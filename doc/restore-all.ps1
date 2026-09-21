@@ -44,9 +44,9 @@ $assets = @(Get-ChildItem (Join-Path $TargetRoot 'src\assets') -Recurse -File -E
 $icons = @(Get-ChildItem (Join-Path $TargetRoot 'src\icons') -Recurse -File -ErrorAction SilentlyContinue)
 $leftover = @($assets + $icons | Where-Object { $_.Name -like '*.part*' })
 
-Write-Host ("全部执行完成: {0} 个部分脚本, src\assets 还原 {1} 个文件, src\icons 还原 {2} 个文件" -f $done, $assets.Count, $icons.Count)
+Write-Host ("All restore parts completed: {0}; src\assets files: {1}; src\icons files: {2}" -f $done, $assets.Count, $icons.Count)
 if ($leftover.Count -gt 0) {
-    Write-Host ("警告: 存在 {0} 个未合并的残留分片(.part 文件), 请检查是否缺少部分脚本" -f $leftover.Count)
+    Write-Host ("Warning: {0} leftover .part files remain; check whether any restore part is missing." -f $leftover.Count)
 } else {
-    Write-Host '校验提示: 预期 src\assets 33 个文件 + src\icons 48 个文件, 无残留分片即还原完整'
+    Write-Host 'Validation: expected 33 src\assets files and 48 src\icons files; no leftover .part files means restore is complete.'
 }
