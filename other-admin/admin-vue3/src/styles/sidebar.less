@@ -1,0 +1,166 @@
+// 侧边栏布局
+
+.app-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  &.mobile.openSidebar {
+    position: fixed;
+    top: 0;
+  }
+
+  &.mobile.hideSidebar {
+    .sidebar-container {
+      width: 0;
+      overflow: hidden;
+    }
+  }
+}
+
+.drawer-bg {
+  background: rgba(0, 0, 0, 1);
+  opacity: 0.3;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  position: absolute;
+  z-index: 999;
+}
+
+.sidebar-container {
+  width: @side-bar-width;
+  height: 100%;
+  background-color: @menu-bg;
+  transition: width @transition-duration @transition-timing;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: @z-index-sidebar;
+
+  // 重置 Element Plus 菜单样式以适配深色主题
+  .el-menu {
+    background-color: transparent;
+    border-right: none;
+  }
+
+  .el-sub-menu__title,
+  .el-menu-item {
+    color: @menu-text;
+    height: 46px;
+    line-height: 46px;
+    margin: 4px 8px;
+    border-radius: @radius-lg;
+    transition:
+      background-color @transition-duration ease,
+      color @transition-duration ease;
+    position: relative;
+
+    &:hover {
+      background-color: @menu-hover-bg !important;
+      color: @menu-active-text;
+    }
+  }
+
+  // 对齐原型 sider-nav-bar.html：active 状态用主色背景填充 + 圆角（移除左侧 3px 竖线）
+  .el-menu-item.is-active {
+    color: @menu-active-text;
+    background-color: @menu-active-bg !important;
+    font-weight: @font-weight-medium;
+  }
+
+  .el-sub-menu .el-menu-item {
+    background-color: darken(@menu-bg, 4%) !important;
+    height: 44px;
+    line-height: 44px;
+    font-size: @font-size-sm;
+
+    &:hover {
+      background-color: @menu-hover-bg !important;
+    }
+
+    &.is-active {
+      background-color: @menu-active-bg !important;
+    }
+  }
+
+  // 折叠状态
+  .hideSidebar & {
+    width: @side-bar-collapsed-width;
+
+    // Element Plus 折叠模式默认 el-menu 宽度 64px，大于容器 64px 会导致图标偏右
+    // 强制 el-menu 宽度 100% 继承父容器，并让菜单项图标居中
+    .el-menu {
+      width: 100%;
+    }
+
+    .el-sub-menu__title span,
+    .el-sub-menu__title .el-sub-menu__icon-arrow,
+    .el-menu-item span {
+      display: none;
+    }
+
+    // 折叠时菜单项图标居中
+    .el-menu-item,
+    .el-sub-menu__title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 !important;
+
+      .el-icon {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.main-container {
+  min-height: 100%;
+  transition: margin-left @transition-duration @transition-timing;
+  margin-left: @side-bar-width;
+  background-color: @color-bg-page;
+  position: relative;
+
+  .hideSidebar & {
+    margin-left: @side-bar-collapsed-width;
+  }
+
+  .mobile & {
+    margin-left: 0;
+  }
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  width: calc(100% - @side-bar-width);
+  transition: width @transition-duration @transition-timing;
+
+  .hideSidebar & {
+    width: calc(100% - @side-bar-collapsed-width);
+  }
+
+  .mobile & {
+    width: 100%;
+  }
+}
+
+// 侧边栏 Logo 区域
+// 注：Logo 容器的完整样式已移至 Logo.vue 的 scoped <style> 中
+// 此处仅保留全局滚动容器与布局相关样式
+
+// 侧边栏滚动
+.sidebar-scroll {
+  height: calc(100% - @navbar-height);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}

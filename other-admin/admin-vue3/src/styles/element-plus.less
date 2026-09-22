@@ -1,0 +1,873 @@
+// Element Plus 主题覆盖（通过 CSS 变量）
+// 按 DESIGN.md 设计原则重新设计：
+// 1. color-block first, shadow second — 阴影用于强调层次，不是装饰
+// 2. 圆角层次：xs/sm/md/lg 梯度，不同场景使用不同圆角
+// 3. 主色光晕：hover/focus 通过主色 fade() 实现品牌电压
+// 4. 表面层次：表头/卡片通过 surface-soft 区分，而非靠阴影
+// 5. 全局 size="large"：组件尺寸统一放大，提升可读性与点击体验
+:root {
+  // 主色（引用 variables.less 中的语义变量）
+  --el-color-primary: @color-primary;
+  --el-color-primary-light-3: @color-primary-light-3;
+  --el-color-primary-light-5: @color-primary-light-5;
+  --el-color-primary-light-7: @color-primary-light-7;
+  --el-color-primary-light-8: lighten(@color-primary-light-7, 5%);
+  --el-color-primary-light-9: @color-primary-light-9;
+  --el-color-primary-dark-2: @color-primary-dark-2;
+
+  // 功能色
+  --el-color-success: @color-success;
+  --el-color-success-light-9: @color-success-light-9;
+  --el-color-warning: @color-warning;
+  --el-color-warning-light-9: @color-warning-light-9;
+  --el-color-danger: @color-danger;
+  --el-color-danger-light-9: @color-danger-light-9;
+  --el-color-info: @color-info;
+  --el-color-info-light-9: @color-info-light-9;
+
+  // 文字色
+  --el-text-color-primary: @color-text-primary;
+  --el-text-color-regular: @color-text-regular;
+  --el-text-color-secondary: @color-text-secondary;
+  --el-text-color-placeholder: @color-text-placeholder;
+
+  // 边框色
+  --el-border-color: @color-border;
+  --el-border-color-light: @color-border-light;
+  --el-border-color-lighter: @color-bg-hover;
+  --el-border-color-extra-light: lighten(@color-bg-hover, 1%);
+
+  // 填充色
+  --el-fill-color: @color-bg-hover;
+  --el-fill-color-light: lighten(@color-bg-hover, 1%);
+  --el-fill-color-lighter: lighten(@color-bg-hover, 1.5%);
+  --el-fill-color-blank: @color-bg-card;
+
+  // 字体
+  --el-font-family: 'HarmonyOS Sans SC', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+
+  // 圆角（DESIGN.md：层次化圆角，输入框最小，卡片中，Dialog 大）
+  --el-border-radius-base: @radius-sm;
+  --el-border-radius-small: @radius-xs;
+  --el-border-radius-round: @radius-lg;
+
+  // 阴影（DESIGN.md：color-block first，阴影克制使用）
+  --el-box-shadow: @shadow-md;
+  --el-box-shadow-light: @shadow-sm;
+  --el-box-shadow-lighter: @shadow-xs;
+  --el-box-shadow-dark: @shadow-lg;
+
+  // 过渡（统一动效曲线）
+  --el-transition-duration: @transition-duration;
+  --el-transition-duration-fast: 0.1s;
+}
+
+// ===========================================================================
+// 表格（精致化：表头灰底 + 主色 hover 强调 + 大行高提升可读性）
+// DESIGN.md "color-block first"：表头用 surface-soft 色块而非阴影区分
+// ===========================================================================
+.el-table {
+  --el-table-header-bg-color: @color-bg-table-header;
+  --el-table-header-text-color: @color-text-table-header;
+  --el-table-border-color: @color-border;
+  --el-table-row-hover-bg-color: fade(@color-primary, 4%);
+  font-size: @font-size-md; // 正文 14px（原 13px 偏小，提升可读性）
+  color: @color-text-regular;
+  // 圆角表格（让表格不再"硬切"，与卡片风格一致）
+  border-radius: @radius-sm;
+  overflow: hidden;
+
+  th.el-table__cell {
+    background-color: @color-bg-table-header;
+    color: @color-text-table-header;
+    font-weight: @font-weight-semibold;
+    font-size: @font-size-md;
+    // 表头 padding 加大（原 12px → 16px），让表头呼吸感更强
+    padding: 16px 0;
+
+    // 表头底部加 2px 主色淡化线（DESIGN.md：主色作为分隔点缀）
+    border-bottom: 2px solid fade(@color-primary, 12%) !important;
+  }
+
+  .el-table__cell {
+    // 行 cell padding 加大（原 10px → 14px），让行高更舒展
+    padding: 14px 0;
+    color: @color-text-regular;
+    transition: background-color @transition-duration ease;
+  }
+
+  // 操作列内按钮对齐
+  .el-table__cell .cell {
+    line-height: @line-height-base;
+    // cell 内 padding 加大
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  // 行 hover 时主色淡色背景（DESIGN.md：brand voltage 通过色块）
+  // 注意：固定列（fixed column）有自己的 cell，需要单独处理 hover 背景，否则透明会透出底层内容
+  .el-table__body tr:hover > td.el-table__cell {
+    background-color: fade(@color-primary, 4%) !important;
+  }
+
+  // 当前选中行：主色更明显
+  .el-table__body tr.current-row > td.el-table__cell {
+    background-color: fade(@color-primary, 8%) !important;
+  }
+
+  // 固定列阴影更柔和
+  .el-table-fixed-column--left::after,
+  .el-table-fixed-column--right::after {
+    box-shadow: -4px 0 8px fade(@color-bg-page, 50%);
+  }
+
+  // 修复：固定列 hover 时 cell 背景需不透明，否则会透出底层滚动内容
+  // Element Plus 默认 fixed cell hover 背景为 transparent，需显式覆盖
+  .el-table__body tr:hover > td.el-table-fixed-column--left.el-table__cell,
+  .el-table__body tr:hover > td.el-table-fixed-column--right.el-table__cell {
+    background-color: @color-bg-card !important;
+  }
+
+  // 固定列在 hover 行中保持表头色（避免与正文色块割裂）
+  .el-table__body tr.current-row > td.el-table-fixed-column--left.el-table__cell,
+  .el-table__body tr.current-row > td.el-table-fixed-column--right.el-table__cell {
+    background-color: @color-bg-card !important;
+  }
+}
+
+// ===========================================================================
+// Dialog（重设计：header 主色细线 + 关闭按钮与标题对齐 + body 分组层次）
+// DESIGN.md：signature surface 概念，header 是色块，body 是 canvas
+// 响应式：1366×768 笔记本兜底，宽度不超出 90vw
+// ===========================================================================
+.el-dialog[class] {
+  --el-dialog-padding-primary: 0;
+  padding: 0 !important;
+  border-radius: @radius-lg;
+  overflow: hidden;
+  box-shadow: @shadow-dialog;
+  background: var(--el-dialog-bg-color, @color-bg-card);
+  // 响应式兜底：弹窗宽度不超出视口 90%，避免 1366×768 溢出
+  max-width: 90vw;
+
+  .el-dialog__header {
+    // header padding 加大（原 16px → 20px），让标题更舒展
+    padding: 20px @spacing-lg;
+    margin-right: 0;
+    background: @color-bg-table-header;
+    position: relative;
+    overflow: hidden;
+    // 让 header 内容水平对齐：使用 flex 让 title 和 close button 在同一行
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: @spacing-md;
+    // header 底部 border 分隔（用 border 而非伪元素渐变，更克制简洁）
+    border-bottom: 1px solid @color-border;
+  }
+
+  .el-dialog__title {
+    font-size: @font-size-xl; // 18px（原 16px 偏小）
+    font-weight: @font-weight-semibold;
+    color: @color-text-primary;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+  }
+
+  // 关闭按钮：与标题同一行对齐，放大可点击区域
+  .el-dialog__headerbtn {
+    // 取消默认绝对定位，改为 flex 子项自然对齐
+    position: static;
+    height: 32px;
+    width: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    border-radius: @radius-sm;
+    transition: all @transition-duration ease;
+
+    .el-dialog__close {
+      color: @color-text-secondary;
+      font-size: 18px; // 放大关闭图标（原 16px）
+      transition: all @transition-duration ease;
+    }
+
+    &:hover {
+      background: fade(@color-danger, 8%);
+
+      .el-dialog__close {
+        color: @color-danger;
+      }
+    }
+  }
+
+  // body：增加内边距 + 用 fade 分组视觉层次
+  .el-dialog__body {
+    padding: @spacing-lg @spacing-lg @spacing-md;
+    background: @color-bg-card;
+
+    // 表单分组容器（业务代码可使用 .form-section 类做分组）
+    .form-section {
+      padding: @spacing-md 0;
+      border-bottom: 1px dashed @color-border-light;
+
+      &:first-child {
+        padding-top: 0;
+      }
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      // 分组标题（业务可使用 .form-section__title）
+      &__title {
+        font-size: @font-size-md;
+        font-weight: @font-weight-semibold;
+        color: @color-text-primary;
+        margin: 0 0 @spacing-md 0;
+        padding-left: @spacing-sm;
+        position: relative;
+        line-height: 1.4;
+
+        // 左侧 3px 主色竖线作为分组点缀
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 2px;
+          bottom: 2px;
+          width: 3px;
+          background: @color-primary;
+          border-radius: @radius-3px;
+        }
+
+        // 分组描述（业务可使用 .form-section__desc）
+        & + .form-section__desc {
+          margin: -8px 0 @spacing-md @spacing-sm;
+          font-size: @font-size-xs;
+          color: @color-text-secondary;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+
+  .el-dialog__footer {
+    padding: @spacing-md @spacing-lg;
+    border-top: 1px solid @color-border-light;
+    background: @color-bg-card;
+    display: flex;
+    justify-content: flex-end;
+    gap: @spacing-sm;
+  }
+}
+
+// ===========================================================================
+// Radio Button（选中态主色光晕）
+// ===========================================================================
+.el-radio-button {
+  .el-radio-button__inner {
+    transition: all @transition-duration ease;
+  }
+
+  .el-radio-button__original-radio:checked + .el-radio-button__inner {
+    box-shadow:
+      -1px 0 0 0 var(--el-color-primary),
+      0 0 0 2px fade(@color-primary, 12%);
+    font-weight: @font-weight-semibold;
+  }
+}
+
+// ===========================================================================
+// Breadcrumb（最后项加粗主色，强化层级）
+// ===========================================================================
+.breadcrumb-container {
+  .el-breadcrumb {
+    display: flex;
+    align-items: center;
+
+    .el-breadcrumb__item {
+      .el-breadcrumb__inner {
+        color: @color-text-secondary;
+        font-weight: @font-weight-normal;
+        font-size: @font-size-sm;
+        transition: color @transition-duration;
+
+        &.is-link:hover {
+          color: var(--el-color-primary);
+        }
+      }
+
+      &:last-child {
+        .el-breadcrumb__inner {
+          color: @color-text-primary;
+          font-weight: @font-weight-medium;
+        }
+      }
+
+      // 分隔符更柔和
+      .el-breadcrumb__separator {
+        color: @color-text-placeholder;
+        margin: 0 @spacing-xs;
+      }
+    }
+  }
+}
+
+// ===========================================================================
+// 表单（重设计：label 字重 + 间距层次 + 错误态强化）
+// ===========================================================================
+.el-form-item {
+  // 默认下间距加大（让表单更舒展）
+  margin-bottom: @spacing-lg; // 原 18px → 24px
+
+  .el-form-item__label {
+    font-weight: @font-weight-medium;
+    color: @color-text-regular;
+    font-size: @font-size-md; // 原 13px → 14px，与正文一致
+    line-height: 1.5;
+  }
+
+  // label 与 content 在水平方向居中对齐（避免 label 顶部对齐输入框）
+  .el-form-item__label,
+  .el-form-item__content {
+    display: flex;
+    align-items: center;
+  }
+
+  // 校验错误态：danger 描边 + 错误信息淡色背景
+  &.is-error {
+    .el-input__wrapper {
+      box-shadow: 0 0 0 1px @color-danger inset !important;
+    }
+    .el-form-item__error {
+      color: @color-danger;
+      font-size: @font-size-xs;
+      padding-top: @spacing-xs;
+    }
+  }
+
+  // 必填项星号主色（默认就是红色，但用主色更协调）
+  &.is-required:not(.is-no-asterisk) {
+    > .el-form-item__label-wrap > .el-form-item__label::before,
+    > .el-form-item__label::before {
+      color: @color-danger;
+      margin-right: @spacing-xs;
+    }
+  }
+}
+
+// ===========================================================================
+// 输入框（聚焦环：DESIGN.md Button focus - 主色环 + 淡色光晕）
+// ===========================================================================
+.el-input__wrapper {
+  border-radius: @radius-sm;
+  transition: box-shadow @transition-duration ease;
+
+  &.is-focus {
+    box-shadow:
+      0 0 0 1px var(--el-color-primary) inset,
+      0 0 0 3px fade(@color-primary, 12%) !important;
+  }
+}
+
+// ===========================================================================
+// 按钮（size="large" 下高度自动 40px；自定义 hover 光晕 + 图标文字对齐）
+// ===========================================================================
+.el-button {
+  border-radius: @radius-sm;
+  font-weight: @font-weight-normal;
+  font-size: @font-size-md;
+  transition: all @transition-duration @transition-timing;
+
+  // 关键：让按钮内所有内容（图标 + 文字）水平 + 垂直对齐
+  // Element Plus 默认 vertical-align: middle 在某些字号下不对齐
+  > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: @spacing-xs-plus;
+    line-height: 1;
+  }
+
+  // 图标自身垂直对齐（svg 默认 baseline 不齐）
+  .el-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  // 主按钮 hover：主色加深（移除光晕避免表格操作列视觉干扰）
+  &--primary {
+    &:hover {
+      background: @color-primary-light-3;
+      border-color: @color-primary-light-3;
+    }
+    &:active {
+      background: @color-primary-dark-2;
+      border-color: @color-primary-dark-2;
+      transform: translateY(1px);
+    }
+    &.is-disabled {
+      background: @color-primary-light-5;
+      border-color: @color-primary-light-5;
+    }
+  }
+
+  // 次要按钮 hover：淡灰背景
+  &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
+      .is-link
+    ):not(.is-text) {
+    &:hover {
+      background-color: @color-bg-hover;
+      border-color: @color-border;
+      color: @color-text-primary;
+    }
+    &:active {
+      background-color: fade(@color-primary, 8%);
+    }
+  }
+
+  // link 按钮带图标时，图标与文字间距统一
+  &.is-link {
+    height: auto;
+    padding: 0 4px;
+    font-size: @font-size-sm;
+
+    &:hover {
+      color: @color-primary-light-3;
+    }
+
+    // link 按钮也保持图标文字对齐
+    > span {
+      gap: 2px;
+    }
+  }
+
+  // 非 link 按钮带图标时，图标与文字间距
+  &:not(.is-link):not(.is-text) {
+    .el-icon + span {
+      margin-left: 0; // gap 已处理间距，取消默认 margin-left 避免双重间距
+    }
+  }
+}
+
+// ===========================================================================
+// 卡片（DESIGN.md：双层阴影 + 圆角加大，靠边界色块区分）
+// ===========================================================================
+.el-card {
+  border-radius: @radius-md;
+  border: 1px solid @color-border;
+  box-shadow: @shadow-card-double;
+  transition:
+    box-shadow @transition-duration ease,
+    border-color @transition-duration ease;
+
+  &.is-always-shadow,
+  &.is-hover-shadow:hover {
+    box-shadow: @shadow-card-double-hover;
+    border-color: fade(@color-primary, 16%);
+  }
+
+  .el-card__header {
+    padding: @spacing-md @spacing-lg;
+    border-bottom: 1px solid @color-border;
+    background: @color-bg-table-header;
+    font-weight: @font-weight-semibold;
+    color: @color-text-primary;
+    font-size: @font-size-md;
+  }
+
+  .el-card__body {
+    padding: @spacing-lg;
+  }
+}
+
+// ===========================================================================
+// 分页（hover 主色淡色）
+// ===========================================================================
+.el-pagination {
+  font-size: @font-size-sm;
+
+  .el-pagination__total {
+    color: @color-text-secondary;
+  }
+
+  button,
+  .el-pager li {
+    border-radius: @radius-sm;
+    transition: all @transition-duration ease;
+
+    &:hover {
+      color: @color-primary;
+      background-color: fade(@color-primary, 6%) !important;
+    }
+  }
+
+  .el-pager li.is-active {
+    color: @color-primary;
+    background-color: fade(@color-primary, 10%);
+    font-weight: @font-weight-medium;
+  }
+}
+
+// ===========================================================================
+// Tag（圆角更柔和，颜色更精致；高度对齐 large size 全局策略）
+// ===========================================================================
+.el-tag {
+  border-radius: @radius-3px;
+  font-size: @font-size-xs;
+  height: 28px; // 原 22/24px → 28px，与 large size 按钮高度协调
+  line-height: 26px;
+  padding: 0 @spacing-sm;
+  border: none;
+  font-weight: @font-weight-medium;
+
+  // 主色 tag 用主色淡色背景
+  &--primary {
+    background-color: fade(@color-primary, 10%);
+    color: @color-primary;
+  }
+  &--success {
+    background-color: fade(@color-success, 10%);
+    color: @color-success;
+  }
+  &--warning {
+    background-color: fade(@color-warning, 10%);
+    color: @color-warning;
+  }
+  &--danger {
+    background-color: fade(@color-danger, 10%);
+    color: @color-danger;
+  }
+  &--info {
+    background-color: fade(@color-info, 10%);
+    color: @color-info;
+  }
+}
+
+// ===========================================================================
+// Dropdown（圆角 + 阴影 + item hover 主色淡色）
+// ===========================================================================
+.el-dropdown-menu {
+  border-radius: @radius-md;
+  box-shadow: @shadow-dropdown;
+  padding: @spacing-xs;
+  border: 1px solid @color-border-light;
+
+  .el-dropdown-menu__item {
+    padding: @spacing-sm @spacing-md;
+    font-size: @font-size-md;
+    color: @color-text-regular;
+    border-radius: @radius-sm;
+    margin: 0 0 2px 0;
+    transition: all @transition-duration ease;
+
+    &:not(.is-disabled):hover {
+      background-color: fade(@color-primary, 8%);
+      color: @color-primary;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.is-disabled {
+      color: @color-text-placeholder;
+    }
+  }
+}
+
+// ===========================================================================
+// 消息提示（圆角 + 阴影 + 主色左侧色条 + 高 z-index 确保不被遮挡）
+// 注意：不要覆盖 Element Plus 默认的 position: fixed 和 top: 20px
+//       否则 ElMessage 会跟随文档流而非固定在视口顶部
+// ===========================================================================
+.el-message {
+  // 提高 z-index：默认 Element Plus 是 3000，与 Dialog 同级，
+  // 在有 Dialog 打开时可能被遮挡，显式提升到 9999 确保最上层
+  z-index: 9999 !important;
+  border-radius: @radius-md;
+  padding: 12px @spacing-md;
+  box-shadow: @shadow-md;
+  border: 1px solid @color-border-light;
+  background: @color-bg-card;
+  min-width: 280px;
+  // 保留 Element Plus 默认 position: fixed; top: 20px; 不覆盖
+  // 仅在 message 内部用 relative 定位左侧色条
+  overflow: visible;
+
+  // 左侧 3px 主色条作为 brand 电压点缀（用伪元素，不影响 message 自身定位）
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--el-color-primary);
+    border-radius: @radius-md 0 0 @radius-md;
+  }
+
+  &.el-message--success::before {
+    background: @color-success;
+  }
+  &.el-message--warning::before {
+    background: @color-warning;
+  }
+  &.el-message--error::before {
+    background: @color-danger;
+  }
+  &.el-message--info::before {
+    background: @color-info;
+  }
+}
+
+// ===========================================================================
+// MessageBox（圆角 + 阴影 + 标题加粗）
+// ===========================================================================
+.el-message-box {
+  border-radius: @radius-md-plus;
+  border: none;
+  box-shadow: @shadow-dialog;
+
+  .el-message-box__header {
+    padding: @spacing-md @spacing-md-plus 0;
+  }
+
+  .el-message-box__title {
+    font-size: @font-size-lg;
+    font-weight: @font-weight-semibold;
+    color: @color-text-primary;
+  }
+
+  .el-message-box__content {
+    padding: @spacing-sm @spacing-md-plus;
+    color: @color-text-regular;
+    font-size: @font-size-md;
+  }
+
+  .el-message-box__btns {
+    padding: @spacing-sm @spacing-md-plus @spacing-md;
+  }
+}
+
+// ===========================================================================
+// Tabs（活动标签主色下划线 + hover 主色文字）
+// ===========================================================================
+.el-tabs {
+  .el-tabs__item {
+    color: @color-text-regular;
+    font-weight: @font-weight-medium;
+    font-size: @font-size-md;
+    height: 44px; // 原 40px → 44px，适配 large
+    line-height: 44px;
+    padding: 0 @spacing-lg;
+    transition: color @transition-duration;
+
+    &:hover {
+      color: @color-primary;
+    }
+    &.is-active {
+      color: @color-primary;
+      font-weight: @font-weight-semibold;
+    }
+  }
+
+  // 活动标签下方主色横线（DESIGN.md：brand voltage 通过细节点缀）
+  .el-tabs__active-bar {
+    background-color: @color-primary;
+    height: 2px;
+    border-radius: 1px;
+  }
+
+  // 顶部 tab header 底部边线
+  .el-tabs__nav-wrap::after {
+    background-color: @color-border-light;
+    height: 1px;
+  }
+
+  // tab content 给一点上下间距
+  .el-tabs__content {
+    padding-top: @spacing-md;
+  }
+}
+
+// ===========================================================================
+// Switch（开启态主色 + 关闭态灰底）
+// 统一通过 CSS 变量注入颜色，业务组件（如 StatusSwitch）可通过局部覆盖
+// --el-switch-on-color / --el-switch-off-color 切换语义色，无需重复 .is-checked 选择器
+// ===========================================================================
+.el-switch {
+  --el-switch-on-color: @color-primary;
+  --el-switch-off-color: @color-info;
+}
+
+// ===========================================================================
+// Loading（主色 spinner）
+// ===========================================================================
+.el-loading-spinner .path {
+  stroke: @color-primary;
+}
+
+// ===========================================================================
+// Tree（节点选中态主色淡色 + hover 主色淡色）
+// ===========================================================================
+.el-tree {
+  .el-tree-node__content {
+    transition: background-color @transition-duration ease;
+    border-radius: @radius-sm;
+    padding: @spacing-xs @spacing-xs-plus;
+    height: 36px; // 原 26px → 36px，适配 large
+
+    &:hover {
+      background-color: fade(@color-primary, 4%);
+    }
+  }
+
+  .el-tree-node.is-current > .el-tree-node__content {
+    background-color: fade(@color-primary, 8%);
+    color: @color-primary;
+  }
+}
+
+// ===========================================================================
+// Select（选项 hover 主色淡色）
+// ===========================================================================
+.el-select-dropdown__item {
+  &.hover,
+  &:hover {
+    background-color: fade(@color-primary, 6%);
+  }
+  &.selected {
+    color: @color-primary;
+    font-weight: @font-weight-medium;
+  }
+}
+
+// ===========================================================================
+// Checkbox / Radio（选中态主色）
+// ===========================================================================
+.el-checkbox {
+  .el-checkbox__input.is-checked .el-checkbox__inner,
+  &.is-checked .el-checkbox__inner {
+    background-color: @color-primary;
+    border-color: @color-primary;
+  }
+  .el-checkbox__input.is-checked + .el-checkbox__label {
+    color: @color-primary;
+  }
+}
+
+.el-radio {
+  .el-radio__input.is-checked .el-radio__inner {
+    background-color: @color-primary;
+    border-color: @color-primary;
+  }
+  .el-radio__input.is-checked + .el-radio__label {
+    color: @color-primary;
+  }
+}
+
+// ===========================================================================
+// DatePicker（选中日期主色背景）
+// ===========================================================================
+.el-date-table td {
+  &.available:hover .el-date-table-cell__text,
+  &.available:hover span {
+    color: @color-primary;
+  }
+  &.current:not(.disabled) .el-date-table-cell__text {
+    background-color: @color-primary;
+  }
+}
+
+// ===========================================================================
+// Tooltip（圆角 + 阴影）
+// ===========================================================================
+.el-popper.is-dark {
+  background: @color-text-primary !important;
+  border-radius: @radius-sm;
+  font-size: @font-size-xs;
+  padding: 6px 10px;
+  box-shadow: @shadow-md;
+
+  .el-popper__arrow::before {
+    background: @color-text-primary;
+  }
+}
+
+// ===========================================================================
+// Menu（侧边栏深色主题对齐）
+// 注：菜单项的 margin/radius/active 已在 sidebar.less 中定义
+// 此处仅补充 sub-menu 折叠箭头颜色、弹出菜单样式等
+// ===========================================================================
+.el-menu--vertical {
+  // 折叠后的弹出子菜单（背景与侧边栏一致）
+  .el-menu {
+    background-color: @menu-bg;
+
+    .el-menu-item {
+      color: @menu-text;
+
+      &:hover {
+        background-color: @menu-hover-bg;
+        color: @menu-active-text;
+      }
+
+      &.is-active {
+        color: @menu-active-text;
+        background-color: @menu-active-bg;
+      }
+    }
+  }
+}
+
+// sub-menu 折叠箭头颜色对齐侧边栏文字色
+.el-sub-menu__icon-arrow {
+  color: @menu-text;
+}
+
+// ===========================================================================
+// Upload（上传组件默认色对齐项目 token，避免业务组件散落硬编码 #d9d9d9）
+// ===========================================================================
+.el-upload {
+  // 图片卡片式上传的虚线边框
+  &--picture-card,
+  &--text {
+    border-color: @color-border;
+  }
+
+  &:hover {
+    border-color: @color-primary;
+    color: @color-primary;
+  }
+
+  // 拖拽上传占位文字 + 图标
+  .el-upload-dragger {
+    border-color: @color-border;
+    background-color: @color-bg-page;
+
+    .el-upload__text {
+      color: @color-text-secondary;
+
+      em {
+        color: @color-primary;
+      }
+    }
+
+    &:hover {
+      border-color: @color-primary;
+    }
+  }
+
+  // 上传图标颜色
+  .el-icon--plus,
+  .el-icon--upload {
+    color: @color-text-placeholder;
+  }
+}

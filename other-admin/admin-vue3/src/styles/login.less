@@ -1,0 +1,296 @@
+// =============================================================================
+// 登录页专用样式（对齐原型 docs/login-demo.html）
+// 设计要点：
+// 1. 4 层呼吸背景：基底渐变 + 网格 mask + 2 个主色光晕动画
+// 2. 居中登录卡片：860×480 + 多层阴影 + backdrop-filter
+// 3. 左右双栏：左侧深色品牌区 + 右侧白色表单区
+// 4. 主色保持 #264ed1（与 web 端收敛，不对齐原型的 #2563eb）
+// =============================================================================
+
+.login-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: @bg-login-base;
+  color: @color-on-dark;
+  font-family: 'HarmonyOS Sans SC', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+}
+
+// ========== 4 层呼吸背景 ==========
+
+// 第 1 层：径向渐变深色基底
+.bg-base {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
+  z-index: 1;
+}
+
+// 第 2 层：40px 网格 + radial mask 渐隐
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, @bg-login-grid 1px, transparent 1px),
+    linear-gradient(to bottom, @bg-login-grid 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+  z-index: 2;
+}
+
+// 第 3 层：650px 主色光球 + breathePrimary 9s 呼吸动画
+.glow-sphere-primary {
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, @color-glow-primary 0%, fade(@color-primary, 5%) 50%, transparent 70%);
+  filter: blur(40px);
+  z-index: 3;
+  animation: breathe-primary 9s infinite ease-in-out;
+}
+
+// 第 4 层：450px 次色光球 + breatheSecondary 12s 呼吸动画
+.glow-sphere-secondary {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  top: 35%;
+  left: 30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, @color-glow-secondary 0%, transparent 65%);
+  filter: blur(50px);
+  z-index: 3;
+  animation: breathe-secondary 12s infinite ease-in-out;
+}
+
+@keyframes breathe-primary {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-48%, -52%) scale(1.25);
+    opacity: 1;
+  }
+}
+
+@keyframes breathe-secondary {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1.1) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-42%, -40%) scale(0.85) rotate(180deg);
+    opacity: 0.9;
+  }
+}
+
+// ========== 语言切换（右上角浮层） ==========
+.lang-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+}
+
+// ========== 居中登录卡片 ==========
+.login-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  width: 860px;
+  max-width: 90vw;
+  height: 480px;
+  border-radius: @radius-xl;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 25px 50px -12px rgba(0, 0, 0, 0.75),
+    0 0 40px fade(@color-primary, 15%);
+  backdrop-filter: blur(10px);
+}
+
+// ========== 左侧品牌区 ==========
+.login-brand {
+  flex: 1;
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+// 警务 Logo 方块（蓝色渐变 + 主色光晕阴影）
+.police-logo {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, @color-primary, @color-primary-dark-2);
+  border-radius: @radius-xl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: @color-on-dark;
+  box-shadow: 0 6px 20px fade(@color-primary, 45%);
+  margin-bottom: @spacing-lg;
+}
+
+// 品牌长标题（自适应折行，最多 300px 宽）
+.brand-title {
+  font-size: @font-size-2xl;
+  font-weight: 700;
+  color: @color-on-dark;
+  letter-spacing: 1px;
+  line-height: 1.45;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  max-width: 300px;
+  word-break: break-all;
+  margin-bottom: @spacing-lg;
+}
+
+// 状态徽章（胶囊形 + 绿色 pulse dot + "系统就绪"）
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: @spacing-sm;
+  font-size: @font-size-xs;
+  color: @color-text-secondary;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 14px;
+  border-radius: @radius-pill;
+
+  .status-dot {
+    margin-right: 0;
+  }
+}
+
+// ========== 右侧表单区 ==========
+.login-form-wrapper {
+  width: 380px;
+  background: @color-bg-card;
+  color: @color-text-primary;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+// 表单区块标题（图标 + 文字 + 底部虚线）
+.login-section-title {
+  font-size: @font-size-xl;
+  font-weight: 700;
+  color: @color-text-primary;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed @color-border;
+  margin-bottom: 28px;
+}
+
+// 表单选项（记住警号 + 忘记密码）
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: @font-size-sm;
+  margin-bottom: 28px;
+  color: @color-text-secondary;
+
+  a {
+    color: @color-primary;
+    text-decoration: none;
+    font-weight: @font-weight-semibold;
+
+    &:hover {
+      color: @color-primary-light-3;
+    }
+  }
+}
+
+// 警号标签（右上角主色等宽字体 tag）
+.police-id-tag {
+  font-family: @font-family-mono;
+  font-size: @font-size-2xs;
+  font-weight: 700;
+  color: @color-primary;
+  background: @color-primary-light-9;
+  padding: 3px 8px;
+  border-radius: @radius-xs;
+  pointer-events: none;
+}
+
+// 提交按钮
+.btn-submit {
+  width: 100%;
+  height: 44px;
+  background-color: @color-primary;
+  color: @color-on-dark;
+  border: none;
+  border-radius: @radius-md;
+  font-size: @font-size-md;
+  font-weight: @font-weight-semibold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: @spacing-sm;
+  cursor: pointer;
+  transition:
+    background-color @transition-duration ease,
+    transform 0.1s ease;
+
+  &:hover {
+    background-color: @color-primary-dark-2;
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+// 底部安全提示
+.form-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: @font-size-2xs;
+  color: @color-text-secondary;
+}
+
+// ========== 响应式（窄屏竖向布局） ==========
+@media (max-width: 960px) {
+  .login-container {
+    width: 90vw;
+    height: auto;
+    max-height: 90vh;
+    flex-direction: column;
+  }
+
+  .login-brand {
+    padding: 30px 20px;
+
+    .brand-title {
+      font-size: @font-size-xl;
+      margin-bottom: @spacing-md;
+    }
+  }
+
+  .login-form-wrapper {
+    width: 100%;
+    padding: 30px 24px;
+  }
+}

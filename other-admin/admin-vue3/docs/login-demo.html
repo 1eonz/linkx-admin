@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>警务协同智能中枢 - 系统登录</title>
+  <!-- 引入字体与图标库 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --color-primary: #2563eb;
+      --color-primary-hover: #1d4ed8;
+      --color-primary-light: #eff6ff;
+      --color-success: #10b981;
+      
+      --bg-page: #080d1a;
+      --bg-card: #ffffff;
+      
+      --border-dark: rgba(255, 255, 255, 0.12);
+      --border-light: #e2e8f0;
+      
+      --text-main: #0f172a;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      
+      --font-main: 'Inter', -apple-system, sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+      
+      --radius-base: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-page);
+      color: #f8fafc;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 多层呼吸背景 */
+    .bg-base {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
+      z-index: 1;
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(51, 65, 85, 0.25) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(51, 65, 85, 0.25) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+      z-index: 2;
+    }
+
+    .glow-sphere-primary {
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, rgba(37, 99, 235, 0.05) 50%, transparent 70%);
+      filter: blur(40px);
+      z-index: 3;
+      animation: breathePrimary 9s infinite ease-in-out;
+    }
+
+    .glow-sphere-secondary {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      top: 35%;
+      left: 30%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.18) 0%, transparent 65%);
+      filter: blur(50px);
+      z-index: 3;
+      animation: breatheSecondary 12s infinite ease-in-out;
+    }
+
+    @keyframes breathePrimary {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+      50% { transform: translate(-48%, -52%) scale(1.25); opacity: 1; }
+    }
+
+    @keyframes breatheSecondary {
+      0%, 100% { transform: translate(-50%, -50%) scale(1.1) rotate(0deg); opacity: 0.6; }
+      50% { transform: translate(-42%, -40%) scale(0.85) rotate(180deg); opacity: 0.9; }
+    }
+
+    /* 登录主卡片 */
+    .login-container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      width: 860px;
+      max-width: 90vw;
+      height: 480px;
+      border-radius: var(--radius-base);
+      overflow: hidden;
+      box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 25px 50px -12px rgba(0, 0, 0, 0.75),
+        0 0 40px rgba(37, 99, 235, 0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    /* =========================================================
+       左侧：全局居中 + 长标题自适应排版
+       ========================================================= */
+    .login-brand {
+      flex: 1;
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border-right: 1px solid var(--border-dark);
+      padding: 40px 36px;
+      
+      /* 使用 flexbox 实现水平与垂直绝对居中 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* 图标容器 */
+    .police-logo {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+      margin-bottom: 20px;
+    }
+
+    /* 可配置的自适应长标题 (适配可达 20 字) */
+    .brand-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 1px;
+      line-height: 1.45;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      max-width: 300px; /* 限制最大宽度，让长文案优雅折行 */
+      word-break: break-all;
+      margin-bottom: 24px;
+    }
+
+    /* 居中展示的状态标签 */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #94a3b8;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-dark);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--color-success);
+      position: relative;
+    }
+
+    .status-dot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background-color: var(--color-success);
+      animation: pulse 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+
+    /* 右侧：表单区 */
+    .login-form-wrapper {
+      width: 380px;
+      background: var(--bg-card);
+      color: var(--text-main);
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed var(--border-light);
+      margin-bottom: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper i.prefix-icon {
+      position: absolute;
+      left: 12px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .form-control {
+      width: 100%;
+      height: 42px;
+      padding: 0 12px 0 36px;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: var(--font-main);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .police-id-tag {
+      position: absolute;
+      right: 8px;
+      font-family: var(--font-code);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-primary);
+      background: var(--color-primary-light);
+      padding: 3px 8px;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      margin-bottom: 28px;
+      color: var(--text-secondary);
+    }
+
+    .form-options label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .form-options a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .btn-submit {
+      width: 100%;
+      height: 44px;
+      background-color: var(--color-primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--font-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--color-primary-hover);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.99);
+    }
+
+    .form-footer {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 呼吸背景 -->
+  <div class="bg-base"></div>
+  <div class="bg-grid"></div>
+  <div class="glow-sphere-primary"></div>
+  <div class="glow-sphere-secondary"></div>
+
+  <!-- 登录卡片 -->
+  <div class="login-container">
+    
+    <!-- 左侧：图标 + 可配置长标题居中展示区 -->
+    <div class="login-brand">
+      <div class="police-logo">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      
+      <!-- 测试 20 个字符级别的长标题，依然能够完美居中且折行协调 -->
+      <h1 class="brand-title" id="configurableTitle">
+        国家级警务协同指挥调度智能中枢系统
+      </h1>
+      
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span>系统就绪</span>
+      </div>
+    </div>
+
+    <!-- 右侧：登录表单区 -->
+    <div class="login-form-wrapper">
+      <div>
+        <div class="section-title">
+          <i class="fa-solid fa-user-shield" style="color: var(--color-primary);"></i>
+          <span>身份认证</span>
+        </div>
+
+        <form onsubmit="event.preventDefault(); handleLogin();">
+          <div class="form-group">
+            <label class="form-label">警号 / 账号</label>
+            <div class="input-wrapper">
+              <i class="fa-regular fa-user prefix-icon"></i>
+              <input type="text" class="form-control" placeholder="请输入警号" required>
+              <span class="police-id-tag">POLICE</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">安全密码</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock prefix-icon"></i>
+              <input type="password" class="form-control" placeholder="请输入密码" required>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <label>
+              <input type="checkbox" checked> 记住警号
+            </label>
+            <a href="javascript:void(0);">忘记密码?</a>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">
+            进入系统 <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="form-footer">
+        <i class="fa-solid fa-shield-cat"></i>
+        <span>未经授权禁止登录，系统全程安全审计</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function handleLogin() {
+      const btn = document.getElementById('submitBtn');
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> 验证中...';
+      btn.style.opacity = '0.85';
+      
+      setTimeout(() => {
+        alert('登录成功！');
+        btn.innerHTML = '进入系统 <i class="fa-solid fa-arrow-right"></i>';
+        btn.style.opacity = '1';
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

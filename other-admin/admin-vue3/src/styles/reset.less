@@ -1,0 +1,277 @@
+// 全局 reset
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'HarmonyOS Sans SC', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: @font-size-md;
+  line-height: @line-height-base;
+  color: @color-text-primary;
+  background-color: @color-bg-page;
+  // 文字选中态使用主色淡色（DESIGN.md：brand voltage 通过色块而非装饰）
+  ::selection {
+    background: fade(@color-primary, 18%);
+    color: @color-text-primary;
+  }
+  ::-moz-selection {
+    background: fade(@color-primary, 18%);
+    color: @color-text-primary;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: @color-primary;
+  text-decoration: none;
+  transition: color @transition-duration @transition-timing;
+
+  &:hover,
+  &:focus {
+    color: @color-primary-light-3;
+  }
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+}
+
+// 滚动条统一（更精致：默认淡，hover 加深）
+::-webkit-scrollbar {
+  width: @scrollbar-size;
+  height: @scrollbar-size;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: @color-scrollbar-thumb;
+  border-radius: @radius-3px;
+  transition: background-color @transition-duration;
+
+  &:hover {
+    background-color: @color-scrollbar-thumb-hover;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+// 通用容器（DESIGN.md：app-container 用 @spacing-md 留白，让 hero "信任留白"）
+.app-container {
+  padding: @spacing-md;
+}
+
+// 卡片（DESIGN.md：双层阴影 — 底层 1px 轮廓 + 上层 4px 立体）
+// "color-block first, shadow second"：阴影用于强调层次而非装饰
+.card {
+  border-radius: @radius-sm;
+  box-shadow: @shadow-card-double;
+}
+
+// 过滤区域
+.filter-container {
+  padding-bottom: @spacing-md;
+
+  .filter-item {
+    margin-right: @spacing-sm;
+    margin-bottom: @spacing-sm;
+  }
+}
+
+// page-loading 遮罩（主色光晕 + 旋转动效）
+.page-loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: fade(@color-bg-card, 90%);
+  backdrop-filter: blur(2px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .page-loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .page-loading-spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid @color-border-light;
+      border-top-color: @color-primary;
+      border-radius: 50%;
+      animation: page-loading-spin 0.8s linear infinite;
+    }
+
+    .page-loading-text {
+      margin-top: 12px;
+      color: @color-text-regular;
+      font-size: @font-size-md;
+    }
+  }
+}
+
+@keyframes page-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// =============================================================================
+// 通用组件样式类（对齐原型 docs/components.html）
+// 设计原则：color-block first, shadow second — 阴影用于强调层次而非装饰
+// =============================================================================
+
+// 现代卡片容器（对齐原型 .modern-card）
+// 与 .card 区别：单层阴影 + 明确 border + 8px 圆角 + 20px padding
+.modern-card {
+  background-color: @color-bg-card;
+  border: 1px solid @color-border;
+  border-radius: @radius-lg;
+  padding: @spacing-lg;
+  box-shadow: @shadow-md;
+  transition: box-shadow @transition-duration @transition-timing;
+}
+
+// 区块标题（图标 + 文字 + 底部虚线）
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: @spacing-sm;
+  font-size: @font-size-lg;
+  font-weight: @font-weight-semibold;
+  color: @color-text-primary;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed @color-border;
+  margin-bottom: @spacing-md;
+}
+
+// 警号 / 设备编号 / ID 等关键数字类型文本（等宽字体 + 主色高亮）
+.police-id {
+  font-family: @font-family-mono;
+  font-weight: @font-weight-semibold;
+  color: @color-primary;
+  background: @color-primary-light-9;
+  padding: 2px 6px;
+  border-radius: @radius-xs;
+  display: inline-block;
+  line-height: 1.4;
+}
+
+// 指标卡片网格（auto-fit 自适应）
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: @spacing-md;
+}
+
+// 指标卡片（渐变背景 + 三段式：title / value / footer）
+.metric-card {
+  background: linear-gradient(180deg, @color-bg-card 0%, @color-bg-page 100%);
+  border: 1px solid @color-border;
+  border-radius: @radius-lg;
+  padding: @spacing-md;
+
+  .metric-title {
+    font-size: @font-size-sm;
+    color: @color-text-secondary;
+    margin-bottom: @spacing-sm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .metric-value {
+    font-size: @font-size-display;
+    font-weight: 700;
+    color: @color-text-primary;
+    font-family: @font-family-mono;
+    line-height: 1.2;
+  }
+
+  .metric-footer {
+    font-size: @font-size-xs;
+    margin-top: @spacing-sm;
+    color: @color-text-secondary;
+  }
+}
+
+// 人员/装备卡片网格
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: @spacing-md;
+}
+
+// 人员卡片（头像 + 信息 + 状态）
+.personnel-card {
+  display: flex;
+  gap: @spacing-sm;
+  align-items: center;
+  border: 1px solid @color-border;
+  border-radius: @radius-md;
+  padding: 14px;
+  background: @color-bg-card;
+  transition: all @transition-duration @transition-timing;
+
+  &:hover {
+    border-color: @color-primary;
+    box-shadow: @shadow-md;
+  }
+}
+
+// 呼吸灯状态点（对齐原型 .status-dot）
+// 用法：<span class="status-dot online"></span>
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  position: relative;
+  vertical-align: middle;
+
+  &.online {
+    background-color: @color-success;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: @color-success;
+      opacity: 0.6;
+      animation: status-dot-pulse 1.6s infinite ease-in-out;
+    }
+  }
+
+  &.busy {
+    background-color: @color-warning;
+  }
+
+  &.offline {
+    background-color: @color-info;
+  }
+}
+
+@keyframes status-dot-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
