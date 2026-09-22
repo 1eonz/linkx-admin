@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>排班管理 - 排班信息与批量排班</title>
+<!-- Tailwind CSS CDN with forms and container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- BEGIN: Element UI Theme Styles -->
+<style data-purpose="element-ui-theme">
+    :root {
+      --el-color-primary: #409eff;
+      --el-color-primary-light-8: #ecf5ff;
+      --el-color-primary-light-9: #f0f7ff;
+      --el-color-success: #67c23a;
+      --el-color-success-light: #f0f9eb;
+      --el-color-danger: #f56c6c;
+      --el-color-danger-light: #fef0f0;
+      --el-border-color: #ebeef5;
+      --el-border-color-base: #dcdfe6;
+      --el-text-color-primary: #303133;
+      --el-text-color-regular: #606266;
+      --el-text-color-secondary: #909399;
+      --el-bg-color-page: #f5f7fa;
+    }
+
+    body {
+      background-color: var(--el-bg-color-page);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      color: var(--el-text-color-primary);
+    }
+
+    /* Custom form validation error focus ring matching Element Plus */
+    .el-input-error {
+      border-color: #f56c6c !important;
+      box-shadow: 0 0 0 2px rgba(245, 108, 108, 0.2) !important;
+    }
+  </style>
+<!-- END: Element UI Theme Styles -->
+<!-- BEGIN: Layout and Overlay Styles -->
+<style data-purpose="modal-overlay">
+    .modal-backdrop {
+      background-color: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(1px);
+    }
+  </style>
+<!-- END: Layout and Overlay Styles -->
+</head>
+<body class="min-h-screen relative p-4 md:p-6 bg-[#f5f7fa]">
+<!-- BEGIN: Global Top Message Notification -->
+<!-- Element UI Toast style floating error message -->
+<div class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-4 py-3 rounded border border-[#fde2e2] bg-[#fef0f0] text-[#f56c6c] text-sm shadow-md transition-all duration-300" data-purpose="toast-error" id="toastNotification" role="alert">
+<svg class="w-4 h-4 flex-shrink-0 fill-current" viewbox="0 0 1024 1024">
+<path d="M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896zm0 83.2a364.8 364.8 0 1 0 0 729.6 364.8 364.8 0 0 0 0-729.6zm-28.8 454.4a32 32 0 0 1 64 0v160a32 32 0 0 1-64 0V601.6zm32-192a38.4 38.4 0 1 1 0 76.8 38.4 38.4 0 0 1 0-76.8z" fill="#f56c6c"></path>
+</svg>
+<span class="font-medium">提交失败，请完善必填项信息</span>
+</div>
+<!-- END: Global Top Message Notification -->
+<!-- BEGIN: Main Content Area -->
+<main class="w-full max-w-[1560px] mx-auto space-y-4">
+<!-- Top Route Breadcrumb / Status Indicator -->
+<div class="flex items-center justify-between text-xs text-gray-500 px-1">
+<div class="flex items-center gap-1.5 font-mono">
+<span class="text-gray-400">路由路径:</span>
+<span class="bg-white border border-[#ebeef5] text-gray-700 px-2 py-0.5 rounded font-medium">/scheduling/dutyInformation</span>
+</div>
+<div class="flex items-center gap-1.5 text-blue-600 bg-blue-50/80 px-2.5 py-1 rounded border border-blue-100">
+<svg class="w-3.5 h-3.5" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+<span>当前为本地模拟数据，路由与功能入口按真实项目完整展示</span>
+</div>
+</div>
+<!-- Main Container Card -->
+<div class="bg-white border border-[#ebeef5] rounded shadow-sm">
+<!-- Card Header: Tabs and Action Buttons -->
+<div class="flex flex-wrap items-center justify-between border-b border-[#ebeef5] px-6 pt-3 pb-0">
+<!-- Element UI Style Tabs -->
+<div class="flex space-x-8 -mb-px">
+<button class="border-b-2 border-[#409eff] text-[#409eff] pb-3 text-sm font-medium flex items-center gap-1.5" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            排班日历
+          </button>
+<button class="border-b-2 border-transparent text-gray-500 hover:text-gray-700 pb-3 text-sm font-medium flex items-center gap-1.5 transition-colors" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 6h16M4 10h16M4 14h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            排班列表
+          </button>
+</div>
+<!-- Quick Operation Buttons -->
+<div class="flex items-center gap-2 pb-3">
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#409eff] hover:bg-blue-600 active:bg-blue-700 text-white rounded text-xs font-medium transition shadow-sm cursor-pointer" id="openModalBtn" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            批量排班
+          </button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#fef0f0] border border-[#fde2e2] text-[#f56c6c] hover:bg-[#f56c6c] hover:text-white rounded text-xs font-medium transition" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            批量删除
+          </button>
+</div>
+</div>
+<!-- Filters Section -->
+<section class="p-6 bg-[#fafafa] border-b border-[#ebeef5]" data-purpose="query-filters">
+<form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4" onsubmit="return false;">
+<!-- Filter 1: 协同岗名称 -->
+<div>
+<label class="block text-xs text-[#606266] mb-1.5 font-medium">协同岗名称</label>
+<input class="w-full text-xs h-8 px-2.5 rounded border border-[#dcdfe6] focus:border-[#409eff] focus:ring-1 focus:ring-[#409eff] outline-none transition bg-white" placeholder="请输入协同岗名称" type="text"/>
+</div>
+<!-- Filter 2: 人员ID -->
+<div>
+<label class="block text-xs text-[#606266] mb-1.5 font-medium">警员 ID / 警号</label>
+<input class="w-full text-xs h-8 px-2.5 rounded border border-[#dcdfe6] focus:border-[#409eff] focus:ring-1 focus:ring-[#409eff] outline-none transition bg-white" placeholder="如 003478" type="text"/>
+</div>
+<!-- Filter 3: 姓名 -->
+<div>
+<label class="block text-xs text-[#606266] mb-1.5 font-medium">民警姓名</label>
+<input class="w-full text-xs h-8 px-2.5 rounded border border-[#dcdfe6] focus:border-[#409eff] focus:ring-1 focus:ring-[#409eff] outline-none transition bg-white" placeholder="如 张三" type="text"/>
+</div>
+<!-- Filter 4: 排班类型 -->
+<div>
+<label class="block text-xs text-[#606266] mb-1.5 font-medium">排班类型</label>
+<div class="relative">
+<select class="w-full text-xs h-8 px-2.5 rounded border border-[#dcdfe6] focus:border-[#409eff] focus:ring-1 focus:ring-[#409eff] outline-none transition bg-white appearance-none pr-8">
+<option value="">全部班次</option>
+<option value="day">白班 (08:30 - 17:30)</option>
+<option value="night">夜班 (17:30 - 次日08:30)</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-400">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+<!-- Filter Actions -->
+<div class="flex items-end gap-2">
+<button class="h-8 px-4 bg-[#409eff] hover:bg-blue-600 text-white rounded text-xs font-medium flex items-center justify-center gap-1.5 transition" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              搜索
+            </button>
+<button class="h-8 px-4 bg-white border border-[#dcdfe6] hover:text-[#409eff] hover:border-[#409eff] text-[#606266] rounded text-xs font-medium flex items-center justify-center gap-1.5 transition" type="reset">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              重置
+            </button>
+</div>
+</form>
+</section>
+<!-- Calendar Body -->
+<section class="p-6" data-purpose="schedule-calendar-matrix">
+<!-- Calendar Month Navigator -->
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<h2 class="text-base font-semibold text-gray-800">2026年 09月</h2>
+<div class="flex items-center border border-[#dcdfe6] rounded bg-white overflow-hidden shadow-xs">
+<button class="px-2.5 py-1 text-xs hover:bg-gray-50 border-r border-[#dcdfe6] text-gray-600 font-medium">上一月</button>
+<button class="px-2.5 py-1 text-xs hover:bg-gray-50 border-r border-[#dcdfe6] text-blue-600 font-medium bg-blue-50">本月</button>
+<button class="px-2.5 py-1 text-xs hover:bg-gray-50 text-gray-600 font-medium">下一月</button>
+</div>
+</div>
+<!-- Color Legend -->
+<div class="flex items-center gap-4 text-xs text-gray-500">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#409eff]"></span>
+<span>白班 (08:30 - 17:30)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#67c23a]"></span>
+<span>夜班 (17:30 - 次日08:30)</span>
+</div>
+</div>
+</div>
+<!-- Calendar Grid Structure -->
+<div class="border border-[#ebeef5] rounded overflow-hidden">
+<!-- Weekday Headers -->
+<div class="grid grid-cols-7 bg-[#f5f7fa] border-b border-[#ebeef5] text-center text-xs font-semibold text-gray-600 py-2.5">
+<div>周一</div>
+<div>周二</div>
+<div>周三</div>
+<div>周四</div>
+<div>周五</div>
+<div class="text-blue-500">周六</div>
+<div class="text-blue-500">周日</div>
+</div>
+<!-- Calendar Matrix Rows (Simulated 2026 September days) -->
+<div class="grid grid-cols-7 divide-x divide-y divide-[#ebeef5] bg-white text-xs">
+<!-- Row 1: Aug 31 (Inactive) to Sep 6 -->
+<div class="min-h-[105px] p-2 bg-[#fafbfc] text-gray-300">
+<span class="block text-right font-medium">31</span>
+</div>
+<div class="min-h-[105px] p-2">
+<span class="block text-right font-medium text-gray-700 mb-1">1</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate" title="情报指挥专班 - 白班: 张三">
+<span class="font-medium">白</span> 张三 (003478)
+                </div>
+</div>
+</div>
+<div class="min-h-[105px] p-2">
+<span class="block text-right font-medium text-gray-700 mb-1">2</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate">
+<span class="font-medium">白</span> 李四 (004129)
+                </div>
+<div class="px-1.5 py-0.5 rounded bg-[#f0f9eb] text-[#67c23a] border border-[#e1f3d8] truncate">
+<span class="font-medium">夜</span> 王五 (009210)
+                </div>
+</div>
+</div>
+<div class="min-h-[105px] p-2">
+<span class="block text-right font-medium text-gray-700 mb-1">3</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate">
+<span class="font-medium">白</span> 刘建国 (001182)
+                </div>
+</div>
+</div>
+<div class="min-h-[105px] p-2">
+<span class="block text-right font-medium text-gray-700 mb-1">4</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate">
+<span class="font-medium">白</span> 陈明 (002931)
+                </div>
+</div>
+</div>
+<div class="min-h-[105px] p-2 bg-[#fdfdfd]">
+<span class="block text-right font-medium text-blue-600 mb-1">5</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#f0f9eb] text-[#67c23a] border border-[#e1f3d8] truncate">
+<span class="font-medium">夜</span> 孙晨 (007421)
+                </div>
+</div>
+</div>
+<div class="min-h-[105px] p-2 bg-[#fdfdfd]">
+<span class="block text-right font-medium text-blue-600 mb-1">6</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate">
+<span class="font-medium">白</span> 赵峰 (006192)
+                </div>
+</div>
+</div>
+<!-- Row 2: Sep 7 to Sep 13 -->
+<div class="min-h-[105px] p-2">
+<span class="block text-right font-medium text-gray-700 mb-1">7</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate">
+<span class="font-medium">白</span> 徐雷 (009012)
+                </div>
+</div>
+</div>
+<div class="min-h-[105px] p-2">
+<span class="block text-right font-medium text-gray-700 mb-1">8</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate">
+<span class="font-medium">白</span> 郑志远 (009043)
+                </div>
+</div>
+</div>
+<div class="min-h-[105px] p-2 bg-blue-50/20">
+<span class="inline-block float-left text-[10px] text-blue-600 font-bold bg-blue-100/70 px-1 rounded">今日</span>
+<span class="block text-right font-medium text-blue-600 mb-1">9</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate">
+<span class="font-medium">白</span> 张三 (003478)
+                </div>
+<div class="px-1.5 py-0.5 rounded bg-[#f0f9eb] text-[#67c23a] border border-[#e1f3d8] truncate">
+<span class="font-medium">夜</span> 李四 (004129)
+                </div>
+</div>
+</div>
+<div class="min-h-[105px] p-2">
+<span class="block text-right font-medium text-gray-700 mb-1">10</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate">
+<span class="font-medium">白</span> 王五 (009210)
+                </div>
+</div>
+</div>
+<div class="min-h-[105px] p-2">
+<span class="block text-right font-medium text-gray-700 mb-1">11</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate">
+<span class="font-medium">白</span> 刘建国 (001182)
+                </div>
+</div>
+</div>
+<div class="min-h-[105px] p-2 bg-[#fdfdfd]">
+<span class="block text-right font-medium text-blue-600 mb-1">12</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#f0f9eb] text-[#67c23a] border border-[#e1f3d8] truncate">
+<span class="font-medium">夜</span> 陈明 (002931)
+                </div>
+</div>
+</div>
+<div class="min-h-[105px] p-2 bg-[#fdfdfd]">
+<span class="block text-right font-medium text-blue-600 mb-1">13</span>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate">
+<span class="font-medium">白</span> 孙晨 (007421)
+                </div>
+</div>
+</div>
+<!-- Row 3: Sep 14 to Sep 20 (Collapsed placeholders for visual fidelity) -->
+<div class="min-h-[105px] p-2"><span class="block text-right font-medium text-gray-700 mb-1">14</span><div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate"><span class="font-medium">白</span> 张三</div></div>
+<div class="min-h-[105px] p-2"><span class="block text-right font-medium text-gray-700 mb-1">15</span><div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate"><span class="font-medium">白</span> 李四</div></div>
+<div class="min-h-[105px] p-2"><span class="block text-right font-medium text-gray-700 mb-1">16</span><div class="px-1.5 py-0.5 rounded bg-[#f0f9eb] text-[#67c23a] border border-[#e1f3d8] truncate"><span class="font-medium">夜</span> 王五</div></div>
+<div class="min-h-[105px] p-2"><span class="block text-right font-medium text-gray-700 mb-1">17</span><div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate"><span class="font-medium">白</span> 赵峰</div></div>
+<div class="min-h-[105px] p-2"><span class="block text-right font-medium text-gray-700 mb-1">18</span><div class="px-1.5 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] truncate"><span class="font-medium">白</span> 徐雷</div></div>
+<div class="min-h-[105px] p-2 bg-[#fdfdfd]"><span class="block text-right font-medium text-blue-600 mb-1">19</span></div>
+<div class="min-h-[105px] p-2 bg-[#fdfdfd]"><span class="block text-right font-medium text-blue-600 mb-1">20</span></div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- END: Main Content Area -->
+<!-- BEGIN: Modal Dialog Form Validation Error State -->
+<!-- The modal can be dynamically closed/opened with click handlers -->
+<div class="fixed inset-0 z-40 modal-backdrop flex items-center justify-center p-4 transition-opacity duration-200" data-purpose="batch-scheduling-modal" id="scheduleModal">
+<div class="bg-white rounded-md shadow-2xl w-full max-w-[620px] overflow-hidden border border-gray-200" onclick="event.stopPropagation()">
+<!-- Modal Header -->
+<div class="flex items-center justify-between px-6 py-4 border-b border-[#ebeef5]">
+<h3 class="text-base font-semibold text-[#303133] flex items-center gap-2">
+<span>批量排班</span>
+<span class="text-[11px] font-normal px-2 py-0.5 bg-red-50 text-red-600 rounded border border-red-100">表单必填项校验提示态</span>
+</h3>
+<button aria-label="关闭" class="text-gray-400 hover:text-gray-600 transition cursor-pointer p-1 -mr-1 rounded hover:bg-gray-100" id="closeModalCross" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<!-- Modal Body (Form with Validation Errors) -->
+<form class="p-6 space-y-4" onsubmit="return false;">
+<!-- Form Item 1: 协同岗名称 (*必填 错误态) -->
+<div>
+<label class="block text-xs text-[#606266] mb-1 font-medium">
+<span class="text-[#f56c6c] mr-1">*</span>协同岗名称
+          </label>
+<div class="relative">
+<input class="w-full text-xs h-9 px-3 rounded border el-input-error outline-none transition bg-white text-gray-800" placeholder="请选择或输入协同岗名称" type="text" value=""/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none text-[#f56c6c]">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" fill-rule="evenodd"></path>
+</svg>
+</div>
+</div>
+<!-- Error Text -->
+<p class="text-[11px] text-[#f56c6c] mt-1 flex items-center gap-1 font-medium">
+<svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" fill-rule="evenodd"></path>
+</svg>
+            请选择或输入协同岗名称
+          </p>
+</div>
+<!-- Form Item 2: 人员姓名 (*必填 错误态) -->
+<div>
+<label class="block text-xs text-[#606266] mb-1 font-medium">
+<span class="text-[#f56c6c] mr-1">*</span>人员姓名
+          </label>
+<div class="relative">
+<div class="w-full text-xs min-h-[36px] px-3 py-1.5 rounded border el-input-error bg-white flex items-center justify-between cursor-pointer">
+<span class="text-gray-400">点击选择关联排班警员...</span>
+<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- Error Text -->
+<p class="text-[11px] text-[#f56c6c] mt-1 flex items-center gap-1 font-medium">
+<svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" fill-rule="evenodd"></path>
+</svg>
+            请选择关联排班警员
+          </p>
+</div>
+<!-- Form Item 3: 排班类型 (*必填 错误态) -->
+<div>
+<label class="block text-xs text-[#606266] mb-1 font-medium">
+<span class="text-[#f56c6c] mr-1">*</span>排班类型
+          </label>
+<div class="relative">
+<select class="w-full text-xs h-9 px-3 rounded border el-input-error outline-none transition bg-white text-gray-400 appearance-none pr-8">
+<option disabled="" selected="" value="">请选择排班类型</option>
+<option class="text-gray-800" value="day">白班 (08:30 - 17:30)</option>
+<option class="text-gray-800" value="night">夜班 (17:30 - 次日08:30)</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-2.5 pointer-events-none text-gray-400">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Error Text -->
+<p class="text-[11px] text-[#f56c6c] mt-1 flex items-center gap-1 font-medium">
+<svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" fill-rule="evenodd"></path>
+</svg>
+            请选择排班类型
+          </p>
+</div>
+<!-- Form Item 4: 日期范围 (*必填 错误态) -->
+<div>
+<label class="block text-xs text-[#606266] mb-1 font-medium">
+<span class="text-[#f56c6c] mr-1">*</span>日期范围
+          </label>
+<div class="relative flex items-center rounded border el-input-error bg-white px-3 h-9">
+<svg class="w-4 h-4 text-gray-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<input class="w-full text-xs border-0 p-0 focus:ring-0 text-gray-700 placeholder-gray-400" placeholder="开始日期" type="text"/>
+<span class="text-xs text-gray-400 px-2">至</span>
+<input class="w-full text-xs border-0 p-0 focus:ring-0 text-gray-700 placeholder-gray-400 text-right" placeholder="结束日期" type="text"/>
+</div>
+<!-- Error Text -->
+<p class="text-[11px] text-[#f56c6c] mt-1 flex items-center gap-1 font-medium">
+<svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" fill-rule="evenodd"></path>
+</svg>
+            请选择排班起止日期
+          </p>
+</div>
+<!-- Form Item 5: 备注说明 (选填 正常态) -->
+<div>
+<label class="block text-xs text-[#606266] mb-1 font-medium">
+            备注说明 <span class="text-gray-400 font-normal">(选填)</span>
+</label>
+<textarea class="w-full text-xs p-2.5 rounded border border-[#dcdfe6] focus:border-[#409eff] focus:ring-1 focus:ring-[#409eff] outline-none transition bg-white" placeholder="请输入排班特殊说明或注意事项..." rows="2"></textarea>
+</div>
+</form>
+<!-- Modal Footer Buttons -->
+<div class="px-6 py-3.5 bg-[#f5f7fa] border-t border-[#ebeef5] flex items-center justify-end gap-3">
+<button class="px-4 py-1.5 text-xs rounded border border-[#dcdfe6] bg-white text-[#606266] hover:text-[#409eff] hover:border-[#409eff] transition font-medium cursor-pointer" id="cancelModalBtn" type="button">
+          取消
+        </button>
+<button class="px-4 py-1.5 text-xs rounded bg-[#409eff] text-white font-medium hover:bg-blue-600 transition shadow-sm flex items-center gap-1 cursor-pointer" type="button">
+<span>确定</span>
+</button>
+</div>
+</div>
+</div>
+<!-- END: Modal Dialog Form Validation Error State -->
+<!-- BEGIN: Interactive Logic -->
+<script>
+  (function() {
+    const modal = document.getElementById('scheduleModal');
+    const toast = document.getElementById('toastNotification');
+    const openBtn = document.getElementById('openModalBtn');
+    const closeCross = document.getElementById('closeModalCross');
+    const cancelBtn = document.getElementById('cancelModalBtn');
+
+    function closeModal() {
+      if (modal) modal.classList.add('hidden');
+      if (toast) toast.classList.add('hidden');
+    }
+
+    function openModal() {
+      if (modal) modal.classList.remove('hidden');
+      if (toast) toast.classList.remove('hidden');
+    }
+
+    if (closeCross) closeCross.addEventListener('click', closeModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+    if (openBtn) openBtn.addEventListener('click', openModal);
+
+    // Clicking the dark backdrop closes modal
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  })();
+</script>
+<!-- END: Interactive Logic -->
+</body></html>

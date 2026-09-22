@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "secondary": "#4f6076",
+        "background": "#f8f9ff",
+        "on-primary-fixed-variant": "#004881",
+        "surface-container": "#ebeef4",
+        "on-tertiary-fixed": "#072100",
+        "inverse-on-surface": "#eef1f7",
+        "secondary-fixed": "#d2e4ff",
+        "surface-dim": "#d7dae0",
+        "on-primary-container": "#003460",
+        "on-secondary-container": "#55667c",
+        "surface-variant": "#e0e2e9",
+        "error-container": "#ffdad6",
+        "on-tertiary-fixed-variant": "#1d5200",
+        "surface-container-lowest": "#ffffff",
+        "outline-variant": "#c0c7d4",
+        "surface": "#f8f9ff",
+        "inverse-surface": "#2d3136",
+        "secondary-fixed-dim": "#b6c8e2",
+        "on-tertiary-container": "#133b00",
+        "secondary-container": "#d2e4ff",
+        "on-tertiary": "#ffffff",
+        "on-surface-variant": "#404752",
+        "surface-container-highest": "#e0e2e9",
+        "on-background": "#181c20",
+        "surface-bright": "#f8f9ff",
+        "tertiary-fixed-dim": "#80dd52",
+        "primary-fixed": "#d3e4ff",
+        "primary-container": "#409eff",
+        "on-primary-fixed": "#001c38",
+        "surface-container-high": "#e6e8ef",
+        "tertiary-fixed": "#9bfa6b",
+        "error": "#ba1a1a",
+        "primary": "#0060a9",
+        "inverse-primary": "#a2c9ff",
+        "on-error": "#ffffff",
+        "on-surface": "#181c20",
+        "tertiary": "#286c00",
+        "on-secondary": "#ffffff",
+        "on-secondary-fixed-variant": "#37485d",
+        "outline": "#707784",
+        "on-error-container": "#93000a",
+        "surface-tint": "#0060a9",
+        "on-secondary-fixed": "#0a1c30",
+        "on-primary": "#ffffff",
+        "surface-container-low": "#f1f3fa",
+        "tertiary-container": "#55af28",
+        "primary-fixed-dim": "#a2c9ff"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "gutter": "16px",
+        "space-xl": "24px",
+        "space-md": "12px",
+        "space-lg": "16px",
+        "space-xs": "4px",
+        "space-sm": "8px",
+        "margin": "20px"
+      },
+      "fontFamily": {
+        "headline-md": ["Inter"],
+        "label-sm": ["Inter"],
+        "label-lg": ["Inter"],
+        "label-md": ["Inter"],
+        "body-lg": ["Inter"],
+        "body-sm": ["Inter"],
+        "display-lg": ["Inter"],
+        "headline-lg": ["Inter"],
+        "body-md": ["Inter"],
+        "headline-sm": ["Inter"]
+      },
+      "fontSize": {
+        "headline-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+        "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+        "body-lg": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "display-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+        "headline-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+        "body-md": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "headline-sm": ["14px", {"lineHeight": "22px", "fontWeight": "600"}]
+      }
+    }
+  }
+}</script></head><body class="bg-[#f0f2f5] font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-[#1a2332] z-50 flex flex-col justify-between text-[#c0c4cc] shadow-lg"><div class="flex flex-col h-full"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-[#111827] border-b border-[#2d3a4f] shrink-0"><svg class="h-8 w-8 text-primary-container shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg><div class="flex flex-col overflow-hidden"><span class="font-headline-sm text-headline-sm text-surface-container-lowest tracking-wide truncate">警务业务协同平台</span><span class="font-label-sm text-label-sm text-[#8a9cae] truncate">LinkX Tactical Admin v2.4</span></div></div><div class="flex-1 overflow-y-auto py-space-xs"><nav class="space-y-0.5 text-body-md font-body-md"><a class="flex items-center gap-space-sm px-space-lg py-2.5 text-[#a6b6c9] hover:bg-[#222e40] hover:text-surface-container-lowest transition-colors" data-path="dashboard" href="#"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span>综合态势工作台</span></a><div class="py-0.5"><div class="flex items-center justify-between px-space-lg py-2 text-[#8b9bb0] font-label-md text-label-md cursor-pointer hover:text-surface-container-lowest"><span class="flex items-center gap-space-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>系统配置</span><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div class="space-y-0.5 pl-space-md"><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="global-parameter-config" href="#"><span>全局参数配置</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="map-config" href="#"><span>地图配置</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="layout-config" href="#"><span>系统设置管理</span></a></div></div><div class="py-0.5"><div class="flex items-center justify-between px-space-lg py-2 text-[#8b9bb0] font-label-md text-label-md cursor-pointer"><span class="flex items-center gap-space-sm"><svg class="w-4 h-4 text-primary-container" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="text-surface-container-lowest font-medium">协同岗管理</span></span><svg class="w-3.5 h-3.5 text-surface-container-lowest" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 15l7-7 7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div class="space-y-0.5 pl-space-md"><a aria-current="page" class="flex items-center py-2 px-space-lg transition-colors bg-[#111827] text-primary-container font-headline-sm border-l-4 border-primary-container pl-3" data-path="collaboration-posts" href="#"><span>协同岗管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="tag-management" href="#"><span>标签管理</span></a></div></div><div class="py-0.5"><div class="flex items-center justify-between px-space-lg py-2 text-[#8b9bb0] font-label-md text-label-md cursor-pointer hover:text-surface-container-lowest"><span class="flex items-center gap-space-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>权限中心</span><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div class="space-y-0.5 pl-space-md"><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="role-management" href="#"><span>角色管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="permission-management" href="#"><span>权限管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="user-management" href="#"><span>用户管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="frontend-permissions" href="#"><span>前台权限管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="frontend-roles" href="#"><span>前台角色管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="frontend-users" href="#"><span>前台用户管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="backend-permissions" href="#"><span>后台权限管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="backend-roles" href="#"><span>后台角色管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="backend-users" href="#"><span>后台用户管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="custom-department" href="#"><span>自定义组织管理</span></a></div></div><div class="py-0.5"><div class="flex items-center justify-between px-space-lg py-2 text-[#8b9bb0] font-label-md text-label-md cursor-pointer hover:text-surface-container-lowest"><span class="flex items-center gap-space-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>位置管理</span><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div class="space-y-0.5 pl-space-md"><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="location-info" href="#"><span>位置信息</span></a></div></div><div class="py-0.5"><div class="flex items-center justify-between px-space-lg py-2 text-[#8b9bb0] font-label-md text-label-md cursor-pointer hover:text-surface-container-lowest"><span class="flex items-center gap-space-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>排班管理</span><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div class="space-y-0.5 pl-space-md"><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="scheduling-types" href="#"><span>排班类型管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="scheduling-info" href="#"><span>排班信息</span></a></div></div><div class="py-0.5"><div class="flex items-center justify-between px-space-lg py-2 text-[#8b9bb0] font-label-md text-label-md cursor-pointer hover:text-surface-container-lowest"><span class="flex items-center gap-space-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>通知管理</span><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div class="space-y-0.5 pl-space-md"><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="alert-push" href="#"><span>预警推送</span></a></div></div><div class="py-0.5"><div class="flex items-center justify-between px-space-lg py-2 text-[#8b9bb0] font-label-md text-label-md cursor-pointer hover:text-surface-container-lowest"><span class="flex items-center gap-space-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>警信扩展信息管理</span><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div class="space-y-0.5 pl-space-md"><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="virtual-users" href="#"><span>虚拟用户管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="archived-groups" href="#"><span>归档群组</span></a></div></div><div class="py-0.5"><div class="flex items-center justify-between px-space-lg py-2 text-[#8b9bb0] font-label-md text-label-md cursor-pointer hover:text-surface-container-lowest"><span class="flex items-center gap-space-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>三方对接</span><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div class="space-y-0.5 pl-space-md"><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="app-management" href="#"><span>应用管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="southbound-integration" href="#"><span>南向对接</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="police-order-platform" href="#"><span>警单平台</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="comm-services" href="#"><span>通信服务管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="ai-agent-integration" href="#"><span>AI智能体对接（南向）</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="northbound-access" href="#"><span>北向接入管理</span></a></div></div><div class="py-0.5"><div class="flex items-center justify-between px-space-lg py-2 text-[#8b9bb0] font-label-md text-label-md cursor-pointer hover:text-surface-container-lowest"><span class="flex items-center gap-space-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>多节点管理</span><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div class="space-y-0.5 pl-space-md"><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="node-management" href="#"><span>节点管理</span></a><a class="flex items-center py-2 px-space-lg text-[#94a3b8] hover:text-surface-container-lowest text-body-sm font-body-sm transition-colors" data-path="node-data-management" href="#"><span>数据管理</span></a></div></div></nav></div></div><div class="h-16 px-space-lg bg-[#111827] border-t border-[#2d3a4f] flex items-center justify-between text-[#8b9bb0] font-label-sm text-label-sm shrink-0"><div><span>专网延时: 12ms</span></div><button class="hover:text-surface-container-lowest flex items-center" title="收起侧栏"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest z-40 border-b border-[#e4e7ed] shadow-[0_1px_4px_rgba(0,21,41,0.06)] flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg"><button class="text-secondary hover:text-primary transition-colors flex items-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button><nav class="flex items-center gap-2 text-[13px] text-[#606266]"><span class="text-secondary">协同岗管理</span><span class="text-[#c0c4cc]">/</span><span class="text-[#303133] font-semibold">协同岗管理</span></nav><div class="hidden xl:flex items-center gap-1.5 bg-[#fef0f0] border border-[#fde2e2] px-2.5 py-1 rounded text-[#f56c6c] text-[12px]"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span>修改数据后，请重新登录客户端</span></div></div><div class="flex items-center gap-space-lg"><div class="hidden md:flex items-center gap-2 bg-[#f5f7fa] border border-[#dcdfe6] px-2.5 py-1 rounded text-[#909399]"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><input class="bg-transparent border-none outline-none text-[13px] text-[#303133] placeholder:text-[#a8abb2] w-48" placeholder="搜索模块、指令 (Ctrl+K)" type="text"/></div><div class="hidden lg:flex items-center gap-1.5 text-[#67c23a] text-[12px] bg-[#f0f9eb] border border-[#e1f3d8] px-2.5 py-1 rounded"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span>协同专网在线 · License 正常</span></div><div class="flex items-center gap-1 text-[#606266]"><button class="relative p-1.5 hover:bg-[#f5f7fa] rounded text-[#606266] transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#f56c6c]"></span></button><button class="p-1.5 hover:bg-[#f5f7fa] rounded text-[#606266] transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button><button class="px-2 py-1 hover:bg-[#f5f7fa] rounded text-[12px] text-[#606266] transition-colors">中/EN</button></div><div class="relative flex items-center gap-2 pl-3 border-l border-[#dcdfe6] cursor-pointer group"><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-[#ebeef5]" src="https://lh3.googleusercontent.com/aida/AEtjO1XXnZcUd9ilLsKHYhlhcCZLExzP78FGuF8sH46L-1vKS4XlfEl9gux5xj3ZEwo3pP5NcxfGGOgsQIkt5Viypxb-w-mA3eySmqNLsAOiY9mEskSBFGUrB6KO06MDlhFJeEd8wwSnYE5BPAyTGZb4CsD56rbrpBvC8O6x_vaY-po7N7LlMwWuI3Jayf6TAnkmgUg8puXlmHofl1LTrhMlrD3Iug-i8qH3fYDNwE7K1G6U8_uJpHmQl0OJvXEg"/><div class="flex flex-col text-left"><span class="text-[13px] text-[#303133] font-medium leading-tight">admin (超级管理员)</span><span class="text-[11px] text-[#909399]">总指挥中心</span></div><svg class="w-4 h-4 text-[#909399]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><div class="absolute right-0 top-full mt-1 w-40 bg-white border border-[#e4e7ed] rounded shadow-lg py-1 hidden group-hover:block z-50"><a class="flex items-center gap-2 px-3 py-2 text-[13px] text-[#606266] hover:bg-[#f5f7fa] hover:text-[#409eff]" href="#"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>修改密码</a><a class="flex items-center gap-2 px-3 py-2 text-[13px] text-[#606266] hover:bg-[#f5f7fa] hover:text-[#409eff]" href="#"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>绑定警员</a><div class="h-px bg-[#ebeef5] my-1"></div><a class="flex items-center gap-2 px-3 py-2 text-[13px] text-[#f56c6c] hover:bg-[#fef0f0]" href="#"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>退出登录</a></div></div></div></header><main class="relative pt-16 bg-[#f0f2f5] min-h-screen"><div class="p-4"><div class="flex flex-col w-full">
+<!-- Primary Container: Tabs & Data Workspace (Prototype Direct Layout) -->
+<div class="bg-white rounded border border-[#e4e7ed] shadow-sm flex flex-col">
+<!-- Element-UI Card-Header / Tabs Bar -->
+<div class="bg-[#f5f7fa] border-b border-[#e4e7ed] px-4 flex items-center justify-between">
+<div class="flex items-center -mb-px" id="collaboration-tabs">
+<button class="tab-item active-tab px-5 py-3.5 bg-white text-[#409eff] border-t-2 border-t-[#409eff] border-x border-[#e4e7ed] font-medium text-[14px] flex items-center gap-2 transition-colors" onclick="switchTab(this, 'tab-post-list')">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>协同岗列表</span>
+<span class="px-1.5 py-0.2 bg-[#ecf5ff] text-[#409eff] rounded-full text-[11px] font-semibold border border-[#d9ecff]">28</span>
+</button>
+<button class="tab-item px-5 py-3.5 text-[#606266] hover:text-[#409eff] border-t-2 border-t-transparent font-medium text-[14px] flex items-center gap-2 transition-colors border-r border-[#e4e7ed]" onclick="switchTab(this, 'tab-hierarchy')">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>层级管理</span>
+</button>
+<button class="tab-item px-5 py-3.5 text-[#606266] hover:text-[#409eff] border-t-2 border-t-transparent font-medium text-[14px] flex items-center gap-2 transition-colors border-r border-[#e4e7ed]" onclick="switchTab(this, 'tab-functions')">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>功能管理</span>
+</button>
+<button class="tab-item px-5 py-3.5 text-[#606266] hover:text-[#409eff] border-t-2 border-t-transparent font-medium text-[14px] flex items-center gap-2 transition-colors border-r border-[#e4e7ed]" onclick="switchTab(this, 'tab-duty-log')">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>上下岗记录</span>
+</button>
+<button class="tab-item px-5 py-3.5 text-[#606266] hover:text-[#409eff] border-t-2 border-t-transparent font-medium text-[14px] flex items-center gap-2 transition-colors border-r border-[#e4e7ed]" onclick="switchTab(this, 'tab-edit-log')">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>编辑记录</span>
+</button>
+</div>
+<div class="hidden lg:flex items-center gap-1.5 text-[#909399] text-[13px]">
+<svg class="w-4 h-4 text-[#409eff]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>支持联动席位与多协同人员关联绑定</span>
+</div>
+</div>
+<!-- Active Tab Pane: 协同岗列表 -->
+<div class="tab-pane p-5 flex flex-col" id="tab-post-list">
+<!-- Search and Filter Form Ribbon -->
+<div class="bg-[#fcfdfe] p-4 rounded border border-[#ebeef5] mb-4 flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-wrap items-center gap-4">
+<div class="flex items-center gap-2">
+<label class="text-[#606266] text-[13px] whitespace-nowrap">协同岗名称:</label>
+<input class="w-48 h-8 px-3 bg-white border border-[#dcdfe6] text-[#303133] text-[13px] rounded outline-none placeholder:text-[#c0c4cc] focus:border-[#409eff]" id="filter-name" placeholder="请输入岗位名称" type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<label class="text-[#606266] text-[13px] whitespace-nowrap">所属组织:</label>
+<div class="relative w-48">
+<select class="w-full h-8 px-3 bg-white border border-[#dcdfe6] text-[#303133] text-[13px] rounded outline-none cursor-pointer appearance-none pr-8 focus:border-[#409eff]" id="filter-org">
+<option value="">全部所属组织</option>
+<option value="市局指挥中心">市局指挥中心</option>
+<option value="东区分局">东区分局</option>
+<option value="南区派出所">南区派出所</option>
+<option value="情指行专班">情指行专班</option>
+<option value="治安支队">治安支队</option>
+</select>
+<svg class="w-4 h-4 absolute right-2.5 top-2 text-[#909399] pointer-events-none" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="h-8 px-4 bg-[#409eff] hover:bg-[#66b1ff] text-white text-[13px] rounded flex items-center gap-1.5 transition-colors shadow-sm" onclick="applyFilter()">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>搜索</span>
+</button>
+<button class="h-8 px-4 bg-white hover:bg-[#f5f7fa] border border-[#dcdfe6] text-[#606266] hover:text-[#409eff] hover:border-[#c6e2ff] text-[13px] rounded flex items-center gap-1.5 transition-colors" onclick="resetFilter()">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>重置</span>
+</button>
+<button class="h-8 px-4 bg-[#409eff] hover:bg-[#66b1ff] text-white text-[13px] rounded flex items-center gap-1.5 transition-colors shadow-sm" onclick="openCreatePostModal()">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>新增</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-1 text-[#909399] text-[12px]">
+<svg class="w-3.5 h-3.5 text-[#e6a23c]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>当前为本地模拟数据，路由与功能入口按真实项目完整展示</span>
+</div>
+</div>
+<!-- Element-UI Data Table -->
+<div class="w-full overflow-x-auto rounded border border-[#ebeef5]">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#f8f9fa] text-[#606266] text-[13px] border-b border-[#ebeef5] whitespace-nowrap">
+<th class="py-3 px-3 w-16 text-center font-medium">序号</th>
+<th class="py-3 px-4 font-medium whitespace-nowrap min-w-[200px]">协同岗名称</th>
+<th class="py-3 px-4 font-medium whitespace-nowrap min-w-[140px]">所属组织</th>
+<th class="py-3 px-4 font-medium whitespace-nowrap min-w-[260px]">关联人员</th>
+<th class="py-3 px-4 w-28 text-center font-medium whitespace-nowrap">状态</th>
+<th class="py-3 px-4 w-48 font-medium whitespace-nowrap">更新时间</th>
+<th class="py-3 px-4 w-48 text-center font-medium whitespace-nowrap">操作</th>
+</tr>
+</thead>
+<tbody class="text-[13px] divide-y divide-[#ebeef5]" id="post-table-body">
+<tr class="hover:bg-[#f5f7fa] transition-colors bg-white">
+<td class="py-3.5 px-3 text-center text-[#909399]">1</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 text-[#303133] whitespace-nowrap font-medium">
+<span class="w-2 h-2 rounded-full bg-[#409eff] shrink-0"></span>
+<span>视频巡查岗</span>
+</div>
+<div class="text-[#909399] text-[12px] pl-4 whitespace-nowrap mt-0.5">编码: POST-V-0881 · 席位 #04</div>
+</td>
+<td class="py-3.5 px-4 text-[#606266] whitespace-nowrap">市局指挥中心</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-wrap gap-1.5 items-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ecf5ff] border border-[#d9ecff] text-[#409eff] text-[12px] whitespace-nowrap">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>张三 (003478)
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ecf5ff] border border-[#d9ecff] text-[#409eff] text-[12px] whitespace-nowrap">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>李四 (004129)
+</span>
+<span class="text-[#909399] text-[12px] cursor-pointer hover:text-[#409eff] whitespace-nowrap px-1.5 py-0.5 rounded bg-[#f4f4f5]" onclick="openAssignModal('视频巡查岗', ['张三 003478', '李四 004129'])">+2</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#f0f9eb] border border-[#e1f3d8] text-[#67c23a] text-[12px]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#67c23a]"></span>启用
+</span>
+</td>
+<td class="py-3.5 px-4 text-[#909399] font-mono text-[12px] whitespace-nowrap">2026-09-21 09:30:00</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center justify-center gap-3">
+<button class="text-[#409eff] hover:text-[#66b1ff] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="editPost('视频巡查岗')">编辑</button>
+<button class="text-[#409eff] hover:text-[#66b1ff] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="openAssignModal('视频巡查岗', ['张三 003478', '李四 004129'])">关联人员</button>
+<button class="text-[#f56c6c] hover:text-[#f78989] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="confirmDeletePost('视频巡查岗')">删除</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#f5f7fa] transition-colors bg-white">
+<td class="py-3.5 px-3 text-center text-[#909399]">2</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 text-[#303133] whitespace-nowrap font-medium">
+<span class="w-2 h-2 rounded-full bg-[#409eff] shrink-0"></span>
+<span>警情处置岗</span>
+</div>
+<div class="text-[#909399] text-[12px] pl-4 whitespace-nowrap mt-0.5">编码: POST-C-0102 · 席位 #02</div>
+</td>
+<td class="py-3.5 px-4 text-[#606266] whitespace-nowrap">东区分局</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-wrap gap-1.5 items-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ecf5ff] border border-[#d9ecff] text-[#409eff] text-[12px] whitespace-nowrap">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>王五 (009210)
+</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#f0f9eb] border border-[#e1f3d8] text-[#67c23a] text-[12px]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#67c23a]"></span>启用
+</span>
+</td>
+<td class="py-3.5 px-4 text-[#909399] font-mono text-[12px] whitespace-nowrap">2026-09-21 08:45:12</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center justify-center gap-3">
+<button class="text-[#409eff] hover:text-[#66b1ff] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="editPost('警情处置岗')">编辑</button>
+<button class="text-[#409eff] hover:text-[#66b1ff] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="openAssignModal('警情处置岗', ['王五 009210'])">关联人员</button>
+<button class="text-[#f56c6c] hover:text-[#f78989] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="confirmDeletePost('警情处置岗')">删除</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#f5f7fa] transition-colors bg-white">
+<td class="py-3.5 px-3 text-center text-[#909399]">3</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 text-[#303133] whitespace-nowrap font-medium">
+<span class="w-2 h-2 rounded-full bg-[#409eff] shrink-0"></span>
+<span>情报研判首席岗</span>
+</div>
+<div class="text-[#909399] text-[12px] pl-4 whitespace-nowrap mt-0.5">编码: POST-INTEL-01 · 席位 #01</div>
+</td>
+<td class="py-3.5 px-4 text-[#606266] whitespace-nowrap">情指行专班</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-wrap gap-1.5 items-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ecf5ff] border border-[#d9ecff] text-[#409eff] text-[12px] whitespace-nowrap">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>赵庆 (001201)
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ecf5ff] border border-[#d9ecff] text-[#409eff] text-[12px] whitespace-nowrap">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>孙志国 (001289)
+</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#f0f9eb] border border-[#e1f3d8] text-[#67c23a] text-[12px]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#67c23a]"></span>启用
+</span>
+</td>
+<td class="py-3.5 px-4 text-[#909399] font-mono text-[12px] whitespace-nowrap">2026-09-20 17:15:30</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center justify-center gap-3">
+<button class="text-[#409eff] hover:text-[#66b1ff] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="editPost('情报研判首席岗')">编辑</button>
+<button class="text-[#409eff] hover:text-[#66b1ff] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="openAssignModal('情报研判首席岗', ['赵庆 001201', '孙志国 001289'])">关联人员</button>
+<button class="text-[#f56c6c] hover:text-[#f78989] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="confirmDeletePost('情报研判首席岗')">删除</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#f5f7fa] transition-colors bg-white">
+<td class="py-3.5 px-3 text-center text-[#909399]">4</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2 text-[#303133] whitespace-nowrap font-medium">
+<span class="w-2 h-2 rounded-full bg-[#409eff] shrink-0"></span>
+<span>交通疏导应急岗</span>
+</div>
+<div class="text-[#909399] text-[12px] pl-4 whitespace-nowrap mt-0.5">编码: POST-TR-09 · 席位 #07</div>
+</td>
+<td class="py-3.5 px-4 text-[#606266] whitespace-nowrap">治安支队</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-wrap gap-1.5 items-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ecf5ff] border border-[#d9ecff] text-[#409eff] text-[12px] whitespace-nowrap">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>郑海龙 (007823)
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ecf5ff] border border-[#d9ecff] text-[#409eff] text-[12px] whitespace-nowrap">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>周明 (008104)
+</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#f0f9eb] border border-[#e1f3d8] text-[#67c23a] text-[12px]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#67c23a]"></span>启用
+</span>
+</td>
+<td class="py-3.5 px-4 text-[#909399] font-mono text-[12px] whitespace-nowrap">2026-09-20 14:02:18</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center justify-center gap-3">
+<button class="text-[#409eff] hover:text-[#66b1ff] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="editPost('交通疏导应急岗')">编辑</button>
+<button class="text-[#409eff] hover:text-[#66b1ff] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="openAssignModal('交通疏导应急岗', ['郑海龙 007823', '周明 008104'])">关联人员</button>
+<button class="text-[#f56c6c] hover:text-[#f78989] text-[13px] transition-colors whitespace-nowrap font-normal" onclick="confirmDeletePost('交通疏导应急岗')">删除</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Section -->
+<div class="mt-4 pt-3 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-2 text-[#606266] text-[13px] whitespace-nowrap">
+<span>共 <strong class="text-[#303133] font-semibold">28</strong> 条记录</span>
+<span class="text-[#dcdfe6]">|</span>
+<div class="relative">
+<select class="h-7 px-2 bg-white border border-[#dcdfe6] text-[#606266] text-[12px] rounded outline-none cursor-pointer">
+<option>10 条/页</option>
+<option>20 条/页</option>
+<option>50 条/页</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-1 text-[13px] whitespace-nowrap">
+<button class="w-8 h-8 rounded bg-[#f4f4f5] border border-[#dcdfe6] text-[#909399] flex items-center justify-center disabled:opacity-50" disabled="">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="w-8 h-8 rounded bg-[#409eff] text-white font-medium flex items-center justify-center shadow-sm">1</button>
+<button class="w-8 h-8 rounded bg-[#f4f4f5] border border-[#dcdfe6] text-[#606266] hover:text-[#409eff] flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded bg-[#f4f4f5] border border-[#dcdfe6] text-[#606266] hover:text-[#409eff] flex items-center justify-center">3</button>
+<button class="w-8 h-8 rounded bg-[#f4f4f5] border border-[#dcdfe6] text-[#606266] hover:text-[#409eff] flex items-center justify-center">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="flex items-center gap-1 pl-2 text-[#606266] text-[13px] whitespace-nowrap">
+<span>跳至</span>
+<input class="w-10 h-7 text-center bg-white border border-[#dcdfe6] text-[#303133] rounded outline-none font-medium" type="text" value="1"/>
+<span>页</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Tabs Panes -->
+<div class="tab-pane hidden p-12 flex flex-col items-center justify-center text-center" id="tab-hierarchy">
+<svg class="w-12 h-12 text-[#909399] mb-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+<h3 class="text-[16px] font-semibold text-[#303133]">层级拓扑管理视图</h3>
+<p class="text-[#909399] text-[13px] max-w-md mt-1">支持以树形组织架构展开查看指挥中心、分局、派出所协同岗归属与纵向联动指令流向。</p>
+<button class="mt-4 px-4 py-1.5 bg-[#409eff] text-white rounded text-[13px]" onclick="switchTab(document.querySelector('.tab-item'), 'tab-post-list')">返回协同岗列表</button>
+</div>
+<div class="tab-pane hidden p-12 flex flex-col items-center justify-center text-center" id="tab-functions">
+<svg class="w-12 h-12 text-[#909399] mb-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+<h3 class="text-[16px] font-semibold text-[#303133]">协同岗能力与功能授权矩阵</h3>
+<p class="text-[#909399] text-[13px] max-w-md mt-1">配置岗位所具备的警单派发、视频上墙、一键呼叫以及情报订阅等多项业务权限。</p>
+<button class="mt-4 px-4 py-1.5 bg-[#409eff] text-white rounded text-[13px]" onclick="switchTab(document.querySelector('.tab-item'), 'tab-post-list')">返回协同岗列表</button>
+</div>
+<div class="tab-pane hidden p-12 flex flex-col items-center justify-center text-center" id="tab-duty-log">
+<svg class="w-12 h-12 text-[#909399] mb-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+<h3 class="text-[16px] font-semibold text-[#303133]">全警协同上下岗流水记录</h3>
+<p class="text-[#909399] text-[13px] max-w-md mt-1">全时段审计各协同席位的登录、换班打卡、交接班记录与设备IP绑定状态。</p>
+<button class="mt-4 px-4 py-1.5 bg-[#409eff] text-white rounded text-[13px]" onclick="switchTab(document.querySelector('.tab-item'), 'tab-post-list')">返回协同岗列表</button>
+</div>
+<div class="tab-pane hidden p-12 flex flex-col items-center justify-center text-center" id="tab-edit-log">
+<svg class="w-12 h-12 text-[#909399] mb-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+<h3 class="text-[16px] font-semibold text-[#303133]">岗位配置变更审计轨迹</h3>
+<p class="text-[#909399] text-[13px] max-w-md mt-1">记录管理员对席位名称、归属单位、关联人员的变更历史，确保执法系统合规性。</p>
+<button class="mt-4 px-4 py-1.5 bg-[#409eff] text-white rounded text-[13px]" onclick="switchTab(document.querySelector('.tab-item'), 'tab-post-list')">返回协同岗列表</button>
+</div>
+</div>
+<!-- Modal: 关联人员配置 (Interactive Element Plus Style Dialog) -->
+<div class="fixed inset-0 z-50 bg-black/40 backdrop-blur-none hidden items-center justify-center p-4 transition-opacity" id="assign-person-modal">
+<div class="bg-white rounded-lg shadow-xl w-full max-w-xl overflow-hidden flex flex-col">
+<!-- Modal Header -->
+<div class="px-5 py-3.5 bg-[#f5f7fa] border-b border-[#ebeef5] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<svg class="w-5 h-5 text-[#409eff]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<h3 class="text-[15px] font-medium text-[#303133]" id="modal-post-title">关联人员 - 视频巡查岗</h3>
+</div>
+<button class="text-[#909399] hover:text-[#303133] transition-colors p-1 rounded" onclick="closeAssignModal()">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<!-- Modal Form Content -->
+<div class="p-5 space-y-4">
+<div>
+<label class="block text-[#606266] text-[13px] mb-1.5">所属协同岗</label>
+<input class="w-full h-8 px-3 bg-[#f5f7fa] border border-[#dcdfe6] text-[#606266] text-[13px] rounded outline-none cursor-not-allowed" id="modal-post-name-input" readonly="" type="text" value="视频巡查岗"/>
+</div>
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="text-[#606266] text-[13px]">人员选择器 (可多选警员)</label>
+<span class="text-[#409eff] text-[12px] cursor-pointer hover:underline" onclick="addMockOfficer()">+ 快速推荐值班人员</span>
+</div>
+<div class="min-h-16 p-2 bg-[#fcfdfe] border border-[#dcdfe6] rounded flex flex-wrap gap-2 items-center" id="selected-officers-container">
+<span class="officer-tag inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#ecf5ff] border border-[#d9ecff] text-[#409eff] text-[12px]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>张三 <span class="font-mono text-[#909399]">003478</span></span>
+<button class="hover:text-[#f56c6c] text-[#909399] flex items-center ml-0.5" onclick="removeOfficerTag(this)"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+</span>
+<span class="officer-tag inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#ecf5ff] border border-[#d9ecff] text-[#409eff] text-[12px]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>李四 <span class="font-mono text-[#909399]">004129</span></span>
+<button class="hover:text-[#f56c6c] text-[#909399] flex items-center ml-0.5" onclick="removeOfficerTag(this)"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+</span>
+<div class="relative flex-1 min-w-[120px]">
+<input class="w-full h-7 px-2 bg-transparent text-[13px] text-[#303133] outline-none placeholder:text-[#c0c4cc]" id="officer-quick-input" onkeydown="handleTagKeydown(event)" placeholder="输入警号或姓名回车..." type="text"/>
+</div>
+</div>
+<p class="text-[#909399] text-[12px] mt-1">提示：输入警员姓名或6位警号后按回车键添加，支持绑定多个轮班警员。</p>
+</div>
+<div>
+<label class="block text-[#606266] text-[13px] mb-1.5">岗位排班策略</label>
+<div class="grid grid-cols-3 gap-2">
+<label class="flex items-center gap-2 p-2 rounded bg-[#f5f7fa] border border-[#e4e7ed] hover:border-[#c6e2ff] cursor-pointer">
+<input checked="" class="text-[#409eff] focus:ring-0" name="shift-policy" type="radio" value="three-shifts"/>
+<div class="flex flex-col">
+<span class="text-[12px] text-[#303133] font-medium">四班三运转</span>
+<span class="text-[#909399] text-[11px]">指挥中心标准</span>
+</div>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-[#f5f7fa] border border-[#e4e7ed] hover:border-[#c6e2ff] cursor-pointer">
+<input class="text-[#409eff] focus:ring-0" name="shift-policy" type="radio" value="two-shifts"/>
+<div class="flex flex-col">
+<span class="text-[12px] text-[#303133] font-medium">两班轮值</span>
+<span class="text-[#909399] text-[11px]">日夜倒班机制</span>
+</div>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-[#f5f7fa] border border-[#e4e7ed] hover:border-[#c6e2ff] cursor-pointer">
+<input class="text-[#409eff] focus:ring-0" name="shift-policy" type="radio" value="emergency"/>
+<div class="flex flex-col">
+<span class="text-[12px] text-[#303133] font-medium">应急机动</span>
+<span class="text-[#909399] text-[11px]">突发专班响应</span>
+</div>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-[#606266] text-[13px] mb-1.5">备注说明</label>
+<textarea class="w-full p-2.5 bg-white border border-[#dcdfe6] text-[#303133] text-[13px] rounded outline-none placeholder:text-[#c0c4cc] focus:border-[#409eff]" placeholder="可录入交接班特殊注意事项等说明..." rows="3"></textarea>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-5 py-3 bg-[#f5f7fa] border-t border-[#ebeef5] flex items-center justify-end gap-3">
+<button class="px-4 py-1.5 bg-white hover:bg-[#f5f7fa] border border-[#dcdfe6] text-[#606266] text-[13px] rounded transition-colors" onclick="closeAssignModal()">取消</button>
+<button class="px-4 py-1.5 bg-[#409eff] hover:bg-[#66b1ff] text-white text-[13px] rounded transition-colors shadow-sm flex items-center gap-1.5" onclick="saveAssignModal()">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>保存关联</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Toast Notification Overlay -->
+<div class="fixed bottom-8 right-8 z-50 bg-[#303133] text-white px-4 py-2.5 rounded shadow-lg flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none" id="toast-notify">
+<svg class="w-4 h-4 text-[#67c23a]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-[13px]" id="toast-text">操作已成功完成</span>
+</div>
+</div>
+<script>
+  function switchTab(btn, targetId) {
+    document.querySelectorAll('.tab-item').forEach(el => {
+      el.classList.remove('active-tab', 'bg-white', 'text-[#409eff]', 'border-t-[#409eff]', 'border-x');
+      el.classList.add('text-[#606266]', 'border-t-transparent');
+    });
+    btn.classList.add('active-tab', 'bg-white', 'text-[#409eff]', 'border-t-[#409eff]', 'border-x');
+    btn.classList.remove('text-[#606266]', 'border-t-transparent');
+
+    document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.classList.remove('hidden');
+    }
+  }
+
+  function applyFilter() {
+    const nameVal = document.getElementById('filter-name').value.trim().toLowerCase();
+    const orgVal = document.getElementById('filter-org').value;
+    const rows = document.querySelectorAll('#post-table-body tr');
+
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      let matchName = !nameVal || text.includes(nameVal);
+      let matchOrg = !orgVal || text.includes(orgVal.toLowerCase());
+
+      if (matchName && matchOrg) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+    showToast('已更新检索结果');
+  }
+
+  function resetFilter() {
+    document.getElementById('filter-name').value = '';
+    document.getElementById('filter-org').value = '';
+    const rows = document.querySelectorAll('#post-table-body tr');
+    rows.forEach(row => row.style.display = '');
+    showToast('已重置筛选条件');
+  }
+
+  function openAssignModal(postName, defaultOfficers) {
+    document.getElementById('modal-post-title').innerText = '关联人员 - ' + postName;
+    document.getElementById('modal-post-name-input').value = postName;
+
+    const container = document.getElementById('selected-officers-container');
+    const inputWrapper = document.getElementById('officer-quick-input').parentElement;
+    container.innerHTML = '';
+
+    if (defaultOfficers && defaultOfficers.length) {
+      defaultOfficers.forEach(item => {
+        const tag = createOfficerTagElement(item);
+        container.appendChild(tag);
+      });
+    }
+    container.appendChild(inputWrapper);
+
+    const modal = document.getElementById('assign-person-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeAssignModal() {
+    const modal = document.getElementById('assign-person-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  function saveAssignModal() {
+    closeAssignModal();
+    showToast('人员绑定关系已更新并下发终端');
+  }
+
+  function createOfficerTagElement(text) {
+    const span = document.createElement('span');
+    span.className = 'officer-tag inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#ecf5ff] border border-[#d9ecff] text-[#409eff] text-[12px]';
+    span.innerHTML = `
+      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      <span>${text}</span>
+      <button onclick="removeOfficerTag(this)" class="hover:text-[#f56c6c] text-[#909399] flex items-center ml-0.5">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    `;
+    return span;
+  }
+
+  function removeOfficerTag(btn) {
+    btn.closest('.officer-tag').remove();
+  }
+
+  function handleTagKeydown(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const val = e.target.value.trim();
+      if (val) {
+        const container = document.getElementById('selected-officers-container');
+        const inputWrapper = e.target.parentElement;
+        const newTag = createOfficerTagElement(val);
+        container.insertBefore(newTag, inputWrapper);
+        e.target.value = '';
+      }
+    }
+  }
+
+  function addMockOfficer() {
+    const mocks = ['刘建平 005512', '钱学锋 006734', '陈安琪 009021'];
+    const pick = mocks[Math.floor(Math.random() * mocks.length)];
+    const container = document.getElementById('selected-officers-container');
+    const inputWrapper = document.getElementById('officer-quick-input').parentElement;
+    const newTag = createOfficerTagElement(pick);
+    container.insertBefore(newTag, inputWrapper);
+  }
+
+  function openCreatePostModal() {
+    openAssignModal('新建协同岗位', ['当前管理员 000001']);
+  }
+
+  function editPost(name) {
+    openAssignModal(name, ['李四 004129']);
+  }
+
+  function confirmDeletePost(name) {
+    if (confirm(`确认要删除协同岗【${name}】吗？`)) {
+      showToast(`协同岗【${name}】已成功移除`);
+    }
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast-notify');
+    document.getElementById('toast-text').innerText = msg;
+    toast.classList.remove('translate-y-20', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+    setTimeout(() => {
+      toast.classList.add('translate-y-20', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 2400);
+  }
+</script></div></main></div></body></html>

@@ -1,0 +1,70 @@
+/**
+ * lx-tokens → Element Plus 变量桥接层
+ * 说明：
+ *  - 选择器用 html:root（特异性 0,1,1）压过 EP 的 :root（0,1,0），与加载顺序无关
+ *  - HUD 深色：EP dark 变量在 html.dark（0,1,1），本文件用 html.dark.lx-theme-hud（0,2,1）覆盖
+ *  - 业务侧只需引入本包入口（自动加载），EP 组件即套用 LxUI 设计令牌
+ */
+html:root {
+  /* 主色 #0060a9 及其明暗梯度（EP light-N = 与白混合 N*10%） */
+  --el-color-primary: var(--lx-color-primary);
+  --el-color-primary-light-3: #4d90c3;
+  --el-color-primary-light-5: #80b0d4;
+  --el-color-primary-light-7: #b3cfe5;
+  --el-color-primary-light-8: #ccdfed;
+  --el-color-primary-light-9: var(--lx-color-primary-light);
+  --el-color-primary-dark-2: #004d87;
+
+  /* 功能语义色与 LxUI 对齐（EP 默认值相同，显式声明兜底） */
+  --el-color-success: var(--lx-color-success);
+  --el-color-warning: var(--lx-color-warning);
+  --el-color-danger: var(--lx-color-error);
+  --el-color-error: var(--lx-color-error);
+  --el-color-info: var(--lx-color-info);
+
+  /* 表面/边框/文字 */
+  --el-bg-color: var(--lx-bg-card);
+  --el-bg-color-overlay: var(--lx-bg-card);
+  --el-fill-color-blank: var(--lx-bg-card);
+  --el-fill-color-light: var(--lx-bg-card-hover);
+  --el-fill-color-lighter: var(--lx-bg-table-header);
+  --el-border-color: var(--lx-border);
+  --el-border-color-light: var(--lx-border-light);
+  --el-border-color-lighter: var(--lx-border-light);
+  --el-text-color-primary: var(--lx-text-primary);
+  --el-text-color-regular: var(--lx-text-regular);
+  --el-text-color-secondary: var(--lx-text-secondary);
+  --el-text-color-placeholder: var(--lx-text-placeholder);
+
+  /* 字体与圆角 */
+  --el-font-family: var(--lx-font-family);
+  --el-border-radius-base: var(--lx-radius-md);
+  --el-border-radius-small: var(--lx-radius-sm);
+  --el-font-size-base: 13px;
+}
+
+/* HUD 深色主题（需同时挂 html.dark 与 .lx-theme-hud） */
+html.dark.lx-theme-hud {
+  --el-bg-color: #0b1220;
+  --el-bg-color-overlay: #16233a;
+  --el-fill-color-blank: #101a2c;
+  --el-fill-color-light: #16233a;
+  --el-fill-color-lighter: #0d1526;
+  --el-border-color: #1e2f47;
+  --el-border-color-light: #1a2a40;
+  --el-border-color-lighter: #1a2a40;
+  --el-text-color-primary: #e2e8f0;
+  --el-text-color-regular: #94a3b8;
+  --el-text-color-secondary: #64748b;
+  --el-text-color-placeholder: #475569;
+
+  /* 主色偏移为战术蓝 sky */
+  --el-color-primary: #38bdf8;
+  --el-color-primary-light-3: #74d1fa;
+  --el-color-primary-light-5: #9cdefc;
+  --el-color-primary-light-7: #c3ebfd;
+  --el-color-primary-light-8: #d7f2fe;
+  --el-color-primary-light-9: rgba(56, 189, 248, 0.12);
+  --el-color-primary-dark-2: #2d97c6;
+  --el-color-on-primary: #0b1220;
+}

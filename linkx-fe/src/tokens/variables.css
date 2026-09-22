@@ -1,0 +1,135 @@
+/**
+ * LxUI 设计令牌 — 亮色主题（默认）
+ *
+ * 规范源：doc/lx-ui/DESIGN-SPEC.md §3
+ * 视觉源：doc/stitch_侧边栏/stitch_/（_1 rail + _2 expanded）
+ *
+ * 铁律：组件样式只允许引用本文件的 var(--lx-*)，禁止硬编码色值（P8）。
+ */
+:root {
+  /* ========== 品牌主色 ========== */
+  /* 唯一主色：主按钮、激活 Tab、链接、选中态。禁用于大面积背景 */
+  --lx-color-primary: #0060a9;
+  --lx-color-primary-hover: #00508f;
+  /* 亮一档容器蓝：深底激活文字、processing 状态、进度条填充。不是按钮色 */
+  --lx-color-primary-container: #409eff;
+  /* 主色 95% 浅底：Tag 浅底、选中项底色 */
+  --lx-color-primary-light: #ecf5ff;
+  --lx-color-on-primary: #ffffff;
+
+  /* ========== 功能语义色（深浅成对，禁止交叉混搭） ========== */
+  --lx-color-success: #67c23a;
+  --lx-color-success-light: #f0f9eb;
+  --lx-color-warning: #e6a23c;
+  --lx-color-warning-strong: #cf8a1e; /* 细小文字场景（对比度补偿，DESIGN-SPEC §3.2） */
+  --lx-color-warning-light: #fdf6ec;
+  --lx-color-error: #f56c6c;
+  --lx-color-error-strong: #c45656; /* 危险确认标题、横幅深红（对比度补偿） */
+  --lx-color-error-light: #fef0f0;
+  --lx-color-info: #909399;
+  --lx-color-info-light: #f4f4f5;
+
+  /* ========== 反色表面（Toast 深色胶囊，stitch Modals & Feedback） ========== */
+  --lx-bg-inverse: #2d3136;
+  --lx-text-inverse: #f0f2f5;
+
+  /* ========== 表面与边框 ========== */
+  --lx-bg-page: #f0f2f5;
+  --lx-bg-card: #ffffff;
+  --lx-bg-card-hover: #f2f4f8;
+  --lx-bg-table-header: #f5f7fa;
+  --lx-bg-tabsbar: #f4f6fa;
+  --lx-border: #e4e7ed;      /* 卡片/表格容器外框 */
+  --lx-border-light: #ebeef5; /* 行分隔线、header 下线（外实内虚） */
+
+  /* ========== 文字 ========== */
+  --lx-text-primary: #1d2129;   /* 标题、表头、指标数值 */
+  --lx-text-regular: #4e5969;   /* 正文、表格行 */
+  --lx-text-secondary: #86909c; /* 辅助说明、时间戳 */
+  --lx-text-placeholder: #c9cdd4;
+  --lx-text-on-dark: #ffffff;
+
+  /* ========== 侧边栏专项（stitch_侧边栏 双方案） ========== */
+  --lx-sidebar-bg: #0c1424;           /* expanded 态（_2） */
+  --lx-sidebar-bg-rail: #131b27;      /* rail 态（_1），略浅：只有图标无需深底 */
+  --lx-sidebar-bg-header: #090f1b;    /* 品牌区"帽檐" */
+  --lx-sidebar-bg-submenu: #0e1728;   /* 二级组容器 */
+  --lx-sidebar-bg-popper: #162032;     /* rail 态 hover popper / tooltip */
+  --lx-sidebar-border: #1e2f47;       /* 右侧分隔线（刻意偏蓝，HUD 风格） */
+  --lx-sidebar-guide: #22354f;        /* 二级引导线 */
+  --lx-sidebar-text: #cbd5e1;         /* 一级文字 slate-300 */
+  --lx-sidebar-text-muted: #94a3b8;   /* 图标、二级文字 slate-400 */
+  --lx-sidebar-active-text: #7dd3fc;  /* 激活文字 sky-300（深底通电感） */
+  --lx-sidebar-active-glow: #38bdf8;  /* 激活竖条 + 光晕源色 sky-400 */
+  --lx-sidebar-hover-bg: rgba(255, 255, 255, 0.05);
+
+  /* ========== 尺寸（对齐 stitch_侧边栏 实测值） ========== */
+  --lx-sidebar-width: 252px;
+  --lx-sidebar-rail-width: 64px;
+  --lx-sidebar-brand-height: 64px;  /* h-16（_1/_2 一致） */
+  --lx-sidebar-item-height: 40px;    /* 直达项 h-10（_2 激活态含 border 实高） */
+  --lx-sidebar-group-height: 36px;   /* 分组头 h-9（_2） */
+  --lx-sidebar-subitem-height: 28px; /* 二级项 h-7（_2） */
+  --lx-sidebar-rail-item-height: 48px; /* rail 项 h-12（_1） */
+  --lx-navbar-height: 56px;
+  --lx-tabsbar-height: 36px;
+  --lx-control-height: 32px;   /* 标准控件高（stitch 紧凑密度） */
+  --lx-table-row-height: 44px; /* 表格常规行高 */
+  --lx-table-header-height: 40px;
+
+  /* ========== 间距（4/8/12/16/24 五档，禁止杂值） ========== */
+  --lx-space-xs: 4px;
+  --lx-space-sm: 8px;
+  --lx-space-md: 12px;
+  --lx-space-lg: 16px;
+  --lx-space-xl: 24px;
+
+  /* ========== 圆角（三档制 P6） ========== */
+  --lx-radius-sm: 2px;   /* 微标签、代码槽 */
+  --lx-radius-md: 4px;   /* 按钮、输入、卡片 */
+  --lx-radius-lg: 8px;   /* 弹窗、抽屉 */
+
+  /* ========== 阴影（三档制 P5） ========== */
+  --lx-shadow-card: 0 1px 4px rgba(0, 21, 41, 0.08);
+  --lx-shadow-pop: 0 2px 12px rgba(0, 0, 0, 0.1);
+  --lx-shadow-modal: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+  /* ========== 动效（三动画制，DESIGN-SPEC §5） ========== */
+  --lx-transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --lx-glow-active: 0 0 8px #38bdf8; /* 唯一允许的发光：侧边栏激活竖条 */
+
+  /* ========== 字体 ========== */
+  --lx-font-family: 'HarmonyOS Sans SC', 'PingFang SC', 'Microsoft YaHei', Inter, sans-serif;
+  --lx-font-mono: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+}
+
+/* ========== 全库唯一动画（禁止自造第 4 种） ========== */
+
+/* 呼吸：在线状态点、品牌区光环（3.5s） */
+@keyframes lx-hud-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.05); }
+}
+
+/* 战术闪烁：仅高危未处理告警（1.4s，稀缺资源） */
+@keyframes lx-tactical-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+/* 外扩淡出：状态点呼吸（EP ping 风格） */
+@keyframes lx-dot-ping {
+  0% { transform: scale(1); opacity: 0.75; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* ========== 无障碍：系统减少动效时全局禁用 ========== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

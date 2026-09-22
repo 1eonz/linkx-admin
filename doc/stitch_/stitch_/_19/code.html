@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>全局参数配置 - 警务业务协同平台</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0060a9",
+            "primary-container": "#409eff",
+            "on-primary": "#ffffff",
+            "secondary": "#4f6076",
+            "outline": "#707784",
+            "outline-variant": "#c0c7d4",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f1f3fa",
+            "surface-container": "#ebeef4",
+            "surface-container-high": "#e6e8ef",
+            "surface-container-highest": "#e0e2e9",
+            "on-surface": "#181c20",
+            "tertiary": "#286c00",
+            "tertiary-container": "#55af28",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6"
+          },
+          fontFamily: {
+            sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#f5f7fa] font-sans text-[13px] text-[#181c20] antialiased">
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-[#1a2332] z-50 flex flex-col justify-between text-[#c0c4cc] shadow-lg">
+<div class="flex flex-col h-full">
+<!-- Brand / Logo Header -->
+<div class="h-16 px-4 flex items-center gap-3 bg-[#111827] border-b border-[#2d3a4f] shrink-0">
+<div class="h-8 w-8 rounded bg-[#409eff]/20 border border-[#409eff]/40 flex items-center justify-center shrink-0">
+<svg class="w-5 h-5 text-[#409eff]" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.67-3.13 9.04-7 10.15-3.87-1.11-7-5.48-7-10.15V6.3l7-3.12zM12 7a3 3 0 100 6 3 3 0 000-6z"></path>
+</svg>
+</div>
+<div class="flex flex-col overflow-hidden">
+<span class="text-[14px] font-semibold text-white tracking-wide truncate whitespace-nowrap">警务业务协同平台</span>
+<span class="text-[11px] text-[#8a9cae] truncate whitespace-nowrap">LinkX Tactical Admin v2.4</span>
+</div>
+</div>
+<!-- Nav Items -->
+<div class="flex-1 overflow-y-auto py-2">
+<nav class="space-y-0.5 text-[13px]">
+<!-- 工作台 -->
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#a6b6c9] hover:bg-[#222e40] hover:text-white transition-colors" href="#">
+<svg class="w-4 h-4 shrink-0 text-[#8b9bb0]" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="whitespace-nowrap">综合态势工作台</span>
+</a>
+<!-- 系统配置 (展开) -->
+<div class="py-0.5">
+<div class="flex items-center justify-between px-4 py-2 text-[#8b9bb0] text-[12px] font-medium">
+<span class="flex items-center gap-3">
+<svg class="w-4 h-4 shrink-0 text-[#8b9bb0]" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.27.1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.27-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="whitespace-nowrap">系统配置</span>
+</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="space-y-0.5">
+<a class="flex items-center py-2 px-4 pl-10 text-[#409eff] bg-[#111827] font-medium border-l-4 border-[#409eff]" href="#">
+<span class="whitespace-nowrap">全局参数配置</span>
+</a>
+<a class="flex items-center py-2 px-4 pl-10 text-[#94a3b8] hover:text-white text-[12px] transition-colors" href="#">
+<span class="whitespace-nowrap">地图配置</span>
+</a>
+<a class="flex items-center py-2 px-4 pl-10 text-[#94a3b8] hover:text-white text-[12px] transition-colors" href="#">
+<span class="whitespace-nowrap">系统设置管理</span>
+</a>
+</div>
+</div>
+<!-- 协同岗管理 -->
+<div class="py-0.5">
+<div class="flex items-center justify-between px-4 py-2 text-[#8b9bb0] text-[12px] font-medium">
+<span class="flex items-center gap-3">
+<svg class="w-4 h-4 shrink-0 text-[#8b9bb0]" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="whitespace-nowrap">协同岗管理</span>
+</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- 权限中心 -->
+<div class="py-0.5">
+<div class="flex items-center justify-between px-4 py-2 text-[#8b9bb0] text-[12px] font-medium">
+<span class="flex items-center gap-3">
+<svg class="w-4 h-4 shrink-0 text-[#8b9bb0]" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="whitespace-nowrap">权限中心</span>
+</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- 位置管理 -->
+<div class="py-0.5">
+<div class="flex items-center justify-between px-4 py-2 text-[#8b9bb0] text-[12px] font-medium">
+<span class="flex items-center gap-3">
+<svg class="w-4 h-4 shrink-0 text-[#8b9bb0]" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="whitespace-nowrap">位置管理</span>
+</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- 排班管理 -->
+<div class="py-0.5">
+<div class="flex items-center justify-between px-4 py-2 text-[#8b9bb0] text-[12px] font-medium">
+<span class="flex items-center gap-3">
+<svg class="w-4 h-4 shrink-0 text-[#8b9bb0]" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="whitespace-nowrap">排班管理</span>
+</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- 通知管理 -->
+<div class="py-0.5">
+<div class="flex items-center justify-between px-4 py-2 text-[#8b9bb0] text-[12px] font-medium">
+<span class="flex items-center gap-3">
+<svg class="w-4 h-4 shrink-0 text-[#8b9bb0]" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="whitespace-nowrap">通知管理</span>
+</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+</nav>
+</div>
+</div>
+<!-- Sidebar Bottom Status -->
+<div class="h-12 px-4 bg-[#111827] border-t border-[#2d3a4f] flex items-center justify-between text-[#8b9bb0] text-[12px] shrink-0">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="whitespace-nowrap">专网延时: 12ms</span>
+</div>
+<button class="hover:text-white transition-colors" title="收起侧栏">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</aside>
+<!-- Content Container with Margin Left for Sidebar -->
+<div class="pl-64">
+<!-- Top Header -->
+<header class="fixed top-0 left-64 right-0 h-16 bg-white z-40 border-b border-[#ebeef4] shadow-[0_1px_4px_rgba(0,21,41,0.06)] flex items-center justify-between px-6">
+<div class="flex items-center gap-4">
+<button class="text-[#4f6076] hover:text-[#0060a9] transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<nav class="flex items-center gap-2 text-[13px]">
+<span class="text-[#4f6076] whitespace-nowrap">系统配置</span>
+<span class="text-[#c0c7d4]">/</span>
+<span class="text-[#181c20] font-semibold whitespace-nowrap">全局参数配置</span>
+</nav>
+<div class="hidden xl:flex items-center gap-1.5 bg-[#ffdad6]/40 px-2.5 py-1 rounded text-[#ba1a1a] text-[12px]">
+<svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+<span class="whitespace-nowrap">修改数据后，请重新登录客户端</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Search Input -->
+<div class="hidden md:flex items-center gap-2 bg-[#f1f3fa] px-3 py-1.5 rounded text-[#4f6076]">
+<svg class="w-4 h-4 text-[#707784]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<input class="bg-transparent border-none outline-none text-[12px] text-[#181c20] placeholder:text-[#707784] w-48" placeholder="搜索模块、指令、配置 (Ctrl+K)" type="text"/>
+</div>
+<div class="hidden lg:flex items-center gap-1.5 text-[#286c00] text-[12px] bg-[#286c00]/10 px-2.5 py-1 rounded whitespace-nowrap">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>协同专网在线 · License 正常</span>
+</div>
+<div class="flex items-center gap-2 text-[#4f6076]">
+<button class="relative p-1.5 hover:bg-[#ebeef4] rounded transition-colors" title="通知">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#ba1a1a]"></span>
+</button>
+<button class="p-1.5 hover:bg-[#ebeef4] rounded transition-colors" title="全屏">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<span class="text-[12px] px-2 py-1 hover:bg-[#ebeef4] rounded cursor-pointer text-[#4f6076]">中/EN</span>
+</div>
+<!-- User Profile Dropdown -->
+<div class="flex items-center gap-2 pl-3 border-l border-[#ebeef4]">
+<div class="w-8 h-8 rounded-full bg-[#0060a9] text-white flex items-center justify-center font-semibold text-xs shrink-0">
+            警
+          </div>
+<div class="flex flex-col text-left">
+<span class="text-[12px] font-semibold text-[#181c20] leading-tight whitespace-nowrap">admin (超级管理员)</span>
+<span class="text-[11px] text-[#4f6076] whitespace-nowrap">总指挥中心</span>
+</div>
+<svg class="w-4 h-4 text-[#707784]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="pt-16 min-h-screen">
+<div class="p-5">
+<div class="flex flex-col w-full gap-4">
+<!-- System Status Alert Strip -->
+<div class="flex items-center justify-between bg-white px-5 py-3 rounded-lg shadow-sm border border-[#ebeef4]">
+<div class="flex items-center gap-3.5">
+<div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#d2e4ff]/50 text-[#0060a9] shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="text-[14px] font-semibold text-[#181c20] whitespace-nowrap">全局参数管理与同步中心</span>
+<span class="inline-flex items-center rounded bg-[#286c00]/10 px-2 py-0.5 text-[11px] text-[#286c00] font-medium whitespace-nowrap">
+<span class="mr-1 h-1.5 w-1.5 rounded-full bg-[#286c00] animate-pulse"></span>热载入就绪
+                  </span>
+</div>
+<p class="text-[12px] text-[#4f6076]">
+                  修改关键参数后各端调度终端（指挥大屏、移动警务掌机、对讲节点）即刻推送同步通知；安全策略类变更需终端重新认证鉴权。
+                </p>
+</div>
+</div>
+<div class="hidden lg:flex items-center gap-6 shrink-0 pl-4">
+<div class="flex flex-col items-end">
+<span class="text-[11px] text-[#707784] whitespace-nowrap">节点哈希校验</span>
+<span class="text-[12px] font-mono text-[#181c20] font-medium whitespace-nowrap">SHA-256: 9E4F...A18C</span>
+</div>
+<div class="h-7 w-px bg-[#ebeef4]"></div>
+<div class="flex flex-col items-end">
+<span class="text-[11px] text-[#707784] whitespace-nowrap">最后热更新</span>
+<span class="text-[12px] text-[#181c20] font-medium whitespace-nowrap">今天 14:26:08</span>
+</div>
+</div>
+</div>
+<!-- Main Table Card -->
+<div class="flex flex-col rounded-lg bg-white shadow-sm border border-[#ebeef4]">
+<!-- Filter Bar & Operations -->
+<div class="flex flex-col gap-3 p-4 border-b border-[#ebeef4]">
+<!-- Search Row -->
+<div class="flex flex-wrap items-center justify-between gap-3">
+<div class="flex flex-wrap items-center gap-2.5">
+<div class="relative w-80">
+<svg class="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707784]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<input class="h-8 w-full rounded bg-[#f1f3fa] pl-8 pr-3 text-[12px] text-[#181c20] placeholder:text-[#707784] border-none focus:outline-none focus:ring-1 focus:ring-[#409eff] transition-all" id="searchInput" placeholder="请输入配置项 / 参数名 / 备注 进行搜索" type="text"/>
+</div>
+<button class="inline-flex h-8 items-center justify-center gap-1.5 rounded bg-[#409eff] px-3.5 text-[13px] font-medium text-white shadow-sm hover:bg-[#338ce6] active:scale-[0.98] transition-all whitespace-nowrap" onclick="applyFilters()">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24">
+<path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>搜索</span>
+</button>
+<button class="inline-flex h-8 items-center justify-center gap-1.5 rounded bg-[#f1f3fa] px-3.5 text-[13px] font-medium text-[#4f6076] hover:bg-[#e0e2e9] hover:text-[#181c20] active:scale-[0.98] transition-all whitespace-nowrap" onclick="resetFilters()">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>重置</span>
+</button>
+<div class="h-4 w-px bg-[#ebeef4] mx-1"></div>
+<button class="inline-flex h-8 items-center justify-center gap-1.5 rounded bg-[#0060a9] px-3.5 text-[13px] font-medium text-white shadow-sm hover:bg-[#004e8a] active:scale-[0.98] transition-all whitespace-nowrap" onclick="openModal('create')">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.4" viewbox="0 0 24 24">
+<path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>新增配置</span>
+</button>
+</div>
+<!-- Prompt Indicator -->
+<div class="flex items-center gap-1.5 text-[#707784] text-[12px]">
+<svg class="w-4 h-4 text-[#409eff]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="whitespace-nowrap">当前为本地模拟数据，路由与功能入口按真实项目完整展示</span>
+</div>
+</div>
+<!-- Chips Category Bar -->
+<div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+<div class="flex flex-wrap items-center gap-2">
+<button class="category-pill inline-flex h-7 items-center gap-1.5 rounded-full bg-[#409eff] px-3 text-[12px] font-medium text-white shadow-sm transition-all" data-category="ALL" onclick="filterCategory('ALL', this)">
+<span class="whitespace-nowrap">全部</span>
+<span class="pill-count inline-flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-white/25 text-[11px] font-semibold text-white">7</span>
+</button>
+<button class="category-pill inline-flex h-7 items-center gap-1.5 rounded-full bg-[#f1f3fa] px-3 text-[12px] font-medium text-[#4f6076] hover:bg-[#e0e2e9] hover:text-[#181c20] transition-all" data-category="BASIC" onclick="filterCategory('BASIC', this)">
+<span class="whitespace-nowrap">基础配置</span>
+<span class="pill-count inline-flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-[#e0e2e9] text-[11px] font-semibold text-[#4f6076]">2</span>
+</button>
+<button class="category-pill inline-flex h-7 items-center gap-1.5 rounded-full bg-[#f1f3fa] px-3 text-[12px] font-medium text-[#4f6076] hover:bg-[#e0e2e9] hover:text-[#181c20] transition-all" data-category="BUSINESS" onclick="filterCategory('BUSINESS', this)">
+<span class="whitespace-nowrap">业务开关</span>
+<span class="pill-count inline-flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-[#e0e2e9] text-[11px] font-semibold text-[#4f6076]">2</span>
+</button>
+<button class="category-pill inline-flex h-7 items-center gap-1.5 rounded-full bg-[#f1f3fa] px-3 text-[12px] font-medium text-[#4f6076] hover:bg-[#e0e2e9] hover:text-[#181c20] transition-all" data-category="MAP" onclick="filterCategory('MAP', this)">
+<span class="whitespace-nowrap">地图配置</span>
+<span class="pill-count inline-flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-[#e0e2e9] text-[11px] font-semibold text-[#4f6076]">2</span>
+</button>
+<button class="category-pill inline-flex h-7 items-center gap-1.5 rounded-full bg-[#f1f3fa] px-3 text-[12px] font-medium text-[#4f6076] hover:bg-[#e0e2e9] hover:text-[#181c20] transition-all" data-category="LICENSE" onclick="filterCategory('LICENSE', this)">
+<span class="whitespace-nowrap">License配置</span>
+<span class="pill-count inline-flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-[#e0e2e9] text-[11px] font-semibold text-[#4f6076]">1</span>
+</button>
+</div>
+<!-- Right Quick Actions -->
+<div class="flex items-center gap-1.5">
+<button class="flex h-7 w-7 items-center justify-center rounded text-[#4f6076] hover:bg-[#f1f3fa] hover:text-[#181c20] transition-colors" title="批量导出">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<button class="flex h-7 w-7 items-center justify-center rounded text-[#4f6076] hover:bg-[#f1f3fa] hover:text-[#181c20] transition-colors" onclick="refreshConfigs()" title="刷新配置">
+<svg class="w-4 h-4" fill="none" id="refreshIcon" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+<!-- Table Container -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse" id="paramsTable">
+<thead>
+<tr class="bg-[#f8f9ff] text-[#4f6076] text-[12px] font-semibold border-b border-[#ebeef4]">
+<th class="w-40 px-4 py-3 text-center whitespace-nowrap">类别</th>
+<th class="w-16 px-3 py-3 text-center whitespace-nowrap">序号</th>
+<th class="w-44 px-4 py-3 whitespace-nowrap">配置项</th>
+<th class="w-56 px-4 py-3 whitespace-nowrap">参数名 (Key)</th>
+<th class="w-52 px-4 py-3 whitespace-nowrap">配置值 (Value)</th>
+<th class="min-w-[280px] px-4 py-3 whitespace-nowrap">业务说明 / 影响范围</th>
+<th class="w-24 px-3 py-3 text-center whitespace-nowrap">状态</th>
+<th class="w-28 px-3 py-3 text-center whitespace-nowrap">操作</th>
+</tr>
+</thead>
+<tbody class="text-[13px] text-[#181c20]" id="tableBody">
+<!-- Row 1: 基础配置 1.1 -->
+<tr class="table-row-item border-b border-[#ebeef4] hover:bg-[#f8f9ff] transition-colors" data-category="BASIC" data-row-id="1">
+<td class="category-cell w-40 bg-[#f8f9ff]/70 p-4 text-center align-middle border-r border-[#ebeef4]" rowspan="2">
+<div class="flex flex-col items-center justify-center gap-1.5">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-[#0060a9] shadow-sm border border-[#ebeef4]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.27.1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.27-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<span class="font-semibold text-[#181c20] text-[13px] whitespace-nowrap">基础配置</span>
+<span class="text-[11px] text-[#707784] whitespace-nowrap">共 2 项</span>
+</div>
+</td>
+<td class="w-16 px-3 py-3.5 text-center font-mono text-[#707784] text-[12px] whitespace-nowrap">
+<span class="inline-block rounded bg-[#f1f3fa] px-1.5 py-0.5">1.1</span>
+</td>
+<td class="w-44 px-4 py-3.5 font-medium text-[#181c20] whitespace-nowrap">系统名称</td>
+<td class="w-56 px-4 py-3.5 font-mono text-[12px] text-[#0060a9] select-all whitespace-nowrap">SYSTEM_NAME</td>
+<td class="w-52 px-4 py-3.5 whitespace-nowrap">
+<span class="inline-flex items-center rounded bg-[#d2e4ff]/60 px-2 py-0.5 font-mono text-[12px] text-[#003460] font-medium">警务协同</span>
+</td>
+<td class="min-w-[280px] px-4 py-3.5 text-[#4f6076] text-[12px] leading-relaxed">全网客户端、移动指挥终端及大屏顶部系统标头显示内容</td>
+<td class="w-24 px-3 py-3.5 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded bg-[#286c00]/10 px-2 py-0.5 text-[11px] text-[#286c00] font-medium">
+<span class="h-1.5 w-1.5 rounded-full bg-[#286c00]"></span>正常
+                      </span>
+</td>
+<td class="w-28 px-3 py-3.5 text-center whitespace-nowrap">
+<div class="flex items-center justify-center gap-1.5">
+<button class="text-[#0060a9] hover:text-[#409eff] text-[12px] font-medium transition-colors" onclick="editRow(this)">编辑</button>
+<span class="text-[#c0c7d4]">|</span>
+<button class="text-[#ba1a1a] hover:text-[#ff5252] text-[12px] font-medium transition-colors" onclick="toggleRowState(this)">禁用</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: 基础配置 1.2 -->
+<tr class="table-row-item border-b border-[#ebeef4] hover:bg-[#f8f9ff] transition-colors" data-category="BASIC" data-row-id="2">
+<td class="w-16 px-3 py-3.5 text-center font-mono text-[#707784] text-[12px] whitespace-nowrap">
+<span class="inline-block rounded bg-[#f1f3fa] px-1.5 py-0.5">1.2</span>
+</td>
+<td class="w-44 px-4 py-3.5 font-medium text-[#181c20] whitespace-nowrap">简单密码开关</td>
+<td class="w-56 px-4 py-3.5 font-mono text-[12px] text-[#0060a9] select-all whitespace-nowrap">ALLOW_SIMPLE_PASSWORD</td>
+<td class="w-52 px-4 py-3.5 whitespace-nowrap">
+<span class="inline-flex items-center rounded bg-[#e6e8ef] px-2 py-0.5 font-mono text-[12px] text-[#181c20] font-semibold">0</span>
+</td>
+<td class="min-w-[280px] px-4 py-3.5 text-[#4f6076] text-[12px] leading-relaxed">允许警员账号使用弱口令（0: 强行校验密码复杂度，1: 放宽限制）</td>
+<td class="w-24 px-3 py-3.5 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded bg-[#286c00]/10 px-2 py-0.5 text-[11px] text-[#286c00] font-medium">
+<span class="h-1.5 w-1.5 rounded-full bg-[#286c00]"></span>正常
+                      </span>
+</td>
+<td class="w-28 px-3 py-3.5 text-center whitespace-nowrap">
+<div class="flex items-center justify-center gap-1.5">
+<button class="text-[#0060a9] hover:text-[#409eff] text-[12px] font-medium transition-colors" onclick="editRow(this)">编辑</button>
+<span class="text-[#c0c7d4]">|</span>
+<button class="text-[#ba1a1a] hover:text-[#ff5252] text-[12px] font-medium transition-colors" onclick="toggleRowState(this)">禁用</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: 业务开关 2.1 -->
+<tr class="table-row-item border-b border-[#ebeef4] hover:bg-[#f8f9ff] transition-colors" data-category="BUSINESS" data-row-id="3">
+<td class="category-cell w-40 bg-[#f8f9ff]/70 p-4 text-center align-middle border-r border-[#ebeef4]" rowspan="2">
+<div class="flex flex-col items-center justify-center gap-1.5">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-[#0060a9] shadow-sm border border-[#ebeef4]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<span class="font-semibold text-[#181c20] text-[13px] whitespace-nowrap">业务开关</span>
+<span class="text-[11px] text-[#707784] whitespace-nowrap">共 2 项</span>
+</div>
+</td>
+<td class="w-16 px-3 py-3.5 text-center font-mono text-[#707784] text-[12px] whitespace-nowrap">
+<span class="inline-block rounded bg-[#f1f3fa] px-1.5 py-0.5">2.1</span>
+</td>
+<td class="w-44 px-4 py-3.5 font-medium text-[#181c20] whitespace-nowrap">排班开关</td>
+<td class="w-56 px-4 py-3.5 font-mono text-[12px] text-[#0060a9] select-all whitespace-nowrap">DUTY_SCHEDULE_ENABLE</td>
+<td class="w-52 px-4 py-3.5 whitespace-nowrap">
+<span class="inline-flex items-center rounded bg-[#e6e8ef] px-2 py-0.5 font-mono text-[12px] text-[#181c20] font-semibold">1</span>
+</td>
+<td class="min-w-[280px] px-4 py-3.5 text-[#4f6076] text-[12px] leading-relaxed">值班室勤务与巡防联动排班模块主开关（1: 启用，0: 禁用停用）</td>
+<td class="w-24 px-3 py-3.5 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded bg-[#286c00]/10 px-2 py-0.5 text-[11px] text-[#286c00] font-medium">
+<span class="h-1.5 w-1.5 rounded-full bg-[#286c00]"></span>正常
+                      </span>
+</td>
+<td class="w-28 px-3 py-3.5 text-center whitespace-nowrap">
+<div class="flex items-center justify-center gap-1.5">
+<button class="text-[#0060a9] hover:text-[#409eff] text-[12px] font-medium transition-colors" onclick="editRow(this)">编辑</button>
+<span class="text-[#c0c7d4]">|</span>
+<button class="text-[#ba1a1a] hover:text-[#ff5252] text-[12px] font-medium transition-colors" onclick="toggleRowState(this)">禁用</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: 业务开关 2.2 -->
+<tr class="table-row-item border-b border-[#ebeef4] hover:bg-[#f8f9ff] transition-colors" data-category="BUSINESS" data-row-id="4">
+<td class="w-16 px-3 py-3.5 text-center font-mono text-[#707784] text-[12px] whitespace-nowrap">
+<span class="inline-block rounded bg-[#f1f3fa] px-1.5 py-0.5">2.2</span>
+</td>
+<td class="w-44 px-4 py-3.5 font-medium text-[#181c20] whitespace-nowrap">群组协同开关</td>
+<td class="w-56 px-4 py-3.5 font-mono text-[12px] text-[#0060a9] select-all whitespace-nowrap">GROUP_COLLABORATION_AUTH</td>
+<td class="w-52 px-4 py-3.5 whitespace-nowrap">
+<span class="inline-flex items-center rounded bg-[#e6e8ef] px-2 py-0.5 font-mono text-[12px] text-[#181c20] font-semibold">1</span>
+</td>
+<td class="min-w-[280px] px-4 py-3.5 text-[#4f6076] text-[12px] leading-relaxed">开启后警务群组支持音视频会商、现场视频回传与图文协同标绘</td>
+<td class="w-24 px-3 py-3.5 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded bg-[#286c00]/10 px-2 py-0.5 text-[11px] text-[#286c00] font-medium">
+<span class="h-1.5 w-1.5 rounded-full bg-[#286c00]"></span>正常
+                      </span>
+</td>
+<td class="w-28 px-3 py-3.5 text-center whitespace-nowrap">
+<div class="flex items-center justify-center gap-1.5">
+<button class="text-[#0060a9] hover:text-[#409eff] text-[12px] font-medium transition-colors" onclick="editRow(this)">编辑</button>
+<span class="text-[#c0c7d4]">|</span>
+<button class="text-[#ba1a1a] hover:text-[#ff5252] text-[12px] font-medium transition-colors" onclick="toggleRowState(this)">禁用</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: 地图配置 3.1 -->
+<tr class="table-row-item border-b border-[#ebeef4] hover:bg-[#f8f9ff] transition-colors" data-category="MAP" data-row-id="5">
+<td class="category-cell w-40 bg-[#f8f9ff]/70 p-4 text-center align-middle border-r border-[#ebeef4]" rowspan="2">
+<div class="flex flex-col items-center justify-center gap-1.5">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-[#0060a9] shadow-sm border border-[#ebeef4]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 6.75V15m6-6v8.25m.53 3.28l-5.73-2.865a1.5 1.5 0 00-1.34 0L3.72 20.53a.75.75 0 01-1.085-.67V5.41a.75.75 0 01.415-.67l5.225-2.612a1.5 1.5 0 011.34 0l5.73 2.865a1.5 1.5 0 001.34 0l4.74-2.37a.75.75 0 011.085.67v14.45a.75.75 0 01-.415.67l-5.225 2.612a1.5 1.5 0 01-1.34 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<span class="font-semibold text-[#181c20] text-[13px] whitespace-nowrap">地图配置</span>
+<span class="text-[11px] text-[#707784] whitespace-nowrap">共 2 项</span>
+</div>
+</td>
+<td class="w-16 px-3 py-3.5 text-center font-mono text-[#707784] text-[12px] whitespace-nowrap">
+<span class="inline-block rounded bg-[#f1f3fa] px-1.5 py-0.5">3.1</span>
+</td>
+<td class="w-44 px-4 py-3.5 font-medium text-[#181c20] whitespace-nowrap">地图服务地址</td>
+<td class="w-56 px-4 py-3.5 font-mono text-[12px] text-[#0060a9] select-all whitespace-nowrap">MAP_SERVER_URL</td>
+<td class="w-52 px-4 py-3.5 whitespace-nowrap">
+<span class="inline-flex items-center rounded bg-[#d2e4ff]/60 px-2 py-0.5 font-mono text-[12px] text-[#003460] truncate max-w-[200px]" title="https://map.example/msip">https://map.example/msip</span>
+</td>
+<td class="min-w-[280px] px-4 py-3.5 text-[#4f6076] text-[12px] leading-relaxed">PGIS / 矢量瓦片切片瓦片流服服务内网专属根地址</td>
+<td class="w-24 px-3 py-3.5 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded bg-[#286c00]/10 px-2 py-0.5 text-[11px] text-[#286c00] font-medium">
+<span class="h-1.5 w-1.5 rounded-full bg-[#286c00]"></span>正常
+                      </span>
+</td>
+<td class="w-28 px-3 py-3.5 text-center whitespace-nowrap">
+<div class="flex items-center justify-center gap-1.5">
+<button class="text-[#0060a9] hover:text-[#409eff] text-[12px] font-medium transition-colors" onclick="editRow(this)">编辑</button>
+<span class="text-[#c0c7d4]">|</span>
+<button class="text-[#ba1a1a] hover:text-[#ff5252] text-[12px] font-medium transition-colors" onclick="toggleRowState(this)">禁用</button>
+</div>
+</td>
+</tr>
+<!-- Row 6: 地图配置 3.2 -->
+<tr class="table-row-item border-b border-[#ebeef4] hover:bg-[#f8f9ff] transition-colors" data-category="MAP" data-row-id="6">
+<td class="w-16 px-3 py-3.5 text-center font-mono text-[#707784] text-[12px] whitespace-nowrap">
+<span class="inline-block rounded bg-[#f1f3fa] px-1.5 py-0.5">3.2</span>
+</td>
+<td class="w-44 px-4 py-3.5 font-medium text-[#181c20] whitespace-nowrap">默认中心点</td>
+<td class="w-56 px-4 py-3.5 font-mono text-[12px] text-[#0060a9] select-all whitespace-nowrap">MAP_DEFAULT_CENTER</td>
+<td class="w-52 px-4 py-3.5 whitespace-nowrap">
+<span class="inline-flex items-center rounded bg-[#e6e8ef] px-2 py-0.5 font-mono text-[12px] text-[#181c20] font-medium">116.2420, 39.5248</span>
+</td>
+<td class="min-w-[280px] px-4 py-3.5 text-[#4f6076] text-[12px] leading-relaxed">指挥作战大屏初始初始化投影坐标定位点（WGS84 / GCJ02）</td>
+<td class="w-24 px-3 py-3.5 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded bg-[#286c00]/10 px-2 py-0.5 text-[11px] text-[#286c00] font-medium">
+<span class="h-1.5 w-1.5 rounded-full bg-[#286c00]"></span>正常
+                      </span>
+</td>
+<td class="w-28 px-3 py-3.5 text-center whitespace-nowrap">
+<div class="flex items-center justify-center gap-1.5">
+<button class="text-[#0060a9] hover:text-[#409eff] text-[12px] font-medium transition-colors" onclick="editRow(this)">编辑</button>
+<span class="text-[#c0c7d4]">|</span>
+<button class="text-[#ba1a1a] hover:text-[#ff5252] text-[12px] font-medium transition-colors" onclick="toggleRowState(this)">禁用</button>
+</div>
+</td>
+</tr>
+<!-- Row 7: License配置 4.1 -->
+<tr class="table-row-item hover:bg-[#f8f9ff] transition-colors" data-category="LICENSE" data-row-id="7">
+<td class="category-cell w-40 bg-[#f8f9ff]/70 p-4 text-center align-middle border-r border-[#ebeef4]">
+<div class="flex flex-col items-center justify-center gap-1.5">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-[#0060a9] shadow-sm border border-[#ebeef4]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<span class="font-semibold text-[#181c20] text-[13px] whitespace-nowrap">License配置</span>
+<span class="text-[11px] text-[#707784] whitespace-nowrap">共 1 项</span>
+</div>
+</td>
+<td class="w-16 px-3 py-3.5 text-center font-mono text-[#707784] text-[12px] whitespace-nowrap">
+<span class="inline-block rounded bg-[#f1f3fa] px-1.5 py-0.5">4.1</span>
+</td>
+<td class="w-44 px-4 py-3.5 font-medium text-[#181c20] whitespace-nowrap">License过期提醒天数</td>
+<td class="w-56 px-4 py-3.5 font-mono text-[12px] text-[#0060a9] select-all whitespace-nowrap">MSIP_LICENSE_EXPIRED_TIME</td>
+<td class="w-52 px-4 py-3.5 whitespace-nowrap">
+<span class="inline-flex items-center rounded bg-[#ffdad6]/60 px-2 py-0.5 font-mono text-[12px] text-[#ba1a1a] font-bold">30</span>
+</td>
+<td class="min-w-[280px] px-4 py-3.5 text-[#4f6076] text-[12px] leading-relaxed">授权证书到期前在各级运维后台及指挥中心触发系统预警天数阈值</td>
+<td class="w-24 px-3 py-3.5 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded bg-[#286c00]/10 px-2 py-0.5 text-[11px] text-[#286c00] font-medium">
+<span class="h-1.5 w-1.5 rounded-full bg-[#286c00]"></span>正常
+                      </span>
+</td>
+<td class="w-28 px-3 py-3.5 text-center whitespace-nowrap">
+<div class="flex items-center justify-center gap-1.5">
+<button class="text-[#0060a9] hover:text-[#409eff] text-[12px] font-medium transition-colors" onclick="editRow(this)">编辑</button>
+<span class="text-[#c0c7d4]">|</span>
+<button class="text-[#ba1a1a] hover:text-[#ff5252] text-[12px] font-medium transition-colors" onclick="toggleRowState(this)">禁用</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Bar -->
+<div class="flex flex-wrap items-center justify-between gap-4 p-4 border-t border-[#ebeef4] bg-white">
+<div class="flex items-center gap-4 text-[12px] text-[#4f6076]">
+<span class="whitespace-nowrap">共 <strong class="font-semibold text-[#181c20]" id="totalCount">7</strong> 条记录</span>
+<div class="flex items-center gap-1 rounded bg-[#f1f3fa] px-2.5 py-1">
+<span class="text-[#181c20] whitespace-nowrap">10 条/页</span>
+<svg class="w-3.5 h-3.5 text-[#707784]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="flex h-7 w-7 items-center justify-center rounded bg-[#f1f3fa] text-[#707784] hover:bg-[#e0e2e9] hover:text-[#181c20] transition-colors disabled:opacity-40" disabled="">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M15.75 19.5L8.25 12l7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<button class="flex h-7 w-7 items-center justify-center rounded bg-[#409eff] text-[12px] font-semibold text-white shadow-sm">
+                  1
+                </button>
+<button class="flex h-7 w-7 items-center justify-center rounded bg-[#f1f3fa] text-[#707784] hover:bg-[#e0e2e9] hover:text-[#181c20] transition-colors disabled:opacity-40" disabled="">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M8.25 4.5l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<div class="ml-4 hidden sm:flex items-center gap-1 text-[12px] text-[#4f6076]">
+<span class="whitespace-nowrap">前往</span>
+<input class="h-7 w-10 rounded bg-[#f1f3fa] text-center font-mono text-[#181c20] border-none text-[12px] focus:outline-none focus:ring-1 focus:ring-[#409eff]" type="text" value="1"/>
+<span class="whitespace-nowrap">页</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Dialog: 编辑 / 新增全局参数 -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200" id="paramModal">
+<div class="w-full max-w-lg rounded-lg bg-white shadow-xl transform scale-95 transition-transform duration-200 overflow-hidden border border-[#ebeef4]" id="modalContainer">
+<!-- Modal Header -->
+<div class="flex items-center justify-between px-6 py-4 bg-[#f8f9ff] border-b border-[#ebeef4]">
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 text-[#0060a9]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.27.1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.27-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<h3 class="text-[14px] font-semibold text-[#181c20]" id="modalTitle">编辑全局参数</h3>
+</div>
+<button class="text-[#707784] hover:text-[#181c20] transition-colors" onclick="closeModal()">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="px-6 py-4 space-y-3.5 text-[13px]">
+<div class="grid grid-cols-4 items-center gap-3">
+<label class="col-span-1 text-right text-[#4f6076]">
+<span class="text-[#ba1a1a] mr-0.5">*</span>配置分类
+          </label>
+<div class="col-span-3">
+<select class="h-8 w-full rounded bg-[#f1f3fa] px-2.5 text-[12px] text-[#181c20] border-none focus:outline-none focus:ring-1 focus:ring-[#409eff]" id="formCategory">
+<option value="BASIC">基础配置 (BASIC)</option>
+<option value="BUSINESS">业务开关 (BUSINESS)</option>
+<option value="MAP">地图配置 (MAP)</option>
+<option value="LICENSE">License配置 (LICENSE)</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-4 items-center gap-3">
+<label class="col-span-1 text-right text-[#4f6076]">
+<span class="text-[#ba1a1a] mr-0.5">*</span>配置项名称
+          </label>
+<div class="col-span-3">
+<input class="h-8 w-full rounded bg-[#f1f3fa] px-3 text-[12px] text-[#181c20] border-none placeholder:text-[#707784] focus:outline-none focus:ring-1 focus:ring-[#409eff]" id="formName" placeholder="例如：系统名称 / 离线消息拉取周期" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-4 items-center gap-3">
+<label class="col-span-1 text-right text-[#4f6076]">
+<span class="text-[#ba1a1a] mr-0.5">*</span>参数编码
+          </label>
+<div class="col-span-3">
+<input class="h-8 w-full rounded bg-[#f1f3fa] px-3 font-mono text-[12px] text-[#181c20] border-none placeholder:text-[#707784] focus:outline-none focus:ring-1 focus:ring-[#409eff]" id="formCode" placeholder="例如：SYSTEM_NAME (大写下划线)" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-4 items-center gap-3">
+<label class="col-span-1 text-right text-[#4f6076]">
+<span class="text-[#ba1a1a] mr-0.5">*</span>配置值
+          </label>
+<div class="col-span-3">
+<textarea class="w-full rounded bg-[#f1f3fa] p-2 font-mono text-[12px] text-[#181c20] border-none placeholder:text-[#707784] focus:outline-none focus:ring-1 focus:ring-[#409eff] resize-none" id="formValue" placeholder="请输入参数实际运行值" rows="2"></textarea>
+</div>
+</div>
+<div class="grid grid-cols-4 items-center gap-3">
+<label class="col-span-1 text-right text-[#4f6076]">
+<span class="text-[#ba1a1a] mr-0.5">*</span>状态
+          </label>
+<div class="col-span-3 flex items-center gap-6">
+<label class="flex items-center gap-1.5 cursor-pointer">
+<input checked="" class="text-[#409eff] focus:ring-0" name="formStatus" type="radio" value="1"/>
+<span class="text-[#181c20] text-[12px]">正常启用</span>
+</label>
+<label class="flex items-center gap-1.5 cursor-pointer">
+<input class="text-[#409eff] focus:ring-0" name="formStatus" type="radio" value="0"/>
+<span class="text-[#4f6076] text-[12px]">禁用停用</span>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-4 items-start gap-3">
+<label class="col-span-1 text-right pt-1.5 text-[#4f6076]">备注说明</label>
+<div class="col-span-3">
+<textarea class="w-full rounded bg-[#f1f3fa] p-2 text-[12px] text-[#181c20] border-none placeholder:text-[#707784] focus:outline-none focus:ring-1 focus:ring-[#409eff] resize-none" id="formRemark" placeholder="请输入配置项用途、关联子系统及运维注意事项..." rows="2"></textarea>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="flex items-center justify-end gap-2 px-6 py-3 bg-[#f8f9ff] border-t border-[#ebeef4]">
+<button class="h-8 rounded bg-[#ebeef4] px-4 text-[12px] font-medium text-[#4f6076] hover:bg-[#e0e2e9] hover:text-[#181c20] transition-colors" onclick="closeModal()">取消</button>
+<button class="h-8 rounded bg-[#409eff] px-4 text-[12px] font-medium text-white shadow-sm hover:bg-[#338ce6] transition-all" onclick="saveModalData()">确定保存</button>
+</div>
+</div>
+</div>
+<!-- Toast Notification -->
+<div class="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-lg bg-[#181c20] px-4 py-2.5 text-white shadow-xl opacity-0 translate-y-4 pointer-events-none transition-all duration-300" id="toastNotification">
+<svg class="w-4 h-4 text-emerald-400" fill="none" id="toastIcon" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="text-[12px]" id="toastMessage">操作成功</span>
+</div>
+<script>
+    let activeCategory = 'ALL';
+    let editingRowElement = null;
+
+    function filterCategory(catKey, btnElement) {
+      activeCategory = catKey;
+      
+      document.querySelectorAll('.category-pill').forEach(pill => {
+        pill.classList.remove('bg-[#409eff]', 'text-white');
+        pill.classList.add('bg-[#f1f3fa]', 'text-[#4f6076]');
+        const countSpan = pill.querySelector('.pill-count');
+        if (countSpan) {
+          countSpan.classList.remove('bg-white/25', 'text-white');
+          countSpan.classList.add('bg-[#e0e2e9]', 'text-[#4f6076]');
+        }
+      });
+
+      btnElement.classList.remove('bg-[#f1f3fa]', 'text-[#4f6076]');
+      btnElement.classList.add('bg-[#409eff]', 'text-white');
+      const activeCount = btnElement.querySelector('.pill-count');
+      if (activeCount) {
+        activeCount.classList.remove('bg-[#e0e2e9]', 'text-[#4f6076]');
+        activeCount.classList.add('bg-white/25', 'text-white');
+      }
+
+      applyTableFilter();
+    }
+
+    function applyFilters() {
+      applyTableFilter();
+      showToast("筛选已应用");
+    }
+
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      const allBtn = document.querySelector('[data-category="ALL"]');
+      if (allBtn) {
+        filterCategory('ALL', allBtn);
+      }
+      showToast("已重置所有筛选条件");
+    }
+
+    function applyTableFilter() {
+      const term = document.getElementById('searchInput').value.trim().toLowerCase();
+      const rows = document.querySelectorAll('#tableBody tr.table-row-item');
+      let visibleCount = 0;
+
+      const categoryGroups = {};
+
+      rows.forEach(row => {
+        const cat = row.getAttribute('data-category');
+        const text = row.innerText.toLowerCase();
+        const matchesSearch = term === '' || text.includes(term);
+        const matchesCat = (activeCategory === 'ALL' || cat === activeCategory);
+
+        if (!categoryGroups[cat]) {
+          categoryGroups[cat] = [];
+        }
+
+        if (matchesSearch && matchesCat) {
+          row.classList.remove('hidden');
+          categoryGroups[cat].push(row);
+          visibleCount++;
+        } else {
+          row.classList.add('hidden');
+        }
+      });
+
+      Object.keys(categoryGroups).forEach(cat => {
+        const groupRows = categoryGroups[cat];
+        groupRows.forEach((row, index) => {
+          let cell = row.querySelector('.category-cell');
+          if (index === 0) {
+            if (!cell) {
+              const firstCell = document.createElement('td');
+              firstCell.className = 'category-cell w-40 bg-[#f8f9ff]/70 p-4 text-center align-middle border-r border-[#ebeef4]';
+              firstCell.rowSpan = groupRows.length;
+              firstCell.innerHTML = getCategoryCellHTML(cat, groupRows.length);
+              row.insertBefore(firstCell, row.firstChild);
+            } else {
+              cell.rowSpan = groupRows.length;
+              cell.style.display = '';
+            }
+          } else {
+            if (cell) {
+              cell.remove();
+            }
+          }
+        });
+      });
+
+      document.getElementById('totalCount').textContent = visibleCount;
+    }
+
+    function getCategoryCellHTML(cat, count) {
+      const meta = {
+        'BASIC': { 
+          name: '基础配置', 
+          svg: '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.27.1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.27-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>'
+        },
+        'BUSINESS': { 
+          name: '业务开关', 
+          svg: '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>'
+        },
+        'MAP': { 
+          name: '地图配置', 
+          svg: '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.53 3.28l-5.73-2.865a1.5 1.5 0 00-1.34 0L3.72 20.53a.75.75 0 01-1.085-.67V5.41a.75.75 0 01.415-.67l5.225-2.612a1.5 1.5 0 011.34 0l5.73 2.865a1.5 1.5 0 001.34 0l4.74-2.37a.75.75 0 011.085.67v14.45a.75.75 0 01-.415.67l-5.225 2.612a1.5 1.5 0 01-1.34 0z"/></svg>'
+        },
+        'LICENSE': { 
+          name: 'License配置', 
+          svg: '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"/></svg>'
+        }
+      }[cat] || { 
+        name: '系统配置', 
+        svg: '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6z"/></svg>'
+      };
+
+      return `
+        <div class="flex flex-col items-center justify-center gap-1.5">
+          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-[#0060a9] shadow-sm border border-[#ebeef4]">
+            ${meta.svg}
+          </div>
+          <span class="font-semibold text-[#181c20] text-[13px] whitespace-nowrap">${meta.name}</span>
+          <span class="text-[11px] text-[#707784] whitespace-nowrap">共 ${count} 项</span>
+        </div>
+      `;
+    }
+
+    function toggleRowState(btn) {
+      const row = btn.closest('tr');
+      const statusTag = row.querySelector('td:nth-last-child(2) span');
+      if (statusTag.innerText.includes('正常')) {
+        statusTag.className = 'inline-flex items-center gap-1 rounded bg-[#ffdad6]/60 px-2 py-0.5 text-[11px] text-[#ba1a1a] font-medium';
+        statusTag.innerHTML = '<span class="h-1.5 w-1.5 rounded-full bg-[#ba1a1a]"></span>禁用';
+        btn.innerText = '恢复';
+        btn.className = 'text-[#286c00] hover:text-[#55af28] text-[12px] font-medium transition-colors';
+        showToast("已禁用该全局参数");
+      } else {
+        statusTag.className = 'inline-flex items-center gap-1 rounded bg-[#286c00]/10 px-2 py-0.5 text-[11px] text-[#286c00] font-medium';
+        statusTag.innerHTML = '<span class="h-1.5 w-1.5 rounded-full bg-[#286c00]"></span>正常';
+        btn.innerText = '禁用';
+        btn.className = 'text-[#ba1a1a] hover:text-[#ff5252] text-[12px] font-medium transition-colors';
+        showToast("已恢复并启用该参数");
+      }
+    }
+
+    function openModal(mode, rowElement = null) {
+      const modal = document.getElementById('paramModal');
+      const modalContainer = document.getElementById('modalContainer');
+      const modalTitle = document.getElementById('modalTitle');
+
+      if (mode === 'edit' && rowElement) {
+        editingRowElement = rowElement;
+        modalTitle.innerText = '编辑全局参数';
+        
+        const cells = rowElement.querySelectorAll('td');
+        const hasCatCell = rowElement.querySelector('.category-cell');
+        const offset = hasCatCell ? 1 : 0;
+
+        const nameText = cells[offset + 1].innerText.trim();
+        const codeText = cells[offset + 2].innerText.trim();
+        const valText = cells[offset + 3].innerText.trim();
+        const remarkText = cells[offset + 4].innerText.trim();
+
+        document.getElementById('formCategory').value = rowElement.getAttribute('data-category');
+        document.getElementById('formName').value = nameText;
+        document.getElementById('formCode').value = codeText;
+        document.getElementById('formValue').value = valText;
+        document.getElementById('formRemark').value = remarkText;
+      } else {
+        editingRowElement = null;
+        modalTitle.innerText = '新增全局参数';
+        document.getElementById('formCategory').value = 'BASIC';
+        document.getElementById('formName').value = '';
+        document.getElementById('formCode').value = '';
+        document.getElementById('formValue').value = '';
+        document.getElementById('formRemark').value = '';
+      }
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modalContainer.classList.remove('scale-95');
+      modalContainer.classList.add('scale-100');
+    }
+
+    function editRow(btn) {
+      const row = btn.closest('tr');
+      openModal('edit', row);
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('paramModal');
+      const modalContainer = document.getElementById('modalContainer');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalContainer.classList.remove('scale-100');
+      modalContainer.classList.add('scale-95');
+      editingRowElement = null;
+    }
+
+    function saveModalData() {
+      const name = document.getElementById('formName').value.trim();
+      const code = document.getElementById('formCode').value.trim();
+      const value = document.getElementById('formValue').value.trim();
+
+      if (!name || !code) {
+        showToast("请完整填写必填字段", true);
+        return;
+      }
+
+      if (editingRowElement) {
+        const hasCatCell = editingRowElement.querySelector('.category-cell');
+        const offset = hasCatCell ? 1 : 0;
+        const cells = editingRowElement.querySelectorAll('td');
+        cells[offset + 1].innerText = name;
+        cells[offset + 2].innerText = code;
+        cells[offset + 3].querySelector('span').innerText = value;
+        cells[offset + 4].innerText = document.getElementById('formRemark').value;
+        showToast("参数保存成功，已广播至节点");
+      } else {
+        showToast("新增配置已成功提交至集群");
+      }
+
+      closeModal();
+    }
+
+    function refreshConfigs() {
+      const icon = document.getElementById('refreshIcon');
+      icon.classList.add('animate-spin');
+      setTimeout(() => {
+        icon.classList.remove('animate-spin');
+        showToast("已成功从 Master 节点重新拉取配置树");
+      }, 600);
+    }
+
+    function showToast(msg, isError = false) {
+      const toast = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastMsg.innerText = msg;
+      if (isError) {
+        toastIcon.className = 'w-4 h-4 text-red-400';
+      } else {
+        toastIcon.className = 'w-4 h-4 text-emerald-400';
+      }
+
+      toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+      }, 2800);
+    }
+  </script>
+</body></html>

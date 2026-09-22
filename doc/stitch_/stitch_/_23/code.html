@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>通知管理 - 预警推送配置</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecf5ff',
+              100: '#d9ecff',
+              500: '#409eff',
+              600: '#1890ff',
+              700: '#096dd9'
+            },
+            danger: {
+              light: '#fef0f0',
+              border: '#fde2e2',
+              DEFAULT: '#f56c6c',
+              dark: '#e6a23c'
+            },
+            success: '#67c23a',
+            info: '#909399'
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-scrollbars-and-transitions">
+    /* 统一系统滚动条及平滑阴影 */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #dcdfe6;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    /* 模拟Element UI对话框阴影 */
+    .el-dialog-shadow {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    /* 警用前台提示卡片微动效 */
+    .el-message-slide {
+      animation: messageSlide 0.3s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+    @keyframes messageSlide {
+      0% {
+        transform: translate(-50%, -100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#f5f7fa] min-h-screen text-slate-700 antialiased relative font-sans select-none overflow-x-hidden p-5">
+<!-- BEGIN: ToastErrorMessage -->
+<!-- 顶部居中滑出的系统级表单校验报错提醒 (Element UI 风格，默认隐藏) -->
+<div class="hidden fixed top-6 left-1/2 -translate-x-1/2 z-[100] el-message-slide pointer-events-auto" data-purpose="validation-toast" id="validation-toast">
+<div class="flex items-center gap-2.5 px-4 py-2.5 rounded bg-[#fef0f0] border border-[#fde2e2] shadow-md text-[#f56c6c] text-sm">
+<svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="font-medium whitespace-nowrap">表单校验未通过，请检查标红的必填项</span>
+<button class="ml-2 text-rose-400 hover:text-rose-600 focus:outline-none" onclick="closeModal()" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</div>
+<!-- END: ToastErrorMessage -->
+<!-- BEGIN: MainContentWrapper -->
+<main class="max-w-[1720px] mx-auto space-y-4" data-purpose="notification-management-page">
+<!-- 顶层面包屑与路由标记 -->
+<div class="flex items-center justify-between text-xs text-slate-500 mb-1 px-1">
+<div class="flex items-center gap-2">
+<span class="text-slate-400">当前路由:</span>
+<code class="px-2 py-0.5 rounded bg-slate-200 text-slate-700 font-mono">/notification/alertPush</code>
+<span class="text-slate-300">|</span>
+<span class="text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">提示：当前为本地模拟数据，路由与功能入口按真实项目完整展示。</span>
+</div>
+<div class="flex items-center gap-1.5 text-slate-400">
+<span>警务业务协同平台</span>
+<span>/</span>
+<span>通知管理</span>
+<span>/</span>
+<span class="text-slate-700 font-medium">预警推送配置</span>
+</div>
+</div>
+<!-- BEGIN: MainCard -->
+<div class="bg-white rounded border border-slate-200 shadow-sm">
+<!-- 选项卡 Tabs 区域 -->
+<div class="border-b border-slate-200 px-6 pt-3 flex items-center gap-8 bg-slate-50/50">
+<button class="pb-3 border-b-2 border-brand-600 font-medium text-brand-600 text-sm flex items-center gap-1.5 focus:outline-none cursor-pointer" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>任务逾期预警</span>
+<span class="ml-1 px-1.5 py-0.2 rounded-full text-[11px] bg-brand-50 text-brand-600 font-semibold border border-brand-100">8</span>
+</button>
+<button class="pb-3 border-b-2 border-transparent hover:border-slate-300 text-slate-500 hover:text-slate-700 text-sm font-medium flex items-center gap-1.5 focus:outline-none transition cursor-pointer" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>无人值守预警</span>
+</button>
+</div>
+<!-- 检索与操作按钮区域 -->
+<div class="p-5 border-b border-slate-100" data-purpose="filters-section">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<!-- 查询输入控件组合 -->
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-600 whitespace-nowrap">组织名称:</span>
+<input class="w-44 text-xs h-8 px-2.5 rounded border border-slate-300 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500" placeholder="输入组织机构关键词" type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-600 whitespace-nowrap">通知对象类型:</span>
+<select class="w-36 text-xs h-8 px-2 rounded border border-slate-300 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 text-slate-600">
+<option value="">全部类型</option>
+<option value="dept">组织机构</option>
+<option value="user">人员用户</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-600 whitespace-nowrap">预警通知对象:</span>
+<input class="w-44 text-xs h-8 px-2.5 rounded border border-slate-300 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500" placeholder="人员名称 / 部门岗位" type="text"/>
+</div>
+<button class="h-8 px-3.5 bg-brand-600 hover:bg-brand-700 text-white rounded text-xs font-medium inline-flex items-center gap-1.5 transition cursor-pointer" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>查询</span>
+</button>
+<button class="h-8 px-3.5 border border-slate-300 hover:bg-slate-50 text-slate-600 rounded text-xs font-medium inline-flex items-center gap-1.5 transition cursor-pointer" type="button">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>重置</span>
+</button>
+</div>
+<!-- 操作按钮动作区 -->
+<div class="flex items-center gap-2.5">
+<button class="h-8 px-3.5 bg-brand-600 hover:bg-brand-700 text-white rounded text-xs font-medium inline-flex items-center gap-1.5 shadow-sm transition cursor-pointer" onclick="openModal()" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>新增规则</span>
+</button>
+<button class="h-8 px-3.5 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 rounded text-xs font-medium inline-flex items-center gap-1.5 transition cursor-pointer" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>批量删除</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 表格区域 -->
+<div class="overflow-x-auto" data-purpose="data-table">
+<table class="w-full text-left text-xs text-slate-600 border-collapse">
+<thead>
+<tr class="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold">
+<th class="py-3 px-4 w-10 text-center">
+<input class="rounded border-slate-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+</th>
+<th class="py-3 px-3 w-16 text-center">序号</th>
+<th class="py-3 px-4">预警规则名称</th>
+<th class="py-3 px-4">组织机构名称</th>
+<th class="py-3 px-4">父组织</th>
+<th class="py-3 px-4">通知对象类型</th>
+<th class="py-3 px-4">预警通知对象</th>
+<th class="py-3 px-4">触发阈值</th>
+<th class="py-3 px-4 text-center">状态</th>
+<th class="py-3 px-4 text-center w-28">操作</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1 -->
+<tr class="hover:bg-blue-50/30 transition-colors">
+<td class="py-3.5 px-4 text-center">
+<input checked="" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+</td>
+<td class="py-3.5 px-3 text-center text-slate-400 font-mono">01</td>
+<td class="py-3.5 px-4 font-medium text-slate-800">情指行重特大警情超期报警</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-medium text-slate-700">情指行专班</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5 text-slate-500">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>市局指挥中心</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-blue-50 text-blue-600 border border-blue-200 whitespace-nowrap">人员用户</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px] whitespace-nowrap">
+<svg class="w-3 h-3 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    张三 (003478)
+                  </span>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px] whitespace-nowrap">
+                    李四 (004129)
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-medium text-rose-600 bg-rose-50 px-2 py-0.5 rounded border border-rose-100 whitespace-nowrap">超期 15 分钟</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<!-- 开启 Switch -->
+<button class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-brand-600 transition-colors focus:outline-none" type="button">
+<span class="translate-x-4 pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center gap-3">
+<button class="text-brand-600 hover:text-brand-700 font-medium cursor-pointer" onclick="openModal()" type="button">编辑</button>
+<span class="text-slate-300">|</span>
+<button class="text-rose-500 hover:text-rose-600 font-medium cursor-pointer" type="button">删除</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-blue-50/30 transition-colors">
+<td class="py-3.5 px-4 text-center">
+<input class="rounded border-slate-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+</td>
+<td class="py-3.5 px-3 text-center text-slate-400 font-mono">02</td>
+<td class="py-3.5 px-4 font-medium text-slate-800">东区分局协同任务处置催办</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-medium text-slate-700">东区分局</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5 text-slate-500">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>市局指挥中心</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-purple-50 text-purple-600 border border-purple-200 whitespace-nowrap">组织机构</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px] whitespace-nowrap">
+<svg class="w-3 h-3 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  指挥中心值班研判组
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-medium text-rose-600 bg-rose-50 px-2 py-0.5 rounded border border-rose-100 whitespace-nowrap">超期 30 分钟</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<!-- 开启 Switch -->
+<button class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-brand-600 transition-colors focus:outline-none" type="button">
+<span class="translate-x-4 pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center gap-3">
+<button class="text-brand-600 hover:text-brand-700 font-medium cursor-pointer" onclick="openModal()" type="button">编辑</button>
+<span class="text-slate-300">|</span>
+<button class="text-rose-500 hover:text-rose-600 font-medium cursor-pointer" type="button">删除</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-blue-50/30 transition-colors">
+<td class="py-3.5 px-4 text-center">
+<input class="rounded border-slate-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+</td>
+<td class="py-3.5 px-3 text-center text-slate-400 font-mono">03</td>
+<td class="py-3.5 px-4 font-medium text-slate-800">巡特警突击支队出警签收提醒</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-slate-300"></span>
+<span class="font-medium text-slate-700">巡特警突击支队</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5 text-slate-500">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>市局指挥中心</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-blue-50 text-blue-600 border border-blue-200 whitespace-nowrap">人员用户</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px] whitespace-nowrap">
+                  徐雷 (009012)
+                </span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-medium text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-100 whitespace-nowrap">超期 10 分钟</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<!-- 关闭 Switch -->
+<button class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-slate-200 transition-colors focus:outline-none" type="button">
+<span class="translate-x-0 pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center gap-3">
+<button class="text-brand-600 hover:text-brand-700 font-medium cursor-pointer" onclick="openModal()" type="button">编辑</button>
+<span class="text-slate-300">|</span>
+<button class="text-rose-500 hover:text-rose-600 font-medium cursor-pointer" type="button">删除</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- 分页栏区域 -->
+<div class="p-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500" data-purpose="pagination">
+<div class="flex items-center gap-2">
+<span>共 <strong class="text-slate-700">16</strong> 条记录</span>
+<span class="text-slate-300">|</span>
+<span>第 1 / 2 页</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-slate-600">每页:</span>
+<select class="border border-slate-300 rounded px-2 py-1 text-xs text-slate-700 focus:outline-none">
+<option>10 条/页</option>
+<option>20 条/页</option>
+<option>50 条/页</option>
+</select>
+<div class="flex items-center space-x-1 ml-2">
+<button class="px-2.5 py-1 rounded border border-slate-200 bg-slate-50 text-slate-300 cursor-not-allowed" disabled="" type="button">&lt;</button>
+<button class="px-2.5 py-1 rounded border border-brand-600 bg-brand-600 text-white font-medium cursor-pointer" type="button">1</button>
+<button class="px-2.5 py-1 rounded border border-slate-200 hover:bg-slate-50 text-slate-600 cursor-pointer" type="button">2</button>
+<button class="px-2.5 py-1 rounded border border-slate-200 hover:bg-slate-50 text-slate-600 cursor-pointer" type="button">&gt;</button>
+</div>
+<span class="ml-2">前往</span>
+<input class="w-10 text-center border border-slate-300 rounded py-1 text-xs text-slate-700 focus:outline-none" type="text" value="1"/>
+<span>页</span>
+</div>
+</div>
+</div>
+<!-- END: MainCard -->
+</main>
+<!-- END: MainContentWrapper -->
+<!-- BEGIN: ModalValidationDialog -->
+<!-- 模态背景遮罩 (默认隐藏，点击遮罩可关闭) -->
+<div class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 overflow-y-auto" data-purpose="modal-overlay" id="modal-container" onclick="handleBackdropClick(event)">
+<!-- 对话框主体容器 -->
+<div class="bg-white rounded-lg el-dialog-shadow w-full max-w-[620px] overflow-hidden border border-slate-200 animate-[scaleIn_0.15s_ease-out]" data-purpose="form-error-modal">
+<!-- 弹窗 Header -->
+<div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-4 bg-brand-600 rounded-sm inline-block"></span>
+<h3 class="text-sm font-semibold text-slate-800 tracking-tight">新增预警推送规则</h3>
+</div>
+<button class="text-slate-400 hover:text-slate-600 transition p-1 hover:bg-slate-100 rounded cursor-pointer" onclick="closeModal()" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- 弹窗 Form Body - 错误提交标红态 -->
+<form class="p-6 space-y-4 text-xs" onsubmit="event.preventDefault();">
+<!-- 表单项 1：规则名称（校验失败） -->
+<div>
+<label class="block font-medium text-slate-700 mb-1.5">
+<span class="text-rose-500 font-bold mr-0.5">*</span>规则名称
+          </label>
+<div class="relative">
+<input class="w-full text-xs h-9 px-3 rounded border border-danger focus:outline-none focus:ring-1 focus:ring-danger focus:border-danger placeholder-slate-400 bg-rose-50/15" placeholder="请输入规则名称，如：东区分局超时催办" type="text"/>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-danger">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" fill-rule="evenodd"></path>
+</svg>
+</div>
+</div>
+<p class="mt-1 text-danger text-[11px] flex items-center gap-1">
+<span>请输入规则名称</span>
+</p>
+</div>
+<!-- 表单项 2：适用组织（校验失败） -->
+<div>
+<label class="block font-medium text-slate-700 mb-1.5">
+<span class="text-rose-500 font-bold mr-0.5">*</span>适用组织
+          </label>
+<div class="relative">
+<div class="w-full h-9 px-3 rounded border border-danger flex items-center justify-between bg-rose-50/15 cursor-pointer">
+<span class="text-slate-400">请选择适用组织机构 (支持树级联选)</span>
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<p class="mt-1 text-danger text-[11px] flex items-center gap-1">
+<span>请选择适用组织机构</span>
+</p>
+</div>
+<!-- 表单项 3：通知对象类型 (单选框组 - 用户已选) -->
+<div>
+<label class="block font-medium text-slate-700 mb-1.5">
+<span class="text-rose-500 font-bold mr-0.5">*</span>通知对象类型
+          </label>
+<div class="flex items-center gap-6 pt-1">
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<input class="w-4 h-4 text-brand-600 border-slate-300 focus:ring-brand-500" name="targetType" type="radio" value="dept"/>
+<span class="text-slate-700">组织机构</span>
+</label>
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<input checked="" class="w-4 h-4 text-brand-600 border-slate-300 focus:ring-brand-500" name="targetType" type="radio" value="user"/>
+<span class="text-slate-700 font-medium text-brand-600">人员用户</span>
+</label>
+</div>
+</div>
+<!-- 表单项 4：预警通知对象（校验失败） -->
+<div>
+<label class="block font-medium text-slate-700 mb-1.5">
+<span class="text-rose-500 font-bold mr-0.5">*</span>预警通知对象
+          </label>
+<div class="relative">
+<input class="w-full text-xs h-9 px-3 rounded border border-danger focus:outline-none focus:ring-1 focus:ring-danger focus:border-danger placeholder-slate-400 bg-rose-50/15" placeholder="请点击或输入选择警员编号/姓名" type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 px-2 py-0.5 bg-slate-100 hover:bg-slate-200 rounded text-[11px] text-slate-600 border border-slate-200 cursor-pointer" type="button">
+              选择人员
+            </button>
+</div>
+<p class="mt-1 text-danger text-[11px] flex items-center gap-1">
+<span>请选择至少一个预警通知对象</span>
+</p>
+</div>
+<!-- 表单项 5：预警触发条件（校验失败） -->
+<div>
+<label class="block font-medium text-slate-700 mb-1.5">
+<span class="text-rose-500 font-bold mr-0.5">*</span>预警触发条件
+          </label>
+<div class="flex items-center gap-2">
+<span class="text-slate-500 whitespace-nowrap">任务接收或处置超时满</span>
+<div class="w-36">
+<input class="w-full text-xs h-9 px-3 rounded border border-danger focus:outline-none focus:ring-1 focus:ring-danger focus:border-danger bg-rose-50/15" placeholder="逾期时长" type="number"/>
+</div>
+<span class="text-slate-600 whitespace-nowrap">分钟后自动触发推送</span>
+</div>
+<p class="mt-1 text-danger text-[11px] flex items-center gap-1">
+<span>请输入大于0的预警阈值</span>
+</p>
+</div>
+<!-- 表单项 6：推送渠道（复选框） -->
+<div class="pt-1">
+<label class="block font-medium text-slate-700 mb-1.5">推送渠道</label>
+<div class="flex items-center gap-6 pt-1">
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+<span class="text-slate-700">警信即时消息</span>
+</label>
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+<span class="text-slate-700">短信网关</span>
+</label>
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+<span class="text-slate-700">客户端弹窗提醒</span>
+</label>
+</div>
+</div>
+</form>
+<!-- 弹窗 Footer 操作按钮 -->
+<div class="px-6 py-3.5 border-t border-slate-100 bg-slate-50/80 flex items-center justify-end gap-3">
+<button class="px-4 py-2 text-xs font-medium text-slate-600 hover:text-slate-800 bg-white border border-slate-300 rounded shadow-xs hover:bg-slate-50 transition cursor-pointer" onclick="closeModal()" type="button">
+          取消
+        </button>
+<button class="px-5 py-2 text-xs font-medium text-white bg-brand-600 hover:bg-brand-700 rounded shadow-xs transition cursor-pointer" type="button">
+          确定
+        </button>
+</div>
+</div>
+</div>
+<!-- END: ModalValidationDialog -->
+<!-- 弹窗与提示交互逻辑 -->
+<script>
+  function openModal() {
+    const modal = document.getElementById('modal-container');
+    const toast = document.getElementById('validation-toast');
+    if (modal) modal.classList.remove('hidden');
+    if (toast) toast.classList.remove('hidden');
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('modal-container');
+    const toast = document.getElementById('validation-toast');
+    if (modal) modal.classList.add('hidden');
+    if (toast) toast.classList.add('hidden');
+  }
+
+  function handleBackdropClick(event) {
+    if (event.target === document.getElementById('modal-container')) {
+      closeModal();
+    }
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+</script>
+</body></html>

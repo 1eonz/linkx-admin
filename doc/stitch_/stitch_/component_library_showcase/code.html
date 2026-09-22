@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-error-container": "#93000a",
+          "surface-container": "#ebeef4",
+          "error": "#ba1a1a",
+          "surface-dim": "#d7dae0",
+          "surface-tint": "#0060a9",
+          "tertiary": "#286c00",
+          "on-primary-fixed": "#001c38",
+          "background": "#f8f9ff",
+          "tertiary-fixed-dim": "#80dd52",
+          "error-container": "#ffdad6",
+          "surface-bright": "#f8f9ff",
+          "on-secondary": "#ffffff",
+          "secondary-fixed": "#d2e4ff",
+          "outline-variant": "#c0c7d4",
+          "surface-container-low": "#f1f3fa",
+          "surface-container-high": "#e6e8ef",
+          "on-error": "#ffffff",
+          "surface-variant": "#e0e2e9",
+          "on-surface": "#181c20",
+          "on-secondary-fixed": "#0a1c30",
+          "secondary-container": "#d2e4ff",
+          "tertiary-fixed": "#9bfa6b",
+          "inverse-primary": "#a2c9ff",
+          "surface-container-highest": "#e0e2e9",
+          "on-primary": "#ffffff",
+          "on-background": "#181c20",
+          "surface-container-lowest": "#ffffff",
+          "on-tertiary-fixed-variant": "#1d5200",
+          "secondary": "#4f6076",
+          "on-tertiary": "#ffffff",
+          "primary-container": "#409eff",
+          "on-tertiary-fixed": "#072100",
+          "surface": "#f8f9ff",
+          "on-tertiary-container": "#133b00",
+          "outline": "#707784",
+          "on-primary-container": "#003460",
+          "primary-fixed": "#d3e4ff",
+          "on-secondary-fixed-variant": "#37485d",
+          "on-surface-variant": "#404752",
+          "on-primary-fixed-variant": "#004881",
+          "inverse-surface": "#2d3136",
+          "inverse-on-surface": "#eef1f7",
+          "secondary-fixed-dim": "#b6c8e2",
+          "tertiary-container": "#55af28",
+          "primary": "#0060a9",
+          "primary-fixed-dim": "#a2c9ff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-lg": "16px",
+          "space-md": "12px",
+          "space-xl": "24px",
+          "gutter": "16px",
+          "margin": "20px",
+          "space-sm": "8px",
+          "space-xs": "4px"
+        },
+        "fontFamily": {
+          "headline-sm": [
+            "Inter"
+          ],
+          "label-md": [
+            "Inter"
+          ],
+          "display-lg": [
+            "Inter"
+          ],
+          "headline-md": [
+            "Inter"
+          ],
+          "body-md": [
+            "Inter"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "label-lg": [
+            "Inter"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "headline-lg": [
+            "Inter"
+          ]
+        },
+        "fontSize": {
+          "headline-sm": [
+            "14px",
+            {
+              "lineHeight": "22px",
+              "fontWeight": "600"
+            }
+          ],
+          "label-md": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "500"
+            }
+          ],
+          "display-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-md": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-md": [
+            "13px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-lg": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "500"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-lg": [
+            "14px",
+            {
+              "lineHeight": "22px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "600"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-background font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-56 bg-inverse-surface z-50 flex flex-col shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-14 flex items-center gap-space-sm px-space-lg bg-inverse-surface"><img alt="Police badge shield with modern geometric cyber lines, classic police blue and metallic silver, clean flat SVG logo for Police Command &amp; Operations System. Brand logo. - Primary color: #409eff
+- Font: inter
+- Mode: light
+- Roundness: rounded-sm
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Ug-doLeeLbkmVMFdwjejD5j4Ql8PuAps_xFSw6NCGlctNO-lWE7D7DjTnHEkCtUlfdxi7XJtvTBJq_wukOtgv7HPLZCBvjeBBTfR71kanRJFW-JJaFp7KMs-LAfdHg6R9SL8F1JYEZl8VRho9hUMARiys61UnCCBL_UWlv0Q8486BdShypN7qCc1u8Z8EXOMZqPEpC0aZe6gu3AKCFFFp4WQ9OUQWVocvRe56Jgr7NNGGwTARvY4APNao"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-inverse-on-surface tracking-tight leading-none">LINKX ADMIN</span><span class="font-label-sm text-label-sm text-secondary-fixed-dim uppercase tracking-wider">Police Command</span></div></div><div class="px-space-md py-space-sm"><div class="bg-on-surface/10 rounded-lg p-space-sm flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-label-sm text-label-sm text-inverse-on-surface">CAD NET: ACTIVE</span></div><span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-variant/20 text-inverse-on-surface font-mono">SEC-4</span></div></div><nav class="flex-1 px-space-sm py-space-xs space-y-1 overflow-y-auto" data-active-classes="bg-primary text-on-primary rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-inverse-on-surface/80 hover:bg-surface-variant/20 hover:text-inverse-on-surface transition-colors" data-path="incident-dispatch" href="#"><span class="material-symbols-outlined text-[18px]">e911_emergency</span><span class="font-label-lg text-label-lg">Incident Dispatch</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-inverse-on-surface/80 hover:bg-surface-variant/20 hover:text-inverse-on-surface transition-colors" data-path="asset-surveillance" href="#"><span class="material-symbols-outlined text-[18px]">videocam</span><span class="font-label-lg text-label-lg">Surveillance Grid</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-inverse-on-surface/80 hover:bg-surface-variant/20 hover:text-inverse-on-surface transition-colors" data-path="fleet-units" href="#"><span class="material-symbols-outlined text-[18px]">local_police</span><span class="font-label-lg text-label-lg">Units &amp; Patrols</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-inverse-on-surface/80 hover:bg-surface-variant/20 hover:text-inverse-on-surface transition-colors" data-path="records-triage" href="#"><span class="material-symbols-outlined text-[18px]">folder_shared</span><span class="font-label-lg text-label-lg">Criminal Records</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-inverse-on-surface/80 hover:bg-surface-variant/20 hover:text-inverse-on-surface transition-colors" data-path="system-analytics" href="#"><span class="material-symbols-outlined text-[18px]">analytics</span><span class="font-label-lg text-label-lg">Ops Intelligence</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-2 transition-colors bg-primary text-on-primary rounded-lg" data-path="component-library" href="#"><span class="material-symbols-outlined text-[18px]">widgets</span><span class="font-label-lg text-label-lg">Design Tokens</span></a></nav><div class="p-space-md bg-inverse-surface border-t border-surface-variant/10"><div class="flex items-center justify-between text-inverse-on-surface/60"><span class="font-label-sm text-label-sm">DISPATCH SYS v4.8</span><span class="font-label-sm text-label-sm font-mono">STN-09</span></div></div></aside><div class="pl-56"><header class="fixed top-0 left-56 right-0 h-14 bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><button class="text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">menu_open</span></button><div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant"><span class="text-on-surface-variant">HQ Command</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="text-on-surface-variant">Metro Ops District</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="text-primary font-semibold">Active Terminal</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm px-space-sm py-1 bg-surface-container-low rounded-lg"><span class="flex h-2 w-2 rounded-full bg-tertiary"></span><span class="font-label-sm text-label-sm text-on-surface font-medium">GRID DEFCON 4</span><span class="text-outline-variant">|</span><span class="font-label-sm text-label-sm text-on-surface-variant font-mono">14 UNITS READY</span></div><div class="h-4 w-[1px] bg-surface-variant"></div><button class="relative p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 h-2 w-2 rounded-full bg-error"></span></button><button class="p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg"><span class="material-symbols-outlined text-[20px]">quick_reference</span></button><button class="p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg"><span class="material-symbols-outlined text-[20px]">fullscreen</span></button><div class="h-4 w-[1px] bg-surface-variant"></div><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1XXnZcUd9ilLsKHYhlhcCZLExzP78FGuF8sH46L-1vKS4XlfEl9gux5xj3ZEwo3pP5NcxfGGOgsQIkt5Viypxb-w-mA3eySmqNLsAOiY9mEskSBFGUrB6KO06MDlhFJeEd8wwSnYE5BPAyTGZb4CsD56rbrpBvC8O6x_vaY-po7N7LlMwWuI3Jayf6TAnkmgUg8puXlmHofl1LTrhMlrD3Iug-i8qH3fYDNwE7K1G6U8_uJpHmQl0OJvXEg"/><div class="flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Capt. D. Vance</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">Badge #4820</span></div><span class="material-symbols-outlined text-secondary text-[16px]">expand_more</span></div></div></header><main class="relative pt-14 w-full bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- System Banner & Top Meta Bar -->
+<div class="px-margin py-space-lg bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-on-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">LinkX Admin 组件库全景展台</h1>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded-lg bg-primary-fixed text-on-primary-fixed font-mono font-bold">V4.8.2-SEC</span>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded-lg bg-tertiary-fixed text-on-tertiary-container font-medium">Element Plus &amp; Tailwind 3.4 规范</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+            警务协同平台组件规范全景 · 包含 8 大核心系统领域 · 36 类高保真业务组件标本及实时交互验证
+          </p>
+</div>
+</div>
+<!-- Quick Anchor Tags -->
+<div class="flex items-center gap-space-xs flex-wrap">
+<a class="font-label-sm text-label-sm px-2.5 py-1 rounded-lg bg-surface-container-low text-secondary hover:bg-surface-container hover:text-primary transition-all" href="#cat-nav">1. 导航与外壳</a>
+<a class="font-label-sm text-label-sm px-2.5 py-1 rounded-lg bg-surface-container-low text-secondary hover:bg-surface-container hover:text-primary transition-all" href="#cat-filter">2. 检索筛查</a>
+<a class="font-label-sm text-label-sm px-2.5 py-1 rounded-lg bg-surface-container-low text-secondary hover:bg-surface-container hover:text-primary transition-all" href="#cat-table">3. 警务表格</a>
+<a class="font-label-sm text-label-sm px-2.5 py-1 rounded-lg bg-surface-container-low text-secondary hover:bg-surface-container hover:text-primary transition-all" href="#cat-selectors">4. 复合输入</a>
+<a class="font-label-sm text-label-sm px-2.5 py-1 rounded-lg bg-surface-container-low text-secondary hover:bg-surface-container hover:text-primary transition-all" href="#cat-modals">5. 弹窗反馈</a>
+<a class="font-label-sm text-label-sm px-2.5 py-1 rounded-lg bg-surface-container-low text-secondary hover:bg-surface-container hover:text-primary transition-all" href="#cat-metrics">6. 安全监控</a>
+<a class="font-label-sm text-label-sm px-2.5 py-1 rounded-lg bg-surface-container-low text-secondary hover:bg-surface-container hover:text-primary transition-all" href="#cat-layout">7. 架构容器</a>
+<a class="font-label-sm text-label-sm px-2.5 py-1 rounded-lg bg-surface-container-low text-secondary hover:bg-surface-container hover:text-primary transition-all" href="#cat-domain">8. 警务域专精</a>
+</div>
+</div>
+<!-- 4 Key System Metrics Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mt-space-xs">
+<div class="p-space-md rounded-lg bg-surface-container-low flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">涵盖核心分类</span>
+<div class="font-display-lg text-display-lg text-primary font-bold mt-0.5">8 <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">Categories</span></div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">category</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">专有警务组件</span>
+<div class="font-display-lg text-display-lg text-tertiary font-bold mt-0.5">36 <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">Components</span></div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[22px]">widgets</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">像素精度基准</span>
+<div class="font-display-lg text-display-lg text-on-surface font-bold mt-0.5">8px/4px <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">Atomic Grid</span></div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[22px]">grid_4x4</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">国密与等级保护</span>
+<div class="font-display-lg text-display-lg text-on-primary-container font-bold mt-0.5">SM4 / 等保三级</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Showcase Body -->
+<div class="px-margin py-space-xl flex flex-col gap-space-xl">
+<!-- ========================================================================= -->
+<!-- SECTION 1: NAVIGATION & SHELL -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-md" id="cat-nav">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-6 bg-primary rounded-sm"></span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">1. 导航与布局外壳 (Navigation &amp; Shell)</h2>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant">5 标本</span>
+</div>
+<span class="font-mono text-label-sm text-secondary">AppShell / PureSidebar / StandardTabs / RoutePill / TopNavBar</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- 1.1 PureSidebar Specimen -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">side_navigation</span>
+              PureSidebar (纯净暗调侧栏折叠态与展开态)
+            </span>
+<span class="font-mono text-label-sm text-on-surface-variant">w-56 / w-16</span>
+</div>
+<!-- Specimen Preview -->
+<div class="flex gap-space-md p-space-md bg-surface-container-low rounded-lg overflow-hidden">
+<!-- Expanded Mini View -->
+<div class="w-48 bg-inverse-surface rounded-lg p-2.5 flex flex-col gap-1.5 shadow-md">
+<div class="px-2 py-1.5 flex items-center gap-2 text-inverse-on-surface">
+<span class="material-symbols-outlined text-primary-container text-[18px]">security</span>
+<span class="font-label-md text-label-md font-semibold">警务系统 Command</span>
+</div>
+<div class="h-[1px] bg-surface-variant/20 my-1"></div>
+<div class="px-2.5 py-1.5 rounded-lg bg-primary text-on-primary flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">e911_emergency</span>
+<span class="font-label-sm text-label-sm">指挥中心调度</span>
+</div>
+<span class="font-mono text-[10px] bg-error text-on-error px-1 rounded-full">3</span>
+</div>
+<div class="px-2.5 py-1.5 rounded-lg text-inverse-on-surface/70 hover:bg-surface-variant/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">videocam</span>
+<span class="font-label-sm text-label-sm">天网视讯网格</span>
+</div>
+<div class="px-2.5 py-1.5 rounded-lg text-inverse-on-surface/70 hover:bg-surface-variant/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">fingerprint</span>
+<span class="font-label-sm text-label-sm">人员档案核查</span>
+</div>
+</div>
+<!-- Collapsed Mini View -->
+<div class="w-14 bg-inverse-surface rounded-lg py-2.5 flex flex-col items-center gap-2 shadow-md">
+<span class="material-symbols-outlined text-primary-container text-[20px]">shield</span>
+<div class="w-8 h-[1px] bg-surface-variant/20 my-1"></div>
+<div class="w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">e911_emergency</span>
+</div>
+<div class="w-9 h-9 rounded-lg text-inverse-on-surface/70 hover:bg-surface-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">videocam</span>
+</div>
+<div class="w-9 h-9 rounded-lg text-inverse-on-surface/70 hover:bg-surface-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">fingerprint</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-center gap-2 text-on-surface-variant font-body-sm text-body-sm pl-space-sm">
+<div class="flex items-center gap-1.5 font-mono text-[12px]"><span class="w-2 h-2 rounded-full bg-primary"></span>展开宽度: 224px (w-56)</div>
+<div class="flex items-center gap-1.5 font-mono text-[12px]"><span class="w-2 h-2 rounded-full bg-secondary"></span>折叠收纳: 56px (w-14)</div>
+<div class="text-[11px] text-on-surface-variant/80">支持徽标气泡 (Badge Alert) 与多级子菜单浮层。</div>
+</div>
+</div>
+</div>
+<!-- 1.2 StandardTabs & Route Breadcrumb Specimen -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">tab</span>
+              StandardTabs (48px标签页带蓝色滑块) &amp; Route Pill
+            </span>
+<span class="font-mono text-label-sm text-on-surface-variant">h-12 / 48px</span>
+</div>
+<!-- Specimen Preview -->
+<div class="p-space-md bg-surface-container-low rounded-lg flex flex-col gap-space-md">
+<!-- Breadcrumb Pill -->
+<div class="flex items-center gap-space-xs bg-surface-container-lowest px-3 py-1.5 rounded-lg shadow-sm w-fit">
+<span class="material-symbols-outlined text-secondary text-[16px]">home_pin</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">指挥总部</span>
+<span class="material-symbols-outlined text-outline text-[14px]">chevron_right</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">南城第一治安支队</span>
+<span class="material-symbols-outlined text-outline text-[14px]">chevron_right</span>
+<span class="font-label-sm text-label-sm font-semibold text-primary px-1.5 py-0.5 bg-primary-fixed/50 rounded">现场接处警中台</span>
+</div>
+<!-- StandardTabs 48px with 2px blue slider -->
+<div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+<div class="h-12 flex items-center px-4 gap-6 relative">
+<button class="font-label-lg text-label-lg font-semibold text-primary flex items-center gap-1.5 h-full relative">
+<span class="material-symbols-outlined text-[18px]">alarm_on</span>
+                  实时告警流水
+                  <span class="px-1.5 py-0.2 bg-primary text-on-primary text-[11px] rounded-full font-mono">18</span>
+<!-- 2px Active Slider -->
+<div class="absolute bottom-0 left-0 right-0 h-[2px] bg-primary"></div>
+</button>
+<button class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 h-full">
+<span class="material-symbols-outlined text-[18px]">map</span>
+                  三维天网巡查
+                </button>
+<button class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 h-full">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                  历史出警卷宗
+                </button>
+<button class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 h-full">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+                  网格策略配置
+                </button>
+</div>
+</div>
+<!-- TopNavBar Status Lights -->
+<div class="flex items-center justify-between p-2.5 bg-surface-container-lowest rounded-lg shadow-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">TopNavBar 网络心跳与警情指示灯：</span>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-tertiary font-mono font-medium">GPS网关 NORMAL</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-label-sm text-label-sm text-primary font-mono font-medium">CAD链路 12ms</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-label-sm text-label-sm text-error font-mono font-medium">特勤频道 BUSY</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 2: SEARCH & FILTER PANEL -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-md" id="cat-filter">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-6 bg-primary rounded-sm"></span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">2. 综合检索与筛选面板 (Search &amp; Filter Panel)</h2>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant">4 标本</span>
+</div>
+<span class="font-mono text-label-sm text-secondary">SearchFilterPanel / StandardInput 36px / StandardSelect / ButtonActionGroup</span>
+</div>
+<!-- Specimen: SearchFilterPanel -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface">SearchFilterPanel 标准搜索过滤容器</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">背景底色 surface-container-low，36px 严谨输入行高，自适应多维筛选参数</p>
+</div>
+<span class="font-label-sm text-label-sm px-space-xs py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-mono font-bold">GRID 4-COL + ACTION</span>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg flex flex-col gap-space-md shadow-inner">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- 2.1 StandardInput (36px) -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-medium">警情编号 / 关键词检索</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-2.5 text-outline text-[18px]">search</span>
+<input class="w-full h-9 pl-8 pr-3 bg-surface-container-lowest rounded-lg text-on-surface font-body-sm text-body-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-outline/60" placeholder="输入编号或案件特征..." type="text" value="POL-2024-0891"/>
+</div>
+</div>
+<!-- 2.2 StandardSelect (36px) -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-medium">响应等级 (Incident Level)</label>
+<div class="relative flex items-center">
+<select class="w-full h-9 px-3 bg-surface-container-lowest rounded-lg text-on-surface font-body-sm text-body-sm shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer">
+<option value="all">全量告警等级 (一级/二级/特勤)</option>
+<option value="1">等级 1: 极度危急 (SWAT/重大警情)</option>
+<option selected="" value="2">等级 2: 治安事件 (日常巡处)</option>
+<option value="3">等级 3: 交通辅警协同处置</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 text-outline text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- 2.3 DatePicker (36px) -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-medium">接警时间范围 (Date Range)</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-2.5 text-outline text-[18px]">calendar_month</span>
+<input class="w-full h-9 pl-8 pr-3 bg-surface-container-lowest rounded-lg text-on-surface font-body-sm text-body-sm shadow-sm focus:outline-none cursor-pointer" readonly="" type="text" value="2024-10-24 至 2024-10-25"/>
+</div>
+</div>
+<!-- 2.4 Jurisdiction Select -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-medium">所属辖区网格 (District Mesh)</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-2.5 text-outline text-[18px]">location_on</span>
+<select class="w-full h-9 pl-8 pr-8 bg-surface-container-lowest rounded-lg text-on-surface font-body-sm text-body-sm shadow-sm appearance-none focus:outline-none">
+<option>东湖高新核心网格 (Zone-A)</option>
+<option>金融港第一巡查大队 (Zone-B)</option>
+<option>光谷软件园联防片区 (Zone-C)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 text-outline text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- ButtonActionGroup (36px Height standard) -->
+<div class="flex flex-wrap items-center justify-between pt-space-xs border-t border-surface-variant/20">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">已选择 <span class="text-primary font-bold">14</span> 条实时涉警记录</span>
+<button class="h-8 px-3 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+                批量导出卷宗
+              </button>
+<button class="h-8 px-3 rounded-lg bg-error-container text-on-error-container hover:bg-error/20 font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">lock_clock</span>
+                一键等级管制
+              </button>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="h-9 px-4 rounded-lg bg-surface-container-lowest text-secondary hover:bg-surface-container font-label-md text-label-md flex items-center gap-1.5 shadow-sm transition-all">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+                重置检索
+              </button>
+<button class="h-9 px-5 rounded-lg bg-primary text-on-primary hover:bg-primary/90 font-label-md text-label-md flex items-center gap-1.5 shadow-sm transition-all">
+<span class="material-symbols-outlined text-[16px]">search</span>
+                查询指令
+              </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 3: DATA TABLE & ROW DISPLAYS -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-md" id="cat-table">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-6 bg-primary rounded-sm"></span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">3. 警务数据表格与行内原子 (Data Table &amp; Row Displays)</h2>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant">6 标本</span>
+</div>
+<span class="font-mono text-label-sm text-secondary">48px Header / 52px Row / 56x24 StatusSwitch / ProtocolBadge / CodeSlot / Pagination</span>
+</div>
+<!-- Specimen: StandardTable -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface">StandardTable (48px 表头 / 52px 紧凑行高 / 文本不折行)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">嵌入 56px×24px 文字旋钮物理分离滑块、多色战备标签与等宽哈希槽</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary">刷新率: 10s</span>
+<button class="p-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">cached</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto rounded-lg shadow-sm bg-surface-container-lowest">
+<table class="w-full text-left border-collapse whitespace-nowrap">
+<thead>
+<tr class="h-12 bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<th class="w-12 px-4 text-center">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-0 cursor-pointer" type="checkbox"/>
+</th>
+<th class="px-4">警情ID / 呼号</th>
+<th class="px-4">涉警类型</th>
+<th class="px-4">加密通讯状态 (StatusSwitch)</th>
+<th class="px-4">网络协议信标 (ProtocolBadge)</th>
+<th class="px-4">数据摘要签名 (CodeSlot)</th>
+<th class="px-4">出勤警力</th>
+<th class="px-4 text-right">协同操作</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container font-body-md text-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="h-[52px] hover:bg-surface-container-low/60 transition-colors">
+<td class="px-4 text-center">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-0 cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 font-mono font-medium text-primary flex items-center gap-2 mt-3.5">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+                  POL-2024-8841
+                </td>
+<td class="px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">local_fire_department</span>
+                    紧急防暴呼叫
+                  </span>
+</td>
+<!-- Exact 56px * 24px StatusSwitch with separated text ON/OFF -->
+<td class="px-4">
+<div class="relative w-14 h-6 bg-primary rounded-full p-0.5 cursor-pointer flex items-center justify-between px-1.5 shadow-inner">
+<span class="text-[10px] font-mono font-bold text-on-primary select-none">ON</span>
+<span class="text-[10px] font-mono font-bold text-on-primary/30 select-none">OFF</span>
+<div class="absolute right-0.5 top-0.5 w-5 h-5 bg-surface-container-lowest rounded-full shadow-md transition-all"></div>
+</div>
+</td>
+<!-- ProtocolBadge Multi-color pills -->
+<td class="px-4">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-mono bg-primary-fixed text-on-primary-fixed font-bold">GB28181-P2P</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container-high text-secondary">TLS 1.3</span>
+</div>
+</td>
+<!-- CodeSlot Monospace Slot -->
+<td class="px-4 font-mono text-[12px]">
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface font-mono shadow-inner tracking-wider">SHA:e7b0...9f2a</span>
+</td>
+<td class="px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-6 h-6 rounded-full bg-secondary text-on-secondary text-[11px] flex items-center justify-center font-bold">04</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">特警一队 (巡逻中)</span>
+</div>
+</td>
+<td class="px-4 text-right">
+<div class="inline-flex items-center gap-2">
+<button class="font-label-sm text-label-sm text-primary hover:underline font-semibold">连线指挥</button>
+<span class="text-outline-variant">|</span>
+<button class="font-label-sm text-label-sm text-secondary hover:text-on-surface">调卷</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="h-[52px] hover:bg-surface-container-low/60 transition-colors">
+<td class="px-4 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-0 cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 font-mono font-medium text-on-surface flex items-center gap-2 mt-3.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                  POL-2024-8840
+                </td>
+<td class="px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">traffic</span>
+                    主干道事故排险
+                  </span>
+</td>
+<!-- Exact 56px * 24px StatusSwitch OFF STATE -->
+<td class="px-4">
+<div class="relative w-14 h-6 bg-surface-variant rounded-full p-0.5 cursor-pointer flex items-center justify-between px-1.5 shadow-inner">
+<span class="text-[10px] font-mono font-bold text-on-surface-variant/40 select-none">ON</span>
+<span class="text-[10px] font-mono font-bold text-on-surface-variant select-none">OFF</span>
+<div class="absolute left-0.5 top-0.5 w-5 h-5 bg-surface-container-lowest rounded-full shadow-md transition-all"></div>
+</div>
+</td>
+<!-- ProtocolBadge Multi-color pills -->
+<td class="px-4">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-mono bg-tertiary-fixed text-on-tertiary-fixed font-bold">RTMP-HD</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container-high text-secondary">H.265</span>
+</div>
+</td>
+<!-- CodeSlot -->
+<td class="px-4 font-mono text-[12px]">
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface font-mono shadow-inner tracking-wider">SHA:4c11...0e59</span>
+</td>
+<td class="px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface text-[11px] flex items-center justify-center font-bold">02</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">交警三大队 (到达现场)</span>
+</div>
+</td>
+<td class="px-4 text-right">
+<div class="inline-flex items-center gap-2">
+<button class="font-label-sm text-label-sm text-primary hover:underline font-semibold">协同指令</button>
+<span class="text-outline-variant">|</span>
+<button class="font-label-sm text-label-sm text-secondary hover:text-on-surface">调卷</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="h-[52px] hover:bg-surface-container-low/60 transition-colors">
+<td class="px-4 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-0 cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-4 font-mono font-medium text-on-surface flex items-center gap-2 mt-3.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                  POL-2024-8839
+                </td>
+<td class="px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">help_outline</span>
+                    社区求助寻回
+                  </span>
+</td>
+<!-- StatusSwitch ON STATE -->
+<td class="px-4">
+<div class="relative w-14 h-6 bg-primary rounded-full p-0.5 cursor-pointer flex items-center justify-between px-1.5 shadow-inner">
+<span class="text-[10px] font-mono font-bold text-on-primary select-none">ON</span>
+<span class="text-[10px] font-mono font-bold text-on-primary/30 select-none">OFF</span>
+<div class="absolute right-0.5 top-0.5 w-5 h-5 bg-surface-container-lowest rounded-full shadow-md transition-all"></div>
+</div>
+</td>
+<td class="px-4">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-mono bg-surface-container-highest text-on-surface-variant font-bold">SIP-VOIP</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container-high text-secondary">G.711</span>
+</div>
+</td>
+<td class="px-4 font-mono text-[12px]">
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface font-mono shadow-inner tracking-wider">SHA:a819...338c</span>
+</td>
+<td class="px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface text-[11px] flex items-center justify-center font-bold">01</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">巡警网格员 #102</span>
+</div>
+</td>
+<td class="px-4 text-right">
+<div class="inline-flex items-center gap-2">
+<button class="font-label-sm text-label-sm text-primary hover:underline font-semibold">详情</button>
+<span class="text-outline-variant">|</span>
+<button class="font-label-sm text-label-sm text-secondary hover:text-on-surface">归档</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- StandardPagination (32px Height) -->
+<div class="flex flex-wrap items-center justify-between pt-2">
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant">
+<span>共检索到 <strong class="text-on-surface font-semibold">1,280</strong> 条涉警流水</span>
+<span>·</span>
+<span>每页 10 条</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface-variant flex items-center justify-center disabled:opacity-40">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-on-primary font-mono text-label-sm font-bold flex items-center justify-center shadow-sm">1</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-mono text-label-sm flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-mono text-label-sm flex items-center justify-center">3</button>
+<span class="text-outline px-1">...</span>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-mono text-label-sm flex items-center justify-center">128</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm ml-2">
+<span>前往</span>
+<input class="w-10 h-8 text-center bg-surface-container rounded border-none font-mono text-body-sm text-on-surface focus:ring-1 focus:ring-primary" type="text" value="1"/>
+<span>页</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 4: ADVANCED SELECTORS & FORM INPUTS -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-md" id="cat-selectors">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-6 bg-primary rounded-sm"></span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">4. 复合选择器与专业表单输入 (Advanced Selectors &amp; Form Inputs)</h2>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant">5 标本</span>
+</div>
+<span class="font-mono text-label-sm text-secondary">SelectTreeLazy / VirtualCheckboxList / DateRangePicker / UploadDropZone / CoordinatePicker</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- 4.1 SelectTreeLazy Hierarchical Picker -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">SelectTreeLazy (警种树懒加载)</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-secondary font-mono">TREE</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">层级公安部门架构，动态异步请求支路警员状态。</p>
+<div class="p-3 bg-surface-container-low rounded-lg flex flex-col gap-1.5 text-body-sm font-body-sm">
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container hover:bg-surface-variant cursor-pointer">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">account_tree</span>
+<span class="font-semibold text-on-surface">市公安局直属指挥部</span>
+</div>
+<span class="font-mono text-[11px] text-secondary font-semibold">HQ</span>
+</div>
+<div class="pl-5 flex flex-col gap-1">
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-lowest shadow-sm hover:bg-surface-container cursor-pointer">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[16px] text-primary-container">shield</span>
+<span class="text-on-surface">巡特警支队 (SWAT)</span>
+</div>
+<span class="px-1.5 py-0.2 rounded bg-primary text-on-primary font-mono text-[10px]">12在勤</span>
+</div>
+<div class="pl-5 flex flex-col gap-1">
+<div class="flex items-center gap-2 p-1 text-on-surface-variant hover:text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>第一突击排 (机动待命)</span>
+</div>
+<div class="flex items-center gap-2 p-1 text-on-surface-variant hover:text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>狙击二组 (出勤现场)</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-1.5 rounded hover:bg-surface-container cursor-pointer text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">arrow_right</span>
+<span class="material-symbols-outlined text-[16px]">traffic</span>
+<span>交通管理局智慧中枢</span>
+</div>
+<span class="font-mono text-[11px] text-outline">48在线</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 4.2 VirtualCheckboxList Police Roster -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">VirtualCheckboxList (花名册勾选)</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-secondary font-mono">LIST</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">千人花名册虚拟滚动，支持快捷全选与警号速查。</p>
+<div class="p-2.5 bg-surface-container-low rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between pb-1.5 border-b border-surface-variant/40">
+<label class="flex items-center gap-2 text-label-sm font-label-sm text-on-surface cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-0" type="checkbox"/>
+                全选当前执勤分队 (24人)
+              </label>
+<span class="text-primary font-mono text-[11px]">已勾选 3 人</span>
+</div>
+<!-- Scroll simulation -->
+<div class="flex flex-col gap-1.5 max-h-36 overflow-y-auto pr-1">
+<div class="flex items-center justify-between p-1.5 bg-surface-container-lowest rounded shadow-sm">
+<div class="flex items-center gap-2">
+<input checked="" class="rounded text-primary focus:ring-0" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">张云鹏 警官</span>
+<span class="font-mono text-[11px] text-secondary">#084920</span>
+</div>
+<span class="px-1.5 py-0.2 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] rounded">电台在守</span>
+</div>
+<div class="flex items-center justify-between p-1.5 bg-surface-container-lowest rounded shadow-sm">
+<div class="flex items-center gap-2">
+<input checked="" class="rounded text-primary focus:ring-0" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">李建国 督察</span>
+<span class="font-mono text-[11px] text-secondary">#084102</span>
+</div>
+<span class="px-1.5 py-0.2 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] rounded">执法仪开机</span>
+</div>
+<div class="flex items-center justify-between p-1.5 bg-surface-container-lowest rounded shadow-sm">
+<div class="flex items-center gap-2">
+<input checked="" class="rounded text-primary focus:ring-0" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">陈思成 辅警</span>
+<span class="font-mono text-[11px] text-secondary">#FJ-9022</span>
+</div>
+<span class="px-1.5 py-0.2 bg-secondary-fixed text-on-secondary-fixed text-[10px] rounded">巡逻车驾驶</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 4.3 CoordinatePicker & UploadDropZone -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">GIS坐标与切片上传</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-secondary font-mono">GEO/FILE</span>
+</div>
+<!-- CoordinatePicker WGS84 GPS coordinate picker -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">CoordinatePicker (WGS84 现场标定)</label>
+<div class="flex items-center gap-1.5">
+<div class="relative flex-1">
+<input class="w-full h-8 px-2.5 bg-surface-container-low rounded font-mono text-[11px] text-on-surface focus:outline-none" readonly="" type="text" value="E 114°21'43.2″, N 30°30'12.8″"/>
+</div>
+<button class="h-8 px-2.5 rounded bg-primary text-on-primary font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+                点选
+              </button>
+</div>
+</div>
+<!-- UploadDropZone GIS tile package dropzone -->
+<div class="flex flex-col gap-1 mt-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">UploadDropZone (瓦片包与态势文件)</label>
+<div class="border-2 border-dashed border-outline-variant hover:border-primary rounded-lg p-3 bg-surface-container-low/50 flex flex-col items-center justify-center text-center cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-primary text-[24px]">cloud_upload</span>
+<span class="font-label-sm text-label-sm text-on-surface mt-1">点击或拖拽 GeoJSON / MBTiles</span>
+<span class="text-[10px] text-outline">单文件不超过 500MB，自动校验国密哈希</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 5: MODALS & FEEDBACK -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-md" id="cat-modals">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-6 bg-primary rounded-sm"></span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">5. 弹窗与交互反馈标本 (Modals &amp; Feedback)</h2>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant">5 标本</span>
+</div>
+<span class="font-mono text-label-sm text-secondary">FormErrorBanner / FormModal (2-Col) / ConfirmDialog / DetailDrawer / ToastNotification</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- 5.1 FormModal standard 2-column dialog preview -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">FormModal 标准双列弹窗预览</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-mono">DIALOG</span>
+</div>
+<!-- Dialog Mockup -->
+<div class="rounded-lg bg-surface-container-low p-3 shadow-md flex flex-col gap-3">
+<div class="flex items-center justify-between pb-2 border-b border-surface-variant/30">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">add_moderator</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">新建涉警联动工单</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px] cursor-pointer">close</span>
+</div>
+<!-- 2-Column form inside modal -->
+<div class="grid grid-cols-2 gap-2 text-body-sm font-body-sm">
+<div class="flex flex-col gap-1">
+<span class="text-on-surface-variant text-[11px]">接报人警号</span>
+<input class="h-7 px-2 rounded bg-surface-container-lowest text-[11px] font-mono" readonly="" type="text" value="084920 (张警官)"/>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-on-surface-variant text-[11px]">险情响应等级</span>
+<select class="h-7 px-1.5 rounded bg-surface-container-lowest text-[11px]">
+<option>二级 (常规快速介入)</option>
+<option>一级 (反恐/重特大)</option>
+</select>
+</div>
+<div class="col-span-2 flex flex-col gap-1">
+<span class="text-on-surface-variant text-[11px]">案发精确地点说明</span>
+<input class="h-7 px-2 rounded bg-surface-container-lowest text-[11px]" type="text" value="关山大道保利广场B座东侧辅道"/>
+</div>
+</div>
+<div class="flex items-center justify-end gap-2 pt-2 border-t border-surface-variant/30">
+<button class="h-7 px-3 rounded bg-surface-container text-on-surface-variant text-[11px]">取消</button>
+<button class="h-7 px-3 rounded bg-primary text-on-primary text-[11px] font-semibold">确认派单</button>
+</div>
+</div>
+</div>
+<!-- 5.2 ConfirmDialog & FormErrorBanner -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">危险操作确认与警报横幅</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-mono">DANGER</span>
+</div>
+<!-- FormErrorBanner -->
+<div class="p-2.5 rounded-lg bg-error-container text-on-error-container flex items-start gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-error mt-0.5">report</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[12px] text-error font-bold">校验阻断：当前区域处于战备封控期</span>
+<span class="font-body-sm text-[11px]">请确认具备市局特批授权码，否则无法进行警械申请。</span>
+</div>
+</div>
+<!-- ConfirmDialog Danger Preview -->
+<div class="rounded-lg bg-surface-container-low p-3 shadow-md flex flex-col gap-2 mt-1">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">确认解除 3号网格警戒线？</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant">
+              此操作将同步通知 18 名执勤警力撤出包围圈并上传日志至纪律委员会，不可逆。
+            </p>
+<div class="flex items-center justify-end gap-2 pt-2">
+<button class="h-7 px-3 rounded bg-surface-container text-on-surface-variant text-[11px]">放弃</button>
+<button class="h-7 px-3 rounded bg-error text-on-error text-[11px] font-semibold shadow-sm">强制解除警戒</button>
+</div>
+</div>
+</div>
+<!-- 5.3 DetailDrawer & ToastNotification -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">DetailDrawer &amp; ToastNotification</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-mono">DRAWER/TOAST</span>
+</div>
+<!-- Toast Pill Specimen (1.6s auto dismiss) -->
+<div class="self-center flex items-center gap-2 px-4 py-2 bg-inverse-surface text-inverse-on-surface rounded-full shadow-lg">
+<span class="material-symbols-outlined text-tertiary-fixed text-[18px]">task_alt</span>
+<span class="font-label-sm text-label-sm font-medium">GIS 网格切片更新指令已广播至 14 巡逻终端 (1.6s)</span>
+</div>
+<!-- DetailDrawer Mockup -->
+<div class="rounded-lg bg-surface-container-low p-3 flex flex-col gap-2 mt-2 shadow-inner">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">出警抽检审计抽屉 (Audit Drawer)</span>
+<span class="font-mono text-[10px] text-outline">width: 480px</span>
+</div>
+<div class="space-y-1 text-[11px] text-on-surface-variant">
+<div class="flex justify-between"><span>抽检审计人:</span> <strong class="text-on-surface">督察大队 #0421</strong></div>
+<div class="flex justify-between"><span>执法记录仪录像:</span> <strong class="text-primary underline">REC_20241024_0911.mp4</strong></div>
+<div class="flex justify-between"><span>AI 话术合规得分:</span> <strong class="text-tertiary font-bold">98.5 (合格)</strong></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 6: METRIC & SECURITY MONITORING CARDS -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-md" id="cat-metrics">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-6 bg-primary rounded-sm"></span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">6. 安全监测与指标卡片 (Metric &amp; Security Monitoring Cards)</h2>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant">4 标本</span>
+</div>
+<span class="font-mono text-label-sm text-secondary">SecurityChannelCard SM4 / FlowLimitCard / AuditLogCard / MetricHeroCard</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- 6.1 SecurityChannelCard (SM4 Cipher) -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-mono">SecurityChannelCard</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed text-[10px] font-mono font-bold">SM4 国密</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">key_vertical</span>
+</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface">硬件加密通道</div>
+<div class="font-mono text-[11px] text-tertiary flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> 双向证书握手完毕
+                </div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-[11px]">
+<span class="text-on-surface-variant font-mono">密钥ID: 0x9B41...E4</span>
+<button class="text-primary hover:underline font-semibold">轮转密钥</button>
+</div>
+</div>
+<!-- 6.2 FlowLimitCard (Token Bucket QPS Meter) -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-mono">FlowLimitCard</span>
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-mono font-bold">QPS 限流桶</span>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="font-display-lg text-display-lg font-bold text-on-surface font-mono">1,420</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">上限 3,000 req/s</span>
+</div>
+<!-- Visual Progress Bar -->
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 47%;"></div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-[11px]">
+<span class="text-on-surface-variant">突发令牌剩余: 84%</span>
+<span class="text-tertiary font-medium">水位健康</span>
+</div>
+</div>
+<!-- 6.3 AuditLogCard (24h Circuit Breaker Counter) -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-mono">AuditLogCard</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary text-[10px] font-mono font-bold">24H 熔断器</span>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="font-display-lg text-display-lg font-bold text-on-surface font-mono">0</span>
+<span class="font-label-sm text-label-sm text-tertiary flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> 零拦截熔断
+              </span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant">所有警务协同微服务均处于可用负载范围内。</p>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-[11px]">
+<span class="text-on-surface-variant">近7日审计总数: 41,209</span>
+<button class="text-primary hover:underline font-semibold">查看日志</button>
+</div>
+</div>
+<!-- 6.4 MetricHeroCard (Duty Stats) -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-mono">MetricHeroCard</span>
+<span class="px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed text-[10px] font-mono font-bold">今日战力</span>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="font-display-lg text-display-lg font-bold text-primary font-mono">98.6%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">处警出动率</span>
+</div>
+<div class="flex items-center gap-2 text-[12px] text-on-surface">
+<span class="material-symbols-outlined text-tertiary text-[16px]">trending_up</span>
+<span>平均接警到场响应 <strong>3.2 分钟</strong></span>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-[11px]">
+<span class="text-on-surface-variant">网格覆盖率: 99.1%</span>
+<span class="text-primary font-mono font-semibold">DISTRICT-1</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 7: LAYOUT & INDICATORS -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-md" id="cat-layout">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-6 bg-primary rounded-sm"></span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">7. 架构容器与状态指示 (Layout &amp; Indicators)</h2>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant">4 标本</span>
+</div>
+<span class="font-mono text-label-sm text-secondary">PageCard / SplitLayout (Tree+Table) / StatGrid / StatusIndicatorLight</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- 7.1 SplitLayout Container (Tree + Table) -->
+<div class="col-span-2 p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface">SplitLayout (左树右表一体化响应容器)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">警务组织结构与设备清单联动典型范式</p>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant">240px + flex-1</span>
+</div>
+<div class="flex flex-col md:flex-row gap-gutter p-space-md bg-surface-container-low rounded-lg">
+<!-- Left Tree Mini -->
+<div class="w-full md:w-56 bg-surface-container-lowest p-3 rounded-lg shadow-sm flex flex-col gap-2">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">警用资产树</span>
+<div class="space-y-1 font-body-sm text-body-sm">
+<div class="p-1.5 bg-primary-fixed/40 rounded text-primary font-semibold flex items-center justify-between">
+<span>对讲电台终端</span>
+<span class="font-mono text-[11px]">84</span>
+</div>
+<div class="p-1.5 hover:bg-surface-container rounded text-on-surface-variant flex items-center justify-between">
+<span>无人机自动巡查机巢</span>
+<span class="font-mono text-[11px]">12</span>
+</div>
+<div class="p-1.5 hover:bg-surface-container rounded text-on-surface-variant flex items-center justify-between">
+<span>智能测速与电子卡口</span>
+<span class="font-mono text-[11px]">230</span>
+</div>
+</div>
+</div>
+<!-- Right Content Mini -->
+<div class="flex-1 bg-surface-container-lowest p-3 rounded-lg shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">电台在线信道列表 (PDT-350M)</span>
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-mono font-bold">全网互通</span>
+</div>
+<div class="space-y-1.5 text-[12px] font-mono">
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded">
+<span>CH-01: 主城快速反应</span>
+<span class="text-tertiary">信号 -68dBm (优)</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded">
+<span>CH-02: 刑事侦查加密</span>
+<span class="text-primary">SM4 动态跳频</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 7.2 StatusIndicatorLight Palette & PageCard Specimen -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">StatusIndicatorLight</span>
+<span class="font-mono text-label-sm text-secondary">状态指示灯标本</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+              提供严苛色温定义的战备光标：在线、警觉预警、严重警情与脱网离线。
+            </p>
+<div class="space-y-3 mt-4">
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-tertiary"></span>
+</span>
+<span class="font-label-sm text-label-sm text-on-surface">正常执勤 (NORMAL)</span>
+</div>
+<span class="font-mono text-[11px] text-tertiary">#286C00</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-error"></span>
+</span>
+<span class="font-label-sm text-label-sm text-on-surface">严重警情呼救 (CRITICAL)</span>
+</div>
+<span class="font-mono text-[11px] text-error">#BA1A1A</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface">网络指令交互 (ACTIVE)</span>
+</div>
+<span class="font-mono text-[11px] text-primary">#0060A9</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-outline"></span>
+<span class="font-label-sm text-label-sm text-on-surface">终端离线挂起 (OFFLINE)</span>
+</div>
+<span class="font-mono text-[11px] text-outline">#707784</span>
+</div>
+</div>
+</div>
+<div class="text-[11px] text-outline-variant font-mono">遵循 GB/T 公共安全视觉颜色语义规范</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 8: VISUALIZATIONS & DOMAIN DISPLAYS -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-md" id="cat-domain">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-6 bg-primary rounded-sm"></span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">8. 警务专精业务与可视化展现 (Visualizations &amp; Domain Displays)</h2>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant">4 标本</span>
+</div>
+<span class="font-mono text-label-sm text-secondary">DutyCalendarGrid / GISMapCanvas / AgentModelTag / DataFlowPath</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- 8.1 DutyCalendarGrid Shift Calendar -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">DutyCalendarGrid 排班</span>
+<span class="font-mono text-[11px] text-secondary">本周轮值</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant">多班组排班网格，支持跨时段值班警力可视化对照。</p>
+<div class="grid grid-cols-5 gap-1 text-center font-mono text-[11px] mt-1">
+<div class="bg-surface-container p-1 rounded font-bold text-on-surface">周一</div>
+<div class="bg-surface-container p-1 rounded font-bold text-on-surface">周二</div>
+<div class="bg-surface-container p-1 rounded font-bold text-on-surface">周三</div>
+<div class="bg-surface-container p-1 rounded font-bold text-on-surface">周四</div>
+<div class="bg-surface-container p-1 rounded font-bold text-on-surface">周五</div>
+<div class="bg-primary-fixed text-on-primary-fixed p-1.5 rounded font-bold">白班·A</div>
+<div class="bg-primary-fixed text-on-primary-fixed p-1.5 rounded font-bold">白班·B</div>
+<div class="bg-primary-fixed text-on-primary-fixed p-1.5 rounded font-bold">白班·A</div>
+<div class="bg-primary-fixed text-on-primary-fixed p-1.5 rounded font-bold">白班·C</div>
+<div class="bg-primary-fixed text-on-primary-fixed p-1.5 rounded font-bold">白班·A</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed p-1.5 rounded">夜巡·C</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed p-1.5 rounded">夜巡·A</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed p-1.5 rounded">夜巡·B</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed p-1.5 rounded">夜巡·A</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed p-1.5 rounded">夜巡·D</div>
+</div>
+</div>
+<!-- 8.2 GISMapCanvas Point Calibration Preview -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">GISMapCanvas 网格标定</span>
+<span class="font-mono text-[11px] text-tertiary font-bold">LIVE GPS</span>
+</div>
+<!-- GIS Map Canvas Container with data-location -->
+<div class="w-full h-32 bg-cover bg-center rounded-lg relative overflow-hidden flex items-center justify-center shadow-inner" data-location="Wuhan East Lake High-Tech Development Zone, China" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA9kR78gWwu1nExq_qYd5apaoEV3Sohmod6rrnh2xyDgnqKdH3k-nTdpUQU6EMdit1LZsRmT6QwaCh9-zRGWXFWwcJLv2kZPho2LInE_zm7gkPCsQAiQWQWhKEk1n_8XWVXoQ0ngDn2OlDSq2k_R0lFRxeCEKaXyxSIGxd9GkRo8FZGc_i41EKU4kfMYh7X-FRsTrH1f7vAdCVoPfZLrXRBM32dbLQsb1Q-D0XwLrokEdDEjpI6FeCIxg')">
+<div class="absolute inset-0 bg-inverse-surface/40 backdrop-blur-[1px]"></div>
+<div class="relative z-10 flex flex-col items-center">
+<span class="material-symbols-outlined text-error text-[28px] animate-bounce">location_pin</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface font-mono text-[10px] font-bold shadow-md">
+                114.39E, 30.48N (网格-03)
+              </span>
+</div>
+</div>
+<span class="text-[11px] text-on-surface-variant font-mono">地图底层基于天地图·公安电子地图</span>
+</div>
+<!-- 8.3 AgentModelTag (AI Multi-Model Badges) -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">AgentModelTag (AI赋能)</span>
+<span class="font-mono text-[11px] text-secondary">警务大模型</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant">标识负责文本提取、视频人脸分析与态势推演的 AI 引擎。</p>
+<div class="flex flex-col gap-2 mt-1">
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-low">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[16px]">neurology</span>
+<span class="font-label-sm text-label-sm text-on-surface">智能警情摘要推理</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-primary-fixed text-on-primary-fixed text-[10px] font-mono font-bold">DeepSeek-R1-Gov</span>
+</div>
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-low">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary text-[16px]">face_retouching_natural</span>
+<span class="font-label-sm text-label-sm text-on-surface">天网人像高精度比对</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-mono font-bold">Vision-V4-CV</span>
+</div>
+</div>
+</div>
+<!-- 8.4 DataFlowPath Node Route -->
+<div class="p-space-lg bg-surface-container-lowest rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">DataFlowPath 链路流向</span>
+<span class="font-mono text-[11px] text-secondary">DAG 拓扑</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant">事件触发到警令下达的全链路节点流水。</p>
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg mt-2">
+<div class="flex flex-col items-center">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center text-[12px] font-bold">110</span>
+<span class="text-[10px] text-on-surface-variant mt-1">接警</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[16px]">arrow_forward</span>
+<div class="flex flex-col items-center">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center text-[12px] font-bold">CAD</span>
+<span class="text-[10px] text-on-surface-variant mt-1">派单</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[16px]">arrow_forward</span>
+<div class="flex flex-col items-center">
+<span class="w-7 h-7 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center text-[12px] font-bold">CAR</span>
+<span class="text-[10px] text-on-surface-variant mt-1">处警车</span>
+</div>
+</div>
+<span class="text-[11px] text-tertiary text-center font-mono">全链路指令延迟 &lt; 850ms</span>
+</div>
+</div>
+</section>
+<!-- Bottom Footer Metadata Bar -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest flex flex-wrap items-center justify-between gap-space-md text-on-surface-variant font-body-sm text-body-sm shadow-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+<span><strong>LinkX Admin 警务前端规范手册</strong> · 已全部通过无障碍与高对比度审定</span>
+</div>
+<div class="flex items-center gap-space-md font-mono text-label-sm">
+<span>Tailwind v3.4 + Vue 3.4 SFC</span>
+<span class="text-outline-variant">|</span>
+<span>8 Categories / 36 Production Specs</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple interactive demonstration hooks for specimens
+  document.addEventListener('DOMContentLoaded', () => {
+    // Interactive StatusSwitches toggle
+    const switches = document.querySelectorAll('.rounded-full.p-0.5.cursor-pointer');
+    switches.forEach(sw => {
+      sw.addEventListener('click', () => {
+        const isPrimary = sw.classList.contains('bg-primary');
+        const knob = sw.querySelector('div');
+        if (isPrimary) {
+          sw.classList.remove('bg-primary');
+          sw.classList.add('bg-surface-variant');
+          knob.classList.remove('right-0.5');
+          knob.classList.add('left-0.5');
+        } else {
+          sw.classList.remove('bg-surface-variant');
+          sw.classList.add('bg-primary');
+          knob.classList.remove('left-0.5');
+          knob.classList.add('right-0.5');
+        }
+      });
+    });
+  });
+</script></main></div></body></html>

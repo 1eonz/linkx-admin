@@ -1,0 +1,42 @@
+/**
+ * LxConfirm 样式 — 确认提示框（stitch ConfirmDialog 规格）
+ * 宽 max-w-lg（512px）/ 圆角 8px / 三段式 / 按钮右对齐
+ */
+.lx-confirm {
+  --el-messagebox-width: 512px;
+  --el-messagebox-border-radius: 8px;
+  padding: 0;
+}
+
+/* 标题：14px 加粗；危险模式深红（对比度补偿 token） */
+.lx-confirm .el-message-box__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--lx-text-primary);
+  word-break: break-all;
+}
+
+.lx-confirm--danger .el-message-box__title {
+  color: var(--lx-color-error-strong);
+}
+
+/* 正文：12px 常规说明（设计稿明确后果写法） */
+.lx-confirm .el-message-box__message {
+  font-size: 12px;
+  color: var(--lx-text-regular);
+  line-height: 1.6;
+}
+
+/* 图标 20px（设计稿） */
+.lx-confirm .el-message-box__status {
+  font-size: 20px;
+}
+
+/* 危险确认主按钮：红底白字加粗（EP danger 按钮走 error 令牌） */
+.lx-confirm .lx-confirm__btn-danger {
+  --el-button-bg-color: var(--lx-color-error);
+  --el-button-border-color: var(--lx-color-error);
+  --el-button-hover-bg-color: var(--lx-color-error-strong);
+  --el-button-hover-border-color: var(--lx-color-error-strong);
+  font-weight: 600;
+}

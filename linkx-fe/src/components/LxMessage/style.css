@@ -1,0 +1,27 @@
+/**
+ * LxMessage 样式 — 深色反色胶囊（stitch ToastNotification 规格）
+ * px-4 py-2 / 圆角 12px（设计系统 full 档）/ 无边框 / shadow-lg
+ * 全局类（函数式挂载，非 scoped）
+ */
+.lx-message {
+  --el-message-bg-color: var(--lx-bg-inverse);
+  --el-message-text-color: var(--lx-text-inverse);
+  --el-message-border-color: transparent;
+  border-radius: 12px;
+  padding: 10px 16px;
+  box-shadow: var(--lx-shadow-modal);
+  backdrop-filter: blur(8px);
+  min-width: auto;
+  font-weight: 500;
+}
+
+/* 图标保持类型色（深底上彩色图标即状态语义） */
+.lx-message .el-message__badge,
+.lx-message .el-message-icon {
+  margin-right: 8px;
+}
+
+/* HUD 深色主题下胶囊略微加边，避免融进深底 */
+.lx-theme-hud .lx-message {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}

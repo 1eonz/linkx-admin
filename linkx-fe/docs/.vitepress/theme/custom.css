@@ -1,0 +1,39 @@
+/* 文档站：demo 区容器 */
+.vp-doc {
+  --vp-code-font-size: 13px;
+}
+
+.vp-doc .demo-box {
+  padding: 16px;
+  margin: 8px 0 16px;
+  border: 1px solid var(--lx-border);
+  border-radius: 4px;
+  background: var(--lx-bg-card);
+}
+
+/* 文档站：demo 内触发按钮（统一视觉，非组件库产物） */
+.vp-doc .demo-btn {
+  height: 32px;
+  padding: 0 16px;
+  border: 1px solid var(--lx-border);
+  border-radius: 4px;
+  background: var(--lx-bg-card);
+  color: var(--lx-text-regular);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.vp-doc .demo-btn:hover {
+  border-color: var(--lx-color-primary);
+  color: var(--lx-color-primary);
+}
+
+.vp-doc .demo-btn--danger {
+  border-color: var(--lx-color-error);
+  color: var(--lx-color-error);
+}
+
+.vp-doc .demo-btn--danger:hover {
+  background: var(--lx-color-error-light);
+}

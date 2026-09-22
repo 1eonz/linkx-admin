@@ -1,0 +1,1027 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>警务业务协同平台 - 警务资源名册</title>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif; }
+      body { overscroll-behavior: none; background-color: #f0f2f5; }
+    }
+    /* Element Plus 精致滚动条 */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: #c0c4cc; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #909399; }
+    ::-webkit-scrollbar-track { background: transparent; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#409eff",
+            "primary-hover": "#66b1ff",
+            "primary-active": "#3a8ee6",
+            "primary-light": "#ecf5ff",
+            "el-sidebar": "#304156",
+            "el-sidebar-sub": "#1f2d3d",
+            "el-sidebar-hover": "#263445",
+            "el-text": "#303133",
+            "el-regular": "#606266",
+            "el-secondary": "#909399",
+            "el-border": "#dcdfe6",
+            "el-border-light": "#e4e7ed",
+            "el-bg": "#f0f2f5",
+            "el-card": "#ffffff",
+            "el-success": "#67c23a",
+            "el-warning": "#e6a23c",
+            "el-danger": "#f56c6c",
+            "el-info": "#909399"
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-el-bg text-el-text text-[13px] antialiased">
+<div class="flex min-h-screen">
+<!-- 侧边栏：标准 Element Plus 管理后台深色风格 -->
+<aside class="fixed left-0 top-0 bottom-0 w-64 bg-el-sidebar z-50 flex flex-col shadow-lg select-none text-[#bfcbd9]">
+<!-- 系统品牌Logo区 -->
+<div class="h-14 flex items-center px-4 bg-[#2b3a4d] gap-3 border-b border-[#222e3c] shrink-0">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white shadow">
+<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.67-3.13 9.07-7 10.18-3.87-1.11-7-5.51-7-10.18V6.3l7-3.12zM12 6a4 4 0 100 8 4 4 0 000-8zm0 2a2 2 0 110 4 2 2 0 010-4zm-5 9c0-1.66 3.34-2.5 5-2.5s5 .84 5 2.5v1H7v-1z"></path>
+</svg>
+</div>
+<span class="font-bold text-[16px] text-white tracking-wide truncate whitespace-nowrap">警务业务协同平台</span>
+</div>
+<!-- 侧边菜单导航 -->
+<nav class="flex-1 py-2 overflow-y-auto font-medium text-[14px]">
+<!-- 综合态势工作台 -->
+<a class="flex items-center px-4 py-3 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors gap-3 whitespace-nowrap" href="#">
+<svg class="w-[18px] h-[18px] fill-current shrink-0" viewBox="0 0 24 24">
+<path d="M12 3a9 9 0 00-9 9h3a6 6 0 0112 0h3a9 9 0 00-9-9zm-1 5v4.27l3.7 2.13.75-1.3L12.5 11.5V8h-1.5zM12 14a2 2 0 100 4 2 2 0 000-4z"></path>
+</svg>
+<span>综合态势工作台</span>
+</a>
+<!-- 协同岗管理 -->
+<div class="flex flex-col">
+<div class="flex items-center justify-between px-4 py-3 text-[#bfcbd9] hover:bg-el-sidebar-hover transition-colors cursor-pointer whitespace-nowrap">
+<div class="flex items-center gap-3">
+<svg class="w-[18px] h-[18px] fill-current shrink-0" viewBox="0 0 24 24">
+<path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path>
+</svg>
+<span>协同岗管理</span>
+</div>
+<svg class="w-4 h-4 fill-current opacity-70" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
+</div>
+<div class="bg-el-sidebar-sub flex flex-col text-[13px]">
+<a class="flex items-center pl-11 pr-4 py-2.5 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors whitespace-nowrap" href="#">协同岗设置</a>
+<a class="flex items-center pl-11 pr-4 py-2.5 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors whitespace-nowrap" href="#">上下岗排班监控</a>
+</div>
+</div>
+<!-- 权限与人员中心 -->
+<div class="flex flex-col">
+<div class="flex items-center justify-between px-4 py-3 text-[#bfcbd9] hover:bg-el-sidebar-hover transition-colors cursor-pointer whitespace-nowrap">
+<div class="flex items-center gap-3">
+<svg class="w-[18px] h-[18px] fill-current shrink-0" viewBox="0 0 24 24">
+<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path>
+</svg>
+<span>权限与人员中心</span>
+</div>
+<svg class="w-4 h-4 fill-current opacity-70" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
+</div>
+<div class="bg-el-sidebar-sub flex flex-col text-[13px]">
+<a class="flex items-center pl-11 pr-4 py-2.5 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors whitespace-nowrap" href="#">组织与人员管理</a>
+<a class="flex items-center pl-11 pr-4 py-2.5 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors whitespace-nowrap" href="#">角色权限矩阵</a>
+<a class="flex items-center pl-11 pr-4 py-2.5 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors whitespace-nowrap" href="#">协同数据授权</a>
+</div>
+</div>
+<!-- 警务资源管理 (展开且选中警员名册) -->
+<div class="flex flex-col">
+<div class="flex items-center justify-between px-4 py-3 text-white bg-el-sidebar-hover cursor-pointer whitespace-nowrap">
+<div class="flex items-center gap-3">
+<svg class="w-[18px] h-[18px] fill-current text-primary shrink-0" viewBox="0 0 24 24">
+<path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"></path>
+</svg>
+<span class="text-white font-medium">警务资源管理</span>
+</div>
+<svg class="w-4 h-4 fill-current text-white transform rotate-180" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
+</div>
+<div class="bg-el-sidebar-sub flex flex-col text-[13px]">
+<a class="flex items-center pl-11 pr-4 py-2.5 text-primary bg-[#263445] font-semibold border-l-4 border-primary whitespace-nowrap" href="#">警员名册</a>
+<a class="flex items-center pl-11 pr-4 py-2.5 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors whitespace-nowrap" href="#">车辆装备</a>
+<a class="flex items-center pl-11 pr-4 py-2.5 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors whitespace-nowrap" href="#">监控与边缘网关</a>
+</div>
+</div>
+<!-- 其它模块导航 -->
+<a class="flex items-center px-4 py-3 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors gap-3 whitespace-nowrap" href="#">
+<svg class="w-[18px] h-[18px] fill-current shrink-0" viewBox="0 0 24 24">
+<path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 002 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"></path>
+</svg>
+<span>勤务排班管理</span>
+</a>
+<a class="flex items-center px-4 py-3 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors gap-3 whitespace-nowrap" href="#">
+<svg class="w-[18px] h-[18px] fill-current shrink-0" viewBox="0 0 24 24">
+<path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path>
+</svg>
+<span>预警与群组协同</span>
+</a>
+<a class="flex items-center px-4 py-3 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors gap-3 whitespace-nowrap" href="#">
+<svg class="w-[18px] h-[18px] fill-current shrink-0" viewBox="0 0 24 24">
+<path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-1.41-1.41L14.17 13H8v-2h6.17l-3.58-3.59L12 6l5 5v2z"></path>
+</svg>
+<span>三方集成与网关</span>
+</a>
+<a class="flex items-center px-4 py-3 text-[#bfcbd9] hover:bg-el-sidebar-hover hover:text-white transition-colors gap-3 whitespace-nowrap" href="#">
+<svg class="w-[18px] h-[18px] fill-current shrink-0" viewBox="0 0 24 24">
+<path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.488.488 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path>
+</svg>
+<span>系统与License配置</span>
+</a>
+</nav>
+<!-- 底部状态节点 -->
+<div class="px-4 py-3 bg-[#1f2d3d] border-t border-[#222e3c] flex items-center justify-between text-xs text-[#8a99a8] shrink-0">
+<span class="font-mono whitespace-nowrap">Node: AP-SEC-01</span>
+<span class="inline-flex items-center gap-1.5 text-el-success whitespace-nowrap">
+<span class="w-2 h-2 rounded-full bg-el-success animate-ping"></span>
+<span>同步正常</span>
+</span>
+</div>
+</aside>
+<!-- 主体工作区 -->
+<div class="pl-64 flex flex-col min-w-0 flex-1 min-h-screen">
+<!-- 顶部固定Header -->
+<header class="fixed top-0 left-64 right-0 z-40 bg-white border-b border-el-border-light shadow-xs">
+<!-- 上行操作与全局状态 -->
+<div class="h-14 px-5 flex items-center justify-between">
+<!-- 左侧折叠与面包屑 -->
+<div class="flex items-center gap-4">
+<button class="text-el-regular hover:text-primary transition-colors p-1" title="折叠导航">
+<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+</button>
+<nav class="flex items-center gap-2 text-[13px] whitespace-nowrap">
+<span class="text-el-secondary hover:text-primary cursor-pointer">首页</span>
+<span class="text-el-secondary">/</span>
+<span class="text-el-secondary">协同岗管理</span>
+<span class="text-el-secondary">/</span>
+<span class="text-el-text font-semibold">警务资源名册</span>
+</nav>
+</div>
+<!-- 右侧搜索、环境徽标、用户头像与工具 -->
+<div class="flex items-center gap-4">
+<!-- 全局搜索 -->
+<div class="relative flex items-center">
+<span class="absolute left-2.5 text-el-secondary pointer-events-none">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+</span>
+<input class="h-8 pl-8 pr-3 w-56 rounded border border-el-border bg-[#fcfdfe] text-[12px] text-el-text placeholder:text-el-secondary focus:border-primary focus:bg-white focus:outline-none transition-colors" placeholder="搜索协同编号、警号或事件..." type="text">
+</div>
+<!-- 在线状态徽章 -->
+<div class="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#f0f9eb] border border-[#e1f3d8] text-el-success text-xs whitespace-nowrap font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-el-success"></span>
+<span>协同专网在线 · License 正常</span>
+</div>
+<!-- 通知铃铛 -->
+<div class="relative flex items-center cursor-pointer text-el-regular hover:text-primary p-1">
+<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></svg>
+<span class="absolute -top-0.5 -right-1 h-4 min-w-[16px] px-1 rounded-full bg-el-danger text-white text-[10px] flex items-center justify-center font-bold">4</span>
+</div>
+<!-- 全屏 -->
+<button class="text-el-regular hover:text-primary p-1" title="全屏切换">
+<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"></path></svg>
+</button>
+<!-- 语言 -->
+<button class="text-el-regular hover:text-primary text-[12px] font-medium px-1">中 / EN</button>
+<!-- 用户名与头像 (使用 requested DataStore 头像) -->
+<div class="flex items-center gap-2 cursor-pointer pl-3 border-l border-el-border-light">
+<img alt="张指挥官头像" class="w-8 h-8 rounded-full object-cover border border-el-border" src="https://lh3.googleusercontent.com/aida/AEtjO1XXnZcUd9ilLsKHYhlhcCZLExzP78FGuF8sH46L-1vKS4XlfEl9gux5xj3ZEwo3pP5NcxfGGOgsQIkt5Viypxb-w-mA3eySmqNLsAOiY9mEskSBFGUrB6KO06MDlhFJeEd8wwSnYE5BPAyTGZb4CsD56rbrpBvC8O6x_vaY-po7N7LlMwWuI3Jayf6TAnkmgUg8puXlmHofl1LTrhMlrD3Iug-i8qH3fYDNwE7K1G6U8_uJpHmQl0OJvXEg">
+<div class="flex items-center gap-1">
+<span class="text-[13px] font-semibold text-el-text whitespace-nowrap">张指挥官 (管理员)</span>
+<svg class="w-4 h-4 text-el-secondary fill-current" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
+</div>
+</div>
+<!-- 退出 -->
+<button class="text-el-regular hover:text-el-danger transition-colors p-1" title="退出系统">
+<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42A6.92 6.92 0 0119 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.58 1.4-4.83 3.59-6.01L7.17 4.57A8.962 8.962 0 003 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"></path></svg>
+</button>
+</div>
+</div>
+<!-- 下行：Element Plus 经典风格多标签栏 (TagsView) -->
+<div class="h-9 bg-[#f4f5f8] border-t border-el-border-light px-4 flex items-center gap-1.5 overflow-x-auto select-none">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-el-border text-primary text-xs font-medium rounded-sm shadow-xs whitespace-nowrap">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>综合态势工作台</span>
+<svg class="w-3 h-3 text-el-secondary hover:text-el-danger cursor-pointer fill-current ml-1" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#eaedf1] border border-transparent text-el-regular hover:bg-white hover:text-el-text text-xs rounded-sm transition-colors cursor-pointer whitespace-nowrap">
+<span>协同岗设置</span>
+<svg class="w-3 h-3 text-el-secondary hover:text-el-danger cursor-pointer fill-current ml-1" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#eaedf1] border border-transparent text-el-regular hover:bg-white hover:text-el-text text-xs rounded-sm transition-colors cursor-pointer whitespace-nowrap">
+<span>组织与人员管理</span>
+<svg class="w-3 h-3 text-el-secondary hover:text-el-danger cursor-pointer fill-current ml-1" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-el-border text-primary text-xs font-semibold rounded-sm shadow-xs whitespace-nowrap">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>警员名册 (资源管理)</span>
+<svg class="w-3 h-3 text-el-secondary hover:text-el-danger cursor-pointer fill-current ml-1" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</div>
+</div>
+</header>
+<!-- 主体容器 -->
+<main class="relative pt-[92px] pb-10 px-5 flex-1 w-full space-y-4">
+<!-- 卡片 1: 顶部分类筛选 Pill 与 核心感知监控条 -->
+<div class="bg-white rounded border border-el-border-light shadow-xs p-4 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+<!-- 分类选择器 -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="h-8 px-3.5 rounded bg-primary text-white text-[13px] font-medium inline-flex items-center gap-1.5 shadow-xs whitespace-nowrap">
+<span>全部警务资源</span>
+<span class="px-1.5 py-0.2 bg-white/25 rounded-full text-xs font-mono">3,420</span>
+</button>
+<button class="h-8 px-3.5 rounded bg-[#f4f4f5] hover:bg-[#ebedf0] text-el-regular text-[13px] font-medium inline-flex items-center gap-1.5 transition-colors whitespace-nowrap">
+<span>在编警员</span>
+<span class="px-1.5 py-0.2 bg-[#e4e7ed] text-el-text rounded-full text-xs font-mono">1,840</span>
+</button>
+<button class="h-8 px-3.5 rounded bg-[#f4f4f5] hover:bg-[#ebedf0] text-el-regular text-[13px] font-medium inline-flex items-center gap-1.5 transition-colors whitespace-nowrap">
+<span>辅警名册</span>
+<span class="px-1.5 py-0.2 bg-[#e4e7ed] text-el-text rounded-full text-xs font-mono">580</span>
+</button>
+<button class="h-8 px-3.5 rounded bg-[#f4f4f5] hover:bg-[#ebedf0] text-el-regular text-[13px] font-medium inline-flex items-center gap-1.5 transition-colors whitespace-nowrap">
+<span>执法车辆</span>
+<span class="px-1.5 py-0.2 bg-[#e4e7ed] text-el-text rounded-full text-xs font-mono">320</span>
+</button>
+<button class="h-8 px-3.5 rounded bg-[#f4f4f5] hover:bg-[#ebedf0] text-el-regular text-[13px] font-medium inline-flex items-center gap-1.5 transition-colors whitespace-nowrap">
+<span>布控摄像机与网关</span>
+<span class="px-1.5 py-0.2 bg-[#e4e7ed] text-el-text rounded-full text-xs font-mono">680</span>
+</button>
+</div>
+<!-- 右侧监测状态标签 -->
+<div class="flex items-center gap-3 shrink-0 flex-wrap">
+<div class="flex items-center gap-2 bg-[#f0f9eb] border border-[#e1f3d8] px-3 py-1.5 rounded whitespace-nowrap">
+<span class="w-2 h-2 rounded-full bg-el-success animate-pulse"></span>
+<span class="text-el-regular text-xs">实时在线率:</span>
+<span class="font-bold text-el-success text-[13px] font-mono">96.8%</span>
+</div>
+<div class="flex items-center gap-2 bg-[#ecf5ff] border border-[#d9ecff] px-3 py-1.5 rounded whitespace-nowrap">
+<svg class="w-4 h-4 fill-current text-primary" viewBox="0 0 24 24"><path d="M12 11c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 2c0-3.31-2.69-6-6-6s-6 2.69-6 6c0 2.22 1.21 4.15 3 5.19l1-1.73c-1.19-.7-2-1.97-2-3.46 0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.49-.81 2.76-2 3.46l1 1.73c1.79-1.04 3-2.97 3-5.19zM4.93 4.93A11.93 11.93 0 000 13c0 4.28 2.26 8.04 5.64 10.15l1.01-1.73C3.99 19.68 2 16.58 2 13c0-2.76 1.12-5.26 2.93-7.07L4.93 4.93zm14.14 0l-1.01 1.73C19.88 8.48 21 10.62 21 13c0 3.58-1.99 6.68-4.65 8.42l1.01 1.73C20.74 21.04 23 17.28 23 13c0-3.32-1.34-6.32-3.93-8.07z"></path></svg>
+<span class="text-el-regular text-xs">感知基站:</span>
+<span class="font-bold text-primary text-[13px]">124 节点</span>
+</div>
+<div class="flex items-center gap-1.5 bg-[#fef0f0] border border-[#fde2e2] px-3 py-1.5 rounded text-el-danger text-xs font-medium whitespace-nowrap">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"></path></svg>
+<span>离线告警: 14</span>
+</div>
+</div>
+</div>
+<!-- 卡片 2: Element Plus 标准筛选表单 -->
+<div class="bg-white rounded border border-el-border-light shadow-xs p-4">
+<!-- 第一行核心筛选项 -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div>
+<label class="block text-xs text-el-regular mb-1.5 whitespace-nowrap font-medium">标识检索 / 编号关键字</label>
+<div class="relative flex items-center">
+<span class="absolute left-2.5 text-el-secondary pointer-events-none">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+</span>
+<input class="h-8 pl-8 pr-3 w-full rounded border border-el-border text-xs text-el-text placeholder:text-el-secondary focus:border-primary focus:outline-none" placeholder="姓名 / 警号 / 车牌 / 设备ID" type="text" value="0034">
+</div>
+</div>
+<div>
+<label class="block text-xs text-el-regular mb-1.5 whitespace-nowrap font-medium">所属警种大类</label>
+<div class="relative flex items-center">
+<select class="h-8 pl-3 pr-8 w-full rounded border border-el-border text-xs text-el-text bg-white appearance-none focus:border-primary focus:outline-none cursor-pointer">
+<option value="">全部警种 (治安/刑侦/交管/特警...)</option>
+<option value="zhian">治安管理支队</option>
+<option value="xingzhen">刑事侦查支队</option>
+<option value="jiaoguan">交通管理支队</option>
+<option selected="" value="tejing">特巡警支队</option>
+<option value="jindu">禁毒缉毒支队</option>
+</select>
+<svg class="w-4 h-4 absolute right-2 text-el-secondary pointer-events-none fill-current" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
+</div>
+</div>
+<div>
+<label class="block text-xs text-el-regular mb-1.5 whitespace-nowrap font-medium">勤务装备状态</label>
+<div class="relative flex items-center">
+<select class="h-8 pl-3 pr-8 w-full rounded border border-el-border text-xs text-el-text bg-white appearance-none focus:border-primary focus:outline-none cursor-pointer">
+<option value="">全部运行状态</option>
+<option selected="" value="onduty">执勤在岗 (实时通信正常)</option>
+<option value="standby">备勤待命 (可随时调派)</option>
+<option value="repair">维护检修 / 离网校准</option>
+<option value="offline">离线告警 / 故障切断</option>
+</select>
+<svg class="w-4 h-4 absolute right-2 text-el-secondary pointer-events-none fill-current" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
+</div>
+</div>
+<div>
+<label class="block text-xs text-el-regular mb-1.5 whitespace-nowrap font-medium">关联协同岗状态</label>
+<div class="relative flex items-center">
+<select class="h-8 pl-3 pr-8 w-full rounded border border-el-border text-xs text-el-text bg-white appearance-none focus:border-primary focus:outline-none cursor-pointer">
+<option value="">全部关联状态</option>
+<option selected="" value="assigned">已分配岗位 (绑定中)</option>
+<option value="unassigned">未分配岗位 (空闲资源池)</option>
+</select>
+<svg class="w-4 h-4 absolute right-2 text-el-secondary pointer-events-none fill-current" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
+</div>
+</div>
+</div>
+<!-- 第二行展开筛选及操作按钮 -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-3 pt-3 border-t border-dashed border-el-border-light items-end" id="advancedSearchRow">
+<div>
+<label class="block text-xs text-el-regular mb-1.5 whitespace-nowrap font-medium">细分装备机型 / 终端型号</label>
+<div class="relative flex items-center">
+<select class="h-8 pl-3 pr-8 w-full rounded border border-el-border text-xs text-el-text bg-white appearance-none focus:border-primary focus:outline-none cursor-pointer">
+<option value="">全部装备型号</option>
+<option value="v9">5G高清执法记录仪 (DSJ-V9)</option>
+<option value="hp780">PDT防爆对讲手台 (HP780)</option>
+<option value="pad">移动单兵巡逻终端 (PAD)</option>
+<option value="cctv">车载4K云台红外摄像机</option>
+</select>
+<svg class="w-4 h-4 absolute right-2 text-el-secondary pointer-events-none fill-current" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
+</div>
+</div>
+<div>
+<label class="block text-xs text-el-regular mb-1.5 whitespace-nowrap font-medium">登记建档时间范围</label>
+<div class="relative flex items-center">
+<span class="absolute left-2.5 text-el-secondary pointer-events-none">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19a2 2 0 002 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"></path></svg>
+</span>
+<input class="h-8 pl-8 pr-3 w-full rounded border border-el-border text-xs text-el-text focus:border-primary focus:outline-none" type="text" value="2026-01-01 至 2026-03-31">
+</div>
+</div>
+<div>
+<label class="block text-xs text-el-regular mb-1.5 whitespace-nowrap font-medium">布控区域网格</label>
+<div class="relative flex items-center">
+<span class="absolute left-2.5 text-el-secondary pointer-events-none">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"></path></svg>
+</span>
+<input class="h-8 pl-8 pr-3 w-full rounded border border-el-border text-xs text-el-text placeholder:text-el-secondary focus:border-primary focus:outline-none" placeholder="核心商圈A区 / 火车站网格" type="text">
+</div>
+</div>
+<!-- 按钮操作区 -->
+<div class="flex items-center gap-2">
+<button class="h-8 px-4 rounded bg-primary hover:bg-primary-hover text-white text-xs font-medium inline-flex items-center gap-1.5 transition-colors shadow-xs whitespace-nowrap" type="button">
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+<span>查询</span>
+</button>
+<button class="h-8 px-3 rounded border border-el-border bg-white hover:bg-[#f5f7fa] text-el-regular text-xs font-medium inline-flex items-center gap-1.5 transition-colors whitespace-nowrap" type="button">
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg>
+<span>重置</span>
+</button>
+<button class="h-8 px-2 text-primary hover:text-primary-hover text-xs font-medium inline-flex items-center gap-0.5 ml-auto whitespace-nowrap cursor-pointer" id="toggleFilterBtn" type="button">
+<span id="toggleFilterText">收起筛选</span>
+<svg class="w-4 h-4 fill-current transition-transform duration-200" id="toggleFilterIcon" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6-6z"></path></svg>
+</button>
+</div>
+</div>
+</div>
+<!-- 卡片 3: 表格操作工具栏与批量操作 -->
+<div class="bg-white rounded-t border border-b-0 border-el-border-light px-4 py-3 flex flex-wrap items-center justify-between gap-3 shadow-xs">
+<!-- 左侧批量操作 -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="h-8 px-3 rounded bg-primary hover:bg-primary-hover text-white text-xs font-medium inline-flex items-center gap-1.5 transition-colors shadow-xs whitespace-nowrap" type="button">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+<span>登记新警员 / 装备</span>
+</button>
+<button class="h-8 px-3 rounded border border-primary/30 bg-[#ecf5ff] hover:bg-[#d9ecff] text-primary text-xs font-medium inline-flex items-center gap-1.5 transition-colors whitespace-nowrap" id="openBatchModalBtn" type="button">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path></svg>
+<span>批量指派协同岗</span>
+</button>
+<button class="h-8 px-3 rounded border border-el-border bg-white hover:bg-[#f5f7fa] text-el-regular text-xs font-medium inline-flex items-center gap-1.5 transition-colors whitespace-nowrap" type="button">
+<svg class="w-4 h-4 fill-current text-el-success" viewBox="0 0 24 24"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42A6.92 6.92 0 0119 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.58 1.4-4.83 3.59-6.01L7.17 4.57A8.962 8.962 0 003 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"></path></svg>
+<span>批量激活上线</span>
+</button>
+<button class="h-8 px-3 rounded border border-el-border bg-white hover:bg-[#f5f7fa] text-el-regular text-xs font-medium inline-flex items-center gap-1.5 transition-colors whitespace-nowrap" type="button">
+<svg class="w-4 h-4 fill-current text-el-secondary" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-1.41-1.41L14.17 13H8v-2h6.17l-3.58-3.59L12 6l5 5v2z"></path></svg>
+<span>导出名册 (Excel)</span>
+</button>
+<button class="h-8 px-3 rounded border border-el-danger/30 bg-[#fef0f0] hover:bg-[#fde2e2] text-el-danger text-xs font-medium inline-flex items-center gap-1.5 transition-colors whitespace-nowrap" type="button">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
+<span>批量删除</span>
+</button>
+</div>
+<!-- 右侧视图与设置 -->
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded border border-el-border bg-white hover:bg-[#f5f7fa] text-el-regular flex items-center justify-center transition-colors" title="刷新表格">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg>
+</button>
+<button class="w-8 h-8 rounded border border-el-border bg-white hover:bg-[#f5f7fa] text-el-regular flex items-center justify-center transition-colors" title="列设置">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"></path></svg>
+</button>
+<button class="w-8 h-8 rounded border border-el-border bg-white hover:bg-[#f5f7fa] text-el-regular flex items-center justify-center transition-colors" title="表格密度">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+</button>
+<div class="h-4 w-px bg-el-border mx-1"></div>
+<div class="inline-flex rounded border border-el-border p-0.5 bg-[#f4f4f5]">
+<button class="px-2.5 py-1 rounded bg-white shadow-xs text-primary font-medium text-xs flex items-center gap-1 whitespace-nowrap">
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M3 3v18h18V3H3zm8 16H5v-6h6v6zm0-8H5V5h6v6zm8 8h-6v-6h6v6zm0-8h-6V5h6v6z"></path></svg>
+<span>列表</span>
+</button>
+<button class="px-2.5 py-1 rounded text-el-regular hover:text-el-text text-xs flex items-center gap-1 whitespace-nowrap">
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"></path></svg>
+<span>轨迹地图</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 卡片 4: 警务名册数据表格 (彻底修复换行、字符挤压，合理列宽配置) -->
+<div class="bg-white rounded-b border border-t-0 border-el-border-light shadow-xs overflow-hidden">
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse text-[13px] min-w-[1280px]">
+<thead>
+<tr class="bg-[#f5f7fa] text-el-regular font-semibold border-y border-el-border-light text-xs">
+<th class="w-12 px-3 py-3 text-center whitespace-nowrap">
+<input checked="" class="rounded border-el-border text-primary focus:ring-primary h-4 w-4 cursor-pointer" type="checkbox">
+</th>
+<th class="py-3 px-3 min-w-[140px] whitespace-nowrap">资源标识 / 警号</th>
+<th class="py-3 px-3 min-w-[170px] whitespace-nowrap">名称 · 职务 / 规格型号</th>
+<th class="py-3 px-3 min-w-[110px] whitespace-nowrap">所属类型</th>
+<th class="py-3 px-3 min-w-[150px] whitespace-nowrap">组织机构隶属</th>
+<th class="py-3 px-3 min-w-[210px] whitespace-nowrap">实时动态与感知数据</th>
+<th class="py-3 px-3 min-w-[190px] whitespace-nowrap">关联协同配置</th>
+<th class="py-3 px-3 min-w-[90px] text-center whitespace-nowrap">在岗授权</th>
+<th class="py-3 px-4 min-w-[180px] text-right whitespace-nowrap">操作管理</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-el-border-light text-el-text">
+<!-- 行 1: 在编民警 -->
+<tr class="hover:bg-[#f5f7fa] transition-colors">
+<td class="px-3 py-3 text-center whitespace-nowrap">
+<input checked="" class="rounded border-el-border text-primary focus:ring-primary h-4 w-4 cursor-pointer" type="checkbox">
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] border border-el-border-light font-mono text-[12px] font-semibold text-el-text whitespace-nowrap">POLICE-003478</span>
+<span class="w-2 h-2 rounded-full bg-el-success shrink-0" title="在线通信正常"></span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 text-sm">
+                      张
+                    </div>
+<div class="flex flex-col">
+<span class="font-bold text-el-text whitespace-nowrap text-[13px]">张伟</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">一级警督 · 协同作战员</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#ecf5ff] text-primary border border-primary/20 text-xs font-medium whitespace-nowrap">
+<svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.67-3.13 9.07-7 10.18-3.87-1.11-7-5.51-7-10.18V6.3l7-3.12z"></path></svg>
+<span>在编民警</span>
+</span>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-el-text whitespace-nowrap">特巡警支队三大队</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">市局特战防暴梯队</span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col gap-1">
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#f0f9eb] text-el-success text-xs border border-[#e1f3d8] whitespace-nowrap w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-el-success"></span>
+<span>执勤在岗 (天网01岗)</span>
+</div>
+<span class="text-xs text-el-secondary flex items-center gap-1 whitespace-nowrap">
+<svg class="w-3.5 h-3.5 fill-current text-el-secondary shrink-0" viewBox="0 0 24 24"><path d="M3.24 6.15C2.51 7.43 2 8.93 2 10.53c0 4.54 3.25 8.33 7.55 9.17l.45-1.95A7.47 7.47 0 014 10.53c0-1.22.39-2.36.95-3.32l-1.71-1.06zM21 10.53c0 4.54-3.25 8.33-7.55 9.17l-.45-1.95a7.47 7.47 0 005.99-7.22c0-1.22-.39-2.36-.95-3.32l1.71-1.06c.73 1.28 1.25 2.78 1.25 4.38zM12 4c-3.61 0-6.53 2.92-6.53 6.53 0 2.21 1.09 4.16 2.77 5.36l1.2-1.6c-1.18-.83-1.97-2.2-1.97-3.76 0-2.5 2.03-4.53 4.53-4.53s4.53 2.03 4.53 4.53c0 1.56-.79 2.93-1.97 3.76l1.2 1.6c1.68-1.2 2.77-3.15 2.77-5.36C18.53 6.92 15.61 4 12 4zm0 4c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"></path></svg>
+<span>电台信道: 350M-CH4 · 正常</span>
+</span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-primary font-medium whitespace-nowrap">绑定协同岗: 综合指挥长</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">辖区: 解放碑核心执勤圈</span>
+</div>
+</td>
+<td class="px-3 py-3 text-center whitespace-nowrap">
+<!-- Element Plus 经典 Switch 控件 -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-9 h-5 bg-[#dcdfe6] peer-focus:outline-none rounded-full peer peer-checked:bg-primary transition-colors after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-transform peer-checked:after:translate-x-4"></div>
+</label>
+</td>
+<td class="px-3 py-4 text-right pr-4 whitespace-nowrap">
+<div class="flex items-center justify-end gap-2 text-xs font-medium">
+<button class="text-primary hover:text-primary-hover whitespace-nowrap">详情档案</button>
+<span class="text-el-border">|</span>
+<button class="text-primary hover:text-primary-hover whitespace-nowrap">轨迹跟踪</button>
+<span class="text-el-border">|</span>
+<button class="text-primary hover:text-primary-hover whitespace-nowrap open-dispatch-single">协同派岗</button>
+<span class="text-el-border">|</span>
+<button class="text-el-danger hover:underline whitespace-nowrap">下线解绑</button>
+</div>
+</td>
+</tr>
+<!-- 行 2: 特种巡逻车辆 -->
+<tr class="hover:bg-[#f5f7fa] transition-colors">
+<td class="px-3 py-3 text-center whitespace-nowrap">
+<input checked="" class="rounded border-el-border text-primary focus:ring-primary h-4 w-4 cursor-pointer" type="checkbox">
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] border border-el-border-light font-mono text-[12px] font-semibold text-el-text whitespace-nowrap">CAR-浙A0129警</span>
+<span class="w-2 h-2 rounded-full bg-el-success animate-pulse shrink-0" title="北斗双模在线"></span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded bg-[#f0f2f5] text-el-regular flex items-center justify-center shrink-0">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17zM7.5 14c-.83 0-1.5-.67-1.5-1.5S6.67 11 7.5 11s1.5.67 1.5 1.5S8.33 14 7.5 14zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path></svg>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-el-text whitespace-nowrap text-[13px]">别克GL8防暴指挥车</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">配置: 车载卫星中继 + 4K云台</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#f4f4f5] text-el-text border border-el-border text-xs font-medium whitespace-nowrap">
+<svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"></path></svg>
+<span>特种车辆</span>
+</span>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-el-text whitespace-nowrap">交警支队机动大队</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">快速机动反应中队</span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col gap-1">
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#f0f9eb] text-el-success text-xs border border-[#e1f3d8] whitespace-nowrap w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-el-success"></span>
+<span>巡逻中 (时速 32km/h)</span>
+</div>
+<span class="text-xs text-el-secondary flex items-center gap-1 whitespace-nowrap">
+<svg class="w-3.5 h-3.5 fill-current text-el-secondary shrink-0" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path></svg>
+<span>GPS精度 0.8米 · 油量 72%</span>
+</span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-primary font-medium whitespace-nowrap">巡段: 解放路-延安路环线</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">随车警力: 3人 · 队长: 陈志刚</span>
+</div>
+</td>
+<td class="px-3 py-3 text-center whitespace-nowrap">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-9 h-5 bg-[#dcdfe6] peer-focus:outline-none rounded-full peer peer-checked:bg-primary transition-colors after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-transform peer-checked:after:translate-x-4"></div>
+</label>
+</td>
+<td class="px-3 py-4 text-right pr-4 whitespace-nowrap">
+<div class="flex items-center justify-end gap-2 text-xs font-medium">
+<button class="text-primary hover:text-primary-hover whitespace-nowrap">车辆底册</button>
+<span class="text-el-border">|</span>
+<button class="text-primary hover:text-primary-hover whitespace-nowrap">实时回传</button>
+<span class="text-el-border">|</span>
+<button class="text-primary hover:text-primary-hover whitespace-nowrap open-dispatch-single">巡段重派</button>
+<span class="text-el-border">|</span>
+<button class="text-el-danger hover:underline whitespace-nowrap">回库解挂</button>
+</div>
+</td>
+</tr>
+<!-- 行 3: 布控高清球机 -->
+<tr class="hover:bg-[#f5f7fa] transition-colors">
+<td class="px-3 py-3 text-center whitespace-nowrap">
+<input checked="" class="rounded border-el-border text-primary focus:ring-primary h-4 w-4 cursor-pointer" type="checkbox">
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] border border-el-border-light font-mono text-[12px] font-semibold text-el-text whitespace-nowrap">CAM-IPC-9941</span>
+<span class="w-2 h-2 rounded-full bg-el-success shrink-0" title="RTSP 推流正常"></span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded bg-[#f0f2f5] text-el-regular flex items-center justify-center shrink-0">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"></path></svg>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-el-text whitespace-nowrap text-[13px]">人民广场西北角4K球机</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">海康威视 iDS-2CD7A48G2</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#e8f4f8] text-[#007799] border border-[#bce2ee] text-xs font-medium whitespace-nowrap">
+<svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14a6 6 0 100 12 6 6 0 000-12zm0 8a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+<span>布控感知端</span>
+</span>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-el-text whitespace-nowrap">天网前端视频专网</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">市局科技信息化局</span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col gap-1">
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#f0f9eb] text-el-success text-xs border border-[#e1f3d8] whitespace-nowrap w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-el-success"></span>
+<span>推流中 · 1080P / 25fps</span>
+</div>
+<span class="text-xs text-el-secondary flex items-center gap-1 whitespace-nowrap">
+<svg class="w-3.5 h-3.5 fill-current text-el-secondary shrink-0" viewBox="0 0 24 24"><path d="M15 9H9v6h6V9zm-2 4h-2v-2h2v2zm8-2V9h-2V7c0-1.1-.9-2-2-2h-2V3h-2v2h-2V3H9v2H7c-1.1 0-2 .9-2 2v2H3v2h2v2H3v2h2v2c0 1.1.9 2 2 2h2v2h2v-2h2v2h2v-2h2c1.1 0 2-.9 2-2v-2h2v-2h-2v-2h2zm-4 6H7V7h10v10z"></path></svg>
+<span>AI结构化: 人脸+车辆特征已开启</span>
+</span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-primary font-medium whitespace-nowrap">接入网关: GW-EDGE-04</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">关联预警组: 广场维稳群组</span>
+</div>
+</td>
+<td class="px-3 py-3 text-center whitespace-nowrap">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-9 h-5 bg-[#dcdfe6] peer-focus:outline-none rounded-full peer peer-checked:bg-primary transition-colors after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-transform peer-checked:after:translate-x-4"></div>
+</label>
+</td>
+<td class="px-3 py-4 text-right pr-4 whitespace-nowrap">
+<div class="flex items-center justify-end gap-2 text-xs font-medium">
+<button class="text-primary hover:text-primary-hover whitespace-nowrap">云台调控</button>
+<span class="text-el-border">|</span>
+<button class="text-primary hover:text-primary-hover whitespace-nowrap">调阅切片</button>
+<span class="text-el-border">|</span>
+<button class="text-primary hover:text-primary-hover whitespace-nowrap open-dispatch-single">布控策略</button>
+<span class="text-el-border">|</span>
+<button class="text-el-danger hover:underline whitespace-nowrap">停用点位</button>
+</div>
+</td>
+</tr>
+<!-- 行 4: 单兵执法仪 (电量低警告状态) -->
+<tr class="hover:bg-[#f5f7fa] transition-colors">
+<td class="px-3 py-3 text-center whitespace-nowrap">
+<input class="rounded border-el-border text-primary focus:ring-primary h-4 w-4 cursor-pointer" type="checkbox">
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] border border-el-border-light font-mono text-[12px] font-semibold text-el-text whitespace-nowrap">DEV-5G-882</span>
+<span class="w-2 h-2 rounded-full bg-el-danger shrink-0" title="低电量告警"></span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded bg-[#f0f2f5] text-el-regular flex items-center justify-center shrink-0">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"></path></svg>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-el-text whitespace-nowrap text-[13px]">海能达5G智能执法仪</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">型号: DSJ-HY8 · 持有人: 李强</span>
+</div>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#f4f4f5] text-el-secondary border border-el-border text-xs font-medium whitespace-nowrap">
+<svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 5c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2H0c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2h-4zM4 5h16v11H4V5z"></path></svg>
+<span>单兵移动装备</span>
+</span>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-el-text whitespace-nowrap">车站治安派出所</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">第一值班巡防巡查组</span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col gap-1">
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#fdf6ec] text-el-warning text-xs border border-[#faecd8] whitespace-nowrap w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-el-warning"></span>
+<span>电量低 18% · 在线录制中</span>
+</div>
+<span class="text-xs text-el-secondary flex items-center gap-1 whitespace-nowrap">
+<svg class="w-3.5 h-3.5 fill-current text-el-secondary shrink-0" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+<span>存储余量: 64.2GB / 128GB</span>
+</span>
+</div>
+</td>
+<td class="px-3 py-3 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-el-secondary font-medium whitespace-nowrap">待分配独立协同岗</span>
+<span class="text-xs text-el-secondary whitespace-nowrap">当前随同辅警 0492 号巡视</span>
+</div>
+</td>
+<td class="px-3 py-3 text-center whitespace-nowrap">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-9 h-5 bg-[#dcdfe6] peer-focus:outline-none rounded-full peer peer-checked:bg-primary transition-colors after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-transform peer-checked:after:translate-x-4"></div>
+</label>
+</td>
+<td class="px-3 py-4 text-right pr-4 whitespace-nowrap">
+<div class="flex items-center justify-end gap-2 text-xs font-medium">
+<button class="text-primary hover:text-primary-hover whitespace-nowrap">充电提醒</button>
+<span class="text-el-border">|</span>
+<button class="text-primary hover:text-primary-hover whitespace-nowrap">视频拉流</button>
+<span class="text-el-border">|</span>
+<button class="text-primary hover:text-primary-hover whitespace-nowrap open-dispatch-single">指定绑定</button>
+<span class="text-el-border">|</span>
+<button class="text-el-danger hover:underline whitespace-nowrap">报修注销</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Element Plus 分页组件区域 -->
+<div class="px-4 py-3 bg-white border-t border-el-border-light flex flex-col sm:flex-row items-center justify-between gap-3 select-none">
+<div class="flex items-center gap-2 text-xs text-el-regular whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-primary/10 text-primary font-medium">已选中 3 项</span>
+<span class="text-el-secondary">· 跨页选择池保持开启 (全局共 3,420 条资源数据)</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-el-regular whitespace-nowrap">
+<span class="text-el-secondary">共 3,420 条</span>
+<select class="h-7 px-2 rounded border border-el-border bg-white text-xs text-el-text focus:outline-none cursor-pointer">
+<option>50 条/页</option>
+<option>100 条/页</option>
+<option>200 条/页</option>
+</select>
+<div class="inline-flex items-center gap-1 ml-1">
+<button class="w-7 h-7 rounded border border-el-border bg-white text-el-secondary hover:bg-[#f5f7fa] flex items-center justify-center disabled:opacity-40" disabled="">
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>
+</button>
+<button class="w-7 h-7 rounded bg-primary text-white font-semibold flex items-center justify-center">1</button>
+<button class="w-7 h-7 rounded border border-el-border bg-white text-el-regular hover:bg-[#f5f7fa] flex items-center justify-center">2</button>
+<button class="w-7 h-7 rounded border border-el-border bg-white text-el-regular hover:bg-[#f5f7fa] flex items-center justify-center">3</button>
+<span class="px-1 text-el-secondary">...</span>
+<button class="w-7 h-7 rounded border border-el-border bg-white text-el-regular hover:bg-[#f5f7fa] flex items-center justify-center">69</button>
+<button class="w-7 h-7 rounded border border-el-border bg-white text-el-secondary hover:bg-[#f5f7fa] flex items-center justify-center">
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
+</button>
+</div>
+<div class="flex items-center gap-1 ml-1 text-el-secondary">
+<span>前往</span>
+<input class="w-10 h-7 text-center rounded border border-el-border bg-white text-xs text-el-text focus:border-primary focus:outline-none" type="text" value="1">
+<span>页</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 卡片 5: 底部多模态联动看板 (实况快照 / 巡逻轨迹 / 协同岗位覆盖度) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+<!-- 卡片 5.1: 重点布控镜头实况快照 -->
+<div class="bg-white rounded border border-el-border-light shadow-xs p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between pb-3 border-b border-el-border-light">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-el-danger animate-ping"></span>
+<h3 class="font-bold text-el-text text-[14px] whitespace-nowrap">实况快照 · 重点布控镜头</h3>
+</div>
+<span class="text-xs text-el-secondary whitespace-nowrap">CAM-IPC-9941 · 延迟 120ms</span>
+</div>
+<div class="relative w-full h-44 mt-3 rounded overflow-hidden bg-[#1f2d3d] group">
+<img alt="重点布控镜头画面" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYC_wbiZ9TsXZIobah7JcmomMj1TudLD0zfcKC7onsA7pTo5KjMxc9wJ3GLS172cSebDIQVnhkTF-0FT2yGg4crx_6Gu-cnCXETF_kHmHcmAGplb9K8TJB0j-zsBzLqTy03I5YuPJ_xFhVrwj4urB9Rf6RQDk-oG76EZxbXDSFhaEMaJMVbrm9KOVpdOWIqdojQE-BxlvrT5kq8WRwbO5DySlGKGogGwK2XJqEFdJk1mBAeh-4-KGR2g">
+<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/30 flex flex-col justify-between p-3">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-black/60 text-white font-mono text-[11px] whitespace-nowrap">REC [4K/25FPS]</span>
+<span class="px-2 py-0.5 rounded bg-el-success/90 text-white text-xs whitespace-nowrap">AI 警戒线正常</span>
+</div>
+<div class="text-white text-xs flex items-center justify-between">
+<span class="font-mono">坐标: E120°09'12", N30°16'44"</span>
+<button class="hover:text-primary transition-colors p-1" title="在新窗口中全屏查看视频流">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 卡片 5.2: 动态巡逻热区与轨迹 -->
+<div class="bg-white rounded border border-el-border-light shadow-xs p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between pb-3 border-b border-el-border-light">
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 fill-current text-primary" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path></svg>
+<h3 class="font-bold text-el-text text-[14px] whitespace-nowrap">动态巡逻热区与轨迹</h3>
+</div>
+<span class="text-xs text-el-success font-semibold whitespace-nowrap">浙A0129警 · 连续巡逻 140分</span>
+</div>
+<!-- 精致内嵌轨迹模拟地图 -->
+<div class="relative w-full h-44 mt-3 rounded overflow-hidden bg-[#e5ecf4] border border-el-border-light flex flex-col justify-between p-3">
+<!-- 示意背景与网格线条 -->
+<div class="absolute inset-0 opacity-40">
+<svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="20" id="mapGrid" patternUnits="userSpaceOnUse" width="20">
+<path d="M 20 0 L 0 0 0 20" fill="none" stroke="#b0c4de" stroke-width="0.75"></path>
+</pattern>
+</defs>
+<rect fill="url(#mapGrid)" height="100%" width="100%"></rect>
+<!-- 巡逻路径折线 -->
+<path d="M 30 130 Q 90 60 160 90 T 290 50" fill="none" stroke="#409eff" stroke-dasharray="4,4" stroke-width="3"></path>
+<circle cx="290" cy="50" fill="#409eff" r="5"></circle>
+<circle cx="290" cy="50" fill="#409eff" opacity="0.3" r="10"></circle>
+</svg>
+</div>
+<!-- 地图顶部位置标识 -->
+<div class="relative z-10 flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-white/90 border border-el-border text-xs text-el-regular font-mono">网格点: 杭州市上城区</span>
+<span class="px-2 py-0.5 rounded bg-primary text-white text-[11px]">实时回传</span>
+</div>
+<!-- 地图底部当前巡段信息 -->
+<div class="relative z-10 bg-white/95 backdrop-blur-sm border border-el-border-light rounded p-2 flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-1.5">
+<svg class="w-4 h-4 fill-current text-primary" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"></path></svg>
+<span class="text-xs text-el-text font-medium whitespace-nowrap">当前巡段: 核心商圈解放路巡线</span>
+</div>
+<button class="text-primary hover:text-primary-hover text-xs font-semibold whitespace-nowrap">放大鹰眼</button>
+</div>
+</div>
+</div>
+<!-- 卡片 5.3: 协同岗位绑定覆盖度 -->
+<div class="bg-white rounded border border-el-border-light shadow-xs p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between pb-3 border-b border-el-border-light">
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 fill-current text-el-success" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path></svg>
+<h3 class="font-bold text-el-text text-[14px] whitespace-nowrap">协同岗位绑定覆盖度</h3>
+</div>
+<span class="text-xs text-el-secondary whitespace-nowrap">全量统计</span>
+</div>
+<!-- 环形图与文字说明 (完全水平排列，杜绝挤压竖排) -->
+<div class="flex items-center justify-around py-3">
+<div class="relative flex items-center justify-center shrink-0">
+<svg class="w-28 h-28 transform -rotate-90">
+<circle class="text-[#e4e7ed]" cx="56" cy="56" fill="transparent" r="44" stroke="currentColor" stroke-width="9"></circle>
+<circle class="text-primary" cx="56" cy="56" fill="transparent" r="44" stroke="currentColor" stroke-dasharray="276.46" stroke-dashoffset="48" stroke-linecap="round" stroke-width="9"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="text-lg font-bold text-el-text font-mono">82.6%</span>
+<span class="text-[11px] text-el-secondary whitespace-nowrap">已受控指派</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 text-xs text-el-regular whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-sm bg-primary shrink-0"></span>
+<span class="whitespace-nowrap">指挥协调岗 (1,480)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-sm bg-[#66b1ff] shrink-0"></span>
+<span class="whitespace-nowrap">路面快反岗 (920)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-sm bg-el-success shrink-0"></span>
+<span class="whitespace-nowrap">天网视频巡查岗 (425)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-sm bg-[#dcdfe6] shrink-0"></span>
+<span class="text-el-secondary whitespace-nowrap">空闲待命池 (595)</span>
+</div>
+</div>
+</div>
+<div class="pt-2.5 border-t border-el-border-light flex items-center justify-between text-xs text-el-secondary">
+<span class="whitespace-nowrap">自动轮换排班策略已启用</span>
+<a class="text-primary hover:text-primary-hover font-medium whitespace-nowrap" href="#">配置排班规则 →</a>
+</div>
+</div>
+</div>
+</main>
+<!-- 底部版权信息 -->
+<footer class="w-full bg-white border-t border-el-border-light py-3 px-6 text-center text-xs text-el-secondary whitespace-nowrap">
+      © 2026 警务业务协同平台 · LinkX Admin Vue 3 + Element Plus Enterprise v2.4.0
+    </footer>
+</div>
+</div>
+<!-- 弹窗：批量关联协同岗 (Element Plus Dialog 规范) -->
+<div class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4" id="dispatchModal">
+<div class="bg-white rounded-lg shadow-2xl w-full max-w-xl overflow-hidden border border-el-border-light animate-in fade-in zoom-in-95 duration-150">
+<!-- Header -->
+<div class="h-12 px-5 bg-[#fafbfc] flex items-center justify-between border-b border-el-border-light">
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 fill-current text-primary" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path></svg>
+<span class="font-bold text-el-text text-sm">批量关联协同岗 · 指派设置</span>
+</div>
+<button class="text-el-secondary hover:text-el-text p-1 transition-colors" id="closeModalCross">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</div>
+<!-- Body -->
+<div class="p-5 space-y-4 text-xs">
+<!-- 选中的项目摘要 -->
+<div class="bg-[#f5f7fa] p-3 rounded border border-el-border-light space-y-1.5">
+<span class="text-el-regular font-medium block">当前拟指派资源对象 (共选定 3 项):</span>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded bg-white border border-el-border text-el-text font-mono">张伟 (POLICE-003478)</span>
+<span class="px-2 py-0.5 rounded bg-white border border-el-border text-el-text font-mono">防暴指挥车 (CAR-浙A0129警)</span>
+<span class="px-2 py-0.5 rounded bg-white border border-el-border text-el-text font-mono">西北角4K球机 (CAM-IPC-9941)</span>
+</div>
+</div>
+<!-- 协同岗选择器 -->
+<div>
+<label class="block text-el-text font-medium mb-1.5">
+<span class="text-el-danger">*</span> 目标协同岗位 (树形组织架构)
+        </label>
+<div class="relative">
+<select class="h-8 px-3 w-full rounded border border-el-border text-xs text-el-text bg-white appearance-none focus:border-primary focus:outline-none cursor-pointer">
+<option value="p1">市局指挥大厅 &gt; 综合态势联合值班长岗位 (1级调度权)</option>
+<option selected="" value="p2">特巡警机动大队 &gt; 快速打击第01防暴协同组 (2级勤务)</option>
+<option value="p3">交警机动分队 &gt; 核心路网铁骑联合巡护岗</option>
+<option value="p4">天网视频巡查科 &gt; 重点商圈AI感知值守专岗</option>
+</select>
+<svg class="w-4 h-4 absolute right-2.5 top-2 text-el-secondary pointer-events-none fill-current" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
+</div>
+</div>
+<!-- 生效时段与指令权限 -->
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block text-el-text font-medium mb-1.5">生效起止时段</label>
+<select class="h-8 px-2.5 w-full rounded border border-el-border text-xs text-el-text bg-white focus:border-primary focus:outline-none">
+<option>即刻生效 · 当班至 24:00</option>
+<option>跨天连续勤务 (48小时内)</option>
+<option>自定义特定排班周期</option>
+</select>
+</div>
+<div>
+<label class="block text-el-text font-medium mb-1.5">指令覆盖权限</label>
+<select class="h-8 px-2.5 w-full rounded border border-el-border text-xs text-el-text bg-white focus:border-primary focus:outline-none">
+<option>继承目标岗位全量指派权限</option>
+<option>仅视音频感知透传 (只读)</option>
+<option>双向语音调度 + 处置上报</option>
+</select>
+</div>
+</div>
+<!-- 任务备注说明 -->
+<div>
+<label class="block text-el-text font-medium mb-1.5">勤务联勤备注 / 任务说明</label>
+<textarea class="w-full p-2.5 rounded border border-el-border text-xs text-el-text focus:border-primary focus:outline-none resize-none" placeholder="填写本次协同岗位关联调度的任务编号、责任人指令或联动备忘..." rows="2"></textarea>
+</div>
+</div>
+<!-- Footer -->
+<div class="h-12 px-5 bg-[#fafbfc] border-t border-el-border-light flex items-center justify-end gap-2">
+<button class="h-8 px-4 rounded border border-el-border bg-white hover:bg-[#f5f7fa] text-el-regular text-xs font-medium transition-colors" id="closeModalCancel" type="button">取消</button>
+<button class="h-8 px-4 rounded bg-primary hover:bg-primary-hover text-white text-xs font-medium inline-flex items-center gap-1.5 shadow-xs transition-colors" id="confirmModalBtn" type="button">
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg>
+<span>确认批量指派并下发</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 交互逻辑 -->
+<script>
+  (function () {
+    // 展开 / 收起筛选条件
+    const toggleBtn = document.getElementById('toggleFilterBtn');
+    const advancedRow = document.getElementById('advancedSearchRow');
+    const toggleText = document.getElementById('toggleFilterText');
+    const toggleIcon = document.getElementById('toggleFilterIcon');
+    let isExpanded = true;
+
+    if (toggleBtn && advancedRow) {
+      toggleBtn.addEventListener('click', function () {
+        isExpanded = !isExpanded;
+        if (isExpanded) {
+          advancedRow.classList.remove('hidden');
+          toggleText.textContent = '收起筛选';
+          toggleIcon.style.transform = 'rotate(0deg)';
+        } else {
+          advancedRow.classList.add('hidden');
+          toggleText.textContent = '展开更多条件';
+          toggleIcon.style.transform = 'rotate(180deg)';
+        }
+      });
+    }
+
+    // 指派弹窗交互
+    const modal = document.getElementById('dispatchModal');
+    const openBatchBtn = document.getElementById('openBatchModalBtn');
+    const singleOpenBtns = document.querySelectorAll('.open-dispatch-single');
+    const closeCross = document.getElementById('closeModalCross');
+    const closeCancel = document.getElementById('closeModalCancel');
+    const confirmBtn = document.getElementById('confirmModalBtn');
+
+    function openModal() {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    if (openBatchBtn) openBatchBtn.addEventListener('click', openModal);
+    singleOpenBtns.forEach(b => b.addEventListener('click', openModal));
+    if (closeCross) closeCross.addEventListener('click', closeModal);
+    if (closeCancel) closeCancel.addEventListener('click', closeModal);
+
+    if (modal) {
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal();
+      });
+    }
+
+    if (confirmBtn) {
+      confirmBtn.addEventListener('click', function () {
+        confirmBtn.innerHTML = '<span class="inline-block animate-spin mr-1">↻</span><span>下发中...</span>';
+        setTimeout(() => {
+          confirmBtn.innerHTML = '<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span>确认批量指派并下发</span>';
+          closeModal();
+        }, 500);
+      });
+    }
+  })();
+</script>
+</body></html>

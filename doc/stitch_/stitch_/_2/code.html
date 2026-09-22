@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline": "#707784", "surface-container-high": "#e6e8ef", "on-secondary": "#ffffff", "on-primary-fixed": "#001c38", "on-primary-container": "#003460", "on-error": "#ffffff", "on-surface-variant": "#404752", "on-tertiary-container": "#133b00", "secondary-fixed-dim": "#b6c8e2", "outline-variant": "#c0c7d4", "on-tertiary-fixed": "#072100", "surface-container-highest": "#e0e2e9", "error": "#ba1a1a", "error-container": "#ffdad6", "primary-fixed-dim": "#a2c9ff", "on-secondary-fixed-variant": "#37485d", "tertiary-fixed-dim": "#80dd52", "secondary-container": "#d2e4ff", "on-primary": "#ffffff", "surface": "#f8f9ff", "on-error-container": "#93000a", "surface-container-lowest": "#ffffff", "secondary-fixed": "#d2e4ff", "surface-dim": "#d7dae0", "on-primary-fixed-variant": "#004881", "inverse-on-surface": "#eef1f7", "background": "#f8f9ff", "surface-tint": "#0060a9", "inverse-primary": "#a2c9ff", "tertiary": "#286c00", "primary": "#0060a9", "on-tertiary": "#ffffff", "surface-container-low": "#f1f3fa", "on-secondary-container": "#55667c", "on-surface": "#181c20", "secondary": "#4f6076", "on-secondary-fixed": "#0a1c30", "tertiary-container": "#55af28", "surface-container": "#ebeef4", "surface-variant": "#e0e2e9", "primary-container": "#409eff", "primary-fixed": "#d3e4ff", "inverse-surface": "#2d3136", "on-background": "#181c20", "surface-bright": "#f8f9ff", "tertiary-fixed": "#9bfa6b", "on-tertiary-fixed-variant": "#1d5200" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-xl": "24px", "space-lg": "16px", "margin": "20px", "space-md": "12px", "gutter": "16px", "space-xs": "4px", "space-sm": "8px" }, "fontFamily": { "headline-md": [ "Inter" ], "label-sm": [ "Inter" ], "body-lg": [ "Inter" ], "headline-sm": [ "Inter" ], "label-lg": [ "Inter" ], "headline-lg": [ "Inter" ], "label-md": [ "Inter" ], "body-md": [ "Inter" ], "display-lg": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-md": [ "16px", { "lineHeight": "24px", "fontWeight": "600" } ], "label-sm": [ "11px", { "lineHeight": "14px", "fontWeight": "500" } ], "body-lg": [ "14px", { "lineHeight": "22px", "fontWeight": "400" } ], "headline-sm": [ "14px", { "lineHeight": "22px", "fontWeight": "600" } ], "label-lg": [ "14px", { "lineHeight": "20px", "fontWeight": "500" } ], "headline-lg": [ "20px", { "lineHeight": "28px", "fontWeight": "600" } ], "label-md": [ "12px", { "lineHeight": "16px", "fontWeight": "500" } ], "body-md": [ "13px", { "lineHeight": "20px", "fontWeight": "400" } ], "display-lg": [ "28px", { "lineHeight": "36px", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-[#304156] z-50 flex flex-col shadow-xl select-none overflow-y-auto"><div class="h-14 flex items-center px-4 bg-[#2b3a4d] gap-3 border-b border-[#222e3c]"><img alt="Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Ug-doLeeLbkmVMFdwjejD5j4Ql8PuAps_xFSw6NCGlctNO-lWE7D7DjTnHEkCtUlfdxi7XJtvTBJq_wukOtgv7HPLZCBvjeBBTfR71kanRJFW-JJaFp7KMs-LAfdHg6R9SL8F1JYEZl8VRho9hUMARiys61UnCCBL_UWlv0Q8486BdShypN7qCc1u8Z8EXOMZqPEpC0aZe6gu3AKCFFFp4WQ9OUQWVocvRe56Jgr7NNGGwTARvY4APNao"/><span class="font-headline-md text-headline-md text-white tracking-wide truncate">警务业务协同平台</span></div><nav class="flex-1 py-2 flex flex-col" data-active-classes="bg-[#263445] text-primary-container font-semibold border-l-4 border-primary-container"><a class="flex items-center px-4 py-3 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors gap-3" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">speed</span><span class="font-body-md text-body-md">综合态势工作台</span></a><div class="flex flex-col"><div class="flex items-center justify-between px-4 py-3 text-[#bfcbd9] hover:bg-[#263445] transition-colors cursor-pointer"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[20px]">group_work</span><span class="font-body-md text-body-md">协同岗管理</span></div><span class="material-symbols-outlined text-[16px]">expand_more</span></div><div class="bg-[#1f2d3d] flex flex-col"><a aria-current="page" class="flex items-center pl-12 pr-4 py-2.5 transition-colors bg-[#263445] text-primary-container font-semibold border-l-4 border-primary-container" data-path="post-config" href="#"><span class="font-body-md text-body-md">协同岗设置</span></a><a class="flex items-center pl-12 pr-4 py-2.5 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors" data-path="duty-monitor" href="#"><span class="font-body-md text-body-md">上下岗排班监控</span></a></div></div><div class="flex flex-col"><div class="flex items-center justify-between px-4 py-3 text-[#bfcbd9] hover:bg-[#263445] transition-colors cursor-pointer"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[20px]">verified_user</span><span class="font-body-md text-body-md">权限与人员中心</span></div><span class="material-symbols-outlined text-[16px]">expand_more</span></div><div class="bg-[#1f2d3d] flex flex-col"><a class="flex items-center pl-12 pr-4 py-2.5 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors" data-path="org-users" href="#"><span class="font-body-md text-body-md">组织与人员管理</span></a><a class="flex items-center pl-12 pr-4 py-2.5 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors" data-path="roles-permissions" href="#"><span class="font-body-md text-body-md">角色权限矩阵</span></a><a class="flex items-center pl-12 pr-4 py-2.5 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors" data-path="data-scopes" href="#"><span class="font-body-md text-body-md">协同数据授权</span></a></div></div><div class="flex flex-col"><div class="flex items-center justify-between px-4 py-3 text-[#bfcbd9] hover:bg-[#263445] transition-colors cursor-pointer"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[20px]">videocam</span><span class="font-body-md text-body-md">警务资源管理</span></div><span class="material-symbols-outlined text-[16px]">expand_more</span></div><div class="bg-[#1f2d3d] flex flex-col"><a class="flex items-center pl-12 pr-4 py-2.5 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors" data-path="officers-roster" href="#"><span class="font-body-md text-body-md">警员名册</span></a><a class="flex items-center pl-12 pr-4 py-2.5 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors" data-path="vehicles-equipment" href="#"><span class="font-body-md text-body-md">车辆装备</span></a><a class="flex items-center pl-12 pr-4 py-2.5 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors" data-path="cameras-gateways" href="#"><span class="font-body-md text-body-md">监控与边缘网关</span></a></div></div><a class="flex items-center px-4 py-3 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors gap-3" data-path="duty-schedule" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-body-md text-body-md">勤务排班管理</span></a><a class="flex items-center px-4 py-3 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors gap-3" data-path="alerts-groups" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span class="font-body-md text-body-md">预警与群组协同</span></a><a class="flex items-center px-4 py-3 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors gap-3" data-path="integrations-hub" href="#"><span class="material-symbols-outlined text-[20px]">hub</span><span class="font-body-md text-body-md">三方集成与网关</span></a><a class="flex items-center px-4 py-3 text-[#bfcbd9] hover:bg-[#263445] hover:text-white transition-colors gap-3" data-path="system-settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-body-md text-body-md">系统与License配置</span></a></nav><div class="px-4 py-3 bg-[#1f2d3d] border-t border-[#222e3c] flex items-center justify-between text-[#8a99a8]"><span class="font-label-sm text-label-sm">Node: AP-SEC-01</span><span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary-container"><span class="w-2 h-2 rounded-full bg-tertiary-container animate-ping"></span>同步正常</span></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 z-40 bg-surface-container-lowest border-b border-[#e6e9f0]"><div class="h-14 px-4 flex items-center justify-between"><div class="flex items-center gap-4"><button class="text-on-surface-variant hover:text-primary-container transition-colors flex items-center"><span class="material-symbols-outlined text-[22px]">menu_open</span></button><nav class="flex items-center gap-2 font-body-sm text-body-sm"><span class="text-outline hover:text-on-surface cursor-pointer">首页</span><span class="text-outline">/</span><span class="text-on-surface font-semibold">协同岗管理</span></nav></div><div class="flex items-center gap-4"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-2.5 text-[18px] text-outline pointer-events-none">search</span><input class="h-8 pl-8 pr-3 w-56 rounded border border-outline-variant bg-surface text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:border-primary-container focus:outline-none" placeholder="搜索协同编号、警号或事件..." type="text"/></div><div class="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#f0f9eb] border border-[#e1f3d8] text-tertiary font-label-sm text-label-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>协同专网在线 · License 正常</div><div class="relative flex items-center cursor-pointer text-on-surface-variant hover:text-primary-container"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute -top-1 -right-1.5 h-4 min-w-[16px] px-1 rounded-full bg-error text-white font-label-sm text-[10px] flex items-center justify-center font-bold">4</span></div><button class="text-on-surface-variant hover:text-primary-container flex items-center"><span class="material-symbols-outlined text-[22px]">fullscreen</span></button><button class="text-on-surface-variant hover:text-primary-container font-label-md text-label-md font-medium px-1">中/EN</button><div class="flex items-center gap-2 cursor-pointer pl-2 border-l border-outline-variant"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Ug-doLeeLbkmVMFdwjejD5j4Ql8PuAps_xFSw6NCGlctNO-lWE7D7DjTnHEkCtUlfdxi7XJtvTBJq_wukOtgv7HPLZCBvjeBBTfR71kanRJFW-JJaFp7KMs-LAfdHg6R9SL8F1JYEZl8VRho9hUMARiys61UnCCBL_UWlv0Q8486BdShypN7qCc1u8Z8EXOMZqPEpC0aZe6gu3AKCFFFp4WQ9OUQWVocvRe56Jgr7NNGGwTARvY4APNao"/><div class="flex items-center gap-1"><span class="font-label-lg text-label-lg font-medium text-on-surface">张指挥官 (管理员)</span><span class="material-symbols-outlined text-[18px] text-outline">arrow_drop_down</span></div></div><button class="text-on-surface-variant hover:text-error transition-colors flex items-center ml-1"><span class="material-symbols-outlined text-[20px]">power_settings_new</span></button></div></div><div class="h-9 bg-surface-container-low border-t border-[#ebeef5] px-4 flex items-center gap-1.5 overflow-x-auto select-none"><a class="inline-flex items-center gap-1.5 px-3 py-1 bg-surface-container-lowest border border-outline-variant text-primary-container font-body-sm text-body-sm font-medium shadow-sm" href="#"><span class="w-2 h-2 rounded-full bg-primary-container"></span>综合态势工作台<span class="material-symbols-outlined text-[14px] text-outline hover:text-error ml-1">close</span></a><a class="inline-flex items-center gap-1 px-3 py-1 bg-surface-container border border-outline-variant text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-lowest hover:text-on-surface" href="#">协同岗设置<span class="material-symbols-outlined text-[14px] text-outline hover:text-error ml-1">close</span></a><a class="inline-flex items-center gap-1 px-3 py-1 bg-surface-container border border-outline-variant text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-lowest hover:text-on-surface" href="#">组织与人员管理<span class="material-symbols-outlined text-[14px] text-outline hover:text-error ml-1">close</span></a></div></header><main class="relative pt-24 bg-[#f0f2f5] flex-1 p-margin w-full"><div class="flex flex-col w-full gap-space-lg">
+<div class="flex items-center justify-between bg-surface-container-lowest px-space-lg py-space-sm rounded-lg shadow-sm">
+<div class="flex items-center gap-space-md">
+<span class="w-1.5 h-5 bg-primary-container rounded-full"></span>
+<h1 class="font-headline-md text-headline-md text-on-surface">协同岗综合管理与排班席位</h1>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">系统编码: POL-POST-OPS-2026</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-body-sm text-body-sm text-outline">实时在岗率</span>
+<div class="w-32 bg-surface-container-high h-2 rounded-full overflow-hidden flex">
+<div class="bg-tertiary-container h-full w-[78%]"></div>
+</div>
+<span class="font-label-md text-label-md font-semibold text-tertiary-container">78.4% (66/84)</span>
+<button class="ml-space-md flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary-container">sync</span>
+        席位脉冲心跳
+      </button>
+</div>
+</div>
+<div class="flex gap-space-lg items-start w-full">
+<!-- Left Tree Sidebar -->
+<aside class="w-72 shrink-0 bg-surface-container-lowest rounded-lg shadow-sm p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[20px] text-primary-container">account_tree</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">协同岗层级体系</span>
+</div>
+<button class="flex items-center gap-0.5 px-2 py-1 rounded bg-secondary-container hover:bg-primary-fixed-dim text-on-primary-container font-label-sm text-label-sm transition-colors">
+<span class="material-symbols-outlined text-[14px]">add</span>新建层级
+        </button>
+</div>
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-[16px] text-outline pointer-events-none">search</span>
+<input class="w-full h-8 pl-8 pr-3 text-body-sm font-body-sm rounded bg-surface-container-low text-on-surface placeholder:text-outline focus:bg-surface-container-lowest focus:outline-none focus:ring-1 focus:ring-primary-container" placeholder="过滤机构与席位单元..." type="text"/>
+</div>
+<div class="flex flex-col gap-1 select-none text-body-sm font-body-sm">
+<div class="flex flex-col">
+<div class="flex items-center justify-between px-2 py-1.5 rounded hover:bg-surface-container-low text-on-surface cursor-pointer">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[18px] text-primary-container">local_police</span>
+<span class="font-medium truncate max-w-[130px]">市公安局协同指挥部</span>
+</div>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-[10px]">8</span>
+</div>
+<div class="flex flex-col pl-6 gap-0.5 mt-0.5">
+<div class="flex items-center justify-between px-2 py-1.5 rounded bg-primary-container text-on-primary font-medium cursor-pointer shadow-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">folder_open</span>
+<span class="truncate max-w-[120px]">情报研判协同中心</span>
+</div>
+<span class="px-1.5 py-0.2 rounded-full bg-white/20 text-white font-label-sm text-[10px]">3</span>
+</div>
+<div class="flex items-center justify-between px-2 py-1.5 rounded hover:bg-surface-container-low text-on-surface cursor-pointer">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">folder</span>
+<span class="truncate max-w-[120px]">指挥调度综合席</span>
+</div>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-[10px]">5</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center justify-between px-2 py-1.5 rounded hover:bg-surface-container-low text-on-surface cursor-pointer">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">traffic</span>
+<span class="font-medium truncate max-w-[130px]">交通警察支队</span>
+</div>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-[10px]">12</span>
+</div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center justify-between px-2 py-1.5 rounded hover:bg-surface-container-low text-on-surface cursor-pointer">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">shield</span>
+<span class="font-medium truncate max-w-[130px]">特警巡防支队</span>
+</div>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-[10px]">16</span>
+</div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center justify-between px-2 py-1.5 rounded hover:bg-surface-container-low text-on-surface cursor-pointer">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">grid_view</span>
+<span class="font-medium truncate max-w-[130px]">基层派出所网格联勤组</span>
+</div>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-[10px]">42</span>
+</div>
+</div>
+</div>
+<div class="mt-4 p-space-md rounded-lg bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-center justify-between text-on-surface font-label-md text-label-md">
+<span class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-[15px]">verified</span>授权容量配额
+          </span>
+<span class="font-semibold text-primary">84 / 200 个</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[42%]"></div>
+</div>
+<p class="font-body-sm text-[11px] text-outline leading-tight">当前版本 License 剩余 116 席，支持热插拔授权扩容与跨网段灾备同步。</p>
+</div>
+</aside>
+<!-- Main Workspace (ProTable & Tools) -->
+<main class="flex-1 flex flex-col gap-space-md min-w-0">
+<!-- Search Form -->
+<section class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm flex flex-col gap-space-md">
+<form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md items-center">
+<div class="flex items-center gap-2">
+<label class="w-20 shrink-0 font-label-md text-label-md text-on-surface-variant text-right">岗位名称</label>
+<input class="flex-1 h-8 px-3 text-body-sm font-body-sm rounded bg-surface-container-low text-on-surface focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary-container focus:outline-none" type="text" value="情报研判"/>
+</div>
+<div class="flex items-center gap-2">
+<label class="w-20 shrink-0 font-label-md text-label-md text-on-surface-variant text-right">岗位类型</label>
+<div class="relative flex-1">
+<select class="w-full h-8 px-3 appearance-none text-body-sm font-body-sm rounded bg-surface-container-low text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container">
+<option selected="">全部类型</option>
+<option>专职合成岗</option>
+<option>应急机动岗</option>
+<option>辅助值班岗</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-[16px] text-outline pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<label class="w-20 shrink-0 font-label-md text-label-md text-on-surface-variant text-right">在岗状态</label>
+<div class="relative flex-1">
+<select class="w-full h-8 px-3 appearance-none text-body-sm font-body-sm rounded bg-surface-container-low text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container">
+<option selected="">全部 (正常在岗)</option>
+<option>正常在岗</option>
+<option>离岗交接</option>
+<option>轮休未上岗</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-[16px] text-outline pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<label class="w-20 shrink-0 font-label-md text-label-md text-on-surface-variant text-right">关联警种</label>
+<div class="relative flex-1">
+<select class="w-full h-8 px-3 appearance-none text-body-sm font-body-sm rounded bg-surface-container-low text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container">
+<option selected="">治安 / 刑侦 / 交警</option>
+<option>刑侦支队</option>
+<option>治安巡逻</option>
+<option>交警勤务</option>
+<option>巡特警突击</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-[16px] text-outline pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+</form>
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-2 text-primary text-label-md font-label-md cursor-pointer hover:underline">
+<span class="material-symbols-outlined text-[16px]">tune</span>高级多维筛选 (网格代码/排班制式/权限级别)
+          </div>
+<div class="flex items-center gap-space-sm">
+<button class="px-4 py-1.5 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-colors" type="button">重置</button>
+<button class="flex items-center gap-1 px-4 py-1.5 rounded bg-primary-container text-on-primary hover:bg-primary font-label-md text-label-md transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">search</span>查询
+            </button>
+</div>
+</div>
+</section>
+<!-- Table Section -->
+<section class="bg-surface-container-lowest rounded-lg shadow-sm flex flex-col overflow-hidden">
+<!-- Toolbar -->
+<div class="p-space-md flex flex-wrap items-center justify-between gap-space-sm bg-surface-container-low">
+<div class="flex items-center gap-space-sm">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary shadow-sm transition-colors" onclick="document.getElementById('edit-drawer').classList.remove('translate-x-full')">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>新增协同岗
+            </button>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">group_add</span>批量分配人员
+            </button>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">calendar_add_on</span>批量下发排班
+            </button>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">file_download</span>导出名册
+            </button>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded text-outline hover:bg-surface-container hover:text-on-surface" title="刷新"><span class="material-symbols-outlined text-[18px]">refresh</span></button>
+<button class="p-1.5 rounded text-outline hover:bg-surface-container hover:text-on-surface" title="列设置"><span class="material-symbols-outlined text-[18px]">view_column</span></button>
+<button class="p-1.5 rounded text-outline hover:bg-surface-container hover:text-on-surface" title="显示密度"><span class="material-symbols-outlined text-[18px]">density_medium</span></button>
+</div>
+</div>
+<!-- Responsive Table Container -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left font-body-sm text-body-sm text-on-surface select-none">
+<thead>
+<tr class="bg-surface-container font-headline-sm text-[12px] text-outline">
+<th class="py-3 px-3 w-10 text-center">
+<input class="rounded accent-primary-container cursor-pointer" type="checkbox"/>
+</th>
+<th class="py-3 px-3">岗位编码</th>
+<th class="py-3 px-4">协同岗位名称</th>
+<th class="py-3 px-4">所属部门</th>
+<th class="py-3 px-4">岗位功能标签</th>
+<th class="py-3 px-4">当前在岗民警</th>
+<th class="py-3 px-3 text-center">实时上下岗状态</th>
+<th class="py-3 px-3">绑定角色</th>
+<th class="py-3 px-4 text-center">操作</th>
+</tr>
+</thead>
+<tbody>
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-3 px-3 text-center">
+<input checked="" class="rounded accent-primary-container cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3 px-3">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] font-semibold">P-INFO-001</span>
+</td>
+<td class="py-3 px-4 font-medium text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+                  情报研判主任席
+                </td>
+<td class="py-3 px-4 text-outline truncate max-w-[140px]">市局情报研判协同中心</td>
+<td class="py-3 px-4">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-primary-container font-label-sm text-[11px]">重大警情研判</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-[11px]">跨域穿透</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<img class="w-7 h-7 rounded-full object-cover shadow-sm" data-alt="Police officer portrait in high contrast uniform studio lighting with clean crisp navy background and focused professional posture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp0yOtkLkgBlPn1Ot98hmJDkj6PoNhQH5X7FzwLisFK6zQTkow1c92wbHhN3r1CUoZay3VRjeozh9pv30SvxCr_Pa1nOdt6vG6oVFrvH0dRRIAh_Y8exO0abGpnMX3qgicvAdqBsLKPxx4ZAtcRhgtFpzxbsw_hDaeb6_D_BZUODJVXGuupJsDfmWoSfw6E2O4s2-I8x4xtSJHrXv_Kb8JUg3dm79IaSW2L56-baHpr1v1wxJ2Uv3Biw"/>
+<div class="flex flex-col">
+<span class="font-medium text-on-surface leading-tight">刘建军</span>
+<span class="font-mono text-[10px] text-outline">警号: 002198</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#f0f9eb] text-tertiary font-label-sm text-[11px] font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>已上岗 08:30
+                  </span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">研判分析专员 (甲级)</td>
+<td class="py-3 px-4 text-center">
+<div class="inline-flex items-center gap-2 text-primary font-label-sm text-label-sm">
+<button class="hover:underline" onclick="document.getElementById('edit-drawer').classList.remove('translate-x-full')">编辑</button>
+<button class="hover:underline">人员指派</button>
+<button class="hover:underline">排班</button>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined text-[16px]">more_horiz</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-low/40">
+<td class="py-3 px-3 text-center">
+<input class="rounded accent-primary-container cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3 px-3">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] font-semibold">P-INFO-002</span>
+</td>
+<td class="py-3 px-4 font-medium text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+                  视侦追踪研判席
+                </td>
+<td class="py-3 px-4 text-outline truncate max-w-[140px]">市局情报研判协同中心</td>
+<td class="py-3 px-4">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-primary-container font-label-sm text-[11px]">视频抓拍联动</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-[11px]">人像追溯</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<img class="w-7 h-7 rounded-full object-cover shadow-sm" data-alt="Female criminal investigator in uniform looking forward in modern tactical operations center lighting with deep blue ambient screen glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW1PAjEgGGsDsYeSjIoP3tWKRkbTDW2DfMxbMK3lTbjpD47qvOzgNgIQDz542IjDqoIflr9lAZzw-XdQ7-lXihJfTfYWBSo_yylxG_TgwL7sk6hTTenhBFHwqggF3Kd_dQDTFpQx1_VeSSuhAR7p0oxxo1GFk5cSIZ_ylSbisuSZEeWDQZtjLYAcyfXVY-LXqLYf8svovL75u8OeX35JDgmZXZAFQHEVjTx1M5KGP0uevmvfc0VsvE-g"/>
+<div class="flex flex-col">
+<span class="font-medium text-on-surface leading-tight">周芳</span>
+<span class="font-mono text-[10px] text-outline">警号: 004120</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#fdf6ec] text-[#e6a23c] font-label-sm text-[11px] font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#e6a23c]"></span>就餐暂离 (11:45)
+                  </span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">天网协同操作员</td>
+<td class="py-3 px-4 text-center">
+<div class="inline-flex items-center gap-2 text-primary font-label-sm text-label-sm">
+<button class="hover:underline">编辑</button>
+<button class="hover:underline">人员指派</button>
+<button class="hover:underline">排班</button>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined text-[16px]">more_horiz</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-3 px-3 text-center">
+<input class="rounded accent-primary-container cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3 px-3">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] font-semibold">P-DISP-003</span>
+</td>
+<td class="py-3 px-4 font-medium text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+                  综合指挥联络席
+                </td>
+<td class="py-3 px-4 text-outline truncate max-w-[140px]">指挥中心指挥科</td>
+<td class="py-3 px-4">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-primary-container font-label-sm text-[11px]">警信调度</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-[11px]">电台一键通</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<img class="w-7 h-7 rounded-full object-cover shadow-sm" data-alt="Senior tactical police dispatcher with headphones in command room warm studio ambient lighting confident look" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxd-02p59c22HokoY8rbxENUI1m4uyp26-KXlSe3FyCwDcF386rC_KBXtNJXQuMS37crWLypJrJfifsWZXSiFd5ihVmf0cnYUhbCP9s-Xg55JGZVIvcfvl2Tqd-M5pP3PRxVdebTM5ZsVmC32z-gffokjKrzdUv79cgqsQQp8G26bN-NEVpKrHgWnoplQ1-VDAHfHW_gx4xp7qJz7p5ZAWTsd6oNrQR8hvON-VlNxFSetHWbjf2o1luA"/>
+<div class="flex flex-col">
+<span class="font-medium text-on-surface leading-tight">陈国强</span>
+<span class="font-mono text-[10px] text-outline">警号: 003512</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container text-outline font-label-sm text-[11px] font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>轮休交班中
+                  </span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">一级指挥长助理</td>
+<td class="py-3 px-4 text-center">
+<div class="inline-flex items-center gap-2 text-primary font-label-sm text-label-sm">
+<button class="hover:underline">编辑</button>
+<button class="hover:underline">人员指派</button>
+<button class="hover:underline">排班</button>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined text-[16px]">more_horiz</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-low/40">
+<td class="py-3 px-3 text-center">
+<input class="rounded accent-primary-container cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-3 px-3">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-mono text-[11px] font-semibold">P-AUTO-007</span>
+</td>
+<td class="py-3 px-4 font-medium text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+                  重点车辆缉查比对席
+                </td>
+<td class="py-3 px-4 text-outline truncate max-w-[140px]">交通交管指挥室</td>
+<td class="py-3 px-4">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-primary-container font-label-sm text-[11px]">卡口缉查布控</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-[11px]">电子封锁</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center font-label-md text-label-md text-outline">席</div>
+<div class="flex flex-col">
+<span class="font-medium text-outline leading-tight">王晓峰 (代)</span>
+<span class="font-mono text-[10px] text-outline">警号: 009821</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#f0f9eb] text-tertiary font-label-sm text-[11px] font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>已上岗 07:50
+                  </span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">交管协同管控岗</td>
+<td class="py-3 px-4 text-center">
+<div class="inline-flex items-center gap-2 text-primary font-label-sm text-label-sm">
+<button class="hover:underline">编辑</button>
+<button class="hover:underline">人员指派</button>
+<button class="hover:underline">排班</button>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined text-[16px]">more_horiz</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ProPagination -->
+<div class="p-space-md flex flex-wrap items-center justify-between gap-space-sm bg-surface-container-low border-t border-[#e6e9f0]">
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-outline">
+<span>共 <strong class="text-on-surface">84</strong> 条岗位记录</span>
+<span>已选中 <strong class="text-primary-container">1</strong> 项</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm">
+<select class="h-7 px-2 text-label-sm font-label-sm rounded bg-surface-container-lowest text-on-surface border border-outline-variant focus:outline-none">
+<option>10 条/页</option>
+<option>20 条/页</option>
+<option>50 条/页</option>
+</select>
+<button class="w-7 h-7 flex items-center justify-center rounded bg-surface-container text-outline hover:bg-surface-container-high disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<div class="flex items-center gap-1">
+<button class="w-7 h-7 rounded bg-primary-container text-on-primary font-medium text-[12px]">1</button>
+<button class="w-7 h-7 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container font-medium text-[12px]">2</button>
+<button class="w-7 h-7 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container font-medium text-[12px]">3</button>
+<span class="text-outline px-1">...</span>
+<button class="w-7 h-7 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container font-medium text-[12px]">9</button>
+</div>
+<button class="w-7 h-7 flex items-center justify-center rounded bg-surface-container text-outline hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<div class="flex items-center gap-1 text-outline">
+<span>跳至</span>
+<input class="w-10 h-7 text-center rounded bg-surface-container-lowest border border-outline-variant text-on-surface focus:outline-none focus:border-primary" type="text" value="1"/>
+<span>页</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Right Drawer for Editing Post (Element Plus Slide-over Style) -->
+<aside class="fixed inset-y-0 right-0 w-full sm:w-[500px] z-50 bg-surface-container-lowest shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out" id="edit-drawer">
+<div class="p-space-lg flex items-center justify-between bg-surface-container-low">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">edit_note</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">编辑协同岗</h2>
+</div>
+<p class="font-body-sm text-[12px] text-outline mt-0.5">席位编码: P-INFO-001 (情报研判协同中心)</p>
+</div>
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" onclick="document.getElementById('edit-drawer').classList.add('translate-x-full')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Drawer Tabs -->
+<div class="flex items-center bg-surface-container-low px-space-lg border-b border-[#e6e9f0]">
+<button class="px-4 py-2 font-label-md text-label-md text-primary-container border-b-2 border-primary-container font-semibold">基本信息</button>
+<button class="px-4 py-2 font-label-md text-label-md text-outline hover:text-on-surface flex items-center gap-1">
+        关联人员 <span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface font-label-sm text-[10px]">3</span>
+</button>
+<button class="px-4 py-2 font-label-md text-label-md text-outline hover:text-on-surface">功能权限绑定</button>
+<button class="px-4 py-2 font-label-md text-label-md text-outline hover:text-on-surface">排班规则</button>
+</div>
+<!-- Drawer Content Form -->
+<div class="flex-1 overflow-y-auto p-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1">
+<span class="text-error">*</span> 协同岗位全称
+        </label>
+<input class="h-9 px-3 text-body-sm font-body-sm rounded bg-surface-container-low text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" type="text" value="情报研判主任席"/>
+<span class="text-[11px] text-outline">用于大屏作战看板与警信联络组对外展示名称</span>
+</div>
+<div class="grid grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1"><span class="text-error">*</span> 岗位属性</label>
+<select class="h-9 px-3 text-body-sm font-body-sm rounded bg-surface-container-low text-on-surface focus:outline-none">
+<option selected="">专职合成指挥席</option>
+<option>应急临时机动席</option>
+<option>跨部门支撑组</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1"><span class="text-error">*</span> 在岗人员上限</label>
+<input class="h-9 px-3 text-body-sm font-body-sm rounded bg-surface-container-low text-on-surface focus:outline-none" type="number" value="2"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">岗位功能标签配置</label>
+<div class="flex flex-wrap gap-1.5 p-2 rounded bg-surface-container-low min-h-[42px] items-center">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm">
+            重大警情研判 <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm">
+            跨域数据穿透 <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm">
+            预警直通红机 <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error">close</span>
+</span>
+<button class="px-2 py-1 rounded border border-dashed border-outline-variant text-outline hover:text-primary hover:border-primary font-label-sm text-label-sm flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">add</span>添加标签
+          </button>
+</div>
+</div>
+<div class="flex flex-col gap-2 pt-2">
+<label class="font-label-md text-label-md text-on-surface">当前绑定执勤民警及排班表</label>
+<div class="flex flex-col gap-2">
+<div class="p-3 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover" data-alt="Senior police officer portrait focused with blue background and badge in uniform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtludIC52ngff1MnPDde8bz2Ly-sXyMQxorumvyieV1xr1NKVwBr1PmVHTFm8KhNar_2KhPaRe3K4pGJg132TyYGE5H0_Rbskoy5Yqe23cKnYUCzxzNGHeG1bv5UQKPuhD8MbqgrmoI44InwMd3BTqZIlQElwL1yrlkMvdtQiGW_LzQTN9zYL4IDhB2qOWWn8DOyb_7iOnoKhXOtybKEfKndO5NhlyudMPbPjhfmqEK7Fxsv7Ix3MRqw"/>
+<div class="flex flex-col">
+<span class="font-medium text-on-surface text-body-sm">刘建军 (主值)</span>
+<span class="text-[11px] text-outline">警号 002198 · 早班 (08:30 - 17:30)</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-[#f0f9eb] text-tertiary font-label-sm text-[11px]">正常在岗</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-secondary-container text-on-primary-container font-semibold flex items-center justify-center font-label-md">张</div>
+<div class="flex flex-col">
+<span class="font-medium text-on-surface text-body-sm">张晓伟 (副值)</span>
+<span class="text-[11px] text-outline">警号 006421 · 晚班备勤 (17:30 - 次日02:00)</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-outline font-label-sm text-[11px]">待上岗</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 pt-2">
+<label class="font-label-md text-label-md text-on-surface">席位上下岗管控联动机制</label>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-2 text-body-sm">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant">人脸识别门禁打卡自动上岗</span>
+<input checked="" class="accent-primary-container w-4 h-4 cursor-pointer" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant">超时 15 分钟离岗自动移交副值</span>
+<input checked="" class="accent-primary-container w-4 h-4 cursor-pointer" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant">战时一键紧急召回推送</span>
+<input checked="" class="accent-primary-container w-4 h-4 cursor-pointer" type="checkbox"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer Actions -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-end gap-space-sm">
+<button class="px-4 py-1.5 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-colors" onclick="document.getElementById('edit-drawer').classList.add('translate-x-full')">
+        取消
+      </button>
+<button class="px-5 py-1.5 rounded bg-primary-container text-on-primary hover:bg-primary font-label-md text-label-md transition-colors shadow-sm" onclick="document.getElementById('edit-drawer').classList.add('translate-x-full')">
+        保存生效
+      </button>
+</div>
+</aside>
+</div></main><footer class="w-full bg-surface-container-lowest border-t border-[#e6e9f0] py-3 px-margin text-center text-outline font-body-sm text-body-sm">© 2026 警务业务协同平台 · LinkX Admin Vue 3 Enterprise v2.4.0</footer></div></body></html>

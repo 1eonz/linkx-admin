@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>多节点协同与数据跨域授权控制台 - 节点管理</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-fixed": "#9bfa6b",
+            "on-error": "#ffffff",
+            "on-background": "#181c20",
+            "primary-fixed": "#d3e4ff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed": "#0a1c30",
+            "on-surface-variant": "#404752",
+            "on-secondary-fixed-variant": "#37485d",
+            "error-container": "#ffdad6",
+            "secondary": "#4f6076",
+            "tertiary": "#286c00",
+            "on-surface": "#181c20",
+            "inverse-on-surface": "#eef1f7",
+            "primary-container": "#409eff",
+            "primary-fixed-dim": "#a2c9ff",
+            "on-primary-container": "#003460",
+            "on-secondary": "#ffffff",
+            "surface-container-highest": "#e0e2e9",
+            "surface-dim": "#d7dae0",
+            "on-tertiary-fixed": "#072100",
+            "secondary-fixed-dim": "#b6c8e2",
+            "on-tertiary-fixed-variant": "#1d5200",
+            "surface": "#f8f9ff",
+            "surface-tint": "#0060a9",
+            "background": "#f8f9ff",
+            "on-primary": "#ffffff",
+            "on-primary-fixed-variant": "#004881",
+            "inverse-primary": "#a2c9ff",
+            "surface-bright": "#f8f9ff",
+            "inverse-surface": "#2d3136",
+            "outline": "#707784",
+            "tertiary-fixed-dim": "#80dd52",
+            "primary": "#0060a9",
+            "secondary-container": "#d2e4ff",
+            "outline-variant": "#c0c7d4",
+            "surface-container-low": "#f1f3fa",
+            "surface-container-high": "#e6e8ef",
+            "error": "#ba1a1a",
+            "surface-container": "#ebeef4",
+            "surface-variant": "#e0e2e9",
+            "on-tertiary-container": "#133b00",
+            "tertiary-container": "#55af28",
+            "on-primary-fixed": "#001c38",
+            "on-secondary-container": "#55667c",
+            "secondary-fixed": "#d2e4ff"
+          },
+          fontFamily: {
+            sans: ["Inter", "system-ui", "-apple-system", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Element UI 经典精致滚动条 */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c0c4cc;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f5f7fa;
+    }
+    /* 内嵌文字开关定制样式 - 彻底杜绝文字与滑块重叠 */
+    .el-switch-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      width: 62px;
+      height: 24px;
+      border-radius: 12px;
+      transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      user-select: none;
+      flex-shrink: 0;
+      border: 1px solid transparent;
+    }
+    .el-switch-btn.is-active {
+      background-color: #409eff;
+      border-color: #409eff;
+    }
+    .el-switch-btn.is-inactive {
+      background-color: #dcdfe6;
+      border-color: #dcdfe6;
+    }
+    .el-switch-btn .switch-thumb {
+      position: absolute;
+      top: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .el-switch-btn.is-active .switch-thumb {
+      left: 39px;
+    }
+    .el-switch-btn.is-inactive .switch-thumb {
+      left: 3px;
+    }
+    .el-switch-btn .switch-text-active {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .el-switch-btn.is-inactive .switch-text-active {
+      display: none;
+    }
+    .el-switch-btn .switch-text-inactive {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 600;
+      color: #606266;
+    }
+    .el-switch-btn.is-active .switch-text-inactive {
+      display: none;
+    }
+  </style>
+<meta content="web_blank" name="shell-type"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-[#f0f2f5] min-h-screen text-[#303133] antialiased p-5 font-sans">
+<!-- 主内容工作区容器 (纯净、无任何弹窗压盖遮挡) -->
+<main class="max-w-[1720px] mx-auto space-y-3.5">
+<!-- 顶部状态栏与面包屑路径 -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white px-5 py-3 rounded border border-[#e4e7ed] shadow-xs">
+<div class="flex items-center gap-3">
+<div class="w-1.5 h-6 bg-[#409eff] rounded-xs"></div>
+<div>
+<div class="flex items-center gap-1.5 text-xs text-[#909399]">
+<span>协同支撑中枢</span>
+<span>/</span>
+<span>多节点互联管理</span>
+<span>/</span>
+<span class="font-mono text-[#606266]">/nodeManage/nodeManagement</span>
+<span>/</span>
+<span class="text-[#303133] font-medium">多节点协同与跨域数据授权控制台</span>
+</div>
+<h1 class="text-base font-bold text-[#1f2d3d] mt-0.5 tracking-tight">
+            多节点协同管理与数据跨域授权控制台
+          </h1>
+</div>
+</div>
+<!-- 拓扑全局监控快照微组件 -->
+<div class="flex items-center gap-4 bg-[#f8f9fb] px-4 py-1.5 rounded border border-[#ebeef5]">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#67c23a] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#67c23a]"></span>
+</span>
+<span class="text-xs text-[#606266]">市局主枢纽网关：<strong class="text-[#67c23a] font-semibold">正常</strong></span>
+</div>
+<div class="h-3.5 w-[1px] bg-[#dcdfe6]"></div>
+<div class="flex items-center gap-1.5 text-xs text-[#606266]">
+<span>在线节点数：</span>
+<span class="font-bold text-[#409eff] text-sm font-mono">18 / 20</span>
+</div>
+</div>
+</div>
+<!-- 业务 Tab 标签导航栏 -->
+<div class="bg-white rounded border border-[#e4e7ed] shadow-xs px-5">
+<div class="flex items-center gap-8 overflow-x-auto text-sm">
+<button class="relative py-3.5 text-[#409eff] font-semibold flex items-center gap-2 focus:outline-none transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>节点管理</span>
+<span class="px-1.5 py-0.5 bg-[#ecf5ff] text-[#409eff] text-[11px] rounded-full border border-[#d9ecff] font-normal">当前拓扑</span>
+<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#409eff] rounded-full"></div>
+</button>
+<button class="py-3.5 text-[#606266] hover:text-[#409eff] font-medium flex items-center gap-1.5 focus:outline-none transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>服务端管理</span>
+</button>
+<button class="py-3.5 text-[#606266] hover:text-[#409eff] font-medium flex items-center gap-1.5 focus:outline-none transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>客户端管理</span>
+</button>
+<button class="py-3.5 text-[#606266] hover:text-[#409eff] font-medium flex items-center gap-1.5 focus:outline-none transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>入站/出站数据授权</span>
+</button>
+<button class="py-3.5 text-[#606266] hover:text-[#409eff] font-medium flex items-center gap-1.5 focus:outline-none transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>连接监控状态</span>
+</button>
+</div>
+</div>
+<!-- 搜索检索与操作工具栏 -->
+<div class="bg-white p-4 rounded border border-[#e4e7ed] shadow-xs space-y-4">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<!-- 检索表单区 -->
+<div class="flex flex-wrap items-center gap-3">
+<!-- 节点名称 -->
+<div class="flex items-center gap-2">
+<span class="text-xs text-[#606266] whitespace-nowrap">节点名称:</span>
+<div class="relative w-56">
+<input class="w-full h-8 text-xs px-2.5 pr-7 border border-[#dcdfe6] rounded hover:border-[#c0c4cc] focus:border-[#409eff] focus:outline-none transition-colors placeholder:text-[#c0c4cc]" placeholder="输入节点名称或标识，如：东区" type="text"/>
+<svg class="w-3.5 h-3.5 text-[#909399] absolute right-2.5 top-2.5 pointer-events-none" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- 架构类型 -->
+<div class="flex items-center gap-2">
+<span class="text-xs text-[#606266] whitespace-nowrap">节点架构类型:</span>
+<div class="relative w-44">
+<select class="w-full h-8 text-xs pl-2.5 pr-7 border border-[#dcdfe6] rounded hover:border-[#c0c4cc] focus:border-[#409eff] focus:outline-none appearance-none cursor-pointer bg-white transition-colors">
+<option value="">全部节点类型</option>
+<option value="server">服务端节点 (核心控制)</option>
+<option value="client">客户端节点 (分局/边缘)</option>
+</select>
+<svg class="w-3.5 h-3.5 text-[#909399] absolute right-2.5 top-2.5 pointer-events-none" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- 通讯状态 -->
+<div class="flex items-center gap-2">
+<span class="text-xs text-[#606266] whitespace-nowrap">网络通讯状态:</span>
+<div class="relative w-40">
+<select class="w-full h-8 text-xs pl-2.5 pr-7 border border-[#dcdfe6] rounded hover:border-[#c0c4cc] focus:border-[#409eff] focus:outline-none appearance-none cursor-pointer bg-white transition-colors">
+<option value="">全部连通状态</option>
+<option value="online">在线连跃</option>
+<option value="offline">离线失联</option>
+</select>
+<svg class="w-3.5 h-3.5 text-[#909399] absolute right-2.5 top-2.5 pointer-events-none" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- 查/重 按钮 -->
+<button class="h-8 px-4 bg-[#409eff] text-white text-xs font-medium rounded hover:bg-[#66b1ff] active:bg-[#3a8ee6] transition-colors flex items-center gap-1 shadow-xs cursor-pointer" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>查询</span>
+</button>
+<button class="h-8 px-3.5 bg-white text-[#606266] border border-[#dcdfe6] text-xs font-medium rounded hover:border-[#c0c4cc] hover:text-[#409eff] transition-colors flex items-center gap-1 cursor-pointer" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>重置</span>
+</button>
+</div>
+<!-- 右侧新建与批量操作 -->
+<div class="flex items-center gap-2.5">
+<button class="h-8 px-3.5 bg-[#409eff] text-white text-xs font-medium rounded hover:bg-[#66b1ff] active:bg-[#3a8ee6] transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="openDialog()" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>+ 新增网络节点</span>
+</button>
+<button class="h-8 px-3 bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] hover:border-[#c0c4cc] hover:text-[#409eff] text-xs font-medium rounded transition-colors flex items-center gap-1 cursor-pointer" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>批量下发授权</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 核心数据表格容器 (Element Plus 高保真标准) -->
+<div class="bg-white rounded border border-[#e4e7ed] shadow-xs overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[1280px]">
+<thead>
+<tr class="bg-[#f5f7fa] text-[#909399] text-xs font-semibold border-b border-[#ebeef5]">
+<th class="py-3.5 px-4 w-16 text-center">序号</th>
+<th class="py-3.5 px-4 w-72">节点标识与名称</th>
+<th class="py-3.5 px-4 w-36">所属层级/架构角色</th>
+<th class="py-3.5 px-4 w-28 text-center">网络状态</th>
+<th class="py-3.5 px-4 w-48 text-center">数据同步机制 (内嵌状态开关)</th>
+<th class="py-3.5 px-4 w-44">最后心跳时间</th>
+<th class="py-3.5 px-4">入站/出站数据授权范围</th>
+<th class="py-3.5 px-4 w-64 text-center">综合业务操作</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#ebeef5] text-xs text-[#606266]">
+<!-- 行 01: 市局主枢纽节点 -->
+<tr class="hover:bg-[#f5f7fa]/80 transition-colors">
+<td class="py-3.5 px-4 text-center font-mono text-[#909399]">01</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] flex items-center justify-center font-bold text-sm flex-shrink-0">
+                    市
+                  </div>
+<div>
+<div class="flex items-center gap-1.5 font-bold text-[#303133]">
+<span>市局主枢纽节点</span>
+<span class="font-mono text-[11px] font-normal px-1.5 py-0.5 bg-[#f4f4f5] text-[#909399] rounded border border-[#e4e7ed]">NODE-MAIN</span>
+</div>
+<div class="text-[11px] text-[#909399] font-mono mt-0.5">IP: 10.128.0.1 (主干光纤)</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ecf5ff] text-[#409eff] border border-[#d9ecff] text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#409eff]"></span>
+                  服务端节点
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#f0f9eb] text-[#67c23a] border border-[#e1f3d8] text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#67c23a]"></span>
+                  在线连跃
+                </span>
+</td>
+<!-- 精巧内嵌文字开关 (开启状态) -->
+<td class="py-3.5 px-4 text-center">
+<button aria-label="数据同步开关" class="el-switch-btn is-active inline-flex" onclick="toggleSwitch(this)" type="button">
+<span class="switch-text-active">开启</span>
+<span class="switch-text-inactive">关闭</span>
+<span class="switch-thumb"></span>
+</button>
+</td>
+<td class="py-3.5 px-4 font-mono text-[#606266]">
+                2026-09-21 10:45:12
+              </td>
+<td class="py-3.5 px-4">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] text-[11px]">警情推送</span>
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] text-[11px]">跨域指令</span>
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] text-[11px]">警员轨迹</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-2">
+<button class="text-[#409eff] hover:underline cursor-pointer" type="button">详情</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#409eff] hover:underline cursor-pointer" onclick="openDialog()" type="button">节点授权</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#409eff] hover:underline cursor-pointer" type="button">配置同步</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#606266] hover:text-[#409eff] cursor-pointer" type="button">编辑</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#f56c6c] hover:underline cursor-pointer" type="button">停用</button>
+</div>
+</td>
+</tr>
+<!-- 行 02: 东区分局协同节点 -->
+<tr class="hover:bg-[#f5f7fa]/80 transition-colors">
+<td class="py-3.5 px-4 text-center font-mono text-[#909399]">02</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] flex items-center justify-center font-bold text-sm flex-shrink-0">
+                    东
+                  </div>
+<div>
+<div class="flex items-center gap-1.5 font-bold text-[#303133]">
+<span>东区分局协同节点</span>
+<span class="font-mono text-[11px] font-normal px-1.5 py-0.5 bg-[#f4f4f5] text-[#909399] rounded border border-[#e4e7ed]">NODE-EAST</span>
+</div>
+<div class="text-[11px] text-[#909399] font-mono mt-0.5">IP: 10.134.12.50 (汇聚分局)</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#909399]"></span>
+                  客户端节点
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#f0f9eb] text-[#67c23a] border border-[#e1f3d8] text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#67c23a]"></span>
+                  在线连跃
+                </span>
+</td>
+<!-- 精巧内嵌文字开关 (开启状态) -->
+<td class="py-3.5 px-4 text-center">
+<button aria-label="数据同步开关" class="el-switch-btn is-active inline-flex" onclick="toggleSwitch(this)" type="button">
+<span class="switch-text-active">开启</span>
+<span class="switch-text-inactive">关闭</span>
+<span class="switch-thumb"></span>
+</button>
+</td>
+<td class="py-3.5 px-4 font-mono text-[#606266]">
+                2026-09-21 10:44:50
+              </td>
+<td class="py-3.5 px-4">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] text-[11px]">警情上报</span>
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] text-[11px]">处置反馈</span>
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] text-[11px]">重点卡口</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-2">
+<button class="text-[#409eff] hover:underline cursor-pointer" type="button">详情</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#409eff] hover:underline cursor-pointer" onclick="openDialog()" type="button">节点授权</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#409eff] hover:underline cursor-pointer" type="button">配置同步</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#606266] hover:text-[#409eff] cursor-pointer" type="button">编辑</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#f56c6c] hover:underline cursor-pointer" type="button">停用</button>
+</div>
+</td>
+</tr>
+<!-- 行 03: 南区派出所末梢节点 -->
+<tr class="hover:bg-[#f5f7fa]/80 transition-colors">
+<td class="py-3.5 px-4 text-center font-mono text-[#909399]">03</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] flex items-center justify-center font-bold text-sm flex-shrink-0">
+                    南
+                  </div>
+<div>
+<div class="flex items-center gap-1.5 font-bold text-[#303133]">
+<span>南区派出所末梢节点</span>
+<span class="font-mono text-[11px] font-normal px-1.5 py-0.5 bg-[#f4f4f5] text-[#909399] rounded border border-[#e4e7ed]">NODE-SOUTH</span>
+</div>
+<div class="text-[11px] text-[#909399] font-mono mt-0.5">IP: 10.142.88.22 (天线4G VPN)</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#909399]"></span>
+                  客户端节点
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#f0f9eb] text-[#67c23a] border border-[#e1f3d8] text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#67c23a]"></span>
+                  在线
+                </span>
+</td>
+<!-- 精巧内嵌文字开关 (开启状态) -->
+<td class="py-3.5 px-4 text-center">
+<button aria-label="数据同步开关" class="el-switch-btn is-active inline-flex" onclick="toggleSwitch(this)" type="button">
+<span class="switch-text-active">开启</span>
+<span class="switch-text-inactive">关闭</span>
+<span class="switch-thumb"></span>
+</button>
+</td>
+<td class="py-3.5 px-4 font-mono text-[#606266]">
+                2026-09-21 10:43:08
+              </td>
+<td class="py-3.5 px-4">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] text-[11px]">警情接收</span>
+<span class="px-2 py-0.5 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] text-[11px]">即时协查</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-2">
+<button class="text-[#409eff] hover:underline cursor-pointer" type="button">详情</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#409eff] hover:underline cursor-pointer" onclick="openDialog()" type="button">节点授权</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#409eff] hover:underline cursor-pointer" type="button">配置同步</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#606266] hover:text-[#409eff] cursor-pointer" type="button">编辑</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#f56c6c] hover:underline cursor-pointer" type="button">停用</button>
+</div>
+</td>
+</tr>
+<!-- 行 04: 西区机动特警节点 (离线测试与关闭状态) -->
+<tr class="hover:bg-[#f5f7fa]/80 transition-colors">
+<td class="py-3.5 px-4 text-center font-mono text-[#909399]">04</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded bg-[#f4f4f5] text-[#909399] border border-[#e4e7ed] flex items-center justify-center font-bold text-sm flex-shrink-0">
+                    西
+                  </div>
+<div>
+<div class="flex items-center gap-1.5 font-bold text-[#606266]">
+<span>西区机动特警节点</span>
+<span class="font-mono text-[11px] font-normal px-1.5 py-0.5 bg-[#f4f4f5] text-[#909399] rounded border border-[#e4e7ed]">NODE-WEST-SWAT</span>
+</div>
+<div class="text-[11px] text-[#909399] font-mono mt-0.5">IP: 10.138.60.10</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#f4f4f5] text-[#606266] border border-[#e4e7ed] text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#909399]"></span>
+                  客户端节点
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#f4f4f5] text-[#909399] border border-[#e4e7ed] text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#c0c4cc]"></span>
+                  离线
+                </span>
+</td>
+<!-- 精巧内嵌文字开关 (关闭状态) -->
+<td class="py-3.5 px-4 text-center">
+<button aria-label="数据同步开关" class="el-switch-btn is-inactive inline-flex" onclick="toggleSwitch(this)" type="button">
+<span class="switch-text-active">开启</span>
+<span class="switch-text-inactive">关闭</span>
+<span class="switch-thumb"></span>
+</button>
+</td>
+<td class="py-3.5 px-4 font-mono text-[#909399]">
+                2026-09-21 09:12:00
+              </td>
+<td class="py-3.5 px-4">
+<span class="text-xs text-[#c0c4cc] italic">暂无授权通道</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-2">
+<button class="text-[#409eff] hover:underline cursor-pointer" type="button">详情</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#409eff] hover:underline cursor-pointer" onclick="openDialog()" type="button">节点授权</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#909399] opacity-50 cursor-not-allowed" disabled="" type="button">配置同步</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#606266] hover:text-[#409eff] cursor-pointer" type="button">编辑</button>
+<span class="text-[#dcdfe6]">|</span>
+<button class="text-[#67c23a] hover:underline cursor-pointer font-medium" type="button">启用</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- 表格标准分页条 -->
+<div class="px-5 py-3.5 bg-white border-t border-[#ebeef5] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#606266]">
+<div>
+          共计 <span class="font-semibold text-[#303133]">4</span> 个协同网络节点，当前显示第 1-4 条
+        </div>
+<div class="flex items-center gap-2">
+<div class="relative mr-2">
+<select class="h-7 text-xs px-2 pr-6 border border-[#dcdfe6] rounded bg-white hover:border-[#c0c4cc] focus:outline-none cursor-pointer">
+<option>每页10条</option>
+<option>每页20条</option>
+<option>每页50条</option>
+</select>
+</div>
+<button class="w-7 h-7 rounded border border-[#dcdfe6] bg-[#f4f4f5] text-[#c0c4cc] flex items-center justify-center cursor-not-allowed" disabled="">
+            &lt;
+          </button>
+<button class="w-7 h-7 rounded border border-[#409eff] bg-[#409eff] text-white font-medium flex items-center justify-center">
+            1
+          </button>
+<button class="w-7 h-7 rounded border border-[#dcdfe6] bg-white text-[#606266] hover:border-[#409eff] hover:text-[#409eff] flex items-center justify-center cursor-pointer transition-colors">
+            2
+          </button>
+<button class="w-7 h-7 rounded border border-[#dcdfe6] bg-white text-[#606266] hover:border-[#409eff] hover:text-[#409eff] flex items-center justify-center cursor-pointer transition-colors">
+            &gt;
+          </button>
+</div>
+</div>
+</div>
+</main>
+<!-- ========================================================================= -->
+<!-- 模态弹窗系统：新增边缘节点与入站出站数据授权 (默认隐藏，彻底避免页面元素重叠穿透) -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 bg-black/45 backdrop-blur-[2px] flex items-center justify-center p-4 overflow-y-auto" id="node-config-dialog" onclick="handleDialogBackdrop(event)" style="display: none;">
+<div class="bg-white w-full max-w-2xl rounded-lg shadow-2xl border border-[#ebeef5] overflow-hidden flex flex-col transition-all transform animate-[scaleIn_0.2s_ease-out]">
+<!-- 弹窗头部 Header -->
+<div class="px-6 py-4 border-b border-[#ebeef5] flex items-center justify-between bg-[#fafafa]">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-4 bg-[#409eff] rounded-xs"></div>
+<h2 class="text-sm font-bold text-[#1f2d3d] tracking-tight">新增节点配置与跨域数据授权</h2>
+</div>
+<button class="text-[#909399] hover:text-[#303133] p-1 rounded hover:bg-[#f0f2f5] transition-colors focus:outline-none cursor-pointer" onclick="closeDialog()" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- 弹窗表单主体 (展示规范的高亮错误校验) -->
+<div class="p-6 space-y-4 max-h-[75vh] overflow-y-auto text-xs">
+<!-- 节点编码与名称 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- 节点编码 (校验标红高亮) -->
+<div>
+<label class="block font-medium text-[#303133] mb-1.5">
+<span class="text-[#f56c6c] font-bold mr-0.5">*</span>节点编码 (Node Code)
+            </label>
+<input class="w-full h-8 text-xs px-3 rounded border border-[#f56c6c] bg-[#fef0f0]/30 text-[#303133] focus:outline-none focus:ring-1 focus:ring-[#f56c6c]" type="text" value="NODE-"/>
+<p class="text-[#f56c6c] text-[11px] mt-1 flex items-center gap-1">
+<svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+<path d="M12 8v4m0 4h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>节点编码格式不合规，须以字母大写与下划线组成</span>
+</p>
+</div>
+<!-- 节点名称 -->
+<div>
+<label class="block font-medium text-[#303133] mb-1.5">
+<span class="text-[#f56c6c] font-bold mr-0.5">*</span>节点名称
+            </label>
+<input class="w-full h-8 text-xs px-3 rounded border border-[#dcdfe6] focus:border-[#409eff] focus:outline-none placeholder:text-[#c0c4cc]" placeholder="例如：西区警务实战研判工作站" type="text"/>
+</div>
+</div>
+<!-- 架构角色与 IP 网关 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-medium text-[#303133] mb-1.5">
+<span class="text-[#f56c6c] font-bold mr-0.5">*</span>节点架构角色
+            </label>
+<div class="relative">
+<select class="w-full h-8 text-xs pl-3 pr-8 rounded border border-[#dcdfe6] focus:border-[#409eff] focus:outline-none appearance-none cursor-pointer bg-white">
+<option value="client">客户端分局节点 (Client Node)</option>
+<option value="server">服务端主控节点 (Server Master)</option>
+</select>
+<svg class="w-3.5 h-3.5 text-[#909399] absolute right-2.5 top-2.5 pointer-events-none" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- IP 网关 (校验标红高亮) -->
+<div>
+<label class="block font-medium text-[#303133] mb-1.5">
+<span class="text-[#f56c6c] font-bold mr-0.5">*</span>通讯专用 IP / 网关地址
+            </label>
+<input class="w-full h-8 text-xs px-3 rounded border border-[#f56c6c] bg-[#fef0f0]/30 text-[#303133] focus:outline-none focus:ring-1 focus:ring-[#f56c6c]" type="text" value="192.168.0."/>
+<p class="text-[#f56c6c] text-[11px] mt-1 flex items-center gap-1">
+<svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+<path d="M12 8v4m0 4h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>请输入有效的公安专网 IPv4 地址</span>
+</p>
+</div>
+</div>
+<!-- 基础协同流开关配置 -->
+<div class="bg-[#f8f9fb] p-3.5 rounded border border-[#ebeef5] space-y-3">
+<div class="text-[#303133] font-semibold text-xs flex items-center justify-between">
+<span>基础协同流自动化机制</span>
+<span class="text-[#909399] text-[11px] font-normal">状态随胶囊滑块内嵌文字响应</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="flex items-center justify-between bg-white p-2.5 rounded border border-[#ebeef5]">
+<div>
+<div class="font-medium text-[#303133]">跨域数据自动入库</div>
+<div class="text-[#909399] text-[11px]">身份鉴权后直通协同库表</div>
+</div>
+<button class="el-switch-btn is-active" onclick="toggleSwitch(this)" type="button">
+<span class="switch-text-active">开启</span>
+<span class="switch-text-inactive">关闭</span>
+<span class="switch-thumb"></span>
+</button>
+</div>
+<div class="flex items-center justify-between bg-white p-2.5 rounded border border-[#ebeef5]">
+<div>
+<div class="font-medium text-[#303133]">30s 周期性心跳探测</div>
+<div class="text-[#909399] text-[11px]">失联则触发多终端警报</div>
+</div>
+<button class="el-switch-btn is-inactive" onclick="toggleSwitch(this)" type="button">
+<span class="switch-text-active">开启</span>
+<span class="switch-text-inactive">关闭</span>
+<span class="switch-thumb"></span>
+</button>
+</div>
+</div>
+</div>
+<!-- 入站/出站数据授权范围 -->
+<div>
+<label class="block font-medium text-[#303133] mb-1.5">
+<span class="text-[#f56c6c] font-bold mr-0.5">*</span>入站/出站数据授权范围
+          </label>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+<label class="flex items-center gap-2 p-2 rounded bg-[#f8f9fb] text-[#606266] border border-[#ebeef5] cursor-pointer hover:bg-[#ecf5ff] hover:border-[#d9ecff] transition-colors">
+<input checked="" class="rounded text-[#409eff] focus:ring-0 cursor-pointer" type="checkbox"/>
+<span>警情接报流 (入站)</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-[#f8f9fb] text-[#606266] border border-[#ebeef5] cursor-pointer hover:bg-[#ecf5ff] hover:border-[#d9ecff] transition-colors">
+<input checked="" class="rounded text-[#409eff] focus:ring-0 cursor-pointer" type="checkbox"/>
+<span>处置反馈流 (出站)</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-[#f8f9fb] text-[#606266] border border-[#ebeef5] cursor-pointer hover:bg-[#ecf5ff] hover:border-[#d9ecff] transition-colors">
+<input class="rounded text-[#409eff] focus:ring-0 cursor-pointer" type="checkbox"/>
+<span>重点车辆卡口流</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-[#f8f9fb] text-[#606266] border border-[#ebeef5] cursor-pointer hover:bg-[#ecf5ff] hover:border-[#d9ecff] transition-colors">
+<input class="rounded text-[#409eff] focus:ring-0 cursor-pointer" type="checkbox"/>
+<span>即时警信广播</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-[#f8f9fb] text-[#606266] border border-[#ebeef5] cursor-pointer hover:bg-[#ecf5ff] hover:border-[#d9ecff] transition-colors">
+<input class="rounded text-[#409eff] focus:ring-0 cursor-pointer" type="checkbox"/>
+<span>设备拓扑遥测流</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-[#f8f9fb] text-[#606266] border border-[#ebeef5] cursor-pointer hover:bg-[#ecf5ff] hover:border-[#d9ecff] transition-colors">
+<input class="rounded text-[#409eff] focus:ring-0 cursor-pointer" type="checkbox"/>
+<span>指令协查文书</span>
+</label>
+</div>
+<div class="p-2 rounded bg-[#fef0f0] border border-[#fde2e2] text-[#f56c6c] mt-2 flex items-center gap-1.5 text-[11px]">
+<svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+<path d="M12 8v4m0 4h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>入站/出站必须至少勾选一个核心业务通道以完成初始握手授权</span>
+</div>
+</div>
+</div>
+<!-- 弹窗 Footer 底部操作 -->
+<div class="px-6 py-3.5 bg-[#fafafa] border-t border-[#ebeef5] flex items-center justify-end gap-2.5">
+<button class="px-4 h-8 bg-white border border-[#dcdfe6] text-[#606266] text-xs font-medium rounded hover:border-[#c0c4cc] hover:text-[#409eff] transition-colors cursor-pointer" onclick="closeDialog()" type="button">
+          关闭窗口
+        </button>
+<button class="px-4 h-8 bg-[#409eff] text-white text-xs font-medium rounded hover:bg-[#66b1ff] active:bg-[#3a8ee6] transition-colors shadow-xs cursor-pointer" onclick="submitAuth()" type="button">
+          提交并下发鉴权
+        </button>
+</div>
+</div>
+</div>
+<!-- JavaScript 交互脚本：开关滑动切换与弹窗控制 -->
+<script>
+    // 1. 独创胶囊内嵌文字开关切换函数（彻底保持滑块与文字空间分离）
+    function toggleSwitch(btn) {
+      if (btn.classList.contains('is-active')) {
+        btn.classList.remove('is-active');
+        btn.classList.add('is-inactive');
+      } else {
+        btn.classList.remove('is-inactive');
+        btn.classList.add('is-active');
+      }
+    }
+
+    // 2. 弹窗打开与关闭
+    function openDialog() {
+      const dialog = document.getElementById('node-config-dialog');
+      if (dialog) {
+        dialog.style.display = 'flex';
+      }
+    }
+
+    function closeDialog() {
+      const dialog = document.getElementById('node-config-dialog');
+      if (dialog) {
+        dialog.style.display = 'none';
+      }
+    }
+
+    function handleDialogBackdrop(event) {
+      if (event.target.id === 'node-config-dialog') {
+        closeDialog();
+      }
+    }
+
+    function submitAuth() {
+      alert('已触发多节点鉴权下发，请确认修正标红校验项后再提交！');
+    }
+
+    // 监听 ESC 键关闭模态窗
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeDialog();
+      }
+    });
+  </script>
+</body></html>

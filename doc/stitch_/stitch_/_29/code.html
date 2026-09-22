@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>三方对接 - 服务配置与设备授权</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-fixed": "#9bfa6b",
+            "on-error": "#ffffff",
+            "on-background": "#181c20",
+            "primary-fixed": "#d3e4ff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed": "#0a1c30",
+            "on-surface-variant": "#404752",
+            "on-secondary-fixed-variant": "#37485d",
+            "error-container": "#ffdad6",
+            "secondary": "#4f6076",
+            "tertiary": "#286c00",
+            "on-surface": "#181c20",
+            "inverse-on-surface": "#eef1f7",
+            "primary-container": "#409eff",
+            "primary-fixed-dim": "#a2c9ff",
+            "on-primary-container": "#003460",
+            "on-secondary": "#ffffff",
+            "surface-container-highest": "#e0e2e9",
+            "surface-dim": "#d7dae0",
+            "on-tertiary-fixed": "#072100",
+            "secondary-fixed-dim": "#b6c8e2",
+            "on-tertiary-fixed-variant": "#1d5200",
+            "surface": "#f8f9ff",
+            "surface-tint": "#0060a9",
+            "background": "#f8f9ff",
+            "on-primary": "#ffffff",
+            "on-primary-fixed-variant": "#004881",
+            "inverse-primary": "#a2c9ff",
+            "surface-bright": "#f8f9ff",
+            "inverse-surface": "#2d3136",
+            "outline": "#707784",
+            "tertiary-fixed-dim": "#80dd52",
+            "primary": "#0060a9",
+            "secondary-container": "#d2e4ff",
+            "outline-variant": "#c0c7d4",
+            "surface-container-low": "#f1f3fa",
+            "surface-container-high": "#e6e8ef",
+            "error": "#ba1a1a",
+            "surface-container": "#ebeef4",
+            "surface-variant": "#e0e2e9",
+            "on-tertiary-container": "#133b00",
+            "tertiary-container": "#55af28",
+            "on-primary-fixed": "#001c38",
+            "on-secondary-container": "#55667c",
+            "secondary-fixed": "#d2e4ff"
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Element UI 风格滚动条 */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #dcdfe6;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    /* 开关精细定位：确保文字与滑块绝对不重叠 */
+    .el-custom-switch {
+      width: 60px;
+      height: 24px;
+      border-radius: 12px;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .el-custom-switch[data-checked="true"] {
+      background-color: #409eff;
+    }
+    .el-custom-switch[data-checked="false"] {
+      background-color: #dcdfe6;
+    }
+    .el-custom-switch .switch-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      position: absolute;
+      top: 3px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .el-custom-switch[data-checked="true"] .switch-dot {
+      transform: translateX(39px);
+    }
+    .el-custom-switch[data-checked="false"] .switch-dot {
+      transform: translateX(3px);
+    }
+    .el-custom-switch .switch-text {
+      position: absolute;
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 500;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+    /* 开启状态：文字居左（靠滑块左边安全距离） */
+    .el-custom-switch[data-checked="true"] .switch-text {
+      left: 10px;
+      color: #ffffff;
+    }
+    /* 关闭状态：文字居右（靠滑块右边安全距离） */
+    .el-custom-switch[data-checked="false"] .switch-text {
+      right: 10px;
+      color: #606266;
+    }
+  </style>
+</head>
+<body class="bg-[#f5f7fa] min-h-screen text-slate-700 antialiased font-sans p-4 md:p-6 select-none">
+<!-- 页面主体容器 -->
+<main class="max-w-[1720px] mx-auto space-y-4" data-purpose="south-interface-page">
+<!-- 顶部面包屑与标题/统计指标区 -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div>
+<div class="flex items-center gap-2 text-outline text-xs mb-1">
+<span class="hover:text-primary transition-colors cursor-pointer">警务业务协同平台</span>
+<span class="">/</span>
+<span class="hover:text-primary transition-colors cursor-pointer">三方对接</span>
+<span class="">/</span>
+<span class="hover:text-primary transition-colors cursor-pointer">应用管理与南向服务对接</span>
+<span class="">/</span>
+<span class="text-on-surface font-medium">南向服务与三方应用配置</span>
+</div>
+<div class="flex items-center gap-3">
+<h1 class="text-xl font-bold tracking-tight text-on-surface">南向服务与三方应用配置</h1>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-xs font-mono">路由: /thirdParty/southInterface</span>
+</div>
+</div>
+<!-- 运行指标微型卡片看板 -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200/80 shadow-xs">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+</span>
+<div class="flex flex-col">
+<span class="text-[11px] text-outline">已连通网关</span>
+<span class="text-sm font-bold text-on-surface">18 / 20 节点</span>
+</div>
+</div>
+<div class="flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200/80 shadow-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">sync_alt</span>
+<div class="flex flex-col">
+<span class="text-[11px] text-outline">今日吞吐调用</span>
+<span class="text-sm font-bold text-on-surface">1,489,204 次</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 主业务卡片主体 -->
+<div class="bg-white rounded-lg border border-slate-200 shadow-xs overflow-hidden flex flex-col">
+<!-- Tab 导航栏 -->
+<div class="flex items-center justify-between px-6 border-b border-slate-200 bg-white h-12"><div class="flex items-center gap-6 h-full overflow-x-auto border-b border-[#ebeef5]"><button class="h-full relative px-1 text-sm font-semibold text-[#409eff] flex items-center gap-2 cursor-pointer transition-colors border-b-2 border-[#409eff] -mb-px"><span class="material-symbols-outlined text-[18px]">settings_ethernet</span><span>服务配置</span><span class="px-2 py-0.5 rounded-full bg-[#ecf5ff] text-[#409eff] text-xs font-semibold">6 活跃</span></button><button class="h-full relative px-1 text-sm font-medium text-[#606266] hover:text-[#409eff] flex items-center gap-2 cursor-pointer transition-colors border-b-2 border-transparent -mb-px"><span class="material-symbols-outlined text-[18px]">devices_other</span><span>设备类型管理</span></button><button class="h-full relative px-1 text-sm font-medium text-[#606266] hover:text-[#409eff] flex items-center gap-2 cursor-pointer transition-colors border-b-2 border-transparent -mb-px"><span class="material-symbols-outlined text-[18px]">videocam</span><span>组织/摄像头授权</span><span class="px-2 py-0.5 rounded-full bg-slate-100 text-[#606266] text-xs font-medium">124</span></button><button class="h-full relative px-1 text-sm font-medium text-[#606266] hover:text-[#409eff] flex items-center gap-2 cursor-pointer transition-colors border-b-2 border-transparent -mb-px"><span class="material-symbols-outlined text-[18px]">hub</span><span>第三方接入应用</span></button></div><div class="flex items-center gap-1"><button class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded transition-colors cursor-pointer" title="全屏工作区"><span class="material-symbols-outlined text-[18px]">fullscreen</span></button><button class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded transition-colors cursor-pointer" onclick="location.reload()" title="刷新"><span class="material-symbols-outlined text-[18px]">refresh</span></button></div></div>
+<!-- 搜索过滤栏与批量操作区 -->
+<div class="p-5 border-b border-slate-200 bg-white space-y-4"><div class="p-4 md:px-5 md:py-4 rounded-lg border border-[#ebeef5] bg-[#f8fafc] mb-4"><form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-end" onsubmit="event.preventDefault();"><div class="flex flex-col gap-1.5"><label class="text-xs font-medium text-[#606266]">服务名称</label><div class="relative"><input class="w-full h-9 pl-3 pr-8 rounded border border-slate-300 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#409eff] focus:ring-1 focus:ring-[#409eff] bg-white" placeholder="输入名称/关键字检索" type="text"/><span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] pointer-events-none">search</span></div></div><div class="flex flex-col gap-1.5"><label class="text-xs font-medium text-[#606266]">所属系统</label><div class="relative"><select class="w-full h-9 px-3 rounded border border-slate-300 text-xs text-slate-800 focus:outline-none focus:border-[#409eff] focus:ring-1 focus:ring-[#409eff] appearance-none cursor-pointer bg-white"><option value="">全部所属系统</option><option value="police">警务平台</option><option value="msip">MSIP综合平台</option><option value="skynet">天网视频平台</option><option value="traffic">交警智慧管控中枢</option></select><span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] pointer-events-none">expand_more</span></div></div><div class="flex flex-col gap-1.5"><label class="text-xs font-medium text-[#606266]">协议类型</label><div class="relative"><select class="w-full h-9 px-3 rounded border border-slate-300 text-xs text-slate-800 focus:outline-none focus:border-[#409eff] focus:ring-1 focus:ring-[#409eff] appearance-none cursor-pointer bg-white"><option value="">全部协议</option><option value="rest">RESTful 接口</option><option value="kafka">消息队列 (Kafka)</option><option value="mqtt">MQTT物联网</option><option value="jdbc">JDBC直连库</option><option value="gb28181">GB28181流媒体</option></select><span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] pointer-events-none">expand_more</span></div></div><div class="flex flex-col gap-1.5"><label class="text-xs font-medium text-[#606266]">运行状态</label><div class="relative"><select class="w-full h-9 px-3 rounded border border-slate-300 text-xs text-slate-800 focus:outline-none focus:border-[#409eff] focus:ring-1 focus:ring-[#409eff] appearance-none cursor-pointer bg-white"><option value="">所有状态</option><option value="1">开启</option><option value="0">关闭</option></select><span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] pointer-events-none">expand_more</span></div></div><div class="flex items-center gap-3"><button class="h-9 px-4 rounded bg-[#409eff] hover:bg-[#337ecc] text-white text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-[#409eff] shadow-xs" type="button"><span class="material-symbols-outlined text-[16px]">search</span><span>查询</span></button><button class="h-9 px-4 rounded border border-slate-300 hover:bg-slate-50 bg-white text-[#606266] text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs" type="button"><span class="material-symbols-outlined text-[16px]">restart_alt</span><span>重置</span></button></div></form></div><div class="flex flex-wrap items-center justify-between gap-3 pt-0.5"><div class="flex items-center gap-3"><button class="h-9 px-4 rounded bg-[#409eff] hover:bg-[#337ecc] text-white text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer group shadow-xs" onclick="openModal()" type="button"><span class="material-symbols-outlined text-[16px] group-hover:rotate-90 transition-transform">add</span><span>新增服务对接</span></button><button class="h-9 px-3.5 rounded border border-slate-300 hover:bg-slate-50 text-[#606266] bg-white text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs" type="button"><span class="material-symbols-outlined text-[16px] text-slate-500">verified_user</span><span>批量授权权限</span></button><button class="h-9 px-3.5 rounded border border-slate-300 hover:bg-slate-50 text-[#606266] bg-white text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs" type="button"><span class="material-symbols-outlined text-[16px] text-slate-500">file_download</span><span>导出配置清单</span></button></div><div class="flex items-center gap-2 text-xs text-slate-500"><span>共管理 <strong class="text-on-surface font-semibold">14</strong> 个南向服务</span><span class="w-1 h-1 rounded-full bg-slate-300"></span><span>已启用 <strong class="text-emerald-600 font-semibold">12</strong> 组</span></div></div></div>
+<!-- 核心高保真数据表格 -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse select-text"><thead>
+<tr class="bg-[#f5f7fa] text-[#606266] text-[14px] font-semibold h-12 border-b border-slate-200">
+<th class="w-12 px-4 py-3 text-center nowrap-cell">
+<input class="rounded text-[#409eff] focus:ring-0 cursor-pointer w-4 h-4 border-slate-300" type="checkbox"/>
+</th>
+<th class="w-14 px-4 py-3 text-center nowrap-cell">序号</th>
+<th class="px-4 py-3 min-w-[220px] nowrap-cell">服务名称</th>
+<th class="px-4 py-3 min-w-[130px] nowrap-cell">所属系统</th>
+<th class="px-4 py-3 min-w-[160px] nowrap-cell">系统编码</th>
+<th class="px-4 py-3 min-w-[130px] nowrap-cell">应用类型</th>
+<th class="px-4 py-3 min-w-[180px] nowrap-cell">访问IP与端口</th>
+<th class="px-4 py-3 min-w-[130px] nowrap-cell">执行周期</th>
+<th class="px-4 py-3 min-w-[100px] text-center nowrap-cell">运行状态</th>
+<th class="px-4 py-3 min-w-[180px] text-right nowrap-cell">操作</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-[14px] text-slate-800">
+<tr class="hover:bg-[#f8faff] transition-colors h-[52px]">
+<td class="px-4 py-3 text-center nowrap-cell">
+<input class="rounded text-[#409eff] focus:ring-0 cursor-pointer w-4 h-4 border-slate-300" type="checkbox"/>
+</td>
+<td class="px-4 py-3 text-center text-slate-400 font-mono nowrap-cell">01</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+<span class="font-semibold text-slate-800 hover:text-[#409eff] cursor-pointer">任务接入服务</span>
+<span class="px-1.5 py-0.5 rounded bg-blue-50 text-[#409eff] border border-blue-200 text-[10px]">核心主干</span>
+</div>
+<span class="text-slate-400 text-xs block mt-0.5 truncate max-w-xs">用于警情协同分派、闭环反馈等下行事件中继</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px] text-primary">local_police</span>
+<span class="">警务平台</span>
+</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-xs select-all tracking-wide">SVC_POLICE_TASK_V3</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200 text-xs">
+<span class="material-symbols-outlined text-[13px]">api</span>
+        RESTful接口
+      </span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-1 font-mono text-slate-800 text-xs">
+<span class="">10.128.42.19</span>
+<span class="text-slate-400">:</span>
+<span class="text-[#409eff] font-semibold">8088</span>
+</div>
+<span class="text-slate-400 text-[11px]">内网专网通道</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-1.5 text-slate-600 text-xs">
+<span class="material-symbols-outlined text-[15px] text-amber-500">bolt</span>
+<span class="">即时流 (PubSub)</span>
+</div>
+</td>
+<td class="px-4 py-3 text-center nowrap-cell">
+<div class="el-custom-switch" data-checked="true" onclick="handleSwitchToggle(this)" role="switch">
+<span class="switch-text">开启</span>
+<div class="switch-dot"></div>
+</div>
+</td>
+<td class="px-4 py-3 text-right nowrap-cell">
+<div class="inline-flex items-center gap-2.5 text-xs">
+<button class="text-[#409eff] hover:underline cursor-pointer font-medium" type="button">编辑</button>
+<button class="text-[#409eff] hover:underline cursor-pointer font-medium" type="button">映射字段</button>
+<button class="text-[#606266] hover:text-slate-900 hover:underline cursor-pointer" type="button">详情</button>
+<button class="text-rose-500 hover:underline cursor-pointer" type="button">删除</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#f8faff] transition-colors h-[52px]">
+<td class="px-4 py-3 text-center nowrap-cell">
+<input class="rounded text-[#409eff] focus:ring-0 cursor-pointer w-4 h-4 border-slate-300" type="checkbox"/>
+</td>
+<td class="px-4 py-3 text-center text-slate-400 font-mono nowrap-cell">02</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+<span class="font-semibold text-slate-800 hover:text-[#409eff] cursor-pointer">组织同步服务</span>
+</div>
+<span class="text-slate-400 text-xs block mt-0.5 truncate max-w-xs">定期从各分局同步警员编制与部门树架构</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px] text-emerald-600">corporate_fare</span>
+<span class="">MSIP综合平台</span>
+</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-xs select-all tracking-wide">SVC_MSIP_ORG_SYNC</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs">
+<span class="material-symbols-outlined text-[13px]">database</span>
+        JDBC直连库
+      </span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-1 font-mono text-slate-800 text-xs">
+<span class="">10.128.45.88</span>
+<span class="text-slate-400">:</span>
+<span class="text-[#409eff] font-semibold">1521</span>
+</div>
+<span class="text-slate-400 text-[11px]">Oracle RAC 备份池</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-1.5 text-slate-600 text-xs">
+<span class="material-symbols-outlined text-[15px] text-slate-400">schedule</span>
+<span class="">5 分钟 / 次</span>
+</div>
+</td>
+<td class="px-4 py-3 text-center nowrap-cell">
+<div class="el-custom-switch" data-checked="true" onclick="handleSwitchToggle(this)" role="switch">
+<span class="switch-text">开启</span>
+<div class="switch-dot"></div>
+</div>
+</td>
+<td class="px-4 py-3 text-right nowrap-cell">
+<div class="inline-flex items-center gap-2.5 text-xs">
+<button class="text-[#409eff] hover:underline cursor-pointer font-medium" type="button">编辑</button>
+<button class="text-[#409eff] hover:underline cursor-pointer font-medium" type="button">映射字段</button>
+<button class="text-[#606266] hover:text-slate-900 hover:underline cursor-pointer" type="button">详情</button>
+<button class="text-rose-500 hover:underline cursor-pointer" type="button">删除</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#f8faff] transition-colors h-[52px]">
+<td class="px-4 py-3 text-center nowrap-cell">
+<input class="rounded text-[#409eff] focus:ring-0 cursor-pointer w-4 h-4 border-slate-300" type="checkbox"/>
+</td>
+<td class="px-4 py-3 text-center text-slate-400 font-mono nowrap-cell">03</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+<span class="font-semibold text-slate-800 hover:text-[#409eff] cursor-pointer">卡口感知中台服务</span>
+<span class="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px]">高并发</span>
+</div>
+<span class="text-slate-400 text-xs block mt-0.5 truncate max-w-xs">全城电警与卡口过车结构化数据秒级摄入</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px] text-blue-600">videocam</span>
+<span class="">天网视频平台</span>
+</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-xs select-all tracking-wide">SVC_SKYNET_BAYONET</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs">
+<span class="material-symbols-outlined text-[13px]">swap_horiz</span>
+        消息队列 (Kafka)
+      </span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-1 font-mono text-slate-800 text-xs">
+<span class="">10.130.12.50</span>
+<span class="text-slate-400">:</span>
+<span class="text-[#409eff] font-semibold">9092</span>
+</div>
+<span class="text-slate-400 text-[11px]">Topic: vehicle_pass_log</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-1.5 text-slate-600 text-xs">
+<span class="material-symbols-outlined text-[15px] text-amber-500">bolt</span>
+<span class="">即时流</span>
+</div>
+</td>
+<td class="px-4 py-3 text-center nowrap-cell">
+<div class="el-custom-switch" data-checked="true" onclick="handleSwitchToggle(this)" role="switch">
+<span class="switch-text">开启</span>
+<div class="switch-dot"></div>
+</div>
+</td>
+<td class="px-4 py-3 text-right nowrap-cell">
+<div class="inline-flex items-center gap-2.5 text-xs">
+<button class="text-[#409eff] hover:underline cursor-pointer font-medium" type="button">编辑</button>
+<button class="text-[#409eff] hover:underline cursor-pointer font-medium" type="button">映射字段</button>
+<button class="text-[#606266] hover:text-slate-900 hover:underline cursor-pointer" type="button">详情</button>
+<button class="text-rose-500 hover:underline cursor-pointer" type="button">删除</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#f8faff] transition-colors bg-slate-50/40 h-[52px]">
+<td class="px-4 py-3 text-center nowrap-cell">
+<input class="rounded text-[#409eff] focus:ring-0 cursor-pointer w-4 h-4 border-slate-300" type="checkbox"/>
+</td>
+<td class="px-4 py-3 text-center text-slate-400 font-mono nowrap-cell">04</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-slate-400 flex-shrink-0"></span>
+<span class="font-semibold text-slate-700 hover:text-[#409eff] cursor-pointer">电子巡查GPS推流服务</span>
+</div>
+<span class="text-slate-400 text-xs block mt-0.5 truncate max-w-xs">对讲机与单兵执法仪实时坐标经纬度订阅</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px] text-primary">local_police</span>
+<span class="">警务平台</span>
+</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-xs select-all tracking-wide">SVC_POLICE_GPS_FEED</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 text-xs">
+<span class="material-symbols-outlined text-[13px]">sensors</span>
+        MQTT物联网
+      </span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-1 font-mono text-slate-700 text-xs">
+<span class="">10.128.43.102</span>
+<span class="text-slate-400">:</span>
+<span class="text-slate-600 font-semibold">1883</span>
+</div>
+<span class="text-slate-400 text-[11px]">QoS 等级 1</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-1.5 text-slate-500 text-xs">
+<span class="material-symbols-outlined text-[15px] text-slate-400">schedule</span>
+<span class="">10 秒 / 次</span>
+</div>
+</td>
+<td class="px-4 py-3 text-center nowrap-cell">
+<div class="el-custom-switch" data-checked="false" onclick="handleSwitchToggle(this)" role="switch">
+<span class="switch-text">关闭</span>
+<div class="switch-dot"></div>
+</div>
+</td>
+<td class="px-4 py-3 text-right nowrap-cell">
+<div class="inline-flex items-center gap-2.5 text-xs">
+<button class="text-[#409eff] hover:underline cursor-pointer font-medium" type="button">编辑</button>
+<button class="text-[#409eff] hover:underline cursor-pointer font-medium" type="button">映射字段</button>
+<button class="text-[#606266] hover:text-slate-900 hover:underline cursor-pointer" type="button">详情</button>
+<button class="text-rose-500 hover:underline cursor-pointer" type="button">删除</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#f8faff] transition-colors h-[52px]">
+<td class="px-4 py-3 text-center nowrap-cell">
+<input class="rounded text-[#409eff] focus:ring-0 cursor-pointer w-4 h-4 border-slate-300" type="checkbox"/>
+</td>
+<td class="px-4 py-3 text-center text-slate-400 font-mono nowrap-cell">05</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+<span class="font-semibold text-slate-800 hover:text-[#409eff] cursor-pointer">GB28181信令转流服务</span>
+</div>
+<span class="text-slate-400 text-xs block mt-0.5 truncate max-w-xs">重点区域高空鹰眼及车载球机SIP点播信令</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px] text-blue-600">videocam</span>
+<span class="">天网视频平台</span>
+</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-xs select-all tracking-wide">SVC_GB28181_SIP_GW</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-200 text-xs">
+<span class="material-symbols-outlined text-[13px]">videocam</span>
+        GB28181流媒体
+      </span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-1 font-mono text-slate-800 text-xs">
+<span class="">10.130.15.11</span>
+<span class="text-slate-400">:</span>
+<span class="text-[#409eff] font-semibold">5060</span>
+</div>
+<span class="text-slate-400 text-[11px]">SIP UDP Signaling</span>
+</td>
+<td class="px-4 py-3 nowrap-cell">
+<div class="flex items-center gap-1.5 text-slate-600 text-xs">
+<span class="material-symbols-outlined text-[15px] text-amber-500">bolt</span>
+<span class="">即时流</span>
+</div>
+</td>
+<td class="px-4 py-3 text-center nowrap-cell">
+<div class="el-custom-switch" data-checked="true" onclick="handleSwitchToggle(this)" role="switch">
+<span class="switch-text">开启</span>
+<div class="switch-dot"></div>
+</div>
+</td>
+<td class="px-4 py-3 text-right nowrap-cell">
+<div class="inline-flex items-center gap-2.5 text-xs">
+<button class="text-[#409eff] hover:underline cursor-pointer font-medium" type="button">编辑</button>
+<button class="text-[#409eff] hover:underline cursor-pointer font-medium" type="button">映射字段</button>
+<button class="text-[#606266] hover:text-slate-900 hover:underline cursor-pointer" type="button">详情</button>
+<button class="text-rose-500 hover:underline cursor-pointer" type="button">删除</button>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<!-- 表格底部 Element UI 风格标准分页器 -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-3 border-t border-slate-200 bg-white gap-3 h-14"><div class="flex items-center gap-2 text-xs text-[#606266]">
+<span class="">共 <strong class="text-slate-800 font-semibold">14</strong> 条记录</span>
+<span class="text-slate-300">|</span>
+<span class="">显示第 1 至 5 项</span>
+</div>
+<div class="flex items-center gap-3 text-xs justify-end">
+<div class="relative inline-block">
+<select class="h-8 px-2.5 pr-7 rounded border border-slate-300 text-xs text-[#606266] bg-white focus:outline-none focus:border-[#409eff] appearance-none cursor-pointer">
+<option>10 条/页</option>
+<option>20 条/页</option>
+<option>50 条/页</option>
+</select>
+<span class="material-symbols-outlined absolute right-1.5 top-1/2 -translate-y-1/2 text-slate-400 text-[14px] pointer-events-none">arrow_drop_down</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-slate-50 disabled:opacity-40 cursor-pointer" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-[#409eff] text-white font-medium flex items-center justify-center shadow-xs">1</button>
+<button class="w-8 h-8 rounded border border-transparent hover:border-slate-200 text-[#606266] flex items-center justify-center hover:bg-slate-50 transition-colors cursor-pointer">2</button>
+<button class="w-8 h-8 rounded border border-transparent hover:border-slate-200 text-[#606266] flex items-center justify-center hover:bg-slate-50 transition-colors cursor-pointer">3</button>
+<button class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-[#606266] hover:bg-slate-50 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+<div class="flex items-center gap-1.5 text-[#606266] ml-1">
+<span class="">前往</span>
+<input class="w-10 h-8 text-center rounded border border-slate-300 text-xs text-slate-700 focus:outline-none focus:border-[#409eff] bg-white" type="text" value="1"/>
+<span class="">页</span>
+</div>
+</div></div>
+</div>
+<!-- 底部辅助联动展示：南向网关状态看板 -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="p-4 rounded-lg bg-white border border-slate-200 shadow-xs flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-[#409eff] flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">security</span>
+</div>
+<div>
+<div class="text-sm font-bold text-slate-800">警务专网加解密通道</div>
+<p class="text-xs text-slate-500 mt-1">SM4 国密硬件加速模块正常，延迟 1.8ms</p>
+<div class="flex items-center gap-1.5 mt-2.5">
+<span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-[11px] text-emerald-700 font-medium">硬件密钥有效期: 284 天</span>
+</div>
+</div>
+</div>
+<div class="p-4 rounded-lg bg-white border border-slate-200 shadow-xs flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-sky-50 flex items-center justify-center text-sky-600 flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">speed</span>
+</div>
+<div class="flex-1">
+<div class="text-sm font-bold text-slate-800">流量控制与限流防护</div>
+<p class="text-xs text-slate-500 mt-1">动态令牌桶：上限 50,000 QPS，当前负载 18%</p>
+<div class="w-full bg-slate-100 rounded-full h-1.5 mt-3 overflow-hidden">
+<div class="bg-[#409eff] h-1.5 rounded-full" style="width: 18%"></div>
+</div>
+</div>
+</div>
+<div class="p-4 rounded-lg bg-white border border-slate-200 shadow-xs flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">history</span>
+</div>
+<div>
+<div class="text-sm font-bold text-slate-800">服务日志全链路追溯</div>
+<p class="text-xs text-slate-500 mt-1">近 24 小时失败重试自动熔断 0 次</p>
+<a class="inline-flex items-center gap-1 text-xs text-[#409eff] hover:underline font-medium mt-2.5" href="javascript:void(0)">
+<span class="">查看调用日志看板</span>
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</main>
+<!-- BEGIN: 新增服务对接模态弹窗 (默认完全隐藏 hidden) -->
+<div class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 overflow-y-auto" id="modal-container" onclick="handleBackdropClick(event)">
+<div class="bg-white rounded-lg shadow-xl w-full max-w-[620px] overflow-hidden border border-slate-200 transform transition-all animate-in fade-in zoom-in duration-150">
+<!-- 弹窗 Header -->
+<div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-4 bg-[#409eff] rounded-sm inline-block"></span>
+<h3 class="text-sm font-semibold text-slate-800 tracking-tight">新增南向服务对接</h3>
+</div>
+<button class="text-slate-400 hover:text-slate-600 transition p-1 hover:bg-slate-100 rounded cursor-pointer" onclick="closeModal()" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- 弹窗 Form Body -->
+<form class="p-6 space-y-4 text-xs" id="service-form" onsubmit="handleFormSubmit(event)">
+<!-- 表单项 1：服务名称 -->
+<div>
+<label class="block font-medium text-slate-700 mb-1.5">
+<span class="text-rose-500 font-bold mr-0.5">*</span>服务名称
+          </label>
+<input class="w-full text-xs h-9 px-3 rounded border border-slate-300 focus:outline-none focus:border-[#409eff] focus:ring-1 focus:ring-[#409eff] placeholder-slate-400" id="form-svc-name" placeholder="请输入南向服务名称，如：治安卡口车牌识别流" required="" type="text"/>
+</div>
+<!-- 表单项 2：所属系统与应用类型 -->
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block font-medium text-slate-700 mb-1.5">
+<span class="text-rose-500 font-bold mr-0.5">*</span>所属系统
+            </label>
+<select class="w-full text-xs h-9 px-3 rounded border border-slate-300 focus:outline-none focus:border-[#409eff] bg-white cursor-pointer" required="">
+<option value="">请选择所属系统</option>
+<option value="police">警务平台</option>
+<option value="msip">MSIP综合平台</option>
+<option value="skynet">天网视频平台</option>
+<option value="traffic">交警智慧管控中枢</option>
+</select>
+</div>
+<div>
+<label class="block font-medium text-slate-700 mb-1.5">
+<span class="text-rose-500 font-bold mr-0.5">*</span>应用类型/协议
+            </label>
+<select class="w-full text-xs h-9 px-3 rounded border border-slate-300 focus:outline-none focus:border-[#409eff] bg-white cursor-pointer" required="">
+<option value="">请选择协议类型</option>
+<option value="RESTful">RESTful 接口</option>
+<option value="Kafka">消息队列 (Kafka)</option>
+<option value="JDBC">JDBC 直连库</option>
+<option value="MQTT">MQTT 物联网</option>
+<option value="GB28181">GB28181 流媒体</option>
+</select>
+</div>
+</div>
+<!-- 表单项 3：系统编码 -->
+<div>
+<label class="block font-medium text-slate-700 mb-1.5">
+<span class="text-rose-500 font-bold mr-0.5">*</span>系统编码 (唯一标识)
+          </label>
+<input class="w-full text-xs h-9 px-3 rounded border border-slate-300 font-mono focus:outline-none focus:border-[#409eff] placeholder-slate-400" placeholder="如：SVC_POLICE_STREAM_01" required="" type="text"/>
+</div>
+<!-- 表单项 4：访问IP与端口 -->
+<div class="grid grid-cols-3 gap-3">
+<div class="col-span-2">
+<label class="block font-medium text-slate-700 mb-1.5">
+<span class="text-rose-500 font-bold mr-0.5">*</span>服务地址 (IP或域名)
+            </label>
+<input class="w-full text-xs h-9 px-3 rounded border border-slate-300 font-mono focus:outline-none focus:border-[#409eff] placeholder-slate-400" placeholder="10.128.xx.xx" required="" type="text"/>
+</div>
+<div>
+<label class="block font-medium text-slate-700 mb-1.5">
+<span class="text-rose-500 font-bold mr-0.5">*</span>端口
+            </label>
+<input class="w-full text-xs h-9 px-3 rounded border border-slate-300 font-mono focus:outline-none focus:border-[#409eff] placeholder-slate-400" placeholder="8080" required="" type="number"/>
+</div>
+</div>
+<!-- 表单项 5：业务说明描述 -->
+<div>
+<label class="block font-medium text-slate-700 mb-1.5">业务功能说明</label>
+<textarea class="w-full text-xs p-3 rounded border border-slate-300 focus:outline-none focus:border-[#409eff] placeholder-slate-400" placeholder="请简述该服务的业务调用场景及对接目的..." rows="2"></textarea>
+</div>
+<!-- 表单项 6：默认初始运行状态 -->
+<div class="flex items-center gap-4 pt-1">
+<label class="font-medium text-slate-700">默认启用状态：</label>
+<label class="inline-flex items-center gap-1.5 cursor-pointer">
+<input checked="" class="w-3.5 h-3.5 text-[#409eff] focus:ring-0 border-slate-300" name="initState" type="radio" value="1"/>
+<span class="text-slate-700">立即启用</span>
+</label>
+<label class="inline-flex items-center gap-1.5 cursor-pointer">
+<input class="w-3.5 h-3.5 text-[#409eff] focus:ring-0 border-slate-300" name="initState" type="radio" value="0"/>
+<span class="text-slate-700">暂不启用</span>
+</label>
+</div>
+<!-- 弹窗 Footer 操作按钮 -->
+<div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+<button class="px-4 py-2 text-xs font-medium text-slate-600 hover:text-slate-800 bg-white border border-slate-300 rounded shadow-xs hover:bg-slate-50 transition cursor-pointer" onclick="closeModal()" type="button">
+            取消
+          </button>
+<button class="px-5 py-2 text-xs font-medium text-white bg-[#409eff] hover:bg-[#337ecc] rounded shadow-xs transition cursor-pointer" type="submit">
+            保存提交
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- END: 新增服务对接模态弹窗 -->
+<!-- 交互脚本 -->
+<script>
+    // 切换运行状态内嵌开关：文字在滑块移动反侧，绝不重叠
+    function handleSwitchToggle(switchEl) {
+      const isChecked = switchEl.getAttribute('data-checked') === 'true';
+      const nextState = !isChecked;
+      switchEl.setAttribute('data-checked', String(nextState));
+
+      const textEl = switchEl.querySelector('.switch-text');
+      if (nextState) {
+        textEl.textContent = '开启';
+      } else {
+        textEl.textContent = '关闭';
+      }
+    }
+
+    // 模态弹窗开闭逻辑 (默认关闭)
+    function openModal() {
+      const modal = document.getElementById('modal-container');
+      if (modal) {
+        modal.classList.remove('hidden');
+      }
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modal-container');
+      if (modal) {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function handleBackdropClick(event) {
+      if (event.target === document.getElementById('modal-container')) {
+        closeModal();
+      }
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert('服务对接配置保存成功！');
+      closeModal();
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+  </script>
+</body></html>

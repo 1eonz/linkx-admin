@@ -1,0 +1,50 @@
+/**
+ * LxUI HUD 深色主题 — 大屏指挥中心预设
+ *
+ * 用法：<html class="lx-theme-hud">（运行时切换，无需重编译）
+ * 规范源：doc/lx-ui/DESIGN-SPEC.md §7.2
+ * 验收标准：任何组件两主题切换零残缺（P8 token 强制保证）
+ */
+.lx-theme-hud {
+  /* 表面与边框：深空画布 */
+  --lx-bg-page: #0b1220;
+  --lx-bg-card: #101a2c;
+  --lx-bg-card-hover: #16233a;
+  --lx-bg-table-header: #16233a;
+  --lx-bg-tabsbar: #0d1526;
+  --lx-border: #1e2f47;
+  --lx-border-light: #1a2a40;
+
+  /* 文字：亮色反转 */
+  --lx-text-primary: #e2e8f0;
+  --lx-text-regular: #94a3b8;
+  --lx-text-secondary: #64748b;
+  --lx-text-placeholder: #475569;
+
+  /* 主色：sky 侵入（HUD 语境下品牌向战术蓝偏移） */
+  --lx-color-primary: #38bdf8;
+  --lx-color-primary-hover: #7dd3fc;
+  --lx-color-primary-container: #0ea5e9;
+  --lx-color-primary-light: rgba(56, 189, 248, 0.12);
+  --lx-color-on-primary: #0b1220;
+
+  /* 功能色：浅底变深底半透明（深色下亮字） */
+  --lx-color-success-light: rgba(103, 194, 58, 0.15);
+  --lx-color-warning-light: rgba(230, 162, 60, 0.15);
+  --lx-color-error-light: rgba(245, 108, 108, 0.15);
+  --lx-color-info-light: rgba(144, 147, 153, 0.15);
+
+  /* 阴影：深色下加深 */
+  --lx-shadow-card: 0 1px 4px rgba(0, 0, 0, 0.4);
+  --lx-shadow-pop: 0 2px 12px rgba(0, 0, 0, 0.5);
+  --lx-shadow-modal: 0 4px 16px rgba(0, 0, 0, 0.6);
+
+  /* 反色表面（Toast 在 HUD 下略微抬亮保持对比） */
+  --lx-bg-inverse: #1e293b;
+  --lx-text-inverse: #e2e8f0;
+
+  /* 危险深红（HUD 下提亮） */
+  --lx-color-error-strong: #f78989;
+
+  /* 侧边栏 token 不变（本来就是深色体系） */
+}
