@@ -74,11 +74,6 @@ export default {
         disabled: {
             type: Boolean,
             default: false
-        },
-        // 关联人员最多可选人数
-        maxCount: {
-            type: Number,
-            default: 5
         }
     },
     components: {
@@ -131,11 +126,6 @@ export default {
             if (this.selected.some(tag => tag.value === item.value)) {
                 this.selected = this.selected.filter(tag => tag.value !== item.value)
             } else {
-                // 选择时立即校验人数上限，避免提交后才提示超限
-                if (this.selected.length >= this.maxCount) {
-                    this.$message.warning(`关联人员最多选择${this.maxCount}人`)
-                    return
-                }
                 this.selected = [...this.selected, item]
             }
         }
