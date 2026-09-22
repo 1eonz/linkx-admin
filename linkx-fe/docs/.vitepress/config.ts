@@ -25,6 +25,12 @@ export default defineConfig({
     sidebar: {
       '/components/': [
         {
+          text: '基础',
+          items: [
+            { text: 'LxIcon 图标总览', link: '/components/lxicons' },
+          ],
+        },
+        {
           text: '布局导航',
           items: [
             { text: 'LxSidebar 侧边栏', link: '/components/lxsidebar' },
@@ -37,7 +43,11 @@ export default defineConfig({
             { text: 'LxProTable 数据表格', link: '/components/lxprotable' },
             { text: 'LxPagination 分页', link: '/components/lxpagination' },
             { text: 'LxStatusDot 状态点', link: '/components/lxstatusdot' },
-            { text: 'LxTag / 徽章 / 空态', link: '/components/lxmisc' },
+            { text: 'LxTag 浅底标签', link: '/components/lxtag' },
+            { text: 'LxActionButtons 行内操作', link: '/components/lxactionbuttons' },
+            { text: 'LxEmpty 空态', link: '/components/lxempty' },
+            { text: 'LxGauge 圆环仪表', link: '/components/lxgauge' },
+            { text: 'LxNodeBadge 节点徽章', link: '/components/lxnodebadge' },
           ],
         },
         {
@@ -49,7 +59,11 @@ export default defineConfig({
         {
           text: '反馈与浮层',
           items: [
-            { text: 'LxMessage / LxConfirm / LxDialog / LxDrawer / 横幅', link: '/components/lxfeedback' },
+            { text: 'LxMessage 全局提示', link: '/components/lxmessage' },
+            { text: 'LxConfirm 确认框', link: '/components/lxconfirm' },
+            { text: 'LxDialog 表单弹窗', link: '/components/lxdialog' },
+            { text: 'LxDrawer 详情抽屉', link: '/components/lxdrawer' },
+            { text: 'LxFormErrorBanner 校验横幅', link: '/components/lxformerrorbanner' },
           ],
         },
       ],

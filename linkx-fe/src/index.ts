@@ -5,7 +5,6 @@
 import type { App } from 'vue';
 // EP 变量桥接（先于组件加载，保证令牌生效）
 import './styles/element-theme.css';
-
 import LxIcon from './components/LxIcon/index.vue';
 import LxStatusDot from './components/LxStatusDot/index.vue';
 import LxSidebar from './components/LxSidebar/index.vue';
@@ -104,3 +103,9 @@ export default {
     for (const c of components) app.component(c.name ?? '', c);
   },
 };
+
+// ===== Element Plus 全量透出（类似 lxcomponent 模式）=====
+// element-plus 是本包 dependencies：安装 lx-ui 即自动携带 EP，宿主项目可直接使用，
+// pnpm 严格模式下也可从本入口导入（ElButton / ElMessage / ElementPlus 插件 / 全部类型）。
+// 宿主项目自身安装的 EP（npm/yarn 提升 或 显式依赖）与本包共享同一 node_modules 实例，无双实例冲突。
+export * from 'element-plus';
