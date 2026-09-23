@@ -1,6 +1,6 @@
 # LxMessage 全局提示
 
-深色胶囊全局轻提示：12px 圆角反色底 + 毛玻璃，默认 **1.6s** 自动消失（设计稿标注）。操作结果反馈首选。
+深色胶囊全局轻提示：12px 圆角反色底 + 毛玻璃。时长分级：`error` 3s（需阅读原因）/ 其余 1.6s，`duration` 可覆盖。操作结果反馈首选。
 
 <script setup lang="ts">
 import Basic from '../../src/components/LxMessage/demo/basic.vue';
@@ -31,7 +31,9 @@ lxMessage.warning({ message: '操作将记录审计日志', duration: 3000 }); /
 | `lxMessage.warning(message \| options)` | 警告（橙点） |
 | `lxMessage.info(message \| options)` | 中性（灰点） |
 
-**LxMessageOptions**：`message: string` / `duration?: number`（默认 1600ms）。
+**LxMessageOptions**：`message: string` / `duration?: number`。
+
+**默认时长分级**：`error` **3000ms**（失败需阅读原因）/ 其余 **1600ms**；`duration` 可逐条覆盖。
 
 ## 使用铁律
 
