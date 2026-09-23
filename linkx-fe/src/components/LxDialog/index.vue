@@ -22,6 +22,8 @@ const props = withDefaults(defineProps<LxDialogProps>(), {
   cancelText: '取消',
   loading: false,
   closeOnClickModal: false,
+  closeOnPressEsc: true,
+  draggable: true,
   hideFooter: false,
 });
 
@@ -63,6 +65,8 @@ function onConfirm() {
     :model-value="visible"
     :width="width"
     :close-on-click-modal="closeOnClickModal"
+    :close-on-press-escape="closeOnPressEsc"
+    :draggable="draggable"
     :show-close="false"
     align-center
     append-to-body
@@ -139,6 +143,7 @@ function onConfirm() {
   justify-content: space-between;
   padding: var(--lx-space-md) var(--lx-space-lg);
   border-bottom: 1px solid var(--lx-border-light);
+  cursor: move; /* 默认 draggable=true，头部即拖拽把手（设计拍板 #9） */
 }
 
 .lx-dialog__title-wrap {
