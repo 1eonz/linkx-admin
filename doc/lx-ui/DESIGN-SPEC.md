@@ -185,7 +185,7 @@ export const NODE_STATUS: Record<number, LxStatus> = {
 |---|---|---|
 | `--lx-sidebar-width` | `252px` | 展开态宽度（`_2` 实测值）。8 的倍数，容纳 7 字标题 + 图标 + 箭头 + padding 富余 |
 | `--lx-sidebar-rail-width` | `64px` | rail 态宽度（`_1`）。容纳 40px 图标区 + 两侧 12px padding |
-| `--lx-sidebar-item-height` | `36px` | 一级项高（`_2` h-9） |
+| `--lx-sidebar-item-height` | `40px` | 一级项高（`_2` 激活态含 border 实高；设计拍板 #4，token 实现为准） |
 | `--lx-sidebar-subitem-height` | `28px` | 二级项高（`_2` h-7） |
 | `--lx-navbar-height` | `56px` | 顶栏（h-14，双方案一致） |
 | `--lx-tabsbar-height` | `36px` | 页签栏（h-9） |
