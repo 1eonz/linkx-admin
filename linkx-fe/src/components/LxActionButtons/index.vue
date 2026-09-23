@@ -1,10 +1,11 @@
 <script setup lang="ts">
 /**
- * LxActionButtons — 表格行内操作（纯文字链接 + 溢出折叠，P2 铁律：禁止图标按钮）
+ * LxActionButtons — 表格行内操作（默认纯文字链接 + 溢出折叠；icon 可选左置，兼容 V3 带图标惯用法）
  * 视觉源：stitch 行内操作 a.text-primary hover:underline text-xs
  */
 import { computed, ref } from 'vue';
 import type { LxActionButtonsProps, LxActionItem } from './types';
+import LxIcon from '../LxIcon/index.vue';
 
 const props = withDefaults(defineProps<LxActionButtonsProps>(), {
   actions: () => [],
@@ -33,7 +34,10 @@ function onClick(action: LxActionItem) {
         :class="`lx-actions__btn--${action.type || 'default'}`"
         href="javascript:;"
         @click="onClick(action)"
-      >{{ action.label }}</a>
+      >
+        <LxIcon v-if="action.icon" :name="action.icon" :size="16" class="lx-actions__icon" />
+        {{ action.label }}</a
+      >
     </template>
 
     <!-- 溢出折叠 -->
@@ -47,7 +51,10 @@ function onClick(action: LxActionItem) {
           :class="`lx-actions__btn--${action.type || 'default'}`"
           href="javascript:;"
           @click="onClick(action)"
-        >{{ action.label }}</a>
+        >
+          <LxIcon v-if="action.icon" :name="action.icon" :size="16" class="lx-actions__icon" />
+          {{ action.label }}</a
+        >
       </span>
     </span>
   </span>
@@ -61,6 +68,8 @@ function onClick(action: LxActionItem) {
 }
 
 .lx-actions__btn {
+  display: inline-flex;
+  align-items: center;
   color: var(--lx-color-primary);
   font-size: 12px;
   cursor: pointer;
@@ -72,6 +81,11 @@ function onClick(action: LxActionItem) {
 .lx-actions__btn:hover {
   text-decoration: underline;
   opacity: 0.85;
+}
+
+/* 可选图标：文字左侧 16px，2px 间距（V3 ActionButtons 规范） */
+.lx-actions__icon {
+  margin-right: 2px;
 }
 
 .lx-actions__btn--danger {
@@ -97,7 +111,8 @@ function onClick(action: LxActionItem) {
 }
 
 .lx-actions__menu-item {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 6px var(--lx-space-sm);
   border-radius: var(--lx-radius-sm);
   font-size: 12px;
