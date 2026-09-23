@@ -28,7 +28,11 @@ import Basic from '../../src/components/LxDialog/demo/basic.vue';
 | confirm-text / cancel-text | 按钮文案 | `string` | `确认` / `取消` |
 | loading | 确认按钮加载态 | `boolean` | `false` |
 | close-on-click-modal | 点遮罩关闭 | `boolean` | `false`（防误触） |
+| close-on-press-esc | 按 ESC 关闭（脏数据敏感场景可关） | `boolean` | `true` |
+| draggable | 头部拖拽移动弹窗位置（header 即拖拽把手） | `boolean` | `true` |
 | hide-footer | 隐藏默认按钮栏 | `boolean` | `false` |
+
+固定行为：**屏幕垂直居中**（align-center）、append-to-body、8px 圆角。
 
 ### Events
 
