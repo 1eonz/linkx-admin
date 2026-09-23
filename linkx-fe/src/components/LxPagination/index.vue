@@ -16,6 +16,8 @@ const props = withDefaults(defineProps<LxPaginationProps>(), {
   showSize: true,
   showTotal: true,
   showJumper: false,
+  autoReset: true,
+  autoScroll: true,
   size: 'default',
 });
 
@@ -38,15 +40,23 @@ const layout = computed(() =>
     .join(', ')
 );
 
+/** 切页回顶：定位组件所在文档位置回滚（列表容器内滚动时业务可关掉自行处理） */
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function onPage(p: number) {
   emit('update:page', p);
   emit('change', p, props.pageSize);
+  if (props.autoScroll) scrollToTop();
 }
 
 function onSize(s: number) {
   emit('update:page-size', s);
-  emit('update:page', 1); // 切换条数回到第一页
-  emit('change', 1, s);
+  // 切换条数回到第一页（设计拍板 #5：受控 + 内置惯用法）
+  if (props.autoReset) emit('update:page', 1);
+  emit('change', props.autoReset ? 1 : props.page, s);
+  if (props.autoScroll) scrollToTop();
 }
 </script>
 
