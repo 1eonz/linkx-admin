@@ -120,7 +120,7 @@ interface Events {
 ```
 
 视觉规格：
-- expanded：`h-9` 图标 + 标题，激活 = 渐变背景 `sky-500/20→transparent` + 1px 竖条 `--lx-sidebar-active-glow` 发光
+- expanded：`h-10` 图标 + 标题（40px，设计拍板 #4），激活 = 渐变背景 `sky-500/20→transparent` + 1px 竖条 `--lx-sidebar-active-glow` 发光
 - rail：`h-12` 居中图标，hover 弹出右侧 tooltip（`bg #162032`，`_1` 规格）
 
 ## 4. LxSidebarGroup — 二级菜单组
@@ -550,15 +550,20 @@ interface Slots {
 }
 ```
 
-## 23. LxPagination — 分页
+## 23. LxPagination — 分页（已实现）
 
 ```ts
 interface Props {
   total?: number;                  // default: 0
   page?: number;                   // default: 1
-  pageSize?: number;               // default: 20
+  pageSize?: number;               // default: 10
   pageSizes?: number[];            // default: [10, 20, 50, 100]
-  layout?: string;                 // default: 'total, sizes, prev, pager, next, jumper'
+  showSize?: boolean;              // default: true
+  showTotal?: boolean;             // default: true
+  showJumper?: boolean;            // default: false
+  autoReset?: boolean;             // default: true：切条数回第 1 页（设计拍板 #5）
+  autoScroll?: boolean;            // default: true：切页窗口回顶（设计拍板 #5）
+  size?: 'small' | 'default' | 'large';
 }
 interface Events {
   (e: 'update:page', v: number): void;
@@ -616,26 +621,32 @@ interface Events {
 }
 ```
 
-## 26. LxFormModal — 表单弹窗
+## 26. LxDialog — 表单弹窗（已实现，替代原 LxFormModal 规划）
+
+三段式（图标标题栏 / 内容 / 右对齐按钮栏），默认 **672px**（stitch max-w-2xl）。
 
 ```ts
 interface Props {
-  modelValue?: boolean;            // 显隐（受控）
+  modelValue?: boolean;            // 显隐（v-model）
   title?: string;
-  width?: number | string;         // default: 520
-  loading?: boolean;               // 提交中（footer 按钮转圈）
-  /** 关闭前确认（有脏数据时） */
-  confirmOnClose?: boolean;        // default: false
+  icon?: string;                   // LxIconName；danger 模式固定 warning 图标
+  width?: number | string;         // default: 672
+  danger?: boolean;                // 红图标/红标题/红底确认
+  confirmText?: string;            // default: '确认'
+  cancelText?: string;             // default: '取消'
+  loading?: boolean;               // 确认 loading 防重
+  closeOnClickModal?: boolean;     // default: false（防误触）
+  closeOnPressEsc?: boolean;       // default: true（设计拍板 #9，可关）
+  draggable?: boolean;             // default: true：头部拖拽移动（设计拍板 #9）
+  hideFooter?: boolean;            // default: false（#footer 插槽自定义时用）
+  // 固定行为：align-center 屏幕垂直居中、append-to-body、8px 圆角
 }
 interface Events {
   (e: 'update:modelValue', v: boolean): void;
-  (e: 'confirm'): void;           // 点确定（表单校验由业务 el-form 执行）
+  (e: 'confirm'): void;
   (e: 'cancel'): void;
 }
-interface Slots {
-  default?(): unknown;            // 表单体
-  footer?(): unknown;             // 替换默认按钮组
-}
+interface Slots { default?(): unknown; footer?(): unknown; }
 ```
 
 ## 27. LxConfirmDialog — 确认对话框
@@ -681,35 +692,35 @@ interface Slots {
 }
 ```
 
-## 29. LxToast — 轻提示（函数式）
+## 29. lxMessage — 全局提示（已实现，函数式）
 
 ```ts
-interface LxToastOptions {
+interface LxMessageOptions {
   message: string;
-  type?: 'success' | 'warning' | 'error' | 'info';
-  duration?: number;               // default: 3000
-  /** 战术闪烁（紧急告警，tacticalBlink 1.4s） */
-  tactical?: boolean;              // default: false
+  duration?: number;               // 覆盖默认分级
+}
+interface LxMessageApi {
+  success(o: LxMessageOptions | string): void;
+  error(o: LxMessageOptions | string): void;
+  warning(o: LxMessageOptions | string): void;
+  info(o: LxMessageOptions | string): void;
 }
 
-// 函数式 API（lx-ui 统一导出）
-declare function LxToast(options: LxToastOptions | string): void;
-declare namespace LxToast {
-  function success(msg: string, opts?: Partial<LxToastOptions>): void;
-  function error(msg: string, opts?: Partial<LxToastOptions>): void;
-  function warning(msg: string, opts?: Partial<LxToastOptions>): void;
-  function info(msg: string, opts?: Partial<LxToastOptions>): void;
-}
+// 时长分级（设计拍板 #3）：error 3000ms / 其余 1600ms；duration 可逐条覆盖
+// 视觉：深色胶囊（#2d3136 反色底）12px 圆角，顶部居中
+export const lxMessage: LxMessageApi;
 ```
 
 ## 30. LxActionButtons — 行内操作按钮组
 
-铁律：纯文字链接按钮，不用图标。
+铁律（设计拍板 #2）：默认纯文字链接；`icon` 可选传入（文字左侧 16px），兼容 V3 带图标惯用法。
 
 ```ts
 interface LxActionItem {
   key: string;
   label: string;                   // e.g. '编辑' / '删除'
+  /** 可选图标（设计拍板 #2）：传入时文字左侧 16px + 2px 间距；默认纯文字 */
+  icon?: string;                   // LxIconName
   /** 危险操作（红色） */
   danger?: boolean;                // default: false
   /** 权限标识（业务方消费，组件不判断） */
