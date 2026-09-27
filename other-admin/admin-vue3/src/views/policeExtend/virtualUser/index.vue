@@ -44,16 +44,18 @@ function getRow(scope: any): VirtualUserItem {
 }
 
 // 查询列表
-async function fetchData(): Promise<void> {
+function fetchData(): Promise<void> {
   listLoading.value = true;
-  try {
-    const res = await getVirtualUserList({ userName: searchForm.value.userName });
-    list.value = (res?.data as VirtualUserItem[]) ?? [];
-  } catch {
-    // 忽略
-  } finally {
-    listLoading.value = false;
-  }
+  return getVirtualUserList({ userName: searchForm.value.userName })
+    .then((res) => {
+      list.value = (res?.data as VirtualUserItem[]) ?? [];
+    })
+    .catch(() => {
+      ElMessage.error('加载虚拟用户列表失败，请重试');
+    })
+    .finally(() => {
+      listLoading.value = false;
+    });
 }
 
 // 搜索
@@ -84,16 +86,21 @@ function handleDelete(row: VirtualUserItem): void {
     cancelButtonText: '取消',
     type: 'warning',
   })
-    .then(() => deleteVirtualUser(row.id))
-    .then((result) => {
-      if (!result || result.code !== 0) {
-        ElMessage.error(result?.msg || '删除失败');
-        return;
-      }
-      ElMessage.success('删除成功');
-      fetchData();
-    })
-    .catch(() => {});
+    .then(() =>
+      deleteVirtualUser(row.id)
+        .then((result) => {
+          if (!result || result.code !== 0) {
+            ElMessage.error(result?.msg || '删除失败');
+            return;
+          }
+          ElMessage.success('删除成功');
+          fetchData();
+        })
+        .catch(() => {
+          ElMessage.error('删除失败，请重试');
+        }),
+    )
+    .catch(() => undefined);
 }
 
 // 弹窗状态

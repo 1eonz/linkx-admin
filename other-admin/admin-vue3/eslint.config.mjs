@@ -33,6 +33,10 @@ export default [
       'vue/component-name-in-template-casing': ['error', 'PascalCase'],
       'vue/attributes-order': 'warn',
       // TS
+      // TypeScript owns name resolution; the base rules misread type declarations
+      // and Vue compiler macros. Keep the TypeScript unused-symbol rule below.
+      'no-undef': 'off',
+      'no-unused-vars': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/ban-ts-comment': ['error', { 'ts-expect-error': 'allow-with-description' }],

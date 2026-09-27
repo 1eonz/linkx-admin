@@ -30,6 +30,7 @@ import { ElMessage } from 'element-plus';
 import type ElTree from 'element-plus/es/components/tree/index';
 import { computed, nextTick, ref, watch } from 'vue';
 
+import type { ApiResponse } from '#/axios';
 import {
   batchSetDeptCameraPriv,
   batchSetDeptOrgPriv,
@@ -159,55 +160,56 @@ function simplifyTreeData(
  *
  * @returns Promise，无返回值
  */
-async function fetchData(): Promise<void> {
+function fetchData(): Promise<void> {
   loading.value = true;
-  try {
-    // 并行请求树和权限
-    const treePromise = isCameraMode.value ? getIcpCameraTree() : getIcpDepartmentTree();
-    let privPromise: Promise<{ code?: number; data?: unknown } | null> = Promise.resolve(null);
+  // 并行请求树和权限
+  const treePromise = isCameraMode.value ? getIcpCameraTree() : getIcpDepartmentTree();
+  let privPromise: Promise<{ code?: number; data?: unknown } | null> = Promise.resolve(null);
 
-    if (isBatchMode.value) {
-      // 批量模式：按部门回显
-      if (props.deptCode) {
-        privPromise = isCameraMode.value ? getDeptCameraPriv(props.deptCode) : getDeptOrgPriv(props.deptCode);
-      }
-    } else {
-      // 单用户模式：按 userId 回显
-      if (props.targetId) {
-        privPromise = isCameraMode.value ? getCameraPriv(props.targetId) : getImuserPriv(props.targetId);
-      }
+  if (isBatchMode.value) {
+    // 批量模式：按部门回显
+    if (props.deptCode) {
+      privPromise = isCameraMode.value ? getDeptCameraPriv(props.deptCode) : getDeptOrgPriv(props.deptCode);
     }
-
-    const [treeRes, privRes] = await Promise.all([treePromise, privPromise]);
-
-    // 处理树数据
-    if (treeRes?.code === 0 && treeRes.data) {
-      const treeList = Array.isArray(treeRes.data) ? treeRes.data : [treeRes.data];
-      rawTreeData.value = simplifyTreeData(
-        treeList as Record<string, unknown>[],
-        props.treeFields.id,
-        props.treeFields.label,
-      );
-    } else {
-      rawTreeData.value = [];
+  } else {
+    // 单用户模式：按 userId 回显
+    if (props.targetId) {
+      privPromise = isCameraMode.value ? getCameraPriv(props.targetId) : getImuserPriv(props.targetId);
     }
-
-    // 处理已选权限
-    if (privRes && (privRes.code === 0 || privRes.code === 200) && Array.isArray(privRes.data)) {
-      checkedKeys.value = privRes.data as string[];
-    } else {
-      checkedKeys.value = [];
-    }
-
-    // 树渲染完后设置勾选
-    nextTick(() => {
-      treeRef.value?.setCheckedKeys(checkedKeys.value);
-    });
-  } catch (e) {
-    console.error('[AuthTreeModal] 加载数据失败', e);
-  } finally {
-    loading.value = false;
   }
+
+  return Promise.all([treePromise, privPromise])
+    .then(([treeRes, privRes]) => {
+      // 处理树数据
+      if (treeRes?.code === 0 && treeRes.data) {
+        const treeList = Array.isArray(treeRes.data) ? treeRes.data : [treeRes.data];
+        rawTreeData.value = simplifyTreeData(
+          treeList as Record<string, unknown>[],
+          props.treeFields.id,
+          props.treeFields.label,
+        );
+      } else {
+        rawTreeData.value = [];
+      }
+
+      // 处理已选权限
+      if (privRes && (privRes.code === 0 || privRes.code === 200) && Array.isArray(privRes.data)) {
+        checkedKeys.value = privRes.data as string[];
+      } else {
+        checkedKeys.value = [];
+      }
+
+      // 树渲染完后设置勾选
+      nextTick(() => {
+        treeRef.value?.setCheckedKeys(checkedKeys.value);
+      });
+    })
+    .catch((e: unknown) => {
+      console.error('[AuthTreeModal] 加载数据失败', e);
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 }
 
 /** 弹窗打开时拉取 */
@@ -233,7 +235,7 @@ watch(
  *
  * @returns Promise，无返回值
  */
-async function handleSave(): Promise<void> {
+function handleSave(): void {
   // 校验
   if (isBatchMode.value) {
     if (!props.deptCode) {
@@ -248,42 +250,51 @@ async function handleSave(): Promise<void> {
   }
 
   submitting.value = true;
-  try {
-    const keys = (treeRef.value?.getCheckedKeys() as string[]) ?? [];
-    let ok = false;
+  const keys = (treeRef.value?.getCheckedKeys() as string[]) ?? [];
+  let request: Promise<ApiResponse> | null = null;
 
-    if (props.api === 'org' && props.targetId) {
-      const res = await setImuserPriv(props.targetId, keys);
-      ok = res?.code === 0;
-    } else if (props.api === 'camera' && props.targetId) {
-      const res = await setCameraPriv(props.targetId, keys);
-      ok = res?.code === 0;
-    } else if (props.api === 'batchOrg') {
-      const res = await batchSetDeptOrgPriv({
-        deptCodes: [props.deptCode],
-        privs: keys,
-        isChildren: props.isChildren,
-      });
-      ok = res?.code === 0 || res?.code === 200;
-    } else if (props.api === 'batchCamera') {
-      const res = await batchSetDeptCameraPriv({
-        deptCodes: [props.deptCode],
-        privs: keys,
-        isChildren: props.isChildren,
-      });
-      ok = res?.code === 0 || res?.code === 200;
-    }
-
-    if (!ok) {
-      ElMessage.error('保存失败');
-      return;
-    }
-    ElMessage.success('保存成功');
-    emit('success');
-    dialogVisible.value = false;
-  } finally {
-    submitting.value = false;
+  if (props.api === 'org' && props.targetId) {
+    request = setImuserPriv(props.targetId, keys);
+  } else if (props.api === 'camera' && props.targetId) {
+    request = setCameraPriv(props.targetId, keys);
+  } else if (props.api === 'batchOrg') {
+    request = batchSetDeptOrgPriv({
+      deptCodes: [props.deptCode],
+      privs: keys,
+      isChildren: props.isChildren,
+    });
+  } else if (props.api === 'batchCamera') {
+    request = batchSetDeptCameraPriv({
+      deptCodes: [props.deptCode],
+      privs: keys,
+      isChildren: props.isChildren,
+    });
   }
+
+  if (!request) {
+    ElMessage.error('保存失败');
+    submitting.value = false;
+    return;
+  }
+
+  request
+    .then((res) => {
+      const success = res.code === 0 || ((props.api === 'batchOrg' || props.api === 'batchCamera') && res.code === 200);
+      if (!success) {
+        ElMessage.error('保存失败');
+        return;
+      }
+      ElMessage.success('保存成功');
+      emit('success');
+      dialogVisible.value = false;
+    })
+    .catch((e: unknown) => {
+      console.error('[AuthTreeModal] 保存授权失败', e);
+      ElMessage.error('保存失败');
+    })
+    .finally(() => {
+      submitting.value = false;
+    });
 }
 
 /**

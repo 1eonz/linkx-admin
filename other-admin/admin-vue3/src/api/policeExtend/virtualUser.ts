@@ -27,8 +27,19 @@ export interface VirtualUserItem {
   [key: string]: unknown;
 }
 
-/** 虚拟用户表单（新增/编辑共用） */
-export type VirtualUserForm = Omit<VirtualUserItem, 'id' | 'createdAt'> & { id?: string };
+/** 新增/编辑虚拟用户的请求载荷。 */
+export interface VirtualUserForm {
+  id?: string;
+  userName: string;
+  contactNumber?: string;
+  appId: string;
+  appSecret: string;
+  defaultUser: number;
+  remark?: string;
+  createdBy?: string;
+  agentId?: string;
+  isBound?: boolean;
+}
 
 /**
  * 查询虚拟用户列表（GET /collaboration/v1/im/users/virtual）

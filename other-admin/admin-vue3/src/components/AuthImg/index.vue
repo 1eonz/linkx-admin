@@ -59,7 +59,8 @@ function loadImg(): void {
       if (objectUrl.value) {
         URL.revokeObjectURL(objectUrl.value);
       }
-      const blob = new Blob([xhr.response]);
+      const contentType = xhr.getResponseHeader('content-type')?.split(';', 1)[0]?.trim();
+      const blob = new Blob([xhr.response], { type: contentType || 'application/octet-stream' });
       objectUrl.value = URL.createObjectURL(blob);
       imgRef.value.src = objectUrl.value;
     }
@@ -76,5 +77,5 @@ onMounted(loadImg);
 </script>
 
 <template>
-  <img ref="imgRef" />
+  <img ref="imgRef" alt="" />
 </template>

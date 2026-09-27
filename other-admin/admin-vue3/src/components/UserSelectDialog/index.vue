@@ -26,7 +26,7 @@ interface Props {
   visible: boolean;
   roleId?: string | number;
   roleName?: string;
-  /** 已选用户 ID 数组（暂未启用回填，预留接口） */
+  /** 已选用户 ID 数组，用于打开弹窗时回显已有绑定 */
   selectedUserIds?: string[];
 }
 
@@ -58,6 +58,8 @@ const tableRef = ref<InstanceType<typeof ProTable>>();
 
 /** 跨页选中数量 */
 const selectedCount = ref(0);
+/** 跨页保存的用户行；初始化时只有 ID 的成员以占位行保留 */
+const selectedUsers = ref(new Map<string, AdminUserItem>());
 
 /** 列定义 */
 const columns = computed<ITableColumn[]>(() => [
@@ -84,16 +86,28 @@ watch(
 
 /** 初始化弹窗 */
 async function initDialog(): Promise<void> {
-  searchParams.value.name = '';
-  selectedCount.value = 0;
-  await nextTick();
-  tableRef.value?.init();
+      searchParams.value.name = '';
+      selectedUsers.value = new Map(
+        props.selectedUserIds.map((id) => [String(id), { id: String(id), idCard: '', status: 0 }]),
+      );
+      selectedCount.value = selectedUsers.value.size;
+      await nextTick();
+      tableRef.value?.init();
 }
 
 /** ProTable @response 回调 */
 function handleResponse(res: unknown): void {
   list.value = defaultTableFormatter.getRecords(res) as AdminUserItem[];
   total.value = defaultTableFormatter.getTotal(res);
+  nextTick(() => {
+    list.value.forEach((user) => {
+      if (selectedUsers.value.has(String(user.id))) {
+        selectedUsers.value.set(String(user.id), user);
+        tableRef.value?.toggleRowSelection(user, true);
+      }
+    });
+    selectedCount.value = selectedUsers.value.size;
+  });
 }
 
 /** 搜索 */
@@ -109,12 +123,19 @@ function handleReset(): void {
 
 /** 选中变化 */
 function handleSelectionChange(selection: AdminUserItem[]): void {
-  selectedCount.value = selection.length;
+  const selectedIds = new Set(selection.map((user) => String(user.id)));
+  list.value.forEach((user) => {
+    const id = String(user.id);
+    if (selectedIds.has(id)) selectedUsers.value.set(id, user);
+    else selectedUsers.value.delete(id);
+  });
+  selection.forEach((user) => selectedUsers.value.set(String(user.id), user));
+  selectedCount.value = selectedUsers.value.size;
 }
 
 /** 确认 */
 function handleConfirm(): void {
-  const selected = tableRef.value?.getSelection() as AdminUserItem[];
+  const selected = [...selectedUsers.value.values()];
   emit('confirm', selected);
   handleClose();
 }
@@ -123,6 +144,7 @@ function handleConfirm(): void {
 function handleClose(): void {
   innerVisible.value = false;
   searchParams.value.name = '';
+  selectedUsers.value.clear();
   selectedCount.value = 0;
   nextTick(() => {
     tableRef.value?.clearSelection();
@@ -161,6 +183,7 @@ function getUser(scope: any): AdminUserItem {
       :search-params="searchParams"
       show-selection
       row-key="id"
+      reserve-selection
       height="400px"
       @response="handleResponse"
       @selection-change="handleSelectionChange"

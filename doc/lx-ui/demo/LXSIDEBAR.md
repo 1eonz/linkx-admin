@@ -4,11 +4,11 @@
 
 ```vue
 <script setup lang="ts">
-import { LxSidebar } from 'lx-ui';
-import { ref } from 'vue';
+import { LxSidebar } from 'lx-ui'
+import { ref } from 'vue'
 
-const mode = ref('expanded');
-const activeKey = ref('dashboard');
+const mode = ref('expanded')
+const activeKey = ref('dashboard')
 const items = ref([
   { key: 'dashboard', title: '综合态势工作台', icon: 'dashboard' },
   {
@@ -20,21 +20,27 @@ const items = ref([
       { key: 'coop-monitor', title: '上下岗排班监控' },
     ],
   },
-]);
+])
 </script>
 
 <template>
-  <LxSidebar v-model:mode="mode" v-model:active-key="activeKey" :items="items" />
+  <LxSidebar
+    v-model:mode="mode"
+    v-model:active-key="activeKey"
+    :items="items"
+  />
 </template>
 ```
 
 ## 何时使用 / 何时不用
 
 **使用：**
+
 - 后台管理端主布局（与 LxNavbar、LxTabsBar 组成壳层三件套）；
 - 需要在"完整导航"（expanded）与"腾出内容空间"（rail）之间切换的场景，如 1366 笔记本、大屏指挥中心。
 
 **不用：**
+
 - H5 移动端主导航（用底部 tab 或抽屉，侧边栏仅以 `mobile` 抽屉形态被壳层复用）；
 - 简单的二级设置页内导航（用 el-tabs 或 LxPageCard 内锚点即可，无需引入整个侧边栏）。
 
@@ -50,14 +56,16 @@ const items = ref([
 <!-- lx-ui/src/components/LxSidebar/demo/basic.vue -->
 <script setup lang="ts">
 // 演示：静态菜单 + 受控激活项
-import { ref } from 'vue';
-import { LxSidebar, type LxMenuItem } from 'lx-ui';
+import { ref } from 'vue'
+import { LxSidebar, type LxMenuItem } from 'lx-ui'
 
-const activeKey = ref('dashboard');
+const activeKey = ref('dashboard')
 const items: LxMenuItem[] = [
   { key: 'dashboard', title: '综合态势工作台', icon: 'dashboard' },
   {
-    key: 'coop', title: '协同岗管理', icon: 'team',
+    key: 'coop',
+    title: '协同岗管理',
+    icon: 'team',
     children: [
       { key: 'coop-setting', title: '协同岗设置' },
       { key: 'coop-monitor', title: '上下岗排班监控' },
@@ -66,11 +74,11 @@ const items: LxMenuItem[] = [
   },
   { key: 'duty', title: '勤务排班管理', icon: 'calendar' },
   { key: 'license', title: '系统与License配置', icon: 'setting' },
-];
+]
 
 function onSelect(item: LxMenuItem) {
-  console.log('select', item.key); // 实际业务中这里做 router.push
-  if (item.path || !item.children) activeKey.value = item.key;
+  console.log('select', item.key) // 实际业务中这里做 router.push
+  if (item.path || !item.children) activeKey.value = item.key
 }
 </script>
 
@@ -91,11 +99,11 @@ function onSelect(item: LxMenuItem) {
 <!-- lx-ui/src/components/LxSidebar/demo/rail-mode.vue -->
 <script setup lang="ts">
 // 演示：rail 形态，底部仪表与 NODE 徽章为默认 footer
-import { ref } from 'vue';
-import { LxSidebar } from 'lx-ui';
+import { ref } from 'vue'
+import { LxSidebar } from 'lx-ui'
 
-const mode = ref('rail');
-const items = [/* 同 basic */];
+const mode = ref('rail')
+const items = [/* 同 basic */]
 </script>
 
 <template>
@@ -115,15 +123,15 @@ const items = [/* 同 basic */];
 <!-- lx-ui/src/components/LxSidebar/demo/controlled.vue -->
 <script setup lang="ts">
 // 演示：形态受控切换 + 持久化（admin-vue3 实际接入模式）
-import { ref } from 'vue';
-import { LxSidebar, type LxSidebarMode } from 'lx-ui';
+import { ref } from 'vue'
+import { LxSidebar, type LxSidebarMode } from 'lx-ui'
 
 const mode = ref<LxSidebarMode>(
-  (localStorage.getItem('sidebar-mode') as LxSidebarMode) || 'expanded'
-);
+  (localStorage.getItem('sidebar-mode') as LxSidebarMode) || 'expanded',
+)
 function onModeChange(m: LxSidebarMode) {
-  mode.value = m;
-  localStorage.setItem('sidebar-mode', m);
+  mode.value = m
+  localStorage.setItem('sidebar-mode', m)
 }
 </script>
 
@@ -144,19 +152,22 @@ function onModeChange(m: LxSidebarMode) {
 <!-- lx-ui/src/components/LxSidebar/demo/badge.vue -->
 <script setup lang="ts">
 // 演示：预警角标（badgeType 决定颜色，rail 态自动退化为圆点）
-import { LxSidebar } from 'lx-ui';
+import { LxSidebar } from 'lx-ui'
 
 const items = [
   { key: 'dashboard', title: '综合态势工作台', icon: 'dashboard' },
   {
-    key: 'alert', title: '预警与群组协同', icon: 'bell',
-    badge: 4, badgeType: 'error',  // ← 未处理预警数
+    key: 'alert',
+    title: '预警与群组协同',
+    icon: 'bell',
+    badge: 4,
+    badgeType: 'error', // ← 未处理预警数
     children: [
       { key: 'alert-config', title: '预警流转配置' },
       { key: 'alert-group', title: '联动响应群组' },
     ],
   },
-];
+]
 </script>
 
 <template>
@@ -174,7 +185,7 @@ const items = [
 <!-- lx-ui/src/components/LxSidebar/demo/slots.vue -->
 <script setup lang="ts">
 // 演示：slot 接管品牌区/底部（接入真实 License 状态）
-import { LxSidebar } from 'lx-ui';
+import { LxSidebar } from 'lx-ui'
 </script>
 
 <template>
@@ -184,7 +195,9 @@ import { LxSidebar } from 'lx-ui';
       <span>我的业务平台</span>
     </template>
     <template #footer>
-      <div style="padding: 8px; color: var(--lx-text-secondary)">License 剩余 284 天</div>
+      <div style="padding: 8px; color: var(--lx-text-secondary)">
+        License 剩余 284 天
+      </div>
     </template>
   </LxSidebar>
 </template>
@@ -194,68 +207,70 @@ import { LxSidebar } from 'lx-ui';
 
 ### Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-|---|---|---|---|
-| mode? | `'rail' \| 'expanded'` | `'expanded'` | 形态。expanded=252px 完整导航；rail=64px 图标轨道。支持 `v-model:mode` |
-| items? | `LxMenuItem[]` | `[]` | 菜单树。业务方从权限菜单接口映射后传入（见 FAQ-1） |
-| active-key? | `string` | — | 激活项 key，受控。建议绑定 `route.name` |
-| expanded-keys? | `string[]` | — | 展开的二级组 keys（受控）；不传则组件内部自管理 |
-| title? | `string` | `'警务业务协同平台'` | 品牌标题（rail 态自动隐藏） |
-| mobile? | `boolean` | `false` | 移动端抽屉模式（overlay + 遮罩 + Esc 关闭） |
-| show-footer? | `boolean` | `true` | 是否渲染底部状态区 |
-| shadow? | `boolean` | `true` | expanded 态右侧投影（`_2` 风格） |
+| 名称           | 类型                   | 默认值               | 说明                                                                   |
+| -------------- | ---------------------- | -------------------- | ---------------------------------------------------------------------- |
+| mode?          | `'rail' \| 'expanded'` | `'expanded'`         | 形态。expanded=252px 完整导航；rail=64px 图标轨道。支持 `v-model:mode` |
+| items?         | `LxMenuItem[]`         | `[]`                 | 菜单树。业务方从权限菜单接口映射后传入（见 FAQ-1）                     |
+| active-key?    | `string`               | —                    | 激活项 key，受控。建议绑定 `route.name`                                |
+| expanded-keys? | `string[]`             | —                    | 展开的二级组 keys（受控）；不传则组件内部自管理                        |
+| title?         | `string`               | `'警务业务协同平台'` | 品牌标题（rail 态自动隐藏）                                            |
+| mobile?        | `boolean`              | `false`              | 移动端模态导航抽屉（遮罩、键盘焦点约束、Esc 关闭并恢复焦点）           |
+| show-footer?   | `boolean`              | `true`               | 是否渲染底部状态区                                                     |
+| shadow?        | `boolean`              | `true`               | expanded 态右侧投影（`_2` 风格）                                       |
 
 ### Events
 
-| 事件名 | 回调参数 | 说明 |
-|---|---|---|
-| update:mode | `(mode: LxSidebarMode)` | 形态切换（footer 按钮 / mobile 遮罩关闭不触发） |
-| select | `(item: LxMenuItem)` | 点击**直达项或二级项**。分组标题点击不触发 |
-| expand-change | `(keys: string[])` | 二级组展开状态变化 |
+| 事件名        | 回调参数                | 说明                                             |
+| ------------- | ----------------------- | ------------------------------------------------ |
+| update:mode   | `(mode: LxSidebarMode)` | 形态切换（footer 按钮 / mobile 遮罩关闭不触发）  |
+| select        | `(item: LxMenuItem)`    | 激活直达项或二级项时触发一次；分组标题点击不触发 |
+| expand-change | `(keys: string[])`      | 二级组展开状态变化                               |
+
+移动端抽屉可通过关闭按钮、遮罩或 `Escape` 关闭；选中菜单项时也会请求宿主关闭抽屉。组件会将焦点限制在抽屉内，并在受控状态关闭后恢复打开前的焦点。分组标题支持 `Enter`/`Space`；rail 分组用 `Enter` 打开子项浮层，按 `Escape` 关闭并还原焦点。无 `path` 的菜单项使用按钮，有 `path` 的项使用链接交给宿主路由处理。所有侧栏动画遵守 `prefers-reduced-motion`。
 
 ### Slots
 
-| 插槽名 | 作用域参数 | 说明 |
-|---|---|---|
-| brand | — | 替换品牌区（默认渲染 LxSidebarBrand） |
-| append | — | 菜单列表之后追加区块（如"常用快捷"） |
-| footer | — | 替换底部状态区（默认渲染 LxSidebarFooter） |
+| 插槽名 | 作用域参数 | 说明                                       |
+| ------ | ---------- | ------------------------------------------ |
+| brand  | —          | 替换品牌区（默认渲染 LxSidebarBrand）      |
+| append | —          | 菜单列表之后追加区块（如"常用快捷"）       |
+| footer | —          | 替换底部状态区（默认渲染 LxSidebarFooter） |
 
 ### Expose
 
-| 方法名 | 签名 | 说明 |
-|---|---|---|
-| toggleMode | `() => void` | 编程式切换形态 |
+| 方法名      | 签名                    | 说明                |
+| ----------- | ----------------------- | ------------------- |
+| toggleMode  | `() => void`            | 编程式切换形态      |
 | toggleGroup | `(key: string) => void` | 展开/折叠指定二级组 |
 
 ## 类型定义
 
 ```ts
 // packages/lx-ui/src/components/LxSidebar/types.ts
-import type { LxSidebarMode, LxStatus } from 'lx-tokens';
+import type { LxSidebarMode, LxStatus } from 'lx-tokens'
 
 export interface LxMenuItem {
   /** 唯一标识（约定为路由 name） */
-  key: string;
+  key: string
   /** 显示标题 */
-  title: string;
+  title: string
   /** svg 图标名（lx-ui 内置 sprite），直达项与分组项均建议配置 */
-  icon?: string;
+  icon?: string
   /** 路由地址（直达项使用；分组项忽略） */
-  path?: string;
+  path?: string
   /** 二级菜单；为空即直达项 */
-  children?: LxMenuItem[];
+  children?: LxMenuItem[]
   /** 角标：数字显示计数，字符串显示文本；rail 态退化为圆点 */
-  badge?: number | string;
+  badge?: number | string
   /** 角标语义色 */
-  badgeType?: LxStatus;
+  badgeType?: LxStatus
   /** 置灰不可点 */
-  disabled?: boolean;
+  disabled?: boolean
   /** 业务透传（如权限标识 command），组件不消费 */
-  meta?: Record<string, unknown>;
+  meta?: Record<string, unknown>
 }
 
-export type { LxSidebarMode };
+export type { LxSidebarMode }
 ```
 
 ## 设计说明
@@ -280,10 +295,10 @@ const menuItems = computed(() =>
       path: m.path,
       children: m.children?.map(toLx),
       meta: { permission: m.permission }, // 组件原样透传
-    };
-  })
-);
-const activeKey = computed(() => route.name as string);
+    }
+  }),
+)
+const activeKey = computed(() => route.name as string)
 // <LxSidebar :items="menuItems" :active-key="activeKey" @select="i => i.path && router.push(i.path)" />
 ```
 

@@ -1,4 +1,5 @@
-﻿﻿<script setup lang="ts">
+﻿﻿
+<script setup lang="ts">
 /**
  * DataPermissionTree - 数据权限穿梭树
  *
@@ -119,12 +120,16 @@ const emit = defineEmits<{
   (e: 'change', detail: SelectedNode[]): void;
   /** 已选 keys 变化时触发（用于 v-model 同步） */
   (e: 'update:modelValue', keys: string[]): void;
+  /** 部门树尚未完整可用或存在失败节点时通知父组件 */
+  (e: 'load-state', ready: boolean): void;
 }>();
 
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const treeData = ref<any[]>([]);
 const loading = ref(false);
 const filterText = ref('');
+const treeLoadError = ref('');
+const failedNodeIds = ref(new Set<string>());
 
 /** 已选节点详情（左侧树勾选项 + 占位项） */
 const selectedNodes = ref<SelectedNode[]>([]);
@@ -153,6 +158,15 @@ const treeProps = { children: 'children', label: 'name' };
 
 /** 是否已经加载过数据（用于 v-if 控制 el-tree 渲染时机） */
 const isTreeReady = ref(false);
+const isLoadReady = computed(() => isTreeReady.value && !treeLoadError.value && failedNodeIds.value.size === 0);
+
+watch(
+  isLoadReady,
+  (ready) => {
+    emit('load-state', ready);
+  },
+  { immediate: true },
+);
 
 // ===== 加载部门树 =====
 /**
@@ -160,36 +174,57 @@ const isTreeReady = ref(false);
  * - 同步模式（DEPARTMENT_SYNC_SIGN=true）：一次性加载完整树
  * - 懒加载模式：仅加载根节点，子节点按需加载
  */
-async function loadTree(): Promise<void> {
+function loadTree(): Promise<void> {
   loading.value = true;
-  try {
-    isSyncMode.value = resolveSyncSign();
+  isTreeReady.value = false;
+  treeLoadError.value = '';
+  failedNodeIds.value.clear();
+  isSyncMode.value = resolveSyncSign();
 
-    if (isSyncMode.value) {
-      // 同步模式：一次性加载完整树
-      const res = await queryDepartmentTree({});
-      const data = res?.data as unknown;
-      const nodes = Array.isArray(data) ? data : data ? [data] : [];
-      treeData.value = normalizeTreeData(nodes as any[]);
-      // 性能优化：默认只展开前 2 级（根 + 一级子节点），避免大树全量渲染卡顿
-      // 用户可手动展开更深层级；回显时通过 ensureParentExpanded 保证选中节点可见
-      defaultExpandedKeys.value = collectExpandableIds(treeData.value, 2);
-    } else {
-      // 懒加载模式：仅加载根节点
-      const res = await queryDepartment({});
-      const root = ((res?.data ?? []) as any[]).map((item) => ({
-        ...item,
-        children: item.hasChildren === false ? undefined : [],
-      }));
-      treeData.value = root;
-      defaultExpandedKeys.value = [];
-    }
-    isTreeReady.value = true;
-  } catch {
-    // 忽略
-  } finally {
-    loading.value = false;
-  }
+  const loadPromise = isSyncMode.value
+    ? queryDepartmentTree({}).then((res) => {
+        if (res?.code !== 0) {
+          treeLoadError.value = '部门树加载失败，请重试。';
+          return false;
+        }
+        const data = res?.data as unknown;
+        const nodes = Array.isArray(data) ? data : data ? [data] : [];
+        treeData.value = normalizeTreeData(nodes as any[]);
+        // 性能优化：默认只展开前 2 级（根 + 一级子节点），避免大树全量渲染卡顿
+        // 用户可手动展开更深层级；回显时通过 ensureParentExpanded 保证选中节点可见
+        defaultExpandedKeys.value = collectExpandableIds(treeData.value, 2);
+        return true;
+      })
+    : queryDepartment({}).then((res) => {
+        if (res?.code !== 0) {
+          treeLoadError.value = '部门树加载失败，请重试。';
+          return false;
+        }
+        const root = ((res?.data ?? []) as any[]).map((item) => ({
+          ...item,
+          children: item.hasChildren === false ? undefined : [],
+        }));
+        treeData.value = root;
+        defaultExpandedKeys.value = [];
+        return true;
+      });
+
+  return loadPromise
+    .then((loaded) => {
+      if (!loaded) return;
+      isTreeReady.value = true;
+      return nextTick().then(() => {
+        if (selectedNodes.value.length > 0) {
+          initCheckedDetail(selectedNodes.value);
+        }
+      });
+    })
+    .catch(() => {
+      treeLoadError.value = '部门树加载失败，请重试。';
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 }
 
 /**
@@ -243,25 +278,50 @@ function normalizeTreeData(nodes: any[]): any[] {
  * @param node - 父节点（level=0 时为根）
  * @param resolve - 加载完成回调
  */
-async function loadNode(node: any, resolve: (data: any[]) => void): Promise<void> {
+function loadNode(node: any, resolve: (data: any[]) => void, stopLoading: () => void): void {
   if (node.level === 0) {
     resolve(treeData.value);
     return;
   }
-  try {
-    const parentCode = node.data?.code;
-    const res = await queryDepartment({ parentCode });
-    const children = ((res?.data ?? []) as any[]).map((item) => ({
-      ...item,
-      children: item.hasChildren === false ? undefined : [],
-    }));
-    resolve(children);
-    nextTick(() => {
-      refreshPendingNodes();
+  const parentCode = node.data?.code;
+  queryDepartment({ parentCode })
+    .then((res) => {
+      if (res?.code !== 0) {
+        const nodeId = String(node.data?.id ?? '');
+        if (nodeId) {
+          failedNodeIds.value.add(nodeId);
+        }
+        stopLoading();
+        return;
+      }
+      const children = ((res?.data ?? []) as any[]).map((item) => ({
+        ...item,
+        children: item.hasChildren === false ? undefined : [],
+      }));
+      resolve(children);
+      if (node.data?.id) {
+        failedNodeIds.value.delete(String(node.data.id));
+      }
+      nextTick(() => {
+        refreshPendingNodes();
+      });
+    })
+    .catch(() => {
+      const nodeId = String(node.data?.id ?? '');
+      if (nodeId) {
+        failedNodeIds.value.add(nodeId);
+      }
+      stopLoading();
     });
-  } catch {
-    resolve([]);
-  }
+}
+
+/** 使用 Element Plus 未标记 loaded 的节点对象重试失败的懒加载请求。 */
+function retryFailedNode(nodeId: string): void {
+  if (!failedNodeIds.value.has(nodeId)) return;
+  const node = treeRef.value?.getNode(nodeId);
+  node?.loadData((children) => {
+    if (Array.isArray(children)) node.expand();
+  });
 }
 
 // ===== 搜索过滤 =====
@@ -718,8 +778,12 @@ onMounted(() => {
         />
       </div>
       <div class="panel-content">
+        <div v-if="treeLoadError" class="tree-load-error" role="alert">
+          <span>{{ treeLoadError }}</span>
+          <el-button type="primary" link :disabled="loading" @click="loadTree">重试</el-button>
+        </div>
         <el-tree
-          v-if="isTreeReady"
+          v-else-if="isTreeReady"
           ref="treeRef"
           :data="treeData"
           :props="treeProps"
@@ -736,6 +800,12 @@ onMounted(() => {
             <span class="custom-tree-node">
               <i v-if="data && data.icon" :class="data.icon" class="node-icon" />
               <span class="node-label" :title="data.name">{{ data.name }}</span>
+              <template v-if="data && failedNodeIds.has(String(data.id))">
+                <span class="node-load-error" role="alert">部门加载失败</span>
+                <el-button size="small" type="primary" link @click.stop="retryFailedNode(String(data.id))"
+                  >重试</el-button
+                >
+              </template>
               <el-tag v-if="data && data.url" size="small" type="info" class="node-tag">
                 {{ data.url }}
               </el-tag>
@@ -759,7 +829,7 @@ onMounted(() => {
           </template>
         </el-tree>
         <!-- 空状态：教学化文案，区分"未加载"与"真的没有" -->
-        <div v-if="!loading && treeData.length === 0" class="empty-state">
+        <div v-if="!loading && isTreeReady && treeData.length === 0" class="empty-state">
           <div class="empty-icon-wrapper">
             <el-icon><Grid /></el-icon>
           </div>
@@ -1033,6 +1103,21 @@ onMounted(() => {
       color: @color-text-placeholder;
     }
   }
+}
+
+.tree-load-error {
+  display: flex;
+  min-height: 180px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: @color-danger;
+}
+
+.node-load-error {
+  margin-left: 8px;
+  color: @color-danger;
+  font-size: 12px;
 }
 
 // 右侧已选列表

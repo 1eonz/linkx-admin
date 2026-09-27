@@ -28,7 +28,7 @@
  * @packageDocumentation
  */
 
-import { computed, reactive, ref, watch, type ComputedRef, type Ref } from 'vue';
+import { computed, ref, watch, type ComputedRef, type Ref } from 'vue';
 
 import { useFetch } from './useFetch';
 import { defaultTableFormatter } from '@/components/ProTable/formatter';
@@ -272,26 +272,25 @@ export function useTable<TItem, TQuery extends Record<string, any> = Record<stri
   /**
    * 包装 fetchApi，处理响应数据提取和转换
    */
-  async function wrappedFetch(params: TQuery & PaginationParams): Promise<TItem[]> {
-    const res = await fetchApi(params);
-    const records = formatResult(res);
-    const totalNum = formatTotal(res);
+  function wrappedFetch(params: TQuery & PaginationParams): Promise<TItem[]> {
+    return fetchApi(params).then((res) => {
+      const records = formatResult(res);
+      const totalNum = formatTotal(res);
 
-    const list = transformItem ? records.map(transformItem) : records;
-    data.value = list;
-    total.value = totalNum;
-    onSuccess?.(list, totalNum);
-    return list;
+      const list = transformItem ? records.map(transformItem) : records;
+      data.value = list;
+      total.value = totalNum;
+      onSuccess?.(list, totalNum);
+      return list;
+    });
   }
 
   // 使用 useFetch 管理请求状态
   const {
     loading: fetchLoading,
-    error: fetchError,
     fetch,
     refresh: fetchRefresh,
     cancel: fetchCancel,
-    mutate: fetchMutate,
   } = useFetch<TItem[], [TQuery & PaginationParams]>({
     fetchFn: wrappedFetch,
     immediate: false, // 由 useTable 自行控制 immediate
@@ -326,24 +325,24 @@ export function useTable<TItem, TQuery extends Record<string, any> = Record<stri
   /**
    * 搜索：重置页码（可选）并请求
    */
-  async function search(): Promise<void> {
+  function search(): Promise<void> {
     if (resetPageOnSearch) {
       page.value = 1;
     }
-    await fetch(buildParams());
+    return fetch(buildParams()).then(() => undefined);
   }
 
   /**
    * 刷新：保持当前页码和参数
    */
-  async function refresh(): Promise<void> {
-    await fetchRefresh();
+  function refresh(): Promise<void> {
+    return fetchRefresh().then(() => undefined);
   }
 
   /**
    * 重置：还原 query + 回到第 1 页 + 请求
    */
-  async function reset(newQuery?: Partial<TQuery>): Promise<void> {
+  function reset(newQuery?: Partial<TQuery>): Promise<void> {
     // 还原到初始 query 快照
     Object.keys(initialQuerySnapshot).forEach((key) => {
       (query as Record<string, any>)[key] = initialQuerySnapshot[key];
@@ -354,7 +353,7 @@ export function useTable<TItem, TQuery extends Record<string, any> = Record<stri
     }
     page.value = defaultPage;
     limit.value = defaultPageSize;
-    await fetch(buildParams());
+    return fetch(buildParams()).then(() => undefined);
   }
 
   /**
@@ -404,7 +403,7 @@ export function useTable<TItem, TQuery extends Record<string, any> = Record<stri
    * 乐观更新
    */
   function mutate(newData: TItem[] | ((prev: TItem[]) => TItem[])): void {
-    fetchMutate(newData as any);
+    data.value = typeof newData === 'function' ? newData(data.value) : newData;
   }
 
   // ===== 计算属性 =====

@@ -126,27 +126,29 @@ async function handleStatusBeforeChange(row: AppItem, newStatus: AppStatus): Pro
 
   // 2. 调用接口
   statusLoadingMap[row.id] = true;
-  try {
-    const res = await updateStatus({ id: row.id, status: newStatus });
-    if (res.code === 0) {
-      ElMessage.success(`${text}成功`);
-      // 调用 refresh 重新拉取列表，保证数据与服务端一致
-      // 注意：refresh 会导致 v-model 值变化，但因为不使用 @change，不会触发 API
-      tableRef.value?.refresh();
-      return true;
-    }
-    // 接口返回业务错误（code !== 0）：http 拦截器已弹错误提示，此处不再重复
-    // 但若 res.msg 有值且与拦截器不同，可补充提示
-    if (res.msg && !res.msg.includes('请求失败')) {
-      ElMessage.error(res.msg);
-    }
-    return false;
-  } catch {
-    // 网络异常等：http 拦截器已弹错误提示，此处不再重复
-    return false;
-  } finally {
-    statusLoadingMap[row.id] = false;
-  }
+  return updateStatus({ id: row.id, status: newStatus })
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(`${text}成功`);
+        // 调用 refresh 重新拉取列表，保证数据与服务端一致
+        // 注意：refresh 会导致 v-model 值变化，但因为不使用 @change，不会触发 API
+        tableRef.value?.refresh();
+        return true;
+      }
+      // 接口返回业务错误（code !== 0）：http 拦截器已弹错误提示，此处不再重复
+      // 但若 res.msg 有值且与拦截器不同，可补充提示
+      if (res.msg && !res.msg.includes('请求失败')) {
+        ElMessage.error(res.msg);
+      }
+      return false;
+    })
+    .catch(() => {
+      // 网络异常等：http 拦截器已弹错误提示，此处不再重复
+      return false;
+    })
+    .finally(() => {
+      statusLoadingMap[row.id] = false;
+    });
 }
 
 // 删除

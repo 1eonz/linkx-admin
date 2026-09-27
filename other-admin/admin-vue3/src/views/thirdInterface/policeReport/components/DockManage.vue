@@ -111,7 +111,8 @@ function handleUpdate(row: DockItem): void {
 
 // 启用/禁用切换（二次确认 + 失败回滚，成功后本地更新不 refresh）
 async function handleStatusChange(row: DockItem, val: 0 | 1): Promise<void> {
-  if (!row.id) return;
+  const id = row.id;
+  if (!id) return;
   const title = val === 1 ? '启用' : '禁用';
   try {
     // 二次确认，用户取消则回滚 UI
@@ -124,24 +125,26 @@ async function handleStatusChange(row: DockItem, val: 0 | 1): Promise<void> {
     row.status = val === 1 ? 0 : 1;
     return;
   }
-  statusLoadingMap[row.id] = true;
-  try {
-    const res = await changeDockEnable({ id: row.id, status: val });
-    if (res.code === 0) {
-      ElMessage.success(`${title}成功`);
-      // 成功后直接更新本地，避免 refresh 导致循环
-      row.status = val;
-    } else {
-      ElMessage.error(res.msg ?? `${title}失败`);
-      // 失败时回滚 UI
+  statusLoadingMap[id] = true;
+  return changeDockEnable({ id, status: val })
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(`${title}成功`);
+        // 成功后直接更新本地，避免 refresh 导致循环
+        row.status = val;
+      } else {
+        ElMessage.error(res.msg ?? `${title}失败`);
+        // 失败时回滚 UI
+        row.status = val === 1 ? 0 : 1;
+      }
+    })
+    .catch(() => {
+      ElMessage.error(`${title}失败`);
       row.status = val === 1 ? 0 : 1;
-    }
-  } catch {
-    ElMessage.error(`${title}失败`);
-    row.status = val === 1 ? 0 : 1;
-  } finally {
-    statusLoadingMap[row.id] = false;
-  }
+    })
+    .finally(() => {
+      statusLoadingMap[id] = false;
+    });
 }
 
 // 删除

@@ -47,19 +47,23 @@ watch(searchText, (val) => {
 });
 
 // ===== 加载菜单树 =====
-async function loadMenuTree(): Promise<void> {
+function loadMenuTree(): Promise<void> {
   treeLoading.value = true;
-  try {
-    const res = await getMenuList({ applicationId: IM_APPLICATION_ID });
-    if (res.code === 0) {
-      allMenuTree.value = (res.data ?? []) as MenuItem[];
-      filterMenuByPermissions();
-    }
-  } catch {
-    ElMessage.error('加载菜单树失败');
-  } finally {
-    treeLoading.value = false;
-  }
+  return getMenuList({ applicationId: IM_APPLICATION_ID })
+    .then((res) => {
+      if (res.code === 0) {
+        allMenuTree.value = (res.data ?? []) as MenuItem[];
+        filterMenuByPermissions();
+      } else {
+        ElMessage.error(res.msg || '加载菜单树失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('加载菜单树失败');
+    })
+    .finally(() => {
+      treeLoading.value = false;
+    });
 }
 
 /** 根据用户权限过滤菜单树 */
@@ -109,9 +113,10 @@ function filterNode(value: string, data: MenuItem): boolean {
 /** 兼容 el-tree FilterNodeMethodFunction 类型 */
 const filterNodeMethod = filterNode as never;
 
-async function refreshData(): Promise<void> {
-  await loadMenuTree();
-  ElMessage.success('刷新成功');
+function refreshData(): void {
+  loadMenuTree().then(() => {
+    ElMessage.success('刷新成功');
+  });
 }
 
 onMounted(() => {

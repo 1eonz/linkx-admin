@@ -57,7 +57,7 @@ function getDisable(data: QueryUserByPageItem): boolean {
 }
 
 // init 入口：row 为 null 表示新增，否则编辑
-async function init(
+function init(
   row: { id: string; departmentCode?: string; departmentName?: string; name?: string } | null,
   allUserList: QueryUserByPageItem[] | null = null,
 ): Promise<void> {
@@ -81,24 +81,33 @@ async function init(
     form.relatedUserNames = row.name || '';
     getUserListByPage();
   }
-  await getList(row?.id);
-  dialogVisible.value = true;
+  return getList(row?.id).then((loaded) => {
+    if (loaded) dialogVisible.value = true;
+  });
 }
 
 // 获取角色和人员详情
-async function getList(id = ''): Promise<void> {
+function getList(id = ''): Promise<boolean> {
   const params = { name: '', pageSize: 100, pageNum: 1 };
-  const roleListRes = await getRoleList(params);
-  roleList.value = (roleListRes.data?.records as RoleItem[])?.filter((item) => item.status === 0) ?? [];
-  if (!isAdd.value) {
-    const userRole = await getUserRoleByUserId(id);
-    const isActive = roleList.value.find((ev) => ev.id === userRole.data?.id);
-    if (isActive) {
-      form.roleIds = [userRole.data?.id as string];
-    }
-  } else {
-    form.roleIds = [];
-  }
+  return getRoleList(params)
+    .then((roleListRes) => {
+      roleList.value = (roleListRes.data?.records as RoleItem[])?.filter((item) => item.status === 0) ?? [];
+      if (!isAdd.value) {
+        return getUserRoleByUserId(id).then((userRole) => {
+          const isActive = roleList.value.find((ev) => ev.id === userRole.data?.id);
+          if (isActive) {
+            form.roleIds = [userRole.data?.id as string];
+          }
+          return true;
+        });
+      }
+      form.roleIds = [];
+      return true;
+    })
+    .catch(() => {
+      ElMessage.error('获取角色信息失败');
+      return false;
+    });
 }
 
 function handleConfirm(): void {
@@ -159,26 +168,28 @@ function closeDialog(): void {
 }
 
 // 选择组织
-async function parentCurrentChange(data: unknown): Promise<void> {
+function parentCurrentChange(data: unknown): Promise<void> {
   const dept = data as { code?: string; name?: string };
   form.departmentCode = dept.code || '';
   form.departmentName = dept.name || '';
   user.pageNum = 1;
   user.list = [];
-  await getUserListByPage();
-  // 如果切换组织，已选人员不在组织内的需要删除已选信息
-  const newChooseUser: QueryUserByPageItem[] = [];
-  const userIdList = user.list.map((item) => item.id);
-  if (user.list.length > 0 && form.relatedUsers.length > 0) {
-    form.relatedUsers.forEach((item) => {
-      if (userIdList.includes(item.id)) {
-        newChooseUser.push(item);
-      }
-    });
-  }
-  form.relatedUsers = newChooseUser;
-  form.relatedUserId = newChooseUser.length > 0 ? newChooseUser[0].id : '';
-  form.relatedUserNames = newChooseUser.map((item) => item.name).join(',');
+  return getUserListByPage().then((loaded) => {
+    if (!loaded) return;
+    // 如果切换组织，已选人员不在组织内的需要删除已选信息
+    const newChooseUser: QueryUserByPageItem[] = [];
+    const userIdList = user.list.map((item) => item.id);
+    if (user.list.length > 0 && form.relatedUsers.length > 0) {
+      form.relatedUsers.forEach((item) => {
+        if (userIdList.includes(item.id)) {
+          newChooseUser.push(item);
+        }
+      });
+    }
+    form.relatedUsers = newChooseUser;
+    form.relatedUserId = newChooseUser.length > 0 ? newChooseUser[0].id : '';
+    form.relatedUserNames = newChooseUser.map((item) => item.name).join(',');
+  });
 }
 
 // 清空组织
@@ -196,31 +207,39 @@ function handleScroll(): void {
 }
 
 // 人员搜索（防抖，500ms）
-const remoteMethod = debounce(async (keywords: string): Promise<void> => {
+const remoteMethod = debounce((keywords: string): Promise<boolean> => {
   user.loading = true;
   user.list = [];
   user.pageNum = 1;
-  await getUserListByPage(keywords);
+  return getUserListByPage(keywords);
 }, 500);
 
 // 分页查询组织下的人员
-async function getUserListByPage(keywords?: string): Promise<void> {
+function getUserListByPage(keywords?: string): Promise<boolean> {
   const params = {
     code: form.departmentCode,
     pageNum: user.pageNum,
     pageSize: 100,
     name: keywords,
   };
-  try {
-    const { code, data } = await queryUserByPage(params);
-    if (code === 0 && data) {
-      const records = (data.records as QueryUserByPageItem[]) ?? [];
-      user.list = [...user.list, ...records];
-      user.total = data.total ?? 0;
-    }
-  } finally {
-    user.loading = false;
-  }
+  return queryUserByPage(params)
+    .then(({ code, data }) => {
+      if (code === 0 && data) {
+        const records = (data.records as QueryUserByPageItem[]) ?? [];
+        user.list = [...user.list, ...records];
+        user.total = data.total ?? 0;
+      } else if (code !== 0) {
+        ElMessage.error('获取人员列表失败');
+      }
+      return true;
+    })
+    .catch(() => {
+      ElMessage.error('获取人员列表失败');
+      return false;
+    })
+    .finally(() => {
+      user.loading = false;
+    });
 }
 
 function handleChangeUser(userId: string): void {

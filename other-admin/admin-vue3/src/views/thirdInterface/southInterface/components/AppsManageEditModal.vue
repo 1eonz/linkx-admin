@@ -1,4 +1,5 @@
-﻿﻿<script setup lang="ts">
+﻿﻿
+<script setup lang="ts">
 /**
  * AppsManageEditModal - 可调用应用编辑弹窗（两步表单）
  *
@@ -303,12 +304,13 @@ function resetForm(): void {
  * @param type 操作类型：'create'-新增，'update'-编辑
  * @param row 编辑模式下传入的行数据（含 id）；新增模式下不传
  */
-async function open(type: 'create' | 'update', row?: { id: string }): Promise<void> {
+function open(type: 'create' | 'update', row?: { id: string }): Promise<void> {
   dialogTitle.value = type === 'create' ? '新增' : '修改';
   formType.value = type;
-  currentStep.value = 0;
+  resetForm();
   formLoading.value = true;
 
+  let request = Promise.resolve();
   if (type === 'create') {
     Object.assign(formData, { ...DEFAULT_FORM, systemCode: generateSystemCode() });
     formData.id = undefined;
@@ -318,9 +320,11 @@ async function open(type: 'create' | 'update', row?: { id: string }): Promise<vo
   } else if (row?.id) {
     dialogVisible.value = true;
     formLoading.value = false;
-    await getDetail(row.id);
+    request = getDetail(row.id);
   }
-  nextTick(() => formRef.value?.clearValidate());
+  return request.then(() => {
+    nextTick(() => formRef.value?.clearValidate());
+  });
 }
 
 /**
@@ -336,66 +340,72 @@ defineExpose({ open });
  *
  * @param id 应用记录 ID
  */
-async function getDetail(id: string): Promise<void> {
+function getDetail(id: string): Promise<void> {
   formLoading.value = true;
-  try {
-    const res = await getCallableAppDetail(id);
-    const data = res?.data as Record<string, unknown> | undefined;
-    if (data) {
-      Object.assign(formData, {
-        ...DEFAULT_FORM,
-        id: data.id as string,
-        name: (data.name as string) ?? '',
-        systemName: (data.systemName as string) ?? '',
-        systemCode: (data.systemCode as string) ?? '',
-        uniqueId: (data.uniqueId as string) ?? '',
-        type: (data.type as number) ?? 1,
-        scope: (data.scope as number) ?? '',
-        ip: (data.ip as string) ?? '',
-        port: (data.port as string | number) ?? '',
-        period: String(data.period ?? '30'),
-      });
+  return getCallableAppDetail(id)
+    .then((res) => {
+      const data = res?.data as Record<string, unknown> | undefined;
+      if (data) {
+        Object.assign(formData, {
+          ...DEFAULT_FORM,
+          id: data.id as string,
+          name: (data.name as string) ?? '',
+          systemName: (data.systemName as string) ?? '',
+          systemCode: (data.systemCode as string) ?? '',
+          uniqueId: (data.uniqueId as string) ?? '',
+          type: (data.type as number) ?? 1,
+          scope: (data.scope as number) ?? '',
+          ip: (data.ip as string) ?? '',
+          port: (data.port as string | number) ?? '',
+          period: String(data.period ?? '30'),
+        });
 
-      if (data.type === 1) {
-        formData.protocol = (data.protocol as string) ?? '';
-        formData.uri = (data.uri as string) ?? '';
-        formData.method = (data.method as string) ?? '';
-        formData.reqHeader = (data.reqHeader as string) ?? '{}';
-        formData.reqBody = (data.reqBody as string) ?? '{}';
-        formData.reqParam = (data.reqParam as string) ?? '{}';
-        formData.pagenation = (data.pagenation as number) ?? 0;
-        formData.pageParamLocation = (data.pageParamLocation as number) ?? 0;
-        formData.pageFieldName = (data.pageFieldName as string) ?? '';
-        formData.pageSizeFieldName = (data.pageSizeFieldName as string) ?? '';
-        formData.responseDataPath = (data.responseDataPath as string) ?? '';
-        formData.pagenationType = (data.pagenationType as number) ?? null;
-        formData.dateTimeSign = (data.dateTimeSign as string) ?? '';
-        formData.dataStartTime = (data.dataStartTime as string) ?? '';
-      }
+        if (data.type === 1) {
+          formData.protocol = (data.protocol as string) ?? '';
+          formData.uri = (data.uri as string) ?? '';
+          formData.method = (data.method as string) ?? '';
+          formData.reqHeader = (data.reqHeader as string) ?? '{}';
+          formData.reqBody = (data.reqBody as string) ?? '{}';
+          formData.reqParam = (data.reqParam as string) ?? '{}';
+          formData.pagenation = (data.pagenation as number) ?? 0;
+          formData.pageParamLocation = (data.pageParamLocation as number) ?? 0;
+          formData.pageFieldName = (data.pageFieldName as string) ?? '';
+          formData.pageSizeFieldName = (data.pageSizeFieldName as string) ?? '';
+          formData.responseDataPath = (data.responseDataPath as string) ?? '';
+          formData.pagenationType = (data.pagenationType as number) ?? null;
+          formData.dateTimeSign = (data.dateTimeSign as string) ?? '';
+          formData.dataStartTime = (data.dataStartTime as string) ?? '';
+        }
 
-      if (data.type === 2) {
-        formData.dbType = (data.dbType as number) ?? 1;
-        formData.account = (data.account as string) ?? '';
-        formData.password = (data.password as string) ?? '';
-        formData.dataName = (data.dataName as string) ?? '';
-        formData.databaseName = (data.databaseName as string) ?? '';
-      }
+        if (data.type === 2) {
+          formData.dbType = (data.dbType as number) ?? 1;
+          formData.account = (data.account as string) ?? '';
+          formData.password = (data.password as string) ?? '';
+          formData.dataName = (data.dataName as string) ?? '';
+          formData.databaseName = (data.databaseName as string) ?? '';
+        }
 
-      // 解析 mapper
-      let parsed: MapperItem[] = [];
-      try {
-        parsed = JSON.parse((data.mapper as string) ?? '[]');
-      } catch {
-        parsed = [];
+        // 解析 mapper
+        let parsed: MapperItem[] = [];
+        try {
+          parsed = JSON.parse((data.mapper as string) ?? '[]');
+        } catch {
+          parsed = [];
+        }
+        mapperList.value = Array.isArray(parsed) ? parsed : [];
+      } else {
+        Object.assign(formData, { ...DEFAULT_FORM, systemCode: generateSystemCode() });
+        mapperList.value = [];
       }
-      mapperList.value = Array.isArray(parsed) ? parsed : [];
-    } else {
+    })
+    .catch(() => {
       Object.assign(formData, { ...DEFAULT_FORM, systemCode: generateSystemCode() });
       mapperList.value = [];
-    }
-  } finally {
-    formLoading.value = false;
-  }
+      ElMessage.error('获取应用详情失败');
+    })
+    .finally(() => {
+      formLoading.value = false;
+    });
 }
 
 /**
@@ -676,25 +686,28 @@ function buildSubmitData(): Record<string, unknown> {
 /**
  * 提交表单：先校验字段映射，通过后调用新增/更新接口，成功后触发 success 事件并关闭弹窗
  */
-async function handleSubmit(): Promise<void> {
+function handleSubmit(): Promise<void> | void {
   if (!validateMapper()) return;
   submitLoading.value = true;
-  try {
-    const payload = buildSubmitData();
-    const isCreate = formType.value === 'create';
-    const res = isCreate ? await createCallableApp(payload) : await updateCallableApp(formData.id as string, payload);
-    if (res.code === 0) {
-      ElMessage.success(isCreate ? '新增成功' : '修改成功');
-      emit('success');
-      dialogVisible.value = false;
-    } else {
-      ElMessage.error(res.msg ?? (isCreate ? '新增失败，请稍后重试' : '修改失败，请稍后重试'));
-    }
-  } catch {
-    ElMessage.error(formType.value === 'create' ? '新增失败，请稍后重试' : '修改失败，请稍后重试');
-  } finally {
-    submitLoading.value = false;
-  }
+  const payload = buildSubmitData();
+  const isCreate = formType.value === 'create';
+  const request = isCreate ? createCallableApp(payload) : updateCallableApp(formData.id as string, payload);
+  return request
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(isCreate ? '新增成功' : '修改成功');
+        emit('success');
+        dialogVisible.value = false;
+      } else {
+        ElMessage.error(res.msg ?? (isCreate ? '新增失败，请稍后重试' : '修改失败，请稍后重试'));
+      }
+    })
+    .catch(() => {
+      ElMessage.error(isCreate ? '新增失败，请稍后重试' : '修改失败，请稍后重试');
+    })
+    .finally(() => {
+      submitLoading.value = false;
+    });
 }
 </script>
 

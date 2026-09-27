@@ -1,126 +1,74 @@
 <script setup lang="ts">
 /**
- * SectionTitle - 区块标题组件
- *
- * 功能特性：
- * - 支持三种风格变体（variant prop）：
- *   - `dashed`（默认）：对齐原型 docs/components.html 的 .section-title 样式（图标+文字+底部虚线分隔）
- *   - `border`：左 border 风格（padding-left + 3px 主色竖线），兼容项目原有的 mapConfig/CommonConfig 等场景
- *   - `plain`：纯标题风格（无装饰），兼容项目原有的 ClientDetailDrawer 等场景
- * - 左侧图标（可选，默认主色）+ 标题文字
- * - 支持右侧附加内容（extra 插槽）
- *
- * @example 默认风格（dashed，图标+虚线）
- * ```vue
- * <SectionTitle title="警务数据与指标统计" :icon="DataAnalysis" />
- * ```
- *
- * @example 左 border 风格（兼容旧 mapConfig 样式）
- * ```vue
- * <SectionTitle title="底图文件" variant="border" />
- * ```
- *
- * @example 纯标题风格（兼容旧 ClientDetailDrawer 样式）
- * ```vue
- * <SectionTitle title="基本信息" variant="plain" />
- * ```
- *
- * @example 自定义标题内容 + 右侧附加
- * ```vue
- * <SectionTitle :icon="Operation">
- *   <template #default>自定义标题</template>
- *   <template #extra><el-tag size="small">NEW</el-tag></template>
- * </SectionTitle>
- * ```
+ * SectionTitle 将旧页面的标题接口适配到 lx-ui 设计组件。
+ * 未收录的 Vue 图标组件仍通过 leading 插槽兼容显示。
  */
-import type { Component } from 'vue';
+import { LxSectionTitle } from 'lx-ui';
+import type { LxIconName, LxSectionTitleProps } from 'lx-ui';
 import { computed } from 'vue';
+import type { Component } from 'vue';
 
 defineOptions({ name: 'SectionTitle' });
 
-const props = withDefaults(
-  defineProps<{
-    /** 标题文字（当默认插槽为空时使用） */
-    title?: string;
-    /** 标题图标组件 */
-    icon?: Component;
-    /** 图标颜色，默认主色 */
-    iconColor?: string;
-    /** 风格变体：dashed（图标+虚线，默认）/ border（左 border）/ plain（纯标题） */
-    variant?: 'dashed' | 'border' | 'plain';
-  }>(),
-  {
-    title: '',
-    icon: undefined,
-    iconColor: undefined,
-    variant: 'dashed',
-  },
-);
+interface Props extends Pick<LxSectionTitleProps, 'size' | 'tag' | 'tagType'> {
+  title?: string;
+  icon?: Component;
+  iconColor?: string;
+  variant?: 'dashed' | 'border' | 'plain';
+}
 
-// 容器 class
-const containerClass = computed(() => `section-title--${props.variant}`);
+const props = withDefaults(defineProps<Props>(), {
+  title: '',
+  icon: undefined,
+  iconColor: undefined,
+  variant: 'dashed',
+});
+
+const iconNames: Record<string, LxIconName> = {
+  Bell: 'bell',
+  Calendar: 'calendar',
+  Connection: 'link',
+  DataAnalysis: 'pulse',
+  Folder: 'folder',
+  Lock: 'lock',
+  MapLocation: 'map-pin',
+  Picture: 'image',
+  Setting: 'setting',
+  Star: 'star',
+  User: 'user',
+};
+
+const lxIconName = computed(() => {
+  const component = props.icon;
+  if (!component || typeof component !== 'object' || !('name' in component)) return undefined;
+  const name = component.name;
+  return typeof name === 'string' ? iconNames[name] : undefined;
+});
 </script>
 
 <template>
-  <div class="custom-section-title" :class="containerClass">
-    <div class="title-left">
-      <el-icon v-if="icon" class="title-icon" :color="iconColor">
-        <component :is="icon" />
-      </el-icon>
-      <slot>{{ title }}</slot>
-    </div>
-    <div class="title-extra">
-      <slot name="extra" />
-    </div>
-  </div>
+  <LxSectionTitle
+    :title="title"
+    :variant="variant"
+    :size="size"
+    :icon="lxIconName"
+    :icon-color="iconColor"
+    :tag="tag"
+    :tag-type="tagType"
+    class="custom-section-title"
+  >
+    <template #default
+      ><slot>{{ title }}</slot></template
+    >
+    <template v-if="icon && !lxIconName" #leading>
+      <el-icon class="title-icon" :color="iconColor"><component :is="icon" /></el-icon>
+    </template>
+    <template v-if="$slots.extra" #extra><slot name="extra" /></template>
+  </LxSectionTitle>
 </template>
 
 <style lang="less" scoped>
 .custom-section-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: @spacing-sm;
-  font-weight: @font-weight-semibold;
-
-  .title-left {
-    display: flex;
-    align-items: center;
-    gap: @spacing-sm;
-  }
-
-  .title-icon {
-    font-size: @font-size-xl;
-    color: @color-primary;
-  }
-
-  .title-extra {
-    margin-left: auto;
-  }
-
-  // 变体：dashed（默认，对齐原型 .section-title）
-  &.section-title--dashed {
-    font-size: @font-size-lg;
-    color: @color-text-primary;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed @color-border;
-    margin-bottom: @spacing-md;
-  }
-
-  // 变体：border（左 border 风格，兼容项目旧样式）
-  &.section-title--border {
-    margin: 0 0 @spacing-md;
-    padding-left: @spacing-sm;
-    border-left: 3px solid @color-primary;
-    font-size: @font-size-lg;
-    color: @color-text-primary;
-  }
-
-  // 变体：plain（纯标题，兼容项目旧样式）
-  &.section-title--plain {
-    margin-bottom: @spacing-sm;
-    font-size: @font-size-sm;
-    color: @color-text-primary;
-  }
+  width: 100%;
 }
 </style>

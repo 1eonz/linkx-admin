@@ -26,6 +26,11 @@ export const routes: AppRouteRecord[] = [
     hidden: true,
   },
   {
+    path: '/h5/ArchivedTable',
+    redirect: '/policeExtend/ArchivedTable',
+    hidden: true,
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -48,15 +53,21 @@ const router = createRouter({
   scrollBehavior: () => ({ top: 0 }),
 });
 
+const dynamicRouteNames = new Set<string>();
+
+export function addDynamicRoute(route: RouteRecordRaw): void {
+  if (route.name) dynamicRouteNames.add(String(route.name));
+  router.addRoute(route);
+}
+
 /**
  * 重置 router（登出时调用）
  */
 export function resetRouter(): void {
-  const staticNames = new Set(routes.map((r) => r.name).filter(Boolean));
-  const dynamicRoutes = router.getRoutes().filter((r) => !staticNames.has(r.name));
-  dynamicRoutes.forEach((r) => {
-    if (r.name) router.removeRoute(r.name);
+  dynamicRouteNames.forEach((name) => {
+    if (router.hasRoute(name)) router.removeRoute(name);
   });
+  dynamicRouteNames.clear();
 }
 
 export default router;

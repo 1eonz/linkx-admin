@@ -9,7 +9,6 @@ import {
   updateCollaboration,
   uploadColTmp,
   queryUserByPage,
-  querySameName,
   type CollaborationItem,
   type QueryUserByPageItem,
 } from '@/api/h5/collaboration';
@@ -21,7 +20,7 @@ import { useUserStore } from '@/store/modules/useUserStore';
 
 defineOptions({ name: 'ColForm' });
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     /** 是否管理员 */
     isAdmin?: boolean;
@@ -156,18 +155,28 @@ function handleChange(file: UploadFile): void {
 }
 
 /** 上传图标 */
-async function uploadFile(): Promise<void> {
-  if (!currentFile.value) return;
+function uploadFile(): Promise<boolean> {
+  if (!currentFile.value) return Promise.resolve(true);
   const form = new FormData();
   form.append('file', currentFile.value);
-  const res = await uploadColTmp(form);
-  if (res.code === 0) {
-    const data = (res as unknown as { data?: { iconUrl: string; fileId: string } })?.data;
-    if (data) {
-      formData.iconUrl = data.iconUrl;
-      formData.fileId = data.fileId;
-    }
-  }
+  return uploadColTmp(form)
+    .then((res) => {
+      if (res.code === 0) {
+        const data = (res as unknown as { data?: { iconUrl: string; fileId: string } })?.data;
+        if (data) {
+          formData.iconUrl = data.iconUrl;
+          formData.fileId = data.fileId;
+        }
+        return true;
+      } else {
+        ElMessage.error(res.msg || '图标上传失败');
+        return false;
+      }
+    })
+    .catch(() => {
+      ElMessage.error('图标上传失败');
+      return false;
+    });
 }
 
 /** 组织树选中：设置 orgId/orgName/orgCode，重置关联人员 */
@@ -195,10 +204,10 @@ function cleanOrganizationInput(): void {
 }
 
 /** 分页查询关联人员 */
-async function getUserListByPage(keywords?: string): Promise<void> {
+function getUserListByPage(keywords?: string): Promise<void> {
   const orgCode = formData.orgCode as string;
   const orgId = formData.orgId as string;
-  if (!orgCode) return;
+  if (!orgCode) return Promise.resolve();
   userLoading.value = true;
   userPageNum.value = userPageNum.value + 1;
   const params: Record<string, unknown> = {
@@ -212,18 +221,22 @@ async function getUserListByPage(keywords?: string): Promise<void> {
   if (globalData.value?.value === 'true') {
     params.type = formData.type;
   }
-  try {
-    const res = await queryUserByPage(params as never);
-    const data = (res as unknown as { data?: { records?: QueryUserByPageItem[]; total?: number } })?.data;
-    const records = data?.records ?? [];
-    records.forEach((i) => {
-      userMap[i.id] = i.name;
+  return queryUserByPage(params as never)
+    .then((res) => {
+      const data = (res as unknown as { data?: { records?: QueryUserByPageItem[]; total?: number } })?.data;
+      const records = data?.records ?? [];
+      records.forEach((i) => {
+        userMap[i.id] = i.name;
+      });
+      userList.value = [...userList.value, ...records];
+      userTotal.value = data?.total ?? 0;
+    })
+    .catch(() => {
+      ElMessage.error('获取关联人员失败');
+    })
+    .finally(() => {
+      userLoading.value = false;
     });
-    userList.value = [...userList.value, ...records];
-    userTotal.value = data?.total ?? 0;
-  } finally {
-    userLoading.value = false;
-  }
 }
 
 /** 触底加载 */
@@ -265,17 +278,18 @@ function remoteMethodType(keywords: string): void {
 }
 
 /** 拉取警单类型 */
-async function getPolicetickettypesFunc(): Promise<void> {
-  try {
-    const res = await getPolicetickettypes();
-    if (res.code === 0) {
-      const data = (res as unknown as { data?: PoliceTicketTypeItem[] })?.data ?? [];
-      typeList.value = data;
-      originTypeList.value = data;
-    }
-  } catch {
-    // 忽略
-  }
+function getPolicetickettypesFunc(): Promise<void> {
+  return getPolicetickettypes()
+    .then((res) => {
+      if (res.code === 0) {
+        const data = (res as unknown as { data?: PoliceTicketTypeItem[] })?.data ?? [];
+        typeList.value = data;
+        originTypeList.value = data;
+      }
+    })
+    .catch(() => {
+      // 忽略
+    });
 }
 
 // 重置表单
@@ -293,39 +307,48 @@ function resetForm(): void {
 }
 
 /** 打开表单弹窗 */
-async function open(type: 'create' | 'update', row?: CollaborationItem): Promise<void> {
+function open(type: 'create' | 'update', row?: CollaborationItem): Promise<void> {
   dialogTitle.value = type === 'create' ? '新增' : '修改';
   formType.value = type;
   formLoading.value = true;
   resetForm();
-  await getPolicetickettypesFunc();
-  if (row) {
+  const loadForm = getPolicetickettypesFunc().then(() => {
+    if (!row) return;
     // 修改：把整个 row 赋给 formData
     Object.assign(formData, JSON.parse(JSON.stringify(row)));
     const { relatedUserNames, relatedUserIds, iconUrl } = row;
-    await getUserListByPage();
-    // 处理 relatedUserIds 是数组或字符串的情况
-    if (Array.isArray(relatedUserIds)) {
-      formData.relatedUserNames = relatedUserNames ? (relatedUserNames as string).split(',') : [];
-      formData.relatedUserIds = [...relatedUserIds];
-      initUserIds.value = [...relatedUserIds];
-    } else if (relatedUserIds) {
-      formData.relatedUserNames = (relatedUserNames as string)?.split(',') ?? [];
-      formData.relatedUserIds = (relatedUserIds as string).split(',');
-      initUserIds.value = (relatedUserIds as string).split(',');
-    }
-    // 建立 userMap
-    (formData.relatedUserIds as string[]).forEach((id: string, index: number) => {
-      const names = formData.relatedUserNames as string[];
-      userMap[id] = names[index];
+    return getUserListByPage().then(() => {
+      // 处理 relatedUserIds 是数组或字符串的情况
+      if (Array.isArray(relatedUserIds)) {
+        formData.relatedUserNames = relatedUserNames ? (relatedUserNames as string).split(',') : [];
+        formData.relatedUserIds = [...relatedUserIds];
+        initUserIds.value = [...relatedUserIds];
+      } else if (relatedUserIds) {
+        formData.relatedUserNames = (relatedUserNames as string)?.split(',') ?? [];
+        formData.relatedUserIds = (relatedUserIds as string).split(',');
+        initUserIds.value = (relatedUserIds as string).split(',');
+      }
+      // 建立 userMap
+      (formData.relatedUserIds as string[]).forEach((id: string, index: number) => {
+        const names = formData.relatedUserNames as string[];
+        userMap[id] = names[index];
+      });
+      imageUrl.value = iconUrl ?? '';
+      showAuthImg.value = !!iconUrl;
     });
-    imageUrl.value = iconUrl ?? '';
-    showAuthImg.value = !!iconUrl;
-  }
-  formLoading.value = false;
-  dialogVisible.value = true;
-  await nextTick();
-  formRef.value?.clearValidate();
+  });
+  return loadForm
+    .then(() => nextTick())
+    .then(() => {
+      formLoading.value = false;
+      dialogVisible.value = true;
+      formRef.value?.clearValidate();
+    })
+    .catch(() => {
+      formLoading.value = false;
+      dialogVisible.value = true;
+      ElMessage.error('加载协同岗信息失败');
+    });
 }
 
 /** 提交表单：数组转逗号字符串 */
@@ -334,32 +357,36 @@ async function submitForm(): Promise<void> {
   const valid = await formRef.value.validate().catch(() => false);
   if (!valid) return;
   formLoading.value = true;
-  try {
-    const params: Record<string, unknown> = { ...formData };
-    const relatedUserNames = params.relatedUserNames as string[];
-    const relatedUserIds = params.relatedUserIds as string[];
-    params.relatedUserNames = relatedUserNames.join(',');
-    params.relatedUserIds = relatedUserIds.join(',');
-    const api = formType.value === 'create' ? createCollaboration : updateCollaboration;
-    const res = await api(params as never);
-    if (res.code === 0) {
-      ElMessage.success(formType.value === 'create' ? '新增成功' : '修改成功');
-      dialogVisible.value = false;
-      emit('success');
-    } else {
-      ElMessage.error(res.msg || '');
-    }
-  } finally {
-    formLoading.value = false;
-  }
+  const params: Record<string, unknown> = { ...formData };
+  const relatedUserNames = params.relatedUserNames as string[];
+  const relatedUserIds = params.relatedUserIds as string[];
+  params.relatedUserNames = relatedUserNames.join(',');
+  params.relatedUserIds = relatedUserIds.join(',');
+  const api = formType.value === 'create' ? createCollaboration : updateCollaboration;
+  return api(params as never)
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(formType.value === 'create' ? '新增成功' : '修改成功');
+        dialogVisible.value = false;
+        emit('success');
+      } else {
+        ElMessage.error(res.msg || '');
+      }
+    })
+    .catch(() => {
+      ElMessage.error(formType.value === 'create' ? '新增失败' : '修改失败');
+    })
+    .finally(() => {
+      formLoading.value = false;
+    });
 }
 
 /** 提交按钮：含图标上传逻辑 */
-async function handleSubmit(): Promise<void> {
-  if (changeImg.value && currentFile.value) {
-    await uploadFile();
-  }
-  await submitForm();
+function handleSubmit(): Promise<void> {
+  const uploadPromise = changeImg.value && currentFile.value ? uploadFile() : Promise.resolve(true);
+  return uploadPromise.then((uploaded) => {
+    if (uploaded) return submitForm();
+  });
 }
 
 // 关闭弹窗

@@ -31,6 +31,9 @@ defineOptions({ name: 'AppH5Config' });
 // ===== 受控模式状态 =====
 const list = ref<LayoutSection[]>([]);
 const listLoading = ref(false);
+const listReady = ref(false);
+const loadError = ref(false);
+const operating = ref(false);
 
 // 板块类型映射
 const sectionTypeMap: Record<LayoutSectionType, string> = {
@@ -66,15 +69,21 @@ const sectionDialog = createDialog<LayoutSection>(EditSectionModal, {
 });
 
 // 获取板块列表
-function getList(): void {
+function getList(): Promise<void> {
   listLoading.value = true;
-  getSectionList({ show: 0 })
+  listReady.value = false;
+  loadError.value = false;
+  return getSectionList({ show: -1 })
     .then((res) => {
-      // res.data 为板块数组
-      list.value = (res?.data as LayoutSection[]) ?? [];
+      if (res.code !== 0 || !Array.isArray(res.data)) {
+        throw new Error(res.msg || '板块列表响应无效');
+      }
+      list.value = res.data;
+      listReady.value = true;
     })
     .catch(() => {
-      list.value = [];
+      loadError.value = true;
+      ElMessage.error('板块列表加载失败，请重试');
     })
     .finally(() => {
       listLoading.value = false;
@@ -83,19 +92,25 @@ function getList(): void {
 
 // 新增板块
 async function handleCreate(): Promise<void> {
+  if (!listReady.value || listLoading.value || operating.value) return;
   try {
     const result = await sectionDialog();
+    if (!listReady.value || listLoading.value || operating.value) return;
+    operating.value = true;
     createSection(result)
       .then((res) => {
         if (res.code === 0) {
           ElMessage.success('新增成功');
-          getList();
+          return getList();
         } else {
           ElMessage.error(res.msg || '新增失败');
         }
       })
       .catch(() => {
         ElMessage.error('新增失败');
+      })
+      .finally(() => {
+        operating.value = false;
       });
   } catch (e) {
     const err = e as { type?: string };
@@ -107,24 +122,30 @@ async function handleCreate(): Promise<void> {
 
 // 编辑板块
 async function handleEdit(row: LayoutSection): Promise<void> {
+  if (!listReady.value || listLoading.value || operating.value) return;
   try {
     const result = await sectionDialog({ props: { initialData: row } });
+    if (!listReady.value || listLoading.value || operating.value) return;
     const sectionId = row.id;
     if (!sectionId) {
       ElMessage.error('板块 ID 缺失，无法更新');
       return;
     }
+    operating.value = true;
     updateSection(sectionId, result)
       .then((res) => {
         if (res.code === 0) {
           ElMessage.success('更新成功');
-          getList();
+          return getList();
         } else {
           ElMessage.error(res.msg || '更新失败');
         }
       })
       .catch(() => {
         ElMessage.error('更新失败');
+      })
+      .finally(() => {
+        operating.value = false;
       });
   } catch (e) {
     const err = e as { type?: string };
@@ -136,27 +157,33 @@ async function handleEdit(row: LayoutSection): Promise<void> {
 
 // 删除板块
 function handleDelete(row: LayoutSection): void {
+  if (!listReady.value || listLoading.value || operating.value) return;
   ElMessageBox.confirm('确定要删除该板块吗？', '删除确认', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning',
   })
     .then(() => {
+      if (!listReady.value || listLoading.value || operating.value) return;
       if (!row.id) {
         ElMessage.error('板块 ID 缺失，无法删除');
         return;
       }
+      operating.value = true;
       deleteSection(row.id)
         .then((res) => {
           if (res.code === 0) {
             ElMessage.success('删除成功');
-            getList();
+            return getList();
           } else {
             ElMessage.error(res.msg || '删除失败');
           }
         })
         .catch(() => {
           ElMessage.error('删除失败');
+        })
+        .finally(() => {
+          operating.value = false;
         });
     })
     .catch(() => {});
@@ -167,9 +194,23 @@ function getTypeText(type: LayoutSectionType): string {
   return sectionTypeMap[type] ?? '未知';
 }
 
-/** 从 ProTable slot scope 中安全获取 LayoutSection */
-function getRow(scope: any): LayoutSection {
-  return (scope?.row as LayoutSection) ?? ({} as LayoutSection);
+/** 仅把含完整板块字段的表格行传入操作回调。 */
+function isLayoutSection(value: unknown): value is LayoutSection {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const row = value as Record<string, unknown>;
+  return (
+    typeof row.name === 'string' &&
+    [1, 2, 3, 4, 5, 6].includes(Number(row.type)) &&
+    [0, 1].includes(Number(row.show)) &&
+    Number.isFinite(Number(row.sort))
+  );
+}
+
+function getRow(scope: unknown): LayoutSection {
+  if (!scope || typeof scope !== 'object' || !('row' in scope) || !isLayoutSection(scope.row)) {
+    return { name: '', type: 1, show: 0, sort: 0 };
+  }
+  return scope.row;
 }
 
 onMounted(getList);
@@ -182,7 +223,14 @@ onMounted(getList);
 
     <!-- 操作区 -->
     <div class="actions-bar">
-      <el-button type="primary" :icon="Plus" @click="handleCreate">新增板块</el-button>
+      <el-button type="primary" :icon="Plus" :disabled="!listReady || listLoading || operating" @click="handleCreate">
+        新增板块
+      </el-button>
+    </div>
+
+    <div v-if="loadError" class="load-error" role="alert">
+      板块列表加载失败，请重试。
+      <el-button link type="primary" :disabled="listLoading" @click="getList">重试</el-button>
     </div>
 
     <ProTable :columns="columns" :data="list" :loading="listLoading" :show-pagination="false">
@@ -204,8 +252,20 @@ onMounted(getList);
       <template #actions="scope">
         <ActionButtons
           :buttons="[
-            { type: 'primary', icon: Edit, label: '编辑', onClick: () => handleEdit(getRow(scope)) },
-            { type: 'danger', icon: Delete, label: '删除', onClick: () => handleDelete(getRow(scope)) },
+            {
+              type: 'primary',
+              icon: Edit,
+              label: '编辑',
+              disabled: !listReady || listLoading || operating,
+              onClick: () => handleEdit(getRow(scope)),
+            },
+            {
+              type: 'danger',
+              icon: Delete,
+              label: '删除',
+              disabled: !listReady || listLoading || operating,
+              onClick: () => handleDelete(getRow(scope)),
+            },
           ]"
         />
       </template>
@@ -219,6 +279,14 @@ onMounted(getList);
 
   .actions-bar {
     padding-bottom: 16px;
+  }
+
+  .load-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    color: var(--el-color-danger);
   }
 }
 </style>

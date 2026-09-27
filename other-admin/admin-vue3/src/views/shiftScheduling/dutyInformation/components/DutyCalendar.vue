@@ -8,6 +8,8 @@ defineOptions({ name: 'DutyCalendar' });
 const props = defineProps<{
   /** 日历数据：{ 'YYYY-MM-DD': ScheduleItem[] } */
   calendarList: Record<string, ScheduleItem[]> | null;
+  /** 日历数据是否正在加载 */
+  loading: boolean;
   /** 当前选中的排班类型（用于决定 popover 中显示 dutyTypeName 还是 postName） */
   dutyTypeFilter: string;
 }>();
@@ -165,7 +167,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="duty-calendar">
+  <div v-loading="loading" class="duty-calendar" :aria-busy="loading">
     <!-- 日历网格（仅渲染日历主体，月份导航和视图切换由主页面负责） -->
     <div class="calendar-list">
       <div class="week-name">

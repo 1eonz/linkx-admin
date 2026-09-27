@@ -147,20 +147,22 @@ async function handleSubmit(): Promise<void> {
   }
 
   submitLoading.value = true;
-  try {
-    const res = await setBatchRole(roleId.value, userIds);
-    if (res.code === 0) {
-      ElMessage.success('绑定成功');
-      emit('success');
-      dialogVisible.value = false;
-    } else {
-      ElMessage.error(res.msg || '绑定失败');
-    }
-  } catch {
-    ElMessage.error('绑定用户失败');
-  } finally {
-    submitLoading.value = false;
-  }
+  setBatchRole(roleId.value, userIds)
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success('绑定成功');
+        emit('success');
+        dialogVisible.value = false;
+      } else {
+        ElMessage.error(res.msg || '绑定失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('绑定用户失败');
+    })
+    .finally(() => {
+      submitLoading.value = false;
+    });
 }
 
 /** 关闭弹窗 */

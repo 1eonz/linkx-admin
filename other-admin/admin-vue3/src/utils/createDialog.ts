@@ -1,5 +1,5 @@
 import { ElDialog } from 'element-plus';
-import { createApp, h, type App, type Component } from 'vue';
+import { createApp, h, ref, type App, type Component } from 'vue';
 
 /**
  * 维护所有打开的弹窗实例
@@ -65,11 +65,11 @@ export function createDialog<T = unknown>(
       const props = options.props ?? {};
       const customEvents = options.on ?? {};
 
-      let visible = false;
+      const visible = ref(false);
       let resolved = false;
 
       const destroy = () => {
-        visible = false;
+        visible.value = false;
         const idx = dialogInstances.findIndex((i) => i.app === app);
         if (idx > -1) dialogInstances.splice(idx, 1);
         setTimeout(() => {
@@ -87,9 +87,9 @@ export function createDialog<T = unknown>(
             h(
               ElDialog,
               {
-                modelValue: visible,
+                modelValue: visible.value,
                 'onUpdate:modelValue': (v: boolean) => {
-                  visible = v;
+                  visible.value = v;
                   if (!v && !resolved) {
                     resolved = true;
                     reject({ type: 'close-dialog' });
@@ -129,7 +129,7 @@ export function createDialog<T = unknown>(
 
       // 下一帧显示，确保动画触发
       requestAnimationFrame(() => {
-        visible = true;
+        visible.value = true;
       });
     });
   };

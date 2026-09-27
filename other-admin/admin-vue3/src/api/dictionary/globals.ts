@@ -8,8 +8,14 @@ export interface GlobalsItem {
   value: string;
   remark: string;
   remarkEn?: string;
+  classify?: string;
   status: number;
   [key: string]: unknown;
+}
+
+/** 全局参数列表筛选条件 */
+export interface GlobalsSearchParams {
+  keyword?: string;
 }
 
 /** 新增/修改全局配置项载荷 */
@@ -24,10 +30,10 @@ export function queryGlobalsList(): HttpResult<Record<string, unknown>> {
 }
 
 /**
- * 全局配置列表（POST /api/globals/list）
+ * 全局配置列表（POST /api/globals/list），关键词沿用旧版 query 参数。
  */
-export function getGlobalsList(): HttpResult<GlobalsItem[]> {
-  return http.post<GlobalsItem[]>('/api/globals/list');
+export function getGlobalsList(params?: GlobalsSearchParams): HttpResult<GlobalsItem[]> {
+  return http.post<GlobalsItem[]>('/api/globals/list', {}, { params });
 }
 
 /**

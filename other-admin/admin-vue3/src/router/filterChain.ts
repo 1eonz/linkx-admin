@@ -31,6 +31,14 @@ export const moduleRoutes: AppRouteRecord[] = [
   nodeManageRouter as AppRouteRecord,
 ];
 
+export function cloneModuleRoutes(routes: RouteRecordRaw[] = moduleRoutes): RouteRecordRaw[] {
+  return routes.map((route) => {
+    const cloned = { ...route, meta: route.meta ? { ...route.meta } : route.meta } as RouteRecordRaw;
+    if (route.children) cloned.children = cloneModuleRoutes(route.children);
+    return cloned;
+  });
+}
+
 /**
  * 路由过滤器接口（责任链模式）
  */
@@ -41,46 +49,28 @@ export interface RouteFilter {
 
 /**
  * License 权限过滤
- * groupCollaborationAuth → 隐藏协同岗管理整个父路由（Collaboration）+ H5 父路由下 ArchivedTable/Quick/GroupTags 子路由 + 位置管理 Location 子路由
- * businessCollaborationAuth → 隐藏 H5 的 App/Carousel
+ * 与 Vue2 路由保持一致：群组协同失效时隐藏归档群组和位置管理。
  */
 export class LicenseFilter implements RouteFilter {
   readonly name = 'LicenseFilter';
 
-  async filter(routes: RouteRecordRaw[], _ctx: FilterContext): Promise<RouteRecordRaw[]> {
-    const licenseAuth = await getLicenseInfoUtil();
+  filter(routes: RouteRecordRaw[], _ctx: FilterContext): Promise<RouteRecordRaw[]> {
+    return getLicenseInfoUtil().then((licenseAuth) => {
+      if (licenseAuth?.groupCollaborationAuth) {
+        // 群组协同失效时仅隐藏归档群组和位置管理；空父路由随之移除。
+        const excludeChildNames = ['ArchivedTable', 'Location'];
+        routes = routes
+          .map((route) => {
+            if (route.children) {
+              route.children = route.children.filter((child) => !excludeChildNames.includes(child.name as string));
+            }
+            return route;
+          })
+          .filter((route) => !route.children || route.children.length > 0);
+      }
 
-    if (licenseAuth?.groupCollaborationAuth) {
-      // 群组协同 license：
-      // - 隐藏 collaboration 父路由（含 CollaborationIndex/Quick 子路由）
-      // - 隐藏 H5 父路由下的 ArchivedTable/Quick/GroupTags 子路由
-      // - 隐藏位置管理父路由下的 Location 子路由（若父路由无子路由则整体移除）
-      const excludeParentNames = ['Collaboration'];
-      const excludeChildNames = ['Quick', 'GroupTags', 'ArchivedTable', 'Location'];
-      routes = routes
-        .filter((route) => !excludeParentNames.includes(route.name as string))
-        .map((route) => {
-          if (route.children) {
-            route.children = route.children.filter((child) => !excludeChildNames.includes(child.name as string));
-          }
-          return route;
-        })
-        .filter((route) => !route.children || route.children.length > 0);
-    }
-
-    if (licenseAuth?.businessCollaborationAuth) {
-      const excludeNames = ['App', 'Carousel'];
-      routes = routes
-        .map((route) => {
-          if (route.children) {
-            route.children = route.children.filter((child) => !excludeNames.includes(child.name as string));
-          }
-          return route;
-        })
-        .filter((route) => !route.children || route.children.length > 0);
-    }
-
-    return routes;
+      return routes;
+    });
   }
 }
 
@@ -123,9 +113,14 @@ export class UserAuthFilter implements RouteFilter {
     const isAdmin = ctx.isAdmin;
     const userId = ctx.userId;
 
+    const hasCarouselMenu = (items: FilterContext['menu']): boolean =>
+      items.some(
+        (item) =>
+          item.url === 'layoutConfig/banner' || (item.children?.length ? hasCarouselMenu(item.children) : false),
+      );
     routes = routes.map((route) => {
       if (route.children) {
-        if (!isAdmin) {
+        if (!isAdmin && !hasCarouselMenu(ctx.menu)) {
           route.children = route.children.filter((child) => child.path !== 'layoutConfig');
         }
         // 用户管理菜单：仅 isAdmin 且 userId='1' 时显示
@@ -156,17 +151,7 @@ export class MenuPermissionFilter implements RouteFilter {
     const userStore = useUserStore();
     const permissionsType = userStore.permissions.type;
     const paths = this.collectPaths(ctx.menu, ctx.menuPermissions);
-
-    console.log(
-      '[MenuPermissionFilter] permissionsType:',
-      permissionsType,
-      'permissionsRaw:',
-      JSON.parse(JSON.stringify(userStore.permissions)),
-      'paths:',
-      paths,
-      'isAdmin:',
-      ctx.isAdmin,
-    );
+    const disabledPaths = this.collectDisabledPaths(ctx.menu);
 
     // 从 globals 收集需要隐藏的 path（EDGEGATEWAY_BREAKER/CAR_BREAKER/CUSTOMIZED_LAYER）
     const hidePaths: string[] = [];
@@ -180,32 +165,63 @@ export class MenuPermissionFilter implements RouteFilter {
       }
     });
 
-    const filterMenus = (routeList: RouteRecordRaw[]): RouteRecordRaw[] => {
+    const filterMenus = (routeList: RouteRecordRaw[], parentPath = ''): RouteRecordRaw[] => {
       return routeList
         .filter((route) => {
-          // type===0 表示超管，不限制
-          // 超管（isAdmin=true）也直接放行，避免依赖 /oauth/v2/permissions 接口返回的 type 字段
-          if (permissionsType === 0 || ctx.isAdmin) return true;
-
           const path = route.path;
+          const fullPath = this.normalizeRoutePath(parentPath, path);
+          // 停用菜单必须对所有身份生效，不能被超管全量放行分支绕过。
+          if (disabledPaths.has(fullPath)) return false;
           if (hidePaths.includes(path)) return false;
+          // type===0 表示超管，但全局开关仍生效。
+          if (permissionsType === 0) return true;
 
           // collaboration 的 index 子路由特殊处理
           if (path === 'index' && paths.includes('/collaboration/index')) {
             return true;
           }
-          return paths.includes(path);
+          return paths.some(
+            (menuPath) =>
+              menuPath === path ||
+              menuPath.startsWith(`${path}/`) ||
+              menuPath.replace(/^\//, '').startsWith(`${path.replace(/^\//, '')}/`) ||
+              // 后端菜单通常返回 /authority/role，而 Vue Router 子路由只声明 role。
+              // 追加后缀匹配，避免权限过滤误删合法子路由。
+              menuPath.endsWith(`/${path}`),
+          );
         })
         .map((route) => {
           const newRoute = { ...route };
           if (newRoute.children) {
-            newRoute.children = filterMenus(newRoute.children);
+            const fullPath = this.normalizeRoutePath(parentPath, newRoute.path);
+            newRoute.children = filterMenus(newRoute.children, fullPath);
           }
           return newRoute;
-        });
+        })
+        .filter((route) => !route.children || route.children.length > 0);
     };
 
     return filterMenus(routes);
+  }
+
+  /** 将父级和子级路由 path 规范化为菜单接口使用的绝对 URL。 */
+  private normalizeRoutePath(parentPath: string, path: string): string {
+    const combined = path.startsWith('/') ? path : `${parentPath}/${path}`;
+    const normalized = combined.replace(/\/+/g, '/').replace(/\/\/$/, '');
+    return normalized.startsWith('/') ? normalized : `/${normalized}`;
+  }
+
+  /** 收集后端明确标记为停用的菜单 URL。 */
+  private collectDisabledPaths(menu: FilterContext['menu']): Set<string> {
+    const disabled = new Set<string>();
+    const visit = (items: FilterContext['menu']): void => {
+      items.forEach((item) => {
+        if (item.status === 0) disabled.add(this.normalizeRoutePath('', item.url));
+        if (item.children?.length) visit(item.children);
+      });
+    };
+    visit(menu);
+    return disabled;
   }
 
   /**
@@ -214,16 +230,15 @@ export class MenuPermissionFilter implements RouteFilter {
   private collectPaths(menu: FilterContext['menu'], menuPermissions: string[]): string[] {
     const paths: string[] = [];
 
-    // 手动补充父级菜单 id
-    const newMenuPermissions = [...menuPermissions, '1522392406668869814', '1522392406668869816'];
-
     const mapper = (data: FilterContext['menu']): void => {
       data.forEach((item) => {
-        if (newMenuPermissions.includes(item.id)) {
+        // 停用菜单不能因为权限 ID 仍被缓存而重新注册；子节点仍需继续遍历，
+        // 这样父节点缺少单独权限 ID 时，已授权的叶子菜单也能正常匹配。
+        if (item.status !== 0 && menuPermissions.includes(item.id)) {
           paths.push(item.url);
-          if (item.children) {
-            mapper(item.children);
-          }
+        }
+        if (item.status !== 0 && item.children) {
+          mapper(item.children);
         }
       });
     };
@@ -276,7 +291,8 @@ export async function addRouterByPermissions(
   menuPermissions: string[],
 ): Promise<RouteRecordRaw[]> {
   const userStore = useUserStore();
-  const { globals, permissions } = userStore;
+  const expectedEpoch = userStore.sessionEpoch;
+  const { globals } = userStore;
 
   // 清理 localStorage 中的旧标志
   localStorage.removeItem('hiddenGateWay');
@@ -320,23 +336,9 @@ export async function addRouterByPermissions(
     .use(new UserAuthFilter())
     .use(new MenuPermissionFilter());
 
-  const filteredRoutes = await chain.run(moduleRoutes, ctx);
-  console.log(
-    '[FilterChain] 过滤后路由:',
-    JSON.parse(
-      JSON.stringify(
-        filteredRoutes.map((r) => ({ path: r.path, name: r.name, childrenCount: r.children?.length ?? 0 })),
-      ),
-    ),
-  );
-  console.log(
-    '[FilterChain] permissions.type:',
-    userStore.permissions.type,
-    'menuPermissions:',
-    ctx.menuPermissions,
-    'isAdmin:',
-    ctx.isAdmin,
-  );
+  // 每次从模块定义复制路由树，避免上个账号的过滤结果污染下个账号。
+  const filteredRoutes = await chain.run(cloneModuleRoutes(), ctx);
+  if (expectedEpoch !== userStore.sessionEpoch) return [];
   userStore.setPermissionsMenu(filteredRoutes);
   return filteredRoutes;
 }

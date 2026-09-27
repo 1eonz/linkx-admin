@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LxUpload 规范标本 · Element Plus 统一桥接标准</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary": "#286c00",
+            "on-error": "#ffffff",
+            "surface-container-low": "#f1f3fa",
+            "on-primary-fixed-variant": "#004881",
+            "tertiary-fixed-dim": "#80dd52",
+            "surface-container-lowest": "#ffffff",
+            "surface": "#f8f9ff",
+            "on-tertiary-fixed-variant": "#1d5200",
+            "on-surface-variant": "#404752",
+            "inverse-on-surface": "#eef1f7",
+            "on-secondary-fixed": "#0a1c30",
+            "on-background": "#181c20",
+            "surface-bright": "#f8f9ff",
+            "outline": "#707784",
+            "error-container": "#ffdad6",
+            "inverse-surface": "#2d3136",
+            "primary-fixed": "#d3e4ff",
+            "surface-dim": "#d7dae0",
+            "on-tertiary-fixed": "#072100",
+            "inverse-primary": "#a2c9ff",
+            "secondary-fixed": "#d2e4ff",
+            "on-primary-fixed": "#001c38",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed-variant": "#37485d",
+            "on-secondary-container": "#55667c",
+            "secondary-fixed-dim": "#b6c8e2",
+            "outline-variant": "#c0c7d4",
+            "background": "#f8f9ff",
+            "on-secondary": "#ffffff",
+            "surface-container-high": "#e6e8ef",
+            "secondary-container": "#d2e4ff",
+            "surface-tint": "#0060a9",
+            "primary-fixed-dim": "#a2c9ff",
+            "tertiary-fixed": "#9bfa6b",
+            "on-tertiary-container": "#133b00",
+            "surface-container-highest": "#e0e2e9",
+            "primary": "#0060a9",
+            "on-primary": "#ffffff",
+            "surface-variant": "#e0e2e9",
+            "primary-container": "#409eff",
+            "on-surface": "#181c20",
+            "error": "#ba1a1a",
+            "tertiary-container": "#55af28",
+            "surface-container": "#ebeef4",
+            "secondary": "#4f6076",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#003460"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "space-sm": "8px",
+            "space-xs": "4px",
+            "space-md": "12px",
+            "gutter": "16px",
+            "space-xl": "24px",
+            "space-lg": "16px",
+            "margin": "20px"
+          },
+          fontFamily: {
+            "display-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-md": ["Inter"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    @keyframes progress-stripe {
+      0% { background-position: 1rem 0; }
+      100% { background-position: 0 0; }
+    }
+    .animate-stripes {
+      background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.25) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0.25) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 1rem 1rem;
+      animation: progress-stripe 1s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Shared TopNavBar Component -->
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-slate-50 group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e6edf4] px-10 py-3">
+<div class="flex items-center gap-4 text-[#0c141d]">
+<div class="size-4">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-[#0c141d] text-lg font-bold leading-tight tracking-[-0.015em]">LxUpload 规范标本 · Element Plus 统一桥接标准</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-[#0c141d] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#overview">组件概览</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#states">交互三态</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#filelist">列表四态</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#practice">业务表单演练</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#specs">研发属性表</a>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#409fff] text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">复制代码仓库</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#e6edf4] text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">下载标准规范.pdf</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex flex-wrap justify-between gap-3 p-4">
+<div class="flex min-w-72 flex-col gap-3">
+<p class="text-[#0c141d] text-4xl font-black leading-tight tracking-[-0.033em]">LxUpload 文件上传拖拽区与文件列表组件标本</p>
+<p class="text-[#4573a1] text-base font-normal leading-normal">
+                遵循 COMPONENT-STYLE-INTERACTION.md §3.7 规格：2px 虚线边框、8px 圆角、120px 基准高度，融合拖拽交互、动态进度条与文件列表四态生命周期。
+              </p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#e6edf4] text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">v2.4.0 稳定版</span>
+</button>
+</div>
+<div class="flex gap-3 p-3 overflow-x-hidden">
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-2 pr-4">
+<div class="text-[#0c141d]" data-icon="CheckCircle" data-size="20px" data-weight="regular">
+<svg fill="currentColor" height="20px" viewbox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+<path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+</svg>
+</div>
+<p class="text-[#0c141d] text-sm font-medium leading-normal">基准高度: 120px</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-2 pr-4">
+<div class="text-[#0c141d]" data-icon="CheckCircle" data-size="20px" data-weight="regular">
+<svg fill="currentColor" height="20px" viewbox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+<path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+</svg>
+</div>
+<p class="text-[#0c141d] text-sm font-medium leading-normal">边框: 2px dashed</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-2 pr-4">
+<div class="text-[#0c141d]" data-icon="CheckCircle" data-size="20px" data-weight="regular">
+<svg fill="currentColor" height="20px" viewbox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+<path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+</svg>
+</div>
+<p class="text-[#0c141d] text-sm font-medium leading-normal">圆角: 8px (rounded-lg)</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-2 pr-4">
+<div class="text-[#0c141d]" data-icon="CheckCircle" data-size="20px" data-weight="regular">
+<svg fill="currentColor" height="20px" viewbox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+<path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+</svg>
+</div>
+<p class="text-[#0c141d] text-sm font-medium leading-normal">主色: #0060a9</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-2 pr-4">
+<div class="text-[#0c141d]" data-icon="CheckCircle" data-size="20px" data-weight="regular">
+<svg fill="currentColor" height="20px" viewbox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+<path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+</svg>
+</div>
+<p class="text-[#0c141d] text-sm font-medium leading-normal">状态三态 + 列表四态</p>
+</div>
+</div>
+<h2 class="text-[#0c141d] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5" id="states">一、拖拽上传区核心三大交互状态 (Dropzone Interactive States)</h2>
+<div class="flex px-4 py-3">
+<div class="flex h-10 flex-1 items-center justify-center rounded bg-[#e6edf4] p-1">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded px-2 has-[:checked]:bg-slate-50 has-[:checked]:shadow-[0_0_4px_rgba(0,0,0,0.1)] has-[:checked]:text-[#0c141d] text-[#4573a1] text-sm font-medium leading-normal" onclick="switchState('default')">
+<span class="truncate">A. 默认就绪态 (Default)</span>
+<input checked="" class="invisible w-0" name="state-toggle" type="radio" value="default"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded px-2 has-[:checked]:bg-slate-50 has-[:checked]:shadow-[0_0_4px_rgba(0,0,0,0.1)] has-[:checked]:text-[#0c141d] text-[#4573a1] text-sm font-medium leading-normal" onclick="switchState('dragover')">
+<span class="truncate">B. 拖拽悬停态 (Drag-Over)</span>
+<input class="invisible w-0" name="state-toggle" type="radio" value="dragover"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded px-2 has-[:checked]:bg-slate-50 has-[:checked]:shadow-[0_0_4px_rgba(0,0,0,0.1)] has-[:checked]:text-[#0c141d] text-[#4573a1] text-sm font-medium leading-normal" onclick="switchState('uploading')">
+<span class="truncate">C. 解析传输态 (Uploading)</span>
+<input class="invisible w-0" name="state-toggle" type="radio" value="uploading"/>
+</label>
+</div>
+</div>
+<!-- Interactive States Showcase -->
+<div class="p-4 space-y-4">
+<!-- State A: Default Idle -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-5 shadow-sm" id="panel-default">
+<div class="flex items-center justify-between pb-3 mb-3 border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-outline"></span>
+<span class="text-sm font-bold text-on-surface">态 A · 默认就绪态 (Idle State)</span>
+</div>
+<span class="text-xs px-2 py-0.5 rounded bg-surface-container text-secondary font-mono">h-120px · 2px dashed #c0c7d4 · bg-surface-container-low</span>
+</div>
+<div class="h-[120px] w-full border-2 border-dashed border-outline-variant rounded-xl bg-surface-container-low/70 hover:border-primary hover:bg-primary-fixed/20 transition-all duration-200 flex flex-col items-center justify-center cursor-pointer group">
+<div class="flex flex-col items-center justify-center pointer-events-none">
+<div class="text-primary transition-transform duration-200 group-hover:-translate-y-0.5">
+<span class="material-symbols-outlined text-[36px]">cloud_upload</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="text-body-lg font-medium text-on-surface">点击或拖拽文件到此处上传</span>
+<span class="text-xs text-primary font-medium underline underline-offset-2">浏览本地文件</span>
+</div>
+<p class="text-body-sm text-secondary mt-0.5">支持扩展名: .xlsx, .csv 格式 (单文件大小不超过 10MB)</p>
+</div>
+</div>
+</div>
+<!-- State B: Drag-Over Active -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-5 shadow-sm" id="panel-dragover">
+<div class="flex items-center justify-between pb-3 mb-3 border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<span class="text-sm font-bold text-primary">态 B · 拖拽悬停触发态 (Drag-Over State)</span>
+</div>
+<span class="text-xs px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed-variant font-mono">border-primary · bg-primary-fixed/30 · drop-active</span>
+</div>
+<div class="h-[120px] w-full border-2 border-dashed border-primary rounded-xl bg-primary-fixed/30 flex flex-col items-center justify-center transition-all duration-200 shadow-[inset_0_0_12px_rgba(0,96,169,0.08)]">
+<div class="flex flex-col items-center justify-center">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary mb-1 animate-bounce">
+<span class="material-symbols-outlined text-[26px]">download</span>
+</div>
+<span class="text-body-lg font-semibold text-primary">释放鼠标即可立即上传文件</span>
+<p class="text-body-sm text-on-primary-fixed-variant mt-0.5">松开文件以注入「警务协同勤务排班解析通道」</p>
+</div>
+</div>
+</div>
+<!-- State C: Uploading / Linear Progress -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-5 shadow-sm" id="panel-uploading">
+<div class="flex items-center justify-between pb-3 mb-3 border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-primary-container animate-spin"></span>
+<span class="text-sm font-bold text-on-surface">态 C · 异步解析传输中 (Uploading / Progress Processing)</span>
+</div>
+<span class="text-xs px-2 py-0.5 rounded bg-surface-container text-secondary font-mono">h-120px · 2px solid · progress bar (68%)</span>
+</div>
+<div class="h-[120px] w-full border-2 border-outline-variant/60 rounded-xl bg-surface-container-lowest px-6 flex flex-col justify-center">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl animate-spin">progress_activity</span>
+<span class="text-body-lg font-medium text-on-surface">正在解析并传输数据包... (2/3)</span>
+</div>
+<button class="text-xs text-secondary hover:text-error transition-colors font-medium">取消上传</button>
+</div>
+<!-- Progress Track -->
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden p-0.5">
+<div class="bg-primary h-full rounded-full transition-all duration-300 animate-stripes" style="width: 68%;"></div>
+</div>
+<div class="flex items-center justify-between mt-2 text-body-sm text-secondary">
+<span>传输速率: 3.4 MB/s · 已完成 6.8MB / 10.0MB (分片块 17/25)</span>
+<span class="font-mono font-semibold text-primary">68%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: File List Lifecycle -->
+<div class="px-4 pt-8 pb-3" id="filelist">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-[#0c141d] text-[22px] font-bold leading-tight tracking-[-0.015em]">二、下方文件列表四态生命周期规范 (File Item Lifecycle States)</h2>
+<p class="text-secondary text-sm mt-1">展示统一上传序列中各状态（传输中、成功、错误超限、就绪队列）的具体行内组件设计。</p>
+</div>
+<button class="text-xs text-secondary hover:text-primary transition-colors flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-sm">cleaning_services</span> 全部清空
+              </button>
+</div>
+</div>
+<div class="p-4">
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl overflow-hidden shadow-sm divide-y divide-outline-variant/30">
+<!-- Item 1: Uploading -->
+<div class="p-3.5 flex items-center justify-between hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center gap-3 min-w-0 flex-1">
+<div class="relative flex items-center justify-center size-8 rounded bg-primary-fixed text-primary shrink-0">
+<span class="material-symbols-outlined text-lg">description</span>
+<span class="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-primary-container ring-2 ring-surface-container-lowest animate-ping"></span>
+</div>
+<div class="min-w-0 flex-1 pr-4">
+<div class="flex items-center justify-between">
+<p class="text-sm font-medium text-on-surface truncate">2026年第四季度交警支队勤务排班表_v2.xlsx</p>
+<span class="text-xs text-primary font-mono font-medium">45%</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1.5 mb-1">
+<div class="bg-primary h-full rounded-full" style="width: 45%;"></div>
+</div>
+<div class="flex items-center gap-3 text-xs text-secondary">
+<span>4.2 MB</span>
+<span>•</span>
+<span class="text-primary">上传中 (预计剩余 3 秒)</span>
+<span>•</span>
+<span>分块 8/18</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0 pl-3">
+<button class="text-xs text-secondary hover:text-primary transition-colors">暂停</button>
+<button class="text-secondary hover:text-error transition-colors p-1" title="取消并移除">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+</div>
+<!-- Item 2: Success -->
+<div class="p-3.5 flex items-center justify-between hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center gap-3 min-w-0 flex-1">
+<div class="flex items-center justify-center size-8 rounded bg-tertiary-fixed text-tertiary shrink-0">
+<span class="material-symbols-outlined text-lg">table_chart</span>
+</div>
+<div class="min-w-0 flex-1 pr-4">
+<div class="flex items-center gap-2">
+<p class="text-sm font-medium text-on-surface truncate">重点卡口车辆布控抓拍历史记录_202610.csv</p>
+<span class="inline-flex items-center gap-1 text-[11px] px-2 py-0.2 rounded-full bg-tertiary-fixed text-tertiary font-medium">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> 解析成功
+                      </span>
+</div>
+<div class="flex items-center gap-3 text-xs text-secondary mt-1">
+<span>1.8 MB</span>
+<span>•</span>
+<span class="text-tertiary font-medium">校验通过 · 1,420 条数据就绪</span>
+<span>•</span>
+<span>2026-10-24 14:32</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0 pl-3">
+<button class="text-xs text-secondary hover:text-primary transition-colors">重新上传</button>
+<button class="text-secondary hover:text-error transition-colors p-1" title="删除记录">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</div>
+<!-- Item 3: Error -->
+<div class="p-3.5 flex items-center justify-between bg-error-container/20 hover:bg-error-container/30 transition-colors">
+<div class="flex items-center gap-3 min-w-0 flex-1">
+<div class="flex items-center justify-center size-8 rounded bg-error-container text-error shrink-0">
+<span class="material-symbols-outlined text-lg">error</span>
+</div>
+<div class="min-w-0 flex-1 pr-4">
+<div class="flex items-center gap-2">
+<p class="text-sm font-medium text-error truncate">未命名涉密人员名册_非法格式.docx</p>
+<span class="inline-flex items-center text-[11px] px-1.5 py-0.2 rounded bg-error-container text-on-error-container font-medium">
+                        格式与体积双超限
+                      </span>
+</div>
+<div class="flex items-center gap-2 text-xs text-error mt-1">
+<span class="font-mono">14.5 MB</span>
+<span>•</span>
+<span>文件体积超 10MB 上限且格式非允许类型（仅支持 .xlsx / .csv）</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0 pl-3">
+<button class="text-xs text-primary font-medium hover:underline">重新选择</button>
+<button class="text-error hover:text-on-error-container transition-colors p-1" title="清除">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+</div>
+<!-- Item 4: Pending / Queue -->
+<div class="p-3.5 flex items-center justify-between hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center gap-3 min-w-0 flex-1">
+<div class="flex items-center justify-center size-8 rounded bg-surface-container text-secondary shrink-0">
+<span class="material-symbols-outlined text-lg">schedule</span>
+</div>
+<div class="min-w-0 flex-1 pr-4">
+<div class="flex items-center gap-2">
+<p class="text-sm font-medium text-on-surface truncate">辅警协同排班模板_标准空白件.xlsx</p>
+<span class="inline-flex items-center text-[11px] px-1.5 py-0.2 rounded bg-surface-container text-secondary">
+                        队列排队中
+                      </span>
+</div>
+<div class="flex items-center gap-3 text-xs text-secondary mt-1">
+<span>840 KB</span>
+<span>•</span>
+<span>等待空闲通道分派...</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0 pl-3">
+<button class="text-xs text-primary font-medium hover:underline">立即上传</button>
+<button class="text-secondary hover:text-error transition-colors p-1" title="移除">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Realistic Modal / Form Scenario -->
+<div class="px-4 pt-8 pb-3" id="practice">
+<h2 class="text-[#0c141d] text-[22px] font-bold leading-tight tracking-[-0.015em]">三、综合业务表单实战场景 (Business Real-world Modal Form)</h2>
+<p class="text-secondary text-sm mt-1">将规范落地于「勤务人员与排班批量数据导入」全流程弹窗体验中。</p>
+</div>
+<div class="p-4">
+<div class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl shadow-lg overflow-hidden">
+<!-- Modal Header -->
+<div class="px-6 py-4 border-b border-outline-variant/30 flex items-center justify-between bg-surface-container-low/30">
+<div class="flex items-center gap-2.5">
+<div class="w-2.5 h-4 bg-primary rounded-full"></div>
+<span class="text-base font-bold text-on-surface">勤务人员与排班批量数据导入</span>
+<span class="text-xs px-2 py-0.5 rounded bg-surface-container text-secondary">第 3 分局专用</span>
+</div>
+<button class="text-secondary hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Steps Bar -->
+<div class="px-8 py-3.5 bg-surface-container-lowest border-b border-outline-variant/20 flex items-center justify-center gap-8">
+<div class="flex items-center gap-2 text-primary font-semibold text-xs">
+<span class="size-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[11px]">1</span>
+<span>上传文件</span>
+</div>
+<div class="w-12 h-px bg-outline-variant/60"></div>
+<div class="flex items-center gap-2 text-secondary text-xs">
+<span class="size-5 rounded-full bg-surface-container text-secondary flex items-center justify-center text-[11px]">2</span>
+<span>字段映射与预检</span>
+</div>
+<div class="w-12 h-px bg-outline-variant/60"></div>
+<div class="flex items-center gap-2 text-secondary text-xs">
+<span class="size-5 rounded-full bg-surface-container text-secondary flex items-center justify-center text-[11px]">3</span>
+<span>入库并完成</span>
+</div>
+</div>
+<!-- Modal Body Content -->
+<div class="p-6 space-y-4">
+<div class="flex items-center justify-between text-xs bg-surface-container-low p-3 rounded-lg border border-outline-variant/30">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-primary text-base">info</span>
+<span>请严格遵循格式标准填报，表头第一行须为“警号、姓名、班次代码、执勤岗位”。</span>
+</div>
+<a class="text-primary hover:underline font-medium inline-flex items-center gap-1" href="#download-template">
+<span class="material-symbols-outlined text-xs">download</span> 下载标准 Excel 模板 (.xlsx)
+                  </a>
+</div>
+<!-- Live Drag Area in Form Context -->
+<div class="h-[120px] w-full border-2 border-dashed border-primary/60 hover:border-primary rounded-xl bg-surface-container-low/40 hover:bg-primary-fixed/20 transition-all flex flex-col items-center justify-center cursor-pointer select-none" id="interactive-dropzone" ondragleave="handleDrag(event, false)" ondragover="handleDrag(event, true)" ondrop="handleDrop(event)">
+<span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+<div class="text-sm font-medium text-on-surface mt-1">
+                    将排班 Excel 文件拖拽至此，或 <span class="text-primary underline">点击选取文件</span>
+</div>
+<div class="text-xs text-secondary mt-0.5">单次最大可解析 10,000 行记录，支持 .xlsx / .csv</div>
+</div>
+<!-- Simulation Info Banner -->
+<div class="flex items-center justify-between px-3.5 py-2.5 bg-surface-container-lowest border border-outline-variant/40 rounded-lg text-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-base">task_alt</span>
+<span class="text-on-surface font-medium">已载入预检对象: 2026_Q4_交警支队勤务表.xlsx (4.2 MB)</span>
+</div>
+<span class="text-secondary font-mono">状态: 准备就绪</span>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-6 py-3.5 bg-surface-container-low/40 border-t border-outline-variant/30 flex items-center justify-between">
+<div class="text-xs text-secondary">
+                  支持并发切片分传 · 校验算法: MD5-CheckSum
+                </div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 text-xs font-medium rounded-lg text-secondary hover:bg-surface-container transition-colors">
+                    取消
+                  </button>
+<button class="px-4 py-2 text-xs font-semibold rounded-lg bg-primary text-on-primary hover:bg-on-primary-fixed-variant transition-colors flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-xs">play_arrow</span> 开始解析并下一步
+                  </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 4: Developer Specs & API Table -->
+<div class="px-4 pt-8 pb-3" id="specs">
+<h2 class="text-[#0c141d] text-[22px] font-bold leading-tight tracking-[-0.015em]">四、研发接口与规范备忘 (Developer API &amp; Token Spec)</h2>
+<p class="text-secondary text-sm mt-1">兼容 Element Plus &lt;el-upload&gt; 封装之 LxUpload Props 定义与交互约束。</p>
+</div>
+<div class="p-4 space-y-4">
+<!-- Token Specs Quick Cards -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-surface-container-lowest border border-outline-variant/40 p-3 rounded-lg">
+<div class="text-xs text-secondary">容器基准高度</div>
+<div class="text-base font-bold text-on-surface font-mono mt-0.5">120px</div>
+<div class="text-[11px] text-primary mt-1">h-[120px] 严格锁定</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/40 p-3 rounded-lg">
+<div class="text-xs text-secondary">边框形态与厚度</div>
+<div class="text-base font-bold text-on-surface font-mono mt-0.5">2px dashed</div>
+<div class="text-[11px] text-secondary mt-1">激活色: #0060a9</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/40 p-3 rounded-lg">
+<div class="text-xs text-secondary">容器圆角</div>
+<div class="text-base font-bold text-on-surface font-mono mt-0.5">8px (rounded-xl)</div>
+<div class="text-[11px] text-secondary mt-1">组件内列表圆角: 4px</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/40 p-3 rounded-lg">
+<div class="text-xs text-secondary">进度条厚度</div>
+<div class="text-base font-bold text-on-surface font-mono mt-0.5">8px / 4px (迷你)</div>
+<div class="text-[11px] text-tertiary mt-1">具备动效条纹填充</div>
+</div>
+</div>
+<!-- Code Specification Memo -->
+<div class="bg-inverse-surface text-inverse-on-surface rounded-xl p-4 font-mono text-xs overflow-x-auto shadow-md">
+<div class="flex items-center justify-between pb-2 mb-2 border-b border-outline/30 text-outline-variant">
+<span>LxUpload.vue · Props Bridge Protocol</span>
+<span>TypeScript Interface</span>
+</div>
+<pre class="leading-relaxed"><code>interface LxUploadProps {
+  /** 允许上传的文件格式扩展名 */
+  accept?: string; // 默认: ".xlsx,.csv"
+  /** 单文件体积上限 (MB) */
+  maxSize?: number; // 默认: 10
+  /** 最大上传数量限制 */
+  limit?: number; // 默认: 5
+  /** 选定后是否立即自动传输 */
+  autoUpload?: boolean; // 默认: false (适配表单工作流)
+  /** 列表展现形式 */
+  listType?: 'standard-rows' | 'compact-chips'; // 默认: 'standard-rows'
+  /** 是否开启拖拽区 */
+  drag?: boolean; // 默认: true (h=120px)
+  /** 远端分片上传切片大小 (KB) */
+  chunkSize?: number; // 默认: 1024 (1MB)
+}</code></pre>
+</div>
+</div>
+<!-- Footer Copyright & Metadata -->
+<footer class="mt-12 px-6 py-6 border-t border-outline-variant/30 flex flex-wrap items-center justify-between text-xs text-secondary">
+<div>
+<span>标本规范所属：GB/T 33170 公安警务信息化前端组件库 (LxDesign)</span>
+<span class="mx-2">·</span>
+<span>修订日期: 2026-10-24</span>
+</div>
+<div class="flex items-center gap-4">
+<a class="hover:text-primary" href="#">设计 Token 文档</a>
+<a class="hover:text-primary" href="#">Storybook 镜像</a>
+<a class="hover:text-primary" href="#">反馈与工单</a>
+</div>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<script>
+    // Tab switching for interactive states demo
+    function switchState(state) {
+      const panelDefault = document.getElementById('panel-default');
+      const panelDragover = document.getElementById('panel-dragover');
+      const panelUploading = document.getElementById('panel-uploading');
+
+      if (state === 'default') {
+        panelDefault.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        panelDefault.classList.add('ring-2', 'ring-primary');
+        setTimeout(() => panelDefault.classList.remove('ring-2', 'ring-primary'), 1200);
+      } else if (state === 'dragover') {
+        panelDragover.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        panelDragover.classList.add('ring-2', 'ring-primary');
+        setTimeout(() => panelDragover.classList.remove('ring-2', 'ring-primary'), 1200);
+      } else if (state === 'uploading') {
+        panelUploading.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        panelUploading.classList.add('ring-2', 'ring-primary');
+        setTimeout(() => panelUploading.classList.remove('ring-2', 'ring-primary'), 1200);
+      }
+    }
+
+    // Micro interactive simulation for drag events on business dropzone
+    function handleDrag(e, isOver) {
+      e.preventDefault();
+      const dropzone = document.getElementById('interactive-dropzone');
+      if (isOver) {
+        dropzone.classList.add('bg-primary-fixed/40', 'border-primary', 'scale-[1.005]');
+      } else {
+        dropzone.classList.remove('bg-primary-fixed/40', 'border-primary', 'scale-[1.005]');
+      }
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      handleDrag(e, false);
+      alert('已侦测到模拟文件拖入！组件将执行 MIME 类型与体积校验');
+    }
+  </script>
+</body></html>

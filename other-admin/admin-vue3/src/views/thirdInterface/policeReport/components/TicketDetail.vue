@@ -28,22 +28,24 @@ const loading = ref(false);
 const detail = ref<PoliceticketItem | null>(null);
 
 /** 打开详情弹窗，根据 id 拉取详情 */
-async function open(id: string): Promise<void> {
+function open(id: string): Promise<void> {
   dialogVisible.value = true;
   loading.value = true;
   detail.value = null;
-  try {
-    const res = await getPoliceticketById(id);
-    if (res.code === 0) {
-      detail.value = res.data;
-    } else {
-      ElMessage.error(res.msg ?? '获取详情失败');
-    }
-  } catch {
-    ElMessage.error('获取详情失败');
-  } finally {
-    loading.value = false;
-  }
+  return getPoliceticketById(id)
+    .then((res) => {
+      if (res.code === 0) {
+        detail.value = res.data;
+      } else {
+        ElMessage.error(res.msg ?? '获取详情失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('获取详情失败');
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 }
 
 defineExpose({ open });

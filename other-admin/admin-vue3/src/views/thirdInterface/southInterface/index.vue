@@ -9,13 +9,14 @@
  * 4. AppsManageMapperModal @save 触发 handleMapperSave 调用 updateCallableAppMapper
  * 5. 分页参数使用 page/pageSize
  */
-import { Plus, View, Edit, Delete, Connection } from '@element-plus/icons-vue';
+import { Plus, View, Edit, Delete, Connection, Setting } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { computed, reactive, ref } from 'vue';
 
 import AppsManageDetailModal from './components/AppsManageDetailModal.vue';
 import AppsManageEditModal from './components/AppsManageEditModal.vue';
 import AppsManageMapperModal from './components/AppsManageMapperModal.vue';
+import TaskConfigModal from './components/TaskConfigModal.vue';
 import {
   deleteCallableApp,
   getCallableAppList,
@@ -44,6 +45,7 @@ const tableRef = ref<InstanceType<typeof ProTable>>();
 const editRef = ref<InstanceType<typeof AppsManageEditModal>>();
 const mapperRef = ref<InstanceType<typeof AppsManageMapperModal>>();
 const detailRef = ref<InstanceType<typeof AppsManageDetailModal>>();
+const taskConfigRef = ref<InstanceType<typeof TaskConfigModal>>();
 
 // ===== 类型映射 =====
 const typeMap: Record<number, string> = {
@@ -119,6 +121,10 @@ function handleDetail(row: CallableApp): void {
   detailRef.value?.open(row);
 }
 
+function handleTaskConfig(row: CallableApp): void {
+  taskConfigRef.value?.open(row);
+}
+
 function handleDelete(row: CallableApp): void {
   ElMessageBox.confirm(`确认删除应用「${row.name}」吗？`, '删除确认', {
     confirmButtonText: '确定',
@@ -141,23 +147,24 @@ function handleDelete(row: CallableApp): void {
 }
 
 // ===== 字段映射保存 =====
-async function handleMapperSave(data: { mapper: string; id?: string; row?: CallableApp }): Promise<void> {
+function handleMapperSave(data: { mapper: string; id?: string; row?: CallableApp }): Promise<void> | void {
   const id = data.id ?? data.row?.id;
   if (!id) {
     ElMessage.error('缺少应用ID');
     return;
   }
-  try {
-    const { code, msg } = await updateCallableAppMapper(id, { mapper: data.mapper });
-    if (code === 0) {
-      ElMessage.success('映射配置保存成功');
-      tableRef.value?.refresh();
-    } else {
-      ElMessage.error(msg ?? '保存映射配置失败');
-    }
-  } catch {
-    ElMessage.error('保存映射配置失败');
-  }
+  return updateCallableAppMapper(id, { mapper: data.mapper })
+    .then(({ code, msg }) => {
+      if (code === 0) {
+        ElMessage.success('映射配置保存成功');
+        tableRef.value?.refresh();
+      } else {
+        ElMessage.error(msg ?? '保存映射配置失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('保存映射配置失败');
+    });
 }
 
 /** 执行周期格式化：>=60 显示小时 */
@@ -227,6 +234,12 @@ function getRow(scope: any): CallableApp {
               { type: 'primary', icon: View, label: '详情', onClick: () => handleDetail(getRow(scope)) },
               { type: 'primary', icon: Edit, label: '编辑', onClick: () => handleUpdate(getRow(scope)) },
               { type: 'primary', icon: Connection, label: '映射字段', onClick: () => handleMapper(getRow(scope)) },
+              {
+                type: 'primary',
+                icon: Setting,
+                label: '关联任务标准件',
+                onClick: () => handleTaskConfig(getRow(scope)),
+              },
               { type: 'danger', icon: Delete, label: '删除', onClick: () => handleDelete(getRow(scope)) },
             ]"
           />
@@ -237,6 +250,7 @@ function getRow(scope: any): CallableApp {
     <AppsManageEditModal ref="editRef" @success="tableRef?.refresh()" />
     <AppsManageMapperModal ref="mapperRef" @save="handleMapperSave" />
     <AppsManageDetailModal ref="detailRef" />
+    <TaskConfigModal ref="taskConfigRef" />
   </div>
 </template>
 

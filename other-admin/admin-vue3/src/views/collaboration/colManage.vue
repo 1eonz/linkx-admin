@@ -207,28 +207,30 @@ function delBatch(): void {
 }
 
 /** 下岗：getOnDutyUsersByPostId → 打开弹窗 */
-async function handleOffDuty(row: CollaborationItem): Promise<void> {
+function handleOffDuty(row: CollaborationItem): Promise<void> {
   listOffDutyLoadingMap[row.id] = true;
-  try {
-    const res = await getOnDutyUsersByPostId(row.id);
-    if (res.code === 0) {
-      const users = (res as unknown as { data?: unknown[] })?.data ?? [];
-      if (users.length === 0) {
-        // 没人在岗：警告提示，不打开弹窗
-        ElMessage.warning(t('index.collaboration.noOnDutyUserTip'));
+  return getOnDutyUsersByPostId(row.id)
+    .then((res) => {
+      if (res.code === 0) {
+        const users = (res as unknown as { data?: unknown[] })?.data ?? [];
+        if (users.length === 0) {
+          // 没人在岗：警告提示，不打开弹窗
+          ElMessage.warning(t('index.collaboration.noOnDutyUserTip'));
+        } else {
+          // 有人：打开弹窗
+          currentOffDutyPost.value = row;
+          offDutyDialogVisible.value = true;
+        }
       } else {
-        // 有人：打开弹窗
-        currentOffDutyPost.value = row;
-        offDutyDialogVisible.value = true;
+        ElMessage.error(res.msg || t('index.collaboration.queryOnDutyFailed'));
       }
-    } else {
-      ElMessage.error(res.msg || t('index.collaboration.queryOnDutyFailed'));
-    }
-  } catch {
-    ElMessage.error(t('index.collaboration.queryOnDutyFailed'));
-  } finally {
-    listOffDutyLoadingMap[row.id] = false;
-  }
+    })
+    .catch(() => {
+      ElMessage.error(t('index.collaboration.queryOnDutyFailed'));
+    })
+    .finally(() => {
+      listOffDutyLoadingMap[row.id] = false;
+    });
 }
 
 // 下岗成功后刷新列表（保持当前页）
@@ -237,33 +239,38 @@ function handleOffDutySuccess(): void {
 }
 
 /** 查询同步状态 */
-async function getImSyncStatusFunc(): Promise<void> {
-  try {
-    const { code, data } = await getImSyncStatus({});
-    if (code === 0) {
-      hiddenSync.value = !!data;
-    }
-  } catch {
-    // 忽略错误
-  }
+function getImSyncStatusFunc(): Promise<void> {
+  return getImSyncStatus({})
+    .then(({ code, data }) => {
+      if (code === 0) {
+        hiddenSync.value = !!data;
+      }
+    })
+    .catch(() => {
+      // 忽略错误
+    });
 }
 
 /** 同步老的协同岗数据 */
-async function syncPostFromImFunc(): Promise<void> {
-  if (syncLoading.value) return; // 防止并发
+function syncPostFromImFunc(): Promise<void> {
+  if (syncLoading.value) return Promise.resolve(); // 防止并发
   syncLoading.value = true;
-  try {
-    const { code } = await syncPostFromIm({});
-    if (code === 0) {
-      pageLoadingUtils.openPageLoading(() => {
-        // 同步完成后刷新当前页
-        tableRef.value?.refresh();
-      });
-      hiddenSync.value = true;
-    }
-  } finally {
-    syncLoading.value = false;
-  }
+  return syncPostFromIm({})
+    .then(({ code }) => {
+      if (code === 0) {
+        pageLoadingUtils.openPageLoading(() => {
+          // 同步完成后刷新当前页
+          tableRef.value?.refresh();
+        });
+        hiddenSync.value = true;
+      }
+    })
+    .catch(() => {
+      ElMessage.error('同步失败，请重试');
+    })
+    .finally(() => {
+      syncLoading.value = false;
+    });
 }
 
 /** 从 ProTable slot scope 中安全获取 CollaborationItem */

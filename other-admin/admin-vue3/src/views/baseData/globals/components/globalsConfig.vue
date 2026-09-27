@@ -26,6 +26,7 @@ const defaultForm = (): GlobalsItem => ({
 const formRef = ref<FormInstance>();
 const dialogVisible = ref(false);
 const isAdd = ref(true);
+const isSubmitting = ref(false);
 const temp = reactive<GlobalsItem>(defaultForm());
 
 // 弹窗标题判断（新增/编辑）
@@ -124,9 +125,12 @@ function open(row?: GlobalsItem): void {
 
 // create() —— 走 createGlobals，成功后关闭弹窗 + emit refresh
 async function handleCreate(): Promise<void> {
+  if (isSubmitting.value) return;
+  isSubmitting.value = true;
   const valid = await formRef.value?.validate().catch(() => false);
   if (!valid) {
     ElMessage.error(t('index.statusTitle.requiredFieldIsEmpty'));
+    isSubmitting.value = false;
     return;
   }
   createGlobals({ ...temp })
@@ -136,17 +140,25 @@ async function handleCreate(): Promise<void> {
         dialogVisible.value = false;
         emit('refresh');
       } else {
-        ElMessage.error(result.msg || '');
+        ElMessage.error(result.msg || '新增全局参数失败');
       }
     })
-    .catch(() => {});
+    .catch(() => {
+      ElMessage.error('新增全局参数失败，请重试');
+    })
+    .finally(() => {
+      isSubmitting.value = false;
+    });
 }
 
 // update() —— 走 updateGlobals，含 value 范围/枚举校验
 async function handleUpdate(): Promise<void> {
+  if (isSubmitting.value) return;
+  isSubmitting.value = true;
   const valid = await formRef.value?.validate().catch(() => false);
   if (!valid) {
     formatError();
+    isSubmitting.value = false;
     return;
   }
   const { name, value } = temp;
@@ -158,15 +170,18 @@ async function handleUpdate(): Promise<void> {
       // 整数校验
       if (Number.isNaN(val) || val % 1 !== 0) {
         formatError();
+        isSubmitting.value = false;
         return;
       }
       // 不能以 0 开头
       if (String(value).length > 1 && String(value).startsWith('0')) {
         formatError();
+        isSubmitting.value = false;
         return;
       }
       if (val < rule[0] || val > rule[1]) {
         formatError(tips + JSON.stringify(rule));
+        isSubmitting.value = false;
         return;
       }
     } else {
@@ -174,6 +189,7 @@ async function handleUpdate(): Promise<void> {
       const config = rule.val.map((i) => String(i));
       if (!config.includes(String(value))) {
         formatError(tips + JSON.stringify(config));
+        isSubmitting.value = false;
         return;
       }
     }
@@ -185,10 +201,15 @@ async function handleUpdate(): Promise<void> {
         dialogVisible.value = false;
         emit('refresh');
       } else {
-        ElMessage.error(result.msg || '');
+        ElMessage.error(result.msg || '更新全局参数失败');
       }
     })
-    .catch(() => {});
+    .catch(() => {
+      ElMessage.error('更新全局参数失败，请重试');
+    })
+    .finally(() => {
+      isSubmitting.value = false;
+    });
 }
 
 // closeDialog → dialogVisible = false
@@ -204,6 +225,7 @@ defineExpose({ open });
     v-model="dialogVisible"
     :title="dialogTitle"
     :close-on-click-modal="false"
+    :close-on-press-escape="!isSubmitting"
     :destroy-on-close="true"
     append-to-body
     align-center
@@ -229,9 +251,13 @@ defineExpose({ open });
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="dialogVisible = false">{{ t('cancel') }}</el-button>
-      <el-button v-if="isAdd" type="primary" @click="handleCreate">{{ t('create') }}</el-button>
-      <el-button v-else type="primary" @click="handleUpdate">{{ t('index.operations.alter') }}</el-button>
+      <el-button :disabled="isSubmitting" @click="dialogVisible = false">{{ t('cancel') }}</el-button>
+      <el-button v-if="isAdd" type="primary" :loading="isSubmitting" @click="handleCreate">
+        {{ t('create') }}
+      </el-button>
+      <el-button v-else type="primary" :loading="isSubmitting" @click="handleUpdate">
+        {{ t('index.operations.alter') }}
+      </el-button>
     </template>
   </el-dialog>
 </template>

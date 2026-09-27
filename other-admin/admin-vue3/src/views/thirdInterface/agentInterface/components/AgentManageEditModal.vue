@@ -21,10 +21,10 @@ import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules, UploadRawFile } from 'element-plus';
 import { computed, reactive, ref } from 'vue';
 
+import { addAgentCategory } from '../utils/category';
 import { getVirtualUserList, type VirtualUserItem } from '@/api/policeExtend/virtualUser';
 import {
   addAiagent,
-  deleteCategory,
   queryCategory,
   updateAiagent,
   uploadAgentFile,
@@ -46,6 +46,7 @@ const props = defineProps<Props>();
 const emit = defineEmits<{
   (e: 'update:visible', v: boolean): void;
   (e: 'success'): void;
+  (e: 'category-change'): void;
 }>();
 
 const dialogVisible = computed({
@@ -140,40 +141,43 @@ const virtualUserOptions = ref<Array<VirtualUserItem>>([]);
 const virtualUserLoading = ref(false);
 
 /** 获取虚拟用户列表，已被其他智能体关联的用户禁用（当前已关联的除外） */
-async function fetchVirtualUserList(): Promise<void> {
+function fetchVirtualUserList(): Promise<void> {
   virtualUserLoading.value = true;
-  try {
-    const currentVirtualUserId = form.virtualUserId;
-    const res = await getVirtualUserList({});
-    if (res?.code === 0) {
-      const list = (res?.data as VirtualUserItem[]) ?? [];
-      virtualUserOptions.value = list.map((item) => ({
-        ...item,
-        // 已被其他 Agent 关联的用户不可选（当前已关联的除外）
-        isBound: Boolean(item.agentId && item.id !== currentVirtualUserId),
-      }));
-    } else {
-      ElMessage.error(res?.msg ?? '获取虚拟用户列表失败');
-    }
-  } catch (e) {
-    console.error('获取虚拟用户列表失败:', e);
-  } finally {
-    virtualUserLoading.value = false;
-  }
+  const currentVirtualUserId = form.virtualUserId;
+  return getVirtualUserList({})
+    .then((res) => {
+      if (res?.code === 0) {
+        const list = (res?.data as VirtualUserItem[]) ?? [];
+        virtualUserOptions.value = list.map((item) => ({
+          ...item,
+          // 已被其他 Agent 关联的用户不可选（当前已关联的除外）
+          isBound: Boolean(item.agentId && item.id !== currentVirtualUserId),
+        }));
+      } else {
+        ElMessage.error(res?.msg ?? '获取虚拟用户列表失败');
+      }
+    })
+    .catch((e: unknown) => {
+      console.error('获取虚拟用户列表失败:', e);
+      ElMessage.error('获取虚拟用户列表失败');
+    })
+    .finally(() => {
+      virtualUserLoading.value = false;
+    });
 }
 
 // ===== 文件能力 - 不支持时清空对应类型数组 =====
-function handleAudioChange(val: 0 | 1): void {
-  if (val === 0) form.audioType = [];
+function handleAudioChange(val: unknown): void {
+  if (Number(val) === 0) form.audioType = [];
 }
-function handleVideoChange(val: 0 | 1): void {
-  if (val === 0) form.videoType = [];
+function handleVideoChange(val: unknown): void {
+  if (Number(val) === 0) form.videoType = [];
 }
-function handleImageChange(val: 0 | 1): void {
-  if (val === 0) form.imageType = [];
+function handleImageChange(val: unknown): void {
+  if (Number(val) === 0) form.imageType = [];
 }
-function handleDocumentChange(val: 0 | 1): void {
-  if (val === 0) form.documentType = [];
+function handleDocumentChange(val: unknown): void {
+  if (Number(val) === 0) form.documentType = [];
 }
 
 // ===== 新建分类弹窗 =====
@@ -186,68 +190,66 @@ function openCategoryDialog(): void {
   categoryDialogVisible.value = true;
 }
 
-async function handleAddCategory(): Promise<void> {
-  if (!newCategoryName.value.trim()) {
-    ElMessage.warning('请输入分类名称');
-    return;
-  }
-  // 简化版：仅在本地添加（实际项目需调用接口）
-  categoryList.value.push({ name: newCategoryName.value.trim() });
-  ElMessage.success('分类已添加，请记得在保存时同步');
-  categoryDialogVisible.value = false;
+function handleAddCategory(): Promise<void> | void {
+  if (categorySubmitting.value) return;
+  categorySubmitting.value = true;
+  return addAgentCategory(newCategoryName.value)
+    .then((result) => {
+      if (!result.ok) {
+        if (result.warning) ElMessage.warning(result.message);
+        else ElMessage.error(result.message);
+        return;
+      }
+      return refreshCategoryList().then(() => {
+        emit('category-change');
+        ElMessage.success('分类已添加');
+        categoryDialogVisible.value = false;
+      });
+    })
+    .catch(() => {
+      ElMessage.error('新建分类失败');
+    })
+    .finally(() => {
+      categorySubmitting.value = false;
+    });
 }
 
-async function handleDeleteCategory(cat: AgentCategory): Promise<void> {
-  if (!cat.id) {
-    // 本地新增未保存的分类，直接移除
-    categoryList.value = categoryList.value.filter((c) => c !== cat);
-    return;
-  }
-  try {
-    const res = await deleteCategory(cat.id);
-    if (res?.code !== 0) {
-      ElMessage.error(res?.msg ?? '删除分类失败');
-      return;
-    }
-    ElMessage.success('删除成功');
-    categoryList.value = categoryList.value.filter((c) => c.id !== cat.id);
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-async function refreshCategoryList(): Promise<void> {
-  try {
-    const res = await queryCategory();
-    if (res?.code === 0) {
-      categoryList.value = (res?.data as AgentCategory[]) ?? [];
-    }
-  } catch (e) {
-    console.error(e);
-  }
+function refreshCategoryList(): Promise<void> {
+  return queryCategory()
+    .then((res) => {
+      if (res?.code === 0) {
+        categoryList.value = (res?.data as AgentCategory[]) ?? [];
+      }
+    })
+    .catch((e: unknown) => {
+      console.error(e);
+      ElMessage.error('获取分类列表失败');
+    });
 }
 
 // ===== 头像上传 =====
-async function handleAvatarUpload(file: File): Promise<void> {
+function handleAvatarUpload(file: File): Promise<void> | void {
   if (avatarUploading.value) return;
   avatarUploading.value = true;
-  try {
-    const res = await uploadAgentFile(file);
-    if (res?.code !== 0) {
-      ElMessage.error(res?.msg ?? '上传失败');
-      return;
-    }
-    const url = typeof res.data === 'string' ? res.data : '';
-    if (url) {
-      form.avatarUrl = url;
-      ElMessage.success('上传成功');
-    }
-  } catch (e) {
-    console.error(e);
-    ElMessage.error('上传失败');
-  } finally {
-    avatarUploading.value = false;
-  }
+  return uploadAgentFile(file)
+    .then((res) => {
+      if (res?.code !== 0) {
+        ElMessage.error(res?.msg ?? '上传失败');
+        return;
+      }
+      const url = typeof res.data === 'string' ? res.data : '';
+      if (url) {
+        form.avatarUrl = url;
+        ElMessage.success('上传成功');
+      }
+    })
+    .catch((e: unknown) => {
+      console.error(e);
+      ElMessage.error('上传失败');
+    })
+    .finally(() => {
+      avatarUploading.value = false;
+    });
 }
 
 function triggerAvatarUpload(): void {
@@ -268,19 +270,24 @@ async function submitForm(): Promise<void> {
   const valid = await formRef.value?.validate().catch(() => false);
   if (!valid) return;
   submitting.value = true;
-  try {
-    const isCreate = isAdd.value;
-    const result = isCreate ? await addAiagent(form) : form.id ? await updateAiagent(form.id, form) : null;
-    if (!result || result.code !== 0) {
-      ElMessage.error(result?.msg ?? `${isCreate ? '新增' : '编辑'}失败`);
-      return;
-    }
-    ElMessage.success(`${isCreate ? '添加' : '编辑'}成功`);
-    emit('success');
-    dialogVisible.value = false;
-  } finally {
-    submitting.value = false;
-  }
+  const isCreate = isAdd.value;
+  const request = isCreate ? addAiagent(form) : form.id ? updateAiagent(form.id, form) : Promise.resolve(null);
+  return request
+    .then((result) => {
+      if (!result || result.code !== 0) {
+        ElMessage.error(result?.msg ?? `${isCreate ? '新增' : '编辑'}失败`);
+        return;
+      }
+      ElMessage.success(`${isCreate ? '添加' : '编辑'}成功`);
+      emit('success');
+      dialogVisible.value = false;
+    })
+    .catch(() => {
+      ElMessage.error(`${isCreate ? '新增' : '编辑'}失败`);
+    })
+    .finally(() => {
+      submitting.value = false;
+    });
 }
 
 function resetForm(): void {
@@ -289,7 +296,7 @@ function resetForm(): void {
 }
 
 /** 打开弹窗 */
-async function init(
+function init(
   type: 'add' | 'edit',
   row?: AiagentItem,
   externalCategoryList?: AgentCategory[],
@@ -298,50 +305,50 @@ async function init(
   isAdd.value = type === 'add';
   resetForm();
   // 优先使用外部传入的分类/文件列表
-  if (externalCategoryList) {
-    categoryList.value = externalCategoryList;
-  } else {
-    await refreshCategoryList();
-  }
-  if (externalFileList) {
-    fileList.value = externalFileList;
-  }
-  if (row) {
-    Object.assign(form, row);
-    // 兼容 categoryIds 可能为字符串
-    if (typeof form.categoryIds === 'string') {
-      form.categoryIds = (form.categoryIds as unknown as string).split(',').filter(Boolean);
-    }
-    // 文件能力类型字段：后端返回 audioTypeList/videoTypeList 等列表字段，需映射到数组字段
-    const rowAny = row as unknown as Record<string, unknown>;
-    if (!Array.isArray(form.audioType) && Array.isArray(rowAny.audioTypeList)) {
-      form.audioType = rowAny.audioTypeList as string[];
-    }
-    if (!Array.isArray(form.videoType) && Array.isArray(rowAny.videoTypeList)) {
-      form.videoType = rowAny.videoTypeList as string[];
-    }
-    if (!Array.isArray(form.imageType) && Array.isArray(rowAny.imageTypeList)) {
-      form.imageType = rowAny.imageTypeList as string[];
-    }
-    if (!Array.isArray(form.documentType) && Array.isArray(rowAny.documentTypeList)) {
-      form.documentType = rowAny.documentTypeList as string[];
-    }
-    // 保证字段值类型合法
-    form.audioType = form.audioType ?? [];
-    form.videoType = form.videoType ?? [];
-    form.imageType = form.imageType ?? [];
-    form.documentType = form.documentType ?? [];
-  }
-  // 拉取虚拟用户列表（编辑时基于已回显的 virtualUserId 标记 isBound）
-  await fetchVirtualUserList();
-  dialogVisible.value = true;
+  const categoryRequest = externalCategoryList ? Promise.resolve() : refreshCategoryList();
+  return categoryRequest
+    .then(() => {
+      if (externalCategoryList) {
+        categoryList.value = externalCategoryList;
+      }
+      if (externalFileList) {
+        fileList.value = externalFileList;
+      }
+      if (row) {
+        Object.assign(form, row);
+        // 兼容 categoryIds 可能为字符串
+        if (typeof form.categoryIds === 'string') {
+          form.categoryIds = (form.categoryIds as unknown as string).split(',').filter(Boolean);
+        }
+        // 文件能力类型字段：后端返回 audioTypeList/videoTypeList 等列表字段，需映射到数组字段
+        const rowAny = row as unknown as Record<string, unknown>;
+        if (!Array.isArray(form.audioType) && Array.isArray(rowAny.audioTypeList)) {
+          form.audioType = rowAny.audioTypeList as string[];
+        }
+        if (!Array.isArray(form.videoType) && Array.isArray(rowAny.videoTypeList)) {
+          form.videoType = rowAny.videoTypeList as string[];
+        }
+        if (!Array.isArray(form.imageType) && Array.isArray(rowAny.imageTypeList)) {
+          form.imageType = rowAny.imageTypeList as string[];
+        }
+        if (!Array.isArray(form.documentType) && Array.isArray(rowAny.documentTypeList)) {
+          form.documentType = rowAny.documentTypeList as string[];
+        }
+        // 保证字段值类型合法
+        form.audioType = form.audioType ?? [];
+        form.videoType = form.videoType ?? [];
+        form.imageType = form.imageType ?? [];
+        form.documentType = form.documentType ?? [];
+      }
+      // 拉取虚拟用户列表（编辑时基于已回显的 virtualUserId 标记 isBound）
+      return fetchVirtualUserList();
+    })
+    .then(() => {
+      dialogVisible.value = true;
+    });
 }
 
 defineExpose({ init });
-
-// 防止 lint 报未使用
-void newCategoryName;
-void categorySubmitting;
 </script>
 
 <template>
@@ -572,7 +579,7 @@ void categorySubmitting;
       <el-input v-model="newCategoryName" placeholder="请输入分类名称" />
       <template #footer>
         <el-button @click="categoryDialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="handleAddCategory">确定</el-button>
+        <el-button type="primary" :loading="categorySubmitting" @click="handleAddCategory">确定</el-button>
       </template>
     </el-dialog>
   </el-dialog>

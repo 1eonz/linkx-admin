@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LxVirtualTree &amp; LxTransferPanel 树组件与数据权限穿梭框规范标本</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed": "#d2e4ff",
+            "tertiary": "#286c00",
+            "on-primary-fixed-variant": "#004881",
+            "primary-container": "#409eff",
+            "on-secondary-fixed-variant": "#37485d",
+            "surface-container-highest": "#e0e2e9",
+            "inverse-on-surface": "#eef1f7",
+            "on-secondary-container": "#55667c",
+            "surface-container-high": "#e6e8ef",
+            "surface-dim": "#d7dae0",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-container": "#133b00",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#80dd52",
+            "on-surface": "#181c20",
+            "tertiary-container": "#55af28",
+            "on-tertiary-fixed-variant": "#1d5200",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#2d3136",
+            "outline": "#707784",
+            "primary-fixed-dim": "#a2c9ff",
+            "secondary-fixed-dim": "#b6c8e2",
+            "on-tertiary-fixed": "#072100",
+            "surface": "#f8f9ff",
+            "on-background": "#181c20",
+            "tertiary-fixed": "#9bfa6b",
+            "on-error-container": "#93000a",
+            "on-error": "#ffffff",
+            "surface-tint": "#0060a9",
+            "primary-fixed": "#d3e4ff",
+            "secondary": "#4f6076",
+            "surface-variant": "#e0e2e9",
+            "on-primary-fixed": "#001c38",
+            "background": "#f8f9ff",
+            "secondary-container": "#d2e4ff",
+            "surface-container-lowest": "#ffffff",
+            "on-primary": "#ffffff",
+            "outline-variant": "#c0c7d4",
+            "inverse-primary": "#a2c9ff",
+            "surface-container-low": "#f1f3fa",
+            "on-secondary-fixed": "#0a1c30",
+            "on-primary-container": "#003460",
+            "surface-container": "#ebeef4",
+            "surface-bright": "#f8f9ff",
+            "primary": "#0060a9",
+            "on-surface-variant": "#404752"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-xs": "4px",
+            "margin": "20px",
+            "space-xl": "24px",
+            "space-md": "12px",
+            "space-lg": "16px",
+            "space-sm": "8px",
+            "gutter": "16px"
+          },
+          "fontFamily": {
+            "headline-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "display-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-md": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c0c4cc;
+      border-radius: 2px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #909399;
+    }
+    .tree-row {
+      height: 32px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased" style="font-family: Inter, -apple-system, 'Noto Sans SC', sans-serif;">
+<!-- Immutable Shared Component: TopNavBar Anchor -->
+<div class="relative flex h-auto w-full flex-col bg-slate-50 group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e6edf4] px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#0c141d]">
+<div class="size-4">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-[#0c141d] text-lg font-bold leading-tight tracking-[-0.015em]">公安警务云工程架构规范 · Element Plus 标本库</h2>
+</div>
+<div class="flex items-center gap-9">
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#">组件总览</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#virtual-tree-section">LxVirtualTree</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#transfer-panel-section">LxTransferPanel</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#token-section">Token体系</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#contract-section">研发契约</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded h-full">
+<div class="text-[#4573a1] flex border-none bg-[#e6edf4] items-center justify-center pl-4 rounded-l border-r-0" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+</svg>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded text-[#0c141d] focus:outline-0 focus:ring-0 border-none bg-[#e6edf4] focus:border-none h-full placeholder:text-[#4573a1] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search" value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#409fff] text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">导出TS定义</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#e6edf4] text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">规范文档 v2.4.0</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex flex-wrap justify-between gap-3 p-4">
+<div class="flex min-w-72 flex-col gap-3">
+<p class="text-[#0c141d] tracking-light text-[32px] font-bold leading-tight">LxVirtualTree 虚拟树 &amp; LxTransferPanel 权限穿梭框规范标本</p>
+<p class="text-[#4573a1] text-sm font-normal leading-normal">
+                遵循 GB 公共安全信息化交互规范与 Element Plus 核心架构 · v2.4.0 COMPLIANT · 32px 紧凑高度 · 16px 严格缩进 · 4px 极细滚动条
+              </p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-8 px-4 bg-[#e6edf4] text-[#0c141d] text-sm font-medium leading-normal">
+<span class="truncate">查看源码</span>
+</button>
+</div>
+<div class="flex gap-3 p-3 overflow-x-hidden">
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-4 pr-4">
+<p class="text-[#0c141d] text-sm font-medium leading-normal">规范版本: v2.4.0 COMPLIANT</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-4 pr-4">
+<p class="text-[#0c141d] text-sm font-medium leading-normal">基准行高: 32px</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-4 pr-4">
+<p class="text-[#0c141d] text-sm font-medium leading-normal">层级缩进: 16px/级</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-4 pr-4">
+<p class="text-[#0c141d] text-sm font-medium leading-normal">滚动条: 4px 极细</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-4 pr-4">
+<p class="text-[#0c141d] text-sm font-medium leading-normal">虚拟渲染: 万级零掉帧</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-4 pr-4">
+<p class="text-[#0c141d] text-sm font-medium leading-normal">设计标准: GB 公安信息化规范</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-4 p-4">
+<div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded p-6 border border-[#cddbea]">
+<p class="text-[#0c141d] text-base font-medium leading-normal">虚拟总节点量</p>
+<p class="text-[#0c141d] tracking-light text-2xl font-bold leading-tight">1,420 节点</p>
+<p class="text-[#078838] text-base font-medium leading-normal">+100%</p>
+</div>
+<div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded p-6 border border-[#cddbea]">
+<p class="text-[#0c141d] text-base font-medium leading-normal">可视区动态渲染</p>
+<p class="text-[#0c141d] tracking-light text-2xl font-bold leading-tight">12 行 (384px)</p>
+<p class="text-[#4573a1] text-base font-medium leading-normal">0 掉帧</p>
+</div>
+<div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded p-6 border border-[#cddbea]">
+<p class="text-[#0c141d] text-base font-medium leading-normal">单行基准高度</p>
+<p class="text-[#0c141d] tracking-light text-2xl font-bold leading-tight">32 px (严格)</p>
+<p class="text-[#4573a1] text-base font-medium leading-normal">±0px 紧凑</p>
+</div>
+<div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded p-6 border border-[#cddbea]">
+<p class="text-[#0c141d] text-base font-medium leading-normal">穿梭同步延迟</p>
+<p class="text-[#0c141d] tracking-light text-2xl font-bold leading-tight">&lt; 16 ms 响应</p>
+<p class="text-[#4573a1] text-base font-medium leading-normal">实时同步</p>
+</div>
+</div>
+<h2 class="text-[#0c141d] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+            一、LxVirtualTree 大数据量虚拟滚动树规范标本 (GB 标准公安机构编成)
+          </h2>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Body Containers -->
+<main class="w-full flex justify-center pb-16">
+<div class="w-full max-w-[960px] px-4 flex flex-col gap-10">
+<!-- SECTION 1: LxVirtualTree Interactive Specimen -->
+<section class="flex flex-col gap-3" id="virtual-tree-section">
+<!-- Container Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-5 shadow-sm">
+<!-- Virtual Tree Header & Filter Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-surface-container-highest">
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-[16px] text-secondary">search</span>
+<input class="w-full h-8 pl-8 pr-7 text-xs bg-surface-container-low border border-outline-variant rounded-lg text-on-surface focus:outline-none focus:border-primary placeholder-secondary transition-colors" placeholder="输入机构名称/部门编码检索..." type="text" value="指挥"/>
+<button class="absolute right-2 top-2 text-secondary hover:text-on-surface">
+<span class="material-symbols-outlined text-[15px]">cancel</span>
+</button>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-xs">
+<button class="text-primary hover:underline font-medium">全展开</button>
+<span class="text-outline-variant">|</span>
+<button class="text-secondary hover:text-on-surface font-medium">全折叠</button>
+</div>
+<div class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container text-[11px] font-medium flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+                节点总数: <span class="font-bold text-on-surface">1,420</span> 个 (可视区虚拟渲染 12 行)
+              </div>
+</div>
+</div>
+<!-- Tree Viewport: 360px Height with 4px Slim Custom Scrollbar -->
+<div class="mt-3 h-[360px] overflow-y-auto custom-scrollbar border border-surface-container rounded-lg bg-surface-container-lowest">
+<div class="flex flex-col py-1 text-xs select-none">
+<!-- Level 0: Root 0px indent -->
+<div class="tree-row flex items-center px-2 hover:bg-[#f2f4f8] transition-colors cursor-pointer group">
+<div class="shrink-0" style="width: 0px;"></div>
+<button class="w-4 h-4 flex items-center justify-center text-secondary hover:text-primary transition-transform rotate-90 mr-1">
+<span class="material-symbols-outlined text-[15px]">arrow_right</span>
+</button>
+<input checked="" class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-primary mr-1.5">corporate_fare</span>
+<span class="font-semibold text-on-surface flex-1 truncate">
+                  江城市公安局<span class="text-primary font-bold bg-primary-fixed px-0.5 rounded">指挥</span>中心 (总局)
+                </span>
+<span class="font-mono text-[11px] text-secondary bg-surface-container-high px-1.5 py-0.5 rounded ml-2">ORG-0100</span>
+</div>
+<!-- Level 1: 16px indent -->
+<div class="tree-row flex items-center px-2 hover:bg-[#f2f4f8] transition-colors cursor-pointer group">
+<div class="shrink-0" style="width: 16px;"></div>
+<button class="w-4 h-4 flex items-center justify-center text-secondary hover:text-primary transition-transform rotate-90 mr-1">
+<span class="material-symbols-outlined text-[15px]">arrow_right</span>
+</button>
+<input checked="" class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-secondary mr-1.5">account_tree</span>
+<span class="text-on-surface flex-1 truncate">情指行一体化研判调度专班</span>
+<span class="text-[11px] text-secondary bg-surface-container px-1.5 py-0.5 rounded ml-2">24 人</span>
+</div>
+<!-- Level 2: 32px indent (Active Selected State: #ecf5ff) -->
+<div class="tree-row flex items-center px-2 bg-[#ecf5ff] text-primary transition-colors cursor-pointer group">
+<div class="shrink-0" style="width: 32px;"></div>
+<button class="w-4 h-4 flex items-center justify-center text-primary transition-transform rotate-90 mr-1">
+<span class="material-symbols-outlined text-[15px]">arrow_right</span>
+</button>
+<input checked="" class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-primary mr-1.5">badge</span>
+<span class="font-medium text-primary flex-1 truncate">
+                  值班<span class="bg-primary-fixed text-primary px-0.5 rounded font-bold">指挥</span>长席 (已激活)
+                </span>
+<span class="font-mono text-[11px] text-primary bg-primary-fixed px-1.5 py-0.5 rounded ml-2 font-medium">CMD-OPER-01</span>
+</div>
+<!-- Level 2: 32px indent -->
+<div class="tree-row flex items-center px-2 hover:bg-[#f2f4f8] transition-colors cursor-pointer group">
+<div class="shrink-0" style="width: 32px;"></div>
+<span class="w-4 h-4 mr-1"></span>
+<input checked="" class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-secondary mr-1.5">radio</span>
+<span class="text-on-surface flex-1 truncate">110 接处警智能调度分席</span>
+<span class="text-[11px] text-secondary bg-surface-container px-1.5 py-0.5 rounded ml-2">12 人</span>
+</div>
+<!-- Level 1: 16px indent (Indeterminate State) -->
+<div class="tree-row flex items-center px-2 hover:bg-[#f2f4f8] transition-colors cursor-pointer group">
+<div class="shrink-0" style="width: 16px;"></div>
+<button class="w-4 h-4 flex items-center justify-center text-secondary hover:text-primary transition-transform rotate-90 mr-1">
+<span class="material-symbols-outlined text-[15px]">arrow_right</span>
+</button>
+<!-- Indeterminate custom element mimic -->
+<div class="w-3.5 h-3.5 mr-2 rounded border border-primary bg-primary flex items-center justify-center cursor-pointer">
+<span class="w-2 h-0.5 bg-white rounded-sm"></span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-secondary mr-1.5">security</span>
+<span class="text-on-surface flex-1 truncate">城北分局社会治安巡控支队</span>
+<span class="text-[11px] text-secondary bg-surface-container px-1.5 py-0.5 rounded ml-2">156 人</span>
+</div>
+<!-- Level 2: 32px indent -->
+<div class="tree-row flex items-center px-2 hover:bg-[#f2f4f8] transition-colors cursor-pointer group">
+<div class="shrink-0" style="width: 32px;"></div>
+<button class="w-4 h-4 flex items-center justify-center text-secondary hover:text-primary transition-transform mr-1">
+<span class="material-symbols-outlined text-[15px]">arrow_right</span>
+</button>
+<input checked="" class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-secondary mr-1.5">local_police</span>
+<span class="text-on-surface flex-1 truncate">站前路派出所综合作战室</span>
+<span class="text-[11px] text-secondary bg-surface-container px-1.5 py-0.5 rounded ml-2">18 人</span>
+</div>
+<!-- Level 2: 32px indent (Disabled State) -->
+<div class="tree-row flex items-center px-2 opacity-50 cursor-not-allowed bg-surface-container-low">
+<div class="shrink-0" style="width: 32px;"></div>
+<span class="w-4 h-4 mr-1"></span>
+<input class="w-3.5 h-3.5 mr-2 rounded text-outline-variant border-outline-variant cursor-not-allowed" disabled="" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-outline mr-1.5">lock</span>
+<span class="text-on-surface-variant flex-1 truncate">机要网络加密信道终端 (权限锁定)</span>
+<span class="text-[10px] text-outline font-mono ml-2">RESTRICTED</span>
+</div>
+<!-- Level 1: 16px indent (Collapsed) -->
+<div class="tree-row flex items-center px-2 hover:bg-[#f2f4f8] transition-colors cursor-pointer group">
+<div class="shrink-0" style="width: 16px;"></div>
+<button class="w-4 h-4 flex items-center justify-center text-secondary hover:text-primary transition-transform mr-1">
+<span class="material-symbols-outlined text-[15px]">arrow_right</span>
+</button>
+<input class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-secondary mr-1.5">traffic</span>
+<span class="text-on-surface flex-1 truncate">交警直属科技勤务大队</span>
+<span class="text-[11px] text-secondary bg-surface-container px-1.5 py-0.5 rounded ml-2">45 人</span>
+</div>
+<!-- Level 1: 16px indent -->
+<div class="tree-row flex items-center px-2 hover:bg-[#f2f4f8] transition-colors cursor-pointer group">
+<div class="shrink-0" style="width: 16px;"></div>
+<button class="w-4 h-4 flex items-center justify-center text-secondary hover:text-primary transition-transform rotate-90 mr-1">
+<span class="material-symbols-outlined text-[15px]">arrow_right</span>
+</button>
+<input class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-secondary mr-1.5">policy</span>
+<span class="text-on-surface flex-1 truncate">刑侦支队物证信息技术大队</span>
+<span class="text-[11px] text-secondary bg-surface-container px-1.5 py-0.5 rounded ml-2">38 人</span>
+</div>
+<!-- Level 2: 32px indent -->
+<div class="tree-row flex items-center px-2 hover:bg-[#f2f4f8] transition-colors cursor-pointer group">
+<div class="shrink-0" style="width: 32px;"></div>
+<span class="w-4 h-4 mr-1"></span>
+<input class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-secondary mr-1.5">fingerprint</span>
+<span class="text-on-surface flex-1 truncate">DNA 与指纹快速比对实验室</span>
+<span class="text-[11px] text-secondary bg-surface-container px-1.5 py-0.5 rounded ml-2">9 人</span>
+</div>
+<!-- Level 2: 32px indent -->
+<div class="tree-row flex items-center px-2 hover:bg-[#f2f4f8] transition-colors cursor-pointer group">
+<div class="shrink-0" style="width: 32px;"></div>
+<span class="w-4 h-4 mr-1"></span>
+<input class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-secondary mr-1.5">csv</span>
+<span class="text-on-surface flex-1 truncate">智慧痕迹检验与理化分析组</span>
+<span class="text-[11px] text-secondary bg-surface-container px-1.5 py-0.5 rounded ml-2">14 人</span>
+</div>
+<!-- Level 1: 16px indent -->
+<div class="tree-row flex items-center px-2 hover:bg-[#f2f4f8] transition-colors cursor-pointer group">
+<div class="shrink-0" style="width: 16px;"></div>
+<button class="w-4 h-4 flex items-center justify-center text-secondary hover:text-primary transition-transform mr-1">
+<span class="material-symbols-outlined text-[15px]">arrow_right</span>
+</button>
+<input class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-secondary mr-1.5">shield</span>
+<span class="text-on-surface flex-1 truncate">网安支队电子证据取证攻防实验室</span>
+<span class="text-[11px] text-secondary bg-surface-container px-1.5 py-0.5 rounded ml-2">29 人</span>
+</div>
+</div>
+</div>
+<!-- Bottom Footer Bar for Tree View -->
+<div class="mt-3 flex items-center justify-between text-xs text-secondary px-1 pt-2 border-t border-surface-container">
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span> 选中: 4 个机构节点</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-outline-variant"></span> 锁定权限: 1 个</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[11px]">虚拟渲染节流窗口: 32px × 12 = 384px</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: LxTransferPanel Real-World Data Permission Transfer -->
+<section class="flex flex-col gap-3" id="transfer-panel-section">
+<h2 class="text-on-surface text-xl font-bold tracking-tight">
+          二、LxTransferPanel 数据权限双栏穿梭框 (DataPermission 实战)
+        </h2>
+<!-- Transfer Dual Panels Container -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-5 shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+<!-- LEFT PANEL: Source Tree (待选权限树) -->
+<div class="md:col-span-5 h-[380px] border border-outline-variant rounded-lg flex flex-col overflow-hidden bg-surface-container-lowest">
+<!-- Left Header (36px high, #f5f7fa style) -->
+<div class="h-9 bg-[#f5f7fa] px-3 flex items-center justify-between border-b border-outline-variant shrink-0">
+<div class="flex items-center gap-2">
+<div class="w-3.5 h-3.5 rounded border border-primary bg-primary flex items-center justify-center">
+<span class="w-2 h-0.5 bg-white rounded-sm"></span>
+</div>
+<span class="text-xs font-semibold text-on-surface">组织与数据权限树 (待选)</span>
+</div>
+<div class="flex items-center gap-1.5 text-[11px]">
+<button class="text-primary hover:underline">全选</button>
+<span class="text-outline-variant">/</span>
+<button class="text-secondary hover:text-on-surface">反选</button>
+</div>
+</div>
+<!-- Quick Search Filter (28px) -->
+<div class="p-2 border-b border-surface-container bg-surface-container-lowest shrink-0">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-2 top-1.5 text-[14px] text-secondary">search</span>
+<input class="w-full h-7 pl-6 pr-6 text-xs bg-surface-container-low border border-outline-variant rounded text-on-surface focus:outline-none focus:border-primary placeholder-secondary" placeholder="快速过滤待分配单位..." type="text"/>
+<span class="material-symbols-outlined absolute right-2 top-1.5 text-[14px] text-secondary cursor-pointer">close</span>
+</div>
+</div>
+<!-- Inner Tree Viewport with Virtual Scrolling (4px scrollbar) -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-1 select-none text-xs">
+<!-- Row 1 -->
+<div class="tree-row flex items-center px-1.5 hover:bg-[#f2f4f8] rounded cursor-pointer">
+<button class="w-4 h-4 flex items-center justify-center text-secondary rotate-90 mr-1">
+<span class="material-symbols-outlined text-[14px]">arrow_right</span>
+</button>
+<input checked="" class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-primary mr-1">corporate_fare</span>
+<span class="truncate text-on-surface flex-1">市公安局指挥中心</span>
+</div>
+<!-- Row 2 (Selected - Indented 16px) -->
+<div class="tree-row flex items-center px-1.5 bg-[#ecf5ff] rounded cursor-pointer text-primary">
+<div class="w-4 shrink-0"></div>
+<span class="w-4 h-4 mr-1"></span>
+<input checked="" class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-primary mr-1">hub</span>
+<span class="truncate font-medium flex-1">情指行一体化专班</span>
+</div>
+<!-- Row 3 (Selected - Indented 16px) -->
+<div class="tree-row flex items-center px-1.5 bg-[#ecf5ff] rounded cursor-pointer text-primary">
+<div class="w-4 shrink-0"></div>
+<span class="w-4 h-4 mr-1"></span>
+<input checked="" class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-primary mr-1">two_wheeler</span>
+<span class="truncate font-medium flex-1">交警直属特勤一中队</span>
+</div>
+<!-- Row 4 (Collapsed - Indented 16px) -->
+<div class="tree-row flex items-center px-1.5 hover:bg-[#f2f4f8] rounded cursor-pointer">
+<div class="w-4 shrink-0"></div>
+<button class="w-4 h-4 flex items-center justify-center text-secondary mr-1">
+<span class="material-symbols-outlined text-[14px]">arrow_right</span>
+</button>
+<input class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-secondary mr-1">shield_person</span>
+<span class="truncate text-on-surface flex-1">特警巡防防暴机动支队</span>
+</div>
+<!-- Row 5 (Indented 32px) -->
+<div class="tree-row flex items-center px-1.5 hover:bg-[#f2f4f8] rounded cursor-pointer">
+<div class="w-8 shrink-0"></div>
+<span class="w-4 h-4 mr-1"></span>
+<input class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-secondary mr-1">local_convenience_store</span>
+<span class="truncate text-on-surface flex-1">联勤联防武装巡逻组</span>
+</div>
+<!-- Row 6 (Indented 16px) -->
+<div class="tree-row flex items-center px-1.5 hover:bg-[#f2f4f8] rounded cursor-pointer">
+<div class="w-4 shrink-0"></div>
+<button class="w-4 h-4 flex items-center justify-center text-secondary mr-1">
+<span class="material-symbols-outlined text-[14px]">arrow_right</span>
+</button>
+<input class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-secondary mr-1">domain</span>
+<span class="truncate text-on-surface flex-1">江北经济开发区分局</span>
+</div>
+<!-- Row 7 (Indented 16px) -->
+<div class="tree-row flex items-center px-1.5 hover:bg-[#f2f4f8] rounded cursor-pointer">
+<div class="w-4 shrink-0"></div>
+<button class="w-4 h-4 flex items-center justify-center text-secondary mr-1">
+<span class="material-symbols-outlined text-[14px]">arrow_right</span>
+</button>
+<input class="w-3.5 h-3.5 mr-2 rounded text-primary focus:ring-0 border-outline-variant" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-secondary mr-1">contact_mail</span>
+<span class="truncate text-on-surface flex-1">出入境智慧服务大厅</span>
+</div>
+</div>
+<!-- Left Footer Status -->
+<div class="h-8 bg-surface-container-low px-3 flex items-center justify-between border-t border-outline-variant text-[11px] text-secondary shrink-0">
+<span>待选池: 1,420 节点</span>
+<span>动态勾选自动穿梭</span>
+</div>
+</div>
+<!-- MIDDLE: Shuttle Action Controls -->
+<div class="md:col-span-2 flex md:flex-col items-center justify-center gap-2.5 py-2">
+<button class="w-9 h-9 flex items-center justify-center rounded-lg bg-primary text-white hover:bg-on-primary-fixed-variant shadow-sm transition-all active:scale-95" title="批量授权移入">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg bg-surface-container-high text-secondary hover:bg-surface-container-highest transition-all active:scale-95" title="批量移除权限">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+</div>
+<!-- RIGHT PANEL: Selected Target List (已选权限清单) -->
+<div class="md:col-span-5 h-[380px] border border-outline-variant rounded-lg flex flex-col overflow-hidden bg-surface-container-lowest">
+<!-- Right Header (36px high, #f5f7fa style) -->
+<div class="h-9 bg-[#f5f7fa] px-3 flex items-center justify-between border-b border-outline-variant shrink-0">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-xs font-semibold text-on-surface">已选数据权限清单</span>
+</div>
+<button class="text-error hover:text-on-error-container text-[11px] font-medium flex items-center gap-0.5 hover:underline">
+<span class="material-symbols-outlined text-[13px]">delete_sweep</span>
+                  一键清空
+                </button>
+</div>
+<!-- Filter Search for Target List -->
+<div class="p-2 border-b border-surface-container bg-surface-container-lowest shrink-0">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-2 top-1.5 text-[14px] text-secondary">filter_alt</span>
+<input class="w-full h-7 pl-6 pr-2 text-xs bg-surface-container-low border border-outline-variant rounded text-on-surface focus:outline-none focus:border-primary placeholder-secondary" placeholder="在已选名单中检索..." type="text"/>
+</div>
+</div>
+<!-- Selected Items List Area (32px row height, 4px scrollbar) -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-1.5 space-y-1">
+<!-- Selected Item 1 -->
+<div class="h-8 flex items-center justify-between px-2.5 bg-surface-container-low hover:bg-[#f2f4f8] rounded border border-surface-container transition-colors group">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary shrink-0"></span>
+<span class="text-xs text-on-surface font-medium truncate">市公安局指挥中心</span>
+<span class="text-[10px] text-secondary font-mono bg-surface-container px-1 rounded">ORG-01</span>
+</div>
+<button class="text-secondary group-hover:text-error hover:bg-error-container p-0.5 rounded transition-colors ml-2" title="移除该项">
+<span class="material-symbols-outlined text-[14px] block">close</span>
+</button>
+</div>
+<!-- Selected Item 2 -->
+<div class="h-8 flex items-center justify-between px-2.5 bg-surface-container-low hover:bg-[#f2f4f8] rounded border border-surface-container transition-colors group">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary shrink-0"></span>
+<span class="text-xs text-on-surface font-medium truncate">情指行一体化研判调度专班</span>
+<span class="text-[10px] text-secondary font-mono bg-surface-container px-1 rounded">DEPT-03</span>
+</div>
+<button class="text-secondary group-hover:text-error hover:bg-error-container p-0.5 rounded transition-colors ml-2" title="移除该项">
+<span class="material-symbols-outlined text-[14px] block">close</span>
+</button>
+</div>
+<!-- Selected Item 3 -->
+<div class="h-8 flex items-center justify-between px-2.5 bg-surface-container-low hover:bg-[#f2f4f8] rounded border border-surface-container transition-colors group">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary shrink-0"></span>
+<span class="text-xs text-on-surface font-medium truncate">交警直属特勤一中队</span>
+<span class="text-[10px] text-secondary font-mono bg-surface-container px-1 rounded">TRF-101</span>
+</div>
+<button class="text-secondary group-hover:text-error hover:bg-error-container p-0.5 rounded transition-colors ml-2" title="移除该项">
+<span class="material-symbols-outlined text-[14px] block">close</span>
+</button>
+</div>
+<!-- Selected Item 4 -->
+<div class="h-8 flex items-center justify-between px-2.5 bg-surface-container-low hover:bg-[#f2f4f8] rounded border border-surface-container transition-colors group">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary shrink-0"></span>
+<span class="text-xs text-on-surface font-medium truncate">值班指挥长席</span>
+<span class="text-[10px] text-secondary font-mono bg-surface-container px-1 rounded">CMD-P01</span>
+</div>
+<button class="text-secondary group-hover:text-error hover:bg-error-container p-0.5 rounded transition-colors ml-2" title="移除该项">
+<span class="material-symbols-outlined text-[14px] block">close</span>
+</button>
+</div>
+<!-- Selected Item 5 -->
+<div class="h-8 flex items-center justify-between px-2.5 bg-surface-container-low hover:bg-[#f2f4f8] rounded border border-surface-container transition-colors group">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary shrink-0"></span>
+<span class="text-xs text-on-surface font-medium truncate">站前路派出所综合作战室</span>
+<span class="text-[10px] text-secondary font-mono bg-surface-container px-1 rounded">SUB-22</span>
+</div>
+<button class="text-secondary group-hover:text-error hover:bg-error-container p-0.5 rounded transition-colors ml-2" title="移除该项">
+<span class="material-symbols-outlined text-[14px] block">close</span>
+</button>
+</div>
+<!-- Empty State Hint (hidden if items present) -->
+<div class="pt-6 text-center text-secondary text-xs hidden">
+                  暂无分配权限，请在左侧勾选
+                </div>
+</div>
+<!-- Right Bottom Footer Bar (32px) -->
+<div class="h-8 bg-surface-container-low px-3 flex items-center justify-between border-t border-outline-variant text-xs shrink-0">
+<div class="text-[11px] text-on-surface font-medium flex items-center gap-1">
+                  已选 <span class="text-primary font-bold">5</span> 项权限节点
+                </div>
+<label class="flex items-center gap-1.5 cursor-pointer text-[11px] text-secondary select-none">
+<input checked="" class="w-3.5 h-3.5 rounded text-primary focus:ring-0 border-outline-variant" type="checkbox"/>
+<span>保留下级继承授权</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Design Tokens Mapping Table -->
+<section class="flex flex-col gap-3" id="token-section">
+<h2 class="text-on-surface text-xl font-bold tracking-tight">
+          三、Design Token 映射表与规范标称
+        </h2>
+<div class="overflow-x-auto rounded-lg border border-outline-variant bg-surface-container-lowest shadow-sm">
+<table class="w-full text-left text-xs">
+<thead class="bg-surface-container-high text-on-surface-variant font-semibold border-b border-outline-variant">
+<tr>
+<th class="py-2.5 px-4">规范类别</th>
+<th class="py-2.5 px-4">设计 Token 变量</th>
+<th class="py-2.5 px-4">基准值</th>
+<th class="py-2.5 px-4">视觉展示</th>
+<th class="py-2.5 px-4">工程规范约定</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-highest text-on-surface">
+<tr class="hover:bg-surface-container-low">
+<td class="py-2 px-4 font-medium">树行基准行高</td>
+<td class="py-2 px-4 font-mono text-primary">--lx-tree-item-height</td>
+<td class="py-2 px-4 font-semibold">32px</td>
+<td class="py-2 px-4">
+<div class="h-6 w-16 bg-surface-container-high border border-outline-variant rounded flex items-center justify-center text-[10px]">32px 紧凑</div>
+</td>
+<td class="py-2 px-4 text-secondary">严格符合紧凑警务屏幕密度标准</td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="py-2 px-4 font-medium">层级缩进</td>
+<td class="py-2 px-4 font-mono text-primary">--lx-tree-indent</td>
+<td class="py-2 px-4 font-semibold">16px / 级</td>
+<td class="py-2 px-4">
+<div class="flex items-center gap-1">
+<span class="w-4 h-2 bg-primary-fixed border border-primary rounded-xs"></span>
+<span class="w-4 h-2 bg-primary border border-primary rounded-xs"></span>
+</div>
+</td>
+<td class="py-2 px-4 text-secondary">级差保持 16px 倍数（0, 16, 32, 48...）</td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="py-2 px-4 font-medium">滚动条宽度</td>
+<td class="py-2 px-4 font-mono text-primary">--lx-scrollbar-width</td>
+<td class="py-2 px-4 font-semibold">4px (极细)</td>
+<td class="py-2 px-4">
+<div class="w-1 h-5 bg-[#c0c4cc] rounded-full mx-2"></div>
+</td>
+<td class="py-2 px-4 text-secondary">悬停变色 #909399，不侵占可视视口宽度</td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="py-2 px-4 font-medium">节点选中态</td>
+<td class="py-2 px-4 font-mono text-primary">--lx-tree-node-selected-bg</td>
+<td class="py-2 px-4 font-mono">#ecf5ff</td>
+<td class="py-2 px-4">
+<div class="w-16 h-5 bg-[#ecf5ff] border border-primary-container text-[#0060a9] rounded flex items-center justify-center text-[10px]">选中态背景</div>
+</td>
+<td class="py-2 px-4 text-secondary">文字色联动翻转为 Primary #0060a9</td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="py-2 px-4 font-medium">表头与背景</td>
+<td class="py-2 px-4 font-mono text-primary">--lx-header-bg</td>
+<td class="py-2 px-4 font-mono">#f5f7fa</td>
+<td class="py-2 px-4">
+<div class="w-16 h-5 bg-[#f5f7fa] border border-outline-variant rounded flex items-center justify-center text-[10px]">36px 高表头</div>
+</td>
+<td class="py-2 px-4 text-secondary">穿梭框标题栏与双向控制槽标准底色</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- SECTION 4: Developer Contracts & TypeScript Interfaces -->
+<section class="flex flex-col gap-3" id="contract-section">
+<h2 class="text-on-surface text-xl font-bold tracking-tight">
+          四、研发契约与 Props 接口定义 (TypeScript &amp; Element Plus 桥接)
+        </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Code Block 1: LxVirtualTreeProps -->
+<div class="rounded-lg border border-outline-variant bg-[#1e2430] p-4 text-[#e6edf4] font-mono text-xs overflow-x-auto shadow-sm">
+<div class="flex items-center justify-between pb-2 mb-3 border-b border-[#37485d]">
+<span class="font-bold text-[#409eff]">interface LxVirtualTreeProps&lt;T&gt;</span>
+<span class="text-[10px] text-[#80dd52]">v2.4.0 Export</span>
+</div>
+<pre><code><span class="text-[#707784]">// LxVirtualTree 虚拟树研发契约定义</span>
+export interface LxVirtualTreeProps&lt;T = any&gt; {
+  <span class="text-[#409eff]">data</span>: T[];                       <span class="text-[#707784]">// 万级扁平或嵌套节点数组</span>
+  <span class="text-[#409eff]">height</span>?: number;                 <span class="text-[#707784]">// 容器默认 360 (px)</span>
+  <span class="text-[#409eff]">itemSize</span>?: number;               <span class="text-[#707784]">// 严格 32px 紧凑基准行高</span>
+  <span class="text-[#409eff]">indent</span>?: number;                 <span class="text-[#707784]">// 严格 16px/级</span>
+  <span class="text-[#409eff]">nodeKey</span>?: string;                <span class="text-[#707784]">// 唯一字段，默认 'id'</span>
+  <span class="text-[#409eff]">showCheckbox</span>?: boolean;          <span class="text-[#707784]">// 是否开启 Element 复选框</span>
+  <span class="text-[#409eff]">checkStrictly</span>?: boolean;         <span class="text-[#707784]">// 父子级联联动严格解耦</span>
+  <span class="text-[#409eff]">filterable</span>?: boolean;            <span class="text-[#707784]">// 是否开启快速虚拟搜索高亮</span>
+  <span class="text-[#409eff]">defaultExpandedKeys</span>?: string[];  <span class="text-[#707784]">// 默认展开节点</span>
+  <span class="text-[#409eff]">scrollbarWidth</span>?: number;         <span class="text-[#707784]">// 极细滚动条，默认 4</span>
+}</code></pre>
+</div>
+<!-- Code Block 2: LxTransferPanelProps -->
+<div class="rounded-lg border border-outline-variant bg-[#1e2430] p-4 text-[#e6edf4] font-mono text-xs overflow-x-auto shadow-sm">
+<div class="flex items-center justify-between pb-2 mb-3 border-b border-[#37485d]">
+<span class="font-bold text-[#409eff]">interface LxTransferPanelProps</span>
+<span class="text-[10px] text-[#80dd52]">v2.4.0 Export</span>
+</div>
+<pre><code><span class="text-[#707784]">// LxTransferPanel 权限双栏穿梭研发契约</span>
+export interface LxTransferPanelProps {
+  <span class="text-[#409eff]">treeData</span>: Array&lt;Record&lt;string, any&gt;&gt;;  <span class="text-[#707784]">// 待选树形数据源</span>
+  <span class="text-[#409eff]">modelValue</span>: (string | number)[];      <span class="text-[#707784]">// 已选权限节点 key 列表</span>
+  <span class="text-[#409eff]">titles</span>?: [string, string];            <span class="text-[#707784]">// 默认 ['待选资源', '已授权节点']</span>
+  <span class="text-[#409eff]">panelHeight</span>?: number;                 <span class="text-[#707784]">// 默认 380px，最大 400px</span>
+  <span class="text-[#409eff]">maxCount</span>?: number;                    <span class="text-[#707784]">// 授权节点上限控制</span>
+  <span class="text-[#409eff]">inheritChild</span>?: boolean;               <span class="text-[#707784]">// 穿梭时保留下级授权开关</span>
+  <span class="text-[#409eff]">onNodeChange</span>?: (selected: any[]) =&gt; void;
+  <span class="text-[#409eff]">onClearAll</span>?: () =&gt; void;              <span class="text-[#707784]">// 右侧一键清空事件</span>
+}</code></pre>
+</div>
+</div>
+</section>
+<!-- Bottom Compliance Signoff -->
+<footer class="pt-6 border-t border-outline-variant flex flex-wrap items-center justify-between gap-4 text-xs text-secondary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-tertiary">verified_user</span>
+<span>遵循 GB 公安警务信息化前端组件库架构工程约定 · 零掉帧虚拟流转检验合格</span>
+</div>
+<div>
+<span>标本构建版本: <code class="font-mono text-primary font-medium">lx-components@2.4.0-stable</code></span>
+</div>
+</footer>
+</div>
+</main>
+</body></html>

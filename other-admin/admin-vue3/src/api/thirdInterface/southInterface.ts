@@ -91,6 +91,11 @@ export interface CallableAppMapperUpdate {
   mapper: string;
 }
 
+export interface CallableAppTaskConfig {
+  enableTask: 0 | 1;
+  taskAutoFillConfig: string;
+}
+
 // ===== 可调用应用 CRUD =====
 
 /** 可调用应用分页（GET /third/v1/app/callable） */
@@ -121,4 +126,17 @@ export function deleteCallableApp(id: string): Promise<ApiResponse> {
 /** 更新字段映射（PUT /third/v1/app/callable/{id}/mapper） */
 export function updateCallableAppMapper(id: string, data: CallableAppMapperUpdate): Promise<ApiResponse> {
   return http.put<string>(`/third/v1/app/callable/${id}/mapper`, data);
+}
+
+/** 获取任务标准件配置（GET /third/v1/app/callable/{id}/task-config） */
+export function getCallableAppTaskConfig(id: string): HttpResult<CallableAppTaskConfig> {
+  return http.get<CallableAppTaskConfig>(`/third/v1/app/callable/${encodeURIComponent(id)}/task-config`);
+}
+
+/** 保存任务标准件配置（POST /third/v1/app/callable/{id}/task-config） */
+export function setCallableAppTaskConfig(
+  id: string,
+  data: CallableAppTaskConfig,
+): Promise<ApiResponse> {
+  return http.post<string>(`/third/v1/app/callable/${encodeURIComponent(id)}/task-config`, data);
 }

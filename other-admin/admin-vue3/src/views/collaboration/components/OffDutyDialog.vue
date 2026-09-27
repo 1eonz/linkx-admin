@@ -57,29 +57,31 @@ watch(
 );
 
 /** 查询在岗人员 */
-async function fetchOnDutyUsers(notTips = false): Promise<void> {
-  if (!props.postInfo) return;
+function fetchOnDutyUsers(notTips = false): Promise<void> {
+  if (!props.postInfo) return Promise.resolve();
   loading.value = true;
-  try {
-    const res = await getOnDutyUsersByPostId(props.postInfo.id);
-    if (res.code === 0) {
-      const data = (res as unknown as { data?: OnDutyUser[] })?.data ?? [];
-      onDutyUsers.value = data;
-      // 没人在岗了，关闭弹窗并通知父组件
-      if (onDutyUsers.value.length === 0 && props.visible) {
-        innerVisible.value = false;
-        if (!notTips) {
-          ElMessage.info(t('index.collaboration.noOnDutyUserNow'));
+  return getOnDutyUsersByPostId(props.postInfo.id)
+    .then((res) => {
+      if (res.code === 0) {
+        const data = (res as unknown as { data?: OnDutyUser[] })?.data ?? [];
+        onDutyUsers.value = data;
+        // 没人在岗了，关闭弹窗并通知父组件
+        if (onDutyUsers.value.length === 0 && props.visible) {
+          innerVisible.value = false;
+          if (!notTips) {
+            ElMessage.info(t('index.collaboration.noOnDutyUserNow'));
+          }
         }
+      } else {
+        ElMessage.error(res.msg || t('index.collaboration.queryOnDutyFailed'));
       }
-    } else {
-      ElMessage.error(res.msg || t('index.collaboration.queryOnDutyFailed'));
-    }
-  } catch {
-    ElMessage.error(t('index.collaboration.queryOnDutyFailed'));
-  } finally {
-    loading.value = false;
-  }
+    })
+    .catch(() => {
+      ElMessage.error(t('index.collaboration.queryOnDutyFailed'));
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 }
 
 // 刷新
@@ -88,52 +90,57 @@ function handleRefresh(): void {
 }
 
 /** 单个下岗：getLastNum 判断是否最后一人 → 二次确认 → doOffDuty */
-async function handleConfirmOffDuty(user: OnDutyUser): Promise<void> {
+function handleConfirmOffDuty(user: OnDutyUser): Promise<void> {
   btnLoadingMap[user.userId] = true;
-  let isLast = false;
-  try {
-    const res = await getLastNum(user.id);
-    // lastPeopleNum === 1 → 最后一个人员，使用特殊提示
-    isLast = res.code === 0 && (res as unknown as { data?: { lastPeopleNum?: number } })?.data?.lastPeopleNum === 1;
-  } catch {
-    // 接口失败：用默认提示
-  } finally {
-    btnLoadingMap[user.userId] = false;
-  }
-
-  const messageKey = isLast ? 'index.collaboration.confirmLastOffDuty' : 'index.collaboration.confirmOffDuty';
-  ElMessageBox.confirm(t(messageKey, { name: user.name }), t('index.statusTitle.tips'), {
-    confirmButtonText: t('determine'),
-    cancelButtonText: t('cancel'),
-    type: 'warning',
-  })
-    .then(() => doOffDuty(user))
-    .catch(() => {});
+  return getLastNum(user.id)
+    .then((res) => {
+      // lastPeopleNum === 1 → 最后一个人员，使用特殊提示
+      const isLast =
+        res.code === 0 && (res as unknown as { data?: { lastPeopleNum?: number } })?.data?.lastPeopleNum === 1;
+      return { isLast };
+    })
+    .catch(() => ({ isLast: false }))
+    .finally(() => {
+      btnLoadingMap[user.userId] = false;
+    })
+    .then(({ isLast }) => {
+      const messageKey = isLast ? 'index.collaboration.confirmLastOffDuty' : 'index.collaboration.confirmOffDuty';
+      return ElMessageBox.confirm(t(messageKey, { name: user.name }), t('index.statusTitle.tips'), {
+        confirmButtonText: t('determine'),
+        cancelButtonText: t('cancel'),
+        type: 'warning',
+      })
+        .then(() => doOffDuty(user))
+        .catch(() => undefined);
+    });
 }
 
 /** 实际下岗请求 */
-async function doOffDuty(user: OnDutyUser): Promise<void> {
-  if (!props.postInfo) return;
+function doOffDuty(user: OnDutyUser): Promise<void> {
+  if (!props.postInfo) return Promise.resolve();
   btnLoadingMap[user.userId] = true;
-  try {
-    const res = await offDutyUser({
-      userId: user.id,
-      userName: user.name,
-      postId: props.postInfo.id,
-      postName: props.postInfo.postName,
+  return offDutyUser({
+    userId: user.id,
+    userName: user.name,
+    postId: props.postInfo.id,
+    postName: props.postInfo.postName,
+  })
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(t('index.collaboration.offDutySuccess'));
+        return fetchOnDutyUsers(true).then(() => {
+          emit('success');
+        });
+      } else {
+        ElMessage.error(res.msg || t('index.collaboration.offDutyFailed'));
+      }
+    })
+    .catch(() => {
+      ElMessage.error(t('index.collaboration.offDutyFailed'));
+    })
+    .finally(() => {
+      btnLoadingMap[user.userId] = false;
     });
-    if (res.code === 0) {
-      ElMessage.success(t('index.collaboration.offDutySuccess'));
-      await fetchOnDutyUsers(true);
-      emit('success');
-    } else {
-      ElMessage.error(res.msg || t('index.collaboration.offDutyFailed'));
-    }
-  } catch {
-    ElMessage.error(t('index.collaboration.offDutyFailed'));
-  } finally {
-    btnLoadingMap[user.userId] = false;
-  }
 }
 
 /** 关闭弹窗 */

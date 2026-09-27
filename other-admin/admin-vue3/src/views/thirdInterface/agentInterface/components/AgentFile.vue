@@ -85,20 +85,23 @@ function getRow(scope: any): AgentFileItem {
 }
 
 // ===== 加载列表 =====
-async function fetchData(): Promise<void> {
+function fetchData(): Promise<void> {
   listLoading.value = true;
-  try {
-    const res = await getAgentFileList();
-    if (res?.code === 0) {
-      list.value = (res?.data as AgentFileItem[]) ?? [];
-    } else {
-      ElMessage.error(res?.msg ?? '加载失败');
-    }
-  } catch (e) {
-    console.error(e);
-  } finally {
-    listLoading.value = false;
-  }
+  return getAgentFileList()
+    .then((res) => {
+      if (res?.code === 0) {
+        list.value = (res?.data as AgentFileItem[]) ?? [];
+      } else {
+        ElMessage.error(res?.msg ?? '加载失败');
+      }
+    })
+    .catch((e: unknown) => {
+      console.error(e);
+      ElMessage.error('加载失败');
+    })
+    .finally(() => {
+      listLoading.value = false;
+    });
 }
 
 function handleSearch(): void {
@@ -127,19 +130,24 @@ async function submitForm(): Promise<void> {
   const valid = await formRef.value?.validate().catch(() => false);
   if (!valid) return;
   dialogLoading.value = true;
-  try {
-    const isCreate = dialogType.value === 'add';
-    const result = isCreate ? await createAgentFile(form) : await updateAgentFile(form);
-    if (!result || result.code !== 0) {
-      ElMessage.error(result?.msg ?? `${isCreate ? '新增' : '编辑'}失败`);
-      return;
-    }
-    ElMessage.success(`${isCreate ? '添加' : '编辑'}成功`);
-    dialogVisible.value = false;
-    fetchData();
-  } finally {
-    dialogLoading.value = false;
-  }
+  const isCreate = dialogType.value === 'add';
+  const request = isCreate ? createAgentFile(form) : updateAgentFile(form);
+  return request
+    .then((result) => {
+      if (!result || result.code !== 0) {
+        ElMessage.error(result?.msg ?? `${isCreate ? '新增' : '编辑'}失败`);
+        return;
+      }
+      ElMessage.success(`${isCreate ? '添加' : '编辑'}成功`);
+      dialogVisible.value = false;
+      fetchData();
+    })
+    .catch(() => {
+      ElMessage.error(`${isCreate ? '新增' : '编辑'}失败`);
+    })
+    .finally(() => {
+      dialogLoading.value = false;
+    });
 }
 
 // ===== 删除 =====
@@ -150,18 +158,19 @@ function handleDelete(row: AgentFileItem): void {
     type: 'warning',
     confirmButtonClass: 'el-button--danger',
   })
-    .then(async () => {
-      try {
-        const res = await deleteAgentFile(row.id);
-        if (!res || res.code !== 0) {
-          ElMessage.error(res?.msg ?? '删除失败');
-          return;
-        }
-        ElMessage.success('删除成功');
-        fetchData();
-      } catch (e) {
-        ElMessage.error((e as Error)?.message ?? '删除失败');
-      }
+    .then(() => {
+      return deleteAgentFile(row.id)
+        .then((res) => {
+          if (!res || res.code !== 0) {
+            ElMessage.error(res?.msg ?? '删除失败');
+            return;
+          }
+          ElMessage.success('删除成功');
+          fetchData();
+        })
+        .catch((e: unknown) => {
+          ElMessage.error((e as Error)?.message ?? '删除失败');
+        });
     })
     .catch(() => {});
 }

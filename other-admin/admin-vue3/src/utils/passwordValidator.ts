@@ -5,7 +5,7 @@ import type { FormItemRule } from 'element-plus';
 
 // 特殊字符正则：`~!@#$%^&*()-_=+\|[{}];:'",<.>/? 和空格
 // 注意：] 放在字符类开始位置，\ 和 - 需要转义
-const SPECIAL_CHAR_PATTERN = /[\]`~!@#$%^&*()\-_=+\\|[{};:'",<.>\/\? ]/;
+const SPECIAL_CHAR_PATTERN = /[\]`~!@#$%^&*()\-_=+\\|[{};:'",<.>/? ]/;
 
 /** 是否包含中文 */
 export function hasChinese(str: string): boolean {

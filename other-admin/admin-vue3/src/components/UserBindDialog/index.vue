@@ -14,7 +14,7 @@
  * <UserBindDialog v-model:visible="dialogVisible" :bind-user="bindUserInfo" @bind-refresh="handleBindSuccess" @unbind="handleUnbindSuccess" />
  * ```
  */
-import { Delete, Link, Search } from '@element-plus/icons-vue';
+import { Delete, Link } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { computed, reactive, ref, watch } from 'vue';
 
@@ -109,25 +109,27 @@ function handleBindConfirm(row: AvailableUserItem): void {
     cancelButtonText: '取消',
     type: 'warning',
   })
-    .then(async () => {
+    .then(() => {
       bindLoading.value = true;
-      try {
-        const res = await bindUserApi({ imUserId: row.id });
-        if (!res || res.code !== 0) {
-          ElMessage.error(res?.msg ?? '绑定失败');
-          return;
-        }
-        ElMessage.success('绑定成功');
-        emit('bindRefresh');
-        // 刷新列表（标记当前行为已绑定）
-        tableRef.value?.refresh();
-      } catch (e) {
-        ElMessage.error('绑定失败');
-      } finally {
-        bindLoading.value = false;
-      }
+      return bindUserApi({ imUserId: row.id })
+        .then((res) => {
+          if (!res || res.code !== 0) {
+            ElMessage.error(res?.msg ?? '绑定失败');
+            return;
+          }
+          ElMessage.success('绑定成功');
+          emit('bindRefresh');
+          // 刷新列表（标记当前行为已绑定）
+          tableRef.value?.refresh();
+        })
+        .catch(() => {
+          ElMessage.error('绑定失败');
+        })
+        .finally(() => {
+          bindLoading.value = false;
+        });
     })
-    .catch(() => {});
+    .catch(() => undefined);
 }
 
 // ===== 解绑确认 =====
@@ -139,25 +141,27 @@ function handleUnbindConfirm(): void {
     cancelButtonText: '取消',
     type: 'warning',
   })
-    .then(async () => {
+    .then(() => {
       unbindLoading.value = true;
-      try {
-        const res = await unbindUserApi();
-        if (!res || res.code !== 0) {
-          ElMessage.error(res?.msg ?? '解绑失败');
-          return;
-        }
-        ElMessage.success('解绑成功');
-        emit('unbind');
-        // 刷新列表
-        tableRef.value?.refresh();
-      } catch (e) {
-        ElMessage.error('解绑失败');
-      } finally {
-        unbindLoading.value = false;
-      }
+      return unbindUserApi()
+        .then((res) => {
+          if (!res || res.code !== 0) {
+            ElMessage.error(res?.msg ?? '解绑失败');
+            return;
+          }
+          ElMessage.success('解绑成功');
+          emit('unbind');
+          // 刷新列表
+          tableRef.value?.refresh();
+        })
+        .catch(() => {
+          ElMessage.error('解绑失败');
+        })
+        .finally(() => {
+          unbindLoading.value = false;
+        });
     })
-    .catch(() => {});
+    .catch(() => undefined);
 }
 
 // ===== 弹窗打开时初始化 =====

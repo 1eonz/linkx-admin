@@ -72,6 +72,7 @@ const canCreate = computed(() => hasBtnPermission('/admin/executor/create'));
 const canDelete = computed(() => hasBtnPermission('/admin/executor/delete'));
 const canSetRole = computed(() => hasBtnPermission('/admin/trUserRole/createMany'));
 const canUpdatePwd = computed(() => hasBtnPermission('/admin/user/updatePwd'));
+const canUpdate = computed(() => hasBtnPermission('/admin/user/update'));
 
 // 搜索区按钮：新增用户/批量编辑/批量删除
 const actions = computed(() => [
@@ -118,16 +119,17 @@ function handleResponse(res: unknown): void {
 }
 
 // 非 admin 用户：用身份证号查所属部门，限定组织
-async function getUserOrgNameByIdCardNum(): Promise<void> {
-  if (isAdmin) return;
-  try {
-    const userRes = await queryUserByIdCard({ idCard: idCardNum });
-    if (userRes?.data?.userDepartments?.length) {
-      departmentCode.value = userRes.data.userDepartments[0].departmentCode;
-    }
-  } catch (error) {
-    console.log(error);
-  }
+function getUserOrgNameByIdCardNum(): Promise<void> {
+  if (isAdmin) return Promise.resolve();
+  return queryUserByIdCard({ idCard: idCardNum })
+    .then((userRes) => {
+      if (userRes?.data?.userDepartments?.length) {
+        departmentCode.value = userRes.data.userDepartments[0].departmentCode;
+      }
+    })
+    .catch(() => {
+      // 查询失败时保留当前列表，避免组织范围读取异常阻断页面使用。
+    });
 }
 
 // 搜索（触发 ProTable.init：重置到第 1 页 + 用最新 searchParams）
@@ -280,11 +282,10 @@ function getUser(scope: any): UserItem {
 
 // onMounted：非 admin 用户先预加载部门，再 init
 // immediate=false 避免在部门预加载完成前就发起请求
-onMounted(async () => {
-  if (!isAdmin) {
-    await getUserOrgNameByIdCardNum();
-  }
-  tableRef.value?.init();
+onMounted(() => {
+  getUserOrgNameByIdCardNum().then(() => {
+    tableRef.value?.init();
+  });
 });
 </script>
 
@@ -337,7 +338,7 @@ onMounted(async () => {
         <template #status="scope">
           <StatusSwitch
             :value="getUser(scope).status ?? 0"
-            :disabled="!isGeneralAdmin()"
+            :disabled="!isGeneralAdmin() || !canUpdate"
             @change="(v) => handleStatusChange(getUser(scope), v)"
           />
         </template>

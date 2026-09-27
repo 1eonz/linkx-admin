@@ -133,22 +133,23 @@ function handleChange(file: UploadFile): void {
  *
  * @returns 上传成功返回 true；未选择文件或上传失败时返回 false
  */
-async function uploadFile(): Promise<boolean> {
-  if (!currentFile.value) return true;
-  try {
-    const res = await uploadAppIcon(currentFile.value);
-    if (res.code !== 0) {
+function uploadFile(): Promise<boolean> {
+  if (!currentFile.value) return Promise.resolve(true);
+  return uploadAppIcon(currentFile.value)
+    .then((res) => {
+      if (res.code !== 0) {
+        ElMessage.error('图标上传失败');
+        return false;
+      }
+      const data = res.data;
+      const url = Array.isArray(data) && data.length > 0 ? data[0] : (data as string);
+      formData.icon = url;
+      return true;
+    })
+    .catch(() => {
       ElMessage.error('图标上传失败');
       return false;
-    }
-    const data = res.data;
-    const url = Array.isArray(data) && data.length > 0 ? data[0] : (data as string);
-    formData.icon = url;
-    return true;
-  } catch {
-    ElMessage.error('图标上传失败');
-    return false;
-  }
+    });
 }
 
 // ===== 前置应用列表 =====
@@ -159,13 +160,14 @@ const prerequisiteList = ref<AppPrerequisiteOption[]>([]);
  *
  * @returns Promise<void>
  */
-async function loadPrerequisiteList(): Promise<void> {
-  try {
-    const res = await getPrerequisiteList();
-    prerequisiteList.value = (res.data ?? []) as AppPrerequisiteOption[];
-  } catch {
-    // 忽略
-  }
+function loadPrerequisiteList(): Promise<void> {
+  return getPrerequisiteList()
+    .then((res) => {
+      prerequisiteList.value = (res.data ?? []) as AppPrerequisiteOption[];
+    })
+    .catch(() => {
+      // 加载失败时保留现有选项，避免覆盖已有页面状态。
+    });
 }
 
 // ===== 类型联动字段 =====
@@ -226,26 +228,30 @@ function resetForm(): void {
  * @param id 编辑模式下传入的应用 id；新增模式下省略
  * @returns Promise<void>
  */
-async function open(type: 'create' | 'update', id?: string): Promise<void> {
+function open(type: 'create' | 'update', id?: string): Promise<void> {
   resetForm();
   dialogVisible.value = true;
   dialogTitle.value = type === 'create' ? '新增应用' : '编辑应用';
   formType.value = type;
-  await loadPrerequisiteList();
-  if (id) {
+  return loadPrerequisiteList().then(() => {
+    if (!id) return;
     formLoading.value = true;
-    try {
-      const res = await getInfo(id);
-      const data = res.data as AppItem | undefined;
-      if (data) {
-        Object.assign(formData, data);
-        showAuthImg.value = true;
-        imageUrl.value = (data.icon as string) ?? '';
-      }
-    } finally {
-      formLoading.value = false;
-    }
-  }
+    return getInfo(id)
+      .then((res) => {
+        const data = res.data as AppItem | undefined;
+        if (data) {
+          Object.assign(formData, data);
+          showAuthImg.value = true;
+          imageUrl.value = (data.icon as string) ?? '';
+        }
+      })
+      .catch(() => {
+        ElMessage.error('获取应用详情失败');
+      })
+      .finally(() => {
+        formLoading.value = false;
+      });
+  });
 }
 
 defineExpose({ open });
@@ -262,26 +268,34 @@ async function handleSubmit(): Promise<void> {
     ElMessage.warning('必填字段未填写');
     return;
   }
-  // 若图标被修改，先上传图标
-  if (changeImg.value) {
-    const ok = await uploadFile();
-    if (!ok) return;
-  }
-  submitLoading.value = true;
-  try {
+  const saveApp = (): Promise<void> => {
+    submitLoading.value = true;
     const isCreate = formType.value === 'create';
     const payload = { ...formData };
-    const res = isCreate ? await createInfo(payload) : await updateInfo(payload);
-    if (res.code === 0) {
-      ElMessage.success(isCreate ? '新增成功' : '修改成功');
-      dialogVisible.value = false;
-      emit('success');
-    } else {
-      ElMessage.error(res.msg ?? (isCreate ? '新增失败' : '修改失败'));
-    }
-  } finally {
-    submitLoading.value = false;
-  }
+    const request = isCreate ? createInfo(payload) : updateInfo(payload);
+    return request
+      .then((res) => {
+        if (res.code === 0) {
+          ElMessage.success(isCreate ? '新增成功' : '修改成功');
+          dialogVisible.value = false;
+          emit('success');
+        } else {
+          ElMessage.error(res.msg ?? (isCreate ? '新增失败' : '修改失败'));
+        }
+      })
+      .catch(() => {
+        ElMessage.error(isCreate ? '新增失败' : '修改失败');
+      })
+      .finally(() => {
+        submitLoading.value = false;
+      });
+  };
+
+  // 若图标被修改，先上传图标
+  if (!changeImg.value) return saveApp();
+  return uploadFile().then((ok) => {
+    if (ok) return saveApp();
+  });
 }
 
 /** 弹窗打开后清除校验状态 */

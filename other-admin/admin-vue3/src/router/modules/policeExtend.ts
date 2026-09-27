@@ -20,6 +20,12 @@ const policeExtendRouter: AppRouteRecord = {
       name: 'virtualUser',
       meta: { title: '虚拟用户管理' },
     },
+    {
+      path: 'ArchivedTable',
+      component: () => import('@/views/h5/archivedTable/index.vue'),
+      name: 'ArchivedTable',
+      meta: { title: '已归档群组管理' },
+    },
   ],
 };
 

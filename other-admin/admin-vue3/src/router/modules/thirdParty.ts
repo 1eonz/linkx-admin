@@ -42,7 +42,13 @@ const thirdPartyRouter: AppRouteRecord = {
       path: 'agentInterface',
       component: () => import('@/views/thirdInterface/agentInterface/index.vue'),
       name: 'AgentInterface',
-      meta: { title: 'AI智能体对接' },
+      meta: { title: 'AI智能体对接（南向）' },
+    },
+    {
+      path: 'thirdParty',
+      component: () => import('@/views/eventType/thirdParty/index.vue'),
+      name: 'NorthboundInterface',
+      meta: { title: '北向接入管理' },
     },
   ],
 };

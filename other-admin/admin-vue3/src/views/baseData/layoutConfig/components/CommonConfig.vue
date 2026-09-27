@@ -1,4 +1,5 @@
-﻿﻿<script setup lang="ts">
+﻿﻿
+<script setup lang="ts">
 /**
  * CommonConfig - 公共设置
  *
@@ -91,6 +92,7 @@ const groupTypeLabels: Record<string, string> = {
 };
 
 const loading = ref(false);
+const loadError = ref(false);
 const formRef = ref<FormInstance>();
 
 /** 表单 schema（含 label/tip/placeholder） */
@@ -129,50 +131,59 @@ const saving = ref(false);
  *
  * @returns Promise<void> 无返回值
  */
-async function loadConfig(): Promise<void> {
+function loadConfig(): Promise<void> {
+  if (loading.value) return Promise.resolve();
   loading.value = true;
-  try {
-    const res = await getSystemConfig();
-    const list = (res?.data ?? []) as SystemConfigItem[];
-    const filtered = list.filter((item) => Boolean(item.key));
+  loadError.value = false;
+  return getSystemConfig()
+    .then((res) => {
+      if (res.code !== 0 || !Array.isArray(res.data)) {
+        throw new Error(res.msg || '系统配置响应无效');
+      }
+      const list = res.data as SystemConfigItem[];
+      const filtered = list.filter((item) => Boolean(item.key));
 
-    // 普通配置项
-    formSchema.value = filtered
-      .filter((item) => item.key !== 'CREAT_GROUP_CONFIG')
-      .map((item) => {
-        let parsedValue: ParsedConfigValue = {};
-        try {
-          parsedValue = JSON.parse(item.value) as ParsedConfigValue;
-        } catch {
-          parsedValue = {};
-        }
-        // 同步到表单
-        form[item.key] = (parsedValue.value as string) ?? '';
-        return {
-          id: item.id,
-          key: item.key,
-          rawValue: item.value,
-          parsedValue,
-          tip: tipsMap[item.key] ?? '',
-          placeholder: placeholderMap[item.key] ?? '',
-        };
-      })
-      .filter((item) => showLabelKeys.includes(item.key));
+      // 普通配置项
+      formSchema.value = filtered
+        .filter((item) => item.key !== 'CREAT_GROUP_CONFIG')
+        .map((item) => {
+          let parsedValue: ParsedConfigValue = {};
+          try {
+            parsedValue = JSON.parse(item.value) as ParsedConfigValue;
+          } catch {
+            parsedValue = {};
+          }
+          // 同步到表单
+          form[item.key] = (parsedValue.value as string) ?? '';
+          return {
+            id: item.id,
+            key: item.key,
+            rawValue: item.value,
+            parsedValue,
+            tip: tipsMap[item.key] ?? '',
+            placeholder: placeholderMap[item.key] ?? '',
+          };
+        })
+        .filter((item) => showLabelKeys.includes(item.key));
 
-    // 协同群组按钮配置
-    const groupItem = filtered.find((c) => c.key === 'CREAT_GROUP_CONFIG');
-    if (groupItem) {
-      groupConfigId.value = groupItem.id;
-      groupButtons.value = parseGroupButtons(groupItem.value);
-    } else {
-      groupConfigId.value = '';
-      groupButtons.value = defaultGroupButtons.map((b) => ({ ...b }));
-    }
-  } catch {
-    ElMessage.error('加载系统配置失败');
-  } finally {
-    loading.value = false;
-  }
+      // 协同群组按钮配置
+      const groupItem = filtered.find((c) => c.key === 'CREAT_GROUP_CONFIG');
+      if (groupItem) {
+        groupConfigId.value = groupItem.id;
+        groupButtons.value = parseGroupButtons(groupItem.value);
+      } else {
+        groupConfigId.value = '';
+        groupButtons.value = defaultGroupButtons.map((b) => ({ ...b }));
+      }
+      loadError.value = false;
+    })
+    .catch(() => {
+      loadError.value = true;
+      ElMessage.error('加载系统配置失败');
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 }
 
 /**
@@ -237,32 +248,34 @@ function getDefaultName(type: number | string): string {
  * @returns Promise<void> 无返回值
  */
 async function handleUpdateSingle(item: FormSchemaItem): Promise<void> {
-  if (!formRef.value) return;
+  if (!formRef.value || loading.value || loadError.value || updating[item.key]) return;
   try {
     await formRef.value.validateField(item.key);
   } catch {
     return;
   }
   updating[item.key] = true;
-  try {
-    // 关键：保留后端 parsedValue 的其他字段，只更新 value
-    const updatedValue: ParsedConfigValue = { ...item.parsedValue, value: form[item.key] };
-    const res = await setSystemConfig({
-      id: item.id,
-      value: JSON.stringify(updatedValue),
+  // 关键：保留后端 parsedValue 的其他字段，只更新 value
+  const updatedValue: ParsedConfigValue = { ...item.parsedValue, value: form[item.key] };
+  return setSystemConfig({
+    id: item.id,
+    value: JSON.stringify(updatedValue),
+  })
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(res.msg || '更新成功');
+        // 同步本地 parsedValue
+        item.parsedValue = updatedValue;
+      } else {
+        ElMessage.error(res.msg || '更新失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('更新失败');
+    })
+    .finally(() => {
+      updating[item.key] = false;
     });
-    if (res.code === 0) {
-      ElMessage.success(res.msg || '更新成功');
-      // 同步本地 parsedValue
-      item.parsedValue = updatedValue;
-    } else {
-      ElMessage.error(res.msg || '更新失败');
-    }
-  } catch {
-    ElMessage.error('更新失败');
-  } finally {
-    updating[item.key] = false;
-  }
 }
 
 /**
@@ -276,33 +289,36 @@ async function handleUpdateSingle(item: FormSchemaItem): Promise<void> {
  *
  * @returns Promise<void> 无返回值
  */
-async function handleSaveGroupConfig(): Promise<void> {
+function handleSaveGroupConfig(): Promise<void> {
+  if (loading.value || loadError.value || saving.value) return Promise.resolve();
   saving.value = true;
-  try {
-    const value = JSON.stringify(groupButtons.value);
-    const payload: Partial<SystemConfigItem> & { key?: string } = {
-      id: groupConfigId.value,
-      value,
-    };
-    // 如果是新增配置，需要传 key
-    if (!groupConfigId.value) {
-      payload.key = 'CREAT_GROUP_CONFIG';
-    }
-    const res = await setSystemConfig(payload as Partial<SystemConfigItem>);
-    if (res.code === 0) {
-      ElMessage.success(res.msg || '保存成功');
-      // 如果是新增配置，回填 id
-      if (!groupConfigId.value && (res.data as { id?: string })?.id) {
-        groupConfigId.value = (res.data as { id: string }).id;
-      }
-    } else {
-      ElMessage.error(res.msg || '保存失败');
-    }
-  } catch {
-    ElMessage.error('保存配置失败');
-  } finally {
-    saving.value = false;
+  const value = JSON.stringify(groupButtons.value);
+  const payload: Partial<SystemConfigItem> & { key?: string } = {
+    id: groupConfigId.value,
+    value,
+  };
+  // 如果是新增配置，需要传 key
+  if (!groupConfigId.value) {
+    payload.key = 'CREAT_GROUP_CONFIG';
   }
+  return setSystemConfig(payload)
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(res.msg || '保存成功');
+        // 如果是新增配置，回填 id
+        if (!groupConfigId.value && (res.data as { id?: string })?.id) {
+          groupConfigId.value = (res.data as { id: string }).id;
+        }
+      } else {
+        ElMessage.error(res.msg || '保存失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('保存配置失败');
+    })
+    .finally(() => {
+      saving.value = false;
+    });
 }
 
 onMounted(loadConfig);
@@ -312,6 +328,10 @@ onMounted(loadConfig);
   <div v-loading="loading" class="common-config">
     <!-- 基础配置 -->
     <SectionTitle title="基础配置" variant="border" />
+    <div v-if="loadError" class="load-error" role="alert">
+      <span>系统配置加载失败，未提交默认配置。</span>
+      <el-button type="primary" link :disabled="loading" @click="loadConfig">重试</el-button>
+    </div>
     <el-form
       v-if="formSchema.length > 0"
       ref="formRef"
@@ -336,6 +356,7 @@ onMounted(loadConfig);
               filterable
               allow-create
               clearable
+              :disabled="loading || loadError"
               default-first-option
               :placeholder="item.placeholder || `请输入${item.parsedValue.name || item.key}`"
             >
@@ -346,12 +367,13 @@ onMounted(loadConfig);
               v-model.trim="form[item.key]"
               :placeholder="item.placeholder || `请输入${item.parsedValue.name || item.key}`"
               clearable
+              :disabled="loading || loadError"
             />
           </el-tooltip>
           <el-button
             type="primary"
             :loading="updating[item.key]"
-            :disabled="updating[item.key]"
+            :disabled="updating[item.key] || loading || loadError"
             class="form-row__btn"
             @click="handleUpdateSingle(item)"
           >
@@ -361,7 +383,7 @@ onMounted(loadConfig);
       </el-form-item>
     </el-form>
 
-    <div v-if="formSchema.length === 0 && !loading" class="empty">
+    <div v-if="formSchema.length === 0 && !loading && !loadError" class="empty">
       <div>暂无配置项数据</div>
     </div>
 
@@ -383,8 +405,15 @@ onMounted(loadConfig);
               clearable
               maxlength="20"
               class="form-row__input"
+              :disabled="loading || loadError"
             />
-            <el-checkbox v-model="config.enable" true-label="true" false-label="false" class="form-row__checkbox">
+            <el-checkbox
+              v-model="config.enable"
+              true-label="true"
+              false-label="false"
+              class="form-row__checkbox"
+              :disabled="loading || loadError"
+            >
               显示
             </el-checkbox>
           </div>
@@ -396,7 +425,7 @@ onMounted(loadConfig);
         <el-button
           type="primary"
           :loading="saving"
-          :disabled="saving"
+          :disabled="saving || loading || loadError"
           style="width: 120px"
           @click="handleSaveGroupConfig"
         >

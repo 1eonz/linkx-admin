@@ -3,14 +3,22 @@
 // 设计变量
 @import './variables.less';
 
+// 将旧布局的导航语义令牌提供给 lx-ui，避免桥接样式重复维护颜色值。
+:root {
+  --navbar-background: @navbar-bg;
+  --navbar-foreground: @navbar-text;
+  --navbar-foreground-active: @navbar-text-active;
+  --navbar-hover-background: @navbar-hover-bg;
+  --navbar-border-color: @navbar-border-color;
+}
+
 // Mixin
 @import './mixin.less';
 
 // reset
 @import './reset.less';
 
-// Element Plus 主题覆盖
-@import './element-plus.less';
+// Element Plus 主题由 main.ts 中的 lx-ui/style.css 统一提供。
 
 // 侧边栏
 @import './sidebar.less';

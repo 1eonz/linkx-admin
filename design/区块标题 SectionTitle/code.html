@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LxSectionTitle 区块标题组件规范标本 - LxUI 公共安全规范组件库</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-container": "#55667c",
+            "inverse-on-surface": "#eef1f7",
+            "surface-container-high": "#e6e8ef",
+            "on-secondary-fixed": "#0a1c30",
+            "error": "#ba1a1a",
+            "tertiary-fixed-dim": "#80dd52",
+            "tertiary-fixed": "#9bfa6b",
+            "secondary-fixed-dim": "#b6c8e2",
+            "secondary-fixed": "#d2e4ff",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#707784",
+            "surface-container-low": "#f1f3fa",
+            "on-background": "#181c20",
+            "primary-fixed-dim": "#a2c9ff",
+            "secondary": "#4f6076",
+            "on-tertiary-container": "#133b00",
+            "surface-bright": "#f8f9ff",
+            "on-primary-container": "#003460",
+            "on-primary-fixed-variant": "#004881",
+            "on-secondary-fixed-variant": "#37485d",
+            "primary-fixed": "#d3e4ff",
+            "inverse-surface": "#2d3136",
+            "surface-container-highest": "#e0e2e9",
+            "surface-dim": "#d7dae0",
+            "tertiary": "#286c00",
+            "tertiary-container": "#55af28",
+            "surface-container": "#ebeef4",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "background": "#f8f9ff",
+            "on-surface": "#181c20",
+            "secondary-container": "#d2e4ff",
+            "primary": "#0060a9",
+            "primary-container": "#409eff",
+            "surface-tint": "#0060a9",
+            "on-error": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#001c38",
+            "inverse-primary": "#a2c9ff",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed-variant": "#1d5200",
+            "on-primary": "#ffffff",
+            "on-surface-variant": "#404752",
+            "outline-variant": "#c0c7d4",
+            "surface": "#f8f9ff",
+            "surface-variant": "#e0e2e9",
+            "on-tertiary-fixed": "#072100"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-sm": "8px",
+            "space-xl": "24px",
+            "margin": "20px",
+            "space-md": "12px",
+            "space-lg": "16px",
+            "space-xs": "4px",
+            "gutter": "16px"
+          },
+          "fontFamily": {
+            "headline-md": ["Inter", "Noto Sans SC", "sans-serif"],
+            "body-md": ["Inter", "Noto Sans SC", "sans-serif"],
+            "headline-sm": ["Inter", "Noto Sans SC", "sans-serif"],
+            "label-sm": ["Inter", "Noto Sans SC", "sans-serif"],
+            "headline-lg": ["Inter", "Noto Sans SC", "sans-serif"],
+            "body-lg": ["Inter", "Noto Sans SC", "sans-serif"],
+            "display-lg": ["Inter", "Noto Sans SC", "sans-serif"],
+            "label-md": ["Inter", "Noto Sans SC", "sans-serif"],
+            "label-lg": ["Inter", "Noto Sans SC", "sans-serif"],
+            "body-sm": ["Inter", "Noto Sans SC", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          },
+          "fontSize": {
+            "headline-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-md": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-sm": ["14px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "headline-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-lg": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "display-lg": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Code syntax presentation styling */
+    .token-keyword { color: #0060a9; font-weight: 600; }
+    .token-type { color: #286c00; }
+    .token-property { color: #404752; }
+    .token-string { color: #ba1a1a; }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md min-h-screen">
+<!-- Shared TopNavBar Anchor (Exact Immutable Component Structure) -->
+<div class="relative flex h-auto w-full flex-col bg-slate-50 group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e6edf4] px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#0c141d]">
+<div class="size-4">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_319)">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</g>
+<defs>
+<clippath id="clip0_6_319"><rect fill="white" height="48" width="48"></rect></clippath>
+</defs>
+</svg>
+</div>
+<h2 class="text-[#0c141d] text-lg font-bold leading-tight tracking-[-0.015em]">LxUI 公共安全规范组件库 · LxSectionTitle</h2>
+</div>
+<div class="flex items-center gap-9">
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#">设计语言</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#">基础组件</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#">业务组件 (GB)</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#">布局排版</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#">研发令牌</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded h-full">
+<div class="text-[#4573a1] flex border-none bg-[#e6edf4] items-center justify-center pl-4 rounded-l border-r-0" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+</svg>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded text-[#0c141d] focus:outline-0 focus:ring-0 border-none bg-[#e6edf4] focus:border-none h-full placeholder:text-[#4573a1] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search" value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#409fff] text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">下载 NPM 规范包</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#e6edf4] text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">文档 v2.4.0</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex flex-wrap gap-2 p-4">
+<a class="text-[#4573a1] text-base font-medium leading-normal" href="#">系统组件库</a>
+<span class="text-[#4573a1] text-base font-medium leading-normal">/</span>
+<a class="text-[#4573a1] text-base font-medium leading-normal" href="#">数据展示 Data Display</a>
+<span class="text-[#4573a1] text-base font-medium leading-normal">/</span>
+<a class="text-[#4573a1] text-base font-medium leading-normal" href="#">区块标题</a>
+<span class="text-[#4573a1] text-base font-medium leading-normal">/</span>
+<span class="text-[#0c141d] text-base font-medium leading-normal">LxSectionTitle 规范标本</span>
+</div>
+<div class="flex flex-wrap justify-between gap-3 p-4">
+<div class="flex min-w-72 flex-col gap-3">
+<p class="text-[#0c141d] text-4xl font-black leading-tight tracking-[-0.033em]">LxSectionTitle 区块标题组件规范标本</p>
+<p class="text-[#4573a1] text-base font-normal leading-normal">
+                  遵循 GB 公共安全视觉工程规范与 Element Plus 统一架构。支持 border (左竖条)、dashed (虚线贯通)、plain (纯文字副标) 三种标准变体及 extra 弹性扩展插槽。
+                </p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#e6edf4] text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">查看 Figma 资产库</span>
+</button>
+</div>
+<div class="flex gap-3 p-3 overflow-x-hidden">
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-4 pr-4">
+<p class="text-[#0c141d] text-sm font-medium leading-normal">规范版本: v2.4.0</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-4 pr-4">
+<p class="text-[#0c141d] text-sm font-medium leading-normal">主色: #0060A9</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-4 pr-4">
+<p class="text-[#0c141d] text-sm font-medium leading-normal">字体族: HarmonyOS / PingFang</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-4 pr-4">
+<p class="text-[#0c141d] text-sm font-medium leading-normal">支持 Extra 插槽</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-4 pr-4">
+<p class="text-[#0c141d] text-sm font-medium leading-normal">符合 GB/T 公共安全 UI 标准</p>
+</div>
+</div>
+<h2 class="text-[#0c141d] tracking-light text-[28px] font-bold leading-tight px-4 text-left pb-3 pt-5">一、三大规范变体展示 (Canonical Variants)</h2>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Specification Stream -->
+<main class="max-w-[1280px] mx-auto px-6 py-8 flex flex-col gap-10">
+<!-- SECTION 1: CANONICAL VARIANTS SHOWCASE -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Variant 1: border 型 (左竖条型) -->
+<div class="flex flex-col bg-surface-container-lowest border border-outline-variant rounded p-5 shadow-sm">
+<div class="flex items-center justify-between pb-3 border-b border-surface-container-high mb-4">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-semibold bg-primary-fixed text-on-primary-fixed-variant">01</span>
+<span class="text-headline-sm font-semibold text-on-surface">border 型 (左竖条)</span>
+</div>
+<span class="text-label-sm text-secondary">默认变体 / 核心信息区</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-4">
+        标准 3px 竖条（高度 14px，圆角 2px），紧随 14px 半粗标题与状态计数 Tag，右侧 extra 承载首要操作。
+      </p>
+<!-- Live Component 1 Demo -->
+<div class="bg-surface-container-low p-4 rounded border border-outline-variant flex flex-col gap-4">
+<!-- LxSectionTitle Border Live Variant -->
+<div class="flex items-center justify-between min-h-[32px] w-full">
+<div class="flex items-center gap-2">
+<!-- 3px Left Bar Indicator -->
+<div class="w-[3px] h-[14px] bg-primary rounded-[2px] shrink-0"></div>
+<h4 class="text-[14px] leading-[20px] font-semibold text-on-surface tracking-tight">基础信息档案 (Basic Info)</h4>
+<span class="text-[11px] leading-[16px] px-1.5 py-0.5 rounded bg-surface-container text-secondary font-medium">8 项字段</span>
+</div>
+<!-- Extra Slot -->
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1 text-[13px] font-medium text-primary hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[15px]" data-icon="edit">edit</span>
+<span>编辑</span>
+</button>
+</div>
+</div>
+<!-- Simulated Interior Content Card -->
+<div class="bg-surface-container-lowest p-3 rounded border border-surface-container-high text-body-sm space-y-2">
+<div class="flex justify-between text-secondary">
+<span>档案编号:</span>
+<span class="font-mono text-on-surface">GB-PSC-2026-9041</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>所属辖区:</span>
+<span class="text-on-surface">滨江新区指挥中枢 02 节点</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>责任民警:</span>
+<span class="text-on-surface">张敬尧 (警号 094821)</span>
+</div>
+</div>
+<!-- Another Sample with + Action -->
+<div class="flex items-center justify-between min-h-[32px] w-full pt-2 border-t border-surface-container-high">
+<div class="flex items-center gap-2">
+<div class="w-[3px] h-[14px] bg-primary rounded-[2px] shrink-0"></div>
+<h4 class="text-[14px] leading-[20px] font-semibold text-on-surface tracking-tight">协同指挥席位配置</h4>
+<span class="text-[11px] leading-[16px] px-1.5 py-0.5 rounded bg-tertiary/10 text-tertiary font-medium">已激活</span>
+</div>
+<button class="inline-flex items-center gap-1 text-[12px] font-medium px-2 py-1 rounded bg-primary text-on-primary hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[14px]" data-icon="add">add</span>
+<span>新增规则</span>
+</button>
+</div>
+</div>
+<!-- Quick Syntax Indicator -->
+<div class="mt-4 pt-3 border-t border-surface-container-high text-label-sm font-mono text-secondary">
+        &lt;LxSectionTitle variant="border" tag="8 项字段" /&gt;
+      </div>
+</div>
+<!-- Variant 2: dashed 型 (虚线贯通型) -->
+<div class="flex flex-col bg-surface-container-lowest border border-outline-variant rounded p-5 shadow-sm">
+<div class="flex items-center justify-between pb-3 border-b border-surface-container-high mb-4">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-semibold bg-secondary-fixed text-on-secondary-fixed-variant">02</span>
+<span class="text-headline-sm font-semibold text-on-surface">dashed 型 (虚线贯通)</span>
+</div>
+<span class="text-label-sm text-secondary">多段分隔 / 接口卡片</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-4">
+        标题行配前置语义图标，下方连接整幅 1px 虚线贯穿线（border-dashed），实现卡片内部清晰段落划分。
+      </p>
+<!-- Live Component 2 Demo -->
+<div class="bg-surface-container-low p-4 rounded border border-outline-variant flex flex-col gap-4">
+<!-- LxSectionTitle Dashed Live Variant 1 -->
+<div class="w-full">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="hub">hub</span>
+<h4 class="text-[14px] leading-[20px] font-semibold text-on-surface tracking-tight">南向接口服务配置</h4>
+<span class="text-[11px] text-secondary font-mono">(PORT: 8443)</span>
+</div>
+<!-- Extra Slot -->
+<button class="inline-flex items-center gap-1 text-[12px] text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]" data-icon="refresh">refresh</span>
+<span>刷新</span>
+</button>
+</div>
+<!-- 1px dashed divider -->
+<div class="w-full border-b border-dashed border-outline-variant"></div>
+</div>
+<!-- Simulated Internal Content -->
+<div class="bg-surface-container-lowest p-3 rounded border border-surface-container-high text-body-sm space-y-2">
+<div class="flex justify-between items-center text-secondary">
+<span>接口状态:</span>
+<span class="inline-flex items-center gap-1.5 text-tertiary font-medium">
+<span class="size-2 rounded-full bg-tertiary"></span>正常运行 (Heartbeat 2s)
+            </span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>上行吞吐:</span>
+<span class="font-mono text-on-surface">1,420 pkts/s</span>
+</div>
+</div>
+<!-- LxSectionTitle Dashed Live Variant 2 -->
+<div class="w-full pt-1">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="lock">lock</span>
+<h4 class="text-[14px] leading-[20px] font-semibold text-on-surface tracking-tight">网关安全传输协议</h4>
+</div>
+<button class="inline-flex items-center gap-0.5 text-[12px] text-secondary hover:text-primary transition-colors">
+<span>更多</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+<div class="w-full border-b border-dashed border-outline-variant"></div>
+</div>
+</div>
+<!-- Quick Syntax Indicator -->
+<div class="mt-4 pt-3 border-t border-surface-container-high text-label-sm font-mono text-secondary">
+        &lt;LxSectionTitle variant="dashed" icon="hub" /&gt;
+      </div>
+</div>
+<!-- Variant 3: plain 型 (纯文字副标型) -->
+<div class="flex flex-col bg-surface-container-lowest border border-outline-variant rounded p-5 shadow-sm">
+<div class="flex items-center justify-between pb-3 border-b border-surface-container-high mb-4">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center justify-center px-2 py-0.5 rounded text-label-sm font-semibold bg-surface-container-high text-on-surface-variant">03</span>
+<span class="text-headline-sm font-semibold text-on-surface">plain 型 (纯文字副标)</span>
+</div>
+<span class="text-label-sm text-secondary">轻量级 / 说明性列表</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-4">
+        去除竖条与虚线，主标题后紧接 12px 弱化说明或提示语句，右侧承载操作，适合极简或多层嵌套场景。
+      </p>
+<!-- Live Component 3 Demo -->
+<div class="bg-surface-container-low p-4 rounded border border-outline-variant flex flex-col gap-4">
+<!-- LxSectionTitle Plain Live Variant 1 -->
+<div class="flex flex-col gap-1 w-full">
+<div class="flex items-center justify-between">
+<h4 class="text-[14px] leading-[20px] font-semibold text-on-surface tracking-tight">预警推送策略与通知对象</h4>
+<!-- Extra Slot -->
+<button class="text-[12px] text-primary hover:underline font-medium">配置通道</button>
+</div>
+<p class="text-[12px] leading-[18px] text-secondary">
+            · 用于配置警情处置流程与责任人分派机制，超时将自动升级。
+          </p>
+</div>
+<!-- Simulated Internal Content -->
+<div class="bg-surface-container-lowest p-3 rounded border border-surface-container-high text-body-sm space-y-2">
+<div class="flex justify-between text-secondary">
+<span>通知级别:</span>
+<span class="text-error font-medium">特级联动 (红灯声光告警)</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>派发对象:</span>
+<span class="text-on-surface">应急机动第一梯队 (14人)</span>
+</div>
+</div>
+<!-- LxSectionTitle Plain Live Variant 2 -->
+<div class="flex items-center justify-between w-full pt-2 border-t border-surface-container-high">
+<div class="flex items-center gap-2">
+<h4 class="text-[14px] leading-[20px] font-semibold text-on-surface tracking-tight">排班周期定义</h4>
+<span class="text-secondary text-[12px]">· 默认按三班两运转执行</span>
+</div>
+<button class="inline-flex items-center text-[12px] text-secondary hover:text-on-surface transition-colors">
+<span>历史记录</span>
+</button>
+</div>
+</div>
+<!-- Quick Syntax Indicator -->
+<div class="mt-4 pt-3 border-t border-surface-container-high text-label-sm font-mono text-secondary">
+        &lt;LxSectionTitle variant="plain" subtitle="..." /&gt;
+      </div>
+</div>
+</section>
+<!-- SECTION 2: REAL-WORLD APPLICATION PANEL -->
+<section class="flex flex-col gap-4">
+<div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-surface-container-high pb-3">
+<div>
+<h3 class="text-headline-lg font-bold text-on-surface">二、实战综合演练场景 (Real-World Application)</h3>
+<p class="text-body-md text-secondary mt-1">
+          将三大变体融合在真实「警务资源与通信节点详情抽屉 (LxDetailDrawer / 640px)」中的节奏排布标本。
+        </p>
+</div>
+<span class="text-label-sm px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-mono">
+        Context: GB-CAD-0941 详情侧边栏
+      </span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Live 640px Simulation Drawer Panel -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-lg border border-outline-variant shadow-md overflow-hidden">
+<!-- Drawer Header Mockup -->
+<div class="bg-surface-container px-6 py-4 border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="shield_person">shield_person</span>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-headline-sm text-on-surface font-bold">节点指挥官档案: 沈维舟</span>
+<span class="px-2 py-0.2 rounded text-[11px] bg-tertiary-container/30 text-on-tertiary-container font-semibold">在线巡弋</span>
+</div>
+<p class="text-[12px] text-secondary">所属单位: 江宁区分局特巡警大队 · 终端编号 SM-8002</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-1.5 text-secondary hover:text-on-surface rounded hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="dock_to_right">dock_to_right</span>
+</button>
+<button class="p-1.5 text-secondary hover:text-on-surface rounded hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<!-- Drawer Body containing the 3 consecutive Section Titles -->
+<div class="p-6 space-y-7">
+<!-- Section 1: border-variant "警员在岗档案" -->
+<div class="flex flex-col gap-3">
+<!-- LX SECTION TITLE COMPONENT (BORDER VARIANT) -->
+<div class="flex items-center justify-between min-h-[28px]">
+<div class="flex items-center gap-2">
+<div class="w-[3px] h-[15px] bg-primary rounded-[2px] shrink-0"></div>
+<h4 class="text-[14px] leading-[20px] font-semibold text-on-surface tracking-tight">警员在岗档案</h4>
+<span class="text-[11px] leading-[16px] px-1.5 py-0.5 rounded bg-primary-fixed text-on-primary-fixed-variant font-medium">一级警督</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-[12px] font-medium text-primary hover:underline inline-flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="edit_note">edit_note</span>
+<span>修改</span>
+</button>
+</div>
+</div>
+<!-- Content Area -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-surface-container-low p-4 rounded border border-surface-container-high text-body-sm">
+<div>
+<span class="text-secondary text-[12px] block">警号 / 工号</span>
+<span class="font-mono font-medium text-on-surface">320104198</span>
+</div>
+<div>
+<span class="text-secondary text-[12px] block">联络电台频点</span>
+<span class="font-mono font-medium text-on-surface">351.250 MHz</span>
+</div>
+<div>
+<span class="text-secondary text-[12px] block">常态化巡区</span>
+<span class="font-medium text-on-surface">奥体中心 A-04 格网</span>
+</div>
+<div>
+<span class="text-secondary text-[12px] block">北斗定位状态</span>
+<span class="inline-flex items-center gap-1 text-tertiary font-medium">
+<span class="size-1.5 rounded-full bg-tertiary"></span>差分锁定中 (0.3m)
+                </span>
+</div>
+<div>
+<span class="text-secondary text-[12px] block">执勤时长</span>
+<span class="font-mono text-on-surface">06h 42m</span>
+</div>
+<div>
+<span class="text-secondary text-[12px] block">电量 / 信号</span>
+<span class="font-mono text-on-surface">88% / -64dBm</span>
+</div>
+</div>
+</div>
+<!-- Section 2: dashed-variant "设备与网络凭证 (SM4加密)" -->
+<div class="flex flex-col gap-3">
+<!-- LX SECTION TITLE COMPONENT (DASHED VARIANT) -->
+<div class="w-full">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="vpn_key">vpn_key</span>
+<h4 class="text-[14px] leading-[20px] font-semibold text-on-surface tracking-tight">设备与网络凭证 (SM4加密)</h4>
+<span class="text-[11px] leading-[16px] px-1.5 py-0.5 rounded bg-surface-container text-secondary font-mono">国密二级</span>
+</div>
+<button class="inline-flex items-center gap-1 text-[12px] font-medium text-primary hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-[14px]" data-icon="autorenew">autorenew</span>
+<span>重新检测</span>
+</button>
+</div>
+<!-- Dashed border separator -->
+<div class="w-full border-b border-dashed border-outline-variant"></div>
+</div>
+<!-- Content Area -->
+<div class="space-y-2.5 pt-1">
+<div class="flex items-center justify-between text-body-sm p-2.5 rounded bg-surface-container-low border border-surface-container-high">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="lock_clock">lock_clock</span>
+<div>
+<div class="font-medium text-on-surface">公钥证书: CERT-SM2-COMM-2026-X8</div>
+<div class="text-[11px] text-secondary font-mono">有效期至: 2027-12-31 23:59:59 (剩余 465 天)</div>
+</div>
+</div>
+<span class="text-label-sm font-semibold text-tertiary bg-tertiary-fixed/40 px-2 py-0.5 rounded">有效验签</span>
+</div>
+<div class="flex items-center justify-between text-body-sm p-2.5 rounded bg-surface-container-low border border-surface-container-high">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="router">router</span>
+<div>
+<div class="font-medium text-on-surface">PDT 数字集群专用通道</div>
+<div class="text-[11px] text-secondary font-mono">安全协议: IPsec / GB/T 35273-2020</div>
+</div>
+</div>
+<span class="text-label-sm font-semibold text-primary bg-primary-fixed px-2 py-0.5 rounded">已握手</span>
+</div>
+</div>
+</div>
+<!-- Section 3: plain-variant "操作审计与流转记录" -->
+<div class="flex flex-col gap-3">
+<!-- LX SECTION TITLE COMPONENT (PLAIN VARIANT) -->
+<div class="flex items-center justify-between w-full">
+<div class="flex flex-col sm:flex-row sm:items-center sm:gap-2">
+<h4 class="text-[14px] leading-[20px] font-semibold text-on-surface tracking-tight">操作审计与流转记录</h4>
+<span class="text-[12px] text-secondary">最近一次更新: 2026-09-22 14:35:10</span>
+</div>
+<button class="inline-flex items-center gap-0.5 text-[12px] font-medium text-primary hover:underline shrink-0">
+<span>查看全部日志</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<!-- Content Area - Timeline log -->
+<div class="border-l-2 border-surface-container-high ml-2 pl-4 py-1 space-y-3 text-body-sm">
+<div class="relative">
+<div class="absolute -left-[21px] top-1.5 size-2 rounded-full bg-primary ring-4 ring-surface-container-lowest"></div>
+<div class="text-[12px] text-secondary font-mono">14:35:10 · 指挥中心调度席</div>
+<div class="text-on-surface font-medium">发起【防汛抢险二级响应】联动指令，已自动下达车载对讲</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[21px] top-1.5 size-2 rounded-full bg-outline-variant ring-4 ring-surface-container-lowest"></div>
+<div class="text-[12px] text-secondary font-mono">12:10:04 · 终端自检</div>
+<div class="text-on-surface">完成例行业务密钥派生，上报会话完整性校验码成功</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer Mockup -->
+<div class="bg-surface-container-low px-6 py-3 border-t border-outline-variant flex items-center justify-between text-label-sm text-secondary">
+<span>公安部第一研究所安全标准审核通过</span>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded border border-outline-variant bg-surface-container-lowest text-on-surface font-medium hover:bg-surface-container transition-colors">导出合规单</button>
+<button class="px-3 py-1.5 rounded bg-primary text-on-primary font-medium hover:opacity-90 transition-opacity">执行远程协同</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Visual Token Matrix & Anatomy Breakdown -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Anatomy Box -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-5 shadow-sm">
+<div class="flex items-center gap-2 pb-3 border-b border-surface-container-high">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="design_services">design_services</span>
+<h4 class="text-headline-sm text-on-surface font-bold">解剖结构 (Anatomy)</h4>
+</div>
+<div class="my-4 p-3 bg-surface-container-low rounded border border-surface-container-high space-y-3 font-mono text-[12px]">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-primary text-on-primary text-[10px]">A</span>
+<span class="text-secondary">左侧标识: 3px × 14px (Radius 2px)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-primary text-on-primary text-[10px]">B</span>
+<span class="text-secondary">标题文字: 14px SemiBold (#181c20)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-primary text-on-primary text-[10px]">C</span>
+<span class="text-secondary">副标题/标签: 12px Regular (#404752)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-primary text-on-primary text-[10px]">D</span>
+<span class="text-secondary">右侧 Extra: 操作链接 / 紧凑按钮组</span>
+</div>
+</div>
+<div class="space-y-2 text-body-sm text-on-surface-variant">
+<div class="flex justify-between py-1 border-b border-surface-container-high">
+<span class="text-secondary">默认高度 (Row Height)</span>
+<span class="font-mono font-medium">32px (标准) / 28px (紧凑)</span>
+</div>
+<div class="flex justify-between py-1 border-b border-surface-container-high">
+<span class="text-secondary">组件外边距 (Margin Bottom)</span>
+<span class="font-mono font-medium">12px (space-md)</span>
+</div>
+<div class="flex justify-between py-1 border-b border-surface-container-high">
+<span class="text-secondary">GB 公安标准色</span>
+<span class="font-mono font-medium text-primary">#0060A9 (警戒蓝)</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-secondary">虚线描边 (Dashed Stroke)</span>
+<span class="font-mono font-medium">1px #C0C7D4 (Dash 4 4)</span>
+</div>
+</div>
+</div>
+<!-- Design System Tokens Mapping -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-5 shadow-sm">
+<div class="flex items-center gap-2 pb-3 border-b border-surface-container-high">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="palette">palette</span>
+<h4 class="text-headline-sm text-on-surface font-bold">设计系统 Design Tokens</h4>
+</div>
+<div class="divide-y divide-surface-container-high text-body-sm mt-3">
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-mono text-[12px] font-semibold text-on-surface">--lx-color-primary</span>
+<span class="text-[11px] text-secondary">标题装饰竖条主色</span>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="size-4 rounded bg-primary border border-outline-variant"></div>
+<span class="font-mono text-[12px] text-on-surface">#0060A9</span>
+</div>
+</div>
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-mono text-[12px] font-semibold text-on-surface">--lx-text-primary</span>
+<span class="text-[11px] text-secondary">标题文字主阶颜色</span>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="size-4 rounded bg-[#181c20] border border-outline-variant"></div>
+<span class="font-mono text-[12px] text-on-surface">#181C20</span>
+</div>
+</div>
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-mono text-[12px] font-semibold text-on-surface">--lx-border-light</span>
+<span class="text-[11px] text-secondary">dashed 分割虚线颜色</span>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="size-4 rounded bg-[#c0c7d4] border border-outline-variant"></div>
+<span class="font-mono text-[12px] text-on-surface">#C0C7D4</span>
+</div>
+</div>
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-mono text-[12px] font-semibold text-on-surface">--lx-text-secondary</span>
+<span class="text-[11px] text-secondary">副标与附加说明文字</span>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="size-4 rounded bg-[#404752] border border-outline-variant"></div>
+<span class="font-mono text-[12px] text-on-surface">#404752</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: DEVELOPER SPEC MEMO & API REFERENCE -->
+<section class="flex flex-col gap-5 pb-12">
+<div class="flex items-baseline justify-between border-b border-surface-container-high pb-3">
+<div>
+<h3 class="text-headline-lg font-bold text-on-surface">三、研发接口备忘录 (Developer Spec Memo &amp; Vue 3 API)</h3>
+<p class="text-body-md text-secondary mt-1">
+          遵循 TypeScript Strict Mode、Vue 3 SFC Composition API 与 Element Plus 组件设计契约。
+        </p>
+</div>
+<span class="text-label-sm px-2.5 py-1 rounded bg-surface-container-highest text-on-surface font-mono">
+        npm i @lxui/section-title
+      </span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Code Spec 1: Props Interface -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-5 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-surface-container-high mb-3">
+<span class="text-headline-sm font-semibold text-on-surface font-mono">TypeScript Props 契约定义</span>
+<span class="text-label-sm text-secondary font-mono">LxSectionTitle.vue</span>
+</div>
+<pre class="bg-surface-container-low p-4 rounded text-body-sm font-mono overflow-x-auto text-on-surface leading-relaxed"><code><span class="token-keyword">export interface</span> <span class="token-type">LxSectionTitleProps</span> {
+  <span class="token-property">/** 标题主文案 (必填) */</span>
+  title: <span class="token-type">string</span>;
+
+  <span class="token-property">/** 规范视觉形态，默认 'border' */</span>
+  variant?: <span class="token-string">'border'</span> | <span class="token-string">'dashed'</span> | <span class="token-string">'plain'</span>;
+
+  <span class="token-property">/** 标题规格大小，默认 14px 'default' */</span>
+  size?: <span class="token-string">'default'</span> | <span class="token-string">'small'</span> | <span class="token-string">'large'</span>;
+
+  <span class="token-property">/** 副标题内容，plain 模式下展示在标题后/下方 */</span>
+  subtitle?: <span class="token-type">string</span>;
+
+  <span class="token-property">/** dashed 模式下可配置前置图标 */</span>
+  icon?: <span class="token-type">string</span>;
+
+  <span class="token-property">/** 附加数量/状态标签 */</span>
+  tag?: <span class="token-type">string</span> | <span class="token-type">number</span>;
+
+  <span class="token-property">/** 标签颜色语义 */</span>
+  tagType?: <span class="token-string">'primary'</span> | <span class="token-string">'success'</span> | <span class="token-string">'warning'</span> | <span class="token-string">'info'</span>;
+}</code></pre>
+</div>
+<div class="pt-3 text-[12px] text-secondary">
+          注: 符合公安警务云敏捷大屏与业务后台统一设计基座，已内嵌无障碍 aria-label 自动化匹配。
+        </div>
+</div>
+<!-- Code Spec 2: Template & Slots Reference -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-5 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-surface-container-high mb-3">
+<span class="text-headline-sm font-semibold text-on-surface font-mono">插槽 Slot &amp; 模板调用示例</span>
+<span class="text-label-sm text-secondary font-mono">ExampleUsage.vue</span>
+</div>
+<pre class="bg-surface-container-low p-4 rounded text-body-sm font-mono overflow-x-auto text-on-surface leading-relaxed"><code><span class="token-property">&lt;!-- 示例 1: 经典 border 型带 extra 按钮 --&gt;</span>
+&lt;<span class="token-keyword">LxSectionTitle</span> 
+  title=<span class="token-string">"警员在岗档案"</span>
+  variant=<span class="token-string">"border"</span>
+  tag=<span class="token-string">"一级警督"</span>
+&gt;
+  &lt;<span class="token-keyword">template</span> <span class="token-property">#extra</span>&gt;
+    &lt;el-button link type=<span class="token-string">"primary"</span>&gt;修改&lt;/el-button&gt;
+  &lt;/<span class="token-keyword">template</span>&gt;
+&lt;/<span class="token-keyword">LxSectionTitle</span>&gt;
+
+<span class="token-property">&lt;!-- 示例 2: dashed 贯通型带刷新插槽 --&gt;</span>
+&lt;<span class="token-keyword">LxSectionTitle</span>
+  title=<span class="token-string">"设备与网络凭证"</span>
+  variant=<span class="token-string">"dashed"</span>
+  icon=<span class="token-string">"vpn_key"</span>
+&gt;
+  &lt;<span class="token-keyword">template</span> <span class="token-property">#extra</span>&gt;
+    &lt;el-button text icon=<span class="token-string">"Refresh"</span>&gt;重新检测&lt;/el-button&gt;
+  &lt;/<span class="token-keyword">template</span>&gt;
+&lt;/<span class="token-keyword">LxSectionTitle</span>&gt;</code></pre>
+</div>
+<div class="pt-3 text-[12px] text-secondary">
+          支持具名插槽：<code class="font-mono text-primary">#default</code>, <code class="font-mono text-primary">#subtitle</code>, <code class="font-mono text-primary">#extra</code>。
+        </div>
+</div>
+</div>
+<!-- API Reference Table -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded overflow-hidden shadow-sm mt-2">
+<div class="px-5 py-3.5 bg-surface-container border-b border-outline-variant flex items-center justify-between">
+<h4 class="text-headline-sm font-bold text-on-surface">属性参数表 (Props API Reference)</h4>
+<span class="text-label-sm text-secondary">Element Plus 规范兼容</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-body-sm">
+<thead class="bg-surface-container-low border-b border-outline-variant font-mono text-[12px] text-secondary">
+<tr>
+<th class="py-3 px-4">参数 (Prop)</th>
+<th class="py-3 px-4">说明 (Description)</th>
+<th class="py-3 px-4">类型 (Type)</th>
+<th class="py-3 px-4">可选值 (Options)</th>
+<th class="py-3 px-4">默认值 (Default)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high font-body-sm">
+<tr>
+<td class="py-3 px-4 font-mono font-semibold text-primary">title</td>
+<td class="py-3 px-4 text-on-surface">区块主标题文本内容</td>
+<td class="py-3 px-4 font-mono text-secondary">string</td>
+<td class="py-3 px-4 text-secondary">—</td>
+<td class="py-3 px-4 font-mono text-secondary">'' (必填)</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-semibold text-primary">variant</td>
+<td class="py-3 px-4 text-on-surface">视觉变体形态，分别控制竖条、虚线与文字副标</td>
+<td class="py-3 px-4 font-mono text-secondary">string</td>
+<td class="py-3 px-4 font-mono text-[12px] text-on-surface-variant">'border' | 'dashed' | 'plain'</td>
+<td class="py-3 px-4 font-mono text-secondary">'border'</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-semibold text-primary">subtitle</td>
+<td class="py-3 px-4 text-on-surface">副标题说明文字，支持简短补充阐述</td>
+<td class="py-3 px-4 font-mono text-secondary">string</td>
+<td class="py-3 px-4 text-secondary">—</td>
+<td class="py-3 px-4 font-mono text-secondary">''</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-semibold text-primary">size</td>
+<td class="py-3 px-4 text-on-surface">标题字号与竖条高度比例规格</td>
+<td class="py-3 px-4 font-mono text-secondary">string</td>
+<td class="py-3 px-4 font-mono text-[12px] text-on-surface-variant">'small' | 'default' | 'large'</td>
+<td class="py-3 px-4 font-mono text-secondary">'default' (14px)</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-semibold text-primary">tag</td>
+<td class="py-3 px-4 text-on-surface">标题后跟随的状态胶囊或计数字段</td>
+<td class="py-3 px-4 font-mono text-secondary">string | number</td>
+<td class="py-3 px-4 text-secondary">—</td>
+<td class="py-3 px-4 font-mono text-secondary">—</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-semibold text-primary">tagType</td>
+<td class="py-3 px-4 text-on-surface">状态胶囊的主题语义色彩</td>
+<td class="py-3 px-4 font-mono text-secondary">string</td>
+<td class="py-3 px-4 font-mono text-[12px] text-on-surface-variant">'primary' | 'success' | 'warning' | 'info'</td>
+<td class="py-3 px-4 font-mono text-secondary">'info'</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Reference Info -->
+<footer class="border-t border-outline-variant bg-surface-container py-6 px-10">
+<div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between text-label-sm text-secondary gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="verified_user">verified_user</span>
+<span>LxUI 视觉工程资产体系 · 遵循全国公共安全行业信息化基础标准 (GA/T)</span>
+</div>
+<div class="flex items-center gap-6">
+<span>最后更新: 2026-09 规范分支</span>
+<a class="text-primary hover:underline" href="#">返回组件索引</a>
+<a class="text-primary hover:underline" href="#">GitLab 镜像仓库</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LxButton 规范标本库 · 公共安全视觉体系</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-surface": "#2d3136",
+            "surface-bright": "#f8f9ff",
+            "surface-container-low": "#f1f3fa",
+            "inverse-primary": "#a2c9ff",
+            "surface-variant": "#e0e2e9",
+            "secondary-container": "#d2e4ff",
+            "outline-variant": "#c0c7d4",
+            "on-tertiary-container": "#133b00",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed-variant": "#1d5200",
+            "tertiary-fixed": "#9bfa6b",
+            "on-error": "#ffffff",
+            "on-background": "#181c20",
+            "error": "#ba1a1a",
+            "surface-tint": "#0060a9",
+            "on-secondary-fixed": "#0a1c30",
+            "primary-fixed-dim": "#a2c9ff",
+            "on-secondary-container": "#55667c",
+            "tertiary-fixed-dim": "#80dd52",
+            "background": "#f8f9ff",
+            "on-tertiary-fixed": "#072100",
+            "on-primary-container": "#003460",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#d7dae0",
+            "outline": "#707784",
+            "surface-container-lowest": "#ffffff",
+            "on-surface-variant": "#404752",
+            "tertiary-container": "#55af28",
+            "inverse-on-surface": "#eef1f7",
+            "primary-fixed": "#d3e4ff",
+            "on-primary-fixed-variant": "#004881",
+            "on-surface": "#181c20",
+            "secondary-fixed-dim": "#b6c8e2",
+            "on-secondary-fixed-variant": "#37485d",
+            "surface": "#f8f9ff",
+            "primary-container": "#409eff",
+            "secondary": "#4f6076",
+            "secondary-fixed": "#d2e4ff",
+            "tertiary": "#286c00",
+            "on-error-container": "#93000a",
+            "primary": "#0060a9",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#001c38",
+            "on-tertiary": "#ffffff",
+            "surface-container-highest": "#e0e2e9",
+            "surface-container": "#ebeef4",
+            "surface-container-high": "#e6e8ef"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "space-md": "12px",
+            "space-sm": "8px",
+            "space-xl": "24px",
+            "space-lg": "16px",
+            "gutter": "16px",
+            "margin": "20px",
+            "space-xs": "4px"
+          },
+          fontFamily: {
+            "label-lg": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-md": ["Inter"],
+            "display-lg": ["Inter"],
+            "body-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-sm": ["Inter"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .custom-code-block {
+      background-color: #0f172a;
+      color: #e2e8f0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-secondary-container">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-slate-50 group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-6 lg:px-20 flex flex-1 justify-center py-4">
+<div class="layout-content-container flex flex-col max-w-[1240px] flex-1">
+<!-- Shared Header Anchor -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e6edf4] px-4 lg:px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#0c141d]">
+<div class="size-4">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-[#0c141d] text-lg font-bold leading-tight tracking-[-0.015em]">公安视讯与综合业务系统 · 规范标本库</h2>
+</div>
+<div class="hidden xl:flex items-center gap-9">
+<a class="text-[#0c141d] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">组件概览</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">设计规范 §3</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">交互拍板 #11</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">代码契约</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">变更记录</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded h-full">
+<div class="text-[#4573a1] flex border-none bg-[#e6edf4] items-center justify-center pl-4 rounded-l border-r-0" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
+<span class="material-symbols-outlined">qr_code_2</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded text-[#0c141d] focus:outline-0 focus:ring-0 border-none bg-[#e6edf4] focus:border-none h-full placeholder:text-[#4573a1] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="搜索组件、CSS变量、规范条款..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#409fff] hover:bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors">
+<span class="truncate">导出规范 PDF</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#e6edf4] hover:bg-surface-variant text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em] transition-colors">
+<span class="truncate">切换深浅色</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/20" data-alt="A portrait photograph of a disciplined Chinese tech UI systems architect in a well-lit modern command center workspace with cool slate-blue ambient displays." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAYenpX92S0dMq-r7X5iC1VEq6uVY-mK1cSpyAkcKcUTAjouktv3IRa5x8UN-uOxOIdp6ixUZremB6nbHP3fUfaJPkyQ6YXmqcbDGf5yCa9b-SORHvWEhY67R53WN-NzdkxkjDothfIXyQoPo0SfMoA23_9-9aN0Q8lIwVIhDyg9Emzo0iG0hY29umLTdCbxk_b0j76cw5Tg641OrEnES9EPWXNXRb3XHgtCocoOHBQBCSpFyQLsdN_5w");'></div>
+</div>
+</header>
+<!-- Breadcrumb & Compliance Anchors -->
+<div class="flex flex-wrap gap-2 px-4 pt-4 text-sm">
+<a class="text-[#4573a1] font-medium leading-normal hover:underline" href="#">基础设计规范</a>
+<span class="text-[#4573a1] font-medium leading-normal">/</span>
+<a class="text-[#4573a1] font-medium leading-normal hover:underline" href="#">GB/T 33170 视觉体系</a>
+<span class="text-[#4573a1] font-medium leading-normal">/</span>
+<span class="text-[#0c141d] font-semibold leading-normal">LxButton 规范与交互矩阵</span>
+</div>
+<div class="flex gap-3 p-4 overflow-x-auto">
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-2 pr-4 text-xs font-semibold text-primary">
+<div class="text-primary" data-icon="ShieldCheck" data-size="20px" data-weight="regular">
+<span class="material-symbols-outlined">swipe_left</span>
+</div>
+<p>GB/T 33170 COMPLIANT</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-2 pr-4 text-xs font-medium text-on-surface">
+<div class="text-[#0c141d]" data-icon="FileCode" data-size="20px" data-weight="regular">
+<span class="material-symbols-outlined">rotate_left</span>
+</div>
+<p>Element Plus Bridge Spec v2.4.0</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-2 pr-4 text-xs font-medium text-on-surface">
+<div class="text-[#0c141d]" data-icon="Palette" data-size="20px" data-weight="regular">
+<span class="material-symbols-outlined">stream_apps</span>
+</div>
+<p>主色 #0060a9 / hover #00508f</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-2 pr-4 text-xs font-medium text-on-surface">
+<div class="text-[#0c141d]" data-icon="Ruler" data-size="20px" data-weight="regular">
+<span class="material-symbols-outlined">cloud_upload</span>
+</div>
+<p>基准尺寸 28 / 32 / 40px</p>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded bg-[#e6edf4] pl-2 pr-4 text-xs font-medium text-on-surface">
+<div class="text-[#0c141d]" data-icon="Lock" data-size="20px" data-weight="regular">
+<span class="material-symbols-outlined">swipe_left_alt</span>
+</div>
+<p>内边距 px-16 (Text 8px)</p>
+</div>
+</div>
+<!-- Banner Intro -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-4 py-2 border-b border-[#e6edf4] pb-6">
+<div class="flex flex-col gap-2 max-w-3xl">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 text-xs bg-primary text-white rounded font-mono font-bold tracking-wider uppercase">CORE COMPONENT</span>
+<span class="px-2 py-0.5 text-xs bg-surface-container-high text-secondary rounded font-mono">STATUS: RATIFIED (拍板 #11)</span>
+</div>
+<h1 class="text-[#0c141d] text-2xl lg:text-3xl font-black leading-tight tracking-tight">LxButton 按钮组件规范与交互矩阵标本 (GB公共安全标准)</h1>
+<p class="text-[#4573a1] text-sm leading-relaxed">
+              遵循 GB 公共安全视觉规范与 DESIGN-SPEC.md §3、COMPONENT-STYLE-INTERACTION.md §5.1 拍板 #11 标准。
+              覆盖 3 档工程基准高度、4 类核心业务形态 × 3 种交互生命周期态（默认/悬停/禁用），内置严谨警务指挥与安防业务交互场景。
+            </p>
+</div>
+<div class="flex gap-2 shrink-0">
+<button class="inline-flex items-center gap-1.5 px-4 h-9 bg-primary text-white rounded text-sm font-medium hover:bg-[#00508f] transition shadow-sm">
+<span class="material-symbols-outlined">terminal</span>
+<span>查看 Bridge 源码</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 h-9 bg-white border border-[#cddbea] text-on-surface rounded text-sm font-medium hover:bg-surface-container-low transition">
+<span class="material-symbols-outlined">download</span>
+<span>Sketch/Figma 资产包</span>
+</button>
+</div>
+</div>
+<!-- Metric KPI Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 p-4">
+<div class="flex flex-col gap-1.5 rounded-lg p-4 bg-surface-container-lowest border border-[#cddbea] shadow-sm">
+<span class="text-xs font-semibold text-secondary uppercase tracking-wider">工程基准尺寸</span>
+<p class="text-xl font-bold text-on-surface font-mono">28 / 32 / 40 <span class="text-xs font-normal text-secondary">px</span></p>
+<span class="text-[11px] text-[#4573a1]">统一 4px 圆角 · 内边距 16px / 文字 8px</span>
+</div>
+<div class="flex flex-col gap-1.5 rounded-lg p-4 bg-surface-container-lowest border border-[#cddbea] shadow-sm">
+<span class="text-xs font-semibold text-primary uppercase tracking-wider">主业务 / Primary</span>
+<p class="text-xl font-bold text-primary font-mono">#0060a9</p>
+<span class="text-[11px] text-[#4573a1]">hover: #00508f · 聚焦光晕 ring-2</span>
+</div>
+<div class="flex flex-col gap-1.5 rounded-lg p-4 bg-surface-container-lowest border border-[#cddbea] shadow-sm">
+<span class="text-xs font-semibold text-[#286c00] uppercase tracking-wider">放行 / Success</span>
+<p class="text-xl font-bold text-[#286c00] font-mono">#67c23a</p>
+<span class="text-[11px] text-[#4573a1]">审批核准 · 查验放行 · 部署激活</span>
+</div>
+<div class="flex flex-col gap-1.5 rounded-lg p-4 bg-surface-container-lowest border border-[#cddbea] shadow-sm">
+<span class="text-xs font-semibold text-amber-700 uppercase tracking-wider">待决 / Warning</span>
+<p class="text-xl font-bold text-amber-700 font-mono">#e6a23c</p>
+<span class="text-[11px] text-[#4573a1]">告警待决 · 临时挂起 · 降级模式</span>
+</div>
+<div class="flex flex-col gap-1.5 rounded-lg p-4 bg-surface-container-lowest border border-[#cddbea] shadow-sm">
+<span class="text-xs font-semibold text-error uppercase tracking-wider">高危 / Danger</span>
+<p class="text-xl font-bold text-error font-mono">#f56c6c</p>
+<span class="text-[11px] text-error">终断警报 · 销毁指令 · 强行驳回</span>
+</div>
+</div>
+<!-- SECTION 1: Full Interactive State Matrix -->
+<div class="px-4 py-6 space-y-6">
+<div class="flex items-center justify-between border-l-4 border-primary pl-3">
+<div>
+<h2 class="text-lg font-bold text-on-surface">1. 核心交互矩阵标本 (4 类形态 × 3 种生命周期态 × 3 档尺寸)</h2>
+<p class="text-xs text-secondary mt-0.5">严格按 Element Plus 与 GB/T 33170 公安规范定义 hover 深度与 disabled 不透明度反馈。</p>
+</div>
+<span class="text-xs bg-surface-container text-secondary font-mono px-2 py-1 rounded">MATRIX VIEW 3.0</span>
+</div>
+<!-- Matrix Container Card -->
+<div class="bg-surface-container-lowest border border-[#cddbea] rounded-lg overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[920px]">
+<thead>
+<tr class="bg-surface-container-low border-b border-[#cddbea] text-xs font-semibold text-secondary">
+<th class="p-3 pl-5 w-44">按钮形态 (Variants)</th>
+<th class="p-3 w-56">默认态 (Default)</th>
+<th class="p-3 w-56">悬停预览 (Hover State)</th>
+<th class="p-3 w-56">禁用态 (Disabled / 40% Opacity)</th>
+<th class="p-3">工程尺寸阶梯 (Sm / Def / Lg)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#e6edf4] text-xs">
+<!-- ROW 1: PRIMARY BUTTON -->
+<tr class="hover:bg-slate-50/50 transition">
+<td class="p-4 pl-5">
+<div class="font-bold text-on-surface text-sm">主按钮 (Primary)</div>
+<div class="text-[11px] text-secondary font-mono mt-0.5">type="primary"</div>
+<div class="text-[11px] text-[#4573a1] mt-1 leading-snug">#0060a9 实底白字<br/>4px 圆角 / 0 16px padding</div>
+</td>
+<td class="p-4">
+<button class="inline-flex items-center justify-center h-8 px-4 bg-[#0060a9] text-white font-medium rounded text-xs shadow-sm hover:shadow transition">
+<span>主操作按钮</span>
+</button>
+<div class="text-[10px] text-secondary font-mono mt-2">bg: #0060a9 / text: #fff</div>
+</td>
+<td class="p-4">
+<button class="inline-flex items-center justify-center h-8 px-4 bg-[#00508f] text-white font-medium rounded text-xs ring-2 ring-[#0060a9]/20 shadow-md">
+<span>悬停聚焦态</span>
+</button>
+<div class="text-[10px] text-secondary font-mono mt-2">hover: #00508f (加深加重)</div>
+</td>
+<td class="p-4">
+<button class="inline-flex items-center justify-center h-8 px-4 bg-[#0060a9] text-white font-medium rounded text-xs opacity-45 cursor-not-allowed" disabled="">
+<span>不可操作态</span>
+</button>
+<div class="text-[10px] text-secondary font-mono mt-2">opacity: 0.45, cursor: not-allowed</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<!-- Small 28px -->
+<div class="flex flex-col items-center gap-1">
+<button class="h-7 px-3 bg-[#0060a9] text-white rounded text-[11px] font-medium inline-flex items-center justify-center">
+<span>S 28px</span>
+</button>
+<span class="text-[10px] text-secondary font-mono">12px字</span>
+</div>
+<!-- Default 32px -->
+<div class="flex flex-col items-center gap-1">
+<button class="h-8 px-4 bg-[#0060a9] text-white rounded text-xs font-medium inline-flex items-center justify-center">
+<span>基准 32px</span>
+</button>
+<span class="text-[10px] text-secondary font-mono">13px字</span>
+</div>
+<!-- Large 40px -->
+<div class="flex flex-col items-center gap-1">
+<button class="h-10 px-5 bg-[#0060a9] text-white rounded text-sm font-semibold inline-flex items-center justify-center">
+<span>大号 40px</span>
+</button>
+<span class="text-[10px] text-secondary font-mono">14px字</span>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 2: SECONDARY / DEFAULT BUTTON -->
+<tr class="hover:bg-slate-50/50 transition">
+<td class="p-4 pl-5">
+<div class="font-bold text-on-surface text-sm">次按钮 (Default)</div>
+<div class="text-[11px] text-secondary font-mono mt-0.5">type="default"</div>
+<div class="text-[11px] text-[#4573a1] mt-1 leading-snug">白底 + 1px 边框<br/>标准次级交互载体</div>
+</td>
+<td class="p-4">
+<button class="inline-flex items-center justify-center h-8 px-4 bg-white border border-[#dcdfe6] text-[#4e5969] font-medium rounded text-xs shadow-xs hover:border-[#0060a9] hover:text-[#0060a9] transition">
+<span>次级线框按钮</span>
+</button>
+<div class="text-[10px] text-secondary font-mono mt-2">border: #dcdfe6 / bg: #fff</div>
+</td>
+<td class="p-4">
+<button class="inline-flex items-center justify-center h-8 px-4 bg-[#ecf5ff] border border-[#0060a9] text-[#0060a9] font-medium rounded text-xs transition">
+<span>悬停聚焦态</span>
+</button>
+<div class="text-[10px] text-secondary font-mono mt-2">border: #0060a9 / bg: #ecf5ff</div>
+</td>
+<td class="p-4">
+<button class="inline-flex items-center justify-center h-8 px-4 bg-[#f5f7fa] border border-[#ebeef5] text-[#c0c4cc] font-medium rounded text-xs cursor-not-allowed" disabled="">
+<span>次按钮禁用</span>
+</button>
+<div class="text-[10px] text-secondary font-mono mt-2">bg: #f5f7fa / text: #c0c4cc</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<button class="h-7 px-3 bg-white border border-[#dcdfe6] text-[#4e5969] rounded text-[11px] font-medium inline-flex items-center justify-center">
+<span>S 28px</span>
+</button>
+<button class="h-8 px-4 bg-white border border-[#dcdfe6] text-[#4e5969] rounded text-xs font-medium inline-flex items-center justify-center">
+<span>基准 32px</span>
+</button>
+<button class="h-10 px-5 bg-white border border-[#dcdfe6] text-[#4e5969] rounded text-sm font-semibold inline-flex items-center justify-center">
+<span>大号 40px</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 3: DANGER BUTTON -->
+<tr class="hover:bg-slate-50/50 transition">
+<td class="p-4 pl-5">
+<div class="font-bold text-[#f56c6c] text-sm">危险按钮 (Danger)</div>
+<div class="text-[11px] text-secondary font-mono mt-0.5">type="danger"</div>
+<div class="text-[11px] text-[#4573a1] mt-1 leading-snug">#f56c6c 实底<br/>高危警情撤销、删除专用</div>
+</td>
+<td class="p-4">
+<button class="inline-flex items-center justify-center gap-1.5 h-8 px-4 bg-[#f56c6c] text-white font-medium rounded text-xs shadow-sm hover:bg-[#e65d5d] transition">
+<span class="material-symbols-outlined" style="font-size:15px;">delete</span>
+<span>批量删除警情</span>
+</button>
+<div class="text-[10px] text-secondary font-mono mt-2">bg: #f56c6c / text: #fff</div>
+</td>
+<td class="p-4">
+<button class="inline-flex items-center justify-center gap-1.5 h-8 px-4 bg-[#e65d5d] text-white font-medium rounded text-xs ring-2 ring-[#f56c6c]/30 shadow-md">
+<span class="material-symbols-outlined" style="font-size:15px;">delete</span>
+<span>悬停聚焦态</span>
+</button>
+<div class="text-[10px] text-secondary font-mono mt-2">hover: #e65d5d (加深加重)</div>
+</td>
+<td class="p-4">
+<button class="inline-flex items-center justify-center gap-1.5 h-8 px-4 bg-[#f56c6c] text-white font-medium rounded text-xs opacity-45 cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined" style="font-size:15px;">delete</span>
+<span>不可操作态</span>
+</button>
+<div class="text-[10px] text-secondary font-mono mt-2">opacity: 0.45, cursor: not-allowed</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<button class="h-7 px-3 bg-[#f56c6c] text-white rounded text-[11px] font-medium inline-flex items-center justify-center gap-1">
+<span class="material-symbols-outlined" style="font-size:13px;">delete</span>
+<span>28px</span>
+</button>
+<button class="h-8 px-4 bg-[#f56c6c] text-white rounded text-xs font-medium inline-flex items-center justify-center gap-1">
+<span class="material-symbols-outlined" style="font-size:14px;">delete</span>
+<span>32px</span>
+</button>
+<button class="h-10 px-5 bg-[#f56c6c] text-white rounded text-sm font-semibold inline-flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined" style="font-size:16px;">delete</span>
+<span>40px</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 4: TEXT / LINK BUTTON -->
+<tr class="hover:bg-slate-50/50 transition">
+<td class="p-4 pl-5">
+<div class="font-bold text-on-surface text-sm">文字按钮 (Text/Link)</div>
+<div class="text-[11px] text-secondary font-mono mt-0.5">type="text" (link)</div>
+<div class="text-[11px] text-[#4573a1] mt-1 leading-snug">表格行内操作绝对主体<br/>严禁使用实体色块</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<button class="h-8 px-2 text-[#0060a9] font-medium text-xs hover:bg-[#ecf5ff] rounded transition inline-flex items-center">
+<span>查看详情</span>
+</button>
+<button class="h-8 px-2 text-[#f56c6c] font-medium text-xs hover:bg-[#fef0f0] rounded transition inline-flex items-center">
+<span>移出布控</span>
+</button>
+</div>
+<div class="text-[10px] text-secondary font-mono mt-2">常规蓝色 / 警务危险红色链接</div>
+</td>
+<td class="p-4">
+<button class="h-8 px-2.5 bg-[#ecf5ff] text-[#0060a9] font-medium text-xs rounded transition inline-flex items-center">
+<span>详情 (悬停淡蓝底)</span>
+</button>
+<div class="text-[10px] text-secondary font-mono mt-2">hover: bg: #ecf5ff / r: 4px</div>
+</td>
+<td class="p-4">
+<button class="h-8 px-2 text-[#c0c4cc] font-medium text-xs cursor-not-allowed inline-flex items-center" disabled="">
+<span>无权审批 (禁用)</span>
+</button>
+<div class="text-[10px] text-secondary font-mono mt-2">text: #c0c4cc / transparent</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<button class="text-[11px] text-[#0060a9] font-medium hover:underline">Sm 12px</button>
+<span class="text-[#c0c7d4]">|</span>
+<button class="text-xs text-[#0060a9] font-medium hover:underline">Def 13px</button>
+<span class="text-[#c0c7d4]">|</span>
+<button class="text-sm text-[#0060a9] font-semibold hover:underline">Lg 14px</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix Footer Footnote -->
+<div class="p-3 bg-[#f8f9fc] border-t border-[#e6edf4] flex flex-wrap items-center justify-between text-xs text-secondary px-5">
+<span class="inline-flex items-center gap-1.5 font-mono">
+<span class="size-2 rounded-full bg-tertiary-container"></span>
+                规范核对：已与 Element Plus 2.4.0 样式层完成 Token 契约绑定
+              </span>
+<span>公安视觉标准代码：GA/T-VIS-SPEC-0932</span>
+</div>
+</div>
+</div>
+<!-- SECTION 2: CANONICAL BUSINESS PATTERNS -->
+<div class="px-4 py-6 space-y-6">
+<div class="flex items-center justify-between border-l-4 border-primary pl-3">
+<div>
+<h2 class="text-lg font-bold text-on-surface">2. 警务实战业务场景示例 (Canonical Business Patterns)</h2>
+<p class="text-xs text-secondary mt-0.5">演示「一屏一主操作」、「操作层次分明」、「危险操作二次警示」的落地编排模式。</p>
+</div>
+<span class="text-xs bg-primary/10 text-primary font-semibold px-2 py-0.5 rounded">PATTERNS</span>
+</div>
+<!-- Scenario A: Table Toolbar Pattern -->
+<div class="bg-surface-container-lowest border border-[#cddbea] rounded-lg shadow-sm p-5 space-y-4">
+<div class="flex items-center justify-between border-b border-[#e6edf4] pb-3">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary"></div>
+<h3 class="font-bold text-sm text-on-surface">场景一：列表页工具栏 (Toolbar Pattern 经典编排)</h3>
+</div>
+<span class="text-xs text-secondary bg-[#e6edf4] px-2 py-0.5 rounded font-mono">H=32px 基准标准</span>
+</div>
+<!-- Fake Search Bar + Toolbar Wrapper -->
+<div class="bg-[#f8f9fb] border border-[#e2e8f0] rounded p-4 space-y-4">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<!-- Left: Status & Search Filter Result -->
+<div class="flex items-center gap-3">
+<div class="relative">
+<input class="h-8 pl-8 pr-3 text-xs rounded border border-[#dcdfe6] focus:border-primary focus:ring-0 w-52 bg-white" placeholder="检索线索或警号..." type="text" value="涉警重点人员动态"/>
+<span class="material-symbols-outlined absolute left-2 top-2 text-secondary" style="font-size:16px;">search</span>
+</div>
+<div class="text-xs text-secondary">
+                    检索命中：共筛选出 <strong class="text-primary font-bold">148</strong> 条涉案重点记录
+                  </div>
+</div>
+<!-- Right: Strict Button Hierarchy -->
+<div class="flex items-center gap-2 flex-wrap">
+<!-- 1. Primary Action -->
+<button class="inline-flex items-center gap-1.5 h-8 px-4 bg-[#0060a9] text-white font-medium rounded text-xs hover:bg-[#00508f] transition shadow-xs">
+<span class="material-symbols-outlined" style="font-size:15px;">add</span>
+<span>新增警务服务</span>
+</button>
+<!-- 2. Danger Action (needs confirm context) -->
+<button class="inline-flex items-center gap-1.5 h-8 px-4 bg-[#f56c6c] text-white font-medium rounded text-xs hover:bg-[#e65d5d] transition shadow-xs">
+<span class="material-symbols-outlined" style="font-size:15px;">delete</span>
+<span>批量删除</span>
+</button>
+<!-- 3. Default Action with Download Icon -->
+<button class="inline-flex items-center gap-1.5 h-8 px-4 bg-white border border-[#dcdfe6] text-[#4e5969] font-medium rounded text-xs hover:border-[#0060a9] hover:text-[#0060a9] hover:bg-[#ecf5ff] transition">
+<span class="material-symbols-outlined" style="font-size:15px;">download</span>
+<span>导出涉案清单</span>
+</button>
+<!-- 4. Pure Icon Refresh Button -->
+<button class="inline-flex items-center justify-center size-8 bg-white border border-[#dcdfe6] text-[#4e5969] rounded hover:border-[#0060a9] hover:text-[#0060a9] hover:bg-[#ecf5ff] transition" title="刷新数据">
+<span class="material-symbols-outlined" style="font-size:16px;">refresh</span>
+</button>
+</div>
+</div>
+<!-- Mini Mock Table Demonstrating Row Link Actions -->
+<div class="bg-white border border-[#e6edf4] rounded overflow-hidden">
+<table class="w-full text-left text-xs border-collapse">
+<thead class="bg-[#f1f3fa] text-secondary font-semibold border-b border-[#e6edf4]">
+<tr>
+<th class="p-2.5 pl-4 w-10"><input class="rounded border-gray-300 text-primary focus:ring-0" type="checkbox"/></th>
+<th class="p-2.5">预警编号</th>
+<th class="p-2.5">布控对象</th>
+<th class="p-2.5">处置级别</th>
+<th class="p-2.5">归属网格</th>
+<th class="p-2.5">更新时间</th>
+<th class="p-2.5 text-right pr-4">行内操作 (强制文字形态)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#f1f3fa] text-on-surface">
+<tr class="hover:bg-slate-50/80">
+<td class="p-2.5 pl-4"><input class="rounded border-gray-300 text-primary focus:ring-0" type="checkbox"/></td>
+<td class="p-2.5 font-mono text-secondary">AL-2024-8841</td>
+<td class="p-2.5 font-medium">张*发 (420104********0912)</td>
+<td class="p-2.5"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-red-100 text-red-700">一级红色告警</span></td>
+<td class="p-2.5">特巡警一支队 03 巡逻组</td>
+<td class="p-2.5 text-secondary font-mono">14:28:10</td>
+<td class="p-2.5 text-right pr-4 space-x-2">
+<button class="text-primary hover:underline font-medium">查验轨迹</button>
+<span class="text-gray-300">|</span>
+<button class="text-primary hover:underline font-medium">指派处置</button>
+<span class="text-gray-300">|</span>
+<button class="text-[#f56c6c] hover:underline font-medium">移出布控</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/80">
+<td class="p-2.5 pl-4"><input class="rounded border-gray-300 text-primary focus:ring-0" type="checkbox"/></td>
+<td class="p-2.5 font-mono text-secondary">AL-2024-8842</td>
+<td class="p-2.5 font-medium">李*波 (320501********3419)</td>
+<td class="p-2.5"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-100 text-amber-700">二级黄色预警</span></td>
+<td class="p-2.5">站前派出所 视巡中队</td>
+<td class="p-2.5 text-secondary font-mono">14:31:05</td>
+<td class="p-2.5 text-right pr-4 space-x-2">
+<button class="text-primary hover:underline font-medium">查验轨迹</button>
+<span class="text-gray-300">|</span>
+<button class="text-primary hover:underline font-medium">指派处置</button>
+<span class="text-gray-300">|</span>
+<button class="text-[#f56c6c] hover:underline font-medium">移出布控</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="text-xs text-secondary flex items-center gap-2 bg-[#f1f3fa] p-2.5 rounded">
+<span class="material-symbols-outlined text-primary" style="font-size:16px;">info</span>
+<span><strong>设计准则核对：</strong>一屏确保只有 1 个全局主按钮（新增），次级工具使用 Default 白底，危险删除必须放置于次席并给予红色警示色，行内一律采用无框超链。</span>
+</div>
+</div>
+<!-- Scenario B: Modal Footer Pattern -->
+<div class="bg-surface-container-lowest border border-[#cddbea] rounded-lg shadow-sm p-5 space-y-4">
+<div class="flex items-center justify-between border-b border-[#e6edf4] pb-3">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary"></div>
+<h3 class="font-bold text-sm text-on-surface">场景二：模态弹窗底部操作栏 (Modal Footer Pattern 标准规范)</h3>
+</div>
+<span class="text-xs text-secondary bg-[#e6edf4] px-2 py-0.5 rounded font-mono">W=672px 标准模态底栏</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Subcase 1: Normal Submit Flow with Loading State -->
+<div class="border border-[#cddbea] rounded bg-white overflow-hidden flex flex-col">
+<div class="px-4 py-3 bg-[#f8f9fc] border-b border-[#e6edf4] flex justify-between items-center">
+<span class="font-bold text-xs text-on-surface">常规表单模态底栏（右对齐 12px 间距）</span>
+<span class="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-mono">NORMAL FLOW</span>
+</div>
+<div class="p-4 flex-1 text-xs text-secondary space-y-2">
+<p class="font-medium text-on-surface">涉案警情跨部门协同指派单 #CMD-2024-09</p>
+<p>请仔细核验接收单位执勤民警警号与加密通信信道，确认后进入即时协同对讲状态。</p>
+</div>
+<!-- Modal Footer Bar -->
+<div class="px-4 py-3 bg-[#f8f9fb] border-t border-[#e6edf4] flex items-center justify-end gap-3">
+<button class="h-8 px-4 bg-white border border-[#dcdfe6] text-[#4e5969] font-medium rounded text-xs hover:border-[#0060a9] hover:text-[#0060a9] transition">
+                    取消
+                  </button>
+<button class="h-8 px-4 bg-[#0060a9] text-white font-medium rounded text-xs hover:bg-[#00508f] transition inline-flex items-center gap-1.5 shadow-xs" id="demoLoadingBtn" onclick="toggleLoadingState()">
+<span class="hidden animate-spin size-3.5 border-2 border-white border-t-transparent rounded-full" id="demoLoadingSpinner"></span>
+<span id="demoBtnLabel">确认指派协同</span>
+</button>
+</div>
+</div>
+<!-- Subcase 2: Destructive Modal Flow -->
+<div class="border border-[#cddbea] rounded bg-white overflow-hidden flex flex-col">
+<div class="px-4 py-3 bg-[#f8f9fc] border-b border-[#e6edf4] flex justify-between items-center">
+<span class="font-bold text-xs text-error">高危确认模态底栏（终止 / 销毁）</span>
+<span class="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-mono">HIGH-RISK FLOW</span>
+</div>
+<div class="p-4 flex-1 text-xs text-secondary space-y-2">
+<p class="font-medium text-error">注意：强制终止行动将立即断开全部现场音视频流</p>
+<p>本操作将记录至不可篡改纪律追溯链条中，并向总指挥中心发送高危状态警报广播。</p>
+</div>
+<!-- Destructive Modal Footer Bar -->
+<div class="px-4 py-3 bg-[#f8f9fb] border-t border-[#e6edf4] flex items-center justify-end gap-3">
+<button class="h-8 px-4 bg-white border border-[#dcdfe6] text-[#4e5969] font-medium rounded text-xs hover:border-[#0060a9] transition">
+                    返回核验
+                  </button>
+<button class="h-8 px-4 bg-[#f56c6c] text-white font-medium rounded text-xs hover:bg-[#e65d5d] transition inline-flex items-center gap-1.5 shadow-xs">
+<span class="material-symbols-outlined" style="font-size:14px;">warning</span>
+<span>确认强制终止</span>
+</button>
+</div>
+</div>
+</div>
+<p class="text-[11px] text-[#4573a1]">交互提示：点击上方“确认指派协同”按钮可直接模拟前端异步提交的 Loading 生命周期变化。</p>
+</div>
+</div>
+<!-- SECTION 3: R&D SPECIFICATION & TOKEN CONTRACT -->
+<div class="px-4 py-6 space-y-6">
+<div class="flex items-center justify-between border-l-4 border-primary pl-3">
+<div>
+<h2 class="text-lg font-bold text-on-surface">3. 研发契约与 Token 规范映射 (Element Plus Bridge)</h2>
+<p class="text-xs text-secondary mt-0.5">将 UI 规范沉淀为工程级 CSS 变量与 Vue 3 Component API 接口契约，杜绝硬编码偏离。</p>
+</div>
+<span class="text-xs bg-[#e6edf4] text-secondary font-mono px-2 py-0.5 rounded">DEV CONTRACT</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Left: CSS Variables Definition -->
+<div class="bg-surface-container-lowest border border-[#cddbea] rounded-lg overflow-hidden shadow-sm flex flex-col">
+<div class="px-4 py-3 bg-surface-container-low border-b border-[#cddbea] flex items-center justify-between">
+<span class="text-xs font-bold text-on-surface flex items-center gap-1.5 font-mono">
+<span class="material-symbols-outlined text-primary" style="font-size:16px;">css</span>
+                  CSS Variables Contract (--lx-btn-*)
+                </span>
+<span class="text-[11px] text-secondary font-mono">variables.scss</span>
+</div>
+<div class="p-4 custom-code-block text-xs leading-relaxed overflow-x-auto flex-1 font-mono">
+<pre class="m-0"><span class="text-slate-400">/* 公安视觉体系基准按钮变量映射 */</span>
+<span class="text-purple-400">:root</span> {
+  <span class="text-sky-300">--lx-btn-font-family</span>: <span class="text-amber-300">Inter, "Noto Sans SC", sans-serif</span>;
+  
+  <span class="text-slate-400">/* 主色规范 */</span>
+  <span class="text-sky-300">--lx-btn-primary-bg</span>: <span class="text-emerald-400">#0060a9</span>;
+  <span class="text-sky-300">--lx-btn-primary-hover</span>: <span class="text-emerald-400">#00508f</span>;
+  <span class="text-sky-300">--lx-btn-primary-active</span>: <span class="text-emerald-400">#00447c</span>;
+  <span class="text-sky-300">--lx-btn-primary-disabled-opacity</span>: <span class="text-amber-300">0.45</span>;
+
+  <span class="text-slate-400">/* 警情危险色规范 */</span>
+  <span class="text-sky-300">--lx-btn-danger-bg</span>: <span class="text-rose-400">#f56c6c</span>;
+  <span class="text-sky-300">--lx-btn-danger-hover</span>: <span class="text-rose-400">#e65d5d</span>;
+
+  <span class="text-slate-400">/* 高度与边距阶梯 (Padding &amp; Height) */</span>
+  <span class="text-sky-300">--lx-btn-height-sm</span>: <span class="text-amber-300">28px</span>;
+  <span class="text-sky-300">--lx-btn-height-default</span>: <span class="text-amber-300">32px</span>;
+  <span class="text-sky-300">--lx-btn-height-lg</span>: <span class="text-amber-300">40px</span>;
+  
+  <span class="text-sky-300">--lx-btn-padding-x</span>: <span class="text-amber-300">16px</span>;
+  <span class="text-sky-300">--lx-btn-text-padding-x</span>: <span class="text-amber-300">8px</span>;
+  <span class="text-sky-300">--lx-btn-radius</span>: <span class="text-amber-300">4px</span>;
+}</pre>
+</div>
+</div>
+<!-- Right: Vue 3 Element Plus Bridge Snippet & Strict Rules -->
+<div class="bg-surface-container-lowest border border-[#cddbea] rounded-lg overflow-hidden shadow-sm flex flex-col">
+<div class="px-4 py-3 bg-surface-container-low border-b border-[#cddbea] flex items-center justify-between">
+<span class="text-xs font-bold text-on-surface flex items-center gap-1.5 font-mono">
+<span class="material-symbols-outlined text-primary" style="font-size:16px;">code</span>
+                  Vue 3 / TypeScript 调用范式
+                </span>
+<span class="text-[11px] text-secondary font-mono"><template></template></span>
+</div>
+<div class="p-4 custom-code-block text-xs leading-relaxed overflow-x-auto flex-1 font-mono">
+<pre class="m-0"><span class="text-slate-400"><!-- 业务层直接调用二次封装的 LxButton --></span>
+<span class="text-purple-400"><template></template></span>
+  <span class="text-slate-400"><!-- 1. 主表单提交 (标准 32px) --></span>
+  <span class="text-sky-300"><lxbutton< span=""> 
+    <span class="text-amber-300">type</span>=<span class="text-emerald-400">"primary"</span> 
+    <span class="text-amber-300">:loading</span>=<span class="text-emerald-400">"submitting"</span> 
+    <span class="text-amber-300">@click</span>=<span class="text-emerald-400">"handleSubmit"</span><span class="text-sky-300">&gt;</span>
+    确认下发指令
+  <span class="text-sky-300"></span>
+
+  <span class="text-slate-400"><!-- 2. 行内表格操作 (绝对禁止色块轰炸) --></span>
+  <span class="text-sky-300"><lxbutton< span=""> 
+    <span class="text-amber-300">type</span>=<span class="text-emerald-400">"text"</span> 
+    <span class="text-amber-300">@click</span>=<span class="text-emerald-400">"openDetail"</span><span class="text-sky-300">&gt;</span>
+    查看研判
+  <span class="text-sky-300"></span>
+<span class="text-purple-400"></span></lxbutton<></span></lxbutton<></span></pre>
+</div>
+<!-- Guidelines Callout -->
+<div class="p-3 bg-amber-50/70 border-t border-amber-200 text-xs text-amber-900 flex items-start gap-2">
+<span class="material-symbols-outlined text-amber-700 shrink-0" style="font-size:16px;">warning</span>
+<div>
+<strong class="font-semibold">拍板 #11 铁律核查清单：</strong>
+<ul class="list-disc list-inside mt-0.5 text-[11px] text-amber-800 space-y-0.5">
+<li>表格 Table 行内绝对禁止使用 Type=Primary 实底按钮（避免视觉噪声过载）。</li>
+<li>同屏主按钮（Primary）上限严格限制为 1 个，多任务必须降级为次按钮（Default）。</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FOOTER ANCHOR -->
+<footer class="mt-8 border-t border-[#e6edf4] py-6 px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-secondary">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary"></div>
+<span>公安视讯与综合业务系统 · 规范标本库 (GB/T 33170 COMPLIANT)</span>
+</div>
+<div class="flex items-center gap-4 text-secondary">
+<span>设计评审拍板: #11 规范决议 (2024Q3)</span>
+<span>•</span>
+<span>Maintainer: UI Architecture Guild</span>
+</div>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple Micro-interaction for Modal Async Button
+  let isLoading = false;
+  function toggleLoadingState() {
+    isLoading = !isLoading;
+    const spinner = document.getElementById('demoLoadingSpinner');
+    const label = document.getElementById('demoBtnLabel');
+    const btn = document.getElementById('demoLoadingBtn');
+
+    if (isLoading) {
+      spinner.classList.remove('hidden');
+      label.innerText = '下发指令中...';
+      btn.classList.add('opacity-80', 'cursor-wait');
+      setTimeout(() => {
+        if (isLoading) toggleLoadingState();
+      }, 2500);
+    } else {
+      spinner.classList.add('hidden');
+      label.innerText = '确认指派协同';
+      btn.classList.remove('opacity-80', 'cursor-wait');
+    }
+  }
+</script>
+</body></html>

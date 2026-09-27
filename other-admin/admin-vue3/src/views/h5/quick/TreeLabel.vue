@@ -57,19 +57,20 @@ function handleDelete(_node: unknown, data: LabelItem): void {
     type: 'warning',
     confirmButtonClass: 'el-button--danger',
   })
-    .then(async () => {
-      try {
-        const res = await labelDelete(String(data.id));
-        if (res.code !== 0) {
-          ElMessage.error(res.msg ?? '删除失败，请重试');
-          return;
-        }
-        ElMessage.success('删除成功');
-        fetchTree();
-      } catch (e) {
-        ElMessage.error((e as Error)?.message ?? '删除失败，请重试');
-      }
-    })
+    .then(() =>
+      labelDelete(String(data.id))
+        .then((res) => {
+          if (res.code !== 0) {
+            ElMessage.error(res.msg ?? '删除失败，请重试');
+            return;
+          }
+          ElMessage.success('删除成功');
+          fetchTree();
+        })
+        .catch((e: unknown) => {
+          ElMessage.error(e instanceof Error ? e.message : '删除失败，请重试');
+        }),
+    )
     .catch(() => {
       // 取消删除，忽略
     });
@@ -87,23 +88,24 @@ function handleBatchDelete(): void {
     type: 'warning',
     confirmButtonClass: 'el-button--danger',
   })
-    .then(async () => {
-      try {
-        const ids = selectedLabels.value
-          .map((item) => item.id)
-          .filter((id): id is string => Boolean(id))
-          .map(String);
-        const res = await labelBatchDelete(ids);
-        if (res.code !== 0) {
-          ElMessage.error(res.msg ?? '删除失败，请重试');
-          return;
-        }
-        ElMessage.success('删除成功');
-        selectedLabels.value = [];
-        fetchTree();
-      } catch (e) {
-        ElMessage.error((e as Error)?.message ?? '删除失败，请重试');
-      }
+    .then(() => {
+      const ids = selectedLabels.value
+        .map((item) => item.id)
+        .filter((id): id is string => Boolean(id))
+        .map(String);
+      return labelBatchDelete(ids)
+        .then((res) => {
+          if (res.code !== 0) {
+            ElMessage.error(res.msg ?? '删除失败，请重试');
+            return;
+          }
+          ElMessage.success('删除成功');
+          selectedLabels.value = [];
+          fetchTree();
+        })
+        .catch((e: unknown) => {
+          ElMessage.error(e instanceof Error ? e.message : '删除失败，请重试');
+        });
     })
     .catch(() => {
       // 取消删除，忽略
@@ -121,16 +123,18 @@ function handleCheckChange(): void {
 }
 
 /** 拉取标签树 */
-async function fetchTree(): Promise<void> {
+function fetchTree(): Promise<void> {
   treeLoading.value = true;
-  try {
-    const res = await labelList();
-    treeData.value = (res.data ?? []) as LabelItem[];
-  } catch {
-    ElMessage.error('加载标签树失败');
-  } finally {
-    treeLoading.value = false;
-  }
+  return labelList()
+    .then((res) => {
+      treeData.value = (res.data ?? []) as LabelItem[];
+    })
+    .catch(() => {
+      ElMessage.error('加载标签树失败');
+    })
+    .finally(() => {
+      treeLoading.value = false;
+    });
 }
 
 /** 表单提交成功后刷新 */

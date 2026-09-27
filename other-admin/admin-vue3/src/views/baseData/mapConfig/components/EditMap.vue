@@ -261,25 +261,31 @@ async function handleSubmit(): Promise<void> {
     }
   }
   submitLoading.value = true;
-  try {
-    const payload: MapItem = {
-      ...formData,
-      configuration: configurationStr,
-    };
-    if (isAdd.value) {
-      delete payload.id;
-    }
-    const res = isAdd.value ? await createMap(payload) : await updateMap(payload);
-    if (res.code === 0) {
-      ElMessage.success(res.msg || (isAdd.value ? '新增成功' : '修改成功'));
-      dialogVisible.value = false;
-      emit('success');
-    } else {
-      ElMessage.error(res.msg || (isAdd.value ? '新增失败' : '修改失败'));
-    }
-  } finally {
-    submitLoading.value = false;
+  const payload: MapItem = {
+    ...formData,
+    configuration: configurationStr,
+  };
+  const isCreating = isAdd.value;
+  if (isCreating) {
+    delete payload.id;
   }
+  const saveRequest = isCreating ? createMap(payload) : updateMap(payload);
+  saveRequest
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(res.msg || (isCreating ? '新增成功' : '修改成功'));
+        dialogVisible.value = false;
+        emit('success');
+      } else {
+        ElMessage.error(res.msg || (isCreating ? '新增失败' : '修改失败'));
+      }
+    })
+    .catch(() => {
+      ElMessage.error(isCreating ? '新增失败，请重试' : '修改失败，请重试');
+    })
+    .finally(() => {
+      submitLoading.value = false;
+    });
 }
 
 /** 关闭弹窗 */

@@ -108,7 +108,8 @@
  */
 
 import { FolderOpened } from '@element-plus/icons-vue';
-import { computed, ref, watch, type ComputedRef, type CSSProperties } from 'vue';
+import { LxProTable } from 'lx-ui';
+import { computed, onBeforeUnmount, ref, watch, type CSSProperties } from 'vue';
 
 import { defaultTableFormatter } from './formatter';
 import type { ITableColumn } from './types';
@@ -170,6 +171,8 @@ interface Props {
   highlightCurrentRow?: boolean;
   /** 表头单元格样式 */
   headerCellStyle?: CSSProperties | (() => CSSProperties);
+  /** 透传给内部 LxProTable 的 ElTable 属性；data、row-key 和内部事件由本组件管理 */
+  tableAttrs?: Record<string, unknown>;
   /** 是否显示分页器 */
   showPagination?: boolean;
   /** 是否斑马纹 */
@@ -209,7 +212,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  data: () => [],
+  data: undefined,
   loading: undefined,
   total: 0,
   page: 1,
@@ -235,6 +238,7 @@ const props = withDefaults(defineProps<Props>(), {
       fontWeight: '600',
       fontSize: '14px',
     }) as CSSProperties,
+  tableAttrs: () => ({}),
   showPagination: true,
   // 远程模式默认值
   fetchApi: undefined,
@@ -267,9 +271,9 @@ const emit = defineEmits<{
 /** 是否远程模式（传入了 fetchApi） */
 const isRemoteMode = computed(() => typeof props.fetchApi === 'function');
 /** 是否受控模式（同时传入了 data 和 fetchApi，data 优先展示） */
-const isControlledMode = computed(() => isRemoteMode.value && props.data && props.data.length >= 0);
+const isControlledMode = computed(() => isRemoteMode.value && props.data !== undefined);
 /** 是否纯远程模式（未传 data，ProTable 内部维护数据） */
-const isPureRemoteMode = computed(() => isRemoteMode.value && !props.data?.length);
+const isPureRemoteMode = computed(() => isRemoteMode.value && !isControlledMode.value);
 
 // ===== 内部状态（远程模式使用） =====
 const innerData = ref<any[]>([]);
@@ -279,7 +283,7 @@ const innerPage = ref(props.page);
 const innerLimit = ref(props.limit);
 
 // 当前请求的 AbortController
-let currentController: AbortController | undefined;
+let abortCurrentRequest: (() => void) | undefined;
 // 请求序号，用于判断请求是否过期
 let requestSeq = 0;
 
@@ -293,7 +297,7 @@ const displayData = computed(() => {
   // 纯远程模式：用内部数据
   if (isPureRemoteMode.value) return innerData.value;
   // 受控模式 / 展示模式：用 props.data
-  return props.data;
+  return props.data ?? [];
 });
 
 /** 最终 loading：父组件传入优先，否则用内部 */
@@ -348,78 +352,84 @@ function buildParams(overridePage?: number, overrideLimit?: number): Record<stri
 /**
  * 执行一次请求
  */
-async function executeFetch(params: Record<string, any>): Promise<any> {
-  if (!props.fetchApi) return undefined;
+function executeFetch(params: Record<string, any>): Promise<any> {
+  if (!props.fetchApi) return Promise.resolve(undefined);
 
   // 取消上一次未完成请求
-  if (currentController) {
-    currentController.abort();
-  }
-  currentController = new AbortController();
   const seq = ++requestSeq;
+  abortCurrentRequest?.();
+  abortCurrentRequest = undefined;
 
   innerLoading.value = true;
   emit('loading-change', true);
 
-  try {
-    const res = await props.fetchApi(params);
+  const request = props.fetchApi(params) as Promise<any> & { abortFetch?: () => void };
+  abortCurrentRequest = request.abortFetch;
+  return request
+    .then((res) => {
+      // 请求已过期（被新请求取消），丢弃结果
+      if (seq !== requestSeq) return undefined;
 
-    // 请求已过期（被新请求取消），丢弃结果
-    if (seq !== requestSeq) return undefined;
+      if (res && typeof res.code === 'number' && res.code !== 0) {
+        throw new Error(res.msg || res.message || '查询失败');
+      }
 
-    // 始终 emit response，让父组件拿到完整响应（受控模式下父组件决定是否更新 data）
-    emit('response', res, params);
+      // 始终 emit response，让父组件拿到完整响应（受控模式下父组件决定是否更新 data）
+      emit('response', res, params);
 
-    // 纯远程模式下，用默认格式化器提取 records 和 total
-    if (isPureRemoteMode.value) {
-      innerData.value = defaultTableFormatter.getRecords(res);
-      innerTotal.value = defaultTableFormatter.getTotal(res);
-    }
+      // 纯远程模式下，用默认格式化器提取 records 和 total
+      if (isPureRemoteMode.value) {
+        innerData.value = defaultTableFormatter.getRecords(res);
+        innerTotal.value = defaultTableFormatter.getTotal(res);
+      }
 
-    return res;
-  } catch (err) {
-    if (seq !== requestSeq) return undefined;
+      return res;
+    })
+    .catch((err: unknown) => {
+      if (seq !== requestSeq) return undefined;
 
-    const e = err instanceof Error ? err : new Error(String(err));
-    emit('response-error', e, params);
-    return undefined;
-  } finally {
-    if (seq === requestSeq) {
-      innerLoading.value = false;
-      emit('loading-change', false);
-    }
-  }
+      const e = err instanceof Error ? err : new Error(String(err));
+      emit('response-error', e, params);
+      return undefined;
+    })
+    .finally(() => {
+      if (seq === requestSeq) {
+        abortCurrentRequest = undefined;
+        innerLoading.value = false;
+        emit('loading-change', false);
+      }
+    });
 }
 
 // ===== Expose 方法（远程模式） =====
 /**
  * init：重置页码到 1 并请求（用最新 searchParams）
  */
-async function init(): Promise<void> {
+function init(): Promise<void> {
   if (!isRemoteMode.value) {
     console.warn('[ProTable] init 仅在远程模式（传入 fetchApi）下生效');
-    return;
+    return Promise.resolve();
   }
   innerPage.value = 1;
-  await executeFetch(buildParams(1, innerLimit.value));
+  return executeFetch(buildParams(1, innerLimit.value)).then(() => undefined);
 }
 
 /**
  * refresh：保持当前页码和参数重新请求
  */
-async function refresh(): Promise<void> {
+function refresh(): Promise<void> {
   if (!isRemoteMode.value) {
     console.warn('[ProTable] refresh 仅在远程模式（传入 fetchApi）下生效');
-    return;
+    return Promise.resolve();
   }
-  await executeFetch(buildParams());
+  return executeFetch(buildParams()).then(() => undefined);
 }
 
 /**
  * fetchPage：手动触发指定页码请求（autoFetchOnPagination=false 时使用）
  */
-async function fetchPage(page: number, limit: number): Promise<void> {
-  if (!isRemoteMode.value) return;
+function fetchPage(page: number, limit: number): Promise<void> {
+  if (!isRemoteMode.value) return Promise.resolve();
 
   // 每页条数变化时回到第 1 页
   if (limit !== innerLimit.value) {
@@ -428,20 +438,21 @@ async function fetchPage(page: number, limit: number): Promise<void> {
     innerPage.value = page;
   }
   innerLimit.value = limit;
-  await executeFetch(buildParams());
+  return executeFetch(buildParams()).then(() => undefined);
 }
 
 /**
  * cancelFetch：取消当前未完成请求
  */
 function cancelFetch(): void {
-  if (currentController) {
-    currentController.abort();
-    currentController = undefined;
-    innerLoading.value = false;
-    emit('loading-change', false);
-  }
+  ++requestSeq;
+  abortCurrentRequest?.();
+  abortCurrentRequest = undefined;
+  innerLoading.value = false;
+  emit('loading-change', false);
 }
+
+onBeforeUnmount(cancelFetch);
 
 /**
  * mutate：乐观更新内部数据（仅纯远程模式生效）
@@ -510,7 +521,7 @@ defineExpose({
   clearAllSelection,
   getMultipleSelection,
   toggleRowSelection,
-  getTableRef: () => tableRef.value,
+  getTableRef: () => tableRef.value?.getTableRef(),
 });
 
 // ===== immediate 处理 =====
@@ -535,20 +546,24 @@ watch(
 
 <template>
   <div class="pro-table">
-    <el-table
+    <LxProTable
       ref="tableRef"
-      v-loading="displayLoading"
+      :loading="displayLoading"
       :data="displayData"
-      :border="border"
+      :bordered="border"
       :stripe="stripe"
-      :highlight-current-row="highlightCurrentRow"
       :row-key="rowKey"
-      :header-cell-style="headerCellStyle"
+      :table-attrs="{
+        ...props.tableAttrs,
+        border,
+        highlightCurrentRow,
+        headerCellStyle,
+        onSelectionChange: handleSelectionChange,
+        onRowClick: (row: any, column: unknown, event: Event) => emit('row-click', row, column, event),
+        onRowDblclick: (row: any, column: unknown, event: Event) => emit('row-dblclick', row, column, event),
+      }"
       style="width: 100%"
       class="pro-table__inner"
-      @selection-change="handleSelectionChange"
-      @row-click="(row, column, event) => emit('row-click', row, column, event)"
-      @row-dblclick="(row, column, event) => emit('row-dblclick', row, column, event)"
     >
       <el-table-column
         v-if="showSelection"
@@ -577,30 +592,50 @@ watch(
           <template #default="scope">
             <slot
               v-if="col.slotName"
-              :name="col.slotName"
+              :name="`cell-${col.slotName}`"
               :row="scope.row"
               :column="scope.column"
               :$index="scope.$index"
-            />
-            <span v-else-if="col.formatter">{{
-              col.formatter(scope.row, scope.column, scope.row[col.prop], scope.$index)
-            }}</span>
-            <span v-else>{{ scope.row[col.prop] }}</span>
+            >
+              <slot :name="col.slotName" :row="scope.row" :column="scope.column" :$index="scope.$index">
+                {{
+                  col.formatter
+                    ? col.formatter(scope.row, scope.column, scope.row[col.prop], scope.$index)
+                    : scope.row[col.prop]
+                }}
+              </slot>
+            </slot>
+            <slot
+              v-else-if="col.formatter"
+              :name="`cell-${col.prop}`"
+              :row="scope.row"
+              :column="scope.column"
+              :$index="scope.$index"
+            >
+              <span>{{ col.formatter(scope.row, scope.column, scope.row[col.prop], scope.$index) }}</span>
+            </slot>
+            <slot v-else :name="`cell-${col.prop}`" :row="scope.row" :column="scope.column" :$index="scope.$index">
+              <span>{{ scope.row[col.prop] }}</span>
+            </slot>
           </template>
           <template v-if="col.headerSlotName" #header="scope">
-            <slot :name="col.headerSlotName" :column="scope.column" :$index="scope.$index" />
+            <slot :name="`header-${col.headerSlotName}`" :column="scope.column" :$index="scope.$index">
+              <slot :name="col.headerSlotName" :column="scope.column" :$index="scope.$index" />
+            </slot>
           </template>
         </el-table-column>
       </template>
 
       <!-- 空数据 -->
       <template #empty>
-        <div class="pro-table__empty">
-          <el-icon :size="40"><FolderOpened /></el-icon>
-          <p>暂无数据</p>
-        </div>
+        <slot name="empty">
+          <div class="pro-table__empty">
+            <el-icon :size="40"><FolderOpened /></el-icon>
+            <p>暂无数据</p>
+          </div>
+        </slot>
       </template>
-    </el-table>
+    </LxProTable>
 
     <div v-if="showPagination" v-show="displayTotal > 0" class="pro-table__pagination">
       <Pagination
@@ -622,6 +657,21 @@ watch(
   .pro-table__inner {
     :deep(.el-table__row) {
       transition: background-color @transition-duration ease;
+    }
+
+    .pro-table__empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: @spacing-section 0;
+      color: @color-text-secondary;
+      font-size: @font-size-md;
+    }
+
+    .pro-table__empty .el-icon {
+      margin-bottom: @spacing-md;
+      color: @color-text-placeholder;
     }
 
     // 表头底部加粗边框 + 主色淡化线点缀

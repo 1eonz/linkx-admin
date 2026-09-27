@@ -10,25 +10,26 @@
 
 ```ts
 /** 语义状态（贯穿 StatusDot / Tag / Switch / MetricCard） */
-type LxStatus = 'online' | 'processing' | 'busy' | 'error' | 'offline' | 'success' | 'warning';
+type LxStatus =
+  'online' | 'processing' | 'busy' | 'error' | 'offline' | 'success' | 'warning'
 
 /** 侧边栏形态 */
-type LxSidebarMode = 'rail' | 'expanded';
+type LxSidebarMode = 'rail' | 'expanded'
 
 /** 通用尺寸 */
-type LxSize = 'small' | 'default' | 'large';
+type LxSize = 'small' | 'default' | 'large'
 
 /** 菜单数据节点（业务方从权限菜单接口映射后传入） */
 interface LxMenuItem {
-  key: string;                    // 唯一标识（路由 name）
-  title: string;                  // 显示标题
-  icon?: string;                  // svg 图标名（lx-ui 内置 svg-sprite）
-  path?: string;                  // 路由地址（直达项）
-  children?: LxMenuItem[];        // 二级菜单
-  badge?: number | string;        // 角标（如预警数量）
-  badgeType?: LxStatus;           // 角标颜色
-  disabled?: boolean;
-  meta?: Record<string, unknown>; // 业务透传（如权限标识）
+  key: string // 唯一标识（路由 name）
+  title: string // 显示标题
+  icon?: string // svg 图标名（lx-ui 内置 svg-sprite）
+  path?: string // 路由地址（直达项）
+  children?: LxMenuItem[] // 二级菜单
+  badge?: number | string // 角标（如预警数量）
+  badgeType?: LxStatus // 角标颜色
+  disabled?: boolean
+  meta?: Record<string, unknown> // 业务透传（如权限标识）
 }
 ```
 
@@ -44,46 +45,46 @@ interface LxMenuItem {
 // Props
 interface Props {
   /** 当前形态：expanded=252px（_2）/ rail=64px（_1） */
-  mode?: LxSidebarMode;                    // default: 'expanded'
+  mode?: LxSidebarMode // default: 'expanded'
   /** 菜单数据（业务方从权限菜单接口映射） */
-  items?: LxMenuItem[];                    // default: []
+  items?: LxMenuItem[] // default: []
   /** 激活项 key（受控，通常绑 route.name） */
-  activeKey?: string;
+  activeKey?: string
   /** 默认展开的二级菜单 keys */
-  expandedKeys?: string[];
+  expandedKeys?: string[]
   /** 品牌标题（expanded 显示，rail 隐藏） */
-  title?: string;                          // default: '警务业务协同平台'
+  title?: string // default: '警务业务协同平台'
   /** 移动端抽屉模式 */
-  mobile?: boolean;                        // default: false
+  mobile?: boolean // default: false
   /** 是否显示底部状态区 */
-  showFooter?: boolean;                    // default: true
+  showFooter?: boolean // default: true
   /** 深度（expanded 时右侧投影 _2 风格） */
-  shadow?: boolean;                        // default: true
+  shadow?: boolean // default: true
 }
 
 // Events
 interface Events {
-  (e: 'update:mode', mode: LxSidebarMode): void;         // 切换形态
-  (e: 'select', item: LxMenuItem): void;                  // 点击直达项
-  (e: 'expand-change', keys: string[]): void;            // 二级展开变化
+  (e: 'update:mode', mode: LxSidebarMode): void // 切换形态
+  (e: 'select', item: LxMenuItem): void // 点击直达项
+  (e: 'expand-change', keys: string[]): void // 二级展开变化
 }
 
 // Slots
 interface Slots {
   /** 品牌区替换（默认渲染 LxSidebarBrand） */
-  brand?(): unknown;
+  brand?(): unknown
   /** 菜单项后追加自定义区块 */
-  append?(): unknown;
+  append?(): unknown
   /** 底部状态区替换（默认渲染 LxSidebarFooter） */
-  footer?(): unknown;
+  footer?(): unknown
 }
 
 // Expose
 interface Expose {
   /** 编程式切换形态 */
-  toggleMode(): void;
+  toggleMode(): void
   /** 展开/折叠指定二级组 */
-  toggleGroup(key: string): void;
+  toggleGroup(key: string): void
 }
 ```
 
@@ -94,15 +95,15 @@ interface Expose {
 ```ts
 interface Props {
   /** rail 模式下自动只渲染 Logo */
-  mode?: LxSidebarMode;            // default: 'expanded'
-  title?: string;                  // default: '警务业务协同平台'
+  mode?: LxSidebarMode // default: 'expanded'
+  title?: string // default: '警务业务协同平台'
   /** Logo 图标名（内置 svg-sprite） */
-  logo?: string;                   // default: 'lx-logo-police'
+  logo?: string // default: 'lx-logo-police'
   /** 点击跳转地址 */
-  to?: string;                     // default: '/'
+  to?: string // default: '/'
 }
 interface Events {
-  (e: 'click', evt: MouseEvent): void;
+  (e: 'click', evt: MouseEvent): void
 }
 ```
 
@@ -110,16 +111,17 @@ interface Events {
 
 ```ts
 interface Props {
-  item: LxMenuItem;
-  mode?: LxSidebarMode;
-  active?: boolean;                // default: false
+  item: LxMenuItem
+  mode?: LxSidebarMode
+  active?: boolean // default: false
 }
 interface Events {
-  (e: 'select', item: LxMenuItem): void;
+  (e: 'select', item: LxMenuItem): void
 }
 ```
 
 视觉规格：
+
 - expanded：`h-10` 图标 + 标题（40px，设计拍板 #4），激活 = 渐变背景 `sky-500/20→transparent` + 1px 竖条 `--lx-sidebar-active-glow` 发光
 - rail：`h-12` 居中图标，hover 弹出右侧 tooltip（`bg #162032`，`_1` 规格）
 
@@ -127,18 +129,19 @@ interface Events {
 
 ```ts
 interface Props {
-  item: LxMenuItem;                // 含 children
-  mode?: LxSidebarMode;
-  activeKey?: string;
-  expanded?: boolean;              // default: true
+  item: LxMenuItem // 含 children
+  mode?: LxSidebarMode
+  activeKey?: string
+  expanded?: boolean // default: true
 }
 interface Events {
-  (e: 'select', item: LxMenuItem): void;
-  (e: 'toggle', expanded: boolean): void;
+  (e: 'select', item: LxMenuItem): void
+  (e: 'toggle', expanded: boolean): void
 }
 ```
 
 视觉规格：
+
 - expanded：内嵌子菜单，左侧 1px 引导线（`#22354f`），激活子项 = `sky-950/60` 背景 + 1.5px 圆点
 - rail：hover 弹出 192px popper，标题栏 + 子项列表（`_1` 规格，选中项带 ✓ 图标）
 
@@ -148,19 +151,19 @@ interface Events {
 
 ```ts
 interface Props {
-  mode?: LxSidebarMode;
+  mode?: LxSidebarMode
   /** 链路健康度（0-100，rail 圆环仪表） */
-  sla?: number;                    // default: 100
+  sla?: number // default: 100
   /** 节点标识 */
-  node?: string;                   // default: 'NODE-01'
+  node?: string // default: 'NODE-01'
   /** 节点在线状态 */
-  nodeStatus?: LxStatus;           // default: 'online'
+  nodeStatus?: LxStatus // default: 'online'
   /** 延迟展示文案（expanded 专网条） */
-  latencyLabel?: string;           // e.g. 'AP-SEC-01 · 12ms'
+  latencyLabel?: string // e.g. 'AP-SEC-01 · 12ms'
 }
 interface Events {
-  (e: 'toggle-mode'): void;        // 点击展开/收起按钮
-  (e: 'settings'): void;           // 点击控制台设置
+  (e: 'toggle-mode'): void // 点击展开/收起按钮
+  (e: 'settings'): void // 点击控制台设置
 }
 ```
 
@@ -171,15 +174,15 @@ interface Events {
 ```ts
 interface Props {
   /** 数值 0-100 */
-  value?: number;                  // default: 0
+  value?: number // default: 0
   /** 直径 px */
-  size?: number;                   // default: 40
+  size?: number // default: 40
   /** 数值色（低于阈值自动变 warning/error） */
-  status?: LxStatus;               // default: 'online'
+  status?: LxStatus // default: 'online'
   /** 数值文案（如 '99.9'） */
-  label?: string;
+  label?: string
   /** 副文案（如 '%'） */
-  subLabel?: string;
+  subLabel?: string
 }
 ```
 
@@ -189,11 +192,11 @@ interface Props {
 
 ```ts
 interface Props {
-  label?: string;                  // e.g. 'NODE-01' / 'AP-SEC-01'
-  status?: LxStatus;               // default: 'online'
+  label?: string // e.g. 'NODE-01' / 'AP-SEC-01'
+  status?: LxStatus // default: 'online'
   /** 附加文案（expanded 模式，如 '专网'） */
-  tag?: string;
-  pulse?: boolean;                 // default: true（呼吸点）
+  tag?: string
+  pulse?: boolean // default: true（呼吸点）
 }
 ```
 
@@ -208,25 +211,25 @@ interface Props {
 ```ts
 interface Props {
   /** 搜索框占位文案；传空串则隐藏搜索 */
-  searchPlaceholder?: string;      // default: '搜索…'
+  searchPlaceholder?: string // default: '搜索…'
   /** 通知数量；不传则隐藏 */
-  notificationCount?: number;
+  notificationCount?: number
   /** 右侧网络状态徽章文案；不传则隐藏 */
-  networkLabel?: string;           // e.g. '协同专网在线 · License 正常'
-  networkStatus?: LxStatus;       // default: 'online'
+  networkLabel?: string // e.g. '协同专网在线 · License 正常'
+  networkStatus?: LxStatus // default: 'online'
   /** 用户显示信息 */
-  user?: { name: string; role?: string; avatar?: string };
+  user?: { name: string; role?: string; avatar?: string }
 }
 interface Events {
-  (e: 'search', keyword: string): void;
-  (e: 'notification-click'): void;
-  (e: 'fullscreen-toggle', full: boolean): void;
-  (e: 'user-command', cmd: 'profile' | 'password' | 'logout'): void;
+  (e: 'search', keyword: string): void
+  (e: 'notification-click'): void
+  (e: 'fullscreen-toggle', full: boolean): void
+  (e: 'user-command', cmd: 'profile' | 'password' | 'logout'): void
 }
 interface Slots {
-  leading?(): unknown;             // 左侧面包屑前（放模式切换按钮）
-  breadcrumb?(): unknown;         // 覆盖默认面包屑
-  trailing?(): unknown;            // 右侧操作区追加
+  leading?(): unknown // 左侧面包屑前（放模式切换按钮）
+  breadcrumb?(): unknown // 覆盖默认面包屑
+  trailing?(): unknown // 右侧操作区追加
 }
 ```
 
@@ -235,30 +238,37 @@ interface Slots {
 浏览器风格页签（`h-9`，激活 = 白底 + 主色文字 + 顶部圆角）。
 
 ```ts
-interface LxTabItem { key: string; title: string; closable?: boolean; }
+interface LxTabItem {
+  key: string
+  title: string
+  closable?: boolean
+}
 
 interface Props {
-  tabs?: LxTabItem[];              // default: []
-  modelValue?: string;             // 激活 key（受控）
+  tabs?: LxTabItem[] // default: []
+  modelValue?: string // 激活 key（受控）
 }
 interface Events {
-  (e: 'update:modelValue', key: string): void;
-  (e: 'close', key: string): void;
-  (e: 'context-menu', evt: { key: string; x: number; y: number }): void;  // 右键菜单
+  (e: 'update:modelValue', key: string): void
+  (e: 'close', key: string): void
+  (e: 'context-menu', evt: { key: string; x: number; y: number }): void // 右键菜单
 }
 ```
 
 ## 10. LxBreadcrumb — 面包屑
 
 ```ts
-interface LxBreadcrumbItem { title: string; to?: string; }
+interface LxBreadcrumbItem {
+  title: string
+  to?: string
+}
 
 interface Props {
-  items?: LxBreadcrumbItem[];      // default: []
-  separator?: string;              // default: '/'
+  items?: LxBreadcrumbItem[] // default: []
+  separator?: string // default: '/'
 }
 interface Events {
-  (e: 'select', item: LxBreadcrumbItem): void;
+  (e: 'select', item: LxBreadcrumbItem): void
 }
 ```
 
@@ -269,19 +279,19 @@ interface Events {
 ```ts
 interface Props {
   /** 左侧面板宽度 */
-  asideWidth?: number | string;    // default: 280
+  asideWidth?: number | string // default: 280
   /** 是否可拖拽调整 */
-  resizable?: boolean;             // default: false
+  resizable?: boolean // default: false
   /** 折叠左侧 */
-  collapsed?: boolean;             // default: false
+  collapsed?: boolean // default: false
 }
 interface Slots {
-  aside?(): unknown;               // 左侧（通常 LxSelectTree）
-  default?(): unknown;             // 右侧主内容
+  aside?(): unknown // 左侧（通常 LxSelectTree）
+  default?(): unknown // 右侧主内容
 }
 interface Events {
-  (e: 'update:collapsed', v: boolean): void;
-  (e: 'resize', width: number): void;
+  (e: 'update:collapsed', v: boolean): void
+  (e: 'resize', width: number): void
 }
 ```
 
@@ -293,18 +303,18 @@ interface Events {
 
 ```ts
 interface Props {
-  title?: string;
-  subtitle?: string;
+  title?: string
+  subtitle?: string
   /** 是否通栏白卡（false 时无 padding，用于嵌表格） */
-  bodyPadding?: boolean;           // default: true
+  bodyPadding?: boolean // default: true
   /** 底部 footer（如统计行） */
-  bordered?: boolean;              // default: true
-  loading?: boolean;               // default: false
+  bordered?: boolean // default: true
+  loading?: boolean // default: false
 }
 interface Slots {
-  headerExtra?(): unknown;         // 标题右侧操作区
-  default?(): unknown;
-  footer?(): unknown;
+  headerExtra?(): unknown // 标题右侧操作区
+  default?(): unknown
+  footer?(): unknown
 }
 ```
 
@@ -316,11 +326,11 @@ interface Slots {
 
 ```ts
 interface Props {
-  title: string;
-  subtitle?: string;
+  title: string
+  subtitle?: string
 }
 interface Slots {
-  extra?(): unknown;              // 右侧操作区（如刷新按钮）
+  extra?(): unknown // 右侧操作区（如刷新按钮）
 }
 ```
 
@@ -332,28 +342,39 @@ stitch Dashboard 四栏统计卡规格。
 
 ```ts
 interface Props {
-  label?: string;                  // e.g. '今日协同在岗警力'
-  value?: number | string;         // e.g. 1428
-  unit?: string;                   // e.g. '人'
+  title?: string // 指标标题；与 label 并传时优先
+  label?: string // 兼容原 lx-ui 标题属性
+  value?: number | string // e.g. 1428
+  unit?: string // e.g. '人'
+  status?: 'normal' | 'success' | 'warning' | 'danger' // 数值和进度条语义色
+  valueType?: 'default' | 'success' | 'warning' | 'danger' // 兼容 Vue3 宿主旧属性
+  badgeText?: string // 设计稿角标；优先于 badge
   /** 徽章文案（如 '在岗率 94.6%'） */
-  badge?: string;
-  badgeStatus?: LxStatus;          // default: 'online'
+  badge?: string
+  badgeStatus?: LxStatus // default: 'online'
   /** 趋势文案（如 '+8.4% 环比昨日'） */
-  trend?: string;
-  trendStatus?: LxStatus;          // 'online'↑ / 'error'↓
-  /** 底部进度条百分比 0-100；不传则隐藏 */
-  progress?: number;
-  /** 底部说明 */
-  footerLabel?: string;
-  footerValue?: string;
+  trend?: string
+  trendStatus?: LxStatus // 'online'↑ / 'error'↓
+  /** 进度条百分比 0-100；不传则隐藏 */
+  progress?: number
+  progressLabel?: string
+  progressValue?: string
+  /** 兼容 Vue3 宿主旧组件的底部说明 */
+  footer?: string
+  footerLabel?: string
+  footerValue?: string
 }
 interface Slots {
+  title?(): unknown // 标题覆盖；优先于 label 插槽
+  label?(): unknown // 兼容原 lx-ui 插槽
+  value?(): unknown
   /** 值区域右侧（如 sparkline 迷你图） */
-  extra?(): unknown;
+  extra?(): unknown
+  footer?(): unknown // 优先于底部说明属性
 }
 ```
 
-视觉：数值 `text-3xl font-mono tabular-nums`，进度条 `h-1.5 rounded-full bg #ebeef5`。
+标题 13px、单位及说明 12px 并使用高对比正文令牌；`trendStatus` 继续控制趋势语义色，浅色状态文字调深到至少 4.5:1，方向使用 LxIcon `arrow-up` / `arrow-down`。数值 24px 等宽、`tabular-nums`；卡片圆角 4px；进度条高 6px，数值与进度填充共用 normal / success / warning / danger 语义色。浅色 warning 数值调深以满足大号文字对比度，HUD 使用主题强调令牌。进度会限制到 0–100，并提供可读名称和格式化 `aria-valuetext`；固定轨道内通过 transform 更新填充，RTL 从右侧展开。组件仅展示数据，loading、空态与错误恢复由宿主组合。`status` 优先于旧版 `valueType`，`title` / `badgeText` 优先于兼容属性 `label` / `badge`。
 
 ## 15. LxStatusDot — 状态点
 
@@ -361,11 +382,11 @@ interface Slots {
 
 ```ts
 interface Props {
-  status?: LxStatus;               // default: 'offline'
-  size?: number;                   // default: 8（rail 徽章用 6）
-  pulse?: boolean;                 // default: true（online 呼吸）
-  statusDesc?: string;             // 状态文案（showText 时显示）
-  showText?: boolean;             // default: false
+  status?: LxStatus // default: 'offline'
+  size?: number // default: 8（rail 徽章用 6）
+  pulse?: boolean // default: true（online 呼吸）
+  statusDesc?: string // 状态文案（showText 时显示）
+  showText?: boolean // default: false
 }
 ```
 
@@ -373,15 +394,15 @@ interface Props {
 
 ```ts
 interface Props {
-  modelValue?: boolean | number;   // 支持 0/1
-  loading?: boolean;               // default: false
-  disabled?: boolean;              // default: false
+  modelValue?: boolean | number // 支持 0/1
+  loading?: boolean // default: false
+  disabled?: boolean // default: false
   /** 切换前确认（危险操作） */
-  confirm?: string | false;        // default: false
+  confirm?: string | false // default: false
 }
 interface Events {
-  (e: 'update:modelValue', v: boolean): void;
-  (e: 'change', v: boolean): void;
+  (e: 'update:modelValue', v: boolean): void
+  (e: 'change', v: boolean): void
 }
 ```
 
@@ -391,16 +412,20 @@ interface Events {
 
 ```ts
 interface Props {
-  status?: LxStatus;               // default: 'online'
+  status?: LxStatus // default: 'online'
   /** 自定义文字色/底色（覆盖 status） */
-  color?: string;
-  bgColor?: string;
-  size?: LxSize;                   // default: 'small' → h-6 text-xs
-  dot?: boolean;                   // default: true（前置圆点）
-  closable?: boolean;              // default: false
+  color?: string
+  bgColor?: string
+  size?: LxSize // default: 'small' → h-6 text-xs
+  dot?: boolean // default: true（前置圆点）
+  closable?: boolean // default: false
 }
-interface Slots { default?(): unknown; }
-interface Events { (e: 'close'): void; }
+interface Slots {
+  default?(): unknown
+}
+interface Events {
+  (e: 'close'): void
+}
 ```
 
 ## 18. LxCodeSlot — 等宽代码槽
@@ -410,11 +435,13 @@ interface Events { (e: 'close'): void; }
 ```ts
 interface Props {
   /** 是否可复制（点击复制 + toast） */
-  copyable?: boolean;              // default: true
+  copyable?: boolean // default: true
   /** 显示宽度截断 */
-  ellipsis?: boolean;              // default: false
+  ellipsis?: boolean // default: false
 }
-interface Slots { default?(): unknown; }
+interface Slots {
+  default?(): unknown
+}
 ```
 
 视觉：`font-mono` + `bg #f4f4f5` + `border #e9e9eb` + `radius 2px` + `px-1.5`。
@@ -425,41 +452,47 @@ interface Slots { default?(): unknown; }
 
 ```ts
 interface LxDutyShift {
-  date: string;                    // 'YYYY-MM-DD'
-  label: string;                   // 班次名（早班/中班/夜班）
-  status?: LxStatus;
-  count?: number;                  // 在岗人数
+  date: string // 'YYYY-MM-DD'
+  label: string // 班次名（早班/中班/夜班）
+  status?: LxStatus
+  count?: number // 在岗人数
 }
 
 interface Props {
-  month?: string;                 // 'YYYY-MM'（受控）
-  shifts?: LxDutyShift[];          // default: []
+  month?: string // 'YYYY-MM'（受控）
+  shifts?: LxDutyShift[] // default: []
   /** 周起始日 */
-  weekStart?: 0 | 1;               // default: 1
+  weekStart?: 0 | 1 // default: 1
 }
 interface Events {
-  (e: 'update:month', m: string): void;
-  (e: 'cell-click', date: string): void;
-  (e: 'shift-click', shift: LxDutyShift): void;
+  (e: 'update:month', m: string): void
+  (e: 'cell-click', date: string): void
+  (e: 'shift-click', shift: LxDutyShift): void
 }
 interface Slots {
-  cell?({ date, shifts }): unknown;  // 自定义单元格渲染
+  cell?({ date, shifts }): unknown // 自定义单元格渲染
 }
 ```
+
+固定渲染 42 个日期格，并为网格、周行和星期列标题提供对应 ARIA 语义。日期格使用 roving tabindex：方向键按日/周移动，Home/End 移至当前周首尾，Enter/空格选择日期；焦点移动到可见网格外时切换到目标月份并保留焦点。无效或空 `month` 回退到当前月。非本月日期使用表头背景区分，不降低文字透明度。
 
 ## 20. LxEmpty — 空状态
 
 ```ts
 interface Props {
-  description?: string;            // default: '暂无数据'
-  /** 图标尺寸 */
-  size?: LxSize;                   // default: 'default'
+  description?: string // default: '暂无数据'
+  /** 尺寸：default 为 64px 图标，compact 为 48px 图标 */
+  size?: 'default' | 'compact' // default: 'default'
+  /** 自定义图标区域宽高，兼容 Element Plus image-size；非法或非正数忽略 */
+  imageSize?: number
 }
 interface Slots {
-  default?(): unknown;             // 图标区替换
-  footer?(): unknown;              // 操作区（如"新建"按钮）
+  default?(): unknown // 图标区替换
+  footer?(): unknown // 操作区（如"新建"按钮）
 }
 ```
+
+默认描述只作兼容兜底；业务调用应传入能说明空态原因的文案，并在需要恢复时通过 `footer` 提供有意义的操作。12px/13px 描述和默认线稿使用 `--lx-text-regular`，以满足浅色和 HUD 主题的对比度要求。加载中和请求失败不属于空态，应由宿主分别呈现 loading/error。
 
 ---
 
@@ -471,29 +504,36 @@ interface Slots {
 
 ```ts
 interface LxSearchField {
-  key: string;
-  label: string;
-  type: 'input' | 'select' | 'date' | 'daterange' | 'number' | 'tree-select' | 'cascader';
-  options?: { label: string; value: string | number }[];
-  placeholder?: string;
-  defaultValue?: unknown;
-  span?: number;                   // 栅格占位（24 制），default: 6
+  key: string
+  label: string
+  type:
+    | 'input'
+    | 'select'
+    | 'date'
+    | 'daterange'
+    | 'number'
+    | 'tree-select'
+    | 'cascader'
+  options?: { label: string; value: string | number }[]
+  placeholder?: string
+  defaultValue?: unknown
+  span?: number // 栅格占位（24 制），default: 6
 }
 
 interface Props {
-  fields?: LxSearchField[];        // default: []
-  modelValue?: Record<string, unknown>;   // 受控值
-  loading?: boolean;               // default: false
+  fields?: LxSearchField[] // default: []
+  modelValue?: Record<string, unknown> // 受控值
+  loading?: boolean // default: false
   /** 收起/展开（字段多时） */
-  collapsible?: boolean;           // default: true
-  collapsed?: boolean;             // default: true
+  collapsible?: boolean // default: true
+  collapsed?: boolean // default: true
   /** 查询按钮文案 */
-  searchText?: string;             // default: '查询'
+  searchText?: string // default: '查询'
 }
 interface Events {
-  (e: 'update:modelValue', v: Record<string, unknown>): void;
-  (e: 'search'): void;
-  (e: 'reset'): void;
+  (e: 'update:modelValue', v: Record<string, unknown>): void
+  (e: 'search'): void
+  (e: 'reset'): void
 }
 ```
 
@@ -503,50 +543,50 @@ interface Events {
 
 ```ts
 interface LxTableColumn {
-  key: string;
-  label: string;
-  width?: number | string;
-  minWidth?: number;
-  align?: 'left' | 'center' | 'right';
-  fixed?: 'left' | 'right';
+  key: string
+  label: string
+  width?: number | string
+  minWidth?: number
+  align?: 'left' | 'center' | 'right'
+  fixed?: 'left' | 'right'
   /** 格式化（纯函数，禁止请求） */
-  formatter?: (row: any, column: LxTableColumn, cellValue: unknown) => string;
+  formatter?: (row: any, column: LxTableColumn, cellValue: unknown) => string
   /** 单元格类型快捷方式 */
-  type?: 'index' | 'selection' | 'expand';
+  type?: 'index' | 'selection' | 'expand'
   /** 可排序（后端排序：sort-key） */
-  sortable?: boolean | 'custom';
-  showOverflowTooltip?: boolean;   // default: true
+  sortable?: boolean | 'custom'
+  showOverflowTooltip?: boolean // default: true
 }
 
 interface Props {
-  columns?: LxTableColumn[];       // default: []
-  data?: any[];                    // default: []（受控，业务方传）
-  loading?: boolean;               // default: false
+  columns?: LxTableColumn[] // default: []
+  data?: any[] // default: []（受控，业务方传）
+  loading?: boolean // default: false
   /** 紧凑密度（行高 36px） */
-  compact?: boolean;               // default: false（常规 44px）
+  compact?: boolean // default: false（常规 44px）
   /** 斑马纹 */
-  stripe?: boolean;                // default: false
-  rowKey?: string;                 // default: 'id'
-  selectedKeys?: (string | number)[];  // 受控选择
+  stripe?: boolean // default: false
+  rowKey?: string // default: 'id'
+  selectedKeys?: (string | number)[] // 受控选择
   /** 空数据由 LxEmpty 渲染 */
-  emptyText?: string;
+  emptyText?: string
 }
 
 interface Events {
-  (e: 'selection-change', rows: any[]): void;
-  (e: 'sort-change', payload: { key: string; order: 'asc' | 'desc' }): void;
-  (e: 'row-click', row: any): void;
-  (e: 'expand-change', row: any, expanded: boolean): void;
+  (e: 'selection-change', rows: any[]): void
+  (e: 'sort-change', payload: { key: string; order: 'asc' | 'desc' }): void
+  (e: 'row-click', row: any): void
+  (e: 'expand-change', row: any, expanded: boolean): void
 }
 
 interface Slots {
   /** 列自定义单元格（#cell-[key]） */
-  [cell: `cell-${string}`]: (scope: { row: any; index: number }) => unknown;
+  [cell: `cell-${string}`]: (scope: { row: any; index: number }) => unknown
   /** 列表头自定义（#header-[key]） */
-  [header: `header-${string}`]: (scope: { column: LxTableColumn }) => unknown;
-  toolbar?(): unknown;            // 表格右上工具区
-  empty?(): unknown;              // 空状态替换
-  append?(): unknown;             // 表尾追加
+  [header: `header-${string}`]: (scope: { column: LxTableColumn }) => unknown
+  toolbar?(): unknown // 表格右上工具区
+  empty?(): unknown // 空状态替换
+  append?(): unknown // 表尾追加
 }
 ```
 
@@ -554,21 +594,23 @@ interface Slots {
 
 ```ts
 interface Props {
-  total?: number;                  // default: 0
-  page?: number;                   // default: 1
-  pageSize?: number;               // default: 10
-  pageSizes?: number[];            // default: [10, 20, 50, 100]
-  showSize?: boolean;              // default: true
-  showTotal?: boolean;             // default: true
-  showJumper?: boolean;            // default: false
-  autoReset?: boolean;             // default: true：切条数回第 1 页（设计拍板 #5）
-  autoScroll?: boolean;            // default: true：切页窗口回顶（设计拍板 #5）
-  size?: 'small' | 'default' | 'large';
+  total?: number // default: 0
+  page?: number // default: 1
+  pageSize?: number // default: 10
+  pageSizes?: number[] // default: [10, 20, 50, 100]
+  showSize?: boolean // default: true
+  showTotal?: boolean // default: true
+  showJumper?: boolean // default: false
+  autoReset?: boolean // default: true：切条数回第 1 页（设计拍板 #5）
+  autoScroll?: boolean // default: true：切页窗口回顶（设计拍板 #5）
+  size?: 'small' | 'default' | 'large'
+  layout?: string // 覆盖默认分页元素排列
+  background?: boolean // default: false：页码按钮背景
 }
 interface Events {
-  (e: 'update:page', v: number): void;
-  (e: 'update:pageSize', v: number): void;
-  (e: 'change', page: number, pageSize: number): void;
+  (e: 'update:page', v: number): void
+  (e: 'update:page-size', v: number): void
+  (e: 'change', page: number, pageSize: number): void
 }
 ```
 
@@ -578,26 +620,26 @@ interface Events {
 
 ```ts
 interface LxTreeNode {
-  id: string | number;
-  label: string;
-  children?: LxTreeNode[];
-  disabled?: boolean;
-  isLeaf?: boolean;
+  id: string | number
+  label: string
+  children?: LxTreeNode[]
+  disabled?: boolean
+  isLeaf?: boolean
 }
 
 interface Props {
-  modelValue?: string | number | (string | number)[];
-  data?: LxTreeNode[];             // default: []（静态数据）
+  modelValue?: string | number | (string | number)[]
+  data?: LxTreeNode[] // default: []（静态数据）
   /** 懒加载（业务传入请求函数——注意：函数由业务实现，组件仅调用） */
-  load?: (node: LxTreeNode, resolve: (children: LxTreeNode[]) => void) => void;
-  multiple?: boolean;              // default: false
-  checkStrictly?: boolean;         // default: false
-  filterable?: boolean;            // default: true（树内搜索）
-  placeholder?: string;            // default: '请选择'
+  load?: (node: LxTreeNode, resolve: (children: LxTreeNode[]) => void) => void
+  multiple?: boolean // default: false
+  checkStrictly?: boolean // default: false
+  filterable?: boolean // default: true（树内搜索）
+  placeholder?: string // default: '请选择'
 }
 interface Events {
-  (e: 'update:modelValue', v: unknown): void;
-  (e: 'node-click', node: LxTreeNode): void;
+  (e: 'update:modelValue', v: unknown): void
+  (e: 'node-click', node: LxTreeNode): void
 }
 ```
 
@@ -605,19 +647,19 @@ interface Events {
 
 ```ts
 interface Props {
-  modelValue?: any[];               // 文件列表（受控）
-  action?: string;                 // 上传地址（由业务提供）
-  accept?: string;                 // e.g. '.xlsx,.csv'
-  limit?: number;
-  maxSize?: number;                // MB
-  draggable?: boolean;             // default: true
-  autoUpload?: boolean;            // default: true
+  modelValue?: any[] // 文件列表（受控）
+  action?: string // 上传地址（由业务提供）
+  accept?: string // e.g. '.xlsx,.csv'
+  limit?: number
+  maxSize?: number // MB
+  draggable?: boolean // default: true
+  autoUpload?: boolean // default: true
 }
 interface Events {
-  (e: 'update:modelValue', files: any[]): void;
-  (e: 'success', file: any): void;
-  (e: 'error', file: any, err: Error): void;
-  (e: 'exceed', files: any[]): void;
+  (e: 'update:modelValue', files: any[]): void
+  (e: 'success', file: any): void
+  (e: 'error', file: any, err: Error): void
+  (e: 'exceed', files: any[]): void
 }
 ```
 
@@ -627,44 +669,47 @@ interface Events {
 
 ```ts
 interface Props {
-  modelValue?: boolean;            // 显隐（v-model）
-  title?: string;
-  icon?: string;                   // LxIconName；danger 模式固定 warning 图标
-  width?: number | string;         // default: 672
-  danger?: boolean;                // 红图标/红标题/红底确认
-  confirmText?: string;            // default: '确认'
-  cancelText?: string;             // default: '取消'
-  loading?: boolean;               // 确认 loading 防重
-  closeOnClickModal?: boolean;     // default: false（防误触）
-  closeOnPressEsc?: boolean;       // default: true（设计拍板 #9，可关）
-  draggable?: boolean;             // default: true：头部拖拽移动（设计拍板 #9）
-  hideFooter?: boolean;            // default: false（#footer 插槽自定义时用）
+  modelValue?: boolean // 显隐（v-model）
+  title?: string
+  icon?: string // LxIconName；danger 模式固定 warning 图标
+  width?: number | string // default: 672
+  danger?: boolean // 红图标/红标题/红底确认
+  confirmText?: string // default: '确认'
+  cancelText?: string // default: '取消'
+  loading?: boolean // 确认 loading 防重
+  closeOnClickModal?: boolean // default: false（防误触）
+  closeOnPressEsc?: boolean // default: true（设计拍板 #9，可关）
+  draggable?: boolean // default: true：头部拖拽移动（设计拍板 #9）
+  hideFooter?: boolean // default: false（#footer 插槽自定义时用）
   // 固定行为：align-center 屏幕垂直居中、append-to-body、8px 圆角
 }
 interface Events {
-  (e: 'update:modelValue', v: boolean): void;
-  (e: 'confirm'): void;
-  (e: 'cancel'): void;
+  (e: 'update:modelValue', v: boolean): void
+  (e: 'confirm'): void
+  (e: 'cancel'): void
 }
-interface Slots { default?(): unknown; footer?(): unknown; }
+interface Slots {
+  default?(): unknown
+  footer?(): unknown
+}
 ```
 
 ## 27. LxConfirmDialog — 确认对话框
 
 ```ts
 interface Props {
-  modelValue?: boolean;
-  title?: string;                  // default: '操作确认'
-  message?: string;
+  modelValue?: boolean
+  title?: string // default: '操作确认'
+  message?: string
   /** 危险操作（红色确定按钮） */
-  danger?: boolean;                // default: false
-  confirmText?: string;            // default: '确定'
-  loading?: boolean;
+  danger?: boolean // default: false
+  confirmText?: string // default: '确定'
+  loading?: boolean
 }
 interface Events {
-  (e: 'update:modelValue', v: boolean): void;
-  (e: 'confirm'): void;
-  (e: 'cancel'): void;
+  (e: 'update:modelValue', v: boolean): void
+  (e: 'confirm'): void
+  (e: 'cancel'): void
 }
 ```
 
@@ -674,21 +719,21 @@ interface Events {
 
 ```ts
 interface Props {
-  modelValue?: boolean;
-  title?: string;
-  size?: number | string;          // default: 480
+  modelValue?: boolean
+  title?: string
+  size?: number | string // default: 480
   /** 头部状态 pill */
-  status?: LxStatus;
-  statusText?: string;
+  status?: LxStatus
+  statusText?: string
 }
 interface Events {
-  (e: 'update:modelValue', v: boolean): void;
-  (e: 'close'): void;
+  (e: 'update:modelValue', v: boolean): void
+  (e: 'close'): void
 }
 interface Slots {
-  default?(): unknown;
+  default?(): unknown
   /** 底部锚定操作栏 */
-  footer?(): unknown;
+  footer?(): unknown
 }
 ```
 
@@ -696,19 +741,19 @@ interface Slots {
 
 ```ts
 interface LxMessageOptions {
-  message: string;
-  duration?: number;               // 覆盖默认分级
+  message: string
+  duration?: number // 覆盖默认分级
 }
 interface LxMessageApi {
-  success(o: LxMessageOptions | string): void;
-  error(o: LxMessageOptions | string): void;
-  warning(o: LxMessageOptions | string): void;
-  info(o: LxMessageOptions | string): void;
+  success(o: LxMessageOptions | string): void
+  error(o: LxMessageOptions | string): void
+  warning(o: LxMessageOptions | string): void
+  info(o: LxMessageOptions | string): void
 }
 
 // 时长分级（设计拍板 #3）：error 3000ms / 其余 1600ms；duration 可逐条覆盖
 // 视觉：深色胶囊（#2d3136 反色底）12px 圆角，顶部居中
-export const lxMessage: LxMessageApi;
+export const lxMessage: LxMessageApi
 ```
 
 ## 30. LxActionButtons — 行内操作按钮组
@@ -717,29 +762,29 @@ export const lxMessage: LxMessageApi;
 
 ```ts
 interface LxActionItem {
-  key: string;
-  label: string;                   // e.g. '编辑' / '删除'
+  key: string
+  label: string // e.g. '编辑' / '删除'
   /** 可选图标（设计拍板 #2）：传入时文字左侧 16px + 2px 间距；默认纯文字 */
-  icon?: string;                   // LxIconName
+  icon?: string // LxIconName
   /** 危险操作（红色） */
-  danger?: boolean;                // default: false
+  danger?: boolean // default: false
   /** 权限标识（业务方消费，组件不判断） */
-  auth?: string;
+  auth?: string
   /** 二次确认文案 */
-  confirm?: string | false;        // default: false
-  disabled?: boolean;
-  divided?: boolean;               // 默认前置分隔线
+  confirm?: string | false // default: false
+  disabled?: boolean
+  divided?: boolean // 默认前置分隔线
 }
 
 interface Props {
-  actions?: LxActionItem[];       // default: []
+  actions?: LxActionItem[] // default: []
   /** 超出 n 个折叠为"更多"下拉 */
-  max?: number;                   // default: 3
+  max?: number // default: 3
   /** 事件统一出口：业务方按 key 分发 */
-  row?: any;                       // 透传给回调
+  row?: any // 透传给回调
 }
 interface Events {
-  (e: 'action', action: { item: LxActionItem; row: any }): void;
+  (e: 'action', action: { item: LxActionItem; row: any }): void
 }
 ```
 
@@ -748,12 +793,21 @@ interface Events {
 ## 统一导出（lx-ui/src/index.ts）
 
 ```ts
-export * from './components';
+export * from './components'
 export type {
-  LxStatus, LxSidebarMode, LxSize, LxMenuItem,
-  LxTabItem, LxBreadcrumbItem, LxSearchField, LxTableColumn,
-  LxDutyShift, LxTreeNode, LxActionItem, LxToastOptions,
-} from 'lx-tokens';
+  LxStatus,
+  LxSidebarMode,
+  LxSize,
+  LxMenuItem,
+  LxTabItem,
+  LxBreadcrumbItem,
+  LxSearchField,
+  LxTableColumn,
+  LxDutyShift,
+  LxTreeNode,
+  LxActionItem,
+  LxToastOptions,
+} from 'lx-tokens'
 ```
 
 ## 使用示例（admin-vue3 业务侧）
@@ -761,13 +815,19 @@ export type {
 ```vue
 <script setup lang="ts">
 // 业务只关心：菜单数据映射 + 路由联动 + 权限过滤
-import { LxSidebar, LxNavbar, LxPageCard, LxProTable, LxPagination } from 'lx-ui';
-import { useUserStore } from '@/store/modules/useUserStore';
+import {
+  LxSidebar,
+  LxNavbar,
+  LxPageCard,
+  LxProTable,
+  LxPagination,
+} from 'lx-ui'
+import { useUserStore } from '@/store/modules/useUserStore'
 
-const userStore = useUserStore();
-const route = useRoute();
-const menuItems = computed(() => userStore.menus.map(toLxMenu));  // 业务映射
-const activeKey = computed(() => route.name as string);
+const userStore = useUserStore()
+const route = useRoute()
+const menuItems = computed(() => userStore.menus.map(toLxMenu)) // 业务映射
+const activeKey = computed(() => route.name as string)
 </script>
 
 <template>
@@ -783,7 +843,11 @@ const activeKey = computed(() => route.name as string);
         <el-button type="primary">新增</el-button>
       </template>
       <template #cell-status="{ row }">
-        <LxStatusDot :status="row.status" show-text :status-desc="row.statusDesc" />
+        <LxStatusDot
+          :status="row.status"
+          show-text
+          :status-desc="row.statusDesc"
+        />
       </template>
     </LxProTable>
     <LxPagination v-model:page="page" :total="total" />

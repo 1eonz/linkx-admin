@@ -10,12 +10,13 @@
  */
 import { ref } from 'vue';
 
+import DeviceTypeManage from './components/DeviceTypeManage.vue';
 import IcpAuthManage from './components/IcpAuthManage.vue';
 import IcpServerConfig from './components/IcpServerConfig.vue';
 
 defineOptions({ name: 'UnifiedComm' });
 
-const activeTab = ref<'serverConfig' | 'authManage'>('serverConfig');
+const activeTab = ref<'serverConfig' | 'authManage' | 'deviceTypeManage'>('serverConfig');
 /** Tab 切换时通过修改 key 强制重建子组件 */
 const tabPaneKey = ref(Date.now());
 
@@ -33,6 +34,9 @@ function handleTabClick(): void {
         </el-tab-pane>
         <el-tab-pane label="通信服务授权管理" name="authManage">
           <IcpAuthManage v-if="activeTab === 'authManage'" :key="`authManage-${tabPaneKey}`" />
+        </el-tab-pane>
+        <el-tab-pane label="设备类型管理" name="deviceTypeManage">
+          <DeviceTypeManage v-if="activeTab === 'deviceTypeManage'" :key="`deviceTypeManage-${tabPaneKey}`" />
         </el-tab-pane>
       </el-tabs>
     </el-card>

@@ -11,11 +11,13 @@
  * - 新增/编辑通过子组件 AgentManageEditModal
  * - 创建分类弹窗
  */
-import { Edit, Delete, Plus } from '@element-plus/icons-vue';
+import { Edit, Delete, Plus, Connection } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { computed, onMounted, reactive, ref } from 'vue';
 
+import AgentBindVirtualUser from './AgentBindVirtualUser.vue';
 import AgentManageEditModal from './AgentManageEditModal.vue';
+import { addAgentCategory } from '../utils/category';
 import {
   deleteAiagent,
   deleteCategory,
@@ -45,12 +47,15 @@ const tableRef = ref<InstanceType<typeof ProTable>>();
 
 // 分类列表
 const categoryList = ref<AgentCategory[]>([]);
+const categoryLoaded = ref(false);
 // 文件接口列表（用于编辑弹窗下拉）
 const fileList = ref<AgentFileItem[]>([]);
 
 // 弹窗
 const editRef = ref<InstanceType<typeof AgentManageEditModal>>();
 const editVisible = ref(false);
+const bindVisible = ref(false);
+const bindAgentId = ref<string>();
 
 // 新建分类弹窗
 const categoryDialogVisible = ref(false);
@@ -151,18 +156,19 @@ function handleDelete(row: AiagentItem): void {
     type: 'warning',
     confirmButtonClass: 'el-button--danger',
   })
-    .then(async () => {
-      try {
-        const res = await deleteAiagent(row.id);
-        if (!res || res.code !== 0) {
-          ElMessage.error(res?.msg ?? '删除失败');
-          return;
-        }
-        ElMessage.success('删除成功');
-        tableRef.value?.refresh();
-      } catch (e) {
-        ElMessage.error((e as Error)?.message ?? '删除失败');
-      }
+    .then(() => {
+      return deleteAiagent(row.id)
+        .then((res) => {
+          if (!res || res.code !== 0) {
+            ElMessage.error(res?.msg ?? '删除失败');
+            return;
+          }
+          ElMessage.success('删除成功');
+          tableRef.value?.refresh();
+        })
+        .catch((e: unknown) => {
+          ElMessage.error((e as Error)?.message ?? '删除失败');
+        });
     })
     .catch(() => {});
 }
@@ -173,20 +179,37 @@ function openCategoryDialog(): void {
   categoryDialogVisible.value = true;
 }
 
-async function handleAddCategory(): Promise<void> {
-  if (!newCategoryName.value.trim()) {
-    ElMessage.warning('请输入分类名称');
+function handleAddCategory(): Promise<void> | void {
+  if (categorySubmitting.value) return;
+  if (!categoryLoaded.value) {
+    ElMessage.error('分类列表加载失败，请刷新后重试');
     return;
   }
-  // 简化版：本地添加（实际项目可调用接口）
   categorySubmitting.value = true;
-  try {
-    categoryList.value.push({ name: newCategoryName.value.trim() });
-    ElMessage.success('分类已添加');
-    categoryDialogVisible.value = false;
-  } finally {
-    categorySubmitting.value = false;
-  }
+  return addAgentCategory(newCategoryName.value)
+    .then((result) => {
+      if (!result.ok) {
+        if (result.warning) ElMessage.warning(result.message);
+        else ElMessage.error(result.message);
+        return;
+      }
+      return loadCategoryList().then((loaded) => {
+        if (!loaded) return;
+        ElMessage.success('分类已添加');
+        categoryDialogVisible.value = false;
+      });
+    })
+    .catch(() => {
+      ElMessage.error('新建分类失败');
+    })
+    .finally(() => {
+      categorySubmitting.value = false;
+    });
+}
+
+function handleBind(row: AiagentItem): void {
+  bindAgentId.value = row.id;
+  bindVisible.value = true;
 }
 
 async function handleDeleteCategory(cat: AgentCategory): Promise<void> {
@@ -198,39 +221,54 @@ async function handleDeleteCategory(cat: AgentCategory): Promise<void> {
     await ElMessageBox.confirm(`确定删除分类「${cat.name}」？`, '删除确认', {
       type: 'warning',
     });
-    const res = await deleteCategory(cat.id);
-    if (!res || res.code !== 0) {
-      ElMessage.error(res?.msg ?? '删除失败');
-      return;
-    }
-    ElMessage.success('删除成功');
-    categoryList.value = categoryList.value.filter((c) => c.id !== cat.id);
   } catch {
-    // 取消
+    return;
   }
+  return deleteCategory(cat.id)
+    .then((res) => {
+      if (!res || res.code !== 0) {
+        ElMessage.error(res?.msg ?? '删除失败');
+        return;
+      }
+      ElMessage.success('删除成功');
+      categoryList.value = categoryList.value.filter((c) => c.id !== cat.id);
+    })
+    .catch(() => {
+      ElMessage.error('删除失败');
+    });
 }
 
 // ===== 加载分类/文件接口列表 =====
-async function loadCategoryList(): Promise<void> {
-  try {
-    const res = await queryCategory();
-    if (res?.code === 0) {
-      categoryList.value = (res?.data as AgentCategory[]) ?? [];
-    }
-  } catch (e) {
-    console.error(e);
-  }
+function loadCategoryList(): Promise<boolean> {
+  return queryCategory()
+    .then((res) => {
+      if (res?.code === 0) {
+        categoryList.value = (res?.data as AgentCategory[]) ?? [];
+        categoryLoaded.value = true;
+        return true;
+      }
+      categoryLoaded.value = false;
+      ElMessage.error(res?.msg ?? '获取分类列表失败');
+      return false;
+    })
+    .catch((e: unknown) => {
+      console.error(e);
+      categoryLoaded.value = false;
+      ElMessage.error('获取分类列表失败');
+      return false;
+    });
 }
 
-async function loadFileList(): Promise<void> {
-  try {
-    const res = await getAgentFileList();
-    if (res?.code === 0) {
-      fileList.value = (res?.data as AgentFileItem[]) ?? [];
-    }
-  } catch (e) {
-    console.error(e);
-  }
+function loadFileList(): Promise<void> {
+  return getAgentFileList()
+    .then((res) => {
+      if (res?.code === 0) {
+        fileList.value = (res?.data as AgentFileItem[]) ?? [];
+      }
+    })
+    .catch((e: unknown) => {
+      console.error(e);
+    });
 }
 
 onMounted(() => {
@@ -309,11 +347,18 @@ onMounted(() => {
       </template>
       <template #actions="scope">
         <el-button type="primary" link :icon="Edit" @click="handleEdit(getRow(scope))">编辑</el-button>
+        <el-button type="primary" link :icon="Connection" @click="handleBind(getRow(scope))">绑定用户</el-button>
         <el-button type="danger" link :icon="Delete" @click="handleDelete(getRow(scope))">删除</el-button>
       </template>
     </ProTable>
 
-    <AgentManageEditModal ref="editRef" v-model:visible="editVisible" @success="handleEditSuccess" />
+    <AgentManageEditModal
+      ref="editRef"
+      v-model:visible="editVisible"
+      @success="handleEditSuccess"
+      @category-change="loadCategoryList"
+    />
+    <AgentBindVirtualUser v-model:visible="bindVisible" :agent-id="bindAgentId" />
 
     <el-dialog
       v-model="categoryDialogVisible"
@@ -326,7 +371,13 @@ onMounted(() => {
       <el-input v-model="newCategoryName" placeholder="请输入分类名称" />
       <template #footer>
         <el-button @click="categoryDialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="categorySubmitting" @click="handleAddCategory">确定</el-button>
+        <el-button
+          type="primary"
+          :loading="categorySubmitting"
+          :disabled="categorySubmitting || !categoryLoaded"
+          @click="handleAddCategory"
+          >确定</el-button
+        >
       </template>
     </el-dialog>
   </div>

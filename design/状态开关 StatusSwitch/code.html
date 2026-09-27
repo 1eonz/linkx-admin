@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LxStatusSwitch 状态开关组件规范标本 (GB公共安全标准)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#a2c9ff",
+            "tertiary-fixed": "#9bfa6b",
+            "on-tertiary-fixed-variant": "#1d5200",
+            "on-primary-fixed": "#001c38",
+            "on-primary-fixed-variant": "#004881",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#0060a9",
+            "surface-container-high": "#e6e8ef",
+            "outline": "#707784",
+            "on-secondary-container": "#55667c",
+            "secondary-fixed": "#d2e4ff",
+            "on-surface-variant": "#404752",
+            "secondary-container": "#d2e4ff",
+            "on-background": "#181c20",
+            "on-error-container": "#93000a",
+            "primary-fixed": "#d3e4ff",
+            "tertiary-container": "#55af28",
+            "surface-container-lowest": "#ffffff",
+            "inverse-surface": "#2d3136",
+            "surface-bright": "#f8f9ff",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-variant": "#37485d",
+            "surface-container-highest": "#e0e2e9",
+            "surface-container-low": "#f1f3fa",
+            "on-tertiary-fixed": "#072100",
+            "surface": "#f8f9ff",
+            "surface-dim": "#d7dae0",
+            "secondary-fixed-dim": "#b6c8e2",
+            "on-surface": "#181c20",
+            "on-tertiary-container": "#133b00",
+            "background": "#f8f9ff",
+            "secondary": "#4f6076",
+            "error": "#ba1a1a",
+            "primary-container": "#409eff",
+            "tertiary": "#286c00",
+            "primary": "#0060a9",
+            "on-primary": "#ffffff",
+            "outline-variant": "#c0c7d4",
+            "inverse-primary": "#a2c9ff",
+            "error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#80dd52",
+            "inverse-on-surface": "#eef1f7",
+            "on-secondary-fixed": "#0a1c30",
+            "on-primary-container": "#003460",
+            "surface-variant": "#e0e2e9",
+            "surface-container": "#ebeef4"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "body-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "label-lg": ["Inter"],
+            "headline-lg": ["Inter"],
+            "display-lg": ["Inter"],
+            "body-md": ["Inter"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    @keyframes spin-fast {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-fast {
+      animation: spin-fast 0.75s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen">
+<!-- Read-Only Shared Component: TopNavBar Banner and Specimen Header -->
+<div class="relative flex h-auto w-full flex-col bg-slate-50 group/design-root overflow-x-hidden border-b border-outline-variant" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-6 md:px-12 lg:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e6edf4] px-4 md:px-10 py-3">
+<div class="flex items-center gap-4 text-[#0c141d]">
+<div class="size-4">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-[#0c141d] text-lg font-bold leading-tight tracking-[-0.015em]">LxStatusSwitch 状态开关规范标本 (GB/T 33170)</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden lg:flex items-center gap-9">
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#overview">规范概览</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#matrix">形态矩阵</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#scenarios">表格演练</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#modal">确认弹窗</a>
+<a class="text-[#0c141d] text-sm font-medium leading-normal" href="#contract">研发契约</a>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#409fff] text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">复制代码标本</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#e6edf4] text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">导出设计资产</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex flex-wrap justify-between gap-3 p-4" id="overview">
+<div class="flex min-w-72 flex-col gap-3">
+<p class="text-[#0c141d] text-4xl font-black leading-tight tracking-[-0.033em]">LxStatusSwitch 表格行内状态开关组件规范标本</p>
+<p class="text-[#4573a1] text-base font-normal leading-normal">
+              遵循 GB/T 33170 公共安全视觉规范与拍板决策 #10：20px 紧凑胶囊规格、统一灰关闭态、危险操作弹窗阻断、权限不足降级 LxTag。
+            </p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-[#e6edf4] text-[#0c141d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">版本 v2.4.0-compliant</span>
+</button>
+</div>
+<div class="flex flex-wrap gap-4 p-4">
+<div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded p-6 border border-[#cddbea]">
+<p class="text-[#0c141d] text-base font-medium leading-normal">胶囊高度 (Height)</p>
+<p class="text-[#0c141d] tracking-light text-2xl font-bold leading-tight">20px (h-5)</p>
+</div>
+<div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded p-6 border border-[#cddbea]">
+<p class="text-[#0c141d] text-base font-medium leading-normal">开启态色彩 (--lx-switch-on)</p>
+<p class="text-[#0c141d] tracking-light text-2xl font-bold leading-tight">#67c23a (绿底白字)</p>
+</div>
+<div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded p-6 border border-[#cddbea]">
+<p class="text-[#0c141d] text-base font-medium leading-normal">关闭态色彩 (--lx-switch-off)</p>
+<p class="text-[#0c141d] tracking-light text-2xl font-bold leading-tight">#909399 (灰底白字)</p>
+</div>
+<div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded p-6 border border-[#cddbea]">
+<p class="text-[#0c141d] text-base font-medium leading-normal">圆钮直径 (Thumb)</p>
+<p class="text-[#0c141d] tracking-light text-2xl font-bold leading-tight">16px (微阴影无缝滑动)</p>
+</div>
+</div>
+<h2 class="text-[#0c141d] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">一、核心开关形态与生命周期矩阵 (Interactive Matrix)</h2>
+<div class="p-4 grid grid-cols-2">
+<div class="flex flex-col gap-1 border-t border-solid border-t-[#cddbea] py-4 pr-2">
+<p class="text-[#4573a1] text-sm font-normal leading-normal">态 A：开启态 (Active)</p>
+<p class="text-[#0c141d] text-sm font-normal leading-normal">绿色胶囊底 #67c23a，滑块居右，内嵌加粗白字「开启」，CSS Token: --lx-switch-on</p>
+</div>
+<div class="flex flex-col gap-1 border-t border-solid border-t-[#cddbea] py-4 pl-2">
+<p class="text-[#4573a1] text-sm font-normal leading-normal">态 B：关闭态 (Inactive)</p>
+<p class="text-[#0c141d] text-sm font-normal leading-normal">标准灰底 #909399，滑块居左，内嵌加粗白字「关闭」，严格禁止关闭态误用警示红</p>
+</div>
+<div class="flex flex-col gap-1 border-t border-solid border-t-[#cddbea] py-4 pr-2">
+<p class="text-[#4573a1] text-sm font-normal leading-normal">态 C：异步 Loading 遮罩态</p>
+<p class="text-[#0c141d] text-sm font-normal leading-normal">切换过渡时覆盖微遮罩与 12px 微型旋转 Spinner，防抖防重复触发</p>
+</div>
+<div class="flex flex-col gap-1 border-t border-solid border-t-[#cddbea] py-4 pl-2">
+<p class="text-[#4573a1] text-sm font-normal leading-normal">态 D：权限不足降级 Tag 态</p>
+<p class="text-[#0c141d] text-sm font-normal leading-normal">无权限时不呈现灰死开关，降级为 20px 浅灰点标 LxTag [● 禁用/只读]，杜绝认知困扰</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Body Specification Details -->
+<main class="max-w-[1240px] mx-auto px-6 py-8 space-y-12">
+<!-- Interactive Matrix Visual Components -->
+<section class="space-y-4" id="matrix">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-5 bg-primary rounded-sm"></span>
+<h3 class="text-headline-md text-on-surface font-semibold">四维交互态实装微标本 (Interactive Matrix Specimens)</h3>
+</div>
+<span class="text-body-sm text-secondary font-mono">Component: &lt;LxStatusSwitch /&gt;</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- State A: Active -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 shadow-sm hover:border-primary transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+<span class="text-label-md font-semibold text-on-surface">态 A：开启态 (Active)</span>
+<span class="text-label-sm px-1.5 py-0.5 rounded bg-tertiary/10 text-tertiary font-mono">v-model: true</span>
+</div>
+<p class="text-body-sm text-on-surface-variant my-3">核心通信正常，指令通道畅通。右侧滑块，左嵌加粗「开启」。</p>
+<div class="py-4 flex items-center justify-center bg-surface-container-low rounded-lg">
+<!-- 20px Height, 42px Width Switch (Active) -->
+<div class="relative w-[42px] h-5 rounded-full flex items-center px-0.5 cursor-pointer shadow-inner select-none transition-colors" style="background-color: #67c23a;">
+<span class="text-[9px] font-bold text-white pl-1 select-none leading-none tracking-tight">开启</span>
+<span class="absolute right-0.5 w-4 h-4 rounded-full bg-white shadow-md transition-transform flex items-center justify-center"></span>
+</div>
+</div>
+</div>
+<div class="pt-3 border-t border-outline-variant text-[11px] font-mono text-secondary flex justify-between">
+<span>--lx-switch-on</span>
+<span class="font-semibold text-on-surface">#67c23a</span>
+</div>
+</div>
+<!-- State B: Inactive -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 shadow-sm hover:border-outline transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+<span class="text-label-md font-semibold text-on-surface">态 B：关闭态 (Inactive)</span>
+<span class="text-label-sm px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container font-mono">v-model: false</span>
+</div>
+<p class="text-body-sm text-on-surface-variant my-3">服务已关闭或休眠。标准中性灰 #909399，严禁滥用红色作为关闭底色。</p>
+<div class="py-4 flex items-center justify-center bg-surface-container-low rounded-lg">
+<!-- 20px Height, 42px Width Switch (Inactive) -->
+<div class="relative w-[42px] h-5 rounded-full flex items-center px-0.5 cursor-pointer shadow-inner select-none transition-colors justify-end" style="background-color: #909399;">
+<span class="text-[9px] font-bold text-white pr-1 select-none leading-none tracking-tight">关闭</span>
+<span class="absolute left-0.5 w-4 h-4 rounded-full bg-white shadow-md transition-transform flex items-center justify-center"></span>
+</div>
+</div>
+</div>
+<div class="pt-3 border-t border-outline-variant text-[11px] font-mono text-secondary flex justify-between">
+<span>--lx-switch-off</span>
+<span class="font-semibold text-on-surface">#909399</span>
+</div>
+</div>
+<!-- State C: Loading Pending -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 shadow-sm hover:border-primary-container transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+<span class="text-label-md font-semibold text-on-surface">态 C：异步 Loading 态</span>
+<span class="text-label-sm px-1.5 py-0.5 rounded bg-primary/10 text-primary font-mono">:loading="true"</span>
+</div>
+<p class="text-body-sm text-on-surface-variant my-3">过渡状态，遮罩覆盖防止二次触控，行内内嵌 12px 高帧率微旋转指示器。</p>
+<div class="py-4 flex items-center justify-center bg-surface-container-low rounded-lg">
+<!-- Loading Switch with Overlay & Spinner -->
+<div class="relative w-[42px] h-5 rounded-full flex items-center px-0.5 cursor-wait select-none opacity-85" style="background-color: #67c23a;">
+<span class="text-[9px] font-bold text-white pl-1 opacity-40">开启</span>
+<span class="absolute right-0.5 w-4 h-4 rounded-full bg-white/90 shadow-sm flex items-center justify-center">
+<svg class="w-3 h-3 text-secondary animate-spin-fast" fill="none" viewbox="0 0 24 24">
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+<path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+</svg>
+</span>
+</div>
+</div>
+</div>
+<div class="pt-3 border-t border-outline-variant text-[11px] font-mono text-secondary flex justify-between">
+<span>Pointer-Events</span>
+<span class="font-semibold text-error">none (Debounced)</span>
+</div>
+</div>
+<!-- State D: Fallback Tag -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 shadow-sm hover:border-outline transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+<span class="text-label-md font-semibold text-on-surface">态 D：权限不足降级 Tag</span>
+<span class="text-label-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-mono">no-auth</span>
+</div>
+<p class="text-body-sm text-on-surface-variant my-3">无变更权限时彻底替换开关为浅灰点标 Tag，解决“点了没反应”问题。</p>
+<div class="py-4 flex items-center justify-center bg-surface-container-low rounded-lg">
+<!-- 20px LxTag Fallback -->
+<div class="inline-flex items-center h-5 px-2 rounded border border-[#e9e9eb] bg-[#f4f4f5] text-[#909399] text-[11px] font-medium leading-none">
+<span class="w-1.5 h-1.5 rounded-full bg-[#909399] mr-1.5"></span>
+<span>禁用 (只读)</span>
+</div>
+</div>
+</div>
+<div class="pt-3 border-t border-outline-variant text-[11px] font-mono text-secondary flex justify-between">
+<span>Component Fallback</span>
+<span class="font-semibold text-on-surface">&lt;LxTag size="mini"&gt;</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Scenario 1: Canonical Real-World Scenarios - Police Grid Table -->
+<section class="space-y-4" id="scenarios">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-5 bg-primary rounded-sm"></span>
+<h3 class="text-headline-md text-on-surface font-semibold">二、三大典型业务场景实战演练 (Canonical Real-World Scenarios)</h3>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-sm font-medium bg-secondary-container text-on-secondary-container">
+          场景 1：公安专网 ProTable 行内真实集成
+        </span>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="px-6 py-4 bg-surface-container-low border-b border-outline-variant flex flex-wrap items-center justify-between gap-4">
+<div>
+<h4 class="text-headline-sm text-on-surface font-semibold">市级治安巡防视频中继节点监控台 (Police Video Relay Cluster)</h4>
+<p class="text-body-sm text-secondary">展示高并发、高实时性要求下的状态列开关规范集成，支持危险操作确认与异步防抖。</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-label-sm text-secondary font-mono">共 4 个活跃节点标本</span>
+<button class="px-2.5 py-1 text-label-sm bg-surface-container-lowest border border-outline-variant rounded hover:bg-surface-container text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">refresh</span> 刷新列表
+          </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-bright text-label-md text-secondary uppercase font-semibold tracking-wider">
+<th class="py-3 px-4 font-medium">节点编号</th>
+<th class="py-3 px-4 font-medium">节点名称</th>
+<th class="py-3 px-4 font-medium">归属单位</th>
+<th class="py-3 px-4 font-medium">通信地址 (IP:Port)</th>
+<th class="py-3 px-4 font-medium">最后心跳</th>
+<th class="py-3 px-4 font-medium w-40">运行状态 (LxStatusSwitch)</th>
+<th class="py-3 px-4 font-medium text-right">操作</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant text-body-sm text-on-surface">
+<!-- Row 1: Active -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 font-mono font-medium text-primary">NODE-MAIN-01</td>
+<td class="py-3.5 px-4 font-medium text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#67c23a]"></span>
+<span>市局指挥中心核心网关</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface-variant">市公安局情报指挥中心</td>
+<td class="py-3.5 px-4 font-mono text-secondary">10.128.42.10:8848</td>
+<td class="py-3.5 px-4 text-secondary">12秒前</td>
+<td class="py-3.5 px-4">
+<!-- Inline Switch (Active) -->
+<div class="flex items-center gap-2">
+<div class="relative w-[42px] h-5 rounded-full flex items-center px-0.5 cursor-pointer shadow-inner select-none transition-transform active:scale-95" style="background-color: #67c23a;" title="点击停用此节点">
+<span class="text-[9px] font-bold text-white pl-1 select-none leading-none tracking-tight">开启</span>
+<span class="absolute right-0.5 w-4 h-4 rounded-full bg-white shadow-md flex items-center justify-center"></span>
+</div>
+<span class="text-[11px] text-tertiary font-medium">正常运行</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<a class="text-primary hover:underline font-medium mr-3" href="#">详情</a>
+<a class="text-primary hover:underline font-medium" href="#">配置</a>
+</td>
+</tr>
+<!-- Row 2: Inactive -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 font-mono font-medium text-on-surface-variant">NODE-BACKUP-02</td>
+<td class="py-3.5 px-4 font-medium text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#909399]"></span>
+<span>东区分局备用前置机</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface-variant">东区公安分局网安大队</td>
+<td class="py-3.5 px-4 font-mono text-secondary">10.128.43.15:8848</td>
+<td class="py-3.5 px-4 text-secondary">2分钟前</td>
+<td class="py-3.5 px-4">
+<!-- Inline Switch (Inactive) -->
+<div class="flex items-center gap-2">
+<div class="relative w-[42px] h-5 rounded-full flex items-center px-0.5 cursor-pointer shadow-inner select-none transition-transform active:scale-95 justify-end" style="background-color: #909399;" title="点击启用服务">
+<span class="text-[9px] font-bold text-white pr-1 select-none leading-none tracking-tight">关闭</span>
+<span class="absolute left-0.5 w-4 h-4 rounded-full bg-white shadow-md flex items-center justify-center"></span>
+</div>
+<span class="text-[11px] text-secondary font-medium">待命中</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<a class="text-primary hover:underline font-medium mr-3" href="#">详情</a>
+<a class="text-primary hover:underline font-medium" href="#">配置</a>
+</td>
+</tr>
+<!-- Row 3: Loading -->
+<tr class="hover:bg-surface-container-low/60 transition-colors bg-primary/5">
+<td class="py-3.5 px-4 font-mono font-medium text-on-surface-variant">NODE-EDGE-03</td>
+<td class="py-3.5 px-4 font-medium text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span>南区派出所边缘计算盒</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface-variant">南区城关派出所综合指挥室</td>
+<td class="py-3.5 px-4 font-mono text-secondary">10.128.44.22:8080</td>
+<td class="py-3.5 px-4 text-secondary">1秒前</td>
+<td class="py-3.5 px-4">
+<!-- Inline Switch (Loading Pending) -->
+<div class="flex items-center gap-2">
+<div class="relative w-[42px] h-5 rounded-full flex items-center px-0.5 cursor-wait select-none opacity-85" style="background-color: #67c23a;">
+<span class="text-[9px] font-bold text-white pl-1 opacity-40">开启</span>
+<span class="absolute right-0.5 w-4 h-4 rounded-full bg-white/90 shadow-sm flex items-center justify-center">
+<svg class="w-3 h-3 text-secondary animate-spin-fast" fill="none" viewbox="0 0 24 24">
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+<path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+</svg>
+</span>
+</div>
+<span class="text-[11px] text-primary font-mono animate-pulse">状态同步中...</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<span class="text-secondary/50 font-medium mr-3 cursor-not-allowed">详情</span>
+<span class="text-secondary/50 font-medium cursor-not-allowed">配置</span>
+</td>
+</tr>
+<!-- Row 4: Permission Fallback -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 font-mono font-medium text-outline">NODE-SPECIAL-09</td>
+<td class="py-3.5 px-4 font-medium text-on-surface">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>机要专网涉密隔离节点</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface-variant">市局机要保密处技术科</td>
+<td class="py-3.5 px-4 font-mono text-secondary">10.128.99.01:9000</td>
+<td class="py-3.5 px-4 text-secondary">正常</td>
+<td class="py-3.5 px-4">
+<!-- Inline Fallback Tag (No Switch) -->
+<div class="flex items-center gap-2">
+<div class="inline-flex items-center h-5 px-2 rounded border border-[#e9e9eb] bg-[#f4f4f5] text-[#909399] text-[11px] font-medium leading-none" title="当前账号未分配 security:node:toggle 权限">
+<span class="w-1.5 h-1.5 rounded-full bg-[#909399] mr-1.5"></span>
+<span>禁用 (无权限)</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<a class="text-primary hover:underline font-medium mr-3" href="#">详情</a>
+<span class="text-outline cursor-not-allowed">审计受限</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-3 bg-surface-container-low border-t border-outline-variant flex items-center justify-between text-body-sm text-secondary">
+<span>显示第 1 至 4 项，共 4 项结果</span>
+<div class="flex gap-1">
+<button class="px-2 py-1 rounded bg-surface-container-lowest border border-outline-variant text-label-sm disabled:opacity-50" disabled="">上一页</button>
+<button class="px-2 py-1 rounded bg-primary text-white text-label-sm">1</button>
+<button class="px-2 py-1 rounded bg-surface-container-lowest border border-outline-variant text-label-sm disabled:opacity-50" disabled="">下一页</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Scenario 2 & Scenario 3 (Split View): Permission Matrix & High-Risk Danger Modal -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Scenario 2: Permission Matrix Card (5 Cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm space-y-4">
+<div class="flex items-center gap-2 pb-3 border-b border-outline-variant">
+<span class="w-1.5 h-4 bg-primary rounded-sm"></span>
+<h4 class="text-headline-sm font-semibold text-on-surface">场景 2：权限不足与角色降级对照 (Permission Matrix)</h4>
+</div>
+<p class="text-body-sm text-on-surface-variant">
+        依照拍板决策 #10 规范，杜绝“用户点不动却反复狂点”的交互坏味道。若接口返回鉴权失败或前端缺失权限指令，严密降级为纯静态标本。
+      </p>
+<div class="space-y-4 pt-2">
+<!-- View A: Admin View -->
+<div class="p-3.5 rounded-lg border border-outline-variant bg-surface-container-low space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">verified_user</span>
+              管理员视图 (Role: SuperAdmin)
+            </span>
+<span class="text-[10px] bg-tertiary/10 text-tertiary px-1.5 py-0.5 rounded font-mono">auth:pass</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-lowest p-2.5 rounded border border-outline-variant">
+<span class="text-body-sm text-on-surface">允许直接触发平滑滑动：</span>
+<div class="relative w-[42px] h-5 rounded-full flex items-center px-0.5 cursor-pointer shadow-inner select-none" style="background-color: #67c23a;">
+<span class="text-[9px] font-bold text-white pl-1 select-none leading-none tracking-tight">开启</span>
+<span class="absolute right-0.5 w-4 h-4 rounded-full bg-white shadow-md flex items-center justify-center"></span>
+</div>
+</div>
+</div>
+<!-- View B: Readonly Operator View -->
+<div class="p-3.5 rounded-lg border border-outline-variant bg-surface-container-low space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">visibility</span>
+              只读岗/外勤民警视图 (Role: Viewer)
+            </span>
+<span class="text-[10px] bg-error-container text-on-error-container px-1.5 py-0.5 rounded font-mono">auth:forbidden</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-lowest p-2.5 rounded border border-outline-variant">
+<span class="text-body-sm text-on-surface">降级为 LxTag (附 Tooltip)：</span>
+<div class="group relative inline-block">
+<div class="inline-flex items-center h-5 px-2 rounded border border-[#e9e9eb] bg-[#f4f4f5] text-[#909399] text-[11px] font-medium leading-none cursor-not-allowed">
+<span class="w-1.5 h-1.5 rounded-full bg-[#909399] mr-1.5"></span>
+<span>禁用/只读</span>
+</div>
+<!-- Tooltip Demo -->
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block whitespace-nowrap bg-inverse-surface text-inverse-on-surface text-[11px] px-2 py-1 rounded shadow-lg z-20">
+                当前账号未分配 security:node:toggle 权限
+              </div>
+</div>
+</div>
+<p class="text-[11px] text-secondary">
+            * 提示：悬浮时浮现黑底微提示，清晰告知缺失的具体权限码，绝不引起困惑。
+          </p>
+</div>
+</div>
+</div>
+<!-- Scenario 3: High-Risk Confirmation Modal (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm space-y-4" id="modal">
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-4 bg-error rounded-sm"></span>
+<h4 class="text-headline-sm font-semibold text-on-surface">场景 3：危险操作二次确认阻断场景 (High-Risk Modal)</h4>
+</div>
+<span class="text-label-sm px-2 py-0.5 rounded bg-error-container text-on-error-container font-mono">GB/T 33170 强阻断</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">
+        对涉及全域调度、视频汇聚的核心节点关闭操作，开关点击后立即拦截，弹出 512px 居中警务高危阻断确认层：
+      </p>
+<!-- Simulated Modal Layer Container with Perspective -->
+<div class="relative bg-surface-container-highest/60 rounded-xl p-6 border border-outline-variant flex items-center justify-center overflow-hidden">
+<!-- Background Simulated Watermark/Grid Backdrop -->
+<div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#4f6076_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<!-- 512px Danger Confirmation Dialog -->
+<div class="relative w-full max-w-[512px] bg-surface-container-lowest rounded-xl shadow-2xl border border-outline-variant/80 overflow-hidden z-10">
+<!-- Modal Header -->
+<div class="p-5 pb-3 flex items-start gap-3.5">
+<!-- Red Warning Triangle SVG -->
+<div class="w-9 h-9 rounded-full bg-error-container/60 flex items-center justify-center shrink-0 border border-error/20">
+<svg class="w-5 h-5 text-error" fill="currentColor" viewbox="0 0 24 24">
+<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"></path>
+</svg>
+</div>
+<div class="space-y-1">
+<h5 class="text-[15px] font-bold text-on-surface leading-tight">确认停用该核心节点通信？</h5>
+<p class="text-[12px] text-error font-medium">警告：此操作直接影响公安一级业务调度</p>
+</div>
+</div>
+<!-- Modal Body with Strict Security Wording -->
+<div class="px-5 py-2 pl-[62px] text-body-sm text-on-surface-variant leading-relaxed space-y-2">
+<p>
+              您正在尝试关闭【<span class="font-semibold text-on-surface">市局指挥中心主节点 NODE-MAIN-01</span>】的服务通信。
+            </p>
+<div class="p-3 bg-surface-container-low rounded border border-outline-variant text-[12px] text-secondary space-y-1">
+<p>• 停用后，下辖 <strong>3 个分局</strong> 与 <strong>18 个基层派出所</strong> 的警情实时跨域同步将立即中断。</p>
+<p>• 可能导致 <strong>142 名在线执勤警力</strong> 的指令流转延迟。</p>
+</div>
+<p class="text-[11px] text-secondary font-mono pt-1">
+              * 此操作属于二级高危变更，将被写入不可篡改的公安系统审计日志 (GB/T 33170 §7.4)。
+            </p>
+</div>
+<!-- Modal Footer (Right-aligned Actions) -->
+<div class="px-5 py-3.5 bg-surface-container-low border-t border-outline-variant flex items-center justify-end gap-2.5">
+<button class="px-4 py-1.5 rounded-lg border border-outline-variant bg-surface-container-lowest text-body-sm text-on-surface hover:bg-surface-container font-medium transition-colors">
+              取消返回
+            </button>
+<button class="px-4 py-1.5 rounded-lg bg-error hover:bg-[#93000a] text-white text-body-sm font-semibold shadow-sm transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">power_settings_new</span>
+<span>确认停用核心节点</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Developer API & Token Specification -->
+<section class="space-y-4" id="contract">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-5 bg-primary rounded-sm"></span>
+<h3 class="text-headline-md text-on-surface font-semibold">三、研发契约与 Vue 3 组件接口 (Developer API &amp; Token Spec)</h3>
+</div>
+<span class="text-label-sm font-mono text-secondary">TypeScript &amp; Tailwind CSS</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- API Interface Table -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 shadow-sm space-y-3">
+<h4 class="text-headline-sm font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">code</span>
+<span>Props 参数契约 (LxStatusSwitch.vue)</span>
+</h4>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-body-sm border-collapse">
+<thead>
+<tr class="border-b border-outline-variant text-label-sm text-secondary">
+<th class="pb-2 font-medium">参数名</th>
+<th class="pb-2 font-medium">类型</th>
+<th class="pb-2 font-medium">默认值</th>
+<th class="pb-2 font-medium">说明</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant text-[12px] font-mono">
+<tr>
+<td class="py-2 text-primary font-semibold">v-model</td>
+<td class="py-2 text-on-surface-variant">boolean | number</td>
+<td class="py-2 text-secondary">false</td>
+<td class="py-2 font-sans text-on-surface">开关状态，支持兼容 0/1 反向映射</td>
+</tr>
+<tr>
+<td class="py-2 text-primary font-semibold">loading</td>
+<td class="py-2 text-on-surface-variant">boolean</td>
+<td class="py-2 text-secondary">false</td>
+<td class="py-2 font-sans text-on-surface">异步加载遮罩态，附带 12px Spinner</td>
+</tr>
+<tr>
+<td class="py-2 text-primary font-semibold">disabled</td>
+<td class="py-2 text-on-surface-variant">boolean</td>
+<td class="py-2 text-secondary">false</td>
+<td class="py-2 font-sans text-on-surface">禁用原生开关交互</td>
+</tr>
+<tr>
+<td class="py-2 text-primary font-semibold">permission</td>
+<td class="py-2 text-on-surface-variant">string</td>
+<td class="py-2 text-secondary">''</td>
+<td class="py-2 font-sans text-on-surface">RBAC 权限标识码，无权限时自动降级</td>
+</tr>
+<tr>
+<td class="py-2 text-primary font-semibold">fallbackTag</td>
+<td class="py-2 text-on-surface-variant">boolean</td>
+<td class="py-2 text-secondary">true</td>
+<td class="py-2 font-sans text-on-surface">无权限时自动转为 20px LxTag 标本</td>
+</tr>
+<tr>
+<td class="py-2 text-primary font-semibold">confirm</td>
+<td class="py-2 text-on-surface-variant">string | object</td>
+<td class="py-2 text-secondary">null</td>
+<td class="py-2 font-sans text-on-surface">开启二次危险阻断提示弹窗配置</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Token & Code Snippet Box -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 shadow-sm space-y-3">
+<h4 class="text-headline-sm font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">css</span>
+<span>CSS Design Tokens &amp; 模板用法</span>
+</h4>
+<div class="bg-inverse-surface text-inverse-on-surface rounded-lg p-4 font-mono text-[12px] leading-relaxed overflow-x-auto">
+<pre class="text-[#a2c9ff]"><code>&lt;!-- 示例：公安业务表格行内集成 --&gt;
+&lt;LxStatusSwitch
+  v-model="row.nodeStatus"
+  :loading="row.syncing"
+  :permission="'security:node:toggle'"
+  :confirm="{
+    title: '确认停用该核心节点？',
+    message: '停用后将中断跨域警情调度，此操作计入审计。',
+    type: 'danger'
+  }"
+  @change="handleStatusChange(row)"
+/&gt;
+
+/* 设计令牌 Design Tokens (DESIGN-SPEC §3) */
+:root {
+  --lx-switch-height: 20px;
+  --lx-switch-width: 42px;
+  --lx-switch-thumb: 16px;
+  --lx-switch-on: #67c23a;   /* 开启绿 */
+  --lx-switch-off: #909399;  /* 统一灰关闭 */
+  --lx-shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}</code></pre>
+</div>
+<p class="text-[11px] text-secondary">
+          拍板决策说明：严禁在未经过确认弹窗的情况下直接使用红色表现关闭态。红色仅限全局错误（Error/Alarm）与高危确认弹窗危险按钮。
+        </p>
+</div>
+</div>
+</section>
+</main>
+<footer class="mt-16 border-t border-outline-variant bg-surface-container-low py-6 text-center text-body-sm text-secondary">
+<div class="max-w-[960px] mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-2">
+<span>公安部公共安全标准体系 GB/T 33170 COMPLIANT SPECIMEN</span>
+<span class="font-mono text-[11px]">LxStatusSwitch v2.4.0 • Design System Team</span>
+</div>
+</footer>
+</body></html>

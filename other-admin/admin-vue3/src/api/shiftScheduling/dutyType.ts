@@ -11,7 +11,7 @@ export interface DutyTypeListQuery {
 /** 排班类型项 */
 export interface DutyTypeItem {
   /** 排班类型标识（主键，0 为内置默认类型，不可删除） */
-  type: string;
+  type: string | number;
   /** 排班类型名称 */
   name: string;
   /** 创建时间 */

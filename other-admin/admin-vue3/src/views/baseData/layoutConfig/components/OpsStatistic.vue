@@ -12,6 +12,7 @@ import { Download } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import { ref } from 'vue';
 
+import type { BinaryApiResponse } from '#/axios';
 import { exportLoginStatistic } from '@/api/baseData/layoutConfig';
 import SectionTitle from '@/components/SectionTitle/index.vue';
 import { getServiceFile } from '@/utils';
@@ -19,9 +20,10 @@ import { getServiceFile } from '@/utils';
 defineOptions({ name: 'OpsStatistic' });
 
 /** 日期范围（[startTime, endTime]） */
-const dateRange = ref<[string, string] | []>([]);
+const dateRange = ref<[string, string] | [] | null>([]);
 
 const exporting = ref(false);
+const defaultTimeRange: [Date, Date] = [new Date(2000, 0, 1, 0, 0, 0), new Date(2000, 0, 1, 23, 59, 59)];
 
 /** 日期禁用函数：限制选择范围内的日期跨度不超过 1 年 */
 function disabledDate(current: Date): boolean {
@@ -39,8 +41,11 @@ function disabledDate(current: Date): boolean {
 
 /** 校验日期范围 */
 function validateDateRange(): { startTime: string; endTime: string } | null {
-  if (!dateRange.value || dateRange.value.length !== 2) {
-    ElMessage.warning('请选择日期范围');
+  if (!dateRange.value || dateRange.value.length === 0) {
+    return { startTime: '', endTime: '' };
+  }
+  if (dateRange.value.length !== 2) {
+    ElMessage.warning('请选择完整的日期范围');
     return null;
   }
   const [startTime, endTime] = dateRange.value;
@@ -72,36 +77,48 @@ function formatDateTime(dateStr: string): string {
   )}:${pad(d.getSeconds())}`;
 }
 
+/** 从 Content-Disposition 获取导出文件名。 */
+function getExportFileName(headers: BinaryApiResponse<ArrayBuffer>['headers']): string {
+  const contentDisposition = headers['content-disposition'] ?? '';
+  if (typeof contentDisposition !== 'string' || !contentDisposition) return '日活数据.xlsx';
+  const match = /filename\*=\s*utf-8''([^;]+)|filename="?([^;"]+)"?/i.exec(contentDisposition);
+  if (!match) return '日活数据.xlsx';
+  const raw = (match[1] || match[2] || '').trim();
+  try {
+    return decodeURIComponent(raw) || '日活数据.xlsx';
+  } catch {
+    return raw || '日活数据.xlsx';
+  }
+}
+
 /** 导出登录统计数据 */
-async function handleExport(): Promise<void> {
+function handleExport(): void {
   const params = validateDateRange();
   if (!params) return;
   exporting.value = true;
-  try {
-    const res = await exportLoginStatistic(params);
-    // 错误兜底：若返回的是 JSON 错误体（非 ArrayBuffer 或 ArrayBuffer 解析为 JSON）
-    if (res.code !== 0) {
-      // 注意：responseType: arraybuffer 时，错误响应也是 ArrayBuffer，需要尝试解析为 JSON
-      const errMsg = parseArrayBufferError(res.data);
-      ElMessage.error(errMsg || res.msg || '导出失败');
-      return;
-    }
-    const buffer = res.data;
-    if (!buffer) {
-      ElMessage.error('导出数据为空');
-      return;
-    }
-    const blob = new Blob([buffer], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  exportLoginStatistic(params)
+    .then(({ data, headers }) => {
+      const contentType = String(headers['content-type'] ?? '').toLowerCase();
+      if (contentType.includes('json')) {
+        ElMessage.error(parseArrayBufferError(data) || '导出失败');
+        return;
+      }
+      if (data.byteLength === 0) {
+        ElMessage.error('导出数据为空');
+        return;
+      }
+      const blob = new Blob([data], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      });
+      getServiceFile(blob, getExportFileName(headers));
+      ElMessage.success('导出成功');
+    })
+    .catch(() => {
+      ElMessage.error('导出失败');
+    })
+    .finally(() => {
+      exporting.value = false;
     });
-    const filename = `登录统计_${params.startTime}_${params.endTime}.xlsx`;
-    getServiceFile(blob, filename);
-    ElMessage.success('导出成功');
-  } catch {
-    ElMessage.error('导出失败');
-  } finally {
-    exporting.value = false;
-  }
 }
 
 /** 尝试将 ArrayBuffer 解析为 JSON 错误体（仅用于错误兜底） */
@@ -134,6 +151,7 @@ function parseArrayBufferError(buffer: unknown): string {
             end-placeholder="结束时间"
             format="YYYY-MM-DD HH:mm:ss"
             value-format="YYYY-MM-DD HH:mm:ss"
+            :default-time="defaultTimeRange"
             :disabled-date="disabledDate"
             style="width: 380px"
           />

@@ -2,116 +2,89 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
 import { addRouterByPermissions } from './filterChain';
-import router from './index';
+import router, { addDynamicRoute } from './index';
 import { useUserStore } from '@/store/modules/useUserStore';
 import { getToken } from '@/utils/auth';
 import { getPageTitle } from '@/utils/get-page-title';
-import { buildRoutesFromOauthMenu, printMatchedInfo } from '@/utils/menuRouteMapper';
 
 NProgress.configure({ showSpinner: false });
 
 const whiteList = ['/login', '/index.html'];
 
-// OAuth 菜单是否已加载
-let oauthMenuLoaded = false;
-
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
   NProgress.start();
 
   const userStore = useUserStore();
-  const { menu } = userStore;
+  const hasToken = getToken();
+
+  // 先验证令牌，再发起受保护的菜单和权限请求。
+  if (!hasToken) {
+    if (to.path === '/login') next();
+    else next(`/login?redirect=${encodeURIComponent(to.fullPath)}`);
+    NProgress.done();
+    return;
+  }
+
+  if (whiteList.includes(to.path)) {
+    next({ path: '/' });
+    NProgress.done();
+    return;
+  }
 
   // 首次进入：菜单为空时拉取菜单并注册动态路由
-  if (!whiteList.includes(to.path) && menu.length === 0) {
-    const res = await userStore.getMenuAction();
-    if (!res) {
-      NProgress.done();
-      next('/login');
-      return;
-    }
+  if (!whiteList.includes(to.path) && !userStore.menuLoaded) {
+    const sessionEpoch = userStore.sessionEpoch;
+    userStore
+      .getMenuAction()
+      .then((loaded) => {
+        // 等待接口期间若登出或切换账号，应废弃旧导航。
+        if (sessionEpoch !== userStore.sessionEpoch) {
+          next(false);
+          NProgress.done();
+          return Promise.resolve();
+        }
+        if (!loaded) {
+          return userStore.resetTokenAction().then(() => {
+            NProgress.done();
+            next('/login');
+          });
+        }
 
-    const { menu: newMenu, permissions } = userStore;
-    const filteredRoutes = await addRouterByPermissions(newMenu, permissions.menus);
+        const { menu: newMenu, permissions } = userStore;
+        return addRouterByPermissions(newMenu, permissions.menus).then((filteredRoutes) => {
+          if (sessionEpoch !== userStore.sessionEpoch) {
+            next(false);
+            NProgress.done();
+            return;
+          }
 
-    // 逐个添加动态路由（Vue Router 4 API）
-    filteredRoutes.forEach((route) => {
-      router.addRoute(route);
-    });
-
-    // 诊断：打印注册后的所有路由
-    console.log(
-      '[RouterGuard] 已注册路由:',
-      router.getRoutes().map((r) => ({ path: r.path, name: r.name })),
-    );
-
-    // 加载 OAuth 菜单（生产环境跳过，开发环境并行）
-    if (!oauthMenuLoaded) {
-      if (import.meta.env.PROD) {
-        oauthMenuLoaded = true;
-      } else {
-        loadOauthMenu();
-      }
-    }
-
-    // next(to.redirectedFrom) 确保新添加的路由生效
-    // 当直接访问 /authority/role 时 redirectedFrom 为 undefined，next() 继续导航到 to
-    const redirectFrom = to.redirectedFrom;
-    if (redirectFrom) {
-      next(redirectFrom);
-    } else {
-      next();
-    }
+          // 逐个添加动态路由（Vue Router 4 API）
+          filteredRoutes.forEach((route) => {
+            addDynamicRoute(route);
+          });
+          // 重新按完整地址解析，使首次直达的动态路由拿到新注册的 matched 记录。
+          // 直接展开旧的 to 对象会复用通配路由的匹配结果，出现地址正确但页面仍显示首页的问题。
+          const browserPath = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+          const initialFallbackPath =
+            to.path === '/dashboard' && from.path === '/' && browserPath !== '/dashboard' && browserPath !== '/';
+          next({ path: initialFallbackPath ? browserPath : to.fullPath, replace: true });
+        });
+      })
+      .catch(() => {
+        NProgress.done();
+        next(false);
+      });
     return;
   }
 
   // 设置页面标题
   document.title = getPageTitle(to.meta?.title as string | undefined);
 
-  // Token 校验
-  const hasToken = getToken();
-  if (hasToken) {
-    const targetPath = typeof to.redirectedFrom === 'string' ? to.redirectedFrom : to.path;
-    if (whiteList.includes(targetPath)) {
-      next({ path: '/' });
-      NProgress.done();
-    } else {
-      next();
-    }
-  } else {
-    if (to.path === '/login') {
-      next();
-    } else {
-      next(`/login?redirect=${to.path}`);
-      NProgress.done();
-    }
-  }
+  next();
 });
 
 router.afterEach(() => {
   NProgress.done();
 });
-
-/**
- * 加载 OAuth 菜单并构建路由（并行运行，不影响现有菜单显示）
- */
-async function loadOauthMenu(): Promise<void> {
-  try {
-    const menuData = await useUserStore().getOauthMenuAction();
-    if (!menuData || menuData.length === 0) {
-      console.warn('[OAuth菜单] 未获取到菜单数据');
-      return;
-    }
-
-    const { routes, matchedInfo } = buildRoutesFromOauthMenu(menuData);
-    printMatchedInfo(matchedInfo);
-
-    if (import.meta.env.PROD) {
-      useUserStore().setOauthMenuLoaded(true);
-    }
-    oauthMenuLoaded = true;
-  } catch (err) {
-    console.error('[OAuth菜单] 加载失败:', err);
-  }
-}
 
 export default router;

@@ -104,21 +104,22 @@ const columns = computed<ITableColumn[]>(() => [
  * @param params 搜索参数 + 分页参数
  * @returns 包装后的响应 { code, data: { records, total } }
  */
-async function fetchGroupList(params: Record<string, unknown>): Promise<{
+function fetchGroupList(params: Record<string, unknown>): Promise<{
   code: number;
   data: { records: AppGroup[]; total: number };
 }> {
-  const res = await getGroupPage({ type: 1 });
-  let records = res.data ?? [];
-  // 前端按 name 关键字过滤（后端不支持 name 参数）
-  const keyword = (params.name as string) ?? '';
-  if (keyword) {
-    records = records.filter((item) => item.name?.includes(keyword));
-  }
-  return {
-    code: res.code ?? 0,
-    data: { records, total: records.length },
-  };
+  return getGroupPage({ type: 1 }).then((res) => {
+    let records = res.data ?? [];
+    // 前端按 name 关键字过滤（后端不支持 name 参数）
+    const keyword = (params.name as string) ?? '';
+    if (keyword) {
+      records = records.filter((item) => item.name?.includes(keyword));
+    }
+    return {
+      code: res.code ?? 0,
+      data: { records, total: records.length },
+    };
+  });
 }
 
 // ===== 搜索/重置 =====
@@ -141,33 +142,36 @@ function resetGroupForm(): void {
  * 获取应用列表
  * 拉取已上架且非前置应用的应用：status === 0 && type !== 3
  */
-async function fetchAppList(): Promise<void> {
+function fetchAppList(): Promise<void> {
   appLoading.value = true;
-  try {
-    const res = await getAppList({ pageNum: 1, pageSize: 100 });
-    const records =
-      (res?.data?.records as AppItem[] | undefined) ?? (Array.isArray(res?.data) ? (res?.data as AppItem[]) : []);
-    appList.value = records
-      .filter((item) => item.status === 0 && item.type !== 3)
-      .map((item) => ({ id: item.id, name: item.name }));
-  } catch {
-    appList.value = [];
-  } finally {
-    appLoading.value = false;
-  }
+  return getAppList({ pageNum: 1, pageSize: 100 })
+    .then((res) => {
+      const records =
+        (res?.data?.records as AppItem[] | undefined) ?? (Array.isArray(res?.data) ? (res?.data as AppItem[]) : []);
+      appList.value = records
+        .filter((item) => item.status === 0 && item.type !== 3)
+        .map((item) => ({ id: item.id, name: item.name }));
+    })
+    .catch(() => {
+      appList.value = [];
+    })
+    .finally(() => {
+      appLoading.value = false;
+    });
 }
 
-async function handleCreate(): Promise<void> {
+function handleCreate(): Promise<void> {
   resetGroupForm();
   groupFormType.value = 'create';
   groupDialogTitle.value = '新增分类';
   // 打开弹窗前先加载应用列表
-  await fetchAppList();
-  groupDialogVisible.value = true;
-  nextTick(() => groupFormRef.value?.clearValidate());
+  return fetchAppList().then(() => {
+    groupDialogVisible.value = true;
+    nextTick(() => groupFormRef.value?.clearValidate());
+  });
 }
 
-async function handleUpdate(row: AppGroup): Promise<void> {
+function handleUpdate(row: AppGroup): Promise<void> {
   resetGroupForm();
   groupFormType.value = 'update';
   groupDialogTitle.value = '编辑分类';
@@ -179,9 +183,10 @@ async function handleUpdate(row: AppGroup): Promise<void> {
     appIds: row.appIds ?? (row.appList ?? []).map((a) => a.id),
   });
   // 打开弹窗前先加载应用列表
-  await fetchAppList();
-  groupDialogVisible.value = true;
-  nextTick(() => groupFormRef.value?.clearValidate());
+  return fetchAppList().then(() => {
+    groupDialogVisible.value = true;
+    nextTick(() => groupFormRef.value?.clearValidate());
+  });
 }
 
 async function handleGroupSubmit(): Promise<void> {
@@ -191,20 +196,25 @@ async function handleGroupSubmit(): Promise<void> {
     return;
   }
   groupSubmitLoading.value = true;
-  try {
-    const isCreate = groupFormType.value === 'create';
-    const payload = { ...groupForm };
-    const res = isCreate ? await createGroup(payload) : await updateGroup(payload);
-    if (res.code === 0) {
-      ElMessage.success(isCreate ? '新增成功' : '修改成功');
-      groupDialogVisible.value = false;
-      tableRef.value?.refresh();
-    } else {
-      ElMessage.error(res.msg ?? (isCreate ? '新增失败' : '修改失败'));
-    }
-  } finally {
-    groupSubmitLoading.value = false;
-  }
+  const isCreate = groupFormType.value === 'create';
+  const payload = { ...groupForm };
+  const request = isCreate ? createGroup(payload) : updateGroup(payload);
+  return request
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(isCreate ? '新增成功' : '修改成功');
+        groupDialogVisible.value = false;
+        tableRef.value?.refresh();
+      } else {
+        ElMessage.error(res.msg ?? (isCreate ? '新增失败' : '修改失败'));
+      }
+    })
+    .catch(() => {
+      ElMessage.error(isCreate ? '新增失败' : '修改失败');
+    })
+    .finally(() => {
+      groupSubmitLoading.value = false;
+    });
 }
 
 function handleDelete(row: AppGroup): void {

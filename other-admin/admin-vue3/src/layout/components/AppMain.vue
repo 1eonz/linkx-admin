@@ -2,13 +2,11 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { useAppStore } from '@/store/modules/useAppStore';
 import { useKeepAliveStore } from '@/store/modules/useKeepAliveStore';
 
 defineOptions({ name: 'AppMain' });
 
 const route = useRoute();
-const appStore = useAppStore();
 
 const cachedViews = computed(() => useKeepAliveStore().cachedViews);
 const key = computed(() => route.path);

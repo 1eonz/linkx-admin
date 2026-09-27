@@ -32,20 +32,28 @@ const rules: FormRules = {
 };
 
 // init 入口：rowArr 为选中人员数组
-async function init(rowArr: Array<{ id: string; name: string }>): Promise<void> {
+function init(rowArr: Array<{ id: string; name: string }>): Promise<void> {
   if (rowArr) {
     form.relatedUserNames = rowArr.map((item) => item.name).join(',');
     form.relatedUserIds = rowArr.map((item) => item.id);
   }
-  await getList();
-  dialogVisible.value = true;
+  return getList().then((loaded) => {
+    if (loaded) dialogVisible.value = true;
+  });
 }
 
 // 获取角色列表：status === 0 的角色
-async function getList(): Promise<void> {
+function getList(): Promise<boolean> {
   const params = { name: '', pageSize: 100, pageNum: 1 };
-  const roleListRes = await getRoleList(params);
-  roleList.value = (roleListRes.data?.records as RoleItem[])?.filter((item) => item.status === 0) ?? [];
+  return getRoleList(params)
+    .then((roleListRes) => {
+      roleList.value = (roleListRes.data?.records as RoleItem[])?.filter((item) => item.status === 0) ?? [];
+      return true;
+    })
+    .catch(() => {
+      ElMessage.error('获取角色列表失败');
+      return false;
+    });
 }
 
 function handleConfirm(): void {

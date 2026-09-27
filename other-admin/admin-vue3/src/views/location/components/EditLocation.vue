@@ -88,30 +88,29 @@ async function submitForm(): Promise<void> {
   const valid = await formRef.value?.validate().catch(() => false);
   if (!valid) return;
   dialogLoading.value = true;
-  try {
-    const isCreate = isAdd.value;
-    const result = isCreate
-      ? await createLocation({
-          departmentCode: form.departmentCode ?? '',
-          departmentName: form.departmentName ?? '',
-          location: form.location ?? '',
-        })
-      : await updateLocation({
-          id: form.id as string,
-          departmentCode: form.departmentCode ?? '',
-          departmentName: form.departmentName ?? '',
-          location: form.location ?? '',
-        });
-    if (!result || result.code !== 0) {
-      ElMessage.error(result?.msg ?? `${isCreate ? '新增' : '编辑'}失败，请重试`);
-      return;
-    }
-    ElMessage.success(`${isCreate ? '新增' : '编辑'}成功`);
-    emit('success');
-    dialogVisible.value = false;
-  } finally {
-    dialogLoading.value = false;
-  }
+  const isCreate = isAdd.value;
+  const payload = {
+    departmentCode: form.departmentCode ?? '',
+    departmentName: form.departmentName ?? '',
+    location: form.location ?? '',
+  };
+  const request = isCreate ? createLocation(payload) : updateLocation({ id: form.id as string, ...payload });
+  return request
+    .then((result) => {
+      if (!result || result.code !== 0) {
+        ElMessage.error(result?.msg ?? `${isCreate ? '新增' : '编辑'}失败，请重试`);
+        return;
+      }
+      ElMessage.success(`${isCreate ? '新增' : '编辑'}成功`);
+      emit('success');
+      dialogVisible.value = false;
+    })
+    .catch(() => {
+      ElMessage.error(`${isCreate ? '新增' : '编辑'}失败，请重试`);
+    })
+    .finally(() => {
+      dialogLoading.value = false;
+    });
 }
 
 function resetForm(): void {

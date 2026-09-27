@@ -20,20 +20,20 @@ const jxVersion = ref('-');
  * - localStorage['simplePassWord']：'true' / 移除（控制密码策略）
  * 获取全局配置（dashboard.getGlobal() 行为）
  */
-async function loadGlobalConfig(): Promise<void> {
-  try {
-    const res = await queryGlobalsList();
-    if (res?.data) {
+function loadGlobalConfig(): Promise<void> {
+  return queryGlobalsList()
+    .then((res) => {
+      if (!res?.data) return;
       if (res.data.ALLOW_SIMPLE_PASSWORD === '1') {
         localStorage.setItem('simplePassWord', 'true');
       } else {
         localStorage.removeItem('simplePassWord');
       }
       localStorage.setItem('globalConfig', JSON.stringify(res.data));
-    }
-  } catch (error) {
-    console.error('[Dashboard] 获取全局配置失败:', error);
-  }
+    })
+    .catch((error: unknown) => {
+      console.error('[Dashboard] 获取全局配置失败:', error);
+    });
 }
 
 onMounted(() => {

@@ -138,25 +138,24 @@ function handleChange(file: UploadFile): void {
  *
  * @returns 上传成功返回 true；未选择文件或上传失败时返回 false
  */
-async function uploadFile(): Promise<boolean> {
-  if (!currentFile.value) return true;
-  const form = new FormData();
-  form.append('file', currentFile.value);
-  try {
-    const res = await uploadCarouselImage(currentFile.value);
-    if (res.code !== 0) {
+function uploadFile(): Promise<boolean> {
+  if (!currentFile.value) return Promise.resolve(true);
+  return uploadCarouselImage(currentFile.value)
+    .then((res) => {
+      if (res.code !== 0) {
+        ElMessage.error('轮播图上传失败');
+        return false;
+      }
+      // data 可能是数组或字符串，统一兼容处理
+      const data = res.data;
+      const url = Array.isArray(data) && data.length > 0 ? data[0] : (data as string);
+      formData.pciUrl = url;
+      return true;
+    })
+    .catch(() => {
       ElMessage.error('轮播图上传失败');
       return false;
-    }
-    // data 可能是数组或字符串，统一兼容处理
-    const data = res.data;
-    const url = Array.isArray(data) && data.length > 0 ? data[0] : (data as string);
-    formData.pciUrl = url;
-    return true;
-  } catch {
-    ElMessage.error('轮播图上传失败');
-    return false;
-  }
+    });
 }
 
 // ===== 公众号选择 =====
@@ -168,13 +167,14 @@ const officialAccountParams = reactive({ pageNum: 1, pageSize: 999 });
  *
  * @returns Promise<void>
  */
-async function loadOfficialAccounts(): Promise<void> {
-  try {
-    const res = await officialAccountsSelect(officialAccountParams);
-    officialAccountList.value = (res.data?.records ?? []) as OfficialAccountOption[];
-  } catch {
-    // 忽略
-  }
+function loadOfficialAccounts(): Promise<void> {
+  return officialAccountsSelect(officialAccountParams)
+    .then((res) => {
+      officialAccountList.value = (res.data?.records ?? []) as OfficialAccountOption[];
+    })
+    .catch(() => {
+      ElMessage.error('加载公众号列表失败，请重试');
+    });
 }
 
 /**
@@ -214,7 +214,7 @@ const envurl = ref('');
  * @param isMore 是否为滚动加载更多（true 追加，false 重置并默认选第一篇）
  * @returns Promise<void>
  */
-async function loadArticleList(id: string, isMore = false): Promise<void> {
+function loadArticleList(id: string, isMore = false): Promise<void> {
   if (!isMore) {
     titlePage.pageNum = 1;
     titleList.value = [];
@@ -222,26 +222,27 @@ async function loadArticleList(id: string, isMore = false): Promise<void> {
     formData.url = undefined;
     formData.title = undefined;
   }
-  try {
-    const params = {
-      pageNum: titlePage.pageNum,
-      pageSize: titlePage.pageSize,
-      officialAccountId: id,
-      isDel: false,
-    };
-    const res = await getArticleList(params);
-    const data = res.data as { records?: ArticleItem[]; totalCount?: number } | undefined;
-    const records = data?.records ?? [];
-    titlePage.totalCount = data?.totalCount ?? 0;
-    titleList.value = [...titleList.value, ...records];
-    // 默认选第一篇
-    if (!isMore && titleList.value.length > 0) {
-      formData.articleId = titleList.value[0].id;
-      handleArticleChange();
-    }
-  } catch {
-    // 忽略
-  }
+  const params = {
+    pageNum: titlePage.pageNum,
+    pageSize: titlePage.pageSize,
+    officialAccountId: id,
+    isDel: false,
+  };
+  return getArticleList(params)
+    .then((res) => {
+      const data = res.data as { records?: ArticleItem[]; totalCount?: number } | undefined;
+      const records = data?.records ?? [];
+      titlePage.totalCount = data?.totalCount ?? 0;
+      titleList.value = [...titleList.value, ...records];
+      // 默认选第一篇
+      if (!isMore && titleList.value.length > 0) {
+        formData.articleId = titleList.value[0].id;
+        handleArticleChange();
+      }
+    })
+    .catch(() => {
+      ElMessage.error('加载文章列表失败，请重试');
+    });
 }
 
 /**
@@ -274,14 +275,15 @@ function handleScroll(): void {
  *
  * @returns Promise<void>
  */
-async function loadEnvUrl(): Promise<void> {
-  try {
-    const res = await getGlobalsList();
-    const list = (res.data ?? []) as { name: string; value: string }[];
-    envurl.value = list.find((item) => item.name === 'IM_ADDRESS_HTTP')?.value ?? '';
-  } catch {
-    // 忽略
-  }
+function loadEnvUrl(): Promise<void> {
+  return getGlobalsList()
+    .then((res) => {
+      const list = (res.data ?? []) as { name: string; value: string }[];
+      envurl.value = list.find((item) => item.name === 'IM_ADDRESS_HTTP')?.value ?? '';
+    })
+    .catch(() => {
+      ElMessage.error('读取文章链接配置失败，请重试');
+    });
 }
 
 /**
@@ -307,31 +309,39 @@ function resetForm(): void {
  * @param id 编辑模式下传入的轮播图 id；新增模式下省略
  * @returns Promise<void>
  */
-async function open(type: 'create' | 'update', id?: string): Promise<void> {
+function open(type: 'create' | 'update', id?: string): Promise<void> {
   resetForm();
   dialogVisible.value = true;
   dialogTitle.value = type === 'create' ? '新增' : '修改';
   formType.value = type;
   // 初次加载公众号列表与全局变量
-  await Promise.all([loadOfficialAccounts(), loadEnvUrl()]);
-  if (id) {
+  return Promise.all([loadOfficialAccounts(), loadEnvUrl()]).then(() => {
+    if (!id) return;
     formLoading.value = true;
-    try {
-      const res = await getCarousel(id);
-      const data = res.data as CarouselItem | undefined;
-      if (data) {
-        Object.assign(formData, data);
-        showAuthImg.value = true;
-        imageUrl.value = (data.pciUrl as string) ?? '';
-        titlePage.officialAccountId = (data.officialAccountId as string) ?? '';
-        if (data.officialAccountId) {
-          await loadArticleList(data.officialAccountId as string);
+    return getCarousel(id)
+      .then((res) => {
+        if (res.code !== 0) {
+          ElMessage.error(res.msg || '获取轮播图详情失败');
+          return;
         }
-      }
-    } finally {
-      formLoading.value = false;
-    }
-  }
+        const data = res.data as CarouselItem | undefined;
+        if (data) {
+          Object.assign(formData, data);
+          showAuthImg.value = true;
+          imageUrl.value = (data.pciUrl as string) ?? '';
+          titlePage.officialAccountId = (data.officialAccountId as string) ?? '';
+          if (data.officialAccountId) {
+            return loadArticleList(data.officialAccountId as string);
+          }
+        }
+      })
+      .catch(() => {
+        ElMessage.error('获取轮播图详情失败，请重试');
+      })
+      .finally(() => {
+        formLoading.value = false;
+      });
+  });
 }
 
 defineExpose({ open });
@@ -348,26 +358,30 @@ async function handleSubmit(): Promise<void> {
     ElMessage.warning('必填字段未填写');
     return;
   }
-  // 若图片被修改，先上传图片
-  if (changeImg.value) {
-    const ok = await uploadFile();
-    if (!ok) return;
-  }
-  submitLoading.value = true;
-  try {
+  const uploadRequest = changeImg.value ? uploadFile() : Promise.resolve(true);
+  return uploadRequest.then((uploaded) => {
+    if (!uploaded) return;
+    submitLoading.value = true;
     const isCreate = formType.value === 'create';
     const payload = { ...formData };
-    const res = isCreate ? await createCarousel(payload) : await updateCarousel(payload);
-    if (res.code === 0) {
-      ElMessage.success(isCreate ? '新增成功' : '修改成功');
-      dialogVisible.value = false;
-      emit('success');
-    } else {
-      ElMessage.error(res.msg ?? (isCreate ? '新增失败' : '修改失败'));
-    }
-  } finally {
-    submitLoading.value = false;
-  }
+    const request = isCreate ? createCarousel(payload) : updateCarousel(payload);
+    return request
+      .then((res) => {
+        if (res.code === 0) {
+          ElMessage.success(isCreate ? '新增成功' : '修改成功');
+          dialogVisible.value = false;
+          emit('success');
+        } else {
+          ElMessage.error(res.msg ?? (isCreate ? '新增失败' : '修改失败'));
+        }
+      })
+      .catch(() => {
+        ElMessage.error(isCreate ? '新增失败，请重试' : '修改失败，请重试');
+      })
+      .finally(() => {
+        submitLoading.value = false;
+      });
+  });
 }
 
 /** 弹窗打开后清除校验状态 */

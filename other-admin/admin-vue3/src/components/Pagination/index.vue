@@ -42,7 +42,7 @@
  * Methods（defineExpose 暴露的方法）:
  * - 无
  */
-import { computed } from 'vue';
+import { LxPagination } from 'lx-ui';
 
 defineOptions({ name: 'Pagination' });
 
@@ -73,43 +73,51 @@ const emit = defineEmits<{
   (e: 'pagination', value: { page: number; limit: number }): void;
 }>();
 
-const currentPage = computed({
-  get: () => props.page,
-  set: (v: number) => {
-    emit('update:page', v);
-    emit('pagination', { page: v, limit: props.limit });
-  },
-});
-
-const pageSize = computed({
-  get: () => props.limit,
-  set: (v: number) => {
-    // 切换 pageSize 时回到第一页（与业务规则一致）
-    emit('update:limit', v);
-    emit('update:page', 1);
-    emit('pagination', { page: 1, limit: v });
-  },
-});
+// 参数顺序由库的 change(page, pageSize) 适配为业务既有对象。
+function handleChange(page: number, limit: number): void {
+  emit('pagination', { page, limit });
+}
 </script>
 
 <template>
-  <div v-show="!hidden" class="pagination-wrapper">
-    <el-pagination
-      v-model:current-page="currentPage"
-      v-model:page-size="pageSize"
+  <div
+    v-show="!hidden"
+    class="pagination-wrapper"
+    role="region"
+    tabindex="0"
+    aria-label="列表分页，可横向滚动查看全部控件"
+  >
+    <LxPagination
+      :page="props.page"
+      :page-size="props.limit"
       :total="total"
       :page-sizes="pageSizes"
       :layout="layout"
       :background="background"
-      :hide-on-single-page="false"
+      :auto-scroll="false"
+      @update:page="emit('update:page', $event)"
+      @update:page-size="emit('update:limit', $event)"
+      @change="handleChange"
     />
   </div>
 </template>
 
 <style lang="less" scoped>
 .pagination-wrapper {
-  display: flex;
-  justify-content: flex-end;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
   padding: 8px 0;
+  overscroll-behavior-inline: contain;
+
+  &:focus-visible {
+    outline: 2px solid var(--el-color-primary);
+    outline-offset: 2px;
+  }
+
+  :deep(.lx-pagination) {
+    width: max-content;
+    min-width: 100%;
+  }
 }
 </style>

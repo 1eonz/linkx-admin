@@ -91,29 +91,32 @@ function checkSelectable(row: CollaborationItem): boolean {
   return !(row.disabled as boolean);
 }
 
-async function fetchList(): Promise<void> {
+function fetchList(): Promise<void> {
   loading.value = true;
-  try {
-    const res = await props.fetchList({
+  return props
+    .fetchList({
       pageNum: page.value,
       pageSize: pageSize.value,
       postName: keyword.value,
       // selectionType 由外部 fetchList 自行决定，这里仅透传 selectionId
       selectionId: mode.value === 'default' ? undefined : currentSelectionId.value,
+    })
+    .then((res) => {
+      list.value = res.records ?? [];
+      total.value = Number(res.total) || 0;
+      // 切换数据后保留选中（ProTable 通过 reserve-selection + row-key 实现）
+    })
+    .catch((error: unknown) => {
+      console.error('[CoopBindDialog] fetchList 失败:', error);
+      ElMessage.error('获取协同岗列表失败');
+    })
+    .finally(() => {
+      loading.value = false;
     });
-    list.value = res.records ?? [];
-    total.value = Number(res.total) || 0;
-    // 切换数据后保留选中（ProTable 通过 reserve-selection + row-key 实现）
-  } catch (e) {
-    console.error('[CoopBindDialog] fetchList 失败:', e);
-    ElMessage.error('获取协同岗列表失败');
-  } finally {
-    loading.value = false;
-  }
 }
 
 /** 父组件调用：打开弹窗 */
-async function open(openMode: BindMode, selectionId?: string): Promise<void> {
+function open(openMode: BindMode, selectionId?: string): Promise<void> {
   mode.value = openMode;
   currentSelectionId.value = selectionId ?? '';
   visible.value = true;
@@ -122,11 +125,8 @@ async function open(openMode: BindMode, selectionId?: string): Promise<void> {
   selected.value = [];
 
   // default 模式：先回调预加载已有默认协同岗
-  if (openMode === 'default' && props.beforeOpenDefault) {
-    await props.beforeOpenDefault();
-  }
-
-  fetchList();
+  const beforeOpen = openMode === 'default' && props.beforeOpenDefault ? props.beforeOpenDefault() : Promise.resolve();
+  return beforeOpen.then(() => fetchList());
 }
 
 function resetBindDialog(): void {
@@ -145,20 +145,22 @@ const handleSearch = debounce(() => {
   fetchList();
 }, 300);
 
-async function submitBind(): Promise<void> {
-  if (selected.value.length === 0) return;
+function submitBind(): Promise<void> {
+  if (selected.value.length === 0) return Promise.resolve();
   submitLoading.value = true;
-  try {
-    const ok = await props.submit(selected.value);
-    if (ok) {
-      ElMessage.success(mode.value === 'default' ? '操作成功' : `成功挂靠 ${selected.value.length} 个协同岗`);
-      visible.value = false;
-      // 通知外部刷新
-      emit('submitted');
-    }
-  } finally {
-    submitLoading.value = false;
-  }
+  return props
+    .submit(selected.value)
+    .then((ok) => {
+      if (ok) {
+        ElMessage.success(mode.value === 'default' ? '操作成功' : `成功挂靠 ${selected.value.length} 个协同岗`);
+        visible.value = false;
+        // 通知外部刷新
+        emit('submitted');
+      }
+    })
+    .finally(() => {
+      submitLoading.value = false;
+    });
 }
 
 function handlePageChange(v: number): void {

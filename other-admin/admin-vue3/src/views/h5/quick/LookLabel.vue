@@ -78,41 +78,45 @@ const pagedPolice = computed(() => {
 });
 
 // ===== 拉取标签树 =====
-async function fetchTree(): Promise<void> {
+function fetchTree(): Promise<void> {
   treeLoading.value = true;
-  try {
-    const res = await labelList();
-    treeData.value = (res.data ?? []) as LabelItem[];
-  } catch {
-    ElMessage.error('加载标签树失败');
-  } finally {
-    treeLoading.value = false;
-  }
+  return labelList()
+    .then((res) => {
+      treeData.value = (res.data ?? []) as LabelItem[];
+    })
+    .catch(() => {
+      ElMessage.error('加载标签树失败');
+    })
+    .finally(() => {
+      treeLoading.value = false;
+    });
 }
 
 // ===== 节点点击：加载警员列表 =====
-async function handleNodeClick(data: LabelItem): Promise<void> {
+function handleNodeClick(data: LabelItem): Promise<void> {
   currentNode.value = data;
   searchName.value = '';
   page.value = 1;
   if (!data.id) {
     policeList.value = [];
     policeTotal.value = 0;
-    return;
+    return Promise.resolve();
   }
   policeLoading.value = true;
-  try {
-    const res = await labelDetail(String(data.id));
-    const detail = res.data as Record<string, unknown> | undefined;
-    policeList.value = flattenOrgUsers(detail);
-    policeTotal.value = policeList.value.length;
-  } catch {
-    ElMessage.error('加载警员列表失败');
-    policeList.value = [];
-    policeTotal.value = 0;
-  } finally {
-    policeLoading.value = false;
-  }
+  return labelDetail(String(data.id))
+    .then((res) => {
+      const detail = res.data as Record<string, unknown> | undefined;
+      policeList.value = flattenOrgUsers(detail);
+      policeTotal.value = policeList.value.length;
+    })
+    .catch(() => {
+      ElMessage.error('加载警员列表失败');
+      policeList.value = [];
+      policeTotal.value = 0;
+    })
+    .finally(() => {
+      policeLoading.value = false;
+    });
 }
 
 /**

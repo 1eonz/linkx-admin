@@ -143,8 +143,8 @@ const actions = computed<ActionItem[]>(() => {
       icon: Plus,
       onClick: handleOpen,
     });
-    // 数据同步按钮：永远隐藏（保留兼容字段）
-    if (!props.hiddenSync && false) {
+    // 默认隐藏同步按钮；开启 hiddenSync=false 时保留旧版同步入口。
+    if (!props.hiddenSync) {
       list.push({
         label: '数据同步',
         type: 'primary',

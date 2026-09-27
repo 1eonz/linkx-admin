@@ -58,8 +58,8 @@
  * - blur(): 使输入框失焦
  * - select(): 选中输入框全部文本
  */
-import type { InputProps } from 'element-plus';
-import { ref, watch } from 'vue';
+import { LxPasswordInput } from 'lx-ui';
+import { ref } from 'vue';
 
 defineOptions({ name: 'PasswordInput' });
 
@@ -98,7 +98,7 @@ interface Props {
   name?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   modelValue: '',
   inputClass: '',
   inputStyle: '',
@@ -125,18 +125,9 @@ const emit = defineEmits<{
   (e: 'clear'): void;
 }>();
 
-const currentValue = ref(props.modelValue);
 const inputRef = ref();
 
-watch(
-  () => props.modelValue,
-  (val) => {
-    currentValue.value = val;
-  },
-);
-
-function handleInput(value: string): void {
-  // Vue3 el-input @input 返回 string
+function handleUpdate(value: string): void {
   emit('update:modelValue', value);
 }
 
@@ -156,11 +147,6 @@ function handleClear(): void {
   emit('clear');
 }
 
-// 禁止复制、粘贴、剪切
-function preventClipboard(event: ClipboardEvent): void {
-  event.preventDefault();
-}
-
 // 暴露方法
 defineExpose({
   focus: () => inputRef.value?.focus(),
@@ -170,10 +156,9 @@ defineExpose({
 </script>
 
 <template>
-  <el-input
+  <LxPasswordInput
     ref="inputRef"
-    v-model="currentValue"
-    type="password"
+    :model-value="modelValue"
     :class="inputClass"
     :style="inputStyle"
     :placeholder="placeholder"
@@ -189,10 +174,7 @@ defineExpose({
     :readonly="readonly"
     :tabindex="tabindex"
     :name="name"
-    @copy="preventClipboard"
-    @paste="preventClipboard"
-    @cut="preventClipboard"
-    @input="handleInput"
+    @update:model-value="handleUpdate"
     @change="handleChange"
     @focus="handleFocus"
     @blur="handleBlur"

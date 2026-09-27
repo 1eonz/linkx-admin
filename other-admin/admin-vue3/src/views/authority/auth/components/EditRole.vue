@@ -1,4 +1,5 @@
-﻿﻿<script setup lang="ts">
+﻿﻿
+<script setup lang="ts">
 /**
  * EditRole - 角色新增/编辑弹窗
  *
@@ -108,6 +109,9 @@ const activeButton = ref<AppScope>('client');
 // ===== 三棵权限树数据 =====
 const menuTree = ref<MenuItem[][]>([[], [], []]);
 const treeLoading = ref(false);
+const menuTreesLoaded = ref(false);
+const treeLoadError = ref('');
+const dataTreeReady = ref(false);
 
 // 硬编码的菜单 ID（applicationId 映射）
 const APP_IDS = ['1289822833455460001', '', '1289822833455460002'];
@@ -135,7 +139,7 @@ const userStore = useUserStore();
 /** 监听 visible，打开时初始化 */
 watch(
   () => props.visible,
-  async (v) => {
+  (v) => {
     if (!v) return;
     // 重置 Tab 状态
     activeTab.value = 'RoleAuth';
@@ -158,25 +162,44 @@ watch(
     formData.value.dataAuthTreecheckedKeys = getAllIds(formData.value.orgPrivList);
 
     // 加载三棵权限树（仅首次加载，如未加载）
-    if (menuTree.value.every((t) => t.length === 0)) {
-      await loadAllMenuTrees();
-    }
-    // 树渲染完后回填三棵权限树的选中状态
-    await nextTick();
-    setCheckedKeysForAll();
-
-    // 弹窗打开后恢复数据权限选中状态
-    await nextTick();
-    if (dataAuthTreeRef.value) {
-      const normalized = dataAuthTreeRef.value.syncFromDetail({
-        orgList: formData.value.orgPrivList as Array<{ id: string; name: string; path?: string }>,
-      });
-      if (normalized && normalized.length) {
-        formData.value.orgPrivList = normalized;
-      }
-    }
+    const loadPromise = menuTreesLoaded.value ? Promise.resolve() : loadAllMenuTrees();
+    return loadPromise.then(() => {
+      if (!menuTreesLoaded.value) return;
+      // 树渲染完后回填三棵权限树的选中状态
+      return nextTick()
+        .then(() => {
+          setCheckedKeysForAll();
+          // 弹窗打开后恢复数据权限选中状态
+          return nextTick();
+        })
+        .then(() => {
+          syncDataPermissionSelection();
+        });
+    });
   },
 );
+
+function syncDataPermissionSelection(): void {
+  if (!dataAuthTreeRef.value) return;
+  const normalized = dataAuthTreeRef.value.syncFromDetail({
+    orgList: formData.value.orgPrivList as Array<{ id: string; name: string; path?: string }>,
+  });
+  if (normalized?.length) formData.value.orgPrivList = normalized;
+}
+
+function retryMenuTreeLoading(): Promise<void> {
+  return loadAllMenuTrees().then(() => {
+    if (!menuTreesLoaded.value) return;
+    return nextTick()
+      .then(() => {
+        setCheckedKeysForAll();
+        return nextTick();
+      })
+      .then(() => {
+        syncDataPermissionSelection();
+      });
+  });
+}
 
 /**
  * 加载所有 Tab 的菜单树数据
@@ -184,51 +207,57 @@ watch(
  * - client 菜单树
  * - h5 菜单树
  */
-async function loadAllMenuTrees(): Promise<void> {
+function loadAllMenuTrees(): Promise<void> {
   treeLoading.value = true;
-  try {
-    const licenseAuth = (userStore as unknown as { licenseAuth?: Record<string, boolean> }).licenseAuth;
-    const promises = APP_IDS.map((appId, index) =>
-      getMenuList({ applicationId: appId })
-        .then((res) => {
-          if (res?.code === 0 && res.data) {
-            let data = filterPermissionData(res.data as MenuItem[]);
-            // 系统内置菜单（status=2）默认勾选 + 禁用编辑
-            data = data.map((item) => {
-              const cloned = { ...item };
-              if ((item as { status?: number }).status === 2) {
-                cloned.disabled = true;
-                const key = (['iccPrivJson', 'adminPrivJson', 'cappPrivJson'] as const)[index];
-                if (!formData.value[key]?.includes(item.id)) {
-                  formData.value[key] = [...(formData.value[key] ?? []), item.id];
-                }
-              }
-              return cloned;
-            });
-            // License 过滤
-            if (licenseAuth?.groupCollaborationAuth) {
-              const filterIds = LICENSE_FILTER_IDS.groupCollaborationAuth[index as 0 | 1 | 2];
-              if (filterIds) {
-                data = data.filter((item) => !filterIds.includes(item.id));
-              }
+  treeLoadError.value = '';
+  menuTreesLoaded.value = false;
+  const licenseAuth = (userStore as unknown as { licenseAuth?: Record<string, boolean> }).licenseAuth;
+  const promises = APP_IDS.map((appId, index) =>
+    getMenuList({ applicationId: appId })
+      .then((res) => {
+        if (res?.code !== 0 || !Array.isArray(res.data)) {
+          treeLoadError.value = '角色权限树加载失败，当前无法保存。请重试。';
+          return;
+        }
+        let data = filterPermissionData(res.data);
+        // 系统内置菜单（status=2）默认勾选 + 禁用编辑
+        data = data.map((item) => {
+          const cloned = { ...item };
+          if ((item as { status?: number }).status === 2) {
+            cloned.disabled = true;
+            const key = (['iccPrivJson', 'adminPrivJson', 'cappPrivJson'] as const)[index];
+            if (!formData.value[key]?.includes(item.id)) {
+              formData.value[key] = [...(formData.value[key] ?? []), item.id];
             }
-            if (licenseAuth?.AICollaborationAuth && index === 2) {
-              const filterIds = LICENSE_FILTER_IDS.AICollaborationAuth[2];
-              if (filterIds) {
-                data = data.filter((item) => !filterIds.includes(item.id));
-              }
-            }
-            menuTree.value[index] = data;
           }
-        })
-        .catch((e) => {
-          console.error(`[EditRole] 加载权限树 ${index} 失败:`, e);
-        }),
-    );
-    await Promise.all(promises);
-  } finally {
-    treeLoading.value = false;
-  }
+          return cloned;
+        });
+        // License 过滤
+        if (licenseAuth?.groupCollaborationAuth) {
+          const filterIds = LICENSE_FILTER_IDS.groupCollaborationAuth[index as 0 | 1 | 2];
+          if (filterIds) {
+            data = data.filter((item) => !filterIds.includes(item.id));
+          }
+        }
+        if (licenseAuth?.AICollaborationAuth && index === 2) {
+          const filterIds = LICENSE_FILTER_IDS.AICollaborationAuth[2];
+          if (filterIds) {
+            data = data.filter((item) => !filterIds.includes(item.id));
+          }
+        }
+        menuTree.value[index] = data;
+      })
+      .catch(() => {
+        treeLoadError.value = '角色权限树加载失败，当前无法保存。请重试。';
+      }),
+  );
+  return Promise.all(promises)
+    .then(() => {
+      menuTreesLoaded.value = !treeLoadError.value;
+    })
+    .finally(() => {
+      treeLoading.value = false;
+    });
 }
 
 /**
@@ -361,12 +390,17 @@ function changeDataAuthCheckKeys(checkedDetail: Array<{ id: string; name: string
   formData.value.orgPrivList = checkedDetail;
 }
 
+function handleDataTreeLoadState(ready: boolean): void {
+  dataTreeReady.value = ready;
+}
+
 /**
  * 提交表单：组装 payload 并 emit submit 事件
  * payload 字段：{ name, iccPrivJson, adminPrivJson, cappPrivJson, orgPrivList, id? }
  * @returns Promise<void>，校验失败时静默捕获
  */
 async function handleSubmit(): Promise<void> {
+  if (!menuTreesLoaded.value || treeLoading.value || !dataTreeReady.value) return;
   try {
     await formRef.value?.validate();
     const params: Record<string, unknown> = {
@@ -452,7 +486,11 @@ function handleClose(): void {
           </div>
 
           <!-- 三棵树（v-show 切换保留状态） -->
-          <div v-loading="treeLoading" class="my-tab-content">
+          <div v-if="treeLoadError" class="tree-load-error" role="alert">
+            <span>{{ treeLoadError }}</span>
+            <el-button type="primary" link :disabled="treeLoading" @click="retryMenuTreeLoading">重试</el-button>
+          </div>
+          <div v-else v-loading="treeLoading" class="my-tab-content">
             <div v-show="activeButton === 'client'" class="client-tree">
               <el-tree
                 ref="clientTreeRef"
@@ -508,6 +546,7 @@ function handleClose(): void {
             right-title="已选择"
             filter-placeholder="搜索部门"
             @change="changeDataAuthCheckKeys"
+            @load-state="handleDataTreeLoadState"
           />
         </div>
       </el-tab-pane>
@@ -516,7 +555,14 @@ function handleClose(): void {
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="handleClose">取消</el-button>
-        <el-button type="primary" @click="handleSubmit">保存</el-button>
+        <el-button
+          type="primary"
+          :disabled="treeLoading || !menuTreesLoaded || !dataTreeReady"
+          :loading="treeLoading"
+          @click="handleSubmit"
+        >
+          保存
+        </el-button>
       </div>
     </template>
   </el-dialog>
@@ -660,5 +706,14 @@ function handleClose(): void {
   justify-content: flex-end;
   gap: 10px;
   padding-top: @spacing-xs;
+}
+
+.tree-load-error {
+  display: flex;
+  min-height: 300px;
+  align-items: center;
+  justify-content: center;
+  gap: @spacing-sm;
+  color: @color-danger;
 }
 </style>

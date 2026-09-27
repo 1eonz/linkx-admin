@@ -78,3 +78,10 @@ export function updateClient(peerId: string, data: ClientUpdatePayload): HttpRes
 export function deleteClient(id: string): Promise<ApiResponse> {
   return http.delete<string>(`/node/v1/p2p/clients/${id}`);
 }
+
+/** 拒绝客户端（PUT /node/v1/p2p/clients/{peerId}/reject） */
+export function rejectClient(peerId: string, desc?: string): Promise<ApiResponse> {
+  return http.put<string>(`/node/v1/p2p/clients/${encodeURIComponent(peerId)}/reject`, undefined, {
+    params: { desc },
+  } as never);
+}

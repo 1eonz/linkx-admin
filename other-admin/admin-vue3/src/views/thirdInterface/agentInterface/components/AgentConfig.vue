@@ -110,23 +110,25 @@ const importBtnDisabled = computed(() => importLoading.value);
  *
  * @returns Promise，无返回值
  */
-async function fetchDeploy(): Promise<void> {
+function fetchDeploy(): Promise<void> {
   deployLoading.value = true;
-  try {
-    const res = await getDeploySettings();
-    if (res?.code === 0 && res.data) {
-      Object.assign(deployForm, res.data);
-      // 通知父组件当前部署模式，父组件用于 beforeLeave 拦截
-      emit('deploy-mode-change', {
-        separatedDeploy: deployForm.separatedDeploy,
-        groupAiFrontendHost: getFrontendHost(),
-      });
-    }
-  } catch (e) {
-    console.error('[AgentConfig] 加载部署配置失败', e);
-  } finally {
-    deployLoading.value = false;
-  }
+  return getDeploySettings()
+    .then((res) => {
+      if (res?.code === 0 && res.data) {
+        Object.assign(deployForm, res.data);
+        // 通知父组件当前部署模式，父组件用于 beforeLeave 拦截
+        emit('deploy-mode-change', {
+          separatedDeploy: deployForm.separatedDeploy,
+          groupAiFrontendHost: getFrontendHost(),
+        });
+      }
+    })
+    .catch((e: unknown) => {
+      console.error('[AgentConfig] 加载部署配置失败', e);
+    })
+    .finally(() => {
+      deployLoading.value = false;
+    });
 }
 
 /**
@@ -136,18 +138,20 @@ async function fetchDeploy(): Promise<void> {
  *
  * @returns Promise，无返回值
  */
-async function fetchApproval(): Promise<void> {
+function fetchApproval(): Promise<void> {
   approvalLoading.value = true;
-  try {
-    const res = await getAiagentSettings();
-    if (res?.code === 0 && res.data) {
-      Object.assign(approvalForm, res.data);
-    }
-  } catch (e) {
-    console.error('[AgentConfig] 加载审批配置失败', e);
-  } finally {
-    approvalLoading.value = false;
-  }
+  return getAiagentSettings()
+    .then((res) => {
+      if (res?.code === 0 && res.data) {
+        Object.assign(approvalForm, res.data);
+      }
+    })
+    .catch((e: unknown) => {
+      console.error('[AgentConfig] 加载审批配置失败', e);
+    })
+    .finally(() => {
+      approvalLoading.value = false;
+    });
 }
 
 /**
@@ -162,21 +166,25 @@ async function saveDeploy(): Promise<void> {
   const valid = await deployRef.value?.validate().catch(() => false);
   if (!valid) return;
   deploySaving.value = true;
-  try {
-    const res = await updateDeploySettings(deployForm);
-    if (res?.code !== 0) {
-      ElMessage.error(res?.msg ?? '保存部署配置失败');
-      return;
-    }
-    ElMessage.success('部署配置保存成功');
-    // 通知父组件部署模式变化
-    emit('deploy-mode-change', {
-      separatedDeploy: deployForm.separatedDeploy,
-      groupAiFrontendHost: getFrontendHost(),
+  return updateDeploySettings(deployForm)
+    .then((res) => {
+      if (res?.code !== 0) {
+        ElMessage.error(res?.msg ?? '保存部署配置失败');
+        return;
+      }
+      ElMessage.success('部署配置保存成功');
+      // 通知父组件部署模式变化
+      emit('deploy-mode-change', {
+        separatedDeploy: deployForm.separatedDeploy,
+        groupAiFrontendHost: getFrontendHost(),
+      });
+    })
+    .catch(() => {
+      ElMessage.error('保存部署配置失败');
+    })
+    .finally(() => {
+      deploySaving.value = false;
     });
-  } finally {
-    deploySaving.value = false;
-  }
 }
 
 /**
@@ -190,16 +198,20 @@ async function saveApproval(): Promise<void> {
   const valid = await approvalRef.value?.validate().catch(() => false);
   if (!valid) return;
   approvalSaving.value = true;
-  try {
-    const res = await updateAiagentSettings(approvalForm);
-    if (res?.code !== 0) {
-      ElMessage.error(res?.msg ?? '保存审批配置失败');
-      return;
-    }
-    ElMessage.success('审批配置保存成功');
-  } finally {
-    approvalSaving.value = false;
-  }
+  return updateAiagentSettings(approvalForm)
+    .then((res) => {
+      if (res?.code !== 0) {
+        ElMessage.error(res?.msg ?? '保存审批配置失败');
+        return;
+      }
+      ElMessage.success('审批配置保存成功');
+    })
+    .catch(() => {
+      ElMessage.error('保存审批配置失败');
+    })
+    .finally(() => {
+      approvalSaving.value = false;
+    });
 }
 
 // ===== 模板下载 =====
@@ -210,14 +222,15 @@ async function saveApproval(): Promise<void> {
  *
  * @returns Promise，无返回值
  */
-async function handleDownloadTemplate(): Promise<void> {
-  try {
-    await downloadAiagentTemplate();
-    ElMessage.success('模板下载成功');
-  } catch (e) {
-    ElMessage.error('模板下载失败');
-    console.error(e);
-  }
+function handleDownloadTemplate(): Promise<void> {
+  return downloadAiagentTemplate()
+    .then(() => {
+      ElMessage.success('模板下载成功');
+    })
+    .catch((e: unknown) => {
+      ElMessage.error('模板下载失败');
+      console.error(e);
+    });
 }
 
 // ===== 文件导入 =====
@@ -239,29 +252,31 @@ function triggerImport(): void {
  * @param e input change 事件对象
  * @returns Promise，无返回值
  */
-async function handleFileChange(e: Event): Promise<void> {
+function handleFileChange(e: Event): Promise<void> | void {
   const target = e.target as HTMLInputElement;
   const file = target.files?.[0];
   if (!file) return;
   if (importLoading.value) return;
   importLoading.value = true;
-  try {
-    const res = await importAiagent(file as UploadRawFile as unknown as File);
-    if (res?.code !== 0) {
-      ElMessage.error(res?.msg ?? '导入失败');
-      return;
-    }
-    ElMessage.success('导入成功');
-    // 通知父组件刷新 AgentManage 列表
-    emit('import-success');
-  } catch (e) {
-    console.error(e);
-    ElMessage.error('导入失败');
-  } finally {
-    importLoading.value = false;
-    // 清空 input 值以便重复导入同一文件
-    target.value = '';
-  }
+  return importAiagent(file as UploadRawFile as unknown as File)
+    .then((res) => {
+      if (res?.code !== 0) {
+        ElMessage.error(res?.msg ?? '导入失败');
+        return;
+      }
+      ElMessage.success('导入成功');
+      // 通知父组件刷新 AgentManage 列表
+      emit('import-success');
+    })
+    .catch((e: unknown) => {
+      console.error(e);
+      ElMessage.error('导入失败');
+    })
+    .finally(() => {
+      importLoading.value = false;
+      // 清空 input 值以便重复导入同一文件
+      target.value = '';
+    });
 }
 
 onMounted(() => {
@@ -323,7 +338,15 @@ onMounted(() => {
 
     <el-divider content-position="left">智能体导入</el-divider>
     <div class="import-actions">
-      <el-button type="primary" :icon="Upload" :loading="importLoading" @click="triggerImport"> 导入智能体 </el-button>
+      <el-button
+        type="primary"
+        :icon="Upload"
+        :loading="importLoading"
+        :disabled="importBtnDisabled"
+        @click="triggerImport"
+      >
+        导入智能体
+      </el-button>
       <el-button :icon="Download" @click="handleDownloadTemplate">下载模板</el-button>
       <input ref="importRef" type="file" accept=".xlsx,.xls" style="display: none" @change="handleFileChange" />
     </div>

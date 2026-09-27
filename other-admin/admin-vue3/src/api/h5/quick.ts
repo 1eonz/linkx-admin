@@ -1,4 +1,4 @@
-import type { ApiResponse, HttpResult, PaginatedResult } from '#/axios';
+import type { ApiResponse, HttpResult } from '#/axios';
 import http from '@/utils/http';
 
 /** 标签项 */

@@ -1,4 +1,4 @@
-<#
+#
 cloudcmd-admin-web 静态资源还原脚本 (第 32/32 部分)
 功能: 在目标项目根目录下生成 src\assets 与 src\icons 的部分文件, 本部分共 2 项:
   - src\icons\svg\dashboard.svg

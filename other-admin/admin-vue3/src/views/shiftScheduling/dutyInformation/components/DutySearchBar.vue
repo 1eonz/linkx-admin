@@ -49,37 +49,38 @@ const dutyTypeLoading = ref(false);
 const uploadRef = ref<UploadInstance>();
 
 // 分页获取排班类型，支持「加载更多」
-async function getDutyTypeOptions(isLoadMore = false): Promise<void> {
-  if (dutyTypeLoading.value) return;
-  if (isLoadMore && !dutyTypePage.hasMore) return;
+function getDutyTypeOptions(isLoadMore = false): Promise<void> {
+  if (dutyTypeLoading.value || (isLoadMore && !dutyTypePage.hasMore)) return Promise.resolve();
 
   dutyTypeLoading.value = true;
-  try {
-    const res = await getDutyTypes({
-      pageNum: isLoadMore ? dutyTypePage.pageNum + 1 : 1,
-      pageSize: dutyTypePage.pageSize,
+  return getDutyTypes({
+    pageNum: isLoadMore ? dutyTypePage.pageNum + 1 : 1,
+    pageSize: dutyTypePage.pageSize,
+  })
+    .then((res) => {
+      const data = res?.data;
+      const types = data?.records ?? [];
+      const total = data?.total ?? 0;
+      const mapped = types.map((item: DutyTypeItem) => ({
+        label: `${item.name}(${item.type})`,
+        value: String(item.type),
+      }));
+      if (isLoadMore) {
+        dutyTypeOptions.value = [...dutyTypeOptions.value, ...mapped];
+        dutyTypePage.pageNum += 1;
+      } else {
+        dutyTypeOptions.value = mapped;
+        dutyTypePage.pageNum = 1;
+      }
+      dutyTypePage.total = total;
+      dutyTypePage.hasMore = dutyTypeOptions.value.length < total;
+    })
+    .catch((e: unknown) => {
+      console.error('获取排班类型失败', e);
+    })
+    .finally(() => {
+      dutyTypeLoading.value = false;
     });
-    const data = res?.data;
-    const types = data?.records ?? [];
-    const total = data?.total ?? 0;
-    const mapped = types.map((item: DutyTypeItem) => ({
-      label: `${item.name}(${item.type})`,
-      value: item.type,
-    }));
-    if (isLoadMore) {
-      dutyTypeOptions.value = [...dutyTypeOptions.value, ...mapped];
-      dutyTypePage.pageNum += 1;
-    } else {
-      dutyTypeOptions.value = mapped;
-      dutyTypePage.pageNum = 1;
-    }
-    dutyTypePage.total = total;
-    dutyTypePage.hasMore = dutyTypeOptions.value.length < total;
-  } catch (e) {
-    console.error('获取排班类型失败', e);
-  } finally {
-    dutyTypeLoading.value = false;
-  }
 }
 
 // 下拉滚动距底部 50px 触发加载更多

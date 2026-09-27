@@ -136,32 +136,37 @@ function normalizeNodes(list: CoopTreeNode[]): CoopTreeNode[] {
 }
 
 /** 首次加载根节点 */
-async function fetchRootNodes(): Promise<void> {
+function fetchRootNodes(): Promise<void> {
   treeLoading.value = true;
-  try {
-    const res = await props.fetchChildren(ROOT_LEVEL_ID);
-    treeData.value = normalizeNodes(res.data ?? []);
-  } catch {
-    ElMessage.error(texts.loadRootError);
-  } finally {
-    treeLoading.value = false;
-  }
+  return props
+    .fetchChildren(ROOT_LEVEL_ID)
+    .then((res) => {
+      treeData.value = normalizeNodes(res.data ?? []);
+    })
+    .catch(() => {
+      ElMessage.error(texts.loadRootError);
+    })
+    .finally(() => {
+      treeLoading.value = false;
+    });
 }
 
 /** el-tree 懒加载子节点 */
 
-async function loadTreeNode(node: any, resolve: (data: CoopTreeNode[]) => void): Promise<void> {
+function loadTreeNode(node: any, resolve: (data: CoopTreeNode[]) => void): Promise<void> {
   if (node.level === 0) {
     resolve(treeData.value);
-    return;
+    return Promise.resolve();
   }
-  try {
-    const res = await props.fetchChildren(node.data.id);
-    resolve(normalizeNodes(res.data ?? []));
-  } catch {
-    resolve([]);
-    ElMessage.error(texts.loadChildrenError);
-  }
+  return props
+    .fetchChildren(node.data.id)
+    .then((res) => {
+      resolve(normalizeNodes(res.data ?? []));
+    })
+    .catch(() => {
+      resolve([]);
+      ElMessage.error(texts.loadChildrenError);
+    });
 }
 
 /** 点击节点：触发父组件加载右侧 + 展开/收起 */
@@ -216,44 +221,56 @@ function refreshNodeChildren(parentData: CoopTreeNode): void {
 }
 
 /** 节点弹窗提交回调 */
-const handleNodeDialogSubmit: SubmitHandler = async (type, name, parentData, editData) => {
-  try {
-    if (type === 'create') {
-      // 层级深度限制
-      if (parentData && treeRef.value) {
-        const parentNode = treeRef.value.getNode(parentData.id) as unknown as TreeNodeInstance | null;
-        if (parentNode && parentNode.level >= props.maxDepth) {
-          ElMessage.error(texts.depthError);
+const handleNodeDialogSubmit: SubmitHandler = (type, name, parentData, editData) => {
+  if (type === 'create') {
+    // 层级深度限制
+    if (parentData && treeRef.value) {
+      const parentNode = treeRef.value.getNode(parentData.id) as unknown as TreeNodeInstance | null;
+      if (parentNode && parentNode.level >= props.maxDepth) {
+        ElMessage.error(texts.depthError);
+        return Promise.resolve(false);
+      }
+    }
+    const parentId = parentData ? parentData.id : ROOT_LEVEL_ID;
+    return props
+      .createNode({ name, parentId })
+      .then((res) => {
+        if (!res || res.code !== 0) {
+          ElMessage.error(res?.msg ?? '创建失败，请重试');
           return false;
         }
-      }
-      const parentId = parentData ? parentData.id : ROOT_LEVEL_ID;
-      const res = await props.createNode({ name, parentId });
-      if (!res || res.code !== 0) {
-        ElMessage.error(res?.msg ?? '创建失败，请重试');
+        ElMessage.success(texts.createSuccess);
+        if (!parentData) {
+          return fetchRootNodes().then(() => true);
+        } else {
+          refreshNodeChildren(parentData);
+        }
+        return true;
+      })
+      .catch((error: unknown) => {
+        ElMessage.error(error instanceof Error ? error.message || '创建失败，请重试' : '创建失败，请重试');
         return false;
-      }
-      ElMessage.success(texts.createSuccess);
-      if (!parentData) {
-        await fetchRootNodes();
-      } else {
-        refreshNodeChildren(parentData);
-      }
-    } else if (editData) {
-      const res = await props.updateNode(editData.id, { name });
-      if (!res || res.code !== 0) {
-        ElMessage.error(res?.msg ?? '更新失败，请重试');
-        return false;
-      }
-      ElMessage.success(texts.updateSuccess);
-      // 同步更新节点显示名称
-      editData.name = name;
-    }
-    return true;
-  } catch (e) {
-    ElMessage.error((e as Error)?.message ?? '操作失败，请重试');
-    return false;
+      });
   }
+  if (editData) {
+    return props
+      .updateNode(editData.id, { name })
+      .then((res) => {
+        if (!res || res.code !== 0) {
+          ElMessage.error(res?.msg ?? '更新失败，请重试');
+          return false;
+        }
+        ElMessage.success(texts.updateSuccess);
+        // 同步更新节点显示名称
+        editData.name = name;
+        return true;
+      })
+      .catch((error: unknown) => {
+        ElMessage.error(error instanceof Error ? error.message || '更新失败，请重试' : '更新失败，请重试');
+        return false;
+      });
+  }
+  return Promise.resolve(false);
 };
 
 /** 二次确认删除节点 */
@@ -264,27 +281,29 @@ function confirmDeleteNode(node: TreeNodeInstance, data: CoopTreeNode): void {
     type: 'warning',
     confirmButtonClass: 'el-button--danger',
   })
-    .then(async () => {
-      try {
-        const res = await props.deleteNode(data.id);
-        if (!res || res.code !== 0) {
-          ElMessage.error(res?.msg ?? '删除失败，请重试');
-          return;
-        }
-        ElMessage.success(texts.deleteSuccess);
-        // 通知父组件：节点已被删除，清空右侧
-        emit('node-deleted', data.id);
+    .then(() =>
+      props
+        .deleteNode(data.id)
+        .then((res) => {
+          if (!res || res.code !== 0) {
+            ElMessage.error(res?.msg ?? '删除失败，请重试');
+            return;
+          }
+          ElMessage.success(texts.deleteSuccess);
+          // 通知父组件：节点已被删除，清空右侧
+          emit('node-deleted', data.id);
 
-        // 根节点（level === 1）重拉整棵树，否则只刷新父节点
-        if (node.level === 1) {
-          await fetchRootNodes();
-        } else if (node.parent) {
-          refreshNodeChildren(node.parent.data);
-        }
-      } catch (e) {
-        ElMessage.error((e as Error)?.message ?? '删除失败，请重试');
-      }
-    })
+          // 根节点（level === 1）重拉整棵树，否则只刷新父节点
+          if (node.level === 1) {
+            return fetchRootNodes();
+          } else if (node.parent) {
+            refreshNodeChildren(node.parent.data);
+          }
+        })
+        .catch((error: unknown) => {
+          ElMessage.error(error instanceof Error ? error.message || '删除失败，请重试' : '删除失败，请重试');
+        }),
+    )
     .catch(() => {
       // 取消删除，忽略
     });

@@ -48,7 +48,6 @@ import {
   type OrganizationItem,
 } from '@/api/authority/customDepartment';
 import { getDutyTypes, type DutyTypeItem } from '@/api/shiftScheduling/dutyType';
-import OrgTreeSelect from '@/components/OrgTreeSelect/index.vue';
 import PoliceSelectDialog from '@/components/PoliceSelectDialog/index.vue';
 import { defaultTableFormatter } from '@/components/ProTable/formatter';
 import ProTable from '@/components/ProTable/index.vue';
@@ -186,50 +185,62 @@ function normalizeNodes(list: CustomDepartmentTreeNode[], isRoot: boolean): Cust
 
 // ===== 组织树加载 =====
 /** 首次加载根节点（组织列表） */
-async function fetchRootNodes(): Promise<void> {
+function fetchRootNodes(): Promise<void> {
   treeLoading.value = true;
-  try {
-    const res = await getOrganizationTree();
-    treeData.value = normalizeNodes((res?.data ?? []) as CustomDepartmentTreeNode[], true);
-  } catch (e) {
-    ElMessage.error('加载组织结构失败');
-  } finally {
-    treeLoading.value = false;
-  }
+  return getOrganizationTree()
+    .then((res) => {
+      if (!res || res.code !== 0) {
+        ElMessage.error(res?.msg ?? '加载组织结构失败');
+        return;
+      }
+      treeData.value = normalizeNodes((res.data ?? []) as CustomDepartmentTreeNode[], true);
+    })
+    .catch(() => {
+      ElMessage.error('加载组织结构失败');
+    })
+    .finally(() => {
+      treeLoading.value = false;
+    });
 }
 
 /** el-tree 懒加载子节点 */
-async function loadTreeNode(node: any, resolve: (data: CustomDepartmentTreeNode[]) => void): Promise<void> {
+function loadTreeNode(node: any, resolve: (data: CustomDepartmentTreeNode[]) => void): Promise<void> {
   if (node.level === 0) {
     resolve(treeData.value);
-    return;
+    return Promise.resolve();
   }
-  try {
-    const data = node.data as CustomDepartmentTreeNode;
-    // 组织下加载部门：parentId=0, departmentCustomId=组织 id
-    // 部门下加载子部门：parentId=部门 id, departmentCustomId=组织 id（从父继承）
-    let parentId = '0';
-    let departmentCustomId = '';
-    if (isOrgNode(data)) {
-      parentId = '0';
-      departmentCustomId = data.id;
-    } else if (isDeptNode(data)) {
-      parentId = data.id;
-      departmentCustomId = data.departmentCustomId;
-    }
-    const res = await getCustomDepartmentChildren({ parentId, departmentCustomId });
-    const children = normalizeNodes((res?.data ?? []) as CustomDepartmentTreeNode[], false);
-    // 子部门继承父级的 departmentCustomId
-    children.forEach((child) => {
-      if (!(child as DepartmentItem).departmentCustomId) {
-        (child as DepartmentItem).departmentCustomId = departmentCustomId;
+  const data = node.data as CustomDepartmentTreeNode;
+  // 组织下加载部门：parentId=0, departmentCustomId=组织 id
+  // 部门下加载子部门：parentId=部门 id, departmentCustomId=组织 id（从父继承）
+  let parentId = '0';
+  let departmentCustomId = '';
+  if (isOrgNode(data)) {
+    parentId = '0';
+    departmentCustomId = data.id;
+  } else if (isDeptNode(data)) {
+    parentId = data.id;
+    departmentCustomId = data.departmentCustomId;
+  }
+  return getCustomDepartmentChildren({ parentId, departmentCustomId })
+    .then((res) => {
+      if (!res || res.code !== 0) {
+        resolve([]);
+        ElMessage.error(res?.msg ?? '加载子节点失败');
+        return;
       }
+      const children = normalizeNodes((res.data ?? []) as CustomDepartmentTreeNode[], false);
+      // 子部门继承父级的 departmentCustomId
+      children.forEach((child) => {
+        if (!(child as DepartmentItem).departmentCustomId) {
+          (child as DepartmentItem).departmentCustomId = departmentCustomId;
+        }
+      });
+      resolve(children);
+    })
+    .catch(() => {
+      resolve([]);
+      ElMessage.error('加载子节点失败');
     });
-    resolve(children);
-  } catch {
-    resolve([]);
-    ElMessage.error('加载子节点失败');
-  }
 }
 
 // ===== 节点交互 =====
@@ -319,34 +330,49 @@ async function submitOrg(): Promise<void> {
     return;
   }
   orgDialogLoading.value = true;
-  try {
-    const payload = { name: orgForm.name, dutyType: orgForm.dutyType };
-    if (orgDialogType.value === 'create') {
-      const res = await createOrganization(payload);
+  const payload = { name: orgForm.name, dutyType: orgForm.dutyType };
+  const isCreate = orgDialogType.value === 'create';
+  const request = isCreate
+    ? createOrganization(payload)
+    : orgEditData.value
+      ? updateOrganization(orgEditData.value.id, payload)
+      : undefined;
+  if (!request) {
+    orgDialogVisible.value = false;
+    orgDialogLoading.value = false;
+    return;
+  }
+  request
+    .then((res) => {
       if (!res || res.code !== 0) {
-        ElMessage.error(res?.msg ?? '创建组织失败');
-        return;
+        ElMessage.error(res?.msg ?? (isCreate ? '创建组织失败' : '更新组织失败'));
+        return false;
       }
-      ElMessage.success('组织创建成功');
-      await fetchRootNodes();
-    } else if (orgEditData.value) {
-      const res = await updateOrganization(orgEditData.value.id, payload);
-      if (!res || res.code !== 0) {
-        ElMessage.error(res?.msg ?? '更新组织失败');
-        return;
+      if (isCreate) {
+        ElMessage.success('组织创建成功');
+        return fetchRootNodes().then(() => true);
       }
       ElMessage.success('组织更新成功');
-      orgEditData.value.name = orgForm.name;
-      orgEditData.value.dutyType = orgForm.dutyType;
+      if (orgEditData.value) {
+        orgEditData.value.name = orgForm.name;
+        orgEditData.value.dutyType = orgForm.dutyType;
+      }
       // 同步当前选中节点显示
-      if (currentNode.value && currentNode.value.id === orgEditData.value.id) {
+      if (currentNode.value && orgEditData.value && currentNode.value.id === orgEditData.value.id) {
         currentNode.value = { ...currentNode.value, name: orgForm.name };
       }
-    }
-    orgDialogVisible.value = false;
-  } finally {
-    orgDialogLoading.value = false;
-  }
+      return true;
+    })
+    .then((saved) => {
+      if (saved) orgDialogVisible.value = false;
+    })
+    .catch((error: unknown) => {
+      const fallback = isCreate ? '创建组织失败' : '更新组织失败';
+      ElMessage.error(error instanceof Error ? error.message || fallback : fallback);
+    })
+    .finally(() => {
+      orgDialogLoading.value = false;
+    });
 }
 
 /** 二次确认删除组织 */
@@ -357,23 +383,24 @@ function confirmDeleteOrg(data: OrganizationItem): void {
     type: 'warning',
     confirmButtonClass: 'el-button--danger',
   })
-    .then(async () => {
-      try {
-        const res = await deleteOrganization(data.id);
-        if (!res || res.code !== 0) {
-          ElMessage.error(res?.msg ?? '删除组织失败');
-          return;
-        }
-        ElMessage.success('组织删除成功');
-        // 清空右侧选中（如果删的是当前节点）
-        if (currentNode.value && currentNode.value.id === data.id) {
-          clearCurrentNode();
-        }
-        await fetchRootNodes();
-      } catch (e) {
-        ElMessage.error((e as Error)?.message ?? '删除组织失败');
-      }
-    })
+    .then(() =>
+      deleteOrganization(data.id)
+        .then((res) => {
+          if (!res || res.code !== 0) {
+            ElMessage.error(res?.msg ?? '删除组织失败');
+            return;
+          }
+          ElMessage.success('组织删除成功');
+          // 清空右侧选中（如果删的是当前节点）
+          if (currentNode.value && currentNode.value.id === data.id) {
+            clearCurrentNode();
+          }
+          return fetchRootNodes();
+        })
+        .catch((error: unknown) => {
+          ElMessage.error(error instanceof Error ? error.message || '删除组织失败' : '删除组织失败');
+        }),
+    )
     .catch(() => {
       // 取消删除
     });
@@ -428,46 +455,62 @@ async function submitNode(): Promise<void> {
     return;
   }
   nodeDialogLoading.value = true;
-  try {
-    const payload: NodeForm = {
-      code: nodeForm.code,
-      name: nodeForm.name,
-      type: nodeForm.type,
-      parentId: nodeForm.parentId,
-      departmentCustomId: nodeForm.departmentCustomId,
-    };
-    if (nodeDialogType.value === 'create') {
-      const res = await createCustomDepartment(payload);
+  const payload: NodeForm = {
+    code: nodeForm.code,
+    name: nodeForm.name,
+    type: nodeForm.type,
+    parentId: nodeForm.parentId,
+    departmentCustomId: nodeForm.departmentCustomId,
+  };
+  const isCreate = nodeDialogType.value === 'create';
+  const request = isCreate
+    ? createCustomDepartment(payload)
+    : nodeEditData.value
+      ? updateCustomDepartment(nodeEditData.value.id, payload)
+      : undefined;
+  if (!request) {
+    nodeDialogVisible.value = false;
+    nodeDialogLoading.value = false;
+    return;
+  }
+  request
+    .then((res) => {
       if (!res || res.code !== 0) {
-        ElMessage.error(res?.msg ?? '创建部门失败');
-        return;
+        ElMessage.error(res?.msg ?? (isCreate ? '创建部门失败' : '更新部门失败'));
+        return false;
       }
-      ElMessage.success('部门创建成功');
-      // 刷新父节点子列表
-      if (nodeParentData.value) {
-        refreshNodeChildren(nodeParentData.value);
-      } else {
-        await fetchRootNodes();
-      }
-    } else if (nodeEditData.value) {
-      const res = await updateCustomDepartment(nodeEditData.value.id, payload);
-      if (!res || res.code !== 0) {
-        ElMessage.error(res?.msg ?? '更新部门失败');
-        return;
+      if (isCreate) {
+        ElMessage.success('部门创建成功');
+        // 刷新父节点子列表
+        if (nodeParentData.value) {
+          refreshNodeChildren(nodeParentData.value);
+          return true;
+        } else {
+          return fetchRootNodes().then(() => true);
+        }
       }
       ElMessage.success('部门更新成功');
-      nodeEditData.value.name = nodeForm.name;
-      nodeEditData.value.code = nodeForm.code;
-      nodeEditData.value.type = nodeForm.type;
+      if (nodeEditData.value) {
+        nodeEditData.value.name = nodeForm.name;
+        nodeEditData.value.code = nodeForm.code;
+        nodeEditData.value.type = nodeForm.type;
+      }
       // 同步当前选中节点显示
-      if (currentNode.value && currentNode.value.id === nodeEditData.value.id) {
+      if (currentNode.value && nodeEditData.value && currentNode.value.id === nodeEditData.value.id) {
         currentNode.value = { ...currentNode.value, name: nodeForm.name };
       }
-    }
-    nodeDialogVisible.value = false;
-  } finally {
-    nodeDialogLoading.value = false;
-  }
+      return true;
+    })
+    .then((saved) => {
+      if (saved) nodeDialogVisible.value = false;
+    })
+    .catch((error: unknown) => {
+      const fallback = isCreate ? '创建部门失败' : '更新部门失败';
+      ElMessage.error(error instanceof Error ? error.message || fallback : fallback);
+    })
+    .finally(() => {
+      nodeDialogLoading.value = false;
+    });
 }
 
 /** 二次确认删除部门 */
@@ -478,45 +521,46 @@ function confirmDeleteNode(data: DepartmentItem): void {
     type: 'warning',
     confirmButtonClass: 'el-button--danger',
   })
-    .then(async () => {
-      try {
-        const res = await deleteCustomDepartment(data.id);
-        if (!res || res.code !== 0) {
-          ElMessage.error(res?.msg ?? '删除部门失败');
-          return;
-        }
-        ElMessage.success('部门删除成功');
-        // 清空右侧选中（如果删的是当前节点）
-        if (currentNode.value && currentNode.value.id === data.id) {
-          clearCurrentNode();
-        }
-        // 刷新父节点子列表
-        // 父节点 id 等于 0 时表示直接挂在组织下，刷新对应组织
-        if (data.parentId === '0') {
-          // 找到对应的组织节点刷新
-          const orgParent = treeData.value.find((n) => isOrgNode(n) && n.id === data.departmentCustomId);
-          if (orgParent) {
-            refreshNodeChildren(orgParent);
-          } else {
-            await fetchRootNodes();
+    .then(() =>
+      deleteCustomDepartment(data.id)
+        .then((res) => {
+          if (!res || res.code !== 0) {
+            ElMessage.error(res?.msg ?? '删除部门失败');
+            return;
           }
-        } else {
-          // 通过 el-tree 找父节点
-          if (treeRef.value) {
-            const parent = treeRef.value.getNode(data.parentId) as unknown as TreeNodeInstance | null;
-            if (parent?.data) {
-              refreshNodeChildren(parent.data);
+          ElMessage.success('部门删除成功');
+          // 清空右侧选中（如果删的是当前节点）
+          if (currentNode.value && currentNode.value.id === data.id) {
+            clearCurrentNode();
+          }
+          // 刷新父节点子列表
+          // 父节点 id 等于 0 时表示直接挂在组织下，刷新对应组织
+          if (data.parentId === '0') {
+            // 找到对应的组织节点刷新
+            const orgParent = treeData.value.find((n) => isOrgNode(n) && n.id === data.departmentCustomId);
+            if (orgParent) {
+              refreshNodeChildren(orgParent);
             } else {
-              await fetchRootNodes();
+              return fetchRootNodes();
             }
           } else {
-            await fetchRootNodes();
+            // 通过 el-tree 找父节点
+            if (treeRef.value) {
+              const parent = treeRef.value.getNode(data.parentId) as unknown as TreeNodeInstance | null;
+              if (parent?.data) {
+                refreshNodeChildren(parent.data);
+              } else {
+                return fetchRootNodes();
+              }
+            } else {
+              return fetchRootNodes();
+            }
           }
-        }
-      } catch (e) {
-        ElMessage.error((e as Error)?.message ?? '删除部门失败');
-      }
-    })
+        })
+        .catch((error: unknown) => {
+          ElMessage.error(error instanceof Error ? error.message || '删除部门失败' : '删除部门失败');
+        }),
+    )
     .catch(() => {
       // 取消删除
     });
@@ -599,30 +643,31 @@ function openPoliceDialog(): void {
   policeDialogVisible.value = true;
 }
 
-async function handlePoliceConfirm(selected: AvailableUserItem[]): Promise<void> {
+function handlePoliceConfirm(selected: AvailableUserItem[]): Promise<void> {
   const node = currentNode.value;
-  if (!isDeptNode(node)) return;
+  if (!isDeptNode(node)) return Promise.resolve();
   if (selected.length === 0) {
     ElMessage.warning('请选择警员');
-    return;
+    return Promise.resolve();
   }
-  try {
-    // 参数结构为 { users: [{ departmentCode, departmentId, id }] }
-    const users: BindUserItem[] = selected.map((u) => ({
-      departmentCode: u.departmentCode,
-      departmentId: u.departmentId,
-      id: u.id,
-    }));
-    const res = await bindCustomDepartmentUsers(node.id, { users });
-    if (!res || res.code !== 0) {
-      ElMessage.error(res?.msg ?? '绑定警员失败');
-      return;
-    }
-    ElMessage.success(`成功绑定 ${selected.length} 名警员`);
-    tableRef.value?.refresh();
-  } catch (e) {
-    ElMessage.error((e as Error)?.message ?? '绑定警员失败');
-  }
+  // 参数结构为 { users: [{ departmentCode, departmentId, id }] }
+  const users: BindUserItem[] = selected.map((u) => ({
+    departmentCode: u.departmentCode,
+    departmentId: u.departmentId,
+    id: u.id,
+  }));
+  return bindCustomDepartmentUsers(node.id, { users })
+    .then((res) => {
+      if (!res || res.code !== 0) {
+        ElMessage.error(res?.msg ?? '绑定警员失败');
+        return;
+      }
+      ElMessage.success(`成功绑定 ${selected.length} 名警员`);
+      tableRef.value?.refresh();
+    })
+    .catch((error: unknown) => {
+      ElMessage.error(error instanceof Error ? error.message || '绑定警员失败' : '绑定警员失败');
+    });
 }
 
 /** 解绑警员 */
@@ -638,31 +683,37 @@ async function handleUnbindUser(row: CustomDepartmentUserItem): Promise<void> {
   } catch {
     return;
   }
-  try {
-    const res = await unbindCustomDepartmentUsers(node.id, { userIds: [row.userId] });
-    if (!res || res.code !== 0) {
-      ElMessage.error(res?.msg ?? '解绑失败');
-      return;
-    }
-    ElMessage.success('解绑成功');
-    tableRef.value?.refresh();
-  } catch (e) {
-    ElMessage.error((e as Error)?.message ?? '解绑失败');
-  }
+  return unbindCustomDepartmentUsers(node.id, { userIds: [row.userId] })
+    .then((res) => {
+      if (!res || res.code !== 0) {
+        ElMessage.error(res?.msg ?? '解绑失败');
+        return;
+      }
+      ElMessage.success('解绑成功');
+      tableRef.value?.refresh();
+    })
+    .catch((error: unknown) => {
+      ElMessage.error(error instanceof Error ? error.message || '解绑失败' : '解绑失败');
+    });
 }
 
 // ===== 排班类型下拉 =====
-async function loadDutyTypes(): Promise<void> {
-  try {
-    const res = await getDutyTypes({ pageNum: 1, pageSize: 100 });
-    const types = (res?.data?.records ?? []) as DutyTypeItem[];
-    dutyTypeOptions.value = types.map((item) => ({
-      label: `${item.name}(${item.type})`,
-      value: item.type,
-    }));
-  } catch (e) {
-    console.error('获取排班类型失败', e);
-  }
+function loadDutyTypes(): Promise<void> {
+  return getDutyTypes({ pageNum: 1, pageSize: 100 })
+    .then((res) => {
+      if (res?.code !== 0) {
+        console.error(res?.msg || '获取排班类型失败');
+        return;
+      }
+      const types = (res?.data?.records ?? []) as DutyTypeItem[];
+      dutyTypeOptions.value = types.map((item) => ({
+        label: `${item.name}(${item.type})`,
+        value: String(item.type),
+      }));
+    })
+    .catch((error: unknown) => {
+      console.error('获取排班类型失败', error);
+    });
 }
 
 // ===== 表单校验规则 =====

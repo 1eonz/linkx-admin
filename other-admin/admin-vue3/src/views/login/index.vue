@@ -1,25 +1,21 @@
 <script setup lang="ts">
-import {
-  ArrowRight,
-  ArrowDown,
-  Key,
-  Loading,
-  Lock,
-  User,
-  UserFilled,
-  WarnTriangleFilled,
-} from '@element-plus/icons-vue';
-import { ElMessage } from 'element-plus';
-import { ref, computed, markRaw, onMounted } from 'vue';
+import { ArrowRight, ArrowDown, Key, Loading, Lock, User, WarnTriangleFilled } from '@element-plus/icons-vue';
+import { ElMessage, ElMessageBox } from 'element-plus';
+import type { FormInstance, FormRules } from 'element-plus';
+import { ref, computed, markRaw, onMounted, reactive } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
-import type { UserInputForm } from '#/user';
-import { queryGlobalsList } from '@/api/dictionary/globals';
-import { getVersion } from '@/api/user';
+import type { PasswordChangeRequiredResult, UserInputForm } from '#/user';
+import { getGlobalsList, queryGlobalsList } from '@/api/dictionary/globals';
+import { changePwd, getVersion } from '@/api/user';
+import { getLicenseInfoUtil } from '@/composables/useLicense';
 import { useSystemTitle } from '@/composables/useSystemTitle';
 import { setLanguage } from '@/locales';
 import { useSettingsStore } from '@/store/modules/useSettingsStore';
 import { useUserStore } from '@/store/modules/useUserStore';
+import { setPasswordChangeToken } from '@/utils/auth';
+import { validateComplexMode, validateRepeatPassword, validateSimpleMode } from '@/utils/passwordValidator';
+import { startSessionMonitoring } from '@/utils/session';
 
 defineOptions({ name: 'Login' });
 
@@ -27,10 +23,13 @@ const router = useRouter();
 const route = useRoute();
 const userStore = useUserStore();
 const settingsStore = useSettingsStore();
-const { systemName: systemTitle, loginTitle } = useSystemTitle();
+const { systemName: systemTitle } = useSystemTitle();
 
-const loginForm = ref<UserInputForm>({ username: '', password: '' });
+const rememberedUsernameKey = 'linkx_admin_remembered_username';
+const rememberedUsername = localStorage.getItem(rememberedUsernameKey);
+const loginForm = ref<UserInputForm>({ username: rememberedUsername ?? '', password: '' });
 const loading = ref(false);
+const rememberMe = ref(rememberedUsername !== null);
 const language = ref(localStorage.getItem('localLanguage') || 'cn');
 
 const loginRules = {
@@ -38,7 +37,39 @@ const loginRules = {
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
 };
 
-const formRef = ref();
+const formRef = ref<FormInstance>();
+const passwordFormRef = ref<FormInstance>();
+const passwordChangeVisible = ref(false);
+const passwordChangeLoading = ref(false);
+const passwordChangeTitle = ref('请修改密码');
+const passwordChangeForm = reactive({ username: '', oldPassword: '', newPassword: '', repeatNewPassword: '' });
+const passwordChangeRules = computed<FormRules>(() => ({
+  oldPassword: [{ required: true, message: '请输入原密码', trigger: 'blur' }],
+  newPassword: [
+    { required: true, message: '请输入新密码', trigger: 'blur' },
+    {
+      validator: (_rule, value, callback) => {
+        const simple = localStorage.getItem('simplePassWord') === 'true';
+        const error = simple
+          ? validateSimpleMode(value as string)
+          : validateComplexMode(value as string, passwordChangeForm.username);
+        callback(error ? new Error(error) : undefined);
+        if (passwordChangeForm.repeatNewPassword) passwordFormRef.value?.validateField('repeatNewPassword');
+      },
+      trigger: ['blur', 'change'],
+    },
+  ],
+  repeatNewPassword: [
+    { required: true, message: '请再次输入新密码', trigger: 'blur' },
+    {
+      validator: (_rule, value, callback) => {
+        const error = validateRepeatPassword(value as string, passwordChangeForm.newPassword);
+        callback(error ? new Error(error) : undefined);
+      },
+      trigger: ['blur', 'change'],
+    },
+  ],
+}));
 
 // 输入框前缀图标（用 markRaw 避免响应式开销）
 const userIcon = markRaw(User);
@@ -56,9 +87,6 @@ getVersion()
   })
   .catch(() => {
     // 静默失败
-  })
-  .finally(() => {
-    // 无清理逻辑
   });
 
 // 获取全局参数中的 SYSTEM_NAME
@@ -85,6 +113,37 @@ onMounted(() => {
     });
 });
 
+function showLicenseStateWarning(): Promise<void> {
+  return getLicenseInfoUtil().then((license) => {
+    let message = '';
+    if (license.licenseState === 0) message = 'license未激活';
+    if (license.licenseState === 3 || license.licenseState === 5) message = 'license已过期，请重新导入';
+    const showMessage = (): Promise<void> => {
+      if (!message) return Promise.resolve();
+      return ElMessageBox.alert(message, 'License 提示').then(
+        () => undefined,
+        () => undefined,
+      );
+    };
+    if (license.licenseState !== 2 || !license.expireDate) return showMessage();
+
+    const remainingDays = Math.ceil(
+      (new Date(license.expireDate.replace(/-/g, '/')).getTime() - Date.now()) / 86400000,
+    );
+    return getGlobalsList()
+      .then((globals) => {
+        const threshold = Number(globals.data?.find((item) => item.name === 'MSIP_LICENSE_EXPIRED_TIME')?.value);
+        if (Number.isFinite(remainingDays) && Number.isFinite(threshold) && remainingDays < threshold) {
+          message = `您的账户还有${remainingDays}天到期，请及时联系相关人员进行续费，以免影响您的业务`;
+        }
+      })
+      .catch(() => {
+        // 提示信息查询失败不阻断已成功的登录。
+      })
+      .then(showMessage);
+  });
+}
+
 function handleLogin(): void {
   formRef.value
     ?.validate()
@@ -94,16 +153,52 @@ function handleLogin(): void {
         .loginAction(loginForm.value)
         .then((result) => {
           if (result && (result.code === 0 || result.code === 121)) {
-            ElMessage.success('登录成功');
-            const redirect = (route.query.redirect as string) || '/';
-            router.push(redirect);
+            if (rememberMe.value && loginForm.value.username) {
+              localStorage.setItem(rememberedUsernameKey, loginForm.value.username);
+            } else {
+              localStorage.removeItem(rememberedUsernameKey);
+            }
+            const loginToken = userStore.token;
+            const warningPromise = result.licenseWarning
+              ? ElMessageBox.alert(result.licenseWarning, 'License 提示').then(
+                  () => undefined,
+                  () => undefined,
+                )
+              : Promise.resolve();
+            const expiryPromise =
+              result.code === 121
+                ? ElMessageBox.alert(`您的密码将在 ${result.msg || ''} 后过期，请及时修改。`, '密码即将过期').then(
+                    () => undefined,
+                    () => undefined,
+                  )
+                : Promise.resolve();
+            return warningPromise
+              .then(() => expiryPromise)
+              .then(() => showLicenseStateWarning())
+              .then(() => {
+                if (userStore.token !== loginToken) return;
+                ElMessage.success('登录成功');
+                startSessionMonitoring();
+                const redirect = (route.query.redirect as string) || '/';
+                return router.push(redirect);
+              });
           } else {
-            const errorMsg = (result && result.msg) || '登录失败';
-            ElMessage.error(errorMsg);
+            const required = result?.data as PasswordChangeRequiredResult | undefined;
+            if ([114, 115, 137].includes(result?.code ?? -1) && required?.accessToken) {
+              setPasswordChangeToken(required.accessToken);
+              passwordChangeTitle.value = result?.msg || '密码已过期，请修改密码';
+              passwordChangeForm.username = required.userName || loginForm.value.username;
+              passwordChangeForm.oldPassword = loginForm.value.password;
+              passwordChangeForm.newPassword = '';
+              passwordChangeForm.repeatNewPassword = '';
+              passwordChangeVisible.value = true;
+            } else {
+              ElMessage.error(result?.msg || '登录失败');
+            }
           }
         })
-        .catch(() => {
-          ElMessage.error('登录失败，请稍后重试');
+        .catch((error) => {
+          ElMessage.error(error?.response?.data?.msg || '登录失败，请稍后重试');
         })
         .finally(() => {
           loading.value = false;
@@ -114,70 +209,82 @@ function handleLogin(): void {
     });
 }
 
+function submitPasswordChange(): void {
+  if (passwordChangeLoading.value) return;
+  passwordFormRef.value?.validate((valid) => {
+    if (!valid || passwordChangeLoading.value) return;
+    passwordChangeLoading.value = true;
+    changePwd({ ...passwordChangeForm })
+      .then((result) => {
+        if (result.code === 0) {
+          passwordChangeVisible.value = false;
+          ElMessage.success('密码修改成功，请重新登录');
+          return userStore.resetTokenAction();
+        }
+        ElMessage.error(result.msg || '密码修改失败');
+      })
+      .catch((error) => {
+        ElMessage.error((error as { response?: { data?: { msg?: string } } })?.response?.data?.msg || '密码修改失败');
+      })
+      .finally(() => {
+        passwordChangeLoading.value = false;
+      });
+  });
+}
+
 function handleCommand(command: string): void {
   language.value = command;
   setLanguage(command as 'cn' | 'en');
 }
 
-// 仅 UI 占位状态（非业务逻辑）：记住警号 checkbox + 警号 tag 展示
-const rememberMe = ref(false);
+function handleRememberMeChange(checked: string | number | boolean): void {
+  if (!checked) localStorage.removeItem(rememberedUsernameKey);
+}
 </script>
 
 <template>
   <div class="login-page">
-    <!-- 4 层呼吸背景（对齐原型 docs/login-demo.html） -->
-    <div class="bg-base"></div>
-    <div class="bg-grid"></div>
-    <div class="glow-sphere-primary"></div>
-    <div class="glow-sphere-secondary"></div>
+    <div class="login-grid" aria-hidden="true"></div>
 
-    <!-- 语言切换（右上角浮层） -->
-    <div class="lang-switch">
-      <el-dropdown trigger="click" @command="handleCommand">
-        <button class="lang-trigger" type="button">
-          <span>{{ language === 'cn' ? '简体中文' : 'English' }}</span>
-          <el-icon><ArrowDown /></el-icon>
-        </button>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item command="cn">简体中文</el-dropdown-item>
-            <el-dropdown-item command="en">English</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </div>
-
-    <!-- 居中登录卡片 -->
-    <div class="login-container">
-      <!-- 左侧品牌区 -->
-      <div class="login-brand">
-        <!-- 警务 Logo 方块（蓝色渐变 + 主色光晕） -->
-        <div class="police-logo">
-          <el-icon><Key /></el-icon>
-        </div>
-
-        <!-- 品牌长标题（自适应折行） -->
-        <h1 class="brand-title">{{ systemTitle }}</h1>
-
-        <!-- 状态徽章（胶囊形 + 绿色 pulse dot + "系统就绪"） -->
-        <div class="status-badge">
-          <span class="status-dot online"></span>
-          <span>系统就绪</span>
-        </div>
-
-        <!-- 版本与版权（底部） -->
-        <div class="brand-footer-info">
-          <span class="version-label">版本 {{ version || '—' }} · © {{ currentYear }} Linkx Platform</span>
-        </div>
+    <header class="login-header">
+      <div class="network-id">
+        <span class="network-id__indicator" aria-hidden="true"></span>
+        <span>公安移动专网安全接入</span>
       </div>
 
-      <!-- 右侧表单区 -->
-      <div class="login-form-wrapper">
-        <div>
-          <!-- 表单区块标题（图标 + 虚线分隔） -->
+      <div class="lang-switch">
+        <el-dropdown trigger="click" @command="handleCommand">
+          <button class="lang-trigger" type="button" aria-label="切换系统语言">
+            <span>{{ language === 'cn' ? '简体中文' : 'English' }}</span>
+            <el-icon><ArrowDown /></el-icon>
+          </button>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item command="cn">简体中文</el-dropdown-item>
+              <el-dropdown-item command="en">English</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
+    </header>
+
+    <main class="login-main">
+      <section class="login-container" aria-labelledby="login-system-title">
+        <div class="login-brand">
+          <div class="police-logo" aria-hidden="true">
+            <el-icon><Key /></el-icon>
+          </div>
+
+          <h1 id="login-system-title" class="brand-title">
+            {{ systemTitle || '警务协同移动指挥后台管理系统' }}
+          </h1>
+          <p class="brand-subtitle">LinkX Mobile Command &amp; Operations Management System</p>
+        </div>
+
+        <div class="login-form-wrapper">
           <div class="login-section-title">
-            <el-icon><UserFilled /></el-icon>
-            <span>{{ loginTitle || '身份认证' }}</span>
+            <h2>身份认证</h2>
+            <span class="required-note">带 * 的项目为必填</span>
           </div>
 
           <el-form
@@ -188,150 +295,107 @@ const rememberMe = ref(false);
             class="login-form"
             @submit.prevent="handleLogin"
           >
-            <el-form-item prop="username" label="警号 / 账号">
+            <el-form-item prop="username" label="用户 / 账号" required>
               <el-input
                 v-model="loginForm.username"
-                placeholder="请输入警号"
+                placeholder="请输入警号或账号"
                 size="large"
                 :prefix-icon="userIcon"
-                tabindex="1"
                 autocomplete="username"
-              >
-                <template #append>
-                  <span class="police-id-tag">POLICE</span>
-                </template>
-              </el-input>
+              />
             </el-form-item>
 
-            <el-form-item prop="password" label="安全密码">
+            <el-form-item prop="password" label="密码" required>
               <el-input
                 v-model="loginForm.password"
                 type="password"
                 placeholder="请输入密码"
                 size="large"
                 :prefix-icon="lockIcon"
-                tabindex="2"
                 show-password
                 autocomplete="current-password"
                 @copy.prevent
                 @paste.prevent
                 @cut.prevent
-                @keyup.enter="handleLogin"
               />
             </el-form-item>
 
-            <!-- 记住警号 + 忘记密码（UI 占位） -->
             <div class="form-options">
-              <el-checkbox v-model="rememberMe">记住警号</el-checkbox>
-              <a href="javascript:void(0);">忘记密码?</a>
+              <el-checkbox v-model="rememberMe" @change="handleRememberMeChange">记住账号</el-checkbox>
+              <span class="account-assistance">忘记密码请联系系统管理员</span>
             </div>
 
-            <button type="submit" class="btn-submit" :class="{ 'is-loading': loading }" :disabled="loading">
+            <button
+              type="submit"
+              class="btn-submit"
+              :class="{ 'is-loading': loading }"
+              :disabled="loading"
+              :aria-busy="loading"
+            >
               <el-icon v-if="loading" class="is-loading"><Loading /></el-icon>
-              <span>{{ loading ? '验证中...' : '进入系统' }}</span>
+              <span>{{ loading ? '正在验证身份…' : '安全登录' }}</span>
               <el-icon v-if="!loading"><ArrowRight /></el-icon>
             </button>
           </el-form>
+
+          <div class="form-footer">
+            <el-icon aria-hidden="true"><WarnTriangleFilled /></el-icon>
+            <span>未经授权禁止登录，系统全程安全审计</span>
+          </div>
         </div>
 
-        <!-- 底部安全提示 -->
-        <div class="form-footer">
-          <el-icon><WarnTriangleFilled /></el-icon>
-          <span>未经授权禁止登录，系统全程安全审计</span>
-        </div>
-      </div>
-    </div>
+        <span class="visually-hidden" role="status" aria-live="polite">{{ loading ? '正在验证身份' : '' }}</span>
+      </section>
+    </main>
+
+    <footer class="login-footer">
+      <span>版本 {{ version || '—' }}</span>
+      <span>Copyright © {{ currentYear }} LinkX Platform</span>
+    </footer>
+
+    <el-dialog
+      v-model="passwordChangeVisible"
+      :title="passwordChangeTitle"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :show-close="false"
+      width="min(560px, calc(100vw - 32px))"
+    >
+      <el-form
+        ref="passwordFormRef"
+        :model="passwordChangeForm"
+        :rules="passwordChangeRules"
+        label-position="top"
+        @submit.prevent="submitPasswordChange"
+      >
+        <el-form-item label="原密码" prop="oldPassword"
+          ><el-input
+            v-model="passwordChangeForm.oldPassword"
+            type="password"
+            show-password
+            autocomplete="current-password"
+        /></el-form-item>
+        <el-form-item label="新密码" prop="newPassword"
+          ><el-input v-model="passwordChangeForm.newPassword" type="password" show-password autocomplete="new-password"
+        /></el-form-item>
+        <el-form-item label="确认新密码" prop="repeatNewPassword"
+          ><el-input
+            v-model="passwordChangeForm.repeatNewPassword"
+            type="password"
+            show-password
+            autocomplete="new-password"
+        /></el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button
+          type="primary"
+          :loading="passwordChangeLoading"
+          :disabled="passwordChangeLoading"
+          @click="submitPasswordChange"
+        >
+          确认修改
+        </el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
-
-<style lang="less" scoped>
-// 登录页主体样式已迁移至 src/styles/login.less（全局通用）
-// 此处仅补充 scoped 级别的细节调整
-
-// 语言切换按钮（深色背景上的浅色按钮）
-.lang-switch {
-  position: absolute;
-  top: @spacing-lg;
-  right: @spacing-xl;
-  z-index: 20;
-
-  .lang-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: @spacing-xs;
-    padding: 6px 12px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: @radius-md;
-    color: @navbar-text;
-    font-size: @font-size-sm;
-    cursor: pointer;
-    transition: all @transition-duration @transition-timing;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.12);
-      color: @navbar-text-active;
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-  }
-}
-
-// 品牌区底部版本信息
-.brand-footer-info {
-  position: absolute;
-  bottom: 24px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: @font-size-2xs;
-  color: fade(@navbar-text, 50%);
-  letter-spacing: 0.5px;
-}
-
-// el-form 局部样式覆盖
-.login-form {
-  :deep(.el-form-item) {
-    margin-bottom: 20px;
-  }
-
-  :deep(.el-form-item__label) {
-    font-size: @font-size-sm;
-    font-weight: @font-weight-semibold;
-    color: @color-text-regular;
-    padding-bottom: 6px;
-  }
-
-  // 输入框 append 区域（POLICE tag）
-  :deep(.el-input-group__append) {
-    background: @color-primary-light-9;
-    border: 1px solid @color-primary-light-7;
-    border-left: none;
-    padding: 0 12px;
-  }
-
-  // checkbox 样式
-  :deep(.el-checkbox) {
-    color: @color-text-secondary;
-
-    .el-checkbox__label {
-      font-size: @font-size-sm;
-    }
-  }
-}
-
-// 提交按钮 loading 状态
-.btn-submit.is-loading {
-  opacity: 0.85;
-  cursor: not-allowed;
-
-  .el-icon.is-loading {
-    animation: btn-loading-spin 0.8s linear infinite;
-  }
-}
-
-@keyframes btn-loading-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-</style>

@@ -65,9 +65,16 @@ const columns = computed<ITableColumn[]>(() => [
 // 权限
 const canDelete = computed(() => hasBtnPermission('/admin/role/delete'));
 const canUpdate = computed(() => hasBtnPermission('/admin/role/update'));
+const canCreate = computed(() => hasBtnPermission('/admin/role/create'));
 
 const actions = computed(() => [
-  { label: '新增', type: 'primary' as const, icon: markRaw(Plus), onClick: handleCreate },
+  {
+    label: '新增',
+    type: 'primary' as const,
+    icon: markRaw(Plus),
+    onClick: handleCreate,
+    visible: canCreate.value,
+  },
 ]);
 
 // ===== ProTable @response 回调 =====
@@ -166,19 +173,20 @@ function handleSetUsers(row: RoleItem): void {
 }
 
 // 设置用户：确认回调
-async function handleUserConfirm(users: AdminUserItem[]): Promise<void> {
+function handleUserConfirm(users: AdminUserItem[]): Promise<void> {
   const userIds = users.map((u) => u.id);
-  try {
-    const result = await setBatchRole(currentRole.id, userIds);
-    if (result.code === 0) {
-      ElMessage.success(result.msg || '设置用户成功');
-      tableRef.value?.refresh();
-    } else {
-      ElMessage.error(result.msg || '操作失败');
-    }
-  } catch {
-    ElMessage.error('操作失败');
-  }
+  return setBatchRole(currentRole.id, userIds)
+    .then((result) => {
+      if (result.code === 0) {
+        ElMessage.success(result.msg || '设置用户成功');
+        tableRef.value?.refresh();
+      } else {
+        ElMessage.error(result.msg || '操作失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('操作失败');
+    });
 }
 
 // 特殊角色保护：id !== 2 且 id !== 6 才可操作删除/禁用/启用
@@ -216,7 +224,7 @@ function getRole(scope: any): RoleItem {
         <template #status="scope">
           <StatusSwitch
             :value="getRole(scope).status ?? 0"
-            :disabled="!isOperable(getRole(scope))"
+            :disabled="!canUpdate || !isOperable(getRole(scope))"
             @change="(v) => handleStatusChange(getRole(scope), v)"
           />
         </template>
@@ -229,12 +237,16 @@ function getRole(scope: any): RoleItem {
                 icon: Edit,
                 label: '编辑',
                 onClick: () => handleUpdate(getRole(scope)),
+                visible: canUpdate && isOperable(getRole(scope)),
+                auth: '/admin/role/update',
               },
               {
                 type: 'primary',
                 icon: User,
                 label: '设置用户',
                 onClick: () => handleSetUsers(getRole(scope)),
+                visible: canUpdate && isOperable(getRole(scope)),
+                auth: '/admin/trUserRole/createMany',
               },
               {
                 type: 'danger',
@@ -242,6 +254,7 @@ function getRole(scope: any): RoleItem {
                 label: '删除',
                 onClick: () => handleDelete(getRole(scope)),
                 visible: canDelete && isOperable(getRole(scope)),
+                auth: '/admin/role/delete',
               },
             ]"
           />

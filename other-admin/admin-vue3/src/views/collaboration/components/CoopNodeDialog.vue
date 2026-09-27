@@ -25,7 +25,7 @@ const props = defineProps<{
   /** 父节点字段标签 */
   parentLabel: string;
   /**
-   * 提交回调（替代 emit，因为需要 await 返回值）
+   * 提交回调，返回 Promise<boolean> 通知弹窗是否关闭
    * 返回 true 表示成功（关闭弹窗），false 表示失败（保持弹窗）
    */
   onSubmit: (
@@ -83,14 +83,16 @@ async function submit(): Promise<void> {
   }
 
   loading.value = true;
-  try {
-    const ok = await props.onSubmit(type.value, form.name, parentData.value, editData.value);
-    if (ok) {
-      visible.value = false;
-    }
-  } finally {
-    loading.value = false;
-  }
+  return props
+    .onSubmit(type.value, form.name, parentData.value, editData.value)
+    .then((ok) => {
+      if (ok) {
+        visible.value = false;
+      }
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 }
 
 defineExpose({ open });

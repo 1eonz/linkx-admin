@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ArrowDown, SwitchButton } from '@element-plus/icons-vue';
 import { ElMessageBox } from 'element-plus';
+import { LxIcon, LxNavbar } from 'lx-ui';
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -37,18 +37,17 @@ function toggleSidebar(): void {
   appStore.toggleSideBar();
 }
 
-async function logout(): Promise<void> {
-  try {
-    await ElMessageBox.confirm('确定要退出登录吗？', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'warning',
+function logout(): void {
+  ElMessageBox.confirm('确定要退出登录吗？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+    .then(() => userStore.logoutAction())
+    .then(() => router.push(`/login?redirect=${router.currentRoute.value.fullPath}`))
+    .catch(() => {
+      // 用户取消
     });
-    await userStore.logoutAction();
-    router.push(`/login?redirect=${router.currentRoute.value.fullPath}`);
-  } catch {
-    // 用户取消
-  }
 }
 
 // 修改密码：调用 userPassword 组件的 setData，self=true 走 changePwd API
@@ -57,17 +56,14 @@ function handleChangePwd(): void {
 }
 
 // 查询当前管理员绑定的警员
-async function loadBindUser(): Promise<void> {
-  try {
-    const res = await getBindUser();
-    if (res?.code === 0 && res.data) {
-      bindUserInfo.value = res.data;
-    } else {
+function loadBindUser(): Promise<void> {
+  return getBindUser()
+    .then((res) => {
+      bindUserInfo.value = res?.code === 0 && res.data ? res.data : null;
+    })
+    .catch(() => {
       bindUserInfo.value = null;
-    }
-  } catch {
-    bindUserInfo.value = null;
-  }
+    });
 }
 
 // 绑定警员：打开弹窗前刷新绑定关系
@@ -94,19 +90,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="navbar">
-    <div class="navbar-left">
+  <LxNavbar class="navbar" :show-fullscreen="false" :search-placeholder="''">
+    <template #leading>
       <Hamburger :is-active="sidebar.opened" class="hamburger-container" @toggle-click="toggleSidebar" />
+    </template>
+    <template #breadcrumb>
       <Breadcrumb class="breadcrumb-container" />
-    </div>
-
-    <div class="navbar-right">
+    </template>
+    <template #trailing>
       <span class="right-tip">修改数据后，请重新登录客户端</span>
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <span class="user-avatar">{{ avatarText }}</span>
           <span v-show="role" class="user-role">{{ role }}</span>
-          <el-icon class="arrow-icon"><ArrowDown /></el-icon>
+          <LxIcon class="arrow-icon" name="chevron-down" :size="12" />
         </div>
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">
@@ -116,24 +113,22 @@ onMounted(() => {
             <el-dropdown-item @click="handleChangePwd">修改密码</el-dropdown-item>
             <el-dropdown-item @click="handleBindUser">绑定警员</el-dropdown-item>
             <el-dropdown-item divided class="logout-item" @click="logout">
-              <el-icon><SwitchButton /></el-icon> 退出
+              <LxIcon name="logout" :size="16" /> 退出
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-    </div>
+    </template>
+  </LxNavbar>
 
-    <!-- 绑定警员弹窗 -->
-    <UserBindDialog
-      v-model:visible="bindUserDialogVisible"
-      :bind-user="bindUserInfo"
-      @bind-refresh="handleBindRefresh"
-      @unbind="handleUnbindSuccess"
-    />
-
-    <!-- 修改密码弹窗 -->
-    <UserPassword ref="passwordRef" />
-  </div>
+  <!-- 弹窗必须位于 lx-navbar 外部：LxNavbar 只渲染具名插槽，默认插槽内容不会挂载。 -->
+  <UserBindDialog
+    v-model:visible="bindUserDialogVisible"
+    :bind-user="bindUserInfo"
+    @bind-refresh="handleBindRefresh"
+    @unbind="handleUnbindSuccess"
+  />
+  <UserPassword ref="passwordRef" />
 </template>
 
 <style lang="less" scoped>
@@ -247,6 +242,41 @@ onMounted(() => {
       &:hover .arrow-icon {
         color: @navbar-text-active;
       }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding-inline-end: @spacing-xs;
+
+    :deep(.lx-navbar__left) {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    :deep(.lx-navbar__right) {
+      flex: 0 0 auto;
+    }
+  }
+
+  .right-tip,
+  .user-role {
+    display: none;
+  }
+
+  .breadcrumb-container {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .avatar-container {
+    flex-shrink: 0;
+
+    .avatar-wrapper {
+      gap: @spacing-xs;
+      padding-inline: @spacing-xs;
+      white-space: nowrap;
     }
   }
 }

@@ -103,6 +103,15 @@ export interface AgentCategory {
   [key: string]: unknown;
 }
 
+/** 智能体与虚拟用户的绑定关系 */
+export interface AssistantAgentBinding {
+  id?: string;
+  virtualUserId?: string;
+  agentId: string;
+  createdUserId?: string | null;
+  [key: string]: unknown;
+}
+
 /**
  * 智能体查询记录
  */
@@ -200,12 +209,13 @@ export function exportAiagentTemplate(): HttpResult<ArrayBuffer> {
 }
 
 /** 触发浏览器下载智能体导入模板 */
-export async function downloadAiagentTemplate(filename = '智能体导入模板.xlsx'): Promise<void> {
-  const res = await exportAiagentTemplate();
-  if (!res || res.code !== 0 || !res.data) {
-    return;
-  }
-  getServiceFile(new Blob([res.data as unknown as ArrayBuffer]), filename);
+export function downloadAiagentTemplate(filename = '智能体导入模板.xlsx'): Promise<void> {
+  return exportAiagentTemplate().then((res) => {
+    if (!res || res.code !== 0 || !res.data) {
+      throw new Error(res?.msg ?? '下载智能体导入模板失败');
+    }
+    getServiceFile(new Blob([res.data as unknown as ArrayBuffer]), filename);
+  });
 }
 
 // ===== 智能体 CRUD =====
@@ -271,6 +281,23 @@ export function deleteCategory(id: string): Promise<ApiResponse> {
   return http.delete<string>(`/XA-ics-agent/proxy/ai/v1/aiagent/management/category/${encodeURIComponent(id)}`);
 }
 
+// ===== 智能体虚拟用户绑定 =====
+
+/** 新建绑定（POST /collaboration/v1/ai/assistant/agent） */
+export function createAssistantAgent(data: AssistantAgentBinding): HttpResult<string> {
+  return http.post<string>('/collaboration/v1/ai/assistant/agent', data);
+}
+
+/** 更新绑定（PUT /collaboration/v1/ai/assistant/agent/{id}） */
+export function updateAssistantAgent(id: string, data: AssistantAgentBinding): Promise<ApiResponse> {
+  return http.put<string>(`/collaboration/v1/ai/assistant/agent/${encodeURIComponent(id)}`, data);
+}
+
+/** 绑定关系分页（GET /collaboration/v1/ai/assistant/agent/page） */
+export function assistantAgentList(params: { agentId: string }): HttpResult<PaginatedResult<AssistantAgentBinding>> {
+  return http.get<PaginatedResult<AssistantAgentBinding>>('/collaboration/v1/ai/assistant/agent/page', { params });
+}
+
 // ===== 查询记录 =====
 
 /**
@@ -317,7 +344,7 @@ export function exportAiagentRecord(params: {
 }
 
 /** 触发浏览器下载查询记录 */
-export async function downloadAiagentRecord(
+export function downloadAiagentRecord(
   params: {
     userName?: string;
     identityCardNumber?: string;
@@ -329,11 +356,12 @@ export async function downloadAiagentRecord(
   },
   filename = '查询记录.xlsx',
 ): Promise<void> {
-  const res = await exportAiagentRecord(params);
-  if (!res || res.code !== 0 || !res.data) {
-    return;
-  }
-  getServiceFile(new Blob([res.data as unknown as ArrayBuffer]), filename);
+  return exportAiagentRecord(params).then((res) => {
+    if (!res || res.code !== 0 || !res.data) {
+      throw new Error(res?.msg ?? '导出查询记录失败');
+    }
+    getServiceFile(new Blob([res.data as unknown as ArrayBuffer]), filename);
+  });
 }
 
 // ===== 文件接口 =====
@@ -355,7 +383,5 @@ export function updateAgentFile(data: Partial<AgentFileItem>): Promise<ApiRespon
 
 /** 删除文件接口（DELETE /XA-ics-agent/proxy/ai/v1/aiagent/attachment-config/delete/{id}） */
 export function deleteAgentFile(id: string): Promise<ApiResponse> {
-  return http.delete<string>(
-    `/XA-ics-agent/proxy/ai/v1/aiagent/attachment-config/delete/${encodeURIComponent(id)}`,
-  );
+  return http.delete<string>(`/XA-ics-agent/proxy/ai/v1/aiagent/attachment-config/delete/${encodeURIComponent(id)}`);
 }

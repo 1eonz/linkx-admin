@@ -147,10 +147,10 @@ const parsedMapperList = computed<{ key: string; value: string }[]>(() => {
  * @param rowData 当前行数据，仅使用其 id 字段发起详情请求
  * @returns 无返回值（Promise<void>）
  */
-async function open(rowData: CallableApp): Promise<void> {
+function open(rowData: CallableApp): Promise<void> {
   dialogVisible.value = true;
   row.value = {} as CallableApp;
-  await getAppDetail(rowData.id);
+  return getAppDetail(rowData.id);
 }
 
 defineExpose({
@@ -167,24 +167,26 @@ defineExpose({
  * @param id 应用 ID
  * @returns 无返回值（Promise<void>）
  */
-async function getAppDetail(id: string): Promise<void> {
-  try {
-    loading.value = true;
-    const res = await getCallableAppDetail(id);
-    const { data, code, msg } = res || {};
-    if (code === 0) {
-      row.value = (data as CallableApp) ?? ({} as CallableApp);
-    } else {
-      row.value = {} as CallableApp;
-      if (msg) {
-        console.error(msg);
+function getAppDetail(id: string): Promise<void> {
+  loading.value = true;
+  return getCallableAppDetail(id)
+    .then((res) => {
+      const { data, code, msg } = res || {};
+      if (code === 0) {
+        row.value = (data as CallableApp) ?? ({} as CallableApp);
+      } else {
+        row.value = {} as CallableApp;
+        if (msg) {
+          console.error(msg);
+        }
       }
-    }
-  } catch {
-    row.value = {} as CallableApp;
-  } finally {
-    loading.value = false;
-  }
+    })
+    .catch(() => {
+      row.value = {} as CallableApp;
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 }
 
 /**

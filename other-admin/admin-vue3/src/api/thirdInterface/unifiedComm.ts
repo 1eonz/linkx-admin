@@ -196,3 +196,45 @@ export function batchSetDeptOrgPriv(data: BatchDeptOrgPrivReq): Promise<ApiRespo
 export function batchSetDeptCameraPriv(data: BatchDeptCameraPrivReq): Promise<ApiResponse> {
   return http.put<string>('/proxy/icp/v1/camera/priv/dept', data);
 }
+
+// ===== 设备类型 =====
+
+export interface DeviceTypeItem {
+  id: string;
+  name: string;
+  icon?: string;
+  iconUri?: string;
+  isShow: 0 | 1;
+  gmtCreated?: string;
+  gmtLastModified?: string;
+  [key: string]: unknown;
+}
+
+export interface DeviceIconUploadResult {
+  filePath?: string;
+  fileUrl?: string;
+}
+
+/** 设备类型列表（GET /proxy/icp/v1/isdnType/list） */
+export function getDeviceTypeList(): HttpResult<DeviceTypeItem[]> {
+  return http.get<DeviceTypeItem[]>('/proxy/icp/v1/isdnType/list');
+}
+
+/** 更新设备类型图标（PUT /proxy/icp/v1/isdnType/{id}） */
+export function updateDeviceType(data: Pick<DeviceTypeItem, 'id' | 'icon' | 'iconUri'>): Promise<ApiResponse> {
+  return http.put<string>(`/proxy/icp/v1/isdnType/${encodeURIComponent(data.id)}`, data);
+}
+
+/** 上传设备图标（POST /proxy/icp/v1/isdnType/uploadIcon） */
+export function uploadDeviceTypeIcon(file: File): HttpResult<DeviceIconUploadResult> {
+  const formData = new FormData();
+  formData.append('file', file);
+  return http.post<DeviceIconUploadResult>('/proxy/icp/v1/isdnType/uploadIcon', formData);
+}
+
+/** 更新设备类型展示状态（PUT /proxy/icp/v1/isdnType/{id}/isShow） */
+export function updateDeviceTypeIsShow(id: string, isShow: 0 | 1): Promise<ApiResponse> {
+  return http.put<string>(`/proxy/icp/v1/isdnType/${encodeURIComponent(id)}/isShow`, undefined, {
+    params: { id, isShow },
+  } as never);
+}

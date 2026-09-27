@@ -172,59 +172,60 @@ async function handleDownload(ids: string[]): Promise<void> {
   // 启动模拟进度（兜底，当 Content-Length 不可用时）
   startProgressSimulation();
 
-  try {
-    const res = await getArchiveDownload(ids, {
-      onDownloadProgress: (e) => {
-        if (cancelRequested.value) return;
-        // 真实进度回调
-        if (e.total && e.total > 0) {
-          const percent = Math.round((e.loaded * 100) / e.total);
-          if (percent >= 90 && percent < 100) {
-            // 进入完成检测模式
-            downloadProgress.value = percent;
-            startCompletionDetection();
-          } else {
-            downloadProgress.value = percent;
-          }
+  return getArchiveDownload(ids, {
+    onDownloadProgress: (e) => {
+      if (cancelRequested.value) return;
+      // 真实进度回调
+      if (e.total && e.total > 0) {
+        const percent = Math.round((e.loaded * 100) / e.total);
+        if (percent >= 90 && percent < 100) {
+          // 进入完成检测模式
+          downloadProgress.value = percent;
+          startCompletionDetection();
         } else {
-          // total 未知：用 loaded/1MB * 10 估算，上限 95
-          const estimate = Math.min(95, Math.floor((e.loaded / (1024 * 1024)) * 10));
-          downloadProgress.value = estimate;
+          downloadProgress.value = percent;
         }
-        downloadText.value = `${downloadProgress.value}%`;
-      },
-      abort: downloadController?.signal,
-    });
+      } else {
+        // total 未知：用 loaded/1MB * 10 估算，上限 95
+        const estimate = Math.min(95, Math.floor((e.loaded / (1024 * 1024)) * 10));
+        downloadProgress.value = estimate;
+      }
+      downloadText.value = `${downloadProgress.value}%`;
+    },
+    abort: downloadController?.signal,
+  })
+    .then((res) => {
+      if (cancelRequested.value) return;
 
-    if (cancelRequested.value) return;
+      // 响应数据可能是 ArrayBuffer（成功）或业务对象（失败兜底）
+      const buffer = res.data;
+      if (!(buffer instanceof ArrayBuffer)) {
+        downloadStatus.value = 'exception';
+        downloadText.value = '下载失败';
+        ElMessage.error(res.msg || '下载失败，请重试');
+        return;
+      }
 
-    // 响应数据可能是 ArrayBuffer（成功）或业务对象（失败兜底）
-    const buffer = res.data;
-    if (!(buffer instanceof ArrayBuffer)) {
+      // 完成
+      downloadProgress.value = 100;
+      downloadText.value = '100%';
+      downloadStatus.value = 'success';
+
+      // 处理 Blob 下载
+      const blob = new Blob([buffer], { type: 'application/zip' });
+      const fileName = buildDownloadFileName(ids);
+      getServiceFile(blob, fileName);
+      ElMessage.success('下载成功');
+    })
+    .catch(() => {
+      if (cancelRequested.value) return;
       downloadStatus.value = 'exception';
       downloadText.value = '下载失败';
-      ElMessage.error(res.msg || '下载失败，请重试');
-      return;
-    }
-
-    // 完成
-    downloadProgress.value = 100;
-    downloadText.value = '100%';
-    downloadStatus.value = 'success';
-
-    // 处理 Blob 下载
-    const blob = new Blob([buffer], { type: 'application/zip' });
-    const fileName = buildDownloadFileName(ids);
-    getServiceFile(blob, fileName);
-    ElMessage.success('下载成功');
-  } catch {
-    if (cancelRequested.value) return;
-    downloadStatus.value = 'exception';
-    downloadText.value = '下载失败';
-    ElMessage.error('下载失败，请重试');
-  } finally {
-    clearAllTimers();
-  }
+      ElMessage.error('下载失败，请重试');
+    })
+    .finally(() => {
+      clearAllTimers();
+    });
 }
 
 /** 单条下载 */
@@ -366,39 +367,49 @@ const syncDisabled = ref(false);
 const groupSyncConfigId = ref<string>('');
 
 /** 加载系统配置，根据 GROUP_SYNC 控制按钮可用性 */
-async function loadSystemConfig(): Promise<void> {
-  try {
-    const res = await getSystemConfig();
-    const list = (res.data ?? []) as Array<{ id: string; key: string; value: string }>;
-    const item = list.find((c) => c.key === 'GROUP_SYNC');
-    if (item) {
-      groupSyncConfigId.value = item.id;
-      syncDisabled.value = item.value !== '0';
-    } else {
+function loadSystemConfig(): Promise<void> {
+  return getSystemConfig()
+    .then((res) => {
+      const list = (res.data ?? []) as Array<{ id: string; key: string; value: string }>;
+      const item = list.find((c) => c.key === 'GROUP_SYNC');
+      if (item) {
+        groupSyncConfigId.value = item.id;
+        syncDisabled.value = item.value !== '0';
+      } else {
+        syncDisabled.value = true;
+      }
+    })
+    .catch(() => {
       syncDisabled.value = true;
-    }
-  } catch {
-    syncDisabled.value = true;
-  }
+    });
 }
 
 /** 执行同步群组 */
-async function handleSync(): Promise<void> {
-  try {
-    const res = await pullHistoryGroup({ sync: 1 });
-    if (res.code !== 0) {
-      ElMessage.error(res.msg || '同步失败');
-      return;
-    }
-    // 同步成功后更新系统配置
-    if (groupSyncConfigId.value) {
-      await setSystemConfig({ id: groupSyncConfigId.value, value: '1' });
-    }
-    syncDisabled.value = true;
-    ElMessage.info('数据同步中，请至后台日志查看同步结果');
-  } catch {
-    ElMessage.error('同步失败，请重试');
-  }
+function handleSync(): Promise<void> {
+  return pullHistoryGroup({ sync: 1 })
+    .then((res) => {
+      if (res.code !== 0) {
+        ElMessage.error(res.msg || '同步失败');
+        return;
+      }
+      const updateConfig = groupSyncConfigId.value
+        ? setSystemConfig({ id: groupSyncConfigId.value, value: '1' }).then((configRes) => {
+            if (configRes.code !== 0) {
+              ElMessage.error(configRes.msg || '同步配置更新失败');
+              return false;
+            }
+            return true;
+          })
+        : Promise.resolve(true);
+      return updateConfig.then((updated) => {
+        if (!updated) return;
+        syncDisabled.value = true;
+        ElMessage.info('数据同步中，请至后台日志查看同步结果');
+      });
+    })
+    .catch(() => {
+      ElMessage.error('同步失败，请重试');
+    });
 }
 
 /** 从 ProTable slot scope 中安全获取 ArchivedGroupItem */

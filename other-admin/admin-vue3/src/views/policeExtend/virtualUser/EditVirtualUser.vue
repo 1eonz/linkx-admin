@@ -16,7 +16,12 @@ import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
 import { computed, reactive, ref } from 'vue';
 
-import { addVirtualUser, updateVirtualUser, type VirtualUserItem } from '@/api/policeExtend/virtualUser';
+import {
+  addVirtualUser,
+  updateVirtualUser,
+  type VirtualUserForm,
+  type VirtualUserItem,
+} from '@/api/policeExtend/virtualUser';
 
 defineOptions({ name: 'EditVirtualUser' });
 
@@ -35,7 +40,7 @@ const isAdd = ref(true);
 const dialogLoading = ref(false);
 const formRef = ref<FormInstance>();
 
-const baseForm = (): Partial<VirtualUserItem> => ({
+const baseForm = (): VirtualUserForm => ({
   userName: '',
   contactNumber: '',
   appId: '',
@@ -45,7 +50,7 @@ const baseForm = (): Partial<VirtualUserItem> => ({
   createdBy: localStorage.getItem('back_user_id') ?? '',
 });
 
-const form = reactive<Partial<VirtualUserItem>>(baseForm());
+const form = reactive<VirtualUserForm>(baseForm());
 
 /** 用户名称校验：长度 1-100，禁止特殊字符 */
 function validateUserName(_rule: unknown, value: string, callback: (err?: Error) => void): void {
@@ -87,19 +92,24 @@ async function submitForm(): Promise<void> {
   const valid = await formRef.value?.validate().catch(() => false);
   if (!valid) return;
   dialogLoading.value = true;
-  try {
-    const isCreate = isAdd.value;
-    const result = isCreate ? await addVirtualUser(form as never) : await updateVirtualUser(form as never);
-    if (!result || result.code !== 0) {
-      ElMessage.error(result?.msg ?? `${isCreate ? '新增' : '编辑'}失败`);
-      return;
-    }
-    ElMessage.success(`${isCreate ? '添加' : '编辑'}成功`);
-    emit('success');
-    dialogVisible.value = false;
-  } finally {
-    dialogLoading.value = false;
-  }
+  const isCreate = isAdd.value;
+  const request = isCreate ? addVirtualUser(form) : updateVirtualUser(form);
+  return request
+    .then((result) => {
+      if (!result || result.code !== 0) {
+        ElMessage.error(result?.msg ?? `${isCreate ? '新增' : '编辑'}失败`);
+        return;
+      }
+      ElMessage.success(`${isCreate ? '添加' : '编辑'}成功`);
+      emit('success');
+      dialogVisible.value = false;
+    })
+    .catch(() => {
+      ElMessage.error(`${isCreate ? '新增' : '编辑'}失败，请重试`);
+    })
+    .finally(() => {
+      dialogLoading.value = false;
+    });
 }
 
 function resetForm(): void {

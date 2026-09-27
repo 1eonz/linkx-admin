@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>警务协同移动指挥后台管理系统 - 统一数字身份认证与安全接入网关</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#0060a9",
+            "primary-container": "#409eff",
+            "on-primary-container": "#003460",
+            "on-primary": "#ffffff",
+            "surface": "#f8f9ff",
+            "surface-bright": "#f8f9ff",
+            "surface-variant": "#e0e2e9",
+            "surface-container": "#ebeef4",
+            "surface-container-high": "#e6e8ef",
+            "surface-container-highest": "#e0e2e9",
+            "surface-container-low": "#f1f3fa",
+            "surface-container-lowest": "#ffffff",
+            "secondary": "#4f6076",
+            "secondary-container": "#d2e4ff",
+            "outline": "#707784",
+            "outline-variant": "#c0c7d4",
+            "on-surface": "#181c20",
+            "on-surface-variant": "#404752",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "tertiary": "#286c00"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "headline-sm": ["Inter", "sans-serif"],
+            "headline-md": ["Inter", "sans-serif"],
+            "headline-lg": ["Inter", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    /* 细腻公安夜幕战术网格背景与径向光晕 */
+    .bg-tactical-grid {
+      background-color: #080e1e;
+      background-image: 
+        radial-gradient(circle at 50% 18%, rgba(24, 76, 140, 0.45) 0%, transparent 60%),
+        radial-gradient(circle at 85% 75%, rgba(13, 38, 80, 0.35) 0%, transparent 50%),
+        linear-gradient(rgba(64, 158, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(64, 158, 255, 0.035) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+    }
+
+    /* 悬浮玻璃态面板 */
+    .glass-card {
+      background: rgba(13, 23, 44, 0.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(64, 158, 255, 0.22);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(32, 94, 168, 0.15);
+    }
+
+    /* 登录输入框聚焦 Element UI 科技蓝光环反馈 */
+    .tech-input {
+      background-color: rgba(9, 17, 34, 0.65);
+      border: 1px solid rgba(64, 158, 255, 0.25);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tech-input:focus {
+      border-color: #409EFF;
+      box-shadow: 0 0 0 3px rgba(64, 158, 255, 0.25);
+      background-color: rgba(9, 17, 34, 0.85);
+      outline: none;
+    }
+
+    /* 渐变警徽发光动画 */
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 0.85; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+    .pulse-badge {
+      animation: pulse-subtle 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="h-full bg-tactical-grid text-slate-100 flex flex-col justify-between select-none overflow-x-hidden font-body-md antialiased relative">
+<!-- 顶栏轻量状态栏：左侧公安内网专属标记，右侧语言与安全信道切换 -->
+<header class="w-full flex items-center justify-between px-6 sm:px-12 py-5 z-20">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center w-8 h-8 rounded bg-primary/20 border border-primary-container/30 text-primary-container shadow-[0_0_12px_rgba(64,158,255,0.3)]">
+<span class="material-symbols-outlined text-[19px]">security</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="text-xs font-semibold tracking-wider text-slate-100">公安内网受控专网</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1 animate-pulse"></span>国密通道 SM4
+          </span>
+</div>
+<span class="text-[11px] text-slate-400 font-mono tracking-tight">LinkX 智慧警务协同平台 · 节点节点机房 04-A</span>
+</div>
+</div>
+<!-- 语言与辅助切换 -->
+<div class="relative group">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-medium text-slate-300 bg-slate-900/60 hover:bg-slate-800/80 border border-slate-700/60 hover:border-primary-container/40 transition-colors backdrop-blur-sm" type="button">
+<span class="material-symbols-outlined text-sm text-primary-container">language</span>
+<span>简体中文</span>
+<span class="material-symbols-outlined text-xs">arrow_drop_down</span>
+</button>
+<!-- 下拉菜单 -->
+<div class="absolute right-0 mt-1.5 w-32 py-1.5 bg-slate-900/95 border border-slate-700/70 rounded shadow-2xl backdrop-blur-md hidden group-hover:block transition-all z-30">
+<a class="flex items-center px-3 py-1.5 text-xs text-primary-container bg-primary-container/10 font-medium" href="javascript:void(0)">简体中文 (默认)</a>
+<a class="flex items-center px-3 py-1.5 text-xs text-slate-300 hover:bg-slate-800 transition" href="javascript:void(0)">English</a>
+<a class="flex items-center px-3 py-1.5 text-xs text-slate-300 hover:bg-slate-800 transition" href="javascript:void(0)">繁體中文</a>
+</div>
+</div>
+</header>
+<!-- 居中高保真悬浮指挥中心登录卡片 -->
+<main class="w-full flex-1 flex items-center justify-center px-4 py-8 relative z-10">
+<div class="w-full max-w-[460px] glass-card rounded-2xl p-8 sm:p-10 relative overflow-hidden transition-all duration-300">
+<!-- 顶部科技微光修饰线条 -->
+<div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary-container to-transparent opacity-80"></div>
+<!-- 徽标与系统标题头部区 -->
+<div class="flex flex-col items-center text-center mb-8">
+<!-- 公安科技立体徽盾标识 -->
+<div class="relative mb-4 pulse-badge flex items-center justify-center">
+<div class="absolute inset-0 bg-primary-container/20 rounded-full blur-xl scale-125"></div>
+<svg class="relative w-16 h-16 drop-shadow-[0_4px_16px_rgba(64,158,255,0.45)]" fill="none" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="shieldGrad" x1="8" x2="56" y1="4" y2="60">
+<stop offset="0%" stop-color="#409eff"></stop>
+<stop offset="50%" stop-color="#0060a9"></stop>
+<stop offset="100%" stop-color="#0c2340"></stop>
+</lineargradient>
+<lineargradient gradientunits="userSpaceOnUse" id="accentGrad" x1="16" x2="48" y1="12" y2="44">
+<stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#409eff" stop-opacity="0.2"></stop>
+</lineargradient>
+</defs>
+<!-- 盾形外轮廓 -->
+<path d="M32 4L11 12V28.5C11 43.2 20 54.8 32 60C44 54.8 53 43.2 53 28.5V12L32 4Z" fill="url(#shieldGrad)" stroke="#67b2ff" stroke-linejoin="round" stroke-width="1.5"></path>
+<!-- 内层科技五角光辉与安全云节点 -->
+<path d="M32 10L15 16.5V28C15 39.8 22.3 49.3 32 53.6C41.7 49.3 49 39.8 49 28V16.5L32 10Z" fill="#081427" fill-opacity="0.6" stroke="url(#accentGrad)" stroke-width="1"></path>
+<!-- 警务长城垛与立体星光 -->
+<path d="M25 24H39V29H36V34H28V29H25V24Z" fill="#409eff" fill-opacity="0.9"></path>
+<polygon fill="#ffd700" points="32,18 34,22 38,22.5 35,25.5 36,29.5 32,27 28,29.5 29,25.5 26,22.5 30,22"></polygon>
+<!-- 云端协同数据弧线 -->
+<circle cx="32" cy="42" fill="#409eff" r="3.5"></circle>
+<path d="M22 42C22 36.477 26.477 32 32 32" stroke="#409eff" stroke-dasharray="2 2" stroke-linecap="round" stroke-width="1.8"></path>
+<path d="M42 42C42 36.477 37.523 32 32 32" stroke="#67b2ff" stroke-linecap="round" stroke-width="1.8"></path>
+</svg>
+</div>
+<h1 class="text-xl sm:text-[22px] font-bold text-slate-50 tracking-wide leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+          警务协同移动指挥后台管理系统
+        </h1>
+<p class="text-[12px] font-mono tracking-wider text-slate-400 mt-1 uppercase">
+          LinkX Mobile Command &amp; Operations Management System
+        </p>
+<div class="mt-2.5 inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-slate-800/80 border border-slate-700/60 text-[11px] text-slate-300">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+          统一数字身份认证与安全接入网关
+        </div>
+</div>
+<!-- 表单主体区 -->
+<form class="space-y-4" onsubmit="event.preventDefault();">
+<!-- 用户名 / 警号输入框 -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between text-xs">
+<label class="font-medium text-slate-300 flex items-center gap-1" for="username">
+              用户 / 账号 <span class="text-primary-container font-mono">*</span>
+</label>
+<span class="text-[11px] text-slate-400">支持警号 / 身份证号</span>
+</div>
+<div class="relative flex items-center rounded-md">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+<span class="material-symbols-outlined text-[19px]">badge</span>
+</div>
+<input autocomplete="username" class="tech-input block w-full pl-10 pr-4 h-11 text-sm text-slate-100 placeholder:text-slate-500 rounded-md focus:outline-none" id="username" name="username" placeholder="请输入警员警号或内网域账号" required="" type="text" value="admin"/>
+</div>
+</div>
+<!-- 密码输入框 -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between text-xs">
+<label class="font-medium text-slate-300 flex items-center gap-1" for="password">
+              密 码 <span class="text-primary-container font-mono">*</span>
+</label>
+<span class="text-[11px] text-slate-400">数字证书口令 / 动态密保</span>
+</div>
+<div class="relative flex items-center rounded-md">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+<span class="material-symbols-outlined text-[19px]">lock</span>
+</div>
+<input autocomplete="current-password" class="tech-input block w-full pl-10 pr-11 h-11 text-sm text-slate-100 placeholder:text-slate-500 rounded-md focus:outline-none" id="password" name="password" placeholder="请输入身份验证密码" required="" type="password" value="12345678"/>
+<button class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-200 focus:outline-none cursor-pointer" id="toggle-pwd-btn" title="切换密码可见性" type="button">
+<span class="material-symbols-outlined text-[20px]" id="pwd-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- 辅助操作行 -->
+<div class="flex items-center justify-between pt-1">
+<label class="flex items-center gap-2 cursor-pointer text-xs text-slate-300 hover:text-slate-100 transition-colors">
+<input checked="" class="w-4 h-4 rounded border-slate-600 bg-slate-900/80 text-[#409EFF] focus:ring-0 focus:ring-offset-0 transition cursor-pointer" type="checkbox"/>
+<span>记住账号 / 保持本次安全会话</span>
+</label>
+<a class="text-xs text-primary-container hover:text-blue-400 transition-colors" href="javascript:void(0)">
+            忘记密码 / 验证协助
+          </a>
+</div>
+<!-- 登录动作主按钮 -->
+<div class="pt-2">
+<button class="group w-full h-[46px] relative overflow-hidden rounded-md text-white font-medium text-base tracking-wider shadow-[0_4px_16px_rgba(64,158,255,0.35)] transition-all duration-200 hover:shadow-[0_6px_22px_rgba(64,158,255,0.55)] hover:-translate-y-0.5 active:translate-y-0" style="background: linear-gradient(135deg, #409EFF 0%, #2b85e4 100%);" type="submit">
+<div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-0.5">login</span>
+<span>安 全 登 录 接 入</span>
+</div>
+</button>
+</div>
+</form>
+<!-- 快速多要素验证辅助接入标识 -->
+<div class="mt-6 pt-5 border-t border-slate-700/50 flex items-center justify-between text-[11px] text-slate-400">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-emerald-400">verified_user</span>
+<span>硬件密码机联机</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-primary-container">usb</span>
+<span>支持 U-Key 硬件盾</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-slate-300">fingerprint</span>
+<span>生物特征识别</span>
+</div>
+</div>
+</div>
+</main>
+<!-- 规范页脚：内网管控水印及版权备案 -->
+<footer class="w-full py-4 text-center text-slate-500 text-xs space-y-1 z-10 px-4">
+<div class="flex items-center justify-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm text-slate-400">gavel</span>
+<span>公安内网受控安全运维系统 · 请妥善保管您的登录凭据与身份令牌，违规操作将被全程审计留痕</span>
+</div>
+<p class="text-[11px] font-mono text-slate-400 tracking-normal">
+      Copyright © 2026 Public Security Command &amp; Operations Department. All Rights Reserved.
+    </p>
+</footer>
+<!-- 极简轻量交互：密码明暗文切换 -->
+<script>
+    const pwdInput = document.getElementById('password');
+    const toggleBtn = document.getElementById('toggle-pwd-btn');
+    const pwdIcon = document.getElementById('pwd-icon');
+
+    toggleBtn.addEventListener('click', function () {
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        pwdIcon.textContent = 'visibility_off';
+      } else {
+        pwdInput.type = 'password';
+        pwdIcon.textContent = 'visibility';
+      }
+    });
+  </script>
+</body></html>

@@ -22,17 +22,11 @@ watch(
   },
 );
 
-// 拼接错误信息为 "第X行错误1，错误2<br/>"
-function formatErrorHtml(errorData: Record<string, string[]>): string {
-  let errorText = '';
-  for (const lineNum in errorData) {
-    if (Object.prototype.hasOwnProperty.call(errorData, lineNum)) {
-      const errArr = errorData[lineNum];
-      const errMsgStr = errArr.join('，');
-      errorText += `第${lineNum}行${errMsgStr}<br/>`;
-    }
-  }
-  return errorText;
+// 服务端错误作为纯文本渲染，避免导入错误内容被解释为 HTML。
+function formatErrorText(errorData: Record<string, string[]>): string {
+  return Object.entries(errorData)
+    .map(([lineNum, messages]) => `第${lineNum}行${messages.join('，')}`)
+    .join('\n');
 }
 
 function closeDialog(): void {
@@ -52,7 +46,7 @@ defineExpose({ visible });
     align-center
     @close="closeDialog"
   >
-    <div class="import-error-content" v-html="formatErrorHtml(errorMap)" />
+    <div class="import-error-content">{{ formatErrorText(errorMap) }}</div>
     <template #footer>
       <el-button type="primary" @click="closeDialog">{{ t('determine') }}</el-button>
     </template>
@@ -70,5 +64,6 @@ defineExpose({ visible });
   overflow-y: auto;
   line-height: @line-height-loose;
   color: @color-danger;
+  white-space: pre-line;
 }
 </style>

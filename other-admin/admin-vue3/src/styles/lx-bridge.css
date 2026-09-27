@@ -1,0 +1,60 @@
+/* 保留业务布局尺寸，统一公共展示组件和原生 Element Plus 的视觉令牌。 */
+:root {
+  --lx-navbar-height: 60px;
+}
+
+body {
+  color: var(--lx-text-regular);
+  background: var(--lx-bg-page);
+  font-family: var(--lx-font-family);
+}
+
+.app-container {
+  min-width: 0;
+}
+
+.lx-navbar {
+  border-color: var(--navbar-border-color);
+  background: var(--navbar-background);
+  color: var(--navbar-foreground);
+}
+
+.lx-navbar__user-copy strong {
+  color: var(--navbar-foreground-active);
+}
+
+.lx-navbar__icon-button,
+.lx-navbar__user {
+  color: var(--navbar-foreground);
+}
+
+.el-dialog {
+  max-width: calc(100vw - 32px);
+}
+
+.el-dialog__body {
+  overflow-wrap: anywhere;
+}
+
+.el-table {
+  --el-table-header-bg-color: var(--lx-bg-table-header);
+  --el-table-header-text-color: var(--lx-text-primary);
+  --el-table-border-color: var(--lx-border-light);
+  --el-table-row-hover-bg-color: var(--lx-bg-card-hover);
+}
+
+:where(button, a, [role='button']):focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .pagination-wrapper {
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .el-form-item__content {
+    min-width: 0;
+  }
+}

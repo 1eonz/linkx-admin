@@ -7,6 +7,7 @@ import { ElMessage, ElMessageBox } from 'element-plus';
 import { ref, computed, nextTick, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import type { BinaryApiResponse } from '#/axios';
 import DutyCalendar from './components/DutyCalendar.vue';
 import DutySearchBar from './components/DutySearchBar.vue';
 import ImportResultDialog from './components/ImportResultDialog.vue';
@@ -15,6 +16,8 @@ import {
   getScheduleCalendar,
   getSchedulePage,
   delBatchSchedule,
+  type ScheduleCalendarQuery,
+  type ScheduleListQuery,
   type ScheduleItem,
   type ImportResultData,
 } from '@/api/shiftScheduling';
@@ -38,6 +41,8 @@ const multipleSelection = ref<string[]>([]);
 
 // 日历数据：{ 'YYYY-MM-DD': ScheduleItem[] }
 const calendarList = ref<Record<string, ScheduleItem[]> | null>(null);
+const calendarLoading = ref(false);
+let calendarRequestVersion = 0;
 
 // 视图模式：calendar/list，默认 list
 const showType = ref<'calendar' | 'list'>('list');
@@ -45,7 +50,6 @@ const showType = ref<'calendar' | 'list'>('list');
 // 组件 ref
 const searchbarRef = ref<InstanceType<typeof DutySearchBar>>();
 const calendarRef = ref<InstanceType<typeof DutyCalendar>>();
-const importDialogRef = ref<InstanceType<typeof ImportResultDialog>>();
 const tableRef = ref<InstanceType<typeof ProTable>>();
 
 // 导入失败明细（传给 ImportResultDialog）
@@ -93,7 +97,7 @@ function formatTimeRemoveSeconds(timeStr?: string): string {
 async function fetchSchedulePageApi(params: Record<string, unknown>): Promise<unknown> {
   const query = searchbarRef.value?.getQuery() ?? { userId: '', userName: '', type: '', date: [] as string[] };
   const [startDate, endDate] = query.date ?? [];
-  return getSchedulePage({
+  const request: ScheduleListQuery = {
     startDate,
     endDate,
     userId: query.userId,
@@ -101,7 +105,8 @@ async function fetchSchedulePageApi(params: Record<string, unknown>): Promise<un
     dutyType: query.type,
     pageNum: Number(params.pageNum ?? 1),
     pageSize: Number(params.pageSize ?? 10),
-  } as never);
+  };
+  return getSchedulePage(request);
 }
 
 // ===== ProTable @response 回调 =====
@@ -111,27 +116,39 @@ function handleResponse(res: unknown): void {
 }
 
 // 日历模式：独立请求逻辑（list 模式由 ProTable 接管）
-async function fetchCalendarData(): Promise<void> {
-  try {
-    const query = searchbarRef.value?.getQuery() ?? { userId: '', userName: '', type: '', date: [] as string[] };
-    const [startDate, endDate] = query.date ?? [];
-    const params: Record<string, unknown> = {
-      startDate,
-      endDate,
-      userId: query.userId,
-      userName: query.userName,
-      dutyType: query.type,
-    };
-    const searchObj = calendarRef.value?.getSearchObj();
-    if (searchObj) {
-      params.month = `${searchObj.year}-${String(searchObj.month).padStart(2, '0')}`;
-    }
-    const res = await getScheduleCalendar(params as never);
-    // calendar 模式 res.data 是 { 'YYYY-MM-DD': ScheduleItem[] }
-    calendarList.value = (res as unknown as { data: Record<string, ScheduleItem[]> | null })?.data ?? null;
-  } catch {
-    // 忽略
-  }
+function fetchCalendarData(): Promise<void> {
+  const query = searchbarRef.value?.getQuery() ?? { userId: '', userName: '', type: '', date: [] as string[] };
+  const searchObj = calendarRef.value?.getSearchObj();
+  if (!searchObj) return Promise.resolve();
+  const requestVersion = ++calendarRequestVersion;
+  const request: ScheduleCalendarQuery = {
+    startDate: query.date?.[0],
+    endDate: query.date?.[1],
+    userId: query.userId,
+    userName: query.userName,
+    dutyType: query.type,
+    month: `${searchObj.year}-${String(searchObj.month).padStart(2, '0')}`,
+  };
+  calendarLoading.value = true;
+  return getScheduleCalendar(request)
+    .then((res) => {
+      if (requestVersion !== calendarRequestVersion) return;
+      if (res.code !== 0) {
+        calendarList.value = null;
+        ElMessage.error(res.msg || '日历数据加载失败，请重试');
+        return;
+      }
+      // calendar 模式 res.data 是 { 'YYYY-MM-DD': ScheduleItem[] }
+      calendarList.value = res.data ?? null;
+    })
+    .catch(() => {
+      if (requestVersion !== calendarRequestVersion) return;
+      calendarList.value = null;
+      ElMessage.error('日历数据加载失败，请重试');
+    })
+    .finally(() => {
+      if (requestVersion === calendarRequestVersion) calendarLoading.value = false;
+    });
 }
 
 // 搜索
@@ -184,11 +201,11 @@ function handleDelete(row?: ScheduleItem): void {
     .then(() => {
       delBatchSchedule(ids)
         .then((result) => {
-          if (result.code === 0) {
-            ElMessage.success(`${row ? '' : '批量'}删除成功`);
-          } else {
+          if (result.code !== 0) {
             ElMessage.error(result.msg || '');
+            return;
           }
+          ElMessage.success(`${row ? '' : '批量'}删除成功`);
           // 刷新当前视图
           if (showType.value === 'calendar') {
             fetchCalendarData();
@@ -196,39 +213,45 @@ function handleDelete(row?: ScheduleItem): void {
             tableRef.value?.refresh();
           }
         })
-        .catch(() => {});
+        .catch((error: unknown) => {
+          ElMessage.error(error instanceof Error ? error.message : '删除失败，请重试');
+        });
     })
-    .catch(() => {});
+    .catch((error: unknown) => {
+      if (error !== 'cancel' && error !== 'close') {
+        ElMessage.error(error instanceof Error ? error.message : '删除失败，请重试');
+      }
+    });
 }
 
 // 模板下载：GET blob → 解析文件名 → 下载
-async function handleExport(): Promise<void> {
-  try {
-    const res = await exportDutyInformationTemplate();
-    const data = (res as unknown as { data: ArrayBuffer })?.data;
-    const headers = (res as unknown as { headers: Record<string, string> })?.headers;
-    if (!data) return;
-    const fileName = getExportFileName(headers);
-    const blob = new Blob([data], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+function handleExport(): Promise<void> {
+  return exportDutyInformationTemplate()
+    .then(({ data, headers }) => {
+      if (!data) return;
+      const fileName = getExportFileName(headers);
+      const blob = new Blob([data], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.style.display = 'none';
+      link.href = url;
+      link.setAttribute('download', fileName);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    })
+    .catch(() => {
+      ElMessage.error('模板下载失败，请重试');
     });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.style.display = 'none';
-    link.href = url;
-    link.setAttribute('download', fileName);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
-  } catch (error) {
-    console.log(error);
-  }
 }
 
 // 从 Content-Disposition 解析文件名
-function getExportFileName(headers?: Record<string, string>): string {
-  const contentDisposition = headers?.['content-disposition'] || '';
+function getExportFileName(headers?: BinaryApiResponse<ArrayBuffer>['headers']): string {
+  const headerValue = headers?.['content-disposition'];
+  const contentDisposition = typeof headerValue === 'string' ? headerValue : '';
   if (!contentDisposition) return '值班信息.xlsx';
   const reg = /filename\*=\s*utf-8''([^;]+)|filename="?([^;"]+)"?/i;
   const match = contentDisposition.match(reg);
@@ -264,8 +287,12 @@ function handleNextMonth(): void {
 // 视图切换：变化时重新拉取对应视图数据
 watch(showType, (newType) => {
   if (newType === 'calendar') {
-    fetchCalendarData();
+    nextTick(() => {
+      fetchCalendarData();
+    });
   } else {
+    calendarRequestVersion += 1;
+    calendarLoading.value = false;
     // list 模式：切回时刷新一次
     // 注意：calendar→list 切换时 ProTable 由 v-if 重新渲染，需 nextTick 等挂载完成
     nextTick(() => {
@@ -304,11 +331,15 @@ onMounted(() => {
       <div class="view-toolbar">
         <div class="month-nav no-select">
           <template v-if="showType === 'calendar' && calendarRef">
-            <el-icon class="arrow-icon" @click="calendarRef.goPrevMonth()"><ArrowLeft /></el-icon>
+            <el-button text circle class="arrow-icon" aria-label="上一月" @click="calendarRef.goPrevMonth()">
+              <el-icon><ArrowLeft /></el-icon>
+            </el-button>
             <span class="month-text">
               {{ calendarRef.getSearchObj().year }}年{{ String(calendarRef.getSearchObj().month).padStart(2, '0') }}月
             </span>
-            <el-icon class="arrow-icon" @click="calendarRef.goNextMonth()"><ArrowRight /></el-icon>
+            <el-button text circle class="arrow-icon" aria-label="下一月" @click="calendarRef.goNextMonth()">
+              <el-icon><ArrowRight /></el-icon>
+            </el-button>
           </template>
         </div>
         <!-- 视图切换：使用 el-radio-group button 样式，与 large 主题一致 -->
@@ -329,6 +360,7 @@ onMounted(() => {
         v-if="showType === 'calendar'"
         ref="calendarRef"
         :calendar-list="calendarList"
+        :loading="calendarLoading"
         :duty-type-filter="searchbarRef?.getQuery()?.type ?? ''"
         @prev-month="handlePrevMonth"
         @next-month="handleNextMonth"
@@ -382,7 +414,7 @@ onMounted(() => {
       </ProTable>
 
       <!-- 导入失败明细弹窗 -->
-      <ImportResultDialog ref="importDialogRef" :error-map="importErrorMap" />
+      <ImportResultDialog :error-map="importErrorMap" />
     </el-card>
   </div>
 </template>
@@ -408,7 +440,6 @@ onMounted(() => {
   min-height: 24px;
 
   .arrow-icon {
-    cursor: pointer;
     font-size: @font-size-xl;
     color: @color-text-regular;
     transition: color @transition-duration;

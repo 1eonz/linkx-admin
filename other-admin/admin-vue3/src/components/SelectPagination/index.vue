@@ -110,50 +110,54 @@ function handleItem(item: Record<string, unknown>): Record<string, unknown> {
 }
 
 /** 加载数据 */
-async function loadData(reset = false): Promise<void> {
-  if (loading.value) return;
+function loadData(reset = false): Promise<void> {
+  if (loading.value) return Promise.resolve();
   if (reset) {
     pageNum.value = 1;
     dataList.value = [];
   }
   loading.value = true;
-  try {
-    const params = {
-      ...props.initParams,
-      pageNum: pageNum.value,
-      pageSize: props.pageSize,
-      keywords: keywords.value,
-    };
-    const res = (await props.api(params)) as
-      { data?: { records?: unknown[]; total?: number } } | { records?: unknown[]; total?: number };
-    const data = res as Record<string, unknown>;
-    const innerData = data.data as { records?: unknown[]; total?: number } | undefined;
-    const records = (innerData?.records ?? data.records ?? []) as Record<string, unknown>[];
-    const totalCount = Number(innerData?.total ?? data.total ?? 0);
+  const params = {
+    ...props.initParams,
+    pageNum: pageNum.value,
+    pageSize: props.pageSize,
+    keywords: keywords.value,
+  };
+  return props
+    .api(params)
+    .then((response) => {
+      const res = response as
+        { data?: { records?: unknown[]; total?: number } } | { records?: unknown[]; total?: number };
+      const data = res as Record<string, unknown>;
+      const innerData = data.data as { records?: unknown[]; total?: number } | undefined;
+      const records = (innerData?.records ?? data.records ?? []) as Record<string, unknown>[];
+      const totalCount = Number(innerData?.total ?? data.total ?? 0);
 
-    const mapped = records.map(handleItem);
-    if (reset) {
-      dataList.value = mapped;
-    } else {
-      dataList.value = [...dataList.value, ...mapped];
-    }
-    total.value = totalCount;
-
-    // 维护 targetMap
-    mapped.forEach((item) => {
-      const key = String(item[props.bindField] ?? item[props.itemKey] ?? '');
-      if (key) {
-        targetMap.value[key] = {
-          name: String(item[props.showField] ?? ''),
-          idCard: item.idCard as string | undefined,
-        };
+      const mapped = records.map(handleItem);
+      if (reset) {
+        dataList.value = mapped;
+      } else {
+        dataList.value = [...dataList.value, ...mapped];
       }
+      total.value = totalCount;
+
+      // 维护 targetMap
+      mapped.forEach((item) => {
+        const key = String(item[props.bindField] ?? item[props.itemKey] ?? '');
+        if (key) {
+          targetMap.value[key] = {
+            name: String(item[props.showField] ?? ''),
+            idCard: item.idCard as string | undefined,
+          };
+        }
+      });
+    })
+    .catch(() => {
+      // 保留已有选项，搜索或重新展开可再次加载。
+    })
+    .finally(() => {
+      loading.value = false;
     });
-  } catch {
-    // 忽略
-  } finally {
-    loading.value = false;
-  }
 }
 
 /** 滚动加载更多 */

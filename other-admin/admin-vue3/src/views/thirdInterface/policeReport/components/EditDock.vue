@@ -148,20 +148,25 @@ async function handleSubmit(): Promise<void> {
     return;
   }
   submitLoading.value = true;
-  try {
-    const isCreate = formType.value === 'create';
-    const payload = { ...formData };
-    const res = isCreate ? await saveDock(payload) : await updateDock(payload);
-    if (res.code === 0) {
-      ElMessage.success(isCreate ? '新增成功' : '修改成功');
-      dialogVisible.value = false;
-      emit('success');
-    } else {
-      ElMessage.error(res.msg ?? (isCreate ? '新增失败' : '修改失败'));
-    }
-  } finally {
-    submitLoading.value = false;
-  }
+  const isCreate = formType.value === 'create';
+  const payload = { ...formData };
+  const request = isCreate ? saveDock(payload) : updateDock(payload);
+  return request
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(isCreate ? '新增成功' : '修改成功');
+        dialogVisible.value = false;
+        emit('success');
+      } else {
+        ElMessage.error(res.msg ?? (isCreate ? '新增失败' : '修改失败'));
+      }
+    })
+    .catch(() => {
+      ElMessage.error(isCreate ? '新增失败' : '修改失败');
+    })
+    .finally(() => {
+      submitLoading.value = false;
+    });
 }
 
 /** 弹窗打开后清除校验状态 */

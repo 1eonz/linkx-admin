@@ -51,7 +51,7 @@
  * Methods（defineExpose 暴露的方法）:
  * - 无
  */
-import { Search, Refresh } from '@element-plus/icons-vue';
+import { LxIcon, LxSearchBar } from 'lx-ui';
 import { computed, useSlots } from 'vue';
 import type { Component } from 'vue';
 
@@ -108,38 +108,49 @@ function handleAction(action: ActionItem): void {
 </script>
 
 <template>
-  <div class="search-bar">
-    <div class="search-bar__left">
-      <!-- 自定义筛选字段插槽（优先级高于默认 searchKey 输入框） -->
-      <slot name="filters" />
-      <template v-if="!hasFiltersSlot">
-        <el-input
-          :model-value="searchKey"
-          :placeholder="placeholder"
-          class="search-bar__item search-bar__input"
-          :prefix-icon="Search"
-          clearable
-          @keyup.enter="handleSearch"
-          @update:model-value="(v) => emit('update:searchKey', v as string)"
-        />
-      </template>
-      <el-button class="search-bar__item" type="primary" :icon="Search" @click="handleSearch">搜索</el-button>
-      <el-button class="search-bar__item" :icon="Refresh" @click="handleReset">重置</el-button>
-    </div>
-    <div class="search-bar__right">
-      <el-button
-        v-for="(action, index) in visibleActions"
-        :key="index"
-        class="search-bar__item"
-        :type="action.type || 'default'"
-        :icon="action.icon"
-        :disabled="action.disabled"
-        @click="handleAction(action)"
-      >
-        {{ action.label }}
-      </el-button>
-    </div>
-  </div>
+  <LxSearchBar class="search-bar" :collapsible="false">
+    <template #filters>
+      <div class="search-bar__left">
+        <!-- 自定义筛选字段插槽优先于默认关键字输入框。 -->
+        <slot name="filters" />
+        <template v-if="!hasFiltersSlot">
+          <el-input
+            :model-value="searchKey"
+            :placeholder="placeholder"
+            class="search-bar__item search-bar__input"
+            clearable
+            @keyup.enter="handleSearch"
+            @update:model-value="(value) => emit('update:searchKey', String(value ?? ''))"
+          >
+            <template #prefix><LxIcon name="search" :size="16" /></template>
+          </el-input>
+        </template>
+      </div>
+    </template>
+    <!-- 使用自有控件保留原重置仅触发 reset 的行为。 -->
+    <template #controls>
+      <div class="search-bar__left">
+        <el-button class="search-bar__item" type="primary" @click="handleSearch">
+          <LxIcon name="search" :size="16" />搜索
+        </el-button>
+        <el-button class="search-bar__item" @click="handleReset"><LxIcon name="refresh" :size="16" />重置</el-button>
+      </div>
+      <!-- LxSearchBar 的 controls 插槽会覆盖默认 actions 插槽，操作按钮必须在此处追加。 -->
+      <div class="search-bar__right">
+        <el-button
+          v-for="(action, index) in visibleActions"
+          :key="index"
+          class="search-bar__item"
+          :type="action.type || 'default'"
+          :icon="action.icon"
+          :disabled="action.disabled"
+          @click="handleAction(action)"
+        >
+          {{ action.label }}
+        </el-button>
+      </div>
+    </template>
+  </LxSearchBar>
 </template>
 
 <style lang="less" scoped>
@@ -152,6 +163,16 @@ function handleAction(action: ActionItem): void {
   padding-bottom: @spacing-md;
   margin-bottom: @spacing-xs;
   border-bottom: 1px solid @color-border-light;
+
+  :deep(.lx-search-bar__grid) {
+    display: block;
+    flex: 1;
+    min-width: 0;
+  }
+
+  :deep(.lx-search-bar__footer) {
+    margin-left: auto;
+  }
 
   &__left,
   &__right {

@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary-fixed-variant":"#1d5200","surface-dim":"#d7dae0","inverse-primary":"#a2c9ff","primary-fixed":"#d3e4ff","tertiary-fixed-dim":"#80dd52","on-error":"#ffffff","surface-container-high":"#e6e8ef","secondary-container":"#d2e4ff","on-primary-fixed":"#001c38","tertiary":"#286c00","on-secondary":"#ffffff","on-tertiary":"#ffffff","inverse-on-surface":"#eef1f7","surface-tint":"#0060a9","surface-container-lowest":"#ffffff","surface-bright":"#f8f9ff","secondary-fixed-dim":"#b6c8e2","on-tertiary-container":"#133b00","on-primary-container":"#003460","on-tertiary-fixed":"#072100","on-error-container":"#93000a","on-surface-variant":"#404752","on-secondary-container":"#55667c","surface":"#f8f9ff","on-secondary-fixed-variant":"#37485d","primary-fixed-dim":"#a2c9ff","inverse-surface":"#2d3136","error-container":"#ffdad6","background":"#f8f9ff","on-background":"#181c20","on-primary":"#ffffff","outline-variant":"#c0c7d4","on-surface":"#181c20","surface-variant":"#e0e2e9","on-secondary-fixed":"#0a1c30","error":"#ba1a1a","primary":"#0060a9","secondary-fixed":"#d2e4ff","on-primary-fixed-variant":"#004881","surface-container":"#ebeef4","surface-container-low":"#f1f3fa","primary-container":"#409eff","secondary":"#4f6076","outline":"#707784","tertiary-container":"#55af28","surface-container-highest":"#e0e2e9","tertiary-fixed":"#9bfa6b"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"gutter":"16px","margin":"20px","space-xl":"24px","space-md":"12px","space-lg":"16px","space-sm":"8px","space-xs":"4px"},"fontFamily":{"body-lg":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"headline-md":["Inter"],"label-lg":["Inter"],"headline-lg":["Inter"],"display-lg":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"body-md":["Inter"]},"fontSize":{"body-lg":["14px",{"lineHeight":"22px","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"500"}],"headline-md":["16px",{"lineHeight":"24px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-lg":["20px",{"lineHeight":"28px","fontWeight":"600"}],"display-lg":["28px",{"lineHeight":"36px","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-sm":["14px",{"lineHeight":"22px","fontWeight":"600"}],"body-md":["13px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">local_police</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">LinkX PoliceOS</span><span class="font-label-sm text-label-sm text-on-surface-variant">GB/T 33170-2016</span></div></div><div class="px-space-md py-space-sm"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Command Ops</span></div><nav class="flex flex-col gap-space-xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-headline-sm rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="command-overview" href="#"><span class="material-symbols-outlined text-[18px]">dashboard</span><span>Command Overview</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="incident-dispatch" href="#"><span class="material-symbols-outlined text-[18px]">emergency</span><span>Incident Dispatch</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="asset-surveillance" href="#"><span class="material-symbols-outlined text-[18px]">videocam</span><span>Surveillance Grid</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="patrol-units" href="#"><span class="material-symbols-outlined text-[18px]">minor_crash</span><span>Patrol Units &amp; GPS</span></a></nav><div class="px-space-md pt-space-lg pb-space-sm"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Standard &amp; Audit</span></div><nav class="flex flex-col gap-space-xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-headline-sm rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="case-dossier" href="#"><span class="material-symbols-outlined text-[18px]">folder_shared</span><span>Case Records &amp; Dossier</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="system-telemetry" href="#"><span class="material-symbols-outlined text-[18px]">tune</span><span>Visual Token Inspector</span></a></nav></div><div class="p-space-md bg-surface-container m-space-md rounded-lg flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-outline uppercase">Secure Uplink</span><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span></div><span class="font-body-sm text-body-sm text-on-surface font-mono">CN-PS-NET::SECURE</span></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="px-space-sm py-0.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-mono">STANDARD: GB/T 33170</span><span class="px-space-sm py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">REV 4.2</span></div><div class="hidden lg:flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md"><span class="material-symbols-outlined text-[16px] text-tertiary">verified</span><span>GovOps Certified</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1 rounded-lg"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">search</span><input class="bg-transparent border-none outline-none font-body-sm text-body-sm text-on-surface placeholder:text-outline w-64" placeholder="Search unit ID, plate, incident code..." type="text"/></div><button class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">settings</span></button><div class="h-6 w-px bg-outline-variant"></div><div class="flex items-center gap-space-sm"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface font-medium leading-none">Commander Z. Chen</span><span class="font-label-sm text-label-sm text-on-surface-variant">ID: PS-880491</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Specimen Command Strip -->
+<div class="px-margin pt-space-lg pb-space-md bg-surface-container-low flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="px-space-sm py-0.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-mono tracking-wider uppercase">GB/T 33170 COMPLIANT</span>
+<span class="px-space-sm py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-mono">SPECIMEN REGISTRY v2.4.0</span>
+<span class="inline-flex items-center gap-1 text-tertiary font-label-sm text-label-sm font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+            29/29 TOKENS LOCKED
+          </span>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<h1 class="font-display-lg text-display-lg text-on-surface font-semibold tracking-tight">LxIcon 29枚矢量线性图标集规范标本</h1>
+<span class="font-label-md text-label-md text-on-surface-variant font-mono">公安指挥调度通信系统通用规范</span>
+</div>
+</div>
+<!-- Global Specimen Controllers -->
+<div class="flex items-center gap-space-md flex-wrap">
+<!-- Palette Switcher -->
+<div class="flex items-center gap-space-xs bg-surface-container-lowest p-1 rounded-lg shadow-sm">
+<span class="font-label-sm text-label-sm text-outline px-space-xs">TONE</span>
+<button class="w-6 h-6 rounded flex items-center justify-center bg-surface-container-high text-on-surface-variant ring-2 ring-primary ring-offset-1 transition-all" id="color-slate" onclick="setTone('text-on-surface-variant', this)" title="Default Slate">
+<span class="w-3 h-3 rounded-full bg-[#404752]"></span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center bg-surface-container-high text-on-surface-variant transition-all" id="color-blue" onclick="setTone('text-primary', this)" title="Dedicated Police Blue (#0060a9)">
+<span class="w-3 h-3 rounded-full bg-[#0060a9]"></span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center bg-surface-container-high text-on-surface-variant transition-all" id="color-green" onclick="setTone('text-tertiary-container', this)" title="Patrol Normal Green (#55af28)">
+<span class="w-3 h-3 rounded-full bg-[#55af28]"></span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center bg-surface-container-high text-on-surface-variant transition-all" id="color-red" onclick="setTone('text-error', this)" title="High Threat Alert (#ba1a1a)">
+<span class="w-3 h-3 rounded-full bg-[#ba1a1a]"></span>
+</button>
+</div>
+<!-- Density / Size Scale Switcher -->
+<div class="flex items-center gap-1 bg-surface-container-lowest p-1 rounded-lg shadow-sm">
+<span class="font-label-sm text-label-sm text-outline px-space-xs">VIEWPORT</span>
+<button class="size-btn px-space-sm py-0.5 rounded font-label-sm text-label-sm font-mono text-on-surface-variant hover:text-on-surface transition-colors" onclick="setIconSize(16, this)">16px</button>
+<button class="size-btn px-space-sm py-0.5 rounded font-label-sm text-label-sm font-mono text-on-surface-variant hover:text-on-surface transition-colors" onclick="setIconSize(18, this)">18px</button>
+<button class="size-btn active-size px-space-sm py-0.5 rounded font-label-sm text-label-sm font-mono bg-primary text-on-primary transition-colors" onclick="setIconSize(20, this)">20px</button>
+<button class="size-btn px-space-sm py-0.5 rounded font-label-sm text-label-sm font-mono text-on-surface-variant hover:text-on-surface transition-colors" onclick="setIconSize(24, this)">24px</button>
+</div>
+<!-- Rapid Token Search / Filter -->
+<div class="flex items-center gap-space-xs bg-surface-container-lowest px-space-sm py-1.5 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-outline">search</span>
+<input class="bg-transparent border-none outline-none font-label-sm text-label-sm text-on-surface placeholder:text-outline w-36 lg:w-44" id="tokenSearch" oninput="filterGrid(this.value)" placeholder="Filter token ID..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Telemetry Summary Badges -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-gutter pt-space-xs">
+<div class="p-space-sm bg-surface-container-lowest rounded-lg shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">STANDARDIZED CANVASES</span>
+<span class="font-headline-md text-headline-md text-on-surface font-mono font-semibold">24 × 24 px</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]">grid_4x4</span>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded-lg shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">SAFE PADDING BAND</span>
+<span class="font-headline-md text-headline-md text-tertiary font-mono font-semibold">2.0 px SafeZone</span>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[20px]">crop_free</span>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded-lg shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">STROKE PARAMETERS</span>
+<span class="font-headline-md text-headline-md text-on-surface font-mono font-semibold">1.5px / Round</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px]">draw</span>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded-lg shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">EXPORT FORMATS</span>
+<span class="font-headline-md text-headline-md text-primary font-mono font-semibold">Vue 3 / SVG / TS</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]">integration_instructions</span>
+</div>
+</div>
+</div>
+<!-- Main Showcase Dual-Pane Arena -->
+<div class="p-margin grid grid-cols-1 xl:grid-cols-12 gap-gutter items-start">
+<!-- Left: 29-Specimen Dynamic Grid (8 columns on full width, responsive) -->
+<div class="xl:col-span-8 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">标本阵列（29 Tokens Master Array）</span>
+<span class="px-space-xs py-0.5 rounded font-label-sm text-label-sm bg-surface-container-high text-on-surface-variant font-mono" id="matchCounter">29/29</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Click card to load spec into Inspector</span>
+</div>
+<!-- Icon Cards Grid (6 to 7 per row on big screens) -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-gutter" id="specimenGrid">
+<!-- #01 minus -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center active-specimen ring-2 ring-primary ring-offset-2" onclick="inspectSpecimen(0)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#01</span>
+<span class="text-tertiary">98.4%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M5 12h14"></path>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">minus</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">折叠/收起</span>
+</div>
+</div>
+<!-- #02 eye-on -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(1)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#02</span>
+<span class="text-tertiary">99.1%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path>
+<circle cx="12" cy="12" r="3"></circle>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">eye-on</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">显式/监视</span>
+</div>
+</div>
+<!-- #03 eye-off -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(2)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#03</span>
+<span class="text-tertiary">96.8%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+<path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+<path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+<line x1="3" x2="21" y1="3" y2="21"></line>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">eye-off</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">隐匿/脱敏</span>
+</div>
+</div>
+<!-- #04 filter -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(3)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#04</span>
+<span class="text-tertiary">97.5%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">filter</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">筛选过滤</span>
+</div>
+</div>
+<!-- #05 sort -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(4)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#05</span>
+<span class="text-tertiary">95.0%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="m7 15 5 5 5-5"></path>
+<path d="m7 9 5-5 5 5"></path>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">sort</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">上下升降排序</span>
+</div>
+</div>
+<!-- #06 fullscreen -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(5)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#06</span>
+<span class="text-tertiary">98.9%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
+<path d="M21 8V5a2 2 0 0 0-2-2h-3"></path>
+<path d="M3 16v3a2 2 0 0 0 2 2h3"></path>
+<path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">fullscreen</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">全屏视界</span>
+</div>
+</div>
+<!-- #07 fullscreen-exit -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(6)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#07</span>
+<span class="text-tertiary">94.3%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M4 14h6v6"></path>
+<path d="M20 10h-6V4"></path>
+<path d="M14 14l7 7"></path>
+<path d="M3 21l7-7"></path>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">fullscreen-exit</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">窗口化收缩</span>
+</div>
+</div>
+<!-- #08 printer -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(7)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#08</span>
+<span class="text-tertiary">91.0%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<polyline points="6 9 6 2 18 2 18 9"></polyline>
+<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+<rect height="8" width="12" x="6" y="14"></rect>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">printer</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">单据打印出单</span>
+</div>
+</div>
+<!-- #09 info -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(8)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#09</span>
+<span class="text-tertiary">99.7%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<line x1="12" x2="12" y1="16" y2="12"></line>
+<line x1="12" x2="12.01" y1="8" y2="8"></line>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">info</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">标准提示说明</span>
+</div>
+</div>
+<!-- #10 circle-question -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(9)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#10</span>
+<span class="text-tertiary">96.0%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+<line x1="12" x2="12.01" y1="17" y2="17"></line>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">circle-question</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">帮助质询</span>
+</div>
+</div>
+<!-- #11 history -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(10)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#11</span>
+<span class="text-tertiary">98.2%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+<path d="M3 3v5h5"></path>
+<path d="M12 7v5l4 2"></path>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">history</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">追溯回溯日志</span>
+</div>
+</div>
+<!-- #12 message -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(11)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#12</span>
+<span class="text-tertiary">95.4%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">message</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">指令交互气泡</span>
+</div>
+</div>
+<!-- #13 password -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(12)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#13</span>
+<span class="text-tertiary">94.7%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<rect height="12" rx="3" width="20" x="2" y="6"></rect>
+<circle cx="7" cy="12" fill="currentColor" r="1.25"></circle>
+<circle cx="12" cy="12" fill="currentColor" r="1.25"></circle>
+<circle cx="17" cy="12" fill="currentColor" r="1.25"></circle>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">password</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">口令密码密级</span>
+</div>
+</div>
+<!-- #14 id-card -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(13)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#14</span>
+<span class="text-tertiary">97.0%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<rect height="16" rx="2" width="20" x="2" y="4"></rect>
+<circle cx="8" cy="10" r="2.5"></circle>
+<path d="M5 16a3 3 0 0 1 6 0"></path>
+<line x1="14" x2="18" y1="9" y2="9"></line>
+<line x1="14" x2="18" y1="13" y2="13"></line>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">id-card</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">警务证/身份核验</span>
+</div>
+</div>
+<!-- #15 logout -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(14)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#15</span>
+<span class="text-tertiary">99.3%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+<polyline points="16 17 21 12 16 7"></polyline>
+<line x1="21" x2="9" y1="12" y2="12"></line>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">logout</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">安全登出销权</span>
+</div>
+</div>
+<!-- #16 home -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(15)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#16</span>
+<span class="text-tertiary">99.5%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">home</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">指挥大厅主页</span>
+</div>
+</div>
+<!-- #17 language -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(16)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#17</span>
+<span class="text-tertiary">92.8%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<line x1="2" x2="22" y1="12" y2="12"></line>
+<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">language</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">多域语言/国际</span>
+</div>
+</div>
+<!-- #18 screenshot -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(17)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#18</span>
+<span class="text-tertiary">95.9%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M4 8V4h4"></path>
+<path d="M16 4h4v4"></path>
+<path d="M20 16v4h-4"></path>
+<path d="M8 20H4v-4"></path>
+<rect height="6" rx="1.5" width="8" x="8" y="9"></rect>
+<circle cx="12" cy="12" r="1.5"></circle>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">screenshot</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">取证截屏/固证</span>
+</div>
+</div>
+<!-- #19 wifi -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(18)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#19</span>
+<span class="text-tertiary">97.8%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+<path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+<path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+<line x1="12" x2="12.01" y1="20" y2="20"></line>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">wifi</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">专网无线接入</span>
+</div>
+</div>
+<!-- #20 cloud -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(19)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#20</span>
+<span class="text-tertiary">98.1%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">cloud</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">警务云集群同步</span>
+</div>
+</div>
+<!-- #21 database -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(20)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#21</span>
+<span class="text-tertiary">99.0%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+<path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+<path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">database</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">核心公安数据库</span>
+</div>
+</div>
+<!-- #22 terminal -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(21)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#22</span>
+<span class="text-tertiary">93.2%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<polyline points="4 17 10 11 4 5"></polyline>
+<line x1="12" x2="20" y1="19" y2="19"></line>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">terminal</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">终端控制台/CLI</span>
+</div>
+</div>
+<!-- #23 cpu -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(22)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#23</span>
+<span class="text-tertiary">96.5%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<rect height="16" rx="2" width="16" x="4" y="4"></rect>
+<rect height="6" width="6" x="9" y="9"></rect>
+<path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"></path>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">cpu</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">边缘算力单元</span>
+</div>
+</div>
+<!-- #24 pin -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(23)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#24</span>
+<span class="text-tertiary">98.0%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<line x1="12" x2="12" y1="17" y2="22"></line>
+<path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.89A2 2 0 0 1 15 10.77V5a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v5.77a2 2 0 0 1-1.11 1.79l-1.78.89A2 2 0 0 0 5 15.24Z"></path>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">pin</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">地理标定/置顶</span>
+</div>
+</div>
+<!-- #25 zoom-in -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(24)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#25</span>
+<span class="text-tertiary">97.3%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+<line x1="11" x2="11" y1="8" y2="14"></line>
+<line x1="8" x2="14" y1="11" y2="11"></line>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">zoom-in</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">电子地图放大</span>
+</div>
+</div>
+<!-- #26 zoom-out -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(25)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#26</span>
+<span class="text-tertiary">97.1%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+<line x1="8" x2="14" y1="11" y2="11"></line>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">zoom-out</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">全局视野缩小</span>
+</div>
+</div>
+<!-- #27 drag -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(26)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#27</span>
+<span class="text-tertiary">91.8%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<circle cx="9" cy="6" fill="currentColor" r="1"></circle>
+<circle cx="9" cy="12" fill="currentColor" r="1"></circle>
+<circle cx="9" cy="18" fill="currentColor" r="1"></circle>
+<circle cx="15" cy="6" fill="currentColor" r="1"></circle>
+<circle cx="15" cy="12" fill="currentColor" r="1"></circle>
+<circle cx="15" cy="18" fill="currentColor" r="1"></circle>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">drag</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">面板拖拽把手</span>
+</div>
+</div>
+<!-- #28 save -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(27)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#28</span>
+<span class="text-tertiary">98.6%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+<polyline points="17 21 17 13 7 13 7 21"></polyline>
+<polyline points="7 3 7 8 15 8"></polyline>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">save</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">警情落库保存</span>
+</div>
+</div>
+<!-- #29 export -->
+<div class="specimen-card group bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 p-space-md rounded-lg shadow-sm cursor-pointer flex flex-col justify-between items-center h-40 relative text-center" onclick="inspectSpecimen(28)">
+<div class="w-full flex items-center justify-between font-label-sm text-label-sm text-outline font-mono">
+<span>#29</span>
+<span class="text-tertiary">96.3%</span>
+</div>
+<div class="icon-holder w-10 h-10 flex items-center justify-center text-on-surface-variant transition-transform group-hover:scale-110">
+<svg class="lx-svg w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+<polyline points="16 6 12 2 8 6"></polyline>
+<line x1="12" x2="12" y1="2" y2="15"></line>
+</svg>
+</div>
+<div class="w-full flex flex-col items-center">
+<span class="token-name font-mono text-[11px] font-medium text-on-surface truncate w-full">export</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate w-full">涉案导出流转</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: High-Precision Specimen Inspector Panel (Sticky) -->
+<div class="xl:col-span-4 sticky top-20 flex flex-col gap-space-md">
+<!-- Precision Zoom Lens Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm flex flex-col gap-space-md">
+<!-- Inspector Title Header -->
+<div class="flex items-center justify-between pb-space-xs border-b border-surface-container">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">biotech</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">标本检视仪（Inspector）</span>
+</div>
+<span class="font-mono font-label-sm text-label-sm text-primary px-space-xs py-0.5 rounded bg-surface-container-high" id="inspCode">PS-SPEC::01</span>
+</div>
+<!-- 2.0X Geometric Cartesian Radar Sight (48x48 Grid Spec) -->
+<div class="relative w-full h-56 bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center select-none">
+<!-- Subtle Cartesian Grid Underlay -->
+<div class="absolute inset-0 bg-[radial-gradient(#c0c7d4_1px,transparent_1px)] [background-size:12px_12px] opacity-40"></div>
+<!-- Center Coordinate Hairlines -->
+<div class="absolute inset-x-0 top-1/2 h-px bg-outline-variant/60"></div>
+<div class="absolute inset-y-0 left-1/2 w-px bg-outline-variant/60"></div>
+<!-- Safe Zone Boundaries (2px margin envelope at scale) -->
+<div class="absolute w-40 h-40 border border-dashed border-error/40 rounded pointer-events-none flex items-start justify-between p-1">
+<span class="font-mono text-[9px] text-error/60 leading-none">20x20 Safe Zone</span>
+<span class="font-mono text-[9px] text-error/60 leading-none">2.0px Band</span>
+</div>
+<!-- Circular Optical Enclosure -->
+<div class="absolute w-36 h-36 rounded-full border border-primary/25 pointer-events-none"></div>
+<!-- Enlarged Target Specimen Icon (Rendered dynamically) -->
+<div class="relative z-10 w-24 h-24 flex items-center justify-center text-primary drop-shadow-[0_2px_8px_rgba(0,96,169,0.25)]" id="inspectorViewport">
+<svg class="w-20 h-20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M5 12h14"></path>
+</svg>
+</div>
+<!-- Corner Telemetry Overlay -->
+<div class="absolute bottom-2 left-2 flex items-center gap-1 font-mono text-[10px] text-on-surface-variant bg-surface/80 px-1.5 py-0.5 rounded">
+<span>SCALE:</span>
+<span class="text-primary font-semibold">4.0X OPTICAL</span>
+</div>
+<div class="absolute bottom-2 right-2 flex items-center gap-1 font-mono text-[10px] text-on-surface-variant bg-surface/80 px-1.5 py-0.5 rounded">
+<span>VIEWPORT:</span>
+<span class="text-on-surface font-semibold">24×24</span>
+</div>
+</div>
+<!-- Specimen Metadata Summary -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-baseline justify-between">
+<h2 class="font-display-lg text-headline-lg font-mono font-bold text-on-surface" id="inspToken">minus</h2>
+<span class="font-headline-sm text-headline-sm text-secondary" id="inspChName">折叠 / 收起</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="inspUsage">
+            用于警情详情卡片折叠、调度分级树状视图收缩、高危告警面板隐藏等关键公共安全交互。
+          </p>
+</div>
+<!-- Code Snippet Accordion 1: Vue 3 SFC Contract -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase font-mono tracking-wider">Vue 3 SFC Contract</span>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-0.5" onclick="copySnippet('vueSnippet', this)">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy</span>
+</button>
+</div>
+<pre class="bg-surface-container-high p-space-sm rounded-lg overflow-x-auto"><code class="font-mono text-body-sm text-on-surface" id="vueSnippet">&lt;LxIcon name="minus" :size="20" class="text-primary" /&gt;</code></pre>
+</div>
+<!-- Code Snippet Accordion 2: Raw SVG XML -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase font-mono tracking-wider">Pure SVG Specimen Source</span>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-0.5" onclick="copySnippet('svgSnippet', this)">
+<span class="material-symbols-outlined text-[14px]">code</span>
+<span>Copy XML</span>
+</button>
+</div>
+<pre class="bg-surface-container-high p-space-sm rounded-lg overflow-x-auto max-h-24"><code class="font-mono text-label-sm text-on-surface-variant" id="svgSnippet">&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M5 12h14"/&gt;&lt;/svg&gt;</code></pre>
+</div>
+<!-- Action Dispatchers -->
+<div class="flex items-center gap-space-sm pt-space-xs">
+<button class="flex-1 bg-primary text-on-primary py-2 px-space-md rounded font-headline-sm text-headline-sm hover:bg-primary-container transition-colors flex items-center justify-center gap-space-xs shadow-sm" onclick="approveSpecimen()">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>核准入库</span>
+</button>
+<button class="bg-surface-container-high text-on-surface hover:bg-surface-variant py-2 px-space-md rounded font-headline-sm text-headline-sm transition-colors flex items-center justify-center gap-space-xs" onclick="exportBatch()">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span>导出包</span>
+</button>
+</div>
+</div>
+<!-- Compliance Standard Checklist Module -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col gap-space-sm">
+<span class="font-label-sm text-label-sm text-outline font-mono uppercase">COMPLIANCE CRITERIA</span>
+<div class="flex flex-col gap-1.5 font-label-md text-label-md text-on-surface">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-[16px]">check_circle</span>
+<span>严格遵守 24x24 笛卡尔坐标系统与对齐</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-[16px]">check_circle</span>
+<span>线宽统一 1.5px，端点强制 Round 倒角处理</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-[16px]">check_circle</span>
+<span>支持 currentColor 自适应公共安全告警色系</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-[16px]">check_circle</span>
+<span>无任何多余私有属性（clean standalone SVG）</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Specification Documentation Memorandum -->
+<div class="px-margin pb-space-xl pt-space-md flex flex-col gap-space-lg">
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm pb-space-xs border-b border-surface-container">
+<span class="material-symbols-outlined text-primary text-[22px]">menu_book</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface">ICON-DESIGN.md 契约工程规范备忘录</span>
+<span class="font-label-sm text-label-sm text-outline">公安指挥调度与应急响应大屏图形系统交互规约 (GB/T 33170-2016)</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<!-- Standard 1 -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[18px]">aspect_ratio</span>
+<span>1. 几何网格与 2px 安全视界</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            所有标本必须基于 24×24 像素网格绘制。上下左右边缘强制保留 2px 安全留白保护区（内部绘图限幅 20×20），以防止高分辨率监视大屏或移动手持终端在亚像素级渲染时产生抗锯齿发虚或边缘截断。
+          </p>
+</div>
+<!-- Standard 2 -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[18px]">density_medium</span>
+<span>2. 四档工程规格自适应</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+<strong>16px</strong>：涉案证据流转等超密集表格数据行；<br/>
+<strong>18px</strong>：警员排班与处警表单录入默认组件；<br/>
+<strong>20px</strong>：侧边栏导航条、快查浮窗与资产卡片；<br/>
+<strong>24px</strong>：指挥调度大屏、电子地图图层标绘与重特大警情弹窗。
+          </p>
+</div>
+<!-- Standard 3 -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+<span>3. 契约纪律与颜色语义</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            严禁打包为字体文件（iconfont），防止公安内网跨网闸离线环境字符映射错位。强制使用 SVG 纯线性 <code class="font-mono text-primary font-semibold">stroke="currentColor"</code> 渲染，由宿主组件外部传入情境色（普通巡检 <code class="font-mono text-[#55af28]">#55af28</code>、高危警情 <code class="font-mono text-error">#ba1a1a</code>、调度主色 <code class="font-mono text-primary">#0060a9</code>）。
+          </p>
+</div>
+</div>
+<!-- Signature Strip -->
+<div class="p-space-sm bg-surface-container-high rounded flex flex-col sm:flex-row items-center justify-between text-outline font-mono text-[11px] gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span>SIGNATURE: 0x9AF88219B</span>
+<span>SHA-256: 3c12f00a4d5e89b...</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span>VERIFIED BY: OPS-SECURITY-BOARD</span>
+<span class="text-tertiary">STATUS: LOCKED-PRODUCTION</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Client-side Interactive Registry & Inspector State Engine -->
+<script>
+  // 29-Token Specimen Database according to standard
+  const SPECIMENS = [
+    {
+      id: "minus",
+      num: "#01",
+      code: "PS-SPEC::01",
+      name: "minus",
+      ch: "减号 / 折叠收起",
+      usage: "用于警情详情卡片折叠、调度分级树状视图收缩、高危告警面板隐藏等关键公共安全交互。",
+      svg: `<path d="M5 12h14"/>`
+    },
+    {
+      id: "eye-on",
+      num: "#02",
+      code: "PS-SPEC::02",
+      name: "eye-on",
+      ch: "眼睛 / 显式监视",
+      usage: "用于调取涉密监控视频流、显示敏感身份证件信息与警务人员在岗实时点名视界。",
+      svg: `<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>`
+    },
+    {
+      id: "eye-off",
+      num: "#03",
+      code: "PS-SPEC::03",
+      name: "eye-off",
+      ch: "眼睛斜杠 / 隐匿脱敏",
+      usage: "用于报警人隐私保护、敏感涉密案情要点隐藏以及一键切换公共视讯脱敏模式。",
+      svg: `<path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="3" y1="3" x2="21" y2="21"/>`
+    },
+    {
+      id: "filter",
+      num: "#04",
+      code: "PS-SPEC::04",
+      name: "filter",
+      ch: "漏斗 / 过滤筛选",
+      usage: "用于警务综合信息系统高密度流水按警情级别、辖区责任网格、发生时间跨度多维过滤。",
+      svg: `<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>`
+    },
+    {
+      id: "sort",
+      num: "#05",
+      code: "PS-SPEC::05",
+      name: "sort",
+      ch: "上下箭头 / 双向排序",
+      usage: "用于表格数据列根据处警紧急度响应倒计时、巡逻车载重负荷与报案时间进行升降排序。",
+      svg: `<path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/>`
+    },
+    {
+      id: "fullscreen",
+      num: "#06",
+      code: "PS-SPEC::06",
+      name: "fullscreen",
+      ch: "四角外扩 / 全屏视界",
+      usage: "用于指挥大屏 GIS 地图全屏独占模式、卡口车牌识别连续画面无边框大屏投射。",
+      svg: `<path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/>`
+    },
+    {
+      id: "fullscreen-exit",
+      num: "#07",
+      code: "PS-SPEC::07",
+      name: "fullscreen-exit",
+      ch: "四角内收 / 退出全屏",
+      usage: "从应急态势独占全屏退回多任务桌面环境，恢复警员常态化协作看板。",
+      svg: `<path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="M14 14l7 7"/><path d="M3 21l7-7"/>`
+    },
+    {
+      id: "printer",
+      num: "#08",
+      code: "PS-SPEC::08",
+      name: "printer",
+      ch: "打印机 / 单据打印",
+      usage: "用于一键打印处警通知单、涉案扣押清单、行政受案回执等标准化法律文书。",
+      svg: `<polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>`
+    },
+    {
+      id: "info",
+      num: "#09",
+      code: "PS-SPEC::09",
+      name: "info",
+      ch: "圆底 i / 提示说明",
+      usage: "提示执法办案法定程序时限、设备工作状态健康度、操作留痕安全告知。",
+      svg: `<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>`
+    },
+    {
+      id: "circle-question",
+      num: "#10",
+      code: "PS-SPEC::10",
+      name: "circle-question",
+      ch: "圆底问号 / 帮助质询",
+      usage: "用于新手警员规范指引、操作规程查阅、处置流程建议及智能问答呼出。",
+      svg: `<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>`
+    },
+    {
+      id: "history",
+      num: "#11",
+      code: "PS-SPEC::11",
+      name: "history",
+      ch: "时钟逆箭头 / 追溯日志",
+      usage: "用于警情调度处置流水时序回放、警力轨迹历史轨迹复盘、系统安全审计日志追查。",
+      svg: `<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/>`
+    },
+    {
+      id: "message",
+      num: "#12",
+      code: "PS-SPEC::12",
+      name: "message",
+      ch: "气泡对话 / 指令交互",
+      usage: "指挥中心即席通联、前沿处警车组双向文本派发、多警种作战群聊消息。",
+      svg: `<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>`
+    },
+    {
+      id: "password",
+      num: "#13",
+      code: "PS-SPEC::13",
+      name: "password",
+      ch: "三点框 / 密级口令",
+      usage: "用于涉案专网系统身份二次认证口令、数字证书密码授权校验以及加密通道配置。",
+      svg: `<rect x="2" y="6" width="20" height="12" rx="3"/><circle cx="7" cy="12" r="1.25" fill="currentColor"/><circle cx="12" cy="12" r="1.25" fill="currentColor"/><circle cx="17" cy="12" r="1.25" fill="currentColor"/>`
+    },
+    {
+      id: "id-card",
+      num: "#14",
+      code: "PS-SPEC::14",
+      name: "id-card",
+      ch: "证件卡 / 警官身份核查",
+      usage: "值班长工作卡核验、涉案嫌疑人二代身份证读卡录入、电子警察出勤卡标定。",
+      svg: `<rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8" cy="10" r="2.5"/><path d="M5 16a3 3 0 0 1 6 0"/><line x1="14" y1="9" x2="18" y2="9"/><line x1="14" y1="13" x2="18" y2="13"/>`
+    },
+    {
+      id: "logout",
+      num: "#15",
+      code: "PS-SPEC::15",
+      name: "logout",
+      ch: "门+箭头 / 安全登出",
+      usage: "交接班注销席位认证、临时离岗锁定终端、退出特权应急调度会话。",
+      svg: `<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>`
+    },
+    {
+      id: "home",
+      num: "#16",
+      code: "PS-SPEC::16",
+      name: "home",
+      ch: "房子 / 指挥大厅主页",
+      usage: "一键返回市局统一指挥调度总览控制台、综合态势首页或辖区门户。",
+      svg: `<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`
+    },
+    {
+      id: "language",
+      num: "#17",
+      code: "PS-SPEC::17",
+      name: "language",
+      ch: "地球网格 / 国际多语",
+      usage: "涉外涉侨警务通报界面、双语出入境签证信息查验以及多语种自动翻译切换。",
+      svg: `<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>`
+    },
+    {
+      id: "screenshot",
+      num: "#18",
+      code: "PS-SPEC::18",
+      name: "screenshot",
+      ch: "相机裁框 / 取证截屏",
+      usage: "快速截取当前监控画面瞬时抓拍、涉案违法电子证据固定并自动写入水印时间戳。",
+      svg: `<path d="M4 8V4h4"/><path d="M16 4h4v4"/><path d="M20 16v4h-4"/><path d="M8 20H4v-4"/><rect x="8" y="9" width="8" height="6" rx="1.5"/><circle cx="12" cy="12" r="1.5"/>`
+    },
+    {
+      id: "wifi",
+      num: "#19",
+      code: "PS-SPEC::19",
+      name: "wifi",
+      ch: "波纹弧线 / 专网无线",
+      usage: "前线移动警务终端 4G/5G 警务专网信号强度检测、现场图传图表通联指示。",
+      svg: `<path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>`
+    },
+    {
+      id: "cloud",
+      num: "#20",
+      code: "PS-SPEC::20",
+      name: "cloud",
+      ch: "云 / 警务云同步",
+      usage: "表示警务大数据中心多活集群云端汇聚、省市两级平台数据实时热同步。",
+      svg: `<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>`
+    },
+    {
+      id: "database",
+      num: "#21",
+      code: "PS-SPEC::21",
+      name: "database",
+      ch: "圆柱体 / 核心数据库",
+      usage: "常住人口库、在逃人员库、重点机动车底库存储与分布式检索状态监控。",
+      svg: `<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>`
+    },
+    {
+      id: "terminal",
+      num: "#22",
+      code: "PS-SPEC::22",
+      name: "terminal",
+      ch: "命令行提示符 / CLI 控制台",
+      usage: "运维人员进入内网网关设备、防火墙策略下发以及底层节点调试控制台。",
+      svg: `<polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>`
+    },
+    {
+      id: "cpu",
+      num: "#23",
+      code: "PS-SPEC::23",
+      name: "cpu",
+      ch: "芯片方块引脚 / 算力单元",
+      usage: "人脸比对边缘计算服务器核心负载、图侦 AI 引擎吞吐率与物理节点监控。",
+      svg: `<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/>`
+    },
+    {
+      id: "pin",
+      num: "#24",
+      code: "PS-SPEC::24",
+      name: "pin",
+      ch: "图钉 / 地理标定置顶",
+      usage: "在 GIS 警用地图上锚定第一警情发生地、重点防护目标或在待办任务列表置顶案卷。",
+      svg: `<line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.89A2 2 0 0 1 15 10.77V5a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v5.77a2 2 0 0 1-1.11 1.79l-1.78.89A2 2 0 0 0 5 15.24Z"/>`
+    },
+    {
+      id: "zoom-in",
+      num: "#25",
+      code: "PS-SPEC::25",
+      name: "zoom-in",
+      ch: "放大镜加号 / 地图放大",
+      usage: "逐级缩放至警用网格楼宇级三维模型、高清卡口图片关键局部细部放大查验。",
+      svg: `<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>`
+    },
+    {
+      id: "zoom-out",
+      num: "#26",
+      code: "PS-SPEC::26",
+      name: "zoom-out",
+      ch: "放大镜减号 / 宏观视野",
+      usage: "迅速切换至全区、全市宏观治安态势热力总览，跳出单一巡区微观视窗。",
+      svg: `<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/>`
+    },
+    {
+      id: "drag",
+      num: "#27",
+      code: "PS-SPEC::27",
+      name: "drag",
+      ch: "六点把手 / 拖拽排布",
+      usage: "指挥控制台多窗口分屏自由布局拖拽、多路监控视频宫格顺序自由调整把手。",
+      svg: `<circle cx="9" cy="6" r="1" fill="currentColor"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="9" cy="18" r="1" fill="currentColor"/><circle cx="15" cy="6" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="18" r="1" fill="currentColor"/>`
+    },
+    {
+      id: "save",
+      num: "#28",
+      code: "PS-SPEC::28",
+      name: "save",
+      ch: "软盘 / 落库存储",
+      usage: "警情初报草稿存储、派警方案预案锁定、电子笔录签名落盘与防篡改存档。",
+      svg: `<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>`
+    },
+    {
+      id: "export",
+      num: "#29",
+      code: "PS-SPEC::29",
+      name: "export",
+      ch: "外向箭头 / 导出流转",
+      usage: "案件卷宗一键打包流转至检察机关跨部门协同平台、调度台账 Excel/PDF 批量导出。",
+      svg: `<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/>`
+    }
+  ];
+
+  let currentTone = 'text-on-surface-variant';
+  let currentActiveIndex = 0;
+
+  function inspectSpecimen(index) {
+    currentActiveIndex = index;
+    const item = SPECIMENS[index];
+    
+    // Highlight Card
+    const cards = document.querySelectorAll('.specimen-card');
+    cards.forEach((c, idx) => {
+      if (idx === index) {
+        c.classList.add('active-specimen', 'ring-2', 'ring-primary', 'ring-offset-2');
+      } else {
+        c.classList.remove('active-specimen', 'ring-2', 'ring-primary', 'ring-offset-2');
+      }
+    });
+
+    // Update Inspector UI
+    document.getElementById('inspCode').innerText = item.code;
+    document.getElementById('inspToken').innerText = item.name;
+    document.getElementById('inspChName').innerText = item.ch;
+    document.getElementById('inspUsage').innerText = item.usage;
+
+    // Viewport SVG Update
+    const vp = document.getElementById('inspectorViewport');
+    vp.innerHTML = `<svg class="w-20 h-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${item.svg}</svg>`;
+
+    // Code Snippets
+    document.getElementById('vueSnippet').innerText = `<LxIcon name="${item.name}" :size="20" class="text-primary" />`;
+    document.getElementById('svgSnippet').innerText = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${item.svg}</svg>`;
+  }
+
+  function setTone(toneClass, btn) {
+    currentTone = toneClass;
+    // update button active rings
+    ['color-slate', 'color-blue', 'color-green', 'color-red'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('ring-2', 'ring-primary', 'ring-offset-1');
+    });
+    if (btn) btn.classList.add('ring-2', 'ring-primary', 'ring-offset-1');
+
+    // update all card SVGs
+    document.querySelectorAll('.icon-holder').forEach(el => {
+      el.className = `icon-holder w-10 h-10 flex items-center justify-center ${toneClass} transition-transform group-hover:scale-110`;
+    });
+  }
+
+  function setIconSize(px, btn) {
+    document.querySelectorAll('.size-btn').forEach(b => {
+      b.classList.remove('bg-primary', 'text-on-primary');
+      b.classList.add('text-on-surface-variant');
+    });
+    btn.classList.add('bg-primary', 'text-on-primary');
+    btn.classList.remove('text-on-surface-variant');
+
+    const sizeClass = px === 16 ? 'w-4 h-4' : px === 18 ? 'w-[18px] h-[18px]' : px === 20 ? 'w-5 h-5' : 'w-6 h-6';
+    
+    document.querySelectorAll('.lx-svg').forEach(el => {
+      el.setAttribute('class', `lx-svg ${sizeClass}`);
+    });
+  }
+
+  function filterGrid(query) {
+    const q = query.trim().toLowerCase();
+    const cards = document.querySelectorAll('.specimen-card');
+    let visible = 0;
+
+    cards.forEach((card, idx) => {
+      const sp = SPECIMENS[idx];
+      const match = sp.name.toLowerCase().includes(q) || sp.ch.toLowerCase().includes(q) || sp.num.toLowerCase().includes(q);
+      if (match) {
+        card.style.display = 'flex';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    document.getElementById('matchCounter').innerText = `${visible}/29`;
+  }
+
+  function copySnippet(elementId, btn) {
+    const text = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = `<span class="material-symbols-outlined text-[14px]">check</span><span>Copied</span>`;
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+      }, 1800);
+    });
+  }
+
+  function approveSpecimen() {
+    const item = SPECIMENS[currentActiveIndex];
+    alert(`【公安规范核准通知】\n标本 [${item.num} ${item.name}] 经过几何视界与 2px 安全留白校验，已成功录入 LinkX PoliceOS 核心资产注册表。`);
+  }
+
+  function exportBatch() {
+    alert(`已将完整的 29 枚 LxIcon 线性矢量包生成为 ESModule / TypeScript 形式，包含 index.d.ts 类型签名与 SVG 资产包。`);
+  }
+</script></main></div></body></html>

@@ -32,6 +32,7 @@
  * - 新增 pulse 呼吸动画
  * - code prop 数字映射：4→online, 1/2/7→processing, 0/5→busy, 3/6→error, 其他→offline
  */
+import { LxStatusDot } from 'lx-ui';
 import { computed } from 'vue';
 
 defineOptions({ name: 'StatusDot' });
@@ -88,61 +89,14 @@ const finalStatus = computed(() => {
   }
   return props.status;
 });
-
-// 圆点尺寸样式
-const dotStyle = computed(() => ({
-  width: `${props.size}px`,
-  height: `${props.size}px`,
-}));
-
-// 是否禁用脉冲动画
-const pulseClass = computed(() => (!props.pulse ? 'no-pulse' : ''));
 </script>
 
 <template>
-  <div v-if="showText" class="status-dot-wrapper">
-    <span class="status-dot custom-status-dot" :class="[finalStatus, pulseClass]" :style="dotStyle" />
-    <span class="status-text">{{ statusDesc || '-' }}</span>
-  </div>
-  <span v-else class="status-dot custom-status-dot" :class="[finalStatus, pulseClass]" :style="dotStyle" />
+  <LxStatusDot
+    :status="finalStatus"
+    :size="size"
+    :pulse="pulse && finalStatus === 'online'"
+    :status-desc="statusDesc"
+    :show-text="showText"
+  />
 </template>
-
-<style lang="less" scoped>
-.custom-status-dot {
-  // 继承全局 .status-dot 基础样式（reset.less 中定义）
-  // 此处覆盖动画控制 + 补充 processing/error 状态颜色
-
-  &.no-pulse::after {
-    display: none !important;
-  }
-
-  // processing 状态（蓝色，处理中）
-  &.processing {
-    background-color: @color-primary;
-
-    &::after {
-      display: none; // processing 默认无动画
-    }
-  }
-
-  // error 状态（红色，错误）
-  &.error {
-    background-color: @color-danger;
-
-    &::after {
-      display: none;
-    }
-  }
-}
-
-.status-dot-wrapper {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-
-  .status-text {
-    font-size: @font-size-sm;
-    color: @color-text-regular;
-  }
-}
-</style>

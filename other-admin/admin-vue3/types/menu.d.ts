@@ -40,11 +40,6 @@ export interface GlobalItem {
 }
 
 /**
- * OAuth 菜单项（与旧 getMenuList 结构兼容）
- */
-export interface OAuthMenuItem extends MenuItem {}
-
-/**
  * 路由过滤上下文
  */
 export interface FilterContext {
@@ -69,7 +64,14 @@ export interface FilterResult {
  */
 export interface OAuthMatchedInfo {
   matched: Array<{ name: string; url: string; routePath: string; component: string }>;
-  placeholder: Array<{ name: string; url: string; normalizedUrl: string; parentName: string; routePath: string; reason: string }>;
+  placeholder: Array<{
+    name: string;
+    url: string;
+    normalizedUrl: string;
+    parentName: string;
+    routePath: string;
+    reason: string;
+  }>;
   disabled: Array<{ name: string; url: string; parentName?: string; reason: string }>;
   routeOnly: Array<{ url: string; reason: string }>;
 }

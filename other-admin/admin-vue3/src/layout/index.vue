@@ -33,6 +33,7 @@ function handleClickOutside(): void {
 const { body } = document;
 const MOBILE_WIDTH = 768;
 const NARROW_DESKTOP_WIDTH = 1366;
+const isMockPreview = import.meta.env.MODE === 'mock-preview';
 
 function handleResize(): void {
   const rect = body.getBoundingClientRect();
@@ -42,7 +43,7 @@ function handleResize(): void {
   } else {
     appStore.toggleDevice('desktop');
     // 窄屏笔记本自动折叠侧边栏（1366×768 等），避免表格/弹窗水平溢出
-    if (rect.width - 1 < NARROW_DESKTOP_WIDTH) {
+    if (rect.width - 1 < NARROW_DESKTOP_WIDTH && !isMockPreview) {
       appStore.closeSideBar(false);
     } else if (!appStore.sidebar.opened) {
       // 标准桌面默认展开（避免 cookie 残留 '0' 导致一直折叠）

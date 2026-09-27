@@ -36,7 +36,6 @@ const searchParams = reactive<Record<string, unknown>>({
 });
 
 const tableRef = ref<InstanceType<typeof ProTable>>();
-const editRoleRef = ref<InstanceType<typeof EditRole>>();
 const bindUserRef = ref<InstanceType<typeof BindUser>>();
 
 // ===== 弹窗状态 =====
@@ -61,9 +60,16 @@ const columns = computed<ITableColumn[]>(() => [
 // ===== 权限 =====
 const canDelete = computed(() => hasBtnPermission('/admin/role/delete'));
 const canUpdate = computed(() => hasBtnPermission('/admin/role/update'));
+const canCreate = computed(() => hasBtnPermission('/admin/role/create'));
 
 const actions = computed(() => [
-  { label: '新增', type: 'primary' as const, icon: markRaw(Plus), onClick: handleCreate },
+  {
+    label: '新增',
+    type: 'primary' as const,
+    icon: markRaw(Plus),
+    onClick: handleCreate,
+    visible: canCreate.value,
+  },
 ]);
 
 // ===== ProTable @response 回调 =====
@@ -198,12 +204,14 @@ function getRole(scope: any): RoleItem {
                 icon: Connection,
                 label: '绑定用户',
                 onClick: () => handleBindUser(getRole(scope)),
+                auth: '/admin/trUserRole/createMany',
               },
               {
                 type: 'primary',
                 icon: Edit,
                 label: '编辑',
                 onClick: () => handleUpdate(getRole(scope)),
+                auth: '/admin/role/update',
               },
               {
                 type: 'danger',
@@ -211,6 +219,7 @@ function getRole(scope: any): RoleItem {
                 label: '删除',
                 onClick: () => handleDelete(getRole(scope)),
                 visible: canDelete && isShow(getRole(scope)),
+                auth: '/admin/role/delete',
               },
               {
                 type: 'danger',
@@ -218,6 +227,7 @@ function getRole(scope: any): RoleItem {
                 label: '禁用',
                 onClick: () => handleStatus(getRole(scope), 1),
                 visible: getRole(scope).status === 0 && canUpdate && isShow(getRole(scope)),
+                auth: '/admin/role/update',
               },
               {
                 type: 'warning',
@@ -225,6 +235,7 @@ function getRole(scope: any): RoleItem {
                 label: '启用',
                 onClick: () => handleStatus(getRole(scope), 0),
                 visible: getRole(scope).status !== 0 && canUpdate && isShow(getRole(scope)),
+                auth: '/admin/role/update',
               },
             ]"
           />

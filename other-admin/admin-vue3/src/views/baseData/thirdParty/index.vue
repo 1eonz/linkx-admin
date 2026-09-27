@@ -30,10 +30,6 @@ const searchParams = reactive<Record<string, unknown>>({
 // 组件 ref
 const tableRef = ref<InstanceType<typeof ProTable>>();
 
-// 用于序号列计算（ProTable 内部 currentPage）
-const currentPage = ref(1);
-const currentLimit = ref(10);
-
 // 列定义：序号/应用名称/应用ID/应用密钥/应用状态/操作列
 const columns = computed<ITableColumn[]>(() => [
   { prop: 'index', label: t('index.list.Index'), width: 60, align: 'center', slotName: 'index' },

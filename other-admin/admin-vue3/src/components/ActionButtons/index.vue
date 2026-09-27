@@ -30,6 +30,8 @@ import { Delete, Edit, VideoPause, VideoPlay, View } from '@element-plus/icons-v
 import { computed } from 'vue';
 import type { Component } from 'vue';
 
+import { hasPermission, type PermissionValue } from '@/composables/usePermission';
+
 defineOptions({ name: 'ActionButtons' });
 
 interface ButtonConfig {
@@ -45,6 +47,8 @@ interface ButtonConfig {
   disabled?: boolean;
   /** 是否显示，默认 true */
   visible?: boolean;
+  /** 权限码；未提供时保持调用方原有显示行为 */
+  auth?: PermissionValue;
 }
 
 // 预设动作配置
@@ -76,7 +80,7 @@ const props = withDefaults(
 const finalButtons = computed<ButtonConfig[]>(() => {
   // 优先使用 buttons 数组
   if (props.buttons.length > 0) {
-    return props.buttons.filter((b) => b.visible !== false);
+    return props.buttons.filter((b) => b.visible !== false && (!b.auth || hasPermission(b.auth)));
   }
 
   // 使用预设 actions

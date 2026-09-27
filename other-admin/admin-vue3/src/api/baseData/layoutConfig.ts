@@ -6,7 +6,7 @@
  * 2. App 板块 CRUD 接口（/api/layout/app/sections）
  * 3. 运维统计导出（/dashboard/v1/statistic/login/export）
  */
-import type { ApiResponse, HttpResult } from '#/axios';
+import type { ApiResponse, BinaryApiResponse, HttpResult } from '#/axios';
 import type { SystemConfigItem } from '@/api/h5/archivedTable';
 import http from '@/utils/http';
 
@@ -63,8 +63,8 @@ export interface PcNavTab {
 
 /** 板块列表查询参数 */
 export interface SectionListQuery {
-  /** 是否显示过滤：0/1，可选 */
-  show?: 0 | 1;
+  /** 是否显示过滤：-1 查询全部，0/1 按显示状态过滤 */
+  show?: -1 | 0 | 1;
 }
 
 /**
@@ -92,10 +92,7 @@ export function createSection(data: LayoutSection): HttpResult<string> {
 /**
  * 更新板块（PUT /api/layout/app/sections/{sectionId}）
  */
-export function updateSection(
-  sectionId: string | number,
-  data: LayoutSection,
-): Promise<ApiResponse<string>> {
+export function updateSection(sectionId: string | number, data: LayoutSection): Promise<ApiResponse<string>> {
   return http.put<string>(`/api/layout/app/sections/${sectionId}`, data);
 }
 
@@ -108,14 +105,14 @@ export function deleteSection(sectionId: string | number): Promise<ApiResponse<s
 
 /**
  * 导出登录统计数据（GET /dashboard/v1/statistic/login/export）
- * 返回 ArrayBuffer，配合 responseType: 'arraybuffer' 使用以生成 Excel 文件
+ * 返回 ArrayBuffer 和响应头，供页面生成 Excel 下载。
  */
 export function exportLoginStatistic(params: {
   startTime: string;
   endTime: string;
-}): HttpResult<ArrayBuffer> {
-  return http.get<ArrayBuffer>('/dashboard/v1/statistic/login/export', {
+}): Promise<BinaryApiResponse<ArrayBuffer>> {
+  return http.getBinary<ArrayBuffer>('/dashboard/v1/statistic/login/export', {
     params,
     responseType: 'arraybuffer',
-  } as never);
+  });
 }

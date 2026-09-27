@@ -4,6 +4,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { resolve } from 'node:path';
+import { mockPreviewPlugin } from './mock/preview-server';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
@@ -11,12 +12,15 @@ export default defineConfig(({ mode }) => {
   return {
     base: env.VITE_PUBLIC_PATH || '/',
     resolve: {
+      // 本地组件库与宿主共享运行时，避免双份 Vue/Element Plus 注入上下文。
+      dedupe: ['vue', 'element-plus'],
       alias: {
         '@': resolve(__dirname, 'src'),
         '#': resolve(__dirname, 'types'),
-      },  
+      },
     },
     plugins: [
+      ...(mode === 'mock-preview' ? [mockPreviewPlugin()] : []),
       vue(),
       AutoImport({
         imports: ['vue', 'vue-router', 'pinia'],
@@ -41,16 +45,21 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      port: 30845,
+      port: mode === 'mock-preview' ? 30847 : 30845,
       open: false,
-      proxy: {
-        [env.VITE_BASE_API || '/linkx/admin']: {
-          target: env.VITE_PROXY || 'https://172.16.23.8:30844',
-          changeOrigin: true,
-          secure: false,
-          rewrite: (p) => p.replace(new RegExp(`^${env.VITE_BASE_API || '/linkx/admin'}`), '/linkx/admin'),
-        },
-      },
+      ...(mode === 'mock-preview'
+        ? {}
+        : {
+            proxy: {
+              [env.VITE_BASE_API || '/linkx/admin']: {
+                target: env.VITE_PROXY || 'https://172.16.23.8:30844',
+                changeOrigin: true,
+                secure: false,
+                rewrite: (p: string) =>
+                  p.replace(new RegExp(`^${env.VITE_BASE_API || '/linkx/admin'}`), '/linkx/admin'),
+              },
+            },
+          }),
     },
     build: {
       outDir: 'dist',

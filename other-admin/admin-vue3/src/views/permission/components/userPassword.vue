@@ -85,26 +85,26 @@ const rules = computed<FormRules>(() => ({
   ],
 }));
 
-async function getGlobal(): Promise<void> {
-  try {
-    const res = await queryGlobalsList();
-    if (res?.data) {
-      if (res.data.ALLOW_SIMPLE_PASSWORD === '1') {
-        localStorage.setItem('simplePassWord', 'true');
-        simplePassWord.value = true;
-      } else {
-        localStorage.removeItem('simplePassWord');
-        simplePassWord.value = false;
+function getGlobal(): Promise<void> {
+  return queryGlobalsList()
+    .then((res) => {
+      if (res?.data) {
+        if (res.data.ALLOW_SIMPLE_PASSWORD === '1') {
+          localStorage.setItem('simplePassWord', 'true');
+          simplePassWord.value = true;
+        } else {
+          localStorage.removeItem('simplePassWord');
+          simplePassWord.value = false;
+        }
       }
-    }
-  } catch (error) {
-    console.error('[UserPassword] 获取全局参数失败:', error);
-  }
+    })
+    .catch((error: unknown) => {
+      console.error('[UserPassword] 获取全局参数失败:', error);
+    });
 }
 
 /** 设置弹窗数据并打开 */
-async function setData(row: { id?: string; username?: string; name?: string }, self: boolean): Promise<void> {
-  await getGlobal();
+function setData(row: { id?: string; username?: string; name?: string }, self: boolean): Promise<void> {
   form.id = row.id || '';
   form.username = row.username || row.name || '';
   form.oldPwd = '';
@@ -112,6 +112,8 @@ async function setData(row: { id?: string; username?: string; name?: string }, s
   form.repeatNewPwd = '';
   isSelf.value = self;
   visible.value = true;
+  // 先打开弹窗，再异步刷新密码策略，避免配置接口慢时阻塞用户操作反馈。
+  return getGlobal();
 }
 
 function closePwdDialog(): void {

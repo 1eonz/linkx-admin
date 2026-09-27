@@ -36,9 +36,13 @@
  *   fetchFn: getTodoList,
  *   immediate: true,
  * });
- * async function addTodo(todo) {
- *   await createTodo(todo);
- *   mutate(prev => [...(prev ?? []), todo]);
+ * function addTodo(todo) {
+ *   createTodo(todo)
+ *     .then(() => mutate((prev) => [...(prev ?? []), todo]))
+ *     .catch(handleCreateError)
+ *     .finally(() => {
+ *       submitting.value = false;
+ *     });
  * }
  * ```
  *
@@ -93,6 +97,10 @@ function throttle<T extends (...args: any[]) => any>(fn: T, wait: number): T {
       }
     });
   }) as T;
+}
+
+function isAbortError(error: unknown): boolean {
+  return typeof error === 'object' && error !== null && 'name' in error && error.name === 'AbortError';
 }
 
 // ===== 类型定义 =====
@@ -327,64 +335,71 @@ export function useFetch<TData, TParams extends any[] = any[]>(
   /**
    * 执行一次请求（含重试逻辑）
    */
-  async function executeOnce(p: TParams): Promise<TData | undefined> {
+  function executeOnce(p: TParams, seq: number): Promise<TData | undefined> {
     const controller = new AbortController();
     if (abortPrevious && currentController) {
       currentController.abort();
     }
     currentController = controller;
-    const seq = ++requestSeq;
 
     loading.value = true;
     error.value = undefined;
 
-    try {
-      const result = await fetchFn(...p);
-      // 请求已过期（被新请求取消），丢弃结果
-      if (seq !== requestSeq) return undefined;
+    return Promise.resolve()
+      .then(() => fetchFn(...p))
+      .then((result) => {
+        // 请求已过期（被新请求取消），丢弃结果
+        if (seq !== requestSeq) return undefined;
 
-      data.value = result;
-      onSuccess?.(result, p);
-      return result;
-    } catch (err) {
-      // 请求已过期
-      if (seq !== requestSeq) return undefined;
+        data.value = result;
+        onSuccess?.(result, p);
+        return result;
+      })
+      .catch((err: unknown) => {
+        // 请求已过期
+        if (seq !== requestSeq || isAbortError(err)) return undefined;
 
-      const e = err instanceof Error ? err : new Error(String(err));
-      error.value = e;
-      const shouldSuppress = onError?.(e, p);
-      if (shouldSuppress !== false) {
-        // 默认错误处理：仅 console.error，不弹 toast（http.ts 已处理）
-        console.error('[useFetch] 请求失败:', e);
-      }
-      return undefined;
-    } finally {
-      if (seq === requestSeq) {
-        loading.value = false;
-        onFinally?.(p);
-      }
-    }
+        const requestError = err instanceof Error ? err : new Error(String(err));
+        error.value = requestError;
+        const shouldSuppress = onError?.(requestError, p);
+        if (shouldSuppress !== false) {
+          // 默认错误处理：仅 console.error，不弹 toast（http.ts 已处理）
+          console.error('[useFetch] 请求失败:', requestError);
+        }
+        return undefined;
+      })
+      .finally(() => {
+        if (seq === requestSeq) {
+          loading.value = false;
+          onFinally?.(p);
+        }
+      });
   }
 
   /**
    * 带重试的请求执行
    */
-  async function executeWithRetry(p: TParams): Promise<TData | undefined> {
-    let lastError: Error | undefined;
-    for (let attempt = 0; attempt <= retryCount; attempt++) {
-      const result = await executeOnce(p);
-      if (result !== undefined || error.value === undefined) {
-        return result;
-      }
-      lastError = error.value;
-      if (attempt < retryCount) {
-        await new Promise((resolve) => setTimeout(resolve, retryInterval));
-      }
+  function executeWithRetry(p: TParams): Promise<TData | undefined> {
+    const seq = ++requestSeq;
+
+    function executeAttempt(attempt: number): Promise<TData | undefined> {
+      if (seq !== requestSeq) return Promise.resolve(undefined);
+
+      return executeOnce(p, seq).then((result) => {
+        if (seq !== requestSeq || result !== undefined || error.value === undefined || attempt >= retryCount) {
+          return result;
+        }
+
+        return new Promise<void>((resolve) => {
+          setTimeout(resolve, retryInterval);
+        }).then(() => {
+          if (seq !== requestSeq) return undefined;
+          return executeAttempt(attempt + 1);
+        });
+      });
     }
-    if (lastError) {
-      error.value = lastError;
-    }
-    return undefined;
+
+    return executeAttempt(0);
   }
 
   /**
@@ -400,7 +415,7 @@ export function useFetch<TData, TParams extends any[] = any[]>(
   /**
    * 触发请求
    */
-  async function fetch(...args: TParams): Promise<TData | undefined> {
+  function fetch(...args: TParams): Promise<TData | undefined> {
     params.value = args;
     return rawFetch(args);
   }
@@ -408,11 +423,11 @@ export function useFetch<TData, TParams extends any[] = any[]>(
   /**
    * 刷新：用上一次参数重新请求
    */
-  async function refresh(): Promise<TData | undefined> {
+  function refresh(): Promise<TData | undefined> {
     const lastParams = params.value ?? defaultParams;
     if (!lastParams) {
       console.warn('[useFetch] refresh 失败：无历史参数且未提供 defaultParams');
-      return undefined;
+      return Promise.resolve(undefined);
     }
     return fetch(...(lastParams as TParams));
   }

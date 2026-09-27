@@ -90,27 +90,28 @@ function handleReset(): void {
 }
 
 /** 导出：Blob 下载，文件名「协同岗编辑记录.xlsx」 */
-async function handleExport(params: Record<string, unknown>): Promise<void> {
-  try {
-    const res = await exportCollaborationEditPage(params as never);
-    const data = (res as unknown as { data?: ArrayBuffer })?.data;
-    if (!data) return;
-    const blob = new Blob([data], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+function handleExport(params: Record<string, unknown>): Promise<void> {
+  return exportCollaborationEditPage(params as never)
+    .then((res) => {
+      const data = (res as unknown as { data?: ArrayBuffer })?.data;
+      if (!data) return;
+      const blob = new Blob([data], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.style.display = 'none';
+      link.href = url;
+      link.setAttribute('download', '协同岗编辑记录.xlsx');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    })
+    .catch((error: unknown) => {
+      console.error('导出失败：', error);
+      ElMessage.error('导出失败');
     });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.style.display = 'none';
-    link.href = url;
-    link.setAttribute('download', '协同岗编辑记录.xlsx');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
-  } catch (error) {
-    console.error('导出失败：', error);
-    ElMessage.error('导出失败');
-  }
 }
 </script>
 

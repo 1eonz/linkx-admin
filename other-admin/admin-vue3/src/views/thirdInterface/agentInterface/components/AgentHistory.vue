@@ -9,7 +9,7 @@
  * - 详情弹窗：展示完整 query/response
  * - 导出（arraybuffer，支持选中行 ids）
  */
-import { Delete, View, Download, Search, Refresh } from '@element-plus/icons-vue';
+import { Delete, View, Download } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { computed, onMounted, reactive, ref } from 'vue';
 
@@ -146,48 +146,51 @@ function handleDelete(row: AiagentRecord): void {
     type: 'warning',
     confirmButtonClass: 'el-button--danger',
   })
-    .then(async () => {
-      try {
-        const res = await deleteAiagentRecord(row.id);
-        if (!res || res.code !== 0) {
-          ElMessage.error(res?.msg ?? '删除失败');
-          return;
-        }
-        ElMessage.success('删除成功');
-        tableRef.value?.refresh();
-      } catch (e) {
-        ElMessage.error((e as Error)?.message ?? '删除失败');
-      }
+    .then(() => {
+      return deleteAiagentRecord(row.id)
+        .then((res) => {
+          if (!res || res.code !== 0) {
+            ElMessage.error(res?.msg ?? '删除失败');
+            return;
+          }
+          ElMessage.success('删除成功');
+          tableRef.value?.refresh();
+        })
+        .catch((e: unknown) => {
+          ElMessage.error((e as Error)?.message ?? '删除失败');
+        });
     })
     .catch(() => {});
 }
 
 // ===== 导出 =====
-async function handleExport(): Promise<void> {
+function handleExport(): Promise<void> | void {
   if (exportLoading.value) return;
   exportLoading.value = true;
-  try {
-    // 选中行优先导出，ids 以逗号分隔
-    const ids = selection.value
-      .map((row) => row.id)
-      .filter(Boolean)
-      .join(',');
-    await downloadAiagentRecord({
-      userName: String(searchParams.userName ?? ''),
-      identityCardNumber: String(searchParams.identityCardNumber ?? ''),
-      content: String(searchParams.content ?? ''),
-      agentName: String(searchParams.agentName ?? ''),
-      startTime: String(searchParams.startTime ?? ''),
-      endTime: String(searchParams.endTime ?? ''),
-      ...(ids ? { ids } : {}),
+  // 选中行优先导出，ids 以逗号分隔
+  const ids = selection.value
+    .map((row) => row.id)
+    .filter(Boolean)
+    .join(',');
+  return downloadAiagentRecord({
+    userName: String(searchParams.userName ?? ''),
+    identityCardNumber: String(searchParams.identityCardNumber ?? ''),
+    content: String(searchParams.content ?? ''),
+    agentName: String(searchParams.agentName ?? ''),
+    startTime: String(searchParams.startTime ?? ''),
+    endTime: String(searchParams.endTime ?? ''),
+    ...(ids ? { ids } : {}),
+  })
+    .then(() => {
+      ElMessage.success('导出成功');
+    })
+    .catch((e: unknown) => {
+      console.error(e);
+      ElMessage.error('导出失败');
+    })
+    .finally(() => {
+      exportLoading.value = false;
     });
-    ElMessage.success('导出成功');
-  } catch (e) {
-    console.error(e);
-    ElMessage.error('导出失败');
-  } finally {
-    exportLoading.value = false;
-  }
 }
 
 onMounted(() => {

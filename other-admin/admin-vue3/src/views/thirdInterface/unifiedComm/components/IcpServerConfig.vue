@@ -97,36 +97,36 @@ const selectedTreeNode = ref<IcpTreeNode | null>(null);
 const dialogTitle = computed(() => (treeDialogType.value === 'dept' ? '选择组织' : '选择摄像头层级'));
 
 // ===== 加载服务器配置 =====
-async function fetchConfig(): Promise<void> {
+function fetchConfig(): Promise<void> {
   loading.value = true;
-  try {
-    const res = await getServerConfig();
-    if (res?.code === 0 && res.data) {
-      Object.assign(form, res.data);
-    }
-  } catch (e) {
-    console.error('[IcpServerConfig] 加载服务器配置失败', e);
-  } finally {
-    loading.value = false;
-  }
+  return getServerConfig()
+    .then((res) => {
+      if (res?.code === 0 && res.data) {
+        Object.assign(form, res.data);
+      }
+    })
+    .catch((e: unknown) => {
+      console.error('[IcpServerConfig] 加载服务器配置失败', e);
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 }
 
 // ===== 加载树数据 =====
-async function loadTreeData(): Promise<void> {
+function loadTreeData(): Promise<void> {
   treeLoading.value = true;
-  try {
-    if (treeDialogType.value === 'dept') {
-      const res = await getIcpDeptSelectTree();
+  const request = treeDialogType.value === 'dept' ? getIcpDeptSelectTree() : getIcpCameraSelectTree();
+  return request
+    .then((res) => {
       treeData.value = (res?.data as IcpTreeNode[]) ?? [];
-    } else {
-      const res = await getIcpCameraSelectTree();
-      treeData.value = (res?.data as IcpTreeNode[]) ?? [];
-    }
-  } catch (e) {
-    console.error('[IcpServerConfig] 加载树数据失败', e);
-  } finally {
-    treeLoading.value = false;
-  }
+    })
+    .catch((e: unknown) => {
+      console.error('[IcpServerConfig] 加载树数据失败', e);
+    })
+    .finally(() => {
+      treeLoading.value = false;
+    });
 }
 
 /** 打开树选择弹窗 */
@@ -175,16 +175,20 @@ async function handleSubmit(): Promise<void> {
   const valid = await formRef.value?.validate().catch(() => false);
   if (!valid) return;
   submitting.value = true;
-  try {
-    const res = await updateServerConfig(form);
-    if (res?.code !== 0) {
-      ElMessage.error(res?.msg ?? '保存失败');
-      return;
-    }
-    ElMessage.success('保存成功');
-  } finally {
-    submitting.value = false;
-  }
+  return updateServerConfig(form)
+    .then((res) => {
+      if (res?.code !== 0) {
+        ElMessage.error(res?.msg ?? '保存失败');
+        return;
+      }
+      ElMessage.success('保存成功');
+    })
+    .catch(() => {
+      ElMessage.error('保存失败');
+    })
+    .finally(() => {
+      submitting.value = false;
+    });
 }
 
 onMounted(() => {

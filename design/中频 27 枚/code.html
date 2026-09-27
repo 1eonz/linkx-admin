@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary-fixed-variant":"#1d5200","surface-dim":"#d7dae0","inverse-primary":"#a2c9ff","primary-fixed":"#d3e4ff","tertiary-fixed-dim":"#80dd52","on-error":"#ffffff","surface-container-high":"#e6e8ef","secondary-container":"#d2e4ff","on-primary-fixed":"#001c38","tertiary":"#286c00","on-secondary":"#ffffff","on-tertiary":"#ffffff","inverse-on-surface":"#eef1f7","surface-tint":"#0060a9","surface-container-lowest":"#ffffff","surface-bright":"#f8f9ff","secondary-fixed-dim":"#b6c8e2","on-tertiary-container":"#133b00","on-primary-container":"#003460","on-tertiary-fixed":"#072100","on-error-container":"#93000a","on-surface-variant":"#404752","on-secondary-container":"#55667c","surface":"#f8f9ff","on-secondary-fixed-variant":"#37485d","primary-fixed-dim":"#a2c9ff","inverse-surface":"#2d3136","error-container":"#ffdad6","background":"#f8f9ff","on-background":"#181c20","on-primary":"#ffffff","outline-variant":"#c0c7d4","on-surface":"#181c20","surface-variant":"#e0e2e9","on-secondary-fixed":"#0a1c30","error":"#ba1a1a","primary":"#0060a9","secondary-fixed":"#d2e4ff","on-primary-fixed-variant":"#004881","surface-container":"#ebeef4","surface-container-low":"#f1f3fa","primary-container":"#409eff","secondary":"#4f6076","outline":"#707784","tertiary-container":"#55af28","surface-container-highest":"#e0e2e9","tertiary-fixed":"#9bfa6b"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"gutter":"16px","margin":"20px","space-xl":"24px","space-md":"12px","space-lg":"16px","space-sm":"8px","space-xs":"4px"},"fontFamily":{"body-lg":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"headline-md":["Inter"],"label-lg":["Inter"],"headline-lg":["Inter"],"display-lg":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"body-md":["Inter"]},"fontSize":{"body-lg":["14px",{"lineHeight":"22px","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"500"}],"headline-md":["16px",{"lineHeight":"24px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-lg":["20px",{"lineHeight":"28px","fontWeight":"600"}],"display-lg":["28px",{"lineHeight":"36px","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-sm":["14px",{"lineHeight":"22px","fontWeight":"600"}],"body-md":["13px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">local_police</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">LinkX PoliceOS</span><span class="font-label-sm text-label-sm text-on-surface-variant">GB/T 33170-2016</span></div></div><div class="px-space-md py-space-sm"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Command Ops</span></div><nav class="flex flex-col gap-space-xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-headline-sm rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="command-overview" href="#"><span class="material-symbols-outlined text-[18px]">dashboard</span><span>Command Overview</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="incident-dispatch" href="#"><span class="material-symbols-outlined text-[18px]">emergency</span><span>Incident Dispatch</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="asset-surveillance" href="#"><span class="material-symbols-outlined text-[18px]">videocam</span><span>Surveillance Grid</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="patrol-units" href="#"><span class="material-symbols-outlined text-[18px]">minor_crash</span><span>Patrol Units &amp; GPS</span></a></nav><div class="px-space-md pt-space-lg pb-space-sm"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Standard &amp; Audit</span></div><nav class="flex flex-col gap-space-xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-headline-sm rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="case-dossier" href="#"><span class="material-symbols-outlined text-[18px]">folder_shared</span><span>Case Records &amp; Dossier</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="system-telemetry" href="#"><span class="material-symbols-outlined text-[18px]">tune</span><span>Visual Token Inspector</span></a></nav></div><div class="p-space-md bg-surface-container m-space-md rounded-lg flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-outline uppercase">Secure Uplink</span><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span></div><span class="font-body-sm text-body-sm text-on-surface font-mono">CN-PS-NET::SECURE</span></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="px-space-sm py-0.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-mono">STANDARD: GB/T 33170</span><span class="px-space-sm py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">REV 4.2</span></div><div class="hidden lg:flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md"><span class="material-symbols-outlined text-[16px] text-tertiary">verified</span><span>GovOps Certified</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1 rounded-lg"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">search</span><input class="bg-transparent border-none outline-none font-body-sm text-body-sm text-on-surface placeholder:text-outline w-64" placeholder="Search unit ID, plate, incident code..." type="text"/></div><button class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">settings</span></button><div class="h-6 w-px bg-outline-variant"></div><div class="flex items-center gap-space-sm"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface font-medium leading-none">Commander Z. Chen</span><span class="font-label-sm text-label-sm text-on-surface-variant">ID: PS-880491</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Specimen Top Header Bar -->
+<header class="bg-surface-container-lowest p-space-lg shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="px-space-sm py-0.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold tracking-wide">
+            P1 核心扩展标本
+          </span>
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+            LxIcon P1 级矢量线性图标集规范标本与检视系统
+          </span>
+<span class="px-space-sm py-0.5 rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-mono">
+            VER 2.4.0
+          </span>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1 font-mono">
+<span class="w-2 h-2 rounded-full bg-tertiary inline-block"></span>
+            GB/T 33444-2016 兼容认证
+          </span>
+<span>•</span>
+<span class="font-mono">viewBox: 0 0 24 24</span>
+<span>•</span>
+<span class="font-mono">stroke-width: 1.5 (round/round)</span>
+<span>•</span>
+<span class="text-primary font-medium">单色严格继承 currentColor</span>
+<span>•</span>
+<span>零多色面填充约束</span>
+</div>
+</div>
+<!-- Controls: Size & Color Switches -->
+<div class="flex items-center gap-space-lg bg-surface-container-low p-space-sm rounded-lg flex-wrap">
+<!-- Scale Switch -->
+<div class="flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase px-space-xs">画布缩放</span>
+<div class="flex bg-surface-container-highest p-0.5 rounded-lg text-on-surface-variant font-label-sm text-label-sm" id="sizeSelector">
+<button class="px-2 py-1 rounded-lg hover:bg-surface transition-colors" data-size="16" type="button">16px</button>
+<button class="px-2 py-1 rounded-lg hover:bg-surface transition-colors" data-size="18" type="button">18px</button>
+<button class="px-2 py-1 rounded-lg bg-surface text-primary font-semibold shadow-sm" data-size="20" type="button">20px</button>
+<button class="px-2 py-1 rounded-lg hover:bg-surface transition-colors" data-size="24" type="button">24px</button>
+</div>
+</div>
+<div class="w-px h-6 bg-outline-variant"></div>
+<!-- Palette Filter Switch -->
+<div class="flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase px-space-xs">标尺色阶</span>
+<div class="flex items-center gap-1.5" id="colorSelector">
+<button class="w-6 h-6 rounded-full bg-[#181c20] shadow-sm flex items-center justify-center transition-transform hover:scale-110 active" data-color="text-on-surface" title="炭黑 (Surface Black)" type="button">
+<span class="material-symbols-outlined text-white text-[14px]">check</span>
+</button>
+<button class="w-6 h-6 rounded-full bg-[#0060a9] shadow-sm flex items-center justify-center transition-transform hover:scale-110" data-color="text-primary" title="主蓝 (Police Primary Blue)" type="button">
+<span class="material-symbols-outlined text-white text-[14px] hidden">check</span>
+</button>
+<button class="w-6 h-6 rounded-full bg-[#55af28] shadow-sm flex items-center justify-center transition-transform hover:scale-110" data-color="text-tertiary-container" title="安全绿 (Security Success)" type="button">
+<span class="material-symbols-outlined text-white text-[14px] hidden">check</span>
+</button>
+<button class="w-6 h-6 rounded-full bg-[#ba1a1a] shadow-sm flex items-center justify-center transition-transform hover:scale-110" data-color="text-error" title="高危红 (Alarm Danger)" type="button">
+<span class="material-symbols-outlined text-white text-[14px] hidden">check</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Workspace Canvas -->
+<div class="p-margin flex flex-col gap-gutter">
+<!-- Main Two-Column Layout (Grid Gallery + Interactive Inspector) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter items-start">
+<!-- Left: 27-Icon Matrix Panel (Span 8) -->
+<section class="xl:col-span-8 bg-surface-container-lowest p-space-lg rounded-lg shadow-sm flex flex-col gap-space-md">
+<!-- Panel Header -->
+<div class="flex items-center justify-between pb-space-sm bg-surface-container-lowest">
+<div class="flex items-center gap-space-sm">
+<div class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">P1 核心通用集合 (共 27 款核心图标全标本)</h2>
+<span class="px-space-sm py-0.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-mono font-semibold">
+              全量收录率 100%
+            </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-mono">
+            覆盖历史公安工程调用频次 <strong class="text-on-surface font-semibold">98.4%</strong>
+</span>
+</div>
+<!-- 27 Icon Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-space-md text-on-surface" id="specimenGrid">
+<!-- 1. people -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="前排主执勤人员剪影与后排副警半身轮廓叠加，严格采用两处 1.5 描边正圆头型与连续肩部几何圆弧。" data-freq="28,490 次" data-id="1" data-legacy="el-icon-user-solid / lx-group" data-name="people" data-zh="两个小人 / 群组协同">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#01</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">28.4k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<circle cx="9" cy="7" r="3"></circle>
+<path d="M3 19v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1"></path>
+<path d="M16 3.13a3 3 0 0 1 0 5.75"></path>
+<path d="M21 19v-1a4 4 0 0 0-3-3.87"></path>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">people</span>
+<span class="block text-[11px] text-on-surface-variant truncate">群组协作</span>
+</div>
+</div>
+<!-- 2. file -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="规范 45 度右上角折角纸张结构，纸页比例保持 1:1.33，内含两条平行文档条目骨架。" data-freq="24,120 次" data-id="2" data-legacy="el-icon-document" data-name="file" data-zh="文档 / 卷宗底册">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#02</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">24.1k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+<polyline points="14 2 14 8 20 8"></polyline>
+<line x1="16" x2="8" y1="13" y2="13"></line>
+<line x1="16" x2="8" y1="17" y2="17"></line>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">file</span>
+<span class="block text-[11px] text-on-surface-variant truncate">文档卷宗</span>
+</div>
+</div>
+<!-- 3. file-check -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="折角卷宗底框内置 45 度圆润折线勾选标记，表示任务完成、案情审核通过。" data-freq="19,550 次" data-id="3" data-legacy="el-icon-document-checked" data-name="file-check" data-zh="文档核实 / 审结归档">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#03</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">19.5k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+<polyline points="14 2 14 8 20 8"></polyline>
+<path d="m9 15 2 2 4-4"></path>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">file-check</span>
+<span class="block text-[11px] text-on-surface-variant truncate">核实归档</span>
+</div>
+</div>
+<!-- 4. star -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="纯线性正五角星，中心对称镂空，尖角与凹槽皆遵循 round 连接标准，杜绝破角。" data-freq="17,310 次" data-id="4" data-legacy="el-icon-star-off" data-name="star" data-zh="星标 / 重点督办">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#04</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">17.3k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">star</span>
+<span class="block text-[11px] text-on-surface-variant truncate">重点星标</span>
+</div>
+</div>
+<!-- 5. tag -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="斜向 45 度穿绳分类吊牌，顶部内置微型贯穿定位孔，用于涉案物料多维分类标记。" data-freq="16,880 次" data-id="5" data-legacy="el-icon-price-tag" data-name="tag" data-zh="标签 / 物料特征">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#05</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">16.8k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+<line x1="7" x2="7.01" y1="7" y2="7"></line>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">tag</span>
+<span class="block text-[11px] text-on-surface-variant truncate">分类标签</span>
+</div>
+</div>
+<!-- 6. image -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="圆角矩形外相框内嵌两座简约平滑山峦折线，右上角配置单色微型小太阳。" data-freq="15,400 次" data-id="6" data-legacy="el-icon-picture-outline" data-name="image" data-zh="图片 / 视界底片">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#06</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">15.4k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<rect height="18" rx="2" ry="2" width="18" x="3" y="3"></rect>
+<circle cx="8.5" cy="8.5" r="1.5"></circle>
+<polyline points="21 15 16 10 5 21"></polyline>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">image</span>
+<span class="block text-[11px] text-on-surface-variant truncate">图像影像</span>
+</div>
+</div>
+<!-- 7. video -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="矩形摄像机身连缀右侧梯形放射透镜，高频用于雪亮工程前端与车载执法记录仪。" data-freq="26,190 次" data-id="7" data-legacy="el-icon-video-camera" data-name="video" data-zh="视频 / 天网云台">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#07</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">26.1k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<polygon points="23 7 16 12 23 17 23 7"></polygon>
+<rect height="14" rx="2" ry="2" width="15" x="1" y="5"></rect>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">video</span>
+<span class="block text-[11px] text-on-surface-variant truncate">视频监控</span>
+</div>
+</div>
+<!-- 8. mobile -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="长宽比严格遵循 1:2.1 的窄边直板警用移动终端，底部预留微点指示槽。" data-freq="21,300 次" data-id="8" data-legacy="el-icon-mobile-phone" data-name="mobile" data-zh="手机 / 移动警务通">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#08</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">21.3k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<rect height="20" rx="2" ry="2" width="14" x="5" y="2"></rect>
+<line x1="12" x2="12.01" y1="18" y2="18"></line>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">mobile</span>
+<span class="block text-[11px] text-on-surface-variant truncate">警务终端</span>
+</div>
+</div>
+<!-- 9. link -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="两节 45 度交错锁结的椭圆链环，表示公安专网数据总线跨节点连接状态。" data-freq="13,440 次" data-id="9" data-legacy="el-icon-link" data-name="link" data-zh="链接 / 警网链路">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#09</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">13.4k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">link</span>
+<span class="block text-[11px] text-on-surface-variant truncate">网络链路</span>
+</div>
+</div>
+<!-- 10. share -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="标准三元拓扑节点与双射线几何，表达指挥部向属地派出所情报共享。" data-freq="12,190 次" data-id="10" data-legacy="el-icon-share" data-name="share" data-zh="分享 / 跨部门协防">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#10</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">12.1k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<circle cx="18" cy="5" r="3"></circle>
+<circle cx="6" cy="12" r="3"></circle>
+<circle cx="18" cy="19" r="3"></circle>
+<line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
+<line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">share</span>
+<span class="block text-[11px] text-on-surface-variant truncate">协防共享</span>
+</div>
+</div>
+<!-- 11. arrow-up -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="垂直居中向上正向指示，由折线顶角与垂直中轴构成，确保小尺寸下的锐度表现。" data-freq="14,020 次" data-id="11" data-legacy="el-icon-top" data-name="arrow-up" data-zh="粗上箭头 / 升级调控">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#11</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">14.0k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<line x1="12" x2="12" y1="19" y2="5"></line>
+<polyline points="5 12 12 5 19 12"></polyline>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">arrow-up</span>
+<span class="block text-[11px] text-on-surface-variant truncate">向上提升</span>
+</div>
+</div>
+<!-- 12. arrow-down -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="向下主轴垂直指引，常用于执法日志下钻展开或警力调配降级。" data-freq="13,890 次" data-id="12" data-legacy="el-icon-bottom" data-name="arrow-down" data-zh="粗下箭头 / 下钻解构">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#12</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">13.8k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<line x1="12" x2="12" y1="5" y2="19"></line>
+<polyline points="19 12 12 19 5 12"></polyline>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">arrow-down</span>
+<span class="block text-[11px] text-on-surface-variant truncate">向下深入</span>
+</div>
+</div>
+<!-- 13. arrow-left -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="指向左侧的水平导航主干箭头，在多级指挥面板中负责安全返回。" data-freq="15,620 次" data-id="13" data-legacy="el-icon-back" data-name="arrow-left" data-zh="粗左箭头 / 级联回退">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#13</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">15.6k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<line x1="19" x2="5" y1="12" y2="12"></line>
+<polyline points="12 19 5 12 12 5"></polyline>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">arrow-left</span>
+<span class="block text-[11px] text-on-surface-variant truncate">向左返回</span>
+</div>
+</div>
+<!-- 14. arrow-right -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="水平向右折线主干，符合右移推进心智，常用在步骤条与审批流流转。" data-freq="16,330 次" data-id="14" data-legacy="el-icon-right" data-name="arrow-right" data-zh="粗右箭头 / 流程推演">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#14</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">16.3k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">arrow-right</span>
+<span class="block text-[11px] text-on-surface-variant truncate">向右推进</span>
+</div>
+</div>
+<!-- 15. caret-down -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="下垂几何小三角（通过纯线性封闭多边形轮廓严格呈现，或单色等线构建）。" data-freq="27,100 次" data-id="15" data-legacy="el-icon-caret-bottom" data-name="caret-down" data-zh="实心倒三角 / 下拉气泡">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#15</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">27.1k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<path d="M7 10l5 5 5-5z"></path>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">caret-down</span>
+<span class="block text-[11px] text-on-surface-variant truncate">下拉角标</span>
+</div>
+</div>
+<!-- 16. close -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="正圆外环界定安全边界，内部配置 45 度精密交叉的 X 形线条，用于警情作废与错误清除。" data-freq="20,910 次" data-id="16" data-legacy="el-icon-circle-close" data-name="close" data-zh="圆框叉 / 异常驳回">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#16</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">20.9k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<circle cx="12" cy="12" r="9"></circle>
+<line x1="15" x2="9" y1="9" y2="15"></line>
+<line x1="9" x2="15" y1="9" y2="15"></line>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">close</span>
+<span class="block text-[11px] text-on-surface-variant truncate">撤销驳回</span>
+</div>
+</div>
+<!-- 17. switch -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="水平长胶囊几何外轮廓与一侧的定位圆形滑块，直观反映功能开关通断机制。" data-freq="11,200 次" data-id="17" data-legacy="el-icon-switch-button / lx-toggle" data-name="switch" data-zh="胶囊开关 / 链路通断">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#17</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">11.2k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<rect height="12" rx="6" ry="6" width="20" x="2" y="6"></rect>
+<circle cx="8" cy="12" r="3"></circle>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">switch</span>
+<span class="block text-[11px] text-on-surface-variant truncate">胶囊开关</span>
+</div>
+</div>
+<!-- 18. power -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="经典国际电工委员会 IEC 60417 开口圆弧配合顶部垂直插入的线性脉冲断路柱。" data-freq="18,440 次" data-id="18" data-legacy="el-icon-switch-button" data-name="power" data-zh="电源 / 主机启闭">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#18</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">18.4k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+<line x1="12" x2="12" y1="2" y2="12"></line>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">power</span>
+<span class="block text-[11px] text-on-surface-variant truncate">电源启闭</span>
+</div>
+</div>
+<!-- 19. clock -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="正圆计时表盘配 90 度右直角时针与分针，表征接警响应耗时与限时督办。" data-freq="23,900 次" data-id="19" data-legacy="el-icon-time" data-name="clock" data-zh="表盘 / 处警时限">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#19</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">23.9k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<circle cx="12" cy="12" r="9"></circle>
+<polyline points="12 7 12 12 16 14"></polyline>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">clock</span>
+<span class="block text-[11px] text-on-surface-variant truncate">表盘时效</span>
+</div>
+</div>
+<!-- 20. grid -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="田字格布局，4 个带轻微圆角的子正方形，间隔统一为 2.5px，支持视频墙分屏模式。" data-freq="17,600 次" data-id="20" data-legacy="el-icon-grid" data-name="grid" data-zh="四宫格 / 战术分屏">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#20</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">17.6k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<rect height="7" rx="1" width="7" x="3" y="3"></rect>
+<rect height="7" rx="1" width="7" x="14" y="3"></rect>
+<rect height="7" rx="1" width="7" x="14" y="14"></rect>
+<rect height="7" rx="1" width="7" x="3" y="14"></rect>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">grid</span>
+<span class="block text-[11px] text-on-surface-variant truncate">网格分屏</span>
+</div>
+</div>
+<!-- 21. list -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="三道齐头并进的水平条目线，用于列表视图切换、涉案档案目录检索。" data-freq="16,100 次" data-id="21" data-legacy="el-icon-tickets" data-name="list" data-zh="列表 / 警情队列">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#21</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">16.1k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<line x1="8" x2="21" y1="6" y2="6"></line>
+<line x1="8" x2="21" y1="12" y2="12"></line>
+<line x1="8" x2="21" y1="18" y2="18"></line>
+<line x1="3" x2="3.01" y1="6" y2="6"></line>
+<line x1="3" x2="3.01" y1="12" y2="12"></line>
+<line x1="3" x2="3.01" y1="18" y2="18"></line>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">list</span>
+<span class="block text-[11px] text-on-surface-variant truncate">清单队列</span>
+</div>
+</div>
+<!-- 22. copy -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="两张错位重叠的标准直角圆弧纸张，直观呈现案卷快速克隆与流水号复制。" data-freq="15,220 次" data-id="22" data-legacy="el-icon-copy-document" data-name="copy" data-zh="双叠文档 / 复制克隆">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#22</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">15.2k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<rect height="13" rx="2" ry="2" width="13" x="9" y="9"></rect>
+<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">copy</span>
+<span class="block text-[11px] text-on-surface-variant truncate">复写克隆</span>
+</div>
+</div>
+<!-- 23. phone -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="45 度倾斜的经典电话听筒轮廓曲线，专门应用于接处警中心语音热线。" data-freq="22,780 次" data-id="23" data-legacy="el-icon-phone-outline" data-name="phone" data-zh="电话 / 110热线">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#23</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">22.7k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">phone</span>
+<span class="block text-[11px] text-on-surface-variant truncate">热线通话</span>
+</div>
+</div>
+<!-- 24. email -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="矩形外廓搭配中央下探封口折线，用于机要通知、部级协查函件分派。" data-freq="14,800 次" data-id="24" data-legacy="el-icon-message" data-name="email" data-zh="信封 / 公安专函">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#24</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">14.8k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+<polyline points="22,6 12,13 2,6"></polyline>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">email</span>
+<span class="block text-[11px] text-on-surface-variant truncate">机要专函</span>
+</div>
+</div>
+<!-- 25. lock -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="封闭矩形实底锁体配备居中闭合 U 型锁扣，指示涉密涉案证据与系统保护。" data-freq="25,900 次" data-id="25" data-legacy="el-icon-lock" data-name="lock" data-zh="挂锁 / 权限锁定">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#25</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">25.9k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<rect height="11" rx="2" ry="2" width="18" x="3" y="11"></rect>
+<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">lock</span>
+<span class="block text-[11px] text-on-surface-variant truncate">密级加锁</span>
+</div>
+</div>
+<!-- 26. unlock -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md" data-desc="U 型锁钩弹开并向右旋转 24 度，明确无歧义传递权限释放、封条解除状态。" data-freq="11,850 次" data-id="26" data-legacy="el-icon-unlock" data-name="unlock" data-zh="开锁 / 权限解封">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#26</span>
+<span class="px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant">11.8k</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<rect height="11" rx="2" ry="2" width="18" x="3" y="11"></rect>
+<path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">unlock</span>
+<span class="block text-[11px] text-on-surface-variant truncate">解封开放</span>
+</div>
+</div>
+<!-- 27. date (补齐第27个图标：日历/时间基准) -->
+<div class="icon-card group cursor-pointer bg-surface p-space-md rounded-lg shadow-sm flex flex-col items-center justify-between relative transition-all duration-150 hover:bg-primary-fixed/20 hover:shadow-md active ring-2 ring-primary" data-desc="顶部两根装订挂耳、横切表头线与内置四点排期矩阵，保障出警排班周期清晰。" data-freq="21,740 次" data-id="27" data-legacy="el-icon-date / lx-calendar" data-name="date" data-zh="日历 / 办案排期">
+<div class="w-full flex justify-between items-center text-[10px] text-outline font-mono">
+<span>#27</span>
+<span class="px-1 py-0.2 rounded-lg bg-primary text-on-primary font-semibold">标本聚焦</span>
+</div>
+<div class="icon-canvas my-3 flex items-center justify-center transition-transform group-hover:scale-110">
+<svg class="specimen-svg transition-all" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20">
+<rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+<line x1="16" x2="16" y1="2" y2="6"></line>
+<line x1="8" x2="8" y1="2" y2="6"></line>
+<line x1="3" x2="21" y1="10" y2="10"></line>
+</svg>
+</div>
+<div class="text-center w-full">
+<span class="block font-mono text-[11px] font-semibold text-on-surface group-hover:text-primary">date</span>
+<span class="block text-[11px] text-on-surface-variant truncate">排期日历</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Right: Specimen Inspector Panel (Span 4) -->
+<aside class="xl:col-span-4 bg-surface-container-lowest p-space-lg rounded-lg shadow-sm flex flex-col gap-space-md sticky top-20">
+<!-- Inspector Title -->
+<div class="flex items-center justify-between pb-space-sm bg-surface-container-lowest">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">biotech</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">标本细节检视仪</h3>
+</div>
+<span class="font-label-sm text-label-sm px-space-sm py-0.5 rounded-lg bg-tertiary/10 text-tertiary font-mono">
+            INSPECTOR::LIVE
+          </span>
+</div>
+<!-- 48px Magnifier Viewport with Geometric Coordinate Overlay -->
+<div class="flex flex-col items-center justify-center p-space-lg bg-surface-container rounded-lg relative overflow-hidden">
+<!-- Background Coordinate Radar Matrix -->
+<div class="absolute inset-0 opacity-20 pointer-events-none flex items-center justify-center">
+<svg class="text-outline" height="240" viewbox="0 0 240 240" width="240">
+<line stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" x1="0" x2="240" y1="120" y2="120"></line>
+<line stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" x1="120" x2="120" y1="0" y2="240"></line>
+<circle cx="120" cy="120" fill="none" r="100" stroke="currentColor" stroke-width="1"></circle>
+<circle cx="120" cy="120" fill="none" r="80" stroke="currentColor" stroke-dasharray="3 3" stroke-width="1"></circle>
+<rect fill="none" height="200" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1" width="200" x="20" y="20"></rect>
+<rect fill="none" height="160" stroke="#ba1a1a" stroke-width="1" width="160" x="40" y="40"></rect>
+</svg>
+</div>
+<!-- Safe Box Notification -->
+<div class="absolute top-2 left-2 flex items-center gap-1 text-[10px] font-mono text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-error inline-block"></span>
+<span>20x20 核心象限 (2px 安全边距)</span>
+</div>
+<div class="absolute top-2 right-2 text-[10px] font-mono text-outline">
+            2.0X 几何放大
+          </div>
+<!-- Rendered Large Specimen -->
+<div class="w-32 h-32 flex items-center justify-center relative z-10 my-4" id="inspectorViewBox">
+<svg class="transition-transform duration-200" fill="none" height="64" id="inspectorSvg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="64">
+<rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+<line x1="16" x2="16" y1="2" y2="6"></line>
+<line x1="8" x2="8" y1="2" y2="6"></line>
+<line x1="3" x2="21" y1="10" y2="10"></line>
+</svg>
+</div>
+<div class="w-full flex justify-between items-center text-label-sm font-mono text-outline-variant pt-space-xs z-10">
+<span>(X: 0, Y: 0)</span>
+<span>VIEWBOX 24×24</span>
+<span>(X: 24, Y: 24)</span>
+</div>
+</div>
+<!-- Metric Details Table -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex justify-between py-1 bg-surface-container-low px-space-sm rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant">标准名称 (Standard Name)</span>
+<span class="font-mono text-label-sm font-semibold text-primary" id="inspectName">date</span>
+</div>
+<div class="flex justify-between py-1 px-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">中文语义与场景</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium" id="inspectZh">日历 / 办案排期</span>
+</div>
+<div class="flex justify-between py-1 bg-surface-container-low px-space-sm rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant">老旧工程迁移映射</span>
+<span class="font-mono text-label-sm text-on-surface-variant" id="inspectLegacy">el-icon-date / lx-calendar</span>
+</div>
+<div class="flex justify-between py-1 px-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">历史收敛引用量</span>
+<span class="font-mono text-label-sm text-on-surface" id="inspectFreq">21,740 次</span>
+</div>
+</div>
+<!-- Vue 3 Syntax Contract Box -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Vue 3 规范引用契约</span>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-0.5" id="copyVueBtn">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>复制契约</span>
+</button>
+</div>
+<div class="bg-surface-container-highest p-space-sm rounded-lg font-mono text-body-sm text-on-surface select-all overflow-x-auto">
+<code id="vueCode">&lt;LxIcon name="date" :size="20" class="text-primary" /&gt;</code>
+</div>
+</div>
+<!-- SVG Source Code Inspector -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">标准 SVG 矢量源码</span>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-0.5" id="copySvgBtn">
+<span class="material-symbols-outlined text-[14px]">code</span>
+<span>复制 SVG</span>
+</button>
+</div>
+<div class="bg-surface-container-highest p-space-sm rounded-lg font-mono text-[11px] leading-relaxed text-on-surface-variant max-h-32 overflow-y-auto break-all select-all">
+<pre id="svgSourceCode">&lt;svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"&gt;
+  &lt;rect x="3" y="4" width="18" height="18" rx="2" ry="2"/&gt;
+  &lt;line x1="16" y1="2" x2="16" y2="6"/&gt;
+  &lt;line x1="8" y1="2" x2="8" y2="6"/&gt;
+  &lt;line x1="3" y1="10" x2="21" y2="10"/&gt;
+&lt;/svg&gt;</pre>
+</div>
+</div>
+<!-- Engineering Guideline Note -->
+<div class="p-space-sm bg-secondary-container/40 rounded-lg flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">verified_user</span>
+<p class="font-body-sm text-body-sm text-on-secondary-container" id="inspectDesc">
+            顶部两根装订挂耳、横切表头线与内置四点排期矩阵，保障出警排班周期清晰。
+          </p>
+</div>
+</aside>
+</div>
+<!-- Bottom Standard Specifications & Discipline Section -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter pt-space-md">
+<!-- Spec Box 1: Geometric Grid & Safe Frame -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined text-[24px]">grid_4x4</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">几何网格与 2px 安全视界</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          所有 P1 图标严格约束在 24×24 笛卡尔坐标系中，外圈预留 2px 绝对安全溢出间距。有效物理矢量形体必须牢固落入 20×20 像素中心象限，避免在高密 Element Plus 表格中被裁剪切角。
+        </p>
+<div class="mt-auto pt-space-sm flex items-center justify-between text-label-sm font-mono text-outline">
+<span>COORDINATE: 24×24</span>
+<span>PADDING: 2px STRICT</span>
+</div>
+</div>
+<!-- Spec Box 2: Density Tiers -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined text-[24px]">view_quilt</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">四档工程规格自适应</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          系统提供四档标准化渲染规格：<strong>16px</strong> (警务表格微型标签)、<strong>18px</strong> (紧凑型输入框前缀)、<strong>20px</strong> (标准按钮与侧边栏常规态)、<strong>24px</strong> (大屏态势与战备抽屉主导操作)。
+        </p>
+<div class="mt-auto pt-space-sm flex items-center justify-between text-label-sm font-mono text-outline">
+<span>TIERS: 16 | 18 | 20 | 24 px</span>
+<span>STROKE: 1.5 FIX</span>
+</div>
+</div>
+<!-- Spec Box 3: Technical Discipline -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined text-[24px]">gavel</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">ICON-DESIGN.md 契约纪律</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          1. 严禁使用 WebFont 字体打包，全面收敛为纯 SVG 矢量组件。<br/>
+          2. 强制使用 <code class="text-primary font-mono font-medium">currentColor</code> 线性描边，禁止硬编码多色填充。<br/>
+          3. 描边顶点与拐点强制使用 <code class="text-primary font-mono font-medium">round/round</code>，确保微观渲染平滑。
+        </p>
+<div class="mt-auto pt-space-sm flex items-center justify-between text-label-sm font-mono text-outline">
+<span>PROTOCOL: GB/T 33444</span>
+<span>NO_FONT_PACKS</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Micro-Interactions Client Script -->
+<script>
+    (function initSpecimenInspector() {
+      const grid = document.getElementById('specimenGrid');
+      const cards = grid.querySelectorAll('.icon-card');
+      const inspectorSvg = document.getElementById('inspectorSvg');
+      const inspectName = document.getElementById('inspectName');
+      const inspectZh = document.getElementById('inspectZh');
+      const inspectLegacy = document.getElementById('inspectLegacy');
+      const inspectFreq = document.getElementById('inspectFreq');
+      const inspectDesc = document.getElementById('inspectDesc');
+      const vueCode = document.getElementById('vueCode');
+      const svgSourceCode = document.getElementById('svgSourceCode');
+      const copyVueBtn = document.getElementById('copyVueBtn');
+      const copySvgBtn = document.getElementById('copySvgBtn');
+      
+      const sizeSelector = document.getElementById('sizeSelector');
+      const colorSelector = document.getElementById('colorSelector');
+
+      // Click card to update inspector
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          cards.forEach(c => {
+            c.classList.remove('ring-2', 'ring-primary', 'bg-primary-fixed/20');
+            const badge = c.querySelector('.text-on-primary');
+            if (badge) {
+              badge.className = 'px-1 py-0.2 rounded-lg bg-surface-container text-on-surface-variant';
+              badge.textContent = c.dataset.freq.split(' ')[0];
+            }
+          });
+
+          card.classList.add('ring-2', 'ring-primary', 'bg-primary-fixed/20');
+          
+          const svgEl = card.querySelector('svg');
+          if (svgEl) {
+            inspectorSvg.innerHTML = svgEl.innerHTML;
+          }
+
+          const name = card.dataset.name;
+          const zh = card.dataset.zh;
+          const legacy = card.dataset.legacy;
+          const freq = card.dataset.freq;
+          const desc = card.dataset.desc;
+
+          inspectName.textContent = name;
+          inspectZh.textContent = zh;
+          inspectLegacy.textContent = legacy;
+          inspectFreq.textContent = freq;
+          inspectDesc.textContent = desc;
+
+          vueCode.textContent = `<LxIcon name="${name}" :size="20" class="text-primary" />`;
+
+          // Format SVG code
+          const fullSvg = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">\n  ${svgEl.innerHTML.trim()}\n</svg>`;
+          svgSourceCode.textContent = fullSvg;
+        });
+      });
+
+      // Size switcher
+      sizeSelector.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          sizeSelector.querySelectorAll('button').forEach(b => {
+            b.className = 'px-2 py-1 rounded-lg hover:bg-surface transition-colors';
+          });
+          btn.className = 'px-2 py-1 rounded-lg bg-surface text-primary font-semibold shadow-sm';
+          const size = btn.dataset.size;
+          document.querySelectorAll('.specimen-svg').forEach(s => {
+            s.setAttribute('width', size);
+            s.setAttribute('height', size);
+          });
+        });
+      });
+
+      // Color palette filter
+      colorSelector.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          colorSelector.querySelectorAll('button span').forEach(s => s.classList.add('hidden'));
+          btn.querySelector('span').classList.remove('hidden');
+
+          const colorClass = btn.dataset.color;
+          grid.className = `grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-space-md ${colorClass}`;
+          inspectorSvg.className = `transition-transform duration-200 ${colorClass}`;
+        });
+      });
+
+      // Copy helpers
+      function showCopied(btn, originalText) {
+        btn.innerHTML = `<span class="material-symbols-outlined text-[14px]">done</span><span>已复制</span>`;
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+        }, 1600);
+      }
+
+      copyVueBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(vueCode.textContent).then(() => {
+          showCopied(copyVueBtn, `<span class="material-symbols-outlined text-[14px]">content_copy</span><span>复制契约</span>`);
+        });
+      });
+
+      copySvgBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(svgSourceCode.textContent).then(() => {
+          showCopied(copySvgBtn, `<span class="material-symbols-outlined text-[14px]">code</span><span>复制 SVG</span>`);
+        });
+      });
+
+    })();
+  </script>
+</div></main></div></body></html>

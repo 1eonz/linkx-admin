@@ -1,0 +1,10 @@
+/**
+ * 整合样式入口（开发态）— "一行引入" EP + Lx 全部样式
+ *
+ * 宿主项目：import 'lx-ui/style.css'
+ * - 发布态 → dist/style.css（EP 全量样式 + Lx 令牌/桥接/组件样式，构建时生成）
+ * - 开发态 → 本文件（vite 可解析裸包 css 导入）
+ */
+@import 'element-plus/dist/index.css';
+@import '../tokens/variables.css';
+@import './element-theme.css';

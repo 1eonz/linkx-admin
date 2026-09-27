@@ -175,13 +175,9 @@ export function selectDivision(): HttpResult<DivisionItem> {
 }
 
 /**
- * 更新行政区划（POST /api/map/updateDivision）
- * 当传入 nodeId 时用于导出/下载行政区划，返回 ArrayBuffer（geojson 文件）
+ * 导出行政区划（POST /api/map/updateDivision），响应沿用标准 JSON 业务信封。
  * @param params 含 nodeId 字段
  */
-export function updateDivision(params: { nodeId: string }): HttpResult<ArrayBuffer> {
-  return http.post<ArrayBuffer>('/api/map/updateDivision', {}, {
-    params,
-    responseType: 'arraybuffer',
-  } as never);
+export function updateDivision(params: { nodeId: string }): HttpResult<unknown> {
+  return http.post<unknown>('/api/map/updateDivision', {}, { params });
 }

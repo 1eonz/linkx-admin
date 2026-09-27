@@ -15,16 +15,18 @@
  *
  * 注：客户端不支持手动新增（由对端注册产生）
  */
-import { Edit, Delete, Key } from '@element-plus/icons-vue';
+import { Edit, Delete, Key, CircleClose } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import ConnectionStatusDot from '../components/ConnectionStatusDot.vue';
 import AuthorizeDialog from './components/AuthorizeDialog.vue';
 import EditDialog from './components/EditDialog.vue';
+import RejectDialog from './components/RejectDialog.vue';
 import {
   deleteClient,
   getClients,
+  rejectClient,
   updateClient,
   type ClientItem,
   type ClientUpdatePayload,
@@ -51,6 +53,8 @@ const currentClient = ref<ClientItem | null>(null);
 // ===== 授权弹窗状态 =====
 const authorizeDialogVisible = ref(false);
 const authorizeLoading = ref(false);
+const rejectDialogVisible = ref(false);
+const rejectLoading = ref(false);
 
 // ===== 列定义 =====
 const columns: ITableColumn[] = [
@@ -80,7 +84,7 @@ const columns: ITableColumn[] = [
   {
     prop: 'operation',
     label: '操作',
-    width: 220,
+    width: 290,
     align: 'center',
     slotName: 'operation',
     fixed: 'right',
@@ -155,6 +159,24 @@ function handleAuthorizeSubmit(payload: {
     .finally(() => {
       authorizeLoading.value = false;
     });
+}
+
+function handleReject(row: ClientItem): void {
+  currentClient.value = row;
+  rejectDialogVisible.value = true;
+}
+
+function handleRejectSubmit(payload: { peerId: string; desc: string }): void {
+  rejectLoading.value = true;
+  rejectClient(payload.peerId, payload.desc)
+    .then((result) => {
+      if (!result || result.code !== 0) return ElMessage.error(result?.msg ?? '拒绝失败，请重试');
+      ElMessage.success('已拒绝该客户端');
+      rejectDialogVisible.value = false;
+      refresh();
+    })
+    .catch(() => ElMessage.error('拒绝失败，请重试'))
+    .finally(() => { rejectLoading.value = false; });
 }
 
 // ===== 删除 =====
@@ -258,6 +280,7 @@ onBeforeUnmount(() => {
             :buttons="[
               { type: 'primary', icon: Edit, label: '编辑', onClick: () => handleEdit(getRow(scope)) },
               { type: 'warning', icon: Key, label: '授权', onClick: () => handleAuthorize(getRow(scope)) },
+              { type: 'warning', icon: CircleClose, label: '拒绝', onClick: () => handleReject(getRow(scope)) },
               { type: 'danger', icon: Delete, label: '删除', onClick: () => handleDelete(getRow(scope)) },
             ]"
           />
@@ -280,6 +303,7 @@ onBeforeUnmount(() => {
       :loading="authorizeLoading"
       @submit="handleAuthorizeSubmit"
     />
+    <RejectDialog v-model:visible="rejectDialogVisible" :client-data="currentClient" :loading="rejectLoading" @submit="handleRejectSubmit" />
   </div>
 </template>
 

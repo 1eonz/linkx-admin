@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LxMetricCard 数据指标卡片组件规范标本 (GB公共安全标准)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#0060a9',
+              hover: '#00508f',
+              light: '#ecf5ff',
+              container: '#409eff',
+            },
+            success: {
+              DEFAULT: '#67c23a',
+              light: '#f0f9eb',
+            },
+            warning: {
+              DEFAULT: '#e6a23c',
+              light: '#fdf6ec',
+            },
+            danger: {
+              DEFAULT: '#f56c6c',
+              light: '#fef0f0',
+              text: '#c45656',
+            },
+            neutral: {
+              DEFAULT: '#909399',
+              light: '#f4f4f5',
+            },
+            text: {
+              primary: '#1d2129',
+              regular: '#4e5969',
+              secondary: '#86909c',
+              placeholder: '#c9cdd4',
+            },
+            border: {
+              DEFAULT: '#e4e7ed',
+              light: '#ebeef5',
+            },
+            surface: {
+              page: '#f0f2f5',
+              card: '#ffffff',
+            }
+          },
+          boxShadow: {
+            card: '0 1px 4px rgba(0, 21, 41, 0.08)',
+            pop: '0 2px 12px rgba(0, 0, 0, 0.1)',
+            modal: '0 4px 16px rgba(0, 0, 0, 0.15)',
+          },
+          fontFamily: {
+            sans: ['"HarmonyOS Sans SC"', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'Consolas', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Tabular numbers for steady dashboard updates (P4 Principle) */
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(1.15); }
+    }
+    .animate-pulse-dot {
+      animation: pulse-dot 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+<body class="bg-surface-page text-text-regular font-sans min-h-screen p-6 antialiased">
+
+  <div class="max-w-[1240px] mx-auto space-y-6">
+
+    <!-- 顶部标题与规范标本信息头 -->
+    <header class="bg-white rounded-[4px] border border-border p-5 shadow-card flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-[4px] bg-primary/10 flex items-center justify-center text-primary">
+            <!-- 指标卡矢量图标 -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M7 16l4-4 4 4 4-8" />
+            </svg>
+          </div>
+          <h1 class="text-lg font-bold text-text-primary tracking-tight">LxMetricCard 数据指标卡片规范标本</h1>
+          <span class="text-xs px-2 py-0.5 rounded-[2px] bg-primary-light text-primary font-medium border border-primary/20">GB 公共安全规范</span>
+          <span class="text-xs px-2 py-0.5 rounded-[2px] bg-success-light text-success font-medium border border-success/20">COMPONENT-SPEC §14</span>
+        </div>
+        <p class="text-xs text-text-secondary mt-1.5 leading-relaxed">
+          专用于详情抽屉（LxDetailDrawer）、大屏态势看板与综合工作台。遵循 P4 数值等宽、P5 阴影三档、P6 圆角 4px 规范，支持三种状态语义色彩联动。
+        </p>
+      </div>
+
+      <!-- 参数规格快速徽章 -->
+      <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
+        <span class="px-2.5 py-1 rounded-[2px] bg-neutral-light text-text-secondary border border-border">高精等宽 JetBrains Mono</span>
+        <span class="px-2.5 py-1 rounded-[2px] bg-neutral-light text-text-secondary border border-border">高度 6px 进度条</span>
+        <span class="px-2.5 py-1 rounded-[2px] bg-neutral-light text-text-secondary border border-border">圆角 4px · 阴影 card</span>
+      </div>
+    </header>
+
+    <!-- 一、核心展示区：3 张数据指标卡并排 (Online 绿 / Warning 橙 / Danger 红) -->
+    <section class="space-y-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-1.5 h-3.5 bg-primary rounded-full inline-block"></span>
+          <h2 class="text-sm font-semibold text-text-primary">核心三态并排展示 (Drawer & Dashboard Hero Metrics)</h2>
+        </div>
+        <span class="text-xs text-text-secondary">栅格排布：3 列等分 (gap-4) · 适配 1080P 及抽屉容器</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+        <!-- 卡片 1：在线率 99.9% (正常/成功语义 - 绿 #67c23a) -->
+        <div class="bg-white rounded-[4px] border border-border shadow-card p-4 transition-all duration-200 hover:shadow-pop flex flex-col justify-between relative overflow-hidden group">
+          <!-- 顶部区域：13px 标题 + 右上角浅底小标签 -->
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-success animate-pulse-dot"></span>
+                <span class="text-[13px] text-text-secondary font-medium">设备在线率</span>
+              </div>
+              <!-- 右上角浅底小标签：绿色 success 语义 -->
+              <span class="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-[2px] bg-success-light text-success border border-success/20 tabular-nums">
+                <svg class="w-3 h-3 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 15l-6-6-6 6"/>
+                </svg>
+                环比 +0.8%
+              </span>
+            </div>
+
+            <!-- 数值主视觉：24px 加粗等宽数字 + 13px 单位 (语义色：绿色 #67c23a) -->
+            <div class="flex items-baseline gap-1 my-1">
+              <span class="text-[26px] font-bold font-mono tabular-nums leading-none tracking-tight text-success">
+                99.9
+              </span>
+              <span class="text-[13px] font-normal text-text-secondary">%</span>
+            </div>
+            
+            <p class="text-[11px] text-text-secondary mt-1">全网边缘节点与接入感知终端运行正常</p>
+          </div>
+
+          <!-- 底部进度条：高 6px、圆角 full、槽 #ebeef5、填充正常绿 -->
+          <div class="mt-4 pt-3 border-t border-border-light">
+            <div class="flex items-center justify-between text-[11px] text-text-secondary mb-1.5">
+              <span>在网健康指标</span>
+              <span class="font-mono tabular-nums text-text-primary font-medium">12,842 / 12,850 台</span>
+            </div>
+            <!-- 槽体 -->
+            <div class="w-full h-1.5 bg-[#ebeef5] rounded-full overflow-hidden">
+              <!-- 填充色：根据语义采用 #67c23a (在线率 99.9%) -->
+              <div class="h-full bg-success rounded-full transition-all duration-500" style="width: 99.9%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 2：平均响应 4.2s (警告语义 - 橙 #e6a23c) -->
+        <div class="bg-white rounded-[4px] border border-border shadow-card p-4 transition-all duration-200 hover:shadow-pop flex flex-col justify-between relative overflow-hidden group">
+          <!-- 顶部区域：13px 标题 + 右上角浅底小标签 -->
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-warning"></span>
+                <span class="text-[13px] text-text-secondary font-medium">平均响应时长</span>
+              </div>
+              <!-- 右上角浅底小标签：橙色 warning 语义 -->
+              <span class="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-[2px] bg-warning-light text-warning border border-warning/20 tabular-nums">
+                <svg class="w-3 h-3 text-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+                慢于基准 0.5s
+              </span>
+            </div>
+
+            <!-- 数值主视觉：24px 加粗等宽数字 + 13px 单位 (语义色：警告色 #e6a23c) -->
+            <div class="flex items-baseline gap-1 my-1">
+              <span class="text-[26px] font-bold font-mono tabular-nums leading-none tracking-tight text-warning">
+                4.2
+              </span>
+              <span class="text-[13px] font-normal text-text-secondary">秒 (s)</span>
+            </div>
+
+            <p class="text-[11px] text-text-secondary mt-1">跨专网隧道国密握手轻度延迟，建议排查</p>
+          </div>
+
+          <!-- 底部进度条：高 6px、圆角 full、槽 #ebeef5、填充警告橙 -->
+          <div class="mt-4 pt-3 border-t border-border-light">
+            <div class="flex items-center justify-between text-[11px] text-text-secondary mb-1.5">
+              <span>预警处置阈值 (≤5.0s)</span>
+              <span class="font-mono tabular-nums text-warning font-medium">84.0% 负荷</span>
+            </div>
+            <!-- 槽体 -->
+            <div class="w-full h-1.5 bg-[#ebeef5] rounded-full overflow-hidden">
+              <!-- 填充色：根据语义采用警告色 #e6a23c (4.2s / 5s = 84%) -->
+              <div class="h-full bg-warning rounded-full transition-all duration-500" style="width: 84%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 3：高危未处理 18 件 (危险语义 - 红 #f56c6c) -->
+        <div class="bg-white rounded-[4px] border border-border shadow-card p-4 transition-all duration-200 hover:shadow-pop flex flex-col justify-between relative overflow-hidden group">
+          <!-- 顶部区域：13px 标题 + 右上角浅底小标签 -->
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-danger animate-pulse"></span>
+                <span class="text-[13px] text-text-secondary font-medium">高危未处理警情</span>
+              </div>
+              <!-- 右上角浅底小标签：红色 danger 语义 -->
+              <span class="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-[2px] bg-danger-light text-danger-text border border-danger/20 tabular-nums">
+                <svg class="w-3 h-3 text-danger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                急需处置
+              </span>
+            </div>
+
+            <!-- 数值主视觉：24px 加粗等宽数字 + 13px 单位 (语义色：危险色 #f56c6c) -->
+            <div class="flex items-baseline gap-1 my-1">
+              <span class="text-[26px] font-bold font-mono tabular-nums leading-none tracking-tight text-danger">
+                18
+              </span>
+              <span class="text-[13px] font-normal text-text-secondary">件</span>
+            </div>
+
+            <p class="text-[11px] text-text-secondary mt-1">含 3 起布控抓拍失联告警与专网中断事件</p>
+          </div>
+
+          <!-- 底部进度条：高 6px、圆角 full、槽 #ebeef5、填充危险红 -->
+          <div class="mt-4 pt-3 border-t border-border-light">
+            <div class="flex items-center justify-between text-[11px] text-text-secondary mb-1.5">
+              <span>待办积压率 (超阈值)</span>
+              <span class="font-mono tabular-nums text-danger font-medium">62.5%</span>
+            </div>
+            <!-- 槽体 -->
+            <div class="w-full h-1.5 bg-[#ebeef5] rounded-full overflow-hidden">
+              <!-- 填充色：根据语义采用危险色 #f56c6c -->
+              <div class="h-full bg-danger rounded-full transition-all duration-500" style="width: 62.5%;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 二、典型应用场景一：正常主色常规卡片（如「今日警情总数」1,247 件） -->
+    <section class="space-y-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-1.5 h-3.5 bg-primary rounded-full inline-block"></span>
+          <h2 class="text-sm font-semibold text-text-primary">默认形态：正常主色指标卡 (标准 Element Plus 风格)</h2>
+        </div>
+        <span class="text-xs text-text-secondary">数值采用系统主色 #0060a9，支持千分位格式化</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+        <!-- 今日警情总数 1,247 件 (正常主色 #0060a9) -->
+        <div class="bg-white rounded-[4px] border border-border shadow-card p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[13px] text-text-secondary font-medium">今日警情总数</span>
+              <span class="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-[2px] bg-primary-light text-primary border border-primary/20 tabular-nums">
+                环比 +12.4%
+              </span>
+            </div>
+
+            <!-- 24px 加粗等宽数字 (正常主色 #0060a9) + 13px 单位 -->
+            <div class="flex items-baseline gap-1 my-1">
+              <span class="text-[26px] font-bold font-mono tabular-nums leading-none tracking-tight text-primary">
+                1,247
+              </span>
+              <span class="text-[13px] font-normal text-text-secondary">件</span>
+            </div>
+            <p class="text-[11px] text-text-secondary mt-1">当日全量接入流转警情统计</p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-border-light">
+            <div class="flex items-center justify-between text-[11px] text-text-secondary mb-1.5">
+              <span>已办结闭环率</span>
+              <span class="font-mono tabular-nums text-text-primary font-medium">1,162 / 1,247 (93.2%)</span>
+            </div>
+            <div class="w-full h-1.5 bg-[#ebeef5] rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 93.2%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 实时在岗警力 3,580 人 -->
+        <div class="bg-white rounded-[4px] border border-border shadow-card p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[13px] text-text-secondary font-medium">实时在岗执勤警力</span>
+              <span class="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-[2px] bg-success-light text-success border border-success/20 tabular-nums">
+                在编率 96.8%
+              </span>
+            </div>
+
+            <div class="flex items-baseline gap-1 my-1">
+              <span class="text-[26px] font-bold font-mono tabular-nums leading-none tracking-tight text-primary">
+                3,580
+              </span>
+              <span class="text-[13px] font-normal text-text-secondary">人</span>
+            </div>
+            <p class="text-[11px] text-text-secondary mt-1">含交警支队、特警巡防及机关值班力量</p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-border-light">
+            <div class="flex items-center justify-between text-[11px] text-text-secondary mb-1.5">
+              <span>GPS 轨迹在线联通</span>
+              <span class="font-mono tabular-nums text-text-primary font-medium">3,492 人实时回传</span>
+            </div>
+            <div class="w-full h-1.5 bg-[#ebeef5] rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 97.5%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 智能感知推送 48,920 条 -->
+        <div class="bg-white rounded-[4px] border border-border shadow-card p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[13px] text-text-secondary font-medium">全域视频结构化流</span>
+              <span class="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-[2px] bg-primary-light text-primary border border-primary/20 tabular-nums">
+                吞吐 4,820 QPS
+              </span>
+            </div>
+
+            <div class="flex items-baseline gap-1 my-1">
+              <span class="text-[26px] font-bold font-mono tabular-nums leading-none tracking-tight text-primary">
+                48,920
+              </span>
+              <span class="text-[13px] font-normal text-text-secondary">路 / 条</span>
+            </div>
+            <p class="text-[11px] text-text-secondary mt-1">AI 视觉边缘分析代理算力平稳</p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-border-light">
+            <div class="flex items-center justify-between text-[11px] text-text-secondary mb-1.5">
+              <span>GPU 边缘显存负载</span>
+              <span class="font-mono tabular-nums text-text-primary font-medium">46.2% 正常</span>
+            </div>
+            <div class="w-full h-1.5 bg-[#ebeef5] rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 46.2%;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 三、典型实战业务场景示范：详情抽屉 (LxDetailDrawer) 内部集成 -->
+    <section class="space-y-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-1.5 h-3.5 bg-primary rounded-full inline-block"></span>
+          <h2 class="text-sm font-semibold text-text-primary">实战应用：右侧详情抽屉 (LxDetailDrawer 480px) 嵌入体验</h2>
+        </div>
+        <span class="text-xs text-text-secondary">遵循抽屉 480px 宽度标准 · 垂直栈叠结构</span>
+      </div>
+
+      <!-- 模拟抽屉容器 -->
+      <div class="bg-white rounded-[4px] border border-border shadow-card p-5 max-w-[540px]">
+        <div class="flex items-center justify-between pb-3 border-b border-border mb-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-7 h-7 rounded-full bg-primary-light flex items-center justify-center text-primary">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-text-primary">高新区交警大队 · 勤务席位运行详情</h3>
+              <p class="text-[11px] text-text-secondary">抽屉 ID: DRAWER_DUTY_8091 · 归属市局指挥中心</p>
+            </div>
+          </div>
+          <button class="text-text-secondary hover:text-text-primary p-1 rounded hover:bg-neutral-light transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 抽屉内双列指标卡 -->
+        <div class="grid grid-cols-2 gap-3 mb-4">
+          <!-- 抽屉内卡 1 -->
+          <div class="bg-surface-page/60 border border-border rounded-[4px] p-3 flex flex-col justify-between">
+            <div class="flex items-center justify-between text-xs text-text-secondary mb-1">
+              <span>当班接处警</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-success-light text-success font-medium">正常</span>
+            </div>
+            <div class="flex items-baseline gap-1 my-1">
+              <span class="text-xl font-bold font-mono tabular-nums text-text-primary">142</span>
+              <span class="text-xs text-text-secondary">起</span>
+            </div>
+            <div class="w-full h-1 bg-[#ebeef5] rounded-full overflow-hidden mt-2">
+              <div class="h-full bg-primary rounded-full" style="width: 88%;"></div>
+            </div>
+          </div>
+
+          <!-- 抽屉内卡 2 -->
+          <div class="bg-surface-page/60 border border-border rounded-[4px] p-3 flex flex-col justify-between">
+            <div class="flex items-center justify-between text-xs text-text-secondary mb-1">
+              <span>超时待跟进</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-danger-light text-danger-text font-medium">高危</span>
+            </div>
+            <div class="flex items-baseline gap-1 my-1">
+              <span class="text-xl font-bold font-mono tabular-nums text-danger">3</span>
+              <span class="text-xs text-text-secondary">起</span>
+            </div>
+            <div class="w-full h-1 bg-[#ebeef5] rounded-full overflow-hidden mt-2">
+              <div class="h-full bg-danger rounded-full" style="width: 25%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 关联信息条目 -->
+        <div class="bg-surface-page/30 rounded border border-border-light p-3 space-y-2 text-xs">
+          <div class="flex justify-between">
+            <span class="text-text-secondary">值班长 / 警号</span>
+            <span class="font-medium text-text-primary">孙志国 · <span class="font-mono">005882</span></span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-text-secondary">通信专网延迟</span>
+            <span class="font-mono text-success font-medium">18ms (国密SM4加密隧道)</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-text-secondary">更新时间戳</span>
+            <span class="font-mono text-text-secondary">2026-10-24 15:40:12</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 四、研发接口契约与设计令牌备忘 (Developer Spec Memo) -->
+    <section class="bg-white rounded-[4px] border border-border shadow-card p-5">
+      <div class="flex items-center gap-2 mb-3">
+        <svg class="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+        <h3 class="text-xs font-bold text-text-primary uppercase tracking-wider">LxMetricCard 组件接口与设计令牌备忘 (Vue 3 / TS)</h3>
+      </div>
+
+      <!-- 规格说明网格 -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4 text-xs font-mono">
+        <div class="bg-surface-page p-2.5 rounded border border-border">
+          <span class="text-text-secondary block text-[11px]">卡片圆角 / 阴影</span>
+          <span class="text-text-primary font-bold">rounded-[4px]</span>
+          <span class="text-[10px] text-text-secondary block">0 1px 4px rgba(...)</span>
+        </div>
+        <div class="bg-surface-page p-2.5 rounded border border-border">
+          <span class="text-text-secondary block text-[11px]">大数字排版</span>
+          <span class="text-text-primary font-bold">24px - 26px bold</span>
+          <span class="text-[10px] text-text-secondary block">font-mono tabular-nums</span>
+        </div>
+        <div class="bg-surface-page p-2.5 rounded border border-border">
+          <span class="text-text-secondary block text-[11px]">底部进度条规格</span>
+          <span class="text-text-primary font-bold">高度 6px (h-1.5)</span>
+          <span class="text-[10px] text-text-secondary block">槽 #ebeef5 · 圆角 full</span>
+        </div>
+        <div class="bg-surface-page p-2.5 rounded border border-border">
+          <span class="text-text-secondary block text-[11px]">状态语义映射</span>
+          <span class="text-text-primary font-bold">normal / warn / danger</span>
+          <span class="text-[10px] text-text-secondary block">#0060a9 / #e6a23c / #f56c6c</span>
+        </div>
+      </div>
+
+      <!-- 代码定义区 -->
+      <div class="bg-[#1e222d] text-slate-300 rounded p-4 font-mono text-[12px] overflow-x-auto leading-relaxed border border-slate-700">
+        <div class="text-slate-500">// packages/components/src/LxMetricCard/types.ts</div>
+        <div><span class="text-purple-400">export interface</span> <span class="text-yellow-300">LxMetricCardProps</span> {</div>
+        <div class="pl-4"><span class="text-slate-400">/** 卡片标题 (如「今日警情总数」) */</span></div>
+        <div class="pl-4">title: <span class="text-teal-300">string</span>;</div>
+        <div class="pl-4"><span class="text-slate-400">/** 核心指标数值 (支持数字或格式化字符串，如 1,247) */</span></div>
+        <div class="pl-4">value: <span class="text-teal-300">number | string</span>;</div>
+        <div class="pl-4"><span class="text-slate-400">/** 右侧单位 (如 '件', '人', '%', '秒') */</span></div>
+        <div class="pl-4">unit?: <span class="text-teal-300">string</span>;</div>
+        <div class="pl-4"><span class="text-slate-400">/** 数值与进度条语义色类型：normal(主色) | success(绿) | warning(橙) | danger(红) */</span></div>
+        <div class="pl-4">status?: <span class="text-teal-300">'normal' | 'success' | 'warning' | 'danger'</span>; <span class="text-slate-500">// default: 'normal'</span></div>
+        <div class="pl-4"><span class="text-slate-400">/** 右上角浅底小标签文案 (如「环比 +12.4%」) */</span></div>
+        <div class="pl-4">badgeText?: <span class="text-teal-300">string</span>;</div>
+        <div class="pl-4"><span class="text-slate-400">/** 底部进度条百分比 (0 - 100)，不传则隐藏进度条 */</span></div>
+        <div class="pl-4">progress?: <span class="text-teal-300">number</span>;</div>
+        <div class="pl-4"><span class="text-slate-400">/** 底部进度条两端标注 */</span></div>
+        <div class="pl-4">progressLabel?: <span class="text-teal-300">string</span>;</div>
+        <div class="pl-4">progressValue?: <span class="text-teal-300">string</span>;</div>
+        <div>}</div>
+      </div>
+    </section>
+
+    <!-- 页脚标准信息 -->
+    <footer class="text-center text-xs text-text-secondary py-3">
+      公安业务协同与综合管理平台 · LxUI 组件库规范标本 · 遵循 GB/T 33170 公安规范与 Element Plus 桥接协议
+    </footer>
+
+  </div>
+
+</body>
+</html>

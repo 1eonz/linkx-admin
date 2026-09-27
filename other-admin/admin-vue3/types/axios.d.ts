@@ -8,6 +8,13 @@ export interface ApiResponse<T = unknown> {
   msg: string;
   data: T;
   headers?: Record<string, string>;
+  licenseWarning?: string;
+}
+
+/** 二进制响应和对应的 HTTP 响应头。 */
+export interface BinaryApiResponse<T extends Blob | ArrayBuffer> {
+  data: T;
+  headers: AxiosResponse<T>['headers'];
 }
 
 /**

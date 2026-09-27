@@ -108,7 +108,7 @@ function resetForm(): void {
 }
 
 // open 方法
-async function open(type: 'create' | 'update', data?: LabelItem, title?: string): Promise<void> {
+function open(type: 'create' | 'update', data?: LabelItem, title?: string): Promise<void> {
   dialogVisible.value = true;
   dialogTitle.value = title ?? (type === 'create' ? '新增' : '修改');
   formType.value = type;
@@ -116,35 +116,37 @@ async function open(type: 'create' | 'update', data?: LabelItem, title?: string)
   getMaxLength(type, data);
   if (data) {
     // 调用 labelDetail 拉取详情
-    try {
-      const res = await labelDetail(data.id);
-      const detail = (res as unknown as { data?: LabelItem })?.data;
-      if (!detail) return;
-      if (type === 'create') {
-        // 新增子标签：继承父标签的 type 和 scope
-        parent.value = data;
-        formData.type = data.type ?? 0;
-        formData.scope = data.scope ?? 1;
-      } else {
-        // 修改
-        formData.id = data.id;
-        formData.name = detail.name ?? '';
-        formData.icon = detail.icon ?? 'fas fa-home';
-        formData.color = detail.color ?? 'rgba(64, 158, 255, 0.8)';
-        formData.parentId = detail.parentId ?? '';
-        formData.level = detail.level ?? 0;
-        formData.type = detail.type ?? 0;
-        formData.scope = detail.scope ?? 1;
-      }
-    } catch {
-      // 忽略
-    }
+    return labelDetail(data.id)
+      .then((res) => {
+        const detail = (res as unknown as { data?: LabelItem })?.data;
+        if (!detail) return;
+        if (type === 'create') {
+          // 新增子标签：继承父标签的 type 和 scope
+          parent.value = data;
+          formData.type = data.type ?? 0;
+          formData.scope = data.scope ?? 1;
+        } else {
+          // 修改
+          formData.id = data.id;
+          formData.name = detail.name ?? '';
+          formData.icon = detail.icon ?? 'fas fa-home';
+          formData.color = detail.color ?? 'rgba(64, 158, 255, 0.8)';
+          formData.parentId = detail.parentId ?? '';
+          formData.level = detail.level ?? 0;
+          formData.type = detail.type ?? 0;
+          formData.scope = detail.scope ?? 1;
+        }
+      })
+      .catch(() => {
+        ElMessage.error('获取标签详情失败，请重试');
+      });
   } else {
     // 顶级新增
     formData.type = 0;
     formData.icon = 'fas fa-home';
     formData.color = 'rgba(64, 158, 255, 0.8)';
   }
+  return Promise.resolve();
 }
 
 // 提交：create 和 update 都调用 labelSave
@@ -153,23 +155,27 @@ async function handleRequest(): Promise<void> {
   const valid = await formRef.value.validate().catch(() => false);
   if (!valid) return;
   formLoading.value = true;
-  try {
-    const param: Record<string, unknown> = { ...formData };
-    if (parent.value) {
-      param.parentId = parent.value.id;
-      param.level = (parent.value.level ?? 0) + 1;
-    }
-    const res = await labelSave(param as never);
-    if (res.code === 0) {
-      ElMessage.success(formType.value === 'create' ? '新增成功' : '修改成功');
-      dialogVisible.value = false;
-      getList();
-    } else {
-      ElMessage.error(res.msg || '');
-    }
-  } finally {
-    formLoading.value = false;
+  const param: Record<string, unknown> = { ...formData };
+  if (parent.value) {
+    param.parentId = parent.value.id;
+    param.level = (parent.value.level ?? 0) + 1;
   }
+  return labelSave(param as never)
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(formType.value === 'create' ? '新增成功' : '修改成功');
+        dialogVisible.value = false;
+        getList();
+      } else {
+        ElMessage.error(res.msg || '');
+      }
+    })
+    .catch(() => {
+      ElMessage.error(formType.value === 'create' ? '新增失败，请重试' : '修改失败，请重试');
+    })
+    .finally(() => {
+      formLoading.value = false;
+    });
 }
 
 // 删除单个标签
@@ -229,23 +235,31 @@ function handleCheckChange(): void {
 }
 
 // 获取列表
-async function getList(): Promise<void> {
+function getList(): Promise<void> {
   if (activeName.value === '1') {
     lookLoading.value = true;
-    try {
-      const res = await labelList();
-      lookList.value = (res as unknown as { data?: LabelItem[] })?.data ?? [];
-    } finally {
-      lookLoading.value = false;
-    }
+    return labelList()
+      .then((res) => {
+        lookList.value = (res as unknown as { data?: LabelItem[] })?.data ?? [];
+      })
+      .catch(() => {
+        ElMessage.error('加载标签列表失败，请重试');
+      })
+      .finally(() => {
+        lookLoading.value = false;
+      });
   } else {
     treeLoading.value = true;
-    try {
-      const res = await labelList();
-      treeData.value = (res as unknown as { data?: LabelItem[] })?.data ?? [];
-    } finally {
-      treeLoading.value = false;
-    }
+    return labelList()
+      .then((res) => {
+        treeData.value = (res as unknown as { data?: LabelItem[] })?.data ?? [];
+      })
+      .catch(() => {
+        ElMessage.error('加载标签树失败，请重试');
+      })
+      .finally(() => {
+        treeLoading.value = false;
+      });
   }
 }
 

@@ -73,17 +73,18 @@ const userDepartmentCode = ref('');
  *
  * @returns Promise<void> 无返回值
  */
-async function getUserOrgNameByIdCardNum(): Promise<void> {
-  if (isAdmin) return;
-  try {
-    const res = await queryUserByIdCard({ idCard: idCardNum });
-    const depts = res?.data?.userDepartments ?? [];
-    if (depts.length > 0) {
-      userDepartmentCode.value = depts[0]?.departmentCode ?? '';
-    }
-  } catch (e) {
-    console.error('[IcpAuthManage] 获取用户部门失败', e);
-  }
+function getUserOrgNameByIdCardNum(): Promise<void> {
+  if (isAdmin) return Promise.resolve();
+  return queryUserByIdCard({ idCard: idCardNum })
+    .then((res) => {
+      const depts = res?.data?.userDepartments ?? [];
+      if (depts.length > 0) {
+        userDepartmentCode.value = depts[0]?.departmentCode ?? '';
+      }
+    })
+    .catch((e: unknown) => {
+      console.error('[IcpAuthManage] 获取用户部门失败', e);
+    });
 }
 
 /**
@@ -115,27 +116,29 @@ function normalizeTree(nodes: DepartmentTreeNode[]): DepartmentTreeNode[] {
  *
  * @returns Promise<void> 无返回值
  */
-async function loadTreeData(): Promise<void> {
+function loadTreeData(): Promise<void> {
   treeLoading.value = true;
-  try {
-    // 非管理员只加载自己所在部门及子部门
-    const params: { parentCode?: string } = {};
-    if (!isAdmin && userDepartmentCode.value) {
-      params.parentCode = userDepartmentCode.value;
-    }
-    const res = await queryDepartmentTree(params);
-    if (res?.code === 0 && res.data) {
-      const list = Array.isArray(res.data) ? res.data : [res.data];
-      treeData.value = normalizeTree(list as DepartmentTreeNode[]);
-      if (treeData.value.length > 0) {
-        defaultExpandedKeys.value = [treeData.value[0].id];
-      }
-    }
-  } catch (e) {
-    console.error('[IcpAuthManage] 加载部门树失败', e);
-  } finally {
-    treeLoading.value = false;
+  // 非管理员只加载自己所在部门及子部门
+  const params: { parentCode?: string } = {};
+  if (!isAdmin && userDepartmentCode.value) {
+    params.parentCode = userDepartmentCode.value;
   }
+  return queryDepartmentTree(params)
+    .then((res) => {
+      if (res?.code === 0 && res.data) {
+        const list = Array.isArray(res.data) ? res.data : [res.data];
+        treeData.value = normalizeTree(list as DepartmentTreeNode[]);
+        if (treeData.value.length > 0) {
+          defaultExpandedKeys.value = [treeData.value[0].id];
+        }
+      }
+    })
+    .catch((e: unknown) => {
+      console.error('[IcpAuthManage] 加载部门树失败', e);
+    })
+    .finally(() => {
+      treeLoading.value = false;
+    });
 }
 
 /**
@@ -409,12 +412,9 @@ function handleAuthSuccess(): void {
 const canAuthImuser = computed(() => hasBtnPermission('/admin/trUserRole/createMany'));
 const canAuthCamera = computed(() => hasBtnPermission('/admin/trUserRole/createMany'));
 
-onMounted(async () => {
+onMounted(() => {
   // 非管理员先获取自己所在部门编码，再加载部门树
-  if (!isAdmin) {
-    await getUserOrgNameByIdCardNum();
-  }
-  loadTreeData();
+  getUserOrgNameByIdCardNum().then(loadTreeData);
 });
 </script>
 

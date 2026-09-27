@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LxSelectPagination 远程搜索分页下拉选择器规范标本 (GB/T 33170 公共安全标准)</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0060a9",
+            "primary-container": "#409eff",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#003460",
+            "primary-fixed": "#d3e4ff",
+            "on-primary-fixed": "#001c38",
+            "secondary": "#4f6076",
+            "secondary-container": "#d2e4ff",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#55667c",
+            "surface": "#f8f9ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f1f3fa",
+            "surface-container": "#ebeef4",
+            "surface-container-high": "#e6e8ef",
+            "surface-container-highest": "#e0e2e9",
+            "on-surface": "#181c20",
+            "on-surface-variant": "#404752",
+            "outline": "#707784",
+            "outline-variant": "#c0c7d4",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a",
+            "tertiary": "#286c00",
+            "tertiary-container": "#55af28",
+            "on-tertiary": "#ffffff",
+            "background": "#f8f9ff",
+            "on-background": "#181c20"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            "headline-lg": ["Inter", "sans-serif"],
+            "headline-md": ["Inter", "sans-serif"],
+            "headline-sm": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "label-lg": ["Inter", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"],
+            "label-sm": ["Inter", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 500;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f1f3fa;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #c0c7d4;
+      border-radius: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #707784;
+    }
+    .pop-shadow {
+      box-shadow: 0 4px 16px -2px rgba(0, 30, 60, 0.12), 0 2px 6px -1px rgba(0, 0, 0, 0.06);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen antialiased">
+<!-- 顶部系统栏 (GB/T 33170 公安警务应用框架风格) -->
+<header class="bg-surface-container-lowest border-b border-outline-variant px-6 py-3 flex items-center justify-between sticky top-0 z-50">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[20px]">local_police</span>
+</div>
+<div>
+<div class="flex items-center space-x-2">
+<span class="text-headline-sm font-semibold text-primary">PGIS 警用资源协同中台</span>
+<span class="text-[11px] px-1.5 py-0.5 bg-primary-fixed text-on-primary-fixed font-mono font-medium rounded">v3.5.2-LTS</span>
+<span class="text-[11px] px-1.5 py-0.5 bg-surface-container-high text-on-surface-variant rounded">GB/T 33170 标本</span>
+</div>
+<p class="text-[11px] text-on-surface-variant font-mono">STANDARDS.SPEC.COMPONENTS.SELECT-PAGINATION</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 text-body-sm text-on-surface-variant">
+<div class="flex items-center space-x-1">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-mono text-[12px]">集群服务响应正常 (32ms)</span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<span class="text-[12px] font-mono">警员/设备海量检索基准</span>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-6 space-y-8">
+<!-- 1. 顶部规范综述 Section -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-outline-variant pb-5">
+<div>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-[24px]">dataset_linked</span>
+<h1 class="text-headline-lg font-bold text-on-surface">LxSelectPagination 远程分页下拉选择器规范标本</h1>
+</div>
+<p class="text-body-md text-on-surface-variant mt-2 max-w-4xl leading-relaxed">
+            针对万级警员、海量执法终端、高清天网摄像头等公共安全选型场景，解耦全量数据拉取压力。基于 <span class="text-primary font-medium">300ms 防抖远程搜索</span>、<span class="text-primary font-medium">触底滚动追加分页 (v-loadmore)</span> 以及核心 <span class="text-primary font-medium font-mono">targetMap</span> 内存回显锁机制，实现即使翻页检索或搜索关键词变更为无关项、已选项脱离当前视窗数据列表时，触发器内依然 <span class="text-tertiary font-semibold">100% 完整准确稳定回显警员中文姓名与警号标签</span>，根治传统下拉框在分页切换时“标签瞬间沦为裸露纯数字 ID”的系统缺陷。
+          </p>
+</div>
+<div class="flex flex-wrap lg:flex-col gap-2 shrink-0">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-surface-container text-on-surface-variant rounded text-label-sm font-mono border border-outline-variant">
+<span class="material-symbols-outlined text-[14px] text-primary">height</span>
+            基准高 32px
+          </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-surface-container text-on-surface-variant rounded text-label-sm font-mono border border-outline-variant">
+<span class="material-symbols-outlined text-[14px] text-primary">timer</span>
+            300ms 防抖查询
+          </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary-container text-on-primary-fixed rounded text-label-sm font-mono border border-primary/20 font-semibold">
+<span class="material-symbols-outlined text-[14px] text-primary">lock_reset</span>
+            targetMap 回显锁
+          </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-surface-container text-on-surface-variant rounded text-label-sm font-mono border border-outline-variant">
+<span class="material-symbols-outlined text-[14px] text-primary">dynamic_feed</span>
+            触底自动追加分页
+          </span>
+</div>
+</div>
+<!-- 核心指标状态栏 -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
+<div class="bg-surface-container-low p-3 rounded border border-outline-variant">
+<div class="text-[11px] text-on-surface-variant">组件标准尺寸 (Element Plus)</div>
+<div class="text-[15px] font-semibold text-on-surface mt-0.5">默认 Compact / 32px</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded border border-outline-variant">
+<div class="text-[11px] text-on-surface-variant">跨页状态管理机制</div>
+<div class="text-[15px] font-semibold text-primary mt-0.5 font-mono">Map&lt;Key, ItemMeta&gt; 缓存</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded border border-outline-variant">
+<div class="text-[11px] text-on-surface-variant">单页数据载荷建议</div>
+<div class="text-[15px] font-semibold text-on-surface mt-0.5">pageSize = 20 / 触底加载</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded border border-outline-variant">
+<div class="text-[11px] text-on-surface-variant">防抖策略与事件触发</div>
+<div class="text-[15px] font-semibold text-on-surface mt-0.5 font-mono">lodash.debounce @ 300ms</div>
+</div>
+</div>
+</section>
+<!-- 2. 核心架构与核心形态展示 Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="w-1.5 h-4 bg-primary rounded-full"></span>
+<h2 class="text-headline-md font-bold text-on-surface">核心架构与形态解构</h2>
+</div>
+<span class="text-body-sm text-on-surface-variant font-mono">COMPONENT ANATOMY &amp; POPPER SPECIFICATION</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- 形态一：触发器 Trigger 规格 (占 5 列) -->
+<div class="lg:col-span-5 bg-surface-container-lowest border border-outline-variant rounded-lg p-5 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between border-b border-outline-variant pb-3 mb-4">
+<span class="text-headline-sm font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">view_stream</span>
+                形态一：触发器 (Trigger) 规格与折叠机制
+              </span>
+<span class="text-[11px] font-mono px-2 py-0.5 bg-surface-container text-on-surface-variant rounded">32px 紧凑高度</span>
+</div>
+<!-- 规则要点清单 -->
+<div class="space-y-2 mb-5 text-[12px] text-on-surface-variant">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span><b>外框尺度：</b>严格 32px 容器高度，圆角 4px，常态边框 <code class="bg-surface-container px-1 font-mono text-[11px]">#c0c7d4</code>，聚焦态主色 <code class="bg-surface-container px-1 font-mono text-[11px]">#0060a9</code> 叠加 2px 柔光外环。</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span><b>标签折叠机制：</b>设置 <code class="bg-surface-container px-1 font-mono text-[11px]">max-collapse-tags: 2</code>，超出显示胶囊 <code class="bg-surface-container px-1 font-mono text-[11px]">+3</code>，Hover 自动出气泡清单。</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span><b>右侧操作区：</b>常态展示 12px 平滑展开箭头，在存在值且 Hover 状态切换为快速清除图标 <code class="bg-surface-container px-1 font-mono text-[11px]">cancel</code>。</span>
+</div>
+</div>
+<!-- 模拟态展示 1：多选折叠常态 -->
+<div class="space-y-3 bg-surface-container-low p-4 rounded-lg border border-outline-variant/60">
+<label class="block text-[12px] font-medium text-on-surface-variant">指派警员（多选折叠 - 常态聚焦）</label>
+<div class="h-8 w-full bg-surface-container-lowest rounded-lg border border-primary ring-2 ring-primary-fixed flex items-center justify-between px-2 cursor-pointer transition-all shadow-sm">
+<!-- 已选 Tags 容器 -->
+<div class="flex items-center space-x-1.5 overflow-hidden">
+<!-- Tag 1 -->
+<div class="h-5 px-1.5 bg-secondary-container text-on-primary-fixed rounded flex items-center space-x-1 text-[11px] font-medium shrink-0">
+<span class="truncate max-w-[80px]">孙志国</span>
+<span class="text-[10px] opacity-70 font-mono">POL-0058</span>
+<span class="material-symbols-outlined text-[12px] hover:text-error cursor-pointer">close</span>
+</div>
+<!-- Tag 2 -->
+<div class="h-5 px-1.5 bg-secondary-container text-on-primary-fixed rounded flex items-center space-x-1 text-[11px] font-medium shrink-0">
+<span class="truncate max-w-[80px]">李建华</span>
+<span class="text-[10px] opacity-70 font-mono">POL-0041</span>
+<span class="material-symbols-outlined text-[12px] hover:text-error cursor-pointer">close</span>
+</div>
+<!-- Collapse Capsule Tag -->
+<div class="h-5 px-1.5 bg-surface-container-high text-on-surface-variant rounded flex items-center text-[11px] font-mono font-semibold shrink-0 cursor-help" title="全部名单: 孙志国, 李建华, 陈明远, 王雪, 赵立东">
+                    +3
+                  </div>
+</div>
+<!-- 右侧清除与下拉箭头 -->
+<div class="flex items-center space-x-1 shrink-0 text-outline">
+<span class="material-symbols-outlined text-[15px] hover:text-on-surface-variant">cancel</span>
+<span class="material-symbols-outlined text-[16px] text-primary rotate-180 transition-transform">expand_more</span>
+</div>
+</div>
+<!-- 悬停折叠胶囊的 Tooltip 预览 -->
+<div class="relative mt-2 p-2 bg-inverse-surface text-inverse-on-surface text-[11px] rounded shadow-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-primary-fixed shrink-0">info</span>
+<span>已折叠 3 人: 陈明远(POL-001042)、王雪(POL-008920)、赵立东(POL-006321)</span>
+</div>
+</div>
+<!-- 模拟态展示 2：空值 Placeholder 态 -->
+<div class="mt-4 space-y-1">
+<label class="block text-[12px] font-medium text-on-surface-variant">关联天网执法球机（单选 - 未选择态）</label>
+<div class="h-8 w-full bg-surface-container-lowest rounded-lg border border-outline-variant flex items-center justify-between px-2.5 text-[12px] text-outline cursor-pointer hover:border-primary">
+<span>请选择视频巡查路口摄像头...</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant text-[11px] text-on-surface-variant flex items-center justify-between font-mono">
+<span>Height: 32px</span>
+<span>Border-radius: 4px</span>
+<span>Border: #c0c7d4</span>
+</div>
+</div>
+<!-- 形态二：展开 Popper 下拉面板解构 (占 7 列) -->
+<div class="lg:col-span-7 bg-surface-container-lowest border border-outline-variant rounded-lg p-5">
+<div class="flex items-center justify-between border-b border-outline-variant pb-3 mb-4">
+<span class="text-headline-sm font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">menu_open</span>
+              形态二：展开 Popper 下拉面板完整解构 (340px 视窗)
+            </span>
+<span class="text-[11px] font-mono px-2 py-0.5 bg-primary-fixed text-on-primary-fixed rounded">v-loadmore 触底无限滚动</span>
+</div>
+<!-- 双面板对比演示：加载中态 vs 加载终态 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- 子态 A：触底滚动加载中态 (Loading More) -->
+<div class="border border-outline-variant rounded bg-surface-container-lowest pop-shadow p-2 flex flex-col justify-between">
+<div>
+<!-- 顶部搜索框 (28px) -->
+<div class="mb-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1.5 text-[14px] text-outline">search</span>
+<input class="w-full h-7 pl-7 pr-6 text-[12px] bg-surface-container-low border border-outline-variant rounded focus:border-primary focus:ring-0 text-on-surface placeholder:text-outline" placeholder="输入姓名/警号/序列号检索..." type="text" value="二大队"/>
+<span class="material-symbols-outlined absolute right-1.5 top-1.5 text-[14px] text-outline hover:text-on-surface cursor-pointer">clear</span>
+</div>
+<div class="flex items-center justify-between mt-1 px-1 text-[10px] text-on-surface-variant font-mono">
+<span>过滤结果: 24 条记录</span>
+<span class="text-primary font-medium">防抖 300ms 触发中</span>
+</div>
+</div>
+<!-- 选项列表区 (每项严格 32px) -->
+<div class="space-y-0.5 max-h-[192px] overflow-y-auto custom-scroll pr-1">
+<!-- 项 1 (已勾选) -->
+<div class="h-8 px-2 flex items-center justify-between rounded bg-secondary-container/40 text-primary cursor-pointer hover:bg-secondary-container/60">
+<div class="flex items-center space-x-2">
+<input checked="" class="w-3.5 h-3.5 rounded text-primary focus:ring-0 border-outline cursor-pointer" type="checkbox"/>
+<span class="text-[13px] font-semibold text-on-surface"><mark class="bg-transparent text-primary font-bold">二大队</mark>-孙志国</span>
+</div>
+<span class="text-[11px] font-mono text-secondary">POL-005882</span>
+</div>
+<!-- 项 2 (悬浮态 Hover) -->
+<div class="h-8 px-2 flex items-center justify-between rounded bg-surface-container cursor-pointer">
+<div class="flex items-center space-x-2">
+<input class="w-3.5 h-3.5 rounded text-primary focus:ring-0 border-outline cursor-pointer" type="checkbox"/>
+<span class="text-[13px] text-on-surface"><mark class="bg-transparent text-primary font-bold">二大队</mark>-周海峰</span>
+</div>
+<span class="text-[11px] font-mono text-on-surface-variant">POL-006109</span>
+</div>
+<!-- 项 3 (常态) -->
+<div class="h-8 px-2 flex items-center justify-between rounded hover:bg-surface-container cursor-pointer">
+<div class="flex items-center space-x-2">
+<input class="w-3.5 h-3.5 rounded text-primary focus:ring-0 border-outline cursor-pointer" type="checkbox"/>
+<span class="text-[13px] text-on-surface"><mark class="bg-transparent text-primary font-bold">二大队</mark>-许文强</span>
+</div>
+<span class="text-[11px] font-mono text-on-surface-variant">POL-007231</span>
+</div>
+<!-- 项 4 (常态) -->
+<div class="h-8 px-2 flex items-center justify-between rounded hover:bg-surface-container cursor-pointer">
+<div class="flex items-center space-x-2">
+<input class="w-3.5 h-3.5 rounded text-primary focus:ring-0 border-outline cursor-pointer" type="checkbox"/>
+<span class="text-[13px] text-on-surface"><mark class="bg-transparent text-primary font-bold">二大队</mark>-杜维新</span>
+</div>
+<span class="text-[11px] font-mono text-on-surface-variant">POL-008115</span>
+</div>
+</div>
+</div>
+<!-- 底部态 A: 加载中态 Loading More -->
+<div class="mt-2 pt-2 border-t border-outline-variant bg-surface-container-low rounded p-1.5 flex items-center justify-center space-x-2 text-[11px] text-primary">
+<svg class="animate-spin h-3.5 w-3.5 text-primary" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+<path class="opacity-75" d="M4 12a8 8 0 018-8v8H4z" fill="currentColor"></path>
+</svg>
+<span class="font-mono">正在追加数据 (第 2/3 页)...</span>
+</div>
+</div>
+<!-- 子态 B：数据加载终态 (Finished / No More) -->
+<div class="border border-outline-variant rounded bg-surface-container-lowest pop-shadow p-2 flex flex-col justify-between">
+<div>
+<!-- 顶部搜索框 (28px) -->
+<div class="mb-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1.5 text-[14px] text-outline">search</span>
+<input class="w-full h-7 pl-7 pr-6 text-[12px] bg-surface-container-low border border-outline-variant rounded focus:border-primary focus:ring-0 text-on-surface placeholder:text-outline" placeholder="输入姓名/警号检索..." type="text" value=""/>
+</div>
+<div class="flex items-center justify-between mt-1 px-1 text-[10px] text-on-surface-variant font-mono">
+<span>警力底库: 128 名在编</span>
+<span class="text-tertiary font-medium">全部已同步</span>
+</div>
+</div>
+<!-- 选项列表区 -->
+<div class="space-y-0.5 max-h-[192px] overflow-y-auto custom-scroll pr-1">
+<!-- 项 1 (已勾选) -->
+<div class="h-8 px-2 flex items-center justify-between rounded bg-secondary-container/40 text-primary cursor-pointer">
+<div class="flex items-center space-x-2">
+<input checked="" class="w-3.5 h-3.5 rounded text-primary focus:ring-0 border-outline cursor-pointer" type="checkbox"/>
+<span class="text-[13px] font-semibold text-on-surface">张绍华</span>
+<span class="text-[10px] px-1 py-0.2 bg-primary-fixed text-on-primary-fixed rounded">特警</span>
+</div>
+<span class="text-[11px] font-mono text-secondary">POL-009120</span>
+</div>
+<!-- 项 2 (已勾选) -->
+<div class="h-8 px-2 flex items-center justify-between rounded bg-secondary-container/40 text-primary cursor-pointer">
+<div class="flex items-center space-x-2">
+<input checked="" class="w-3.5 h-3.5 rounded text-primary focus:ring-0 border-outline cursor-pointer" type="checkbox"/>
+<span class="text-[13px] font-semibold text-on-surface">钱正宇</span>
+<span class="text-[10px] px-1 py-0.2 bg-surface-container text-on-surface-variant rounded">治安</span>
+</div>
+<span class="text-[11px] font-mono text-secondary">POL-009344</span>
+</div>
+<!-- 项 3 -->
+<div class="h-8 px-2 flex items-center justify-between rounded hover:bg-surface-container cursor-pointer">
+<div class="flex items-center space-x-2">
+<input class="w-3.5 h-3.5 rounded text-primary focus:ring-0 border-outline cursor-pointer" type="checkbox"/>
+<span class="text-[13px] text-on-surface">顾少峰</span>
+<span class="text-[10px] px-1 py-0.2 bg-surface-container text-on-surface-variant rounded">刑侦</span>
+</div>
+<span class="text-[11px] font-mono text-on-surface-variant">POL-009402</span>
+</div>
+<!-- 项 4 -->
+<div class="h-8 px-2 flex items-center justify-between rounded hover:bg-surface-container cursor-pointer">
+<div class="flex items-center space-x-2">
+<input class="w-3.5 h-3.5 rounded text-primary focus:ring-0 border-outline cursor-pointer" type="checkbox"/>
+<span class="text-[13px] text-on-surface">黄建明</span>
+<span class="text-[10px] px-1 py-0.2 bg-surface-container text-on-surface-variant rounded">交警</span>
+</div>
+<span class="text-[11px] font-mono text-on-surface-variant">POL-009581</span>
+</div>
+</div>
+</div>
+<!-- 底部态 B: 数据终态 Finished -->
+<div class="mt-2 pt-2 border-t border-outline-variant flex items-center justify-center space-x-2 text-[11px] text-outline">
+<span class="w-8 h-[1px] bg-outline-variant"></span>
+<span>已加载全部 128 项警员数据</span>
+<span class="w-8 h-[1px] bg-outline-variant"></span>
+</div>
+</div>
+</div>
+<div class="mt-3 bg-surface-container-low p-2.5 rounded text-[11px] text-on-surface-variant flex items-center justify-between">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">visibility</span>
+              单条选项行高严格 32px | flex space-between 对齐 | 关键匹配词高亮
+            </span>
+<span class="font-mono text-primary">Popper-Width: 320px ~ 360px</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. 重点能力实战演示：跨页回显机制 (targetMap 回显锁) Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="w-1.5 h-4 bg-tertiary rounded-full"></span>
+<h2 class="text-headline-md font-bold text-on-surface">重点机制：跨页回显锁 (targetMap 缓存隔离)</h2>
+</div>
+<span class="text-label-sm text-tertiary bg-surface-container-high px-2.5 py-0.5 rounded font-mono font-medium">SOLVES DISAPPEARING TAG BUG</span>
+</div>
+<!-- 对比分析卡片 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- 传统痛点缺陷卡片 -->
+<div class="bg-error-container/20 border border-error/30 rounded-lg p-5">
+<div class="flex items-center space-x-2 text-error font-semibold pb-2 border-b border-error/20">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+<h3 class="text-headline-sm">传统普通远程 Select 跨页致命痛点</h3>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-2">
+            当用户在第 1 页选择了「孙志国(1001)」，翻到第 4 页或输入新搜索词「特警」时，由于返回的数据列表中仅包含当前页结果，组件在 options 里匹配不到 1001 的详细 label，<span class="text-error font-semibold">导致触发器内标签瞬间退化为冷冰冰的裸 ID「1001」</span>，甚至被误判定为失效值导致丢失。
+          </p>
+<!-- 模拟错误态视图 -->
+<div class="mt-4 p-3 bg-surface-container-lowest rounded border border-error/40 space-y-2">
+<span class="text-[11px] text-error font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">warning</span> 错误反面教材 (翻页后标签崩坏)：
+            </span>
+<div class="h-8 border border-outline-variant rounded flex items-center px-2 space-x-1.5 bg-surface-container-low opacity-90">
+<div class="h-5 px-1.5 bg-error-container text-on-error-container rounded text-[11px] font-mono flex items-center">
+                1001 <span class="material-symbols-outlined text-[12px] ml-1">close</span>
+</div>
+<div class="h-5 px-1.5 bg-error-container text-on-error-container rounded text-[11px] font-mono flex items-center">
+                1042 <span class="material-symbols-outlined text-[12px] ml-1">close</span>
+</div>
+<span class="text-[11px] text-error">警员姓名已丢失，指挥员无法辨识</span>
+</div>
+</div>
+</div>
+<!-- LxSelectPagination 破局解决方案 -->
+<div class="bg-surface-container-lowest border border-tertiary/40 rounded-lg p-5">
+<div class="flex items-center space-x-2 text-tertiary font-semibold pb-2 border-b border-tertiary/20">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<h3 class="text-headline-sm">LxSelectPagination targetMap 回显锁方案</h3>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-2">
+            构建独立于分页列表生命周期的响应式字典缓存 <code class="font-mono text-primary text-[12px]">targetMap: Map&lt;id, ItemMeta&gt;</code>。一旦选中，该元数据即刻存入锁住。后续无论远程分页列表如何被清空、换页、或搜索结果无匹配，<span class="text-tertiary font-semibold">触发器永远优先从 targetMap 中精准提取格式化后的结构化 Label</span>。
+          </p>
+<!-- 模拟正确状态视图 -->
+<div class="mt-4 p-3 bg-surface-container-low rounded border border-tertiary/40 space-y-2">
+<span class="text-[11px] text-tertiary font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">lock</span> targetMap 稳定回显态 (翻页至第 4 页，历史 3 项完全锁定)：
+            </span>
+<div class="h-8 border border-primary rounded flex items-center px-2 space-x-1.5 bg-surface-container-lowest">
+<div class="h-5 px-1.5 bg-secondary-container text-on-primary-fixed rounded text-[11px] flex items-center gap-1 font-medium">
+<span>孙志国 (POL-005882)</span>
+<span class="material-symbols-outlined text-[12px]">close</span>
+</div>
+<div class="h-5 px-1.5 bg-secondary-container text-on-primary-fixed rounded text-[11px] flex items-center gap-1 font-medium">
+<span>李建华 (POL-004129)</span>
+<span class="material-symbols-outlined text-[12px]">close</span>
+</div>
+<span class="text-[10px] text-tertiary font-mono font-medium">100% 完整中文元数据</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 实战演练场景：重点警情联合处置指派弹窗 (GB 标准警务指派面板) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-outline-variant pb-3 mb-5">
+<div>
+<div class="flex items-center space-x-2">
+<span class="px-2 py-0.5 bg-error text-on-error rounded text-[11px] font-bold">110 指令单</span>
+<h3 class="text-headline-sm font-bold text-on-surface">实战演练场景：重点警情联合处置指派面板</h3>
+</div>
+<p class="text-[12px] text-on-surface-variant mt-1">警情编号: JQ-20250228-0914 (天河区天府路涉违突发事件应急协同)</p>
+</div>
+<div class="flex items-center space-x-2 text-[12px]">
+<span class="text-on-surface-variant font-mono">已锁定联动警力:</span>
+<span class="px-2 py-0.5 bg-primary-fixed text-on-primary-fixed font-bold font-mono rounded">5 名</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- 左侧表单域 (占 7 列) -->
+<div class="lg:col-span-7 space-y-4">
+<div>
+<label class="block text-[12px] font-medium text-on-surface mb-1">
+                处置指挥长 <span class="text-error">*</span>
+</label>
+<input class="w-full h-8 text-[12px] bg-surface-container border border-outline-variant rounded px-2.5 text-on-surface font-mono" disabled="" type="text" value="王建民 局长 (POL-000108 - 指挥作战中心)"/>
+</div>
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="block text-[12px] font-medium text-on-surface">
+                  联合指派巡逻警员 (LxSelectPagination 远程大数据选人) <span class="text-error">*</span>
+</label>
+<span class="text-[11px] text-primary font-mono">当前翻至第 1 页 | targetMap 锁死 5 名已选项</span>
+</div>
+<!-- 重点展示交互输入框 -->
+<div class="relative">
+<div class="min-h-8 w-full bg-surface-container-lowest rounded border-2 border-primary p-1 flex flex-wrap items-center gap-1.5 ring-2 ring-primary-fixed/50">
+<!-- Tag 1: 在当前第 1 页 -->
+<div class="h-6 px-2 bg-secondary-container text-on-primary-fixed rounded flex items-center space-x-1 text-[11px] font-medium border border-primary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>孙志国 (POL-005882)</span>
+<span class="text-[10px] text-secondary font-mono">[第1页/现场]</span>
+<button class="material-symbols-outlined text-[13px] hover:text-error">close</button>
+</div>
+<!-- Tag 2: 在当前第 1 页 -->
+<div class="h-6 px-2 bg-secondary-container text-on-primary-fixed rounded flex items-center space-x-1 text-[11px] font-medium border border-primary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>李建华 (POL-004129)</span>
+<span class="text-[10px] text-secondary font-mono">[第1页/便衣]</span>
+<button class="material-symbols-outlined text-[13px] hover:text-error">close</button>
+</div>
+<!-- Tag 3: 跨页选项 (历史第 4 页拉取并由 targetMap 缓存) -->
+<div class="h-6 px-2 bg-primary-fixed text-on-primary-fixed rounded flex items-center space-x-1 text-[11px] font-medium border border-primary/40">
+<span class="material-symbols-outlined text-[12px] text-primary">lock</span>
+<span>陈明远 (POL-001042)</span>
+<span class="text-[10px] text-primary font-mono">[第4页锁定]</span>
+<button class="material-symbols-outlined text-[13px] hover:text-error">close</button>
+</div>
+<!-- Tag 4: 跨页搜索项 (历史关键词搜出后锁定) -->
+<div class="h-6 px-2 bg-primary-fixed text-on-primary-fixed rounded flex items-center space-x-1 text-[11px] font-medium border border-primary/40">
+<span class="material-symbols-outlined text-[12px] text-primary">lock</span>
+<span>王雪 (POL-008920)</span>
+<span class="text-[10px] text-primary font-mono">[搜‘特勤’锁定]</span>
+<button class="material-symbols-outlined text-[13px] hover:text-error">close</button>
+</div>
+<!-- Tag 5: 跨页选项 -->
+<div class="h-6 px-2 bg-primary-fixed text-on-primary-fixed rounded flex items-center space-x-1 text-[11px] font-medium border border-primary/40">
+<span class="material-symbols-outlined text-[12px] text-primary">lock</span>
+<span>赵立东 (POL-006321)</span>
+<span class="text-[10px] text-primary font-mono">[搜‘二队’锁定]</span>
+<button class="material-symbols-outlined text-[13px] hover:text-error">close</button>
+</div>
+<!-- 实时光标 -->
+<div class="flex-1 min-w-[80px] h-6 flex items-center px-1">
+<input class="w-full text-[11px] border-0 p-0 focus:ring-0 text-on-surface placeholder:text-outline bg-transparent" placeholder="继续键入检索并翻页追加..." type="text"/>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant mt-1.5 px-1">
+<span>支持根据警号、姓名全拼、所属中队无缝远程过滤</span>
+<span class="text-tertiary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">shield</span>
+                    targetMap 运行中：零失真、零白屏、零退化为数字 ID
+                  </span>
+</div>
+</div>
+</div>
+<!-- 处置任务说明 -->
+<div>
+<label class="block text-[12px] font-medium text-on-surface mb-1">处置协同指令要求</label>
+<textarea class="w-full text-[12px] bg-surface-container-low border border-outline-variant rounded p-2 text-on-surface" placeholder="输入指派指令内容..." rows="2">请所列 5 名参战干警于 15 分钟内携带 5G 执法记录仪到达天府路集结，切换对讲机至 CH-08 专网频道响应现场调度。</textarea>
+</div>
+<!-- 底部操作按钮 -->
+<div class="flex items-center justify-end space-x-3 pt-2">
+<button class="px-4 py-1.5 text-body-sm text-on-surface-variant bg-surface-container hover:bg-surface-container-high rounded border border-outline-variant transition">
+                取消重置
+              </button>
+<button class="px-5 py-1.5 text-body-sm text-on-primary bg-primary hover:bg-primary-container rounded font-medium flex items-center space-x-1 transition shadow-sm">
+<span class="material-symbols-outlined text-[16px]">send</span>
+<span>下发指派 (已选 5 人)</span>
+</button>
+</div>
+</div>
+<!-- 右侧 targetMap 内部运行时态视窗 (占 5 列) -->
+<div class="lg:col-span-5 bg-surface-container-low rounded-lg p-4 border border-outline-variant">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2 mb-3">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">memory</span>
+<span class="text-label-md font-bold font-mono">targetMap 内存镜像 (Live Memory)</span>
+</div>
+<span class="text-[10px] bg-tertiary-container text-on-tertiary px-1.5 py-0.2 rounded font-mono">Locked: 5</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mb-2 leading-relaxed">
+              这是内部组件绑定的私有响应式 Map，只要用户选过一次，其元数据就会在此被持久化绑定，直到用户主动点击 Tag 上的 × 移除：
+            </p>
+<pre class="bg-inverse-surface text-inverse-on-surface p-3 rounded text-[11px] font-mono overflow-x-auto leading-5 shadow-inner"><span class="text-primary-fixed-dim">// Vue 3 响应式字典锁 (当前瞬时状态)</span>
+targetMap = {
+  <span class="text-tertiary-fixed-dim">"POL-005882"</span>: { name: <span class="text-primary-fixed">"孙志国"</span>, dept: <span class="text-surface-dim">"二大队"</span>, isCurrentPage: <span class="text-tertiary-fixed">true</span> },
+  <span class="text-tertiary-fixed-dim">"POL-004129"</span>: { name: <span class="text-primary-fixed">"李建华"</span>, dept: <span class="text-surface-dim">"便衣支队"</span>, isCurrentPage: <span class="text-tertiary-fixed">true</span> },
+  <span class="text-tertiary-fixed-dim">"POL-001042"</span>: { name: <span class="text-primary-fixed">"陈明远"</span>, dept: <span class="text-surface-dim">"指挥中心"</span>, isCurrentPage: <span class="text-error-container">false</span> },
+  <span class="text-tertiary-fixed-dim">"POL-008920"</span>: { name: <span class="text-primary-fixed">"王雪"</span>, dept: <span class="text-surface-dim">"特警巡防"</span>, isCurrentPage: <span class="text-error-container">false</span> },
+  <span class="text-tertiary-fixed-dim">"POL-006321"</span>: { name: <span class="text-primary-fixed">"赵立东"</span>, dept: <span class="text-surface-dim">"二大队"</span>, isCurrentPage: <span class="text-error-container">false</span> }
+}</pre>
+<div class="mt-3 p-2 bg-surface-container-lowest rounded border border-outline-variant text-[11px] text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0">speed</span>
+<span>翻页与换词搜索时，仅刷新渲染视窗列表；已选项均从 targetMap 瞬间 O(1) 锁定呈现，零卡顿。</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. 研发接口备忘录与代码契约 Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="w-1.5 h-4 bg-primary rounded-full"></span>
+<h2 class="text-headline-md font-bold text-on-surface">研发接口备忘录与代码契约 (TypeScript &amp; Vue 3 Props Spec)</h2>
+</div>
+<span class="text-body-sm text-on-surface-variant font-mono">COMPONENT API CONTRACT</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Props 规范表格 (占 7 列) -->
+<div class="lg:col-span-7 bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+<div class="bg-surface-container px-4 py-3 border-b border-outline-variant flex items-center justify-between">
+<span class="text-label-lg font-bold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">tune</span>
+              组件标准 Props 属性契约 (API Specifications)
+            </span>
+<span class="text-[11px] font-mono text-on-surface-variant">Vue 3 + TS 严格类型定义</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-[12px]">
+<thead class="bg-surface-container-low text-on-surface border-b border-outline-variant">
+<tr>
+<th class="py-2.5 px-3 font-semibold font-mono">属性名 (Prop)</th>
+<th class="py-2.5 px-3 font-semibold font-mono">类型 (Type)</th>
+<th class="py-2.5 px-3 font-semibold font-mono">默认值</th>
+<th class="py-2.5 px-3 font-semibold">规范说明与公共安全约束</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-sm">
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 font-mono font-medium text-primary">remoteMethod</td>
+<td class="py-2 px-3 font-mono text-[11px] text-secondary">(q: string, p: number) =&gt; Promise&lt;PageResult&gt;</td>
+<td class="py-2 px-3 font-mono text-outline">必填</td>
+<td class="py-2 px-3 text-on-surface-variant">分页检索回调，必须返回包含 { list, total, hasMore } 结构的 Promise</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 font-mono font-medium text-primary">valueKey</td>
+<td class="py-2 px-3 font-mono text-[11px] text-secondary">string</td>
+<td class="py-2 px-3 font-mono text-outline">'id'</td>
+<td class="py-2 px-3 text-on-surface-variant">警员身份证号/警号/设备序列号等唯一主键标识字段</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 font-mono font-medium text-primary">labelKey</td>
+<td class="py-2 px-3 font-mono text-[11px] text-secondary">string | ((item) =&gt; string)</td>
+<td class="py-2 px-3 font-mono text-outline">'label'</td>
+<td class="py-2 px-3 text-on-surface-variant">回显名称字段，支持传递函数格式化为「姓名 (工号)」</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 font-mono font-medium text-primary">targetMap</td>
+<td class="py-2 px-3 font-mono text-[11px] text-secondary">Record&lt;string, ItemMeta&gt;</td>
+<td class="py-2 px-3 font-mono text-outline">() =&gt; ({})</td>
+<td class="py-2 px-3 text-on-surface-variant">外部初始化注入的历史选项字典，用于详情编辑页首次加载时准确回显</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 font-mono font-medium text-primary">debounce</td>
+<td class="py-2 px-3 font-mono text-[11px] text-secondary">number</td>
+<td class="py-2 px-3 font-mono text-outline">300</td>
+<td class="py-2 px-3 text-on-surface-variant">防抖毫秒数。GB规范强制要求在 250ms ~ 400ms 区间，严禁即键即发</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 font-mono font-medium text-primary">maxCollapseTags</td>
+<td class="py-2 px-3 font-mono text-[11px] text-secondary">number</td>
+<td class="py-2 px-3 font-mono text-outline">2</td>
+<td class="py-2 px-3 text-on-surface-variant">触发框内最多允许平铺的 Tag 数量，超出以 +N 折叠胶囊汇总并附 Tooltip</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-3 font-mono font-medium text-primary">pageSize</td>
+<td class="py-2 px-3 font-mono text-[11px] text-secondary">number</td>
+<td class="py-2 px-3 font-mono text-outline">20</td>
+<td class="py-2 px-3 text-on-surface-variant">每次滚动触底时追加拉取的分页步长，建议不超过 30 条以保障渲染丝滑度</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- 研发集成范式代码 (占 5 列) -->
+<div class="lg:col-span-5 bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col justify-between">
+<div>
+<div class="bg-surface-container px-4 py-3 border-b border-outline-variant flex items-center justify-between">
+<span class="text-label-lg font-bold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">code</span>
+                Vue 3 SFC 业务端落地示例代码
+              </span>
+<span class="text-[11px] font-mono text-tertiary">标准工程实践</span>
+</div>
+<div class="p-3 bg-inverse-surface text-inverse-on-surface">
+<pre class="text-[11.5px] font-mono leading-5 overflow-x-auto"><span class="text-outline">&lt;!-- 业务使用端 template --&gt;</span>
+&lt;<span class="text-primary-fixed">LxSelectPagination</span>
+  <span class="text-tertiary-fixed">v-model</span>=<span class="text-primary-fixed-dim">"selectedPoliceIds"</span>
+  :<span class="text-tertiary-fixed">remoteMethod</span>=<span class="text-primary-fixed-dim">"fetchPolicePaging"</span>
+  <span class="text-tertiary-fixed">valueKey</span>=<span class="text-primary-fixed-dim">"policeCode"</span>
+  :<span class="text-tertiary-fixed">labelKey</span>=<span class="text-primary-fixed-dim">"(item) =&gt; `${item.name} (${item.policeCode})`"</span>
+  :<span class="text-tertiary-fixed">targetMap</span>=<span class="text-primary-fixed-dim">"historyPoliceCache"</span>
+  :<span class="text-tertiary-fixed">maxCollapseTags</span>=<span class="text-primary-fixed-dim">"2"</span>
+  :<span class="text-tertiary-fixed">debounce</span>=<span class="text-primary-fixed-dim">"300"</span>
+  <span class="text-tertiary-fixed">placeholder</span>=<span class="text-primary-fixed-dim">"指派涉案警员（支持工号/姓名分页检索）"</span>
+/&gt;
+
+<span class="text-outline">&lt;!-- 业务脚本 script setup --&gt;</span>
+<span class="text-primary-fixed">const</span> <span class="text-tertiary-fixed-dim">selectedPoliceIds</span> = ref([<span class="text-primary-fixed-dim">'POL-005882'</span>, <span class="text-primary-fixed-dim">'POL-001042'</span>])
+<span class="text-primary-fixed">const</span> <span class="text-tertiary-fixed-dim">historyPoliceCache</span> = ref({
+  <span class="text-primary-fixed-dim">'POL-001042'</span>: { name: <span class="text-primary-fixed-dim">'陈明远'</span>, policeCode: <span class="text-primary-fixed-dim">'POL-001042'</span> }
+})
+
+<span class="text-outline">// 分页拉取函数</span>
+<span class="text-primary-fixed">async function</span> <span class="text-tertiary-fixed">fetchPolicePaging</span>(query, page) {
+  <span class="text-primary-fixed">const</span> res = <span class="text-primary-fixed">await</span> api.getPoliceList({ query, page, size: 20 })
+  <span class="text-primary-fixed">return</span> {
+    list: res.data.records,
+    total: res.data.total,
+    hasMore: res.data.current * 20 &lt; res.data.total
+  }
+}</pre>
+</div>
+</div>
+<div class="p-3 bg-surface-container-low border-t border-outline-variant flex items-center justify-between text-[11px] text-on-surface-variant">
+<span>遵循公安内网研发准则：强类型安全</span>
+<span class="font-mono text-primary">ESLint: STRICT-PASS</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- 底部备案与标准页脚 -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant py-4 px-6 mt-12 text-center text-body-sm text-on-surface-variant">
+<div class="flex flex-col sm:flex-row items-center justify-between max-w-7xl mx-auto text-[11px] font-mono space-y-2 sm:space-y-0">
+<div>公安信息化组件库 · LxSelectPagination 远程分页规范标本 (GB/T 33170)</div>
+<div class="flex items-center space-x-4">
+<span>防抖控制: 300ms</span>
+<span>触底分页: v-loadmore</span>
+<span>元数据回显锁: targetMap</span>
+<span class="text-tertiary font-bold">● 标准验证通过</span>
+</div>
+</div>
+</footer>
+</body></html>

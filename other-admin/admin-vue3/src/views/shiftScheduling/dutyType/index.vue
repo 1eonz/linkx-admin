@@ -99,24 +99,29 @@ async function submitForm(): Promise<void> {
   const valid = await dataFormRef.value?.validate().catch(() => false);
   if (!valid) return;
   dialogLoading.value = true;
-  try {
-    const isCreate = dialogStatus.value === 'create';
-    const result = isCreate
-      ? await createDutyType({ name: temp.name ?? '' })
-      : await updateDutyType(temp.type as string, { name: temp.name ?? '' });
-    if (!result || result.code !== 0) {
-      ElMessage.error(result?.msg ?? `${isCreate ? '创建' : '更新'}失败，请重试`);
-      return;
-    }
-    ElMessage.success(`${isCreate ? '创建' : '更新'}成功`);
-    // 关闭弹窗并重置表单
-    dialogVisible.value = false;
-    resetTemp();
-    dataFormRef.value?.resetFields();
-    tableRef.value?.refresh();
-  } finally {
-    dialogLoading.value = false;
-  }
+  const isCreate = dialogStatus.value === 'create';
+  const request = isCreate
+    ? createDutyType({ name: temp.name ?? '' })
+    : updateDutyType(temp.type ?? '', { name: temp.name ?? '' });
+  return request
+    .then((result) => {
+      if (!result || result.code !== 0) {
+        ElMessage.error(result?.msg ?? `${isCreate ? '创建' : '更新'}失败，请重试`);
+        return;
+      }
+      ElMessage.success(`${isCreate ? '创建' : '更新'}成功`);
+      // 关闭弹窗并重置表单
+      dialogVisible.value = false;
+      resetTemp();
+      dataFormRef.value?.resetFields();
+      tableRef.value?.refresh();
+    })
+    .catch(() => {
+      ElMessage.error(`${isCreate ? '创建' : '更新'}失败，请重试`);
+    })
+    .finally(() => {
+      dialogLoading.value = false;
+    });
 }
 
 /** 关闭弹窗时重置表单和校验状态 */
@@ -141,7 +146,11 @@ function handleDelete(row: DutyTypeItem): void {
       ElMessage.success('删除成功');
       tableRef.value?.refresh();
     })
-    .catch(() => {});
+    .catch((error: unknown) => {
+      if (error !== 'cancel') {
+        ElMessage.error(error instanceof Error ? error.message : '删除失败，请重试');
+      }
+    });
 }
 
 // ===== 工具函数 =====
@@ -188,7 +197,7 @@ function handleDialogOpen(): void {
                 type: 'danger',
                 icon: Delete,
                 label: '删除',
-                visible: getRow(scope).type !== 0,
+                visible: String(getRow(scope).type) !== '0',
                 onClick: () => handleDelete(getRow(scope)),
               },
             ]"

@@ -21,10 +21,10 @@ const h5Router: AppRouteRecord = {
       meta: { title: '轮播图管理' },
     },
     {
-      path: 'ArchivedTable',
-      component: () => import('@/views/h5/archivedTable/index.vue'),
-      name: 'ArchivedTable',
-      meta: { title: '已归档群组管理' },
+      path: 'GroupTags',
+      component: () => import('@/views/h5/groupTags/index.vue'),
+      name: 'GroupTags',
+      meta: { title: '群组标签管理' },
     },
   ],
 };

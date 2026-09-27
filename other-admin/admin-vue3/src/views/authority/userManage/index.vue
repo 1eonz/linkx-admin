@@ -25,6 +25,7 @@ import { defaultTableFormatter } from '@/components/ProTable/formatter';
 import ProTable from '@/components/ProTable/index.vue';
 import type { ITableColumn } from '@/components/ProTable/types';
 import SearchBar from '@/components/SearchBar/index.vue';
+import { hasBtnPermission } from '@/composables/usePermission';
 import UserPassword from '@/views/permission/components/userPassword.vue';
 
 defineOptions({ name: 'UserManage' });
@@ -55,8 +56,16 @@ const columns = computed<ITableColumn[]>(() => [
   },
 ]);
 
+const canCreate = computed(() => hasBtnPermission('/admin/user/create'));
+
 const actions = computed(() => [
-  { label: '新增', type: 'primary' as const, icon: markRaw(Plus), onClick: handleCreate },
+  {
+    label: '新增',
+    type: 'primary' as const,
+    icon: markRaw(Plus),
+    onClick: handleCreate,
+    visible: canCreate.value,
+  },
 ]);
 
 // ===== ProTable @response 回调 =====
@@ -165,18 +174,21 @@ function getUser(scope: any): AdminUserItem {
                 icon: Edit,
                 label: '编辑',
                 onClick: () => handleUpdate(getUser(scope)),
+                auth: '/admin/user/update',
               },
               {
                 type: 'primary',
                 icon: Key,
                 label: '重置密码',
                 onClick: () => handleResetPassword(getUser(scope)),
+                auth: '/admin/user/updatePwd',
               },
               {
                 type: 'danger',
                 icon: Delete,
                 label: '删除',
                 onClick: () => handleDelete(getUser(scope)),
+                auth: '/admin/user/delete',
               },
               {
                 type: 'danger',
@@ -184,6 +196,7 @@ function getUser(scope: any): AdminUserItem {
                 label: '禁用',
                 onClick: () => handleStatus(getUser(scope), 1),
                 visible: getUser(scope).status === 0,
+                auth: '/admin/user/update',
               },
               {
                 type: 'warning',
@@ -191,6 +204,7 @@ function getUser(scope: any): AdminUserItem {
                 label: '启用',
                 onClick: () => handleStatus(getUser(scope), 0),
                 visible: getUser(scope).status !== 0,
+                auth: '/admin/user/update',
               },
             ]"
           />

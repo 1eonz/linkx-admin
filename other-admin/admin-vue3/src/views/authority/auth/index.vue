@@ -49,9 +49,16 @@ const columns = computed<ITableColumn[]>(() => [
 // 权限
 const canDelete = computed(() => hasBtnPermission('/admin/role/delete'));
 const canUpdate = computed(() => hasBtnPermission('/admin/role/update'));
+const canCreate = computed(() => hasBtnPermission('/admin/role/create'));
 
 const actions = computed(() => [
-  { label: '新增', type: 'primary' as const, icon: markRaw(Plus), onClick: handleCreate },
+  {
+    label: '新增',
+    type: 'primary' as const,
+    icon: markRaw(Plus),
+    onClick: handleCreate,
+    visible: canCreate.value,
+  },
 ]);
 
 // ===== ProTable @response 回调 =====
@@ -182,7 +189,9 @@ function getRole(scope: any): RoleItem {
         </template>
 
         <template #actions="scope">
-          <el-button type="primary" link :icon="Edit" @click="handleUpdate(getRole(scope))">编辑</el-button>
+          <el-button v-if="canUpdate" type="primary" link :icon="Edit" @click="handleUpdate(getRole(scope))"
+            >编辑</el-button
+          >
           <el-button
             v-if="canDelete && isShow(getRole(scope))"
             type="danger"

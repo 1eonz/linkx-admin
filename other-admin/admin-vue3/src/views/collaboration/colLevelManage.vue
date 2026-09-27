@@ -80,17 +80,18 @@ const columns: ITableColumn[] = [
 ];
 
 // 非管理员：通过身份证查用户部门
-async function getUserInfoByIdCard(): Promise<void> {
-  try {
-    const userRes = await queryUserByIdCard({ idCard: idCardNum });
-    const userDepartments = userRes?.data?.userDepartments as
-      Array<{ departmentId: string; departmentCode: string }> | undefined;
-    if (userDepartments?.length) {
-      departmentId.value = userDepartments[0].departmentId;
-    }
-  } catch {
-    // 忽略错误
-  }
+function getUserInfoByIdCard(): Promise<void> {
+  return queryUserByIdCard({ idCard: idCardNum })
+    .then((userRes) => {
+      const userDepartments = userRes?.data?.userDepartments as
+        Array<{ departmentId: string; departmentCode: string }> | undefined;
+      if (userDepartments?.length) {
+        departmentId.value = userDepartments[0].departmentId;
+      }
+    })
+    .catch(() => {
+      // 忽略错误
+    });
 }
 
 // ===== ProTable fetchApi：根据搜索条件动态切换后端 API =====
@@ -167,41 +168,49 @@ function handleNodeDeleted(): void {
 }
 
 // 节点新增/编辑提交：CoopLevelTree 的依赖反转回调
-async function handleNodeSubmit(
+function handleNodeSubmit(
   type: 'create' | 'edit',
   name: string,
   parentData: CoopTreeNode | null,
   editData: CoopTreeNode | null,
 ): Promise<boolean> {
-  try {
-    if (type === 'create') {
-      const parentId = parentData ? parentData.id : 0;
-      const res = await createCoopLevel({ name, parentId });
-      if (!res || res.code !== 0) {
-        ElMessage.error(res?.msg ?? '创建失败，请重试');
+  if (type === 'create') {
+    const parentId = parentData ? parentData.id : 0;
+    return createCoopLevel({ name, parentId })
+      .then((res) => {
+        if (!res || res.code !== 0) {
+          ElMessage.error(res?.msg ?? '创建失败，请重试');
+          return false;
+        }
+        ElMessage.success('层级创建成功');
+        return true;
+      })
+      .catch((error: unknown) => {
+        ElMessage.error(error instanceof Error ? error.message || '创建失败，请重试' : '创建失败，请重试');
         return false;
-      }
-      ElMessage.success('层级创建成功');
-      return true;
-    } else if (editData) {
-      const res = await updateCoopLevel(editData.id, { name });
-      if (!res || res.code !== 0) {
-        ElMessage.error(res?.msg ?? '更新失败，请重试');
-        return false;
-      }
-      ElMessage.success('层级更新成功');
-      editData.name = name;
-      // 同步更新当前选中节点显示
-      if (currentNode.value && currentNode.value.id === editData.id) {
-        currentNode.value = { ...currentNode.value, name };
-      }
-      return true;
-    }
-    return false;
-  } catch (e) {
-    ElMessage.error((e as Error)?.message ?? '操作失败，请重试');
-    return false;
+      });
   }
+  if (editData) {
+    return updateCoopLevel(editData.id, { name })
+      .then((res) => {
+        if (!res || res.code !== 0) {
+          ElMessage.error(res?.msg ?? '更新失败，请重试');
+          return false;
+        }
+        ElMessage.success('层级更新成功');
+        editData.name = name;
+        // 同步更新当前选中节点显示
+        if (currentNode.value && currentNode.value.id === editData.id) {
+          currentNode.value = { ...currentNode.value, name };
+        }
+        return true;
+      })
+      .catch((error: unknown) => {
+        ElMessage.error(error instanceof Error ? error.message || '更新失败，请重试' : '更新失败，请重试');
+        return false;
+      });
+  }
+  return Promise.resolve(false);
 }
 
 // 移除成员
@@ -215,13 +224,18 @@ async function handleUnbindMember(row: CoopLevelMember): Promise<void> {
   } catch {
     return;
   }
-  try {
-    await deleteCoopLevelMembers([String(row.uid)]);
-    ElMessage.success('移除成功');
-    tableRef.value?.refresh();
-  } catch (e) {
-    ElMessage.error((e as Error)?.message ?? '移除失败');
-  }
+  return deleteCoopLevelMembers([String(row.uid)])
+    .then((res) => {
+      if (res?.code !== 0) {
+        ElMessage.error(res?.msg ?? '移除失败');
+        return;
+      }
+      ElMessage.success('移除成功');
+      tableRef.value?.refresh();
+    })
+    .catch((error: unknown) => {
+      ElMessage.error(error instanceof Error ? error.message || '移除失败' : '移除失败');
+    });
 }
 
 /** 从 ProTable slot scope 中安全获取 CoopLevelMember */
@@ -236,14 +250,14 @@ function openBindDialog(): void {
 }
 
 // 挂靠弹窗：获取协同岗列表（依赖反转）
-async function bindFetchList(params: {
+function bindFetchList(params: {
   pageNum: number;
   pageSize: number;
   postName?: string;
   selectionType?: string;
   selectionId?: string;
 }): Promise<{ records: CollaborationItem[]; total: number | string }> {
-  const res = await getCollaborationPage({
+  return getCollaborationPage({
     type: 0,
     orgId: departmentId.value,
     postName: params.postName,
@@ -252,30 +266,28 @@ async function bindFetchList(params: {
     selectionId: params.selectionId,
     pageNum: params.pageNum,
     pageSize: params.pageSize,
-  } as never);
-  // 注意：getCollaborationPage 返回直接 {records, total} 结构（无 code/data 包装）
-  // 用 defaultTableFormatter 兼容提取，避免 res.data 为 undefined 报错
-  return {
+  } as never).then((res) => ({
     records: defaultTableFormatter.getRecords(res) as CollaborationItem[],
     total: defaultTableFormatter.getTotal(res),
-  };
+  }));
 }
 
 // 挂靠弹窗：提交（依赖反转）
-async function bindSubmit(selected: CollaborationItem[]): Promise<boolean> {
-  if (!currentNode.value) return false;
-  try {
-    const postIds = selected.map((r) => String(r.id));
-    const res = await updateCoopLevelMembers(currentNode.value.id, postIds);
-    if (!res || res.code !== 0) {
-      ElMessage.error(res?.msg ?? '挂靠失败，请重试');
+function bindSubmit(selected: CollaborationItem[]): Promise<boolean> {
+  if (!currentNode.value) return Promise.resolve(false);
+  const postIds = selected.map((r) => String(r.id));
+  return updateCoopLevelMembers(currentNode.value.id, postIds)
+    .then((res) => {
+      if (!res || res.code !== 0) {
+        ElMessage.error(res?.msg ?? '挂靠失败，请重试');
+        return false;
+      }
+      return true;
+    })
+    .catch((error: unknown) => {
+      ElMessage.error(error instanceof Error ? error.message || '挂靠失败，请重试' : '挂靠失败，请重试');
       return false;
-    }
-    return true;
-  } catch (e) {
-    ElMessage.error((e as Error)?.message ?? '挂靠失败，请重试');
-    return false;
-  }
+    });
 }
 
 // 挂靠成功回调：刷新右侧表格

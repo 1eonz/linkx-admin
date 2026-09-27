@@ -42,6 +42,7 @@ const dialogTitle = ref('新增');
 const isAdd = ref(true);
 const confirmLoading = ref(false);
 const detailLoading = ref(false);
+const dataTreeReady = ref(false);
 
 const formRef = ref<FormInstance>();
 const dataAuthTreeRef = ref<InstanceType<typeof DataPermissionTree>>();
@@ -73,7 +74,7 @@ const rules: FormRules = {
 };
 
 // ===== 打开弹窗 =====
-async function open(row?: AdminUserItem): Promise<void> {
+function open(row?: AdminUserItem): Promise<void> {
   // 重置
   resetForm();
   isAdd.value = !row;
@@ -83,34 +84,39 @@ async function open(row?: AdminUserItem): Promise<void> {
     // 编辑模式
     userForm.id = row.id;
     detailLoading.value = true;
-    try {
-      const res = await getAdminUserById(row.id);
-      const data = res.data as AdminUserItem | undefined;
-      if (data) {
-        userForm.idCard = data.idCard ?? '';
-        // 优先用 orgList（新格式）
-        if (data.orgList && data.orgList.length > 0) {
-          userForm.orgList = data.orgList;
-          userForm.orgIds = data.orgIds ?? data.orgList.map((item) => item.id);
-          userForm.dataAuthTreecheckedKeys = [];
-        } else if (data.orgIds && data.orgIds.length > 0) {
-          // 旧格式兜底
-          userForm.orgIds = data.orgIds;
-          userForm.orgList = [];
-          userForm.dataAuthTreecheckedKeys = [];
+    return getAdminUserById(row.id)
+      .then((res) => {
+        const data = res.data as AdminUserItem | undefined;
+        if (data) {
+          userForm.idCard = data.idCard ?? '';
+          // 优先用 orgList（新格式）
+          if (data.orgList && data.orgList.length > 0) {
+            userForm.orgList = data.orgList;
+            userForm.orgIds = data.orgIds ?? data.orgList.map((item) => item.id);
+            userForm.dataAuthTreecheckedKeys = [];
+          } else if (data.orgIds && data.orgIds.length > 0) {
+            // 旧格式兜底
+            userForm.orgIds = data.orgIds;
+            userForm.orgList = [];
+            userForm.dataAuthTreecheckedKeys = [];
+          }
         }
-      }
-    } finally {
-      detailLoading.value = false;
-    }
-
-    // 等待弹窗渲染后回显数据权限树
-    nextTick(() => {
-      syncTreeCheckedState();
-    });
+        // 等待弹窗渲染后回显数据权限树
+        nextTick(() => {
+          syncTreeCheckedState();
+        });
+        dialogVisible.value = true;
+      })
+      .catch(() => {
+        ElMessage.error('获取用户详情失败');
+      })
+      .finally(() => {
+        detailLoading.value = false;
+      });
   }
 
   dialogVisible.value = true;
+  return Promise.resolve();
 }
 
 defineExpose({ open });
@@ -132,6 +138,10 @@ function changeDataAuthCheckKeys(checkedDetail: Array<{ id: string; name: string
   userForm.orgIds = checkedDetail.map((item) => item.id);
 }
 
+function handleDataTreeLoadState(ready: boolean): void {
+  dataTreeReady.value = ready;
+}
+
 /** 用户名失焦去空格 */
 function handleIdCardBlur(): void {
   if (isAdd.value) {
@@ -141,6 +151,7 @@ function handleIdCardBlur(): void {
 
 // ===== 提交 =====
 async function handleConfirm(): Promise<void> {
+  if (!dataTreeReady.value || detailLoading.value) return;
   const valid = await formRef.value?.validate().catch(() => false);
   if (!valid) return;
 
@@ -151,25 +162,29 @@ async function handleConfirm(): Promise<void> {
   }
 
   confirmLoading.value = true;
-  try {
-    const param = {
-      idCard: userForm.idCard,
-      orgIds: userForm.orgIds,
-      orgList: userForm.orgList,
-      ...(isAdd.value ? {} : { id: userForm.id }),
-    };
-    const fn = isAdd.value ? createAdminUser : updateAdminUser;
-    const res = await fn(param);
-    if (res.code === 0) {
-      ElMessage.success(isAdd.value ? '新增成功' : '更新成功');
-      emit('success');
-      dialogVisible.value = false;
-    } else {
-      ElMessage.error(res.msg || '操作失败');
-    }
-  } finally {
-    confirmLoading.value = false;
-  }
+  const param = {
+    idCard: userForm.idCard,
+    orgIds: userForm.orgIds,
+    orgList: userForm.orgList,
+    ...(isAdd.value ? {} : { id: userForm.id }),
+  };
+  const fn = isAdd.value ? createAdminUser : updateAdminUser;
+  fn(param)
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(isAdd.value ? '新增成功' : '更新成功');
+        emit('success');
+        dialogVisible.value = false;
+      } else {
+        ElMessage.error(res.msg || '操作失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('操作失败');
+    })
+    .finally(() => {
+      confirmLoading.value = false;
+    });
 }
 
 /** 关闭弹窗 */
@@ -229,6 +244,7 @@ function resetForm(): void {
             filter-placeholder="搜索部门"
             :height="400"
             @change="changeDataAuthCheckKeys"
+            @load-state="handleDataTreeLoadState"
           />
         </div>
       </el-form-item>
@@ -236,7 +252,14 @@ function resetForm(): void {
 
     <template #footer>
       <el-button @click="closeDialog">取消</el-button>
-      <el-button type="primary" :loading="confirmLoading" @click="handleConfirm">确定</el-button>
+      <el-button
+        type="primary"
+        :disabled="detailLoading || !dataTreeReady"
+        :loading="confirmLoading"
+        @click="handleConfirm"
+      >
+        确定
+      </el-button>
     </template>
   </el-dialog>
 </template>

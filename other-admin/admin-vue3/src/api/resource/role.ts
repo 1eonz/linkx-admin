@@ -1,4 +1,4 @@
-import type { ApiResponse, HttpResult, PaginatedResult } from '#/axios';
+import type { HttpResult, PaginatedResult } from '#/axios';
 import type { RoleItem } from '@/api/permission/role';
 import http from '@/utils/http';
 

@@ -64,25 +64,26 @@ function handleResponse(res: unknown): void {
 }
 
 /** 递归拉取所有已有默认协同岗（用于弹窗中标记 disabled） */
-async function getAllFetchDefaultMembers(): Promise<void> {
-  try {
-    const res = await pageDefaultCoop({
-      orgId: props.orgId,
-      pageNum: defaultPageNum,
-      pageSize: 100,
+function getAllFetchDefaultMembers(): Promise<void> {
+  return pageDefaultCoop({
+    orgId: props.orgId,
+    pageNum: defaultPageNum,
+    pageSize: 100,
+  })
+    .then((res) => {
+      const data = res.data as { records?: DefaultCoopItem[]; total?: number | string } | DefaultCoopItem[];
+      const records = Array.isArray(data) ? data : (data.records ?? []);
+      const totalNum = Array.isArray(data) ? records.length : Number(data.total) || 0;
+      const ids = records.map((item) => item.id);
+      allDefaultList.value = [...allDefaultList.value, ...ids];
+      if (allDefaultList.value.length < totalNum) {
+        defaultPageNum++;
+        return getAllFetchDefaultMembers();
+      }
+    })
+    .catch(() => {
+      ElMessage.error('加载默认协同岗列表失败');
     });
-    const data = res.data as { records?: DefaultCoopItem[]; total?: number | string } | DefaultCoopItem[];
-    const records = Array.isArray(data) ? data : (data.records ?? []);
-    const totalNum = Array.isArray(data) ? records.length : Number(data.total) || 0;
-    const ids = records.map((item) => item.id);
-    allDefaultList.value = [...allDefaultList.value, ...ids];
-    if (allDefaultList.value.length < totalNum) {
-      defaultPageNum++;
-      await getAllFetchDefaultMembers();
-    }
-  } catch {
-    ElMessage.error('加载默认协同岗列表失败');
-  }
 }
 
 // 打开"设置默认协同岗"弹窗
@@ -91,22 +92,22 @@ function openBindDialog(): void {
 }
 
 // 弹窗预加载：清空已有列表，递归拉取全部
-async function handleBeforeOpenDefault(): Promise<void> {
+function handleBeforeOpenDefault(): Promise<void> {
   defaultPageNum = 1;
   allDefaultList.value = [];
-  await getAllFetchDefaultMembers();
+  return getAllFetchDefaultMembers();
 }
 
 // 弹窗：获取列表（依赖反转）
 // 注意：default 模式不传 selectionType / selectionId
-async function bindFetchList(params: {
+function bindFetchList(params: {
   pageNum: number;
   pageSize: number;
   postName?: string;
   selectionType?: string;
   selectionId?: string;
 }): Promise<{ records: CollaborationItem[]; total: number | string }> {
-  const res = await getCollaborationPage({
+  return getCollaborationPage({
     orgId: props.orgId,
     postName: params.postName,
     // default 模式不传 selectionType / selectionId
@@ -114,37 +115,39 @@ async function bindFetchList(params: {
     selectionId: undefined,
     pageNum: params.pageNum,
     pageSize: params.pageSize,
-  } as never);
-  // 注意：getCollaborationPage 返回直接 {records, total} 结构（无 code/data 包装）
-  // 用 defaultTableFormatter 兼容提取，避免 res.data 为 undefined 报错
-  const records = (defaultTableFormatter.getRecords(res) as CollaborationItem[]).map((item) => {
-    // 已存在的默认协同岗标记 disabled
-    if (allDefaultList.value.includes(item.id)) {
-      return { ...item, disabled: true } as CollaborationItem;
-    }
-    return { ...item, disabled: false } as CollaborationItem;
+  } as never).then((res) => {
+    // 注意：getCollaborationPage 返回直接 {records, total} 结构（无 code/data 包装）
+    // 用 defaultTableFormatter 兼容提取，避免 res.data 为 undefined 报错
+    const records = (defaultTableFormatter.getRecords(res) as CollaborationItem[]).map((item) => {
+      // 已存在的默认协同岗标记 disabled
+      if (allDefaultList.value.includes(item.id)) {
+        return { ...item, disabled: true } as CollaborationItem;
+      }
+      return { ...item, disabled: false } as CollaborationItem;
+    });
+    return {
+      records,
+      total: defaultTableFormatter.getTotal(res),
+    };
   });
-  return {
-    records,
-    total: defaultTableFormatter.getTotal(res),
-  };
 }
 
 // 弹窗：提交
-async function bindSubmit(selected: CollaborationItem[]): Promise<boolean> {
-  try {
-    const creator = localStorage.getItem('back_username') ?? '';
-    const userIds = selected.map((item) => String(item.id));
-    const res = await creatDefaultCoop({ creator, userIds });
-    if (!res || res.code !== 0) {
-      ElMessage.error(res?.msg ?? '设置失败，请重试');
+function bindSubmit(selected: CollaborationItem[]): Promise<boolean> {
+  const creator = localStorage.getItem('back_username') ?? '';
+  const userIds = selected.map((item) => String(item.id));
+  return creatDefaultCoop({ creator, userIds })
+    .then((res) => {
+      if (!res || res.code !== 0) {
+        ElMessage.error(res?.msg ?? '设置失败，请重试');
+        return false;
+      }
+      return true;
+    })
+    .catch((error: unknown) => {
+      ElMessage.error(error instanceof Error ? error.message || '设置失败，请重试' : '设置失败，请重试');
       return false;
-    }
-    return true;
-  } catch (e) {
-    ElMessage.error((e as Error)?.message ?? '设置失败，请重试');
-    return false;
-  }
+    });
 }
 
 // 提交成功回调
@@ -163,17 +166,18 @@ async function handleDelete(row: DefaultCoopItem): Promise<void> {
   } catch {
     return;
   }
-  try {
-    const res = await deleteDefaultCoop(row.uid);
-    if (res && res.code === 0) {
-      ElMessage.success('移除成功');
-      tableRef.value?.refresh();
-    } else {
-      ElMessage.error('移除失败');
-    }
-  } catch (e) {
-    ElMessage.error((e as Error)?.message ?? '移除失败');
-  }
+  return deleteDefaultCoop(row.uid)
+    .then((res) => {
+      if (res && res.code === 0) {
+        ElMessage.success('移除成功');
+        tableRef.value?.refresh();
+      } else {
+        ElMessage.error('移除失败');
+      }
+    })
+    .catch((error: unknown) => {
+      ElMessage.error(error instanceof Error ? error.message || '移除失败' : '移除失败');
+    });
 }
 
 // 暴露方法给父组件：父组件调用 refresh()/init() 即可触发数据刷新

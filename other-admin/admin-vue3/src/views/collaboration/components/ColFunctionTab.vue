@@ -87,7 +87,10 @@ async function fetchMembersApi(params: Record<string, unknown>): Promise<unknown
     return { records: [], total: 0 };
   }
   // 调用 getFunctionaldeptsMembers，将 levelId 从 params 中剥离
-  const { levelId: _levelId, orgId: _orgId, pageNum, pageSize, ...rest } = params;
+  const requestParams = { ...params };
+  delete requestParams.levelId;
+  delete requestParams.orgId;
+  const { pageNum, pageSize, ...rest } = requestParams;
   return getFunctionaldeptsMembers(levelId, {
     orgId: props.orgId,
     pageNum,
@@ -103,8 +106,8 @@ function handleResponse(res: unknown): void {
 }
 
 // 默认勾选切换
-async function handleMemberCheckChange(row: FunctionalDeptMember): Promise<void> {
-  if (!currentNode.value) return;
+function handleMemberCheckChange(row: FunctionalDeptMember): Promise<void> {
+  if (!currentNode.value) return Promise.resolve();
   const data = [
     {
       id: row.uid,
@@ -115,20 +118,22 @@ async function handleMemberCheckChange(row: FunctionalDeptMember): Promise<void>
       departmentName: currentNode.value.name,
     },
   ];
-  try {
-    isDisabled.value = true;
-    const res = await checkedFunctionaldeptsMembers(data);
-    if (res && res.code === 0) {
-      ElMessage.success('修改成功');
-      tableRef.value?.refresh();
-    } else {
+  isDisabled.value = true;
+  return checkedFunctionaldeptsMembers(data)
+    .then((res) => {
+      if (res && res.code === 0) {
+        ElMessage.success('修改成功');
+        tableRef.value?.refresh();
+      } else {
+        ElMessage.error('修改失败');
+      }
+    })
+    .catch(() => {
       ElMessage.error('修改失败');
-    }
-  } catch {
-    ElMessage.error('修改失败');
-  } finally {
-    isDisabled.value = false;
-  }
+    })
+    .finally(() => {
+      isDisabled.value = false;
+    });
 }
 
 // 节点点击：更新 searchParams.levelId + 调用 tableRef.init()
@@ -148,42 +153,50 @@ function handleNodeDeleted(): void {
 }
 
 // 节点新增/编辑提交：CoopLevelTree 的依赖反转回调
-async function handleNodeSubmit(
+function handleNodeSubmit(
   type: 'create' | 'edit',
   name: string,
   parentData: CoopTreeNode | null,
   editData: CoopTreeNode | null,
 ): Promise<boolean> {
-  try {
-    const creator = localStorage.getItem('back_username') ?? '';
-    if (type === 'create') {
-      const parentId = parentData ? parentData.id : 0;
-      const res = await createFunctionaldepts({ name, parentId, creator });
-      if (!res || res.code !== 0) {
-        ElMessage.error(res?.msg ?? '创建失败，请重试');
+  const creator = localStorage.getItem('back_username') ?? '';
+  if (type === 'create') {
+    const parentId = parentData ? parentData.id : 0;
+    return createFunctionaldepts({ name, parentId, creator })
+      .then((res) => {
+        if (!res || res.code !== 0) {
+          ElMessage.error(res?.msg ?? '创建失败，请重试');
+          return false;
+        }
+        ElMessage.success('职能创建成功');
+        return true;
+      })
+      .catch((error: unknown) => {
+        ElMessage.error(error instanceof Error ? error.message || '创建失败，请重试' : '创建失败，请重试');
         return false;
-      }
-      ElMessage.success('职能创建成功');
-      return true;
-    } else if (editData) {
-      const res = await updateFunctionaldepts(editData.id, { name });
-      if (!res || res.code !== 0) {
-        ElMessage.error(res?.msg ?? '更新失败，请重试');
-        return false;
-      }
-      ElMessage.success('职能更新成功');
-      editData.name = name;
-      // 同步更新当前选中节点显示
-      if (currentNode.value && currentNode.value.id === editData.id) {
-        currentNode.value = { ...currentNode.value, name };
-      }
-      return true;
-    }
-    return false;
-  } catch (e) {
-    ElMessage.error((e as Error)?.message ?? '操作失败，请重试');
-    return false;
+      });
   }
+  if (editData) {
+    return updateFunctionaldepts(editData.id, { name })
+      .then((res) => {
+        if (!res || res.code !== 0) {
+          ElMessage.error(res?.msg ?? '更新失败，请重试');
+          return false;
+        }
+        ElMessage.success('职能更新成功');
+        editData.name = name;
+        // 同步更新当前选中节点显示
+        if (currentNode.value && currentNode.value.id === editData.id) {
+          currentNode.value = { ...currentNode.value, name };
+        }
+        return true;
+      })
+      .catch((error: unknown) => {
+        ElMessage.error(error instanceof Error ? error.message || '更新失败，请重试' : '更新失败，请重试');
+        return false;
+      });
+  }
+  return Promise.resolve(false);
 }
 
 // 移除成员
@@ -198,19 +211,24 @@ async function handleUnbindMember(row: FunctionalDeptMember): Promise<void> {
   } catch {
     return;
   }
-  try {
-    await deleteFunctionaldeptsMembers([
-      {
-        id: row.uid,
-        postName: row.name,
-        departmentName: currentNode.value.name,
-      },
-    ]);
-    ElMessage.success('移除成功');
-    tableRef.value?.refresh();
-  } catch (e) {
-    ElMessage.error((e as Error)?.message ?? '移除失败');
-  }
+  return deleteFunctionaldeptsMembers([
+    {
+      id: row.uid,
+      postName: row.name,
+      departmentName: currentNode.value.name,
+    },
+  ])
+    .then((res) => {
+      if (res?.code !== 0) {
+        ElMessage.error(res?.msg ?? '移除失败');
+        return;
+      }
+      ElMessage.success('移除成功');
+      tableRef.value?.refresh();
+    })
+    .catch((error: unknown) => {
+      ElMessage.error(error instanceof Error ? error.message || '移除失败' : '移除失败');
+    });
 }
 
 // 打开挂靠弹窗
@@ -221,14 +239,14 @@ function openBindDialog(): void {
 
 // 挂靠弹窗：获取列表（依赖反转）
 // 注意：selectionType 由本函数决定为 'functionalDepartment'（职能管理场景）
-async function bindFetchList(params: {
+function bindFetchList(params: {
   pageNum: number;
   pageSize: number;
   postName?: string;
   selectionType?: string;
   selectionId?: string;
 }): Promise<{ records: CollaborationItem[]; total: number | string }> {
-  const res = await getCollaborationPage({
+  return getCollaborationPage({
     orgId: props.orgId,
     postName: params.postName,
     // 职能管理场景固定使用 functionalDepartment
@@ -236,38 +254,38 @@ async function bindFetchList(params: {
     selectionId: params.selectionId,
     pageNum: params.pageNum,
     pageSize: params.pageSize,
-  } as never);
-  // 注意：getCollaborationPage 返回直接 {records, total} 结构（无 code/data 包装）
-  // 用 defaultTableFormatter 兼容提取，避免 res.data 为 undefined 报错
-  return {
+  } as never).then((res) => ({
+    // 注意：getCollaborationPage 返回直接 {records, total} 结构（无 code/data 包装）
+    // 用 defaultTableFormatter 兼容提取，避免 res.data 为 undefined 报错
     records: defaultTableFormatter.getRecords(res) as CollaborationItem[],
     total: defaultTableFormatter.getTotal(res),
-  };
+  }));
 }
 
 // 挂靠弹窗：提交
-async function bindSubmit(selected: CollaborationItem[]): Promise<boolean> {
-  if (!currentNode.value) return false;
-  try {
-    const creator = localStorage.getItem('back_username') ?? '';
-    const updater = creator;
-    const selecteds = selected.map((item) => ({
-      userId: String(item.id),
-      checked: 0,
-      sort: 1,
-      creator,
-      updater,
-    }));
-    const res = await updateFunctionaldeptsMembers(currentNode.value.id, selecteds);
-    if (!res || res.code !== 0) {
-      ElMessage.error(res?.msg ?? '挂靠失败，请重试');
+function bindSubmit(selected: CollaborationItem[]): Promise<boolean> {
+  if (!currentNode.value) return Promise.resolve(false);
+  const creator = localStorage.getItem('back_username') ?? '';
+  const updater = creator;
+  const selecteds = selected.map((item) => ({
+    userId: String(item.id),
+    checked: 0,
+    sort: 1,
+    creator,
+    updater,
+  }));
+  return updateFunctionaldeptsMembers(currentNode.value.id, selecteds)
+    .then((res) => {
+      if (!res || res.code !== 0) {
+        ElMessage.error(res?.msg ?? '挂靠失败，请重试');
+        return false;
+      }
+      return true;
+    })
+    .catch((error: unknown) => {
+      ElMessage.error(error instanceof Error ? error.message || '挂靠失败，请重试' : '挂靠失败，请重试');
       return false;
-    }
-    return true;
-  } catch (e) {
-    ElMessage.error((e as Error)?.message ?? '挂靠失败，请重试');
-    return false;
-  }
+    });
 }
 
 // 挂靠成功回调

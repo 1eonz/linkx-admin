@@ -46,19 +46,23 @@ watch(searchText, (val) => {
 });
 
 // ===== 加载菜单树 =====
-async function loadMenuTree(): Promise<void> {
+function loadMenuTree(): Promise<void> {
   treeLoading.value = true;
-  try {
-    const res = await getMenuList({ applicationId: '' });
-    if (res.code === 0) {
-      allMenuTree.value = (res.data ?? []) as MenuItem[];
-      filterMenuByPermissions();
-    }
-  } catch {
-    ElMessage.error('加载菜单树失败');
-  } finally {
-    treeLoading.value = false;
-  }
+  return getMenuList({ applicationId: '' })
+    .then((res) => {
+      if (res.code === 0) {
+        allMenuTree.value = (res.data ?? []) as MenuItem[];
+        filterMenuByPermissions();
+      } else {
+        ElMessage.error(res.msg || '加载菜单树失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('加载菜单树失败');
+    })
+    .finally(() => {
+      treeLoading.value = false;
+    });
 }
 
 /**
@@ -117,9 +121,10 @@ function filterNode(value: string, data: MenuItem): boolean {
 const filterNodeMethod = filterNode as never;
 
 /** 刷新数据 */
-async function refreshData(): Promise<void> {
-  await loadMenuTree();
-  ElMessage.success('刷新成功');
+function refreshData(): void {
+  loadMenuTree().then(() => {
+    ElMessage.success('刷新成功');
+  });
 }
 
 // ===== 初始化 =====

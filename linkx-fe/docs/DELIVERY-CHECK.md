@@ -1,0 +1,68 @@
+# lx-ui 交付核查
+
+## 本次组件
+
+新增 18 个组件并从 `src/index.ts` 命名导出：`LxPageCard`、`LxSectionTitle`、`LxMetricCard`、`LxDescriptions`、`LxCodeSlot`、`LxSearchBar`、`LxStatusSwitch`、`LxUpload`、`LxSelectPagination`、`LxPasswordInput`、`LxVirtualTree`、`LxTransferPanel`、`LxAuthImg`、`LxNavbar`、`LxTabsBar`、`LxBreadcrumb`、`LxSplitLayout`、`LxDutyCalendar`。对应公共 Props 类型也从入口导出。`LX_ICONS` 提供 94 个标准图形，`LX_ICON_ALIASES` 提供 `date` -> `calendar` 和 `eye-on` -> `eye` 两个兼容名称；`LxIconName` 覆盖共 96 个可用名称。
+
+## 接入契约
+
+- 库入口为 `lx-ui`，样式入口为 `lx-ui/style.css`；本地消费保留 `src` 入口，发布配置指向 `dist/lx-ui.js`、`dist/style.css` 和 `dist/index.d.ts`。
+- 选择、树、穿梭、上传的值由宿主通过 `v-model` 管理。`LxSelectPagination.api({ page, pageSize, keyword, ...params })` 返回 `{ records, total }` 或 `{ data: { records, total } }`，初始跨页标签可由 `valueMap` 提供；请求变化、搜索和卸载会使旧响应失效，续页失败可重试。
+- `LxUpload` 默认手动提交；`action` 或 `httpRequest` 由宿主配置。文件校验、进度/状态展示、失败重试、取消和 `clearFiles()` 回写由库处理；自定义适配器收到 `chunkSize` 提示，但分片协议仍由宿主实现。独立 Mock Demo、4 项单测和 3 项 Chromium 用例已通过，未触发真实上传。
+- `LxVirtualTree` 的禁用节点不可勾选；`LxTransferPanel` 在树勾选更新时保留暂未加载和禁用节点，支持全选/反选、上限禁用和清空事件。其 `change.nodes` 只包含当前树可解析的节点，未加载键只通过 keys 回传。
+- `LxSplitLayout.asideWidth` 接受数值像素或 CSS 宽度字符串；拖拽、方向键调整及容器变窄限宽时发出像素 `resize`，折叠后主区保持同行。
+- `LxProTable` 的默认插槽可覆盖配置列，`empty` 插槽覆盖空态；`tableAttrs` 透传 Element Plus 表格属性与原生事件。实例暴露 `getTableRef()`、`clearSelection()`、`toggleRowSelection(row, selected?)`、`getSelectionRows()`，原 `row-click` 语义事件仍保留。
+- `LxProTable` 的独立文档 Playwright 4/4 通过：跨页选择/清空、加载读屏状态与减少动效、空结果/失败重试/排序反馈、375px 局部滚动与方向键、44px 复选目标和 HUD 深色令牌。选择状态由 `selectedKeys` 驱动；分页切换时保留已选记录并更新当前页复选框。示例数据和状态只存在于浏览器内存。
+- `LxPagination` 增加 `layout`、`background`，默认行为不变；局部滚动页面使用 `autoScroll=false`。`LxSearchBar.controls` 覆盖内置查询/重置按钮，原 `actions` 插槽保留。`LxNavbar.showFullscreen` 默认 `true`。`LxBreadcrumb.select` 传 `(item, MouseEvent)`。`LxSectionTitle` 默认插槽和 `LxMetricCard` 的 `label`、`value`、`footer` 插槽均有原内容回退。
+- `LxMetricCard` 按设计稿支持 `title`、语义 `status`、`badgeText`、进度标签与格式化值，并继续兼容 lx-ui `label`/`badge` 和 Vue3 宿主 `valueType`/`footer` 及 `title`/`value`/`footer`/`extra` 插槽；进度值被限制到 `0–100` 并提供 ARIA 名称和值文本；固定轨道内使用 transform 更新填充，并支持 RTL 起点。
+- 权限消费层已提供 `setupLxPermission`、`hasPermission`、`isFieldMasked` 和 `maskValue`；`LxActionButtons.auth`、`LxProTable`/`LxDescriptions` 的 `mask` 只消费宿主注入的权限源。
+
+## 验证
+
+在 `linkx-fe` 目录执行：
+
+| 命令              | 结果                                              |
+| ----------------- | ------------------------------------------------- |
+| `pnpm typecheck`  | 通过，包含 `docs/**/*.vue` 的类型检查             |
+| `pnpm build`      | 通过，130 个模块；生成 JS、CSS 与声明文件         |
+| `pnpm build:docs` | 通过，页面渲染完成；存在大于 500 kB 的 chunk 提示 |
+
+Vue3 宿主 `tests/unit/lx-virtual-tree.test.ts` 覆盖虚拟窗口、过滤祖先、禁用节点选择、键盘展开/焦点移动、全部公开方法和 node 插槽。独立中文 Demo/API 页位于 `docs/components/lxvirtualtree.md`，状态示例中的加载和错误由宿主展示。Chrome 浏览器已验证桌面筛选/选择/键盘焦点、空结果/错误恢复、375px HUD 深色令牌和无横向溢出；不等于 Vue3 业务宿主替换或真实后端联调。
+
+Vue3 宿主 `tests/unit/lx-search-bar.test.ts` 覆盖受控值更新、默认值重置并立即查询、loading 锁定和展开字段。SearchBar 文档 Demo 的成功/空/错、失败恢复、重置和 loading 已通过桌面浏览器检查；375px 展开十项条件时页面没有横向溢出。
+
+Vue3 宿主 `tests/unit/lx-dialog.test.ts` 覆盖标题关联、确认与 loading 锁、取消/关闭和自定义 footer 共 4 项。`tests/e2e/lx-dialog-docs.spec.ts` 的 3 项 Playwright 浏览器检查覆盖 375px 面板收缩/页面无横向溢出/单列布局/44px 点按目标、键盘焦点环、减少动效、校验失败、loading、防重复确认、提交成功、ESC 与自定义 footer。弹窗标题由 Element Plus `titleId` 关联到标题文本；示例提交只使用本地内存 Mock。
+
+以下组件已有专项证据：LxIcon、LxVirtualTree、LxTransferPanel、LxDialog、LxSelectPagination、LxUpload、LxDescriptions、LxMetricCard、LxAuthImg、LxStatusSwitch、LxActionButtons、LxEmpty、LxSidebar、LxBreadcrumb、LxNavbar、LxTabsBar、LxPageCard、LxSplitLayout、LxDutyCalendar、LxPagination、基础控件桥接、LxDynamicForm 和 LxSearchBar。壳层组件 Playwright 4/4 覆盖键盘路由接管、通知和用户菜单、页签交互、具名 region 及组件容器窄屏布局；修复了通知徽标遮挡点击的问题。其余组件尚未完成真实浏览器下的鼠标、键盘、响应式和深色主题验收，不能由构建通过推断。
+
+Impeccable `detect.mjs` 的源码输出 `[]` 且退出码为 0，只代表本次静态规则没有命中；URL 扫描的非零退出码即使同时输出 `[]` 仍是失败。LxIcon 文档页已有一份正式单目标 Critique 快照（27/40）；静态 `index.vue` 扫描为 `[]`，浏览器 overlay 则列出 4 条细项、标题计数为 3，命中主要在 VitePress 文档外壳。主会话浏览器另抽查 `delete` hover 动画和 `prefers-reduced-motion` 降级均符合预期。键盘 focus 已通过文档 Playwright 验收：焦点态使用卡片自身 2px 主题色边框，没有额外外框，卡片尺寸保持稳定；其余图标动效仍待覆盖。该快照不关闭整库 UI-11；整库评审仍需在 UI-10 闭环后覆盖其他组件、主题/状态与动效，并按组件边界复核 overlay 命中。
+
+`LxSidebar` 有独立中文 API/Demo；文档 Playwright 2/2 覆盖分组键盘与 `aria-expanded`、菜单单次选择、rail 浮层焦点和 Escape、移动模态抽屉的焦点循环/关闭后返回、HUD 深色及减少动效。当前证据为组件库级验证；Vue3 现有侧栏仍使用 Element Plus 菜单和权限路由数据，尚未替换为 `LxSidebar`。整库 Impeccable 视觉/动效审查仍待 UI-10 完成。
+
+`LxSplitLayout` 有独立中文 API/Demo；宿主单测 3/3 覆盖键盘宽度边界、受控折叠和 `ResizeObserver` 清理；文档 Playwright 3/3 覆盖 1920px 键盘/拖动限宽、桌面折叠主区同行、375px 局部表格滚动/44px 按钮、HUD 深色和减少动效。库类型检查、134 模块构建与文档构建通过。Vue3 业务页仍待 UI-04 契约迁移；UI-11 正式 Critique 未完成，本次不以 detector `[]` 作为验收。
+
+`LxDutyCalendar` 有独立中文 API/Demo；8 项单测与文档 Playwright 3/3 覆盖 42 格、月份边界与年份切换、键盘焦点、slot、宿主空/加载/失败/只读状态、375/320px、触控尺寸、HUD 深色、文字对比度和减少动效。库类型检查、134 模块构建及 VitePress 构建通过。无专属 `design/` 日历稿；Vue3 旧排班页的班次详情、加载、查询和实例方法契约需在 UI-04 适配，UI-11 正式 Critique 仍待 UI-10 闭环。
+
+`LxPagination` 的中文 API/Demo 覆盖默认与自定义 layout、背景样式、自动重置/滚动和站点明暗主题；5 项组件单测验证受控事件顺序与滚动开关，2 项适配器单测保留旧 `page/limit/pagination` 契约，文档 Playwright 3/3 覆盖条数切换、主题、375px 局部滚动及键盘焦点。文档 Demo 使用 `zh-cn` locale；detector 对组件、Demo、文档和 Vue3 适配器 stdout `[]`、stderr 空、退出码 0，仅表示本次静态规则零命中；UI-11 正式 Critique 仍待 UI-10 其余组件闭环。
+
+`LxPasswordInput` 已补独立中文 API/Demo；文档 Playwright 3/3 实际验证密码显隐与清空、输入事件、focus/blur/select 实例方法、复制/剪切/粘贴阻止、只读/禁用语义和 375px HUD 无横向溢出。Demo 使用内存样例，无登录请求；`autocomplete` 与剪贴板约束按现有组件契约说明。库类型检查、134 模块构建、VitePress 构建及定向 Prettier 通过；组件级验收不代表真实认证联调或 UI-11 整库 Critique 完成。
+
+`LxEmpty` 有独立中文 API/Demo；5 项单测覆盖默认文案、status 语义、紧凑档、自定义尺寸校验、图标/操作插槽与宿主 class 透传。文档 Playwright 覆盖默认 64px、`image-size=80`、键盘操作、筛选恢复、两主题对比度、长描述和 375/320px 无横向溢出。阶段性启发式评审曾记 28/40，亮色浏览器 overlay 发现 5 项真实低对比度文字；已改用正文令牌并补对比度回归。后续流程审计确认该评分没有对应的 Impeccable Critique 快照，且设计评审未在独立新标签检查页面，因此不能视为正式 Impeccable 验收，需在 UI-11 按 skill 规范补齐。detector `[]` 仅表示静态规则零命中。Vue3 15 处 `el-empty` 仍待 UI-04 替换，组件证据不代表宿主页面已经采用。
+
+VirtualTree 已检查桌面浅色与 375px HUD 深色；TransferPanel 已通过 4 项单测及文档 Playwright 3/3，覆盖树外键/禁用键保留、全选/反选、上限与清空、宿主状态、375px 触控、键盘焦点及 HUD 深色；Dialog 已通过桌面手动检查和 375px Chromium 测试；SelectPagination 已通过跨页回显、搜索取消、失败恢复、空结果、375px 弹层和触屏按钮 Playwright 3/3；LxUpload 已通过手动 Mock 上传、进度、失败恢复、取消、校验及 375px 交互；LxDescriptions 已通过 6 项单测、3 项文档 Playwright 和阶段性组件级 Impeccable 定向检查（19/20），覆盖 32px 行高、复制键盘焦点、状态点、375/320px 抽屉边界、主题及减少动效；其 detector `[]` 仅代表静态规则零命中，不是正式 Critique 通过；LxMetricCard 已通过 6 项单测和 2 项文档 Playwright，覆盖旧宿主契约、趋势图标、语义色、进度读屏、对比度及 320px/HUD/减少动效；LxAuthImg 已通过 6 项单测和 3 项文档 Playwright，覆盖 Blob Mock、取消竞态、对象 URL 清理、失败回退、空源及 375px/HUD/减少动效；LxStatusSwitch 已通过 6 项单测和 3 项文档 Playwright，覆盖旧值映射、确认取消、只读、失败恢复、4.5:1 对比度、焦点、42×20px 轨道、375px 44×44px 点按区、HUD 深色和减少动效；LxActionButtons 已通过 3 项单测和文档 Playwright 3/3，覆盖 hidden/disabled、click 事件、键盘展开、Escape 焦点恢复、焦点移出/外部点击收起、375px 44×44px 点按区、HUD 深色和减少动效；基础控件桥接、DynamicForm 和 SearchBar 已检查桌面及 375px。这些证据不代表全部组件矩阵、Vue3 业务宿主回归或真实上传协议联调。文档站演示使用本地示例数据，上传网络接口需由宿主提供。
+
+## 设计来源与宿主采用
+
+`design/` 中的按钮、表单控件、检索、状态开关、远程分页选择、描述行、虚拟树/穿梭、上传、指标卡和区块标题是当前视觉/交互源；`doc/LxIcon*` 的动态图标已进入 LxIcon 目录和文档 Demo。基础控件桥接页 `/components/element-bridge` 现覆盖按钮、表单八件套、Tabs、Card、Tree、Descriptions，并通过桌面、HUD 深色和 375px 检查；`LxDynamicForm` 独立页覆盖 Mock 成功/空/错、联动、禁用、重置、栅格和 375px；`LxSearchBar` 独立页覆盖成功/空/错、失败恢复、展开、重置、loading 与 375px 全字段布局；`LxSelectPagination` 独立页覆盖 300ms 防抖、远程追加分页、targetMap 跨页标签、取消和错误恢复；`LxUpload` 独立页覆盖内存 Mock 进度、成功/失败重试、取消、文件校验、两种列表布局、375px 触屏和 HUD 深色；`LxDescriptions` 独立页覆盖 32px 紧凑行、复制字段、状态点、主题及窄屏抽屉边界；`LxMetricCard` 独立页按指标卡设计稿展示语义色、角标、趋势与进度，趋势箭头采用 LxIcon，兼容宿主旧属性，6 项单测及 320px/HUD/减少动效文档浏览器用例通过；`LxAuthImg` 独立 API/Demo 使用本地 PNG 和宿主 Blob Mock，6 项单测、3 项文档 Playwright 覆盖成功、失败回退、空源、取消、对象 URL 清理、375px、HUD 深色、键盘与减少动效；`LxStatusSwitch` 独立页覆盖 `boolean`/旧 `0/1`、关闭确认、只读、loading、Mock 失败恢复、对比度、焦点、轨道尺寸、375px 点按区、HUD 深色及减少动效；`LxTransferPanel` 独立页覆盖全选/反选、上限、树外既有键、禁用项、清空和宿主 loading/empty/error 状态。库内已有实现不等于 Vue3 已采用，宿主页面映射及状态见 `other-admin/admin-vue3/docs/ELEMENT-PLUS-LX-UI-MATRIX.md`。
+
+Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTitle 适配器已使用 lx-ui；侧栏、Navbar、SearchBar 和 GroupTags 的首批图标也已改用 LxIcon，其他页面的 Element Plus 图标仍待分批迁移。GroupTags 表格与分页在窄屏使用独立键盘可聚焦滚动区，Mock E2E 4/4。ActionButtons、StatusSwitch 等仍由宿主独立实现。组件库行为和 Demo 完成后再执行 Impeccable 组件/动效审查；Vue3 全量替换后执行 Impeccable 页面审查。二者均需写入交接记录，不能由构建通过代替。
+
+## LxIcon 设计清单验收
+
+- 94 个标准图形键和 2 个兼容名称已归并；名称/路径单测位于 Vue3 宿主 `tests/unit/lx-icon.test.ts`。
+- P0 13 个核心图标、P1 27 个业务图标和 29 枚扩展清单均映射至可用图形；其中 `date`、`eye-on` 复用既有图形。
+- 组件测试覆盖 69 个去重动效名称；专项浏览器验收 `pnpm test:e2e:icons` 分别验证桌面悬浮、键盘焦点、减少动效，以及 Chromium 触屏按压、剪贴板操作和 320px 窄屏。
+- 扩展清单沿用 P1 语义动效；29 枚清单使用与参考稿一致的放大和蓝色阴影反馈。所有动效尊重 `prefers-reduced-motion`。
+- Impeccable 定向预检后，LxIcon hover/focus 使用自然减速曲线；warning 与 email 动效仍提供轻微语义反馈。桌面和 Pixel 7 浏览器均验证 hover/键盘/触屏及减少动效。
+- `LxUpload` 进度填充已改为固定轨道上的 `transform` 缩放，并在减少动效设置下关闭过渡；Chromium 文档 E2E 覆盖进度、重试、取消和该偏好。
+- 本阶段验证：图标单测 5 项、桌面/移动专项 E2E 各 1 项通过；Vue3 与 lx-ui 类型检查、Vue3 定向 ESLint、Prettier、组件库构建和文档构建通过。组件库未配置独立 ESLint。

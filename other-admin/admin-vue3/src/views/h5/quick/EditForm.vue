@@ -1,4 +1,5 @@
-﻿﻿<script setup lang="ts">
+﻿﻿
+<script setup lang="ts">
 /**
  * EditForm - 标签新增/编辑弹窗
  *
@@ -46,7 +47,7 @@ const defaultForm: Partial<LabelItem> = {
   scope: 1,
   icon: 'fas fa-home',
   color: 'rgba(64, 158, 255, 0.8)',
-  parentId: 0,
+  parentId: '0',
   level: 1,
 };
 
@@ -203,7 +204,7 @@ function selectIcon(icon: string): void {
  * @param data 新增下级时为父标签数据；编辑时为待编辑的标签数据
  * @returns Promise<void>
  */
-async function open(type: 'create' | 'update', data: LabelItem | null): Promise<void> {
+function open(type: 'create' | 'update', data: LabelItem | null): Promise<void> {
   resetForm();
   dialogVisible.value = true;
   dialogTitle.value = type === 'create' ? '新增' : '修改';
@@ -215,25 +216,31 @@ async function open(type: 'create' | 'update', data: LabelItem | null): Promise<
       parentData.value = data;
       formData.type = data.type ?? 0;
       formData.scope = data.scope ?? 1;
+      return Promise.resolve();
     } else {
       // 编辑：拉取详情回显
       formLoading.value = true;
-      try {
-        const res = await labelDetail(String(data.id));
-        const detail = res.data as Record<string, unknown> | undefined;
-        formData.id = data.id;
-        formData.name = data.name;
-        formData.icon = data.icon || 'fas fa-home';
-        formData.color = data.color || 'rgba(64, 158, 255, 0.8)';
-        formData.parentId = data.parentId;
-        formData.level = data.level;
-        formData.type = (detail?.type as number) ?? data.type ?? 0;
-        formData.scope = (detail?.scope as number) ?? data.scope ?? 1;
-      } finally {
-        formLoading.value = false;
-      }
+      return labelDetail(String(data.id))
+        .then((res) => {
+          const detail = res.data as Record<string, unknown> | undefined;
+          formData.id = data.id;
+          formData.name = data.name;
+          formData.icon = data.icon || 'fas fa-home';
+          formData.color = data.color || 'rgba(64, 158, 255, 0.8)';
+          formData.parentId = data.parentId;
+          formData.level = data.level;
+          formData.type = (detail?.type as number) ?? data.type ?? 0;
+          formData.scope = (detail?.scope as number) ?? data.scope ?? 1;
+        })
+        .catch(() => {
+          ElMessage.error('获取标签详情失败，请重试');
+        })
+        .finally(() => {
+          formLoading.value = false;
+        });
     }
   }
+  return Promise.resolve();
 }
 
 defineExpose({ open });
@@ -251,24 +258,28 @@ async function handleSubmit(): Promise<void> {
     return;
   }
   submitLoading.value = true;
-  try {
-    const payload: Partial<LabelItem> = { ...formData };
-    // 新增下级标签：设置 parentId 和 level
-    if (formType.value === 'create' && parentData.value) {
-      payload.parentId = parentData.value.id;
-      payload.level = (parentData.value.level ?? 0) + 1;
-    }
-    const res = await labelSave(payload);
-    if (res.code === 0) {
-      ElMessage.success(formType.value === 'create' ? '新增成功' : '修改成功');
-      dialogVisible.value = false;
-      emit('success');
-    } else {
-      ElMessage.error(res.msg ?? (formType.value === 'create' ? '新增失败' : '修改失败'));
-    }
-  } finally {
-    submitLoading.value = false;
+  const payload: Partial<LabelItem> = { ...formData };
+  // 新增下级标签：设置 parentId 和 level
+  if (formType.value === 'create' && parentData.value) {
+    payload.parentId = parentData.value.id;
+    payload.level = (parentData.value.level ?? 0) + 1;
   }
+  return labelSave(payload)
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(formType.value === 'create' ? '新增成功' : '修改成功');
+        dialogVisible.value = false;
+        emit('success');
+      } else {
+        ElMessage.error(res.msg ?? (formType.value === 'create' ? '新增失败' : '修改失败'));
+      }
+    })
+    .catch(() => {
+      ElMessage.error(formType.value === 'create' ? '新增失败，请重试' : '修改失败，请重试');
+    })
+    .finally(() => {
+      submitLoading.value = false;
+    });
 }
 
 /** 弹窗打开后清除校验状态 */

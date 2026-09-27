@@ -1,0 +1,31 @@
+.lx-dynamic-form {
+  display: grid;
+  width: 100%;
+}
+
+.lx-dynamic-form__item {
+  min-width: 0;
+}
+
+.lx-dynamic-form__item--full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 640px) {
+  .lx-dynamic-form {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .lx-dynamic-form__item {
+    grid-column: 1 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-dynamic-form,
+  .lx-dynamic-form * {
+    scroll-behavior: auto;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

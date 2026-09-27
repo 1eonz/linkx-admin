@@ -1,4 +1,4 @@
-import type { ApiResponse, HttpResult, PaginatedResult } from '#/axios';
+import type { ApiResponse, BinaryApiResponse, HttpResult, PaginatedResult } from '#/axios';
 import http from '@/utils/http';
 
 /** 值班列表查询参数 */
@@ -59,11 +59,10 @@ export function uploadDutyInformationFile(formData: FormData): HttpResult<Import
 
 /**
  * 下载值班信息导入模板（GET /collaboration/duty/schedule/template）
- * responseType=blob，返回二进制流
- * 注：返回结构为 { data: ArrayBuffer, headers: Record<string,string> }
+ * 返回二进制流及响应头，用于读取服务端文件名。
  */
-export function exportDutyInformationTemplate(): HttpResult<ArrayBuffer> {
-  return http.get<ArrayBuffer>('/collaboration/v1/duty/schedule/template', {
+export function exportDutyInformationTemplate(): Promise<BinaryApiResponse<ArrayBuffer>> {
+  return http.getBinary<ArrayBuffer>('/collaboration/v1/duty/schedule/template', {
     responseType: 'arraybuffer',
   });
 }

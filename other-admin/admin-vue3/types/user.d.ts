@@ -65,3 +65,9 @@ export interface LoginResult {
   idCardNum: string;
   isAdmin: boolean;
 }
+
+/** Login responses that require an immediate password change still include a temporary token. */
+export interface PasswordChangeRequiredResult extends Partial<LoginResult> {
+  accessToken: string;
+  userName: string;
+}

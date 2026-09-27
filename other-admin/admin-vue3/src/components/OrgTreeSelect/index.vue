@@ -160,71 +160,74 @@ onMounted(() => {
 });
 
 // ============= 非 admin 用户：用身份证号查所属部门 =============
-async function getUserDepartment(): Promise<void> {
-  if (!props.isUseUserDepartMent || isAdmin || !idCardNum) return;
-  try {
-    const res = await queryUserByIdCard({ idCard: idCardNum });
-    if (res?.data?.userDepartments?.length) {
-      const first = res.data.userDepartments[0];
-      userDepartmentCode.value = first.departmentCode;
-      // 把 userInfo 存到 store
-      userStore.setUserInfoAction(res.data as never);
-    }
-  } catch (error) {
-    console.error('[OrgTreeSelect] 查询用户部门失败:', error);
-  }
+function getUserDepartment(): Promise<void> {
+  if (!props.isUseUserDepartMent || isAdmin || !idCardNum) return Promise.resolve();
+  return queryUserByIdCard({ idCard: idCardNum })
+    .then((res) => {
+      if (res?.data?.userDepartments?.length) {
+        const first = res.data.userDepartments[0];
+        userDepartmentCode.value = first.departmentCode;
+        // 把 userInfo 存到 store
+        userStore.setUserInfoAction(res.data as never);
+      }
+    })
+    .catch((error: unknown) => {
+      console.error('[OrgTreeSelect] 查询用户部门失败:', error);
+    });
 }
 
 // ============= 同步加载：一次性拉整棵树 =============
-async function loadSyncTree(): Promise<void> {
-  await getUserDepartment();
-  const params: { parentCode?: string } = {};
-  // 非 admin 且有用户部门 code → 限定查询
-  const code = !isAdmin && userDepartmentCode.value ? userDepartmentCode.value : props.departmentCode;
-  if (code) params.parentCode = code;
-  try {
-    const { code: resCode, data } = await queryDepartmentTree(params);
-    if (resCode === 0 && data) {
-      treeData.value = [data];
-    }
-  } catch (error) {
-    console.error('[OrgTreeSelect] 加载部门树失败:', error);
-  }
+function loadSyncTree(): Promise<void> {
+  return getUserDepartment().then(() => {
+    const params: { parentCode?: string } = {};
+    // 非 admin 且有用户部门 code → 限定查询
+    const code = !isAdmin && userDepartmentCode.value ? userDepartmentCode.value : props.departmentCode;
+    if (code) params.parentCode = code;
+    return queryDepartmentTree(params)
+      .then(({ code: resCode, data }) => {
+        if (resCode === 0 && data) {
+          treeData.value = [data];
+        }
+      })
+      .catch((error: unknown) => {
+        console.error('[OrgTreeSelect] 加载部门树失败:', error);
+      });
+  });
 }
 
 // ============= 懒加载：el-tree load 回调 =============
-async function loadNode(node: any, resolve: (data: DepartmentNode[]) => void): Promise<void> {
+function loadNode(node: any, resolve: (data: DepartmentNode[]) => void): Promise<void> {
   // 非 admin 用户首次（level 0）：用身份证查所属部门作为根
   if (props.isUseUserDepartMent && !isAdmin && idCardNum && node.level === 0) {
-    await getUserDepartment();
     let deptArr: DepartmentNode[] = [];
-    if (userDepartmentCode.value) {
-      // 用 userDepartments 直接作为根节点
-      try {
-        const res = await queryUserByIdCard({ idCard: idCardNum });
-        if (res?.data?.userDepartments?.length) {
-          deptArr = res.data.userDepartments.map((item) => ({
-            id: item.departmentId,
-            code: item.departmentCode,
-            name: item.departmentName,
-          }));
-          userStore.setUserInfoAction(res.data as never);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    if (deptArr.length === 0) {
-      deptArr = await loadDepartmentList(node?.data?.code);
-    }
-    return resolve(deptArr);
+    return getUserDepartment()
+      .then(() => {
+        if (!userDepartmentCode.value) return;
+        // 用 userDepartments 直接作为根节点
+        return queryUserByIdCard({ idCard: idCardNum }).then((res) => {
+          if (res?.data?.userDepartments?.length) {
+            deptArr = res.data.userDepartments.map((item) => ({
+              id: item.departmentId,
+              code: item.departmentCode,
+              name: item.departmentName,
+            }));
+            userStore.setUserInfoAction(res.data as never);
+          }
+        });
+      })
+      .catch((error: unknown) => {
+        console.error('[OrgTreeSelect] 加载用户部门失败:', error);
+      })
+      .then(() => (deptArr.length === 0 ? loadDepartmentList(node?.data?.code) : deptArr))
+      .then((departments) => {
+        resolve(departments);
+      });
   }
-  const res = await loadDepartmentList(node?.data?.code);
-  resolve(res);
+  return loadDepartmentList(node?.data?.code).then(resolve);
 }
 
 // ============= 拉取下一级部门（懒加载分支用） =============
-async function loadDepartmentList(code = ''): Promise<DepartmentNode[]> {
+function loadDepartmentList(code = ''): Promise<DepartmentNode[]> {
   let newId = code;
   if (!isAdmin && !code && userDepartmentCode.value) {
     newId = userDepartmentCode.value;
@@ -233,15 +236,9 @@ async function loadDepartmentList(code = ''): Promise<DepartmentNode[]> {
   }
   const params: { parentCode?: string } = {};
   if (newId) params.parentCode = newId;
-  try {
-    const res = await queryDepartment(params);
-    if (res.code === 0 && res.data?.length) {
-      return res.data;
-    }
-    return [];
-  } catch {
-    return [];
-  }
+  return queryDepartment(params)
+    .then((res) => (res.code === 0 && res.data?.length ? res.data : []))
+    .catch(() => []);
 }
 
 // ============= 选中节点 =============

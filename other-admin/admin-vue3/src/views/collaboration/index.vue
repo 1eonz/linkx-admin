@@ -28,15 +28,16 @@ const departmentId = ref('');
 const departmentSyncSign = ref(false);
 
 // 全局开关判断：SHOW_331_FEATURE 控制是否显示「协同岗层级管理」tab
-async function fetchGlobalsList(): Promise<void> {
-  try {
-    const res = await getGlobalsList();
-    const list = (res as unknown as { data?: Array<{ name: string; value: unknown }> })?.data ?? [];
-    const show331Item = list.find((item) => item.name === 'SHOW_331_FEATURE');
-    isShow331Feature.value = show331Item?.value === 'true' || show331Item?.value === true;
-  } catch {
-    // 忽略错误
-  }
+function fetchGlobalsList(): Promise<void> {
+  return getGlobalsList()
+    .then((res) => {
+      const list = (res as unknown as { data?: Array<{ name: string; value: unknown }> })?.data ?? [];
+      const show331Item = list.find((item) => item.name === 'SHOW_331_FEATURE');
+      isShow331Feature.value = show331Item?.value === 'true' || show331Item?.value === true;
+    })
+    .catch(() => {
+      // 忽略错误
+    });
 }
 
 // 读取 localStorage.globalConfig.DEPARTMENT_SYNC_SIGN 决定组织树加载方式
@@ -51,19 +52,20 @@ function readDepartmentSyncSign(): void {
 }
 
 // 非管理员：通过身份证查询所属部门
-async function getUserOrgNameByIdCardNum(): Promise<void> {
-  if (isAdmin) return;
-  try {
-    const userRes = await queryUserByIdCard({ idCard: idCardNum });
-    const userDepartments =
-      (userRes?.data?.userDepartments as Array<{ departmentId: string; departmentCode: string }>) ?? [];
-    if (userDepartments.length > 0) {
-      departmentCode.value = userDepartments[0].departmentCode;
-      departmentId.value = userDepartments[0].departmentId;
-    }
-  } catch {
-    // 忽略错误
-  }
+function getUserOrgNameByIdCardNum(): Promise<void> {
+  if (isAdmin) return Promise.resolve();
+  return queryUserByIdCard({ idCard: idCardNum })
+    .then((userRes) => {
+      const userDepartments =
+        (userRes?.data?.userDepartments as Array<{ departmentId: string; departmentCode: string }>) ?? [];
+      if (userDepartments.length > 0) {
+        departmentCode.value = userDepartments[0].departmentCode;
+        departmentId.value = userDepartments[0].departmentId;
+      }
+    })
+    .catch(() => {
+      // 忽略错误
+    });
 }
 
 // 非管理员：orgIds 设为本用户 departmentId（只查本级）
@@ -73,13 +75,12 @@ function computeOrgIds(): void {
   }
 }
 
-onMounted(async () => {
+onMounted(() => {
   fetchGlobalsList();
   readDepartmentSyncSign();
-  if (!isAdmin) {
-    await getUserOrgNameByIdCardNum();
-  }
-  computeOrgIds();
+  getUserOrgNameByIdCardNum().then(() => {
+    computeOrgIds();
+  });
 });
 
 onBeforeUnmount(() => {

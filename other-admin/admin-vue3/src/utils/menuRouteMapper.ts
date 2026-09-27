@@ -11,8 +11,8 @@ import Layout from '@/layout/index.vue';
  */
 export const ROUTE_COMPONENT_MAP: Record<string, () => Promise<unknown>> = {
   // ===== 系统配置 /baseData =====
-  thirdParty: () => import('@/views/eventType/thirdParty/index.vue'),
-  globals: () => import('@/views/eventType/globals.vue'),
+  thirdParty: () => import('@/views/baseData/thirdParty/index.vue'),
+  globals: () => import('@/views/baseData/globals/index.vue'),
   mapConfig: () => import('@/views/baseData/mapConfig/index.vue'),
   layoutConfig: () => import('@/views/baseData/layoutConfig/index.vue'),
   // dictionary: () => import('@/views/eventType/dictionary'),
@@ -35,16 +35,16 @@ export const ROUTE_COMPONENT_MAP: Record<string, () => Promise<unknown>> = {
   ArchivedTable: () => import('@/views/h5/archivedTable/index.vue'),
 
   // ===== 协同岗管理 /collaboration =====
-  collaboration: () => import('@/views/h5/collaboration/index.vue'),
+  collaboration: () => import('@/views/collaboration/index.vue'),
   quick: () => import('@/views/h5/quick/index.vue'),
 
   // ===== 位置管理 /location =====
   location: () => import('@/views/location/index.vue'),
 
   // ===== 三方警单 /policeReport =====
-  dock: () => import('@/views/thirdInterface/policeReport/dock.vue'),
-  manage: () => import('@/views/thirdInterface/policeReport/manage.vue'),
-  typeManage: () => import('@/views/thirdInterface/policeReport/typeManage.vue'),
+  dock: () => import('@/views/thirdInterface/policeReport/components/DockManage.vue'),
+  manage: () => import('@/views/thirdInterface/policeReport/components/TicketManage.vue'),
+  typeManage: () => import('@/views/thirdInterface/policeReport/components/TypeManage.vue'),
 
   // ===== 排班管理 /scheduling =====
   dutyInformation: () => import('@/views/shiftScheduling/dutyInformation/index.vue'),
@@ -217,44 +217,4 @@ export function buildRoutesFromOauthMenu(menuData: MenuItem[]): {
   }
 
   return { routes, matchedInfo };
-}
-
-/**
- * 打印映射结果到控制台（调试用，仅开发环境生效）
- * @param matchedInfo - 路由匹配诊断信息
- */
-export function printMatchedInfo(matchedInfo: OAuthMatchedInfo): void {
-  if (!import.meta.env.DEV) return;
-
-  console.group('%c[OAuth 菜单映射结果]', 'color: #264ed1; font-weight: bold;');
-
-  console.group('%c✅ 映射成功', 'color: #67C23A;');
-  console.table(matchedInfo.matched);
-  console.groupEnd();
-
-  console.group('%c⚠️ 占位页面（接口有但路由不存在）', 'color: #E6A23C;');
-  if (matchedInfo.placeholder.length > 0) {
-    console.table(matchedInfo.placeholder);
-  } else {
-    console.log('无');
-  }
-  console.groupEnd();
-
-  console.group('%c🔵 路由独有（路由存在但接口未返回）', 'color: #909399;');
-  if (matchedInfo.routeOnly.length > 0) {
-    console.table(matchedInfo.routeOnly);
-  } else {
-    console.log('无');
-  }
-  console.groupEnd();
-
-  console.group('%c🚫 已禁用（status=0）', 'color: #F56C6C;');
-  if (matchedInfo.disabled.length > 0) {
-    console.table(matchedInfo.disabled);
-  } else {
-    console.log('无');
-  }
-  console.groupEnd();
-
-  console.groupEnd();
 }

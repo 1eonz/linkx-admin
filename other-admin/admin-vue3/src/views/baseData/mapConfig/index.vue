@@ -68,12 +68,6 @@ const baseMapColumns = computed<ITableColumn[]>(() => [
   { prop: 'actions', label: '操作', fixed: 'right', width: 200, align: 'center', slotName: 'actions' },
 ]);
 
-// 底图文件列表搜索区按钮
-const baseMapActions = computed(() => [
-  { label: '上传底图', type: 'primary' as const, icon: Upload, onClick: handleUploadBaseMap },
-  { label: '更新底图', type: 'success' as const, onClick: handleUpdateBaseMap },
-]);
-
 // ProTable @response 回调
 function handleBaseMapResponse(res: unknown): void {
   baseMapList.value = defaultTableFormatter.getRecords(res) as BaseMapItem[];
@@ -97,16 +91,12 @@ const mapColumns = computed<ITableColumn[]>(() => [
   { prop: 'actions', label: '操作', fixed: 'right', width: 280, align: 'center', slotName: 'actions' },
 ]);
 
-// 地图配置搜索区按钮
-const mapActions = computed(() => [{ label: '新增地图', type: 'primary' as const, icon: Plus, onClick: handleAddMap }]);
-
 function handleMapResponse(res: unknown): void {
   mapList.value = defaultTableFormatter.getRecords(res) as MapItem[];
   mapTotal.value = defaultTableFormatter.getTotal(res);
 }
 
 // ===== 上传底图 =====
-const uploadRef = ref();
 const uploadFileList = ref<UploadFile[]>([]);
 
 /** 选择底图文件回调（auto-upload=false 手动上传） */
@@ -121,8 +111,8 @@ function handleFileChange(file: UploadFile): void {
   }
   // 校验文件大小（500MB）
   const size = file.size ?? 0;
-  const isLt500M = size / 1024 / 1024 < 500;
-  if (!isLt500M) {
+  const isWithinSizeLimit = size <= 500 * 1024 * 1024;
+  if (!isWithinSizeLimit) {
     ElMessage.error('文件大小不能超过 500MB');
     uploadFileList.value = [];
     return;
@@ -133,23 +123,25 @@ function handleFileChange(file: UploadFile): void {
 }
 
 /** 执行底图上传 */
-async function doUploadBaseMap(file: File): Promise<void> {
+function doUploadBaseMap(file: File): Promise<void> {
   const loading = ElMessage({ message: '正在上传底图...', duration: 0, type: 'info' });
-  try {
-    const res = await uploadBaseMap(file);
-    if (res.code === 0) {
-      ElMessage.success('上传成功');
-      // 上传成功后先调 initBaseMap（debounce 500ms）再刷新底图列表
-      handleUpdateBaseMap();
-    } else {
-      ElMessage.error(res.msg || '上传失败');
-    }
-  } catch {
-    ElMessage.error('上传失败');
-  } finally {
-    loading.close();
-    uploadFileList.value = [];
-  }
+  return uploadBaseMap(file)
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success('上传成功');
+        // 上传成功后先调 initBaseMap（debounce 500ms）再刷新底图列表
+        handleUpdateBaseMap();
+      } else {
+        ElMessage.error(res.msg || '上传失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('上传失败');
+    })
+    .finally(() => {
+      loading.close();
+      uploadFileList.value = [];
+    });
 }
 
 /** 打开底图上传 */
@@ -162,18 +154,19 @@ function handleUploadBaseMap(): void {
 }
 
 /** 初始化底图（debounce 500ms 后执行），成功后刷新底图列表 */
-const handleUpdateBaseMap = useDebounceFn(async () => {
-  try {
-    const res = await initBaseMap();
-    if (res.code === 0) {
-      ElMessage.success(res.msg || '更新底图成功');
-      baseMapTableRef.value?.refresh();
-    } else {
-      ElMessage.error(res.msg || '更新底图失败');
-    }
-  } catch {
-    ElMessage.error('更新底图失败');
-  }
+const handleUpdateBaseMap = useDebounceFn(() => {
+  return initBaseMap()
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(res.msg || '更新底图成功');
+        baseMapTableRef.value?.refresh();
+      } else {
+        ElMessage.error(res.msg || '更新底图失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('更新底图失败');
+    });
 }, 500);
 
 /** 删除底图文件 */
@@ -193,7 +186,9 @@ function handleDeleteBaseMap(row: BaseMapItem): void {
             ElMessage.error(res.msg || '删除失败');
           }
         })
-        .catch(() => {});
+        .catch(() => {
+          ElMessage.error('删除失败，请重试');
+        });
     })
     .catch(() => {});
 }
@@ -288,83 +283,106 @@ const geoForm = reactive<GeoConfig>({
 const geocodeOptions = ref<string[]>([]);
 const inversecodeOptions = ref<string[]>([]);
 const poiOptions = ref<string[]>([]);
+const geoConfigLoadError = ref(false);
+const geoOptionsLoadErrors = ref<GeoType[]>([]);
+const geoUpdating = ref(false);
 
 /** 加载选中的地理编码 */
-async function loadGeo(): Promise<void> {
-  try {
-    const res = await selectGeo();
-    if (res.code === 0 && res.data) {
-      geoForm.geocode = res.data.geocode ?? '';
-      geoForm.inversecode = res.data.inversecode ?? '';
-      geoForm.poi = res.data.poi ?? '';
-    }
-  } catch {
-    // 忽略
-  }
+function loadGeo(): Promise<void> {
+  return selectGeo()
+    .then((res) => {
+      if (res.code !== 0) throw new Error('地理编码配置加载失败');
+      geoForm.geocode = res.data?.geocode ?? '';
+      geoForm.inversecode = res.data?.inversecode ?? '';
+      geoForm.poi = res.data?.poi ?? '';
+      geoConfigLoadError.value = false;
+    })
+    .catch(() => {
+      geoConfigLoadError.value = true;
+    });
 }
 
 /** 加载地理编码可选项 */
-async function loadGeoOptions(type: GeoType): Promise<void> {
-  try {
-    const res = await selectListGeo({ type });
-    if (res.code === 0 && Array.isArray(res.data)) {
-      const list = res.data.filter((i) => i);
+function loadGeoOptions(type: GeoType): Promise<void> {
+  return selectListGeo({ type })
+    .then((res) => {
+      if (res.code !== 0 || !Array.isArray(res.data)) throw new Error('地理编码选项加载失败');
+      const list = res.data.filter((item) => item);
       if (type === 'geocode') geocodeOptions.value = list;
       else if (type === 'inversecode') inversecodeOptions.value = list;
       else poiOptions.value = list;
-    }
-  } catch {
-    // 忽略
-  }
+      geoOptionsLoadErrors.value = geoOptionsLoadErrors.value.filter((failedType) => failedType !== type);
+    })
+    .catch(() => {
+      if (!geoOptionsLoadErrors.value.includes(type))
+        geoOptionsLoadErrors.value = [...geoOptionsLoadErrors.value, type];
+    });
+}
+
+/** 只重试读取失败的配置和选项，避免改写仍有效的表单值。 */
+function retryGeoLoad(): Promise<void> {
+  const failedTypes = [...geoOptionsLoadErrors.value];
+  const retries: Promise<void>[] = failedTypes.map((type) => loadGeoOptions(type));
+  if (geoConfigLoadError.value) retries.push(loadGeo());
+  return Promise.all(retries).then(() => undefined);
 }
 
 /** 更新地理编码接口 */
-const handleUpdateGeo = useDebounceFn(async () => {
-  try {
-    const res = await updateGeo({ ...geoForm });
-    if (res.code === 0) {
-      ElMessage.success(res.msg || '更新成功');
-    } else {
-      ElMessage.error(res.msg || '更新失败');
-    }
-  } catch {
-    ElMessage.error('更新失败');
-  }
+const handleUpdateGeo = useDebounceFn(() => {
+  if (geoConfigLoadError.value || geoOptionsLoadErrors.value.length > 0 || geoUpdating.value) return;
+  geoUpdating.value = true;
+  return updateGeo({ ...geoForm })
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(res.msg || '更新成功');
+      } else {
+        ElMessage.error(res.msg || '更新失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('更新失败');
+    })
+    .finally(() => {
+      geoUpdating.value = false;
+    });
 }, 500);
 
 // ===== 地图数据 Tab：行政区划 =====
 const divisionName = ref('');
+const divisionLoadError = ref(false);
 
 /** 查询行政区划 */
-async function loadDivision(): Promise<void> {
-  try {
-    const res = await selectDivision();
-    if (res.code === 0 && res.data) {
-      divisionName.value = (res.data as DivisionItem).name ?? '';
-    }
-  } catch {
-    // 忽略
-  }
+function loadDivision(): Promise<void> {
+  return selectDivision()
+    .then((res) => {
+      if (res.code !== 0) throw new Error('行政区划加载失败');
+      divisionName.value = (res.data as DivisionItem | null)?.name ?? '';
+      divisionLoadError.value = false;
+    })
+    .catch(() => {
+      divisionLoadError.value = true;
+    });
 }
 
 /** 下载行政区划（导出 .geojson） */
-const handleDownloadDivision = useDebounceFn(async () => {
-  try {
-    const res = await updateDivision({ nodeId: '0' });
-    if (res.code === 0 && res.data) {
-      const blob = new Blob([res.data as unknown as ArrayBuffer], { type: 'application/json' });
-      const filename = `${divisionName.value || 'division'}.geojson`;
-      getServiceFile(blob, filename);
-    } else {
+const handleDownloadDivision = useDebounceFn(() => {
+  return updateDivision({ nodeId: '0' })
+    .then((res) => {
+      const content = res.code === 0 && res.data ? JSON.stringify(res.data) : undefined;
+      if (content) {
+        const blob = new Blob([content], { type: 'application/geo+json' });
+        const filename = `${divisionName.value || 'division'}.geojson`;
+        getServiceFile(blob, filename);
+      } else {
+        ElMessage.error('下载失败');
+      }
+    })
+    .catch(() => {
       ElMessage.error('下载失败');
-    }
-  } catch {
-    ElMessage.error('下载失败');
-  }
+    });
 }, 500);
 
 /** 上传行政区划（.geojson） */
-const divisionUploadRef = ref();
 const divisionUploadList = ref<UploadFile[]>([]);
 
 function handleDivisionFileChange(file: UploadFile): void {
@@ -376,8 +394,8 @@ function handleDivisionFileChange(file: UploadFile): void {
     return;
   }
   const size = file.size ?? 0;
-  const isLt500M = size / 1024 / 1024 < 500;
-  if (!isLt500M) {
+  const isWithinSizeLimit = size <= 500 * 1024 * 1024;
+  if (!isWithinSizeLimit) {
     ElMessage.error('文件大小不能超过 500MB');
     divisionUploadList.value = [];
     return;
@@ -387,22 +405,24 @@ function handleDivisionFileChange(file: UploadFile): void {
 }
 
 /** 执行行政区划上传（复用 uploadBaseMap 接口） */
-async function doUploadDivision(file: File): Promise<void> {
+function doUploadDivision(file: File): Promise<void> {
   const loading = ElMessage({ message: '正在上传...', duration: 0, type: 'info' });
-  try {
-    const res = await uploadBaseMap(file);
-    if (res.code === 0) {
-      ElMessage.success('上传成功');
-      loadDivision();
-    } else {
-      ElMessage.error(res.msg || '上传失败');
-    }
-  } catch {
-    ElMessage.error('上传失败');
-  } finally {
-    loading.close();
-    divisionUploadList.value = [];
-  }
+  return uploadBaseMap(file)
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success('上传成功');
+        loadDivision();
+      } else {
+        ElMessage.error(res.msg || '上传失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('上传失败');
+    })
+    .finally(() => {
+      loading.close();
+      divisionUploadList.value = [];
+    });
 }
 
 /** 打开行政区划上传 */
@@ -564,6 +584,10 @@ onMounted(() => {
         <!-- 地理编码接口配置 -->
         <div class="section">
           <SectionTitle title="地理编码接口配置" variant="border" />
+          <div v-if="geoConfigLoadError || geoOptionsLoadErrors.length > 0" class="geo-load-error" role="alert">
+            <span>地理编码配置或选项读取失败，保存已暂停。</span>
+            <el-button link type="primary" @click="retryGeoLoad">重试</el-button>
+          </div>
           <el-form :inline="true" :model="geoForm" label-width="120px" class="geo-form">
             <el-form-item label="地理编码：" style="width: 45%">
               <el-select v-model="geoForm.geocode" placeholder="请选择" style="width: 400px" disabled>
@@ -581,7 +605,14 @@ onMounted(() => {
               </el-select>
             </el-form-item>
             <el-form-item label=" " style="width: 45%">
-              <el-button type="primary" @click="handleUpdateGeo">更新接口</el-button>
+              <el-button
+                type="primary"
+                :loading="geoUpdating"
+                :disabled="geoConfigLoadError || geoOptionsLoadErrors.length > 0"
+                @click="handleUpdateGeo"
+              >
+                更新接口
+              </el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -591,6 +622,10 @@ onMounted(() => {
         <!-- 行政区划 -->
         <div class="section">
           <SectionTitle title="行政区划" variant="border" />
+          <div v-if="divisionLoadError" class="division-load-error" role="alert">
+            <span>行政区划加载失败，请重试</span>
+            <el-button link type="primary" @click="loadDivision">重试</el-button>
+          </div>
           <el-form :inline="true" label-width="120px">
             <el-form-item label=" " style="width: 45%">
               <el-button type="primary" @click="handleDownloadDivision">下载行政区划</el-button>
@@ -649,6 +684,22 @@ onMounted(() => {
 
 .geo-form {
   width: 100%;
+}
+
+.geo-load-error {
+  display: flex;
+  align-items: center;
+  gap: @spacing-sm;
+  margin-bottom: @spacing-sm;
+  color: @color-danger;
+}
+
+.division-load-error {
+  display: flex;
+  align-items: center;
+  gap: @spacing-sm;
+  margin-bottom: @spacing-sm;
+  color: @color-danger;
 }
 
 .hidden-upload {

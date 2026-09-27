@@ -24,6 +24,8 @@
  *
  * Methods：无
  */
+import { LxBreadcrumb } from 'lx-ui';
+import type { LxBreadcrumbItem } from 'lx-ui';
 import { compile as pathCompile } from 'path-to-regexp';
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -64,21 +66,23 @@ function handleLink(item: RouteLocationMatched): void {
   }
   router.push(pathCompileFn(path));
 }
+
+const breadcrumbItems = computed<LxBreadcrumbItem[]>(() =>
+  levelList.value.map((item, index) => ({
+    title: String(item.meta?.title ?? ''),
+    to: index < levelList.value.length - 1 ? pathCompileFn(item.path) : undefined,
+  })),
+);
+
+function handleSelect(item: LxBreadcrumbItem, event: MouseEvent): void {
+  event.preventDefault();
+  const routeItem = levelList.value.find((matched) => pathCompileFn(matched.path) === item.to);
+  if (routeItem) handleLink(routeItem);
+}
 </script>
 
 <template>
-  <el-breadcrumb class="app-breadcrumb breadcrumb-container" separator="/">
-    <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
-        <span v-if="item.redirect === 'noRedirect' || index === levelList.length - 1" class="no-redirect">
-          {{ item.meta?.title }}
-        </span>
-        <a v-else @click.prevent="handleLink(item)">
-          {{ item.meta?.title }}
-        </a>
-      </el-breadcrumb-item>
-    </transition-group>
-  </el-breadcrumb>
+  <LxBreadcrumb class="app-breadcrumb breadcrumb-container" :items="breadcrumbItems" @select="handleSelect" />
 </template>
 
 <style lang="less" scoped>
@@ -116,5 +120,14 @@ function handleLink(item: RouteLocationMatched): void {
     color: @navbar-text-active;
     cursor: text;
   }
+}
+
+:deep(.lx-breadcrumb__item),
+:deep(.lx-breadcrumb__separator) {
+  color: @navbar-text;
+}
+
+:deep(.lx-breadcrumb__item[aria-current='page']) {
+  color: @navbar-text-active;
 }
 </style>

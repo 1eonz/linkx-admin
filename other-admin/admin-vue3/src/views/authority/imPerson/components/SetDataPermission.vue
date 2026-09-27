@@ -70,23 +70,27 @@ function getAllIds(nodes: DepartmentNode[]): string[] {
 }
 
 /** 加载部门树 */
-async function loadDepartmentTree(): Promise<void> {
+function loadDepartmentTree(): Promise<void> {
   treeLoading.value = true;
-  try {
-    const res = await queryDepartment({});
-    if (res?.code === 0 && res.data) {
-      departmentTree.value = res.data as DepartmentNode[];
-    }
-  } catch (e) {
-    console.error('[SetDataPermission] 加载部门树失败:', e);
-    ElMessage.error('加载部门树失败');
-  } finally {
-    treeLoading.value = false;
-  }
+  return queryDepartment({})
+    .then((res) => {
+      if (res?.code === 0 && res.data) {
+        departmentTree.value = res.data as DepartmentNode[];
+      } else {
+        ElMessage.error(res?.msg || '加载部门树失败');
+      }
+    })
+    .catch((error: unknown) => {
+      console.error('[SetDataPermission] 加载部门树失败:', error);
+      ElMessage.error('加载部门树失败');
+    })
+    .finally(() => {
+      treeLoading.value = false;
+    });
 }
 
 /** 初始化（对外暴露） */
-async function init(row: UserItem): Promise<void> {
+function init(row: UserItem): Promise<void> {
   currentUser.value = { ...row };
   // 解析 imOrgPrivJson 获取已选 id 列表
   const imOrgPrivJson = (row as { imOrgPrivJson?: unknown }).imOrgPrivJson;
@@ -96,14 +100,18 @@ async function init(row: UserItem): Promise<void> {
     checkedKeys.value = [];
   }
   // 加载部门树
-  await loadDepartmentTree();
-  // 显示弹窗
-  dialogVisible.value = true;
-  // 树渲染完成后回填选中
-  await nextTick();
-  if (treeRef.value && checkedKeys.value.length > 0) {
-    treeRef.value.setCheckedKeys(checkedKeys.value);
-  }
+  return loadDepartmentTree()
+    .then(() => {
+      // 显示弹窗
+      dialogVisible.value = true;
+      // 树渲染完成后回填选中
+      return nextTick();
+    })
+    .then(() => {
+      if (treeRef.value && checkedKeys.value.length > 0) {
+        treeRef.value.setCheckedKeys(checkedKeys.value);
+      }
+    });
 }
 
 /** 确认提交 */
@@ -113,27 +121,29 @@ async function handleConfirm(): Promise<void> {
     return;
   }
   submitLoading.value = true;
-  try {
-    const checked = treeRef.value?.getCheckedKeys() as string[];
-    const halfChecked = treeRef.value?.getHalfCheckedKeys() as string[];
-    const imOrgPrivJson = [...checked, ...halfChecked].map((id) => ({ id }));
-    // 调用 updatePerson 更新 imOrgPrivJson 字段
-    const res = await updatePerson({
-      id: currentUser.value.id,
-      imOrgPrivJson,
-    } as Partial<UserItem>);
-    if (res.code === 0) {
-      ElMessage.success(res.msg || '设置成功');
-      emit('success');
-      handleClose();
-    } else {
-      ElMessage.error(res.msg || '设置失败');
-    }
-  } catch {
-    ElMessage.error('设置失败');
-  } finally {
-    submitLoading.value = false;
-  }
+  const checked = treeRef.value?.getCheckedKeys() as string[];
+  const halfChecked = treeRef.value?.getHalfCheckedKeys() as string[];
+  const imOrgPrivJson = [...checked, ...halfChecked].map((id) => ({ id }));
+  // 调用 updatePerson 更新 imOrgPrivJson 字段
+  updatePerson({
+    id: currentUser.value.id,
+    imOrgPrivJson,
+  } as Partial<UserItem>)
+    .then((res) => {
+      if (res.code === 0) {
+        ElMessage.success(res.msg || '设置成功');
+        emit('success');
+        handleClose();
+      } else {
+        ElMessage.error(res.msg || '设置失败');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('设置失败');
+    })
+    .finally(() => {
+      submitLoading.value = false;
+    });
 }
 
 /** 关闭弹窗 */
