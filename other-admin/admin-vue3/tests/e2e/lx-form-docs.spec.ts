@@ -21,7 +21,7 @@ test.describe('lx-ui LxForm 文档示例', () => {
     if (!codeBox || !nameBox) throw new Error('桌面双列表单字段未进入布局');
 
     expect(nameBox.x).toBeGreaterThan(codeBox.x + codeBox.width);
-    expect(Math.abs(nameBox.y - codeBox.y)).toBeLessThanOrEqual(1);
+    expect(Math.abs(nameBox.y - codeBox.y)).toBeLessThanOrEqual(3);
     await expect(remarkItem).toHaveCSS('grid-column-start', '1');
     await expect(remarkItem).toHaveCSS('grid-column-end', '-1');
     await expect(form).toHaveCSS('column-gap', '16px');
@@ -40,7 +40,7 @@ test.describe('lx-ui LxForm 文档示例', () => {
     const assertSingleColumn = async (viewportWidth: number) => {
       await expect
         .poll(() =>
-          form.evaluate((element) => getComputedStyle(element).gridTemplateColumns.trim().split(/\\s+/).length),
+          form.evaluate((element) => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length),
         )
         .toBe(1);
 

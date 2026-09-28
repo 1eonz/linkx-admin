@@ -38,6 +38,8 @@ interface Props {
   form: Partial<RoleItem>;
   /** 兼容旧 prop（未使用） */
   applicationId?: string;
+  /** 保存请求进行中时禁用再次提交 */
+  submitting?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -45,6 +47,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: '新增角色',
   form: () => ({}),
   applicationId: '',
+  submitting: false,
 });
 
 const emit = defineEmits<{
@@ -55,6 +58,7 @@ const emit = defineEmits<{
 }>();
 
 const formRef = ref<FormInstance>();
+const validatingSubmit = ref(false);
 // 三棵权限树 ref
 const clientTreeRef = ref<InstanceType<typeof ElTree>>();
 const adminTreeRef = ref<InstanceType<typeof ElTree>>();
@@ -400,7 +404,16 @@ function handleDataTreeLoadState(ready: boolean): void {
  * @returns Promise<void>，校验失败时静默捕获
  */
 async function handleSubmit(): Promise<void> {
-  if (!menuTreesLoaded.value || treeLoading.value || !dataTreeReady.value) return;
+  if (
+    props.submitting ||
+    validatingSubmit.value ||
+    !menuTreesLoaded.value ||
+    treeLoading.value ||
+    !dataTreeReady.value
+  ) {
+    return;
+  }
+  validatingSubmit.value = true;
   try {
     await formRef.value?.validate();
     const params: Record<string, unknown> = {
@@ -416,6 +429,8 @@ async function handleSubmit(): Promise<void> {
     emit('submit', params);
   } catch {
     // 校验失败
+  } finally {
+    validatingSubmit.value = false;
   }
 }
 
@@ -440,6 +455,8 @@ function handleClose(): void {
     width="800px"
     align-center
     :close-on-click-modal="false"
+    :close-on-press-escape="!submitting && !validatingSubmit"
+    :show-close="!submitting && !validatingSubmit"
     class="edit-role-dialog"
     @close="handleClose"
   >
@@ -554,11 +571,12 @@ function handleClose(): void {
 
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="handleClose">取消</el-button>
+        <el-button :disabled="submitting || validatingSubmit" @click="handleClose">取消</el-button>
         <el-button
           type="primary"
-          :disabled="treeLoading || !menuTreesLoaded || !dataTreeReady"
-          :loading="treeLoading"
+          :disabled="treeLoading || !menuTreesLoaded || !dataTreeReady || submitting || validatingSubmit"
+          :loading="treeLoading || submitting || validatingSubmit"
+          :aria-busy="treeLoading || submitting || validatingSubmit ? 'true' : undefined"
           @click="handleSubmit"
         >
           保存

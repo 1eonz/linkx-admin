@@ -45,6 +45,8 @@ interface ButtonConfig {
   onClick?: () => void;
   /** 是否禁用 */
   disabled?: boolean;
+  /** 是否显示进行中状态 */
+  loading?: boolean;
   /** 是否显示，默认 true */
   visible?: boolean;
   /** 权限码；未提供时保持调用方原有显示行为 */
@@ -119,6 +121,8 @@ const containerStyle = computed(() => ({
       link
       :type="btn.type || 'primary'"
       :disabled="btn.disabled"
+      :loading="btn.loading"
+      :aria-busy="btn.loading ? 'true' : undefined"
       @click="btn.onClick?.()"
     >
       <el-icon v-if="btn.icon" style="margin-right: 2px">

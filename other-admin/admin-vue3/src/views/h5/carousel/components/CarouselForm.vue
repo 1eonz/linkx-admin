@@ -427,7 +427,7 @@ function handleDialogClosed(): void {
           :on-change="handleChange"
           accept=".jpg,.png,.gif,.JPG,.PNG,.GIF"
         >
-          <AuthImg v-if="showAuthImg && imageUrl" :auth-src="imageUrl" class="avatar" />
+          <AuthImg v-if="showAuthImg && imageUrl" :auth-src="imageUrl" alt="轮播图预览" class="avatar" />
           <img v-else-if="imageUrl" :src="imageUrl" class="avatar" alt="preview" />
           <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
         </el-upload>

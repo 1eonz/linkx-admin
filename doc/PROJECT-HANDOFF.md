@@ -1,5 +1,21 @@
 # LinkX 项目交接记录
 
+## [2026-09-29] GLM #1 lx-ui 全局组件注册完成，进入 #2
+
+- 目标：确保 lx-ui 插件安装时使用明确、稳定的全局名称，不把组件注册到空名称。
+- 改动文件：`linkx-fe/src/index.ts`、`other-admin/admin-vue3/tests/unit/lx-ui-install.test.ts`，以及交付计划、项目地图和迁移/审核台账。
+- 完成内容：以 `Record<string, Component>` 显式注册 39 个 `Lx*` 组件；插件回归检查每个公开名称均可获取、名称无重复、空注册名不存在。公共导出和组件 API 未改变。
+- 验证命令与结果：定向 Vitest 1/1；lx-ui `pnpm typecheck`、`pnpm build`（134 modules）、`pnpm build:docs` 通过；Vue3 全量 Vitest 39 文件/200 项、Vue3 `vue-tsc` 与 Prettier 通过。Code Review 未发现新增可复现问题。
+- 未完成/阻塞：linkx-fe 没有独立 ESLint CLI，Vue3 ESLint 对库文件会忽略，故不记 ESLint 通过；VitePress 构建有大 chunk 警告。此任务无样式或动效变化，不需要 Impeccable 视觉结论。
+- 下一步：GLM #2 Cascader 值类型；#11 另执行 Impeccable Audit 并核对浏览器状态，`[]` 只作为静态 detector 结果。
+
+## [2026-09-28] Impeccable 规则固化与 CODE-02 请求竞态波次
+
+- 最新选择器样式为自身 1px `border-box` 实体边框，状态只切换边框色，选择器无 `box-shadow`/`outline`，32px 高度和键盘行为稳定。旧 inset 记录保留为历史，不作为当前实现证据。
+- Impeccable A/B 报告为 `.impeccable/critique/.element-bridge-assessment-a-single-border-final.md` 与 `.impeccable/critique/.element-bridge-assessment-b-single-border-final.md`；综合 snapshot 30/40。detector `[]` 只代表静态规则零命中，缺少浏览器状态、overlay/截图、stderr/退出码和 snapshot 时必须登记为复验未完成。
+- CODE-02 完成 `useFetch` signal 通道、取消失效序号、卸载保护和可取消调度；`useTable` 仅在序号校验后的 onSuccess 写入列表/总数。7 项单测、定向 ESLint、vue-tsc 通过。
+- 边界：未接入 signal 的旧 API 只能丢弃迟到结果；License、v-loadmore、四处提交锁、ColForm、AuthImg 留待下一波。所有 API 请求保持 `.then().catch().finally()`。
+
 > 对应计划：[PROJECT-DELIVERY-PLAN.md](./PROJECT-DELIVERY-PLAN.md)  
 > 记录原则：每个阶段只记录实际完成和实际验证，不把静态检查写成联调完成。
 
@@ -1496,3 +1512,131 @@
 - 验证：`pnpm test:e2e:icons` 桌面 Chromium 与 Pixel 7 共 2/2 通过；覆盖图标全集、hover/focus 动效、减少动效、焦点边框颜色/宽度、主题浅底、无额外阴影/轮廓、焦点前后尺寸稳定和 320px 横向溢出。浏览器实测 email 图标键盘焦点样式与卡片边界对齐。`pnpm build:docs`、该 E2E 文件 ESLint/Prettier 检查、`git diff --check` 通过；文档构建有既有 chunk >500 kB 和 pnpm 配置提示。Impeccable layout detector 输出 `[]`、stderr 为空、退出码 0，只表示静态规则零命中。
 - 文档同步：更新 LxUI Delivery Check、Roadmap、项目计划与本交接记录。
 - 未完成：整库 UI-11 Critique、其他代表性图标动效、UI-10 剩余组件候选及 Vue3 替换后 UI-12 仍按既定计划跟踪。
+
+## [2026-09-28] UI-01 / 输入、选择与表单控件焦点边线贴合
+
+- 用户反馈：基础控件键盘聚焦时的外层蓝色边框与输入框/选择框自身边界有间隔，视觉上不齐。
+- 修正：按 `design/表单控件八件套/` 的 1px 状态边线与 2px、15% 主色光晕实现输入框、选择框和文本域焦点态。移除控件焦点的默认 outline/offset；错误态仍保留 1px 红色内线，外侧主色光晕表示当前焦点。Element Plus 延后注入的规则由根选择器覆盖，不改变表单值、校验或提交时机。
+- 验证：定向 Playwright 3/3 通过，覆盖默认输入/选择/文本域、校验错误后的输入/选择聚焦、焦点尺寸稳定、1440px 桌面双列及 390/320px 单列。ESLint、Prettier 通过。Assessment A 用本机 Chrome 截图检查 1280×900 与 375×844：光晕贴边、红边保留、无控件尺寸变化；assessment 文件见 `.impeccable/critique/.element-bridge-assessment-a-postfix.md`。Assessment B 的 Markdown detector 为 `[]`/stderr 空/exit 0，五个状态成功注入 overlay 并截图；静态结果只代表零规则命中，原始 console 文本未保留。B 报告见 `.impeccable/critique/.element-bridge-assessment-b-postfix.md`。
+- Impeccable 复核：合并快照评分 35/40，已写入 `.impeccable/critique/2026-09-28T02-28-51Z__linkx-fe-src-components-lxform-style-css.md`。overlay 对设计令牌主色的 palette 命中属误报；select popup 的“文字遮挡”标签本身覆盖了选项文字，未证实页面遮挡。另记录错误文案 `#c45656` 对白底 4.36:1、placeholder `#c9cdd4` 对白底 1.59:1，需作为后续可访问性事项独立处理，不阻塞本次焦点边线对齐。
+- 服务状态：Playwright 临时服务 4176 和 Critique helper 8400 均已停止；用户的 VitePress 预览 4174 保持运行，可查看 `http://127.0.0.1:4174/components/element-bridge.html`。
+- 未完成/边界：这是基础控件焦点样式闭环，不代表 Vue3 业务表单替换或整库 UI-11 完成。后续按既定顺序继续 UI-10 候选，再做整库 Impeccable 审查；错误/placeholder 对比度纳入后续可访问性清单。
+
+## [2026-09-28] UI-01 / 复选框焦点外圈与自身边界对齐
+
+- 反馈：复选框焦点外圈仍有视觉问题。
+- 调整：保留复选框自身 14px 方框与 1px 状态边线，焦点时在边界外零间隙显示 2px 淡色主色焦点环，不使用偏移 outline 或改变方框尺寸。Demo 增加由子项自动计算的“全选通知渠道”，演示真实半选状态。
+- 验证：定向 Playwright 覆盖未选中、已选中、真实半选及 HUD 深色焦点；检查外圈宽度、无 outline、控件尺寸稳定。库构建、文档构建、类型检查及定向 ESLint 已通过；最终测试和格式结果见下方补充。
+- 下一步：持续按 UI-10 → UI-11 → UI-04 顺序推进；本修正不关闭整库 Impeccable 审查，也不代表 Vue3 表单宿主已迁移。
+
+## [2026-09-28] UI-01 / 多选下拉焦点外圈复修
+
+- 反馈：用户在浏览器复核时指出多选组件外圈仍有问题。上一版多选聚焦为 1px 内侧主色边线叠加 2px、24% 主色外扩光晕，视觉上仍像两道轮廓。
+- 处理：Element Plus 当前版本没有单选/多选模式的独立根状态类，因此两种下拉共用单一 2px `outline`，设置 `outline-offset: -1px` 让焦点线中心与控件边缘重合。焦点时不绘制 box-shadow，也关闭其阴影过渡，避免第二道轮廓和切换残影；错误焦点轮廓为红色。该轮廓不改变边框盒或选择行为；其他输入、数字、日期和文本域维持原有光晕。
+- 验证：`pnpm exec playwright test --config=playwright.lxui.config.ts tests/e2e/lx-element-bridge-docs.spec.ts` 1/1 通过，覆盖单选/多选、焦点/错误、浅色/HUD、桌面/375px、焦点颜色、轮廓偏移、无 box-shadow、错误态红色及尺寸稳定。`pnpm typecheck`、134 模块 `pnpm build`、`pnpm build:docs`、定向 Prettier/ESLint 与 `git diff --check` 通过；文档构建保留既有 chunk 体积警告。
+- 浏览器：保留预览 `http://127.0.0.1:4174/components/element-bridge.html`。浅色桌面、HUD 桌面、浅色 375px、HUD 错误态 375px 截图及 computed style 记录位于 `.impeccable/critique/evidence-2026-09-28/select-final-*.png`；多选宽度为 287px/301px，高度均 32px；375px 页面 scrollWidth 为 375。
+- 文档同步：更新 Element Bridge 状态说明、LxForm 组件交付核查与路线图、项目地图、总计划及交接。Impeccable 修复后双路审查和综合快照完成后，将结果补在本条。
+- 范围：仅关闭基础控件桥接的单选/多选焦点边缘对齐问题；不代表 Vue3 业务表单已迁移或整库 UI-11 已完成。
+
+## [2026-09-28] UI-01 / 多选下拉焦点外缘贴边复验
+
+- 用户复核指出：`outline-offset: -1px` 虽然消除了双轮廓，但 2px 焦点线仍跨过控件外缘，整体看起来像额外包了一圈。
+- 调整：单选/多选统一将焦点 outline 内收至 `-2px`，让线条外缘贴住控件边界，不改变 32px 高度或选择行为。错误焦点使用 `--lx-color-error-strong`，强化其在浅红色错误底上的可见度。
+- 验证：`lx-element-bridge-docs.spec.ts` 1/1 通过，覆盖单选、多选、桌面/375px、浅色/HUD、普通/错误焦点、颜色、轮廓偏移、无阴影、控件尺寸和移动端页面宽度。lx-ui `vue-tsc --noEmit` 与 134 模块 `vite build` 通过；定向 ESLint、Prettier 检查及 `git diff --check` 通过。VitePress 文档构建与本轮浏览器评审尚待完成。
+- Impeccable：上一版的两路评审指出多选几何已无分离 halo，但错误态对比度偏弱；本轮 `-2px` 版本已重新启动隔离 A/B 复验。检测器 `[]` 只作为静态零命中记录，不单独判定视觉通过。
+- 后续边界：评审还发现错误下拉展开时与提示行约 2px 交叠、错误信息缺少持久 ARIA 关联；这两项记入后续布局与可访问性任务，不混入本次焦点外缘修改。Vue3 表单迁移及整库 UI-11 仍按原计划跟踪。
+
+## [2026-09-28] UI-01 / 多选下拉改为控件自身焦点边线
+
+- 用户复核指出：即使把 `outline` 偏移到 `-2px`，多选焦点外圈仍不顺眼。上一轮 A/B 在各自截图中没有复现双框；该结论不足以推翻用户当前浏览器中的观感反馈。
+- 改动：单选和多选下拉聚焦时用单一 2px inset 边线替换组件原有内边线，普通态使用主题主色，错误态使用高对比错误强调色；移除独立 `outline`。该规则沿用控件自身边界/圆角，不参与布局或阴影过渡，32px 高度及选择行为不变。
+- 回归：`tests/e2e/lx-element-bridge-docs.spec.ts` 1/1 通过，覆盖单选/多选、错误/普通、HUD/浅色、桌面/375px、单一 inset 阴影、无 outline 和尺寸稳定。lx-ui `pnpm typecheck`、134 模块构建、VitePress 文档构建、Vue3 定向 ESLint/Prettier 和 `git diff --check` 均通过；文档构建保留既有大 chunk 警告，pnpm 有既有配置迁移提示。
+- 浏览器与独立评审：本地预览 `http://127.0.0.1:4174/components/element-bridge.html?focus-check=20260928` 保持运行。A/B 已用最终 inset 样式在浅色/HUD、普通/模拟错误、桌面/375px 八种组合检查；焦点线单一贴边、尺寸稳定，桌面 `287×32px`、375px `301×32px`。A 记录和截图位于 `.impeccable/critique/.element-bridge-assessment-a-inset-border.md` 与 `.impeccable/critique/evidence-2026-09-28/assessment-a-inset-border/`；B 记录位于 `.impeccable/critique/.element-bridge-assessment-b-inset-shadow.md`，detector `[]` 只代表静态规则零命中，八态 overlay 证据位于 `.impeccable/critique/evidence-2026-09-28/assessment-b-inset-shadow/`。
+- Impeccable 正式记录：28/40，P0/P1 均为 0；快照 `.impeccable/critique/2026-09-28T08-02-17Z__linkx-fe-src-components-lxform-style-css.md` 已保存，趋势包含旧光晕方案 35/40 与本次 inset 方案 28/40 两项不同范围的评审。评审记录的后续问题为窄屏菜单遮挡字段标签、模拟错误态文字对比度约 3.93:1、选项行高 34px（设计参考 32px）。
+- 文档同步：桥接页说明、lx-ui Delivery Check/Roadmap、项目地图、总计划和本交接记录均已更新为控件自身 inset 边线规则及正式评审结果；临时报告草稿已清理。
+- 后续项：错误提示文案对比度、展开菜单与错误提示重叠、错误消息持久 ARIA 关联仍未修复；Vue3 表单替换和整库 UI-11 也未因此完成。
+
+## [2026-09-28] UI-01 / 多选下拉外圈按设计稿复修
+
+- 用户复核指出 1px 实体边框方案下多选仍有外圈样式问题。对照 `design/表单控件八件套/code.html` 后确认设计稿聚焦态要求 1px 主色边框及贴边 2px、15% 主色微光；此前实现漏掉了外圈光晕，只有边框变色。
+- 调整：单选/多选共享 1px `border-box` 边框与零间隙 2px、15% 外侧光晕；错误态保留红边并显示主色焦点环。共享 `--lx-control-focus-halo-color` 从 24% 调为设计稿中的 15%，输入、日期、文本域和复选框焦点同步回到设计基准。无 `outline`，32px 控件高度及选择行为不变；减少动效由全局 `prefers-reduced-motion` 规则覆盖。
+- 浏览器实测：4174 的 Element Bridge 实际多选通过键盘回车展开；计算样式为 `1px solid rgb(0, 96, 169)` + `color(srgb 0 0.376471 0.662745 / 0.15) 0px 0px 0px 2px`，盒尺寸 `319×32px`。Playwright 1/1 通过，覆盖多选键盘展开、单选/多选错误态、HUD 与 375px。后续类型/构建、格式检查及 Impeccable 独立双路复评结果见本条补充。
+- 文档同步：Element Bridge 说明、LxForm Delivery Check/Roadmap、Element Plus/LxUI 矩阵、项目地图、总计划与迁移 Backlog 已按设计稿更新。窄屏弹层遮挡标签、错误提示对比度、选项行高和错误消息 `aria-describedby` 仍列入后续问题；Vue3 表单替换和整库 UI-11 未完成。
+
+## [2026-09-28] UI-01 / 多选下拉外圈单边框最终修正
+
+- 用户复核：15% 外扩 halo 在页面中仍像第二道边框，上一轮静态设计稿核对和自动断言不足以代表用户实际观感。
+- 样式：单选与多选下拉统一用控件自身 1px `border-box` 边框表达焦点；正常焦点显示主色边框，错误焦点优先显示错误色边框；不叠加外扩 `box-shadow` 或 `outline`。保留 32px 控件高度、标签起点、键盘选择及标签折叠行为。根据用户反馈，有意覆盖设计稿静态 select 样例中的 2px/15% halo；其他输入类控件不变。
+- 验证：Element Bridge Playwright 1/1 通过，覆盖键盘展开/关闭、单选/多选、普通/错误、浅色/HUD、桌面/375px、`box-shadow: none`、状态边框颜色和焦点前后尺寸稳定。4174 真实浏览器复核计算样式确认普通焦点为 1px 主色边框、无 shadow；错误焦点切换错误色。桌面控件 `287×32px`，375px 为 `301×32px`，页面横向溢出为 0。
+- 构建与代码检查：lx-ui `pnpm typecheck`、`pnpm build`（134 modules）、`pnpm build:docs`，Vue3 定向 Playwright 1/1、E2E 文件 ESLint、修改文件 Prettier 检查、`git diff --check` 通过；文档构建有既有大 chunk 警告。Stylelint 因环境缺少 `postcss-less` 无法运行；lx-ui 自目录也未暴露 stylelint 命令。
+- Impeccable 综合评审：Assessment A `/root/select_final_assessment_a` 与 Assessment B `/root/select_final_assessment_b` 隔离执行。评分 29/40（Good），P0/P1 均为 0。detector 对 `linkx-fe/docs/components/element-bridge.md` 输出 `[]`、stderr 空、退出码 0；四个独立 overlay 视图计数：桌面浅色 7、桌面 HUD 175、375px 浅色真实错误 7、375px HUD 模拟错误 173。HUD 命中主要是目标主题调色板，其他命中多属 VitePress 外壳；实际组件附近有效命中是浅色错误文案约 4.4:1。overlay 保存在截图，未显示到用户可见的浏览器标签。
+- 评审记录：正式快照 `.impeccable/critique/2026-09-28T10-30-19Z__linkx-fe-docs-components-element-bridge-md.md`，首次趋势为 29/40。A 记录 `.impeccable/critique/.element-bridge-assessment-a-single-border-final.md`，截图目录 `evidence-2026-09-28/assessment-a-single-border-final/`；B 记录 `.impeccable/critique/.element-bridge-assessment-b-single-border-final.md`，20 张截图目录 `evidence-2026-09-28/assessment-b-single-border-final-verified/`。
+- 文档：已更新 Element Bridge 组件说明、LxForm 交付核查/路线图、项目地图、总计划、Vue3 迁移矩阵和 Backlog。Impeccable 建议：375px 弹层遮挡字段标签（P2）、浅色错误提示 4.4:1（P2）、选项行高 34px 对照 32px 设计契约（P3）；错误消息持久 ARIA 关联也继续单独跟踪。
+- 边界：此项关闭 lx-ui 基础桥接页的下拉外圈问题，不代表 Vue3 业务表单替换或 UI-11 整库审查完成；后续宿主迁移仍需保留原校验与提交契约。
+
+## [2026-09-28] UI-01 / 多选下拉外圈按实览再次收敛
+
+- 用户反馈：15% 主色外扩光晕在实际 Element Bridge 页仍看起来像第二圈，与下拉自身边框观感不协调。
+- 修正：单选、多选下拉都只用自身 1px 边框呈现焦点；删除依赖 `:has(.el-tag)` 的多选光晕及 LxForm 错误多选重复阴影。普通焦点切换主色边框，错误焦点保留高对比错误色边框。下拉焦点不再绘制 `box-shadow` 或 `outline`，不改变 32px 高度、标签位置、键盘选择和折叠行为；文本输入、日期、数字、文本域及复选框维持各自规则。
+- 验证：`tests/e2e/lx-element-bridge-docs.spec.ts` 1/1 通过，检查真实键盘开合、单选/多选、普通/错误、浅色/HUD、桌面/375px、无额外阴影和尺寸稳定。4174 浏览器实测为 `1px solid rgb(0, 96, 169)`、`box-shadow: none`、`outline: none`，桌面 `319×32px`；lx-ui `pnpm typecheck`、134 模块 `pnpm build`、`pnpm build:docs`、定向 ESLint/Prettier、`git diff --check` 通过。VitePress 构建提示既有大 chunk 警告；Stylelint 未运行（环境无 `postcss-less`）。
+- 文档：同步 Element Bridge、LxForm Delivery Check/Roadmap、Vue3 迁移矩阵、项目地图和总计划。
+- Impeccable：针对本次用户反馈后的最终样式，A/B 两路隔离浏览器评审正在执行；完成后把完整评审结论、detector 证据、截图及 snapshot/trend 路径补入此记录。
+- 边界：该修正只关闭 lx-ui Element Bridge 下拉外圈样式问题，不代表 Vue3 业务表单替换或 UI-11 整库审查完成。375px 弹层遮挡字段标签、错误提示对比度和选项行高仍独立跟踪。
+
+
+## [2026-09-28] UI-01 / 多选下拉改用控件内部单线
+
+- 用户反馈：上一版真实 1px border 虽无外扩 shadow，仍与输入框的内部边线呈现不一致，页面看起来像多了一层外圈。
+- 调整：linkx-fe/src/styles/element-theme.css 与 src/components/LxForm/style.css 将单选/多选选择器统一为 border: 0、1px inset box-shadow；普通、悬停、聚焦和错误态只替换边线 token，移除外扩轮廓，恢复 4px 12px 内容内距。焦点前后均维持 border-box、32px 高度、标签起点和键盘开合。
+- 浏览器证据：4174 实测“协同部门”聚焦 wrapper 为 border: 0px none、box-shadow: rgb(0, 96, 169) 0 0 0 1px inset、outline: none、319×32px；展开菜单和两个已选标签可见。
+- 自动验证：定向 lx-element-bridge-docs.spec.ts 1 项通过；断言覆盖单选/多选、浅色/HUD、普通/错误、键盘开合、375px、内侧边线及尺寸稳定。因配置启动的 4176 文档服务在测试结束后仍保持复用，未以 Ctrl-C 结果作为测试失败依据。
+- 文档同步：Element Bridge 说明、LxForm Delivery Check/Roadmap、Element Plus/lx-ui 矩阵、项目地图、总计划和迁移台账均已改为“控件内部 1px inset 单线”规则。
+- Impeccable：两路独立评审正在针对本次最终样式取证；detector JSON、stderr、退出码、overlay、快照和趋势在复评完成后补充。此前 30/40 记录仅对应上一版实体 border，不代表本次结果。
+- 边界：该项只关闭基础控件的边线层级问题，不代表 Vue3 业务表单替换或整库 UI-11 完成。
+
+## [2026-09-29] CODE-02 / 请求取消与远程下拉分页修复
+
+- `useFetch`/`useTable`：复核 signal 传递、取消时请求序号失效、`abortPrevious=false` 时全部活动请求取消、取消防抖和重试等待，以及列表只在序号有效的 `onSuccess` 中提交。`tests/unit/use-fetch.test.ts` 9/9 通过。
+- `v-loadmore`：重建 `src/directives/loadmore.ts`，通过选择器输入上的 `aria-controls` 找到被 teleport 的 listbox 和滚动容器；监听聚焦/展开后的延迟挂载，更新回调，并在目标切换/卸载时清理滚动监听、observer 和宿主事件。`tests/unit/loadmore.test.ts` 3/3 覆盖延迟 teleport、距底阈值、回调更新、滚动监听及未完成观察时卸载清理。
+- 浏览器验收：`tests/e2e/preview.spec.ts` 的轮播文章分页用例以本地 mock-preview 拦截读接口，真实 Element Plus 下拉滚动后请求第 2 页并呈现第 21 篇文章，1/1 通过；不发送后端写请求。其他 `v-loadmore` 宿主尚未逐页做浏览器验收。
+- 代码门禁：`pnpm exec vue-tsc --noEmit`、相关文件定向 ESLint 和 Prettier、`git diff --check` 通过。业务 API 调用写法保持 `.then().catch().finally()`。
+- Impeccable 规则再确认：任何 detector `[]` 都要检查 JSON、stderr、退出码和目标访问结果；有效 `[]` 只是静态零命中，若没有独立 A/B、浏览器各状态 overlay/截图及 snapshot，仍记为“复验未完成”。
+- 下一步：按 GLM 评审台账继续 #8 License、#9 AuthImg、#10 重复提交和 #11 ColForm；保留 #1/#2 与 #3/#4 的后续核验，真实后端未知项不猜测。
+
+## [2026-09-29] UI-01 / Element Bridge 最终样式记录更正
+
+- 前序交接中的“控件内部 inset 边线”只对应历史方案，已被用户实览后的最终单边框样式取代。当前选择器聚焦态使用自身 1px `border-box` 边框，只切换边框色，不使用 `box-shadow` 或 `outline`。
+- 最终 Impeccable A/B 快照为 30/40；A/B 独立报告、浏览器截图和 overlay 证据见 `.impeccable/critique/.element-bridge-assessment-a-single-border-final.md`、`.impeccable/critique/.element-bridge-assessment-b-single-border-final.md`、`.impeccable/critique/2026-09-28T11-54-41Z__linkx-fe-docs-components-element-bridge-md.md`。其中 detector `[]` 只记静态零命中，不作为视觉通过的单独依据。
+
+## [2026-09-29] GLM #8 / License 失败不覆盖既有授权
+
+- `refreshLicenseAuthAction` 现在只在 `code === 0` 且状态值有效时生成并持久化新授权；网络异常、业务码失败、无效状态/日期和会话 epoch 变化均不写入缓存，返回当前 store 授权。
+- `auth-store.test.ts` 新增失败保留、无效响应保留和有效响应更新覆盖；Vue3 全量单测 36 个文件/186 项通过，`vue-tsc`、定向 ESLint/Prettier、`git diff --check` 通过。`code-reviewer` 复核未发现本次新增问题。
+- 本项为状态/错误处理，无视觉改动；Impeccable 不适用，未运行 detector。业务 API 继续使用 Promise 链，未改成 `async/await`。
+- 下一步按台账处理 GLM #9 宿主 AuthImg 的失败状态、请求取消/响应归属和对象 URL 回收；UI 相关验证需按 Impeccable 检查，`[]` 不单独构成通过证据。
+
+## [2026-09-29] GLM #9 / AuthImg 失败恢复、竞态与资源生命周期
+
+- 改动：新增 `src/api/authImage.ts`，依 Vue2 规则将 `/static` 映射到 `/api/static`，只允许站内相对路径，Token 仅通过 Authorization header 发送，响应以 Promise 链检查 HTTP 状态并返回 Blob。`AuthImg` 在资源变化/卸载时 abort 请求、用递增序号阻止迟到结果覆盖，并在资源切换、图片解码失败和卸载时回收 ObjectURL；失败占位新增可键盘重试按钮并尊重减少动效。
+- 可访问性：10 个宿主调用点补充轮播缩略图、头像、设备/协同/应用图标的 `alt`；Mock E2E 检查键盘重试名称、图片替代文本及载入完成后的 `aria-busy=false`。
+- 代码审核：核对 Vue2 `src/components/AuthImg/index.vue` 的网关路径拼接契约、Vue3 Token/header 边界、URL 外站拦截、请求竞态与 ObjectURL 释放，无本次新增的可复现缺陷。真实鉴权服务未联调。
+- Impeccable 降级检查：detector 读取 JSON `[]`、stderr 空文件、退出码 0；只代表 AuthImg 源码静态零命中。两个隔离 gpt-6-sol Agent 均因服务端 HTTP 503 未启动；新浏览器标签可正常访问 Mock 页面，但 `document.title` 修改报 getter-only 错误，确认页面桥只读，因此未注入 overlay、无正式 A/B 综合 Critique。之前保存的 375px、加载、失败、减少动效截图保留；旧 `desktop-retry-success.png` 是图片完成 load 前的过渡帧，本轮 E2E 已补等待 `aria-busy=false` 的断言。报告：`.impeccable/critique/authimg-degraded-review-2026-09-29.md`。
+- 验证：AuthImg 定向单测 12/12；`tests/e2e/preview.spec.ts --grep AuthImg` 3/3；`vue-tsc --noEmit`、相关文件 ESLint、Prettier 检查通过。Detector `[]` 不视为视觉通过；Impeccable 正式审查仍待后续环境可用时补齐。
+- 下一步：按用户要求自动开始 GLM #10，处理权限角色删除、第三方应用删除/编辑、管理员用户删除的重复提交锁，锁定从确认开始并由 `.finally()` 释放。
+
+## [2026-09-29] GLM #10 / 写操作重复提交锁
+
+- 目标范围：角色删除、角色启停与角色保存；第三方应用删除与编辑保存；管理员用户删除与启停。角色、用户删除的锁在确认框打开时建立，取消和 API 请求结束后均恢复；请求进行时相应操作禁用并呈现 loading/`aria-busy`。第三方应用行级删除锁覆盖确认到请求结束，编辑保存有独立提交锁。
+- 浏览器回归：`tests/e2e/duplicate-submit.spec.ts` 5/5 通过；覆盖删除确认取消后恢复、请求中重复点击只发一次、角色启停/保存、管理员用户删改、失败重试，以及第三方应用浅色/HUD 桌面/375px 文本对比度和 44×44px 操作目标。四张截图：`.impeccable/critique/duplicate-submit-third-party-light.png`、`duplicate-submit-third-party-hud.png`、`duplicate-submit-third-party-light-375.png`、`duplicate-submit-third-party-hud-375.png`。
+- 代码审核：检查行锁归属、确认取消、并发触发、失败后释放和恢复重试，未发现本次新增可复现问题。传输层 `src/utils/http.ts` 已统一显示 HTTP/网络错误；页面空 `.catch()` 同时承接 Element Plus 确认取消，避免重复 Toast。
+- 构建与静态检查：`pnpm build`（包含 vue-tsc）通过；定向 ESLint/Prettier 与 `git diff --check` 通过。Rollup 有仓库原有的 sidebar Less 导出告警，不影响构建产物生成。
+- Impeccable：目标 detector stdout 为 `[]`、stderr 0 字节、退出码 0，仅证明目标源码静态规则零命中。五次隔离 `gpt-6-sol ultra` 评审尝试因提供方 HTTP 503 无法启动；本地浏览器可访问 Mock 页面，但 CUA DOM evaluate 是只读，未注入 overlay。人工检查的浅色/HUD、桌面/375px 截图不构成正式双路 Critique；无 A/B 报告或 snapshot，状态仍为“视觉 Critique 待补”。完整降级记录：`.impeccable/critique/duplicate-submit-degraded-review-2026-09-29.md`。
+- 下一步：自动进入 GLM #11 ColForm 远程人员搜索竞态；Impeccable detector 的 `[]` 不作为视觉通过证据。
+
+## [2026-09-29] GLM #11 / ColForm 远程搜索竞态与分页
+
+- 改动：`queryUserByPage` 接受可选 AbortSignal；ColForm 以递增请求代次拒绝旧结果/旧 `finally`，请求成功后才提交页码，触底分页保留当前关键词并阻止重复请求。新关键词、组织切换、重置、关闭和卸载均取消旧请求；查询组件暴露 `aria-busy` 状态。
+- Mock E2E：`tests/e2e/col-form-search-race.spec.ts` 1/1，通过延迟旧关键词响应验证取消/迟到保护、当前搜索 loading 清理、分页第 2 页继续携带同一关键词，且列表没有旧候选。全程只拦截本地 Mock，不发送真实后端请求。
+- 代码审核：核对请求代次和 AbortSignal 互补保护、旧 `finally` 归属、pageNum 仅在当前成功响应后推进、触底并发保护与关键词保留，未发现新增可复现问题。
+- 静态门禁：`vue-tsc --noEmit`、API/ColForm/E2E 定向 ESLint 与 Prettier 检查、`git diff --check` 通过；业务请求仍使用 `.then().catch().finally()`。
+- 下一步：自动开始 GLM #1 lx-ui 全局组件注册，再按评审台账继续 #2。#10 Impeccable 正式 Critique 作为环境恢复后的独立补充项继续跟踪。

@@ -3,6 +3,7 @@
  * baseData/thirdParty/index.vue - 三方应用管理
  */
 import { Plus, View, Edit, Delete } from '@element-plus/icons-vue';
+import { useWindowSize } from '@vueuse/core';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { ref, reactive, computed, markRaw } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -29,41 +30,61 @@ const searchParams = reactive<Record<string, unknown>>({
 
 // 组件 ref
 const tableRef = ref<InstanceType<typeof ProTable>>();
+const { width: viewportWidth } = useWindowSize();
+const isCompact = computed(() => viewportWidth.value <= 640);
 
 // 列定义：序号/应用名称/应用ID/应用密钥/应用状态/操作列
-const columns = computed<ITableColumn[]>(() => [
-  { prop: 'index', label: t('index.list.Index'), width: 60, align: 'center', slotName: 'index' },
-  {
+const columns = computed<ITableColumn[]>(() => {
+  const compact = isCompact.value;
+  const columns: ITableColumn[] = [];
+  if (!compact) {
+    columns.push({ prop: 'index', label: t('index.list.Index'), width: 60, align: 'center', slotName: 'index' });
+  }
+  columns.push({
     prop: 'clientName',
     label: t('index.list.thirdPartyApp'),
-    minWidth: 100,
+    width: compact ? 120 : undefined,
+    minWidth: compact ? undefined : 100,
+    fixed: compact ? 'left' : undefined,
     align: 'center',
-    showOverflowTooltip: true,
-  },
-  {
-    prop: 'clientId',
-    label: t('index.list.thirdPartyAppID'),
-    minWidth: 100,
-    align: 'center',
-    showOverflowTooltip: true,
-  },
-  {
-    prop: 'clientSecret',
-    label: t('index.list.thirdPartyAppSecret'),
-    minWidth: 100,
-    align: 'center',
-    slotName: 'clientSecret',
-  },
-  { prop: 'status', label: t('index.list.thirdPartyAppStatus'), minWidth: 60, align: 'center', slotName: 'status' },
-  {
+    showOverflowTooltip: !compact,
+    slotName: 'clientName',
+  });
+  if (!compact) {
+    columns.push(
+      {
+        prop: 'clientId',
+        label: t('index.list.thirdPartyAppID'),
+        minWidth: 100,
+        align: 'center',
+        showOverflowTooltip: true,
+      },
+      {
+        prop: 'clientSecret',
+        label: t('index.list.thirdPartyAppSecret'),
+        minWidth: 100,
+        align: 'center',
+        slotName: 'clientSecret',
+      },
+      {
+        prop: 'status',
+        label: t('index.list.thirdPartyAppStatus'),
+        minWidth: 60,
+        align: 'center',
+        slotName: 'status',
+      },
+    );
+  }
+  columns.push({
     prop: 'actions',
     label: t('index.operations.operation'),
     fixed: 'right',
-    width: 280,
+    width: compact ? 164 : 280,
     align: 'center',
     slotName: 'actions',
-  },
-]);
+  });
+  return columns;
+});
 
 // 搜索区按钮：仅新增
 const actions = computed(() => [
@@ -75,6 +96,8 @@ const searchPlaceholder = computed(() => t('index.list.thirdPartyApp'));
 // 弹窗 ref
 const thirdEditRef = ref<InstanceType<typeof ThirdPartyEdit>>();
 const thirdDetailRef = ref<InstanceType<typeof ThirdPartyDetail>>();
+const deletingAppIds = ref<Array<string | number>>([]);
+const pendingDeleteAppIds = ref<Array<string | number>>([]);
 
 // ===== ProTable @response 回调 =====
 function handleResponse(res: unknown): void {
@@ -115,24 +138,38 @@ function handleView(row: ThirdAppItem): void {
 
 // 删除
 function handleDelete(row: ThirdAppItem): void {
+  if (deletingAppIds.value.includes(row.id)) return;
+  deletingAppIds.value = [...deletingAppIds.value, row.id];
   ElMessageBox.confirm(t('index.operations.affirmDeleted'), {
     confirmButtonText: t('determine'),
     cancelButtonText: t('cancel'),
     type: 'info',
   })
     .then(() => {
-      collaborationDelete(row.id)
-        .then((result) => {
-          if (result.code === 0) {
-            ElMessage.success(t('index.statusTitle.successfullyDelete'));
-          } else {
-            ElMessage.error(result.msg || '');
-          }
-          tableRef.value?.refresh();
-        })
-        .catch(() => {});
+      pendingDeleteAppIds.value = [...pendingDeleteAppIds.value, row.id];
+      return collaborationDelete(row.id);
     })
-    .catch(() => {});
+    .then((result) => {
+      if (result.code === 0) {
+        ElMessage.success(t('index.statusTitle.successfullyDelete'));
+      } else {
+        ElMessage.error(result.msg || '');
+      }
+      tableRef.value?.refresh();
+    })
+    .catch(() => {})
+    .finally(() => {
+      deletingAppIds.value = deletingAppIds.value.filter((id) => id !== row.id);
+      pendingDeleteAppIds.value = pendingDeleteAppIds.value.filter((id) => id !== row.id);
+    });
+}
+
+function isAppDeleting(row: ThirdAppItem): boolean {
+  return deletingAppIds.value.includes(row.id);
+}
+
+function isAppDeletePending(row: ThirdAppItem): boolean {
+  return pendingDeleteAppIds.value.includes(row.id);
 }
 
 /** 从 ProTable slot scope 中安全获取 ThirdAppItem */
@@ -165,6 +202,7 @@ function getIndex(scope: any): number {
 
       <ProTable
         ref="tableRef"
+        class="third-party-table"
         :columns="columns"
         :fetch-api="collaborationList"
         :data="list"
@@ -173,6 +211,19 @@ function getIndex(scope: any): number {
         @response="handleResponse"
         @loading-change="handleLoadingChange"
       >
+        <template #clientName="scope">
+          <div class="third-party-client-name">
+            <span class="third-party-client-name__text">{{ getRow(scope).clientName }}</span>
+            <el-tag
+              v-if="isCompact"
+              :type="getRow(scope).status === 1 ? 'info' : 'danger'"
+              :class="getRow(scope).status === 1 ? 'third-party-status--enabled' : 'third-party-status--disabled'"
+            >
+              {{ getRow(scope).status === 1 ? t('index.list.AppOpen') : t('index.list.AppClose') }}
+            </el-tag>
+          </div>
+        </template>
+
         <!-- 序号列：从 1 开始自增 -->
         <template #index="scope">
           <span>{{ getIndex(scope) }}</span>
@@ -185,28 +236,82 @@ function getIndex(scope: any): number {
 
         <!-- 状态列：0→danger 红色「停用」，1→默认色「启用」 -->
         <template #status="scope">
-          <el-tag :type="getRow(scope).status === 1 ? 'info' : 'danger'">
+          <el-tag
+            :type="getRow(scope).status === 1 ? 'info' : 'danger'"
+            :class="getRow(scope).status === 1 ? 'third-party-status--enabled' : 'third-party-status--disabled'"
+          >
             {{ getRow(scope).status === 1 ? t('index.list.AppOpen') : t('index.list.AppClose') }}
           </el-tag>
         </template>
 
         <!-- 操作列：详情/修改/删除 -->
         <template #actions="scope">
+          <div v-if="isCompact" class="third-party-compact-actions">
+            <el-tooltip :content="t('index.operations.particulars')" placement="top">
+              <el-button
+                class="third-party-compact-action"
+                type="primary"
+                link
+                circle
+                :icon="View"
+                :aria-label="t('index.operations.particulars')"
+                :disabled="isAppDeleting(getRow(scope))"
+                @click="handleView(getRow(scope))"
+              />
+            </el-tooltip>
+            <el-tooltip :content="t('index.operations.change')" placement="top">
+              <el-button
+                class="third-party-compact-action"
+                type="primary"
+                link
+                circle
+                :icon="Edit"
+                :aria-label="t('index.operations.change')"
+                :disabled="isAppDeleting(getRow(scope))"
+                @click="handleUpdate(getRow(scope))"
+              />
+            </el-tooltip>
+            <el-tooltip :content="t('delete')" placement="top">
+              <el-button
+                class="third-party-compact-action"
+                type="danger"
+                link
+                circle
+                :icon="Delete"
+                :aria-label="t('delete')"
+                :disabled="isAppDeleting(getRow(scope))"
+                :loading="isAppDeletePending(getRow(scope))"
+                :aria-busy="isAppDeletePending(getRow(scope)) ? 'true' : undefined"
+                @click="handleDelete(getRow(scope))"
+              />
+            </el-tooltip>
+          </div>
           <ActionButtons
+            v-else
+            class="third-party-actions"
             :buttons="[
               {
                 type: 'primary',
                 icon: View,
                 label: t('index.operations.particulars'),
                 onClick: () => handleView(getRow(scope)),
+                disabled: isAppDeleting(getRow(scope)),
               },
               {
                 type: 'primary',
                 icon: Edit,
                 label: t('index.operations.change'),
                 onClick: () => handleUpdate(getRow(scope)),
+                disabled: isAppDeleting(getRow(scope)),
               },
-              { type: 'danger', icon: Delete, label: t('delete'), onClick: () => handleDelete(getRow(scope)) },
+              {
+                type: 'danger',
+                icon: Delete,
+                label: t('delete'),
+                onClick: () => handleDelete(getRow(scope)),
+                disabled: isAppDeleting(getRow(scope)),
+                loading: isAppDeletePending(getRow(scope)),
+              },
             ]"
           />
         </template>
@@ -227,5 +332,74 @@ function getIndex(scope: any): number {
 .filter-item {
   display: inline-block;
   vertical-align: middle;
+}
+
+.third-party-client-name {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.third-party-client-name__text {
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+  white-space: normal;
+}
+
+.third-party-compact-actions {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.third-party-compact-action {
+  margin: 0;
+}
+
+:global(.third-party-compact-action.el-button.is-circle) {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  padding: 0;
+}
+
+:global(html.dark.lx-theme-hud .third-party-actions .el-button--primary.is-link),
+:global(html.dark.lx-theme-hud .third-party-compact-action.el-button--primary.is-link) {
+  color: @color-on-dark;
+}
+
+:global(html.dark.lx-theme-hud .third-party-actions .el-button--danger.is-link),
+:global(html.dark.lx-theme-hud .third-party-compact-action.el-button--danger.is-link) {
+  color: lighten(@color-danger, 30%);
+}
+
+:global(html.dark.lx-theme-hud .third-party-table .el-table__body .cell) {
+  color: @color-on-dark;
+}
+
+:deep(.third-party-status--enabled) {
+  color: @color-success-dark;
+  background-color: @color-success-light-9;
+  border-color: fade(@color-success, 28%);
+}
+
+:deep(.third-party-status--disabled) {
+  color: @color-danger-dark;
+  background-color: @color-danger-light-9;
+  border-color: fade(@color-danger, 28%);
+}
+
+:global(html.dark.lx-theme-hud .third-party-status--disabled) {
+  color: @color-on-dark;
+  background-color: @color-danger-dark;
+  border-color: @color-danger-dark;
+}
+
+:global(html.dark.lx-theme-hud .third-party-status--enabled) {
+  color: @color-on-dark;
+  background-color: @color-success-dark;
+  border-color: @color-success-dark;
 }
 </style>

@@ -40,6 +40,9 @@ const searchParams = reactive<Record<string, unknown>>({
 const tableRef = ref<InstanceType<typeof ProTable>>();
 const editUserRef = ref<InstanceType<typeof EditUser>>();
 const passwordRef = ref<InstanceType<typeof UserPassword>>();
+const pendingUserIds = ref<string[]>([]);
+const deletingUserIds = ref<string[]>([]);
+const updatingUserStatusIds = ref<string[]>([]);
 
 // ===== 列定义 =====
 const columns = computed<ITableColumn[]>(() => [
@@ -96,12 +99,17 @@ function handleUpdate(row: AdminUserItem): void {
 
 // ===== 删除 =====
 function handleDelete(row: AdminUserItem): void {
+  if (pendingUserIds.value.includes(row.id)) return;
+  pendingUserIds.value = [...pendingUserIds.value, row.id];
   ElMessageBox.confirm(`确认删除用户「${row.idCard}」？`, '删除确认', {
     confirmButtonText: '确定删除',
     cancelButtonText: '取消',
     type: 'warning',
   })
-    .then(() => deleteAdminUser(row.id))
+    .then(() => {
+      deletingUserIds.value = [...deletingUserIds.value, row.id];
+      return deleteAdminUser(row.id);
+    })
     .then((result) => {
       if (result.code === 0) {
         ElMessage.success('删除成功');
@@ -110,18 +118,35 @@ function handleDelete(row: AdminUserItem): void {
         ElMessage.error(result.msg || '删除失败');
       }
     })
-    .catch(() => {});
+    .catch(() => {})
+    .finally(() => {
+      pendingUserIds.value = pendingUserIds.value.filter((id) => id !== row.id);
+      deletingUserIds.value = deletingUserIds.value.filter((id) => id !== row.id);
+    });
 }
 
 // ===== 禁用/启用 =====
 function handleStatus(row: AdminUserItem, status: number): void {
-  updateAdminUser({ id: row.id, status }).then((result) => {
-    if (result.code === 0) {
-      tableRef.value?.refresh();
-    } else {
-      ElMessage.error(result.msg || '操作失败');
-    }
-  });
+  if (pendingUserIds.value.includes(row.id)) return;
+  pendingUserIds.value = [...pendingUserIds.value, row.id];
+  updatingUserStatusIds.value = [...updatingUserStatusIds.value, row.id];
+  updateAdminUser({ id: row.id, status })
+    .then((result) => {
+      if (result.code === 0) {
+        tableRef.value?.refresh();
+      } else {
+        ElMessage.error(result.msg || '操作失败');
+      }
+    })
+    .catch(() => {})
+    .finally(() => {
+      pendingUserIds.value = pendingUserIds.value.filter((id) => id !== row.id);
+      updatingUserStatusIds.value = updatingUserStatusIds.value.filter((id) => id !== row.id);
+    });
+}
+
+function isUserPending(row: AdminUserItem): boolean {
+  return pendingUserIds.value.includes(row.id);
 }
 
 // ===== 重置密码 =====
@@ -175,6 +200,7 @@ function getUser(scope: any): AdminUserItem {
                 label: '编辑',
                 onClick: () => handleUpdate(getUser(scope)),
                 auth: '/admin/user/update',
+                disabled: isUserPending(getUser(scope)),
               },
               {
                 type: 'primary',
@@ -182,6 +208,7 @@ function getUser(scope: any): AdminUserItem {
                 label: '重置密码',
                 onClick: () => handleResetPassword(getUser(scope)),
                 auth: '/admin/user/updatePwd',
+                disabled: isUserPending(getUser(scope)),
               },
               {
                 type: 'danger',
@@ -189,6 +216,8 @@ function getUser(scope: any): AdminUserItem {
                 label: '删除',
                 onClick: () => handleDelete(getUser(scope)),
                 auth: '/admin/user/delete',
+                disabled: isUserPending(getUser(scope)),
+                loading: deletingUserIds.includes(getUser(scope).id),
               },
               {
                 type: 'danger',
@@ -197,6 +226,8 @@ function getUser(scope: any): AdminUserItem {
                 onClick: () => handleStatus(getUser(scope), 1),
                 visible: getUser(scope).status === 0,
                 auth: '/admin/user/update',
+                disabled: isUserPending(getUser(scope)),
+                loading: updatingUserStatusIds.includes(getUser(scope).id),
               },
               {
                 type: 'warning',
@@ -205,6 +236,8 @@ function getUser(scope: any): AdminUserItem {
                 onClick: () => handleStatus(getUser(scope), 0),
                 visible: getUser(scope).status !== 0,
                 auth: '/admin/user/update',
+                disabled: isUserPending(getUser(scope)),
+                loading: updatingUserStatusIds.includes(getUser(scope).id),
               },
             ]"
           />

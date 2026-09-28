@@ -70,7 +70,7 @@ html:root {
   font-weight: 600;
 }
 
-.el-button.el-button--primary {
+.el-button.el-button--primary:not(.is-link):not(.is-text):not(.is-plain) {
   --el-button-bg-color: var(--lx-color-primary);
   --el-button-border-color: var(--lx-color-primary);
   --el-button-hover-bg-color: var(--lx-color-primary-hover);
@@ -94,7 +94,7 @@ html:root {
   --el-button-hover-text-color: var(--lx-color-primary);
 }
 
-.el-button.el-button--danger {
+.el-button.el-button--danger:not(.is-link):not(.is-text):not(.is-plain) {
   --el-button-bg-color: var(--lx-color-error);
   --el-button-border-color: var(--lx-color-error);
   --el-button-hover-bg-color: var(--lx-color-danger-hover);
@@ -106,6 +106,14 @@ html:root {
   --el-button-active-text-color: var(--lx-color-on-danger);
 }
 
+.el-button--danger.is-link,
+.el-button--danger.is-text {
+  --el-button-text-color: var(--lx-color-error-strong);
+  --el-button-hover-text-color: var(--lx-color-error-strong);
+  --el-button-active-text-color: var(--lx-color-error-strong);
+  --el-button-disabled-text-color: var(--lx-color-error-strong);
+}
+
 .el-button.is-link,
 .el-button.is-text {
   min-height: var(--lx-control-height);
@@ -114,9 +122,6 @@ html:root {
 }
 
 .el-button:focus-visible,
-.el-input__wrapper.is-focus,
-.el-select__wrapper.is-focused,
-.el-textarea__inner:focus,
 .el-switch:focus-visible .el-switch__core {
   outline: 2px solid var(--lx-color-primary);
   outline-offset: 2px;
@@ -139,25 +144,72 @@ html:root {
     background-color var(--lx-transition);
 }
 
+/* 选择器用真实 1px 边框承载状态色，边线贴合控件几何外缘。 */
+html:root .el-select__wrapper {
+  box-sizing: border-box;
+  border: 1px solid var(--lx-border);
+  padding: 3px 11px;
+  box-shadow: none;
+  transition:
+    border-color var(--lx-transition),
+    background-color var(--lx-transition),
+    box-shadow var(--lx-transition);
+}
+
 .el-input__wrapper:hover,
-.el-select__wrapper:hover,
 .el-textarea__inner:hover {
   box-shadow: 0 0 0 1px var(--lx-color-primary) inset;
 }
 
-.el-input__wrapper.is-focus,
-.el-select__wrapper.is-focused,
-.el-textarea__inner:focus {
+html:root .el-select__wrapper:hover {
+  border-color: var(--lx-color-primary);
+  box-shadow: none;
+}
+
+/* 部分 EP 组件样式晚于桥接层注入；根选择器提高优先级以稳定应用焦点令牌。 */
+html:root .el-input__wrapper.is-focus,
+html:root .el-date-editor.is-active,
+html:root .el-textarea__inner:focus {
+  outline: none;
+  outline-offset: 0;
   box-shadow:
     0 0 0 1px var(--lx-color-primary) inset,
-    var(--lx-focus-ring);
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+/* 单选和多选都只用自身边框提示焦点，避免控件外再出现第二圈。 */
+html:root .el-select__wrapper.is-focused {
+  border-color: var(--lx-color-primary);
+  box-shadow: none;
+  outline: none;
+  outline-offset: 0;
 }
 
 .el-form-item.is-error .el-input__wrapper,
-.el-form-item.is-error .el-select__wrapper,
 .el-form-item.is-error .el-textarea__inner {
   background-color: var(--lx-color-error-light);
   box-shadow: 0 0 0 1px var(--lx-color-error) inset;
+}
+
+html:root .el-form-item.is-error .el-input__wrapper.is-focus,
+html:root .el-form-item.is-error .el-date-editor.is-active,
+html:root .el-form-item.is-error .el-textarea__inner:focus {
+  outline: none;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+html:root .el-form-item.is-error .el-select__wrapper {
+  background-color: var(--lx-color-error-light);
+  border-color: var(--lx-color-error);
+  box-shadow: none;
+}
+
+html:root .el-form-item.is-error .el-select__wrapper.is-focused {
+  border-color: var(--lx-color-error-strong);
+  box-shadow: none;
 }
 
 .el-form-item.is-error .el-form-item__error {
@@ -189,10 +241,26 @@ html:root {
   background: var(--lx-color-primary);
 }
 
-.el-radio__input.is-focus .el-radio__inner,
-.el-checkbox__input.is-focus .el-checkbox__inner {
+.el-radio__input.is-focus .el-radio__inner {
   outline: 2px solid var(--lx-color-primary);
   outline-offset: 2px;
+}
+
+html:root .el-checkbox__input.is-focus .el-checkbox__inner {
+  box-sizing: border-box;
+  border-color: var(--el-color-primary);
+  outline: none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+html.dark.lx-theme-hud
+  .el-checkbox__input:not(.is-checked):not(.is-indeterminate):not(
+    .is-disabled
+  ):not(.is-focus)
+  .el-checkbox__inner {
+  border-color: var(--el-text-color-regular);
+  background-color: var(--el-bg-color);
 }
 
 .el-switch {
@@ -285,4 +353,5 @@ html.dark.lx-theme-hud {
   --el-color-primary-light-9: rgba(56, 189, 248, 0.12);
   --el-color-primary-dark-2: #2d97c6;
   --el-color-on-primary: #0b1220;
+  --lx-color-error-strong: #f78989;
 }

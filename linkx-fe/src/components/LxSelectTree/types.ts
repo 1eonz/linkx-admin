@@ -10,6 +10,10 @@ export interface LxTreeNode {
   children?: LxTreeNode[];
   /** 声明有子节点（懒加载场景渲染展开箭头） */
   hasChildren?: boolean;
+  /** 显式声明是否为叶节点；优先级高于 children 和 hasChildren */
+  isLeaf?: boolean;
+  /** 禁止该节点被勾选 */
+  disabled?: boolean;
   /** 节点状态（显示右侧小圆点，可选） */
   status?: LxStatus;
   /** 业务透传 */
@@ -31,6 +35,8 @@ export interface LxSelectTreeProps {
   filterable?: boolean;
   /** 搜索占位符 */
   placeholder?: string;
+  /** 搜索输入框的可访问名称 */
+  searchLabel?: string;
   /** 懒加载（请求由业务注入） */
   lazy?: LxTreeLazyLoad;
   /** 默认展开的层级 keys */

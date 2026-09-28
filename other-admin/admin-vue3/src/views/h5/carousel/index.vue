@@ -130,7 +130,12 @@ function getRow(scope: any): CarouselItem {
       >
         <!-- 轮播图列：AuthImg 鉴权渲染 -->
         <template #pciUrl="scope">
-          <AuthImg v-if="getRow(scope).pciUrl" :auth-src="getRow(scope).pciUrl as string" class="head-shot" />
+          <AuthImg
+            v-if="getRow(scope).pciUrl"
+            :auth-src="getRow(scope).pciUrl as string"
+            :alt="`${getRow(scope).title || '轮播图'}缩略图`"
+            class="head-shot"
+          />
         </template>
 
         <!-- 操作列 -->

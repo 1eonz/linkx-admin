@@ -167,7 +167,12 @@ onBeforeUnmount(() => {
       <el-table-column prop="name" label="设备名称" min-width="160" show-overflow-tooltip />
       <el-table-column label="设备图标" width="130" align="center">
         <template #default="scope">
-          <AuthImg v-if="getRow(scope).iconUri" :auth-src="getRow(scope).iconUri ?? ''" class="device-icon" />
+          <AuthImg
+            v-if="getRow(scope).iconUri"
+            :auth-src="getRow(scope).iconUri ?? ''"
+            :alt="`${getRow(scope).name || '设备'}图标`"
+            class="device-icon"
+          />
           <span v-else>-</span>
         </template>
       </el-table-column>
@@ -218,7 +223,7 @@ onBeforeUnmount(() => {
               class="preview-image"
               alt="待保存的设备图标"
             />
-            <AuthImg v-else-if="imageUrl" :auth-src="imageUrl" class="preview-image" />
+            <AuthImg v-else-if="imageUrl" :auth-src="imageUrl" alt="设备图标预览" class="preview-image" />
             <div v-else class="preview-placeholder">无图标</div>
             <el-upload
               action="#"

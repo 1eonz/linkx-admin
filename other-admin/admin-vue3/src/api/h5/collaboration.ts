@@ -47,6 +47,17 @@ export interface QueryUserByPageItem {
   [key: string]: unknown;
 }
 
+/** 分页查询人员的筛选参数。 */
+export interface QueryUserByPageParams {
+  code?: string;
+  privString?: string;
+  includeChildren?: number;
+  pageNum: number;
+  pageSize: number;
+  name?: string;
+  type?: number;
+}
+
 /** 警单类型项（getPolicetickettypes 返回） */
 export interface PoliceTicketType {
   id: string;
@@ -171,16 +182,14 @@ export function queryDepartmentTree(params: { parentCode?: string } = {}): HttpR
  * 按部门分页查询用户（GET /collaboration/post/queryUserByPage）
  * 用于：ColForm 弹窗中根据组织查询人员列表
  */
-export function queryUserByPage(params: {
-  code?: string;
-  privString?: string;
-  includeChildren?: number;
-  pageNum: number;
-  pageSize: number;
-  name?: string;
-  type?: number;
-}): HttpResult<PaginatedResult<QueryUserByPageItem>> {
-  return http.get<PaginatedResult<QueryUserByPageItem>>('/collaboration/v1/post/queryUserByPage', { params });
+export function queryUserByPage(
+  params: QueryUserByPageParams,
+  options: { abort?: AbortSignal } = {},
+): HttpResult<PaginatedResult<QueryUserByPageItem>> {
+  return http.get<PaginatedResult<QueryUserByPageItem>>('/collaboration/v1/post/queryUserByPage', {
+    params,
+    abort: options.abort,
+  });
 }
 
 /**

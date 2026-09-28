@@ -212,3 +212,123 @@ test('北向接入管理使用本地 Mock 完成筛选和增改删', async ({ pa
   await expect(appMain.locator('.northbound-table tbody tr').filter({ hasText: '预览联调平台二期' })).toHaveCount(0);
   expect(unconfiguredApis).toEqual([]);
 });
+
+test('轮播文章下拉滚到底部后使用本地 Mock 加载下一页', async ({ page }) => {
+  const articlePages: number[] = [];
+  await page.route('**/linkx/admin/collaboration/v1/post/articles/page**', async (route) => {
+    const pageNum = Number(new URL(route.request().url()).searchParams.get('pageNum'));
+    articlePages.push(pageNum);
+    const records =
+      pageNum === 1
+        ? Array.from({ length: 20 }, (_, index) => ({
+            id: `mock-article-${String(index + 1).padStart(3, '0')}`,
+            title: `本地 Mock 文章 ${index + 1}`,
+            contentUrl: `/mock/articles/${index + 1}`,
+          }))
+        : [{ id: 'mock-article-021', title: '本地 Mock 文章 21', contentUrl: '/mock/articles/21' }];
+
+    await route.fulfill({
+      json: { code: 0, msg: 'Mock 成功', data: { records, totalCount: 21 } },
+    });
+  });
+
+  await page.goto('/h5/carousel', { waitUntil: 'domcontentloaded' });
+  const appMain = page.locator('.app-main');
+  await appMain.getByRole('button', { name: '新增' }).click();
+  const dialog = page.getByRole('dialog', { name: '新增' });
+  const accountField = dialog.locator('.el-form-item').filter({ hasText: '公众号' });
+  await accountField.locator('.el-select').click();
+  await page.getByRole('option', { name: '杭州警务' }).click();
+  await expect.poll(() => articlePages).toEqual([1]);
+
+  const titleField = dialog.locator('.el-form-item').filter({ hasText: '标题' });
+  await titleField.locator('.el-select').click();
+  const articleDropdown = page.locator('.el-select-dropdown__wrap:visible').last();
+  await articleDropdown.evaluate((element) => {
+    element.scrollTop = element.scrollHeight;
+    element.dispatchEvent(new Event('scroll'));
+  });
+
+  await expect.poll(() => articlePages).toEqual([1, 2]);
+  await expect(page.getByRole('option', { name: '本地 Mock 文章 21' })).toBeVisible();
+});
+
+test('AuthImg 请求失败时保留轮播图尺寸并在窄屏不溢出', async ({ page }) => {
+  await page.route('**/linkx/admin/mock/images/duty-banner.svg', (route) =>
+    route.fulfill({ status: 404, contentType: 'text/plain', body: '本地 Mock 图片不存在' }),
+  );
+
+  for (const viewport of [
+    { width: 1280, height: 900 },
+    { width: 375, height: 812 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto('/h5/carousel', { waitUntil: 'domcontentloaded' });
+
+    const placeholder = page.locator('.head-shot.auth-img-placeholder').first();
+    await expect(placeholder).toBeVisible();
+    const geometry = await placeholder.evaluate((element) => {
+      const style = getComputedStyle(element);
+      const rect = element.getBoundingClientRect();
+      return {
+        width: rect.width,
+        height: rect.height,
+        borderRadius: style.borderRadius,
+        display: style.display,
+      };
+    });
+    expect(geometry).toEqual({ width: 170, height: 80, borderRadius: '4px', display: 'inline-flex' });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(viewport.width);
+  }
+});
+
+test('AuthImg 可通过键盘重试失败的图片请求', async ({ page }) => {
+  let attempts = 0;
+  await page.route('**/linkx/admin/mock/images/duty-banner.svg', (route) => {
+    attempts += 1;
+    if (attempts === 1) {
+      return route.fulfill({ status: 404, contentType: 'text/plain', body: '本地 Mock 图片不存在' });
+    }
+
+    return route.fulfill({
+      status: 200,
+      contentType: 'image/svg+xml',
+      body: '<svg xmlns="http://www.w3.org/2000/svg" width="170" height="80"><rect width="170" height="80" fill="#e5e6eb"/></svg>',
+    });
+  });
+  await page.goto('/h5/carousel', { waitUntil: 'domcontentloaded' });
+
+  const retry = page.getByRole('button', { name: '图片加载失败，重新加载 应急值守安排缩略图' }).first();
+  await expect(retry).toBeVisible();
+  await expect(retry.getByText('重试')).toBeVisible();
+  await retry.press('Enter');
+  const loadedImage = page.locator('img.head-shot').first();
+  await expect(loadedImage).toHaveAttribute('src', /^blob:/);
+  await expect(loadedImage).toHaveAttribute('alt', '应急值守安排缩略图');
+  await expect(loadedImage).toHaveAttribute('aria-busy', 'false');
+  expect(attempts).toBe(2);
+});
+
+test('AuthImg 加载图标遵守减少动效偏好', async ({ page }) => {
+  let releaseImage!: () => void;
+  const imageResponse = new Promise<void>((resolve) => {
+    releaseImage = resolve;
+  });
+  await page.route('**/linkx/admin/mock/images/duty-banner.svg', async (route) => {
+    await imageResponse;
+    await route.fulfill({
+      status: 200,
+      contentType: 'image/svg+xml',
+      body: '<svg xmlns="http://www.w3.org/2000/svg" width="170" height="80" viewBox="0 0 170 80"><rect width="170" height="80" fill="#e5e6eb"/></svg>',
+    });
+  });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/h5/carousel', { waitUntil: 'domcontentloaded' });
+
+  const loading = page.locator('.head-shot.auth-img-placeholder.is-loading').first();
+  await expect(loading).toBeVisible();
+  expect(await loading.locator('svg').evaluate((icon) => getComputedStyle(icon).animationName)).toBe('none');
+
+  releaseImage();
+  await expect(page.locator('.head-shot').first()).toHaveAttribute('src', /^blob:/);
+});

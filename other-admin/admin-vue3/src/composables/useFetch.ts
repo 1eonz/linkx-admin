@@ -51,54 +51,6 @@
 
 import { onUnmounted, ref, shallowRef, watch, type Ref, type WatchSource } from 'vue';
 
-// ===== debounce / throttle 工具函数 =====
-
-/**
- * 防抖函数：在指定间隔内多次调用只执行最后一次
- * @param fn 需要防抖的函数
- * @param wait 间隔（毫秒）
- */
-function debounce<T extends (...args: any[]) => any>(fn: T, wait: number): T {
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  return ((...args: Parameters<T>) => {
-    if (timer) clearTimeout(timer);
-    return new Promise<ReturnType<T>>((resolve) => {
-      timer = setTimeout(() => resolve(fn(...args)), wait);
-    });
-  }) as T;
-}
-
-/**
- * 节流函数：在指定间隔内最多执行一次
- * @param fn 需要节流的函数
- * @param wait 间隔（毫秒）
- */
-function throttle<T extends (...args: any[]) => any>(fn: T, wait: number): T {
-  let lastTime = 0;
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  return ((...args: Parameters<T>) => {
-    const now = Date.now();
-    const remaining = wait - (now - lastTime);
-    if (remaining <= 0) {
-      if (timer) {
-        clearTimeout(timer);
-        timer = undefined;
-      }
-      lastTime = now;
-      return Promise.resolve(fn(...args));
-    }
-    return new Promise<ReturnType<T>>((resolve) => {
-      if (!timer) {
-        timer = setTimeout(() => {
-          lastTime = Date.now();
-          timer = undefined;
-          resolve(fn(...args));
-        }, remaining);
-      }
-    });
-  }) as T;
-}
-
 function isAbortError(error: unknown): boolean {
   return typeof error === 'object' && error !== null && 'name' in error && error.name === 'AbortError';
 }
@@ -118,6 +70,11 @@ export interface UseFetchOptions<TData, TParams extends any[]> {
    * 内部不关心响应结构，只负责管理 loading / data / error。
    */
   fetchFn: (...args: TParams) => Promise<TData>;
+
+  /**
+   * 可选的带取消信号请求函数。提供后，取消会同时中止宿主请求；未提供时仍会丢弃迟到结果。
+   */
+  fetchFnWithSignal?: (...args: [...TParams, signal: AbortSignal]) => Promise<TData>;
 
   /**
    * 默认参数。immediate=true 时首次调用使用。
@@ -270,8 +227,8 @@ export interface UseFetchReturn<TData, TParams extends any[]> {
   reset: () => void;
 
   /**
-   * 取消当前未完成请求（通过 AbortController.abort）。
-   * 不会重置 data/loading，仅中断请求。
+   * 取消当前请求并丢弃迟到结果；若宿主提供 fetchFnWithSignal，同时中止网络请求。
+   * 不会清空已有 data，但会释放 loading。
    */
   cancel: () => void;
 
@@ -300,6 +257,7 @@ export function useFetch<TData, TParams extends any[] = any[]>(
 ): UseFetchReturn<TData, TParams> {
   const {
     fetchFn,
+    fetchFnWithSignal,
     defaultParams,
     immediate = false,
     abortPrevious = true,
@@ -325,28 +283,48 @@ export function useFetch<TData, TParams extends any[] = any[]>(
   // ===== 内部变量 =====
   // 当前请求的 AbortController，用于取消未完成请求
   let currentController: AbortController | undefined;
+  const activeControllers = new Set<AbortController>();
   // 请求序号，用于判断请求是否过期（旧请求完成后不覆盖新请求结果）
   let requestSeq = 0;
   // 轮询定时器
   let pollingTimer: ReturnType<typeof setTimeout> | undefined;
   // 页面可见性监听器引用
   let visibilityHandler: (() => void) | undefined;
+  // 组件卸载后不再启动新的请求或写入状态
+  let disposed = false;
+  // 防抖/节流调度句柄及其等待者，取消时必须全部结束
+  let scheduleTimer: ReturnType<typeof setTimeout> | undefined;
+  let scheduledArgs: TParams | undefined;
+  let scheduledResolvers: Array<(value: TData | undefined) => void> = [];
+  let lastThrottleAt = 0;
+  let retryTimer: ReturnType<typeof setTimeout> | undefined;
+  let retryTimerResolve: (() => void) | undefined;
+
+  function clearRetryTimer(): void {
+    if (retryTimer) clearTimeout(retryTimer);
+    retryTimer = undefined;
+    const resolve = retryTimerResolve;
+    retryTimerResolve = undefined;
+    resolve?.();
+  }
 
   /**
    * 执行一次请求（含重试逻辑）
    */
   function executeOnce(p: TParams, seq: number): Promise<TData | undefined> {
     const controller = new AbortController();
-    if (abortPrevious && currentController) {
-      currentController.abort();
+    if (abortPrevious) {
+      activeControllers.forEach((activeController) => activeController.abort());
+      activeControllers.clear();
     }
     currentController = controller;
+    activeControllers.add(controller);
 
     loading.value = true;
     error.value = undefined;
 
     return Promise.resolve()
-      .then(() => fetchFn(...p))
+      .then(() => (fetchFnWithSignal ? fetchFnWithSignal(...p, controller.signal) : fetchFn(...p)))
       .then((result) => {
         // 请求已过期（被新请求取消），丢弃结果
         if (seq !== requestSeq) return undefined;
@@ -369,6 +347,8 @@ export function useFetch<TData, TParams extends any[] = any[]>(
         return undefined;
       })
       .finally(() => {
+        activeControllers.delete(controller);
+        if (currentController === controller) currentController = undefined;
         if (seq === requestSeq) {
           loading.value = false;
           onFinally?.(p);
@@ -380,6 +360,8 @@ export function useFetch<TData, TParams extends any[] = any[]>(
    * 带重试的请求执行
    */
   function executeWithRetry(p: TParams): Promise<TData | undefined> {
+    if (disposed) return Promise.resolve(undefined);
+    clearRetryTimer();
     const seq = ++requestSeq;
 
     function executeAttempt(attempt: number): Promise<TData | undefined> {
@@ -391,7 +373,12 @@ export function useFetch<TData, TParams extends any[] = any[]>(
         }
 
         return new Promise<void>((resolve) => {
-          setTimeout(resolve, retryInterval);
+          retryTimerResolve = resolve;
+          retryTimer = setTimeout(() => {
+            retryTimer = undefined;
+            retryTimerResolve = undefined;
+            resolve();
+          }, retryInterval);
         }).then(() => {
           if (seq !== requestSeq) return undefined;
           return executeAttempt(attempt + 1);
@@ -402,14 +389,44 @@ export function useFetch<TData, TParams extends any[] = any[]>(
     return executeAttempt(0);
   }
 
-  /**
-   * fetch 函数（可能被防抖/节流包装）
-   */
-  let rawFetch = executeWithRetry;
-  if (debounceInterval > 0) {
-    rawFetch = debounce(executeWithRetry, debounceInterval) as typeof executeWithRetry;
-  } else if (throttleInterval > 0) {
-    rawFetch = throttle(executeWithRetry, throttleInterval) as typeof executeWithRetry;
+  function settleScheduled(value: TData | undefined): void {
+    const resolvers = scheduledResolvers;
+    scheduledResolvers = [];
+    scheduledArgs = undefined;
+    resolvers.forEach((resolve) => resolve(value));
+  }
+
+  /** 防抖/节流调度器：被覆盖或取消的调用也必须结束 Promise。 */
+  function scheduleFetch(args: TParams): Promise<TData | undefined> {
+    if (debounceInterval <= 0 && throttleInterval <= 0) return executeWithRetry(args);
+
+    const now = Date.now();
+    const elapsed = now - lastThrottleAt;
+    const wait = debounceInterval > 0 ? debounceInterval : Math.max(0, throttleInterval - elapsed);
+    if (throttleInterval > 0 && wait === 0) {
+      lastThrottleAt = now;
+      return executeWithRetry(args);
+    }
+
+    if (scheduleTimer) clearTimeout(scheduleTimer);
+    scheduledArgs = args;
+    const promise = new Promise<TData | undefined>((resolve) => {
+      scheduledResolvers.push(resolve);
+    });
+    scheduleTimer = setTimeout(() => {
+      scheduleTimer = undefined;
+      const nextArgs = scheduledArgs;
+      const resolvers = scheduledResolvers;
+      scheduledArgs = undefined;
+      scheduledResolvers = [];
+      if (!nextArgs || disposed) {
+        resolvers.forEach((resolve) => resolve(undefined));
+        return;
+      }
+      if (throttleInterval > 0) lastThrottleAt = Date.now();
+      executeWithRetry(nextArgs).then((result) => resolvers.forEach((resolve) => resolve(result)));
+    }, wait);
+    return promise;
   }
 
   /**
@@ -417,7 +434,7 @@ export function useFetch<TData, TParams extends any[] = any[]>(
    */
   function fetch(...args: TParams): Promise<TData | undefined> {
     params.value = args;
-    return rawFetch(args);
+    return scheduleFetch(args);
   }
 
   /**
@@ -447,10 +464,17 @@ export function useFetch<TData, TParams extends any[] = any[]>(
    * 取消当前请求
    */
   function cancel(): void {
-    if (currentController) {
-      currentController.abort();
-      currentController = undefined;
+    requestSeq += 1;
+    clearRetryTimer();
+    if (scheduleTimer) {
+      clearTimeout(scheduleTimer);
+      scheduleTimer = undefined;
     }
+    settleScheduled(undefined);
+    activeControllers.forEach((controller) => controller.abort());
+    activeControllers.clear();
+    currentController = undefined;
+    loading.value = false;
     stopPolling();
   }
 
@@ -534,6 +558,7 @@ export function useFetch<TData, TParams extends any[] = any[]>(
 
   // 组件卸载时清理
   onUnmounted(() => {
+    disposed = true;
     cancel();
   });
 

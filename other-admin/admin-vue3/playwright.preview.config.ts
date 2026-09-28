@@ -6,7 +6,7 @@ export default defineConfig({
   ...baseConfig,
   timeout: 240_000,
   testIgnore: [],
-  testMatch: '**/preview.spec.ts',
+  testMatch: ['**/preview.spec.ts', '**/col-form-search-race.spec.ts'],
   use: {
     ...baseConfig.use,
     baseURL: 'http://127.0.0.1:30847',

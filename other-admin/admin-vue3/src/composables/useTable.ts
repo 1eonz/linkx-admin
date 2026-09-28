@@ -53,7 +53,7 @@ export interface UseTableOptions<TItem, TQuery extends Record<string, any> = Rec
    * 接收合并后的参数（query + 分页字段），返回后端响应。
    * 内部用 defaultTableFormatter 提取 records 和 total。
    */
-  fetchApi: (params: TQuery & PaginationParams) => Promise<any>;
+  fetchApi: (params: TQuery & PaginationParams, signal?: AbortSignal) => Promise<any>;
 
   /**
    * 查询参数对象（必填，建议传入 reactive 对象）。
@@ -272,16 +272,18 @@ export function useTable<TItem, TQuery extends Record<string, any> = Record<stri
   /**
    * 包装 fetchApi，处理响应数据提取和转换
    */
-  function wrappedFetch(params: TQuery & PaginationParams): Promise<TItem[]> {
-    return fetchApi(params).then((res) => {
+  interface TableFetchResult {
+    list: TItem[];
+    total: number;
+  }
+
+  function wrappedFetch(params: TQuery & PaginationParams, signal?: AbortSignal): Promise<TableFetchResult> {
+    return fetchApi(params, signal).then((res) => {
       const records = formatResult(res);
       const totalNum = formatTotal(res);
 
       const list = transformItem ? records.map(transformItem) : records;
-      data.value = list;
-      total.value = totalNum;
-      onSuccess?.(list, totalNum);
-      return list;
+      return { list, total: totalNum };
     });
   }
 
@@ -291,13 +293,19 @@ export function useTable<TItem, TQuery extends Record<string, any> = Record<stri
     fetch,
     refresh: fetchRefresh,
     cancel: fetchCancel,
-  } = useFetch<TItem[], [TQuery & PaginationParams]>({
-    fetchFn: wrappedFetch,
+  } = useFetch<TableFetchResult, [TQuery & PaginationParams]>({
+    fetchFn: (params) => wrappedFetch(params),
+    fetchFnWithSignal: (params, signal) => wrappedFetch(params, signal),
     immediate: false, // 由 useTable 自行控制 immediate
     abortPrevious,
     retryCount,
     onError: (err) => {
       onError?.(err);
+    },
+    onSuccess: (result) => {
+      data.value = result.list;
+      total.value = result.total;
+      onSuccess?.(result.list, result.total);
     },
   });
 

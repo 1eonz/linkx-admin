@@ -26,6 +26,10 @@ const searchParams = reactive<Record<string, unknown>>({
 
 // 组件 ref
 const tableRef = ref<InstanceType<typeof ProTable>>();
+const pendingRoleIds = ref<string[]>([]);
+const deletingRoleIds = ref<string[]>([]);
+const updatingRoleStatusIds = ref<string[]>([]);
+const submittingRole = ref(false);
 
 // 弹窗
 const dialogVisible = ref(false);
@@ -96,6 +100,8 @@ function handleUpdate(row: RoleItem): void {
 
 // 删除
 function handleDelete(row: RoleItem): void {
+  if (pendingRoleIds.value.includes(row.id)) return;
+  pendingRoleIds.value = [...pendingRoleIds.value, row.id];
   const confirmMsg = `确认删除${row.name}`;
   ElMessageBox.confirm(confirmMsg, '提示', {
     confirmButtonText: '确定',
@@ -103,22 +109,29 @@ function handleDelete(row: RoleItem): void {
     type: 'warning',
   })
     .then(() => {
-      deleteRole([row.id])
-        .then((result) => {
-          if (result.code === 0) {
-            ElMessage.success('删除成功');
-          } else {
-            ElMessage.error(result.msg || '删除失败');
-          }
-          tableRef.value?.refresh();
-        })
-        .catch(() => {});
+      deletingRoleIds.value = [...deletingRoleIds.value, row.id];
+      return deleteRole([row.id]);
     })
-    .catch(() => {});
+    .then((result) => {
+      if (result.code === 0) {
+        ElMessage.success('删除成功');
+      } else {
+        ElMessage.error(result.msg || '删除失败');
+      }
+      tableRef.value?.refresh();
+    })
+    .catch(() => {})
+    .finally(() => {
+      pendingRoleIds.value = pendingRoleIds.value.filter((id) => id !== row.id);
+      deletingRoleIds.value = deletingRoleIds.value.filter((id) => id !== row.id);
+    });
 }
 
 // 禁用/启用
 function handleStatus(row: RoleItem, status: number): void {
+  if (pendingRoleIds.value.includes(row.id)) return;
+  pendingRoleIds.value = [...pendingRoleIds.value, row.id];
+  updatingRoleStatusIds.value = [...updatingRoleStatusIds.value, row.id];
   updateRole({ id: row.id, status })
     .then((result) => {
       if (result.code === 0) {
@@ -127,13 +140,19 @@ function handleStatus(row: RoleItem, status: number): void {
         ElMessage.error(result.msg || '操作失败');
       }
     })
-    .catch(() => {});
+    .catch(() => {})
+    .finally(() => {
+      pendingRoleIds.value = pendingRoleIds.value.filter((id) => id !== row.id);
+      updatingRoleStatusIds.value = updatingRoleStatusIds.value.filter((id) => id !== row.id);
+    });
 }
 
 // 提交（新增/编辑）
 // payload 结构（由 EditRole 触发）：
 //   { name, iccPrivJson, adminPrivJson, cappPrivJson, orgPrivList, id? }
 function handleSubmit(payload: Record<string, unknown>): void {
+  if (submittingRole.value) return;
+  submittingRole.value = true;
   const isEdit = Boolean(payload.id);
   const fn = isEdit
     ? updateRole
@@ -148,7 +167,14 @@ function handleSubmit(payload: Record<string, unknown>): void {
         ElMessage.error(result.msg || '操作失败');
       }
     })
-    .catch(() => {});
+    .catch(() => {})
+    .finally(() => {
+      submittingRole.value = false;
+    });
+}
+
+function isRolePending(row: RoleItem): boolean {
+  return pendingRoleIds.value.includes(row.id);
 }
 
 // id !== 2 且 id !== 6 时显示删除/禁用按钮
@@ -189,7 +215,13 @@ function getRole(scope: any): RoleItem {
         </template>
 
         <template #actions="scope">
-          <el-button v-if="canUpdate" type="primary" link :icon="Edit" @click="handleUpdate(getRole(scope))"
+          <el-button
+            v-if="canUpdate"
+            type="primary"
+            link
+            :icon="Edit"
+            :disabled="isRolePending(getRole(scope))"
+            @click="handleUpdate(getRole(scope))"
             >编辑</el-button
           >
           <el-button
@@ -197,6 +229,9 @@ function getRole(scope: any): RoleItem {
             type="danger"
             link
             :icon="Delete"
+            :disabled="isRolePending(getRole(scope))"
+            :loading="deletingRoleIds.includes(getRole(scope).id)"
+            :aria-busy="deletingRoleIds.includes(getRole(scope).id) ? 'true' : undefined"
             @click="handleDelete(getRole(scope))"
           >
             删除
@@ -206,6 +241,9 @@ function getRole(scope: any): RoleItem {
             type="danger"
             link
             :icon="Lock"
+            :disabled="isRolePending(getRole(scope))"
+            :loading="updatingRoleStatusIds.includes(getRole(scope).id)"
+            :aria-busy="updatingRoleStatusIds.includes(getRole(scope).id) ? 'true' : undefined"
             @click="handleStatus(getRole(scope), 1)"
           >
             禁用
@@ -215,6 +253,9 @@ function getRole(scope: any): RoleItem {
             type="warning"
             link
             :icon="Unlock"
+            :disabled="isRolePending(getRole(scope))"
+            :loading="updatingRoleStatusIds.includes(getRole(scope).id)"
+            :aria-busy="updatingRoleStatusIds.includes(getRole(scope).id) ? 'true' : undefined"
             @click="handleStatus(getRole(scope), 0)"
           >
             启用
@@ -223,7 +264,13 @@ function getRole(scope: any): RoleItem {
       </ProTable>
     </el-card>
 
-    <EditRole v-model:visible="dialogVisible" :title="dialogTitle" :form="editForm" @submit="handleSubmit" />
+    <EditRole
+      v-model:visible="dialogVisible"
+      :title="dialogTitle"
+      :form="editForm"
+      :submitting="submittingRole"
+      @submit="handleSubmit"
+    />
   </div>
 </template>
 

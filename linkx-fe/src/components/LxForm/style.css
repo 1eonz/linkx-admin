@@ -58,21 +58,38 @@
  * 覆盖 EP 全系输入容器：input / select / textarea / date-picker / cascader
  */
 .lx-form .el-form-item.is-error .el-input__wrapper,
-.lx-form .el-form-item.is-error .el-select__wrapper,
 .lx-form .el-form-item.is-error .el-textarea__inner,
 .lx-form-item.is-error .el-input__wrapper,
-.lx-form-item.is-error .el-select__wrapper,
 .lx-form-item.is-error .el-textarea__inner {
   box-shadow: 0 0 0 1px var(--lx-color-error) inset;
   background-color: var(--lx-color-error-light);
 }
 
-/* 错误态聚焦：保持红环（不被主色 focus 环覆盖，stitch _26 focus:ring-[#f56c6c]） */
+.lx-form .el-form-item.is-error .el-select__wrapper,
+.lx-form-item.is-error .el-select__wrapper {
+  background-color: var(--lx-color-error-light);
+  border-color: var(--lx-color-error);
+  box-shadow: none;
+}
+
+/* 输入和文本域保留焦点光晕；下拉仅切换自身边框颜色。 */
 .lx-form .el-form-item.is-error .el-input__wrapper.is-focus,
-.lx-form .el-form-item.is-error .el-select__wrapper.is-focused,
+.lx-form .el-form-item.is-error .el-textarea__inner:focus,
 .lx-form-item.is-error .el-input__wrapper.is-focus,
+.lx-form-item.is-error .el-textarea__inner:focus {
+  outline: none;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+.lx-form .el-form-item.is-error .el-select__wrapper.is-focused,
 .lx-form-item.is-error .el-select__wrapper.is-focused {
-  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
+  border-color: var(--lx-color-error-strong);
+  box-shadow: none;
+  outline: none;
+  outline-offset: 0;
 }
 
 /* ========== 双列/多列网格（对齐设计稿 672px 弹窗 grid-cols-2） ========== */

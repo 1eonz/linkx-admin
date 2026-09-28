@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { FormInstance, FormItemRule, UploadFile } from 'element-plus';
 import { ElMessage } from 'element-plus';
-import { ref, reactive, computed, nextTick } from 'vue';
+import { ref, reactive, computed, nextTick, onBeforeUnmount } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import {
@@ -109,7 +109,11 @@ const userTotal = ref(0);
 const userPageNum = ref(0);
 const userPageSize = 100;
 const userLoading = ref(false);
+const userSearchKeyword = ref('');
 const initUserIds = ref<string[]>([]);
+let userRequestSequence = 0;
+let userRequestController: AbortController | undefined;
+let formOpenSequence = 0;
 
 // 警单类型
 const typeList = ref<PoliceTicketTypeItem[]>([]);
@@ -181,6 +185,7 @@ function uploadFile(): Promise<boolean> {
 
 /** 组织树选中：设置 orgId/orgName/orgCode，重置关联人员 */
 function organizationCurrentChange(data: { id?: string; name?: string; code?: string }): void {
+  invalidateUserRequest();
   formData.orgId = data.id ?? '';
   formData.orgName = data.name ?? '';
   formData.orgCode = data.code ?? '';
@@ -188,70 +193,96 @@ function organizationCurrentChange(data: { id?: string; name?: string; code?: st
   userList.value = [];
   userPageNum.value = 0;
   userTotal.value = 0;
+  userSearchKeyword.value = '';
   formData.relatedUserIds = [];
   formData.relatedUserNames = [];
 }
 
 function cleanOrganizationInput(): void {
+  invalidateUserRequest();
   formData.orgId = '';
   formData.orgName = '';
   formData.orgCode = '';
   userList.value = [];
   userPageNum.value = 0;
   userTotal.value = 0;
+  userSearchKeyword.value = '';
   formData.relatedUserIds = [];
   formData.relatedUserNames = [];
 }
 
+/** 使当前人员查询失效，并取消仍在进行的请求。 */
+function invalidateUserRequest(): void {
+  userRequestSequence += 1;
+  userRequestController?.abort();
+  userRequestController = undefined;
+  userLoading.value = false;
+}
+
 /** 分页查询关联人员 */
-function getUserListByPage(keywords?: string): Promise<void> {
-  const orgCode = formData.orgCode as string;
-  const orgId = formData.orgId as string;
+function getUserListByPage(): Promise<void> {
+  const orgCode = formData.orgCode;
+  const orgId = formData.orgId;
   if (!orgCode) return Promise.resolve();
+  if (userLoading.value) return Promise.resolve();
+
+  const requestSequence = userRequestSequence;
+  const requestController = new AbortController();
+  const pageNum = userPageNum.value + 1;
+  userRequestController = requestController;
   userLoading.value = true;
-  userPageNum.value = userPageNum.value + 1;
-  const params: Record<string, unknown> = {
+  const params = {
     privString: orgId,
     code: orgCode,
     includeChildren: 1,
-    pageNum: userPageNum.value,
+    pageNum,
     pageSize: userPageSize,
-    name: keywords,
+    name: userSearchKeyword.value || undefined,
+    ...(globalData.value?.value === 'true' ? { type: formData.type } : {}),
   };
-  if (globalData.value?.value === 'true') {
-    params.type = formData.type;
-  }
-  return queryUserByPage(params as never)
+  return queryUserByPage(params, { abort: requestController.signal })
     .then((res) => {
-      const data = (res as unknown as { data?: { records?: QueryUserByPageItem[]; total?: number } })?.data;
-      const records = data?.records ?? [];
+      if (requestSequence !== userRequestSequence) return;
+      if (res.code !== 0 || !res.data) {
+        ElMessage.error(res.msg || '获取关联人员失败');
+        return;
+      }
+      const { records, total } = res.data;
       records.forEach((i) => {
         userMap[i.id] = i.name;
       });
-      userList.value = [...userList.value, ...records];
-      userTotal.value = data?.total ?? 0;
+      userList.value = pageNum === 1 ? records : [...userList.value, ...records];
+      userPageNum.value = pageNum;
+      userTotal.value = total;
     })
     .catch(() => {
-      ElMessage.error('获取关联人员失败');
+      if (requestSequence === userRequestSequence && !requestController.signal.aborted) {
+        ElMessage.error('获取关联人员失败');
+      }
     })
     .finally(() => {
-      userLoading.value = false;
+      if (requestSequence === userRequestSequence && userRequestController === requestController) {
+        userRequestController = undefined;
+        userLoading.value = false;
+      }
     });
 }
 
 /** 触底加载 */
 function handleScroll(): void {
-  if (userList.value.length < userTotal.value) {
+  if (!userLoading.value && userList.value.length < userTotal.value) {
     getUserListByPage();
   }
 }
 
 /** 远程搜索：重置 pageNum=0 + 空列表 */
 function remoteMethod(keywords: string): void {
-  userLoading.value = true;
+  invalidateUserRequest();
+  userSearchKeyword.value = keywords;
   userList.value = [];
   userPageNum.value = 0;
-  getUserListByPage(keywords);
+  userTotal.value = 0;
+  getUserListByPage();
 }
 
 /** 关联人员禁用规则：已绑定其他协同岗的人员禁用，但当前协同岗已绑定的允许 */
@@ -261,6 +292,11 @@ function getDisable(data: QueryUserByPageItem): boolean {
     return false;
   }
   return isBinding === 1;
+}
+
+/** 返回人员不可选的原因，避免只用置灰状态传达业务规则。 */
+function getDisabledReason(data: QueryUserByPageItem): string {
+  return getDisable(data) ? '已关联至其他协同岗' : '';
 }
 
 /** 警单类型远程搜索：本地过滤 */
@@ -294,10 +330,12 @@ function getPolicetickettypesFunc(): Promise<void> {
 
 // 重置表单
 function resetForm(): void {
+  invalidateUserRequest();
   Object.assign(formData, defaultForm());
   userList.value = [];
   userPageNum.value = 0;
   userTotal.value = 0;
+  userSearchKeyword.value = '';
   Object.keys(userMap).forEach((k) => delete userMap[k]);
   initUserIds.value = [];
   imageUrl.value = '';
@@ -308,16 +346,19 @@ function resetForm(): void {
 
 /** 打开表单弹窗 */
 function open(type: 'create' | 'update', row?: CollaborationItem): Promise<void> {
+  const requestSequence = ++formOpenSequence;
   dialogTitle.value = type === 'create' ? '新增' : '修改';
   formType.value = type;
   formLoading.value = true;
   resetForm();
+  dialogVisible.value = true;
   const loadForm = getPolicetickettypesFunc().then(() => {
-    if (!row) return;
+    if (requestSequence !== formOpenSequence || !row) return;
     // 修改：把整个 row 赋给 formData
     Object.assign(formData, JSON.parse(JSON.stringify(row)));
     const { relatedUserNames, relatedUserIds, iconUrl } = row;
     return getUserListByPage().then(() => {
+      if (requestSequence !== formOpenSequence) return;
       // 处理 relatedUserIds 是数组或字符串的情况
       if (Array.isArray(relatedUserIds)) {
         formData.relatedUserNames = relatedUserNames ? (relatedUserNames as string).split(',') : [];
@@ -340,14 +381,15 @@ function open(type: 'create' | 'update', row?: CollaborationItem): Promise<void>
   return loadForm
     .then(() => nextTick())
     .then(() => {
-      formLoading.value = false;
-      dialogVisible.value = true;
+      if (requestSequence !== formOpenSequence) return;
       formRef.value?.clearValidate();
     })
     .catch(() => {
-      formLoading.value = false;
-      dialogVisible.value = true;
+      if (requestSequence !== formOpenSequence) return;
       ElMessage.error('加载协同岗信息失败');
+    })
+    .finally(() => {
+      if (requestSequence === formOpenSequence) formLoading.value = false;
     });
 }
 
@@ -391,8 +433,13 @@ function handleSubmit(): Promise<void> {
 
 // 关闭弹窗
 function closeDialog(): void {
+  formOpenSequence += 1;
+  invalidateUserRequest();
+  formLoading.value = false;
   dialogVisible.value = false;
 }
+
+onBeforeUnmount(invalidateUserRequest);
 
 defineExpose({ open });
 </script>
@@ -437,16 +484,17 @@ defineExpose({ open });
       <el-form-item label="图标">
         <el-upload :show-file-list="false" :auto-upload="false" :on-change="handleChange" accept=".jpg,.png,.gif">
           <img v-if="imageUrl" :src="imageUrl" class="avatar" alt="icon" />
-          <AuthImg v-else-if="showAuthImg" :auth-src="imageUrl" class="avatar" />
+          <AuthImg v-else-if="showAuthImg" :auth-src="imageUrl" alt="协同岗图标预览" class="avatar" />
           <el-button v-else type="primary">点击上传</el-button>
         </el-upload>
+        <div class="upload-hint">支持 JPG、PNG、GIF，文件需小于 1 MB</div>
       </el-form-item>
 
       <!-- 归属组织 -->
       <el-form-item label="归属组织" prop="orgName">
         <OrgTreeSelect
           v-model="formData.orgName as string"
-          :is-init-value="false"
+          :is-init-value="formType === 'update'"
           placeholder="请选择归属组织"
           width="100%"
           @clear-val="cleanOrganizationInput"
@@ -466,6 +514,7 @@ defineExpose({ open });
           placeholder="请选择关联人员"
           :remote-method="remoteMethod"
           :loading="userLoading"
+          :aria-busy="userLoading"
           style="width: 100%"
         >
           <el-option
@@ -474,7 +523,14 @@ defineExpose({ open });
             :label="item.name"
             :value="item.id"
             :disabled="getDisable(item)"
-          />
+          >
+            <span class="user-option">
+              <span>{{ item.name }}</span>
+              <span v-if="getDisabledReason(item)" class="user-option__reason">
+                {{ getDisabledReason(item) }}
+              </span>
+            </span>
+          </el-option>
         </el-select>
       </el-form-item>
 
@@ -512,5 +568,25 @@ defineExpose({ open });
   border-radius: @radius-sm;
   object-fit: cover;
   display: block;
+}
+
+.upload-hint {
+  margin-left: 12px;
+  color: var(--el-text-color-secondary);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.user-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.user-option__reason {
+  color: var(--el-text-color-secondary);
+  font-size: 12px;
 }
 </style>

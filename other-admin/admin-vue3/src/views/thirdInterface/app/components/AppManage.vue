@@ -251,7 +251,7 @@ function getRow(scope: any): AppItem {
     >
       <!-- 应用图标列：AuthImg 鉴权渲染 -->
       <template #icon="scope">
-        <AuthImg v-if="getRow(scope).icon" :auth-src="getRow(scope).icon as string" class="app-icon" />
+        <AuthImg v-if="getRow(scope).icon" :auth-src="getRow(scope).icon as string" alt="应用图标" class="app-icon" />
         <span v-else class="app-icon-empty">-</span>
       </template>
 

@@ -17,6 +17,7 @@ const { t } = useI18n({ useScope: 'global' });
 const formRef = ref<FormInstance>();
 const dialogVisible = ref(false);
 const isAdd = ref(true);
+const submitting = ref(false);
 
 // thirdAppForm 默认值
 const defaultForm = (): Required<ThirdAppForm> => ({
@@ -106,8 +107,16 @@ function init(row?: ThirdAppForm): void {
 
 // handleConfirm —— validate 通过后调用 create/update API
 async function handleConfirm(): Promise<void> {
-  const valid = await formRef.value?.validate().catch(() => false);
-  if (!valid) return;
+  if (submitting.value) return;
+  submitting.value = true;
+  const valid = await formRef.value
+    ?.validate()
+    .then(() => true)
+    .catch(() => false);
+  if (!valid) {
+    submitting.value = false;
+    return;
+  }
   // 用 ThirdAppForm（id 可选）类型，便于新增时 delete id
   const param: ThirdAppForm = JSON.parse(JSON.stringify(thirdAppForm));
   // 新增时删除 id（避免后端报错）
@@ -125,7 +134,10 @@ async function handleConfirm(): Promise<void> {
         ElMessage.error(result.msg || '');
       }
     })
-    .catch(() => {});
+    .catch(() => {})
+    .finally(() => {
+      submitting.value = false;
+    });
 }
 
 // closeDialog → resetTemp → dialogVisible = false
@@ -147,6 +159,8 @@ defineExpose({ init });
     v-model="dialogVisible"
     :title="dialogTitle"
     :close-on-click-modal="false"
+    :close-on-press-escape="!submitting"
+    :show-close="!submitting"
     :destroy-on-close="true"
     append-to-body
     align-center
@@ -214,8 +228,16 @@ defineExpose({ init });
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="closeDialog">{{ t('cancel') }}</el-button>
-      <el-button type="primary" @click="handleConfirm">{{ t('determine') }}</el-button>
+      <el-button :disabled="submitting" @click="closeDialog">{{ t('cancel') }}</el-button>
+      <el-button
+        type="primary"
+        :loading="submitting"
+        :disabled="submitting"
+        :aria-busy="submitting ? 'true' : undefined"
+        @click="handleConfirm"
+      >
+        {{ t('determine') }}
+      </el-button>
     </template>
   </el-dialog>
 </template>

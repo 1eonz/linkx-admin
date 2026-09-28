@@ -40,6 +40,23 @@ describe('权限展示消费', () => {
     expect(wrapper.text()).not.toContain('删除');
   });
 
+  it('ActionButtons 将行级 loading 状态传递给按钮', () => {
+    const wrapper = mount(ActionButtons, {
+      props: { buttons: [{ label: '删除', disabled: true, loading: true }] },
+      global: {
+        stubs: {
+          'el-button': {
+            template: '<button :disabled="$attrs.disabled" :data-loading="$attrs.loading"><slot /></button>',
+          },
+          'el-icon': { template: '<span><slot /></span>' },
+        },
+      },
+    });
+
+    expect(wrapper.get('button').attributes('disabled')).toBeDefined();
+    expect(wrapper.get('button').attributes('data-loading')).toBe('true');
+  });
+
   it('v-auth.disable 在权限变化后恢复可操作状态', () => {
     const el = document.createElement('button');
     el.textContent = '同步';

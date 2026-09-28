@@ -332,7 +332,12 @@ onMounted(() => {
       @response="handleResponse"
     >
       <template #avatarUrl="scope">
-        <AuthImg v-if="getRow(scope).avatarUrl" :auth-src="getRow(scope).avatarUrl" class="row-avatar" />
+        <AuthImg
+          v-if="getRow(scope).avatarUrl"
+          :auth-src="getRow(scope).avatarUrl"
+          :alt="`${getRow(scope).name || '智能体'}头像`"
+          class="row-avatar"
+        />
         <span v-else>-</span>
       </template>
       <template #priority="scope">

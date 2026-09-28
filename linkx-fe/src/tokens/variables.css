@@ -26,7 +26,7 @@
   --lx-color-warning-strong: #cf8a1e; /* 细小文字场景（对比度补偿，DESIGN-SPEC §3.2） */
   --lx-color-warning-light: #fdf6ec;
   --lx-color-error: #f56c6c;
-  --lx-color-error-strong: #c45656; /* 危险确认标题、横幅深红（对比度补偿） */
+  --lx-color-error-strong: #b54747; /* 删除等小字号危险文字，白底对比度不低于 4.5:1 */
   --lx-color-danger-hover: #e45e5e;
   --lx-color-on-danger: #1d2129;
   --lx-color-error-light: #fef0f0;
@@ -108,6 +108,11 @@
   /* ========== 动效（三动画制，DESIGN-SPEC §5） ========== */
   --lx-transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   --lx-focus-ring: 0 0 0 2px var(--lx-color-primary-light);
+  --lx-control-focus-halo-color: color-mix(
+    in srgb,
+    var(--el-color-primary, var(--lx-color-primary)) 15%,
+    transparent
+  );
   --lx-glow-active: 0 0 8px #38bdf8; /* 唯一允许的发光：侧边栏激活竖条 */
 
   /* ========== 字体 ========== */

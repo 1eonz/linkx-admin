@@ -371,7 +371,7 @@ defineExpose({ init });
         <el-col :span="12">
           <el-form-item label="头像">
             <div class="avatar-wrap">
-              <AuthImg v-if="form.avatarUrl" :auth-src="form.avatarUrl" class="avatar-img" />
+              <AuthImg v-if="form.avatarUrl" :auth-src="form.avatarUrl" alt="智能体头像预览" class="avatar-img" />
               <div v-else class="avatar-placeholder">无</div>
               <el-button :icon="Plus" :loading="avatarUploading" @click="triggerAvatarUpload"> 上传 </el-button>
             </div>

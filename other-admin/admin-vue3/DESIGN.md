@@ -372,11 +372,11 @@
 
 **路径**：`src/components/AuthImg/index.vue`
 
-**功能**：XHR 拉取需要鉴权的图片资源（避免 URL 暴露 Token）→ Blob → ObjectURL 渲染
+**功能**：通过可取消请求拉取鉴权图片（Token 仅放在请求头）→ Blob → ObjectURL 渲染；加载中/失败显示尺寸不变的图标占位
 
-**Props**：`authSrc: string`（相对路径，如 `/static/xxx.png`，自动拼接 `/api` 网关前缀）
+**Props**：`authSrc: string`（相对路径，如 `/static/xxx.png`，自动拼接 `/api` 网关前缀）、`alt?: string`（默认空；提供后错误占位会以“图片加载中/失败”播报状态）
 
-**资源管理**：`props.authSrc` 变化时自动重新加载；组件卸载时由浏览器回收 ObjectURL，旧 URL 在重载前主动释放
+**资源管理**：`props.authSrc` 变化时取消旧请求并重新加载；请求序号阻止不遵守取消信号的迟到响应覆盖新图；切换资源或卸载时释放 ObjectURL。请求失败或图片解码失败会显示占位。
 
 ### 8.7 PasswordInput（密码输入框）
 

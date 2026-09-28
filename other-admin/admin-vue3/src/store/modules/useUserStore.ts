@@ -21,6 +21,7 @@ import {
   setButtons,
   setIdCardNum,
   setIsAdmin,
+  setLicenseAuth,
   setToken,
   setUserId,
   setUserName,
@@ -159,53 +160,72 @@ export const useUserStore = defineStore('user', () => {
 
   function refreshLicenseAuthAction(): Promise<LicenseAuth> {
     const expectedEpoch = sessionEpoch.value;
-    const newAuth: LicenseAuth = {
-      groupCollaborationAuth: false,
-      taskCollaborationAuth: false,
-      businessCollaborationAuth: false,
-      AICollaborationAuth: false,
-      northboundDataInterface: false,
-      licenseState: 999,
-      expireDate: '',
-    };
+    let refreshedAuth: LicenseAuth | null = null;
 
     return getLicenseInfo()
       .then((res) => {
-        if (res.code === 0) {
-          const authData = res.data;
-          if ([1, 2, 4].includes(Number(authData.status))) {
-            if (authData.LINKXBS === '1' && authData.LINKXGCF === '0') {
-              newAuth.groupCollaborationAuth = true;
-            }
-            if (authData.LINKXBS === '1' && authData.LINKXTCF === '0') {
-              newAuth.taskCollaborationAuth = true;
-            }
-            if (authData.LINKXBS === '1' && authData.LINKXBCF === '0') {
-              newAuth.businessCollaborationAuth = true;
-            }
-            if (authData.LINKXBS === '1' && authData.LINKXACF === '0') {
-              newAuth.AICollaborationAuth = true;
-            }
-            if (authData.LINKXBS === '1' && authData.LINKXNDI === '0') {
-              newAuth.northboundDataInterface = true;
-            }
-          }
-          newAuth.licenseState = Number(authData.status);
-          newAuth.expireDate = authData.expireDate ?? '';
-        } else {
+        if (expectedEpoch !== sessionEpoch.value) return;
+        if (!res || res.code !== 0) {
           console.error('LicenseInfo 获取失败');
+          return;
         }
+
+        const authData = res.data;
+        const rawStatus: unknown = authData?.status;
+        const licenseState =
+          typeof rawStatus === 'number'
+            ? rawStatus
+            : typeof rawStatus === 'string' && rawStatus.trim()
+              ? Number(rawStatus)
+              : Number.NaN;
+        if (
+          !authData ||
+          !Number.isFinite(licenseState) ||
+          (authData.expireDate != null && typeof authData.expireDate !== 'string')
+        ) {
+          console.error('LicenseInfo 获取失败：响应数据无效');
+          return;
+        }
+
+        const newAuth: LicenseAuth = {
+          groupCollaborationAuth: false,
+          taskCollaborationAuth: false,
+          businessCollaborationAuth: false,
+          AICollaborationAuth: false,
+          northboundDataInterface: false,
+          licenseState,
+          expireDate: authData.expireDate ?? '',
+        };
+        if ([1, 2, 4].includes(licenseState)) {
+          if (authData.LINKXBS === '1' && authData.LINKXGCF === '0') {
+            newAuth.groupCollaborationAuth = true;
+          }
+          if (authData.LINKXBS === '1' && authData.LINKXTCF === '0') {
+            newAuth.taskCollaborationAuth = true;
+          }
+          if (authData.LINKXBS === '1' && authData.LINKXBCF === '0') {
+            newAuth.businessCollaborationAuth = true;
+          }
+          if (authData.LINKXBS === '1' && authData.LINKXACF === '0') {
+            newAuth.AICollaborationAuth = true;
+          }
+          if (authData.LINKXBS === '1' && authData.LINKXNDI === '0') {
+            newAuth.northboundDataInterface = true;
+          }
+        }
+
+        setLicenseAuth(newAuth);
+        licenseAuth.value = newAuth;
+        refreshedAuth = newAuth;
       })
       .catch((error) => {
         console.error('LicenseInfo 获取失败', error);
       })
-      .then(() => import('@/utils/auth'))
-      .then(({ setLicenseAuth }) => {
-        if (expectedEpoch === sessionEpoch.value) {
-          setLicenseAuth(newAuth);
-          licenseAuth.value = newAuth;
-        }
-        return newAuth;
+      .finally(() => {
+        if (expectedEpoch !== sessionEpoch.value) refreshedAuth = null;
+      })
+      .then(() => {
+        return refreshedAuth ?? licenseAuth.value;
       });
   }
 

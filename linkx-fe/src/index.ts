@@ -2,7 +2,7 @@
  * lx-ui — LinkX 业务组件库入口
  * 铁律（DESIGN-SPEC §11）：禁止出现 axios / router / pinia / 业务 API
  */
-import type { App } from 'vue'
+import type { App, Component } from 'vue'
 // EP 变量桥接（先于组件加载，保证令牌生效）
 import './styles/element-theme.css'
 import LxIcon from './components/LxIcon/index.vue'
@@ -50,7 +50,7 @@ import LxSplitLayout from './components/LxSplitLayout/index.vue'
 import LxDutyCalendar from './components/LxDutyCalendar/index.vue'
 import LxDynamicForm from './components/LxDynamicForm/index.vue'
 
-const components = [
+const componentRegistry: Record<string, Component> = {
   LxIcon,
   LxStatusDot,
   LxSidebar,
@@ -90,7 +90,7 @@ const components = [
   LxSplitLayout,
   LxDutyCalendar,
   LxDynamicForm,
-]
+}
 
 export * from './components/LxSidebar/types'
 export * from './components/LxProTable/types'
@@ -259,7 +259,9 @@ export {
 
 export default {
   install(app: App) {
-    for (const c of components) app.component(c.name ?? '', c)
+    for (const [name, component] of Object.entries(componentRegistry)) {
+      app.component(name, component)
+    }
   },
 }
 

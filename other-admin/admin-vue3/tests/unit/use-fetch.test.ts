@@ -119,9 +119,103 @@ describe('useTable Promise 链请求包装', () => {
     expect(table.data.value).toEqual([{ id: 2, name: '本地新增' }]);
 
     await table.search();
-    expect(fetchApi).toHaveBeenCalledWith({ keyword: '', pageNum: 1, pageSize: 10 });
+    expect(fetchApi).toHaveBeenCalledWith({ keyword: '', pageNum: 1, pageSize: 10 }, expect.anything());
     expect(table.data.value).toEqual([{ id: 1, name: '服务端数据' }]);
     expect(table.total.value).toBe(1);
+    wrapper.unmount();
+  });
+
+  it('取消后迟到的成功结果不会回写，并释放 loading', async () => {
+    let resolveRequest!: (value: string) => void;
+    let receivedSignal!: AbortSignal;
+    const { state, wrapper } = mountUseFetch<string, [string]>({
+      fetchFn: () => Promise.resolve('unused'),
+      fetchFnWithSignal: (_key, signal) => {
+        receivedSignal = signal;
+        return new Promise<string>((resolve) => {
+          resolveRequest = resolve;
+        });
+      },
+    });
+
+    const request = state.fetch('slow');
+    await flushPromises();
+    expect(receivedSignal.aborted).toBe(false);
+    state.cancel();
+    expect(receivedSignal.aborted).toBe(true);
+    resolveRequest('迟到结果');
+
+    await expect(request).resolves.toBeUndefined();
+    expect(state.data.value).toBeUndefined();
+    expect(state.loading.value).toBe(false);
+    wrapper.unmount();
+  });
+
+  it('取消防抖调度时，所有等待中的 Promise 都会结束且不会发请求', async () => {
+    const fetchFn = vi.fn().mockResolvedValue('不应发出');
+    const { state, wrapper } = mountUseFetch({ fetchFn, debounceInterval: 20 });
+
+    const first = state.fetch('first');
+    const second = state.fetch('second');
+    state.cancel();
+
+    await expect(first).resolves.toBeUndefined();
+    await expect(second).resolves.toBeUndefined();
+    expect(fetchFn).not.toHaveBeenCalled();
+    wrapper.unmount();
+  });
+
+  it('取消会结束等待重试的请求，不等待重试间隔', async () => {
+    let rejectObserved!: () => void;
+    const failureObserved = new Promise<void>((resolve) => {
+      rejectObserved = resolve;
+    });
+    const fetchFn = vi.fn().mockRejectedValue(new Error('暂时不可用'));
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const { state, wrapper } = mountUseFetch({
+      fetchFn,
+      retryCount: 2,
+      retryInterval: 60_000,
+      onError: () => {
+        rejectObserved();
+        return false;
+      },
+    });
+
+    const request = state.fetch();
+    await failureObserved;
+    await flushPromises();
+    state.cancel();
+
+    await expect(request).resolves.toBeUndefined();
+    expect(fetchFn).toHaveBeenCalledOnce();
+    expect(state.loading.value).toBe(false);
+    consoleError.mockRestore();
+    wrapper.unmount();
+  });
+
+  it('abortPrevious=false 时 cancel 仍中止全部活动请求', async () => {
+    const signals: AbortSignal[] = [];
+    const resolvers: Array<(value: string) => void> = [];
+    const { state, wrapper } = mountUseFetch<string, [string]>({
+      fetchFn: () => Promise.resolve('unused'),
+      fetchFnWithSignal: (_key, signal) => {
+        signals.push(signal);
+        return new Promise<string>((resolve) => resolvers.push(resolve));
+      },
+      abortPrevious: false,
+    });
+
+    const first = state.fetch('first');
+    const second = state.fetch('second');
+    await flushPromises();
+    expect(signals).toHaveLength(2);
+    state.cancel();
+
+    expect(signals.every((signal) => signal.aborted)).toBe(true);
+    resolvers.forEach((resolve) => resolve('迟到结果'));
+    await expect(Promise.all([first, second])).resolves.toEqual([undefined, undefined]);
+    expect(state.data.value).toBeUndefined();
     wrapper.unmount();
   });
 });

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, reactive, ref } from 'vue'
+import { computed, onBeforeUnmount, reactive, ref } from 'vue'
 import {
   ElButton,
   ElCheckbox,
@@ -27,6 +27,7 @@ const formRef = ref<FormInstance>()
 const form = reactive({
   name: '',
   department: '',
+  departments: ['command', 'patrol'],
   level: 'normal',
   channels: ['radio'],
   duration: 30,
@@ -43,6 +44,13 @@ const rules: FormRules = {
 const feedback = ref('')
 const hud = ref(false)
 const activeTab = ref('overview')
+const channelValues = ['radio', 'message']
+const allChannelsChecked = computed(
+  () => form.channels.length === channelValues.length,
+)
+const allChannelsIndeterminate = computed(
+  () => form.channels.length > 0 && !allChannelsChecked.value,
+)
 const treeData = [
   { label: '指挥中心', children: [{ label: '一大队' }, { label: '二大队' }] },
   { label: '巡防大队', children: [{ label: '机动中队' }] },
@@ -75,6 +83,10 @@ function validate() {
 function reset() {
   formRef.value?.resetFields()
   feedback.value = '已重置'
+}
+
+function toggleAllChannels(value: string | number | boolean) {
+  form.channels = value === true ? [...channelValues] : []
 }
 
 onBeforeUnmount(() => {
@@ -121,6 +133,20 @@ onBeforeUnmount(() => {
           <ElOption label="巡防大队" value="patrol" />
         </ElSelect>
       </ElFormItem>
+      <ElFormItem label="协同部门">
+        <ElSelect
+          v-model="form.departments"
+          multiple
+          collapse-tags
+          collapse-tags-tooltip
+          placeholder="选择协同部门"
+          clearable
+        >
+          <ElOption label="指挥中心" value="command" />
+          <ElOption label="巡防大队" value="patrol" />
+          <ElOption label="应急支队" value="response" />
+        </ElSelect>
+      </ElFormItem>
       <ElFormItem label="任务等级">
         <ElRadioGroup v-model="form.level">
           <ElRadio value="normal">常规</ElRadio>
@@ -128,10 +154,23 @@ onBeforeUnmount(() => {
         </ElRadioGroup>
       </ElFormItem>
       <ElFormItem label="通知渠道">
-        <ElCheckboxGroup v-model="form.channels">
-          <ElCheckbox value="radio">电台</ElCheckbox>
-          <ElCheckbox value="message">短信</ElCheckbox>
-        </ElCheckboxGroup>
+        <div class="lx-control-bridge-demo__channels">
+          <ElCheckbox
+            class="lx-control-bridge-demo__channels-all"
+            :model-value="allChannelsChecked"
+            :indeterminate="allChannelsIndeterminate"
+            @change="toggleAllChannels"
+          >
+            全选通知渠道
+          </ElCheckbox>
+          <ElCheckboxGroup
+            v-model="form.channels"
+            class="lx-control-bridge-demo__channels-options"
+          >
+            <ElCheckbox value="radio">电台</ElCheckbox>
+            <ElCheckbox value="message">短信</ElCheckbox>
+          </ElCheckboxGroup>
+        </div>
       </ElFormItem>
       <ElFormItem label="持续时间（分钟）">
         <ElInputNumber v-model="form.duration" :min="1" :max="120" />
@@ -247,6 +286,30 @@ onBeforeUnmount(() => {
 .lx-control-bridge-demo__form :deep(.el-select),
 .lx-control-bridge-demo__form :deep(.el-date-editor) {
   width: 100%;
+}
+
+.lx-control-bridge-demo__channels {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--lx-space-xs);
+}
+
+.lx-control-bridge-demo__channels-all {
+  display: flex;
+  width: fit-content;
+  margin: 0;
+}
+
+.lx-control-bridge-demo__channels-options {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--lx-space-sm);
+  margin-left: 22px;
+}
+
+.lx-control-bridge-demo__channels-options :deep(.el-checkbox) {
+  margin-right: 0;
 }
 
 .lx-control-bridge-demo__actions {

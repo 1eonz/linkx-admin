@@ -322,7 +322,12 @@ getImSyncStatusFunc();
     >
       <!-- 图标列：AuthImg 渲染 -->
       <template #iconUrl="scope">
-        <AuthImg v-if="getRow(scope).iconUrl" :auth-src="getRow(scope).iconUrl as string" class="head-shot" />
+        <AuthImg
+          v-if="getRow(scope).iconUrl"
+          :auth-src="getRow(scope).iconUrl as string"
+          alt="协同岗图标"
+          class="head-shot"
+        />
       </template>
 
       <!-- 协同岗类型：1=人员核查协同岗 else 普通协同岗 -->

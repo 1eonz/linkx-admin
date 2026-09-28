@@ -940,6 +940,11 @@ export function getPreviewData(method: string, path: string, url: URL, body: unk
       { id: 'preview-ticket-type-001', tag: '治安警情' },
       { id: 'preview-ticket-type-002', tag: '防汛巡查' },
     ]);
+  if (path === '/collaboration/v1/policetickettype/list' && method === 'GET')
+    return handled([
+      { id: 'ticket-001', tag: '治安警情' },
+      { id: 'ticket-002', tag: '巡逻动态' },
+    ]);
 
   if (path === '/api/icp/server/config' && method === 'GET') {
     return handled({
