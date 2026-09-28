@@ -1479,3 +1479,20 @@
 - 文档同步：更新总计划、项目地图、lx-ui Roadmap/Delivery Check 和本交接记录。Impeccable 静态 `[]` 没有作为视觉验收；以真实焦点状态截图与 E2E 结果记录本次改动。
 - 未完成/边界：本次只修复 LxIcon 文档目录的卡片键盘焦点样式，不代表整库 UI-11 Critique 完成；其他代表性图标动画、暗色标题对比、分组浏览及尺寸契约仍待处理。
 - 下一步：继续 LxIcon 其余视觉建议与动效覆盖，并推进剩余 UI-10 候选；维持基础控件/动态图标 → `LxDynamicForm` → 其他 lx-ui 组件 → Impeccable 整库审查 → Vue3 Element Plus 替换的顺序。
+
+## [2026-09-28] UI-11 / LxIcon 焦点边框光学对齐复验
+
+- 反馈：上一轮的 2px 蓝色卡片边框虽然没有造成尺寸变化，但视觉上仍与卡片自身的原边界错开。
+- 证据：独立浏览器评估检查桌面焦点、hover 和 390px 窄屏；源码显示原边框为 1px，焦点加粗后内缘变化 1px。detector `--scope layout` 对 `lxicons.md` 输出 `[]`、stderr 空、退出码 0；这只表示本次静态规则零命中，不代替视觉检查。
+- 修复：焦点态保留 1px 外边框并切换为主题主色，以 1px inset 主色线补足 2px 键盘焦点指标；无外扩 outline，卡片盒尺寸不变。
+- 验证：`tests/e2e/lx-icon-docs.spec.ts` Playwright 1/1；该文件 ESLint、Prettier 检查、`git diff --check` 和 VitePress 文档构建通过。系统 Chrome 等待过渡结束后实测桌面卡片 108×84px、390px 视口 108.66×84px、320px 视口 132×84px，三个视口均为 1px 主色边框 + 1px inset 焦点线、无 outline/横向溢出；detector `--scope layout` 对文档源码 stdout `[]`、stderr 空、退出码 0，仅为静态零命中。
+- 文档同步：更新交付计划、项目地图、组件交付核查和本交接日志。整库 UI-11 与 UI-12 仍未完成。
+- 下一步：继续 LxIcon 主题/分组/尺寸建议和其他 UI-10 组件验收，再依计划完成组件库 Impeccable 审查和 Vue3 页面替换。
+
+## [2026-09-28] UI-11 / LxIcon 焦点边框单线样式复验
+
+- 反馈：此前 1px 边框加 1px inset 主色线仍像双层蓝框，视觉上不够整齐。
+- 改动：焦点态只将卡片自己的 1px 边框切换为主题主色，并使用主色浅底；关闭 inset 阴影和 outline，让蓝色边界与卡片真实边界重合。
+- 验证：`pnpm test:e2e:icons` 桌面 Chromium 与 Pixel 7 共 2/2 通过；覆盖图标全集、hover/focus 动效、减少动效、焦点边框颜色/宽度、主题浅底、无额外阴影/轮廓、焦点前后尺寸稳定和 320px 横向溢出。浏览器实测 email 图标键盘焦点样式与卡片边界对齐。`pnpm build:docs`、该 E2E 文件 ESLint/Prettier 检查、`git diff --check` 通过；文档构建有既有 chunk >500 kB 和 pnpm 配置提示。Impeccable layout detector 输出 `[]`、stderr 为空、退出码 0，只表示静态规则零命中。
+- 文档同步：更新 LxUI Delivery Check、Roadmap、项目计划与本交接记录。
+- 未完成：整库 UI-11 Critique、其他代表性图标动效、UI-10 剩余组件候选及 Vue3 替换后 UI-12 仍按既定计划跟踪。

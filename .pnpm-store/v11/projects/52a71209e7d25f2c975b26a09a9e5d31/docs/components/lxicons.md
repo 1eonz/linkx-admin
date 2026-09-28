@@ -187,7 +187,10 @@ async function copy(name: LxIconName) {
   box-shadow: var(--lx-shadow-pop);
 }
 .vp-doc .icon-grid .icon-tile:focus-visible {
-  border: 2px solid var(--lx-color-primary);
+  border-color: var(--lx-color-primary);
+  background: var(--lx-color-primary-light);
+  color: var(--lx-color-primary);
+  box-shadow: none;
   outline: none;
 }
 .icon-tile:active {

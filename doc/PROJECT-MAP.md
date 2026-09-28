@@ -24,7 +24,7 @@ flowchart TD
 
 `LxEmpty` 已按 lx-ui 空态规格补齐默认/紧凑尺寸、`imageSize` 兼容和 `default`/`footer` 插槽；阶段性启发式评审曾记录 28/40 与 34/40，浏览器 overlay 的 8 条发现中 5 条确认是低对比度文本，已改用正文令牌并补筛选恢复、双主题对比度浏览器断言。后续流程核验发现这些评分没有正式 Impeccable Critique 快照，设计评审也未在独立新标签检查页面，因此只作为阶段性证据，UI-11 正式审查仍待按 skill 规范完成。源码 CLI `detect.mjs` 返回 `[]` 只代表目标源码静态规则零命中；URL CLI 还必须核对 stderr 和退出码，Puppeteer 缺失时即使 stdout 为 `[]` 也属于扫描失败。Vue3 的 15 处 `el-empty` 仍待 UI-04 替换。
 
-`LxIcon` 图标总览页已完成一次正式双路 Critique，27/40，快照为 `.impeccable/critique/2026-09-27T22-24-39Z__linkx-fe-src-components-lxicon-index-vue.md`。源码 detector `[]` 只表示静态规则零命中；浏览器 overlay 的细项数与标题数不一致，且命中主要来自 VitePress 外壳。主会话在真实浏览器验证 `delete` hover 动画和减少动效；键盘焦点已改为贴合卡片本体的 2px 主题色边框，并由文档 E2E 验证尺寸不变。暗色标题对比、长分组、尺寸契约和其他图标动效仍需处理；整库 UI-11 继续待 UI-10 候选闭环。
+`LxIcon` 图标总览页已完成一次正式双路 Critique，27/40，快照为 `.impeccable/critique/2026-09-27T22-24-39Z__linkx-fe-src-components-lxicon-index-vue.md`。源码 detector `[]` 只表示静态规则零命中；浏览器 overlay 的细项数与标题数不一致，且命中主要来自 VitePress 外壳。主会话在真实浏览器验证 `delete` hover 动画和减少动效；键盘焦点保留卡片 1px 外边框并加 1px inset 主色线，贴齐组件本体且不改变尺寸，文档 E2E 覆盖该状态。暗色标题对比、长分组、尺寸契约和其他图标动效仍需处理；整库 UI-11 继续待 UI-10 候选闭环。
 
 ## 目录职责
 

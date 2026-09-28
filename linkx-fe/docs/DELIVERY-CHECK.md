@@ -35,7 +35,7 @@ Vue3 宿主 `tests/unit/lx-dialog.test.ts` 覆盖标题关联、确认与 loadin
 
 以下组件已有专项证据：LxIcon、LxVirtualTree、LxTransferPanel、LxDialog、LxSelectPagination、LxUpload、LxDescriptions、LxMetricCard、LxAuthImg、LxStatusSwitch、LxActionButtons、LxEmpty、LxSidebar、LxBreadcrumb、LxNavbar、LxTabsBar、LxPageCard、LxSplitLayout、LxDutyCalendar、LxPagination、基础控件桥接、LxDynamicForm 和 LxSearchBar。壳层组件 Playwright 4/4 覆盖键盘路由接管、通知和用户菜单、页签交互、具名 region 及组件容器窄屏布局；修复了通知徽标遮挡点击的问题。其余组件尚未完成真实浏览器下的鼠标、键盘、响应式和深色主题验收，不能由构建通过推断。
 
-Impeccable `detect.mjs` 的源码输出 `[]` 且退出码为 0，只代表本次静态规则没有命中；URL 扫描的非零退出码即使同时输出 `[]` 仍是失败。LxIcon 文档页已有一份正式单目标 Critique 快照（27/40）；静态 `index.vue` 扫描为 `[]`，浏览器 overlay 则列出 4 条细项、标题计数为 3，命中主要在 VitePress 文档外壳。主会话浏览器另抽查 `delete` hover 动画和 `prefers-reduced-motion` 降级均符合预期。键盘 focus 已通过文档 Playwright 验收：焦点态使用卡片自身 2px 主题色边框，没有额外外框，卡片尺寸保持稳定；其余图标动效仍待覆盖。该快照不关闭整库 UI-11；整库评审仍需在 UI-10 闭环后覆盖其他组件、主题/状态与动效，并按组件边界复核 overlay 命中。
+Impeccable `detect.mjs` 的源码输出 `[]` 且退出码为 0，只代表本次静态规则没有命中；URL 扫描的非零退出码即使同时输出 `[]` 仍是失败。LxIcon 文档页已有一份正式单目标 Critique 快照（27/40）；静态 `index.vue` 扫描为 `[]`，浏览器 overlay 则列出 4 条细项、标题计数为 3，命中主要在 VitePress 文档外壳。主会话浏览器另抽查 `delete` hover 动画和 `prefers-reduced-motion` 降级均符合预期。键盘 focus 现仅将卡片自身 1px 边框切换为主色并应用主题浅底，不叠加 inset 阴影或额外轮廓；文档 Playwright 检查焦点颜色、底色及焦点前后尺寸一致。其余图标动效仍待覆盖。该快照不关闭整库 UI-11；整库评审仍需在 UI-10 闭环后覆盖其他组件、主题/状态与动效，并按组件边界复核 overlay 命中。
 
 `LxSidebar` 有独立中文 API/Demo；文档 Playwright 2/2 覆盖分组键盘与 `aria-expanded`、菜单单次选择、rail 浮层焦点和 Escape、移动模态抽屉的焦点循环/关闭后返回、HUD 深色及减少动效。当前证据为组件库级验证；Vue3 现有侧栏仍使用 Element Plus 菜单和权限路由数据，尚未替换为 `LxSidebar`。整库 Impeccable 视觉/动效审查仍待 UI-10 完成。
 

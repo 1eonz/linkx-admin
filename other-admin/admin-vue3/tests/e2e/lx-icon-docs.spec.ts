@@ -66,7 +66,9 @@ test.describe('lx-ui 图标总览', () => {
       const style = getComputedStyle(element);
       const bounds = element.getBoundingClientRect();
       return {
+        backgroundColor: style.backgroundColor,
         borderWidth: style.borderTopWidth,
+        boxShadow: style.boxShadow,
         outlineStyle: style.outlineStyle,
         width: bounds.width,
         height: bounds.height,
@@ -74,7 +76,9 @@ test.describe('lx-ui 图标总览', () => {
     });
     const boundsWithFocus = await emailTile.boundingBox();
     expect(focusState).toMatchObject({
-      borderWidth: '2px',
+      backgroundColor: 'rgb(236, 245, 255)',
+      borderWidth: '1px',
+      boxShadow: 'none',
       outlineStyle: 'none',
     });
     expect(boundsWithFocus?.width).toBe(boundsBeforeFocus.width);

@@ -621,3 +621,17 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 发现：图标卡片使用向外偏移的键盘焦点轮廓，与卡片自身边框之间留有间隔，形成两层错位的蓝色边框。
 - 调整：文档示例将焦点态改为卡片自身 2px `--lx-color-primary` 边框，移除额外 outline；固定 `box-sizing: border-box`，并仅过渡颜色和阴影，避免边框变粗时改变卡片外部尺寸。
 - 验证：`tests/e2e/lx-icon-docs.spec.ts` 1/1 通过，覆盖键盘焦点边框颜色/宽度、无额外 outline 和焦点前后尺寸一致；ESLint、Prettier、`git diff --check` 及 VitePress 文档构建通过。手动浏览器确认桌面 108×84px、320px 视口无横向溢出。构建保留既有大包和 pnpm 配置提示。该项是针对焦点视觉的修正，不代表整库 UI-11 或其他动态图标动效审查完成。
+
+#### LxIcon 焦点边框光学对齐复验（2026-09-28）
+
+- 复核发现：上一轮将焦点边框加粗到 2px 虽固定了卡片尺寸，但蓝色内缘向卡片内部偏移 1px，视觉上仍像与原边界不齐。
+- 调整：保留原 1px 边框的外侧位置并切换为主题主色；增加贴合边框内侧的 1px inset 焦点线，形成 2px 可见键盘指标，不绘制向外偏移的蓝色 outline。
+- 验证：图标文档 Playwright 1/1 通过；ESLint、Prettier、`git diff --check` 和 VitePress 文档构建通过。系统 Chrome 实测稳定焦点态桌面卡片为 108×84px、390px 为 108.66×84px、320px 为 132×84px；三种宽度均保持 1px 主色外边框、1px inset 主色线、无 outline 且文档无横向溢出。detector `--scope layout` 输出 `[]`、stderr 空、退出码 0，仅表示静态规则零命中。
+- 边界与下一步：此为 LxIcon 文档卡片的定向视觉修正，不代表整库 UI-11 Critique、其他图标动效覆盖或 Vue3 整站 UI-12 完成；继续按既定组件计划推进。
+
+#### LxIcon 焦点边框单线样式复验（2026-09-28）
+
+- 反馈：1px 主色边框叠加 1px inset 阴影仍呈双层蓝线，整体不够利落。
+- 调整：焦点态只将卡片自身 1px 边框切换为主色，并应用 `--lx-color-primary-light` 浅底；移除 inset 阴影和 outline，保持 `border-box` 外部尺寸。
+- 验证：LxIcon 文档 Playwright 桌面与 Pixel 7 两项均通过，检查边框颜色/宽度、浅底、无阴影/outline、焦点前后尺寸稳定及 320px 无横向溢出；浏览器实测 email 卡片键盘焦点与自身边框重合。`pnpm build:docs`、定向 ESLint/Prettier、`git diff --check` 通过。Impeccable `detect.mjs --json --scope layout linkx-fe/docs/components/lxicons.md` 输出 `[]`、stderr 为空、退出码 0，仅代表静态规则零命中。
+- 边界：仅调整 LxIcon 文档总览卡片焦点样式，不代表整库 UI-11 Critique、其余图标动效覆盖或 Vue3 替换后 UI-12 完成。

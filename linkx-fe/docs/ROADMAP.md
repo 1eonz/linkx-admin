@@ -26,13 +26,13 @@ Vue3 页面中的共享控件替换会重复影响表单、弹窗、表格、搜
 
 不为清单中的每种 Element Plus 标签都新增 Lx 包装；没有通用封装时直接从 lx-ui 使用其导出的 Element Plus 控件。每个组件替换波次之前仍要以一个真实宿主场景校验库组件组合，避免只在独立 Demo 中通过。
 
-LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快照见 `.impeccable/critique/2026-09-27T22-24-39Z__linkx-fe-src-components-lxicon-index-vue.md`。静态源码扫描 `[]` 不表示浏览器页面或动效通过；浏览器 overlay 列出 4 个文档壳层命中，但标题计为 3 个。随后主会话浏览器抽查 `delete`：hover 触发 `lx-icon-delete-shake`，`prefers-reduced-motion: reduce` 下 animation/transform 关闭且 transition 为 `0s`；键盘 focus 与其余动效图标仍待覆盖，整库 UI-11 仍待 UI-10 其他候选闭环后完成。
+LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快照见 `.impeccable/critique/2026-09-27T22-24-39Z__linkx-fe-src-components-lxicon-index-vue.md`。静态源码扫描 `[]` 不表示浏览器页面或动效通过；浏览器 overlay 列出 4 个文档壳层命中，但标题计为 3 个。随后主会话浏览器抽查 `delete`：hover 触发 `lx-icon-delete-shake`，`prefers-reduced-motion: reduce` 下 animation/transform 关闭且 transition 为 `0s`；键盘焦点边框已通过文档 Playwright 验收，其他代表性动效仍待覆盖，整库 UI-11 仍待 UI-10 其他候选闭环后完成。
 
 ## 组件行为证据
 
 | 组件                 | 当前证据                                                                                                                                                                                                                         | 未完成                                                                                                                                 |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `LxIcon`             | 94 个标准图形、96 个可用名称；静态 detector `index.vue` 返回 `[]`/exit 0；图标总览页正式 Critique 27/40，snapshot 已保存；浏览器 overlay 细项 4 条而标题计数为 3 条；delete hover/reduced-motion 抽查通过 | 处理暗色标题对比、分组浏览和尺寸引用；补测键盘 focus 及其余代表性图标动效；该目标评审不代表整库 UI-11 完成 |
+| `LxIcon`             | 94 个标准图形、96 个可用名称；静态 detector `index.vue` 返回 `[]`/exit 0；图标总览页正式 Critique 27/40，snapshot 已保存；浏览器 overlay 细项 4 条而标题计数为 3 条；delete hover/reduced-motion 抽查通过；键盘焦点边框已通过文档 Playwright 验收 | 处理暗色标题对比、分组浏览和尺寸引用；补测其他代表性图标动效；该目标评审不代表整库 UI-11 完成 |
 | `LxVirtualTree`      | Vue3 宿主单测覆盖虚拟窗口、过滤祖先、禁用节点选择、键盘焦点、公开方法与 node 插槽；独立 Demo/API 页覆盖 props、events、slots、exposes、状态、级联切换及 HUD 主题                                                                 | 文档构建通过；Chrome 桌面交互/方向键、375px HUD 深色、错误/空状态与无横向溢出通过                                                      |
 | `LxDynamicForm`      | Vue3 宿主定向单测 5 项；独立 Demo/API 页覆盖成功/空/错、联动、禁用、重置、栅格和注入式 Mock                                                                                                                                      | 文档构建通过；Chrome 1/2/3 列、24 栅格通栏、错误恢复和 375px 无横向溢出通过                                                            |
 | `LxSidebar`         | 独立中文 API/Demo；文档 Playwright 2/2 覆盖 expanded/rail 分组键盘、单次 select、浮层焦点与 Escape、移动模态抽屉焦点循环/返回、HUD 主题及减少动效；VitePress 浏览器已检查实际渲染 | UI-11 正式视觉/动效审查待 UI-10 闭环；Vue3 现有权限菜单外壳仍未采用，后续替换需保留动态菜单、搜索和“全部菜单”目录契约             |
