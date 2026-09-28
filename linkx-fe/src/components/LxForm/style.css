@@ -78,12 +78,22 @@
 /* ========== 双列/多列网格（对齐设计稿 672px 弹窗 grid-cols-2） ========== */
 .lx-form--grid {
   display: grid;
-  column-gap: var(--lx-space-md);
+  column-gap: var(--lx-space-lg);
 }
 
 /* 行距改由 rowGap 控制（模板 :style 注入），清零 EP 自带 margin */
 .lx-form--grid > .el-form-item {
   margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .lx-form--grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .lx-form--grid > .el-form-item {
+    grid-column: 1 / -1 !important;
+  }
 }
 
 /* ========== inline 行内表单（搜索栏）：右距收紧到 token ========== */

@@ -30,7 +30,7 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 <<< ../../src/components/LxForm/demo/dialog.vue
 :::
 
-要点：`columns="2"` 双列网格（stitch `_26` 表单弹窗 `max-w-2xl grid-cols-2` 规格），通栏字段 `span="full"`；打开弹窗回显数据后 `nextTick(() => formRef.value?.clearValidate())` 清残留校验 —— 这是全项目弹窗表单的惯用法。
+要点：`columns="2"` 桌面双列网格按设计稿使用 `16px` 间距；视口宽度不大于 `640px` 时自动折为单列，所有字段（含 `span="full"`）占满表单宽度。桌面多列模式仍保留 `span` 跨列语义。打开弹窗回显数据后 `nextTick(() => formRef.value?.clearValidate())` 清残留校验 —— 这是全项目弹窗表单的惯用法。
 
 ## 行内搜索表单（inline）
 
@@ -52,38 +52,38 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 
 ## API — LxForm
 
-| Prop | 说明 | 类型 | 默认值 |
-|---|---|---|---|
-| model | 表单数据对象（必传） | `Record<string, any>` | — |
-| rules | 校验规则（支持 computed 动态规则） | `FormRules` | — |
-| label-position | label 位置 | `'top' \| 'left' \| 'right'` | `top` |
-| label-width | label 宽度（left/right 生效） | `string \| number` | — |
-| inline | 行内表单（与 columns 互斥） | `boolean` | `false` |
-| disabled | 整表禁用 | `boolean` | `false` |
-| columns | 网格列数（2/3 双列三列） | `number` | `1` |
-| row-gap | 网格行间距 | `number` | `16` |
+| Prop           | 说明                                           | 类型                         | 默认值  |
+| -------------- | ---------------------------------------------- | ---------------------------- | ------- |
+| model          | 表单数据对象（必传）                           | `Record<string, any>`        | —       |
+| rules          | 校验规则（支持 computed 动态规则）             | `FormRules`                  | —       |
+| label-position | label 位置                                     | `'top' \| 'left' \| 'right'` | `top`   |
+| label-width    | label 宽度（left/right 生效）                  | `string \| number`           | —       |
+| inline         | 行内表单（与 columns 互斥）                    | `boolean`                    | `false` |
+| disabled       | 整表禁用                                       | `boolean`                    | `false` |
+| columns        | 网格列数（2/3 双列三列；视口 ≤640px 自动单列） | `number`                     | `1`     |
+| row-gap        | 网格行间距                                     | `number`                     | `16`    |
 
 **透传**：`status-icon` / `scroll-to-error` / `hide-required-asterisk` / `label-suffix` / `validate-on-rule-change` / `size` / `@validate` 等 el-form 全量 props 与事件原样透传。
 
 **Ref 方法**（`ref<LxFormInstance>()`）：
 
-| 方法 | 说明 |
-|---|---|
-| validate | 全表校验，`Promise`；`.catch()` 分支提示用户 |
-| validateField | 校验指定字段（跨字段联动校验用） |
-| resetFields | 重置为初始值并清校验 |
-| clearValidate | 清校验标记（弹窗回显后必调） |
-| scrollToField | 滚动到指定字段 |
+| 方法          | 说明                                         |
+| ------------- | -------------------------------------------- |
+| validate      | 全表校验，`Promise`；`.catch()` 分支提示用户 |
+| validateField | 校验指定字段（跨字段联动校验用）             |
+| resetFields   | 重置为初始值并清校验                         |
+| clearValidate | 清校验标记（弹窗回显后必调）                 |
+| scrollToField | 滚动到指定字段                               |
 
 ## API — LxFormItem
 
-| Prop | 说明 | 类型 | 默认值 |
-|---|---|---|---|
-| label | 字段标签 | `string` | — |
-| prop | model 字段路径（校验绑定） | `string` | — |
-| rules | 仅本项校验规则 | `FormItemRule[]` | — |
-| required | 必填星号（视觉标记） | `boolean` | — |
-| span | 网格跨列：`1` / `2…` / `'full'` 通栏 | `number \| 'full'` | `1` |
+| Prop     | 说明                                                             | 类型               | 默认值 |
+| -------- | ---------------------------------------------------------------- | ------------------ | ------ |
+| label    | 字段标签                                                         | `string`           | —      |
+| prop     | model 字段路径（校验绑定）                                       | `string`           | —      |
+| rules    | 仅本项校验规则                                                   | `FormItemRule[]`   | —      |
+| required | 必填星号（视觉标记）                                             | `boolean`          | —      |
+| span     | 桌面网格跨列：`1` / `2…` / `'full'` 通栏；窄屏时字段自动占满单列 | `number \| 'full'` | `1`    |
 
 插槽全量转发（含 `#error` 自定义错误渲染、`#label`）。
 
