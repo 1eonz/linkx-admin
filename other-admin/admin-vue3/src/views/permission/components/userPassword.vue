@@ -13,7 +13,7 @@ import { validateSimpleMode, validateComplexMode, validateRepeatPassword } from 
 defineOptions({ name: 'UserPassword' });
 
 const emit = defineEmits<{
-  (e: 'success'): void;
+  (e: 'success', personIds: string[]): void;
 }>();
 
 const { t } = useI18n({ useScope: 'global' });
@@ -146,7 +146,7 @@ function changePwdSubmit(): void {
         if (result.code === 0) {
           closePwdDialog(true);
           ElMessage.success(t('index.operations.change') + t('succeed'));
-          emit('success');
+          emit('success', [id]);
         } else {
           ElMessage.error(result.msg || '');
         }

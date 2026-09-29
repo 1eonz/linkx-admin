@@ -49,6 +49,8 @@ const searchParams = reactive<Record<string, unknown>>({
 const multipleSelection = ref<UserItem[]>([]);
 const pendingDeleteIds = ref(new Set<string>());
 const pendingStatusIds = ref(new Set<string>());
+const pendingRefreshIds = ref(new Set<string>());
+const refreshFailed = ref(false);
 const batchDeletePending = ref(false);
 
 function setPendingId(target: typeof pendingDeleteIds, id: string, pending: boolean): void {
@@ -59,7 +61,18 @@ function setPendingId(target: typeof pendingDeleteIds, id: string, pending: bool
 }
 
 function isPersonRowBusy(id: string): boolean {
-  return pendingDeleteIds.value.has(id) || pendingStatusIds.value.has(id);
+  return pendingDeleteIds.value.has(id) || pendingStatusIds.value.has(id) || pendingRefreshIds.value.has(id);
+}
+
+function refreshPersonRows(ids: string[] = []): Promise<void> {
+  const uniqueIds = [...new Set(ids.map(String).filter(Boolean))];
+  uniqueIds.forEach((id) => setPendingId(pendingRefreshIds, id, true));
+  refreshFailed.value = false;
+  return tableRef.value?.refresh() ?? Promise.resolve();
+}
+
+function handlePersonMutationSuccess(ids: string[] = []): Promise<void> {
+  return refreshPersonRows(ids);
 }
 
 // 组件 ref
@@ -133,6 +146,17 @@ const departmentCode = ref('');
 function handleResponse(res: unknown): void {
   list.value = defaultTableFormatter.getRecords(res) as UserItem[];
   total.value = defaultTableFormatter.getTotal(res);
+  pendingRefreshIds.value = new Set();
+  refreshFailed.value = false;
+}
+
+function handleResponseError(): void {
+  if (pendingRefreshIds.value.size > 0) refreshFailed.value = true;
+}
+
+function retryListRefresh(): void {
+  refreshFailed.value = false;
+  tableRef.value?.refresh();
 }
 
 // 非 admin 用户：用身份证号查所属部门，限定组织
@@ -231,10 +255,10 @@ function handleDelete(rows: UserItem | UserItem[], batchAction = false): void {
         .then((result) => {
           if (result.code === 0) {
             ElMessage.success(t('index.statusTitle.successfullyDelete'));
+            return refreshPersonRows(ids);
           } else {
             ElMessage.error(result.msg || '');
           }
-          tableRef.value?.refresh();
         })
         .catch(() => {});
     })
@@ -295,7 +319,7 @@ function handleStatusChange(row: UserItem, status: number): void {
     .then((result) => {
       if (result.code === 0) {
         ElMessage.success(status === 0 ? t('index.messageText.enableSuccess') : t('index.messageText.disableSuccess'));
-        tableRef.value?.refresh();
+        return refreshPersonRows([id]);
       } else {
         ElMessage.error(result.msg || t('index.messageText.operationFailed'));
       }
@@ -362,6 +386,18 @@ onMounted(() => {
         </template>
       </SearchBar>
 
+      <el-alert
+        v-if="refreshFailed"
+        type="warning"
+        :closable="false"
+        show-icon
+        title="写入已完成，但列表刷新失败；请重新加载后继续操作。"
+      >
+        <template #default>
+          <el-button type="primary" link @click="retryListRefresh">重新加载</el-button>
+        </template>
+      </el-alert>
+
       <ProTable
         ref="tableRef"
         :columns="columns"
@@ -374,6 +410,7 @@ onMounted(() => {
         row-key="id"
         :immediate="false"
         @response="handleResponse"
+        @response-error="handleResponseError"
         @selection-change="handleSelection"
       >
         <template #role="scope">
@@ -424,11 +461,11 @@ onMounted(() => {
     </el-card>
 
     <!-- 设置角色 -->
-    <SetRole ref="roleRef" @success="() => tableRef?.refresh()" />
+    <SetRole ref="roleRef" @success="handlePersonMutationSuccess" />
     <!-- 批量设置角色 -->
-    <SetBatchRole ref="batchRoleRef" @success="() => tableRef?.refresh()" />
+    <SetBatchRole ref="batchRoleRef" @success="handlePersonMutationSuccess" />
     <!-- 修改密码 -->
-    <UserPassword ref="passwordRef" @success="() => tableRef?.refresh()" />
+    <UserPassword ref="passwordRef" @success="handlePersonMutationSuccess" />
   </div>
 </template>
 

@@ -14,7 +14,7 @@ import OrgTreeSelect from '@/components/OrgTreeSelect/index.vue';
 defineOptions({ name: 'SetRole' });
 
 const emit = defineEmits<{
-  (e: 'success'): void;
+  (e: 'success', personIds: string[]): void;
 }>();
 
 const { t } = useI18n({ useScope: 'global' });
@@ -151,7 +151,7 @@ function handleConfirm(): void {
       .then((result) => {
         if (result.code === 0) {
           ElMessage.success(result.msg || '');
-          emit('success');
+          emit('success', isAdd.value ? form.relatedUsers.map((item) => item.id) : [form.executorId]);
           closeDialog(true);
         } else {
           ElMessage.error(result.msg || '');

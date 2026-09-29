@@ -11,7 +11,7 @@ import { getRoleList } from '@/api/resource/role';
 defineOptions({ name: 'SetBatchRole' });
 
 const emit = defineEmits<{
-  (e: 'success'): void;
+  (e: 'success', personIds: string[]): void;
 }>();
 
 const { t } = useI18n({ useScope: 'global' });
@@ -73,7 +73,7 @@ function handleConfirm(): void {
       .then((result) => {
         if (result.code === 0) {
           ElMessage.success(result.msg || '');
-          emit('success');
+          emit('success', [...form.relatedUserIds]);
           closeDialog(true);
         } else {
           ElMessage.error(result.msg || '');

@@ -51,6 +51,8 @@ const userSubmitting = ref(false);
 const currentRole = reactive<{ id: string; name: string }>({ id: '', name: '' });
 const pendingRoleIds = ref(new Set<string>());
 const pendingRoleDeleteIds = ref(new Set<string>());
+const refreshPending = ref(false);
+const refreshFailed = ref(false);
 
 function setRolePending(target: typeof pendingRoleIds, id: string, pending: boolean): void {
   const next = new Set(target.value);
@@ -89,6 +91,7 @@ const actions = computed(() => [
     icon: markRaw(Plus),
     onClick: handleCreate,
     visible: canCreate.value,
+    disabled: submitting.value || refreshPending.value,
   },
 ]);
 
@@ -96,6 +99,25 @@ const actions = computed(() => [
 function handleResponse(res: unknown): void {
   list.value = defaultTableFormatter.getRecords(res) as RoleItem[];
   total.value = defaultTableFormatter.getTotal(res);
+  refreshPending.value = false;
+  refreshFailed.value = false;
+}
+
+function handleResponseError(): void {
+  if (refreshPending.value) refreshFailed.value = true;
+}
+
+function refreshRolesAfterMutation(): Promise<void> {
+  const table = tableRef.value;
+  if (!table) return Promise.resolve();
+  refreshPending.value = true;
+  refreshFailed.value = false;
+  return table.refresh();
+}
+
+function retryListRefresh(): void {
+  refreshFailed.value = false;
+  tableRef.value?.refresh();
 }
 
 // ===== 搜索/重置 =====
@@ -110,6 +132,7 @@ function handleReset(): void {
 
 // 新增
 function handleCreate(): void {
+  if (submitting.value || refreshPending.value) return;
   Object.keys(editForm).forEach((k) => delete (editForm as Record<string, unknown>)[k]);
   editForm.status = 0;
   dialogTitle.value = '新增角色';
@@ -118,6 +141,7 @@ function handleCreate(): void {
 
 // 编辑
 function handleUpdate(row: RoleItem): void {
+  if (submitting.value || refreshPending.value) return;
   Object.keys(editForm).forEach((k) => delete (editForm as Record<string, unknown>)[k]);
   Object.assign(editForm, row);
   dialogTitle.value = '编辑角色';
@@ -127,7 +151,7 @@ function handleUpdate(row: RoleItem): void {
 // 删除
 function handleDelete(row: RoleItem): void {
   const id = String(row.id);
-  if (pendingRoleIds.value.has(id)) return;
+  if (submitting.value || refreshPending.value || pendingRoleIds.value.has(id)) return;
   setRoleRowLocked(id, true);
   setRolePending(pendingRoleDeleteIds, id, true);
   const confirmMsg = `确认删除${row.name}`;
@@ -141,10 +165,10 @@ function handleDelete(row: RoleItem): void {
         .then((result) => {
           if (result.code === 0) {
             ElMessage.success('删除成功');
+            return refreshRolesAfterMutation();
           } else {
             ElMessage.error(result.msg || '删除失败');
           }
-          tableRef.value?.refresh();
         })
         .catch(() => {});
     })
@@ -158,12 +182,12 @@ function handleDelete(row: RoleItem): void {
 // 状态切换（StatusSwitch @change）
 function handleStatusChange(row: RoleItem, status: number): void {
   const id = String(row.id);
-  if (pendingRoleIds.value.has(id)) return;
+  if (submitting.value || refreshPending.value || pendingRoleIds.value.has(id)) return;
   setRoleRowLocked(id, true);
   updateRole({ id: row.id, status })
     .then((result) => {
       if (result.code === 0) {
-        tableRef.value?.refresh();
+        return refreshRolesAfterMutation();
       } else {
         ElMessage.error(result.msg || '操作失败');
       }
@@ -179,7 +203,7 @@ function handleStatusChange(row: RoleItem, status: number): void {
 //   新增: { applicationId, roleName, permissionIds }
 //   编辑: { id, roleName, permissionIds }
 function handleSubmit(payload: Record<string, unknown>): void {
-  if (submitting.value) return;
+  if (submitting.value || refreshPending.value) return;
   submitting.value = true;
   const isEdit = Boolean(payload.id);
   const fn = isEdit ? updateRole : createRole;
@@ -188,7 +212,7 @@ function handleSubmit(payload: Record<string, unknown>): void {
       if (result.code === 0) {
         ElMessage.success(isEdit ? '更新成功' : '新增成功');
         dialogVisible.value = false;
-        tableRef.value?.refresh();
+        return refreshRolesAfterMutation();
       } else {
         ElMessage.error(result.msg || '操作失败');
       }
@@ -201,6 +225,8 @@ function handleSubmit(payload: Record<string, unknown>): void {
 
 // 设置用户：打开弹窗
 function handleSetUsers(row: RoleItem): void {
+  const id = String(row.id);
+  if (submitting.value || refreshPending.value || userSubmitting.value || pendingRoleIds.value.has(id)) return;
   currentRole.id = row.id;
   currentRole.name = row.name;
   userDialogVisible.value = true;
@@ -208,16 +234,17 @@ function handleSetUsers(row: RoleItem): void {
 
 // 设置用户：确认回调
 function handleUserConfirm(users: AdminUserItem[]): Promise<void> {
-  if (userSubmitting.value) return Promise.resolve();
+  if (userSubmitting.value || refreshPending.value) return Promise.resolve();
   userSubmitting.value = true;
-  setRoleRowLocked(currentRole.id, true);
+  const roleId = currentRole.id;
+  setRoleRowLocked(roleId, true);
   const userIds = users.map((u) => u.id);
-  return setBatchRole(currentRole.id, userIds)
+  return setBatchRole(roleId, userIds)
     .then((result) => {
       if (result.code === 0) {
         ElMessage.success(result.msg || '设置用户成功');
-        tableRef.value?.refresh();
         userDialogVisible.value = false;
+        return refreshRolesAfterMutation();
       } else {
         ElMessage.error(result.msg || '操作失败');
       }
@@ -227,7 +254,7 @@ function handleUserConfirm(users: AdminUserItem[]): Promise<void> {
     })
     .finally(() => {
       userSubmitting.value = false;
-      setRoleRowLocked(currentRole.id, false);
+      setRoleRowLocked(roleId, false);
     });
 }
 
@@ -253,6 +280,18 @@ function getRole(scope: any): RoleItem {
         @reset="handleReset"
       />
 
+      <el-alert
+        v-if="refreshFailed"
+        type="warning"
+        :closable="false"
+        show-icon
+        title="写入已完成，但列表刷新失败；请重新加载后继续操作。"
+      >
+        <template #default>
+          <el-button type="primary" link @click="retryListRefresh">重新加载</el-button>
+        </template>
+      </el-alert>
+
       <ProTable
         ref="tableRef"
         :columns="columns"
@@ -261,12 +300,13 @@ function getRole(scope: any): RoleItem {
         :total="total"
         :search-params="searchParams"
         @response="handleResponse"
+        @response-error="handleResponseError"
       >
         <!-- 状态列：使用 StatusSwitch 替代 el-tag，特殊角色禁用切换 -->
         <template #status="scope">
           <StatusSwitch
             :value="getRole(scope).status ?? 0"
-            :disabled="!canUpdate || !isOperable(getRole(scope))"
+            :disabled="submitting || refreshPending || !canUpdate || !isOperable(getRole(scope))"
             :loading="pendingRoleIds.has(String(getRole(scope).id))"
             @change="(v) => handleStatusChange(getRole(scope), v)"
           />
@@ -282,7 +322,7 @@ function getRole(scope: any): RoleItem {
                 onClick: () => handleUpdate(getRole(scope)),
                 visible: canUpdate && isOperable(getRole(scope)),
                 auth: '/admin/role/update',
-                disabled: pendingRoleIds.has(String(getRole(scope).id)),
+                disabled: submitting || refreshPending || pendingRoleIds.has(String(getRole(scope).id)),
               },
               {
                 type: 'primary',
@@ -291,7 +331,8 @@ function getRole(scope: any): RoleItem {
                 onClick: () => handleSetUsers(getRole(scope)),
                 visible: canUpdate && isOperable(getRole(scope)),
                 auth: '/admin/trUserRole/createMany',
-                disabled: pendingRoleIds.has(String(getRole(scope).id)),
+                disabled:
+                  submitting || refreshPending || userSubmitting || pendingRoleIds.has(String(getRole(scope).id)),
                 loading: userSubmitting && currentRole.id === String(getRole(scope).id),
               },
               {
@@ -301,7 +342,7 @@ function getRole(scope: any): RoleItem {
                 onClick: () => handleDelete(getRole(scope)),
                 visible: canDelete && isOperable(getRole(scope)),
                 auth: '/admin/role/delete',
-                disabled: pendingRoleIds.has(String(getRole(scope).id)),
+                disabled: submitting || refreshPending || pendingRoleIds.has(String(getRole(scope).id)),
                 loading: pendingRoleDeleteIds.has(String(getRole(scope).id)),
               },
             ]"

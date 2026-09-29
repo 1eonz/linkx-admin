@@ -1,0 +1,103 @@
+{
+  "browser": "153.0.8010.53",
+  "runner": "@playwright/test 1.58.0",
+  "target": "http://127.0.0.1:30847/authority/adminPerson",
+  "routeCheck": {
+    "requestedPath": "/authority/adminPerson",
+    "finalPath": "/authority/adminPerson",
+    "routeMatched": true,
+    "loginPath": false,
+    "passwordInputCount": 0,
+    "loginTextVisible": true,
+    "fixtureRowVisible": true,
+    "title": "后台用户管理 - 警务协同后台管理系统",
+    "headings": []
+  },
+  "mutableInjection": {
+    "titleChanged": true,
+    "scriptAppended": true,
+    "scriptExecuted": true,
+    "titleRestored": true
+  },
+  "backendMockCount": 7,
+  "backendMocks": [
+    {
+      "method": "POST",
+      "path": "/linkx/admin/api/globals/list",
+      "status": 200,
+      "state": "fulfilled"
+    },
+    {
+      "method": "POST",
+      "path": "/linkx/admin/auth/v1/oauth/v2/permissions",
+      "status": 200,
+      "state": "fulfilled"
+    },
+    {
+      "method": "POST",
+      "path": "/linkx/admin/api/menu/list",
+      "status": 200,
+      "state": "fulfilled"
+    },
+    {
+      "method": "GET",
+      "path": "/linkx/admin/api/msip/license/info",
+      "status": 200,
+      "state": "fulfilled"
+    },
+    {
+      "method": "GET",
+      "path": "/linkx/admin/collaboration/v1/post/queryDepartment",
+      "status": 200,
+      "state": "fulfilled"
+    },
+    {
+      "method": "GET",
+      "path": "/linkx/admin/auth/v1/user/adminuser/bind/im-user",
+      "status": 200,
+      "state": "fulfilled"
+    },
+    {
+      "method": "GET",
+      "path": "/linkx/admin/auth/v1/user/page",
+      "status": 200,
+      "state": "fulfilled"
+    }
+  ],
+  "blockedExternalRequests": [],
+  "blockedWrites": [],
+  "pageErrors": [],
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "args": [
+        {
+          "kind": "string",
+          "value": "[vite] connecting..."
+        }
+      ]
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "args": [
+        {
+          "kind": "string",
+          "value": "[vite] connected."
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "text": "LicenseInfo 获取失败：响应数据无效",
+      "args": [
+        {
+          "kind": "string",
+          "value": "LicenseInfo 获取失败：响应数据无效"
+        }
+      ]
+    }
+  ],
+  "success": true
+}
