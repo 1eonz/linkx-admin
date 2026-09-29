@@ -11,7 +11,10 @@
 - GLM #10 写操作重复提交：角色删除/启停/保存、第三方应用删除/编辑保存、管理员用户删除/启停锁已实现；定向 Mock E2E 5/5 通过，行级锁覆盖确认至请求完成并由 `.finally()` 释放。代码审核未发现新增可复现问题；Impeccable 正式 Critique 因两个隔离评审模型连续 HTTP 503、浏览器 evaluate 只读而延期，detector `[]` 仅记静态零命中。
 - 自动进入 GLM #11 ColForm 远程搜索竞态：API 增加可选 AbortSignal；关键词代次保护列表、页码和 loading，触底分页沿用当前关键词；组织切换、重置、关闭、卸载会取消旧请求。Mock E2E 1/1、`vue-tsc`、定向 ESLint/Prettier 通过，代码审核未发现新增可复现问题。
 - GLM #1 lx-ui 全局组件注册：入口使用显式 `Lx*` 名称注册表，插件回归验证 39 个组件可注册且无空名称；lx-ui 类型检查、134 模块构建、VitePress 文档构建及 Vue3 全量 Vitest 39 文件/200 项通过。代码复核未发现本次新增问题；组件库无独立 ESLint，使用 Vue3 ESLint 配置会忽略库文件，因此未记为 ESLint 通过。格式检查以 Vue3 已安装的 Prettier 对本次文件复核。
-- 自动进入 GLM #2 Cascader 值类型：修复 `LxSearchBar` 将 number/boolean 选项值字符串化的问题，并补齐 Demo、中文说明和可观察行为回归；业务 API 继续使用 `.then().catch().finally()`。
+- GLM #2 Cascader 值类型已修复：值契约与 Element Plus 对齐为 string/number/record object，保留具名接口、混合路径和带 `call`/`Symbol.iterator` 字段的记录对象，不再把值字符串化；Demo、中文说明和 6 项行为单测已同步。ColForm 迟到请求 E2E 现在等待旧 Mock route handler 完成后才断言，整组 E2E 4/4 通过；业务 API 仍使用 `.then().catch().finally()`。
+- GLM #9/#10 降级视觉复核已由两个独立 Luna `max` A/B 评估重做：AuthImg 29/40，第三方接入重复提交体验 21/40；两份快照分别为 `.impeccable/critique/2026-09-29T01-10-08Z__admin-admin-vue3-src-components-authimg-index-vue.md` 和 `.impeccable/critique/2026-09-29T01-10-09Z__admin-vue3-src-views-basedata-thirdparty-index-vue.md`。两目标源码 detector 均有效 `[]`、stderr 空、退出码 0；浏览器 mutable injection 和 overlay 均成功，命中主要属于 admin 壳层/滚动容器，没有命中 AuthImg；重复提交页面确认框期间同一行操作被禁用，未发送业务写请求。页面访问、overlay、假阳性、Mock 心跳及视口限制详见两份 A/B 报告和证据目录。
+- Luna `max` 代码复核确认 `/authority/adminRole` 角色保存和 `/authority/adminPerson` 的授权/改密/删除/状态写操作仍缺并发锁；它们在用户代码规则下属于真实 P1 风险，但不属于旧 GLM #10 的 `/authority/role`、`/authority/userManage` 与第三方应用范围，单列 CODE-03 待办，不把旧 #10 扩大后误记为已通过。A 报告称第三方接口失败“静默”不成立：HTTP/网络错误由共享拦截器提示；Create 表单一次出现浏览器 autofill 值但未用干净 profile 复现，仍是待核实观察。
+- ColForm 竞态 E2E 经 Luna 审查后进一步加固：旧 route 的完成信号只由首条 handler 触发，避免同 URL 新响应误满足；首屏列表请求也等待对应响应完成。`col-form-search-race.spec.ts` 最终复跑 4/4 通过。下一步自动进入 CODE-03 写操作 pending 锁补齐。
 
 ## 2026-09-28 追加交付记录
 
@@ -727,7 +730,6 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 调整：焦点态只将卡片自身 1px 边框切换为主色，并应用 `--lx-color-primary-light` 浅底；移除 inset 阴影和 outline，保持 `border-box` 外部尺寸。
 - 验证：LxIcon 文档 Playwright 桌面与 Pixel 7 两项均通过，检查边框颜色/宽度、浅底、无阴影/outline、焦点前后尺寸稳定及 320px 无横向溢出；浏览器实测 email 卡片键盘焦点与自身边框重合。`pnpm build:docs`、定向 ESLint/Prettier、`git diff --check` 通过。Impeccable `detect.mjs --json --scope layout linkx-fe/docs/components/lxicons.md` 输出 `[]`、stderr 为空、退出码 0，仅代表静态规则零命中。
 - 边界：仅调整 LxIcon 文档总览卡片焦点样式，不代表整库 UI-11 Critique、其余图标动效覆盖或 Vue3 替换后 UI-12 完成。
-
 
 #### UI-01 多选下拉内侧边线对齐复修（2026-09-28）
 

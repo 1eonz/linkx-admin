@@ -1,5 +1,14 @@
 # LinkX 项目交接记录
 
+## [2026-09-29] GLM #2 Cascader 值契约修正与 ColForm 竞态回归稳定化
+
+- 目标：让 `LxSearchBar` 的级联字段遵循实际 Element Plus 值契约，并避免竞态 E2E 在旧 Mock route 尚未结束时提前断言。
+- 改动文件：`linkx-fe/src/components/LxSearchBar/{types.ts,index.vue,demo/basic.vue}`、`linkx-fe/docs/components/lxsearchbar.md`、`other-admin/admin-vue3/tests/unit/lx-search-bar.test.ts`、`other-admin/admin-vue3/tests/e2e/col-form-search-race.spec.ts`，以及计划、项目地图、迁移和代码评审核验台账。
+- 完成内容：Cascader 节点值接受 string、number 与普通 record object；组件不再因普通 `call` 或 `Symbol.iterator` 字段拒绝记录对象，保留混合路径及值类型。Demo 改为数字组织 ID，中文 API 与测试说明同步。迟到人员查询测试释放旧请求后等待 route handler 的 `finally` 完成，再确认重开表单没有旧人员选项。
+- 验证命令与结果：Vue3 `vue-tsc --noEmit` 通过；`lx-search-bar.test.ts` 6/6；`col-form-search-race.spec.ts` 4/4；定向 ESLint 对 Vue3 测试文件无错误；本次文件 Prettier 检查通过；lx-ui `pnpm typecheck`、`pnpm build`（134 modules）、`pnpm build:docs` 通过；`git diff --check` 无空白错误。linkx-fe 没有独立 ESLint CLI，因此未将 ESLint 记录为通过。E2E 使用本地 Mock，不代表真实后端联调。
+- 未完成/阻塞：GLM #2 的独立 Luna 代码复审仍待完成；鉴权图片及重复提交的 Impeccable Luna A/B 正式复核仍在运行，未将 detector `[]` 当作视觉通过。
+- 下一步：收齐代码审查与两项独立 A/B 报告，核验浏览器注入、截图、stderr 和退出码后综合并保存正式 snapshot；根据正式报告更新 UI-04 后续事项。
+
 ## [2026-09-29] GLM #1 lx-ui 全局组件注册完成，进入 #2
 
 - 目标：确保 lx-ui 插件安装时使用明确、稳定的全局名称，不把组件注册到空名称。
@@ -1582,7 +1591,6 @@
 - 文档：同步 Element Bridge、LxForm Delivery Check/Roadmap、Vue3 迁移矩阵、项目地图和总计划。
 - Impeccable：针对本次用户反馈后的最终样式，A/B 两路隔离浏览器评审正在执行；完成后把完整评审结论、detector 证据、截图及 snapshot/trend 路径补入此记录。
 - 边界：该修正只关闭 lx-ui Element Bridge 下拉外圈样式问题，不代表 Vue3 业务表单替换或 UI-11 整库审查完成。375px 弹层遮挡字段标签、错误提示对比度和选项行高仍独立跟踪。
-
 
 ## [2026-09-28] UI-01 / 多选下拉改用控件内部单线
 

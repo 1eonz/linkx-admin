@@ -126,6 +126,8 @@ export type {
 } from './components/LxDescriptions/types'
 export type { LxCodeSlotProps } from './components/LxCodeSlot/types'
 export type {
+  LxCascaderOption,
+  LxCascaderOptionValue,
   LxSearchBarProps,
   LxSearchField,
   LxSearchFieldType,

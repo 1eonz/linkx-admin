@@ -1,0 +1,51 @@
+{
+  "assessment": "B",
+  "requested_model": "gpt-6-luna max",
+  "target": "other-admin/admin-vue3/src/views/collaboration/components/ColForm.vue",
+  "url": "http://127.0.0.1:30847/collaboration/index",
+  "captures": [
+    {
+      "state": "desktop create dialog",
+      "viewport": { "width": 1280, "height": 720 },
+      "detector_script": "http://localhost:8400/detect.js",
+      "script_appended": true,
+      "load_status": "loaded",
+      "console_message": "%c[impeccable] 33 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "timestamp": "2026-09-28T23:24:38.814Z",
+      "colform_visible_markers": ["low contrast text: 0 / 20", "low contrast text: icon upload hint"]
+    },
+    {
+      "state": "375px after edit dialog had been inspected; screenshot showed list after re-injection",
+      "viewport": { "width": 375, "height": 812 },
+      "detector_script": "http://localhost:8400/detect.js",
+      "script_appended": true,
+      "load_status": "loaded",
+      "console_message": "%c[impeccable] 15 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "timestamp": "2026-09-28T23:28:52.741Z",
+      "accessible_dialog_count_after_capture": 0,
+      "attribution": "not treated as a ColForm edit-dialog result"
+    }
+  ],
+  "console_errors": [
+    {
+      "level": "error",
+      "message": "Uncaught TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.",
+      "timestamp": "2026-09-28T23:20:55.596Z",
+      "url": "http://127.0.0.1:30847/collaboration/index"
+    },
+    {
+      "level": "error",
+      "message": "Uncaught TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.",
+      "timestamp": "2026-09-28T23:20:55.596Z",
+      "url": "http://127.0.0.1:30847/collaboration/index"
+    },
+    {
+      "level": "error",
+      "message": "TypeError: Failed to execute 'getComputedStyle' on 'Window': parameter 1 is not of type 'Element'.\n    at I (http://127.0.0.1:30847/node_modules/.vite/deps/chunk-UOUYOJRM.js?v=f914b447:2696:15)\n    at He (http://127.0.0.1:30847/node_modules/.vite/deps/chunk-UOUYOJRM.js?v=f914b447:2847:11)\n    at ce (http://127.0.0.1:30847/node_modules/.vite/deps/chunk-UOUYOJRM.js?v=f914b447:2856:138)\n    at Jt (http://127.0.0.1:30847/node_modules/.vite/deps/chunk-UOUYOJRM.js?v=f914b447:2870:11)\n    at Kt (http://127.0.0.1:30847/node_modules/.vite/deps/chunk-UOUYOJRM.js?v=f914b447:2876:38)\n    at oe (http://127.0.0.1:30847/node_modules/.vite/deps/chunk-UOUYOJRM.js?v=f914b447:2916:497)\n    at en (http://127.0.0.1:30847/node_modules/.vite/deps/chunk-UOUYOJRM.js?v=f914b447:2952:117)\n    at Object.forceUpdate (http://127.0.0.1:30847/node_modules/.vite/deps/chunk-UOUYOJRM.js?v=f914b447:3119:46)\n    at http://127.0.0.1:30847/node_modules/.vite/deps/chunk-UOUYOJRM.js?v=f914b447:3125:12\n    at new Promise (<anonymous>)",
+      "timestamp": "2026-09-28T23:20:55.604Z",
+      "url": "http://127.0.0.1:30847/node_modules/.vite/deps/chunk-UOUYOJRM.js?v=f914b447"
+    }
+  ],
+  "screenshot_files": [],
+  "screenshot_note": "Native CUA screenshots were visually reviewed inline; this browser API did not expose a local export path."
+}

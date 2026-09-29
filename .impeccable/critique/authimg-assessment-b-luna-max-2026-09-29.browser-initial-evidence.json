@@ -1,0 +1,119 @@
+{
+  "requestedUrl": "http://127.0.0.1:30847/h5/carousel",
+  "browser": "system Chrome via Playwright",
+  "runs": [
+    {
+      "name": "desktop-1280x800",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "isMobile": false,
+      "navigationError": null,
+      "finalUrl": "http://127.0.0.1:30847/h5/carousel",
+      "title": "AuthImg mutable injection preflight",
+      "preflight": {
+        "location": "http://127.0.0.1:30847/h5/carousel",
+        "protocol": "http:",
+        "originalTitle": "警务协同后台管理系统",
+        "resultingTitle": "AuthImg mutable injection preflight",
+        "scriptAppended": true,
+        "markerExecuted": true
+      },
+      "overlayEnabled": false,
+      "overlayReason": "目标页面未访问成功；预检仅在导航失败上下文中尝试，未向该上下文注入 detector overlay。",
+      "screenshotPath": ".impeccable/critique/authimg-assessment-b-luna-max-2026-09-29.desktop-1280x800.png",
+      "consoleMessages": [
+        {
+          "type": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "type": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_FAILED"
+        }
+      ],
+      "pageErrors": [],
+      "requestFailures": [
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:30847/linkx/admin/api/globals/list",
+          "failure": "net::ERR_FAILED"
+        }
+      ],
+      "blockedWrites": [
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/api/globals/list"
+        }
+      ]
+    },
+    {
+      "name": "mobile-375x812",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "isMobile": true,
+      "navigationError": null,
+      "finalUrl": "http://127.0.0.1:30847/h5/carousel",
+      "title": "AuthImg mutable injection preflight",
+      "preflight": {
+        "location": "http://127.0.0.1:30847/h5/carousel",
+        "protocol": "http:",
+        "originalTitle": "警务协同后台管理系统",
+        "resultingTitle": "AuthImg mutable injection preflight",
+        "scriptAppended": true,
+        "markerExecuted": true
+      },
+      "overlayEnabled": false,
+      "overlayReason": "目标页面未访问成功；预检仅在导航失败上下文中尝试，未向该上下文注入 detector overlay。",
+      "screenshotPath": ".impeccable/critique/authimg-assessment-b-luna-max-2026-09-29.mobile-375x812.png",
+      "consoleMessages": [
+        {
+          "type": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "type": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_FAILED"
+        }
+      ],
+      "pageErrors": [],
+      "requestFailures": [
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:30847/linkx/admin/api/globals/list",
+          "failure": "net::ERR_FAILED"
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:30847/linkx/admin/base/v1/globals/getGlobalsList",
+          "failure": "net::ERR_FAILED"
+        }
+      ],
+      "blockedWrites": [
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/api/globals/list"
+        },
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/base/v1/globals/getGlobalsList"
+        }
+      ]
+    }
+  ]
+}

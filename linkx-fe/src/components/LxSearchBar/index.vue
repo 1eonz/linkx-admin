@@ -15,7 +15,11 @@ import {
   ElTreeSelect,
 } from 'element-plus'
 import LxIcon from '../LxIcon/index.vue'
-import type { LxSearchBarProps, LxSearchField } from './types'
+import type {
+  LxCascaderOptionValue,
+  LxSearchBarProps,
+  LxSearchField,
+} from './types'
 import 'element-plus/es/components/button/style/css'
 import 'element-plus/es/components/input/style/css'
 import 'element-plus/es/components/select/style/css'
@@ -106,26 +110,32 @@ function treeValue(
     : undefined
 }
 
-function cascaderOptions(
-  options: LxSearchField['options'],
-): Array<Record<string, unknown>> | undefined {
-  return options?.map((option) => ({
-    label: option.label,
-    value: String(option.value),
-    disabled: option.disabled,
-    children: cascaderOptions(option.children),
-  }))
+function isCascaderNodeValue(value: unknown): value is LxCascaderOptionValue {
+  if (typeof value === 'string' || typeof value === 'number') return true
+  if (typeof value !== 'object' || value === null || Array.isArray(value))
+    return false
+  try {
+    const prototype = Object.getPrototypeOf(value)
+    return prototype === Object.prototype || prototype === null
+  } catch {
+    return false
+  }
+}
+
+function isCascaderValue(
+  value: unknown,
+): value is LxCascaderOptionValue | LxCascaderOptionValue[] {
+  return (
+    isCascaderNodeValue(value) ||
+    (Array.isArray(value) && value.every(isCascaderNodeValue))
+  )
 }
 
 function cascaderValue(
   field: LxSearchField,
-): string | number | (string | number)[] | undefined {
+): LxCascaderOptionValue | LxCascaderOptionValue[] | undefined {
   const value = valueOf(field)
-  return typeof value === 'string' ||
-    typeof value === 'number' ||
-    Array.isArray(value)
-    ? (value as string | number | (string | number)[])
-    : undefined
+  return isCascaderValue(value) ? value : undefined
 }
 
 function fieldSpan(field: LxSearchField): number {
@@ -256,10 +266,10 @@ function toggleCollapsed() {
           />
 
           <ElCascader
-            v-else
+            v-else-if="field.type === 'cascader'"
             :id="fieldId(field.key)"
             :model-value="cascaderValue(field)"
-            :options="cascaderOptions(field.options)"
+            :options="field.options"
             :placeholder="field.placeholder || `请选择${field.label}`"
             :clearable="field.clearable !== false"
             :disabled="field.disabled"

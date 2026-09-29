@@ -60,8 +60,8 @@ const fields: NonNullable<LxSearchBarProps['fields']> = [
     options: [
       {
         label: '平台',
-        value: 'platform',
-        children: [{ label: '北向', value: 'north' }],
+        value: 100,
+        children: [{ label: '北向', value: 101 }],
       },
     ],
   },
@@ -86,7 +86,7 @@ const fields: NonNullable<LxSearchBarProps['fields']> = [
   },
 ]
 
-const query = ref<Record<string, unknown>>({ count: 0 })
+const query = ref<Record<string, unknown>>({ count: 0, source: [100, 101] })
 const loading = ref(false)
 const mode = ref<Mode>('success')
 const rows = ref<string[]>([])

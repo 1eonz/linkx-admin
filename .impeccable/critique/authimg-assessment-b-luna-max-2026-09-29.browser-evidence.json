@@ -1,0 +1,462 @@
+{
+  "requestedUrl": "http://127.0.0.1:30847/h5/carousel",
+  "browser": "system Chrome via Playwright",
+  "sessionSeed": "Per-context equivalent of tests/e2e/fixtures.ts seedSession",
+  "mockBackend": "User-provided local dev:mock server at 127.0.0.1:30847",
+  "writeProtection": {
+    "allowMethods": [
+      "GET",
+      "HEAD",
+      "OPTIONS"
+    ],
+    "allowQueryPosts": [
+      "/auth/v1/oauth/v2/permissions",
+      "/api/globals/list",
+      "/base/v1/globals/getGlobalsList",
+      "/api/menu/list"
+    ],
+    "blockAllOtherPostPutPatchDelete": true
+  },
+  "overlayUrl": "http://127.0.0.1:8401/detect.js",
+  "runs": [
+    {
+      "name": "desktop-1280x800",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "isMobile": false,
+      "navigationError": null,
+      "finalUrl": "http://127.0.0.1:30847/h5/carousel",
+      "targetDocument": true,
+      "baseline": {
+        "title": "轮播图管理 - 警务协同后台管理系统",
+        "readyState": "complete",
+        "href": "http://127.0.0.1:30847/h5/carousel",
+        "bodyText": "警\n警务协同\n全部菜单\n33 项\n首页\n系统配置\n三方接入管理\n全局参数配置\n地图配置\n布局配置\nH5管理\n轮播图管理\n群组标签管理\n协同岗管理\n协同岗管理\n标签管理\n权限中心\n角色管理\n权限管理\n用户管理\n前台权限管理\n前台角色管理\n前台用户管理\n后台权限管理\n后台角色管理\n后台用户管理\n自定义组织管理\n位置管理\n位置信息\n排班管理\n排班类型管理\n排班信息\n预警管理\n预警推送\n警信扩展信息管理\n虚拟用户管理\n已归档群组管理\n三方对接\n应用管理\n南向对接\n警单平台\n通信服务管理\nAI智能体对接（南向）\n北向接入管理\n多节点管理\n节点管理\n数据管理\n首页\n/\nH5管理\n/\n轮播图管理\n修改数据后，请重新登录客户端\nM\nMock预览管理员\n搜索\n重置\n新增\n序号\n\t\n轮播图\n\t\n标题\n\t\n跳转链接\n\t\n排序值\n\t\n操作\n1\n\t\n\t\n应急值守安排\n\t\n/news/duty\n\t\n1\n\t\n编辑\n删除\n\n\n2\n\t\n\t\n平安巡防提示\n\t\n/news/patrol\n\t\n2\n\t\n编辑\n删除\n共 2 条\n10条/页\n1\n前往\n页",
+        "viewport": {
+          "width": 1280,
+          "height": 800
+        },
+        "documentSize": {
+          "width": 1280,
+          "height": 800
+        },
+        "authImages": {
+          "imageCount": 2,
+          "loadedCount": 2,
+          "brokenCount": 0,
+          "placeholders": []
+        },
+        "headings": []
+      },
+      "preflight": {
+        "location": "http://127.0.0.1:30847/h5/carousel",
+        "protocol": "http:",
+        "originalTitle": "轮播图管理 - 警务协同后台管理系统",
+        "temporaryTitle": "AuthImg mutable injection preflight",
+        "scriptAppended": true,
+        "markerExecuted": true
+      },
+      "preflightSucceeded": true,
+      "overlayInjection": {
+        "attempted": true,
+        "loaded": true
+      },
+      "overlayState": {
+        "title": "轮播图管理 - 警务协同后台管理系统",
+        "url": "http://127.0.0.1:30847/h5/carousel",
+        "overlayCount": 23,
+        "bannerCount": 1,
+        "labels": [
+          "‹›layout property animation",
+          "✦ glowing shadow accents",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "cramped padding",
+          "layout property animation",
+          "cards flush against the scroller edge"
+        ]
+      },
+      "overlayEnabled": true,
+      "baselineScreenshotPath": "F:/work/linkx-admin/.impeccable/critique/authimg-assessment-b-luna-max-2026-09-29.desktop-1280x800.png",
+      "overlayScreenshotPath": "F:/work/linkx-admin/.impeccable/critique/authimg-assessment-b-luna-max-2026-09-29.desktop-1280x800.overlay.png",
+      "consoleMessages": [
+        {
+          "type": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "type": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 23 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        },
+        {
+          "type": "log",
+          "text": "%clayout-transition%c transition: width color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%cclipped-overflow-container%c div.sidebar-wrapper.sidebar-container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%cdark-glow%c Colored box-shadow glow (#264ed1) on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%ccramped-padding%c <li> \"el-menu-item\": children flush against bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%clayout-transition%c transition: margin-left color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%cedge-flush-cards%c 2 cards flush against the left edge of div.el-scrollbar__wrap.el-scrollbar__wrap--hidden-default at rest (0px gap, e.g. td.el-table_1_column_1.is-center.el-table__cell) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%clayout-transition%c transition: width color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "endGroup",
+          "text": "console.groupEnd"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_FAILED"
+        }
+      ],
+      "impeccableConsoleMessages": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 23 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        }
+      ],
+      "pageErrors": [],
+      "requestFailures": [
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/auth/v1/oauth/v2/keepalive",
+          "failure": "net::ERR_FAILED"
+        }
+      ],
+      "apiResponses": [
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/api/globals/list",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/auth/v1/oauth/v2/permissions",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/api/menu/list",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "pathname": "/linkx/admin/api/msip/license/info",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "pathname": "/linkx/admin/api/content/carousel/page",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "pathname": "/linkx/admin/auth/v1/user/adminuser/bind/im-user",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "pathname": "/linkx/admin/mock/images/duty-banner.svg",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "pathname": "/linkx/admin/mock/images/patrol-banner.svg",
+          "status": 200
+        }
+      ],
+      "allowedQueryRequests": [
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/api/globals/list"
+        },
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/auth/v1/oauth/v2/permissions"
+        },
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/api/menu/list"
+        }
+      ],
+      "blockedMutations": [
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/auth/v1/oauth/v2/keepalive"
+        }
+      ]
+    },
+    {
+      "name": "mobile-375x812",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "isMobile": true,
+      "navigationError": null,
+      "finalUrl": "http://127.0.0.1:30847/h5/carousel",
+      "targetDocument": true,
+      "baseline": {
+        "title": "轮播图管理 - 警务协同后台管理系统",
+        "readyState": "complete",
+        "href": "http://127.0.0.1:30847/h5/carousel",
+        "bodyText": "警\n警务协同\n首页\n/\nH5管理\n/\n轮播图管理\nM\n搜索\n重置\n新增\n序号\n\t\n轮播图\n\t\n标题\n\t\n跳转链接\n\t\n排序值\n\t\n操作\n1\n\t\n\t\n应急值守安排\n\t\n/news/duty\n\t\n1\n\t\n编辑\n删除\n\n\n2\n\t\n\t\n平安巡防提示\n\t\n/news/patrol\n\t\n2\n\t\n编辑\n删除\n共 2 条\n10条/页\n1\n前往\n页",
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "documentSize": {
+          "width": 375,
+          "height": 812
+        },
+        "authImages": {
+          "imageCount": 2,
+          "loadedCount": 2,
+          "brokenCount": 0,
+          "placeholders": []
+        },
+        "headings": []
+      },
+      "preflight": {
+        "location": "http://127.0.0.1:30847/h5/carousel",
+        "protocol": "http:",
+        "originalTitle": "轮播图管理 - 警务协同后台管理系统",
+        "temporaryTitle": "AuthImg mutable injection preflight",
+        "scriptAppended": true,
+        "markerExecuted": true
+      },
+      "preflightSucceeded": true,
+      "overlayInjection": {
+        "attempted": true,
+        "loaded": true
+      },
+      "overlayState": {
+        "title": "轮播图管理 - 警务协同后台管理系统",
+        "url": "http://127.0.0.1:30847/h5/carousel",
+        "overlayCount": 5,
+        "bannerCount": 1,
+        "labels": [
+          "‹›layout property animation",
+          "✦ glowing shadow accents",
+          "layout property animation",
+          "cards flush against the scroller edge"
+        ]
+      },
+      "overlayEnabled": true,
+      "baselineScreenshotPath": "F:/work/linkx-admin/.impeccable/critique/authimg-assessment-b-luna-max-2026-09-29.mobile-375x812.png",
+      "overlayScreenshotPath": "F:/work/linkx-admin/.impeccable/critique/authimg-assessment-b-luna-max-2026-09-29.mobile-375x812.overlay.png",
+      "consoleMessages": [
+        {
+          "type": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "type": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 5 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        },
+        {
+          "type": "log",
+          "text": "%clayout-transition%c transition: width color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%cclipped-overflow-container%c div.sidebar-wrapper.sidebar-container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%cdark-glow%c Colored box-shadow glow (#264ed1) on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%clayout-transition%c transition: margin-left color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%cedge-flush-cards%c 2 cards flush against the left edge of div.el-scrollbar__wrap.el-scrollbar__wrap--hidden-default at rest (0px gap, e.g. td.el-table_1_column_1.is-center.el-table__cell) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "log",
+          "text": "%clayout-transition%c transition: width color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+        },
+        {
+          "type": "endGroup",
+          "text": "console.groupEnd"
+        }
+      ],
+      "impeccableConsoleMessages": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 5 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        }
+      ],
+      "pageErrors": [],
+      "requestFailures": [],
+      "apiResponses": [
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/api/globals/list",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/auth/v1/oauth/v2/permissions",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/api/menu/list",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "pathname": "/linkx/admin/api/msip/license/info",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "pathname": "/linkx/admin/api/content/carousel/page",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "pathname": "/linkx/admin/auth/v1/user/adminuser/bind/im-user",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "pathname": "/linkx/admin/mock/images/duty-banner.svg",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "pathname": "/linkx/admin/mock/images/patrol-banner.svg",
+          "status": 200
+        }
+      ],
+      "allowedQueryRequests": [
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/api/globals/list"
+        },
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/auth/v1/oauth/v2/permissions"
+        },
+        {
+          "method": "POST",
+          "pathname": "/linkx/admin/api/menu/list"
+        }
+      ],
+      "blockedMutations": []
+    }
+  ]
+}

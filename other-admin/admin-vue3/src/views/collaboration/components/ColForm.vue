@@ -109,6 +109,7 @@ const userTotal = ref(0);
 const userPageNum = ref(0);
 const userPageSize = 100;
 const userLoading = ref(false);
+const userRequestError = ref(false);
 const userSearchKeyword = ref('');
 const initUserIds = ref<string[]>([]);
 let userRequestSequence = 0;
@@ -119,6 +120,24 @@ let formOpenSequence = 0;
 const typeList = ref<PoliceTicketTypeItem[]>([]);
 const originTypeList = ref<PoliceTicketTypeItem[]>([]);
 const loadingType = ref(false);
+
+const userStatusText = computed(() => {
+  if (!formData.orgCode) return '请先选择归属组织，再搜索该组织及下属单位的人员。';
+  if (userLoading.value) return `正在加载${formData.orgName || '当前组织'}及下属单位的人员…`;
+  if (userRequestError.value) return '人员加载失败，已选人员仍保留。请重试。';
+  if (userSearchKeyword.value && userList.value.length === 0) {
+    return `未找到“${userSearchKeyword.value}”匹配的人员。`;
+  }
+  if (userList.value.length === 0) return '当前组织暂无可关联人员。';
+  return `${formData.orgName || '当前组织'}及下属单位 · 共 ${userTotal.value} 人 · 已选 ${formData.relatedUserIds.length} 人`;
+});
+
+const userEmptyText = computed(() => {
+  if (!formData.orgCode) return '请先选择归属组织';
+  if (userRequestError.value) return '人员加载失败，请在下方重试';
+  if (userSearchKeyword.value) return `未找到“${userSearchKeyword.value}”匹配的人员`;
+  return '当前组织暂无可关联人员';
+});
 
 // MULTIPLE_COLLABORATION 全局开关（控制 queryUserByPage 是否传 type）
 const globalData = computed(() => {
@@ -193,6 +212,7 @@ function organizationCurrentChange(data: { id?: string; name?: string; code?: st
   userList.value = [];
   userPageNum.value = 0;
   userTotal.value = 0;
+  userRequestError.value = false;
   userSearchKeyword.value = '';
   formData.relatedUserIds = [];
   formData.relatedUserNames = [];
@@ -206,6 +226,7 @@ function cleanOrganizationInput(): void {
   userList.value = [];
   userPageNum.value = 0;
   userTotal.value = 0;
+  userRequestError.value = false;
   userSearchKeyword.value = '';
   formData.relatedUserIds = [];
   formData.relatedUserNames = [];
@@ -231,6 +252,7 @@ function getUserListByPage(): Promise<void> {
   const pageNum = userPageNum.value + 1;
   userRequestController = requestController;
   userLoading.value = true;
+  userRequestError.value = false;
   const params = {
     privString: orgId,
     code: orgCode,
@@ -244,6 +266,7 @@ function getUserListByPage(): Promise<void> {
     .then((res) => {
       if (requestSequence !== userRequestSequence) return;
       if (res.code !== 0 || !res.data) {
+        userRequestError.value = true;
         ElMessage.error(res.msg || '获取关联人员失败');
         return;
       }
@@ -254,9 +277,11 @@ function getUserListByPage(): Promise<void> {
       userList.value = pageNum === 1 ? records : [...userList.value, ...records];
       userPageNum.value = pageNum;
       userTotal.value = total;
+      userRequestError.value = false;
     })
     .catch(() => {
       if (requestSequence === userRequestSequence && !requestController.signal.aborted) {
+        userRequestError.value = true;
         ElMessage.error('获取关联人员失败');
       }
     })
@@ -282,6 +307,13 @@ function remoteMethod(keywords: string): void {
   userList.value = [];
   userPageNum.value = 0;
   userTotal.value = 0;
+  userRequestError.value = false;
+  getUserListByPage();
+}
+
+/** 按当前组织、关键词和页码重试人员查询。 */
+function retryUserSearch(): void {
+  if (userLoading.value || !formData.orgCode) return;
   getUserListByPage();
 }
 
@@ -335,6 +367,7 @@ function resetForm(): void {
   userList.value = [];
   userPageNum.value = 0;
   userTotal.value = 0;
+  userRequestError.value = false;
   userSearchKeyword.value = '';
   Object.keys(userMap).forEach((k) => delete userMap[k]);
   initUserIds.value = [];
@@ -447,6 +480,7 @@ defineExpose({ open });
 <template>
   <el-dialog
     v-model="dialogVisible"
+    class="col-form-dialog"
     :title="dialogTitle"
     :close-on-click-modal="false"
     :destroy-on-close="true"
@@ -478,6 +512,7 @@ defineExpose({ open });
         >
           <el-option v-for="item in collarationArr" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
+        <div v-if="formType === 'update'" class="field-hint">协同岗类型创建后不可修改。</div>
       </el-form-item>
 
       <!-- 图标 -->
@@ -531,7 +566,28 @@ defineExpose({ open });
               </span>
             </span>
           </el-option>
+          <template #empty>
+            <div class="user-select-empty" role="status" aria-live="polite">
+              {{ userEmptyText }}
+            </div>
+          </template>
+          <template #loading>
+            <div class="user-select-empty" role="status" aria-live="polite">正在搜索关联人员…</div>
+          </template>
         </el-select>
+        <div class="user-select-feedback" role="status" aria-live="polite">
+          <span>{{ userStatusText }}</span>
+          <el-button
+            v-if="userRequestError && formData.orgCode"
+            link
+            type="primary"
+            :disabled="userLoading"
+            aria-label="重试关联人员搜索"
+            @click="retryUserSearch"
+          >
+            重试
+          </el-button>
+        </div>
       </el-form-item>
 
       <!-- 警单类型（仅 type !== 1 时显示） -->
@@ -572,9 +628,32 @@ defineExpose({ open });
 
 .upload-hint {
   margin-left: 12px;
-  color: var(--el-text-color-secondary);
+  color: var(--el-text-color-regular);
   font-size: 12px;
   line-height: 20px;
+}
+
+.field-hint,
+.user-select-feedback {
+  color: var(--el-text-color-regular);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.user-select-feedback {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.user-select-empty {
+  padding: 8px 12px;
+  color: var(--el-text-color-regular);
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
 }
 
 .user-option {
@@ -586,7 +665,33 @@ defineExpose({ open });
 }
 
 .user-option__reason {
-  color: var(--el-text-color-secondary);
+  color: var(--el-text-color-regular);
   font-size: 12px;
+}
+
+:deep(.el-input__count) {
+  color: var(--el-text-color-regular);
+}
+
+@media (max-width: 480px) {
+  :deep(.col-form-dialog .el-form-item) {
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  :deep(.col-form-dialog .el-form-item__label) {
+    justify-content: flex-start;
+    width: 100% !important;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+
+  :deep(.col-form-dialog .el-form-item__content) {
+    margin-left: 0 !important;
+  }
+
+  .upload-hint {
+    margin-left: 0;
+  }
 }
 </style>
