@@ -33,6 +33,7 @@ export default defineConfig({
           text: '基础',
           items: [
             { text: '基础控件桥接', link: '/components/element-bridge' },
+            { text: 'LxButton 按钮', link: '/components/lxbutton' },
             { text: 'LxIcon 图标总览', link: '/components/lxicons' },
           ],
         },
@@ -94,6 +95,20 @@ export default defineConfig({
           text: '数据录入',
           items: [
             { text: 'LxForm 表单', link: '/components/lxform' },
+            { text: 'LxInput 输入框', link: '/components/lxinput' },
+            { text: 'LxTextarea 文本域', link: '/components/lxtextarea' },
+            { text: 'LxRadio 单选组', link: '/components/lxradio' },
+            { text: 'LxCheckbox 复选组', link: '/components/lxcheckbox' },
+            { text: 'LxSwitch 开关', link: '/components/lxswitch' },
+            { text: 'LxSelect 下拉选择', link: '/components/lxselect' },
+            {
+              text: 'LxDatePicker 日期选择',
+              link: '/components/lxdatepicker',
+            },
+            {
+              text: 'LxInputNumber 数字输入',
+              link: '/components/lxinputnumber',
+            },
             { text: 'LxSearchBar 检索面板', link: '/components/lxsearchbar' },
             {
               text: 'LxDynamicForm 动态表单',

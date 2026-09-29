@@ -1,0 +1,26 @@
+/**
+ * LxRadioGroup 布局样式（design/表单控件八件套 03 单选组）
+ *
+ * 排布契约：水平 16px 间距（标本 gap-4，覆盖 EP 默认 32px 右距）；
+ * vertical 开启列排 8px 行距（标本"处置通道优先级" space-y-2）。
+ * 选项自身的靶环 / hover 规则见 LxRadio/style.css。
+ */
+
+/* 水平：flexwrap 16px 间距 */
+.lx-radio-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--lx-space-lg);
+}
+
+.lx-radio-group .lx-radio.el-radio {
+  margin-right: 0;
+}
+
+/* 垂直：列排 8px 行距 */
+.lx-radio-group--vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--lx-space-sm);
+}

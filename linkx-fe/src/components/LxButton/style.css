@@ -1,0 +1,234 @@
+/**
+ * LxButton 终态样式（design/按钮体系/code.html 标本，拍板 #11）
+ *
+ * 挂载方式：非 scoped 全局类 + .lx-btn 前缀（参照 LxForm 作用域模式）。
+ * 色值全部引用 --lx-btn-* / --lx-* 令牌（P8 铁律），EP 内核变量做桥接点；
+ * HUD 深色适配通过 element-theme.css 对 --lx-btn-* 的覆写完成，本文件零硬编码。
+ */
+
+/* ===== 尺寸档（28 / 32 / 40px，内边距 12 / 16 / 20px）===== */
+.lx-btn.el-button {
+  height: var(--lx-btn-height-md);
+  padding: 0 var(--lx-btn-padding-x-md);
+  border-radius: var(--lx-radius-md);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.lx-btn--sm.el-button {
+  height: var(--lx-btn-height-sm);
+  padding: 0 var(--lx-btn-padding-x-sm);
+  font-size: 12px;
+}
+
+.lx-btn--lg.el-button {
+  height: var(--lx-btn-height-lg);
+  padding: 0 var(--lx-btn-padding-x-lg);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* 块级撑满 */
+.lx-btn--block.el-button {
+  display: flex;
+  width: 100%;
+}
+
+/* ===== 主操作：实底白字，hover/active 逐档加深（标本 primary 行）===== */
+.lx-btn.el-button--primary:not(.is-link):not(.is-text):not(.is-plain) {
+  --el-button-bg-color: var(--lx-btn-primary-bg);
+  --el-button-border-color: var(--lx-btn-primary-bg);
+  --el-button-hover-bg-color: var(--lx-btn-primary-hover);
+  --el-button-hover-border-color: var(--lx-btn-primary-hover);
+  --el-button-active-bg-color: var(--lx-btn-primary-active);
+  --el-button-active-border-color: var(--lx-btn-primary-active);
+  --el-button-text-color: var(--lx-color-on-primary);
+  --el-button-hover-text-color: var(--lx-color-on-primary);
+  --el-button-active-text-color: var(--lx-color-on-primary);
+}
+
+/* ===== 高危操作：#f56c6c 实底深字（标本 danger 行；文字用深字方案——白字对比度 2.9:1 不达标）===== */
+.lx-btn.el-button--danger:not(.is-link):not(.is-text):not(.is-plain) {
+  --el-button-bg-color: var(--lx-btn-danger-bg);
+  --el-button-border-color: var(--lx-btn-danger-bg);
+  --el-button-hover-bg-color: var(--lx-btn-danger-hover);
+  --el-button-hover-border-color: var(--lx-btn-danger-hover);
+  --el-button-active-bg-color: var(--lx-btn-danger-hover);
+  --el-button-active-border-color: var(--lx-btn-danger-hover);
+  --el-button-text-color: var(--lx-color-on-danger);
+  --el-button-hover-text-color: var(--lx-color-on-danger);
+  --el-button-active-text-color: var(--lx-color-on-danger);
+}
+
+/* ===== 次按钮：白底 + #dcdfe6 边框，hover 边框/文字/底色三连转主色 ===== */
+.lx-btn.el-button--default:not(.is-link):not(.is-text) {
+  --el-button-bg-color: var(--lx-bg-card);
+  --el-button-border-color: var(--lx-control-border);
+  --el-button-text-color: var(--lx-text-regular);
+  --el-button-hover-bg-color: var(--lx-color-primary-light);
+  --el-button-hover-border-color: var(--lx-color-primary);
+  --el-button-hover-text-color: var(--lx-color-primary);
+}
+
+/* ===== 文字形态：无底色，padding 收窄 8px，hover 浅色底（标本 text 行）=====
+ * --lx-btn-text-color 为 textColor prop 注入的自定义色变量：
+ * 提供时覆盖全部文字形态语义色，hover 底由 color-mix 派生同色 8% 浅底 */
+.lx-btn.el-button.is-text {
+  padding-inline: var(--lx-btn-text-padding-x);
+  --el-button-text-color: var(--lx-btn-text-color, var(--lx-color-primary));
+  --el-button-hover-text-color: var(
+    --lx-btn-text-color,
+    var(--lx-color-primary)
+  );
+  --el-button-hover-bg-color: color-mix(
+    in srgb,
+    var(--lx-btn-text-color, var(--lx-color-primary)) 8%,
+    transparent
+  );
+}
+
+/* 危险文字：红字 + 浅红 hover 底（标本"移出布控"行内操作；
+ * 红字用 error-strong 而非标本 #f56c6c，12px 级小字号白底对比度需 ≥4.5:1） */
+.lx-btn.el-button--danger.is-text {
+  --el-button-text-color: var(
+    --lx-btn-text-color,
+    var(--lx-color-error-strong)
+  );
+  --el-button-hover-text-color: var(
+    --lx-btn-text-color,
+    var(--lx-color-error-strong)
+  );
+  --el-button-hover-bg-color: color-mix(
+    in srgb,
+    var(--lx-btn-text-color, var(--lx-color-error)) 8%,
+    transparent
+  );
+}
+
+/* 成功文字：绿字（strong 档对比度补偿，与 danger 文字同策略） */
+.lx-btn.el-button--success.is-text {
+  --el-button-text-color: var(
+    --lx-btn-text-color,
+    var(--lx-color-success-strong)
+  );
+  --el-button-hover-text-color: var(
+    --lx-btn-text-color,
+    var(--lx-color-success-strong)
+  );
+  --el-button-hover-bg-color: color-mix(
+    in srgb,
+    var(--lx-btn-text-color, var(--lx-color-success)) 8%,
+    transparent
+  );
+}
+
+/* 警示文字：橙字（strong 档对比度补偿） */
+.lx-btn.el-button--warning.is-text {
+  --el-button-text-color: var(
+    --lx-btn-text-color,
+    var(--lx-color-warning-strong)
+  );
+  --el-button-hover-text-color: var(
+    --lx-btn-text-color,
+    var(--lx-color-warning-strong)
+  );
+  --el-button-hover-bg-color: color-mix(
+    in srgb,
+    var(--lx-btn-text-color, var(--lx-color-warning)) 8%,
+    transparent
+  );
+}
+
+/* ===== 成功/警示操作：走 --lx-* 语义令牌桥（与 primary/danger 同款，防 EP 升级漂移）；
+ * 实底文字用深字方案（白字对比度 2.1~2.2:1 不达标，拍板 #2026-09-29）===== */
+.lx-btn.el-button--success:not(.is-link):not(.is-text):not(.is-plain) {
+  --el-button-bg-color: var(--lx-color-success);
+  --el-button-border-color: var(--lx-color-success);
+  --el-button-hover-bg-color: var(--lx-color-success-strong);
+  --el-button-hover-border-color: var(--lx-color-success-strong);
+  --el-button-active-bg-color: var(--lx-color-success-strong);
+  --el-button-active-border-color: var(--lx-color-success-strong);
+  --el-button-text-color: var(--lx-color-on-success);
+  --el-button-hover-text-color: var(--lx-color-on-success);
+  --el-button-active-text-color: var(--lx-color-on-success);
+}
+
+.lx-btn.el-button--warning:not(.is-link):not(.is-text):not(.is-plain) {
+  --el-button-bg-color: var(--lx-color-warning);
+  --el-button-border-color: var(--lx-color-warning);
+  --el-button-hover-bg-color: var(--lx-color-warning-strong);
+  --el-button-hover-border-color: var(--lx-color-warning-strong);
+  --el-button-active-bg-color: var(--lx-color-warning-strong);
+  --el-button-active-border-color: var(--lx-color-warning-strong);
+  --el-button-text-color: var(--lx-color-on-warning);
+  --el-button-hover-text-color: var(--lx-color-on-warning);
+  --el-button-active-text-color: var(--lx-color-on-warning);
+}
+
+/* ===== 悬停光晕与禁用/加载 ===== */
+
+/* 主/危险操作 hover：ring 光晕（标本 ring-2 20%），次按钮与文字形态不加环保持轻量 */
+.lx-btn.el-button--primary:not(.is-disabled):not(.is-loading):hover {
+  box-shadow: var(--lx-btn-ring);
+}
+
+.lx-btn.el-button--danger:not(.is-text):not(.is-disabled):not(
+    .is-loading
+  ):hover {
+  box-shadow: var(--lx-btn-ring-danger);
+}
+
+/* 禁用：实底形态整体 0.45 透明度 + 禁用手势（标本 primary/danger 禁用行） */
+.lx-btn.el-button.is-disabled {
+  opacity: var(--lx-btn-disabled-opacity);
+}
+
+/* 次按钮禁用：专用禁用色替代透明度（标本 default 禁用行 #f5f7fa/#ebeef5/#c0c4cc；
+ * 透明度会把正文色冲淡到不可读，专用色保住"为什么不可用"的信息可读性） */
+.lx-btn.el-button--default:not(.is-text).is-disabled {
+  opacity: 1;
+  --el-button-bg-color: var(--lx-btn-disabled-bg);
+  --el-button-border-color: var(--lx-btn-disabled-border);
+  --el-button-text-color: var(--lx-btn-disabled-text);
+}
+
+/* 文字形态禁用：灰字 #c0c4cc、无透明度（标本 text 禁用行"无权审批"） */
+.lx-btn.el-button.is-text.is-disabled {
+  opacity: 1;
+  --el-button-text-color: var(--lx-btn-disabled-text);
+  --el-button-hover-bg-color: transparent;
+}
+
+/* 加载：0.8 透明度 + 等待手势（标本"下发指令中..."态） */
+.lx-btn.el-button.is-loading {
+  opacity: var(--lx-btn-loading-opacity);
+  cursor: wait;
+}
+
+/* ===== 焦点与触控 ===== */
+.lx-btn.el-button:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+/* 后置图标：与文字间距对齐 EP 内核前置图标的 gap */
+.lx-btn__icon-right {
+  flex: 0 0 auto;
+  margin-left: 6px;
+}
+
+/* 触屏（无 hover 能力）场景：44px 最小触控目标（宽高同约束，
+ * 纯图标文字按钮收窄后宽度仅约 31px，只限高不限宽无法命中） */
+@media (hover: none) {
+  .lx-btn.el-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* 减少动效偏好：关闭过渡动画 */
+@media (prefers-reduced-motion: reduce) {
+  .lx-btn.el-button {
+    transition: none;
+  }
+}

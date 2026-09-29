@@ -113,7 +113,7 @@ describe('LxUpload', () => {
     };
     const wrapper = mountUpload({ modelValue: [file], disabled: true });
     const instance = wrapper.vm as unknown as LxUploadInstance;
-    const progress = wrapper.get('[role="progressbar"]');
+    const progress = wrapper.get('.lx-upload__progress-track');
 
     expect(progress.attributes('aria-label')).toBe('large.csv 上传进度');
     expect(progress.attributes('aria-valuenow')).toBe('68');
@@ -139,6 +139,81 @@ describe('LxUpload', () => {
     const latest = updates?.at(-1)?.[0] as LxUploadFile[];
     expect(latest[0]).toMatchObject({ uid: 17, status: 'uploading', percentage: 68 });
     expect(wrapper.emitted('progress')).toHaveLength(1);
+    wrapper.unmount();
+  });
+
+  it('swaps the dropzone for the aggregate progress panel while uploading', () => {
+    const files: LxUploadFile[] = [
+      { uid: 1, name: 'a.csv', status: 'uploading', percentage: 60 },
+      { uid: 2, name: 'b.csv', status: 'uploading', percentage: 20 },
+    ];
+    const wrapper = mountUpload({ modelValue: files, action: 'mock://upload' });
+    const panel = wrapper.get('.lx-upload__panel');
+    const track = panel.get('[role="progressbar"]');
+
+    expect(wrapper.classes()).toContain('is-uploading');
+    expect(wrapper.find('.lx-upload__dropzone').exists()).toBe(false);
+    expect(panel.text()).toContain('正在上传 2 个文件');
+    expect(track.attributes('aria-label')).toBe('批量上传总进度');
+    expect(track.attributes('aria-valuenow')).toBe('40');
+    expect(panel.get('.lx-upload__cancel').attributes('disabled')).toBeUndefined();
+    wrapper.unmount();
+  });
+
+  it('aborts all requests and restores the queue when cancelling the batch upload', async () => {
+    const file: LxUploadFile = {
+      uid: 9,
+      name: 'mid.csv',
+      status: 'uploading',
+      percentage: 45,
+    };
+    const wrapper = mountUpload({ modelValue: [file], action: 'mock://upload' });
+
+    await wrapper.get('.lx-upload__cancel').trigger('click');
+    expect(uploadMethods.abort).toHaveBeenCalledTimes(1);
+    const latest = wrapper.emitted('update:modelValue')?.at(-1)?.[0] as LxUploadFile[];
+    expect(latest[0]).toMatchObject({ uid: 9, status: 'ready', percentage: 0 });
+    expect(wrapper.get('.lx-upload__announcement').text()).toContain('已取消上传');
+    wrapper.unmount();
+  });
+
+  it('restores the dropzone once no file is uploading', async () => {
+    const file: LxUploadFile = {
+      uid: 12,
+      name: 'done.csv',
+      status: 'uploading',
+      percentage: 80,
+    };
+    const wrapper = mountUpload({ modelValue: [file], action: 'mock://upload' });
+
+    expect(wrapper.find('.lx-upload__panel').exists()).toBe(true);
+    await wrapper.setProps({
+      modelValue: [{ ...file, status: 'success', percentage: 100 }],
+    });
+    expect(wrapper.find('.lx-upload__panel').exists()).toBe(false);
+    expect(wrapper.find('.lx-upload__dropzone-idle').exists()).toBe(true);
+    expect(wrapper.find('.lx-upload__dropzone-over').exists()).toBe(true);
+    expect(wrapper.find('.lx-upload__browse').exists()).toBe(true);
+    wrapper.unmount();
+  });
+
+  it('renders status badges with localized queue wording and a clear-all header', async () => {
+    const files: LxUploadFile[] = [
+      { uid: 1, name: 'queued.csv', status: 'ready' },
+      { uid: 2, name: 'done.csv', status: 'success' },
+      { uid: 3, name: 'bad.csv', status: 'error' },
+    ];
+    const wrapper = mountUpload({ modelValue: files, action: 'mock://upload' });
+    const badges = wrapper.findAll('.lx-upload__file-status');
+
+    expect(badges.map((badge) => badge.text())).toEqual(['排队中', '上传成功', '上传失败']);
+    expect(wrapper.get('.lx-upload__list-header').text()).toContain('已选 3 个文件');
+    expect(wrapper.find('.lx-upload__file.is-fail .lx-upload__file-name').exists()).toBe(true);
+    expect(wrapper.get('.lx-upload__clear').attributes('disabled')).toBeUndefined();
+
+    await wrapper.get('.lx-upload__clear').trigger('click');
+    expect(uploadMethods.clearFiles).toHaveBeenCalledTimes(1);
+    expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toEqual([]);
     wrapper.unmount();
   });
 });

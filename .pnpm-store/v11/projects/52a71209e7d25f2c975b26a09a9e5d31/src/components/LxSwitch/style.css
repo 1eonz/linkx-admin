@@ -1,0 +1,83 @@
+/**
+ * LxSwitch 终态样式（design/表单控件八件套 07 状态开关）
+ *
+ * 标本契约：胶囊固定 40×20、滑块 16px、开启 #67c23a 成功绿、关闭 #909399 信息灰。
+ * EP 内核几何默认值（core 40×20 / action 16px）恰好对齐标本，此处显式固化防升级漂移；
+ * 色值经 --lx-* 令牌注入 EP 开关变量（开绿关灰为标本核心差异，EP 默认开关同为主色）。
+ * 与 element-theme.css 的全局桥并存（过渡期），本文件保证脱离全局桥时规格不漂移。
+ * 色值全部引用 --lx-* 令牌（P8 铁律），零硬编码。
+ */
+
+/* ===== 色彩契约：开绿关灰（标本 07；EP 默认两态均为主色）===== */
+.lx-switch.el-switch {
+  --el-switch-on-color: var(--lx-color-success);
+  --el-switch-off-color: var(--lx-color-info);
+}
+
+/* ===== 几何契约：40×20 胶囊 + 16px 滑块（固化 EP 默认值防升级漂移）===== */
+.lx-switch.el-switch .el-switch__core {
+  min-width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--el-switch-off-color);
+}
+
+.lx-switch.el-switch .el-switch__action {
+  width: 16px;
+  height: 16px;
+}
+
+/* 开启态描边跟随开启色（EP 原生 border 变量走 off 色，开启时需同步转绿） */
+.lx-switch.el-switch.is-checked .el-switch__core {
+  border-color: var(--el-switch-on-color);
+}
+
+/* ===== 胶囊内文字模式（inline-prompt + activeText/inactiveText）=====
+ * EP 在 inlinePrompt 下始终渲染 inner-wrapper（空 div），仅传文字/图标时才有子元素；
+ * :has(> *) 据此判断"胶囊内有实际内容"才放宽至 42px（对齐 LxStatusSwitch 既有
+ * 两字文案验收规格），无文字时保持标本 40×20（inlinePrompt 默认 true 不影响）。
+ * 文字 11px/600 深灰 #1d2129，保证绿/灰底上的对比度（令牌与 LxStatusSwitch 共用）。
+ */
+.lx-switch.el-switch:has(.el-switch__inner-wrapper > *) .el-switch__core {
+  min-width: 42px;
+}
+
+.lx-switch.el-switch .el-switch__inner-wrapper {
+  color: var(--lx-status-switch-text);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* 胶囊两侧文字（无 inline-prompt）：沿用 EP 默认 12px 灰字、激活态主色，
+ * 仅固化字号对齐 32px 控件行高，不额外改色 */
+.lx-switch.el-switch .el-switch__label {
+  font-size: 12px;
+}
+
+/* ===== 尺寸基准：跟随 32px 行高（EP 默认 32px，显式声明走令牌桥）===== */
+.lx-switch.el-switch {
+  height: var(--lx-control-height);
+}
+
+/* ===== 禁用：半透明胶囊（标本 07 #67c23a/50"上级锁定"行）===== */
+.lx-switch.el-switch.is-disabled .el-switch__core {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== 焦点与触控 ===== */
+/* 键盘焦点：主色外环（复用 EP 原生 input:focus-visible ~ core 机制，
+ * 仅键盘导航显示，鼠标点击不出现常驻外环） */
+.lx-switch.el-switch .el-switch__input:focus-visible ~ .el-switch__core {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+/* 触屏（无 hover 能力）：44px 最小触控目标（胶囊本体 20px 高，靠内边距撑大命中区） */
+@media (hover: none) {
+  .lx-switch.el-switch {
+    min-height: 44px;
+    min-width: 44px;
+    justify-content: center;
+  }
+}

@@ -1,7 +1,12 @@
 <script setup lang="ts">
 /**
- * LxActionButtons — 表格行内操作（默认纯文字链接 + 溢出折叠；icon 可选左置，兼容 V3 带图标惯用法）
- * 视觉源：stitch 行内操作 a.text-primary hover:underline text-xs
+ * LxActionButtons — 表格行内操作（LxButton 文字形态内核 + 溢出折叠）
+ * 视觉源：design/按钮体系 text 形态（拍板 #11：表格行内一律 text 形态）
+ * 语义色档（2026-09-29 两项目 192 例全量调研拍板）：
+ *   编辑/详情/常规=primary 蓝、删除/禁用=danger 红、启用/恢复=warning 橙、激活/授权=success 绿
+ * 外显按钮走 LxButton（继承语义色/hover 浅底/触控 44px/focus-visible/reduced-motion）；
+ * 「更多」为自绘 disclosure（role=group + Escape/焦点管理，见 closeMore 与 onFocusout），
+ * 菜单项 hover 底按语义色派生，与 LxButton 文字形态同款
  */
 import {
   computed,
@@ -13,7 +18,9 @@ import {
 
 import type { LxActionButtonsProps, LxActionItem } from './types'
 import { hasPermission } from '../../permissions'
+import LxButton from '../LxButton/index.vue'
 import LxIcon from '../LxIcon/index.vue'
+import type { LxButtonType } from '../LxButton/types'
 
 const props = withDefaults(defineProps<LxActionButtonsProps>(), {
   actions: () => [],
@@ -33,19 +40,36 @@ const moreGroupLabel = computed(() =>
 )
 const moreOpen = ref(false)
 const rootRef = ref<HTMLElement | null>(null)
-const moreButtonRef = ref<HTMLButtonElement | null>(null)
+const moreButtonRef = ref<InstanceType<typeof LxButton> | null>(null)
 const menuId = `lx-actions-menu-${getCurrentInstance()?.uid ?? 0}`
 
-function onClick(action: LxActionItem) {
+/** 语义色文字档：danger/success/warning 需要 type + text 组合激活（LxButton 契约） */
+function isSemanticType(
+  type: LxActionItem['type'],
+): type is 'danger' | 'success' | 'warning' {
+  return type === 'danger' || type === 'success' || type === 'warning'
+}
+
+/** 语义档 → LxButton type：default/primary 归一为 text 形态（默认蓝） */
+function buttonTypeOf(type: LxActionItem['type']): LxButtonType {
+  return isSemanticType(type) ? type : 'text'
+}
+
+function onClick(action: LxActionItem, fromMenu = false) {
   if (action.disabled) return
   emit('click', action)
-  closeMore()
+  action.onClick?.(action)
+  // 菜单项点击后自身被隐藏（v-show），焦点需归还「更多」触发按钮，与 Escape 路径同款
+  closeMore(fromMenu)
 }
 
 function closeMore(restoreFocus = false) {
   if (!moreOpen.value) return
   moreOpen.value = false
-  if (restoreFocus) moreButtonRef.value?.focus()
+  if (restoreFocus) {
+    // LxButton 未暴露 focus 方法，经组件实例取根 button 元素恢复焦点（Escape 收起场景）
+    ;(moreButtonRef.value?.$el as HTMLElement | undefined)?.focus()
+  }
 }
 
 function onDocumentPointerDown(event: PointerEvent) {
@@ -89,38 +113,34 @@ onBeforeUnmount(() => {
     @focusout="onFocusout"
     @keydown="onKeydown"
   >
-    <template
+    <LxButton
       v-for="(action, index) in shown"
       :key="action.key ?? `${action.label}-${index}`"
+      class="lx-actions__item"
+      size="sm"
+      :type="buttonTypeOf(action.type)"
+      :text="isSemanticType(action.type)"
+      :icon="action.icon"
+      :text-color="action.textColor"
+      :disabled="action.disabled"
+      @click="onClick(action)"
     >
-      <button
-        type="button"
-        class="lx-actions__btn"
-        :class="`lx-actions__btn--${action.type || 'default'}`"
-        :disabled="action.disabled"
-        @click="onClick(action)"
-      >
-        <LxIcon
-          v-if="action.icon"
-          :name="action.icon"
-          :size="16"
-          class="lx-actions__icon"
-        />
-        {{ action.label }}
-      </button>
-    </template>
+      {{ action.label }}
+    </LxButton>
 
     <div v-if="overflow.length" class="lx-actions__more-wrap">
-      <button
+      <LxButton
         ref="moreButtonRef"
-        type="button"
-        class="lx-actions__btn"
+        class="lx-actions__item"
+        :class="{ 'lx-actions__more--open': moreOpen }"
+        size="sm"
+        type="text"
         :aria-expanded="moreOpen"
         :aria-controls="menuId"
         @click="moreOpen = !moreOpen"
       >
         {{ moreText }}
-      </button>
+      </LxButton>
       <div
         v-show="moreOpen"
         :id="menuId"
@@ -134,6 +154,14 @@ onBeforeUnmount(() => {
           type="button"
           class="lx-actions__menu-item"
           :class="`lx-actions__btn--${action.type || 'default'}`"
+          :style="
+            action.textColor
+              ? {
+                  '--lx-actions-item-color': action.textColor,
+                  '--lx-actions-item-bg': action.textColor,
+                }
+              : undefined
+          "
           :disabled="action.disabled"
           @click="onClick(action)"
         >
@@ -156,55 +184,38 @@ onBeforeUnmount(() => {
   max-width: 100%;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--lx-space-md);
+  /* 外显按钮为 LxButton 文字形态（自带左右 8px padding），相邻文字间距 16px 与旧版一致 */
+  gap: 0;
+  row-gap: 4px;
 }
 
-.lx-actions__btn {
-  display: inline-flex;
-  min-width: 24px;
-  min-height: 24px;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--lx-color-primary);
-  font: inherit;
-  font-size: 12px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: opacity var(--lx-transition);
-}
-
-.lx-actions__btn:hover {
-  text-decoration: underline;
-  opacity: 0.85;
-}
-
-.lx-actions__btn:focus-visible {
-  border-radius: var(--lx-radius-sm);
-  outline: 2px solid var(--lx-color-primary);
-  outline-offset: 2px;
-}
-
-.lx-actions__btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.55;
-  text-decoration: none;
-}
-
-.lx-actions__btn:disabled:hover {
-  opacity: 0.55;
-}
-
-/* 可选图标：文字左侧 16px，2px 间距（V3 ActionButtons 规范） */
-.lx-actions__icon {
-  flex: 0 0 auto;
-  margin-right: 2px;
+/* 菜单项语义色（外显按钮由 LxButton 语义档接管；折叠后保持同色不因折叠变色）。
+ * 派生机制与 LxButton text 形态同款：文字用 strong 档保对比度，hover 底用语义色 8% 派生，
+ * hover 不再把语义色冲成蓝色（红字删除项 hover 保持红字 + 浅红底） */
+.lx-actions__btn--default,
+.lx-actions__btn--primary {
+  --lx-actions-item-color: var(--lx-color-primary);
+  --lx-actions-item-bg: var(--lx-color-primary);
 }
 
 .lx-actions__btn--danger {
-  color: var(--lx-color-error);
+  --lx-actions-item-color: var(--lx-color-error-strong);
+  --lx-actions-item-bg: var(--lx-color-error);
+}
+
+.lx-actions__btn--success {
+  --lx-actions-item-color: var(--lx-color-success-strong);
+  --lx-actions-item-bg: var(--lx-color-success);
+}
+
+.lx-actions__btn--warning {
+  --lx-actions-item-color: var(--lx-color-warning-strong);
+  --lx-actions-item-bg: var(--lx-color-warning);
+}
+
+/* 「更多」触发器打开态：浅底给视觉用户状态反馈（aria-expanded 之外的可见信号） */
+.lx-actions__more--open.el-button {
+  background: color-mix(in srgb, var(--lx-color-primary) 8%, transparent);
 }
 
 .lx-actions__more-wrap {
@@ -241,7 +252,8 @@ onBeforeUnmount(() => {
   font-family: inherit;
   font-size: 12px;
   text-align: start;
-  color: var(--lx-text-regular);
+  /* 折叠项保持语义色（红字删除项折叠后仍为红字），变量由上方语义类注入 */
+  color: var(--lx-actions-item-color, var(--lx-color-primary));
   cursor: pointer;
   overflow-wrap: anywhere;
   transition:
@@ -249,9 +261,14 @@ onBeforeUnmount(() => {
     color var(--lx-transition);
 }
 
+/* hover 保持语义色（变量未注入时回退中性蓝），底色按语义色 8% 派生，与外显按钮同款 */
 .lx-actions__menu-item:hover {
-  background: var(--lx-color-primary-light);
-  color: var(--lx-color-primary);
+  background: color-mix(
+    in srgb,
+    var(--lx-actions-item-bg, var(--lx-color-primary)) 8%,
+    transparent
+  );
+  color: var(--lx-actions-item-color, var(--lx-color-primary));
 }
 
 .lx-actions__menu-item:focus-visible {
@@ -259,25 +276,26 @@ onBeforeUnmount(() => {
   outline-offset: -2px;
 }
 
+/* 禁用改专用灰字而非透明度（透明度冲淡红字不可读，与 LxButton 禁用哲学一致） */
 .lx-actions__menu-item:disabled {
   cursor: not-allowed;
-  opacity: 0.55;
+  color: var(--lx-btn-disabled-text);
 }
 
-@media (max-width: 600px) {
-  .lx-actions__btn {
-    min-width: 44px;
-    min-height: 44px;
-    padding-inline: 2px;
-  }
+/* 菜单项图标：文字左侧 16px，2px 间距 */
+.lx-actions__icon {
+  flex: 0 0 auto;
+  margin-right: 2px;
+}
 
+/* 触屏（无 hover 能力）：44px 最小触控目标，判定与 LxButton 内核同款（非宽度断言） */
+@media (hover: none) {
   .lx-actions__menu-item {
     min-height: 44px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lx-actions__btn,
   .lx-actions__menu-item {
     transition: none;
   }

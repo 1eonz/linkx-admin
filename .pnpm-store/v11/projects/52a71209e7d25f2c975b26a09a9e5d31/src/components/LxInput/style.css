@@ -1,0 +1,87 @@
+/**
+ * LxInput 专属样式（design/表单控件八件套 01 文本输入框）
+ *
+ * 核心态（边框/焦点环/错误态/禁用/触屏）在本文件组件级固化，脱离
+ * element-theme.css 全局桥时规格不漂移（与 Radio/Checkbox/Switch 同族契约）；
+ * 全局桥的同款规则继续服务存量裸 el-input 直用页面（过渡期并存）。
+ * 色值全部引用 --lx-* 令牌（P8 铁律），零硬编码。
+ */
+
+/* ===== 核心态固化（与全局桥同款，锚定 .lx-input 前缀提特异性）===== */
+/* 基础几何：圆角 + 1px 控件描边（--lx-control-border 专属控件态档） */
+.lx-input .el-input__wrapper {
+  border-radius: var(--lx-radius-md);
+  box-shadow: 0 0 0 1px var(--lx-control-border) inset;
+  transition:
+    box-shadow var(--lx-transition),
+    background-color var(--lx-transition);
+}
+
+/* 禁用态：半透明（标本 01 上级锁定行） */
+.lx-input.is-disabled .el-input__wrapper {
+  opacity: 0.6;
+}
+
+/* hover：描边转主色 */
+.lx-input .el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--lx-color-primary) inset;
+}
+
+/* 键盘焦点：1px 主色内描边 + 2px 光环（不在控件外溢出第二圈） */
+.lx-input .el-input__wrapper.is-focus {
+  outline: none;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 1px var(--lx-color-primary) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+/* 错误态：红底红边一体化（标本八件套错误行，依赖 ElForm/LxForm 上下文） */
+.el-form-item.is-error .lx-input .el-input__wrapper {
+  background-color: var(--lx-color-error-light);
+  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
+}
+
+.el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
+  outline: none;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+/* 错误态输入值同步变红：error-strong 深红做小字号对比度补偿（DESIGN-SPEC §3.2） */
+.el-form-item.is-error .lx-input .el-input__inner {
+  color: var(--lx-color-error-strong);
+}
+
+/* mono 值：警号 / 编码等机器读数字段（标本 01 聚焦行 font-mono 契约） */
+.lx-input--mono .el-input__inner {
+  font-family: var(--lx-font-mono);
+}
+
+/* 字数计数器：等宽 11px（标本 08 "42 / 200" 契约，input/textarea 两处统一）。
+ * 文字色用 label 档 #606266（白底约 6.1:1 达 AA）；secondary #86909c 仅 3.2:1
+ * 未达 AA（critique 2026-09-29 P2，与 E2E 开关胶囊文字 4.5:1 门槛同口径）
+ */
+.lx-input .el-input__count,
+.lx-input .el-input__count-inner {
+  font-family: var(--lx-font-mono);
+  font-size: 11px;
+  color: var(--lx-text-label);
+}
+
+/* 超限计数红字（EP is-exceed 态；正常 maxlength 场景已被硬截断，
+ * 仅 formatter 改写字长时可能出现，红字用 strong 档保证小字号对比度） */
+.lx-input.is-exceed .el-input__count {
+  color: var(--lx-color-error-strong);
+}
+
+/* ===== 触屏 ===== */
+/* 触屏（无 hover 能力）：44px 最小触控目标（与 Radio/Checkbox/Switch 同族契约；
+ * textarea 多行基线天然 ≥44px，无此需求） */
+@media (hover: none) {
+  .lx-input .el-input__wrapper {
+    min-height: 44px;
+  }
+}

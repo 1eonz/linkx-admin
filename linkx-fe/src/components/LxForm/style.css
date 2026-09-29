@@ -4,18 +4,18 @@
  * 视觉源：stitch _26 节点管理表单弹窗（错误态高亮规格）
  *   - 错误文字：控件下方 11px 深红（对比度补偿 error-strong）+ 前置圆圈感叹号图标
  *   - 错误输入框：1px 红边 + 浅红底 #fef0f0（error-light）
- *   - label：上置 12px/500 主文字色，必填红星前置
+ *   - label：上置 12px/500 标签色 #606266，必填红星前置
  *
  * 作用域：.lx-form（LxForm 根）内所有 el-form-item 均生效，
  *        存量业务直接写 el-form-item 同样获得本样式（迁移零成本）。
  */
 
-/* ========== label 规格（stitch 表单 label：12px / 500 / 主文字色） ========== */
+/* ========== label 规格（标本八件套：12px / 500 / #606266 标签色） ========== */
 .lx-form .el-form-item__label,
 .lx-form-item .el-form-item__label {
   font-size: 12px;
   font-weight: 500;
-  color: var(--lx-text-primary);
+  color: var(--lx-text-label);
 }
 
 .lx-form .el-form-item--label-top .el-form-item__label,

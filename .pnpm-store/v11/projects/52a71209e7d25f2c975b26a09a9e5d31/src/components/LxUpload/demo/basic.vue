@@ -109,7 +109,10 @@ onBeforeUnmount(() => {
     <header class="lx-upload-demo__header">
       <div>
         <h2 id="lx-upload-demo-title">排班数据导入</h2>
-        <p>支持 CSV、Excel 文件；所有传输状态均由本地内存 Mock 驱动。</p>
+        <p>
+          支持 CSV、Excel 文件；所有传输状态均由本地内存 Mock
+          驱动。拖拽文件到虚线框可见"释放鼠标即可上传"切换态；开启"选择后立即上传"后，上传期间拖区切换为聚合进度面板，可随时取消；关闭时文件以"排队中"徽章等待提交。
+        </p>
       </div>
       <label class="lx-upload-demo__toggle">
         <input v-model="hudTheme" type="checkbox" />

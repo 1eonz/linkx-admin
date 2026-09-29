@@ -27,13 +27,45 @@
   --lx-color-warning-light: #fdf6ec;
   --lx-color-error: #f56c6c;
   --lx-color-error-strong: #b54747; /* 删除等小字号危险文字，白底对比度不低于 4.5:1 */
-  --lx-color-danger-hover: #e45e5e;
+  --lx-color-danger-hover: #e65d5d; /* 标本 danger 行 hover 加深档（原 #e45e5e 为漂移值） */
+  /* 彩色实底上的文字（2026-09-29 拍板深字方案）：中饱和底配深字替代标本白字，
+   * 白字在 danger/success/warning 底上对比度仅 2.1~2.9:1，深字约 6~7:1 达 WCAG AA */
   --lx-color-on-danger: #1d2129;
+  --lx-color-on-success: #1d2129;
+  --lx-color-on-warning: #1d2129;
   --lx-color-error-light: #fef0f0;
   --lx-color-info: #909399;
   --lx-color-info-strong: #606266;
   --lx-color-info-light: #f4f4f5;
   --lx-status-switch-text: #1d2129; /* 保证状态轨道文案在绿/灰底上的对比度 */
+
+  /* ========== 按钮专属令牌（design/按钮体系 §3 --lx-btn-* 契约，拍板 #11）========== */
+  /* 三档工程高度：28 / 32 / 40px；内边距 12 / 16 / 20px，文字型收窄到 8px */
+  --lx-btn-height-sm: 28px;
+  --lx-btn-height-md: 32px;
+  --lx-btn-height-lg: 40px;
+  --lx-btn-padding-x-sm: 12px;
+  --lx-btn-padding-x-md: 16px;
+  --lx-btn-padding-x-lg: 20px;
+  --lx-btn-text-padding-x: 8px;
+  /* 主操作：实底白字，hover 加深一档、active 再加深（标本 primary 行） */
+  --lx-btn-primary-bg: var(--lx-color-primary);
+  --lx-btn-primary-hover: var(--lx-color-primary-hover);
+  --lx-btn-primary-active: var(--lx-color-primary-active);
+  /* 高危操作：#f56c6c 实底，hover #e65d5d（标本 danger 行 / 令牌契约） */
+  --lx-btn-danger-bg: var(--lx-color-error);
+  --lx-btn-danger-hover: var(--lx-color-danger-hover);
+  /* 禁用与加载透明度（标本 primary/danger 禁用 0.45 / loading 0.8） */
+  --lx-btn-disabled-opacity: 0.45;
+  --lx-btn-loading-opacity: 0.8;
+  /* 次按钮/文字形态禁用专用色（标本 default 禁用行 #f5f7fa/#ebeef5/#c0c4cc；
+   * 透明度会把文字冲淡到不可读，这两档形态改用专用禁用色表达） */
+  --lx-btn-disabled-bg: #f5f7fa;
+  --lx-btn-disabled-border: #ebeef5;
+  --lx-btn-disabled-text: #c0c4cc;
+  /* hover 光晕（标本 ring-2 20%）：默认主色环，危险红环 */
+  --lx-btn-ring: 0 0 0 2px rgba(0, 96, 169, 0.2);
+  --lx-btn-ring-danger: 0 0 0 2px rgba(245, 108, 108, 0.3);
 
   /* ========== 反色表面（Toast 深色胶囊，stitch Modals & Feedback） ========== */
   --lx-bg-inverse: #2d3136;
@@ -47,10 +79,14 @@
   --lx-bg-tabsbar: #f4f6fa;
   --lx-border: #e4e7ed; /* 卡片/表格容器外框 */
   --lx-border-light: #ebeef5; /* 行分隔线、header 下线（外实内虚） */
+  /* 表单控件描边（标本八件套 #dcdfe6）：比容器外框深一档，
+   * 仅用于 input/select/radio/checkbox 等控件态，容器类边框仍用 --lx-border */
+  --lx-control-border: #dcdfe6;
 
   /* ========== 文字 ========== */
   --lx-text-primary: #1d2129; /* 标题、表头、指标数值 */
   --lx-text-regular: #4e5969; /* 正文、表格行 */
+  --lx-text-label: #606266; /* 表单字段标签（标本八件套，弱于正文一档保证层级） */
   --lx-text-secondary: #86909c; /* 辅助说明、时间戳 */
   --lx-text-placeholder: #c9cdd4;
   --lx-text-on-dark: #ffffff;
@@ -102,7 +138,8 @@
 
   /* ========== 阴影（三档制 P5） ========== */
   --lx-shadow-card: 0 1px 4px rgba(0, 21, 41, 0.08);
-  --lx-shadow-pop: 0 2px 12px rgba(0, 0, 0, 0.1);
+  /* popper 档（标本八件套 02：0 4px 16px/0.12），原 0 2px 12px/0.1 偏浅 */
+  --lx-shadow-pop: 0 4px 16px rgba(0, 0, 0, 0.12);
   --lx-shadow-modal: 0 4px 16px rgba(0, 0, 0, 0.15);
 
   /* ========== 动效（三动画制，DESIGN-SPEC §5） ========== */

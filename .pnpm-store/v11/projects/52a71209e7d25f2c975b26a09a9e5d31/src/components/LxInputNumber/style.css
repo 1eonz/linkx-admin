@@ -1,0 +1,106 @@
+/**
+ * LxInputNumber 专属样式（design/表单控件八件套 05 数字输入器）
+ *
+ * 触发器核心态（边框/焦点/错误/禁用/步进钮/触屏）在本文件组件级固化，
+ * 脱离 element-theme.css 全局桥时规格不漂移（与 Input/Select/DatePicker 族
+ * 同契约）；全局桥的同款规则继续服务存量裸 el-input-number 直用页面。
+ * 步进钮 hover 图标转主色由 EP 原生提供（.el-input-number__increase:hover），
+ * 本文件仅补 hover 底色（标本 05 hover:bg-surface-container 契约）。
+ * 色值全部引用 --lx-* 令牌（P8 铁律），零硬编码。
+ */
+
+/* ===== 默认宽 160px（标本 05 w-40；EP 原生 150px）=====
+ * :not() 排除 sm/lg 档，保留 EP 原生档宽（120/180px）不被同特异性覆盖 */
+.lx-input-number:not(.el-input-number--large):not(.el-input-number--small) {
+  width: 160px;
+}
+
+/* ===== 触发器核心态（wrapper 为后代，与 LxInput 同模式）===== */
+/* 闭合态：4px 圆角 + 1px 控件描边（EP 原生同为 box-shadow 伪边框模式） */
+.lx-input-number .el-input__wrapper {
+  border-radius: var(--lx-radius-md);
+  box-shadow: 0 0 0 1px var(--lx-control-border) inset;
+  transition:
+    box-shadow var(--lx-transition),
+    background-color var(--lx-transition);
+}
+
+/* hover：描边转主色 */
+.lx-input-number .el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--lx-color-primary) inset;
+}
+
+/* 焦点态：1px 主色内描边 + 2px 光环（标本 05 focus-within 主色 ring 契约） */
+.lx-input-number .el-input__wrapper.is-focus {
+  outline: none;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 1px var(--lx-color-primary) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+/* 值文字：mono + 600 字重（标本 05 font-mono font-semibold）。
+ * 左对齐由 EP 内核 align='left' prop → 根类 is-left → 原生规则
+ * .el-input-number.is-left .el-input__inner 提供（特异性高于通用 center 规则） */
+.lx-input-number .el-input__inner {
+  font-family: var(--lx-font-mono);
+  font-weight: 600;
+}
+
+/* ===== 步进钮（controls-right 右侧垂直拆分为默认形态）===== */
+/* 闭合态：透明白底（EP 原生浅灰 fill 底；标本 05 白底 + #dcdfe6 分隔线由
+ * EP 原生 border-left/border-bottom 提供） */
+.lx-input-number .el-input-number__increase,
+.lx-input-number .el-input-number__decrease {
+  background: transparent;
+  transition:
+    color var(--lx-transition),
+    background-color var(--lx-transition);
+}
+
+/* hover：浅灰底 + 图标主色（图标主色 EP 原生已提供，此处固化防升级漂移；
+ * :not(.is-disabled) 保证极值禁用态不被点亮） */
+.lx-input-number .el-input-number__increase:not(.is-disabled):hover,
+.lx-input-number .el-input-number__decrease:not(.is-disabled):hover {
+  background-color: var(--lx-bg-card-hover);
+  color: var(--lx-color-primary);
+}
+
+/* 禁用态：整体半透明（标本 05 极值行同族表达） */
+.lx-input-number.is-disabled .el-input__wrapper {
+  opacity: 0.6;
+}
+
+/* 错误态：红底红边一体化（标本八件套错误行，依赖 ElForm/LxForm 上下文） */
+.el-form-item.is-error .lx-input-number .el-input__wrapper {
+  background-color: var(--lx-color-error-light);
+  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
+}
+
+.el-form-item.is-error .lx-input-number .el-input__wrapper.is-focus {
+  outline: none;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+/* 错误态值文字同步变红：error-strong 深红做小字号对比度补偿（DESIGN-SPEC §3.2） */
+.el-form-item.is-error .lx-input-number .el-input__inner {
+  color: var(--lx-color-error-strong);
+}
+
+/* ===== 触屏 ===== */
+/* 触屏（无 hover 能力）：44px 最小触控目标 + 步进钮高度同步放大
+ * （EP controls-right 钮高固定 15px 是按 32px 控件高 /2 计算，
+ * 44px 时 (44-2)/2=21px 两钮才能铺满右侧无死区） */
+@media (hover: none) {
+  .lx-input-number .el-input__wrapper {
+    min-height: 44px;
+  }
+
+  .lx-input-number.is-controls-right .el-input-number__increase,
+  .lx-input-number.is-controls-right .el-input-number__decrease {
+    --el-input-number-controls-height: 21px;
+  }
+}

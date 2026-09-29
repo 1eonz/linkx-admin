@@ -24,9 +24,11 @@ describe('authenticated image API', () => {
   it('maps static images through the API gateway and keeps the token in headers', async () => {
     const blob = new Blob(['image'], { type: 'image/png' });
     const signal = new AbortController().signal;
-    fetchMock.mockResolvedValueOnce(new Response(blob, { status: 200 }));
+    // jsdom/Node 双 realm 下 new Response(blob) 会把 body 字符串化成 "[object Blob]"，
+    // 改用最小 Response 形状 mock，返回测试创建的同一 Blob 实例
+    fetchMock.mockResolvedValueOnce({ ok: true, blob: () => Promise.resolve(blob) } as Response);
 
-    await expect(getAuthImageBlob('/static/avatar.png', signal)).resolves.toEqual(blob);
+    await expect(getAuthImageBlob('/static/avatar.png', signal)).resolves.toBe(blob);
 
     expect(fetchMock).toHaveBeenCalledWith(
       '/linkx/admin/api/static/avatar.png',

@@ -1,10 +1,10 @@
-import { createApp } from 'vue';
-import { describe, expect, it } from 'vitest';
-
 import LxUI from 'lx-ui';
+import { describe, expect, it } from 'vitest';
+import { createApp } from 'vue';
 
 const componentNames = [
   'LxIcon',
+  'LxButton',
   'LxStatusDot',
   'LxSidebar',
   'LxSidebarBrand',
@@ -43,6 +43,18 @@ const componentNames = [
   'LxSplitLayout',
   'LxDutyCalendar',
   'LxDynamicForm',
+  // 波次 3 输入类族（design/表单控件八件套 01/03/04/07/08）
+  'LxInput',
+  'LxTextarea',
+  'LxRadio',
+  'LxRadioGroup',
+  'LxCheckbox',
+  'LxCheckboxGroup',
+  'LxSwitch',
+  // 波次 4 复合选择族（design/表单控件八件套 02/05/06）
+  'LxSelect',
+  'LxDatePicker',
+  'LxInputNumber',
 ];
 
 describe('lx-ui 插件注册', () => {

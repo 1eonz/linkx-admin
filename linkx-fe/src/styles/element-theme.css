@@ -138,7 +138,7 @@ html:root {
 .el-select__wrapper,
 .el-textarea__inner {
   border-radius: var(--lx-radius-md);
-  box-shadow: 0 0 0 1px var(--lx-border) inset;
+  box-shadow: 0 0 0 1px var(--lx-control-border) inset;
   transition:
     box-shadow var(--lx-transition),
     background-color var(--lx-transition);
@@ -147,7 +147,7 @@ html:root {
 /* 选择器用真实 1px 边框承载状态色，边线贴合控件几何外缘。 */
 html:root .el-select__wrapper {
   box-sizing: border-box;
-  border: 1px solid var(--lx-border);
+  border: 1px solid var(--lx-control-border);
   padding: 3px 11px;
   box-shadow: none;
   transition:
@@ -216,32 +216,138 @@ html:root .el-form-item.is-error .el-select__wrapper.is-focused {
   color: var(--lx-color-error-strong);
 }
 
+/* 错误态输入值同步变红（标本八件套：红边浅红底 + 深红值一体化表达）。
+ * 用 error-strong 而非 error：13px 小字号对比度补偿（DESIGN-SPEC §3.2）。
+ */
+.el-form-item.is-error .el-input__inner,
+.el-form-item.is-error .el-textarea__inner,
+.el-form-item.is-error .el-range-input {
+  color: var(--lx-color-error-strong);
+}
+
 .el-textarea__inner {
   resize: vertical;
 }
 
-.el-select__popper,
-.el-picker__popper,
-.el-dropdown__popper,
-.el-popover.el-popper {
+/* ===== Popper 终态（design/表单控件八件套 02/06）=====
+ * 加 html:root 提特异性：EP 2.14 的 .el-xxx__popper.el-popper 为 (0,2,0)，
+ * 原桥接层 (0,1,0) 实际从未生效，本波一并修复。
+ */
+html:root .el-select__popper,
+html:root .el-picker__popper,
+html:root .el-dropdown__popper,
+html:root .el-popover.el-popper {
   border-radius: var(--lx-radius-md);
   box-shadow: var(--lx-shadow-pop);
 }
 
+/* ===== Select 下拉面板终态（design/表单控件八件套 02，EP 2.14.6 类名锚定）=====
+ * 标本契约：选项行高 32px；选中项 #f5f7fa 底 + 主色文字 + 500 字重 + 右侧 Check（EP 原生）。
+ * 展开态箭头旋转 180° 由 EP 原生 .el-select__caret.is-reverse 提供，无需覆写。
+ */
+html:root .el-select-dropdown__item {
+  height: 32px;
+  line-height: 32px;
+}
+
+html:root .el-select-dropdown__item.is-selected {
+  color: var(--lx-color-primary);
+  font-weight: 500;
+  background-color: var(--lx-bg-table-header);
+}
+
+/* 展开态触发器：已选文字转主色。
+ * :not(.is-transparent) 排除空值占位态，避免误染 placeholder。
+ */
+html:root
+  .el-select__wrapper.is-focused
+  .el-select__placeholder:not(.is-transparent) {
+  color: var(--lx-color-primary);
+  font-weight: 500;
+}
+
+/* ===== 日期区间带（design/表单控件八件套 06）=====
+ * 连贯区间浅蓝带 #ecf5ff；起止主色圆点白字由 EP 默认提供。
+ * EP 2.14.6 变量锚定：--el-datepicker-inrange(-hover)-bg-color。
+ */
+html:root {
+  --el-datepicker-inrange-bg-color: var(--lx-color-primary-light);
+  --el-datepicker-inrange-hover-bg-color: var(--lx-color-primary-light);
+}
+
+/* 数值与日期输入用等宽字体（标本八件套 05/06 font-mono 契约），不做全局 mono */
+html:root .el-input-number .el-input__inner,
+html:root .el-date-editor .el-input__inner,
+html:root .el-date-editor .el-range-input {
+  font-family: var(--lx-font-mono);
+}
+
+/* ===== 单选/复选终态（design/表单控件八件套 03/04，EP 2.14.6 类名锚定）=====
+ * 标本契约：选项文字 12px；未选描边 #dcdfe6；
+ * 单选选中为"白底蓝心靶环"（非 EP 默认整圆填充），靶心 6px；
+ * hover 时描边与文字同步提亮到主色。
+ */
 .el-radio,
 .el-checkbox {
   min-height: var(--lx-control-height);
-  font-size: 13px;
+  font-size: 12px;
 }
 
-.el-radio__input.is-checked .el-radio__inner,
+/* 未选态描边：#dcdfe6 深于容器外框一档（--lx-control-border 专属控件态） */
+html:root .el-radio__inner,
+html:root .el-checkbox__inner {
+  border-color: var(--lx-control-border);
+}
+
+/* hover：描边与 label 同步转主色（标本 03/04 group-hover 契约），禁用态除外 */
+html:root .el-radio:not(.is-disabled):hover .el-radio__inner,
+html:root .el-checkbox:not(.is-disabled):hover .el-checkbox__inner {
+  border-color: var(--lx-color-primary);
+}
+
+.el-radio:not(.is-disabled):hover .el-radio__label,
+.el-checkbox:not(.is-disabled):hover .el-checkbox__label {
+  color: var(--lx-color-primary);
+}
+
+/* 单选选中态：白底 + 主色描边 + 6px 主色靶心（标本八件套 03）。
+ * :not(.is-disabled) 保证 EP 的灰底禁用态优先级不被本规则覆盖。
+ * ::after 尺寸/颜色覆写 EP 默认（4px 白心），缩放动画由 EP 原生 scale 提供。
+ */
+html:root .el-radio__input.is-checked:not(.is-disabled) .el-radio__inner {
+  border-color: var(--lx-color-primary);
+  background: var(--lx-bg-card);
+}
+
+html:root .el-radio__input.is-checked:not(.is-disabled) .el-radio__inner:after {
+  width: 6px;
+  height: 6px;
+  background-color: var(--lx-color-primary);
+}
+
+/* 选中态 label：主色 + 500 字重（标本八件套 03）。
+ * :not(.is-disabled) 防止 500 字重泄漏进禁用态（EP 禁用灰只覆盖 color）。
+ */
+.el-radio__input.is-checked:not(.is-disabled) + .el-radio__label {
+  color: var(--lx-color-primary);
+  font-weight: 500;
+}
+
+/* 复选选中/半选：主色填充 + 白勾/横杠（EP 默认契约已对齐标本 04） */
 .el-checkbox__input.is-checked .el-checkbox__inner,
 .el-checkbox__input.is-indeterminate .el-checkbox__inner {
   border-color: var(--lx-color-primary);
   background: var(--lx-color-primary);
 }
 
-.el-radio__input.is-focus .el-radio__inner {
+/* 表单字段标签：#606266（标本八件套统一 label 契约，弱于正文保证层级） */
+html:root .el-form-item__label {
+  color: var(--lx-text-label);
+}
+
+/* EP 2.14.6 的 radio is-focus 类挂在根 label 上（非 __input），
+ * 焦点环走原生 input:focus-visible + 相邻 inner 钩子（仅键盘导航显示） */
+.el-radio__original:focus-visible + .el-radio__inner {
   outline: 2px solid var(--lx-color-primary);
   outline-offset: 2px;
 }
@@ -354,4 +460,49 @@ html.dark.lx-theme-hud {
   --el-color-primary-dark-2: #2d97c6;
   --el-color-on-primary: #0b1220;
   --lx-color-error-strong: #f78989;
+
+  /* 表单控件暗色适配：标签与描边跟随 HUD 表面体系，
+   * #606266/#dcdfe6 是亮色值，深底上直接不可见 */
+  --lx-text-label: var(--el-text-color-regular);
+  --lx-control-border: var(--el-border-color);
+
+  /* 按钮专属令牌 HUD 偏移：主操作换战术蓝 sky，实底文字随 EP on-primary 变深 */
+  --lx-btn-primary-bg: var(--el-color-primary);
+  --lx-btn-primary-hover: var(--el-color-primary-light-3);
+  --lx-btn-primary-active: var(--el-color-primary-dark-2);
+  --lx-btn-ring: 0 0 0 2px rgba(56, 189, 248, 0.25);
+  /* 次按钮/文字形态禁用色偏移：亮色 #f5f7fa/#ebeef5/#c0c4cc 深底不可见，
+   * 换 HUD 表面/边框/占位色阶 */
+  --lx-btn-disabled-bg: var(--el-fill-color-light);
+  --lx-btn-disabled-border: var(--el-border-color);
+  --lx-btn-disabled-text: var(--el-text-color-placeholder);
+}
+
+/* HUD 选中项底色：#f5f7fa 是亮色值，深底换成 EP HUD 表面色 */
+html.dark.lx-theme-hud .el-select-dropdown__item.is-selected {
+  background-color: var(--el-fill-color-light);
+}
+
+/* HUD 单选靶心：深底替代白底，描边与靶心跟随 HUD 主色 sky
+ * （--lx-color-primary 仍是亮色深蓝 #0060a9，深底上对比度不足） */
+html.dark.lx-theme-hud
+  .el-radio__input.is-checked:not(.is-disabled)
+  .el-radio__inner {
+  border-color: var(--el-color-primary);
+  background: var(--el-bg-color-overlay);
+}
+
+html.dark.lx-theme-hud
+  .el-radio__input.is-checked:not(.is-disabled)
+  .el-radio__inner:after {
+  background-color: var(--el-color-primary);
+}
+
+/* HUD 复选填充：同上跟随 HUD 主色，避免亮色深蓝填块在深底发闷 */
+html.dark.lx-theme-hud .el-checkbox__input.is-checked .el-checkbox__inner,
+html.dark.lx-theme-hud
+  .el-checkbox__input.is-indeterminate
+  .el-checkbox__inner {
+  border-color: var(--el-color-primary);
+  background: var(--el-color-primary);
 }

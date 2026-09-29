@@ -49,9 +49,33 @@ import LxBreadcrumb from './components/LxBreadcrumb/index.vue'
 import LxSplitLayout from './components/LxSplitLayout/index.vue'
 import LxDutyCalendar from './components/LxDutyCalendar/index.vue'
 import LxDynamicForm from './components/LxDynamicForm/index.vue'
+import LxButton from './components/LxButton/index.vue'
+// 输入类族（design/表单控件八件套 01/03/04/07/08）
+import LxInput from './components/LxInput/index.vue'
+import LxTextarea from './components/LxTextarea/index.vue'
+import LxRadio from './components/LxRadio/index.vue'
+import LxRadioGroup from './components/LxRadioGroup/index.vue'
+import LxCheckbox from './components/LxCheckbox/index.vue'
+import LxCheckboxGroup from './components/LxCheckboxGroup/index.vue'
+import LxSwitch from './components/LxSwitch/index.vue'
+// 复合选择族（design/表单控件八件套 02/05/06）
+import LxSelect from './components/LxSelect/index.vue'
+import LxDatePicker from './components/LxDatePicker/index.vue'
+import LxInputNumber from './components/LxInputNumber/index.vue'
 
 const componentRegistry: Record<string, Component> = {
   LxIcon,
+  LxButton,
+  LxInput,
+  LxTextarea,
+  LxRadio,
+  LxRadioGroup,
+  LxCheckbox,
+  LxCheckboxGroup,
+  LxSwitch,
+  LxSelect,
+  LxDatePicker,
+  LxInputNumber,
   LxStatusDot,
   LxSidebar,
   LxSidebarBrand,
@@ -182,6 +206,39 @@ export type {
   LxDynamicFormProps,
   LxDynamicFormSlotProps,
 } from './components/LxDynamicForm/types'
+export type {
+  LxButtonProps,
+  LxButtonSize,
+  LxButtonType,
+} from './components/LxButton/types'
+export type { LxInputProps, LxInputSize } from './components/LxInput/types'
+export type { LxTextareaProps } from './components/LxTextarea/types'
+export type { LxRadioProps, LxRadioValue } from './components/LxRadio/types'
+export type { LxRadioGroupProps } from './components/LxRadioGroup/types'
+export type {
+  LxCheckboxProps,
+  LxCheckboxValue,
+} from './components/LxCheckbox/types'
+export type { LxCheckboxGroupProps } from './components/LxCheckboxGroup/types'
+export type { LxSwitchProps } from './components/LxSwitch/types'
+export type {
+  LxSelectModelValue,
+  LxSelectOptionValue,
+  LxSelectProps,
+  LxSelectSize,
+} from './components/LxSelect/types'
+export type {
+  LxDateModelValue,
+  LxDatePickerProps,
+  LxDatePickerShortcut,
+  LxDatePickerSize,
+  LxDatePickerType,
+} from './components/LxDatePicker/types'
+export type {
+  LxInputNumberAlign,
+  LxInputNumberProps,
+  LxInputNumberSize,
+} from './components/LxInputNumber/types'
 export {
   lxMessage,
   type LxMessageApi,
@@ -219,6 +276,17 @@ export type {
 
 export {
   LxIcon,
+  LxButton,
+  LxInput,
+  LxTextarea,
+  LxRadio,
+  LxRadioGroup,
+  LxCheckbox,
+  LxCheckboxGroup,
+  LxSwitch,
+  LxSelect,
+  LxDatePicker,
+  LxInputNumber,
   LxStatusDot,
   LxSidebar,
   LxSidebarBrand,

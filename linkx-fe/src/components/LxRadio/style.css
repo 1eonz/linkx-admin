@@ -1,0 +1,88 @@
+/**
+ * LxRadio / LxRadioGroup 终态样式 — 选项部分（design/表单控件八件套 03 单选组）
+ *
+ * 标本契约：选项文字 12px；未选描边 #dcdfe6；选中"白底蓝心靶环"
+ * （14px 圆环 + 6px 主色靶心，非 EP 默认蓝底白心）；hover 描边与文字同步转主色。
+ * 与 element-theme.css 的全局同款覆写并存（过渡期），全局层服务存量
+ * el-radio 直用页面，本文件保证 LxRadio 脱离全局桥时规格不漂移。
+ * 色值全部引用 --lx-* 令牌（P8 铁律），零硬编码。
+ */
+
+/* ===== 选项基础 ===== */
+.lx-radio.el-radio {
+  min-height: var(--lx-control-height);
+  font-size: 12px;
+}
+
+/* 未选描边：#dcdfe6（--lx-control-border 专属控件态，深于容器外框一档） */
+.lx-radio .el-radio__inner {
+  border-color: var(--lx-control-border);
+}
+
+/* hover：描边与 label 同步转主色（标本 03 group-hover 契约），禁用态除外 */
+.lx-radio.el-radio:not(.is-disabled):hover .el-radio__inner {
+  border-color: var(--lx-color-primary);
+}
+
+.lx-radio.el-radio:not(.is-disabled):hover .el-radio__label {
+  color: var(--lx-color-primary);
+}
+
+/* ===== 选中态：白底蓝心靶环（标本 03 核心差异，替代 EP 默认蓝底白心）=====
+ * :not(.is-disabled) 保证 EP 的灰底禁用态优先级不被本规则覆盖；
+ * ::after 6px 覆写 EP 默认 4px 白心，缩放动画由 EP 原生 scale 提供。
+ */
+.lx-radio .el-radio__input.is-checked:not(.is-disabled) .el-radio__inner {
+  border-color: var(--lx-color-primary);
+  background: var(--lx-bg-card);
+}
+
+.lx-radio .el-radio__input.is-checked:not(.is-disabled) .el-radio__inner:after {
+  width: 6px;
+  height: 6px;
+  background-color: var(--lx-color-primary);
+}
+
+/* 选中态 label：主色 + 500 字重（标本 03）；
+ * :not(.is-disabled) 防止字重泄漏进禁用态（EP 禁用灰只覆盖 color） */
+.lx-radio .el-radio__input.is-checked:not(.is-disabled) + .el-radio__label {
+  color: var(--lx-color-primary);
+  font-weight: 500;
+}
+
+/* ===== HUD 深色主题：靶环底色与靶心跟随 HUD 主色 =====
+ * --lx-bg-card 是亮色值（#ffffff）深底不可用，换 EP HUD 表面色；
+ * --lx-color-primary 仍为亮色深蓝 #0060a9，深底对比度不足，换 HUD 主色。
+ */
+html.dark.lx-theme-hud
+  .lx-radio
+  .el-radio__input.is-checked:not(.is-disabled)
+  .el-radio__inner {
+  border-color: var(--el-color-primary);
+  background: var(--el-bg-color-overlay);
+}
+
+html.dark.lx-theme-hud
+  .lx-radio
+  .el-radio__input.is-checked:not(.is-disabled)
+  .el-radio__inner:after {
+  background-color: var(--el-color-primary);
+}
+
+/* ===== 键盘焦点环（与全局桥同款，组件级固化防桥退役后丢失 WCAG 2.4.7）=====
+ * EP 2.14.6 的 is-focus 类挂在根 label.el-radio 上（非 __input），
+ * 键盘环走原生钩子 input:focus-visible + 相邻 inner；程序化聚焦不触发
+ * focus-visible，仅键盘导航显示（与 EP 原生行为一致）
+ */
+.lx-radio .el-radio__original:focus-visible + .el-radio__inner {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+/* ===== 触屏 ===== */
+/* 触屏（无 hover 能力）：44px 最小触控目标（整个 label 均可点击） */
+@media (hover: none) {
+  .lx-radio.el-radio {
+    min-height: 44px;
+  }
+}

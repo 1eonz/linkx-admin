@@ -1,0 +1,97 @@
+/**
+ * LxSelect 专属样式（design/表单控件八件套 02 下拉选择器）
+ *
+ * 触发器核心态（边框/展开/禁用/错误）与 popper 终态在本文件组件级固化，
+ * 脱离 element-theme.css 全局桥时规格不漂移（与 Input/Textarea/Radio 族同契约）；
+ * 全局桥的同款规则继续服务存量裸 el-select 直用页面（过渡期并存）。
+ * popper 面板 teleport 到 body，经组件注入的 lx-select__popper 类锚定。
+ * 色值全部引用 --lx-* 令牌（P8 铁律），零硬编码。
+ */
+
+/* ===== 触发器（.lx-select.el-select 双类锚定，压过全局桥 html:root 档）===== */
+/* 闭合态：真实 1px 控件边框承载状态色（EP 默认 box-shadow 伪边框），32px 高由令牌桥供给 */
+.lx-select.el-select .el-select__wrapper {
+  box-sizing: border-box;
+  border: 1px solid var(--lx-control-border);
+  padding: 3px 11px;
+  box-shadow: none;
+  transition:
+    border-color var(--lx-transition),
+    background-color var(--lx-transition);
+}
+
+/* hover：描边转主色（标本 02 综合演练卡 hover:border-primary 契约；
+ * 主卡片的 #c0c4cc 灰加深方案已在波 1 拍板弃用） */
+.lx-select.el-select .el-select__wrapper:hover {
+  border-color: var(--lx-color-primary);
+  box-shadow: none;
+}
+
+/* 展开态：主色边框；已选文字转主色 + 500 字重（EP 2.14.6 类名锚定）。
+ * :not(.is-transparent) 排除空值占位态，避免误染 placeholder */
+.lx-select.el-select .el-select__wrapper.is-focused {
+  border-color: var(--lx-color-primary);
+  box-shadow: none;
+  outline: none;
+  outline-offset: 0;
+}
+
+.lx-select.el-select
+  .el-select__wrapper.is-focused
+  .el-select__placeholder:not(.is-transparent) {
+  color: var(--lx-color-primary);
+  font-weight: 500;
+}
+
+/* 禁用态：半透明（标本 02 禁用选项同族表达） */
+.lx-select.el-select .el-select__wrapper.is-disabled {
+  opacity: 0.6;
+}
+
+/* 错误态：红底红边一体化（标本八件套错误行，依赖 ElForm/LxForm 上下文） */
+.el-form-item.is-error .lx-select.el-select .el-select__wrapper {
+  background-color: var(--lx-color-error-light);
+  border-color: var(--lx-color-error);
+  box-shadow: none;
+}
+
+.el-form-item.is-error .lx-select.el-select .el-select__wrapper.is-focused {
+  border-color: var(--lx-color-error-strong);
+  box-shadow: none;
+}
+
+/* ===== Popper 终态（teleport 到 body，lx-select__popper 锚定）===== */
+/* 面板：4px 圆角 + pop 档阴影（标本 02：0 4px 16px/0.12） */
+.lx-select__popper.el-select__popper {
+  border-radius: var(--lx-radius-md);
+  box-shadow: var(--lx-shadow-pop);
+}
+
+/* 选项行高 32px（标本 02 选项高度契约） */
+.lx-select__popper.el-select__popper .el-select-dropdown__item {
+  height: 32px;
+  line-height: 32px;
+}
+
+/* 选中项：#f5f7fa 底 + 主色文字 + 500 字重 + 右侧 Check（EP 原生） */
+.lx-select__popper.el-select__popper .el-select-dropdown__item.is-selected {
+  color: var(--lx-color-primary);
+  font-weight: 500;
+  background-color: var(--lx-bg-table-header);
+}
+
+/* HUD 深色：选中底色 #f5f7fa 是亮色值，深底换 EP HUD 表面色
+ * （html 级 HUD 挂载生效；容器级挂载的 popper 换肤缺口由波次 8 皮肤专项统一收口） */
+html.dark.lx-theme-hud
+  .lx-select__popper
+  .el-select-dropdown__item.is-selected {
+  background-color: var(--el-fill-color-light);
+}
+
+/* ===== 触屏 ===== */
+/* 触屏（无 hover 能力）：44px 最小触控目标（与输入类族同族契约） */
+@media (hover: none) {
+  .lx-select.el-select .el-select__wrapper {
+    min-height: 44px;
+  }
+}

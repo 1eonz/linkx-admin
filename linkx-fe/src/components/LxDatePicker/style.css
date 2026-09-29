@@ -1,0 +1,102 @@
+/**
+ * LxDatePicker 专属样式（design/表单控件八件套 06 日期范围选择器）
+ *
+ * 触发器核心态（边框/焦点/错误/禁用）与 popper 区间带终态在本文件组件级固化，
+ * 脱离 element-theme.css 全局桥时规格不漂移（与 Input/Select 族同契约）；
+ * 全局桥的同款规则继续服务存量裸 el-date-picker 直用页面（过渡期并存）。
+ *
+ * 双形态 DOM 差异（EP 2.14.6 picker.vue rangeInputKls 锚定）：
+ *  - 单值：class 落在 .el-input 根上，.el-input__wrapper 是后代（焦点态 .is-focus）
+ *  - 区间：class 与 .el-input__wrapper 同元素（激活态 .is-active）
+ * 因此每条触发器规则都双锚定（后代 + 同元素）覆盖两种形态。
+ * 色值全部引用 --lx-* 令牌（P8 铁律），零硬编码。
+ */
+
+/* ===== 触发器核心态 ===== */
+/* 闭合态：4px 圆角 + 1px 控件描边（EP 原生同为 box-shadow 伪边框模式）；
+ * 高度 28/32/40px 由 --el-component-size* 变量桥供给（变量继承不受组件边界影响） */
+.lx-date-picker .el-input__wrapper,
+.lx-date-picker.el-input__wrapper {
+  border-radius: var(--lx-radius-md);
+  box-shadow: 0 0 0 1px var(--lx-control-border) inset;
+  transition:
+    box-shadow var(--lx-transition),
+    background-color var(--lx-transition);
+}
+
+/* hover：描边转主色（标本 06 激活卡同族契约） */
+.lx-date-picker .el-input__wrapper:hover,
+.lx-date-picker.el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--lx-color-primary) inset;
+}
+
+/* 焦点/激活态：1px 主色内描边 + 2px 光环（单值 .is-focus / 区间 .is-active） */
+.lx-date-picker .el-input__wrapper.is-focus,
+.lx-date-picker.el-input__wrapper.is-active {
+  outline: none;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 1px var(--lx-color-primary) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+/* 前置日历图标转主色（标本 06 calendar_today text-primary 契约） */
+.lx-date-picker .el-input__prefix .el-input__icon,
+.lx-date-picker .el-range__icon {
+  color: var(--lx-color-primary);
+}
+
+/* 值文字等宽字体（标本 06 font-mono 契约） */
+.lx-date-picker .el-input__inner,
+.lx-date-picker .el-range-input {
+  font-family: var(--lx-font-mono);
+}
+
+/* 禁用态：半透明（单值 is-disabled 在根 / 区间与 wrapper 同元素） */
+.lx-date-picker.is-disabled .el-input__wrapper,
+.lx-date-picker.el-input__wrapper.is-disabled {
+  opacity: 0.6;
+}
+
+/* 错误态：红底红边一体化（标本八件套错误行，依赖 ElForm/LxForm 上下文） */
+.el-form-item.is-error .lx-date-picker .el-input__wrapper,
+.el-form-item.is-error .lx-date-picker.el-input__wrapper {
+  background-color: var(--lx-color-error-light);
+  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
+}
+
+.el-form-item.is-error .lx-date-picker .el-input__wrapper.is-focus,
+.el-form-item.is-error .lx-date-picker.el-input__wrapper.is-active {
+  outline: none;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+/* 错误态值文字同步变红：error-strong 深红做小字号对比度补偿（DESIGN-SPEC §3.2） */
+.el-form-item.is-error .lx-date-picker .el-input__inner,
+.el-form-item.is-error .lx-date-picker .el-range-input {
+  color: var(--lx-color-error-strong);
+}
+
+/* ===== Popper 终态（teleport 到 body，lx-date-picker__popper 锚定）===== */
+/* 面板：4px 圆角 + pop 档阴影（与 Select 面板同族）；
+ * 区间连贯浅蓝带 #ecf5ff 经 EP 变量注入（--el-datepicker-inrange-bg-color，
+ * 作用于 .el-date-table td.in-range .el-date-table-cell）；
+ * 起止主色圆点白字由 EP 原生提供，周一起始由内置 zh-cn locale 提供 */
+.lx-date-picker__popper.el-picker__popper {
+  border-radius: var(--lx-radius-md);
+  box-shadow: var(--lx-shadow-pop);
+  --el-datepicker-inrange-bg-color: var(--lx-color-primary-light);
+  --el-datepicker-inrange-hover-bg-color: var(--lx-color-primary-light);
+}
+
+/* ===== 触屏 ===== */
+/* 触屏（无 hover 能力）：44px 最小触控目标（与输入/选择族同族契约） */
+@media (hover: none) {
+  .lx-date-picker .el-input__wrapper,
+  .lx-date-picker.el-input__wrapper {
+    min-height: 44px;
+  }
+}

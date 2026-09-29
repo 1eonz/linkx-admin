@@ -75,7 +75,7 @@ const columns: LxTableColumn[] = [
 function actionsOf(row: Row): LxActionItem[] {
   return [
     { label: '编辑' },
-    { label: '授权' },
+    { label: '授权', type: 'success' },
     { label: '停用', type: 'danger', hidden: row.status === 'error' },
     { label: '删除', type: 'danger' },
   ]

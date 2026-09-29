@@ -1,0 +1,70 @@
+/**
+ * LxCheckbox 终态样式 — 选项部分（design/表单控件八件套 04 复选组）
+ *
+ * 标本契约：选项文字 12px；未选描边 #dcdfe6；选中/半选主色填充
+ * 白勾/横杠（EP 原生契约已对齐标本）；hover 描边与文字同步转主色。
+ * 与 element-theme.css 的全局同款覆写并存（过渡期），本文件保证
+ * LxCheckbox 脱离全局桥时规格不漂移。
+ * 色值全部引用 --lx-* 令牌（P8 铁律），零硬编码。
+ */
+
+/* ===== 选项基础 ===== */
+.lx-checkbox.el-checkbox {
+  min-height: var(--lx-control-height);
+  font-size: 12px;
+}
+
+/* 未选描边：#dcdfe6（--lx-control-border 专属控件态） */
+.lx-checkbox .el-checkbox__inner {
+  border-color: var(--lx-control-border);
+}
+
+/* hover：描边与 label 同步转主色（标本 04 group-hover 契约），禁用态除外 */
+.lx-checkbox.el-checkbox:not(.is-disabled):hover .el-checkbox__inner {
+  border-color: var(--lx-color-primary);
+}
+
+.lx-checkbox.el-checkbox:not(.is-disabled):hover .el-checkbox__label {
+  color: var(--lx-color-primary);
+}
+
+/* ===== 选中/半选：主色填充白勾/横杠（EP 原生契约，组件级固化防漂移）===== */
+.lx-checkbox .el-checkbox__input.is-checked .el-checkbox__inner,
+.lx-checkbox .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  border-color: var(--lx-color-primary);
+  background: var(--lx-color-primary);
+}
+
+/* ===== HUD 深色主题：填充跟随 HUD 主色 =====
+ * --lx-color-primary 是亮色深蓝 #0060a9，深底发闷，换 HUD 战术蓝。
+ */
+html.dark.lx-theme-hud
+  .lx-checkbox
+  .el-checkbox__input.is-checked
+  .el-checkbox__inner,
+html.dark.lx-theme-hud
+  .lx-checkbox
+  .el-checkbox__input.is-indeterminate
+  .el-checkbox__inner {
+  border-color: var(--el-color-primary);
+  background: var(--el-color-primary);
+}
+
+/* ===== 键盘焦点环（与全局桥同款，组件级固化防桥退役后丢失 WCAG 2.4.7）=====
+ * 用光环而非 outline：直角 outline 环与圆角勾选盒不贴形
+ */
+.lx-checkbox .el-checkbox__input.is-focus .el-checkbox__inner {
+  box-sizing: border-box;
+  border-color: var(--el-color-primary);
+  outline: none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+/* ===== 触屏 ===== */
+/* 触屏（无 hover 能力）：44px 最小触控目标（整个 label 均可点击） */
+@media (hover: none) {
+  .lx-checkbox.el-checkbox {
+    min-height: 44px;
+  }
+}

@@ -45,7 +45,8 @@ describe('LxDialog', () => {
 
   it('emits confirm without closing and blocks confirm while loading', async () => {
     const wrapper = mountDialog();
-    const confirm = wrapper.get('.lx-dialog__btn--primary');
+    // 底部操作已切换 LxButton 内核（.lx-btn 体系）
+    const confirm = wrapper.get('.lx-btn--primary');
 
     await confirm.trigger('click');
     expect(wrapper.emitted('confirm')).toHaveLength(1);
@@ -60,7 +61,7 @@ describe('LxDialog', () => {
 
   it('emits cancel only for the cancel action and models header close', async () => {
     const cancelWrapper = mountDialog();
-    await cancelWrapper.get('.lx-dialog__btn:not(.lx-dialog__btn--primary)').trigger('click');
+    await cancelWrapper.get('.lx-btn--default').trigger('click');
     expect(cancelWrapper.emitted('cancel')).toHaveLength(1);
     expect(cancelWrapper.emitted('update:modelValue')).toEqual([[false]]);
     cancelWrapper.unmount();
@@ -76,7 +77,7 @@ describe('LxDialog', () => {
     const wrapper = mountDialog({ hideFooter: true }, { footer: '<button type="button">完成</button>' });
 
     expect(wrapper.get('footer button').text()).toBe('完成');
-    expect(wrapper.find('.lx-dialog__btn').exists()).toBe(false);
+    expect(wrapper.find('.lx-btn').exists()).toBe(false);
     wrapper.unmount();
   });
 });

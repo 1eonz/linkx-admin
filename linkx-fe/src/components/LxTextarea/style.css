@@ -1,0 +1,65 @@
+/**
+ * LxTextarea 专属样式（design/表单控件八件套 08 文本域）
+ *
+ * 核心态（边框/焦点环/错误态）在本文件组件级固化，脱离
+ * element-theme.css 全局桥时规格不漂移（与 Input/Radio/Checkbox 同族契约）；
+ * 全局桥的同款规则继续服务存量裸 el-textarea 直用页面（过渡期并存）。
+ * 色值全部引用 --lx-* 令牌（P8 铁律），零硬编码。
+ */
+
+/* 内边距 8/12px + 行高 20px（标本 08 p-2.5 与 body-md 行高契约；标本 10px
+ * 内衬取整为令牌五档 sm 8px）+ 核心几何：圆角 + 1px 控件描边 + 竖向 resize */
+.lx-textarea .el-textarea__inner {
+  padding: var(--lx-space-sm) var(--lx-space-md);
+  line-height: 20px;
+  border-radius: var(--lx-radius-md);
+  box-shadow: 0 0 0 1px var(--lx-control-border) inset;
+  transition:
+    box-shadow var(--lx-transition),
+    background-color var(--lx-transition);
+  resize: vertical;
+}
+
+/* hover：描边转主色 */
+.lx-textarea .el-textarea__inner:hover {
+  box-shadow: 0 0 0 1px var(--lx-color-primary) inset;
+}
+
+/* 键盘焦点：1px 主色内描边 + 2px 光环（不在控件外溢出第二圈） */
+.lx-textarea .el-textarea__inner:focus {
+  outline: none;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 1px var(--lx-color-primary) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+/* 错误态：红底红边 + 深红值一体化（标本八件套错误行，依赖 ElForm/LxForm 上下文；
+ * error-strong 做小字号对比度补偿） */
+.el-form-item.is-error .lx-textarea .el-textarea__inner {
+  background-color: var(--lx-color-error-light);
+  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
+  color: var(--lx-color-error-strong);
+}
+
+.el-form-item.is-error .lx-textarea .el-textarea__inner:focus {
+  outline: none;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+/* 字数计数器：等宽 11px（标本 08 "42 / 200" 右对齐微型计数，10px 过小
+ * 影响可读统一抬到 11px）；文字色用 label 档 #606266（约 6.1:1 达 AA），
+ * secondary 3.2:1 未达 AA（critique 2026-09-29 P2，与 LxInput 同口径） */
+.lx-textarea .el-input__count {
+  font-family: var(--lx-font-mono);
+  font-size: 11px;
+  color: var(--lx-text-label);
+}
+
+/* 无 maxlength 的开口计数（EP is-outside 落在域外下方）同样走等宽规格 */
+.lx-textarea .el-input__count.is-outside {
+  padding-top: 2px;
+}

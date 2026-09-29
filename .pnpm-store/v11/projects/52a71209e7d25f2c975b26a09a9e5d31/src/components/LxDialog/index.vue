@@ -10,6 +10,7 @@ import { computed } from 'vue'
 import { ElDialog } from 'element-plus'
 import type { LxDialogProps } from './types'
 import LxIcon from '../LxIcon/index.vue'
+import LxButton from '../LxButton/index.vue'
 import 'element-plus/es/components/dialog/style/css'
 
 const props = withDefaults(defineProps<LxDialogProps>(), {
@@ -103,21 +104,19 @@ function onConfirm() {
 
     <slot />
 
-    <!-- 底部：顶 1px 分隔线，按钮右对齐：取消（灰）在左、主操作在右（stitch 按钮律） -->
+    <!-- 底部：顶 1px 分隔线，按钮右对齐：取消（次按钮）在左、主操作在右（stitch 按钮律）。
+     按钮内核切换为 LxButton（EP 内核）：loading 时呈现 spinner 并拦截点击 -->
     <template v-if="!hideFooter" #footer>
       <div class="lx-dialog__footer">
-        <button class="lx-dialog__btn" type="button" @click="onCancel">
-          {{ cancelText }}
-        </button>
-        <button
-          class="lx-dialog__btn lx-dialog__btn--primary"
-          :class="{ 'lx-dialog__btn--danger': danger }"
-          type="button"
-          :disabled="loading"
+        <LxButton size="md" @click="onCancel">{{ cancelText }}</LxButton>
+        <LxButton
+          size="md"
+          :type="danger ? 'danger' : 'primary'"
+          :loading="loading"
           @click="onConfirm"
         >
           {{ confirmText }}
-        </button>
+        </LxButton>
       </div>
     </template>
 
@@ -208,65 +207,15 @@ function onConfirm() {
   margin-top: var(--lx-space-lg);
 }
 
-/* 按钮高度 32px（--lx-control-height），主按钮蓝底白字加粗 */
-.lx-dialog__btn {
-  height: var(--lx-control-height);
-  padding: 0 var(--lx-space-lg);
-  border: 1px solid var(--lx-border);
-  border-radius: var(--lx-radius-md);
-  background: var(--lx-bg-card);
-  color: var(--lx-text-regular);
-  font-size: 13px;
-  cursor: pointer;
-  transition:
-    border-color var(--lx-transition),
-    background-color var(--lx-transition),
-    color var(--lx-transition);
-}
+/* 底部按钮已切换 LxButton 内核（.lx-btn 体系自带尺寸/hover/禁用/焦点样式） */
 
-.lx-dialog__close:focus-visible,
-.lx-dialog__btn:focus-visible {
+.lx-dialog__close:focus-visible {
   outline: 2px solid var(--lx-color-primary);
   outline-offset: 2px;
 }
 
-.lx-dialog__btn:hover {
-  border-color: var(--lx-color-primary);
-  color: var(--lx-color-primary);
-}
-
-.lx-dialog__btn--primary {
-  border-color: var(--lx-color-primary);
-  background: var(--lx-color-primary);
-  color: var(--lx-color-on-primary);
-  font-weight: 600;
-}
-
-.lx-dialog__btn--primary:hover {
-  border-color: var(--lx-color-primary-hover);
-  background: var(--lx-color-primary-hover);
-  color: var(--lx-color-on-primary);
-}
-
-/* 危险模式：红底白字（stitch DANGER） */
-.lx-dialog__btn--danger {
-  border-color: var(--lx-color-error);
-  background: var(--lx-color-error);
-}
-
-.lx-dialog__btn--danger:hover {
-  border-color: var(--lx-color-error-strong);
-  background: var(--lx-color-error-strong);
-}
-
-.lx-dialog__btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .lx-dialog__close,
-  .lx-dialog__btn {
+  .lx-dialog__close {
     transition: none;
   }
 }
@@ -274,10 +223,6 @@ function onConfirm() {
 @media (max-width: 600px) {
   .lx-dialog__close {
     width: 44px;
-    height: 44px;
-  }
-
-  .lx-dialog__btn {
     height: 44px;
   }
 }
