@@ -17,6 +17,7 @@ const emit = defineEmits<{
 const { t } = useI18n({ useScope: 'global' });
 
 const dialogVisible = ref(false);
+const submitting = ref(false);
 const formRef = ref<FormInstance>();
 const roleList = ref<RoleItem[]>([]);
 
@@ -57,8 +58,13 @@ function getList(): Promise<boolean> {
 }
 
 function handleConfirm(): void {
+  if (submitting.value) return;
+  submitting.value = true;
   formRef.value?.validate((valid) => {
-    if (!valid) return;
+    if (!valid) {
+      submitting.value = false;
+      return;
+    }
     const params = {
       userIds: form.relatedUserIds,
       roleId: form.roleIds as string,
@@ -68,16 +74,20 @@ function handleConfirm(): void {
         if (result.code === 0) {
           ElMessage.success(result.msg || '');
           emit('success');
-          closeDialog();
+          closeDialog(true);
         } else {
           ElMessage.error(result.msg || '');
         }
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        submitting.value = false;
+      });
   });
 }
 
-function closeDialog(): void {
+function closeDialog(force = false): void {
+  if (submitting.value && !force) return;
   form.relatedUserNames = '';
   form.relatedUserIds = [];
   form.roleIds = '';
@@ -93,6 +103,8 @@ defineExpose({ init });
     v-if="dialogVisible"
     v-model="dialogVisible"
     :close-on-click-modal="false"
+    :close-on-press-escape="!submitting"
+    :show-close="!submitting"
     :title="t('index.operations.setRole')"
     align-center
     @close="closeDialog"
@@ -126,8 +138,16 @@ defineExpose({ init });
     </el-form>
 
     <template #footer>
-      <el-button @click="dialogVisible = false">{{ t('cancel') }}</el-button>
-      <el-button type="primary" @click="handleConfirm">{{ t('index.operations.save') }}</el-button>
+      <el-button :disabled="submitting" @click="() => closeDialog()">{{ t('cancel') }}</el-button>
+      <el-button
+        type="primary"
+        :disabled="submitting"
+        :loading="submitting"
+        :aria-busy="submitting ? 'true' : undefined"
+        @click="handleConfirm"
+      >
+        {{ t('index.operations.save') }}
+      </el-button>
     </template>
   </el-dialog>
 </template>

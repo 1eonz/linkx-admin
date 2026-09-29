@@ -1,0 +1,274 @@
+{
+  "browser": "153.0.8010.53",
+  "target": "http://127.0.0.1:30847/collaboration/index",
+  "livePort": 8400,
+  "assessmentSummary": {
+    "runner": "@playwright/test 1.58.0",
+    "browserMode": "headless system Chrome",
+    "viewCount": 13,
+    "writeGuard": {
+      "enabled": true,
+      "matchedRequests": 0,
+      "submissionAttempted": false,
+      "uploadAttempted": false
+    },
+    "routeMocks": [
+      {
+        "path": "/linkx/admin/collaboration/v1/post/queryUserByPage",
+        "mode": "empty",
+        "status": 200
+      },
+      {
+        "path": "/linkx/admin/collaboration/v1/post/queryUserByPage",
+        "mode": "error",
+        "status": 503
+      }
+    ],
+    "normalViewportChecks": [
+      {
+        "viewport": "1280x720",
+        "document": "1280x720",
+        "horizontalOverflow": false
+      },
+      {
+        "viewport": "375x812",
+        "document": "375x812",
+        "horizontalOverflow": false
+      }
+    ],
+    "overlayConsole": [
+      {
+        "view": "overlay-list-desktop",
+        "headlineFindings": 31,
+        "detailedRuleRows": 33
+      },
+      {
+        "view": "overlay-create-desktop",
+        "headlineFindings": 31,
+        "detailedRuleRows": 33
+      },
+      {
+        "view": "overlay-empty-desktop",
+        "headlineFindings": 34,
+        "detailedRuleRows": 36
+      },
+      {
+        "view": "overlay-edit-mobile",
+        "headlineFindings": 14,
+        "detailedRuleRows": 16
+      },
+      {
+        "view": "overlay-error-mobile",
+        "headlineFindings": 22,
+        "detailedRuleRows": 24
+      }
+    ],
+    "overlayViewportAnomaly": {
+      "view": "overlay-error-mobile",
+      "configuredViewport": "375x812",
+      "postInjectionWindow": "545x1181",
+      "screenshotViewport": "375x812",
+      "dialogRect": {
+        "x": 101,
+        "width": 343
+      },
+      "classification": "Detector-induced geometry; do not use spatial overlay hits as product evidence."
+    },
+    "overlayDocumentEffects": {
+      "desktop": "Document scroll size increased from 1280x720 to 1282x722 after injection.",
+      "mobileEdit": "Post-injection window and document size reported 377x817."
+    },
+    "screenshotReuse": {
+      "reused": [
+        "create-desktop",
+        "edit-desktop",
+        "empty-desktop",
+        "error-desktop",
+        "create-mobile",
+        "edit-mobile"
+      ],
+      "savedThisRun": [
+        "empty-mobile",
+        "error-mobile",
+        "overlay-list-desktop",
+        "overlay-create-desktop",
+        "overlay-empty-desktop",
+        "overlay-edit-mobile",
+        "overlay-error-mobile"
+      ]
+    },
+    "limitations": [
+      "No stable loading state was captured.",
+      "Empty and error states came from local route mocks; no real-backend validation was performed."
+    ]
+  },
+  "views": [
+    {
+      "name": "create-desktop",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.create-desktop.png",
+      "screenshotStatus": {
+        "saved": false,
+        "reused": true
+      },
+      "routeMocks": [],
+      "blockedWrites": []
+    },
+    {
+      "name": "edit-desktop",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.edit-desktop.png",
+      "screenshotStatus": {
+        "saved": false,
+        "reused": true
+      },
+      "routeMocks": [],
+      "blockedWrites": []
+    },
+    {
+      "name": "empty-desktop",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.empty-results-desktop.png",
+      "screenshotStatus": {
+        "saved": false,
+        "reused": true
+      },
+      "routeMocks": [
+        {
+          "path": "/linkx/admin/collaboration/v1/post/queryUserByPage",
+          "mode": "empty",
+          "status": 200
+        }
+      ],
+      "blockedWrites": []
+    },
+    {
+      "name": "error-desktop",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.error-desktop.png",
+      "screenshotStatus": {
+        "saved": false,
+        "reused": true
+      },
+      "routeMocks": [
+        {
+          "path": "/linkx/admin/collaboration/v1/post/queryUserByPage",
+          "mode": "error",
+          "status": 503
+        }
+      ],
+      "blockedWrites": []
+    },
+    {
+      "name": "create-mobile",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.create-mobile.png",
+      "screenshotStatus": {
+        "saved": false,
+        "reused": true
+      },
+      "routeMocks": [],
+      "blockedWrites": []
+    },
+    {
+      "name": "edit-mobile",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.edit-mobile.png",
+      "screenshotStatus": {
+        "saved": false,
+        "reused": true
+      },
+      "routeMocks": [],
+      "blockedWrites": []
+    },
+    {
+      "name": "empty-mobile",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.empty-results-mobile.png",
+      "screenshotStatus": {
+        "saved": true,
+        "reused": false
+      },
+      "routeMocks": [
+        {
+          "path": "/linkx/admin/collaboration/v1/post/queryUserByPage",
+          "mode": "empty",
+          "status": 200
+        }
+      ],
+      "blockedWrites": []
+    },
+    {
+      "name": "error-mobile",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.error-mobile.png",
+      "screenshotStatus": {
+        "saved": true,
+        "reused": false
+      },
+      "routeMocks": [
+        {
+          "path": "/linkx/admin/collaboration/v1/post/queryUserByPage",
+          "mode": "error",
+          "status": 503
+        }
+      ],
+      "blockedWrites": []
+    },
+    {
+      "name": "overlay-list-desktop",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.overlay-list-desktop.png",
+      "screenshotStatus": {
+        "saved": true,
+        "reused": false
+      },
+      "routeMocks": [],
+      "blockedWrites": []
+    },
+    {
+      "name": "overlay-create-desktop",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.overlay-create-desktop.png",
+      "screenshotStatus": {
+        "saved": true,
+        "reused": false
+      },
+      "routeMocks": [],
+      "blockedWrites": []
+    },
+    {
+      "name": "overlay-empty-desktop",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.overlay-empty-desktop.png",
+      "screenshotStatus": {
+        "saved": true,
+        "reused": false
+      },
+      "routeMocks": [
+        {
+          "path": "/linkx/admin/collaboration/v1/post/queryUserByPage",
+          "mode": "empty",
+          "status": 200
+        }
+      ],
+      "blockedWrites": []
+    },
+    {
+      "name": "overlay-edit-mobile",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.overlay-edit-mobile.png",
+      "screenshotStatus": {
+        "saved": true,
+        "reused": false
+      },
+      "routeMocks": [],
+      "blockedWrites": []
+    },
+    {
+      "name": "overlay-error-mobile",
+      "screenshot": "colform-assessment-b-luna-max-recheck-2026-09-29.overlay-error-mobile.png",
+      "screenshotStatus": {
+        "saved": true,
+        "reused": false
+      },
+      "routeMocks": [
+        {
+          "path": "/linkx/admin/collaboration/v1/post/queryUserByPage",
+          "mode": "error",
+          "status": 503
+        }
+      ],
+      "blockedWrites": []
+    }
+  ],
+  "blockedWrites": []
+}

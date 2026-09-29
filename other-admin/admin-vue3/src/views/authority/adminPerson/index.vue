@@ -47,6 +47,20 @@ const searchParams = reactive<Record<string, unknown>>({
 
 // 多选：当前页选中行（仅用于响应 selection-change，跨页全量选中通过 getMultipleSelection 获取）
 const multipleSelection = ref<UserItem[]>([]);
+const pendingDeleteIds = ref(new Set<string>());
+const pendingStatusIds = ref(new Set<string>());
+const batchDeletePending = ref(false);
+
+function setPendingId(target: typeof pendingDeleteIds, id: string, pending: boolean): void {
+  const next = new Set(target.value);
+  if (pending) next.add(id);
+  else next.delete(id);
+  target.value = next;
+}
+
+function isPersonRowBusy(id: string): boolean {
+  return pendingDeleteIds.value.has(id) || pendingStatusIds.value.has(id);
+}
 
 // 组件 ref
 const tableRef = ref<InstanceType<typeof ProTable>>();
@@ -89,6 +103,7 @@ const actions = computed(() => [
     icon: markRaw(Edit),
     onClick: handleEdit,
     visible: canSetRole.value,
+    disabled: hasBusySelection(),
   },
   {
     label: t('index.operations.batchRemove'),
@@ -96,6 +111,8 @@ const actions = computed(() => [
     icon: markRaw(Delete),
     onClick: handleBatchDelete,
     visible: canDelete.value,
+    disabled: batchDeletePending.value || hasBusySelection(),
+    loading: batchDeletePending.value,
   },
 ]);
 
@@ -159,6 +176,18 @@ function getMultipleSelection(): UserItem[] {
   return tableRef.value?.getMultipleSelection() ?? [];
 }
 
+function getSelectedPeople(): UserItem[] {
+  const selection = new Map<string, UserItem>();
+  [...multipleSelection.value, ...getMultipleSelection()].forEach((row) => {
+    selection.set(String(row.id), row);
+  });
+  return [...selection.values()];
+}
+
+function hasBusySelection(): boolean {
+  return getSelectedPeople().some((row) => isPersonRowBusy(String(row.id)));
+}
+
 /** 清空所有跨页选中 */
 function clearAllSelection(): void {
   tableRef.value?.clearAllSelection();
@@ -181,12 +210,16 @@ function cleanOrganizationInput(): void {
 }
 
 // 删除
-function handleDelete(rows: UserItem | UserItem[]): void {
+function handleDelete(rows: UserItem | UserItem[], batchAction = false): void {
   const array = Array.isArray(rows) ? rows : [rows];
   if (array.length === 0) {
     ElMessage.error(t('index.messageText.pleaseCheckData'));
     return;
   }
+  const ids = array.map((row) => String(row.id));
+  if (ids.some(isPersonRowBusy)) return;
+  ids.forEach((id) => setPendingId(pendingDeleteIds, id, true));
+  if (batchAction) batchDeletePending.value = true;
   const confirmMsg = array.length > 1 ? t('affirmPermanentlyDeleted') : t('affirmDeletedAuth');
   ElMessageBox.confirm(confirmMsg, {
     confirmButtonText: t('determine'),
@@ -194,7 +227,7 @@ function handleDelete(rows: UserItem | UserItem[]): void {
     type: 'info',
   })
     .then(() => {
-      deletePerson(array.map((r) => r.id).join(','))
+      return deletePerson(array.map((r) => r.id).join(','))
         .then((result) => {
           if (result.code === 0) {
             ElMessage.success(t('index.statusTitle.successfullyDelete'));
@@ -205,26 +238,34 @@ function handleDelete(rows: UserItem | UserItem[]): void {
         })
         .catch(() => {});
     })
-    .catch(() => {});
+    .catch(() => {})
+    .finally(() => {
+      ids.forEach((id) => setPendingId(pendingDeleteIds, id, false));
+      if (batchAction) batchDeletePending.value = false;
+    });
 }
 
 // 批量删除
 function handleBatchDelete(): void {
   // 使用 getMultipleSelection() 拿到跨页全量选中
-  const selection = getMultipleSelection();
+  const selection = getSelectedPeople();
   if (selection.length === 0) {
     ElMessage.error(t('index.messageText.pleaseCheckData'));
     return;
   }
-  handleDelete(selection);
+  handleDelete(selection, true);
 }
 
 // 批量编辑（设置角色）
 function handleEdit(): void {
   // 使用 getMultipleSelection() 拿到跨页全量选中
-  const selection = getMultipleSelection();
+  const selection = getSelectedPeople();
   if (selection.length === 0) {
     ElMessage.error(t('index.messageText.pleaseCheckData'));
+    return;
+  }
+  if (selection.some((row) => isPersonRowBusy(String(row.id)))) {
+    ElMessage.warning('请等待所选人员的当前操作完成后再批量编辑');
     return;
   }
   batchRoleRef.value?.init(selection);
@@ -247,6 +288,9 @@ function handleChangePwd(row: UserItem): void {
 
 // 状态切换（StatusSwitch @change）
 function handleStatusChange(row: UserItem, status: number): void {
+  const id = String(row.id);
+  if (isPersonRowBusy(id)) return;
+  setPendingId(pendingStatusIds, id, true);
   updatePersonStatus(row.id, status)
     .then((result) => {
       if (result.code === 0) {
@@ -258,7 +302,8 @@ function handleStatusChange(row: UserItem, status: number): void {
     })
     .catch(() => {
       ElMessage.error(t('index.messageText.operationFailed'));
-    });
+    })
+    .finally(() => setPendingId(pendingStatusIds, id, false));
 }
 
 /**
@@ -339,6 +384,7 @@ onMounted(() => {
           <StatusSwitch
             :value="getUser(scope).status ?? 0"
             :disabled="!isGeneralAdmin() || !canUpdate"
+            :loading="isPersonRowBusy(String(getUser(scope).id))"
             @change="(v) => handleStatusChange(getUser(scope), v)"
           />
         </template>
@@ -352,6 +398,7 @@ onMounted(() => {
                 label: t('index.operations.setRole'),
                 onClick: () => manageRole(getUser(scope)),
                 visible: canSetRole,
+                disabled: isPersonRowBusy(String(getUser(scope).id)),
               },
               {
                 type: 'danger',
@@ -359,6 +406,7 @@ onMounted(() => {
                 label: t('index.operations.reset') + t('index.pass.pass'),
                 onClick: () => handleChangePwd(getUser(scope)),
                 visible: canUpdatePwd,
+                disabled: isPersonRowBusy(String(getUser(scope).id)),
               },
               {
                 type: 'danger',
@@ -366,6 +414,8 @@ onMounted(() => {
                 label: t('delete'),
                 onClick: () => handleDelete(getUser(scope)),
                 visible: canDelete,
+                disabled: isPersonRowBusy(String(getUser(scope).id)),
+                loading: pendingDeleteIds.has(String(getUser(scope).id)),
               },
             ]"
           />

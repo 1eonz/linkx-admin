@@ -26,6 +26,7 @@ interface Props {
   visible: boolean;
   roleId?: string | number;
   roleName?: string;
+  submitting?: boolean;
   /** 已选用户 ID 数组，用于打开弹窗时回显已有绑定 */
   selectedUserIds?: string[];
 }
@@ -34,6 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
   visible: false,
   roleId: '',
   roleName: '',
+  submitting: false,
   selectedUserIds: () => [],
 });
 
@@ -86,13 +88,13 @@ watch(
 
 /** 初始化弹窗 */
 async function initDialog(): Promise<void> {
-      searchParams.value.name = '';
-      selectedUsers.value = new Map(
-        props.selectedUserIds.map((id) => [String(id), { id: String(id), idCard: '', status: 0 }]),
-      );
-      selectedCount.value = selectedUsers.value.size;
-      await nextTick();
-      tableRef.value?.init();
+  searchParams.value.name = '';
+  selectedUsers.value = new Map(
+    props.selectedUserIds.map((id) => [String(id), { id: String(id), idCard: '', status: 0 }]),
+  );
+  selectedCount.value = selectedUsers.value.size;
+  await nextTick();
+  tableRef.value?.init();
 }
 
 /** ProTable @response 回调 */
@@ -135,9 +137,9 @@ function handleSelectionChange(selection: AdminUserItem[]): void {
 
 /** 确认 */
 function handleConfirm(): void {
+  if (props.submitting) return;
   const selected = [...selectedUsers.value.values()];
   emit('confirm', selected);
-  handleClose();
 }
 
 /** 关闭 */
@@ -162,6 +164,8 @@ function getUser(scope: any): AdminUserItem {
     v-model="innerVisible"
     :title="dialogTitle"
     :close-on-click-modal="false"
+    :close-on-press-escape="!props.submitting"
+    :show-close="!props.submitting"
     width="800px"
     align-center
     class="user-select-dialog"
@@ -197,8 +201,16 @@ function getUser(scope: any): AdminUserItem {
 
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="handleClose">取消</el-button>
-        <el-button type="primary" @click="handleConfirm">确定</el-button>
+        <el-button :disabled="props.submitting" @click="handleClose">取消</el-button>
+        <el-button
+          type="primary"
+          :disabled="props.submitting"
+          :loading="props.submitting"
+          :aria-busy="props.submitting ? 'true' : undefined"
+          @click="handleConfirm"
+        >
+          确定
+        </el-button>
       </div>
     </template>
   </el-dialog>

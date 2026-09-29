@@ -43,10 +43,25 @@ const tableRef = ref<InstanceType<typeof ProTable>>();
 const dialogVisible = ref(false);
 const dialogTitle = ref('新增角色');
 const editForm = reactive<Partial<RoleItem>>({});
+const submitting = ref(false);
 
 // ===== 设置用户弹窗 =====
 const userDialogVisible = ref(false);
+const userSubmitting = ref(false);
 const currentRole = reactive<{ id: string; name: string }>({ id: '', name: '' });
+const pendingRoleIds = ref(new Set<string>());
+const pendingRoleDeleteIds = ref(new Set<string>());
+
+function setRolePending(target: typeof pendingRoleIds, id: string, pending: boolean): void {
+  const next = new Set(target.value);
+  if (pending) next.add(String(id));
+  else next.delete(String(id));
+  target.value = next;
+}
+
+function setRoleRowLocked(id: string, pending: boolean): void {
+  setRolePending(pendingRoleIds, id, pending);
+}
 
 // 列定义
 const columns = computed<ITableColumn[]>(() => [
@@ -111,6 +126,10 @@ function handleUpdate(row: RoleItem): void {
 
 // 删除
 function handleDelete(row: RoleItem): void {
+  const id = String(row.id);
+  if (pendingRoleIds.value.has(id)) return;
+  setRoleRowLocked(id, true);
+  setRolePending(pendingRoleDeleteIds, id, true);
   const confirmMsg = `确认删除${row.name}`;
   ElMessageBox.confirm(confirmMsg, '提示', {
     confirmButtonText: '确定',
@@ -118,7 +137,7 @@ function handleDelete(row: RoleItem): void {
     type: 'warning',
   })
     .then(() => {
-      deleteRole([row.id])
+      return deleteRole([row.id])
         .then((result) => {
           if (result.code === 0) {
             ElMessage.success('删除成功');
@@ -129,11 +148,18 @@ function handleDelete(row: RoleItem): void {
         })
         .catch(() => {});
     })
-    .catch(() => {});
+    .catch(() => {})
+    .finally(() => {
+      setRoleRowLocked(id, false);
+      setRolePending(pendingRoleDeleteIds, id, false);
+    });
 }
 
 // 状态切换（StatusSwitch @change）
 function handleStatusChange(row: RoleItem, status: number): void {
+  const id = String(row.id);
+  if (pendingRoleIds.value.has(id)) return;
+  setRoleRowLocked(id, true);
   updateRole({ id: row.id, status })
     .then((result) => {
       if (result.code === 0) {
@@ -142,7 +168,10 @@ function handleStatusChange(row: RoleItem, status: number): void {
         ElMessage.error(result.msg || '操作失败');
       }
     })
-    .catch(() => {});
+    .catch(() => {})
+    .finally(() => {
+      setRoleRowLocked(id, false);
+    });
 }
 
 // 提交（新增/编辑）
@@ -150,6 +179,8 @@ function handleStatusChange(row: RoleItem, status: number): void {
 //   新增: { applicationId, roleName, permissionIds }
 //   编辑: { id, roleName, permissionIds }
 function handleSubmit(payload: Record<string, unknown>): void {
+  if (submitting.value) return;
+  submitting.value = true;
   const isEdit = Boolean(payload.id);
   const fn = isEdit ? updateRole : createRole;
   fn(payload as Partial<RoleItem>)
@@ -162,7 +193,10 @@ function handleSubmit(payload: Record<string, unknown>): void {
         ElMessage.error(result.msg || '操作失败');
       }
     })
-    .catch(() => {});
+    .catch(() => {})
+    .finally(() => {
+      submitting.value = false;
+    });
 }
 
 // 设置用户：打开弹窗
@@ -174,18 +208,26 @@ function handleSetUsers(row: RoleItem): void {
 
 // 设置用户：确认回调
 function handleUserConfirm(users: AdminUserItem[]): Promise<void> {
+  if (userSubmitting.value) return Promise.resolve();
+  userSubmitting.value = true;
+  setRoleRowLocked(currentRole.id, true);
   const userIds = users.map((u) => u.id);
   return setBatchRole(currentRole.id, userIds)
     .then((result) => {
       if (result.code === 0) {
         ElMessage.success(result.msg || '设置用户成功');
         tableRef.value?.refresh();
+        userDialogVisible.value = false;
       } else {
         ElMessage.error(result.msg || '操作失败');
       }
     })
     .catch(() => {
       ElMessage.error('操作失败');
+    })
+    .finally(() => {
+      userSubmitting.value = false;
+      setRoleRowLocked(currentRole.id, false);
     });
 }
 
@@ -225,6 +267,7 @@ function getRole(scope: any): RoleItem {
           <StatusSwitch
             :value="getRole(scope).status ?? 0"
             :disabled="!canUpdate || !isOperable(getRole(scope))"
+            :loading="pendingRoleIds.has(String(getRole(scope).id))"
             @change="(v) => handleStatusChange(getRole(scope), v)"
           />
         </template>
@@ -239,6 +282,7 @@ function getRole(scope: any): RoleItem {
                 onClick: () => handleUpdate(getRole(scope)),
                 visible: canUpdate && isOperable(getRole(scope)),
                 auth: '/admin/role/update',
+                disabled: pendingRoleIds.has(String(getRole(scope).id)),
               },
               {
                 type: 'primary',
@@ -247,6 +291,8 @@ function getRole(scope: any): RoleItem {
                 onClick: () => handleSetUsers(getRole(scope)),
                 visible: canUpdate && isOperable(getRole(scope)),
                 auth: '/admin/trUserRole/createMany',
+                disabled: pendingRoleIds.has(String(getRole(scope).id)),
+                loading: userSubmitting && currentRole.id === String(getRole(scope).id),
               },
               {
                 type: 'danger',
@@ -255,6 +301,8 @@ function getRole(scope: any): RoleItem {
                 onClick: () => handleDelete(getRole(scope)),
                 visible: canDelete && isOperable(getRole(scope)),
                 auth: '/admin/role/delete',
+                disabled: pendingRoleIds.has(String(getRole(scope).id)),
+                loading: pendingRoleDeleteIds.has(String(getRole(scope).id)),
               },
             ]"
           />
@@ -262,13 +310,20 @@ function getRole(scope: any): RoleItem {
       </ProTable>
     </el-card>
 
-    <EditRole v-model:visible="dialogVisible" :title="dialogTitle" :form="editForm" @submit="handleSubmit" />
+    <EditRole
+      v-model:visible="dialogVisible"
+      :title="dialogTitle"
+      :form="editForm"
+      :submitting="submitting"
+      @submit="handleSubmit"
+    />
 
     <!-- 设置用户弹窗 -->
     <UserSelectDialog
       v-model:visible="userDialogVisible"
       :role-id="currentRole.id"
       :role-name="currentRole.name"
+      :submitting="userSubmitting"
       @confirm="handleUserConfirm"
     />
   </div>

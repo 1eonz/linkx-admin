@@ -95,6 +95,7 @@ function handleChange(newValue: boolean | string | number): void {
       inline-prompt
       :active-text="normalText"
       :inactive-text="forbiddenText"
+      :aria-busy="loading ? 'true' : undefined"
       class="status-switch"
       @change="handleChange"
     />

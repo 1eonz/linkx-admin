@@ -38,6 +38,7 @@
  * - icon: Component，按钮图标组件
  * - onClick: () => void，按钮点击回调
  * - disabled: boolean，是否禁用
+ * - loading: boolean，是否显示处理中状态
  * - visible: boolean，是否显示，默认 true（visible !== false 均显示）
  *
  * Events:
@@ -63,6 +64,7 @@ interface ActionItem {
   icon?: Component;
   onClick?: () => void;
   disabled?: boolean;
+  loading?: boolean;
   visible?: boolean;
 }
 
@@ -144,6 +146,8 @@ function handleAction(action: ActionItem): void {
           :type="action.type || 'default'"
           :icon="action.icon"
           :disabled="action.disabled"
+          :loading="action.loading"
+          :aria-busy="action.loading ? 'true' : undefined"
           @click="handleAction(action)"
         >
           {{ action.label }}

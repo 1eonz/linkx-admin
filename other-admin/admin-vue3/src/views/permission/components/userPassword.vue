@@ -19,6 +19,7 @@ const emit = defineEmits<{
 const { t } = useI18n({ useScope: 'global' });
 
 const visible = ref(false);
+const submitting = ref(false);
 const formRef = ref<FormInstance>();
 const isSelf = ref(false);
 const simplePassWord = ref<boolean | string>(localStorage.getItem('simplePassWord') === 'true');
@@ -116,14 +117,20 @@ function setData(row: { id?: string; username?: string; name?: string }, self: b
   return getGlobal();
 }
 
-function closePwdDialog(): void {
+function closePwdDialog(force = false): void {
+  if (submitting.value && !force) return;
   visible.value = false;
   formRef.value?.resetFields();
 }
 
 function changePwdSubmit(): void {
+  if (submitting.value) return;
+  submitting.value = true;
   formRef.value?.validate((valid) => {
-    if (!valid) return;
+    if (!valid) {
+      submitting.value = false;
+      return;
+    }
     const { id, username, oldPwd, newPwd, repeatNewPwd } = form;
     let param: Record<string, unknown>;
     let api: (data: any) => Promise<{ code: number; msg?: string }>;
@@ -137,7 +144,7 @@ function changePwdSubmit(): void {
     api(param)
       .then((result) => {
         if (result.code === 0) {
-          closePwdDialog();
+          closePwdDialog(true);
           ElMessage.success(t('index.operations.change') + t('succeed'));
           emit('success');
         } else {
@@ -146,6 +153,9 @@ function changePwdSubmit(): void {
       })
       .catch(() => {
         ElMessage.error(t('index.operations.change') + t('fail'));
+      })
+      .finally(() => {
+        submitting.value = false;
       });
   });
 }
@@ -158,6 +168,8 @@ defineExpose({ setData });
     v-model="visible"
     :title="t('index.pass.passModify')"
     :close-on-click-modal="false"
+    :close-on-press-escape="!submitting"
+    :show-close="!submitting"
     width="800px"
     align-center
     @close="closePwdDialog"
@@ -174,8 +186,16 @@ defineExpose({ setData });
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="closePwdDialog">{{ t('cancel') }}</el-button>
-      <el-button type="primary" @click="changePwdSubmit">{{ t('index.operations.change') }}</el-button>
+      <el-button :disabled="submitting" @click="() => closePwdDialog()">{{ t('cancel') }}</el-button>
+      <el-button
+        type="primary"
+        :disabled="submitting"
+        :loading="submitting"
+        :aria-busy="submitting ? 'true' : undefined"
+        @click="changePwdSubmit"
+      >
+        {{ t('index.operations.change') }}
+      </el-button>
     </template>
   </el-dialog>
 </template>
