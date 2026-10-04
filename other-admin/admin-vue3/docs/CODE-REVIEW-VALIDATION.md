@@ -1,5 +1,11 @@
 # GLM 代码评审复核与修复台账
 
+## 2026-10-05 Wave 2 LxDatePicker 短视口修复代码复审
+
+- **结论**：独立代码复审批准；未发现本次 DatePicker 定位、滚动和 E2E 增补中的可复现正确性或契约问题。
+- **范围**：复核 `LxDatePicker` 窄屏视口边界检测、居中态和面板滚动，以及 320×375/390×375 普通与快捷区间回归断言。
+- **复审边界**：代码复审代理未运行测试；行为测试与类型、构建、Lint、格式验证结果单独记录在项目交接台账。Impeccable A/B 的未关闭视觉建议不等同于代码缺陷。
+
 ## 2026-10-04 UI-13 DynamicForm/Form 代码审核发现
 
 - **发现**：`LxDatePicker` 在 Element Plus Fragment 根回退时，当前实现仍可能无法稳定定位本实例触发器；DynamicForm/DatePicker 定向单测出现 5 项失败，包含字段说明未到达实际输入和相邻日期字段隔离回归。
@@ -99,3 +105,10 @@ GLM 报告的 11 项 major 经复核后，#1、#2、#5、#6、#7、#8、#9、#10
 ## 2026-10-04 Wave 0 DatePicker 复核结论
 
 独立代码审核未发现可复现缺陷；建议补充的区间起止输入和相邻区间实例 `aria-describedby` 回归已加入。当前工作区 DatePicker/DynamicForm 单测 36/36，lx-ui 类型检查、构建、文档构建、DatePicker 文档 E2E 1/1、目标 ESLint/Prettier 和差异检查通过。正式 Impeccable A/B、overlay 与 snapshot/trend 仍未完成；detector `[]` 不作通过依据。
+
+## 2026-10-05 Wave 2 DatePicker Demo 与窄屏样式复核
+
+- **结论**：Approved；未发现 Critical 或 Nitpick。测试对比度 helper 曾有忽略 alpha 的潜在误报风险，已增加对 `rgba(...)` 和 slash-alpha 色值的拒绝分支，并经独立复核确认当前浏览器 `rgb(...)` 计算色仍兼容。
+- **范围**：`linkx-fe/src/components/LxDatePicker/demo/basic.vue`、`style.css`、`other-admin/admin-vue3/tests/e2e/lx-date-picker-docs.spec.ts`。未读取 Impeccable A/B 报告；未运行测试。
+- **复核依据**：窄屏用例实际检查 320/375/390px 弹层和内部日期面板边界、宽度上限、触控目标；390px 首屏用例检查区间两端输入可见并可操作。对比度断言读取当前分隔符和输入表面的计算颜色。
+- **复验**：修订后 HUD 对比度 E2E 1/1、目标 ESLint 和 Prettier 通过；完整日期文档 E2E 由主会话运行 12/12。

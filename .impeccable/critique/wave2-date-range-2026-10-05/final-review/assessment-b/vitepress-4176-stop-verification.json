@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-10-05T05:34:12+08:00",
+  "server": "http://127.0.0.1:4176",
+  "startedBy": "Playwright webServer in assessment-b.config.mjs (reuseExistingServer=false)",
+  "wrapperPid": 37904,
+  "vitepressPid": 42340,
+  "shutdown": "Playwright webServer lifecycle cleanup after the Assessment B test; no manual stop signal was sent.",
+  "postRunVerification": {
+    "method": "Read-only Get-NetTCPConnection and Get-Process checks",
+    "listenerPids": [],
+    "processes": [
+      { "pid": 37904, "present": false },
+      { "pid": 42340, "present": false }
+    ],
+    "result": "Port 4176 was not listening; both Assessment B server processes were absent."
+  },
+  "overlayEndpoint": {
+    "port": 8403,
+    "shutdown": "assessment-b.mjs closed its temporary HTTP server in finally.",
+    "listenerPids": []
+  },
+  "preservedService": {
+    "port": 5180,
+    "listenerPid": 24136,
+    "touched": false
+  }
+}

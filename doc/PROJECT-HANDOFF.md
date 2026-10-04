@@ -1,5 +1,28 @@
 # LinkX 项目交接记录
 
+## [2026-10-05] Wave 2 / LxDatePicker 短视口修复与正式复核
+
+- **问题与修复**：原弹层在 390×375 下超出视口，内部滚动不能让视口外的末行可见。现按实际边界检测：原生定位完整时保留输入框锚点；越界时使用视口内居中浮层，滚动限制在 `.el-picker-panel` 内，避免箭头裁切和页面滚动串联。320px 区间面板宽度同步受视口约束。
+- **实现与回归文件**：`linkx-fe/src/components/LxDatePicker/index.vue`、`style.css`、`demo/basic.vue`、`other-admin/admin-vue3/tests/e2e/lx-date-picker-docs.spec.ts`。
+- **最终行为验证**：DatePicker 文档 E2E **16/16**；DatePicker/DynamicForm 定向单测 **39/39**。320/375/390px 宽度、短屏普通/快捷弹层、末行滚动可达、页面纵向滚动隔离、键盘/Escape、HUD、错误态和减少动效均有覆盖。
+- **质量验证**：lx-ui `vue-tsc --noEmit`、`pnpm build`（196 modules）、`pnpm build:docs`，Vue3 目标 ESLint、Prettier 与目标 `git diff --check` 通过。文档构建有既有大 chunk 提示；pnpm 忽略旧 `onlyBuiltDependencies` 字段。
+- **Impeccable 正式复核**：Assessment A **31/40**；Assessment B 静态 detector 为 JSON `[]`、stderr 空、退出码 0，另有 9 场景浏览器证据、4 个覆盖层视图；独立代码复审批准。A/B、测量、截图及服务生命周期文件位于 `.impeccable/critique/wave2-date-range-2026-10-05/final-review/`；综合快照为 `.impeccable/critique/2026-10-04T21-53-59Z__linkx-fe-src-components-lxdatepicker-index-vue.md`，这是该目标的首次记录，暂无历史趋势。
+- **未关闭建议**：窄屏遮挡活动字段、快捷日历需内部滚动且缺少提示、桌面标签重叠约 16px（3 项 P2），桌面弹层距底边约 1px（1 项 P3）。320px 文档页横向滚动暂不能归因于 DatePicker。短视口修复子项已验收，但 DatePicker 的 UI-10 严格矩阵行仍开放，后续需跟踪上述建议。
+- **服务状态**：Assessment B 启动的 4176 和 8403 临时服务均已退出；原有 5180 服务仍运行且未触碰。
+- **提交约定**：本波先单独提交实现/E2E，再单独提交计划、交接、评审台账和 Impeccable 证据，使用 Conventional Commit；逐项暂存，排除 `.pnpm-store/` 镜像和 live-server 状态。推送 `main` 后自动进入 `LxSelect`。
+- **代码提交**：实现与回归已提交为 `c63b39a fix(lx-ui): keep DatePicker popper within short viewports`；本交接、审计台账和 A/B 证据使用独立文档提交。推送状态以本次 Git 记录为准。
+
+## [2026-10-05] Wave 2 / LxDatePicker Demo 与窄屏复核
+
+- **目标**：收敛日期区间 Demo 信息层级，修正 HUD 分隔符对比和移动端弹层宽度，并确认弹层末行是否能通过页面滚动到达。
+- **改动文件**：`linkx-fe/src/components/LxDatePicker/demo/basic.vue`、`style.css`、`other-admin/admin-vue3/tests/e2e/lx-date-picker-docs.spec.ts`；计划、项目地图、迁移 Backlog、组件路线图/交付核查、组件审计、代码复审台账与本交接记录；Impeccable 证据归档于 `.impeccable/critique/wave2-date-range-2026-10-04/`。
+- **完成内容**：区间示例前移；精简可见标题，将尺寸/扩展参数置于默认收起的键盘可访问说明；HUD 区间分隔符采用高对比正文令牌；小屏日期弹层宽度改为视口宽减 16px。对比度 helper 明确拒绝半透明颜色。
+- **浏览器和代码审核**：独立代码审查批准，无 Critical/Nitpick；对 alpha helper 的改进建议已落实并复核。375×812 快捷区间弹层最初 y=440–866，末行超出视口 54px；向下滚动 54px 后弹层 y=386–812、末行 y=766–811。点击 10 月 5/6 日成功，焦点稳定。完整 A/B 与快照路径、分数和 overlay 归属以后续本波综合报告为准。
+- **验证**：`tests/e2e/lx-date-picker-docs.spec.ts` **12/12**；改动 helper 后 HUD 用例 **1/1**；lx-ui `pnpm exec vue-tsc --noEmit`、`pnpm build`（196 modules）、`pnpm build:docs`，Vue3 目标 ESLint、目标 Prettier、目标 `git diff --check` 通过。首轮测试在 4176 尚未监听时失败；手动启动 VitePress 后单 worker 重跑通过。文档构建有既有大 chunk 与 pnpm 配置警告。
+- **未完成/风险**：滚动前末行部分越界，需要页面滚动后完整查看；未改变 Element Plus 的弹层自动定位策略。真实业务宿主页和后端不在本波。Wave 2 的 `LxSelect`、Checkbox/Radio、Switch 及全库严格审查仍待完成。
+- **本波提交范围与提交号**：实现与 E2E 单独使用 Conventional Commit；计划、审核记录和 Impeccable 证据单独使用文档 Conventional Commit；仅暂存本波文件，不包括 `.pnpm-store/` 镜像目录。提交号和推送结果以 Git 最终记录为准。
+- **下一步**：自动进入 `LxSelect` 严格对照与行为复核，继续遵守 API `.then().catch().finally()`、中文文档/注释、Detector JSON/stderr/退出码及浏览器证据规则；每个子项完成后复审、分别提交并推送。
+
 ## [2026-10-04] 后续任务完整拆分与当前入口
 
 - 已新增 [`PROJECT-FOLLOWUP-BREAKDOWN.md`](./PROJECT-FOLLOWUP-BREAKDOWN.md)，按 Wave 0–12 拆分组件库严格对照、DynamicForm/Form、TreeSelect/Cascader、动态图标、登录页、Vue3 Element Plus 替换、权限、Mock 全菜单和整站发布门禁。

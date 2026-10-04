@@ -2,8 +2,6 @@
 
 封装 Element Plus 日期内核，默认周一起始，区间分隔符为“至”，窄屏切换单面板。
 
-区间双输入需成对关联 ID 和 label：`:id="['start', 'end']"` 配 `<label for="start">`、`<label for="end">`。
-
 ## 交互示例
 
 <script setup lang="ts">
@@ -43,6 +41,7 @@ import Basic from '../../src/components/LxDatePicker/demo/basic.vue';
 | ------------------- | --------------------- | ---------------------------------- |
 | `update:modelValue` | `(value)`             | 选中值变化。                       |
 | `change`            | `(value)`             | 面板确认/清除后值变化（EP 原生）。 |
+| `visible-change`    | `(visible: boolean)`  | 日期面板展开或收起。               |
 | `focus`             | `(event: FocusEvent)` | 聚焦。                             |
 | `blur`              | `(event: FocusEvent)` | 失焦。                             |
 
@@ -101,9 +100,11 @@ import Basic from '../../src/components/LxDatePicker/demo/basic.vue';
 
 ## 可访问性
 
+区间双输入需成对关联 ID 和 label：`:id="['start', 'end']"` 配 `<label for="start">`、`<label for="end">`。完整标注示例见上方交互 Demo。
+
 触发器为 combobox 语义（EP 内核）；单值与区间形态键盘可达：聚焦输入框后按 ArrowDown 打开日历并进入日期网格，方向键移动日期焦点，Enter 选择日期，Escape 关闭日历；区间形态可用 Tab 切换起止输入，窄屏单面板会把两个端点的焦点都放入当前可见网格。宿主通过 `aria-describedby` 传入的说明 ID 会同步到实际输入框，区间形态会关联开始和结束输入，相邻日期字段之间互不串联；错误态红底红边在 `LxForm` 校验上下文自动生效（组件级固化，脱离全局桥不漂移）；开启"减少动效"时边框过渡关闭。
 
-窄屏（视口不大于 640px）下快捷预设改为日历上方的横排按钮，日期格与翻月按钮提供至少 44px 的触控区域；弹层宽度限制在当前视口内。
+窄屏（视口宽度不大于 640px）下快捷预设改为日历上方的横排按钮，日期格与翻月按钮提供至少 44px 的触控区域。弹层完整落在视口内时继续锚定触发器；若高度不足导致越界，则切换到视口居中显示，定位箭头隐藏，日期面板内部可滚动，滚动不会带动页面。组件关闭或恢复宽屏布局后继续使用 Element Plus 原生定位。
 
 周首由已注册并注入日期对象的 Day.js `zh-cn` locale 决定；组件不会切换宿主的全局默认 locale。
 

@@ -1,5 +1,13 @@
 # lx-ui 路线图
 
+## 2026-10-05 Wave 2 / LxDatePicker 短视口复验
+
+DatePicker 短视口修复按实际边界选择原生锚点或居中浮层，日历面板独立滚动，弹层完整留在视口内。文档 Playwright 16/16，DatePicker/DynamicForm 定向单测 39/39；类型检查、库构建 196 modules、文档构建与目标 ESLint/Prettier 通过。正式 Impeccable A 为 31/40，B 覆盖 9 个浏览器场景并记录 detector、覆盖层与生命周期证据，独立代码审核批准。字段上下文遮挡、短屏末行滚动提示、桌面标签遮挡和底边距仍有 3 项 P2、1 项 P3 建议；DatePicker 严格矩阵行不关闭，后续按整改台账跟踪。报告位于 `.impeccable/critique/wave2-date-range-2026-10-05/final-review/`，综合快照为 `.impeccable/critique/2026-10-04T21-53-59Z__linkx-fe-src-components-lxdatepicker-index-vue.md`。下一项为 `LxSelect`；52 项矩阵与 UI-11 仍未关闭。
+
+## 2026-10-05 Wave 2 / LxDatePicker Demo 子项
+
+DatePicker 文档 Demo 已完成信息层级与窄屏弹层专项复核：日期区间示例前移，尺寸/扩展说明默认折叠，HUD 分隔符使用正文对比令牌，弹层宽度按视口减 16px 限制。文档 Playwright 12/12、lx-ui 类型/库构建/文档构建、Vue3 目标 ESLint/Prettier 通过；独立代码审核批准。375×812 下快捷范围弹层初始底部超出 54px，页面滚动后末行可见并可选，记录为需滚动查看的边界。当前组件评审 A/B 和综合 Critique 状态见本波归档；该子项不等于 Wave 2 全部组件或 52 项矩阵关闭。下一项为 `LxSelect`。
+
 ## 2026-10-04 基础控件复核状态
 
 `LxPasswordInput` 的透传 `type` 不能覆盖内部密码遮罩；调用方传入 `type="text"` 的回归、显隐往返和只读组合单测 7/7 通过，修后独立代码复审批准，未发现 P0–P2。剪贴板默认允许，`preventClipboard` 只阻止前端事件，不构成凭据安全控制。Wave 1 的正式 Impeccable overlay/snapshot 因浏览器注入限制仍待补；当前按总计划继续 Wave 2 交互修复。

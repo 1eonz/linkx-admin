@@ -91,7 +91,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxCheckbox`         | `design/表单控件八件套/`                          | 待严格复核；框体、半选、焦点与触控态                                                                               |
 | `LxCheckboxGroup`    | `design/表单控件八件套/`                          | 待严格复核；组间距、方向、禁用和半选态                                                                             |
 | `LxCodeSlot`         | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；代码区层级、复制反馈与窄屏                                                                             |
-| `LxDatePicker`       | `design/表单控件八件套/`                          | Wave 0 字段说明 ID 单值/相邻区间隔离回归通过；待严格复核输入边界、弹层、范围态、窄屏及正式 Critique                |
+| `LxDatePicker`       | `design/表单控件八件套/`                          | Wave 2 E2E 16/16、单测 39/39；A 31/40、B 9 场景、代码复审通过；4 项 P2/P3 未结，严格矩阵行保持打开                 |
 | `LxDescriptions`     | `design/详情描述行 Descriptions/`                 | 部分证据；19/20 阶段审查不是正式关闭                                                                               |
 | `LxDialog`           | `DESIGN-SPEC.md` + Dialog API/Demo                | Wave 5 实现/17 项定向单测与文档证据完成；正式 Critique 待收口（焦点、确认、窄屏和动效）                            |
 | `LxDrawer`           | `DESIGN-SPEC.md` + Drawer API/Demo                | Wave 5 实现/文档证据完成；移动端稳态截图已复拍；正式 Critique 待收口（宽度、焦点、遮罩与窄屏）                     |

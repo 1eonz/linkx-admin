@@ -1,5 +1,19 @@
 # lx-ui 交付核查
 
+## 2026-10-05 LxDatePicker 窄视口修复复验
+
+- DatePicker 窄屏弹层按实际边界选择原生锚定或视口居中；居中模式隐藏定位箭头，滚动限制在日期面板内部，窄屏宽度受视口约束。
+- 文档 Playwright 16/16、DatePicker/DynamicForm 定向单测 39/39；覆盖 320/375/390px、短屏普通及快捷区间、滚动后末行可见、页面滚动隔离、HUD、键盘、错误态和减少动效。
+- lx-ui 类型检查、库构建（196 modules）、文档构建、Vue3 目标 ESLint/Prettier 和目标差异检查通过；VitePress 有既有大 chunk 提示。
+- 正式 Assessment A 31/40、Assessment B 9 个场景及独立代码审查均完成。4 项 P2/P3 体验建议仍在跟踪，故 DatePicker 严格审查行不关闭；detector `[]` 只代表源码静态零命中。证据位于 `.impeccable/critique/wave2-date-range-2026-10-05/final-review/`，综合快照为 `.impeccable/critique/2026-10-04T21-53-59Z__linkx-fe-src-components-lxdatepicker-index-vue.md`。
+
+## 2026-10-05 LxDatePicker Demo 专项复核
+
+- Demo 将日期区间主示例前移，低频尺寸/扩展参数放入默认收起、可键盘访问的说明；HUD 分隔符使用正文色令牌，小屏含侧栏弹层限制为视口宽减 16px。
+- Playwright 文档 E2E 12/12；alpha 安全对比度 helper 修改后 HUD 定向用例 1/1；lx-ui 类型、库构建（196 modules）、文档构建及 Vue3 目标 ESLint/Prettier 通过。独立代码审查批准；详情与 Impeccable A/B 证据路径见 `.impeccable/critique/wave2-date-range-2026-10-04/`。
+- 375×812 常用日期范围弹层底部初始越界约 54px；滚动后末行完整可见、可选，键盘焦点稳定。该边界继续记为已知体验限制，不声称初始状态完全置于视口。
+- 只覆盖 LxDatePicker Demo 与样式的本轮改动；LxSelect、Checkbox/Radio、Switch 及全库 UI-10/UI-11 门槛仍待完成。
+
 ## 2026-10-04 密码输入框回归约定
 
 `LxPasswordInput` 必须以组件显隐状态控制密码类型，调用方透传的 `type` 不能覆盖遮罩。剪贴板默认允许；宿主显式开启 `preventClipboard` 时组件只阻止前端事件，不得将其作为服务端安全边界。Wave 1 行为修复与 Impeccable 正式视觉审查分别记录。

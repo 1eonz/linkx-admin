@@ -1,5 +1,20 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-05 Wave 2 / DatePicker 短视口边界
+
+- 本子项只修改 lx-ui DatePicker、中文 Demo/API 文档和文档 E2E；未改 Vue3 业务页面、请求 API、权限键、路由或后端协议。
+- 文档 E2E 16/16、DatePicker/DynamicForm 定向单测 39/39；lx-ui 类型检查、库构建、文档构建及 Vue3 目标 ESLint/Prettier 通过。
+- 320/375/390px 与短视口验证覆盖原生锚定和越界居中两种定位；短屏外框完整入屏，末行在面板内滚动可达，页面滚动保持不变。当前证据属于组件文档，不代表宿主业务页迁移或真实后端验收。
+- Assessment A 31/40、Assessment B 9 个浏览器场景、独立代码审核已完成。字段上下文、滚动提示和桌面边距建议仍待整改，因此 DatePicker 严格矩阵行保持打开。
+- 下一组件入口为 `LxSelect`；lx-ui 全部组件严格检查与 UI-11 结束前继续保留 Vue3 宿主 Element Plus 依赖。
+
+## 2026-10-05 Wave 2 / DatePicker 文档边界
+
+- 当前只调整 lx-ui DatePicker 文档 Demo、窄屏弹层宽度和对应文档 E2E；未改 Vue3 业务页面、API、权限键、路由或后端协议。
+- 文档 Playwright 12/12；Vue3 定向 ESLint 与 Prettier、lx-ui 类型检查/构建/文档构建通过。代码审核批准；HUD 对比度测试拒绝透明色的回归也已通过。
+- 375×812 的常用区间弹层初始底部越界约 54px，页面滚动后末行可见、可选且焦点稳定。当前证据针对文档 Demo，不代替宿主业务页迁移或真实后端验收。
+- 下一组件入口为 `LxSelect`；保留现有宿主 Element Plus，直到组件库严格检查和 UI-11 门禁完成。
+
 ## 2026-10-04 基础控件迁移边界
 
 `LxPasswordInput` 的密码类型由组件显隐状态控制，未声明属性 `type` 只能透传其他语义，不能覆盖遮罩。剪贴板默认允许；`preventClipboard` 是组件前端交互选项，不作为宿主或后端凭据安全措施。登录和改密仍需独立的真实认证联调。

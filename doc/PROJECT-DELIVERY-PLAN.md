@@ -1,5 +1,23 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-05 Wave 2 / LxDatePicker 短视口修复与正式复核
+
+- **实现结果**：窄屏打开弹层后测量实际边界；原生定位完整时继续锚定输入框，越界时切换到视口内居中浮层。滚动限制在日历面板内，箭头仅在居中态隐藏；320px 区间弹层保留至少 18.5px 横向余量。
+- **回归证据**：DatePicker 文档 Playwright **16/16**；覆盖 320/375/390px 宽度、320×375 和 390×375 普通及快捷区间、滚动后末行可见、滚轮不带动页面、HUD、错误态 ARIA、键盘/Escape 与减少动效。DatePicker/DynamicForm 定向单测 **39/39**。
+- **静态与构建验证**：lx-ui `vue-tsc --noEmit`、`build`（196 modules）、`build:docs`、Vue3 目标 ESLint、目标 Prettier 和目标 `git diff --check` 通过。VitePress 构建有既有大 chunk 提示；pnpm 报告旧 `onlyBuiltDependencies` 字段被忽略。
+- **正式复核**：Assessment A **31/40**；Assessment B detector 为有效 JSON `[]`、stderr 空、退出码 0，并完成 9 个浏览器场景和 4 个覆盖层视图；独立代码复审批准。完整证据在 `.impeccable/critique/wave2-date-range-2026-10-05/final-review/`，综合快照为 `.impeccable/critique/2026-10-04T21-53-59Z__linkx-fe-src-components-lxdatepicker-index-vue.md`（首次目标记录，无历史趋势）。`[]` 只表示静态零命中。
+- **未关闭建议**：A 留下 3 项 P2（字段上下文遮挡、快捷日历需滚动且无提示、桌面标签重叠）和 1 项 P3（桌面弹层贴近底边）；320px 文档横向滚动暂无法归因于 DatePicker。DatePicker 的 UI-10 严格矩阵行仍未关闭，以上建议需进入后续统一整改台账。
+- **范围与顺序**：本子项的实现、行为验收、A/B 及代码复审已收口；不关闭 Wave 2 其他控件或 UI-10 的 52 项矩阵。下一项按计划为 `LxSelect`。lx-ui 全库严格核验和 UI-11 门禁完成前，不移除 Vue3 宿主 Element Plus。
+
+## 2026-10-05 Wave 2 / LxDatePicker Demo 与窄屏复核
+
+- 当前完成子项：DatePicker Demo 的区间示例前移、可见说明精简、低频参数改为默认收起；HUD 区间分隔符提高对比度；窄屏快捷区间弹层保留 8px 左右留白。对比度回归拒绝半透明颜色，避免忽略 alpha 后误报通过。
+- 可达性证据：375×812 下快捷区间弹层初始下边界约 y=866，超出视口 54px；页面滚动 54px 后弹层随触发器移动，末行完整可见，依次选择 10 月 5/6 日成功且焦点稳定。结论是需滚动后查看末行，不是不可选。日期区间的其他弹层在独立 A/B 视图中另行测量，具体尺寸见本波报告。
+- 验证：DatePicker 文档 Playwright 12/12；修改 alpha 对比度 helper 后 HUD 定向用例 1/1；lx-ui `vue-tsc --noEmit`、`build`（196 modules）、`build:docs`、Vue3 定向 ESLint、Prettier 与目标 `git diff --check` 通过。文档构建保留既有大 chunk 与 pnpm 配置警告；首轮 Playwright 因 4176 服务未监听而失败，显式启动服务后单 worker 重跑通过。
+- 独立代码审核：批准，无 Critical/Nitpick；指出的半透明颜色测试风险已修复并复核通过。
+- Impeccable：当前版本独立 A/B 报告与综合 snapshot/trend 以 `.impeccable/critique/wave2-date-range-2026-10-04/` 和本条后续报告为准；detector `[]` 只表示静态零命中。当前记录仅覆盖 LxDatePicker 文档 Demo 与关联样式，不关闭 Wave 0 的字段关联评审，也不代表 Wave 2 全部组件完成。
+- 下一项：继续 `LxSelect` 的设计对照、交互行为与严格审查，再推进 Checkbox/Radio/Switch；Vue3 Element Plus 批量替换仍受 lx-ui 全库门禁约束。
+
 ## 2026-10-04 后续任务完整拆分与执行规范
 
 完整的剩余任务拆分、依赖顺序、完成门槛、中文文档/注释规则、`.then().catch().finally()` 规则、Mock 边界、代码审核和 Impeccable A/B 证据要求见 [`PROJECT-FOLLOWUP-BREAKDOWN.md`](./PROJECT-FOLLOWUP-BREAKDOWN.md)。Wave 1 密码框透传 `type` 覆盖遮罩的 P1 已在提交 `2762816` 修复并增加回归；当前单测 7/7，独立代码复审批准且未发现 P0–P2。Assessment A 最新静态复评为暂定 30/40，已检查当前源码和文档，但视觉结论仍依赖旧截图；Assessment B 六个有效 detector 结果均为 `[]`、stderr 空、退出码 0。因浏览器策略未取得修复后的 overlay/snapshot，Wave 1 不能标记视觉审查关闭。当前继续 Wave 2 实现，宿主 Element Plus 替换门槛不变。
