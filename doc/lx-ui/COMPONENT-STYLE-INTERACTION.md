@@ -260,14 +260,14 @@
 
 **样式规格（当前实现）**：
 
-| 项           | 规格                                                                                                            |
-| ------------ | --------------------------------------------------------------------------------------------------------------- |
-| 布局         | `columns=2` 双列网格（stitch `_26` 弹窗 grid-cols-2），间距 16/12px；`span="full"` 通栏                         |
-| label        | `top` 上置（弹窗默认）12px secondary / `left` 左置（老项目兼容）13px + labelWidth 100-200px                     |
-| 控件         | 32px 高，圆角 4px                                                                                               |
-| 必填         | `*` 前缀（hide-required-asterisk 可关）                                                                         |
+| 项           | 规格                                                                                                                   |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| 布局         | `columns=2` 双列网格（stitch `_26` 弹窗 grid-cols-2），间距 16/12px；`span="full"` 通栏                                |
+| label        | `top` 上置（弹窗默认）12px secondary / `left` 左置（老项目兼容）13px + labelWidth 100-200px                            |
+| 控件         | 32px 高，圆角 4px                                                                                                      |
+| 必填         | `*` 前缀（hide-required-asterisk 可关）                                                                                |
 | **错误态**   | 错误文字 **11px `#ba1a1a`** + 前置圆圈感叹号小图标；错误输入框 **1px `#ba1a1a` 红边 + `#fff5f5` 浅红底**，聚焦保持红环 |
-| 错误接管范围 | input / select / textarea / date-picker / cascader 全系容器                                                     |
+| 错误接管范围 | input / select / textarea / date-picker / cascader 全系容器                                                            |
 
 **交互逻辑**：
 
@@ -343,7 +343,7 @@
 
 ### 3.8 LxPasswordInput 密码框 🆕 P2｜9 处
 
-el-input password 全量透传 + 显示/隐藏眼睛切换；**禁 copy/paste/cut**（preventDefault，剪贴板防护）。样式同 el-input 桥接。
+复用 `LxInput` 的尺寸和外观，显隐按钮切换密码遮罩；默认允许复制、剪切和粘贴，以兼容密码管理器。宿主可用 `preventClipboard` 显式阻止对应前端事件，但这不是安全边界，不能替代宿主或服务端凭据保护。
 
 ### 3.9 LxVirtualTree 虚拟滚动树 🆕 P2｜7 处
 

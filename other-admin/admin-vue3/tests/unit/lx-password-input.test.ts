@@ -14,6 +14,36 @@ describe('LxPasswordInput', () => {
     wrapper.unmount();
   });
 
+  it('调用方透传 type 时仍由组件控制密码遮罩', async () => {
+    const wrapper = mount(LxPasswordInput, { attrs: { type: 'text' } });
+    const input = wrapper.get('input.el-input__inner');
+    const toggle = wrapper.get('button.lx-password-input__toggle');
+
+    expect(input.attributes('type')).toBe('password');
+    await toggle.trigger('click');
+    expect(input.attributes('type')).toBe('text');
+    await toggle.trigger('click');
+    expect(input.attributes('type')).toBe('password');
+
+    wrapper.unmount();
+  });
+
+  it('只读状态下透传 type 仍不能覆盖密码遮罩', async () => {
+    const wrapper = mount(LxPasswordInput, {
+      attrs: { type: 'text' },
+      props: { readonly: true },
+    });
+    const input = wrapper.get('input.el-input__inner');
+    const toggle = wrapper.get('button.lx-password-input__toggle');
+
+    expect(input.attributes('type')).toBe('password');
+    expect(input.attributes('readonly')).toBeDefined();
+    await toggle.trigger('click');
+    expect(input.attributes('type')).toBe('text');
+
+    wrapper.unmount();
+  });
+
   it('使用统一尺寸并通过语义按钮切换密码可见状态', async () => {
     const wrapper = mount(LxPasswordInput);
     const input = wrapper.get('input.el-input__inner');

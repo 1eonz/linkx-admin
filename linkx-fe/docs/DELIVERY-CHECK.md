@@ -1,5 +1,9 @@
 # lx-ui 交付核查
 
+## 2026-10-04 密码输入框回归约定
+
+`LxPasswordInput` 必须以组件显隐状态控制密码类型，调用方透传的 `type` 不能覆盖遮罩。剪贴板默认允许；宿主显式开启 `preventClipboard` 时组件只阻止前端事件，不得将其作为服务端安全边界。Wave 1 行为修复与 Impeccable 正式视觉审查分别记录。
+
 ## 2026-10-04 后续交付拆分
 
 Wave 0–12 的完整任务、证据门槛和阻塞口径见仓库文档 `doc/PROJECT-FOLLOWUP-BREAKDOWN.md`。Wave 0 已修复 `LxDatePicker` 相邻实例说明 ID 隔离，36 项 DatePicker/DynamicForm 单测、组件库构建、文档构建和 DatePicker 文档 E2E 通过；正式 Impeccable Critique 仍未关闭。基础控件统一严格审查、TreeSelect/Cascader 当前版本 overlay 及全库 52 项矩阵继续进行。所有新备注和组件说明使用中文，`[]` 仅记静态 detector 零命中。
@@ -91,7 +95,7 @@ Impeccable `detect.mjs` 的源码输出 `[]` 且退出码为 0，只代表本次
 
 `LxPagination` 的中文 API/Demo 覆盖默认与自定义 layout、背景样式、自动重置/滚动和站点明暗主题；5 项组件单测验证受控事件顺序与滚动开关，2 项适配器单测保留旧 `page/limit/pagination` 契约，文档 Playwright 3/3 覆盖条数切换、主题、375px 局部滚动及键盘焦点。文档 Demo 使用 `zh-cn` locale；detector 对组件、Demo、文档和 Vue3 适配器 stdout `[]`、stderr 空、退出码 0，仅表示本次静态规则零命中；UI-11 正式 Critique 仍待 UI-10 其余组件闭环。
 
-`LxPasswordInput` 已补独立中文 API/Demo；文档 Playwright 3/3 实际验证密码显隐与清空、输入事件、focus/blur/select 实例方法、复制/剪切/粘贴阻止、只读/禁用语义和 375px HUD 无横向溢出。Demo 使用内存样例，无登录请求；`autocomplete` 与剪贴板约束按现有组件契约说明。库类型检查、134 模块构建、VitePress 构建及定向 Prettier 通过；组件级验收不代表真实认证联调或 UI-11 整库 Critique 完成。
+`LxPasswordInput` 已补独立中文 API/Demo；既有文档 Playwright 覆盖密码显隐与清空、输入事件、focus/blur/select 实例方法、默认剪贴板可用与显式阻止、只读/禁用语义和窄屏布局。`preventClipboard` 只阻止前端剪贴板事件，不是安全边界；Demo 使用内存样例，不访问登录接口。组件级验收不代表真实认证联调或 UI-11 整库 Critique 完成。
 
 `LxEmpty` 有独立中文 API/Demo；5 项单测覆盖默认文案、status 语义、紧凑档、自定义尺寸校验、图标/操作插槽与宿主 class 透传。文档 Playwright 覆盖默认 64px、`image-size=80`、键盘操作、筛选恢复、两主题对比度、长描述和 375/320px 无横向溢出。阶段性启发式评审曾记 28/40，亮色浏览器 overlay 发现 5 项真实低对比度文字；已改用正文令牌并补对比度回归。后续流程审计确认该评分没有对应的 Impeccable Critique 快照，且设计评审未在独立新标签检查页面，因此不能视为正式 Impeccable 验收，需在 UI-11 按 skill 规范补齐。detector `[]` 仅表示静态规则零命中。Vue3 15 处 `el-empty` 仍待 UI-04 替换，组件证据不代表宿主页面已经采用。
 

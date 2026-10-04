@@ -52,6 +52,7 @@ test.describe('lx-ui LxPasswordInput 文档示例', () => {
     await expect(input).toHaveValue('Demo-Paste-Value');
 
     await page.getByLabel('阻止剪贴板操作', { exact: true }).check();
+    await page.evaluate(() => navigator.clipboard.writeText('Blocked-Paste-Value'));
     await input.fill('');
     await input.focus();
     await input.press('ControlOrMeta+V');

@@ -1,5 +1,9 @@
 # lx-ui 路线图
 
+## 2026-10-04 基础控件复核状态
+
+`LxPasswordInput` 的透传 `type` 不能覆盖内部密码遮罩；调用方传入 `type="text"` 的回归、显隐往返和只读组合单测 7/7 通过，修后独立代码复审批准，未发现 P0–P2。剪贴板默认允许，`preventClipboard` 只阻止前端事件，不构成凭据安全控制。Wave 1 的正式 Impeccable overlay/snapshot 因浏览器注入限制仍待补；当前按总计划继续 Wave 2 交互修复。
+
 ## 2026-10-04 后续任务拆分入口
 
 组件库严格对照、DynamicForm/Form、基础控件、TreeSelect/Cascader、动态图标、登录页、Vue3 宿主替换和整站审查已按 Wave 0–12 拆分，详见仓库文档 `doc/PROJECT-FOLLOWUP-BREAKDOWN.md`。Wave 0 的 `LxDatePicker` 字段说明隔离修复、代码审核和定向回归已完成；正式 Impeccable A/B、overlay 与 snapshot/trend 仍待补。当前进入 Wave 1 基础控件批次。新增文档和注释使用中文；API 请求链保持 `.then().catch().finally()`；静态 detector `[]` 不作为正式视觉通过。

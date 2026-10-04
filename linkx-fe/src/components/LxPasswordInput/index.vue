@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, useAttrs, watch } from 'vue'
 import { useFormDisabled } from 'element-plus'
 import LxInput from '../LxInput/index.vue'
 import type { LxInputSize } from '../LxInput/types'
@@ -36,6 +36,7 @@ const emit = defineEmits<{
 
 const inputRef = ref<InputInstance>()
 const isPasswordVisible = ref(false)
+const attrs = useAttrs()
 const isDisabled = useFormDisabled()
 const inputSize = computed<LxInputSize>(() => {
   if (props.size === 'sm' || props.size === 'small') return 'sm'
@@ -60,6 +61,13 @@ watch(
 function preventClipboard(event: ClipboardEvent) {
   if (!props.preventClipboard) return
   event.preventDefault()
+}
+
+function getForwardedAttrs() {
+  // 密码框的 type 由显隐状态控制，不允许调用方透传属性覆盖遮罩。
+  const forwardedAttrs = { ...attrs }
+  delete forwardedAttrs.type
+  return forwardedAttrs
 }
 
 function togglePasswordVisibility() {
@@ -90,7 +98,7 @@ defineExpose({
     :autocomplete="props.autocomplete"
     :readonly="props.readonly"
     :name="props.name"
-    v-bind="$attrs"
+    v-bind="getForwardedAttrs()"
     @update:model-value="emit('update:modelValue', $event)"
     @change="emit('change', $event)"
     @focus="emit('focus', $event)"

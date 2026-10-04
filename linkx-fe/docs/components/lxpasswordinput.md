@@ -26,7 +26,7 @@ import Basic from '../../src/components/LxPasswordInput/demo/basic.vue';
 | `readonly`         | `boolean`                                                       | `false`          | 只读展示，仍可聚焦和选中。                                               |
 | `clearable`        | `boolean`                                                       | `false`          | 显示清空操作。                                                           |
 | `showPassword`     | `boolean`                                                       | `true`           | 显示内置的密码/明文切换操作。                                            |
-| `preventClipboard` | `boolean`                                                       | `false`          | 显式阻止复制、剪切和粘贴；默认允许密码管理器操作。                       |
+| `preventClipboard` | `boolean`                                                       | `false`          | 通过前端事件显式阻止复制、剪切和粘贴；默认允许密码管理器操作。           |
 | `maxlength`        | `number \| string`                                              | —                | 最大输入长度。                                                           |
 | `minlength`        | `number \| string`                                              | —                | 最小输入长度提示，提交校验由宿主表单负责。                               |
 | `size`             | `'sm' \| 'md' \| 'lg' \| '' \| 'small' \| 'default' \| 'large'` | `'md'`           | 使用 `sm/md/lg`；为兼容旧调用保留 `small/default/large` 与空字符串别名。 |
@@ -57,7 +57,7 @@ import Basic from '../../src/components/LxPasswordInput/demo/basic.vue';
 
 ## 使用边界
 
-- `id`、`aria-*` 等未声明属性会转发到底层输入组件；调用者仍应提供可访问名称和表单标签。
-- 默认允许输入框上的复制、剪切和粘贴，便于使用密码管理器；宿主确有明确策略时可设置 `preventClipboard` 阻止这些事件。自动填充由 `autocomplete` 和宿主登录流程控制。
+- `id`、`aria-*` 等未声明属性会转发到底层输入组件；`type` 由组件显隐状态控制，不会作为透传属性转发。调用者仍应提供可访问名称和表单标签。
+- 默认允许输入框上的复制、剪切和粘贴，便于使用密码管理器；宿主有明确交互策略时可设置 `preventClipboard` 阻止对应前端事件。事件拦截不是安全边界，不能替代宿主及服务端的凭据保护。自动填充由 `autocomplete` 和宿主登录流程控制。
 - `minlength` 仅设置原生输入属性，不替代宿主的表单校验，也不代表后端密码策略。
 - 示例中的状态是内存 Mock，不代表登录、改密或真实认证联调。
