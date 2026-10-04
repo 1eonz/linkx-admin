@@ -1,6 +1,8 @@
 import { mount } from '@vue/test-utils';
+import type { DateCell } from 'element-plus';
 import { LxDatePicker } from 'lx-ui';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { h, nextTick, ref } from 'vue';
 
 // EP date-picker 的 popper teleport 到 body 且卸载后节点残留，
 // 每用例前清空避免 querySelector 命中旧实例的 popper
@@ -52,6 +54,81 @@ describe('LxDatePicker', () => {
     });
 
     expect(wrapper.find('.el-range-separator').text()).toBe('~');
+    wrapper.unmount();
+  });
+
+  it('将范围分隔符插槽转发至真实区间触发器', () => {
+    const wrapper = mount(LxDatePicker, {
+      props: { type: 'daterange', modelValue: [], rangeSeparator: '~' },
+      slots: { 'range-separator': '<span data-testid="custom-separator">到</span>' },
+    });
+
+    expect(wrapper.find('[data-testid="custom-separator"]').text()).toBe('到');
+    expect(wrapper.find('.el-range-separator').exists()).toBe(false);
+    wrapper.unmount();
+  });
+
+  it('将日期单元和导航插槽转发至真实日期面板', async () => {
+    const wrapper = mount(LxDatePicker, {
+      props: { modelValue: '2026-09-15', valueFormat: 'YYYY-MM-DD' },
+      slots: {
+        default: (cell: DateCell) =>
+          h('span', { class: 'custom-date-cell', 'data-date': cell.dayjs?.format('YYYY-MM-DD') }, `日期${cell.text}`),
+        'prev-month': '<span data-testid="custom-prev-month">前月</span>',
+        'next-month': '<span data-testid="custom-next-month">后月</span>',
+        'prev-year': '<span data-testid="custom-prev-year">前年</span>',
+        'next-year': '<span data-testid="custom-next-year">后年</span>',
+      },
+      attachTo: document.body,
+    });
+
+    await wrapper.find('input').trigger('click');
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const cell = document.body.querySelector('.custom-date-cell[data-date="2026-09-15"]');
+    expect(cell?.textContent).toBe('日期15');
+    for (const name of ['prev-month', 'next-month', 'prev-year', 'next-year']) {
+      expect(document.body.querySelector(`[data-testid="custom-${name}"]`)).not.toBeNull();
+    }
+    wrapper.unmount();
+  });
+
+  it('区间成对 id 分别关联开始与结束字段', async () => {
+    const wrapper = mount(LxDatePicker, {
+      props: { type: 'daterange', modelValue: [] },
+      attrs: { id: ['test-range-start', 'test-range-end'] },
+    });
+    await nextTick();
+    expect(wrapper.findAll('input').map((input) => input.attributes('id'))).toEqual([
+      'test-range-start',
+      'test-range-end',
+    ]);
+    wrapper.unmount();
+  });
+
+  it('相邻区间选择器的两个输入框分别关联各自说明', async () => {
+    const wrapper = mount({
+      render: () =>
+        h('div', [
+          h(LxDatePicker, {
+            modelValue: [],
+            type: 'daterange',
+            'aria-describedby': 'first-range-feedback',
+          }),
+          h(LxDatePicker, {
+            modelValue: [],
+            type: 'daterange',
+            'aria-describedby': 'second-range-feedback',
+          }),
+        ]),
+    });
+
+    await nextTick();
+    expect(wrapper.findAll('input').map((input) => input.attributes('aria-describedby'))).toEqual([
+      'first-range-feedback',
+      'first-range-feedback',
+      'second-range-feedback',
+      'second-range-feedback',
+    ]);
     wrapper.unmount();
   });
 
@@ -135,6 +212,60 @@ describe('LxDatePicker', () => {
     });
 
     expect(wrapper.find('input').attributes('aria-label')).toBe('专项布控日期区间');
+    wrapper.unmount();
+  });
+
+  it('将字段说明关联至日期触发器输入框', () => {
+    const wrapper = mount(LxDatePicker, {
+      props: { modelValue: '' },
+      attrs: { 'aria-describedby': 'date-feedback' },
+    });
+
+    expect(wrapper.find('input').attributes('aria-describedby')).toBe('date-feedback');
+    wrapper.unmount();
+  });
+
+  it('更新或移除字段说明时同步实际输入框属性', async () => {
+    const description = ref<string | undefined>('date-feedback');
+    const wrapper = mount({
+      render: () =>
+        h(LxDatePicker, {
+          modelValue: '',
+          'aria-describedby': description.value,
+        }),
+    });
+
+    expect(wrapper.find('input').attributes('aria-describedby')).toBe('date-feedback');
+    description.value = 'updated-date-feedback';
+    await nextTick();
+    expect(wrapper.find('input').attributes('aria-describedby')).toBe('updated-date-feedback');
+
+    description.value = undefined;
+    await nextTick();
+    expect(wrapper.find('input').attributes('aria-describedby')).toBeUndefined();
+    wrapper.unmount();
+  });
+
+  it('相邻日期选择器只关联各自的字段说明', async () => {
+    const wrapper = mount({
+      render: () =>
+        h('div', [
+          h(LxDatePicker, {
+            modelValue: '',
+            'aria-describedby': 'first-date-feedback',
+          }),
+          h(LxDatePicker, {
+            modelValue: '',
+            'aria-describedby': 'second-date-feedback',
+          }),
+        ]),
+    });
+
+    await nextTick();
+    expect(wrapper.findAll('input').map((input) => input.attributes('aria-describedby'))).toEqual([
+      'first-date-feedback',
+      'second-date-feedback',
+    ]);
     wrapper.unmount();
   });
 

@@ -51,6 +51,18 @@ import Basic from '../../src/components/LxDatePicker/demo/basic.vue';
 | `focus` | 聚焦触发器。 |
 | `blur`  | 移除焦点。   |
 
+## Slots
+
+| 名称                        | 参数                                | 说明                                                                                             |
+| --------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `default`                   | `DateCell`（Element Plus 导出类型） | 自定义日期单元，包含 `text`、`dayjs`、`isCurrent` 等内核原始字段；不提供时保留内核默认日期单元。 |
+| `range-separator`           | —                                   | 自定义区间分隔符；不提供时使用 `rangeSeparator`。                                                |
+| `prev-month` / `next-month` | —                                   | 前后月导航图标；不提供时使用内核默认图标。                                                       |
+| `prev-year` / `next-year`   | —                                   | 前后年导航图标；面板支持对应导航时生效。                                                         |
+| `sidebar`                   | `{ class: string }`                 | 面板侧栏，参数由内核传入；自定义内容须自行保留键盘与可访问名称。                                 |
+
+日期单元插槽保留 `el-date-table-cell` 与 `el-date-table-cell__text` 结构时，可继续使用内核的选中、范围和当前日期样式。区间字段通过 attrs 传入成对 `id`，并分别用 `<label for>` 关联开始/结束输入；单值字段使用一个 `id`。
+
 ## 低频 props 透传
 
 `disabled-date`（禁用日期谓词）、`default-value`、`unlink-panels`（双面板独立翻页）、`editable`、`popper-class`（与组件锚定类 `lx-date-picker__popper` 合并保留）、`calendar-change`/`panel-change` 监听器等经 attrs 直达 EP 内核：
@@ -85,7 +97,7 @@ import Basic from '../../src/components/LxDatePicker/demo/basic.vue';
 
 ## 可访问性
 
-触发器为 combobox 语义（EP 内核）；单值与区间形态键盘可达（Tab 切换起止输入）；错误态红底红边在 `LxForm` 校验上下文自动生效（组件级固化，脱离全局桥不漂移）；开启"减少动效"时边框过渡关闭。
+触发器为 combobox 语义（EP 内核）；单值与区间形态键盘可达（Tab 切换起止输入）；宿主通过 `aria-describedby` 传入的说明 ID 会同步到实际输入框，区间形态会关联开始和结束输入，相邻日期字段之间互不串联；错误态红底红边在 `LxForm` 校验上下文自动生效（组件级固化，脱离全局桥不漂移）；开启"减少动效"时边框过渡关闭。
 
 ## Vue3 宿主适配
 

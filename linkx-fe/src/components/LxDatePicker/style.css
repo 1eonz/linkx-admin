@@ -58,11 +58,11 @@
   opacity: 0.6;
 }
 
-/* 错误态：红底红边一体化（标本八件套错误行，依赖 ElForm/LxForm 上下文） */
+/* 错误态：使用表单专属校验令牌，依赖 ElForm/LxForm 上下文。 */
 .el-form-item.is-error .lx-date-picker .el-input__wrapper,
 .el-form-item.is-error .lx-date-picker.el-input__wrapper {
-  background-color: var(--lx-color-error-light);
-  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
+  background-color: var(--lx-color-form-error-bg);
+  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
 }
 
 .el-form-item.is-error .lx-date-picker .el-input__wrapper.is-focus,
@@ -70,14 +70,14 @@
   outline: none;
   outline-offset: 0;
   box-shadow:
-    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 1px var(--lx-color-form-error) inset,
     0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
-/* 错误态值文字同步变红：error-strong 深红做小字号对比度补偿（DESIGN-SPEC §3.2） */
+/* 表单校验错误值与边线使用同一表单错误令牌。 */
 .el-form-item.is-error .lx-date-picker .el-input__inner,
 .el-form-item.is-error .lx-date-picker .el-range-input {
-  color: var(--lx-color-error-strong);
+  color: var(--lx-color-form-error);
 }
 
 /* ===== Popper 终态（teleport 到 body，lx-date-picker__popper 锚定）===== */

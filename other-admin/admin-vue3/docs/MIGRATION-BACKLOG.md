@@ -97,3 +97,6 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 权限键必须沿用 Vue2/API 契约。若后端没有区分按钮和文本的独立字段，前端只做展示层区分，不臆造新的服务端权限类型。
 
 2026-09-28 多选下拉内侧边线对齐复修：用户仍反馈外圈观感不协调。经真实 DOM 对照，选择器原先使用实体 border，输入类控件使用内部 inset 边线；现统一为无实体 border、1px inset 状态线，普通/悬停/聚焦/错误仅切换 token 颜色，保留 32px 和原交互。4174 计算样式及 Element Bridge 定向 Playwright 已验证；正式 Impeccable 双路复评待当前样式稳定后补录。
+## 2026-10-04 Wave 0 迁移影响
+
+当前仅修复 lx-ui `LxDatePicker` 对实际输入框的说明 ID 关联，没有改动 Vue3 业务 API、路由、权限或后端协议。当前工作区 DynamicForm 日期字段回归与 DatePicker 合计 36/36；本波提交不包含既存 DynamicForm 实现改动。Wave 1 先完成基础控件审查，宿主 Element Plus 替换顺序不变。

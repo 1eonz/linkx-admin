@@ -15,19 +15,39 @@
  * 模板保持单根（无根级注释）：注释节点会引入 Fragment 根，
  * 破坏 $attrs 单根继承与测试工具对根元素类的断言。
  */
-import { ref } from 'vue'
 import { ElDatePicker, provideGlobalConfig } from 'element-plus'
-import type { DatePickerInstance } from 'element-plus'
+import type { DateCell, DatePickerInstance } from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import {
+  computed,
+  getCurrentInstance,
+  onMounted,
+  onUpdated,
+  ref,
+  useAttrs,
+} from 'vue'
+
 import type {
   LxDatePickerSize,
   LxDateModelValue,
   LxDatePickerProps,
 } from './types'
+import { syncAriaDescribedBy } from '../../utils/syncAriaDescribedBy'
 import 'element-plus/es/components/date-picker/style/css'
 import './style.css'
 
 defineOptions({ name: 'LxDatePicker', inheritAttrs: false })
+
+defineSlots<{
+  /** 日期单元格；保留 EP DateCell 原始字段与日期引用。 */
+  default?: (cell: DateCell) => unknown
+  'range-separator'?: () => unknown
+  'prev-month'?: () => unknown
+  'next-month'?: () => unknown
+  'prev-year'?: () => unknown
+  'next-year'?: () => unknown
+  sidebar?: (scope: { class: string }) => unknown
+}>()
 
 /**
  * 注入 zh-cn 日历语境（周一起始 + 中文面板文案）。
@@ -65,8 +85,48 @@ const emit = defineEmits<{
   blur: [event: FocusEvent]
 }>()
 
+const attrs = useAttrs()
+const userPopperClass = computed(() => {
+  const value = attrs.popperClass ?? attrs['popper-class']
+  return typeof value === 'string' ? value : undefined
+})
+
 /** EP 内核实例引用：focus/blur 方法透传给调用方 */
 const pickerRef = ref<DatePickerInstance>()
+const managedDescriptionIds = new WeakMap<HTMLInputElement, Set<string>>()
+const instanceClass = `lx-date-picker--instance-${getCurrentInstance()?.uid ?? 'unknown'}`
+
+function syncInputDescriptions(): void {
+  const root = pickerRef.value?.$el
+  let container: HTMLElement | undefined
+  if (root instanceof HTMLElement) {
+    container = root
+  } else {
+    const parentElement = root?.parentElement
+    if (parentElement instanceof HTMLElement) {
+      // ElDatePicker 在部分版本以 Fragment 作为根，注释节点的父节点本身
+      // 可能就是当前触发器；若不是，再在父节点内按实例标记查找，避免
+      // 把说明 ID 写入同级日期选择器的输入框。
+      const trigger = parentElement.classList.contains(instanceClass)
+        ? parentElement
+        : parentElement.querySelector<HTMLElement>(`.${instanceClass}`)
+      if (trigger) container = trigger
+    }
+  }
+  if (!container) return
+
+  container.querySelectorAll('input').forEach((input) => {
+    let managedIds = managedDescriptionIds.get(input)
+    if (!managedIds) {
+      managedIds = new Set<string>()
+      managedDescriptionIds.set(input, managedIds)
+    }
+    syncAriaDescribedBy(input, attrs['aria-describedby'], managedIds)
+  })
+}
+
+onMounted(syncInputDescriptions)
+onUpdated(syncInputDescriptions)
 
 /** 档位映射：Lx 工程档名 → EP 内核档（高度由全局令牌桥收敛 28/32/40px） */
 const SIZE_MAP: Record<LxDatePickerSize, 'small' | 'default' | 'large'> = {
@@ -87,9 +147,9 @@ defineExpose({
   <ElDatePicker
     ref="pickerRef"
     class="lx-date-picker"
-    :class="`lx-date-picker--${size}`"
+    :class="[`lx-date-picker--${size}`, instanceClass]"
     v-bind="$attrs"
-    :popper-class="['lx-date-picker__popper', $attrs.popperClass]"
+    :popper-class="['lx-date-picker__popper', userPopperClass]"
     :model-value="modelValue"
     :type="type"
     :placeholder="placeholder"
@@ -108,5 +168,27 @@ defineExpose({
     @change="emit('change', $event as LxDateModelValue)"
     @focus="emit('focus', $event)"
     @blur="emit('blur', $event)"
-  />
+  >
+    <template v-if="$slots.default" #default="cell">
+      <slot v-bind="cell" />
+    </template>
+    <template v-if="$slots['range-separator']" #range-separator>
+      <slot name="range-separator" />
+    </template>
+    <template v-if="$slots['prev-month']" #prev-month>
+      <slot name="prev-month" />
+    </template>
+    <template v-if="$slots['next-month']" #next-month>
+      <slot name="next-month" />
+    </template>
+    <template v-if="$slots['prev-year']" #prev-year>
+      <slot name="prev-year" />
+    </template>
+    <template v-if="$slots['next-year']" #next-year>
+      <slot name="next-year" />
+    </template>
+    <template v-if="$slots.sidebar" #sidebar="scope">
+      <slot name="sidebar" v-bind="scope" />
+    </template>
+  </ElDatePicker>
 </template>

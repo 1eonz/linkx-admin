@@ -56,3 +56,6 @@ GLM 报告的 11 项 major 经复核后，#1、#2、#5、#6、#7、#8、#9、#10
 - 所有业务 API 调用继续使用 `.then().catch().finally()`；本波未将 API 链改写为 `async/await`。
 - GLM #8 属于 store/API 错误恢复，无界面或动效变更；未运行 Impeccable detector，不产生 `[]` 结果，也不记为视觉检查。
 - 下一步 CODE-03：为 `/authority/adminRole` 角色保存及 `/authority/adminPerson` 授权/改密/删除/状态写操作增加防重复提交锁和可访问 busy 状态，按 Vue2/API 行为回归；随后单独进行代码审核和 UI/动效检查。GLM #2 Cascader、GLM #9/#10 正式视觉复核和 GLM #11 E2E 时序复核已完成；真实后端联调仍独立记录。
+## 2026-10-04 Wave 0 DatePicker 复核结论
+
+独立代码审核未发现可复现缺陷；建议补充的区间起止输入和相邻区间实例 `aria-describedby` 回归已加入。当前工作区 DatePicker/DynamicForm 单测 36/36，lx-ui 类型检查、构建、文档构建、DatePicker 文档 E2E 1/1、目标 ESLint/Prettier 和差异检查通过。正式 Impeccable A/B、overlay 与 snapshot/trend 仍未完成；detector `[]` 不作通过依据。

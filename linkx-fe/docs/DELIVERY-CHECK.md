@@ -68,3 +68,8 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 - Impeccable 定向预检后，LxIcon hover/focus 使用自然减速曲线；warning 与 email 动效仍提供轻微语义反馈。桌面和 Pixel 7 浏览器均验证 hover/键盘/触屏及减少动效。
 - `LxUpload` 进度填充已改为固定轨道上的 `transform` 缩放，并在减少动效设置下关闭过渡；Chromium 文档 E2E 覆盖进度、重试、取消和该偏好。
 - 本阶段验证：图标单测 5 项、桌面/移动专项 E2E 各 1 项通过；Vue3 与 lx-ui 类型检查、Vue3 定向 ESLint、Prettier、组件库构建和文档构建通过。组件库未配置独立 ESLint。
+## 2026-10-04 Wave 0 日期说明关联
+
+- 当前工作区 DatePicker/DynamicForm 定向单测 36/36；lx-ui 类型、构建、文档构建通过，DatePicker 文档 E2E 1/1。
+- 代码审核未发现可复现缺陷；新增区间起止和相邻区间说明 ID 隔离断言。
+- 正式 Impeccable A/B、overlay 和 snapshot/trend 仍待完成；该行为修复不代表基础控件严格视觉矩阵关闭。

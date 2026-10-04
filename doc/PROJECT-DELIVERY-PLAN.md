@@ -737,3 +737,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 调整：单选/多选选择器统一改为 border: 0 + 控件内部 1px box-shadow inset；普通、悬停、聚焦和错误态只切换该内侧边线颜色，取消选择器外扩轮廓。恢复 4px 12px 内边距，保留 border-box、32px 高度、标签折叠和键盘展开语义。
 - 验证：4174 真实浏览器计算样式为 border: 0、box-shadow: rgb(0, 96, 169) 0 0 0 1px inset、outline: none，盒尺寸 319×32px；定向 Element Bridge Playwright 断言已通过（1 项，测试进程在完成后因复用文档服务保持运行，未再执行终止性重跑）。Impeccable 两路复评等待当前样式稳定后补记。
 - 边界：只处理 lx-ui 基础控件桥接的多选/单选边线层级；Vue3 业务表单仍按 UI-04 保留原校验、提交和权限契约。
+## 2026-10-04 Wave 0 结项与 Wave 1 入口
+
+- `LxDatePicker` 使用实例 UID 限定 Fragment 根下实际触发器，将宿主 `aria-describedby` 同步到单值/区间输入，并清理上次由组件管理的说明 ID。
+- 当前工作区 DatePicker/DynamicForm 单测 36/36；lx-ui 类型、库构建（196 modules）、文档构建和 DatePicker 文档 E2E 1/1 通过；独立代码审核未发现可复现缺陷，目标 ESLint、Prettier 与差异检查通过。
+- 正式 Impeccable A/B、修后 overlay、综合报告及 snapshot/trend 仍待完成；本结项不代表 DynamicForm/Form 或基础控件已完成视觉审查。
+- 下一执行入口：Wave 1 基础控件第一组，按 `PROJECT-FOLLOWUP-BREAKDOWN.md` 的状态矩阵与证据门槛逐项推进。

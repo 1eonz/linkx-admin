@@ -1648,3 +1648,14 @@
 - 代码审核：核对请求代次和 AbortSignal 互补保护、旧 `finally` 归属、pageNum 仅在当前成功响应后推进、触底并发保护与关键词保留，未发现新增可复现问题。
 - 静态门禁：`vue-tsc --noEmit`、API/ColForm/E2E 定向 ESLint 与 Prettier 检查、`git diff --check` 通过；业务请求仍使用 `.then().catch().finally()`。
 - 下一步：自动开始 GLM #1 lx-ui 全局组件注册，再按评审台账继续 #2。#10 Impeccable 正式 Critique 作为环境恢复后的独立补充项继续跟踪。
+## [2026-10-04] Wave 0 / DatePicker 字段说明隔离修复
+
+- **目标**：修复 Element Plus Fragment 根下日期触发器定位不稳定的问题，避免相邻日期字段互相覆盖 `aria-describedby`。
+- **改动文件**：`linkx-fe/src/components/LxDatePicker/index.vue`、`linkx-fe/src/utils/syncAriaDescribedBy.ts`、`other-admin/admin-vue3/tests/unit/lx-date-picker.test.ts`，以及计划、项目地图、迁移台账、组件审计和中文日期组件文档。DynamicForm 定向测试参与本地交叉验证，其既有实现与测试改动不纳入 Wave 0 提交。
+- **实现**：使用 Vue 实例 UID 标记日期触发器，Fragment 回退只在当前实例范围查找输入；按输入框同步宿主说明 ID，并移除上次由组件管理的 ID。单值、区间起止输入、相邻单值/区间实例及 DynamicForm 字段反馈均有测试覆盖。
+- **代码审核**：独立审核未发现可复现实现缺陷；审核建议直接验证区间两个输入和相邻区间实例，本波已新增该断言。
+- **验证**：当前工作区 DatePicker/DynamicForm 定向单测 36/36；lx-ui `pnpm typecheck`、`pnpm build`（196 modules）、`pnpm build:docs`；DatePicker 文档 E2E 1/1；目标 ESLint、Prettier 和 `git diff --check` 通过。文档构建有既有大 chunk 警告。提交仅包含本波 DatePicker 回归；既存 DynamicForm 实现与测试改动不纳入本波提交。
+- **浏览器/视觉审查**：文档 E2E 只验证当前组件交互，不是完整主题、窄屏、减少动效或 overlay 审查。本轮没有形成修复后独立 Impeccable A/B、综合报告和 snapshot/trend，继续标记阶段性。
+- **未完成与风险**：正式 Impeccable Critique 待补；DynamicForm/Form 不登记视觉验收关闭。真实后端不涉及。
+- **本波提交范围与提交号**：Wave 0 日期说明隔离修复、回归测试与本记录列出的计划/台账/API 文档；提交号由最终 Git 提交记录确认。
+- **下一步**：进入 Wave 1，按 `design/按钮体系/` 与 `design/表单控件八件套/` 严格复核 Button、ActionButtons、Input、Textarea、InputNumber、PasswordInput；当前正式 Critique 缺口持续跟踪。

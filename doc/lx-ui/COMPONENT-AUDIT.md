@@ -228,4 +228,8 @@ cascader / steps / timeline / carousel / transfer(EP 原生) / slider / rate / s
 
 ---
 
-*调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerson.vue / ServerFormDialog.vue / thirdPartyEdit.vue / ProTable / SearchBar / OrgTreeSelect / SelectPagination 等 30+ 文件）。本文件为设计工作底稿，后续按 P0 → P1 → P2 顺序补齐。*
+_调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerson.vue / ServerFormDialog.vue / thirdPartyEdit.vue / ProTable / SearchBar / OrgTreeSelect / SelectPagination 等 30+ 文件）。本文件为设计工作底稿，后续按 P0 → P1 → P2 顺序补齐。_
+
+## 2026-10-04 Wave 0 复验记录
+
+`LxDatePicker` 的单值说明更新/移除、相邻单值实例、区间起止输入及相邻区间实例隔离已通过行为回归。该修复只关闭可访问性关联缺陷；输入边界、弹层、范围视觉、窄屏和正式 Impeccable Critique 仍按基础控件批次复核，52 项严格关闭数不变。
