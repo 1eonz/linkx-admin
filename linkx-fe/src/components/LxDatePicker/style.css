@@ -109,6 +109,11 @@
   color: var(--lx-text-placeholder);
 }
 
+/* HUD 深底上的区间分隔符使用正文令牌，避免 Element Plus 亮色次级文字失去对比。 */
+.lx-theme-hud .lx-date-picker .el-range-separator {
+  color: var(--lx-text-regular);
+}
+
 /* ===== Popper 终态（teleport 到 body，lx-date-picker__popper 锚定）===== */
 /* 面板：4px 圆角 + pop 档阴影（与 Select 面板同族）；
  * 区间连贯浅蓝带 #ecf5ff 经 EP 变量注入（--el-datepicker-inrange-bg-color，
@@ -196,8 +201,8 @@ html:root
   .lx-date-picker__popper .el-picker-panel:has(.el-picker-panel__sidebar) {
     box-sizing: border-box;
     display: flex;
-    width: min(360px, calc(100vw - 8px));
-    max-width: calc(100vw - 8px);
+    width: min(360px, calc(100vw - 16px));
+    max-width: calc(100vw - 16px);
     flex-direction: column;
   }
 
@@ -237,7 +242,7 @@ html:root
   html:root
     .lx-date-picker__popper
     .el-date-range-picker.single-panel.has-sidebar {
-    width: min(360px, calc(100vw - 8px));
+    width: min(360px, calc(100vw - 16px));
   }
 
   html:root
@@ -303,4 +308,26 @@ html:root
   .lx-date-picker__popper .el-date-table td .el-date-table-cell {
     width: 40px;
   }
+}
+
+.lx-date-picker__popper--viewport-fit {
+  position: fixed !important;
+  box-sizing: border-box;
+  top: 50vh !important;
+  top: 50dvh !important;
+  left: 50% !important;
+  max-width: calc(100vw - 8px) !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.lx-date-picker__popper--viewport-fit > .el-popper__arrow {
+  display: none;
+}
+
+.lx-date-picker__popper--viewport-fit > .el-picker-panel {
+  box-sizing: border-box;
+  max-height: calc(100vh - 20px);
+  max-height: calc(100dvh - 20px);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
 }

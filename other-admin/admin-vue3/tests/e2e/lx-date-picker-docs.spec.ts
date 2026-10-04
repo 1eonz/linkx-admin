@@ -15,19 +15,102 @@ function readMonthHeadings(text: string): string[] {
     .filter((line) => /^\d{4}\s*年\s*\d{1,2}\s*月$/.test(line));
 }
 
-test('390px 首屏可操作日期控件并呈现区间标签接入约定', async ({ page }) => {
+function getContrastRatio(foreground: string, background: string): number {
+  const luminance = (color: string) => {
+    const channels = color
+      .match(/[\d.]+/g)
+      ?.slice(0, 3)
+      .map(Number);
+    if (!channels || channels.length !== 3) throw new Error(`无法解析颜色：${color}`);
+    if (color.startsWith('rgba(') || color.includes('/')) {
+      throw new Error(`对比度校验要求不透明颜色：${color}`);
+    }
+
+    const linearChannels = channels.map((value) => {
+      const normalized = value / 255;
+      return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+    });
+
+    return 0.2126 * linearChannels[0] + 0.7152 * linearChannels[1] + 0.0722 * linearChannels[2];
+  };
+
+  const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+  return (values[0] + 0.05) / (values[1] + 0.05);
+}
+
+test('390px 首屏可操作区间两端并呈现区间标签接入约定', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/components/lxdatepicker');
 
-  const firstControl = page.getByLabel('布控生效日期', { exact: true });
-  const bounds = await firstControl.boundingBox();
-  if (!bounds) throw new Error('首个日期控件未进入浏览器视口');
+  const range = page.locator('.lx-date-picker-demo [data-testid="range"]');
+  const start = range.getByLabel('专项布控日期区间开始日期', { exact: true });
+  const end = range.getByLabel('专项布控日期区间结束日期', { exact: true });
+  const status = range.locator('.lx-date-picker-demo__status');
 
-  expect(bounds.y).toBeGreaterThanOrEqual(0);
-  expect(bounds.y + bounds.height).toBeLessThanOrEqual(844);
+  await expect(range).toBeVisible();
+  await expect(status).toContainText('等待日期操作');
+  const rangeBounds = await range.boundingBox();
+  if (!rangeBounds) throw new Error('日期区间示例未进入浏览器视口');
+  const startBounds = await start.boundingBox();
+  const endBounds = await end.boundingBox();
+  if (!startBounds || !endBounds) throw new Error('区间起止输入未进入浏览器视口');
+
+  for (const [label, bounds] of [
+    ['区间开始输入', startBounds],
+    ['区间结束输入', endBounds],
+  ] as const) {
+    expect(bounds.x, `${label}应位于视口左边界内`).toBeGreaterThanOrEqual(0);
+    expect(bounds.x + bounds.width, `${label}应完整显示在视口内`).toBeLessThanOrEqual(390);
+    expect(bounds.y, `${label}应位于首屏内`).toBeGreaterThanOrEqual(0);
+    expect(bounds.y + bounds.height, `${label}应完整显示在首屏内`).toBeLessThanOrEqual(844);
+  }
+  expect(rangeBounds.y).toBeLessThan(
+    await page
+      .locator('.lx-date-picker-demo [data-testid="single"]')
+      .evaluate((element) => element.getBoundingClientRect().y),
+  );
+  await expect(start).toBeEnabled();
+  await expect(end).toBeEnabled();
+  await start.click();
+  await expect(page.locator('.lx-date-picker__popper[aria-hidden="false"]')).toBeVisible();
   await expect(page.locator('main')).toContainText("['start', 'end']");
   await expect(page.locator('main')).toContainText('label for="start"');
   await expect(page.locator('main')).toContainText('label for="end"');
+});
+
+test('实现补充默认收起并可用键盘访问展开', async ({ page }) => {
+  await page.goto('/components/lxdatepicker');
+
+  const details = page.locator('.lx-date-picker-demo__details');
+  const summary = details.locator('summary');
+  const note = details.locator('.lx-date-picker-demo__note');
+
+  await expect(details).toBeVisible();
+  expect(await details.evaluate((element) => element.hasAttribute('open'))).toBe(false);
+  await expect(note).not.toBeVisible();
+
+  await summary.focus();
+  await expect(summary).toBeFocused();
+  await page.keyboard.press('Enter');
+
+  await expect(details).toHaveAttribute('open', '');
+  await expect(note).toBeVisible();
+  await expect(summary).toHaveText('键盘操作与扩展参数');
+  await expect(details.locator('.lx-date-picker-demo__keyboard-note')).toContainText('方向键移动日期');
+  await expect(note).toContainText('disabled-date');
+});
+
+test('表单日期错误态展示邻近文案并关联无效状态', async ({ page }) => {
+  await page.goto('/components/lxdatepicker');
+
+  const errorItem = page.locator('.lx-date-picker-demo [data-testid="error"] .el-form-item');
+  const input = errorItem.getByRole('combobox');
+
+  await expect(errorItem).toHaveClass(/is-error/);
+  await expect(errorItem.locator('.el-form-item__error')).toHaveText('请选择复核日期');
+  await expect(input).toHaveAttribute('aria-invalid', 'true');
+  const describedBy = await input.getAttribute('aria-describedby');
+  expect(describedBy).toContain(await errorItem.locator('.el-form-item__error').getAttribute('id'));
 });
 
 test('周一起始表头与日期、月份示例状态保持独立', async ({ page }) => {
@@ -73,6 +156,14 @@ test('320px、375px 与 390px 下区间快捷项横排且触控区域完整', as
     await expect(popper.getByRole('grid')).toHaveCount(1);
     await expect(popper.locator('.el-picker-panel__shortcut')).toHaveCount(3);
     await expect(popper).not.toHaveClass(/el-zoom-in-top-enter-active/);
+    await expect
+      .poll(() =>
+        popper.evaluate((element) => {
+          const { top, bottom } = element.getBoundingClientRect();
+          return top >= 8 && bottom <= window.innerHeight - 8;
+        }),
+      )
+      .toBe(true);
 
     const geometry = await popper.evaluate((element) => {
       const shortcuts = Array.from(element.querySelectorAll<HTMLElement>('.el-picker-panel__shortcut')).map((button) =>
@@ -85,10 +176,17 @@ test('320px、375px 与 390px 下区间快捷项横排且触控区域完整', as
         button.getBoundingClientRect(),
       );
       const panel = element.getBoundingClientRect();
+      const dateRangePicker = element.querySelector<HTMLElement>('.el-date-range-picker')?.getBoundingClientRect();
 
       return {
         panelLeft: panel.left,
+        panelTop: panel.top,
         panelRight: panel.right,
+        panelBottom: panel.bottom,
+        viewportHeight: window.innerHeight,
+        dateRangePickerLeft: dateRangePicker?.left ?? Number.NaN,
+        dateRangePickerRight: dateRangePicker?.right ?? Number.NaN,
+        dateRangePickerWidth: dateRangePicker?.width ?? Number.NaN,
         clientWidth: document.documentElement.clientWidth,
         viewportWidth: window.innerWidth,
         shortcutRows: new Set(shortcuts.map((rect) => Math.round(rect.top))).size,
@@ -102,7 +200,12 @@ test('320px、375px 与 390px 下区间快捷项横排且触控区域完整', as
     });
 
     expect(geometry.panelLeft).toBeGreaterThanOrEqual(0);
+    expect(geometry.panelTop, JSON.stringify(geometry)).toBeGreaterThanOrEqual(8);
     expect(geometry.panelRight).toBeLessThanOrEqual(geometry.clientWidth);
+    expect(geometry.panelBottom, JSON.stringify(geometry)).toBeLessThanOrEqual(geometry.viewportHeight - 8);
+    expect(geometry.dateRangePickerLeft, JSON.stringify(geometry)).toBeGreaterThanOrEqual(0);
+    expect(geometry.dateRangePickerRight, JSON.stringify(geometry)).toBeLessThanOrEqual(geometry.clientWidth);
+    expect(geometry.dateRangePickerWidth, JSON.stringify(geometry)).toBeLessThanOrEqual(geometry.viewportWidth - 16);
     expect(geometry.shortcutRows).toBe(1);
     expect(
       geometry.shortcutHeights.every((height) => Math.round(height) >= 44),
@@ -166,11 +269,171 @@ test('320px 触屏区间日历保留 44px 触控区域且不横向溢出', async
   }
 });
 
+test('320x375 与 390x375 短视口中快捷日历完整显示且滚动不带动页面', async ({ page }) => {
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height: 375 });
+    await page.goto('/components/lxdatepicker');
+
+    const demo = page.locator('.lx-date-picker-demo');
+    await demo.getByLabel('研判时间范围开始日期', { exact: true }).click();
+
+    const popper = page.locator('.lx-date-picker__popper.lx-date-picker-demo__shortcuts-popper[aria-hidden="false"]');
+    await expect(popper.locator('.el-picker-panel__shortcut')).toHaveCount(3);
+    await expect
+      .poll(() =>
+        popper.evaluate((element) => {
+          const { top, bottom } = element.getBoundingClientRect();
+          return top >= 8 && bottom <= window.innerHeight - 8;
+        }),
+      )
+      .toBe(true);
+
+    const initialGeometry = await popper.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const shortcuts = Array.from(element.querySelectorAll<HTMLElement>('.el-picker-panel__shortcut')).map(
+        (shortcut) => shortcut.getBoundingClientRect(),
+      );
+
+      return {
+        top: bounds.top,
+        bottom: bounds.bottom,
+        viewportHeight: window.innerHeight,
+        shortcutBounds: shortcuts.map(({ left, right, top, bottom }) => ({ left, right, top, bottom })),
+      };
+    });
+
+    expect(initialGeometry.top, JSON.stringify(initialGeometry)).toBeGreaterThanOrEqual(8);
+    expect(initialGeometry.bottom, JSON.stringify(initialGeometry)).toBeLessThanOrEqual(
+      initialGeometry.viewportHeight - 8,
+    );
+    expect(
+      initialGeometry.shortcutBounds.every(
+        ({ left, right, top, bottom }) =>
+          left >= 0 && right <= width && top >= initialGeometry.top && bottom <= initialGeometry.bottom,
+      ),
+      JSON.stringify(initialGeometry),
+    ).toBe(true);
+
+    const scrollYBeforeWheel = await page.evaluate(() => window.scrollY);
+    const popperBounds = await popper.boundingBox();
+    if (!popperBounds) throw new Error('快捷日期弹层未进入视口');
+
+    await page.mouse.move(popperBounds.x + popperBounds.width / 2, popperBounds.y + popperBounds.height * 0.75);
+    await page.mouse.wheel(0, 120);
+    expect(await page.evaluate(() => window.scrollY)).toBe(scrollYBeforeWheel);
+
+    await expect
+      .poll(() =>
+        popper.evaluate((element) => {
+          const bounds = element.getBoundingClientRect();
+          const lastRow = element.querySelector('.el-date-table tbody tr:last-child')?.getBoundingClientRect();
+
+          return Boolean(lastRow && lastRow.top >= bounds.top && lastRow.bottom <= bounds.bottom);
+        }),
+      )
+      .toBe(true);
+  }
+});
+
+test('320x375 与 390x375 短视口中的普通区间日历完整显示且可滚动', async ({ page }) => {
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height: 375 });
+    await page.goto('/components/lxdatepicker');
+
+    const start = page.getByLabel('专项布控日期区间开始日期', { exact: true });
+    await start.click();
+
+    const popper = page.locator('.lx-date-picker__popper[aria-hidden="false"]');
+    await expect(popper).toBeVisible();
+    await expect
+      .poll(() =>
+        popper.evaluate((element) => {
+          const bounds = element.getBoundingClientRect();
+          return (
+            bounds.left >= 0 &&
+            bounds.right <= window.innerWidth &&
+            bounds.top >= 8 &&
+            bounds.bottom <= window.innerHeight - 8
+          );
+        }),
+      )
+      .toBe(true);
+
+    const visibleMonthCount = await popper.locator('.el-date-range-picker__content').count();
+    expect(visibleMonthCount).toBe(1);
+
+    const scrollYBeforeWheel = await page.evaluate(() => window.scrollY);
+    const popperBounds = await popper.boundingBox();
+    if (!popperBounds) throw new Error('普通日期区间弹层未进入视口');
+
+    await page.mouse.move(popperBounds.x + popperBounds.width / 2, popperBounds.y + popperBounds.height / 2);
+    await page.mouse.wheel(0, 360);
+    expect(await page.evaluate(() => window.scrollY)).toBe(scrollYBeforeWheel);
+
+    await expect
+      .poll(() =>
+        popper.evaluate((element) => {
+          const bounds = element.getBoundingClientRect();
+          const lastRow = element.querySelector('.el-date-table tbody tr:last-child')?.getBoundingClientRect();
+
+          return Boolean(lastRow && lastRow.top >= bounds.top && lastRow.bottom <= bounds.bottom);
+        }),
+      )
+      .toBe(true);
+  }
+});
+
+test('日历打开时视口高度变化会更新定位模式', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/components/lxdatepicker');
+
+  const start = page.getByLabel('专项布控日期区间开始日期', { exact: true });
+  await start.click();
+
+  const popper = page.locator('.lx-date-picker__popper[aria-hidden="false"]');
+  await expect(popper).toBeVisible();
+  await expect(popper).not.toHaveClass(/lx-date-picker__popper--viewport-fit/);
+
+  await page.setViewportSize({ width: 390, height: 375 });
+  await expect(popper).toHaveClass(/lx-date-picker__popper--viewport-fit/);
+  await expect
+    .poll(() =>
+      popper.evaluate((element) => {
+        const bounds = element.getBoundingClientRect();
+        return bounds.top >= 8 && bounds.bottom <= window.innerHeight - 8;
+      }),
+    )
+    .toBe(true);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(popper).not.toHaveClass(/lx-date-picker__popper--viewport-fit/);
+  await expect(popper.locator('.el-popper__arrow')).toBeVisible();
+});
+
 test('HUD 主题在浅深模式切换后应用到日期弹层', async ({ page }) => {
   await page.goto('/components/lxdatepicker');
   const demo = page.locator('.lx-date-picker-demo');
   const hudSwitch = demo.getByLabel('HUD 深色主题');
   await hudSwitch.check();
+  const rangeSeparator = demo.locator('[data-testid="range"] .el-range-separator');
+  const rangeWrapper = rangeSeparator.locator('xpath=..');
+  await expect
+    .poll(() => rangeWrapper.evaluate((element) => getComputedStyle(element).backgroundColor))
+    .toBe('rgb(16, 26, 44)');
+  const rangeSeparatorColors = await rangeSeparator.evaluate((element) => {
+    const wrapper = element.closest<HTMLElement>('.el-input__wrapper');
+    if (!wrapper) throw new Error('日期区间分隔符缺少触发器表面');
+
+    return {
+      foreground: getComputedStyle(element).color,
+      background: getComputedStyle(wrapper).backgroundColor,
+    };
+  });
+  expect(
+    getContrastRatio(rangeSeparatorColors.foreground, rangeSeparatorColors.background),
+    `HUD 区间分隔符对比度：${JSON.stringify(rangeSeparatorColors)}`,
+  ).toBeGreaterThanOrEqual(4.5);
+
   const effectiveDate = demo.getByLabel('布控生效日期', { exact: true });
   await expect
     .poll(() =>
@@ -331,6 +594,11 @@ test('区间开始和结束输入均可将键盘焦点送入可见日历网格',
   await expect.poll(() => leftFocus.textContent()).not.toBe(initialDate);
   await page.keyboard.press('Enter');
   await expect(popper.locator('.el-date-range-picker__content.is-left td.start-date')).toContainText('16');
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('Enter');
+  await expect(demo.locator('[data-testid="range"] .lx-date-picker-demo__status')).toContainText(
+    '专项布控区间 已选：2026-09-16 至 2026-09-17',
+  );
 
   await page.keyboard.press('Escape');
   await expect(popper).toBeHidden();
