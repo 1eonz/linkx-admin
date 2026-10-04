@@ -105,6 +105,7 @@
 - 按 `design/按钮体系/` 和 `design/表单控件八件套/` 建立状态矩阵：默认、悬停、按下、焦点、禁用、加载、危险、错误、只读、前后缀、尺寸和长文本。
 - 核对 Button 层级、图标间距、真实 button 语义、键盘激活、加载锁和危险确认；ActionButtons 核对隐藏、溢出菜单、Escape 和 44px 热区。
 - 核对 Input/Textarea 的 32px 令牌、清空、字数、错误关联、焦点贴边、自动完成、只读和窄屏；PasswordInput 核对显隐按钮、选择/焦点、清空和禁用。
+- 密码遮罩必须由组件显隐状态控制，`$attrs` 中的 `type` 不得覆盖内部值；剪贴板默认允许以兼容密码管理器，显式 `preventClipboard` 仅是前端交互策略，不得描述成安全边界。
 - 核对 InputNumber 的 sm/md/lg、步进器连续贴合、`controls` 显隐、边界、键盘和表单校验。
 - 每个组件补中文 Demo/API、公开类型、单测和文档 E2E；覆盖亮色/HUD、375px、键盘和减少动效。
 - 批次完成后执行独立代码审核、Impeccable A/B、建议修复和复验，记录 detector JSON/stderr/exit code。
@@ -229,4 +230,4 @@
 
 ## 五、当前执行入口
 
-当前执行入口为 **Wave 1：基础控件第一组——按钮与输入**。按设计稿完成状态矩阵、契约/样式复核、中文 Demo/API、行为测试和文档 E2E，再进行代码审核与 Impeccable A/B。Wave 0 的正式视觉 Critique 继续作为未关闭项；detector `[]`、普通文档 E2E 和构建通过均不能替代 overlay/snapshot。
+Wave 1 密码框透传 `type` 遮罩覆盖的 P1 已由提交 `2762816` 修复，定向单测 7/7；Vue3 类型检查、lx-ui 类型检查/构建/文档构建及目标 Prettier 检查通过。独立代码复审批准，未发现 P0–P2；新增用例覆盖 `readonly` 与 `attrs.type` 组合。Assessment A 最新静态复评为暂定 30/40，已检查修复后的组件源码和文档，但没有修复后的浏览器行为证据；Assessment B 六个静态扫描均有效返回 `[]`、stderr 为空、退出码为 0。浏览器策略拒绝可变页面/overlay 注入，本轮未运行文档 E2E，也无修复后的 overlay、截图或 snapshot/trend，因此 Wave 1 及 Wave 0 正式视觉 Critique 仍未关闭。当前继续 **Wave 2：选择与日期** 的实现和行为检查；检测器空数组、普通文档 E2E 和构建通过均不能替代正式 overlay 与快照证据。

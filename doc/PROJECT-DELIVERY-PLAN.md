@@ -2,7 +2,7 @@
 
 ## 2026-10-04 后续任务完整拆分与执行规范
 
-完整的剩余任务拆分、依赖顺序、完成门槛、中文文档/注释规则、`.then().catch().finally()` 规则、Mock 边界、代码审核和 Impeccable A/B 证据要求见 [`PROJECT-FOLLOWUP-BREAKDOWN.md`](./PROJECT-FOLLOWUP-BREAKDOWN.md)。Wave 0 已修复并复验 `LxDatePicker` 相邻实例 `aria-describedby` 隔离，当前进入 Wave 1 基础控件第一组。正式 Impeccable A/B 与当前版本 overlay/snapshot 仍未关闭；detector `[]` 只代表静态零命中，不能单独通过审查。
+完整的剩余任务拆分、依赖顺序、完成门槛、中文文档/注释规则、`.then().catch().finally()` 规则、Mock 边界、代码审核和 Impeccable A/B 证据要求见 [`PROJECT-FOLLOWUP-BREAKDOWN.md`](./PROJECT-FOLLOWUP-BREAKDOWN.md)。Wave 1 密码框透传 `type` 覆盖遮罩的 P1 已在提交 `2762816` 修复并增加回归；当前单测 7/7，独立代码复审批准且未发现 P0–P2。Assessment A 最新静态复评为暂定 30/40，已检查当前源码和文档，但视觉结论仍依赖旧截图；Assessment B 六个有效 detector 结果均为 `[]`、stderr 空、退出码 0。因浏览器策略未取得修复后的 overlay/snapshot，Wave 1 不能标记视觉审查关闭。当前继续 Wave 2 实现，宿主 Element Plus 替换门槛不变。
 
 - Wave 0 验证：DatePicker/DynamicForm 单测 36/36；lx-ui `typecheck`、`build`（196 modules）、`build:docs`，DatePicker 文档 E2E 1/1，目标 ESLint/Prettier 和差异检查通过。独立代码审核未发现可复现缺陷；相邻区间说明隔离补测已通过。
 - Wave 0 未关闭：修复后的正式 Impeccable A/B、overlay、综合报告和 snapshot/trend 尚待完成；DynamicForm/Form 与基础控件均不可据此标记正式视觉审查关闭。

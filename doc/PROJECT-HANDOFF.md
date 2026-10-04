@@ -1787,3 +1787,15 @@
 - **未完成与风险**：正式 Impeccable Critique 待补；DynamicForm/Form 不登记视觉验收关闭。真实后端不涉及。
 - **本波提交范围与提交号**：Wave 0 日期说明隔离修复、回归测试与本记录列出的计划/台账/API 文档；提交号由最终 Git 提交记录确认。
 - **下一步**：进入 Wave 1，按 `design/按钮体系/` 与 `design/表单控件八件套/` 严格复核 Button、ActionButtons、Input、Textarea、InputNumber、PasswordInput；当前正式 Critique 缺口持续跟踪。
+
+## [2026-10-04] Wave 1 / LxPasswordInput 透传属性遮罩修复
+
+- **目标**：防止调用方透传 `type="text"` 覆盖密码输入框的显隐状态，统一剪贴板前端交互说明，并将 P1 修复和验收证据交接给后续波次。
+- **改动范围**：`linkx-fe/src/components/LxPasswordInput/index.vue`、`types.ts`、中文组件文档与 lx-ui 交付记录；Vue3 密码框单测和文档 E2E 源码；项目交付计划、波次拆分、项目地图、组件审计及迁移台账；`.impeccable/critique/wave1-final-*`、`wave1-postfix-*` 评估和代码复审记录。
+- **完成内容**：组件复制 `$attrs` 后移除 `type`，确保原生输入类型始终受 `showPassword` 状态控制；剪贴板默认允许，显式 `preventClipboard` 只阻止前端事件，不代表服务端凭据安全控制。单测覆盖透传 `type` 下的密码/明文往返、只读组合及已有禁用边界；中文文档注明 `type` 不会透传。
+- **代码审核**：修后独立复审批准，未发现 P0–P2；只读与透传 `type` 组合回归已补齐。复审未读取独立 Assessment A/B，也未修改产品源码。
+- **验证**：Vue3 密码框 Vitest 7/7；Vue3 `vue-tsc --noEmit`；lx-ui `pnpm typecheck`；`pnpm build`（196 modules）；VitePress `pnpm build:docs`；本波文件 Prettier 检查；Vue3 单测/E2E 源码 ESLint。文档构建有既有 500KB chunk 警告。Vue3 ESLint 对 `linkx-fe` 路径报告超出 base path 并忽略，因此本次没有把 lx-ui 源码记为 ESLint 通过；lx-ui 使用已通过的 Prettier 检查。
+- **Impeccable 状态**：Assessment A 最新静态复评暂定 30/40，已核对当前源码与文档；现存截图早于透传过滤实现，不能验证属性覆盖或修复后的交互。Assessment B 六个源码 detector 均为有效 JSON `[]`、stderr 为空、退出码 0，仅说明静态零命中。受浏览器脚本注入策略限制，本轮未运行文档 E2E、overlay、现场截图、综合报告或 snapshot/trend；Wave 1 及 Wave 0 正式视觉 Critique 仍未关闭，不计入 52 项严格关闭数。
+- **未完成/风险**：未实测修复后浏览器剪贴板行为和视觉 overlay；真实登录、改密及后端安全联调不在本波范围。文档 E2E 源码已更新，但本轮未运行。
+- **本波提交范围与提交号**：实现、回归测试、组件文档先以 `2762816`（`fix(lx-ui): prevent forwarded type from bypassing password mask`）提交。计划、地图、审计、独立评审报告及本记录由后续 `docs(project)` 提交承载；两笔提交一并推送。
+- **下一步**：自动继续 Wave 2（选择与日期），优先按 `PROJECT-FOLLOWUP-BREAKDOWN.md` 检查 DatePicker 窄屏区间首屏布局和 Escape 起止端点；UI 实施前遵循 `frontend-ui-ux` 与 Impeccable `distill` skill。正式 overlay 与 snapshot/trend 仍是视觉关闭门槛。

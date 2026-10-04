@@ -1,5 +1,9 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-04 基础控件 P1 复核
+
+代码审核发现并定位到 `LxPasswordInput` 透传 `$attrs` 会允许 `type="text"` 绕过密码遮罩；当前已从透传属性中剔除 `type`，新增显隐往返及只读组合回归，7/7 通过，修后独立代码复审批准、未发现 P0–P2。剪贴板契约统一为默认允许，`preventClipboard` 仅为前端事件策略。Wave 1 的正式浏览器 overlay/snapshot 尚缺，因此该批不计入 52 项严格关闭数。
+
 ## 2026-10-03 UI-10 Wave 6 交付与审查状态更正
 
 `LxTreeSelect` 与 `LxCascader` 的实现、Demo、API、单测和文档 E2E 已完成：单测 17/17，VitePress Playwright 8/8。当前源码与两份文档的 detector 均为有效 `[]`、stderr 为空、退出码 0，仅代表静态规则零命中。现存 10 月 2 日 overlay 截图早于当前代码/文档修改；本次浏览器策略拒绝 overlay 注入预检，因此当前版本缺少正式 Critique 所需的 overlay/复验，两个组件不登记为严格 UI-10 已关闭。既有 Assessment A 建议已落实，P3 观察项继续跟踪。本矩阵当前 **0/52 个公开组件按统一严格口径关闭**。
@@ -331,7 +335,7 @@ el-divider(12)、el-color-picker(6)、el-menu(3)、el-alert(3)、el-collapse(2)�
 | P1     | **LxSectionTitle / LxMetricCard**         | 28   | 有                                           | 区块标题三 variant / 指标卡等宽数值；V3 已有成熟原型可直接吸收                                               |
 | P2     | **LxVirtualTree / LxCheckboxList**        | 8    | 有（花名册勾选标本：卡片式 checkbox + 计数） | 万级虚拟滚动，纯前端可封装                                                                                   |
 | P2     | **LxTransferPanel**（DataPermissionTree） | 3    | 有                                           | 左树右已选双栏 + 全选/取消                                                                                   |
-| P2     | **LxPasswordInput**                       | 9    | 无                                           | 剪贴板防护，直接封装                                                                                         |
+| P2     | **LxPasswordInput**                       | 9    | 无                                           | 复用 LxInput、显隐切换；默认允许剪贴板，显式事件拦截不作为安全控制                                           |
 | P2     | **LxAuthImg**                             | 12   | 无                                           | 请求函数由业务传入（P7）                                                                                     |
 | P3     | 人员选择弹窗壳                            | 3    | 无                                           | "SearchBar + ProTable + 多选"壳组件，fetchApi 注入                                                           |
 | P3     | LxBreadcrumb                              | 2    | 无                                           | 路由自动生成                                                                                                 |
