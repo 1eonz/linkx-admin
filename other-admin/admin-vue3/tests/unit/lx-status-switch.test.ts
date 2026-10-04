@@ -78,6 +78,13 @@ describe('LxStatusSwitch', () => {
     wrapper.unmount();
   });
 
+  it('falls back to a read-only tag when an injected permission is absent', () => {
+    const wrapper = mountSwitch({ modelValue: true, permission: 'demo:status-switch' });
+    expect(wrapper.get('.lx-status-switch__fallback').text()).toContain('禁用/只读');
+    expect(wrapper.findComponent(SwitchStub).exists()).toBe(false);
+    wrapper.unmount();
+  });
+
   it('blocks changes while loading', async () => {
     const wrapper = mountSwitch({ modelValue: true, loading: true, confirm: '关闭后停止服务。' });
     const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
@@ -111,6 +118,32 @@ describe('LxStatusSwitch', () => {
 
     await expect(beforeChange()).resolves.toBe(true);
     expect(lxConfirmMock).not.toHaveBeenCalled();
+    wrapper.unmount();
+  });
+  it('accepts structured confirmation options without a runtime prop warning', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const wrapper = mountSwitch({
+      modelValue: true,
+      confirm: {
+        title: '停用服务',
+        message: '停用后将停止接收事件。',
+        confirmText: '继续停用',
+        cancelText: '暂不停用',
+        type: 'danger',
+      },
+    });
+    const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
+
+    await expect(beforeChange()).resolves.toBe(true);
+    expect(lxConfirmMock).toHaveBeenCalledWith({
+      title: '停用服务',
+      message: '停用后将停止接收事件。',
+      confirmText: '继续停用',
+      cancelText: '暂不停用',
+      danger: true,
+    });
+    expect(warn.mock.calls.some(([message]) => String(message).includes('confirm'))).toBe(false);
+    warn.mockRestore();
     wrapper.unmount();
   });
 });

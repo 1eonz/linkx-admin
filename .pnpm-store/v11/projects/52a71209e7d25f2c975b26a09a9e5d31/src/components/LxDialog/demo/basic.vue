@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { LxDialog, lxMessage } from '../../../index'
 
 type DemoMode = 'form' | 'danger' | 'custom'
@@ -7,7 +7,18 @@ type DemoMode = 'form' | 'danger' | 'custom'
 const visible = ref(false)
 const loading = ref(false)
 const mode = ref<DemoMode>('form')
+const darkTheme = ref(false)
 const form = ref({ level: '紧急', place: '', assignee: '084920 (张警官)' })
+const placeError = ref('')
+
+function syncThemeRoot(enabled: boolean) {
+  if (typeof document === 'undefined') return
+  document.documentElement.classList.toggle('dark', enabled)
+  document.documentElement.classList.toggle('lx-theme-hud', enabled)
+}
+
+watch(darkTheme, syncThemeRoot)
+onBeforeUnmount(() => syncThemeRoot(false))
 
 function openDialog(nextMode: DemoMode) {
   mode.value = nextMode
@@ -16,9 +27,14 @@ function openDialog(nextMode: DemoMode) {
 
 function submit() {
   if (mode.value === 'form' && !form.value.place.trim()) {
+    placeError.value = '请填写案发精确地点'
     lxMessage.warning('请填写案发精确地点')
+    void nextTick(() => {
+      document.querySelector<HTMLInputElement>('#lx-dialog-place')?.focus()
+    })
     return
   }
+  placeError.value = ''
   loading.value = true
   const currentMode = mode.value
   setTimeout(() => {
@@ -32,8 +48,16 @@ function submit() {
 </script>
 
 <template>
-  <div class="lx-dialog-demo">
-    <div class="lx-dialog-demo__actions" role="group" aria-label="弹窗示例">
+  <section
+    class="lx-dialog-demo"
+    :class="{ 'lx-theme-hud': darkTheme }"
+    aria-label="弹窗示例"
+  >
+    <label class="lx-dialog-demo__theme">
+      <input v-model="darkTheme" type="checkbox" />
+      HUD 深色主题
+    </label>
+    <div class="lx-dialog-demo__actions" role="group" aria-label="弹窗操作">
       <button class="demo-btn" type="button" @click="openDialog('form')">
         新建涉警联动工单
       </button>
@@ -81,10 +105,21 @@ function submit() {
         <label class="lx-dialog-form-field lx-dialog-form-field--full">
           <span class="lx-dialog-form-label">案发精确地点</span>
           <input
+            id="lx-dialog-place"
             class="lx-dialog-form-input"
             v-model="form.place"
             placeholder="道路 + 门牌 / 网格编号"
+            :aria-invalid="placeError ? 'true' : 'false'"
+            :aria-describedby="placeError ? 'lx-dialog-place-error' : undefined"
+            @input="placeError = ''"
           />
+          <span
+            v-if="placeError"
+            id="lx-dialog-place-error"
+            class="lx-dialog-form-error"
+            role="alert"
+            >{{ placeError }}</span
+          >
         </label>
       </div>
       <p v-else-if="mode === 'danger'" class="lx-dialog-danger" role="alert">
@@ -107,10 +142,29 @@ function submit() {
         </button>
       </template>
     </LxDialog>
-  </div>
+  </section>
 </template>
 
 <style scoped>
+.lx-dialog-demo {
+  display: grid;
+  gap: var(--lx-space-md);
+  min-width: 0;
+}
+
+.lx-dialog-demo__theme {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: var(--lx-space-sm);
+  color: var(--lx-text-secondary);
+  font-size: 13px;
+}
+
+.lx-dialog-demo__theme input {
+  accent-color: var(--lx-color-primary);
+}
+
 .lx-dialog-demo__actions {
   display: flex;
   flex-wrap: wrap;
@@ -180,6 +234,12 @@ function submit() {
 .lx-dialog-form-label {
   font-size: 11px;
   color: var(--lx-text-secondary);
+}
+
+.lx-dialog-form-error {
+  color: var(--lx-color-form-error);
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .lx-dialog-form-input {

@@ -163,7 +163,7 @@ onBeforeUnmount(() => {
               : undefined
           "
           :disabled="action.disabled"
-          @click="onClick(action)"
+          @click="onClick(action, true)"
         >
           <LxIcon
             v-if="action.icon"

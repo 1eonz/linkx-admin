@@ -11,6 +11,35 @@
   background: var(--lx-bg-card);
 }
 
+/* API 表在窄屏内自身滚动，避免文档列被长类型撑出视口。第一列和代码列保持
+   单行便于扫描，横向滚动由表格自身承载，不影响页面主滚动。 */
+.vp-doc table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: var(--lx-color-primary) var(--lx-bg-table-header);
+}
+
+.vp-doc table th:first-child,
+.vp-doc table td:first-child,
+.vp-doc table code {
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .vp-doc table {
+    font-size: 12px;
+  }
+
+  .vp-doc table th,
+  .vp-doc table td {
+    min-width: max-content;
+  }
+}
+
 /* 文档站：demo 内触发按钮（统一视觉，非组件库产物） */
 .vp-doc .demo-btn {
   height: 32px;

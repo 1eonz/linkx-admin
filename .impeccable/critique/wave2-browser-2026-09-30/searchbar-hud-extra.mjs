@@ -1,0 +1,16 @@
+import { createRequire } from 'node:module';
+import { writeFileSync } from 'node:fs';
+const require = createRequire(import.meta.url);
+const { chromium } = require('F:/work/linkx-admin/other-admin/admin-vue3/node_modules/@playwright/test');
+const out = 'F:/work/linkx-admin/.impeccable/critique/wave2-browser-2026-09-30';
+const browser = await chromium.launch({ headless: true, executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
+const context = await browser.newContext({ viewport: { width: 375, height: 812 } });
+const page = await context.newPage();
+await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'dark' });
+await page.goto('http://127.0.0.1:4177/components/lxsearchbar', { waitUntil: 'networkidle', timeout: 15000 });
+await page.evaluate(() => { document.documentElement.classList.add('dark', 'lx-theme-hud'); });
+await page.screenshot({ path: `${out}/searchbar-mobile-hud-reduced.png`, fullPage: true });
+const metrics = await page.evaluate(() => ({ classes: document.documentElement.className, viewport: { width: innerWidth, height: innerHeight }, scrollWidth: document.documentElement.scrollWidth, reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches }));
+writeFileSync(`${out}/searchbar-mobile-hud-reduced.json`, JSON.stringify({ name: 'searchbar-mobile-hud-reduced', meta: { mode: 'mobile-hud-reduced-motion', hudClassApplied: true }, metrics }, null, 2));
+console.log(JSON.stringify(metrics));
+await browser.close();

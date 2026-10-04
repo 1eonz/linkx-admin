@@ -3,11 +3,11 @@ import { LxTextarea } from 'lx-ui';
 import { describe, expect, it } from 'vitest';
 
 describe('LxTextarea', () => {
-  it('renders the lx-textarea class on the EP textarea root', () => {
+  it('renders the lx-textarea shell around the EP textarea root', () => {
     const wrapper = mount(LxTextarea);
 
     expect(wrapper.classes()).toContain('lx-textarea');
-    expect(wrapper.classes()).toContain('el-textarea');
+    expect(wrapper.find('.lx-textarea__control.el-textarea').exists()).toBe(true);
     expect(wrapper.find('textarea.el-textarea__inner').exists()).toBe(true);
     wrapper.unmount();
   });
@@ -59,6 +59,42 @@ describe('LxTextarea', () => {
 
     expect(outside.get('.el-input__count').classes()).toContain('is-outside');
     outside.unmount();
+  });
+
+  it('默认硬截断且校验模式正确关联超限说明', async () => {
+    const hardLimit = mount(LxTextarea, {
+      props: { maxlength: 5, showWordLimit: true },
+    });
+    expect(hardLimit.get('textarea').attributes('maxlength')).toBe('5');
+    expect(hardLimit.find('.lx-textarea__overflow-message').exists()).toBe(false);
+    hardLimit.unmount();
+
+    const value = '涉密核验'.repeat(51);
+    const validation = mount(LxTextarea, {
+      props: {
+        modelValue: value,
+        maxlength: 200,
+        maxlengthMode: 'validate',
+        showWordLimit: true,
+      },
+      attrs: { 'aria-describedby': 'existing-help' },
+    });
+    const textarea = validation.get('textarea');
+
+    expect(textarea.attributes('maxlength')).toBeUndefined();
+    expect(textarea.attributes('aria-invalid')).toBe('true');
+    expect(textarea.attributes('aria-describedby')).toContain('existing-help');
+    const overflowMessage = validation.get('.lx-textarea__overflow-message');
+    const overflowDescriptionId = overflowMessage.attributes('id');
+    expect(textarea.attributes('aria-describedby')).toContain(overflowDescriptionId);
+    expect(overflowMessage.text()).toContain('字数超出上限 200 字');
+    expect(validation.get('.lx-textarea__validation-count').text()).toBe(`${value.length} / 200`);
+
+    await validation.setProps({ modelValue: value.slice(0, 200) });
+    expect(validation.find('.lx-textarea__overflow-message').exists()).toBe(false);
+    expect(validation.get('textarea').attributes('aria-invalid')).toBeUndefined();
+    expect(validation.get('textarea').attributes('aria-describedby')).toBe('existing-help');
+    validation.unmount();
   });
 
   it('blocks editing and marks the disabled state when disabled', () => {

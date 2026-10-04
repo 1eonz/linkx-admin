@@ -2,6 +2,8 @@
 
 P1 例外场景组件：状态标记必须用 LxStatusDot，仅当需要**携带文字信息**（关键词、检索条件、已选项）时才用 LxTag。浅底深字，包含品牌主色和四种反馈语义色。
 
+小字可读性：success/warning 的底色和边框保留语义色，文字使用正文令牌，确保浅色主题达到正文对比度要求；深色主题随令牌同步。
+
 <script setup lang="ts">
 import { LxTag } from '../../src';
 </script>

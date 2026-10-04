@@ -44,6 +44,8 @@ export interface LxSidebarProps {
   nodeLabel?: string
   /** 节点状态 */
   nodeStatus?: LxStatus
+  /** expanded 底部专网延迟文案 */
+  latencyLabel?: string
 }
 
 /** rail 态 tooltip 浮层数据（容器统一管理，Teleport 到 body） */

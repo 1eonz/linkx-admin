@@ -1,0 +1,2 @@
+const {chromium}=require('C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright')
+;(async()=>{const b=await chromium.launch({headless:true});const p=await b.newPage({viewport:{width:1280,height:900}});await p.goto('http://127.0.0.1:4191/components/lxcascader',{waitUntil:'networkidle'});await p.locator('.lx-cascader .el-input__wrapper').hover(); console.log(await p.locator('.lx-cascader').evaluate(e=>e.outerHTML)); await b.close()})().catch(e=>{console.error(e.stack||e);process.exitCode=1})

@@ -1,5 +1,108 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-04 后续任务完整拆分与执行规范
+
+完整的剩余任务拆分、依赖顺序、完成门槛、中文文档/注释规则、`.then().catch().finally()` 规则、Mock 边界、代码审核和 Impeccable A/B 证据要求见 [`PROJECT-FOLLOWUP-BREAKDOWN.md`](./PROJECT-FOLLOWUP-BREAKDOWN.md)。Wave 0 已修复并复验 `LxDatePicker` 相邻实例 `aria-describedby` 隔离，当前进入 Wave 1 基础控件第一组。正式 Impeccable A/B 与当前版本 overlay/snapshot 仍未关闭；detector `[]` 只代表静态零命中，不能单独通过审查。
+
+- Wave 0 验证：DatePicker/DynamicForm 单测 36/36；lx-ui `typecheck`、`build`（196 modules）、`build:docs`，DatePicker 文档 E2E 1/1，目标 ESLint/Prettier 和差异检查通过。独立代码审核未发现可复现缺陷；相邻区间说明隔离补测已通过。
+- Wave 0 未关闭：修复后的正式 Impeccable A/B、overlay、综合报告和 snapshot/trend 尚待完成；DynamicForm/Form 与基础控件均不可据此标记正式视觉审查关闭。
+- 当前正式门槛：TreeSelect/Cascader 当前版本 overlay、52 个公开组件严格矩阵、Vue3 Element Plus 分批替换、权限/真实后端联调、登录页与动态图标整站审查均未全部完成。
+
+## 2026-10-03 UI-13 / DynamicForm 字段反馈复验
+
+- 日期字段的 `aria-describedby` 已同步到实际日期输入；描述 ID 更新或移除时同步清理，并通过双日期字段回归验证不会串联到相邻字段。动态表单字段反馈 ID 保持实例级唯一，上传和自定义插槽提供实际控件所需的描述 ID；loading 时禁止重复触发重试。
+- Demo 的候选人员状态新增可固定的“加载中”选项；API 文档在完整参考表前新增最小 schema 示例，并明确长表单的业务分区/步骤由宿主负责。文档侧栏“数据录入”分组超过 4 项同级入口，登记为全站文档导航信息架构待办。
+- 阶段性验证：DynamicForm 与 DatePicker 定向单测早期曾为 34/34，文档 Playwright 1/1；后续代码复核发现相邻日期选择器说明 ID 隔离缺陷，修复前定向测试有 5 项失败。Wave 0 已修复并在当前工作区复验 36/36；较早失败仅保留为问题发现背景。VitePress 构建保留既有大 chunk 警告。
+- Impeccable Assessment A 桌面评审 29/40（Good）；可执行的加载状态、最小接入示例和长表单边界建议已处理，导航分组作为跨站事项保留。Assessment B 源码/文档 detector 为有效 JSON `[]`、stderr 空、退出码 0，仅表示静态零命中。新浏览器标签可访问页面，但注入预检无可用的可变页面接口；未启动 overlay。故本轮只记阶段性评审，未生成正式 Critique 快照，不关闭 UI-13/UI-11。
+- 下一步继续基础控件严格设计对照与行为/浏览器验收；保留 DynamicForm 正式 Impeccable 视觉证据待补项，不能将 detector `[]` 或阶段性评审写成正式通过。
+
+## 2026-10-03 UI-10 Wave 6 交付与审查状态更正
+
+- `LxTreeSelect` 与 `LxCascader` 的实现、Demo、API、单测和文档 E2E 已完成；单测 17/17、文档 Playwright 8/8（`playwright.lxui.config.ts`，VitePress 4176）。Cascader Demo 可从 `/components/new-components.html` 总览页和 `/components/lxcascader.html` 独立页查看。
+- 当前两组件源码及两份文档的 detector 均为有效 JSON `[]`、stderr 为空、退出码 0，仅表示静态规则零命中。当前浏览器策略拒绝 overlay 注入预检；10 月 2 日旧 overlay 早于当前代码/文档修改，不能作为当前版本正式 Critique 证据。
+- 仍保留 P3 观察：English locale 在 Demo 中可进一步增加可见覆盖、两个 Demo 外框风格可统一，移动/减少动效复验受浏览器能力限制；文档外壳横向溢出和 overlay 命中已在报告中与组件缺陷区分。
+- Wave 6 的实现和行为验收完成，但当前正式 Impeccable Critique 尚未闭环，因此 TreeSelect/Cascader 不登记为严格 UI-10 已关闭。基础控件批次按计划继续，顺序为 Button、Input、Textarea、Select、DatePicker、Checkbox/Radio、Switch、PasswordInput；InputNumber 已完成实现回归，随批次统一 A/B。Vue3 Element Plus 替换、UI-10/11 全库审查和真实后端联调仍未完成。
+- 执行规则（2026-10-03）：每波结束后自动执行 code review，修复本波可复现问题，同步计划与交接记录，再按本波文件清单提交并推送；完成后自动开始下一波。子 Agent 按用户最新配置使用 `gpt-6-luna`、`max` 思考强度。
+
+## 2026-10-02 UI-10 Wave 6 修复与复验中
+
+- `LxTreeSelect` 多选 footer 现在按局部 `locale` 提供中英文“已选数量/未选择/取消/确认”文案，并允许四项文案分别覆盖；`selectedText` 支持 `{count}`。
+- `LxCascader` 明确 `loading` 优先于并发 `error`：请求中仅呈现 loading，loading 结束后仍有 error 才呈现错误、`aria-invalid` 与重试；Demo 的路径值不再和状态播报重复读出，模式、数据状态控件分组。
+- 当前验证：定向单测 17/17、文档 Playwright 5/5、lx-ui typecheck/build/docs build、Vue3 `vue-tsc --noEmit`、目标 Prettier 检查通过。Vue3 ESLint 对仓库外 linkx-fe 文件输出 ignored，不能视为库 ESLint 通过；linkx-fe 没有独立 ESLint 配置/脚本。
+- 前置 Impeccable detector 对源码/文档四个目标 JSON 均为 `[]`、stderr 空、exit 0；仅是静态零命中。前置浏览器 overlay 证据见 `.impeccable/critique/wave6-current-2026-10-02/assessment-b/`。修后独立 A/B 正在进行；在综合快照和剩余建议复验前，TreeSelect/Cascader 不更新为严格 UI-10 已关闭。
+- 下一步：收齐修后 A/B，按实际组件缺陷修复并复验，再更新矩阵/交接；本波收口后转入基础控件批次，保留“基础控件与动态图标 → DynamicForm → 其他 lx-ui → Vue3 Element Plus 替换”的顺序。
+
+## 2026-10-02 本地预览分页回归与控件参数确认
+
+- 全菜单 Mock 预览用例复跑通过，32 个子菜单页面及“全部菜单”目录可见；此前记录的菜单定位失败当前不可复现。
+- 轮播文章分页已修复：滚动加载增加并发保护、失败页码回退、按文章 ID 去重及请求代次校验；切换/清空公众号后旧响应不再覆盖当前选项。
+- `LxInputNumber` 的 `controls` 已有公开参数，默认 `true`，传 `:controls="false"` 隐藏按钮；当前 API、Demo 开关及 12 项单测均覆盖该契约，本轮追加确认浏览器用例 1/1 通过。
+- 验证：`preview.spec.ts` 全量 6/6（全菜单、北向 Mock CRUD、轮播分页、AuthImg 失败/键盘/减少动效）；轮播分页定向 E2E 1/1；`vue-tsc --noEmit`、目标 ESLint、Prettier 通过。均为本地 Mock，不代表真实后端联调。
+- Impeccable detector 的 JSON、stderr、退出码分别保存于 `.impeccable/critique/carousel-pagination-2026-10-02/`；结果 `[]` 只表示静态零命中。本轮未执行正式双路评审及 snapshot，不将功能验收误记为正式视觉 Critique。
+
+## 2026-10-02 基础控件批次增量：LxInputNumber
+
+- 已修复 sm/md/lg 右侧步进器的中间空白：按钮由触发器实际高度分配，上下连续贴合并保留 1px 分隔线。
+- `controls` 参数已在 Demo 提供可视化开关，覆盖显示、隐藏和恢复；组件 API、实际输入框可访问属性与中文说明同步。
+- 证据：InputNumber 定向单测 12/12；通过 `playwright.lxui.config.ts`（4176 lx-ui 文档站）运行 `lx-base-controls-docs.spec.ts --grep InputNumber` 为 1/1；基础控件综合 `lx-base-controls-docs.spec.ts` 在修复 DatePicker 区间默认宽度后 4/4；浏览器人工复核、lx-ui `pnpm typecheck`、`pnpm build`（195 modules）、`pnpm build:docs`、目标 Prettier/ESLint 和 `git diff --check` 均通过；文档构建保留仓库已有的大 chunk 警告。宿主 30846 配置本次因代理 172.16.23.8:30844 超时未通过，不作为组件失败证据。Impeccable detector JSON/stderr/退出码已分开保存，`[]` 仅为静态零命中；当前隔离 Agent 额度失败，本批仍需与其他基础控件合并进行正式 A/B，不单独关闭 UI-10。
+
+## 2026-10-01 连续实施与审查安排（子 Agent 配置已于 2026-10-03 更新）
+
+- 当时的子 Agent 配置为 `gpt-6.1-sol`、`medium`；2026-10-03 用户更新为 `gpt-6-luna`、`max`，后续以最新配置为准。每批实施完成后执行独立代码审核与 Impeccable A/B，记录实际证据和未完成项。
+- 当前先收口 UI-10 Wave 6：TreeSelect 的叶节点提交/非叶展开、多选确认取消、Cascader 的错误焦点与实际输入框错误描述关联；同步 API、Demo、单测与文档 E2E。
+- 下一批严格核对基础控件（Button、Input、Select、Textarea、InputNumber、Checkbox/Radio、Switch、DatePicker、PasswordInput），再完成动态图标和两个 Form 的统一设计矩阵，随后逐批完成其余 lx-ui 组件。
+- 各批必须保留设计依据、建议处理、浏览器状态与动效证据、独立审核结论和交接记录；有效 detector `[]` 仍只代表静态零命中，不能单独登记正式通过。
+- lx-ui 全库门槛关闭后才执行 Vue3 全量替换；宿主移除自身 Element Plus 依赖，缺少 Lx 专用封装的能力通过 lx-ui 导出桥接并登记，保留库内部 Element Plus。业务迁移与 Mock 深交互验收随后继续；真实联调和用户确认延期项保持单列。
+
+## 2026-09-30 基础组件严格审查扩展（计划确认）
+
+- 基础组件与表单同样纳入 UI-10 严格对照：`LxButton`、`LxInput`、`LxInputNumber`、`LxTextarea`、`LxSelect`、`LxDatePicker`、`LxCheckbox`/`LxCheckboxGroup`、`LxRadio`/`LxRadioGroup`、`LxSwitch` 和 `LxPasswordInput`。
+- 每个组件按 `design/` 对照默认、hover、focus、disabled、loading、error、empty（适用时）、明暗/HUD、窄屏、键盘和 `prefers-reduced-motion`；同步 Demo、中文 API、行为测试、浏览器证据和独立代码审核。
+- 基础组件批次与 `LxForm`/`LxDynamicForm`、TreeSelect/Cascader 分开记录，未完成前不得把桥接页通过或 detector `[]` 记为严格关闭；完成后再进入其余 lx-ui、UI-11 正式 Critique 和 Vue3 Element Plus 替换。
+
+## 2026-09-30 UI-10 Wave 5 postfix 复验与交接
+
+- **范围**：复验 `LxDialog`、`LxDrawer`、`LxEmpty`、`LxPageCard`、`LxFormErrorBanner` 及对应 VitePress 文档，覆盖 portal HUD 主题、Drawer Escape、PageCard 错误恢复和窄屏 API 表格边界。
+- **Assessment A**：独立设计评审 **34/40（Good）**，确认 HUD portal、Drawer 默认 Escape、Dialog 首错字段聚焦、PageCard 错误恢复和 375px 表格局部滚动。
+- **Assessment B**：源码/文档 detector 均为有效 JSON `[]`，stderr 为空、退出码 0；独立 Playwright 取证覆盖亮色/HUD、桌面/375px、打开/Escape、错误恢复和 API 表格滚动，共 16 张截图及 sidecar，外部请求 0。因 CUA 不可用，报告保留 `DEGRADED` 标记。
+- **结论**：实现、行为回归和 A/B 证据已落盘；保留 P2（PageCard Demo 状态开关、窄屏 API 表滚动发现性）与 P3（辅助文字字号）建议。UI-11 全库正式审查和 Vue3 宿主替换门槛仍未关闭。
+- **证据**：`.impeccable/critique/wave5-postfix-2026-09-30/assessment-a.md`、`assessment-b/assessment-b.md`、`report.md`、`2026-09-30T07-48-23Z__linkx-fe-src-components-lxdialog-index-vue.md`。
+- **下一步**：完成当前波次代码审核并登记剩余建议；随后按 `doc/lx-ui/COMPONENT-AUDIT.md` 进入尚未完成正式 A/B 的树/穿梭/上传/远程分页选择等组件。
+- **代码审核**：PageCard 文档 E2E 的 hydration 时序误报已修复并复验 6/6；目标单测、类型、Lint、Prettier、库构建和文档构建通过，详细记录见 `other-admin/admin-vue3/docs/CODE-REVIEW-VALIDATION.md`。
+
+## 2026-09-30 UI-10 Wave 5 浮层与反馈组件收口
+
+- **范围**：`LxDialog`、`LxDrawer`、`LxEmpty`、`LxPageCard`、`LxFormErrorBanner` 的实现、Demo/API、单测和文档浏览器回归。
+- **已完成**：五个组件补齐亮色/HUD、375px 窄屏、焦点可见、加载/错误/空态、禁用和 `prefers-reduced-motion` 状态；Dialog/Drawer 保留受控显隐与 ESC/遮罩规则，PageCard 具名 region 使用 `aria-busy`，FormErrorBanner 提供 assertive alert 语义。
+- **验证证据**：定向 Vitest 17/17；文档 Playwright 7/7；lx-ui typecheck、build、docs build 通过；`.impeccable/critique/wave5-2026-09-30/browser-result.json` 为 passed、无外部请求；detector JSON `[]`、stderr 空、退出码 0；Drawer 移动端截图已在过渡完成后重拍并确认 375px 无横向溢出。
+- **正式门槛**：独立 Impeccable Assessment A/B、综合报告及 snapshot/trend 尚未全部收口，当前只记“实现与阶段性浏览器证据完成”，不关闭 UI-11。`LxForm/demo/control-bridge.vue` 直接使用 `ElTabs`/`ElTabPane` 的 Element Plus 桥接缺口已登记。
+- **下一步**：完成 Wave 5 A/B 隔离评审和综合快照；按建议复验后再更新 UI-10 矩阵，并进入 Vue3 宿主替换与整站审查的依赖核对。
+
+## 2026-09-30 UI-13 表单严格对照复修
+
+- 已修复 `LxDynamicForm` 自适应栅格：自适应模式不再写入会覆盖 container query 的行内 `grid-column`，三列/两列由 CSS 变量按容器断点选择；固定列模式仍保留明确跨列契约。
+- 已补公开 `LxTreeSelect`，DynamicForm 的 `tree-select` 字段改用该 Lx 封装；保留 Element Plus 树选择值、级联、懒加载和 `$attrs` 契约，组件内统一 lx-ui 控件样式和减少动效。
+- `LxForm` 基础/弹窗 Demo 已改用 `LxInput`、`LxSelect`、`LxTextarea` 与 `LxFormItem`，仅保留 Element Plus 类型导入，不再以 `El*` 作为示例 UI。
+- 本轮门禁：`linkx-fe` typecheck、build、build:docs 和修改文件 Prettier 通过；DynamicForm 定向 Vitest 首轮 7 项中 6 项通过，1 项暴露初始值重置契约回归，已修复并待重跑。根级 Vitest 缺 jsdom 属于调用环境问题。
+- Impeccable Assessment A 已完成（29/40，见 `.impeccable/critique/form-assessment-a-current-2026-09-30.md`）；Assessment B 正在收尾。detector JSON 为 `[]`、stderr 为空、退出码 0，只表示静态规则零命中，待 B 的浏览器/overlay 证据与 A 综合后才登记正式复验。
+
+## 2026-09-30 UI-13 表单第一波实施记录
+
+- `LxDynamicForm` 已从单文件 `El*` 条件分支改为按 schema `type` 分发的独立字段子组件：input/password、textarea、number、select/remote-select、date/daterange、switch、radio、checkbox、upload、tree-select 各自维护输入和输出。字段层只组合公开 `Lx*` 控件；`tree-select` 已切换到公开 `LxTreeSelect`，后续补独立浏览器状态证据。
+- 新增 React/TSX 友好受控 `value` + `change(nextValue)`，同时保留 `modelValue`/`v-model`、`update:modelValue`、`field-change`、具名 slot 和表单实例方法；上传字段默认使用 `LxUpload`，支持单文件/多文件列表回写并兼容旧自定义上传 slot。
+- 动态表单布局默认按容器宽度自适应 3/2/1 列；`adaptive=false` 时保留固定 `columns` 兼容路径。单列、双列、三列、通栏、禁用、默认值、联动和重置已补测试/文档。
+- 本波验证：`linkx-fe` `pnpm typecheck`、`pnpm build`、`pnpm build:docs` 通过；Vue3 动态表单及基础控件定向单测 40/40；本地 Mock 文档浏览器检查通过（桌面 3 列、375px 自适应 1 列、HUD、无外部请求）。
+- 本波尚未关闭：LxForm 的设计稿逐项浏览器证据、全库 UI-10 设计对照、UI-11 正式 Impeccable 双路 Critique；这些必须在代码审核和复验后继续执行，不能仅由 detector `[]` 或构建通过替代。
+
+## 2026-09-30 续接批次与 DynamicForm 重新规划
+
+- 用户最新指定的主顺序：先严格对照设计重做 `LxForm` 与 `LxDynamicForm`，字段控件通过已有 `Lx*` 基础封装组合，不在表单实现中直接用 `El*` 代替；再逐项严格核对和修正全部 lx-ui 组件；完成库级检查及 Impeccable 复验后，才启动 Vue3 Element Plus 全量替换。AuthImg 的 A/B 作为只读取证先补齐；其 P1/P2 修复和 Vue3 DESIGN §8.6 E2E 放在后续宿主替换波次，避免越过库优先顺序。
+- AuthImg 旧 Critique 的目标指纹与当前 `src/components/AuthImg/index.vue` 不一致，因此旧 29/40 快照只能作为历史证据，不可证明当前源码已正式复验。本波新 A/B 尚在进行，不登记正式通过；detector 的 `[]` 单独不构成通过。
+- 最新提交 `2a93ef1` 已增加 `LxInput`、`LxInputNumber`、`LxTextarea`、`LxSelect`、`LxDatePicker`、`LxCheckbox`/`LxCheckboxGroup`、`LxRadio`/`LxRadioGroup`、`LxSwitch`、`LxButton` 等基础封装及文档/Demo/测试；`LxDynamicForm` 尚未接入。UI-13 同时覆盖 `LxForm` 与 `LxDynamicForm` 的设计图逐项核对，优先复用这些公开 `Lx*` 组件；Element Plus 可留在 `Lx*` 实现内部，不得在动态表单 field renderer 中直接以 `El*` 作 UI 实现。缺口须先登记，不复制 Element Plus 源码。
+- `LxDynamicForm` 现状是一个 `index.vue` 以大型 `v-if` 链直接渲染 Element Plus 字段，列数由固定 `columns` 控制；`upload` 依赖宿主插槽，没有内建单图/多图列表字段。新实现需由 `type` 映射到独立字段子组件文件；图片单张/多张、预览/列表与移除等字段行为在上传子组件管理，网络请求仍由宿主 adapter 注入。
+- DynamicForm 提供受控 `value` + `change(nextValue)` 用法以贴近 React/TSX 传值习惯，同时保留现有 `v-model` / `modelValue` 契约兼容；确定优先级并覆盖双向兼容与重置、校验、默认值、联动、disabled、自定义 slot 的行为测试。布局改按容器可用宽度自适应为 1/2/3 列，不再要求调用方固定列数；保留通栏字段能力并验证 320/375/768px 及窄容器。
+- UI-13 验收包括类型、库构建、文档构建、行为测试、成功/空/失败/取消 Mock 状态、键盘/焦点和浏览器响应式证据；API、类型、Demo、中文文档与项目地图同步。组件实施后执行独立代码审核及正式 Impeccable Critique，逐条处理建议并复验，再恢复其他 lx-ui 计划波次。
+
 ## 2026-09-29 追加交付记录
 
 - CODE-02 请求基础层补齐：`useFetch` 的 signal 取消、请求序号、可取消调度/重试及 `useTable` 防止旧响应覆盖已通过 9 项定向单测；`v-loadmore` 已改为从 `aria-controls` 定位 Element Plus teleport 下拉，延迟挂载时按需观察，支持更新回调并清理滚动监听和 observer。定向单测合计 12/12，轮播文章实际下拉分页 Mock E2E 1/1。
@@ -81,14 +184,14 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 
 根据 Vue3 宿主的 Element Plus / lx-ui 用量盘点，先完成共享组件库和接入层，再集中做受影响页面的深交互验收。Vue3 有 103 个源码文件直接引用 Element Plus，模板使用 46 种 Element Plus 标签；其中有通用 Lx 封装候选的控件只有一部分，若先逐页验收再替换，表单、弹窗、表格、导航和树等相同交互可能需要重复验证。用户再次确认库内前置顺序：`design/` 基础控件与动态图标先完成，随后才完成 `LxDynamicForm`，最后替换 Vue3 页面中的 Element Plus。
 
-| 顺序 | 工作                                                  | 执行要求                                                                                                                                                                                                      |
-| ---- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1    | lx-ui 设计基础控件与动态图标：UI-01、UI-06～08、UI-10 | 对照 `design/` 的按钮、表单八件套和其他基础控件，逐项补桥接、状态 Demo、键盘/窄屏/主题/减少动效浏览器证据；动态图标已有库级证据，复核映射即可，不能把部分完成记作整库完成。                                   |
-| 2    | 完成 `LxDynamicForm`：UI-02、UI-03                    | 已完成 schema、默认值、栅格、联动、校验、重置、禁用插槽和注入式 Mock；独立中文 API、5 项定向测试及桌面/375px 浏览器证据已记录。                                                                               |
-| 3    | 完成其他待替换 lx-ui 组件并审查：UI-02、UI-03、UI-11  | 按宿主采用面补弹窗、表格、搜索、树、选择等契约与状态证据；正式 Impeccable Critique 按 skill 双路独立评审、逐主题/状态检查、记录 detector 与 overlay，并保存快照/趋势后修复复验。`[]` 只表示 detector 零命中。 |
-| 4    | Vue3 接入与页面替换：UI-09、UI-04                     | 统一库导出和版本，迁移宿主导入/自动导入/类型/插件/样式/分包，再按组件影响面替换页面；没有专用 Lx 封装的控件从 lx-ui 使用其导出的 Element Plus。                                                               |
-| 5    | 页面深交互与业务迁移验收：P1、UI-12                   | 在对应组件替换稳定后按 Vue2 契约做业务 Mock/E2E；全量替换后执行 Impeccable 整站审查。已通过且未受影响的测试保留为基线。                                                                                       |
-| 6    | 删除宿主直接依赖并做最终回归                          | 所有源码、类型、自动导入和构建入口不再直接依赖 Element Plus 后，才从 Vue3 package.json 移除 element-plus；随后运行类型、Lint、单测、构建、业务 E2E 和全菜单 Mock 验收。                                       |
+| 顺序 | 工作                                                  | 执行要求                                                                                                                                                                             |
+| ---- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1    | lx-ui 设计基础控件与动态图标：UI-01、UI-06～08、UI-10 | 对照 `design/` 的按钮、表单八件套和其他基础控件，逐项补桥接、状态 Demo、键盘/窄屏/主题/减少动效浏览器证据；动态图标已有库级证据，复核映射即可，不能把部分完成记作整库完成。          |
+| 2    | 设计对照重做 `LxForm` / `LxDynamicForm`：UI-13        | 逐项对照 design 参考重做表单；动态 schema 类型分发到独立子组件，仅组合 `Lx*` 控件；新增单/多图列表、受控 `value`/`change` 与 v-model 兼容、容器自适应 1/2/3 列。旧测试留作回归基线。 |
+| 3    | 全部 lx-ui 组件严格设计核对及审查：UI-10、UI-11       | 建立全组件→设计源映射，逐项对照状态、尺寸、间距、焦点、主题、动效和窄屏并修正；状态/文档/测试同步。之后完成独立 Impeccable Critique 与建议复验。`[]` 仅表示 detector 零命中。        |
+| 4    | Vue3 接入与页面替换：UI-09、UI-04                     | 统一库导出和版本，迁移宿主导入/自动导入/类型/插件/样式/分包，再按组件影响面替换页面；没有专用 Lx 封装的控件从 lx-ui 使用其导出的 Element Plus。                                      |
+| 5    | 页面深交互与业务迁移验收：P1、UI-12                   | 在对应组件替换稳定后按 Vue2 契约做业务 Mock/E2E；全量替换后执行 Impeccable 整站审查。已通过且未受影响的测试保留为基线。                                                              |
+| 6    | 删除宿主直接依赖并做最终回归                          | 所有源码、类型、自动导入和构建入口不再直接依赖 Element Plus 后，才从 Vue3 package.json 移除 element-plus；随后运行类型、Lint、单测、构建、业务 E2E 和全菜单 Mock 验收。              |
 
 该顺序不改变已完成模块和验证结论。P1-04 已通过的排班 4/4、协同下岗 1/1 继续有效；协同树、记录筛选/导出、批量操作等受共享交互影响的深度 Mock/E2E 排在对应组件替换之后。API 字段映射、二进制响应类型、Vue2 已有菜单/按钮权限和管理员例外属于独立契约，可在组件工作期间继续核对和修复。新权限中心、文本/字段权限及页面引导仍按用户确认范围延期。
 
@@ -223,15 +326,16 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 | 控件映射      | 46 种标签：13 种存在较直接的 lx-ui 封装候选，8 种只有特定场景封装，25 种没有 Lx 通用封装；完整标签和次数见 Vue3 Element Plus / lx-ui 清单    | 缺少 Lx 封装的控件可从 lx-ui 导出的 Element Plus 使用，不需要复制组件源码 |
 | 版本边界      | 当前安装树中 Vue3 宿主 Element Plus 为 2.14.2，lx-ui 为 2.14.6                                                                               | 迁移时要统一解析和类型来源并回归，不预设版本变化无影响                    |
 
-严格按用户确认顺序执行：先按 `design/` 完成 lx-ui 基础控件桥接与状态/浏览器验收，并复核 `doc/LxIcon*` 动态图标的库级证据；再完成 `LxDynamicForm`；随后补齐其他待替换组件，使用 Impeccable 审查组件与动效、吸收建议并复验。只有组件库闭环和审查通过后，才进入 Vue3 Element Plus 替换。替换阶段先统一组件、服务、类型和 locale 导入，使其从 lx-ui 公共入口解析，并迁移自动导入、组件类型生成、全局插件、样式和 Vite 分包；接着按共享组件影响面替换 Vue3 适配器和页面中的设计组件与图标，每一波只回归受影响页面，稳定后补该业务模块深交互 Mock/E2E。全部替换后执行 Impeccable 全站审查；所有直接引用迁移后才移除 Vue3 package.json 的直接依赖并更新锁文件。Element Plus 继续由 lx-ui 提供。移除宿主直依赖不等于减少运行时组件或 bundle 体积；当前应用仍整体安装 Element Plus 插件，体积优化须另立验收。
+严格按用户确认顺序执行：先按 `design/` 完成 lx-ui 基础控件桥接与状态/浏览器验收，并复核 `doc/LxIcon*` 动态图标的库级证据；再按现行 UI-13 重新完成 `LxDynamicForm`；随后补齐其他待替换组件，使用 Impeccable 审查组件与动效、吸收建议并复验。只有组件库闭环和审查通过后，才进入 Vue3 Element Plus 替换。替换阶段先统一组件、服务、类型和 locale 导入，使其从 lx-ui 公共入口解析，并迁移自动导入、组件类型生成、全局插件、样式和 Vite 分包；接着按共享组件影响面替换 Vue3 适配器和页面中的设计组件与图标，每一波只回归受影响页面，稳定后补该业务模块深交互 Mock/E2E。全部替换后执行 Impeccable 全站审查；所有直接引用迁移后才移除 Vue3 package.json 的直接依赖并更新锁文件。Element Plus 继续由 lx-ui 提供。移除宿主直依赖不等于减少运行时组件或 bundle 体积；当前应用仍整体安装 Element Plus 插件，体积优化须另立验收。
 
 `design/` 是组件视觉和交互的当前来源，压缩包/旧版目录仅作历史参考；`doc/LxIcon*` 是动态图标清单来源。必须分别记录设计稿、lx-ui 实现、Vue3 宿主采用位置和验证证据，库中已有组件不代表宿主已采用。`@element-plus/icons-vue` 的独立依赖在 Vue3 图标迁移波次中另行清点，只有源码已无直接引用且缺失图形有明确处理后才可删除。
 
-| 编号  | 任务                      | 产出与完成定义                                                                                                                                                                                                                                        | 状态                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ----- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| UI-10 | 设计资产到 lx-ui 闭环     | 建立 `design/` 组件与 `doc/LxIcon*` 到库组件、令牌、Demo、行为测试的映射；补齐与设计稿不一致的实现，并区分库完成与宿主采用                                                                                                                            | 进行中（基础控件、动态图标、DynamicForm、SectionTitle、SearchBar、Dialog、ProTable、SelectPagination、Upload、Descriptions、StatusSwitch、TransferPanel、MetricCard、AuthImg、Pagination 已有库级证据；LxSidebar 文档和交互浏览器验收 2/2 完成；LxSplitLayout 独立 API/Demo、3 项单测和 3 项文档 Playwright 完成；LxDutyCalendar 独立 API/Demo、8 项单测和 3 项文档 Playwright 完成；Breadcrumb、Navbar、TabsBar、PageCard 壳层 Demo 的 Playwright 4/4 完成；其他候选仍待补） |
-| UI-11 | lx-ui Impeccable 审查     | lx-ui 组件实现和 Demo 完成后，按 skill 双路独立评审，记录启发式评分、静态 detector、逐主题/状态的浏览器 overlay、误报、修复复验，并保存 `.impeccable/critique` 快照/趋势；核对 JSON、stderr、退出码，非 0 即扫描失败，stdout 的 `[]` 不能覆盖失败状态 | 进行中（LxEmpty 已有阶段性人工评审 34/40、静态扫描和 overlay，但缺正式快照，且设计评审未使用独立新标签、HUD detector 未复扫；不计正式完成。此前 CLI URL 扫描曾因缺 Puppeteer 失败；本轮新标签确认 lxicons 文档页可访问，但可用 CUA 执行接口为只读，未注入 overlay，也未生成评分/快照；若正式评审时仍无注入能力，按 skill 记录浏览器 fallback。LxIcon/LxUpload 动效预检建议已吸收；LxSidebar/SplitLayout 视觉与动效正式审查待 UI-10 闭环；正式整库审查依赖 UI-10 组件闭环）    |
-| UI-12 | Vue3 整站 Impeccable 审查 | Vue3 组件与图标迁移稳定后，对全菜单页面分批检查视觉一致性、动效、窄屏、键盘和状态；修复后记录页面范围及证据                                                                                                                                           | 待开始（依赖 UI-04、UI-09）                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 编号  | 任务                                 | 产出与完成定义                                                                                                                                                                                                                                                                | 状态                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ----- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| UI-10 | 设计资产到 lx-ui 闭环                | 建立全量 `design/` 组件与 `doc/LxIcon*` 到 `Lx*` 实现、令牌、Demo、行为测试的映射；严格对照设计修正所有组件并区分库完成与宿主采用                                                                                                                                             | 进行中（上一提交新增多种 Lx 基础封装并有对应 Demo/API；两种 Form 和所有组件尚待完整逐项设计对照，部分宿主/状态证据仍待补）                                                                                                                                                                                                                                                                                                                                                 |
+| UI-11 | lx-ui Impeccable 审查                | lx-ui 组件实现和 Demo 完成后，按 skill 双路独立评审，记录启发式评分、静态 detector、逐主题/状态的浏览器 overlay、误报、修复复验，并保存 `.impeccable/critique` 快照/趋势；核对 JSON、stderr、退出码，非 0 即扫描失败，stdout 的 `[]` 不能覆盖失败状态                         | 进行中（LxEmpty 已有阶段性人工评审 34/40、静态扫描和 overlay，但缺正式快照，且设计评审未使用独立新标签、HUD detector 未复扫；不计正式完成。此前 CLI URL 扫描曾因缺 Puppeteer 失败；本轮新标签确认 lxicons 文档页可访问，但可用 CUA 执行接口为只读，未注入 overlay，也未生成评分/快照；若正式评审时仍无注入能力，按 skill 记录浏览器 fallback。LxIcon/LxUpload 动效预检建议已吸收；LxSidebar/SplitLayout 视觉与动效正式审查待 UI-10 闭环；正式整库审查依赖 UI-10 组件闭环） |
+| UI-12 | Vue3 整站 Impeccable 审查            | Vue3 组件与图标迁移稳定后，对全菜单页面分批检查视觉一致性、动效、窄屏、键盘和状态；修复后记录页面范围及证据                                                                                                                                                                   | 待开始（依赖 UI-04、UI-09）                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| UI-13 | LxForm 与 LxDynamicForm 设计对照重做 | 对照表单设计逐项核验；动态表单每类 schema `type` 由独立子组件文件渲染且只组合 `Lx*` 控件；上传支持单图/多图列表；使用 React/TSX 友好的受控 `value` + `change(nextValue)` 并兼容原 `v-model`；按容器宽度自适应 1/2/3 列；保留校验、默认值、联动、disabled、slot 和通栏字段契约 | 主任务第一波；完成两表单行为、类型/API/Demo/中文文档、浏览器和键盘/主题/减少动效检查，再进行代码审核与正式 Impeccable 复验                                                                                                                                                                                                                                                                                                                                                 |
 
 #### LxSelectPagination 设计闭环（2026-09-27）
 
@@ -737,6 +841,14 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 调整：单选/多选选择器统一改为 border: 0 + 控件内部 1px box-shadow inset；普通、悬停、聚焦和错误态只切换该内侧边线颜色，取消选择器外扩轮廓。恢复 4px 12px 内边距，保留 border-box、32px 高度、标签折叠和键盘展开语义。
 - 验证：4174 真实浏览器计算样式为 border: 0、box-shadow: rgb(0, 96, 169) 0 0 0 1px inset、outline: none，盒尺寸 319×32px；定向 Element Bridge Playwright 断言已通过（1 项，测试进程在完成后因复用文档服务保持运行，未再执行终止性重跑）。Impeccable 两路复评等待当前样式稳定后补记。
 - 边界：只处理 lx-ui 基础控件桥接的多选/单选边线层级；Vue3 业务表单仍按 UI-04 保留原校验、提交和权限契约。
+
+### UI-13-P1 / DynamicForm 字段反馈与演示设置（2026-09-30）
+
+- Assessment A/B 复核确认：动态表单远程负责人失败状态此前主要出现在演示设置区和全局 footer，脱离负责人字段；本波新增 `LxDynamicFormField.feedback` 与 `LxDynamicFormFieldFeedback`，支持字段级 loading/empty/error 文案和宿主 `retry()`，错误状态通过稳定 ID 与 `aria-describedby` 关联控件。
+- Demo 仍按默认关闭的“演示设置（布局、禁用、主题与 Mock 状态）”渐进披露；成功数量保留在设置区，空结果、加载和失败迁移到负责人字段，失败只保留字段内“重试”动作，避免重复文案和无关 footer 状态。
+- 类型、公开入口、中文 API、组件样式和 DynamicForm 定向单测同步；请求仍由 Demo/宿主按 `.then().catch().finally()` 编排，`retry()` 只触发宿主恢复流程。
+- 验证状态：代码修改已完成，等待 `pnpm typecheck`、定向 Vitest/Playwright、Prettier 和文档构建结果后更新为正式交接结论。Impeccable detector 若输出 `[]` 仍需同时记录 JSON、stderr、退出码及浏览器证据，不能单独作为通过。
+
 ## 2026-10-04 Wave 0 结项与 Wave 1 入口
 
 - `LxDatePicker` 使用实例 UID 限定 Fragment 根下实际触发器，将宿主 `aria-describedby` 同步到单值/区间输入，并清理上次由组件管理的说明 ID。

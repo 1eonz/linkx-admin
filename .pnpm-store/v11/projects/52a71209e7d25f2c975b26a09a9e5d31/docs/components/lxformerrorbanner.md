@@ -1,6 +1,6 @@
 # LxFormErrorBanner 校验横幅
 
-浅红底 + 深红文字的表单校验阻断横幅（内联组件，非浮层）：用于表单提交前的**批量校验阻断**提示，区别于单字段行内错误。
+浅红底 + 深红文字的表单校验阻断横幅（内联组件，非浮层）：用于表单提交前的**批量校验阻断**提示，区别于单字段行内错误。根节点使用 `role="alert"`、`aria-live="assertive"` 和 `aria-atomic="true"`，保证阻断原因及时播报。
 
 <script setup lang="ts">
 import Basic from '../../src/components/LxFormErrorBanner/demo/basic.vue';
@@ -25,17 +25,21 @@ import Basic from '../../src/components/LxFormErrorBanner/demo/basic.vue';
 
 ### Props
 
-| 名称 | 说明 | 类型 | 默认值 |
-|---|---|---|---|
-| title | 主文案（12px 粗体深红） | `string` | — |
-| description | 补充说明（11px） | `string` | — |
+| 名称        | 说明                    | 类型     | 默认值 |
+| ----------- | ----------------------- | -------- | ------ |
+| title       | 主文案（12px 粗体深红） | `string` | —      |
+| description | 补充说明（11px）        | `string` | —      |
 
 ### Slots
 
 `default` — 扩展内容（如违规字段清单）。
 
+## 状态与示例
+
+示例提供 HUD 深色主题、字段清单展开/收起和 slot 操作；显示/移除由宿主控制。组件没有 loading、empty 或网络请求状态。
+
 ## 使用铁律
 
 - 定位是**业务规则阻断**（封控期禁新增、配额用尽等表单整体无法提交的场景），单字段格式错误走 LxForm 的行内错误态。
-- 视觉规格：report 图标与文字顶部对齐、浅红底（`--lx-color-error-light`）、深红文字（`--lx-color-error-strong` 对比度补偿）。
+- 视觉规格：report 图标与文字顶部对齐、表单专用错误底色 `--lx-color-form-error-bg`、深红文字 `--lx-color-form-error`；与字段错误态共用令牌。
 - 出现在表单顶部，打开弹窗若业务校验失败即展示，修复后消失。

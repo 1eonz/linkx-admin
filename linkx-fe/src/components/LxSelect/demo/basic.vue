@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { ElOption } from 'element-plus'
+import { ref } from 'vue'
+
 import LxSelect from '../index.vue'
 
 const hudTheme = ref(false)
@@ -67,8 +68,11 @@ function searchOfficer(query: string) {
       </h4>
       <div class="lx-select-demo__row">
         <div class="lx-select-demo__field">
-          <span class="lx-select-demo__label">布控等级</span>
+          <label class="lx-select-demo__label" for="demo-select-level"
+            >布控等级</label
+          >
           <LxSelect
+            id="demo-select-level"
             v-model="controlLevel"
             placeholder="请选择布控等级"
             @change="reportChange('布控等级', $event)"
@@ -79,8 +83,11 @@ function searchOfficer(query: string) {
           </LxSelect>
         </div>
         <div class="lx-select-demo__field">
-          <span class="lx-select-demo__label">处置通道（可清空）</span>
+          <label class="lx-select-demo__label" for="demo-select-channel"
+            >处置通道（可清空）</label
+          >
           <LxSelect
+            id="demo-select-channel"
             v-model="channel"
             clearable
             placeholder="请选择处置通道"
@@ -98,8 +105,11 @@ function searchOfficer(query: string) {
     <section class="lx-select-demo__panel" data-testid="multiple">
       <h4>多选与折叠（超出折叠为 +N，悬停可见完整列表）</h4>
       <div class="lx-select-demo__field">
-        <span class="lx-select-demo__label">协同单位</span>
+        <label class="lx-select-demo__label" for="demo-select-units"
+          >协同单位</label
+        >
         <LxSelect
+          id="demo-select-units"
           v-model="units"
           multiple
           collapse-tags
@@ -120,8 +130,11 @@ function searchOfficer(query: string) {
     <section class="lx-select-demo__panel" data-testid="filterable">
       <h4>本地过滤（输入关键字检索选项）</h4>
       <div class="lx-select-demo__field">
-        <span class="lx-select-demo__label">指挥中心</span>
+        <label class="lx-select-demo__label" for="demo-select-center"
+          >指挥中心</label
+        >
         <LxSelect
+          id="demo-select-center"
           v-model="commandCenter"
           filterable
           placeholder="输入关键字检索"
@@ -138,8 +151,11 @@ function searchOfficer(query: string) {
     <section class="lx-select-demo__panel" data-testid="remote">
       <h4>远程检索（remote + remote-method 经 attrs 透传；loading 面板态）</h4>
       <div class="lx-select-demo__field">
-        <span class="lx-select-demo__label">值班警员</span>
+        <label class="lx-select-demo__label" for="demo-select-officer"
+          >值班警员</label
+        >
         <LxSelect
+          id="demo-select-officer"
           v-model="dutyOfficer"
           filterable
           remote
@@ -165,8 +181,10 @@ function searchOfficer(query: string) {
     <section class="lx-select-demo__panel" data-testid="disabled">
       <h4>禁用态（半透明 + 禁用手势）</h4>
       <div class="lx-select-demo__field">
-        <span class="lx-select-demo__label">应急链路（锁定）</span>
-        <LxSelect :model-value="lockedChannel" disabled>
+        <label class="lx-select-demo__label" for="demo-select-locked"
+          >应急链路（锁定）</label
+        >
+        <LxSelect id="demo-select-locked" :model-value="lockedChannel" disabled>
           <ElOption label="卫星应急链路" value="satellite" />
           <ElOption label="高密加密专线" value="encrypted" />
         </LxSelect>

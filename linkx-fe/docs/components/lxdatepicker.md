@@ -1,8 +1,8 @@
 # LxDatePicker 日期选择器
 
-基于 Element Plus `el-date-picker` 内核二次封装的日期选择器。32px 触发器、主色日历图标、值文字等宽字体（font-mono 契约）；**周一起始为默认契约**——组件内置 zh-cn 日历语境（`provideGlobalConfig`，与 `ElConfigProvider` 等价），不依赖宿主全局 locale 配置；区间分隔符默认中文"至"（EP 原生默认 `-`）；拖选区间呈连贯浅蓝带 `#ecf5ff`、起止主色圆点白字（EP 原生 + 变量注入）。`disabled-date`/`default-value`/`unlink-panels` 等经 attrs 透传。
+封装 Element Plus 日期内核，默认周一起始，区间分隔符为“至”，窄屏切换单面板。
 
-视觉规范源：`design/表单控件八件套/code.html` 06。
+区间双输入需成对关联 ID 和 label：`:id="['start', 'end']"` 配 `<label for="start">`、`<label for="end">`。
 
 ## 交互示例
 
@@ -31,9 +31,11 @@ import Basic from '../../src/components/LxDatePicker/demo/basic.vue';
 | `clearable`        | `boolean`                                                                                                                         | `true`           | 可清空：值非空时悬停清除按钮（EP 原生默认 true）。                                                   |
 | `format`           | `string`                                                                                                                          | —                | 显示格式（dayjs format，如 `YYYY-MM-DD`）。                                                          |
 | `valueFormat`      | `string`                                                                                                                          | —                | 值格式（不传则 v-model 为 Date 对象；传则按格式序列化）。                                            |
-| `shortcuts`        | `{ text: string; value: Date \| (() => Date \| [Date, Date]) }[]`                                                                 | —                | 快捷预设（今日/本周/近30天；位置随 EP 原生左侧竖排，裁剪记录 #8）。                                  |
+| `shortcuts`        | `{ text: string; value: Date \| (() => Date \| [Date, Date]) }[]`                                                                 | —                | 快捷预设；桌面沿用 EP 侧栏，窄屏显示为日历上方横排按钮。                                             |
+| `popperClass`      | `string`                                                                                                                          | —                | teleported 日期弹层的附加类；可响应式切换主题，不覆盖组件锚定类。                                    |
 | `size`             | `'sm' \| 'md' \| 'lg'`                                                                                                            | `'md'`           | 工程尺寸：28 / 32 / 40px；档名区别于 EP 的 `small/default/large`。                                   |
 | `name`             | `string`                                                                                                                          | —                | 原生 name 属性。                                                                                     |
+| `singlePanel`      | `boolean`                                                                                                                         | 按视口自适应     | 区间日历单面板显示；视口不大于 640px 时默认开启，显式 `true/false` 可覆盖。                          |
 
 ## Events
 
@@ -61,11 +63,11 @@ import Basic from '../../src/components/LxDatePicker/demo/basic.vue';
 | `prev-year` / `next-year`   | —                                   | 前后年导航图标；面板支持对应导航时生效。                                                         |
 | `sidebar`                   | `{ class: string }`                 | 面板侧栏，参数由内核传入；自定义内容须自行保留键盘与可访问名称。                                 |
 
-日期单元插槽保留 `el-date-table-cell` 与 `el-date-table-cell__text` 结构时，可继续使用内核的选中、范围和当前日期样式。区间字段通过 attrs 传入成对 `id`，并分别用 `<label for>` 关联开始/结束输入；单值字段使用一个 `id`。
+日期单元插槽保留 `el-date-table-cell` 与 `el-date-table-cell__text` 结构时，可继续使用内核的选中、范围和当前日期样式。
 
 ## 低频 props 透传
 
-`disabled-date`（禁用日期谓词）、`default-value`、`unlink-panels`（双面板独立翻页）、`editable`、`popper-class`（与组件锚定类 `lx-date-picker__popper` 合并保留）、`calendar-change`/`panel-change` 监听器等经 attrs 直达 EP 内核：
+`disabled-date`（禁用日期谓词）、`default-value`、`unlink-panels`（开启后双面板独立翻页；默认随另一面板联动）、`editable`、`calendar-change`/`panel-change` 监听器等经 attrs 直达 EP 内核：
 
 ```vue
 <LxDatePicker
@@ -79,25 +81,31 @@ import Basic from '../../src/components/LxDatePicker/demo/basic.vue';
 
 ## 周一起始契约
 
-组件 setup 内置 `provideGlobalConfig({ locale: zhCn })`（dayjs zh-cn `weekStart: 1`）：面板周表头为"一 二 三 四 五 六 日"，文档站与宿主均无需配置全局 locale。该注入为子树级：不影响宿主其他 EP 组件的全局语境。
+组件通过 `provideGlobalConfig({ locale: zhCn })` 为自身及日期面板提供中文 locale，并注册 Day.js `zh-cn` 数据。Element Plus 日期表格据此将单值和区间面板设为周一起始；组件不调用全局 `dayjs.locale()`，宿主当前 locale 保持不变。
 
 ## 与标本的对齐说明
+
+视觉规范源：`design/表单控件八件套/code.html` 06。
 
 | 契约项     | 标本 06              | 实现                                                           |
 | ---------- | -------------------- | -------------------------------------------------------------- |
 | 周表头     | 一 二 三 四 五 六 日 | 内置 zh-cn 语境（周一起始）                                    |
 | 区间分隔符 | "至"                 | 默认值差异（EP 原生 `-`）                                      |
 | 区间连贯带 | `#ecf5ff` 浅蓝带     | `--lx-color-primary-light` 经 EP 变量注入 popper（组件级固化） |
-| 起止日期   | 主色圆点白字         | EP 原生提供                                                    |
+| 起止日期   | 主色圆点与高对比文字 | 圆点沿用 EP 内核；文字使用 `--lx-color-on-primary`             |
 | 前置图标   | 日历图标主色         | `--lx-color-primary` 覆写                                      |
 | 值文字     | font-mono            | `--lx-font-mono`                                               |
-| 快捷预设   | 今日/本周/近30天     | `shortcuts` 契约；位置随 EP 原生（裁剪记录 #8）                |
+| 快捷预设   | 今日/本周/近30天     | `shortcuts` 契约；桌面左侧纵排，窄屏日历上方横排               |
 | 双月联动   | 展开双月面板         | EP 原生 + `unlink-panels` 透传                                 |
 | 触控目标   | 32px                 | 触屏（`hover: none`）44px（与输入类族同族契约）                |
 
 ## 可访问性
 
-触发器为 combobox 语义（EP 内核）；单值与区间形态键盘可达（Tab 切换起止输入）；宿主通过 `aria-describedby` 传入的说明 ID 会同步到实际输入框，区间形态会关联开始和结束输入，相邻日期字段之间互不串联；错误态红底红边在 `LxForm` 校验上下文自动生效（组件级固化，脱离全局桥不漂移）；开启"减少动效"时边框过渡关闭。
+触发器为 combobox 语义（EP 内核）；单值与区间形态键盘可达：聚焦输入框后按 ArrowDown 打开日历并进入日期网格，方向键移动日期焦点，Enter 选择日期，Escape 关闭日历；区间形态可用 Tab 切换起止输入，窄屏单面板会把两个端点的焦点都放入当前可见网格。宿主通过 `aria-describedby` 传入的说明 ID 会同步到实际输入框，区间形态会关联开始和结束输入，相邻日期字段之间互不串联；错误态红底红边在 `LxForm` 校验上下文自动生效（组件级固化，脱离全局桥不漂移）；开启"减少动效"时边框过渡关闭。
+
+窄屏（视口不大于 640px）下快捷预设改为日历上方的横排按钮，日期格与翻月按钮提供至少 44px 的触控区域；弹层宽度限制在当前视口内。
+
+周首由已注册并注入日期对象的 Day.js `zh-cn` locale 决定；组件不会切换宿主的全局默认 locale。
 
 ## Vue3 宿主适配
 

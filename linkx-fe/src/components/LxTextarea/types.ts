@@ -2,7 +2,7 @@
  * LxTextarea 类型契约
  *
  * 视觉源：design/表单控件八件套/code.html 08（文本域）
- * 溢出红字计数为裁剪项：EP maxlength 硬截断下不会出现超限态（DESIGN-SYNC-AUDIT 终裁）。
+ * maxlength 默认沿用原生硬截断；validate 模式保留超限输入并显示设计稿错误反馈。
  */
 export interface LxTextareaProps {
   /** 输入值（v-model） */
@@ -19,6 +19,8 @@ export interface LxTextareaProps {
   autosize?: boolean | { minRows?: number; maxRows?: number }
   /** 最大输入长度；与 showWordLimit 联动出现计数器 */
   maxlength?: number
+  /** 超限处理：truncate 原生硬截断；validate 保留内容并显示超限错误，默认 truncate */
+  maxlengthMode?: 'truncate' | 'validate'
   /**
    * 显示字数统计。EP 2.14.6 契约：必须配合 maxlength 才渲染计数器
    * （无 maxlength 时计数器不显示，旧版"域外开口计数"行为已移除；

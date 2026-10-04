@@ -5,6 +5,12 @@
 > 姊妹文档：`DESIGN-SPEC.md`（令牌与原则）、`COMPONENT-SPEC.md`（接口签名）、`COMPONENT-AUDIT.md`（覆盖度调研）。
 > 视觉源头：`doc/stitch_侧边栏/stitch_/`（侧边栏族唯一源）、`doc/stitch_/stitch_/component_library_showcase`（组件标本）。
 
+## 2026-09-30 Wave 5 实现复核记录
+
+`LxDialog`、`LxDrawer`、`LxEmpty`、`LxPageCard`、`LxFormErrorBanner` 已按本说明书和 `DESIGN-SPEC.md` 完成实现、Demo/API 与行为回归。定向单测 17/17、文档 Playwright 7/7、lx-ui typecheck/build/docs build 通过；亮色/HUD、桌面/375px、焦点、加载/错误/空态和 `prefers-reduced-motion` 已留有浏览器证据。Drawer 移动端截图在动画结束后重拍，面板为 375px 全宽、页面无横向溢出。正式 Impeccable A/B 综合快照尚未完成，detector `[]` 只记录静态零命中。
+
+桥接缺口：`LxForm/demo/control-bridge.vue` 仍直接使用 `ElTabs`/`ElTabPane` 演示 Element Plus 兼容层；该示例不作为公开 LxTabs 组件已完成的证据，待后续 UI-10 波次处理。
+
 ---
 
 ## 0. 阅读说明与全局横切规范
@@ -103,13 +109,13 @@
 
 **交互**：拖拽分隔条实时调宽（最小 200 / 最大 480）；`resize` 抛出宽度供持久化；折叠态右侧内容自动撑满。
 
-### 1.6 LxPageCard 页面卡片容器 📐 P1｜V3 el-card 63 处的替代
+### 1.6 LxPageCard 页面卡片容器 ✅｜V3 el-card 63 处的替代
 
-**样式（建议）**：白底 + 1px `--lx-border` + 圆角 4px + `--lx-shadow-card`；header 高 48px：标题 16px/600 + 右侧 `headerExtra` 插槽；body padding 20px（`bodyPadding=false` 时为 0，嵌表格用）；footer 插槽（统计行）。
+**样式（当前实现）**：白底 + 1px `--lx-border` + 圆角 4px + `--lx-shadow-card`；header 高 48px：标题 16px/600 + 右侧 `headerExtra` 插槽；body padding 20px（`bodyPadding=false` 时为 0，嵌表格用）；footer 插槽（统计行）。加载遮罩保留内容层级，错误和空态由宿主插槽组合。
 
-**交互**：`loading` 显加载遮罩；`bordered=false` 无边框通栏模式。
+**交互**：`loading` 显加载遮罩并将具名 region 标记 `aria-busy=true`；`bordered=false` 无边框通栏模式；标题通过稳定 ID 关联 region，窄屏容器不向页面扩张。
 
-**确认点**：❓ V3 现状 `shadow="always"` 较重 → 建议 shadow-card 轻阴影，靠 border 区分层次。
+**确认点**：❓ V3 现状 `shadow="always"` 较重 → 当前实现采用 shadow-card 轻阴影，靠 border 区分层次；Wave 5 文档回归覆盖插槽、loading、error、`aria-busy`、HUD 和 375px。
 
 ---
 
@@ -183,7 +189,7 @@
 
 ### 2.6 LxEmpty 空态 ✅｜35 处
 
-64px 线稿图标 + 13px `--lx-text-regular` 描述；`compact` 紧凑档使用 48px 图标和 12px 正文令牌（弹窗/抽屉内），保证小字和图形对比度；`footer` 插槽放新建或恢复操作；`default` 插槽替换线稿图标区域。业务传入具体空态原因，loading/error 使用独立状态。
+64px 线稿图标 + 13px `--lx-text-regular` 描述；`compact` 紧凑档使用 48px 图标和 12px 正文令牌（弹窗/抽屉内），保证小字和图形对比度；`footer` 插槽放新建或恢复操作；`default` 插槽替换线稿图标区域。业务传入具体空态原因，loading/error 使用独立状态。Wave 5 文档回归覆盖默认/紧凑尺寸、操作焦点、HUD、375px 与减少动效。
 
 ### 2.7 LxSectionTitle 区块标题 🆕 P1｜20 处
 
@@ -260,7 +266,7 @@
 | label        | `top` 上置（弹窗默认）12px secondary / `left` 左置（老项目兼容）13px + labelWidth 100-200px                     |
 | 控件         | 32px 高，圆角 4px                                                                                               |
 | 必填         | `*` 前缀（hide-required-asterisk 可关）                                                                         |
-| **错误态**   | 错误文字 **11px `#c45656`**（对比度补偿）+ 前置圆圈感叹号小图标；错误输入框 **1px 红边 + 浅红底**，聚焦保持红环 |
+| **错误态**   | 错误文字 **11px `#ba1a1a`** + 前置圆圈感叹号小图标；错误输入框 **1px `#ba1a1a` 红边 + `#fff5f5` 浅红底**，聚焦保持红环 |
 | 错误接管范围 | input / select / textarea / date-picker / cascader 全系容器                                                     |
 
 **交互逻辑**：
@@ -393,7 +399,7 @@ el-input password 全量透传 + 显示/隐藏眼睛切换；**禁 copy/paste/cu
 5. `hideFooter` + `footer` 插槽完全自定义。
 6. 生命周期惯用法：open 后 `init(type, row)` 回显 → `nextTick(clearValidate)`；关闭回调清空表单。
 
-已实现 ✅（`closeOnPressEsc` / `draggable` props）。
+已实现 ✅（`closeOnPressEsc` / `draggable` props）。Wave 5 文档回归覆盖可访问标题、确认/loading、取消/关闭、footer、键盘焦点、减少动效和 375px 单列表单；移动端面板与关闭按钮保持视口内。
 
 ### 4.4 LxDrawer 详情抽屉 ✅｜36+ 处
 
@@ -401,11 +407,15 @@ el-input password 全量透传 + 显示/隐藏眼睛切换；**禁 copy/paste/cu
 
 **交互**：`v-model`；ESC/遮罩默认不关（防误触）；铁律**详情一律抽屉不走弹窗**（客户端详情、审计详情、节点详情），内容配 LxSectionTitle 分组 + LxDescriptions 键值行。
 
+Wave 5 文档回归另覆盖 HUD、ESC/遮罩规则、标题可访问名称和 375px 稳态：抽屉面板在窄屏占满视口宽度，截图在过渡完成后采集，页面 `scrollWidth` 保持视口宽度。
+
 ### 4.5 LxFormErrorBanner 校验横幅 ✅｜表单阻断
 
 **样式（当前实现）**：浅红底 `#fef0f0` + 圆角 4px + padding 12px + `--lx-shadow-card`；**report 图标 18px 深红与文字顶部对齐**；标题 12px/600 `#c45656` + 描述 11px；`role="alert"`。
 
 **交互**：v-if 业务控制——提交被业务规则阻断（封控期禁新增、配额用尽）时出现在表单顶部，修复即移除；与 LxForm 行内错误互补（Banner 管整体阻断，行内管单字段）。
+
+Wave 5 文档回归确认 `role="alert"`、`aria-live="assertive"`、`aria-atomic="true"`，并覆盖受影响字段跳转、HUD、375px 和减少动效。
 
 ### 4.6 浮层三件套桥接 🔧 P2｜92 处
 

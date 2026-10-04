@@ -1,0 +1,227 @@
+[
+  {
+    "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+    "tagName": "button",
+    "rect": {
+      "x": 891,
+      "y": 1243,
+      "width": 40,
+      "height": 40,
+      "top": 1243,
+      "right": 931,
+      "bottom": 1283,
+      "left": 891
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "ignoreValue": "",
+        "name": "Raster buried under a wash or opacity",
+        "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+      }
+    ]
+  },
+  {
+    "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(2) > button.copy",
+    "tagName": "button",
+    "rect": {
+      "x": 908,
+      "y": 4001,
+      "width": 40,
+      "height": 40,
+      "top": 4001,
+      "right": 948,
+      "bottom": 4041,
+      "left": 908
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "ignoreValue": "",
+        "name": "Raster buried under a wash or opacity",
+        "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+      }
+    ]
+  },
+  {
+    "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(3) > button.copy",
+    "tagName": "button",
+    "rect": {
+      "x": 908,
+      "y": 4211.46875,
+      "width": 40,
+      "height": 40,
+      "top": 4211.46875,
+      "right": 948,
+      "bottom": 4251.46875,
+      "left": 908
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "ignoreValue": "",
+        "name": "Raster buried under a wash or opacity",
+        "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+      }
+    ]
+  },
+  {
+    "selector": "#el-id-1024-3",
+    "tagName": "div",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "advisory": true,
+        "detail": "1px border + 16px shadow blur",
+        "ignoreValue": "",
+        "name": "Hairline border with wide shadow",
+        "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+      }
+    ]
+  },
+  {
+    "selector": "#el-id-1024-8",
+    "tagName": "div",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "advisory": true,
+        "detail": "1px border + 16px shadow blur",
+        "ignoreValue": "",
+        "name": "Hairline border with wide shadow",
+        "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+      }
+    ]
+  },
+  {
+    "selector": "div.dynamic-form-demo__candidate-controls > span:nth-of-type(1)",
+    "tagName": "span",
+    "rect": {
+      "x": 357,
+      "y": 420,
+      "width": 78,
+      "height": 24,
+      "top": 420,
+      "right": 435,
+      "bottom": 444,
+      "left": 357
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"候选人员数据\" is 50% covered by overlapping text (div.el-form-item__error)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "span.dynamic-form-demo__status",
+    "tagName": "span",
+    "rect": {
+      "x": 653,
+      "y": 420,
+      "width": 76.6875,
+      "height": 24,
+      "top": 420,
+      "right": 729.6875,
+      "bottom": 444,
+      "left": 653
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span.dynamic-form-demo__status \"3 名候选人员\" is 50% covered by an opaque element (div.el-select__wrapper.el-tooltip__trigger.el-tooltip__trigger)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "body",
+    "tagName": "body",
+    "rect": null,
+    "isPageLevel": true,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "bounce-easing",
+        "category": "slop",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+        "ignoreValue": "",
+        "name": "Bounce or elastic easing",
+        "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+      },
+      {
+        "type": "layout-transition",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "transition: height, padding-top, padding-bottom",
+        "ignoreValue": "",
+        "name": "Layout property animation",
+        "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+      }
+    ]
+  }
+]

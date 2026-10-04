@@ -39,6 +39,15 @@ describe('LxInputNumber', () => {
     md.unmount();
   });
 
+  it('keeps the declared name attribute on the native input and updates it', async () => {
+    const wrapper = mount(LxInputNumber, { props: { name: 'patrolQuota' } });
+
+    expect(wrapper.get('input').attributes('name')).toBe('patrolQuota');
+    await wrapper.setProps({ name: 'updatedQuota' });
+    expect(wrapper.get('input').attributes('name')).toBe('updatedQuota');
+    wrapper.unmount();
+  });
+
   it('emits update:modelValue with the stepped value on increase press', async () => {
     const wrapper = mount(LxInputNumber, {
       props: { modelValue: 30 },

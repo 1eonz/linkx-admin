@@ -50,6 +50,7 @@ const titleId = `lx-page-card-title-${useId()}`
       v-if="loading"
       class="lx-page-card__loading"
       role="status"
+      aria-live="polite"
       aria-label="加载中"
     >
       <LxIcon name="loading" :size="20" />

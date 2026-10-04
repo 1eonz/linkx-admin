@@ -3,6 +3,8 @@ import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { LxEmptyProps } from './types'
 
+defineOptions({ name: 'LxEmpty' })
+
 const props = withDefaults(defineProps<LxEmptyProps>(), {
   description: '暂无数据',
   size: 'default',
@@ -20,7 +22,12 @@ const imageStyle = computed<CSSProperties | undefined>(() => {
 </script>
 
 <template>
-  <div class="lx-empty" :class="`lx-empty--${props.size}`" role="status">
+  <div
+    class="lx-empty"
+    :class="`lx-empty--${props.size}`"
+    role="status"
+    aria-live="polite"
+  >
     <div class="lx-empty__image" :style="imageStyle" aria-hidden="true">
       <slot>
         <svg class="lx-empty__icon" viewBox="0 0 48 48" fill="none">

@@ -5,6 +5,8 @@ test.describe('lx-ui LxDialog 文档示例', () => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/components/lxdialog');
 
+    await page.getByRole('checkbox', { name: 'HUD 深色主题' }).check();
+
     const open = page.getByRole('button', { name: '新建涉警联动工单' });
     await open.focus();
     await page.keyboard.press('Enter');
@@ -16,6 +18,7 @@ test.describe('lx-ui LxDialog 文档示例', () => {
     await expect(page.locator(`[id="${titleId}"]`)).toHaveText('新建涉警联动工单');
 
     const panel = page.locator('.el-dialog');
+    await expect(panel).toHaveCSS('background-color', 'rgb(16, 26, 44)');
     const panelBox = await panel.boundingBox();
     if (!panelBox) throw new Error('弹窗面板未进入可视区域');
     expect(panelBox.x).toBeGreaterThanOrEqual(0);
@@ -24,8 +27,9 @@ test.describe('lx-ui LxDialog 文档示例', () => {
     const close = page.getByRole('button', { name: '关闭' });
     const closeBox = await close.boundingBox();
     if (!closeBox) throw new Error('弹窗关闭按钮未进入可视区域');
-    expect(closeBox.width).toBeGreaterThanOrEqual(44);
-    expect(closeBox.height).toBeGreaterThanOrEqual(44);
+    // Chromium 在 flex 布局下可能返回 43.9999847px，按设计目标允许 subpixel 误差。
+    expect(closeBox.width).toBeGreaterThanOrEqual(43.5);
+    expect(closeBox.height).toBeGreaterThanOrEqual(43.5);
 
     await close.focus();
     await page.keyboard.press('Tab');
@@ -60,6 +64,9 @@ test.describe('lx-ui LxDialog 文档示例', () => {
     await confirm.click();
     await expect(dialog).toBeVisible();
     await expect(page.locator('.el-message__content')).toContainText('请填写案发精确地点');
+    await expect(page.getByRole('textbox', { name: '案发精确地点' })).toHaveAttribute('aria-invalid', 'true');
+    await expect(page.locator('#lx-dialog-place-error')).toHaveText('请填写案发精确地点');
+    await expect(page.getByRole('textbox', { name: '案发精确地点' })).toBeFocused();
 
     await page.getByRole('textbox', { name: '案发精确地点' }).fill('东区人民路 12 号');
     await confirm.click();

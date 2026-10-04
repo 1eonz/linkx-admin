@@ -150,7 +150,22 @@ const resultText = computed(() =>
       @update:collapsed="collapsed = $event"
       @search="runSearch"
       @reset="status = '已重置'"
-    />
+    >
+      <template #meta>
+        <span
+          class="lx-search-demo__meta-status"
+          role="status"
+          aria-live="polite"
+        >
+          <span class="lx-search-demo__meta-dot" aria-hidden="true" />
+          {{ status
+          }}<template v-if="rows.length"> · 共 {{ rows.length }} 条</template>
+        </span>
+        <span class="lx-search-demo__meta-hint">
+          快捷键：<kbd>Enter</kbd> 查询 / <kbd>Esc</kbd> 重置
+        </span>
+      </template>
+    </LxSearchBar>
     <p class="lx-search-demo__result">结果：{{ resultText }}</p>
   </section>
 </template>
@@ -193,6 +208,34 @@ const resultText = computed(() =>
 .lx-search-demo__modes button:focus-visible {
   outline: 2px solid var(--lx-color-primary);
   outline-offset: 2px;
+}
+.lx-search-demo__meta-status,
+.lx-search-demo__meta-hint {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--lx-space-xs);
+}
+.lx-search-demo__meta-dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--lx-color-primary-container);
+}
+.lx-search-demo__meta-hint {
+  color: var(--lx-text-secondary-strong);
+  white-space: nowrap;
+}
+.lx-search-demo__meta-hint kbd {
+  padding: 0 4px;
+  border: 1px solid var(--lx-border);
+  border-radius: var(--lx-radius-sm);
+  background: var(--lx-bg-card-hover);
+  color: var(--lx-text-regular);
+  font-family: var(--lx-font-mono);
+  font-size: 11px;
+  line-height: 16px;
 }
 .lx-search-demo__result {
   margin: 0;

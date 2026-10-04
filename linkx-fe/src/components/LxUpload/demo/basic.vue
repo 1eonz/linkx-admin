@@ -62,7 +62,7 @@ function mockUpload(options: LxUploadRequestOptions): XMLHttpRequest {
 
     options.onSuccess({ success: true, fileName: options.file.name })
     lastAction.value = `${options.file.name} 上传成功`
-  }, 160)
+  }, 300)
 
   return request
 }

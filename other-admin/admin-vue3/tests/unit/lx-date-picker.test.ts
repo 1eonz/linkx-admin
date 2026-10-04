@@ -1,7 +1,8 @@
 import { mount } from '@vue/test-utils';
+import dayjs from 'dayjs';
 import type { DateCell } from 'element-plus';
 import { LxDatePicker } from 'lx-ui';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { h, nextTick, ref } from 'vue';
 
 // EP date-picker 的 popper teleport 到 body 且卸载后节点残留，
@@ -26,6 +27,31 @@ describe('LxDatePicker', () => {
     wrapper.unmount();
   });
 
+  it('动态更新 popperClass 后同步到已打开的日期弹层', async () => {
+    const wrapper = mount(LxDatePicker, {
+      props: { modelValue: '2026-09-15', popperClass: 'theme-light' },
+      attachTo: document.body,
+    });
+
+    try {
+      await wrapper.find('input').trigger('click');
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      const popper = document.body.querySelector('.lx-date-picker__popper');
+      expect(popper?.classList.contains('theme-light')).toBe(true);
+
+      await wrapper.setProps({ popperClass: 'lx-theme-hud' });
+      await nextTick();
+      expect(popper?.classList.contains('lx-theme-hud')).toBe(true);
+      expect(popper?.classList.contains('theme-light')).toBe(false);
+
+      await wrapper.setProps({ popperClass: undefined });
+      await nextTick();
+      expect(popper?.classList.contains('lx-theme-hud')).toBe(false);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
   it('renders the range editor form with the same anchor class', () => {
     const wrapper = mount(LxDatePicker, {
       props: { type: 'daterange', modelValue: [] },
@@ -46,6 +72,86 @@ describe('LxDatePicker', () => {
 
     expect(wrapper.find('.el-range-separator').text()).toBe('至');
     wrapper.unmount();
+  });
+
+  it('窄屏默认使用单面板，并允许 singlePanel 显式覆盖', async () => {
+    vi.spyOn(window, 'matchMedia').mockReturnValue({
+      matches: true,
+      media: '(max-width: 640px)',
+      onchange: null,
+      addEventListener: () => undefined,
+      removeEventListener: () => undefined,
+      addListener: () => undefined,
+      removeListener: () => undefined,
+      dispatchEvent: () => true,
+    });
+
+    const wrapper = mount(LxDatePicker, {
+      props: { type: 'daterange', modelValue: [] },
+      attachTo: document.body,
+    });
+    const input = wrapper.find('input');
+    await input.trigger('click');
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(document.body.querySelectorAll('.el-date-table')).toHaveLength(1);
+
+    await wrapper.setProps({ singlePanel: false });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(document.body.querySelectorAll('.el-date-table')).toHaveLength(2);
+
+    await wrapper.setProps({ singlePanel: true });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(document.body.querySelectorAll('.el-date-table')).toHaveLength(1);
+
+    wrapper.unmount();
+  });
+
+  it('宿主使用英文 locale 时仍显示周一起始且不修改全局 locale', async () => {
+    const previousLocale = dayjs.locale();
+    dayjs.locale('en');
+
+    try {
+      const wrapper = mount(
+        {
+          render: () =>
+            h('div', [
+              h(LxDatePicker, { modelValue: '2026-09-15', valueFormat: 'YYYY-MM-DD' }),
+              h(LxDatePicker, {
+                modelValue: ['2026-09-15', '2026-10-08'],
+                type: 'daterange',
+                valueFormat: 'YYYY-MM-DD',
+              }),
+            ]),
+        },
+        { attachTo: document.body },
+      );
+
+      const inputs = wrapper.findAll('input');
+      await inputs[0].trigger('click');
+      await nextTick();
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const weekdays = ['一', '二', '三', '四', '五', '六', '日'];
+      const singleDialog = document.body.querySelector('[role="dialog"]');
+      const singleHeaders = Array.from(singleDialog?.querySelectorAll('th[scope="col"]') ?? []).map((cell) =>
+        cell.textContent?.trim(),
+      );
+      await inputs[1].trigger('click');
+      await nextTick();
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const dialogs = document.body.querySelectorAll('[role="dialog"]');
+      const rangeHeaders = Array.from(dialogs[1]?.querySelectorAll('th[scope="col"]') ?? []).map((cell) =>
+        cell.textContent?.trim(),
+      );
+
+      expect(singleHeaders).toEqual(weekdays);
+      expect(rangeHeaders).toEqual([...weekdays, ...weekdays]);
+      expect(dayjs.locale()).toBe('en');
+      wrapper.unmount();
+    } finally {
+      dayjs.locale(previousLocale);
+    }
   });
 
   it('allows overriding the range separator through props', () => {

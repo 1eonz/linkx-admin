@@ -3,6 +3,7 @@ import { expect, test } from '@playwright/test';
 test.describe('lx-ui LxForm 文档示例', () => {
   test('桌面保留双列间距和通栏字段', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/components/lxform');
     await page.getByRole('button', { name: '编辑节点信息' }).click();
 
@@ -18,17 +19,29 @@ test.describe('lx-ui LxForm 文档示例', () => {
     const remarkItem = dialog.locator('.el-form-item').filter({ hasText: '备注' });
     const codeBox = await codeItem.boundingBox();
     const nameBox = await nameItem.boundingBox();
-    if (!codeBox || !nameBox) throw new Error('桌面双列表单字段未进入布局');
+    const codeLabelBox = await codeItem.locator('.el-form-item__label').boundingBox();
+    const nameLabelBox = await nameItem.locator('.el-form-item__label').boundingBox();
+    const codeControlBox = await codeItem.locator('.el-input__wrapper').boundingBox();
+    const nameControlBox = await nameItem.locator('.el-input__wrapper').boundingBox();
+    if (!codeBox || !nameBox || !codeLabelBox || !nameLabelBox || !codeControlBox || !nameControlBox) {
+      throw new Error('桌面双列表单字段未进入布局');
+    }
 
     expect(nameBox.x).toBeGreaterThan(codeBox.x + codeBox.width);
-    expect(Math.abs(nameBox.y - codeBox.y)).toBeLessThanOrEqual(3);
+    expect(Math.abs(nameLabelBox.y - codeLabelBox.y)).toBeLessThanOrEqual(2);
+    expect(Math.abs(nameControlBox.y - codeControlBox.y)).toBeLessThanOrEqual(2);
+    await expect(codeItem.locator('.el-form-item__label')).toHaveCSS('font-size', '12px');
+    await expect(codeItem.locator('.el-form-item__label')).toHaveCSS('font-weight', '500');
+    await expect(codeItem.locator('.el-input__wrapper')).toHaveCSS('height', '32px');
+    await expect(codeItem.locator('.el-input__wrapper')).toHaveCSS('border-radius', '4px');
     await expect(remarkItem).toHaveCSS('grid-column-start', '1');
     await expect(remarkItem).toHaveCSS('grid-column-end', '-1');
     await expect(form).toHaveCSS('column-gap', '16px');
   });
 
-  test('390px 和 320px 下折为单列，校验、键盘顺序及页面宽度正常', async ({ page }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
+  test('375px 和 320px 下折为单列，校验、键盘顺序及页面宽度正常', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 844 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/components/lxform');
     await page.getByRole('button', { name: '编辑节点信息' }).click();
 
@@ -62,7 +75,7 @@ test.describe('lx-ui LxForm 文档示例', () => {
       );
     };
 
-    await assertSingleColumn(390);
+    await assertSingleColumn(375);
 
     const codeInput = dialog.getByRole('textbox', { name: /节点编码/ });
     const nameInput = dialog.getByRole('textbox', { name: /节点名称/ });
@@ -72,6 +85,18 @@ test.describe('lx-ui LxForm 文档示例', () => {
     expect(Math.abs(nameBox.x - codeBox.x)).toBeLessThanOrEqual(1);
     expect(nameBox.y).toBeGreaterThan(codeBox.y);
 
+    const gridItem = dialog.locator('.el-form-item').filter({ hasText: '所属网格' });
+    const gridLabel = gridItem.locator('.el-form-item__label');
+    await gridItem.getByRole('combobox').focus();
+    await page.keyboard.press('Enter');
+    const selectPopper = page.locator('.el-select__popper:visible').last();
+    await expect(selectPopper).toBeVisible();
+    const labelBox = await gridLabel.boundingBox();
+    const popperBox = await selectPopper.boundingBox();
+    if (!labelBox || !popperBox) throw new Error('窄屏网格下拉或字段标签未进入布局');
+    expect(popperBox.y).toBeGreaterThanOrEqual(labelBox.y + labelBox.height - 1);
+    await page.keyboard.press('Escape');
+
     await codeInput.focus();
     await page.keyboard.press('Tab');
     await expect(nameInput).toBeFocused();
@@ -80,6 +105,54 @@ test.describe('lx-ui LxForm 文档示例', () => {
     await assertSingleColumn(320);
     await dialog.getByRole('button', { name: '保存' }).click();
     await expect(dialog.locator('.lx-form .el-form-item.is-error')).toHaveCount(3);
+    const firstError = dialog.locator('.el-form-item.is-error').first();
+    const firstErrorInput = firstError.locator('input').first();
+    const firstErrorMessage = firstError.locator('.el-form-item__error');
+    await expect(firstErrorInput).toBeFocused();
+    await expect(firstErrorInput).toHaveAttribute('aria-required', 'true');
+    await expect(firstErrorInput).toHaveAttribute('aria-invalid', 'true');
+    const errorId = await firstErrorMessage.getAttribute('id');
+    const describedBy = await firstErrorInput.getAttribute('aria-describedby');
+    expect(errorId).toBeTruthy();
+    expect(describedBy?.split(/\s+/)).toContain(errorId);
+    await expect(dialog.locator('.el-form-item__error').first()).toHaveCSS('color', 'rgb(186, 26, 26)');
+    await expect(dialog.locator('.el-form-item__error').first()).toHaveCSS('font-size', '11px');
+    await expect(dialog.locator('.el-form-item.is-error .el-input__wrapper').first()).toHaveCSS(
+      'background-color',
+      'rgb(255, 245, 245)',
+    );
+    await expect(dialog.locator('.el-form-item.is-error .el-input__inner').first()).toHaveCSS(
+      'color',
+      'rgb(186, 26, 26)',
+    );
+    const errorControl = dialog.locator('.el-form-item.is-error .el-input__wrapper').first();
+    await errorControl.locator('input').focus();
+    await expect
+      .poll(() => errorControl.evaluate((element) => getComputedStyle(element).boxShadow))
+      .toMatch(/rgb\(186, 26, 26\).*2px/);
+    const errorSelect = dialog.locator('.el-form-item.is-error .lx-select .el-select__wrapper').first();
+    await errorSelect.locator('input').focus();
+    await expect(errorSelect).toHaveCSS('background-color', 'rgb(255, 245, 245)');
+    await expect(errorSelect).toHaveCSS('border-color', 'rgb(186, 26, 26)');
+    await expect(errorSelect).toHaveCSS('box-shadow', 'none');
     await expect(dialog.getByRole('button', { name: '保存' })).toBeVisible();
+  });
+
+  test('HUD主题的表单校验色保持可见且令牌一致', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/components/lxform');
+    await page.locator('html').evaluate((element) => element.classList.add('lx-theme-hud'));
+    await page.getByRole('button', { name: '编辑节点信息' }).click();
+
+    const dialog = page.getByRole('dialog');
+    await dialog.getByRole('button', { name: '保存' }).click();
+    const errorText = dialog.locator('.el-form-item__error').first();
+    const errorControl = dialog.locator('.el-form-item.is-error .el-input__wrapper').first();
+    await expect(errorText).toHaveCSS('color', 'rgb(247, 137, 137)');
+    await expect(errorControl).toHaveCSS('background-color', 'rgba(245, 108, 108, 0.15)');
+    await expect
+      .poll(() => errorControl.evaluate((element) => getComputedStyle(element).boxShadow))
+      .toContain('rgb(247, 137, 137)');
   });
 });

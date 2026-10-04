@@ -1,6 +1,6 @@
 # LxTextarea 文本域
 
-基于 Element Plus `el-input type="textarea"` 内核二次封装的多行文本域。3 行基准高度、8/12px 内边距、底部右对齐等宽字数计数（11px）、默认 `resize: vertical`。溢出红字计数为有意识裁剪：EP `maxlength` 硬截断下超限态不可达（DESIGN-SYNC-AUDIT 终裁）。
+基于 Element Plus `el-input type="textarea"` 内核二次封装的多行文本域。3 行基准高度、8/12px 内边距、底部右对齐等宽字数计数、默认 `resize: vertical`。`maxlengthMode="truncate"` 保留原生硬截断；`maxlengthMode="validate"` 允许内容暂时超过阈值，并显示错误底色、错误说明和红色计数，便于用户直接修正。
 
 视觉规范源：`design/表单控件八件套/code.html` 08。
 
@@ -26,8 +26,9 @@ import Basic from '../../src/components/LxTextarea/demo/basic.vue';
 | `readonly`      | `boolean`                                           | `false`          | 只读态。                                                                                                                                                                   |
 | `rows`          | `number`                                            | `3`              | 行数（标本 08 三行基准约 74px）。                                                                                                                                          |
 | `autosize`      | `boolean \| { minRows?: number; maxRows?: number }` | `false`          | 自适应高度：`true` 随内容撑开，或指定行数区间。                                                                                                                            |
-| `maxlength`     | `number`                                            | —                | 最大长度；与 `showWordLimit` 联动出现计数器（硬截断）。                                                                                                                    |
-| `showWordLimit` | `boolean`                                           | `false`          | 显示字数统计。EP 2.14.6 契约：须配合 `maxlength` 才渲染计数器（无 `maxlength` 不显示，旧版域外计数行为已移除；位置可经 attrs 透传 `word-limit-position="outside"` 切换）。 |
+| `maxlength`     | `number`                                            | —                | 最大长度；`truncate` 模式作为原生输入上限，`validate` 模式作为校验阈值。                                                                                                   |
+| `maxlengthMode` | `'truncate' \| 'validate'`                         | `'truncate'`     | 超限处理方式。`truncate` 硬截断；`validate` 保留超出部分、设置 `aria-invalid` 并关联错误说明。                                                                              |
+| `showWordLimit` | `boolean`                                           | `false`          | 显示字数统计。`truncate` 模式使用 Element Plus 计数器；`validate` 模式使用 lx-ui 计数器，并在超限时变为错误色。                                                         |
 | `resize`        | `'none' \| 'both' \| 'horizontal' \| 'vertical'`    | `'vertical'`     | 原生 resize 行为（标本 08 resize-y 契约）。                                                                                                                                |
 | `name`          | `string`                                            | —                | 原生 name 属性。                                                                                                                                                           |
 
@@ -52,13 +53,12 @@ import Basic from '../../src/components/LxTextarea/demo/basic.vue';
 
 | 偏差项       | 标本                         | 实现                                     | 依据                                                                   |
 | ------------ | ---------------------------- | ---------------------------------------- | ---------------------------------------------------------------------- |
-| 溢出红字计数 | 超限 218/200 红字 + 错误提示 | 裁剪                                     | EP maxlength 硬截断，超限态不可达                                      |
 | 计数器字号   | 10px                         | 11px + 等宽 + label 色（约 6.1:1 达 AA） | 10px 过小影响可读性；secondary 3.2:1 不达 AA（critique 2026-09-29 P2） |
 | 字体         | 标本 textarea 为 font-sans   | 继承宿主字体栈                           | 文案说明类内容非机器读数，不开 mono                                    |
 
 ## 可访问性
 
-`name`/`id` 供读屏关联；键盘焦点主色边框 + 光环（组件级固化，脱离全局桥不漂移）；错误态置于 `LxForm` 校验上下文自动生效；"减少动效"偏好时过渡动画全局关闭。多行基线天然 ≥44px，无需触屏提升。
+`name`/`id` 供读屏关联；键盘焦点主色边框 + 光环（组件级固化，脱离全局桥不漂移）；超限校验模式设置 `aria-invalid="true"`，并通过 `aria-describedby` 关联错误说明。表单错误态置于 `LxForm` 校验上下文自动生效；"减少动效"偏好时过渡动画全局关闭。多行基线天然 ≥44px，无需触屏提升。
 
 ## Vue3 宿主适配
 

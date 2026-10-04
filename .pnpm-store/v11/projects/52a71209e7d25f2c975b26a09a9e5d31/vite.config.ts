@@ -56,7 +56,7 @@ export default defineConfig({
     rollupOptions: {
       // vue 为 peer；element-plus（含 es 子路径按需样式）不打进产物：
       // JS 侧保留 import 语句由宿主构建解析，CSS 不内联进 lx-ui.css，保证与 EP 全量样式不重复
-      external: [/^element-plus(?:\/.*)?$/, 'vue'],
+      external: [/^dayjs(?:\/.*)?$/, /^element-plus(?:\/.*)?$/, 'vue'],
     },
     cssCodeSplit: false,
   },

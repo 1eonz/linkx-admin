@@ -32,6 +32,9 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     const lightLabelColor = await firstLabel.evaluate((element) => getComputedStyle(element).color);
     expect(contrastRatio(lightLabelColor, 'rgb(255, 255, 255)')).toBeGreaterThanOrEqual(4.5);
     await expect(page.getByRole('img', { name: '在线（在岗备勤）' }).first()).toBeVisible();
+    const statusDot = page.locator('.lx-descriptions__value .lx-status-dot__wrap').first();
+    await expect(statusDot).toHaveCSS('width', '6px');
+    await expect(statusDot).toHaveCSS('height', '6px');
 
     const copyButton = page
       .getByRole('region', { name: '详情描述示例' })

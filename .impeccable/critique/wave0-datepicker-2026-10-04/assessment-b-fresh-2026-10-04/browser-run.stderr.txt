@@ -1,0 +1,36 @@
+locator.check: Clicking the checkbox did not change its state
+Call log:
+  - waiting for locator('.lx-date-picker-demo input[type="checkbox"]')
+    - locator resolved to <input type="checkbox" data-v-e5f256fe=""/>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="el-picker-panel__content el-date-range-picker__content is-left">…</div> from <div id="el-popper-container-1024">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="el-picker-panel__content el-date-range-picker__content is-left">…</div> from <div id="el-popper-container-1024">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <span>skipped heading level: <h2> "交互示例 ​" followed by …</span> from <div class="impeccable-overlay impeccable-banner">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - performing click action
+    - click action done
+    - waiting for scheduled navigations to finish
+    - navigations have finished
+
+    at main (F:\work\linkx-admin\.impeccable\critique\wave0-datepicker-2026-10-04\assessment-b-fresh-2026-10-04\browser-capture.cjs:291:21)

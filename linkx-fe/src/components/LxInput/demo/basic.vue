@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import type { FormRules } from 'element-plus'
 import LxInput from '../index.vue'
 import type { LxInputSize } from '../types'
+import { LxForm, LxFormItem } from '../../../index'
+import type { LxFormInstance } from '../../../index'
 
 const size = ref<LxInputSize>('md')
 const hudTheme = ref(false)
@@ -9,9 +12,23 @@ const hudTheme = ref(false)
 /** 各示例字段独立状态，避免共用 model 互相覆盖 */
 const officerName = ref('')
 const officerId = ref('33010619890401')
-const phone = ref('1390000')
+const phoneFormRef = ref<LxFormInstance>()
+const phoneForm = reactive({ phone: '1390000' })
+const phoneRules: FormRules = {
+  phone: [
+    {
+      pattern: /^1\d{10}$/,
+      message: '联系电话须为 11 位手机号',
+      trigger: 'blur',
+    },
+  ],
+}
 const readonlyNode = ref('杭州市公安局西湖区分局 (自动指派)')
 const lastAction = ref('输入内容观察状态；演示数据仅存在于页面内存。')
+
+onMounted(() => {
+  phoneFormRef.value?.validateField('phone').catch(() => undefined)
+})
 
 function reportChange(field: string, value: string) {
   lastAction.value = `${field} 已输入：${value || '(空)'}`
@@ -70,21 +87,27 @@ function reportChange(field: string, value: string) {
           </p>
         </div>
         <div class="lx-input-demo__field">
-          <label class="lx-input-demo__label" for="demo-phone">
-            <span class="lx-input-demo__required">*</span>联系电话（错误态由
-            LxForm 校验触发）
-          </label>
-          <LxInput
-            id="demo-phone"
-            v-model="phone"
-            :size="size"
-            mono
-            :maxlength="11"
-            show-word-limit
-            @change="reportChange('联系电话', phone)"
-          />
+          <LxForm
+            ref="phoneFormRef"
+            class="lx-input-demo__validation-form"
+            :model="phoneForm"
+            :rules="phoneRules"
+            label-position="top"
+          >
+            <LxFormItem label="联系电话" prop="phone">
+              <LxInput
+                id="demo-phone"
+                v-model="phoneForm.phone"
+                :size="size"
+                mono
+                :maxlength="11"
+                show-word-limit
+                @change="reportChange('联系电话', phoneForm.phone)"
+              />
+            </LxFormItem>
+          </LxForm>
           <p class="lx-input-demo__tip">
-            字数计数 8 / 11：红边浅红底深红值需在 LxForm 内触发
+            当前以无效号码展示真实校验错误；改为 11 位手机号后错误会清除
           </p>
         </div>
         <div class="lx-input-demo__field">
@@ -215,6 +238,14 @@ function reportChange(field: string, value: string) {
   min-width: 0;
 }
 
+.lx-input-demo__validation-form {
+  min-width: 0;
+}
+
+:deep(.lx-input-demo__validation-form .el-form-item) {
+  margin-bottom: 0;
+}
+
 .lx-input-demo__label {
   font-size: 12px;
   font-weight: 500;
@@ -236,7 +267,7 @@ function reportChange(field: string, value: string) {
 .lx-input-demo__tip {
   margin: 0;
   font-size: 12px;
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
 }
 
 .lx-input-demo__note {

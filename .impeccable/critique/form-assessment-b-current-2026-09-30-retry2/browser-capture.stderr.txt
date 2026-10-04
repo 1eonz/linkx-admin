@@ -1,0 +1,19 @@
+locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('.dynamic-form-demo__toolbar label').filter({ hasText: 'HUD 深色主题' })
+    - locator resolved to <label data-v-6188fab0="" class="el-checkbox lx-checkbox">…</label>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    58 × waiting for element to be visible, enabled and stable
+       - element is not visible
+     - retrying click action
+       - waiting 500ms
+
+    at main (F:\work\linkx-admin\.impeccable\critique\form-assessment-b-current-2026-09-30-retry2\capture-browser-evidence.cjs:53:97)

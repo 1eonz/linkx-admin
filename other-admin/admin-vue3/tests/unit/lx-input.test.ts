@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { LxInput } from 'lx-ui';
-import { nextTick } from 'vue';
 import { describe, expect, it } from 'vitest';
+import { nextTick } from 'vue';
 
 describe('LxInput', () => {
   it('renders the lx-input class family on the EP kernel root', () => {

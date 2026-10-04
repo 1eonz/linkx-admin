@@ -139,6 +139,19 @@ describe('LxSearchBar', () => {
     wrapper.unmount();
   });
 
+  it('renders the host status slot and resets from Escape', async () => {
+    const wrapper = mount(LxSearchBar, {
+      props: { fields, modelValue: { keyword: '值班员', status: 'online' } },
+      slots: { meta: '<span data-testid="meta">结果状态</span>' },
+    });
+
+    expect(wrapper.get('[data-testid="meta"]').text()).toBe('结果状态');
+    await wrapper.get('.lx-search-bar').trigger('keyup.esc');
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([{ status: 'all' }]);
+    expect(wrapper.emitted('search')).toHaveLength(1);
+    wrapper.unmount();
+  });
+
   it('blocks search while loading and expands fields after the first four', async () => {
     const longFields = Array.from({ length: 9 }, (_, index) => ({
       key: `field-${index}`,
@@ -159,6 +172,25 @@ describe('LxSearchBar', () => {
 
     await wrapper.get('.lx-search-bar__actions .el-button').trigger('click');
     expect(wrapper.emitted('search')).toBeUndefined();
+    wrapper.unmount();
+  });
+  it('uses separate accessible ids for a date range field', () => {
+    const wrapper = mount(LxSearchBar, {
+      props: {
+        fields: [
+          {
+            key: 'createdAt',
+            label: '创建时间',
+            type: 'daterange',
+          },
+        ],
+        modelValue: { createdAt: ['2026-09-01', '2026-09-30'] },
+      },
+    });
+    const datePicker = wrapper.findComponent({ name: 'ElDatePicker' });
+
+    expect(datePicker.props('id')).toEqual(['lx-search-createdAt-start', 'lx-search-createdAt-end']);
+    expect(wrapper.get('label').attributes('for')).toBe('lx-search-createdAt-start');
     wrapper.unmount();
   });
 });

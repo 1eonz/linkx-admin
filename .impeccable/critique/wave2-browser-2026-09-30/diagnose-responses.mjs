@@ -1,0 +1,12 @@
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const { chromium } = require('F:/work/linkx-admin/other-admin/admin-vue3/node_modules/@playwright/test');
+const executablePath = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const browser = await chromium.launch({ headless: true, executablePath });
+const page = await browser.newPage();
+const responses=[];
+page.on('response', r => { if (r.status() >= 400) responses.push({status:r.status(),url:r.url(),method:r.request().method()}); });
+await page.goto('http://127.0.0.1:4177/components/lxsearchbar',{waitUntil:'networkidle',timeout:15000});
+await page.waitForTimeout(500);
+console.log(JSON.stringify(responses,null,2));
+await browser.close();

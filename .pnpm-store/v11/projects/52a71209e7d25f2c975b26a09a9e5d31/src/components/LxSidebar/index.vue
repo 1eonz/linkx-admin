@@ -34,6 +34,7 @@ const props = withDefaults(defineProps<LxSidebarProps>(), {
   slaValue: 99.9,
   nodeLabel: 'NODE-01',
   nodeStatus: 'online',
+  latencyLabel: '',
 })
 
 const emit = defineEmits<{
@@ -310,6 +311,7 @@ watch(
           :sla-value="slaValue"
           :node-label="nodeLabel"
           :node-status="nodeStatus"
+          :latency-label="latencyLabel"
           @toggle="onModeToggle"
         />
       </slot>

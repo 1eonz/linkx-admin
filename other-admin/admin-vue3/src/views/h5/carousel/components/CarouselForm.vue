@@ -192,6 +192,9 @@ function handleOfficialAccountChange(id: string | undefined): void {
   if (id) {
     titlePage.pageNum = 1;
     loadArticleList(id);
+  } else {
+    articleRequestId++;
+    articleListLoading.value = false;
   }
 }
 
@@ -203,6 +206,8 @@ const titlePage = reactive({
   totalCount: 0,
   officialAccountId: '',
 });
+const articleListLoading = ref(false);
+let articleRequestId = 0;
 /** 文章跳转链接前缀（来自全局变量 IM_ADDRESS_HTTP） */
 const envurl = ref('');
 
@@ -215,12 +220,18 @@ const envurl = ref('');
  * @returns Promise<void>
  */
 function loadArticleList(id: string, isMore = false): Promise<void> {
+  if (isMore && articleListLoading.value) return Promise.resolve();
+
+  const requestId = ++articleRequestId;
+  articleListLoading.value = true;
   if (!isMore) {
     titlePage.pageNum = 1;
     titleList.value = [];
     formData.articleId = '';
     formData.url = undefined;
     formData.title = undefined;
+  } else {
+    titlePage.pageNum++;
   }
   const params = {
     pageNum: titlePage.pageNum,
@@ -230,10 +241,20 @@ function loadArticleList(id: string, isMore = false): Promise<void> {
   };
   return getArticleList(params)
     .then((res) => {
+      if (requestId !== articleRequestId || formData.officialAccountId !== id) return;
+
       const data = res.data as { records?: ArticleItem[]; totalCount?: number } | undefined;
       const records = data?.records ?? [];
       titlePage.totalCount = data?.totalCount ?? 0;
-      titleList.value = [...titleList.value, ...records];
+      const knownArticleIds = new Set(titleList.value.map((item) => item.id));
+      titleList.value = [
+        ...titleList.value,
+        ...records.filter((item) => {
+          if (knownArticleIds.has(item.id)) return false;
+          knownArticleIds.add(item.id);
+          return true;
+        }),
+      ];
       // 默认选第一篇
       if (!isMore && titleList.value.length > 0) {
         formData.articleId = titleList.value[0].id;
@@ -241,7 +262,12 @@ function loadArticleList(id: string, isMore = false): Promise<void> {
       }
     })
     .catch(() => {
+      if (requestId !== articleRequestId) return;
+      if (isMore) titlePage.pageNum--;
       ElMessage.error('加载文章列表失败，请重试');
+    })
+    .finally(() => {
+      if (requestId === articleRequestId) articleListLoading.value = false;
     });
 }
 
@@ -262,7 +288,6 @@ function handleArticleChange(): void {
  */
 function handleScroll(): void {
   if (titleList.value.length < titlePage.totalCount) {
-    titlePage.pageNum++;
     const id = formData.officialAccountId;
     if (id) {
       loadArticleList(id, true);

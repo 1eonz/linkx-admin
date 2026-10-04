@@ -106,6 +106,14 @@ onBeforeUnmount(() => {
         <LxStatusSwitch :model-value="true" disabled />
       </div>
 
+      <div class="status-switch-demo__row" data-testid="permission-row">
+        <div>
+          <strong>权限不足</strong>
+          <span>未注入权限码时降级为浅灰 LxTag</span>
+        </div>
+        <LxStatusSwitch :model-value="true" permission="demo:status-switch" />
+      </div>
+
       <div class="status-switch-demo__row" data-testid="confirm-row">
         <div>
           <strong>关闭前确认</strong>
@@ -114,7 +122,11 @@ onBeforeUnmount(() => {
         <div class="status-switch-demo__control">
           <LxStatusSwitch
             :model-value="confirmValue"
-            confirm="关闭后将中断节点通信，并记录操作审计。"
+            :confirm="{
+              title: '确认停用该节点？',
+              message: '关闭后将中断节点通信，并记录操作审计。',
+              type: 'danger',
+            }"
             @update:model-value="confirmValue = Boolean($event)"
           />
           <span data-testid="confirm-state">{{
@@ -186,7 +198,7 @@ onBeforeUnmount(() => {
 .status-switch-demo__row > div {
   display: grid;
   min-width: 0;
-  gap: var(--lx-space-2xs);
+  gap: var(--lx-space-xs);
 }
 
 .status-switch-demo__control {

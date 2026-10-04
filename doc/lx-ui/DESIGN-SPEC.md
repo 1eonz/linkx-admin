@@ -5,6 +5,12 @@
 > 姊妹文档：`DESIGN.md`（架构与迁移）、`COMPONENT-SPEC.md`（组件接口签名）、`DOCS-SITE.md`（文档站与 demo 规范）。
 > 视觉源头：`doc/stitch_侧边栏/stitch_/`（侧边栏唯一设计源，`_1` rail + `_2` expanded）。
 
+## 2026-09-30 Wave 5 实现与验收备注
+
+`LxDialog`、`LxDrawer`、`LxEmpty`、`LxPageCard`、`LxFormErrorBanner` 已按本规范完成实现与阶段性回归。定向单测 17/17、文档 Playwright 7/7、lx-ui typecheck/build/docs build 通过；亮色/HUD、桌面/375px、焦点、加载/错误/空态和 `prefers-reduced-motion` 均有浏览器证据。Drawer 移动端截图在动画完成后采集，面板为 375px 全宽且页面无横向溢出。该记录不替代正式 UI-11 Impeccable 双路 Critique；detector `[]` 只表示源码静态规则零命中。
+
+Element Plus 桥接缺口已登记：`linkx-fe/src/components/LxForm/demo/control-bridge.vue` 仍直接使用 `ElTabs`/`ElTabPane`。在专用 LxTabs 封装或明确桥接边界完成前，不把该 Demo 当作公开 LxTabs 设计闭环证据。
+
 ---
 
 ## 目录
@@ -143,6 +149,7 @@ export const NODE_STATUS: Record<number, LxStatus> = {
 | success | `#67c23a` | `#f0f9eb` | 唯一"正常"色。**不得**用于普通操作按钮（绿色按钮仅限"启用"类开关型动作） |
 | warning | `#e6a23c` | `#fdf6ec` | 唯一"注意"色。文字在浅底上对比度 3.1:1，**仅用于 ≥12px 粗体**文字；细小文字场景加深为 `#cf8a1e` |
 | error | `#f56c6c`（实底）/ `#b54747`（链接文字） | `#fef0f0` | 唯一"危险"色。实底危险按钮使用配套反色文字；删除链接使用深值，白底文字对比度不低于 4.5:1；HUD 深色使用 `#f78989`。**不得**用于装饰 |
+| `--lx-color-form-error` / `--lx-color-form-error-bg` | `#ba1a1a`（HUD：`#f78989`） | `#fff5f5`（HUD：`rgba(245,108,108,.15)`） | 仅用于字段校验错误文案、输入值、控件边线和浅底；与危险按钮/删除链接语义分离，来源为 `design/表单控件八件套/` |
 | info | `#909399` | `#f4f4f5` | 唯一"中性"色。次要文字、禁用态、归档态、LxCodeSlot 底色 |
 
 ### 3.3 表面与边框

@@ -13,14 +13,32 @@
  * 模板保持单根（无根级注释）：注释节点会引入 Fragment 根，
  * 破坏 $attrs 单根继承与测试工具对根元素类的断言。
  */
-import { ref } from 'vue'
-import { ElSelect } from 'element-plus'
+import { ElOption, ElSelect } from 'element-plus'
 import type { SelectInstance } from 'element-plus'
-import type { LxSelectModelValue, LxSelectProps, LxSelectSize } from './types'
+import { computed, onMounted, onUpdated, ref, useAttrs } from 'vue'
+
+import type {
+  LxSelectModelValue,
+  LxSelectOption,
+  LxSelectOptionValue,
+  LxSelectProps,
+  LxSelectSize,
+} from './types'
+import { syncAriaDescribedBy } from '../../utils/syncAriaDescribedBy'
 import 'element-plus/es/components/select/style/css'
 import './style.css'
 
 defineOptions({ name: 'LxSelect', inheritAttrs: false })
+
+defineSlots<{
+  /** 选项内容插槽；不传时使用 option.label。 */
+  option?: (scope: { option: LxSelectOption }) => unknown
+  prefix?: () => unknown
+  empty?: () => unknown
+  header?: () => unknown
+  footer?: () => unknown
+  default?: () => unknown
+}>()
 
 withDefaults(defineProps<LxSelectProps>(), {
   modelValue: undefined,
@@ -44,13 +62,29 @@ const emit = defineEmits<{
   change: [value: LxSelectModelValue]
   clear: []
   'visible-change': [visible: boolean]
-  'remove-tag': [tag: string | number | boolean]
+  'remove-tag': [tag: LxSelectOptionValue]
   focus: [event: FocusEvent]
   blur: [event: FocusEvent]
 }>()
 
+const attrs = useAttrs()
+const userPopperClass = computed(() => {
+  const value = attrs.popperClass ?? attrs['popper-class']
+  return typeof value === 'string' ? value : undefined
+})
+
 /** EP 内核实例引用：focus/blur 方法透传给调用方 */
 const selectRef = ref<SelectInstance>()
+const managedDescriptionIds = new Set<string>()
+
+function syncInputDescription(): void {
+  const input = selectRef.value?.inputRef
+  if (!(input instanceof HTMLInputElement)) return
+  syncAriaDescribedBy(input, attrs['aria-describedby'], managedDescriptionIds)
+}
+
+onMounted(syncInputDescription)
+onUpdated(syncInputDescription)
 
 /** 档位映射：Lx 工程档名 → EP 内核档（高度由全局令牌桥收敛 28/32/40px） */
 const SIZE_MAP: Record<LxSelectSize, 'small' | 'default' | 'large'> = {
@@ -73,7 +107,7 @@ defineExpose({
     class="lx-select"
     :class="`lx-select--${size}`"
     v-bind="$attrs"
-    :popper-class="['lx-select__popper', $attrs.popperClass]"
+    :popper-class="['lx-select__popper', userPopperClass]"
     :model-value="modelValue"
     :placeholder="placeholder"
     :disabled="disabled"
@@ -93,13 +127,28 @@ defineExpose({
     @visible-change="emit('visible-change', $event)"
     @remove-tag="
       // EP 类型声明 $event 为 unknown，运行时实际派发选项值，此处按选项值类型收窄
-      emit('remove-tag', $event as string | number | boolean)
+      emit('remove-tag', $event as LxSelectOptionValue)
     "
     @focus="emit('focus', $event)"
     @blur="emit('blur', $event)"
   >
     <template v-if="$slots.prefix" #prefix><slot name="prefix" /></template>
     <template v-if="$slots.empty" #empty><slot name="empty" /></template>
+    <template v-if="$slots.header" #header><slot name="header" /></template>
+    <template v-if="$slots.footer" #footer><slot name="footer" /></template>
+    <ElOption
+      v-for="(option, index) in options"
+      :key="
+        typeof option.value === 'object'
+          ? `object:${index}`
+          : `${typeof option.value}:${String(option.value)}`
+      "
+      :label="option.label"
+      :value="option.value"
+      :disabled="option.disabled"
+    >
+      <slot name="option" :option="option">{{ option.label }}</slot>
+    </ElOption>
     <slot />
   </ElSelect>
 </template>

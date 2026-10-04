@@ -81,6 +81,7 @@ export default defineConfig({
             },
             { text: 'LxStatusDot 状态点', link: '/components/lxstatusdot' },
             { text: 'LxTag 浅底标签', link: '/components/lxtag' },
+            { text: 'LxCodeSlot 代码槽', link: '/components/lxcodeslot' },
             {
               text: 'LxActionButtons 行内操作',
               link: '/components/lxactionbuttons',
@@ -101,6 +102,8 @@ export default defineConfig({
             { text: 'LxCheckbox 复选组', link: '/components/lxcheckbox' },
             { text: 'LxSwitch 开关', link: '/components/lxswitch' },
             { text: 'LxSelect 下拉选择', link: '/components/lxselect' },
+            { text: 'LxTreeSelect 树形下拉', link: '/components/lxtreeselect' },
+            { text: 'LxCascader 级联选择', link: '/components/lxcascader' },
             {
               text: 'LxDatePicker 日期选择',
               link: '/components/lxdatepicker',

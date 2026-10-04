@@ -1,0 +1,423 @@
+[
+  {
+    "selector": "span.container",
+    "tagName": "span",
+    "rect": {
+      "x": 335,
+      "y": -806,
+      "width": 16,
+      "height": 14,
+      "top": -806,
+      "right": 351,
+      "bottom": -792,
+      "left": 335
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "clipped-overflow-container",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span.container clips a positioned child",
+        "ignoreValue": "",
+        "name": "Positioned child clipped by overflow container",
+        "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip."
+      }
+    ]
+  },
+  {
+    "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > button.copy",
+    "tagName": "button",
+    "rect": {
+      "x": 282,
+      "y": 546,
+      "width": 40,
+      "height": 40,
+      "top": 546,
+      "right": 322,
+      "bottom": 586,
+      "left": 282
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "ignoreValue": "",
+        "name": "Raster buried under a wash or opacity",
+        "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+      }
+    ]
+  },
+  {
+    "selector": "details.details.custom-block:nth-of-type(2) > div.language-vue.vp-adaptive-theme > button.copy",
+    "tagName": "button",
+    "rect": {
+      "x": 282,
+      "y": 1103,
+      "width": 40,
+      "height": 40,
+      "top": 1103,
+      "right": 322,
+      "bottom": 1143,
+      "left": 282
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "ignoreValue": "",
+        "name": "Raster buried under a wash or opacity",
+        "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+      }
+    ]
+  },
+  {
+    "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+    "tagName": "button",
+    "rect": {
+      "x": 323,
+      "y": 1449,
+      "width": 40,
+      "height": 40,
+      "top": 1449,
+      "right": 363,
+      "bottom": 1489,
+      "left": 323
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "ignoreValue": "",
+        "name": "Raster buried under a wash or opacity",
+        "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+      }
+    ]
+  },
+  {
+    "selector": "#el-id-1024-3",
+    "tagName": "div",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "advisory": true,
+        "detail": "1px border + 16px shadow blur",
+        "ignoreValue": "",
+        "name": "Hairline border with wide shadow",
+        "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+      }
+    ]
+  },
+  {
+    "selector": "body",
+    "tagName": "body",
+    "rect": null,
+    "isPageLevel": true,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "em-dash-overuse",
+        "category": "slop",
+        "severity": "advisory",
+        "advisory": true,
+        "detail": "13 em-dashes in body text",
+        "ignoreValue": "",
+        "name": "Em-dash overuse",
+        "description": "Em-dash saturation in body copy is an AI cadence tell. Advisory only: humans use em-dashes legitimately, so this fires only on saturation — at least 8 em-dashes (— or --) at a density near one per 500 characters of body text — never on a long article that uses a few. Prefer commas, colons, periods, or parentheses."
+      },
+      {
+        "type": "layout-transition",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "transition: height, padding-top, padding-bottom",
+        "ignoreValue": "",
+        "name": "Layout property animation",
+        "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+      }
+    ]
+  },
+  {
+    "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > span.lang",
+    "tagName": "span",
+    "rect": {
+      "x": 304.828125,
+      "y": 536,
+      "width": 21.171875,
+      "height": 24,
+      "top": 536,
+      "right": 326,
+      "bottom": 560,
+      "left": 304.828125
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span.lang \"vue\" is 50% covered by overlapping text (p)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "span.line:nth-of-type(18) > span:nth-of-type(1)",
+    "tagName": "span",
+    "rect": {
+      "x": 65,
+      "y": 932.59375,
+      "width": 35.75,
+      "height": 15,
+      "top": 932.59375,
+      "right": 100.75,
+      "bottom": 947.59375,
+      "left": 65
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"const\" is 100% covered by an opaque element (div.demo-box)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "span.line:nth-of-type(18) > span:nth-of-type(2)",
+    "tagName": "span",
+    "rect": {
+      "x": 100.75,
+      "y": 932.59375,
+      "width": 35.75,
+      "height": 15,
+      "top": 932.59375,
+      "right": 136.5,
+      "bottom": 947.59375,
+      "left": 100.75
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"form\" is 100% covered by an opaque element (div.demo-box)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "span.line:nth-of-type(18) > span:nth-of-type(4)",
+    "tagName": "span",
+    "rect": {
+      "x": 150.796875,
+      "y": 932.59375,
+      "width": 64.328125,
+      "height": 15,
+      "top": 932.59375,
+      "right": 215.125,
+      "bottom": 947.59375,
+      "left": 150.796875
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"reactive\" is 100% covered by an opaque element (div.demo-box)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "span.line:nth-of-type(18) > span:nth-of-type(5)",
+    "tagName": "span",
+    "rect": {
+      "x": 215.125,
+      "y": 932.59375,
+      "width": 14.296875,
+      "height": 15,
+      "top": 932.59375,
+      "right": 229.421875,
+      "bottom": 947.59375,
+      "left": 215.125
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"({\" is 100% covered by an opaque element (div.demo-box)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > pre.shiki.shiki-themes > code > span.line:nth-of-type(19) > span:nth-of-type(1)",
+    "tagName": "span",
+    "rect": {
+      "x": 65,
+      "y": 954.6875,
+      "width": 85.78125,
+      "height": 15,
+      "top": 954.6875,
+      "right": 150.78125,
+      "bottom": 969.6875,
+      "left": 65
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"taskName:\" is 100% covered by an opaque element (button.el-button.el-button--primary.el-button--default.lx-btn.lx-btn--primary.lx-btn--md)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > pre.shiki.shiki-themes > code > span.line:nth-of-type(21) > span:nth-of-type(1)",
+    "tagName": "span",
+    "rect": {
+      "x": 65,
+      "y": 998.875,
+      "width": 64.328125,
+      "height": 15,
+      "top": 998.875,
+      "right": 129.328125,
+      "bottom": 1013.875,
+      "left": 65
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"phone:\" is 100% covered by an opaque element (div.demo-box)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > pre.shiki.shiki-themes > code > span.line:nth-of-type(21) > span:nth-of-type(2)",
+    "tagName": "span",
+    "rect": {
+      "x": 129.328125,
+      "y": 998.875,
+      "width": 14.296875,
+      "height": 15,
+      "top": 998.875,
+      "right": 143.625,
+      "bottom": 1013.875,
+      "left": 129.328125
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"''\" is 100% covered by an opaque element (div.demo-box)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "details.details.custom-block:nth-of-type(2) > div.language-vue.vp-adaptive-theme > span.lang",
+    "tagName": "span",
+    "rect": {
+      "x": 304.828125,
+      "y": 1093,
+      "width": 21.171875,
+      "height": 24,
+      "top": 1093,
+      "right": 326,
+      "bottom": 1117,
+      "left": 304.828125
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span.lang \"vue\" is 50% covered by overlapping text (p)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  }
+]

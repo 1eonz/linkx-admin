@@ -1,0 +1,595 @@
+[
+  {
+    "name": "lxform",
+    "url": "http://localhost:4177/components/lxform",
+    "status": 200,
+    "finalUrl": "http://localhost:4177/components/lxform",
+    "preflight": {
+      "title": "Codex Injection Preflight",
+      "scriptValue": "ok"
+    },
+    "pageSummary": {
+      "title": "Codex Injection Preflight",
+      "h1": [
+        "数据录入表单\n​"
+      ],
+      "h2": [
+        "新增组件",
+        "基础",
+        "布局导航",
+        "数据展示",
+        "数据录入",
+        "反馈与浮层",
+        "何时使用\n​",
+        "基础校验表单（label 上置 · blur/change 触发）\n​",
+        "弹窗双列表单（LxDialog + columns=2 组合）\n​",
+        "行内搜索表单（inline）\n​",
+        "API — LxForm\n​",
+        "API — LxFormItem\n​",
+        "设计说明\n​",
+        "迁移指南（el-form → LxForm）\n​"
+      ],
+      "forms": [
+        {
+          "className": "el-form el-form--default el-form--label-top lx-form",
+          "itemCount": 5
+        }
+      ],
+      "controls": [
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "VPSwitch VPSwitchAppearance",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "新增组件",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "基础",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "布局导航",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "数据展示",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "数据录入",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "反馈与浮层",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "text": "",
+          "placeholder": "如：广场东侧夜间巡防",
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-input__inner",
+          "label": "任务名称"
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-select__input is-default",
+          "label": "责任网格"
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "text": "",
+          "placeholder": "值班民警手机号",
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-input__inner",
+          "label": "联系电话"
+        },
+        {
+          "tag": "textarea",
+          "type": null,
+          "text": "",
+          "placeholder": "选填",
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-textarea__inner",
+          "label": "现场备注"
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "提交校验",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--primary el-button--default lx-btn lx-btn--primary lx-btn--md",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "重置",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--default el-button--default lx-btn lx-btn--default lx-btn--md",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": null,
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "copy",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "编辑节点信息",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--primary el-button--default lx-btn lx-btn--primary lx-btn--md",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": null,
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "copy",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": null,
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "copy",
+          "label": null
+        }
+      ],
+      "bodyText": "Skip to content\nLxUI\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n\nLxProTable 数据表格\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxDutyCalendar 排班日历\n\nLxSectionTitle 区块标题\n\nLxAuthImg 鉴权图片\n\nLxDescriptions 详情描述\n\nLxPagination 分页\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxEmpty 空态\n\nLxGauge 圆环仪表\n\nLxNodeBadge 节点徽章\n\n权限消费\n\n数据录入\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\nLxTreeSelect 树形下拉\n\nLxDatePicker 日期选择\n\nLxInputNumber 数字输入\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxPasswordInput 密码输入框\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nOn this page\n何时使用\n基础校验表单（label 上置 · blur/change 触发）\n弹窗双列表单（LxDialog + columns=2 组合）\n行内搜索表单（inline）\nAPI — LxForm\nAPI — LxFormItem\n设计说明\n迁移指南（el-form → LxForm）\n数据录入表单\n​\n\nLxForm + LxFormItem：表单容器与表单项的 lx-ui 视觉封装，内部保留 Element Plus 校验实例契约。核心视觉依据为仓库根目录的 design/表单控件八件套/：32px 控件、12px 上置标签、16px 网格间距，以及 #ba1a1a 校验边线与 #fff5f5 错误底色。$attrs 全透传，存量 el-form 用法可逐步迁移。\n\n何时使用\n​\n弹窗表单（配 LxDialog + columns=2）、页面表单（columns=1）、行内搜索表单（inline）\n需要统一错误提示视觉的任何 el-form 场景\n基础校验表单（label 上置 · blur/change 触发）\n​\n任务名称\n责任网格\n选择网格\n联系电话\n现场备注\n提交校验\n重置\n查看代码\n\n要点：label-position 默认 top（设计稿表单 label 上置 12px/500）；rules 惯例 —— 输入类 trigger: 'blur'、选择类 trigger: 'change'；业务表单优先使用 LxFormItem 与公开的 LxInput/LxSelect/LxTextarea，存量 el-form-item 仍可在 LxForm 内获得组件库错误样式；新代码优先使用公开的 LxFormItem 和 Lx* 基础控件。\n\n弹窗双列表单（LxDialog + columns=2 组合）\n​\n编辑节点信息\n查看代码\n\n要点：columns=\"2\" 桌面双列网格按设计稿使用 16px 间距；视口宽度不大于 640px 时自动折为单列，所有字段（含 span=\"full\"）占满表单宽度。桌面多列模式仍保留 span 跨列语义。打开弹窗回显数据后 nextTick(() => formRef.value?.clearValidate()) 清残留校验 —— 这是全项目弹窗表单的惯用法。\n\n行内搜索表单（inline）\n​\nvue\n<LxForm :model=\"query\" inline>\n  <LxFormItem>\n    <LxInput v-model=\"query.keyword\" placeholder=\"组织名称\" clearable @keyup.enter=\"onSearch\" />\n  </LxFormItem>\n  <LxFormItem>\n    <LxSelect v-model=\"query.status\" placeholder=\"状态\" clearable :options=\"[{ label: '在线', value: '1' }]\" />\n  </LxFormItem>\n  <LxFormItem>\n    <LxButton type=\"primary\" @click=\"onSearch\">搜索</LxButton>\n  </LxFormItem>\n</LxForm>\nAPI — LxForm\n​\nProp\t说明\t类型\t默认值\nmodel\t表单数据对象（必传）\tRecord<string, any>\t—\nrules\t校验规则（支持 computed 动态规则）\tFormRules\t—\nlabel-position\tlabel 位置\t'top' | 'left' | 'right'\ttop\nlabel-width\tlabel 宽度（left/right 生效）\tstring | number\t—\ninline\t行内表单（与 columns 互斥）\tboolean\tfalse\ndisabled\t整表禁用\tboolean\tfalse\ncolumns\t网格列数（2/3 双列三列；视口 ≤640px 自动单列）\tnumber\t1\nrow-gap\t网格行间距\tnumber\t16\n\n透传：status-icon / scroll-to-error / hide-required-asterisk / label-suffix / validate-on-rule-change / size / @validate 等 el-form 全量 props 与事件原样透传。\n\nRef 方法（ref<LxFormInstance>()）：\n\n方法\t说明\nvalidate\t全表校验，Promise；.catch() 分支提示用户\nvalidateField\t校验指定字段（跨字段联动校验用）\nresetFields\t重置为初始值并清校验\nclearValidate\t清校验标记（弹窗回显后必调）\nscrollToField\t滚动到指定字段\nAPI — LxFormItem\n​\nProp\t说明\t类型\t默认值\nlabel\t字段标签\tstring\t—\nprop\tmodel 字段路径（校验绑定）\tstring\t—\nrules\t仅本项校验规则\tFormItemRule[]\t—\nrequired\t必填星号（视觉标记）\tboolean\t—\nspan\t桌面网格跨列：1 / 2… / 'full' 通栏；窄屏时字段自动占满单列\tnumber | 'full'\t1\n\n插槽全量转发（含 #error 自定义错误渲染、#label）。\n\n设计说明\n​\n错误态规格（表单控件设计标本）：输入框 1px #ba1a1a 边线 + #fff5f5 浅红底；错误提示 11px #ba1a1a + 12px 圆圈感叹号图标。\n兼容范围：el-input / el-select / el-textarea / el-date-picker / el-cascader 等全系输入容器的错误态均已覆盖。\nlabel 上置是设计稿表单主形态；老项目 label-position=\"left\" + label-width=\"120px\" 用法完全兼容。\n焦点边界：输入、文本域和日期使用贴边 1px 主色边线加 2px 光晕；选择器、单选和多选只改变自身边界或方框外零间隙光晕，不在组件外叠加第二圈，避免设计稿之外的蓝色外框。\n迁移指南（el-form → LxForm）\n​\n标签 el-form → LxForm、el-form-item → LxFormItem（或不改，原生 el-form-item 在 LxForm 内同样生效）\nprops 原样保留（model / rules / label-width / disabled / @validate…）\nconst formRef = ref<FormInstance>() → ref<LxFormInstance>()，方法名不变\n删除业务里自写的校验红字样式，交由组件库接管\nPager\nPrevious page\n权限消费\nNext page\nLxInput 输入框"
+    },
+    "consoleEvents": [
+      {
+        "type": "debug",
+        "text": "[vite] connecting..."
+      },
+      {
+        "type": "debug",
+        "text": "[vite] connected."
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "blockedRequests": []
+  },
+  {
+    "name": "lxdynamicform",
+    "url": "http://localhost:4177/components/lxdynamicform",
+    "status": 200,
+    "finalUrl": "http://localhost:4177/components/lxdynamicform",
+    "preflight": null,
+    "pageSummary": {
+      "title": "LxDynamicForm 动态表单 | LxUI",
+      "h1": [
+        "LxDynamicForm 动态表单\n​"
+      ],
+      "h2": [
+        "新增组件",
+        "基础",
+        "布局导航",
+        "数据展示",
+        "数据录入",
+        "反馈与浮层",
+        "交互示例\n​",
+        "Props\n​",
+        "字段 schema\n​",
+        "Events\n​",
+        "插槽与实例\n​",
+        "使用边界\n​"
+      ],
+      "forms": [
+        {
+          "className": "el-form el-form--default el-form--label-top lx-form lx-form--grid lx-dynamic-form lx-dynamic-form",
+          "itemCount": 6
+        }
+      ],
+      "controls": [
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "VPSwitch VPSwitchAppearance",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "新增组件",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "基础",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "布局导航",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "数据展示",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "数据录入",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "反馈与浮层",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "item",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--primary el-button--small lx-btn lx-btn--primary lx-btn--sm",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm",
+          "label": null
+        },
+        {
+          "tag": "input",
+          "type": "checkbox",
+          "text": "on",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-checkbox__original",
+          "label": ""
+        },
+        {
+          "tag": "input",
+          "type": "checkbox",
+          "text": "on",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-checkbox__original",
+          "label": ""
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--primary el-button--small lx-btn lx-btn--primary lx-btn--sm",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm",
+          "label": null
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "text": "",
+          "placeholder": "输入任务名称",
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-input__inner",
+          "label": "任务名称"
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-select__input is-default",
+          "label": "任务类型"
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-select__input is-default",
+          "label": "负责人"
+        },
+        {
+          "tag": "input",
+          "type": "checkbox",
+          "text": "on",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-switch__input",
+          "label": "启用任务"
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "点击或拖拽文件到此处上传\n\n支持扩展名：image/*，单文件不超过 10MB\n\n浏览本地文件",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-upload el-upload--text is-drag",
+          "label": "任务封面（单张）"
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "浏览本地文件",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "lx-upload__browse",
+          "label": "任务封面（单张）"
+        },
+        {
+          "tag": "div",
+          "type": null,
+          "text": "点击或拖拽文件到此处上传\n\n支持扩展名：image/*，单文件不超过 10MB\n\n浏览本地文件",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-upload el-upload--text is-drag",
+          "label": "现场图片（多张）"
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "浏览本地文件",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "lx-upload__browse",
+          "label": "现场图片（多张）"
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "全部清空",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "lx-upload__clear",
+          "label": "现场图片（多张）"
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": "移除 东门现场.jpg",
+          "ariaInvalid": null,
+          "className": "lx-upload__remove",
+          "label": "现场图片（多张）"
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": "移除 西门现场.jpg",
+          "ariaInvalid": null,
+          "className": "lx-upload__remove",
+          "label": "现场图片（多张）"
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "提交校验",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--primary el-button--default lx-btn lx-btn--primary lx-btn--md",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "text": "重置",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "el-button el-button--default el-button--default lx-btn lx-btn--default lx-btn--md",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": null,
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "copy",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": null,
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "copy",
+          "label": null
+        },
+        {
+          "tag": "button",
+          "type": null,
+          "text": "",
+          "placeholder": null,
+          "ariaLabel": null,
+          "ariaInvalid": null,
+          "className": "copy",
+          "label": null
+        }
+      ],
+      "bodyText": "Skip to content\nLxUI\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n\nLxProTable 数据表格\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxDutyCalendar 排班日历\n\nLxSectionTitle 区块标题\n\nLxAuthImg 鉴权图片\n\nLxDescriptions 详情描述\n\nLxPagination 分页\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxEmpty 空态\n\nLxGauge 圆环仪表\n\nLxNodeBadge 节点徽章\n\n权限消费\n\n数据录入\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\nLxTreeSelect 树形下拉\n\nLxDatePicker 日期选择\n\nLxInputNumber 数字输入\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxPasswordInput 密码输入框\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nOn this page\n交互示例\nProps\n字段 schema\nEvents\n插槽与实例\n使用边界\nLxDynamicForm 动态表单\n​\n\n通过字段 schema 组合 Lx* 基础控件，使用 v-model 或 value + change(nextValue) 受控 API 向宿主报告字段变化。后者采用 React 常见的值/变化事件命名，但仍是 Vue 组件契约，可在 Vue 模板或 TSX 中使用，不依赖 React runtime。每种字段类型由独立子组件管理；远程候选项和上传适配器由宿主提供，组件不访问业务接口。\n\n交互示例\n​\n演示设置\n任务名称\n任务类型\n日常巡防\n负责人\n搜索候选人员\n启用任务\n任务封面（单张）\n\n点击或拖拽文件到此处上传\n\n支持扩展名：image/*，单文件不超过 10MB\n\n浏览本地文件\n现场图片（多张）\n\n点击或拖拽文件到此处上传\n\n支持扩展名：image/*，单文件不超过 10MB\n\n浏览本地文件\n已选 2 个文件\n全部清空\n东门现场.jpg\n上传成功\n180 KB\n西门现场.jpg\n上传成功\n216 KB\n提交校验\n重置\n候选人员：3 项\n查看示例代码\n\n示例可切换固定列数和自适应布局，显示任务类型联动字段、受控禁用、单张/多张图片的 LxUpload 列表、表单校验、重置及 HUD 深色令牌。候选人员与图片上传均由宿主注入的内存 Mock 驱动，涵盖成功、空结果、加载、失败和重试；不会发起真实网络请求。\n\nProps\n​\n名称\t类型\t默认值\t说明\nmodelValue\tRecord<string, unknown>\t—\t受控表单数据，配合 v-model；保留旧契约。\nvalue\tRecord<string, unknown>\t—\t受控表单数据；与 change(nextModel) 搭配，同时存在时优先使用。\nfields\tLxDynamicFormField[]\t必填\t字段 schema，按数组顺序渲染。\ncolumns\t1 | 2 | 3 | 4\t1\tadaptive=false 时的固定列数。\nadaptive\tboolean\ttrue\t按容器宽度自适应为 3/2/1 列；窄容器不依赖视口宽度。\nlabelWidth\tstring | number\t''\t表单标签宽度，传给表单容器。\nlabelPosition\t'top' | 'left' | 'right'\t'top'\t标签位置。\ndisabled\tboolean\tfalse\t禁用内置字段，且传给自定义插槽的 disabled 参数。\nrowGap\tnumber\t16\t行间距，单位 px。\n字段 schema\n​\n字段\t类型\t说明\nkey、label、type\tstring、string、LxDynamicFormFieldType\t字段键、可见标签和控件类型。\nrequired\tboolean\t生成默认必填校验；复选/多选字段要求非空数组，必填开关需匹配 activeValue（默认 true）；自定义规则由 rules 追加。\nspan\t1 | 2 | 3 | 4 | 6 | 8 | 12 | 24\t24 栅格单位。实际占用列数按当前 columns 向上取整，24 通栏。\nvisible\tboolean | (model) => boolean\t依据当前表单 model 控制显示。\ndisabled\tboolean | (model) => boolean\t依据当前表单 model 控制字段禁用。\ndefaultValue\tunknown\tmodelValue[key] === undefined 时作为初始显示值和校验值；不会在挂载时主动修改父级对象。\nprops\tRecord<string, unknown>\t传给对应 Lx* 控件的属性；上传可配置 accept、multiple、limit 与宿主适配器。\noptions\tLxDynamicFormOption[]\t选择、单选和复选项，包含 label、value、可选 disabled。\nrules\tFormItemRule[]\t字段校验规则。\nslot\tstring\tslot、upload 等自定义字段的具名插槽；默认使用 key。\n\n内置 type：input、password、textarea、number、select、remote-select、tree-select、date、daterange、switch、radio、checkbox、upload、slot。remote-select 由宿主将候选项和 remoteMethod 经 options、props 传入；upload 默认使用 LxUpload，根据 props.multiple 管理单文件或多文件列表，支持进度、失败重试、取消和移除；同名具名插槽存在时继续使用旧的自定义上传契约。\n\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tmodel\t字段改变或调用 resetFields() 后，返回新的表单对象。\nchange\tnextModel\t与 value 搭配的受控事件，返回更新后的完整表单对象。\nfield-change\t(key, value, field)\t单个字段更新后发出；禁用字段不更新。\nvalidate\tvalid\t调用实例 validate() 后报告全表结果。\nsubmit\tmodel\tvalidate() 全表成功时发出，包含 schema 默认值。\nreset\t无\t调用实例 resetFields() 后发出。\n插槽与实例\n​\n\n具名字段插槽接收 { field, value, disabled, update }。宿主自定义控件应遵守 disabled，并通过 update(value) 通知组件；组件会发出 update:modelValue 和 field-change。全表禁用时 update 会忽略写入。\n\nvue\n<LxDynamicForm ref=\"formRef\" v-model=\"form\" :fields=\"fields\">\n  <template #attachment=\"{ value, disabled, update }\">\n    <MyUpload :model-value=\"value\" :disabled=\"disabled\" @update:model-value=\"update\" />\n  </template>\n</LxDynamicForm>\n\n受控值调用：\n\nvue\n<LxDynamicForm :value=\"form\" :fields=\"fields\" @change=\"form = $event\" />\n\n实例公开 validate()、validateField()、resetFields()、clearValidate() 和 scrollToField()。validate() 返回 Promise<boolean>，仅全表成功时发出 submit；validateField() 保留 Element Plus 的校验返回值。resetFields() 恢复初始值、清除校验并通过 update:modelValue 和 reset 通知宿主，不直接修改父级对象。\n\n使用边界\n​\n表单数据由宿主持有；默认值只用于缺失字段，显式 null、false、0 和空字符串不会被覆盖。\nspan 按 24 栅格折算；默认自适应以三列为基准，容器小于 760px 折为两列，小于 520px 折为单列，所有字段占满一行。\n远程候选请求的取消、失败反馈和重试由宿主适配层处理。Demo 的内存 Mock 仅验证组件交互，不代表真实后端联调。\n上传控件由 LxUpload 管理文件列表和状态，上传请求、鉴权和业务提交仍由宿主通过 httpRequest/adapter 注入；单图字段在 change 中返回首个文件，多图字段返回文件数组。\nPager\nPrevious page\nLxSearchBar 检索面板\nNext page\nLxStatusSwitch 状态开关"
+    },
+    "consoleEvents": [
+      {
+        "type": "debug",
+        "text": "[vite] connecting..."
+      },
+      {
+        "type": "debug",
+        "text": "[vite] connected."
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "blockedRequests": []
+  }
+]

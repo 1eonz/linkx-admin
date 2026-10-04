@@ -1,0 +1,620 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#VPContent"
+  - banner:
+    - generic:
+      - generic:
+        - generic:
+          - link "LxUI" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e7]: LxUI
+          - generic [ref=e8]:
+            - navigation "Main Navigation" [ref=e9]:
+              - generic [ref=e10]: Main Navigation
+              - link "首页" [ref=e11] [cursor=pointer]:
+                - /url: /
+                - generic [ref=e12]: 首页
+              - link "组件" [ref=e13] [cursor=pointer]:
+                - /url: /components/lxsidebar.html
+                - generic [ref=e14]: 组件
+              - link "新增组件" [ref=e15] [cursor=pointer]:
+                - /url: /components/new-components.html
+                - generic [ref=e16]: 新增组件
+            - switch "Switch to dark theme" [ref=e18] [cursor=pointer]
+  - complementary [ref=e23]:
+    - navigation "Sidebar Navigation" [ref=e25]:
+      - generic [ref=e26]: Sidebar Navigation
+      - generic [ref=e28]:
+        - button "新增组件" [ref=e29]:
+          - heading "新增组件" [level=2] [ref=e31]
+        - link "新增组件总览" [ref=e36] [cursor=pointer]:
+          - /url: /components/new-components.html
+          - paragraph [ref=e37]: 新增组件总览
+      - generic [ref=e39]:
+        - button "基础" [ref=e40]:
+          - heading "基础" [level=2] [ref=e42]
+        - generic [ref=e43]:
+          - link "基础控件桥接" [ref=e47] [cursor=pointer]:
+            - /url: /components/element-bridge.html
+            - paragraph [ref=e48]: 基础控件桥接
+          - link "LxButton 按钮" [ref=e52] [cursor=pointer]:
+            - /url: /components/lxbutton.html
+            - paragraph [ref=e53]: LxButton 按钮
+          - link "LxIcon 图标总览" [ref=e57] [cursor=pointer]:
+            - /url: /components/lxicons.html
+            - paragraph [ref=e58]: LxIcon 图标总览
+      - generic [ref=e60]:
+        - button "布局导航" [ref=e61]:
+          - heading "布局导航" [level=2] [ref=e63]
+        - generic [ref=e64]:
+          - link "LxSidebar 侧边栏" [ref=e68] [cursor=pointer]:
+            - /url: /components/lxsidebar.html
+            - paragraph [ref=e69]: LxSidebar 侧边栏
+          - link "LxNavbar 顶部导航" [ref=e73] [cursor=pointer]:
+            - /url: /components/lxnavbar.html
+            - paragraph [ref=e74]: LxNavbar 顶部导航
+          - link "LxBreadcrumb 面包屑" [ref=e78] [cursor=pointer]:
+            - /url: /components/lxbreadcrumb.html
+            - paragraph [ref=e79]: LxBreadcrumb 面包屑
+          - link "LxTabsBar 页签栏" [ref=e83] [cursor=pointer]:
+            - /url: /components/lxtabsbar.html
+            - paragraph [ref=e84]: LxTabsBar 页签栏
+          - link "LxSplitLayout 分栏布局" [ref=e88] [cursor=pointer]:
+            - /url: /components/lxsplitlayout.html
+            - paragraph [ref=e89]: LxSplitLayout 分栏布局
+          - link "LxSelectTree 组织树选择" [ref=e93] [cursor=pointer]:
+            - /url: /components/lxselecttree.html
+            - paragraph [ref=e94]: LxSelectTree 组织树选择
+      - generic [ref=e96]:
+        - button "数据展示" [ref=e97]:
+          - heading "数据展示" [level=2] [ref=e99]
+        - generic [ref=e100]:
+          - link "LxProTable 数据表格" [ref=e104] [cursor=pointer]:
+            - /url: /components/lxprotable.html
+            - paragraph [ref=e105]: LxProTable 数据表格
+          - link "LxPageCard 页面容器" [ref=e109] [cursor=pointer]:
+            - /url: /components/lxpagecard.html
+            - paragraph [ref=e110]: LxPageCard 页面容器
+          - link "LxMetricCard 指标卡" [ref=e114] [cursor=pointer]:
+            - /url: /components/lxmetriccard.html
+            - paragraph [ref=e115]: LxMetricCard 指标卡
+          - link "LxDutyCalendar 排班日历" [ref=e119] [cursor=pointer]:
+            - /url: /components/lxdutycalendar.html
+            - paragraph [ref=e120]: LxDutyCalendar 排班日历
+          - link "LxSectionTitle 区块标题" [ref=e124] [cursor=pointer]:
+            - /url: /components/lxsectiontitle.html
+            - paragraph [ref=e125]: LxSectionTitle 区块标题
+          - link "LxAuthImg 鉴权图片" [ref=e129] [cursor=pointer]:
+            - /url: /components/lxauthimg.html
+            - paragraph [ref=e130]: LxAuthImg 鉴权图片
+          - link "LxDescriptions 详情描述" [ref=e134] [cursor=pointer]:
+            - /url: /components/lxdescriptions.html
+            - paragraph [ref=e135]: LxDescriptions 详情描述
+          - link "LxPagination 分页" [ref=e139] [cursor=pointer]:
+            - /url: /components/lxpagination.html
+            - paragraph [ref=e140]: LxPagination 分页
+          - link "LxVirtualTree 虚拟树" [ref=e144] [cursor=pointer]:
+            - /url: /components/lxvirtualtree.html
+            - paragraph [ref=e145]: LxVirtualTree 虚拟树
+          - link "LxTransferPanel 双栏穿梭" [ref=e149] [cursor=pointer]:
+            - /url: /components/lxtransferpanel.html
+            - paragraph [ref=e150]: LxTransferPanel 双栏穿梭
+          - link "LxStatusDot 状态点" [ref=e154] [cursor=pointer]:
+            - /url: /components/lxstatusdot.html
+            - paragraph [ref=e155]: LxStatusDot 状态点
+          - link "LxTag 浅底标签" [ref=e159] [cursor=pointer]:
+            - /url: /components/lxtag.html
+            - paragraph [ref=e160]: LxTag 浅底标签
+          - link "LxCodeSlot 代码槽" [ref=e164] [cursor=pointer]:
+            - /url: /components/lxcodeslot.html
+            - paragraph [ref=e165]: LxCodeSlot 代码槽
+          - link "LxActionButtons 行内操作" [ref=e169] [cursor=pointer]:
+            - /url: /components/lxactionbuttons.html
+            - paragraph [ref=e170]: LxActionButtons 行内操作
+          - link "LxEmpty 空态" [ref=e174] [cursor=pointer]:
+            - /url: /components/lxempty.html
+            - paragraph [ref=e175]: LxEmpty 空态
+          - link "LxGauge 圆环仪表" [ref=e179] [cursor=pointer]:
+            - /url: /components/lxgauge.html
+            - paragraph [ref=e180]: LxGauge 圆环仪表
+          - link "LxNodeBadge 节点徽章" [ref=e184] [cursor=pointer]:
+            - /url: /components/lxnodebadge.html
+            - paragraph [ref=e185]: LxNodeBadge 节点徽章
+          - link "权限消费" [ref=e189] [cursor=pointer]:
+            - /url: /components/permissions.html
+            - paragraph [ref=e190]: 权限消费
+      - generic [ref=e192]:
+        - button "数据录入" [ref=e193]:
+          - heading "数据录入" [level=2] [ref=e195]
+        - generic [ref=e196]:
+          - link "LxForm 表单" [ref=e200] [cursor=pointer]:
+            - /url: /components/lxform.html
+            - paragraph [ref=e201]: LxForm 表单
+          - link "LxInput 输入框" [ref=e205] [cursor=pointer]:
+            - /url: /components/lxinput.html
+            - paragraph [ref=e206]: LxInput 输入框
+          - link "LxTextarea 文本域" [ref=e210] [cursor=pointer]:
+            - /url: /components/lxtextarea.html
+            - paragraph [ref=e211]: LxTextarea 文本域
+          - link "LxRadio 单选组" [ref=e215] [cursor=pointer]:
+            - /url: /components/lxradio.html
+            - paragraph [ref=e216]: LxRadio 单选组
+          - link "LxCheckbox 复选组" [ref=e220] [cursor=pointer]:
+            - /url: /components/lxcheckbox.html
+            - paragraph [ref=e221]: LxCheckbox 复选组
+          - link "LxSwitch 开关" [ref=e225] [cursor=pointer]:
+            - /url: /components/lxswitch.html
+            - paragraph [ref=e226]: LxSwitch 开关
+          - link "LxSelect 下拉选择" [ref=e230] [cursor=pointer]:
+            - /url: /components/lxselect.html
+            - paragraph [ref=e231]: LxSelect 下拉选择
+          - link "LxTreeSelect 树形下拉" [ref=e235] [cursor=pointer]:
+            - /url: /components/lxtreeselect.html
+            - paragraph [ref=e236]: LxTreeSelect 树形下拉
+          - link "LxDatePicker 日期选择" [ref=e240] [cursor=pointer]:
+            - /url: /components/lxdatepicker.html
+            - paragraph [ref=e241]: LxDatePicker 日期选择
+          - link "LxInputNumber 数字输入" [ref=e245] [cursor=pointer]:
+            - /url: /components/lxinputnumber.html
+            - paragraph [ref=e246]: LxInputNumber 数字输入
+          - link "LxSearchBar 检索面板" [ref=e250] [cursor=pointer]:
+            - /url: /components/lxsearchbar.html
+            - paragraph [ref=e251]: LxSearchBar 检索面板
+          - link "LxDynamicForm 动态表单" [ref=e255] [cursor=pointer]:
+            - /url: /components/lxdynamicform.html
+            - paragraph [ref=e256]: LxDynamicForm 动态表单
+          - link "LxStatusSwitch 状态开关" [ref=e260] [cursor=pointer]:
+            - /url: /components/lxstatusswitch.html
+            - paragraph [ref=e261]: LxStatusSwitch 状态开关
+          - link "LxPasswordInput 密码输入框" [ref=e265] [cursor=pointer]:
+            - /url: /components/lxpasswordinput.html
+            - paragraph [ref=e266]: LxPasswordInput 密码输入框
+          - link "LxUpload 文件上传" [ref=e270] [cursor=pointer]:
+            - /url: /components/lxupload.html
+            - paragraph [ref=e271]: LxUpload 文件上传
+          - link "LxSelectPagination 远程分页选择" [ref=e275] [cursor=pointer]:
+            - /url: /components/lxselectpagination.html
+            - paragraph [ref=e276]: LxSelectPagination 远程分页选择
+      - generic [ref=e278]:
+        - button "反馈与浮层" [ref=e279]:
+          - heading "反馈与浮层" [level=2] [ref=e281]
+        - generic [ref=e282]:
+          - link "LxMessage 全局提示" [ref=e286] [cursor=pointer]:
+            - /url: /components/lxmessage.html
+            - paragraph [ref=e287]: LxMessage 全局提示
+          - link "LxConfirm 确认框" [ref=e291] [cursor=pointer]:
+            - /url: /components/lxconfirm.html
+            - paragraph [ref=e292]: LxConfirm 确认框
+          - link "LxDialog 表单弹窗" [ref=e296] [cursor=pointer]:
+            - /url: /components/lxdialog.html
+            - paragraph [ref=e297]: LxDialog 表单弹窗
+          - link "LxDrawer 详情抽屉" [ref=e301] [cursor=pointer]:
+            - /url: /components/lxdrawer.html
+            - paragraph [ref=e302]: LxDrawer 详情抽屉
+          - link "LxFormErrorBanner 校验横幅" [ref=e306] [cursor=pointer]:
+            - /url: /components/lxformerrorbanner.html
+            - paragraph [ref=e307]: LxFormErrorBanner 校验横幅
+  - generic [ref=e310]:
+    - navigation "On this page" [ref=e316]:
+      - generic [ref=e317]:
+        - heading "On this page" [level=2] [ref=e319]
+        - list [ref=e320]:
+          - listitem [ref=e321]:
+            - link "交互示例" [ref=e322] [cursor=pointer]:
+              - /url: "#交互示例"
+          - listitem [ref=e323]:
+            - link "Props" [ref=e324] [cursor=pointer]:
+              - /url: "#props"
+          - listitem [ref=e325]:
+            - link "Events" [ref=e326] [cursor=pointer]:
+              - /url: "#events"
+          - listitem [ref=e327]:
+            - link "Slots" [ref=e328] [cursor=pointer]:
+              - /url: "#slots"
+          - listitem [ref=e329]:
+            - link "Exposes" [ref=e330] [cursor=pointer]:
+              - /url: "#exposes"
+          - listitem [ref=e331]:
+            - link "对齐说明" [ref=e332] [cursor=pointer]:
+              - /url: "#对齐说明"
+          - listitem [ref=e333]:
+            - link "可访问性" [ref=e334] [cursor=pointer]:
+              - /url: "#可访问性"
+    - generic [ref=e337]:
+      - main [ref=e338]:
+        - generic [ref=e340]:
+          - heading "LxInputNumber 数字输入器 Permalink to \"LxInputNumber 数字输入器\"" [level=1] [ref=e341]:
+            - text: LxInputNumber 数字输入器
+            - link "Permalink to \"LxInputNumber 数字输入器\"" [ref=e342] [cursor=pointer]:
+              - /url: "#lxinputnumber-数字输入器"
+              - text: "#"
+          - paragraph [ref=e343]:
+            - text: 基于 Element Plus
+            - code [ref=e344]: el-input-number
+            - text: 内核二次封装的数字输入器。默认宽 160px、值文字等宽 600 字重左对齐、步进钮右侧垂直拆分；步进钮 hover 图标转主色由 EP 内核原生提供。未声明的 EP props（
+            - code [ref=e345]: valueOnClear
+            - text: /
+            - code [ref=e346]: autocomplete
+            - text: 等）经 attrs 透传，兼容旧用法。
+          - paragraph [ref=e347]:
+            - text: 视觉规范源：
+            - code [ref=e348]: design/表单控件八件套/code.html
+            - text: 05。
+          - heading "交互示例 Permalink to \"交互示例\"" [level=2] [ref=e349]:
+            - text: 交互示例
+            - link "Permalink to \"交互示例\"" [ref=e350] [cursor=pointer]:
+              - /url: "#交互示例"
+              - text: "#"
+          - generic [ref=e351]:
+            - generic [ref=e353]:
+              - checkbox "HUD 深色主题" [ref=e354]
+              - text: HUD 深色主题
+            - generic [ref=e355]:
+              - heading "基础步进（160px 宽 + 右侧垂直拆分步进钮 + 值文字 mono 左对齐）" [level=4] [ref=e356]
+              - generic [ref=e357]:
+                - generic [ref=e358]:
+                  - generic [ref=e359]: 巡逻车组配置配额（步长 1）
+                  - generic [ref=e360]:
+                    - button "decrease number" [ref=e361] [cursor=pointer]:
+                      - img [ref=e363]
+                    - button "increase number" [ref=e365] [cursor=pointer]:
+                      - img [ref=e367]
+                    - spinbutton "巡逻车组配置配额（步长 1）" [ref=e371]: "30"
+                - generic [ref=e372]:
+                  - generic [ref=e373]: 告警确认时限（分钟，步长 5）
+                  - generic [ref=e374]:
+                    - button "decrease number" [ref=e375] [cursor=pointer]:
+                      - img [ref=e377]
+                    - button "increase number" [ref=e379] [cursor=pointer]:
+                      - img [ref=e381]
+                    - spinbutton "告警确认时限（分钟，步长 5）" [ref=e385]: "30"
+              - paragraph [ref=e386]: 步进钮 hover 时图标转主色 + 浅灰底；步长 5 + step-strictly 示例只允许输入 5 的倍数。
+            - generic [ref=e387]:
+              - heading "极值边界（max=100：达到上限后增加钮禁用半透明）" [level=4] [ref=e388]
+              - generic [ref=e389]:
+                - generic [ref=e390]: 最高并发处警上限
+                - generic [ref=e391]:
+                  - button "decrease number" [ref=e392] [cursor=pointer]:
+                    - img [ref=e394]
+                  - button "increase number" [ref=e396]:
+                    - img [ref=e398]
+                  - spinbutton "最高并发处警上限" [ref=e402]: "100"
+              - paragraph [ref=e403]: 已触发最大值阈值限制（Max = 100）；减少钮仍可操作，回落后增加钮恢复可用。
+            - generic [ref=e404]:
+              - heading "小数步长与精度（step 0.1 / precision 1：值守灵敏度系数）" [level=4] [ref=e405]
+              - generic [ref=e406]:
+                - generic [ref=e407]:
+                  - generic [ref=e408]: 灵敏度系数（0.1 步长）
+                  - generic [ref=e409]:
+                    - button "decrease number" [ref=e410] [cursor=pointer]:
+                      - img [ref=e412]
+                    - button "increase number" [ref=e414] [cursor=pointer]:
+                      - img [ref=e416]
+                    - spinbutton "灵敏度系数（0.1 步长）" [ref=e420]: "0.5"
+                - generic [ref=e421]:
+                  - generic [ref=e422]: 无步进钮形态（controls=false）
+                  - spinbutton "无步进钮形态（controls=false）" [ref=e426]: "0.5"
+            - generic [ref=e427]:
+              - heading "尺寸档（sm=28px / md=32px 基准 / lg=40px）" [level=4] [ref=e428]
+              - generic [ref=e429]:
+                - generic [ref=e430]:
+                  - generic [ref=e431]: 紧凑档 sm
+                  - generic [ref=e432]:
+                    - button "decrease number" [ref=e433] [cursor=pointer]:
+                      - img [ref=e435]
+                    - button "increase number" [ref=e437] [cursor=pointer]:
+                      - img [ref=e439]
+                    - spinbutton "紧凑档 sm" [ref=e443]: "30"
+                - generic [ref=e444]:
+                  - generic [ref=e445]: 基准档 md（默认）
+                  - generic [ref=e446]:
+                    - button "decrease number" [ref=e447] [cursor=pointer]:
+                      - img [ref=e449]
+                    - button "increase number" [ref=e451] [cursor=pointer]:
+                      - img [ref=e453]
+                    - spinbutton "基准档 md（默认）" [ref=e457]: "30"
+                - generic [ref=e458]:
+                  - generic [ref=e459]: 宽松档 lg
+                  - generic [ref=e460]:
+                    - button "decrease number" [ref=e461] [cursor=pointer]:
+                      - img [ref=e463]
+                    - button "increase number" [ref=e465] [cursor=pointer]:
+                      - img [ref=e467]
+                    - spinbutton "宽松档 lg" [ref=e471]: "30"
+            - generic [ref=e472]:
+              - heading "禁用态（半透明 + 禁用手势）" [level=4] [ref=e473]
+              - generic [ref=e474]:
+                - generic [ref=e475]: 省厅锁定配额（禁用）
+                - generic [ref=e476]:
+                  - button "decrease number" [ref=e477] [cursor=pointer]:
+                    - img [ref=e479]
+                  - button "increase number" [ref=e481] [cursor=pointer]:
+                    - img [ref=e483]
+                  - spinbutton "省厅锁定配额（禁用）" [disabled] [ref=e487]: "12"
+            - paragraph [ref=e488]: 巡逻车组配额：30 → 31
+            - paragraph [ref=e489]: "默认宽 160px / 32px 高 / 4px 圆角 / 1px #dcdfe6 描边，hover 与焦点转主色光环； value-on-clear / autocomplete 等低频 props 经 attrs 透传给 EP 内核。"
+          - group [ref=e490]:
+            - generic "查看示例代码" [ref=e491] [cursor=pointer]
+          - heading "Props Permalink to \"Props\"" [level=2] [ref=e492]:
+            - text: Props
+            - link "Permalink to \"Props\"" [ref=e493] [cursor=pointer]:
+              - /url: "#props"
+              - text: "#"
+          - paragraph [ref=e494]:
+            - text: 字段通过
+            - code [ref=e495]: id
+            - text: 与外部
+            - code [ref=e496]: <label for>
+            - text: 关联，
+            - code [ref=e497]: id
+            - text: 经 attrs 传入内核的原生数字输入。步进按钮的内核名称与数值字段标签分别保留。
+          - table [ref=e498]:
+            - rowgroup [ref=e499]:
+              - row "名称 类型 默认值 说明" [ref=e500]:
+                - columnheader "名称" [ref=e501]
+                - columnheader "类型" [ref=e502]
+                - columnheader "默认值" [ref=e503]
+                - columnheader "说明" [ref=e504]
+            - rowgroup [ref=e505]:
+              - row "modelValue number | undefined — 数值（v-model；清空后为 undefined）。" [ref=e506]:
+                - cell "modelValue" [ref=e507]:
+                  - code [ref=e508]: modelValue
+                - cell "number | undefined" [ref=e509]:
+                  - code [ref=e510]: number | undefined
+                - cell "—" [ref=e511]
+                - cell "数值（v-model；清空后为 undefined）。" [ref=e512]:
+                  - text: 数值（v-model；清空后为
+                  - code [ref=e513]: undefined
+                  - text: ）。
+              - row "min number -Infinity 最小值（达到后增加钮禁用）。" [ref=e514]:
+                - cell "min" [ref=e515]:
+                  - code [ref=e516]: min
+                - cell "number" [ref=e517]:
+                  - code [ref=e518]: number
+                - cell "-Infinity" [ref=e519]:
+                  - code [ref=e520]: "-Infinity"
+                - cell "最小值（达到后增加钮禁用）。" [ref=e521]
+              - row "max number Infinity 最大值（达到后减少钮禁用）。" [ref=e522]:
+                - cell "max" [ref=e523]:
+                  - code [ref=e524]: max
+                - cell "number" [ref=e525]:
+                  - code [ref=e526]: number
+                - cell "Infinity" [ref=e527]:
+                  - code [ref=e528]: "Infinity"
+                - cell "最大值（达到后减少钮禁用）。" [ref=e529]
+              - row "step number 1 步长。" [ref=e530]:
+                - cell "step" [ref=e531]:
+                  - code [ref=e532]: step
+                - cell "number" [ref=e533]:
+                  - code [ref=e534]: number
+                - cell "1" [ref=e535]:
+                  - code [ref=e536]: "1"
+                - cell "步长。" [ref=e537]
+              - row "stepStrictly boolean false 只允许输入步进的倍数。" [ref=e538]:
+                - cell "stepStrictly" [ref=e539]:
+                  - code [ref=e540]: stepStrictly
+                - cell "boolean" [ref=e541]:
+                  - code [ref=e542]: boolean
+                - cell "false" [ref=e543]:
+                  - code [ref=e544]: "false"
+                - cell "只允许输入步进的倍数。" [ref=e545]
+              - row "precision number — 数值精度（小数位数）。" [ref=e546]:
+                - cell "precision" [ref=e547]:
+                  - code [ref=e548]: precision
+                - cell "number" [ref=e549]:
+                  - code [ref=e550]: number
+                - cell "—" [ref=e551]
+                - cell "数值精度（小数位数）。" [ref=e552]
+              - row "disabled boolean —（undefined） 禁用态。默认未设置：ElForm 禁用态可正常传导；显式传 true/false 才覆盖继承。" [ref=e553]:
+                - cell "disabled" [ref=e554]:
+                  - code [ref=e555]: disabled
+                - cell "boolean" [ref=e556]:
+                  - code [ref=e557]: boolean
+                - cell "—（undefined）" [ref=e558]:
+                  - text: —（
+                  - code [ref=e559]: undefined
+                  - text: ）
+                - cell "禁用态。默认未设置：ElForm 禁用态可正常传导；显式传 true/false 才覆盖继承。" [ref=e560]:
+                  - text: 禁用态。默认未设置：
+                  - code [ref=e561]: ElForm
+                  - text: 禁用态可正常传导；显式传
+                  - code [ref=e562]: "true"
+                  - text: /
+                  - code [ref=e563]: "false"
+                  - text: 才覆盖继承。
+              - row "controls boolean true 是否显示步进钮（false 时纯数字输入）。" [ref=e564]:
+                - cell "controls" [ref=e565]:
+                  - code [ref=e566]: controls
+                - cell "boolean" [ref=e567]:
+                  - code [ref=e568]: boolean
+                - cell "true" [ref=e569]:
+                  - code [ref=e570]: "true"
+                - cell "是否显示步进钮（false 时纯数字输入）。" [ref=e571]:
+                  - text: 是否显示步进钮（
+                  - code [ref=e572]: "false"
+                  - text: 时纯数字输入）。
+              - row "controlsPosition 'right' | '' 'right' 步进钮位置：Lx 默认 right（右侧垂直拆分，标本 05 唯一形态）；传 '' 恢复 EP 两侧形态。" [ref=e573]:
+                - cell "controlsPosition" [ref=e574]:
+                  - code [ref=e575]: controlsPosition
+                - cell "'right' | ''" [ref=e576]:
+                  - code [ref=e577]: "'right' | ''"
+                - cell "'right'" [ref=e578]:
+                  - code [ref=e579]: "'right'"
+                - cell "步进钮位置：Lx 默认 right（右侧垂直拆分，标本 05 唯一形态）；传 '' 恢复 EP 两侧形态。" [ref=e580]:
+                  - text: 步进钮位置：Lx 默认
+                  - code [ref=e581]: right
+                  - text: （右侧垂直拆分，标本 05 唯一形态）；传
+                  - code [ref=e582]: "''"
+                  - text: 恢复 EP 两侧形态。
+              - row "placeholder string '' 占位文案。" [ref=e583]:
+                - cell "placeholder" [ref=e584]:
+                  - code [ref=e585]: placeholder
+                - cell "string" [ref=e586]:
+                  - code [ref=e587]: string
+                - cell "''" [ref=e588]:
+                  - code [ref=e589]: "''"
+                - cell "占位文案。" [ref=e590]
+              - row "align 'left' | 'right' | 'center' 'left' 值文字对齐：Lx 默认左对齐（标本 05 契约；EP 原生默认 center）。" [ref=e591]:
+                - cell "align" [ref=e592]:
+                  - code [ref=e593]: align
+                - cell "'left' | 'right' | 'center'" [ref=e594]:
+                  - code [ref=e595]: "'left' | 'right' | 'center'"
+                - cell "'left'" [ref=e596]:
+                  - code [ref=e597]: "'left'"
+                - cell "值文字对齐：Lx 默认左对齐（标本 05 契约；EP 原生默认 center）。" [ref=e598]:
+                  - text: 值文字对齐：Lx 默认左对齐（标本 05 契约；EP 原生默认
+                  - code [ref=e599]: center
+                  - text: ）。
+              - row "size 'sm' | 'md' | 'lg' 'md' 工程尺寸：28 / 32 / 40px；档名区别于 EP 的 small/default/large。" [ref=e600]:
+                - cell "size" [ref=e601]:
+                  - code [ref=e602]: size
+                - cell "'sm' | 'md' | 'lg'" [ref=e603]:
+                  - code [ref=e604]: "'sm' | 'md' | 'lg'"
+                - cell "'md'" [ref=e605]:
+                  - code [ref=e606]: "'md'"
+                - cell "工程尺寸：28 / 32 / 40px；档名区别于 EP 的 small/default/large。" [ref=e607]:
+                  - text: 工程尺寸：28 / 32 / 40px；档名区别于 EP 的
+                  - code [ref=e608]: small/default/large
+                  - text: 。
+              - row "name string — 原生 name 属性（表单序列化 / 读屏关联）。" [ref=e609]:
+                - cell "name" [ref=e610]:
+                  - code [ref=e611]: name
+                - cell "string" [ref=e612]:
+                  - code [ref=e613]: string
+                - cell "—" [ref=e614]
+                - cell "原生 name 属性（表单序列化 / 读屏关联）。" [ref=e615]
+          - heading "Events Permalink to \"Events\"" [level=2] [ref=e616]:
+            - text: Events
+            - link "Permalink to \"Events\"" [ref=e617] [cursor=pointer]:
+              - /url: "#events"
+              - text: "#"
+          - table [ref=e618]:
+            - rowgroup [ref=e619]:
+              - row "名称 参数 说明" [ref=e620]:
+                - columnheader "名称" [ref=e621]
+                - columnheader "参数" [ref=e622]
+                - columnheader "说明" [ref=e623]
+            - rowgroup [ref=e624]:
+              - 'row "update:modelValue (value: number | undefined) 数值变化。" [ref=e625]':
+                - cell "update:modelValue" [ref=e626]:
+                  - code [ref=e627]: update:modelValue
+                - 'cell "(value: number | undefined)" [ref=e628]':
+                  - code [ref=e629]: "(value: number | undefined)"
+                - cell "数值变化。" [ref=e630]
+              - 'row "change (currentValue, oldValue: number | undefined) 值变化确认（失焦或步进）派发。" [ref=e631]':
+                - cell "change" [ref=e632]:
+                  - code [ref=e633]: change
+                - 'cell "(currentValue, oldValue: number | undefined)" [ref=e634]':
+                  - code [ref=e635]: "(currentValue, oldValue: number | undefined)"
+                - cell "值变化确认（失焦或步进）派发。" [ref=e636]
+              - 'row "focus (event: FocusEvent) 聚焦。" [ref=e637]':
+                - cell "focus" [ref=e638]:
+                  - code [ref=e639]: focus
+                - 'cell "(event: FocusEvent)" [ref=e640]':
+                  - code [ref=e641]: "(event: FocusEvent)"
+                - cell "聚焦。" [ref=e642]
+              - 'row "blur (event: FocusEvent) 失焦。" [ref=e643]':
+                - cell "blur" [ref=e644]:
+                  - code [ref=e645]: blur
+                - 'cell "(event: FocusEvent)" [ref=e646]':
+                  - code [ref=e647]: "(event: FocusEvent)"
+                - cell "失焦。" [ref=e648]
+          - heading "Slots Permalink to \"Slots\"" [level=2] [ref=e649]:
+            - text: Slots
+            - link "Permalink to \"Slots\"" [ref=e650] [cursor=pointer]:
+              - /url: "#slots"
+              - text: "#"
+          - paragraph [ref=e651]:
+            - text: 无专属插槽。EP 内核未提供具名插槽；前缀图标等场景请使用
+            - code [ref=e652]: LxInput
+            - text: + 数字校验。
+          - heading "Exposes Permalink to \"Exposes\"" [level=2] [ref=e653]:
+            - text: Exposes
+            - link "Permalink to \"Exposes\"" [ref=e654] [cursor=pointer]:
+              - /url: "#exposes"
+              - text: "#"
+          - table [ref=e655]:
+            - rowgroup [ref=e656]:
+              - row "方法 参数 说明" [ref=e657]:
+                - columnheader "方法" [ref=e658]
+                - columnheader "参数" [ref=e659]
+                - columnheader "说明" [ref=e660]
+            - rowgroup [ref=e661]:
+              - row "focus — 聚焦输入框。" [ref=e662]:
+                - cell "focus" [ref=e663]:
+                  - code [ref=e664]: focus
+                - cell "—" [ref=e665]
+                - cell "聚焦输入框。" [ref=e666]
+              - row "blur — 移除焦点。" [ref=e667]:
+                - cell "blur" [ref=e668]:
+                  - code [ref=e669]: blur
+                - cell "—" [ref=e670]
+                - cell "移除焦点。" [ref=e671]
+          - heading "对齐说明 Permalink to \"对齐说明\"" [level=2] [ref=e672]:
+            - text: 对齐说明
+            - link "Permalink to \"对齐说明\"" [ref=e673] [cursor=pointer]:
+              - /url: "#对齐说明"
+              - text: "#"
+          - list [ref=e674]:
+            - listitem [ref=e675]:
+              - text: 默认宽 160px（标本 05
+              - code [ref=e676]: w-40
+              - text: ；EP 原生 150px），
+              - code [ref=e677]: sm
+              - text: /
+              - code [ref=e678]: lg
+              - text: 档宽度随 EP 原生。
+            - listitem [ref=e679]:
+              - text: 值文字等宽字体 + 600 字重由组件样式锚定；左对齐经 EP 原生
+              - code [ref=e680]: align
+              - text: prop 实现（根类
+              - code [ref=e681]: is-left
+              - text: ）。
+            - listitem [ref=e682]: 步进钮 hover 图标转主色为 EP 内核原生行为，组件样式仅补触屏档步进钮高度与 hover 背景态。
+            - listitem [ref=e683]: 键盘操作：↑/↓ 步进、Shift+↑/↓ 大步进（×10）、输入任意数值失焦确认；禁用态阻断全部交互。
+            - listitem [ref=e684]:
+              - code [ref=e685]: valueOnClear
+              - text: /
+              - code [ref=e686]: autocomplete
+              - text: /
+              - code [ref=e687]: validateEvent
+              - text: 等低频 props 经 attrs 透传，行为与 EP 内核一致。
+          - heading "可访问性 Permalink to \"可访问性\"" [level=2] [ref=e688]:
+            - text: 可访问性
+            - link "Permalink to \"可访问性\"" [ref=e689] [cursor=pointer]:
+              - /url: "#可访问性"
+              - text: "#"
+          - paragraph [ref=e690]:
+            - text: 右侧步进按钮按触发器实际高度上下连续贴合，中间只保留 1px 分隔线；sm、md、lg 不会出现按钮之间的空白。包装组件会把
+            - code [ref=e691]: id
+            - text: 、
+            - code [ref=e692]: name
+            - text: 和自动填充属性同步到实际数字输入框，Demo 的可见标签可直接关联到输入。
+          - list [ref=e693]:
+            - listitem [ref=e694]:
+              - text: 步进钮为 EP 原生 button，带
+              - code [ref=e695]: aria-label
+              - text: （增加/减少）与禁用态语义。
+            - listitem [ref=e696]:
+              - text: 值文字
+              - code [ref=e697]: tabular-nums
+              - text: 等宽数字呈现，避免步进时宽度抖动。
+            - listitem [ref=e698]:
+              - text: 键盘焦点环由 EP 原生 focus 样式承接；触屏档（
+              - code [ref=e699]: "hover: none"
+              - text: ）步进钮高度放大至最小触控目标。
+      - contentinfo [ref=e700]:
+        - navigation "Pager" [ref=e701]:
+          - generic [ref=e702]: Pager
+          - link "Previous page LxDatePicker 日期选择" [ref=e704] [cursor=pointer]:
+            - /url: /components/lxdatepicker.html
+            - generic [ref=e705]: Previous page
+            - generic [ref=e706]: LxDatePicker 日期选择
+          - link "Next page LxSearchBar 检索面板" [ref=e708] [cursor=pointer]:
+            - /url: /components/lxsearchbar.html
+            - generic [ref=e709]: Next page
+            - generic [ref=e710]: LxSearchBar 检索面板
+```

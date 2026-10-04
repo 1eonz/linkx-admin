@@ -35,7 +35,7 @@ import Basic from '../../src/components/LxEmpty/demo/basic.vue';
 
 ## 视觉与可访问性
 
-默认图标为 64px，紧凑档为 48px；描述分别使用 13px 和 12px 的 `--lx-text-regular` 正文令牌，默认线稿也使用该令牌，避免小字和图形对比度不足。组件根节点使用 `role="status"`，默认线稿图标为装饰性内容；`footer` 中的交互控件沿用宿主提供的语义、名称和键盘行为。组件不添加入场动画。
+默认图标为 64px，紧凑档为 48px；描述分别使用 13px 和 12px 的 `--lx-text-regular` 正文令牌，默认线稿也使用该令牌，避免小字和图形对比度不足。组件根节点使用 `role="status"` 与 `aria-live="polite"`，默认线稿图标为装饰性内容；`footer` 中的交互控件沿用宿主提供的语义、名称和键盘行为。组件不添加入场动画。
 
 ## Vue3 宿主适配
 

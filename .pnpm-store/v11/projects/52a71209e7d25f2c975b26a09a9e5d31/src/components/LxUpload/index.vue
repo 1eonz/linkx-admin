@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** 上传界面只处理前端校验与状态展示，网络传输由 Element Plus 或业务侧配置负责。 */
-import { computed, ref } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 import { ElUpload } from 'element-plus'
 import type {
   UploadFile,
@@ -52,7 +52,51 @@ const emit = defineEmits<{
 const uploadRef = ref<UploadInstance>()
 const announcement = ref('')
 const uploadErrors = ref<Record<number, string>>({})
+const attrs = useAttrs()
+function describedBy(): string | undefined {
+  const value = attrs['aria-describedby']
+  return typeof value === 'string' ? value : undefined
+}
 const draggable = computed(() => props.drag ?? props.draggable)
+
+const acceptLabels: Record<string, string> = {
+  'image/*': '图片',
+  'video/*': '视频',
+  'audio/*': '音频',
+  'application/pdf': 'PDF',
+  'application/msword': 'Word 文档',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+    'Word 文档',
+  'application/vnd.ms-excel': 'Excel 表格',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+    'Excel 表格',
+  'application/vnd.ms-powerpoint': 'PowerPoint 演示文稿',
+  'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+    'PowerPoint 演示文稿',
+  '.doc': 'Word 文档',
+  '.docx': 'Word 文档',
+  '.xls': 'Excel 表格',
+  '.xlsx': 'Excel 表格',
+  '.csv': 'CSV 文件',
+  '.pdf': 'PDF',
+  '.ppt': 'PowerPoint 演示文稿',
+  '.pptx': 'PowerPoint 演示文稿',
+  '.jpg': '图片',
+  '.jpeg': '图片',
+  '.png': '图片',
+  '.gif': '图片',
+  '.webp': '图片',
+}
+
+function acceptLabel(accept: string): string {
+  if (!accept.trim()) return '常见文件格式'
+  const labels = accept
+    .split(',')
+    .map((item) => item.trim().toLowerCase())
+    .filter(Boolean)
+    .map((item) => acceptLabels[item] ?? '指定格式')
+  return [...new Set(labels)].join('、')
+}
 
 function recordOf(value: unknown): Record<string, unknown> | undefined {
   return typeof value === 'object' && value !== null
@@ -387,6 +431,7 @@ defineExpose({
       :name="name"
       :with-credentials="withCredentials"
       :http-request="requestHandler"
+      :aria-describedby="describedBy()"
       :before-upload="beforeUpload"
       :on-change="onChange"
       :on-progress="onProgress"
@@ -400,6 +445,12 @@ defineExpose({
         <div v-if="isUploading" class="lx-upload__panel">
           <div class="lx-upload__panel-info">
             <p class="lx-upload__panel-title">
+              <LxIcon
+                name="loading"
+                :size="16"
+                :spin="true"
+                aria-hidden="true"
+              />
               正在上传 {{ uploadingCount }} 个文件
             </p>
             <p class="lx-upload__panel-hint">
@@ -439,12 +490,17 @@ defineExpose({
             /></span>
             <p class="lx-upload__title">点击或拖拽文件到此处上传</p>
             <p class="lx-upload__hint">
-              <template v-if="accept">支持扩展名：{{ accept }}</template>
+              <template v-if="accept">支持{{ acceptLabel(accept) }}</template>
               <template v-else>支持常见文件格式</template>
               <template v-if="maxSize">，单文件不超过 {{ maxSize }}MB</template>
+              <template v-if="limit">，最多 {{ limit }} 个文件</template>
             </p>
             <!-- 位于 .el-upload 触发器内，click 冒泡至根节点即打开文件选择（EP onKeydown 带 self 修饰，无键盘双触发） -->
-            <button class="lx-upload__browse" type="button">
+            <button
+              class="lx-upload__browse"
+              type="button"
+              :aria-describedby="describedBy()"
+            >
               浏览本地文件
             </button>
           </div>
@@ -588,9 +644,9 @@ defineExpose({
 .lx-upload__trigger :deep(.el-upload-dragger) {
   height: 120px;
   overflow: hidden;
-  border: 2px dashed var(--lx-border);
+  border: 2px dashed var(--lx-control-border);
   border-radius: var(--lx-radius-lg);
-  background: var(--lx-bg-card);
+  background: var(--lx-bg-card-hover);
   transition:
     border-color var(--lx-transition),
     background-color var(--lx-transition);
@@ -610,7 +666,8 @@ defineExpose({
 /* 态C 上传中：拖区整体变形为进度面板，虚线换实线主色边（标本态C） */
 .lx-upload.is-uploading .lx-upload__trigger :deep(.el-upload-dragger) {
   border-style: solid;
-  border-color: var(--lx-color-primary);
+  border-color: var(--lx-control-border);
+  background: var(--lx-bg-card);
 }
 
 .lx-upload__trigger :deep(.el-upload-dragger:focus-visible),
@@ -711,6 +768,9 @@ defineExpose({
 }
 
 .lx-upload__panel-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lx-space-xs);
   color: var(--lx-text-primary);
   font-size: 14px;
   font-weight: 500;
@@ -718,7 +778,7 @@ defineExpose({
 }
 
 .lx-upload__panel-hint {
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
   font-size: 12px;
   line-height: 18px;
 }
@@ -740,8 +800,10 @@ defineExpose({
   position: absolute;
   inset-block: 0;
   left: 0;
-  width: calc(var(--lx-upload-panel-progress, 0) * 100%);
+  width: 100%;
   border-radius: inherit;
+  transform: scaleX(var(--lx-upload-panel-progress, 0));
+  transform-origin: left center;
   /* 8px 条纹动画条：主色/浅主色 45° 相间，背景位移动画产生流动感 */
   background: repeating-linear-gradient(
     -45deg,
@@ -749,7 +811,7 @@ defineExpose({
     var(--lx-color-primary-light) 10px 20px
   );
   animation: lx-upload-stripes 0.8s linear infinite;
-  transition: width var(--lx-transition);
+  transition: transform var(--lx-transition);
 }
 
 /* 20px 渐变周期沿 45° 轴，水平位移一个视觉周期 = 20px / cos(45°) ≈ 28.28px */
@@ -757,6 +819,10 @@ defineExpose({
   to {
     background-position: 28.28px 0;
   }
+}
+
+:dir(rtl) .lx-upload__panel-value {
+  transform-origin: right center;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -816,7 +882,7 @@ defineExpose({
 }
 
 .lx-upload__hint {
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
   font-size: 12px;
   line-height: 18px;
 }
@@ -848,7 +914,7 @@ defineExpose({
 }
 
 .lx-upload__list-title {
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
   font-size: 12px;
   line-height: 18px;
 }
@@ -860,7 +926,7 @@ defineExpose({
   padding: 0 var(--lx-space-xs);
   border: 0;
   background: none;
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
   cursor: pointer;
   font: inherit;
   font-size: 12px;
@@ -888,7 +954,7 @@ defineExpose({
   margin: 0;
   padding: 0;
   border: 1px solid var(--lx-border-light);
-  border-radius: var(--lx-radius-md);
+  border-radius: var(--lx-radius-lg);
   background: var(--lx-bg-card);
   list-style: none;
 }
@@ -930,7 +996,7 @@ defineExpose({
 
 .lx-upload__file-icon.is-success {
   background: var(--lx-color-success-light);
-  color: var(--lx-color-success-strong);
+  color: var(--lx-color-success-text);
 }
 
 .lx-upload__file-icon.is-fail {
@@ -974,7 +1040,7 @@ defineExpose({
   padding: 1px 8px;
   border-radius: 999px;
   background: var(--lx-color-info-light);
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
   font-size: 11px;
   line-height: 16px;
   white-space: nowrap;
@@ -987,7 +1053,7 @@ defineExpose({
 
 .lx-upload__file-status.is-success {
   background: var(--lx-color-success-light);
-  color: var(--lx-color-success-strong);
+  color: var(--lx-color-success-text);
 }
 
 .lx-upload__file-status.is-fail {
@@ -997,7 +1063,7 @@ defineExpose({
 
 .lx-upload__file-percentage,
 .lx-upload__file-meta {
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
   font-size: 12px;
 }
 
@@ -1064,7 +1130,7 @@ defineExpose({
   border: 0;
   border-radius: var(--lx-radius-md);
   background: transparent;
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
   cursor: pointer;
 }
 

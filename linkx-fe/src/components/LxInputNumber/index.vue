@@ -10,7 +10,7 @@
  * 模板保持单根（无根级注释）：注释节点会引入 Fragment 根，
  * 破坏 $attrs 单根继承与测试工具对根元素类的断言。
  */
-import { ref } from 'vue'
+import { onMounted, onUpdated, ref, useAttrs } from 'vue'
 import { ElInputNumber } from 'element-plus'
 import type { InputNumberInstance } from 'element-plus'
 import type {
@@ -18,12 +18,13 @@ import type {
   LxInputNumberProps,
   LxInputNumberSize,
 } from './types'
+import { syncAriaDescribedBy } from '../../utils/syncAriaDescribedBy'
 import 'element-plus/es/components/input-number/style/css'
 import './style.css'
 
 defineOptions({ name: 'LxInputNumber', inheritAttrs: false })
 
-withDefaults(defineProps<LxInputNumberProps>(), {
+const props = withDefaults(defineProps<LxInputNumberProps>(), {
   modelValue: undefined,
   // 边界默认值与 EP 内核对齐（-Infinity/Infinity），显式固化防升级漂移
   min: -Infinity,
@@ -54,6 +55,29 @@ const emit = defineEmits<{
 
 /** EP 内核实例引用：focus/blur 方法透传给调用方 */
 const numberRef = ref<InputNumberInstance>()
+const attrs = useAttrs()
+const managedDescriptionIds = new Set<string>()
+
+function syncInputAttributes(): void {
+  const input = numberRef.value?.$el?.querySelector('input')
+  if (!(input instanceof HTMLInputElement)) return
+  for (const name of [
+    'id',
+    'name',
+    'autocomplete',
+    'aria-label',
+    'aria-labelledby',
+  ]) {
+    const value = name === 'name' ? props.name : attrs[name]
+    if (typeof value === 'string' && value.length > 0)
+      input.setAttribute(name, value)
+    else input.removeAttribute(name)
+  }
+  syncAriaDescribedBy(input, attrs['aria-describedby'], managedDescriptionIds)
+}
+
+onMounted(syncInputAttributes)
+onUpdated(syncInputAttributes)
 
 /** 档位映射：Lx 工程档名 → EP 内核档（高度由全局令牌桥收敛 28/32/40px） */
 const SIZE_MAP: Record<LxInputNumberSize, 'small' | 'default' | 'large'> = {

@@ -94,7 +94,7 @@ const dashOffset = computed(
 
 @media (prefers-reduced-motion: reduce) {
   .lx-gauge__arc {
-    transition: none;
+    transition: none !important;
   }
 }
 </style>

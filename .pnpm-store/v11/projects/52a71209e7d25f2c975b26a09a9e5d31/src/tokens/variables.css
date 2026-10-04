@@ -22,11 +22,17 @@
   --lx-color-success: #67c23a;
   --lx-color-success-strong: #529b2e;
   --lx-color-success-light: #f0f9eb;
+  --lx-color-success-border: #e1f3d8;
   --lx-color-warning: #e6a23c;
-  --lx-color-warning-strong: #cf8a1e; /* 细小文字场景（对比度补偿，DESIGN-SPEC §3.2） */
+  --lx-color-warning-strong: #cf8a1e; /* 实底按钮悬停色，不用于白底小字号文字 */
+  --lx-color-warning-text: #915b0c; /* 白底及警示浅底上的小字号文字 */
   --lx-color-warning-light: #fdf6ec;
+  --lx-color-warning-border: #f5dab1;
   --lx-color-error: #f56c6c;
   --lx-color-error-strong: #b54747; /* 删除等小字号危险文字，白底对比度不低于 4.5:1 */
+  /* 表单设计标本的校验态专色；与按钮 danger 的粉红实底语义分离。 */
+  --lx-color-form-error: #ba1a1a;
+  --lx-color-form-error-bg: #fff5f5;
   --lx-color-danger-hover: #e65d5d; /* 标本 danger 行 hover 加深档（原 #e45e5e 为漂移值） */
   /* 彩色实底上的文字（2026-09-29 拍板深字方案）：中饱和底配深字替代标本白字，
    * 白字在 danger/success/warning 底上对比度仅 2.1~2.9:1，深字约 6~7:1 达 WCAG AA */
@@ -34,10 +40,18 @@
   --lx-color-on-success: #1d2129;
   --lx-color-on-warning: #1d2129;
   --lx-color-error-light: #fef0f0;
+  --lx-color-error-border: #fbc4c4;
   --lx-color-info: #909399;
   --lx-color-info-strong: #606266;
   --lx-color-info-light: #f4f4f5;
-  --lx-status-switch-text: #1d2129; /* 保证状态轨道文案在绿/灰底上的对比度 */
+  --lx-color-info-border: #d3d4d6;
+  --lx-status-switch-text: #1d2129;
+  --lx-tag-close-hover-bg: rgba(
+    0,
+    0,
+    0,
+    0.15
+  ); /* 保证状态轨道文案在绿/灰底上的对比度 */
 
   /* ========== 按钮专属令牌（design/按钮体系 §3 --lx-btn-* 契约，拍板 #11）========== */
   /* 三档工程高度：28 / 32 / 40px；内边距 12 / 16 / 20px，文字型收窄到 8px */
@@ -88,8 +102,11 @@
   --lx-text-regular: #4e5969; /* 正文、表格行 */
   --lx-text-label: #606266; /* 表单字段标签（标本八件套，弱于正文一档保证层级） */
   --lx-text-secondary: #86909c; /* 辅助说明、时间戳 */
+  --lx-text-secondary-strong: #606266; /* 白底上的辅助说明，保证 4.5:1 以上对比度 */
+  --lx-color-on-input: #4e5969; /* 浅色输入表面上的正文与计数文字 */
   --lx-text-placeholder: #c9cdd4;
   --lx-text-on-dark: #ffffff;
+  --lx-color-success-text: #3f7e23; /* 成功浅底上的小字号文字 */
 
   /* ========== 侧边栏专项（stitch_侧边栏 双方案） ========== */
   --lx-sidebar-bg: #0c1424; /* expanded 态（_2） */

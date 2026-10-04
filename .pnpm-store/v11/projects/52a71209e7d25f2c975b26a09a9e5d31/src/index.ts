@@ -20,6 +20,7 @@ import LxPagination from './components/LxPagination/index.vue'
 import LxEmpty from './components/LxEmpty/index.vue'
 import LxProTable from './components/LxProTable/index.vue'
 import LxSelectTree from './components/LxSelectTree/index.vue'
+import LxTreeSelect from './components/LxTreeSelect/index.vue'
 // 数据录入（stitch 表单控件 + _26 错误态规格）
 import LxForm from './components/LxForm/index.vue'
 import LxFormItem from './components/LxForm/LxFormItem.vue'
@@ -50,6 +51,7 @@ import LxSplitLayout from './components/LxSplitLayout/index.vue'
 import LxDutyCalendar from './components/LxDutyCalendar/index.vue'
 import LxDynamicForm from './components/LxDynamicForm/index.vue'
 import LxButton from './components/LxButton/index.vue'
+import LxCascader from './components/LxCascader/index.vue'
 // 输入类族（design/表单控件八件套 01/03/04/07/08）
 import LxInput from './components/LxInput/index.vue'
 import LxTextarea from './components/LxTextarea/index.vue'
@@ -90,6 +92,7 @@ const componentRegistry: Record<string, Component> = {
   LxEmpty,
   LxProTable,
   LxSelectTree,
+  LxTreeSelect,
   LxForm,
   LxFormItem,
   LxDialog,
@@ -114,11 +117,18 @@ const componentRegistry: Record<string, Component> = {
   LxSplitLayout,
   LxDutyCalendar,
   LxDynamicForm,
+  LxCascader,
 }
 
 export * from './components/LxSidebar/types'
 export * from './components/LxProTable/types'
 export * from './components/LxSelectTree/types'
+export type {
+  LxTreeSelectPrimitive,
+  LxTreeSelectProps,
+  LxTreeSelectSize,
+  LxTreeSelectValue,
+} from './components/LxTreeSelect/types'
 export * from './components/LxActionButtons/types'
 export type { LxStatusDotProps } from './components/LxStatusDot/types'
 export type { LxTagProps } from './components/LxTag/types'
@@ -150,14 +160,15 @@ export type {
 } from './components/LxDescriptions/types'
 export type { LxCodeSlotProps } from './components/LxCodeSlot/types'
 export type {
-  LxCascaderOption,
-  LxCascaderOptionValue,
   LxSearchBarProps,
   LxSearchField,
   LxSearchFieldType,
   LxSearchOption,
 } from './components/LxSearchBar/types'
-export type { LxStatusSwitchProps } from './components/LxStatusSwitch/types'
+export type {
+  LxStatusSwitchConfirmOptions,
+  LxStatusSwitchProps,
+} from './components/LxStatusSwitch/types'
 export type {
   LxUploadFile,
   LxUploadFileStatus,
@@ -200,12 +211,21 @@ export type {
 } from './components/LxDutyCalendar/types'
 export type {
   LxDynamicFormField,
+  LxDynamicFormFieldFeedback,
   LxDynamicFormFieldType,
   LxDynamicFormInstance,
   LxDynamicFormOption,
   LxDynamicFormProps,
   LxDynamicFormSlotProps,
 } from './components/LxDynamicForm/types'
+export type {
+  LxCascaderModelValue,
+  LxCascaderOption,
+  LxCascaderOptionValue,
+  LxCascaderPathValue,
+  LxCascaderProps,
+  LxCascaderSize,
+} from './components/LxCascader/types'
 export type {
   LxButtonProps,
   LxButtonSize,
@@ -223,6 +243,7 @@ export type { LxCheckboxGroupProps } from './components/LxCheckboxGroup/types'
 export type { LxSwitchProps } from './components/LxSwitch/types'
 export type {
   LxSelectModelValue,
+  LxSelectOption,
   LxSelectOptionValue,
   LxSelectProps,
   LxSelectSize,
@@ -301,6 +322,7 @@ export {
   LxEmpty,
   LxProTable,
   LxSelectTree,
+  LxTreeSelect,
   LxForm,
   LxFormItem,
   LxDialog,
@@ -325,6 +347,7 @@ export {
   LxSplitLayout,
   LxDutyCalendar,
   LxDynamicForm,
+  LxCascader,
 }
 
 export default {

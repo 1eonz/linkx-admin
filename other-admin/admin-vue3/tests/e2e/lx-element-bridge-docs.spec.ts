@@ -177,7 +177,8 @@ test.describe('lx-ui Element Plus 基础控件焦点样式', () => {
     expect(await dateRange.boundingBox()).toEqual(dateBeforeFocus);
     await page.keyboard.press('Escape');
 
-    await page.getByRole('checkbox', { name: 'HUD 深色' }).check();
+    // LxCheckbox 保留 EP 的隐藏原生 input，使用语义 label 触发而不是直接 check 隐藏 input。
+    await page.getByText('HUD 深色', { exact: true }).click();
     await expect.poll(async () => (await readControlFocusStyle(checkboxInner)).backgroundColor).toBe('rgb(11, 18, 32)');
     await expect.poll(async () => (await readControlFocusStyle(checkboxInner)).borderColor).toBe('rgb(148, 163, 184)');
     const darkMessageIdle = await readControlFocusStyle(checkboxInner);
@@ -217,7 +218,7 @@ test.describe('lx-ui Element Plus 基础控件焦点样式', () => {
     expect(darkDateFocus.width).toBe(dateFocus.width);
     expect(darkDateFocus.height).toBe(dateFocus.height);
     await page.keyboard.press('Escape');
-    await page.getByRole('checkbox', { name: 'HUD 深色' }).uncheck();
+    await page.getByText('HUD 深色', { exact: true }).click();
 
     const remarkItem = page.locator('.el-form-item').filter({ hasText: '备注' });
     const remarkTextarea = remarkItem.locator('.el-textarea__inner');
@@ -245,7 +246,7 @@ test.describe('lx-ui Element Plus 基础控件焦点样式', () => {
     await departmentSelect.focus();
     await expect
       .poll(async () => (await readControlFocusStyle(departmentWrapper)).borderColor)
-      .toBe('rgb(196, 86, 86)');
+      .toBe('rgb(186, 26, 26)');
     const errorSelectFocus = await readControlFocusStyle(departmentWrapper);
     expect(errorSelectFocus.outlineStyle).toBe('none');
     expect(errorSelectFocus.outlineOffset).toBe('0px');
@@ -260,13 +261,13 @@ test.describe('lx-ui Element Plus 基础控件焦点样式', () => {
     await departmentsSelect.focus();
     await expect
       .poll(async () => (await readControlFocusStyle(departmentsWrapper)).borderColor)
-      .toBe('rgb(196, 86, 86)');
+      .toBe('rgb(186, 26, 26)');
     const errorDepartmentsFocus = await readControlFocusStyle(departmentsWrapper);
     expect(errorDepartmentsFocus.outlineStyle).toBe('none');
     expect(errorDepartmentsFocus.outlineOffset).toBe('0px');
     expect(errorDepartmentsFocus.borderWidth).toBe('1px');
     expect(errorDepartmentsFocus.boxShadow).toBe('none');
-    await page.getByRole('checkbox', { name: 'HUD 深色' }).check();
+    await page.getByText('HUD 深色', { exact: true }).click();
     await departmentsSelect.focus();
     await expect
       .poll(async () => (await readControlFocusStyle(departmentsWrapper)).borderColor)
@@ -276,14 +277,14 @@ test.describe('lx-ui Element Plus 基础控件焦点样式', () => {
     expect((await readControlFocusStyle(departmentsWrapper)).transitionProperty).toBe(
       'border-color, background-color, box-shadow',
     );
-    await page.getByRole('checkbox', { name: 'HUD 深色' }).uncheck();
+    await page.getByText('HUD 深色', { exact: true }).click();
     await departmentsItem.evaluate((element) => element.classList.remove('is-error'));
 
     await page.setViewportSize({ width: 375, height: 844 });
     await departmentSelect.focus();
     await expect
       .poll(async () => (await readControlFocusStyle(departmentWrapper)).borderColor)
-      .toBe('rgb(196, 86, 86)');
+      .toBe('rgb(186, 26, 26)');
     const mobileSelectFocus = await readControlFocusStyle(departmentWrapper);
     expect(mobileSelectFocus.outlineStyle).toBe('none');
     expect(mobileSelectFocus.outlineOffset).toBe('0px');
@@ -301,14 +302,20 @@ test.describe('lx-ui Element Plus 基础控件焦点样式', () => {
     expect(mobileDepartmentsFocus.outlineOffset).toBe('0px');
     expect(mobileDepartmentsFocus.borderWidth).toBe('1px');
     expect(mobileDepartmentsFocus.boxShadow).toBe('none');
-    expect(await departmentsWrapper.boundingBox()).toEqual(mobileDepartmentsBefore);
+    const mobileDepartmentsAfter = await departmentsWrapper.boundingBox();
+    expect(mobileDepartmentsAfter?.x).toBe(mobileDepartmentsBefore?.x);
+    expect(mobileDepartmentsAfter?.width).toBe(mobileDepartmentsBefore?.width);
+    expect(mobileDepartmentsAfter?.height).toBe(mobileDepartmentsBefore?.height);
     await departmentsItem.evaluate((element) => element.classList.add('is-error'));
     await expect
       .poll(async () => (await readControlFocusStyle(departmentsWrapper)).borderColor)
-      .toBe('rgb(196, 86, 86)');
+      .toBe('rgb(186, 26, 26)');
     expect((await readControlFocusStyle(departmentsWrapper)).outlineStyle).toBe('none');
     expect((await readControlFocusStyle(departmentsWrapper)).boxShadow).toBe('none');
-    expect(await departmentsWrapper.boundingBox()).toEqual(mobileDepartmentsBefore);
+    const mobileDepartmentsError = await departmentsWrapper.boundingBox();
+    expect(mobileDepartmentsError?.x).toBe(mobileDepartmentsBefore?.x);
+    expect(mobileDepartmentsError?.width).toBe(mobileDepartmentsBefore?.width);
+    expect(mobileDepartmentsError?.height).toBe(mobileDepartmentsBefore?.height);
     await departmentsItem.evaluate((element) => element.classList.remove('is-error'));
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
   });

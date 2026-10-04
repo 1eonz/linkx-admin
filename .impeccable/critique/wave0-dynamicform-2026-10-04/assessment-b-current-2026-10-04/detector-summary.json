@@ -1,0 +1,82 @@
+{
+  "method": "Assessment B only; isolated from Assessment A",
+  "targets": [
+    {
+      "path": "linkx-fe/src/components/LxDynamicForm",
+      "stdout": "detector-component.stdout.json",
+      "stderr": "detector-component.stderr.txt",
+      "exitCode": 0,
+      "legalJson": true,
+      "findingCount": 0
+    },
+    {
+      "path": "linkx-fe/src/components/LxDynamicForm/demo/basic.vue",
+      "stdout": "detector-demo.stdout.json",
+      "stderr": "detector-demo.stderr.txt",
+      "exitCode": 0,
+      "legalJson": true,
+      "findingCount": 0
+    },
+    {
+      "path": "linkx-fe/docs/components/lxdynamicform.md",
+      "stdout": "detector-docs.stdout.json",
+      "stderr": "detector-docs.stderr.txt",
+      "exitCode": 0,
+      "legalJson": true,
+      "findingCount": 0
+    }
+  ],
+  "browser": {
+    "url": "http://127.0.0.1:4189/components/lxdynamicform.html",
+    "runtime": "Installed Chrome controlled by Playwright; CUA browser surface unavailable",
+    "freshPages": 5,
+    "successfulPreflights": 5,
+    "overlayScans": 12,
+    "successfulOverlayScans": 12,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "externalRequests": 0,
+    "consoleError": "One VitePress /favicon.ico 404; no component or demo error"
+  },
+  "viewports": {
+    "desktop": "1440x900",
+    "mobile": "375x812",
+    "mobileBaselineHorizontalOverflow": false,
+    "mobileDocumentScrollWidthBeforeOverlay": 375,
+    "mobileDocumentScrollWidthAfterOverlay": 615,
+    "overlayWidthAttribution": "Detector marker labels extend the documentation page; product baseline remains 375px"
+  },
+  "themeAndStateScans": {
+    "desktopLight": { "findings": 15, "overlayNodes": 13 },
+    "mobileLight": { "findings": 10, "overlayNodes": 8 },
+    "desktopHudReducedMotion": { "findings": 209, "overlayNodes": 207 },
+    "mobileHudReducedMotion": { "findings": 207, "overlayNodes": 205 },
+    "desktopLightStateMatrix": {
+      "views": 8,
+      "findingsPerView": 15,
+      "overlayNodesPerView": 13,
+      "states": [
+        "default",
+        "validation error",
+        "candidate loading",
+        "candidate empty",
+        "candidate error",
+        "conditional support field",
+        "disabled form",
+        "upload complete"
+      ]
+    }
+  },
+  "fingerprints": {
+    "changedDuringCapture": 0,
+    "totalFiles": 16
+  },
+  "serverLifecycle": {
+    "docsServerStart": "docs-server-start.json",
+    "docsServerStop": "docs-server-stop.json",
+    "docsServerPort": 4189,
+    "docsServerProcessGone": true,
+    "impeccableHelperPort": 8400,
+    "impeccableHelperExitCode": 0
+  }
+}

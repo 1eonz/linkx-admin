@@ -21,6 +21,7 @@ test.describe('LxActionButtons 文档示例', () => {
     await actionGroup.getByRole('button', { name: '停用' }).click();
     await expect(page.getByTestId('last-action')).toHaveText('停用');
     await expect(actionGroup).toBeHidden();
+    await expect(moreButton).toBeFocused();
   });
 
   test('375px 下触控目标达到 44px，长菜单不撑宽页面并适配 HUD 主题', async ({ page }) => {
@@ -37,7 +38,7 @@ test.describe('LxActionButtons 文档示例', () => {
     expect(buttonBox?.height).toBeGreaterThanOrEqual(44);
     expect(menuBox?.x).toBeGreaterThanOrEqual(0);
     expect((menuBox?.x ?? 0) + (menuBox?.width ?? 0)).toBeLessThanOrEqual(375);
-    await expect(page.getByRole('button', { name: '暂不可执行' })).toBeDisabled();
+    await expect(actionGroup.getByRole('button', { name: '暂不可执行' })).toBeDisabled();
 
     const lightBackground = await actionGroup.evaluate((element) => getComputedStyle(element).backgroundColor);
     await page.locator('html').evaluate((element) => element.classList.add('lx-theme-hud'));

@@ -18,6 +18,8 @@ import Basic from '../../src/components/LxInputNumber/demo/basic.vue';
 
 ## Props
 
+字段通过 `id` 与外部 `<label for>` 关联，`id` 经 attrs 传入内核的原生数字输入。步进按钮的内核名称与数值字段标签分别保留。
+
 | 名称               | 类型                            | 默认值           | 说明                                                                                      |
 | ------------------ | ------------------------------- | ---------------- | ----------------------------------------------------------------------------------------- |
 | `modelValue`       | `number \| undefined`           | —                | 数值（v-model；清空后为 `undefined`）。                                                   |
@@ -63,6 +65,8 @@ import Basic from '../../src/components/LxInputNumber/demo/basic.vue';
 - `valueOnClear`/`autocomplete`/`validateEvent` 等低频 props 经 attrs 透传，行为与 EP 内核一致。
 
 ## 可访问性
+
+右侧步进按钮按触发器实际高度上下连续贴合，中间只保留 1px 分隔线；sm、md、lg 不会出现按钮之间的空白。包装组件会把 `id`、`name` 和自动填充属性同步到实际数字输入框，Demo 的可见标签可直接关联到输入。
 
 - 步进钮为 EP 原生 button，带 `aria-label`（增加/减少）与禁用态语义。
 - 值文字 `tabular-nums` 等宽数字呈现，避免步进时宽度抖动。

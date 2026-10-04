@@ -1,5 +1,139 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-03 UI-10 Wave 6 交付与审查状态更正
+
+`LxTreeSelect` 与 `LxCascader` 的实现、Demo、API、单测和文档 E2E 已完成：单测 17/17，VitePress Playwright 8/8。当前源码与两份文档的 detector 均为有效 `[]`、stderr 为空、退出码 0，仅代表静态规则零命中。现存 10 月 2 日 overlay 截图早于当前代码/文档修改；本次浏览器策略拒绝 overlay 注入预检，因此当前版本缺少正式 Critique 所需的 overlay/复验，两个组件不登记为严格 UI-10 已关闭。既有 Assessment A 建议已落实，P3 观察项继续跟踪。本矩阵当前 **0/52 个公开组件按统一严格口径关闭**。
+
+## 2026-10-02 UI-10 Wave 6 修后复验进行中
+
+- TreeSelect 多选 footer 的内置中文硬编码改为 locale-aware 中英文默认和逐项覆盖；`selectedText` 支持 `{count}`。多选提交/取消语义及 footer slot 未改。
+- Cascader 对并发 `loading`/`error` 采用 loading 优先规则，只有 loading 结束后 error 仍然存在才暴露错误、无效输入状态及 retry；Demo 删除路径与 last-action 双重读屏播报并分组演示控制。
+- 修后行为单测 17/17、文档 E2E 5/5、lx-ui typecheck/build/docs build 及 Vue3 vue-tsc/Prettier 通过。组件库无独立 ESLint 配置；Vue3 ESLint ignored 外部路径不计通过。
+- 前置 A/B 仅用于确定本次问题；修后 A/B 正在独立评估。完成建议复验、综合 snapshot/trend 前，矩阵状态仍“待严格复核”，不增加 0/52 严格关闭计数。前置 detector `[]` 是静态零命中，不是视觉通过。
+
+## 2026-09-30 基础组件审查批次登记
+
+除 `LxForm`/`LxDynamicForm` 外，基础控件本身也必须逐项严格对照设计：`LxButton`、`LxInput`、`LxInputNumber`、`LxTextarea`、`LxSelect`、`LxDatePicker`、`LxCheckbox`/`LxCheckboxGroup`、`LxRadio`/`LxRadioGroup`、`LxSwitch`、`LxPasswordInput`。矩阵关闭条件与其他组件相同：设计源、实现/token、Demo/API、行为测试、浏览器状态证据、代码审核和 Impeccable A/B 均齐备；不以 Element Plus 内核可用或 detector `[]` 代替视觉对照。
+
+## Wave 5 postfix 审计状态（2026-09-30）
+
+- `LxDialog`、`LxDrawer`、`LxEmpty`、`LxPageCard`、`LxFormErrorBanner` 已完成实现、定向行为回归和独立 A/B 证据收集；Assessment A 为 34/40（Good）。
+- Assessment B 的源码/文档 detector 均为有效 `[]`、stderr 为空、退出码 0；Playwright 证据覆盖亮色/HUD、桌面/375px 和关键交互，保存 16 张截图及 sidecar，外部请求 0。因 CUA 不可用，B 标记为 `DEGRADED`。
+- 已关闭上一轮 P1：portal HUD 主题断层、Drawer Escape 默认关闭、PageCard 错误恢复和窄屏 API 表格撑破页面。仍保留 P2/P3 设计建议，且 UI-11 全库正式矩阵不能由本波单独关闭。
+
+## Wave 5 组件证据（2026-09-30）
+
+本波完成 `LxDialog`、`LxDrawer`、`LxEmpty`、`LxPageCard`、`LxFormErrorBanner` 的实现与阶段性验收：对应 Demo/API、17 项定向单测和 7 项文档 Playwright 均通过；lx-ui 类型检查、构建和文档构建通过。浏览器证据保存在 `.impeccable/critique/wave5-2026-09-30/`，包含亮色/HUD、桌面/375px 截图、可访问性状态和无外部请求结果；Drawer 移动端截图在过渡完成后重拍，面板为 375px 全宽且页面无横向溢出。源码 detector JSON `[]`、stderr 为空、退出码 0 只代表静态规则零命中。
+
+Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B 由于 CUA 不可用使用 Playwright fallback，保留 `DEGRADED` 限制和剩余 P2/P3 建议。另登记 Element Plus 桥接缺口：`linkx-fe/src/components/LxForm/demo/control-bridge.vue` 直接使用 `ElTabs`/`ElTabPane`，待后续 UI-10 对照时补齐专用封装或明确桥接边界。
+
+## UI-13 表单专项复验补丁（2026-09-30）
+
+- 根据 Form/DynamicForm Assessment A 的真实发现，`LxDynamicForm` 新增可选 `field.feedback` 契约：状态文案贴在对应控件下方，并支持由宿主注入 `retry()` 与自定义按钮文案；错误反馈使用 `role="alert"`、稳定 ID 和 `aria-describedby`，不再把远程负责人失败提示孤立放在演示设置或表单底部。
+- 动态表单 Demo 默认仍只展示可填写表单；布局、禁用、HUD 与候选 Mock 控制保留在默认关闭的“演示设置（布局、禁用、主题与 Mock 状态）”中。候选成功数量仍只在设置区显示，空结果/加载/失败状态移到“负责人”字段，避免重复错误文案。
+- `LxDynamicFormFieldFeedback` 已同步导出、中文 API 文档、类型回归测试；宿主 `retry` 只触发已有恢复流程，网络请求继续由宿主按 `.then().catch().finally()` 编排。该补丁不改变 52 个组件“0/52 正式关闭”口径，仍需库级 UI-10 矩阵与 Impeccable 正式 A/B。
+
+## 2026-09-30 当前完整清点（后续以本节为准）
+
+旧版调研是 15 个组件时期的历史快照，不能代表当前库规模或 Element Plus 覆盖度。按 `linkx-fe/src/index.ts` 的 `componentRegistry` 逐项核对，当前公开注册 **52 个 Lx 组件**，另有 `lxMessage`、`lxConfirm` 两个反馈服务 API；源码中有 47 个组件目录，Sidebar 的子组件和 FormItem 等复合导出共用父目录，因此目录数不等于公开组件数。表格下方的旧统计和“明确排除组件”结论只保留作历史调研，不作为当前实施清单。
+
+当前任务是对 52 个注册组件逐项做严格视觉对照。此前的单组件功能测试、局部截图或桥接页验收可作为证据，但没有完成本轮统一矩阵记录前，一律不视为全库严格对照完成。**基础组件内部使用 Element Plus 作为行为内核是允许的；对外公开和业务组合必须使用 Lx 封装，并由 Lx token/样式落实视觉稿。**
+
+### 有直接视觉资产的组件
+
+| 当前设计源                                                                                | 必须纳入对照的公开组件                                                                                                                                                                                                                 | 严格对照状态                                                                                                                                                                                 |
+| ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `design/按钮体系/`                                                                        | `LxButton`、`LxActionButtons`                                                                                                                                                                                                          | 待按状态、尺寸、按钮层级、危险操作与键盘焦点逐项核验                                                                                                                                         |
+| `design/表单控件八件套/`                                                                  | `LxForm`、`LxFormItem`、`LxDynamicForm`、`LxInput`、`LxTextarea`、`LxRadio`、`LxRadioGroup`、`LxCheckbox`、`LxCheckboxGroup`、`LxSwitch`、`LxSelect`、`LxDatePicker`、`LxInputNumber`、`LxPasswordInput`、`LxCascader`、`LxTreeSelect` | TreeSelect/Cascader 实现与行为验收已完成，当前版本正式 Critique 待 overlay/复验；LxForm/DynamicForm 与基础控件仍按设计逐项核验。无 Cascader 专属稿时按 Select 控件外形与本设计源状态令牌验收 |
+| `design/高频核心 13 枚/`、`design/中频 27 枚/`、`design/常用联想 29 枚/` 与 `doc/LxIcon*` | `LxIcon`                                                                                                                                                                                                                               | 按图标路径、命名、尺寸、动效触发/结束、主题、键盘及减少动效逐项核验                                                                                                                          |
+| `design/检索面板 SearchBar/`                                                              | `LxSearchBar`                                                                                                                                                                                                                          | 待纳入全库矩阵复核字段密度、展开/收起、响应式及操作层级                                                                                                                                      |
+| `design/状态开关 StatusSwitch/`                                                           | `LxStatusSwitch`                                                                                                                                                                                                                       | 待纳入全库矩阵复核开关轨道、状态色、只读/加载及确认反馈                                                                                                                                      |
+| `design/上传拖拽区 Upload/`                                                               | `LxUpload`                                                                                                                                                                                                                             | 待纳入全库矩阵复核拖放区、列表、进度/失败/重试及移动操作                                                                                                                                     |
+| `design/详情描述行 Descriptions/`                                                         | `LxDescriptions`                                                                                                                                                                                                                       | 待纳入全库矩阵复核标签和值的层级、行高、复制和窄屏折叠                                                                                                                                       |
+| `design/虚拟滚动树 + 双栏穿梭/`                                                           | `LxVirtualTree`、`LxTransferPanel`                                                                                                                                                                                                     | 待纳入全库矩阵复核树密度、选中/禁用、双栏比例、空/加载和窄屏交互                                                                                                                             |
+| `design/远程分页下拉 SelectPagination/`                                                   | `LxSelectPagination`                                                                                                                                                                                                                   | 待纳入全库矩阵复核输入框、标签收敛、下拉分页、加载/空/失败和键盘状态                                                                                                                         |
+| `design/指标卡 MetricCard/`                                                               | `LxMetricCard`                                                                                                                                                                                                                         | 待纳入全库矩阵复核数值层级、语义色、趋势/进度和窄屏排列                                                                                                                                      |
+| `design/区块标题 SectionTitle/`                                                           | `LxSectionTitle`                                                                                                                                                                                                                       | 待纳入全库矩阵复核变体、图标、标签、标题截断和对齐                                                                                                                                           |
+
+### 按组件规范和既有唯一视觉源对照的组件
+
+下列组件没有单独的 `design/` 画板时，不能据此沿用 Element Plus 默认视觉；须以 `doc/lx-ui/DESIGN-SPEC.md`、`COMPONENT-SPEC.md`、`COMPONENT-STYLE-INTERACTION.md` 中适用章节为准。侧栏家族的唯一视觉源是 `doc/stitch_侧边栏/stitch_/`。每个条目同样要补当前源码、Demo、主题/尺寸/状态浏览器证据和复验结论。
+
+| 规范/视觉源                                     | 必须纳入对照的公开组件                                                                                                                                                                                                                            | 严格对照状态                                                                   |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `doc/stitch_侧边栏/stitch_/` + `DESIGN-SPEC.md` | `LxSidebar`、`LxSidebarBrand`、`LxSidebarItem`、`LxSidebarGroup`、`LxSidebarFooter`、`LxGauge`、`LxNodeBadge`                                                                                                                                     | 待全库视图逐项复核 rail/expanded、菜单状态、焦点、动效和窄屏抽屉               |
+| `DESIGN-SPEC.md` + 对应组件 API/交互规范        | `LxNavbar`、`LxBreadcrumb`、`LxTabsBar`、`LxSplitLayout`、`LxPageCard`、`LxProTable`、`LxPagination`、`LxEmpty`、`LxStatusDot`、`LxTag`、`LxCodeSlot`、`LxSelectTree`、`LxDialog`、`LxDrawer`、`LxFormErrorBanner`、`LxDutyCalendar`、`LxAuthImg` | 待全库视图逐项复核；已有专项行为证据保留，但需补齐当前实现与规范的视觉差异记录 |
+| `DESIGN-SPEC.md` §2、§6–§9 + `LxDialog` 规范    | `lxMessage`、`lxConfirm`（服务 API，不计入 52 个注册组件）                                                                                                                                                                                        | 对照反馈类型、语义色、字号、位置、时长、键盘关闭和减少动效                     |
+
+### UI-10 统一完成门槛
+
+1. 每个注册组件对应一个可信设计源，并记录关键数值或状态；直接设计资产优先于通用规范，旧版/压缩包仅用于追溯。
+2. 对照默认、hover、focus、disabled、loading、error、empty、明暗主题、窄屏和 `prefers-reduced-motion` 中适用的状态；不可适用项说明原因。
+3. 公共组合只使用 `Lx*` 导出；若库内暂时没有专用控件，则明确登记缺口和允许从 lx-ui 导出的 Element Plus 备选。Element Plus 实现可作为 Lx 包装内部的行为内核，不等于视觉对照完成。
+4. Demo、中文 API 文档、行为测试和浏览器证据同步；记录 `component → design source → implementation/token → evidence → residual issues`。检测器 `[]` 只代表对应源码静态规则零命中。
+5. 全量矩阵关闭后，先完成 lx-ui 组件/动效 Impeccable 正式复验和建议处理，再进入 Vue3 Element Plus 替换；替换完成后另做 Vue3 整站审查。
+
+### 52 个公开组件逐项验收矩阵
+
+本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **0/52 已按统一严格口径关闭**；Form 三项、基础控件及 TreeSelect/Cascader 当前版本审查仍在验收中。
+
+| 公开组件             | 唯一对照源                                        | 当前矩阵状态                                                                                                       |
+| -------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `LxActionButtons`    | `design/按钮体系/`                                | 待严格复核；保留既有键盘/窄屏行为证据                                                                              |
+| `LxAuthImg`          | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；真实鉴权联调另列                                                                                       |
+| `LxBreadcrumb`       | `DESIGN-SPEC.md` + 导航规范                       | 待严格复核；保留现有宿主导航契约                                                                                   |
+| `LxButton`           | `design/按钮体系/`                                | 待严格复核；基础尺寸/层级/危险态逐项对照                                                                           |
+| `LxCascader`         | `design/表单控件八件套/`（无专属画板）            | 实现与行为验收完成；当前版本正式 Critique 待 overlay/复验；按 Select 控件外形与状态令牌映射                        |
+| `LxCheckbox`         | `design/表单控件八件套/`                          | 待严格复核；框体、半选、焦点与触控态                                                                               |
+| `LxCheckboxGroup`    | `design/表单控件八件套/`                          | 待严格复核；组间距、方向、禁用和半选态                                                                             |
+| `LxCodeSlot`         | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；代码区层级、复制反馈与窄屏                                                                             |
+| `LxDatePicker`       | `design/表单控件八件套/`                          | Wave 0 字段说明 ID 单值/相邻区间隔离回归通过；待严格复核输入边界、弹层、范围态、窄屏及正式 Critique                |
+| `LxDescriptions`     | `design/详情描述行 Descriptions/`                 | 部分证据；19/20 阶段审查不是正式关闭                                                                               |
+| `LxDialog`           | `DESIGN-SPEC.md` + Dialog API/Demo                | Wave 5 实现/17 项定向单测与文档证据完成；正式 Critique 待收口（焦点、确认、窄屏和动效）                            |
+| `LxDrawer`           | `DESIGN-SPEC.md` + Drawer API/Demo                | Wave 5 实现/文档证据完成；移动端稳态截图已复拍；正式 Critique 待收口（宽度、焦点、遮罩与窄屏）                     |
+| `LxDutyCalendar`     | `DESIGN-SPEC.md` + Calendar API/Demo              | 待严格复核；无专属画板，需记录规范映射                                                                             |
+| `LxDynamicForm`      | `design/表单控件八件套/`                          | UI-13 实现/回归通过；字段子组件、Lx 控件、自适应布局和反馈关联已落盘；正式 Critique 仍待综合关闭（整库门槛）       |
+| `LxEmpty`            | `DESIGN-SPEC.md` + Empty API/Demo                 | Wave 5 实现/文档证据完成；正式 Critique 待收口，阶段性评分不替代本矩阵                                             |
+| `LxForm`             | `design/表单控件八件套/`                          | UI-13 实现/回归通过；首错焦点已修复并有桌面/375px 浏览器证据；正式 Critique 仍待综合关闭（移动提示层级与整库门槛） |
+| `LxFormErrorBanner`  | `DESIGN-SPEC.md` + 表单错误态规范                 | Wave 5 实现/文档证据完成；正式 Critique 待收口（图标、文案、语义色及窄屏）                                         |
+| `LxFormItem`         | `design/表单控件八件套/`                          | UI-13 本波；错误/必填 ARIA 与样式待正式 Critique                                                                   |
+| `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                             |
+| `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | 部分证据；27/40 快照有未关闭建议                                                                                   |
+| `LxInput`            | `design/表单控件八件套/`                          | 待严格复核；32px、边界、清空、错误/禁用/焦点                                                                       |
+| `LxInputNumber`      | `design/表单控件八件套/`                          | 待严格复核；32px、步进按钮、边界与键盘                                                                             |
+| `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 待严格复核；数值、语义色、趋势、进度和窄屏                                                                         |
+| `LxNavbar`           | `DESIGN-SPEC.md` + Navbar API/Demo                | 待严格复核；导航密度、焦点、菜单与窄屏                                                                             |
+| `LxNodeBadge`        | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；节点状态、字号和对齐                                                                                   |
+| `LxPageCard`         | `DESIGN-SPEC.md` + PageCard API/Demo              | Wave 5 实现/文档证据完成；正式 Critique 待收口（表面、内距、加载及插槽态）                                         |
+| `LxPagination`       | `DESIGN-SPEC.md` + Pagination API/Demo            | 待严格复核；密度、分页按钮、背景与窄屏                                                                             |
+| `LxPasswordInput`    | `design/表单控件八件套/` + PasswordInput API/Demo | 待严格复核；32px、显隐、禁用和键盘焦点                                                                             |
+| `LxProTable`         | `DESIGN-SPEC.md` + ProTable API/Demo              | 待严格复核；表头/行密度、选择、空错态和滚动                                                                        |
+| `LxRadio`            | `design/表单控件八件套/`                          | 待严格复核；14px 控件、焦点、选中和禁用态                                                                          |
+| `LxRadioGroup`       | `design/表单控件八件套/`                          | 待严格复核；间距、方向、选中和禁用态                                                                               |
+| `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 待严格复核；字段密度、展开/收起、操作层级                                                                          |
+| `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                               |
+| `LxSelect`           | `design/表单控件八件套/`                          | 待严格复核；32px、单/多选边框、焦点和弹层                                                                          |
+| `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 待严格复核；标签、弹层分页、键盘和窄屏                                                                             |
+| `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                       |
+| `LxSidebar`          | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；rail/expanded、菜单态、动效和抽屉                                                                      |
+| `LxSidebarBrand`     | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；品牌锁定区、折叠态与对齐                                                                               |
+| `LxSidebarFooter`    | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；底部操作、焦点与窄屏                                                                                   |
+| `LxSidebarGroup`     | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；分组层级、展开态和动效                                                                                 |
+| `LxSidebarItem`      | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；选中/禁用/悬停/键盘态                                                                                  |
+| `LxSplitLayout`      | `DESIGN-SPEC.md` + SplitLayout API/Demo           | 待严格复核；分栏比例、拖动、键盘和折叠态                                                                           |
+| `LxStatusDot`        | `DESIGN-SPEC.md` §2 + 状态点 API/Demo             | 待严格复核；状态语义、动画和减少动效                                                                               |
+| `LxStatusSwitch`     | `design/状态开关 StatusSwitch/`                   | 待严格复核；轨道、状态、只读/加载与确认反馈                                                                        |
+| `LxSwitch`           | `design/表单控件八件套/`                          | 待严格复核；20px 轨道、状态文本和动效                                                                              |
+| `LxTabsBar`          | `DESIGN-SPEC.md` + TabsBar API/Demo               | 待严格复核；页签层级、关闭/拖动和横向滚动                                                                          |
+| `LxTag`              | `DESIGN-SPEC.md` §2 + Tag API/Demo                | 待严格复核；语义色、尺寸、关闭态与对比度                                                                           |
+| `LxTextarea`         | `design/表单控件八件套/`                          | 待严格复核；行高、字数、错误/焦点与窄屏                                                                            |
+| `LxTransferPanel`    | `design/虚拟滚动树 + 双栏穿梭/`                   | 待严格复核；双栏比例、选择态、空态和触控                                                                           |
+| `LxTreeSelect`       | `design/表单控件八件套/` + TreeSelect API/Demo    | 实现与行为验收完成；当前版本正式 Critique 待 overlay/复验；P3 观察继续跟踪                                         |
+| `LxUpload`           | `design/上传拖拽区 Upload/`                       | 待严格复核；提示文字对比度、列表、进度/失败/重试                                                                   |
+| `LxVirtualTree`      | `design/虚拟滚动树 + 双栏穿梭/`                   | 待严格复核；节点密度、选中/禁用、虚拟滚动和键盘                                                                    |
+
+---
+
 > 用途：组件库样式与交互设计的依据文档。
 > 调研范围：Vue2 老工程（`src/`，Vue 2.6 + Element UI 2.15）、Vue3 新工程（`other-admin/admin-vue3/`，Vue 3 + Element Plus 全量，全局 `size='large'`）、lx-ui（`linkx-fe/`，15 组件 + 2 函数式 API）。
 > 统计口径：Grep count 实测按文件统计后汇总；数字为两工程合并值（标注分代的除外）。
@@ -9,11 +143,11 @@
 
 ## 一、项目全景
 
-| 工程 | 技术栈 | 组件形态 | 业务模块 |
-|---|---|---|---|
-| **Vue2 老工程** `src/` | Vue 2.6 + Element UI 2.15（全局注册） | el-xxx + 自研组件全局注册（components/index.js install） | 权限中心、通知、基础数据、协同岗、位置、排班、三方对接、警信扩展、多节点管理（10 大块） |
-| **Vue3 新工程** `other-admin/admin-vue3/` | Vue 3 + EP 全量注册（`size='large'`） | el-xxx 按需 + 22 个自研组件按需 import | 同上 10 大块迁移；ProTable 三模式成熟化 |
-| **lx-ui** `linkx-fe/` | Vue3 + EP 二次封装 + 设计令牌 | 15 组件 + lxMessage/lxConfirm + `--lx-*` 令牌 + HUD 深色主题 | 目标：统一两代工程视觉与交互 |
+| 工程                                      | 技术栈                                | 组件形态                                                     | 业务模块                                                                                |
+| ----------------------------------------- | ------------------------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| **Vue2 老工程** `src/`                    | Vue 2.6 + Element UI 2.15（全局注册） | el-xxx + 自研组件全局注册（components/index.js install）     | 权限中心、通知、基础数据、协同岗、位置、排班、三方对接、警信扩展、多节点管理（10 大块） |
+| **Vue3 新工程** `other-admin/admin-vue3/` | Vue 3 + EP 全量注册（`size='large'`） | el-xxx 按需 + 22 个自研组件按需 import                       | 同上 10 大块迁移；ProTable 三模式成熟化                                                 |
+| **lx-ui** `linkx-fe/`                     | Vue3 + EP 二次封装 + 设计令牌         | 15 组件 + lxMessage/lxConfirm + `--lx-*` 令牌 + HUD 深色主题 | 目标：统一两代工程视觉与交互                                                            |
 
 **两代工程交互范式高度一致**（迁移友好）：
 
@@ -30,41 +164,41 @@
 
 ### T0 高频核心（样式设计最高优先级）
 
-| 组件 | 次数 | 项目中的作用与交互 |
-|---|---|---|
-| el-button | **~687**（V2 458 / V3 229） | 所有操作触发：搜索/重置/新增/批量删除/行内编辑/弹窗确定取消；V3 大量 `link` 型行内按钮 |
-| el-table / el-table-column | ~58 / ~418 列 | 列表数据展示；绝大多数经自研 ProTable 封装；行 hover、固定操作列、多选列（reserve-selection 跨页保留） |
-| el-form / el-form-item | ~447 / ~620 | 弹窗表单（label-width 100~200px，90% label-position=left）+ 行内搜索表单（68px）；rules 校验（输入 blur / 选择 change） |
-| el-input | **~436** | 文本/密码/textarea；clearable、回车搜索、前缀图标（唯一允许的装饰=搜索放大镜） |
-| el-select / el-option | ~130 / ~159 | 下拉枚举选择，大量 v-for 动态 options |
-| el-dialog | **~128** | 编辑/详情/选择弹窗；标准配置 `close-on-click-modal=false` + `append-to-body` + `align-center`，宽 500~800px |
-| $message / ElMessage | **~950** | 操作结果反馈之首；成功绿/失败红；http 拦截器统一 4 处提示 |
-| $confirm / ElMessageBox.confirm | **~117** | 删除/解绑/退出登录危险操作二次确认，warning 图标，取消走 `.catch(() => {})` 静默 |
-| v-loading | ~100 | 表格/树/抽屉加载遮罩 + ElLoading.service 全屏轮询（"数据同步中…"，5s 轮询） |
+| 组件                            | 次数                        | 项目中的作用与交互                                                                                                      |
+| ------------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| el-button                       | **~687**（V2 458 / V3 229） | 所有操作触发：搜索/重置/新增/批量删除/行内编辑/弹窗确定取消；V3 大量 `link` 型行内按钮                                  |
+| el-table / el-table-column      | ~58 / ~418 列               | 列表数据展示；绝大多数经自研 ProTable 封装；行 hover、固定操作列、多选列（reserve-selection 跨页保留）                  |
+| el-form / el-form-item          | ~447 / ~620                 | 弹窗表单（label-width 100~200px，90% label-position=left）+ 行内搜索表单（68px）；rules 校验（输入 blur / 选择 change） |
+| el-input                        | **~436**                    | 文本/密码/textarea；clearable、回车搜索、前缀图标（唯一允许的装饰=搜索放大镜）                                          |
+| el-select / el-option           | ~130 / ~159                 | 下拉枚举选择，大量 v-for 动态 options                                                                                   |
+| el-dialog                       | **~128**                    | 编辑/详情/选择弹窗；标准配置 `close-on-click-modal=false` + `append-to-body` + `align-center`，宽 500~800px             |
+| $message / ElMessage            | **~950**                    | 操作结果反馈之首；成功绿/失败红；http 拦截器统一 4 处提示                                                               |
+| $confirm / ElMessageBox.confirm | **~117**                    | 删除/解绑/退出登录危险操作二次确认，warning 图标，取消走 `.catch(() => {})` 静默                                        |
+| v-loading                       | ~100                        | 表格/树/抽屉加载遮罩 + ElLoading.service 全屏轮询（"数据同步中…"，5s 轮询）                                             |
 
 ### T1 中频
 
-| 组件 | 次数 | 作用 |
-|---|---|---|
-| el-pagination | ~14 直用 + 全部经封装 | 列表分页；pageSizes [10,20,50,100]，切条数回第 1 页 |
-| el-tag | ~89 | 状态标记、已选人员标签、关键词标签 |
-| el-card | ~63（集中 V3） | V3 列表页标准容器（`.app-container > el-card shadow="always"`） |
-| el-tabs / el-tab-pane | ~30 / ~72 | 模块内多 Tab；**9 处 `type="border-card"`** |
-| el-tree | ~38 | 权限树/部门树/菜单树勾选与展示（区别于选择器形态） |
-| el-tooltip | ~41 | 长文本提示、详情抽屉指标说明（9 处集中） |
-| el-descriptions(+item) | ~36 / ~57 | 详情键值对展示（客户端详情、授权详情、抽屉内） |
-| el-empty | ~35 | 树/列表/穿梭无数据占位 |
-| el-upload | ~20 | 头像/图标手动上传（`action="#" + auto-upload=false`）、Excel 导入、地图底图上传 |
-| el-popover | ~23 | 组织树下拉容器（OrgTreeSelect 基座）、选中项详情弹出 |
-| el-date-picker | ~21 | 日期范围筛选、授权到期日 |
-| el-switch | ~22 | 启用/禁用行内切换（loading 防抖，inline-prompt 内嵌文字） |
-| el-radio(+group) | ~75 | 表单单选、推送方式选择 |
-| el-checkbox(+group) | ~33 | 多选、记住密码、树节点勾选 |
-| el-input-number | ~15 | 端口/排序号/有效期 |
-| el-dropdown(+menu/item) | ~23 | Navbar 用户菜单、"更多操作"折叠 |
-| el-row / el-col | ~92 | 表单栅格双列布局 |
-| el-scrollbar | ~19 | 侧边栏/弹窗滚动（仅 V2） |
-| el-icon | ~46 | EP 图标承载（仅 V3） |
+| 组件                    | 次数                  | 作用                                                                            |
+| ----------------------- | --------------------- | ------------------------------------------------------------------------------- |
+| el-pagination           | ~14 直用 + 全部经封装 | 列表分页；pageSizes [10,20,50,100]，切条数回第 1 页                             |
+| el-tag                  | ~89                   | 状态标记、已选人员标签、关键词标签                                              |
+| el-card                 | ~63（集中 V3）        | V3 列表页标准容器（`.app-container > el-card shadow="always"`）                 |
+| el-tabs / el-tab-pane   | ~30 / ~72             | 模块内多 Tab；**9 处 `type="border-card"`**                                     |
+| el-tree                 | ~38                   | 权限树/部门树/菜单树勾选与展示（区别于选择器形态）                              |
+| el-tooltip              | ~41                   | 长文本提示、详情抽屉指标说明（9 处集中）                                        |
+| el-descriptions(+item)  | ~36 / ~57             | 详情键值对展示（客户端详情、授权详情、抽屉内）                                  |
+| el-empty                | ~35                   | 树/列表/穿梭无数据占位                                                          |
+| el-upload               | ~20                   | 头像/图标手动上传（`action="#" + auto-upload=false`）、Excel 导入、地图底图上传 |
+| el-popover              | ~23                   | 组织树下拉容器（OrgTreeSelect 基座）、选中项详情弹出                            |
+| el-date-picker          | ~21                   | 日期范围筛选、授权到期日                                                        |
+| el-switch               | ~22                   | 启用/禁用行内切换（loading 防抖，inline-prompt 内嵌文字）                       |
+| el-radio(+group)        | ~75                   | 表单单选、推送方式选择                                                          |
+| el-checkbox(+group)     | ~33                   | 多选、记住密码、树节点勾选                                                      |
+| el-input-number         | ~15                   | 端口/排序号/有效期                                                              |
+| el-dropdown(+menu/item) | ~23                   | Navbar 用户菜单、"更多操作"折叠                                                 |
+| el-row / el-col         | ~92                   | 表单栅格双列布局                                                                |
+| el-scrollbar            | ~19                   | 侧边栏/弹窗滚动（仅 V2）                                                        |
+| el-icon                 | ~46                   | EP 图标承载（仅 V3）                                                            |
 
 ### T2 低频
 
@@ -81,45 +215,45 @@ el-divider(12)、el-color-picker(6)、el-menu(3)、el-alert(3)、el-collapse(2)�
 
 ### 3.1 表格与搜索（列表页骨架）
 
-| 组件 | 频次 | 作用 / 关键交互逻辑 |
-|---|---|---|
-| **ProTable** | V2 8 / **V3 49（绝对核心）** | 配置式 columns + 内置分页。**三种数据模式**：纯 data / fetchApi 自治 / fetchApi 受控 + @response 回调（项目主流）；AbortController 竞态取消；reserve-selection 跨页保留选中；defaultTableFormatter 兼容 4 种后端结构；expose `init()`（回第 1 页）`refresh()`（保持页码）`mutate()`（乐观更新） |
-| **SearchBar** | V2 8 / **V3 25** | V2：props 全配置（searchKey/showOrg/showDateRange/actions）+ ResizeObserver 自动换行。V3：`#filters` 插槽 + 关键字框（220px 回车搜索）+ 搜索/重置 + 右侧 actions 配置按钮（label/type/icon/onClick） |
-| **Pagination** | V2 26 | v-model page/limit；**切 pageSize 自动回第 1 页**；autoScroll 回顶；`@pagination {page, limit}` |
-| **ActionButtons** | V3 29 | 行内操作：`buttons` 配置或 `actions` **预设语义**（view/edit/disable/enable/delete → 自动图标+配色）；el-button link 型 |
+| 组件              | 频次                         | 作用 / 关键交互逻辑                                                                                                                                                                                                                                                                             |
+| ----------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ProTable**      | V2 8 / **V3 49（绝对核心）** | 配置式 columns + 内置分页。**三种数据模式**：纯 data / fetchApi 自治 / fetchApi 受控 + @response 回调（项目主流）；AbortController 竞态取消；reserve-selection 跨页保留选中；defaultTableFormatter 兼容 4 种后端结构；expose `init()`（回第 1 页）`refresh()`（保持页码）`mutate()`（乐观更新） |
+| **SearchBar**     | V2 8 / **V3 25**             | V2：props 全配置（searchKey/showOrg/showDateRange/actions）+ ResizeObserver 自动换行。V3：`#filters` 插槽 + 关键字框（220px 回车搜索）+ 搜索/重置 + 右侧 actions 配置按钮（label/type/icon/onClick）                                                                                            |
+| **Pagination**    | V2 26                        | v-model page/limit；**切 pageSize 自动回第 1 页**；autoScroll 回顶；`@pagination {page, limit}`                                                                                                                                                                                                 |
+| **ActionButtons** | V3 29                        | 行内操作：`buttons` 配置或 `actions` **预设语义**（view/edit/disable/enable/delete → 自动图标+配色）；el-button link 型                                                                                                                                                                         |
 
 ### 3.2 选择器类
 
-| 组件 | 频次 | 作用 / 关键交互逻辑 |
-|---|---|---|
+| 组件                                            | 频次     | 作用 / 关键交互逻辑                                                                                                                            |
+| ----------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | **SelectTree / SelectTreeLazy / OrgTreeSelect** | 合计 ~36 | 组织树选择：popover + input + tree 组合；懒加载/同步双模式（读全局配置 DEPARTMENT_SYNC_SIGN）；非 admin 自动定位本部门；搜索过滤；选中回填关闭 |
-| **SelectPagination** | V3 6 | **远程分页下拉**：remote 搜索 + 滚动加载更多（v-loadmore）；内部 targetMap 解决回显（已选项不在当前页仍显示）；api 必传注入 |
-| **SelectPopper** | 1 | 多选下拉容器基座（搜索 + 已选 tag 区 + footer） |
-| **VirtualTree** | 7 | 万级树虚拟滚动（可视区渲染）；getCheckedKeys/expandAll/filter 全量树方法 |
-| **VirtualCheckboxList** | 1 | 花名册虚拟勾选列表（卡片式 checkbox + 计数） |
-| **DataPermissionTree** | 3 | **左树右已选双栏穿梭**：VirtualTree + VirtualCheckboxList + 全选/取消 |
-| **RelatedUserSelect** | 1 | 协同人员选择：**树模式/搜索模式自动切换**，双数组 v-model（value + labels） |
+| **SelectPagination**                            | V3 6     | **远程分页下拉**：remote 搜索 + 滚动加载更多（v-loadmore）；内部 targetMap 解决回显（已选项不在当前页仍显示）；api 必传注入                    |
+| **SelectPopper**                                | 1        | 多选下拉容器基座（搜索 + 已选 tag 区 + footer）                                                                                                |
+| **VirtualTree**                                 | 7        | 万级树虚拟滚动（可视区渲染）；getCheckedKeys/expandAll/filter 全量树方法                                                                       |
+| **VirtualCheckboxList**                         | 1        | 花名册虚拟勾选列表（卡片式 checkbox + 计数）                                                                                                   |
+| **DataPermissionTree**                          | 3        | **左树右已选双栏穿梭**：VirtualTree + VirtualCheckboxList + 全选/取消                                                                          |
+| **RelatedUserSelect**                           | 1        | 协同人员选择：**树模式/搜索模式自动切换**，双数组 v-model（value + labels）                                                                    |
 
 ### 3.3 弹窗类
 
-| 组件 | 频次 | 作用 |
-|---|---|---|
-| UserSelectDialog / PoliceSelectDialog / UserBindDialog | 各 1 | 搜索 + ProTable 跨页选人弹窗；标题实时"已选 N 人"；确认回传数组 |
-| createDialog（V2 工厂函数） | 多处 | Promise 弹窗：`await dialogFn()` 拿提交数据；ok/cancel/close 三态 resolve/reject；全局登记 closeAllDialogs |
-| Upload（V2） | 2 | 拖拽/点击上传弹窗：格式大小校验 → uploadApi(FormData) 注入式 → 成功关闭 |
+| 组件                                                   | 频次 | 作用                                                                                                       |
+| ------------------------------------------------------ | ---- | ---------------------------------------------------------------------------------------------------------- |
+| UserSelectDialog / PoliceSelectDialog / UserBindDialog | 各 1 | 搜索 + ProTable 跨页选人弹窗；标题实时"已选 N 人"；确认回传数组                                            |
+| createDialog（V2 工厂函数）                            | 多处 | Promise 弹窗：`await dialogFn()` 拿提交数据；ok/cancel/close 三态 resolve/reject；全局登记 closeAllDialogs |
+| Upload（V2）                                           | 2    | 拖拽/点击上传弹窗：格式大小校验 → uploadApi(FormData) 注入式 → 成功关闭                                    |
 
 ### 3.4 展示与状态类
 
-| 组件 | 频次 | 作用 |
-|---|---|---|
-| **StatusSwitch** | 14 | **业务值反向映射 0=启用/1=禁用**；disabled 降级显示 el-tag；loading 防抖；开关内嵌文字 |
-| **StatusDot / ConnectionStatusDot** | 8+ | 五态呼吸灯；**code 0-7 数字兼容层**（4→online，1/2/7→processing，0/5→busy，3/6→error，对齐后端连接状态枚举） |
-| **SectionTitle** | 20 | 区块标题三 variant（dashed 虚线 / border 主色竖条 / plain）；icon + #extra |
-| **MetricCard** | 8 | 指标卡：title / 等宽字体大数值 / valueType 语义配色 / footer —— 客户端详情抽屉 6 连用 |
-| ModernCard / PersonnelCard / PoliceId | 储备 | 白底卡片容器 / 人员卡（头像+警号+状态点）/ 警号高亮标签 |
-| AuthImg | 12 | XHR 带 token 拉 blob 图片（鉴权头像/图标） |
-| PasswordInput | 9 | 密码框禁 copy/paste/cut；透传 el-input 全量 |
-| Breadcrumb / Hamburger / SvgIcon | 布局级 | 面包屑自动生成 / 侧边栏折叠 / svg sprite |
+| 组件                                  | 频次   | 作用                                                                                                         |
+| ------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------ |
+| **StatusSwitch**                      | 14     | **业务值反向映射 0=启用/1=禁用**；disabled 降级显示 el-tag；loading 防抖；开关内嵌文字                       |
+| **StatusDot / ConnectionStatusDot**   | 8+     | 五态呼吸灯；**code 0-7 数字兼容层**（4→online，1/2/7→processing，0/5→busy，3/6→error，对齐后端连接状态枚举） |
+| **SectionTitle**                      | 20     | 区块标题三 variant（dashed 虚线 / border 主色竖条 / plain）；icon + #extra                                   |
+| **MetricCard**                        | 8      | 指标卡：title / 等宽字体大数值 / valueType 语义配色 / footer —— 客户端详情抽屉 6 连用                        |
+| ModernCard / PersonnelCard / PoliceId | 储备   | 白底卡片容器 / 人员卡（头像+警号+状态点）/ 警号高亮标签                                                      |
+| AuthImg                               | 12     | XHR 带 token 拉 blob 图片（鉴权头像/图标）                                                                   |
+| PasswordInput                         | 9      | 密码框禁 copy/paste/cut；透传 el-input 全量                                                                  |
+| Breadcrumb / Hamburger / SvgIcon      | 布局级 | 面包屑自动生成 / 侧边栏折叠 / svg sprite                                                                     |
 
 ### 3.5 Composables
 
@@ -129,13 +263,13 @@ el-divider(12)、el-color-picker(6)、el-menu(3)、el-alert(3)、el-collapse(2)�
 
 ## 四、lx-ui 现有组件清单
 
-| 分类 | 组件 |
-|---|---|
-| 布局导航 | LxSidebar（+Brand/Item/Group/Footer）、LxGauge、LxNodeBadge、LxSelectTree |
-| 数据展示 | LxProTable、LxPagination、LxStatusDot、LxTag、LxEmpty、LxActionButtons |
-| 数据录入 | LxForm / LxFormItem（$attrs 透传 + 错误态接管 + columns 网格） |
-| 反馈与浮层 | LxDialog、LxDrawer、LxFormErrorBanner、lxMessage、lxConfirm |
-| 基础设施 | LxIcon（内置 24px stroke1.5 图标集）、`--lx-*` 全量令牌、HUD 深色主题、EP 变量桥接层 |
+| 分类       | 组件                                                                                 |
+| ---------- | ------------------------------------------------------------------------------------ |
+| 布局导航   | LxSidebar（+Brand/Item/Group/Footer）、LxGauge、LxNodeBadge、LxSelectTree            |
+| 数据展示   | LxProTable、LxPagination、LxStatusDot、LxTag、LxEmpty、LxActionButtons               |
+| 数据录入   | LxForm / LxFormItem（$attrs 透传 + 错误态接管 + columns 网格）                       |
+| 反馈与浮层 | LxDialog、LxDrawer、LxFormErrorBanner、lxMessage、lxConfirm                          |
+| 基础设施   | LxIcon（内置 24px stroke1.5 图标集）、`--lx-*` 全量令牌、HUD 深色主题、EP 变量桥接层 |
 
 ---
 
@@ -143,65 +277,65 @@ el-divider(12)、el-color-picker(6)、el-menu(3)、el-alert(3)、el-collapse(2)�
 
 ### A. 已覆盖且满足 ✅
 
-| 项目需求 | lx-ui 对应 | 符合度说明 |
-|---|---|---|
-| el-table + ProTable | LxProTable | 纯受控（columns/data/分页/多选/插槽）；数据模式差异见 B-1 |
-| el-form 全家 | LxForm / LxFormItem | $attrs 透传 + 五方法 + 错误态接管；label 上置/left 双形态兼容老项目 |
-| el-dialog 弹窗 | LxDialog | close-on-click-modal=false 防误触、672px 双列、loading |
-| el-drawer 详情抽屉 | LxDrawer | 480px 右滑、图标标题、footer 插槽 |
-| $message / ElMessage | lxMessage | 时长差异见 B-2 |
-| $confirm / ElMessageBox.confirm | lxConfirm | Promise\<boolean\> 优于项目 then/catch 写法 |
-| SelectTree 系组织树选择 | LxSelectTree | 懒加载注入式、搜索过滤、checked-keys 受控 |
-| StatusDot / ConnectionStatusDot | LxStatusDot | 五态 + code 0-7 兼容层已有 + pulse 节流建议 |
-| el-tag | LxTag | 四语义 + closable |
-| el-menu + Hamburger + 侧边栏 | LxSidebar | rail/expanded 双态、HUD 风格，超出项目现状 |
-| SvgIcon / el-icon | LxIcon | 内置图标集 |
-| el-empty | LxEmpty | — |
-| el-alert（表单阻断场景） | LxFormErrorBanner | report 图标 + 深红标题规格 |
+| 项目需求                        | lx-ui 对应          | 符合度说明                                                          |
+| ------------------------------- | ------------------- | ------------------------------------------------------------------- |
+| el-table + ProTable             | LxProTable          | 纯受控（columns/data/分页/多选/插槽）；数据模式差异见 B-1           |
+| el-form 全家                    | LxForm / LxFormItem | $attrs 透传 + 五方法 + 错误态接管；label 上置/left 双形态兼容老项目 |
+| el-dialog 弹窗                  | LxDialog            | close-on-click-modal=false 防误触、672px 双列、loading              |
+| el-drawer 详情抽屉              | LxDrawer            | 480px 右滑、图标标题、footer 插槽                                   |
+| $message / ElMessage            | lxMessage           | 时长差异见 B-2                                                      |
+| $confirm / ElMessageBox.confirm | lxConfirm           | Promise\<boolean\> 优于项目 then/catch 写法                         |
+| SelectTree 系组织树选择         | LxSelectTree        | 懒加载注入式、搜索过滤、checked-keys 受控                           |
+| StatusDot / ConnectionStatusDot | LxStatusDot         | 五态 + code 0-7 兼容层已有 + pulse 节流建议                         |
+| el-tag                          | LxTag               | 四语义 + closable                                                   |
+| el-menu + Hamburger + 侧边栏    | LxSidebar           | rail/expanded 双态、HUD 风格，超出项目现状                          |
+| SvgIcon / el-icon               | LxIcon              | 内置图标集                                                          |
+| el-empty                        | LxEmpty             | —                                                                   |
+| el-alert（表单阻断场景）        | LxFormErrorBanner   | report 图标 + 深红标题规格                                          |
 
 ### B. 已覆盖但存在交互差异 ⚠️（需设计决策）
 
-| # | 差异点 | 项目现状 | lx-ui 现状 | 建议 |
-|---|---|---|---|---|
-| 1 | **表格数据模式** | fetchApi 三模式 + 竞态取消 + mutate 乐观更新 + formatter 兼容 4 种后端 | 纯受控 data/total（P7 零请求铁律） | 保持 P7；竞态取消/乐观更新下沉到 **useTable composable**（纯前端逻辑不违反 P7） |
-| 2 | **Message 时长** | 3s | 设计稿 1.6s | 设计稿为准；duration 参数已有可覆盖 |
-| 3 | **ActionButtons 图标** | V3 带图标 + 预设语义（view/edit/delete 自动配色） | 纯文字（设计稿 P2 铁律"禁止图标按钮"） | **冲突点待拍板**：遵循设计稿纯文字 vs 保留预设语义映射 |
-| 4 | **控件密度** | V3 `size='large'`（40px） | `--lx-control-height: 32px`（设计稿紧凑密度） | 设计稿为准；迁移时控件变紧凑属预期视觉升级 |
-| 5 | **分页回第 1 页** | 封装内置"切 pageSize 回第 1 页" + autoScroll | 纯受控，业务自行处理 | 可加可选 `autoReset`，或文档推荐惯用法 |
-| 6 | **弹窗宽度** | 500~800px 不等 | 默认 672 | width 可覆盖，兼容 ✅ |
+| #   | 差异点                 | 项目现状                                                               | lx-ui 现状                                    | 建议                                                                            |
+| --- | ---------------------- | ---------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------- |
+| 1   | **表格数据模式**       | fetchApi 三模式 + 竞态取消 + mutate 乐观更新 + formatter 兼容 4 种后端 | 纯受控 data/total（P7 零请求铁律）            | 保持 P7；竞态取消/乐观更新下沉到 **useTable composable**（纯前端逻辑不违反 P7） |
+| 2   | **Message 时长**       | 3s                                                                     | 设计稿 1.6s                                   | 设计稿为准；duration 参数已有可覆盖                                             |
+| 3   | **ActionButtons 图标** | V3 带图标 + 预设语义（view/edit/delete 自动配色）                      | 纯文字（设计稿 P2 铁律"禁止图标按钮"）        | **冲突点待拍板**：遵循设计稿纯文字 vs 保留预设语义映射                          |
+| 4   | **控件密度**           | V3 `size='large'`（40px）                                              | `--lx-control-height: 32px`（设计稿紧凑密度） | 设计稿为准；迁移时控件变紧凑属预期视觉升级                                      |
+| 5   | **分页回第 1 页**      | 封装内置"切 pageSize 回第 1 页" + autoScroll                           | 纯受控，业务自行处理                          | 可加可选 `autoReset`，或文档推荐惯用法                                          |
+| 6   | **弹窗宽度**           | 500~800px 不等                                                         | 默认 672                                      | width 可覆盖，兼容 ✅                                                           |
 
 ### C. 未覆盖 — EP 原生组件（不封装，但**桥接样式层需补齐**）⚠️
 
 `element-theme.css` 目前只桥接颜色/圆角/字体基础变量，以下高频组件的**视觉规格尚未按设计稿定制**：
 
-| 优先级 | 组件 | 理由 |
-|---|---|---|
-| P0 | **el-button**（687 次） | 第一大组件；主/次/link 三态需对齐设计规范（32px 高、4px 圆角、主色三态） |
-| P0 | **表单八件套**：input/select/radio/checkbox/switch/input-number/date-picker/upload | LxForm 只接管错误态；控件本身的边框/焦点环/尺寸需桥接覆盖 |
-| P1 | **el-tabs**（30 次，9 处 border-card） | 设计稿已有 `--lx-bg-tabsbar` 专用 token，桥接待接 |
-| P1 | **el-card**（63 次） | V3 列表页容器；卡片阴影需对齐 `--lx-shadow-card` |
-| P1 | **el-tree**（38 次） | 树勾选/展示形态（LxSelectTree 只覆盖选择器形态） |
-| P1 | **el-descriptions**（36 次） | LxDrawer 详情内容主力，标签-值对齐规格 |
-| P2 | tooltip / popover / dropdown 浮层三件套（92 次） | 阴影/圆角对齐 `--lx-shadow-pop` |
-| P2 | collapse / divider / progress / scrollbar / breadcrumb / color-picker / image | 低频，桥接兜底即可 |
+| 优先级 | 组件                                                                               | 理由                                                                     |
+| ------ | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| P0     | **el-button**（687 次）                                                            | 第一大组件；主/次/link 三态需对齐设计规范（32px 高、4px 圆角、主色三态） |
+| P0     | **表单八件套**：input/select/radio/checkbox/switch/input-number/date-picker/upload | LxForm 只接管错误态；控件本身的边框/焦点环/尺寸需桥接覆盖                |
+| P1     | **el-tabs**（30 次，9 处 border-card）                                             | 设计稿已有 `--lx-bg-tabsbar` 专用 token，桥接待接                        |
+| P1     | **el-card**（63 次）                                                               | V3 列表页容器；卡片阴影需对齐 `--lx-shadow-card`                         |
+| P1     | **el-tree**（38 次）                                                               | 树勾选/展示形态（LxSelectTree 只覆盖选择器形态）                         |
+| P1     | **el-descriptions**（36 次）                                                       | LxDrawer 详情内容主力，标签-值对齐规格                                   |
+| P2     | tooltip / popover / dropdown 浮层三件套（92 次）                                   | 阴影/圆角对齐 `--lx-shadow-pop`                                          |
+| P2     | collapse / divider / progress / scrollbar / breadcrumb / color-picker / image      | 低频，桥接兜底即可                                                       |
 
 ### D. 未覆盖 — 业务封装层缺口（lx-ui 高价值新增）
 
-| 优先级 | 组件 | 频次 | 设计稿标本 | 封装要点（P7 兼容设计） |
-|---|---|---|---|---|
-| **P0** | **LxSearchBar** | 33 | 有（GRID 4-COL 检索面板 + ACTION 行） | COMPONENT-SPEC 已有签名规划：字段驱动 `LxSearchField[]` + `#filters` 插槽 + actions 配置 + search/reset 事件 |
-| **P0** | **LxStatusSwitch** | 14 | 有（胶囊滑块内嵌"开启/关闭"） | 0/1 反向映射 + disabled 降级 Tag + loading 防抖，纯前端可封装 |
-| P1 | **LxUpload** | 20 | 有（UploadDropZone 虚线拖拽区标本） | V2 已是 uploadApi 注入式 → 不违反 P7；拖拽区 + 格式/大小校验 + tips |
-| P1 | **LxSelectPagination** | 6 | 无专门标本 | 远程分页下拉；api 注入 + **targetMap 回显**是项目独有难点 |
-| P1 | **LxDescriptions** | 36 | 有（抽屉标签-值两端对齐行） | 配 LxDrawer 的详情行组件 |
-| P1 | **LxSectionTitle / LxMetricCard** | 28 | 有 | 区块标题三 variant / 指标卡等宽数值；V3 已有成熟原型可直接吸收 |
-| P2 | **LxVirtualTree / LxCheckboxList** | 8 | 有（花名册勾选标本：卡片式 checkbox + 计数） | 万级虚拟滚动，纯前端可封装 |
-| P2 | **LxTransferPanel**（DataPermissionTree） | 3 | 有 | 左树右已选双栏 + 全选/取消 |
-| P2 | **LxPasswordInput** | 9 | 无 | 剪贴板防护，直接封装 |
-| P2 | **LxAuthImg** | 12 | 无 | 请求函数由业务传入（P7） |
-| P3 | 人员选择弹窗壳 | 3 | 无 | "SearchBar + ProTable + 多选"壳组件，fetchApi 注入 |
-| P3 | LxBreadcrumb | 2 | 无 | 路由自动生成 |
-| P3 | **useTable composable** | — | — | 竞态取消/乐观更新/搜索刷新语义，纯前端逻辑（B-1 配套） |
+| 优先级 | 组件                                      | 频次 | 设计稿标本                                   | 封装要点（P7 兼容设计）                                                                                      |
+| ------ | ----------------------------------------- | ---- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **P0** | **LxSearchBar**                           | 33   | 有（GRID 4-COL 检索面板 + ACTION 行）        | COMPONENT-SPEC 已有签名规划：字段驱动 `LxSearchField[]` + `#filters` 插槽 + actions 配置 + search/reset 事件 |
+| **P0** | **LxStatusSwitch**                        | 14   | 有（胶囊滑块内嵌"开启/关闭"）                | 0/1 反向映射 + disabled 降级 Tag + loading 防抖，纯前端可封装                                                |
+| P1     | **LxUpload**                              | 20   | 有（UploadDropZone 虚线拖拽区标本）          | V2 已是 uploadApi 注入式 → 不违反 P7；拖拽区 + 格式/大小校验 + tips                                          |
+| P1     | **LxSelectPagination**                    | 6    | 无专门标本                                   | 远程分页下拉；api 注入 + **targetMap 回显**是项目独有难点                                                    |
+| P1     | **LxDescriptions**                        | 36   | 有（抽屉标签-值两端对齐行）                  | 配 LxDrawer 的详情行组件                                                                                     |
+| P1     | **LxSectionTitle / LxMetricCard**         | 28   | 有                                           | 区块标题三 variant / 指标卡等宽数值；V3 已有成熟原型可直接吸收                                               |
+| P2     | **LxVirtualTree / LxCheckboxList**        | 8    | 有（花名册勾选标本：卡片式 checkbox + 计数） | 万级虚拟滚动，纯前端可封装                                                                                   |
+| P2     | **LxTransferPanel**（DataPermissionTree） | 3    | 有                                           | 左树右已选双栏 + 全选/取消                                                                                   |
+| P2     | **LxPasswordInput**                       | 9    | 无                                           | 剪贴板防护，直接封装                                                                                         |
+| P2     | **LxAuthImg**                             | 12   | 无                                           | 请求函数由业务传入（P7）                                                                                     |
+| P3     | 人员选择弹窗壳                            | 3    | 无                                           | "SearchBar + ProTable + 多选"壳组件，fetchApi 注入                                                           |
+| P3     | LxBreadcrumb                              | 2    | 无                                           | 路由自动生成                                                                                                 |
+| P3     | **useTable composable**                   | —    | —                                            | 竞态取消/乐观更新/搜索刷新语义，纯前端逻辑（B-1 配套）                                                       |
 
 ### E. 明确不做 ❌
 
@@ -221,10 +355,10 @@ cascader / steps / timeline / carousel / transfer(EP 原生) / slider / rate / s
 
 **待拍板的两个交互冲突**：
 
-| 冲突 | 选项 A | 选项 B |
-|---|---|---|
+| 冲突               | 选项 A                 | 选项 B                                                 |
+| ------------------ | ---------------------- | ------------------------------------------------------ |
 | ActionButtons 形态 | 设计稿 P2 铁律：纯文字 | 项目现状：图标 + 预设语义（view/edit/delete 自动配色） |
-| 控件密度 | 设计稿：32px 紧凑 | V3 现状：size='large' 40px |
+| 控件密度           | 设计稿：32px 紧凑      | V3 现状：size='large' 40px                             |
 
 ---
 

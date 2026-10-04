@@ -2,8 +2,7 @@ import type { FormInstance, FormItemRule, FormRules } from 'element-plus'
 
 /**
  * LxForm Props — el-form 二次封装（$attrs 全透传，未声明的 props/事件原样传给 el-form）
- * 视觉源：stitch component_library_showcase · StandardInput/Select
- *        + _26 节点管理表单弹窗（错误态高亮规格）
+ * 视觉源：design/表单控件八件套/（32px 控件、标签与校验错误态）
  */
 export interface LxFormProps {
   /** 表单数据对象（必传，供校验） */
@@ -21,9 +20,11 @@ export interface LxFormProps {
   inline?: boolean
   /** 整表禁用 */
   disabled?: boolean
+  /** 校验失败后滚动并聚焦到首个无效字段；默认 false，保持 Element Plus 契约。 */
+  scrollToError?: boolean
   /** 网格列数（1=常规流式，2/3=双列/三列网格；视口不大于 640px 时折为单列）；inline 模式下失效 */
   columns?: number
-  /** 网格模式行间距 px，默认 16 */
+  /** 网格模式行间距 px，默认 12（水平间距仍为 16px） */
   rowGap?: number
 }
 

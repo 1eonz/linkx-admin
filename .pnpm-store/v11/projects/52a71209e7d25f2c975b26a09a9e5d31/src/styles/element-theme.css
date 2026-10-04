@@ -187,8 +187,8 @@ html:root .el-select__wrapper.is-focused {
 
 .el-form-item.is-error .el-input__wrapper,
 .el-form-item.is-error .el-textarea__inner {
-  background-color: var(--lx-color-error-light);
-  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
+  background-color: var(--lx-color-form-error-bg);
+  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
 }
 
 html:root .el-form-item.is-error .el-input__wrapper.is-focus,
@@ -197,32 +197,30 @@ html:root .el-form-item.is-error .el-textarea__inner:focus {
   outline: none;
   outline-offset: 0;
   box-shadow:
-    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 1px var(--lx-color-form-error) inset,
     0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
 html:root .el-form-item.is-error .el-select__wrapper {
-  background-color: var(--lx-color-error-light);
-  border-color: var(--lx-color-error);
+  background-color: var(--lx-color-form-error-bg);
+  border-color: var(--lx-color-form-error);
   box-shadow: none;
 }
 
 html:root .el-form-item.is-error .el-select__wrapper.is-focused {
-  border-color: var(--lx-color-error-strong);
+  border-color: var(--lx-color-form-error);
   box-shadow: none;
 }
 
 .el-form-item.is-error .el-form-item__error {
-  color: var(--lx-color-error-strong);
+  color: var(--lx-color-form-error);
 }
 
-/* 错误态输入值同步变红（标本八件套：红边浅红底 + 深红值一体化表达）。
- * 用 error-strong 而非 error：13px 小字号对比度补偿（DESIGN-SPEC §3.2）。
- */
+/* 字段校验错误的输入值与边线使用同一表单专属令牌。 */
 .el-form-item.is-error .el-input__inner,
 .el-form-item.is-error .el-textarea__inner,
 .el-form-item.is-error .el-range-input {
-  color: var(--lx-color-error-strong);
+  color: var(--lx-color-form-error);
 }
 
 .el-textarea__inner {
@@ -239,6 +237,97 @@ html:root .el-dropdown__popper,
 html:root .el-popover.el-popper {
   border-radius: var(--lx-radius-md);
   box-shadow: var(--lx-shadow-pop);
+}
+
+/* ===== Tooltip / Popover / Dropdown 桥接（浮层三件套） =====
+ * 统一 Teleport 到 body 后的层级、圆角、阴影和焦点可见性。组件仍保留
+ * Element Plus 的键盘导航、定位和关闭契约；业务只需使用对应 EP 控件。
+ */
+html:root .el-tooltip__popper.el-popper,
+html:root .el-popper.is-dark {
+  --el-popper-bg-color-dark: var(--lx-bg-inverse);
+  z-index: 4000;
+  border: 1px solid var(--lx-bg-inverse);
+  border-radius: var(--lx-radius-md);
+  background: var(--lx-bg-inverse);
+  box-shadow: var(--lx-shadow-pop);
+  color: var(--lx-text-inverse);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+html:root .el-tooltip__popper.el-popper > .el-popper__arrow:before,
+html:root .el-popper.is-dark > .el-popper__arrow:before {
+  border-color: var(--lx-bg-inverse);
+  background: var(--lx-bg-inverse);
+}
+
+html:root .el-popover.el-popper {
+  --el-popover-bg-color: var(--lx-bg-card);
+  --el-popover-border-color: var(--lx-border);
+  --el-popover-padding: var(--lx-space-md);
+  --el-popover-border-radius: var(--lx-radius-md);
+  z-index: 2000;
+  color: var(--lx-text-regular);
+  box-shadow: var(--lx-shadow-pop);
+}
+
+html:root .el-dropdown__popper.el-popper {
+  --el-dropdown-menu-box-shadow: var(--lx-shadow-pop);
+  --el-dropdown-menuItem-hover-fill: var(--lx-bg-table-header);
+  --el-dropdown-menuItem-hover-color: var(--lx-color-primary);
+  --el-dropdown-menu-index: 2000;
+  z-index: 2000;
+  border-radius: var(--lx-radius-md);
+  box-shadow: var(--lx-shadow-pop);
+}
+
+html:root .el-dropdown-menu {
+  min-width: 128px;
+  padding: var(--lx-space-xs) 0;
+  background: var(--lx-bg-card);
+}
+
+html:root .el-dropdown-menu__item {
+  min-height: var(--lx-control-height);
+  box-sizing: border-box;
+  padding: var(--lx-space-xs) var(--lx-space-lg);
+  color: var(--lx-text-regular);
+  font-size: 13px;
+  line-height: 24px;
+}
+
+html:root .el-dropdown-menu__item:not(.is-disabled):hover,
+html:root .el-dropdown-menu__item:not(.is-disabled):focus {
+  background: var(--lx-bg-table-header);
+  color: var(--lx-color-primary);
+}
+
+html:root .el-dropdown-menu__item--divided {
+  margin: var(--lx-space-xs) 0;
+  border-top-color: var(--lx-border-light);
+}
+
+html:root .el-dropdown-menu__item.is-disabled {
+  color: var(--lx-text-placeholder);
+  cursor: not-allowed;
+}
+
+html:root .el-dropdown-menu__item.is-danger,
+html:root .el-dropdown-menu__item--danger {
+  color: var(--lx-color-error-strong);
+}
+
+html:root .el-dropdown-menu__item.is-danger:not(.is-disabled):hover,
+html:root .el-dropdown-menu__item--danger:not(.is-disabled):hover {
+  background: var(--lx-color-error-light);
+  color: var(--lx-color-error-strong);
+}
+
+html:root .el-dropdown-selfdefine:focus-visible,
+html:root .el-popover__reference:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
 }
 
 /* ===== Select 下拉面板终态（design/表单控件八件套 02，EP 2.14.6 类名锚定）=====
@@ -436,7 +525,8 @@ html.dark.lx-theme-hud
 }
 
 /* HUD 深色主题（需同时挂 html.dark 与 .lx-theme-hud） */
-html.dark.lx-theme-hud {
+html.dark.lx-theme-hud,
+html:root .el-picker__popper.lx-theme-hud {
   --el-bg-color: #0b1220;
   --el-bg-color-overlay: #16233a;
   --el-fill-color-blank: #101a2c;

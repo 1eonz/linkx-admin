@@ -10,11 +10,13 @@
 /* ===== 核心态固化（与全局桥同款，锚定 .lx-input 前缀提特异性）===== */
 /* 基础几何：圆角 + 1px 控件描边（--lx-control-border 专属控件态档） */
 .lx-input .el-input__wrapper {
+  box-sizing: border-box;
+  height: var(--el-input-height);
   border-radius: var(--lx-radius-md);
+  background-color: var(--lx-bg-card);
   box-shadow: 0 0 0 1px var(--lx-control-border) inset;
-  transition:
-    box-shadow var(--lx-transition),
-    background-color var(--lx-transition);
+  /* 前景与表面令牌需同步切换，避免主题过渡期间文字对比度骤降。 */
+  transition: box-shadow var(--lx-transition);
 }
 
 /* 禁用态：半透明（标本 01 上级锁定行） */
@@ -36,23 +38,23 @@
     0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
-/* 错误态：红底红边一体化（标本八件套错误行，依赖 ElForm/LxForm 上下文） */
+/* 错误态：使用表单专属校验令牌，依赖 ElForm/LxForm 上下文。 */
 .el-form-item.is-error .lx-input .el-input__wrapper {
-  background-color: var(--lx-color-error-light);
-  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
+  background-color: var(--lx-color-form-error-bg);
+  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
 }
 
 .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
   outline: none;
   outline-offset: 0;
   box-shadow:
-    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 1px var(--lx-color-form-error) inset,
     0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
-/* 错误态输入值同步变红：error-strong 深红做小字号对比度补偿（DESIGN-SPEC §3.2） */
+/* 表单校验错误输入值与边线使用同一表单专属令牌。 */
 .el-form-item.is-error .lx-input .el-input__inner {
-  color: var(--lx-color-error-strong);
+  color: var(--lx-color-form-error);
 }
 
 /* mono 值：警号 / 编码等机器读数字段（标本 01 聚焦行 font-mono 契约） */
@@ -68,7 +70,15 @@
 .lx-input .el-input__count-inner {
   font-family: var(--lx-font-mono);
   font-size: 11px;
-  color: var(--lx-text-label);
+  color: var(--lx-color-on-input);
+}
+
+.lx-input .el-input__count-inner {
+  background-color: var(--lx-bg-card);
+}
+
+.el-form-item.is-error .lx-input .el-input__count-inner {
+  background-color: transparent;
 }
 
 /* 超限计数红字（EP is-exceed 态；正常 maxlength 场景已被硬截断，

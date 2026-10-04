@@ -28,6 +28,7 @@ import {
   type LxUploadFile,
   type LxVirtualTreeNode,
 } from '../../src';
+import CascaderDemo from '../../src/components/LxCascader/demo/basic.vue';
 
 const lastAction = ref('等待操作');
 const query = ref<Record<string, unknown>>({ keyword: '', status: 'online', date: '' });
@@ -234,6 +235,13 @@ function onPermissionChange(keys: (string | number)[], _nodes: LxVirtualTreeNode
           <LxUpload v-model="uploadFiles" accept=".xlsx,.csv" :max-size="10" :auto-upload="false" />
         </div>
       </div>
+    </section>
+
+    <section class="new-components-demo__section">
+      <LxSectionTitle title="级联选择">
+        <template #extra><span class="new-components-demo__caption">单选/多选、加载、失败重试与禁用状态</span></template>
+      </LxSectionTitle>
+      <CascaderDemo />
     </section>
 
     <section class="new-components-demo__section">

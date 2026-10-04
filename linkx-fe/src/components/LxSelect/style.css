@@ -17,7 +17,8 @@
   box-shadow: none;
   transition:
     border-color var(--lx-transition),
-    background-color var(--lx-transition);
+    background-color var(--lx-transition),
+    box-shadow var(--lx-transition);
 }
 
 /* hover：描边转主色（标本 02 综合演练卡 hover:border-primary 契约；
@@ -48,15 +49,15 @@
   opacity: 0.6;
 }
 
-/* 错误态：红底红边一体化（标本八件套错误行，依赖 ElForm/LxForm 上下文） */
+/* 错误态：使用表单专属校验令牌，依赖 ElForm/LxForm 上下文。 */
 .el-form-item.is-error .lx-select.el-select .el-select__wrapper {
-  background-color: var(--lx-color-error-light);
-  border-color: var(--lx-color-error);
+  background-color: var(--lx-color-form-error-bg);
+  border-color: var(--lx-color-form-error);
   box-shadow: none;
 }
 
 .el-form-item.is-error .lx-select.el-select .el-select__wrapper.is-focused {
-  border-color: var(--lx-color-error-strong);
+  border-color: var(--lx-color-form-error);
   box-shadow: none;
 }
 
@@ -90,7 +91,7 @@ html.dark.lx-theme-hud
 
 /* ===== 触屏 ===== */
 /* 触屏（无 hover 能力）：44px 最小触控目标（与输入类族同族契约） */
-@media (hover: none) {
+@media (hover: none), (max-width: 640px) {
   .lx-select.el-select .el-select__wrapper {
     min-height: 44px;
   }

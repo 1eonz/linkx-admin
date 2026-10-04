@@ -1,0 +1,59 @@
+{
+  "name": "statusswitch-desktop-final",
+  "meta": {
+    "mode": "numeric-readonly-confirm"
+  },
+  "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave2-browser-2026-09-30\\statusswitch-desktop-final.png",
+  "metrics": {
+    "viewport": {
+      "width": 1440,
+      "height": 900,
+      "dpr": 1
+    },
+    "scroll": {
+      "width": 1440,
+      "height": 2819,
+      "horizontalOverflow": 0
+    },
+    "classes": "",
+    "title": "LxStatusSwitch 状态开关 | LxUI",
+    "bodyText": "Skip to content\nLxUI\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n\nLxProTable 数据表格\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxDutyCalendar 排班日历\n\nLxSectionTitle 区块标题\n\nLxAuthImg 鉴权图片\n\nLxDescriptions 详情描述\n\nLxPagination 分页\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxEmpty 空态\n\nLxGauge 圆环仪表\n\nLxNodeBadge 节点徽章\n\n权限消费\n\n数据录入\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\nLxTreeSelect 树形下拉\n\nLxDatePicker 日期选择\n\nLxInputNumber 数字输入\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxPasswordInput 密码输入框\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nOn this page\n交互示例\nProps\nEvents\n行为与边界\n设计对照记录\nLxStatusSwitch 状态开关\n​\n\n用于表格行或设置项内切换开启/关闭状态。开关本体复用 LxSwitch（胶囊内两字文字模式），胶囊色彩、几何与触控规格由 LxSwitch 统一固化；本组件专注业务值映射（0/1 旧值兼容）、关闭确认与只读 Tag。组件不访问业务接口；状态保存、错误反馈和权限判断由宿主负责。\n\n交互示例\n​\nHUD 深色主题\n下一次保存失败\n布控服务\n布控视频中继集群\n开启\n开启\n兼容旧状态值\n0 表示开启，1 表示关闭\n关闭\n1\n保存处理中\n",
+    "probes": [
+      null,
+      {
+        "selector": ".status-switch-demo",
+        "text": "HUD 深色主题 下一次保存失败布控服务布控视频中继集群开启开启兼容旧状态值0 表示开启，1 表示关闭关闭1保存处理中提交期间锁定开关关闭只读状态保留当前业务状态，不提供切换入口开启（只读）权限不足未注入权限码时降级为浅灰 LxTag开启关闭前确认取消确认时维持原状态关闭关闭状态由宿主持有；此示例不会请求后端。",
+        "rect": {
+          "x": 384,
+          "y": 377,
+          "width": 688,
+          "height": 444
+        },
+        "display": "grid",
+        "color": "rgb(78, 89, 105)",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "transitionDuration": "0s",
+        "transitionProperty": "all"
+      },
+      null,
+      null,
+      null,
+      {
+        "selector": ".el-switch__core",
+        "text": "开启",
+        "rect": {
+          "x": 1017,
+          "y": 432,
+          "width": 42,
+          "height": 20
+        },
+        "display": "flex",
+        "color": "rgb(134, 144, 156)",
+        "backgroundColor": "rgb(103, 194, 58)",
+        "transitionDuration": "0.3s, 0.3s",
+        "transitionProperty": "border-color, background-color"
+      }
+    ],
+    "reducedMotion": false
+  }
+}

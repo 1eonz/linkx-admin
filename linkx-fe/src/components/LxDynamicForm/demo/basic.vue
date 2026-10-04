@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+
 import {
+  LxButton,
+  LxCheckbox,
   LxDynamicForm,
   type LxDynamicFormField,
   type LxDynamicFormInstance,
   type LxDynamicFormOption,
-  type LxDynamicFormSlotProps,
+  type LxUploadRequestOptions,
 } from '../../../index'
 
 type CandidateMode = 'success' | 'empty' | 'error'
@@ -17,17 +20,36 @@ const form = ref<Record<string, unknown>>({
   mode: 'patrol',
   officer: '',
   enabled: true,
-  attachment: '',
+  cover: null,
+  photos: [
+    {
+      uid: 'demo-photo-1',
+      name: '东门现场.jpg',
+      size: 184320,
+      status: 'success',
+    },
+    {
+      uid: 'demo-photo-2',
+      name: '西门现场.jpg',
+      size: 221184,
+      status: 'success',
+    },
+  ],
 })
 const columns = ref<1 | 2 | 3>(2)
+const adaptive = ref(true)
 const disabled = ref(false)
 const darkTheme = ref(false)
+const validationError = ref(false)
 const candidateMode = ref<CandidateMode>('success')
 const candidateStatus = ref<CandidateStatus>('idle')
 const candidateOptions = ref<LxDynamicFormOption[]>([])
 const lastAction = ref('')
 let requestId = 0
 let timer: ReturnType<typeof setTimeout> | undefined
+const uploadTimers = new Set<number>()
+let originalDark = false
+let originalHud = false
 
 const allCandidates: LxDynamicFormOption[] = [
   { label: '李警官 · 指挥中心', value: 'officer-1' },
@@ -63,25 +85,76 @@ function loadCandidates(keyword = '') {
       if (currentRequest !== requestId) return
       candidateOptions.value = options
       candidateStatus.value = options.length ? 'ready' : 'empty'
-      lastAction.value = options.length
-        ? `候选人员：${options.length} 项`
-        : '没有匹配的候选人员'
     })
-    .catch((error: unknown) => {
+    .catch(() => {
       if (currentRequest !== requestId) return
       candidateOptions.value = []
       candidateStatus.value = 'error'
-      lastAction.value =
-        error instanceof Error ? error.message : '候选人员读取失败'
     })
     .finally(() => {
       if (currentRequest === requestId) timer = undefined
     })
 }
 
+/** 仅供文档演示的内存上传适配器，不发起网络请求。 */
+function mockImageUpload(options: LxUploadRequestOptions): XMLHttpRequest {
+  const request = new XMLHttpRequest()
+  let timerId: number | undefined
+
+  const finish = () => {
+    if (timerId !== undefined) uploadTimers.delete(timerId)
+    const progress = Object.assign(new ProgressEvent('progress'), {
+      percent: 100,
+    })
+    options.onProgress(progress)
+    options.onSuccess({ success: true, fileName: options.file.name })
+  }
+
+  // 给文档验收留出读取“上传中”状态的窗口，同时保持 Mock 不阻塞示例。
+  timerId = window.setTimeout(finish, 900)
+  uploadTimers.add(timerId)
+  request.abort = () => {
+    if (timerId === undefined) return
+    window.clearTimeout(timerId)
+    uploadTimers.delete(timerId)
+    timerId = undefined
+  }
+  return request
+}
+
 function setCandidateMode(mode: CandidateMode) {
   candidateMode.value = mode
   loadCandidates()
+}
+
+function showCandidateLoading() {
+  requestId += 1
+  if (timer) clearTimeout(timer)
+  timer = undefined
+  candidateStatus.value = 'loading'
+}
+
+function candidateFeedback() {
+  if (candidateStatus.value === 'loading') {
+    return { status: 'loading' as const, message: '候选人员加载中' }
+  }
+  if (candidateStatus.value === 'empty') {
+    return { status: 'info' as const, message: '暂无候选人员' }
+  }
+  if (candidateStatus.value === 'error') {
+    return {
+      status: 'error' as const,
+      message: '候选人员读取失败',
+      retry: () => loadCandidates(),
+      retryLabel: '重试',
+    }
+  }
+  return undefined
+}
+
+function setFixedColumns(count: 1 | 2 | 3) {
+  adaptive.value = false
+  columns.value = count
 }
 
 const fields = computed<LxDynamicFormField[]>(() => [
@@ -116,6 +189,7 @@ const fields = computed<LxDynamicFormField[]>(() => [
       loading: candidateStatus.value === 'loading',
       placeholder: '搜索候选人员',
     },
+    feedback: candidateFeedback(),
   },
   {
     key: 'enabled',
@@ -132,33 +206,84 @@ const fields = computed<LxDynamicFormField[]>(() => [
     props: { rows: 2, placeholder: '填写支援范围' },
   },
   {
-    key: 'attachment',
-    label: '任务附件',
+    key: 'cover',
+    label: '任务封面（单张）',
     type: 'upload',
-    slot: 'attachment',
+    span: 12,
+    props: {
+      accept: 'image/*',
+      autoUpload: true,
+      drag: true,
+      httpRequest: mockImageUpload,
+      limit: 1,
+      maxSize: 10,
+    },
+  },
+  {
+    key: 'photos',
+    label: '现场图片（多张）',
+    type: 'upload',
     span: 24,
+    props: {
+      accept: 'image/*',
+      autoUpload: true,
+      drag: true,
+      httpRequest: mockImageUpload,
+      limit: 5,
+      maxSize: 10,
+      multiple: true,
+    },
   },
 ])
 
 function submit() {
   formRef.value?.validate().then((valid) => {
+    validationError.value = !valid
     if (!valid) lastAction.value = '请填写标红的必填字段'
   })
 }
 
 function reset() {
+  validationError.value = false
   formRef.value?.resetFields()
   lastAction.value = '表单已恢复初始值'
 }
 
-function onFileChange(event: Event, update: LxDynamicFormSlotProps['update']) {
-  const input = event.target as HTMLInputElement
-  update(input.files?.[0]?.name ?? '')
+function onFieldChange(key: string) {
+  validationError.value = false
+  lastAction.value = `字段已更新：${key}`
 }
 
+function syncTheme() {
+  if (typeof document === 'undefined') return
+  document.documentElement.classList.toggle(
+    'dark',
+    darkTheme.value || originalDark,
+  )
+  document.documentElement.classList.toggle(
+    'lx-theme-hud',
+    darkTheme.value || originalHud,
+  )
+}
+
+watch(darkTheme, syncTheme)
+
+onMounted(() => {
+  if (typeof document === 'undefined') return
+  originalDark = document.documentElement.classList.contains('dark')
+  originalHud = document.documentElement.classList.contains('lx-theme-hud')
+  syncTheme()
+})
+
 onBeforeUnmount(() => {
+  if (typeof document !== 'undefined') {
+    document.documentElement.classList.toggle('dark', originalDark)
+    document.documentElement.classList.toggle('lx-theme-hud', originalHud)
+  }
   requestId += 1
   if (timer) clearTimeout(timer)
+  uploadTimers.forEach((timerId) => window.clearTimeout(timerId))
+  uploadTimers.clear()
 })
 
 loadCandidates()
@@ -166,102 +291,112 @@ loadCandidates()
 
 <template>
   <div class="dynamic-form-demo" :class="{ 'lx-theme-hud': darkTheme }">
-    <div class="dynamic-form-demo__toolbar">
-      <div class="dynamic-form-demo__modes" role="group" aria-label="表单列数">
-        <button
-          v-for="count in [1, 2, 3] as const"
-          :key="count"
-          type="button"
-          :aria-pressed="columns === count"
-          @click="columns = count"
+    <details class="dynamic-form-demo__settings">
+      <summary>演示设置</summary>
+      <p class="dynamic-form-demo__settings-hint">
+        低频检查项：布局、禁用、主题与 Mock 状态
+      </p>
+      <div class="dynamic-form-demo__toolbar">
+        <div
+          class="dynamic-form-demo__modes"
+          role="group"
+          aria-label="表单列数"
         >
-          {{ count }} 列
-        </button>
+          <LxButton
+            size="sm"
+            :type="adaptive ? 'primary' : 'default'"
+            :aria-pressed="adaptive"
+            @click="adaptive = true"
+          >
+            自适应
+          </LxButton>
+          <LxButton
+            v-for="count in [1, 2, 3] as const"
+            :key="count"
+            size="sm"
+            :type="!adaptive && columns === count ? 'primary' : 'default'"
+            :aria-pressed="!adaptive && columns === count"
+            @click="setFixedColumns(count)"
+          >
+            {{ count }} 列
+          </LxButton>
+        </div>
+        <LxCheckbox v-model="disabled">禁用表单</LxCheckbox>
+        <LxCheckbox v-model="darkTheme">HUD 深色主题</LxCheckbox>
       </div>
-      <label><input v-model="disabled" type="checkbox" /> 禁用表单</label>
-      <label><input v-model="darkTheme" type="checkbox" /> HUD 深色主题</label>
-    </div>
 
-    <div class="dynamic-form-demo__candidate-controls">
-      <span>候选人员数据</span>
-      <div
-        class="dynamic-form-demo__modes"
-        role="group"
-        aria-label="候选人员模拟结果"
-      >
-        <button
-          type="button"
-          :aria-pressed="candidateMode === 'success'"
-          @click="setCandidateMode('success')"
+      <div class="dynamic-form-demo__candidate-controls">
+        <span>候选人员数据</span>
+        <div
+          class="dynamic-form-demo__modes"
+          role="group"
+          aria-label="候选人员模拟结果"
         >
-          成功
-        </button>
-        <button
-          type="button"
-          :aria-pressed="candidateMode === 'empty'"
-          @click="setCandidateMode('empty')"
+          <LxButton
+            size="sm"
+            :type="candidateStatus === 'loading' ? 'primary' : 'default'"
+            :aria-pressed="candidateStatus === 'loading'"
+            @click="showCandidateLoading"
+          >
+            加载中
+          </LxButton>
+          <LxButton
+            size="sm"
+            :type="candidateMode === 'success' ? 'primary' : 'default'"
+            :aria-pressed="candidateMode === 'success'"
+            @click="setCandidateMode('success')"
+          >
+            成功
+          </LxButton>
+          <LxButton
+            size="sm"
+            :type="candidateMode === 'empty' ? 'primary' : 'default'"
+            :aria-pressed="candidateMode === 'empty'"
+            @click="setCandidateMode('empty')"
+          >
+            空结果
+          </LxButton>
+          <LxButton
+            size="sm"
+            :type="candidateMode === 'error' ? 'primary' : 'default'"
+            :aria-pressed="candidateMode === 'error'"
+            @click="setCandidateMode('error')"
+          >
+            失败
+          </LxButton>
+        </div>
+        <span
+          v-if="candidateStatus === 'ready'"
+          class="dynamic-form-demo__status"
         >
-          空结果
-        </button>
-        <button
-          type="button"
-          :aria-pressed="candidateMode === 'error'"
-          @click="setCandidateMode('error')"
-        >
-          失败
-        </button>
+          {{ candidateOptions.length }} 名候选人员
+        </span>
       </div>
-      <button
-        v-if="candidateStatus === 'error'"
-        type="button"
-        @click="loadCandidates()"
-      >
-        重试
-      </button>
-      <span
-        class="dynamic-form-demo__status"
-        :role="candidateStatus === 'error' ? 'alert' : 'status'"
-      >
-        {{
-          candidateStatus === 'loading'
-            ? '候选人员加载中'
-            : candidateStatus === 'error'
-              ? '候选人员读取失败'
-              : candidateStatus === 'empty'
-                ? '暂无候选人员'
-                : `${candidateOptions.length} 名候选人员`
-        }}
-      </span>
-    </div>
+    </details>
 
     <LxDynamicForm
       ref="formRef"
       v-model="form"
       :fields="fields"
       :columns="columns"
+      :adaptive="adaptive"
       :disabled="disabled"
-      @field-change="lastAction = `字段已更新：${$event}`"
+      @field-change="onFieldChange"
       @submit="lastAction = `表单已校验：${String($event.name)}`"
       @reset="lastAction = '表单已恢复初始值'"
-    >
-      <template #attachment="{ value, disabled: fieldDisabled, update }">
-        <label class="dynamic-form-demo__file">
-          <span>{{ value || '选择本地附件' }}</span>
-          <input
-            type="file"
-            :disabled="fieldDisabled"
-            @change="onFileChange($event, update)"
-          />
-        </label>
-      </template>
-    </LxDynamicForm>
+    />
 
     <div class="dynamic-form-demo__footer">
-      <button type="button" :disabled="disabled" @click="submit">
+      <LxButton type="primary" :disabled="disabled" @click="submit">
         提交校验
-      </button>
-      <button type="button" :disabled="disabled" @click="reset">重置</button>
-      <span role="status" aria-live="polite">{{ lastAction }}</span>
+      </LxButton>
+      <LxButton :disabled="disabled" @click="reset">重置</LxButton>
+      <span
+        :role="validationError ? 'alert' : 'status'"
+        :aria-live="validationError ? 'assertive' : 'polite'"
+      >
+        {{ lastAction }}
+      </span>
     </div>
   </div>
 </template>
@@ -279,6 +414,31 @@ loadCandidates()
   font-size: 13px;
 }
 
+.dynamic-form-demo__settings {
+  display: grid;
+  gap: var(--lx-space-sm);
+}
+
+.dynamic-form-demo__settings > summary {
+  min-height: 32px;
+  padding: 6px 0;
+  color: var(--lx-text-regular);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.dynamic-form-demo__settings > summary::marker {
+  color: var(--lx-color-primary);
+}
+
+.dynamic-form-demo__settings-hint {
+  margin: 0;
+  color: var(--lx-text-secondary-strong);
+  font-size: 12px;
+  line-height: 18px;
+}
+
 .dynamic-form-demo__toolbar,
 .dynamic-form-demo__candidate-controls,
 .dynamic-form-demo__footer,
@@ -289,58 +449,20 @@ loadCandidates()
   gap: var(--lx-space-sm);
 }
 
-.dynamic-form-demo__toolbar label {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--lx-space-xs);
-}
-
-.dynamic-form-demo input[type='checkbox'] {
-  accent-color: var(--lx-color-primary);
-}
-
-.dynamic-form-demo button {
-  min-height: 32px;
-  padding: 4px 10px;
-  border: 1px solid var(--lx-border);
+.dynamic-form-demo__toolbar {
+  padding: var(--lx-space-sm);
+  border: 1px solid var(--lx-border-light);
   border-radius: var(--lx-radius-sm);
-  background: var(--lx-bg-card);
-  color: var(--lx-text-regular);
-  cursor: pointer;
-  font: inherit;
+  background: var(--lx-bg-page);
 }
 
-.dynamic-form-demo button:hover,
-.dynamic-form-demo button[aria-pressed='true'] {
-  border-color: var(--lx-color-primary);
-  color: var(--lx-color-primary);
-}
-
-.dynamic-form-demo button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.dynamic-form-demo button:focus-visible,
-.dynamic-form-demo input:focus-visible {
-  outline: 2px solid var(--lx-color-primary);
-  outline-offset: 2px;
+.dynamic-form-demo__candidate-controls {
+  padding: var(--lx-space-sm);
+  border-top: 1px solid var(--lx-border-light);
 }
 
 .dynamic-form-demo__status {
-  color: var(--lx-text-secondary);
-}
-
-.dynamic-form-demo__file {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--lx-space-sm);
-  min-width: 0;
-}
-
-.dynamic-form-demo__file input {
-  max-width: 100%;
+  color: var(--lx-text-secondary-strong);
 }
 
 .dynamic-form-demo__footer {
@@ -349,6 +471,6 @@ loadCandidates()
 }
 
 .dynamic-form-demo__footer span {
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
 }
 </style>

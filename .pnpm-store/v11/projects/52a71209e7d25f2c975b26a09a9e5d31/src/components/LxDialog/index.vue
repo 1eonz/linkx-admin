@@ -13,6 +13,8 @@ import LxIcon from '../LxIcon/index.vue'
 import LxButton from '../LxButton/index.vue'
 import 'element-plus/es/components/dialog/style/css'
 
+defineOptions({ name: 'LxDialog' })
+
 const props = withDefaults(defineProps<LxDialogProps>(), {
   modelValue: false,
   title: '',
@@ -69,6 +71,7 @@ function onConfirm() {
     :close-on-press-escape="closeOnPressEsc"
     :draggable="draggable"
     :show-close="false"
+    :aria-label="title ? undefined : '对话框'"
     align-center
     append-to-body
     @update:model-value="close"
@@ -120,7 +123,7 @@ function onConfirm() {
       </div>
     </template>
 
-    <template v-else #footer>
+    <template v-else-if="$slots.footer" #footer>
       <slot name="footer" />
     </template>
   </ElDialog>
@@ -134,6 +137,13 @@ function onConfirm() {
   --el-dialog-bg-color: var(--lx-bg-card);
   box-shadow: var(--lx-shadow-modal);
   max-width: calc(100vw - 32px);
+}
+
+/* Dialog 通过 append-to-body 脱离业务 Demo 的局部主题节点；显式绑定根主题，
+   保证 HUD 下 portal 浮层与宿主保持同一组表面和文字令牌。 */
+:global(html.lx-theme-hud .lx-dialog) {
+  --el-dialog-bg-color: var(--lx-bg-card);
+  color: var(--lx-text-primary);
 }
 
 :global(.lx-dialog .el-dialog__header) {
@@ -181,8 +191,10 @@ function onConfirm() {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border: none;
   border-radius: var(--lx-radius-md);
   background: transparent;
@@ -217,13 +229,6 @@ function onConfirm() {
 @media (prefers-reduced-motion: reduce) {
   .lx-dialog__close {
     transition: none;
-  }
-}
-
-@media (max-width: 600px) {
-  .lx-dialog__close {
-    width: 44px;
-    height: 44px;
   }
 }
 </style>

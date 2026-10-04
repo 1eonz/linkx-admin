@@ -1,6 +1,6 @@
-# Element Plus 基础控件桥接
+# Lx 基础控件与 Element Plus 兼容桥接
 
-`lx-ui/style.css` 为 Element Plus 提供 LinkX 设计令牌与状态样式。基础控件沿用 Element Plus 的数据、事件和校验契约；此页使用库入口导出的原生控件，检查 `design/按钮体系/` 与 `design/表单控件八件套/` 的实际渲染。
+按钮和表单基础控件优先使用 `LxButton`、`LxInput`、`LxSelect`、`LxRadio`、`LxCheckbox`、`LxInputNumber`、`LxDatePicker`、`LxSwitch`、`LxTextarea` 等公开封装，逐项对照 `design/按钮体系/` 与 `design/表单控件八件套/`。这些封装保留宿主常用的 Element Plus 值、事件和校验契约，同时按 LinkX 标本实现尺寸、状态和焦点样式。
 
 <script setup lang="ts">
 import ControlBridge from '../../src/components/LxForm/demo/control-bridge.vue';
@@ -12,16 +12,35 @@ import ControlBridge from '../../src/components/LxForm/demo/control-bridge.vue';
 <<< ../../src/components/LxForm/demo/control-bridge.vue
 :::
 
-上方覆盖 28/32/40px 按钮、默认/危险/禁用态，以及文本输入、普通选择、多选下拉、单选、复选、数字、日期范围、开关和文本域。通知渠道的全选项与子项分行缩进，用于辨认三态和组间距；协同部门多选用于检查标签折叠与键盘焦点。点击“校验表单”可检查必填错误与恢复，HUD 开关用于检查深色令牌。示例只使用本地表单数据，不访问接口。
+上方覆盖 28/32/40px 按钮、默认/危险/禁用态，以及 Lx 文本输入、普通选择、多选下拉、单选、复选、数字、日期范围、开关和文本域。通知渠道的全选项与子项分行缩进，用于辨认三态和组间距；协同部门多选用于检查标签折叠与键盘焦点。详情、页面容器和组织树分别使用 `LxDescriptions`、`LxPageCard`、`LxVirtualTree`。点击“校验表单”可检查必填错误与恢复，HUD 开关用于检查深色令牌。示例只使用本地表单数据，不访问接口。
 
 ## 接入
 
 ```ts
-import { ElButton, ElInput, ElSelect } from 'lx-ui'
+import {
+  ElTabPane,
+  ElTabs,
+  LxButton,
+  LxCheckbox,
+  LxCheckboxGroup,
+  LxDatePicker,
+  LxDescriptions,
+  LxForm,
+  LxFormItem,
+  LxInput,
+  LxInputNumber,
+  LxPageCard,
+  LxRadio,
+  LxRadioGroup,
+  LxSelect,
+  LxSwitch,
+  LxTextarea,
+  LxVirtualTree,
+} from 'lx-ui'
 import 'lx-ui/style.css'
 ```
 
-没有专用 Lx 封装的基础控件可直接从 `lx-ui` 使用其导出的 Element Plus 控件。`LxDynamicForm` 在本桥接之上组合 schema 字段；是否采用 schema 表单取决于页面的实际复用和联动需求。Vue3 宿主移除 `element-plus` 直依赖前仍需完成导入、自动导入、类型、样式与构建配置迁移。
+当前缺少通用内容页签封装：`LxTabsBar` 用于路由页面标签，与 `ElTabs` / `ElTabPane` 的局部内容切换契约不同。此处仅对该缺口直接使用 `lx-ui` 导出的 Element Plus 控件；后续如按设计新增通用页签组件，再统一替换并补交互验收。`LxDynamicForm` 在这些公开 `Lx*` 控件之上组合 schema 字段。Vue3 宿主移除 `element-plus` 直依赖前仍需完成导入、自动导入、类型、样式与构建配置迁移。
 
 ## 状态与边界
 

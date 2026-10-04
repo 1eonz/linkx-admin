@@ -3,10 +3,10 @@
  * LxPagination — 分页器（Element Plus el-pagination 二次封装）
  * 纯受控：页码计算与请求由业务负责，样式由 token 桥接层接管
  */
-import { computed } from 'vue';
-import { ElPagination } from 'element-plus';
-import type { LxPaginationProps } from './types';
-import 'element-plus/es/components/pagination/style/css';
+import { computed } from 'vue'
+import { ElPagination } from 'element-plus'
+import type { LxPaginationProps } from './types'
+import 'element-plus/es/components/pagination/style/css'
 
 const props = withDefaults(defineProps<LxPaginationProps>(), {
   page: 1,
@@ -21,50 +21,62 @@ const props = withDefaults(defineProps<LxPaginationProps>(), {
   size: 'default',
   layout: undefined,
   background: false,
-});
+})
 
 const emit = defineEmits<{
-  'update:page': [page: number];
-  'update:page-size': [size: number];
-  change: [page: number, size: number];
-}>();
+  'update:page': [page: number]
+  'update:page-size': [size: number]
+  change: [page: number, size: number]
+}>()
 
-const resolvedLayout = computed(() => props.layout ??
-  [
-    props.showTotal && 'total',
-    props.showSize && 'sizes',
-    'prev',
-    'pager',
-    'next',
-    props.showJumper && 'jumper',
-  ]
-    .filter(Boolean)
-    .join(', ')
-);
+const resolvedLayout = computed(
+  () =>
+    props.layout ??
+    [
+      props.showTotal && 'total',
+      props.showSize && 'sizes',
+      'prev',
+      'pager',
+      'next',
+      props.showJumper && 'jumper',
+    ]
+      .filter(Boolean)
+      .join(', '),
+)
 
-/** 切页回顶：定位组件所在文档位置回滚（列表容器内滚动时业务可关掉自行处理） */
+/** 切页回顶：定位组件所在文档位置回滚（列表容器内滚动时业务可关掉自行处理）。
+ * 系统开启减少动效时改用即时滚动，避免组件主动制造平滑动画。
+ */
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (typeof window === 'undefined' || typeof window.scrollTo !== 'function')
+    return
+  const mediaQuery =
+    typeof window.matchMedia === 'function'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)')
+      : null
+  const reducedMotion = mediaQuery?.matches ?? false
+  window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' })
 }
 
 function onPage(p: number) {
-  emit('update:page', p);
-  emit('change', p, props.pageSize);
-  if (props.autoScroll) scrollToTop();
+  emit('update:page', p)
+  emit('change', p, props.pageSize)
+  if (props.autoScroll) scrollToTop()
 }
 
 function onSize(s: number) {
-  emit('update:page-size', s);
+  emit('update:page-size', s)
   // 切换条数回到第一页（设计拍板 #5：受控 + 内置惯用法）
-  if (props.autoReset) emit('update:page', 1);
-  emit('change', props.autoReset ? 1 : props.page, s);
-  if (props.autoScroll) scrollToTop();
+  if (props.autoReset) emit('update:page', 1)
+  emit('change', props.autoReset ? 1 : props.page, s)
+  if (props.autoScroll) scrollToTop()
 }
 </script>
 
 <template>
   <ElPagination
     class="lx-pagination"
+    :class="`lx-pagination--${size}`"
     :current-page="page"
     :page-size="pageSize"
     :page-sizes="pageSizes"
@@ -80,10 +92,31 @@ function onSize(s: number) {
 <style scoped>
 .lx-pagination {
   --el-pagination-font-size: 12px;
-  --el-pagination-button-width: 32px;
-  --el-pagination-button-height: var(--lx-control-height);
+  --el-pagination-button-width: var(--lx-control-height-sm);
+  --el-pagination-button-height: var(--lx-control-height-sm);
   --el-pagination-hover-color: var(--lx-color-primary);
+  --el-pagination-button-bg-color: transparent;
+  --el-pagination-button-color: var(--lx-text-regular);
+  --el-pagination-button-disabled-color: var(--lx-text-placeholder);
+  --el-pagination-button-disabled-bg-color: var(--lx-bg-table-header);
   color: var(--lx-text-regular);
   justify-content: flex-end;
+}
+
+.lx-pagination--default {
+  --el-pagination-button-width: var(--lx-control-height-sm);
+  --el-pagination-button-height: var(--lx-control-height-sm);
+}
+
+.lx-pagination--small {
+  --el-pagination-font-size: 12px;
+  --el-pagination-button-width: var(--lx-control-height-sm);
+  --el-pagination-button-height: var(--lx-control-height-sm);
+}
+
+.lx-pagination--large {
+  --el-pagination-font-size: 13px;
+  --el-pagination-button-width: var(--lx-control-height-lg);
+  --el-pagination-button-height: var(--lx-control-height-lg);
 }
 </style>

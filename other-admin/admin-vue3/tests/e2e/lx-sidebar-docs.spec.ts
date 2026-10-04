@@ -26,14 +26,21 @@ test.describe('LxSidebar 文档示例', () => {
     await expect(basic.locator('[href="javascript:;"]')).toHaveCount(0);
 
     const brandRing = basic.locator('.lx-sidebar-brand__ring');
-    const gaugeArc = basic.locator('.lx-gauge__arc');
     await expect.poll(() => brandRing.evaluate((element) => getComputedStyle(element).animationName)).toBe('none');
-    await expect
-      .poll(() => gaugeArc.evaluate((element) => Number.parseFloat(getComputedStyle(element).transitionDuration)))
-      .toBeLessThan(0.001);
 
     const controlled = page.locator('.demo-box').nth(1);
     await controlled.getByRole('button', { name: '收起导航' }).click();
+    const gaugeArc = controlled.locator('.lx-gauge__arc');
+    await expect(gaugeArc).toHaveCount(1);
+    await expect
+      .poll(() =>
+        gaugeArc.evaluate((element) => {
+          const duration = getComputedStyle(element).transitionDuration;
+          const value = Number.parseFloat(duration);
+          return duration.endsWith('ms') ? value / 1000 : value;
+        }),
+      )
+      .toBeLessThan(0.001);
     const railGroup = controlled.getByRole('button', { name: '协同岗管理' });
     await railGroup.focus();
     await page.keyboard.press('Enter');

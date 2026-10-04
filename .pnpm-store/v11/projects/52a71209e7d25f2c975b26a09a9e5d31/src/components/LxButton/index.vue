@@ -8,10 +8,11 @@
  * 拍板 #11 铁律：表格行内一律用 type="text"；同屏 primary 上限 1 个。
  * 图标统一走 LxIcon（currentColor 跟随文字色），不使用 EP 图标链路。
  */
-import { computed, ref, useAttrs } from 'vue'
 import { ElButton, ElTooltip } from 'element-plus'
-import LxIcon from '../LxIcon/index.vue'
+import { computed, ref, useAttrs } from 'vue'
+
 import type { LxButtonProps, LxButtonSize } from './types'
+import LxIcon from '../LxIcon/index.vue'
 import 'element-plus/es/components/button/style/css'
 import 'element-plus/es/components/tooltip/style/css'
 import './style.css'
@@ -136,6 +137,7 @@ function onClick(event: MouseEvent) {
       :virtual-ref="tooltipTrigger"
       :content="iconOnlyLabel"
       placement="top"
+      :show-after="200"
     />
   </ElButton>
 </template>

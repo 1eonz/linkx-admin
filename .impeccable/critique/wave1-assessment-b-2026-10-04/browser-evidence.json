@@ -1,0 +1,83 @@
+{
+  "wave": "Wave 1",
+  "assessment": "B: detector and browser evidence",
+  "date": "2026-10-04",
+  "isolation": "Assessment B only; no Assessment A findings were read or used.",
+  "target": {
+    "project": "linkx-fe",
+    "components": [
+      "LxButton",
+      "LxActionButtons",
+      "LxInput",
+      "LxTextarea",
+      "LxInputNumber",
+      "LxPasswordInput"
+    ],
+    "documentRoutes": [
+      "http://127.0.0.1:4174/components/lxbutton.html",
+      "http://127.0.0.1:4174/components/lxactionbuttons.html",
+      "http://127.0.0.1:4174/components/lxinput.html",
+      "http://127.0.0.1:4174/components/lxtextarea.html",
+      "http://127.0.0.1:4174/components/lxinputnumber.html",
+      "http://127.0.0.1:4174/components/lxpasswordinput.html"
+    ],
+    "routeHttpStatus": 200,
+    "routeResponseBytes": 514,
+    "routeResponseNote": "VitePress SPA shell returned; this does not constitute browser rendering evidence."
+  },
+  "targetVersionFingerprints": [
+    { "path": "linkx-fe/src/components/LxButton/index.vue", "bytes": 5494, "sha256": "4AEE3D69205246CECF041CC7FB87A0065A1D93DB8D10DF84977557721DFCBE72" },
+    { "path": "linkx-fe/src/components/LxButton/demo/basic.vue", "bytes": 8503, "sha256": "533F268F86C43120F7DDB583FD6146EBBFCAE3C7EB3B92D189C7ADEE0BBD9C00" },
+    { "path": "linkx-fe/docs/components/lxbutton.md", "bytes": 8615, "sha256": "54330AB757F7C4380952E20633DE204DFAB0BA62AB436513A6CCA2F9D83C012C" },
+    { "path": "linkx-fe/src/components/LxActionButtons/index.vue", "bytes": 9117, "sha256": "10884F7DACC78643E5CB78B50D07BCCD4BC0FAA2D7AF2E17CD81B377BD6DE87B" },
+    { "path": "linkx-fe/src/components/LxActionButtons/demo/basic.vue", "bytes": 5177, "sha256": "48170FB50FE293B835ABD440B71A31C76B38386D937270F1AA7E5289256A3ED1" },
+    { "path": "linkx-fe/docs/components/lxactionbuttons.md", "bytes": 4708, "sha256": "9EAC9FC6EE04F7A60FBBF79E5DC2B5AE4E9DD0CBE669254DCFEAC6413073BD78" },
+    { "path": "linkx-fe/src/components/LxInput/index.vue", "bytes": 3366, "sha256": "8E0A376DECF1837FC0CB957017F0D8D66891CE29BA45484C94FA6A081BA543ED" },
+    { "path": "linkx-fe/src/components/LxInput/demo/basic.vue", "bytes": 6869, "sha256": "F81BD28753AA165327F053187F5D15928044ADA07D7744D01F8827A63FCACBD6" },
+    { "path": "linkx-fe/docs/components/lxinput.md", "bytes": 6702, "sha256": "34D52DE8D8831582FDDFE013F646D5324A3F45F1458BF2DF7233168E7B233C76" },
+    { "path": "linkx-fe/src/components/LxTextarea/index.vue", "bytes": 4759, "sha256": "F87DA9C8B1303FCD09954FE969B5161D2E99ED22B349AF380925C5823A0B5C10" },
+    { "path": "linkx-fe/src/components/LxTextarea/demo/basic.vue", "bytes": 6406, "sha256": "10FBF48C78E7CFFA949CB9B71B0B300951A21E733649BA7033FE90266EF32D69" },
+    { "path": "linkx-fe/docs/components/lxtextarea.md", "bytes": 6363, "sha256": "79E15DDBA6D1FB6BC10567BCFB47A557DF263D5F4DA41BA7C7BEA6E52F9C981A" },
+    { "path": "linkx-fe/src/components/LxInputNumber/index.vue", "bytes": 4133, "sha256": "EC4C2E47EC0CC9D4761EB37536DBCDC977DCD7663DC8E9CE7CACE1A000E3558D" },
+    { "path": "linkx-fe/src/components/LxInputNumber/demo/basic.vue", "bytes": 8333, "sha256": "F5ACAE60460BFF564E91DA8727B4CAAF1F6C8B2CA7DA136999D3D1ED96287C76" },
+    { "path": "linkx-fe/docs/components/lxinputnumber.md", "bytes": 5742, "sha256": "3C9A6A5CA3FEC75C83B26C48BE7FF1F75A5248BAB2FA52A3FF1898C55BB4CC4E" },
+    { "path": "linkx-fe/src/components/LxPasswordInput/index.vue", "bytes": 2414, "sha256": "2BB3AF4C923E858911530F59F4858F2CFD5CAE96111C92FB90FA806181969EFD" },
+    { "path": "linkx-fe/src/components/LxPasswordInput/demo/basic.vue", "bytes": 5265, "sha256": "13302669D3A876CCA2CFD0531DD9DB91596329EE5831CD57FC589D8341C76A66" },
+    { "path": "linkx-fe/docs/components/lxpasswordinput.md", "bytes": 4093, "sha256": "BF415238AC2B3E2CCD8B4FA38E52B6178158D70B6C11E2CD66375FF8F049ED48" }
+  ],
+  "staticDetector": [
+    { "component": "LxButton", "target": "linkx-fe/src/components/LxButton/index.vue", "jsonFile": "lxbutton.detector.stdout.json", "stderrFile": "lxbutton.detector.stderr.txt", "exitCodeFile": "lxbutton.detector.exit-code.txt", "findingCount": 0, "exitCode": 0, "stderrBytes": 0 },
+    { "component": "LxActionButtons", "target": "linkx-fe/src/components/LxActionButtons/index.vue", "jsonFile": "lxactionbuttons.detector.stdout.json", "stderrFile": "lxactionbuttons.detector.stderr.txt", "exitCodeFile": "lxactionbuttons.detector.exit-code.txt", "findingCount": 0, "exitCode": 0, "stderrBytes": 0 },
+    { "component": "LxInput", "target": "linkx-fe/src/components/LxInput/index.vue", "jsonFile": "lxinput.detector.stdout.json", "stderrFile": "lxinput.detector.stderr.txt", "exitCodeFile": "lxinput.detector.exit-code.txt", "findingCount": 0, "exitCode": 0, "stderrBytes": 0 },
+    { "component": "LxTextarea", "target": "linkx-fe/src/components/LxTextarea/index.vue", "jsonFile": "lxtextarea.detector.stdout.json", "stderrFile": "lxtextarea.detector.stderr.txt", "exitCodeFile": "lxtextarea.detector.exit-code.txt", "findingCount": 0, "exitCode": 0, "stderrBytes": 0 },
+    { "component": "LxInputNumber", "target": "linkx-fe/src/components/LxInputNumber/index.vue", "jsonFile": "lxinputnumber.detector.stdout.json", "stderrFile": "lxinputnumber.detector.stderr.txt", "exitCodeFile": "lxinputnumber.detector.exit-code.txt", "findingCount": 0, "exitCode": 0, "stderrBytes": 0 },
+    { "component": "LxPasswordInput", "target": "linkx-fe/src/components/LxPasswordInput/index.vue", "jsonFile": "lxpasswordinput.detector.stdout.json", "stderrFile": "lxpasswordinput.detector.stderr.txt", "exitCodeFile": "lxpasswordinput.detector.exit-code.txt", "findingCount": 0, "exitCode": 0, "stderrBytes": 0 }
+  ],
+  "browser": {
+    "status": "unavailable",
+    "cuaState": { "apps": [], "browsers": [] },
+    "attempts": [
+      { "provider": "iab", "result": "Browser is not available: iab" },
+      { "provider": "chrome", "result": "Browser is not available: chrome" }
+    ],
+    "automationPackages": { "playwright": false, "playwright-core": false, "puppeteer": false, "puppeteer-core": false },
+    "installedBrowserExecutables": [
+      "C:/Program Files/Google/Chrome/Application/chrome.exe",
+      "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
+    ],
+    "nativeBrowserTabCreated": false,
+    "mutableDomPreflight": "not attempted: no reachable browser tab; document.title and script-node mutation could not be verified",
+    "overlay": "not attempted: live detector overlay requires a browser page",
+    "views": [],
+    "screenshots": [],
+    "viewportMeasurements": "uncollected",
+    "documentFingerprint": "uncollected",
+    "consoleFindings": "uncollected; this is not a zero-console-error result",
+    "externalRequestCount": "uncollected; this is not a zero-external-request result"
+  },
+  "temporaryServers": {
+    "vitepress": { "startedByAssessmentB": true, "url": "http://127.0.0.1:4174", "stopMethod": "Ctrl+C to the exec session", "stoppedBeforeReport": true },
+    "impeccableLiveServer": { "started": false, "reason": "browser backend unavailable" }
+  },
+  "assessmentBoundary": "Detector [] only records zero static findings on each scanned Vue source file. Browser overlay, rendered themes, responsive behavior, console, and external requests remain unverified. This evidence does not claim formal Impeccable Critique completion."
+}

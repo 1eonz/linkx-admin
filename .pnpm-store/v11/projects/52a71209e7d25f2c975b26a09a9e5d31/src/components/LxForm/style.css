@@ -1,9 +1,9 @@
 /**
  * LxForm 表单样式 — 错误提示与布局由组件库接管（业务零自定义 CSS）
  *
- * 视觉源：stitch _26 节点管理表单弹窗（错误态高亮规格）
- *   - 错误文字：控件下方 11px 深红（对比度补偿 error-strong）+ 前置圆圈感叹号图标
- *   - 错误输入框：1px 红边 + 浅红底 #fef0f0（error-light）
+ * 视觉源：design/表单控件八件套/（32px 标准、上置标签与错误校验态）
+ *   - 错误文字：控件下方 11px #ba1a1a + 前置圆圈感叹号图标
+ *   - 错误输入框：1px #ba1a1a 边线 + #fff5f5 浅红底
  *   - label：上置 12px/500 标签色 #606266，必填红星前置
  *
  * 作用域：.lx-form（LxForm 根）内所有 el-form-item 均生效，
@@ -24,6 +24,13 @@
   line-height: 20px;
 }
 
+.lx-form
+  .el-form-item.is-required:not(.is-no-asterisk)
+  .el-form-item__label::before,
+.lx-form-item.is-required:not(.is-no-asterisk) .el-form-item__label::before {
+  color: var(--lx-color-form-error);
+}
+
 /* ========== 表单项垂直间距（token 化，替代 EP 默认 18px） ========== */
 .lx-form .el-form-item,
 .lx-form-item {
@@ -38,7 +45,11 @@
   gap: 4px;
   padding-top: 2px;
   font-size: 11px;
-  color: var(--lx-color-error-strong);
+}
+
+.lx-form .el-form-item.is-error .el-form-item__error,
+.lx-form-item.el-form-item.is-error .el-form-item__error {
+  color: var(--lx-color-form-error);
 }
 
 .lx-form .el-form-item__error::before,
@@ -47,7 +58,7 @@
   flex-shrink: 0;
   width: 12px;
   height: 12px;
-  background-color: var(--lx-color-error);
+  background-color: var(--lx-color-form-error);
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 8v5'/%3E%3Cpath d='M12 16.5h.01'/%3E%3C/svg%3E")
     center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 8v5'/%3E%3Cpath d='M12 16.5h.01'/%3E%3C/svg%3E")
@@ -61,14 +72,14 @@
 .lx-form .el-form-item.is-error .el-textarea__inner,
 .lx-form-item.is-error .el-input__wrapper,
 .lx-form-item.is-error .el-textarea__inner {
-  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
-  background-color: var(--lx-color-error-light);
+  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
+  background-color: var(--lx-color-form-error-bg);
 }
 
 .lx-form .el-form-item.is-error .el-select__wrapper,
 .lx-form-item.is-error .el-select__wrapper {
-  background-color: var(--lx-color-error-light);
-  border-color: var(--lx-color-error);
+  background-color: var(--lx-color-form-error-bg);
+  border-color: var(--lx-color-form-error);
   box-shadow: none;
 }
 
@@ -80,13 +91,13 @@
   outline: none;
   outline-offset: 0;
   box-shadow:
-    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 1px var(--lx-color-form-error) inset,
     0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
 .lx-form .el-form-item.is-error .el-select__wrapper.is-focused,
 .lx-form-item.is-error .el-select__wrapper.is-focused {
-  border-color: var(--lx-color-error-strong);
+  border-color: var(--lx-color-form-error);
   box-shadow: none;
   outline: none;
   outline-offset: 0;

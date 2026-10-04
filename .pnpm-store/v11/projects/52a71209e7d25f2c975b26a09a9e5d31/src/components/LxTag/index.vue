@@ -19,16 +19,18 @@ const emit = defineEmits<{ close: [e: MouseEvent] }>()
   <span
     class="lx-tag"
     :class="[`lx-tag--${type}`, `lx-tag--${size}`, { 'is-disabled': disabled }]"
+    :aria-disabled="disabled ? 'true' : undefined"
   >
     <span class="lx-tag__content"><slot /></span>
-    <span
+    <button
       v-if="closable && !disabled"
       class="lx-tag__close"
-      role="button"
+      type="button"
       aria-label="关闭"
-      @click="emit('close', $event)"
-      >×</span
+      @click.stop="emit('close', $event)"
     >
+      ×
+    </button>
   </span>
 </template>
 
@@ -59,24 +61,26 @@ const emit = defineEmits<{ close: [e: MouseEvent] }>()
   border-color: var(--lx-color-primary-light);
 }
 .lx-tag--success {
-  color: #529b2e;
+  /* 语义由浅底/边框及文字本身表达，标签字色维持正文对比度。 */
+  color: var(--lx-text-regular);
   background: var(--lx-color-success-light);
-  border-color: #e1f3d8;
+  border-color: var(--lx-color-success-border);
 }
 .lx-tag--warning {
-  color: var(--lx-color-warning-strong);
+  /* 小字号浅色底场景使用正文色，避免警示色文字低于 AA 对比度。 */
+  color: var(--lx-text-regular);
   background: var(--lx-color-warning-light);
-  border-color: #f5dab1;
+  border-color: var(--lx-color-warning-border);
 }
 .lx-tag--error {
-  color: #c45656;
+  color: var(--lx-color-error-strong);
   background: var(--lx-color-error-light);
-  border-color: #fbc4c4;
+  border-color: var(--lx-color-error-border);
 }
 .lx-tag--info {
   color: var(--lx-text-regular);
   background: var(--lx-color-info-light);
-  border-color: #d3d4d6;
+  border-color: var(--lx-color-info-border);
 }
 
 .lx-tag.is-disabled {
@@ -88,15 +92,32 @@ const emit = defineEmits<{ close: [e: MouseEvent] }>()
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 14px;
-  height: 14px;
+  min-width: 24px;
+  min-height: 24px;
+  margin-block: -3px;
+  padding: 0;
+  border: 0;
   border-radius: 50%;
-  font-size: 12px;
+  background: transparent;
+  color: inherit;
+  font-size: 16px;
+  line-height: 1;
   cursor: pointer;
   transition: background-color var(--lx-transition);
 }
 
 .lx-tag__close:hover {
-  background: rgba(0, 0, 0, 0.15);
+  background: var(--lx-tag-close-hover-bg);
+}
+
+.lx-tag__close:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-tag__close {
+    transition: none;
+  }
 }
 </style>

@@ -1,0 +1,203 @@
+{
+  "recordType": "assessment-b-evidence-only",
+  "target": "http://127.0.0.1:4189/components/lxdatepicker.html",
+  "scope": "Wave 0 LxDatePicker current state; Assessment A was not inspected; this is not a completed combined Critique.",
+  "browserMethod": {
+    "tool": "Playwright with local Chromium",
+    "cuaBrowserAvailable": false,
+    "injectionPreflight": {
+      "titleSet": "[Human] LxDatePicker Assessment B",
+      "scriptAppended": true,
+      "scriptExecuted": true
+    },
+    "userVisibleHumanTab": false,
+    "overlayEvidence": "overlay-evidence.json and the archived screenshots; no claim that a user-facing [Human] tab was shown"
+  },
+  "staticScans": [
+    {
+      "target": "linkx-fe/src/components/LxDatePicker",
+      "stdout": "component-directory.stdout.json",
+      "stderr": "component-directory.stderr.txt",
+      "exitCodeFile": "component-directory.exit-code.txt",
+      "exitCode": 0,
+      "jsonValid": true,
+      "findingCount": 0,
+      "findings": [],
+      "stderrEmpty": true
+    },
+    {
+      "target": "linkx-fe/src/components/LxDatePicker/demo/basic.vue",
+      "stdout": "demo.stdout.json",
+      "stderr": "demo.stderr.txt",
+      "exitCodeFile": "demo.exit-code.txt",
+      "exitCode": 0,
+      "jsonValid": true,
+      "findingCount": 0,
+      "findings": [],
+      "stderrEmpty": true
+    },
+    {
+      "target": "linkx-fe/docs/components/lxdatepicker.md",
+      "stdout": "documentation.stdout.json",
+      "stderr": "documentation.stderr.txt",
+      "exitCodeFile": "documentation.exit-code.txt",
+      "exitCode": 0,
+      "jsonValid": true,
+      "findingCount": 0,
+      "findings": [],
+      "stderrEmpty": true
+    }
+  ],
+  "browserViews": [
+    {
+      "view": "desktop-light-range-open",
+      "findings": 24,
+      "overlays": 22,
+      "banner": 1
+    },
+    {
+      "view": "desktop-hud-range-open",
+      "findings": 48,
+      "overlays": 46,
+      "banner": 1
+    },
+    {
+      "view": "desktop-hud-reduced-motion-range-open",
+      "findings": 48,
+      "overlays": 46,
+      "banner": 2
+    },
+    {
+      "view": "mobile-390x844-range-open",
+      "findings": 16,
+      "overlays": 14,
+      "banner": 1
+    },
+    {
+      "view": "mobile-375x844-range-open",
+      "findings": 16,
+      "overlays": 14,
+      "banner": 2
+    }
+  ],
+  "browserRuleOccurrencesAcrossViews": {
+    "ai-color-palette": 66,
+    "buried-raster": 10,
+    "clipped-overflow-container": 2,
+    "edge-flush-cards": 3,
+    "em-dash-overuse": 5,
+    "gpt-thin-border-wide-shadow": 24,
+    "layout-transition": 5,
+    "line-length": 21,
+    "text-occlusion": 16,
+    "totalOccurrences": 152,
+    "note": "Counts repeat across views and are rule occurrences, not distinct defects."
+  },
+  "runtimeEvidence": {
+    "pageErrors": [],
+    "consoleErrorCount": 1,
+    "consoleError": {
+      "type": "error",
+      "url": "http://127.0.0.1:4189/favicon.ico",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    "networkEventCount": 2480,
+    "requests": 1240,
+    "responses": 1240,
+    "capturedResponsesAtOrAbove400": 0,
+    "localDetectorHelperRequests": 5,
+    "nonLocalExternalRequests": 0
+  },
+  "interactionAndLayout": {
+    "keyboard": {
+      "activeTag": "TD",
+      "activeLabel": "15",
+      "focusVisible": true,
+      "visibleFocusOutline": false,
+      "escapeClosed": false,
+      "note": "The selected-date ring in the screenshot is not recorded as a visible keyboard-focus outline."
+    },
+    "reducedMotion": {
+      "prefersReducedMotion": true,
+      "wrapperTransitionDuration": "1e-05s",
+      "wrapperAnimationDuration": "1e-05s",
+      "popperTransitionDuration": "1e-05s",
+      "popperAnimationDuration": "1e-05s"
+    },
+    "desktop1440": {
+      "documentWidth": 1425,
+      "bodyWidth": 1425,
+      "horizontalOverflow": false
+    },
+    "mobile390": {
+      "viewportWidth": 390,
+      "documentWidth": 390,
+      "bodyWidth": 390,
+      "horizontalOverflow": false,
+      "popperWithinViewport": true
+    },
+    "mobile375": {
+      "screenshotDimensions": "375x844",
+      "recordedViewport": "615x1385",
+      "recordedBodyWidth": 375,
+      "recordedHorizontalOverflow": false,
+      "measurementReliable": false,
+      "note": "Viewport fields disagree with the captured image dimensions; do not treat the overflow flag as a verified pass."
+    }
+  },
+  "sourceFreshness": {
+    "unchangedDuringCapture": 4,
+    "totalFingerprinted": 4,
+    "files": [
+      "linkx-fe/src/components/LxDatePicker/index.vue",
+      "linkx-fe/src/components/LxDatePicker/style.css",
+      "linkx-fe/src/components/LxDatePicker/demo/basic.vue",
+      "linkx-fe/docs/components/lxdatepicker.md"
+    ],
+    "evidence": "fingerprint-comparison.json"
+  },
+  "ruleAdjudication": [
+    {
+      "rule": "ai-color-palette",
+      "assessment": "Intentional HUD theme variant; do not count detector hits alone as defects."
+    },
+    {
+      "rule": "gpt-thin-border-wide-shadow",
+      "assessment": "The component style explicitly uses the lx shadow token --lx-shadow-pop and inset control rings; these hits require token-aware review."
+    },
+    {
+      "rule": "text-occlusion",
+      "assessment": "The Element Plus calendar popper intentionally overlays page content; screenshots show underlying labels or demo hints covered while it is open."
+    },
+    {
+      "rule": "buried-raster, clipped-overflow-container, layout-transition",
+      "assessment": "Hits point to documentation/code-example shell elements, not the DatePicker implementation."
+    },
+    {
+      "rule": "edge-flush-cards",
+      "assessment": "The matched table is a calendar date grid, not a card list."
+    },
+    {
+      "rule": "line-length, em-dash-overuse",
+      "assessment": "Hits are rendered documentation text; the em-dash rule counts API-table placeholders as well as prose."
+    }
+  ],
+  "servers": {
+    "docsServer": {
+      "port": 4189,
+      "processId": 3572,
+      "stopped": true,
+      "listenerRemaining": 0,
+      "checkedAtUtc": "2026-10-04T06:23:22.7191230Z",
+      "evidence": "docs-server-stop.json"
+    },
+    "detectorHelper": {
+      "port": 8400,
+      "processId": 40868,
+      "stopExitCode": 0,
+      "evidence": "live-server-stop.json"
+    },
+    "port4176Touched": false
+  },
+  "close": "Questions skipped: this deliverable is the requested Assessment B-only evidence record, not a full Critique."
+}

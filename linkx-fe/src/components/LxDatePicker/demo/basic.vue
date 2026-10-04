@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { LxDatePickerShortcut } from '../types'
+
+import LxIcon from '../../LxIcon/index.vue'
 import LxDatePicker from '../index.vue'
+import type { LxDatePickerShortcut } from '../types'
 
 const hudTheme = ref(false)
 
 /** Panel 1 单值：布控生效日期（标本 06 文案语境） */
 const effectiveDate = ref<string>('2026-09-15')
+const reviewMonth = ref<string>('2026-09')
+const annotatedDate = ref<string>('2026-09-15')
 /** Panel 2 区间：专项布控日期区间（标本 06 主形态，W-320px 触发器） */
 const controlRange = ref<[string, string]>(['2026-09-15', '2026-10-08'])
+const analysisRange = ref<[string, string]>(['2026-09-15', '2026-10-08'])
 /** Panel 3 带时间：告警汇聚窗口 */
 const windowTime = ref<string>('2026-09-29 08:00:00')
 /** Panel 4 禁用/只读 */
@@ -73,11 +78,15 @@ const shortcuts: LxDatePickerShortcut[] = [
     </div>
 
     <section class="lx-date-picker-demo__panel" data-testid="single">
-      <h4>基础单值（32px 触发器 + 主色日历图标 + 值文字等宽字体）</h4>
+      <h3>基础单值（32px 触发器 + 主色日历图标 + 值文字等宽字体）</h3>
       <div class="lx-date-picker-demo__row">
         <div class="lx-date-picker-demo__field">
-          <span class="lx-date-picker-demo__label">布控生效日期</span>
+          <label class="lx-date-picker-demo__label" for="demo-date-effective"
+            >布控生效日期</label
+          >
           <LxDatePicker
+            id="demo-date-effective"
+            :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
             v-model="effectiveDate"
             type="date"
             value-format="YYYY-MM-DD"
@@ -86,9 +95,13 @@ const shortcuts: LxDatePickerShortcut[] = [
           />
         </div>
         <div class="lx-date-picker-demo__field">
-          <span class="lx-date-picker-demo__label">月份选择（月度复盘）</span>
+          <label class="lx-date-picker-demo__label" for="demo-date-month"
+            >月份选择（月度复盘）</label
+          >
           <LxDatePicker
-            v-model="effectiveDate"
+            id="demo-date-month"
+            :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
+            v-model="reviewMonth"
             type="month"
             value-format="YYYY-MM"
             placeholder="请选择月份"
@@ -99,12 +112,20 @@ const shortcuts: LxDatePickerShortcut[] = [
     </section>
 
     <section class="lx-date-picker-demo__panel" data-testid="range">
-      <h4>
-        日期区间（标本 06 主形态：分隔符"至" + 展开双月联动面板 + 周一起始）
-      </h4>
+      <h3>日期区间（标本 06 主形态：分隔符"至" + 双月独立翻页 + 周一起始）</h3>
       <div class="lx-date-picker-demo__field">
         <span class="lx-date-picker-demo__label">专项布控日期区间</span>
+        <label
+          class="lx-date-picker-demo__sr-only"
+          for="demo-date-control-start"
+          >专项布控日期区间开始日期</label
+        >
+        <label class="lx-date-picker-demo__sr-only" for="demo-date-control-end"
+          >专项布控日期区间结束日期</label
+        >
         <LxDatePicker
+          :id="['demo-date-control-start', 'demo-date-control-end']"
+          :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
           v-model="controlRange"
           type="daterange"
           value-format="YYYY-MM-DD"
@@ -115,24 +136,43 @@ const shortcuts: LxDatePickerShortcut[] = [
         />
       </div>
       <p class="lx-date-picker-demo__hint">
+        本区间示例开启
+        unlink-panels，左右月份独立翻页；快捷预设示例保留默认联动。
         面板周表头为"一 二 三 四 五 六 日"（内置 zh-cn 语境，周一起始）；
-        拖选区间时中段呈连贯浅蓝带 #ecf5ff，起止为主色圆点白字。
+        拖选区间时中段呈连贯浅蓝带
+        #ecf5ff，起止为主色圆点，文字随主题保持高对比。
+      </p>
+      <p class="lx-date-picker-demo__hint">
+        键盘操作：按 ArrowDown 打开日历并进入日期网格；方向键移动焦点，按 Enter
+        选择日期，按 Escape 关闭日历。
       </p>
     </section>
 
     <section class="lx-date-picker-demo__panel" data-testid="shortcuts">
-      <h4>快捷预设（今日/本周/近30天；左侧竖排位置随 EP 原生）</h4>
+      <h3>快捷预设（今日/本周/近30天；桌面竖排，手机横排）</h3>
       <div class="lx-date-picker-demo__field">
         <span class="lx-date-picker-demo__label">研判时间范围</span>
+        <label
+          class="lx-date-picker-demo__sr-only"
+          for="demo-date-analysis-start"
+          >研判时间范围开始日期</label
+        >
+        <label class="lx-date-picker-demo__sr-only" for="demo-date-analysis-end"
+          >研判时间范围结束日期</label
+        >
         <LxDatePicker
-          v-model="controlRange"
+          :id="['demo-date-analysis-start', 'demo-date-analysis-end']"
+          :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
+          v-model="analysisRange"
           type="daterange"
           value-format="YYYY-MM-DD"
           :shortcuts="shortcuts"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
           @change="reportChange('研判时间范围', $event)"
-        />
+        >
+          <template #range-separator>至</template>
+        </LxDatePicker>
       </div>
       <p class="lx-date-picker-demo__hint">
         "本周"预设按周一起始计算（与面板周表头同契约）；快捷项点击后回填区间并保持面板开启，
@@ -140,13 +180,51 @@ const shortcuts: LxDatePickerShortcut[] = [
       </p>
     </section>
 
-    <section class="lx-date-picker-demo__panel" data-testid="datetime">
-      <h4>
-        带时间面板（datetimerange：区间 + 时分秒，底部此刻/确定随 EP 原生）
-      </h4>
+    <section class="lx-date-picker-demo__panel" data-testid="slots">
+      <h3>日期标记</h3>
       <div class="lx-date-picker-demo__field">
-        <span class="lx-date-picker-demo__label">告警汇聚窗口</span>
+        <label class="lx-date-picker-demo__label" for="demo-date-annotated"
+          >专项复盘日期</label
+        >
         <LxDatePicker
+          id="demo-date-annotated"
+          :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
+          v-model="annotatedDate"
+          value-format="YYYY-MM-DD"
+        >
+          <template #default="cell">
+            <div class="el-date-table-cell">
+              <span class="el-date-table-cell__text">{{ cell.text }}</span>
+              <LxIcon
+                v-if="cell.dayjs?.format('YYYY-MM-DD') === '2026-09-15'"
+                class="lx-date-picker-demo__marker"
+                name="star"
+                :size="10"
+                label="专项复盘"
+              />
+            </div>
+          </template>
+          <template #prev-month
+            ><LxIcon name="chevron-left" :size="16"
+          /></template>
+          <template #next-month
+            ><LxIcon name="chevron-right" :size="16"
+          /></template>
+        </LxDatePicker>
+      </div>
+    </section>
+
+    <section class="lx-date-picker-demo__panel" data-testid="datetime">
+      <h3>
+        带时间面板（datetimerange：区间 + 时分秒，底部此刻/确定随 EP 原生）
+      </h3>
+      <div class="lx-date-picker-demo__field">
+        <label class="lx-date-picker-demo__label" for="demo-date-window"
+          >告警汇聚窗口</label
+        >
+        <LxDatePicker
+          id="demo-date-window"
+          :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
           v-model="windowTime"
           type="datetime"
           value-format="YYYY-MM-DD HH:mm:ss"
@@ -157,11 +235,21 @@ const shortcuts: LxDatePickerShortcut[] = [
     </section>
 
     <section class="lx-date-picker-demo__panel" data-testid="disabled">
-      <h4>禁用与只读（禁用半透明；只读可聚焦不可改值）</h4>
+      <h3>禁用与只读（禁用半透明；只读可聚焦不可改值）</h3>
       <div class="lx-date-picker-demo__row">
         <div class="lx-date-picker-demo__field">
           <span class="lx-date-picker-demo__label">省厅锁定区间（禁用）</span>
+          <label
+            class="lx-date-picker-demo__sr-only"
+            for="demo-date-locked-start"
+            >省厅锁定区间开始日期</label
+          >
+          <label class="lx-date-picker-demo__sr-only" for="demo-date-locked-end"
+            >省厅锁定区间结束日期</label
+          >
           <LxDatePicker
+            :id="['demo-date-locked-start', 'demo-date-locked-end']"
+            :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
             :model-value="lockedRange"
             type="daterange"
             value-format="YYYY-MM-DD"
@@ -172,7 +260,19 @@ const shortcuts: LxDatePickerShortcut[] = [
         </div>
         <div class="lx-date-picker-demo__field">
           <span class="lx-date-picker-demo__label">归档区间（只读）</span>
+          <label
+            class="lx-date-picker-demo__sr-only"
+            for="demo-date-archive-start"
+            >归档区间开始日期</label
+          >
+          <label
+            class="lx-date-picker-demo__sr-only"
+            for="demo-date-archive-end"
+            >归档区间结束日期</label
+          >
           <LxDatePicker
+            :id="['demo-date-archive-start', 'demo-date-archive-end']"
+            :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
             :model-value="lockedRange"
             type="daterange"
             value-format="YYYY-MM-DD"
@@ -227,7 +327,7 @@ const shortcuts: LxDatePickerShortcut[] = [
   background: var(--lx-bg-card);
 }
 
-.lx-date-picker-demo__panel h4 {
+.lx-date-picker-demo__panel h3 {
   margin: 0;
   font-size: 13px;
   font-weight: 600;
@@ -253,8 +353,29 @@ const shortcuts: LxDatePickerShortcut[] = [
   color: var(--lx-text-label);
 }
 
-.lx-date-picker-demo__field .lx-date-picker {
-  width: 100%;
+.lx-date-picker-demo__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.lx-date-picker-demo__marker {
+  position: absolute;
+  inset-inline-end: 2px;
+  inset-block-start: 0;
+  color: var(--lx-color-primary);
+}
+
+:deep(.lx-date-picker-demo__field .lx-date-picker) {
+  /* 区间日期选择器有 EP 的 350px 默认宽度；Demo 字段必须在窄屏容器内收缩。 */
+  width: 100% !important;
+  max-width: 100%;
 }
 
 .lx-date-picker-demo__hint,
@@ -263,10 +384,10 @@ const shortcuts: LxDatePickerShortcut[] = [
   margin: 0;
   font-size: 12px;
   line-height: 1.6;
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
 }
 
 .lx-date-picker-demo__note {
-  color: var(--lx-color-warning-strong);
+  color: var(--lx-color-warning-text);
 }
 </style>

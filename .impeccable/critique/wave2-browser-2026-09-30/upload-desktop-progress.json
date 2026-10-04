@@ -1,0 +1,73 @@
+{
+  "name": "upload-desktop-progress",
+  "meta": {
+    "mode": "progress"
+  },
+  "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave2-browser-2026-09-30\\upload-desktop-progress.png",
+  "metrics": {
+    "viewport": {
+      "width": 1440,
+      "height": 900,
+      "dpr": 1
+    },
+    "scroll": {
+      "width": 1440,
+      "height": 4707,
+      "horizontalOverflow": 0
+    },
+    "classes": "",
+    "title": "LxUpload 文件上传 | LxUI",
+    "bodyText": "Skip to content\nLxUI\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n\nLxProTable 数据表格\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxDutyCalendar 排班日历\n\nLxSectionTitle 区块标题\n\nLxAuthImg 鉴权图片\n\nLxDescriptions 详情描述\n\nLxPagination 分页\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxEmpty 空态\n\nLxGauge 圆环仪表\n\nLxNodeBadge 节点徽章\n\n权限消费\n\n数据录入\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\nLxTreeSelect 树形下拉\n\nLxDatePicker 日期选择\n\nLxInputNumber 数字输入\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxPasswordInput 密码输入框\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nOn this page\n交互示例\n排班数据导入\nProps\nEvents\n插槽与实例\n拖拽区与列表行为\n请求边界\n设计对照记录\nLxUpload 文件上传\n​\n\n基于 Element Plus 上传能力统一文件校验、拖拽区域、上传进度和文件状态展示。网络请求由宿主通过 action 或 httpRequest 配置；组件不访问业务接口。\n\n拖拽区三态：默认就绪（36px 图标 + 主副文案 + \"浏览本地文件\"下划线链接）；拖拽悬停时内容切换为圆形图标 + \"释放鼠标即可上传\"（由 Element Plus .is-dragover 类纯 CSS 驱动，含 ",
+    "probes": [
+      null,
+      null,
+      {
+        "selector": ".lx-upload-demo",
+        "text": "排班数据导入 支持 CSV、Excel 文件；所有传输状态均由本地内存 Mock 驱动。拖拽文件到虚线框可见\"释放鼠标即可上传\"切换态；开启\"选择后立即上传\"后，上传期间拖区切换为聚合进度面板，可随时取消；关闭时文件以\"排队中\"徽章等待提交。  HUD 深色主题 文件列表 标准行  紧凑标签  选择后立即上传  禁用上传 上传文件 正在上传 1 个文件  总进度 60%，请勿关闭页面  取消上传 ",
+        "rect": {
+          "x": 384,
+          "y": -94,
+          "width": 688,
+          "height": 684
+        },
+        "display": "grid",
+        "color": "rgb(29, 33, 41)",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "transitionDuration": "0s",
+        "transitionProperty": "all"
+      },
+      {
+        "selector": ".lx-upload__progress-value",
+        "text": "",
+        "rect": {
+          "x": 462,
+          "y": 371,
+          "width": 312,
+          "height": 4
+        },
+        "display": "block",
+        "color": "rgb(78, 89, 105)",
+        "backgroundColor": "rgb(0, 96, 169)",
+        "transitionDuration": "0.2s",
+        "transitionProperty": "transform"
+      },
+      {
+        "selector": ".el-upload-dragger",
+        "text": "正在上传 1 个文件  总进度 60%，请勿关闭页面  取消上传",
+        "rect": {
+          "x": 405,
+          "y": 180,
+          "width": 646,
+          "height": 120
+        },
+        "display": "block",
+        "color": "rgb(78, 89, 105)",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "transitionDuration": "0.2s, 0.2s",
+        "transitionProperty": "border-color, background-color"
+      },
+      null
+    ],
+    "reducedMotion": false
+  }
+}

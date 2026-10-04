@@ -1,0 +1,415 @@
+{
+  "view": {
+    "id": "lxform-desktop",
+    "page": "lxform",
+    "url": "http://localhost:4177/components/lxform",
+    "width": 1280,
+    "height": 800
+  },
+  "url": "http://localhost:4177/components/lxform",
+  "navigationStatus": 200,
+  "overlayInjected": true,
+  "injectionError": null,
+  "detectorResponses": [
+    {
+      "status": 200,
+      "url": "http://localhost:8400/detect.js"
+    }
+  ],
+  "detectorRawPhase": "impeccableDetect() before impeccableScan() overlay rendering",
+  "detectorFindings": [
+    {
+      "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > button.copy",
+      "tagName": "button",
+      "rect": {
+        "x": 891,
+        "y": 498,
+        "width": 40,
+        "height": 40,
+        "top": 498,
+        "right": 931,
+        "bottom": 538,
+        "left": 891
+      },
+      "isPageLevel": false,
+      "isHidden": true,
+      "findings": [
+        {
+          "type": "buried-raster",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "raster background at opacity 0",
+          "ignoreValue": "",
+          "name": "Raster buried under a wash or opacity",
+          "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+        }
+      ]
+    },
+    {
+      "selector": "details.details.custom-block:nth-of-type(2) > div.language-vue.vp-adaptive-theme > button.copy",
+      "tagName": "button",
+      "rect": {
+        "x": 891,
+        "y": 895,
+        "width": 40,
+        "height": 40,
+        "top": 895,
+        "right": 931,
+        "bottom": 935,
+        "left": 891
+      },
+      "isPageLevel": false,
+      "isHidden": true,
+      "findings": [
+        {
+          "type": "buried-raster",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "raster background at opacity 0",
+          "ignoreValue": "",
+          "name": "Raster buried under a wash or opacity",
+          "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+        }
+      ]
+    },
+    {
+      "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+      "tagName": "button",
+      "rect": {
+        "x": 908,
+        "y": 1151,
+        "width": 40,
+        "height": 40,
+        "top": 1151,
+        "right": 948,
+        "bottom": 1191,
+        "left": 908
+      },
+      "isPageLevel": false,
+      "isHidden": false,
+      "findings": [
+        {
+          "type": "buried-raster",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "raster background at opacity 0",
+          "ignoreValue": "",
+          "name": "Raster buried under a wash or opacity",
+          "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+        }
+      ]
+    },
+    {
+      "selector": "#el-id-1024-3",
+      "tagName": "div",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "isPageLevel": false,
+      "isHidden": true,
+      "findings": [
+        {
+          "type": "gpt-thin-border-wide-shadow",
+          "category": "slop",
+          "severity": "advisory",
+          "advisory": true,
+          "detail": "1px border + 16px shadow blur",
+          "ignoreValue": "",
+          "name": "Hairline border with wide shadow",
+          "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+        }
+      ]
+    },
+    {
+      "selector": "body",
+      "tagName": "body",
+      "rect": null,
+      "isPageLevel": true,
+      "isHidden": false,
+      "findings": [
+        {
+          "type": "em-dash-overuse",
+          "category": "slop",
+          "severity": "advisory",
+          "advisory": true,
+          "detail": "15 em-dashes in body text",
+          "ignoreValue": "",
+          "name": "Em-dash overuse",
+          "description": "Em-dash saturation in body copy is an AI cadence tell. Advisory only: humans use em-dashes legitimately, so this fires only on saturation — at least 8 em-dashes (— or --) at a density near one per 500 characters of body text — never on a long article that uses a few. Prefer commas, colons, periods, or parentheses."
+        },
+        {
+          "type": "layout-transition",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "transition: height, padding-top, padding-bottom",
+          "ignoreValue": "",
+          "name": "Layout property animation",
+          "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+        }
+      ]
+    },
+    {
+      "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > span.lang",
+      "tagName": "span",
+      "rect": {
+        "x": 913.828125,
+        "y": 488,
+        "width": 21.171875,
+        "height": 24,
+        "top": 488,
+        "right": 935,
+        "bottom": 512,
+        "left": 913.828125
+      },
+      "isPageLevel": false,
+      "isHidden": true,
+      "findings": [
+        {
+          "type": "text-occlusion",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "span.lang \"vue\" is 50% covered by overlapping text (p)",
+          "ignoreValue": "",
+          "name": "Text occluded by an overlapping element",
+          "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+        }
+      ]
+    },
+    {
+      "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > pre.shiki.shiki-themes > code > span.line:nth-of-type(12) > span",
+      "tagName": "span",
+      "rect": {
+        "x": 377,
+        "y": 752.03125,
+        "width": 92.921875,
+        "height": 15,
+        "top": 752.03125,
+        "right": 469.921875,
+        "bottom": 767.03125,
+        "left": 377
+      },
+      "isPageLevel": false,
+      "isHidden": true,
+      "findings": [
+        {
+          "type": "text-occlusion",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "span \"LxTextarea,\" is 100% covered by an opaque element (div.demo-box)",
+          "ignoreValue": "",
+          "name": "Text occluded by an overlapping element",
+          "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+        }
+      ]
+    }
+  ],
+  "overlayMeta": {
+    "detectorAvailable": true,
+    "overlayElementCount": 13,
+    "bodyClasses": "",
+    "htmlClasses": ""
+  },
+  "interactionState": {
+    "activeTag": "button",
+    "activeType": "button",
+    "activeLabel": null,
+    "activeClass": "el-button el-button--primary el-button--default lx-btn lx-btn--primary lx-btn--md",
+    "focusStyle": {
+      "outlineStyle": "none",
+      "outlineWidth": "3px",
+      "borderColor": "rgb(0, 96, 169)",
+      "boxShadow": "none"
+    },
+    "invalidItems": [
+      {
+        "label": "任务名称",
+        "error": "请输入任务名称",
+        "ariaInvalid": true,
+        "ariaDescribedBy": "lx-form-item-error-151"
+      },
+      {
+        "label": "责任网格",
+        "error": "请选择责任网格",
+        "ariaInvalid": true,
+        "ariaDescribedBy": "lx-form-item-error-159"
+      }
+    ],
+    "uploadZones": [],
+    "hudDemoClass": null,
+    "hudThemeChecked": null,
+    "reducedMotion": false,
+    "viewport": {
+      "width": 1280,
+      "height": 800,
+      "scrollWidth": 1280,
+      "scrollHeight": 4418
+    }
+  },
+  "uploadState": null,
+  "detectorConsole": [
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "line": 8159,
+        "column": 12,
+        "lineNumber": 8159,
+        "columnNumber": 12
+      }
+    }
+  ],
+  "consoleEvents": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:4177/@vite/client",
+        "line": 494,
+        "column": 8,
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:4177/@vite/client",
+        "line": 617,
+        "column": 14,
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "line": 8159,
+        "column": 12,
+        "lineNumber": 8159,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cem-dash-overuse%c 15 em-dashes in body text color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%ctext-occlusion%c span.lang \"vue\" is 50% covered by overlapping text (p) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%ctext-occlusion%c span \"LxTextarea,\" is 100% covered by an opaque element (div.demo-box) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "line": 8169,
+        "column": 12,
+        "lineNumber": 8169,
+        "columnNumber": 12
+      }
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "badResponses": [],
+  "blockedRequests": [],
+  "screenshot": "viewport-overlay.png",
+  "uploadScreenshot": null
+}

@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-04",
+  "status": "final-target-bytes; browser assessment is limited",
+  "script": "C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\detect.mjs",
+  "targets": [
+    {
+      "path": "linkx-fe/src/components/LxDatePicker/index.vue",
+      "sha256": "E3B4513BB5B39A8C68AD4FE9524FF7E8FE4575D999CBAA834365B4F5218EC6",
+      "command": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\detect.mjs\" --json \"linkx-fe/src/components/LxDatePicker/index.vue\"",
+      "stdout": "detector-final-index.stdout.json",
+      "stderr": "detector-final-index.stderr.txt",
+      "exitCodeFile": "detector-final-index.exit-code.txt",
+      "exitCode": 0,
+      "findingCount": 0
+    },
+    {
+      "path": "linkx-fe/src/components/LxDatePicker/demo/basic.vue",
+      "sha256": "1E62E4705E1203070FE526C2063DC12739CA2F1BF3203F373CA0BCA94B0C2368",
+      "command": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\detect.mjs\" --json \"linkx-fe/src/components/LxDatePicker/demo/basic.vue\"",
+      "stdout": "detector-final-demo.stdout.json",
+      "stderr": "detector-final-demo.stderr.txt",
+      "exitCodeFile": "detector-final-demo.exit-code.txt",
+      "exitCode": 0,
+      "findingCount": 0
+    },
+    {
+      "path": "linkx-fe/docs/components/lxdatepicker.md",
+      "sha256": "011850196C44A67470A4B433F31C5C73219F3C8148329C62C2DBDE96135A0CD4",
+      "command": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\detect.mjs\" --json \"linkx-fe/docs/components/lxdatepicker.md\"",
+      "stdout": "detector-final-docs.stdout.json",
+      "stderr": "detector-final-docs.stderr.txt",
+      "exitCodeFile": "detector-final-docs.exit-code.txt",
+      "exitCode": 0,
+      "findingCount": 0
+    }
+  ],
+  "relatedFingerprints": {
+    "linkx-fe/src/components/LxDatePicker/style.css": "B77CDBAC529A07D91CD6960FA71692F1502897DC25A3560E19C1DE1E08B94DFE",
+    "linkx-fe/src/components/LxDatePicker/types.ts": "4A7C664054F868310FCCB04D06F2A345A38B5552B1A021853BF0567A38E99302"
+  },
+  "browser": {
+    "url": "http://127.0.0.1:4174/components/lxdatepicker.html",
+    "httpStatus": 200,
+    "context": "new Codex IAB tab 3",
+    "visuallyInspectedStates": [
+      "desktop light default",
+      "desktop light range popper open",
+      "desktop HUD default",
+      "desktop HUD range popper open"
+    ],
+    "keyboard": "ArrowDown focuses date cell; ArrowRight moves focus from 15 to 16; Escape closes and returns focus to range start input",
+    "overlayInjection": "rejected by browser security policy for javascript: URL; no workaround attempted",
+    "persistedScreenshots": [],
+    "mobileViewports": "not independently verified at 320/375/390px after CSS fix",
+    "pageErrorsAndFailedRequests": "not exposed by this CUA session"
+  }
+}

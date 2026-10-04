@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { ElCheckbox } from 'element-plus'
+import LxCheckbox from '../LxCheckbox/index.vue'
 import LxIcon from '../LxIcon/index.vue'
 import LxVirtualTree from '../LxVirtualTree/index.vue'
 import type { LxVirtualTreeNode } from '../LxVirtualTree/types'
 import { lxMessage } from '../LxMessage'
 import type { LxTransferPanelProps } from './types'
-import 'element-plus/es/components/checkbox/style/css'
 
 defineOptions({ name: 'LxTransferPanel' })
 
@@ -31,7 +30,7 @@ const inherit = ref(props.inheritChild)
 
 watch(
   () => props.inheritChild,
-  (value) => (inherit.value = value),
+  (value) => (inherit.value = value)
 )
 
 const nodeMap = computed(() => {
@@ -47,14 +46,14 @@ const nodeMap = computed(() => {
 })
 
 const allKeys = computed(() =>
-  [...nodeMap.value.keys()].filter((key) => !nodeMap.value.get(key)?.disabled),
+  [...nodeMap.value.keys()].filter((key) => !nodeMap.value.get(key)?.disabled)
 )
 const selectedKeySet = computed(() => new Set(props.modelValue))
 const maxCount = computed(() =>
-  props.maxCount == null ? null : Math.max(0, Math.floor(props.maxCount)),
+  props.maxCount == null ? null : Math.max(0, Math.floor(props.maxCount))
 )
 const missingKeys = computed(() =>
-  allKeys.value.filter((key) => !selectedKeySet.value.has(key)),
+  allKeys.value.filter((key) => !selectedKeySet.value.has(key))
 )
 const canSelectAll = computed(() => {
   if (!missingKeys.value.length) return false
@@ -66,15 +65,15 @@ const canSelectAll = computed(() => {
 // 树按需加载时，暂未出现在当前树中的既有授权仍需可见且可移除。
 const selectedNodes = computed(() =>
   props.modelValue.map(
-    (key) => nodeMap.value.get(key) ?? { id: key, label: String(key) },
-  ),
+    (key) => nodeMap.value.get(key) ?? { id: key, label: String(key) }
+  )
 )
 const visibleSelectedNodes = computed(() => {
   const query = selectedFilter.value.trim().toLocaleLowerCase()
   return !query
     ? selectedNodes.value
     : selectedNodes.value.filter((node) =>
-        node.label.toLocaleLowerCase().includes(query),
+        node.label.toLocaleLowerCase().includes(query)
       )
 })
 
@@ -98,7 +97,7 @@ function update(keys: (string | number)[]) {
   const unique = [...new Set(keys)].filter(
     (key) =>
       props.modelValue.includes(key) ||
-      (nodeMap.value.has(key) && !nodeMap.value.get(key)?.disabled),
+      (nodeMap.value.has(key) && !nodeMap.value.get(key)?.disabled)
   )
   if (
     maxCount.value !== null &&
@@ -119,7 +118,7 @@ function update(keys: (string | number)[]) {
     unique,
     unique
       .map((key) => nodeMap.value.get(key))
-      .filter((node): node is LxVirtualTreeNode => Boolean(node)),
+      .filter((node): node is LxVirtualTreeNode => Boolean(node))
   )
 }
 
@@ -271,8 +270,8 @@ function updateInherit(value: string | number | boolean) {
         <span
           >已选 <strong>{{ modelValue.length }}</strong> 项</span
         >
-        <ElCheckbox :model-value="inherit" @update:model-value="updateInherit"
-          >保留下级继承授权</ElCheckbox
+        <LxCheckbox :model-value="inherit" @update:model-value="updateInherit"
+          >保留下级继承授权</LxCheckbox
         >
       </footer>
     </div>

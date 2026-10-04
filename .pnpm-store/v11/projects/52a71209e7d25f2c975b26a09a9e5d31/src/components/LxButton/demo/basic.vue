@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
+
 import LxButton from '../index.vue'
 import type { LxButtonSize } from '../types'
 
@@ -11,24 +12,38 @@ const submitting = ref(false)
 /** 无文案切换的 loading：独立状态，避免与上面的文案切换示例互相锁定 */
 const plainLoading = ref(false)
 const lastAction = ref('点击按钮观察交互状态；演示数据仅存在于页面内存。')
+const pendingTimers = new Set<ReturnType<typeof window.setTimeout>>()
+
+function scheduleCompletion(complete: () => void) {
+  const timer = window.setTimeout(() => {
+    pendingTimers.delete(timer)
+    complete()
+  }, 2500)
+  pendingTimers.add(timer)
+}
+
+onBeforeUnmount(() => {
+  pendingTimers.forEach((timer) => window.clearTimeout(timer))
+  pendingTimers.clear()
+})
 
 function handleSubmit() {
   if (submitting.value) return
   submitting.value = true
   lastAction.value = '指令下发中……（loading 期间点击被拦截）'
-  window.setTimeout(() => {
+  scheduleCompletion(() => {
     submitting.value = false
     lastAction.value = '指令已下发：DEMO-2024-0917（模拟成功，未请求后端）'
-  }, 2500)
+  })
 }
 
 function handlePlainSubmit() {
   if (plainLoading.value) return
   plainLoading.value = true
-  window.setTimeout(() => {
+  scheduleCompletion(() => {
     plainLoading.value = false
     lastAction.value = '无文案切换完成：spinner 原位旋转，文字全程保留'
-  }, 2500)
+  })
 }
 </script>
 
@@ -50,22 +65,23 @@ function handlePlainSubmit() {
     </div>
 
     <section class="lx-button-demo__panel" data-testid="matrix">
-      <h4>形态 × 尺寸矩阵</h4>
+      <h4>推荐用法</h4>
       <div class="lx-button-demo__row">
         <LxButton :size="size" type="primary">主操作按钮</LxButton>
         <LxButton :size="size" type="default">次级线框按钮</LxButton>
-        <LxButton :size="size" type="danger">批量删除警情</LxButton>
         <LxButton :size="size" type="text">查看详情</LxButton>
       </div>
-      <div class="lx-button-demo__row">
-        <LxButton :size="size" type="success">审批核准</LxButton>
-        <LxButton :size="size" type="warning">告警待决</LxButton>
-      </div>
-      <!-- 全形态展示例外标注：教学页铺开全部形态，业务同屏仍守 primary≤1 -->
       <p class="lx-button-demo__tip">
-        矩阵展示例外：本面板为教学铺开全部形态，业务页面同屏仍遵守主按钮上限 1
-        个。
+        业务页面同屏最多展示一个主操作；行内查看操作使用文字形态。
       </p>
+      <details class="lx-button-demo__variants">
+        <summary>查看完整按钮类型矩阵</summary>
+        <div class="lx-button-demo__row">
+          <LxButton :size="size" type="danger">批量删除警情</LxButton>
+          <LxButton :size="size" type="success">审批核准</LxButton>
+          <LxButton :size="size" type="warning">告警待决</LxButton>
+        </div>
+      </details>
     </section>
 
     <section class="lx-button-demo__panel" data-testid="states">
@@ -236,6 +252,24 @@ function handlePlainSubmit() {
   color: var(--lx-text-regular);
 }
 
+.lx-button-demo__variants {
+  display: grid;
+  gap: 12px;
+}
+
+.lx-button-demo__variants summary {
+  display: flex;
+  min-height: 32px;
+  align-items: center;
+  color: var(--lx-color-primary);
+  cursor: pointer;
+}
+
+.lx-button-demo__variants summary:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
 .lx-button-demo__row {
   display: flex;
   flex-wrap: wrap;
@@ -248,7 +282,7 @@ function handlePlainSubmit() {
 .lx-button-demo__tip {
   margin: 0;
   font-size: 12px;
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
 }
 
 .lx-button-demo__note {

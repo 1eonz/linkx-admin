@@ -242,15 +242,28 @@ test('轮播文章下拉滚到底部后使用本地 Mock 加载下一页', async
   await expect.poll(() => articlePages).toEqual([1]);
 
   const titleField = dialog.locator('.el-form-item').filter({ hasText: '标题' });
-  await titleField.locator('.el-select').click();
-  const articleDropdown = page.locator('.el-select-dropdown__wrap:visible').last();
+  const articleSelect = titleField.locator('.el-select');
+  await articleSelect.click();
+  const articleCombobox = articleSelect.getByRole('combobox');
+  const listboxId = await articleCombobox.getAttribute('aria-controls');
+  expect(listboxId).toBeTruthy();
+  const articleListbox = page.locator(`[id="${listboxId}"]`);
+  const articleDropdown = page.locator('.el-select-dropdown__wrap:visible').filter({ has: articleListbox });
+  await expect(articleDropdown).toHaveCount(1);
+  const scrollMetrics = await articleDropdown.evaluate((element) => ({
+    clientHeight: element.clientHeight,
+    scrollHeight: element.scrollHeight,
+  }));
+  expect(scrollMetrics.scrollHeight).toBeGreaterThan(scrollMetrics.clientHeight);
   await articleDropdown.evaluate((element) => {
     element.scrollTop = element.scrollHeight;
-    element.dispatchEvent(new Event('scroll'));
+    element.dispatchEvent(new Event('scroll', { bubbles: true }));
   });
 
   await expect.poll(() => articlePages).toEqual([1, 2]);
-  await expect(page.getByRole('option', { name: '本地 Mock 文章 21' })).toBeVisible();
+  const loadedArticleOption = articleListbox.getByRole('option', { name: '本地 Mock 文章 21' });
+  await expect(loadedArticleOption).toBeVisible();
+  await expect(loadedArticleOption).toHaveCount(1);
 });
 
 test('AuthImg 请求失败时保留轮播图尺寸并在窄屏不溢出', async ({ page }) => {

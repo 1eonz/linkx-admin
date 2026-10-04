@@ -1,5 +1,41 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-04 后续迁移波次拆分
+
+组件库、权限、Mock、登录页、动态图标和宿主替换的完整执行拆分见仓库文档 `doc/PROJECT-FOLLOWUP-BREAKDOWN.md`。Wave 0 已修复 `LxDatePicker` 相邻实例说明 ID 隔离，DatePicker/DynamicForm 定向测试 36/36；组件库正式 Critique 仍待补。当前入口为 Wave 1 基础控件第一组，之后按其余 lx-ui、宿主 Element Plus 分批替换推进。所有 API 请求继续使用 `.then().catch().finally()`；中文文档和注释规则、Impeccable `[]` 证据规则以及真实后端阻塞口径以该拆分文档为准。
+
+## 2026-10-03 UI-13 DynamicForm 字段反馈复验
+
+- Vue3 集成以 `lx-ui` 的 `LxDynamicForm` 为对照；日期字段反馈说明现在到达可聚焦的日期输入框，并覆盖 ID 更新/移除及两个相邻日期字段的隔离回归。
+- 验证：DynamicForm/DatePicker 定向单测 34/34、lx-ui 文档浏览器 E2E 1/1、Vue3 `vue-tsc --noEmit` 和目标 ESLint/Prettier 通过；本波未修改业务 API 或真实后端协议。
+- Impeccable A 桌面评审 29/40（Good），Demo 固定 loading、最小 schema 文档建议已落实。B 的 detector 为 `[]`、stderr 空、退出码 0，仅代表静态零命中；浏览器不提供可变注入接口，overlay 未运行，正式 Critique 未关闭，未生成正式快照。
+- Vue3 Element Plus 页面替换仍按组件库计划后续执行；本条是组件库字段反馈验收，不代表宿主业务页迁移完成。
+
+## 2026-10-03 lx-ui Wave 6 交付与宿主替换门槛
+
+- TreeSelect/Cascader 库级实现、行为测试、文档 E2E 已收口：单测 17/17，lx-ui 文档 Playwright 8/8（VitePress 4176）。当前正式 Impeccable Critique 未收口：旧 overlay 早于当前代码/文档修改，本次浏览器策略拒绝注入预检；detector `[]` 只表示静态零命中。该项仍不代表 Vue3 页面已经替换 Element Plus。
+- Vue3 宿主继续保留自身 `element-plus` 依赖。必须先完成基础控件严格 UI 批次、其余 lx-ui 组件和 UI-11 全库 Critique，再按 `ELEMENT-PLUS-LX-UI-MATRIX.md` 分批替换页面并回归受影响业务。
+- API 请求继续使用 `.then().catch().finally()`；权限中心、按钮/文本/字段权限和引导页仍为延期新需求，不能混入本轮组件迁移完成度。
+
+## 2026-10-02 TreeSelect/Cascader 行为补齐（2026-10-03 行为复验）
+
+- `LxTreeSelect` 多选 footer 按 locale 显示中英文计数/操作文案，提供 `selectedText`、`unselectedText`、`cancelText`、`confirmText` 覆盖；宿主单测覆盖默认英文和自定义文本。
+- `LxCascader` 统一并发 loading/error 契约：loading 中不声明输入错误、不呈现错误或重试；loading 结束且 error 保持时显示失败和重试。Demo 单独播报简洁操作结果，值显示不再重复 live announcement。
+- 单测 17/17、lx-ui typecheck/build/docs build、Vue3 `vue-tsc`、Prettier、TreeSelect/Cascader 文档 Playwright 8/8 通过；Playwright 使用 `playwright.lxui.config.ts`，真实后端不在本波范围。
+- 当前源码及两份组件文档 detector 均为 JSON `[]`、stderr 空、退出码 0；这仅代表静态零命中。当前正式 Impeccable Critique 尚未完成，不能引用 10 月 2 日旧 overlay 关闭此项。该项不代表 Vue3 Element Plus 替换或 UI-10 全库完成。linkx-fe 无独立 ESLint 配置，Vue3 ESLint 的 ignored 输出不记为组件库 Lint 通过。
+
+## 2026-10-02 本地预览增量回归
+
+- 全菜单 32 个路由、全部菜单目录和北向接入 Mock CRUD 已在 `preview.spec.ts` 复跑通过；轮播文章分页的页码 1/2、唯一选项和 AuthImg 失败/重试/减少动效场景均通过，预览套件共 6/6。
+- 轮播文章分页增加请求锁、失败页码回退、文章 ID 去重和公众号切换请求代次保护。定向 E2E、目标 ESLint、Prettier 和 `vue-tsc --noEmit` 通过；仅为 Mock/browser 证据，真实后端及其他 v-loadmore 宿主仍待逐页验证。
+- `LxInputNumber.controls` 默认显示步进按钮，传 `false` 隐藏，API/Demo/行为测试与浏览器验收已具备；Vue3 Element Plus 替换门槛仍按 UI-10/UI-11/UI-04 执行。
+
+## 2026-09-30 lx-ui 基础组件审查批次
+
+Vue3 宿主替换前新增基础组件门槛：先严格审查并稳定 `LxButton`、`LxInput`、`LxInputNumber`、`LxTextarea`、`LxSelect`、`LxDatePicker`、Checkbox/Radio 组、`LxSwitch`、`LxPasswordInput` 的设计和交互，再按矩阵逐页接入。宿主现有 `element-plus` 依赖继续保留，直到组件库 UI-10/UI-11 和受影响页面回归完成。
+
+2026-09-30 UI-10 Wave 5 postfix：`LxDialog`、`LxDrawer`、`LxEmpty`、`LxPageCard`、`LxFormErrorBanner` 的宿主回归证据已更新。Dialog/Drawer/PageCard 相关单测和文档 E2E 通过，组件 A/B 证据位于 `.impeccable/critique/wave5-postfix-2026-09-30/`；Assessment A 34/40，Assessment B 为 Playwright fallback 的降级浏览器证据。宿主业务页尚未批量替换 Element Plus，真实后端联调仍单独跟踪。
+
 ## 2026-09-29 追加记录
 
 - GLM #1 lx-ui 全局注册：使用显式 `Lx*` 注册表注册 39 个组件，插件单测 1/1；lx-ui 类型检查、库构建、VitePress 文档构建及 Vue3 全量单测 39 文件/200 项通过。代码审核无新增可复现问题。linkx-fe 没有独立 ESLint CLI，不将 Vue3 配置忽略视为通过；无视觉变化，不需要 Impeccable 检查。GLM #2 Cascader 值契约现已按 Element Plus 的 string/number/record object 完成修正；SearchBar 6 项单测、ColForm 竞态 E2E 4/4、lx-ui typecheck/build/docs build 和正式交接记录通过。
@@ -97,6 +133,9 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 权限键必须沿用 Vue2/API 契约。若后端没有区分按钮和文本的独立字段，前端只做展示层区分，不臆造新的服务端权限类型。
 
 2026-09-28 多选下拉内侧边线对齐复修：用户仍反馈外圈观感不协调。经真实 DOM 对照，选择器原先使用实体 border，输入类控件使用内部 inset 边线；现统一为无实体 border、1px inset 状态线，普通/悬停/聚焦/错误仅切换 token 颜色，保留 32px 和原交互。4174 计算样式及 Element Bridge 定向 Playwright 已验证；正式 Impeccable 双路复评待当前样式稳定后补录。
+
+2026-09-30 UI-13 LxForm 首错焦点修复：LxForm 现在保存真实表单根节点并在校验 Promise reject 后聚焦首个错误输入；桌面/375px浏览器证据和 3/3 文档 E2E 已通过。该修复不代表 Form 正式 Impeccable 关闭；组件库全量 UI-10/UI-11 完成前不进入宿主 Element Plus 依赖移除。
+
 ## 2026-10-04 Wave 0 迁移影响
 
 当前仅修复 lx-ui `LxDatePicker` 对实际输入框的说明 ID 关联，没有改动 Vue3 业务 API、路由、权限或后端协议。当前工作区 DynamicForm 日期字段回归与 DatePicker 合计 36/36；本波提交不包含既存 DynamicForm 实现改动。Wave 1 先完成基础控件审查，宿主 Element Plus 替换顺序不变。

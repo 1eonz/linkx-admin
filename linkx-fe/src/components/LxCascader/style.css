@@ -1,0 +1,159 @@
+.lx-cascader-field,
+.lx-cascader {
+  width: 100%;
+  min-width: 0;
+}
+
+.lx-cascader .el-input__wrapper {
+  border-radius: var(--lx-radius-md);
+  box-shadow: 0 0 0 1px var(--lx-control-border) inset;
+  transition:
+    box-shadow var(--lx-transition),
+    background-color var(--lx-transition);
+}
+
+.lx-cascader .el-input__wrapper:hover,
+.lx-cascader .el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px var(--lx-color-primary) inset;
+  outline: none;
+}
+
+.lx-cascader .el-input.is-disabled .el-input__wrapper {
+  opacity: 0.6;
+}
+
+.lx-cascader--selection-paused .el-cascader__tags .el-tag__close {
+  pointer-events: none;
+}
+
+/* 表单校验错误接管级联触发器，和 LxInput/LxTextarea 共用表单专属令牌。 */
+.el-form-item.is-error .lx-cascader .el-input__wrapper {
+  background-color: var(--lx-color-form-error-bg);
+  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
+}
+
+.lx-cascader-field.is-error .lx-cascader .el-input__wrapper {
+  background-color: var(--lx-color-form-error-bg);
+  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
+}
+
+.el-form-item.is-error .lx-cascader .el-input__inner {
+  color: var(--lx-color-form-error);
+}
+
+.el-form-item.is-error .lx-cascader .el-input__wrapper.is-focus,
+.lx-cascader-field.is-error .lx-cascader .el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
+  outline: none;
+}
+
+.lx-cascader__popper.el-cascader__dropdown {
+  box-sizing: border-box;
+  max-width: calc(100vw - 16px);
+  border-radius: var(--lx-radius-md);
+  box-shadow: var(--lx-shadow-pop);
+  overflow-x: auto;
+}
+
+.lx-cascader__popper .el-cascader-panel {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.lx-cascader__popper .el-cascader-menu {
+  min-width: min(180px, 32vw);
+}
+
+.lx-cascader__popper.is-loading .el-cascader-panel,
+.lx-cascader__popper.is-error .el-cascader-panel,
+.lx-cascader__popper.is-loading .el-cascader__suggestion-panel,
+.lx-cascader__popper.is-error .el-cascader__suggestion-panel {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.lx-cascader__panel-state,
+.lx-cascader__empty,
+.lx-cascader__panel-footer,
+.lx-cascader__feedback {
+  align-items: center;
+  display: flex;
+  gap: var(--lx-space-sm);
+}
+
+.lx-cascader__panel-state,
+.lx-cascader__empty {
+  justify-content: center;
+  min-height: var(--lx-control-height);
+  color: var(--lx-text-secondary-strong);
+}
+
+.lx-cascader__panel-state.is-error,
+.lx-cascader__empty.is-error,
+.lx-cascader__feedback.is-error {
+  color: var(--lx-color-form-error);
+}
+
+.lx-cascader__panel-footer {
+  justify-content: space-between;
+  color: var(--lx-color-form-error);
+}
+
+.lx-cascader__feedback {
+  margin-top: var(--lx-space-xs);
+  color: var(--lx-text-secondary-strong);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.lx-cascader__retry {
+  min-height: 44px;
+  padding-inline: var(--lx-space-sm);
+  border: 1px solid currentColor;
+  border-radius: var(--lx-radius-sm);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+.lx-cascader__retry:hover:not(:disabled) {
+  background: var(--lx-color-primary-light);
+}
+
+.lx-cascader__retry:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+.lx-cascader__retry:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (hover: none), (max-width: 600px) {
+  .lx-cascader .el-input__wrapper {
+    min-height: 44px;
+  }
+
+  .lx-cascader__popper .el-cascader-node,
+  .lx-cascader__popper .el-cascader__suggestion-item {
+    height: 44px;
+    min-height: 44px;
+    line-height: 44px;
+  }
+
+  .lx-cascader__popper .el-cascader-menu {
+    min-width: min(180px, calc((100vw - 16px) / 3));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-cascader,
+  .lx-cascader *,
+  .lx-cascader__popper,
+  .lx-cascader__popper * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

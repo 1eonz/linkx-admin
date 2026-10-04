@@ -7,6 +7,7 @@
  *   element-theme.css 的同款全局覆写保留过渡期（存量 el-radio 直用页面迁移完成后摘除）。
  * 与 LxRadioGroup 配合使用；单项独立使用时亦可 v-model（EP 内核契约）。
  */
+import { computed } from 'vue'
 import { ElRadio } from 'element-plus'
 import type { LxRadioProps } from './types'
 import 'element-plus/es/components/radio/style/css'
@@ -14,7 +15,7 @@ import './style.css'
 
 defineOptions({ name: 'LxRadio', inheritAttrs: false })
 
-withDefaults(defineProps<LxRadioProps>(), {
+const props = withDefaults(defineProps<LxRadioProps>(), {
   value: undefined,
   label: '',
   // disabled 显式 default: undefined（对齐 EP 内核 default: void 0）：absent 时保持
@@ -23,6 +24,8 @@ withDefaults(defineProps<LxRadioProps>(), {
   disabled: undefined,
   name: undefined,
 })
+
+const resolvedValue = computed(() => props.value ?? (props.label || undefined))
 
 defineEmits<{
   /** 选中项变化（EP 内核原生 change 契约） */
@@ -33,13 +36,12 @@ defineEmits<{
 <template>
   <ElRadio
     class="lx-radio"
-    :value="value"
-    :label="label || undefined"
-    :disabled="disabled"
-    :name="name"
+    :value="resolvedValue"
+    :disabled="props.disabled"
+    :name="props.name"
     v-bind="$attrs"
     @change="$emit('change', $event)"
   >
-    <slot>{{ label }}</slot>
+    <slot>{{ props.label }}</slot>
   </ElRadio>
 </template>

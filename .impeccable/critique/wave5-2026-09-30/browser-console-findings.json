@@ -1,0 +1,40 @@
+{
+  "scope": "Wave 5 Assessment B browser console and overlay evidence",
+  "injection": {
+    "status": "succeeded",
+    "script": "http://127.0.0.1:8400/detect.js?wave5=20260930",
+    "loaded_message": "[assessment-b] detect.js loaded"
+  },
+  "cli_detector": {
+    "targets": 5,
+    "stdout_result": "[]",
+    "stderr": "",
+    "exit_code": 0
+  },
+  "browser_rules_seen": [
+    "buried-raster",
+    "first-viewport-column-overflow",
+    "layout-transition",
+    "line-length",
+    "clipped-overflow-container",
+    "edge-flush-cards",
+    "cramped-padding",
+    "low-contrast",
+    "tiny-text"
+  ],
+  "interpretation": {
+    "docs_shell_or_heuristic_likely": [
+      "buried-raster on VitePress button.copy",
+      "first-viewport-column-overflow on VitePress div.container",
+      "layout-transition on body",
+      "line-length on documentation paragraphs",
+      "clipped-overflow-container and edge-flush-cards on documentation navigation/API tables"
+    ],
+    "component_or_demo_review": [
+      "Drawer content-body cramped-padding",
+      "PageCard low-contrast status/metadata text",
+      "FormErrorBanner low-contrast and tiny-text in the banner at mobile width",
+      "Dialog mobile clipped-overflow-container around the 375px dialog view"
+    ]
+  }
+}

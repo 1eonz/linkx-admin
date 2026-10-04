@@ -1,0 +1,284 @@
+{
+  "case": "lxform-375-light",
+  "url": "http://127.0.0.1:4174/components/lxform.html",
+  "httpStatus": 200,
+  "viewport": {
+    "width": 375,
+    "height": 812
+  },
+  "preflight": {
+    "markerPresent": true,
+    "markerExecuted": true,
+    "title": "[Human] 数据录入表单 | LxUI"
+  },
+  "setup": {
+    "settingsOpened": false,
+    "hudControl": null,
+    "candidateError": false
+  },
+  "injectionError": null,
+  "overlay": {
+    "detectorScriptPresent": true,
+    "detectorFunctionAvailable": true,
+    "findings": [
+      {
+        "selector": "span.container",
+        "tagName": "span",
+        "rect": {
+          "x": 335,
+          "y": -789,
+          "width": 16,
+          "height": 14,
+          "top": -789,
+          "right": 351,
+          "bottom": -775,
+          "left": 335
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "clipped-overflow-container",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "span.container clips a positioned child",
+            "ignoreValue": "",
+            "name": "Positioned child clipped by overflow container",
+            "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip."
+          }
+        ]
+      },
+      {
+        "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 282,
+          "y": 539,
+          "width": 40,
+          "height": 40,
+          "top": 539,
+          "right": 322,
+          "bottom": 579,
+          "left": 282
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "details.details.custom-block:nth-of-type(2) > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 282,
+          "y": 1096,
+          "width": 40,
+          "height": 40,
+          "top": 1096,
+          "right": 322,
+          "bottom": 1136,
+          "left": 282
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 323,
+          "y": 1442,
+          "width": 40,
+          "height": 40,
+          "top": 1442,
+          "right": 363,
+          "bottom": 1482,
+          "left": 323
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-3",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "em-dash-overuse",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "13 em-dashes in body text",
+            "ignoreValue": "",
+            "name": "Em-dash overuse",
+            "description": "Em-dash saturation in body copy is an AI cadence tell. Advisory only: humans use em-dashes legitimately, so this fires only on saturation — at least 8 em-dashes (— or --) at a density near one per 500 characters of body text — never on a long article that uses a few. Prefer commas, colons, periods, or parentheses."
+          },
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      },
+      {
+        "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > span.lang",
+        "tagName": "span",
+        "rect": {
+          "x": 304.828125,
+          "y": 529,
+          "width": 21.171875,
+          "height": 24,
+          "top": 529,
+          "right": 326,
+          "bottom": 553,
+          "left": 304.828125
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "text-occlusion",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "span.lang \"vue\" is 50% covered by overlapping text (p)",
+            "ignoreValue": "",
+            "name": "Text occluded by an overlapping element",
+            "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+          }
+        ]
+      }
+    ],
+    "overlayNodeCount": 7,
+    "visibleOverlayNodeCount": 3,
+    "reducedMotionMatches": false,
+    "hudThemeApplied": false
+  },
+  "screenshot": "lxform-375-light-overlay.png",
+  "requestedOrigins": [
+    "http://127.0.0.1:4174",
+    "http://127.0.0.1:8400"
+  ],
+  "failedRequests": [],
+  "pageErrors": [],
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "log",
+      "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cem-dash-overuse%c 13 em-dashes in body text color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ctext-occlusion%c span.lang \"vue\" is 50% covered by overlapping text (p) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    }
+  ]
+}

@@ -91,6 +91,8 @@ import Basic from '../../src/components/LxButton/demo/basic.vue';
 
 文字形态支持全部语义色组合（hover 底均为对应色 8% 透明度浅底）：
 
+成功和警示文字分别使用 `--lx-color-success-text` 与 `--lx-color-warning-text`，避免实底悬停色用于白底小字号时对比度不足；HUD 主题提供对应的亮字令牌。默认、悬停和按下状态均以 4.5:1 为文字对比度门槛，自定义 `textColor` 的对比度由调用方负责。
+
 ```vue
 <LxButton type="success" text>核准归档</LxButton>
 <LxButton type="warning" text>催办预警</LxButton>

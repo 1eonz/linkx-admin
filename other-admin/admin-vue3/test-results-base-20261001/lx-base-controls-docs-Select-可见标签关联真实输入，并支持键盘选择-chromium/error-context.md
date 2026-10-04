@@ -1,0 +1,696 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#VPContent"
+    - banner:
+      - generic:
+        - generic:
+          - generic:
+            - link "LxUI" [ref=e6] [cursor=pointer]:
+              - /url: /
+              - generic [ref=e7]: LxUI
+            - generic [ref=e8]:
+              - navigation "Main Navigation" [ref=e9]:
+                - generic [ref=e10]: Main Navigation
+                - link "首页" [ref=e11] [cursor=pointer]:
+                  - /url: /
+                  - generic [ref=e12]: 首页
+                - link "组件" [ref=e13] [cursor=pointer]:
+                  - /url: /components/lxsidebar.html
+                  - generic [ref=e14]: 组件
+                - link "新增组件" [ref=e15] [cursor=pointer]:
+                  - /url: /components/new-components.html
+                  - generic [ref=e16]: 新增组件
+              - switch "Switch to dark theme" [ref=e18] [cursor=pointer]
+    - complementary [ref=e23]:
+      - navigation "Sidebar Navigation" [ref=e25]:
+        - generic [ref=e26]: Sidebar Navigation
+        - generic [ref=e28]:
+          - button "新增组件" [ref=e29]:
+            - heading "新增组件" [level=2] [ref=e31]
+          - link "新增组件总览" [ref=e36] [cursor=pointer]:
+            - /url: /components/new-components.html
+            - paragraph [ref=e37]: 新增组件总览
+        - generic [ref=e39]:
+          - button "基础" [ref=e40]:
+            - heading "基础" [level=2] [ref=e42]
+          - generic [ref=e43]:
+            - link "基础控件桥接" [ref=e47] [cursor=pointer]:
+              - /url: /components/element-bridge.html
+              - paragraph [ref=e48]: 基础控件桥接
+            - link "LxButton 按钮" [ref=e52] [cursor=pointer]:
+              - /url: /components/lxbutton.html
+              - paragraph [ref=e53]: LxButton 按钮
+            - link "LxIcon 图标总览" [ref=e57] [cursor=pointer]:
+              - /url: /components/lxicons.html
+              - paragraph [ref=e58]: LxIcon 图标总览
+        - generic [ref=e60]:
+          - button "布局导航" [ref=e61]:
+            - heading "布局导航" [level=2] [ref=e63]
+          - generic [ref=e64]:
+            - link "LxSidebar 侧边栏" [ref=e68] [cursor=pointer]:
+              - /url: /components/lxsidebar.html
+              - paragraph [ref=e69]: LxSidebar 侧边栏
+            - link "LxNavbar 顶部导航" [ref=e73] [cursor=pointer]:
+              - /url: /components/lxnavbar.html
+              - paragraph [ref=e74]: LxNavbar 顶部导航
+            - link "LxBreadcrumb 面包屑" [ref=e78] [cursor=pointer]:
+              - /url: /components/lxbreadcrumb.html
+              - paragraph [ref=e79]: LxBreadcrumb 面包屑
+            - link "LxTabsBar 页签栏" [ref=e83] [cursor=pointer]:
+              - /url: /components/lxtabsbar.html
+              - paragraph [ref=e84]: LxTabsBar 页签栏
+            - link "LxSplitLayout 分栏布局" [ref=e88] [cursor=pointer]:
+              - /url: /components/lxsplitlayout.html
+              - paragraph [ref=e89]: LxSplitLayout 分栏布局
+            - link "LxSelectTree 组织树选择" [ref=e93] [cursor=pointer]:
+              - /url: /components/lxselecttree.html
+              - paragraph [ref=e94]: LxSelectTree 组织树选择
+        - generic [ref=e96]:
+          - button "数据展示" [ref=e97]:
+            - heading "数据展示" [level=2] [ref=e99]
+          - generic [ref=e100]:
+            - link "LxProTable 数据表格" [ref=e104] [cursor=pointer]:
+              - /url: /components/lxprotable.html
+              - paragraph [ref=e105]: LxProTable 数据表格
+            - link "LxPageCard 页面容器" [ref=e109] [cursor=pointer]:
+              - /url: /components/lxpagecard.html
+              - paragraph [ref=e110]: LxPageCard 页面容器
+            - link "LxMetricCard 指标卡" [ref=e114] [cursor=pointer]:
+              - /url: /components/lxmetriccard.html
+              - paragraph [ref=e115]: LxMetricCard 指标卡
+            - link "LxDutyCalendar 排班日历" [ref=e119] [cursor=pointer]:
+              - /url: /components/lxdutycalendar.html
+              - paragraph [ref=e120]: LxDutyCalendar 排班日历
+            - link "LxSectionTitle 区块标题" [ref=e124] [cursor=pointer]:
+              - /url: /components/lxsectiontitle.html
+              - paragraph [ref=e125]: LxSectionTitle 区块标题
+            - link "LxAuthImg 鉴权图片" [ref=e129] [cursor=pointer]:
+              - /url: /components/lxauthimg.html
+              - paragraph [ref=e130]: LxAuthImg 鉴权图片
+            - link "LxDescriptions 详情描述" [ref=e134] [cursor=pointer]:
+              - /url: /components/lxdescriptions.html
+              - paragraph [ref=e135]: LxDescriptions 详情描述
+            - link "LxPagination 分页" [ref=e139] [cursor=pointer]:
+              - /url: /components/lxpagination.html
+              - paragraph [ref=e140]: LxPagination 分页
+            - link "LxVirtualTree 虚拟树" [ref=e144] [cursor=pointer]:
+              - /url: /components/lxvirtualtree.html
+              - paragraph [ref=e145]: LxVirtualTree 虚拟树
+            - link "LxTransferPanel 双栏穿梭" [ref=e149] [cursor=pointer]:
+              - /url: /components/lxtransferpanel.html
+              - paragraph [ref=e150]: LxTransferPanel 双栏穿梭
+            - link "LxStatusDot 状态点" [ref=e154] [cursor=pointer]:
+              - /url: /components/lxstatusdot.html
+              - paragraph [ref=e155]: LxStatusDot 状态点
+            - link "LxTag 浅底标签" [ref=e159] [cursor=pointer]:
+              - /url: /components/lxtag.html
+              - paragraph [ref=e160]: LxTag 浅底标签
+            - link "LxCodeSlot 代码槽" [ref=e164] [cursor=pointer]:
+              - /url: /components/lxcodeslot.html
+              - paragraph [ref=e165]: LxCodeSlot 代码槽
+            - link "LxActionButtons 行内操作" [ref=e169] [cursor=pointer]:
+              - /url: /components/lxactionbuttons.html
+              - paragraph [ref=e170]: LxActionButtons 行内操作
+            - link "LxEmpty 空态" [ref=e174] [cursor=pointer]:
+              - /url: /components/lxempty.html
+              - paragraph [ref=e175]: LxEmpty 空态
+            - link "LxGauge 圆环仪表" [ref=e179] [cursor=pointer]:
+              - /url: /components/lxgauge.html
+              - paragraph [ref=e180]: LxGauge 圆环仪表
+            - link "LxNodeBadge 节点徽章" [ref=e184] [cursor=pointer]:
+              - /url: /components/lxnodebadge.html
+              - paragraph [ref=e185]: LxNodeBadge 节点徽章
+            - link "权限消费" [ref=e189] [cursor=pointer]:
+              - /url: /components/permissions.html
+              - paragraph [ref=e190]: 权限消费
+        - generic [ref=e192]:
+          - button "数据录入" [ref=e193]:
+            - heading "数据录入" [level=2] [ref=e195]
+          - generic [ref=e196]:
+            - link "LxForm 表单" [ref=e200] [cursor=pointer]:
+              - /url: /components/lxform.html
+              - paragraph [ref=e201]: LxForm 表单
+            - link "LxInput 输入框" [ref=e205] [cursor=pointer]:
+              - /url: /components/lxinput.html
+              - paragraph [ref=e206]: LxInput 输入框
+            - link "LxTextarea 文本域" [ref=e210] [cursor=pointer]:
+              - /url: /components/lxtextarea.html
+              - paragraph [ref=e211]: LxTextarea 文本域
+            - link "LxRadio 单选组" [ref=e215] [cursor=pointer]:
+              - /url: /components/lxradio.html
+              - paragraph [ref=e216]: LxRadio 单选组
+            - link "LxCheckbox 复选组" [ref=e220] [cursor=pointer]:
+              - /url: /components/lxcheckbox.html
+              - paragraph [ref=e221]: LxCheckbox 复选组
+            - link "LxSwitch 开关" [ref=e225] [cursor=pointer]:
+              - /url: /components/lxswitch.html
+              - paragraph [ref=e226]: LxSwitch 开关
+            - link "LxSelect 下拉选择" [ref=e230] [cursor=pointer]:
+              - /url: /components/lxselect.html
+              - paragraph [ref=e231]: LxSelect 下拉选择
+            - link "LxTreeSelect 树形下拉" [ref=e235] [cursor=pointer]:
+              - /url: /components/lxtreeselect.html
+              - paragraph [ref=e236]: LxTreeSelect 树形下拉
+            - link "LxDatePicker 日期选择" [ref=e240] [cursor=pointer]:
+              - /url: /components/lxdatepicker.html
+              - paragraph [ref=e241]: LxDatePicker 日期选择
+            - link "LxInputNumber 数字输入" [ref=e245] [cursor=pointer]:
+              - /url: /components/lxinputnumber.html
+              - paragraph [ref=e246]: LxInputNumber 数字输入
+            - link "LxSearchBar 检索面板" [ref=e250] [cursor=pointer]:
+              - /url: /components/lxsearchbar.html
+              - paragraph [ref=e251]: LxSearchBar 检索面板
+            - link "LxDynamicForm 动态表单" [ref=e255] [cursor=pointer]:
+              - /url: /components/lxdynamicform.html
+              - paragraph [ref=e256]: LxDynamicForm 动态表单
+            - link "LxStatusSwitch 状态开关" [ref=e260] [cursor=pointer]:
+              - /url: /components/lxstatusswitch.html
+              - paragraph [ref=e261]: LxStatusSwitch 状态开关
+            - link "LxPasswordInput 密码输入框" [ref=e265] [cursor=pointer]:
+              - /url: /components/lxpasswordinput.html
+              - paragraph [ref=e266]: LxPasswordInput 密码输入框
+            - link "LxUpload 文件上传" [ref=e270] [cursor=pointer]:
+              - /url: /components/lxupload.html
+              - paragraph [ref=e271]: LxUpload 文件上传
+            - link "LxSelectPagination 远程分页选择" [ref=e275] [cursor=pointer]:
+              - /url: /components/lxselectpagination.html
+              - paragraph [ref=e276]: LxSelectPagination 远程分页选择
+        - generic [ref=e278]:
+          - button "反馈与浮层" [ref=e279]:
+            - heading "反馈与浮层" [level=2] [ref=e281]
+          - generic [ref=e282]:
+            - link "LxMessage 全局提示" [ref=e286] [cursor=pointer]:
+              - /url: /components/lxmessage.html
+              - paragraph [ref=e287]: LxMessage 全局提示
+            - link "LxConfirm 确认框" [ref=e291] [cursor=pointer]:
+              - /url: /components/lxconfirm.html
+              - paragraph [ref=e292]: LxConfirm 确认框
+            - link "LxDialog 表单弹窗" [ref=e296] [cursor=pointer]:
+              - /url: /components/lxdialog.html
+              - paragraph [ref=e297]: LxDialog 表单弹窗
+            - link "LxDrawer 详情抽屉" [ref=e301] [cursor=pointer]:
+              - /url: /components/lxdrawer.html
+              - paragraph [ref=e302]: LxDrawer 详情抽屉
+            - link "LxFormErrorBanner 校验横幅" [ref=e306] [cursor=pointer]:
+              - /url: /components/lxformerrorbanner.html
+              - paragraph [ref=e307]: LxFormErrorBanner 校验横幅
+    - generic [ref=e310]:
+      - navigation "On this page" [ref=e316]:
+        - generic [ref=e317]:
+          - heading "On this page" [level=2] [ref=e319]
+          - list [ref=e320]:
+            - listitem [ref=e321]:
+              - link "交互示例" [ref=e322] [cursor=pointer]:
+                - /url: "#交互示例"
+            - listitem [ref=e323]:
+              - link "Props" [ref=e324] [cursor=pointer]:
+                - /url: "#props"
+            - listitem [ref=e325]:
+              - link "Events" [ref=e326] [cursor=pointer]:
+                - /url: "#events"
+            - listitem [ref=e327]:
+              - link "Slots" [ref=e328] [cursor=pointer]:
+                - /url: "#slots"
+            - listitem [ref=e329]:
+              - link "Exposes" [ref=e330] [cursor=pointer]:
+                - /url: "#exposes"
+            - listitem [ref=e331]:
+              - link "低频 props 透传" [ref=e332] [cursor=pointer]:
+                - /url: "#低频-props-透传"
+            - listitem [ref=e333]:
+              - link "与标本的对齐说明" [ref=e334] [cursor=pointer]:
+                - /url: "#与标本的对齐说明"
+            - listitem [ref=e335]:
+              - link "可访问性" [ref=e336] [cursor=pointer]:
+                - /url: "#可访问性"
+            - listitem [ref=e337]:
+              - link "Vue3 宿主适配" [ref=e338] [cursor=pointer]:
+                - /url: "#vue3-宿主适配"
+      - generic [ref=e341]:
+        - main [ref=e342]:
+          - generic [ref=e344]:
+            - heading "LxSelect 下拉选择器 Permalink to \"LxSelect 下拉选择器\"" [level=1] [ref=e345]:
+              - text: LxSelect 下拉选择器
+              - link "Permalink to \"LxSelect 下拉选择器\"" [ref=e346] [cursor=pointer]:
+                - /url: "#lxselect-下拉选择器"
+                - text: "#"
+            - paragraph [ref=e347]:
+              - text: 基于 Element Plus
+              - code [ref=e348]: el-select
+              - text: 内核二次封装的下拉选择器。32px 触发器 + 真实 1px 边框（非 EP 默认 box-shadow 伪边框）；hover 与展开态描边转主色、已选文字主色 500 字重、箭头旋转 180°（EP 原生）；面板选项 32px 行高、选中项
+              - code [ref=e349]: "#f5f7fa"
+              - text: 底 + 主色文字 + 右侧 Check。选项经默认插槽传
+              - code [ref=e350]: ElOption
+              - text: （EP 全导出可直接使用）；
+              - code [ref=e351]: remote-method
+              - text: /
+              - code [ref=e352]: remote
+              - text: 等低频 props 经 attrs 透传。
+            - paragraph [ref=e353]:
+              - text: 视觉规范源：
+              - code [ref=e354]: design/表单控件八件套/code.html
+              - text: 02。
+            - heading "交互示例 Permalink to \"交互示例\"" [level=2] [ref=e355]:
+              - text: 交互示例
+              - link "Permalink to \"交互示例\"" [ref=e356] [cursor=pointer]:
+                - /url: "#交互示例"
+                - text: "#"
+            - generic [ref=e357]:
+              - generic [ref=e359]:
+                - checkbox "HUD 深色主题" [ref=e360]
+                - text: HUD 深色主题
+              - generic [ref=e361]:
+                - heading "基础单选（32px 触发器 + 1px 边框；展开态箭头旋转 + 已选文字转主色）" [level=4] [ref=e362]
+                - generic [ref=e363]:
+                  - generic [ref=e364]:
+                    - generic [ref=e365]: 布控等级
+                    - generic [ref=e367] [cursor=pointer]:
+                      - generic:
+                        - combobox "布控等级" [ref=e369]
+                        - generic [ref=e370]: 二级布控
+                      - img [ref=e373]
+                  - generic [ref=e375]:
+                    - generic [ref=e376]: 处置通道（可清空）
+                    - generic [ref=e378] [cursor=pointer]:
+                      - generic:
+                        - combobox "处置通道（可清空）" [ref=e380]
+                        - generic [ref=e381]: 高密加密专线
+                      - img [ref=e384]
+              - generic [ref=e386]:
+                - heading "多选与折叠（超出折叠为 +N，悬停可见完整列表）" [level=4] [ref=e387]
+                - generic [ref=e388]:
+                  - generic [ref=e389]: 协同单位
+                  - generic [ref=e391] [cursor=pointer]:
+                    - generic [ref=e392]:
+                      - generic [ref=e394]:
+                        - generic [ref=e396]: 市局指挥中心
+                        - button "Close this tag" [ref=e397]:
+                          - img [ref=e399]
+                      - combobox "协同单位" [ref=e402]
+                    - img [ref=e405]
+              - generic [ref=e407]:
+                - heading "本地过滤（输入关键字检索选项）" [level=4] [ref=e408]
+                - generic [ref=e409]:
+                  - generic [ref=e410]: 指挥中心
+                  - generic [ref=e412]:
+                    - generic [ref=e413]:
+                      - combobox "指挥中心" [expanded] [active] [ref=e415]
+                      - generic [ref=e416]: 输入关键字检索
+                    - img [ref=e419] [cursor=pointer]
+              - generic [ref=e421]:
+                - heading "远程检索（remote + remote-method 经 attrs 透传；loading 面板态）" [level=4] [ref=e422]
+                - generic [ref=e423]:
+                  - generic [ref=e424]: 值班警员
+                  - generic [ref=e427]:
+                    - combobox "值班警员" [ref=e429]
+                    - generic [ref=e430]: 输入警号或姓名检索
+                - paragraph [ref=e431]: Demo 以前端 600ms 延迟模拟远程数据源，宿主接入时 remote-method 指向真实接口；旧请求返回晚于新请求时被种子值丢弃，避免旧结果覆盖新状态。
+              - generic [ref=e432]:
+                - heading "禁用态（半透明 + 禁用手势）" [level=4] [ref=e433]
+                - generic [ref=e434]:
+                  - generic [ref=e435]: 应急链路（锁定）
+                  - generic [ref=e437]:
+                    - generic:
+                      - combobox "应急链路（锁定）" [disabled] [ref=e439]
+                      - generic [ref=e440]: 卫星应急链路
+                    - generic:
+                      - generic:
+                        - img
+              - paragraph [ref=e441]: 选择选项观察触发器与面板行为；演示数据仅存在于页面内存。
+              - paragraph [ref=e442]: "触发器 32px / 4px 圆角 / 1px #dcdfe6 边框，hover 与展开转主色；面板选项 32px 行高，选中项 #f5f7fa 底 + 主色 500 字重 + 右侧 Check。"
+            - group [ref=e443]:
+              - generic "查看示例代码" [ref=e444] [cursor=pointer]
+            - heading "Props Permalink to \"Props\"" [level=2] [ref=e445]:
+              - text: Props
+              - link "Permalink to \"Props\"" [ref=e446] [cursor=pointer]:
+                - /url: "#props"
+                - text: "#"
+            - paragraph [ref=e447]:
+              - text: 配置式
+              - code [ref=e448]: options
+              - text: 保留值类型：数字
+              - code [ref=e449]: "1"
+              - text: 与字符串
+              - code [ref=e450]: "'1'"
+              - text: 、布尔值
+              - code [ref=e451]: "true"
+              - text: 与字符串
+              - code [ref=e452]: "'true'"
+              - text: 是不同选项，动态重排后仍分别返回原始类型。字段通过
+              - code [ref=e453]: id
+              - text: 与外部
+              - code [ref=e454]: <label for>
+              - text: 关联；
+              - code [ref=e455]: id
+              - text: 经 attrs 传入内核输入。
+            - table [ref=e456]:
+              - rowgroup [ref=e457]:
+                - row "名称 类型 默认值 说明" [ref=e458]:
+                  - columnheader "名称" [ref=e459]
+                  - columnheader "类型" [ref=e460]
+                  - columnheader "默认值" [ref=e461]
+                  - columnheader "说明" [ref=e462]
+              - rowgroup [ref=e463]:
+                - row "modelValue string | number | boolean | object | array — 选中值（v-model；多选为数组）。" [ref=e464]:
+                  - cell "modelValue" [ref=e465]:
+                    - code [ref=e466]: modelValue
+                  - cell "string | number | boolean | object | array" [ref=e467]:
+                    - code [ref=e468]: string | number | boolean | object | array
+                  - cell "—" [ref=e469]
+                  - cell "选中值（v-model；多选为数组）。" [ref=e470]
+                - row "placeholder string '' 占位文案。" [ref=e471]:
+                  - cell "placeholder" [ref=e472]:
+                    - code [ref=e473]: placeholder
+                  - cell "string" [ref=e474]:
+                    - code [ref=e475]: string
+                  - cell "''" [ref=e476]:
+                    - code [ref=e477]: "''"
+                  - cell "占位文案。" [ref=e478]
+                - row "disabled boolean —（undefined） 禁用态：半透明 + 禁用手势。默认未设置：ElForm 禁用态可正常传导；显式传 true/false 才覆盖继承。" [ref=e479]:
+                  - cell "disabled" [ref=e480]:
+                    - code [ref=e481]: disabled
+                  - cell "boolean" [ref=e482]:
+                    - code [ref=e483]: boolean
+                  - cell "—（undefined）" [ref=e484]:
+                    - text: —（
+                    - code [ref=e485]: undefined
+                    - text: ）
+                  - cell "禁用态：半透明 + 禁用手势。默认未设置：ElForm 禁用态可正常传导；显式传 true/false 才覆盖继承。" [ref=e486]:
+                    - text: 禁用态：半透明 + 禁用手势。默认未设置：
+                    - code [ref=e487]: ElForm
+                    - text: 禁用态可正常传导；显式传
+                    - code [ref=e488]: "true"
+                    - text: /
+                    - code [ref=e489]: "false"
+                    - text: 才覆盖继承。
+                - row "clearable boolean false 可清空：单选值非空时右侧清除按钮。" [ref=e490]:
+                  - cell "clearable" [ref=e491]:
+                    - code [ref=e492]: clearable
+                  - cell "boolean" [ref=e493]:
+                    - code [ref=e494]: boolean
+                  - cell "false" [ref=e495]:
+                    - code [ref=e496]: "false"
+                  - cell "可清空：单选值非空时右侧清除按钮。" [ref=e497]
+                - row "filterable boolean false 本地过滤：输入关键字检索选项。" [ref=e498]:
+                  - cell "filterable" [ref=e499]:
+                    - code [ref=e500]: filterable
+                  - cell "boolean" [ref=e501]:
+                    - code [ref=e502]: boolean
+                  - cell "false" [ref=e503]:
+                    - code [ref=e504]: "false"
+                  - cell "本地过滤：输入关键字检索选项。" [ref=e505]
+                - row "multiple boolean false 多选：选中项渲染为标签，配合 collapseTags 折叠。" [ref=e506]:
+                  - cell "multiple" [ref=e507]:
+                    - code [ref=e508]: multiple
+                  - cell "boolean" [ref=e509]:
+                    - code [ref=e510]: boolean
+                  - cell "false" [ref=e511]:
+                    - code [ref=e512]: "false"
+                  - cell "多选：选中项渲染为标签，配合 collapseTags 折叠。" [ref=e513]:
+                    - text: 多选：选中项渲染为标签，配合
+                    - code [ref=e514]: collapseTags
+                    - text: 折叠。
+                - row "collapseTags boolean false 多选超出折叠为 +N。" [ref=e515]:
+                  - cell "collapseTags" [ref=e516]:
+                    - code [ref=e517]: collapseTags
+                  - cell "boolean" [ref=e518]:
+                    - code [ref=e519]: boolean
+                  - cell "false" [ref=e520]:
+                    - code [ref=e521]: "false"
+                  - cell "多选超出折叠为 +N。" [ref=e522]
+                - row "collapseTagsTooltip boolean false 折叠标签悬停提示完整列表。" [ref=e523]:
+                  - cell "collapseTagsTooltip" [ref=e524]:
+                    - code [ref=e525]: collapseTagsTooltip
+                  - cell "boolean" [ref=e526]:
+                    - code [ref=e527]: boolean
+                  - cell "false" [ref=e528]:
+                    - code [ref=e529]: "false"
+                  - cell "折叠标签悬停提示完整列表。" [ref=e530]
+                - row "loading boolean false 远程检索加载态（面板显示加载文案）。" [ref=e531]:
+                  - cell "loading" [ref=e532]:
+                    - code [ref=e533]: loading
+                  - cell "boolean" [ref=e534]:
+                    - code [ref=e535]: boolean
+                  - cell "false" [ref=e536]:
+                    - code [ref=e537]: "false"
+                  - cell "远程检索加载态（面板显示加载文案）。" [ref=e538]
+                - row "size 'sm' | 'md' | 'lg' 'md' 工程尺寸：28 / 32 / 40px；档名区别于 EP 的 small/default/large。" [ref=e539]:
+                  - cell "size" [ref=e540]:
+                    - code [ref=e541]: size
+                  - cell "'sm' | 'md' | 'lg'" [ref=e542]:
+                    - code [ref=e543]: "'sm' | 'md' | 'lg'"
+                  - cell "'md'" [ref=e544]:
+                    - code [ref=e545]: "'md'"
+                  - cell "工程尺寸：28 / 32 / 40px；档名区别于 EP 的 small/default/large。" [ref=e546]:
+                    - text: 工程尺寸：28 / 32 / 40px；档名区别于 EP 的
+                    - code [ref=e547]: small/default/large
+                    - text: 。
+                - row "name string — 原生 name 属性。" [ref=e548]:
+                  - cell "name" [ref=e549]:
+                    - code [ref=e550]: name
+                  - cell "string" [ref=e551]:
+                    - code [ref=e552]: string
+                  - cell "—" [ref=e553]
+                  - cell "原生 name 属性。" [ref=e554]
+            - heading "Events Permalink to \"Events\"" [level=2] [ref=e555]:
+              - text: Events
+              - link "Permalink to \"Events\"" [ref=e556] [cursor=pointer]:
+                - /url: "#events"
+                - text: "#"
+            - table [ref=e557]:
+              - rowgroup [ref=e558]:
+                - row "名称 参数 说明" [ref=e559]:
+                  - columnheader "名称" [ref=e560]
+                  - columnheader "参数" [ref=e561]
+                  - columnheader "说明" [ref=e562]
+              - rowgroup [ref=e563]:
+                - row "update:modelValue (value) 选中值变化。" [ref=e564]:
+                  - cell "update:modelValue" [ref=e565]:
+                    - code [ref=e566]: update:modelValue
+                  - cell "(value)" [ref=e567]:
+                    - code [ref=e568]: (value)
+                  - cell "选中值变化。" [ref=e569]
+                - row "change (value) 选中值变化（EP 内核原生）。" [ref=e570]:
+                  - cell "change" [ref=e571]:
+                    - code [ref=e572]: change
+                  - cell "(value)" [ref=e573]:
+                    - code [ref=e574]: (value)
+                  - cell "选中值变化（EP 内核原生）。" [ref=e575]
+                - row "clear — 点击清除按钮。" [ref=e576]:
+                  - cell "clear" [ref=e577]:
+                    - code [ref=e578]: clear
+                  - cell "—" [ref=e579]
+                  - cell "点击清除按钮。" [ref=e580]
+                - 'row "visible-change (visible: boolean) 下拉面板展开/收起。" [ref=e581]':
+                  - cell "visible-change" [ref=e582]:
+                    - code [ref=e583]: visible-change
+                  - 'cell "(visible: boolean)" [ref=e584]':
+                    - code [ref=e585]: "(visible: boolean)"
+                  - cell "下拉面板展开/收起。" [ref=e586]
+                - row "remove-tag (tag) 多选移除标签。" [ref=e587]:
+                  - cell "remove-tag" [ref=e588]:
+                    - code [ref=e589]: remove-tag
+                  - cell "(tag)" [ref=e590]:
+                    - code [ref=e591]: (tag)
+                  - cell "多选移除标签。" [ref=e592]
+                - 'row "focus (event: FocusEvent) 聚焦。" [ref=e593]':
+                  - cell "focus" [ref=e594]:
+                    - code [ref=e595]: focus
+                  - 'cell "(event: FocusEvent)" [ref=e596]':
+                    - code [ref=e597]: "(event: FocusEvent)"
+                  - cell "聚焦。" [ref=e598]
+                - 'row "blur (event: FocusEvent) 失焦。" [ref=e599]':
+                  - cell "blur" [ref=e600]:
+                    - code [ref=e601]: blur
+                  - 'cell "(event: FocusEvent)" [ref=e602]':
+                    - code [ref=e603]: "(event: FocusEvent)"
+                  - cell "失焦。" [ref=e604]
+            - heading "Slots Permalink to \"Slots\"" [level=2] [ref=e605]:
+              - text: Slots
+              - link "Permalink to \"Slots\"" [ref=e606] [cursor=pointer]:
+                - /url: "#slots"
+                - text: "#"
+            - table [ref=e607]:
+              - rowgroup [ref=e608]:
+                - row "名称 说明" [ref=e609]:
+                  - columnheader "名称" [ref=e610]
+                  - columnheader "说明" [ref=e611]
+              - rowgroup [ref=e612]:
+                - row "默认插槽 选项内容：传 ElOption 列表。" [ref=e613]:
+                  - cell "默认插槽" [ref=e614]
+                  - cell "选项内容：传 ElOption 列表。" [ref=e615]:
+                    - text: 选项内容：传
+                    - code [ref=e616]: ElOption
+                    - text: 列表。
+                - row "prefix 触发器内前置内容（图标）。" [ref=e617]:
+                  - cell "prefix" [ref=e618]:
+                    - code [ref=e619]: prefix
+                  - cell "触发器内前置内容（图标）。" [ref=e620]
+                - row "empty 无选项时的空态内容（默认\"无数据\"占位）。" [ref=e621]:
+                  - cell "empty" [ref=e622]:
+                    - code [ref=e623]: empty
+                  - cell "无选项时的空态内容（默认\"无数据\"占位）。" [ref=e624]
+            - heading "Exposes Permalink to \"Exposes\"" [level=2] [ref=e625]:
+              - text: Exposes
+              - link "Permalink to \"Exposes\"" [ref=e626] [cursor=pointer]:
+                - /url: "#exposes"
+                - text: "#"
+            - table [ref=e627]:
+              - rowgroup [ref=e628]:
+                - row "名称 说明" [ref=e629]:
+                  - columnheader "名称" [ref=e630]
+                  - columnheader "说明" [ref=e631]
+              - rowgroup [ref=e632]:
+                - row "focus 聚焦触发器。" [ref=e633]:
+                  - cell "focus" [ref=e634]:
+                    - code [ref=e635]: focus
+                  - cell "聚焦触发器。" [ref=e636]
+                - row "blur 移除焦点。" [ref=e637]:
+                  - cell "blur" [ref=e638]:
+                    - code [ref=e639]: blur
+                  - cell "移除焦点。" [ref=e640]
+            - heading "低频 props 透传 Permalink to \"低频 props 透传\"" [level=2] [ref=e641]:
+              - text: 低频 props 透传
+              - link "Permalink to \"低频 props 透传\"" [ref=e642] [cursor=pointer]:
+                - /url: "#低频-props-透传"
+                - text: "#"
+            - paragraph [ref=e643]:
+              - code [ref=e644]: remote
+              - text: /
+              - code [ref=e645]: remote-method
+              - text: （远程检索）、
+              - code [ref=e646]: multiple-limit
+              - text: 、
+              - code [ref=e647]: automatic-dropdown
+              - text: 、
+              - code [ref=e648]: popper-class
+              - text: （与组件锚定类
+              - code [ref=e649]: lx-select__popper
+              - text: 合并保留而非覆盖）等未声明 props 经 attrs 直达 EP 内核：
+            - generic [ref=e650]:
+              - button "Copy Code" [ref=e651] [cursor=pointer]
+              - generic [ref=e652]: vue
+              - code [ref=e654]:
+                - generic [ref=e655]: <LxSelect
+                - generic [ref=e656]: v-model="officer"
+                - generic [ref=e657]: filterable
+                - generic [ref=e658]: remote
+                - generic [ref=e659]: :remote-method="searchOfficer"
+                - generic [ref=e660]: :loading="loading"
+                - generic [ref=e661]: ">"
+                - generic [ref=e662]: <ElOption v-for="item in options" :key="item" :label="item" :value="item" />
+                - generic [ref=e663]: </LxSelect>
+            - heading "与标本的对齐说明 Permalink to \"与标本的对齐说明\"" [level=2] [ref=e664]:
+              - text: 与标本的对齐说明
+              - link "Permalink to \"与标本的对齐说明\"" [ref=e665] [cursor=pointer]:
+                - /url: "#与标本的对齐说明"
+                - text: "#"
+            - table [ref=e666]:
+              - rowgroup [ref=e667]:
+                - row "契约项 标本 02 实现" [ref=e668]:
+                  - columnheader "契约项" [ref=e669]
+                  - columnheader "标本 02" [ref=e670]
+                  - columnheader "实现" [ref=e671]
+              - rowgroup [ref=e672]:
+                - 'row "触发器边框 1px #dcdfe6 真实边框 真实 border 承载状态色（EP 默认 box-shadow 伪边框，覆写）" [ref=e673]':
+                  - cell "触发器边框" [ref=e674]
+                  - 'cell "1px #dcdfe6 真实边框" [ref=e675]':
+                    - text: 1px
+                    - code [ref=e676]: "#dcdfe6"
+                    - text: 真实边框
+                  - cell "真实 border 承载状态色（EP 默认 box-shadow 伪边框，覆写）" [ref=e677]
+                - row "hover 描边转主色 综合演练卡 border-primary 契约（主卡片灰加深方案已弃用）" [ref=e678]:
+                  - cell "hover" [ref=e679]
+                  - cell "描边转主色" [ref=e680]
+                  - cell "综合演练卡 border-primary 契约（主卡片灰加深方案已弃用）" [ref=e681]:
+                    - text: 综合演练卡
+                    - code [ref=e682]: border-primary
+                    - text: 契约（主卡片灰加深方案已弃用）
+                - row "展开态 主色边框 + 已选文字主色 500 字重 + :not(.is-transparent) 排除占位误染" [ref=e683]:
+                  - cell "展开态" [ref=e684]
+                  - cell "主色边框 + 已选文字主色" [ref=e685]
+                  - cell "500 字重 + :not(.is-transparent) 排除占位误染" [ref=e686]:
+                    - text: 500 字重 +
+                    - code [ref=e687]: :not(.is-transparent)
+                    - text: 排除占位误染
+                - row "选项行高 32px popper 终态组件级固化" [ref=e688]:
+                  - cell "选项行高" [ref=e689]
+                  - cell "32px" [ref=e690]
+                  - cell "popper 终态组件级固化" [ref=e691]
+                - 'row "选中项 #f5f7fa 底 + 主色 + Check 主色文字 + 500 字重 + Check 由 EP 原生提供" [ref=e692]':
+                  - cell "选中项" [ref=e693]
+                  - cell "#f5f7fa 底 + 主色 + Check" [ref=e694]:
+                    - code [ref=e695]: "#f5f7fa"
+                    - text: 底 + 主色 + Check
+                  - cell "主色文字 + 500 字重 + Check 由 EP 原生提供" [ref=e696]
+                - row "面板阴影 0 4px 16px pop 档 --lx-shadow-pop 令牌" [ref=e697]:
+                  - cell "面板阴影" [ref=e698]
+                  - cell "0 4px 16px pop 档" [ref=e699]:
+                    - code [ref=e700]: 0 4px 16px
+                    - text: pop 档
+                  - cell "--lx-shadow-pop 令牌" [ref=e701]:
+                    - code [ref=e702]: "--lx-shadow-pop"
+                    - text: 令牌
+                - 'row "触控目标 32px 触屏（hover: none）44px（与输入类族同族契约）" [ref=e703]':
+                  - cell "触控目标" [ref=e704]
+                  - cell "32px" [ref=e705]
+                  - 'cell "触屏（hover: none）44px（与输入类族同族契约）" [ref=e706]':
+                    - text: 触屏（
+                    - code [ref=e707]: "hover: none"
+                    - text: ）44px（与输入类族同族契约）
+            - heading "可访问性 Permalink to \"可访问性\"" [level=2] [ref=e708]:
+              - text: 可访问性
+              - link "Permalink to \"可访问性\"" [ref=e709] [cursor=pointer]:
+                - /url: "#可访问性"
+                - text: "#"
+            - paragraph [ref=e710]:
+              - text: combobox 语义输入框（EP 内核
+              - code [ref=e711]: role="combobox"
+              - text: +
+              - code [ref=e712]: aria-expanded
+              - text: /
+              - code [ref=e713]: aria-activedescendant
+              - text: ）承载键盘可达性；键盘焦点主色边框；错误态红底红边在
+              - code [ref=e714]: LxForm
+              - text: 校验上下文自动生效（组件级固化，脱离全局桥不漂移）；开启"减少动效"时边框过渡关闭。
+            - heading "Vue3 宿主适配 Permalink to \"Vue3 宿主适配\"" [level=2] [ref=e715]:
+              - text: Vue3 宿主适配
+              - link "Permalink to \"Vue3 宿主适配\"" [ref=e716] [cursor=pointer]:
+                - /url: "#vue3-宿主适配"
+                - text: "#"
+            - paragraph [ref=e717]:
+              - text: 业务层直接使用
+              - code [ref=e718]: LxSelect
+              - text: （或全局组件名
+              - code [ref=e719]: <LxSelect />
+              - text: ）。
+              - code [ref=e720]: ElOption
+              - text: 从
+              - code [ref=e721]: lx-ui
+              - text: （EP 全导出）或
+              - code [ref=e722]: element-plus
+              - text: 导入均可；宿主存量
+              - code [ref=e723]: el-select
+              - text: 直用页面按 UI-04 波次另行替换。
+        - contentinfo [ref=e724]:
+          - navigation "Pager" [ref=e725]:
+            - generic [ref=e726]: Pager
+            - link "Previous page LxSwitch 开关" [ref=e728] [cursor=pointer]:
+              - /url: /components/lxswitch.html
+              - generic [ref=e729]: Previous page
+              - generic [ref=e730]: LxSwitch 开关
+            - link "Next page LxTreeSelect 树形下拉" [ref=e732] [cursor=pointer]:
+              - /url: /components/lxtreeselect.html
+              - generic [ref=e733]: Next page
+              - generic [ref=e734]: LxTreeSelect 树形下拉
+  - tooltip [ref=e735]:
+    - listbox [ref=e739]:
+      - option "市局指挥中心" [ref=e740] [cursor=pointer]
+      - option "城东分局指挥室" [ref=e741] [cursor=pointer]
+      - option "城西分局指挥室" [ref=e742] [cursor=pointer]
+      - option "高新区指挥室" [ref=e743] [cursor=pointer]
+```

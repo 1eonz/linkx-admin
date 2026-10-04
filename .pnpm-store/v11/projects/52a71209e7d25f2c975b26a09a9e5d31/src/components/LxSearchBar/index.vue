@@ -4,29 +4,19 @@
  * 请求、分页复位和字段联动均由宿主通过事件与 computed fields 控制。
  */
 import { computed, ref, watch } from 'vue'
-import {
-  ElButton,
-  ElCascader,
-  ElDatePicker,
-  ElInput,
-  ElInputNumber,
-  ElOption,
-  ElSelect,
-  ElTreeSelect,
-} from 'element-plus'
+import LxButton from '../LxButton/index.vue'
+import LxCascader from '../LxCascader/index.vue'
+import LxDatePicker from '../LxDatePicker/index.vue'
+import LxInput from '../LxInput/index.vue'
+import LxInputNumber from '../LxInputNumber/index.vue'
 import LxIcon from '../LxIcon/index.vue'
+import LxSelect from '../LxSelect/index.vue'
+import LxTreeSelect from '../LxTreeSelect/index.vue'
 import type {
   LxCascaderOptionValue,
   LxSearchBarProps,
   LxSearchField,
 } from './types'
-import 'element-plus/es/components/button/style/css'
-import 'element-plus/es/components/input/style/css'
-import 'element-plus/es/components/select/style/css'
-import 'element-plus/es/components/date-picker/style/css'
-import 'element-plus/es/components/input-number/style/css'
-import 'element-plus/es/components/cascader/style/css'
-import 'element-plus/es/components/tree-select/style/css'
 
 defineOptions({ inheritAttrs: false, name: 'LxSearchBar' })
 
@@ -48,6 +38,25 @@ const emit = defineEmits<{
   'update:collapsed': [value: boolean]
 }>()
 
+defineSlots<{
+  /**
+   * 检索面板底部的状态/快捷键信息行。组件不推断请求耗时或结果数量，
+   * 由宿主通过插槽按业务语义注入，避免把请求状态耦合进组件库。
+   */
+  meta?: (scope: { canReset: boolean; loading: boolean }) => unknown
+  /** 接管查询与重置按钮，作用域见 controls 插槽。 */
+  controls?: (scope: {
+    search: () => void
+    reset: () => void
+    canReset: boolean
+    loading: boolean
+  }) => unknown
+  /** 在默认查询/重置按钮前追加操作。 */
+  actions?: () => unknown
+  /** 在字段网格中追加自定义过滤项。 */
+  filters?: () => unknown
+}>()
+
 const collapsedState = ref(props.collapsed)
 
 watch(
@@ -59,6 +68,11 @@ watch(
 
 const canCollapse = computed(() => props.collapsible && props.fields.length > 8)
 const isCollapsed = computed(() => canCollapse.value && collapsedState.value)
+const controlSize = computed<'sm' | 'md' | 'lg'>(() => {
+  if (props.size === 'small') return 'sm'
+  if (props.size === 'large') return 'lg'
+  return 'md'
+})
 const visibleFields = computed(() =>
   isCollapsed.value ? props.fields.slice(0, 4) : props.fields,
 )
@@ -87,6 +101,16 @@ function fieldId(key: string): string {
   return `lx-search-${key.replace(/[^a-zA-Z0-9_-]/g, '-')}`
 }
 
+function fieldControlId(field: LxSearchField): string | [string, string] {
+  const id = fieldId(field.key)
+  return field.type === 'daterange' ? [`${id}-start`, `${id}-end`] : id
+}
+
+function fieldLabelTarget(field: LxSearchField): string {
+  const id = fieldControlId(field)
+  return Array.isArray(id) ? id[0] : id
+}
+
 function dateValue(
   field: LxSearchField,
 ): string | number | Date | string[] | number[] | Date[] | undefined {
@@ -97,6 +121,17 @@ function dateValue(
     Array.isArray(value)
     ? (value as string | number | Date | string[] | number[] | Date[])
     : undefined
+}
+
+function treeOptions(
+  field: LxSearchField,
+): Record<string, unknown>[] | undefined {
+  return field.options?.map((option) => ({
+    label: option.label,
+    value: option.value,
+    disabled: option.disabled,
+    children: option.children,
+  }))
 }
 
 function treeValue(
@@ -183,6 +218,7 @@ function toggleCollapsed() {
     :class="`lx-search-bar--${size}`"
     v-bind="$attrs"
     aria-label="检索条件"
+    @keyup.esc="reset"
   >
     <div class="lx-search-bar__grid">
       <template v-for="field in visibleFields" :key="field.key">
@@ -190,44 +226,39 @@ function toggleCollapsed() {
           class="lx-search-bar__field"
           :style="{ '--lx-search-span': fieldSpan(field) }"
         >
-          <label class="lx-search-bar__label" :for="fieldId(field.key)">{{
+          <label class="lx-search-bar__label" :for="fieldLabelTarget(field)">{{
             field.label
           }}</label>
 
-          <ElInput
+          <LxInput
             v-if="field.type === 'input'"
             :id="fieldId(field.key)"
             :model-value="valueOf(field) as string"
             :placeholder="field.placeholder || `请输入${field.label}`"
             :clearable="field.clearable !== false"
             :disabled="field.disabled"
+            :size="controlSize"
             @update:model-value="updateField(field, $event)"
             @keyup.enter="search"
           />
 
-          <ElSelect
+          <LxSelect
             v-else-if="field.type === 'select'"
             :id="fieldId(field.key)"
             :model-value="
               valueOf(field) as string | number | boolean | undefined
             "
+            :options="field.options"
             :placeholder="field.placeholder || `请选择${field.label}`"
             :clearable="field.clearable !== false"
             :disabled="field.disabled"
+            :size="controlSize"
             @update:model-value="updateField(field, $event)"
-          >
-            <ElOption
-              v-for="option in field.options || []"
-              :key="String(option.value)"
-              :label="option.label"
-              :value="option.value"
-              :disabled="option.disabled"
-            />
-          </ElSelect>
+          />
 
-          <ElDatePicker
+          <LxDatePicker
             v-else-if="field.type === 'date' || field.type === 'daterange'"
-            :id="fieldId(field.key)"
+            :id="fieldControlId(field)"
             :model-value="dateValue(field)"
             :type="field.type === 'date' ? 'date' : 'daterange'"
             :placeholder="field.placeholder || `请选择${field.label}`"
@@ -239,33 +270,36 @@ function toggleCollapsed() {
             "
             :clearable="field.clearable !== false"
             :disabled="field.disabled"
+            :size="controlSize"
             value-format="YYYY-MM-DD"
             @update:model-value="updateField(field, $event)"
           />
 
-          <ElInputNumber
+          <LxInputNumber
             v-else-if="field.type === 'number'"
             :id="fieldId(field.key)"
             :model-value="valueOf(field) as number"
             :placeholder="field.placeholder || `请输入${field.label}`"
             :controls-position="'right'"
             :disabled="field.disabled"
+            :size="controlSize"
             @update:model-value="updateField(field, $event)"
           />
 
-          <ElTreeSelect
+          <LxTreeSelect
             v-else-if="field.type === 'tree-select'"
             :id="fieldId(field.key)"
             :model-value="treeValue(field)"
-            :data="field.options"
+            :data="treeOptions(field)"
             :placeholder="field.placeholder || `请选择${field.label}`"
             :clearable="field.clearable !== false"
             :disabled="field.disabled"
+            :size="controlSize"
             check-strictly
             @update:model-value="updateField(field, $event)"
           />
 
-          <ElCascader
+          <LxCascader
             v-else-if="field.type === 'cascader'"
             :id="fieldId(field.key)"
             :model-value="cascaderValue(field)"
@@ -273,6 +307,7 @@ function toggleCollapsed() {
             :placeholder="field.placeholder || `请选择${field.label}`"
             :clearable="field.clearable !== false"
             :disabled="field.disabled"
+            :size="controlSize"
             @update:model-value="updateField(field, $event)"
           />
         </div>
@@ -281,6 +316,10 @@ function toggleCollapsed() {
       <div v-if="$slots.filters" class="lx-search-bar__slot-fields">
         <slot name="filters" />
       </div>
+    </div>
+
+    <div v-if="$slots.meta" class="lx-search-bar__meta">
+      <slot name="meta" :can-reset="canReset" :loading="loading" />
     </div>
 
     <footer class="lx-search-bar__footer">
@@ -308,23 +347,22 @@ function toggleCollapsed() {
           :loading="loading"
         >
           <slot name="actions" />
-          <ElButton
+          <LxButton
             type="primary"
             :loading="loading"
-            :size="size"
+            :size="controlSize"
+            icon="search"
             @click="search"
           >
-            <LxIcon v-if="!loading" name="search" :size="16" />
             {{ searchText }}
-          </ElButton>
-          <ElButton
+          </LxButton>
+          <LxButton
             :disabled="loading || !canReset"
-            :size="size"
+            :size="controlSize"
             @click="reset"
           >
-            <LxIcon name="undo" :size="16" />
             {{ resetText }}
-          </ElButton>
+          </LxButton>
         </slot>
       </div>
     </footer>
@@ -337,7 +375,10 @@ function toggleCollapsed() {
   min-width: 0;
   gap: var(--lx-space-md);
   padding: var(--lx-space-lg);
+  border: 1px solid var(--lx-border);
+  border-radius: var(--lx-radius-md);
   background: var(--lx-bg-card);
+  box-shadow: var(--lx-shadow-card);
 }
 
 .lx-search-bar__grid {
@@ -355,9 +396,22 @@ function toggleCollapsed() {
 }
 
 .lx-search-bar__label {
-  color: var(--lx-text-regular);
-  font-size: 13px;
-  line-height: 20px;
+  color: var(--lx-text-label);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.lx-search-bar__meta {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lx-space-md);
+  padding-top: var(--lx-space-sm);
+  border-top: 1px solid var(--lx-border-light);
+  color: var(--lx-text-secondary-strong);
+  font-size: 12px;
+  line-height: 18px;
 }
 
 .lx-search-bar__field :deep(.el-select),
@@ -422,6 +476,11 @@ function toggleCollapsed() {
 @media (max-width: 767px) {
   .lx-search-bar {
     padding: var(--lx-space-md);
+  }
+
+  .lx-search-bar__meta {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .lx-search-bar__grid {

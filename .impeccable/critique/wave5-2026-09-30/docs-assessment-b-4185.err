@@ -1,0 +1,46 @@
+[WARN] The "pnpm" field in package.json is no longer read by pnpm. The following keys were ignored: "pnpm.onlyBuiltDependencies". See https://pnpm.io/settings for the new home of each setting.
+$ vitepress dev docs "--" "--host" "127.0.0.1" "--port" "4185"
+14:23:20 [vitepress] Pre-transform error: Duplicate attribute.
+14:23:20 [vitepress] Pre-transform error: Duplicate attribute.
+14:23:21 [vitepress] Internal server error: Duplicate attribute.
+  Plugin: vite:vue
+  File: F:/work/linkx-admin/linkx-fe/src/components/LxForm/index.vue:125:5
+  123|    <ElForm
+  124|      ref="formRef"
+  125|      ref="elFormRef"
+     |       ^
+  126|      class="lx-form"
+  127|      :class="{ 'lx-form--grid': isGrid }"
+      at createCompilerError (F:\work\linkx-admin\linkx-fe\node_modules\.pnpm\@vue+compiler-core@3.5.43\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:1378:17)
+      at emitError (F:\work\linkx-admin\linkx-fe\node_modules\.pnpm\@vue+compiler-core@3.5.43\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3035:5)
+      at Object.onattribnameend (F:\work\linkx-admin\linkx-fe\node_modules\.pnpm\@vue+compiler-core@3.5.43\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:2520:7)
+      at Tokenizer.handleAttrNameEnd (F:\work\linkx-admin\linkx-fe\node_modules\.pnpm\@vue+compiler-core@3.5.43\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:926:14)
+      at Tokenizer.stateInAttrName (F:\work\linkx-admin\linkx-fe\node_modules\.pnpm\@vue+compiler-core@3.5.43\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:866:12)
+      at Tokenizer.parse (F:\work\linkx-admin\linkx-fe\node_modules\.pnpm\@vue+compiler-core@3.5.43\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:1117:16)
+      at Object.baseParse (F:\work\linkx-admin\linkx-fe\node_modules\.pnpm\@vue+compiler-core@3.5.43\node_modules\@vue\compiler-core\dist\compiler-core.cjs.js:3074:13)
+      at Object.parse (F:\work\linkx-admin\linkx-fe\node_modules\.pnpm\@vue+compiler-dom@3.5.43\node_modules\@vue\compiler-dom\dist\compiler-dom.cjs.js:913:23)
+      at Object.parse$1 [as parse] (F:\work\linkx-admin\linkx-fe\node_modules\.pnpm\@vue+compiler-sfc@3.5.43\node_modules\@vue\compiler-sfc\dist\compiler-sfc.cjs.js:1918:24)
+      at createDescriptor (file:///F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/@vitejs+plugin-vue@5.2.4_vi_38ed323c3d08d05762d43774ed34f54b/node_modules/@vitejs/plugin-vue/dist/index.mjs:71:43)
+node:internal/fs/watchers:323
+    const error = new UVException({
+                  ^
+
+Error: EBUSY: resource busy or locked, watch 'F:\work\linkx-admin\linkx-fe\docs\.vitepress\dist\auth-img-sample.png'
+    at FSWatcher.<computed> (node:internal/fs/watchers:323:19)
+    at Object.watch (node:fs:3145:36)
+    at createFsWatchInstance (file:///F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vite@5.4.21/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42780:17)
+    at setFsWatchListener (file:///F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vite@5.4.21/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42827:15)
+    at NodeFsHandler._watchWithNodeFs (file:///F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vite@5.4.21/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42982:14)
+    at NodeFsHandler._handleFile (file:///F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vite@5.4.21/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43046:23)
+    at NodeFsHandler._addToNodeFs (file:///F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vite@5.4.21/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43288:21)
+Emitted 'error' event on FSWatcher instance at:
+    at FSWatcher._handleError (file:///F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vite@5.4.21/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:44481:10)
+    at NodeFsHandler._addToNodeFs (file:///F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vite@5.4.21/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43296:18) {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'F:\\work\\linkx-admin\\linkx-fe\\docs\\.vitepress\\dist\\auth-img-sample.png',
+  filename: 'F:\\work\\linkx-admin\\linkx-fe\\docs\\.vitepress\\dist\\auth-img-sample.png'
+}
+
+Node.js v26.8.1

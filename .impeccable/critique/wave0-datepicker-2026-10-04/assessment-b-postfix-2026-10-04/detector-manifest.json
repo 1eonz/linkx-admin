@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-04",
+  "snapshotStatus": "中间快照；根任务在后续 320px 浏览器检查发现日期弹层溢出，正在修复。需按最终 hashes 重跑。",
+  "script": "C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\detect.mjs",
+  "targets": [
+    {
+      "path": "linkx-fe/src/components/LxDatePicker/index.vue",
+      "sha256": "E3B4513BB5B39A8C68AD4FE9524FF7E8FE4575D999CBAA834365B4B4F5218EC6",
+      "command": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\detect.mjs\" --json \"linkx-fe/src/components/LxDatePicker/index.vue\"",
+      "stdout": "detector-index.stdout.json",
+      "stderr": "detector-index.stderr.txt",
+      "exitCodeFile": "detector-index.exit-code.txt",
+      "exitCode": 0,
+      "findingCount": 0
+    },
+    {
+      "path": "linkx-fe/src/components/LxDatePicker/demo/basic.vue",
+      "sha256": "1E62E4705E1203070FE526C2063DC12739CA2F1BF3203F373CA0BCA94B0C2368",
+      "command": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\detect.mjs\" --json \"linkx-fe/src/components/LxDatePicker/demo/basic.vue\"",
+      "stdout": "detector-demo.stdout.json",
+      "stderr": "detector-demo.stderr.txt",
+      "exitCodeFile": "detector-demo.exit-code.txt",
+      "exitCode": 0,
+      "findingCount": 0
+    },
+    {
+      "path": "linkx-fe/docs/components/lxdatepicker.md",
+      "sha256": "011850196C44A67470A4B433F31C5C73219F3C8148329C62C2DBDE96135A0CD4",
+      "command": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\detect.mjs\" --json \"linkx-fe/docs/components/lxdatepicker.md\"",
+      "stdout": "detector-docs.stdout.json",
+      "stderr": "detector-docs.stderr.txt",
+      "exitCodeFile": "detector-docs.exit-code.txt",
+      "exitCode": 0,
+      "findingCount": 0
+    }
+  ],
+  "browser": {
+    "url": "http://127.0.0.1:4174/components/lxdatepicker.html",
+    "httpStatus": 200,
+    "context": "新建 Codex IAB tab 2",
+    "overlayInjection": "浏览器安全策略拒绝 javascript: 协议；未尝试绕过，未注入 detect.js",
+    "persistedScreenshots": []
+  }
+}

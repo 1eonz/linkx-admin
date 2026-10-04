@@ -1,6 +1,6 @@
 # 数据录入表单
 
-**LxForm + LxFormItem**：Element Plus `el-form` / `el-form-item` 二次封装。核心价值：**错误提示样式由组件库接管**（stitch `_26` 节点管理弹窗错误态规格：11px 深红文字 + 圆圈感叹号图标 + 输入框红边浅红底），业务禁止自写校验红字。`$attrs` 全透传，存量 `el-form` 用法零成本迁移。
+**LxForm + LxFormItem**：表单容器与表单项的 lx-ui 视觉封装，内部保留 Element Plus 校验实例契约。核心视觉依据为仓库根目录的 `design/表单控件八件套/`：32px 控件、12px 上置标签、16px 网格间距，以及 `#ba1a1a` 校验边线与 `#fff5f5` 错误底色。`$attrs` 全透传，存量 `el-form` 用法可逐步迁移。
 
 ## 何时使用
 
@@ -20,7 +20,7 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 <<< ../../src/components/LxForm/demo/basic.vue
 :::
 
-要点：`label-position` 默认 `top`（设计稿表单 label 上置 12px/500）；rules 惯例 —— 输入类 `trigger: 'blur'`、选择类 `trigger: 'change'`；LxForm 内直接写原生 `el-form-item` 同样获得组件库错误样式（存量代码迁移零成本）。
+要点：`label-position` 默认 `top`（设计稿表单 label 上置 12px/500）；rules 惯例 —— 输入类 `trigger: 'blur'`、选择类 `trigger: 'change'`；业务表单优先使用 `LxFormItem` 与公开的 `LxInput`/`LxSelect`/`LxTextarea`，存量 `el-form-item` 仍可在 LxForm 内获得组件库错误样式；新代码优先使用公开的 `LxFormItem` 和 `Lx*` 基础控件。
 
 ## 弹窗双列表单（LxDialog + columns=2 组合）
 
@@ -37,15 +37,13 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 ```vue
 <LxForm :model="query" inline>
   <LxFormItem>
-    <ElInput v-model="query.keyword" placeholder="组织名称" clearable @keyup.enter="onSearch" />
+    <LxInput v-model="query.keyword" placeholder="组织名称" clearable @keyup.enter="onSearch" />
   </LxFormItem>
   <LxFormItem>
-    <ElSelect v-model="query.status" placeholder="状态" clearable>
-      <ElOption label="在线" value="1" />
-    </ElSelect>
+    <LxSelect v-model="query.status" placeholder="状态" clearable :options="[{ label: '在线', value: '1' }]" />
   </LxFormItem>
   <LxFormItem>
-    <button class="demo-btn" @click="onSearch">搜索</button>
+    <LxButton type="primary" @click="onSearch">搜索</LxButton>
   </LxFormItem>
 </LxForm>
 ```
@@ -61,7 +59,7 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 | inline         | 行内表单（与 columns 互斥）                    | `boolean`                    | `false` |
 | disabled       | 整表禁用                                       | `boolean`                    | `false` |
 | columns        | 网格列数（2/3 双列三列；视口 ≤640px 自动单列） | `number`                     | `1`     |
-| row-gap        | 网格行间距                                     | `number`                     | `16`    |
+| row-gap        | 网格行间距                                     | `number`                     | `12`    |
 
 **透传**：`status-icon` / `scroll-to-error` / `hide-required-asterisk` / `label-suffix` / `validate-on-rule-change` / `size` / `@validate` 等 el-form 全量 props 与事件原样透传。
 
@@ -89,9 +87,10 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 
 ## 设计说明
 
-- **错误态规格**（stitch `_26`）：输入框 `1px` 红边 + `--lx-color-error-light` 浅红底；错误提示 11px `--lx-color-error-strong`（小字号对比度补偿）+ 12px 圆圈感叹号图标。
+- **错误态规格**（表单控件设计标本）：输入框 `1px #ba1a1a` 边线 + `#fff5f5` 浅红底；错误提示 11px `#ba1a1a` + 12px 圆圈感叹号图标。
 - **兼容范围**：el-input / el-select / el-textarea / el-date-picker / el-cascader 等全系输入容器的错误态均已覆盖。
 - **label 上置**是设计稿表单主形态；老项目 `label-position="left"` + `label-width="120px"` 用法完全兼容。
+- **焦点边界**：输入、文本域和日期使用贴边 1px 主色边线加 2px 光晕；选择器、单选和多选只改变自身边界或方框外零间隙光晕，不在组件外叠加第二圈，避免设计稿之外的蓝色外框。
 
 ## 迁移指南（el-form → LxForm）
 
@@ -99,3 +98,7 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 2. props 原样保留（model / rules / label-width / disabled / @validate…）
 3. `const formRef = ref<FormInstance>()` → `ref<LxFormInstance>()`，方法名不变
 4. 删除业务里自写的校验红字样式，交由组件库接管
+
+## 可访问性与错误恢复
+
+开启 `scroll-to-error` 后，校验失败会滚动并聚焦第一个可操作的错误控件；错误控件带 `aria-invalid="true"`，错误文案 ID 会通过 `aria-describedby` 关联。组件内部不发起请求，宿主继续使用 `.then().catch().finally()` 管理提交、失败提示和 loading。

@@ -13,7 +13,7 @@ test.describe('lx-ui LxUpload 文档示例', () => {
       buffer: Buffer.from('姓名,班次\n李警官,早班'),
     });
 
-    await expect(page.locator('.lx-upload__file-status')).toHaveText('等待上传');
+    await expect(page.locator('.lx-upload__file-status')).toHaveText('排队中');
     await page.getByRole('button', { name: '开始上传' }).click();
     await expect(page.getByRole('progressbar', { name: '排班数据.csv 上传进度' })).toBeVisible();
     await expect(page.getByRole('progressbar', { name: '排班数据.csv 上传进度' })).toHaveAttribute(

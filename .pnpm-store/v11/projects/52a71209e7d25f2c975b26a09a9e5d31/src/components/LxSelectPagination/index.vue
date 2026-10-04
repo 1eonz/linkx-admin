@@ -8,8 +8,9 @@ import {
   ref,
   watch,
 } from 'vue'
-import { ElInput, ElOption, ElSelect } from 'element-plus'
 import LxIcon from '../LxIcon/index.vue'
+import LxInput from '../LxInput/index.vue'
+import LxSelect from '../LxSelect/index.vue'
 import { lxMessage } from '../LxMessage'
 import type {
   LxSelectPaginationItem,
@@ -18,9 +19,7 @@ import type {
   LxSelectPaginationResult,
   LxSelectPaginationValue,
 } from './types'
-import 'element-plus/es/components/input/style/css'
-import 'element-plus/es/components/option/style/css'
-import 'element-plus/es/components/select/style/css'
+import type { LxSelectModelValue, LxSelectOption } from '../LxSelect/types'
 
 defineOptions({ name: 'LxSelectPagination' })
 
@@ -51,7 +50,7 @@ const emit = defineEmits<{
   load: [items: LxSelectPaginationItem[], total: number]
 }>()
 
-const selectRef = ref<InstanceType<typeof ElSelect>>()
+const selectRef = ref<InstanceType<typeof LxSelect>>()
 const instanceId = getCurrentInstance()?.uid ?? 'standalone'
 const items = ref<LxSelectPaginationItem[]>([])
 const selectedMeta = ref<Record<string, LxSelectPaginationItem>>({})
@@ -90,7 +89,7 @@ function optionValue(item: LxSelectPaginationItem): string | number {
 
 function normalizeMappedItem(
   key: string,
-  item: LxSelectPaginationItem,
+  item: LxSelectPaginationItem
 ): LxSelectPaginationItem {
   return itemValue(item) === undefined
     ? { ...item, [props.valueKey]: key }
@@ -137,7 +136,7 @@ const selectedOptions = computed<LxSelectPaginationItem[]>(() =>
       items.value.find((item) => String(itemValue(item)) === key) ??
       externalItem(key) ?? { [props.valueKey]: value, label: String(value) }
     )
-  }),
+  })
 )
 
 const options = computed(() => {
@@ -152,8 +151,22 @@ const options = computed(() => {
   })
 })
 
+const selectOptions = computed<LxSelectOption[]>(() =>
+  options.value.flatMap((item) => {
+    const value = itemValue(item)
+    if (value === undefined) return []
+    return [
+      {
+        label: itemLabel(item),
+        value,
+        description: itemDescription(item),
+      },
+    ]
+  })
+)
+
 const hasMore = computed(
-  () => pageHasMore.value ?? total.value > items.value.length,
+  () => pageHasMore.value ?? total.value > items.value.length
 )
 
 function resultData(result: LxSelectPaginationResult) {
@@ -180,8 +193,8 @@ function syncSelectedMeta(value: LxSelectPaginationValue) {
   const values = Array.isArray(value)
     ? value
     : value === undefined || value === null || value === ''
-      ? []
-      : [value]
+    ? []
+    : [value]
   const selected = new Set(values.map(String))
 
   for (const key of Object.keys(selectedMeta.value)) {
@@ -200,12 +213,12 @@ watch(() => props.modelValue, syncSelectedMeta, { immediate: true, deep: true })
 watch(
   () => [props.targetMap, props.valueMap] as const,
   () => syncSelectedMeta(props.modelValue),
-  { immediate: true, deep: true },
+  { immediate: true, deep: true }
 )
 
 function resultTotal(
   data: ReturnType<typeof resultData>,
-  nextItems: LxSelectPaginationItem[],
+  nextItems: LxSelectPaginationItem[]
 ) {
   if (data.total > 0 || data.records.length === 0) return data.total
   return data.records.length < props.pageSize
@@ -309,7 +322,7 @@ watch(
     page.value = 1
     if (visible.value && !props.disabled) load(true)
   },
-  { deep: true },
+  { deep: true }
 )
 
 watch(
@@ -321,7 +334,7 @@ watch(
     abortRequest()
     loading.value = false
     detachScroll()
-  },
+  }
 )
 
 function loadMore() {
@@ -331,13 +344,13 @@ function loadMore() {
 }
 
 function selectedItems(
-  value: LxSelectPaginationValue,
+  value: LxSelectPaginationValue
 ): LxSelectPaginationItem[] {
   const values = Array.isArray(value)
     ? value
     : value === undefined || value === null || value === ''
-      ? []
-      : [value]
+    ? []
+    : [value]
   return values.map((entry) => {
     const key = String(entry)
     return (
@@ -348,23 +361,31 @@ function selectedItems(
   })
 }
 
-function onChange(value: LxSelectPaginationValue) {
+function onChange(value: unknown) {
+  const normalized: LxSelectPaginationValue = Array.isArray(value)
+    ? value.filter(
+        (item): item is string | number =>
+          typeof item === 'string' || typeof item === 'number'
+      )
+    : typeof value === 'string' || typeof value === 'number'
+    ? value
+    : undefined
   if (
     props.multiple &&
-    Array.isArray(value) &&
+    Array.isArray(normalized) &&
     props.max !== undefined &&
-    value.length > props.max
+    normalized.length > props.max
   ) {
-    const next = value.slice(0, props.max)
+    const next = normalized.slice(0, props.max)
     syncSelectedMeta(next)
     lxMessage.warning(`最多可选择 ${props.max} 项`)
     emit('update:modelValue', next)
     emit('change', next, selectedItems(next))
     return
   }
-  syncSelectedMeta(value)
-  emit('update:modelValue', value)
-  emit('change', value, selectedItems(value))
+  syncSelectedMeta(normalized)
+  emit('update:modelValue', normalized)
+  emit('change', normalized, selectedItems(normalized))
 }
 
 function detachScroll() {
@@ -429,10 +450,11 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <ElSelect
+  <LxSelect
     ref="selectRef"
     class="lx-select-pagination"
     :model-value="modelValue"
+    :options="selectOptions"
     :multiple="multiple"
     :collapse-tags="multiple"
     :collapse-tags-tooltip="multiple"
@@ -449,7 +471,7 @@ onBeforeUnmount(() => {
     <template #header>
       <div class="lx-select-pagination__search" @click.stop>
         <LxIcon name="search" :size="14" aria-hidden="true" />
-        <ElInput
+        <LxInput
           :model-value="keyword"
           :placeholder="searchPlaceholder"
           :aria-label="searchPlaceholder"
@@ -461,23 +483,18 @@ onBeforeUnmount(() => {
       </div>
     </template>
 
-    <ElOption
-      v-for="item in options"
-      :key="String(optionValue(item))"
-      :label="itemLabel(item)"
-      :value="optionValue(item)"
-    >
+    <template #option="{ option }">
       <div class="lx-select-pagination__option">
         <span class="lx-select-pagination__option-label">{{
-          itemLabel(item)
+          option.label
         }}</span>
         <span
-          v-if="itemDescription(item)"
+          v-if="option.description"
           class="lx-select-pagination__option-description"
-          >{{ itemDescription(item) }}</span
+          >{{ option.description }}</span
         >
       </div>
-    </ElOption>
+    </template>
 
     <template #footer>
       <div class="lx-select-pagination__footer" @click.stop>
@@ -508,7 +525,7 @@ onBeforeUnmount(() => {
         <span v-else role="status" aria-live="polite">暂无匹配项</span>
       </div>
     </template>
-  </ElSelect>
+  </LxSelect>
 </template>
 
 <style scoped>

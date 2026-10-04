@@ -61,6 +61,7 @@ import NewComponentsDemo from './NewComponentsDemo.vue';
 
 | 组件                 | 关键 props                                                    | 事件 / 行为                                                                                                            |
 | -------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `LxCascader`         | `options`、`props`、`multiple`、`loading`、`error`             | `v-model`、`change`、`retry`；支持单选/多选、失败重试和禁用状态；[独立 API 与交互 Demo](/components/lxcascader)         |
 | `LxSearchBar`        | `fields`、`collapsed`、`loading`                              | `v-model`、`search`、`reset`、`update:collapsed`；`controls` 覆盖内置按钮，`actions` 仍可追加按钮；字段超过 8 个可收起 |
 | `LxStatusSwitch`     | `modelValue`、`confirm`、`loading`                            | 兼容 `0 = 开启`、`1 = 关闭` 的旧业务值                                                                                 |
 | `LxUpload`           | `accept`、`maxSize`、`limit`、`drag`、`listType`、`chunkSize` | `v-model`、`change`、`success`、`error`、`remove`、`exceed`；提供宿主请求适配器、进度、取消和失败重试                  |

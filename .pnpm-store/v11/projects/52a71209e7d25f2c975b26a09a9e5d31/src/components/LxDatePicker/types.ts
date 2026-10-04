@@ -3,8 +3,8 @@
  *
  * 视觉源：design/表单控件八件套/code.html 06（日期范围选择器）
  * 尺寸档名 sm/md/lg 区别于 EP 的 small/default/large，映射关系见组件内 SIZE_MAP。
- * 周一起始为默认契约：组件内置 zh-cn 日历语境（dayjs zh-cn weekStart=1），
- * 不依赖宿主是否配置全局 locale。
+ * 周一起始为默认契约：注册 Day.js zh-cn 数据并局部注入日期面板语境，
+ * 不修改宿主的全局 locale。
  * daterange 底部按钮组、shortcuts 左侧竖排位置随 EP 原生（裁剪记录 #6/#8）；
  * disabled-date / default-value / shortcuts 等低频 props 经 $attrs 透传。
  */
@@ -32,7 +32,7 @@ export type LxDateModelValue =
 
 export type LxDatePickerSize = 'sm' | 'md' | 'lg'
 
-/** 快捷预设项（EP 原生契约；位置随 EP 左侧栏，裁剪记录 #8） */
+/** 快捷预设项（桌面沿用 EP 侧栏，窄屏改为日历上方横排） */
 export interface LxDatePickerShortcut {
   text: string
   value: Date | (() => [Date, Date] | Date)
@@ -66,8 +66,12 @@ export interface LxDatePickerProps {
   valueFormat?: string
   /** 快捷预设（如 今日/本周/近30天；位置随 EP 原生） */
   shortcuts?: LxDatePickerShortcut[]
+  /** teleported 日期弹层的附加类，可用于响应式主题切换 */
+  popperClass?: string
   /** 工程尺寸档：sm=28px / md=32px（基准）/ lg=40px */
   size?: LxDatePickerSize
   /** 原生 name 属性（表单序列化 / 读屏关联） */
   name?: string
+  /** 单面板显示；默认视口不大于 640px 时启用，显式 true/false 可覆盖 */
+  singlePanel?: boolean
 }

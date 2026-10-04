@@ -1,29 +1,29 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, reactive, ref } from 'vue'
 import {
-  ElButton,
-  ElCheckbox,
-  ElCheckboxGroup,
-  ElDatePicker,
-  ElDescriptions,
-  ElDescriptionsItem,
-  ElForm,
-  ElFormItem,
-  ElInput,
-  ElInputNumber,
-  ElOption,
-  ElRadio,
-  ElRadioGroup,
-  ElSelect,
-  ElSwitch,
   ElTabPane,
   ElTabs,
-  ElTree,
-  type FormInstance,
+  LxButton,
+  LxCheckbox,
+  LxCheckboxGroup,
+  LxDatePicker,
+  LxDescriptions,
+  LxForm,
+  LxFormItem,
+  LxInput,
+  LxInputNumber,
+  LxPageCard,
+  LxRadio,
+  LxRadioGroup,
+  LxSelect,
+  LxSwitch,
+  LxTextarea,
+  LxVirtualTree,
+  type LxFormInstance,
   type FormRules,
 } from '../../../index'
 
-const formRef = ref<FormInstance>()
+const formRef = ref<LxFormInstance>()
 const form = reactive({
   name: '',
   department: '',
@@ -52,21 +52,33 @@ const allChannelsIndeterminate = computed(
   () => form.channels.length > 0 && !allChannelsChecked.value,
 )
 const treeData = [
-  { label: '指挥中心', children: [{ label: '一大队' }, { label: '二大队' }] },
-  { label: '巡防大队', children: [{ label: '机动中队' }] },
+  {
+    id: 'command',
+    label: '指挥中心',
+    children: [
+      { id: 'first-squad', label: '一大队' },
+      { id: 'second-squad', label: '二大队' },
+    ],
+  },
+  {
+    id: 'patrol',
+    label: '巡防大队',
+    children: [{ id: 'mobile-squad', label: '机动中队' }],
+  },
 ]
 let initialTheme: { dark: boolean; hud: boolean } | undefined
 
-function toggleHud(value: boolean) {
+function toggleHud(value: string | number | boolean) {
   if (typeof document === 'undefined') return
+  const enabled = value === true
   const root = document.documentElement
   initialTheme ??= {
     dark: root.classList.contains('dark'),
     hud: root.classList.contains('lx-theme-hud'),
   }
-  hud.value = value
-  root.classList.toggle('dark', value)
-  root.classList.toggle('lx-theme-hud', value)
+  hud.value = enabled
+  root.classList.toggle('dark', enabled)
+  root.classList.toggle('lx-theme-hud', enabled)
 }
 
 function validate() {
@@ -100,125 +112,135 @@ onBeforeUnmount(() => {
   <section class="lx-control-bridge-demo" aria-label="基础控件交互示例">
     <div class="lx-control-bridge-demo__toolbar">
       <div class="lx-control-bridge-demo__buttons">
-        <ElButton type="primary" size="small">小号操作</ElButton>
-        <ElButton type="primary">主操作</ElButton>
-        <ElButton type="primary" size="large">大号操作</ElButton>
-        <ElButton>次要操作</ElButton>
-        <ElButton type="danger">危险操作</ElButton>
-        <ElButton type="primary" disabled>禁用操作</ElButton>
+        <LxButton type="primary" size="sm">小号操作</LxButton>
+        <LxButton type="primary">主操作</LxButton>
+        <LxButton type="primary" size="lg">大号操作</LxButton>
+        <LxButton>次要操作</LxButton>
+        <LxButton type="danger">危险操作</LxButton>
+        <LxButton type="primary" disabled>禁用操作</LxButton>
       </div>
-      <label class="lx-control-bridge-demo__theme">
-        <input
-          :checked="hud"
-          type="checkbox"
-          @change="toggleHud(($event.target as HTMLInputElement).checked)"
-        />
-        HUD 深色
-      </label>
+      <LxCheckbox v-model="hud" @change="toggleHud">HUD 深色</LxCheckbox>
     </div>
 
-    <ElForm
+    <LxForm
       ref="formRef"
       :model="form"
       :rules="rules"
-      label-position="top"
       class="lx-control-bridge-demo__form"
+      :columns="2"
     >
-      <ElFormItem label="任务名称" prop="name">
-        <ElInput v-model="form.name" placeholder="输入任务名称" clearable />
-      </ElFormItem>
-      <ElFormItem label="责任部门" prop="department">
-        <ElSelect v-model="form.department" placeholder="选择部门" clearable>
-          <ElOption label="指挥中心" value="command" />
-          <ElOption label="巡防大队" value="patrol" />
-        </ElSelect>
-      </ElFormItem>
-      <ElFormItem label="协同部门">
-        <ElSelect
+      <LxFormItem label="任务名称" prop="name">
+        <LxInput v-model="form.name" placeholder="输入任务名称" clearable />
+      </LxFormItem>
+      <LxFormItem label="责任部门" prop="department">
+        <LxSelect
+          v-model="form.department"
+          placeholder="选择部门"
+          clearable
+          :options="[
+            { label: '指挥中心', value: 'command' },
+            { label: '巡防大队', value: 'patrol' },
+          ]"
+        />
+      </LxFormItem>
+      <LxFormItem label="协同部门">
+        <LxSelect
           v-model="form.departments"
           multiple
           collapse-tags
           collapse-tags-tooltip
           placeholder="选择协同部门"
           clearable
-        >
-          <ElOption label="指挥中心" value="command" />
-          <ElOption label="巡防大队" value="patrol" />
-          <ElOption label="应急支队" value="response" />
-        </ElSelect>
-      </ElFormItem>
-      <ElFormItem label="任务等级">
-        <ElRadioGroup v-model="form.level">
-          <ElRadio value="normal">常规</ElRadio>
-          <ElRadio value="urgent">紧急</ElRadio>
-        </ElRadioGroup>
-      </ElFormItem>
-      <ElFormItem label="通知渠道">
+          :options="[
+            { label: '指挥中心', value: 'command' },
+            { label: '巡防大队', value: 'patrol' },
+            { label: '应急支队', value: 'response' },
+          ]"
+        />
+      </LxFormItem>
+      <LxFormItem label="任务等级">
+        <LxRadioGroup v-model="form.level">
+          <LxRadio value="normal">常规</LxRadio>
+          <LxRadio value="urgent">紧急</LxRadio>
+        </LxRadioGroup>
+      </LxFormItem>
+      <LxFormItem label="通知渠道">
         <div class="lx-control-bridge-demo__channels">
-          <ElCheckbox
+          <LxCheckbox
             class="lx-control-bridge-demo__channels-all"
             :model-value="allChannelsChecked"
             :indeterminate="allChannelsIndeterminate"
             @change="toggleAllChannels"
           >
             全选通知渠道
-          </ElCheckbox>
-          <ElCheckboxGroup
+          </LxCheckbox>
+          <LxCheckboxGroup
             v-model="form.channels"
             class="lx-control-bridge-demo__channels-options"
           >
-            <ElCheckbox value="radio">电台</ElCheckbox>
-            <ElCheckbox value="message">短信</ElCheckbox>
-          </ElCheckboxGroup>
+            <LxCheckbox value="radio">电台</LxCheckbox>
+            <LxCheckbox value="message">短信</LxCheckbox>
+          </LxCheckboxGroup>
         </div>
-      </ElFormItem>
-      <ElFormItem label="持续时间（分钟）">
-        <ElInputNumber v-model="form.duration" :min="1" :max="120" />
-      </ElFormItem>
-      <ElFormItem label="执行日期">
-        <ElDatePicker
+      </LxFormItem>
+      <LxFormItem label="持续时间（分钟）">
+        <LxInputNumber v-model="form.duration" :min="1" :max="120" />
+      </LxFormItem>
+      <LxFormItem label="执行日期">
+        <LxDatePicker
           v-model="form.dates"
           type="daterange"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
         />
-      </ElFormItem>
-      <ElFormItem label="启用任务">
-        <ElSwitch v-model="form.enabled" aria-label="启用任务" />
-      </ElFormItem>
-      <ElFormItem label="备注">
-        <ElInput
+      </LxFormItem>
+      <LxFormItem label="启用任务">
+        <LxSwitch v-model="form.enabled" aria-label="启用任务" />
+      </LxFormItem>
+      <LxFormItem label="备注">
+        <LxTextarea
           v-model="form.remark"
-          type="textarea"
           :rows="2"
           placeholder="补充任务要求"
         />
-      </ElFormItem>
-      <ElFormItem label="只读状态">
-        <ElInput model-value="由系统自动分配" disabled />
-      </ElFormItem>
-    </ElForm>
+      </LxFormItem>
+      <LxFormItem label="只读状态">
+        <LxInput model-value="由系统自动分配" disabled />
+      </LxFormItem>
+    </LxForm>
 
     <div class="lx-control-bridge-demo__actions">
-      <ElButton type="primary" @click="validate">校验表单</ElButton>
-      <ElButton @click="reset">重置</ElButton>
+      <LxButton type="primary" @click="validate">校验表单</LxButton>
+      <LxButton @click="reset">重置</LxButton>
       <span role="status" aria-live="polite">{{ feedback }}</span>
     </div>
 
     <div class="lx-control-bridge-demo__display">
-      <ElCard shadow="never" class="lx-control-bridge-demo__card">
+      <LxPageCard title="基础信息">
         <ElTabs v-model="activeTab" aria-label="基础信息页签">
           <ElTabPane label="概览" name="overview">
-            <ElDescriptions :column="2" border>
-              <ElDescriptionsItem label="任务状态">执行中</ElDescriptionsItem>
-              <ElDescriptionsItem label="责任部门">指挥中心</ElDescriptionsItem>
-            </ElDescriptions>
+            <LxDescriptions
+              :columns="2"
+              :items="[
+                {
+                  key: 'status',
+                  label: '任务状态',
+                  value: '执行中',
+                  statusDot: 'processing',
+                },
+                { key: 'department', label: '责任部门', value: '指挥中心' },
+              ]"
+            />
           </ElTabPane>
           <ElTabPane label="组织树" name="tree">
-            <ElTree :data="treeData" node-key="label" default-expand-all />
+            <LxVirtualTree
+              :data="treeData"
+              :height="160"
+              :default-expanded-keys="['command', 'patrol']"
+            />
           </ElTabPane>
         </ElTabs>
-      </ElCard>
+      </LxPageCard>
     </div>
   </section>
 </template>
@@ -247,44 +269,17 @@ onBeforeUnmount(() => {
   margin-top: var(--lx-space-lg);
 }
 
-.lx-control-bridge-demo__card :deep(.el-tree) {
-  max-height: 160px;
-  overflow: auto;
-}
-
 .lx-control-bridge-demo__toolbar {
   justify-content: space-between;
   margin-bottom: var(--lx-space-lg);
-}
-
-.lx-control-bridge-demo__theme {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--lx-space-xs);
-  font-size: 13px;
-}
-
-.lx-control-bridge-demo__theme input {
-  accent-color: var(--lx-color-primary);
-}
-
-.lx-control-bridge-demo__theme input:focus-visible {
-  outline: 2px solid var(--lx-color-primary);
-  outline-offset: 2px;
-}
-
-.lx-control-bridge-demo__form {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--lx-space-lg);
 }
 
 .lx-control-bridge-demo__form :deep(.el-form-item) {
   min-width: 0;
 }
 
-.lx-control-bridge-demo__form :deep(.el-select),
-.lx-control-bridge-demo__form :deep(.el-date-editor) {
+.lx-control-bridge-demo__form :deep(.lx-select),
+.lx-control-bridge-demo__form :deep(.lx-date-picker) {
   width: 100%;
 }
 
@@ -308,7 +303,7 @@ onBeforeUnmount(() => {
   margin-left: 22px;
 }
 
-.lx-control-bridge-demo__channels-options :deep(.el-checkbox) {
+.lx-control-bridge-demo__channels-options :deep(.lx-checkbox) {
   margin-right: 0;
 }
 
@@ -321,10 +316,6 @@ onBeforeUnmount(() => {
 @media (max-width: 640px) {
   .lx-control-bridge-demo {
     padding: var(--lx-space-md);
-  }
-
-  .lx-control-bridge-demo__form {
-    grid-template-columns: minmax(0, 1fr);
   }
 }
 </style>

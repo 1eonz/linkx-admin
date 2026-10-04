@@ -1,10 +1,54 @@
 # lx-ui 交付核查
 
+## 2026-10-04 后续交付拆分
+
+Wave 0–12 的完整任务、证据门槛和阻塞口径见仓库文档 `doc/PROJECT-FOLLOWUP-BREAKDOWN.md`。Wave 0 已修复 `LxDatePicker` 相邻实例说明 ID 隔离，36 项 DatePicker/DynamicForm 单测、组件库构建、文档构建和 DatePicker 文档 E2E 通过；正式 Impeccable Critique 仍未关闭。基础控件统一严格审查、TreeSelect/Cascader 当前版本 overlay 及全库 52 项矩阵继续进行。所有新备注和组件说明使用中文，`[]` 仅记静态 detector 零命中。
+
+## 2026-10-03 UI-13 DynamicForm 字段反馈复验
+
+- 日期输入框接收字段 `aria-describedby`；字段说明更新/移除及相邻两个日期字段互不串联由单测覆盖。字段反馈 ID 实例级唯一，loading 时重试按钮禁用，上传和自定义 slot 将描述 ID 传到实际控件。
+- Demo 增加可固定查看的候选项加载状态；API 文档新增最小 schema 示例，并说明较长表单的分区标题或步骤由宿主编排。
+- 定向单测 34/34，动态表单文档 Playwright 1/1；lx-ui `typecheck`、库构建及文档构建通过，Vue3 类型检查、目标 ESLint/Prettier、差异空白检查通过。VitePress 有既有的大 chunk 警告。
+- Impeccable Assessment A 桌面评审 29/40（Good），加载状态、最小示例和宿主分区说明已落实；文档侧栏同级入口过多登记为全站后续项。Assessment B 和当前 detector 的 `[]`、空 stderr、退出码 0 只表示静态零命中；浏览器页面可访问，但没有可用的动态注入接口，overlay 未运行，因此正式 Impeccable Critique 仍待补，不能记为组件通过。
+
+## 2026-10-03 TreeSelect/Cascader 交付与审查状态
+
+- `LxTreeSelect`、`LxCascader` 的组件单测 17/17、文档 Playwright 8/8；测试使用 `playwright.lxui.config.ts` 和 VitePress 4176。“新增组件”总览与 Cascader 独立页都展示交互 Demo。
+- 当前两份组件源码与两份文档的 detector 均为有效 JSON `[]`、stderr 空、exit 0，仅表示静态规则零命中。浏览器策略拒绝当前 overlay 注入预检；旧 overlay 早于当前代码/文档，不能登记为当前版本正式 Critique 通过。正式 Impeccable Critique 仍待补。
+- 既有 Assessment A 建议已落实；保留 P3 与文档壳层观察，不把本波写成全库完成。基础控件统一桌面/375px/HUD/减少动效审查继续进行，Vue3 Element Plus 替换门槛不变。
+
+## 2026-10-02 LxInputNumber 增量
+
+- sm、md、lg 步进按钮按触发器高度连续贴合，中间保留 1px 分隔线；Demo 提供 `controls` 显示/隐藏开关。
+- 实际数字输入同步 `id/name/autocomplete/aria-*`，可见字段标签可关联原生输入；定向单测 12/12、InputNumber 文档 E2E 1/1。
+- lx-ui `pnpm typecheck`、库构建（195 modules）和 VitePress 文档构建已复验通过；文档构建保留仓库已有的大 chunk 警告。
+- 基础控件综合文档 E2E 已 4/4：Select、DatePicker、InputNumber 的标签/键盘行为，以及 375/320px、HUD、减少动效和页面宽度均通过；DatePicker 禁用/只读区间的窄屏默认宽度问题已修复。
+- 仍待基础控件批次统一的桌面/375px/HUD/减少动效证据及 Impeccable A/B。
+
+## 2026-09-30 基础组件审查门禁
+
+基础组件批次包含 `LxButton`、`LxInput`、`LxInputNumber`、`LxTextarea`、`LxSelect`、`LxDatePicker`、Checkbox/Radio 组、`LxSwitch` 和 `LxPasswordInput`。各项必须有设计源映射、中文 API/Demo、状态与键盘行为测试、桌面/375px/HUD/减少动效浏览器证据、代码审核及 Impeccable A/B 记录；静态 detector `[]` 不单独构成通过。
+
+## 2026-09-30 UI-13 复修增量
+
+- 自适应布局已修复：字段不再通过行内 `grid-column` 固定三列 span，容器在 760px/520px 断点分别选择两列/单列；固定列与 `span=24` 通栏保持兼容。
+- 新增公开 `LxTreeSelect` 并接入 DynamicForm；Element Plus 仅保留在 Lx 封装内部。新增 API 文档和侧栏入口；Wave 6 已补成功/空/失败/禁用、键盘、HUD、窄屏浏览器证据及文档 E2E，正式 Critique 仍待当前 overlay 证据，详情见本页顶部记录。
+- LxForm 基础/弹窗 Demo 改用 `LxInput`、`LxSelect`、`LxTextarea`，避免新示例直接使用 `El*`。
+- Assessment A 29/40；Assessment B 的 detector `[]`（stderr 空、exit 0）已记录，浏览器 overlay/截图与综合快照待收尾。静态 `[]` 不代表组件审查完成。
+
 ## 本次组件
 
 新增 18 个组件并从 `src/index.ts` 命名导出：`LxPageCard`、`LxSectionTitle`、`LxMetricCard`、`LxDescriptions`、`LxCodeSlot`、`LxSearchBar`、`LxStatusSwitch`、`LxUpload`、`LxSelectPagination`、`LxPasswordInput`、`LxVirtualTree`、`LxTransferPanel`、`LxAuthImg`、`LxNavbar`、`LxTabsBar`、`LxBreadcrumb`、`LxSplitLayout`、`LxDutyCalendar`。对应公共 Props 类型也从入口导出。`LX_ICONS` 提供 94 个标准图形，`LX_ICON_ALIASES` 提供 `date` -> `calendar` 和 `eye-on` -> `eye` 两个兼容名称；`LxIconName` 覆盖共 96 个可用名称。
 
 ## 接入契约
+
+### UI-13 表单验收记录（2026-09-30）
+
+- 已完成：字段独立子组件、Lx 基础控件组合、`value` + `change` 与旧 `v-model` 兼容、LxUpload 单/多文件列表、3/2/1 列容器自适应、固定列兼容模式。
+- 已验证：类型检查、库构建、文档构建、Vue3 定向单测 40/40、本地 Mock 浏览器成功/空/错/禁用/HUD/375px/无外部请求。
+- 待完成：LxForm 设计图逐项浏览器证据；TreeSelect/Cascader 当前版本正式 Critique；基础控件及其余组件的全库 UI-10 严格设计对照和 UI-11 正式 Impeccable 双路 Critique。
+
+- `LxForm` 与 `LxDynamicForm` 依 UI-13 逐项对照 `design/` 参考验收。动态表单按字段 `type` 分发至独立子组件，只组合公开 `Lx*` 控件（Element Plus 可留在这些封装内部），不以 `El*` 字段控件代替设计实现；补 React/TSX 友好的受控 `value` + `change(nextValue)` 与旧 `v-model` 兼容、单图/多图上传列表、容器宽度自适应 1/2/3 列。全库组件也须逐项对照设计源，不能以构建或 detector `[]` 代替设计验收。
 
 - 库入口为 `lx-ui`，样式入口为 `lx-ui/style.css`；本地消费保留 `src` 入口，发布配置指向 `dist/lx-ui.js`、`dist/style.css` 和 `dist/index.d.ts`。
 - 选择、树、穿梭、上传的值由宿主通过 `v-model` 管理。`LxSelectPagination.api({ page, pageSize, keyword, ...params })` 返回 `{ records, total }` 或 `{ data: { records, total } }`，初始跨页标签可由 `valueMap` 提供；请求变化、搜索和卸载会使旧响应失效，续页失败可重试。
@@ -68,3 +112,16 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 - Impeccable 定向预检后，LxIcon hover/focus 使用自然减速曲线；warning 与 email 动效仍提供轻微语义反馈。桌面和 Pixel 7 浏览器均验证 hover/键盘/触屏及减少动效。
 - `LxUpload` 进度填充已改为固定轨道上的 `transform` 缩放，并在减少动效设置下关闭过渡；Chromium 文档 E2E 覆盖进度、重试、取消和该偏好。
 - 本阶段验证：图标单测 5 项、桌面/移动专项 E2E 各 1 项通过；Vue3 与 lx-ui 类型检查、Vue3 定向 ESLint、Prettier、组件库构建和文档构建通过。组件库未配置独立 ESLint。
+
+### 2026-09-30 UI-13 LxForm 首错焦点修复复验
+
+- 状态：实现与回归已完成，正式 UI-11 仍未关闭。
+- 证据：`.impeccable/critique/form-focus-postfix-2026-09-30/browser-evidence.json`；LxForm 桌面/375px 提交失败后首个错误输入获得焦点，`aria-invalid` 和页面宽度契约保持。
+- detector：LxForm、LxFormItem、LxDynamicForm 及 fields 目录均为有效 JSON `[]`，stderr 为空、退出码 0；该结果只代表静态规则零命中。
+- Form 综合报告中的旧“焦点未修复”结论已由 postfix 证据标记为历史观察；当前首错焦点已在桌面/375px 复验。Wave 5 独立 A/B、综合报告和 snapshot 已保存，B 保留 CUA 不可用的 `DEGRADED` 限制；下一步继续处理剩余 P2/P3 建议并推进全库 52 项矩阵。
+
+## 2026-10-04 Wave 0 日期说明关联
+
+- 当前工作区 DatePicker/DynamicForm 定向单测 36/36；lx-ui 类型、构建、文档构建通过，DatePicker 文档 E2E 1/1。
+- 代码审核未发现可复现缺陷；新增区间起止和相邻区间说明 ID 隔离断言。
+- 正式 Impeccable A/B、overlay 和 snapshot/trend 仍待完成；该行为修复不代表基础控件严格视觉矩阵关闭。

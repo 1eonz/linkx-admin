@@ -163,6 +163,9 @@ onBeforeUnmount(() =>
 <style scoped>
 .lx-navbar {
   display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--lx-navbar-height);
   min-height: var(--lx-navbar-height);
   align-items: center;
   justify-content: space-between;
@@ -187,12 +190,25 @@ onBeforeUnmount(() =>
   gap: var(--lx-space-sm);
 }
 
+.lx-navbar__left {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
 .lx-navbar__right {
   justify-content: flex-end;
+  flex: 0 1 auto;
+  overflow: hidden;
+}
+
+.lx-navbar__left :deep(*) {
+  min-width: 0;
 }
 
 .lx-navbar__search {
-  width: 220px;
+  width: 200px;
+  flex: 0 1 200px;
+  box-sizing: border-box;
   min-height: var(--lx-control-height);
   gap: var(--lx-space-xs);
   padding: 0 var(--lx-space-sm);
@@ -225,8 +241,10 @@ onBeforeUnmount(() =>
 
 .lx-navbar__icon-button {
   display: inline-flex;
-  width: var(--lx-control-height);
+  width: max(var(--lx-control-height), 32px);
+  min-width: var(--lx-control-height);
   height: var(--lx-control-height);
+  min-height: var(--lx-control-height);
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -255,6 +273,7 @@ onBeforeUnmount(() =>
 
 .lx-navbar__user {
   gap: var(--lx-space-sm);
+  flex: 0 1 auto;
   min-height: var(--lx-control-height);
   padding: 0 var(--lx-space-sm);
   border: 0;
@@ -314,16 +333,40 @@ onBeforeUnmount(() =>
 
   .lx-navbar__search {
     width: 160px;
+    flex-basis: 160px;
   }
 }
 
 @media (max-width: 640px) {
   .lx-navbar {
+    gap: var(--lx-space-sm);
     padding-inline: var(--lx-space-sm);
   }
 
   .lx-navbar__search {
-    width: 120px;
+    width: clamp(96px, 30vw, 140px);
+    flex-basis: clamp(96px, 30vw, 140px);
+  }
+}
+
+/* 触屏设备上保留 44px 点按区，视觉图标仍由内部 18px 图形承载。 */
+@media (pointer: coarse), (max-width: 640px) {
+  .lx-navbar__icon-button,
+  .lx-navbar__user {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .lx-navbar__search {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-navbar__icon-button,
+  .lx-navbar__user,
+  .lx-navbar__search {
+    transition: none;
   }
 }
 </style>

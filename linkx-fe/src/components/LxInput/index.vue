@@ -4,8 +4,8 @@
  * 视觉源：design/表单控件八件套/code.html 01
  *   32px 基准高、4px 圆角、主色焦点光环；错误态红边浅红底深红值由
  *   element-theme.css 全局桥接层统一供给（承接波 1）。
- * 边框 / 焦点 / 错误态 / 尺寸视觉全部走全局令牌桥，本组件样式层
- * 只叠加 Lx 增量规格（mono 值字体、计数器外观，见 style.css）。
+ * 边框 / 焦点 / 错误态使用全局令牌；尺寸高度由组件样式按令牌固定，
+ * 避免内核内容行高撑开外框（mono 值字体、计数器外观也见 style.css）。
  * 未声明的 EP props（formatter/parser 等）经 $attrs 透传，兼容旧用法。
  */
 import { ref } from 'vue'

@@ -1,0 +1,1033 @@
+[
+  {
+    "id": "lxform-desktop",
+    "url": "http://localhost:4177/components/lxform",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "navigationStatus": 200,
+    "overlayInjected": true,
+    "detectorRawPhase": "impeccableDetect() before impeccableScan() overlay rendering",
+    "overlayElementGroupCount": 7,
+    "rawRuleHitCount": 8,
+    "ruleCounts": {
+      "buried-raster": 3,
+      "gpt-thin-border-wide-shadow": 1,
+      "em-dash-overuse": 1,
+      "layout-transition": 1,
+      "text-occlusion": 2
+    },
+    "consoleSummary": [
+      "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    ],
+    "interaction": {
+      "activeLabel": null,
+      "invalidItems": [
+        {
+          "label": "任务名称",
+          "error": "请输入任务名称",
+          "ariaInvalid": true,
+          "ariaDescribedBy": "lx-form-item-error-151"
+        },
+        {
+          "label": "责任网格",
+          "error": "请选择责任网格",
+          "ariaInvalid": true,
+          "ariaDescribedBy": "lx-form-item-error-159"
+        }
+      ],
+      "uploadSuccessCount": 0,
+      "hudDemoClass": null,
+      "hudThemeChecked": null,
+      "reducedMotion": false,
+      "scrollWidth": 1280
+    },
+    "errors": {
+      "pageErrorCount": 0,
+      "failedRequestCount": 0,
+      "badResponseCount": 0,
+      "blockedRequestCount": 0
+    },
+    "detectorRawPath": "lxform-desktop\\detector-raw.json",
+    "consolePath": "lxform-desktop\\console.json",
+    "screenshotPath": "lxform-desktop\\viewport-overlay.png",
+    "uploadScreenshotPath": null,
+    "findings": [
+      {
+        "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "details.details.custom-block:nth-of-type(2) > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "#el-id-1024-3",
+        "tagName": "div",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "detail": "1px border + 16px shadow blur",
+        "advisory": true
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "isHidden": false,
+        "isPageLevel": true,
+        "type": "em-dash-overuse",
+        "category": "slop",
+        "severity": "advisory",
+        "detail": "15 em-dashes in body text",
+        "advisory": true
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "isHidden": false,
+        "isPageLevel": true,
+        "type": "layout-transition",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "transition: height, padding-top, padding-bottom",
+        "advisory": false
+      },
+      {
+        "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > span.lang",
+        "tagName": "span",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "span.lang \"vue\" is 50% covered by overlapping text (p)",
+        "advisory": false
+      },
+      {
+        "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > pre.shiki.shiki-themes > code > span.line:nth-of-type(12) > span",
+        "tagName": "span",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "span \"LxTextarea,\" is 100% covered by an opaque element (div.demo-box)",
+        "advisory": false
+      }
+    ]
+  },
+  {
+    "id": "lxform-mobile",
+    "url": "http://localhost:4177/components/lxform",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "navigationStatus": 200,
+    "overlayInjected": true,
+    "detectorRawPhase": "impeccableDetect() before impeccableScan() overlay rendering",
+    "overlayElementGroupCount": 7,
+    "rawRuleHitCount": 8,
+    "ruleCounts": {
+      "clipped-overflow-container": 1,
+      "buried-raster": 3,
+      "gpt-thin-border-wide-shadow": 1,
+      "em-dash-overuse": 1,
+      "layout-transition": 1,
+      "text-occlusion": 1
+    },
+    "consoleSummary": [
+      "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    ],
+    "interaction": {
+      "activeLabel": null,
+      "invalidItems": [
+        {
+          "label": "任务名称",
+          "error": "请输入任务名称",
+          "ariaInvalid": true,
+          "ariaDescribedBy": "lx-form-item-error-151"
+        },
+        {
+          "label": "责任网格",
+          "error": "请选择责任网格",
+          "ariaInvalid": true,
+          "ariaDescribedBy": "lx-form-item-error-159"
+        }
+      ],
+      "uploadSuccessCount": 0,
+      "hudDemoClass": null,
+      "hudThemeChecked": null,
+      "reducedMotion": false,
+      "scrollWidth": 375
+    },
+    "errors": {
+      "pageErrorCount": 0,
+      "failedRequestCount": 0,
+      "badResponseCount": 0,
+      "blockedRequestCount": 0
+    },
+    "detectorRawPath": "lxform-mobile\\detector-raw.json",
+    "consolePath": "lxform-mobile\\console.json",
+    "screenshotPath": "lxform-mobile\\viewport-overlay.png",
+    "uploadScreenshotPath": null,
+    "findings": [
+      {
+        "selector": "span.container",
+        "tagName": "span",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "clipped-overflow-container",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "span.container clips a positioned child",
+        "advisory": false
+      },
+      {
+        "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "details.details.custom-block:nth-of-type(2) > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "#el-id-1024-3",
+        "tagName": "div",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "detail": "1px border + 16px shadow blur",
+        "advisory": true
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "isHidden": false,
+        "isPageLevel": true,
+        "type": "em-dash-overuse",
+        "category": "slop",
+        "severity": "advisory",
+        "detail": "13 em-dashes in body text",
+        "advisory": true
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "isHidden": false,
+        "isPageLevel": true,
+        "type": "layout-transition",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "transition: height, padding-top, padding-bottom",
+        "advisory": false
+      },
+      {
+        "selector": "details.details.custom-block:nth-of-type(1) > div.language-vue.vp-adaptive-theme > span.lang",
+        "tagName": "span",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "span.lang \"vue\" is 50% covered by overlapping text (p)",
+        "advisory": false
+      }
+    ]
+  },
+  {
+    "id": "lxdynamicform-desktop",
+    "url": "http://localhost:4177/components/lxdynamicform",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "navigationStatus": 200,
+    "overlayInjected": true,
+    "detectorRawPhase": "impeccableDetect() before impeccableScan() overlay rendering",
+    "overlayElementGroupCount": 12,
+    "rawRuleHitCount": 13,
+    "ruleCounts": {
+      "low-contrast": 4,
+      "buried-raster": 3,
+      "gpt-thin-border-wide-shadow": 2,
+      "text-occlusion": 2,
+      "bounce-easing": 1,
+      "layout-transition": 1
+    },
+    "consoleSummary": [
+      "%c[impeccable] 12 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    ],
+    "interaction": {
+      "activeLabel": "任务名称",
+      "invalidItems": [
+        {
+          "label": "任务名称",
+          "error": "请输入任务名称",
+          "ariaInvalid": true,
+          "ariaDescribedBy": "lx-form-item-error-170"
+        }
+      ],
+      "uploadSuccessCount": 2,
+      "hudDemoClass": "dynamic-form-demo",
+      "hudThemeChecked": false,
+      "reducedMotion": false,
+      "scrollWidth": 1280
+    },
+    "errors": {
+      "pageErrorCount": 0,
+      "failedRequestCount": 0,
+      "badResponseCount": 0,
+      "blockedRequestCount": 0
+    },
+    "detectorRawPath": "lxdynamicform-desktop\\detector-raw.json",
+    "consolePath": "lxdynamicform-desktop\\console.json",
+    "screenshotPath": "lxdynamicform-desktop\\viewport-overlay.png",
+    "uploadScreenshotPath": "lxdynamicform-desktop\\upload-state-overlay.png",
+    "findings": [
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(5) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > p.lx-upload__hint",
+        "tagName": "p",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "3.2:1 (need 4.5:1) — text #86909c on #ffffff",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(6) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > p.lx-upload__hint",
+        "tagName": "p",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "3.2:1 (need 4.5:1) — text #86909c on #ffffff",
+        "advisory": false
+      },
+      {
+        "selector": "li.lx-upload__file.is-success:nth-of-type(1) > div.lx-upload__file-main > div.lx-upload__file-heading > span.lx-upload__file-status.is-success",
+        "tagName": "span",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "3.2:1 (need 4.5:1) — text #529b2e on #f0f9eb",
+        "advisory": false
+      },
+      {
+        "selector": "li.lx-upload__file.is-success:nth-of-type(2) > div.lx-upload__file-main > div.lx-upload__file-heading > span.lx-upload__file-status.is-success",
+        "tagName": "span",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "3.2:1 (need 4.5:1) — text #529b2e on #f0f9eb",
+        "advisory": false
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(2) > button.copy",
+        "tagName": "button",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(3) > button.copy",
+        "tagName": "button",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "#el-id-1024-3",
+        "tagName": "div",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "detail": "1px border + 16px shadow blur",
+        "advisory": true
+      },
+      {
+        "selector": "#el-id-1024-8",
+        "tagName": "div",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "detail": "1px border + 16px shadow blur",
+        "advisory": true
+      },
+      {
+        "selector": "div.dynamic-form-demo__candidate-controls > span:nth-of-type(1)",
+        "tagName": "span",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "span \"候选人员数据\" is 50% covered by overlapping text (div.el-form-item__error)",
+        "advisory": false
+      },
+      {
+        "selector": "span.dynamic-form-demo__status",
+        "tagName": "span",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "span.dynamic-form-demo__status \"3 名候选人员\" is 50% covered by an opaque element (div.el-select__wrapper.el-tooltip__trigger.el-tooltip__trigger)",
+        "advisory": false
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "isHidden": false,
+        "isPageLevel": true,
+        "type": "bounce-easing",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+        "advisory": false
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "isHidden": false,
+        "isPageLevel": true,
+        "type": "layout-transition",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "transition: height, padding-top, padding-bottom",
+        "advisory": false
+      }
+    ]
+  },
+  {
+    "id": "lxdynamicform-mobile",
+    "url": "http://localhost:4177/components/lxdynamicform",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "navigationStatus": 200,
+    "overlayInjected": true,
+    "detectorRawPhase": "impeccableDetect() before impeccableScan() overlay rendering",
+    "overlayElementGroupCount": 14,
+    "rawRuleHitCount": 15,
+    "ruleCounts": {
+      "clipped-overflow-container": 1,
+      "low-contrast": 4,
+      "buried-raster": 3,
+      "gpt-thin-border-wide-shadow": 2,
+      "text-occlusion": 3,
+      "bounce-easing": 1,
+      "layout-transition": 1
+    },
+    "consoleSummary": [
+      "%c[impeccable] 14 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    ],
+    "interaction": {
+      "activeLabel": "任务名称",
+      "invalidItems": [
+        {
+          "label": "任务名称",
+          "error": "请输入任务名称",
+          "ariaInvalid": true,
+          "ariaDescribedBy": "lx-form-item-error-170"
+        }
+      ],
+      "uploadSuccessCount": 2,
+      "hudDemoClass": "dynamic-form-demo",
+      "hudThemeChecked": false,
+      "reducedMotion": false,
+      "scrollWidth": 375
+    },
+    "errors": {
+      "pageErrorCount": 0,
+      "failedRequestCount": 0,
+      "badResponseCount": 0,
+      "blockedRequestCount": 0
+    },
+    "detectorRawPath": "lxdynamicform-mobile\\detector-raw.json",
+    "consolePath": "lxdynamicform-mobile\\console.json",
+    "screenshotPath": "lxdynamicform-mobile\\viewport-overlay.png",
+    "uploadScreenshotPath": "lxdynamicform-mobile\\upload-state-overlay.png",
+    "findings": [
+      {
+        "selector": "span.container",
+        "tagName": "span",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "clipped-overflow-container",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "span.container clips a positioned child",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(5) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > p.lx-upload__hint",
+        "tagName": "p",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "3.2:1 (need 4.5:1) — text #86909c on #ffffff",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(6) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > p.lx-upload__hint",
+        "tagName": "p",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "3.2:1 (need 4.5:1) — text #86909c on #ffffff",
+        "advisory": false
+      },
+      {
+        "selector": "li.lx-upload__file.is-success:nth-of-type(1) > div.lx-upload__file-main > div.lx-upload__file-heading > span.lx-upload__file-status.is-success",
+        "tagName": "span",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "3.2:1 (need 4.5:1) — text #529b2e on #f0f9eb",
+        "advisory": false
+      },
+      {
+        "selector": "li.lx-upload__file.is-success:nth-of-type(2) > div.lx-upload__file-main > div.lx-upload__file-heading > span.lx-upload__file-status.is-success",
+        "tagName": "span",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "3.2:1 (need 4.5:1) — text #529b2e on #f0f9eb",
+        "advisory": false
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(2) > button.copy",
+        "tagName": "button",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(3) > button.copy",
+        "tagName": "button",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "#el-id-1024-3",
+        "tagName": "div",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "detail": "1px border + 16px shadow blur",
+        "advisory": true
+      },
+      {
+        "selector": "#el-id-1024-8",
+        "tagName": "div",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "detail": "1px border + 16px shadow blur",
+        "advisory": true
+      },
+      {
+        "selector": "label.el-checkbox.lx-checkbox:nth-of-type(1) > span.el-checkbox__label",
+        "tagName": "span",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "span.el-checkbox__label \"禁用表单\" is 100% covered by overlapping text (div.el-form-item__error)",
+        "advisory": false
+      },
+      {
+        "selector": "div.dynamic-form-demo__candidate-controls > span:nth-of-type(1)",
+        "tagName": "span",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "span \"候选人员数据\" is 86% covered by an opaque element (div.el-select__wrapper.el-tooltip__trigger.el-tooltip__trigger)",
+        "advisory": false
+      },
+      {
+        "selector": "span.dynamic-form-demo__status",
+        "tagName": "span",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "span.dynamic-form-demo__status \"3 名候选人员\" is 50% covered by an opaque element (div.el-select__wrapper.is-filterable.el-tooltip__trigger.el-tooltip__trigger)",
+        "advisory": false
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "isHidden": false,
+        "isPageLevel": true,
+        "type": "bounce-easing",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+        "advisory": false
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "isHidden": false,
+        "isPageLevel": true,
+        "type": "layout-transition",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "transition: height, padding-top, padding-bottom",
+        "advisory": false
+      }
+    ]
+  },
+  {
+    "id": "lxdynamicform-hud-dark-reduced-motion",
+    "url": "http://localhost:4177/components/lxdynamicform",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "navigationStatus": 200,
+    "overlayInjected": true,
+    "detectorRawPhase": "impeccableDetect() before impeccableScan() overlay rendering",
+    "overlayElementGroupCount": 24,
+    "rawRuleHitCount": 25,
+    "ruleCounts": {
+      "low-contrast": 4,
+      "ai-color-palette": 14,
+      "buried-raster": 3,
+      "gpt-thin-border-wide-shadow": 2,
+      "bounce-easing": 1,
+      "layout-transition": 1
+    },
+    "consoleSummary": [
+      "%c[impeccable] 24 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    ],
+    "interaction": {
+      "activeLabel": "任务名称",
+      "invalidItems": [
+        {
+          "label": "任务名称",
+          "error": "请输入任务名称",
+          "ariaInvalid": true,
+          "ariaDescribedBy": "lx-form-item-error-170"
+        }
+      ],
+      "uploadSuccessCount": 2,
+      "hudDemoClass": "dynamic-form-demo lx-theme-hud",
+      "hudThemeChecked": true,
+      "reducedMotion": true,
+      "scrollWidth": 1280
+    },
+    "errors": {
+      "pageErrorCount": 0,
+      "failedRequestCount": 0,
+      "badResponseCount": 0,
+      "blockedRequestCount": 0
+    },
+    "detectorRawPath": "lxdynamicform-hud-dark-reduced-motion\\detector-raw.json",
+    "consolePath": "lxdynamicform-hud-dark-reduced-motion\\console.json",
+    "screenshotPath": "lxdynamicform-hud-dark-reduced-motion\\viewport-overlay.png",
+    "uploadScreenshotPath": "lxdynamicform-hud-dark-reduced-motion\\upload-state-overlay.png",
+    "findings": [
+      {
+        "selector": "#el-id-1024-10",
+        "tagName": "div",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "2.8:1 (need 4.5:1) — text #606266 on #101a2c",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(5) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > span.lx-upload__drop-icon",
+        "tagName": "span",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(5) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > span.lx-upload__drop-icon > svg.lx-icon",
+        "tagName": "svg",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > span.lx-upload__drop-icon > svg.lx-icon > path:nth-of-type(1)",
+        "tagName": "path",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > span.lx-upload__drop-icon > svg.lx-icon > path:nth-of-type(2)",
+        "tagName": "path",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > span.lx-upload__drop-icon > svg.lx-icon > path:nth-of-type(3)",
+        "tagName": "path",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(5) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > p.lx-upload__hint",
+        "tagName": "p",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "3.7:1 (need 4.5:1) — text #64748b on #101a2c",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(5) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > button.lx-upload__browse",
+        "tagName": "button",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(5) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-over > p.lx-upload__over-title",
+        "tagName": "p",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "#el-id-1024-11",
+        "tagName": "div",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "2.8:1 (need 4.5:1) — text #606266 on #101a2c",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(6) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > span.lx-upload__drop-icon",
+        "tagName": "span",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(6) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > span.lx-upload__drop-icon > svg.lx-icon",
+        "tagName": "svg",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > span.lx-upload__drop-icon > svg.lx-icon > path:nth-of-type(1)",
+        "tagName": "path",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > span.lx-upload__drop-icon > svg.lx-icon > path:nth-of-type(2)",
+        "tagName": "path",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > span.lx-upload__drop-icon > svg.lx-icon > path:nth-of-type(3)",
+        "tagName": "path",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(6) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > p.lx-upload__hint",
+        "tagName": "p",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "3.7:1 (need 4.5:1) — text #64748b on #101a2c",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(6) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > button.lx-upload__browse",
+        "tagName": "button",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "div.el-form-item.asterisk-left:nth-of-type(6) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-over > p.lx-upload__over-title",
+        "tagName": "p",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "ai-color-palette",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "Cyan neon text on dark background",
+        "advisory": false
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(2) > button.copy",
+        "tagName": "button",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(3) > button.copy",
+        "tagName": "button",
+        "isHidden": false,
+        "isPageLevel": false,
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "raster background at opacity 0",
+        "advisory": false
+      },
+      {
+        "selector": "#el-id-1024-3",
+        "tagName": "div",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "detail": "1px border + 16px shadow blur",
+        "advisory": true
+      },
+      {
+        "selector": "#el-id-1024-8",
+        "tagName": "div",
+        "isHidden": true,
+        "isPageLevel": false,
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "detail": "1px border + 16px shadow blur",
+        "advisory": true
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "isHidden": false,
+        "isPageLevel": true,
+        "type": "bounce-easing",
+        "category": "slop",
+        "severity": "warning",
+        "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+        "advisory": false
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "isHidden": false,
+        "isPageLevel": true,
+        "type": "layout-transition",
+        "category": "quality",
+        "severity": "warning",
+        "detail": "transition: height, padding-top, padding-bottom",
+        "advisory": false
+      }
+    ]
+  }
+]

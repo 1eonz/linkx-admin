@@ -1,0 +1,10 @@
+locator.waitFor: Error: strict mode violation: locator('.lx-tree-select__popper') resolved to 2 elements:
+    1) <div tabindex="-1" role="tooltip" id="el-id-1024-1" aria-hidden="false" data-popper-escaped="false" data-popper-reference-hidden="false" data-popper-placement="bottom-start" class="el-popper is-pure is-light el-tooltip el-select__popper el-tree-select__popper lx-tree-select__popper el-zoom-in-top-enter-from el-zoom-in-top-enter-active">…</div> aka getByRole('tooltip', { name: '暂无数据' })
+    2) <div class="el-select-dropdown el-tree-select__popper lx-tree-select__popper">…</div> aka locator('div').filter({ hasText: '暂无数据' }).nth(2)
+
+Call log:
+[2m  - waiting for locator('.lx-tree-select__popper') to be visible[22m
+
+    at F:\work\linkx-admin\.impeccable\critique\wave6-tree-cascader-2026-09-30\assessment-b\browser-evidence-clean.cjs:90:53
+    at async runScenario (F:\work\linkx-admin\.impeccable\critique\wave6-tree-cascader-2026-09-30\assessment-b\browser-evidence-clean.cjs:22:5)
+    at async main (F:\work\linkx-admin\.impeccable\critique\wave6-tree-cascader-2026-09-30\assessment-b\browser-evidence-clean.cjs:87:5)

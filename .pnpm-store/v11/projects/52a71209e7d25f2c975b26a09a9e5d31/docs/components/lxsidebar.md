@@ -36,6 +36,7 @@ import Controlled from '../../src/components/LxSidebar/demo/controlled.vue';
 | show-footer              | 底部状态区（SLA 仪表 + 节点徽章 + 切换按钮）                                                   | `boolean`              | `true`               |
 | sla-value                | SLA 仪表数值                                                                                   | `number`               | `99.9`               |
 | node-label / node-status | 节点徽章文案 / 状态                                                                            | `string` / `LxStatus`  | `NODE-01` / `online` |
+| latency-label            | expanded 底部专网状态条文案；为空时回退到 `node-label`                                         | `string`               | `''`                 |
 
 ### Events
 
@@ -54,6 +55,8 @@ import Controlled from '../../src/components/LxSidebar/demo/controlled.vue';
 ### Slots
 
 `brand`（品牌区）/ `append`（菜单追加区）/ `footer`（底部状态区）
+
+默认 `footer` 会随 `mode` 切换形态：expanded 显示专网状态条、延迟文案、控制台设置和收起按钮；rail 显示 SLA 圆环、NODE 徽章和展开按钮。`latency-label` 只影响 expanded 状态条，rail 仍使用 `sla-value` 与 `node-label`。
 
 ## FAQ
 

@@ -8,6 +8,7 @@
 
 /* ===== 尺寸档（28 / 32 / 40px，内边距 12 / 16 / 20px）===== */
 .lx-btn.el-button {
+  box-sizing: border-box;
   height: var(--lx-btn-height-md);
   padding: 0 var(--lx-btn-padding-x-md);
   border-radius: var(--lx-radius-md);
@@ -85,6 +86,19 @@
     var(--lx-btn-text-color, var(--lx-color-primary)) 8%,
     transparent
   );
+  --el-button-active-text-color: var(--el-button-hover-text-color);
+  --el-button-active-bg-color: var(--el-button-hover-bg-color);
+}
+
+/* EP 的文字按钮直接使用全局 fill 色；在 Lx 边界绑定状态色以保持 HUD 和语义浅底。 */
+.lx-btn.el-button.is-text:not(.is-disabled):hover {
+  color: var(--el-button-hover-text-color);
+  background-color: var(--el-button-hover-bg-color);
+}
+
+.lx-btn.el-button.is-text:not(.is-disabled):active {
+  color: var(--el-button-active-text-color);
+  background-color: var(--el-button-active-bg-color);
 }
 
 /* 危险文字：红字 + 浅红 hover 底（标本"移出布控"行内操作；
@@ -105,15 +119,15 @@
   );
 }
 
-/* 成功文字：绿字（strong 档对比度补偿，与 danger 文字同策略） */
+/* 成功文字：使用文字专色，避免实底悬停色在白底上对比度不足。 */
 .lx-btn.el-button--success.is-text {
   --el-button-text-color: var(
     --lx-btn-text-color,
-    var(--lx-color-success-strong)
+    var(--lx-color-success-text)
   );
   --el-button-hover-text-color: var(
     --lx-btn-text-color,
-    var(--lx-color-success-strong)
+    var(--lx-color-success-text)
   );
   --el-button-hover-bg-color: color-mix(
     in srgb,
@@ -122,15 +136,15 @@
   );
 }
 
-/* 警示文字：橙字（strong 档对比度补偿） */
+/* 警示文字：明暗主题分别提供适合小字号的文字专色。 */
 .lx-btn.el-button--warning.is-text {
   --el-button-text-color: var(
     --lx-btn-text-color,
-    var(--lx-color-warning-strong)
+    var(--lx-color-warning-text)
   );
   --el-button-hover-text-color: var(
     --lx-btn-text-color,
-    var(--lx-color-warning-strong)
+    var(--lx-color-warning-text)
   );
   --el-button-hover-bg-color: color-mix(
     in srgb,
@@ -219,7 +233,7 @@
 
 /* 触屏（无 hover 能力）场景：44px 最小触控目标（宽高同约束，
  * 纯图标文字按钮收窄后宽度仅约 31px，只限高不限宽无法命中） */
-@media (hover: none) {
+@media (hover: none), (max-width: 640px) {
   .lx-btn.el-button {
     min-height: 44px;
     min-width: 44px;

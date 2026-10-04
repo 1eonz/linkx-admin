@@ -22,7 +22,8 @@ const semanticActions: LxActionItem[] = [
   { label: '编辑' },
   { label: '重置密码', type: 'warning' },
   { label: '删除', type: 'danger' },
-  { label: '授权', type: 'success' },
+  { label: '停用', type: 'danger' },
+  { label: '暂不可执行', disabled: true },
 ]
 
 /** 图标 + 文字：常用操作提速识别；纯文字高密度场景降噪 */
@@ -51,6 +52,7 @@ const overflowActions: LxActionItem[] = [
   { label: '设置角色' },
   { label: '数据权限' },
   { label: '设备调度权限' },
+  { label: '停用', type: 'danger' },
   { label: '摄像头权限' },
   { label: '重置密码', type: 'warning' },
   { label: '删除', type: 'danger' },
@@ -59,12 +61,12 @@ const overflowActions: LxActionItem[] = [
 /** 禁用项：点击被拦截 */
 const disabledActions: LxActionItem[] = [
   { label: '编辑' },
-  { label: '无权审批', disabled: true },
+  { label: '暂不可执行', disabled: true },
 ]
 
 /** 统一 click 事件：父级集中处理（与 onClick 并存，先派发事件后调用回调） */
 function onAction(action: LxActionItem) {
-  lastAction.value = `统一 click 事件：${action.label}`
+  lastAction.value = action.label
 }
 </script>
 
@@ -106,7 +108,7 @@ function onAction(action: LxActionItem) {
     </section>
 
     <section class="lx-actions-demo__panel" data-testid="overflow">
-      <h4>溢出折叠（超过 max 进「更多」）</h4>
+      <h4>禁用项与事件反馈</h4>
       <div class="lx-actions-demo__row">
         <LxActionButtons
           :actions="overflowActions"
@@ -120,7 +122,13 @@ function onAction(action: LxActionItem) {
       </p>
     </section>
 
-    <p class="lx-actions-demo__status" aria-live="polite">{{ lastAction }}</p>
+    <p
+      class="lx-actions-demo__status"
+      data-testid="last-action"
+      aria-live="polite"
+    >
+      {{ lastAction }}
+    </p>
   </div>
 </template>
 
@@ -160,6 +168,6 @@ function onAction(action: LxActionItem) {
 .lx-actions-demo__tip {
   margin: 0;
   font-size: 12px;
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
 }
 </style>

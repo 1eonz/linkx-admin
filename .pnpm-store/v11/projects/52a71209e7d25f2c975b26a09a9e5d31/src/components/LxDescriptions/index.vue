@@ -102,6 +102,7 @@ function displayValue(item: LxDescriptionItem): string {
           <LxStatusDot
             v-if="item.statusDot && !isMasked(item)"
             :status="item.statusDot"
+            :size="6"
             :status-desc="displayValue(item)"
             show-text
           />

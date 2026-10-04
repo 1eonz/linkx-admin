@@ -1,5 +1,29 @@
 # GLM 代码评审复核与修复台账
 
+## 2026-10-04 UI-13 DynamicForm/Form 代码审核发现
+
+- **发现**：`LxDatePicker` 在 Element Plus Fragment 根回退时，当前实现仍可能无法稳定定位本实例触发器；DynamicForm/DatePicker 定向单测出现 5 项失败，包含字段说明未到达实际输入和相邻日期字段隔离回归。
+- **处理状态**：Wave 0 修复完成。组件实例 UID 用于限定 Fragment 根下的触发器范围；单值和区间输入、相邻区间实例、说明更新/移除及 DynamicForm 日期字段均有回归覆盖。此项代码缺陷关闭，但 DynamicForm/Form 正式视觉审查仍因 Impeccable A/B 和 snapshot 缺失而保持阶段性。
+- **独立代码审核**：未发现可复现实现缺陷；建议补充区间两个输入框及相邻区间实例的 `aria-describedby` 隔离测试，该建议已落实。
+- **验证**：DatePicker/DynamicForm 单测 36/36；lx-ui `typecheck`、`build`（196 modules）、`build:docs`；DatePicker 文档 E2E 1/1；目标 ESLint、Prettier 和 `git diff --check` 均通过。VitePress 构建保留既有大 chunk 警告。正式 Impeccable A/B、overlay、snapshot/trend 未完成，detector `[]` 不作通过依据。
+
+## 2026-10-02 轮播文章分页触底回归
+
+- **发现**：触底事件在文章列表尚未更新时可重复进入分页回调，测试曾观察到新增文章重复呈现；旧测试还按固定 CSS 类滚动下拉，并在 Element Plus popper 过渡时全局查询同名 option。
+- **修复**：`CarouselForm.vue` 对文章分页请求加 loading 锁，失败回退页码，按文章 ID 去重；请求代次和公众号 ID 校验阻止切换账号后的迟到结果覆盖当前数据。`preview.spec.ts` 按输入框 `aria-controls` 关联真实 listbox/滚动容器，并断言第 21 篇唯一出现。
+- **复核**：未发现本次修改改变既有文章选择、默认首篇回填或 Promise 链异常处理契约；API 仍使用 `.then().catch().finally()`。完整 preview E2E 6/6，分页定向 E2E 1/1，目标 ESLint、Prettier、`vue-tsc --noEmit` 通过。
+- **边界**：E2E 使用本地 Mock；未验证真实后端或其他 `v-loadmore` 页面。旧 #7 指令单测结论不变，本次是轮播宿主分页状态加固。
+- **Impeccable 静态检查**：`.impeccable/critique/carousel-pagination-2026-10-02/` 保存 JSON、stderr 和退出码；JSON `[]` 且 stderr 为空、退出码 0，只表示源码 detector 零命中，不代表正式双路视觉 Critique。
+
+## 2026-09-30 UI-10 Wave 5 postfix 代码审核
+
+- **范围**：`LxDialog`、`LxDrawer`、`LxEmpty`、`LxPageCard`、`LxFormErrorBanner` 的组件实现、Demo 和对应宿主单测/文档 E2E。
+- **结论**：未发现本波组件代码新增的可复现正确性、契约或安全问题。Dialog/Drawer 的受控显隐、ESC、ARIA 标题关系、portal 主题变量、PageCard `aria-busy`/恢复状态和 ErrorBanner live region 与测试契约一致；组件仍不发起业务请求。
+- **发现并修复**：PageCard 文档 E2E 在 VitePress hydration 完成前立即读取 `table`，会出现空表误报。已先等待 `Props` 标题可见再检查表格布局；修复后定向文档 E2E **6/6** 通过。
+- **验证**：Wave 5 单测 9/9（Drawer 4、PageCard 3、FormErrorBanner 2）；定向文档 E2E 6/6；Vue3 `vue-tsc --noEmit`、目标 E2E/单测 ESLint、lx-ui `build`（195 modules）、VitePress `build:docs` 和目标文件 Prettier 通过；目标范围 `git diff --check` 通过。
+- **环境边界**：全库 `git diff --check` 仍受既有 `.vitepress/config.ts` EOF 空行影响，未修改他人文件；不影响本波目标范围。真实后端联调未执行，Impeccable B 的 CUA 限制仍按 `DEGRADED` 登记。
+- **后续**：保留 Wave 5 P2/P3 视觉建议，进入 `COMPONENT-AUDIT.md` 中树/穿梭/上传/远程分页选择等尚未完成正式 A/B 的下一波。
+
 > 复核时间：2026-09-28  
 > 来源：[CODE-REVIEW.md](./CODE-REVIEW.md)
 
@@ -56,6 +80,22 @@ GLM 报告的 11 项 major 经复核后，#1、#2、#5、#6、#7、#8、#9、#10
 - 所有业务 API 调用继续使用 `.then().catch().finally()`；本波未将 API 链改写为 `async/await`。
 - GLM #8 属于 store/API 错误恢复，无界面或动效变更；未运行 Impeccable detector，不产生 `[]` 结果，也不记为视觉检查。
 - 下一步 CODE-03：为 `/authority/adminRole` 角色保存及 `/authority/adminPerson` 授权/改密/删除/状态写操作增加防重复提交锁和可访问 busy 状态，按 Vue2/API 行为回归；随后单独进行代码审核和 UI/动效检查。GLM #2 Cascader、GLM #9/#10 正式视觉复核和 GLM #11 E2E 时序复核已完成；真实后端联调仍独立记录。
+
+## 2026-09-30 UI-13 LxForm 首错焦点修复代码审核
+
+- 结论：未发现本次修复新增的可复现正确性或契约问题。
+- 复核范围：`linkx-fe/src/components/LxForm/index.vue`、`other-admin/admin-vue3/tests/e2e/lx-form-docs.spec.ts`。
+- 重点：表单根节点从组件挂载实例获取，失败路径保持 Promise 链；聚焦重试只在 `scrollToError` 开启时执行；未改变 `validate`、`validateField`、`resetFields`、`clearValidate` 和 `scrollToField` 的公开方法；没有引入 API 请求或 `async/await` 改写。
+- 验证：lx-ui `vue-tsc --noEmit`；LxForm 文档 Playwright 3/3；Vue3 定向 Vitest 34/34；`git diff --check`。未把 detector `[]` 作为代码审查结论。
+- 后续：正式 Impeccable 综合仍需按 A/B、浏览器状态/overlay、snapshot/trend 门槛收口；组件库全量严格矩阵完成前不进入 Vue3 Element Plus 直接依赖移除。
+
+## 2026-10-02 UI-10 Wave 6 TreeSelect/Cascader 行为复核
+
+- 复核点：TreeSelect 文案 locale 选择与 `{count}` 单次替换、显式覆盖、原 footer slot/提交事件兼容；Cascader loading/error 组合下错误状态是否会错误关联到实际 input、面板与外层是否重复提供 retry、loading 结束后错误是否正确恢复；Demo 是否仅保留一个级联选择结果 live announcement。
+- 结果：已由定向测试覆盖英文默认 footer、定制文案、并发 `loading + error` 先加载后错误的转移、错误 ARIA 和重试按钮。未发现本波新增的 API 请求逻辑或 `.then().catch().finally()` 风格变化。
+- 验证：单测 17/17；定向文档 E2E 5/5；lx-ui typecheck/build/docs build、Vue3 vue-tsc、目标 Prettier 检查通过。`linkx-fe` 无独立 ESLint 配置，Vue3 ESLint 对库路径提示 ignored，因此不将该结果记为库 Lint 通过。
+- 严格视觉结论由修后 Impeccable A/B 综合报告给出；此前 detector `[]` 不是代码审核或视觉通过结论。报告落盘前本项仍为审查中。
+
 ## 2026-10-04 Wave 0 DatePicker 复核结论
 
 独立代码审核未发现可复现缺陷；建议补充的区间起止输入和相邻区间实例 `aria-describedby` 回归已加入。当前工作区 DatePicker/DynamicForm 单测 36/36，lx-ui 类型检查、构建、文档构建、DatePicker 文档 E2E 1/1、目标 ESLint/Prettier 和差异检查通过。正式 Impeccable A/B、overlay 与 snapshot/trend 仍未完成；detector `[]` 不作通过依据。

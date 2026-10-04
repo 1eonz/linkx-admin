@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 /**
  * LxStatusDot — 业务状态指示圆点（全库状态表达第一公民，设计原则 P1）
  * 语义色映射：DESIGN-SPEC §2.1（全库契约，禁止使用方自行换色）
@@ -85,7 +85,7 @@ const isBreathing = computed(
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  animation: lx-dot-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: lx-dot-ping 3.5s ease-in-out infinite;
 }
 
 .lx-status-dot__text {
@@ -93,11 +93,11 @@ const isBreathing = computed(
   white-space: nowrap;
 }
 
-/* error 文本用语义深色（比 regular 更醒目但仍克制） */
-.lx-status-dot--error .lx-status-dot__text {
-  color: var(--lx-color-error);
-}
-.lx-status-dot--busy .lx-status-dot__text {
-  color: var(--lx-color-warning-strong);
+/* 状态文字保持正文对比度；语义色由圆点单独承载。 */
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-status-dot__ping {
+    animation: none;
+  }
 }
 </style>

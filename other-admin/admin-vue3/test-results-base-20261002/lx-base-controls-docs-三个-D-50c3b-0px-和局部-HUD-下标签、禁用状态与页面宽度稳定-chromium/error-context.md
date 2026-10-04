@@ -1,0 +1,719 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#VPContent"
+  - banner:
+    - generic:
+      - generic:
+        - generic:
+          - link "LxUI" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e7]: LxUI
+          - button "mobile navigation" [ref=e9] [cursor=pointer]
+  - generic [ref=e15]:
+    - button "Menu" [ref=e16] [cursor=pointer]:
+      - generic [ref=e18]: Menu
+    - button "On this page" [ref=e20] [cursor=pointer]: On this page
+  - complementary [ref=e22]:
+    - navigation "Sidebar Navigation" [ref=e23]:
+      - generic [ref=e24]: Sidebar Navigation
+      - generic [ref=e26]:
+        - button "新增组件" [ref=e27]:
+          - heading "新增组件" [level=2] [ref=e29]
+        - link "新增组件总览" [ref=e34] [cursor=pointer]:
+          - /url: /components/new-components.html
+          - paragraph [ref=e35]: 新增组件总览
+      - generic [ref=e37]:
+        - button "基础" [ref=e38]:
+          - heading "基础" [level=2] [ref=e40]
+        - generic [ref=e41]:
+          - link "基础控件桥接" [ref=e45] [cursor=pointer]:
+            - /url: /components/element-bridge.html
+            - paragraph [ref=e46]: 基础控件桥接
+          - link "LxButton 按钮" [ref=e50] [cursor=pointer]:
+            - /url: /components/lxbutton.html
+            - paragraph [ref=e51]: LxButton 按钮
+          - link "LxIcon 图标总览" [ref=e55] [cursor=pointer]:
+            - /url: /components/lxicons.html
+            - paragraph [ref=e56]: LxIcon 图标总览
+      - generic [ref=e58]:
+        - button "布局导航" [ref=e59]:
+          - heading "布局导航" [level=2] [ref=e61]
+        - generic [ref=e62]:
+          - link "LxSidebar 侧边栏" [ref=e66] [cursor=pointer]:
+            - /url: /components/lxsidebar.html
+            - paragraph [ref=e67]: LxSidebar 侧边栏
+          - link "LxNavbar 顶部导航" [ref=e71] [cursor=pointer]:
+            - /url: /components/lxnavbar.html
+            - paragraph [ref=e72]: LxNavbar 顶部导航
+          - link "LxBreadcrumb 面包屑" [ref=e76] [cursor=pointer]:
+            - /url: /components/lxbreadcrumb.html
+            - paragraph [ref=e77]: LxBreadcrumb 面包屑
+          - link "LxTabsBar 页签栏" [ref=e81] [cursor=pointer]:
+            - /url: /components/lxtabsbar.html
+            - paragraph [ref=e82]: LxTabsBar 页签栏
+          - link "LxSplitLayout 分栏布局" [ref=e86] [cursor=pointer]:
+            - /url: /components/lxsplitlayout.html
+            - paragraph [ref=e87]: LxSplitLayout 分栏布局
+          - link "LxSelectTree 组织树选择" [ref=e91] [cursor=pointer]:
+            - /url: /components/lxselecttree.html
+            - paragraph [ref=e92]: LxSelectTree 组织树选择
+      - generic [ref=e94]:
+        - button "数据展示" [ref=e95]:
+          - heading "数据展示" [level=2] [ref=e97]
+        - generic [ref=e98]:
+          - link "LxProTable 数据表格" [ref=e102] [cursor=pointer]:
+            - /url: /components/lxprotable.html
+            - paragraph [ref=e103]: LxProTable 数据表格
+          - link "LxPageCard 页面容器" [ref=e107] [cursor=pointer]:
+            - /url: /components/lxpagecard.html
+            - paragraph [ref=e108]: LxPageCard 页面容器
+          - link "LxMetricCard 指标卡" [ref=e112] [cursor=pointer]:
+            - /url: /components/lxmetriccard.html
+            - paragraph [ref=e113]: LxMetricCard 指标卡
+          - link "LxDutyCalendar 排班日历" [ref=e117] [cursor=pointer]:
+            - /url: /components/lxdutycalendar.html
+            - paragraph [ref=e118]: LxDutyCalendar 排班日历
+          - link "LxSectionTitle 区块标题" [ref=e122] [cursor=pointer]:
+            - /url: /components/lxsectiontitle.html
+            - paragraph [ref=e123]: LxSectionTitle 区块标题
+          - link "LxAuthImg 鉴权图片" [ref=e127] [cursor=pointer]:
+            - /url: /components/lxauthimg.html
+            - paragraph [ref=e128]: LxAuthImg 鉴权图片
+          - link "LxDescriptions 详情描述" [ref=e132] [cursor=pointer]:
+            - /url: /components/lxdescriptions.html
+            - paragraph [ref=e133]: LxDescriptions 详情描述
+          - link "LxPagination 分页" [ref=e137] [cursor=pointer]:
+            - /url: /components/lxpagination.html
+            - paragraph [ref=e138]: LxPagination 分页
+          - link "LxVirtualTree 虚拟树" [ref=e142] [cursor=pointer]:
+            - /url: /components/lxvirtualtree.html
+            - paragraph [ref=e143]: LxVirtualTree 虚拟树
+          - link "LxTransferPanel 双栏穿梭" [ref=e147] [cursor=pointer]:
+            - /url: /components/lxtransferpanel.html
+            - paragraph [ref=e148]: LxTransferPanel 双栏穿梭
+          - link "LxStatusDot 状态点" [ref=e152] [cursor=pointer]:
+            - /url: /components/lxstatusdot.html
+            - paragraph [ref=e153]: LxStatusDot 状态点
+          - link "LxTag 浅底标签" [ref=e157] [cursor=pointer]:
+            - /url: /components/lxtag.html
+            - paragraph [ref=e158]: LxTag 浅底标签
+          - link "LxCodeSlot 代码槽" [ref=e162] [cursor=pointer]:
+            - /url: /components/lxcodeslot.html
+            - paragraph [ref=e163]: LxCodeSlot 代码槽
+          - link "LxActionButtons 行内操作" [ref=e167] [cursor=pointer]:
+            - /url: /components/lxactionbuttons.html
+            - paragraph [ref=e168]: LxActionButtons 行内操作
+          - link "LxEmpty 空态" [ref=e172] [cursor=pointer]:
+            - /url: /components/lxempty.html
+            - paragraph [ref=e173]: LxEmpty 空态
+          - link "LxGauge 圆环仪表" [ref=e177] [cursor=pointer]:
+            - /url: /components/lxgauge.html
+            - paragraph [ref=e178]: LxGauge 圆环仪表
+          - link "LxNodeBadge 节点徽章" [ref=e182] [cursor=pointer]:
+            - /url: /components/lxnodebadge.html
+            - paragraph [ref=e183]: LxNodeBadge 节点徽章
+          - link "权限消费" [ref=e187] [cursor=pointer]:
+            - /url: /components/permissions.html
+            - paragraph [ref=e188]: 权限消费
+      - generic [ref=e190]:
+        - button "数据录入" [ref=e191]:
+          - heading "数据录入" [level=2] [ref=e193]
+        - generic [ref=e194]:
+          - link "LxForm 表单" [ref=e198] [cursor=pointer]:
+            - /url: /components/lxform.html
+            - paragraph [ref=e199]: LxForm 表单
+          - link "LxInput 输入框" [ref=e203] [cursor=pointer]:
+            - /url: /components/lxinput.html
+            - paragraph [ref=e204]: LxInput 输入框
+          - link "LxTextarea 文本域" [ref=e208] [cursor=pointer]:
+            - /url: /components/lxtextarea.html
+            - paragraph [ref=e209]: LxTextarea 文本域
+          - link "LxRadio 单选组" [ref=e213] [cursor=pointer]:
+            - /url: /components/lxradio.html
+            - paragraph [ref=e214]: LxRadio 单选组
+          - link "LxCheckbox 复选组" [ref=e218] [cursor=pointer]:
+            - /url: /components/lxcheckbox.html
+            - paragraph [ref=e219]: LxCheckbox 复选组
+          - link "LxSwitch 开关" [ref=e223] [cursor=pointer]:
+            - /url: /components/lxswitch.html
+            - paragraph [ref=e224]: LxSwitch 开关
+          - link "LxSelect 下拉选择" [ref=e228] [cursor=pointer]:
+            - /url: /components/lxselect.html
+            - paragraph [ref=e229]: LxSelect 下拉选择
+          - link "LxTreeSelect 树形下拉" [ref=e233] [cursor=pointer]:
+            - /url: /components/lxtreeselect.html
+            - paragraph [ref=e234]: LxTreeSelect 树形下拉
+          - link "LxDatePicker 日期选择" [ref=e238] [cursor=pointer]:
+            - /url: /components/lxdatepicker.html
+            - paragraph [ref=e239]: LxDatePicker 日期选择
+          - link "LxInputNumber 数字输入" [ref=e243] [cursor=pointer]:
+            - /url: /components/lxinputnumber.html
+            - paragraph [ref=e244]: LxInputNumber 数字输入
+          - link "LxSearchBar 检索面板" [ref=e248] [cursor=pointer]:
+            - /url: /components/lxsearchbar.html
+            - paragraph [ref=e249]: LxSearchBar 检索面板
+          - link "LxDynamicForm 动态表单" [ref=e253] [cursor=pointer]:
+            - /url: /components/lxdynamicform.html
+            - paragraph [ref=e254]: LxDynamicForm 动态表单
+          - link "LxStatusSwitch 状态开关" [ref=e258] [cursor=pointer]:
+            - /url: /components/lxstatusswitch.html
+            - paragraph [ref=e259]: LxStatusSwitch 状态开关
+          - link "LxPasswordInput 密码输入框" [ref=e263] [cursor=pointer]:
+            - /url: /components/lxpasswordinput.html
+            - paragraph [ref=e264]: LxPasswordInput 密码输入框
+          - link "LxUpload 文件上传" [ref=e268] [cursor=pointer]:
+            - /url: /components/lxupload.html
+            - paragraph [ref=e269]: LxUpload 文件上传
+          - link "LxSelectPagination 远程分页选择" [ref=e273] [cursor=pointer]:
+            - /url: /components/lxselectpagination.html
+            - paragraph [ref=e274]: LxSelectPagination 远程分页选择
+      - generic [ref=e276]:
+        - button "反馈与浮层" [ref=e277]:
+          - heading "反馈与浮层" [level=2] [ref=e279]
+        - generic [ref=e280]:
+          - link "LxMessage 全局提示" [ref=e284] [cursor=pointer]:
+            - /url: /components/lxmessage.html
+            - paragraph [ref=e285]: LxMessage 全局提示
+          - link "LxConfirm 确认框" [ref=e289] [cursor=pointer]:
+            - /url: /components/lxconfirm.html
+            - paragraph [ref=e290]: LxConfirm 确认框
+          - link "LxDialog 表单弹窗" [ref=e294] [cursor=pointer]:
+            - /url: /components/lxdialog.html
+            - paragraph [ref=e295]: LxDialog 表单弹窗
+          - link "LxDrawer 详情抽屉" [ref=e299] [cursor=pointer]:
+            - /url: /components/lxdrawer.html
+            - paragraph [ref=e300]: LxDrawer 详情抽屉
+          - link "LxFormErrorBanner 校验横幅" [ref=e304] [cursor=pointer]:
+            - /url: /components/lxformerrorbanner.html
+            - paragraph [ref=e305]: LxFormErrorBanner 校验横幅
+  - generic [ref=e310]:
+    - main [ref=e311]:
+      - generic [ref=e313]:
+        - heading "LxDatePicker 日期选择器 Permalink to \"LxDatePicker 日期选择器\"" [level=1] [ref=e314]:
+          - text: LxDatePicker 日期选择器
+          - link "Permalink to \"LxDatePicker 日期选择器\"" [ref=e315] [cursor=pointer]:
+            - /url: "#lxdatepicker-日期选择器"
+            - text: "#"
+        - paragraph [ref=e316]:
+          - text: 基于 Element Plus
+          - code [ref=e317]: el-date-picker
+          - text: 内核二次封装的日期选择器。32px 触发器、主色日历图标、值文字等宽字体（font-mono 契约）；
+          - strong [ref=e318]: 周一起始为默认契约
+          - text: ——组件内置 zh-cn 日历语境（
+          - code [ref=e319]: provideGlobalConfig
+          - text: ，与
+          - code [ref=e320]: ElConfigProvider
+          - text: 等价），不依赖宿主全局 locale 配置；区间分隔符默认中文"至"（EP 原生默认
+          - code [ref=e321]: "-"
+          - text: ）；拖选区间呈连贯浅蓝带
+          - code [ref=e322]: "#ecf5ff"
+          - text: 、起止主色圆点白字（EP 原生 + 变量注入）。
+          - code [ref=e323]: disabled-date
+          - text: /
+          - code [ref=e324]: default-value
+          - text: /
+          - code [ref=e325]: unlink-panels
+          - text: 等经 attrs 透传。
+        - paragraph [ref=e326]:
+          - text: 视觉规范源：
+          - code [ref=e327]: design/表单控件八件套/code.html
+          - text: 06。
+        - heading "交互示例 Permalink to \"交互示例\"" [level=2] [ref=e328]:
+          - text: 交互示例
+          - link "Permalink to \"交互示例\"" [ref=e329] [cursor=pointer]:
+            - /url: "#交互示例"
+            - text: "#"
+        - generic [ref=e330]:
+          - generic [ref=e332]:
+            - checkbox "HUD 深色主题" [ref=e333]
+            - text: HUD 深色主题
+          - generic [ref=e334]:
+            - heading "基础单值（32px 触发器 + 主色日历图标 + 值文字等宽字体）" [level=4] [ref=e335]
+            - generic [ref=e336]:
+              - generic [ref=e337]:
+                - generic [ref=e338]: 布控生效日期
+                - generic [ref=e340]:
+                  - img [ref=e343]
+                  - combobox "布控生效日期" [ref=e345]: 2026-09-15
+              - generic [ref=e346]:
+                - generic [ref=e347]: 月份选择（月度复盘）
+                - generic [ref=e349]:
+                  - img [ref=e352]
+                  - combobox "月份选择（月度复盘）" [ref=e354]: 2026-09
+          - generic [ref=e355]:
+            - heading "日期区间（标本 06 主形态：分隔符\"至\" + 展开双月联动面板 + 周一起始）" [level=4] [ref=e356]
+            - generic [ref=e357]:
+              - generic [ref=e358]: 专项布控日期区间
+              - generic [ref=e359]: 专项布控日期区间开始日期
+              - generic [ref=e360]: 专项布控日期区间结束日期
+              - generic [ref=e361]:
+                - img [ref=e363]
+                - combobox "专项布控日期区间开始日期" [ref=e365]: 2026-09-15
+                - generic [ref=e366]: 至
+                - combobox "专项布控日期区间结束日期" [ref=e367]: 2026-10-08
+            - paragraph [ref=e368]: "面板周表头为\"一 二 三 四 五 六 日\"（内置 zh-cn 语境，周一起始）； 拖选区间时中段呈连贯浅蓝带 #ecf5ff，起止为主色圆点白字。"
+          - generic [ref=e369]:
+            - heading "快捷预设（今日/本周/近30天；左侧竖排位置随 EP 原生）" [level=4] [ref=e370]
+            - generic [ref=e371]:
+              - generic [ref=e372]: 研判时间范围
+              - generic [ref=e373]: 研判时间范围开始日期
+              - generic [ref=e374]: 研判时间范围结束日期
+              - generic [ref=e375]:
+                - img [ref=e377]
+                - combobox "研判时间范围开始日期" [ref=e379]: 2026-09-15
+                - text: 至
+                - combobox "研判时间范围结束日期" [ref=e380]: 2026-10-08
+            - paragraph [ref=e381]: "\"本周\"预设按周一起始计算（与面板周表头同契约）；快捷项点击后回填区间并保持面板开启， 宿主可按业务追加\"案发时段\"等自定义预设。"
+          - generic [ref=e382]:
+            - heading "日期标记" [level=4] [ref=e383]
+            - generic [ref=e384]:
+              - generic [ref=e385]: 专项复盘日期
+              - generic [ref=e387]:
+                - img [ref=e390]
+                - combobox "专项复盘日期" [ref=e392]: 2026-09-15
+          - generic [ref=e393]:
+            - heading "带时间面板（datetimerange：区间 + 时分秒，底部此刻/确定随 EP 原生）" [level=4] [ref=e394]
+            - generic [ref=e395]:
+              - generic [ref=e396]: 告警汇聚窗口
+              - generic [ref=e398]:
+                - img [ref=e401]
+                - combobox "告警汇聚窗口" [ref=e405]: 2026-09-29 08:00:00
+          - generic [ref=e406]:
+            - heading "禁用与只读（禁用半透明；只读可聚焦不可改值）" [level=4] [ref=e407]
+            - generic [ref=e408]:
+              - generic [ref=e409]:
+                - generic [ref=e410]: 省厅锁定区间（禁用）
+                - generic [ref=e411]: 省厅锁定区间开始日期
+                - generic [ref=e412]: 省厅锁定区间结束日期
+                - generic [ref=e413]:
+                  - img [ref=e415]
+                  - combobox "省厅锁定区间开始日期" [disabled] [ref=e417]: 2026-09-01
+                  - generic [ref=e418]: 至
+                  - combobox "省厅锁定区间结束日期" [disabled] [ref=e419]: 2026-09-30
+              - generic [ref=e420]:
+                - generic [ref=e421]: 归档区间（只读）
+                - generic [ref=e422]: 归档区间开始日期
+                - generic [ref=e423]: 归档区间结束日期
+                - generic [ref=e424]:
+                  - img [ref=e426]
+                  - combobox "归档区间开始日期" [ref=e428]: 2026-09-01
+                  - generic [ref=e429]: 至
+                  - combobox "归档区间结束日期" [ref=e430]: 2026-09-30
+          - paragraph [ref=e431]: 选择日期观察触发器与面板行为；演示数据仅存在于页面内存。
+          - paragraph [ref=e432]: "触发器 32px / 4px 圆角 / 1px #dcdfe6 描边，hover 与展开转主色光环；区间分隔符默认\"至\"； disabled-date / default-value 等低频 props 经 attrs 透传给 EP 内核。"
+        - group [ref=e433]:
+          - generic "查看示例代码" [ref=e434] [cursor=pointer]
+        - heading "Props Permalink to \"Props\"" [level=2] [ref=e435]:
+          - text: Props
+          - link "Permalink to \"Props\"" [ref=e436] [cursor=pointer]:
+            - /url: "#props"
+            - text: "#"
+        - table [ref=e437]:
+          - rowgroup [ref=e438]:
+            - row "名称 类型 默认值 说明" [ref=e439]:
+              - columnheader "名称" [ref=e440]
+              - columnheader "类型" [ref=e441]
+              - columnheader "默认值" [ref=e442]
+              - columnheader "说明" [ref=e443]
+          - rowgroup [ref=e444]:
+            - row "modelValue string | number | Date | (string|number|Date)[] — 选中值（v-model；区间类型为二元数组，配 valueFormat 时为格式化字符串）。" [ref=e445]:
+              - cell "modelValue" [ref=e446]:
+                - code [ref=e447]: modelValue
+              - cell "string | number | Date | (string|number|Date)[]" [ref=e448]:
+                - code [ref=e449]: string | number | Date | (string|number|Date)[]
+              - cell "—" [ref=e450]
+              - cell "选中值（v-model；区间类型为二元数组，配 valueFormat 时为格式化字符串）。" [ref=e451]:
+                - text: 选中值（v-model；区间类型为二元数组，配
+                - code [ref=e452]: valueFormat
+                - text: 时为格式化字符串）。
+            - row "type 'date' | 'daterange' | 'datetime' | 'datetimerange' | 'dates' | 'week' | 'month' | 'monthrange' | 'year' | 'yearrange' 'date' 面板类型；quarter 等新增类型经 attrs 透传扩展。" [ref=e453]:
+              - cell "type" [ref=e454]:
+                - code [ref=e455]: type
+              - cell "'date' | 'daterange' | 'datetime' | 'datetimerange' | 'dates' | 'week' | 'month' | 'monthrange' | 'year' | 'yearrange'" [ref=e456]:
+                - code [ref=e457]: "'date' | 'daterange' | 'datetime' | 'datetimerange' | 'dates' | 'week' | 'month' | 'monthrange' | 'year' | 'yearrange'"
+              - cell "'date'" [ref=e458]:
+                - code [ref=e459]: "'date'"
+              - cell "面板类型；quarter 等新增类型经 attrs 透传扩展。" [ref=e460]:
+                - text: 面板类型；
+                - code [ref=e461]: quarter
+                - text: 等新增类型经 attrs 透传扩展。
+            - row "placeholder string '' 占位文案（单值形态）。" [ref=e462]:
+              - cell "placeholder" [ref=e463]:
+                - code [ref=e464]: placeholder
+              - cell "string" [ref=e465]:
+                - code [ref=e466]: string
+              - cell "''" [ref=e467]:
+                - code [ref=e468]: "''"
+              - cell "占位文案（单值形态）。" [ref=e469]
+            - row "startPlaceholder string '' 区间起始占位（range 形态）。" [ref=e470]:
+              - cell "startPlaceholder" [ref=e471]:
+                - code [ref=e472]: startPlaceholder
+              - cell "string" [ref=e473]:
+                - code [ref=e474]: string
+              - cell "''" [ref=e475]:
+                - code [ref=e476]: "''"
+              - cell "区间起始占位（range 形态）。" [ref=e477]
+            - row "endPlaceholder string '' 区间结束占位（range 形态）。" [ref=e478]:
+              - cell "endPlaceholder" [ref=e479]:
+                - code [ref=e480]: endPlaceholder
+              - cell "string" [ref=e481]:
+                - code [ref=e482]: string
+              - cell "''" [ref=e483]:
+                - code [ref=e484]: "''"
+              - cell "区间结束占位（range 形态）。" [ref=e485]
+            - row "rangeSeparator string '至' 区间分隔符；Lx 默认中文契约（EP 原生默认 -）。" [ref=e486]:
+              - cell "rangeSeparator" [ref=e487]:
+                - code [ref=e488]: rangeSeparator
+              - cell "string" [ref=e489]:
+                - code [ref=e490]: string
+              - cell "'至'" [ref=e491]:
+                - code [ref=e492]: "'至'"
+              - cell "区间分隔符；Lx 默认中文契约（EP 原生默认 -）。" [ref=e493]:
+                - text: 区间分隔符；Lx 默认中文契约（EP 原生默认
+                - code [ref=e494]: "-"
+                - text: ）。
+            - row "disabled boolean —（undefined） 禁用态：半透明 + 禁用手势。默认未设置：ElForm 禁用态可正常传导；显式传 true/false 才覆盖继承。" [ref=e495]:
+              - cell "disabled" [ref=e496]:
+                - code [ref=e497]: disabled
+              - cell "boolean" [ref=e498]:
+                - code [ref=e499]: boolean
+              - cell "—（undefined）" [ref=e500]:
+                - text: —（
+                - code [ref=e501]: undefined
+                - text: ）
+              - cell "禁用态：半透明 + 禁用手势。默认未设置：ElForm 禁用态可正常传导；显式传 true/false 才覆盖继承。" [ref=e502]:
+                - text: 禁用态：半透明 + 禁用手势。默认未设置：
+                - code [ref=e503]: ElForm
+                - text: 禁用态可正常传导；显式传
+                - code [ref=e504]: "true"
+                - text: /
+                - code [ref=e505]: "false"
+                - text: 才覆盖继承。
+            - row "readonly boolean false 只读态：可聚焦不可改值。" [ref=e506]:
+              - cell "readonly" [ref=e507]:
+                - code [ref=e508]: readonly
+              - cell "boolean" [ref=e509]:
+                - code [ref=e510]: boolean
+              - cell "false" [ref=e511]:
+                - code [ref=e512]: "false"
+              - cell "只读态：可聚焦不可改值。" [ref=e513]
+            - row "clearable boolean true 可清空：值非空时悬停清除按钮（EP 原生默认 true）。" [ref=e514]:
+              - cell "clearable" [ref=e515]:
+                - code [ref=e516]: clearable
+              - cell "boolean" [ref=e517]:
+                - code [ref=e518]: boolean
+              - cell "true" [ref=e519]:
+                - code [ref=e520]: "true"
+              - cell "可清空：值非空时悬停清除按钮（EP 原生默认 true）。" [ref=e521]
+            - row "format string — 显示格式（dayjs format，如 YYYY-MM-DD）。" [ref=e522]:
+              - cell "format" [ref=e523]:
+                - code [ref=e524]: format
+              - cell "string" [ref=e525]:
+                - code [ref=e526]: string
+              - cell "—" [ref=e527]
+              - cell "显示格式（dayjs format，如 YYYY-MM-DD）。" [ref=e528]:
+                - text: 显示格式（dayjs format，如
+                - code [ref=e529]: YYYY-MM-DD
+                - text: ）。
+            - row "valueFormat string — 值格式（不传则 v-model 为 Date 对象；传则按格式序列化）。" [ref=e530]:
+              - cell "valueFormat" [ref=e531]:
+                - code [ref=e532]: valueFormat
+              - cell "string" [ref=e533]:
+                - code [ref=e534]: string
+              - cell "—" [ref=e535]
+              - cell "值格式（不传则 v-model 为 Date 对象；传则按格式序列化）。" [ref=e536]
+            - 'row "shortcuts { text: string; value: Date | (() => Date | [Date, Date]) }[] — 快捷预设（今日/本周/近30天；位置随 EP 原生左侧竖排，裁剪记录 #8）。" [ref=e537]':
+              - cell "shortcuts" [ref=e538]:
+                - code [ref=e539]: shortcuts
+              - 'cell "{ text: string; value: Date | (() => Date | [Date, Date]) }[]" [ref=e540]':
+                - code [ref=e541]: "{ text: string; value: Date | (() => Date | [Date, Date]) }[]"
+              - cell "—" [ref=e542]
+              - 'cell "快捷预设（今日/本周/近30天；位置随 EP 原生左侧竖排，裁剪记录 #8）。" [ref=e543]'
+            - row "size 'sm' | 'md' | 'lg' 'md' 工程尺寸：28 / 32 / 40px；档名区别于 EP 的 small/default/large。" [ref=e544]:
+              - cell "size" [ref=e545]:
+                - code [ref=e546]: size
+              - cell "'sm' | 'md' | 'lg'" [ref=e547]:
+                - code [ref=e548]: "'sm' | 'md' | 'lg'"
+              - cell "'md'" [ref=e549]:
+                - code [ref=e550]: "'md'"
+              - cell "工程尺寸：28 / 32 / 40px；档名区别于 EP 的 small/default/large。" [ref=e551]:
+                - text: 工程尺寸：28 / 32 / 40px；档名区别于 EP 的
+                - code [ref=e552]: small/default/large
+                - text: 。
+            - row "name string — 原生 name 属性。" [ref=e553]:
+              - cell "name" [ref=e554]:
+                - code [ref=e555]: name
+              - cell "string" [ref=e556]:
+                - code [ref=e557]: string
+              - cell "—" [ref=e558]
+              - cell "原生 name 属性。" [ref=e559]
+        - heading "Events Permalink to \"Events\"" [level=2] [ref=e560]:
+          - text: Events
+          - link "Permalink to \"Events\"" [ref=e561] [cursor=pointer]:
+            - /url: "#events"
+            - text: "#"
+        - table [ref=e562]:
+          - rowgroup [ref=e563]:
+            - row "名称 参数 说明" [ref=e564]:
+              - columnheader "名称" [ref=e565]
+              - columnheader "参数" [ref=e566]
+              - columnheader "说明" [ref=e567]
+          - rowgroup [ref=e568]:
+            - row "update:modelValue (value) 选中值变化。" [ref=e569]:
+              - cell "update:modelValue" [ref=e570]:
+                - code [ref=e571]: update:modelValue
+              - cell "(value)" [ref=e572]:
+                - code [ref=e573]: (value)
+              - cell "选中值变化。" [ref=e574]
+            - row "change (value) 面板确认/清除后值变化（EP 原生）。" [ref=e575]:
+              - cell "change" [ref=e576]:
+                - code [ref=e577]: change
+              - cell "(value)" [ref=e578]:
+                - code [ref=e579]: (value)
+              - cell "面板确认/清除后值变化（EP 原生）。" [ref=e580]
+            - 'row "focus (event: FocusEvent) 聚焦。" [ref=e581]':
+              - cell "focus" [ref=e582]:
+                - code [ref=e583]: focus
+              - 'cell "(event: FocusEvent)" [ref=e584]':
+                - code [ref=e585]: "(event: FocusEvent)"
+              - cell "聚焦。" [ref=e586]
+            - 'row "blur (event: FocusEvent) 失焦。" [ref=e587]':
+              - cell "blur" [ref=e588]:
+                - code [ref=e589]: blur
+              - 'cell "(event: FocusEvent)" [ref=e590]':
+                - code [ref=e591]: "(event: FocusEvent)"
+              - cell "失焦。" [ref=e592]
+        - heading "Exposes Permalink to \"Exposes\"" [level=2] [ref=e593]:
+          - text: Exposes
+          - link "Permalink to \"Exposes\"" [ref=e594] [cursor=pointer]:
+            - /url: "#exposes"
+            - text: "#"
+        - table [ref=e595]:
+          - rowgroup [ref=e596]:
+            - row "名称 说明" [ref=e597]:
+              - columnheader "名称" [ref=e598]
+              - columnheader "说明" [ref=e599]
+          - rowgroup [ref=e600]:
+            - row "focus 聚焦触发器。" [ref=e601]:
+              - cell "focus" [ref=e602]:
+                - code [ref=e603]: focus
+              - cell "聚焦触发器。" [ref=e604]
+            - row "blur 移除焦点。" [ref=e605]:
+              - cell "blur" [ref=e606]:
+                - code [ref=e607]: blur
+              - cell "移除焦点。" [ref=e608]
+        - heading "Slots Permalink to \"Slots\"" [level=2] [ref=e609]:
+          - text: Slots
+          - link "Permalink to \"Slots\"" [ref=e610] [cursor=pointer]:
+            - /url: "#slots"
+            - text: "#"
+        - table [ref=e611]:
+          - rowgroup [ref=e612]:
+            - row "名称 参数 说明" [ref=e613]:
+              - columnheader "名称" [ref=e614]
+              - columnheader "参数" [ref=e615]
+              - columnheader "说明" [ref=e616]
+          - rowgroup [ref=e617]:
+            - row "default DateCell（Element Plus 导出类型） 自定义日期单元，包含 text、dayjs、isCurrent 等内核原始字段；不提供时保留内核默认日期单元。" [ref=e618]:
+              - cell "default" [ref=e619]:
+                - code [ref=e620]: default
+              - cell "DateCell（Element Plus 导出类型）" [ref=e621]:
+                - code [ref=e622]: DateCell
+                - text: （Element Plus 导出类型）
+              - cell "自定义日期单元，包含 text、dayjs、isCurrent 等内核原始字段；不提供时保留内核默认日期单元。" [ref=e623]:
+                - text: 自定义日期单元，包含
+                - code [ref=e624]: text
+                - text: 、
+                - code [ref=e625]: dayjs
+                - text: 、
+                - code [ref=e626]: isCurrent
+                - text: 等内核原始字段；不提供时保留内核默认日期单元。
+            - row "range-separator — 自定义区间分隔符；不提供时使用 rangeSeparator。" [ref=e627]:
+              - cell "range-separator" [ref=e628]:
+                - code [ref=e629]: range-separator
+              - cell "—" [ref=e630]
+              - cell "自定义区间分隔符；不提供时使用 rangeSeparator。" [ref=e631]:
+                - text: 自定义区间分隔符；不提供时使用
+                - code [ref=e632]: rangeSeparator
+                - text: 。
+            - row "prev-month / next-month — 前后月导航图标；不提供时使用内核默认图标。" [ref=e633]:
+              - cell "prev-month / next-month" [ref=e634]:
+                - code [ref=e635]: prev-month
+                - text: /
+                - code [ref=e636]: next-month
+              - cell "—" [ref=e637]
+              - cell "前后月导航图标；不提供时使用内核默认图标。" [ref=e638]
+            - row "prev-year / next-year — 前后年导航图标；面板支持对应导航时生效。" [ref=e639]:
+              - cell "prev-year / next-year" [ref=e640]:
+                - code [ref=e641]: prev-year
+                - text: /
+                - code [ref=e642]: next-year
+              - cell "—" [ref=e643]
+              - cell "前后年导航图标；面板支持对应导航时生效。" [ref=e644]
+            - 'row "sidebar { class: string } 面板侧栏，参数由内核传入；自定义内容须自行保留键盘与可访问名称。" [ref=e645]':
+              - cell "sidebar" [ref=e646]:
+                - code [ref=e647]: sidebar
+              - 'cell "{ class: string }" [ref=e648]':
+                - code [ref=e649]: "{ class: string }"
+              - cell "面板侧栏，参数由内核传入；自定义内容须自行保留键盘与可访问名称。" [ref=e650]
+        - paragraph [ref=e651]:
+          - text: 日期单元插槽保留
+          - code [ref=e652]: el-date-table-cell
+          - text: 与
+          - code [ref=e653]: el-date-table-cell__text
+          - text: 结构时，可继续使用内核的选中、范围和当前日期样式。区间字段通过 attrs 传入成对
+          - code [ref=e654]: id
+          - text: ，并分别用
+          - code [ref=e655]: <label for>
+          - text: 关联开始/结束输入；单值字段使用一个
+          - code [ref=e656]: id
+          - text: 。
+        - heading "低频 props 透传 Permalink to \"低频 props 透传\"" [level=2] [ref=e657]:
+          - text: 低频 props 透传
+          - link "Permalink to \"低频 props 透传\"" [ref=e658] [cursor=pointer]:
+            - /url: "#低频-props-透传"
+            - text: "#"
+        - paragraph [ref=e659]:
+          - code [ref=e660]: disabled-date
+          - text: （禁用日期谓词）、
+          - code [ref=e661]: default-value
+          - text: 、
+          - code [ref=e662]: unlink-panels
+          - text: （双面板独立翻页）、
+          - code [ref=e663]: editable
+          - text: 、
+          - code [ref=e664]: popper-class
+          - text: （与组件锚定类
+          - code [ref=e665]: lx-date-picker__popper
+          - text: 合并保留）、
+          - code [ref=e666]: calendar-change
+          - text: /
+          - code [ref=e667]: panel-change
+          - text: 监听器等经 attrs 直达 EP 内核：
+        - generic [ref=e668]:
+          - button "Copy Code" [ref=e669] [cursor=pointer]
+          - generic [ref=e670]: vue
+          - code [ref=e672]:
+            - generic [ref=e673]: <LxDatePicker
+            - generic [ref=e674]: v-model="range"
+            - generic [ref=e675]: type="daterange"
+            - generic [ref=e676]: value-format="YYYY-MM-DD"
+            - generic [ref=e677]: unlink-panels
+            - generic [ref=e678]: ":disabled-date=\"(date: Date) => date.getTime() > Date.now()\""
+            - generic [ref=e679]: />
+        - heading "周一起始契约 Permalink to \"周一起始契约\"" [level=2] [ref=e680]:
+          - text: 周一起始契约
+          - link "Permalink to \"周一起始契约\"" [ref=e681] [cursor=pointer]:
+            - /url: "#周一起始契约"
+            - text: "#"
+        - paragraph [ref=e682]:
+          - text: 组件 setup 内置
+          - code [ref=e683]: "provideGlobalConfig({ locale: zhCn })"
+          - text: （dayjs zh-cn
+          - code [ref=e684]: "weekStart: 1"
+          - text: ）：面板周表头为"一 二 三 四 五 六 日"，文档站与宿主均无需配置全局 locale。该注入为子树级：不影响宿主其他 EP 组件的全局语境。
+        - heading "与标本的对齐说明 Permalink to \"与标本的对齐说明\"" [level=2] [ref=e685]:
+          - text: 与标本的对齐说明
+          - link "Permalink to \"与标本的对齐说明\"" [ref=e686] [cursor=pointer]:
+            - /url: "#与标本的对齐说明"
+            - text: "#"
+        - table [ref=e687]:
+          - rowgroup [ref=e688]:
+            - row "契约项 标本 06 实现" [ref=e689]:
+              - columnheader "契约项" [ref=e690]
+              - columnheader "标本 06" [ref=e691]
+              - columnheader "实现" [ref=e692]
+          - rowgroup [ref=e693]:
+            - row "周表头 一 二 三 四 五 六 日 内置 zh-cn 语境（周一起始）" [ref=e694]:
+              - cell "周表头" [ref=e695]
+              - cell "一 二 三 四 五 六 日" [ref=e696]
+              - cell "内置 zh-cn 语境（周一起始）" [ref=e697]
+            - row "区间分隔符 \"至\" 默认值差异（EP 原生 -）" [ref=e698]:
+              - cell "区间分隔符" [ref=e699]
+              - cell "\"至\"" [ref=e700]
+              - cell "默认值差异（EP 原生 -）" [ref=e701]:
+                - text: 默认值差异（EP 原生
+                - code [ref=e702]: "-"
+                - text: ）
+            - 'row "区间连贯带 #ecf5ff 浅蓝带 --lx-color-primary-light 经 EP 变量注入 popper（组件级固化）" [ref=e703]':
+              - cell "区间连贯带" [ref=e704]
+              - cell "#ecf5ff 浅蓝带" [ref=e705]:
+                - code [ref=e706]: "#ecf5ff"
+                - text: 浅蓝带
+              - cell "--lx-color-primary-light 经 EP 变量注入 popper（组件级固化）" [ref=e707]:
+                - code [ref=e708]: "--lx-color-primary-light"
+                - text: 经 EP 变量注入 popper（组件级固化）
+            - row "起止日期 主色圆点白字 EP 原生提供" [ref=e709]:
+              - cell "起止日期" [ref=e710]
+              - cell "主色圆点白字" [ref=e711]
+              - cell "EP 原生提供" [ref=e712]
+            - row "前置图标 日历图标主色 --lx-color-primary 覆写" [ref=e713]:
+              - cell "前置图标" [ref=e714]
+              - cell "日历图标主色" [ref=e715]
+              - cell "--lx-color-primary 覆写" [ref=e716]:
+                - code [ref=e717]: "--lx-color-primary"
+                - text: 覆写
+            - row "值文字 font-mono --lx-font-mono" [ref=e718]:
+              - cell "值文字" [ref=e719]
+              - cell "font-mono" [ref=e720]
+              - cell "--lx-font-mono" [ref=e721]:
+                - code [ref=e722]: "--lx-font-mono"
+            - 'row "快捷预设 今日/本周/近30天 shortcuts 契约；位置随 EP 原生（裁剪记录 #8）" [ref=e723]':
+              - cell "快捷预设" [ref=e724]
+              - cell "今日/本周/近30天" [ref=e725]
+              - 'cell "shortcuts 契约；位置随 EP 原生（裁剪记录 #8）" [ref=e726]':
+                - code [ref=e727]: shortcuts
+                - text: "契约；位置随 EP 原生（裁剪记录 #8）"
+            - row "双月联动 展开双月面板 EP 原生 + unlink-panels 透传" [ref=e728]:
+              - cell "双月联动" [ref=e729]
+              - cell "展开双月面板" [ref=e730]
+              - cell "EP 原生 + unlink-panels 透传" [ref=e731]:
+                - text: EP 原生 +
+                - code [ref=e732]: unlink-panels
+                - text: 透传
+            - 'row "触控目标 32px 触屏（hover: none）44px（与输入类族同族契约）" [ref=e733]':
+              - cell "触控目标" [ref=e734]
+              - cell "32px" [ref=e735]
+              - 'cell "触屏（hover: none）44px（与输入类族同族契约）" [ref=e736]':
+                - text: 触屏（
+                - code [ref=e737]: "hover: none"
+                - text: ）44px（与输入类族同族契约）
+        - heading "可访问性 Permalink to \"可访问性\"" [level=2] [ref=e738]:
+          - text: 可访问性
+          - link "Permalink to \"可访问性\"" [ref=e739] [cursor=pointer]:
+            - /url: "#可访问性"
+            - text: "#"
+        - paragraph [ref=e740]:
+          - text: 触发器为 combobox 语义（EP 内核）；单值与区间形态键盘可达（Tab 切换起止输入）；错误态红底红边在
+          - code [ref=e741]: LxForm
+          - text: 校验上下文自动生效（组件级固化，脱离全局桥不漂移）；开启"减少动效"时边框过渡关闭。
+        - heading "Vue3 宿主适配 Permalink to \"Vue3 宿主适配\"" [level=2] [ref=e742]:
+          - text: Vue3 宿主适配
+          - link "Permalink to \"Vue3 宿主适配\"" [ref=e743] [cursor=pointer]:
+            - /url: "#vue3-宿主适配"
+            - text: "#"
+        - paragraph [ref=e744]:
+          - text: 业务层直接使用
+          - code [ref=e745]: LxDatePicker
+          - text: （或全局组件名
+          - code [ref=e746]: <LxDatePicker />
+          - text: ）。旧 Vue2 项目的
+          - code [ref=e747]: el-date-picker
+          - text: 周起始依赖全局 locale 配置，迁移后由组件内置语境保证，无需宿主重复配置；宿主存量
+          - code [ref=e748]: el-date-picker
+          - text: 直用页面按 UI-04 波次另行替换。
+    - contentinfo [ref=e749]:
+      - navigation "Pager" [ref=e750]:
+        - generic [ref=e751]: Pager
+        - link "Previous page LxTreeSelect 树形下拉" [ref=e753] [cursor=pointer]:
+          - /url: /components/lxtreeselect.html
+          - generic [ref=e754]: Previous page
+          - generic [ref=e755]: LxTreeSelect 树形下拉
+        - link "Next page LxInputNumber 数字输入" [ref=e757] [cursor=pointer]:
+          - /url: /components/lxinputnumber.html
+          - generic [ref=e758]: Next page
+          - generic [ref=e759]: LxInputNumber 数字输入
+```

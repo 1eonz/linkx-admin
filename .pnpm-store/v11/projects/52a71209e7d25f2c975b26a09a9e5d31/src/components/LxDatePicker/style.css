@@ -58,11 +58,11 @@
   opacity: 0.6;
 }
 
-/* 错误态：红底红边一体化（标本八件套错误行，依赖 ElForm/LxForm 上下文） */
+/* 错误态：使用表单专属校验令牌，依赖 ElForm/LxForm 上下文。 */
 .el-form-item.is-error .lx-date-picker .el-input__wrapper,
 .el-form-item.is-error .lx-date-picker.el-input__wrapper {
-  background-color: var(--lx-color-error-light);
-  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
+  background-color: var(--lx-color-form-error-bg);
+  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
 }
 
 .el-form-item.is-error .lx-date-picker .el-input__wrapper.is-focus,
@@ -70,33 +70,237 @@
   outline: none;
   outline-offset: 0;
   box-shadow:
-    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 1px var(--lx-color-form-error) inset,
     0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
-/* 错误态值文字同步变红：error-strong 深红做小字号对比度补偿（DESIGN-SPEC §3.2） */
+/* 表单校验错误值与边线使用同一表单错误令牌。 */
 .el-form-item.is-error .lx-date-picker .el-input__inner,
 .el-form-item.is-error .lx-date-picker .el-range-input {
-  color: var(--lx-color-error-strong);
+  color: var(--lx-color-form-error);
+}
+
+/* HUD 主题将宿主输入表面的根令牌映射到局部作用域，这里同步触发器表面与文字。 */
+.lx-theme-hud .lx-date-picker .el-input__wrapper,
+.lx-theme-hud .lx-date-picker.el-input__wrapper {
+  background-color: var(--lx-bg-card);
+  box-shadow: 0 0 0 1px var(--lx-border) inset;
+}
+
+.lx-theme-hud .lx-date-picker .el-input__wrapper:hover,
+.lx-theme-hud .lx-date-picker.el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--lx-color-primary) inset;
+}
+
+.lx-theme-hud .lx-date-picker .el-input__wrapper.is-focus,
+.lx-theme-hud .lx-date-picker.el-input__wrapper.is-active {
+  box-shadow:
+    0 0 0 1px var(--lx-color-primary) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+.lx-theme-hud .lx-date-picker .el-input__inner,
+.lx-theme-hud .lx-date-picker .el-range-input {
+  color: var(--lx-text-primary);
+}
+
+.lx-theme-hud .lx-date-picker .el-input__inner::placeholder,
+.lx-theme-hud .lx-date-picker .el-range-input::placeholder {
+  color: var(--lx-text-placeholder);
 }
 
 /* ===== Popper 终态（teleport 到 body，lx-date-picker__popper 锚定）===== */
 /* 面板：4px 圆角 + pop 档阴影（与 Select 面板同族）；
  * 区间连贯浅蓝带 #ecf5ff 经 EP 变量注入（--el-datepicker-inrange-bg-color，
  * 作用于 .el-date-table td.in-range .el-date-table-cell）；
- * 起止主色圆点白字由 EP 原生提供，周一起始由内置 zh-cn locale 提供 */
-.lx-date-picker__popper.el-picker__popper {
+ * 起止主色圆点保留 EP 内核样式，文字使用主题对应的高对比令牌；周一起始由内置 zh-cn locale 提供 */
+html:root .lx-date-picker__popper.el-picker__popper {
   border-radius: var(--lx-radius-md);
   box-shadow: var(--lx-shadow-pop);
   --el-datepicker-inrange-bg-color: var(--lx-color-primary-light);
   --el-datepicker-inrange-hover-bg-color: var(--lx-color-primary-light);
 }
 
+html:root
+  .lx-date-picker__popper
+  .el-date-table
+  td.in-range
+  .el-date-table-cell__text {
+  color: var(--lx-text-primary);
+}
+
+html:root
+  .lx-date-picker__popper
+  .el-date-table
+  td.in-range
+  .el-date-table-cell {
+  background-color: var(--lx-color-primary-light);
+}
+
+html:root
+  .lx-date-picker__popper
+  .el-date-table
+  td.current:not(.disabled)
+  .el-date-table-cell__text,
+html:root
+  .lx-date-picker__popper
+  .el-date-table
+  td.start-date:not(.disabled)
+  .el-date-table-cell__text,
+html:root
+  .lx-date-picker__popper
+  .el-date-table
+  td.end-date:not(.disabled)
+  .el-date-table-cell__text {
+  color: var(--lx-color-on-primary);
+}
+
+html:root
+  .lx-date-picker__popper
+  .el-date-table
+  td:focus-visible
+  .el-date-table-cell__text {
+  border-radius: 50%;
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
 /* ===== 触屏 ===== */
 /* 触屏（无 hover 能力）：44px 最小触控目标（与输入/选择族同族契约） */
-@media (hover: none) {
+@media (hover: none), (max-width: 640px) {
   .lx-date-picker .el-input__wrapper,
   .lx-date-picker.el-input__wrapper {
     min-height: 44px;
+  }
+
+  .lx-date-picker__popper .el-date-table td {
+    min-width: 44px;
+    height: 45px;
+    padding: 0;
+  }
+
+  .lx-date-picker__popper .el-date-table td .el-date-table-cell {
+    min-width: 44px;
+    height: 45px;
+    padding: 0;
+  }
+
+  .lx-date-picker__popper .el-picker-panel__icon-btn {
+    display: inline-grid;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    place-items: center;
+  }
+
+  .lx-date-picker__popper .el-picker-panel:has(.el-picker-panel__sidebar) {
+    box-sizing: border-box;
+    display: flex;
+    width: min(360px, calc(100vw - 8px));
+    max-width: calc(100vw - 8px);
+    flex-direction: column;
+  }
+
+  .lx-date-picker__popper .el-picker-panel__sidebar {
+    position: relative;
+    inset: auto;
+    display: grid;
+    width: auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+    padding: 8px;
+    border-right: 0;
+    border-bottom: 1px solid var(--lx-border-light);
+  }
+
+  .lx-date-picker__popper .el-picker-panel__shortcut {
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 6px;
+    text-align: center;
+  }
+
+  html:root .lx-date-picker__popper .el-date-range-picker__content {
+    box-sizing: border-box;
+    width: min(308px, calc(100vw - 16px));
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  html:root .lx-date-picker__popper .el-date-range-picker.single-panel {
+    box-sizing: border-box;
+    width: min(322px, calc(100vw - 8px));
+    max-width: calc(100vw - 8px);
+  }
+
+  html:root
+    .lx-date-picker__popper
+    .el-date-range-picker.single-panel.has-sidebar {
+    width: min(360px, calc(100vw - 8px));
+  }
+
+  html:root
+    .lx-date-picker__popper
+    .el-date-range-picker.single-panel
+    .el-picker-panel__body {
+    width: 100%;
+    min-width: 0;
+  }
+
+  html:root .lx-date-picker__popper .el-date-table {
+    width: min(308px, calc(100vw - 16px));
+    table-layout: fixed;
+  }
+
+  .lx-date-picker__popper .el-date-table td .el-date-table-cell {
+    width: 44px;
+    margin-inline: auto;
+  }
+
+  html:root .lx-date-picker__popper .el-picker-panel__body-wrapper,
+  html:root .lx-date-picker__popper .el-picker-panel__body {
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+  }
+
+  .lx-date-picker__popper .el-picker-panel__body-wrapper {
+    flex: 1 1 auto;
+  }
+
+  .lx-date-picker__popper
+    .el-date-table
+    td
+    .el-date-table-cell
+    .el-date-table-cell__text {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* 极窄桌面窗口保留可见滚动条时，压缩鼠标命中格以避免弹层挤出内容区。 */
+@media (max-width: 330px) and (hover: hover) and (pointer: fine) {
+  .lx-date-picker__popper .el-picker-panel:has(.el-picker-panel__sidebar),
+  html:root .lx-date-picker__popper .el-date-range-picker.single-panel,
+  html:root
+    .lx-date-picker__popper
+    .el-date-range-picker.single-panel.has-sidebar {
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+  }
+
+  html:root .lx-date-picker__popper .el-date-range-picker__content,
+  html:root .lx-date-picker__popper .el-date-table {
+    width: calc(100vw - 24px);
+  }
+
+  .lx-date-picker__popper .el-date-table td,
+  .lx-date-picker__popper .el-date-table td .el-date-table-cell {
+    min-width: 40px;
+  }
+
+  .lx-date-picker__popper .el-date-table td .el-date-table-cell {
+    width: 40px;
   }
 }

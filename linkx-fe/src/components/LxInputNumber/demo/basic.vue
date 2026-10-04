@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+
 import LxInputNumber from '../index.vue'
 
 const hudTheme = ref(false)
+const showControls = ref(true)
 
 /** Panel 1 基础步进：巡逻车组配置配额（标本 05 文案语境，步长 1） */
 const quota = ref<number>(30)
+/** 告警确认时限：与巡逻配额相互独立 */
+const acknowledgementMinutes = ref<number>(30)
 /** Panel 2 极值：最高并发处警上限（max=100，达到后减少钮禁用） */
 const maxConcurrency = ref<number>(100)
 /** Panel 3 小数步长与精度 */
@@ -33,16 +37,22 @@ function reportChange(
         <input v-model="hudTheme" type="checkbox" />
         HUD 深色主题
       </label>
+      <label>
+        <input v-model="showControls" type="checkbox" />
+        显示步进器
+      </label>
     </div>
 
     <section class="lx-input-number-demo__panel" data-testid="basic">
       <h4>基础步进（160px 宽 + 右侧垂直拆分步进钮 + 值文字 mono 左对齐）</h4>
       <div class="lx-input-number-demo__row">
         <div class="lx-input-number-demo__field">
-          <span class="lx-input-number-demo__label"
-            >巡逻车组配置配额（步长 1）</span
+          <label class="lx-input-number-demo__label" for="demo-number-quota"
+            >巡逻车组配置配额（步长 1）</label
           >
           <LxInputNumber
+            id="demo-number-quota"
+            name="patrolQuota"
             v-model="quota"
             :min="0"
             :max="200"
@@ -53,11 +63,12 @@ function reportChange(
           />
         </div>
         <div class="lx-input-number-demo__field">
-          <span class="lx-input-number-demo__label"
-            >告警确认时限（分钟，步长 5）</span
+          <label class="lx-input-number-demo__label" for="demo-number-timeout"
+            >告警确认时限（分钟，步长 5）</label
           >
           <LxInputNumber
-            v-model="quota"
+            id="demo-number-timeout"
+            v-model="acknowledgementMinutes"
             :min="0"
             :max="120"
             :step="5"
@@ -78,8 +89,11 @@ function reportChange(
     <section class="lx-input-number-demo__panel" data-testid="limit">
       <h4>极值边界（max=100：达到上限后增加钮禁用半透明）</h4>
       <div class="lx-input-number-demo__field">
-        <span class="lx-input-number-demo__label">最高并发处警上限</span>
+        <label class="lx-input-number-demo__label" for="demo-number-limit"
+          >最高并发处警上限</label
+        >
         <LxInputNumber
+          id="demo-number-limit"
           v-model="maxConcurrency"
           :min="1"
           :max="100"
@@ -99,10 +113,11 @@ function reportChange(
       <h4>小数步长与精度（step 0.1 / precision 1：值守灵敏度系数）</h4>
       <div class="lx-input-number-demo__row">
         <div class="lx-input-number-demo__field">
-          <span class="lx-input-number-demo__label"
-            >灵敏度系数（0.1 步长）</span
+          <label class="lx-input-number-demo__label" for="demo-number-threshold"
+            >灵敏度系数（0.1 步长）</label
           >
           <LxInputNumber
+            id="demo-number-threshold"
             v-model="threshold"
             :min="0"
             :max="2"
@@ -115,10 +130,13 @@ function reportChange(
           />
         </div>
         <div class="lx-input-number-demo__field">
-          <span class="lx-input-number-demo__label"
-            >无步进钮形态（controls=false）</span
+          <label
+            class="lx-input-number-demo__label"
+            for="demo-number-no-controls"
+            >无步进钮形态（controls=false）</label
           >
           <LxInputNumber
+            id="demo-number-no-controls"
             v-model="threshold"
             :min="0"
             :max="2"
@@ -133,16 +151,43 @@ function reportChange(
       <h4>尺寸档（sm=28px / md=32px 基准 / lg=40px）</h4>
       <div class="lx-input-number-demo__row">
         <div class="lx-input-number-demo__field">
-          <span class="lx-input-number-demo__label">紧凑档 sm</span>
-          <LxInputNumber v-model="quota" size="sm" :min="0" :max="200" />
+          <label class="lx-input-number-demo__label" for="demo-number-small"
+            >紧凑档 sm</label
+          >
+          <LxInputNumber
+            id="demo-number-small"
+            v-model="quota"
+            size="sm"
+            :controls="showControls"
+            :min="0"
+            :max="200"
+          />
         </div>
         <div class="lx-input-number-demo__field">
-          <span class="lx-input-number-demo__label">基准档 md（默认）</span>
-          <LxInputNumber v-model="quota" size="md" :min="0" :max="200" />
+          <label class="lx-input-number-demo__label" for="demo-number-medium"
+            >基准档 md（默认）</label
+          >
+          <LxInputNumber
+            id="demo-number-medium"
+            v-model="quota"
+            size="md"
+            :controls="showControls"
+            :min="0"
+            :max="200"
+          />
         </div>
         <div class="lx-input-number-demo__field">
-          <span class="lx-input-number-demo__label">宽松档 lg</span>
-          <LxInputNumber v-model="quota" size="lg" :min="0" :max="200" />
+          <label class="lx-input-number-demo__label" for="demo-number-large"
+            >宽松档 lg</label
+          >
+          <LxInputNumber
+            id="demo-number-large"
+            v-model="quota"
+            size="lg"
+            :controls="showControls"
+            :min="0"
+            :max="200"
+          />
         </div>
       </div>
     </section>
@@ -150,8 +195,16 @@ function reportChange(
     <section class="lx-input-number-demo__panel" data-testid="disabled">
       <h4>禁用态（半透明 + 禁用手势）</h4>
       <div class="lx-input-number-demo__field">
-        <span class="lx-input-number-demo__label">省厅锁定配额（禁用）</span>
-        <LxInputNumber v-model="lockedQuota" :min="0" :max="100" disabled />
+        <label class="lx-input-number-demo__label" for="demo-number-locked"
+          >省厅锁定配额（禁用）</label
+        >
+        <LxInputNumber
+          id="demo-number-locked"
+          v-model="lockedQuota"
+          :min="0"
+          :max="100"
+          disabled
+        />
       </div>
     </section>
 
@@ -230,7 +283,7 @@ function reportChange(
   margin: 0;
   font-size: 12px;
   line-height: 1.6;
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
 }
 
 .lx-input-number-demo__note {

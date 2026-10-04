@@ -62,5 +62,5 @@ import Basic from '../../src/components/LxActionButtons/demo/basic.vue';
 - 语义色按映射表取档：编辑=primary、删除/禁用=danger、启用/恢复=warning、激活/授权=success；折叠进「更多」后颜色保持一致。
 - 危险操作（删除/停用）标 `type: 'danger'`，点击后必须接 lxConfirm 二次确认。
 - 权限过滤在业务侧完成（`hidden: true` 或直接不传入）；权限/显隐变化后「更多」入口自动增减，无需手动管理。
-- 「更多」支持点击、Tab/Enter/Space 与 Escape，焦点移出或点击外部时收起；收起后焦点回到触发按钮。
+- 「更多」支持点击、Tab/Enter/Space 与 Escape；Escape 或选择溢出项后焦点回到触发按钮，焦点移出或点击外部时收起但保留用户的新焦点位置。
 - 窄屏下操作按钮和菜单项至少 44px 高；超长操作名称允许换行，不撑宽页面。

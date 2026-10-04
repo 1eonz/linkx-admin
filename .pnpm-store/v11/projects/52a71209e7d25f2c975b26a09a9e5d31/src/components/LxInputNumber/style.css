@@ -50,8 +50,12 @@
 /* ===== 步进钮（controls-right 右侧垂直拆分为默认形态）===== */
 /* 闭合态：透明白底（EP 原生浅灰 fill 底；标本 05 白底 + #dcdfe6 分隔线由
  * EP 原生 border-left/border-bottom 提供） */
-.lx-input-number .el-input-number__increase,
-.lx-input-number .el-input-number__decrease {
+.lx-input-number.el-input-number.is-controls-right .el-input-number__increase,
+.lx-input-number.el-input-number.is-controls-right .el-input-number__decrease {
+  /* EP 按 sm/md 的固定 11/15px 高度计算，当前 34/36px 触发器会在两个按钮之间留下空隙。
+   * 按触发器实际高度对半分配，保留 1px 中间分隔线并让上下按钮连续贴合。 */
+  height: calc(50% - 1px) !important;
+  line-height: calc(50% - 1px) !important;
   background: transparent;
   transition:
     color var(--lx-transition),
@@ -71,23 +75,23 @@
   opacity: 0.6;
 }
 
-/* 错误态：红底红边一体化（标本八件套错误行，依赖 ElForm/LxForm 上下文） */
+/* 错误态：使用表单专属校验令牌，依赖 ElForm/LxForm 上下文。 */
 .el-form-item.is-error .lx-input-number .el-input__wrapper {
-  background-color: var(--lx-color-error-light);
-  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
+  background-color: var(--lx-color-form-error-bg);
+  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
 }
 
 .el-form-item.is-error .lx-input-number .el-input__wrapper.is-focus {
   outline: none;
   outline-offset: 0;
   box-shadow:
-    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 1px var(--lx-color-form-error) inset,
     0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
-/* 错误态值文字同步变红：error-strong 深红做小字号对比度补偿（DESIGN-SPEC §3.2） */
+/* 表单校验错误值与边线使用同一表单错误令牌。 */
 .el-form-item.is-error .lx-input-number .el-input__inner {
-  color: var(--lx-color-error-strong);
+  color: var(--lx-color-form-error);
 }
 
 /* ===== 触屏 ===== */

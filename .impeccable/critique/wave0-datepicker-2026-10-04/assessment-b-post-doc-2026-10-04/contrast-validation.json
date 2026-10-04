@@ -1,0 +1,11 @@
+{
+  "method": "输入颜色来自浏览器记录的 computed foreground/background RGB，之后独立重算 WCAG 相对亮度比；HUD 区间中段的 rgba 背景按实测日历底色 rgb(22, 35, 58) 合成。原采集脚本内联的 ratio 字段为空，因 RGB 解析器未匹配到数字；报告以此处的重算值为准。",
+  "samples": [
+    { "theme": "light", "sample": "range-mid", "foreground": "rgb(29, 33, 41)", "background": "rgb(236, 245, 255)", "ratio": 14.65 },
+    { "theme": "light", "sample": "range-endpoint", "foreground": "rgb(255, 255, 255)", "background": "rgb(0, 96, 169)", "ratio": 6.47 },
+    { "theme": "light", "sample": "weekday", "foreground": "rgb(78, 89, 105)", "background": "rgb(255, 255, 255)", "ratio": 7.1 },
+    { "theme": "HUD", "sample": "range-mid", "foreground": "rgb(226, 232, 240)", "background": "rgba(56, 189, 248, 0.12)", "underlay": "rgb(22, 35, 58)", "ratio": 10.19 },
+    { "theme": "HUD", "sample": "range-endpoint", "foreground": "rgb(11, 18, 32)", "background": "rgb(56, 189, 248)", "ratio": 8.74 },
+    { "theme": "HUD", "sample": "weekday", "foreground": "rgb(148, 163, 184)", "background": "rgb(22, 35, 58)", "ratio": 6.13 }
+  ]
+}

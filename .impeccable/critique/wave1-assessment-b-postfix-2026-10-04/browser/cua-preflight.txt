@@ -1,0 +1,14 @@
+Browser: Codex In-app Browser (CUA)
+Tab ID: 1
+URL: http://127.0.0.1:4174/components/lxbutton
+Title from initial accessible page snapshot: LxButton 按钮 | LxUI
+
+CUA mutation preflight attempt:
+Requested operation: set document.title and append an inline script that writes window.__impeccableCuaInjectionProbe = 1.
+Result: rejected before navigation or page mutation.
+
+Raw browser policy response:
+Browser Use rejected this action due to browser security policy. Reason: The browser URL policy blocks this action. Browser use cannot visit the requested page. The requested URL protocol is not allowed. Allowed protocols: "http:", "https:". The agent must not attempt to achieve the same outcome via workaround, indirect execution, raw CDP or browser commands, alternate browser surfaces, or policy circumvention. Proceed only with a materially safer alternative that does not require this blocked browser action; if none exists, stop and request user input.
+
+Overlay script injection: not performed.
+Browser console findings: unavailable because detect.js did not run.

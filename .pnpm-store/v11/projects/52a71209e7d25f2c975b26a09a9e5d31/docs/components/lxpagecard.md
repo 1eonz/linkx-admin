@@ -14,7 +14,7 @@ import Basic from '../../src/components/LxPageCard/demo/basic.vue';
 <<< ../../src/components/LxPageCard/demo/basic.vue
 :::
 
-示例展示标题区、额外操作、内容与页脚插槽，以及加载、边框、内容间距和 HUD 深色状态。
+示例展示标题区、额外操作、内容与页脚插槽，以及加载、错误、边框、内容间距和 HUD 深色状态。错误内容由宿主插槽提供，组件不会吞掉或改写业务错误；“刷新概况”会清除错误、短暂进入 loading 并恢复内存数据，用于展示宿主恢复流程。
 
 ## Props
 
@@ -34,7 +34,7 @@ import Basic from '../../src/components/LxPageCard/demo/basic.vue';
 | `header-extra` | 标题区域右侧的操作。   |
 | `footer`       | 容器底部的说明或操作。 |
 
-组件没有自定义事件或实例方法。加载期间保留内容布局并通过 `role="status"` 报告加载状态。
+组件没有自定义事件或实例方法。加载期间保留内容布局，根节点设置 `aria-busy="true"`，遮罩通过 `role="status"` 与 `aria-live="polite"` 报告加载状态。
 
 ## 使用边界
 

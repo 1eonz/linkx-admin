@@ -1,13 +1,36 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
 
 import LxPageCard from '../index.vue'
 
 const loading = ref(false)
 const bordered = ref(true)
 const bodyPadding = ref(true)
+const showError = ref(false)
 const hudTheme = ref(false)
 const lastAction = ref('页面状态由宿主持有；示例不会请求后端。')
+let refreshTimer: number | undefined
+
+function refreshCard() {
+  if (refreshTimer !== undefined) {
+    window.clearTimeout(refreshTimer)
+  }
+  showError.value = false
+  loading.value = true
+  lastAction.value = '正在刷新概况（内存示例）'
+  refreshTimer = window.setTimeout(() => {
+    loading.value = false
+    lastAction.value = '概况已刷新（内存示例）'
+    refreshTimer = undefined
+  }, 320)
+}
+
+onBeforeUnmount(() => {
+  if (refreshTimer !== undefined) {
+    window.clearTimeout(refreshTimer)
+    refreshTimer = undefined
+  }
+})
 </script>
 
 <template>
@@ -16,6 +39,7 @@ const lastAction = ref('页面状态由宿主持有；示例不会请求后端�
       <label><input v-model="loading" type="checkbox" />加载遮罩</label>
       <label><input v-model="bordered" type="checkbox" />显示边框</label>
       <label><input v-model="bodyPadding" type="checkbox" />内容内边距</label>
+      <label><input v-model="showError" type="checkbox" />展示错误态</label>
       <label><input v-model="hudTheme" type="checkbox" />HUD 深色主题</label>
     </div>
 
@@ -30,13 +54,17 @@ const lastAction = ref('页面状态由宿主持有；示例不会请求后端�
         <button
           class="page-card-demo__refresh"
           type="button"
-          @click="lastAction = '概况已刷新（内存示例）'"
+          @click="refreshCard"
         >
           刷新概况
         </button>
       </template>
 
-      <div class="page-card-demo__body">
+      <div v-if="showError" class="page-card-demo__error" role="alert">
+        <strong>数据同步失败</strong>
+        <span>请检查网络后重试，当前内容仍保留。</span>
+      </div>
+      <div v-else class="page-card-demo__body">
         <div><span>在线节点</span><strong>18 / 20</strong></div>
         <div><span>待处理告警</span><strong>3 项</strong></div>
       </div>
@@ -68,10 +96,10 @@ const lastAction = ref('页面状态由宿主持有；示例不会请求后端�
 .page-card-demo {
   display: grid;
   min-width: 0;
-  gap: 14px;
-  padding: 16px;
+  gap: var(--lx-space-md);
+  padding: var(--lx-space-lg);
   border: 1px solid var(--lx-border);
-  border-radius: 4px;
+  border-radius: var(--lx-radius-md);
   background: var(--lx-bg-card);
   color: var(--lx-text-regular);
 }
@@ -79,14 +107,14 @@ const lastAction = ref('页面状态由宿主持有；示例不会请求后端�
 .page-card-demo__controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 16px;
+  gap: var(--lx-space-sm) var(--lx-space-lg);
 }
 
 .page-card-demo__controls label {
   display: inline-flex;
   min-height: 32px;
   align-items: center;
-  gap: 8px;
+  gap: var(--lx-space-sm);
   color: var(--lx-text-secondary);
   font-size: 13px;
 }
@@ -97,7 +125,7 @@ const lastAction = ref('页面状态由宿主持有；示例不会请求后端�
 
 .page-card-demo__refresh {
   min-height: 36px;
-  padding: 0 10px;
+  padding: 0 var(--lx-space-sm);
   border: 1px solid var(--lx-border);
   border-radius: var(--lx-radius-sm);
   background: transparent;
@@ -113,12 +141,12 @@ const lastAction = ref('页面状态由宿主持有；示例不会请求后端�
 .page-card-demo__body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: var(--lx-space-lg);
 }
 
 .page-card-demo__body div {
   display: grid;
-  gap: 6px;
+  gap: var(--lx-space-sm);
 }
 
 .page-card-demo__body span,
@@ -133,6 +161,22 @@ const lastAction = ref('页面状态由宿主持有；示例不会请求后端�
   font-size: 18px;
 }
 
+.page-card-demo__error {
+  display: grid;
+  gap: var(--lx-space-xs);
+  padding: var(--lx-space-md);
+  border: 1px solid var(--lx-color-error-border);
+  border-radius: var(--lx-radius-md);
+  background: var(--lx-color-error-light);
+  color: var(--lx-color-error-strong);
+  font-size: 13px;
+}
+
+.page-card-demo__error strong {
+  color: var(--lx-color-error-strong);
+  font-size: 13px;
+}
+
 .page-card-demo__status {
   min-height: 20px;
   margin: 0;
@@ -140,7 +184,7 @@ const lastAction = ref('页面状态由宿主持有；示例不会请求后端�
 
 @media (max-width: 480px) {
   .page-card-demo {
-    padding: 12px;
+    padding: var(--lx-space-md);
   }
 
   .page-card-demo__body {

@@ -1,31 +1,46 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import LxIcon from '../LxIcon/index.vue';
-import { lxMessage } from '../LxMessage';
-import type { LxCodeSlotProps } from './types';
+import { onMounted, onUpdated, ref } from 'vue'
+import LxIcon from '../LxIcon/index.vue'
+import { lxMessage } from '../LxMessage'
+import type { LxCodeSlotProps } from './types'
 
-defineOptions({ name: 'LxCodeSlot' });
+defineOptions({ name: 'LxCodeSlot' })
 
 const props = withDefaults(defineProps<LxCodeSlotProps>(), {
   copyable: true,
   ellipsis: false,
-});
+})
 
-const emit = defineEmits<{ copy: [value: string] }>();
-const contentRef = ref<HTMLElement>();
+const emit = defineEmits<{ copy: [value: string] }>()
+const contentRef = ref<HTMLElement>()
+const copyTitle = ref('点击复制')
+
+function updateCopyTitle() {
+  const value = contentRef.value?.textContent?.trim() ?? ''
+  const title =
+    props.ellipsis && value
+      ? `${props.copyable ? '点击复制：' : '完整内容：'}${value}`
+      : props.copyable
+        ? '点击复制'
+        : ''
+  if (copyTitle.value !== title) copyTitle.value = title
+}
+
+onMounted(updateCopyTitle)
+onUpdated(updateCopyTitle)
 
 async function copy() {
-  if (!props.copyable) return;
-  const value = contentRef.value?.textContent?.trim() ?? '';
-  if (!value) return;
+  if (!props.copyable) return
+  const value = contentRef.value?.textContent?.trim() ?? ''
+  if (!value) return
 
   try {
-    if (!navigator.clipboard) throw new Error('Clipboard API is unavailable');
-    await navigator.clipboard.writeText(value);
-    emit('copy', value);
-    lxMessage.success('已复制');
+    if (!navigator.clipboard) throw new Error('Clipboard API is unavailable')
+    await navigator.clipboard.writeText(value)
+    emit('copy', value)
+    lxMessage.success('已复制')
   } catch {
-    lxMessage.error('复制失败，请手动复制');
+    lxMessage.error('复制失败，请手动复制')
   }
 }
 </script>
@@ -36,19 +51,28 @@ async function copy() {
     class="lx-code-slot lx-code-slot--copyable"
     :class="{ 'is-ellipsis': ellipsis }"
     type="button"
-    title="点击复制"
+    :title="copyTitle"
+    aria-label="点击复制代码"
     @click="copy"
   >
     <span ref="contentRef" class="lx-code-slot__content"><slot /></span>
     <LxIcon name="copy" :size="14" class="lx-code-slot__icon" />
   </button>
-  <span v-else ref="contentRef" class="lx-code-slot" :class="{ 'is-ellipsis': ellipsis }"><slot /></span>
+  <span
+    v-else
+    ref="contentRef"
+    class="lx-code-slot"
+    :class="{ 'is-ellipsis': ellipsis }"
+    :title="copyTitle || undefined"
+    ><slot
+  /></span>
 </template>
 
 <style scoped>
 .lx-code-slot {
   display: inline-flex;
   align-items: center;
+  min-width: 0;
   max-width: 100%;
   gap: var(--lx-space-xs);
   padding: 2px 6px;
@@ -64,7 +88,10 @@ async function copy() {
 
 .lx-code-slot--copyable {
   cursor: pointer;
-  transition: color var(--lx-transition), border-color var(--lx-transition), background-color var(--lx-transition);
+  transition:
+    color var(--lx-transition),
+    border-color var(--lx-transition),
+    background-color var(--lx-transition);
 }
 
 .lx-code-slot--copyable:hover {
@@ -91,5 +118,11 @@ async function copy() {
 .lx-code-slot__icon {
   flex-shrink: 0;
   opacity: 0.72;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-code-slot--copyable {
+    transition: none;
+  }
 }
 </style>

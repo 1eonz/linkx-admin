@@ -75,6 +75,34 @@ describe('LxSelect', () => {
     wrapper.unmount();
   });
 
+  it('配置式选项重排后保留相同文本值的数字、字符串和布尔类型', async () => {
+    const warnings: string[] = [];
+    const options = [
+      { label: '数字编号', value: 1 },
+      { label: '字符串编号', value: '1' },
+      { label: '布尔开关', value: true },
+      { label: '字符串开关', value: 'true' },
+    ];
+    const wrapper = mount(LxSelect, {
+      props: { options, modelValue: '' },
+      attachTo: document.body,
+      global: { config: { warnHandler: (message) => warnings.push(message) } },
+    });
+
+    await wrapper.setProps({ options: [...options].reverse() });
+    await wrapper.find('.el-select__wrapper').trigger('click');
+    const items = Array.from(document.body.querySelectorAll('.lx-select__popper .el-select-dropdown__item'));
+    expect(items.map((item) => item.textContent?.trim())).toEqual(options.map((option) => option.label).reverse());
+    expect(warnings.filter((message) => message.includes('Duplicate keys'))).toEqual([]);
+
+    for (const [index, option] of [...options].reverse().entries()) {
+      items[index].dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([option.value]);
+    }
+    wrapper.unmount();
+  });
+
   it('merges the anchor popper class with the host custom popper class', async () => {
     const wrapper = mount(LxSelect, {
       props: { modelValue: '' },

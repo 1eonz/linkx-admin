@@ -1,0 +1,86 @@
+import { mount } from '@vue/test-utils';
+import { ElForm } from 'element-plus';
+import { LxPasswordInput } from 'lx-ui';
+import { describe, expect, it } from 'vitest';
+import { h } from 'vue';
+
+describe('LxPasswordInput', () => {
+  it('renders a password input with autocomplete off by default', () => {
+    const wrapper = mount(LxPasswordInput);
+
+    const input = wrapper.get('input.el-input__inner');
+    expect(input.attributes('type')).toBe('password');
+    expect(input.attributes('autocomplete')).toBe('off');
+    wrapper.unmount();
+  });
+
+  it('使用统一尺寸并通过语义按钮切换密码可见状态', async () => {
+    const wrapper = mount(LxPasswordInput);
+    const input = wrapper.get('input.el-input__inner');
+    const toggle = wrapper.get('button.lx-password-input__toggle');
+
+    expect(wrapper.find('.el-input--small').exists()).toBe(false);
+    expect(input.attributes('type')).toBe('password');
+    expect(toggle.attributes('type')).toBe('button');
+    expect(toggle.attributes('aria-label')).toBe('显示密码');
+    expect(toggle.attributes('aria-pressed')).toBe('false');
+
+    await toggle.trigger('click');
+    expect(input.attributes('type')).toBe('text');
+    expect(toggle.attributes('aria-label')).toBe('隐藏密码');
+    expect(toggle.attributes('aria-pressed')).toBe('true');
+
+    await wrapper.setProps({ showPassword: false });
+    expect(input.attributes('type')).toBe('password');
+    await wrapper.setProps({ showPassword: true });
+    expect(input.attributes('type')).toBe('password');
+    wrapper.unmount();
+  });
+
+  it('支持旧尺寸别名并在禁用或关闭显隐能力时阻止切换', async () => {
+    const legacy = mount(LxPasswordInput, { props: { size: 'small' } });
+    expect(legacy.find('.el-input--small').exists()).toBe(true);
+    legacy.unmount();
+
+    const disabled = mount(LxPasswordInput, {
+      props: { disabled: true },
+    });
+    await disabled.get('.lx-password-input__toggle').trigger('click');
+    expect(disabled.get('input').attributes('type')).toBe('password');
+    expect(disabled.get('.lx-password-input__toggle').attributes('disabled')).toBeDefined();
+    disabled.unmount();
+
+    const hidden = mount(LxPasswordInput, { props: { showPassword: false } });
+    expect(hidden.find('.lx-password-input__toggle').exists()).toBe(false);
+    hidden.unmount();
+  });
+
+  it('inherits disabled state from an enclosing Element Plus form', async () => {
+    const wrapper = mount(ElForm, {
+      props: { disabled: true },
+      slots: { default: () => h(LxPasswordInput, { modelValue: 'secret' }) },
+    });
+
+    expect(wrapper.get('input.el-input__inner').attributes('disabled')).toBeDefined();
+    const toggle = wrapper.get('.lx-password-input__toggle');
+    expect(toggle.attributes('disabled')).toBeDefined();
+    await toggle.trigger('click');
+    expect(wrapper.get('input.el-input__inner').attributes('type')).toBe('password');
+    wrapper.unmount();
+  });
+
+  it('默认允许剪贴板操作，并支持显式阻止', () => {
+    for (const preventClipboard of [false, true]) {
+      const wrapper = mount(LxPasswordInput, { props: { preventClipboard } });
+      const input = wrapper.get('input.el-input__inner');
+
+      for (const type of ['copy', 'cut', 'paste']) {
+        const event = new Event(type, { cancelable: true });
+        input.element.dispatchEvent(event);
+        expect(event.defaultPrevented).toBe(preventClipboard);
+      }
+
+      wrapper.unmount();
+    }
+  });
+});

@@ -17,7 +17,9 @@
 /* ===== 几何契约：40×20 胶囊 + 16px 滑块（固化 EP 默认值防升级漂移）===== */
 .lx-switch.el-switch .el-switch__core {
   min-width: 40px;
+  width: 40px;
   height: 20px;
+  box-sizing: border-box;
   border-radius: 10px;
   border: 1px solid var(--el-switch-off-color);
 }
@@ -40,6 +42,7 @@
  */
 .lx-switch.el-switch:has(.el-switch__inner-wrapper > *) .el-switch__core {
   min-width: 42px;
+  width: 42px;
 }
 
 .lx-switch.el-switch .el-switch__inner-wrapper {
@@ -74,7 +77,7 @@
 }
 
 /* 触屏（无 hover 能力）：44px 最小触控目标（胶囊本体 20px 高，靠内边距撑大命中区） */
-@media (hover: none) {
+@media (hover: none), (max-width: 480px) {
   .lx-switch.el-switch {
     min-height: 44px;
     min-width: 44px;

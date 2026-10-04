@@ -9,8 +9,10 @@
  * activeText/inactiveText/inlinePrompt 为 EP 原生文字能力（胶囊内/两侧显示）；
  * active-value/inactive-value/before-change 等旧 EP props 经 $attrs 透传。
  */
+import { onMounted, onUpdated, ref, useAttrs } from 'vue'
 import { ElSwitch } from 'element-plus'
 import type { LxSwitchProps } from './types'
+import { syncAriaDescribedBy } from '../../utils/syncAriaDescribedBy'
 import 'element-plus/es/components/switch/style/css'
 import './style.css'
 
@@ -34,10 +36,24 @@ const emit = defineEmits<{
   'update:modelValue': [value: boolean | string | number]
   change: [value: boolean | string | number]
 }>()
+
+const attrs = useAttrs()
+const switchRef = ref<{ $el?: HTMLElement }>()
+const managedDescriptionIds = new Set<string>()
+
+function syncSwitchDescription(): void {
+  const control = switchRef.value?.$el?.querySelector('[role="switch"]')
+  if (!(control instanceof HTMLElement)) return
+  syncAriaDescribedBy(control, attrs['aria-describedby'], managedDescriptionIds)
+}
+
+onMounted(syncSwitchDescription)
+onUpdated(syncSwitchDescription)
 </script>
 
 <template>
   <ElSwitch
+    ref="switchRef"
     class="lx-switch"
     :model-value="modelValue"
     :active-text="activeText"

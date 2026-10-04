@@ -7,9 +7,15 @@
  * 色值全部引用 --lx-* 令牌（P8 铁律），零硬编码。
  */
 
+.lx-textarea {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
 /* 内边距 8/12px + 行高 20px（标本 08 p-2.5 与 body-md 行高契约；标本 10px
  * 内衬取整为令牌五档 sm 8px）+ 核心几何：圆角 + 1px 控件描边 + 竖向 resize */
-.lx-textarea .el-textarea__inner {
+.lx-textarea__control .el-textarea__inner {
   padding: var(--lx-space-sm) var(--lx-space-md);
   line-height: 20px;
   border-radius: var(--lx-radius-md);
@@ -21,12 +27,12 @@
 }
 
 /* hover：描边转主色 */
-.lx-textarea .el-textarea__inner:hover {
+.lx-textarea__control .el-textarea__inner:hover {
   box-shadow: 0 0 0 1px var(--lx-color-primary) inset;
 }
 
 /* 键盘焦点：1px 主色内描边 + 2px 光环（不在控件外溢出第二圈） */
-.lx-textarea .el-textarea__inner:focus {
+.lx-textarea__control .el-textarea__inner:focus {
   outline: none;
   outline-offset: 0;
   box-shadow:
@@ -34,32 +40,87 @@
     0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
-/* 错误态：红底红边 + 深红值一体化（标本八件套错误行，依赖 ElForm/LxForm 上下文；
- * error-strong 做小字号对比度补偿） */
-.el-form-item.is-error .lx-textarea .el-textarea__inner {
-  background-color: var(--lx-color-error-light);
-  box-shadow: 0 0 0 1px var(--lx-color-error) inset;
-  color: var(--lx-color-error-strong);
+/* 错误态：使用表单专属校验令牌（标本八件套错误行，依赖 ElForm/LxForm 上下文）。 */
+.el-form-item.is-error .lx-textarea__control .el-textarea__inner {
+  background-color: var(--lx-color-form-error-bg);
+  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
+  color: var(--lx-color-form-error);
 }
 
-.el-form-item.is-error .lx-textarea .el-textarea__inner:focus {
+.el-form-item.is-error .lx-textarea__control .el-textarea__inner:focus {
   outline: none;
   outline-offset: 0;
   box-shadow:
-    0 0 0 1px var(--lx-color-error) inset,
+    0 0 0 1px var(--lx-color-form-error) inset,
     0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
 /* 字数计数器：等宽 11px（标本 08 "42 / 200" 右对齐微型计数，10px 过小
  * 影响可读统一抬到 11px）；文字色用 label 档 #606266（约 6.1:1 达 AA），
  * secondary 3.2:1 未达 AA（critique 2026-09-29 P2，与 LxInput 同口径） */
-.lx-textarea .el-input__count {
+.lx-textarea__control .el-input__count {
   font-family: var(--lx-font-mono);
   font-size: 11px;
   color: var(--lx-text-label);
 }
 
 /* 无 maxlength 的开口计数（EP is-outside 落在域外下方）同样走等宽规格 */
-.lx-textarea .el-input__count.is-outside {
+.lx-textarea__control .el-input__count.is-outside {
   padding-top: 2px;
+}
+
+.lx-textarea.is-overflow .lx-textarea__control .el-textarea__inner {
+  background-color: var(--lx-color-form-error-bg);
+  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
+  color: var(--lx-color-form-error);
+}
+
+.lx-textarea.is-overflow .lx-textarea__control .el-textarea__inner:focus {
+  box-shadow:
+    0 0 0 1px var(--lx-color-form-error) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+.lx-textarea__feedback {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lx-space-sm);
+  margin-top: 1px;
+}
+
+.lx-textarea__overflow-message {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  color: var(--lx-color-error-strong);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.lx-textarea__validation-count {
+  flex: 0 0 auto;
+  color: var(--lx-text-secondary-strong);
+  font-family: var(--lx-font-mono);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.lx-textarea__validation-count.is-overflow {
+  color: var(--lx-color-error-strong);
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .lx-textarea__feedback {
+    align-items: flex-start;
+  }
+
+  .lx-textarea__overflow-message {
+    flex: 1 1 auto;
+  }
 }

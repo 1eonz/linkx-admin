@@ -1,0 +1,535 @@
+[
+  {
+    "selector": "span.container",
+    "tagName": "span",
+    "rect": {
+      "x": 335,
+      "y": -254,
+      "width": 16,
+      "height": 14,
+      "top": -254,
+      "right": 351,
+      "bottom": -240,
+      "left": 335
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "clipped-overflow-container",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span.container clips a positioned child",
+        "ignoreValue": "",
+        "name": "Positioned child clipped by overflow container",
+        "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip."
+      }
+    ]
+  },
+  {
+    "selector": "div.el-form-item.asterisk-left:nth-of-type(5) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > p.lx-upload__hint",
+    "tagName": "p",
+    "rect": {
+      "x": 49,
+      "y": 800,
+      "width": 235.390625,
+      "height": 18,
+      "top": 800,
+      "right": 284.390625,
+      "bottom": 818,
+      "left": 49
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "3.2:1 (need 4.5:1) — text #86909c on #ffffff",
+        "ignoreValue": "",
+        "name": "Low contrast text",
+        "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background."
+      }
+    ]
+  },
+  {
+    "selector": "div.el-form-item.asterisk-left:nth-of-type(6) > div.el-form-item__content > div.lx-upload > div.lx-upload__trigger > div.el-upload.el-upload--text > div.el-upload-dragger > div.lx-upload__dropzone > div.lx-upload__dropzone-idle > p.lx-upload__hint",
+    "tagName": "p",
+    "rect": {
+      "x": 49,
+      "y": 962,
+      "width": 235.390625,
+      "height": 18,
+      "top": 962,
+      "right": 284.390625,
+      "bottom": 980,
+      "left": 49
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "3.2:1 (need 4.5:1) — text #86909c on #ffffff",
+        "ignoreValue": "",
+        "name": "Low contrast text",
+        "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background."
+      }
+    ]
+  },
+  {
+    "selector": "li.lx-upload__file.is-success:nth-of-type(1) > div.lx-upload__file-main > div.lx-upload__file-heading > span.lx-upload__file-status.is-success",
+    "tagName": "span",
+    "rect": {
+      "x": 86,
+      "y": 1124,
+      "width": 60,
+      "height": 18,
+      "top": 1124,
+      "right": 146,
+      "bottom": 1142,
+      "left": 86
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "3.2:1 (need 4.5:1) — text #529b2e on #f0f9eb",
+        "ignoreValue": "",
+        "name": "Low contrast text",
+        "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background."
+      }
+    ]
+  },
+  {
+    "selector": "li.lx-upload__file.is-success:nth-of-type(2) > div.lx-upload__file-main > div.lx-upload__file-heading > span.lx-upload__file-status.is-success",
+    "tagName": "span",
+    "rect": {
+      "x": 86,
+      "y": 1239,
+      "width": 60,
+      "height": 18,
+      "top": 1239,
+      "right": 146,
+      "bottom": 1257,
+      "left": 86
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "low-contrast",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "3.2:1 (need 4.5:1) — text #529b2e on #f0f9eb",
+        "ignoreValue": "",
+        "name": "Low contrast text",
+        "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background."
+      }
+    ]
+  },
+  {
+    "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+    "tagName": "button",
+    "rect": {
+      "x": 282,
+      "y": 1497,
+      "width": 40,
+      "height": 40,
+      "top": 1497,
+      "right": 322,
+      "bottom": 1537,
+      "left": 282
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "ignoreValue": "",
+        "name": "Raster buried under a wash or opacity",
+        "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+      }
+    ]
+  },
+  {
+    "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(2) > button.copy",
+    "tagName": "button",
+    "rect": {
+      "x": 323,
+      "y": 5336,
+      "width": 40,
+      "height": 40,
+      "top": 5336,
+      "right": 363,
+      "bottom": 5376,
+      "left": 323
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "ignoreValue": "",
+        "name": "Raster buried under a wash or opacity",
+        "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+      }
+    ]
+  },
+  {
+    "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(3) > button.copy",
+    "tagName": "button",
+    "rect": {
+      "x": 323,
+      "y": 5546.46875,
+      "width": 40,
+      "height": 40,
+      "top": 5546.46875,
+      "right": 363,
+      "bottom": 5586.46875,
+      "left": 323
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "buried-raster",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "ignoreValue": "",
+        "name": "Raster buried under a wash or opacity",
+        "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+      }
+    ]
+  },
+  {
+    "selector": "#el-id-1024-3",
+    "tagName": "div",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "advisory": true,
+        "detail": "1px border + 16px shadow blur",
+        "ignoreValue": "",
+        "name": "Hairline border with wide shadow",
+        "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+      }
+    ]
+  },
+  {
+    "selector": "#el-id-1024-8",
+    "tagName": "div",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "gpt-thin-border-wide-shadow",
+        "category": "slop",
+        "severity": "advisory",
+        "advisory": true,
+        "detail": "1px border + 16px shadow blur",
+        "ignoreValue": "",
+        "name": "Hairline border with wide shadow",
+        "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+      }
+    ]
+  },
+  {
+    "selector": "table:nth-of-type(1)",
+    "tagName": "table",
+    "rect": {
+      "x": 24,
+      "y": 1797,
+      "width": 327,
+      "height": 730,
+      "top": 1797,
+      "right": 351,
+      "bottom": 2527,
+      "left": 24
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "edge-flush-cards",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "20 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+        "ignoreValue": "",
+        "name": "Cards flush against the scroller edge",
+        "description": "Cards inside a horizontal scroller or tab panel sit flush against the container edge at rest while keeping a gutter on the other side, so their edges and rounded corners get cut off. Usually the panel is sized wider than its clip box. Keep a consistent inset on both sides."
+      }
+    ]
+  },
+  {
+    "selector": "label.el-checkbox.lx-checkbox:nth-of-type(1) > span.el-checkbox__label",
+    "tagName": "span",
+    "rect": {
+      "x": 60,
+      "y": 435,
+      "width": 64,
+      "height": 14,
+      "top": 435,
+      "right": 124,
+      "bottom": 449,
+      "left": 60
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span.el-checkbox__label \"禁用表单\" is 100% covered by overlapping text (div.el-form-item__error)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "div.dynamic-form-demo__candidate-controls > span:nth-of-type(1)",
+    "tagName": "span",
+    "rect": {
+      "x": 45,
+      "y": 482,
+      "width": 78,
+      "height": 24,
+      "top": 482,
+      "right": 123,
+      "bottom": 506,
+      "left": 45
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"候选人员数据\" is 86% covered by an opaque element (div.el-select__wrapper.el-tooltip__trigger.el-tooltip__trigger)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "span.dynamic-form-demo__status",
+    "tagName": "span",
+    "rect": {
+      "x": 45,
+      "y": 566,
+      "width": 76.6875,
+      "height": 24,
+      "top": 566,
+      "right": 121.6875,
+      "bottom": 590,
+      "left": 45
+    },
+    "isPageLevel": false,
+    "isHidden": true,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span.dynamic-form-demo__status \"3 名候选人员\" is 50% covered by an opaque element (div.el-select__wrapper.is-filterable.el-tooltip__trigger.el-tooltip__trigger)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "div:nth-of-type(4) > div > span",
+    "tagName": "span",
+    "rect": {
+      "x": 45,
+      "y": 778,
+      "width": 113.640625,
+      "height": 20,
+      "top": 778,
+      "right": 158.640625,
+      "bottom": 798,
+      "left": 45
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"low contrast text\" is 67% covered by overlapping text (p.lx-upload__title)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "div:nth-of-type(5) > div > span",
+    "tagName": "span",
+    "rect": {
+      "x": 45,
+      "y": 940,
+      "width": 113.640625,
+      "height": 20,
+      "top": 940,
+      "right": 158.640625,
+      "bottom": 960,
+      "left": 45
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"low contrast text\" is 67% covered by overlapping text (p.lx-upload__title)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "div:nth-of-type(6) > div > span",
+    "tagName": "span",
+    "rect": {
+      "x": 82,
+      "y": 1102,
+      "width": 113.640625,
+      "height": 20,
+      "top": 1102,
+      "right": 195.640625,
+      "bottom": 1122,
+      "left": 82
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"low contrast text\" is 100% covered by overlapping text (span.lx-upload__file-name)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "div:nth-of-type(7) > div > span",
+    "tagName": "span",
+    "rect": {
+      "x": 82,
+      "y": 1217,
+      "width": 113.640625,
+      "height": 20,
+      "top": 1217,
+      "right": 195.640625,
+      "bottom": 1237,
+      "left": 82
+    },
+    "isPageLevel": false,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "text-occlusion",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "span \"low contrast text\" is 100% covered by overlapping text (span.lx-upload__file-name)",
+        "ignoreValue": "",
+        "name": "Text occluded by an overlapping element",
+        "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+      }
+    ]
+  },
+  {
+    "selector": "body",
+    "tagName": "body",
+    "rect": null,
+    "isPageLevel": true,
+    "isHidden": false,
+    "findings": [
+      {
+        "type": "bounce-easing",
+        "category": "slop",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+        "ignoreValue": "",
+        "name": "Bounce or elastic easing",
+        "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+      },
+      {
+        "type": "layout-transition",
+        "category": "quality",
+        "severity": "warning",
+        "advisory": false,
+        "detail": "transition: height, padding-top, padding-bottom",
+        "ignoreValue": "",
+        "name": "Layout property animation",
+        "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+      }
+    ]
+  }
+]

@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 import LxPasswordInput from '../index.vue'
+import type { LxPasswordInputProps } from '../types'
 
 interface PasswordInputExposes {
   focus: () => void
@@ -12,7 +13,9 @@ interface PasswordInputExposes {
 const password = ref('LinkX-Demo-2026')
 const clearable = ref(true)
 const showPassword = ref(true)
+const preventClipboard = ref(false)
 const hudTheme = ref(false)
+const size = ref<NonNullable<LxPasswordInputProps['size']>>('md')
 const readonlyPassword = ref('Read-only-2026')
 const disabledPassword = ref('Disabled-2026')
 const inputRef = ref<PasswordInputExposes | null>(null)
@@ -27,12 +30,24 @@ function recordAction(action: string) {
   <section class="password-input-demo" :class="{ 'lx-theme-hud': hudTheme }">
     <div class="password-input-demo__toolbar">
       <label>
+        尺寸档
+        <select v-model="size" aria-label="密码框尺寸档">
+          <option value="sm">sm 28px</option>
+          <option value="md">md 32px</option>
+          <option value="lg">lg 40px</option>
+        </select>
+      </label>
+      <label>
         <input v-model="clearable" type="checkbox" />
         显示清空按钮
       </label>
       <label>
         <input v-model="showPassword" type="checkbox" />
         允许切换明文
+      </label>
+      <label>
+        <input v-model="preventClipboard" type="checkbox" />
+        阻止剪贴板操作
       </label>
       <label>
         <input v-model="hudTheme" type="checkbox" />
@@ -49,10 +64,12 @@ function recordAction(action: string) {
         placeholder="请输入至少 8 位密码"
         autocomplete="new-password"
         name="previewPassword"
+        :size="size"
         :maxlength="32"
         :minlength="8"
         :clearable="clearable"
         :show-password="showPassword"
+        :prevent-clipboard="preventClipboard"
         @update:model-value="recordAction('密码内容已更新')"
         @change="recordAction('密码输入已确认')"
         @focus="recordAction('密码框已聚焦')"
@@ -60,7 +77,11 @@ function recordAction(action: string) {
         @clear="recordAction('密码已清空')"
       />
       <p class="password-input-demo__hint">
-        此组件会阻止复制、剪切和粘贴事件。
+        {{
+          preventClipboard
+            ? '当前已按宿主策略阻止复制、剪切和粘贴。'
+            : '默认允许使用密码管理器复制、剪切和粘贴。'
+        }}
       </p>
     </div>
 
@@ -71,6 +92,7 @@ function recordAction(action: string) {
         v-model="readonlyPassword"
         readonly
         autocomplete="off"
+        :size="size"
         aria-describedby="password-input-readonly-note"
       />
       <p id="password-input-readonly-note" class="password-input-demo__hint">
@@ -84,6 +106,7 @@ function recordAction(action: string) {
         id="password-input-disabled"
         v-model="disabledPassword"
         disabled
+        :size="size"
       />
       <p class="password-input-demo__hint">禁用状态不可聚焦或编辑。</p>
     </div>
@@ -138,6 +161,14 @@ function recordAction(action: string) {
   accent-color: var(--el-color-primary);
 }
 
+.password-input-demo__toolbar select {
+  min-height: 32px;
+  border: 1px solid var(--el-border-color);
+  border-radius: 4px;
+  background: var(--el-bg-color);
+  color: var(--el-text-color-primary);
+}
+
 .password-input-demo__field {
   display: grid;
   width: min(100%, 480px);
@@ -154,7 +185,7 @@ function recordAction(action: string) {
 .password-input-demo__hint,
 .password-input-demo__status {
   margin: 0;
-  color: var(--el-text-color-secondary);
+  color: var(--lx-text-secondary-strong);
   font-size: 13px;
   line-height: 1.5;
 }

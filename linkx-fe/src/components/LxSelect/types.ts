@@ -4,12 +4,25 @@
  * 视觉源：design/表单控件八件套/code.html 02（下拉选择器）
  * 尺寸档名 sm/md/lg 区别于 EP 的 small/default/large，映射关系见组件内 SIZE_MAP；
  * 高度经全局令牌桥（--el-component-size*）收敛为 28/32/40px。
- * 选项经默认插槽传入 ElOption（lx-ui 已透出 EP 全量导出），
+ * 选项可经配置式 options 或默认插槽传入 ElOption（lx-ui 已透出 EP 全量导出），
  * remote-method / multiple-limit / tag-type 等低频 EP props 经 $attrs 透传。
  */
 
-/** 单个选项的值（对象值场景经 attrs 透传，运行时兼容） */
-export type LxSelectOptionValue = string | number | boolean
+/** 单个选项的值；记录对象保持 Element Plus 的原始引用语义。 */
+export type LxSelectOptionValue =
+  | string
+  | number
+  | boolean
+  | Record<string, unknown>
+
+/** LxSelect 内置选项；用于 schema/配置驱动场景，也可继续使用默认插槽。 */
+export interface LxSelectOption {
+  label: string
+  value: LxSelectOptionValue
+  disabled?: boolean
+  /** 自定义选项插槽可读取的辅助说明，不参与值比较。 */
+  description?: string
+}
 
 /** v-model 值：单选为标量，多选为数组 */
 export type LxSelectModelValue = LxSelectOptionValue | LxSelectOptionValue[]
@@ -38,6 +51,8 @@ export interface LxSelectProps {
   collapseTagsTooltip?: boolean
   /** 远程/过滤加载态：面板显示加载中 */
   loading?: boolean
+  /** 配置驱动选项；与默认插槽可同时使用，适合动态表单。 */
+  options?: LxSelectOption[]
   /** 工程尺寸档：sm=28px / md=32px（基准）/ lg=40px */
   size?: LxSelectSize
   /** 原生 name 属性（表单序列化 / 读屏关联） */
