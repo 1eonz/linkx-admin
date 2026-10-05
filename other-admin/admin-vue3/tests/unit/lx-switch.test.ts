@@ -24,6 +24,33 @@ describe('LxSwitch', () => {
     wrapper.unmount();
   });
 
+  it('uses a controlled click for Space so the native input follows v-model', async () => {
+    const wrapper = mount(LxSwitch, { props: { modelValue: false } });
+
+    await wrapper.find('input.el-switch__input').trigger('keydown', { key: ' ' });
+
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([true]);
+    expect(wrapper.emitted('change')?.[0]).toEqual([true]);
+    wrapper.unmount();
+  });
+
+  it('ignores repeated Space keydowns and respects disabled and loading states', async () => {
+    const repeated = mount(LxSwitch, { props: { modelValue: false } });
+    await repeated.find('input.el-switch__input').trigger('keydown', {
+      key: ' ',
+      repeat: true,
+    });
+    expect(repeated.emitted('update:modelValue')).toBeUndefined();
+    repeated.unmount();
+
+    for (const props of [{ disabled: true }, { loading: true }]) {
+      const wrapper = mount(LxSwitch, { props: { modelValue: false, ...props } });
+      await wrapper.find('input.el-switch__input').trigger('keydown', { key: ' ' });
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+      wrapper.unmount();
+    }
+  });
+
   it('marks the checked state through the kernel is-checked class', () => {
     const wrapper = mount(LxSwitch, { props: { modelValue: true } });
 
@@ -61,6 +88,24 @@ describe('LxSwitch', () => {
 
     await wrapper.trigger('click');
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['on']);
+    wrapper.unmount();
+  });
+
+  it('applies aria-labelledby to the internal switch control', () => {
+    const wrapper = mount(LxSwitch, {
+      attrs: { 'aria-labelledby': 'switch-label' },
+    });
+
+    expect(wrapper.find('input.el-switch__input').attributes('aria-labelledby')).toBe('switch-label');
+    wrapper.unmount();
+  });
+
+  it('applies aria-describedby to the internal switch control', () => {
+    const wrapper = mount(LxSwitch, {
+      attrs: { 'aria-describedby': 'switch-description' },
+    });
+
+    expect(wrapper.find('input.el-switch__input').attributes('aria-describedby')).toBe('switch-description');
     wrapper.unmount();
   });
 
