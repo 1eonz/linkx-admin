@@ -1,5 +1,16 @@
 # LinkX 项目交接记录
 
+## [2026-10-05] Wave 2 / LxCheckbox 与 LxRadio 实现及复核
+
+- **目标**：按 `design/表单控件八件套/code.html` 03/04 标本完成 Checkbox/Radio 控件与组的状态、主题、键盘、触屏和减少动效复核。
+- **改动范围**：四个组件的 Demo、类型与样式；Element Plus/HUD 主题令牌；中文 API；Vue3 单测与文档 E2E。源码与回归已按第一笔提交独立提交为 `be86f10 fix(lx-ui): 完善复选与单选控件状态`。
+- **关键行为**：浅色禁用文字采用 `#909399`，HUD 次级文字采用 `#94a3b8`；Radio 状态区与 `aria-live` 播报中文选项名；组内默认焦点项可操作，已选禁用历史值放在组外只读展示；触屏目标为 44px。
+- **验证**：Checkbox/Radio 定向单测 20/20、文档 Playwright 4/4；Vue3 `vue-tsc --noEmit`、目标 ESLint/Prettier、lx-ui `pnpm typecheck`、生产构建（196 modules）、文档构建及目标 `git diff --cached --check` 通过。浏览器 E2E 拦截外部网络；Mock/文档 Demo 不代表真实业务后端。
+- **代码复审**：独立复审批准；未发现当前差异中的可复现 P0–P2 代码问题。原 Tab 停靠问题已由可用的组选中项、组外历史值和真实 Tab/方向键测试关闭；复审者未自行重跑测试。
+- **Impeccable**：独立 A 评分 34/40；独立 B 完成四组件源码 detector 三件套、Radio Demo 最终复扫和 16 个 Radio/RadioGroup overlay 浏览器视图，触屏 44px 由 E2E 覆盖。静态 `[]` 仅代表源码规则零命中。A 的 375px API 多列表格扫描效率 P2 仍开放，故 Checkbox/Radio 严格设计矩阵行不标记关闭。A/B、截图与中文综合报告位于 `.impeccable/critique/wave2-checkbox-radio-2026-10-05/`；snapshot 为 `.impeccable/critique/2026-10-05T05-40-12Z__linkx-fe-src-components-lxradio-demo-basic-vue.md`，该目标首次记录，趋势为 34/40。
+- **提交约定**：仅本波实现/E2E 文件纳入 `fix(lx-ui)`；计划、项目地图、组件审计、代码审核台账与 Impeccable 证据另用 `docs(project)` Conventional Commit。只暂存白名单文件，不包含 `.pnpm-store/` 镜像、`test-results`、live-server 运行状态或其他波次产物。推送后自动进入 `LxSwitch`。
+- **未完成/风险**：375px API 表格的阅读方式需另行设计和浏览器复验；UI-10 52 项总矩阵、Vue3 宿主 Element Plus 替换和真实后端联调均未由本波关闭。
+
 ## [2026-10-05] Wave 2 / LxSelect 交互修复与提交准备
 
 - **目标**：完成 Select options/插槽、远程错误恢复、主题边界、设计样本中的单项禁用状态和窄屏点按目标验收，并保留代码/设计审查证据。

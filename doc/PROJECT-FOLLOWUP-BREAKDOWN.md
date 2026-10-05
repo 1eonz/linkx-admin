@@ -20,7 +20,7 @@
 ### 2. 当前未关闭项
 
 1. **DynamicForm/Form**：`LxDatePicker` 的说明 ID 实例隔离缺陷已按 Wave 0 修复，独立代码审核未发现可复现缺陷；日期与 DynamicForm 单测、类型、库构建、文档构建和日期文档 E2E 已通过。修复后的正式 Impeccable A/B、overlay、综合报告和 snapshot/trend 尚未关闭，因此整体仍为阶段性完成。
-2. **基础控件**：`LxButton`、`LxInput`、`LxTextarea`、`LxInputNumber`、`LxSelect`、`LxDatePicker`、Checkbox/Radio 组、`LxSwitch`、`LxPasswordInput` 尚未完成统一严格设计矩阵和正式 A/B。InputNumber 的实现回归已有，但不能单独代表批次关闭。LxSelect 本子项的实现、Demo/API、禁用项、远程失败恢复、行为 E2E、构建和最终独立代码复审已完成；Assessment A-only 暂定 29/40，Assessment B 的静态扫描有效返回 `[]`，但 overlay、当前版本持久截图和正式 Critique snapshot/trend 缺失，故严格矩阵仍开放。下一入口为 Checkbox/Radio。
+2. **基础控件**：`LxButton`、`LxInput`、`LxTextarea`、`LxInputNumber`、`LxSelect`、`LxDatePicker`、Checkbox/Radio 组、`LxSwitch`、`LxPasswordInput` 仍需逐项完成严格设计矩阵。LxSelect 实现、Demo/API、禁用项、远程失败恢复、行为 E2E 和代码复审已完成；正式视觉关闭仍有证据/建议待办。Checkbox/Radio 实现、Demo/API、行为 E2E、A/B 浏览器评审和独立代码复审已完成，A 为 34/40；触屏目标 44px 已由 B 实测。375px API 表格扫描效率 P2 仍开放，因此该两组的严格矩阵行暂不关闭。下一入口为 `LxSwitch`。
 3. **TreeSelect/Cascader**：实现、Demo、单测和文档 E2E 已完成；当前版本的正式 overlay 证据和复验仍缺，旧截图不得沿用为当前版本通过证据。
 4. **其余 lx-ui**：组件审查矩阵中的 52 个公开组件尚未逐项完成设计差异、状态证据、代码审核和正式 Critique；已有专项证据只作阶段性材料。
 5. **Vue3 Element Plus 替换**：宿主仍有直接导入和模板使用，尚未按映射矩阵分批替换；在库级门槛和页面回归完成前不得删除宿主 `element-plus`。删除目标是 Vue3 宿主直依赖，保留 `lx-ui` 内部依赖。
@@ -123,6 +123,8 @@
 - 批次完成后执行代码审核、Impeccable A/B、复验和四份台账更新。
 
 **LxSelect 当前子项进度（2026-10-05）**：实现、中文 API/Demo 与行为测试已完成；HUD token 局部作用域、Teleported option 样式、弹层开合两态就近重试、错误关联清理和窄屏 44px 选项行已复验。组件单测 10/10、文档 E2E 3/3、类型/库构建/文档构建与目标 ESLint/Prettier 通过；最终独立代码复审批准。Assessment A-only 暂定 29/40；Assessment B detector JSON 为有效 `[]`、stderr 为空、退出码 0，浏览器交互仅为阶段性证据，overlay、当前版持久截图及正式 snapshot/trend 未完成，不能记为 UI-10 严格关闭。下一项为 Checkbox/Radio，提交顺序、中文文档和 Vue3 API Promise 链风格保持不变。
+
+**Checkbox/Radio 当前子项进度（2026-10-05）**：`LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 的实现、中文文档/Demo、单测 20/20 和文档 E2E 4/4 已完成；Vue3 类型、目标 ESLint/Prettier、lx-ui 类型、196 模块库构建和文档构建通过。独立代码复审批准。Impeccable A 34/40；B 覆盖 Checkbox/Radio 亮色、HUD、禁用、375px 触屏、键盘和减少动效，Radio 与 RadioGroup 最终注入 16/16；触控目标 44px 已验证。四个组件目录与最终 Radio Demo 的 detector 都是有效 JSON `[]`、stderr 空、退出码 0，仅表示静态零命中。P2：窄屏 API 多列表格仍不易扫描，尽管容器已有横向滚动且页面没有整体溢出；此项列入文档体验整改，不关闭严格矩阵行。综合报告、截图、代码审核与 snapshot/trend 见 `.impeccable/critique/wave2-checkbox-radio-2026-10-05/`。实现/E2E 提交为 `be86f10`；下一项自动进入 `LxSwitch`，不得提前开始 Vue3 Element Plus 全量替换。
 
 ### Wave 3：表单和动态表单正式 Critique 收口
 

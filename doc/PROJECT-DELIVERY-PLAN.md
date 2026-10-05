@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-05 Wave 2 / Checkbox 与 Radio 实现及审查
+
+- **完成内容**：完成 `LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 的状态、令牌、中文 API/Demo 和行为回归收口。Radio 改选后的可见/读屏回报采用中文选项名；组选中可用项作为 Tab 入口，已选禁用历史值展示在独立只读示例。
+- **验证**：定向单测 20/20、文档 Playwright 4/4；Vue3 `vue-tsc --noEmit`、目标 ESLint/Prettier、lx-ui `pnpm typecheck`、`pnpm build`（196 modules）、`pnpm build:docs` 与暂存前 `git diff --cached --check` 通过。测试中 Element Plus 对旧 `label` 作值用法输出既有弃用提示；此回归用于保留迁移兼容契约。
+- **代码复审**：独立复审批准；原 Radio Tab 可达性问题通过默认选中可用项、组外禁用历史值和真实 Tab/方向键 E2E 关闭，未发现其他 P0–P2。
+- **Impeccable**：A 34/40；B 对 Checkbox/Radio 两组分别检查亮色、HUD、触屏、禁用、焦点和减少动效。Radio 最新 16 个浏览器视图均完成注入/预检，四个组件目录与最终 Radio Demo detector 均为有效 `[]`、stderr 空、退出码 0。触屏 44px 目标已实测；A 提出的 375px API 表格扫描效率 P2 仍开放，严格矩阵行保持打开。完整报告、截图和综合快照位于 `.impeccable/critique/wave2-checkbox-radio-2026-10-05/`。
+- **状态与下一步**：源码及 E2E 已提交为 `be86f10 fix(lx-ui): 完善复选与单选控件状态`；交接、计划和评审证据按既定约定另作 Conventional Commit。下一项自动继续 `LxSwitch`；全库严格门禁前不移除 Vue3 宿主 `element-plus`。
+
 ## 2026-10-05 Wave 2 / LxSelect 实现与交互复验
 
 - **完成内容**：修复 HUD 主色变量影响全局的问题，将 Select teleported option 描述改为直接类名样式；远程错误说明继续关联输入框，弹层打开时由 footer 提供重试，关闭时将错误与重试放回控件旁，成功后清理 `aria-describedby`；窄屏/触屏选项行提升到 44px。按设计样本补充单项离线禁用候选项，并将远程失败空态文案明确为请求失败。中文 API 补齐 `options`、公开插槽、错误恢复和 2px 键盘焦点光环说明。

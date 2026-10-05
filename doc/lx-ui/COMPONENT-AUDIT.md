@@ -1,5 +1,9 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-05 Wave 2 / Checkbox 与 Radio 复验状态
+
+`LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 的实现、中文 API/Demo、单测 20/20、文档 E2E 4/4、构建及独立代码复审已完成。Impeccable A 为 34/40；B 完成两组亮色/HUD/触屏/禁用/键盘/减少动效状态检查，Radio 与 RadioGroup 的最终版 overlay/preflight 16/16，触屏目标 44px 实测通过。四个源码目录和最终 Radio Demo 的 detector 均为有效 `[]`、stderr 空、退出码 0；仅代表静态扫描零命中。A 提出的 375px API 表格阅读 P2 仍开放；严格矩阵行继续保持待整改，下一项为 `LxSwitch`。证据及综合快照见 `.impeccable/critique/wave2-checkbox-radio-2026-10-05/`。源码/E2E 提交 `be86f10`。
+
 ## 2026-10-05 Wave 2 / LxSelect 复验状态
 
 `LxSelect` 已补齐远程失败时弹层开合两态就近恢复、HUD token 局部作用域、Teleported option 描述样式、设计样本中的单项离线禁用状态及触屏/窄屏 44px 选项行；中文 API/Demo 已同步，组件单测 10/10、当前文档 E2E 3/3，类型、库构建、文档构建和 Luna max 独立代码复审通过。主会话阶段检查及独立评估的证据边界见 `.impeccable/critique/wave2-lx-select-2026-10-05/`。Assessment A-only 暂定 29/40；正式 Critique 仍缺当前版 overlay、持久截图和 snapshot/trend；detector 有效 `[]` 只代表静态零命中。本矩阵仍为 **0/52 个公开组件按统一严格口径关闭**；下一基础控件子项为 Checkbox/Radio。
@@ -92,8 +96,8 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxBreadcrumb`       | `DESIGN-SPEC.md` + 导航规范                       | 待严格复核；保留现有宿主导航契约                                                                                   |
 | `LxButton`           | `design/按钮体系/`                                | 待严格复核；基础尺寸/层级/危险态逐项对照                                                                           |
 | `LxCascader`         | `design/表单控件八件套/`（无专属画板）            | 实现与行为验收完成；当前版本正式 Critique 待 overlay/复验；按 Select 控件外形与状态令牌映射                        |
-| `LxCheckbox`         | `design/表单控件八件套/`                          | 待严格复核；框体、半选、焦点与触控态                                                                               |
-| `LxCheckboxGroup`    | `design/表单控件八件套/`                          | 待严格复核；组间距、方向、禁用和半选态                                                                             |
+| `LxCheckbox`         | `design/表单控件八件套/`                          | A/B 与行为完成；窄屏 API 表格 P2 待处理                                                                            |
+| `LxCheckboxGroup`    | `design/表单控件八件套/`                          | A/B、半选、禁用与触屏验收完成；随 API 表格 P2 保持开放                                                             |
 | `LxCodeSlot`         | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；代码区层级、复制反馈与窄屏                                                                             |
 | `LxDatePicker`       | `design/表单控件八件套/`                          | Wave 2 E2E 16/16、单测 39/39；A 31/40、B 9 场景、代码复审通过；4 项 P2/P3 未结，严格矩阵行保持打开                 |
 | `LxDescriptions`     | `design/详情描述行 Descriptions/`                 | 部分证据；19/20 阶段审查不是正式关闭                                                                               |
@@ -116,8 +120,8 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxPagination`       | `DESIGN-SPEC.md` + Pagination API/Demo            | 待严格复核；密度、分页按钮、背景与窄屏                                                                             |
 | `LxPasswordInput`    | `design/表单控件八件套/` + PasswordInput API/Demo | 待严格复核；32px、显隐、禁用和键盘焦点                                                                             |
 | `LxProTable`         | `DESIGN-SPEC.md` + ProTable API/Demo              | 待严格复核；表头/行密度、选择、空错态和滚动                                                                        |
-| `LxRadio`            | `design/表单控件八件套/`                          | 待严格复核；14px 控件、焦点、选中和禁用态                                                                          |
-| `LxRadioGroup`       | `design/表单控件八件套/`                          | 待严格复核；间距、方向、选中和禁用态                                                                               |
+| `LxRadio`            | `design/表单控件八件套/`                          | A/B 与行为完成；中文播报、触屏和减少动效通过；窄屏 API 表格 P2 待处理                                              |
+| `LxRadioGroup`       | `design/表单控件八件套/`                          | A/B、键盘及禁用态验收完成；随 API 表格 P2 保持开放                                                                 |
 | `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 待严格复核；字段密度、展开/收起、操作层级                                                                          |
 | `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                               |
 | `LxSelect`           | `design/表单控件八件套/`                          | 实现与行为验收：单测 10/10、文档 E2E 3/3；当前严格 Critique 待修后 A/B、overlay/snapshot；桌面 32px、窄屏 44px     |

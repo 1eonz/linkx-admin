@@ -1,5 +1,9 @@
 # lx-ui 路线图
 
+## 2026-10-05 Wave 2 / LxCheckbox 与 LxRadio 复验
+
+`LxCheckbox`/`LxCheckboxGroup` 与 `LxRadio`/`LxRadioGroup` 的当前实现、Demo、中文 API、行为回归和独立审查已完成。定向单测 20/20、文档 Playwright 4/4；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。独立代码复审批准，未发现 P0–P2 代码问题。Impeccable A 为 34/40；B 覆盖 Checkbox/Radio 的亮色、HUD、375px 触屏、禁用、键盘和减少动效状态，Radio 最新矩阵 overlay 注入 16/16；四个组件目录与最终 Radio Demo 的 detector 均为有效 `[]`、stderr 空、退出码 0。`[]` 只代表静态规则零命中。A 留下 375px API 表格扫描效率 P2，窄屏虽有表格自身滚动且页面无横向溢出，阅读体验仍待优化；真实触屏高度已由 B 验证为 44px。报告、截图和综合 Critique 见 `.impeccable/critique/wave2-checkbox-radio-2026-10-05/`。严格矩阵行保留上述文档 P2，下一项自动进入 `LxSwitch`。
+
 ## 2026-10-05 Wave 2 / LxSelect 交互复验
 
 LxSelect 已完成配置式选项与插槽、远程空/失败状态和弹层开合两态恢复、HUD 弹层主色隔离、离线禁用候选项和窄屏触控选项。组件单测 10/10、当前文档 Playwright 3/3；Vue3 类型检查/目标 ESLint/Prettier、lx-ui 类型检查、库构建（196 modules）和文档构建通过，Luna max 独立代码复审最终批准。E2E 首次精确化时暴露 Select 下拉与折叠标签 tooltip 同带锚定类的问题，最终限定 `.el-select-dropdown.lx-select__popper` 后全绿。Assessment A-only 暂定 29/40；本波没有成功注入 overlay，也未生成当前版本持久截图或 snapshot/trend；detector 的有效 `[]` 只代表静态零命中，因此 LxSelect 严格矩阵行暂不关闭。下一项为 Checkbox/Radio。

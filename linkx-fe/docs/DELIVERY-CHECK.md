@@ -1,5 +1,13 @@
 # lx-ui 交付核查
 
+## 2026-10-05 LxCheckbox / LxRadio 交付复验
+
+- Checkbox、CheckboxGroup、Radio、RadioGroup 的状态样式、中文 API/Demo 与可观察行为回归已复核；浅色禁用文字为 `#909399`，HUD 次级文字为 `#94a3b8`，Radio `aria-live` 播报中文选项名，Demo 展示组外已选禁用历史值。
+- 定向单测 20/20、文档 E2E 4/4；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、生产构建（196 modules）、文档构建和目标差异检查通过。独立代码复审批准，未发现 P0–P2 代码问题。
+- Impeccable A 34/40；B 记录 Checkbox/Radio 与组控件的主题、触屏、键盘、减少动效状态，最新 Radio 矩阵 16/16 成功注入 overlay。静态 detector 四个组件目录及最终 Radio Demo 均为有效 `[]`、stderr 空、退出码 0；这不替代浏览器结论。
+- 尚存建议：375px API 多列表格仍不易快速扫描。文档页保持无整体横向溢出，现有表格容器可横向滚动；此项列为文档体验 P2，严格设计矩阵行不关闭，下一项进入 `LxSwitch`。真实触屏 44px 目标已由 B 验证通过。
+- 证据：`.impeccable/critique/wave2-checkbox-radio-2026-10-05/`；实现/E2E 提交 `be86f10`。
+
 ## 2026-10-05 LxSelect 行为与窄屏复验
 
 - HUD 下拉主色变量现限制于 Select popper；Teleported option 描述使用直接类名；远程失败说明仍关联输入框，弹层打开时 footer 提供重试，关闭时错误和重试回到控件旁；Demo 增加单项离线禁用候选项。
