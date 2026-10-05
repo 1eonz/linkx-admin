@@ -139,3 +139,10 @@ GLM 报告的 11 项 major 经复核后，#1、#2、#5、#6、#7、#8、#9、#10
 - **范围**：`linkx-fe/src/components/LxDatePicker/demo/basic.vue`、`style.css`、`other-admin/admin-vue3/tests/e2e/lx-date-picker-docs.spec.ts`。未读取 Impeccable A/B 报告；未运行测试。
 - **复核依据**：窄屏用例实际检查 320/375/390px 弹层和内部日期面板边界、宽度上限、触控目标；390px 首屏用例检查区间两端输入可见并可操作。对比度断言读取当前分隔符和输入表面的计算颜色。
 - **复验**：修订后 HUD 对比度 E2E 1/1、目标 ESLint 和 Prettier 通过；完整日期文档 E2E 由主会话运行 12/12。
+
+## 2026-10-05 Wave 2 LxSwitch 代码复核
+
+- **结论**：独立代码复核批准，未发现可复现的功能回归。
+- **范围**：`linkx-fe/src/components/LxSwitch/index.vue`、`demo/basic.vue`、VitePress 样式和中文组件文档，以及 Vue3 LxSwitch 单测与文档 E2E。复核者未读取 Impeccable Assessment A/B 文件，也未修改工作区。
+- **重点**：核对 Element Plus 开关的受控值与键盘切换、内部原生控件的 ARIA 名称/说明、HUD 主题预览恢复、失败后保留原值并允许重试、375px 样式与 E2E 配置。Demo 的下发流程仅用本地内存和定时器模拟，不新增业务 API；Vue3 API 请求写法未改变。
+- **验证**：最终 LxSwitch 单测 14/14、文档 E2E 6/6、Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、组件库构建（196 modules）和文档构建通过。VitePress 输出既有大 chunk 警告；本条代码复核记录不代替 Impeccable A/B 结论。

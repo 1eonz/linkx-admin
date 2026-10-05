@@ -889,3 +889,11 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 当前工作区 DatePicker/DynamicForm 单测 36/36；lx-ui 类型、库构建（196 modules）、文档构建和 DatePicker 文档 E2E 1/1 通过；独立代码审核未发现可复现缺陷，目标 ESLint、Prettier 与差异检查通过。
 - 正式 Impeccable A/B、修后 overlay、综合报告及 snapshot/trend 仍待完成；本结项不代表 DynamicForm/Form 或基础控件已完成视觉审查。
 - 下一执行入口：Wave 1 基础控件第一组，按 `PROJECT-FOLLOWUP-BREAKDOWN.md` 的状态矩阵与证据门槛逐项推进。
+
+## 2026-10-05 Wave 2 / LxSwitch 结项与后续入口
+
+- 实现与 E2E 已由 `1679d9c fix(lx-ui): align switch behavior and responsive demo` 提交。LxSwitch 单测 14/14、VitePress 文档 Playwright 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、组件库构建（196 modules）和文档构建通过。VitePress 有既有大包警告。
+- 独立代码复核批准，未发现可复现 P0–P2；测试缺口记录为真实触摸点击、ARIA 描述属性动态移除及 Demo 定时器运行期间卸载。
+- Impeccable A/B 综合 32/40，是三项有界修后评分，基线 29/40 的其他分项未重评。三份 detector 为有效 `[]`、stderr 空、退出码 0；只说明静态规则零命中。移动根宽异常归因于注入标记；无用户可见 overlay 声明。正式快照为 `.impeccable/critique/2026-10-05T13-00-21Z__linkx-fe-src-components-lxswitch-index-vue.md`，目标首次正式记录，趋势为 32/40。
+- P2 移动文档侧栏隐藏时的键盘顺序转入共享壳层复验；生产高影响动作的确认、授权审计及失败补偿转入 Vue3 宿主迁移，必须以真实业务/API 契约为依据。P3 术语说明保留为中文文档改进，不扩大通用组件 API。
+- 下一执行项为 `LxPasswordInput` 的设计严格对照与正式复核；随后完成动态图标，再开展 `LxDynamicForm` 专项。Vue3 Element Plus 替换继续冻结，直到基础组件与动态图标门槛满足。实现/E2E 与计划、审计、交接及 Critique 证据必须按 `fix(lx-ui)`、`docs(project)` 分开提交并推送；每次暂存仅包含本波白名单。

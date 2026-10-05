@@ -1,8 +1,14 @@
 # lx-ui 路线图
 
+## 2026-10-05 Wave 2 / LxSwitch 复验
+
+`LxSwitch` 的组件、Demo、中文 API、行为回归和独立代码复核已完成。单测 14/14、文档 Playwright 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。代码复核批准，未发现可复现的 P0–P2 问题。Impeccable A/B 综合 32/40，是基于 29/40 的三项有界修后评分；源码、Demo、文档的 detector 结果均为有效 `[]`、stderr 空、退出码 0，仅代表静态规则零命中。报告与浏览器证据见 `.impeccable/critique/wave2-lx-switch-2026-10-05/`，实现提交为 `1679d9c`。
+
+移动文档侧栏隐藏时的键盘顺序需在共享壳层波次复验；生产高影响开关的确认、授权审计和失败补偿由宿主依据真实业务契约确定；中文术语释义作为文档改进继续跟踪。下一项是 `LxPasswordInput`，之后完成动态图标严格复核，再按计划进入 `LxDynamicForm`。这些交叉残项没有关闭前，不将组件计入统一严格矩阵关闭数。完成一波后继续下一波，组件实现/E2E 与项目计划/审计/Critique 证据分开提交并推送。
+
 ## 2026-10-05 Wave 2 / LxCheckbox 与 LxRadio 复验
 
-`LxCheckbox`/`LxCheckboxGroup` 与 `LxRadio`/`LxRadioGroup` 的当前实现、Demo、中文 API、行为回归和独立审查已完成。定向单测 20/20、文档 Playwright 4/4；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。独立代码复审批准，未发现 P0–P2 代码问题。Impeccable A 为 34/40；B 覆盖 Checkbox/Radio 的亮色、HUD、375px 触屏、禁用、键盘和减少动效状态，Radio 最新矩阵 overlay 注入 16/16；四个组件目录与最终 Radio Demo 的 detector 均为有效 `[]`、stderr 空、退出码 0。`[]` 只代表静态规则零命中。A 留下 375px API 表格扫描效率 P2，窄屏虽有表格自身滚动且页面无横向溢出，阅读体验仍待优化；真实触屏高度已由 B 验证为 44px。报告、截图和综合 Critique 见 `.impeccable/critique/wave2-checkbox-radio-2026-10-05/`。严格矩阵行保留上述文档 P2，下一项自动进入 `LxSwitch`。
+`LxCheckbox`/`LxCheckboxGroup` 与 `LxRadio`/`LxRadioGroup` 的当前实现、Demo、中文 API、行为回归和独立审查已完成。定向单测 20/20、文档 Playwright 4/4；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。独立代码复审批准，未发现 P0–P2 代码问题。Impeccable A 为 34/40；B 覆盖 Checkbox/Radio 的亮色、HUD、375px 触屏、禁用、键盘和减少动效状态，Radio 最新矩阵 overlay 注入 16/16；四个组件目录与最终 Radio Demo 的 detector 均为有效 `[]`、stderr 空、退出码 0。`[]` 只代表静态规则零命中。A 留下 375px API 表格扫描效率 P2，窄屏虽有表格自身滚动且页面无横向溢出，阅读体验仍待优化；真实触屏高度已由 B 验证为 44px。报告、截图和综合 Critique 见 `.impeccable/critique/wave2-checkbox-radio-2026-10-05/`。严格矩阵行保留上述文档 P2。
 
 ## 2026-10-05 Wave 2 / LxSelect 交互复验
 

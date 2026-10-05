@@ -1,8 +1,14 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-05 Wave 2 / LxSwitch 复验状态
+
+`LxSwitch` 已完成组件实现、Demo、中文 API、行为回归及独立代码复核。单测 14/14、文档 Playwright 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。独立代码复核批准，未发现可复现的 P0–P2 代码问题。Impeccable 双路评审为 32/40；这是以 29/40 为基线的有界复评，仅更新三项启发式，不是全量重新评分。组件、Demo、中文文档 detector 都是有效 `[]`、stderr 空、退出码 0，仅代表静态规则零命中。实现提交为 `1679d9c`，综合报告和浏览器证据见 `.impeccable/critique/wave2-lx-switch-2026-10-05/`。
+
+剩余事项分属共享文档壳层与宿主业务：移动侧栏关闭时的键盘顺序列入后续壳层复验；生产高影响操作的确认、审计和失败补偿须按真实宿主/API 契约验收；专业术语释义列为中文文档改进。它们不应由 LxSwitch 通用组件臆造。本次完成 LxSwitch 组件级复核，但以上交叉事项未关闭前不增加 52 项统一严格矩阵的关闭计数。下一基础控件子项为 `LxPasswordInput`，其后继续动态图标，再进入 `LxDynamicForm`。
+
 ## 2026-10-05 Wave 2 / Checkbox 与 Radio 复验状态
 
-`LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 的实现、中文 API/Demo、单测 20/20、文档 E2E 4/4、构建及独立代码复审已完成。Impeccable A 为 34/40；B 完成两组亮色/HUD/触屏/禁用/键盘/减少动效状态检查，Radio 与 RadioGroup 的最终版 overlay/preflight 16/16，触屏目标 44px 实测通过。四个源码目录和最终 Radio Demo 的 detector 均为有效 `[]`、stderr 空、退出码 0；仅代表静态扫描零命中。A 提出的 375px API 表格阅读 P2 仍开放；严格矩阵行继续保持待整改，下一项为 `LxSwitch`。证据及综合快照见 `.impeccable/critique/wave2-checkbox-radio-2026-10-05/`。源码/E2E 提交 `be86f10`。
+`LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 的实现、中文 API/Demo、单测 20/20、文档 E2E 4/4、构建及独立代码复审已完成。Impeccable A 为 34/40；B 完成两组亮色/HUD/触屏/禁用/键盘/减少动效状态检查，Radio 与 RadioGroup 的最终版 overlay/preflight 16/16，触屏目标 44px 实测通过。四个源码目录和最终 Radio Demo 的 detector 均为有效 `[]`、stderr 空、退出码 0；仅代表静态扫描零命中。A 提出的 375px API 表格阅读 P2 仍开放；严格矩阵行继续保持待整改。证据及综合快照见 `.impeccable/critique/wave2-checkbox-radio-2026-10-05/`。源码/E2E 提交 `be86f10`。
 
 ## 2026-10-05 Wave 2 / LxSelect 复验状态
 
@@ -135,7 +141,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxSplitLayout`      | `DESIGN-SPEC.md` + SplitLayout API/Demo           | 待严格复核；分栏比例、拖动、键盘和折叠态                                                                           |
 | `LxStatusDot`        | `DESIGN-SPEC.md` §2 + 状态点 API/Demo             | 待严格复核；状态语义、动画和减少动效                                                                               |
 | `LxStatusSwitch`     | `design/状态开关 StatusSwitch/`                   | 待严格复核；轨道、状态、只读/加载与确认反馈                                                                        |
-| `LxSwitch`           | `design/表单控件八件套/`                          | 待严格复核；20px 轨道、状态文本和动效                                                                              |
+| `LxSwitch`           | `design/表单控件八件套/`                          | 组件级复核已完成；共享壳层与宿主契约仍跟踪，暂不计入全库严格关闭                                                   |
 | `LxTabsBar`          | `DESIGN-SPEC.md` + TabsBar API/Demo               | 待严格复核；页签层级、关闭/拖动和横向滚动                                                                          |
 | `LxTag`              | `DESIGN-SPEC.md` §2 + Tag API/Demo                | 待严格复核；语义色、尺寸、关闭态与对比度                                                                           |
 | `LxTextarea`         | `design/表单控件八件套/`                          | 待严格复核；行高、字数、错误/焦点与窄屏                                                                            |

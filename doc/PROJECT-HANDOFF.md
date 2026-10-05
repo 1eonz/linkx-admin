@@ -1,5 +1,15 @@
 # LinkX 项目交接记录
 
+## [2026-10-05] Wave 2 / LxSwitch 交付与复验
+
+- **目标**：对照表单控件标本 07 完成 LxSwitch 组件、Demo、中文 API 和行为/视觉复核。
+- **实现提交**：`1679d9c fix(lx-ui): align switch behavior and responsive demo`，已本地提交；本交接的文档与 Critique 快照另用 `docs(project)` 提交并推送。
+- **验证**：单测 14/14、文档 Playwright 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。文档构建有既有大包警告。此前默认 Playwright 配置误启 Vue3 应用并遇只读接口超时，不计验收；切到 `playwright.lxui.config.ts` 后 6/6 通过，未发出业务写请求。
+- **代码复核**：独立复核批准，未发现可复现 P0–P2。剩余非阻塞覆盖缺口为真实触摸点击、ARIA 说明动态移除、定时器运行时卸载 Demo。
+- **Impeccable**：独立 Assessment A/B 综合 32/40；为以 29/40 为基线的有界复评，不是全量重评分。三份源码 detector 均为有效 `[]`、stderr 空、退出码 0，只代表静态零命中。B 的 375px 根宽增量已归因于 detector overlay 标记，原始页面宽度正常；没有声称 `[Human]` 用户标签显示了 overlay。完整报告与证据见 `.impeccable/critique/wave2-lx-switch-2026-10-05/`；正式快照为 `.impeccable/critique/2026-10-05T13-00-21Z__linkx-fe-src-components-lxswitch-index-vue.md`，本目标首次正式记录，趋势为 32/40。
+- **剩余项**：移动文档侧栏关闭状态的 Tab 顺序属于共享壳层，进入壳层复验；生产高影响开关的确认、授权审计及失败补偿由 Vue3 宿主依据真实接口契约验收；专业缩写可在组件中文文档首次出现时释义。这些不由 lx-ui 通用组件臆造。
+- **下一步**：按基础控件顺序验收 `LxPasswordInput`，随后复核动态图标，再进入 `LxDynamicForm`；完成基础组件和动态图标门槛前不开始 Vue3 Element Plus 替换。每波先提交实现/E2E 的 `fix(lx-ui)`，再用独立 `docs(project)` 提交计划、交接、审计、代码复核记录与 Critique 快照，核对白名单后推送。
+
 ## [2026-10-05] Wave 2 / LxCheckbox 与 LxRadio 实现及复核
 
 - **目标**：按 `design/表单控件八件套/code.html` 03/04 标本完成 Checkbox/Radio 控件与组的状态、主题、键盘、触屏和减少动效复核。

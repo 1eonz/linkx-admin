@@ -1,11 +1,19 @@
 # lx-ui 交付核查
 
+## 2026-10-05 LxSwitch 交付复验
+
+- LxSwitch 组件、Demo、中文 API、状态/键盘/主题/窄屏回归和独立代码复核已完成。单测 14/14、文档 E2E 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、生产构建（196 modules）和文档构建通过。VitePress 保留既有大包提示。
+- Impeccable A/B 综合评分 32/40；这是从 29/40 基线更新系统控制、识别和窄屏简约性三项的有界复评。组件、Demo、文档 detector 均为有效 `[]`、stderr 空、退出码 0，只表示当前静态规则零命中。移动 375px 下 overlay 造成的根宽增加已归因于注入标记；隐藏标记后页面恢复 375px。没有声称用户可见标签中存在 overlay。
+- 独立代码复核批准，未发现可复现 P0–P2。非阻塞验证缺口：E2E 尚未执行真实触摸点击；ARIA 属性动态移除、定时器运行中离开 Demo 的回归尚未覆盖。
+- 仍跟踪的交叉事项：移动文档侧栏关闭后的键盘顺序列入共享壳层复验；生产高影响操作的确认/审计/失败补偿需按真实宿主契约验收；术语释义属于后续文档改进。LxSwitch 本波完成不代表 52 项矩阵、Vue3 组件替换或真实后端联调已完成。
+- 证据与快照：`.impeccable/critique/wave2-lx-switch-2026-10-05/`；正式快照 `.impeccable/critique/2026-10-05T13-00-21Z__linkx-fe-src-components-lxswitch-index-vue.md`，该目标首次正式记录，趋势为 32/40；实现提交 `1679d9c`。
+
 ## 2026-10-05 LxCheckbox / LxRadio 交付复验
 
 - Checkbox、CheckboxGroup、Radio、RadioGroup 的状态样式、中文 API/Demo 与可观察行为回归已复核；浅色禁用文字为 `#909399`，HUD 次级文字为 `#94a3b8`，Radio `aria-live` 播报中文选项名，Demo 展示组外已选禁用历史值。
 - 定向单测 20/20、文档 E2E 4/4；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、生产构建（196 modules）、文档构建和目标差异检查通过。独立代码复审批准，未发现 P0–P2 代码问题。
 - Impeccable A 34/40；B 记录 Checkbox/Radio 与组控件的主题、触屏、键盘、减少动效状态，最新 Radio 矩阵 16/16 成功注入 overlay。静态 detector 四个组件目录及最终 Radio Demo 均为有效 `[]`、stderr 空、退出码 0；这不替代浏览器结论。
-- 尚存建议：375px API 多列表格仍不易快速扫描。文档页保持无整体横向溢出，现有表格容器可横向滚动；此项列为文档体验 P2，严格设计矩阵行不关闭，下一项进入 `LxSwitch`。真实触屏 44px 目标已由 B 验证通过。
+- 尚存建议：375px API 多列表格仍不易快速扫描。文档页保持无整体横向溢出，现有表格容器可横向滚动；此项列为文档体验 P2，严格设计矩阵行不关闭。真实触屏 44px 目标已由 B 验证通过。
 - 证据：`.impeccable/critique/wave2-checkbox-radio-2026-10-05/`；实现/E2E 提交 `be86f10`。
 
 ## 2026-10-05 LxSelect 行为与窄屏复验
