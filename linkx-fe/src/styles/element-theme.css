@@ -524,9 +524,10 @@ html.dark.lx-theme-hud
   background: var(--lx-bg-card);
 }
 
-/* HUD 深色主题（需同时挂 html.dark 与 .lx-theme-hud） */
+/* 全局 HUD 主题挂在 html；传送菜单也可通过自身的 HUD 类独立应用主题令牌。 */
 html.dark.lx-theme-hud,
-html:root .el-picker__popper.lx-theme-hud {
+html:root .el-picker__popper.lx-theme-hud,
+html:root .lx-select__popper.lx-theme-hud {
   --el-bg-color: #0b1220;
   --el-bg-color-overlay: #16233a;
   --el-fill-color-blank: #101a2c;
@@ -568,8 +569,16 @@ html:root .el-picker__popper.lx-theme-hud {
   --lx-btn-disabled-text: var(--el-text-color-placeholder);
 }
 
+/* 传送下拉只在自身范围覆盖 Lx 主色，避免影响页面其他组件。 */
+html:root .lx-select__popper.lx-theme-hud {
+  --lx-color-primary: #38bdf8;
+}
+
 /* HUD 选中项底色：#f5f7fa 是亮色值，深底换成 EP HUD 表面色 */
-html.dark.lx-theme-hud .el-select-dropdown__item.is-selected {
+html.dark.lx-theme-hud .el-select-dropdown__item.is-selected,
+html:root
+  .lx-select__popper.lx-theme-hud
+  .el-select-dropdown__item.is-selected {
   background-color: var(--el-fill-color-light);
 }
 
