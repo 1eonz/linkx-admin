@@ -1,5 +1,9 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-05 Wave 2 / LxSelect 复验状态
+
+`LxSelect` 已补齐远程失败时弹层开合两态就近恢复、HUD token 局部作用域、Teleported option 描述样式、设计样本中的单项离线禁用状态及触屏/窄屏 44px 选项行；中文 API/Demo 已同步，组件单测 10/10、当前文档 E2E 3/3，类型、库构建、文档构建和 Luna max 独立代码复审通过。主会话阶段检查及独立评估的证据边界见 `.impeccable/critique/wave2-lx-select-2026-10-05/`。Assessment A-only 暂定 29/40；正式 Critique 仍缺当前版 overlay、持久截图和 snapshot/trend；detector 有效 `[]` 只代表静态零命中。本矩阵仍为 **0/52 个公开组件按统一严格口径关闭**；下一基础控件子项为 Checkbox/Radio。
+
 ## 2026-10-04 基础控件 P1 复核
 
 代码审核发现并定位到 `LxPasswordInput` 透传 `$attrs` 会允许 `type="text"` 绕过密码遮罩；当前已从透传属性中剔除 `type`，新增显隐往返及只读组合回归，7/7 通过，修后独立代码复审批准、未发现 P0–P2。剪贴板契约统一为默认允许，`preventClipboard` 仅为前端事件策略。Wave 1 的正式浏览器 overlay/snapshot 尚缺，因此该批不计入 52 项严格关闭数。
@@ -116,7 +120,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxRadioGroup`       | `design/表单控件八件套/`                          | 待严格复核；间距、方向、选中和禁用态                                                                               |
 | `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 待严格复核；字段密度、展开/收起、操作层级                                                                          |
 | `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                               |
-| `LxSelect`           | `design/表单控件八件套/`                          | 待严格复核；32px、单/多选边框、焦点和弹层                                                                          |
+| `LxSelect`           | `design/表单控件八件套/`                          | 实现与行为验收：单测 10/10、文档 E2E 3/3；当前严格 Critique 待修后 A/B、overlay/snapshot；桌面 32px、窄屏 44px     |
 | `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 待严格复核；标签、弹层分页、键盘和窄屏                                                                             |
 | `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                       |
 | `LxSidebar`          | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；rail/expanded、菜单态、动效和抽屉                                                                      |

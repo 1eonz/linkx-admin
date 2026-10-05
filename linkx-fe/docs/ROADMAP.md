@@ -1,5 +1,9 @@
 # lx-ui 路线图
 
+## 2026-10-05 Wave 2 / LxSelect 交互复验
+
+LxSelect 已完成配置式选项与插槽、远程空/失败状态和弹层开合两态恢复、HUD 弹层主色隔离、离线禁用候选项和窄屏触控选项。组件单测 10/10、当前文档 Playwright 3/3；Vue3 类型检查/目标 ESLint/Prettier、lx-ui 类型检查、库构建（196 modules）和文档构建通过，Luna max 独立代码复审最终批准。E2E 首次精确化时暴露 Select 下拉与折叠标签 tooltip 同带锚定类的问题，最终限定 `.el-select-dropdown.lx-select__popper` 后全绿。Assessment A-only 暂定 29/40；本波没有成功注入 overlay，也未生成当前版本持久截图或 snapshot/trend；detector 的有效 `[]` 只代表静态零命中，因此 LxSelect 严格矩阵行暂不关闭。下一项为 Checkbox/Radio。
+
 ## 2026-10-05 Wave 2 / LxDatePicker 短视口复验
 
 DatePicker 短视口修复按实际边界选择原生锚点或居中浮层，日历面板独立滚动，弹层完整留在视口内。文档 Playwright 16/16，DatePicker/DynamicForm 定向单测 39/39；类型检查、库构建 196 modules、文档构建与目标 ESLint/Prettier 通过。正式 Impeccable A 为 31/40，B 覆盖 9 个浏览器场景并记录 detector、覆盖层与生命周期证据，独立代码审核批准。字段上下文遮挡、短屏末行滚动提示、桌面标签遮挡和底边距仍有 3 项 P2、1 项 P3 建议；DatePicker 严格矩阵行不关闭，后续按整改台账跟踪。报告位于 `.impeccable/critique/wave2-date-range-2026-10-05/final-review/`，综合快照为 `.impeccable/critique/2026-10-04T21-53-59Z__linkx-fe-src-components-lxdatepicker-index-vue.md`。下一项为 `LxSelect`；52 项矩阵与 UI-11 仍未关闭。

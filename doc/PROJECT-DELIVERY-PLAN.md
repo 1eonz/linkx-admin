@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-05 Wave 2 / LxSelect 实现与交互复验
+
+- **完成内容**：修复 HUD 主色变量影响全局的问题，将 Select teleported option 描述改为直接类名样式；远程错误说明继续关联输入框，弹层打开时由 footer 提供重试，关闭时将错误与重试放回控件旁，成功后清理 `aria-describedby`；窄屏/触屏选项行提升到 44px。按设计样本补充单项离线禁用候选项，并将远程失败空态文案明确为请求失败。中文 API 补齐 `options`、公开插槽、错误恢复和 2px 键盘焦点光环说明。
+- **验证**：LxSelect 单测 **10/10**、当前文档 E2E **3/3**；E2E 覆盖 options/slot、禁用候选项、空结果/失败/弹层内重试、错误描述清理、HUD 局部主色令牌和 320px 44px 选项行。首次复跑发现宽泛的 `.lx-select__popper` 同时命中 Select 下拉与多选标签 tooltip，改为 `.el-select-dropdown.lx-select__popper` 后通过。Vue3 `vue-tsc --noEmit`、目标 ESLint/Prettier、lx-ui `pnpm typecheck`、`pnpm build`（196 modules）、`pnpm build:docs` 和目标 `git diff --check` 通过；文档构建保留既有大 chunk 提示。lx-ui 未安装独立 Vitest 命令，单测结果为现有 LxSelect 单测文件 10/10。
+- **代码复审**：Luna max 独立复审最终批准。复审曾初判两个类不能同处下拉节点；实际 Playwright DOM 显示 Select dropdown 同时带两类，而宽泛定位会另命中 tooltip。最终精确定位已由主任务 E2E 3/3 复验，复审者批准且未自行重跑测试。
+- **Impeccable**：Assessment A-only 暂定 **29/40**，当前复核环境无可用浏览器且 4174 连接被拒绝；浏览器主题、焦点光环及 320/390/1280px 当前视图因此未验证。Assessment B 两个目标 detector 均为有效 JSON `[]`、stderr 为空、退出码 0，只表示静态零命中；早前只读浏览器交互可见 HUD、失败重试与禁用项，但 overlay 注入、当前版本持久截图、综合快照和趋势记录未完成。证据与范围见 `.impeccable/critique/wave2-lx-select-2026-10-05/`，综合状态为降级，不能登记正式 Critique 通过。
+- **状态与下一步**：实现、API/Demo、行为测试、构建、最终代码复审和阶段性浏览器检查已完成；正式视觉 Critique 未闭环前，`LxSelect` UI-10 严格矩阵行保持打开。下一项继续 Wave 2 的 Checkbox/Radio，随后 Switch；组件库和 UI-11 门禁关闭前保留 Vue3 宿主 `element-plus`。
+
 ## 2026-10-05 Wave 2 / LxDatePicker 短视口修复与正式复核
 
 - **实现结果**：窄屏打开弹层后测量实际边界；原生定位完整时继续锚定输入框，越界时切换到视口内居中浮层。滚动限制在日历面板内，箭头仅在居中态隐藏；320px 区间弹层保留至少 18.5px 横向余量。

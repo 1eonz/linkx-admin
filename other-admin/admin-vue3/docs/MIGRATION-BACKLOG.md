@@ -1,5 +1,12 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-05 Wave 2 / LxSelect 组件侧验收
+
+- 本次修改限于 lx-ui、中文组件文档和文档 E2E；没有替换 Vue3 业务页，没有改请求 API、路由、权限键或后端协议。
+- 组件单测 10/10、当前文档 Playwright 3/3，覆盖本地 Mock 的成功/空/失败与弹层开合两态恢复、键盘、单项禁用、HUD 局部令牌和 320px 行高。严格 locator 排除了同样带 `lx-select__popper` 的折叠标签 tooltip。类型、目标 ESLint/Prettier、组件库构建和文档构建通过；主会话另完成当前版本 HUD/失败状态与窄屏的阶段性现场检查。
+- LxSelect 的配置式 options、插槽和远程状态能力可供后续宿主迁移；实际业务接口继续由宿主按 `.then().catch().finally()` 提供，不把 Demo Mock 当作迁移或真实联调证据。
+- Luna max 独立代码复审批准。正式 Impeccable overlay、当前版本持久截图与 snapshot/trend 尚未完成，UI-10 严格行保持开放；库级 UI-10/UI-11 门禁结束前保留 Vue3 宿主 Element Plus 依赖。
+
 ## 2026-10-05 Wave 2 / DatePicker 短视口边界
 
 - 本子项只修改 lx-ui DatePicker、中文 Demo/API 文档和文档 E2E；未改 Vue3 业务页面、请求 API、权限键、路由或后端协议。

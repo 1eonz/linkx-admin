@@ -1,5 +1,25 @@
 # GLM 代码评审复核与修复台账
 
+## 2026-10-05 Wave 2 LxSelect E2E 定位最终复审
+
+- **结论**：Luna max 复审批准，无阻断问题。
+- **复核过程**：首轮意见误判 `.el-select-dropdown.lx-select__popper` 无法匹配实际下拉节点。失败上下文确认 Element Plus 当前 DOM 的真实下拉节点同时带有这两个类；宽泛的 `.lx-select__popper` 则会同时命中折叠标签 tooltip。
+- **修复与验证**：E2E 改为限定 `.el-select-dropdown.lx-select__popper`，HUD 场景同时限定 `.lx-theme-hud`；文档补齐焦点光环、弹层开合两态重试和 `aria-describedby` 清理说明。主任务重跑文档 E2E 3/3 通过；最终复审者确认选择器和文档与当前实现一致，但未重跑测试。
+
+## 2026-10-05 Wave 2 LxSelect Demo 补充复审
+
+- **结论**：Luna max 独立代码复审批准；未发现本轮新增禁用选项、错误状态文案及 E2E 断言中的可复现 P0–P2。
+- **范围**：复核离线 `ElOption` 的禁用呈现、请求失败空态与 `role="alert"`/`aria-describedby` 保持关系、footer 重试入口及 HUD、320px 浏览器 E2E。
+- **验证边界**：复审者未运行测试或 detector；本波 E2E、类型、Lint、Prettier、构建结果由主任务实际执行记录。代码复审批准不替代 Impeccable 视觉审查。
+
+## 2026-10-05 Wave 2 LxSelect 修后复审
+
+- **结论**：独立复审批准，当前 LxSelect 变更未发现可复现 P0–P2。
+- **范围**：复核 HUD 主色 token 的局部作用域、teleported options 的描述样式、远程错误恢复按钮的位置，以及 320px/触屏行高和对应文档 E2E。
+- **处理**：原先的 HUD token 全局泄漏通过 popper 专属 selector 修复；选项描述改用直接类名；重试按钮放入 Select 弹层 footer，错误说明与实际输入框的 `aria-describedby` 关系保留；窄屏/触屏选项行提升至 44px。
+- **验证**：LxSelect 单测 10/10、文档 E2E 3/3；Vue3 `vue-tsc --noEmit`、目标 ESLint/Prettier、lx-ui typecheck/build（196 modules）/build:docs 均通过。代码复审者没有重跑这些命令；结果由主任务直接运行取得。
+- **边界**：Demo 网络状态为本地 Mock，不代表真实 API 联调；修后 Impeccable A/B、overlay/snapshot/trend 单独跟踪，不因代码复审批准而视作视觉门槛通过。
+
 ## 2026-10-05 Wave 2 LxDatePicker 短视口修复代码复审
 
 - **结论**：独立代码复审批准；未发现本次 DatePicker 定位、滚动和 E2E 增补中的可复现正确性或契约问题。

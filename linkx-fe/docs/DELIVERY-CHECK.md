@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-05 LxSelect 行为与窄屏复验
+
+- HUD 下拉主色变量现限制于 Select popper；Teleported option 描述使用直接类名；远程失败说明仍关联输入框，弹层打开时 footer 提供重试，关闭时错误和重试回到控件旁；Demo 增加单项离线禁用候选项。
+- 窄屏/触屏将 Select 选项行提升至 44px，桌面继续按 02 标本保持 32px。hover 视觉规范记录 02 字段样本与综合演练卡两种依据，当前沿用综合演练卡的主色描边。主会话 320px 实测触发器与弹层留在视口内，HUD 传送菜单使用深色表面和局部主色。
+- LxSelect 单测 10/10、当前文档 E2E 3/3；Vue3 类型检查、目标 Prettier/ESLint、lx-ui 类型/196 模块构建/文档构建通过。构建保留既有大 chunk 警告。
+- Luna max 独立代码复审最终批准。人工浏览器阶段记录见 `.impeccable/critique/wave2-lx-select-2026-10-05/main-session-check.md`；Assessment A-only 暂定 29/40。overlay、当前版本持久截图和 snapshot/trend 缺失，正式 Impeccable 及严格 UI-10 行保持未完成。Vue3 宿主替换仍等待组件库门禁。
+
 ## 2026-10-05 LxDatePicker 窄视口修复复验
 
 - DatePicker 窄屏弹层按实际边界选择原生锚定或视口居中；居中模式隐藏定位箭头，滚动限制在日期面板内部，窄屏宽度受视口约束。

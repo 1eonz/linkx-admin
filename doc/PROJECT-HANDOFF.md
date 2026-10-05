@@ -1,5 +1,17 @@
 # LinkX 项目交接记录
 
+## [2026-10-05] Wave 2 / LxSelect 交互修复与提交准备
+
+- **目标**：完成 Select options/插槽、远程错误恢复、主题边界、设计样本中的单项禁用状态和窄屏点按目标验收，并保留代码/设计审查证据。
+- **改动文件**：`linkx-fe/src/styles/element-theme.css`、`linkx-fe/src/components/LxSelect/style.css`、`demo/basic.vue`、`linkx-fe/docs/components/lxselect.md`、`other-admin/admin-vue3/tests/e2e/lx-select-docs.spec.ts`；项目计划、地图、迁移台账、组件矩阵、代码复审与 Impeccable 记录同步更新。
+- **实现**：HUD 的 `--lx-color-primary` 覆写仅作用于 LxSelect popper；teleported 选项描述用自身类选择器；远程失败说明保留 alert/`aria-describedby`，弹层打开时 footer 提供重试，关闭时错误和重试回到控件旁，成功后清理描述关联；Demo 展示设计样本中的离线禁用项；`hover: none` 或视口不大于 640px 时选项行高为 44px。中文 API 同步焦点光环和错误恢复契约，hover 采用综合演练卡主色描边。
+- **验证**：LxSelect 单测 10/10、修复 locator 后文档 Playwright 3/3；Vue3 `vue-tsc --noEmit`、目标 Prettier、无自动修复 ESLint；lx-ui `pnpm typecheck`、`pnpm build`（196 modules）、`pnpm build:docs` 和目标 `git diff --check` 通过。VitePress 保留既有大 chunk 提示。E2E 拦截非本地流量，Mock 不代表真实后端联调。
+- **代码复审**：Luna max 独立复审最终批准。实际下拉节点同时带 `.el-select-dropdown` 与 `.lx-select__popper`；更宽泛的锚定类会把多选 tooltip 一并命中，已限定下拉内容节点并由主任务重跑 3/3。复审者未重跑测试。
+- **Impeccable**：Assessment A-only 暂定 29/40，当前评估环境无可用浏览器且 4174 拒绝连接；Assessment B detector 为有效 JSON `[]`、stderr 空、退出码 0，仅表示静态零命中。早前只读浏览器交互记录于 `.impeccable/critique/wave2-lx-select-2026-10-05/assessment-b-final/`，但本波没有成功注入 overlay，也没有当前版本持久截图、综合 snapshot/trend；只登记阶段性复验，不能标记正式 Critique 通过。
+- **本波提交**：实现与 E2E 已单独提交为 `4e0b544 fix(lx-ui): complete select interaction states`；本交接、计划、审核记录和 Impeccable 原始证据另作文档提交。推送状态由本波完成回报记录。
+- **未完成/风险**：Vue3 业务页尚未替换；真实接口、权限与后端联调不在本波。正式 Impeccable overlay/snapshot/trend 仍未闭环，UI-10 严格矩阵行保持开放。
+- **提交约定**：按既定规则仅暂存本波文件，先 Conventional Commit 提交组件实现/E2E，再独立提交 API、计划、审计、交接与审查证据；排除 `.pnpm-store/` 镜像、`.impeccable/live/server.json` 删除、`0`、`test-results` 和其他波次材料。完成推送后自动进入 Checkbox/Radio。
+
 ## [2026-10-05] Wave 2 / LxDatePicker 短视口修复与正式复核
 
 - **问题与修复**：原弹层在 390×375 下超出视口，内部滚动不能让视口外的末行可见。现按实际边界检测：原生定位完整时保留输入框锚点；越界时使用视口内居中浮层，滚动限制在 `.el-picker-panel` 内，避免箭头裁切和页面滚动串联。320px 区间面板宽度同步受视口约束。
