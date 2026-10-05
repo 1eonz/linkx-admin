@@ -5,7 +5,7 @@
  * 脱离 element-theme.css 全局桥时规格不漂移（与 Input/Textarea/Radio 族同契约）；
  * 全局桥的同款规则继续服务存量裸 el-select 直用页面（过渡期并存）。
  * popper 面板 teleport 到 body，经组件注入的 lx-select__popper 类锚定。
- * 色值全部引用 --lx-* 令牌（P8 铁律），零硬编码。
+ * 色值全部引用 Lx/Element Plus 主题令牌（P8 铁律），零硬编码。
  */
 
 /* ===== 触发器（.lx-select.el-select 双类锚定，压过全局桥 html:root 档）===== */
@@ -37,6 +37,12 @@
   outline-offset: 0;
 }
 
+/* 键盘焦点使用独立光环，避免只靠 hover 和边框颜色表达焦点。 */
+.lx-select.el-select .el-select__wrapper:focus-visible,
+.lx-select.el-select .el-select__wrapper:has(input:focus-visible) {
+  box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
 .lx-select.el-select
   .el-select__wrapper.is-focused
   .el-select__placeholder:not(.is-transparent) {
@@ -61,6 +67,14 @@
   box-shadow: none;
 }
 
+.el-form-item.is-error .lx-select.el-select .el-select__wrapper:focus-visible,
+.el-form-item.is-error
+  .lx-select.el-select
+  .el-select__wrapper:has(input:focus-visible) {
+  border-color: var(--lx-color-form-error);
+  box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
 /* ===== Popper 终态（teleport 到 body，lx-select__popper 锚定）===== */
 /* 面板：4px 圆角 + pop 档阴影（标本 02：0 4px 16px/0.12） */
 .lx-select__popper.el-select__popper {
@@ -68,7 +82,7 @@
   box-shadow: var(--lx-shadow-pop);
 }
 
-/* 选项行高 32px（标本 02 选项高度契约） */
+/* 桌面选项行高 32px（标本 02 选项高度契约） */
 .lx-select__popper.el-select__popper .el-select-dropdown__item {
   height: 32px;
   line-height: 32px;
@@ -81,10 +95,10 @@
   background-color: var(--lx-bg-table-header);
 }
 
-/* HUD 深色：选中底色 #f5f7fa 是亮色值，深底换 EP HUD 表面色
- * （html 级 HUD 挂载生效；容器级挂载的 popper 换肤缺口由波次 8 皮肤专项统一收口） */
-html.dark.lx-theme-hud
-  .lx-select__popper
+/* HUD 深色：传送到 body 的菜单通过 popper 自身主题类切换选中底色。 */
+html.dark.lx-theme-hud .lx-select__popper .el-select-dropdown__item.is-selected,
+html:root
+  .lx-select__popper.lx-theme-hud
   .el-select-dropdown__item.is-selected {
   background-color: var(--el-fill-color-light);
 }
@@ -94,5 +108,10 @@ html.dark.lx-theme-hud
 @media (hover: none), (max-width: 640px) {
   .lx-select.el-select .el-select__wrapper {
     min-height: 44px;
+  }
+
+  .lx-select__popper.el-select__popper .el-select-dropdown__item {
+    height: 44px;
+    line-height: 44px;
   }
 }

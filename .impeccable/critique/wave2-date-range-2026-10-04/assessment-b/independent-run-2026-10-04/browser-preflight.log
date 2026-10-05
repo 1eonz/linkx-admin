@@ -1,0 +1,11 @@
+Assessment B 写入式注入预检
+
+目标：独立标签中的 LxDatePicker 文档页。
+方法：CDP Runtime.evaluate。
+原始标题：LxDatePicker 日期选择器 | LxUI
+改写后标题：Assessment B Injection Preflight
+追加 script 节点：true
+inline probe 执行：true（window.__impeccableAssessmentBPreflight = "ok"）
+结果：写入式预检成功。
+
+恢复结果：标题恢复为原值，测试 script 节点已移除，window probe 已删除。

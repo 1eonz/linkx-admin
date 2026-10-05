@@ -1,0 +1,79 @@
+{
+  "responseStatus": 200,
+  "stateCount": 9,
+  "overflowStates": [],
+  "mobileToggleBounds": {
+    "x": 283,
+    "y": 614,
+    "width": 44,
+    "height": 44,
+    "top": 614,
+    "right": 327,
+    "bottom": 658,
+    "left": 283
+  },
+  "desktopToggleBounds": {
+    "x": 794,
+    "y": 486,
+    "width": 28,
+    "height": 28,
+    "top": 486,
+    "right": 822,
+    "bottom": 514,
+    "left": 794
+  },
+  "interactions": {
+    "passwordToggle": {
+      "before": "password",
+      "afterShow": {
+        "inputType": "text",
+        "buttonLabel": "隐藏密码",
+        "ariaPressed": "true"
+      },
+      "afterSpace": "password",
+      "afterEnter": "text",
+      "afterBlur": {
+        "inputType": "text",
+        "focused": false,
+        "status": "密码框已失焦"
+      }
+    },
+    "keyboardFocus": {
+      "tag": "BUTTON",
+      "className": "lx-password-input__toggle",
+      "ariaLabel": "隐藏密码",
+      "focusVisible": true
+    },
+    "readonly": {
+      "readOnly": true,
+      "inputTypeAfterReveal": "text",
+      "toggleDisabled": false
+    },
+    "disabled": {
+      "disabled": true,
+      "toggleDisabled": true,
+      "inputReceivedFocus": false
+    },
+    "showPasswordFalse": {
+      "toggleRemoved": true,
+      "inputType": "password"
+    },
+    "reducedMotion": {
+      "media": "reduce",
+      "toggleTransitionDuration": "1e-05s"
+    }
+  },
+  "injection": {
+    "preflight": {
+      "title": "[Human] LxPasswordInput Assessment B",
+      "scriptAppendSupported": true,
+      "removedAfterProbe": true
+    },
+    "loaded": true,
+    "src": "http://127.0.0.1:8401/detect.js",
+    "detectorFunctionAvailable": true
+  },
+  "overlayCount": 4,
+  "externalRequests": [],
+  "pageErrors": []
+}

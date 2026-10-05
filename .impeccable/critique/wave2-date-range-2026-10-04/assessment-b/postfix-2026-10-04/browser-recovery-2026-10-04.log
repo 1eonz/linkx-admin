@@ -1,0 +1,10 @@
+Assessment B 浏览器恢复尝试
+
+主代理报告其 CUA 浏览器已恢复后，本子代理再次检查并尝试独立标签：
+1. cua.getState() -> {"apps":[],"browsers":[]}
+2. agent.browsers.list() -> []
+3. cua.createBrowserTab("iab", "http://127.0.0.1:4174/components/lxdatepicker.html", {visible:false}) -> Browser is not available: iab
+
+这是本次恢复后的单次确认；没有重试其它 provider。上一个 postfix 阶段的本地 Playwright 回退已确认不可用：require.resolve("playwright") 为 MODULE_NOT_FOUND，全局命令及两个 node_modules/.bin 路径均缺失。
+
+因此本次没有可用的新标签，没有页面 DOM、console、overlay 命中、视口/主题、弹层/键盘或截图证据。未启动 live-server；未发起外网请求。原始 postfix assessment-b.md 与 detector 输出未修改。

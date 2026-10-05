@@ -1,0 +1,11 @@
+Assessment B 浏览器状态证据
+
+默认桌面浅色：viewport=1280x720；documentElement.scrollWidth=1265。打开专项布控日期区间起始输入后，AX 树显示两个日期表格，输入值为 2026-09-15 至 2026-10-08。
+
+键盘行为（桌面）：ArrowDown 后 active element 为 TD.available.in-range.start-date（文本 15）；ArrowRight 后焦点移至 TD.available.in-range（文本 16）。Enter 后日期输入仍为 2026-09-15，demo 状态文案未变化（当前区间提交行为未由此步骤验证）。Escape 后起始输入重新获得焦点、aria-expanded=false、可见 popper 查询无结果，弹层已隐藏。
+
+HUD 深色：切换 HUD 深色主题后 demo 根节点包含 lx-theme-hud；打开区间弹层后 popper 包含 lx-theme-hud，背景计算色为 rgb(22, 35, 58)，且弹层可见。
+
+窄屏 HUD：viewport=390x844；documentElement.scrollWidth=886。区间弹层宽 324px，当前可见日期面板数=1。结束输入按 ArrowDown 后焦点位于 TD.available.in-range.end-date（文本 8），结束输入 aria-expanded=true。886px 的根文档宽度是文档页整体溢出观察；本次数据未定位具体溢出节点，不能归因到 LxDatePicker 弹层。
+
+结束清理：测试弹层关闭；viewport reset；HUD 主题复原。没有向真实后端发送请求。

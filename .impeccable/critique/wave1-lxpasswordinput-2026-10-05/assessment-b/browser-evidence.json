@@ -1,0 +1,153 @@
+{
+  "targetUrl": "http://127.0.0.1:4195/components/lxpasswordinput",
+  "browser": {
+    "tool": "CUA",
+    "tabId": "1",
+    "visible": false,
+    "visibilityNote": "visible=true is unsupported in a sub-agent thread; visible=false opened the requested fresh tab successfully."
+  },
+  "injectionPreflight": {
+    "titleSet": "Assessment B injection preflight",
+    "scriptElementAppended": true,
+    "markerPresent": true
+  },
+  "initialEndpointAttempt": {
+    "url": "http://127.0.0.1:4195/detect.js",
+    "responseStatus": 200,
+    "contentType": "text/html",
+    "responseBytes": 514,
+    "scriptOnload": "loaded",
+    "runtimeException": {
+      "method": "Runtime.exceptionThrown",
+      "text": "Uncaught",
+      "message": "SyntaxError: Unexpected token '<'",
+      "url": "http://127.0.0.1:4195/detect.js"
+    },
+    "overlayNodes": 0
+  },
+  "bundledLiveServer": {
+    "startCommand": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs\" \"--background\"",
+    "startExitCode": 0,
+    "pid": 15632,
+    "port": 8400,
+    "token": "redacted in saved stdout",
+    "injectedScriptUrl": "http://localhost:8400/detect.js",
+    "scriptOnload": "loaded",
+    "markerPresent": true,
+    "overlayNodeCount": 4,
+    "stopCommand": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs\" \"stop\"",
+    "stopStdout": "Stopped live server on port 8400.",
+    "stopExitCode": 0,
+    "pidAfterStop": "not running",
+    "stopStderr": "Optional live-inject cleanup reported config_missing for F:\\work\\linkx-admin\\.impeccable\\live\\config.json; the server itself stopped successfully."
+  },
+  "overlayConsole": [
+    {
+      "sequence": 32,
+      "method": "Runtime.consoleAPICalled",
+      "type": "startGroup",
+      "message": "[impeccable] 4 anti-patterns found"
+    },
+    {
+      "sequence": 33,
+      "method": "Runtime.consoleAPICalled",
+      "type": "log",
+      "message": "buried-raster: raster background at opacity 0",
+      "target": "BUTTON.copy"
+    },
+    {
+      "sequence": 34,
+      "method": "Runtime.consoleAPICalled",
+      "type": "log",
+      "message": "edge-flush-cards: 13 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+      "target": "TABLE"
+    },
+    {
+      "sequence": 35,
+      "method": "Runtime.consoleAPICalled",
+      "type": "log",
+      "message": "first-viewport-column-overflow: div.container opens the page with one column running 835% of the viewport tall while a sibling fits in 84% — the fold falls deep inside the section",
+      "target": "DIV.container"
+    },
+    {
+      "sequence": 36,
+      "method": "Runtime.consoleAPICalled",
+      "type": "log",
+      "message": "layout-transition: transition: height, padding-top, padding-bottom",
+      "target": "BODY"
+    },
+    {
+      "sequence": 37,
+      "method": "Runtime.consoleAPICalled",
+      "type": "endGroup",
+      "message": "console.groupEnd"
+    }
+  ],
+  "overlayTargetClassification": [
+    {
+      "rule": "buried-raster",
+      "target": "button.copy",
+      "ancestors": ["div.language-vue.vp-adaptive-theme", "details.custom-block", ".vp-doc._components_lxpasswordinput"],
+      "classification": "VitePress code-block copy control; documentation shell, not LxPasswordInput."
+    },
+    {
+      "rule": "edge-flush-cards",
+      "target": "table",
+      "ancestors": ["div", ".vp-doc._components_lxpasswordinput"],
+      "classification": "Generated Props table in documentation. The rule's 'cards' description is a semantic mismatch for this table."
+    },
+    {
+      "rule": "first-viewport-column-overflow",
+      "target": "div.container",
+      "ancestors": [".VPDoc.has-sidebar.has-aside", "#VPContent.VPContent.has-sidebar", ".Layout", "#app"],
+      "classification": "VitePress document layout and long page content; not the component demo."
+    },
+    {
+      "rule": "layout-transition",
+      "target": "body",
+      "classification": "Document shell transition; not the component."
+    }
+  ],
+  "desktopDom": {
+    "viewport": { "width": 1280, "height": 720 },
+    "document": { "clientWidth": 1265, "scrollWidth": 1265 },
+    "body": { "clientWidth": 1265, "scrollWidth": 1265 },
+    "demoClass": "password-input-demo lx-theme-hud",
+    "passwordInputs": [
+      { "type": "password", "disabled": false, "readOnly": false, "autocomplete": "new-password", "tabIndex": 0, "rect": { "x": 364, "y": 345, "width": 408, "height": 30, "right": 772 } },
+      { "type": "password", "disabled": false, "readOnly": true, "autocomplete": "off", "tabIndex": 0, "rect": { "x": 364, "y": 455, "width": 422, "height": 30, "right": 786 } },
+      { "type": "password", "disabled": true, "readOnly": false, "autocomplete": "off", "tabIndex": 0, "rect": { "x": 364, "y": 564, "width": 422, "height": 30, "right": 786 } }
+    ],
+    "visibilityButtons": [
+      { "ariaLabel": "显示密码", "ariaPressed": "false", "disabled": false, "tabIndex": 0 },
+      { "ariaLabel": "显示密码", "ariaPressed": "false", "disabled": false, "tabIndex": 0 },
+      { "ariaLabel": "显示密码", "ariaPressed": "false", "disabled": true, "tabIndex": 0 }
+    ]
+  },
+  "interactionDom": {
+    "hudDarkCheckbox": true,
+    "visibilityClick": { "accessibleNameAfterShow": "隐藏密码", "ariaPressed": "true" },
+    "spaceKey": { "accessibleNameAfterHide": "显示密码", "ariaPressed": "false" },
+    "tabOrder": "Tab from the password field focused its show-password control.",
+    "disabledState": "Input and show-password control are disabled in the disabled example.",
+    "readOnlyState": "Read-only example exposes readOnly=true and remains focusable."
+  },
+  "mobileAndReducedMotionDom": {
+    "viewport": { "width": 375, "height": 812, "visualWidth": 375 },
+    "document": { "clientWidth": 375, "scrollWidth": 375 },
+    "body": { "clientWidth": 375, "scrollWidth": 375 },
+    "demo": { "x": 24, "width": 327, "right": 351, "clientWidth": 325, "scrollWidth": 325 },
+    "passwordFields": [
+      { "type": "password", "disabled": false, "readOnly": false, "rect": { "x": 48, "y": 481, "width": 213, "height": 30, "right": 261 } },
+      { "type": "password", "disabled": false, "readOnly": true, "rect": { "x": 48, "y": 591, "width": 227, "height": 30, "right": 275 } },
+      { "type": "password", "disabled": true, "readOnly": false, "rect": { "x": 48, "y": 700, "width": 227, "height": 30, "right": 275 }
+      }
+    ],
+    "hudDarkCheckbox": true,
+    "prefersReducedMotion": true,
+    "demoAndPasswordControlComputedTransitionDuration": "1e-05s",
+    "demoAndPasswordControlComputedAnimationDuration": "1e-05s"
+  },
+  "passwordValuesRead": false,
+  "screenshots": "DOM records were saved; no screenshot file was captured."
+}

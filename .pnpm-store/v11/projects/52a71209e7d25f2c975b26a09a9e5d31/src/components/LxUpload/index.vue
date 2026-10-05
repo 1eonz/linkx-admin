@@ -14,6 +14,7 @@ import type {
   UploadUserFile,
 } from 'element-plus'
 import LxIcon from '../LxIcon/index.vue'
+import type { LxIconName } from '../LxIcon/icons'
 import { lxMessage } from '../LxMessage'
 import type { LxUploadFile, LxUploadProps } from './types'
 import 'element-plus/es/components/upload/style/css'
@@ -341,7 +342,7 @@ function statusText(file: UploadUserFile): string {
   return '排队中'
 }
 
-function statusIcon(file: UploadUserFile): string {
+function statusIcon(file: UploadUserFile): LxIconName {
   if (file.status === 'uploading') return 'loading'
   if (file.status === 'success') return 'check'
   if (file.status === 'fail') return 'alert'

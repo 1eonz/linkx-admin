@@ -1,0 +1,542 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#VPContent"
+  - banner:
+    - generic:
+      - generic:
+        - generic:
+          - link "LxUI" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e7]: LxUI
+          - generic [ref=e8]:
+            - navigation "Main Navigation" [ref=e9]:
+              - generic [ref=e10]: Main Navigation
+              - link "首页" [ref=e11] [cursor=pointer]:
+                - /url: /
+                - generic [ref=e12]: 首页
+              - link "组件" [ref=e13] [cursor=pointer]:
+                - /url: /components/lxsidebar.html
+                - generic [ref=e14]: 组件
+              - link "新增组件" [ref=e15] [cursor=pointer]:
+                - /url: /components/new-components.html
+                - generic [ref=e16]: 新增组件
+            - switch "Switch to dark theme" [ref=e18] [cursor=pointer]
+  - complementary [ref=e23]:
+    - navigation "Sidebar Navigation" [ref=e25]:
+      - generic [ref=e26]: Sidebar Navigation
+      - generic [ref=e28]:
+        - button "新增组件" [ref=e29]:
+          - heading "新增组件" [level=2] [ref=e31]
+        - link "新增组件总览" [ref=e36] [cursor=pointer]:
+          - /url: /components/new-components.html
+          - paragraph [ref=e37]: 新增组件总览
+      - generic [ref=e39]:
+        - button "基础" [ref=e40]:
+          - heading "基础" [level=2] [ref=e42]
+        - generic [ref=e43]:
+          - link "基础控件桥接" [ref=e47] [cursor=pointer]:
+            - /url: /components/element-bridge.html
+            - paragraph [ref=e48]: 基础控件桥接
+          - link "LxButton 按钮" [ref=e52] [cursor=pointer]:
+            - /url: /components/lxbutton.html
+            - paragraph [ref=e53]: LxButton 按钮
+          - link "LxIcon 图标总览" [ref=e57] [cursor=pointer]:
+            - /url: /components/lxicons.html
+            - paragraph [ref=e58]: LxIcon 图标总览
+      - generic [ref=e60]:
+        - button "布局导航" [ref=e61]:
+          - heading "布局导航" [level=2] [ref=e63]
+        - generic [ref=e64]:
+          - link "LxSidebar 侧边栏" [ref=e68] [cursor=pointer]:
+            - /url: /components/lxsidebar.html
+            - paragraph [ref=e69]: LxSidebar 侧边栏
+          - link "LxNavbar 顶部导航" [ref=e73] [cursor=pointer]:
+            - /url: /components/lxnavbar.html
+            - paragraph [ref=e74]: LxNavbar 顶部导航
+          - link "LxBreadcrumb 面包屑" [ref=e78] [cursor=pointer]:
+            - /url: /components/lxbreadcrumb.html
+            - paragraph [ref=e79]: LxBreadcrumb 面包屑
+          - link "LxTabsBar 页签栏" [ref=e83] [cursor=pointer]:
+            - /url: /components/lxtabsbar.html
+            - paragraph [ref=e84]: LxTabsBar 页签栏
+          - link "LxSplitLayout 分栏布局" [ref=e88] [cursor=pointer]:
+            - /url: /components/lxsplitlayout.html
+            - paragraph [ref=e89]: LxSplitLayout 分栏布局
+          - link "LxSelectTree 组织树选择" [ref=e93] [cursor=pointer]:
+            - /url: /components/lxselecttree.html
+            - paragraph [ref=e94]: LxSelectTree 组织树选择
+      - generic [ref=e96]:
+        - button "数据展示" [ref=e97]:
+          - heading "数据展示" [level=2] [ref=e99]
+        - generic [ref=e100]:
+          - link "LxProTable 数据表格" [ref=e104] [cursor=pointer]:
+            - /url: /components/lxprotable.html
+            - paragraph [ref=e105]: LxProTable 数据表格
+          - link "LxPageCard 页面容器" [ref=e109] [cursor=pointer]:
+            - /url: /components/lxpagecard.html
+            - paragraph [ref=e110]: LxPageCard 页面容器
+          - link "LxMetricCard 指标卡" [ref=e114] [cursor=pointer]:
+            - /url: /components/lxmetriccard.html
+            - paragraph [ref=e115]: LxMetricCard 指标卡
+          - link "LxDutyCalendar 排班日历" [ref=e119] [cursor=pointer]:
+            - /url: /components/lxdutycalendar.html
+            - paragraph [ref=e120]: LxDutyCalendar 排班日历
+          - link "LxSectionTitle 区块标题" [ref=e124] [cursor=pointer]:
+            - /url: /components/lxsectiontitle.html
+            - paragraph [ref=e125]: LxSectionTitle 区块标题
+          - link "LxAuthImg 鉴权图片" [ref=e129] [cursor=pointer]:
+            - /url: /components/lxauthimg.html
+            - paragraph [ref=e130]: LxAuthImg 鉴权图片
+          - link "LxDescriptions 详情描述" [ref=e134] [cursor=pointer]:
+            - /url: /components/lxdescriptions.html
+            - paragraph [ref=e135]: LxDescriptions 详情描述
+          - link "LxPagination 分页" [ref=e139] [cursor=pointer]:
+            - /url: /components/lxpagination.html
+            - paragraph [ref=e140]: LxPagination 分页
+          - link "LxVirtualTree 虚拟树" [ref=e144] [cursor=pointer]:
+            - /url: /components/lxvirtualtree.html
+            - paragraph [ref=e145]: LxVirtualTree 虚拟树
+          - link "LxTransferPanel 双栏穿梭" [ref=e149] [cursor=pointer]:
+            - /url: /components/lxtransferpanel.html
+            - paragraph [ref=e150]: LxTransferPanel 双栏穿梭
+          - link "LxStatusDot 状态点" [ref=e154] [cursor=pointer]:
+            - /url: /components/lxstatusdot.html
+            - paragraph [ref=e155]: LxStatusDot 状态点
+          - link "LxTag 浅底标签" [ref=e159] [cursor=pointer]:
+            - /url: /components/lxtag.html
+            - paragraph [ref=e160]: LxTag 浅底标签
+          - link "LxCodeSlot 代码槽" [ref=e164] [cursor=pointer]:
+            - /url: /components/lxcodeslot.html
+            - paragraph [ref=e165]: LxCodeSlot 代码槽
+          - link "LxActionButtons 行内操作" [ref=e169] [cursor=pointer]:
+            - /url: /components/lxactionbuttons.html
+            - paragraph [ref=e170]: LxActionButtons 行内操作
+          - link "LxEmpty 空态" [ref=e174] [cursor=pointer]:
+            - /url: /components/lxempty.html
+            - paragraph [ref=e175]: LxEmpty 空态
+          - link "LxGauge 圆环仪表" [ref=e179] [cursor=pointer]:
+            - /url: /components/lxgauge.html
+            - paragraph [ref=e180]: LxGauge 圆环仪表
+          - link "LxNodeBadge 节点徽章" [ref=e184] [cursor=pointer]:
+            - /url: /components/lxnodebadge.html
+            - paragraph [ref=e185]: LxNodeBadge 节点徽章
+          - link "权限消费" [ref=e189] [cursor=pointer]:
+            - /url: /components/permissions.html
+            - paragraph [ref=e190]: 权限消费
+      - generic [ref=e192]:
+        - button "数据录入" [ref=e193]:
+          - heading "数据录入" [level=2] [ref=e195]
+        - generic [ref=e196]:
+          - link "LxForm 表单" [ref=e200] [cursor=pointer]:
+            - /url: /components/lxform.html
+            - paragraph [ref=e201]: LxForm 表单
+          - link "LxInput 输入框" [ref=e205] [cursor=pointer]:
+            - /url: /components/lxinput.html
+            - paragraph [ref=e206]: LxInput 输入框
+          - link "LxTextarea 文本域" [ref=e210] [cursor=pointer]:
+            - /url: /components/lxtextarea.html
+            - paragraph [ref=e211]: LxTextarea 文本域
+          - link "LxRadio 单选组" [ref=e215] [cursor=pointer]:
+            - /url: /components/lxradio.html
+            - paragraph [ref=e216]: LxRadio 单选组
+          - link "LxCheckbox 复选组" [ref=e220] [cursor=pointer]:
+            - /url: /components/lxcheckbox.html
+            - paragraph [ref=e221]: LxCheckbox 复选组
+          - link "LxSwitch 开关" [ref=e225] [cursor=pointer]:
+            - /url: /components/lxswitch.html
+            - paragraph [ref=e226]: LxSwitch 开关
+          - link "LxSelect 下拉选择" [ref=e230] [cursor=pointer]:
+            - /url: /components/lxselect.html
+            - paragraph [ref=e231]: LxSelect 下拉选择
+          - link "LxTreeSelect 树形下拉" [ref=e235] [cursor=pointer]:
+            - /url: /components/lxtreeselect.html
+            - paragraph [ref=e236]: LxTreeSelect 树形下拉
+          - link "LxCascader 级联选择" [ref=e240] [cursor=pointer]:
+            - /url: /components/lxcascader.html
+            - paragraph [ref=e241]: LxCascader 级联选择
+          - link "LxDatePicker 日期选择" [ref=e245] [cursor=pointer]:
+            - /url: /components/lxdatepicker.html
+            - paragraph [ref=e246]: LxDatePicker 日期选择
+          - link "LxInputNumber 数字输入" [ref=e250] [cursor=pointer]:
+            - /url: /components/lxinputnumber.html
+            - paragraph [ref=e251]: LxInputNumber 数字输入
+          - link "LxSearchBar 检索面板" [ref=e255] [cursor=pointer]:
+            - /url: /components/lxsearchbar.html
+            - paragraph [ref=e256]: LxSearchBar 检索面板
+          - link "LxDynamicForm 动态表单" [ref=e260] [cursor=pointer]:
+            - /url: /components/lxdynamicform.html
+            - paragraph [ref=e261]: LxDynamicForm 动态表单
+          - link "LxStatusSwitch 状态开关" [ref=e265] [cursor=pointer]:
+            - /url: /components/lxstatusswitch.html
+            - paragraph [ref=e266]: LxStatusSwitch 状态开关
+          - link "LxPasswordInput 密码输入框" [ref=e270] [cursor=pointer]:
+            - /url: /components/lxpasswordinput.html
+            - paragraph [ref=e271]: LxPasswordInput 密码输入框
+          - link "LxUpload 文件上传" [ref=e275] [cursor=pointer]:
+            - /url: /components/lxupload.html
+            - paragraph [ref=e276]: LxUpload 文件上传
+          - link "LxSelectPagination 远程分页选择" [ref=e280] [cursor=pointer]:
+            - /url: /components/lxselectpagination.html
+            - paragraph [ref=e281]: LxSelectPagination 远程分页选择
+      - generic [ref=e283]:
+        - button "反馈与浮层" [ref=e284]:
+          - heading "反馈与浮层" [level=2] [ref=e286]
+        - generic [ref=e287]:
+          - link "LxMessage 全局提示" [ref=e291] [cursor=pointer]:
+            - /url: /components/lxmessage.html
+            - paragraph [ref=e292]: LxMessage 全局提示
+          - link "LxConfirm 确认框" [ref=e296] [cursor=pointer]:
+            - /url: /components/lxconfirm.html
+            - paragraph [ref=e297]: LxConfirm 确认框
+          - link "LxDialog 表单弹窗" [ref=e301] [cursor=pointer]:
+            - /url: /components/lxdialog.html
+            - paragraph [ref=e302]: LxDialog 表单弹窗
+          - link "LxDrawer 详情抽屉" [ref=e306] [cursor=pointer]:
+            - /url: /components/lxdrawer.html
+            - paragraph [ref=e307]: LxDrawer 详情抽屉
+          - link "LxFormErrorBanner 校验横幅" [ref=e311] [cursor=pointer]:
+            - /url: /components/lxformerrorbanner.html
+            - paragraph [ref=e312]: LxFormErrorBanner 校验横幅
+  - generic [ref=e315]:
+    - navigation "On this page" [ref=e321]:
+      - generic [ref=e322]:
+        - heading "On this page" [level=2] [ref=e324]
+        - list [ref=e325]:
+          - listitem [ref=e326]:
+            - link "交互示例" [ref=e327] [cursor=pointer]:
+              - /url: "#交互示例"
+          - listitem [ref=e328]:
+            - link "Props" [ref=e329] [cursor=pointer]:
+              - /url: "#props"
+          - listitem [ref=e330]:
+            - link "Events" [ref=e331] [cursor=pointer]:
+              - /url: "#events"
+          - listitem [ref=e332]:
+            - link "旧 EP props 透传" [ref=e333] [cursor=pointer]:
+              - /url: "#旧-ep-props-透传"
+          - listitem [ref=e334]:
+            - link "与标本的对齐说明" [ref=e335] [cursor=pointer]:
+              - /url: "#与标本的对齐说明"
+          - listitem [ref=e336]:
+            - link "可访问性" [ref=e337] [cursor=pointer]:
+              - /url: "#可访问性"
+          - listitem [ref=e338]:
+            - link "Vue3 宿主适配" [ref=e339] [cursor=pointer]:
+              - /url: "#vue3-宿主适配"
+    - generic [ref=e342]:
+      - main [ref=e343]:
+        - generic [ref=e345]:
+          - heading "LxSwitch 状态开关 Permalink to \"LxSwitch 状态开关\"" [level=1] [ref=e346]:
+            - text: LxSwitch 状态开关
+            - link "Permalink to \"LxSwitch 状态开关\"" [ref=e347] [cursor=pointer]:
+              - /url: "#lxswitch-状态开关"
+              - text: "#"
+          - paragraph [ref=e348]:
+            - text: LxSwitch 是基于 Element Plus 内核的通用状态开关，主形态遵循标本 07：状态文字置于开关外，胶囊固定
+            - strong [ref=e349]: 40×20
+            - text: 、滑块 16px，开启为
+            - code [ref=e350]: "#67c23a"
+            - text: 、关闭为
+            - code [ref=e351]: "#909399"
+            - text: 。不开放 size 档；胶囊内文字和两侧文字作为扩展形态。表格行内状态列使用
+            - code [ref=e352]: LxStatusSwitch
+            - text: ，其开关本体复用本组件。
+          - paragraph [ref=e353]:
+            - text: 视觉规范源：
+            - code [ref=e354]: design/表单控件八件套/code.html
+            - text: 07。
+          - heading "交互示例 Permalink to \"交互示例\"" [level=2] [ref=e355]:
+            - text: 交互示例
+            - link "Permalink to \"交互示例\"" [ref=e356] [cursor=pointer]:
+              - /url: "#交互示例"
+              - text: "#"
+          - generic [ref=e357]:
+            - generic [ref=e359]:
+              - checkbox "HUD 深色主题（全页预览）" [ref=e360]
+              - text: HUD 深色主题（全页预览）
+            - generic [ref=e361]:
+              - heading "开关外状态文字（标本 07 主形态）" [level=4] [ref=e362]
+              - generic [ref=e363]:
+                - generic [ref=e364]:
+                  - generic [ref=e365]:
+                    - generic [ref=e366]: 卡口车辆实时 AI 研判拦截
+                    - generic [ref=e367]: 高算力端侧即时告警接入
+                  - generic [ref=e368]:
+                    - generic [ref=e369]: 关闭
+                    - generic "卡口车辆实时 AI 研判拦截" [ref=e370]:
+                      - switch "卡口车辆实时 AI 研判拦截" [checked] [active]
+                - generic [ref=e374]:
+                  - generic [ref=e375]:
+                    - generic [ref=e376]: 夜间低敏静默布防模式
+                    - generic [ref=e377]: 未触发常规巡线时不发送警报
+                  - generic [ref=e378]:
+                    - generic [ref=e379]: 关闭
+                    - generic [ref=e380]:
+                      - switch "夜间低敏静默布防模式"
+                - generic [ref=e384]:
+                  - generic [ref=e385]:
+                    - generic [ref=e386]: 省厅直辖联防调度镜像（锁定）
+                    - generic [ref=e387]: 受上级指令系统锁定，本级不可改动
+                  - generic [ref=e388]:
+                    - generic [ref=e389]: 已锁
+                    - generic [ref=e390]:
+                      - switch "省厅直辖联防调度镜像（锁定）" [checked] [disabled]
+              - paragraph [ref=e394]: 状态文字位于开关外；锁定态同时说明不可操作原因，颜色不作为唯一状态提示。
+            - generic [ref=e395]:
+              - heading "胶囊内文字（扩展形态）" [level=4] [ref=e396]
+              - generic [ref=e398]:
+                - generic [ref=e399]:
+                  - generic [ref=e400]: 勤务值守模式
+                  - generic [ref=e401]: 自定义两字文案（胶囊内不限于"开启/关闭"）
+                - generic [ref=e402]:
+                  - switch "勤务值守模式" [checked]
+                  - generic [ref=e406] [cursor=pointer]: 值守
+              - paragraph [ref=e408]: inlinePrompt 默认 true；传 activeText / inactiveText 后，文案显示在胶囊内。该形态适合状态词本身足够清楚的场景。
+            - generic [ref=e409]:
+              - heading "无文字开关（标本 07 形态：状态由外部文字表达）" [level=4] [ref=e410]
+              - generic [ref=e411]:
+                - generic [ref=e412]:
+                  - switch "HUD 战术图层"
+                - generic [ref=e416]: 关闭
+                - generic [ref=e417]: 无文字时胶囊保持标本 40×20；状态不能只靠颜色区分
+            - generic [ref=e418]:
+              - heading "加载态与透传" [level=4] [ref=e419]
+              - generic [ref=e420]:
+                - generic [ref=e421]:
+                  - switch "省厅镜像同步"
+                - generic [ref=e425]: 首次操作模拟失败并保留关闭值；再次操作成功（每次约 2s）
+              - generic [ref=e426]:
+                - generic [ref=e427]:
+                  - switch "自定义值开关"
+                - generic [ref=e431]: active-value/inactive-value 经 attrs 透传：当前值 off
+            - generic [ref=e432]:
+              - heading "胶囊两侧文字（显式传 :inline-prompt=\"false\"）" [level=4] [ref=e433]
+              - generic [ref=e434]:
+                - generic [ref=e435]:
+                  - switch "外置状态文案开关"
+                  - generic [ref=e437] [cursor=pointer]: 未联动
+                  - generic [ref=e441] [cursor=pointer]: 已联动
+                - generic [ref=e442]: 文字显示在胶囊两侧，激活侧转主色（EP 原生 label 契约）
+            - paragraph [ref=e443]: AI 研判拦截 已关闭
+            - paragraph [ref=e444]: "胶囊固定 40×20（胶囊内文字放宽至 42px）、滑块 16px；开启 #67c23a 成功绿、关闭 #909399 信息灰；不开放 size 档。"
+          - group [ref=e445]:
+            - generic "查看示例代码" [ref=e446] [cursor=pointer]
+          - heading "Props Permalink to \"Props\"" [level=2] [ref=e447]:
+            - text: Props
+            - link "Permalink to \"Props\"" [ref=e448] [cursor=pointer]:
+              - /url: "#props"
+              - text: "#"
+          - paragraph [ref=e449]: 窄屏查看参数时，请横向滚动表格以查看默认值和完整说明列。
+          - table [ref=e450]:
+            - rowgroup [ref=e451]:
+              - row "名称 类型 默认值 说明" [ref=e452]:
+                - columnheader "名称" [ref=e453]
+                - columnheader "类型" [ref=e454]
+                - columnheader "默认值" [ref=e455]
+                - columnheader "说明" [ref=e456]
+            - rowgroup [ref=e457]:
+              - row "modelValue boolean | string | number false 开关值（v-model；自定义值经 active-value attrs）。" [ref=e458]:
+                - cell "modelValue" [ref=e459]:
+                  - code [ref=e460]: modelValue
+                - cell "boolean | string | number" [ref=e461]:
+                  - code [ref=e462]: boolean | string | number
+                - cell "false" [ref=e463]:
+                  - code [ref=e464]: "false"
+                - cell "开关值（v-model；自定义值经 active-value attrs）。" [ref=e465]:
+                  - text: 开关值（v-model；自定义值经
+                  - code [ref=e466]: active-value
+                  - text: attrs）。
+              - row "activeText string — 开启态文字；inlinePrompt 时显示在胶囊内，否则胶囊右侧。" [ref=e467]:
+                - cell "activeText" [ref=e468]:
+                  - code [ref=e469]: activeText
+                - cell "string" [ref=e470]:
+                  - code [ref=e471]: string
+                - cell "—" [ref=e472]
+                - cell "开启态文字；inlinePrompt 时显示在胶囊内，否则胶囊右侧。" [ref=e473]:
+                  - text: 开启态文字；
+                  - code [ref=e474]: inlinePrompt
+                  - text: 时显示在胶囊内，否则胶囊右侧。
+              - row "inactiveText string — 关闭态文字；inlinePrompt 时显示在胶囊内，否则胶囊左侧。" [ref=e475]:
+                - cell "inactiveText" [ref=e476]:
+                  - code [ref=e477]: inactiveText
+                - cell "string" [ref=e478]:
+                  - code [ref=e479]: string
+                - cell "—" [ref=e480]
+                - cell "关闭态文字；inlinePrompt 时显示在胶囊内，否则胶囊左侧。" [ref=e481]:
+                  - text: 关闭态文字；
+                  - code [ref=e482]: inlinePrompt
+                  - text: 时显示在胶囊内，否则胶囊左侧。
+              - row "inlinePrompt boolean true 文字显示在胶囊内；开启后胶囊放宽至 42px 容纳两字文案。Lx 默认 true（与 EP 原生默认 false 有意不同），两侧文字模式显式传 false。" [ref=e483]:
+                - cell "inlinePrompt" [ref=e484]:
+                  - code [ref=e485]: inlinePrompt
+                - cell "boolean" [ref=e486]:
+                  - code [ref=e487]: boolean
+                - cell "true" [ref=e488]:
+                  - code [ref=e489]: "true"
+                - cell "文字显示在胶囊内；开启后胶囊放宽至 42px 容纳两字文案。Lx 默认 true（与 EP 原生默认 false 有意不同），两侧文字模式显式传 false。" [ref=e490]:
+                  - text: 文字显示在胶囊内；开启后胶囊放宽至 42px 容纳两字文案。Lx 默认 true（与 EP 原生默认 false 有意不同），两侧文字模式显式传
+                  - code [ref=e491]: "false"
+                  - text: 。
+              - row "disabled boolean —（undefined） 禁用态：胶囊半透明 + 禁用手势（标本 07\"上级锁定\"行）。默认未设置：不阻断 EP 内核禁用继承链（loading 拦截 / ElForm 禁用传导）；显式传 true/false 才覆盖继承。" [ref=e492]:
+                - cell "disabled" [ref=e493]:
+                  - code [ref=e494]: disabled
+                - cell "boolean" [ref=e495]:
+                  - code [ref=e496]: boolean
+                - cell "—（undefined）" [ref=e497]:
+                  - text: —（
+                  - code [ref=e498]: undefined
+                  - text: ）
+                - cell "禁用态：胶囊半透明 + 禁用手势（标本 07\"上级锁定\"行）。默认未设置：不阻断 EP 内核禁用继承链（loading 拦截 / ElForm 禁用传导）；显式传 true/false 才覆盖继承。" [ref=e499]:
+                  - text: 禁用态：胶囊半透明 + 禁用手势（标本 07"上级锁定"行）。默认未设置：不阻断 EP 内核禁用继承链（loading 拦截 /
+                  - code [ref=e500]: ElForm
+                  - text: 禁用传导）；显式传
+                  - code [ref=e501]: "true"
+                  - text: /
+                  - code [ref=e502]: "false"
+                  - text: 才覆盖继承。
+              - row "loading boolean false 加载态：滑块 spinner + 点击拦截。" [ref=e503]:
+                - cell "loading" [ref=e504]:
+                  - code [ref=e505]: loading
+                - cell "boolean" [ref=e506]:
+                  - code [ref=e507]: boolean
+                - cell "false" [ref=e508]:
+                  - code [ref=e509]: "false"
+                - cell "加载态：滑块 spinner + 点击拦截。" [ref=e510]
+              - row "name string — 原生 name 属性。" [ref=e511]:
+                - cell "name" [ref=e512]:
+                  - code [ref=e513]: name
+                - cell "string" [ref=e514]:
+                  - code [ref=e515]: string
+                - cell "—" [ref=e516]
+                - cell "原生 name 属性。" [ref=e517]
+          - heading "Events Permalink to \"Events\"" [level=2] [ref=e518]:
+            - text: Events
+            - link "Permalink to \"Events\"" [ref=e519] [cursor=pointer]:
+              - /url: "#events"
+              - text: "#"
+          - table [ref=e520]:
+            - rowgroup [ref=e521]:
+              - row "名称 参数 说明" [ref=e522]:
+                - columnheader "名称" [ref=e523]
+                - columnheader "参数" [ref=e524]
+                - columnheader "说明" [ref=e525]
+            - rowgroup [ref=e526]:
+              - row "update:modelValue (value) 开关值变化。" [ref=e527]:
+                - cell "update:modelValue" [ref=e528]:
+                  - code [ref=e529]: update:modelValue
+                - cell "(value)" [ref=e530]:
+                  - code [ref=e531]: (value)
+                - cell "开关值变化。" [ref=e532]
+              - row "change (value) 开关切换。" [ref=e533]:
+                - cell "change" [ref=e534]:
+                  - code [ref=e535]: change
+                - cell "(value)" [ref=e536]:
+                  - code [ref=e537]: (value)
+                - cell "开关切换。" [ref=e538]
+          - heading "旧 EP props 透传 Permalink to \"旧 EP props 透传\"" [level=2] [ref=e539]:
+            - text: 旧 EP props 透传
+            - link "Permalink to \"旧 EP props 透传\"" [ref=e540] [cursor=pointer]:
+              - /url: "#旧-ep-props-透传"
+              - text: "#"
+          - paragraph [ref=e541]:
+            - code [ref=e542]: active-value
+            - text: /
+            - code [ref=e543]: inactive-value
+            - text: （自定义开关值）、
+            - code [ref=e544]: before-change
+            - text: （切换前拦截）经 attrs 透传给 EP 内核：
+          - generic [ref=e545]:
+            - button "Copy Code" [ref=e546] [cursor=pointer]
+            - generic [ref=e547]: vue
+            - code [ref=e549]:
+              - generic [ref=e550]: <LxSwitch v-model="mode" active-value="on" inactive-value="off" />
+          - heading "与标本的对齐说明 Permalink to \"与标本的对齐说明\"" [level=2] [ref=e551]:
+            - text: 与标本的对齐说明
+            - link "Permalink to \"与标本的对齐说明\"" [ref=e552] [cursor=pointer]:
+              - /url: "#与标本的对齐说明"
+              - text: "#"
+          - table [ref=e553]:
+            - rowgroup [ref=e554]:
+              - row "契约项 标本 07 实现" [ref=e555]:
+                - columnheader "契约项" [ref=e556]
+                - columnheader "标本 07" [ref=e557]
+                - columnheader "实现" [ref=e558]
+            - rowgroup [ref=e559]:
+              - row "胶囊几何 40×20 胶囊 + 16px 滑块 EP 内核默认值恰好对齐，显式固化防升级漂移" [ref=e560]:
+                - cell "胶囊几何" [ref=e561]
+                - cell "40×20 胶囊 + 16px 滑块" [ref=e562]
+                - cell "EP 内核默认值恰好对齐，显式固化防升级漂移" [ref=e563]
+              - 'row "开启色 #67c23a（成功绿） --lx-color-success 注入 EP 开关变量" [ref=e564]':
+                - cell "开启色" [ref=e565]
+                - cell "#67c23a（成功绿）" [ref=e566]
+                - cell "--lx-color-success 注入 EP 开关变量" [ref=e567]:
+                  - code [ref=e568]: "--lx-color-success"
+                  - text: 注入 EP 开关变量
+              - 'row "关闭色 #909399（信息灰） --lx-color-info 注入 EP 开关变量" [ref=e569]':
+                - cell "关闭色" [ref=e570]
+                - cell "#909399（信息灰）" [ref=e571]
+                - cell "--lx-color-info 注入 EP 开关变量" [ref=e572]:
+                  - code [ref=e573]: "--lx-color-info"
+                  - text: 注入 EP 开关变量
+              - 'row "禁用 #67c23a/50 半透明 胶囊 opacity 0.5" [ref=e574]':
+                - cell "禁用" [ref=e575]
+                - cell "#67c23a/50 半透明" [ref=e576]
+                - cell "胶囊 opacity 0.5" [ref=e577]
+              - row "状态文字 外部\"开启/关闭\"文字 宿主布局表达（状态不能只靠颜色区分）" [ref=e578]:
+                - cell "状态文字" [ref=e579]
+                - cell "外部\"开启/关闭\"文字" [ref=e580]
+                - cell "宿主布局表达（状态不能只靠颜色区分）" [ref=e581]
+              - row "胶囊内文字 —（衍生场景） inlinePrompt 默认 true：42px 胶囊 + 11px/600 深灰对比文字，主用法形态" [ref=e582]:
+                - cell "胶囊内文字" [ref=e583]
+                - cell "—（衍生场景）" [ref=e584]
+                - cell "inlinePrompt 默认 true：42px 胶囊 + 11px/600 深灰对比文字，主用法形态" [ref=e585]:
+                  - code [ref=e586]: inlinePrompt
+                  - text: 默认 true：42px 胶囊 + 11px/600 深灰对比文字，主用法形态
+              - row "size 档 — 有意识裁剪，胶囊尺寸唯一" [ref=e587]:
+                - cell "size 档" [ref=e588]
+                - cell "—" [ref=e589]
+                - cell "有意识裁剪，胶囊尺寸唯一" [ref=e590]
+          - heading "可访问性 Permalink to \"可访问性\"" [level=2] [ref=e591]:
+            - text: 可访问性
+            - link "Permalink to \"可访问性\"" [ref=e592] [cursor=pointer]:
+              - /url: "#可访问性"
+              - text: "#"
+          - paragraph [ref=e593]:
+            - text: 每个开关都必须提供准确的可访问名称；可通过
+            - code [ref=e594]: aria-label
+            - text: 或
+            - code [ref=e595]: aria-labelledby
+            - text: 为内部原生控件命名，
+            - code [ref=e596]: aria-describedby
+            - text: 会同步到内部控件。隐藏 input 保持 Element Plus 原生键盘操作；键盘焦点显示主色外环。触屏设备的命中区域至少为 44×44px，胶囊本体仍保持设计规定的尺寸。
+          - paragraph [ref=e597]: loading、禁用和业务下发失败由宿主按实际状态提供；本组件不发起业务请求。Demo 使用本地内存模拟首次失败和再次成功，展示失败时保留原值、重试后同步控件值与状态播报。
+          - heading "Vue3 宿主适配 Permalink to \"Vue3 宿主适配\"" [level=2] [ref=e598]:
+            - text: Vue3 宿主适配
+            - link "Permalink to \"Vue3 宿主适配\"" [ref=e599] [cursor=pointer]:
+              - /url: "#vue3-宿主适配"
+              - text: "#"
+          - paragraph [ref=e600]:
+            - text: 业务层直接使用
+            - code [ref=e601]: LxSwitch
+            - text: （或全局组件名）。
+            - code [ref=e602]: element-theme.css
+            - text: 对裸
+            - code [ref=e603]: el-switch
+            - text: 的全局色彩桥保留过渡期；表格行内状态列继续用
+            - code [ref=e604]: LxStatusSwitch
+            - text: 。
+      - contentinfo [ref=e605]:
+        - navigation "Pager" [ref=e606]:
+          - generic [ref=e607]: Pager
+          - link "Previous page LxCheckbox 复选组" [ref=e609] [cursor=pointer]:
+            - /url: /components/lxcheckbox.html
+            - generic [ref=e610]: Previous page
+            - generic [ref=e611]: LxCheckbox 复选组
+          - link "Next page LxSelect 下拉选择" [ref=e613] [cursor=pointer]:
+            - /url: /components/lxselect.html
+            - generic [ref=e614]: Next page
+            - generic [ref=e615]: LxSelect 下拉选择
+```

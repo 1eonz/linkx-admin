@@ -77,7 +77,7 @@ function toggleMode() {
           aria-label="控制台设置"
           @click="emit('settings')"
         >
-          <LxIcon name="settings" :size="14" />
+          <LxIcon name="setting" :size="14" />
           <span>控制台设置</span>
         </button>
         <button

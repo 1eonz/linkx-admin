@@ -1,0 +1,2803 @@
+{
+  "assessment": "A-only design and UX review; Assessment B and detector intentionally omitted by task scope",
+  "capturedAt": "2026-10-05T17:47:05.962Z",
+  "target": "linkx-fe/src/components/LxPasswordInput/index.vue",
+  "document": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+  "server": {
+    "startCommand": "pnpm dev --host 127.0.0.1 --port 4182 --strictPort",
+    "sessionId": 30208,
+    "listenerPidAtCapture": 15008,
+    "stopMethod": "Send Ctrl+C to the active exec session (sessionId 30208), then verify Get-NetTCPConnection -State Listen -LocalPort 4182 returns no row.",
+    "stoppedAndVerified": true,
+    "listenerPortClosed": true,
+    "listenerPidAbsent": true,
+    "stopSignal": "Ctrl+C sent to exec session 30208",
+    "sessionExitCode": 1,
+    "verification": "Get-NetTCPConnection on 4182 returned no listener; process 15008 was absent.",
+    "stopVerifiedAt": "2026-10-06T01:55:14.4471177+08:00"
+  },
+  "browser": {
+    "automation": "Playwright 1.58.0",
+    "executable": "Google Chrome 154.0.8037.95",
+    "freshContext": true,
+    "freshPage": true,
+    "status": 200,
+    "title": "LxPasswordInput 密码输入框 | LxUI"
+  },
+  "interactions": {
+    "keyboardEnterPressed": "false",
+    "keyboardSpacePressed": "true",
+    "maskOnBlurInternalTransferType": "text",
+    "maskOnBlurAfterLeavingType": "password",
+    "tabOrder": [
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "name": null,
+        "text": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "name": null,
+        "text": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "name": null,
+        "text": ""
+      },
+      {
+        "tag": "SUMMARY",
+        "type": null,
+        "name": null,
+        "text": "剪贴板与主题设置"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "name": null,
+        "text": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "name": null,
+        "text": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "password",
+        "name": null,
+        "text": ""
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": "显示密码",
+        "text": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": null,
+        "text": ""
+      }
+    ],
+    "readonlyInputFocusable": true,
+    "readonlyToggleAccessibleName": "显示密码",
+    "disabledInputDisabled": true,
+    "disabledToggleDisabled": true
+  },
+  "screenshots": [
+    {
+      "file": "docs-1280-light-top.png",
+      "fullPage": false
+    },
+    {
+      "file": "demo-1280-light-masked.png",
+      "target": ".password-input-demo"
+    },
+    {
+      "file": "demo-1280-light-revealed-mask-off.png",
+      "target": ".password-input-demo"
+    },
+    {
+      "file": "demo-1280-light-mask-on-blur-after-exit.png",
+      "target": ".password-input-demo"
+    },
+    {
+      "file": "demo-1280-readonly-visible-disabled.png",
+      "target": ".password-input-demo"
+    },
+    {
+      "file": "demo-1280-disclosure-open.png",
+      "target": ".password-input-demo"
+    },
+    {
+      "file": "demo-1280-hud-open.png",
+      "target": ".password-input-demo"
+    },
+    {
+      "file": "demo-1280-reduced-motion.png",
+      "target": ".password-input-demo"
+    },
+    {
+      "file": "demo-375-light.png",
+      "target": ".password-input-demo"
+    },
+    {
+      "file": "docs-375-light-props.png",
+      "fullPage": false
+    },
+    {
+      "file": "demo-320-light.png",
+      "target": ".password-input-demo"
+    },
+    {
+      "file": "docs-320-light-props.png",
+      "fullPage": false
+    },
+    {
+      "file": "demo-320-hud-expanded.png",
+      "target": ".password-input-demo"
+    }
+  ],
+  "observations": [
+    {
+      "label": "1280-light-docs-top",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3816
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 345,
+          "width": 624,
+          "height": 603
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 362,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": false,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 562,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 672,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 781,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 562,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 454,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BODY",
+          "type": null,
+          "name": null,
+          "text": "Skip to contentLxUI Main Navigation 首页组件新增组件AppearanceMenuOn this page Sidebar N"
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1219,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2598,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 3044,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "1280-light-masked-mask-on-blur-off",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3816
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 297,
+          "width": 624,
+          "height": 603
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 314,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": false,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 406,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BODY",
+          "type": null,
+          "name": null,
+          "text": "Skip to contentLxUI Main Navigation 首页组件新增组件AppearanceMenuOn this page Sidebar N"
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "1280-light-revealed-mask-on-blur-off",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3816
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 297,
+          "width": 624,
+          "height": 603
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 314,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": false,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "text",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "隐藏密码",
+          "pressed": "true",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 406,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BUTTON",
+          "type": "button",
+          "name": "隐藏密码",
+          "text": ""
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "1280-light-revealed-after-blur-mask-on-blur-off",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3816
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 297,
+          "width": 624,
+          "height": 603
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 314,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": false,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "text",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "隐藏密码",
+          "pressed": "true",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 406,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BUTTON",
+          "type": "button",
+          "name": null,
+          "text": "移除焦点"
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "keyboard-enter-toggle",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3816
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 297,
+          "width": 624,
+          "height": 603
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 314,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": false,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 406,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BUTTON",
+          "type": "button",
+          "name": "显示密码",
+          "text": ""
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "keyboard-space-toggle",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3816
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 297,
+          "width": 624,
+          "height": 603
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 314,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": false,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "text",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "隐藏密码",
+          "pressed": "true",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 406,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BUTTON",
+          "type": "button",
+          "name": "隐藏密码",
+          "text": ""
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "mask-on-blur-internal-focus-transfer",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3816
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 297,
+          "width": 624,
+          "height": 603
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 314,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": true,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "text",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "隐藏密码",
+          "pressed": "true",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 406,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BUTTON",
+          "type": "button",
+          "name": "隐藏密码",
+          "text": ""
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "mask-on-blur-after-leaving-component",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3816
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 297,
+          "width": 624,
+          "height": 603
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 314,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": true,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 406,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BUTTON",
+          "type": "button",
+          "name": null,
+          "text": "移除焦点"
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "1280-readonly-disabled-masked",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3816
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 297,
+          "width": 624,
+          "height": 603
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 314,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": true,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": true,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 406,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "INPUT",
+          "type": "password",
+          "name": null,
+          "text": ""
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "1280-readonly-visible-disabled",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3816
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 297,
+          "width": 624,
+          "height": 603
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 314,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": true,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "text",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 406,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BUTTON",
+          "type": "button",
+          "name": "隐藏密码",
+          "text": ""
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "1280-disclosure-open",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3848
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 265,
+          "width": 624,
+          "height": 635
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 282,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": true,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "text",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": true,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 374,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "matrix(-1, 0, 0, -1, 0, 0)",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "SUMMARY",
+          "type": null,
+          "name": null,
+          "text": "剪贴板与主题设置"
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "1280-hud-open",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3848
+      },
+      "theme": {
+        "hudEnabled": true,
+        "demoBackground": "rgb(16, 26, 44)",
+        "demoText": "rgb(226, 232, 240)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 265,
+          "width": 624,
+          "height": 635
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 282,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": true,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "text",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": true,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 374,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "matrix(-1, 0, 0, -1, 0, 0)",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "INPUT",
+          "type": "checkbox",
+          "name": null,
+          "text": ""
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "1280-hud-reduced-motion",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "scrollHeight": 3848
+      },
+      "theme": {
+        "hudEnabled": true,
+        "demoBackground": "rgb(16, 26, 44)",
+        "demoText": "rgb(226, 232, 240)"
+      },
+      "demo": {
+        "rect": {
+          "x": 336,
+          "y": 265,
+          "width": 624,
+          "height": 635
+        },
+        "clientWidth": 622,
+        "scrollWidth": 622,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 1,
+        "toolbarRect": {
+          "x": 353,
+          "y": 282,
+          "width": 590,
+          "height": 32
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": true,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "readonlyInput": {
+          "type": "text",
+          "readonly": true,
+          "disabled": false,
+          "focused": true,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 794,
+            "y": 624,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 794,
+            "y": 733,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "1e-05s",
+          "rect": {
+            "x": 794,
+            "y": 514,
+            "width": 28,
+            "height": 28
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": true,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 353,
+            "y": 374,
+            "width": 168,
+            "height": 32
+          },
+          "iconTransform": "matrix(-1, 0, 0, -1, 0, 0)",
+          "iconTransitionDuration": "1e-05s"
+        },
+        "focusedElement": {
+          "tag": "INPUT",
+          "type": "text",
+          "name": null,
+          "text": ""
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 336,
+            "y": 1171,
+            "width": 624,
+            "height": 1088
+          },
+          "clientWidth": 624,
+          "scrollWidth": 917,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2550,
+            "width": 624,
+            "height": 275
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        },
+        {
+          "rect": {
+            "x": 336,
+            "y": 2996,
+            "width": 624,
+            "height": 168
+          },
+          "clientWidth": 624,
+          "scrollWidth": 624,
+          "parentClientWidth": 624
+        }
+      ],
+      "reducedMotion": true
+    },
+    {
+      "label": "375-light-demo-light-masked",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 375,
+        "height": 844
+      },
+      "document": {
+        "clientWidth": 375,
+        "scrollWidth": 375,
+        "bodyClientWidth": 375,
+        "bodyScrollWidth": 375,
+        "scrollHeight": 4718
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 24,
+          "y": 86,
+          "width": 327,
+          "height": 673
+        },
+        "clientWidth": 325,
+        "scrollWidth": 325,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 2,
+        "toolbarRect": {
+          "x": 37,
+          "y": 99,
+          "width": 301,
+          "height": 72
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": false,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 283,
+            "y": 361,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 283,
+            "y": 471,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 283,
+            "y": 580,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 283,
+            "y": 361,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 37,
+            "y": 249,
+            "width": 168,
+            "height": 44
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BODY",
+          "type": null,
+          "name": null,
+          "text": "Skip to contentLxUI Main Navigation 首页组件新增组件AppearanceMenuOn this page Sidebar N"
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 24,
+            "y": 1058,
+            "width": 327,
+            "height": 1088
+          },
+          "clientWidth": 327,
+          "scrollWidth": 917,
+          "parentClientWidth": 327
+        },
+        {
+          "rect": {
+            "x": 24,
+            "y": 2549,
+            "width": 327,
+            "height": 655
+          },
+          "clientWidth": 327,
+          "scrollWidth": 420,
+          "parentClientWidth": 327
+        },
+        {
+          "rect": {
+            "x": 24,
+            "y": 3375,
+            "width": 327,
+            "height": 168
+          },
+          "clientWidth": 327,
+          "scrollWidth": 327,
+          "parentClientWidth": 327
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "375-light-props-tables",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 375,
+        "height": 844
+      },
+      "document": {
+        "clientWidth": 375,
+        "scrollWidth": 375,
+        "bodyClientWidth": 375,
+        "bodyScrollWidth": 375,
+        "scrollHeight": 4718
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 24,
+          "y": -501,
+          "width": 327,
+          "height": 673
+        },
+        "clientWidth": 325,
+        "scrollWidth": 325,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 2,
+        "toolbarRect": {
+          "x": 37,
+          "y": -488,
+          "width": 301,
+          "height": 72
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": false,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 283,
+            "y": -226,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 283,
+            "y": -116,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 283,
+            "y": -7,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 283,
+            "y": -226,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 37,
+            "y": -338,
+            "width": 168,
+            "height": 44
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BODY",
+          "type": null,
+          "name": null,
+          "text": "Skip to contentLxUI Main Navigation 首页组件新增组件AppearanceMenuOn this page Sidebar N"
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 24,
+            "y": 471,
+            "width": 327,
+            "height": 1088
+          },
+          "clientWidth": 327,
+          "scrollWidth": 917,
+          "parentClientWidth": 327
+        },
+        {
+          "rect": {
+            "x": 24,
+            "y": 1962,
+            "width": 327,
+            "height": 655
+          },
+          "clientWidth": 327,
+          "scrollWidth": 420,
+          "parentClientWidth": 327
+        },
+        {
+          "rect": {
+            "x": 24,
+            "y": 2788,
+            "width": 327,
+            "height": 168
+          },
+          "clientWidth": 327,
+          "scrollWidth": 327,
+          "parentClientWidth": 327
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "320-light-demo-light-masked",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "document": {
+        "clientWidth": 320,
+        "scrollWidth": 320,
+        "bodyClientWidth": 320,
+        "bodyScrollWidth": 320,
+        "scrollHeight": 4957
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 24,
+          "y": 18,
+          "width": 272,
+          "height": 765
+        },
+        "clientWidth": 270,
+        "scrollWidth": 270,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 3,
+        "toolbarRect": {
+          "x": 37,
+          "y": 31,
+          "width": 246,
+          "height": 112
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": false,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 228,
+            "y": 333,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 228,
+            "y": 443,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 228,
+            "y": 552,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 228,
+            "y": 333,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 37,
+            "y": 221,
+            "width": 168,
+            "height": 44
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BODY",
+          "type": null,
+          "name": null,
+          "text": "Skip to contentLxUI Main Navigation 首页组件新增组件AppearanceMenuOn this page Sidebar N"
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 24,
+            "y": 1082,
+            "width": 272,
+            "height": 1088
+          },
+          "clientWidth": 272,
+          "scrollWidth": 917,
+          "parentClientWidth": 272
+        },
+        {
+          "rect": {
+            "x": 24,
+            "y": 2601,
+            "width": 272,
+            "height": 655
+          },
+          "clientWidth": 272,
+          "scrollWidth": 420,
+          "parentClientWidth": 272
+        },
+        {
+          "rect": {
+            "x": 24,
+            "y": 3427,
+            "width": 272,
+            "height": 191
+          },
+          "clientWidth": 272,
+          "scrollWidth": 272,
+          "parentClientWidth": 272
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "320-light-props-tables",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "document": {
+        "clientWidth": 320,
+        "scrollWidth": 320,
+        "bodyClientWidth": 320,
+        "bodyScrollWidth": 320,
+        "scrollHeight": 4957
+      },
+      "theme": {
+        "hudEnabled": false,
+        "demoBackground": "rgb(255, 255, 255)",
+        "demoText": "rgb(29, 33, 41)"
+      },
+      "demo": {
+        "rect": {
+          "x": 24,
+          "y": -615,
+          "width": 272,
+          "height": 765
+        },
+        "clientWidth": 270,
+        "scrollWidth": 270,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 3,
+        "toolbarRect": {
+          "x": 37,
+          "y": -602,
+          "width": 246,
+          "height": 112
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": false,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 228,
+            "y": -300,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 228,
+            "y": -190,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 228,
+            "y": -81,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 228,
+            "y": -300,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": false,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 37,
+            "y": -412,
+            "width": 168,
+            "height": 44
+          },
+          "iconTransform": "none",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "BODY",
+          "type": null,
+          "name": null,
+          "text": "Skip to contentLxUI Main Navigation 首页组件新增组件AppearanceMenuOn this page Sidebar N"
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 24,
+            "y": 449,
+            "width": 272,
+            "height": 1088
+          },
+          "clientWidth": 272,
+          "scrollWidth": 917,
+          "parentClientWidth": 272
+        },
+        {
+          "rect": {
+            "x": 24,
+            "y": 1968,
+            "width": 272,
+            "height": 655
+          },
+          "clientWidth": 272,
+          "scrollWidth": 420,
+          "parentClientWidth": 272
+        },
+        {
+          "rect": {
+            "x": 24,
+            "y": 2794,
+            "width": 272,
+            "height": 191
+          },
+          "clientWidth": 272,
+          "scrollWidth": 272,
+          "parentClientWidth": 272
+        }
+      ],
+      "reducedMotion": false
+    },
+    {
+      "label": "320-hud-expanded",
+      "url": "http://127.0.0.1:4182/components/lxpasswordinput.html",
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "document": {
+        "clientWidth": 320,
+        "scrollWidth": 320,
+        "bodyClientWidth": 320,
+        "bodyScrollWidth": 320,
+        "scrollHeight": 5021
+      },
+      "theme": {
+        "hudEnabled": true,
+        "demoBackground": "rgb(16, 26, 44)",
+        "demoText": "rgb(226, 232, 240)"
+      },
+      "demo": {
+        "rect": {
+          "x": 24,
+          "y": 0,
+          "width": 272,
+          "height": 829
+        },
+        "clientWidth": 270,
+        "scrollWidth": 270,
+        "toolbarLabelCount": 4,
+        "toolbarLineCount": 3,
+        "toolbarRect": {
+          "x": 37,
+          "y": 13,
+          "width": 246,
+          "height": 112
+        },
+        "showPasswordEnabled": true,
+        "maskOnBlurEnabled": false,
+        "preventClipboardEnabled": false,
+        "mainInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 228,
+            "y": 379,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "readonlyInput": {
+          "type": "password",
+          "readonly": true,
+          "disabled": false,
+          "focused": false,
+          "toggleDisabled": false,
+          "toggleRect": {
+            "x": 228,
+            "y": 489,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "disabledInput": {
+          "type": "password",
+          "readonly": false,
+          "disabled": true,
+          "focused": false,
+          "toggleDisabled": true,
+          "toggleRect": {
+            "x": 228,
+            "y": 598,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "mainInputAccessibleName": null,
+        "toggle": {
+          "accessibleName": "显示密码",
+          "pressed": "false",
+          "computedTransitionDuration": "0s",
+          "rect": {
+            "x": 228,
+            "y": 379,
+            "width": 44,
+            "height": 44
+          }
+        },
+        "securityHint": "组件默认保留显隐状态；登录或敏感配置建议开启失焦遮罩。",
+        "advanced": {
+          "open": true,
+          "summaryText": "剪贴板与主题设置",
+          "summaryRect": {
+            "x": 37,
+            "y": 203,
+            "width": 168,
+            "height": 44
+          },
+          "iconTransform": "matrix(-1, 0, 0, -1, 0, 0)",
+          "iconTransitionDuration": "0.16s"
+        },
+        "focusedElement": {
+          "tag": "INPUT",
+          "type": "checkbox",
+          "name": null,
+          "text": ""
+        }
+      },
+      "tables": [
+        {
+          "rect": {
+            "x": 24,
+            "y": 1128,
+            "width": 272,
+            "height": 1088
+          },
+          "clientWidth": 272,
+          "scrollWidth": 917,
+          "parentClientWidth": 272
+        },
+        {
+          "rect": {
+            "x": 24,
+            "y": 2647,
+            "width": 272,
+            "height": 655
+          },
+          "clientWidth": 272,
+          "scrollWidth": 420,
+          "parentClientWidth": 272
+        },
+        {
+          "rect": {
+            "x": 24,
+            "y": 3473,
+            "width": 272,
+            "height": 191
+          },
+          "clientWidth": 272,
+          "scrollWidth": 272,
+          "parentClientWidth": 272
+        }
+      ],
+      "reducedMotion": false
+    }
+  ],
+  "browserEvents": {
+    "pageErrors": [],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "failedRequests": [],
+    "httpErrors": []
+  }
+}

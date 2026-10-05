@@ -1,0 +1,193 @@
+{
+  "requestedRoute": {
+    "initial": {
+      "status": "failed",
+      "reason": "首次探测返回 ERR_CONNECTION_REFUSED"
+    },
+    "beforeCapture": {
+      "status": "http-200",
+      "statusCode": 200,
+      "note": "parent 随后启动并保持 4174；下方场景均直接访问该路由"
+    }
+  },
+  "routeBase": "http://127.0.0.1:4174",
+  "scenarios": [
+    {
+      "id": "checkbox-light-desktop",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 4,
+      "labels": 3,
+      "scroll": "1265/1265",
+      "action": null,
+      "error": null
+    },
+    {
+      "id": "checkbox-hud-dark-desktop",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 14,
+      "labels": 13,
+      "scroll": "1265/1265",
+      "action": null,
+      "error": null
+    },
+    {
+      "id": "checkbox-touch-375",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 4,
+      "labels": 3,
+      "scroll": "375/375",
+      "action": {
+        "type": "touch",
+        "x": 188,
+        "y": 420,
+        "label": "已知晓涉密核验义务并承诺遵守"
+      },
+      "error": null
+    },
+    {
+      "id": "checkbox-disabled-selected-half-375",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 4,
+      "labels": 3,
+      "scroll": "375/375",
+      "action": null,
+      "error": null
+    },
+    {
+      "id": "radio-light-desktop",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 3,
+      "labels": 2,
+      "scroll": "1265/1265",
+      "action": null,
+      "error": null
+    },
+    {
+      "id": "radio-hud-dark-desktop",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 7,
+      "labels": 6,
+      "scroll": "1265/1265",
+      "action": null,
+      "error": null
+    },
+    {
+      "id": "radio-touch-375",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 4,
+      "labels": 3,
+      "scroll": "375/375",
+      "action": {
+        "type": "touch",
+        "x": 180,
+        "y": 98,
+        "label": "应急处突"
+      },
+      "error": null
+    },
+    {
+      "id": "radio-tab-arrow-reduced-motion",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 3,
+      "labels": 2,
+      "scroll": "1265/1265",
+      "action": {
+        "type": "keyboard",
+        "tabReachedVerticalGroup": true,
+        "tabFocusedLabel": "高密加密专线 (当前激活)",
+        "tabFocusVisible": true,
+        "arrowRight": {
+          "activeLabel": "光纤骨干网",
+          "activeFocusVisible": true,
+          "selectedLabel": "光纤骨干网",
+          "disabledBetweenInitialAndSelected": true
+        }
+      },
+      "error": null
+    }
+  ],
+  "detectorResponses": [
+    {
+      "scenarioId": "checkbox-light-desktop",
+      "event": "response",
+      "url": "http://127.0.0.1:63928/detect.js",
+      "status": 200,
+      "type": "Script"
+    },
+    {
+      "scenarioId": "checkbox-hud-dark-desktop",
+      "event": "response",
+      "url": "http://127.0.0.1:63928/detect.js",
+      "status": 200,
+      "type": "Script"
+    },
+    {
+      "scenarioId": "checkbox-touch-375",
+      "event": "response",
+      "url": "http://127.0.0.1:63928/detect.js",
+      "status": 200,
+      "type": "Script"
+    },
+    {
+      "scenarioId": "checkbox-disabled-selected-half-375",
+      "event": "response",
+      "url": "http://127.0.0.1:63928/detect.js",
+      "status": 200,
+      "type": "Script"
+    },
+    {
+      "scenarioId": "radio-light-desktop",
+      "event": "response",
+      "url": "http://127.0.0.1:63928/detect.js",
+      "status": 200,
+      "type": "Script"
+    },
+    {
+      "scenarioId": "radio-hud-dark-desktop",
+      "event": "response",
+      "url": "http://127.0.0.1:63928/detect.js",
+      "status": 200,
+      "type": "Script"
+    },
+    {
+      "scenarioId": "radio-touch-375",
+      "event": "response",
+      "url": "http://127.0.0.1:63928/detect.js",
+      "status": 200,
+      "type": "Script"
+    },
+    {
+      "scenarioId": "radio-tab-arrow-reduced-motion",
+      "event": "response",
+      "url": "http://127.0.0.1:63928/detect.js",
+      "status": 200,
+      "type": "Script"
+    }
+  ],
+  "failedRequests": 0,
+  "consoleErrors": 1
+}

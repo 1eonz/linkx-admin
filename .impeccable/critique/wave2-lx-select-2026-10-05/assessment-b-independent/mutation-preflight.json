@@ -1,0 +1,13 @@
+{
+  "runner": "Codex CUA browser API",
+  "target": "http://127.0.0.1:4177/components/lxselect.html",
+  "attempted": [
+    "set document.title to B Mutation Probe",
+    "append inline script setting window.__bMutationProbe"
+  ],
+  "mutationSucceeded": false,
+  "error": "TypeError: Cannot set property title of [object Object] which has only a getter",
+  "cleanup": "The failure occurred while setting document.title; no script was appended and no page mutation occurred.",
+  "overlayInjected": false,
+  "bypassAttempted": false
+}

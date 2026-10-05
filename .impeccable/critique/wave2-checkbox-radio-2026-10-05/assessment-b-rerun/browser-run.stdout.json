@@ -1,0 +1,146 @@
+{
+  "browser": {
+    "name": "Google Chrome",
+    "version": "154.0.8037.95",
+    "executablePath": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "headless": true,
+    "playwright": "F:\\work\\linkx-admin\\other-admin\\admin-vue3\\node_modules\\.pnpm\\@playwright+test@1.58.0\\node_modules\\@playwright\\test\\index.js"
+  },
+  "scenarios": [
+    {
+      "id": "checkbox-light-desktop",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 4,
+      "screenshot": "checkbox-light-desktop-overlay.png",
+      "action": null,
+      "error": null
+    },
+    {
+      "id": "checkbox-hud-dark-desktop",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 84,
+      "screenshot": "checkbox-hud-dark-desktop-overlay.png",
+      "action": null,
+      "error": null
+    },
+    {
+      "id": "checkbox-touch-375",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 4,
+      "screenshot": "checkbox-touch-375-overlay.png",
+      "action": {
+        "type": "touch",
+        "text": "已知晓涉密核验义务并承诺遵守",
+        "bounds": {
+          "x": 53,
+          "y": 390,
+          "width": 269,
+          "height": 44
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "checkbox-disabled-selected-half-375",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 4,
+      "screenshot": "checkbox-disabled-selected-half-375-overlay.png",
+      "action": null,
+      "error": null
+    },
+    {
+      "id": "radio-light-desktop",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 3,
+      "screenshot": "radio-light-desktop-overlay.png",
+      "action": null,
+      "error": null
+    },
+    {
+      "id": "radio-hud-dark-desktop",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 82,
+      "screenshot": "radio-hud-dark-desktop-overlay.png",
+      "action": null,
+      "error": null
+    },
+    {
+      "id": "radio-touch-375",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 4,
+      "screenshot": "radio-touch-375-overlay.png",
+      "action": {
+        "type": "touch",
+        "text": "应急处突",
+        "bounds": {
+          "x": 143,
+          "y": 82,
+          "width": 74,
+          "height": 44
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "radio-keyboard-focus-reduced-motion",
+      "status": "complete",
+      "loaded": true,
+      "scannerAvailable": true,
+      "scanInvoked": true,
+      "overlayNodes": 3,
+      "screenshot": "radio-keyboard-focus-reduced-motion-overlay.png",
+      "action": {
+        "type": "keyboard",
+        "tabFocus": {
+          "label": "日常勤务",
+          "focusVisible": true,
+          "disabled": false
+        },
+        "arrowRight": {
+          "activeLabel": "应急处突",
+          "activeFocusVisible": true,
+          "selectedLabel": "应急处突"
+        },
+        "verticalBeforeArrow": {
+          "activeLabel": "高密加密专线 (当前激活)",
+          "activeFocusVisible": true,
+          "selectedLabel": "高密加密专线 (当前激活)"
+        },
+        "arrowDown": {
+          "activeLabel": "光纤骨干网",
+          "activeFocusVisible": true,
+          "selectedLabel": "光纤骨干网",
+          "disabledLabels": [
+            "卫星链路直通 (未联通/禁用)"
+          ]
+        }
+      },
+      "error": null
+    }
+  ],
+  "detectorResponses": 8,
+  "requestFailures": 0,
+  "httpErrors": 0,
+  "consoleErrors": 1
+}

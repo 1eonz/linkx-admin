@@ -1,27 +1,27 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import LxFormItem from '../../LxForm/LxFormItem.vue'
 import LxIcon from '../../LxIcon/index.vue'
 import LxDatePicker from '../index.vue'
 import type { LxDatePickerShortcut } from '../types'
 
 const hudTheme = ref(false)
 
-/** Panel 1 单值：布控生效日期（标本 06 文案语境） */
+/** 第一组区间示例：专项布控日期区间（标本 06 主形态，W-320px 触发器） */
+const controlRange = ref<[string, string]>(['2026-09-15', '2026-10-08'])
+const analysisRange = ref<[string, string]>(['2026-09-15', '2026-10-08'])
+/** 单值示例：布控生效日期（标本 06 文案语境） */
 const effectiveDate = ref<string>('2026-09-15')
 const reviewMonth = ref<string>('2026-09')
 const annotatedDate = ref<string>('2026-09-15')
-/** Panel 2 区间：专项布控日期区间（标本 06 主形态，W-320px 触发器） */
-const controlRange = ref<[string, string]>(['2026-09-15', '2026-10-08'])
-const analysisRange = ref<[string, string]>(['2026-09-15', '2026-10-08'])
-/** Panel 3 带时间：告警汇聚窗口 */
+const reviewDate = ref<string>('')
+/** 带时间示例：告警汇聚窗口 */
 const windowTime = ref<string>('2026-09-29 08:00:00')
-/** Panel 4 禁用/只读 */
+/** 禁用和只读示例 */
 const lockedRange = ref<[string, string]>(['2026-09-01', '2026-09-30'])
 
-const lastAction = ref(
-  '选择日期观察触发器与面板行为；演示数据仅存在于页面内存。',
-)
+const lastAction = ref('等待日期操作；演示数据仅保存在当前页面。')
 
 function reportChange(field: string, value: unknown) {
   lastAction.value = `${field} 已选：${Array.isArray(value) ? value.join(' 至 ') : value}`
@@ -77,8 +77,41 @@ const shortcuts: LxDatePickerShortcut[] = [
       </label>
     </div>
 
+    <section class="lx-date-picker-demo__panel" data-testid="range">
+      <h3>日期区间</h3>
+      <div class="lx-date-picker-demo__field">
+        <span class="lx-date-picker-demo__label">专项布控日期区间</span>
+        <label
+          class="lx-date-picker-demo__sr-only"
+          for="demo-date-control-start"
+          >专项布控日期区间开始日期</label
+        >
+        <label class="lx-date-picker-demo__sr-only" for="demo-date-control-end"
+          >专项布控日期区间结束日期</label
+        >
+        <LxDatePicker
+          :id="['demo-date-control-start', 'demo-date-control-end']"
+          :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
+          v-model="controlRange"
+          type="daterange"
+          value-format="YYYY-MM-DD"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          unlink-panels
+          @change="reportChange('专项布控区间', $event)"
+        />
+      </div>
+      <p class="lx-date-picker-demo__hint">
+        周一开周，左右月份可独立翻页，所选日期以连续色带显示。
+      </p>
+      <p class="lx-date-picker-demo__hint">聚焦后按 ArrowDown 打开日历。</p>
+      <p class="lx-date-picker-demo__status" aria-live="polite">
+        {{ lastAction }}
+      </p>
+    </section>
+
     <section class="lx-date-picker-demo__panel" data-testid="single">
-      <h3>基础单值（32px 触发器 + 主色日历图标 + 值文字等宽字体）</h3>
+      <h3>单日和月份</h3>
       <div class="lx-date-picker-demo__row">
         <div class="lx-date-picker-demo__field">
           <label class="lx-date-picker-demo__label" for="demo-date-effective"
@@ -111,45 +144,8 @@ const shortcuts: LxDatePickerShortcut[] = [
       </div>
     </section>
 
-    <section class="lx-date-picker-demo__panel" data-testid="range">
-      <h3>日期区间（标本 06 主形态：分隔符"至" + 双月独立翻页 + 周一起始）</h3>
-      <div class="lx-date-picker-demo__field">
-        <span class="lx-date-picker-demo__label">专项布控日期区间</span>
-        <label
-          class="lx-date-picker-demo__sr-only"
-          for="demo-date-control-start"
-          >专项布控日期区间开始日期</label
-        >
-        <label class="lx-date-picker-demo__sr-only" for="demo-date-control-end"
-          >专项布控日期区间结束日期</label
-        >
-        <LxDatePicker
-          :id="['demo-date-control-start', 'demo-date-control-end']"
-          :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
-          v-model="controlRange"
-          type="daterange"
-          value-format="YYYY-MM-DD"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          unlink-panels
-          @change="reportChange('专项布控区间', $event)"
-        />
-      </div>
-      <p class="lx-date-picker-demo__hint">
-        本区间示例开启
-        unlink-panels，左右月份独立翻页；快捷预设示例保留默认联动。
-        面板周表头为"一 二 三 四 五 六 日"（内置 zh-cn 语境，周一起始）；
-        拖选区间时中段呈连贯浅蓝带
-        #ecf5ff，起止为主色圆点，文字随主题保持高对比。
-      </p>
-      <p class="lx-date-picker-demo__hint">
-        键盘操作：按 ArrowDown 打开日历并进入日期网格；方向键移动焦点，按 Enter
-        选择日期，按 Escape 关闭日历。
-      </p>
-    </section>
-
     <section class="lx-date-picker-demo__panel" data-testid="shortcuts">
-      <h3>快捷预设（今日/本周/近30天；桌面竖排，手机横排）</h3>
+      <h3>常用日期范围</h3>
       <div class="lx-date-picker-demo__field">
         <span class="lx-date-picker-demo__label">研判时间范围</span>
         <label
@@ -162,7 +158,11 @@ const shortcuts: LxDatePickerShortcut[] = [
         >
         <LxDatePicker
           :id="['demo-date-analysis-start', 'demo-date-analysis-end']"
-          :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
+          :popper-class="
+            hudTheme
+              ? 'lx-date-picker-demo__shortcuts-popper lx-theme-hud'
+              : 'lx-date-picker-demo__shortcuts-popper'
+          "
           v-model="analysisRange"
           type="daterange"
           value-format="YYYY-MM-DD"
@@ -175,8 +175,7 @@ const shortcuts: LxDatePickerShortcut[] = [
         </LxDatePicker>
       </div>
       <p class="lx-date-picker-demo__hint">
-        "本周"预设按周一起始计算（与面板周表头同契约）；快捷项点击后回填区间并保持面板开启，
-        宿主可按业务追加"案发时段"等自定义预设。
+        "本周"从周一开始计算。选择预设后会回填日期并保持日历打开。
       </p>
     </section>
 
@@ -215,9 +214,7 @@ const shortcuts: LxDatePickerShortcut[] = [
     </section>
 
     <section class="lx-date-picker-demo__panel" data-testid="datetime">
-      <h3>
-        带时间面板（datetimerange：区间 + 时分秒，底部此刻/确定随 EP 原生）
-      </h3>
+      <h3>日期与时间</h3>
       <div class="lx-date-picker-demo__field">
         <label class="lx-date-picker-demo__label" for="demo-date-window"
           >告警汇聚窗口</label
@@ -234,8 +231,20 @@ const shortcuts: LxDatePickerShortcut[] = [
       </div>
     </section>
 
+    <section class="lx-date-picker-demo__panel" data-testid="error">
+      <h3>表单校验</h3>
+      <LxFormItem label="复核日期" prop="reviewDate" error="请选择复核日期">
+        <LxDatePicker
+          id="reviewDate"
+          v-model="reviewDate"
+          :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
+          placeholder="请选择日期"
+        />
+      </LxFormItem>
+    </section>
+
     <section class="lx-date-picker-demo__panel" data-testid="disabled">
-      <h3>禁用与只读（禁用半透明；只读可聚焦不可改值）</h3>
+      <h3>禁用与只读</h3>
       <div class="lx-date-picker-demo__row">
         <div class="lx-date-picker-demo__field">
           <span class="lx-date-picker-demo__label">省厅锁定区间（禁用）</span>
@@ -284,14 +293,17 @@ const shortcuts: LxDatePickerShortcut[] = [
       </div>
     </section>
 
-    <p class="lx-date-picker-demo__status" aria-live="polite">
-      {{ lastAction }}
-    </p>
-    <p class="lx-date-picker-demo__note">
-      触发器 32px / 4px 圆角 / 1px #dcdfe6 描边，hover
-      与展开转主色光环；区间分隔符默认"至"； disabled-date / default-value
-      等低频 props 经 attrs 透传给 EP 内核。
-    </p>
+    <details class="lx-date-picker-demo__details">
+      <summary>键盘操作与扩展参数</summary>
+      <p class="lx-date-picker-demo__keyboard-note">
+        方向键移动日期，Enter 选择，Escape 关闭日历。
+      </p>
+      <p class="lx-date-picker-demo__note">
+        默认尺寸为 32px 高、4px
+        圆角，聚焦时显示主题色边线。disabled-date、default-value
+        等低频参数会传递给底层日期选择器。
+      </p>
+    </details>
   </div>
 </template>
 
@@ -389,5 +401,30 @@ const shortcuts: LxDatePickerShortcut[] = [
 
 .lx-date-picker-demo__note {
   color: var(--lx-color-warning-text);
+}
+
+.lx-date-picker-demo__details {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid var(--lx-border-light);
+  padding-top: 8px;
+}
+
+.lx-date-picker-demo__details summary {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  color: var(--lx-text-secondary-strong);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.lx-date-picker-demo__details summary:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+.lx-date-picker-demo__details[open] summary {
+  color: var(--lx-color-primary);
 }
 </style>

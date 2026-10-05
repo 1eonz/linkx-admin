@@ -15,11 +15,11 @@
  * 模板保持单根（无根级注释）：注释节点会引入 Fragment 根，
  * 破坏 $attrs 单根继承与测试工具对根元素类的断言。
  */
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { ElDatePicker, provideGlobalConfig } from 'element-plus'
 import type { DateCell, DatePickerInstance } from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
-import dayjs from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
 import 'dayjs/locale/zh-cn'
 import {
   computed,
@@ -102,6 +102,7 @@ const props = withDefaults(defineProps<LxDatePickerProps>(), {
 const emit = defineEmits<{
   'update:modelValue': [value: LxDateModelValue]
   change: [value: LxDateModelValue]
+  'visible-change': [visible: boolean]
   focus: [event: FocusEvent]
   blur: [event: FocusEvent]
 }>()
@@ -113,12 +114,20 @@ const pickerRef = ref<DatePickerInstance>()
 const managedDescriptionIds = new WeakMap<HTMLInputElement, Set<string>>()
 const instanceClass = `lx-date-picker--instance-${getCurrentInstance()?.uid ?? 'unknown'}`
 const instancePopperClass = `lx-date-picker__popper--instance-${getCurrentInstance()?.uid ?? 'unknown'}`
+const viewportFitClass = 'lx-date-picker__popper--viewport-fit'
 const isNarrowViewport = ref(false)
 const singlePanel = computed(() => props.singlePanel ?? isNarrowViewport.value)
 let viewportQuery: MediaQueryList | undefined
+let viewportFitFrame: number | undefined
 
 function updateViewportMode(): void {
   isNarrowViewport.value = viewportQuery?.matches ?? window.innerWidth <= 640
+  if (!isNarrowViewport.value) {
+    getPickerPopper()?.classList.remove(viewportFitClass)
+    return
+  }
+
+  scheduleViewportFit()
 }
 
 function getPickerContainer(): HTMLElement | undefined {
@@ -159,6 +168,49 @@ function getVisiblePopper(): HTMLElement | undefined {
       `.${instancePopperClass}[aria-hidden="false"]`,
     ) ?? undefined
   )
+}
+
+function getPickerPopper(): HTMLElement | undefined {
+  return (
+    document.querySelector<HTMLElement>(`.${instancePopperClass}`) ?? undefined
+  )
+}
+
+function syncViewportFit(): void {
+  const popper = getVisiblePopper()
+  if (!popper) return
+
+  popper.classList.remove(viewportFitClass)
+  // 等待 Element Plus 根据新视口完成弹层翻转后，再判断锚点位置是否仍越界。
+  viewportFitFrame = window.requestAnimationFrame(() => {
+    viewportFitFrame = undefined
+    const currentPopper = getVisiblePopper()
+    if (!currentPopper) return
+
+    const { top, bottom } = currentPopper.getBoundingClientRect()
+    const overflowsViewport = top < 8 || bottom > window.innerHeight - 8
+    if (isNarrowViewport.value && overflowsViewport) {
+      currentPopper.classList.add(viewportFitClass)
+    }
+  })
+}
+
+function scheduleViewportFit(): void {
+  if (viewportFitFrame !== undefined) {
+    window.cancelAnimationFrame(viewportFitFrame)
+  }
+
+  viewportFitFrame = window.requestAnimationFrame(() => {
+    viewportFitFrame = undefined
+    syncViewportFit()
+  })
+}
+
+function handlePickerVisibleChange(visible: boolean): void {
+  emit('visible-change', visible)
+  if (visible) {
+    scheduleViewportFit()
+  }
 }
 
 function getRangeEndpointDate(isEndInput: boolean) {
@@ -391,12 +443,16 @@ onMounted(() => {
     query.addEventListener('change', updateViewportMode)
     stopViewportTracking = () =>
       query.removeEventListener('change', updateViewportMode)
-    return
   }
 
   window.addEventListener('resize', updateViewportMode)
-  stopViewportTracking = () =>
+  const stopResizeTracking = () =>
     window.removeEventListener('resize', updateViewportMode)
+  const stopMediaQueryTracking = stopViewportTracking
+  stopViewportTracking = () => {
+    stopResizeTracking()
+    stopMediaQueryTracking?.()
+  }
 })
 
 let stopViewportTracking: (() => void) | undefined
@@ -407,6 +463,9 @@ onBeforeUnmount(() => {
   focusedRangeInput = undefined
   if (rangeFocusFrame !== undefined) {
     window.cancelAnimationFrame(rangeFocusFrame)
+  }
+  if (viewportFitFrame !== undefined) {
+    window.cancelAnimationFrame(viewportFitFrame)
   }
 })
 
@@ -467,6 +526,7 @@ defineExpose({
     :single-panel="singlePanel"
     @update:model-value="emit('update:modelValue', $event as LxDateModelValue)"
     @change="emit('change', $event as LxDateModelValue)"
+    @visible-change="handlePickerVisibleChange"
     @focus="handlePickerFocus"
     @blur="emit('blur', $event)"
   >

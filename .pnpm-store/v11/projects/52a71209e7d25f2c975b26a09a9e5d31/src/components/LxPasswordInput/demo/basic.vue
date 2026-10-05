@@ -13,6 +13,7 @@ interface PasswordInputExposes {
 const password = ref('LinkX-Demo-2026')
 const clearable = ref(true)
 const showPassword = ref(true)
+const maskOnBlur = ref(true)
 const preventClipboard = ref(false)
 const hudTheme = ref(false)
 const size = ref<NonNullable<LxPasswordInputProps['size']>>('md')
@@ -46,14 +47,37 @@ function recordAction(action: string) {
         允许切换明文
       </label>
       <label>
-        <input v-model="preventClipboard" type="checkbox" />
-        阻止剪贴板操作
-      </label>
-      <label>
-        <input v-model="hudTheme" type="checkbox" />
-        HUD 深色主题
+        <input v-model="maskOnBlur" type="checkbox" />
+        离开组件后重新遮罩
       </label>
     </div>
+
+    <p class="password-input-demo__security-hint">
+      组件参数默认保留显隐状态；{{
+        maskOnBlur ? '本示例已开启离开遮罩。' : '本示例已关闭离开遮罩。'
+      }}登录或敏感配置建议开启。
+    </p>
+
+    <details class="password-input-demo__advanced">
+      <summary>
+        <span>剪贴板与主题设置</span>
+        <LxIcon
+          class="password-input-demo__advanced-icon"
+          name="chevron-down"
+          :size="16"
+        />
+      </summary>
+      <div class="password-input-demo__advanced-controls">
+        <label>
+          <input v-model="preventClipboard" type="checkbox" />
+          阻止剪贴板操作
+        </label>
+        <label>
+          <input v-model="hudTheme" type="checkbox" />
+          HUD 深色主题
+        </label>
+      </div>
+    </details>
 
     <div class="password-input-demo__field">
       <label for="password-input-demo">访问密码</label>
@@ -69,6 +93,7 @@ function recordAction(action: string) {
         :minlength="8"
         :clearable="clearable"
         :show-password="showPassword"
+        :mask-on-blur="maskOnBlur"
         :prevent-clipboard="preventClipboard"
         @update:model-value="recordAction('密码内容已更新')"
         @change="recordAction('密码输入已确认')"
@@ -79,8 +104,8 @@ function recordAction(action: string) {
       <p class="password-input-demo__hint">
         {{
           preventClipboard
-            ? '当前已按宿主策略阻止复制、剪切和粘贴。'
-            : '默认允许使用密码管理器复制、剪切和粘贴。'
+            ? '此示例已阻止复制、剪切和粘贴。'
+            : '此示例默认允许密码管理器操作剪贴板。'
         }}
       </p>
     </div>
@@ -134,6 +159,7 @@ function recordAction(action: string) {
   gap: 18px;
   min-width: 0;
   padding: 16px;
+  scroll-margin-block-start: calc(var(--vp-nav-height, 64px) + 16px);
   color: var(--el-text-color-primary);
   background: var(--el-bg-color);
   border: 1px solid var(--el-border-color);
@@ -141,11 +167,19 @@ function recordAction(action: string) {
 }
 
 .password-input-demo__toolbar,
-.password-input-demo__actions {
+.password-input-demo__actions,
+.password-input-demo__advanced-controls {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px 16px;
+}
+
+.password-input-demo__security-hint {
+  margin: -10px 0 0;
+  color: var(--el-text-color-secondary);
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .password-input-demo__toolbar label {
@@ -157,8 +191,77 @@ function recordAction(action: string) {
   font-size: 14px;
 }
 
+.password-input-demo__advanced {
+  display: grid;
+  gap: 8px;
+}
+
+.password-input-demo__advanced summary {
+  display: flex;
+  width: fit-content;
+  min-height: 32px;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 8px;
+  color: var(--el-color-primary);
+  cursor: pointer;
+  list-style: none;
+}
+
+.password-input-demo__advanced summary::-webkit-details-marker {
+  display: none;
+}
+
+.password-input-demo__advanced summary:focus-visible {
+  outline: 2px solid var(--el-color-primary);
+  outline-offset: 2px;
+}
+
+.password-input-demo__advanced-icon {
+  transition: transform 160ms ease;
+}
+
+.password-input-demo__advanced[open] .password-input-demo__advanced-icon {
+  transform: rotate(180deg);
+}
+
+.password-input-demo__advanced-controls {
+  padding-block: 4px;
+}
+
+.password-input-demo.lx-theme-hud {
+  --el-color-primary: var(--lx-color-primary);
+  --el-bg-color: var(--lx-bg-card);
+  --el-bg-color-overlay: var(--lx-bg-card);
+  --el-fill-color-blank: var(--lx-bg-card);
+  --el-fill-color-light: var(--lx-bg-card-hover);
+  --el-border-color: var(--lx-border);
+  --el-border-color-light: var(--lx-border);
+  --el-text-color-primary: var(--lx-text-primary);
+  --el-text-color-regular: var(--lx-text-regular);
+  --el-text-color-secondary: var(--lx-text-regular);
+  --el-text-color-placeholder: var(--lx-text-regular);
+}
+
 .password-input-demo__toolbar input {
   accent-color: var(--el-color-primary);
+}
+
+@media (max-width: 640px) {
+  .password-input-demo__toolbar label,
+  .password-input-demo__advanced-controls label {
+    min-height: 44px;
+  }
+
+  .password-input-demo__advanced summary {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .password-input-demo__advanced-icon {
+    transition: none;
+  }
 }
 
 .password-input-demo__toolbar select {

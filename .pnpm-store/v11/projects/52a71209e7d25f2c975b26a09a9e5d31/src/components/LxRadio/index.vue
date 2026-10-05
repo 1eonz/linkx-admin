@@ -9,7 +9,7 @@
  */
 import { computed } from 'vue'
 import { ElRadio } from 'element-plus'
-import type { LxRadioProps } from './types'
+import type { LxRadioProps, LxRadioValue } from './types'
 import 'element-plus/es/components/radio/style/css'
 import './style.css'
 
@@ -27,9 +27,11 @@ const props = withDefaults(defineProps<LxRadioProps>(), {
 
 const resolvedValue = computed(() => props.value ?? (props.label || undefined))
 
-defineEmits<{
+const emit = defineEmits<{
+  /** 独立使用时同步 v-model。 */
+  'update:modelValue': [value: LxRadioValue | undefined]
   /** 选中项变化（EP 内核原生 change 契约） */
-  change: [value: unknown]
+  change: [value: LxRadioValue | undefined]
 }>()
 </script>
 
@@ -37,10 +39,12 @@ defineEmits<{
   <ElRadio
     class="lx-radio"
     :value="resolvedValue"
+    :model-value="props.modelValue"
     :disabled="props.disabled"
     :name="props.name"
     v-bind="$attrs"
-    @change="$emit('change', $event)"
+    @update:model-value="emit('update:modelValue', $event)"
+    @change="emit('change', $event)"
   >
     <slot>{{ props.label }}</slot>
   </ElRadio>

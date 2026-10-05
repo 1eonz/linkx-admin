@@ -6,7 +6,9 @@ export interface LxPasswordInputProps {
   disabled?: boolean
   clearable?: boolean
   showPassword?: boolean
-  /** 是否阻止复制、剪切和粘贴；默认允许，宿主有明确策略时再启用。 */
+  /** 焦点离开整个组件后重新遮罩；默认关闭。 */
+  maskOnBlur?: boolean
+  /** 是否通过前端事件阻止复制、剪切和粘贴；默认允许，不能替代宿主或服务端安全控制。 */
   preventClipboard?: boolean
   maxlength?: number | string
   minlength?: number | string

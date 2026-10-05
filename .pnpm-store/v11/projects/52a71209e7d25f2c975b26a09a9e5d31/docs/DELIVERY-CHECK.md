@@ -1,5 +1,53 @@
 # lx-ui 交付核查
 
+## 2026-10-06 LxIcon 修后交付复验
+
+- 当前代码复审批准，未发现可复现 P0–P2。未知图标运行时回退、侧栏 icon resolve/fallback、设置入口图标键与 Upload 图标类型已复核；真实读屏器播报和真实权限菜单畸形数据仍未覆盖。
+- 组件单测 6/6、图标文档桌面/移动 E2E 2/2；后者覆盖 96 名称、语义搜索、sticky 检索、桌面 32px/移动 44px 清除、清除后焦点恢复、亮色/常规暗色/HUD 空态对比度、键盘、复制和减少动效。类型检查、目标 ESLint/Prettier、196 模块构建、文档构建均通过。
+- Impeccable A 修前基线 32/40；B 的六个 detector 为有效 JSON `[]`、空 stderr、退出码 0，九个运行态视图均注入成功。overlay 标签、文档壳层及 token 提示逐项核验；修后只做有界 E2E 验证，未重新评分。详细报告与原始证据：`.impeccable/critique/wave3-lxicon-2026-10-06/`。
+- 本项不关闭 UI-10 的 52 项全库矩阵或 UI-11 整库评审；下一组件为 `LxDynamicForm`，Vue3 全量替换继续冻结。
+
+## 2026-10-05 LxSwitch 交付复验
+
+- LxSwitch 组件、Demo、中文 API、状态/键盘/主题/窄屏回归和独立代码复核已完成。单测 14/14、文档 E2E 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、生产构建（196 modules）和文档构建通过。VitePress 保留既有大包提示。
+- Impeccable A/B 综合评分 32/40；这是从 29/40 基线更新系统控制、识别和窄屏简约性三项的有界复评。组件、Demo、文档 detector 均为有效 `[]`、stderr 空、退出码 0，只表示当前静态规则零命中。移动 375px 下 overlay 造成的根宽增加已归因于注入标记；隐藏标记后页面恢复 375px。没有声称用户可见标签中存在 overlay。
+- 独立代码复核批准，未发现可复现 P0–P2。非阻塞验证缺口：E2E 尚未执行真实触摸点击；ARIA 属性动态移除、定时器运行中离开 Demo 的回归尚未覆盖。
+- 仍跟踪的交叉事项：移动文档侧栏关闭后的键盘顺序列入共享壳层复验；生产高影响操作的确认/审计/失败补偿需按真实宿主契约验收；术语释义属于后续文档改进。LxSwitch 本波完成不代表 52 项矩阵、Vue3 组件替换或真实后端联调已完成。
+- 证据与快照：`.impeccable/critique/wave2-lx-switch-2026-10-05/`；正式快照 `.impeccable/critique/2026-10-05T13-00-21Z__linkx-fe-src-components-lxswitch-index-vue.md`，该目标首次正式记录，趋势为 32/40；实现提交 `1679d9c`。
+
+## 2026-10-05 LxCheckbox / LxRadio 交付复验
+
+- Checkbox、CheckboxGroup、Radio、RadioGroup 的状态样式、中文 API/Demo 与可观察行为回归已复核；浅色禁用文字为 `#909399`，HUD 次级文字为 `#94a3b8`，Radio `aria-live` 播报中文选项名，Demo 展示组外已选禁用历史值。
+- 定向单测 20/20、文档 E2E 4/4；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、生产构建（196 modules）、文档构建和目标差异检查通过。独立代码复审批准，未发现 P0–P2 代码问题。
+- Impeccable A 34/40；B 记录 Checkbox/Radio 与组控件的主题、触屏、键盘、减少动效状态，最新 Radio 矩阵 16/16 成功注入 overlay。静态 detector 四个组件目录及最终 Radio Demo 均为有效 `[]`、stderr 空、退出码 0；这不替代浏览器结论。
+- 尚存建议：375px API 多列表格仍不易快速扫描。文档页保持无整体横向溢出，现有表格容器可横向滚动；此项列为文档体验 P2，严格设计矩阵行不关闭。真实触屏 44px 目标已由 B 验证通过。
+- 证据：`.impeccable/critique/wave2-checkbox-radio-2026-10-05/`；实现/E2E 提交 `be86f10`。
+
+## 2026-10-05 LxSelect 行为与窄屏复验
+
+- HUD 下拉主色变量现限制于 Select popper；Teleported option 描述使用直接类名；远程失败说明仍关联输入框，弹层打开时 footer 提供重试，关闭时错误和重试回到控件旁；Demo 增加单项离线禁用候选项。
+- 窄屏/触屏将 Select 选项行提升至 44px，桌面继续按 02 标本保持 32px。hover 视觉规范记录 02 字段样本与综合演练卡两种依据，当前沿用综合演练卡的主色描边。主会话 320px 实测触发器与弹层留在视口内，HUD 传送菜单使用深色表面和局部主色。
+- LxSelect 单测 10/10、当前文档 E2E 3/3；Vue3 类型检查、目标 Prettier/ESLint、lx-ui 类型/196 模块构建/文档构建通过。构建保留既有大 chunk 警告。
+- Luna max 独立代码复审最终批准。人工浏览器阶段记录见 `.impeccable/critique/wave2-lx-select-2026-10-05/main-session-check.md`；Assessment A-only 暂定 29/40。overlay、当前版本持久截图和 snapshot/trend 缺失，正式 Impeccable 及严格 UI-10 行保持未完成。Vue3 宿主替换仍等待组件库门禁。
+
+## 2026-10-05 LxDatePicker 窄视口修复复验
+
+- DatePicker 窄屏弹层按实际边界选择原生锚定或视口居中；居中模式隐藏定位箭头，滚动限制在日期面板内部，窄屏宽度受视口约束。
+- 文档 Playwright 16/16、DatePicker/DynamicForm 定向单测 39/39；覆盖 320/375/390px、短屏普通及快捷区间、滚动后末行可见、页面滚动隔离、HUD、键盘、错误态和减少动效。
+- lx-ui 类型检查、库构建（196 modules）、文档构建、Vue3 目标 ESLint/Prettier 和目标差异检查通过；VitePress 有既有大 chunk 提示。
+- 正式 Assessment A 31/40、Assessment B 9 个场景及独立代码审查均完成。4 项 P2/P3 体验建议仍在跟踪，故 DatePicker 严格审查行不关闭；detector `[]` 只代表源码静态零命中。证据位于 `.impeccable/critique/wave2-date-range-2026-10-05/final-review/`，综合快照为 `.impeccable/critique/2026-10-04T21-53-59Z__linkx-fe-src-components-lxdatepicker-index-vue.md`。
+
+## 2026-10-05 LxDatePicker Demo 专项复核
+
+- Demo 将日期区间主示例前移，低频尺寸/扩展参数放入默认收起、可键盘访问的说明；HUD 分隔符使用正文色令牌，小屏含侧栏弹层限制为视口宽减 16px。
+- Playwright 文档 E2E 12/12；alpha 安全对比度 helper 修改后 HUD 定向用例 1/1；lx-ui 类型、库构建（196 modules）、文档构建及 Vue3 目标 ESLint/Prettier 通过。独立代码审查批准；详情与 Impeccable A/B 证据路径见 `.impeccable/critique/wave2-date-range-2026-10-04/`。
+- 375×812 常用日期范围弹层底部初始越界约 54px；滚动后末行完整可见、可选，键盘焦点稳定。该边界继续记为已知体验限制，不声称初始状态完全置于视口。
+- 只覆盖 LxDatePicker Demo 与样式的本轮改动；LxSelect、Checkbox/Radio、Switch 及全库 UI-10/UI-11 门槛仍待完成。
+
+## 2026-10-04 密码输入框回归约定
+
+`LxPasswordInput` 必须以组件显隐状态控制密码类型，调用方透传的 `type` 不能覆盖遮罩。剪贴板默认允许；宿主显式开启 `preventClipboard` 时组件只阻止前端事件，不得将其作为服务端安全边界。Wave 1 行为修复与 Impeccable 正式视觉审查分别记录。
+
 ## 2026-10-04 后续交付拆分
 
 Wave 0–12 的完整任务、证据门槛和阻塞口径见仓库文档 `doc/PROJECT-FOLLOWUP-BREAKDOWN.md`。Wave 0 已修复 `LxDatePicker` 相邻实例说明 ID 隔离，36 项 DatePicker/DynamicForm 单测、组件库构建、文档构建和 DatePicker 文档 E2E 通过；正式 Impeccable Critique 仍未关闭。基础控件统一严格审查、TreeSelect/Cascader 当前版本 overlay 及全库 52 项矩阵继续进行。所有新备注和组件说明使用中文，`[]` 仅记静态 detector 零命中。
@@ -91,7 +139,7 @@ Impeccable `detect.mjs` 的源码输出 `[]` 且退出码为 0，只代表本次
 
 `LxPagination` 的中文 API/Demo 覆盖默认与自定义 layout、背景样式、自动重置/滚动和站点明暗主题；5 项组件单测验证受控事件顺序与滚动开关，2 项适配器单测保留旧 `page/limit/pagination` 契约，文档 Playwright 3/3 覆盖条数切换、主题、375px 局部滚动及键盘焦点。文档 Demo 使用 `zh-cn` locale；detector 对组件、Demo、文档和 Vue3 适配器 stdout `[]`、stderr 空、退出码 0，仅表示本次静态规则零命中；UI-11 正式 Critique 仍待 UI-10 其余组件闭环。
 
-`LxPasswordInput` 已补独立中文 API/Demo；文档 Playwright 3/3 实际验证密码显隐与清空、输入事件、focus/blur/select 实例方法、复制/剪切/粘贴阻止、只读/禁用语义和 375px HUD 无横向溢出。Demo 使用内存样例，无登录请求；`autocomplete` 与剪贴板约束按现有组件契约说明。库类型检查、134 模块构建、VitePress 构建及定向 Prettier 通过；组件级验收不代表真实认证联调或 UI-11 整库 Critique 完成。
+`LxPasswordInput` 独立中文 API/Demo 已覆盖密码显隐与清空、输入事件、focus/blur/select 实例方法、默认剪贴板可用与显式阻止、只读/禁用语义和窄屏布局。2026-10-06 修后单测 10/10、文档 Playwright 9/9，覆盖 320px 真实目录锚点、暗色 VitePress 表面与 Element Plus 输入主题变量、HUD 切换、44px 工具栏/高级标签、键盘和减少动效；独立代码复审批准，Impeccable A 为 32/40。B 的三个 detector 均为有效 JSON `[]`、stderr 空、退出码 0；overlay 11 个目标归因为 HUD 主题提示或 VitePress 文档壳层。`preventClipboard` 只阻止前端剪贴板事件，不是安全边界；Demo 使用内存样例，不访问登录接口。宿主 Form 校验失败集成示例仍列在 Form/DynamicForm 后续任务；组件验收不代表真实认证联调或 UI-11 整库 Critique 完成。
 
 `LxEmpty` 有独立中文 API/Demo；5 项单测覆盖默认文案、status 语义、紧凑档、自定义尺寸校验、图标/操作插槽与宿主 class 透传。文档 Playwright 覆盖默认 64px、`image-size=80`、键盘操作、筛选恢复、两主题对比度、长描述和 375/320px 无横向溢出。阶段性启发式评审曾记 28/40，亮色浏览器 overlay 发现 5 项真实低对比度文字；已改用正文令牌并补对比度回归。后续流程审计确认该评分没有对应的 Impeccable Critique 快照，且设计评审未在独立新标签检查页面，因此不能视为正式 Impeccable 验收，需在 UI-11 按 skill 规范补齐。detector `[]` 仅表示静态规则零命中。Vue3 15 处 `el-empty` 仍待 UI-04 替换，组件证据不代表宿主页面已经采用。
 

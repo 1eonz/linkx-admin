@@ -1,0 +1,21 @@
+Assessment B detector overlay 记录
+
+overlay script URL：http://127.0.0.1:8400/detect.js
+CDP 注入结果：script 节点已追加；页面滚动位置为顶端。
+等待：2500 ms。
+浏览器 console：
+level=log
+timestamp=2026-10-04T10:58:35.298Z
+url=http://127.0.0.1:8400/detect.js
+message=%c[impeccable] 14 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold
+
+DOM 可访问树中的 overlay 标签包括：
+- line length too long（2 处）
+- raster buried under a wash or opacity
+- one column stretches the first viewport
+- ✦ em-dash overuse: 14 em-dashes in body text
+- layout property animation: transition: height, padding-top, padding-bottom
+
+解释边界：console 的 14 是自动规则命中总数，不等于 14 个已确认缺陷。当前文档页把组件 demo 与 VitePress 文档外壳一起呈现；宽列、raster、布局 transition 的目标归属未确认。长行标签落在 demo 说明文本附近；em-dash 规则扫描了整页正文。需结合源码和实际组件逐条归因，不能直接把以上标签算作组件缺陷。
+
+可见性限制：调用 browser visibility.set(true) 返回 `IAB visibility is not supported in a subagent thread`，因此没有将标签切到前台或设置 `[Human]` 会话名。后台新标签仍可通过 CDP 注入并提供原生截图。

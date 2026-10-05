@@ -1,0 +1,46 @@
+{
+  "target": "http://127.0.0.1:4192/components/lxswitch.html",
+  "freshBrowserTabCount": 1,
+  "preflight": {
+    "documentTitleMutation": true,
+    "inlineScriptAppended": true,
+    "inlineScriptExecuted": true
+  },
+  "overlay": {
+    "scriptUrl": "http://localhost:8400/detect.js",
+    "scriptAppended": true,
+    "scriptLoaded": true,
+    "scriptLoadError": null,
+    "detectorFunctionsPresent": [
+      "impeccableDetect",
+      "impeccableDetectAsync",
+      "impeccableScan",
+      "impeccableScanAsync",
+      "impeccableMeasureHiddenText",
+      "impeccableCollectVisualContrastCandidates",
+      "impeccableAnalyzeVisualContrast",
+      "impeccableGetLastVisualContrastAnalyses"
+    ],
+    "consoleSummary": "[impeccable] 15 anti-patterns found",
+    "visibleOnScreenshots": [
+      "lxswitch-light-desktop.png",
+      "lxswitch-hud-desktop-states.png",
+      "lxswitch-hud-disabled-loading.png",
+      "lxswitch-keyboard-focus.png",
+      "lxswitch-touch-375.png",
+      "lxswitch-reduced-motion.png"
+    ]
+  },
+  "browserEvidence": {
+    "viewportResources": ["http://127.0.0.1:4192"],
+    "overlayOrigin": "http://localhost:8400",
+    "networkRequestsAfterLoadingClick": 0,
+    "externalBusinessApiObserved": false,
+    "globalRequestInterceptionEnabled": false
+  },
+  "limitations": [
+    "IAB CDP does not support Input.dispatchTouchEvent, so a native touch tap was not verified.",
+    "At 375 CSS px the document scrollWidth measured 536 px; the contributing node was not isolated.",
+    "After continuation the browser tool reported Browser is not available: 2; the previously saved screenshots and CDP output retain the injection evidence."
+  ]
+}

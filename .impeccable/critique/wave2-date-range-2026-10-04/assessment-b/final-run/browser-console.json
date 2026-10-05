@@ -1,0 +1,35 @@
+{
+  "summary": {
+    "message": "[impeccable] 37 anti-patterns found",
+    "timestamp": "2026-10-04T16:37:46.726Z",
+    "source": "http://localhost:8400/detect.js",
+    "primaryFindings": 37,
+    "advisoryFindings": 1
+  },
+  "findingLogCounts": {
+    "ai-color-palette": 33,
+    "buried-raster": 2,
+    "em-dash-overuse": 1,
+    "layout-transition": 1,
+    "first-viewport-column-overflow": 1
+  },
+  "representativeTargets": {
+    "ai-color-palette": [
+      "i.el-icon.el-input__icon.el-range__icon",
+      "svg",
+      "path",
+      "span.el-date-picker__header-label.active",
+      "span.el-date-table-cell__text",
+      "svg.lx-icon.lx-date-picker-demo__marker"
+    ],
+    "buried-raster": ["button.copy"],
+    "em-dash-overuse": ["body: 14 em-dashes in body text"],
+    "layout-transition": ["body: transition height, padding-top, padding-bottom"],
+    "first-viewport-column-overflow": ["div.container"]
+  },
+  "injection": {
+    "script": "http://localhost:8400/detect.js",
+    "loaded": true,
+    "visibleOverlayBoxes": 37
+  }
+}

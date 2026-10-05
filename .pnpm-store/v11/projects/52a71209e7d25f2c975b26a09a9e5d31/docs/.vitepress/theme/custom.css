@@ -11,6 +11,38 @@
   background: var(--lx-bg-card);
 }
 
+.vp-doc #lx-passwordinput-demo {
+  scroll-margin-block-start: calc(var(--vp-nav-height, 64px) + 16px);
+}
+
+@media (max-width: 960px) {
+  .vp-doc #lx-passwordinput-demo {
+    scroll-margin-block-start: calc(var(--vp-nav-height, 64px) + 48px + 16px);
+  }
+}
+
+.dark .vp-doc .password-input-demo:not(.lx-theme-hud) {
+  color-scheme: dark;
+  --lx-bg-card: var(--vp-c-bg-alt);
+  --lx-bg-card-hover: var(--vp-c-bg-soft);
+  --lx-border: var(--vp-c-divider);
+  --lx-color-primary: var(--vp-c-brand-1);
+  --lx-text-primary: var(--vp-c-text-1);
+  --lx-text-regular: var(--vp-c-text-1);
+  --lx-text-secondary-strong: var(--vp-c-text-2);
+  --el-color-primary: var(--vp-c-brand-1);
+  --el-bg-color: var(--vp-c-bg-alt);
+  --el-bg-color-overlay: var(--vp-c-bg-alt);
+  --el-fill-color-blank: var(--vp-c-bg-alt);
+  --el-fill-color-light: var(--vp-c-bg-soft);
+  --el-border-color: var(--vp-c-divider);
+  --el-border-color-light: var(--vp-c-divider);
+  --el-text-color-primary: var(--vp-c-text-1);
+  --el-text-color-regular: var(--vp-c-text-1);
+  --el-text-color-secondary: var(--vp-c-text-2);
+  --el-text-color-placeholder: var(--vp-c-text-2);
+}
+
 /* API 表在窄屏内自身滚动，避免文档列被长类型撑出视口。第一列和代码列保持
    单行便于扫描，横向滚动由表格自身承载，不影响页面主滚动。 */
 .vp-doc table {
@@ -29,7 +61,64 @@
   white-space: nowrap;
 }
 
+.vp-doc .lx-passwordinput-props-hint {
+  display: none;
+}
+
+.vp-doc .lx-switch-props {
+  margin: 16px 0 24px;
+  border-top: 1px solid var(--lx-border);
+  font-size: 13px;
+}
+
+.vp-doc .lx-switch-props__item {
+  display: grid;
+  grid-template-columns: minmax(8rem, 22%) minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--lx-border);
+}
+
+.vp-doc .lx-switch-props__name,
+.vp-doc .lx-switch-props__detail {
+  min-width: 0;
+  margin: 0;
+}
+
+.vp-doc .lx-switch-props__name {
+  font-weight: 600;
+}
+
+.vp-doc .lx-switch-props__meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4px 16px;
+  margin: 0 0 6px;
+  color: var(--lx-text-secondary-strong);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.vp-doc .lx-switch-props__meta code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.vp-doc .lx-switch-props__description {
+  margin: 0;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 640px) {
+  .vp-doc .lx-passwordinput-props-hint {
+    display: block;
+    margin: -4px 0 8px;
+    color: var(--lx-text-secondary-strong);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
   .vp-doc table {
     font-size: 12px;
   }
@@ -37,6 +126,19 @@
   .vp-doc table th,
   .vp-doc table td {
     min-width: max-content;
+  }
+
+  .vp-doc .lx-switch-props__item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+    padding: 10px 0;
+  }
+
+  .vp-doc .lx-switch-props__meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 4px 12px;
+    margin-bottom: 4px;
   }
 }
 

@@ -28,11 +28,33 @@
   color: var(--lx-color-primary);
 }
 
+/* 禁用项文字使用设计规定的中性信息色，保留禁用态的可读层级。 */
+.lx-checkbox.el-checkbox.is-disabled .el-checkbox__label {
+  color: var(--lx-color-info);
+}
+
 /* ===== 选中/半选：主色填充白勾/横杠（EP 原生契约，组件级固化防漂移）===== */
-.lx-checkbox .el-checkbox__input.is-checked .el-checkbox__inner,
-.lx-checkbox .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+.lx-checkbox
+  .el-checkbox__input.is-checked:not(.is-disabled)
+  .el-checkbox__inner,
+.lx-checkbox
+  .el-checkbox__input.is-indeterminate:not(.is-disabled)
+  .el-checkbox__inner {
   border-color: var(--lx-color-primary);
   background: var(--lx-color-primary);
+}
+
+/* 选中态仍用正文色表达文字，避免与图稿中仅强调勾选框的层级冲突。 */
+.lx-checkbox
+  .el-checkbox__input.is-checked:not(.is-disabled)
+  + .el-checkbox__label {
+  color: var(--lx-color-text-main);
+}
+
+.lx-checkbox.el-checkbox:not(.is-disabled):hover
+  .el-checkbox__input.is-checked
+  + .el-checkbox__label {
+  color: var(--lx-color-primary);
 }
 
 /* ===== HUD 深色主题：填充跟随 HUD 主色 =====
@@ -40,11 +62,11 @@
  */
 html.dark.lx-theme-hud
   .lx-checkbox
-  .el-checkbox__input.is-checked
+  .el-checkbox__input.is-checked:not(.is-disabled)
   .el-checkbox__inner,
 html.dark.lx-theme-hud
   .lx-checkbox
-  .el-checkbox__input.is-indeterminate
+  .el-checkbox__input.is-indeterminate:not(.is-disabled)
   .el-checkbox__inner {
   border-color: var(--el-color-primary);
   background: var(--el-color-primary);

@@ -1,5 +1,43 @@
 # lx-ui 路线图
 
+## 2026-10-06 Wave 3 / LxIcon 修后严格复核
+
+`LxIcon` 对未知运行时名称显示有访问名称的问号图标；侧栏菜单先解析图标键并安全回退，设置入口改用现存 `setting` 名称；Upload 状态图标补充名称类型。中文总览增加语义检索、固定检索入口、清空回焦、P1 别名计数说明、暗色主题映射和高对比空态。组件单测 6/6、文档 E2E 2/2；Vue3/lx-ui 类型检查、目标 ESLint/Prettier、196 模块构建和文档构建通过。
+
+Impeccable A 修前基线 32/40；独立 B 对六个目标记录 detector JSON、stderr、退出码，并对九种页面视图实际注入 detector 和截图。检测器 `[]` 仅表示静态零命中。A/B 建议已在修后 E2E 中验证，但没有重新评分；375px overlay 根宽变化归因于检测标记，未归因到产品页面。未覆盖真实读屏器播报和真实权限菜单异常图标。
+
+下一入口为 `LxDynamicForm`，并把真实 Form 校验反馈及密码字段 ARIA 示例纳入组合验收；全库 UI-10/UI-11 完成前保留 Vue3 宿主 Element Plus。
+
+## 2026-10-06 Wave 1 / LxPasswordInput 修后复核
+
+320px 页内“交互示例”锚点现在避开 VitePress 移动目录；普通暗色文档主题同步映射到 Demo 和内部输入面，HUD 仍可独立切换；窄屏工具栏和展开的高级设置标签均达到 44px。单测 10/10、文档 E2E 9/9、类型检查、目标 ESLint/Prettier、lx-ui 类型检查与文档构建通过。独立代码复审批准；Impeccable A 32/40，B 的 3 个 detector 都是有效 `[]`/空 stderr/退出码 0，overlay 11 个目标归因为 HUD 主题提示或 VitePress 文档壳层。证据见 `.impeccable/critique/wave1-lxpasswordinput-2026-10-05/final-recheck-2026-10-06/`。密码字段宿主校验集成示例留在后续 Form/DynamicForm；移动目录项高度留在共享壳层。下一步先严格复核动态图标，再做 `LxDynamicForm`。
+
+## 2026-10-05 Wave 2 / LxSwitch 复验
+
+`LxSwitch` 的组件、Demo、中文 API、行为回归和独立代码复核已完成。单测 14/14、文档 Playwright 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。代码复核批准，未发现可复现的 P0–P2 问题。Impeccable A/B 综合 32/40，是基于 29/40 的三项有界修后评分；源码、Demo、文档的 detector 结果均为有效 `[]`、stderr 空、退出码 0，仅代表静态规则零命中。报告与浏览器证据见 `.impeccable/critique/wave2-lx-switch-2026-10-05/`，实现提交为 `1679d9c`。
+
+移动文档侧栏隐藏时的键盘顺序需在共享壳层波次复验；生产高影响开关的确认、授权审计和失败补偿由宿主依据真实业务契约确定；中文术语释义作为文档改进继续跟踪。`LxPasswordInput` 当前复核已记录在本文件顶部，动态图标严格复核已完成，当前进入 `LxDynamicForm`。这些交叉残项没有关闭前，不将组件计入统一严格矩阵关闭数。完成一波后继续下一波，组件实现/E2E 与项目计划/审计/Critique 证据分开提交并推送。
+
+## 2026-10-05 Wave 2 / LxCheckbox 与 LxRadio 复验
+
+`LxCheckbox`/`LxCheckboxGroup` 与 `LxRadio`/`LxRadioGroup` 的当前实现、Demo、中文 API、行为回归和独立审查已完成。定向单测 20/20、文档 Playwright 4/4；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。独立代码复审批准，未发现 P0–P2 代码问题。Impeccable A 为 34/40；B 覆盖 Checkbox/Radio 的亮色、HUD、375px 触屏、禁用、键盘和减少动效状态，Radio 最新矩阵 overlay 注入 16/16；四个组件目录与最终 Radio Demo 的 detector 均为有效 `[]`、stderr 空、退出码 0。`[]` 只代表静态规则零命中。A 留下 375px API 表格扫描效率 P2，窄屏虽有表格自身滚动且页面无横向溢出，阅读体验仍待优化；真实触屏高度已由 B 验证为 44px。报告、截图和综合 Critique 见 `.impeccable/critique/wave2-checkbox-radio-2026-10-05/`。严格矩阵行保留上述文档 P2。
+
+## 2026-10-05 Wave 2 / LxSelect 交互复验
+
+LxSelect 已完成配置式选项与插槽、远程空/失败状态和弹层开合两态恢复、HUD 弹层主色隔离、离线禁用候选项和窄屏触控选项。组件单测 10/10、当前文档 Playwright 3/3；Vue3 类型检查/目标 ESLint/Prettier、lx-ui 类型检查、库构建（196 modules）和文档构建通过，Luna max 独立代码复审最终批准。E2E 首次精确化时暴露 Select 下拉与折叠标签 tooltip 同带锚定类的问题，最终限定 `.el-select-dropdown.lx-select__popper` 后全绿。Assessment A-only 暂定 29/40；本波没有成功注入 overlay，也未生成当前版本持久截图或 snapshot/trend；detector 的有效 `[]` 只代表静态零命中，因此 LxSelect 严格矩阵行暂不关闭。下一项为 Checkbox/Radio。
+
+## 2026-10-05 Wave 2 / LxDatePicker 短视口复验
+
+DatePicker 短视口修复按实际边界选择原生锚点或居中浮层，日历面板独立滚动，弹层完整留在视口内。文档 Playwright 16/16，DatePicker/DynamicForm 定向单测 39/39；类型检查、库构建 196 modules、文档构建与目标 ESLint/Prettier 通过。正式 Impeccable A 为 31/40，B 覆盖 9 个浏览器场景并记录 detector、覆盖层与生命周期证据，独立代码审核批准。字段上下文遮挡、短屏末行滚动提示、桌面标签遮挡和底边距仍有 3 项 P2、1 项 P3 建议；DatePicker 严格矩阵行不关闭，后续按整改台账跟踪。报告位于 `.impeccable/critique/wave2-date-range-2026-10-05/final-review/`，综合快照为 `.impeccable/critique/2026-10-04T21-53-59Z__linkx-fe-src-components-lxdatepicker-index-vue.md`。下一项为 `LxSelect`；52 项矩阵与 UI-11 仍未关闭。
+
+## 2026-10-05 Wave 2 / LxDatePicker Demo 子项
+
+DatePicker 文档 Demo 已完成信息层级与窄屏弹层专项复核：日期区间示例前移，尺寸/扩展说明默认折叠，HUD 分隔符使用正文对比令牌，弹层宽度按视口减 16px 限制。文档 Playwright 12/12、lx-ui 类型/库构建/文档构建、Vue3 目标 ESLint/Prettier 通过；独立代码审核批准。375×812 下快捷范围弹层初始底部超出 54px，页面滚动后末行可见并可选，记录为需滚动查看的边界。当前组件评审 A/B 和综合 Critique 状态见本波归档；该子项不等于 Wave 2 全部组件或 52 项矩阵关闭。下一项为 `LxSelect`。
+
+## 2026-10-04 基础控件复核状态
+
+`LxPasswordInput` 的透传 `type` 不能覆盖内部密码遮罩；调用方传入 `type="text"` 的回归、显隐往返和只读组合单测 7/7 通过，修后独立代码复审批准，未发现 P0–P2。剪贴板默认允许，`preventClipboard` 只阻止前端事件，不构成凭据安全控制。Wave 1 的正式 Impeccable overlay/snapshot 因浏览器注入限制仍待补；当前按总计划继续 Wave 2 交互修复。
+
 ## 2026-10-04 后续任务拆分入口
 
 组件库严格对照、DynamicForm/Form、基础控件、TreeSelect/Cascader、动态图标、登录页、Vue3 宿主替换和整站审查已按 Wave 0–12 拆分，详见仓库文档 `doc/PROJECT-FOLLOWUP-BREAKDOWN.md`。Wave 0 的 `LxDatePicker` 字段说明隔离修复、代码审核和定向回归已完成；正式 Impeccable A/B、overlay 与 snapshot/trend 仍待补。当前进入 Wave 1 基础控件批次。新增文档和注释使用中文；API 请求链保持 `.then().catch().finally()`；静态 detector `[]` 不作为正式视觉通过。

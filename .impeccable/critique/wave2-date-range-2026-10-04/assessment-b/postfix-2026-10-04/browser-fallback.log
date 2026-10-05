@@ -1,0 +1,18 @@
+Assessment B postfix 浏览器能力记录
+
+目标 URL：http://127.0.0.1:4174/components/lxdatepicker.html
+
+首次尝试：cua.createBrowserTab("iab", URL, { visible: false })
+返回：Browser is not available: iab
+
+一次 CUA 回退：cua.getState()
+返回：{"apps":[],"browsers":[]}
+
+一次本地 Playwright 回退（未联网、未安装）：
+- linkx-fe 目录的 require.resolve("playwright")：PLAYWRIGHT_NOT_RESOLVED: MODULE_NOT_FOUND
+- 全局 playwright 命令：missing
+- node_modules/.bin/playwright.cmd：false
+- linkx-fe/node_modules/.bin/playwright.cmd：false
+- linkx-fe/package.json 没有 Playwright 依赖。
+
+结论：当前 postfix 执行环境没有浏览器 provider，也没有可保存截图的本地 Playwright。没有可用标签，故写入式 injection preflight、overlay 注入、1280px/375px、亮色/HUD、区间弹层和键盘检查均未执行。没有发起外网请求，没有安装依赖，没有重复等待或进行第二次浏览器回退。

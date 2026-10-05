@@ -1,0 +1,164 @@
+{
+  "detectorRun": [
+    {
+      "el": {
+        "tagName": "BUTTON",
+        "id": null,
+        "className": "copy"
+      },
+      "findings": [
+        {
+          "type": "buried-raster",
+          "detail": "raster background at opacity 0"
+        }
+      ]
+    },
+    {
+      "el": {
+        "tagName": "TABLE",
+        "id": null,
+        "className": null
+      },
+      "findings": [
+        {
+          "type": "edge-flush-cards",
+          "detail": "13 cards flush against the left edge of table at rest (1px gap, e.g. th)"
+        }
+      ]
+    },
+    {
+      "el": {
+        "tagName": "DIV",
+        "id": null,
+        "className": "container"
+      },
+      "findings": [
+        {
+          "type": "first-viewport-column-overflow",
+          "detail": "div.container opens the page with one column running 666% of the viewport tall while a sibling fits in 88% — the fold falls deep inside the section"
+        }
+      ]
+    },
+    {
+      "el": {
+        "tagName": "BODY",
+        "id": null,
+        "className": null
+      },
+      "findings": [
+        {
+          "type": "layout-transition",
+          "detail": "transition: height, padding-top, padding-bottom"
+        }
+      ]
+    }
+  ],
+  "overlayDom": [
+    {
+      "overlayClass": "impeccable-overlay",
+      "text": "raster buried under a wash or opacity",
+      "targetSelector": "div#VPContent > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxpasswordinput > div > details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+      "targetTag": "BUTTON",
+      "targetClass": "copy",
+      "scope": "VitePress docs shell/content"
+    },
+    {
+      "overlayClass": "impeccable-overlay impeccable-visible",
+      "text": "cards flush against the scroller edge",
+      "targetSelector": "div#VPContent > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxpasswordinput > div > table:nth-of-type(1)",
+      "targetTag": "TABLE",
+      "targetClass": null,
+      "scope": "VitePress docs shell/content"
+    },
+    {
+      "overlayClass": "impeccable-overlay impeccable-visible",
+      "text": "one column stretches the first viewport",
+      "targetSelector": "div#VPContent > div.VPDoc.has-sidebar.has-aside > div.container",
+      "targetTag": "DIV",
+      "targetClass": "container",
+      "scope": "VitePress docs shell/content"
+    },
+    {
+      "overlayClass": "impeccable-overlay impeccable-banner",
+      "text": "layout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+      "targetSelector": null,
+      "targetTag": null,
+      "targetClass": null,
+      "scope": "page-level overlay"
+    }
+  ],
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "verbose",
+      "text": "[DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq)"
+    },
+    {
+      "type": "verbose",
+      "text": "[DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq)"
+    },
+    {
+      "type": "verbose",
+      "text": "[DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq)"
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 4 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cedge-flush-cards%c 13 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cfirst-viewport-column-overflow%c div.container opens the page with one column running 666% of the viewport tall while a sibling fits in 88% — the fold falls deep inside the section color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 4 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cedge-flush-cards%c 13 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cfirst-viewport-column-overflow%c div.container opens the page with one column running 666% of the viewport tall while a sibling fits in 88% — the fold falls deep inside the section color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    }
+  ]
+}

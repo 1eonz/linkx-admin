@@ -41,14 +41,27 @@ const attrs = useAttrs()
 const switchRef = ref<{ $el?: HTMLElement }>()
 const managedDescriptionIds = new Set<string>()
 
-function syncSwitchDescription(): void {
+function syncSwitchAccessibility(): void {
   const control = switchRef.value?.$el?.querySelector('[role="switch"]')
   if (!(control instanceof HTMLElement)) return
+
+  const labelledBy = attrs['aria-labelledby']
+  if (typeof labelledBy === 'string' && labelledBy.trim()) {
+    control.setAttribute('aria-labelledby', labelledBy.trim())
+  } else {
+    control.removeAttribute('aria-labelledby')
+  }
+
   syncAriaDescribedBy(control, attrs['aria-describedby'], managedDescriptionIds)
 }
 
-onMounted(syncSwitchDescription)
-onUpdated(syncSwitchDescription)
+function handleSpaceKeydown(event: KeyboardEvent): void {
+  if (event.repeat) return
+  switchRef.value?.$el?.click()
+}
+
+onMounted(syncSwitchAccessibility)
+onUpdated(syncSwitchAccessibility)
 </script>
 
 <template>
@@ -63,6 +76,7 @@ onUpdated(syncSwitchDescription)
     :loading="loading"
     :name="name"
     v-bind="$attrs"
+    @keydown.space.prevent="handleSpaceKeydown"
     @update:model-value="emit('update:modelValue', $event)"
     @change="emit('change', $event)"
   />

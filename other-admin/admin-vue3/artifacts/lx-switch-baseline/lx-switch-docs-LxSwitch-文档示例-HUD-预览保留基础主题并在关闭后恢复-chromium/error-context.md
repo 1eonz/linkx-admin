@@ -1,0 +1,49 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e7]: 公安移动专网安全接入
+    - button "切换系统语言" [ref=e10] [cursor=pointer]:
+      - generic [ref=e11]: 简体中文
+      - img [ref=e13]
+  - main [ref=e15]:
+    - region "警务协同" [ref=e16]:
+      - generic [ref=e17]:
+        - img [ref=e20]
+        - heading "警务协同" [level=1] [ref=e22]
+        - paragraph [ref=e23]: LinkX Mobile Command & Operations Management System
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - heading "身份认证" [level=2] [ref=e26]
+          - generic [ref=e27]: 带 * 的项目为必填
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e30]: "*用户 / 账号"
+            - generic [ref=e33]:
+              - img [ref=e36]
+              - textbox "*用户 / 账号" [ref=e38]:
+                - /placeholder: 请输入警号或账号
+          - generic [ref=e39]:
+            - generic [ref=e40]: "*密码"
+            - generic [ref=e43]:
+              - img [ref=e46]
+              - textbox "*密码" [ref=e49]:
+                - /placeholder: 请输入密码
+          - generic [ref=e50]:
+            - generic [ref=e51] [cursor=pointer]:
+              - generic [ref=e52]:
+                - checkbox "记住账号"
+              - generic [ref=e54]: 记住账号
+            - generic [ref=e55]: 忘记密码请联系系统管理员
+          - button "安全登录" [ref=e56] [cursor=pointer]:
+            - generic [ref=e57]: 安全登录
+            - img [ref=e59]
+        - generic [ref=e61]:
+          - img [ref=e63]
+          - generic [ref=e65]: 未经授权禁止登录，系统全程安全审计
+      - status [ref=e66]
+  - contentinfo [ref=e67]:
+    - generic [ref=e68]: 版本 —
+    - generic [ref=e69]: Copyright © 2026 LinkX Platform
+```

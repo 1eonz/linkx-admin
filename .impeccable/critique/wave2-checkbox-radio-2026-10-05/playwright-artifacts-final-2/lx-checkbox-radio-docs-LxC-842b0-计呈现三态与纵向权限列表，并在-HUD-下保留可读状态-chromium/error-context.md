@@ -1,0 +1,630 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#VPContent"
+  - banner:
+    - generic:
+      - generic:
+        - generic:
+          - link "LxUI" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e7]: LxUI
+          - generic [ref=e8]:
+            - navigation "Main Navigation" [ref=e9]:
+              - generic [ref=e10]: Main Navigation
+              - link "首页" [ref=e11] [cursor=pointer]:
+                - /url: /
+                - generic [ref=e12]: 首页
+              - link "组件" [ref=e13] [cursor=pointer]:
+                - /url: /components/lxsidebar.html
+                - generic [ref=e14]: 组件
+              - link "新增组件" [ref=e15] [cursor=pointer]:
+                - /url: /components/new-components.html
+                - generic [ref=e16]: 新增组件
+            - switch "Switch to dark theme" [ref=e18] [cursor=pointer]
+  - complementary [ref=e23]:
+    - navigation "Sidebar Navigation" [ref=e25]:
+      - generic [ref=e26]: Sidebar Navigation
+      - generic [ref=e28]:
+        - button "新增组件" [ref=e29]:
+          - heading "新增组件" [level=2] [ref=e31]
+        - link "新增组件总览" [ref=e36] [cursor=pointer]:
+          - /url: /components/new-components.html
+          - paragraph [ref=e37]: 新增组件总览
+      - generic [ref=e39]:
+        - button "基础" [ref=e40]:
+          - heading "基础" [level=2] [ref=e42]
+        - generic [ref=e43]:
+          - link "基础控件桥接" [ref=e47] [cursor=pointer]:
+            - /url: /components/element-bridge.html
+            - paragraph [ref=e48]: 基础控件桥接
+          - link "LxButton 按钮" [ref=e52] [cursor=pointer]:
+            - /url: /components/lxbutton.html
+            - paragraph [ref=e53]: LxButton 按钮
+          - link "LxIcon 图标总览" [ref=e57] [cursor=pointer]:
+            - /url: /components/lxicons.html
+            - paragraph [ref=e58]: LxIcon 图标总览
+      - generic [ref=e60]:
+        - button "布局导航" [ref=e61]:
+          - heading "布局导航" [level=2] [ref=e63]
+        - generic [ref=e64]:
+          - link "LxSidebar 侧边栏" [ref=e68] [cursor=pointer]:
+            - /url: /components/lxsidebar.html
+            - paragraph [ref=e69]: LxSidebar 侧边栏
+          - link "LxNavbar 顶部导航" [ref=e73] [cursor=pointer]:
+            - /url: /components/lxnavbar.html
+            - paragraph [ref=e74]: LxNavbar 顶部导航
+          - link "LxBreadcrumb 面包屑" [ref=e78] [cursor=pointer]:
+            - /url: /components/lxbreadcrumb.html
+            - paragraph [ref=e79]: LxBreadcrumb 面包屑
+          - link "LxTabsBar 页签栏" [ref=e83] [cursor=pointer]:
+            - /url: /components/lxtabsbar.html
+            - paragraph [ref=e84]: LxTabsBar 页签栏
+          - link "LxSplitLayout 分栏布局" [ref=e88] [cursor=pointer]:
+            - /url: /components/lxsplitlayout.html
+            - paragraph [ref=e89]: LxSplitLayout 分栏布局
+          - link "LxSelectTree 组织树选择" [ref=e93] [cursor=pointer]:
+            - /url: /components/lxselecttree.html
+            - paragraph [ref=e94]: LxSelectTree 组织树选择
+      - generic [ref=e96]:
+        - button "数据展示" [ref=e97]:
+          - heading "数据展示" [level=2] [ref=e99]
+        - generic [ref=e100]:
+          - link "LxProTable 数据表格" [ref=e104] [cursor=pointer]:
+            - /url: /components/lxprotable.html
+            - paragraph [ref=e105]: LxProTable 数据表格
+          - link "LxPageCard 页面容器" [ref=e109] [cursor=pointer]:
+            - /url: /components/lxpagecard.html
+            - paragraph [ref=e110]: LxPageCard 页面容器
+          - link "LxMetricCard 指标卡" [ref=e114] [cursor=pointer]:
+            - /url: /components/lxmetriccard.html
+            - paragraph [ref=e115]: LxMetricCard 指标卡
+          - link "LxDutyCalendar 排班日历" [ref=e119] [cursor=pointer]:
+            - /url: /components/lxdutycalendar.html
+            - paragraph [ref=e120]: LxDutyCalendar 排班日历
+          - link "LxSectionTitle 区块标题" [ref=e124] [cursor=pointer]:
+            - /url: /components/lxsectiontitle.html
+            - paragraph [ref=e125]: LxSectionTitle 区块标题
+          - link "LxAuthImg 鉴权图片" [ref=e129] [cursor=pointer]:
+            - /url: /components/lxauthimg.html
+            - paragraph [ref=e130]: LxAuthImg 鉴权图片
+          - link "LxDescriptions 详情描述" [ref=e134] [cursor=pointer]:
+            - /url: /components/lxdescriptions.html
+            - paragraph [ref=e135]: LxDescriptions 详情描述
+          - link "LxPagination 分页" [ref=e139] [cursor=pointer]:
+            - /url: /components/lxpagination.html
+            - paragraph [ref=e140]: LxPagination 分页
+          - link "LxVirtualTree 虚拟树" [ref=e144] [cursor=pointer]:
+            - /url: /components/lxvirtualtree.html
+            - paragraph [ref=e145]: LxVirtualTree 虚拟树
+          - link "LxTransferPanel 双栏穿梭" [ref=e149] [cursor=pointer]:
+            - /url: /components/lxtransferpanel.html
+            - paragraph [ref=e150]: LxTransferPanel 双栏穿梭
+          - link "LxStatusDot 状态点" [ref=e154] [cursor=pointer]:
+            - /url: /components/lxstatusdot.html
+            - paragraph [ref=e155]: LxStatusDot 状态点
+          - link "LxTag 浅底标签" [ref=e159] [cursor=pointer]:
+            - /url: /components/lxtag.html
+            - paragraph [ref=e160]: LxTag 浅底标签
+          - link "LxCodeSlot 代码槽" [ref=e164] [cursor=pointer]:
+            - /url: /components/lxcodeslot.html
+            - paragraph [ref=e165]: LxCodeSlot 代码槽
+          - link "LxActionButtons 行内操作" [ref=e169] [cursor=pointer]:
+            - /url: /components/lxactionbuttons.html
+            - paragraph [ref=e170]: LxActionButtons 行内操作
+          - link "LxEmpty 空态" [ref=e174] [cursor=pointer]:
+            - /url: /components/lxempty.html
+            - paragraph [ref=e175]: LxEmpty 空态
+          - link "LxGauge 圆环仪表" [ref=e179] [cursor=pointer]:
+            - /url: /components/lxgauge.html
+            - paragraph [ref=e180]: LxGauge 圆环仪表
+          - link "LxNodeBadge 节点徽章" [ref=e184] [cursor=pointer]:
+            - /url: /components/lxnodebadge.html
+            - paragraph [ref=e185]: LxNodeBadge 节点徽章
+          - link "权限消费" [ref=e189] [cursor=pointer]:
+            - /url: /components/permissions.html
+            - paragraph [ref=e190]: 权限消费
+      - generic [ref=e192]:
+        - button "数据录入" [ref=e193]:
+          - heading "数据录入" [level=2] [ref=e195]
+        - generic [ref=e196]:
+          - link "LxForm 表单" [ref=e200] [cursor=pointer]:
+            - /url: /components/lxform.html
+            - paragraph [ref=e201]: LxForm 表单
+          - link "LxInput 输入框" [ref=e205] [cursor=pointer]:
+            - /url: /components/lxinput.html
+            - paragraph [ref=e206]: LxInput 输入框
+          - link "LxTextarea 文本域" [ref=e210] [cursor=pointer]:
+            - /url: /components/lxtextarea.html
+            - paragraph [ref=e211]: LxTextarea 文本域
+          - link "LxRadio 单选组" [ref=e215] [cursor=pointer]:
+            - /url: /components/lxradio.html
+            - paragraph [ref=e216]: LxRadio 单选组
+          - link "LxCheckbox 复选组" [ref=e220] [cursor=pointer]:
+            - /url: /components/lxcheckbox.html
+            - paragraph [ref=e221]: LxCheckbox 复选组
+          - link "LxSwitch 开关" [ref=e225] [cursor=pointer]:
+            - /url: /components/lxswitch.html
+            - paragraph [ref=e226]: LxSwitch 开关
+          - link "LxSelect 下拉选择" [ref=e230] [cursor=pointer]:
+            - /url: /components/lxselect.html
+            - paragraph [ref=e231]: LxSelect 下拉选择
+          - link "LxTreeSelect 树形下拉" [ref=e235] [cursor=pointer]:
+            - /url: /components/lxtreeselect.html
+            - paragraph [ref=e236]: LxTreeSelect 树形下拉
+          - link "LxCascader 级联选择" [ref=e240] [cursor=pointer]:
+            - /url: /components/lxcascader.html
+            - paragraph [ref=e241]: LxCascader 级联选择
+          - link "LxDatePicker 日期选择" [ref=e245] [cursor=pointer]:
+            - /url: /components/lxdatepicker.html
+            - paragraph [ref=e246]: LxDatePicker 日期选择
+          - link "LxInputNumber 数字输入" [ref=e250] [cursor=pointer]:
+            - /url: /components/lxinputnumber.html
+            - paragraph [ref=e251]: LxInputNumber 数字输入
+          - link "LxSearchBar 检索面板" [ref=e255] [cursor=pointer]:
+            - /url: /components/lxsearchbar.html
+            - paragraph [ref=e256]: LxSearchBar 检索面板
+          - link "LxDynamicForm 动态表单" [ref=e260] [cursor=pointer]:
+            - /url: /components/lxdynamicform.html
+            - paragraph [ref=e261]: LxDynamicForm 动态表单
+          - link "LxStatusSwitch 状态开关" [ref=e265] [cursor=pointer]:
+            - /url: /components/lxstatusswitch.html
+            - paragraph [ref=e266]: LxStatusSwitch 状态开关
+          - link "LxPasswordInput 密码输入框" [ref=e270] [cursor=pointer]:
+            - /url: /components/lxpasswordinput.html
+            - paragraph [ref=e271]: LxPasswordInput 密码输入框
+          - link "LxUpload 文件上传" [ref=e275] [cursor=pointer]:
+            - /url: /components/lxupload.html
+            - paragraph [ref=e276]: LxUpload 文件上传
+          - link "LxSelectPagination 远程分页选择" [ref=e280] [cursor=pointer]:
+            - /url: /components/lxselectpagination.html
+            - paragraph [ref=e281]: LxSelectPagination 远程分页选择
+      - generic [ref=e283]:
+        - button "反馈与浮层" [ref=e284]:
+          - heading "反馈与浮层" [level=2] [ref=e286]
+        - generic [ref=e287]:
+          - link "LxMessage 全局提示" [ref=e291] [cursor=pointer]:
+            - /url: /components/lxmessage.html
+            - paragraph [ref=e292]: LxMessage 全局提示
+          - link "LxConfirm 确认框" [ref=e296] [cursor=pointer]:
+            - /url: /components/lxconfirm.html
+            - paragraph [ref=e297]: LxConfirm 确认框
+          - link "LxDialog 表单弹窗" [ref=e301] [cursor=pointer]:
+            - /url: /components/lxdialog.html
+            - paragraph [ref=e302]: LxDialog 表单弹窗
+          - link "LxDrawer 详情抽屉" [ref=e306] [cursor=pointer]:
+            - /url: /components/lxdrawer.html
+            - paragraph [ref=e307]: LxDrawer 详情抽屉
+          - link "LxFormErrorBanner 校验横幅" [ref=e311] [cursor=pointer]:
+            - /url: /components/lxformerrorbanner.html
+            - paragraph [ref=e312]: LxFormErrorBanner 校验横幅
+  - generic [ref=e315]:
+    - navigation "On this page" [ref=e321]:
+      - generic [ref=e322]:
+        - heading "On this page" [level=2] [ref=e324]
+        - list [ref=e325]:
+          - listitem [ref=e326]:
+            - link "交互示例" [ref=e327] [cursor=pointer]:
+              - /url: "#交互示例"
+          - listitem [ref=e328]:
+            - link "LxCheckbox Props" [ref=e329] [cursor=pointer]:
+              - /url: "#lxcheckbox-props"
+          - listitem [ref=e330]:
+            - link "LxCheckboxGroup Props" [ref=e331] [cursor=pointer]:
+              - /url: "#lxcheckboxgroup-props"
+          - listitem [ref=e332]:
+            - link "Events" [ref=e333] [cursor=pointer]:
+              - /url: "#events"
+          - listitem [ref=e334]:
+            - link "Slots" [ref=e335] [cursor=pointer]:
+              - /url: "#slots"
+          - listitem [ref=e336]:
+            - link "全选/半选联动" [ref=e337] [cursor=pointer]:
+              - /url: "#全选-半选联动"
+          - listitem [ref=e338]:
+            - link "与标本的对齐说明" [ref=e339] [cursor=pointer]:
+              - /url: "#与标本的对齐说明"
+          - listitem [ref=e340]:
+            - link "可访问性" [ref=e341] [cursor=pointer]:
+              - /url: "#可访问性"
+          - listitem [ref=e342]:
+            - link "Vue3 宿主适配" [ref=e343] [cursor=pointer]:
+              - /url: "#vue3-宿主适配"
+    - generic [ref=e346]:
+      - main [ref=e347]:
+        - generic [ref=e349]:
+          - heading "LxCheckbox / LxCheckboxGroup 复选组 Permalink to \"LxCheckbox / LxCheckboxGroup 复选组\"" [level=1] [ref=e350]:
+            - text: LxCheckbox / LxCheckboxGroup 复选组
+            - link "Permalink to \"LxCheckbox / LxCheckboxGroup 复选组\"" [ref=e351] [cursor=pointer]:
+              - /url: "#lxcheckbox-lxcheckboxgroup-复选组"
+              - text: "#"
+          - paragraph [ref=e352]:
+            - text: 基于 Element Plus
+            - code [ref=e353]: el-checkbox
+            - text: /
+            - code [ref=e354]: el-checkbox-group
+            - text: 内核二次封装的复选组。选中/半选主色填充白勾/横杠（EP 原生契约已对齐标本）；hover 描边与文字同步转主色为 Lx 增量规格；水平 16px 间距，
+            - code [ref=e355]: vertical
+            - text: 开启列排 12px 行距。
+          - paragraph [ref=e356]:
+            - text: 视觉规范源：
+            - code [ref=e357]: design/表单控件八件套/code.html
+            - text: 04。
+          - heading "交互示例 Permalink to \"交互示例\"" [level=2] [ref=e358]:
+            - text: 交互示例
+            - link "Permalink to \"交互示例\"" [ref=e359] [cursor=pointer]:
+              - /url: "#交互示例"
+              - text: "#"
+          - generic [ref=e360]:
+            - generic [ref=e362]:
+              - checkbox "HUD 深色主题" [ref=e363]
+              - text: HUD 深色主题
+            - generic [ref=e364]:
+              - heading "复选组（标本 04 关联授权业务权限）" [level=3] [ref=e365]
+              - group "关联授权业务权限" [ref=e366]:
+                - generic [ref=e367] [cursor=pointer]:
+                  - generic [ref=e368]:
+                    - checkbox "视频巡查权限 (已授权)" [checked]
+                  - generic [ref=e370]: 视频巡查权限 (已授权)
+                - generic [ref=e371] [cursor=pointer]:
+                  - generic [ref=e372]:
+                    - checkbox "警单流转 (部分下属权限)" [checked=mixed]
+                  - generic [ref=e374]: 警单流转 (部分下属权限)
+                - generic [ref=e375] [cursor=pointer]:
+                  - generic [ref=e376]:
+                    - checkbox "全网广播调度"
+                  - generic [ref=e378]: 全网广播调度
+                - generic [ref=e379]:
+                  - generic [ref=e380] [cursor=pointer]:
+                    - checkbox "重特大警情跨区移送 (需支队审批)" [disabled]
+                  - generic [ref=e382]: 重特大警情跨区移送 (需支队审批)
+              - paragraph [ref=e383]: 纵向 12px 行距；选中白勾、半选横杠，禁用项不可变更
+            - generic [ref=e384]:
+              - heading "独立复选与水平排布" [level=3] [ref=e385]
+              - generic [ref=e386] [cursor=pointer]:
+                - generic [ref=e387]:
+                  - checkbox "已知晓涉密核验义务并承诺遵守"
+                - generic [ref=e389]: 已知晓涉密核验义务并承诺遵守
+              - group "水平排布的通知渠道" [ref=e390]:
+                - generic [ref=e391] [cursor=pointer]:
+                  - generic [ref=e392]:
+                    - checkbox "警情简报" [checked]
+                  - generic [ref=e394]: 警情简报
+                - generic [ref=e395] [cursor=pointer]:
+                  - generic [ref=e396]:
+                    - checkbox "勤务调度"
+                  - generic [ref=e398]: 勤务调度
+                - generic [ref=e399] [cursor=pointer]:
+                  - generic [ref=e400]:
+                    - checkbox "协同通知"
+                  - generic [ref=e402]: 协同通知
+              - paragraph [ref=e403]: 默认水平排布，16px 间距；独立复选框的值为布尔类型
+            - region "禁用复选框的选中与半选回显" [ref=e404]:
+              - heading "禁用状态的选中与半选回显" [level=3] [ref=e405]
+              - generic [ref=e406]:
+                - generic [ref=e407] [cursor=pointer]:
+                  - checkbox "已分配的受限权限" [checked] [disabled]
+                - generic [ref=e409]: 已分配的受限权限
+              - generic [ref=e410]:
+                - generic [ref=e411] [cursor=pointer]:
+                  - checkbox "部分分配的受限权限" [checked=mixed] [disabled]
+                - generic [ref=e413]: 部分分配的受限权限
+            - paragraph [ref=e414]: 当前授权：video； 通知渠道：briefing； 承诺未勾选
+            - paragraph [ref=e415]: 选中/半选主色填充白勾/横杠为 EP 原生契约；hover 文字转主色为 Lx 增量规格。
+          - group [ref=e416]:
+            - generic "查看示例代码" [ref=e417] [cursor=pointer]
+          - heading "LxCheckbox Props Permalink to \"LxCheckbox Props\"" [level=2] [ref=e418]:
+            - text: LxCheckbox Props
+            - link "Permalink to \"LxCheckbox Props\"" [ref=e419] [cursor=pointer]:
+              - /url: "#lxcheckbox-props"
+              - text: "#"
+          - table [ref=e420]:
+            - rowgroup [ref=e421]:
+              - row "名称 类型 默认值 说明" [ref=e422]:
+                - columnheader "名称" [ref=e423]
+                - columnheader "类型" [ref=e424]
+                - columnheader "默认值" [ref=e425]
+                - columnheader "说明" [ref=e426]
+            - rowgroup [ref=e427]:
+              - row "modelValue string | number | boolean — v-model（独立使用时 boolean，组内由 Group 接管）。" [ref=e428]:
+                - cell "modelValue" [ref=e429]:
+                  - code [ref=e430]: modelValue
+                - cell "string | number | boolean" [ref=e431]:
+                  - code [ref=e432]: string | number | boolean
+                - cell "—" [ref=e433]
+                - cell "v-model（独立使用时 boolean，组内由 Group 接管）。" [ref=e434]
+              - row "value string | number — 组内该项的选中值（配合 LxCheckboxGroup；组选项值不支持 boolean）。" [ref=e435]:
+                - cell "value" [ref=e436]:
+                  - code [ref=e437]: value
+                - cell "string | number" [ref=e438]:
+                  - code [ref=e439]: string | number
+                - cell "—" [ref=e440]
+                - cell "组内该项的选中值（配合 LxCheckboxGroup；组选项值不支持 boolean）。" [ref=e441]:
+                  - text: 组内该项的选中值（配合
+                  - code [ref=e442]: LxCheckboxGroup
+                  - text: ；组选项值不支持 boolean）。
+              - row "label string '' 无插槽时的文字回退；未传 value 时兼作选中值（EP 旧契约兼容）。" [ref=e443]:
+                - cell "label" [ref=e444]:
+                  - code [ref=e445]: label
+                - cell "string" [ref=e446]:
+                  - code [ref=e447]: string
+                - cell "''" [ref=e448]:
+                  - code [ref=e449]: "''"
+                - cell "无插槽时的文字回退；未传 value 时兼作选中值（EP 旧契约兼容）。" [ref=e450]:
+                  - text: 无插槽时的文字回退；未传
+                  - code [ref=e451]: value
+                  - text: 时兼作选中值（EP 旧契约兼容）。
+              - row "disabled boolean —（undefined） 禁用态：灰底 + 灰字（标本 04\"需支队审批\"行）。默认未设置：不阻断 LxCheckboxGroup / ElForm 禁用继承；显式传值才覆盖。" [ref=e452]:
+                - cell "disabled" [ref=e453]:
+                  - code [ref=e454]: disabled
+                - cell "boolean" [ref=e455]:
+                  - code [ref=e456]: boolean
+                - cell "—（undefined）" [ref=e457]:
+                  - text: —（
+                  - code [ref=e458]: undefined
+                  - text: ）
+                - cell "禁用态：灰底 + 灰字（标本 04\"需支队审批\"行）。默认未设置：不阻断 LxCheckboxGroup / ElForm 禁用继承；显式传值才覆盖。" [ref=e459]:
+                  - text: 禁用态：灰底 + 灰字（标本 04"需支队审批"行）。默认未设置：不阻断
+                  - code [ref=e460]: LxCheckboxGroup
+                  - text: /
+                  - code [ref=e461]: ElForm
+                  - text: 禁用继承；显式传值才覆盖。
+              - row "indeterminate boolean false 半选态：主色填充 + 白色横杠；不修改值，并向辅助技术暴露混合态。" [ref=e462]:
+                - cell "indeterminate" [ref=e463]:
+                  - code [ref=e464]: indeterminate
+                - cell "boolean" [ref=e465]:
+                  - code [ref=e466]: boolean
+                - cell "false" [ref=e467]:
+                  - code [ref=e468]: "false"
+                - cell "半选态：主色填充 + 白色横杠；不修改值，并向辅助技术暴露混合态。" [ref=e469]
+              - row "name string — 原生 name；组内缺省由 Group 注入。" [ref=e470]:
+                - cell "name" [ref=e471]:
+                  - code [ref=e472]: name
+                - cell "string" [ref=e473]:
+                  - code [ref=e474]: string
+                - cell "—" [ref=e475]
+                - cell "原生 name；组内缺省由 Group 注入。" [ref=e476]
+          - heading "LxCheckboxGroup Props Permalink to \"LxCheckboxGroup Props\"" [level=2] [ref=e477]:
+            - text: LxCheckboxGroup Props
+            - link "Permalink to \"LxCheckboxGroup Props\"" [ref=e478] [cursor=pointer]:
+              - /url: "#lxcheckboxgroup-props"
+              - text: "#"
+          - table [ref=e479]:
+            - rowgroup [ref=e480]:
+              - row "名称 类型 默认值 说明" [ref=e481]:
+                - columnheader "名称" [ref=e482]
+                - columnheader "类型" [ref=e483]
+                - columnheader "默认值" [ref=e484]
+                - columnheader "说明" [ref=e485]
+            - rowgroup [ref=e486]:
+              - row "modelValue (string | number)[] [] 当前选中值集合（v-model）；组选项值只支持字符串或数字。" [ref=e487]:
+                - cell "modelValue" [ref=e488]:
+                  - code [ref=e489]: modelValue
+                - cell "(string | number)[]" [ref=e490]:
+                  - code [ref=e491]: (string | number)[]
+                - cell "[]" [ref=e492]:
+                  - code [ref=e493]: "[]"
+                - cell "当前选中值集合（v-model）；组选项值只支持字符串或数字。" [ref=e494]
+              - row "disabled boolean —（undefined） 整组禁用；缺省时继承 ElForm 禁用状态，显式传入 true 或 false 时覆盖继承。" [ref=e495]:
+                - cell "disabled" [ref=e496]:
+                  - code [ref=e497]: disabled
+                - cell "boolean" [ref=e498]:
+                  - code [ref=e499]: boolean
+                - cell "—（undefined）" [ref=e500]:
+                  - text: —（
+                  - code [ref=e501]: undefined
+                  - text: ）
+                - cell "整组禁用；缺省时继承 ElForm 禁用状态，显式传入 true 或 false 时覆盖继承。" [ref=e502]:
+                  - text: 整组禁用；缺省时继承
+                  - code [ref=e503]: ElForm
+                  - text: 禁用状态，显式传入
+                  - code [ref=e504]: "true"
+                  - text: 或
+                  - code [ref=e505]: "false"
+                  - text: 时覆盖继承。
+              - row "vertical boolean false 垂直排布（标本 04 权限列表）。" [ref=e506]:
+                - cell "vertical" [ref=e507]:
+                  - code [ref=e508]: vertical
+                - cell "boolean" [ref=e509]:
+                  - code [ref=e510]: boolean
+                - cell "false" [ref=e511]:
+                  - code [ref=e512]: "false"
+                - cell "垂直排布（标本 04 权限列表）。" [ref=e513]
+              - row "name string — 原生 name，注入组内全部 LxCheckbox。" [ref=e514]:
+                - cell "name" [ref=e515]:
+                  - code [ref=e516]: name
+                - cell "string" [ref=e517]:
+                  - code [ref=e518]: string
+                - cell "—" [ref=e519]
+                - cell "原生 name，注入组内全部 LxCheckbox。" [ref=e520]:
+                  - text: 原生 name，注入组内全部
+                  - code [ref=e521]: LxCheckbox
+                  - text: 。
+          - heading "Events Permalink to \"Events\"" [level=2] [ref=e522]:
+            - text: Events
+            - link "Permalink to \"Events\"" [ref=e523] [cursor=pointer]:
+              - /url: "#events"
+              - text: "#"
+          - table [ref=e524]:
+            - rowgroup [ref=e525]:
+              - row "组件 事件 参数 说明" [ref=e526]:
+                - columnheader "组件" [ref=e527]
+                - columnheader "事件" [ref=e528]
+                - columnheader "参数" [ref=e529]
+                - columnheader "说明" [ref=e530]
+            - rowgroup [ref=e531]:
+              - row "LxCheckbox update:modelValue (value) 独立使用勾选变化。" [ref=e532]:
+                - cell "LxCheckbox" [ref=e533]:
+                  - code [ref=e534]: LxCheckbox
+                - cell "update:modelValue" [ref=e535]:
+                  - code [ref=e536]: update:modelValue
+                - cell "(value)" [ref=e537]:
+                  - code [ref=e538]: (value)
+                - cell "独立使用勾选变化。" [ref=e539]
+              - row "LxCheckbox change (value) 勾选变化。" [ref=e540]:
+                - cell "LxCheckbox" [ref=e541]:
+                  - code [ref=e542]: LxCheckbox
+                - cell "change" [ref=e543]:
+                  - code [ref=e544]: change
+                - cell "(value)" [ref=e545]:
+                  - code [ref=e546]: (value)
+                - cell "勾选变化。" [ref=e547]
+              - row "LxCheckboxGroup update:modelValue (string | number)[] 选中集合变化。" [ref=e548]:
+                - cell "LxCheckboxGroup" [ref=e549]:
+                  - code [ref=e550]: LxCheckboxGroup
+                - cell "update:modelValue" [ref=e551]:
+                  - code [ref=e552]: update:modelValue
+                - cell "(string | number)[]" [ref=e553]:
+                  - code [ref=e554]: (string | number)[]
+                - cell "选中集合变化。" [ref=e555]
+              - row "LxCheckboxGroup change (string | number)[] 选中集合变化。" [ref=e556]:
+                - cell "LxCheckboxGroup" [ref=e557]:
+                  - code [ref=e558]: LxCheckboxGroup
+                - cell "change" [ref=e559]:
+                  - code [ref=e560]: change
+                - cell "(string | number)[]" [ref=e561]:
+                  - code [ref=e562]: (string | number)[]
+                - cell "选中集合变化。" [ref=e563]
+          - heading "Slots Permalink to \"Slots\"" [level=2] [ref=e564]:
+            - text: Slots
+            - link "Permalink to \"Slots\"" [ref=e565] [cursor=pointer]:
+              - /url: "#slots"
+              - text: "#"
+          - table [ref=e566]:
+            - rowgroup [ref=e567]:
+              - row "组件 名称 说明" [ref=e568]:
+                - columnheader "组件" [ref=e569]
+                - columnheader "名称" [ref=e570]
+                - columnheader "说明" [ref=e571]
+            - rowgroup [ref=e572]:
+              - row "LxCheckbox default 选项文字；缺省回退 label prop。" [ref=e573]:
+                - cell "LxCheckbox" [ref=e574]:
+                  - code [ref=e575]: LxCheckbox
+                - cell "default" [ref=e576]:
+                  - code [ref=e577]: default
+                - cell "选项文字；缺省回退 label prop。" [ref=e578]:
+                  - text: 选项文字；缺省回退
+                  - code [ref=e579]: label
+                  - text: prop。
+              - row "LxCheckboxGroup default 组内选项，放 LxCheckbox。" [ref=e580]:
+                - cell "LxCheckboxGroup" [ref=e581]:
+                  - code [ref=e582]: LxCheckboxGroup
+                - cell "default" [ref=e583]:
+                  - code [ref=e584]: default
+                - cell "组内选项，放 LxCheckbox。" [ref=e585]:
+                  - text: 组内选项，放
+                  - code [ref=e586]: LxCheckbox
+                  - text: 。
+          - heading "全选/半选联动 Permalink to \"全选/半选联动\"" [level=2] [ref=e587]:
+            - text: 全选/半选联动
+            - link "Permalink to \"全选/半选联动\"" [ref=e588] [cursor=pointer]:
+              - /url: "#全选-半选联动"
+              - text: "#"
+          - paragraph [ref=e589]:
+            - text: 父级全选项由子集推导勾选态，
+            - code [ref=e590]: indeterminate
+            - text: 表达部分选中（标本 04"警单流转"行）：
+          - generic [ref=e591]:
+            - button "Copy Code" [ref=e592] [cursor=pointer]
+            - generic [ref=e593]: vue
+            - code [ref=e595]:
+              - generic [ref=e596]: <script setup lang="ts">
+              - generic [ref=e597]: "import { computed, ref } from 'vue'"
+              - generic [ref=e598]: const all = ['video', 'dispatch', 'broadcast']
+              - generic [ref=e599]: const checked = ref(['video'])
+              - generic [ref=e600]: const allToggled = computed(() => checked.value.length === all.length)
+              - generic [ref=e601]: const someChecked = computed(
+              - generic [ref=e602]: () => checked.value.length > 0 && checked.value.length < all.length,
+              - generic [ref=e603]: )
+              - generic [ref=e604]: "function toggleAll(next: boolean) {"
+              - generic [ref=e605]: "checked.value = next ? [...all] : []"
+              - generic [ref=e606]: "}"
+              - generic [ref=e607]: </script>
+              - generic [ref=e608]: <template>
+              - generic [ref=e609]: <LxCheckbox
+              - generic [ref=e610]: :model-value="allToggled"
+              - generic [ref=e611]: :indeterminate="someChecked"
+              - generic [ref=e612]: "@update:model-value=\"toggleAll\""
+              - generic [ref=e613]: ">"
+              - generic [ref=e614]: 全部授权
+              - generic [ref=e615]: </LxCheckbox>
+              - generic [ref=e616]: </template>
+          - heading "与标本的对齐说明 Permalink to \"与标本的对齐说明\"" [level=2] [ref=e617]:
+            - text: 与标本的对齐说明
+            - link "Permalink to \"与标本的对齐说明\"" [ref=e618] [cursor=pointer]:
+              - /url: "#与标本的对齐说明"
+              - text: "#"
+          - table [ref=e619]:
+            - rowgroup [ref=e620]:
+              - row "契约项 标本 04 实现" [ref=e621]:
+                - columnheader "契约项" [ref=e622]
+                - columnheader "标本 04" [ref=e623]
+                - columnheader "实现" [ref=e624]
+            - rowgroup [ref=e625]:
+              - row "选中/半选 主色填充白勾/横杠 EP 原生契约，组件级固化防漂移" [ref=e626]:
+                - cell "选中/半选" [ref=e627]
+                - cell "主色填充白勾/横杠" [ref=e628]
+                - cell "EP 原生契约，组件级固化防漂移" [ref=e629]
+              - row "hover 描边与文字同步转主色 组件级固化" [ref=e630]:
+                - cell "hover" [ref=e631]
+                - cell "描边与文字同步转主色" [ref=e632]
+                - cell "组件级固化" [ref=e633]
+              - row "水平间距 16px --lx-space-lg，覆盖 EP 默认 32px 右距" [ref=e634]:
+                - cell "水平间距" [ref=e635]
+                - cell "16px" [ref=e636]
+                - cell "--lx-space-lg，覆盖 EP 默认 32px 右距" [ref=e637]:
+                  - code [ref=e638]: "--lx-space-lg"
+                  - text: ，覆盖 EP 默认 32px 右距
+              - row "垂直行距 space-y-3（12px） --lx-space-md" [ref=e639]:
+                - cell "垂直行距" [ref=e640]
+                - cell "space-y-3（12px）" [ref=e641]
+                - cell "--lx-space-md" [ref=e642]:
+                  - code [ref=e643]: "--lx-space-md"
+              - row "HUD 深色 — 填充跟随 HUD 战术蓝（el-* 变量）" [ref=e644]:
+                - cell "HUD 深色" [ref=e645]
+                - cell "—" [ref=e646]
+                - cell "填充跟随 HUD 战术蓝（el-* 变量）" [ref=e647]
+          - heading "可访问性 Permalink to \"可访问性\"" [level=2] [ref=e648]:
+            - text: 可访问性
+            - link "Permalink to \"可访问性\"" [ref=e649] [cursor=pointer]:
+              - /url: "#可访问性"
+              - text: "#"
+          - paragraph [ref=e650]:
+            - text: 原生
+            - code [ref=e651]: input[type=checkbox]
+            - text: 语义；半选态同步设置原生
+            - code [ref=e652]: indeterminate
+            - text: 属性和
+            - code [ref=e653]: aria-checked="mixed"
+            - text: ，不修改 v-model 值。触屏设备整个 label 的最小高度为 44px。HUD 深色主题下禁用项使用深色中性底和可辨认的浅色文字；已选或半选的禁用项不会套用可操作状态的主色填充。
+          - heading "Vue3 宿主适配 Permalink to \"Vue3 宿主适配\"" [level=2] [ref=e654]:
+            - text: Vue3 宿主适配
+            - link "Permalink to \"Vue3 宿主适配\"" [ref=e655] [cursor=pointer]:
+              - /url: "#vue3-宿主适配"
+              - text: "#"
+          - paragraph [ref=e656]:
+            - text: 业务层使用
+            - code [ref=e657]: LxCheckboxGroup
+            - text: +
+            - code [ref=e658]: LxCheckbox
+            - text: 组合，独立勾选场景单用
+            - code [ref=e659]: LxCheckbox
+            - text: 。
+            - code [ref=e660]: element-theme.css
+            - text: 对裸
+            - code [ref=e661]: el-checkbox
+            - text: 的全局同款覆写保留过渡期。
+      - contentinfo [ref=e662]:
+        - navigation "Pager" [ref=e663]:
+          - generic [ref=e664]: Pager
+          - link "Previous page LxRadio 单选组" [ref=e666] [cursor=pointer]:
+            - /url: /components/lxradio.html
+            - generic [ref=e667]: Previous page
+            - generic [ref=e668]: LxRadio 单选组
+          - link "Next page LxSwitch 开关" [ref=e670] [cursor=pointer]:
+            - /url: /components/lxswitch.html
+            - generic [ref=e671]: Next page
+            - generic [ref=e672]: LxSwitch 开关
+```

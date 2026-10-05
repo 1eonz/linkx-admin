@@ -1,0 +1,70 @@
+{
+  "target": "http://127.0.0.1:5180/components/lxdatepicker",
+  "date": "2026-10-05",
+  "method": "Assessment A only; fresh IAB tab; live visual review and read-only DOM measurements",
+  "screenshots": "Rendered in the CUA review session; no filesystem export handle was exposed.",
+  "observations": [
+    {
+      "state": "desktop default",
+      "viewport": { "width": 1280, "height": 720 },
+      "scrollY": 0,
+      "rangeTrigger": { "x": 365, "y": 462, "width": 551, "height": 32 },
+      "computedStyle": {
+        "borderRadius": "4px",
+        "height": "32px",
+        "boxShadow": "rgb(220, 223, 230) 0px 0px 0px 1px inset"
+      },
+      "cssLoadedEvidence": "The rendered LxDatePicker trigger had the component-specific 4px radius and token-based inset border."
+    },
+    {
+      "state": "desktop range popper",
+      "viewport": { "width": 1280, "height": 720 },
+      "scrollY": 118,
+      "popper": { "x": 318, "y": 389, "width": 646, "height": 326 },
+      "visibleMonthPanels": 2,
+      "visibleInRangeCells": 24,
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "state": "HUD theme range popper",
+      "viewport": { "width": 1280, "height": 720 },
+      "themeToggleChecked": true,
+      "popperBackground": "rgb(22, 35, 58)",
+      "triggerBackground": "rgb(16, 26, 44)",
+      "triggerText": "rgb(226, 232, 240)",
+      "triggerActiveShadow": "rgb(56, 189, 248) 0px 0px 0px 1px inset plus 2px focus halo"
+    },
+    {
+      "state": "375x812 range popper",
+      "viewport": { "width": 375, "height": 812 },
+      "scrollY": 118,
+      "popperClass": "el-date-range-picker single-panel",
+      "popper": { "x": 19, "y": 28, "width": 322, "height": 363 },
+      "popperFullyInViewport": true,
+      "internalScrollableDescendants": 0
+    },
+    {
+      "state": "390x375 range popper before wheel",
+      "viewport": { "width": 390, "height": 375 },
+      "scrollY": 118,
+      "documentScrollRange": 7963,
+      "popperClass": "el-date-range-picker single-panel",
+      "popper": { "x": 27, "y": 28, "width": 322, "height": 363 },
+      "popperBottom": 391,
+      "bottomOverflow": 16,
+      "popperOverflowY": "visible",
+      "internalScrollableDescendants": 0
+    },
+    {
+      "state": "390x375 pointer wheel over popper",
+      "wheelPoint": { "x": 200, "y": 200 },
+      "direction": "down",
+      "scrollYBefore": 118,
+      "scrollYAfter": 493,
+      "receiver": "document.scrollingElement (HTML)",
+      "popperAfter": { "top": 86, "bottom": 449 },
+      "bottomOverflowAfter": 74
+    }
+  ],
+  "scopeNote": "The page shell was visible in browser screenshots but was not assessed from source; review sources were limited to the four user-specified files."
+}

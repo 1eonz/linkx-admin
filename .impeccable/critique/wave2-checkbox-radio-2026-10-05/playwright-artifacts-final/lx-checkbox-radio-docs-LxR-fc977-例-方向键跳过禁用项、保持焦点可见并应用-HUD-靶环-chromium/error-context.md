@@ -1,0 +1,585 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#VPContent"
+  - banner:
+    - generic:
+      - generic:
+        - generic:
+          - link "LxUI" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e7]: LxUI
+          - generic [ref=e8]:
+            - navigation "Main Navigation" [ref=e9]:
+              - generic [ref=e10]: Main Navigation
+              - link "首页" [ref=e11] [cursor=pointer]:
+                - /url: /
+                - generic [ref=e12]: 首页
+              - link "组件" [ref=e13] [cursor=pointer]:
+                - /url: /components/lxsidebar.html
+                - generic [ref=e14]: 组件
+              - link "新增组件" [ref=e15] [cursor=pointer]:
+                - /url: /components/new-components.html
+                - generic [ref=e16]: 新增组件
+            - switch "Switch to dark theme" [ref=e18] [cursor=pointer]
+  - complementary [ref=e23]:
+    - navigation "Sidebar Navigation" [ref=e25]:
+      - generic [ref=e26]: Sidebar Navigation
+      - generic [ref=e28]:
+        - button "新增组件" [ref=e29]:
+          - heading "新增组件" [level=2] [ref=e31]
+        - link "新增组件总览" [ref=e36] [cursor=pointer]:
+          - /url: /components/new-components.html
+          - paragraph [ref=e37]: 新增组件总览
+      - generic [ref=e39]:
+        - button "基础" [ref=e40]:
+          - heading "基础" [level=2] [ref=e42]
+        - generic [ref=e43]:
+          - link "基础控件桥接" [ref=e47] [cursor=pointer]:
+            - /url: /components/element-bridge.html
+            - paragraph [ref=e48]: 基础控件桥接
+          - link "LxButton 按钮" [ref=e52] [cursor=pointer]:
+            - /url: /components/lxbutton.html
+            - paragraph [ref=e53]: LxButton 按钮
+          - link "LxIcon 图标总览" [ref=e57] [cursor=pointer]:
+            - /url: /components/lxicons.html
+            - paragraph [ref=e58]: LxIcon 图标总览
+      - generic [ref=e60]:
+        - button "布局导航" [ref=e61]:
+          - heading "布局导航" [level=2] [ref=e63]
+        - generic [ref=e64]:
+          - link "LxSidebar 侧边栏" [ref=e68] [cursor=pointer]:
+            - /url: /components/lxsidebar.html
+            - paragraph [ref=e69]: LxSidebar 侧边栏
+          - link "LxNavbar 顶部导航" [ref=e73] [cursor=pointer]:
+            - /url: /components/lxnavbar.html
+            - paragraph [ref=e74]: LxNavbar 顶部导航
+          - link "LxBreadcrumb 面包屑" [ref=e78] [cursor=pointer]:
+            - /url: /components/lxbreadcrumb.html
+            - paragraph [ref=e79]: LxBreadcrumb 面包屑
+          - link "LxTabsBar 页签栏" [ref=e83] [cursor=pointer]:
+            - /url: /components/lxtabsbar.html
+            - paragraph [ref=e84]: LxTabsBar 页签栏
+          - link "LxSplitLayout 分栏布局" [ref=e88] [cursor=pointer]:
+            - /url: /components/lxsplitlayout.html
+            - paragraph [ref=e89]: LxSplitLayout 分栏布局
+          - link "LxSelectTree 组织树选择" [ref=e93] [cursor=pointer]:
+            - /url: /components/lxselecttree.html
+            - paragraph [ref=e94]: LxSelectTree 组织树选择
+      - generic [ref=e96]:
+        - button "数据展示" [ref=e97]:
+          - heading "数据展示" [level=2] [ref=e99]
+        - generic [ref=e100]:
+          - link "LxProTable 数据表格" [ref=e104] [cursor=pointer]:
+            - /url: /components/lxprotable.html
+            - paragraph [ref=e105]: LxProTable 数据表格
+          - link "LxPageCard 页面容器" [ref=e109] [cursor=pointer]:
+            - /url: /components/lxpagecard.html
+            - paragraph [ref=e110]: LxPageCard 页面容器
+          - link "LxMetricCard 指标卡" [ref=e114] [cursor=pointer]:
+            - /url: /components/lxmetriccard.html
+            - paragraph [ref=e115]: LxMetricCard 指标卡
+          - link "LxDutyCalendar 排班日历" [ref=e119] [cursor=pointer]:
+            - /url: /components/lxdutycalendar.html
+            - paragraph [ref=e120]: LxDutyCalendar 排班日历
+          - link "LxSectionTitle 区块标题" [ref=e124] [cursor=pointer]:
+            - /url: /components/lxsectiontitle.html
+            - paragraph [ref=e125]: LxSectionTitle 区块标题
+          - link "LxAuthImg 鉴权图片" [ref=e129] [cursor=pointer]:
+            - /url: /components/lxauthimg.html
+            - paragraph [ref=e130]: LxAuthImg 鉴权图片
+          - link "LxDescriptions 详情描述" [ref=e134] [cursor=pointer]:
+            - /url: /components/lxdescriptions.html
+            - paragraph [ref=e135]: LxDescriptions 详情描述
+          - link "LxPagination 分页" [ref=e139] [cursor=pointer]:
+            - /url: /components/lxpagination.html
+            - paragraph [ref=e140]: LxPagination 分页
+          - link "LxVirtualTree 虚拟树" [ref=e144] [cursor=pointer]:
+            - /url: /components/lxvirtualtree.html
+            - paragraph [ref=e145]: LxVirtualTree 虚拟树
+          - link "LxTransferPanel 双栏穿梭" [ref=e149] [cursor=pointer]:
+            - /url: /components/lxtransferpanel.html
+            - paragraph [ref=e150]: LxTransferPanel 双栏穿梭
+          - link "LxStatusDot 状态点" [ref=e154] [cursor=pointer]:
+            - /url: /components/lxstatusdot.html
+            - paragraph [ref=e155]: LxStatusDot 状态点
+          - link "LxTag 浅底标签" [ref=e159] [cursor=pointer]:
+            - /url: /components/lxtag.html
+            - paragraph [ref=e160]: LxTag 浅底标签
+          - link "LxCodeSlot 代码槽" [ref=e164] [cursor=pointer]:
+            - /url: /components/lxcodeslot.html
+            - paragraph [ref=e165]: LxCodeSlot 代码槽
+          - link "LxActionButtons 行内操作" [ref=e169] [cursor=pointer]:
+            - /url: /components/lxactionbuttons.html
+            - paragraph [ref=e170]: LxActionButtons 行内操作
+          - link "LxEmpty 空态" [ref=e174] [cursor=pointer]:
+            - /url: /components/lxempty.html
+            - paragraph [ref=e175]: LxEmpty 空态
+          - link "LxGauge 圆环仪表" [ref=e179] [cursor=pointer]:
+            - /url: /components/lxgauge.html
+            - paragraph [ref=e180]: LxGauge 圆环仪表
+          - link "LxNodeBadge 节点徽章" [ref=e184] [cursor=pointer]:
+            - /url: /components/lxnodebadge.html
+            - paragraph [ref=e185]: LxNodeBadge 节点徽章
+          - link "权限消费" [ref=e189] [cursor=pointer]:
+            - /url: /components/permissions.html
+            - paragraph [ref=e190]: 权限消费
+      - generic [ref=e192]:
+        - button "数据录入" [ref=e193]:
+          - heading "数据录入" [level=2] [ref=e195]
+        - generic [ref=e196]:
+          - link "LxForm 表单" [ref=e200] [cursor=pointer]:
+            - /url: /components/lxform.html
+            - paragraph [ref=e201]: LxForm 表单
+          - link "LxInput 输入框" [ref=e205] [cursor=pointer]:
+            - /url: /components/lxinput.html
+            - paragraph [ref=e206]: LxInput 输入框
+          - link "LxTextarea 文本域" [ref=e210] [cursor=pointer]:
+            - /url: /components/lxtextarea.html
+            - paragraph [ref=e211]: LxTextarea 文本域
+          - link "LxRadio 单选组" [ref=e215] [cursor=pointer]:
+            - /url: /components/lxradio.html
+            - paragraph [ref=e216]: LxRadio 单选组
+          - link "LxCheckbox 复选组" [ref=e220] [cursor=pointer]:
+            - /url: /components/lxcheckbox.html
+            - paragraph [ref=e221]: LxCheckbox 复选组
+          - link "LxSwitch 开关" [ref=e225] [cursor=pointer]:
+            - /url: /components/lxswitch.html
+            - paragraph [ref=e226]: LxSwitch 开关
+          - link "LxSelect 下拉选择" [ref=e230] [cursor=pointer]:
+            - /url: /components/lxselect.html
+            - paragraph [ref=e231]: LxSelect 下拉选择
+          - link "LxTreeSelect 树形下拉" [ref=e235] [cursor=pointer]:
+            - /url: /components/lxtreeselect.html
+            - paragraph [ref=e236]: LxTreeSelect 树形下拉
+          - link "LxCascader 级联选择" [ref=e240] [cursor=pointer]:
+            - /url: /components/lxcascader.html
+            - paragraph [ref=e241]: LxCascader 级联选择
+          - link "LxDatePicker 日期选择" [ref=e245] [cursor=pointer]:
+            - /url: /components/lxdatepicker.html
+            - paragraph [ref=e246]: LxDatePicker 日期选择
+          - link "LxInputNumber 数字输入" [ref=e250] [cursor=pointer]:
+            - /url: /components/lxinputnumber.html
+            - paragraph [ref=e251]: LxInputNumber 数字输入
+          - link "LxSearchBar 检索面板" [ref=e255] [cursor=pointer]:
+            - /url: /components/lxsearchbar.html
+            - paragraph [ref=e256]: LxSearchBar 检索面板
+          - link "LxDynamicForm 动态表单" [ref=e260] [cursor=pointer]:
+            - /url: /components/lxdynamicform.html
+            - paragraph [ref=e261]: LxDynamicForm 动态表单
+          - link "LxStatusSwitch 状态开关" [ref=e265] [cursor=pointer]:
+            - /url: /components/lxstatusswitch.html
+            - paragraph [ref=e266]: LxStatusSwitch 状态开关
+          - link "LxPasswordInput 密码输入框" [ref=e270] [cursor=pointer]:
+            - /url: /components/lxpasswordinput.html
+            - paragraph [ref=e271]: LxPasswordInput 密码输入框
+          - link "LxUpload 文件上传" [ref=e275] [cursor=pointer]:
+            - /url: /components/lxupload.html
+            - paragraph [ref=e276]: LxUpload 文件上传
+          - link "LxSelectPagination 远程分页选择" [ref=e280] [cursor=pointer]:
+            - /url: /components/lxselectpagination.html
+            - paragraph [ref=e281]: LxSelectPagination 远程分页选择
+      - generic [ref=e283]:
+        - button "反馈与浮层" [ref=e284]:
+          - heading "反馈与浮层" [level=2] [ref=e286]
+        - generic [ref=e287]:
+          - link "LxMessage 全局提示" [ref=e291] [cursor=pointer]:
+            - /url: /components/lxmessage.html
+            - paragraph [ref=e292]: LxMessage 全局提示
+          - link "LxConfirm 确认框" [ref=e296] [cursor=pointer]:
+            - /url: /components/lxconfirm.html
+            - paragraph [ref=e297]: LxConfirm 确认框
+          - link "LxDialog 表单弹窗" [ref=e301] [cursor=pointer]:
+            - /url: /components/lxdialog.html
+            - paragraph [ref=e302]: LxDialog 表单弹窗
+          - link "LxDrawer 详情抽屉" [ref=e306] [cursor=pointer]:
+            - /url: /components/lxdrawer.html
+            - paragraph [ref=e307]: LxDrawer 详情抽屉
+          - link "LxFormErrorBanner 校验横幅" [ref=e311] [cursor=pointer]:
+            - /url: /components/lxformerrorbanner.html
+            - paragraph [ref=e312]: LxFormErrorBanner 校验横幅
+  - generic [ref=e315]:
+    - navigation "On this page" [ref=e321]:
+      - generic [ref=e322]:
+        - heading "On this page" [level=2] [ref=e324]
+        - list [ref=e325]:
+          - listitem [ref=e326]:
+            - link "交互示例" [ref=e327] [cursor=pointer]:
+              - /url: "#交互示例"
+          - listitem [ref=e328]:
+            - link "LxRadio Props" [ref=e329] [cursor=pointer]:
+              - /url: "#lxradio-props"
+          - listitem [ref=e330]:
+            - link "LxRadioGroup Props" [ref=e331] [cursor=pointer]:
+              - /url: "#lxradiogroup-props"
+          - listitem [ref=e332]:
+            - link "Events" [ref=e333] [cursor=pointer]:
+              - /url: "#events"
+          - listitem [ref=e334]:
+            - link "Slots" [ref=e335] [cursor=pointer]:
+              - /url: "#slots"
+          - listitem [ref=e336]:
+            - link "旧用法兼容" [ref=e337] [cursor=pointer]:
+              - /url: "#旧用法兼容"
+          - listitem [ref=e338]:
+            - link "与标本的对齐说明" [ref=e339] [cursor=pointer]:
+              - /url: "#与标本的对齐说明"
+          - listitem [ref=e340]:
+            - link "可访问性" [ref=e341] [cursor=pointer]:
+              - /url: "#可访问性"
+          - listitem [ref=e342]:
+            - link "Vue3 宿主适配" [ref=e343] [cursor=pointer]:
+              - /url: "#vue3-宿主适配"
+    - generic [ref=e346]:
+      - main [ref=e347]:
+        - generic [ref=e349]:
+          - heading "LxRadio / LxRadioGroup 单选组 Permalink to \"LxRadio / LxRadioGroup 单选组\"" [level=1] [ref=e350]:
+            - text: LxRadio / LxRadioGroup 单选组
+            - link "Permalink to \"LxRadio / LxRadioGroup 单选组\"" [ref=e351] [cursor=pointer]:
+              - /url: "#lxradio-lxradiogroup-单选组"
+              - text: "#"
+          - paragraph [ref=e352]:
+            - text: 基于 Element Plus
+            - code [ref=e353]: el-radio
+            - text: /
+            - code [ref=e354]: el-radio-group
+            - text: 内核二次封装的单选组。选中态为
+            - strong [ref=e355]: 白底蓝心靶环
+            - text: （14px 圆环 + 6px 主色靶心，非 EP 默认蓝底白心）；hover 时描边与文字同步转主色；水平 16px 间距，
+            - code [ref=e356]: vertical
+            - text: 开启列排 8px 行距。
+          - paragraph [ref=e357]:
+            - text: 视觉规范源：
+            - code [ref=e358]: design/表单控件八件套/code.html
+            - text: 03。
+          - heading "交互示例 Permalink to \"交互示例\"" [level=2] [ref=e359]:
+            - text: 交互示例
+            - link "Permalink to \"交互示例\"" [ref=e360] [cursor=pointer]:
+              - /url: "#交互示例"
+              - text: "#"
+          - generic [ref=e361]:
+            - generic [ref=e363]:
+              - checkbox "HUD 深色主题" [checked] [active] [ref=e364]
+              - text: HUD 深色主题
+            - generic [ref=e365]:
+              - heading "水平排布（标本 03 勤务响应等级）" [level=4] [ref=e366]
+              - radiogroup "勤务响应等级" [ref=e367]:
+                - generic [ref=e368] [cursor=pointer]:
+                  - radio "日常勤务" [ref=e370]
+                  - generic [ref=e372]: 日常勤务
+                - generic [ref=e373] [cursor=pointer]:
+                  - radio "应急处突" [checked] [ref=e375]
+                  - generic [ref=e377]: 应急处突
+                - generic [ref=e378] [cursor=pointer]:
+                  - radio "特勤安保" [ref=e380]
+                  - generic [ref=e382]: 特勤安保
+              - paragraph [ref=e383]: 选中态：白底蓝心靶环（14px 圆环 + 6px 靶心）+ 主色文字
+            - generic [ref=e384]:
+              - heading "垂直排布含禁用（标本 03 处置通道优先级）" [level=4] [ref=e385]
+              - radiogroup "处置通道优先级" [ref=e386]:
+                - generic [ref=e387] [cursor=pointer]:
+                  - radio "高密加密专线 (当前激活)" [ref=e389]
+                  - generic [ref=e391]: 高密加密专线 (当前激活)
+                - generic [ref=e392] [cursor=pointer]:
+                  - radio "卫星链路直通 (未联通/禁用)" [disabled] [ref=e394]
+                  - generic [ref=e396]: 卫星链路直通 (未联通/禁用)
+                - generic [ref=e397] [cursor=pointer]:
+                  - radio "光纤骨干网" [checked] [ref=e399]
+                  - generic [ref=e401]: 光纤骨干网
+              - paragraph [ref=e402]: vertical 列排 8px 行距；禁用项灰底描边灰字不可选
+            - generic [ref=e403]:
+              - heading "label 兼作选中值（EP 旧契约兼容）" [level=4] [ref=e404]
+              - radiogroup "旧版单选值用法" [ref=e405]:
+                - generic [ref=e406] [cursor=pointer]:
+                  - radio "高密加密专线" [ref=e408]
+                  - generic [ref=e410]: 高密加密专线
+                - generic [ref=e411] [cursor=pointer]:
+                  - radio "光纤骨干网" [checked] [ref=e413]
+                  - generic [ref=e415]: 光纤骨干网
+              - paragraph [ref=e416]: 未传 value 时 label 兼作选中值（EP 旧用法兼容）
+            - paragraph [ref=e417]: 处置通道 选中：fiber
+            - paragraph [ref=e418]: 选中"白底蓝心靶环"替代 EP 默认蓝底白心；hover 描边与文字同步转主色；键盘焦点主色外环。
+          - group [ref=e419]:
+            - generic "查看示例代码" [ref=e420] [cursor=pointer]
+          - heading "LxRadio Props Permalink to \"LxRadio Props\"" [level=2] [ref=e421]:
+            - text: LxRadio Props
+            - link "Permalink to \"LxRadio Props\"" [ref=e422] [cursor=pointer]:
+              - /url: "#lxradio-props"
+              - text: "#"
+          - table [ref=e423]:
+            - rowgroup [ref=e424]:
+              - row "名称 类型 默认值 说明" [ref=e425]:
+                - columnheader "名称" [ref=e426]
+                - columnheader "类型" [ref=e427]
+                - columnheader "默认值" [ref=e428]
+                - columnheader "说明" [ref=e429]
+            - rowgroup [ref=e430]:
+              - row "value string | number | boolean — 该项的选中值（配合 LxRadioGroup v-model）。" [ref=e431]:
+                - cell "value" [ref=e432]:
+                  - code [ref=e433]: value
+                - cell "string | number | boolean" [ref=e434]:
+                  - code [ref=e435]: string | number | boolean
+                - cell "—" [ref=e436]
+                - cell "该项的选中值（配合 LxRadioGroup v-model）。" [ref=e437]:
+                  - text: 该项的选中值（配合
+                  - code [ref=e438]: LxRadioGroup
+                  - text: v-model）。
+              - row "label string '' 无插槽时的文字回退；未传 value 时兼作选中值（EP 旧契约兼容）。" [ref=e439]:
+                - cell "label" [ref=e440]:
+                  - code [ref=e441]: label
+                - cell "string" [ref=e442]:
+                  - code [ref=e443]: string
+                - cell "''" [ref=e444]:
+                  - code [ref=e445]: "''"
+                - cell "无插槽时的文字回退；未传 value 时兼作选中值（EP 旧契约兼容）。" [ref=e446]:
+                  - text: 无插槽时的文字回退；未传
+                  - code [ref=e447]: value
+                  - text: 时兼作选中值（EP 旧契约兼容）。
+              - row "disabled boolean —（undefined） 禁用态：灰底描边 + 灰字（标本 03 禁用行）。默认未设置：不阻断 LxRadioGroup / ElForm 禁用继承；显式传值才覆盖。" [ref=e448]:
+                - cell "disabled" [ref=e449]:
+                  - code [ref=e450]: disabled
+                - cell "boolean" [ref=e451]:
+                  - code [ref=e452]: boolean
+                - cell "—（undefined）" [ref=e453]:
+                  - text: —（
+                  - code [ref=e454]: undefined
+                  - text: ）
+                - cell "禁用态：灰底描边 + 灰字（标本 03 禁用行）。默认未设置：不阻断 LxRadioGroup / ElForm 禁用继承；显式传值才覆盖。" [ref=e455]:
+                  - text: 禁用态：灰底描边 + 灰字（标本 03 禁用行）。默认未设置：不阻断
+                  - code [ref=e456]: LxRadioGroup
+                  - text: /
+                  - code [ref=e457]: ElForm
+                  - text: 禁用继承；显式传值才覆盖。
+              - row "name string — 原生 name；组内缺省由 Group 注入。" [ref=e458]:
+                - cell "name" [ref=e459]:
+                  - code [ref=e460]: name
+                - cell "string" [ref=e461]:
+                  - code [ref=e462]: string
+                - cell "—" [ref=e463]
+                - cell "原生 name；组内缺省由 Group 注入。" [ref=e464]
+          - heading "LxRadioGroup Props Permalink to \"LxRadioGroup Props\"" [level=2] [ref=e465]:
+            - text: LxRadioGroup Props
+            - link "Permalink to \"LxRadioGroup Props\"" [ref=e466] [cursor=pointer]:
+              - /url: "#lxradiogroup-props"
+              - text: "#"
+          - table [ref=e467]:
+            - rowgroup [ref=e468]:
+              - row "名称 类型 默认值 说明" [ref=e469]:
+                - columnheader "名称" [ref=e470]
+                - columnheader "类型" [ref=e471]
+                - columnheader "默认值" [ref=e472]
+                - columnheader "说明" [ref=e473]
+            - rowgroup [ref=e474]:
+              - row "modelValue string | number | boolean — 当前选中项的值（v-model）。" [ref=e475]:
+                - cell "modelValue" [ref=e476]:
+                  - code [ref=e477]: modelValue
+                - cell "string | number | boolean" [ref=e478]:
+                  - code [ref=e479]: string | number | boolean
+                - cell "—" [ref=e480]
+                - cell "当前选中项的值（v-model）。" [ref=e481]
+              - row "disabled boolean —（undefined） 整组禁用；缺省时继承 ElForm 禁用状态，显式传入 true 或 false 时覆盖继承。" [ref=e482]:
+                - cell "disabled" [ref=e483]:
+                  - code [ref=e484]: disabled
+                - cell "boolean" [ref=e485]:
+                  - code [ref=e486]: boolean
+                - cell "—（undefined）" [ref=e487]:
+                  - text: —（
+                  - code [ref=e488]: undefined
+                  - text: ）
+                - cell "整组禁用；缺省时继承 ElForm 禁用状态，显式传入 true 或 false 时覆盖继承。" [ref=e489]:
+                  - text: 整组禁用；缺省时继承
+                  - code [ref=e490]: ElForm
+                  - text: 禁用状态，显式传入
+                  - code [ref=e491]: "true"
+                  - text: 或
+                  - code [ref=e492]: "false"
+                  - text: 时覆盖继承。
+              - row "vertical boolean false 垂直排布（标本 03 处置通道优先级行）。" [ref=e493]:
+                - cell "vertical" [ref=e494]:
+                  - code [ref=e495]: vertical
+                - cell "boolean" [ref=e496]:
+                  - code [ref=e497]: boolean
+                - cell "false" [ref=e498]:
+                  - code [ref=e499]: "false"
+                - cell "垂直排布（标本 03 处置通道优先级行）。" [ref=e500]
+              - row "name string — 原生 name，注入组内全部 LxRadio。" [ref=e501]:
+                - cell "name" [ref=e502]:
+                  - code [ref=e503]: name
+                - cell "string" [ref=e504]:
+                  - code [ref=e505]: string
+                - cell "—" [ref=e506]
+                - cell "原生 name，注入组内全部 LxRadio。" [ref=e507]:
+                  - text: 原生 name，注入组内全部
+                  - code [ref=e508]: LxRadio
+                  - text: 。
+          - heading "Events Permalink to \"Events\"" [level=2] [ref=e509]:
+            - text: Events
+            - link "Permalink to \"Events\"" [ref=e510] [cursor=pointer]:
+              - /url: "#events"
+              - text: "#"
+          - table [ref=e511]:
+            - rowgroup [ref=e512]:
+              - row "组件 事件 参数 说明" [ref=e513]:
+                - columnheader "组件" [ref=e514]
+                - columnheader "事件" [ref=e515]
+                - columnheader "参数" [ref=e516]
+                - columnheader "说明" [ref=e517]
+            - rowgroup [ref=e518]:
+              - row "LxRadioGroup update:modelValue (value) 选中值变化。" [ref=e519]:
+                - cell "LxRadioGroup" [ref=e520]:
+                  - code [ref=e521]: LxRadioGroup
+                - cell "update:modelValue" [ref=e522]:
+                  - code [ref=e523]: update:modelValue
+                - cell "(value)" [ref=e524]:
+                  - code [ref=e525]: (value)
+                - cell "选中值变化。" [ref=e526]
+              - row "LxRadioGroup change (value) 选中项变化。" [ref=e527]:
+                - cell "LxRadioGroup" [ref=e528]:
+                  - code [ref=e529]: LxRadioGroup
+                - cell "change" [ref=e530]:
+                  - code [ref=e531]: change
+                - cell "(value)" [ref=e532]:
+                  - code [ref=e533]: (value)
+                - cell "选中项变化。" [ref=e534]
+              - row "LxRadio change (value) 单项选中（EP 契约）。" [ref=e535]:
+                - cell "LxRadio" [ref=e536]:
+                  - code [ref=e537]: LxRadio
+                - cell "change" [ref=e538]:
+                  - code [ref=e539]: change
+                - cell "(value)" [ref=e540]:
+                  - code [ref=e541]: (value)
+                - cell "单项选中（EP 契约）。" [ref=e542]
+          - heading "Slots Permalink to \"Slots\"" [level=2] [ref=e543]:
+            - text: Slots
+            - link "Permalink to \"Slots\"" [ref=e544] [cursor=pointer]:
+              - /url: "#slots"
+              - text: "#"
+          - table [ref=e545]:
+            - rowgroup [ref=e546]:
+              - row "组件 名称 说明" [ref=e547]:
+                - columnheader "组件" [ref=e548]
+                - columnheader "名称" [ref=e549]
+                - columnheader "说明" [ref=e550]
+            - rowgroup [ref=e551]:
+              - row "LxRadio default 选项文字；缺省回退 label prop。" [ref=e552]:
+                - cell "LxRadio" [ref=e553]:
+                  - code [ref=e554]: LxRadio
+                - cell "default" [ref=e555]:
+                  - code [ref=e556]: default
+                - cell "选项文字；缺省回退 label prop。" [ref=e557]:
+                  - text: 选项文字；缺省回退
+                  - code [ref=e558]: label
+                  - text: prop。
+              - row "LxRadioGroup default 组内选项，放 LxRadio。" [ref=e559]:
+                - cell "LxRadioGroup" [ref=e560]:
+                  - code [ref=e561]: LxRadioGroup
+                - cell "default" [ref=e562]:
+                  - code [ref=e563]: default
+                - cell "组内选项，放 LxRadio。" [ref=e564]:
+                  - text: 组内选项，放
+                  - code [ref=e565]: LxRadio
+                  - text: 。
+          - heading "旧用法兼容 Permalink to \"旧用法兼容\"" [level=2] [ref=e566]:
+            - text: 旧用法兼容
+            - link "Permalink to \"旧用法兼容\"" [ref=e567] [cursor=pointer]:
+              - /url: "#旧用法兼容"
+              - text: "#"
+          - paragraph [ref=e568]:
+            - text: 存量 Vue2 迁移代码惯用
+            - code [ref=e569]: label
+            - text: 承载选中值。EP 2.14 内核原生支持该回退（
+            - code [ref=e570]: value
+            - text: 缺省时
+            - code [ref=e571]: label
+            - text: 兼作值），
+            - code [ref=e572]: LxRadio
+            - text: 透传该契约，迁移零改动：
+          - generic [ref=e573]:
+            - button "Copy Code" [ref=e574] [cursor=pointer]
+            - generic [ref=e575]: vue
+            - code [ref=e577]:
+              - generic [ref=e578]: <LxRadioGroup v-model="channel">
+              - generic [ref=e579]: <!-- 与 <LxRadio value="encrypted"> 等价 -->
+              - generic [ref=e580]: <LxRadio label="encrypted">高密加密专线</LxRadio>
+              - generic [ref=e581]: </LxRadioGroup>
+          - heading "与标本的对齐说明 Permalink to \"与标本的对齐说明\"" [level=2] [ref=e582]:
+            - text: 与标本的对齐说明
+            - link "Permalink to \"与标本的对齐说明\"" [ref=e583] [cursor=pointer]:
+              - /url: "#与标本的对齐说明"
+              - text: "#"
+          - table [ref=e584]:
+            - rowgroup [ref=e585]:
+              - row "契约项 标本 03 实现" [ref=e586]:
+                - columnheader "契约项" [ref=e587]
+                - columnheader "标本 03" [ref=e588]
+                - columnheader "实现" [ref=e589]
+            - rowgroup [ref=e590]:
+              - row "选中态 白底 + 蓝描边 + 6px 靶心 组件级固化（替代 EP 默认蓝底白心）" [ref=e591]:
+                - cell "选中态" [ref=e592]
+                - cell "白底 + 蓝描边 + 6px 靶心" [ref=e593]
+                - cell "组件级固化（替代 EP 默认蓝底白心）" [ref=e594]
+              - row "hover 描边与文字同步转主色 组件级固化" [ref=e595]:
+                - cell "hover" [ref=e596]
+                - cell "描边与文字同步转主色" [ref=e597]
+                - cell "组件级固化" [ref=e598]
+              - row "选中 label 主色 + 500 字重 组件级固化" [ref=e599]:
+                - cell "选中 label" [ref=e600]
+                - cell "主色 + 500 字重" [ref=e601]
+                - cell "组件级固化" [ref=e602]
+              - row "水平间距 gap-4（16px） --lx-space-lg，覆盖 EP 默认 32px 右距" [ref=e603]:
+                - cell "水平间距" [ref=e604]
+                - cell "gap-4（16px）" [ref=e605]
+                - cell "--lx-space-lg，覆盖 EP 默认 32px 右距" [ref=e606]:
+                  - code [ref=e607]: "--lx-space-lg"
+                  - text: ，覆盖 EP 默认 32px 右距
+              - row "垂直行距 space-y-2（8px） --lx-space-sm" [ref=e608]:
+                - cell "垂直行距" [ref=e609]
+                - cell "space-y-2（8px）" [ref=e610]
+                - cell "--lx-space-sm" [ref=e611]:
+                  - code [ref=e612]: "--lx-space-sm"
+              - row "HUD 深色 — 靶环底色/靶心跟随 HUD 战术蓝（el-* 变量）" [ref=e613]:
+                - cell "HUD 深色" [ref=e614]
+                - cell "—" [ref=e615]
+                - cell "靶环底色/靶心跟随 HUD 战术蓝（el-* 变量）" [ref=e616]
+          - heading "可访问性 Permalink to \"可访问性\"" [level=2] [ref=e617]:
+            - text: 可访问性
+            - link "Permalink to \"可访问性\"" [ref=e618] [cursor=pointer]:
+              - /url: "#可访问性"
+              - text: "#"
+          - paragraph [ref=e619]:
+            - text: 原生
+            - code [ref=e620]: input[type=radio]
+            - text: 语义 +
+            - code [ref=e621]: name
+            - text: 组关联；键盘方向键组内切换（EP 原生）；Tab 进入组时显示主色外环，鼠标或程序化聚焦不显示（
+            - code [ref=e622]: focus-visible
+            - text: ）；触屏设备整个 label 的最小高度为 44px。HUD 深色主题下未选圆环使用深色表面，禁用项使用中性灰阶。系统启用“减少动效”时，靶心过渡缩短到 0.01ms，视觉上关闭缩放动效。
+          - heading "Vue3 宿主适配 Permalink to \"Vue3 宿主适配\"" [level=2] [ref=e623]:
+            - text: Vue3 宿主适配
+            - link "Permalink to \"Vue3 宿主适配\"" [ref=e624] [cursor=pointer]:
+              - /url: "#vue3-宿主适配"
+              - text: "#"
+          - paragraph [ref=e625]:
+            - text: 业务层使用
+            - code [ref=e626]: LxRadioGroup
+            - text: +
+            - code [ref=e627]: LxRadio
+            - text: 组合（或全局组件名）。
+            - code [ref=e628]: element-theme.css
+            - text: 对裸
+            - code [ref=e629]: el-radio
+            - text: 的全局同款覆写保留过渡期，存量直用页面迁移完成后摘除。
+      - contentinfo [ref=e630]:
+        - navigation "Pager" [ref=e631]:
+          - generic [ref=e632]: Pager
+          - link "Previous page LxTextarea 文本域" [ref=e634] [cursor=pointer]:
+            - /url: /components/lxtextarea.html
+            - generic [ref=e635]: Previous page
+            - generic [ref=e636]: LxTextarea 文本域
+          - link "Next page LxCheckbox 复选组" [ref=e638] [cursor=pointer]:
+            - /url: /components/lxcheckbox.html
+            - generic [ref=e639]: Next page
+            - generic [ref=e640]: LxCheckbox 复选组
+```
