@@ -1,5 +1,12 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-06 Wave 1 / PasswordInput 组件侧交接
+
+- 本轮修改限于 lx-ui PasswordInput Demo、中文 API/文档样式和文档 E2E；没有迁移 Vue3 业务表单、修改 API/路由/权限/后端协议，也没有删除 Element Plus。
+- 组件单测 10/10、文档 Playwright 9/9；覆盖真实移动目录锚点、亮/暗/HUD、键盘显隐、离焦遮罩、清空、只读/禁用、44px 设置项和减少动效。Vue3 类型检查、定向 ESLint/Prettier、lx-ui 类型与文档构建通过。
+- 独立代码复审批准。Impeccable A 32/40；B 三个 detector 均为有效 `[]`、空 stderr、退出码 0，overlay 命中经核验属于 HUD 主题提示或 VitePress 文档壳层。报告与证据见 `.impeccable/critique/wave1-lxpasswordinput-2026-10-05/final-recheck-2026-10-06/`。
+- 后续在 `LxForm/LxDynamicForm` 组合验收时加入密码字段校验失败、错误文案和 ARIA 关联示例；真实登录/改密仍需后端联调。当前下一入口是动态图标严格复核，随后进行 DynamicForm，Element Plus 替换继续冻结。
+
 ## 2026-10-05 Wave 2 / LxSelect 组件侧验收
 
 - 本次修改限于 lx-ui、中文组件文档和文档 E2E；没有替换 Vue3 业务页，没有改请求 API、路由、权限键或后端协议。

@@ -146,3 +146,12 @@ GLM 报告的 11 项 major 经复核后，#1、#2、#5、#6、#7、#8、#9、#10
 - **范围**：`linkx-fe/src/components/LxSwitch/index.vue`、`demo/basic.vue`、VitePress 样式和中文组件文档，以及 Vue3 LxSwitch 单测与文档 E2E。复核者未读取 Impeccable Assessment A/B 文件，也未修改工作区。
 - **重点**：核对 Element Plus 开关的受控值与键盘切换、内部原生控件的 ARIA 名称/说明、HUD 主题预览恢复、失败后保留原值并允许重试、375px 样式与 E2E 配置。Demo 的下发流程仅用本地内存和定时器模拟，不新增业务 API；Vue3 API 请求写法未改变。
 - **验证**：最终 LxSwitch 单测 14/14、文档 E2E 6/6、Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、组件库构建（196 modules）和文档构建通过。VitePress 输出既有大 chunk 警告；本条代码复核记录不代替 Impeccable A/B 结论。
+
+## 2026-10-06 Wave 1 LxPasswordInput 最终代码复核
+
+- **结论**：独立复核批准；未发现可复现的 P0–P2 问题。
+- **范围**：`linkx-fe/src/components/LxPasswordInput/index.vue`、`types.ts`、Demo、中文 API 文档、文档主题 CSS，以及 Vue3 组件单测和文档 E2E。
+- **重点**：确认 `maskOnBlur` 默认兼容既有显隐行为；启用后在输入框与显隐按钮间移动焦点不回罩，焦点离开组件后恢复遮罩；调用方 `type` 不会覆盖密码类型，其他 attributes 仍正常透传。窄屏参数表提示、Demo 滚动偏移与对应样式和浏览器断言一致，减少动效测试测量实际有过渡的图标。
+- **验证**：主任务已运行 PasswordInput 单测 10/10、文档 Playwright 8/8、Vue3 类型检查、定向 ESLint/Prettier、lx-ui 类型检查、196 模块构建、VitePress 文档构建和 `git diff --check`，均通过。VitePress 保留既有大 chunk 警告。
+- **复审发现与修复**：首轮复核发现窄屏展开的高级设置复选框标签约为 24px，未覆盖 44px 触控目标。Demo 在 640px 以下将两个高级标签加入 44px 规则，E2E 展开设置并分别测量两个标签；复核者对最终差异再次检查并批准。
+- **最终验证与边界**：修后单测 10/10、文档 E2E 9/9、Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、VitePress 文档构建和 `git diff --check` 通过。VitePress 保留既有大 chunk 警告。复核者未运行测试、未读取 Impeccable A/B 证据，也未修改工作区；真实登录/改密后端联调不由组件级回归替代。

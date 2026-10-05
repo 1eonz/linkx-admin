@@ -1,8 +1,15 @@
 # LinkX 后续任务完整拆分与执行规范
 
-> 更新时间：2026-10-05
+> 更新时间：2026-10-06
 >
 > 本文是 `doc/PROJECT-DELIVERY-PLAN.md` 的执行拆分入口。它把当前仍未完成、证据不足或明确阻塞的工作按依赖顺序拆成可交付波次。每个波次完成后，必须先完成验证、代码审核、样式与动效审查，再进入下一波；不得用“代码已经存在”“构建通过”或 detector 输出 `[]` 代替交付证据。
+
+### 当前执行指针（2026-10-06）
+
+- `LxPasswordInput` 已完成当前实现、行为回归、正式 A/B、overlay 归因和独立代码复审。A 为 32/40；单测 10/10、文档 E2E 9/9、类型/构建/目标 ESLint/Prettier 通过。修复了 320px 目录锚点、文档暗色表面和 44px 移动工具标签。
+- 三个 detector 均为有效 JSON `[]`、stderr 空、退出码 0；浏览器 overlay 11 个目标均归为 HUD 主题提示或文档壳层目标，不计为密码控件缺陷。该证据不关闭全库 52 项严格矩阵。
+- 尚有一项 P2 集成文档建议：用真实 `LxForm/LxFormItem` 展示密码字段校验错误、文案和 ARIA 关联；它由 Form/DynamicForm 宿主组合负责，禁止在独立 PasswordInput Demo 伪造。另将移动 Props 表和 VitePress 页内目录触控高度列入共用文档壳层体验任务。
+- 下一入口固定为动态图标严格复核，然后进入 `LxDynamicForm`；其波次同时验收密码字段宿主校验集成示例。各波仍按 `fix(lx-ui)` 实现/E2E 与 `docs(project)` 计划/交接/审计/Critique 两笔提交并推送。
 
 ## 一、当前事实与完成口径
 
@@ -20,7 +27,7 @@
 ### 2. 当前未关闭项
 
 1. **DynamicForm/Form**：`LxDatePicker` 的说明 ID 实例隔离缺陷已按 Wave 0 修复，独立代码审核未发现可复现缺陷；日期与 DynamicForm 单测、类型、库构建、文档构建和日期文档 E2E 已通过。修复后的正式 Impeccable A/B、overlay、综合报告和 snapshot/trend 尚未关闭，因此整体仍为阶段性完成。
-2. **基础控件**：`LxButton`、`LxInput`、`LxTextarea`、`LxInputNumber`、`LxSelect`、`LxDatePicker`、Checkbox/Radio 组、`LxSwitch`、`LxPasswordInput` 仍需逐项完成严格设计矩阵。LxSelect 实现、Demo/API、禁用项、远程失败恢复、行为 E2E 和代码复审已完成；正式视觉关闭仍有证据/建议待办。Checkbox/Radio 实现、Demo/API、行为 E2E、A/B 浏览器评审和独立代码复审已完成，A 为 34/40；触屏目标 44px 已由 B 实测。375px API 表格扫描效率 P2 仍开放，因此该两组的严格矩阵行暂不关闭。下一入口为 `LxSwitch`。
+2. **基础控件**：`LxButton`、`LxInput`、`LxTextarea`、`LxInputNumber`、`LxSelect`、`LxDatePicker`、Checkbox/Radio 组、`LxSwitch`、`LxPasswordInput` 仍需逐项完成严格设计矩阵。LxPasswordInput 的正式 A/B 与代码复核已补，A 为 32/40；密码字段的真实宿主校验示例 P2 留待 Form/DynamicForm 组合验收。LxSelect 的严格行仍有建议待办；Checkbox/Radio 的 375px API 表格 P2 仍开放。上述事项关闭前对应严格矩阵行保持打开。
 3. **TreeSelect/Cascader**：实现、Demo、单测和文档 E2E 已完成；当前版本的正式 overlay 证据和复验仍缺，旧截图不得沿用为当前版本通过证据。
 4. **其余 lx-ui**：组件审查矩阵中的 52 个公开组件尚未逐项完成设计差异、状态证据、代码审核和正式 Critique；已有专项证据只作阶段性材料。
 5. **Vue3 Element Plus 替换**：宿主仍有直接导入和模板使用，尚未按映射矩阵分批替换；在库级门槛和页面回归完成前不得删除宿主 `element-plus`。删除目标是 Vue3 宿主直依赖，保留 `lx-ui` 内部依赖。

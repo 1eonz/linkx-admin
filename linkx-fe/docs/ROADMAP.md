@@ -1,10 +1,14 @@
 # lx-ui 路线图
 
+## 2026-10-06 Wave 1 / LxPasswordInput 修后复核
+
+320px 页内“交互示例”锚点现在避开 VitePress 移动目录；普通暗色文档主题同步映射到 Demo 和内部输入面，HUD 仍可独立切换；窄屏工具栏和展开的高级设置标签均达到 44px。单测 10/10、文档 E2E 9/9、类型检查、目标 ESLint/Prettier、lx-ui 类型检查与文档构建通过。独立代码复审批准；Impeccable A 32/40，B 的 3 个 detector 都是有效 `[]`/空 stderr/退出码 0，overlay 11 个目标归因为 HUD 主题提示或 VitePress 文档壳层。证据见 `.impeccable/critique/wave1-lxpasswordinput-2026-10-05/final-recheck-2026-10-06/`。密码字段宿主校验集成示例留在后续 Form/DynamicForm；移动目录项高度留在共享壳层。下一步先严格复核动态图标，再做 `LxDynamicForm`。
+
 ## 2026-10-05 Wave 2 / LxSwitch 复验
 
 `LxSwitch` 的组件、Demo、中文 API、行为回归和独立代码复核已完成。单测 14/14、文档 Playwright 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。代码复核批准，未发现可复现的 P0–P2 问题。Impeccable A/B 综合 32/40，是基于 29/40 的三项有界修后评分；源码、Demo、文档的 detector 结果均为有效 `[]`、stderr 空、退出码 0，仅代表静态规则零命中。报告与浏览器证据见 `.impeccable/critique/wave2-lx-switch-2026-10-05/`，实现提交为 `1679d9c`。
 
-移动文档侧栏隐藏时的键盘顺序需在共享壳层波次复验；生产高影响开关的确认、授权审计和失败补偿由宿主依据真实业务契约确定；中文术语释义作为文档改进继续跟踪。下一项是 `LxPasswordInput`，之后完成动态图标严格复核，再按计划进入 `LxDynamicForm`。这些交叉残项没有关闭前，不将组件计入统一严格矩阵关闭数。完成一波后继续下一波，组件实现/E2E 与项目计划/审计/Critique 证据分开提交并推送。
+移动文档侧栏隐藏时的键盘顺序需在共享壳层波次复验；生产高影响开关的确认、授权审计和失败补偿由宿主依据真实业务契约确定；中文术语释义作为文档改进继续跟踪。`LxPasswordInput` 当前复核已记录在本文件顶部，之后先完成动态图标严格复核，再按计划进入 `LxDynamicForm`。这些交叉残项没有关闭前，不将组件计入统一严格矩阵关闭数。完成一波后继续下一波，组件实现/E2E 与项目计划/审计/Critique 证据分开提交并推送。
 
 ## 2026-10-05 Wave 2 / LxCheckbox 与 LxRadio 复验
 

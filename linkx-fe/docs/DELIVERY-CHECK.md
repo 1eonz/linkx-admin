@@ -132,7 +132,7 @@ Impeccable `detect.mjs` 的源码输出 `[]` 且退出码为 0，只代表本次
 
 `LxPagination` 的中文 API/Demo 覆盖默认与自定义 layout、背景样式、自动重置/滚动和站点明暗主题；5 项组件单测验证受控事件顺序与滚动开关，2 项适配器单测保留旧 `page/limit/pagination` 契约，文档 Playwright 3/3 覆盖条数切换、主题、375px 局部滚动及键盘焦点。文档 Demo 使用 `zh-cn` locale；detector 对组件、Demo、文档和 Vue3 适配器 stdout `[]`、stderr 空、退出码 0，仅表示本次静态规则零命中；UI-11 正式 Critique 仍待 UI-10 其余组件闭环。
 
-`LxPasswordInput` 已补独立中文 API/Demo；既有文档 Playwright 覆盖密码显隐与清空、输入事件、focus/blur/select 实例方法、默认剪贴板可用与显式阻止、只读/禁用语义和窄屏布局。`preventClipboard` 只阻止前端剪贴板事件，不是安全边界；Demo 使用内存样例，不访问登录接口。组件级验收不代表真实认证联调或 UI-11 整库 Critique 完成。
+`LxPasswordInput` 独立中文 API/Demo 已覆盖密码显隐与清空、输入事件、focus/blur/select 实例方法、默认剪贴板可用与显式阻止、只读/禁用语义和窄屏布局。2026-10-06 修后单测 10/10、文档 Playwright 9/9，覆盖 320px 真实目录锚点、暗色 VitePress 表面与 Element Plus 输入主题变量、HUD 切换、44px 工具栏/高级标签、键盘和减少动效；独立代码复审批准，Impeccable A 为 32/40。B 的三个 detector 均为有效 JSON `[]`、stderr 空、退出码 0；overlay 11 个目标归因为 HUD 主题提示或 VitePress 文档壳层。`preventClipboard` 只阻止前端剪贴板事件，不是安全边界；Demo 使用内存样例，不访问登录接口。宿主 Form 校验失败集成示例仍列在 Form/DynamicForm 后续任务；组件验收不代表真实认证联调或 UI-11 整库 Critique 完成。
 
 `LxEmpty` 有独立中文 API/Demo；5 项单测覆盖默认文案、status 语义、紧凑档、自定义尺寸校验、图标/操作插槽与宿主 class 透传。文档 Playwright 覆盖默认 64px、`image-size=80`、键盘操作、筛选恢复、两主题对比度、长描述和 375/320px 无横向溢出。阶段性启发式评审曾记 28/40，亮色浏览器 overlay 发现 5 项真实低对比度文字；已改用正文令牌并补对比度回归。后续流程审计确认该评分没有对应的 Impeccable Critique 快照，且设计评审未在独立新标签检查页面，因此不能视为正式 Impeccable 验收，需在 UI-11 按 skill 规范补齐。detector `[]` 仅表示静态规则零命中。Vue3 15 处 `el-empty` 仍待 UI-04 替换，组件证据不代表宿主页面已经采用。
 

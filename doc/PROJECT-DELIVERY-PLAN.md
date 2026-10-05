@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-06 Wave 1 / LxPasswordInput 修后复核
+
+- **完成内容**：修复 320px 页面内“交互示例”锚点被移动目录覆盖；暗色 VitePress 下 Demo 和 Element Plus 输入面映射站点暗色令牌；窄屏主工具栏及高级设置标签提升到 44px。补真实目录链接、明暗/HUD 和高级标签尺寸 E2E。
+- **验证**：LxPasswordInput 单测 10/10、文档 Playwright 9/9、Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、VitePress 文档构建和差异检查通过。文档构建仅有既有大 chunk 警告。
+- **代码复审与 Impeccable**：独立代码复审最终批准；曾发现高级设置标签触控区不足，修后复核通过。A 32/40；B 三个 detector 均为有效 `[]`、stderr 空、退出码 0，浏览器 overlay 11 个目标经归因后均属 HUD 主题规则提示或 VitePress 文档壳层，不是密码控件缺陷。正式复核与证据见 `.impeccable/critique/wave1-lxpasswordinput-2026-10-05/final-recheck-2026-10-06/`；综合 snapshot/trend 另见 `.impeccable/critique/`。
+- **未关闭项**：宿主 `LxForm/LxFormItem` 校验失败集成示例并入 Form/DynamicForm 后续波次；移动 Props 表呈现与 VitePress 目录项高度列入共享文档壳层体验待办。因此 `LxPasswordInput` 不登记为严格矩阵已关闭。
+- **下一步**：按用户确认顺序先严格复核动态图标，再进入 `LxDynamicForm`；其中纳入密码字段与宿主校验反馈的集成示例。lx-ui 全库门槛完成前不替换或删除 Vue3 宿主 Element Plus。
+
 ## 2026-10-05 Wave 2 / Checkbox 与 Radio 实现及审查
 
 - **完成内容**：完成 `LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 的状态、令牌、中文 API/Demo 和行为回归收口。Radio 改选后的可见/读屏回报采用中文选项名；组选中可用项作为 Tab 入口，已选禁用历史值展示在独立只读示例。

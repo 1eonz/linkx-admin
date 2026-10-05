@@ -1855,3 +1855,13 @@
 - **未完成/风险**：未实测修复后浏览器剪贴板行为和视觉 overlay；真实登录、改密及后端安全联调不在本波范围。文档 E2E 源码已更新，但本轮未运行。
 - **本波提交范围与提交号**：实现、回归测试、组件文档先以 `2762816`（`fix(lx-ui): prevent forwarded type from bypassing password mask`）提交。计划、地图、审计、独立评审报告及本记录由后续 `docs(project)` 提交承载；两笔提交一并推送。
 - **下一步**：自动继续 Wave 2（选择与日期），优先按 `PROJECT-FOLLOWUP-BREAKDOWN.md` 检查 DatePicker 窄屏区间首屏布局和 Escape 起止端点；UI 实施前遵循 `frontend-ui-ux` 与 Impeccable `distill` skill。正式 overlay 与 snapshot/trend 仍是视觉关闭门槛。
+
+## [2026-10-06] Wave 1 / LxPasswordInput 修后验收与交接
+
+- **修复**：320px 下页内目录锚点跳转后标题不再被移动导航遮挡；VitePress 暗色主题同步作用于 Demo 和输入框表面，同时保留独立 HUD 切换；移动工具栏及展开后的高级设置标签高度统一为 44px。
+- **验证**：LxPasswordInput 单测 10/10，文档 E2E 9/9；Vue3 类型检查、定向 ESLint、目标 Prettier、lx-ui 类型检查与 VitePress 文档构建通过。最后一次构建直接调用已安装的 VitePress CLI；pnpm 脚本入口因被忽略的依赖构建脚本触发安装状态检查而退出，CLI 构建本身成功。文档构建保留既有大 chunk 提示。
+- **代码审核**：独立复审批准，未发现 P0–P2；复审提出的高级设置标签触控高度不足已修复并由 E2E 覆盖。
+- **Impeccable**：双路 Assessment A/B 完成，32/40（Good），P0/P1 为 0。detector 的 JSON `[]`、空 stderr、退出码 0 仅记录静态零命中；浏览器 overlay 11 个节点经归因属于 HUD 调色板规则和 VitePress 文档壳层，没有把命中数当作组件缺陷。注入前后页面宽度增量为 0。最终复验见 `.impeccable/critique/wave1-lxpasswordinput-2026-10-05/final-recheck-2026-10-06/`；首次趋势记录为 32/40，snapshot 为 `.impeccable/critique/2026-10-05T19-16-45Z__linkx-fe-src-components-lxpasswordinput-index-vue.md`。
+- **未关闭事项**：宿主 `LxForm/LxFormItem` 校验失败集成示例移入 `LxForm/LxDynamicForm` 波次；移动 Props 表扫描成本及共享 VitePress 移动目录 32px 行高作为 P3 继续跟踪。PasswordInput 本次完成修后验收，但这些跨组件/文档待办未完成前，不据此宣称 52 项严格矩阵已关闭。
+- **提交范围**：组件、Demo、中文 API 文档、Vue3 单测/E2E 已提交为 `45a6b6f`（`fix(lx-ui): refine password input documentation flow`）；项目计划、地图、交接、迁移台账、组件审计、代码复核、Impeccable 报告/证据和 snapshot 随本波 `docs(project)` 提交。
+- **下一步**：按用户确定的顺序先严格复核动态图标，再实现/完善 `LxDynamicForm`，其中加入真实宿主校验失败示例；随后继续基础组件与 Vue3 Element Plus 替换计划。业务 API 调用继续使用 `.then().catch().finally()`，文档与新增注释保持中文。
