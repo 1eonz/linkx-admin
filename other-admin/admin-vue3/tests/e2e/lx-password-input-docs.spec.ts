@@ -51,6 +51,7 @@ test.describe('lx-ui LxPasswordInput 文档示例', () => {
     await input.press('ControlOrMeta+V');
     await expect(input).toHaveValue('Demo-Paste-Value');
 
+    await page.getByText('剪贴板与主题设置', { exact: true }).click();
     await page.getByLabel('阻止剪贴板操作', { exact: true }).check();
     await page.evaluate(() => navigator.clipboard.writeText('Blocked-Paste-Value'));
     await input.fill('');
@@ -95,6 +96,120 @@ test.describe('lx-ui LxPasswordInput 文档示例', () => {
     await expect(disabledToggle).toBeDisabled();
   });
 
+  test('剪贴板与主题设置支持键盘展开且窄屏触控区域为 44px', async ({ page }) => {
+    await page.goto('/components/lxpasswordinput');
+    const advanced = page.locator('.password-input-demo__advanced');
+    const summary = advanced.locator('summary');
+
+    for (const width of [375, 320]) {
+      await page.setViewportSize({ width, height: 812 });
+      const height = await summary.evaluate((element) => element.getBoundingClientRect().height);
+      expect(height, `${width}px 下设置入口高度不足`).toBeGreaterThanOrEqual(44);
+    }
+
+    await summary.click();
+    const controlLabelHeights = await advanced
+      .locator('.password-input-demo__advanced-controls label')
+      .evaluateAll((labels) => labels.map((label) => label.getBoundingClientRect().height));
+    expect(controlLabelHeights).toHaveLength(2);
+    expect(Math.min(...controlLabelHeights)).toBeGreaterThanOrEqual(44);
+
+    await summary.click();
+    await summary.focus();
+    await summary.press('Enter');
+    await expect(advanced).toHaveAttribute('open', '');
+    await summary.press('Space');
+    await expect(advanced).not.toHaveAttribute('open', '');
+  });
+
+  test('开启失焦遮罩后，焦点离开整个控件才隐藏明文', async ({ page }) => {
+    await page.goto('/components/lxpasswordinput');
+
+    const input = page.getByLabel('访问密码');
+    const toggle = page.locator('.lx-password-input__toggle').first();
+    const maskOnBlur = page.getByLabel('离开组件后重新遮罩');
+    await expect(maskOnBlur).toBeChecked();
+
+    await toggle.click();
+    await expect(input).toHaveAttribute('type', 'text');
+    await input.focus();
+    await input.press('Tab');
+    await expect(toggle).toBeFocused();
+    await expect(input).toHaveAttribute('type', 'text');
+
+    await toggle.press('Tab');
+    await expect(page.getByLabel('只读密码')).toBeFocused();
+    await expect(input).toHaveAttribute('type', 'password');
+  });
+
+  test('320px 下参数表可横滑，目录锚点标题和触控项避开固定导航', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.goto('/components/lxpasswordinput');
+
+    await expect(page.getByText('窄屏下可左右滑动参数表，查看完整内容。')).toBeVisible();
+    const table = page.locator('.vp-doc table').first();
+    const tableWidth = await table.evaluate((element) => ({
+      client: element.clientWidth,
+      scroll: element.scrollWidth,
+    }));
+    expect(tableWidth.scroll).toBeGreaterThan(tableWidth.client);
+
+    await page.locator('.VPLocalNavOutlineDropdown > button').click();
+    await page.locator('.VPLocalNavOutlineDropdown a[href="#lx-passwordinput-demo"]').click();
+    await expect(page).toHaveURL(/#lx-passwordinput-demo$/);
+    const geometry = await page.evaluate(() => {
+      const headingElement = document.querySelector<HTMLElement>('#lx-passwordinput-demo');
+      const navElement = document.querySelector<HTMLElement>('.VPLocalNav');
+      if (!headingElement || !navElement) throw new Error('找不到示例标题或移动目录');
+      return {
+        headingTop: headingElement.getBoundingClientRect().top,
+        navBottom: navElement.getBoundingClientRect().bottom,
+        documentWidth: document.documentElement.scrollWidth,
+        toolbarLabelHeights: Array.from(
+          document.querySelectorAll<HTMLElement>('.password-input-demo__toolbar label'),
+        ).map((label) => label.getBoundingClientRect().height),
+      };
+    });
+    expect(geometry.headingTop).toBeGreaterThanOrEqual(geometry.navBottom + 8);
+    expect(geometry.toolbarLabelHeights.length).toBeGreaterThan(0);
+    expect(Math.min(...geometry.toolbarLabelHeights)).toBeGreaterThanOrEqual(44);
+    expect(geometry.documentWidth).toBeLessThanOrEqual(320);
+  });
+
+  test('VitePress 暗色主题映射到密码框预览，HUD 主题仍可独立切换', async ({ page }) => {
+    await page.goto('/components/lxpasswordinput');
+    await page.locator('html').evaluate((element) => element.classList.add('dark'));
+
+    const demo = page.locator('.password-input-demo');
+    const darkTheme = await demo.evaluate((element) => {
+      const reference = document.createElement('span');
+      reference.style.backgroundColor = 'var(--vp-c-bg-alt)';
+      reference.style.color = 'var(--vp-c-text-1)';
+      document.body.append(reference);
+      const expectedBackground = getComputedStyle(reference).backgroundColor;
+      const expectedText = getComputedStyle(reference).color;
+      reference.remove();
+
+      const inputSurface = element.querySelector('.el-input__wrapper');
+      return {
+        background: getComputedStyle(element).backgroundColor,
+        inputBackground: inputSurface ? getComputedStyle(inputSurface).backgroundColor : '',
+        text: getComputedStyle(element).color,
+        expectedBackground,
+        expectedText,
+      };
+    });
+    expect(darkTheme.background).toBe(darkTheme.expectedBackground);
+    expect(darkTheme.inputBackground).toBe(darkTheme.expectedBackground);
+    expect(darkTheme.text).toBe(darkTheme.expectedText);
+
+    await page.getByText('剪贴板与主题设置', { exact: true }).click();
+    await page.getByLabel('HUD 深色主题').check();
+    await expect(demo).toHaveClass(/lx-theme-hud/);
+    const hudBackground = await demo.evaluate((element) => getComputedStyle(element).backgroundColor);
+    expect(hudBackground).not.toBe(darkTheme.background);
+  });
+
   test('只读和禁用语义保留，375px 深色视图不横向溢出', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/components/lxpasswordinput');
@@ -126,13 +241,25 @@ test.describe('lx-ui LxPasswordInput 文档示例', () => {
       expect(geometry.toggleHeight, `${size} 档窄屏触控高度不足`).toBe(44);
       expect(geometry.toggleWidth, `${size} 档窄屏触控宽度不足`).toBe(44);
     }
+    await page.getByText('剪贴板与主题设置', { exact: true }).click();
     await page.getByLabel('HUD 深色主题').check();
     await expect(page.locator('.password-input-demo')).toHaveClass(/lx-theme-hud/);
     await expect(page.locator('.password-input-demo__actions').getByRole('button')).toHaveCount(3);
+
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    const advancedIcon = page.locator('.password-input-demo__advanced-icon');
+    const normalTransition = await advancedIcon.evaluate((element) =>
+      Number.parseFloat(getComputedStyle(element).transitionDuration),
+    );
+    expect(normalTransition).toBeGreaterThan(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(375);
 
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await expect(page.getByLabel('访问密码')).toBeVisible();
+    const reducedTransition = await advancedIcon.evaluate((element) =>
+      Number.parseFloat(getComputedStyle(element).transitionDuration),
+    );
+    expect(reducedTransition).toBeLessThanOrEqual(0.00001);
   });
 
   test('关闭显隐能力会恢复遮罩，窄屏焦点框不压住字段标签', async ({ page }) => {

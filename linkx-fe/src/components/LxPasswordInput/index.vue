@@ -17,6 +17,7 @@ const props = withDefaults(defineProps<LxPasswordInputProps>(), {
   disabled: undefined,
   clearable: false,
   showPassword: true,
+  maskOnBlur: false,
   preventClipboard: false,
   maxlength: undefined,
   minlength: undefined,
@@ -35,6 +36,7 @@ const emit = defineEmits<{
 }>()
 
 const inputRef = ref<InputInstance>()
+const focusRoot = ref<HTMLElement>()
 const isPasswordVisible = ref(false)
 const attrs = useAttrs()
 const isDisabled = useFormDisabled()
@@ -75,6 +77,17 @@ function togglePasswordVisibility() {
   isPasswordVisible.value = !isPasswordVisible.value
 }
 
+// 显隐按钮属于同一控件，只有焦点离开包装根节点时才恢复遮罩。
+function handleFocusout(event: FocusEvent) {
+  if (!props.maskOnBlur) return
+
+  const nextTarget = event.relatedTarget
+  if (nextTarget instanceof Node && focusRoot.value?.contains(nextTarget))
+    return
+
+  isPasswordVisible.value = false
+}
+
 defineExpose({
   focus: () => inputRef.value?.focus(),
   blur: () => inputRef.value?.blur(),
@@ -83,47 +96,57 @@ defineExpose({
 </script>
 
 <template>
-  <LxInput
-    ref="inputRef"
-    class="lx-password-input"
-    :model-value="props.modelValue"
-    :type="isPasswordVisible ? 'text' : 'password'"
-    :placeholder="props.placeholder"
-    :disabled="props.disabled"
-    :clearable="props.clearable"
-    :show-password="false"
-    :maxlength="maxLength"
-    :minlength="minLength"
-    :size="inputSize"
-    :autocomplete="props.autocomplete"
-    :readonly="props.readonly"
-    :name="props.name"
-    v-bind="getForwardedAttrs()"
-    @update:model-value="emit('update:modelValue', $event)"
-    @change="emit('change', $event)"
-    @focus="emit('focus', $event)"
-    @blur="emit('blur', $event)"
-    @clear="emit('clear')"
-    @copy="preventClipboard"
-    @cut="preventClipboard"
-    @paste="preventClipboard"
+  <div
+    ref="focusRoot"
+    class="lx-password-input__focus-root"
+    @focusout="handleFocusout"
   >
-    <template v-if="props.showPassword" #suffix>
-      <button
-        class="lx-password-input__toggle"
-        type="button"
-        :disabled="isDisabled"
-        :aria-label="isPasswordVisible ? '隐藏密码' : '显示密码'"
-        :aria-pressed="isPasswordVisible"
-        @click="togglePasswordVisibility"
-      >
-        <LxIcon :name="isPasswordVisible ? 'eye-off' : 'eye'" :size="16" />
-      </button>
-    </template>
-  </LxInput>
+    <LxInput
+      ref="inputRef"
+      class="lx-password-input"
+      :model-value="props.modelValue"
+      :type="isPasswordVisible ? 'text' : 'password'"
+      :placeholder="props.placeholder"
+      :disabled="props.disabled"
+      :clearable="props.clearable"
+      :show-password="false"
+      :maxlength="maxLength"
+      :minlength="minLength"
+      :size="inputSize"
+      :autocomplete="props.autocomplete"
+      :readonly="props.readonly"
+      :name="props.name"
+      v-bind="getForwardedAttrs()"
+      @update:model-value="emit('update:modelValue', $event)"
+      @change="emit('change', $event)"
+      @focus="emit('focus', $event)"
+      @blur="emit('blur', $event)"
+      @clear="emit('clear')"
+      @copy="preventClipboard"
+      @cut="preventClipboard"
+      @paste="preventClipboard"
+    >
+      <template v-if="props.showPassword" #suffix>
+        <button
+          class="lx-password-input__toggle"
+          type="button"
+          :disabled="isDisabled"
+          :aria-label="isPasswordVisible ? '隐藏密码' : '显示密码'"
+          :aria-pressed="isPasswordVisible"
+          @click="togglePasswordVisibility"
+        >
+          <LxIcon :name="isPasswordVisible ? 'eye-off' : 'eye'" :size="16" />
+        </button>
+      </template>
+    </LxInput>
+  </div>
 </template>
 
 <style scoped>
+.lx-password-input__focus-root {
+  width: 100%;
+}
+
 .lx-password-input {
   width: 100%;
 }

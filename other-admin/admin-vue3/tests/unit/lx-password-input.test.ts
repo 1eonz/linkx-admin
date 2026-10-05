@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import { ElForm } from 'element-plus';
 import { LxPasswordInput } from 'lx-ui';
 import { describe, expect, it } from 'vitest';
-import { h } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 
 describe('LxPasswordInput', () => {
   it('renders a password input with autocomplete off by default', () => {
@@ -26,6 +26,68 @@ describe('LxPasswordInput', () => {
     expect(input.attributes('type')).toBe('password');
 
     wrapper.unmount();
+  });
+
+  it('动态更新透传 type 时仍由组件控制密码遮罩', async () => {
+    const forwardedType = ref('text');
+    const Host = defineComponent({
+      setup() {
+        return () => h(LxPasswordInput, { type: forwardedType.value });
+      },
+    });
+    const wrapper = mount(Host);
+    const input = wrapper.get('input.el-input__inner');
+
+    forwardedType.value = 'email';
+    await nextTick();
+    expect(input.attributes('type')).toBe('password');
+
+    wrapper.unmount();
+  });
+
+  it('仅在焦点离开整个组件后按需重新遮罩', async () => {
+    const outsideButton = document.createElement('button');
+    document.body.append(outsideButton);
+
+    const wrapper = mount(LxPasswordInput, {
+      attachTo: document.body,
+      props: { maskOnBlur: true },
+    });
+    const input = wrapper.get('input.el-input__inner');
+    const toggle = wrapper.get('button.lx-password-input__toggle');
+
+    input.element.focus();
+    await toggle.trigger('click');
+    expect(input.attributes('type')).toBe('text');
+
+    toggle.element.focus();
+    expect(input.attributes('type')).toBe('text');
+    outsideButton.focus();
+    await nextTick();
+    expect(input.attributes('type')).toBe('password');
+
+    wrapper.unmount();
+    outsideButton.remove();
+  });
+
+  it('默认不因焦点离开而改变已选择的明文状态', async () => {
+    const outsideButton = document.createElement('button');
+    document.body.append(outsideButton);
+
+    const wrapper = mount(LxPasswordInput, {
+      attachTo: document.body,
+    });
+    const input = wrapper.get('input.el-input__inner');
+    const toggle = wrapper.get('button.lx-password-input__toggle');
+
+    input.element.focus();
+    await toggle.trigger('click');
+    outsideButton.focus();
+    await nextTick();
+    expect(input.attributes('type')).toBe('text');
+
+    wrapper.unmount();
+    outsideButton.remove();
   });
 
   it('只读状态下透传 type 仍不能覆盖密码遮罩', async () => {
