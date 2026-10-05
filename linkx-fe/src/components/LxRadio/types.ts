@@ -10,6 +10,8 @@
 export type LxRadioValue = string | number | boolean
 
 export interface LxRadioProps {
+  /** 独立使用时的当前选中值；组内状态由 `LxRadioGroup` 管理。 */
+  modelValue?: LxRadioValue
   /** 该项的选中值（配合 LxRadioGroup v-model） */
   value?: LxRadioValue
   /** 无插槽时的文字回退内容；未传 value 时按 EP 旧契约兼作选中值 */

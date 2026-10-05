@@ -1,7 +1,8 @@
 import { mount } from '@vue/test-utils';
-import { h } from 'vue';
+import { ElForm } from 'element-plus';
 import { LxRadio, LxRadioGroup } from 'lx-ui';
 import { describe, expect, it } from 'vitest';
+import { h } from 'vue';
 
 /** 组装"组 + 两项"的测试挂载（靶环选中态断言依赖内核 is-checked 类） */
 function mountGroup(options: { modelValue?: string; disabled?: boolean; vertical?: boolean } = {}) {
@@ -65,9 +66,39 @@ describe('LxRadioGroup', () => {
     expect(wrapper.emitted('update:modelValue')).toBeUndefined();
     wrapper.unmount();
   });
+
+  it('未指定禁用状态时继承 ElForm 的禁用状态', () => {
+    const wrapper = mount(ElForm, {
+      props: { model: {}, disabled: true },
+      slots: {
+        default: () =>
+          h(
+            LxRadioGroup,
+            { modelValue: 'daily' },
+            {
+              default: () => h(LxRadio, { value: 'daily' }, () => '日常勤务'),
+            },
+          ),
+      },
+    });
+
+    expect(wrapper.find('input[type="radio"]').attributes('disabled')).toBeDefined();
+    wrapper.unmount();
+  });
 });
 
 describe('LxRadio', () => {
+  it('独立使用时通过 update:modelValue 同步选中值', async () => {
+    const wrapper = mount(LxRadio, {
+      props: { modelValue: 'other', value: 'daily', label: '日常勤务' },
+    });
+
+    await wrapper.find('input[type="radio"]').setValue(true);
+
+    expect(wrapper.emitted('update:modelValue')).toEqual([['daily']]);
+    wrapper.unmount();
+  });
+
   it('falls back to the label prop as the option value (EP legacy contract)', () => {
     // 存量 Vue2 迁移代码惯用 label 承载选中值：未传 value 时内核以 label 兼作值
     const wrapper = mount(LxRadioGroup, {
@@ -102,6 +133,20 @@ describe('LxRadio', () => {
 
     expect(wrapper.classes()).toContain('is-disabled');
     expect(wrapper.find('input[type="radio"]').exists()).toBe(true);
+    wrapper.unmount();
+  });
+
+  it('禁用的已选项仍保留选中状态', () => {
+    const wrapper = mount(LxRadioGroup, {
+      props: { modelValue: 'encrypted' },
+      slots: {
+        default: () => [h(LxRadio, { value: 'encrypted', disabled: true }, () => '高密加密专线')],
+      },
+    });
+
+    expect(wrapper.find('.lx-radio').classes()).toContain('is-disabled');
+    expect(wrapper.find('.lx-radio').classes()).toContain('is-checked');
+    expect(wrapper.find('input[type="radio"]').attributes('disabled')).toBeDefined();
     wrapper.unmount();
   });
 });

@@ -1,7 +1,8 @@
 import { mount } from '@vue/test-utils';
-import { h } from 'vue';
+import { ElForm } from 'element-plus';
 import { LxCheckbox, LxCheckboxGroup } from 'lx-ui';
 import { describe, expect, it } from 'vitest';
+import { h } from 'vue';
 
 /** 组装"组 + 多项"的测试挂载 */
 function mountGroup(options: { modelValue?: string[]; disabled?: boolean; vertical?: boolean } = {}) {
@@ -59,6 +60,7 @@ describe('LxCheckboxGroup', () => {
     await wrapper.findAll('input[type="checkbox"]')[1]?.setValue(true);
 
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['video', 'dispatch']]);
+    expect(wrapper.emitted('change')?.at(-1)).toEqual([['video', 'dispatch']]);
     wrapper.unmount();
   });
 
@@ -76,6 +78,25 @@ describe('LxCheckboxGroup', () => {
     expect(input.attributes('disabled')).toBeDefined();
     await input.trigger('click');
     expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+    wrapper.unmount();
+  });
+
+  it('inherits the disabled state from ElForm when disabled is omitted', () => {
+    const wrapper = mount(ElForm, {
+      props: { model: {}, disabled: true },
+      slots: {
+        default: () =>
+          h(
+            LxCheckboxGroup,
+            { modelValue: [] },
+            {
+              default: () => h(LxCheckbox, { value: 'video' }, () => '视频巡查权限'),
+            },
+          ),
+      },
+    });
+
+    expect(wrapper.find('input[type="checkbox"]').attributes('disabled')).toBeDefined();
     wrapper.unmount();
   });
 });
@@ -101,6 +122,8 @@ describe('LxCheckbox', () => {
 
     // EP 契约（2.14.x 一致）：is-indeterminate 落在内层 el-checkbox__input 而非根元素
     expect(wrapper.find('.el-checkbox__input').classes()).toContain('is-indeterminate');
+    expect(wrapper.attributes('aria-checked')).toBe('mixed');
+    expect((wrapper.find('input[type="checkbox"]').element as HTMLInputElement).indeterminate).toBe(true);
     // 半选仅视觉表达（横杠），不改值：modelValue 保持 false
     expect(wrapper.props('modelValue')).toBe(false);
     wrapper.unmount();
@@ -130,5 +153,21 @@ describe('LxCheckbox', () => {
 
     expect(wrapper.classes()).toContain('is-disabled');
     wrapper.unmount();
+  });
+
+  it('keeps checked and indeterminate values disabled', () => {
+    const checked = mount(LxCheckbox, {
+      props: { modelValue: true, disabled: true },
+    });
+    const indeterminate = mount(LxCheckbox, {
+      props: { modelValue: false, indeterminate: true, disabled: true },
+    });
+
+    expect(checked.find('input[type="checkbox"]').element).toHaveProperty('checked', true);
+    expect(checked.find('input[type="checkbox"]').attributes('disabled')).toBeDefined();
+    expect(indeterminate.attributes('aria-checked')).toBe('mixed');
+    expect(indeterminate.find('input[type="checkbox"]').attributes('disabled')).toBeDefined();
+    checked.unmount();
+    indeterminate.unmount();
   });
 });

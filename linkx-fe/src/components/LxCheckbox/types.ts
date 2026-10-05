@@ -7,18 +7,19 @@
  * 组容器类型见 LxCheckboxGroup/types.ts。
  */
 
-/** 复选项的值类型（对齐 EP CheckboxGroup modelValue 契约） */
+/** 复选项单值类型；独立复选框支持 boolean，组内选项值另限 string 或 number */
 export type LxCheckboxValue = string | number | boolean
 
 export interface LxCheckboxProps {
   /** v-model（独立使用时为 boolean，组内由 Group 接管） */
   modelValue?: LxCheckboxValue
-  /** 组内该项的选中值（配合 LxCheckboxGroup） */
-  value?: LxCheckboxValue
+  /** 组内该项的选中值（配合 LxCheckboxGroup，仅支持 string 或 number） */
+  value?: string | number
   /** 无插槽时的文字回退内容；未传 value 时按 EP 旧契约兼作选中值 */
   label?: string
   /**
-   * 禁用态：灰底 + 灰字（标本 04"需支队审批"行）。
+   * 禁用态：浅色主题文字使用 --lx-color-info（#909399），HUD 下跟随 HUD 次级文字色。
+   * 灰底状态对照标本 04“需支队审批”行。
    * 默认未设置（undefined）：不阻断 EP 内核 useFormDisabled 的 ?? 继承链，
    * CheckboxGroup / ElForm 的禁用态可正常传导；显式传 true/false 才覆盖继承
    */

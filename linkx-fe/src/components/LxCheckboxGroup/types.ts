@@ -9,7 +9,7 @@
 export interface LxCheckboxGroupProps {
   /**
    * 当前选中值集合（v-model）
-   * 类型对齐 EP 2.14.6 checkbox-group 契约（string | number 数组）；
+   * 组选项仅支持 string | number；
    * 单项独立使用的 boolean 值契约见 LxCheckboxProps.modelValue
    */
   modelValue?: (string | number)[]

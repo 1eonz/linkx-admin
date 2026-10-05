@@ -23,16 +23,19 @@ const props = withDefaults(defineProps<LxCheckboxGroupProps>(), {
   name: undefined,
 })
 
-const elementModelValue = computed(() =>
-  props.modelValue.filter(
+/** 过滤组选项不支持的布尔值，保持传给内核及发出的值集合一致。 */
+function normalizeGroupValues(values: (string | number | boolean)[]) {
+  return values.filter(
     (value): value is string | number =>
       typeof value === 'string' || typeof value === 'number',
-  ),
-)
+  )
+}
+
+const elementModelValue = computed(() => normalizeGroupValues(props.modelValue))
 
 const emit = defineEmits<{
   'update:modelValue': [value: (string | number)[]]
-  change: [value: (string | number | boolean)[]]
+  change: [value: (string | number)[]]
 }>()
 </script>
 
@@ -44,8 +47,10 @@ const emit = defineEmits<{
     :disabled="disabled"
     :name="name"
     v-bind="$attrs"
-    @update:model-value="emit('update:modelValue', $event)"
-    @change="emit('change', $event)"
+    @update:model-value="
+      emit('update:modelValue', normalizeGroupValues($event))
+    "
+    @change="emit('change', normalizeGroupValues($event))"
   >
     <slot />
   </ElCheckboxGroup>

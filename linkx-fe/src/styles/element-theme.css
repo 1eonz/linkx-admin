@@ -422,11 +422,21 @@ html:root .el-radio__input.is-checked:not(.is-disabled) .el-radio__inner:after {
   font-weight: 500;
 }
 
-/* 复选选中/半选：主色填充 + 白勾/横杠（EP 默认契约已对齐标本 04） */
-.el-checkbox__input.is-checked .el-checkbox__inner,
-.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+/* 复选选中/半选：主色填充 + 白勾/横杠；禁用态保留灰色表面 */
+.el-checkbox__input.is-checked:not(.is-disabled) .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate:not(.is-disabled) .el-checkbox__inner {
   border-color: var(--lx-color-primary);
   background: var(--lx-color-primary);
+}
+
+.el-checkbox__input.is-checked:not(.is-disabled) + .el-checkbox__label {
+  color: var(--lx-color-text-main);
+}
+
+.el-checkbox:not(.is-disabled):hover
+  .el-checkbox__input.is-checked
+  + .el-checkbox__label {
+  color: var(--lx-color-primary);
 }
 
 /* 表单字段标签：#606266（标本八件套统一 label 契约，弱于正文保证层级） */
@@ -597,10 +607,31 @@ html.dark.lx-theme-hud
   background-color: var(--el-color-primary);
 }
 
-/* HUD 复选填充：同上跟随 HUD 主色，避免亮色深蓝填块在深底发闷 */
-html.dark.lx-theme-hud .el-checkbox__input.is-checked .el-checkbox__inner,
+/* HUD 下未选圆环沿用深色表面，禁用态则保留可辨认的中性灰阶。 */
 html.dark.lx-theme-hud
-  .el-checkbox__input.is-indeterminate
+  .el-radio__input:not(.is-checked):not(.is-disabled)
+  .el-radio__inner {
+  border-color: var(--el-text-color-regular);
+  background: var(--el-bg-color);
+}
+
+html.dark.lx-theme-hud .el-radio__input.is-disabled .el-radio__inner,
+html.dark.lx-theme-hud .el-checkbox__input.is-disabled .el-checkbox__inner {
+  border-color: var(--el-text-color-regular);
+  background: var(--el-fill-color-light);
+}
+
+html.dark.lx-theme-hud .el-radio__input.is-disabled + .el-radio__label,
+html.dark.lx-theme-hud .el-checkbox__input.is-disabled + .el-checkbox__label {
+  color: var(--el-text-color-regular);
+}
+
+/* HUD 复选填充：同上跟随 HUD 主色，避免亮色深蓝填块在深底发闷 */
+html.dark.lx-theme-hud
+  .el-checkbox__input.is-checked:not(.is-disabled)
+  .el-checkbox__inner,
+html.dark.lx-theme-hud
+  .el-checkbox__input.is-indeterminate:not(.is-disabled)
   .el-checkbox__inner {
   border-color: var(--el-color-primary);
   background: var(--el-color-primary);
