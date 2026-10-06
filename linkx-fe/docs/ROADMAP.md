@@ -1,5 +1,13 @@
 # lx-ui 路线图
 
+## 2026-10-06 Wave 3 / LxIcon 修后严格复核
+
+`LxIcon` 对未知运行时名称显示有访问名称的问号图标；侧栏菜单先解析图标键并安全回退，设置入口改用现存 `setting` 名称；Upload 状态图标补充名称类型。中文总览增加语义检索、普通文档流搜索、清空回焦、P1 别名计数说明、暗色主题映射和高对比空态。组件单测 7/7、文档 E2E 当前复跑 2/2（单 Chromium 项目，含桌面及 320px 窄屏交互路径；375px 由独立浏览器评估覆盖）；Vue3/lx-ui 类型检查、Vue3 测试文件 ESLint、目标 Prettier、196 模块构建和文档构建通过。lx-ui 没有独立 ESLint 配置。
+
+Impeccable A 修后为 37/40（修前 33/40）。独立 B 对 `LxIcon` 组件和中文文档分别保存 detector JSON、stderr、退出码，两个静态结果均为有效 `[]`；另在五种浏览器状态成功注入 overlay 并保存截图。命中逐项归为 CJK 行长误报、Shiki/VitePress 代码与导航壳层规则提示，没有命中图标控件；浅色默认页一条无 URL 的 console 404 未归因。静态 `[]` 只表示静态规则零命中。真实读屏器播报、权限菜单异常图标和 Firefox/Safari 尚未覆盖。展开 P1/P2 后的 26/29 项长列表保留 P2。综合报告为 `.impeccable/critique/wave3-lxicon-2026-10-06/final-report.md`，正式 snapshot 为 `.impeccable/critique/2026-10-06T02-52-50Z__linkx-fe-docs-components-lxicons-md.md`。
+
+下一入口为 `LxDynamicForm`：按 schema type 独立拆分字段 renderer，补密码宿主校验/ARIA、远程查询乱序与取消、上传状态映射、`daterange` 往返、受控回灌和容器断点测试。完整只读审计见 `.impeccable/critique/wave4-dynamicform-agent-audit/followup-review.md`。全库 UI-10/UI-11 完成前保留 Vue3 宿主 Element Plus。
+
 ## 2026-10-06 Wave 1 / LxPasswordInput 修后复核
 
 320px 页内“交互示例”锚点现在避开 VitePress 移动目录；普通暗色文档主题同步映射到 Demo 和内部输入面，HUD 仍可独立切换；窄屏工具栏和展开的高级设置标签均达到 44px。单测 10/10、文档 E2E 9/9、类型检查、目标 ESLint/Prettier、lx-ui 类型检查与文档构建通过。独立代码复审批准；Impeccable A 32/40，B 的 3 个 detector 都是有效 `[]`/空 stderr/退出码 0，overlay 11 个目标归因为 HUD 主题提示或 VitePress 文档壳层。证据见 `.impeccable/critique/wave1-lxpasswordinput-2026-10-05/final-recheck-2026-10-06/`。密码字段宿主校验集成示例留在后续 Form/DynamicForm；移动目录项高度留在共享壳层。下一步先严格复核动态图标，再做 `LxDynamicForm`。
@@ -8,7 +16,7 @@
 
 `LxSwitch` 的组件、Demo、中文 API、行为回归和独立代码复核已完成。单测 14/14、文档 Playwright 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。代码复核批准，未发现可复现的 P0–P2 问题。Impeccable A/B 综合 32/40，是基于 29/40 的三项有界修后评分；源码、Demo、文档的 detector 结果均为有效 `[]`、stderr 空、退出码 0，仅代表静态规则零命中。报告与浏览器证据见 `.impeccable/critique/wave2-lx-switch-2026-10-05/`，实现提交为 `1679d9c`。
 
-移动文档侧栏隐藏时的键盘顺序需在共享壳层波次复验；生产高影响开关的确认、授权审计和失败补偿由宿主依据真实业务契约确定；中文术语释义作为文档改进继续跟踪。`LxPasswordInput` 当前复核已记录在本文件顶部，之后先完成动态图标严格复核，再按计划进入 `LxDynamicForm`。这些交叉残项没有关闭前，不将组件计入统一严格矩阵关闭数。完成一波后继续下一波，组件实现/E2E 与项目计划/审计/Critique 证据分开提交并推送。
+移动文档侧栏隐藏时的键盘顺序需在共享壳层波次复验；生产高影响开关的确认、授权审计和失败补偿由宿主依据真实业务契约确定；中文术语释义作为文档改进继续跟踪。`LxPasswordInput` 当前复核已记录在本文件顶部，动态图标严格复核已完成，当前进入 `LxDynamicForm`。这些交叉残项没有关闭前，不将组件计入统一严格矩阵关闭数。完成一波后继续下一波，组件实现/E2E 与项目计划/审计/Critique 证据分开提交并推送。
 
 ## 2026-10-05 Wave 2 / LxCheckbox 与 LxRadio 复验
 

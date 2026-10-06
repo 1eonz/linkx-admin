@@ -1,5 +1,16 @@
 # LinkX 项目交接记录
 
+## [2026-10-06] Wave 3 / LxIcon 修后复验与 Wave 4 交接
+
+- **目标**：完成 LxIcon 修后独立 A/B、正式 detector/浏览器证据、代码复审及下一波 DynamicForm 任务拆解。
+- **实现范围**：`LxIcon` 未知运行时名称回退与可访问标签、侧栏图标解析及缺省回退、设置入口有效图标键、Upload 状态图标名称类型、中文目录搜索/键盘/主题/空态与业务节点样例；Vue3 侧为该组件的单测和文档 E2E，没有迁移业务页面或修改接口。
+- **验证**：单测 7/7、图标 E2E 4/4；Vue3 `vue-tsc --noEmit`、目标 ESLint/Prettier、lx-ui `pnpm typecheck`、`pnpm build`（196 modules）、`pnpm build:docs` 和 `git diff --check` 通过。文档构建保留既有大 chunk 警告。
+- **代码复审**：独立 Luna max 批准，无可复现 P0–P2。非阻断 P3：E2E 建议比较 96 个 `data-icon-name` 的去重集合；静态 AST 核对已确认当前完整无重无漏。真实读屏器与真实权限菜单畸形图标数据仍待宿主 Mock/辅助技术覆盖。
+- **Impeccable**：独立 A 修后 37/40（修前 33/40）；sticky 遮挡、默认展开过多、缺少权限组合样例三项已解决。B 两个静态目标均为有效 JSON `[]`、空 stderr、退出码 0；五个新 context 的 overlay 均成功。CJK 行长规则、Shiki、code-copy、导航和文档壳层命中逐条归因，不是图标控件缺陷。浅色桌面有一条无 URL、无 HTTP 404 对应事件的 console 404，未归因。综合报告、快照、trend 和原始证据见 `.impeccable/critique/wave3-lxicon-2026-10-06/`。
+- **流程记录**：第一份修后 B 因执行上下文意外看到 A 报告片段而不纳入正式结果；其过程材料与说明位于 `agent-assessment-b-postfix/`。正式 B 由全新隔离 agent 独立重跑，未读取 A 或旧 B 材料。
+- **实现提交**：后续记录提交号。项目计划、地图、审计、代码复审、Impeccable 报告和交接使用单独 `docs(project)` 提交；两笔只推送本波白名单文件。
+- **下一波**：进入 `LxDynamicForm`。只读复核报告 `.impeccable/critique/wave4-dynamicform-agent-audit/followup-review.md` 指出无可确认 P0。P1：每个 schema type 的独立 renderer 文件、真实宿主 password 校验错误与 ARIA、remote-select 乱序/取消与重试。P2：上传失败/重试/取消/移除值映射、`daterange` 往返、320/375/768px 和 320/520/760/768px 容器断点、受控 `value` 回灌。业务网络和上传契约只在确认宿主 API 后接入；lx-ui 不引入请求层。
+
 ## [2026-10-05] Wave 2 / LxSwitch 交付与复验
 
 - **目标**：对照表单控件标本 07 完成 LxSwitch 组件、Demo、中文 API 和行为/视觉复核。
@@ -1865,3 +1876,27 @@
 - **未关闭事项**：宿主 `LxForm/LxFormItem` 校验失败集成示例移入 `LxForm/LxDynamicForm` 波次；移动 Props 表扫描成本及共享 VitePress 移动目录 32px 行高作为 P3 继续跟踪。PasswordInput 本次完成修后验收，但这些跨组件/文档待办未完成前，不据此宣称 52 项严格矩阵已关闭。
 - **提交范围**：组件、Demo、中文 API 文档、Vue3 单测/E2E 已提交为 `45a6b6f`（`fix(lx-ui): refine password input documentation flow`）；项目计划、地图、交接、迁移台账、组件审计、代码复核、Impeccable 报告/证据和 snapshot 随本波 `docs(project)` 提交。
 - **下一步**：按用户确定的顺序先严格复核动态图标，再实现/完善 `LxDynamicForm`，其中加入真实宿主校验失败示例；随后继续基础组件与 Vue3 Element Plus 替换计划。业务 API 调用继续使用 `.then().catch().finally()`，文档与新增注释保持中文。
+
+## [2026-10-06] Wave 3 / LxIcon 严格复核与交接
+
+- **目标**：完成动态图标当前实现和可视目录的正式独立 A/B 复核，吸收有效设计意见，保留 detector 原始结果、浏览器覆盖、代码复审与波次交接。
+- **改动文件**：`linkx-fe/src/components/LxIcon/index.vue`、`linkx-fe/src/components/LxSidebar/LxSidebarFooter.vue`、`LxSidebarGroup.vue`、`LxSidebarItem.vue`、`linkx-fe/src/components/LxUpload/index.vue`、`linkx-fe/docs/components/lxicons.md`、`other-admin/admin-vue3/tests/unit/lx-icon.test.ts`、`tests/e2e/lx-icon-docs.spec.ts`；另同步项目计划、项目地图、迁移 Backlog、波次拆分、组件审计、lx-ui Roadmap/Delivery Check、代码复审台账和本交接。
+- **完成内容**：`LxIcon.name` 收窄到 `LxIconName`；未知运行时名称回退问号图形并提供访问名称；侧栏菜单在数据边界 resolve 图标名并回退；设置入口改为真实图标键；上传状态图标使用具体名称类型。图标页增加中文语义检索、普通文档流搜索、清除并回焦、P1 计数说明、常规暗色令牌、11px 英文键与强对比空态。
+- **验证**：图标单测当前复跑 7/7；文档 Playwright 当前配置 2/2（单 Chromium 项目，含桌面与 320px 窄屏交互路径，375px 由独立浏览器评估覆盖）；Vue3 `vue-tsc --noEmit`、目标 ESLint/Prettier、lx-ui `pnpm typecheck`、`pnpm build`（196 modules）、`pnpm build:docs` 均通过。VitePress 有既有大 chunk 警告。
+- **代码审核**：独立 Luna max 只读批准，未发现可复现 P0–P2。保留两项测试风险：屏幕阅读器实际播报尚未验证；真实权限菜单异常图标数据尚未进入回归。
+- **Impeccable Assessment A**：独立评估 32/40（Good），这是修前基线，0 项 P0/P1；建议包括长目录检索可恢复性、英文键 10px、P1 计数口径和空态文字对比。窄屏最终有效批次在重新加载页面后确认 VitePress 侧栏关闭，浅色/HUD 均无根级横向溢出；早前 resize 状态污染与失败主题开关采集均已排除。
+- **Impeccable Assessment B**：六个目标的原始 detector stdout 均为 JSON `[]`，stderr 0 字节、退出码 0；只表示静态规则零命中。9 个浏览器视图均实际注入并运行 detector，截图确认黄色标记显示。真实问题为图标英文键字号与浅色空态对比度；其他命中分别归于 VitePress 壳层、设计 token 提示或 overlay 自身标签。375px `615px` 根宽是在 overlay 激活后测得，不作为原页面溢出证据。通用 404 console 没有资源 URL，未归因。临时 8400 服务已停止，用户的 4174 服务 PID 前后均为 44124。
+- **修后复验（早期记录，已由下方正式补充交接校正）**：早期 E2E 汇总曾写为“两项目 2/2”，与当前 Playwright 配置不符；当前配置实际为单 Chromium 项目，最新实跑 2/2。桌面/移动视口与主题结论以独立 A/B 浏览器证据及下方正式补充交接为准。
+- **未完成/风险**：本波不增加 UI-10 52 项矩阵关闭计数；整库 UI-11 尚未完成。真实读屏器、生产权限菜单异常数据和真实后端不在本次浏览器验收范围。浏览器存在一条无 URL 的资源 404，当前无法归因。
+- **本波提交范围**：实现、中文组件文档、Vue3 单测/E2E 已单独提交为 `d4972fd fix(lx-ui): harden icon fallbacks and docs search`；计划/地图/迁移台账/交接/审计/代码复审和 Impeccable 报告、截图、快照按 `docs(project)` 第二笔提交。仅暂存本波白名单；保留 `.pnpm-store` 镜像、`0`、`test-results`、PasswordInput 评审、其他组件评审与运行时文件。
+- **下一步**：自动开始 `LxDynamicForm` 波次，按 `PROJECT-FOLLOWUP-BREAKDOWN.md` 执行 schema 字段组件拆分、单/多图上传列表、容器自适应 1/2/3 列、受控 `value`/`change(nextValue)`、远程状态与取消竞态，并纳入密码字段宿主校验失败和 ARIA 示例。Vue3 业务 API 继续使用 `.then().catch().finally()`；文档与注释用中文；完成后再次代码复审、Impeccable、分别提交并推送。
+
+## [2026-10-06] Wave 3 / LxIcon 正式复核补充交接
+
+- 本节修正上方同日历史记录中的最终复核数据；旧记录保留为过程记录，提交及后续引用以本节为准。
+- **最终实现与验证**：图标单测 7/7；文档 Playwright 当前配置 2/2，实际为单 Chromium 项目，覆盖桌面流程和 320px 窄屏路径；375px/320px 多状态视觉覆盖由独立 Assessment A/B 浏览器证据承担。Vue3/lx-ui 类型检查、目标 ESLint/Prettier、196 模块构建、文档构建与 `git diff --check` 通过。
+- **代码复审与 Impeccable**：独立代码复审批准，无可复现 P0–P2；名称集合断言保留 P3。修后 Assessment A 37/40，修前基线 33/40；正式隔离 B 的组件和文档扫描均是 JSON `[]`、stderr 空、退出码 0，五个浏览器 context 的 overlay 均成功。规则命中归属于 CJK 行长提示、VitePress/Shiki 壳层或 code-copy 控件，没有命中 LxIcon 控件。无 URL console 404 未归因。正式综合报告为 `.impeccable/critique/wave3-lxicon-2026-10-06/final-report.md`；正式 snapshot 为 `.impeccable/critique/2026-10-06T02-52-50Z__linkx-fe-docs-components-lxicons-md.md`，目标趋势两次均为 37/40。
+- **提交与后续**：实现提交为 `d4972fd fix(lx-ui): harden icon fallbacks and docs search`；计划、交接及审查证据随本次 `docs(project)` 提交推送。该波完成归档后自动进入 DynamicForm 波次。
+- **未关闭**：展开的 P1/P2 分组仍分别含 26/29 项，作为 P2 跟踪；E2E 名称集合核对作为 P3 跟踪。真实屏幕阅读器、生产权限菜单畸形数据、Firefox/Safari 和实体触屏未覆盖，且浅色默认页一条 console 404 未归因；因此不增加 52 项严格矩阵关闭数。
+- **评估记录边界**：一份较早修后 B 运行已从综合结论排除。现存报告不能唯一证明哪一文件对应交叉风险；`agent-assessment-b-postfix/assessment-b.md` 已标为历史分报告，正式 B 仅指向 `agent-assessment-b-isolated-final/assessment-b.md`。
+- **下一步**：自动进入 DynamicForm 波次，按后续拆分完成 renderer 独立文件、密码宿主校验/ARIA、远程 Mock 取消和乱序、上传状态映射、`daterange` 往返、自适应列数及父级受控值回灌。生产接口和上传值契约需按真实宿主来源确认。API 请求保持 `.then().catch().finally()`；每步同步中文计划、交接和审查记录，并分两笔 Conventional Commit 推送。

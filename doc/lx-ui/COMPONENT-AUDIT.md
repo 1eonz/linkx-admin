@@ -1,5 +1,9 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-06 Wave 3 / LxIcon 修后复核
+
+`LxIcon` 修后独立 Assessment A/B、浏览器 overlay 和代码复审均已完成。A 修后 37/40（修前基线 33/40）；B 对组件与文档各扫描一次，均为有效 JSON `[]`、stderr 0 字节、退出码 0，并在五个新浏览器 context 成功注入 overlay。命中已逐项归因到 CJK 字符宽度误报、Shiki/VitePress 文档壳层或 code-copy/导航规则误报，没有落在图标控件节点。单测 7/7、文档 E2E 当前配置复跑 2/2（单 Chromium 项目，独立浏览器评估覆盖 375px）。展开 P1/P2 分组仍需浏览 26/29 项，保留 P2；代码复审建议 E2E 直接比较图标名称集合，保留 P3，因此不增加 52 项严格矩阵关闭数。真实读屏器、真实权限菜单畸形数据和无 URL console 404 仍未覆盖/归因。综合报告为 `.impeccable/critique/wave3-lxicon-2026-10-06/final-report.md`，snapshot 为 `.impeccable/critique/2026-10-06T02-52-50Z__linkx-fe-docs-components-lxicons-md.md`。
+
 ## 2026-10-06 LxPasswordInput 严格复核进度
 
 当前版独立 Assessment A 为 32/40，Assessment B 完成源码/Demo/文档三项有效 detector 与浏览器 overlay；三个 JSON 均为 `[]`、stderr 空、退出码 0。11 个 overlay 目标归因为 HUD 深色主题提示重复节点及 VitePress 文档表格/壳层，不是密码输入控件缺陷。修复后的移动锚点、暗色 Demo 和 44px 设置标签均经浏览器与 E2E 验证，独立代码复审批准。正式证据见 `.impeccable/critique/wave1-lxpasswordinput-2026-10-05/final-recheck-2026-10-06/`。仍需在 Form/DynamicForm 波次补真实宿主表单校验失败集成示例，严格矩阵行暂不关闭。
@@ -8,7 +12,7 @@
 
 `LxSwitch` 已完成组件实现、Demo、中文 API、行为回归及独立代码复核。单测 14/14、文档 Playwright 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。独立代码复核批准，未发现可复现的 P0–P2 代码问题。Impeccable 双路评审为 32/40；这是以 29/40 为基线的有界复评，仅更新三项启发式，不是全量重新评分。组件、Demo、中文文档 detector 都是有效 `[]`、stderr 空、退出码 0，仅代表静态规则零命中。实现提交为 `1679d9c`，综合报告和浏览器证据见 `.impeccable/critique/wave2-lx-switch-2026-10-05/`。
 
-剩余事项分属共享文档壳层与宿主业务：移动侧栏关闭时的键盘顺序列入后续壳层复验；生产高影响操作的确认、审计和失败补偿须按真实宿主/API 契约验收；专业术语释义列为中文文档改进。它们不应由 LxSwitch 通用组件臆造。本次完成 LxSwitch 组件级复核，但以上交叉事项未关闭前不增加 52 项统一严格矩阵的关闭计数。下一基础控件子项为 `LxPasswordInput`，其后继续动态图标，再进入 `LxDynamicForm`。
+剩余事项分属共享文档壳层与宿主业务：移动侧栏关闭时的键盘顺序列入后续壳层复验；生产高影响操作的确认、审计和失败补偿须按真实宿主/API 契约验收；专业术语释义列为中文文档改进。它们不应由 LxSwitch 通用组件臆造。本次完成 LxSwitch 组件级复核，但以上交叉事项未关闭前不增加 52 项统一严格矩阵的关闭计数。其后续基础控件及动态图标子项已处理；当前下一入口为 `LxDynamicForm`。
 
 ## 2026-10-05 Wave 2 / Checkbox 与 Radio 复验状态
 
@@ -120,7 +124,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxFormErrorBanner`  | `DESIGN-SPEC.md` + 表单错误态规范                 | Wave 5 实现/文档证据完成；正式 Critique 待收口（图标、文案、语义色及窄屏）                                             |
 | `LxFormItem`         | `design/表单控件八件套/`                          | UI-13 本波；错误/必填 ARIA 与样式待正式 Critique                                                                       |
 | `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                                 |
-| `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | 部分证据；27/40 快照有未关闭建议                                                                                       |
+| `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | A/B 与代码复审通过；真实读屏及权限菜单数据未覆盖，暂不计入严格矩阵                                                     |
 | `LxInput`            | `design/表单控件八件套/`                          | 待严格复核；32px、边界、清空、错误/禁用/焦点                                                                           |
 | `LxInputNumber`      | `design/表单控件八件套/`                          | 待严格复核；32px、步进按钮、边界与键盘                                                                                 |
 | `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 待严格复核；数值、语义色、趋势、进度和窄屏                                                                             |

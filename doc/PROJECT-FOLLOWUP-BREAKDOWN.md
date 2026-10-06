@@ -9,7 +9,8 @@
 - `LxPasswordInput` 已完成当前实现、行为回归、正式 A/B、overlay 归因和独立代码复审。A 为 32/40；单测 10/10、文档 E2E 9/9、类型/构建/目标 ESLint/Prettier 通过。修复了 320px 目录锚点、文档暗色表面和 44px 移动工具标签。
 - 三个 detector 均为有效 JSON `[]`、stderr 空、退出码 0；浏览器 overlay 11 个目标均归为 HUD 主题提示或文档壳层目标，不计为密码控件缺陷。该证据不关闭全库 52 项严格矩阵。
 - 尚有一项 P2 集成文档建议：用真实 `LxForm/LxFormItem` 展示密码字段校验错误、文案和 ARIA 关联；它由 Form/DynamicForm 宿主组合负责，禁止在独立 PasswordInput Demo 伪造。另将移动 Props 表和 VitePress 页内目录触控高度列入共用文档壳层体验任务。
-- 下一入口固定为动态图标严格复核，然后进入 `LxDynamicForm`；其波次同时验收密码字段宿主校验集成示例。各波仍按 `fix(lx-ui)` 实现/E2E 与 `docs(project)` 计划/交接/审计/Critique 两笔提交并推送。
+- 动态图标已完成修后独立 A/B、浏览器复验、独立代码复审和交接。A 修前基线 33/40、修后 37/40；B 的组件和文档 detector 均为有效 JSON `[]`、空 stderr、退出码 0，并有五个成功 overlay 浏览器视图。A 留下展开后 P1/P2 长分组 26/29 项的 P2；代码复审留下一项名称集合断言 P3；完整边界见 Wave 3 台账与正式 snapshot `.impeccable/critique/2026-10-06T02-52-50Z__linkx-fe-docs-components-lxicons-md.md`。较早一次修后 B 已排除，正式结果来自全新隔离 agent；无法从现存材料唯一定位交叉风险所对应的旧文件，候选分报告均不得代替正式报告。
+- 下一入口为 `LxDynamicForm`。先按 schema `type` 拆分独立字段文件，包括 `password`、`remote-select` 和 `daterange`；字段只组合公开 `Lx*` 基础组件。补真实 `LxForm/LxFormItem` 密码校验错误和 ARIA、宿主可取消的远程查询乱序/失败重试、单图/多图上传失败恢复和值映射、`daterange` 回显/更新/清空、真实容器 1/2/3 列断点、父级受控值回灌。详细审计见 `.impeccable/critique/wave4-dynamicform-agent-audit/followup-review.md`；真实业务接口、上传字段和 AbortSignal 适配必须按宿主契约确认。完成独立代码复审、Impeccable A/B 与修后复验后，按 `fix(lx-ui)` 和 `docs(project)` 两笔提交并推送，再自动进入剩余组件。
 
 ## 一、当前事实与完成口径
 

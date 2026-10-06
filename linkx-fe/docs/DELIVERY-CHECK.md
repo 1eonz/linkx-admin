@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-06 LxIcon 修后交付复验
+
+- 当前代码复审批准，未发现可复现 P0–P2。未知图标运行时回退、侧栏图标解析/回退、设置入口键与 Upload 名称类型已复核；真实读屏器和权限菜单畸形数据未覆盖。另有 E2E 名称集合比较的 P3 建议。
+- 组件单测 7/7、文档 E2E 当前复跑 2/2（单 Chromium 项目，覆盖桌面与 320px 窄屏交互路径；375px 行为由独立浏览器评估覆盖）；覆盖 96 个名称、语义搜索、清除与焦点恢复、明暗/HUD 空态对比度、键盘、复制和减少动效。Vue3 类型检查、测试文件 ESLint、目标 Prettier、196 模块构建、文档构建均通过；lx-ui 无独立 ESLint 配置。
+- Impeccable 修后 Assessment A 为 37/40（修前 33/40）；B 两个静态目标均为有效 JSON `[]`、空 stderr、退出码 0，并在五个新浏览器 context 成功运行 overlay。页面规则命中归为 CJK 行长误报、Shiki/VitePress 文档壳层或导航/code-copy 规则误报，没有命中 LxIcon 控件。`[]` 仅表示静态零命中；浅色默认页一条无 URL console 404 未归因。综合报告及正式 snapshot：`.impeccable/critique/wave3-lxicon-2026-10-06/final-report.md`、`.impeccable/critique/2026-10-06T02-52-50Z__linkx-fe-docs-components-lxicons-md.md`。
+- 展开 P1/P2 长分组后仍有 26/29 项，作为 P2 继续跟踪；本项不关闭 UI-10 的 52 项全库矩阵或 UI-11 整库评审。下一组件为 `LxDynamicForm`，Vue3 全量替换继续冻结。
+
 ## 2026-10-05 LxSwitch 交付复验
 
 - LxSwitch 组件、Demo、中文 API、状态/键盘/主题/窄屏回归和独立代码复核已完成。单测 14/14、文档 E2E 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、生产构建（196 modules）和文档构建通过。VitePress 保留既有大包提示。

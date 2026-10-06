@@ -1,5 +1,15 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-06 Wave 3 / LxIcon 严格复核与修后收口
+
+- **完成内容**：未知运行时图标安全回退到有可访问错误名称的问号图标；侧栏菜单图标在数据边界解析并回退；设置入口使用有效图标键；上传状态图标使用 `LxIconName`。目录加入中文语义检索、清除后焦点恢复、别名计数说明、窄屏触控、主题映射和清晰空态。搜索栏采用普通文档流，避免滚动遮挡卡片。
+- **验证**：`tests/unit/lx-icon.test.ts` 7/7；图标文档 E2E 当前配置 2/2（单 Chromium 项目，含桌面与 320px 窄屏交互检查；375px 行为另有独立浏览器评估证据）。Vue3 `vue-tsc --noEmit`、目标 ESLint/Prettier、lx-ui `pnpm typecheck`、`pnpm build`（196 modules）、`pnpm build:docs` 通过。文档构建保留既有大 chunk 警告；lx-ui 没有独立 ESLint 配置，不把宿主忽略库路径记为库 ESLint 通过。`git diff --check` 通过。
+- **代码复审**：独立 Luna max 只读复审批准，未发现可复现 P0–P2。P3 建议是 E2E 除 96 张卡片总数外，进一步比较 `data-icon-name` 去重集合；静态 AST 复核已确认当前分组与注册名称无重复、无遗漏。真实读屏器播报和真实权限菜单中的畸形图标数据仍未覆盖。
+- **Impeccable 修后复验**：独立 Assessment A 重评分 37/40（Excellent），修前基线为 33/40；搜索栏遮挡、默认展示过多和缺少业务组合样例三项原问题均已复验解决。独立 Assessment B 扫描组件与文档，均为有效 JSON `[]`、stderr 为空、退出码 0；这只表示静态规则零命中。五个新浏览器 context 均成功注入 overlay，所有规则命中已逐项归因为 CJK 行长规则误报、Shiki/VitePress 文档壳层或导航/code-copy 误报，没有命中 LxIcon 控件节点。综合报告为 `.impeccable/critique/wave3-lxicon-2026-10-06/final-report.md`；正式 snapshot 为 `.impeccable/critique/2026-10-06T02-52-50Z__linkx-fe-docs-components-lxicons-md.md`，含最终报告来源说明，目标首次趋势为 37/40。原始扫描、截图及服务记录见 `.impeccable/critique/wave3-lxicon-2026-10-06/`。
+- **未关闭项与边界**：展开 P1/P2 长分组后仍有 26/29 个图标，保留为 P2；代码复审提出的名称集合断言保留为 P3。浅色默认页面有一条无 URL 且无匹配 HTTP 404 的 console 事件，未归因。真实读屏器、真实权限菜单数据、Firefox/Safari 和触屏设备未覆盖。本波不增加 UI-10 52 项严格矩阵关闭数，也不关闭 UI-11 整库门禁。
+- **实现提交**：`d4972fd fix(lx-ui): harden icon fallbacks and docs search`。
+- **下一步**：自动进入 `LxDynamicForm`，按 schema type 拆分字段渲染器；补真实 `LxForm/LxFormItem` 密码校验与 ARIA、宿主远程查询取消/乱序、单图/多图上传状态映射、`daterange` 往返、自适应容器断点和受控值回灌。Vue3 Element Plus 替换仍等待 lx-ui 全库门禁。实现/E2E 与计划、审计、正式评审证据继续分别使用 `fix(lx-ui)`、`docs(project)` Conventional Commit 并推送。
+
 ## 2026-10-06 Wave 1 / LxPasswordInput 修后复核
 
 - **完成内容**：修复 320px 页面内“交互示例”锚点被移动目录覆盖；暗色 VitePress 下 Demo 和 Element Plus 输入面映射站点暗色令牌；窄屏主工具栏及高级设置标签提升到 44px。补真实目录链接、明暗/HUD 和高级标签尺寸 E2E。

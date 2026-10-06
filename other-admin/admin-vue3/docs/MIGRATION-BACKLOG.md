@@ -1,11 +1,18 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-06 Wave 3 / LxIcon 组件侧交接
+
+- 本轮修改限于 lx-ui 图标运行时类型/回退、侧栏和上传图标调用点、中文图标文档及文档 E2E；没有迁移 Vue3 业务页、改 API/路由/权限键/后端协议，也没有删除 Vue3 Element Plus。
+- 单测 7/7、浏览器 E2E 当前配置复跑 2/2（单 Chromium 项目，覆盖桌面与 320px 窄屏交互；375px 由独立浏览器评估覆盖）；类型、Vue3 测试文件 ESLint、目标 Prettier、196 模块库构建和文档构建通过。文档搜索、主题、触控、键盘和减少动效均使用本地页面，无真实后端请求。
+- Impeccable A 修后 37/40（修前 33/40）；独立 B 的组件/文档 detector 均为 JSON `[]`、stderr 空、退出码 0，五个浏览器 overlay context 全部成功。清除回焦、搜索布局、权限组合样例和主题空态均有修后复验；`[]` 只表示静态规则零命中。长分组与无 URL console 404 分别保留 P2 和未归因观察。
+- 图标类型和演示可供后续宿主迁移复用，但本波未替换 Vue3 业务页图标、Element Plus 图标或权限数据，也不代表 UI-10/UI-11 全库门槛完成。下一入口为 `LxDynamicForm`，按独立 renderer、密码校验/ARIA、远程取消、上传映射、日期区间及自适应布局矩阵推进。
+
 ## 2026-10-06 Wave 1 / PasswordInput 组件侧交接
 
 - 本轮修改限于 lx-ui PasswordInput Demo、中文 API/文档样式和文档 E2E；没有迁移 Vue3 业务表单、修改 API/路由/权限/后端协议，也没有删除 Element Plus。
 - 组件单测 10/10、文档 Playwright 9/9；覆盖真实移动目录锚点、亮/暗/HUD、键盘显隐、离焦遮罩、清空、只读/禁用、44px 设置项和减少动效。Vue3 类型检查、定向 ESLint/Prettier、lx-ui 类型与文档构建通过。
 - 独立代码复审批准。Impeccable A 32/40；B 三个 detector 均为有效 `[]`、空 stderr、退出码 0，overlay 命中经核验属于 HUD 主题提示或 VitePress 文档壳层。报告与证据见 `.impeccable/critique/wave1-lxpasswordinput-2026-10-05/final-recheck-2026-10-06/`。
-- 后续在 `LxForm/LxDynamicForm` 组合验收时加入密码字段校验失败、错误文案和 ARIA 关联示例；真实登录/改密仍需后端联调。当前下一入口是动态图标严格复核，随后进行 DynamicForm，Element Plus 替换继续冻结。
+- 后续在 `LxForm/LxDynamicForm` 组合验收时加入密码字段校验失败、错误文案和 ARIA 关联示例；真实登录/改密仍需后端联调。动态图标严格复核已完成，当前下一入口是 `LxDynamicForm`，Element Plus 替换继续冻结。
 
 ## 2026-10-05 Wave 2 / LxSelect 组件侧验收
 
