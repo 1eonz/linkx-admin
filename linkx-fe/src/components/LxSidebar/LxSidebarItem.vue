@@ -6,6 +6,7 @@
 import { computed, inject } from 'vue'
 import type { LxMenuItem } from './types'
 import { LX_SIDEBAR_KEY } from './context'
+import { resolveLxIconName } from '../LxIcon/icons'
 import LxIcon from '../LxIcon/index.vue'
 
 const props = withDefaults(
@@ -24,6 +25,9 @@ const emit = defineEmits<{ select: [item: LxMenuItem] }>()
 
 const ctx = inject(LX_SIDEBAR_KEY)
 const isRail = computed(() => props.mode === 'rail')
+const iconName = computed(
+  () => resolveLxIconName(props.item.icon ?? '') ?? 'dashboard',
+)
 const badgeTypeColor = computed(() => {
   const map: Record<string, string> = {
     online: 'var(--lx-color-success)',
@@ -75,7 +79,7 @@ function onLeave() {
 
     <!-- 图标盒：expanded w-6（16px 图标）/ rail w-8（20px 图标） -->
     <span class="lx-sidebar-item__icon">
-      <LxIcon :name="item.icon || 'dashboard'" :size="isRail ? 20 : 16" />
+      <LxIcon :name="iconName" :size="isRail ? 20 : 16" />
       <!-- rail 态角标退化为圆点（_1: w-1.5 右上角） -->
       <span
         v-if="isRail && item.badge"

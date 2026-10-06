@@ -14,7 +14,7 @@ import {
 const props = withDefaults(
   defineProps<{
     /** 图标名（支持标准键和兼容别名） */
-    name: LxIconName | string
+    name: LxIconName
     /** 尺寸 px，默认 18 */
     size?: number
     /** 为图标提供可访问名称；传入后不再作为装饰图标隐藏 */
@@ -28,14 +28,27 @@ const props = withDefaults(
 defineOptions({ inheritAttrs: false, name: 'LxIcon' })
 
 const attrs = useAttrs()
+const safeName = computed(() =>
+  typeof props.name === 'string' ? props.name : '',
+)
+const resolvedName = computed(() => resolveLxIconName(props.name))
 const paths = computed<readonly string[]>(
-  () => getLxIconPaths(props.name) ?? [],
+  () => getLxIconPaths(resolvedName.value ?? 'circle-question') ?? [],
 )
 const motionNames = new Set<string>(LX_ICON_MOTION_NAMES)
 const motionName = computed(() =>
-  motionNames.has(props.name) ? resolveLxIconName(props.name) : undefined,
+  motionNames.has(props.name) ? resolvedName.value : undefined,
 )
 const isSpinning = computed(() => props.spin || props.name === 'loading')
+const accessibleLabel = computed(
+  () =>
+    props.label ||
+    (resolvedName.value
+      ? ''
+      : safeName.value
+        ? `未知图标：${safeName.value}`
+        : '未知图标'),
+)
 </script>
 
 <template>
@@ -50,14 +63,15 @@ const isSpinning = computed(() => props.spin || props.name === 'loading')
     stroke-linecap="round"
     stroke-linejoin="round"
     :class="{ 'is-spinning': isSpinning }"
-    :data-icon-name="name"
+    :data-icon-name="safeName"
     :data-lx-motion="motionName"
-    :aria-hidden="label ? undefined : 'true'"
-    :aria-label="label || undefined"
-    :role="label ? 'img' : undefined"
+    :aria-hidden="accessibleLabel ? undefined : 'true'"
+    :aria-label="accessibleLabel || undefined"
+    :role="accessibleLabel ? 'img' : undefined"
+    :data-icon-invalid="resolvedName ? undefined : 'true'"
     v-bind="attrs"
   >
-    <title v-if="label">{{ label }}</title>
+    <title v-if="accessibleLabel">{{ accessibleLabel }}</title>
     <path v-for="(d, i) in paths" :key="i" :d="d" />
   </svg>
 </template>
@@ -211,10 +225,10 @@ const isSpinning = computed(() => props.spin || props.name === 'loading')
   --lx-icon-hover-transform: translateX(2px);
 }
 
-.lx-icon[data-lx-motion]:is(:hover, :focus-visible),
+.lx-icon[data-lx-motion]:not(.is-spinning):is(:hover, :focus-visible),
 :global(
   :is(button, a, [role='button']):is(:hover, :focus-visible, :active)
-    .lx-icon[data-lx-motion]
+    .lx-icon[data-lx-motion]:not(.is-spinning)
 ) {
   animation: var(--lx-icon-hover-animation, none);
   filter: var(--lx-icon-hover-filter, none);

@@ -6,6 +6,7 @@
 import { computed, inject, ref } from 'vue'
 import type { LxMenuItem } from './types'
 import { LX_SIDEBAR_KEY } from './context'
+import { resolveLxIconName } from '../LxIcon/icons'
 import LxIcon from '../LxIcon/index.vue'
 
 const props = withDefaults(
@@ -25,6 +26,9 @@ const emit = defineEmits<{
 
 const ctx = inject(LX_SIDEBAR_KEY)
 const isRail = computed(() => props.mode === 'rail')
+const iconName = computed(
+  () => resolveLxIconName(props.item.icon ?? '') ?? 'cube',
+)
 const submenuId = computed(
   () => 'lx-sidebar-submenu-' + encodeURIComponent(props.item.key),
 )
@@ -109,7 +113,7 @@ function onLeave() {
     >
       <span class="lx-sidebar-group__bar" />
       <span class="lx-sidebar-group__icon">
-        <LxIcon :name="item.icon || 'cube'" :size="isRail ? 20 : 16" />
+        <LxIcon :name="iconName" :size="isRail ? 20 : 16" />
         <span v-if="isRail && badgeCount" class="lx-sidebar-group__dot" />
       </span>
       <template v-if="!isRail">

@@ -376,8 +376,9 @@ const isAliasName = (name: string): name is LxIconAliasName =>
   Object.prototype.hasOwnProperty.call(LX_ICON_ALIASES, name)
 
 export const resolveLxIconName = (
-  name: string,
+  name: unknown,
 ): LxIconSourceName | undefined => {
+  if (typeof name !== 'string') return undefined
   if (isSourceName(name)) return name
   if (isAliasName(name)) return LX_ICON_ALIASES[name]
   return undefined

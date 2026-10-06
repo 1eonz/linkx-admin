@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import {
   getLxIconPaths,
   LxIcon,
+  LxSidebar,
   LX_ICON_ALIASES,
   LX_ICON_29_NAMES,
   LX_ICON_NAMES,
@@ -10,6 +11,8 @@ import {
   LX_ICON_P1_NAMES,
   LX_ICONS,
   resolveLxIconName,
+  type LxIconName,
+  type LxMenuItem,
 } from 'lx-ui';
 import { describe, expect, it } from 'vitest';
 
@@ -29,7 +32,7 @@ describe('LxIcon reference names', () => {
     expect(getLxIconPaths(alias)).toEqual(getLxIconPaths(canonical));
   });
 
-  it('renders aliases and leaves unknown names empty', () => {
+  it('renders aliases and exposes an accessible fallback for unknown runtime names', () => {
     const alias = mount(LxIcon, { props: { name: 'eye-on' } });
     expect(alias.attributes('data-icon-name')).toBe('eye-on');
     expect(alias.attributes('data-lx-motion')).toBe('eye');
@@ -38,12 +41,44 @@ describe('LxIcon reference names', () => {
     const dateAlias = mount(LxIcon, { props: { name: 'date' } });
     expect(dateAlias.attributes('data-lx-motion')).toBe('calendar');
 
-    const unknown = mount(LxIcon, { props: { name: 'unknown-icon' } });
-    expect(unknown.findAll('path')).toHaveLength(0);
+    // 通过类型边界模拟外部数据进入组件后的运行时脏值。
+    const unknownName = 'unknown-icon' as unknown as LxIconName;
+    const unknown = mount(LxIcon, { props: { name: unknownName } });
+    expect(unknown.attributes('data-icon-invalid')).toBe('true');
+    expect(unknown.attributes('aria-label')).toBe('未知图标：unknown-icon');
+    expect(unknown.attributes('role')).toBe('img');
+    expect(unknown.find('title').text()).toBe('未知图标：unknown-icon');
+    expect(unknown.findAll('path').map((path) => path.attributes('d'))).toEqual(getLxIconPaths('circle-question'));
+
+    const malformedName = JSON.parse('{"toString":1}') as unknown as LxIconName;
+    const malformed = mount(LxIcon, { props: { name: malformedName } });
+    expect(malformed.attributes('data-icon-invalid')).toBe('true');
+    expect(malformed.attributes('data-icon-name')).toBe('');
+    expect(malformed.attributes('aria-label')).toBe('未知图标');
+    expect(malformed.findAll('path').map((path) => path.attributes('d'))).toEqual(getLxIconPaths('circle-question'));
 
     alias.unmount();
     dateAlias.unmount();
     unknown.unmount();
+    malformed.unmount();
+  });
+
+  it('uses known fallback icons for unknown permission-menu icon names', () => {
+    // 模拟权限接口返回的 JSON 菜单中出现非字符串图标值。
+    const items = JSON.parse(
+      '[{"key":"malformed-item","title":"畸形菜单","icon":{"toString":1}},{"key":"malformed-group","title":"畸形分组","icon":{"toString":1},"children":[{"key":"child","title":"子菜单"}]}]',
+    ) as unknown as LxMenuItem[];
+    const sidebar = mount(LxSidebar, {
+      props: {
+        showFooter: false,
+        items,
+      },
+    });
+
+    expect(sidebar.findAll('.lx-sidebar-item .lx-icon')[0].attributes('data-icon-name')).toBe('dashboard');
+    expect(sidebar.findAll('.lx-sidebar-group__head .lx-icon')[0].attributes('data-icon-name')).toBe('cube');
+
+    sidebar.unmount();
   });
 
   it('marks each P0 icon for its reference motion', () => {
@@ -75,5 +110,13 @@ describe('LxIcon reference names', () => {
       expect(icon.attributes('data-lx-motion')).toBe(resolveLxIconName(name));
       icon.unmount();
     }
+  });
+
+  it('keeps the explicit spin state on motion-enabled icons', () => {
+    const spinning = mount(LxIcon, { props: { name: 'plus', spin: true } });
+
+    expect(spinning.classes()).toContain('is-spinning');
+
+    spinning.unmount();
   });
 });

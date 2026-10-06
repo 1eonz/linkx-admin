@@ -26,17 +26,17 @@ import Controlled from '../../src/components/LxSidebar/demo/controlled.vue';
 
 ### Props
 
-| 名称                     | 说明                                                                                           | 类型                   | 默认值               |
-| ------------------------ | ---------------------------------------------------------------------------------------------- | ---------------------- | -------------------- |
-| mode / v-model:mode      | 形态                                                                                           | `'rail' \| 'expanded'` | `expanded`           |
-| items                    | 菜单树（key/title/icon/children/badge/badgeType/disabled/meta）                                | `LxMenuItem[]`         | `[]`                 |
-| active-key               | 激活项 key（建议绑定 route.name）                                                              | `string`               | `''`                 |
-| title / subtitle         | 品牌标题 / 副标题                                                                              | `string`               | `警务业务协同平台`   |
-| mobile                   | 移动端模态导航抽屉（v-model:mobile）；打开后焦点进入抽屉，Tab 在抽屉内循环，关闭后返回触发控件 | `boolean`              | `false`              |
-| show-footer              | 底部状态区（SLA 仪表 + 节点徽章 + 切换按钮）                                                   | `boolean`              | `true`               |
-| sla-value                | SLA 仪表数值                                                                                   | `number`               | `99.9`               |
-| node-label / node-status | 节点徽章文案 / 状态                                                                            | `string` / `LxStatus`  | `NODE-01` / `online` |
-| latency-label            | expanded 底部专网状态条文案；为空时回退到 `node-label`                                         | `string`               | `''`                 |
+| 名称                     | 说明                                                                                                  | 类型                   | 默认值               |
+| ------------------------ | ----------------------------------------------------------------------------------------------------- | ---------------------- | -------------------- |
+| mode / v-model:mode      | 形态                                                                                                  | `'rail' \| 'expanded'` | `expanded`           |
+| items                    | 菜单树（key/title/icon/children/badge/badgeType/disabled/meta）；未知或非字符串图标安全回退为默认图标 | `LxMenuItem[]`         | `[]`                 |
+| active-key               | 激活项 key（建议绑定 route.name）                                                                     | `string`               | `''`                 |
+| title / subtitle         | 品牌标题 / 副标题                                                                                     | `string`               | `警务业务协同平台`   |
+| mobile                   | 移动端模态导航抽屉（v-model:mobile）；打开后焦点进入抽屉，Tab 在抽屉内循环，关闭后返回触发控件        | `boolean`              | `false`              |
+| show-footer              | 底部状态区（SLA 仪表 + 节点徽章 + 切换按钮）                                                          | `boolean`              | `true`               |
+| sla-value                | SLA 仪表数值                                                                                          | `number`               | `99.9`               |
+| node-label / node-status | 节点徽章文案 / 状态                                                                                   | `string` / `LxStatus`  | `NODE-01` / `online` |
+| latency-label            | expanded 底部专网状态条文案；为空时回退到 `node-label`                                                | `string`               | `''`                 |
 
 ### Events
 
