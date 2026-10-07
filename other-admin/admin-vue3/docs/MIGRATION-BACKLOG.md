@@ -1,18 +1,45 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-07 lx-ui Wave 4 组件门禁收口
+
+- DynamicForm/DatePicker/Upload 组件单测 **89/89**、三份文档 E2E **43/43**；最新 DatePicker/Upload 子集 **31/31**。新增短视口弹层关系、面板滚动和上传文件名可访问名称回归；Vue3/lx-ui 类型检查、目标 ESLint/Prettier、203 模块库构建和文档构建通过。证据对应组件库本身及本地 Mock，不表示 Vue3 业务页已采用。
+- Upload ref 类型边界、上传必填字段 ARIA 回归及 `LxFormItem` 同批次字段反馈移除/`clearValidate()` 的观察器风险均已修复；独立代码复审未发现 P0–P2。Assessment A 30/40；B 六项目标 detector 有效 `[]`、空 stderr、exit 0，浏览器 overlay 已完成归因。
+- 本波没有修改业务 API、路由、权限键或 Vue3 页面，没有删除 Vue3 宿主 `element-plus`，也没有真实上传服务端联调。后续仍按计划优先完成 TreeSelect/Cascader 与 `LxSelectPagination`，全库 lx-ui 门禁后再开展宿主组件替换。
+- lx-ui 文档 E2E 已从被其他项目占用的 4176 隔离到 4177；三组件文档 E2E 43/43 与 Switch 兼容用例 6/6 通过。当前仍是组件库和本地 Mock 证据，不代表 Vue3 业务页面已采用。
+- 组件与测试提交为 `a2ba943`。Impeccable snapshot 已保存；trend 查询仅有本目标首次 30/40 记录。代码复审指出的 fallback UID 回灌后公开 `abort()` 组合测试列入后续 Upload 复验。
+
+## 2026-10-06 DynamicForm / Upload 复审修复边界
+
+- 独立代码复审发现 `LxUpload` 跨实例回退 UID 冲突并已修复；新增两个组件实例接收相同无 UID 文件的单测。DatePicker/DynamicForm/Upload 单测 69/69、UID 修复后文档 Playwright 13/13、lx-ui 类型检查、203 模块构建、文档构建、目标 Prettier 和 Vue3 ESLint 通过。第二次独立代码复审批准，未发现可复现 P0–P2。
+- 此前 Impeccable A/B 文件冻结不一致，B 浏览器证据不完整，不能标记正式通过；统一冻结后的 A/B 待完成。
+- 本轮仍无 Vue3 业务页面采用 DynamicForm 的证据，也未迁移 Element Plus、改动 API/路由/权限键或触及真实上传协议。
+
+## 2026-10-06 DynamicForm 日期清空值契约补齐
+
+- `LxDatePicker` 基于 Element Plus 2.14.6，日期区间使用默认清空行为时发出 `null`；组件事件类型、DynamicForm 受控字段回写、中文文档与 Demo 已同步该值形状。
+- 该改动只校正 lx-ui 公共类型和文档 Mock 回归，没有 Vue3 业务页使用方，也没有替换 Element Plus 控件、API、路由或权限逻辑。
+- DatePicker/DynamicForm/Upload 定向单测 69/69、UID 修复后 DynamicForm/Upload 文档 Playwright 13/13 通过；测试覆盖日期区间实际清空、受控字段回写 `null` 和跨实例文件 UID 唯一性。实际命令与评审边界见 `doc/PROJECT-HANDOFF.md` 最新交接记录。
+
+## 2026-10-06 DynamicForm 组件库验收边界
+
+- 本轮完善 `linkx-fe` 的 DynamicForm/LxUpload 组件契约、中文说明和组件级回归；Vue3 项目目前没有 `LxDynamicForm` 业务页面使用方，因此本轮不登记宿主迁移完成。
+- 47 项定向单测、13 项 lx-ui 文档 E2E 与类型/构建检查通过；其中 1 项新增默认日期区间清空回归验证 `null` 事件载荷，详细交接见 `doc/PROJECT-HANDOFF.md` 和 `linkx-fe/docs/DELIVERY-CHECK.md`。
+- 本轮未替换业务 API、路由、权限标识或 Vue3 页面中的 Element Plus，也未删除宿主依赖。真实上传与远程查询仍由宿主提供 adapter，真实后端取消和权限联调单列验收。
+- DynamicForm/Upload 组件级完成后，计划继续 TreeSelect/Cascader 当前版本 Critique 和远程分页选择闭环；全库 UI-10/UI-11 门禁结束前不启动 Element Plus 全量替换。
+
 ## 2026-10-06 Wave 3 / LxIcon 组件侧交接
 
 - 本轮修改限于 lx-ui 图标运行时类型/回退、侧栏和上传图标调用点、中文图标文档及文档 E2E；没有迁移 Vue3 业务页、改 API/路由/权限键/后端协议，也没有删除 Vue3 Element Plus。
 - 单测 7/7、浏览器 E2E 当前配置复跑 2/2（单 Chromium 项目，覆盖桌面与 320px 窄屏交互；375px 由独立浏览器评估覆盖）；类型、Vue3 测试文件 ESLint、目标 Prettier、196 模块库构建和文档构建通过。文档搜索、主题、触控、键盘和减少动效均使用本地页面，无真实后端请求。
 - Impeccable A 修后 37/40（修前 33/40）；独立 B 的组件/文档 detector 均为 JSON `[]`、stderr 空、退出码 0，五个浏览器 overlay context 全部成功。清除回焦、搜索布局、权限组合样例和主题空态均有修后复验；`[]` 只表示静态规则零命中。长分组与无 URL console 404 分别保留 P2 和未归因观察。
-- 图标类型和演示可供后续宿主迁移复用，但本波未替换 Vue3 业务页图标、Element Plus 图标或权限数据，也不代表 UI-10/UI-11 全库门槛完成。下一入口为 `LxDynamicForm`，按独立 renderer、密码校验/ARIA、远程取消、上传映射、日期区间及自适应布局矩阵推进。
+- 图标类型和演示可供后续宿主迁移复用，但本波未替换 Vue3 业务页图标、Element Plus 图标或权限数据，也不代表 UI-10/UI-11 全库门槛完成。后续 DynamicForm 组件层状态见本文件顶部；不代表 Vue3 宿主使用方已迁移。
 
 ## 2026-10-06 Wave 1 / PasswordInput 组件侧交接
 
 - 本轮修改限于 lx-ui PasswordInput Demo、中文 API/文档样式和文档 E2E；没有迁移 Vue3 业务表单、修改 API/路由/权限/后端协议，也没有删除 Element Plus。
 - 组件单测 10/10、文档 Playwright 9/9；覆盖真实移动目录锚点、亮/暗/HUD、键盘显隐、离焦遮罩、清空、只读/禁用、44px 设置项和减少动效。Vue3 类型检查、定向 ESLint/Prettier、lx-ui 类型与文档构建通过。
 - 独立代码复审批准。Impeccable A 32/40；B 三个 detector 均为有效 `[]`、空 stderr、退出码 0，overlay 命中经核验属于 HUD 主题提示或 VitePress 文档壳层。报告与证据见 `.impeccable/critique/wave1-lxpasswordinput-2026-10-05/final-recheck-2026-10-06/`。
-- 后续在 `LxForm/LxDynamicForm` 组合验收时加入密码字段校验失败、错误文案和 ARIA 关联示例；真实登录/改密仍需后端联调。动态图标严格复核已完成，当前下一入口是 `LxDynamicForm`，Element Plus 替换继续冻结。
+- 密码字段校验失败、错误文案和 ARIA 关联已加入 DynamicForm 组件级样例与测试；真实登录/改密仍需后端联调。动态图标和 DynamicForm 组件层验收已推进，宿主 Element Plus 替换继续冻结。
 
 ## 2026-10-05 Wave 2 / LxSelect 组件侧验收
 

@@ -1,5 +1,56 @@
 # LinkX 项目交接记录
 
+## [2026-10-07] UI-13 / Wave 4 正式收口与下一波交接
+
+- **范围**：`LxDatePicker`、`LxDynamicForm`、`LxUpload` 当前实现、字段 renderer、中文 API/Demo、Vue3 定向单测和文档 E2E。未修改业务 API、路由、权限键、真实上传协议或 Vue3 页面，也未移除宿主 `element-plus`。
+- **行为补充**：短视口日期 E2E 现在检查触发器可见、弹层不相交并验证面板滚动；Upload 省略文件名保留完整 `title`，不改变窄屏省略设计。新增文档、交接备注和代码说明使用中文；宿主 API 请求写法继续使用 `.then().catch().finally()`。
+- **验证**：定向 Vitest **89/89**；三份文档 E2E 合并 **43/43**，最新 DatePicker/Upload 子集 **31/31**；Vue3/lx-ui 类型检查、目标 ESLint/Prettier、203 模块构建、VitePress 文档构建和差异检查通过。构建仅保留既有大 chunk 与 pnpm 配置提示。
+- **测试服务端口**：发现 4176 已被另一项目的 dumi 服务占用，首次 E2E 实际复用了错误站点；lx-ui Playwright 配置、DynamicForm 来源拦截和 Switch 测试已统一到 4177。Wave 4 三页 43/43 重跑通过，Switch 配置兼容用例 6/6；用户的 4174 预览和原有 4176 服务保持运行。
+- **代码审核**：独立复审未发现 P0–P2。P3 短视口断言已补并通过；fallback UID 回灌后再调用公开 `abort()` 的组合路径尚无直接测试，作为非阻断测试空缺交给后续 Upload 复验。真实后端、上传服务端 AbortSignal、读屏器和 Firefox/Safari 未覆盖。
+- **Impeccable**：A/B 使用独立 Agent。A 30/40（Good）；B 六个静态目标均为有效 `[]`/空 stderr/exit 0，10 个浏览器 context 的 overlay 证据已归因。`[]` 仅代表静态零命中；综合报告 `.impeccable/critique/wave4-dynamicform-2026-10-07/final-report.md`，snapshot `.impeccable/critique/2026-10-07T03-11-47Z__linkx-fe-src-components-lxdynamicform-index-vue.md`。Trend 查询仅有本目标首次 30/40 记录，暂无历史趋势。
+- **提交**：组件与测试已提交 `a2ba943 fix(lx-ui): finalize DynamicForm date picker and upload flows`；项目计划、交接和审查证据由配套 `docs(project)` 提交归档。
+- **交接给下一波**：先复验当前 TreeSelect/Cascader 的键盘、触控、错误焦点、主题和减少动效；再补 `LxSelectPagination` disabled 继承、迟到响应隔离、续页失败同页重试及禁用不发请求。后续 Upload 复验同时补 fallback UID 回灌后公开 `abort()` 的组合测试。完成对应 A/B、代码复审和文档后才推进 Vue3 Element Plus 替换。
+
+## [2026-10-06] UI-13 / LxUpload 跨实例 UID 复审修复与 Critique 重新冻结
+
+- **目标**：处理独立代码复审发现的回退文件 UID 跨组件实例冲突，并校正 DynamicForm/Upload 当前 Impeccable 证据状态。
+- **改动文件**：新增 `linkx-fe/src/components/LxUpload/uid.ts`，修改 `linkx-fe/src/components/LxUpload/index.vue` 与 `other-admin/admin-vue3/tests/unit/lx-upload.test.ts`；同步交付计划、后续拆分、项目地图、组件审计、lx-ui Roadmap/Delivery Check、Vue3 迁移台账和本交接记录。
+- **完成内容**：多个 LxUpload 实例共享模块级序列生成唯一回退 UID 前缀；原有来源 UID 和既有 UID 映射保持不变。双实例挂载相同无 UID 文件的行为测试通过。
+- **实际验证**：`pnpm exec vitest run tests/unit/lx-date-picker.test.ts tests/unit/lx-dynamic-form.test.ts tests/unit/lx-upload.test.ts` 为 **69/69**；`pnpm exec playwright test --config=playwright.lxui.config.ts tests/e2e/lx-dynamic-form-docs.spec.ts tests/e2e/lx-upload-docs.spec.ts --reporter=list` 为 **13/13**。lx-ui `pnpm run typecheck`、203 模块生产构建、VitePress 文档构建、目标 Prettier 和 Vue3 ESLint 通过；VitePress 保留大 chunk 警告。
+- **代码复审**：独立复审曾发现一个 P2 UID 重号风险；本次修复并补回归，第二次独立只读复审批准，未发现可复现 P0–P2。
+- **Impeccable 证据**：Assessment A 27/40 的截图采集冻结于 10:19；Assessment B 使用 10:05 的另一份 31 文件冻结，浏览器流程只完成部分场景，最终新标签尝试失败。A/B 源码版本不匹配，禁止合并为正式 Critique。原始报告、detector JSON/stderr/退出码、浏览器记录、失败信息及服务清理证据保存在 `.impeccable/critique/wave4-dynamicform-2026-10-06/`；detector `[]` 仅代表静态零命中。
+- **风险与未完成**：新的统一源码/文档冻结、隔离 A/B、移动浮层和触控尺寸复核、正式报告及 snapshot/trend 待完成。`LxForm` 设计图逐项对照、真实上传协议和服务端取消联调仍开放。
+- **下一步**：完成最终验证和新冻结 A/B 后，按组件/E2E 与计划/审查文档两笔白名单 Conventional Commit 分别提交并推送；随后执行 Wave 4 TreeSelect/Cascader 与 LxSelectPagination，先处理表单 disabled 继承及请求状态机 Vitest 缺口。
+
+## [2026-10-06] UI-13 / 日期区间默认清空值契约补齐
+
+- **目标**：修复 `LxDatePicker` 实际清空值与公开事件类型、DynamicForm 日期 renderer 类型不一致的问题，并留存受控回写证据。
+- **改动范围**：`linkx-fe/src/components/LxDatePicker/types.ts`、`LxDynamicForm/fields/LxDynamicFieldDateRange.vue`、DynamicForm Demo、DatePicker/DynamicForm 中文文档与 Vue3 单测/E2E；同步更新交付计划、项目地图、迁移台账、组件审计和 lx-ui 路线图/交付核查。
+- **完成内容**：根据 Element Plus 2.14.6 当前实现，默认日期区间清空事件发出 `null`；公开值类型和动态字段转发类型已包含 `null`。Demo 显示日期区间受控值，浏览器用例验证选择、清空后两个输入变空且字段回写为 `null`。
+- **实际验证**：DatePicker/DynamicForm 定向单测 **47/47**，DynamicForm/Upload 文档 Playwright **13/13**，其中浏览器用例真实选择并清空区间，断言两个输入框清空且模型显示 `null`。Vue3 `vue-tsc --noEmit`、lx-ui `vue-tsc --noEmit`、目标 ESLint、目标 Prettier、lx-ui 生产构建（202 modules）和 VitePress 文档构建通过；保留 VitePress 既有大 chunk 警告。`git diff --check`、代码复审及 Impeccable 仍待完成。
+- **未完成/风险**：旧 23 文件冻结不包含 Vue3 集成测试且早于本修复，不能作为正式 A/B 证据；真实宿主页面没有 DynamicForm 使用方，本轮不代表业务迁移或真实后端联调。
+- **下一步与提交范围**：完成新冻结后的隔离 Assessment A/B、合并报告和代码复审，再仅暂存本波组件/E2E 文件提交 `fix(lx-ui)`，另将计划、交接、审计和 Critique 证据提交 `docs(project)` 并推送；排除 `.pnpm-store/`、Wave 3 文件和其他无关改动。随后继续 TreeSelect/Cascader 当前版复验与远程分页选择闭环。
+
+## [2026-10-06] UI-13 / DynamicForm 与 Upload 组件验收
+
+- **目标**：完成 DynamicForm 分字段渲染、受控值与上传适配回归，并为后续组件严格对照和宿主替换保留可追溯证据。
+- **改动范围**：`linkx-fe/src/components/LxDynamicForm/`、`LxUpload/`、对应中文 API/Demo、Vue3 定向单测与文档 E2E；另更新项目地图、详细计划、迁移台账、组件审计和 lx-ui Roadmap/Delivery Check。没有替换 Vue3 业务组件，没有更改 API、路由、权限键或后端协议。
+- **完成内容**：按 schema `type` 加载独立字段 renderer；字段组合公开 `Lx*` 控件；受控 `value`/`change(nextValue)` 保持旧 `v-model`；覆盖密码、远程选择、日期范围及单/多文件上传。上传重试等待受控队列更新，迟到回调不覆盖取消结果；模型回灌保留文件 UID、URL、response 和 Error。
+- **实际验证**：DynamicForm/Upload 定向单测 46/46；文档 Playwright 13/13。lx-ui/Vue3 类型检查、目标 ESLint/Prettier、202 模块生产构建、VitePress 文档构建和差异检查通过。首次 E2E 与文档构建并行时出现 Windows `EBUSY`，该次失败作废；构建退出后独立重跑 13/13。文档构建仍有既有大 chunk 警告。
+- **代码与样式审查**：独立代码复审最终批准。正式 Impeccable A/B、建议处理、snapshot/trend 正在本轮单独完成；在最终结果入档前保持正式 Critique 未收口。
+- **未完成/阻塞**：不代表真实上传后端联调；`LxForm` 设计稿逐项核对、UI-10 52 项严格矩阵及 UI-11 整库 Critique 仍开放。Vue3 页面替换和宿主 Element Plus 移除继续等待全库门禁。
+- **风险与下一步**：外部上传 adapter、真实身份/权限和服务端取消需按宿主协议联调。完成 A/B 修后复验与两笔提交推送后，按详细计划进入 TreeSelect/Cascader 当前版 Critique 和远程分页选择闭环。提交仅纳入本波白名单，不含 `.pnpm-store/` 镜像或其他波次产物。
+
+## [2026-10-06] UI-13 / DynamicForm 与 Upload 组件验收
+
+- **目标**：完成 DynamicForm 分字段渲染、受控值与上传适配回归，并为后续组件严格对照和宿主替换保留可追溯证据。
+- **改动范围**：`linkx-fe/src/components/LxDynamicForm/`、`LxUpload/`、对应中文 API/Demo、Vue3 定向单测与文档 E2E；另更新项目地图、详细计划、迁移台账、组件审计和 lx-ui Roadmap/Delivery Check。没有替换 Vue3 业务组件，没有更改 API、路由、权限键或后端协议。
+- **完成内容**：按 schema `type` 加载独立字段 renderer；字段组合公开 `Lx*` 控件；受控 `value`/`change(nextValue)` 保持旧 `v-model`；覆盖密码、远程选择、日期范围及单/多文件上传。上传重试等待受控队列更新，迟到回调不覆盖取消结果；模型回灌保留文件 UID、URL、response 和 Error。
+- **实际验证**：DynamicForm/Upload 定向单测 46/46；文档 Playwright 13/13。lx-ui/Vue3 类型检查、目标 ESLint/Prettier、202 模块生产构建、VitePress 文档构建和差异检查通过。首次 E2E 与文档构建并行时出现 Windows `EBUSY`，该次失败作废；构建退出后独立重跑 13/13。文档构建仍有既有大 chunk 警告。
+- **代码与样式审查**：独立代码复审最终批准。正式 Impeccable A/B、建议处理、snapshot/trend 正在本轮单独完成；在最终结果入档前保持正式 Critique 未收口。
+- **未完成/阻塞**：不代表真实上传后端联调；`LxForm` 设计稿逐项核对、UI-10 52 项严格矩阵及 UI-11 整库 Critique 仍开放。Vue3 页面替换和宿主 Element Plus 移除继续等待全库门禁。
+- **风险与下一步**：外部上传 adapter、真实身份/权限和服务端取消需按宿主协议联调。完成 A/B 修后复验与两笔提交推送后，按详细计划进入 TreeSelect/Cascader 当前版 Critique 和远程分页选择闭环。提交仅纳入本波白名单，不含 `.pnpm-store/` 镜像或其他波次产物。
+
 ## [2026-10-06] Wave 3 / LxIcon 修后复验与 Wave 4 交接
 
 - **目标**：完成 LxIcon 修后独立 A/B、正式 detector/浏览器证据、代码复审及下一波 DynamicForm 任务拆解。

@@ -1,5 +1,25 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-07 UI-13 / Wave 4 严格复验结论
+
+`LxDatePicker`、`LxDynamicForm`、`LxUpload` 已完成统一源码冻结后的独立 A/B、代码复审和浏览器复验。A 设计评分 30/40（Good），没有 P0–P2；B 对三组件源码和三份中文文档共六个目标保存 JSON、stderr、退出码，均为有效 `[]`、stderr 为空、exit 0，并在 10 个新 context 覆盖 Light/HUD、桌面/375px、校验/上传/日期弹层状态。Overlay 命中已归因到 HUD 令牌、文档壳层、预期浮层覆盖和隐藏节点；移动文件名省略由 `title`、完整文本和操作标签保留可访问名称。定向单测 89/89，文档 E2E 43/43，目标格式、类型、203 模块构建和文档构建通过。
+
+端口复验：4176 被另一项目占用后，lx-ui Playwright 与 DynamicForm/Switch 本地来源校验已统一隔离到 4177；三页组件 E2E 43/43、Switch 兼容 6/6 均通过。
+
+本结果关闭本波组件级行为与视觉复验，不增加 UI-10 52 项严格矩阵的全库关闭数：`LxForm` 设计图逐项对照、真实上传服务端协议/取消、真实业务页面采用和整站 UI-11 Critique 仍开放。P3 事项为三个 Demo 的主题/Mock 控件发现路径与 Upload 文案密度，列入共享文档壳层后续任务。代码复审另记录 fallback UID 回灌后公开 `abort()` 的组合测试缺口，交给后续 Upload 复验。Snapshot 已保存；trend 只有本目标首次 30/40 记录。下一审查批次为 TreeSelect/Cascader 当前版和 `LxSelectPagination` 状态机。
+
+## 2026-10-07 UI-13 / DynamicForm、DatePicker 与 Upload 修后复验（过程记录）
+
+本条保留统一冻结前的过程数据：DatePicker/DynamicForm/Upload 定向单测 **88/88**、文档 Playwright **36/36**；随后补充短视口与文件名回归并以顶部正式结论为准。真实上传服务端联调及 `LxForm` 设计图完整对照仍不包含在本次验收内。
+
+## 2026-10-06 UI-13 / DynamicForm 与 Upload 复审更正
+
+独立复审发现并修复了 `LxUpload` 多实例回退 UID 冲突：UID 前缀序列现由 `LxUpload/uid.ts` 模块级工厂生成，同一父组件内两个实例对相同无 UID 文件的单测通过。DatePicker/DynamicForm/Upload 单测为 69/69、修复后文档 E2E 13/13，lx-ui 类型检查、203 模块构建、VitePress 文档构建和目标 Prettier/Vue3 ESLint 通过，文档构建保留大 chunk 警告。第二次独立代码复审核准，未发现可复现 P0–P2。此前 Impeccable A 与 B 使用不同文件冻结且 B 浏览器证据不完整，不能登记为正式 Critique；当前统一冻结后的隔离 A/B 待完成。该复审修复和组件级验收仍不关闭 `LxForm` 设计差异、真实上传联调或 52 项 UI-10 严格矩阵，当前仍为 0/52。
+
+## 2026-10-06 UI-13 / DynamicForm 与 Upload 组件验收
+
+`LxDynamicForm` 的字段子组件、公开 Lx 控件组合、受控值兼容、远程查询、日期范围与上传映射已完成组件级实现和行为回归；默认 `daterange` 清空值明确为 `null`，并由 LxDatePicker 类型、DynamicForm 事件、Demo 和测试共同覆盖。`LxUpload` 受控重试队列、取消迟到回调、文件元数据回灌和跨实例 fallback UID 唯一性由回归覆盖。定向单测 69/69、UID 修复后文档 Playwright 13/13，lx-ui 类型检查和目标 Prettier/Vue3 ESLint 通过；生产库及文档构建待修后补跑。独立代码复审发现的 UID 重号已修复。此前 Impeccable A/B 源码冻结不匹配且 B 浏览器证据不完整，统一冻结后的正式 A/B 与 snapshot/trend 待重新执行。即使组件级 Critique 完成，也不等于 `LxForm` 全部设计差异关闭或本组件行达到统一 UI-10 严格口径。严格矩阵仍为 0/52。真实 adapter 服务端取消另需宿主协议验收。
+
 ## 2026-10-06 Wave 3 / LxIcon 修后复核
 
 `LxIcon` 修后独立 Assessment A/B、浏览器 overlay 和代码复审均已完成。A 修后 37/40（修前基线 33/40）；B 对组件与文档各扫描一次，均为有效 JSON `[]`、stderr 0 字节、退出码 0，并在五个新浏览器 context 成功注入 overlay。命中已逐项归因到 CJK 字符宽度误报、Shiki/VitePress 文档壳层或 code-copy/导航规则误报，没有落在图标控件节点。单测 7/7、文档 E2E 当前配置复跑 2/2（单 Chromium 项目，独立浏览器评估覆盖 375px）。展开 P1/P2 分组仍需浏览 26/29 项，保留 P2；代码复审建议 E2E 直接比较图标名称集合，保留 P3，因此不增加 52 项严格矩阵关闭数。真实读屏器、真实权限菜单畸形数据和无 URL console 404 仍未覆盖/归因。综合报告为 `.impeccable/critique/wave3-lxicon-2026-10-06/final-report.md`，snapshot 为 `.impeccable/critique/2026-10-06T02-52-50Z__linkx-fe-docs-components-lxicons-md.md`。
@@ -12,7 +32,7 @@
 
 `LxSwitch` 已完成组件实现、Demo、中文 API、行为回归及独立代码复核。单测 14/14、文档 Playwright 6/6；Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、196 模块构建和文档构建通过。独立代码复核批准，未发现可复现的 P0–P2 代码问题。Impeccable 双路评审为 32/40；这是以 29/40 为基线的有界复评，仅更新三项启发式，不是全量重新评分。组件、Demo、中文文档 detector 都是有效 `[]`、stderr 空、退出码 0，仅代表静态规则零命中。实现提交为 `1679d9c`，综合报告和浏览器证据见 `.impeccable/critique/wave2-lx-switch-2026-10-05/`。
 
-剩余事项分属共享文档壳层与宿主业务：移动侧栏关闭时的键盘顺序列入后续壳层复验；生产高影响操作的确认、审计和失败补偿须按真实宿主/API 契约验收；专业术语释义列为中文文档改进。它们不应由 LxSwitch 通用组件臆造。本次完成 LxSwitch 组件级复核，但以上交叉事项未关闭前不增加 52 项统一严格矩阵的关闭计数。其后续基础控件及动态图标子项已处理；当前下一入口为 `LxDynamicForm`。
+剩余事项分属共享文档壳层与宿主业务：移动侧栏关闭时的键盘顺序列入后续壳层复验；生产高影响操作的确认、审计和失败补偿须按真实宿主/API 契约验收；专业术语释义列为中文文档改进。它们不应由 LxSwitch 通用组件臆造。本次完成 LxSwitch 组件级复核，但以上交叉事项未关闭前不增加 52 项统一严格矩阵的关闭计数。其后续基础控件及动态图标子项已处理，DynamicForm/Upload 当前状态见本文件顶部；下一项按详细计划为 TreeSelect/Cascader 当前版正式复验。
 
 ## 2026-10-05 Wave 2 / Checkbox 与 Radio 复验状态
 
@@ -118,7 +138,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxDialog`           | `DESIGN-SPEC.md` + Dialog API/Demo                | Wave 5 实现/17 项定向单测与文档证据完成；正式 Critique 待收口（焦点、确认、窄屏和动效）                                |
 | `LxDrawer`           | `DESIGN-SPEC.md` + Drawer API/Demo                | Wave 5 实现/文档证据完成；移动端稳态截图已复拍；正式 Critique 待收口（宽度、焦点、遮罩与窄屏）                         |
 | `LxDutyCalendar`     | `DESIGN-SPEC.md` + Calendar API/Demo              | 待严格复核；无专属画板，需记录规范映射                                                                                 |
-| `LxDynamicForm`      | `design/表单控件八件套/`                          | UI-13 实现/回归通过；字段子组件、Lx 控件、自适应布局和反馈关联已落盘；正式 Critique 仍待综合关闭（整库门槛）           |
+| `LxDynamicForm`      | `design/表单控件八件套/`                          | 实现、46 项单测、13 项文档 E2E 和代码复审通过；正式 Critique 收口中；`LxForm` 设计差异及统一 UI-10 严格矩阵仍开放      |
 | `LxEmpty`            | `DESIGN-SPEC.md` + Empty API/Demo                 | Wave 5 实现/文档证据完成；正式 Critique 待收口，阶段性评分不替代本矩阵                                                 |
 | `LxForm`             | `design/表单控件八件套/`                          | UI-13 实现/回归通过；首错焦点已修复并有桌面/375px 浏览器证据；正式 Critique 仍待综合关闭（移动提示层级与整库门槛）     |
 | `LxFormErrorBanner`  | `DESIGN-SPEC.md` + 表单错误态规范                 | Wave 5 实现/文档证据完成；正式 Critique 待收口（图标、文案、语义色及窄屏）                                             |
@@ -155,7 +175,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxTextarea`         | `design/表单控件八件套/`                          | 待严格复核；行高、字数、错误/焦点与窄屏                                                                                |
 | `LxTransferPanel`    | `design/虚拟滚动树 + 双栏穿梭/`                   | 待严格复核；双栏比例、选择态、空态和触控                                                                               |
 | `LxTreeSelect`       | `design/表单控件八件套/` + TreeSelect API/Demo    | 实现与行为验收完成；当前版本正式 Critique 待 overlay/复验；P3 观察继续跟踪                                             |
-| `LxUpload`           | `design/上传拖拽区 Upload/`                       | 待严格复核；提示文字对比度、列表、进度/失败/重试                                                                       |
+| `LxUpload`           | `design/上传拖拽区 Upload/`                       | 受控模型、进度/失败/重试/取消/移除已有组件行为证据；设计图严格对照、提示文字视觉复核、正式 Critique 收口中             |
 | `LxVirtualTree`      | `design/虚拟滚动树 + 双栏穿梭/`                   | 待严格复核；节点密度、选中/禁用、虚拟滚动和键盘                                                                        |
 
 ---

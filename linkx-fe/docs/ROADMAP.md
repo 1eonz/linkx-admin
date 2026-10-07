@@ -1,12 +1,33 @@
 # lx-ui 路线图
 
+## 2026-10-07 UI-13 / DynamicForm、DatePicker 与 Upload 正式收口
+
+- 修复 LxUpload 根节点模板 ref 的 Vue 类型边界，并补齐必填字段 ARIA 回归；另修 `LxFormItem` 同批次移除反馈与清校验时的内部错误 ID 缓存及非幂等属性写入。字段类型预览测试逐类精确核对四组候选项。
+- DatePicker/DynamicForm/Upload 定向单测 **89/89**、当前三份文档 E2E 合并 **43/43**（最新 DatePicker/Upload 子集 31/31）；Vue3/lx-ui 类型检查、目标 ESLint/Prettier、203 模块库构建和 VitePress 文档构建通过。文档构建保留既有 chunk 大小警告及 pnpm 旧配置提示。
+- lx-ui Playwright 已从冲突的 4176 隔离到 4177；DynamicForm/Switch 来源拦截同步修正，Switch 兼容用例 6/6 通过。
+- 独立代码复审未发现 P0–P2；fallback UID 回灌后公开 `abort()` 的组合测试留待后续 Upload 复验。Impeccable A 为 30/40；B 六个静态目标均为有效 JSON `[]`、stderr 空、退出码 0，10 个浏览器 overlay 场景已完成归因。综合报告和 snapshot 已归档；trend 只有本目标首次 30/40 记录。`[]` 只表示静态零命中，不单独代表视觉通过。
+- 下一项按依赖顺序为 TreeSelect/Cascader 当前版本复核及 `LxSelectPagination` 禁用继承、竞态和续页失败恢复闭环。Vue3 宿主 Element Plus 替换仍等待全库门禁。
+
+## 2026-10-06 UI-13 / LxUpload 跨实例 UID 修复
+
+独立代码复审发现不同上传实例可能为相同无 UID 文件生成重复回退 UID。已将前缀生成改为模块级序列并新增双实例回归；DatePicker、DynamicForm、Upload 单测 69/69、文档 E2E 13/13、lx-ui 类型检查、203 模块构建、文档构建、目标格式和 Vue3 ESLint 通过，VitePress 保留大 chunk 警告。第二次独立代码复审批准，未发现可复现 P0–P2。旧 Assessment A/B 源码冻结不匹配且 B 浏览器证据不完整，须重建统一冻结后正式复验，不能登记 UI-10 严格矩阵关闭。
+
+## 2026-10-06 UI-13 / DynamicForm 与 Upload 组件验收
+
+- DynamicForm 字段已按 schema 类型拆成独立文件并组合公开 `Lx*` 控件；`value`/`change(nextValue)` 与 `v-model` 兼容，覆盖密码、远程选择、日期范围和单/多文件上传。
+- `daterange` 使用默认日期清空行为时发出 `null`；DatePicker 公共事件类型、DynamicForm 字段 renderer、Demo 与宿主规范已对齐。
+- 修复 LxUpload 受控队列重试时序、取消后迟到回调和 UID/URL/response/error 映射；Mock Demo 与中文 API 同步。
+- 定向单测 69/69、UID 修复后文档 Playwright 13/13；lx-ui 类型检查、目标 ESLint/Prettier、203 模块构建和 VitePress 文档构建通过，文档构建保留既有大 chunk 警告。
+- 独立代码复审发现并修复跨实例 fallback UID 重号；修后复审批准，未发现可复现 P0–P2。旧 Impeccable A/B 源码冻结不一致且 B 浏览器证据不完整，当前版本须重新执行；完成前仍标记为组件集成验收，不关闭 UI-10 严格矩阵。真实上传协议、LxForm 完整设计对照和 Vue3 页面替换仍待后续波次。
+- 下一入口：按详细计划进行 TreeSelect/Cascader 当前版正式复验与远程分页选择闭环。
+
 ## 2026-10-06 Wave 3 / LxIcon 修后严格复核
 
 `LxIcon` 对未知运行时名称显示有访问名称的问号图标；侧栏菜单先解析图标键并安全回退，设置入口改用现存 `setting` 名称；Upload 状态图标补充名称类型。中文总览增加语义检索、普通文档流搜索、清空回焦、P1 别名计数说明、暗色主题映射和高对比空态。组件单测 7/7、文档 E2E 当前复跑 2/2（单 Chromium 项目，含桌面及 320px 窄屏交互路径；375px 由独立浏览器评估覆盖）；Vue3/lx-ui 类型检查、Vue3 测试文件 ESLint、目标 Prettier、196 模块构建和文档构建通过。lx-ui 没有独立 ESLint 配置。
 
 Impeccable A 修后为 37/40（修前 33/40）。独立 B 对 `LxIcon` 组件和中文文档分别保存 detector JSON、stderr、退出码，两个静态结果均为有效 `[]`；另在五种浏览器状态成功注入 overlay 并保存截图。命中逐项归为 CJK 行长误报、Shiki/VitePress 代码与导航壳层规则提示，没有命中图标控件；浅色默认页一条无 URL 的 console 404 未归因。静态 `[]` 只表示静态规则零命中。真实读屏器播报、权限菜单异常图标和 Firefox/Safari 尚未覆盖。展开 P1/P2 后的 26/29 项长列表保留 P2。综合报告为 `.impeccable/critique/wave3-lxicon-2026-10-06/final-report.md`，正式 snapshot 为 `.impeccable/critique/2026-10-06T02-52-50Z__linkx-fe-docs-components-lxicons-md.md`。
 
-下一入口为 `LxDynamicForm`：按 schema type 独立拆分字段 renderer，补密码宿主校验/ARIA、远程查询乱序与取消、上传状态映射、`daterange` 往返、受控回灌和容器断点测试。完整只读审计见 `.impeccable/critique/wave4-dynamicform-agent-audit/followup-review.md`。全库 UI-10/UI-11 完成前保留 Vue3 宿主 Element Plus。
+DynamicForm/Upload 组件级验收状态见本文件顶部；完成 Impeccable A/B 收口后，下一入口按详细计划转为 TreeSelect/Cascader 当前版正式复验与远程分页选择闭环。完整只读审计见 `.impeccable/critique/wave4-dynamicform-agent-audit/followup-review.md`。全库 UI-10/UI-11 完成前保留 Vue3 宿主 Element Plus。
 
 ## 2026-10-06 Wave 1 / LxPasswordInput 修后复核
 

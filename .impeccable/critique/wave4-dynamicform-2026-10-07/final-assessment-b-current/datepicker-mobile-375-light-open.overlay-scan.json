@@ -1,0 +1,922 @@
+{
+  "preflight": {
+    "mutable": true,
+    "titleRestored": true,
+    "scriptAppended": true
+  },
+  "scriptUrl": "http://127.0.0.1:8493/detect.js",
+  "scriptLoaded": true,
+  "injectionError": null,
+  "scanSucceeded": true,
+  "scanError": null,
+  "firstScan": {
+    "available": true,
+    "scanGroupCount": 15,
+    "findings": [
+      {
+        "selector": "span.container",
+        "tagName": "span",
+        "rect": {
+          "x": 335,
+          "y": -352,
+          "width": 16,
+          "height": 14,
+          "top": -352,
+          "right": 351,
+          "bottom": -338,
+          "left": 335
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "clipped-overflow-container",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "span.container clips a positioned child",
+            "ignoreValue": "",
+            "name": "Positioned child clipped by overflow container",
+            "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip."
+          }
+        ]
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 278,
+          "y": 1579.9375,
+          "width": 44,
+          "height": 44,
+          "top": 1579.9375,
+          "right": 322,
+          "bottom": 1623.9375,
+          "left": 278
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 319,
+          "y": 5250.9375,
+          "width": 44,
+          "height": 44,
+          "top": 5250.9375,
+          "right": 363,
+          "bottom": 5294.9375,
+          "left": 319
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-0",
+        "tagName": "div",
+        "rect": {
+          "x": 26,
+          "y": 213,
+          "width": 324,
+          "height": 265.6875,
+          "top": 213,
+          "right": 350,
+          "bottom": 478.6875,
+          "left": 26
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-1",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-2",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-3",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-4",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-5",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-7",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-8",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-9",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "em-dash-overuse",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "14 em-dashes in body text",
+            "ignoreValue": "",
+            "name": "Em-dash overuse",
+            "description": "Em-dash saturation in body copy is an AI cadence tell. Advisory only: humans use em-dashes legitimately, so this fires only on saturation — at least 8 em-dashes (— or --) at a density near one per 500 characters of body text — never on a long article that uses a few. Prefer commas, colons, periods, or parentheses."
+          },
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      },
+      {
+        "selector": "p.lx-date-picker-demo__hint:nth-of-type(2)",
+        "tagName": "p",
+        "rect": {
+          "x": 53,
+          "y": 263.375,
+          "width": 269,
+          "height": 19.1875,
+          "top": 263.375,
+          "right": 322,
+          "bottom": 282.5625,
+          "left": 53
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "text-occlusion",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "p.lx-date-picker-demo__hint \"聚焦后按 ArrowDown 打开日历。\" is 100% covered by overlapping text (th)",
+            "ignoreValue": "",
+            "name": "Text occluded by an overlapping element",
+            "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-date-picker-demo__row > div.lx-date-picker-demo__field:nth-of-type(1) > label.lx-date-picker-demo__label",
+        "tagName": "label",
+        "rect": {
+          "x": 53,
+          "y": 364.5625,
+          "width": 269,
+          "height": 24,
+          "top": 364.5625,
+          "right": 322,
+          "bottom": 388.5625,
+          "left": 53
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "text-occlusion",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "label.lx-date-picker-demo__label \"布控生效日期\" is 98% covered by an opaque element (div.el-date-table-cell)",
+            "ignoreValue": "",
+            "name": "Text occluded by an overlapping element",
+            "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+          }
+        ]
+      }
+    ],
+    "findingGroupCount": 15,
+    "overlayNodes": [
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "positioned child clipped by overflow container",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "span",
+          "id": null,
+          "className": "container",
+          "text": ""
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "positioned child clipped by overflow container",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "button",
+          "id": null,
+          "className": "copy",
+          "text": ""
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "button",
+          "id": null,
+          "className": "copy",
+          "text": ""
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "div",
+          "id": "el-id-1024-0",
+          "className": "el-popper is-pure is-light el-tooltip el-picker__popper lx-date-picker__popper lx-date-picker__popper--instance-152 el-zoom-in-top-enter-active el-zoom-in-top-enter-to",
+          "text": "2026 年9 月\n一\t二\t三\t四\t五\t六\t日\n\n31\n\t\n1\n\t\n2\n\t\n3\n\t\n4\n\t\n5\n\t\n6\n\n\n7\n\t\n8\n\t\n9\n\t\n10\n\t\n11\n\t\n12\n\t\n13\n\n\n14\n\t\n15\n\t\n16\n\t\n17\n\t\n18\n\t\n19\n\t\n20\n\n\n21\n\t\n22\n\t\n23\n\t\n24\n\t\n25\n\t\n26\n\t\n27\n\n\n28\n\t\n29\n\t\n30\n\t\n1\n\t\n2\n\t\n3"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "div",
+          "id": "el-id-1024-1",
+          "className": "el-popper is-pure is-light el-tooltip el-picker__popper lx-date-picker__popper lx-date-picker__popper--instance-275",
+          "text": "2026 年9 月一二三四五六日311234567891011121314151617181920212223242526272829301234567891011"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "div",
+          "id": "el-id-1024-2",
+          "className": "el-popper is-pure is-light el-tooltip el-picker__popper lx-date-picker__popper lx-date-picker__popper--instance-345",
+          "text": "2026 年9 月一月二月三月四月五月六月七月八月九月十月十一月十二月"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "div",
+          "id": "el-id-1024-3",
+          "className": "el-popper is-pure is-light el-tooltip el-picker__popper lx-date-picker__popper lx-date-picker__popper--instance-385 lx-date-picker-demo__shortcuts-popper",
+          "text": "今日本周近30天2026 年9 月一二三四五六日311234567891011121314151617181920212223242526272829301234567891011"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "div",
+          "id": "el-id-1024-4",
+          "className": "el-popper is-pure is-light el-tooltip el-picker__popper lx-date-picker__popper lx-date-picker__popper--instance-500",
+          "text": "2026 年9 月一二三四五六日31123456789101112131415专项复盘1617181920212223242526272829301234567891011"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "div",
+          "id": "el-id-1024-5",
+          "className": "el-popper is-pure is-light el-tooltip el-picker__popper lx-date-picker__popper lx-date-picker__popper--instance-569",
+          "text": "2026 年9 月一二三四五六日311234567891011121314151617181920212223242526272829301234567891011此刻确定"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "div",
+          "id": "el-id-1024-7",
+          "className": "el-popper is-pure is-light el-tooltip el-picker__popper lx-date-picker__popper lx-date-picker__popper--instance-649",
+          "text": "2026 年10 月一二三四五六日2829301234567891011121314151617181920212223242526272829303112345678"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "div",
+          "id": "el-id-1024-8",
+          "className": "el-popper is-pure is-light el-tooltip el-picker__popper lx-date-picker__popper lx-date-picker__popper--instance-720",
+          "text": "2026 年9 月一二三四五六日311234567891011121314151617181920212223242526272829301234567891011"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "div",
+          "id": "el-id-1024-9",
+          "className": "el-popper is-pure is-light el-tooltip el-picker__popper lx-date-picker__popper lx-date-picker__popper--instance-835",
+          "text": "2026 年9 月一二三四五六日311234567891011121314151617181920212223242526272829301234567891011"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "text occluded by an overlapping element",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "p",
+          "id": null,
+          "className": "lx-date-picker-demo__hint",
+          "text": "聚焦后按 ArrowDown 打开日历。"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "text occluded by an overlapping element",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "text occluded by an overlapping element",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "label",
+          "id": null,
+          "className": "lx-date-picker-demo__label",
+          "text": "布控生效日期"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "text occluded by an overlapping element",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay",
+          "impeccable-banner"
+        ],
+        "text": "✦ em-dash overuse: 14 em-dashes in body text\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+        "rect": {
+          "x": 0,
+          "y": -36,
+          "width": 375,
+          "height": 36
+        },
+        "target": null
+      }
+    ],
+    "overlayNodeCount": 29
+  },
+  "progressStateScan": null,
+  "screenshot": "screenshots/datepicker-mobile-375-light-open.png"
+}

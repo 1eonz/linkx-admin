@@ -1,0 +1,241 @@
+{
+  "preflight": {
+    "mutable": true,
+    "titleRestored": true,
+    "scriptAppended": true
+  },
+  "scriptUrl": "http://127.0.0.1:8493/detect.js",
+  "scriptLoaded": true,
+  "injectionError": null,
+  "scanSucceeded": true,
+  "scanError": null,
+  "firstScan": {
+    "available": true,
+    "scanGroupCount": 4,
+    "findings": [
+      {
+        "selector": "span.container",
+        "tagName": "span",
+        "rect": {
+          "x": 335,
+          "y": -800,
+          "width": 16,
+          "height": 14,
+          "top": -800,
+          "right": 351,
+          "bottom": -786,
+          "left": 335
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "clipped-overflow-container",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "span.container clips a positioned child",
+            "ignoreValue": "",
+            "name": "Positioned child clipped by overflow container",
+            "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip."
+          }
+        ]
+      },
+      {
+        "selector": "span.lx-upload__file-name",
+        "tagName": "span",
+        "rect": {
+          "x": 90,
+          "y": 319,
+          "width": 107,
+          "height": 24,
+          "top": 319,
+          "right": 197,
+          "bottom": 343,
+          "left": 90
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "text-overflow",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "span.lx-upload__file-name overflows its box by 42px",
+            "ignoreValue": "",
+            "name": "Content overflowing its container",
+            "description": "Content renders wider than its container, spilling out or forcing a horizontal scrollbar. Let text wrap, constrain widths, or give the region a deliberate scroll affordance."
+          }
+        ]
+      },
+      {
+        "selector": "button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 278,
+          "y": 897,
+          "width": 44,
+          "height": 44,
+          "top": 897,
+          "right": 322,
+          "bottom": 941,
+          "left": 278
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ],
+    "findingGroupCount": 4,
+    "overlayNodes": [
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "positioned child clipped by overflow container",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "span",
+          "id": null,
+          "className": "container",
+          "text": ""
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "positioned child clipped by overflow container",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "content overflowing its container",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "span",
+          "id": null,
+          "className": "lx-upload__file-name",
+          "text": "assessment-sample.csv"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "content overflowing its container",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "button",
+          "id": null,
+          "className": "copy",
+          "text": ""
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay",
+          "impeccable-banner"
+        ],
+        "text": "layout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+        "rect": {
+          "x": 0,
+          "y": -36,
+          "width": 375,
+          "height": 36
+        },
+        "target": null
+      }
+    ],
+    "overlayNodeCount": 7
+  },
+  "progressStateScan": null,
+  "screenshot": "screenshots/upload-mobile-375-light-failure.png"
+}

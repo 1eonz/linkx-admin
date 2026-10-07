@@ -1,0 +1,485 @@
+{
+  "preflight": {
+    "mutable": true,
+    "titleRestored": true,
+    "scriptAppended": true
+  },
+  "scriptUrl": "http://127.0.0.1:8493/detect.js",
+  "scriptLoaded": true,
+  "injectionError": null,
+  "scanSucceeded": true,
+  "scanError": null,
+  "firstScan": {
+    "available": true,
+    "scanGroupCount": 8,
+    "findings": [
+      {
+        "selector": "div.vp-doc > div > p:nth-of-type(1)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 133,
+          "width": 688,
+          "height": 58,
+          "top": 133,
+          "right": 1072,
+          "bottom": 191,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1003,
+          "y": 1085,
+          "width": 40,
+          "height": 40,
+          "top": 1085,
+          "right": 1043,
+          "bottom": 1125,
+          "left": 1003
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.vp-doc > div > p:nth-of-type(2)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 1090,
+          "width": 688,
+          "height": 84,
+          "top": 1090,
+          "right": 1072,
+          "bottom": 1174,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(3)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 3238,
+          "width": 688,
+          "height": 90,
+          "top": 3238,
+          "right": 1072,
+          "bottom": 3328,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(4)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 3449,
+          "width": 688,
+          "height": 324,
+          "top": 3449,
+          "right": 1072,
+          "bottom": 3773,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(5)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 4291,
+          "width": 688,
+          "height": 84,
+          "top": 4291,
+          "right": 1072,
+          "bottom": 4375,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "table:nth-of-type(1)",
+        "tagName": "table",
+        "rect": {
+          "x": 384,
+          "y": 1299,
+          "width": 688,
+          "height": 1333,
+          "top": 1299,
+          "right": 1072,
+          "bottom": 2632,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "edge-flush-cards",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "17 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+            "ignoreValue": "",
+            "name": "Cards flush against the scroller edge",
+            "description": "Cards inside a horizontal scroller or tab panel sit flush against the container edge at rest while keeping a gutter on the other side, so their edges and rounded corners get cut off. Usually the panel is sized wider than its clip box. Keep a consistent inset on both sides."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ],
+    "findingGroupCount": 8,
+    "overlayNodes": [
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "line length too long",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "p",
+          "id": null,
+          "className": "",
+          "text": "基于 Element Plus 上传能力统一文件校验、拖拽区域、上传进度和文件状态展示。网络请求由宿主通过 action 或 httpRequest 配置；组件不访问业务接口。"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "line length too long",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "button",
+          "id": null,
+          "className": "copy",
+          "text": ""
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "line length too long",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "p",
+          "id": null,
+          "className": "",
+          "text": "示例覆盖手动/自动上传、拖拽区三态、聚合进度面板与取消上传、成功/失败/排队徽章、进度、重试、文件校验、禁用、标准行/紧凑标签和 HUD 深色主题。请求由 Demo 内存 Mock 提供，不发送网络请求。"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "line length too long",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "line length too long",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "p",
+          "id": null,
+          "className": "",
+          "text": "组件目前没有自定义插槽。实例公开 submit()、abort(file?) 和 clearFiles()；禁用时 submit()、clearFiles() 不执行。abort(file?) 会取消目标请求并将对应上传状态复位到队列；调用 clearFiles() 会同步发出空 v-model。"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "line length too long",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "line length too long",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "p",
+          "id": null,
+          "className": "",
+          "text": "LxUploadFile 包含 uid、name 及可选的 size、type、status、percentage、raw、url、error 和 response。response 是宿主上传适配器返回的原始值，组件不会假定其中存在特定 URL 字段。受控父级把文件值回传后，组件会继续保留 url、response 与失败 Error，后续进度或列表变更不"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "line length too long",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "line length too long",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "p",
+          "id": null,
+          "className": "",
+          "text": "拖拽区高度至少为 120px；提示文案可换行，内容较多时区域随内容增高。窄屏文件名在行内省略，不撑宽页面。触屏模式下上传区域、取消、重试、移除和清空操作均保留至少 44px 的点按区域。"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "line length too long",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay"
+        ],
+        "text": "cards flush against the scroller edge",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": {
+          "tag": "table",
+          "id": null,
+          "className": "",
+          "text": "名称\t类型\t默认值\t说明\nmodelValue\tunknown[]\t[]\t受控文件列表，配合 v-model；变更时发出 LxUploadFile[]，保留文件 URL 和宿主适配器的原始 response。\naction\tstring\t''\tElement Plus 默认上传地址。为空且未配置 httpRequest 时，提交会被阻止并显示配置提示。\nht"
+        }
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-label"
+        ],
+        "text": "cards flush against the scroller edge",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "target": null
+      },
+      {
+        "tag": "div",
+        "classes": [
+          "impeccable-overlay",
+          "impeccable-banner"
+        ],
+        "text": "layout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+        "rect": {
+          "x": 0,
+          "y": -36,
+          "width": 1440,
+          "height": 36
+        },
+        "target": null
+      }
+    ],
+    "overlayNodeCount": 15
+  },
+  "progressStateScan": null,
+  "screenshot": "screenshots/upload-desktop-light-failure.png"
+}
