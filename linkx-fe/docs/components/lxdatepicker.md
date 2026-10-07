@@ -18,7 +18,7 @@ import Basic from '../../src/components/LxDatePicker/demo/basic.vue';
 
 | 名称               | 类型                                                                                                                              | 默认值           | 说明                                                                                                 |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------- |
-| `modelValue`       | `string \| number \| Date \| (string\|number\|Date)[]`                                                                            | —                | 选中值（v-model；区间类型为二元数组，配 `valueFormat` 时为格式化字符串）。                           |
+| `modelValue`       | `string \| number \| Date \| (string\|number\|Date)[] \| null`                                                                    | —                | 选中值（v-model；区间类型为二元数组，配 `valueFormat` 时为格式化字符串；默认清空值为 `null`）。      |
 | `type`             | `'date' \| 'daterange' \| 'datetime' \| 'datetimerange' \| 'dates' \| 'week' \| 'month' \| 'monthrange' \| 'year' \| 'yearrange'` | `'date'`         | 面板类型；`quarter` 等新增类型经 attrs 透传扩展。                                                    |
 | `placeholder`      | `string`                                                                                                                          | `''`             | 占位文案（单值形态）。                                                                               |
 | `startPlaceholder` | `string`                                                                                                                          | `''`             | 区间起始占位（range 形态）。                                                                         |
@@ -37,13 +37,13 @@ import Basic from '../../src/components/LxDatePicker/demo/basic.vue';
 
 ## Events
 
-| 名称                | 参数                  | 说明                               |
-| ------------------- | --------------------- | ---------------------------------- |
-| `update:modelValue` | `(value)`             | 选中值变化。                       |
-| `change`            | `(value)`             | 面板确认/清除后值变化（EP 原生）。 |
-| `visible-change`    | `(visible: boolean)`  | 日期面板展开或收起。               |
-| `focus`             | `(event: FocusEvent)` | 聚焦。                             |
-| `blur`              | `(event: FocusEvent)` | 失焦。                             |
+| 名称                | 参数                  | 说明                                           |
+| ------------------- | --------------------- | ---------------------------------------------- |
+| `update:modelValue` | `(value)`             | 选中值变化；默认清空时发出 `null`。            |
+| `change`            | `(value)`             | 面板确认/清除后值变化；默认清空时发出 `null`。 |
+| `visible-change`    | `(visible: boolean)`  | 日期面板展开或收起。                           |
+| `focus`             | `(event: FocusEvent)` | 聚焦。                                         |
+| `blur`              | `(event: FocusEvent)` | 失焦。                                         |
 
 ## Exposes
 
@@ -104,7 +104,7 @@ import Basic from '../../src/components/LxDatePicker/demo/basic.vue';
 
 触发器为 combobox 语义（EP 内核）；单值与区间形态键盘可达：聚焦输入框后按 ArrowDown 打开日历并进入日期网格，方向键移动日期焦点，Enter 选择日期，Escape 关闭日历；区间形态可用 Tab 切换起止输入，窄屏单面板会把两个端点的焦点都放入当前可见网格。宿主通过 `aria-describedby` 传入的说明 ID 会同步到实际输入框，区间形态会关联开始和结束输入，相邻日期字段之间互不串联；错误态红底红边在 `LxForm` 校验上下文自动生效（组件级固化，脱离全局桥不漂移）；开启"减少动效"时边框过渡关闭。
 
-窄屏（视口宽度不大于 640px）下快捷预设改为日历上方的横排按钮，日期格与翻月按钮提供至少 44px 的触控区域。弹层完整落在视口内时继续锚定触发器；若高度不足导致越界，则切换到视口居中显示，定位箭头隐藏，日期面板内部可滚动，滚动不会带动页面。组件关闭或恢复宽屏布局后继续使用 Element Plus 原生定位。
+窄屏（视口宽度不大于 640px）下快捷预设改为日历上方的横排按钮，日期格与翻月按钮提供至少 44px 的触控区域。通过点击或 ArrowDown 打开面板前，组件会将触发器调整到可用位置，使弹层优先显示在字段下方；极短视口或弹层仍越界时，弹层保持贴近字段并限制最大高度，箭头隐藏，日期面板内部可滚动且滚动不会带动页面。弹层打开后会响应窗口和可视视口变化；组件关闭或恢复宽屏布局后继续使用 Element Plus 原生定位。窄屏显式设置 `singlePanel=false` 时保留双月布局，弹层内容可在面板内横向滚动。
 
 周首由已注册并注入日期对象的 Day.js `zh-cn` locale 决定；组件不会切换宿主的全局默认 locale。
 

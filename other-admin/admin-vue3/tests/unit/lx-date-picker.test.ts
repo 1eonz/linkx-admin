@@ -65,6 +65,30 @@ describe('LxDatePicker', () => {
     wrapper.unmount();
   });
 
+  it('clears a date range to null', async () => {
+    const wrapper = mount(LxDatePicker, {
+      props: {
+        type: 'daterange',
+        modelValue: ['2026-10-01', '2026-10-06'],
+        valueFormat: 'YYYY-MM-DD',
+      },
+      attachTo: document.body,
+    });
+
+    try {
+      await wrapper.find('.el-range-editor').trigger('mouseenter');
+      await nextTick();
+      const clearIcon = wrapper.find('.el-range__close-icon');
+
+      expect(clearIcon.exists()).toBe(true);
+      expect(clearIcon.classes()).not.toContain('el-range__close-icon--hidden');
+      await clearIcon.trigger('click');
+      expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([null]);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
   it('defaults the range separator to 至 (Chinese contract, EP native is -)', () => {
     const wrapper = mount(LxDatePicker, {
       props: { type: 'daterange', modelValue: [] },

@@ -6,6 +6,8 @@ export type LxUploadListType = 'standard-rows' | 'compact-chips'
 /** 宿主上传适配器参数；分片协议和网络请求由宿主实现。 */
 export interface LxUploadRequestOptions extends UploadRequestOptions {
   chunkSize: number
+  /** 取消上传、受控列表移除文件或卸载组件时触发；宿主应将它传给可取消的请求实现。 */
+  signal: AbortSignal
 }
 
 export type LxUploadRequestHandler = (
@@ -21,6 +23,8 @@ export interface LxUploadFile {
   percentage?: number
   raw?: File
   url?: string
+  /** 宿主上传适配器返回的原始结果；组件不会解析其中的业务字段。 */
+  response?: unknown
   error?: Error
   [key: string]: unknown
 }

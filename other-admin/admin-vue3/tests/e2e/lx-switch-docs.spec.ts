@@ -114,7 +114,7 @@ test.describe('LxSwitch 文档示例', () => {
 
   test('375px 触屏、HUD 深色和减少动效保持可用', async ({ browser }) => {
     const context = await browser.newContext({
-      baseURL: 'http://127.0.0.1:4176',
+      baseURL: 'http://127.0.0.1:4177',
       viewport: { width: 375, height: 812 },
       deviceScaleFactor: 1,
       isMobile: true,
@@ -124,7 +124,7 @@ test.describe('LxSwitch 文档示例', () => {
 
     try {
       const externalRequests: string[] = [];
-      const localOrigin = new URL('http://127.0.0.1:4176').origin;
+      const localOrigin = new URL('http://127.0.0.1:4177').origin;
       await context.route('**/*', async (route) => {
         const requestUrl = new URL(route.request().url());
         if (

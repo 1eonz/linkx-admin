@@ -32,6 +32,7 @@ interface AriaState {
   invalid: string | null
   required: string | null
   describedBy: string | null
+  appliedDescribedBy: string | null
 }
 
 const formItemRef = ref<FormItemInstance>()
@@ -51,8 +52,31 @@ function restoreAttribute(
   name: string,
   value: string | null,
 ): void {
-  if (value === null) element.removeAttribute(name)
-  else element.setAttribute(name, value)
+  if (value === null) {
+    if (element.hasAttribute(name)) element.removeAttribute(name)
+    return
+  }
+
+  // 相同值也会触发属性观察器，避免重复同步形成循环。
+  if (element.getAttribute(name) !== value) element.setAttribute(name, value)
+}
+
+function originalDescriptionIds(
+  control: HTMLElement,
+  root: HTMLElement,
+): string | null {
+  const managedIds = new Set(
+    Array.from(
+      root.querySelectorAll<HTMLElement>(
+        '.el-form-item__error, [data-lx-field-feedback]',
+      ),
+      (element) => element.id,
+    ).filter(Boolean),
+  )
+  const ids = (control.getAttribute('aria-describedby') ?? '')
+    .split(/\s+/)
+    .filter((id) => id && id !== formItemErrorId && !managedIds.has(id))
+  return ids.length ? [...new Set(ids)].join(' ') : null
 }
 
 function synchronizeFieldAccessibility(): void {
@@ -74,8 +98,7 @@ function synchronizeFieldAccessibility(): void {
     '[role="checkbox"]',
     '[role="radio"]',
     '[role="switch"]',
-    '.el-upload-dragger',
-    '.lx-upload__browse',
+    '.el-upload[role="button"]',
   ].join(',')
   const controls = new Set(root.querySelectorAll<HTMLElement>(selector))
 
@@ -90,10 +113,12 @@ function synchronizeFieldAccessibility(): void {
   controls.forEach((control) => {
     let original = ariaState.get(control)
     if (!original && (required || invalid)) {
+      const currentDescription = control.getAttribute('aria-describedby')
       original = {
         invalid: control.getAttribute('aria-invalid'),
         required: control.getAttribute('aria-required'),
-        describedBy: control.getAttribute('aria-describedby'),
+        describedBy: originalDescriptionIds(control, root),
+        appliedDescribedBy: currentDescription,
       }
       ariaState.set(control, original)
     }
@@ -110,12 +135,13 @@ function synchronizeFieldAccessibility(): void {
       .filter((id) => id && id !== formItemErrorId)
     if (invalid && errorMessage) describedBy.push(formItemErrorId)
     if (describedBy.length) {
-      control.setAttribute(
-        'aria-describedby',
-        [...new Set(describedBy)].join(' '),
-      )
+      const nextDescription = [...new Set(describedBy)].join(' ')
+      if (control.getAttribute('aria-describedby') !== nextDescription)
+        control.setAttribute('aria-describedby', nextDescription)
+      original.appliedDescribedBy = nextDescription
     } else {
       restoreAttribute(control, 'aria-describedby', original.describedBy)
+      original.appliedDescribedBy = original.describedBy
     }
 
     if (!required && !invalid) ariaState.delete(control)
@@ -126,10 +152,30 @@ onMounted(() => {
   const root = formItemRef.value?.$el
   if (!root || typeof MutationObserver === 'undefined') return
 
-  observer = new MutationObserver(synchronizeFieldAccessibility)
+  observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (
+        mutation.type !== 'attributes' ||
+        mutation.attributeName !== 'aria-describedby' ||
+        !(mutation.target instanceof HTMLElement)
+      )
+        return
+
+      const control = mutation.target
+      const original = ariaState.get(control)
+      if (
+        !original ||
+        control.getAttribute('aria-describedby') === original.appliedDescribedBy
+      )
+        return
+
+      original.describedBy = originalDescriptionIds(control, root)
+    })
+    synchronizeFieldAccessibility()
+  })
   observer.observe(root, {
     attributes: true,
-    attributeFilter: ['class'],
+    attributeFilter: ['aria-describedby', 'class'],
     childList: true,
     characterData: true,
     subtree: true,

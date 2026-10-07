@@ -24,12 +24,16 @@ import LxDynamicFieldCheckbox from './fields/LxDynamicFieldCheckbox.vue'
 import LxDynamicFieldDate from './fields/LxDynamicFieldDate.vue'
 import LxDynamicFieldInput from './fields/LxDynamicFieldInput.vue'
 import LxDynamicFieldNumber from './fields/LxDynamicFieldNumber.vue'
+import LxDynamicFieldPassword from './fields/LxDynamicFieldPassword.vue'
 import LxDynamicFieldRadio from './fields/LxDynamicFieldRadio.vue'
+import LxDynamicFieldRemoteSelect from './fields/LxDynamicFieldRemoteSelect.vue'
 import LxDynamicFieldSelect from './fields/LxDynamicFieldSelect.vue'
 import LxDynamicFieldSwitch from './fields/LxDynamicFieldSwitch.vue'
 import LxDynamicFieldTextarea from './fields/LxDynamicFieldTextarea.vue'
 import LxDynamicFieldTreeSelect from './fields/LxDynamicFieldTreeSelect.vue'
 import LxDynamicFieldUpload from './fields/LxDynamicFieldUpload.vue'
+import LxDynamicFieldDateRange from './fields/LxDynamicFieldDateRange.vue'
+import { isDateRangeValue } from './fields/types'
 import type {
   LxDynamicFormField,
   LxDynamicFormFieldFeedback,
@@ -70,14 +74,14 @@ defineSlots<Record<string, (scope: LxDynamicFormSlotProps) => unknown>>()
 const fieldComponents: Partial<Record<LxDynamicFormField['type'], Component>> =
   {
     input: LxDynamicFieldInput,
-    password: LxDynamicFieldInput,
+    password: LxDynamicFieldPassword,
     textarea: LxDynamicFieldTextarea,
     number: LxDynamicFieldNumber,
     select: LxDynamicFieldSelect,
-    'remote-select': LxDynamicFieldSelect,
+    'remote-select': LxDynamicFieldRemoteSelect,
     'tree-select': LxDynamicFieldTreeSelect,
     date: LxDynamicFieldDate,
-    daterange: LxDynamicFieldDate,
+    daterange: LxDynamicFieldDateRange,
     switch: LxDynamicFieldSwitch,
     radio: LxDynamicFieldRadio,
     checkbox: LxDynamicFieldCheckbox,
@@ -167,6 +171,7 @@ function fieldRules(field: LxDynamicFormField): FormItemRule[] | undefined {
   )
   const isArrayValue =
     field.type === 'checkbox' ||
+    field.type === 'daterange' ||
     (['select', 'remote-select', 'tree-select', 'upload'].includes(
       field.type,
     ) &&
@@ -198,12 +203,28 @@ function fieldRules(field: LxDynamicFormField): FormItemRule[] | undefined {
           message,
           trigger: 'change',
         }
-      : {
-          required: true,
-          ...(isArrayValue ? { type: 'array' as const } : {}),
-          message,
-          trigger: isTextEntry ? 'blur' : 'change',
-        }
+      : field.type === 'daterange'
+        ? {
+            validator: (_rule, value, callback) => {
+              const valueFormat = field.props?.valueFormat
+              callback(
+                isDateRangeValue(
+                  value,
+                  typeof valueFormat === 'string' ? valueFormat : undefined,
+                )
+                  ? undefined
+                  : new Error(message),
+              )
+            },
+            message,
+            trigger: 'change',
+          }
+        : {
+            required: true,
+            ...(isArrayValue ? { type: 'array' as const } : {}),
+            message,
+            trigger: isTextEntry ? 'blur' : 'change',
+          }
   return [requiredRule, ...(field.rules ?? [])]
 }
 
@@ -331,61 +352,72 @@ defineExpose(publicMethods)
       :scroll-to-error="true"
     >
       <template v-for="field in fields" :key="field.key">
-        <LxFormItem
-          v-if="isVisible(field)"
-          class="lx-dynamic-form__item"
-          :style="fieldStyle(field)"
-          :label="field.label"
-          :prop="field.key"
-          :rules="fieldRules(field)"
-          :required="field.required"
-          :span="field.span === 24 ? 'full' : 1"
-        >
-          <slot
-            v-if="
-              field.type === 'slot' ||
-              (field.type === 'upload' && hasCustomSlot(field))
-            "
-            :name="slotName(field)"
-            v-bind="slotProps(field)"
-          />
-          <component
-            :is="fieldComponent(field)"
-            v-else-if="fieldComponent(field)"
-            :field="field"
-            :value="fieldValue(field)"
-            :disabled="isDisabled(field)"
-            :aria-describedby="
-              field.feedback ? fieldFeedbackId(field) : undefined
-            "
-            @change="updateField(field, $event)"
-          />
-          <div
-            v-if="field.feedback"
-            :id="fieldFeedbackId(field)"
-            class="lx-dynamic-form__feedback"
-            :class="`is-${feedbackStatus(field.feedback)}`"
-            :role="
-              feedbackStatus(field.feedback) === 'error' ? 'alert' : 'status'
-            "
-            aria-live="polite"
-            data-lx-field-feedback
+        <template v-if="isVisible(field)">
+          <h3
+            v-if="field.sectionTitleBefore"
+            class="lx-dynamic-form__section-title"
           >
-            <span>{{ field.feedback.message }}</span>
-            <LxButton
-              v-if="field.feedback.retry"
-              type="text"
-              size="sm"
-              :disabled="
-                isDisabled(field) ||
-                feedbackStatus(field.feedback) === 'loading'
+            {{ field.sectionTitleBefore }}
+          </h3>
+          <LxFormItem
+            class="lx-dynamic-form__item"
+            :style="fieldStyle(field)"
+            :label="field.label"
+            :prop="field.key"
+            :rules="fieldRules(field)"
+            :required="field.required"
+            :span="field.span === 24 ? 'full' : 1"
+          >
+            <slot
+              v-if="
+                field.type === 'slot' ||
+                (field.type === 'upload' && hasCustomSlot(field))
               "
-              @click="retryFieldFeedback(field)"
+              :name="slotName(field)"
+              v-bind="slotProps(field)"
+            />
+            <component
+              :is="fieldComponent(field)"
+              v-else-if="fieldComponent(field)"
+              :field="field"
+              :value="fieldValue(field)"
+              :disabled="isDisabled(field)"
+              :aria-describedby="
+                field.feedback ? fieldFeedbackId(field) : undefined
+              "
+              @change="updateField(field, $event)"
+            />
+            <div
+              v-if="field.feedback"
+              :id="fieldFeedbackId(field)"
+              class="lx-dynamic-form__feedback"
+              :class="`is-${feedbackStatus(field.feedback)}`"
+              :role="
+                feedbackStatus(field.feedback) === 'error' ? 'alert' : 'status'
+              "
+              :aria-live="
+                feedbackStatus(field.feedback) === 'error'
+                  ? 'assertive'
+                  : 'polite'
+              "
+              data-lx-field-feedback
             >
-              {{ field.feedback.retryLabel ?? '重试' }}
-            </LxButton>
-          </div>
-        </LxFormItem>
+              <span>{{ field.feedback.message }}</span>
+              <LxButton
+                v-if="field.feedback.retry"
+                type="text"
+                size="sm"
+                :disabled="
+                  isDisabled(field) ||
+                  feedbackStatus(field.feedback) === 'loading'
+                "
+                @click="retryFieldFeedback(field)"
+              >
+                {{ field.feedback.retryLabel ?? '重试' }}
+              </LxButton>
+            </div>
+          </LxFormItem>
+        </template>
       </template>
     </LxForm>
   </div>

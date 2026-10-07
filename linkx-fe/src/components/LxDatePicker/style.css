@@ -313,11 +313,17 @@ html:root
 .lx-date-picker__popper--viewport-fit {
   position: fixed !important;
   box-sizing: border-box;
-  top: 50vh !important;
-  top: 50dvh !important;
-  left: 50% !important;
-  max-width: calc(100vw - 8px) !important;
-  transform: translate(-50%, -50%) !important;
+  top: var(--lx-date-picker-fit-top, 8px) !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: var(--lx-date-picker-fit-left, 8px) !important;
+  width: var(--lx-date-picker-fit-max-width, calc(100vw - 16px)) !important;
+  max-height: var(
+    --lx-date-picker-fit-max-height,
+    calc(100dvh - 16px)
+  ) !important;
+  max-width: var(--lx-date-picker-fit-max-width, calc(100vw - 16px)) !important;
+  transform: none !important;
 }
 
 .lx-date-picker__popper--viewport-fit > .el-popper__arrow {
@@ -326,8 +332,38 @@ html:root
 
 .lx-date-picker__popper--viewport-fit > .el-picker-panel {
   box-sizing: border-box;
-  max-height: calc(100vh - 20px);
-  max-height: calc(100dvh - 20px);
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
+  width: 100%;
+  min-width: 0;
+  height: var(--lx-date-picker-fit-panel-height, calc(100dvh - 16px));
+  min-height: 0;
+  max-height: var(--lx-date-picker-fit-panel-height, calc(100dvh - 16px));
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.lx-date-picker__popper--viewport-fit .el-date-range-picker:not(.single-panel) {
+  width: max-content;
+  min-width: 646px;
+}
+
+@media (max-width: 640px) {
+  .lx-date-picker__popper--dual-panel {
+    box-sizing: border-box;
+    width: calc(100vw - 16px) !important;
+    max-width: calc(100vw - 16px) !important;
+  }
+
+  .lx-date-picker__popper--dual-panel > .el-picker-panel {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    overflow: auto;
+  }
+
+  .lx-date-picker__popper--dual-panel
+    > .el-picker-panel.el-date-range-picker:not(.single-panel) {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
 }

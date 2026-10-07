@@ -9,11 +9,11 @@ export default defineConfig({
   testMatch: '**/lx-*-docs.spec.ts',
   use: {
     ...baseConfig.use,
-    baseURL: 'http://127.0.0.1:4176',
+    baseURL: 'http://127.0.0.1:4177',
   },
   webServer: {
-    command: 'pnpm --dir ../../linkx-fe dev --host 127.0.0.1 --port 4176 --strictPort',
-    url: 'http://127.0.0.1:4176',
+    command: 'pnpm --dir ../../linkx-fe dev --host 127.0.0.1 --port 4177 --strictPort',
+    url: 'http://127.0.0.1:4177',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

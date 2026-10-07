@@ -49,7 +49,7 @@ function mockUpload(options: LxUploadRequestOptions): XMLHttpRequest {
     timer = undefined
     if (nextMode.value === 'failure') {
       nextMode.value = 'success'
-      const error = Object.assign(new Error('本地 Mock 上传失败'), {
+      const error = Object.assign(new Error('上传服务暂不可用，请重试'), {
         name: 'UploadAjaxError',
         status: 500,
         method: options.method,
@@ -116,7 +116,7 @@ onBeforeUnmount(() => {
       </div>
       <label class="lx-upload-demo__toggle">
         <input v-model="hudTheme" type="checkbox" />
-        HUD 深色主题
+        文档站整体深色（HUD）
       </label>
     </header>
 
@@ -175,7 +175,7 @@ onBeforeUnmount(() => {
         :disabled="disabled || files.length === 0"
         @click="uploadRef?.submit()"
       >
-        开始上传
+        上传全部待传文件
       </button>
       <button
         type="button"
@@ -251,6 +251,12 @@ onBeforeUnmount(() => {
 .lx-upload-demo__mode-group {
   color: var(--lx-text-regular);
   font-size: 13px;
+}
+
+.lx-upload-demo__toggle {
+  min-height: 44px;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .lx-upload-demo__toggle input {
