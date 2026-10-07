@@ -1,5 +1,14 @@
 # LinkX 项目交接记录
 
+## [2026-10-07] UI-13 / Wave 5 选择器组件正式交接
+
+- **范围**：`LxTreeSelect`、`LxCascader`、`LxSelectPagination` 的当前实现、类型、Demo、中文文档、主题样式和 Vue3 文档 E2E；没有改业务 API、路由、权限键、真实后端协议或 Vue3 页面。
+- **行为结果**：TreeSelect 支持真实方向键/Enter 选择与清空，Cascader 提供英文错误/Retry、错误焦点和 375px 长节点换行，SelectPagination 处理表单 disabled、请求代次、取消、续页失败同页重试和禁用不请求。
+- **实际验证**：定向单测 **36/36**、文档 E2E **15/15**；lx-ui 类型检查、203 模块构建、VitePress 构建、目标 ESLint/Prettier 和差异检查通过。4177 临时评审服务已停止，4174 保持用户预览。
+- **独立审查**：A 32/40（Good），B 9 项 detector 均为有效 `[]`/空 stderr/exit 0，9 个浏览器场景 overlay 成功；代码复审无 P0–P2，P3 为长节点实际换行 E2E 覆盖增强。完整证据见 `.impeccable/critique/wave5-tree-select-pagination-2026-10-07/`。静态 `[]` 不代表视觉通过。
+- **剩余项**：四项 P2（移动换行密度、错误旧状态、主题入口不对称、侧栏同级密度）转入下一波；不关闭 UI-10 全库矩阵。真实权限、后端联调和 Element Plus 删除仍冻结。
+- **交接给下一波**：先处理上述文档/壳层 P2 与长节点 E2E，再进入 `LxUpload` fallback UID/abort 组合回归、`LxDescriptions`、`LxVirtualTree`、`LxTransferPanel`、`LxMetricCard`、`LxSectionTitle`、`LxStatusSwitch`、`LxSearchBar` 的设计对照、行为闭环、代码复审和 A/B；每完成一个批次自动提交、推送并更新交接文档。
+
 ## [2026-10-07] UI-13 / Wave 4 正式收口与下一波交接
 
 - **范围**：`LxDatePicker`、`LxDynamicForm`、`LxUpload` 当前实现、字段 renderer、中文 API/Demo、Vue3 定向单测和文档 E2E。未修改业务 API、路由、权限键、真实上传协议或 Vue3 页面，也未移除宿主 `element-plus`。

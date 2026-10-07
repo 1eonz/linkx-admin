@@ -1,5 +1,12 @@
 # lx-ui 路线图
 
+## 2026-10-07 Wave 5 / TreeSelect、Cascader 与 SelectPagination
+
+- 当前版本实现、中文 Demo/API、行为回归和宿主文档 E2E 已收口：单测 **36/36**、文档 E2E **15/15**；覆盖键盘/清空、错误焦点和英文提示、移动触控、表单禁用继承、请求取消与迟到隔离、续页失败同页重试。
+- 独立 Impeccable A **32/40**，B 9 个目标 detector 为有效 `[]`/空 stderr/exit 0，并完成 9 个浏览器 overlay 场景；代码复审无 P0–P2。A 的四项 P2 和长节点 E2E P3 进入后续文档/壳层整改。静态 `[]` 不等于视觉通过。
+- 当前不增加 UI-10 52 项严格关闭数，不迁移 Vue3 业务页面，也不删除宿主 `element-plus`。先完成组件库下一批，再按矩阵替换宿主。
+- 下一入口：Upload fallback UID/公开 `abort()` 组合回归，然后进入 Descriptions、VirtualTree、TransferPanel、MetricCard、SectionTitle、StatusSwitch、SearchBar 的设计对照、行为测试、浏览器证据、代码复审与 A/B。
+
 ## 2026-10-07 UI-13 / DynamicForm、DatePicker 与 Upload 正式收口
 
 - 修复 LxUpload 根节点模板 ref 的 Vue 类型边界，并补齐必填字段 ARIA 回归；另修 `LxFormItem` 同批次移除反馈与清校验时的内部错误 ID 缓存及非幂等属性写入。字段类型预览测试逐类精确核对四组候选项。

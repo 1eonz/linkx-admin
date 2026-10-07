@@ -1,5 +1,14 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-07 Wave 5 / TreeSelect、Cascader 与 SelectPagination 正式收口
+
+- **完成内容**：补齐 `LxTreeSelect` 方向键/Enter 选择、清空和窄屏触控；补齐 `LxCascader` 英文错误文案、错误焦点和窄屏长节点换行；补齐 `LxSelectPagination` 表单禁用继承、迟到响应隔离、续页失败同页重试和禁用不发请求。三个组件 Demo 和中文文档均同步更新组件选型说明。
+- **验证**：定向单测 **36/36**，文档 E2E **15/15**；lx-ui typecheck、203 模块库构建、VitePress 文档构建、目标 Prettier/ESLint 和 `git diff --check` 通过。4177 评审服务已停止，用户预览 4174 未触碰；保留既有文档构建大 chunk 与 pnpm 配置提示。
+- **代码复审**：独立复审批准，未发现 P0、P1、P2；P3 为 Cascader 移动 E2E 尚未用足够长的真实节点直接断言换行，列入下一次回归增强。
+- **Impeccable 正式结果**：A/B 使用独立 Agent。A **32/40（Good）**，修复前基线 29/40；B 的 9 个 detector 目标均为合法 JSON `[]`、stderr 为空、退出码 0，并完成 9 个独立浏览器 overlay 场景。`[]` 仅表示静态零命中；最终报告、证据和 snapshot/trend 见 `.impeccable/critique/wave5-tree-select-pagination-2026-10-07/` 与 `.impeccable/critique/2026-10-07T05-56-06Z__linkx-fe-src-components-lxtreeselect-index-vue.md`。
+- **剩余 P2**：移动 Cascader 换行密度、Cascader 错误后的旧成功状态、三个 Demo 主题入口不对称、文档侧栏同级链接过多，已登记下一波文档/壳层整改；不增加 UI-10 52 项全库关闭数。
+- **边界**：没有进行真实后端、权限身份或 Vue3 业务页面联调，没有删除宿主 `element-plus`；API 请求继续使用 `.then().catch().finally()`。完成本波两笔白名单提交推送后自动进入下一批复杂组件，继续逐项代码复审和 Impeccable A/B。
+
 ## 2026-10-07 Wave 4 / DynamicForm、DatePicker 与 Upload 正式收口
 
 - **修复**：`LxUpload` 根节点 ref 回调在 Vue3 宿主与组件库的 Vue 类型之间存在名义类型冲突；回调改为接收 `unknown` 并以 `HTMLElement` 收窄。上传必填回归验证真实键盘触发器的 required、invalid 和描述关联；同批次移除字段反馈并清除校验时，`LxFormItem` 不再缓存内部错误 ID，ARIA 属性恢复也改为幂等写入。字段类型 E2E 现在逐类精确验证四组候选成员和数量。

@@ -1,5 +1,12 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-07 Wave 5 选择器组件交接
+
+- `LxTreeSelect`、`LxCascader`、`LxSelectPagination` 当前版本行为闭环完成：定向单测 36/36、文档 E2E 15/15；覆盖键盘/清空、错误焦点与英文错误、窄屏触控、表单 disabled、取消与迟到请求、续页失败重试及禁用不请求。
+- 独立代码复审无 P0–P2；Impeccable A 32/40，B 9 个目标 detector 均为有效 `[]`/空 stderr/exit 0，9 个浏览器场景成功。四项 P2 和长节点 E2E P3 已写入项目台账；`[]` 不等于视觉通过。
+- 本波没有迁移 Vue3 业务页、权限菜单或 Element Plus 依赖；继续保留 `.then().catch().finally()` API 链和现有宿主契约。全库 lx-ui 门禁前不得删除宿主 `element-plus`。
+- 下一入口：按组件库顺序完成 Upload fallback UID/公开 abort 组合回归、Descriptions、VirtualTree、TransferPanel、MetricCard、SectionTitle、StatusSwitch、SearchBar，再进入宿主替换矩阵。
+
 ## 2026-10-07 lx-ui Wave 4 组件门禁收口
 
 - DynamicForm/DatePicker/Upload 组件单测 **89/89**、三份文档 E2E **43/43**；最新 DatePicker/Upload 子集 **31/31**。新增短视口弹层关系、面板滚动和上传文件名可访问名称回归；Vue3/lx-ui 类型检查、目标 ESLint/Prettier、203 模块库构建和文档构建通过。证据对应组件库本身及本地 Mock，不表示 Vue3 业务页已采用。

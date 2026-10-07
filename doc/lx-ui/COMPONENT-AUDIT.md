@@ -1,12 +1,18 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-07 Wave 5 选择器组件正式审计
+
+`LxTreeSelect`、`LxCascader`、`LxSelectPagination` 已完成当前源码冻结后的行为、浏览器和视觉复验。定向单测 36/36、文档 E2E 15/15；A 32/40（Good），B 对 9 个源码/Demo/文档目标取得有效 JSON `[]`、空 stderr、退出码 0，并完成 9 个独立 overlay 场景；独立代码复审无 P0–P2。完整证据见 `.impeccable/critique/wave5-tree-select-pagination-2026-10-07/`。
+
+本波修复了 SelectPagination HUD 令牌、Cascader 375px 长标签和三份文档选型说明。A 保留四项 P2：移动换行密度、错误后的旧成功状态、主题开关入口不对称、文档侧栏同级密度；另有长节点实际换行 E2E 的 P3 覆盖增强。静态 detector `[]` 只表示零命中，不作为视觉通过；本波不增加 UI-10 52 项矩阵关闭数。下一批按审计优先级进入 Upload 组合 abort 回归及数据展示/复杂交互组件。
+
 ## 2026-10-07 UI-13 / Wave 4 严格复验结论
 
 `LxDatePicker`、`LxDynamicForm`、`LxUpload` 已完成统一源码冻结后的独立 A/B、代码复审和浏览器复验。A 设计评分 30/40（Good），没有 P0–P2；B 对三组件源码和三份中文文档共六个目标保存 JSON、stderr、退出码，均为有效 `[]`、stderr 为空、exit 0，并在 10 个新 context 覆盖 Light/HUD、桌面/375px、校验/上传/日期弹层状态。Overlay 命中已归因到 HUD 令牌、文档壳层、预期浮层覆盖和隐藏节点；移动文件名省略由 `title`、完整文本和操作标签保留可访问名称。定向单测 89/89，文档 E2E 43/43，目标格式、类型、203 模块构建和文档构建通过。
 
 端口复验：4176 被另一项目占用后，lx-ui Playwright 与 DynamicForm/Switch 本地来源校验已统一隔离到 4177；三页组件 E2E 43/43、Switch 兼容 6/6 均通过。
 
-本结果关闭本波组件级行为与视觉复验，不增加 UI-10 52 项严格矩阵的全库关闭数：`LxForm` 设计图逐项对照、真实上传服务端协议/取消、真实业务页面采用和整站 UI-11 Critique 仍开放。P3 事项为三个 Demo 的主题/Mock 控件发现路径与 Upload 文案密度，列入共享文档壳层后续任务。代码复审另记录 fallback UID 回灌后公开 `abort()` 的组合测试缺口，交给后续 Upload 复验。Snapshot 已保存；trend 只有本目标首次 30/40 记录。下一审查批次为 TreeSelect/Cascader 当前版和 `LxSelectPagination` 状态机。
+本结果关闭本波组件级行为与视觉复验，不增加 UI-10 52 项严格矩阵的全库关闭数：`LxForm` 设计图逐项对照、真实上传服务端协议/取消、真实业务页面采用和整站 UI-11 Critique 仍开放。Wave 5 A 32/40、B 9 项 detector 与 9 个浏览器场景、代码复审无 P0–P2；移动换行密度、错误旧状态、主题入口不对称和侧栏密度四项 P2，以及长节点 E2E P3，列入下一批文档/壳层整改。Snapshot 已保存；下一审查批次为 Upload 组合 abort 回归和数据展示/复杂交互组件。
 
 ## 2026-10-07 UI-13 / DynamicForm、DatePicker 与 Upload 修后复验（过程记录）
 
@@ -90,14 +96,14 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | 当前设计源                                                                                | 必须纳入对照的公开组件                                                                                                                                                                                                                 | 严格对照状态                                                                                                                                                                                 |
 | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `design/按钮体系/`                                                                        | `LxButton`、`LxActionButtons`                                                                                                                                                                                                          | 待按状态、尺寸、按钮层级、危险操作与键盘焦点逐项核验                                                                                                                                         |
-| `design/表单控件八件套/`                                                                  | `LxForm`、`LxFormItem`、`LxDynamicForm`、`LxInput`、`LxTextarea`、`LxRadio`、`LxRadioGroup`、`LxCheckbox`、`LxCheckboxGroup`、`LxSwitch`、`LxSelect`、`LxDatePicker`、`LxInputNumber`、`LxPasswordInput`、`LxCascader`、`LxTreeSelect` | TreeSelect/Cascader 实现与行为验收已完成，当前版本正式 Critique 待 overlay/复验；LxForm/DynamicForm 与基础控件仍按设计逐项核验。无 Cascader 专属稿时按 Select 控件外形与本设计源状态令牌验收 |
+| `design/表单控件八件套/`                                                                  | `LxForm`、`LxFormItem`、`LxDynamicForm`、`LxInput`、`LxTextarea`、`LxRadio`、`LxRadioGroup`、`LxCheckbox`、`LxCheckboxGroup`、`LxSwitch`、`LxSelect`、`LxDatePicker`、`LxInputNumber`、`LxPasswordInput`、`LxCascader`、`LxTreeSelect` | TreeSelect/Cascader 当前版 A/B、浏览器和代码复审已完成，保留移动密度与状态一致性 P2；LxForm/DynamicForm 与基础控件仍按设计逐项核验。无 Cascader 专属稿时按 Select 控件外形与本设计源状态令牌验收 |
 | `design/高频核心 13 枚/`、`design/中频 27 枚/`、`design/常用联想 29 枚/` 与 `doc/LxIcon*` | `LxIcon`                                                                                                                                                                                                                               | 按图标路径、命名、尺寸、动效触发/结束、主题、键盘及减少动效逐项核验                                                                                                                          |
 | `design/检索面板 SearchBar/`                                                              | `LxSearchBar`                                                                                                                                                                                                                          | 待纳入全库矩阵复核字段密度、展开/收起、响应式及操作层级                                                                                                                                      |
 | `design/状态开关 StatusSwitch/`                                                           | `LxStatusSwitch`                                                                                                                                                                                                                       | 待纳入全库矩阵复核开关轨道、状态色、只读/加载及确认反馈                                                                                                                                      |
 | `design/上传拖拽区 Upload/`                                                               | `LxUpload`                                                                                                                                                                                                                             | 待纳入全库矩阵复核拖放区、列表、进度/失败/重试及移动操作                                                                                                                                     |
 | `design/详情描述行 Descriptions/`                                                         | `LxDescriptions`                                                                                                                                                                                                                       | 待纳入全库矩阵复核标签和值的层级、行高、复制和窄屏折叠                                                                                                                                       |
 | `design/虚拟滚动树 + 双栏穿梭/`                                                           | `LxVirtualTree`、`LxTransferPanel`                                                                                                                                                                                                     | 待纳入全库矩阵复核树密度、选中/禁用、双栏比例、空/加载和窄屏交互                                                                                                                             |
-| `design/远程分页下拉 SelectPagination/`                                                   | `LxSelectPagination`                                                                                                                                                                                                                   | 待纳入全库矩阵复核输入框、标签收敛、下拉分页、加载/空/失败和键盘状态                                                                                                                         |
+| `design/远程分页下拉 SelectPagination/`                                                   | `LxSelectPagination`                                                                                                                                                                                                                   | 当前版行为、15 项文档 E2E、A/B 和代码复审已完成；保留严格矩阵中的设计差异与 P2 文档壳层整改                                                                                              |
 | `design/指标卡 MetricCard/`                                                               | `LxMetricCard`                                                                                                                                                                                                                         | 待纳入全库矩阵复核数值层级、语义色、趋势/进度和窄屏排列                                                                                                                                      |
 | `design/区块标题 SectionTitle/`                                                           | `LxSectionTitle`                                                                                                                                                                                                                       | 待纳入全库矩阵复核变体、图标、标签、标题截断和对齐                                                                                                                                           |
 
@@ -121,7 +127,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 
 ### 52 个公开组件逐项验收矩阵
 
-本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **0/52 已按统一严格口径关闭**；Form 三项、基础控件及 TreeSelect/Cascader 当前版本审查仍在验收中。
+本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **0/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但 P2 与全库设计矩阵仍未关闭。
 
 | 公开组件             | 唯一对照源                                        | 当前矩阵状态                                                                                                           |
 | -------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -129,7 +135,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxAuthImg`          | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；真实鉴权联调另列                                                                                           |
 | `LxBreadcrumb`       | `DESIGN-SPEC.md` + 导航规范                       | 待严格复核；保留现有宿主导航契约                                                                                       |
 | `LxButton`           | `design/按钮体系/`                                | 待严格复核；基础尺寸/层级/危险态逐项对照                                                                               |
-| `LxCascader`         | `design/表单控件八件套/`（无专属画板）            | 实现与行为验收完成；当前版本正式 Critique 待 overlay/复验；按 Select 控件外形与状态令牌映射                            |
+| `LxCascader`         | `design/表单控件八件套/`（无专属画板）            | 当前版单测/E2E、A/B 和代码复审完成；P2 为移动换行密度、错误旧状态、主题入口；按 Select 控件外形与状态令牌映射                            |
 | `LxCheckbox`         | `design/表单控件八件套/`                          | A/B 与行为完成；窄屏 API 表格 P2 待处理                                                                                |
 | `LxCheckboxGroup`    | `design/表单控件八件套/`                          | A/B、半选、禁用与触屏验收完成；随 API 表格 P2 保持开放                                                                 |
 | `LxCodeSlot`         | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；代码区层级、复制反馈与窄屏                                                                                 |
@@ -159,7 +165,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 待严格复核；字段密度、展开/收起、操作层级                                                                              |
 | `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                                   |
 | `LxSelect`           | `design/表单控件八件套/`                          | 实现与行为验收：单测 10/10、文档 E2E 3/3；当前严格 Critique 待修后 A/B、overlay/snapshot；桌面 32px、窄屏 44px         |
-| `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 待严格复核；标签、弹层分页、键盘和窄屏                                                                                 |
+| `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                               |
 | `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                           |
 | `LxSidebar`          | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；rail/expanded、菜单态、动效和抽屉                                                                          |
 | `LxSidebarBrand`     | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；品牌锁定区、折叠态与对齐                                                                                   |
@@ -174,7 +180,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxTag`              | `DESIGN-SPEC.md` §2 + Tag API/Demo                | 待严格复核；语义色、尺寸、关闭态与对比度                                                                               |
 | `LxTextarea`         | `design/表单控件八件套/`                          | 待严格复核；行高、字数、错误/焦点与窄屏                                                                                |
 | `LxTransferPanel`    | `design/虚拟滚动树 + 双栏穿梭/`                   | 待严格复核；双栏比例、选择态、空态和触控                                                                               |
-| `LxTreeSelect`       | `design/表单控件八件套/` + TreeSelect API/Demo    | 实现与行为验收完成；当前版本正式 Critique 待 overlay/复验；P3 观察继续跟踪                                             |
+| `LxTreeSelect`       | `design/表单控件八件套/` + TreeSelect API/Demo    | 当前版单测/E2E、A/B 和代码复审完成；P3 为长节点换行 E2E 覆盖增强，严格矩阵仍待全库复验                                             |
 | `LxUpload`           | `design/上传拖拽区 Upload/`                       | 受控模型、进度/失败/重试/取消/移除已有组件行为证据；设计图严格对照、提示文字视觉复核、正式 Critique 收口中             |
 | `LxVirtualTree`      | `design/虚拟滚动树 + 双栏穿梭/`                   | 待严格复核；节点密度、选中/禁用、虚拟滚动和键盘                                                                        |
 

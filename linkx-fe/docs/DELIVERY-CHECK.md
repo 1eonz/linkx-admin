@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-07 Wave 5 选择器组件正式核查
+
+- TreeSelect/Cascader/SelectPagination 当前源码、Demo 和中文文档已完成行为闭环；定向单测 **36/36**、文档 Playwright **15/15**，覆盖键盘、清空、错误/重试、窄屏、禁用继承、取消、迟到响应和续页失败恢复。
+- lx-ui typecheck、203 模块构建、VitePress 文档构建、目标 ESLint/Prettier 和 `git diff --check` 通过。4177 评审服务已清理，4174 未触碰。
+- Impeccable A **32/40（Good）**；B 的 9 个 detector 结果均为合法 `[]`、stderr 空、exit 0，浏览器 9/9 场景 overlay 成功。代码复审无 P0–P2；剩余 P2/P3 见 `.impeccable/critique/wave5-tree-select-pagination-2026-10-07/final-report.md`。`[]` 只代表静态零命中。
+- 本项不代表真实后端/权限联调、Vue3 业务页替换或 UI-10 全库矩阵关闭。下一批为 Upload 组合 abort 回归和数据展示/复杂交互组件。
+
 ## 2026-10-07 UI-13 / DynamicForm、DatePicker 与 Upload 正式收口
 
 - 修复 Upload 模板根节点 ref 的跨 Vue 类型边界，并补齐上传必填字段真实触发器的 ARIA 错误态和恢复回归。

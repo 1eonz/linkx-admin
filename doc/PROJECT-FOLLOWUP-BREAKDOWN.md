@@ -6,6 +6,10 @@
 
 ### 当前执行指针（2026-10-07）
 
+Wave 5 选择器组件已完成正式收口：TreeSelect/Cascader/SelectPagination 定向单测 36/36、文档 E2E 15/15，A 32/40，B 9 个 detector 有效 `[]`/空 stderr/exit 0 且 9 个浏览器场景完成 overlay，代码复审无 P0–P2。当前指针转入下一批复杂组件；四项 P2（移动换行密度、错误旧状态、主题入口不对称、侧栏同级密度）与长节点 E2E P3 保持登记，不能在下游迁移中遗失。
+
+下一波顺序固定为：先补 Upload fallback UID 回灌后公开 `abort()` 组合回归；再推进 `LxDescriptions`、`LxVirtualTree`、`LxTransferPanel`、`LxMetricCard`、`LxSectionTitle`、`LxStatusSwitch`、`LxSearchBar`。每个子批次必须同步设计差异、中文 Demo/API、单测、Mock、浏览器证据、独立代码复审、Impeccable A/B、snapshot/trend 和交接记录；完成后才进入宿主 Element Plus 替换。
+
 - `LxPasswordInput` 已完成当前实现、行为回归、正式 A/B、overlay 归因和独立代码复审。A 为 32/40；单测 10/10、文档 E2E 9/9、类型/构建/目标 ESLint/Prettier 通过。修复了 320px 目录锚点、文档暗色表面和 44px 移动工具标签。
 - 三个 detector 均为有效 JSON `[]`、stderr 空、退出码 0；浏览器 overlay 11 个目标均归为 HUD 主题提示或文档壳层目标，不计为密码控件缺陷。该证据不关闭全库 52 项严格矩阵。
 - 尚有一项 P2 集成文档建议：用真实 `LxForm/LxFormItem` 展示密码字段校验错误、文案和 ARIA 关联；它由 Form/DynamicForm 宿主组合负责，禁止在独立 PasswordInput Demo 伪造。另将移动 Props 表和 VitePress 页内目录触控高度列入共用文档壳层体验任务。
