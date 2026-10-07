@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import en from 'element-plus/es/locale/lang/en'
 import { computed, ref } from 'vue'
+
 import LxCascader from '../index.vue'
 import type {
   LxCascaderModelValue,
@@ -30,8 +32,10 @@ const options: LxCascaderOption[] = [
 
 const path = ref<LxCascaderModelValue>(['hangzhou', 'xihu', 'command'])
 const multiple = ref(false)
+const englishLocale = ref(false)
 const state = ref<DemoState>('ready')
 const lastAction = ref('已回显组织路径')
+const locale = computed(() => (englishLocale.value ? en : undefined))
 
 const loading = computed(
   () => state.value === 'loading' || state.value === 'loading-error',
@@ -83,14 +87,15 @@ function retry(): void {
     <div class="cascader-demo__field">
       <label id="cascader-demo-label" for="cascader-demo-path">组织路径</label>
       <LxCascader
-        :key="multiple ? 'multiple' : 'single'"
         id="cascader-demo-path"
+        :key="multiple ? 'multiple' : 'single'"
         :model-value="path"
         :options="options"
         :multiple="multiple"
         :loading="loading"
         :error="error"
         :disabled="disabled"
+        :locale="locale"
         clearable
         filterable
         collapse-tags
@@ -128,6 +133,11 @@ function retry(): void {
           >
             {{ item.label }}
           </button>
+        </div>
+        <div role="group" aria-label="显示语言">
+          <label
+            ><input v-model="englishLocale" type="checkbox" /> 控件英文</label
+          >
         </div>
       </div>
     </details>

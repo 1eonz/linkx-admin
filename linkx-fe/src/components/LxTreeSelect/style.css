@@ -16,6 +16,12 @@
     background-color var(--lx-transition);
 }
 
+@media (hover: none), (max-width: 640px) {
+  .lx-tree-select.el-select .el-select__wrapper {
+    min-height: 44px;
+  }
+}
+
 .lx-tree-select.el-select .el-select__wrapper:hover,
 .lx-tree-select.el-select .el-select__wrapper.is-focused {
   box-shadow: 0 0 0 1px var(--lx-color-primary) inset;

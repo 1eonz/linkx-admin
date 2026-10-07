@@ -62,6 +62,7 @@ export interface LxSelectPaginationProps {
   valueMap?: Record<string, LxSelectPaginationValueMapItem>
   debounce?: number
   maxCollapseTags?: number
+  /** 禁用态；未显式设置时继承 Element Plus 的 ElForm/LxForm 禁用状态。 */
   disabled?: boolean
   clearable?: boolean
   max?: number

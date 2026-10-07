@@ -77,7 +77,15 @@ test.describe('lx-ui LxCascader 文档示例', () => {
     await searchInput.press('Backspace');
     await expect(demo.locator('.cascader-demo__value')).toHaveText(errorValue ?? '');
     await expect(cascader).toHaveClass(/lx-cascader--selection-paused/);
-    await demo.getByRole('button', { name: '重试', exact: true }).click();
+
+    const inputWrapper = cascader.locator('.el-input__wrapper');
+    await input.focus();
+    await expect(inputWrapper).toHaveClass(/is-focus/);
+    await expect(inputWrapper).toHaveCSS('box-shadow', 'rgb(186, 26, 26) 0px 0px 0px 1px inset');
+
+    await demo.getByRole('checkbox', { name: '控件英文' }).check();
+    await expect(demo.locator('.lx-cascader__feedback')).toContainText('Failed to load organization data');
+    await demo.getByRole('button', { name: 'Retry', exact: true }).click();
     await expect(demo.locator('.lx-cascader__feedback')).toHaveCount(0);
     await expect(input).not.toHaveAttribute('aria-describedby', /cascader-demo-path-error/);
 
@@ -104,6 +112,8 @@ test.describe('lx-ui LxCascader 文档示例', () => {
     const demo = page.locator('.cascader-demo');
     const cascader = demo.locator('.lx-cascader').first();
     const input = cascader.locator('input').first();
+    const triggerBounds = await cascader.locator('.el-input__wrapper').boundingBox();
+    expect(triggerBounds?.height).toBeGreaterThanOrEqual(44);
     await input.focus();
     await input.press('ArrowDown');
 
@@ -125,6 +135,20 @@ test.describe('lx-ui LxCascader 文档示例', () => {
     expect(geometry.width).toBeLessThanOrEqual(375);
     expect(geometry.rowHeights.length).toBeGreaterThan(0);
     expect(Math.min(...geometry.rowHeights)).toBeGreaterThanOrEqual(44);
+    const nodeLabelStyle = await popper
+      .locator('.el-cascader-node__label')
+      .first()
+      .evaluate((element) => {
+        const style = getComputedStyle(element);
+        return {
+          overflow: style.overflow,
+          whiteSpace: style.whiteSpace,
+          text: element.textContent?.trim(),
+        };
+      });
+    expect(nodeLabelStyle.overflow).toBe('visible');
+    expect(nodeLabelStyle.whiteSpace).toBe('normal');
+    expect(nodeLabelStyle.text).toBe('杭州市公安局');
 
     await input.press('Escape');
     await expect(popper).toBeHidden();

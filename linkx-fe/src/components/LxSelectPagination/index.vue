@@ -1,5 +1,6 @@
 <script setup lang="ts">
 /** 远程检索由宿主注入；跨页已选项的显示元数据独立于当前结果页缓存。 */
+import { useFormDisabled } from 'element-plus'
 import {
   computed,
   getCurrentInstance,
@@ -8,10 +9,7 @@ import {
   ref,
   watch,
 } from 'vue'
-import LxIcon from '../LxIcon/index.vue'
-import LxInput from '../LxInput/index.vue'
-import LxSelect from '../LxSelect/index.vue'
-import { lxMessage } from '../LxMessage'
+
 import type {
   LxSelectPaginationItem,
   LxSelectPaginationProps,
@@ -19,7 +17,11 @@ import type {
   LxSelectPaginationResult,
   LxSelectPaginationValue,
 } from './types'
-import type { LxSelectModelValue, LxSelectOption } from '../LxSelect/types'
+import LxIcon from '../LxIcon/index.vue'
+import LxInput from '../LxInput/index.vue'
+import { lxMessage } from '../LxMessage'
+import LxSelect from '../LxSelect/index.vue'
+import type { LxSelectOption } from '../LxSelect/types'
 
 defineOptions({ name: 'LxSelectPagination' })
 
@@ -39,7 +41,8 @@ const props = withDefaults(defineProps<LxSelectPaginationProps>(), {
   valueMap: () => ({}),
   debounce: 300,
   maxCollapseTags: 2,
-  disabled: false,
+  // 保留 undefined，使 Element Plus 表单禁用态可以沿 useFormDisabled 继承。
+  disabled: undefined,
   clearable: true,
   max: undefined,
 })
@@ -51,6 +54,7 @@ const emit = defineEmits<{
 }>()
 
 const selectRef = ref<InstanceType<typeof LxSelect>>()
+const isDisabled = useFormDisabled(computed(() => props.disabled))
 const instanceId = getCurrentInstance()?.uid ?? 'standalone'
 const items = ref<LxSelectPaginationItem[]>([])
 const selectedMeta = ref<Record<string, LxSelectPaginationItem>>({})
@@ -58,6 +62,7 @@ const keyword = ref('')
 const page = ref(1)
 const total = ref(0)
 const pageHasMore = ref<boolean>()
+const failedPage = ref<number>()
 const loading = ref(false)
 const visible = ref(false)
 const loadError = ref(false)
@@ -65,6 +70,7 @@ const popperClass = `lx-select-pagination-popper-${instanceId}`
 let queryTimer: ReturnType<typeof setTimeout> | undefined
 let requestId = 0
 let requestController: AbortController | undefined
+let activeRequest: { page: number; reset: boolean } | undefined
 let scrollTarget: HTMLElement | undefined
 
 const selectedValues = computed<(string | number)[]>(() => {
@@ -83,13 +89,9 @@ function itemValue(item: LxSelectPaginationItem): string | number | undefined {
     : undefined
 }
 
-function optionValue(item: LxSelectPaginationItem): string | number {
-  return itemValue(item) ?? ''
-}
-
 function normalizeMappedItem(
   key: string,
-  item: LxSelectPaginationItem
+  item: LxSelectPaginationItem,
 ): LxSelectPaginationItem {
   return itemValue(item) === undefined
     ? { ...item, [props.valueKey]: key }
@@ -136,7 +138,7 @@ const selectedOptions = computed<LxSelectPaginationItem[]>(() =>
       items.value.find((item) => String(itemValue(item)) === key) ??
       externalItem(key) ?? { [props.valueKey]: value, label: String(value) }
     )
-  })
+  }),
 )
 
 const options = computed(() => {
@@ -162,11 +164,11 @@ const selectOptions = computed<LxSelectOption[]>(() =>
         description: itemDescription(item),
       },
     ]
-  })
+  }),
 )
 
 const hasMore = computed(
-  () => pageHasMore.value ?? total.value > items.value.length
+  () => pageHasMore.value ?? total.value > items.value.length,
 )
 
 function resultData(result: LxSelectPaginationResult) {
@@ -193,8 +195,8 @@ function syncSelectedMeta(value: LxSelectPaginationValue) {
   const values = Array.isArray(value)
     ? value
     : value === undefined || value === null || value === ''
-    ? []
-    : [value]
+      ? []
+      : [value]
   const selected = new Set(values.map(String))
 
   for (const key of Object.keys(selectedMeta.value)) {
@@ -213,12 +215,12 @@ watch(() => props.modelValue, syncSelectedMeta, { immediate: true, deep: true })
 watch(
   () => [props.targetMap, props.valueMap] as const,
   () => syncSelectedMeta(props.modelValue),
-  { immediate: true, deep: true }
+  { immediate: true, deep: true },
 )
 
 function resultTotal(
   data: ReturnType<typeof resultData>,
-  nextItems: LxSelectPaginationItem[]
+  nextItems: LxSelectPaginationItem[],
 ) {
   if (data.total > 0 || data.records.length === 0) return data.total
   return data.records.length < props.pageSize
@@ -231,78 +233,104 @@ function abortRequest() {
   requestController = undefined
 }
 
-function load(reset = false) {
-  if (props.disabled || (!props.api && !props.remoteMethod)) return
-
-  const id = ++requestId
+function invalidateRequest(rollbackPage = false) {
+  ++requestId
+  if (rollbackPage && activeRequest && !activeRequest.reset) {
+    page.value = Math.max(1, activeRequest.page - 1)
+  }
+  activeRequest = undefined
   abortRequest()
-  const controller = new AbortController()
-  requestController = controller
+  loading.value = false
+}
+
+function load(reset = false) {
+  if (isDisabled.value || (!props.api && !props.remoteMethod)) return
+
   if (reset) {
     if (queryTimer) clearTimeout(queryTimer)
     queryTimer = undefined
+    invalidateRequest()
     page.value = 1
     items.value = []
     total.value = 0
     pageHasMore.value = undefined
+    failedPage.value = undefined
+  } else if (activeRequest) {
+    return
   }
+
+  const id = ++requestId
+  const requestedPage = page.value
+  const requestedKeyword = keyword.value
+  const requestParamsSnapshot = { ...props.params }
+  const requestedPageSize = props.pageSize
+  const requestApi = props.api
+  const requestRemoteMethod = props.remoteMethod
+  const controller = new AbortController()
+  requestController = controller
+  activeRequest = { page: requestedPage, reset }
   loading.value = true
   loadError.value = false
 
   const requestParams: LxSelectPaginationRequestParams = {
-    ...props.params,
-    page: page.value,
-    pageSize: props.pageSize,
-    keyword: keyword.value,
+    ...requestParamsSnapshot,
+    page: requestedPage,
+    pageSize: requestedPageSize,
+    keyword: requestedKeyword,
     signal: controller.signal,
   }
 
   void Promise.resolve()
     .then(() => {
-      if (props.remoteMethod) {
-        return props.remoteMethod(keyword.value, page.value, {
-          pageSize: props.pageSize,
-          params: props.params,
+      if (requestRemoteMethod) {
+        return requestRemoteMethod(requestedKeyword, requestedPage, {
+          pageSize: requestedPageSize,
+          params: requestParamsSnapshot,
           signal: controller.signal,
         })
       }
-      if (props.api) return props.api(requestParams)
+      if (requestApi) return requestApi(requestParams)
       throw new Error('请提供 remoteMethod 或 api')
     })
     .then((result) => {
-      if (id !== requestId) return
+      if (id !== requestId || isDisabled.value) return
       const data = resultData(result)
       const nextItems = reset ? data.records : [...items.value, ...data.records]
       items.value = nextItems
       total.value = resultTotal(data, nextItems)
       pageHasMore.value = data.hasMore
+      failedPage.value = undefined
       rememberSelected(data.records)
       syncSelectedMeta(props.modelValue)
       emit('load', data.records, total.value)
     })
     .catch(() => {
-      if (id !== requestId || controller.signal.aborted) return
-      if (!reset) page.value = Math.max(1, page.value - 1)
+      if (id !== requestId || controller.signal.aborted || isDisabled.value)
+        return
+      if (!reset) page.value = Math.max(1, requestedPage - 1)
+      failedPage.value = requestedPage
       loadError.value = true
       lxMessage.error('加载选项失败，请重试')
     })
     .finally(() => {
       if (id !== requestId) return
       loading.value = false
+      activeRequest = undefined
       if (requestController === controller) requestController = undefined
     })
 }
 
 function scheduleSearch(value: string) {
+  if (isDisabled.value) return
   keyword.value = value
   if (queryTimer) clearTimeout(queryTimer)
-  ++requestId
-  abortRequest()
-  loading.value = false
+  invalidateRequest()
   loadError.value = false
   items.value = []
   total.value = 0
   pageHasMore.value = undefined
+  failedPage.value = undefined
+  page.value = 1
   const configuredDelay = Number.isFinite(props.debounce) ? props.debounce : 300
   const delay = Math.min(400, Math.max(250, configuredDelay))
   queryTimer = setTimeout(() => load(true), delay)
@@ -312,45 +340,42 @@ watch(
   () => [props.api, props.remoteMethod, props.params, props.pageSize] as const,
   () => {
     if (queryTimer) clearTimeout(queryTimer)
-    ++requestId
-    abortRequest()
-    loading.value = false
+    invalidateRequest()
     loadError.value = false
     items.value = []
     total.value = 0
     pageHasMore.value = undefined
+    failedPage.value = undefined
     page.value = 1
-    if (visible.value && !props.disabled) load(true)
+    if (visible.value && !isDisabled.value) load(true)
   },
-  { deep: true }
+  { deep: true },
 )
 
-watch(
-  () => props.disabled,
-  (disabled) => {
-    if (!disabled) return
-    if (queryTimer) clearTimeout(queryTimer)
-    ++requestId
-    abortRequest()
-    loading.value = false
-    detachScroll()
-  }
-)
+watch(isDisabled, (disabled) => {
+  if (!disabled) return
+  if (queryTimer) clearTimeout(queryTimer)
+  invalidateRequest(true)
+  failedPage.value = undefined
+  loadError.value = false
+  visible.value = false
+  detachScroll()
+})
 
 function loadMore() {
-  if (!hasMore.value || loading.value) return
+  if (isDisabled.value || !hasMore.value || loading.value) return
   page.value += 1
   load()
 }
 
 function selectedItems(
-  value: LxSelectPaginationValue
+  value: LxSelectPaginationValue,
 ): LxSelectPaginationItem[] {
   const values = Array.isArray(value)
     ? value
     : value === undefined || value === null || value === ''
-    ? []
-    : [value]
+      ? []
+      : [value]
   return values.map((entry) => {
     const key = String(entry)
     return (
@@ -362,14 +387,15 @@ function selectedItems(
 }
 
 function onChange(value: unknown) {
+  if (isDisabled.value) return
   const normalized: LxSelectPaginationValue = Array.isArray(value)
     ? value.filter(
         (item): item is string | number =>
-          typeof item === 'string' || typeof item === 'number'
+          typeof item === 'string' || typeof item === 'number',
       )
     : typeof value === 'string' || typeof value === 'number'
-    ? value
-    : undefined
+      ? value
+      : undefined
   if (
     props.multiple &&
     Array.isArray(normalized) &&
@@ -404,7 +430,7 @@ function onDropdownScroll() {
 
 async function attachScroll() {
   await nextTick()
-  if (!visible.value || props.disabled) return
+  if (!visible.value || isDisabled.value) return
   const popper = document.querySelector<HTMLElement>(`.${popperClass}`)
   scrollTarget =
     popper?.querySelector<HTMLElement>('.el-select-dropdown__wrap') ?? undefined
@@ -412,8 +438,13 @@ async function attachScroll() {
 }
 
 function onVisibleChange(next: boolean) {
+  if (next && isDisabled.value) {
+    visible.value = false
+    detachScroll()
+    return
+  }
   visible.value = next
-  if (next && !props.disabled) {
+  if (next && !isDisabled.value) {
     attachScroll()
     if (!items.value.length && !loading.value) load(true)
   } else {
@@ -431,8 +462,13 @@ function onSearchKeydown(event: Event | KeyboardEvent) {
 }
 
 function retry() {
-  if (items.value.length) loadMore()
-  else load(true)
+  if (isDisabled.value || loading.value) return
+  if (failedPage.value !== undefined) {
+    page.value = failedPage.value
+    load()
+  } else {
+    load(true)
+  }
 }
 
 defineExpose({
@@ -442,9 +478,8 @@ defineExpose({
 })
 
 onBeforeUnmount(() => {
-  ++requestId
   if (queryTimer) clearTimeout(queryTimer)
-  abortRequest()
+  invalidateRequest()
   detachScroll()
 })
 </script>
@@ -507,14 +542,14 @@ onBeforeUnmount(() => {
           role="alert"
         >
           <span>选项暂时无法加载</span>
-          <button type="button" :disabled="disabled" @click="retry">
+          <button type="button" :disabled="isDisabled" @click="retry">
             重新加载
           </button>
         </div>
         <button
           v-else-if="hasMore"
           type="button"
-          :disabled="disabled"
+          :disabled="isDisabled"
           @click="loadMore"
         >
           继续加载（{{ items.length }} / {{ total }}）

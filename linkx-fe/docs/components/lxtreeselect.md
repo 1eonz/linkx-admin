@@ -16,6 +16,10 @@ import Basic from '../../src/components/LxTreeSelect/demo/basic.vue';
 
 示例覆盖带可见字段标签的单选/多选确认、禁用节点、空目录、加载态、加载失败与重试、HUD 深色、英文语言环境、键盘焦点和受控值回显；数据与加载状态都在浏览器内存中。英文开关会切换整个 TreeSelect 子树的内核及组件文案。
 
+### 组件选型
+
+当候选项是可展开的组织树、需要按层级筛选或一次选择多个分支时使用 `LxTreeSelect`。如果用户只需要沿固定路径逐级选择，使用 `LxCascader`；如果候选项数量很大且必须远程搜索分页，使用 `LxSelectPagination`。
+
 多选遵循组织树的确认边界：勾选只更新弹层内的待提交值，底部 **确认** 才触发 `update:modelValue` / `change`；**取消**、按 `Escape` 或点击弹层外部会丢弃本次草稿。单选默认只选择叶节点并立即回填关闭；点击非叶节点只展开或收起，透传 `checkStrictly` 后才允许选择非叶节点。
 
 ```vue

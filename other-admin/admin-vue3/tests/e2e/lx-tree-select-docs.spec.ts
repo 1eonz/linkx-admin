@@ -13,6 +13,27 @@ test.describe('lx-ui LxTreeSelect 文档示例', () => {
     expect(bounds.y + bounds.height).toBeLessThanOrEqual(viewportHeight);
   });
 
+  test('支持方向键与 Enter 选择树节点', async ({ page }) => {
+    await page.goto('/components/lxtreeselect.html');
+
+    const select = page.locator('.lx-tree-select').first();
+    const input = select.getByRole('combobox', { name: '组织机构' });
+    const popper = page.locator('.lx-tree-select__popper').last();
+    const currentValue = page.locator('.lx-tree-select-demo__value');
+
+    await page.locator('.lx-tree-select-demo__settings summary').click();
+    await page.getByRole('button', { name: '清空选择' }).click();
+    await expect(currentValue).toHaveText('当前值：');
+    await input.focus();
+    await input.press('ArrowDown');
+    await expect(popper).toBeVisible();
+    await input.press('ArrowDown');
+    await input.press('Enter');
+
+    await expect(popper).toBeHidden();
+    await expect(currentValue).not.toHaveText('当前值：');
+  });
+
   test('覆盖单选、多选、空态、加载态、HUD 和窄屏布局', async ({ page }) => {
     await page.goto('/components/lxtreeselect.html');
     await expect(page.getByRole('heading', { name: 'LxTreeSelect 树形下拉' })).toBeVisible();
@@ -104,6 +125,8 @@ test.describe('lx-ui LxTreeSelect 文档示例', () => {
     await select.click();
     const mobilePopper = page.locator('.lx-tree-select__popper').last();
     await expect(mobilePopper).toBeVisible();
+    const triggerBounds = await select.locator('.el-select__wrapper').boundingBox();
+    expect(triggerBounds?.height).toBeGreaterThanOrEqual(44);
     const widths = await page.evaluate(() => ({
       viewport: document.documentElement.clientWidth,
       document: document.documentElement.scrollWidth,
