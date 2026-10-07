@@ -1,0 +1,2773 @@
+{
+  "target": "docs-sidebar",
+  "state": "mobile-375-sidebar",
+  "screenshot": "screenshots/recheck-3/docs-sidebar-mobile-375-sidebar-overlay.png",
+  "injection": {
+    "success": true,
+    "detectorUrl": "http://localhost:8400/detect.js",
+    "impeccableConsoleMessages": [
+      {
+        "type": "startGroup",
+        "text": "%c[impeccable] 39 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "lineNumber": 8159,
+          "columnNumber": 12
+        }
+      }
+    ]
+  },
+  "view": {
+    "title": "[Human] Assessment B - 文档侧栏在 LxSidebar 文档路由中的呈现",
+    "url": "http://127.0.0.1:4175/components/lxsidebar.html",
+    "viewport": {
+      "width": 375,
+      "height": 844
+    },
+    "documentTheme": "light",
+    "documentClasses": "",
+    "bodyScrollWidth": 375,
+    "bodyClientWidth": 375,
+    "headings": [
+      {
+        "level": "H2",
+        "text": "新增组件"
+      },
+      {
+        "level": "H2",
+        "text": "基础"
+      },
+      {
+        "level": "H2",
+        "text": "布局导航"
+      },
+      {
+        "level": "H2",
+        "text": "数据展示"
+      },
+      {
+        "level": "H3",
+        "text": "表格与分页"
+      },
+      {
+        "level": "H3",
+        "text": "页面与指标"
+      },
+      {
+        "level": "H3",
+        "text": "日历与组织"
+      },
+      {
+        "level": "H3",
+        "text": "状态与辅助"
+      },
+      {
+        "level": "H3",
+        "text": "图形与操作"
+      },
+      {
+        "level": "H2",
+        "text": "数据录入"
+      },
+      {
+        "level": "H3",
+        "text": "表单与基础字段"
+      },
+      {
+        "level": "H3",
+        "text": "选项控件"
+      },
+      {
+        "level": "H3",
+        "text": "树形与日期选择"
+      },
+      {
+        "level": "H3",
+        "text": "检索与复杂字段"
+      },
+      {
+        "level": "H2",
+        "text": "反馈与浮层"
+      },
+      {
+        "level": "H1",
+        "text": "LxSidebar 侧边栏\n​"
+      },
+      {
+        "level": "H2",
+        "text": "基础用法\n​"
+      },
+      {
+        "level": "H2",
+        "text": "双形态受控切换（v-model:mode + 持久化）\n​"
+      },
+      {
+        "level": "H2",
+        "text": "API\n​"
+      },
+      {
+        "level": "H3",
+        "text": "Props\n​"
+      },
+      {
+        "level": "H3",
+        "text": "Events\n​"
+      },
+      {
+        "level": "H3",
+        "text": "Slots\n​"
+      },
+      {
+        "level": "H2",
+        "text": "FAQ\n​"
+      }
+    ],
+    "visibleButtons": [
+      {
+        "text": "",
+        "ariaLabel": "搜索文档",
+        "title": "",
+        "className": "DocSearch DocSearch-Button",
+        "disabled": false,
+        "rect": {
+          "x": 263,
+          "y": 5,
+          "width": 48,
+          "height": 55
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "mobile navigation",
+        "title": "",
+        "className": "VPNavBarHamburger active hamburger",
+        "disabled": false,
+        "rect": {
+          "x": 319,
+          "y": 0,
+          "width": 48,
+          "height": 64
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "",
+        "title": "Switch to dark theme",
+        "className": "VPSwitch VPSwitchAppearance",
+        "disabled": false,
+        "rect": {
+          "x": 278,
+          "y": 269,
+          "width": 40,
+          "height": 22
+        }
+      },
+      {
+        "text": "菜单",
+        "ariaLabel": "",
+        "title": "",
+        "className": "menu",
+        "disabled": false,
+        "rect": {
+          "x": 0,
+          "y": 64,
+          "width": 94,
+          "height": 47
+        }
+      },
+      {
+        "text": "本页导航",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 291,
+          "y": 76,
+          "width": 64,
+          "height": 24
+        }
+      },
+      {
+        "text": "综合态势工作台",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-item lx-sidebar-item--expanded is-active",
+        "disabled": false,
+        "rect": {
+          "x": 49,
+          "y": 554,
+          "width": 235,
+          "height": 40
+        }
+      },
+      {
+        "text": "协同岗管理",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-group__head",
+        "disabled": false,
+        "rect": {
+          "x": 54,
+          "y": 599,
+          "width": 225,
+          "height": 36
+        }
+      },
+      {
+        "text": "预警与群组协同 4",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-group__head",
+        "disabled": false,
+        "rect": {
+          "x": 54,
+          "y": 647,
+          "width": 225,
+          "height": 36
+        }
+      },
+      {
+        "text": "勤务排班管理",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-item lx-sidebar-item--expanded",
+        "disabled": false,
+        "rect": {
+          "x": 49,
+          "y": 690,
+          "width": 235,
+          "height": 40
+        }
+      },
+      {
+        "text": "警务资源管理",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-item lx-sidebar-item--expanded",
+        "disabled": false,
+        "rect": {
+          "x": 49,
+          "y": 730,
+          "width": 235,
+          "height": 40
+        }
+      },
+      {
+        "text": "权限与人员中心",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-group__head",
+        "disabled": false,
+        "rect": {
+          "x": 54,
+          "y": 775,
+          "width": 225,
+          "height": 36
+        }
+      },
+      {
+        "text": "三方集成与网关",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-group__head",
+        "disabled": false,
+        "rect": {
+          "x": 54,
+          "y": 823,
+          "width": 225,
+          "height": 36
+        }
+      },
+      {
+        "text": "系统与License配置",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-item lx-sidebar-item--expanded",
+        "disabled": false,
+        "rect": {
+          "x": 49,
+          "y": 866,
+          "width": 235,
+          "height": 40
+        }
+      },
+      {
+        "text": "控制台设置",
+        "ariaLabel": "控制台设置",
+        "title": "",
+        "className": "lx-sidebar-footer__settings",
+        "disabled": false,
+        "rect": {
+          "x": 53,
+          "y": 986,
+          "width": 175,
+          "height": 44
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "收起导航",
+        "title": "",
+        "className": "lx-sidebar-footer__toggle",
+        "disabled": false,
+        "rect": {
+          "x": 236,
+          "y": 986,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "",
+        "title": "Copy Code",
+        "className": "copy",
+        "disabled": false,
+        "rect": {
+          "x": 278,
+          "y": 1144,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "综合态势工作台",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-item lx-sidebar-item--expanded",
+        "disabled": false,
+        "rect": {
+          "x": 49,
+          "y": 1375,
+          "width": 235,
+          "height": 40
+        }
+      },
+      {
+        "text": "协同岗管理",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-group__head has-active",
+        "disabled": false,
+        "rect": {
+          "x": 54,
+          "y": 1420,
+          "width": 225,
+          "height": 36
+        }
+      },
+      {
+        "text": "协同岗设置",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-group__subitem is-active",
+        "disabled": false,
+        "rect": {
+          "x": 81,
+          "y": 1464,
+          "width": 194,
+          "height": 28
+        }
+      },
+      {
+        "text": "上下岗排班监控",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-group__subitem",
+        "disabled": false,
+        "rect": {
+          "x": 81,
+          "y": 1496,
+          "width": 194,
+          "height": 28
+        }
+      },
+      {
+        "text": "系统与License配置",
+        "ariaLabel": "",
+        "title": "",
+        "className": "lx-sidebar-item lx-sidebar-item--expanded",
+        "disabled": false,
+        "rect": {
+          "x": 49,
+          "y": 1539,
+          "width": 235,
+          "height": 40
+        }
+      },
+      {
+        "text": "控制台设置",
+        "ariaLabel": "控制台设置",
+        "title": "",
+        "className": "lx-sidebar-footer__settings",
+        "disabled": false,
+        "rect": {
+          "x": 53,
+          "y": 1807,
+          "width": 175,
+          "height": 44
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "收起导航",
+        "title": "",
+        "className": "lx-sidebar-footer__toggle",
+        "disabled": false,
+        "rect": {
+          "x": 236,
+          "y": 1807,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "打开移动端导航",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 293,
+          "y": 1682,
+          "width": 41,
+          "height": 170
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "",
+        "title": "Copy Code",
+        "className": "copy",
+        "disabled": false,
+        "rect": {
+          "x": 278,
+          "y": 1965,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "‹",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 53,
+          "y": 472,
+          "width": 14,
+          "height": 20
+        }
+      },
+      {
+        "text": "›",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 67,
+          "y": 472,
+          "width": 10,
+          "height": 20
+        }
+      },
+      {
+        "text": "‹",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 45,
+          "y": 532,
+          "width": 14,
+          "height": 20
+        }
+      },
+      {
+        "text": "›",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 59,
+          "y": 532,
+          "width": 10,
+          "height": 20
+        }
+      },
+      {
+        "text": "‹",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 53,
+          "y": 1293,
+          "width": 14,
+          "height": 20
+        }
+      },
+      {
+        "text": "›",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 67,
+          "y": 1293,
+          "width": 10,
+          "height": 20
+        }
+      },
+      {
+        "text": "‹",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 50,
+          "y": 1409,
+          "width": 14,
+          "height": 20
+        }
+      },
+      {
+        "text": "›",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 64,
+          "y": 1409,
+          "width": 10,
+          "height": 20
+        }
+      },
+      {
+        "text": "◉",
+        "ariaLabel": "",
+        "title": "Toggle overlay visibility",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 323,
+          "y": 6,
+          "width": 21,
+          "height": 24
+        }
+      },
+      {
+        "text": "×",
+        "ariaLabel": "",
+        "title": "Dismiss banner",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 346,
+          "y": 6,
+          "width": 21,
+          "height": 24
+        }
+      }
+    ],
+    "visibleInputs": [
+      {
+        "tagName": "INPUT",
+        "type": "checkbox",
+        "value": "on",
+        "checked": true,
+        "disabled": false,
+        "ariaLabel": "",
+        "label": "HUD 深色主题",
+        "className": "",
+        "rect": {
+          "x": 286,
+          "y": 1344,
+          "width": 13,
+          "height": 13
+        }
+      }
+    ],
+    "sidebar": {
+      "className": "VPSidebar",
+      "text": "Sidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格与分页\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅",
+      "activeLinks": [
+        {
+          "text": "LxSidebar 侧边栏",
+          "href": ""
+        }
+      ]
+    },
+    "bodyTextStart": "Skip to content\nLxUI\n首页\n组件\n新增组件\n\nAppearance\n\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格与分页\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxSidebar 侧边栏\n​\n\n双形态导航容器：expanded（252px 完整导航）/ rail（64px 图标轨道，hover 弹出二级 popper）。视觉源为 stitch 设计稿唯一基准，HUD 战术风格（激活竖条发光、品牌同心环呼吸）。\n\n基础用法\n​\n警务业务协同平台\n综合态势工作台\n协同岗管理\n预警与群组协同\n4\n勤务排班管理\n警务资源管理\n权限与人员中心\n三方集成与网关\n系统与License配置\nNODE-01\n专网\n控制台设置\n工作区\n最近选中：暂无（已触发 0 次）\n查看代码\n双形态受控切换（v-model:mode + 持久化）\n​\n警务业务协同平台\n综合态势工作台\n协同岗管理\n协同岗设置\n上下岗排班监控\n系统与License配置\nNODE-01\n专网\n控制台设置\nHUD 深色主题\n\n当前形态：expanded\n\n点击侧边栏底部按钮切换（已持久化到 localStorage）\n\n打开移动端导航\n查看代码\nAPI\n​\nProps\n​\n名称\t说明\t类型\t默认值\nmode / v-model:mode\t形态\t'rail' | 'expanded'\texpanded\nitems\t菜单树（key/title/icon/children/badge/badgeType/disabled/meta）；未知或非字符串图标安全回退为默认图标\tLxMenuItem[]\t[]\nactive-key\t激活项 key（建议绑定 route.name）\tstring\t''\ntitle / subtitle\t品牌标题 / 副标题\tstring\t警务业务协同平台\nmobile\t移动端模态导航抽屉（v-model:mobile）；打开后焦点进入抽屉，Tab 在抽屉内循环，关闭后返回触发控件\tboolean\tfalse\nshow-footer\t底部状态区（SLA 仪表 + 节点徽章 + 切换按钮）\tboolean\ttrue\nsla-value\tSLA 仪表数值\tnumber\t99.9\nnode-label / node-status\t节点徽章文案 / 状态\tstring / LxStatus\tNODE-01 / online\nlatency-label\texpanded 底部专网状态条文案；为空时回退到 node-label\tstring\t''\nEvents\n​\n名称\t说明\t回调\nselect\t菜单项选中（直达项与二级项统一出口）\t(item: LxMenuItem)\nexpand-change\t分组展开状态变化\t(keys: string[])\nupdate:mode / update:mobile\t受控更新\t—\n\n移动端抽屉可通过关闭按钮、遮罩或 Escape 关闭；选中菜单项时也会请求宿主关闭抽屉。由宿主控制 v-model:mobile，组件会在抽",
+    "impeccableNodes": [
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 22,
+          "y": 198,
+          "width": 331,
+          "height": 148
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "双形态导航容器：expanded（252px 完整导航）/ rail（64px 图标轨道，hover 弹出二级 popper）。视觉源为 stitch 设计稿唯一基准，HUD 战术风格（激活竖条发光、品牌同心环呼吸）。",
+          "rect": {
+            "x": 24,
+            "y": 200,
+            "width": 327,
+            "height": 144
+          },
+          "outerHTML": "<p>双形态导航容器：<code>expanded</code>（252px 完整导航）/ <code>rail</code>（64px 图标轨道，hover 弹出二级 popper）。视觉源为 stitch 设计稿唯一基准，HUD 战术风格（激活竖条发光、品牌同心环呼吸）。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 20,
+          "y": 178,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "layout property animation",
+        "rect": {
+          "x": 39,
+          "y": 480,
+          "width": 256,
+          "height": 564
+        },
+        "targetElement": {
+          "tagName": "ASIDE",
+          "id": "",
+          "className": "lx-sidebar lx-sidebar--expanded",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "警务业务协同平台 综合态势工作台 协同岗管理 预警与群组协同 4 勤务排班管理 警务资源管理 权限与人员中心 三方集成与网关 系统与License配置 NODE-01 专网 控制台设置",
+          "rect": {
+            "x": 41,
+            "y": 482,
+            "width": 252,
+            "height": 560
+          },
+          "outerHTML": "<aside data-v-6157c524=\"\" class=\"lx-sidebar lx-sidebar--expanded\"><!--v-if--><div data-v-a39a91a9=\"\" data-v-6157c524=\"\" class=\"lx-sidebar-brand lx-sidebar-brand--expanded\"><!-- rail 态：w-9 徽标 + 双层同心环（_1 规格） --><!-- expanded 态：w-10 圆角方形徽标 + 外圈呼吸环（_2 规格） --><div data-v-a39a91a9=\"\" class=\"lx-sidebar-brand__logo\"><span data-v-a39a91a9=\"\" class=\"lx-sidebar-brand__ring\"></span><svg data-v-7c5539c6=\"\" data-v-a39a91a9=\"\" class=\"lx-icon\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" data-icon-name=\"shield\" aria-hidden=\"true\"><!--v-if--><path data-v-7c5539c6=\"\" d=\"M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z\"></path><path data-v-7c5539c6=\"\" d=\"M9 12l2 2 4-4\"></path></svg></div><div data-v-a39a91a9=\"\" "
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "layout property animation",
+        "rect": {
+          "x": 37,
+          "y": 460,
+          "width": 168,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "‹\n›\n✦ glowing shadow accents",
+        "rect": {
+          "x": 55,
+          "y": 492,
+          "width": 44,
+          "height": 44
+        },
+        "targetElement": {
+          "tagName": "DIV",
+          "id": "",
+          "className": "lx-sidebar-brand__logo",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 57,
+            "y": 494,
+            "width": 40,
+            "height": 40
+          },
+          "outerHTML": "<div data-v-a39a91a9=\"\" class=\"lx-sidebar-brand__logo\"><span data-v-a39a91a9=\"\" class=\"lx-sidebar-brand__ring\"></span><svg data-v-7c5539c6=\"\" data-v-a39a91a9=\"\" class=\"lx-icon\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" data-icon-name=\"shield\" aria-hidden=\"true\"><!--v-if--><path data-v-7c5539c6=\"\" d=\"M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z\"></path><path data-v-7c5539c6=\"\" d=\"M9 12l2 2 4-4\"></path></svg></div>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "‹\n›\n✦ glowing shadow accents",
+        "rect": {
+          "x": 53,
+          "y": 472,
+          "width": 189,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 51,
+          "y": 487,
+          "width": 52,
+          "height": 52
+        },
+        "targetElement": {
+          "tagName": "SPAN",
+          "id": "",
+          "className": "lx-sidebar-brand__ring",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 52,
+            "y": 489,
+            "width": 50,
+            "height": 50
+          },
+          "outerHTML": "<span data-v-a39a91a9=\"\" class=\"lx-sidebar-brand__ring\"></span>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 49,
+          "y": 467,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 65,
+          "y": 502,
+          "width": 24,
+          "height": 24
+        },
+        "targetElement": {
+          "tagName": "svg",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 67,
+            "y": 504,
+            "width": 20,
+            "height": 20
+          },
+          "outerHTML": "<svg data-v-7c5539c6=\"\" data-v-a39a91a9=\"\" class=\"lx-icon\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" data-icon-name=\"shield\" aria-hidden=\"true\"><!--v-if--><path data-v-7c5539c6=\"\" d=\"M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z\"></path><path data-v-7c5539c6=\"\" d=\"M9 12l2 2 4-4\"></path></svg>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 63,
+          "y": 482,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 69,
+          "y": 504,
+          "width": 16,
+          "height": 19
+        },
+        "targetElement": {
+          "tagName": "path",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 71,
+            "y": 506,
+            "width": 12,
+            "height": 15
+          },
+          "outerHTML": "<path data-v-7c5539c6=\"\" d=\"M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z\"></path>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 67,
+          "y": 484,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 73,
+          "y": 510,
+          "width": 9,
+          "height": 7
+        },
+        "targetElement": {
+          "tagName": "path",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 75,
+            "y": 512,
+            "width": 5,
+            "height": 3
+          },
+          "outerHTML": "<path data-v-7c5539c6=\"\" d=\"M9 12l2 2 4-4\"></path>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 71,
+          "y": 490,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "‹\n›\n✦ glowing shadow accents",
+        "rect": {
+          "x": 47,
+          "y": 552,
+          "width": 239,
+          "height": 44
+        },
+        "targetElement": {
+          "tagName": "BUTTON",
+          "id": "",
+          "className": "lx-sidebar-item lx-sidebar-item--expanded is-active",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "综合态势工作台",
+          "rect": {
+            "x": 49,
+            "y": 554,
+            "width": 235,
+            "height": 40
+          },
+          "outerHTML": "<button data-v-1e2dd699=\"\" data-v-6157c524=\"\" class=\"lx-sidebar-item lx-sidebar-item--expanded is-active\" type=\"button\"><!-- 激活竖条：expanded w-1 h-4 + glow / rail w-0.5 上下内缩（_1 精确冰蓝切口） --><span data-v-1e2dd699=\"\" class=\"lx-sidebar-item__bar\"></span><!-- 图标盒：expanded w-6（16px 图标）/ rail w-8（20px 图标） --><span data-v-1e2dd699=\"\" class=\"lx-sidebar-item__icon\"><svg data-v-7c5539c6=\"\" data-v-1e2dd699=\"\" class=\"lx-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" data-icon-name=\"dashboard\" aria-hidden=\"true\"><!--v-if--><path data-v-7c5539c6=\"\" d=\"M4 4h7v7H4z\"></path><path data-v-7c5539c6=\"\" d=\"M13 4h7v4h-7z\"></path><path data-v-7c5539c6=\"\" d=\"M13 11h7v9h-7z\"></path><path data-v-7c5539c6=\"\" d=\"M4 14h7v6"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "‹\n›\n✦ glowing shadow accents",
+        "rect": {
+          "x": 45,
+          "y": 532,
+          "width": 189,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ glowing shadow accents",
+        "rect": {
+          "x": 47,
+          "y": 564,
+          "width": 8,
+          "height": 20
+        },
+        "targetElement": {
+          "tagName": "SPAN",
+          "id": "",
+          "className": "lx-sidebar-item__bar",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 49,
+            "y": 566,
+            "width": 4,
+            "height": 16
+          },
+          "outerHTML": "<span data-v-1e2dd699=\"\" class=\"lx-sidebar-item__bar\"></span>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ glowing shadow accents",
+        "rect": {
+          "x": 45,
+          "y": 544,
+          "width": 169,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 247,
+          "y": 950,
+          "width": 26,
+          "height": 28
+        },
+        "targetElement": {
+          "tagName": "SPAN",
+          "id": "",
+          "className": "lx-sidebar-footer__network-label",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "专网",
+          "rect": {
+            "x": 249,
+            "y": 952,
+            "width": 22,
+            "height": 24
+          },
+          "outerHTML": "<span data-v-97e33afb=\"\" class=\"lx-sidebar-footer__network-label\">专网</span>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 245,
+          "y": 930,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "low contrast text",
+        "rect": {
+          "x": 291,
+          "y": 692,
+          "width": 45,
+          "height": 196
+        },
+        "targetElement": {
+          "tagName": "OUTPUT",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "最近选中：暂无（已触发 0 次）",
+          "rect": {
+            "x": 293,
+            "y": 694,
+            "width": 41,
+            "height": 192
+          },
+          "outerHTML": "<output data-testid=\"sidebar-selection-count\" aria-live=\"polite\"> 最近选中：暂无（已触发 0 次） </output>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "low contrast text",
+        "rect": {
+          "x": 289,
+          "y": 672,
+          "width": 114,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "targetElement": {
+          "tagName": "BUTTON",
+          "id": "",
+          "className": "copy",
+          "role": "",
+          "ariaLabel": "",
+          "title": "Copy Code",
+          "text": "",
+          "rect": {
+            "x": 278,
+            "y": 1144,
+            "width": 44,
+            "height": 44
+          },
+          "outerHTML": "<button title=\"Copy Code\" class=\"copy\"></button>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "layout property animation",
+        "rect": {
+          "x": 39,
+          "y": 1301,
+          "width": 256,
+          "height": 564
+        },
+        "targetElement": {
+          "tagName": "ASIDE",
+          "id": "",
+          "className": "lx-sidebar lx-sidebar--expanded",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "警务业务协同平台 综合态势工作台 协同岗管理 协同岗设置 上下岗排班监控 系统与License配置 NODE-01 专网 控制台设置",
+          "rect": {
+            "x": 41,
+            "y": 1303,
+            "width": 252,
+            "height": 560
+          },
+          "outerHTML": "<aside data-v-6157c524=\"\" class=\"lx-sidebar lx-sidebar--expanded\"><!--v-if--><div data-v-a39a91a9=\"\" data-v-6157c524=\"\" class=\"lx-sidebar-brand lx-sidebar-brand--expanded\"><!-- rail 态：w-9 徽标 + 双层同心环（_1 规格） --><!-- expanded 态：w-10 圆角方形徽标 + 外圈呼吸环（_2 规格） --><div data-v-a39a91a9=\"\" class=\"lx-sidebar-brand__logo\"><span data-v-a39a91a9=\"\" class=\"lx-sidebar-brand__ring\"></span><svg data-v-7c5539c6=\"\" data-v-a39a91a9=\"\" class=\"lx-icon\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" data-icon-name=\"shield\" aria-hidden=\"true\"><!--v-if--><path data-v-7c5539c6=\"\" d=\"M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z\"></path><path data-v-7c5539c6=\"\" d=\"M9 12l2 2 4-4\"></path></svg></div><div data-v-a39a91a9=\"\" "
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "layout property animation",
+        "rect": {
+          "x": 37,
+          "y": 1281,
+          "width": 168,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "‹\n›\n✦ glowing shadow accents",
+        "rect": {
+          "x": 55,
+          "y": 1313,
+          "width": 44,
+          "height": 44
+        },
+        "targetElement": {
+          "tagName": "DIV",
+          "id": "",
+          "className": "lx-sidebar-brand__logo",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 57,
+            "y": 1315,
+            "width": 40,
+            "height": 40
+          },
+          "outerHTML": "<div data-v-a39a91a9=\"\" class=\"lx-sidebar-brand__logo\"><span data-v-a39a91a9=\"\" class=\"lx-sidebar-brand__ring\"></span><svg data-v-7c5539c6=\"\" data-v-a39a91a9=\"\" class=\"lx-icon\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" data-icon-name=\"shield\" aria-hidden=\"true\"><!--v-if--><path data-v-7c5539c6=\"\" d=\"M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z\"></path><path data-v-7c5539c6=\"\" d=\"M9 12l2 2 4-4\"></path></svg></div>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "‹\n›\n✦ glowing shadow accents",
+        "rect": {
+          "x": 53,
+          "y": 1293,
+          "width": 189,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 51,
+          "y": 1308,
+          "width": 52,
+          "height": 52
+        },
+        "targetElement": {
+          "tagName": "SPAN",
+          "id": "",
+          "className": "lx-sidebar-brand__ring",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 52,
+            "y": 1310,
+            "width": 50,
+            "height": 50
+          },
+          "outerHTML": "<span data-v-a39a91a9=\"\" class=\"lx-sidebar-brand__ring\"></span>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 49,
+          "y": 1288,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 65,
+          "y": 1323,
+          "width": 24,
+          "height": 24
+        },
+        "targetElement": {
+          "tagName": "svg",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 67,
+            "y": 1325,
+            "width": 20,
+            "height": 20
+          },
+          "outerHTML": "<svg data-v-7c5539c6=\"\" data-v-a39a91a9=\"\" class=\"lx-icon\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" data-icon-name=\"shield\" aria-hidden=\"true\"><!--v-if--><path data-v-7c5539c6=\"\" d=\"M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z\"></path><path data-v-7c5539c6=\"\" d=\"M9 12l2 2 4-4\"></path></svg>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 63,
+          "y": 1303,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 69,
+          "y": 1325,
+          "width": 16,
+          "height": 19
+        },
+        "targetElement": {
+          "tagName": "path",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 71,
+            "y": 1327,
+            "width": 12,
+            "height": 15
+          },
+          "outerHTML": "<path data-v-7c5539c6=\"\" d=\"M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z\"></path>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 67,
+          "y": 1305,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 73,
+          "y": 1331,
+          "width": 9,
+          "height": 7
+        },
+        "targetElement": {
+          "tagName": "path",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 75,
+            "y": 1333,
+            "width": 5,
+            "height": 3
+          },
+          "outerHTML": "<path data-v-7c5539c6=\"\" d=\"M9 12l2 2 4-4\"></path>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 71,
+          "y": 1311,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 52,
+          "y": 1418,
+          "width": 229,
+          "height": 40
+        },
+        "targetElement": {
+          "tagName": "BUTTON",
+          "id": "",
+          "className": "lx-sidebar-group__head has-active",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "协同岗管理",
+          "rect": {
+            "x": 54,
+            "y": 1420,
+            "width": 225,
+            "height": 36
+          },
+          "outerHTML": "<button data-v-d2d80241=\"\" class=\"lx-sidebar-group__head has-active\" type=\"button\" aria-expanded=\"true\" aria-controls=\"lx-sidebar-submenu-coop\"><span data-v-d2d80241=\"\" class=\"lx-sidebar-group__bar\"></span><span data-v-d2d80241=\"\" class=\"lx-sidebar-group__icon\"><svg data-v-7c5539c6=\"\" data-v-d2d80241=\"\" class=\"lx-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" data-icon-name=\"team\" aria-hidden=\"true\"><!--v-if--><path data-v-7c5539c6=\"\" d=\"M9 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7z\"></path><path data-v-7c5539c6=\"\" d=\"M3 20c0-3 2.7-5.5 6-5.5s6 2.5 6 5.5\"></path><path data-v-7c5539c6=\"\" d=\"M16 4.5a3.5 3.5 0 010 6.8\"></path><path data-v-7c5539c6=\"\" d=\"M17.5 14.8c2 .8 3.5 2.7 3.5 5.2\"></path></svg><"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 50,
+          "y": 1398,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "‹\n›\n✦ glowing shadow accents",
+        "rect": {
+          "x": 52,
+          "y": 1429,
+          "width": 8,
+          "height": 18
+        },
+        "targetElement": {
+          "tagName": "SPAN",
+          "id": "",
+          "className": "lx-sidebar-group__bar",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 54,
+            "y": 1431,
+            "width": 4,
+            "height": 14
+          },
+          "outerHTML": "<span data-v-d2d80241=\"\" class=\"lx-sidebar-group__bar\"></span>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "‹\n›\n✦ glowing shadow accents",
+        "rect": {
+          "x": 50,
+          "y": 1409,
+          "width": 189,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 60,
+          "y": 1424,
+          "width": 28,
+          "height": 28
+        },
+        "targetElement": {
+          "tagName": "SPAN",
+          "id": "",
+          "className": "lx-sidebar-group__icon",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 62,
+            "y": 1426,
+            "width": 24,
+            "height": 24
+          },
+          "outerHTML": "<span data-v-d2d80241=\"\" class=\"lx-sidebar-group__icon\"><svg data-v-7c5539c6=\"\" data-v-d2d80241=\"\" class=\"lx-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" data-icon-name=\"team\" aria-hidden=\"true\"><!--v-if--><path data-v-7c5539c6=\"\" d=\"M9 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7z\"></path><path data-v-7c5539c6=\"\" d=\"M3 20c0-3 2.7-5.5 6-5.5s6 2.5 6 5.5\"></path><path data-v-7c5539c6=\"\" d=\"M16 4.5a3.5 3.5 0 010 6.8\"></path><path data-v-7c5539c6=\"\" d=\"M17.5 14.8c2 .8 3.5 2.7 3.5 5.2\"></path></svg><!--v-if--></span>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 58,
+          "y": 1404,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 64,
+          "y": 1428,
+          "width": 20,
+          "height": 20
+        },
+        "targetElement": {
+          "tagName": "svg",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 66,
+            "y": 1430,
+            "width": 16,
+            "height": 16
+          },
+          "outerHTML": "<svg data-v-7c5539c6=\"\" data-v-d2d80241=\"\" class=\"lx-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" data-icon-name=\"team\" aria-hidden=\"true\"><!--v-if--><path data-v-7c5539c6=\"\" d=\"M9 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7z\"></path><path data-v-7c5539c6=\"\" d=\"M3 20c0-3 2.7-5.5 6-5.5s6 2.5 6 5.5\"></path><path data-v-7c5539c6=\"\" d=\"M16 4.5a3.5 3.5 0 010 6.8\"></path><path data-v-7c5539c6=\"\" d=\"M17.5 14.8c2 .8 3.5 2.7 3.5 5.2\"></path></svg>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 62,
+          "y": 1408,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 68,
+          "y": 1431,
+          "width": 9,
+          "height": 9
+        },
+        "targetElement": {
+          "tagName": "path",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 70,
+            "y": 1433,
+            "width": 5,
+            "height": 5
+          },
+          "outerHTML": "<path data-v-7c5539c6=\"\" d=\"M9 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7z\"></path>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 66,
+          "y": 1411,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 66,
+          "y": 1438,
+          "width": 12,
+          "height": 8
+        },
+        "targetElement": {
+          "tagName": "path",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 68,
+            "y": 1440,
+            "width": 8,
+            "height": 4
+          },
+          "outerHTML": "<path data-v-7c5539c6=\"\" d=\"M3 20c0-3 2.7-5.5 6-5.5s6 2.5 6 5.5\"></path>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 64,
+          "y": 1418,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 75,
+          "y": 1431,
+          "width": 6,
+          "height": 9
+        },
+        "targetElement": {
+          "tagName": "path",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 77,
+            "y": 1433,
+            "width": 2,
+            "height": 5
+          },
+          "outerHTML": "<path data-v-7c5539c6=\"\" d=\"M16 4.5a3.5 3.5 0 010 6.8\"></path>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 73,
+          "y": 1411,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 76,
+          "y": 1438,
+          "width": 6,
+          "height": 7
+        },
+        "targetElement": {
+          "tagName": "path",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 78,
+            "y": 1440,
+            "width": 2,
+            "height": 3
+          },
+          "outerHTML": "<path data-v-7c5539c6=\"\" d=\"M17.5 14.8c2 .8 3.5 2.7 3.5 5.2\"></path>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 74,
+          "y": 1418,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 94,
+          "y": 1424,
+          "width": 157,
+          "height": 28
+        },
+        "targetElement": {
+          "tagName": "SPAN",
+          "id": "",
+          "className": "lx-sidebar-group__title",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "协同岗管理",
+          "rect": {
+            "x": 96,
+            "y": 1426,
+            "width": 153,
+            "height": 24
+          },
+          "outerHTML": "<span data-v-d2d80241=\"\" class=\"lx-sidebar-group__title\">协同岗管理</span>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 92,
+          "y": 1404,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 79,
+          "y": 1462,
+          "width": 198,
+          "height": 32
+        },
+        "targetElement": {
+          "tagName": "BUTTON",
+          "id": "",
+          "className": "lx-sidebar-group__subitem is-active",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "协同岗设置",
+          "rect": {
+            "x": 81,
+            "y": 1464,
+            "width": 194,
+            "height": 28
+          },
+          "outerHTML": "<button data-v-d2d80241=\"\" class=\"lx-sidebar-group__subitem is-active\" tabindex=\"0\" type=\"button\"><!-- 前缀圆点：激活 sky-400 / 非激活 slate-500（_2: w-1 h-1） --><span data-v-d2d80241=\"\" class=\"lx-sidebar-group__subdot is-active\"></span><span data-v-d2d80241=\"\" class=\"lx-sidebar-group__subtext\">协同岗设置</span><!--v-if--></button>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 77,
+          "y": 1442,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 89,
+          "y": 1474,
+          "width": 8,
+          "height": 8
+        },
+        "targetElement": {
+          "tagName": "SPAN",
+          "id": "",
+          "className": "lx-sidebar-group__subdot is-active",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "",
+          "rect": {
+            "x": 91,
+            "y": 1476,
+            "width": 4,
+            "height": 4
+          },
+          "outerHTML": "<span data-v-d2d80241=\"\" class=\"lx-sidebar-group__subdot is-active\"></span>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 87,
+          "y": 1454,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 101,
+          "y": 1464,
+          "width": 166,
+          "height": 28
+        },
+        "targetElement": {
+          "tagName": "SPAN",
+          "id": "",
+          "className": "lx-sidebar-group__subtext",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "协同岗设置",
+          "rect": {
+            "x": 103,
+            "y": 1466,
+            "width": 162,
+            "height": 24
+          },
+          "outerHTML": "<span data-v-d2d80241=\"\" class=\"lx-sidebar-group__subtext\">协同岗设置</span>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 99,
+          "y": 1444,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 247,
+          "y": 1771,
+          "width": 26,
+          "height": 28
+        },
+        "targetElement": {
+          "tagName": "SPAN",
+          "id": "",
+          "className": "lx-sidebar-footer__network-label",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "专网",
+          "rect": {
+            "x": 249,
+            "y": 1773,
+            "width": 22,
+            "height": 24
+          },
+          "outerHTML": "<span data-v-97e33afb=\"\" class=\"lx-sidebar-footer__network-label\">专网</span>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ ai color palette",
+        "rect": {
+          "x": 245,
+          "y": 1751,
+          "width": 115,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "low contrast text",
+        "rect": {
+          "x": 274,
+          "y": 1412,
+          "width": 78,
+          "height": 88
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "当前形态：expanded",
+          "rect": {
+            "x": 276,
+            "y": 1414,
+            "width": 74,
+            "height": 84
+          },
+          "outerHTML": "<p>当前形态：expanded</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "low contrast text",
+        "rect": {
+          "x": 272,
+          "y": 1392,
+          "width": 114,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "low contrast text",
+        "rect": {
+          "x": 270,
+          "y": 1540,
+          "width": 87,
+          "height": 116
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "点击侧边栏底部按钮切换（已持久化到 localStorage）",
+          "rect": {
+            "x": 272,
+            "y": 1542,
+            "width": 83,
+            "height": 112
+          },
+          "outerHTML": "<p style=\"font-size: 12px;\"> 点击侧边栏底部按钮切换（已持久化到 localStorage） </p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "low contrast text",
+        "rect": {
+          "x": 268,
+          "y": 1520,
+          "width": 114,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "targetElement": {
+          "tagName": "BUTTON",
+          "id": "",
+          "className": "copy",
+          "role": "",
+          "ariaLabel": "",
+          "title": "Copy Code",
+          "text": "",
+          "rect": {
+            "x": 278,
+            "y": 1965,
+            "width": 44,
+            "height": 44
+          },
+          "outerHTML": "<button title=\"Copy Code\" class=\"copy\"></button>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 22,
+          "y": 3229,
+          "width": 331,
+          "height": 120
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "移动端抽屉可通过关闭按钮、遮罩或 Escape 关闭；选中菜单项时也会请求宿主关闭抽屉。由宿主控制 v-model:mobile，组件会在抽屉关闭后恢复打开前的键盘焦点。",
+          "rect": {
+            "x": 24,
+            "y": 3231,
+            "width": 327,
+            "height": 116
+          },
+          "outerHTML": "<p>移动端抽屉可通过关闭按钮、遮罩或 <code>Escape</code> 关闭；选中菜单项时也会请求宿主关闭抽屉。由宿主控制 <code>v-model:mobile</code>，组件会在抽屉关闭后恢复打开前的键盘焦点。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 20,
+          "y": 3209,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 22,
+          "y": 3361,
+          "width": 331,
+          "height": 122
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "菜单项提供 path 时渲染为链接并由宿主的 select 事件处理路由；未提供 path 时渲染为按钮。每次激活只触发一次 select，分组标题只切换展开状态。",
+          "rect": {
+            "x": 24,
+            "y": 3363,
+            "width": 327,
+            "height": 118
+          },
+          "outerHTML": "<p>菜单项提供 <code>path</code> 时渲染为链接并由宿主的 <code>select</code> 事件处理路由；未提供 <code>path</code> 时渲染为按钮。每次激活只触发一次 <code>select</code>，分组标题只切换展开状态。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 20,
+          "y": 3341,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 22,
+          "y": 3495,
+          "width": 331,
+          "height": 122
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "分组标题支持 Enter 和 Space 展开；rail 分组可用键盘打开子项浮层，Escape 关闭浮层并将焦点还给分组标题。所有过渡和品牌呼吸效果均遵守 prefers-reduced-motion。",
+          "rect": {
+            "x": 24,
+            "y": 3497,
+            "width": 327,
+            "height": 118
+          },
+          "outerHTML": "<p>分组标题支持 <code>Enter</code> 和 <code>Space</code> 展开；rail 分组可用键盘打开子项浮层，<code>Escape</code> 关闭浮层并将焦点还给分组标题。所有过渡和品牌呼吸效果均遵守 <code>prefers-reduced-motion</code>。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 20,
+          "y": 3475,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 22,
+          "y": 3765,
+          "width": 331,
+          "height": 180
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "默认 footer 会随 mode 切换形态：expanded 显示专网状态条、延迟文案、控制台设置和收起按钮；rail 显示 SLA 圆环、NODE 徽章和展开按钮。latency-label 只影响 expanded 状态条，rail 仍使用 sla-value 与 node-label。",
+          "rect": {
+            "x": 24,
+            "y": 3767,
+            "width": 327,
+            "height": 176
+          },
+          "outerHTML": "<p>默认 <code>footer</code> 会随 <code>mode</code> 切换形态：expanded 显示专网状态条、延迟文案、控制台设置和收起按钮；rail 显示 SLA 圆环、NODE 徽章和展开按钮。<code>latency-label</code> 只影响 expanded 状态条，rail 仍使用 <code>sla-value</code> 与 <code>node-label</code>。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 20,
+          "y": 3745,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-banner",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "layout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 36
+        },
+        "targetElement": null
+      }
+    ],
+    "hudNodes": 1,
+    "activeElement": {
+      "tagName": "BODY",
+      "role": "",
+      "ariaLabel": "",
+      "className": "",
+      "text": "Skip to content\nLxUI\n首页\n组件\n新增组件\n\nAppearance\n\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLx"
+    }
+  },
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:4175/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:4175/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 39 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8159,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: width color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cdark-glow%c Zero-offset box-shadow glow (#38bdf8) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cdark-glow%c Zero-offset box-shadow glow (#38bdf8) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan gradient background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cdark-glow%c Zero-offset box-shadow glow (#38bdf8) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clow-contrast%c 4.3:1 (need 4.5:1) — text #6b7280 on #f0f2f5 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: width color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cdark-glow%c Zero-offset box-shadow glow (#38bdf8) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cdark-glow%c Zero-offset box-shadow glow (#38bdf8) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clow-contrast%c 4.3:1 (need 4.5:1) — text #6b7280 on #f0f2f5 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clow-contrast%c 4.3:1 (need 4.5:1) — text #6b7280 on #f0f2f5 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8169,
+        "columnNumber": 12
+      }
+    }
+  ],
+  "pageErrors": []
+}

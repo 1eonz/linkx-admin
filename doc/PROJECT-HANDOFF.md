@@ -1960,3 +1960,37 @@
 - **未关闭**：展开的 P1/P2 分组仍分别含 26/29 项，作为 P2 跟踪；E2E 名称集合核对作为 P3 跟踪。真实屏幕阅读器、生产权限菜单畸形数据、Firefox/Safari 和实体触屏未覆盖，且浅色默认页一条 console 404 未归因；因此不增加 52 项严格矩阵关闭数。
 - **评估记录边界**：一份较早修后 B 运行已从综合结论排除。现存报告不能唯一证明哪一文件对应交叉风险；`agent-assessment-b-postfix/assessment-b.md` 已标为历史分报告，正式 B 仅指向 `agent-assessment-b-isolated-final/assessment-b.md`。
 - **下一步**：自动进入 DynamicForm 波次，按后续拆分完成 renderer 独立文件、密码宿主校验/ARIA、远程 Mock 取消和乱序、上传状态映射、`daterange` 往返、自适应列数及父级受控值回灌。生产接口和上传值契约需按真实宿主来源确认。API 请求保持 `.then().catch().finally()`；每步同步中文计划、交接和审查记录，并分两笔 Conventional Commit 推送。
+
+## 2026-10-07 Wave 6 交接：Cascader、Descriptions、VirtualTree 与文档侧栏
+
+### 目标
+
+完成当前版本 Cascader、Descriptions、VirtualTree 和文档侧栏的严格设计对照、行为回归、浏览器取证、独立代码审核及 Impeccable A/B；修复审核中发现的焦点、键碰撞、键盘冒泡和主题传送问题。
+
+### 改动与结果
+
+- Cascader 传送弹层继承 HUD Element Plus 变量；Descriptions 主题标签和侧栏术语改为中文；VirtualTree 行内展开按钮/复选框不再参与重复键盘操作，number/string 键使用类型隔离，空字符串键过滤后保留焦点，移动 Demo 控件最小高度为 44px。
+- 同步中文 Demo、API 文档、侧栏配置、Vue3 单测和文档 E2E。业务 API、权限协议、路由和宿主 Element Plus 依赖未改变。
+- 空字符串键回归测试使用两行都匹配过滤条件，旧实现会错误回退到第一行；当前定向 VirtualTree 18/18 通过。
+
+### 实际验证
+
+- Vue3 全量 Vitest：58 个文件、457 个测试通过。
+- VirtualTree 18/18、Descriptions 6/6；两个文档 E2E 共 6/6。
+- lx-ui 类型检查、库构建、VitePress 文档构建、Vue3 类型检查、目标格式检查和 `git diff --check` 通过；文档构建保留既有大 chunk 警告。
+- 独立代码审核批准，无可复现 P0-P3；报告为 `.impeccable/critique/wave6-descriptions-virtualtree-2026-10-07/code-review-wave6.md`。
+- Assessment A 35/40（Good）；Assessment B 7 项 detector 均为有效 JSON `[]`、stderr 空、退出码 0，四页新标签 overlay/键盘/HUD/错误/空态/375px 采集完成。B 使用隔离 Playwright fallback，完整证据索引为 `.impeccable/critique/wave6-descriptions-virtualtree-2026-10-07/recheck-assessment-b/evidence-index.md`。
+- 正式综合报告为 `.impeccable/critique/wave6-descriptions-virtualtree-2026-10-07/final-report.md`。detector 的 `[]` 只表示静态规则零命中，不单独代表视觉通过；临时 live server 和文档服务均已停止并验证端口不可达。
+
+### 未完成与风险
+
+- Demo 控制区渐进披露、VirtualTree 自定义 node 插槽单行/可测量高度契约、Cascader loading 触发器语义分别登记为 P2、P2、P3。
+- 本波只关闭组件级审核门禁，不增加 UI-10 52 项全库严格矩阵关闭数；Vue3 `DataPermissionTree` 宿主替换、真实权限联调、权限中心/文本字段权限/引导页继续延期。
+
+### 下一步交接
+
+进入 Wave 7 `LxTransferPanel`：严格对照 `design/虚拟滚动树 + 双栏穿梭/code.html` 和 `screen.png`，落实 5:2:5 栅格、380px 面板、32px 行高、节点 code/status、空/加载/错误、上限/禁用、窄屏 44px、HUD 和 `prefers-reduced-motion`；补单测、Mock/E2E、A/B、代码审核和 snapshot/trend。库级门禁完成后再回归 Vue3 `DataPermissionTree` 的 props、exposes、勾选与回传契约。
+
+### 提交约定
+
+实现和回归文件使用一笔 `fix(lx-ui): ...`；计划、交接、审计、审核和 Impeccable 证据使用一笔 `docs(project): ...`。只暂存本波白名单，排除 `.pnpm-store`、旧波次证据和运行时文件；两笔提交均需推送 `origin/main`。

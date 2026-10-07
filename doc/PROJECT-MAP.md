@@ -1,5 +1,13 @@
 # LinkX 项目地图
 
+## 2026-10-07 UI-13 / Wave 6 组件级正式验收
+
+- **入口**：`linkx-fe/src/components/LxCascader/`、`LxDescriptions/`、`LxVirtualTree/`，文档侧栏配置位于 `linkx-fe/docs/.vitepress/config.ts`；行为回归位于 Vue3 `tests/unit/lx-virtual-tree.test.ts`、`lx-descriptions.test.ts` 及对应文档 E2E。
+- **完成**：当前源码已通过 Cascader HUD 弹层、Descriptions 术语、VirtualTree 键盘/混合勾选/键碰撞/空键焦点和移动控件修复，中文文档与 E2E 同步。
+- **证据**：全量 Vitest 58/457；VirtualTree 18/18、Descriptions 6/6；文档 E2E 6/6；lx-ui 类型/库构建/文档构建和 Vue3 类型检查通过。A 35/40；B 7 个 detector 为有效 `[]`/空 stderr/exit 0，并完成四页浏览器 overlay 取证；代码复审批准。正式报告和原始证据见 `.impeccable/critique/wave6-descriptions-virtualtree-2026-10-07/`。
+- **边界**：`[]` 不等于视觉通过；Assessment B 使用隔离 Playwright fallback。Demo 控制密度、VirtualTree 插槽高度、Cascader loading 文案列入后续 P2/P3。全库 52 项严格矩阵、Vue3 `DataPermissionTree` 宿主替换和真实权限联调仍未完成。
+- **下一入口**：Wave 7 `LxTransferPanel`，对照 `design/虚拟滚动树 + 双栏穿梭/` 完成 5:2:5、380px、code/status、空/错/加载、键盘、HUD、窄屏和减少动效，再执行宿主契约回归。
+
 ## 2026-10-07 UI-13 / Wave 5 选择器组件验收
 
 - **入口**：`linkx-fe/src/components/LxTreeSelect/`、`LxCascader/`、`LxSelectPagination/`；测试为 Vue3 `tests/unit/lx-select-pagination.test.ts` 及三份文档 E2E。

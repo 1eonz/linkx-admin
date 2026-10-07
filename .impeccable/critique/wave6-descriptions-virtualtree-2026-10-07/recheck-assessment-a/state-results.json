@@ -1,0 +1,89 @@
+{
+  "cascader": {
+    "loading": {
+      "busy": "true",
+      "invalid": null,
+      "feedback": "加载中",
+      "retryCount": 0,
+      "inputDisabled": false
+    },
+    "loadingError": {
+      "busy": "true",
+      "invalid": null,
+      "feedback": "加载中",
+      "retryCount": 0
+    },
+    "error": {
+      "ariaInvalid": "true",
+      "ariaDescribedBy": "cascader-demo-path-error",
+      "errorId": "cascader-demo-path-error",
+      "focusClass": "el-input__wrapper is-focus",
+      "focusBorder": "rgb(186, 26, 26) 0px 0px 0px 1px inset",
+      "transition": "0s"
+    },
+    "english": "Failed to load organization data\nRetry",
+    "disabled": {
+      "inputDisabled": true,
+      "triggerClass": "el-input el-input--default is-disabled el-input--suffix",
+      "feedback": "组织路径控件当前已禁用。"
+    }
+  },
+  "descriptions": {
+    "errorBefore": {
+      "role": "alert",
+      "text": "详情读取失败。重试",
+      "visibleDescriptions": 0
+    },
+    "afterRetry": 1,
+    "loading": {
+      "role": "status",
+      "busy": "true"
+    },
+    "empty": {
+      "role": "status",
+      "text": "暂无可展示的详情。"
+    },
+    "copyFocus": {
+      "focused": true,
+      "outline": "none",
+      "label": "复制警号：005882"
+    },
+    "theme": {
+      "htmlDark": true,
+      "htmlHud": true
+    },
+    "reducedMotionTransition": "1e-05s"
+  },
+  "virtualTree": {
+    "error": {
+      "role": "alert",
+      "text": "组织数据加载失败。重试"
+    },
+    "retryTree": 1,
+    "empty": {
+      "treeCount": 1,
+      "emptyText": "暂无数据",
+      "status": "宿主返回了空结果"
+    },
+    "expandedAll": 21,
+    "collapsedAll": 12
+  },
+  "sidebar": {
+    "groupKeyboard": {
+      "expandedAfterSpace": "false",
+      "outline": "solid"
+    },
+    "railFocus": {
+      "focused": true,
+      "outline": "solid"
+    },
+    "railEscape": {
+      "popper": 0,
+      "triggerFocused": true
+    },
+    "brandMotion": {
+      "animation": "none",
+      "duration": "1e-05s"
+    }
+  }
+}

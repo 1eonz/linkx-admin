@@ -1,0 +1,262 @@
+{
+  "title": "LxUpload 文件上传 | LxUI",
+  "bodyText": "Skip to contentLxUI搜索文档K Main Navigation 首页组件新增组件Appearance菜单本页导航 Sidebar Navigation 新增组件新增组件总览基础基础控件桥接LxButton 按钮LxIcon 图标总览布局导航LxSidebar 侧边栏LxNavbar 顶部导航LxBreadcrumb 面包屑LxTabsBar 页签栏LxSplitLayout 分栏布局LxSelectTree 组织树选择数据展示LxProTable 数据表格LxPageCard 页面容器LxMetricCard 指标卡LxDutyCalendar 排班日历LxSectionTitle 区块标题LxAuthImg 鉴权图片LxDescriptions 详情描述LxPagination 分页LxVirtualTree 虚拟树LxTransferPanel 双栏穿梭LxStatusDot 状态点LxTag 浅底标签LxCodeSlot 代码槽LxActionButtons 行内操作LxEmpty 空态LxGauge 圆环仪表LxNodeBadge 节点徽章权限消费数据录入LxForm 表单LxInput 输入框LxTextarea 文本域LxRadio 单选组LxCheckbox 复选组LxSwitch 开关LxSelect 下拉选择LxTreeSelect 树形下拉LxCascader 级联选择LxDatePicker 日期选择LxInputNumber 数字输入LxSearchBar 检索面板LxDynamicForm 动态表单LxStatusSwitch 状态开关LxPasswordInput 密码输入框LxUpload 文件上传LxSelectPagination 远程分页选择反馈与浮层LxMessage 全局提示LxConfirm 确认框LxDialog 表单弹窗LxDrawer 详情抽屉LxFormErrorBanner 校验横幅本页导航交互示例排班数据导入PropsEvents插槽与实例文件值拖拽区与列表行为窄屏与触屏请求边界设计对照记录LxUpload 文件上传 ​基于 Element Plus 上传能力统一文件校验、拖拽区域、上传进度和文件状态展示。网络请求由宿主通过 action 或 httpRequest 配置；组件不访问业务接口。交互示例 ​排班数据导入 支持 CSV、Excel 文件；所有传输状态均由本地内存 Mock 驱动。拖拽文件到虚线框可见\"释放鼠标即可上传\"切换态；开启\"选择后立即上传\"后，上传期间拖区切换为聚合进度面板，可随时取消；关闭时文件以\"排队中\"徽章等待提交。 文档站整体深色（HUD） 文件列表 标准行 紧凑标签 选择后立即上传 禁用上传 上传文件 正在上传 1 个文件 总进度 20%，请勿关闭页面 取消上传 已选 1 个文件 全部清空 fallback-abort.csv上传中20% 17 B 上传全部待传文件 清空文件 下一次上传失败 Mock 请求1已取消0最近状态尚未上传文件查看示例代码vue<script setup lang=\"ts\"> import { onBeforeUnmount, onMounted, ref, watch } from 'vue' import { LxUpload, type LxUploadFile, type LxUploadInstance, type LxUploadListType, type LxUploadRequestOptions, } from '../../../index' type MockMode = 'success' | 'failure' const uploadRef = ref<LxUploadInstance>() const files = ref<LxUploadFile[]>([]) const nextMode = ref<MockMode>('success') const listType = ref<LxUploadListType>('standard-rows') const disabled = ref(false) const autoUpload = ref(false) const hudTheme = ref(false) const requestCount = ref(0) const cancelledCount = ref(0) const lastAction = ref('尚未上传文件') let originalDark = false let originalHud = false function mockUpload(options: LxUploadRequestOptions): XMLHttpRequest { requestCount.value += 1 let percentage = 0 let timer: number | undefined const request = new XMLHttpRequest() request.abort = () => { if (timer !== undefined) window.clearInterval(timer) cancelledCount.value += 1 lastAction.value = `${options.file.name} 已取消` } timer = window.setInterval(() => { percentage += 20 if (percentage < 100) { const event = Object.assign(new ProgressEvent('progress'), { percent: percentage, }) options.onProgress(event) return } window.clearInterval(timer) timer = undefined if (nextMode.value === 'failure') { nextMode.value = 'success' const error = Object.assign(new Error('上传服务暂不可用，请重试'), { name: 'UploadAjaxError', status: 500, method: options.method, url: options.action, }) options.onError(error) lastAction.value = `${options.file.name} 上传失败` return } options.onSuccess({ success: true, fileName: options.file.name }) lastAction.value = `${options.file.name} 上传成功` }, 300) return request } function setNextFailure() { nextMode.value = 'failure' lastAction.value = '下一次本地 Mock 请求将失败' } function handleSuccess(file: LxUploadFile) { lastAction.value = `${file.name} 上传成功` } function handleError(file: LxUploadFile, error: Error) { lastAction.value = `${file.name} 上传失败：${error.message}` } function setTheme(enabled: boolean) { if (typeof document === 'undefined') return document.documentElement.classList.toggle('dark', enabled || originalDark) document.documentElement.classList.toggle( 'lx-theme-hud', enabled || originalHud, ) } watch(hudTheme, setTheme) onMounted(() => { originalDark = document.documentElement.classList.contains('dark') originalHud = document.documentElement.classList.contains('lx-theme-hud') setTheme(hudTheme.value) }) onBeforeUnmount(() => { if (typeof document === 'undefined') return document.documentElement.classList.toggle('dark', originalDark) document.documentElement.classList.toggle('lx-theme-hud', originalHud) }) </script> <template> <section class=\"lx-upload-demo\" aria-labelledby=\"lx-upload-demo-title\"> <header class=\"lx-upload-demo__header\"> <div> <h2 id=\"lx-upload-demo-title\">排班数据导入</h2> <p> 支持 CSV、Excel 文件；所有传输状态均由本地内存 Mock 驱动。拖拽文件到虚线框可见\"释放鼠标即可上传\"切换态；开启\"选择后立即上传\"后，上传期间拖区切换为聚合进度面板，可随时取消；关闭时文件以\"排队中\"徽章等待提交。 </p> </div> <label class=\"lx-upload-demo__toggle\"> <input v-model=\"hudTheme\" type=\"checkbox\" /> 文档站整体深色（HUD） </label> </header> <div class=\"lx-upload-demo__toolbar\"> <fieldset class=\"lx-upload-demo__mode-group\"> <legend>文件列表</legend> <button type=\"button\" :aria-pressed=\"listType === 'standard-rows'\" @click=\"listType = 'standard-rows'\" > 标准行 </button> <button type=\"button\" :aria-pressed=\"listType === 'compact-chips'\" @click=\"listType = 'compact-chips'\" > 紧凑标签 </button> </fieldset> <label class=\"lx-upload-demo__toggle\"> <input v-model=\"autoUpload\" type=\"checkbox\" /> 选择后立即上传 </label> <label class=\"lx-upload-demo__toggle\"> <input v-model=\"disabled\" type=\"checkbox\" /> 禁用上传 </label> </div> <label class=\"lx-upload-demo__field\"> <span>上传文件</span> <LxUpload ref=\"uploadRef\" v-model=\"files\" action=\"mock://upload\" accept=\".xlsx,.csv\" :limit=\"5\" :max-size=\"10\" :auto-upload=\"autoUpload\" :disabled=\"disabled\" :multiple=\"true\" :drag=\"true\" :list-type=\"listType\" :chunk-size=\"1024\" :http-request=\"mockUpload\" @success=\"handleSuccess\" @error=\"handleError\" /> </label> <div class=\"lx-upload-demo__actions\" aria-label=\"上传操作\"> <button type=\"button\" :disabled=\"disabled || files.length === 0\" @click=\"uploadRef?.submit()\" > 上传全部待传文件 </button> <button type=\"button\" :disabled=\"disabled || files.length === 0\" @click=\"uploadRef?.clearFiles()\" > 清空文件 </button> <button type=\"button\" :disabled=\"disabled\" @click=\"setNextFailure\"> 下一次上传失败 </button> </div> <dl class=\"lx-upload-demo__stats\" aria-live=\"polite\"> <div> <dt>Mock 请求</dt> <dd data-testid=\"upload-request-count\">{{ requestCount }}</dd> </div> <div> <dt>已取消</dt> <dd data-testid=\"upload-cancel-count\">{{ cancelledCount }}</dd> </div> <div> <dt>最近状态</dt> <dd data-testid=\"upload-last-action\">{{ lastAction }}</dd> </div> </dl> </section> </template> <style scoped> .lx-upload-demo { display: grid; max-width: 760px; min-width: 0; gap: 20px; padding: 20px; border: 1px solid var(--lx-border-light); background: var(--lx-bg-card); color: var(--lx-text-primary); } .lx-upload-demo__header, .lx-upload-demo__toolbar, .lx-upload-demo__toggle, .lx-upload-demo__actions, .lx-upload-demo__mode-group { display: flex; align-items: center; gap: 12px; } .lx-upload-demo__header, .lx-upload-demo__toolbar { justify-content: space-between; } .lx-upload-demo__header h2 { margin: 0; font-size: 16px; line-height: 24px; } .lx-upload-demo__header p, .lx-upload-demo__mode-group legend { margin: 4px 0 0; color: var(--lx-text-secondary); font-size: 12px; } .lx-upload-demo__toggle, .lx-upload-demo__field, .lx-upload-demo__mode-group { color: var(--lx-text-regular); font-size: 13px; } .lx-upload-demo__toggle { min-height: 44px; flex: 0 0 auto; white-space: nowrap; } .lx-upload-demo__toggle input { accent-color: var(--lx-color-primary); } .lx-upload-demo__field { display: grid; min-width: 0; gap: var(--lx-space-sm); } .lx-upload-demo__mode-group { flex-wrap: wrap; margin: 0; padding: 0; border: 0; } .lx-upload-demo__mode-group legend { float: left; padding: 0; } .lx-upload-demo__mode-group button, .lx-upload-demo__actions button { min-height: 44px; padding: 0 12px; border: 1px solid var(--lx-border); border-radius: var(--lx-radius-md); background: var(--lx-bg-card); color: var(--lx-text-primary); cursor: pointer; font: inherit; } .lx-upload-demo__mode-group button[aria-pressed='true'], .lx-upload-demo__actions button:first-child { border-color: var(--lx-color-primary); background: var(--lx-color-primary-light); color: var(--lx-color-primary); } .lx-upload-demo__actions button:disabled { cursor: not-allowed; opacity: 0.55; } .lx-upload-demo__mode-group button:focus-visible, .lx-upload-demo__actions button:focus-visible, .lx-upload-demo__toggle input:focus-visible { outline: 2px solid var(--lx-color-primary); outline-offset: 2px; } .lx-upload-demo__actions { flex-wrap: wrap; justify-content: flex-start; } .lx-upload-demo__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding-top: 16px; border-top: 1px solid var(--lx-border-light); color: var(--lx-text-secondary); font-size: 12px; } .lx-upload-demo__stats div { min-width: 0; } .lx-upload-demo__stats dt { margin-bottom: 4px; } .lx-upload-demo__stats dd { overflow-wrap: anywhere; margin: 0; color: var(--lx-text-primary); } @media (max-width: 600px) { .lx-upload-demo { padding: 16px; } .lx-upload-demo__header, .lx-upload-demo__toolbar { align-items: flex-start; flex-direction: column; } .lx-upload-demo__stats { grid-template-columns: 1fr; } } </style>示例覆盖手动/自动上传、拖拽区三态、聚合进度面板与取消上传、成功/失败/排队徽章、进度、重试、文件校验、禁用、标准行/紧凑标签和 HUD 深色主题。请求由 Demo 内存 Mock 提供，不发送网络请求。Props ​名称类型默认值说明modelValueunknown[][]受控文件列表，配合 v-model；变更时发出 LxUploadFile[]，保留文件 URL 和宿主适配器的原始 response。actionstring''Element Plus 默认上传地址。为空且未配置 httpRequest 时，提交会被阻止并显示配置",
+  "interactive": [
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": "搜索文档",
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "搜索文档K",
+      "className": "DocSearch DocSearch-Button"
+    },
+    {
+      "tag": "BUTTON",
+      "role": "switch",
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": "VPSwitch VPSwitchAppearance"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": "extra navigation",
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": "button"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "本页导航",
+      "className": ""
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "新增组件",
+      "className": "item"
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "基础",
+      "className": "item"
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "布局导航",
+      "className": "item"
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "数据展示",
+      "className": "item"
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "数据录入",
+      "className": "item"
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "反馈与浮层",
+      "className": "item"
+    },
+    {
+      "tag": "INPUT",
+      "role": null,
+      "type": "checkbox",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": ""
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": "true",
+      "disabled": false,
+      "text": "标准行",
+      "className": ""
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": "false",
+      "disabled": false,
+      "text": "紧凑标签",
+      "className": ""
+    },
+    {
+      "tag": "INPUT",
+      "role": null,
+      "type": "checkbox",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": ""
+    },
+    {
+      "tag": "INPUT",
+      "role": null,
+      "type": "checkbox",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": ""
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "正在上传 1 个文件 总进度 20%，请勿关闭页面 取消上传",
+      "className": "el-upload el-upload--text is-drag"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "取消上传",
+      "className": "lx-upload__cancel"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "全部清空",
+      "className": "lx-upload__clear"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": "取消并移除 fallback-abort.csv",
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": "lx-upload__remove"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "上传全部待传文件",
+      "className": ""
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "清空文件",
+      "className": ""
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "下一次上传失败",
+      "className": ""
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": "copy"
+    }
+  ],
+  "states": [
+    {
+      "selector": ".lx-upload.is-uploading",
+      "count": 1,
+      "visible": true,
+      "text": "正在上传 1 个文件 总进度 20%，请勿关闭页面 取消上传 已选 1 个文件 全部清空 fallback-abort.csv上传中20% 17 B"
+    },
+    {
+      "selector": ".lx-upload__panel",
+      "count": 1,
+      "visible": true,
+      "text": "正在上传 1 个文件 总进度 20%，请勿关闭页面 取消上传"
+    },
+    {
+      "selector": ".lx-upload__cancel",
+      "count": 1,
+      "visible": true,
+      "text": "取消上传"
+    },
+    {
+      "selector": ".lx-upload__file",
+      "count": 1,
+      "visible": true,
+      "text": "fallback-abort.csv上传中20% 17 B"
+    }
+  ]
+}

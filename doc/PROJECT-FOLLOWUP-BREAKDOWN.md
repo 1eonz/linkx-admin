@@ -8,7 +8,11 @@
 
 Wave 5 选择器组件已完成正式收口：TreeSelect/Cascader/SelectPagination 定向单测 36/36、文档 E2E 15/15，A 32/40，B 9 个 detector 有效 `[]`/空 stderr/exit 0 且 9 个浏览器场景完成 overlay，代码复审无 P0–P2。当前指针转入下一批复杂组件；四项 P2（移动换行密度、错误旧状态、主题入口不对称、侧栏同级密度）与长节点 E2E P3 保持登记，不能在下游迁移中遗失。
 
-下一波顺序固定为：先补 Upload fallback UID 回灌后公开 `abort()` 组合回归；再推进 `LxDescriptions`、`LxVirtualTree`、`LxTransferPanel`、`LxMetricCard`、`LxSectionTitle`、`LxStatusSwitch`、`LxSearchBar`。每个子批次必须同步设计差异、中文 Demo/API、单测、Mock、浏览器证据、独立代码复审、Impeccable A/B、snapshot/trend 和交接记录；完成后才进入宿主 Element Plus 替换。
+Wave 6（`LxCascader`、`LxDescriptions`、`LxVirtualTree` 与文档侧栏）已完成当前源码冻结后的组件级正式收口。A 为 35/40（Good），B 的 7 个 detector 均为有效 JSON `[]`、stderr 空、退出码 0，并在四个新标签完成 overlay、键盘、HUD、错误/空态和 375px 取证；代码审核批准。全库 52 项严格矩阵仍未关闭，宿主 Element Plus 替换继续冻结。
+
+当前执行指针转入 Wave 7：先完成 `LxTransferPanel` 的设计稿严格对照、行为回归、Mock/E2E、独立代码审核和 Impeccable A/B；然后按台账继续 MetricCard、SectionTitle、StatusSwitch、SearchBar、AuthImg、Navbar/Sidebar 余项，最后才进入 Vue3 宿主替换。
+
+每个子批次必须同步设计差异、中文 Demo/API、单测、Mock、浏览器证据、独立代码复审、Impeccable A/B、snapshot/trend 和交接记录；检测器输出 `[]` 必须同时保留 stderr 与退出码，不能单独作为通过依据。业务 API 继续使用 `.then().catch().finally()`，所有新增文档和注释使用中文。
 
 - `LxPasswordInput` 已完成当前实现、行为回归、正式 A/B、overlay 归因和独立代码复审。A 为 32/40；单测 10/10、文档 E2E 9/9、类型/构建/目标 ESLint/Prettier 通过。修复了 320px 目录锚点、文档暗色表面和 44px 移动工具标签。
 - 三个 detector 均为有效 JSON `[]`、stderr 空、退出码 0；浏览器 overlay 11 个目标均归为 HUD 主题提示或文档壳层目标，不计为密码控件缺陷。该证据不关闭全库 52 项严格矩阵。

@@ -1,0 +1,21 @@
+{
+  "capturedAt": "2026-10-07",
+  "url": "http://127.0.0.1:4175/components/lxcascader",
+  "popperClass": "el-popper is-pure is-light el-tooltip el-cascader__dropdown lx-cascader__popper dark lx-theme-hud",
+  "computed": {
+    "background": "rgb(255, 255, 255)",
+    "color": "rgb(60, 60, 67)",
+    "borderColor": "rgb(235, 238, 245)",
+    "--el-bg-color": "#ffffff",
+    "--el-bg-color-overlay": "#ffffff",
+    "--el-fill-color-blank": "#ffffff",
+    "--el-fill-color-light": "#f2f4f8",
+    "--el-border-color": "#e4e7ed",
+    "--el-border-color-light": "#ebeef5",
+    "--el-text-color-primary": "#1d2129",
+    "--lx-bg-card": "#101a2c",
+    "--lx-bg-page": "#0b1220"
+  },
+  "rootClasses": "",
+  "interpretation": "Cascader trigger and demo surface are HUD-dark, but the teleported popper retains Element Plus light variables. This is a confirmed P1/P2 visual contract mismatch, not a detector result."
+}

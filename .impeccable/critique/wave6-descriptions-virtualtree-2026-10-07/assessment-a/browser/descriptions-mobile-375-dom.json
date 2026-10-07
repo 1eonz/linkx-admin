@@ -1,0 +1,256 @@
+{
+  "title": "LxDescriptions 详情描述 | LxUI",
+  "bodyText": "Skip to contentLxUI搜索文档K Main Navigation 首页组件新增组件Appearance菜单本页导航 Sidebar Navigation 新增组件新增组件总览基础基础控件桥接LxButton 按钮LxIcon 图标总览布局导航LxSidebar 侧边栏LxNavbar 顶部导航LxBreadcrumb 面包屑LxTabsBar 页签栏LxSplitLayout 分栏布局LxSelectTree 组织树选择数据展示LxProTable 数据表格LxPageCard 页面容器LxMetricCard 指标卡LxDutyCalendar 排班日历LxSectionTitle 区块标题LxAuthImg 鉴权图片LxDescriptions 详情描述LxPagination 分页LxVirtualTree 虚拟树LxTransferPanel 双栏穿梭LxStatusDot 状态点LxTag 浅底标签LxCodeSlot 代码槽LxActionButtons 行内操作LxEmpty 空态LxGauge 圆环仪表LxNodeBadge 节点徽章权限消费数据录入LxForm 表单LxInput 输入框LxTextarea 文本域LxRadio 单选组LxCheckbox 复选组LxSwitch 开关LxSelect 下拉选择LxTreeSelect 树形下拉LxCascader 级联选择LxDatePicker 日期选择LxInputNumber 数字输入LxSearchBar 检索面板LxDynamicForm 动态表单LxStatusSwitch 状态开关LxPasswordInput 密码输入框LxUpload 文件上传LxSelectPagination 远程分页选择反馈与浮层LxMessage 全局提示LxConfirm 确认框LxDialog 表单弹窗LxDrawer 详情抽屉LxFormErrorBanner 校验横幅本页导航交互示例PropsSlots响应式与状态LxDescriptions 详情描述 ​用于详情抽屉和只读信息面板，默认以 32px 紧凑行高显示标签与值。组件不请求数据；空、加载和错误状态由宿主按页面流程组合。交互示例 ​ 单列 双列 网格边框 HUD 深色主题 详情读取中空结果错误姓名孙志国警号005882联系电话138-0010-8921所属组织市局指挥中心 / 联合情报研判战队角色分配一级协同 / 系统副管理员运行状态在线（在岗备勤）创建时间2026-09-22 14:35:10业务备注重点高架合流区视频快反联动专员，具有跨网段加密调度二级权限。人员档案姓名孙志国警号005882联系电话138-0010-8921所属组织市局指挥中心 / 联合情报研判战队角色分配一级协同 / 系统副管理员运行状态在线（在岗备勤）查看示例代码vue<script setup lang=\"ts\"> import { onBeforeUnmount, onMounted, ref, watch } from 'vue' import { LxDescriptions, type LxDescriptionItem } from '../../../index' type PreviewState = 'ready' | 'loading' | 'empty' | 'error' const previewStates = [ { value: 'ready', label: '详情' }, { value: 'loading', label: '读取中' }, { value: 'empty', label: '空结果' }, { value: 'error', label: '错误' }, ] as const const layout = ref<'two-ends' | 'grid'>('two-ends') const bordered = ref(false) const hudTheme = ref(false) const previewState = ref<PreviewState>('ready') let originalDark = false let originalHud = false const items: LxDescriptionItem[] = [ { key: 'name', label: '姓名', value: '孙志国' }, { key: 'policeId', label: '警号', value: '005882', copyable: true }, { key: 'phone', label: '联系电话', value: '138-0010-8921' }, { key: 'organization', label: '所属组织', value: '市局指挥中心 / 联合情报研判战队', span: 2, }, { key: 'role', label: '角色分配', value: '一级协同 / 系统副管理员' }, { key: 'status', label: '运行状态', value: '在线（在岗备勤）', statusDot: 'online', }, { key: 'createdAt', label: '创建时间', value: '2026-09-22 14:35:10' }, { key: 'remarks', label: '业务备注', value: '重点高架合流区视频快反联动专员，具有跨网段加密调度二级权限。', span: 2, }, ] const drawerItems = items.slice(0, 6) function setTheme(enabled: boolean) { if (typeof document === 'undefined') return document.documentElement.classList.toggle('dark', enabled || originalDark) document.documentElement.classList.toggle( 'lx-theme-hud', enabled || originalHud, ) } watch(hudTheme, setTheme) onMounted(() => { originalDark = document.documentElement.classList.contains('dark') originalHud = document.documentElement.classList.contains('lx-theme-hud') setTheme(hudTheme.value) }) onBeforeUnmount(() => { if (typeof document === 'undefined') return document.documentElement.classList.toggle('dark', originalDark) document.documentElement.classList.toggle('lx-theme-hud', originalHud) }) </script> <template> <section class=\"lx-descriptions-demo\" aria-label=\"详情描述示例\"> <div class=\"lx-descriptions-demo__controls\"> <div class=\"lx-descriptions-demo__segmented\" role=\"group\" aria-label=\"详情布局\" > <button type=\"button\" :aria-pressed=\"layout === 'two-ends'\" @click=\"layout = 'two-ends'\" > 单列 </button> <button type=\"button\" :aria-pressed=\"layout === 'grid'\" @click=\"layout = 'grid'\" > 双列 </button> </div> <label class=\"lx-descriptions-demo__toggle\"> <input v-model=\"bordered\" type=\"checkbox\" /> 网格边框 </label> <label class=\"lx-descriptions-demo__toggle\"> <input v-model=\"hudTheme\" type=\"checkbox\" /> HUD 深色主题 </label> <div class=\"lx-descriptions-demo__segmented\" role=\"group\" aria-label=\"数据状态\" > <button v-for=\"state in previewStates\" :key=\"state.value\" type=\"button\" :aria-pressed=\"previewState === state.value\" @click=\"previewState = state.value\" > {{ state.label }} </button> </div> </div> <div v-if=\"previewState === 'ready'\" class=\"lx-descriptions-demo__main\"> <LxDescriptions :items=\"items\" :columns=\"2\" :layout=\"layout\" :bordered=\"bordered\" :label-width=\"layout === 'grid' ? 96 : undefined\" > <template #item-role=\"{ value }\"> <span class=\"lx-descriptions-demo__role-value\">{{ value }}</span> </template> </LxDescriptions> </div> <p v-else-if=\"previewState === 'loading'\" class=\"lx-descriptions-demo__state\" role=\"status\" aria-busy=\"true\" > 正在读取详情… </p> <div v-else-if=\"previewState === 'empty'\" class=\"lx-descriptions-demo__state\" role=\"status\" > 暂无可展示的详情。 </div> <div v-else class=\"lx-descriptions-demo__state is-error\" role=\"alert\"> <span>详情读取失败。</span> <button type=\"button\" @click=\"previewState = 'ready'\">重试</button> </div> <section class=\"lx-descriptions-demo__drawer\" aria-label=\"480 像素详情抽屉\"> <h3>人员档案</h3> <LxDescriptions :items=\"drawerItems\" layout=\"two-ends\" :label-width=\"88\" /> </section> </section> </template> <style scoped> .lx-descriptions-demo { display: grid; width: 100%; max-width: 820px; min-width: 0; grid-template-columns: minmax(0, 1fr); gap: 20px; color: var(--lx-text-primary); } .lx-descriptions-demo__controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; } .lx-descriptions-demo__segmented { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px; border: 1px solid var(--lx-border); border-radius: var(--lx-radius-sm); background: var(--lx-bg-card); } .lx-descriptions-demo__segmented button, .lx-descriptions-demo__state button { min-height: 44px; padding: 0 10px; border: 0; border-radius: var(--lx-radius-sm); background: transparent; color: var(--lx-text-regular); cursor: pointer; font: inherit; } .lx-descriptions-demo__segmented button[aria-pressed='true'] { background: var(--lx-color-primary-light); color: var(--lx-color-primary); } .lx-descriptions-demo__toggle { display: inline-flex; min-height: 44px; align-items: center; gap: 8px; color: var(--lx-text-regular); font-size: 13px; } .lx-descriptions-demo__toggle input { accent-color: var(--lx-color-primary); } .lx-descriptions-demo__main { min-width: 0; } .lx-descriptions-demo__state { display: flex; min-height: 64px; align-items: center; justify-content: center; gap: 12px; margin: 0; border-block: 1px solid var(--lx-border-light); color: var(--lx-text-secondary); } .lx-descriptions-demo__state.is-error { color: var(--lx-color-error-strong); } .lx-descriptions-demo__state button { border: 1px solid var(--lx-border); background: var(--lx-bg-card); color: var(--lx-text-primary); } .lx-descriptions-demo__drawer { width: min(480px, 100%); max-width: 100%; box-sizing: border-box; min-width: 0; justify-self: end; padding: 16px; border: 1px solid var(--lx-border-light); background: var(--lx-bg-card); } .lx-descriptions-demo__drawer h3 { margin: 0 0 12px; font-size: 14px; line-height: 20px; } .lx-descriptions-demo__role-value { display: inline-flex; max-width: 100%; align-items: center; min-width: 0; overflow: hidden; padding: 0 6px; border: 1px solid var(--lx-color-primary-light); border-radius: var(--lx-radius-sm); background: var(--lx-color-primary-light); color: var(--lx-color-primary); text-overflow: ellipsis; white-space: nowrap; } .lx-descriptions-demo__segmented button:focus-visible, .lx-descriptions-demo__state button:focus-visible, .lx-descriptions-demo__toggle input:focus-visible { outline: 2px solid var(--lx-color-primary); outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .lx-descriptions-demo__segmented button, .lx-descriptions-demo__state button { transition: none; } } @media (max-width: 600px) { .lx-descriptions-demo__drawer { justify-self: stretch; padding: 12px; } } </style>示例中的姓名、警号和组织信息均为静态演示数据；状态点、复制字段、角色具名插槽、单列/双列、480px 抽屉宽度、边框、HUD 深色及宿主状态均可切换检查。Props ​名称类型默认值说明itemsLxDescriptionItem[][]描述行数据，字段见下表。columns1 | 2 | 31网格列数；two-ends 布局始终为一列。layout'two-ends' | 'grid' | 'compact'自动两端对齐、网格或紧凑布局；未设置时按 columns 推断。rowHeightnumber设计令牌行最小高度，单位 px；未设置时默认 32px，紧凑布局使用 28px。dividerColorstring边框令牌底部分隔线和外边框颜色；支持 CSS 颜色或变量。labelWidthstring | numberauto全局标签宽度；数值按 px 处理。单项的 labelWidth 优先级更高。borderedbooleanfalse是否显示左右外边框及标签分隔线。size'small' | 'default''default'紧凑尺寸；layout=\"compact\" 会使用 small。描述项 ​名称类型说明keystring唯一键，也用于对应的 item-${key} 插槽。labelstring左侧标签。valueunknown右侧值；空值显示 -，长文本单行省略并通过 title 查看完整值。spannumber跨列数，会限制在当前布局有效列范围内。labelWidthstring | number单项标签宽度，数值按 px 处理。copyableboolean默认值渲染为键盘可操作的 LxCodeSlot，名称包含字段和值；脱敏时不显示复制按钮。statusDotLxStatus默认值渲染为带文本的 LxStatusDot；使用项目状态语义。maskboolean | string按宿主注入的字段权限显示脱敏占位符；字符串可自定义占位内容。Slots ​名称参数说明item-${key}{ item, value }覆盖指定项的默认值展示；自定义插槽由宿主负责处理脱敏。组件没有事件或实例方法。自定义插槽优先于 copyable 和 statusDot 默认渲染。响应式与状态 ​桌面端按 columns 排列；视口小于 768px 时收为单列，并保留标签/值两端对齐。标签使用 --lx-text-secondary 与常规字重，值使用 --lx-text-primary 与中等字重，保持设计稿的层级差异；浅色与 HUD 深色主题均满足正文对比度要求。statusDot 和 copyable 内嵌展示件继承值列的字重与颜色；状态圆点仍使用状态语义色，复制按钮 hover/focus 仍使用主色反馈。标签允许长词断行，值列和状态文字在窄容器内省略，组件根节点不会撑开抽屉或页面。loading、empty、error 不属于描述行组件的状态属性，由宿主组合状态提示与重试入口。mask 只消费 setupLxPermission 注入的权限数据，不读取 Router、Pinia、接口或登录凭据。自定义插槽会接管值渲染，需要由宿主确保相同的脱敏规则。行悬停只",
+  "interactive": [
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": "搜索文档",
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "搜索文档K",
+      "className": "DocSearch DocSearch-Button"
+    },
+    {
+      "tag": "BUTTON",
+      "role": "switch",
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": "VPSwitch VPSwitchAppearance"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": "extra navigation",
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": "button"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": "mobile navigation",
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": "VPNavBarHamburger hamburger"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "菜单",
+      "className": "menu"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "本页导航",
+      "className": ""
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "新增组件",
+      "className": "item"
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "基础",
+      "className": "item"
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "布局导航",
+      "className": "item"
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "数据展示",
+      "className": "item"
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "数据录入",
+      "className": "item"
+    },
+    {
+      "tag": "DIV",
+      "role": "button",
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "反馈与浮层",
+      "className": "item"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": "true",
+      "disabled": false,
+      "text": "单列",
+      "className": ""
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": "false",
+      "disabled": false,
+      "text": "双列",
+      "className": ""
+    },
+    {
+      "tag": "INPUT",
+      "role": null,
+      "type": "checkbox",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": ""
+    },
+    {
+      "tag": "INPUT",
+      "role": null,
+      "type": "checkbox",
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": ""
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": "true",
+      "disabled": false,
+      "text": "详情",
+      "className": ""
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": "false",
+      "disabled": false,
+      "text": "读取中",
+      "className": ""
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": "false",
+      "disabled": false,
+      "text": "空结果",
+      "className": ""
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": null,
+      "ariaPressed": "false",
+      "disabled": false,
+      "text": "错误",
+      "className": ""
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": "复制警号：005882",
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "005882",
+      "className": "lx-code-slot lx-code-slot--copyable is-ellipsis"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": "button",
+      "ariaLabel": "复制警号：005882",
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "005882",
+      "className": "lx-code-slot lx-code-slot--copyable is-ellipsis"
+    },
+    {
+      "tag": "BUTTON",
+      "role": null,
+      "type": null,
+      "ariaLabel": null,
+      "ariaPressed": null,
+      "disabled": false,
+      "text": "",
+      "className": "copy"
+    }
+  ],
+  "states": [
+    {
+      "selector": ".lx-descriptions-demo",
+      "count": 1,
+      "visible": true,
+      "text": "单列 双列 网格边框 HUD 深色主题 详情读取中空结果错误姓名孙志国警号005882联系电话138-0010-8921所属组织市局指挥中心 / 联合情报研判战队角色分配一级协同 / 系统副管理员运行状态在线（在岗备勤）创建时间2026-09-22 14:35:10业务备注重点高架合流区视频快反联动专员，具有跨网段加密调度二级权限。人员档案姓名孙志国警号005882联系电话138-0010-8921所属组织市局指挥中心 / 联合情报研判战队角色分配一级协同 / 系统副管理员运"
+    },
+    {
+      "selector": ".lx-descriptions",
+      "count": 2,
+      "visible": true,
+      "text": "姓名孙志国警号005882联系电话138-0010-8921所属组织市局指挥中心 / 联合情报研判战队角色分配一级协同 / 系统副管理员运行状态在线（在岗备勤）创建时间2026-09-22 14:35:10业务备注重点高架合流区视频快反联动专员，具有跨网段加密调度二级权限。"
+    },
+    {
+      "selector": ".lx-descriptions-demo__state",
+      "count": 0,
+      "visible": false,
+      "text": ""
+    }
+  ]
+}

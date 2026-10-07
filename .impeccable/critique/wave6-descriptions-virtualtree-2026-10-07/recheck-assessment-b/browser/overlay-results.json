@@ -1,0 +1,632 @@
+[
+  {
+    "id": "cascader",
+    "url": "http://127.0.0.1:8400/detect.js",
+    "preflight": true,
+    "injected": true,
+    "findings": [
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(1) > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 908,
+          "y": 963,
+          "width": 40,
+          "height": 40,
+          "top": 963,
+          "right": 948,
+          "bottom": 1003,
+          "left": 908
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(2) > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 908,
+          "y": 3698.5625,
+          "width": 40,
+          "height": 40,
+          "top": 3698.5625,
+          "right": 948,
+          "bottom": 3738.5625,
+          "left": 908
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-0",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "table",
+        "tagName": "table",
+        "rect": {
+          "x": 336,
+          "y": 1571.5625,
+          "width": 624,
+          "height": 1433,
+          "top": 1571.5625,
+          "right": 960,
+          "bottom": 3004.5625,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "edge-flush-cards",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "19 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+            "ignoreValue": "",
+            "name": "Cards flush against the scroller edge",
+            "description": "Cards inside a horizontal scroller or tab panel sit flush against the container edge at rest while keeping a gutter on the other side, so their edges and rounded corners get cut off. Usually the panel is sized wider than its clip box. Keep a consistent inset on both sides."
+          }
+        ]
+      },
+      {
+        "selector": "div.VPDoc.has-sidebar > div.container",
+        "tagName": "div",
+        "rect": {
+          "x": 304,
+          "y": 112,
+          "width": 944,
+          "height": 4805.53125,
+          "top": 112,
+          "right": 1248,
+          "bottom": 4917.53125,
+          "left": 304
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "first-viewport-column-overflow",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "div.container opens the page with one column running 544% of the viewport tall while a sibling fits in 87% — the fold falls deep inside the section",
+            "ignoreValue": "",
+            "name": "One column stretches the first viewport",
+            "description": "A multi-column opening section lets one column run far past the fold while its sibling fits in a single viewport, so the short column floats in dead space and the fold falls deep inside one section. Balance the columns, cap the tall one, or let the long content flow below the opening row."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "skipped-heading",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "<h1> \"LxCascader 级联选择 ​\" followed by <h3> \"组件选型 ​\" (missing h2)",
+            "ignoreValue": "",
+            "name": "Skipped heading level",
+            "description": "Heading levels should not skip (e.g. h1 then h3 with no h2). Screen readers use heading hierarchy for navigation. Skipping levels breaks the document outline."
+          },
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ],
+    "console": [],
+    "overlay": {
+      "total": 6,
+      "visible": 5,
+      "labels": 5,
+      "banner": 1,
+      "script": true
+    },
+    "error": null
+  },
+  {
+    "id": "descriptions",
+    "url": "http://127.0.0.1:8400/detect.js",
+    "preflight": true,
+    "injected": true,
+    "findings": [
+      {
+        "selector": "button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 891,
+          "y": 1137,
+          "width": 40,
+          "height": 40,
+          "top": 1137,
+          "right": 931,
+          "bottom": 1177,
+          "left": 891
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "table:nth-of-type(1)",
+        "tagName": "table",
+        "rect": {
+          "x": 336,
+          "y": 1323,
+          "width": 624,
+          "height": 758,
+          "top": 1323,
+          "right": 960,
+          "bottom": 2081,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "edge-flush-cards",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "9 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+            "ignoreValue": "",
+            "name": "Cards flush against the scroller edge",
+            "description": "Cards inside a horizontal scroller or tab panel sit flush against the container edge at rest while keeping a gutter on the other side, so their edges and rounded corners get cut off. Usually the panel is sized wider than its clip box. Keep a consistent inset on both sides."
+          }
+        ]
+      },
+      {
+        "selector": "div.VPDoc.has-sidebar > div.container",
+        "tagName": "div",
+        "rect": {
+          "x": 304,
+          "y": 112,
+          "width": 944,
+          "height": 3638,
+          "top": 112,
+          "right": 1248,
+          "bottom": 3750,
+          "left": 304
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "first-viewport-column-overflow",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "div.container opens the page with one column running 909% of the viewport tall while a sibling fits in 87% — the fold falls deep inside the section",
+            "ignoreValue": "",
+            "name": "One column stretches the first viewport",
+            "description": "A multi-column opening section lets one column run far past the fold while its sibling fits in a single viewport, so the short column floats in dead space and the fold falls deep inside one section. Balance the columns, cap the tall one, or let the long content flow below the opening row."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ],
+    "console": [],
+    "overlay": {
+      "total": 4,
+      "visible": 3,
+      "labels": 3,
+      "banner": 1,
+      "script": true
+    },
+    "error": null
+  },
+  {
+    "id": "virtualtree",
+    "url": "http://127.0.0.1:8400/detect.js",
+    "preflight": true,
+    "injected": true,
+    "findings": [
+      {
+        "selector": "div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 891,
+          "y": 965,
+          "width": 40,
+          "height": 40,
+          "top": 965,
+          "right": 931,
+          "bottom": 1005,
+          "left": 891
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(2) > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 908,
+          "y": 2304,
+          "width": 40,
+          "height": 40,
+          "top": 2304,
+          "right": 948,
+          "bottom": 2344,
+          "left": 908
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(3) > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 908,
+          "y": 3350.75,
+          "width": 40,
+          "height": 40,
+          "top": 3350.75,
+          "right": 948,
+          "bottom": 3390.75,
+          "left": 908
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "label.virtual-tree-demo__strict:nth-of-type(1)",
+        "tagName": "label",
+        "rect": {
+          "x": 336,
+          "y": 519,
+          "width": 110,
+          "height": 30,
+          "top": 519,
+          "right": 446,
+          "bottom": 549,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "text-occlusion",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "label.virtual-tree-demo__strict \"父子独立勾选\" is 72% covered by an opaque element (div.lx-virtual-tree__viewport)",
+            "ignoreValue": "",
+            "name": "Text occluded by an overlapping element",
+            "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+          }
+        ]
+      },
+      {
+        "selector": "label.virtual-tree-demo__strict:nth-of-type(2)",
+        "tagName": "label",
+        "rect": {
+          "x": 450,
+          "y": 519,
+          "width": 116.375,
+          "height": 30,
+          "top": 519,
+          "right": 566.375,
+          "bottom": 549,
+          "left": 450
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "text-occlusion",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "label.virtual-tree-demo__strict \"HUD 深色主题\" is 95% covered by an opaque element (div.lx-virtual-tree__viewport)",
+            "ignoreValue": "",
+            "name": "Text occluded by an overlapping element",
+            "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+          }
+        ]
+      },
+      {
+        "selector": "div.VPDoc.has-sidebar > div.container",
+        "tagName": "div",
+        "rect": {
+          "x": 304,
+          "y": 112,
+          "width": 944,
+          "height": 4506.40625,
+          "top": 112,
+          "right": 1248,
+          "bottom": 4618.40625,
+          "left": 304
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "first-viewport-column-overflow",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "div.container opens the page with one column running 925% of the viewport tall while a sibling fits in 87% — the fold falls deep inside the section",
+            "ignoreValue": "",
+            "name": "One column stretches the first viewport",
+            "description": "A multi-column opening section lets one column run far past the fold while its sibling fits in a single viewport, so the short column floats in dead space and the fold falls deep inside one section. Balance the columns, cap the tall one, or let the long content flow below the opening row."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ],
+    "console": [],
+    "overlay": {
+      "total": 7,
+      "visible": 4,
+      "labels": 6,
+      "banner": 1,
+      "script": true
+    },
+    "error": null
+  },
+  {
+    "id": "upload",
+    "url": "http://127.0.0.1:8400/detect.js",
+    "preflight": true,
+    "injected": true,
+    "findings": [
+      {
+        "selector": "button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 891,
+          "y": 1040,
+          "width": 40,
+          "height": 40,
+          "top": 1040,
+          "right": 931,
+          "bottom": 1080,
+          "left": 891
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "table:nth-of-type(1)",
+        "tagName": "table",
+        "rect": {
+          "x": 336,
+          "y": 1254,
+          "width": 624,
+          "height": 1333,
+          "top": 1254,
+          "right": 960,
+          "bottom": 2587,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "edge-flush-cards",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "17 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+            "ignoreValue": "",
+            "name": "Cards flush against the scroller edge",
+            "description": "Cards inside a horizontal scroller or tab panel sit flush against the container edge at rest while keeping a gutter on the other side, so their edges and rounded corners get cut off. Usually the panel is sized wider than its clip box. Keep a consistent inset on both sides."
+          }
+        ]
+      },
+      {
+        "selector": "div.VPDoc.has-sidebar > div.container",
+        "tagName": "div",
+        "rect": {
+          "x": 304,
+          "y": 112,
+          "width": 944,
+          "height": 5338,
+          "top": 112,
+          "right": 1248,
+          "bottom": 5450,
+          "left": 304
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "first-viewport-column-overflow",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "div.container opens the page with one column running 1036% of the viewport tall while a sibling fits in 87% — the fold falls deep inside the section",
+            "ignoreValue": "",
+            "name": "One column stretches the first viewport",
+            "description": "A multi-column opening section lets one column run far past the fold while its sibling fits in a single viewport, so the short column floats in dead space and the fold falls deep inside one section. Balance the columns, cap the tall one, or let the long content flow below the opening row."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ],
+    "console": [],
+    "overlay": {
+      "total": 4,
+      "visible": 3,
+      "labels": 3,
+      "banner": 1,
+      "script": true
+    },
+    "error": null
+  }
+]

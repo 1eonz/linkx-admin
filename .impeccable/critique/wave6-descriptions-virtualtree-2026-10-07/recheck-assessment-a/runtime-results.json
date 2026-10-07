@@ -1,0 +1,395 @@
+[
+  {
+    "slug": "cascader",
+    "phase": "desktop",
+    "title": "LxCascader 级联选择 | LxUI",
+    "url": "http://127.0.0.1:4175/components/lxcascader",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "width": 1440,
+      "height": 4808
+    },
+    "heading": "LxCascader 级联选择 ​",
+    "bodyText": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\n本页导航\n基础用法\n设计对照\nProps 与事件\n键盘操作\n自定义字段映射\nLxCascader 级联选择\n​\n\n级联选择器的 lx-ui 封装，供检索面板和表单组合使用。组件保留 Element Plus 的节点值、级联路径、过滤、清空、键盘和实例方法契约，宿主只依赖 LxCascader。数据请求由宿主负责，组件通过公开的 loading、error 和 retry 契约反馈异步状态。\n\n组织路径\n演示状态\n\n当前值：hangzhou / xihu / command\n\n已回显组织路径\n\n示例可切换单选/多选、加载中、失败重试、加载与失败并发、禁用状态、控件英文文案和 HUD 深色主题。主题开关同时作用于示例表面与传送到页面根节点的级联弹层。状态说明会跟随加载、失败和禁用状态更新；并发演示中加载文案优先显示。失败态的“重试”只发出 retry，不会在组件内部请求数据；宿主应在监听后重新加载 options 并清除 error。\n\n组件选型\n​\n\n当用户需要沿省市、组织或业务目录的固定路径逐级选择时使用 LxCascader。需要展开任意层级并多选树分支时使用 LxTreeSelect；候选项数量很大且数据由远程搜索分页提供时使用 LxSelectPagination。\n\n基础用法\n​\nvue\n<LxCascader\n  v-model=\"path\"\n  :options=\"options\"\n  placeholder=\"请选择组织路径\"\n  clearable\n/>\n设计对照\n​\n标准触发器高度沿用 lx-ui 28/32/40px 尺寸档，默认 32px。\n4px 圆角、1px 控件描边和主色焦点边线使用 lx-ui 令牌；不叠加偏移外圈，焦点时控件尺寸保持稳定。\n弹层使用组件库 popper 阴影和圆角，窄屏触控目标放大到至少 44px。\n375px 视口下弹层限制在视口内，级联列可在弹层内部横向滚动；长组织名完整换行显示，节点和过滤结果行保持至少 44px 触控高度。\nprefers-reduced-motion: reduce 时关闭过渡与动画。\nProps 与事件\n​\nProp\t类型\t默认值\t说明\nmodelValue\tLxCascaderModelValue\tundefined\t受控选择值；支持单值、路径数组和多选路径数组。\noptions\tLxCascaderOption[]\t[]\t选项数据；可使用 Element Plus 默认字段或自定义字段映射。\nprops\tCascaderProps\tElement Plus 默认映射\t配置选项字段、选择模式、禁用和懒加载；快捷选择属性仅在显式传入时覆盖对应配置。\nid / name / autocomplete\tstring\tundefined\t设置实际输入框的表单标识、提交字段名和自动填充行为。\naria-label / aria-labelledby\tstring\tundefined\t为实际输入框提供可访问名称；优先使用页面中的可见字段标签。\nplaceholder\tstring\t''\t未选择时的占位文案。\ndisabled\tboolean\tundefined\t禁用状态；未设置时保留 Element Plus 表单上下文行为。\nclearable / filterable\tboolean\tfalse\t是否允许清空、筛选。\nmultiple\tboolean\tprops.multiple 或 false\t是否多选；省略时继承 props.multiple。\ncollapseTags / collapseTagsTooltip\tboolean\tfalse\t多选标签收敛及收敛提示。\ncheckStrictly\tboolean\tprops.checkStrictly 或 false\t是否允许选择非叶子节点；省略时继承 props.checkStrictly。\nshowAllLevels\tboolean\ttrue\t输入框是否显示完整路径。\nemitPath\tboolean\tprops.emitPath 或 true\t单选时回传路径数组；省略时继承配置，关闭后回传节点值。\nsize\t'sm' | 'md' | 'lg'\t'md'\t28/32/40px 工程尺寸档。\nloading / error\tboolean\tfalse\t加载/失败时暂停选择、清空和移除标签；保留错误重试入口。\nlocale\tElement Plus Language\t继承宿主配置；无配置时 zh-cn\t只作用于本组件子树，也决定未覆写的状态文案语言。\nemptyText / loadingText\tstring\tlocale 对应文案\t空态、加载文案；显式传值优先。\nerrorText / retryText\tstring\tlocale 对应文案\t错误及重试文案；显式传值优先。\n\n未声明的 Element Plus Cascader 属性继续通过 $attrs 透传。组件发出 update:modelValue、change、expandChange、visibleChange、focus、blur 和 retry；模板中 visibleChange 使用 @visible-change 监听。公开 focus、blur、togglePopperVisible 和 getCheckedNodes。按 Escape 会关闭当前弹层并回到触发输入框。\n\n键盘操作\n​\n聚焦输入框后按 ArrowDown 展开弹层并聚焦当前或首个节点；ArrowUp / ArrowDown 在当前列移动。\nArrowRight 进入下一级，ArrowLeft 返回上一级；在目标节点聚焦时按 Enter 激活该节点，单选叶节点会提交路径。\nfilterable 开启时可直接输入文字筛选路径；按 Escape 关闭弹层并将焦点还给输入框。\n自定义字段映射\n​\n\noptions 接受 Element Plus 的 CascaderOption 扩展结构。默认 label、value、children 字段可以省略，改由 props 指定业务字段名；节点值的字符串、数字和记录对象兼容仍由 LxCascaderOption 保留。\n\nvue\n<script setup lang=\"ts\">\nimport type { LxCascaderOption, LxCascaderProps } from 'lx-ui'\n\nconst options: LxCascaderOption[] = [\n  {\n    name: '市局',\n    nodeCode: 'city',\n    childrenList: [{ name: '指挥中心', nodeCode: 'command' }],\n  },\n]\n\nconst cascaderProps: LxCascaderProps['props'] = {\n  label: 'name',\n  value: 'nodeCode',\n  children: 'childrenList',\n}\n</script>\n\n<template>\n  <LxCascader v-model=\"path\" :options=\"options\" :props=\"cascaderProps\" />\n</template>\n\n错误、加载和空态自有文案会跟随 locale 选择中英文；若宿主提供其他语言包，建议显式传入四个文案属性，以便覆盖通用中英文兜底。\n\n若 loading 与 error 同时为 true，组件优先显示加载状态并隐藏错误/重试反馈；请求结束后宿主将 loading 设为 false，仍为 true 的 error 才展示失败状态和重试入口。\n\n错误状态为实际输入框设置 aria-invalid，通过 aria-describedby 关联当前可见的错误文案，并保留宿主传入的描述 ID；错误提示使用 assertive alert 播报，持久化的隐藏弹层不会重复占用错误 ID。位于 ElFormItem 时，表单校验文案也会关联到实际输入框，即使宿主没有为该文案设置 ID。清除 error 后移除组件错误关联。加载失败时仍允许打开弹层查看反馈并重试，错误焦点保留控件内侧 1px 边线。\n\nmodelValue 支持单个节点值、路径数组，以及多选时的路径数组集合；节点值可为字符串、数字或记录对象。级联没有业务请求能力，远程节点加载等低频能力通过 $attrs 传给内核，数据和错误处理由宿主负责。\n\nPager\nPrevious page\nLxTreeSelect 树形下拉\nNext page\nLxDatePicker 日期选择"
+  },
+  {
+    "slug": "cascader",
+    "phase": "interactions",
+    "stateButtons": [
+      "多选模式",
+      "加载中",
+      "失败",
+      "加载中且失败",
+      "禁用"
+    ],
+    "readyInputAriaLabel": null,
+    "readyDescribedBy": null,
+    "error": {
+      "input": {
+        "ariaInvalid": "true",
+        "describedBy": "cascader-demo-path-error",
+        "focused": true
+      },
+      "wrapperClass": "el-input__wrapper is-focus",
+      "wrapper": "rgb(186, 26, 26) 0px 0px 0px 1px inset",
+      "feedback": "组织数据加载失败重试",
+      "feedbackRole": "alert",
+      "retryMinHeight": "44px"
+    },
+    "englishFeedback": "Failed to load organization data\nRetry",
+    "mobile": {
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "documentWidth": 375,
+      "bodyWidth": 375,
+      "inputHeight": 44,
+      "toolbarButtons": [
+        {
+          "text": "多选模式",
+          "height": 44
+        },
+        {
+          "text": "加载中",
+          "height": 44
+        },
+        {
+          "text": "失败",
+          "height": 44
+        },
+        {
+          "text": "加载中且失败",
+          "height": 44
+        },
+        {
+          "text": "禁用",
+          "height": 44
+        }
+      ]
+    }
+  },
+  {
+    "slug": "descriptions",
+    "phase": "desktop",
+    "title": "LxDescriptions 详情描述 | LxUI",
+    "url": "http://127.0.0.1:4175/components/lxdescriptions",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "width": 1440,
+      "height": 3519
+    },
+    "heading": "LxDescriptions 详情描述 ​",
+    "bodyText": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\n本页导航\n交互示例\nProps\nSlots\n响应式与状态\nLxDescriptions 详情描述\n​\n\n用于详情抽屉和只读信息面板，默认以 32px 紧凑行高显示标签与值。组件不请求数据；空、加载和错误状态由宿主按页面流程组合。\n\n交互示例\n​\n单列\n双列\n网格边框\nHUD 深色主题（整页）\n详情\n读取中\n空结果\n错误\n姓名\n孙志国\n警号\n005882\n联系电话\n138-0010-8921\n所属组织\n市局指挥中心 / 联合情报研判战队\n角色分配\n一级协同 / 系统副管理员\n运行状态\n在线（在岗备勤），当前负责跨辖区视频联动与加密调度\n创建时间\n2026-09-22 14:35:10\n设备标识\nGB28181-P2P-EDGE-NODE-20261007-00000001-REGION-OPS\n业务备注\n重点高架合流区视频快反联动专员，具有跨网段加密调度二级权限。\n人员档案\n姓名\n孙志国\n警号\n005882\n联系电话\n138-0010-8921\n所属组织\n市局指挥中心 / 联合情报研判战队\n角色分配\n一级协同 / 系统副管理员\n运行状态\n在线（在岗备勤），当前负责跨辖区视频联动与加密调度\n查看示例代码\n\n示例中的姓名、警号和组织信息均为静态演示数据；状态点、复制字段、角色具名插槽、单列/双列、480px 抽屉宽度、边框、HUD 深色及宿主状态均可切换检查。\n\nProps\n​\n名称\t类型\t默认值\t说明\nitems\tLxDescriptionItem[]\t[]\t描述行数据，字段见下表。\ncolumns\t1 | 2 | 3\t1\t网格列数；two-ends 布局始终为一列。\nlayout\t'two-ends' | 'grid' | 'compact'\t自动\t两端对齐、网格或紧凑布局；未设置时按 columns 推断。\nrowHeight\tnumber\t设计令牌\t行最小高度，单位 px；未设置时默认 32px，紧凑布局使用 28px。\ndividerColor\tstring\t边框令牌\t底部分隔线和外边框颜色；支持 CSS 颜色或变量。\nlabelWidth\tstring | number\tauto\t全局标签宽度；数值按 px 处理。单项的 labelWidth 优先级更高。\nbordered\tboolean\tfalse\t是否显示左右外边框及标签分隔线。\nsize\t'small' | 'default'\t'default'\t紧凑尺寸；layout=\"compact\" 会使用 small。\n描述项\n​\n名称\t类型\t说明\nkey\tstring\t唯一键，也用于对应的 item-${key} 插槽。\nlabel\tstring\t左侧标签。\nvalue\tunknown\t右侧值；空值显示 -，长文本单行省略并通过 title 查看完整值。\nspan\tnumber\t跨列数，会限制在当前布局有效列范围内。\nlabelWidth\tstring | number\t单项标签宽度，数值按 px 处理。\ncopyable\tboolean\t默认值渲染为键盘可操作的 LxCodeSlot，名称包含字段和值；桌面长值省略，窄屏换行；脱敏时不显示复制按钮。\nstatusDot\tLxStatus\t默认值渲染为带文本的 LxStatusDot；使用项目状态语义。\nmask\tboolean | string\t按宿主注入的字段权限显示脱敏占位符；字符串可自定义占位内容。\nSlots\n​\n名称\t参数\t说明\nitem-${key}\t{ item, value }\t覆盖指定项的默认值展示；自定义插槽由宿主负责处理脱敏。\n\n组件没有事件或实例方法。自定义插槽优先于 copyable 和 statusDot 默认渲染。\n\n响应式与状态\n​\n桌面端按 columns 排列；视口小于 768px 时收为单列，并保留标签/值两端对齐。\n标签使用 --lx-text-secondary 与常规字重，值使用 --lx-text-primary 与中等字重，保持设计稿的层级差异；浅色与 HUD 深色主题均满足正文对比度要求。\nstatusDot 和 copyable 内嵌展示件继承值列的字重与颜色；状态圆点仍使用状态语义色，复制按钮 hover/focus 仍使用主色反馈。\n桌面端长值保留省略和完整 title；窄屏普通值、复制值和状态说明均可换行，避免只能依赖悬停提示读取完整内容。\n标签允许长词断行；窄屏值列及其内嵌展示可以增高换行，组件根节点不会撑开抽屉或页面。\nloading、empty、error 不属于描述行组件的状态属性，由宿主组合状态提示与重试入口。\nmask 只消费 setupLxPermission 注入的权限数据，不读取 Router、Pinia、接口或登录凭据。自定义插槽会接管值渲染，需要由宿主确保相同的脱敏规则。\n行悬停只改变背景色；系统启用 prefers-reduced-motion 时关闭该过渡。\nPager\nPrevious page\nLxPagination 分页\nNext page\nLxPageCard 页面容器"
+  },
+  {
+    "slug": "descriptions",
+    "phase": "interactions",
+    "content": {
+      "rect": {
+        "width": 688,
+        "height": 291
+      },
+      "text": "姓名孙志国警号005882联系电话138-0010-8921所属组织市局指挥中心 / 联合情报研判战队角色分配一级协同 / 系统副管理员运行状态在线（在岗备勤），当前负责跨辖区视频联动与加密调度创建时间2026-09-22 14:35:10设备标识GB28181-P2P-EDGE-NODE-20261007-00000001-REGION-OPS业务备注重点高架合流区视频快反联动专员，具有跨网段加密调度二级权限。",
+      "rows": [
+        {
+          "text": "姓名孙志国",
+          "height": 32,
+          "labelWidth": "auto"
+        },
+        {
+          "text": "警号005882",
+          "height": 33,
+          "labelWidth": "auto"
+        },
+        {
+          "text": "联系电话138-0010-8921",
+          "height": 32,
+          "labelWidth": "auto"
+        },
+        {
+          "text": "所属组织市局指挥中心 / 联合情报研判战队",
+          "height": 32,
+          "labelWidth": "auto"
+        },
+        {
+          "text": "角色分配一级协同 / 系统副管理员",
+          "height": 32,
+          "labelWidth": "auto"
+        },
+        {
+          "text": "运行状态在线（在岗备勤），当前负责跨辖区视频联动与加密调度",
+          "height": 32,
+          "labelWidth": "auto"
+        },
+        {
+          "text": "创建时间2026-09-22 14:35:10",
+          "height": 32,
+          "labelWidth": "auto"
+        },
+        {
+          "text": "设备标识GB28181-P2P-EDGE-NODE-20261007-00000001-REGION-OPS",
+          "height": 33,
+          "labelWidth": "auto"
+        },
+        {
+          "text": "业务备注重点高架合流区视频快反联动专员，具有跨网段加密调度二级权限。",
+          "height": 32,
+          "labelWidth": "auto"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "005882",
+          "aria": "复制警号：005882"
+        },
+        {
+          "text": "GB28181-P2P-EDGE-NODE-20261007-00000001-REGION-OPS",
+          "aria": "复制设备标识：GB28181-P2P-EDGE-NODE-20261007-00000001-REGION-OPS"
+        }
+      ]
+    },
+    "copy": {
+      "count": 3,
+      "ariaLabel": "复制警号：005882",
+      "focused": true
+    },
+    "mobile": {
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "documentWidth": 375,
+      "bodyWidth": 375,
+      "drawers": [],
+      "descriptions": [
+        {
+          "width": 327,
+          "height": 343
+        },
+        {
+          "width": 301,
+          "height": 211
+        }
+      ]
+    }
+  },
+  {
+    "slug": "virtualtree",
+    "phase": "desktop",
+    "title": "LxVirtualTree 虚拟树 | LxUI",
+    "url": "http://127.0.0.1:4175/components/lxvirtualtree",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "width": 1440,
+      "height": 4255
+    },
+    "heading": "LxVirtualTree 虚拟树 ​",
+    "bodyText": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\n本页导航\n交互示例\nProps\nEvents\n插槽\n实例方法\n状态与边界\nLxVirtualTree 虚拟树\n​\n\n固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。\n\n交互示例\n​\n演示状态和更多操作\n\n树数据已就绪\n\n辖区单位 01\n20 个单元\n执勤单元 01\n已选\n执勤单元 02\n单位\n执勤单元 03\n单位\n执勤单元 04\n单位\n执勤单元 05\n单位\n执勤单元 06\n单位\n执勤单元 07\n单位\n执勤单元 08\n单位\n执勤单元 09\n单位\n执勤单元 10\n单位\n执勤单元 11\n单位\n执勤单元 12\n单位\n执勤单元 13\n单位\n执勤单元 14\n单位\n执勤单元 15\n单位\n执勤单元 16\n单位\n执勤单元 17\n单位\n执勤单元 18\n单位\n执勤单元 19\n单位\n执勤单元 20\n单位\n受控选中：1 项\nunit-1-1\n公开方法读取：0 项\n\n加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。\n\n查看示例代码\n\n示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。\n\nProps\n​\n名称\t类型\t默认值\t说明\ndata\tLxVirtualTreeNode[]\t[]\t树数据；节点使用 id 作为默认键，也可配置 nodeKey。\nariaLabel\tstring\t'树形结构'\t树控件的可访问名称；建议按业务用途覆盖，例如“组织结构”。\nmodelValue\t(string | number)[]\t[]\t受控选中键；配合 v-model 使用。\nheight\tnumber\t360\t可视区域高度，单位 px。\nitemSize\tnumber\t32\t固定行高，单位 px；所有节点行使用相同行高以计算虚拟窗口。\nindent\tnumber\t16\t每层缩进，单位 px。\nnodeKey\tstring\t'id'\t节点唯一键字段。\nshowCheckbox\tboolean\tfalse\t是否显示复选框。\ncheckStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择可用后代。\nfilterable\tboolean\ttrue\t是否显示内置过滤框。\ndefaultExpandedKeys\t(string | number)[]\t[]\t初始展开节点键；后续展开状态通过组件交互和 expandAll 管理。\nscrollbarWidth\tnumber\t4\t滚动条宽度，单位 px。\n\n节点类型：\n\nts\ninterface LxVirtualTreeNode {\n  id: string | number\n  label: string\n  children?: LxVirtualTreeNode[]\n  disabled?: boolean\n  isLeaf?: boolean\n  [key: string]: unknown\n}\n\ndisabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf: false 可显示展开控制，但静态树组件不会为其加载子数据。\n\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t选中键变化，用于 v-model。\ncheck-change\t(keys, nodes)\t勾选变化；nodes 为当前树数据中对应的已选节点。\nnode-click\tnode\t点击可用节点时触发。\nexpand-change\tkeys\t展开节点键集合变化。\n插槽\n​\n名称\t参数\t说明\nnode\t{ node, level, checked }\t在节点标签后追加状态或业务展示；保持内容单行以符合固定行高。\n实例方法\n​\n\n可通过模板引用调用：\n\nts\ninterface LxVirtualTreeExpose {\n  getCheckedKeys(): (string | number)[]\n  setCheckedKeys(keys: (string | number)[]): void\n  expandAll(expand?: boolean): void\n  filter(value: string): void\n  scrollToKey(key: string | number): void\n}\n方法\t说明\ngetCheckedKeys()\t读取当前 modelValue 的副本。\nsetCheckedKeys(keys)\t仅保留当前树中存在且未禁用的键；发出 update:modelValue 和 check-change，不直接修改父级数据。\nexpandAll(expand = true)\t展开或收起全部分支，并发出 expand-change。\nfilter(value)\t设置过滤关键字；空字符串清除过滤。\nscrollToKey(key)\t将当前可见节点滚动到视口起点；过滤或折叠后不可见的节点不会滚动。\n状态与边界\n​\n空数组显示“暂无数据”；有过滤词但无匹配项显示“未找到匹配节点”。\n加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 data。\n树容器以 role=\"tree\" 暴露，并提供默认可访问名称“树形结构”；可通过 aria-label/ariaLabel 按实际内容覆盖名称。\n树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。\n行高固定，节点插槽不应换行撑高行；长标签使用省略显示，完整内容保留在 title 属性中。\n虚拟树按 nodeKey 建立索引，同一棵树中该值必须唯一。\nPager\nPrevious page\nLxAuthImg 鉴权图片\nNext page\nLxTransferPanel 双栏穿梭"
+  },
+  {
+    "slug": "virtualtree",
+    "phase": "interactions",
+    "tree": {
+      "rect": {
+        "width": 688,
+        "height": 280
+      },
+      "treeitems": [
+        {
+          "text": "辖区单位 0120 个单元",
+          "tabindex": "0",
+          "ariaExpanded": "true",
+          "ariaSelected": null
+        },
+        {
+          "text": "执勤单元 01已选",
+          "tabindex": "-1",
+          "ariaExpanded": null,
+          "ariaSelected": null
+        },
+        {
+          "text": "执勤单元 02单位",
+          "tabindex": "-1",
+          "ariaExpanded": null,
+          "ariaSelected": null
+        },
+        {
+          "text": "执勤单元 03单位",
+          "tabindex": "-1",
+          "ariaExpanded": null,
+          "ariaSelected": null
+        },
+        {
+          "text": "执勤单元 04单位",
+          "tabindex": "-1",
+          "ariaExpanded": null,
+          "ariaSelected": null
+        },
+        {
+          "text": "执勤单元 05单位",
+          "tabindex": "-1",
+          "ariaExpanded": null,
+          "ariaSelected": null
+        },
+        {
+          "text": "执勤单元 06单位",
+          "tabindex": "-1",
+          "ariaExpanded": null,
+          "ariaSelected": null
+        },
+        {
+          "text": "执勤单元 07单位",
+          "tabindex": "-1",
+          "ariaExpanded": null,
+          "ariaSelected": null
+        },
+        {
+          "text": "执勤单元 08单位",
+          "tabindex": "-1",
+          "ariaExpanded": null,
+          "ariaSelected": null
+        },
+        {
+          "text": "执勤单元 09单位",
+          "tabindex": "-1",
+          "ariaExpanded": null,
+          "ariaSelected": null
+        },
+        {
+          "text": "执勤单元 10单位",
+          "tabindex": "-1",
+          "ariaExpanded": null,
+          "ariaSelected": null
+        },
+        {
+          "text": "执勤单元 11单位",
+          "tabindex": "-1",
+          "ariaExpanded": null,
+          "ariaSelected": null
+        }
+      ],
+      "buttons": [
+        {
+          "text": "",
+          "aria": "收起节点",
+          "tabindex": "-1"
+        }
+      ],
+      "checkboxes": [
+        {
+          "checked": false,
+          "tabindex": "-1"
+        },
+        {
+          "checked": true,
+          "tabindex": "-1"
+        },
+        {
+          "checked": false,
+          "tabindex": "-1"
+        },
+        {
+          "checked": false,
+          "tabindex": "-1"
+        },
+        {
+          "checked": false,
+          "tabindex": "-1"
+        },
+        {
+          "checked": false,
+          "tabindex": "-1"
+        },
+        {
+          "checked": false,
+          "tabindex": "-1"
+        },
+        {
+          "checked": false,
+          "tabindex": "-1"
+        }
+      ]
+    },
+    "focused": {
+      "active": "treeitem",
+      "activeText": "执勤单元 01已选",
+      "treeitemCount": 21
+    },
+    "clearBox": {
+      "x": 1039,
+      "y": 567,
+      "width": 24,
+      "height": 24
+    },
+    "mobile": {
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "documentWidth": 375,
+      "bodyWidth": 375,
+      "treeRect": {
+        "width": 327,
+        "height": 280
+      },
+      "expandTarget": {
+        "width": 24,
+        "height": 24,
+        "aria": "收起节点"
+      },
+      "checkboxTarget": {
+        "width": 24,
+        "height": 24,
+        "tabindex": "-1"
+      }
+    }
+  },
+  {
+    "slug": "sidebar",
+    "phase": "desktop",
+    "title": "LxSidebar 侧边栏 | LxUI",
+    "url": "http://127.0.0.1:4175/components/lxsidebar",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "width": 1440,
+      "height": 3687
+    },
+    "heading": "LxSidebar 侧边栏 ​",
+    "bodyText": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\n本页导航\n基础用法\n双形态受控切换（v-model:mode + 持久化）\nAPI\nFAQ\nLxSidebar 侧边栏\n​\n\n双形态导航容器：expanded（252px 完整导航）/ rail（64px 图标轨道，hover 弹出二级 popper）。视觉源为 stitch 设计稿唯一基准，HUD 战术风格（激活竖条发光、品牌同心环呼吸）。\n\n基础用法\n​\n警务业务协同平台\n综合态势工作台\n协同岗管理\n预警与群组协同\n4\n勤务排班管理\n警务资源管理\n权限与人员中心\n三方集成与网关\n系统与License配置\nNODE-01\n专网\n控制台设置\n工作区\n最近选中：暂无（已触发 0 次）\n查看代码\n双形态受控切换（v-model:mode + 持久化）\n​\n警务业务协同平台\n综合态势工作台\n协同岗管理\n协同岗设置\n上下岗排班监控\n系统与License配置\nNODE-01\n专网\n控制台设置\nHUD 深色主题\n\n当前形态：expanded\n\n点击侧边栏底部按钮切换（已持久化到 localStorage）\n\n打开移动端导航\n查看代码\nAPI\n​\nProps\n​\n名称\t说明\t类型\t默认值\nmode / v-model:mode\t形态\t'rail' | 'expanded'\texpanded\nitems\t菜单树（key/title/icon/children/badge/badgeType/disabled/meta）；未知或非字符串图标安全回退为默认图标\tLxMenuItem[]\t[]\nactive-key\t激活项 key（建议绑定 route.name）\tstring\t''\ntitle / subtitle\t品牌标题 / 副标题\tstring\t警务业务协同平台\nmobile\t移动端模态导航抽屉（v-model:mobile）；打开后焦点进入抽屉，Tab 在抽屉内循环，关闭后返回触发控件\tboolean\tfalse\nshow-footer\t底部状态区（SLA 仪表 + 节点徽章 + 切换按钮）\tboolean\ttrue\nsla-value\tSLA 仪表数值\tnumber\t99.9\nnode-label / node-status\t节点徽章文案 / 状态\tstring / LxStatus\tNODE-01 / online\nlatency-label\texpanded 底部专网状态条文案；为空时回退到 node-label\tstring\t''\nEvents\n​\n名称\t说明\t回调\nselect\t菜单项选中（直达项与二级项统一出口）\t(item: LxMenuItem)\nexpand-change\t分组展开状态变化\t(keys: string[])\nupdate:mode / update:mobile\t受控更新\t—\n\n移动端抽屉可通过关闭按钮、遮罩或 Escape 关闭；选中菜单项时也会请求宿主关闭抽屉。由宿主控制 v-model:mobile，组件会在抽屉关闭后恢复打开前的键盘焦点。\n\n菜单项提供 path 时渲染为链接并由宿主的 select 事件处理路由；未提供 path 时渲染为按钮。每次激活只触发一次 select，分组标题只切换展开状态。\n\n分组标题支持 Enter 和 Space 展开；rail 分组可用键盘打开子项浮层，Escape 关闭浮层并将焦点还给分组标题。所有过渡和品牌呼吸效果均遵守 prefers-reduced-motion。\n\nSlots\n​\n\nbrand（品牌区）/ append（菜单追加区）/ footer（底部状态区）\n\n默认 footer 会随 mode 切换形态：expanded 显示专网状态条、延迟文案、控制台设置和收起按钮；rail 显示 SLA 圆环、NODE 徽章和展开按钮。latency-label 只影响 expanded 状态条，rail 仍使用 sla-value 与 node-label。\n\nFAQ\n​\n\n如何接 router？ 监听 @select，对无 children 的项 router.push(item.path)；activeKey 绑定 route.name。\n\nPager\nPrevious page\nLxIcon 图标总览\nNext page\nLxNavbar 顶部导航"
+  },
+  {
+    "slug": "sidebar",
+    "phase": "interactions",
+    "expanded": "true",
+    "focusOutline": "solid",
+    "selectionCount": "最近选中：协同岗设置（已触发 1 次）",
+    "railChildFocused": true,
+    "popperCountAfterEscape": 0,
+    "railGroupFocusedAfterEscape": true,
+    "mobile": {
+      "drawerVisible": true,
+      "closeFocused": true,
+      "drawerAfterEscape": 0,
+      "openFocusedAfterEscape": true,
+      "viewport": {
+        "width": 375,
+        "height": 780
+      },
+      "documentWidth": 375,
+      "bodyWidth": 375
+    }
+  }
+]

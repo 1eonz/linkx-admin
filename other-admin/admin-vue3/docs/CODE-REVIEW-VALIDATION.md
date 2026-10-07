@@ -1,5 +1,13 @@
 # GLM 代码评审复核与修复台账
 
+## 2026-10-07 Wave 6 lx-ui 组件审核收口
+
+- 审核范围：`LxCascader`、`LxDescriptions`、`LxVirtualTree`、中文 Demo/文档、文档侧栏以及 Vue3 对应单测/E2E。
+- 独立代码复审批准，无可复现 P0-P3；number/string 键碰撞、行内控件键盘冒泡和空字符串键过滤焦点均已修复并回归。VirtualTree 18/18、Descriptions 6/6，两个文档 E2E 共 6/6；lx-ui 类型/构建/文档构建和 Vue3 类型检查通过。
+- Impeccable A 35/40；B 的 7 个 detector 均为有效 JSON `[]`、stderr 空、退出码 0，四页新标签浏览器证据已覆盖 overlay、键盘、HUD、错误/空态和 375px。`[]` 不作为视觉通过的单独依据，完整证据见 `.impeccable/critique/wave6-descriptions-virtualtree-2026-10-07/`。
+- 审核边界：Demo 控制密度、VirtualTree 插槽高度契约、Cascader loading 触发器语义作为后续 P2/P3；未替换 `DataPermissionTree`，未删除宿主 `element-plus`，未进行真实权限后端联调。
+- 下一步：按 Wave 7 审核 `LxTransferPanel` 设计稿、单测、Mock/E2E、A/B 和宿主契约，保持业务 API `.then().catch().finally()` 风格。
+
 ## 2026-10-06 Wave 3 LxIcon 测试改进建议
 
 - **结论**：当前实现复审批准，无可复现 P0–P2；组件、侧栏、上传调用和当前图标分组静态解析一致。

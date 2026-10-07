@@ -1,5 +1,13 @@
 # lx-ui 交付核查
 
+## 2026-10-07 Wave 6 正式交付检查
+
+- `LxCascader`、`LxDescriptions`、`LxVirtualTree` 与文档侧栏已完成当前源码冻结后的实现、中文 Demo/API、行为回归和浏览器验收；VirtualTree/Descriptions 单测 18/18、6/6，文档 E2E 6/6，Vue3 全量 Vitest 58/457。
+- lx-ui 类型检查、库构建、VitePress 文档构建、Vue3 类型检查和差异检查通过；代码复审批准，无可复现 P0-P3。构建保留既有大 chunk 警告。
+- Impeccable A 35/40（Good）；B 7 个 detector 均为有效 `[]`、stderr 空、退出码 0，四个新标签完成 overlay、键盘、HUD、错误/空态和 375px 证据。`[]` 只代表静态规则零命中，完整报告和指纹见 `.impeccable/critique/wave6-descriptions-virtualtree-2026-10-07/`。
+- 后续 P2/P3：Demo 控制区渐进披露、VirtualTree 自定义 node 插槽单行/高度契约、Cascader loading 触发器语义。组件级交付不等于 Vue3 页面已替换，`DataPermissionTree` 宿主回归和真实权限联调仍待完成。
+- 下一波为 `LxTransferPanel`，继续覆盖设计稿 5:2:5、380px 面板、节点 code/status、空/加载/错误、键盘、HUD、窄屏、减少动效和宿主 Mock；完成后才推进 Vue3 Element Plus 替换。
+
 ## 2026-10-07 Wave 5 选择器组件正式核查
 
 - TreeSelect/Cascader/SelectPagination 当前源码、Demo 和中文文档已完成行为闭环；定向单测 **36/36**、文档 Playwright **15/15**，覆盖键盘、清空、错误/重试、窄屏、禁用继承、取消、迟到响应和续页失败恢复。

@@ -1,5 +1,14 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-07 Wave 6 / Cascader、Descriptions、VirtualTree 与文档侧栏正式收口
+
+- **完成内容**：修复 Cascader 传送弹层 HUD 变量继承、Descriptions 中文主题标签和侧栏术语；补齐 VirtualTree 行内控件键盘事件隔离、number/string 键区分、空字符串键过滤焦点恢复、移动触控高度和混合勾选语义；同步中文 Demo、API、E2E 断言和文档导航。
+- **验证**：Vue3 全量 Vitest 58 个文件/457 个测试；VirtualTree 18/18、Descriptions 6/6；VirtualTree 文档 E2E 3/3、Descriptions 文档 E2E 3/3；lx-ui 类型检查、库构建、VitePress 文档构建、Vue3 类型检查、目标格式检查和 `git diff --check` 通过。构建保留既有大 chunk 警告。
+- **代码复审**：独立审核批准，无可复现 P0-P3；空字符串节点键回归覆盖已按审核意见确保旧实现会失败。
+- **Impeccable 正式结果**：Assessment A 35/40（Good）；Assessment B 使用隔离 Playwright fallback，7 个 detector 均为有效 JSON `[]`、stderr 为空、退出码 0，四个新标签 overlay/键盘/HUD/375px 证据与当前源码指纹一致。完整报告见 `.impeccable/critique/wave6-descriptions-virtualtree-2026-10-07/final-report.md`，A/B 和代码审核证据位于同目录；`[]` 只表示静态规则零命中。
+- **后续登记**：Demo 高级控制渐进披露（P2）、VirtualTree 自定义 node 插槽单行/可测量高度契约（P2）、Cascader loading 可聚焦语义说明（P3）列入后续台账；不增加 UI-10 52 项全库关闭数。
+- **下一步**：进入 Wave 7 `LxTransferPanel`，按 `design/虚拟滚动树 + 双栏穿梭/` 严格实现 5:2:5 布局、380px 高度、节点 code/status、空/加载/错误、窄屏/HUD/键盘和减少动效；完成库级门禁后再回归 Vue3 `DataPermissionTree`，不提前删除宿主 `element-plus`。
+
 ## 2026-10-07 Wave 5 / TreeSelect、Cascader 与 SelectPagination 正式收口
 
 - **完成内容**：补齐 `LxTreeSelect` 方向键/Enter 选择、清空和窄屏触控；补齐 `LxCascader` 英文错误文案、错误焦点和窄屏长节点换行；补齐 `LxSelectPagination` 表单禁用继承、迟到响应隔离、续页失败同页重试和禁用不发请求。三个组件 Demo 和中文文档均同步更新组件选型说明。

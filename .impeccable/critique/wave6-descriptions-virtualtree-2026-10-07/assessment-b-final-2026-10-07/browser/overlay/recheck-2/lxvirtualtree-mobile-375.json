@@ -1,0 +1,947 @@
+{
+  "target": "lxvirtualtree",
+  "state": "mobile-375",
+  "screenshot": "screenshots/recheck-2/lxvirtualtree-mobile-375-overlay.png",
+  "injection": {
+    "success": true,
+    "detectorUrl": "http://localhost:8400/detect.js",
+    "impeccableConsoleMessages": [
+      {
+        "type": "startGroup",
+        "text": "%c[impeccable] 9 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "lineNumber": 8159,
+          "columnNumber": 12
+        }
+      }
+    ]
+  },
+  "view": {
+    "title": "[Human] Assessment B - LxVirtualTree 文档页",
+    "url": "http://127.0.0.1:4175/components/lxvirtualtree.html",
+    "viewport": {
+      "width": 375,
+      "height": 844
+    },
+    "documentTheme": "light",
+    "documentClasses": "",
+    "bodyScrollWidth": 375,
+    "bodyClientWidth": 375,
+    "headings": [
+      {
+        "level": "H2",
+        "text": "新增组件"
+      },
+      {
+        "level": "H2",
+        "text": "基础"
+      },
+      {
+        "level": "H2",
+        "text": "布局导航"
+      },
+      {
+        "level": "H2",
+        "text": "数据展示"
+      },
+      {
+        "level": "H3",
+        "text": "表格与分页"
+      },
+      {
+        "level": "H3",
+        "text": "页面与指标"
+      },
+      {
+        "level": "H3",
+        "text": "日历与组织"
+      },
+      {
+        "level": "H3",
+        "text": "状态与辅助"
+      },
+      {
+        "level": "H3",
+        "text": "图形与操作"
+      },
+      {
+        "level": "H2",
+        "text": "数据录入"
+      },
+      {
+        "level": "H3",
+        "text": "表单与基础字段"
+      },
+      {
+        "level": "H3",
+        "text": "选项控件"
+      },
+      {
+        "level": "H3",
+        "text": "树形与日期选择"
+      },
+      {
+        "level": "H3",
+        "text": "检索与复杂字段"
+      },
+      {
+        "level": "H2",
+        "text": "反馈与浮层"
+      },
+      {
+        "level": "H1",
+        "text": "LxVirtualTree 虚拟树\n​"
+      },
+      {
+        "level": "H2",
+        "text": "交互示例\n​"
+      },
+      {
+        "level": "H2",
+        "text": "Props\n​"
+      },
+      {
+        "level": "H2",
+        "text": "Events\n​"
+      },
+      {
+        "level": "H2",
+        "text": "插槽\n​"
+      },
+      {
+        "level": "H2",
+        "text": "实例方法\n​"
+      },
+      {
+        "level": "H2",
+        "text": "状态与边界\n​"
+      }
+    ],
+    "visibleButtons": [
+      {
+        "text": "",
+        "ariaLabel": "搜索文档",
+        "title": "",
+        "className": "DocSearch DocSearch-Button",
+        "disabled": false,
+        "rect": {
+          "x": 263,
+          "y": 5,
+          "width": 48,
+          "height": 55
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "mobile navigation",
+        "title": "",
+        "className": "VPNavBarHamburger hamburger",
+        "disabled": false,
+        "rect": {
+          "x": 319,
+          "y": 0,
+          "width": 48,
+          "height": 64
+        }
+      },
+      {
+        "text": "菜单",
+        "ariaLabel": "",
+        "title": "",
+        "className": "menu",
+        "disabled": false,
+        "rect": {
+          "x": 0,
+          "y": 64,
+          "width": 94,
+          "height": 47
+        }
+      },
+      {
+        "text": "本页导航",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 291,
+          "y": 76,
+          "width": 64,
+          "height": 24
+        }
+      },
+      {
+        "text": "正常数据",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 24,
+          "y": 535,
+          "width": 70,
+          "height": 34
+        }
+      },
+      {
+        "text": "空结果",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 98,
+          "y": 535,
+          "width": 57,
+          "height": 34
+        }
+      },
+      {
+        "text": "加载中",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 159,
+          "y": 535,
+          "width": 57,
+          "height": 34
+        }
+      },
+      {
+        "text": "加载失败",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 220,
+          "y": 535,
+          "width": 70,
+          "height": 34
+        }
+      },
+      {
+        "text": "筛选第二个辖区",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 24,
+          "y": 569,
+          "width": 109,
+          "height": 34
+        }
+      },
+      {
+        "text": "清除筛选",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 137,
+          "y": 569,
+          "width": 70,
+          "height": 34
+        }
+      },
+      {
+        "text": "设置示例选择",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 211,
+          "y": 569,
+          "width": 96,
+          "height": 34
+        }
+      },
+      {
+        "text": "读取选中键",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 24,
+          "y": 607,
+          "width": 83,
+          "height": 34
+        }
+      },
+      {
+        "text": "展开全部",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 111,
+          "y": 607,
+          "width": 70,
+          "height": 34
+        }
+      },
+      {
+        "text": "收起全部",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 185,
+          "y": 607,
+          "width": 70,
+          "height": 34
+        }
+      },
+      {
+        "text": "定位末尾节点",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 24,
+          "y": 645,
+          "width": 96,
+          "height": 34
+        }
+      },
+      {
+        "text": "重试",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 228,
+          "y": 800,
+          "width": 44,
+          "height": 34
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "",
+        "title": "Copy Code",
+        "className": "copy",
+        "disabled": false,
+        "rect": {
+          "x": 278,
+          "y": 1055,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "",
+        "title": "Copy Code",
+        "className": "copy",
+        "disabled": false,
+        "rect": {
+          "x": 319,
+          "y": 2860,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "",
+        "title": "Copy Code",
+        "className": "copy",
+        "disabled": false,
+        "rect": {
+          "x": 319,
+          "y": 4415,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "◉",
+        "ariaLabel": "",
+        "title": "Toggle overlay visibility",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 323,
+          "y": 6,
+          "width": 21,
+          "height": 24
+        }
+      },
+      {
+        "text": "×",
+        "ariaLabel": "",
+        "title": "Dismiss banner",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 346,
+          "y": 6,
+          "width": 21,
+          "height": 24
+        }
+      }
+    ],
+    "visibleInputs": [
+      {
+        "tagName": "INPUT",
+        "type": "checkbox",
+        "value": "on",
+        "checked": false,
+        "disabled": false,
+        "ariaLabel": "",
+        "label": "父子独立勾选",
+        "className": "",
+        "rect": {
+          "x": 132,
+          "y": 656,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tagName": "INPUT",
+        "type": "checkbox",
+        "value": "on",
+        "checked": true,
+        "disabled": false,
+        "ariaLabel": "",
+        "label": "HUD 深色主题",
+        "className": "",
+        "rect": {
+          "x": 32,
+          "y": 692,
+          "width": 13,
+          "height": 13
+        }
+      }
+    ],
+    "sidebar": {
+      "className": "VPSidebar",
+      "text": "Sidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格与分页\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅",
+      "activeLinks": [
+        {
+          "text": "LxVirtualTree 虚拟树",
+          "href": ""
+        }
+      ]
+    },
+    "bodyTextStart": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格与分页\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxVirtualTree 虚拟树\n​\n\n固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。\n\n交互示例\n​\n演示状态和更多操作\n正常数据\n空结果\n加载中\n加载失败\n筛选第二个辖区\n清除筛选\n设置示例选择\n读取选中键\n展开全部\n收起全部\n定位末尾节点\n父子独立勾选\nHUD 深色主题\n\n组织数据加载失败，可重试\n\n组织数据加载失败。\n重试\n受控选中：1 项\nunit-1-1\n公开方法读取：0 项\n\n加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。\n\n查看示例代码\n\n示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。\n\nProps\n​\n名称\t类型\t默认值\t说明\ndata\tLxVirtualTreeNode[]\t[]\t树数据；节点使用 id 作为默认键，也可配置 nodeKey。\nariaLabel\tstring\t'树形结构'\t树控件的可访问名称；建议按业务用途覆盖，例如“组织结构”。\nmodelValue\t(string | number)[]\t[]\t受控选中键；配合 v-model 使用。\nheight\tnumber\t360\t可视区域高度，单位 px。\nitemSize\tnumber\t32\t固定行高，单位 px；所有节点行使用相同行高以计算虚拟窗口。\nindent\tnumber\t16\t每层缩进，单位 px。\nnodeKey\tstring\t'id'\t节点唯一键字段。\nshowCheckbox\tboolean\tfalse\t是否显示复选框。\ncheckStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择可用后代。\nfilterable\tboolean\ttrue\t是否显示内置过滤框。\ndefaultExpandedKeys\t(string | number)[]\t[]\t初始展开节点键；后续展开状态通过组件交互和 expandAll 管理。\nscrollbarWidth\tnumber\t4\t滚动条宽度，单位 px。\n\n节点类型：\n\nts\ninterface LxVirtualTreeNode {\n  id: string | number\n  label: string\n  children?: LxVirtualTreeNode[]\n  disabled?: boolean\n  isLeaf?: boolean\n  [key: string]: unknown\n}\n\ndisabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf",
+    "impeccableNodes": [
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 22,
+          "y": 198,
+          "width": 331,
+          "height": 146
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+          "rect": {
+            "x": 24,
+            "y": 200,
+            "width": 327,
+            "height": 142
+          },
+          "outerHTML": "<p>固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 <code>v-model</code> 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 20,
+          "y": 178,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "targetElement": {
+          "tagName": "BUTTON",
+          "id": "",
+          "className": "copy",
+          "role": "",
+          "ariaLabel": "",
+          "title": "Copy Code",
+          "text": "",
+          "rect": {
+            "x": 278,
+            "y": 1055,
+            "width": 44,
+            "height": 44
+          },
+          "outerHTML": "<button title=\"Copy Code\" class=\"copy\"></button>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 22,
+          "y": 1058,
+          "width": 331,
+          "height": 200
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。",
+          "rect": {
+            "x": 24,
+            "y": 1060,
+            "width": 327,
+            "height": 196
+          },
+          "outerHTML": "<p>示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 20,
+          "y": 1038,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 317,
+          "y": 2858,
+          "width": 48,
+          "height": 48
+        },
+        "targetElement": {
+          "tagName": "BUTTON",
+          "id": "",
+          "className": "copy",
+          "role": "",
+          "ariaLabel": "",
+          "title": "Copy Code",
+          "text": "",
+          "rect": {
+            "x": 319,
+            "y": 2860,
+            "width": 44,
+            "height": 44
+          },
+          "outerHTML": "<button title=\"Copy Code\" class=\"copy\"></button>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 315,
+          "y": 2838,
+          "width": 232,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 317,
+          "y": 4413,
+          "width": 48,
+          "height": 48
+        },
+        "targetElement": {
+          "tagName": "BUTTON",
+          "id": "",
+          "className": "copy",
+          "role": "",
+          "ariaLabel": "",
+          "title": "Copy Code",
+          "text": "",
+          "rect": {
+            "x": 319,
+            "y": 4415,
+            "width": 44,
+            "height": 44
+          },
+          "outerHTML": "<button title=\"Copy Code\" class=\"copy\"></button>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 315,
+          "y": 4393,
+          "width": 232,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "text occluded by an overlapping element",
+        "rect": {
+          "x": 122,
+          "y": 645,
+          "width": 114,
+          "height": 34
+        },
+        "targetElement": {
+          "tagName": "LABEL",
+          "id": "",
+          "className": "virtual-tree-demo__strict",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "父子独立勾选",
+          "rect": {
+            "x": 124,
+            "y": 647,
+            "width": 110,
+            "height": 30
+          },
+          "outerHTML": "<label data-v-68f0cede=\"\" class=\"virtual-tree-demo__strict\"><input data-v-68f0cede=\"\" type=\"checkbox\" style=\"\"> 父子独立勾选 </label>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "text occluded by an overlapping element",
+        "rect": {
+          "x": 120,
+          "y": 625,
+          "width": 251,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "text occluded by an overlapping element",
+        "rect": {
+          "x": 22,
+          "y": 681,
+          "width": 120,
+          "height": 34
+        },
+        "targetElement": {
+          "tagName": "LABEL",
+          "id": "",
+          "className": "virtual-tree-demo__strict",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "HUD 深色主题",
+          "rect": {
+            "x": 24,
+            "y": 683,
+            "width": 116,
+            "height": 30
+          },
+          "outerHTML": "<label data-v-68f0cede=\"\" class=\"virtual-tree-demo__strict\"><input data-v-68f0cede=\"\" type=\"checkbox\" style=\"\"> HUD 深色主题 </label>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "text occluded by an overlapping element",
+        "rect": {
+          "x": 20,
+          "y": 661,
+          "width": 251,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "text occluded by an overlapping element",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "targetElement": {
+          "tagName": "SPAN",
+          "id": "",
+          "className": "lang",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "vue",
+          "rect": {
+            "x": 305,
+            "y": 1045,
+            "width": 21,
+            "height": 24
+          },
+          "outerHTML": "<span class=\"lang\">vue</span>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "text occluded by an overlapping element",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-banner",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "layout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 36
+        },
+        "targetElement": null
+      }
+    ],
+    "hudNodes": 1,
+    "activeElement": {
+      "tagName": "BODY",
+      "role": "",
+      "ariaLabel": "",
+      "className": "",
+      "text": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayo"
+    }
+  },
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:4175/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:4175/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 9 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8159,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%ctext-occlusion%c label.virtual-tree-demo__strict \"父子独立勾选\" is 72% covered by an opaque element (div.lx-virtual-tree__viewport) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%ctext-occlusion%c label.virtual-tree-demo__strict \"HUD 深色主题\" is 95% covered by an opaque element (div.lx-virtual-tree__viewport) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%ctext-occlusion%c span.lang \"vue\" is 50% covered by overlapping text (p) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8169,
+        "columnNumber": 12
+      }
+    }
+  ],
+  "pageErrors": []
+}

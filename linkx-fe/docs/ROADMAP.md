@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-07 Wave 6 / Cascader、Descriptions、VirtualTree 正式收口
+
+当前源码、Demo 和中文文档已完成统一版本的组件级验收：VirtualTree/Descriptions 单测 18/18、6/6，文档 E2E 各 3/3，lx-ui 类型检查、库构建和文档构建通过。Cascader HUD 弹层、Descriptions 术语、VirtualTree 键盘事件/键碰撞/空键焦点和移动控件均已修复。Impeccable A 35/40；B 7 个 detector 为有效 `[]`、stderr 空、exit 0，四页浏览器 overlay 证据和当前源码指纹已保存。`[]` 只表示静态零命中；综合报告见 `.impeccable/critique/wave6-descriptions-virtualtree-2026-10-07/final-report.md`。
+
+保留后续 P2/P3：Demo 控制区分组、VirtualTree 自定义插槽行高契约、Cascader loading 语义。下一入口为 `LxTransferPanel`，严格对照双栏穿梭设计稿完成 5:2:5、380px、节点 code/status、状态闭环、窄屏/HUD/键盘/减少动效，再进入宿主适配；Vue3 `element-plus` 直接依赖继续保留。
+
 ## 2026-10-07 Wave 5 / TreeSelect、Cascader 与 SelectPagination
 
 - 当前版本实现、中文 Demo/API、行为回归和宿主文档 E2E 已收口：单测 **36/36**、文档 E2E **15/15**；覆盖键盘/清空、错误焦点和英文提示、移动触控、表单禁用继承、请求取消与迟到隔离、续页失败同页重试。

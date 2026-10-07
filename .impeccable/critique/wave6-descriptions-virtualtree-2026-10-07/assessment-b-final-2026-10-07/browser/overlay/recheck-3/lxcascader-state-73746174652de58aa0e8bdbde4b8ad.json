@@ -1,0 +1,1067 @@
+{
+  "target": "lxcascader",
+  "state": "state-加载中",
+  "screenshot": "screenshots/recheck-3/lxcascader-state-73746174652de58aa0e8bdbde4b8ad-overlay.png",
+  "injection": {
+    "success": true,
+    "detectorUrl": "http://localhost:8400/detect.js",
+    "impeccableConsoleMessages": [
+      {
+        "type": "startGroup",
+        "text": "%c[impeccable] 13 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "lineNumber": 8159,
+          "columnNumber": 12
+        }
+      }
+    ]
+  },
+  "view": {
+    "title": "[Human] Assessment B - LxCascader 文档页",
+    "url": "http://127.0.0.1:4175/components/lxcascader.html",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "documentTheme": "light",
+    "documentClasses": "",
+    "bodyScrollWidth": 1440,
+    "bodyClientWidth": 1440,
+    "headings": [
+      {
+        "level": "H2",
+        "text": "新增组件"
+      },
+      {
+        "level": "H2",
+        "text": "基础"
+      },
+      {
+        "level": "H2",
+        "text": "布局导航"
+      },
+      {
+        "level": "H2",
+        "text": "数据展示"
+      },
+      {
+        "level": "H3",
+        "text": "表格与分页"
+      },
+      {
+        "level": "H3",
+        "text": "页面与指标"
+      },
+      {
+        "level": "H3",
+        "text": "日历与组织"
+      },
+      {
+        "level": "H3",
+        "text": "状态与辅助"
+      },
+      {
+        "level": "H3",
+        "text": "图形与操作"
+      },
+      {
+        "level": "H2",
+        "text": "数据录入"
+      },
+      {
+        "level": "H3",
+        "text": "表单与基础字段"
+      },
+      {
+        "level": "H3",
+        "text": "选项控件"
+      },
+      {
+        "level": "H3",
+        "text": "树形与日期选择"
+      },
+      {
+        "level": "H3",
+        "text": "检索与复杂字段"
+      },
+      {
+        "level": "H2",
+        "text": "反馈与浮层"
+      },
+      {
+        "level": "H1",
+        "text": "LxCascader 级联选择\n​"
+      },
+      {
+        "level": "H3",
+        "text": "组件选型\n​"
+      },
+      {
+        "level": "H2",
+        "text": "基础用法\n​"
+      },
+      {
+        "level": "H2",
+        "text": "设计对照\n​"
+      },
+      {
+        "level": "H2",
+        "text": "Props 与事件\n​"
+      },
+      {
+        "level": "H2",
+        "text": "键盘操作\n​"
+      },
+      {
+        "level": "H2",
+        "text": "自定义字段映射\n​"
+      }
+    ],
+    "visibleButtons": [
+      {
+        "text": "搜索文档 K",
+        "ariaLabel": "搜索文档",
+        "title": "",
+        "className": "DocSearch DocSearch-Button",
+        "disabled": false,
+        "rect": {
+          "x": 304,
+          "y": 12,
+          "width": 159,
+          "height": 40
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "",
+        "title": "Switch to dark theme",
+        "className": "VPSwitch VPSwitchAppearance",
+        "disabled": false,
+        "rect": {
+          "x": 1368,
+          "y": 21,
+          "width": 40,
+          "height": 22
+        }
+      },
+      {
+        "text": "多选模式",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 401,
+          "y": 449,
+          "width": 70,
+          "height": 44
+        }
+      },
+      {
+        "text": "加载中",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 479,
+          "y": 449,
+          "width": 58,
+          "height": 44
+        }
+      },
+      {
+        "text": "失败",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 545,
+          "y": 449,
+          "width": 46,
+          "height": 44
+        }
+      },
+      {
+        "text": "加载中且失败",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 599,
+          "y": 449,
+          "width": 94,
+          "height": 44
+        }
+      },
+      {
+        "text": "禁用",
+        "ariaLabel": "",
+        "title": "",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 701,
+          "y": 449,
+          "width": 46,
+          "height": 44
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "",
+        "title": "Copy Code",
+        "className": "copy",
+        "disabled": false,
+        "rect": {
+          "x": 1020,
+          "y": 1053,
+          "width": 40,
+          "height": 40
+        }
+      },
+      {
+        "text": "",
+        "ariaLabel": "",
+        "title": "Copy Code",
+        "className": "copy",
+        "disabled": false,
+        "rect": {
+          "x": 1020,
+          "y": 3735,
+          "width": 40,
+          "height": 40
+        }
+      },
+      {
+        "text": "◉",
+        "ariaLabel": "",
+        "title": "Toggle overlay visibility",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 1388,
+          "y": 6,
+          "width": 21,
+          "height": 24
+        }
+      },
+      {
+        "text": "×",
+        "ariaLabel": "",
+        "title": "Dismiss banner",
+        "className": "",
+        "disabled": false,
+        "rect": {
+          "x": 1411,
+          "y": 6,
+          "width": 21,
+          "height": 24
+        }
+      }
+    ],
+    "visibleInputs": [
+      {
+        "tagName": "INPUT",
+        "type": "text",
+        "value": "杭州市公安局 / 西湖区分局 / 情指中心",
+        "checked": false,
+        "disabled": false,
+        "ariaLabel": "",
+        "label": "组织路径",
+        "className": "el-input__inner",
+        "rect": {
+          "x": 412,
+          "y": 320,
+          "width": 442,
+          "height": 30
+        }
+      },
+      {
+        "tagName": "INPUT",
+        "type": "checkbox",
+        "value": "on",
+        "checked": false,
+        "disabled": false,
+        "ariaLabel": "",
+        "label": "控件英文",
+        "className": "",
+        "rect": {
+          "x": 759,
+          "y": 465,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tagName": "INPUT",
+        "type": "checkbox",
+        "value": "on",
+        "checked": true,
+        "disabled": false,
+        "ariaLabel": "",
+        "label": "HUD 深色主题",
+        "className": "",
+        "rect": {
+          "x": 405,
+          "y": 517,
+          "width": 13,
+          "height": 13
+        }
+      }
+    ],
+    "sidebar": {
+      "className": "VPSidebar",
+      "text": "Sidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格与分页\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅",
+      "activeLinks": [
+        {
+          "text": "LxCascader 级联选择",
+          "href": ""
+        }
+      ]
+    },
+    "bodyTextStart": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格与分页\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\n本页导航\n基础用法\n设计对照\nProps 与事件\n键盘操作\n自定义字段映射\nLxCascader 级联选择\n​\n\n级联选择器的 lx-ui 封装，供检索面板和表单组合使用。组件保留 Element Plus 的节点值、级联路径、过滤、清空、键盘和实例方法契约，宿主只依赖 LxCascader。数据请求由宿主负责，组件通过公开的 loading、error 和 retry 契约反馈异步状态。\n\n组织路径\n加载中\n演示状态\n多选模式\n加载中\n失败\n加载中且失败\n禁用\n控件英文\nHUD 深色主题\n\n当前值：hangzhou / xihu / command\n\n正在加载组织数据，暂不可选择。\n\n示例可切换单选/多选、加载中、失败重试、加载与失败并发、禁用状态、控件英文文案和 HUD 深色主题。主题开关同时作用于示例表面与传送到页面根节点的级联弹层。状态说明会跟随加载、失败和禁用状态更新；并发演示中加载文案优先显示。失败态的“重试”只发出 retry，不会在组件内部请求数据；宿主应在监听后重新加载 options 并清除 error。\n\n组件选型\n​\n\n当用户需要沿省市、组织或业务目录的固定路径逐级选择时使用 LxCascader。需要展开任意层级并多选树分支时使用 LxTreeSelect；候选项数量很大且数据由远程搜索分页提供时使用 LxSelectPagination。\n\n基础用法\n​\nvue\n<LxCascader\n  v-model=\"path\"\n  :options=\"options\"\n  placeholder=\"请选择组织路径\"\n  clearable\n/>\n设计对照\n​\n标准触发器高度沿用 lx-ui 28/32/40px 尺寸档，默认 32px。\n4px 圆角、1px 控件描边和主色焦点边线使用 lx-ui 令牌；不叠加偏移外圈，焦点时控件尺寸保持稳定。\n弹层使用组件库 popper 阴影和圆角，窄屏触控目标放大到至少 44px。\n375px 视口下弹层限制在视口内，级联列可在弹层内部横向滚动；长组织名完整换行显示，节点和过滤结果行保持至少 44px 触控高度。\nprefers-reduced-motion: reduce 时关闭过渡与动画。\nProps 与事件\n​\nProp\t类型\t默认值\t说明\nmodelValue\tLxCascaderModelValue\tundefined\t受控选择值；支持单值、路径数组和多选路径数组。\noptions\tLxCascaderOption[]\t[]\t选项数据；可使用 Element Plus 默认字段或自定义字段映射。\nprops\tCascaderProps\tElement Plus 默认映射\t配置选项字段、选择模式、禁用和懒加载；快捷选择属性仅在显式传入时覆盖对应配置。\nid / name / a",
+    "impeccableNodes": [
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 382,
+          "y": 166,
+          "width": 692,
+          "height": 90
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "级联选择器的 lx-ui 封装，供检索面板和表单组合使用。组件保留 Element Plus 的节点值、级联路径、过滤、清空、键盘和实例方法契约，宿主只依赖 LxCascader。数据请求由宿主负责，组件通过公开的 loading、error 和 retry 契约反馈异步状态。",
+          "rect": {
+            "x": 384,
+            "y": 168,
+            "width": 688,
+            "height": 86
+          },
+          "outerHTML": "<p>级联选择器的 lx-ui 封装，供检索面板和表单组合使用。组件保留 Element Plus 的节点值、级联路径、过滤、清空、键盘和实例方法契约，宿主只依赖 <code>LxCascader</code>。数据请求由宿主负责，组件通过公开的 loading、error 和 retry 契约反馈异步状态。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 380,
+          "y": 146,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 382,
+          "y": 636,
+          "width": 692,
+          "height": 120
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "示例可切换单选/多选、加载中、失败重试、加载与失败并发、禁用状态、控件英文文案和 HUD 深色主题。主题开关同时作用于示例表面与传送到页面根节点的级联弹层。状态说明会跟随加载、失败和禁用状态更新；并发演示中加载文案优先显示。失败态的“重试”只发出 retry，不会在组件内部请求数据；宿主应在监听后重新加载 options 并清除 error。",
+          "rect": {
+            "x": 384,
+            "y": 638,
+            "width": 688,
+            "height": 116
+          },
+          "outerHTML": "<p>示例可切换单选/多选、加载中、失败重试、加载与失败并发、禁用状态、控件英文文案和 HUD 深色主题。主题开关同时作用于示例表面与传送到页面根节点的级联弹层。状态说明会跟随加载、失败和禁用状态更新；并发演示中加载文案优先显示。失败态的“重试”只发出 <code>retry</code>，不会在组件内部请求数据；宿主应在监听后重新加载 <code>options</code> 并清除 <code>error</code>。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 380,
+          "y": 616,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 382,
+          "y": 828,
+          "width": 692,
+          "height": 94
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "当用户需要沿省市、组织或业务目录的固定路径逐级选择时使用 LxCascader。需要展开任意层级并多选树分支时使用 LxTreeSelect；候选项数量很大且数据由远程搜索分页提供时使用 LxSelectPagination。",
+          "rect": {
+            "x": 384,
+            "y": 830,
+            "width": 688,
+            "height": 90
+          },
+          "outerHTML": "<p>当用户需要沿省市、组织或业务目录的固定路径逐级选择时使用 <code>LxCascader</code>。需要展开任意层级并多选树分支时使用 <code>LxTreeSelect</code>；候选项数量很大且数据由远程搜索分页提供时使用 <code>LxSelectPagination</code>。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 380,
+          "y": 808,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 1018,
+          "y": 1051,
+          "width": 44,
+          "height": 44
+        },
+        "targetElement": {
+          "tagName": "BUTTON",
+          "id": "",
+          "className": "copy",
+          "role": "",
+          "ariaLabel": "",
+          "title": "Copy Code",
+          "text": "",
+          "rect": {
+            "x": 1020,
+            "y": 1053,
+            "width": 40,
+            "height": 40
+          },
+          "outerHTML": "<button title=\"Copy Code\" class=\"copy\"></button>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 1016,
+          "y": 1031,
+          "width": 232,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 382,
+          "y": 3113,
+          "width": 692,
+          "height": 122
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "未声明的 Element Plus Cascader 属性继续通过 $attrs 透传。组件发出 update:modelValue、change、expandChange、visibleChange、focus、blur 和 retry；模板中 visibleChange 使用 @visible-change 监听。公开 focus、blur、togglePopperVisible 和 getCheckedNodes。按 Escape 会关闭当前弹层并回到触发输入框。",
+          "rect": {
+            "x": 384,
+            "y": 3115,
+            "width": 688,
+            "height": 118
+          },
+          "outerHTML": "<p>未声明的 Element Plus Cascader 属性继续通过 <code>$attrs</code> 透传。组件发出 <code>update:modelValue</code>、<code>change</code>、<code>expandChange</code>、<code>visibleChange</code>、<code>focus</code>、<code>blur</code> 和 <code>retry</code>；模板中 <code>visibleChange</code> 使用 <code>@visible-change</code> 监听。公开 <code>focus</code>、<code>blur</code>、<code>togglePopperVisible</code> 和 <code>getCheckedNodes</code>。按 Escape 会关闭当前弹层并回到触发输入框。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 380,
+          "y": 3093,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 382,
+          "y": 3615,
+          "width": 692,
+          "height": 94
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "options 接受 Element Plus 的 CascaderOption 扩展结构。默认 label、value、children 字段可以省略，改由 props 指定业务字段名；节点值的字符串、数字和记录对象兼容仍由 LxCascaderOption 保留。",
+          "rect": {
+            "x": 384,
+            "y": 3617,
+            "width": 688,
+            "height": 90
+          },
+          "outerHTML": "<p><code>options</code> 接受 Element Plus 的 <code>CascaderOption</code> 扩展结构。默认 <code>label</code>、<code>value</code>、<code>children</code> 字段可以省略，改由 <code>props</code> 指定业务字段名；节点值的字符串、数字和记录对象兼容仍由 <code>LxCascaderOption</code> 保留。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 380,
+          "y": 3595,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 1018,
+          "y": 3733,
+          "width": 44,
+          "height": 44
+        },
+        "targetElement": {
+          "tagName": "BUTTON",
+          "id": "",
+          "className": "copy",
+          "role": "",
+          "ariaLabel": "",
+          "title": "Copy Code",
+          "text": "",
+          "rect": {
+            "x": 1020,
+            "y": 3735,
+            "width": 40,
+            "height": 40
+          },
+          "outerHTML": "<button title=\"Copy Code\" class=\"copy\"></button>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "raster buried under a wash or opacity",
+        "rect": {
+          "x": 1016,
+          "y": 3713,
+          "width": 232,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 382,
+          "y": 4315,
+          "width": 692,
+          "height": 64
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "若 loading 与 error 同时为 true，组件优先显示加载状态并隐藏错误/重试反馈；请求结束后宿主将 loading 设为 false，仍为 true 的 error 才展示失败状态和重试入口。",
+          "rect": {
+            "x": 384,
+            "y": 4317,
+            "width": 688,
+            "height": 60
+          },
+          "outerHTML": "<p>若 <code>loading</code> 与 <code>error</code> 同时为 <code>true</code>，组件优先显示加载状态并隐藏错误/重试反馈；请求结束后宿主将 <code>loading</code> 设为 <code>false</code>，仍为 <code>true</code> 的 <code>error</code> 才展示失败状态和重试入口。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 380,
+          "y": 4295,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 382,
+          "y": 4391,
+          "width": 692,
+          "height": 150
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "错误状态为实际输入框设置 aria-invalid，通过 aria-describedby 关联当前可见的错误文案，并保留宿主传入的描述 ID；错误提示使用 assertive alert 播报，持久化的隐藏弹层不会重复占用错误 ID。位于 ElFormItem 时，表单校验文案也会关联到实际输入框，即使宿主没有为该文案设置 ID。清除 error 后移除组件错误关联。加载失败时仍允许打开弹层查看反馈并重试，错误焦点保留控件内侧 1px 边线。",
+          "rect": {
+            "x": 384,
+            "y": 4393,
+            "width": 688,
+            "height": 146
+          },
+          "outerHTML": "<p>错误状态为实际输入框设置 <code>aria-invalid</code>，通过 <code>aria-describedby</code> 关联当前可见的错误文案，并保留宿主传入的描述 ID；错误提示使用 assertive alert 播报，持久化的隐藏弹层不会重复占用错误 ID。位于 <code>ElFormItem</code> 时，表单校验文案也会关联到实际输入框，即使宿主没有为该文案设置 ID。清除 <code>error</code> 后移除组件错误关联。加载失败时仍允许打开弹层查看反馈并重试，错误焦点保留控件内侧 1px 边线。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 380,
+          "y": 4371,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 382,
+          "y": 4553,
+          "width": 692,
+          "height": 92
+        },
+        "targetElement": {
+          "tagName": "P",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "modelValue 支持单个节点值、路径数组，以及多选时的路径数组集合；节点值可为字符串、数字或记录对象。级联没有业务请求能力，远程节点加载等低频能力通过 $attrs 传给内核，数据和错误处理由宿主负责。",
+          "rect": {
+            "x": 384,
+            "y": 4555,
+            "width": 688,
+            "height": 88
+          },
+          "outerHTML": "<p><code>modelValue</code> 支持单个节点值、路径数组，以及多选时的路径数组集合；节点值可为字符串、数字或记录对象。级联没有业务请求能力，远程节点加载等低频能力通过 <code>$attrs</code> 传给内核，数据和错误处理由宿主负责。</p>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "line length too long",
+        "rect": {
+          "x": 380,
+          "y": 4533,
+          "width": 130,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "targetElement": {
+          "tagName": "DIV",
+          "id": "el-id-1024-0",
+          "className": "el-popper is-pure is-light el-tooltip el-cascader__dropdown lx-cascader__popper is-loading dark lx-theme-hud",
+          "role": "tooltip",
+          "ariaLabel": "",
+          "title": "",
+          "text": "加载中杭州市公安局西湖区分局滨江区分局临时管控节点（禁用）情指中心巡防大队无匹配数据",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "outerHTML": "<div class=\"el-popper is-pure is-light el-tooltip el-cascader__dropdown lx-cascader__popper is-loading dark lx-theme-hud\" tabindex=\"-1\" aria-hidden=\"true\" role=\"tooltip\" id=\"el-id-1024-0\" data-popper-reference-hidden=\"false\" data-popper-escaped=\"false\" data-popper-placement=\"bottom-start\" style=\"z-index: 2001; position: absolute; inset: 363px auto auto 401px; display: none;\"><div class=\"el-cascader__header\"><div class=\"lx-cascader__panel-state\" role=\"status\" aria-live=\"polite\"><span>加载中</span></div></div><div class=\"el-cascader-panel\"><div class=\"el-scrollbar el-cascader-menu\"><div class=\"el-cascader-menu__wrap el-scrollbar__wrap el-scrollbar__wrap--hidden-default\"><ul class=\"el-scrollbar__view el-cascader-menu__list\" role=\"menu\" style=\"\"><li id=\"el-id-1024-1-0-6\" role=\"menuitem\" aria-hasp"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "✦ hairline border with wide shadow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "cards flush against the scroller edge",
+        "rect": {
+          "x": 382,
+          "y": 1660,
+          "width": 692,
+          "height": 1437
+        },
+        "targetElement": {
+          "tagName": "TABLE",
+          "id": "",
+          "className": "",
+          "role": "",
+          "ariaLabel": "",
+          "title": "",
+          "text": "Prop 类型 默认值 说明 modelValue LxCascaderModelValue undefined 受控选择值；支持单值、路径数组和多选路径数组。 options LxCascaderOption[] [] 选项数据；可使用 Element Plus 默认字段或自定义字段映射。 props CascaderProps Element Plus 默认映射 配置选项字段、选择模式、禁用和懒加载；快捷选择属性仅在显式传入时覆盖对应配置。 id / name / autocomplete string undefined 设置实际输入框的表单标识、提交字段名和自动填充行为。 aria-l",
+          "rect": {
+            "x": 384,
+            "y": 1662,
+            "width": 688,
+            "height": 1433
+          },
+          "outerHTML": "<table tabindex=\"0\"><thead><tr><th>Prop</th><th>类型</th><th>默认值</th><th>说明</th></tr></thead><tbody><tr><td><code>modelValue</code></td><td><code>LxCascaderModelValue</code></td><td><code>undefined</code></td><td>受控选择值；支持单值、路径数组和多选路径数组。</td></tr><tr><td><code>options</code></td><td><code>LxCascaderOption[]</code></td><td><code>[]</code></td><td>选项数据；可使用 Element Plus 默认字段或自定义字段映射。</td></tr><tr><td><code>props</code></td><td><code>CascaderProps</code></td><td>Element Plus 默认映射</td><td>配置选项字段、选择模式、禁用和懒加载；快捷选择属性仅在显式传入时覆盖对应配置。</td></tr><tr><td><code>id</code> / <code>name</code> / <code>autocomplete</code></td><td><code>string</code></td><td><code>undefined</code></td><td>设置实际输入框的表单标识、提交字段名和自动填充行为。</td></tr><tr><td><code>aria-label</code> / <code>aria-labelledby</code></td><td><code>string</code>"
+        }
+      },
+      {
+        "id": "",
+        "className": "impeccable-label",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "cards flush against the scroller edge",
+        "rect": {
+          "x": 380,
+          "y": 1640,
+          "width": 224,
+          "height": 20
+        },
+        "targetElement": null
+      },
+      {
+        "id": "",
+        "className": "impeccable-overlay impeccable-banner",
+        "role": "",
+        "ariaLabel": "",
+        "title": "",
+        "text": "skipped heading level: <h1> \"LxCascader 级联选择 ​\" followed by <h3> \"组件选型 ​\" (missing h2)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 36
+        },
+        "targetElement": null
+      }
+    ],
+    "hudNodes": 2,
+    "activeElement": {
+      "tagName": "BODY",
+      "role": "",
+      "ariaLabel": "",
+      "className": "",
+      "text": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\n"
+    }
+  },
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:4175/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:4175/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://127.0.0.1:4175/favicon.ico",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 13 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8159,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cedge-flush-cards%c 19 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cskipped-heading%c <h1> \"LxCascader 级联选择 ​\" followed by <h3> \"组件选型 ​\" (missing h2) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8169,
+        "columnNumber": 12
+      }
+    }
+  ],
+  "pageErrors": []
+}

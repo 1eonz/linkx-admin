@@ -1,5 +1,13 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-07 UI-13 / Wave 6 Cascader、Descriptions、VirtualTree 正式审计
+
+当前版本 `LxCascader`、`LxDescriptions`、`LxVirtualTree` 及文档侧栏已完成统一源码冻结后的组件级行为、浏览器和视觉复验。VirtualTree/Descriptions 定向单测 18/18、6/6，文档 E2E 3/3、3/3；Vue3 全量单测 58 个文件/457 个测试；lx-ui 类型检查、库构建、文档构建和 Vue3 类型检查通过。独立代码复审批准，无可复现 P0-P3。
+
+Assessment A 为 35/40（Good）。Assessment B 的 7 个源码/文档目标均保存 JSON、stderr、退出码，结果为有效 `[]`、stderr 空、exit 0；四个新标签完成 overlay、键盘、HUD、错误/空态和 375px 证据。`[]` 仅表示静态规则零命中，B 使用隔离 Playwright fallback 的限制已写入报告。正式综合报告为 `.impeccable/critique/wave6-descriptions-virtualtree-2026-10-07/final-report.md`，原始证据、指纹和生命周期记录位于同目录。
+
+本波关闭组件级审核门禁，但不增加 UI-10 52 项全库严格矩阵关闭数。Demo 控制区渐进披露、VirtualTree 自定义插槽行高契约和 Cascader loading 触发器语义列入后续 P2/P3；`LxTransferPanel` 进入下一波，继续对照 `design/虚拟滚动树 + 双栏穿梭/` 后再进行 Vue3 `DataPermissionTree` 宿主替换。
+
 ## 2026-10-07 Wave 5 选择器组件正式审计
 
 `LxTreeSelect`、`LxCascader`、`LxSelectPagination` 已完成当前源码冻结后的行为、浏览器和视觉复验。定向单测 36/36、文档 E2E 15/15；A 32/40（Good），B 对 9 个源码/Demo/文档目标取得有效 JSON `[]`、空 stderr、退出码 0，并完成 9 个独立 overlay 场景；独立代码复审无 P0–P2。完整证据见 `.impeccable/critique/wave5-tree-select-pagination-2026-10-07/`。
