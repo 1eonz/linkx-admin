@@ -31,10 +31,17 @@ const items: LxDescriptionItem[] = [
   {
     key: 'status',
     label: '运行状态',
-    value: '在线（在岗备勤）',
+    value: '在线（在岗备勤），当前负责跨辖区视频联动与加密调度',
     statusDot: 'online',
   },
   { key: 'createdAt', label: '创建时间', value: '2026-09-22 14:35:10' },
+  {
+    key: 'deviceCode',
+    label: '设备标识',
+    value: 'GB28181-P2P-EDGE-NODE-20261007-00000001-REGION-OPS',
+    copyable: true,
+    span: 2,
+  },
   {
     key: 'remarks',
     label: '业务备注',
@@ -98,7 +105,7 @@ onBeforeUnmount(() => {
       </label>
       <label class="lx-descriptions-demo__toggle">
         <input v-model="hudTheme" type="checkbox" />
-        HUD 深色主题
+        HUD 深色主题（整页）
       </label>
       <div
         class="lx-descriptions-demo__segmented"
@@ -124,7 +131,11 @@ onBeforeUnmount(() => {
         :layout="layout"
         :bordered="bordered"
         :label-width="layout === 'grid' ? 96 : undefined"
-      />
+      >
+        <template #item-role="{ value }">
+          <span class="lx-descriptions-demo__role-value">{{ value }}</span>
+        </template>
+      </LxDescriptions>
     </div>
     <p
       v-else-if="previewState === 'loading'"
@@ -255,6 +266,21 @@ onBeforeUnmount(() => {
   margin: 0 0 12px;
   font-size: 14px;
   line-height: 20px;
+}
+
+.lx-descriptions-demo__role-value {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0 6px;
+  border: 1px solid var(--lx-color-primary-light);
+  border-radius: var(--lx-radius-sm);
+  background: var(--lx-color-primary-light);
+  color: var(--lx-color-primary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .lx-descriptions-demo__segmented button:focus-visible,

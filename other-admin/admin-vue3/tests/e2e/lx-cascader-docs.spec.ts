@@ -1,6 +1,66 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('lx-ui LxCascader 文档示例', () => {
+  test('组件侧栏按功能分组且保留所有展示与录入入口', async ({ page }) => {
+    await page.goto('/components/lxcascader');
+
+    const sidebar = page.locator('.VPSidebar');
+    for (const group of [
+      '表格、分页与详情',
+      '页面与指标',
+      '日历与组织',
+      '状态与辅助',
+      '图形与操作',
+      '表单与基础字段',
+      '选项控件',
+      '树形与日期选择',
+      '检索与复杂字段',
+    ]) {
+      await expect(sidebar.getByText(group, { exact: true })).toBeVisible();
+    }
+
+    const visibleLinks = (await sidebar.getByRole('link').allTextContents()).map((text) => text.trim());
+    const expectedLinks = [
+      'LxProTable 数据表格',
+      'LxPagination 分页',
+      'LxDescriptions 详情描述',
+      'LxPageCard 页面容器',
+      'LxMetricCard 指标卡',
+      'LxSectionTitle 区块标题',
+      'LxDutyCalendar 排班日历',
+      'LxAuthImg 鉴权图片',
+      'LxVirtualTree 虚拟树',
+      'LxTransferPanel 双栏穿梭',
+      'LxStatusDot 状态点',
+      'LxTag 浅底标签',
+      'LxNodeBadge 节点徽章',
+      'LxEmpty 空态',
+      'LxCodeSlot 代码槽',
+      'LxActionButtons 行内操作',
+      'LxGauge 圆环仪表',
+      '权限消费',
+      'LxForm 表单',
+      'LxInput 输入框',
+      'LxTextarea 文本域',
+      'LxInputNumber 数字输入',
+      'LxPasswordInput 密码输入框',
+      'LxRadio 单选组',
+      'LxCheckbox 复选组',
+      'LxSwitch 开关',
+      'LxSelect 下拉选择',
+      'LxTreeSelect 树形下拉',
+      'LxCascader 级联选择',
+      'LxDatePicker 日期选择',
+      'LxSearchBar 检索面板',
+      'LxDynamicForm 动态表单',
+      'LxStatusSwitch 状态开关',
+      'LxUpload 文件上传',
+      'LxSelectPagination 远程分页选择',
+    ];
+
+    for (const link of expectedLinks) expect(visibleLinks).toContain(link);
+  });
+
   test('新增组件总览包含可见的级联选择 Demo', async ({ page }) => {
     await page.goto('/components/new-components');
 
@@ -60,6 +120,7 @@ test.describe('lx-ui LxCascader 文档示例', () => {
     await demo.getByRole('button', { name: '加载中且失败', exact: true }).click();
     await expect(demo.locator('.lx-cascader__feedback')).toContainText('加载中');
     await expect(demo.locator('.lx-cascader__feedback')).not.toContainText('加载失败');
+    await expect(demo.locator('.cascader-demo__status')).toHaveText('正在加载组织数据，加载完成前保留当前路径。');
     await expect(demo.locator('.lx-cascader-field')).toHaveAttribute('aria-busy', 'true');
     await expect(input).not.toHaveAttribute('aria-invalid', 'true');
     const loadingValue = await demo.locator('.cascader-demo__value').textContent();
@@ -70,6 +131,7 @@ test.describe('lx-ui LxCascader 文档示例', () => {
 
     await demo.getByRole('button', { name: '失败', exact: true }).click();
     await expect(demo.locator('.lx-cascader__feedback')).toContainText('组织数据加载失败');
+    await expect(demo.locator('.cascader-demo__status')).toHaveText('组织数据加载失败，请重试。');
     await expect(input).toHaveAttribute('aria-describedby', 'cascader-demo-path-error');
     await expect(page.locator('[id="cascader-demo-path-error"]')).toHaveCount(1);
     const errorValue = await demo.locator('.cascader-demo__value').textContent();
@@ -87,10 +149,28 @@ test.describe('lx-ui LxCascader 文档示例', () => {
     await expect(demo.locator('.lx-cascader__feedback')).toContainText('Failed to load organization data');
     await demo.getByRole('button', { name: 'Retry', exact: true }).click();
     await expect(demo.locator('.lx-cascader__feedback')).toHaveCount(0);
+    await expect(demo.locator('.cascader-demo__status')).toHaveText('数据已恢复，可以继续选择');
     await expect(input).not.toHaveAttribute('aria-describedby', /cascader-demo-path-error/);
+
+    await demo.getByRole('checkbox', { name: 'HUD 深色主题' }).check();
+    await expect(demo).toHaveClass(/lx-theme-hud/);
+    await input.focus();
+    await input.press('ArrowDown');
+    await expect(popper).toHaveClass(/lx-theme-hud/);
+    await expect(popper).toHaveClass(/dark/);
+    const themeTokenValues = await Promise.all([
+      demo.evaluate((element) => getComputedStyle(element).getPropertyValue('--lx-bg-card').trim()),
+      popper.evaluate((element) => getComputedStyle(element).getPropertyValue('--lx-bg-card').trim()),
+    ]);
+    expect(themeTokenValues[0]).not.toBe('');
+    expect(themeTokenValues[1]).toBe(themeTokenValues[0]);
+    const popperBackground = await popper.evaluate((element) => getComputedStyle(element).backgroundColor);
+    expect(popperBackground).not.toBe('rgb(255, 255, 255)');
+    await input.press('Escape');
 
     await demo.getByRole('button', { name: '禁用', exact: true }).click();
     await expect(input).toBeDisabled();
+    await expect(demo.locator('.cascader-demo__status')).toHaveText('组织路径控件当前已禁用。');
   });
 
   test('reduced motion disables transitions in the teleported cascader popper', async ({ page }) => {
@@ -149,6 +229,24 @@ test.describe('lx-ui LxCascader 文档示例', () => {
     expect(nodeLabelStyle.overflow).toBe('visible');
     expect(nodeLabelStyle.whiteSpace).toBe('normal');
     expect(nodeLabelStyle.text).toBe('杭州市公安局');
+    const wrappedLabel = popper.locator('.el-cascader-node__label').filter({ hasText: '杭州市公安局' }).first();
+    const wrappedLabelMetrics = await wrappedLabel.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return {
+        height: element.getBoundingClientRect().height,
+        lineHeight: Number.parseFloat(style.lineHeight),
+        scrollWidth: element.scrollWidth,
+        clientWidth: element.clientWidth,
+      };
+    });
+    expect(wrappedLabelMetrics.height).toBeGreaterThan(wrappedLabelMetrics.lineHeight);
+    expect(wrappedLabelMetrics.scrollWidth).toBeLessThanOrEqual(wrappedLabelMetrics.clientWidth);
+
+    await page.keyboard.press('ArrowRight');
+    await expect.poll(() => popper.locator('.el-cascader-node__label').count()).toBeGreaterThan(0);
+    const childLabel = popper.locator('.el-cascader-node__label').filter({ hasText: '西湖区分局' }).first();
+    await expect(childLabel).toBeVisible();
+    expect(await childLabel.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
 
     await input.press('Escape');
     await expect(popper).toBeHidden();

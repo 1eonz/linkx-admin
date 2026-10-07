@@ -29,9 +29,15 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
 
     expect(rowBox.height).toBe(32);
     expect(await firstLabel.evaluate((element) => getComputedStyle(element).fontSize)).toBe('13px');
+    const firstValue = firstRow.locator('.lx-descriptions__value-text');
+    expect(await firstValue.evaluate((element) => getComputedStyle(element).fontWeight)).toBe('500');
     const lightLabelColor = await firstLabel.evaluate((element) => getComputedStyle(element).color);
     expect(contrastRatio(lightLabelColor, 'rgb(255, 255, 255)')).toBeGreaterThanOrEqual(4.5);
     await expect(page.getByRole('img', { name: '在线（在岗备勤）' }).first()).toBeVisible();
+    const statusText = page.locator('.lx-descriptions__value .lx-status-dot__text').first();
+    expect(await statusText.evaluate((element) => getComputedStyle(element).color)).toBe(
+      await firstValue.evaluate((element) => getComputedStyle(element).color),
+    );
     const statusDot = page.locator('.lx-descriptions__value .lx-status-dot__wrap').first();
     await expect(statusDot).toHaveCSS('width', '6px');
     await expect(statusDot).toHaveCSS('height', '6px');
@@ -68,6 +74,36 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     const mobileColumns = await descriptions.evaluate(
       (element) => getComputedStyle(element).gridTemplateColumns.split(' ').length,
     );
+    const mobileRemarks = descriptions.locator('.lx-descriptions__value-text').filter({ hasText: '重点高架合流区' });
+    await expect(mobileRemarks).toHaveText('重点高架合流区视频快反联动专员，具有跨网段加密调度二级权限。');
+    await expect(mobileRemarks).toHaveCSS('white-space', 'normal');
+    const mobileCode = descriptions
+      .locator('.lx-descriptions__item')
+      .filter({ hasText: '设备标识' })
+      .locator('.lx-code-slot__content');
+    await expect(mobileCode).toHaveText('GB28181-P2P-EDGE-NODE-20261007-00000001-REGION-OPS');
+    await expect(mobileCode).toHaveCSS('white-space', 'normal');
+    const codeMetrics = await mobileCode.evaluate((element) => ({
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+      clientHeight: element.clientHeight,
+    }));
+    expect(codeMetrics.clientHeight).toBeGreaterThan(18);
+    expect(codeMetrics.scrollWidth).toBeLessThanOrEqual(codeMetrics.clientWidth);
+
+    const mobileStatus = descriptions
+      .locator('.lx-descriptions__item')
+      .filter({ hasText: '运行状态' })
+      .locator('.lx-status-dot__text');
+    await expect(mobileStatus).toHaveText('在线（在岗备勤），当前负责跨辖区视频联动与加密调度');
+    await expect(mobileStatus).toHaveCSS('white-space', 'normal');
+    const statusMetrics = await mobileStatus.evaluate((element) => ({
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+      clientHeight: element.clientHeight,
+    }));
+    expect(statusMetrics.clientHeight).toBeGreaterThan(20);
+    expect(statusMetrics.scrollWidth).toBeLessThanOrEqual(statusMetrics.clientWidth);
     const drawerBox = await page.getByRole('region', { name: '480 像素详情抽屉' }).boundingBox();
     expect(mobileColumns).toBe(1);
     expect(drawerBox?.width).toBeLessThanOrEqual(375);
@@ -91,7 +127,7 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     await page.getByRole('button', { name: '重试' }).click();
     await expect(page.locator('.lx-descriptions__item').first()).toBeVisible();
 
-    await page.getByLabel('HUD 深色主题').check();
+    await page.getByLabel('HUD 深色主题（整页）').check();
     await expect(page.locator('html')).toHaveClass(/lx-theme-hud/);
     const hudLabelColor = await page
       .locator('.lx-descriptions__label')

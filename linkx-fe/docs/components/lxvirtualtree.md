@@ -14,23 +14,24 @@ import Basic from '../../src/components/LxVirtualTree/demo/basic.vue';
 <<< ../../src/components/LxVirtualTree/demo/basic.vue
 :::
 
-示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；可单独切换 HUD 深色令牌预览。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。
+示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。
 
 ## Props
 
-| 名称                  | 类型                   | 默认值  | 说明                                                          |
-| --------------------- | ---------------------- | ------- | ------------------------------------------------------------- |
-| `data`                | `LxVirtualTreeNode[]`  | `[]`    | 树数据；节点使用 `id` 作为默认键，也可配置 `nodeKey`。        |
-| `modelValue`          | `(string \| number)[]` | `[]`    | 受控选中键；配合 `v-model` 使用。                             |
-| `height`              | `number`               | `360`   | 可视区域高度，单位 px。                                       |
-| `itemSize`            | `number`               | `32`    | 固定行高，单位 px；所有节点行使用相同行高以计算虚拟窗口。     |
-| `indent`              | `number`               | `16`    | 每层缩进，单位 px。                                           |
-| `nodeKey`             | `string`               | `'id'`  | 节点唯一键字段。                                              |
-| `showCheckbox`        | `boolean`              | `false` | 是否显示复选框。                                              |
-| `checkStrictly`       | `boolean`              | `false` | 为 `true` 时父子独立勾选；默认级联选择可用后代。              |
-| `filterable`          | `boolean`              | `true`  | 是否显示内置过滤框。                                          |
-| `defaultExpandedKeys` | `(string \| number)[]` | `[]`    | 初始展开节点键；后续展开状态通过组件交互和 `expandAll` 管理。 |
-| `scrollbarWidth`      | `number`               | `4`     | 滚动条宽度，单位 px。                                         |
+| 名称                  | 类型                   | 默认值       | 说明                                                          |
+| --------------------- | ---------------------- | ------------ | ------------------------------------------------------------- |
+| `data`                | `LxVirtualTreeNode[]`  | `[]`         | 树数据；节点使用 `id` 作为默认键，也可配置 `nodeKey`。        |
+| `ariaLabel`           | `string`               | `'树形结构'` | 树控件的可访问名称；建议按业务用途覆盖，例如“组织结构”。      |
+| `modelValue`          | `(string \| number)[]` | `[]`         | 受控选中键；配合 `v-model` 使用。                             |
+| `height`              | `number`               | `360`        | 可视区域高度，单位 px。                                       |
+| `itemSize`            | `number`               | `32`         | 固定行高，单位 px；所有节点行使用相同行高以计算虚拟窗口。     |
+| `indent`              | `number`               | `16`         | 每层缩进，单位 px。                                           |
+| `nodeKey`             | `string`               | `'id'`       | 节点唯一键字段。                                              |
+| `showCheckbox`        | `boolean`              | `false`      | 是否显示复选框。                                              |
+| `checkStrictly`       | `boolean`              | `false`      | 为 `true` 时父子独立勾选；默认级联选择可用后代。              |
+| `filterable`          | `boolean`              | `true`       | 是否显示内置过滤框。                                          |
+| `defaultExpandedKeys` | `(string \| number)[]` | `[]`         | 初始展开节点键；后续展开状态通过组件交互和 `expandAll` 管理。 |
+| `scrollbarWidth`      | `number`               | `4`          | 滚动条宽度，单位 px。                                         |
 
 节点类型：
 
@@ -88,6 +89,7 @@ interface LxVirtualTreeExpose {
 
 - 空数组显示“暂无数据”；有过滤词但无匹配项显示“未找到匹配节点”。
 - 加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 `data`。
-- 键盘树项采用 roving tabindex；筛选框、清除按钮、展开按钮和复选框可通过 Tab 访问。
+- 树容器以 `role="tree"` 暴露，并提供默认可访问名称“树形结构”；可通过 `aria-label`/`ariaLabel` 按实际内容覆盖名称。
+- 树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。
 - 行高固定，节点插槽不应换行撑高行；长标签使用省略显示，完整内容保留在 `title` 属性中。
 - 虚拟树按 `nodeKey` 建立索引，同一棵树中该值必须唯一。
