@@ -1,0 +1,91 @@
+{
+  "targetUrl": "http://127.0.0.1:4182/components/lxupload",
+  "browser": {
+    "version": "154.0.8037.95",
+    "automation": "Playwright 1.58.0 with isolated fresh contexts; system Chrome"
+  },
+  "injectionCount": 1,
+  "viewCount": 1,
+  "checks": [
+    {
+      "name": "navigation-lxupload-desktop",
+      "passed": true,
+      "details": {
+        "status": 200,
+        "url": "http://127.0.0.1:4182/components/lxupload"
+      }
+    },
+    {
+      "name": "viewport-lxupload-desktop",
+      "passed": true,
+      "details": {
+        "expected": 1440,
+        "innerWidth": 1440,
+        "visualViewportWidth": 1440,
+        "documentWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "detector-injection-lxupload-desktop",
+      "passed": true,
+      "details": {
+        "label": "lxupload-desktop",
+        "preflight": {
+          "titleSet": true,
+          "scriptInserted": true,
+          "scriptUrl": "http://127.0.0.1:8400/detect.js"
+        },
+        "detectorReady": true,
+        "requestSeen": true,
+        "previousTitle": "LxUpload 文件上传 | LxUI"
+      }
+    },
+    {
+      "name": "browser-overlay-visible-lxupload-desktop-light",
+      "passed": true,
+      "details": {
+        "findingCount": 34,
+        "overlayVisible": 12
+      }
+    },
+    {
+      "name": "lxupload-dark-hud-rendered",
+      "passed": false,
+      "details": {
+        "light": {
+          "class": "",
+          "lxCardToken": "#ffffff",
+          "lxCardHoverToken": "#f2f4f8",
+          "uploadSurfaceBackground": "rgb(242, 244, 248)"
+        },
+        "darkHud": {
+          "class": "dark lx-theme-hud",
+          "lxCardToken": "#101a2c",
+          "lxCardHoverToken": "#16233a",
+          "uploadSurfaceBackground": "rgb(242, 244, 248)",
+          "luminance": null
+        }
+      }
+    }
+  ],
+  "errors": [
+    {
+      "name": "Error",
+      "message": "Assessment B check failed: lxupload-dark-hud-rendered",
+      "stack": "Error: Assessment B check failed: lxupload-dark-hud-rendered\n    at check (file:///F:/work/linkx-admin/.impeccable/critique/wave4-dynamicform-2026-10-06/assessment-b-current-final/capture-lxupload.mjs:79:22)\n    at run (file:///F:/work/linkx-admin/.impeccable/critique/wave4-dynamicform-2026-10-06/assessment-b-current-final/capture-lxupload.mjs:302:3)\n    at async file:///F:/work/linkx-admin/.impeccable/critique/wave4-dynamicform-2026-10-06/assessment-b-current-final/capture-lxupload.mjs:362:3"
+    }
+  ],
+  "consoleErrors": 0,
+  "pageErrors": 0,
+  "failedRequests": 0,
+  "httpFailures": 0,
+  "networkGuard": null,
+  "screenshots": [
+    {
+      "file": "screenshots/lxupload-desktop-light.png",
+      "width": 1440,
+      "height": 1000
+    }
+  ]
+}

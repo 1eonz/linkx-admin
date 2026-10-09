@@ -1,0 +1,32 @@
+{
+  "targetUrl": "http://127.0.0.1:4182/components/lxdynamicform",
+  "browser": {
+    "version": "154.0.8037.95",
+    "contextIsolation": "newContext per viewport/scenario; no persistent user data directory"
+  },
+  "injectionCount": 0,
+  "viewCount": 0,
+  "checks": [
+    {
+      "name": "navigation-desktop",
+      "passed": true,
+      "details": {
+        "status": 200,
+        "url": "http://127.0.0.1:4182/components/lxdynamicform"
+      }
+    }
+  ],
+  "errors": [
+    {
+      "name": "TimeoutError",
+      "message": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: /LxDynamicForm/ }) to be visible\u001b[22m\n",
+      "stack": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: /LxDynamicForm/ }) to be visible\u001b[22m\n\n    at openPage (F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-b-current-final\\capture-dynamicform.mjs:294:62)\n    at async run (F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-b-current-final\\capture-dynamicform.mjs:320:19)\n    at async file:///F:/work/linkx-admin/.impeccable/critique/wave4-dynamicform-2026-10-06/assessment-b-current-final/capture-dynamicform.mjs:442:3"
+    }
+  ],
+  "consoleErrors": 3,
+  "pageErrors": 0,
+  "failedRequests": 3,
+  "httpFailures": 0,
+  "networkGuard": null,
+  "screenshots": []
+}

@@ -1,0 +1,8 @@
+浏览器自动化运行时核验：
+puppeteer=MISSING
+puppeteer-core=MISSING
+playwright=MISSING（当前工作目录的 Node 模块解析）
+playwright-core=MISSING（当前工作目录的 Node 模块解析）
+admin 项目声明并存在 `@playwright/test` 包路径；本轮按要求未用 Playwright 代替 Puppeteer 正式门槛，也未运行测试。
+系统 Chrome：C:/Program Files/Google/Chrome/Application/chrome.exe，可启动 Chrome/154.0.8037.95
+补充取证使用新建的临时 Chromium profile 与原生 CDP；该回退不满足 Puppeteer 缺失时的正式通过门槛。

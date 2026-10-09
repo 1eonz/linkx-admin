@@ -1,0 +1,93 @@
+=== desktop-light ===
+Console headline: [impeccable] 23 anti-patterns found
+Logged finding rows: 24
+line-length: 17
+  target: p
+  target: li
+  detail: ~108 chars/line (aim for <80)
+  detail: ~106 chars/line (aim for <80)
+buried-raster: 3
+  target: button.copy
+  detail: raster background at opacity 0
+bounce-easing: 1
+  target: body
+  detail: cubic-bezier(.71, -.46, .29, 1.46)
+clipped-overflow-container: 1
+  target: div#lx-transfer-panel-161-source-panel.lx-transfer-panel__panel
+  detail: div.lx-transfer-panel__panel clips a positioned child
+edge-flush-cards: 1
+  target: table
+  detail: 11 cards flush against the left edge of table at rest (1px gap, e.g. th)
+layout-transition: 1
+  target: body
+  detail: transition: height, padding-top, padding-bottom
+Mutable injection: true; detect.js loaded: true; likely overlay nodes: 45; visible marker rows captured: 21
+Viewport: inner 1440px / scrollWidth 1425px / horizontal overflow false
+Component: {"rect":{"x":336,"y":290,"width":865,"height":380,"right":1201,"bottom":670},"scrollWidth":865,"clientWidth":865,"overflowX":false,"inViewport":true}
+Focus: {"tag":"BODY","className":"","text":"Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础","focusVisible":false,"outlineStyle":"none","rect":{"x":0,"y":-203,"width":1425,"height":7488.03125},"inViewport":true,"insideComponent":false}
+Console events: 29; detector-related: 1
+
+=== dark-hud ===
+Console headline: [impeccable] 184 anti-patterns found
+Logged finding rows: 185
+ai-color-palette: 161
+  target: span
+  detail: Purple/violet neon text on dark background
+line-length: 17
+  target: p
+  target: li
+  detail: ~108 chars/line (aim for <80)
+  detail: ~106 chars/line (aim for <80)
+buried-raster: 3
+  target: button.copy
+  detail: raster background at opacity 0
+bounce-easing: 1
+  target: body
+  detail: cubic-bezier(.71, -.46, .29, 1.46)
+clipped-overflow-container: 1
+  target: div#lx-transfer-panel-161-source-panel.lx-transfer-panel__panel
+  detail: div.lx-transfer-panel__panel clips a positioned child
+edge-flush-cards: 1
+  target: table
+  detail: 11 cards flush against the left edge of table at rest (1px gap, e.g. th)
+layout-transition: 1
+  target: body
+  detail: transition: height, padding-top, padding-bottom
+Mutable injection: true; detect.js loaded: true; likely overlay nodes: 367; visible marker rows captured: 3
+Viewport: inner 1440px / scrollWidth 1425px / horizontal overflow false
+Component: {"rect":{"x":336,"y":290,"width":865,"height":380,"right":1201,"bottom":670},"scrollWidth":865,"clientWidth":865,"overflowX":false,"inViewport":true}
+Focus: {"tag":"BODY","className":"","text":"Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础","focusVisible":false,"outlineStyle":"none","rect":{"x":0,"y":-203,"width":1425,"height":7488.03125},"inViewport":true,"insideComponent":false}
+Console events: 189; detector-related: 1
+
+=== mobile-375-keyboard-reduced-motion ===
+Console headline: [impeccable] 11 anti-patterns found
+Logged finding rows: 12
+text-occlusion: 5
+  target: button
+  target: label
+  detail: button "加载中" is 33% covered by an opaque element (div.lx-transfer-panel__mobile-switch)
+  detail: button "加载失败" is 33% covered by an opaque element (div.lx-transfer-panel__mobile-switch)
+  detail: label "最多 5 项" is 100% covered by an opaque element (button)
+  detail: label "HUD 深色主题" is 60% covered by an opaque element (button)
+  detail: label "提供继承说明" is 67% covered by an opaque element (header.lx-transfer-panel__header)
+buried-raster: 3
+  target: button.copy
+  detail: raster background at opacity 0
+clipped-overflow-container: 2
+  target: span.container
+  target: div#lx-transfer-panel-161-source-panel.lx-transfer-panel__panel
+  detail: span.container clips a positioned child
+  detail: div.lx-transfer-panel__panel clips a positioned child
+bounce-easing: 1
+  target: body
+  detail: cubic-bezier(.71, -.46, .29, 1.46)
+layout-transition: 1
+  target: body
+  detail: transition: height, padding-top, padding-bottom
+Mutable injection: true; detect.js loaded: true; likely overlay nodes: 21; visible marker rows captured: 4
+Viewport: inner 375px / scrollWidth 375px / horizontal overflow false
+Component: {"rect":{"x":24,"y":611,"width":327,"height":516,"right":351,"bottom":1127},"scrollWidth":327,"clientWidth":327,"overflowX":false,"inViewport":true}
+Focus: {"tag":"BUTTON","className":"","text":"待选\n2","focusVisible":true,"outlineStyle":"solid","rect":{"x":29,"y":616,"width":156.5,"height":44},"inViewport":true,"insideComponent":true}
+Keyboard traversal: {"steps":1,"reachedComponent":true,"focused":{"tag":"BUTTON","className":"","text":"待选\n2","inside":true,"focusVisible":true,"rect":{"x":29,"y":616,"width":156.5,"height":44}}}
+Console events: 16; detector-related: 1
+

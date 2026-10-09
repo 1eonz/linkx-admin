@@ -1,10 +1,23 @@
 # lx-ui 交付核查
 
-## 2026-10-10 G2 正式核查
+## 2026-10-10 Wave 9 / LxUpload 正式核查
 
-- `LxSearchBar` 单测 8/8、文档 E2E 3/3、Assessment A 25/40；`LxStatusSwitch` 单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6。类型检查、库构建、目标 Prettier/ESLint 已通过。
-- SearchBar 修后 Assessment B 的组件、Demo、文档 detector 均为有效 JSON `[]`、stderr 空、退出码 0；亮色/HUD、1440/375px、减少动效和交互证据已归档。`[]` 仅代表静态规则零命中；375px 整页横溢出来自文档 API 表格/代码区域，组件自身无溢出。
-- **已完成门禁**：`F:\work\linkx-admin\linkx-fe` 下 `pnpm exec vite build` 已通过；SearchBar Assessment A 修后评分、G2 综合报告、snapshot/trend 与独立代码复审已完成。复审修后无 P0/P1/P2，P3 ARIA 单测增强进入后续台账；按两笔白名单提交推送后继续下一波。
+- fallback UID 回灌后公开 `abort()` 组合回归已补齐；LxUpload 单测 38/38，文档 E2E 证据合计 9/9。
+- 首次批量 E2E 因文档服务中途退出出现 7/9，两个连接拒绝用例已独立重跑通过；详情见 `.impeccable/critique/wave9-upload-2026-10-10/agent-notes.md`。
+- 真实上传协议、AbortSignal 联调和业务页面替换未关闭；下一波进入 Descriptions/VirtualTree 正式复验。
+
+## 2026-10-10 G2 正式收口
+
+- `LxSearchBar` Demo 已新增四字段标准态，桌面端用于直接核对同行操作，窄屏回落单列；工具栏不再重复显示组件 `meta` 的等待状态。
+- `LxStatusSwitch` 确认配置支持 `impact`/`audit` 上下文，loading、只读和无权限行均保留 `aria-labelledby`/`aria-describedby` 到真实控件或只读标签。
+- 定向单测 `26/26`，`vue-tsc --noEmit`、203 模块库构建、VitePress 文档构建、目标 ESLint 和 Prettier 通过；SearchBar E2E `3/3`、StatusSwitch E2E `4/4`。Assessment A/B 修后报告、detector 三件套和浏览器 overlay/Teleport 证据已归档；综合报告 `.impeccable/critique/g2-complete-2026-10-10/recheck-final/report.md`、两个正式 snapshot/trend 均已写入，评分 `39/40`，代码复审无 P0-P2。detector `[]` 只代表静态零命中，不能单独代替视觉结论。
+- 下一入口：先修复 `LxTransferPanel` 选择框尺寸反馈并完成有界复验，随后进入 `LxDescriptions`、`LxVirtualTree` 当前版正式 A/B。UI-10、真实后端联调和 Vue3 宿主 `element-plus` 删除门禁保持未完成。
+
+## 2026-10-10 G2 阶段性核查（历史记录，降级未正式通过）
+
+- `LxSearchBar` 单测 8/8、文档 E2E 3/3、Assessment A 降级评分 31/40；`LxStatusSwitch` 单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6。类型检查、库构建、目标 Prettier/ESLint 已通过。
+- SearchBar 修后 Assessment B 的组件、Demo、文档 detector 均为有效 JSON `[]`、stderr 空、退出码 0；截图/DOM 证据已归档，但 overlay 注入未稳定完成，`[]` 仅代表静态规则零命中。Assessment A 因浏览器不可启动为降级评审，评分 31/40（Good）；375px 整页宽度来自 API 表格/代码区域的判断仍需可启动浏览器复验。
+- **实现级门禁已完成，正式 Critique 未完成**：`F:\work\linkx-admin\linkx-fe` 下 `pnpm exec vite build`、单测/E2E、类型和目标格式检查已通过；没有可用 G2 综合报告、snapshot/trend。P1：SearchBar 四字段操作行布局、StatusSwitch HUD Teleport 确认层；P2：无 `meta` 时结果/错误反馈、行名可访问名称、375px 复杂状态及确认/失败/只读路径、文档页 404 归因。处理并复验前不得标记 G2 关闭或进入下一波。
 - UI-10 仍为 0/52；真实后端/权限联调及 Vue3 宿主 `element-plus` 删除继续冻结，API 请求链保持 `.then().catch().finally()`。
 
 ## 2026-10-10 Wave 7 / LxTransferPanel 正式收口

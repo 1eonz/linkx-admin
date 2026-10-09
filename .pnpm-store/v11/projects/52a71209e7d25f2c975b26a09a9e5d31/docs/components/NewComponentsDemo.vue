@@ -276,7 +276,13 @@ function onPermissionChange(keys: (string | number)[], _nodes: LxVirtualTreeNode
             @node-click="lastAction = `查看节点：${$event.label}`"
           />
         </LxPageCard>
-        <LxTransferPanel v-model="selectedTransferKeys" :tree-data="treeData" :max-count="4" @change="onPermissionChange" />
+        <LxTransferPanel
+          v-model="selectedTransferKeys"
+          :tree-data="treeData"
+          :max-count="4"
+          inherit-child-description="本地演示假设：仅向所选辖区的直属单位继承；关闭后仅保留已选节点自身权限。"
+          @change="onPermissionChange"
+        />
       </div>
     </section>
 

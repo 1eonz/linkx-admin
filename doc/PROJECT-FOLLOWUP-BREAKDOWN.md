@@ -1,21 +1,33 @@
 # LinkX 后续任务完整拆分与执行规范
 
-### 2026-10-10 G2 当前交接快照（已正式收口）
+### 2026-10-10 Wave 9 当前交接：LxUpload 回灌 UID/公开 abort 已完成
 
-- `LxSearchBar` 的实现、中文文档和行为回归已完成：单测 8/8、文档 E2E 3/3；修后 Assessment A 25/40，B 三个 detector 有效 `[]`/空 stderr/exit 0，并完成亮色/HUD、1440/375px、减少动效和交互证据。375px 文档整页 615px 宽度来自 API 表格/代码区域，组件本身无溢出。
+- 已补无 UID 文件生成 fallback UID、父级原样回灌后通过公开 `abort()` 取消并复位的组合回归；LxUpload 单测 38/38 通过。
+- 文档 E2E 前 7 项通过；文档服务中途退出造成第 8、9 项连接拒绝，两个受影响用例独立重跑 2/2 通过，合计证据 9/9。记录见 `.impeccable/critique/wave9-upload-2026-10-10/agent-notes.md`。
+- 真实上传协议/AbortSignal 联调和业务页面替换仍延期；下一波进入 `LxDescriptions`、`LxVirtualTree` 当前版正式复验。
+
+### 2026-10-10 G2 修复复验交接（待最终快照收口）
+
+- Assessment A/B 已分别完成独立设计评审与 detector/浏览器证据，报告位于 `.impeccable/critique/g2-complete-2026-10-10/recheck-assessment-a/` 和 `recheck-assessment-b/`。B 的六目标 detector 三件套均为有效 `[]`、空 stderr、exit 0；overlay、确认框 Teleport、HUD、ARIA 和 375px 证据已保存。
+- 已处理 A 的 P1/P2：StatusSwitch 支持 `impact`/`audit` 确认上下文并为 loading、只读、无权限状态保留行名关联；SearchBar Demo 增加四字段标准态并移除重复状态。定向单测 `26/26`、类型检查和目标格式校验通过。
+- G2 仍需完成修后独立 A/B、综合报告、`.impeccable/critique` snapshot/trend 和代码复审，不能仅以 detector `[]` 关闭；完成后按两笔 Conventional Commit 推送并自动进入 `LxDescriptions`/`LxVirtualTree` 当前版复核。
+
+### 2026-10-10 G2 当前交接快照（历史记录）
+
+- `LxSearchBar` 的实现、中文文档和行为回归已完成：单测 8/8、文档 E2E 3/3。G2 Assessment A 因浏览器不可启动降级为 **31/40（Good）**；B 的 detector 有效 `[]`/空 stderr/exit 0 仅代表静态规则零命中，虽有截图和 DOM 证据，overlay 注入未稳定完成，不能登记正式视觉通过。证据见 `.impeccable/critique/g2-complete-2026-10-10/assessment-a/report.md` 与 `assessment-b/report.md`。
 - `LxStatusSwitch` 的确认竞态、外部 modelValue/权限源变化、loading/disabled、ARIA、Space 键盘和失败重试已完成；单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6，类型、构建、Prettier、ESLint 已通过。
-- 独立代码复审修后无 P0/P1/P2，SearchBar ARIA/隐藏数量单测增强列为 P3；综合报告、snapshot 和 trend 已写入 `.impeccable/critique/wave8-searchbar-2026-10-10/` 与 `.impeccable/critique/2026-10-09T18-16-30Z__linkx-fe-src-components-lxsearchbar-index-vue.md`。检测器继续按 JSON、stderr、退出码三件套判定。
-- G2 已关闭并按依赖顺序进入下一波；API 请求继续采用 `.then().catch().finally()`，新增注释和交接文档使用中文，权限中心/字段权限/引导页保持延后，Vue3 宿主 `element-plus` 删除门禁保持冻结。
+- 本轮没有可用的 G2 综合报告、snapshot/trend，也未完成 overlay 复验；不能把 detector `[]`、构建或 Mock E2E 记作正式 Critique 通过。P1：SearchBar 四字段操作行与设计稿不一致、StatusSwitch HUD 与 Teleport 确认层可能脱节。P2：SearchBar 无 `meta` 时缺少结果/错误状态、StatusSwitch 行名未进入可访问名称、375px 复杂状态及确认/失败/只读路径缺少完整实图，文档页资源 404 待归因。
+- G2 保持开放；先处理 P1/P2，再以可启动浏览器完成独立 A/B、overlay、综合报告和 snapshot/trend。API 请求继续采用 `.then().catch().finally()`，权限中心/字段权限/引导页保持延后，Vue3 宿主 `element-plus` 删除门禁保持冻结。
 
-> 更新时间：2026-10-09
+> 更新时间：2026-10-10
 >
 > 本文是 `doc/PROJECT-DELIVERY-PLAN.md` 的执行拆分入口。它把当前仍未完成、证据不足或明确阻塞的工作按依赖顺序拆成可交付波次。每个波次完成后，必须先完成验证、代码审核、样式与动效审查，再进入下一波；不得用“代码已经存在”“构建通过”或 detector 输出 `[]` 代替交付证据。
 
-### 2026-10-10 执行指针：Wave 7 已关闭，进入 G2
+### 2026-10-10 执行指针：Wave 7 已关闭，G2 阶段性复核中
 
 Wave 7 `LxTransferPanel` 已完成并通过正式收口：定向单测 64/64、TransferPanel 文档 E2E 32/32、A 32/40、B 三目标有效 `[]`/空 stderr/exit 0、六组浏览器 overlay 与源码哈希证据齐备，代码复审无 P0–P3。P2/P3 仅保留中等宽度扫描密度、窄屏条目内距、整树反选发现成本和滚动提示位置。综合报告为 `.impeccable/critique/wave7-transferpanel-2026-10-09/final-density-61/final-report.md`。
 
-当前自动执行 G2：`LxSearchBar` + `LxStatusSwitch`。SearchBar 需要补组件级 Playwright（成功/空/失败恢复、重置、loading、展开、Enter/Escape、焦点和 375px）；StatusSwitch 需要核对 `0/1`、`change(number)`、确认/取消、只读、加载和失败恢复。G2 完成前不推进 Vue3 宿主替换，不删除 `element-plus`。
+当前 G2 复核对象为 `LxSearchBar` + `LxStatusSwitch`。已有单测、文档 E2E 和基础浏览器截图不等于正式 Critique；需处理 A/B 报告的 P1/P2，补齐 overlay、确认/取消、只读、失败恢复、375px 复杂状态和资源 404 归因，并生成综合报告与 snapshot/trend。G2 关闭前不推进 Vue3 宿主替换，不删除 `element-plus`。
 
 ### 当前执行指针（2026-10-09）
 

@@ -1,0 +1,1343 @@
+{
+  "view": "mobile-375-touch",
+  "label": "375px 触屏",
+  "capturedAt": "2026-10-06T14:20:49.506Z",
+  "targetUrl": "http://127.0.0.1:4174/components/lxdynamicform.html",
+  "detectorScriptUrl": "http://localhost:8400/detect.js",
+  "responseStatus": 200,
+  "responseUrl": "http://127.0.0.1:4174/components/lxdynamicform.html",
+  "context": {
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "deviceScaleFactor": 2,
+    "isMobile": true,
+    "hasTouch": true,
+    "colorScheme": "light"
+  },
+  "themeAction": "none",
+  "injectionSucceeded": true,
+  "injectionError": null,
+  "postInjectionWaitMs": 3000,
+  "page": {
+    "title": "LxDynamicForm 动态表单 | LxUI",
+    "heading": "LxDynamicForm 动态表单\n​",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "最小配置\n​"
+      },
+      {
+        "level": "h2",
+        "text": "交互示例\n​"
+      },
+      {
+        "level": "h3",
+        "text": "任务信息"
+      },
+      {
+        "level": "h3",
+        "text": "任务状态"
+      },
+      {
+        "level": "h3",
+        "text": "附件"
+      },
+      {
+        "level": "h2",
+        "text": "Props\n​"
+      },
+      {
+        "level": "h2",
+        "text": "字段 schema\n​"
+      },
+      {
+        "level": "h2",
+        "text": "Events\n​"
+      },
+      {
+        "level": "h2",
+        "text": "插槽与实例\n​"
+      },
+      {
+        "level": "h2",
+        "text": "使用边界\n​"
+      }
+    ],
+    "theme": {
+      "htmlClass": "",
+      "dataTheme": null,
+      "colorScheme": "light",
+      "background": "rgb(255, 255, 255)",
+      "switchTitle": "Switch to dark theme"
+    },
+    "viewport": {
+      "width": 615,
+      "height": 1332,
+      "visualViewportWidth": 375,
+      "visualViewportHeight": 812,
+      "documentClientWidth": 375,
+      "documentScrollWidth": 615,
+      "horizontalOverflow": true
+    },
+    "detector": {
+      "scriptPresent": true,
+      "apiAvailable": true,
+      "error": null,
+      "findings": [
+        {
+          "selector": "span.container",
+          "tagName": "span",
+          "rect": {
+            "x": 335,
+            "y": 25,
+            "width": 16,
+            "height": 14,
+            "top": 25,
+            "right": 351,
+            "bottom": 39,
+            "left": 335
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "clipped-overflow-container",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "span.container clips a positioned child",
+              "ignoreValue": "",
+              "name": "Positioned child clipped by overflow container",
+              "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip."
+            }
+          ]
+        },
+        {
+          "selector": "div > div.language-vue.vp-adaptive-theme:nth-of-type(1) > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 323,
+            "y": 607,
+            "width": 40,
+            "height": 40,
+            "top": 607,
+            "right": 363,
+            "bottom": 647,
+            "left": 323
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 282,
+            "y": 2638.78125,
+            "width": 40,
+            "height": 40,
+            "top": 2638.78125,
+            "right": 322,
+            "bottom": 2678.78125,
+            "left": 282
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(3) > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 323,
+            "y": 7485.78125,
+            "width": 40,
+            "height": 40,
+            "top": 7485.78125,
+            "right": 363,
+            "bottom": 7525.78125,
+            "left": 323
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(4) > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 323,
+            "y": 7696.25,
+            "width": 40,
+            "height": 40,
+            "top": 7696.25,
+            "right": 363,
+            "bottom": 7736.25,
+            "left": 323
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 323,
+            "y": 7818.34375,
+            "width": 40,
+            "height": 40,
+            "top": 7818.34375,
+            "right": 363,
+            "bottom": 7858.34375,
+            "left": 323
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "#el-id-1024-5",
+          "tagName": "div",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "gpt-thin-border-wide-shadow",
+              "category": "slop",
+              "severity": "advisory",
+              "advisory": true,
+              "detail": "1px border + 16px shadow blur",
+              "ignoreValue": "",
+              "name": "Hairline border with wide shadow",
+              "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+            }
+          ]
+        },
+        {
+          "selector": "#el-id-1024-10",
+          "tagName": "div",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "gpt-thin-border-wide-shadow",
+              "category": "slop",
+              "severity": "advisory",
+              "advisory": true,
+              "detail": "1px border + 16px shadow blur",
+              "ignoreValue": "",
+              "name": "Hairline border with wide shadow",
+              "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+            }
+          ]
+        },
+        {
+          "selector": "#el-id-1024-15",
+          "tagName": "div",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "gpt-thin-border-wide-shadow",
+              "category": "slop",
+              "severity": "advisory",
+              "advisory": true,
+              "detail": "1px border + 16px shadow blur",
+              "ignoreValue": "",
+              "name": "Hairline border with wide shadow",
+              "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+            }
+          ]
+        },
+        {
+          "selector": "body",
+          "tagName": "body",
+          "rect": null,
+          "isPageLevel": true,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "bounce-easing",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+              "ignoreValue": "",
+              "name": "Bounce or elastic easing",
+              "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+            },
+            {
+              "type": "layout-transition",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "transition: height, padding-top, padding-bottom",
+              "ignoreValue": "",
+              "name": "Layout property animation",
+              "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+            }
+          ]
+        }
+      ],
+      "findingGroupCount": 10,
+      "findingCount": 11,
+      "selectors": [
+        {
+          "selector": "span.container",
+          "tagName": "span",
+          "findings": [
+            {
+              "type": "clipped-overflow-container",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "span.container clips a positioned child",
+              "ignoreValue": "",
+              "name": "Positioned child clipped by overflow container",
+              "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip."
+            }
+          ]
+        },
+        {
+          "selector": "div > div.language-vue.vp-adaptive-theme:nth-of-type(1) > button.copy",
+          "tagName": "button",
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+          "tagName": "button",
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(3) > button.copy",
+          "tagName": "button",
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(4) > button.copy",
+          "tagName": "button",
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+          "tagName": "button",
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "#el-id-1024-5",
+          "tagName": "div",
+          "findings": [
+            {
+              "type": "gpt-thin-border-wide-shadow",
+              "category": "slop",
+              "severity": "advisory",
+              "advisory": true,
+              "detail": "1px border + 16px shadow blur",
+              "ignoreValue": "",
+              "name": "Hairline border with wide shadow",
+              "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+            }
+          ]
+        },
+        {
+          "selector": "#el-id-1024-10",
+          "tagName": "div",
+          "findings": [
+            {
+              "type": "gpt-thin-border-wide-shadow",
+              "category": "slop",
+              "severity": "advisory",
+              "advisory": true,
+              "detail": "1px border + 16px shadow blur",
+              "ignoreValue": "",
+              "name": "Hairline border with wide shadow",
+              "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+            }
+          ]
+        },
+        {
+          "selector": "#el-id-1024-15",
+          "tagName": "div",
+          "findings": [
+            {
+              "type": "gpt-thin-border-wide-shadow",
+              "category": "slop",
+              "severity": "advisory",
+              "advisory": true,
+              "detail": "1px border + 16px shadow blur",
+              "ignoreValue": "",
+              "name": "Hairline border with wide shadow",
+              "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+            }
+          ]
+        },
+        {
+          "selector": "body",
+          "tagName": "body",
+          "findings": [
+            {
+              "type": "bounce-easing",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+              "ignoreValue": "",
+              "name": "Bounce or elastic easing",
+              "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+            },
+            {
+              "type": "layout-transition",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "transition: height, padding-top, padding-bottom",
+              "ignoreValue": "",
+              "name": "Layout property animation",
+              "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+            }
+          ]
+        }
+      ],
+      "overlays": [
+        {
+          "index": 0,
+          "className": "impeccable-overlay impeccable-visible",
+          "text": "positioned child clipped by overflow container",
+          "attributes": [
+            [
+              "class",
+              "impeccable-overlay impeccable-visible"
+            ],
+            [
+              "style",
+              "position: absolute; top: 23px; left: 333px; width: 20px; height: 18px; z-index: 99999; box-sizing: border-box; animation-delay: 0ms;"
+            ]
+          ],
+          "visible": true,
+          "rect": {
+            "x": 333,
+            "y": 23,
+            "width": 20,
+            "height": 18,
+            "top": 23,
+            "right": 353,
+            "bottom": 41,
+            "left": 333
+          },
+          "targetSelector": "span.container",
+          "targetTagName": "span",
+          "targetClassName": "container",
+          "targetText": null,
+          "targetRect": {
+            "x": 335,
+            "y": 25,
+            "width": 16,
+            "height": 14,
+            "top": 25,
+            "right": 351,
+            "bottom": 39,
+            "left": 335
+          },
+          "matchingFindings": [
+            {
+              "type": "clipped-overflow-container",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "span.container clips a positioned child",
+              "ignoreValue": "",
+              "name": "Positioned child clipped by overflow container",
+              "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip."
+            }
+          ],
+          "selectorMatchStatus": "matched-by-tag-and-bounds"
+        },
+        {
+          "index": 1,
+          "className": "impeccable-overlay impeccable-visible",
+          "text": "raster buried under a wash or opacity",
+          "attributes": [
+            [
+              "class",
+              "impeccable-overlay impeccable-visible"
+            ],
+            [
+              "style",
+              "position: absolute; top: 605px; left: 321px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; animation-delay: 60ms;"
+            ]
+          ],
+          "visible": true,
+          "rect": {
+            "x": 321,
+            "y": 605,
+            "width": 44,
+            "height": 44,
+            "top": 605,
+            "right": 365,
+            "bottom": 649,
+            "left": 321
+          },
+          "targetSelector": "div > div.language-vue.vp-adaptive-theme:nth-of-type(1) > button.copy",
+          "targetTagName": "button",
+          "targetClassName": "copy",
+          "targetText": null,
+          "targetRect": {
+            "x": 323,
+            "y": 607,
+            "width": 40,
+            "height": 40,
+            "top": 607,
+            "right": 363,
+            "bottom": 647,
+            "left": 323
+          },
+          "matchingFindings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ],
+          "selectorMatchStatus": "matched-by-tag-and-bounds"
+        },
+        {
+          "index": 2,
+          "className": "impeccable-overlay",
+          "text": "raster buried under a wash or opacity",
+          "attributes": [
+            [
+              "class",
+              "impeccable-overlay"
+            ],
+            [
+              "style",
+              "position: absolute; top: 2636.78px; left: 280px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; display: none;"
+            ]
+          ],
+          "visible": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "targetSelector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+          "targetTagName": "button",
+          "targetClassName": "copy",
+          "targetText": null,
+          "targetRect": {
+            "x": 282,
+            "y": 2638.78125,
+            "width": 40,
+            "height": 40,
+            "top": 2638.78125,
+            "right": 322,
+            "bottom": 2678.78125,
+            "left": 282
+          },
+          "matchingFindings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ],
+          "selectorMatchStatus": "matched-by-tag-and-bounds"
+        },
+        {
+          "index": 3,
+          "className": "impeccable-overlay impeccable-visible",
+          "text": "raster buried under a wash or opacity",
+          "attributes": [
+            [
+              "class",
+              "impeccable-overlay impeccable-visible"
+            ],
+            [
+              "style",
+              "position: absolute; top: 7483.78px; left: 321px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; animation-delay: 180ms;"
+            ]
+          ],
+          "visible": true,
+          "rect": {
+            "x": 321,
+            "y": 7483.78125,
+            "width": 44,
+            "height": 44,
+            "top": 7483.78125,
+            "right": 365,
+            "bottom": 7527.78125,
+            "left": 321
+          },
+          "targetSelector": "div.language-vue.vp-adaptive-theme:nth-of-type(3) > button.copy",
+          "targetTagName": "button",
+          "targetClassName": "copy",
+          "targetText": null,
+          "targetRect": {
+            "x": 323,
+            "y": 7485.78125,
+            "width": 40,
+            "height": 40,
+            "top": 7485.78125,
+            "right": 363,
+            "bottom": 7525.78125,
+            "left": 323
+          },
+          "matchingFindings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ],
+          "selectorMatchStatus": "matched-by-tag-and-bounds"
+        },
+        {
+          "index": 4,
+          "className": "impeccable-overlay impeccable-visible",
+          "text": "raster buried under a wash or opacity",
+          "attributes": [
+            [
+              "class",
+              "impeccable-overlay impeccable-visible"
+            ],
+            [
+              "style",
+              "position: absolute; top: 7694.25px; left: 321px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; animation-delay: 240ms;"
+            ]
+          ],
+          "visible": true,
+          "rect": {
+            "x": 321,
+            "y": 7694.25,
+            "width": 44,
+            "height": 44,
+            "top": 7694.25,
+            "right": 365,
+            "bottom": 7738.25,
+            "left": 321
+          },
+          "targetSelector": "div.language-vue.vp-adaptive-theme:nth-of-type(4) > button.copy",
+          "targetTagName": "button",
+          "targetClassName": "copy",
+          "targetText": null,
+          "targetRect": {
+            "x": 323,
+            "y": 7696.25,
+            "width": 40,
+            "height": 40,
+            "top": 7696.25,
+            "right": 363,
+            "bottom": 7736.25,
+            "left": 323
+          },
+          "matchingFindings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ],
+          "selectorMatchStatus": "matched-by-tag-and-bounds"
+        },
+        {
+          "index": 5,
+          "className": "impeccable-overlay impeccable-visible",
+          "text": "raster buried under a wash or opacity",
+          "attributes": [
+            [
+              "class",
+              "impeccable-overlay impeccable-visible"
+            ],
+            [
+              "style",
+              "position: absolute; top: 7816.34px; left: 321px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; animation-delay: 300ms;"
+            ]
+          ],
+          "visible": true,
+          "rect": {
+            "x": 321,
+            "y": 7816.34375,
+            "width": 44,
+            "height": 44,
+            "top": 7816.34375,
+            "right": 365,
+            "bottom": 7860.34375,
+            "left": 321
+          },
+          "targetSelector": "div.language-ts.vp-adaptive-theme > button.copy",
+          "targetTagName": "button",
+          "targetClassName": "copy",
+          "targetText": null,
+          "targetRect": {
+            "x": 323,
+            "y": 7818.34375,
+            "width": 40,
+            "height": 40,
+            "top": 7818.34375,
+            "right": 363,
+            "bottom": 7858.34375,
+            "left": 323
+          },
+          "matchingFindings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ],
+          "selectorMatchStatus": "matched-by-tag-and-bounds"
+        },
+        {
+          "index": 6,
+          "className": "impeccable-overlay",
+          "text": "✦ hairline border with wide shadow",
+          "attributes": [
+            [
+              "class",
+              "impeccable-overlay"
+            ],
+            [
+              "style",
+              "position: absolute; top: -2px; left: -2px; width: 4px; height: 4px; z-index: 99999; box-sizing: border-box; display: none;"
+            ]
+          ],
+          "visible": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "targetSelector": "#el-id-1024-5",
+          "targetTagName": "div",
+          "targetClassName": "el-popper is-pure is-light el-tooltip el-select__popper lx-select__popper",
+          "targetText": "日常巡防应急支援",
+          "targetRect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "matchingFindings": [
+            {
+              "type": "gpt-thin-border-wide-shadow",
+              "category": "slop",
+              "severity": "advisory",
+              "advisory": true,
+              "detail": "1px border + 16px shadow blur",
+              "ignoreValue": "",
+              "name": "Hairline border with wide shadow",
+              "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+            }
+          ],
+          "selectorMatchStatus": "matched-by-tag-and-bounds"
+        },
+        {
+          "index": 7,
+          "className": "impeccable-overlay",
+          "text": "✦ hairline border with wide shadow",
+          "attributes": [
+            [
+              "class",
+              "impeccable-overlay"
+            ],
+            [
+              "style",
+              "position: absolute; top: -2px; left: -2px; width: 4px; height: 4px; z-index: 99999; box-sizing: border-box; display: none;"
+            ]
+          ],
+          "visible": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "targetSelector": "#el-id-1024-5",
+          "targetTagName": "div",
+          "targetClassName": "el-popper is-pure is-light el-tooltip el-select__popper lx-select__popper",
+          "targetText": "李警官 · 指挥中心陈警官 · 一大队周警官 · 二大队",
+          "targetRect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "matchingFindings": [
+            {
+              "type": "gpt-thin-border-wide-shadow",
+              "category": "slop",
+              "severity": "advisory",
+              "advisory": true,
+              "detail": "1px border + 16px shadow blur",
+              "ignoreValue": "",
+              "name": "Hairline border with wide shadow",
+              "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+            }
+          ],
+          "selectorMatchStatus": "matched-by-tag-and-bounds"
+        },
+        {
+          "index": 8,
+          "className": "impeccable-overlay",
+          "text": "✦ hairline border with wide shadow",
+          "attributes": [
+            [
+              "class",
+              "impeccable-overlay"
+            ],
+            [
+              "style",
+              "position: absolute; top: -2px; left: -2px; width: 4px; height: 4px; z-index: 99999; box-sizing: border-box; display: none;"
+            ]
+          ],
+          "visible": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "targetSelector": "#el-id-1024-5",
+          "targetTagName": "div",
+          "targetClassName": "el-popper is-pure is-light el-tooltip el-select__popper lx-select__popper",
+          "targetText": "文本类字段文本输入密码输入多行文本选择类字段下拉选择远程选择树形选择单选组多选组日期与数值数字输入日期选择日期范围状态与附件开关文件上传自定义插槽",
+          "targetRect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "matchingFindings": [
+            {
+              "type": "gpt-thin-border-wide-shadow",
+              "category": "slop",
+              "severity": "advisory",
+              "advisory": true,
+              "detail": "1px border + 16px shadow blur",
+              "ignoreValue": "",
+              "name": "Hairline border with wide shadow",
+              "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+            }
+          ],
+          "selectorMatchStatus": "matched-by-tag-and-bounds"
+        },
+        {
+          "index": 9,
+          "className": "impeccable-overlay impeccable-banner",
+          "text": "✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+          "attributes": [
+            [
+              "class",
+              "impeccable-overlay impeccable-banner"
+            ],
+            [
+              "style",
+              "position: fixed; top: 0px; left: 0px; right: 0px; z-index: 100000; background: oklch(0.84 0.19 80.46); color: oklch(0.04 0.004 95); font-family: system-ui, sans-serif; font-size: 13px; display: flex; align-items: center; pointer-events: auto; height: 36px; overflow: hidden; max-width: 100vw; transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);"
+            ]
+          ],
+          "visible": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 375,
+            "height": 36,
+            "top": 0,
+            "right": 375,
+            "bottom": 36,
+            "left": 0
+          },
+          "targetSelector": null,
+          "targetTagName": null,
+          "targetClassName": null,
+          "targetText": null,
+          "targetRect": null,
+          "matchingFindings": [],
+          "selectorMatchStatus": "unmatched"
+        }
+      ],
+      "overlayCount": 10,
+      "visibleOverlayCount": 6,
+      "matchedOverlayCount": 9,
+      "unmatchedOverlays": [
+        {
+          "index": 9,
+          "text": "✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 375,
+            "height": 36,
+            "top": 0,
+            "right": 375,
+            "bottom": 36,
+            "left": 0
+          }
+        }
+      ],
+      "unmatchedFindingGroups": [
+        {
+          "selector": "#el-id-1024-10",
+          "tagName": "div",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "gpt-thin-border-wide-shadow",
+              "category": "slop",
+              "severity": "advisory",
+              "advisory": true,
+              "detail": "1px border + 16px shadow blur",
+              "ignoreValue": "",
+              "name": "Hairline border with wide shadow",
+              "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+            }
+          ]
+        },
+        {
+          "selector": "#el-id-1024-15",
+          "tagName": "div",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "gpt-thin-border-wide-shadow",
+              "category": "slop",
+              "severity": "advisory",
+              "advisory": true,
+              "detail": "1px border + 16px shadow blur",
+              "ignoreValue": "",
+              "name": "Hairline border with wide shadow",
+              "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+            }
+          ]
+        },
+        {
+          "selector": "body",
+          "tagName": "body",
+          "rect": null,
+          "isPageLevel": true,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "bounce-easing",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+              "ignoreValue": "",
+              "name": "Bounce or elastic easing",
+              "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+            },
+            {
+              "type": "layout-transition",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "transition: height, padding-top, padding-bottom",
+              "ignoreValue": "",
+              "name": "Layout property animation",
+              "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+            }
+          ]
+        }
+      ],
+      "injectedScriptUrl": "http://localhost:8400/detect.js"
+    },
+    "bodyTextStart": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n\nLxProTable 数据表格\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxDutyCalendar 排班日历\n\nLxSectionTitle 区块标题\n\nLxAuthImg 鉴权图片\n\nLxDescriptions 详情描述\n\nLxPagination 分页\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxEmpty 空态\n\nLxGauge 圆环仪表\n\nLxNodeBadge 节点徽章\n\n权限消费\n\n数据录入\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\nLxInputNumber 数字输入\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxPasswordInput 密码输入框\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxDynamicForm 动态表单\n​\n\n通过字段 schema 组合 Lx* 基础控件，使用 v-model 或 value + change(nextValue) "
+  },
+  "events": {
+    "console": [
+      {
+        "type": "debug",
+        "text": "[vite] connecting...",
+        "location": {
+          "url": "http://127.0.0.1:4174/@vite/client",
+          "line": 494,
+          "column": 8,
+          "lineNumber": 494,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "debug",
+        "text": "[vite] connected.",
+        "location": {
+          "url": "http://127.0.0.1:4174/@vite/client",
+          "line": 617,
+          "column": 14,
+          "lineNumber": 617,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "startGroup",
+        "text": "%c[impeccable] 10 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8159,
+          "column": 12,
+          "lineNumber": 8159,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8165,
+          "column": 16,
+          "lineNumber": 8165,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8165,
+          "column": 16,
+          "lineNumber": 8165,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8165,
+          "column": 16,
+          "lineNumber": 8165,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8165,
+          "column": 16,
+          "lineNumber": 8165,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8165,
+          "column": 16,
+          "lineNumber": 8165,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8165,
+          "column": 16,
+          "lineNumber": 8165,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8165,
+          "column": 16,
+          "lineNumber": 8165,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8165,
+          "column": 16,
+          "lineNumber": 8165,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8165,
+          "column": 16,
+          "lineNumber": 8165,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8165,
+          "column": 16,
+          "lineNumber": 8165,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8165,
+          "column": 16,
+          "lineNumber": 8165,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "endGroup",
+        "text": "console.groupEnd",
+        "location": {
+          "url": "http://localhost:8400/detect.js",
+          "line": 8169,
+          "column": 12,
+          "lineNumber": 8169,
+          "columnNumber": 12
+        }
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": []
+  },
+  "screenshots": {
+    "fullPage": "mobile-375-touch.png",
+    "viewport": "mobile-375-touch-viewport.png"
+  }
+}

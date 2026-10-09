@@ -1,0 +1,128 @@
+{
+  "scenario": "lxselectpagination-mobile-375-hud-error",
+  "route": "lxselectpagination",
+  "theme": "dark（Demo 控件标签为 HUD 深色主题；控件仅切换 html.dark）",
+  "requestedState": "窄屏，展开选择器并触发远程请求失败",
+  "viewport": {
+    "width": 375,
+    "height": 812,
+    "isMobile": true
+  },
+  "overlayInjection": {
+    "loaded": false,
+    "src": "http://127.0.0.1:8400/detect.js",
+    "error": "script load failed"
+  },
+  "preflight": {
+    "title": "[Human] lxselectpagination lxselectpagination-mobile-375-hud-error",
+    "mutableInjection": true,
+    "preflightScript": true
+  },
+  "actionResults": [
+    {
+      "action": "pagination-hud",
+      "result": "HUD checkbox not found"
+    },
+    {
+      "action": "pagination-error",
+      "result": "failure button not found"
+    }
+  ],
+  "browser": {
+    "title": "[Human] lxselectpagination lxselectpagination-mobile-375-hud-error",
+    "url": "chrome-error://chromewebdata/",
+    "viewport": {
+      "width": 375,
+      "height": 812,
+      "isNarrow": true,
+      "visualWidth": 375,
+      "screenWidth": 375,
+      "devicePixelRatio": 1
+    },
+    "document": {
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "scrollHeight": 812,
+      "bodyScrollWidth": 375
+    },
+    "theme": {
+      "dark": false,
+      "hud": false,
+      "classes": []
+    },
+    "demoFound": false,
+    "demoText": "",
+    "states": {
+      "loading": false,
+      "errorText": [],
+      "overlayNodeCount": 0,
+      "alerts": []
+    },
+    "controls": [
+      {
+        "tag": "button",
+        "text": "刷新",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      }
+    ],
+    "selectPagination": null,
+    "overlayScripts": [
+      {
+        "src": "http://127.0.0.1:8400/detect.js",
+        "loaded": true
+      }
+    ]
+  },
+  "detectorConsole": {
+    "runs": [],
+    "findingCount": 0,
+    "ruleCounts": {},
+    "findings": []
+  },
+  "screenshot": "screenshots/lxselectpagination-mobile-375-hud-error.png",
+  "console": [],
+  "runtimeExceptions": [],
+  "networkFailures": [
+    {
+      "url": "0879CF1487E615FEACC62683A31F5348",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "A6876904C4C14407D57467F37FAD3B74",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "A6876904C4C14407D57467F37FAD3B74",
+      "errorText": "net::ERR_ABORTED",
+      "blockedReason": ""
+    },
+    {
+      "url": "CEC602E555080D58980CEC8D3A068CDE",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "CEC602E555080D58980CEC8D3A068CDE",
+      "errorText": "net::ERR_ABORTED",
+      "blockedReason": ""
+    },
+    {
+      "url": "16588.4",
+      "errorText": "net::ERR_FAILED",
+      "blockedReason": ""
+    }
+  ],
+  "stateChecks": {
+    "viewportWidthMatches": true,
+    "narrowMediaQueryMatches": true,
+    "errorStateVisible": false,
+    "loadingStateVisible": true,
+    "darkThemeApplied": false,
+    "hudThemeClassApplied": null
+  }
+}

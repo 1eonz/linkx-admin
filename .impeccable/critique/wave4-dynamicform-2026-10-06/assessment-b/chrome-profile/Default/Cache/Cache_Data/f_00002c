@@ -1,0 +1,159 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxTextarea/index.vue");import { defineComponent as _defineComponent } from "/.vitepress/cache/deps/vue.js?v=1b82acbd";
+import { computed, getCurrentInstance, ref, useAttrs } from "/.vitepress/cache/deps/vue.js?v=1b82acbd";
+import { ElInput } from "/.vitepress/cache/deps/element-plus.js?v=1b82acbd";
+import LxIcon from "/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxIcon/index.vue";
+import "/.vitepress/cache/deps/element-plus_es_components_input_style_css.js?v=1b82acbd";
+import "/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxTextarea/style.css";
+const _sfc_main = /* @__PURE__ */ _defineComponent({
+  ...{ name: "LxTextarea", inheritAttrs: false },
+  __name: "index",
+  props: {
+    modelValue: { type: String, required: false, default: "" },
+    placeholder: { type: String, required: false, default: "" },
+    disabled: { type: Boolean, required: false, default: void 0 },
+    readonly: { type: Boolean, required: false, default: false },
+    rows: { type: Number, required: false, default: 3 },
+    autosize: { type: [Boolean, Object], required: false, default: false },
+    maxlength: { type: Number, required: false, default: void 0 },
+    maxlengthMode: { type: String, required: false, default: "truncate" },
+    showWordLimit: { type: Boolean, required: false, default: false },
+    resize: { type: String, required: false, default: "vertical" },
+    name: { type: String, required: false, default: void 0 }
+  },
+  emits: ["update:modelValue", "input", "change", "focus", "blur"],
+  setup(__props, { expose: __expose, emit: __emit }) {
+    const props = __props;
+    const emit = __emit;
+    const inputRef = ref();
+    const attrs = useAttrs();
+    const instanceId = getCurrentInstance()?.uid ?? 0;
+    const inputId = computed(() => {
+      const id = attrs.id;
+      return typeof id === "string" && id !== "" ? id : `lx-textarea-${instanceId}`;
+    });
+    const overflowDescriptionId = computed(() => `${inputId.value}-overflow`);
+    const isOverflow = computed(
+      () => props.maxlengthMode === "validate" && props.maxlength !== void 0 && props.maxlength >= 0 && props.modelValue.length > props.maxlength
+    );
+    const nativeMaxlength = computed(
+      () => props.maxlengthMode === "validate" ? void 0 : props.maxlength
+    );
+    const ariaDescribedby = computed(() => {
+      const supplied = attrs["aria-describedby"];
+      const ids = [
+        typeof supplied === "string" ? supplied.trim() : "",
+        isOverflow.value ? overflowDescriptionId.value : ""
+      ].filter(Boolean);
+      return ids.length > 0 ? ids.join(" ") : void 0;
+    });
+    const ariaInvalid = computed(
+      () => isOverflow.value ? "true" : attrs["aria-invalid"]
+    );
+    const showValidationCounter = computed(
+      () => props.maxlengthMode === "validate" && props.showWordLimit && props.maxlength !== void 0 && props.maxlength >= 0
+    );
+    __expose({
+      /** 聚焦文本域 */
+      focus: () => inputRef.value?.focus(),
+      /** 移除焦点 */
+      blur: () => inputRef.value?.blur()
+    });
+    const __returned__ = { props, emit, inputRef, attrs, instanceId, inputId, overflowDescriptionId, isOverflow, nativeMaxlength, ariaDescribedby, ariaInvalid, showValidationCounter, get ElInput() {
+      return ElInput;
+    }, LxIcon };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+});
+import { mergeProps as _mergeProps, createVNode as _createVNode, toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, normalizeClass as _normalizeClass, normalizeStyle as _normalizeStyle } from "/.vitepress/cache/deps/vue.js?v=1b82acbd";
+const _hoisted_1 = {
+  key: 0,
+  class: "lx-textarea__feedback"
+};
+const _hoisted_2 = ["id"];
+const _hoisted_3 = ["aria-label"];
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return _openBlock(), _createElementBlock(
+    "div",
+    {
+      class: _normalizeClass(["lx-textarea", [
+        _ctx.$attrs.class,
+        { "is-overflow": $setup.isOverflow, "is-disabled": $props.disabled }
+      ]]),
+      style: _normalizeStyle(_ctx.$attrs.style)
+    },
+    [
+      _createVNode($setup["ElInput"], _mergeProps({
+        ref: "inputRef",
+        class: "lx-textarea__control"
+      }, _ctx.$attrs, {
+        id: $setup.inputId,
+        "aria-describedby": $setup.ariaDescribedby,
+        "aria-invalid": $setup.ariaInvalid,
+        "model-value": $props.modelValue,
+        type: "textarea",
+        placeholder: $props.placeholder,
+        disabled: $props.disabled,
+        readonly: $props.readonly,
+        rows: $props.rows,
+        autosize: $props.autosize,
+        maxlength: $setup.nativeMaxlength,
+        "show-word-limit": $props.maxlengthMode === "truncate" && $props.showWordLimit,
+        resize: $props.resize,
+        name: $props.name,
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.emit("update:modelValue", $event)),
+        onInput: _cache[1] || (_cache[1] = ($event) => $setup.emit("input", $event)),
+        onChange: _cache[2] || (_cache[2] = ($event) => $setup.emit("change", $event)),
+        onFocus: _cache[3] || (_cache[3] = ($event) => $setup.emit("focus", $event)),
+        onBlur: _cache[4] || (_cache[4] = ($event) => $setup.emit("blur", $event))
+      }), null, 16, ["id", "aria-describedby", "aria-invalid", "model-value", "placeholder", "disabled", "readonly", "rows", "autosize", "maxlength", "show-word-limit", "resize", "name"]),
+      $setup.showValidationCounter || $setup.isOverflow ? (_openBlock(), _createElementBlock("div", _hoisted_1, [
+        $setup.isOverflow ? (_openBlock(), _createElementBlock("p", {
+          key: 0,
+          id: $setup.overflowDescriptionId,
+          class: "lx-textarea__overflow-message",
+          role: "alert"
+        }, [
+          _createVNode($setup["LxIcon"], {
+            name: "circle-alert",
+            size: 12,
+            "aria-hidden": "true"
+          }),
+          _createElementVNode(
+            "span",
+            null,
+            "字数超出上限 " + _toDisplayString($props.maxlength) + " 字",
+            1
+            /* TEXT */
+          )
+        ], 8, _hoisted_2)) : _createCommentVNode("v-if", true),
+        $setup.showValidationCounter ? (_openBlock(), _createElementBlock("span", {
+          key: 1,
+          class: _normalizeClass(["lx-textarea__validation-count", { "is-overflow": $setup.isOverflow }]),
+          role: "status",
+          "aria-label": `字数 ${$props.modelValue.length} / ${$props.maxlength}`
+        }, _toDisplayString($props.modelValue.length) + " / " + _toDisplayString($props.maxlength), 11, _hoisted_3)) : _createCommentVNode("v-if", true)
+      ])) : _createCommentVNode("v-if", true)
+    ],
+    6
+    /* CLASS, STYLE */
+  );
+}
+_sfc_main.__hmrId = "e17a83c5";
+typeof __VUE_HMR_RUNTIME__ !== "undefined" && __VUE_HMR_RUNTIME__.createRecord(_sfc_main.__hmrId, _sfc_main);
+import.meta.hot.on("file-changed", ({ file }) => {
+  __VUE_HMR_RUNTIME__.CHANGED_FILE = file;
+});
+import.meta.hot.accept((mod) => {
+  if (!mod) return;
+  const { default: updated, _rerender_only } = mod;
+  if (_rerender_only) {
+    __VUE_HMR_RUNTIME__.rerender(updated.__hmrId, updated.render);
+  } else {
+    __VUE_HMR_RUNTIME__.reload(updated.__hmrId, updated);
+  }
+});
+import _export_sfc from "/@id/__x00__plugin-vue:export-helper";
+export default /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "F:/work/linkx-admin/linkx-fe/src/components/LxTextarea/index.vue"]]);
+
+//# sourceMappingURL=data:application/json;base64,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QUFBQTtVQU5ELElBQUk7QUFBQSxVQUNMLE9BQU07QUFBQSxVQUNOLE1BQUs7QUFBQTtVQUVMLGFBQTREO0FBQUEsWUFBcEQsTUFBSztBQUFBLFlBQWdCLE1BQU07QUFBQSxZQUFJLGVBQVk7QUFBQTtVQUNuRDtBQUFBLFlBQXFDO0FBQUE7QUFBQSxZQUEvQixZQUFPLGlCQUFHLGdCQUFTLElBQUc7QUFBQSxZQUFFO0FBQUE7QUFBQTtBQUFBO1FBR3hCLDhDQURSLG9CQVFPO0FBQUE7VUFOTCxPQUFLLGlCQUFDLGlDQUErQixpQkFDWixrQkFBVTtBQUFBLFVBQ25DLE1BQUs7QUFBQSxVQUNKLGNBQVUsTUFBUSxrQkFBVyxNQUFNLE1BQU0sZ0JBQVM7QUFBQSw0QkFFaEQsa0JBQVcsTUFBTSxJQUFHLFFBQUcsaUJBQUcsZ0JBQVMiLCJuYW1lcyI6W10sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbImluZGV4LnZ1ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0IHNldHVwIGxhbmc9XCJ0c1wiPlxuLyoqXG4gKiBMeFRleHRhcmVhIOKAlCDlpJrooYzmlofmnKzln5/vvIhFbGVtZW50IFBsdXMgZWwtaW5wdXQgdHlwZT1cInRleHRhcmVhXCIg5YaF5qC45LqM5qyh5bCB6KOF77yJXG4gKiDop4bop4nmupDvvJpkZXNpZ24v6KGo5Y2V5o6n5Lu25YWr5Lu25aWXL2NvZGUuaHRtbCAwOFxuICogICAzIOihjOWfuuWHhumrmOW6puOAgeW6lemDqOWPs+Wvuem9kOWtl+aVsOiuoeaVsO+8iOetieWuvSAxMXB477yJ44CBcmVzaXplLXnvvJtcbiAqICAg6L655qGGIC8g54Sm54K5IC8g6ZSZ6K+v5oCB6KeG6KeJ55SxIGVsZW1lbnQtdGhlbWUuY3NzIOWFqOWxgOS7pOeJjOahpeS+m+e7me+8iOaJv+aOpeazoiAx77yJ44CCXG4gKiDpu5jorqQgbWF4bGVuZ3RoTW9kZT1cInRydW5jYXRlXCIg6YG15LuOIEVQIOehrOaIquaWre+8m1widmFsaWRhdGVcIiDmqKHlvI/kv53nlZnotoXpmZDlgLzvvIxcbiAqIOW5tuaPkOS+m+WFs+iBlOeahOmUmeivr+ivtOaYjuS4juiuoeaVsOWPjemmiO+8jOS+m+eUqOaIt+ebtOaOpeS/ruato+OAglxuICog5pyq5aOw5piO55qEIEVQIHByb3BzIOe7jyAkYXR0cnMg6YCP5Lyg77yM5YW85a655pen55So5rOV44CCXG4gKi9cbmltcG9ydCB7IGNvbXB1dGVkLCBnZXRDdXJyZW50SW5zdGFuY2UsIHJlZiwgdXNlQXR0cnMgfSBmcm9tICd2dWUnXG5pbXBvcnQgeyBFbElucHV0IH0gZnJvbSAnZWxlbWVudC1wbHVzJ1xuaW1wb3J0IHR5cGUgeyBJbnB1dEluc3RhbmNlIH0gZnJvbSAnZWxlbWVudC1wbHVzJ1xuaW1wb3J0IHR5cGUgeyBMeFRleHRhcmVhUHJvcHMgfSBmcm9tICcuL3R5cGVzJ1xuaW1wb3J0IEx4SWNvbiBmcm9tICcuLi9MeEljb24vaW5kZXgudnVlJ1xuaW1wb3J0ICdlbGVtZW50LXBsdXMvZXMvY29tcG9uZW50cy9pbnB1dC9zdHlsZS9jc3MnXG5pbXBvcnQgJy4vc3R5bGUuY3NzJ1xuXG5kZWZpbmVPcHRpb25zKHsgbmFtZTogJ0x4VGV4dGFyZWEnLCBpbmhlcml0QXR0cnM6IGZhbHNlIH0pXG5cbmNvbnN0IHByb3BzID0gd2l0aERlZmF1bHRzKGRlZmluZVByb3BzPEx4VGV4dGFyZWFQcm9wcz4oKSwge1xuICBtb2RlbFZhbHVlOiAnJyxcbiAgcGxhY2Vob2xkZXI6ICcnLFxuICAvLyBkaXNhYmxlZCDmmL7lvI8gZGVmYXVsdDogdW5kZWZpbmVk77yI5a+56b2QIEVQIOWGheaguCBkZWZhdWx0OiB2b2lkIDDvvInvvJphYnNlbnQg5pe25L+d5oyBXG4gIC8vIHVuZGVmaW5lZCDogIzpnZ7ooqsgVnVlIGNhc3Qg5Li6IGZhbHNl77yMdXNlRm9ybURpc2FibGVkIOeahCA/PyDpk77vvIjooajljZXnpoHnlKjnu6fmib/vvIlcbiAgLy8g5omN5LiN5Lya6KKr55+t6Lev77yb5Yig5o6J6buY6K6k5YC85LiN6KGM4oCU4oCU5pegIGRlZmF1bHQg55qEIEJvb2xlYW4g5Lya6KKrIGNhc3Qg5oiQIGZhbHNlXG4gIGRpc2FibGVkOiB1bmRlZmluZWQsXG4gIHJlYWRvbmx5OiBmYWxzZSxcbiAgcm93czogMyxcbiAgYXV0b3NpemU6IGZhbHNlLFxuICBtYXhsZW5ndGg6IHVuZGVmaW5lZCxcbiAgbWF4bGVuZ3RoTW9kZTogJ3RydW5jYXRlJyxcbiAgc2hvd1dvcmRMaW1pdDogZmFsc2UsXG4gIHJlc2l6ZTogJ3ZlcnRpY2FsJyxcbiAgbmFtZTogdW5kZWZpbmVkLFxufSlcblxuY29uc3QgZW1pdCA9IGRlZmluZUVtaXRzPHtcbiAgJ3VwZGF0ZTptb2RlbFZhbHVlJzogW3ZhbHVlOiBzdHJpbmddXG4gIGlucHV0OiBbdmFsdWU6IHN0cmluZ11cbiAgY2hhbmdlOiBbdmFsdWU6IHN0cmluZ11cbiAgZm9jdXM6IFtldmVudDogRm9jdXNFdmVudF1cbiAgYmx1cjogW2V2ZW50OiBGb2N1c0V2ZW50XVxufT4oKVxuXG4vKiogRVAg5YaF5qC45a6e5L6L5byV55So77yadGV4dGFyZWEg5b2i5oCB5LiLIGZvY3VzL2JsdXIg5pa55rOV6YCP5Lyg57uZ6LCD55So5pa5ICovXG5jb25zdCBpbnB1dFJlZiA9IHJlZjxJbnB1dEluc3RhbmNlPigpXG5jb25zdCBhdHRycyA9IHVzZUF0dHJzKClcbmNvbnN0IGluc3RhbmNlSWQgPSBnZXRDdXJyZW50SW5zdGFuY2UoKT8udWlkID8/IDBcbmNvbnN0IGlucHV0SWQgPSBjb21wdXRlZCgoKSA9PiB7XG4gIGNvbnN0IGlkID0gYXR0cnMuaWRcbiAgcmV0dXJuIHR5cGVvZiBpZCA9PT0gJ3N0cmluZycgJiYgaWQgIT09ICcnID8gaWQgOiBgbHgtdGV4dGFyZWEtJHtpbnN0YW5jZUlkfWBcbn0pXG5jb25zdCBvdmVyZmxvd0Rlc2NyaXB0aW9uSWQgPSBjb21wdXRlZCgoKSA9PiBgJHtpbnB1dElkLnZhbHVlfS1vdmVyZmxvd2ApXG5jb25zdCBpc092ZXJmbG93ID0gY29tcHV0ZWQoXG4gICgpID0+XG4gICAgcHJvcHMubWF4bGVuZ3RoTW9kZSA9PT0gJ3ZhbGlkYXRlJyAmJlxuICAgIHByb3BzLm1heGxlbmd0aCAhPT0gdW5kZWZpbmVkICYmXG4gICAgcHJvcHMubWF4bGVuZ3RoID49IDAgJiZcbiAgICBwcm9wcy5tb2RlbFZhbHVlLmxlbmd0aCA+IHByb3BzLm1heGxlbmd0aCxcbilcbmNvbnN0IG5hdGl2ZU1heGxlbmd0aCA9IGNvbXB1dGVkKCgpID0+XG4gIHByb3BzLm1heGxlbmd0aE1vZGUgPT09ICd2YWxpZGF0ZScgPyB1bmRlZmluZWQgOiBwcm9wcy5tYXhsZW5ndGgsXG4pXG5jb25zdCBhcmlhRGVzY3JpYmVkYnkgPSBjb21wdXRlZCgoKSA9PiB7XG4gIGNvbnN0IHN1cHBsaWVkID0gYXR0cnNbJ2FyaWEtZGVzY3JpYmVkYnknXVxuICBjb25zdCBpZHMgPSBbXG4gICAgdHlwZW9mIHN1cHBsaWVkID09PSAnc3RyaW5nJyA/IHN1cHBsaWVkLnRyaW0oKSA6ICcnLFxuICAgIGlzT3ZlcmZsb3cudmFsdWUgPyBvdmVyZmxvd0Rlc2NyaXB0aW9uSWQudmFsdWUgOiAnJyxcbiAgXS5maWx0ZXIoQm9vbGVhbilcbiAgcmV0dXJuIGlkcy5sZW5ndGggPiAwID8gaWRzLmpvaW4oJyAnKSA6IHVuZGVmaW5lZFxufSlcbmNvbnN0IGFyaWFJbnZhbGlkID0gY29tcHV0ZWQoKCkgPT5cbiAgaXNPdmVyZmxvdy52YWx1ZSA/ICd0cnVlJyA6IGF0dHJzWydhcmlhLWludmFsaWQnXSxcbilcbmNvbnN0IHNob3dWYWxpZGF0aW9uQ291bnRlciA9IGNvbXB1dGVkKFxuICAoKSA9PlxuICAgIHByb3BzLm1heGxlbmd0aE1vZGUgPT09ICd2YWxpZGF0ZScgJiZcbiAgICBwcm9wcy5zaG93V29yZExpbWl0ICYmXG4gICAgcHJvcHMubWF4bGVuZ3RoICE9PSB1bmRlZmluZWQgJiZcbiAgICBwcm9wcy5tYXhsZW5ndGggPj0gMCxcbilcblxuZGVmaW5lRXhwb3NlKHtcbiAgLyoqIOiBmueEpuaWh+acrOWfnyAqL1xuICBmb2N1czogKCkgPT4gaW5wdXRSZWYudmFsdWU/LmZvY3VzKCksXG4gIC8qKiDnp7vpmaTnhKbngrkgKi9cbiAgYmx1cjogKCkgPT4gaW5wdXRSZWYudmFsdWU/LmJsdXIoKSxcbn0pXG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8ZGl2XG4gICAgY2xhc3M9XCJseC10ZXh0YXJlYVwiXG4gICAgOmNsYXNzPVwiW1xuICAgICAgJGF0dHJzLmNsYXNzLFxuICAgICAgeyAnaXMtb3ZlcmZsb3cnOiBpc092ZXJmbG93LCAnaXMtZGlzYWJsZWQnOiBkaXNhYmxlZCB9LFxuICAgIF1cIlxuICAgIDpzdHlsZT1cIiRhdHRycy5zdHlsZVwiXG4gID5cbiAgICA8RWxJbnB1dFxuICAgICAgcmVmPVwiaW5wdXRSZWZcIlxuICAgICAgY2xhc3M9XCJseC10ZXh0YXJlYV9fY29udHJvbFwiXG4gICAgICB2LWJpbmQ9XCIkYXR0cnNcIlxuICAgICAgOmlkPVwiaW5wdXRJZFwiXG4gICAgICA6YXJpYS1kZXNjcmliZWRieT1cImFyaWFEZXNjcmliZWRieVwiXG4gICAgICA6YXJpYS1pbnZhbGlkPVwiYXJpYUludmFsaWRcIlxuICAgICAgOm1vZGVsLXZhbHVlPVwibW9kZWxWYWx1ZVwiXG4gICAgICB0eXBlPVwidGV4dGFyZWFcIlxuICAgICAgOnBsYWNlaG9sZGVyPVwicGxhY2Vob2xkZXJcIlxuICAgICAgOmRpc2FibGVkPVwiZGlzYWJsZWRcIlxuICAgICAgOnJlYWRvbmx5PVwicmVhZG9ubHlcIlxuICAgICAgOnJvd3M9XCJyb3dzXCJcbiAgICAgIDphdXRvc2l6ZT1cImF1dG9zaXplXCJcbiAgICAgIDptYXhsZW5ndGg9XCJuYXRpdmVNYXhsZW5ndGhcIlxuICAgICAgOnNob3ctd29yZC1saW1pdD1cIm1heGxlbmd0aE1vZGUgPT09ICd0cnVuY2F0ZScgJiYgc2hvd1dvcmRMaW1pdFwiXG4gICAgICA6cmVzaXplPVwicmVzaXplXCJcbiAgICAgIDpuYW1lPVwibmFtZVwiXG4gICAgICBAdXBkYXRlOm1vZGVsLXZhbHVlPVwiZW1pdCgndXBkYXRlOm1vZGVsVmFsdWUnLCAkZXZlbnQpXCJcbiAgICAgIEBpbnB1dD1cImVtaXQoJ2lucHV0JywgJGV2ZW50KVwiXG4gICAgICBAY2hhbmdlPVwiZW1pdCgnY2hhbmdlJywgJGV2ZW50KVwiXG4gICAgICBAZm9jdXM9XCJlbWl0KCdmb2N1cycsICRldmVudClcIlxuICAgICAgQGJsdXI9XCJlbWl0KCdibHVyJywgJGV2ZW50KVwiXG4gICAgLz5cbiAgICA8ZGl2XG4gICAgICB2LWlmPVwic2hvd1ZhbGlkYXRpb25Db3VudGVyIHx8IGlzT3ZlcmZsb3dcIlxuICAgICAgY2xhc3M9XCJseC10ZXh0YXJlYV9fZmVlZGJhY2tcIlxuICAgID5cbiAgICAgIDxwXG4gICAgICAgIHYtaWY9XCJpc092ZXJmbG93XCJcbiAgICAgICAgOmlkPVwib3ZlcmZsb3dEZXNjcmlwdGlvbklkXCJcbiAgICAgICAgY2xhc3M9XCJseC10ZXh0YXJlYV9fb3ZlcmZsb3ctbWVzc2FnZVwiXG4gICAgICAgIHJvbGU9XCJhbGVydFwiXG4gICAgICA+XG4gICAgICAgIDxMeEljb24gbmFtZT1cImNpcmNsZS1hbGVydFwiIDpzaXplPVwiMTJcIiBhcmlhLWhpZGRlbj1cInRydWVcIiAvPlxuICAgICAgICA8c3Bhbj7lrZfmlbDotoXlh7rkuIrpmZAge3sgbWF4bGVuZ3RoIH19IOWtlzwvc3Bhbj5cbiAgICAgIDwvcD5cbiAgICAgIDxzcGFuXG4gICAgICAgIHYtaWY9XCJzaG93VmFsaWRhdGlvbkNvdW50ZXJcIlxuICAgICAgICBjbGFzcz1cImx4LXRleHRhcmVhX192YWxpZGF0aW9uLWNvdW50XCJcbiAgICAgICAgOmNsYXNzPVwieyAnaXMtb3ZlcmZsb3cnOiBpc092ZXJmbG93IH1cIlxuICAgICAgICByb2xlPVwic3RhdHVzXCJcbiAgICAgICAgOmFyaWEtbGFiZWw9XCJg5a2X5pWwICR7bW9kZWxWYWx1ZS5sZW5ndGh9IC8gJHttYXhsZW5ndGh9YFwiXG4gICAgICA+XG4gICAgICAgIHt7IG1vZGVsVmFsdWUubGVuZ3RoIH19IC8ge3sgbWF4bGVuZ3RoIH19XG4gICAgICA8L3NwYW4+XG4gICAgPC9kaXY+XG4gIDwvZGl2PlxuPC90ZW1wbGF0ZT5cbiJdLCJmaWxlIjoiRjovd29yay9saW5reC1hZG1pbi9saW5reC1mZS9zcmMvY29tcG9uZW50cy9MeFRleHRhcmVhL2luZGV4LnZ1ZSJ9

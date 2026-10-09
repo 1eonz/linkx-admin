@@ -1,0 +1,454 @@
+{
+  "assessment": "A: independent design review and live browser inspection",
+  "target": "http://127.0.0.1:4174/components/lxicons.html",
+  "source": "linkx-fe/docs/components/lxicons.md",
+  "detector": "not run by assignment scope",
+  "context": {
+    "createdFresh": true,
+    "browser": "Microsoft Edge launched through Playwright Chromium API",
+    "isolatedContext": true,
+    "locale": "zh-CN",
+    "permissions": [
+      "clipboard-read",
+      "clipboard-write"
+    ]
+  },
+  "captures": [
+    {
+      "file": "desktop-1440-light.png",
+      "fullPage": true
+    },
+    {
+      "file": "desktop-1440-dark.png",
+      "fullPage": true
+    },
+    {
+      "file": "mobile-375-light.png",
+      "fullPage": true
+    },
+    {
+      "file": "mobile-375-dark.png",
+      "fullPage": true
+    },
+    {
+      "file": "mobile-320-light.png",
+      "fullPage": true
+    },
+    {
+      "file": "mobile-375-search-empty.png",
+      "fullPage": false
+    },
+    {
+      "file": "mobile-375-filter-after-collapse-and-term-change.png",
+      "fullPage": false
+    },
+    {
+      "file": "mobile-375-copy-success.png",
+      "fullPage": false
+    },
+    {
+      "file": "mobile-375-copy-failure.png",
+      "fullPage": false
+    },
+    {
+      "file": "mobile-375-reduced-motion-expanded.png",
+      "fullPage": false
+    }
+  ],
+  "observations": {
+    "desktopLight": {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "documentWidth": 1440,
+      "horizontalOverflow": false,
+      "htmlTheme": "light",
+      "pageTitle": "LxIcon 图标总览 | LxUI",
+      "h1": "LxIcon 图标总览\n​",
+      "intro": "管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。",
+      "searchPlaceholder": "输入英文名称或中文用途，如：undo / 重置 / 登出",
+      "search": {
+        "top": 345,
+        "left": 384,
+        "width": 360,
+        "height": 42,
+        "inInitialViewport": true
+      },
+      "firstGroup": {
+        "top": 403,
+        "left": 384,
+        "width": 688,
+        "height": 24,
+        "inInitialViewport": true
+      },
+      "firstTile": {
+        "top": 443,
+        "left": 384,
+        "width": 108,
+        "height": 96,
+        "inInitialViewport": true
+      },
+      "groupCount": 7,
+      "initiallyOpenGroups": 0,
+      "tilesInOpenGroups": 0
+    },
+    "themeSwitchInitialTitle": "Switch to dark theme",
+    "desktopDark": {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "documentWidth": 1440,
+      "horizontalOverflow": false,
+      "htmlTheme": "dark",
+      "pageTitle": "LxIcon 图标总览 | LxUI",
+      "h1": "LxIcon 图标总览\n​",
+      "intro": "管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。",
+      "searchPlaceholder": "输入英文名称或中文用途，如：undo / 重置 / 登出",
+      "search": {
+        "top": 345,
+        "left": 384,
+        "width": 360,
+        "height": 42,
+        "inInitialViewport": true
+      },
+      "firstGroup": {
+        "top": 403,
+        "left": 384,
+        "width": 688,
+        "height": 24,
+        "inInitialViewport": true
+      },
+      "firstTile": {
+        "top": 0,
+        "left": 0,
+        "width": 0,
+        "height": 0,
+        "inInitialViewport": false
+      },
+      "groupCount": 7,
+      "initiallyOpenGroups": 0,
+      "tilesInOpenGroups": 0
+    },
+    "themeSwitchDarkTitle": "Switch to light theme",
+    "mobile375Light": {
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "documentWidth": 375,
+      "horizontalOverflow": false,
+      "htmlTheme": "light",
+      "pageTitle": "LxIcon 图标总览 | LxUI",
+      "h1": "LxIcon 图标总览\n​",
+      "intro": "管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。",
+      "searchPlaceholder": "输入英文名称或中文用途，如：undo / 重置 / 登出",
+      "search": {
+        "top": 437,
+        "left": 24,
+        "width": 327,
+        "height": 42,
+        "inInitialViewport": true
+      },
+      "firstGroup": {
+        "top": 495,
+        "left": 24,
+        "width": 327,
+        "height": 24,
+        "inInitialViewport": true
+      },
+      "firstTile": {
+        "top": 535,
+        "left": 24,
+        "width": 160,
+        "height": 96,
+        "inInitialViewport": true
+      },
+      "groupCount": 7,
+      "initiallyOpenGroups": 0,
+      "tilesInOpenGroups": 0
+    },
+    "mobile375Dark": {
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "documentWidth": 375,
+      "horizontalOverflow": false,
+      "htmlTheme": "dark",
+      "pageTitle": "LxIcon 图标总览 | LxUI",
+      "h1": "LxIcon 图标总览\n​",
+      "intro": "管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。",
+      "searchPlaceholder": "输入英文名称或中文用途，如：undo / 重置 / 登出",
+      "search": {
+        "top": 437,
+        "left": 24,
+        "width": 327,
+        "height": 42,
+        "inInitialViewport": true
+      },
+      "firstGroup": {
+        "top": 495,
+        "left": 24,
+        "width": 327,
+        "height": 24,
+        "inInitialViewport": true
+      },
+      "firstTile": {
+        "top": 535,
+        "left": 24,
+        "width": 160,
+        "height": 96,
+        "inInitialViewport": true
+      },
+      "groupCount": 7,
+      "initiallyOpenGroups": 0,
+      "tilesInOpenGroups": 0
+    },
+    "mobile320Light": {
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "documentWidth": 320,
+      "horizontalOverflow": false,
+      "htmlTheme": "light",
+      "pageTitle": "LxIcon 图标总览 | LxUI",
+      "h1": "LxIcon 图标总览\n​",
+      "intro": "管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。",
+      "searchPlaceholder": "输入英文名称或中文用途，如：undo / 重置 / 登出",
+      "search": {
+        "top": 465,
+        "left": 24,
+        "width": 272,
+        "height": 42,
+        "inInitialViewport": true
+      },
+      "firstGroup": {
+        "top": 523,
+        "left": 24,
+        "width": 272,
+        "height": 24,
+        "inInitialViewport": true
+      },
+      "firstTile": {
+        "top": 563,
+        "left": 24,
+        "width": 132,
+        "height": 96,
+        "inInitialViewport": true
+      },
+      "groupCount": 7,
+      "initiallyOpenGroups": 0,
+      "tilesInOpenGroups": 0
+    },
+    "emptySearch": {
+      "visible": true,
+      "text": "无匹配图标",
+      "role": "status",
+      "ariaLive": "polite",
+      "ariaAtomic": "true",
+      "groupCount": 0,
+      "clearButtonVisible": true
+    },
+    "filterCollapseThenChangeTerm": {
+      "queryBefore": "das",
+      "groupOpenBeforeCollapse": true,
+      "groupOpenAfterManualCollapse": false,
+      "queryAfter": "dashboard",
+      "groupOpenAfterTermChange": true,
+      "matchingTiles": 1
+    },
+    "keyboardTabSequence": [
+      {
+        "tag": "A",
+        "ariaLabel": null,
+        "text": "Skip to content",
+        "className": "VPSkipLink visually-hidden",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px"
+      },
+      {
+        "tag": "A",
+        "ariaLabel": null,
+        "text": "LxUI",
+        "className": "title",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px"
+      },
+      {
+        "tag": "BUTTON",
+        "ariaLabel": "mobile navigation",
+        "text": "",
+        "className": "VPNavBarHamburger hamburger",
+        "outlineStyle": "auto",
+        "outlineWidth": "4px"
+      },
+      {
+        "tag": "BUTTON",
+        "ariaLabel": null,
+        "text": "Menu",
+        "className": "menu",
+        "outlineStyle": "auto",
+        "outlineWidth": "4px"
+      },
+      {
+        "tag": "BUTTON",
+        "ariaLabel": null,
+        "text": "On this page",
+        "className": "",
+        "outlineStyle": "auto",
+        "outlineWidth": "4px"
+      },
+      {
+        "tag": "DIV",
+        "ariaLabel": null,
+        "text": "新增组件",
+        "className": "item",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px"
+      },
+      {
+        "tag": "A",
+        "ariaLabel": null,
+        "text": "新增组件总览",
+        "className": "VPLink link link",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px"
+      },
+      {
+        "tag": "DIV",
+        "ariaLabel": null,
+        "text": "基础",
+        "className": "item",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px"
+      },
+      {
+        "tag": "A",
+        "ariaLabel": null,
+        "text": "基础控件桥接",
+        "className": "VPLink link link",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px"
+      },
+      {
+        "tag": "A",
+        "ariaLabel": null,
+        "text": "LxButton 按钮",
+        "className": "VPLink link link",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px"
+      },
+      {
+        "tag": "A",
+        "ariaLabel": null,
+        "text": "LxIcon 图标总览",
+        "className": "VPLink link link",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px"
+      },
+      {
+        "tag": "DIV",
+        "ariaLabel": null,
+        "text": "布局导航",
+        "className": "item",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px"
+      }
+    ],
+    "skipLink": {
+      "count": 1,
+      "visible": true,
+      "text": "Skip to content"
+    },
+    "keyboardSearch": {
+      "query": "undo",
+      "matchCount": 1,
+      "inputFocused": true
+    },
+    "focusAfterSearch": {
+      "tag": "BUTTON",
+      "ariaLabel": "清除筛选",
+      "text": "",
+      "className": "icon-search__clear",
+      "outlineStyle": "auto",
+      "outlineWidth": "4px"
+    },
+    "keyboardClear": {
+      "valueAfterActivation": "",
+      "focusAfterActivation": {
+        "tag": "INPUT",
+        "ariaLabel": "按名称或中文用途筛选图标",
+        "text": "",
+        "className": "icon-search",
+        "outlineStyle": "none",
+        "outlineWidth": "3px"
+      }
+    },
+    "keyboardTileFocus": {
+      "tabsAfterClear": 1,
+      "focused": {
+        "tag": "BUTTON",
+        "ariaLabel": "复制 dashboard（仪表盘）图标用法",
+        "text": "仪表盘\ndashboard",
+        "className": "icon-tile",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px"
+      },
+      "count": 1
+    },
+    "keyboardTileCopy": {
+      "clipboardText": "<LxIcon name=\"dashboard\" :size=\"20\" />",
+      "announcements": [
+        {
+          "role": "alert",
+          "live": null,
+          "text": "已复制：<LxIcon name=\"dashboard\" :size=\"20\" />"
+        }
+      ]
+    },
+    "copySuccess": {
+      "clipboardText": "<LxIcon name=\"dashboard\" :size=\"20\" />",
+      "pageText": "-down、arrow-left、arrow-right、caret-down、close、switch、power、clock、grid、list、copy、phone、email、lock、unlock、date\n29 枚扩展\t29\tminus、eye-on、eye-off、filter、sort、fullscreen、fullscreen-exit、printer、info、circle-question、history、message、password、id-card、logout、home、language、screenshot、wifi、cloud、database、terminal、cpu、pin、zoom-in、zoom-out、drag、save、export\n去重合计\t69\t别名按独立可用名称计数，动效复用标准图形。\n新增图标\n​\n\n在 src/components/LxIcon/icons.ts 的 LX_ICONS 中按组追加图形，键为 kebab-case 名称，值为 24×24 viewBox 的 SVG path 数组。仅当设计或业务契约存在同义旧名称时，才在 LX_ICON_ALIASES 中映射到标准图形；LxIconName 和本页总览会同时包含标准键与别名。\n\n兼容别名\n​\n名称\t标准图形\t来源\t说明\ndate\tcalendar\tP1 清单\t保留设计文档名称，复用已有日历图形。\neye-on\teye\t29 枚清单\t与现有可见状态图形同义，避免新增重复路径。\n\n业务存量值 calendar、eye 仍可照常使用；别名不会改变它们的序列化值。\n\nPager\nPrevious page\nLxButton 按钮\nNext page\nLxSidebar 侧边栏\n\n已复制：<LxIcon name=\"dashboard\" :size=\"20\" />",
+      "announcements": [
+        {
+          "role": "alert",
+          "live": null,
+          "text": "已复制：<LxIcon name=\"dashboard\" :size=\"20\" />"
+        }
+      ]
+    },
+    "copyFailure": {
+      "fallbackVisible": true,
+      "fallbackValue": "<LxIcon name=\"team\" :size=\"20\" />",
+      "fallbackFocused": true,
+      "selectionLength": 33,
+      "announcements": [
+        {
+          "role": "alert",
+          "live": null,
+          "text": "复制失败，已选中下方代码，请手动复制"
+        }
+      ],
+      "fallbackMessage": "复制 team 失败。下方代码已选中，可手动复制：",
+      "htmlTheme": "light"
+    },
+    "reducedMotion": {
+      "mediaPreferenceActive": true,
+      "collapsedChevron": {
+        "transform": "none",
+        "transitionDuration": "1e-05s"
+      },
+      "expandedChevron": {
+        "transform": "matrix(-1, 0, 0, -1, 0, 0)",
+        "transitionDuration": "1e-05s"
+      },
+      "tileTransitionDuration": "1e-05s",
+      "expanded": true
+    },
+    "pageErrors": []
+  },
+  "completedAt": "2026-10-05T22:46:38.489Z"
+}

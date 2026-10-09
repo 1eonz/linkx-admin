@@ -1,0 +1,138 @@
+{
+  "name": "mobile-375",
+  "httpStatus": 200,
+  "snapshots": [
+    {
+      "name": "mobile-375-initial",
+      "title": "LxDynamicForm 动态表单 | LxUI",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "document": {
+        "width": 375,
+        "height": 9602
+      },
+      "groups": [
+        {
+          "title": "任务信息",
+          "visibleFieldCount": 4
+        },
+        {
+          "title": "任务状态",
+          "visibleFieldCount": 1
+        },
+        {
+          "title": "附件",
+          "visibleFieldCount": 2
+        }
+      ],
+      "fields": [
+        {
+          "tag": "input",
+          "type": "text",
+          "label": "任务名称",
+          "ariaLabel": "",
+          "placeholder": "输入任务名称",
+          "readonly": false,
+          "disabled": false,
+          "width": 257
+        },
+        {
+          "tag": "input",
+          "type": "password",
+          "label": "访问密码",
+          "ariaLabel": "",
+          "placeholder": "输入访问密码",
+          "readonly": false,
+          "disabled": false,
+          "width": 227
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "label": "任务类型",
+          "ariaLabel": "",
+          "placeholder": "",
+          "readonly": true,
+          "disabled": false,
+          "width": 199
+        },
+        {
+          "tag": "input",
+          "type": "text",
+          "label": "负责人",
+          "ariaLabel": "",
+          "placeholder": "",
+          "readonly": false,
+          "disabled": false,
+          "width": 271
+        }
+      ],
+      "visibleButtons": [
+        "菜单",
+        "本页导航",
+        "新增组件",
+        "基础",
+        "布局导航",
+        "数据展示",
+        "数据录入",
+        "反馈与浮层",
+        "点击或拖拽文件到此处上传\n\n支持图片，单文件不超过 10MB，最多 1 个文件\n\n浏览本地文件",
+        "浏览本地文件",
+        "点击或拖拽文件到此处上传\n\n支持图片，单文件不超过 10MB，最多 5 个文件\n\n浏览本地文件",
+        "浏览本地文件",
+        "全部清空",
+        "提交校验",
+        "重置"
+      ],
+      "primaryActions": [
+        {
+          "label": "提交校验",
+          "x": 37,
+          "y": 2392,
+          "width": 86,
+          "height": 44
+        },
+        {
+          "label": "重置",
+          "x": 143,
+          "y": 2392,
+          "width": 60,
+          "height": 44
+        }
+      ],
+      "errors": [],
+      "uploadRows": [
+        "东门现场.jpg\n上传成功\n180 KB"
+      ],
+      "darkClass": false,
+      "hudClass": false
+    }
+  ],
+  "interactions": [
+    {
+      "action": "mobile-empty-submit",
+      "fieldErrors": [
+        "请输入任务名称",
+        "请输入访问密码"
+      ],
+      "actions": [
+        {
+          "label": "提交校验",
+          "x": 37,
+          "y": 2392,
+          "width": 86,
+          "height": 44
+        },
+        {
+          "label": "重置",
+          "x": 143,
+          "y": 2392,
+          "width": 60,
+          "height": 44
+        }
+      ]
+    }
+  ]
+}

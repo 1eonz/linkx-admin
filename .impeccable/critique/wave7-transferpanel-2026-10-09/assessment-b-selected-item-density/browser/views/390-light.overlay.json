@@ -1,0 +1,291 @@
+{
+  "name": "390-light",
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "theme": "light"
+  },
+  "responseStatus": 200,
+  "preflight": {
+    "titleChanged": true,
+    "scriptConnected": true,
+    "inlineExecuted": true
+  },
+  "scriptConnected": true,
+  "scanFunction": true,
+  "detectFunction": true,
+  "scan": {
+    "elementCount": 10,
+    "findingCount": 11,
+    "rules": {
+      "clipped-overflow-container": 1,
+      "gpt-thin-border-wide-shadow": 1,
+      "cramped-padding": 4,
+      "buried-raster": 3,
+      "bounce-easing": 1,
+      "layout-transition": 1
+    },
+    "entries": [
+      {
+        "path": [
+          "span.container",
+          "button.VPNavBarHamburger.hamburger",
+          "div.content-body",
+          "div.content"
+        ],
+        "findings": [
+          {
+            "type": "clipped-overflow-container",
+            "detail": "span.container clips a positioned child"
+          }
+        ]
+      },
+      {
+        "path": [
+          "div.lx-transfer-panel__scope-action-content",
+          "details.lx-transfer-panel__scope-actions",
+          "header.lx-transfer-panel__header.lx-transfer-panel__header--source",
+          "div#lx-transfer-panel-161-source-panel.lx-transfer-panel__panel.is-mobile-hidden"
+        ],
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "detail": "1px border + 16px shadow blur"
+          }
+        ]
+      },
+      {
+        "path": [
+          "li.lx-transfer-panel__selected-item",
+          "ul.lx-transfer-panel__selected.has-overflow",
+          "div.lx-transfer-panel__selected-wrap",
+          "div#lx-transfer-panel-161-selected-panel.lx-transfer-panel__panel"
+        ],
+        "findings": [
+          {
+            "type": "cramped-padding",
+            "detail": "<li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset)"
+          }
+        ]
+      },
+      {
+        "path": [
+          "li.lx-transfer-panel__selected-item",
+          "ul.lx-transfer-panel__selected.has-overflow",
+          "div.lx-transfer-panel__selected-wrap",
+          "div#lx-transfer-panel-161-selected-panel.lx-transfer-panel__panel"
+        ],
+        "findings": [
+          {
+            "type": "cramped-padding",
+            "detail": "<li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset)"
+          }
+        ]
+      },
+      {
+        "path": [
+          "li.lx-transfer-panel__selected-item",
+          "ul.lx-transfer-panel__selected.has-overflow",
+          "div.lx-transfer-panel__selected-wrap",
+          "div#lx-transfer-panel-161-selected-panel.lx-transfer-panel__panel"
+        ],
+        "findings": [
+          {
+            "type": "cramped-padding",
+            "detail": "<li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset)"
+          }
+        ]
+      },
+      {
+        "path": [
+          "li.lx-transfer-panel__selected-item",
+          "ul.lx-transfer-panel__selected.has-overflow",
+          "div.lx-transfer-panel__selected-wrap",
+          "div#lx-transfer-panel-161-selected-panel.lx-transfer-panel__panel"
+        ],
+        "findings": [
+          {
+            "type": "cramped-padding",
+            "detail": "<li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top (no inset)"
+          }
+        ]
+      },
+      {
+        "path": [
+          "button.copy",
+          "div.language-vue.vp-adaptive-theme",
+          "details.details.custom-block",
+          "div"
+        ],
+        "findings": [
+          {
+            "type": "buried-raster",
+            "detail": "raster background at opacity 0"
+          }
+        ]
+      },
+      {
+        "path": [
+          "button.copy",
+          "div.language-ts.vp-adaptive-theme",
+          "div",
+          "div.vp-doc._components_lxtransferpanel"
+        ],
+        "findings": [
+          {
+            "type": "buried-raster",
+            "detail": "raster background at opacity 0"
+          }
+        ]
+      },
+      {
+        "path": [
+          "button.copy",
+          "div.language-vue.vp-adaptive-theme",
+          "div",
+          "div.vp-doc._components_lxtransferpanel"
+        ],
+        "findings": [
+          {
+            "type": "buried-raster",
+            "detail": "raster background at opacity 0"
+          }
+        ]
+      },
+      {
+        "path": [
+          "body",
+          "html"
+        ],
+        "findings": [
+          {
+            "type": "bounce-easing",
+            "detail": "cubic-bezier(.71, -.46, .29, 1.46)"
+          },
+          {
+            "type": "layout-transition",
+            "detail": "transition: height, padding-top, padding-bottom"
+          }
+        ]
+      }
+    ]
+  },
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 10 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "log",
+      "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 10 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "log",
+      "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "badResponses": [],
+  "screenshot": ".impeccable\\critique\\wave7-transferpanel-2026-10-09\\assessment-b-selected-item-density\\browser\\overlay-screenshots\\390-light.png"
+}

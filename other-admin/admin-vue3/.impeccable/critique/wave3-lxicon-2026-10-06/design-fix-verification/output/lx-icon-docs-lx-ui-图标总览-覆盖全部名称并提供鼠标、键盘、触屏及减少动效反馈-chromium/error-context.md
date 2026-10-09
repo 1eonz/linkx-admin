@@ -1,0 +1,456 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#VPContent"
+  - banner:
+    - generic:
+      - generic:
+        - generic:
+          - link "LxUI" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e7]: LxUI
+          - generic [ref=e8]:
+            - navigation "Main Navigation" [ref=e9]:
+              - generic [ref=e10]: Main Navigation
+              - link "首页" [ref=e11] [cursor=pointer]:
+                - /url: /
+                - generic [ref=e12]: 首页
+              - link "组件" [ref=e13] [cursor=pointer]:
+                - /url: /components/lxsidebar.html
+                - generic [ref=e14]: 组件
+              - link "新增组件" [ref=e15] [cursor=pointer]:
+                - /url: /components/new-components.html
+                - generic [ref=e16]: 新增组件
+            - switch "Switch to dark theme" [ref=e18] [cursor=pointer]
+  - complementary [ref=e23]:
+    - navigation "Sidebar Navigation" [ref=e25]:
+      - generic [ref=e26]: Sidebar Navigation
+      - generic [ref=e28]:
+        - button "新增组件" [ref=e29]:
+          - heading "新增组件" [level=2] [ref=e31]
+        - link "新增组件总览" [ref=e36] [cursor=pointer]:
+          - /url: /components/new-components.html
+          - paragraph [ref=e37]: 新增组件总览
+      - generic [ref=e39]:
+        - button "基础" [ref=e40]:
+          - heading "基础" [level=2] [ref=e42]
+        - generic [ref=e43]:
+          - link "基础控件桥接" [ref=e47] [cursor=pointer]:
+            - /url: /components/element-bridge.html
+            - paragraph [ref=e48]: 基础控件桥接
+          - link "LxButton 按钮" [ref=e52] [cursor=pointer]:
+            - /url: /components/lxbutton.html
+            - paragraph [ref=e53]: LxButton 按钮
+          - link "LxIcon 图标总览" [ref=e57] [cursor=pointer]:
+            - /url: /components/lxicons.html
+            - paragraph [ref=e58]: LxIcon 图标总览
+      - generic [ref=e60]:
+        - button "布局导航" [ref=e61]:
+          - heading "布局导航" [level=2] [ref=e63]
+        - generic [ref=e64]:
+          - link "LxSidebar 侧边栏" [ref=e68] [cursor=pointer]:
+            - /url: /components/lxsidebar.html
+            - paragraph [ref=e69]: LxSidebar 侧边栏
+          - link "LxNavbar 顶部导航" [ref=e73] [cursor=pointer]:
+            - /url: /components/lxnavbar.html
+            - paragraph [ref=e74]: LxNavbar 顶部导航
+          - link "LxBreadcrumb 面包屑" [ref=e78] [cursor=pointer]:
+            - /url: /components/lxbreadcrumb.html
+            - paragraph [ref=e79]: LxBreadcrumb 面包屑
+          - link "LxTabsBar 页签栏" [ref=e83] [cursor=pointer]:
+            - /url: /components/lxtabsbar.html
+            - paragraph [ref=e84]: LxTabsBar 页签栏
+          - link "LxSplitLayout 分栏布局" [ref=e88] [cursor=pointer]:
+            - /url: /components/lxsplitlayout.html
+            - paragraph [ref=e89]: LxSplitLayout 分栏布局
+          - link "LxSelectTree 组织树选择" [ref=e93] [cursor=pointer]:
+            - /url: /components/lxselecttree.html
+            - paragraph [ref=e94]: LxSelectTree 组织树选择
+      - generic [ref=e96]:
+        - button "数据展示" [ref=e97]:
+          - heading "数据展示" [level=2] [ref=e99]
+        - generic [ref=e100]:
+          - link "LxProTable 数据表格" [ref=e104] [cursor=pointer]:
+            - /url: /components/lxprotable.html
+            - paragraph [ref=e105]: LxProTable 数据表格
+          - link "LxPageCard 页面容器" [ref=e109] [cursor=pointer]:
+            - /url: /components/lxpagecard.html
+            - paragraph [ref=e110]: LxPageCard 页面容器
+          - link "LxMetricCard 指标卡" [ref=e114] [cursor=pointer]:
+            - /url: /components/lxmetriccard.html
+            - paragraph [ref=e115]: LxMetricCard 指标卡
+          - link "LxDutyCalendar 排班日历" [ref=e119] [cursor=pointer]:
+            - /url: /components/lxdutycalendar.html
+            - paragraph [ref=e120]: LxDutyCalendar 排班日历
+          - link "LxSectionTitle 区块标题" [ref=e124] [cursor=pointer]:
+            - /url: /components/lxsectiontitle.html
+            - paragraph [ref=e125]: LxSectionTitle 区块标题
+          - link "LxAuthImg 鉴权图片" [ref=e129] [cursor=pointer]:
+            - /url: /components/lxauthimg.html
+            - paragraph [ref=e130]: LxAuthImg 鉴权图片
+          - link "LxDescriptions 详情描述" [ref=e134] [cursor=pointer]:
+            - /url: /components/lxdescriptions.html
+            - paragraph [ref=e135]: LxDescriptions 详情描述
+          - link "LxPagination 分页" [ref=e139] [cursor=pointer]:
+            - /url: /components/lxpagination.html
+            - paragraph [ref=e140]: LxPagination 分页
+          - link "LxVirtualTree 虚拟树" [ref=e144] [cursor=pointer]:
+            - /url: /components/lxvirtualtree.html
+            - paragraph [ref=e145]: LxVirtualTree 虚拟树
+          - link "LxTransferPanel 双栏穿梭" [ref=e149] [cursor=pointer]:
+            - /url: /components/lxtransferpanel.html
+            - paragraph [ref=e150]: LxTransferPanel 双栏穿梭
+          - link "LxStatusDot 状态点" [ref=e154] [cursor=pointer]:
+            - /url: /components/lxstatusdot.html
+            - paragraph [ref=e155]: LxStatusDot 状态点
+          - link "LxTag 浅底标签" [ref=e159] [cursor=pointer]:
+            - /url: /components/lxtag.html
+            - paragraph [ref=e160]: LxTag 浅底标签
+          - link "LxCodeSlot 代码槽" [ref=e164] [cursor=pointer]:
+            - /url: /components/lxcodeslot.html
+            - paragraph [ref=e165]: LxCodeSlot 代码槽
+          - link "LxActionButtons 行内操作" [ref=e169] [cursor=pointer]:
+            - /url: /components/lxactionbuttons.html
+            - paragraph [ref=e170]: LxActionButtons 行内操作
+          - link "LxEmpty 空态" [ref=e174] [cursor=pointer]:
+            - /url: /components/lxempty.html
+            - paragraph [ref=e175]: LxEmpty 空态
+          - link "LxGauge 圆环仪表" [ref=e179] [cursor=pointer]:
+            - /url: /components/lxgauge.html
+            - paragraph [ref=e180]: LxGauge 圆环仪表
+          - link "LxNodeBadge 节点徽章" [ref=e184] [cursor=pointer]:
+            - /url: /components/lxnodebadge.html
+            - paragraph [ref=e185]: LxNodeBadge 节点徽章
+          - link "权限消费" [ref=e189] [cursor=pointer]:
+            - /url: /components/permissions.html
+            - paragraph [ref=e190]: 权限消费
+      - generic [ref=e192]:
+        - button "数据录入" [ref=e193]:
+          - heading "数据录入" [level=2] [ref=e195]
+        - generic [ref=e196]:
+          - link "LxForm 表单" [ref=e200] [cursor=pointer]:
+            - /url: /components/lxform.html
+            - paragraph [ref=e201]: LxForm 表单
+          - link "LxInput 输入框" [ref=e205] [cursor=pointer]:
+            - /url: /components/lxinput.html
+            - paragraph [ref=e206]: LxInput 输入框
+          - link "LxTextarea 文本域" [ref=e210] [cursor=pointer]:
+            - /url: /components/lxtextarea.html
+            - paragraph [ref=e211]: LxTextarea 文本域
+          - link "LxRadio 单选组" [ref=e215] [cursor=pointer]:
+            - /url: /components/lxradio.html
+            - paragraph [ref=e216]: LxRadio 单选组
+          - link "LxCheckbox 复选组" [ref=e220] [cursor=pointer]:
+            - /url: /components/lxcheckbox.html
+            - paragraph [ref=e221]: LxCheckbox 复选组
+          - link "LxSwitch 开关" [ref=e225] [cursor=pointer]:
+            - /url: /components/lxswitch.html
+            - paragraph [ref=e226]: LxSwitch 开关
+          - link "LxSelect 下拉选择" [ref=e230] [cursor=pointer]:
+            - /url: /components/lxselect.html
+            - paragraph [ref=e231]: LxSelect 下拉选择
+          - link "LxTreeSelect 树形下拉" [ref=e235] [cursor=pointer]:
+            - /url: /components/lxtreeselect.html
+            - paragraph [ref=e236]: LxTreeSelect 树形下拉
+          - link "LxCascader 级联选择" [ref=e240] [cursor=pointer]:
+            - /url: /components/lxcascader.html
+            - paragraph [ref=e241]: LxCascader 级联选择
+          - link "LxDatePicker 日期选择" [ref=e245] [cursor=pointer]:
+            - /url: /components/lxdatepicker.html
+            - paragraph [ref=e246]: LxDatePicker 日期选择
+          - link "LxInputNumber 数字输入" [ref=e250] [cursor=pointer]:
+            - /url: /components/lxinputnumber.html
+            - paragraph [ref=e251]: LxInputNumber 数字输入
+          - link "LxSearchBar 检索面板" [ref=e255] [cursor=pointer]:
+            - /url: /components/lxsearchbar.html
+            - paragraph [ref=e256]: LxSearchBar 检索面板
+          - link "LxDynamicForm 动态表单" [ref=e260] [cursor=pointer]:
+            - /url: /components/lxdynamicform.html
+            - paragraph [ref=e261]: LxDynamicForm 动态表单
+          - link "LxStatusSwitch 状态开关" [ref=e265] [cursor=pointer]:
+            - /url: /components/lxstatusswitch.html
+            - paragraph [ref=e266]: LxStatusSwitch 状态开关
+          - link "LxPasswordInput 密码输入框" [ref=e270] [cursor=pointer]:
+            - /url: /components/lxpasswordinput.html
+            - paragraph [ref=e271]: LxPasswordInput 密码输入框
+          - link "LxUpload 文件上传" [ref=e275] [cursor=pointer]:
+            - /url: /components/lxupload.html
+            - paragraph [ref=e276]: LxUpload 文件上传
+          - link "LxSelectPagination 远程分页选择" [ref=e280] [cursor=pointer]:
+            - /url: /components/lxselectpagination.html
+            - paragraph [ref=e281]: LxSelectPagination 远程分页选择
+      - generic [ref=e283]:
+        - button "反馈与浮层" [ref=e284]:
+          - heading "反馈与浮层" [level=2] [ref=e286]
+        - generic [ref=e287]:
+          - link "LxMessage 全局提示" [ref=e291] [cursor=pointer]:
+            - /url: /components/lxmessage.html
+            - paragraph [ref=e292]: LxMessage 全局提示
+          - link "LxConfirm 确认框" [ref=e296] [cursor=pointer]:
+            - /url: /components/lxconfirm.html
+            - paragraph [ref=e297]: LxConfirm 确认框
+          - link "LxDialog 表单弹窗" [ref=e301] [cursor=pointer]:
+            - /url: /components/lxdialog.html
+            - paragraph [ref=e302]: LxDialog 表单弹窗
+          - link "LxDrawer 详情抽屉" [ref=e306] [cursor=pointer]:
+            - /url: /components/lxdrawer.html
+            - paragraph [ref=e307]: LxDrawer 详情抽屉
+          - link "LxFormErrorBanner 校验横幅" [ref=e311] [cursor=pointer]:
+            - /url: /components/lxformerrorbanner.html
+            - paragraph [ref=e312]: LxFormErrorBanner 校验横幅
+  - generic [ref=e315]:
+    - navigation "On this page" [ref=e321]:
+      - generic [ref=e322]:
+        - heading "On this page" [level=2] [ref=e324]
+        - list [ref=e325]:
+          - listitem [ref=e326]:
+            - link "图标列表（94 个图形，96 个可用名称）" [ref=e327] [cursor=pointer]:
+              - /url: "#图标列表-94-个图形-96-个可用名称"
+          - listitem [ref=e328]:
+            - link "图标规格与动效" [ref=e329] [cursor=pointer]:
+              - /url: "#图标规格与动效"
+          - listitem [ref=e330]:
+            - link "业务组合示例" [ref=e331] [cursor=pointer]:
+              - /url: "#业务组合示例"
+          - listitem [ref=e332]:
+            - link "使用" [ref=e333] [cursor=pointer]:
+              - /url: "#使用"
+          - listitem [ref=e334]:
+            - link "设计清单覆盖" [ref=e335] [cursor=pointer]:
+              - /url: "#设计清单覆盖"
+          - listitem [ref=e336]:
+            - link "新增图标" [ref=e337] [cursor=pointer]:
+              - /url: "#新增图标"
+          - listitem [ref=e338]:
+            - link "兼容别名" [ref=e339] [cursor=pointer]:
+              - /url: "#兼容别名"
+    - generic [ref=e342]:
+      - main [ref=e343]:
+        - generic [ref=e345]:
+          - heading "LxIcon 图标总览 Permalink to \"LxIcon 图标总览\"" [level=1] [ref=e346]:
+            - text: LxIcon 图标总览
+            - link "Permalink to \"LxIcon 图标总览\"" [ref=e347] [cursor=pointer]:
+              - /url: "#lxicon-图标总览"
+              - text: "#"
+          - paragraph [ref=e348]: 管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。
+          - heading "图标列表（94 个图形，96 个可用名称） Permalink to \"图标列表（94 个图形，96 个可用名称）\"" [level=2] [ref=e349]:
+            - text: 图标列表（94 个图形，96 个可用名称）
+            - link "Permalink to \"图标列表（94 个图形，96 个可用名称）\"" [ref=e350] [cursor=pointer]:
+              - /url: "#图标列表-94-个图形-96-个可用名称"
+              - text: "#"
+          - generic [ref=e351]:
+            - search "图标目录筛选" [ref=e352]:
+              - textbox "按名称或中文用途筛选图标" [active] [ref=e353]:
+                - /placeholder: 搜索图标名称或用途
+            - status [ref=e354]
+            - group [ref=e355]:
+              - generic "P0 高频核心·常用操作（4）" [ref=e356] [cursor=pointer]:
+                - generic [ref=e357]: P0 高频核心·常用操作（4）
+                - img [ref=e358]
+              - generic [ref=e360]:
+                - button "复制 delete（删除）图标用法" [ref=e361] [cursor=pointer]:
+                  - img [ref=e362]
+                  - generic [ref=e365]: 删除
+                  - generic [ref=e366]: delete
+                - button "复制 edit（编辑）图标用法" [ref=e367] [cursor=pointer]:
+                  - img [ref=e368]
+                  - generic [ref=e372]: 编辑
+                  - generic [ref=e373]: edit
+                - button "复制 plus（新增）图标用法" [ref=e374] [cursor=pointer]:
+                  - img [ref=e375]
+                  - generic [ref=e376]: 新增
+                  - generic [ref=e377]: plus
+                - button "复制 refresh（刷新）图标用法" [ref=e378] [cursor=pointer]:
+                  - img [ref=e379]
+                  - generic [ref=e384]: 刷新
+                  - generic [ref=e385]: refresh
+            - group [ref=e386]:
+              - generic "P0 高频核心·内容与状态（9）" [ref=e387] [cursor=pointer]:
+                - generic [ref=e388]: P0 高频核心·内容与状态（9）
+                - img [ref=e389]
+            - group [ref=e391]:
+              - generic "侧边栏菜单（12）" [ref=e392] [cursor=pointer]:
+                - generic [ref=e393]: 侧边栏菜单（12）
+                - img [ref=e394]
+            - group [ref=e396]:
+              - generic "交互（10）" [ref=e397] [cursor=pointer]:
+                - generic [ref=e398]: 交互（10）
+                - img [ref=e399]
+            - group [ref=e401]:
+              - generic "反馈提示（4）" [ref=e402] [cursor=pointer]:
+                - generic [ref=e403]: 反馈提示（4）
+                - img [ref=e404]
+            - group [ref=e406]:
+              - generic "P1 业务语义（26）" [ref=e407] [cursor=pointer]:
+                - generic [ref=e408]: P1 业务语义（26）
+                - img [ref=e409]
+            - group [ref=e411]:
+              - generic "P2 通用补充（29）" [ref=e412] [cursor=pointer]:
+                - generic [ref=e413]: P2 通用补充（29）
+                - img [ref=e414]
+            - group [ref=e416]:
+              - generic "兼容别名（2）" [ref=e417] [cursor=pointer]:
+                - generic [ref=e418]: 兼容别名（2）
+                - img [ref=e419]
+            - status [ref=e421]
+          - heading "图标规格与动效 Permalink to \"图标规格与动效\"" [level=2] [ref=e422]:
+            - text: 图标规格与动效
+            - link "Permalink to \"图标规格与动效\"" [ref=e423] [cursor=pointer]:
+              - /url: "#图标规格与动效"
+              - text: "#"
+          - paragraph [ref=e424]:
+            - text: 内置 SVG 图标使用 24×24 画布、1.5px 描边和圆角端点；
+            - code [ref=e425]: currentColor
+            - text: 继承文字颜色，无需单独传色。
+          - paragraph [ref=e426]:
+            - text: 动效仅配置在 69 个名称上，其余名称保持静态。悬停或键盘聚焦时采用自然减速曲线；
+            - code [ref=e427]: warning
+            - text: 与
+            - code [ref=e428]: email
+            - text: 使用短促的语义反馈，不使用弹性回弹。系统开启减少动效后停用图标动画。
+          - heading "业务组合示例 Permalink to \"业务组合示例\"" [level=2] [ref=e429]:
+            - text: 业务组合示例
+            - link "Permalink to \"业务组合示例\"" [ref=e430] [cursor=pointer]:
+              - /url: "#业务组合示例"
+              - text: "#"
+          - paragraph [ref=e431]: 权限节点列表可以用主体、资源和状态图标一起说明授权关系：
+          - figure "权限节点状态组合" [ref=e432]:
+            - generic [ref=e433]: 权限节点状态组合
+            - generic [ref=e434]:
+              - generic [ref=e435]:
+                - img [ref=e436]
+                - text: 运维组
+              - img [ref=e441]
+              - generic [ref=e443]:
+                - img [ref=e444]
+                - text: 设备管理
+              - generic [ref=e448]:
+                - img [ref=e449]
+                - text: 已授权
+          - heading "使用 Permalink to \"使用\"" [level=2] [ref=e452]:
+            - text: 使用
+            - link "Permalink to \"使用\"" [ref=e453] [cursor=pointer]:
+              - /url: "#使用"
+              - text: "#"
+          - generic [ref=e454]:
+            - button "Copy Code" [ref=e455] [cursor=pointer]
+            - generic [ref=e456]: vue
+            - code [ref=e458]:
+              - generic [ref=e459]: <LxIcon name="shield" :size="20" />
+          - paragraph [ref=e460]:
+            - text: 默认尺寸为
+            - code [ref=e461]: 18px
+            - text: ，常用对照尺寸为
+            - code [ref=e462]: "16"
+            - text: /
+            - code [ref=e463]: "18"
+            - text: /
+            - code [ref=e464]: 20px
+            - text: ；设计稿中的
+            - code [ref=e465]: 24px
+            - text: 是 SVG 画布预览尺寸，不是额外标准档。
+            - code [ref=e466]: size
+            - text: 可按布局需要自定义。组件库导出由
+            - code [ref=e467]: LX_ICONS
+            - text: 键自动推导的
+            - code [ref=e468]: LxIconName
+            - text: ；静态配置请使用该类型，外部字符串需先通过
+            - code [ref=e469]: resolveLxIconName
+            - text: 校验。未知运行时名称会显示问号图标并带有可访问错误名称。
+          - heading "设计清单覆盖 Permalink to \"设计清单覆盖\"" [level=2] [ref=e470]:
+            - text: 设计清单覆盖
+            - link "Permalink to \"设计清单覆盖\"" [ref=e471] [cursor=pointer]:
+              - /url: "#设计清单覆盖"
+              - text: "#"
+          - paragraph [ref=e472]:
+            - text: 三份参考清单逐项对应标准图形或兼容别名；去重后共有 69 个动效名称。其他可用名称不执行 hover/focus 图标动效；
+            - code [ref=e473]: spin
+            - text: 可按需驱动旋转状态。
+          - paragraph [ref=e474]:
+            - text: P1 清单包含 27 个名称：图标卡片展示 26 个标准图形键，兼容别名
+            - code [ref=e475]: date
+            - text: 单列展示，不重复计入卡片。
+          - generic [ref=e476]:
+            - generic [ref=e477]:
+              - term [ref=e478]: P0 高频核心
+              - definition [ref=e479]:
+                - generic [ref=e480]: 13 个
+                - code [ref=e481]: delete、edit、plus、refresh、undo、download、upload、eye、loading、more、folder、folder-open、warning
+            - generic [ref=e482]:
+              - term [ref=e483]: P1 业务语义
+              - definition [ref=e484]:
+                - generic [ref=e485]: 27 个
+                - code [ref=e486]: people、file、file-check、star、tag、image、video、mobile、link、share、arrow-up、arrow-down、arrow-left、arrow-right、caret-down、close、switch、power、clock、grid、list、copy、phone、email、lock、unlock、date
+            - generic [ref=e487]:
+              - term [ref=e488]: 29 枚扩展
+              - definition [ref=e489]:
+                - generic [ref=e490]: 29 个
+                - code [ref=e491]: minus、eye-on、eye-off、filter、sort、fullscreen、fullscreen-exit、printer、info、circle-question、history、message、password、id-card、logout、home、language、screenshot、wifi、cloud、database、terminal、cpu、pin、zoom-in、zoom-out、drag、save、export
+            - generic [ref=e492]:
+              - term [ref=e493]: 去重合计
+              - definition [ref=e494]:
+                - generic [ref=e495]: 69 个
+                - generic [ref=e496]: 别名按独立可用名称计数，动效复用标准图形。
+          - heading "新增图标 Permalink to \"新增图标\"" [level=2] [ref=e497]:
+            - text: 新增图标
+            - link "Permalink to \"新增图标\"" [ref=e498] [cursor=pointer]:
+              - /url: "#新增图标"
+              - text: "#"
+          - paragraph [ref=e499]:
+            - text: 在
+            - code [ref=e500]: src/components/LxIcon/icons.ts
+            - text: 的
+            - code [ref=e501]: LX_ICONS
+            - text: 中按组追加图形，键为 kebab-case 名称，值为 24×24 viewBox 的 SVG path 数组。仅当设计或业务契约存在同义旧名称时，才在
+            - code [ref=e502]: LX_ICON_ALIASES
+            - text: 中映射到标准图形；
+            - code [ref=e503]: LxIconName
+            - text: 和本页总览会同时包含标准键与别名。
+          - heading "兼容别名 Permalink to \"兼容别名\"" [level=2] [ref=e504]:
+            - text: 兼容别名
+            - link "Permalink to \"兼容别名\"" [ref=e505] [cursor=pointer]:
+              - /url: "#兼容别名"
+              - text: "#"
+          - region "兼容别名对应关系" [ref=e506]:
+            - table [ref=e507]:
+              - rowgroup [ref=e508]:
+                - row "名称 标准图形 来源 说明" [ref=e509]:
+                  - columnheader "名称" [ref=e510]
+                  - columnheader "标准图形" [ref=e511]
+                  - columnheader "来源" [ref=e512]
+                  - columnheader "说明" [ref=e513]
+              - rowgroup [ref=e514]:
+                - row "date calendar P1 清单 保留设计文档名称，复用已有日历图形。" [ref=e515]:
+                  - cell "date" [ref=e516]:
+                    - code [ref=e517]: date
+                  - cell "calendar" [ref=e518]:
+                    - code [ref=e519]: calendar
+                  - cell "P1 清单" [ref=e520]
+                  - cell "保留设计文档名称，复用已有日历图形。" [ref=e521]
+                - row "eye-on eye 29 枚清单 与现有可见状态图形同义，避免新增重复路径。" [ref=e522]:
+                  - cell "eye-on" [ref=e523]:
+                    - code [ref=e524]: eye-on
+                  - cell "eye" [ref=e525]:
+                    - code [ref=e526]: eye
+                  - cell "29 枚清单" [ref=e527]
+                  - cell "与现有可见状态图形同义，避免新增重复路径。" [ref=e528]
+          - paragraph [ref=e529]:
+            - text: 业务存量值
+            - code [ref=e530]: calendar
+            - text: 、
+            - code [ref=e531]: eye
+            - text: 仍可照常使用；别名不会改变它们的序列化值。
+      - contentinfo [ref=e532]:
+        - navigation "Pager" [ref=e533]:
+          - generic [ref=e534]: Pager
+          - link "Previous page LxButton 按钮" [ref=e536] [cursor=pointer]:
+            - /url: /components/lxbutton.html
+            - generic [ref=e537]: Previous page
+            - generic [ref=e538]: LxButton 按钮
+          - link "Next page LxSidebar 侧边栏" [ref=e540] [cursor=pointer]:
+            - /url: /components/lxsidebar.html
+            - generic [ref=e541]: Next page
+            - generic [ref=e542]: LxSidebar 侧边栏
+```

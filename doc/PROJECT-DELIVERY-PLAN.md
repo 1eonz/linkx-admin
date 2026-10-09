@@ -1,11 +1,25 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-10 Wave 9 / LxUpload 回灌 UID 与公开 abort 回归完成
+
+- 已确认 fallback UID 在父级回灌后仍可由公开 `abort(file?)` 精确定位；新增组合回归，验证请求取消、队列复位和受控值保持一致。
+- LxUpload 单测 **38/38**；文档 E2E 前 7 项通过，服务中途断开导致第 8、9 项连接拒绝，两个受影响用例随后单独重跑 **2/2** 通过，合计证据 **9/9**。
+- 交接记录见 `.impeccable/critique/wave9-upload-2026-10-10/agent-notes.md`；真实协议、AbortSignal 和业务页面替换继续留在 UI-04/迁移波次。下一入口为 `LxDescriptions`、`LxVirtualTree` 当前版正式复验。
+
 ## 2026-10-10 G2 / LxSearchBar + LxStatusSwitch 正式收口
 
-- **LxSearchBar**：已补 `role=search`、loading 的 `aria-busy`、折叠按钮字段数量提示、移动端 44px 触控高度和减少动效降级；单测 8/8、文档 E2E 3/3，类型检查、目标格式检查通过。修后 Assessment A **25/40**；Assessment B 三个 detector 均为有效 JSON `[]`、stderr 为空、退出码 0，并完成浅色/HUD、1440/375px、减少动效和交互浏览器证据。375px 整页 `scrollWidth=615` 仅由文档 API 表格/代码区域产生，组件自身无横向溢出，列为文档壳层 P2。
+- **本轮修复**：StatusSwitch 确认配置新增 `impact`、`audit`，Demo 展示核心节点、影响范围和不可篡改审计提示；loading、只读和无权限行补齐 `aria-labelledby`/`aria-describedby`，只读标签保留行级关联。SearchBar Demo 新增四字段标准态，明确桌面同行、窄屏单列，并移除工具栏与 `meta` 的重复等待状态。
+- **独立证据**：Assessment A/B 已完成并写入 `.impeccable/critique/g2-complete-2026-10-10/recheck-assessment-a/report.md`、`recheck-assessment-b/report.md`；B 六个 detector 均为合法 `[]`、stderr 为空、exit 0，浏览器 overlay、Teleport、HUD、ARIA 和 375px 证据齐备。综合报告见 `.impeccable/critique/g2-complete-2026-10-10/recheck-final/report.md`，SearchBar 与 StatusSwitch 正式 snapshot 分别为 `.impeccable/critique/2026-10-09T19-51-41Z__linkx-fe-src-components-lxsearchbar-index-vue.md` 和 `.impeccable/critique/2026-10-09T19-51-41Z__linkx-fe-src-components-lxstatusswitch-index-vue.md`；trend 查询均返回 `39/40` 非空记录。
+- **验证**：定向单测 `26/26`，`linkx-fe` `vue-tsc --noEmit`、203 模块库构建、VitePress 文档构建、目标 ESLint、目标文件 Prettier、StatusSwitch E2E `4/4`、SearchBar E2E `3/3` 和 `git diff --check` 均通过。API 请求与 Demo Mock 继续保持 `.then().catch().finally()`。独立代码复审无 P0-P2，仅发现并确认旧文档计数已同步为 `9/9`。
+- **正式结论**：G2 以 `39/40` 收口，P0/P1/P2/P3 为 0；detector `[]` 仅记录静态零命中，正式结论同时依赖独立 A/B、浏览器 overlay、stderr、退出码、快照和趋势证据。VitePress 文档壳长行与复制按钮提示列为观察项，不回写为组件缺陷。
+- **下一步**：按用户新增反馈先修复并复验 `LxTransferPanel` 选择框尺寸；该修复完成后进入 `LxDescriptions`、`LxVirtualTree` 当前版正式 A/B。
+
+## 2026-10-10 G2 / LxSearchBar + LxStatusSwitch 阶段性复核（历史记录）
+
+- **LxSearchBar**：已补 `role=search`、loading 的 `aria-busy`、折叠按钮字段数量提示、移动端 44px 触控高度和减少动效降级；单测 8/8、文档 E2E 3/3，类型检查、目标格式检查通过。G2 Assessment A 报告为浏览器不可启动的降级评审，评分 **31/40（Good）**；Assessment B 的 detector JSON `[]`/空 stderr/退出码 0 只说明静态规则零命中，浏览器截图和 DOM 证据已保存，但 overlay 注入未稳定完成，不能据此登记正式视觉通过。报告见 `.impeccable/critique/g2-complete-2026-10-10/assessment-a/report.md` 与 `assessment-b/report.md`。
 - **LxStatusSwitch**：已补确认等待期间 modelValue 版本、loading/disabled/权限撤销竞态隔离、loading `aria-busy`、只读/无权限 `aria-disabled`；单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6，类型、Prettier 和 ESLint 已通过。确认、取消、失败重试、Space 键盘、0/1 映射和原地权限源变化均有回归。
-- **正式审查**：独立代码复审修后无 P0/P1/P2，SearchBar ARIA/隐藏数量单测增强保留为 P3；综合报告为 `.impeccable/critique/wave8-searchbar-2026-10-10/final-report.md`，snapshot 为 `.impeccable/critique/2026-10-09T18-16-30Z__linkx-fe-src-components-lxsearchbar-index-vue.md`，trend 为 25/40 → 25/40。
-- **边界与下一步**：G2 已关闭，自动进入下一波组件库候选；在全库 UI-10 严格矩阵和 Vue3 页面迁移门禁完成前，继续保留 Vue3 宿主 `element-plus`，权限中心、字段权限和引导页按既定计划延后。
+- **审查结论**：本轮仅形成阶段性/降级 A/B 证据，没有可用的 G2 综合报告、snapshot/trend，也没有完成 overlay 复验；不能把 detector `[]`、构建或 Mock E2E 记作正式 Critique 通过。A/B 报告登记的 P1 为 SearchBar 四字段操作行与设计稿不一致、StatusSwitch HUD 与 Teleport 确认层可能脱节；P2 为 SearchBar 无 `meta` 时结果/错误状态不可见、StatusSwitch 行名未进入可访问名称、375px 复杂状态和确认/失败/只读路径缺少完整实图证据，以及文档页资源 404 待归因。
+- **边界与下一步**：G2 保持开放，先修复或明确 P1/P2，再用可启动浏览器完成独立 A/B、overlay、综合报告和 snapshot/trend；在全库 UI-10 严格矩阵和 Vue3 页面迁移门禁完成前，继续保留 Vue3 宿主 `element-plus`，权限中心、字段权限和引导页按既定计划延后。
 
 ## 2026-10-10 Wave 7 / LxTransferPanel 正式收口
 

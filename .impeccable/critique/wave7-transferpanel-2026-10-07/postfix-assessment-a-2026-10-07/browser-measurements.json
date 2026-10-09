@@ -1,0 +1,6073 @@
+{
+  "assessment": "Assessment A 独立视觉与交互评审采集",
+  "capturedAt": "2026-10-07T15:26:31.740Z",
+  "target": "http://127.0.0.1:4174/components/lxtransferpanel",
+  "browser": {
+    "name": "Chromium via @playwright/test",
+    "version": "154.0.8037.95",
+    "executablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+  },
+  "isolation": {
+    "newBrowser": true,
+    "newContext": true,
+    "newPage": true,
+    "existingTabsReused": false,
+    "detectorCalled": false
+  },
+  "screenshots": [
+    "screenshots/page-1440-light.png",
+    "screenshots/demo-1440-light.png",
+    "screenshots/page-1280-light.png",
+    "screenshots/demo-375-light.png",
+    "screenshots/page-375-light.png",
+    "screenshots/filter-cap-375.png",
+    "screenshots/filter-all-selected-1440.png",
+    "screenshots/filter-cap-1440.png",
+    "screenshots/keyboard-focus-1440.png",
+    "screenshots/state-loading-1440.png",
+    "screenshots/state-error-1440.png",
+    "screenshots/state-error-375.png",
+    "screenshots/state-empty-tree-1440.png",
+    "screenshots/demo-1440-hud.png",
+    "screenshots/demo-375-hud.png",
+    "screenshots/demo-375-hud-reduced-motion.png"
+  ],
+  "measurements": [
+    {
+      "httpStatus": 200,
+      "title": "LxTransferPanel 双栏穿梭 | LxUI",
+      "independentContext": true,
+      "reusedPage": false
+    },
+    {
+      "label": "桌面 1440 浅色初始状态",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 1440
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 64,
+          "right": 1440,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 272,
+          "height": 1000,
+          "right": 272,
+          "bottom": 1000
+        },
+        "article": {
+          "x": 336,
+          "y": 112,
+          "width": 880,
+          "height": 4916.1,
+          "right": 1216,
+          "bottom": 5028.1
+        },
+        "localAside": {
+          "x": 1248,
+          "y": 112,
+          "width": 160,
+          "height": 5044.1,
+          "right": 1408,
+          "bottom": 5156.1
+        },
+        "docContainer": {
+          "x": 304,
+          "y": 112,
+          "width": 1104,
+          "height": 5044.1,
+          "right": 1408,
+          "bottom": 5156.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": true,
+      "demo": {
+        "x": 336,
+        "y": 347,
+        "width": 880,
+        "height": 631,
+        "right": 1216,
+        "bottom": 978
+      },
+      "transfer": {
+        "x": 336,
+        "y": 516,
+        "width": 880,
+        "height": 380,
+        "right": 1216,
+        "bottom": 896
+      },
+      "transferColumnCount": "356.656px 142.672px 356.672px",
+      "panelRects": [
+        {
+          "x": 336,
+          "y": 516,
+          "width": 356.7,
+          "height": 380,
+          "right": 692.7,
+          "bottom": 896
+        },
+        {
+          "x": 859.3,
+          "y": 516,
+          "width": 356.7,
+          "height": 380,
+          "right": 1216,
+          "bottom": 896
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 349,
+          "y": 522.5,
+          "width": 330.7,
+          "height": 24,
+          "right": 679.7,
+          "bottom": 546.5
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 349,
+          "y": 522.5,
+          "width": 330.7,
+          "height": 24,
+          "right": 679.7,
+          "bottom": 546.5
+        },
+        "actions": null,
+        "actionButtons": [],
+        "statusText": null,
+        "titleAndActionsOnSeparateRows": false
+      },
+      "filters": {
+        "sourceValue": "",
+        "sourceClearVisible": false,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": false
+        },
+        "filteredActions": []
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 21
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 263,
+          "scrollHeight": 45440,
+          "scrollTop": 0,
+          "scrollable": true
+        },
+        "selected": {
+          "clientHeight": 265,
+          "scrollHeight": 265,
+          "scrollable": false
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 611,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 635
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 198,
+            "scrollWidth": 198,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 657,
+              "width": 197.5,
+              "height": 24,
+              "right": 1074.9,
+              "bottom": 681
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 187,
+            "scrollWidth": 187,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 703,
+              "width": 186.5,
+              "height": 24,
+              "right": 1063.9,
+              "bottom": 727
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 749,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 773
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 791,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 815
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          34,
+          34,
+          34,
+          34,
+          58
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "已载入组织权限数据",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "SUMMARY",
+        "ariaLabel": null,
+        "text": "示例状态与主题",
+        "className": "",
+        "outlineWidth": "3px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 337,
+          "y": 364,
+          "width": 878,
+          "height": 41,
+          "right": 1215,
+          "bottom": 405
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "桌面 1280 浅色初始状态",
+      "viewport": {
+        "width": 1280,
+        "height": 900,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 1280
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 64,
+          "right": 1280,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 272,
+          "height": 900,
+          "right": 272,
+          "bottom": 900
+        },
+        "article": {
+          "x": 336,
+          "y": 112,
+          "width": 720,
+          "height": 5329.1,
+          "right": 1056,
+          "bottom": 5441.1
+        },
+        "localAside": {
+          "x": 1088,
+          "y": 112,
+          "width": 160,
+          "height": 5457.1,
+          "right": 1248,
+          "bottom": 5569.1
+        },
+        "docContainer": {
+          "x": 304,
+          "y": 112,
+          "width": 944,
+          "height": 5457.1,
+          "right": 1248,
+          "bottom": 5569.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": true,
+      "demo": {
+        "x": 336,
+        "y": 375,
+        "width": 720,
+        "height": 631,
+        "right": 1056,
+        "bottom": 1006
+      },
+      "transfer": {
+        "x": 336,
+        "y": 544,
+        "width": 720,
+        "height": 380,
+        "right": 1056,
+        "bottom": 924
+      },
+      "transferColumnCount": "290px 116px 290px",
+      "panelRects": [
+        {
+          "x": 336,
+          "y": 544,
+          "width": 290,
+          "height": 380,
+          "right": 626,
+          "bottom": 924
+        },
+        {
+          "x": 766,
+          "y": 544,
+          "width": 290,
+          "height": 380,
+          "right": 1056,
+          "bottom": 924
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 349,
+          "y": 550.5,
+          "width": 264,
+          "height": 24,
+          "right": 613,
+          "bottom": 574.5
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 349,
+          "y": 550.5,
+          "width": 264,
+          "height": 24,
+          "right": 613,
+          "bottom": 574.5
+        },
+        "actions": null,
+        "actionButtons": [],
+        "statusText": null,
+        "titleAndActionsOnSeparateRows": false
+      },
+      "filters": {
+        "sourceValue": "",
+        "sourceClearVisible": false,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": false
+        },
+        "filteredActions": []
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 21
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 263,
+          "scrollHeight": 45440,
+          "scrollTop": 0,
+          "scrollable": true
+        },
+        "selected": {
+          "clientHeight": 265,
+          "scrollHeight": 286,
+          "scrollable": true
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 137,
+            "scrollWidth": 137,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 784,
+              "y": 639,
+              "width": 137.3,
+              "height": 24,
+              "right": 921.3,
+              "bottom": 663
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 131,
+            "scrollWidth": 154,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 784,
+              "y": 685,
+              "width": 130.9,
+              "height": 24,
+              "right": 914.9,
+              "bottom": 709
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 120,
+            "scrollWidth": 120,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 784,
+              "y": 731,
+              "width": 119.9,
+              "height": 24,
+              "right": 903.9,
+              "bottom": 755
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 137,
+            "scrollWidth": 142,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 784,
+              "y": 777,
+              "width": 137.3,
+              "height": 24,
+              "right": 921.3,
+              "bottom": 801
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 214,
+            "scrollWidth": 214,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 784,
+              "y": 819,
+              "width": 214,
+              "height": 24,
+              "right": 998,
+              "bottom": 843
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          34,
+          34,
+          34,
+          34,
+          86
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "已载入组织权限数据",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "SUMMARY",
+        "ariaLabel": null,
+        "text": "示例状态与主题",
+        "className": "",
+        "outlineWidth": "3px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 337,
+          "y": 392,
+          "width": 718,
+          "height": 41,
+          "right": 1055,
+          "bottom": 433
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "移动端 375 浅色初始状态",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 375,
+        "scrollWidth": 375,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 375
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 64,
+          "right": 375,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 311,
+          "height": 812,
+          "right": 311,
+          "bottom": 812
+        },
+        "article": {
+          "x": 24,
+          "y": 144,
+          "width": 327,
+          "height": 7490.1,
+          "right": 351,
+          "bottom": 7634.1
+        },
+        "localAside": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "docContainer": {
+          "x": 24,
+          "y": 144,
+          "width": 327,
+          "height": 7490.1,
+          "right": 351,
+          "bottom": 7634.1
+        }
+      },
+      "navClearOfArticle": false,
+      "articleClearOfAside": false,
+      "demo": {
+        "x": 24,
+        "y": 493,
+        "width": 327,
+        "height": 1193,
+        "right": 351,
+        "bottom": 1686
+      },
+      "transfer": {
+        "x": 24,
+        "y": 720,
+        "width": 327,
+        "height": 840,
+        "right": 351,
+        "bottom": 1560
+      },
+      "transferColumnCount": "327px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 720,
+          "width": 327,
+          "height": 380,
+          "right": 351,
+          "bottom": 1100
+        },
+        {
+          "x": 24,
+          "y": 1180,
+          "width": 327,
+          "height": 380,
+          "right": 351,
+          "bottom": 1560
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 37,
+          "y": 730.5,
+          "width": 301,
+          "height": 24,
+          "right": 338,
+          "bottom": 754.5
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 37,
+          "y": 730.5,
+          "width": 301,
+          "height": 24,
+          "right": 338,
+          "bottom": 754.5
+        },
+        "actions": null,
+        "actionButtons": [],
+        "statusText": null,
+        "titleAndActionsOnSeparateRows": false
+      },
+      "filters": {
+        "sourceValue": "",
+        "sourceClearVisible": false,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": false
+        },
+        "filteredActions": []
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 21
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 255,
+          "scrollHeight": 45440,
+          "scrollTop": 0,
+          "scrollable": true
+        },
+        "selected": {
+          "clientHeight": 257,
+          "scrollHeight": 334,
+          "scrollable": true
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 162,
+            "scrollWidth": 162,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1289,
+              "width": 162.3,
+              "height": 24,
+              "right": 204.3,
+              "bottom": 1313
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 156,
+            "scrollWidth": 156,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1347,
+              "width": 155.9,
+              "height": 24,
+              "right": 197.9,
+              "bottom": 1371
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 145,
+            "scrollWidth": 145,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1405,
+              "width": 144.9,
+              "height": 24,
+              "right": 186.9,
+              "bottom": 1429
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 162,
+            "scrollWidth": 162,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1463,
+              "width": 162.3,
+              "height": 24,
+              "right": 204.3,
+              "bottom": 1487
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 239,
+            "scrollWidth": 239,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1511,
+              "width": 239,
+              "height": 24,
+              "right": 281,
+              "bottom": 1535
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          46,
+          46,
+          46,
+          46,
+          86
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "已载入组织权限数据",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "SUMMARY",
+        "ariaLabel": null,
+        "text": "示例状态与主题",
+        "className": "",
+        "outlineWidth": "3px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 25,
+          "y": 510,
+          "width": 325,
+          "height": 41,
+          "right": 350,
+          "bottom": 551
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "移动端 375 筛选结果受选择上限限制",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 375,
+        "scrollWidth": 375,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 375
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": -493,
+          "width": 375,
+          "height": 64,
+          "right": 375,
+          "bottom": -429
+        },
+        "leftSidebar": {
+          "x": -311,
+          "y": 0,
+          "width": 311,
+          "height": 812,
+          "right": 0,
+          "bottom": 812
+        },
+        "article": {
+          "x": 24,
+          "y": -349,
+          "width": 327,
+          "height": 7490.1,
+          "right": 351,
+          "bottom": 7141.1
+        },
+        "localAside": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "docContainer": {
+          "x": 24,
+          "y": -349,
+          "width": 327,
+          "height": 7490.1,
+          "right": 351,
+          "bottom": 7141.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": false,
+      "demo": {
+        "x": 24,
+        "y": 0,
+        "width": 327,
+        "height": 1193,
+        "right": 351,
+        "bottom": 1193
+      },
+      "transfer": {
+        "x": 24,
+        "y": 227,
+        "width": 327,
+        "height": 840,
+        "right": 351,
+        "bottom": 1067
+      },
+      "transferColumnCount": "327px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 227,
+          "width": 327,
+          "height": 380,
+          "right": 351,
+          "bottom": 607
+        },
+        {
+          "x": 24,
+          "y": 687,
+          "width": 327,
+          "height": 380,
+          "right": 351,
+          "bottom": 1067
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 37,
+          "y": 232,
+          "width": 301,
+          "height": 24,
+          "right": 338,
+          "bottom": 256
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 37,
+          "y": 232,
+          "width": 301,
+          "height": 68,
+          "right": 338,
+          "bottom": 300
+        },
+        "actions": {
+          "x": 37,
+          "y": 256,
+          "width": 173.1,
+          "height": 44,
+          "right": 210.1,
+          "bottom": 300
+        },
+        "actionButtons": [
+          {
+            "label": "全选筛选结果",
+            "disabled": true,
+            "rect": {
+              "x": 37,
+              "y": 256,
+              "width": 80,
+              "height": 44,
+              "right": 117,
+              "bottom": 300
+            }
+          },
+          {
+            "label": "反选筛选结果",
+            "disabled": true,
+            "rect": {
+              "x": 130.1,
+              "y": 256,
+              "width": 80,
+              "height": 44,
+              "right": 210.1,
+              "bottom": 300
+            }
+          }
+        ],
+        "statusText": "达到选择上限：筛选结果有 1 项未选，当前可再选 0 项",
+        "titleAndActionsOnSeparateRows": true
+      },
+      "filters": {
+        "sourceValue": "待授权特勤支队",
+        "sourceClearVisible": true,
+        "sourceFocus": true
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": true
+        },
+        "filteredActions": [
+          {
+            "ariaLabel": "全选筛选结果",
+            "title": "选择名称匹配筛选文本的节点",
+            "hasVisibleInlineReason": true
+          },
+          {
+            "ariaLabel": "反选筛选结果",
+            "title": "只反转名称匹配筛选文本的节点",
+            "hasVisibleInlineReason": true
+          }
+        ]
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 2
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 206,
+          "scrollHeight": 206,
+          "scrollTop": 0,
+          "scrollable": false
+        },
+        "selected": {
+          "clientHeight": 257,
+          "scrollHeight": 334,
+          "scrollable": true
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 162,
+            "scrollWidth": 162,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 796,
+              "width": 162.3,
+              "height": 24,
+              "right": 204.3,
+              "bottom": 820
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 156,
+            "scrollWidth": 156,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 854,
+              "width": 155.9,
+              "height": 24,
+              "right": 197.9,
+              "bottom": 878
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 145,
+            "scrollWidth": 145,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 912,
+              "width": 144.9,
+              "height": 24,
+              "right": 186.9,
+              "bottom": 936
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 162,
+            "scrollWidth": 162,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 970,
+              "width": 162.3,
+              "height": 24,
+              "right": 204.3,
+              "bottom": 994
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 239,
+            "scrollWidth": 239,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1018,
+              "width": 239,
+              "height": 24,
+              "right": 281,
+              "bottom": 1042
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          46,
+          46,
+          46,
+          46,
+          86
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "已载入组织权限数据",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".lx-transfer-panel__header-status[0]",
+          "text": "达到选择上限：筛选结果有 1 项未选，当前可再选 0 项",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(245, 247, 250)",
+          "ratio": 5.69
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "INPUT",
+        "ariaLabel": "筛选待选节点",
+        "text": "",
+        "className": "",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 51,
+          "y": 331,
+          "width": 243,
+          "height": 24,
+          "right": 294,
+          "bottom": 355
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "lx-transfer-panel__node-key",
+          "transitionDuration": "0.25s, 0.5s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "el-checkbox__inner",
+          "transitionDuration": "0.25s, 0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "筛选结果已全部选择",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 1440
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 64,
+          "right": 1440,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": -257.9,
+          "y": 0,
+          "width": 272,
+          "height": 1000,
+          "right": 14.1,
+          "bottom": 1000
+        },
+        "article": {
+          "x": 336,
+          "y": -381,
+          "width": 880,
+          "height": 5083.1,
+          "right": 1216,
+          "bottom": 4702.1
+        },
+        "localAside": {
+          "x": 1248,
+          "y": -381,
+          "width": 160,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 4830.1
+        },
+        "docContainer": {
+          "x": 304,
+          "y": -381,
+          "width": 1104,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 4830.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": true,
+      "demo": {
+        "x": 336,
+        "y": -146,
+        "width": 880,
+        "height": 631,
+        "right": 1216,
+        "bottom": 485
+      },
+      "transfer": {
+        "x": 336,
+        "y": 23,
+        "width": 880,
+        "height": 380,
+        "right": 1216,
+        "bottom": 403
+      },
+      "transferColumnCount": "356.656px 142.672px 356.672px",
+      "panelRects": [
+        {
+          "x": 336,
+          "y": 23,
+          "width": 356.7,
+          "height": 380,
+          "right": 692.7,
+          "bottom": 403
+        },
+        {
+          "x": 859.3,
+          "y": 23,
+          "width": 356.7,
+          "height": 380,
+          "right": 1216,
+          "bottom": 403
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 349,
+          "y": 30,
+          "width": 149.5,
+          "height": 24,
+          "right": 498.5,
+          "bottom": 54
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 349,
+          "y": 28,
+          "width": 330.7,
+          "height": 28,
+          "right": 679.7,
+          "bottom": 56
+        },
+        "actions": {
+          "x": 506.5,
+          "y": 28,
+          "width": 173.1,
+          "height": 28,
+          "right": 679.7,
+          "bottom": 56
+        },
+        "actionButtons": [
+          {
+            "label": "全选筛选结果",
+            "disabled": true,
+            "rect": {
+              "x": 506.5,
+              "y": 28,
+              "width": 80,
+              "height": 28,
+              "right": 586.5,
+              "bottom": 56
+            }
+          },
+          {
+            "label": "反选筛选结果",
+            "disabled": false,
+            "rect": {
+              "x": 599.7,
+              "y": 28,
+              "width": 80,
+              "height": 28,
+              "right": 679.7,
+              "bottom": 56
+            }
+          }
+        ],
+        "statusText": "筛选结果已全部选择，共 1 项",
+        "titleAndActionsOnSeparateRows": true
+      },
+      "filters": {
+        "sourceValue": "交警直属特勤",
+        "sourceClearVisible": true,
+        "sourceFocus": true
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": true
+        },
+        "filteredActions": [
+          {
+            "ariaLabel": "全选筛选结果",
+            "title": "选择名称匹配筛选文本的节点",
+            "hasVisibleInlineReason": true
+          }
+        ]
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 2
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 246,
+          "scrollHeight": 246,
+          "scrollTop": 0,
+          "scrollable": false
+        },
+        "selected": {
+          "clientHeight": 265,
+          "scrollHeight": 265,
+          "scrollable": false
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 118,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 142
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 198,
+            "scrollWidth": 198,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 164,
+              "width": 197.5,
+              "height": 24,
+              "right": 1074.9,
+              "bottom": 188
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 187,
+            "scrollWidth": 187,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 210,
+              "width": 186.5,
+              "height": 24,
+              "right": 1063.9,
+              "bottom": 234
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 256,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 280
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 298,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 322
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          34,
+          34,
+          34,
+          34,
+          58
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "已载入组织权限数据",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".lx-transfer-panel__header-status[0]",
+          "text": "筛选结果已全部选择，共 1 项",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(245, 247, 250)",
+          "ratio": 5.69
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "INPUT",
+        "ariaLabel": "筛选待选节点",
+        "text": "",
+        "className": "",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 363,
+          "y": 87,
+          "width": 292.7,
+          "height": 24,
+          "right": 655.7,
+          "bottom": 111
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "lx-transfer-panel__node-key",
+          "transitionDuration": "0.25s, 0.5s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "el-checkbox__inner",
+          "transitionDuration": "0.25s, 0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "筛选结果受选择上限限制",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 1440
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 64,
+          "right": 1440,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 272,
+          "height": 1000,
+          "right": 272,
+          "bottom": 1000
+        },
+        "article": {
+          "x": 336,
+          "y": -235,
+          "width": 880,
+          "height": 5083.1,
+          "right": 1216,
+          "bottom": 4848.1
+        },
+        "localAside": {
+          "x": 1248,
+          "y": -235,
+          "width": 160,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 4976.1
+        },
+        "docContainer": {
+          "x": 304,
+          "y": -235,
+          "width": 1104,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 4976.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": true,
+      "demo": {
+        "x": 336,
+        "y": 0,
+        "width": 880,
+        "height": 631,
+        "right": 1216,
+        "bottom": 631
+      },
+      "transfer": {
+        "x": 336,
+        "y": 169,
+        "width": 880,
+        "height": 380,
+        "right": 1216,
+        "bottom": 549
+      },
+      "transferColumnCount": "356.656px 142.672px 356.672px",
+      "panelRects": [
+        {
+          "x": 336,
+          "y": 169,
+          "width": 356.7,
+          "height": 380,
+          "right": 692.7,
+          "bottom": 549
+        },
+        {
+          "x": 859.3,
+          "y": 169,
+          "width": 356.7,
+          "height": 380,
+          "right": 1216,
+          "bottom": 549
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 349,
+          "y": 176,
+          "width": 149.5,
+          "height": 24,
+          "right": 498.5,
+          "bottom": 200
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 349,
+          "y": 174,
+          "width": 330.7,
+          "height": 28,
+          "right": 679.7,
+          "bottom": 202
+        },
+        "actions": {
+          "x": 506.5,
+          "y": 174,
+          "width": 173.1,
+          "height": 28,
+          "right": 679.7,
+          "bottom": 202
+        },
+        "actionButtons": [
+          {
+            "label": "全选筛选结果",
+            "disabled": true,
+            "rect": {
+              "x": 506.5,
+              "y": 174,
+              "width": 80,
+              "height": 28,
+              "right": 586.5,
+              "bottom": 202
+            }
+          },
+          {
+            "label": "反选筛选结果",
+            "disabled": true,
+            "rect": {
+              "x": 599.7,
+              "y": 174,
+              "width": 80,
+              "height": 28,
+              "right": 679.7,
+              "bottom": 202
+            }
+          }
+        ],
+        "statusText": "达到选择上限：筛选结果有 1 项未选，当前可再选 0 项",
+        "titleAndActionsOnSeparateRows": true
+      },
+      "filters": {
+        "sourceValue": "待授权特勤支队",
+        "sourceClearVisible": true,
+        "sourceFocus": true
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": true
+        },
+        "filteredActions": [
+          {
+            "ariaLabel": "全选筛选结果",
+            "title": "选择名称匹配筛选文本的节点",
+            "hasVisibleInlineReason": true
+          },
+          {
+            "ariaLabel": "反选筛选结果",
+            "title": "只反转名称匹配筛选文本的节点",
+            "hasVisibleInlineReason": true
+          }
+        ]
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 2
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 246,
+          "scrollHeight": 246,
+          "scrollTop": 0,
+          "scrollable": false
+        },
+        "selected": {
+          "clientHeight": 265,
+          "scrollHeight": 265,
+          "scrollable": false
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 264,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 288
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 198,
+            "scrollWidth": 198,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 310,
+              "width": 197.5,
+              "height": 24,
+              "right": 1074.9,
+              "bottom": 334
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 187,
+            "scrollWidth": 187,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 356,
+              "width": 186.5,
+              "height": 24,
+              "right": 1063.9,
+              "bottom": 380
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 402,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 426
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 444,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 468
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          34,
+          34,
+          34,
+          34,
+          58
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "已载入组织权限数据",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".lx-transfer-panel__header-status[0]",
+          "text": "达到选择上限：筛选结果有 1 项未选，当前可再选 0 项",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(245, 247, 250)",
+          "ratio": 5.69
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "INPUT",
+        "ariaLabel": "筛选待选节点",
+        "text": "",
+        "className": "",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 363,
+          "y": 233,
+          "width": 292.7,
+          "height": 24,
+          "right": 655.7,
+          "bottom": 257
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "lx-transfer-panel__node-key",
+          "transitionDuration": "0.25s, 0.5s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "el-checkbox__inner",
+          "transitionDuration": "0.25s, 0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "键盘 Tab 聚焦筛选清除按钮",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 1440
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 64,
+          "right": 1440,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 272,
+          "height": 1000,
+          "right": 272,
+          "bottom": 1000
+        },
+        "article": {
+          "x": 336,
+          "y": -235,
+          "width": 880,
+          "height": 5083.1,
+          "right": 1216,
+          "bottom": 4848.1
+        },
+        "localAside": {
+          "x": 1248,
+          "y": -235,
+          "width": 160,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 4976.1
+        },
+        "docContainer": {
+          "x": 304,
+          "y": -235,
+          "width": 1104,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 4976.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": true,
+      "demo": {
+        "x": 336,
+        "y": 0,
+        "width": 880,
+        "height": 631,
+        "right": 1216,
+        "bottom": 631
+      },
+      "transfer": {
+        "x": 336,
+        "y": 169,
+        "width": 880,
+        "height": 380,
+        "right": 1216,
+        "bottom": 549
+      },
+      "transferColumnCount": "356.656px 142.672px 356.672px",
+      "panelRects": [
+        {
+          "x": 336,
+          "y": 169,
+          "width": 356.7,
+          "height": 380,
+          "right": 692.7,
+          "bottom": 549
+        },
+        {
+          "x": 859.3,
+          "y": 169,
+          "width": 356.7,
+          "height": 380,
+          "right": 1216,
+          "bottom": 549
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 349,
+          "y": 176,
+          "width": 149.5,
+          "height": 24,
+          "right": 498.5,
+          "bottom": 200
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 349,
+          "y": 174,
+          "width": 330.7,
+          "height": 28,
+          "right": 679.7,
+          "bottom": 202
+        },
+        "actions": {
+          "x": 506.5,
+          "y": 174,
+          "width": 173.1,
+          "height": 28,
+          "right": 679.7,
+          "bottom": 202
+        },
+        "actionButtons": [
+          {
+            "label": "全选筛选结果",
+            "disabled": true,
+            "rect": {
+              "x": 506.5,
+              "y": 174,
+              "width": 80,
+              "height": 28,
+              "right": 586.5,
+              "bottom": 202
+            }
+          },
+          {
+            "label": "反选筛选结果",
+            "disabled": false,
+            "rect": {
+              "x": 599.7,
+              "y": 174,
+              "width": 80,
+              "height": 28,
+              "right": 679.7,
+              "bottom": 202
+            }
+          }
+        ],
+        "statusText": "筛选结果已全部选择，共 1 项",
+        "titleAndActionsOnSeparateRows": true
+      },
+      "filters": {
+        "sourceValue": "交警直属特勤",
+        "sourceClearVisible": true,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": true
+        },
+        "filteredActions": [
+          {
+            "ariaLabel": "全选筛选结果",
+            "title": "选择名称匹配筛选文本的节点",
+            "hasVisibleInlineReason": true
+          }
+        ]
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 2
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 246,
+          "scrollHeight": 246,
+          "scrollTop": 0,
+          "scrollable": false
+        },
+        "selected": {
+          "clientHeight": 265,
+          "scrollHeight": 265,
+          "scrollable": false
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 264,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 288
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 198,
+            "scrollWidth": 198,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 310,
+              "width": 197.5,
+              "height": 24,
+              "right": 1074.9,
+              "bottom": 334
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 187,
+            "scrollWidth": 187,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 356,
+              "width": 186.5,
+              "height": 24,
+              "right": 1063.9,
+              "bottom": 380
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 402,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 426
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 444,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 468
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          34,
+          34,
+          34,
+          34,
+          58
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "已载入组织权限数据",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".lx-transfer-panel__header-status[0]",
+          "text": "筛选结果已全部选择，共 1 项",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(245, 247, 250)",
+          "ratio": 5.69
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "BUTTON",
+        "ariaLabel": "清除待选节点筛选",
+        "text": "",
+        "className": "",
+        "outlineWidth": "2px",
+        "outlineStyle": "solid",
+        "outlineOffset": "1px",
+        "rect": {
+          "x": 659.7,
+          "y": 233,
+          "width": 24,
+          "height": 24,
+          "right": 683.7,
+          "bottom": 257
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "lx-transfer-panel__node-key",
+          "transitionDuration": "0.25s, 0.5s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "el-checkbox__inner",
+          "transitionDuration": "0.25s, 0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "键盘 Tab 聚焦反选筛选结果",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 1440
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 64,
+          "right": 1440,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 272,
+          "height": 1000,
+          "right": 272,
+          "bottom": 1000
+        },
+        "article": {
+          "x": 336,
+          "y": -235,
+          "width": 880,
+          "height": 5083.1,
+          "right": 1216,
+          "bottom": 4848.1
+        },
+        "localAside": {
+          "x": 1248,
+          "y": -235,
+          "width": 160,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 4976.1
+        },
+        "docContainer": {
+          "x": 304,
+          "y": -235,
+          "width": 1104,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 4976.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": true,
+      "demo": {
+        "x": 336,
+        "y": 0,
+        "width": 880,
+        "height": 631,
+        "right": 1216,
+        "bottom": 631
+      },
+      "transfer": {
+        "x": 336,
+        "y": 169,
+        "width": 880,
+        "height": 380,
+        "right": 1216,
+        "bottom": 549
+      },
+      "transferColumnCount": "356.656px 142.672px 356.672px",
+      "panelRects": [
+        {
+          "x": 336,
+          "y": 169,
+          "width": 356.7,
+          "height": 380,
+          "right": 692.7,
+          "bottom": 549
+        },
+        {
+          "x": 859.3,
+          "y": 169,
+          "width": 356.7,
+          "height": 380,
+          "right": 1216,
+          "bottom": 549
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 349,
+          "y": 176,
+          "width": 149.5,
+          "height": 24,
+          "right": 498.5,
+          "bottom": 200
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 349,
+          "y": 174,
+          "width": 330.7,
+          "height": 28,
+          "right": 679.7,
+          "bottom": 202
+        },
+        "actions": {
+          "x": 506.5,
+          "y": 174,
+          "width": 173.1,
+          "height": 28,
+          "right": 679.7,
+          "bottom": 202
+        },
+        "actionButtons": [
+          {
+            "label": "全选筛选结果",
+            "disabled": true,
+            "rect": {
+              "x": 506.5,
+              "y": 174,
+              "width": 80,
+              "height": 28,
+              "right": 586.5,
+              "bottom": 202
+            }
+          },
+          {
+            "label": "反选筛选结果",
+            "disabled": false,
+            "rect": {
+              "x": 599.7,
+              "y": 174,
+              "width": 80,
+              "height": 28,
+              "right": 679.7,
+              "bottom": 202
+            }
+          }
+        ],
+        "statusText": "筛选结果已全部选择，共 1 项",
+        "titleAndActionsOnSeparateRows": true
+      },
+      "filters": {
+        "sourceValue": "交警直属特勤",
+        "sourceClearVisible": true,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": true
+        },
+        "filteredActions": [
+          {
+            "ariaLabel": "全选筛选结果",
+            "title": "选择名称匹配筛选文本的节点",
+            "hasVisibleInlineReason": true
+          }
+        ]
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 2
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 246,
+          "scrollHeight": 246,
+          "scrollTop": 0,
+          "scrollable": false
+        },
+        "selected": {
+          "clientHeight": 265,
+          "scrollHeight": 265,
+          "scrollable": false
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 264,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 288
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 198,
+            "scrollWidth": 198,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 310,
+              "width": 197.5,
+              "height": 24,
+              "right": 1074.9,
+              "bottom": 334
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 187,
+            "scrollWidth": 187,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 356,
+              "width": 186.5,
+              "height": 24,
+              "right": 1063.9,
+              "bottom": 380
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 402,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 426
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 444,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 468
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          34,
+          34,
+          34,
+          34,
+          58
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "已载入组织权限数据",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".lx-transfer-panel__header-status[0]",
+          "text": "筛选结果已全部选择，共 1 项",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(245, 247, 250)",
+          "ratio": 5.69
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "BUTTON",
+        "ariaLabel": "反选筛选结果",
+        "text": "反选筛选结果",
+        "className": "",
+        "outlineWidth": "2px",
+        "outlineStyle": "solid",
+        "outlineOffset": "2px",
+        "rect": {
+          "x": 599.7,
+          "y": 174,
+          "width": 80,
+          "height": 28,
+          "right": 679.7,
+          "bottom": 202
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "lx-transfer-panel__node-key",
+          "transitionDuration": "0.25s, 0.5s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "el-checkbox__inner",
+          "transitionDuration": "0.25s, 0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "加载状态",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 1440
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 64,
+          "right": 1440,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 272,
+          "height": 1000,
+          "right": 272,
+          "bottom": 1000
+        },
+        "article": {
+          "x": 336,
+          "y": -235,
+          "width": 880,
+          "height": 5141.1,
+          "right": 1216,
+          "bottom": 4906.1
+        },
+        "localAside": {
+          "x": 1248,
+          "y": -235,
+          "width": 160,
+          "height": 5269.1,
+          "right": 1408,
+          "bottom": 5034.1
+        },
+        "docContainer": {
+          "x": 304,
+          "y": -235,
+          "width": 1104,
+          "height": 5269.1,
+          "right": 1408,
+          "bottom": 5034.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": true,
+      "demo": {
+        "x": 336,
+        "y": 0,
+        "width": 880,
+        "height": 689,
+        "right": 1216,
+        "bottom": 689
+      },
+      "transfer": {
+        "x": 336,
+        "y": 169,
+        "width": 880,
+        "height": 380,
+        "right": 1216,
+        "bottom": 549
+      },
+      "transferColumnCount": "356.656px 142.672px 356.672px",
+      "panelRects": [
+        {
+          "x": 336,
+          "y": 169,
+          "width": 356.7,
+          "height": 380,
+          "right": 692.7,
+          "bottom": 549
+        },
+        {
+          "x": 859.3,
+          "y": 169,
+          "width": 356.7,
+          "height": 380,
+          "right": 1216,
+          "bottom": 549
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 349,
+          "y": 175.5,
+          "width": 330.7,
+          "height": 24,
+          "right": 679.7,
+          "bottom": 199.5
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 349,
+          "y": 175.5,
+          "width": 330.7,
+          "height": 24,
+          "right": 679.7,
+          "bottom": 199.5
+        },
+        "actions": null,
+        "actionButtons": [],
+        "statusText": null,
+        "titleAndActionsOnSeparateRows": false
+      },
+      "filters": {
+        "sourceValue": "",
+        "sourceClearVisible": false,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": false
+        },
+        "filteredActions": []
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 21
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 263,
+          "scrollHeight": 45440,
+          "scrollTop": 0,
+          "scrollable": true
+        },
+        "selected": {
+          "clientHeight": 265,
+          "scrollHeight": 265,
+          "scrollable": false
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 264,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 288
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 198,
+            "scrollWidth": 198,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 310,
+              "width": 197.5,
+              "height": 24,
+              "right": 1074.9,
+              "bottom": 334
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 187,
+            "scrollWidth": 187,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 356,
+              "width": 186.5,
+              "height": 24,
+              "right": 1063.9,
+              "bottom": 380
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 402,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 426
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 444,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 468
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          34,
+          34,
+          34,
+          34,
+          58
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "宿主正在加载组织权限数据",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__message[0]",
+          "text": "组织权限数据加载中……",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "BUTTON",
+        "ariaLabel": null,
+        "text": "加载中",
+        "className": "",
+        "outlineWidth": "3px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 480,
+          "y": 82,
+          "width": 57,
+          "height": 34,
+          "right": 537,
+          "bottom": 116
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "错误状态",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 1440
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 64,
+          "right": 1440,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 272,
+          "height": 1000,
+          "right": 272,
+          "bottom": 1000
+        },
+        "article": {
+          "x": 336,
+          "y": -235,
+          "width": 880,
+          "height": 5151.1,
+          "right": 1216,
+          "bottom": 4916.1
+        },
+        "localAside": {
+          "x": 1248,
+          "y": -235,
+          "width": 160,
+          "height": 5279.1,
+          "right": 1408,
+          "bottom": 5044.1
+        },
+        "docContainer": {
+          "x": 304,
+          "y": -235,
+          "width": 1104,
+          "height": 5279.1,
+          "right": 1408,
+          "bottom": 5044.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": true,
+      "demo": {
+        "x": 336,
+        "y": 0,
+        "width": 880,
+        "height": 699,
+        "right": 1216,
+        "bottom": 699
+      },
+      "transfer": {
+        "x": 336,
+        "y": 169,
+        "width": 880,
+        "height": 380,
+        "right": 1216,
+        "bottom": 549
+      },
+      "transferColumnCount": "356.656px 142.672px 356.672px",
+      "panelRects": [
+        {
+          "x": 336,
+          "y": 169,
+          "width": 356.7,
+          "height": 380,
+          "right": 692.7,
+          "bottom": 549
+        },
+        {
+          "x": 859.3,
+          "y": 169,
+          "width": 356.7,
+          "height": 380,
+          "right": 1216,
+          "bottom": 549
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 349,
+          "y": 175.5,
+          "width": 330.7,
+          "height": 24,
+          "right": 679.7,
+          "bottom": 199.5
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 349,
+          "y": 175.5,
+          "width": 330.7,
+          "height": 24,
+          "right": 679.7,
+          "bottom": 199.5
+        },
+        "actions": null,
+        "actionButtons": [],
+        "statusText": null,
+        "titleAndActionsOnSeparateRows": false
+      },
+      "filters": {
+        "sourceValue": "",
+        "sourceClearVisible": false,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": false
+        },
+        "filteredActions": []
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 21
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 263,
+          "scrollHeight": 45440,
+          "scrollTop": 0,
+          "scrollable": true
+        },
+        "selected": {
+          "clientHeight": 265,
+          "scrollHeight": 265,
+          "scrollable": false
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 264,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 288
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 198,
+            "scrollWidth": 198,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 310,
+              "width": 197.5,
+              "height": 24,
+              "right": 1074.9,
+              "bottom": 334
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 187,
+            "scrollWidth": 187,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 356,
+              "width": 186.5,
+              "height": 24,
+              "right": 1063.9,
+              "bottom": 380
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 402,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 426
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 444,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 468
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          34,
+          34,
+          34,
+          34,
+          58
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "组织权限数据加载失败，可重试",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__message[0]",
+          "text": "组织权限数据加载失败，当前选择仍然保留。重试",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "BUTTON",
+        "ariaLabel": null,
+        "text": "加载失败",
+        "className": "",
+        "outlineWidth": "3px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 541,
+          "y": 82,
+          "width": 70,
+          "height": 34,
+          "right": 611,
+          "bottom": 116
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "移动端 375 错误状态",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 375,
+        "scrollWidth": 375,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 375
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": -347,
+          "width": 375,
+          "height": 64,
+          "right": 375,
+          "bottom": -283
+        },
+        "leftSidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 311,
+          "height": 812,
+          "right": 311,
+          "bottom": 812
+        },
+        "article": {
+          "x": 24,
+          "y": -203,
+          "width": 327,
+          "height": 7582.1,
+          "right": 351,
+          "bottom": 7379.1
+        },
+        "localAside": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "docContainer": {
+          "x": 24,
+          "y": -203,
+          "width": 327,
+          "height": 7582.1,
+          "right": 351,
+          "bottom": 7379.1
+        }
+      },
+      "navClearOfArticle": false,
+      "articleClearOfAside": false,
+      "demo": {
+        "x": 24,
+        "y": 146,
+        "width": 327,
+        "height": 1285,
+        "right": 351,
+        "bottom": 1431
+      },
+      "transfer": {
+        "x": 24,
+        "y": 373,
+        "width": 327,
+        "height": 840,
+        "right": 351,
+        "bottom": 1213
+      },
+      "transferColumnCount": "327px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 373,
+          "width": 327,
+          "height": 380,
+          "right": 351,
+          "bottom": 753
+        },
+        {
+          "x": 24,
+          "y": 833,
+          "width": 327,
+          "height": 380,
+          "right": 351,
+          "bottom": 1213
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 37,
+          "y": 383.5,
+          "width": 301,
+          "height": 24,
+          "right": 338,
+          "bottom": 407.5
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 37,
+          "y": 383.5,
+          "width": 301,
+          "height": 24,
+          "right": 338,
+          "bottom": 407.5
+        },
+        "actions": null,
+        "actionButtons": [],
+        "statusText": null,
+        "titleAndActionsOnSeparateRows": false
+      },
+      "filters": {
+        "sourceValue": "",
+        "sourceClearVisible": false,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": false
+        },
+        "filteredActions": []
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 21
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 255,
+          "scrollHeight": 45440,
+          "scrollTop": 0,
+          "scrollable": true
+        },
+        "selected": {
+          "clientHeight": 257,
+          "scrollHeight": 334,
+          "scrollable": true
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 162,
+            "scrollWidth": 162,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 942,
+              "width": 162.3,
+              "height": 24,
+              "right": 204.3,
+              "bottom": 966
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 156,
+            "scrollWidth": 156,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1000,
+              "width": 155.9,
+              "height": 24,
+              "right": 197.9,
+              "bottom": 1024
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 145,
+            "scrollWidth": 145,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1058,
+              "width": 144.9,
+              "height": 24,
+              "right": 186.9,
+              "bottom": 1082
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 162,
+            "scrollWidth": 162,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1116,
+              "width": 162.3,
+              "height": 24,
+              "right": 204.3,
+              "bottom": 1140
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 239,
+            "scrollWidth": 239,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1164,
+              "width": 239,
+              "height": 24,
+              "right": 281,
+              "bottom": 1188
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          46,
+          46,
+          46,
+          46,
+          86
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "组织权限数据加载失败，可重试",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__message[0]",
+          "text": "组织权限数据加载失败，当前选择仍然保留。重试",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "BUTTON",
+        "ariaLabel": null,
+        "text": "加载失败",
+        "className": "",
+        "outlineWidth": "3px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 229,
+          "y": 228,
+          "width": 70,
+          "height": 44,
+          "right": 299,
+          "bottom": 272
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "空树状态",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 1440
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 64,
+          "right": 1440,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": -86.4,
+          "y": 0,
+          "width": 272,
+          "height": 1000,
+          "right": 185.6,
+          "bottom": 1000
+        },
+        "article": {
+          "x": 336,
+          "y": 112,
+          "width": 880,
+          "height": 5083.1,
+          "right": 1216,
+          "bottom": 5195.1
+        },
+        "localAside": {
+          "x": 1248,
+          "y": 112,
+          "width": 160,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 5323.1
+        },
+        "docContainer": {
+          "x": 304,
+          "y": 112,
+          "width": 1104,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 5323.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": true,
+      "demo": {
+        "x": 336,
+        "y": 347,
+        "width": 880,
+        "height": 631,
+        "right": 1216,
+        "bottom": 978
+      },
+      "transfer": {
+        "x": 336,
+        "y": 516,
+        "width": 880,
+        "height": 380,
+        "right": 1216,
+        "bottom": 896
+      },
+      "transferColumnCount": "356.656px 142.672px 356.672px",
+      "panelRects": [
+        {
+          "x": 336,
+          "y": 516,
+          "width": 356.7,
+          "height": 380,
+          "right": 692.7,
+          "bottom": 896
+        },
+        {
+          "x": 859.3,
+          "y": 516,
+          "width": 356.7,
+          "height": 380,
+          "right": 1216,
+          "bottom": 896
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 349,
+          "y": 522.5,
+          "width": 330.7,
+          "height": 24,
+          "right": 679.7,
+          "bottom": 546.5
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 349,
+          "y": 522.5,
+          "width": 330.7,
+          "height": 24,
+          "right": 679.7,
+          "bottom": 546.5
+        },
+        "actions": null,
+        "actionButtons": [],
+        "statusText": null,
+        "titleAndActionsOnSeparateRows": false
+      },
+      "filters": {
+        "sourceValue": "",
+        "sourceClearVisible": false,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": false
+        },
+        "filteredActions": []
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 0 个节点",
+        "virtualTreeRows": 0
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 263,
+          "scrollHeight": 263,
+          "scrollTop": 0,
+          "scrollable": false
+        },
+        "selected": {
+          "clientHeight": 265,
+          "scrollHeight": 354,
+          "scrollable": true
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 607,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 631
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 677,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 701
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 747,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 771
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 817,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 841
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 887,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 911
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          58,
+          58,
+          58,
+          58,
+          58
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "宿主返回了空树数据",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 0 个节点",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(78, 89, 105)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 7.1
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(107, 114, 128)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 4.83
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(63, 126, 35)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 4.52
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.15
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(96, 98, 102)",
+          "effectiveBackground": "rgb(242, 244, 248)",
+          "ratio": 5.55
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[1]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[2]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[3]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[4]",
+          "text": "节点未加载",
+          "foreground": "rgb(145, 91, 12)",
+          "effectiveBackground": "rgb(253, 246, 236)",
+          "ratio": 5.28
+        }
+      ],
+      "focusStyle": {
+        "tagName": "BUTTON",
+        "ariaLabel": null,
+        "text": "空结果",
+        "className": "",
+        "outlineWidth": "3px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 419,
+          "y": 429,
+          "width": 57,
+          "height": 34,
+          "right": 476,
+          "bottom": 463
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "lx-transfer-panel__node-key",
+          "transitionDuration": "0.25s, 0.5s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "lx-transfer-panel__node-key",
+          "transitionDuration": "0.25s, 0.5s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "lx-transfer-panel__node-key",
+          "transitionDuration": "0.25s, 0.5s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "lx-transfer-panel__node-key",
+          "transitionDuration": "0.25s, 0.5s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "lx-transfer-panel__node-key",
+          "transitionDuration": "0.25s, 0.5s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "el-checkbox__inner",
+          "transitionDuration": "0.25s, 0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "HUD 深色主题桌面",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 1440
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 64,
+          "right": 1440,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 272,
+          "height": 1000,
+          "right": 272,
+          "bottom": 1000
+        },
+        "article": {
+          "x": 336,
+          "y": 112,
+          "width": 880,
+          "height": 5083.1,
+          "right": 1216,
+          "bottom": 5195.1
+        },
+        "localAside": {
+          "x": 1248,
+          "y": 112,
+          "width": 160,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 5323.1
+        },
+        "docContainer": {
+          "x": 304,
+          "y": 112,
+          "width": 1104,
+          "height": 5211.1,
+          "right": 1408,
+          "bottom": 5323.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": true,
+      "demo": {
+        "x": 336,
+        "y": 347,
+        "width": 880,
+        "height": 631,
+        "right": 1216,
+        "bottom": 978
+      },
+      "transfer": {
+        "x": 336,
+        "y": 516,
+        "width": 880,
+        "height": 380,
+        "right": 1216,
+        "bottom": 896
+      },
+      "transferColumnCount": "356.656px 142.672px 356.672px",
+      "panelRects": [
+        {
+          "x": 336,
+          "y": 516,
+          "width": 356.7,
+          "height": 380,
+          "right": 692.7,
+          "bottom": 896
+        },
+        {
+          "x": 859.3,
+          "y": 516,
+          "width": 356.7,
+          "height": 380,
+          "right": 1216,
+          "bottom": 896
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 349,
+          "y": 522.5,
+          "width": 330.7,
+          "height": 24,
+          "right": 679.7,
+          "bottom": 546.5
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 349,
+          "y": 522.5,
+          "width": 330.7,
+          "height": 24,
+          "right": 679.7,
+          "bottom": 546.5
+        },
+        "actions": null,
+        "actionButtons": [],
+        "statusText": null,
+        "titleAndActionsOnSeparateRows": false
+      },
+      "filters": {
+        "sourceValue": "",
+        "sourceClearVisible": false,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": false
+        },
+        "filteredActions": []
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 21
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 263,
+          "scrollHeight": 45440,
+          "scrollTop": 0,
+          "scrollable": true
+        },
+        "selected": {
+          "clientHeight": 265,
+          "scrollHeight": 265,
+          "scrollable": false
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 611,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 635
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 198,
+            "scrollWidth": 198,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 657,
+              "width": 197.5,
+              "height": 24,
+              "right": 1074.9,
+              "bottom": 681
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 187,
+            "scrollWidth": 187,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 703,
+              "width": 186.5,
+              "height": 24,
+              "right": 1063.9,
+              "bottom": 727
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 204,
+            "scrollWidth": 204,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 749,
+              "width": 204,
+              "height": 24,
+              "right": 1081.3,
+              "bottom": 773
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 281,
+            "scrollWidth": 281,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 877.3,
+              "y": 791,
+              "width": 280.7,
+              "height": 24,
+              "right": 1158,
+              "bottom": 815
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          34,
+          34,
+          34,
+          34,
+          58
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "已载入组织权限数据",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(16, 26, 44)",
+          "ratio": 6.79
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(134, 239, 172)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 11.2
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(134, 239, 172)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 11.2
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 6.13
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(246, 199, 107)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 9.96
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 6.13
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(246, 199, 107)",
+          "effectiveBackground": "rgb(251, 241, 226)",
+          "ratio": 1.41
+        }
+      ],
+      "focusStyle": {
+        "tagName": "INPUT",
+        "ariaLabel": null,
+        "text": "",
+        "className": "",
+        "outlineWidth": "3px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 713.2,
+          "y": 439.5,
+          "width": 13,
+          "height": 13,
+          "right": 726.2,
+          "bottom": 452.5
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "HUD 深色主题移动端 375",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 375,
+        "scrollWidth": 375,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 375
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 64,
+          "right": 375,
+          "bottom": 64
+        },
+        "leftSidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 311,
+          "height": 812,
+          "right": 311,
+          "bottom": 812
+        },
+        "article": {
+          "x": 24,
+          "y": 144,
+          "width": 327,
+          "height": 7490.1,
+          "right": 351,
+          "bottom": 7634.1
+        },
+        "localAside": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "docContainer": {
+          "x": 24,
+          "y": 144,
+          "width": 327,
+          "height": 7490.1,
+          "right": 351,
+          "bottom": 7634.1
+        }
+      },
+      "navClearOfArticle": false,
+      "articleClearOfAside": false,
+      "demo": {
+        "x": 24,
+        "y": 493,
+        "width": 327,
+        "height": 1193,
+        "right": 351,
+        "bottom": 1686
+      },
+      "transfer": {
+        "x": 24,
+        "y": 720,
+        "width": 327,
+        "height": 840,
+        "right": 351,
+        "bottom": 1560
+      },
+      "transferColumnCount": "327px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 720,
+          "width": 327,
+          "height": 380,
+          "right": 351,
+          "bottom": 1100
+        },
+        {
+          "x": 24,
+          "y": 1180,
+          "width": 327,
+          "height": 380,
+          "right": 351,
+          "bottom": 1560
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 37,
+          "y": 730.5,
+          "width": 301,
+          "height": 24,
+          "right": 338,
+          "bottom": 754.5
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 37,
+          "y": 730.5,
+          "width": 301,
+          "height": 24,
+          "right": 338,
+          "bottom": 754.5
+        },
+        "actions": null,
+        "actionButtons": [],
+        "statusText": null,
+        "titleAndActionsOnSeparateRows": false
+      },
+      "filters": {
+        "sourceValue": "",
+        "sourceClearVisible": false,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": false
+        },
+        "filteredActions": []
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 21
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 255,
+          "scrollHeight": 45440,
+          "scrollTop": 0,
+          "scrollable": true
+        },
+        "selected": {
+          "clientHeight": 257,
+          "scrollHeight": 334,
+          "scrollable": true
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 162,
+            "scrollWidth": 162,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1289,
+              "width": 162.3,
+              "height": 24,
+              "right": 204.3,
+              "bottom": 1313
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 156,
+            "scrollWidth": 156,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1347,
+              "width": 155.9,
+              "height": 24,
+              "right": 197.9,
+              "bottom": 1371
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 145,
+            "scrollWidth": 145,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1405,
+              "width": 144.9,
+              "height": 24,
+              "right": 186.9,
+              "bottom": 1429
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 162,
+            "scrollWidth": 162,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1463,
+              "width": 162.3,
+              "height": 24,
+              "right": 204.3,
+              "bottom": 1487
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 239,
+            "scrollWidth": 239,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1511,
+              "width": 239,
+              "height": 24,
+              "right": 281,
+              "bottom": 1535
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          46,
+          46,
+          46,
+          46,
+          86
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "已载入组织权限数据",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(16, 26, 44)",
+          "ratio": 6.79
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(134, 239, 172)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 11.2
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(134, 239, 172)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 11.2
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 6.13
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(246, 199, 107)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 9.96
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 6.13
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(246, 199, 107)",
+          "effectiveBackground": "rgb(251, 241, 226)",
+          "ratio": 1.41
+        }
+      ],
+      "focusStyle": {
+        "tagName": "INPUT",
+        "ariaLabel": null,
+        "text": "",
+        "className": "",
+        "outlineWidth": "3px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 131.2,
+          "y": 638.5,
+          "width": 13,
+          "height": 13,
+          "right": 144.2,
+          "bottom": 651.5
+        }
+      },
+      "prefersReducedMotion": false,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "0.25s, 0.25s",
+          "animationDuration": "0s"
+        }
+      ]
+    },
+    {
+      "label": "HUD 移动端 reduced motion",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "devicePixelRatio": 1
+      },
+      "document": {
+        "clientWidth": 375,
+        "scrollWidth": 375,
+        "hasHorizontalOverflow": false,
+        "bodyScrollWidth": 375
+      },
+      "nav": {
+        "top": {
+          "x": 0,
+          "y": -493,
+          "width": 375,
+          "height": 64,
+          "right": 375,
+          "bottom": -429
+        },
+        "leftSidebar": {
+          "x": -311,
+          "y": 0,
+          "width": 311,
+          "height": 812,
+          "right": 0,
+          "bottom": 812
+        },
+        "article": {
+          "x": 24,
+          "y": -349,
+          "width": 327,
+          "height": 7490.1,
+          "right": 351,
+          "bottom": 7141.1
+        },
+        "localAside": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "docContainer": {
+          "x": 24,
+          "y": -349,
+          "width": 327,
+          "height": 7490.1,
+          "right": 351,
+          "bottom": 7141.1
+        }
+      },
+      "navClearOfArticle": true,
+      "articleClearOfAside": false,
+      "demo": {
+        "x": 24,
+        "y": 0,
+        "width": 327,
+        "height": 1193,
+        "right": 351,
+        "bottom": 1193
+      },
+      "transfer": {
+        "x": 24,
+        "y": 227,
+        "width": 327,
+        "height": 840,
+        "right": 351,
+        "bottom": 1067
+      },
+      "transferColumnCount": "327px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 227,
+          "width": 327,
+          "height": 380,
+          "right": 351,
+          "bottom": 607
+        },
+        {
+          "x": 24,
+          "y": 687,
+          "width": 327,
+          "height": 380,
+          "right": 351,
+          "bottom": 1067
+        }
+      ],
+      "header": {
+        "title": {
+          "x": 37,
+          "y": 237.5,
+          "width": 301,
+          "height": 24,
+          "right": 338,
+          "bottom": 261.5
+        },
+        "titleText": "组织与数据权限树（待选）",
+        "main": {
+          "x": 37,
+          "y": 237.5,
+          "width": 301,
+          "height": 24,
+          "right": 338,
+          "bottom": 261.5
+        },
+        "actions": null,
+        "actionButtons": [],
+        "statusText": null,
+        "titleAndActionsOnSeparateRows": false
+      },
+      "filters": {
+        "sourceValue": "",
+        "sourceClearVisible": false,
+        "sourceFocus": false
+      },
+      "disabledOperations": {
+        "addAll": {
+          "disabled": true,
+          "title": "已全部选择或达到选择上限",
+          "visibleReasonBesideButton": false
+        },
+        "filteredActions": []
+      },
+      "counts": {
+        "selectedText": "当前已选 5 项",
+        "treeText": "待选树 1,420 个节点",
+        "virtualTreeRows": 21
+      },
+      "scrolling": {
+        "tree": {
+          "clientHeight": 255,
+          "scrollHeight": 45440,
+          "scrollTop": 0,
+          "scrollable": true
+        },
+        "selected": {
+          "clientHeight": 257,
+          "scrollHeight": 334,
+          "scrollable": true
+        },
+        "longLabels": [
+          {
+            "text": "市公安局指挥中心",
+            "title": "市公安局指挥中心",
+            "clientWidth": 162,
+            "scrollWidth": 162,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 796,
+              "width": 162.3,
+              "height": 24,
+              "right": 204.3,
+              "bottom": 820
+            }
+          },
+          {
+            "text": "情指行一体化研判调度专班",
+            "title": "情指行一体化研判调度专班",
+            "clientWidth": 156,
+            "scrollWidth": 156,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 854,
+              "width": 155.9,
+              "height": 24,
+              "right": 197.9,
+              "bottom": 878
+            }
+          },
+          {
+            "text": "交警直属特勤一中队",
+            "title": "交警直属特勤一中队",
+            "clientWidth": 145,
+            "scrollWidth": 145,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 912,
+              "width": 144.9,
+              "height": 24,
+              "right": 186.9,
+              "bottom": 936
+            }
+          },
+          {
+            "text": "站前路派出所综合作战室",
+            "title": "站前路派出所综合作战室",
+            "clientWidth": 162,
+            "scrollWidth": 162,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 970,
+              "width": 162.3,
+              "height": 24,
+              "right": 204.3,
+              "bottom": 994
+            }
+          },
+          {
+            "text": "历史授权单位（记录中）",
+            "title": "历史授权单位（记录中）",
+            "clientWidth": 239,
+            "scrollWidth": 239,
+            "textOverflow": "ellipsis",
+            "rect": {
+              "x": 42,
+              "y": 1018,
+              "width": 239,
+              "height": 24,
+              "right": 281,
+              "bottom": 1042
+            }
+          }
+        ],
+        "selectedRowHeights": [
+          46,
+          46,
+          46,
+          46,
+          86
+        ]
+      },
+      "contrast": [
+        {
+          "selector": ".transfer-panel-demo__status span[0]",
+          "text": "已载入组织权限数据",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[0]",
+          "text": "当前已选 5 项",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[1]",
+          "text": "待选树 1,420 个节点",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__summary span[2]",
+          "text": "包含一个当前树中未加载的既有选中键",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(255, 255, 255)",
+          "ratio": 2.56
+        },
+        {
+          "selector": ".transfer-panel-demo__note[0]",
+          "text": "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(16, 26, 44)",
+          "ratio": 6.79
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[0]",
+          "text": "正常",
+          "foreground": "rgb(134, 239, 172)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 11.2
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[1]",
+          "text": "正常",
+          "foreground": "rgb(134, 239, 172)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 11.2
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[2]",
+          "text": "处理中",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 6.13
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[3]",
+          "text": "忙碌",
+          "foreground": "rgb(246, 199, 107)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 9.96
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-status[4]",
+          "text": "停用",
+          "foreground": "rgb(148, 163, 184)",
+          "effectiveBackground": "rgb(22, 35, 58)",
+          "ratio": 6.13
+        },
+        {
+          "selector": ".lx-transfer-panel__selected-item .lx-transfer-panel__node-unloaded[0]",
+          "text": "节点未加载",
+          "foreground": "rgb(246, 199, 107)",
+          "effectiveBackground": "rgb(251, 241, 226)",
+          "ratio": 1.41
+        }
+      ],
+      "focusStyle": {
+        "tagName": "INPUT",
+        "ariaLabel": null,
+        "text": "",
+        "className": "",
+        "outlineWidth": "3px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "rect": {
+          "x": 131.2,
+          "y": 145.5,
+          "width": 13,
+          "height": 13,
+          "right": 144.2,
+          "bottom": 158.5
+        }
+      },
+      "prefersReducedMotion": true,
+      "nonzeroMotionProperties": [
+        {
+          "selector": "lx-transfer-panel__panel",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        },
+        {
+          "selector": "lx-transfer-panel__header",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        },
+        {
+          "selector": "lx-transfer-panel__header-main",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        },
+        {
+          "selector": "lx-transfer-panel__title",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        },
+        {
+          "selector": "path",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        },
+        {
+          "selector": "lx-transfer-panel__filter lx-transfer-panel__filter--source",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        },
+        {
+          "selector": "svg",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        },
+        {
+          "selector": "path",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        },
+        {
+          "selector": "path",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        },
+        {
+          "selector": "INPUT",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        },
+        {
+          "selector": "lx-transfer-panel__tree",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        },
+        {
+          "selector": "lx-virtual-tree",
+          "transitionDuration": "1e-05s",
+          "animationDuration": "1e-05s"
+        }
+      ]
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "httpErrors": []
+}

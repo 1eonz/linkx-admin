@@ -1,0 +1,410 @@
+{
+  "method": "isolated Assessment A, fresh Edge/Playwright contexts",
+  "target": "http://127.0.0.1:4174",
+  "browserVersion": "154.0.4258.53",
+  "startedAt": "2026-10-06T20:54:09.636Z",
+  "screenshots": [
+    "dynamicform-desktop-light.png",
+    "dynamicform-desktop-hud.png",
+    "dynamicform-mobile375-light.png",
+    "dynamicform-mobile375-hud.png",
+    "datepicker-desktop-light.png",
+    "datepicker-desktop-hud.png",
+    "datepicker-mobile375-light.png",
+    "datepicker-mobile375-hud.png",
+    "upload-desktop-light.png",
+    "upload-desktop-hud.png",
+    "upload-mobile375-light.png",
+    "upload-mobile375-hud.png",
+    "dynamicform-desktop-upload-failure.png",
+    "dynamicform-mobile375-upload-failure.png",
+    "datepicker-desktop-dark-error-empty.png",
+    "datepicker-desktop-dark-range-open.png",
+    "datepicker-mobile375-light-error-empty.png",
+    "datepicker-mobile375-light-range-open.png"
+  ],
+  "pages": [
+    {
+      "route": "/components/lxdynamicform",
+      "viewport": "desktop",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "width": 1440,
+          "height": 7667
+        }
+      },
+      "screenshots": [
+        "dynamicform-desktop-light.png",
+        "dynamicform-desktop-hud.png"
+      ]
+    },
+    {
+      "route": "/components/lxdynamicform",
+      "viewport": "mobile375",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "width": 375,
+          "height": 10231
+        }
+      },
+      "screenshots": [
+        "dynamicform-mobile375-light.png",
+        "dynamicform-mobile375-hud.png"
+      ]
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "viewport": "desktop",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "width": 1440,
+          "height": 6828
+        }
+      },
+      "screenshots": [
+        "datepicker-desktop-light.png",
+        "datepicker-desktop-hud.png"
+      ]
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "viewport": "mobile375",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "width": 375,
+          "height": 8602
+        }
+      },
+      "screenshots": [
+        "datepicker-mobile375-light.png",
+        "datepicker-mobile375-hud.png"
+      ]
+    },
+    {
+      "route": "/components/lxupload",
+      "viewport": "desktop",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "width": 1440,
+          "height": 5006
+        }
+      },
+      "screenshots": [
+        "upload-desktop-light.png",
+        "upload-desktop-hud.png"
+      ]
+    },
+    {
+      "route": "/components/lxupload",
+      "viewport": "mobile375",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "width": 375,
+          "height": 6891
+        }
+      },
+      "screenshots": [
+        "upload-mobile375-light.png",
+        "upload-mobile375-hud.png"
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "route": "/components/lxdynamicform",
+      "state": "upload-failure-and-retry",
+      "viewport": "desktop",
+      "screenshot": "dynamicform-desktop-upload-failure.png"
+    },
+    {
+      "route": "/components/lxdynamicform",
+      "state": "upload-failure-and-retry",
+      "viewport": "mobile375",
+      "screenshot": "dynamicform-mobile375-upload-failure.png"
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "state": "empty-value-validation-error",
+      "viewport": "desktop",
+      "colorScheme": "dark",
+      "screenshot": "datepicker-desktop-dark-error-empty.png"
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "state": "range-calendar-open",
+      "viewport": "desktop",
+      "colorScheme": "dark",
+      "overflow": {
+        "viewportWidth": 1440,
+        "documentWidth": 1440,
+        "picker": {
+          "left": 405,
+          "right": 1051,
+          "width": 646
+        }
+      },
+      "screenshot": "datepicker-desktop-dark-range-open.png"
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "state": "empty-value-validation-error",
+      "viewport": "mobile375",
+      "colorScheme": "light",
+      "screenshot": "datepicker-mobile375-light-error-empty.png"
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "state": "range-calendar-open",
+      "viewport": "mobile375",
+      "colorScheme": "light",
+      "overflow": {
+        "viewportWidth": 375,
+        "documentWidth": 375,
+        "picker": {
+          "left": 27,
+          "right": 349,
+          "width": 322
+        }
+      },
+      "screenshot": "datepicker-mobile375-light-range-open.png"
+    }
+  ],
+  "finishedAt": "2026-10-06T20:55:39.541Z",
+  "sourceFingerprintBefore": {
+    "capturedAt": "2026-10-06T20:54:09.636Z",
+    "files": [
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/index.vue",
+        "modifiedAt": "2026-10-06T07:03:08.005Z",
+        "bytes": 14105,
+        "sha256": "26c1b19646d89f4ae9566f32b742d60088aec817cde0d2462b7a0cdd7c6e748c"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/style.css",
+        "modifiedAt": "2026-10-06T20:46:32.917Z",
+        "bytes": 2250,
+        "sha256": "fea68097bd48ed0c28ad30e2a76272ca7554649c334b430fe6e5add7fbca4b1e"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/demo/basic.vue",
+        "modifiedAt": "2026-10-06T20:39:03.890Z",
+        "bytes": 28380,
+        "sha256": "beec504acb57be2f860eb41ac348f835c3957af4d9050cbc2c78e1c803d25a9a"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/types.ts",
+        "modifiedAt": "2026-10-06T07:03:08.004Z",
+        "bytes": 2734,
+        "sha256": "1996839e87702da19c39c29062153c98b6f425b78dbae5e96c5da054c90c588c"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/index.vue",
+        "modifiedAt": "2026-10-06T09:52:33.372Z",
+        "bytes": 17016,
+        "sha256": "6b3e98dd0a0b6afeece68cf39a47b0cac7d5c8be309058aa6ef8b6aa69de30ad"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/style.css",
+        "modifiedAt": "2026-10-04T20:21:52.949Z",
+        "bytes": 10157,
+        "sha256": "e989b53ed4a60137dbf0af6852ce14a960102c7b1d1e5a7605372b27a8240ea8"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/demo/basic.vue",
+        "modifiedAt": "2026-10-06T17:49:13.147Z",
+        "bytes": 13662,
+        "sha256": "2c48b5b1be0f394d8c33bb511bb47c0f829bd347f2284db720356f68c2aa0155"
+      },
+      {
+        "path": "linkx-fe/src/components/LxUpload/index.vue",
+        "modifiedAt": "2026-10-06T20:39:59.518Z",
+        "bytes": 44655,
+        "sha256": "4507faef58121f8fd6ebae4526d398be72628ef0300394f7fadac1343e0ec640"
+      },
+      {
+        "path": "linkx-fe/src/components/LxUpload/demo/basic.vue",
+        "modifiedAt": "2026-10-06T16:55:53.845Z",
+        "bytes": 8729,
+        "sha256": "a0e49ce1084c7c3dccdb4feb27d005b8d149b9edcbfc2334aeef41b60e128ab6"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxdynamicform.md",
+        "modifiedAt": "2026-10-06T19:20:03.551Z",
+        "bytes": 14048,
+        "sha256": "2c6176bee6c22201d1228223e1c023b142760ab5bc2445d3c6eca71dbd6f4487"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxdatepicker.md",
+        "modifiedAt": "2026-10-06T09:58:47.785Z",
+        "bytes": 11908,
+        "sha256": "dda2b1f674b2811d63cec50853e8280198dd14e98cbd891531f0a5e73686a6eb"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxupload.md",
+        "modifiedAt": "2026-10-06T20:39:23.744Z",
+        "bytes": 9507,
+        "sha256": "cbab34d859358167df599464aceffeda08fb14e2b1af56c51a358a8f52d617e4"
+      }
+    ]
+  },
+  "sourceFingerprintAfter": {
+    "capturedAt": "2026-10-06T20:55:39.541Z",
+    "files": [
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/index.vue",
+        "modifiedAt": "2026-10-06T07:03:08.005Z",
+        "bytes": 14105,
+        "sha256": "26c1b19646d89f4ae9566f32b742d60088aec817cde0d2462b7a0cdd7c6e748c"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/style.css",
+        "modifiedAt": "2026-10-06T20:46:32.917Z",
+        "bytes": 2250,
+        "sha256": "fea68097bd48ed0c28ad30e2a76272ca7554649c334b430fe6e5add7fbca4b1e"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/demo/basic.vue",
+        "modifiedAt": "2026-10-06T20:39:03.890Z",
+        "bytes": 28380,
+        "sha256": "beec504acb57be2f860eb41ac348f835c3957af4d9050cbc2c78e1c803d25a9a"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/types.ts",
+        "modifiedAt": "2026-10-06T07:03:08.004Z",
+        "bytes": 2734,
+        "sha256": "1996839e87702da19c39c29062153c98b6f425b78dbae5e96c5da054c90c588c"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/index.vue",
+        "modifiedAt": "2026-10-06T09:52:33.372Z",
+        "bytes": 17016,
+        "sha256": "6b3e98dd0a0b6afeece68cf39a47b0cac7d5c8be309058aa6ef8b6aa69de30ad"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/style.css",
+        "modifiedAt": "2026-10-04T20:21:52.949Z",
+        "bytes": 10157,
+        "sha256": "e989b53ed4a60137dbf0af6852ce14a960102c7b1d1e5a7605372b27a8240ea8"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/demo/basic.vue",
+        "modifiedAt": "2026-10-06T17:49:13.147Z",
+        "bytes": 13662,
+        "sha256": "2c48b5b1be0f394d8c33bb511bb47c0f829bd347f2284db720356f68c2aa0155"
+      },
+      {
+        "path": "linkx-fe/src/components/LxUpload/index.vue",
+        "modifiedAt": "2026-10-06T20:39:59.518Z",
+        "bytes": 44655,
+        "sha256": "4507faef58121f8fd6ebae4526d398be72628ef0300394f7fadac1343e0ec640"
+      },
+      {
+        "path": "linkx-fe/src/components/LxUpload/demo/basic.vue",
+        "modifiedAt": "2026-10-06T16:55:53.845Z",
+        "bytes": 8729,
+        "sha256": "a0e49ce1084c7c3dccdb4feb27d005b8d149b9edcbfc2334aeef41b60e128ab6"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxdynamicform.md",
+        "modifiedAt": "2026-10-06T19:20:03.551Z",
+        "bytes": 14048,
+        "sha256": "2c6176bee6c22201d1228223e1c023b142760ab5bc2445d3c6eca71dbd6f4487"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxdatepicker.md",
+        "modifiedAt": "2026-10-06T09:58:47.785Z",
+        "bytes": 11908,
+        "sha256": "dda2b1f674b2811d63cec50853e8280198dd14e98cbd891531f0a5e73686a6eb"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxupload.md",
+        "modifiedAt": "2026-10-06T20:39:23.744Z",
+        "bytes": 9507,
+        "sha256": "cbab34d859358167df599464aceffeda08fb14e2b1af56c51a358a8f52d617e4"
+      }
+    ]
+  },
+  "sourceFingerprintChanged": false,
+  "browserErrors": [
+    {
+      "url": "http://127.0.0.1:4174/components/lxdynamicform",
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxdynamicform",
+      "state": "remote-select-empty",
+      "message": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('radio', { name: '空结果' })\u001b[22m\n\u001b[2m    - locator resolved to <input type=\"radio\" value=\"empty\" name=\"el-id-1024-0\" class=\"el-radio__original\"/>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"el-radio__inner\"></span> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <span class=\"el-radio__inner\"></span> intercepts pointer events\u001b[22m\n\u001b[2m  2 × retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-v-1f2aba1b=\"\" class=\"content-body\">…</div> from <header class=\"VPNav\" data-v-da8dd485=\"\" data-v-65fc48a9=\"\">…</header> subtree intercepts pointer events\u001b[22m\n\u001b[2m  13 × retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <span class=\"el-radio__inner\"></span> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <span class=\"el-radio__inner\"></span> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div data-v-1f2aba1b=\"\" class=\"content-body\">…</div> from <header class=\"VPNav\" data-v-da8dd485=\"\" data-v-65fc48a9=\"\">…</header> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div data-v-1f2aba1b=\"\" class=\"content-body\">…</div> from <header class=\"VPNav\" data-v-da8dd485=\"\" data-v-65fc48a9=\"\">…</header> subtree intercepts pointer events\u001b[22m\n\u001b[2m  2 × retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"el-radio__inner\"></span> intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <div data-v-1f2aba1b=\"\" class=\"content-body\">…</div> from <header class=\"VPNav\" data-v-da8dd485=\"\" data-v-65fc48a9=\"\">…</header> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxdynamicform",
+      "state": "required-error-desktop",
+      "message": "TimeoutError: locator.waitFor: Timeout 4000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('请填写任务名称') to be visible\u001b[22m\n"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxdynamicform",
+      "type": "console",
+      "message": "UploadAjaxError: 上传失败，请重试\n    at finish (http://127.0.0.1:4174/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxDynamicForm/demo/basic.vue?t=1791319592918:381:39)"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxdynamicform",
+      "state": "required-error-mobile375",
+      "message": "TimeoutError: locator.waitFor: Timeout 4000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('请填写任务名称') to be visible\u001b[22m\n"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxdynamicform",
+      "type": "console",
+      "message": "UploadAjaxError: 上传失败，请重试\n    at finish (http://127.0.0.1:4174/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxDynamicForm/demo/basic.vue?t=1791319592918:381:39)"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxupload",
+      "type": "console",
+      "message": "UploadAjaxError: 上传服务暂不可用，请重试\n    at http://127.0.0.1:4174/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxUpload/demo/basic.vue?t=1791319592918:45:39"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxupload",
+      "state": "upload-failure-desktop",
+      "message": "Error: locator.waitFor: Error: strict mode violation: getByText('上传服务暂不可用，请重试') resolved to 2 elements:\n    1) <span data-v-1f2ff5a5=\"\" class=\"lx-upload__file-error\">上传服务暂不可用，请重试</span> aka getByText('上传服务暂不可用，请重试', { exact: true })\n    2) <span>'上传服务暂不可用，请重试'</span> aka getByText('\\'上传服务暂不可用，请重试\\'')\n\nCall log:\n\u001b[2m  - waiting for getByText('上传服务暂不可用，请重试') to be visible\u001b[22m\n\u001b[2m    8 × locator resolved to hidden <span>'上传服务暂不可用，请重试'</span>\u001b[22m\n"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxupload",
+      "type": "console",
+      "message": "UploadAjaxError: 上传服务暂不可用，请重试\n    at http://127.0.0.1:4174/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxUpload/demo/basic.vue?t=1791319592918:45:39"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxupload",
+      "state": "upload-failure-mobile375",
+      "message": "Error: locator.waitFor: Error: strict mode violation: getByText('上传服务暂不可用，请重试') resolved to 2 elements:\n    1) <span data-v-1f2ff5a5=\"\" class=\"lx-upload__file-error\">上传服务暂不可用，请重试</span> aka getByText('上传服务暂不可用，请重试', { exact: true })\n    2) <span>'上传服务暂不可用，请重试'</span> aka getByText('\\'上传服务暂不可用，请重试\\'')\n\nCall log:\n\u001b[2m  - waiting for getByText('上传服务暂不可用，请重试') to be visible\u001b[22m\n\u001b[2m    8 × locator resolved to hidden <span>'上传服务暂不可用，请重试'</span>\u001b[22m\n"
+    }
+  ]
+}

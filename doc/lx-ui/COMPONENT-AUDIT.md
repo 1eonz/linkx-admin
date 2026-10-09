@@ -1,12 +1,16 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
-## 2026-10-10 UI-10 / G2 SearchBar、StatusSwitch 正式审查
+## 2026-10-10 UI-13 / Wave 9 LxUpload 回灌 abort 回归
 
-`LxSearchBar` 已完成当前修复：`role=search`、loading/折叠字段 ARIA、移动 44px 触控和减少动效降级；单测 8/8、文档 E2E 3/3，Assessment A 25/40。`LxStatusSwitch` 已完成确认竞态、外部 modelValue/权限源变化和权限撤销保护、loading/只读 ARIA、Space 键盘和失败重试；单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6。
+`LxUpload` 已补 fallback UID 回灌后公开 `abort()` 的组合回归，单测 38/38；文档 E2E 首次为 7/9，服务恢复后两个用例独立重跑 2/2，当前证据合计 9/9。记录见 `.impeccable/critique/wave9-upload-2026-10-10/agent-notes.md`。真实上传协议和服务端 AbortSignal 联调仍属 UI-04，下一项进入 `LxDescriptions`、`LxVirtualTree` 当前版正式审查。
 
-SearchBar 修后 Assessment B 的组件、Demo、文档 detector 均为有效 JSON `[]`，stderr 为空、退出码 0，并已保存亮色/HUD、1440/375px、减少动效和交互证据；复验报告为 `.impeccable/critique/wave8-searchbar-2026-10-10/assessment-b/final-recheck/final-recheck-report.md`。`[]` 仅表示静态规则零命中。375px 页面 `scrollWidth=615` 归因于文档 API 表格/代码区域，组件自身无横向溢出。Assessment A 修后评分、统一综合报告和 snapshot/trend 尚待完成，故 G2 与全库 UI-10 **0/52** 均保持阶段性状态。
+## 2026-10-10 UI-10 / G2 SearchBar、StatusSwitch 阶段性审查（降级，未正式关闭）
 
-当前门禁已关闭：`linkx-fe` 正确执行 `pnpm exec vite build`；独立代码复审修后无 P0/P1/P2，SearchBar B 三个 detector 为有效 `[]`/空 stderr/exit 0，综合报告和 snapshot/trend 已完成。P3 ARIA 单测增强及字段级错误、Escape、设计资产同步进入后续台账。Vue3 宿主 `element-plus`、权限中心、字段权限和引导页仍按计划冻结。
+`LxSearchBar` 已完成当前修复：`role=search`、loading/折叠字段 ARIA、移动 44px 触控和减少动效降级；单测 8/8、文档 E2E 3/3，Assessment A 降级评分 31/40。`LxStatusSwitch` 已完成确认竞态、外部 modelValue/权限源变化和权限撤销保护、loading/只读 ARIA、Space 键盘和失败重试；单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6。
+
+SearchBar 修后 Assessment B 的组件、Demo、文档 detector 均为有效 JSON `[]`，stderr 为空、退出码 0，并已保存亮色/HUD、1440/375px、减少动效和交互截图/DOM 证据；overlay 注入未稳定完成，`[]` 仅表示静态规则零命中。Assessment A 因浏览器不可启动为降级评审，评分 **31/40（Good）**。报告位于 `.impeccable/critique/g2-complete-2026-10-10/assessment-a/report.md` 与 `assessment-b/report.md`；没有可用统一综合报告、snapshot/trend，故 G2 与全库 UI-10 **0/52** 均保持阶段性状态。
+
+当前仅关闭实现级检查：`linkx-fe` 的库构建、定向单测/E2E、类型和格式检查通过。不能把构建、Mock 或 detector `[]` 当作正式 Critique 通过。P1：SearchBar 四字段操作行与设计稿不一致、StatusSwitch HUD 与 Teleport 确认层可能脱节；P2：SearchBar 无 `meta` 时结果/错误状态不可见、StatusSwitch 行名未进入可访问名称、375px 复杂状态及确认/失败/只读路径缺少完整实图、文档页资源 404 待归因。Vue3 宿主 `element-plus`、权限中心、字段权限和引导页仍按计划冻结。
 
 ## 2026-10-10 UI-10 / Wave 7 LxTransferPanel 正式关闭
 
@@ -196,7 +200,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxProTable`         | `DESIGN-SPEC.md` + ProTable API/Demo              | 待严格复核；表头/行密度、选择、空错态和滚动                                                                                                                                                |
 | `LxRadio`            | `design/表单控件八件套/`                          | A/B 与行为完成；中文播报、触屏和减少动效通过；窄屏 API 表格 P2 待处理                                                                                                                      |
 | `LxRadioGroup`       | `design/表单控件八件套/`                          | A/B、键盘及禁用态验收完成；随 API 表格 P2 保持开放                                                                                                                                         |
-| `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 已有中文 API/Demo 与 8 项单测，缺组件级 Playwright；G2 需复核字段/操作层级、键盘与窄屏，并核对旧宿主组织/日期/事件/实例契约                                                                |
+| `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 单测 9/9、文档 E2E 3/3；修后 A/B 已补独立浏览器/overlay 证据，Demo 增加四字段标准态；最终综合快照待收口，严格矩阵保持打开 |
 | `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                                                                                                       |
 | `LxSelect`           | `design/表单控件八件套/`                          | 实现与行为验收：单测 10/10、文档 E2E 3/3；当前严格 Critique 待修后 A/B、overlay/snapshot；桌面 32px、窄屏 44px                                                                             |
 | `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                                                                          |
@@ -208,7 +212,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxSidebarItem`      | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；选中/禁用/悬停/键盘态                                                                                                                                                          |
 | `LxSplitLayout`      | `DESIGN-SPEC.md` + SplitLayout API/Demo           | 待严格复核；分栏比例、拖动、键盘和折叠态                                                                                                                                                   |
 | `LxStatusDot`        | `DESIGN-SPEC.md` §2 + 状态点 API/Demo             | 待严格复核；状态语义、动画和减少动效                                                                                                                                                       |
-| `LxStatusSwitch`     | `design/状态开关 StatusSwitch/`                   | 已有中文 API/Demo、8 项单测和文档 Playwright 3/3；G2 复核轨道、状态、只读/加载、确认反馈及 0/1/change(number) 映射，Vue3 宿主替换仍待 UI-04                                                |
+| `LxStatusSwitch`     | `design/状态开关 StatusSwitch/`                   | 单测 17/17、文档 E2E 3/3；修后 A/B 已覆盖 HUD Teleport、ARIA 行名、确认影响/审计上下文和 375px 路径；最终综合快照待收口，Vue3 宿主替换仍待 UI-04 |
 | `LxSwitch`           | `design/表单控件八件套/`                          | 组件级复核已完成；共享壳层与宿主契约仍跟踪，暂不计入全库严格关闭                                                                                                                           |
 | `LxTabsBar`          | `DESIGN-SPEC.md` + TabsBar API/Demo               | 待严格复核；页签层级、关闭/拖动和横向滚动                                                                                                                                                  |
 | `LxTag`              | `DESIGN-SPEC.md` §2 + Tag API/Demo                | 待严格复核；语义色、尺寸、关闭态与对比度                                                                                                                                                   |

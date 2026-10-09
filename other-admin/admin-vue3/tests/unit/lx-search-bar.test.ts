@@ -193,4 +193,22 @@ describe('LxSearchBar', () => {
     expect(wrapper.get('label').attributes('for')).toBe('lx-search-createdAt-start');
     wrapper.unmount();
   });
+
+  it('keeps four-field actions on the same grid row and exposes default status', () => {
+    const fourFields = fields
+      .concat([
+        { key: 'owner', label: '负责人', type: 'input' as const },
+        { key: 'region', label: '区域', type: 'input' as const },
+      ])
+      .slice(0, 4);
+    const wrapper = mount(LxSearchBar, {
+      props: { fields: fourFields, statusText: '暂无结果' },
+    });
+
+    expect(wrapper.find('.lx-search-bar__grid--inline-actions').exists()).toBe(true);
+    expect(wrapper.find('.lx-search-bar__actions--inline').exists()).toBe(true);
+    expect(wrapper.find('.lx-search-bar__footer').exists()).toBe(false);
+    expect(wrapper.get('[role="status"]').text()).toBe('暂无结果');
+    wrapper.unmount();
+  });
 });

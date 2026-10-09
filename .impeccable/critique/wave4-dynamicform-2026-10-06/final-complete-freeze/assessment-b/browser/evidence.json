@@ -1,0 +1,247 @@
+{
+  "startedAt": "2026-10-06T13:49:33.172Z",
+  "targetUrl": "http://127.0.0.1:4174/components/lxdynamicform.html",
+  "browserAutomation": "@playwright/test via installed admin-vue3 dependency",
+  "browser": {
+    "executablePath": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "version": "154.0.4258.53",
+    "attempts": []
+  },
+  "preflight": {
+    "freshContext": true,
+    "freshPage": true,
+    "responseStatus": 200,
+    "mutableInjectionSucceeded": true,
+    "mutation": {
+      "title": "[Assessment B preflight]",
+      "scriptConnected": true,
+      "scriptType": "classic",
+      "marker": {
+        "executed": true,
+        "marker": "injection-ok"
+      }
+    },
+    "pageState": {
+      "title": "[Assessment B preflight]",
+      "htmlClass": "",
+      "htmlTheme": null,
+      "colorScheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "devicePixelRatio": 1
+      },
+      "pageSize": {
+        "width": 1440,
+        "height": 7352
+      },
+      "horizontalOverflow": false,
+      "bodyStyle": {
+        "color": "rgb(60, 60, 67)",
+        "backgroundColor": "rgb(255, 255, 255)"
+      },
+      "headings": [
+        {
+          "tag": "h2",
+          "text": "新增组件"
+        },
+        {
+          "tag": "h2",
+          "text": "基础"
+        },
+        {
+          "tag": "h2",
+          "text": "布局导航"
+        },
+        {
+          "tag": "h2",
+          "text": "数据展示"
+        },
+        {
+          "tag": "h2",
+          "text": "数据录入"
+        },
+        {
+          "tag": "h2",
+          "text": "反馈与浮层"
+        },
+        {
+          "tag": "h1",
+          "text": "LxDynamicForm 动态表单\n​"
+        },
+        {
+          "tag": "h2",
+          "text": "最小配置\n​"
+        },
+        {
+          "tag": "h2",
+          "text": "交互示例\n​"
+        },
+        {
+          "tag": "h3",
+          "text": "任务信息"
+        },
+        {
+          "tag": "h3",
+          "text": "任务状态"
+        },
+        {
+          "tag": "h3",
+          "text": "附件"
+        },
+        {
+          "tag": "h2",
+          "text": "Props\n​"
+        },
+        {
+          "tag": "h2",
+          "text": "字段 schema\n​"
+        },
+        {
+          "tag": "h2",
+          "text": "Events\n​"
+        },
+        {
+          "tag": "h2",
+          "text": "插槽与实例\n​"
+        },
+        {
+          "tag": "h2",
+          "text": "使用边界\n​"
+        }
+      ],
+      "formCount": 2,
+      "inputCount": 15,
+      "themeButton": [
+        {
+          "title": "Switch to dark theme",
+          "ariaLabel": null
+        },
+        {
+          "title": "Switch to dark theme",
+          "ariaLabel": null
+        }
+      ]
+    },
+    "console": [
+      {
+        "type": "debug",
+        "text": "[vite] connecting...",
+        "location": {
+          "url": "http://127.0.0.1:4174/@vite/client",
+          "lineNumber": 494,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "debug",
+        "text": "[vite] connected.",
+        "location": {
+          "url": "http://127.0.0.1:4174/@vite/client",
+          "lineNumber": 617,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "location": {
+          "url": "http://127.0.0.1:4174/favicon.ico",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "screenshot": "preflight.png"
+  },
+  "liveServer": {
+    "startCommand": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs\" --background",
+    "cwd": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\final-complete-freeze\\assessment-b",
+    "exitCode": 0,
+    "signal": null,
+    "stdoutToken": "已脱敏；PID 和端口单独记录。",
+    "stderr": "",
+    "parseError": null,
+    "started": true,
+    "pid": 13052,
+    "port": 8400,
+    "stopCommand": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs\" stop --keep-inject",
+    "stopExitCode": 0,
+    "stopStdout": "Stopped live server on port 8400.",
+    "stopStderr": "",
+    "stopped": true
+  },
+  "views": [
+    {
+      "id": "light-desktop",
+      "description": "亮色桌面",
+      "status": 200,
+      "theme": {
+        "desired": "light",
+        "method": "initial appearance state",
+        "actual": {
+          "isDark": false,
+          "colorScheme": "light",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      },
+      "injectionSucceeded": true,
+      "overlayCount": 16,
+      "serializedFindingGroups": 16,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "screenshot": "light-desktop.png",
+      "json": "light-desktop.json"
+    },
+    {
+      "id": "dark-desktop-hud",
+      "description": "HUD 深色桌面：深色主题下显示 Impeccable overlay HUD",
+      "status": 200,
+      "theme": {
+        "desired": "dark",
+        "method": "initial appearance state",
+        "actual": {
+          "isDark": true,
+          "colorScheme": "dark",
+          "backgroundColor": "rgb(27, 27, 31)"
+        }
+      },
+      "injectionSucceeded": true,
+      "overlayCount": 325,
+      "serializedFindingGroups": 326,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "screenshot": "dark-desktop-hud.png",
+      "json": "dark-desktop-hud.json"
+    },
+    {
+      "id": "touch-375",
+      "description": "375px 触屏",
+      "status": 200,
+      "theme": {
+        "desired": "light",
+        "method": "initial appearance state",
+        "actual": {
+          "isDark": false,
+          "colorScheme": "light",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      },
+      "injectionSucceeded": true,
+      "overlayCount": 10,
+      "serializedFindingGroups": 10,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "screenshot": "touch-375.png",
+      "json": "touch-375.json"
+    }
+  ],
+  "errors": [],
+  "targetAfterAssessment": {
+    "status": 200,
+    "stillReachable": true
+  },
+  "finishedAt": "2026-10-06T13:49:56.568Z"
+}

@@ -1,0 +1,1378 @@
+{
+  "id": "virtualtree-hud-ready-desktop",
+  "contextOrdinal": 7,
+  "independentContext": true,
+  "page": "VirtualTree",
+  "route": "http://127.0.0.1:4174/components/lxvirtualtree",
+  "requestedTheme": "HUD",
+  "requestedState": "ready",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "mobileContext": false,
+  "detectorServerUrl": "http://127.0.0.1:8400",
+  "startedAt": "2026-10-08T03:30:10.179Z",
+  "succeeded": true,
+  "error": null,
+  "mainDocumentStatus": 200,
+  "renderedState": {
+    "hudClassApplied": true,
+    "pressedButtons": [
+      "正常数据"
+    ],
+    "visibleStatus": "当前已选中 1 项。",
+    "backgroundColor": "rgb(11, 18, 32)"
+  },
+  "preflight": {
+    "originalTitle": "LxVirtualTree 虚拟树 | LxUI",
+    "mutatedTitle": "LxVirtualTree 虚拟树 | LxUI [Assessment B preflight]",
+    "scriptTagConnected": true,
+    "scriptExecuted": true,
+    "scriptCount": 1
+  },
+  "baselinePageMetrics": {
+    "viewportClientWidth": 1440,
+    "windowInnerWidth": 1440,
+    "visualViewportWidth": 1440,
+    "viewportHeight": 1000,
+    "documentClientWidth": 1440,
+    "documentScrollWidth": 1440,
+    "bodyClientWidth": 1440,
+    "bodyScrollWidth": 1440,
+    "horizontalOverflow": false,
+    "pageScrollX": 0,
+    "pageScrollY": 0,
+    "overflowingElements": [],
+    "faviconLinks": [
+      {
+        "href": "http://127.0.0.1:4174/favicon.svg",
+        "rel": "icon",
+        "type": "image/svg+xml"
+      }
+    ],
+    "horizontalOverflowInspectionScope": "body content excluding VitePress right outline navigation and Impeccable overlays"
+  },
+  "faviconProbe": {
+    "linkFound": true,
+    "href": "http://127.0.0.1:4174/favicon.svg",
+    "status": 200,
+    "ok": true,
+    "contentType": "image/svg+xml",
+    "bytes": 456
+  },
+  "overlayInjection": {
+    "requestedUrl": "http://127.0.0.1:8400/detect.js",
+    "scriptTagReturned": true,
+    "scriptResponseStatuses": [
+      {
+        "status": 200,
+        "ok": true
+      }
+    ],
+    "apiReady": true,
+    "scanInvoked": true,
+    "scanResult": {
+      "scanInvoked": true,
+      "scanReturnType": "array",
+      "scanReturnCount": 25,
+      "detectorResults": [
+        {
+          "selector": "div.vp-doc > div > p:nth-of-type(1)",
+          "tagName": "p",
+          "rect": {
+            "x": 384,
+            "y": 168,
+            "width": 688,
+            "height": 58,
+            "top": 168,
+            "right": 1072,
+            "bottom": 226,
+            "left": 384
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "line-length",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "~86 chars/line (aim for <80)",
+              "ignoreValue": "",
+              "name": "Line length too long",
+              "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+            }
+          ]
+        },
+        {
+          "selector": "div.virtual-tree-demo.lx-theme-hud",
+          "tagName": "div",
+          "rect": {
+            "x": 384,
+            "y": 347,
+            "width": 688,
+            "height": 573,
+            "top": 347,
+            "right": 1072,
+            "bottom": 920,
+            "left": 384
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "cramped-padding",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "<div> \"virtual-tree-demo\": children flush against bg on right/left (no inset)",
+              "ignoreValue": "",
+              "name": "Cramped padding",
+              "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers."
+            }
+          ]
+        },
+        {
+          "selector": "div.virtual-tree-demo__toolbar > button:nth-of-type(1)",
+          "tagName": "button",
+          "rect": {
+            "x": 384,
+            "y": 419,
+            "width": 70,
+            "height": 34,
+            "top": 419,
+            "right": 454,
+            "bottom": 453,
+            "left": 384
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.lx-virtual-tree__row.is-checked",
+          "tagName": "div",
+          "rect": {
+            "x": 385,
+            "y": 600,
+            "width": 686,
+            "height": 32,
+            "top": 600,
+            "right": 1071,
+            "bottom": 632,
+            "left": 385
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.lx-virtual-tree__row.is-checked > span.lx-virtual-tree__toggle-placeholder",
+          "tagName": "span",
+          "rect": {
+            "x": 409,
+            "y": 604,
+            "width": 24,
+            "height": 24,
+            "top": 604,
+            "right": 433,
+            "bottom": 628,
+            "left": 409
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.lx-virtual-tree__row.is-checked > label.lx-virtual-tree__checkbox-control",
+          "tagName": "label",
+          "rect": {
+            "x": 437,
+            "y": 604,
+            "width": 24,
+            "height": 24,
+            "top": 604,
+            "right": 461,
+            "bottom": 628,
+            "left": 437
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.lx-virtual-tree__row.is-checked > label.lx-virtual-tree__checkbox-control > input.lx-virtual-tree__checkbox",
+          "tagName": "input",
+          "rect": {
+            "x": 437,
+            "y": 604,
+            "width": 24,
+            "height": 24,
+            "top": 604,
+            "right": 461,
+            "bottom": 628,
+            "left": 437
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.lx-virtual-tree__row.is-checked > svg.lx-icon.lx-virtual-tree__node-icon",
+          "tagName": "svg",
+          "rect": {
+            "x": 465,
+            "y": 608.5,
+            "width": 15,
+            "height": 15,
+            "top": 608.5,
+            "right": 480,
+            "bottom": 623.5,
+            "left": 465
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.lx-virtual-tree__row.is-checked > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(1)",
+          "tagName": "path",
+          "rect": {
+            "x": 468.75,
+            "y": 610.375,
+            "width": 7.5,
+            "height": 11.25,
+            "top": 610.375,
+            "right": 476.25,
+            "bottom": 621.625,
+            "left": 468.75
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.lx-virtual-tree__row.is-checked > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(2)",
+          "tagName": "path",
+          "rect": {
+            "x": 473.75,
+            "y": 610.375,
+            "width": 3.125,
+            "height": 3.125,
+            "top": 610.375,
+            "right": 476.875,
+            "bottom": 613.5,
+            "left": 473.75
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.lx-virtual-tree__row.is-checked > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(3)",
+          "tagName": "path",
+          "rect": {
+            "x": 470.625,
+            "y": 616.625,
+            "width": 3.75,
+            "height": 0,
+            "top": 616.625,
+            "right": 474.375,
+            "bottom": 616.625,
+            "left": 470.625
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.lx-virtual-tree__row.is-checked > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(4)",
+          "tagName": "path",
+          "rect": {
+            "x": 470.625,
+            "y": 619.125,
+            "width": 3.75,
+            "height": 0,
+            "top": 619.125,
+            "right": 474.375,
+            "bottom": 619.125,
+            "left": 470.625
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.lx-virtual-tree__row.is-checked > span.lx-virtual-tree__label",
+          "tagName": "span",
+          "rect": {
+            "x": 484,
+            "y": 606,
+            "width": 69.15625,
+            "height": 20,
+            "top": 606,
+            "right": 553.15625,
+            "bottom": 626,
+            "left": 484
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "span.virtual-tree-demo__selected",
+          "tagName": "span",
+          "rect": {
+            "x": 557.15625,
+            "y": 604,
+            "width": 22,
+            "height": 24,
+            "top": 604,
+            "right": 579.15625,
+            "bottom": 628,
+            "left": 557.15625
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-vue.vp-adaptive-theme > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 1003,
+            "y": 1005,
+            "width": 40,
+            "height": 40,
+            "top": 1005,
+            "right": 1043,
+            "bottom": 1045,
+            "left": 1003
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.vp-doc > div > p:nth-of-type(2)",
+          "tagName": "p",
+          "rect": {
+            "x": 384,
+            "y": 1010,
+            "width": 688,
+            "height": 140,
+            "top": 1010,
+            "right": 1072,
+            "bottom": 1150,
+            "left": 384
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "line-length",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "~86 chars/line (aim for <80)",
+              "ignoreValue": "",
+              "name": "Line length too long",
+              "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(2) > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 1020,
+            "y": 2679,
+            "width": 40,
+            "height": 40,
+            "top": 2679,
+            "right": 1060,
+            "bottom": 2719,
+            "left": 1020
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(3) > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 1020,
+            "y": 3029.75,
+            "width": 40,
+            "height": 40,
+            "top": 3029.75,
+            "right": 1060,
+            "bottom": 3069.75,
+            "left": 1020
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(4) > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 1020,
+            "y": 3934.3125,
+            "width": 40,
+            "height": 40,
+            "top": 3934.3125,
+            "right": 1060,
+            "bottom": 3974.3125,
+            "left": 1020
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "fieldset.virtual-tree-demo__action-group:nth-of-type(1) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "tagName": "button",
+          "rect": {
+            "x": 393,
+            "y": 481,
+            "width": 109,
+            "height": 34,
+            "top": 481,
+            "right": 502,
+            "bottom": 515,
+            "left": 393
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "text-occlusion",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "button \"筛选第二个辖区\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)",
+              "ignoreValue": "",
+              "name": "Text occluded by an overlapping element",
+              "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+            }
+          ]
+        },
+        {
+          "selector": "fieldset.virtual-tree-demo__action-group:nth-of-type(2) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "tagName": "button",
+          "rect": {
+            "x": 626.328125,
+            "y": 481,
+            "width": 96,
+            "height": 34,
+            "top": 481,
+            "right": 722.328125,
+            "bottom": 515,
+            "left": 626.328125
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "text-occlusion",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "button \"设置示例选择\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)",
+              "ignoreValue": "",
+              "name": "Text occluded by an overlapping element",
+              "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+            }
+          ]
+        },
+        {
+          "selector": "fieldset.virtual-tree-demo__action-group:nth-of-type(2) > div.virtual-tree-demo__action-content > button:nth-of-type(2)",
+          "tagName": "button",
+          "rect": {
+            "x": 726.328125,
+            "y": 481,
+            "width": 83,
+            "height": 34,
+            "top": 481,
+            "right": 809.328125,
+            "bottom": 515,
+            "left": 726.328125
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "text-occlusion",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "button \"读取选中键\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)",
+              "ignoreValue": "",
+              "name": "Text occluded by an overlapping element",
+              "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+            }
+          ]
+        },
+        {
+          "selector": "fieldset.virtual-tree-demo__action-group:nth-of-type(3) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "tagName": "button",
+          "rect": {
+            "x": 859.65625,
+            "y": 481,
+            "width": 70,
+            "height": 34,
+            "top": 481,
+            "right": 929.65625,
+            "bottom": 515,
+            "left": 859.65625
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "text-occlusion",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "button \"展开全部\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)",
+              "ignoreValue": "",
+              "name": "Text occluded by an overlapping element",
+              "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+            }
+          ]
+        },
+        {
+          "selector": "fieldset.virtual-tree-demo__action-group:nth-of-type(3) > div.virtual-tree-demo__action-content > button:nth-of-type(2)",
+          "tagName": "button",
+          "rect": {
+            "x": 933.65625,
+            "y": 481,
+            "width": 70,
+            "height": 34,
+            "top": 481,
+            "right": 1003.65625,
+            "bottom": 515,
+            "left": 933.65625
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "text-occlusion",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "button \"收起全部\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)",
+              "ignoreValue": "",
+              "name": "Text occluded by an overlapping element",
+              "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+            }
+          ]
+        },
+        {
+          "selector": "body",
+          "tagName": "body",
+          "rect": null,
+          "isPageLevel": true,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "layout-transition",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "transition: height, padding-top, padding-bottom",
+              "ignoreValue": "",
+              "name": "Layout property animation",
+              "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+            }
+          ]
+        }
+      ]
+    },
+    "error": null,
+    "overlayNodes": [
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "targetTag": "p",
+        "targetClass": "",
+        "targetText": "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "body > div:nth-of-type(1) > div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > p:nth-of-type(1)",
+          "visible": true,
+          "rect": {
+            "x": 384,
+            "y": 168,
+            "width": 688,
+            "height": 58
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "cramped padding",
+        "targetTag": "div",
+        "targetClass": "virtual-tree-demo lx-theme-hud",
+        "targetText": "演示状态和更多操作 正常数据  空结果  加载中  加载失败 筛选 筛选第二个辖区  按编码筛选第二个辖区 清除筛选选中 设置示例选择 读取选中键展开与定位展开全部收起全部 定位末尾节点 选择方式 父子独立勾选 外观主题 HUD 深色主题 树数据已就绪 勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。 当前已选中 1 项。辖区",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1)",
+          "visible": true,
+          "rect": {
+            "x": 384,
+            "y": 347,
+            "width": 688,
+            "height": 573
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "✦ ai color palette",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "正常数据",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__toolbar:nth-of-type(1) > button:nth-of-type(1)",
+          "visible": false,
+          "rect": {
+            "x": 384,
+            "y": 419,
+            "width": 70,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "✦ ai color palette",
+        "targetTag": "div",
+        "targetClass": "lx-virtual-tree__row is-checked",
+        "targetText": "执勤单元 01已选",
+        "target": {
+          "scope": {
+            "kind": "component",
+            "tag": "section",
+            "className": "lx-virtual-tree"
+          },
+          "selector": "section.lx-virtual-tree > div.lx-virtual-tree__viewport:nth-of-type(2) > div.lx-virtual-tree__row.is-checked:nth-of-type(3)",
+          "visible": true,
+          "rect": {
+            "x": 385,
+            "y": 600,
+            "width": 686,
+            "height": 32
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "✦ ai color palette",
+        "targetTag": "span",
+        "targetClass": "lx-virtual-tree__toggle-placeholder",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "component",
+            "tag": "section",
+            "className": "lx-virtual-tree"
+          },
+          "selector": "section.lx-virtual-tree > div.lx-virtual-tree__viewport:nth-of-type(2) > div.lx-virtual-tree__row.is-checked:nth-of-type(3) > span.lx-virtual-tree__toggle-placeholder:nth-of-type(1)",
+          "visible": true,
+          "rect": {
+            "x": 409,
+            "y": 604,
+            "width": 24,
+            "height": 24
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "✦ ai color palette",
+        "targetTag": "label",
+        "targetClass": "lx-virtual-tree__checkbox-control",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "component",
+            "tag": "section",
+            "className": "lx-virtual-tree"
+          },
+          "selector": "section.lx-virtual-tree > div.lx-virtual-tree__viewport:nth-of-type(2) > div.lx-virtual-tree__row.is-checked:nth-of-type(3) > label.lx-virtual-tree__checkbox-control",
+          "visible": true,
+          "rect": {
+            "x": 437,
+            "y": 604,
+            "width": 24,
+            "height": 24
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "✦ ai color palette",
+        "targetTag": "input",
+        "targetClass": "lx-virtual-tree__checkbox",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "component",
+            "tag": "section",
+            "className": "lx-virtual-tree"
+          },
+          "selector": "section.lx-virtual-tree > div.lx-virtual-tree__viewport:nth-of-type(2) > div.lx-virtual-tree__row.is-checked:nth-of-type(3) > label.lx-virtual-tree__checkbox-control > input.lx-virtual-tree__checkbox",
+          "visible": true,
+          "rect": {
+            "x": 437,
+            "y": 604,
+            "width": 24,
+            "height": 24
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "✦ ai color palette",
+        "targetTag": "svg",
+        "targetClass": "[object SVGAnimatedString]",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "component",
+            "tag": "section",
+            "className": "lx-virtual-tree"
+          },
+          "selector": "section.lx-virtual-tree > div.lx-virtual-tree__viewport:nth-of-type(2) > div.lx-virtual-tree__row.is-checked:nth-of-type(3) > svg.lx-icon.lx-virtual-tree__node-icon",
+          "visible": true,
+          "rect": {
+            "x": 465,
+            "y": 609,
+            "width": 15,
+            "height": 15
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "✦ ai color palette",
+        "targetTag": "path",
+        "targetClass": "[object SVGAnimatedString]",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "component",
+            "tag": "section",
+            "className": "lx-virtual-tree"
+          },
+          "selector": "section.lx-virtual-tree > div.lx-virtual-tree__viewport:nth-of-type(2) > div.lx-virtual-tree__row.is-checked:nth-of-type(3) > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(1)",
+          "visible": true,
+          "rect": {
+            "x": 469,
+            "y": 610,
+            "width": 8,
+            "height": 11
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "✦ ai color palette",
+        "targetTag": "path",
+        "targetClass": "[object SVGAnimatedString]",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "component",
+            "tag": "section",
+            "className": "lx-virtual-tree"
+          },
+          "selector": "section.lx-virtual-tree > div.lx-virtual-tree__viewport:nth-of-type(2) > div.lx-virtual-tree__row.is-checked:nth-of-type(3) > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(2)",
+          "visible": true,
+          "rect": {
+            "x": 474,
+            "y": 610,
+            "width": 3,
+            "height": 3
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "✦ ai color palette",
+        "targetTag": "path",
+        "targetClass": "[object SVGAnimatedString]",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "component",
+            "tag": "section",
+            "className": "lx-virtual-tree"
+          },
+          "selector": "section.lx-virtual-tree > div.lx-virtual-tree__viewport:nth-of-type(2) > div.lx-virtual-tree__row.is-checked:nth-of-type(3) > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(3)",
+          "visible": false,
+          "rect": {
+            "x": 471,
+            "y": 617,
+            "width": 4,
+            "height": 0
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "✦ ai color palette",
+        "targetTag": "path",
+        "targetClass": "[object SVGAnimatedString]",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "component",
+            "tag": "section",
+            "className": "lx-virtual-tree"
+          },
+          "selector": "section.lx-virtual-tree > div.lx-virtual-tree__viewport:nth-of-type(2) > div.lx-virtual-tree__row.is-checked:nth-of-type(3) > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(4)",
+          "visible": false,
+          "rect": {
+            "x": 471,
+            "y": 619,
+            "width": 4,
+            "height": 0
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "✦ ai color palette",
+        "targetTag": "span",
+        "targetClass": "lx-virtual-tree__label",
+        "targetText": "执勤单元 01",
+        "target": {
+          "scope": {
+            "kind": "component",
+            "tag": "section",
+            "className": "lx-virtual-tree"
+          },
+          "selector": "section.lx-virtual-tree > div.lx-virtual-tree__viewport:nth-of-type(2) > div.lx-virtual-tree__row.is-checked:nth-of-type(3) > span.lx-virtual-tree__label:nth-of-type(2)",
+          "visible": true,
+          "rect": {
+            "x": 484,
+            "y": 606,
+            "width": 69,
+            "height": 20
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "✦ ai color palette",
+        "targetTag": "span",
+        "targetClass": "virtual-tree-demo__selected",
+        "targetText": "已选",
+        "target": {
+          "scope": {
+            "kind": "component",
+            "tag": "section",
+            "className": "lx-virtual-tree"
+          },
+          "selector": "section.lx-virtual-tree > div.lx-virtual-tree__viewport:nth-of-type(2) > div.lx-virtual-tree__row.is-checked:nth-of-type(3) > span.virtual-tree-demo__selected:nth-of-type(3)",
+          "visible": true,
+          "rect": {
+            "x": 557,
+            "y": 604,
+            "width": 22,
+            "height": 24
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "raster buried under a wash or opacity",
+        "targetTag": "button",
+        "targetClass": "copy",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+          "visible": false,
+          "rect": {
+            "x": 1003,
+            "y": 1005,
+            "width": 40,
+            "height": 40
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "targetTag": "p",
+        "targetClass": "",
+        "targetText": "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，展开后按筛选、选中、展开与定位、行为选项分组，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "body > div:nth-of-type(1) > div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > p:nth-of-type(2)",
+          "visible": true,
+          "rect": {
+            "x": 384,
+            "y": 1010,
+            "width": 688,
+            "height": 140
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "raster buried under a wash or opacity",
+        "targetTag": "button",
+        "targetClass": "copy",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "div:nth-of-type(1) > div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > div.language-ts.vp-adaptive-theme:nth-of-type(2) > button.copy",
+          "visible": true,
+          "rect": {
+            "x": 1020,
+            "y": 2679,
+            "width": 40,
+            "height": 40
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "raster buried under a wash or opacity",
+        "targetTag": "button",
+        "targetClass": "copy",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "div:nth-of-type(1) > div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > div.language-ts.vp-adaptive-theme:nth-of-type(3) > button.copy",
+          "visible": true,
+          "rect": {
+            "x": 1020,
+            "y": 3030,
+            "width": 40,
+            "height": 40
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "raster buried under a wash or opacity",
+        "targetTag": "button",
+        "targetClass": "copy",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "div:nth-of-type(1) > div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > div.language-ts.vp-adaptive-theme:nth-of-type(4) > button.copy",
+          "visible": true,
+          "rect": {
+            "x": 1020,
+            "y": 3934,
+            "width": 40,
+            "height": 40
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "text occluded by an overlapping element",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "筛选第二个辖区",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__actions:nth-of-type(2) > fieldset.virtual-tree-demo__action-group:nth-of-type(1) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "visible": false,
+          "rect": {
+            "x": 393,
+            "y": 481,
+            "width": 109,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "text occluded by an overlapping element",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "设置示例选择",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__actions:nth-of-type(2) > fieldset.virtual-tree-demo__action-group:nth-of-type(2) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "visible": false,
+          "rect": {
+            "x": 626,
+            "y": 481,
+            "width": 96,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "text occluded by an overlapping element",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "读取选中键",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__actions:nth-of-type(2) > fieldset.virtual-tree-demo__action-group:nth-of-type(2) > div.virtual-tree-demo__action-content > button:nth-of-type(2)",
+          "visible": false,
+          "rect": {
+            "x": 726,
+            "y": 481,
+            "width": 83,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "text occluded by an overlapping element",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "展开全部",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__actions:nth-of-type(2) > fieldset.virtual-tree-demo__action-group:nth-of-type(3) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "visible": false,
+          "rect": {
+            "x": 860,
+            "y": 481,
+            "width": 70,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "text occluded by an overlapping element",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "收起全部",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__actions:nth-of-type(2) > fieldset.virtual-tree-demo__action-group:nth-of-type(3) > div.virtual-tree-demo__action-content > button:nth-of-type(2)",
+          "visible": false,
+          "rect": {
+            "x": 934,
+            "y": 481,
+            "width": 70,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay impeccable-banner",
+        "text": "layout property animation: transition: height, padding-top, padding-bottom◉×",
+        "target": null,
+        "display": "flex"
+      }
+    ]
+  },
+  "pageMetrics": {
+    "viewportClientWidth": 1440,
+    "windowInnerWidth": 1440,
+    "visualViewportWidth": 1440,
+    "viewportHeight": 1000,
+    "documentClientWidth": 1440,
+    "documentScrollWidth": 1440,
+    "bodyClientWidth": 1440,
+    "bodyScrollWidth": 1440,
+    "horizontalOverflow": false,
+    "pageScrollX": 0,
+    "pageScrollY": 0,
+    "overflowingElements": [],
+    "faviconLinks": [
+      {
+        "href": "http://127.0.0.1:4174/favicon.svg",
+        "rel": "icon",
+        "type": "image/svg+xml"
+      }
+    ],
+    "horizontalOverflowInspectionScope": "body content excluding VitePress right outline navigation and Impeccable overlays",
+    "injectedDetectorNodes": 2,
+    "documentScrollWidthBeforeOverlay": 1440,
+    "pageOwnsHorizontalOverflow": false
+  },
+  "screenshot": "browser/screenshots/virtualtree-hud-ready-desktop.png",
+  "screenshotSha256": "bd23d51600dbd9a0f07bd9696be216fc590ead2152cb37efe85371dafff4aea6",
+  "faviconResponses": [
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:4174/favicon.svg",
+      "status": 200,
+      "ok": true,
+      "resourceType": "fetch",
+      "at": "2026-10-08T03:30:11.692Z"
+    }
+  ],
+  "favicon404s": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrorCount": 0,
+  "pageErrorCount": 0,
+  "finishedAt": "2026-10-08T03:30:17.403Z"
+}

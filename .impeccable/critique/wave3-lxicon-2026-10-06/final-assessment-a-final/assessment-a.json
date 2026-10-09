@@ -1,0 +1,66 @@
+{
+  "method": "Assessment A isolated design review; fresh Playwright Edge context",
+  "target": "http://127.0.0.1:4174/components/lxicons.html",
+  "source": "linkx-fe/docs/components/lxicons.md",
+  "detector": "not run by assignment scope",
+  "assessmentB": "not read by assignment scope",
+  "codeReviewReports": "not read by assignment scope",
+  "heuristics": [
+    { "id": 1, "name": "Visibility of System Status", "score": 3, "keyIssue": "Copy and empty states are clear; the filtered result count is per group." },
+    { "id": 2, "name": "Match Between System and Real World", "score": 3, "keyIssue": "Chinese labels are natural, while P0/P1/P2 and kebab-case remain maintainer language." },
+    { "id": 3, "name": "User Control and Freedom", "score": 3, "keyIssue": "Search can be cleared and groups can be collapsed." },
+    { "id": 4, "name": "Consistency and Standards", "score": 4, "keyIssue": "Native buttons and details/summary patterns behave predictably." },
+    { "id": 5, "name": "Error Prevention", "score": 3, "keyIssue": "Input examples and empty-state recovery are clear." },
+    { "id": 6, "name": "Recognition Rather Than Recall", "score": 3, "keyIssue": "Icon labels and synonyms help; every group starts collapsed." },
+    { "id": 7, "name": "Flexibility and Efficiency of Use", "score": 2, "keyIssue": "Basic keyboard flow works; shortcuts, favorites, and batch copy are absent." },
+    { "id": 8, "name": "Aesthetic and Minimalist Design", "score": 3, "keyIssue": "Clear hierarchy; seven peer categories and long reference content compete for attention." },
+    { "id": 9, "name": "Help Users Recognize, Diagnose, and Recover from Errors", "score": 3, "keyIssue": "Copy failure explains manual recovery and preserves the selected code." },
+    { "id": 10, "name": "Help and Documentation", "score": 3, "keyIssue": "Usage and specification guidance is complete but embedded in a long page." }
+  ],
+  "total": 30,
+  "applicableMaximum": 40,
+  "rating": "Good",
+  "cognitiveLoad": {
+    "rating": "moderate",
+    "failedChecklistItems": [
+      "Chunking: seven peer categories are shown together; expanded groups contain 10 to 29 icons.",
+      "Minimal choices: the initial browsing decision presents seven category choices, above the four-item reference threshold."
+    ],
+    "passedChecklistItems": [
+      "Single focus",
+      "Grouping",
+      "Visual hierarchy",
+      "One thing at a time",
+      "Working memory",
+      "Progressive disclosure"
+    ]
+  },
+  "priorityIssues": [
+    {
+      "priority": "P2",
+      "title": "All seven catalog groups start collapsed",
+      "evidence": "mobile-375-light.png; browser-evidence.json observations.mobile375Light.initiallyOpenGroups",
+      "suggestedCommand": "/impeccable onboard"
+    },
+    {
+      "priority": "P2",
+      "title": "Mobile copy toast overlays the navigation header",
+      "evidence": "mobile-375-copy-success.png; mobile-375-copy-failure.png",
+      "suggestedCommand": "/impeccable adapt"
+    },
+    {
+      "priority": "P2",
+      "title": "Narrow-screen checklist table is difficult to read",
+      "evidence": "mobile-320-light.png; mobile-375-light.png",
+      "suggestedCommand": "/impeccable adapt"
+    }
+  ],
+  "browserEvidence": "browser-evidence.json",
+  "captureCount": 10,
+  "boundary": [
+    "Assessment B and code review reports were not read.",
+    "Detector was not run.",
+    "Edge/Chromium was used; Safari, Firefox, and real screen readers were not tested.",
+    "Clipboard failure was simulated by rejecting navigator.clipboard.writeText in the isolated page."
+  ]
+}

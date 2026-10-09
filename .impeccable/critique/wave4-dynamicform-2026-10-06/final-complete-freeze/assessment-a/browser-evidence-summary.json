@@ -1,0 +1,122 @@
+{
+  "browser": "154.0.8037.95",
+  "target": "http://127.0.0.1:4174/components/lxdynamicform.html",
+  "desktop": {
+    "httpStatus": 200,
+    "interactions": [
+      {
+        "action": "empty-form-submit",
+        "fieldErrors": [
+          "请输入任务名称",
+          "请输入访问密码"
+        ],
+        "footer": "提交校验\n重置\n请填写标红的必填字段"
+      },
+      {
+        "action": "required-fields-recovery",
+        "fieldErrors": [
+          "请输入任务名称",
+          "请输入访问密码"
+        ],
+        "footer": "提交校验\n重置\n表单已校验：完整冻结评估任务",
+        "nameValue": "完整冻结评估任务",
+        "passwordRetained": true
+      },
+      {
+        "action": "upload-failure",
+        "fileRow": "重试-严格冻结评估.png\n上传失败\n18 B\n上传失败，请重试\n重新上传"
+      },
+      {
+        "action": "upload-retry",
+        "retryFound": true,
+        "fileRow": "重试-严格冻结评估.png\n上传成功\n18 B"
+      },
+      {
+        "action": "type-list-open-by-keyboard",
+        "count": 14,
+        "options": [
+          "文本输入",
+          "密码输入",
+          "多行文本",
+          "数字输入",
+          "下拉选择",
+          "远程选择",
+          "树形选择",
+          "日期选择",
+          "日期范围",
+          "开关",
+          "单选组",
+          "多选组",
+          "文件上传",
+          "自定义插槽"
+        ]
+      },
+      {
+        "action": "type-list-filter",
+        "query": "密码",
+        "count": 1,
+        "options": [
+          "密码输入"
+        ]
+      },
+      {
+        "action": "keyboard-select-password-type",
+        "previewLabel": "密码输入示例",
+        "inputType": "password"
+      },
+      {
+        "action": "keyboard-select-upload-type",
+        "previewLabel": "文件上传示例",
+        "fileInputCount": 1,
+        "uploadButtonCount": 1
+      }
+    ],
+    "consoleErrors": [
+      {
+        "text": "UploadAjaxError: 上传失败，请重试\n    at finish (http://127.0.0.1:4174/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxDynamicForm/demo/basic.vue?t=1791292616472:351:39)",
+        "location": {
+          "url": "http://127.0.0.1:4174/.vitepress/cache/deps/element-plus.js?v=1b82acbd",
+          "lineNumber": 66772,
+          "columnNumber": 12
+        }
+      }
+    ],
+    "httpFailures": []
+  },
+  "mobile": {
+    "httpStatus": 200,
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "document": {
+      "width": 375,
+      "height": 9602
+    },
+    "interactions": [
+      {
+        "action": "mobile-empty-submit",
+        "fieldErrors": [
+          "请输入任务名称",
+          "请输入访问密码"
+        ],
+        "actions": [
+          {
+            "label": "提交校验",
+            "x": 37,
+            "y": 2392,
+            "width": 86,
+            "height": 44
+          },
+          {
+            "label": "重置",
+            "x": 143,
+            "y": 2392,
+            "width": 60,
+            "height": 44
+          }
+        ]
+      }
+    ]
+  }
+}

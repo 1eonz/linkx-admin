@@ -1,0 +1,87 @@
+{
+  "method": "fresh isolated Edge/Playwright context; read-only DOM state check",
+  "target": "http://127.0.0.1:4174/components/lxicons.html",
+  "detector": "not run",
+  "priorAssessmentArtifacts": "not opened",
+  "assistiveTechnologyTest": "not run; live-region DOM state only",
+  "sourceEvidence": {
+    "file": "linkx-fe/docs/components/lxicons.md",
+    "lines": [349, 352],
+    "liveRegionSelector": ".icon-search-status",
+    "liveRegionAttributes": {
+      "role": "status",
+      "aria-live": "polite",
+      "aria-atomic": "true"
+    },
+    "visibleEmptyCopyAriaHidden": true
+  },
+  "e2eAssertionEvidence": {
+    "file": "other-admin/admin-vue3/tests/e2e/lx-icon-docs.spec.ts",
+    "lines": [54, 101],
+    "assertsInitiallyAttachedAndEmpty": true,
+    "assertsNoMatchText": true,
+    "assertsVisibleCopyAriaHidden": true,
+    "assertsRoleStatus": true,
+    "assertsAriaLivePolite": true,
+    "assertsAriaAtomic": false,
+    "executedThisTurn": false
+  },
+  "viewport": {
+    "width": 375,
+    "height": 812
+  },
+  "beforeSearch": {
+    "status": {
+      "exists": true,
+      "text": "",
+      "role": "status",
+      "ariaLive": "polite",
+      "ariaAtomic": "true",
+      "ariaHidden": null,
+      "visualBounds": {
+        "width": 1,
+        "height": 1,
+        "visible": true
+      }
+    },
+    "visibleEmptyCopy": {
+      "exists": false
+    },
+    "query": "",
+    "groupCount": 7
+  },
+  "afterNoMatchSearch": {
+    "status": {
+      "exists": true,
+      "text": "无匹配图标",
+      "role": "status",
+      "ariaLive": "polite",
+      "ariaAtomic": "true",
+      "ariaHidden": null,
+      "visualBounds": {
+        "width": 1,
+        "height": 1,
+        "visible": true
+      }
+    },
+    "visibleEmptyCopy": {
+      "exists": true,
+      "text": "无匹配图标",
+      "ariaHidden": "true",
+      "visualBounds": {
+        "width": 327,
+        "height": 76,
+        "visible": true
+      }
+    },
+    "query": "postfix-status-node-no-match-xyzz",
+    "groupCount": 0
+  },
+  "conclusion": {
+    "liveRegionRemainsMounted": true,
+    "liveRegionTextChanges": true,
+    "visualEmptyCopyIsHiddenFromAssistiveTechnology": true,
+    "liveRegionHasExpectedSemantics": true
+  },
+  "completedAt": "2026-10-05T23:10:08.074Z"
+}

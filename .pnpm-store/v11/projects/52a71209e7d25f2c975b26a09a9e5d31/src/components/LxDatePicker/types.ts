@@ -23,12 +23,12 @@ export type LxDatePickerType =
   | 'yearrange'
 
 /**
- * v-model 值：单值为单标量，区间为二元数组。
+ * v-model 值：单值为单标量，区间为二元数组；默认清空值为 null。
  * 数组形对齐 EP ModelValueType 同质数组契约（string[] | number[] | Date[]，
  * 区间起止值同类型），混合类型数组在运行时也会被 dayjs 归一失败。
  */
 export type LxDateModelValue =
-  string | number | Date | string[] | number[] | Date[]
+  string | number | Date | string[] | number[] | Date[] | null
 
 export type LxDatePickerSize = 'sm' | 'md' | 'lg'
 

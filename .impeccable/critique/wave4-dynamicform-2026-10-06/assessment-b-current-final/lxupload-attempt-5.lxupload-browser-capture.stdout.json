@@ -1,0 +1,122 @@
+{
+  "targetUrl": "http://127.0.0.1:4182/components/lxupload",
+  "browser": {
+    "version": "154.0.8037.95",
+    "automation": "Playwright 1.58.0 with isolated fresh contexts; system Chrome"
+  },
+  "injectionCount": 1,
+  "viewCount": 3,
+  "checks": [
+    {
+      "name": "navigation-lxupload-desktop",
+      "passed": true,
+      "details": {
+        "status": 200,
+        "url": "http://127.0.0.1:4182/components/lxupload"
+      }
+    },
+    {
+      "name": "viewport-lxupload-desktop",
+      "passed": true,
+      "details": {
+        "expected": 1440,
+        "innerWidth": 1440,
+        "visualViewportWidth": 1440,
+        "documentWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "detector-injection-lxupload-desktop",
+      "passed": true,
+      "details": {
+        "label": "lxupload-desktop",
+        "preflight": {
+          "titleSet": true,
+          "scriptInserted": true,
+          "scriptUrl": "http://127.0.0.1:8400/detect.js"
+        },
+        "detectorReady": true,
+        "requestSeen": true,
+        "previousTitle": "LxUpload 文件上传 | LxUI"
+      }
+    },
+    {
+      "name": "browser-overlay-visible-lxupload-desktop-light",
+      "passed": true,
+      "details": {
+        "findingCount": 34,
+        "overlayVisible": 12
+      }
+    },
+    {
+      "name": "lxupload-dark-hud-rendered",
+      "passed": true,
+      "details": {
+        "light": {
+          "class": "",
+          "lxCardToken": "#ffffff",
+          "lxCardHoverToken": "#f2f4f8",
+          "uploadSurfaceBackground": "rgb(242, 244, 248)"
+        },
+        "darkHud": {
+          "class": "dark lx-theme-hud",
+          "lxCardToken": "#101a2c",
+          "lxCardHoverToken": "#16233a",
+          "uploadSurfaceBackground": "rgb(242, 244, 248)",
+          "luminance": 0.010307971146801835
+        }
+      }
+    },
+    {
+      "name": "browser-overlay-visible-lxupload-desktop-dark-hud",
+      "passed": true,
+      "details": {
+        "findingCount": 90,
+        "overlayVisible": 38
+      }
+    },
+    {
+      "name": "compact-list-mode",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "browser-overlay-visible-lxupload-upload-failure",
+      "passed": true,
+      "details": {
+        "findingCount": 173,
+        "overlayVisible": 21
+      }
+    }
+  ],
+  "errors": [
+    {
+      "name": "TimeoutError",
+      "message": "locator.innerText: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.lx-upload-demo').locator('.lx-upload__file').filter({ hasText: 'night-shift.csv' }).locator('.lx-upload__file-status')\u001b[22m\n",
+      "stack": "locator.innerText: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.lx-upload-demo').locator('.lx-upload__file').filter({ hasText: 'night-shift.csv' }).locator('.lx-upload__file-status')\u001b[22m\n\n    at run (F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-b-current-final\\capture-lxupload.mjs:331:72)\n    at async file:///F:/work/linkx-admin/.impeccable/critique/wave4-dynamicform-2026-10-06/assessment-b-current-final/capture-lxupload.mjs:376:3"
+    }
+  ],
+  "consoleErrors": 1,
+  "pageErrors": 0,
+  "failedRequests": 0,
+  "httpFailures": 0,
+  "networkGuard": null,
+  "screenshots": [
+    {
+      "file": "screenshots/lxupload-desktop-light.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "screenshots/lxupload-desktop-dark-hud.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "screenshots/lxupload-upload-failure.png",
+      "width": 1440,
+      "height": 1000
+    }
+  ]
+}

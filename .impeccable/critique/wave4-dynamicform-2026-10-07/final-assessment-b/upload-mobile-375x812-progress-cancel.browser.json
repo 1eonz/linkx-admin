@@ -1,0 +1,164 @@
+{
+  "scenario": "upload-mobile-375x812-progress-cancel",
+  "route": "http://127.0.0.1:4174/components/lxupload",
+  "viewport": {
+    "width": 375,
+    "height": 812
+  },
+  "deviceScaleFactor": 1,
+  "mobile": true,
+  "hasTouch": true,
+  "freshContextAndPage": true,
+  "browserName": "Chromium (Playwright)",
+  "navigation": {
+    "status": 200,
+    "finalUrl": "http://127.0.0.1:4174/components/lxupload",
+    "title": ""
+  },
+  "heading": "LxUpload 文件上传\n​",
+  "preflight": {
+    "titleChanged": true,
+    "scriptAppended": true,
+    "inlineScriptRan": true
+  },
+  "interaction": {
+    "autoUpload": true,
+    "cancelVisible": true,
+    "progressValue": "20",
+    "fileName": "schedule.csv"
+  },
+  "overlay": {
+    "url": "http://localhost:8400/detect.js",
+    "injectionAttempts": [
+      {
+        "attempt": 1,
+        "loaded": true,
+        "error": null
+      }
+    ],
+    "scriptLoaded": true,
+    "scanFunctionAvailable": true,
+    "scanReturnedArray": true,
+    "findingCount": 4,
+    "scan": [
+      {
+        "el": "ref: <Node>",
+        "findings": [
+          {
+            "type": "clipped-overflow-container",
+            "detail": "span.container clips a positioned child"
+          }
+        ]
+      },
+      {
+        "el": "ref: <Node>",
+        "findings": [
+          {
+            "type": "cramped-padding",
+            "detail": "<div> \"el-upload-dragger\": children flush against border+bg on right/bottom/left (no inset)"
+          }
+        ]
+      },
+      {
+        "el": "ref: <Node>",
+        "findings": [
+          {
+            "type": "buried-raster",
+            "detail": "raster background at opacity 0"
+          }
+        ]
+      },
+      {
+        "el": "ref: <Node>",
+        "findings": [
+          {
+            "type": "layout-transition",
+            "detail": "transition: height, padding-top, padding-bottom"
+          }
+        ]
+      }
+    ],
+    "globalKeys": [
+      "impeccableAnalyzeVisualContrast",
+      "impeccableCollectVisualContrastCandidates",
+      "impeccableDetect",
+      "impeccableDetectAsync",
+      "impeccableGetLastVisualContrastAnalyses",
+      "impeccableMeasureHiddenText",
+      "impeccableScan",
+      "impeccableScanAsync"
+    ],
+    "overlayDom": [
+      {
+        "className": "impeccable-overlay",
+        "text": "positioned child clipped by overflow container"
+      },
+      {
+        "className": "impeccable-label",
+        "text": "positioned child clipped by overflow container"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "cramped padding"
+      },
+      {
+        "className": "impeccable-label",
+        "text": "cramped padding"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "raster buried under a wash or opacity"
+      },
+      {
+        "className": "impeccable-label",
+        "text": "raster buried under a wash or opacity"
+      },
+      {
+        "className": "impeccable-overlay impeccable-banner",
+        "text": "layout property animation: transition: height, padding-top, padding-bottom\n◉\n×"
+      }
+    ],
+    "consoleMessages": [
+      {
+        "type": "startGroup",
+        "text": "%c[impeccable] 3 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      },
+      {
+        "type": "startGroup",
+        "text": "%c[impeccable] 4 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      }
+    ],
+    "ran": true
+  },
+  "screenshot": {
+    "path": "screenshots/upload-mobile-375x812-progress-cancel.png",
+    "dimensions": {
+      "width": 375,
+      "height": 812
+    },
+    "matchesViewport": true,
+    "overlayIncluded": true,
+    "unmodifiedPng": true
+  },
+  "postCaptureInteraction": {
+    "cancelClicked": false,
+    "cancelCount": "0",
+    "lastAction": "schedule.csv 上传成功"
+  },
+  "errors": [],
+  "pageTheme": {
+    "htmlClass": "",
+    "bodyClass": "",
+    "scrollY": 1041
+  },
+  "browserNetwork": {
+    "localRequestCount": 416,
+    "failedCount": 0,
+    "externalAttemptCount": 0,
+    "httpErrorCount": 0,
+    "pageErrorCount": 0,
+    "noExternalRequests": true,
+    "noHttpErrors": true,
+    "noPageErrors": true
+  }
+}

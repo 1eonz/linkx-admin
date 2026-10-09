@@ -1,0 +1,45 @@
+{
+  "baseUrl": "http://127.0.0.1:4174",
+  "targetPath": "/components/lxdynamicform.html",
+  "browser": "Headless Google Chrome launched by Playwright Chromium",
+  "browserExecutablePath": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "detectorPath": "C:/Users/Administrator/.codex/skills/impeccable/scripts/detector/detect-antipatterns-browser.js",
+  "context": "本轮新建的独立 BrowserContext 与 Page",
+  "pageResults": [
+    {
+      "target": "lxdynamicform",
+      "url": "http://127.0.0.1:4174/components/lxdynamicform.html",
+      "console": [],
+      "pageErrors": [],
+      "requests": [
+        {
+          "url": "http://127.0.0.1:4174/components/lxdynamicform.html",
+          "method": "GET"
+        }
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:4174/components/lxdynamicform.html",
+          "failure": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "injection": {},
+      "themeTransitions": [],
+      "views": [],
+      "interaction": {},
+      "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4174/components/lxdynamicform.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4174/components/lxdynamicform.html\", waiting until \"load\"\u001b[22m\n\n    at run (F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-07\\final-recheck\\assessment-b\\playwright-capture-dynamicform.mjs:260:35)\n    at async file:///F:/work/linkx-admin/other-admin/admin-vue3/[eval1]:1:219",
+      "requestDomains": [
+        "127.0.0.1"
+      ],
+      "externalRequests": [],
+      "noExternalRequests": true
+    }
+  ],
+  "screenshotIndex": [],
+  "errors": [
+    {
+      "target": "lxdynamicform",
+      "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4174/components/lxdynamicform.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4174/components/lxdynamicform.html\", waiting until \"load\"\u001b[22m\n\n    at run (F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-07\\final-recheck\\assessment-b\\playwright-capture-dynamicform.mjs:260:35)\n    at async file:///F:/work/linkx-admin/other-admin/admin-vue3/[eval1]:1:219"
+    }
+  ]
+}

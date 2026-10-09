@@ -1,0 +1,419 @@
+{
+  "id": "mobile-320-reflow",
+  "viewport": {
+    "width": 320,
+    "height": 780
+  },
+  "colorScheme": "light",
+  "isMobile": true,
+  "hasTouch": true,
+  "startedAt": "2026-10-07T16:55:00.871Z",
+  "navigation": {
+    "httpStatus": 200,
+    "finalUrl": "http://127.0.0.1:4174/components/lxtransferpanel",
+    "title": "LxTransferPanel 双栏穿梭 | LxUI",
+    "demoVisible": true
+  },
+  "mutationPreflight": {
+    "titleSet": true,
+    "scriptAppended": true,
+    "scriptExecuted": true
+  },
+  "interactions": {
+    "innerWidth": 320,
+    "visualViewportWidth": 320,
+    "documentClientWidth": 320,
+    "documentScrollWidth": 320,
+    "horizontalOverflow": false,
+    "docsContainer": {
+      "left": 24,
+      "right": 296,
+      "width": 272
+    },
+    "demo": {
+      "left": 24,
+      "right": 296,
+      "width": 272
+    },
+    "transferPanel": {
+      "left": 24,
+      "right": 296,
+      "width": 272
+    }
+  },
+  "injection": {
+    "succeeded": true,
+    "scriptSrc": "http://127.0.0.1:8400/detect.js"
+  },
+  "scan": {
+    "apiAvailable": true,
+    "scriptPresent": true,
+    "overlayCount": 5,
+    "bannerCount": 1,
+    "groupCount": 6,
+    "ruleCount": 7,
+    "rules": [
+      {
+        "selector": "span.container",
+        "tagName": "span",
+        "type": "clipped-overflow-container",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "span.container clips a positioned child",
+        "name": "Positioned child clipped by overflow container"
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "type": "buried-raster",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "name": "Raster buried under a wash or opacity"
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "type": "buried-raster",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "name": "Raster buried under a wash or opacity"
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "type": "buried-raster",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "name": "Raster buried under a wash or opacity"
+      },
+      {
+        "selector": "table:nth-of-type(1)",
+        "tagName": "table",
+        "type": "edge-flush-cards",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "10 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+        "name": "Cards flush against the scroller edge"
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "type": "bounce-easing",
+        "severity": "warning",
+        "category": "slop",
+        "advisory": false,
+        "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+        "name": "Bounce or elastic easing"
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "type": "layout-transition",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "transition: height, padding-top, padding-bottom",
+        "name": "Layout property animation"
+      }
+    ],
+    "groups": [
+      {
+        "selector": "span.container",
+        "tagName": "span",
+        "rect": {
+          "x": 280,
+          "y": 25,
+          "width": 16,
+          "height": 14,
+          "top": 25,
+          "right": 296,
+          "bottom": 39,
+          "left": 280
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "clipped-overflow-container",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "span.container clips a positioned child",
+            "ignoreValue": "",
+            "name": "Positioned child clipped by overflow container",
+            "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip."
+          }
+        ]
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 223,
+          "y": 2015,
+          "width": 44,
+          "height": 44,
+          "top": 2015,
+          "right": 267,
+          "bottom": 2059,
+          "left": 223
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 264,
+          "y": 7275,
+          "width": 44,
+          "height": 44,
+          "top": 7275,
+          "right": 308,
+          "bottom": 7319,
+          "left": 264
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 264,
+          "y": 8118.375,
+          "width": 44,
+          "height": 44,
+          "top": 8118.375,
+          "right": 308,
+          "bottom": 8162.375,
+          "left": 264
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "table:nth-of-type(1)",
+        "tagName": "table",
+        "rect": {
+          "x": 24,
+          "y": 2129,
+          "width": 272,
+          "height": 1573,
+          "top": 2129,
+          "right": 296,
+          "bottom": 3702,
+          "left": 24
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "edge-flush-cards",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "10 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+            "ignoreValue": "",
+            "name": "Cards flush against the scroller edge",
+            "description": "Cards inside a horizontal scroller or tab panel sit flush against the container edge at rest while keeping a gutter on the other side, so their edges and rounded corners get cut off. Usually the panel is sized wider than its clip box. Keep a consistent inset on both sides."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "bounce-easing",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+            "ignoreValue": "",
+            "name": "Bounce or elastic easing",
+            "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+          },
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ]
+  },
+  "browser": {
+    "title": "[Human] LxTransferPanel Assessment B",
+    "viewportWidth": 560,
+    "viewportHeight": 1365,
+    "screenWidth": 320,
+    "screenHeight": 780,
+    "devicePixelRatio": 1,
+    "visualViewportWidth": 320,
+    "viewportMeta": "width=device-width,initial-scale=1",
+    "htmlClasses": "",
+    "documentWidth": 560,
+    "horizontalOverflow": true,
+    "documentHeight": 8958,
+    "bodyClasses": "",
+    "themeClasses": [
+      "transfer-panel-demo"
+    ],
+    "activeElement": {
+      "tagName": "summary",
+      "ariaLabel": null,
+      "text": "示例状态与主题"
+    }
+  },
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 5 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "log",
+      "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    }
+  ],
+  "pageErrors": [],
+  "requestFailures": [],
+  "playwrightViewport": {
+    "width": 320,
+    "height": 780
+  },
+  "preInjectionBrowser": {
+    "innerWidth": 320,
+    "innerHeight": 780,
+    "screenWidth": 320,
+    "screenHeight": 780,
+    "devicePixelRatio": 1,
+    "visualViewportWidth": 320,
+    "viewportMeta": "width=device-width,initial-scale=1",
+    "htmlClasses": ""
+  },
+  "preInjectionLayout": {
+    "documentClientWidth": 320,
+    "documentScrollWidth": 320,
+    "horizontalOverflow": false,
+    "visualViewportOverflow": false,
+    "docsContainer": {
+      "left": 24,
+      "right": 296,
+      "width": 272
+    },
+    "demo": {
+      "left": 24,
+      "right": 296,
+      "width": 272
+    },
+    "transferPanel": {
+      "left": 24,
+      "right": 296,
+      "width": 272
+    },
+    "sourceTitle": {
+      "text": "组织与数据权限树（待选）",
+      "clientWidth": 246,
+      "scrollWidth": 246,
+      "bounds": {
+        "left": 37,
+        "right": 283,
+        "width": 246
+      },
+      "parentBounds": {
+        "left": 37,
+        "right": 283,
+        "width": 246
+      }
+    }
+  },
+  "preInjectionScreenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\pre-overlay-mobile-320-reflow.png",
+  "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\mobile-320-reflow.png",
+  "finishedAt": "2026-10-07T16:55:07.063Z"
+}

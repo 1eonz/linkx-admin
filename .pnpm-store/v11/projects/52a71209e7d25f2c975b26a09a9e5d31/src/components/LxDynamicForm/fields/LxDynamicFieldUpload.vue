@@ -8,11 +8,11 @@ import type { LxUploadFile } from '../../LxUpload/types'
 const props = defineProps<LxDynamicFieldProps>()
 const emit = defineEmits<{ change: [value: unknown] }>()
 
-const uploadProps = computed(() =>
-  omitFieldProps(props.field.props, ['disabled', 'multiple']),
-)
-
 const multiple = computed(() => props.field.props?.multiple === true)
+const uploadProps = computed(() => {
+  const fieldProps = omitFieldProps(props.field.props, ['disabled', 'multiple'])
+  return multiple.value ? fieldProps : { ...fieldProps, limit: 1 }
+})
 
 function isUploadFile(value: unknown): value is LxUploadFile {
   return (
@@ -25,12 +25,25 @@ function isUploadFile(value: unknown): value is LxUploadFile {
   )
 }
 
-function toUploadFile(value: unknown, index: number): LxUploadFile | undefined {
+function toUploadFile(
+  value: unknown,
+  index: number,
+  usedUids: Set<string>,
+): LxUploadFile | undefined {
   if (typeof value === 'string') {
     if (!value.trim()) return undefined
+    const fileName = value.split(/[?#]/, 1)[0]?.split('/').pop()
+    const baseUid = `lx-dynamic-${index}`
+    let uid = baseUid
+    let suffix = 1
+    while (usedUids.has(uid)) {
+      uid = `${baseUid}-${suffix}`
+      suffix += 1
+    }
+    usedUids.add(uid)
     return {
-      uid: `lx-dynamic-${index}`,
-      name: value.split('/').pop() || `文件${index + 1}`,
+      uid,
+      name: fileName || `文件${index + 1}`,
       url: value,
       status: 'success',
     }
@@ -40,14 +53,13 @@ function toUploadFile(value: unknown, index: number): LxUploadFile | undefined {
 }
 
 const files = computed<LxUploadFile[]>(() => {
-  if (Array.isArray(props.value)) {
-    return props.value
-      .map((value, index) => toUploadFile(value, index))
-      .filter((value): value is LxUploadFile => Boolean(value))
-  }
-  const file = toUploadFile(props.value, 0)
-  if (file) return [file]
-  return []
+  const values = Array.isArray(props.value) ? props.value : [props.value]
+  const usedUids = new Set(
+    values.filter(isUploadFile).map((file) => String(file.uid)),
+  )
+  return values
+    .map((value, index) => toUploadFile(value, index, usedUids))
+    .filter((value): value is LxUploadFile => Boolean(value))
 })
 
 function updateFiles(nextFiles: LxUploadFile[]): void {

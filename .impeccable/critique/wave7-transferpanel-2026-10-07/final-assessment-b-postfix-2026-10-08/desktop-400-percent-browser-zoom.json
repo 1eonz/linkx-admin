@@ -1,0 +1,702 @@
+{
+  "id": "desktop-400-percent-browser-zoom",
+  "viewport": {
+    "width": 1280,
+    "height": 1000
+  },
+  "colorScheme": "light",
+  "isMobile": false,
+  "hasTouch": false,
+  "startedAt": "2026-10-07T16:55:22.729Z",
+  "navigation": {
+    "httpStatus": 200,
+    "finalUrl": "http://127.0.0.1:4174/components/lxtransferpanel",
+    "title": "LxTransferPanel 双栏穿梭 | LxUI",
+    "demoVisible": true
+  },
+  "mutationPreflight": {
+    "titleSet": true,
+    "scriptAppended": true,
+    "scriptExecuted": true
+  },
+  "interactions": {
+    "operation": "按七次 Ctrl+Shift+=，观察 Chromium 浏览器缩放后的 CSS viewport",
+    "before": {
+      "innerWidth": 1280,
+      "devicePixelRatio": 1,
+      "visualViewportWidth": 1280
+    },
+    "after": {
+      "innerWidth": 1280,
+      "devicePixelRatio": 1,
+      "visualViewportWidth": 1280,
+      "documentClientWidth": 1280,
+      "documentScrollWidth": 1280,
+      "horizontalOverflow": false,
+      "docsContainerWidth": 944,
+      "transferPanelWidth": 720
+    },
+    "shortcutAttempts": [
+      {
+        "index": 1,
+        "dispatched": true
+      },
+      {
+        "index": 2,
+        "dispatched": true
+      },
+      {
+        "index": 3,
+        "dispatched": true
+      },
+      {
+        "index": 4,
+        "dispatched": true
+      },
+      {
+        "index": 5,
+        "dispatched": true
+      },
+      {
+        "index": 6,
+        "dispatched": true
+      },
+      {
+        "index": 7,
+        "dispatched": true
+      }
+    ],
+    "likelyBrowserZoomApplied": false
+  },
+  "injection": {
+    "succeeded": true,
+    "scriptSrc": "http://127.0.0.1:8400/detect.js"
+  },
+  "scan": {
+    "apiAvailable": true,
+    "scriptPresent": true,
+    "overlayCount": 12,
+    "bannerCount": 1,
+    "groupCount": 12,
+    "ruleCount": 13,
+    "rules": [
+      {
+        "selector": "div.vp-doc > div > p:nth-of-type(1)",
+        "tagName": "p",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~90 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "type": "buried-raster",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "name": "Raster buried under a wash or opacity"
+      },
+      {
+        "selector": "p:nth-of-type(4)",
+        "tagName": "p",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~90 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "div.vp-doc > div > ul > li:nth-of-type(2)",
+        "tagName": "li",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~88 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "div.vp-doc > div > ul > li:nth-of-type(6)",
+        "tagName": "li",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~88 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "p:nth-of-type(5)",
+        "tagName": "p",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~90 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "p:nth-of-type(6)",
+        "tagName": "p",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~90 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "type": "buried-raster",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "name": "Raster buried under a wash or opacity"
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "type": "buried-raster",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "name": "Raster buried under a wash or opacity"
+      },
+      {
+        "selector": "p:nth-of-type(7)",
+        "tagName": "p",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~90 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "table:nth-of-type(1)",
+        "tagName": "table",
+        "type": "edge-flush-cards",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "10 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+        "name": "Cards flush against the scroller edge"
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "type": "bounce-easing",
+        "severity": "warning",
+        "category": "slop",
+        "advisory": false,
+        "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+        "name": "Bounce or elastic easing"
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "type": "layout-transition",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "transition: height, padding-top, padding-bottom",
+        "name": "Layout property animation"
+      }
+    ],
+    "groups": [
+      {
+        "selector": "div.vp-doc > div > p:nth-of-type(1)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 168,
+          "width": 720,
+          "height": 86,
+          "top": 168,
+          "right": 1056,
+          "bottom": 254,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~90 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 987,
+          "y": 1163,
+          "width": 40,
+          "height": 40,
+          "top": 1163,
+          "right": 1027,
+          "bottom": 1203,
+          "left": 987
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(4)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 3690,
+          "width": 720,
+          "height": 88,
+          "top": 3690,
+          "right": 1056,
+          "bottom": 3778,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~90 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.vp-doc > div > ul > li:nth-of-type(2)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 3955,
+          "width": 700,
+          "height": 98,
+          "top": 3955,
+          "right": 1056,
+          "bottom": 4053,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~88 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.vp-doc > div > ul > li:nth-of-type(6)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 4207,
+          "width": 700,
+          "height": 98,
+          "top": 4207,
+          "right": 1056,
+          "bottom": 4305,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~88 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(5)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 4482,
+          "width": 720,
+          "height": 88,
+          "top": 4482,
+          "right": 1056,
+          "bottom": 4570,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~90 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(6)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 4586,
+          "width": 720,
+          "height": 116,
+          "top": 4586,
+          "right": 1056,
+          "bottom": 4702,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~90 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1004,
+          "y": 4730,
+          "width": 40,
+          "height": 40,
+          "top": 4730,
+          "right": 1044,
+          "bottom": 4770,
+          "left": 1004
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1004,
+          "y": 5573.375,
+          "width": 40,
+          "height": 40,
+          "top": 5573.375,
+          "right": 1044,
+          "bottom": 5613.375,
+          "left": 1004
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(7)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 5772.03125,
+          "width": 720,
+          "height": 116,
+          "top": 5772.03125,
+          "right": 1056,
+          "bottom": 5888.03125,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~90 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "table:nth-of-type(1)",
+        "tagName": "table",
+        "rect": {
+          "x": 336,
+          "y": 1277,
+          "width": 720,
+          "height": 1573,
+          "top": 1277,
+          "right": 1056,
+          "bottom": 2850,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "edge-flush-cards",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "10 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+            "ignoreValue": "",
+            "name": "Cards flush against the scroller edge",
+            "description": "Cards inside a horizontal scroller or tab panel sit flush against the container edge at rest while keeping a gutter on the other side, so their edges and rounded corners get cut off. Usually the panel is sized wider than its clip box. Keep a consistent inset on both sides."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "bounce-easing",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+            "ignoreValue": "",
+            "name": "Bounce or elastic easing",
+            "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+          },
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ]
+  },
+  "browser": {
+    "title": "[Human] LxTransferPanel Assessment B",
+    "viewportWidth": 1280,
+    "viewportHeight": 1000,
+    "screenWidth": 1280,
+    "screenHeight": 1000,
+    "devicePixelRatio": 1,
+    "visualViewportWidth": 1280,
+    "viewportMeta": "width=device-width,initial-scale=1",
+    "htmlClasses": "",
+    "documentWidth": 1280,
+    "horizontalOverflow": false,
+    "documentHeight": 6171,
+    "bodyClasses": "",
+    "themeClasses": [
+      "transfer-panel-demo"
+    ],
+    "activeElement": {
+      "tagName": "summary",
+      "ariaLabel": null,
+      "text": "示例状态与主题"
+    }
+  },
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 12 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~90 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~90 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~88 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~88 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~90 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~90 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~90 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cedge-flush-cards%c 10 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    }
+  ],
+  "pageErrors": [],
+  "requestFailures": [],
+  "playwrightViewport": {
+    "width": 1280,
+    "height": 1000
+  },
+  "preInjectionBrowser": {
+    "innerWidth": 1280,
+    "innerHeight": 1000,
+    "screenWidth": 1280,
+    "screenHeight": 1000,
+    "devicePixelRatio": 1,
+    "visualViewportWidth": 1280,
+    "viewportMeta": "width=device-width,initial-scale=1",
+    "htmlClasses": ""
+  },
+  "preInjectionLayout": {
+    "documentClientWidth": 1280,
+    "documentScrollWidth": 1280,
+    "horizontalOverflow": false,
+    "visualViewportOverflow": false,
+    "docsContainer": {
+      "left": 304,
+      "right": 1248,
+      "width": 944
+    },
+    "demo": {
+      "left": 336,
+      "right": 1056,
+      "width": 720
+    },
+    "transferPanel": {
+      "left": 336,
+      "right": 1056,
+      "width": 720
+    },
+    "sourceTitle": {
+      "text": "组织与数据权限树（待选）",
+      "clientWidth": 264,
+      "scrollWidth": 264,
+      "bounds": {
+        "left": 349,
+        "right": 613,
+        "width": 264
+      },
+      "parentBounds": {
+        "left": 349,
+        "right": 613,
+        "width": 264
+      }
+    }
+  },
+  "preInjectionScreenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\pre-overlay-desktop-400-percent-browser-zoom.png",
+  "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\desktop-400-percent-browser-zoom.png",
+  "finishedAt": "2026-10-07T16:55:29.695Z"
+}

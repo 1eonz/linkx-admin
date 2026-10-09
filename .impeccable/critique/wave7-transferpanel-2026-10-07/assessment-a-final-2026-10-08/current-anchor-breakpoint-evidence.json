@@ -1,0 +1,91 @@
+{
+  "target": "http://127.0.0.1:4183/components/lxtransferpanel.html",
+  "browser": "Chrome/154.0.8037.95",
+  "procedure": "在 1440px 聚焦 archive-unit-09 后，不执行面板切换或其它 DOM 操作，直接依次调整到 375px、320px。",
+  "observations": [
+    {
+      "label": "anchor-at-1440-before-resize",
+      "viewportWidth": 1440,
+      "activeElement": {
+        "tag": "DIV",
+        "role": "treeitem",
+        "key": "archive-unit-09",
+        "connected": true,
+        "focusVisible": true
+      },
+      "focusedKey": "archive-unit-09",
+      "anchorRow": {
+        "key": "archive-unit-09",
+        "connected": true,
+        "focused": true,
+        "offset": 116,
+        "bounds": {
+          "top": 413,
+          "bottom": 445
+        }
+      },
+      "tree": {
+        "scrollTop": 301,
+        "scrollHeight": 45440,
+        "clientHeight": 262,
+        "itemSize": "32px"
+      }
+    },
+    {
+      "label": "anchor-at-375-after-resize",
+      "viewportWidth": 375,
+      "activeElement": {
+        "tag": "DIV",
+        "role": "treeitem",
+        "key": "archive-unit-09",
+        "connected": true,
+        "focusVisible": true
+      },
+      "focusedKey": "archive-unit-09",
+      "anchorRow": {
+        "key": "archive-unit-09",
+        "connected": true,
+        "focused": true,
+        "offset": 116,
+        "bounds": {
+          "top": 918,
+          "bottom": 982
+        }
+      },
+      "tree": {
+        "scrollTop": 717,
+        "scrollHeight": 90880,
+        "clientHeight": 222,
+        "itemSize": "64px"
+      }
+    },
+    {
+      "label": "anchor-at-320-after-resize",
+      "viewportWidth": 320,
+      "activeElement": {
+        "tag": "DIV",
+        "role": "treeitem",
+        "key": "archive-unit-09",
+        "connected": true,
+        "focusVisible": true
+      },
+      "focusedKey": "archive-unit-09",
+      "anchorRow": {
+        "key": "archive-unit-09",
+        "connected": true,
+        "focused": true,
+        "offset": 116,
+        "bounds": {
+          "top": 986,
+          "bottom": 1066
+        }
+      },
+      "tree": {
+        "scrollTop": 925,
+        "scrollHeight": 113600,
+        "clientHeight": 222,
+        "itemSize": "80px"
+      }
+    }
+  ]
+}

@@ -1,0 +1,464 @@
+{
+  "method": "isolated Assessment A, fresh Edge/Playwright contexts",
+  "target": "http://127.0.0.1:4174",
+  "browserVersion": "154.0.4258.53",
+  "startedAt": "2026-10-06T21:16:10.795Z",
+  "screenshots": [
+    "dynamicform-desktop-light.png",
+    "dynamicform-desktop-light-viewport.png",
+    "dynamicform-desktop-hud.png",
+    "dynamicform-desktop-hud-viewport.png",
+    "dynamicform-mobile375-light.png",
+    "dynamicform-mobile375-light-viewport.png",
+    "dynamicform-mobile375-hud.png",
+    "dynamicform-mobile375-hud-viewport.png",
+    "datepicker-desktop-light.png",
+    "datepicker-desktop-light-viewport.png",
+    "datepicker-desktop-hud.png",
+    "datepicker-desktop-hud-viewport.png",
+    "datepicker-mobile375-light.png",
+    "datepicker-mobile375-light-viewport.png",
+    "datepicker-mobile375-hud.png",
+    "datepicker-mobile375-hud-viewport.png",
+    "upload-desktop-light.png",
+    "upload-desktop-light-viewport.png",
+    "upload-desktop-hud.png",
+    "upload-desktop-hud-viewport.png",
+    "upload-mobile375-light.png",
+    "upload-mobile375-light-viewport.png",
+    "upload-mobile375-hud.png",
+    "upload-mobile375-hud-viewport.png",
+    "dynamicform-desktop-remote-empty.png",
+    "dynamicform-desktop-required-error.png",
+    "dynamicform-desktop-upload-failure.png",
+    "dynamicform-desktop-upload-retry-success.png",
+    "dynamicform-mobile375-required-error.png",
+    "dynamicform-mobile375-upload-failure.png",
+    "dynamicform-mobile375-upload-retry-success.png",
+    "datepicker-desktop-dark-error-empty.png",
+    "datepicker-desktop-dark-range-open.png",
+    "datepicker-mobile375-light-error-empty.png",
+    "datepicker-mobile375-light-range-open.png",
+    "upload-desktop-light-failure.png",
+    "upload-desktop-light-retry-success.png",
+    "upload-mobile375-dark-failure.png",
+    "upload-mobile375-dark-retry-success.png"
+  ],
+  "pages": [
+    {
+      "route": "/components/lxdynamicform",
+      "viewport": "desktop",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "width": 1440,
+          "height": 7667
+        }
+      },
+      "screenshots": [
+        "dynamicform-desktop-light.png",
+        "dynamicform-desktop-hud.png"
+      ]
+    },
+    {
+      "route": "/components/lxdynamicform",
+      "viewport": "mobile375",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "width": 375,
+          "height": 10231
+        }
+      },
+      "screenshots": [
+        "dynamicform-mobile375-light.png",
+        "dynamicform-mobile375-hud.png"
+      ]
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "viewport": "desktop",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "width": 1440,
+          "height": 6828
+        }
+      },
+      "screenshots": [
+        "datepicker-desktop-light.png",
+        "datepicker-desktop-hud.png"
+      ]
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "viewport": "mobile375",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "width": 375,
+          "height": 8602
+        }
+      },
+      "screenshots": [
+        "datepicker-mobile375-light.png",
+        "datepicker-mobile375-hud.png"
+      ]
+    },
+    {
+      "route": "/components/lxupload",
+      "viewport": "desktop",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "width": 1440,
+          "height": 5006
+        }
+      },
+      "screenshots": [
+        "upload-desktop-light.png",
+        "upload-desktop-hud.png"
+      ]
+    },
+    {
+      "route": "/components/lxupload",
+      "viewport": "mobile375",
+      "status": 200,
+      "dimensions": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "width": 375,
+          "height": 6891
+        }
+      },
+      "screenshots": [
+        "upload-mobile375-light.png",
+        "upload-mobile375-hud.png"
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "route": "/components/lxdynamicform",
+      "state": "remote-select-empty",
+      "observed": "暂无候选人员",
+      "screenshot": "dynamicform-desktop-remote-empty.png"
+    },
+    {
+      "route": "/components/lxdynamicform",
+      "state": "required-validation-error",
+      "viewport": "desktop",
+      "screenshot": "dynamicform-desktop-required-error.png"
+    },
+    {
+      "route": "/components/lxdynamicform",
+      "state": "upload-failure-and-retry",
+      "viewport": "desktop",
+      "screenshot": "dynamicform-desktop-upload-failure.png"
+    },
+    {
+      "route": "/components/lxdynamicform",
+      "state": "upload-retry-success",
+      "viewport": "desktop",
+      "screenshot": "dynamicform-desktop-upload-retry-success.png"
+    },
+    {
+      "route": "/components/lxdynamicform",
+      "state": "required-validation-error",
+      "viewport": "mobile375",
+      "screenshot": "dynamicform-mobile375-required-error.png"
+    },
+    {
+      "route": "/components/lxdynamicform",
+      "state": "upload-failure-and-retry",
+      "viewport": "mobile375",
+      "screenshot": "dynamicform-mobile375-upload-failure.png"
+    },
+    {
+      "route": "/components/lxdynamicform",
+      "state": "upload-retry-success",
+      "viewport": "mobile375",
+      "screenshot": "dynamicform-mobile375-upload-retry-success.png"
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "state": "empty-value-validation-error",
+      "viewport": "desktop",
+      "colorScheme": "dark",
+      "screenshot": "datepicker-desktop-dark-error-empty.png"
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "state": "range-calendar-open",
+      "viewport": "desktop",
+      "colorScheme": "dark",
+      "overflow": {
+        "viewportWidth": 1440,
+        "documentWidth": 1440,
+        "picker": {
+          "left": 405,
+          "right": 1051,
+          "width": 646
+        }
+      },
+      "screenshot": "datepicker-desktop-dark-range-open.png"
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "state": "empty-value-validation-error",
+      "viewport": "mobile375",
+      "colorScheme": "light",
+      "screenshot": "datepicker-mobile375-light-error-empty.png"
+    },
+    {
+      "route": "/components/lxdatepicker",
+      "state": "range-calendar-open",
+      "viewport": "mobile375",
+      "colorScheme": "light",
+      "overflow": {
+        "viewportWidth": 375,
+        "documentWidth": 375,
+        "picker": {
+          "left": 27,
+          "right": 349,
+          "width": 322
+        }
+      },
+      "screenshot": "datepicker-mobile375-light-range-open.png"
+    },
+    {
+      "route": "/components/lxupload",
+      "state": "upload-failure-with-retry",
+      "viewport": "desktop",
+      "colorScheme": "light",
+      "screenshot": "upload-desktop-light-failure.png"
+    },
+    {
+      "route": "/components/lxupload",
+      "state": "upload-retry-success",
+      "viewport": "desktop",
+      "colorScheme": "light",
+      "screenshot": "upload-desktop-light-retry-success.png"
+    },
+    {
+      "route": "/components/lxupload",
+      "state": "upload-failure-with-retry",
+      "viewport": "mobile375",
+      "colorScheme": "dark",
+      "screenshot": "upload-mobile375-dark-failure.png"
+    },
+    {
+      "route": "/components/lxupload",
+      "state": "upload-retry-success",
+      "viewport": "mobile375",
+      "colorScheme": "dark",
+      "screenshot": "upload-mobile375-dark-retry-success.png"
+    }
+  ],
+  "finishedAt": "2026-10-06T21:17:07.339Z",
+  "sourceFingerprintBefore": {
+    "capturedAt": "2026-10-06T21:16:10.795Z",
+    "files": [
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/index.vue",
+        "modifiedAt": "2026-10-06T07:03:08.005Z",
+        "bytes": 14105,
+        "sha256": "26c1b19646d89f4ae9566f32b742d60088aec817cde0d2462b7a0cdd7c6e748c"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/style.css",
+        "modifiedAt": "2026-10-06T20:46:32.917Z",
+        "bytes": 2250,
+        "sha256": "fea68097bd48ed0c28ad30e2a76272ca7554649c334b430fe6e5add7fbca4b1e"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/demo/basic.vue",
+        "modifiedAt": "2026-10-06T20:39:03.890Z",
+        "bytes": 28380,
+        "sha256": "beec504acb57be2f860eb41ac348f835c3957af4d9050cbc2c78e1c803d25a9a"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/types.ts",
+        "modifiedAt": "2026-10-06T07:03:08.004Z",
+        "bytes": 2734,
+        "sha256": "1996839e87702da19c39c29062153c98b6f425b78dbae5e96c5da054c90c588c"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/index.vue",
+        "modifiedAt": "2026-10-06T09:52:33.372Z",
+        "bytes": 17016,
+        "sha256": "6b3e98dd0a0b6afeece68cf39a47b0cac7d5c8be309058aa6ef8b6aa69de30ad"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/style.css",
+        "modifiedAt": "2026-10-04T20:21:52.949Z",
+        "bytes": 10157,
+        "sha256": "e989b53ed4a60137dbf0af6852ce14a960102c7b1d1e5a7605372b27a8240ea8"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/demo/basic.vue",
+        "modifiedAt": "2026-10-06T17:49:13.147Z",
+        "bytes": 13662,
+        "sha256": "2c48b5b1be0f394d8c33bb511bb47c0f829bd347f2284db720356f68c2aa0155"
+      },
+      {
+        "path": "linkx-fe/src/components/LxUpload/index.vue",
+        "modifiedAt": "2026-10-06T20:39:59.518Z",
+        "bytes": 44655,
+        "sha256": "4507faef58121f8fd6ebae4526d398be72628ef0300394f7fadac1343e0ec640"
+      },
+      {
+        "path": "linkx-fe/src/components/LxUpload/demo/basic.vue",
+        "modifiedAt": "2026-10-06T20:56:37.545Z",
+        "bytes": 8914,
+        "sha256": "4a2e7d186717591668147779ef820e8ca75a76603cdb06c8368fd148dd4dd315"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxdynamicform.md",
+        "modifiedAt": "2026-10-06T20:56:37.688Z",
+        "bytes": 14058,
+        "sha256": "6ca1f374021b4b9e99bd71a486d929877e4a2fa0f3a2032fad9874726b143d73"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxdatepicker.md",
+        "modifiedAt": "2026-10-06T09:58:47.785Z",
+        "bytes": 11908,
+        "sha256": "dda2b1f674b2811d63cec50853e8280198dd14e98cbd891531f0a5e73686a6eb"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxupload.md",
+        "modifiedAt": "2026-10-06T20:39:23.744Z",
+        "bytes": 9507,
+        "sha256": "cbab34d859358167df599464aceffeda08fb14e2b1af56c51a358a8f52d617e4"
+      }
+    ]
+  },
+  "sourceFingerprintAfter": {
+    "capturedAt": "2026-10-06T21:17:07.339Z",
+    "files": [
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/index.vue",
+        "modifiedAt": "2026-10-06T07:03:08.005Z",
+        "bytes": 14105,
+        "sha256": "26c1b19646d89f4ae9566f32b742d60088aec817cde0d2462b7a0cdd7c6e748c"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/style.css",
+        "modifiedAt": "2026-10-06T20:46:32.917Z",
+        "bytes": 2250,
+        "sha256": "fea68097bd48ed0c28ad30e2a76272ca7554649c334b430fe6e5add7fbca4b1e"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/demo/basic.vue",
+        "modifiedAt": "2026-10-06T20:39:03.890Z",
+        "bytes": 28380,
+        "sha256": "beec504acb57be2f860eb41ac348f835c3957af4d9050cbc2c78e1c803d25a9a"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDynamicForm/types.ts",
+        "modifiedAt": "2026-10-06T07:03:08.004Z",
+        "bytes": 2734,
+        "sha256": "1996839e87702da19c39c29062153c98b6f425b78dbae5e96c5da054c90c588c"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/index.vue",
+        "modifiedAt": "2026-10-06T09:52:33.372Z",
+        "bytes": 17016,
+        "sha256": "6b3e98dd0a0b6afeece68cf39a47b0cac7d5c8be309058aa6ef8b6aa69de30ad"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/style.css",
+        "modifiedAt": "2026-10-04T20:21:52.949Z",
+        "bytes": 10157,
+        "sha256": "e989b53ed4a60137dbf0af6852ce14a960102c7b1d1e5a7605372b27a8240ea8"
+      },
+      {
+        "path": "linkx-fe/src/components/LxDatePicker/demo/basic.vue",
+        "modifiedAt": "2026-10-06T17:49:13.147Z",
+        "bytes": 13662,
+        "sha256": "2c48b5b1be0f394d8c33bb511bb47c0f829bd347f2284db720356f68c2aa0155"
+      },
+      {
+        "path": "linkx-fe/src/components/LxUpload/index.vue",
+        "modifiedAt": "2026-10-06T20:39:59.518Z",
+        "bytes": 44655,
+        "sha256": "4507faef58121f8fd6ebae4526d398be72628ef0300394f7fadac1343e0ec640"
+      },
+      {
+        "path": "linkx-fe/src/components/LxUpload/demo/basic.vue",
+        "modifiedAt": "2026-10-06T20:56:37.545Z",
+        "bytes": 8914,
+        "sha256": "4a2e7d186717591668147779ef820e8ca75a76603cdb06c8368fd148dd4dd315"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxdynamicform.md",
+        "modifiedAt": "2026-10-06T20:56:37.688Z",
+        "bytes": 14058,
+        "sha256": "6ca1f374021b4b9e99bd71a486d929877e4a2fa0f3a2032fad9874726b143d73"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxdatepicker.md",
+        "modifiedAt": "2026-10-06T09:58:47.785Z",
+        "bytes": 11908,
+        "sha256": "dda2b1f674b2811d63cec50853e8280198dd14e98cbd891531f0a5e73686a6eb"
+      },
+      {
+        "path": "linkx-fe/docs/components/lxupload.md",
+        "modifiedAt": "2026-10-06T20:39:23.744Z",
+        "bytes": 9507,
+        "sha256": "cbab34d859358167df599464aceffeda08fb14e2b1af56c51a358a8f52d617e4"
+      }
+    ]
+  },
+  "sourceFingerprintChanged": false,
+  "browserErrors": [
+    {
+      "url": "http://127.0.0.1:4174/components/lxdynamicform",
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxdynamicform",
+      "type": "console",
+      "message": "UploadAjaxError: 上传失败，请重试\n    at finish (http://127.0.0.1:4174/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxDynamicForm/demo/basic.vue?t=1791320780804:381:39)"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxdynamicform",
+      "type": "console",
+      "message": "UploadAjaxError: 上传失败，请重试\n    at finish (http://127.0.0.1:4174/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxDynamicForm/demo/basic.vue?t=1791320780804:381:39)"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxupload",
+      "type": "console",
+      "message": "UploadAjaxError: 上传服务暂不可用，请重试\n    at http://127.0.0.1:4174/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxUpload/demo/basic.vue?t=1791320780804:45:39"
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxupload",
+      "type": "console",
+      "message": "UploadAjaxError: 上传服务暂不可用，请重试\n    at http://127.0.0.1:4174/@fs/F:/work/linkx-admin/linkx-fe/src/components/LxUpload/demo/basic.vue?t=1791320780804:45:39"
+    }
+  ]
+}

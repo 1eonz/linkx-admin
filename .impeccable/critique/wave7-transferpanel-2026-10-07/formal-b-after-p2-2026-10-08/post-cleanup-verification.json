@@ -1,0 +1,72 @@
+{
+  "checkedAt": "2026-10-08T03:34:15.233Z",
+  "userServerRoutes": [
+    {
+      "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "http://127.0.0.1:4174/components/lxvirtualtree",
+      "status": 200,
+      "ok": true
+    }
+  ],
+  "userServerUnchangedAndReachable": true,
+  "temporaryOverlayServerHealth": {
+    "url": "http://127.0.0.1:8400/health",
+    "status": null,
+    "ok": false,
+    "error": "fetch failed"
+  },
+  "temporaryOverlayServerStopped": true,
+  "liveStart": {
+    "mode": "start",
+    "startedAt": "2026-10-08T03:29:10.283Z",
+    "endedAt": "2026-10-08T03:29:10.682Z",
+    "workingDirectory": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-b-after-p2-2026-10-08",
+    "command": "\"E:\\nvm4w\\nodejs\\node.exe\" \"C:/Users/Administrator/.codex/skills/impeccable/scripts/live-server.mjs\" \"--background\"",
+    "exitCode": 0,
+    "signal": null,
+    "spawnError": null,
+    "stdoutSha256": "6cf5c251ad389d547aebcc7cbf4c973273b806c22cc7bd396350903af251e9bf",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "parseError": null,
+    "server": {
+      "pid": 26360,
+      "port": 8400,
+      "token": "6cff1c5a-255a-48c5-942b-dde0ac42f110"
+    },
+    "health": {
+      "reachable": true,
+      "status": 200,
+      "body": "{\"status\":\"ok\",\"port\":8400,\"mode\":\"variant\",\"hasProjectContext\":false,\"connectedClients\":0}"
+    },
+    "pidAlive": true
+  },
+  "liveStop": {
+    "mode": "stop",
+    "startedAt": "2026-10-08T03:29:10.283Z",
+    "stoppedAt": "2026-10-08T03:31:24.795Z",
+    "workingDirectory": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-b-after-p2-2026-10-08",
+    "startCommand": "\"E:\\nvm4w\\nodejs\\node.exe\" \"C:/Users/Administrator/.codex/skills/impeccable/scripts/live-server.mjs\" \"--background\"",
+    "startExitCode": 0,
+    "stopCommand": "\"E:\\nvm4w\\nodejs\\node.exe\" \"C:/Users/Administrator/.codex/skills/impeccable/scripts/live-server.mjs\" \"stop\" \"--keep-inject\"",
+    "stopExitCode": 0,
+    "stopSignal": null,
+    "stopSpawnError": null,
+    "stopStdoutSha256": "9532a9a39ac8bdaa51e64d50952231f629f3f174643aecc44c14ab295d9ebaad",
+    "stopStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "server": {
+      "pid": 26360,
+      "port": 8400,
+      "token": "6cff1c5a-255a-48c5-942b-dde0ac42f110"
+    },
+    "healthAfterStop": {
+      "reachable": false,
+      "error": "fetch failed"
+    },
+    "pidAliveAfterStop": false,
+    "stopSucceeded": true
+  }
+}

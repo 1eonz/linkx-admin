@@ -1,0 +1,817 @@
+{
+  "id": "virtualtree-hud-empty-desktop",
+  "contextOrdinal": 9,
+  "independentContext": true,
+  "page": "VirtualTree",
+  "route": "http://127.0.0.1:4174/components/lxvirtualtree",
+  "requestedTheme": "HUD",
+  "requestedState": "empty",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "mobileContext": false,
+  "detectorServerUrl": "http://127.0.0.1:8400",
+  "startedAt": "2026-10-08T03:30:24.493Z",
+  "succeeded": true,
+  "error": null,
+  "mainDocumentStatus": 200,
+  "renderedState": {
+    "hudClassApplied": true,
+    "pressedButtons": [
+      "空结果"
+    ],
+    "visibleStatus": "当前已选中 1 项。",
+    "backgroundColor": "rgb(11, 18, 32)"
+  },
+  "preflight": {
+    "originalTitle": "LxVirtualTree 虚拟树 | LxUI",
+    "mutatedTitle": "LxVirtualTree 虚拟树 | LxUI [Assessment B preflight]",
+    "scriptTagConnected": true,
+    "scriptExecuted": true,
+    "scriptCount": 1
+  },
+  "baselinePageMetrics": {
+    "viewportClientWidth": 1440,
+    "windowInnerWidth": 1440,
+    "visualViewportWidth": 1440,
+    "viewportHeight": 1000,
+    "documentClientWidth": 1440,
+    "documentScrollWidth": 1440,
+    "bodyClientWidth": 1440,
+    "bodyScrollWidth": 1440,
+    "horizontalOverflow": false,
+    "pageScrollX": 0,
+    "pageScrollY": 0,
+    "overflowingElements": [],
+    "faviconLinks": [
+      {
+        "href": "http://127.0.0.1:4174/favicon.svg",
+        "rel": "icon",
+        "type": "image/svg+xml"
+      }
+    ],
+    "horizontalOverflowInspectionScope": "body content excluding VitePress right outline navigation and Impeccable overlays"
+  },
+  "faviconProbe": {
+    "linkFound": true,
+    "href": "http://127.0.0.1:4174/favicon.svg",
+    "status": 200,
+    "ok": true,
+    "contentType": "image/svg+xml",
+    "bytes": 456
+  },
+  "overlayInjection": {
+    "requestedUrl": "http://127.0.0.1:8400/detect.js",
+    "scriptTagReturned": true,
+    "scriptResponseStatuses": [
+      {
+        "status": 200,
+        "ok": true
+      }
+    ],
+    "apiReady": true,
+    "scanInvoked": true,
+    "scanResult": {
+      "scanInvoked": true,
+      "scanReturnType": "array",
+      "scanReturnCount": 14,
+      "detectorResults": [
+        {
+          "selector": "div.vp-doc > div > p:nth-of-type(1)",
+          "tagName": "p",
+          "rect": {
+            "x": 384,
+            "y": 168,
+            "width": 688,
+            "height": 58,
+            "top": 168,
+            "right": 1072,
+            "bottom": 226,
+            "left": 384
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "line-length",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "~86 chars/line (aim for <80)",
+              "ignoreValue": "",
+              "name": "Line length too long",
+              "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+            }
+          ]
+        },
+        {
+          "selector": "div.virtual-tree-demo.lx-theme-hud",
+          "tagName": "div",
+          "rect": {
+            "x": 384,
+            "y": 347,
+            "width": 688,
+            "height": 573,
+            "top": 347,
+            "right": 1072,
+            "bottom": 920,
+            "left": 384
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "cramped-padding",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "<div> \"virtual-tree-demo\": children flush against bg on right/left (no inset)",
+              "ignoreValue": "",
+              "name": "Cramped padding",
+              "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers."
+            }
+          ]
+        },
+        {
+          "selector": "div.virtual-tree-demo__toolbar > button:nth-of-type(2)",
+          "tagName": "button",
+          "rect": {
+            "x": 458,
+            "y": 419,
+            "width": 57,
+            "height": 34,
+            "top": 419,
+            "right": 515,
+            "bottom": 453,
+            "left": 458
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "ai-color-palette",
+              "category": "slop",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "Cyan neon text on dark background",
+              "ignoreValue": "",
+              "name": "AI color palette",
+              "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-vue.vp-adaptive-theme > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 1003,
+            "y": 1005,
+            "width": 40,
+            "height": 40,
+            "top": 1005,
+            "right": 1043,
+            "bottom": 1045,
+            "left": 1003
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.vp-doc > div > p:nth-of-type(2)",
+          "tagName": "p",
+          "rect": {
+            "x": 384,
+            "y": 1010,
+            "width": 688,
+            "height": 140,
+            "top": 1010,
+            "right": 1072,
+            "bottom": 1150,
+            "left": 384
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "line-length",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "~86 chars/line (aim for <80)",
+              "ignoreValue": "",
+              "name": "Line length too long",
+              "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(2) > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 1020,
+            "y": 2679,
+            "width": 40,
+            "height": 40,
+            "top": 2679,
+            "right": 1060,
+            "bottom": 2719,
+            "left": 1020
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(3) > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 1020,
+            "y": 3029.75,
+            "width": 40,
+            "height": 40,
+            "top": 3029.75,
+            "right": 1060,
+            "bottom": 3069.75,
+            "left": 1020
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(4) > button.copy",
+          "tagName": "button",
+          "rect": {
+            "x": 1020,
+            "y": 3934.3125,
+            "width": 40,
+            "height": 40,
+            "top": 3934.3125,
+            "right": 1060,
+            "bottom": 3974.3125,
+            "left": 1020
+          },
+          "isPageLevel": false,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "buried-raster",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "raster background at opacity 0",
+              "ignoreValue": "",
+              "name": "Raster buried under a wash or opacity",
+              "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+            }
+          ]
+        },
+        {
+          "selector": "fieldset.virtual-tree-demo__action-group:nth-of-type(1) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "tagName": "button",
+          "rect": {
+            "x": 393,
+            "y": 481,
+            "width": 109,
+            "height": 34,
+            "top": 481,
+            "right": 502,
+            "bottom": 515,
+            "left": 393
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "text-occlusion",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "button \"筛选第二个辖区\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)",
+              "ignoreValue": "",
+              "name": "Text occluded by an overlapping element",
+              "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+            }
+          ]
+        },
+        {
+          "selector": "fieldset.virtual-tree-demo__action-group:nth-of-type(2) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "tagName": "button",
+          "rect": {
+            "x": 626.328125,
+            "y": 481,
+            "width": 96,
+            "height": 34,
+            "top": 481,
+            "right": 722.328125,
+            "bottom": 515,
+            "left": 626.328125
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "text-occlusion",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "button \"设置示例选择\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)",
+              "ignoreValue": "",
+              "name": "Text occluded by an overlapping element",
+              "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+            }
+          ]
+        },
+        {
+          "selector": "fieldset.virtual-tree-demo__action-group:nth-of-type(2) > div.virtual-tree-demo__action-content > button:nth-of-type(2)",
+          "tagName": "button",
+          "rect": {
+            "x": 726.328125,
+            "y": 481,
+            "width": 83,
+            "height": 34,
+            "top": 481,
+            "right": 809.328125,
+            "bottom": 515,
+            "left": 726.328125
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "text-occlusion",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "button \"读取选中键\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)",
+              "ignoreValue": "",
+              "name": "Text occluded by an overlapping element",
+              "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+            }
+          ]
+        },
+        {
+          "selector": "fieldset.virtual-tree-demo__action-group:nth-of-type(3) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "tagName": "button",
+          "rect": {
+            "x": 859.65625,
+            "y": 481,
+            "width": 70,
+            "height": 34,
+            "top": 481,
+            "right": 929.65625,
+            "bottom": 515,
+            "left": 859.65625
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "text-occlusion",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "button \"展开全部\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)",
+              "ignoreValue": "",
+              "name": "Text occluded by an overlapping element",
+              "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+            }
+          ]
+        },
+        {
+          "selector": "fieldset.virtual-tree-demo__action-group:nth-of-type(3) > div.virtual-tree-demo__action-content > button:nth-of-type(2)",
+          "tagName": "button",
+          "rect": {
+            "x": 933.65625,
+            "y": 481,
+            "width": 70,
+            "height": 34,
+            "top": 481,
+            "right": 1003.65625,
+            "bottom": 515,
+            "left": 933.65625
+          },
+          "isPageLevel": false,
+          "isHidden": true,
+          "findings": [
+            {
+              "type": "text-occlusion",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "button \"收起全部\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)",
+              "ignoreValue": "",
+              "name": "Text occluded by an overlapping element",
+              "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+            }
+          ]
+        },
+        {
+          "selector": "body",
+          "tagName": "body",
+          "rect": null,
+          "isPageLevel": true,
+          "isHidden": false,
+          "findings": [
+            {
+              "type": "layout-transition",
+              "category": "quality",
+              "severity": "warning",
+              "advisory": false,
+              "detail": "transition: height, padding-top, padding-bottom",
+              "ignoreValue": "",
+              "name": "Layout property animation",
+              "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+            }
+          ]
+        }
+      ]
+    },
+    "error": null,
+    "overlayNodes": [
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "targetTag": "p",
+        "targetClass": "",
+        "targetText": "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "body > div:nth-of-type(1) > div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > p:nth-of-type(1)",
+          "visible": true,
+          "rect": {
+            "x": 384,
+            "y": 168,
+            "width": 688,
+            "height": 58
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "cramped padding",
+        "targetTag": "div",
+        "targetClass": "virtual-tree-demo lx-theme-hud",
+        "targetText": "演示状态和更多操作 正常数据  空结果  加载中  加载失败 筛选 筛选第二个辖区  按编码筛选第二个辖区 清除筛选选中 设置示例选择 读取选中键展开与定位展开全部收起全部 定位末尾节点 选择方式 父子独立勾选 外观主题 HUD 深色主题 宿主返回了空结果 勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。 当前已选中 1 项。",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1)",
+          "visible": true,
+          "rect": {
+            "x": 384,
+            "y": 347,
+            "width": 688,
+            "height": 573
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "✦ ai color palette",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "空结果",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__toolbar:nth-of-type(1) > button:nth-of-type(2)",
+          "visible": false,
+          "rect": {
+            "x": 458,
+            "y": 419,
+            "width": 57,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "raster buried under a wash or opacity",
+        "targetTag": "button",
+        "targetClass": "copy",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+          "visible": false,
+          "rect": {
+            "x": 1003,
+            "y": 1005,
+            "width": 40,
+            "height": 40
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "targetTag": "p",
+        "targetClass": "",
+        "targetText": "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，展开后按筛选、选中、展开与定位、行为选项分组，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "body > div:nth-of-type(1) > div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > p:nth-of-type(2)",
+          "visible": true,
+          "rect": {
+            "x": 384,
+            "y": 1010,
+            "width": 688,
+            "height": 140
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "raster buried under a wash or opacity",
+        "targetTag": "button",
+        "targetClass": "copy",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "div:nth-of-type(1) > div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > div.language-ts.vp-adaptive-theme:nth-of-type(2) > button.copy",
+          "visible": true,
+          "rect": {
+            "x": 1020,
+            "y": 2679,
+            "width": 40,
+            "height": 40
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "raster buried under a wash or opacity",
+        "targetTag": "button",
+        "targetClass": "copy",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "div:nth-of-type(1) > div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > div.language-ts.vp-adaptive-theme:nth-of-type(3) > button.copy",
+          "visible": true,
+          "rect": {
+            "x": 1020,
+            "y": 3030,
+            "width": 40,
+            "height": 40
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "raster buried under a wash or opacity",
+        "targetTag": "button",
+        "targetClass": "copy",
+        "targetText": "",
+        "target": {
+          "scope": {
+            "kind": "docs-content",
+            "tag": "div",
+            "className": "vp-doc"
+          },
+          "selector": "div:nth-of-type(1) > div.Layout > div.VPContent.has-sidebar:nth-of-type(2) > div.VPDoc.has-sidebar.has-aside > div.container > div.content:nth-of-type(2) > div.content-container > main.main > div.vp-doc._components_lxvirtualtree > div > div.language-ts.vp-adaptive-theme:nth-of-type(4) > button.copy",
+          "visible": true,
+          "rect": {
+            "x": 1020,
+            "y": 3934,
+            "width": 40,
+            "height": 40
+          }
+        },
+        "display": "block"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "text occluded by an overlapping element",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "筛选第二个辖区",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__actions:nth-of-type(2) > fieldset.virtual-tree-demo__action-group:nth-of-type(1) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "visible": false,
+          "rect": {
+            "x": 393,
+            "y": 481,
+            "width": 109,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "text occluded by an overlapping element",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "设置示例选择",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__actions:nth-of-type(2) > fieldset.virtual-tree-demo__action-group:nth-of-type(2) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "visible": false,
+          "rect": {
+            "x": 626,
+            "y": 481,
+            "width": 96,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "text occluded by an overlapping element",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "读取选中键",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__actions:nth-of-type(2) > fieldset.virtual-tree-demo__action-group:nth-of-type(2) > div.virtual-tree-demo__action-content > button:nth-of-type(2)",
+          "visible": false,
+          "rect": {
+            "x": 726,
+            "y": 481,
+            "width": 83,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "text occluded by an overlapping element",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "展开全部",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__actions:nth-of-type(2) > fieldset.virtual-tree-demo__action-group:nth-of-type(3) > div.virtual-tree-demo__action-content > button:nth-of-type(1)",
+          "visible": false,
+          "rect": {
+            "x": 860,
+            "y": 481,
+            "width": 70,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay",
+        "text": "text occluded by an overlapping element",
+        "targetTag": "button",
+        "targetClass": "",
+        "targetText": "收起全部",
+        "target": {
+          "scope": {
+            "kind": "demo",
+            "tag": "div",
+            "className": "virtual-tree-demo lx-theme-hud"
+          },
+          "selector": "div.virtual-tree-demo.lx-theme-hud:nth-of-type(1) > details.virtual-tree-demo__controls > div.virtual-tree-demo__actions:nth-of-type(2) > fieldset.virtual-tree-demo__action-group:nth-of-type(3) > div.virtual-tree-demo__action-content > button:nth-of-type(2)",
+          "visible": false,
+          "rect": {
+            "x": 934,
+            "y": 481,
+            "width": 70,
+            "height": 34
+          }
+        },
+        "display": "none"
+      },
+      {
+        "className": "impeccable-overlay impeccable-banner",
+        "text": "layout property animation: transition: height, padding-top, padding-bottom◉×",
+        "target": null,
+        "display": "flex"
+      }
+    ]
+  },
+  "pageMetrics": {
+    "viewportClientWidth": 1440,
+    "windowInnerWidth": 1440,
+    "visualViewportWidth": 1440,
+    "viewportHeight": 1000,
+    "documentClientWidth": 1440,
+    "documentScrollWidth": 1440,
+    "bodyClientWidth": 1440,
+    "bodyScrollWidth": 1440,
+    "horizontalOverflow": false,
+    "pageScrollX": 0,
+    "pageScrollY": 0,
+    "overflowingElements": [],
+    "faviconLinks": [
+      {
+        "href": "http://127.0.0.1:4174/favicon.svg",
+        "rel": "icon",
+        "type": "image/svg+xml"
+      }
+    ],
+    "horizontalOverflowInspectionScope": "body content excluding VitePress right outline navigation and Impeccable overlays",
+    "injectedDetectorNodes": 2,
+    "documentScrollWidthBeforeOverlay": 1440,
+    "pageOwnsHorizontalOverflow": false
+  },
+  "screenshot": "browser/screenshots/virtualtree-hud-empty-desktop.png",
+  "screenshotSha256": "f921fb455931e3ff9fac2d071b1bc6b26eb9ebfe095fb174c442829f78e5757b",
+  "faviconResponses": [
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:4174/favicon.svg",
+      "status": 200,
+      "ok": true,
+      "resourceType": "fetch",
+      "at": "2026-10-08T03:30:25.934Z"
+    }
+  ],
+  "favicon404s": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrorCount": 0,
+  "pageErrorCount": 0,
+  "finishedAt": "2026-10-08T03:30:31.450Z"
+}

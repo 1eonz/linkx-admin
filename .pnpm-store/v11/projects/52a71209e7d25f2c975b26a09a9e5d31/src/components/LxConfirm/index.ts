@@ -5,39 +5,48 @@
  *   标准形态：警告图标 + 常规确认
  * 返回 Promise<boolean>，确认 true / 取消 false（业务无需 try/catch reject）
  */
-import { ElMessageBox } from 'element-plus';
-import type { LxConfirmOptions } from './types';
-import './style.css';
-import 'element-plus/es/components/message-box/style/css';
+import { ElMessageBox } from 'element-plus'
+import type { LxConfirmOptions } from './types'
+import './style.css'
+import 'element-plus/es/components/message-box/style/css'
 
-export async function lxConfirm(options: LxConfirmOptions = {}): Promise<boolean> {
+export async function lxConfirm(
+  options: LxConfirmOptions = {},
+): Promise<boolean> {
   const {
     title,
     message = '',
     confirmText = '确认',
     cancelText = '取消',
     danger = false,
-  } = options;
+    customClass,
+  } = options
 
   try {
-    await ElMessageBox.confirm(message, title ?? (danger ? '确认执行该操作？' : '确认'), {
-      confirmButtonText: confirmText,
-      cancelButtonText: cancelText,
-      type: danger ? 'error' : 'warning',
-      // 设计稿确认框居中图标形态
-      center: true,
-      customClass: danger ? 'lx-confirm lx-confirm--danger' : 'lx-confirm',
-      confirmButtonClass: danger ? 'lx-confirm__btn-danger' : '',
-      // 纯确认语义不允许点遮罩误触（危险操作尤其）
-      closeOnClickModal: false,
-      closeOnPressEscape: true,
-      // 取消按钮走 EP 默认 plain 风格（灰底描边）
-      distinguishCancelAndClose: false,
-    });
-    return true;
+    await ElMessageBox.confirm(
+      message,
+      title ?? (danger ? '确认执行该操作？' : '确认'),
+      {
+        confirmButtonText: confirmText,
+        cancelButtonText: cancelText,
+        type: danger ? 'error' : 'warning',
+        // 设计稿确认框居中图标形态
+        center: true,
+        customClass: ['lx-confirm', danger && 'lx-confirm--danger', customClass]
+          .filter(Boolean)
+          .join(' '),
+        confirmButtonClass: danger ? 'lx-confirm__btn-danger' : '',
+        // 纯确认语义不允许点遮罩误触（危险操作尤其）
+        closeOnClickModal: false,
+        closeOnPressEscape: true,
+        // 取消按钮走 EP 默认 plain 风格（灰底描边）
+        distinguishCancelAndClose: false,
+      },
+    )
+    return true
   } catch {
-    return false;
+    return false
   }
 }
 
-export type { LxConfirmOptions };
+export type { LxConfirmOptions }

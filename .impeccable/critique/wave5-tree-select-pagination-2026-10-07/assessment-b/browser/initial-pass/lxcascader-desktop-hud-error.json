@@ -1,0 +1,335 @@
+{
+  "scenario": "lxcascader-desktop-hud-error",
+  "route": "lxcascader",
+  "theme": "HUD 深色（由 DOM 注入，Demo 未提供切换控件）",
+  "requestedState": "展开演示状态，失败",
+  "viewport": {
+    "width": 1440,
+    "height": 1000,
+    "isMobile": false
+  },
+  "overlayInjection": {
+    "loaded": true,
+    "src": "http://127.0.0.1:8400/detect.js"
+  },
+  "actionResults": [
+    {
+      "action": "hud",
+      "result": "added dark and lx-theme-hud classes"
+    },
+    {
+      "action": "cascader-error",
+      "result": "clicked 失败"
+    }
+  ],
+  "browser": {
+    "title": "[Human] lxcascader lxcascader-desktop-hud-error",
+    "url": "http://127.0.0.1:4177/components/lxcascader",
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "isMobile": false
+    },
+    "document": {
+      "scrollWidth": 1425,
+      "clientWidth": 1425,
+      "scrollHeight": 4701,
+      "bodyScrollWidth": 1425
+    },
+    "theme": {
+      "dark": true,
+      "hud": true,
+      "classes": [
+        "dark",
+        "lx-theme-hud"
+      ]
+    },
+    "demoFound": true,
+    "demoText": "组织路径 组织数据加载失败 重试 演示状态 多选模式 加载中 失败 加载中且失败 禁用 控件英文 当前值：hangzhou / xihu / command 已回显组织路径",
+    "states": {
+      "loading": false,
+      "errorText": [
+        "组织数据加载失败\n重试",
+        "组织数据加载失败"
+      ],
+      "overlayNodeCount": 45,
+      "alerts": [
+        {
+          "role": "alert",
+          "text": "组织数据加载失败\n重试",
+          "visible": true
+        },
+        {
+          "role": "status",
+          "text": "已回显组织路径",
+          "visible": true
+        },
+        {
+          "role": "alert",
+          "text": "组织数据加载失败",
+          "visible": false
+        }
+      ]
+    },
+    "controls": [
+      {
+        "tag": "button",
+        "text": "搜索文档\nK",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "",
+        "role": "switch",
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "input",
+        "text": "",
+        "role": null,
+        "type": "text",
+        "disabled": false,
+        "ariaInvalid": "true"
+      },
+      {
+        "tag": "button",
+        "text": "重试",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "多选模式",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "加载中",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "失败",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "加载中且失败",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "禁用",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "input",
+        "text": "",
+        "role": null,
+        "type": "checkbox",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "◉",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "×",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      }
+    ],
+    "overlayScripts": [
+      {
+        "src": "http://127.0.0.1:8400/detect.js",
+        "loaded": false
+      }
+    ]
+  },
+  "screenshot": "screenshots/lxcascader-desktop-hud-error.png",
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "timestamp": 1791350085722.534
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "timestamp": 1791350085750.325
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 23 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "timestamp": 1791350099997.318
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350099997.467
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button",
+      "timestamp": 1791350099997.735
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350099997.898
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy",
+      "timestamp": 1791350099998.045
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350099998.179
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350099998.307
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350099998.435
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350099998.555
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350099998.672
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350099998.794
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy",
+      "timestamp": 1791350099998.928
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350099999.049
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350099999.173
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350099999.292
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350099999.408
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350099999.523
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350099999.634
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350099999.753
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350099999.874
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350099999.993
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350100000.105
+    },
+    {
+      "type": "log",
+      "text": "%cedge-flush-cards%c 19 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit table",
+      "timestamp": 1791350100000.223
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body",
+      "timestamp": 1791350100000.429
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "timestamp": 1791350100000.554
+    }
+  ],
+  "runtimeExceptions": [],
+  "networkFailures": []
+}

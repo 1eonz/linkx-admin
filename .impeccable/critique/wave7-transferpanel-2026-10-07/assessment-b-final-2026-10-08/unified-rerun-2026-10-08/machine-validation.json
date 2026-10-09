@@ -1,0 +1,535 @@
+{
+  "assessment": "Assessment B",
+  "generatedAt": "2026-10-08",
+  "scope": {
+    "sourceTargets": [
+      "linkx-fe/src/components/LxTransferPanel/index.vue",
+      "linkx-fe/src/components/LxTransferPanel/demo/basic.vue",
+      "linkx-fe/docs/components/lxtransferpanel.md",
+      "linkx-fe/src/components/LxVirtualTree/index.vue",
+      "linkx-fe/src/components/LxVirtualTree/demo/basic.vue",
+      "linkx-fe/docs/components/lxvirtualtree.md",
+      "linkx-fe/docs/.vitepress/theme/custom.css"
+    ],
+    "markupDetectorCount": 6,
+    "cssOnlyAttemptExcluded": true,
+    "browserViews": 4,
+    "screenshots": 25
+  },
+  "assertions": {
+    "sourceHashesUnchanged": true,
+    "allMarkupDetectorsClean": true,
+    "allFourPagesInjected": true,
+    "screenshotCount": 25,
+    "onlyBrowserHttpErrorIsFavicon": true,
+    "virtualTreeVpDocOverflowExactly24": true,
+    "transferPanelVpDocNoOverflow": true,
+    "overlayAdds240ToRootEveryView": true,
+    "overlayLeavesInnerWidthsStable": true,
+    "supplementPortsClosed": true,
+    "temporaryProfileAndOverlayRemoved": true
+  },
+  "detectors": [
+    {
+      "name": "theme-css",
+      "exitCode": 0,
+      "emptyJson": true,
+      "stderrBytes": 0,
+      "supportedMarkup": false
+    },
+    {
+      "name": "transferpanel-component",
+      "exitCode": 0,
+      "emptyJson": true,
+      "stderrBytes": 0,
+      "supportedMarkup": true
+    },
+    {
+      "name": "transferpanel-demo",
+      "exitCode": 0,
+      "emptyJson": true,
+      "stderrBytes": 0,
+      "supportedMarkup": true
+    },
+    {
+      "name": "transferpanel-doc",
+      "exitCode": 0,
+      "emptyJson": true,
+      "stderrBytes": 0,
+      "supportedMarkup": true
+    },
+    {
+      "name": "virtualtree-component",
+      "exitCode": 0,
+      "emptyJson": true,
+      "stderrBytes": 0,
+      "supportedMarkup": true
+    },
+    {
+      "name": "virtualtree-demo",
+      "exitCode": 0,
+      "emptyJson": true,
+      "stderrBytes": 0,
+      "supportedMarkup": true
+    },
+    {
+      "name": "virtualtree-doc",
+      "exitCode": 0,
+      "emptyJson": true,
+      "stderrBytes": 0,
+      "supportedMarkup": true
+    }
+  ],
+  "browser": {
+    "pages": [
+      {
+        "name": "transfer-desktop",
+        "url": "http://127.0.0.1:8418/components/lxtransferpanel.html",
+        "overlayInjected": true,
+        "antiPatternSummary": [
+          "%c[impeccable] 19 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        ],
+        "httpErrors": [
+          {
+            "url": "http://127.0.0.1:8418/favicon.ico",
+            "status": 404
+          }
+        ],
+        "networkFailures": 0,
+        "consoleErrors": 1,
+        "viewportMetadata": null
+      },
+      {
+        "name": "transfer-mobile",
+        "url": "http://127.0.0.1:8418/components/lxtransferpanel.html",
+        "overlayInjected": true,
+        "antiPatternSummary": [
+          "%c[impeccable] 5 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        ],
+        "httpErrors": [],
+        "networkFailures": 0,
+        "consoleErrors": 0,
+        "viewportMetadata": {
+          "at375": {
+            "width": 615,
+            "height": 1332,
+            "visualWidth": 375
+          },
+          "at320": {
+            "width": 560,
+            "height": 1421,
+            "visualWidth": 375
+          }
+        }
+      },
+      {
+        "name": "virtualtree-desktop",
+        "url": "http://127.0.0.1:8418/components/lxvirtualtree.html",
+        "overlayInjected": true,
+        "antiPatternSummary": [
+          "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        ],
+        "httpErrors": [],
+        "networkFailures": 0,
+        "consoleErrors": 0,
+        "viewportMetadata": null
+      },
+      {
+        "name": "virtualtree-mobile",
+        "url": "http://127.0.0.1:8418/components/lxvirtualtree.html",
+        "overlayInjected": true,
+        "antiPatternSummary": [
+          "%c[impeccable] 6 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        ],
+        "httpErrors": [],
+        "networkFailures": 0,
+        "consoleErrors": 0,
+        "viewportMetadata": {
+          "at375": {
+            "width": 615,
+            "height": 1332,
+            "visualWidth": 375
+          },
+          "at320": {
+            "width": 560,
+            "height": 1421,
+            "visualWidth": 375
+          }
+        }
+      }
+    ],
+    "allHttpErrors": [
+      {
+        "page": "transfer-desktop",
+        "url": "http://127.0.0.1:8418/favicon.ico",
+        "status": 404
+      }
+    ]
+  },
+  "responsiveSupplement": {
+    "scope": "只读补充尺寸测量；不重复 detector 或业务状态交互",
+    "views": [
+      {
+        "name": "transferpanel-375",
+        "viewportWidth": 375,
+        "rootBefore": {
+          "client": 375,
+          "scroll": 375
+        },
+        "rootAfter": {
+          "client": 375,
+          "scroll": 615
+        },
+        "bodyBefore": 375,
+        "bodyAfter": 375,
+        "vpDocBefore": {
+          "client": 327,
+          "scroll": 327
+        },
+        "codeBlocks": [
+          {
+            "index": 0,
+            "className": "language-vue vp-adaptive-theme",
+            "x": 41,
+            "width": 293,
+            "client": 293,
+            "scroll": 293
+          },
+          {
+            "index": 1,
+            "className": "language-ts vp-adaptive-theme",
+            "x": 24,
+            "width": 327,
+            "client": 327,
+            "scroll": 327
+          },
+          {
+            "index": 2,
+            "className": "language-vue vp-adaptive-theme",
+            "x": 24,
+            "width": 327,
+            "client": 327,
+            "scroll": 327
+          }
+        ],
+        "tables": [
+          {
+            "index": 0,
+            "client": 327,
+            "scroll": 997,
+            "overflowX": "auto"
+          },
+          {
+            "index": 1,
+            "client": 327,
+            "scroll": 486,
+            "overflowX": "auto"
+          },
+          {
+            "index": 2,
+            "client": 327,
+            "scroll": 443,
+            "overflowX": "auto"
+          }
+        ],
+        "overlayDelta": {
+          "documentClientWidth": 0,
+          "documentScrollWidth": 240,
+          "bodyScrollWidth": 0,
+          "vpDocClientWidth": 0,
+          "vpDocScrollWidth": 0,
+          "tableWidthsStable": true,
+          "codeBlockWidthsStable": true
+        },
+        "overlayGeometry": {
+          "elementCount": 13,
+          "maximumRight": 615,
+          "beyondDocumentClientWidth": 4
+        }
+      },
+      {
+        "name": "transferpanel-320",
+        "viewportWidth": 320,
+        "rootBefore": {
+          "client": 320,
+          "scroll": 320
+        },
+        "rootAfter": {
+          "client": 320,
+          "scroll": 560
+        },
+        "bodyBefore": 320,
+        "bodyAfter": 320,
+        "vpDocBefore": {
+          "client": 272,
+          "scroll": 272
+        },
+        "codeBlocks": [
+          {
+            "index": 0,
+            "className": "language-vue vp-adaptive-theme",
+            "x": 41,
+            "width": 238,
+            "client": 238,
+            "scroll": 238
+          },
+          {
+            "index": 1,
+            "className": "language-ts vp-adaptive-theme",
+            "x": 24,
+            "width": 272,
+            "client": 272,
+            "scroll": 272
+          },
+          {
+            "index": 2,
+            "className": "language-vue vp-adaptive-theme",
+            "x": 24,
+            "width": 272,
+            "client": 272,
+            "scroll": 272
+          }
+        ],
+        "tables": [
+          {
+            "index": 0,
+            "client": 272,
+            "scroll": 997,
+            "overflowX": "auto"
+          },
+          {
+            "index": 1,
+            "client": 272,
+            "scroll": 486,
+            "overflowX": "auto"
+          },
+          {
+            "index": 2,
+            "client": 272,
+            "scroll": 443,
+            "overflowX": "auto"
+          }
+        ],
+        "overlayDelta": {
+          "documentClientWidth": 0,
+          "documentScrollWidth": 240,
+          "bodyScrollWidth": 0,
+          "vpDocClientWidth": 0,
+          "vpDocScrollWidth": 0,
+          "tableWidthsStable": true,
+          "codeBlockWidthsStable": true
+        },
+        "overlayGeometry": {
+          "elementCount": 11,
+          "maximumRight": 560,
+          "beyondDocumentClientWidth": 4
+        }
+      },
+      {
+        "name": "virtualtree-375",
+        "viewportWidth": 375,
+        "rootBefore": {
+          "client": 375,
+          "scroll": 375
+        },
+        "rootAfter": {
+          "client": 375,
+          "scroll": 615
+        },
+        "bodyBefore": 375,
+        "bodyAfter": 375,
+        "vpDocBefore": {
+          "client": 327,
+          "scroll": 351
+        },
+        "codeBlocks": [
+          {
+            "index": 0,
+            "className": "language-vue vp-adaptive-theme",
+            "x": 41,
+            "width": 293,
+            "client": 293,
+            "scroll": 293
+          },
+          {
+            "index": 1,
+            "className": "language-ts vp-adaptive-theme",
+            "x": 0,
+            "width": 375,
+            "client": 375,
+            "scroll": 375
+          },
+          {
+            "index": 2,
+            "className": "language-ts vp-adaptive-theme",
+            "x": 0,
+            "width": 375,
+            "client": 375,
+            "scroll": 375
+          },
+          {
+            "index": 3,
+            "className": "language-ts vp-adaptive-theme",
+            "x": 0,
+            "width": 375,
+            "client": 375,
+            "scroll": 375
+          }
+        ],
+        "tables": [
+          {
+            "index": 0,
+            "client": 327,
+            "scroll": 637,
+            "overflowX": "auto"
+          },
+          {
+            "index": 1,
+            "client": 327,
+            "scroll": 414,
+            "overflowX": "auto"
+          },
+          {
+            "index": 2,
+            "client": 327,
+            "scroll": 352,
+            "overflowX": "auto"
+          },
+          {
+            "index": 3,
+            "client": 327,
+            "scroll": 384,
+            "overflowX": "auto"
+          }
+        ],
+        "overlayDelta": {
+          "documentClientWidth": 0,
+          "documentScrollWidth": 240,
+          "bodyScrollWidth": 0,
+          "vpDocClientWidth": 0,
+          "vpDocScrollWidth": 0,
+          "tableWidthsStable": true,
+          "codeBlockWidthsStable": true
+        },
+        "overlayGeometry": {
+          "elementCount": 15,
+          "maximumRight": 615,
+          "beyondDocumentClientWidth": 5
+        }
+      },
+      {
+        "name": "virtualtree-320",
+        "viewportWidth": 320,
+        "rootBefore": {
+          "client": 320,
+          "scroll": 320
+        },
+        "rootAfter": {
+          "client": 320,
+          "scroll": 560
+        },
+        "bodyBefore": 320,
+        "bodyAfter": 320,
+        "vpDocBefore": {
+          "client": 272,
+          "scroll": 296
+        },
+        "codeBlocks": [
+          {
+            "index": 0,
+            "className": "language-vue vp-adaptive-theme",
+            "x": 41,
+            "width": 238,
+            "client": 238,
+            "scroll": 238
+          },
+          {
+            "index": 1,
+            "className": "language-ts vp-adaptive-theme",
+            "x": 0,
+            "width": 320,
+            "client": 320,
+            "scroll": 320
+          },
+          {
+            "index": 2,
+            "className": "language-ts vp-adaptive-theme",
+            "x": 0,
+            "width": 320,
+            "client": 320,
+            "scroll": 320
+          },
+          {
+            "index": 3,
+            "className": "language-ts vp-adaptive-theme",
+            "x": 0,
+            "width": 320,
+            "client": 320,
+            "scroll": 320
+          }
+        ],
+        "tables": [
+          {
+            "index": 0,
+            "client": 272,
+            "scroll": 637,
+            "overflowX": "auto"
+          },
+          {
+            "index": 1,
+            "client": 272,
+            "scroll": 414,
+            "overflowX": "auto"
+          },
+          {
+            "index": 2,
+            "client": 272,
+            "scroll": 352,
+            "overflowX": "auto"
+          },
+          {
+            "index": 3,
+            "client": 272,
+            "scroll": 384,
+            "overflowX": "auto"
+          }
+        ],
+        "overlayDelta": {
+          "documentClientWidth": 0,
+          "documentScrollWidth": 240,
+          "bodyScrollWidth": 0,
+          "vpDocClientWidth": 0,
+          "vpDocScrollWidth": 0,
+          "tableWidthsStable": true,
+          "codeBlockWidthsStable": true
+        },
+        "overlayGeometry": {
+          "elementCount": 15,
+          "maximumRight": 560,
+          "beyondDocumentClientWidth": 5
+        }
+      }
+    ],
+    "cleanup": {
+      "attempted": true,
+      "browserStopped": true,
+      "overlayStopped": true,
+      "vitepressStopped": true,
+      "profileRemoved": true,
+      "overlayRootRemoved": true,
+      "portsClosed": true,
+      "overlayStopStatus": 0,
+      "overlayStopStdout": "Stopped live server on port 9356.",
+      "overlayStopStderr": "{\"ok\":false,\"error\":\"config_missing\",\"path\":\"F:\\\\work\\\\linkx-admin\\\\.impeccable\\\\critique\\\\wave7-transferpanel-2026-10-07\\\\assessment-b-final-2026-10-08\\\\unified-rerun-2026-10-08\\\\overflow-measure-overlay-root\\\\.impeccable\\\\live\\\\config.json\"}\nNote: could not remove live script tag ({\"ok\":false,\"error\":\"config_missing\",\"path\":\"F:\\\\work\\\\linkx-admin\\\\.impeccable\\\\critique\\\\wave7-transferpanel-2026-10-07\\\\assessment-b-final-2026-10-08\\\\unified-rerun-2026-10-08\\\\overflow-measure-overlay-root\\\\.impeccable\\\\live\\\\config.json\"})"
+    }
+  },
+  "sourceHashes": {
+    "before": "source-hashes-before.json",
+    "after": "source-hashes-after.json",
+    "unchanged": true
+  },
+  "limitations": [
+    "原始移动端浏览器元数据中，320px配置记录为layout width 560、visual width 375；补测使用独立CDP设置并得到一致宽度，但未生成补测截图。",
+    "Impeccable CSS-only命令输出不作为样式扫描通过证据。"
+  ]
+}

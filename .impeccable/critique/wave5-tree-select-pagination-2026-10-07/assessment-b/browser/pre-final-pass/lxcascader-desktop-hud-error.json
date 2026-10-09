@@ -1,0 +1,771 @@
+{
+  "scenario": "lxcascader-desktop-hud-error",
+  "route": "lxcascader",
+  "theme": "HUD 深色（由 DOM 注入，Demo 未提供切换控件）",
+  "requestedState": "展开演示状态，失败",
+  "viewport": {
+    "width": 1440,
+    "height": 1000,
+    "isMobile": false
+  },
+  "overlayInjection": {
+    "loaded": true,
+    "src": "http://127.0.0.1:8400/detect.js"
+  },
+  "preflight": {
+    "title": "[Human] lxcascader lxcascader-desktop-hud-error",
+    "mutableInjection": true,
+    "preflightScript": true
+  },
+  "actionResults": [
+    {
+      "action": "hud",
+      "result": "added dark and lx-theme-hud classes"
+    },
+    {
+      "action": "cascader-error",
+      "result": "clicked 失败"
+    }
+  ],
+  "browser": {
+    "title": "[Human] lxcascader lxcascader-desktop-hud-error",
+    "url": "http://127.0.0.1:4177/components/lxcascader",
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "isNarrow": false,
+      "visualWidth": 1425,
+      "screenWidth": 1440,
+      "devicePixelRatio": 1
+    },
+    "document": {
+      "scrollWidth": 1425,
+      "clientWidth": 1425,
+      "scrollHeight": 4701,
+      "bodyScrollWidth": 1425
+    },
+    "theme": {
+      "dark": true,
+      "hud": true,
+      "classes": [
+        "dark",
+        "lx-theme-hud"
+      ]
+    },
+    "demoFound": true,
+    "demoText": "组织路径 组织数据加载失败 重试 演示状态 多选模式 加载中 失败 加载中且失败 禁用 控件英文 当前值：hangzhou / xihu / command 已回显组织路径",
+    "states": {
+      "loading": false,
+      "errorText": [
+        "组织数据加载失败\n重试",
+        "组织数据加载失败"
+      ],
+      "overlayNodeCount": 45,
+      "alerts": [
+        {
+          "role": "alert",
+          "text": "组织数据加载失败\n重试",
+          "visible": true
+        },
+        {
+          "role": "status",
+          "text": "已回显组织路径",
+          "visible": true
+        },
+        {
+          "role": "alert",
+          "text": "组织数据加载失败",
+          "visible": false
+        }
+      ]
+    },
+    "controls": [
+      {
+        "tag": "button",
+        "text": "搜索文档\nK",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "",
+        "role": "switch",
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "input",
+        "text": "",
+        "role": null,
+        "type": "text",
+        "disabled": false,
+        "ariaInvalid": "true"
+      },
+      {
+        "tag": "button",
+        "text": "重试",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "多选模式",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "加载中",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "失败",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "加载中且失败",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "禁用",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "input",
+        "text": "",
+        "role": null,
+        "type": "checkbox",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "◉",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "×",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      }
+    ],
+    "selectPagination": null,
+    "overlayScripts": [
+      {
+        "src": "http://127.0.0.1:8400/detect.js",
+        "loaded": true
+      }
+    ]
+  },
+  "detectorConsole": {
+    "runs": [
+      "%c[impeccable] 23 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    ],
+    "findingCount": 23,
+    "ruleCounts": {
+      "ai-color-palette": 12,
+      "buried-raster": 2,
+      "edge-flush-cards": 1,
+      "layout-transition": 1,
+      "line-length": 7
+    },
+    "findings": [
+      {
+        "rule": "line-length",
+        "message": "~86 chars/line (aim for <80)",
+        "selector": "p",
+        "args": [
+          "%cline-length%c ~86 chars/line (aim for <80)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "p"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Cyan neon text on dark background",
+        "selector": "button",
+        "args": [
+          "%cai-color-palette%c Cyan neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button"
+        ]
+      },
+      {
+        "rule": "line-length",
+        "message": "~86 chars/line (aim for <80)",
+        "selector": "p",
+        "args": [
+          "%cline-length%c ~86 chars/line (aim for <80)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "p"
+        ]
+      },
+      {
+        "rule": "buried-raster",
+        "message": "raster background at opacity 0",
+        "selector": "button.copy",
+        "args": [
+          "%cburied-raster%c raster background at opacity 0",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button.copy"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "line-length",
+        "message": "~86 chars/line (aim for <80)",
+        "selector": "p",
+        "args": [
+          "%cline-length%c ~86 chars/line (aim for <80)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "p"
+        ]
+      },
+      {
+        "rule": "line-length",
+        "message": "~86 chars/line (aim for <80)",
+        "selector": "p",
+        "args": [
+          "%cline-length%c ~86 chars/line (aim for <80)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "p"
+        ]
+      },
+      {
+        "rule": "buried-raster",
+        "message": "raster background at opacity 0",
+        "selector": "button.copy",
+        "args": [
+          "%cburied-raster%c raster background at opacity 0",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button.copy"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "line-length",
+        "message": "~86 chars/line (aim for <80)",
+        "selector": "p",
+        "args": [
+          "%cline-length%c ~86 chars/line (aim for <80)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "p"
+        ]
+      },
+      {
+        "rule": "line-length",
+        "message": "~86 chars/line (aim for <80)",
+        "selector": "p",
+        "args": [
+          "%cline-length%c ~86 chars/line (aim for <80)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "p"
+        ]
+      },
+      {
+        "rule": "line-length",
+        "message": "~86 chars/line (aim for <80)",
+        "selector": "p",
+        "args": [
+          "%cline-length%c ~86 chars/line (aim for <80)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "p"
+        ]
+      },
+      {
+        "rule": "edge-flush-cards",
+        "message": "19 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+        "selector": "table",
+        "args": [
+          "%cedge-flush-cards%c 19 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "table"
+        ]
+      },
+      {
+        "rule": "layout-transition",
+        "message": "transition: height, padding-top, padding-bottom",
+        "selector": "body",
+        "args": [
+          "%clayout-transition%c transition: height, padding-top, padding-bottom",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "body"
+        ]
+      }
+    ]
+  },
+  "screenshot": "screenshots/lxcascader-desktop-hud-error.png",
+  "console": [
+    {
+      "type": "debug",
+      "args": [
+        "[vite] connecting..."
+      ],
+      "text": "[vite] connecting...",
+      "timestamp": 1791350680744.547
+    },
+    {
+      "type": "debug",
+      "args": [
+        "[vite] connected."
+      ],
+      "text": "[vite] connected.",
+      "timestamp": 1791350680766.668
+    },
+    {
+      "type": "startGroup",
+      "args": [
+        "%c[impeccable] 23 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "text": "%c[impeccable] 23 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "timestamp": 1791350695145.706
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "p"
+      ],
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350695145.834
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Cyan neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button"
+      ],
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button",
+      "timestamp": 1791350695146.11
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "p"
+      ],
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350695146.269
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button.copy"
+      ],
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy",
+      "timestamp": 1791350695146.415
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350695146.536
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350695146.657
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350695146.794
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350695146.912
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "p"
+      ],
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350695147.038
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "p"
+      ],
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350695147.16
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button.copy"
+      ],
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy",
+      "timestamp": 1791350695147.292
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350695147.42
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350695147.539
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350695147.656
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350695147.78
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350695147.893
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350695148.019
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791350695148.14
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "p"
+      ],
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350695148.251
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "p"
+      ],
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350695148.365
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "p"
+      ],
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p",
+      "timestamp": 1791350695148.471
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cedge-flush-cards%c 19 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "table"
+      ],
+      "text": "%cedge-flush-cards%c 19 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit table",
+      "timestamp": 1791350695148.577
+    },
+    {
+      "type": "log",
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "body"
+      ],
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body",
+      "timestamp": 1791350695148.773
+    },
+    {
+      "type": "endGroup",
+      "args": [
+        "console.groupEnd"
+      ],
+      "text": "console.groupEnd",
+      "timestamp": 1791350695148.887
+    }
+  ],
+  "runtimeExceptions": [],
+  "networkFailures": [],
+  "stateChecks": {
+    "viewportWidthMatches": true,
+    "narrowMediaQueryMatches": true,
+    "errorStateVisible": true,
+    "loadingStateVisible": true,
+    "darkThemeApplied": true,
+    "hudThemeClassApplied": true
+  }
+}

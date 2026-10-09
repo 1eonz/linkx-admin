@@ -16,6 +16,7 @@ const screenshotsDir = path.join(outDir, 'screenshots');
 const browserPath = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const consoleEntries = [];
 const pageErrors = [];
+const pendingConsoleTasks = [];
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 await fs.mkdir(screenshotsDir, { recursive: true });
@@ -29,9 +30,37 @@ const context = await browser.newContext({
 });
 const page = await context.newPage();
 page.on('console', (message) => {
-  consoleEntries.push({ type: message.type(), text: message.text() });
+  const entry = { type: message.type(), text: message.text() };
+  consoleEntries.push(entry);
+  pendingConsoleTasks.push(Promise.all(message.args().map(async (handle) => {
+    try {
+      return await handle.evaluate((value) => {
+        if (value instanceof Element) {
+          const rect = value.getBoundingClientRect();
+          return {
+            kind: 'element',
+            tag: value.tagName,
+            id: value.id,
+            className: value.className?.toString?.() ?? '',
+            text: value.innerText?.slice(0, 180) ?? value.textContent?.slice(0, 180) ?? '',
+            ariaLabel: value.getAttribute('aria-label'),
+            title: value.getAttribute('title'),
+            rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
+            outerHTML: value.outerHTML.slice(0, 360),
+          };
+        }
+        return { kind: typeof value, value: String(value).slice(0, 180) };
+      });
+    } catch {
+      return { kind: 'unavailable' };
+    }
+  })).then((values) => { entry.arguments = values; }));
 });
 page.on('pageerror', (error) => pageErrors.push(error.message));
+
+async function flushConsoleArguments() {
+  await Promise.all(pendingConsoleTasks.splice(0));
+}
 
 async function loadPage(width, height, hud = false, reducedMotion = 'no-preference') {
   await page.setViewportSize({ width, height });
@@ -41,7 +70,7 @@ async function loadPage(width, height, hud = false, reducedMotion = 'no-preferen
     document.documentElement.classList.toggle('lx-theme-hud', useHud);
   }, hud);
   await page.evaluate(() => document.fonts.ready.then(() => true));
-  await delay(100);
+  await delay(350);
 }
 
 async function pageMetrics() {
@@ -59,6 +88,36 @@ async function pageMetrics() {
     const longestName = names.reduce((longest, name) => name.length > longest.length ? name : longest, '');
     const longestElement = [...document.querySelectorAll('.icon-tile__name')].find((item) => item.textContent.trim() === longestName);
     const longestStyle = longestElement ? getComputedStyle(longestElement) : null;
+    const parseRgb = (value) => {
+      const channels = value.match(/rgba?\(([^)]+)\)/)?.[1]
+        .split(',')
+        .map((part) => Number.parseFloat(part.trim()));
+      if (!channels) return null;
+      return { r: channels[0], g: channels[1], b: channels[2], a: channels[3] ?? 1 };
+    };
+    const luminance = (color) => {
+      const linear = (channel) => {
+        const value = channel / 255;
+        return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+      };
+      return 0.2126 * linear(color.r) + 0.7152 * linear(color.g) + 0.0722 * linear(color.b);
+    };
+    const labelContrasts = [...document.querySelectorAll('.icon-tile__name')].map((item) => {
+      const label = getComputedStyle(item);
+      const tile = getComputedStyle(item.closest('.icon-tile'));
+      const foreground = parseRgb(label.color);
+      const background = parseRgb(tile.backgroundColor);
+      if (!foreground || !background) return null;
+      const fgLum = luminance(foreground);
+      const bgLum = luminance(background);
+      return {
+        name: item.textContent.trim(),
+        fontSize: label.fontSize,
+        foreground: label.color,
+        background: tile.backgroundColor,
+        contrastRatio: Number(((Math.max(fgLum, bgLum) + 0.05) / (Math.min(fgLum, bgLum) + 0.05)).toFixed(2)),
+      };
+    }).filter(Boolean).sort((left, right) => left.contrastRatio - right.contrastRatio);
     return {
       viewportWidth: innerWidth,
       viewportHeight: innerHeight,
@@ -74,6 +133,11 @@ async function pageMetrics() {
       rootBackground: rootStyle.backgroundColor,
       docsBackground: docStyle.backgroundColor,
       tileCount: document.querySelectorAll('.icon-tile').length,
+      iconGroups: {
+        count: document.querySelectorAll('details.icon-group').length,
+        openCount: document.querySelectorAll('details.icon-group[open]').length,
+        titles: [...document.querySelectorAll('details.icon-group > summary')].map((summary) => summary.innerText.trim()),
+      },
       searchValue: input?.value ?? null,
       searchClearBox: (() => {
         const button = document.querySelector('.icon-search__clear');
@@ -97,7 +161,17 @@ async function pageMetrics() {
         fontSize: longestStyle.fontSize,
         lineHeight: longestStyle.lineHeight,
         overflowWrap: longestStyle.overflowWrap,
+        tileWidth: longestElement.closest('.icon-tile').getBoundingClientRect().width,
+        tileContentWidth: longestElement.closest('.icon-tile').clientWidth,
+        tileText: longestElement.closest('.icon-tile').innerText,
       } : null,
+      englishKeyContrast: {
+        sampleCount: labelContrasts.length,
+        minimum: labelContrasts[0] ?? null,
+        maximum: labelContrasts.at(-1) ?? null,
+        allMeetNormalTextAa: labelContrasts.length === document.querySelectorAll('.icon-tile').length
+          && labelContrasts.every((item) => item.contrastRatio >= 4.5),
+      },
       firstTileStyle: tileStyle ? {
         color: tileStyle.color,
         backgroundColor: tileStyle.backgroundColor,
@@ -106,6 +180,14 @@ async function pageMetrics() {
       } : null,
     };
   });
+}
+
+async function openIconGroups() {
+  await page.locator('details.icon-group').evaluateAll((groups) => {
+    groups.forEach((group) => { group.open = true; });
+  });
+  await page.locator('.icon-tile').first().waitFor({ state: 'visible' });
+  await delay(250);
 }
 
 async function contrastForEmptyState() {
@@ -191,6 +273,7 @@ async function injectDetector(label) {
     return { loaded: await loaded, scriptSrc: script.src, title: document.title };
   }, { src: `${overlayBase}/detect.js`, nextTitle: title });
   await delay(2500);
+  await flushConsoleArguments();
   const pageState = await page.evaluate(() => ({
     scriptPresent: Boolean(document.querySelector('script[data-assessment-b="true"]')),
     scriptReadyState: document.querySelector('script[data-assessment-b="true"]')?.readyState ?? null,
@@ -199,7 +282,7 @@ async function injectDetector(label) {
       .map((element) => ({ tag: element.tagName, id: element.id, className: element.className?.toString?.() ?? '' })),
     bodyChildCount: document.body.children.length,
   }));
-  const messages = consoleEntries.slice(consoleStart).filter((entry) => /impeccable|design|detector/i.test(entry.text));
+  const messages = consoleEntries.slice(consoleStart);
   return { ...injection, pageState, detectorConsoleMessages: messages };
 }
 
@@ -219,7 +302,22 @@ const evidence = {
 
 try {
   await loadPage(1440, 900, false);
+  evidence.initialDesktopLight = {
+    defaultGroups: await page.evaluate(() => ({
+      groupCount: document.querySelectorAll('details.icon-group').length,
+      initiallyOpenCount: document.querySelectorAll('details.icon-group[open]').length,
+      titles: [...document.querySelectorAll('details.icon-group > summary')].map((summary) => summary.innerText.trim()),
+    })),
+    defaultScreenshot: 'screenshots/light-desktop-default-groups.png',
+  };
+  await page.screenshot({ path: path.join(outDir, evidence.initialDesktopLight.defaultScreenshot), fullPage: true, animations: 'disabled' });
+  await openIconGroups();
   evidence.initialDesktopLight = await pageMetrics();
+  evidence.initialDesktopLight.defaultGroups = {
+    groupCount: 7,
+    initiallyOpenCount: 0,
+    interactionCaptureOpensGroups: true,
+  };
   evidence.initialDesktopLight.screenshot = 'screenshots/light-desktop-1440-before-overlay.png';
   evidence.initialDesktopLight.overlayScriptPresent = await page.locator('script[data-assessment-b="true"]').count() > 0;
   await page.screenshot({ path: path.join(outDir, evidence.initialDesktopLight.screenshot), fullPage: true, animations: 'disabled' });
@@ -229,6 +327,7 @@ try {
 
   const input = page.locator('.icon-search');
   await input.fill('undo');
+  await openIconGroups();
   await page.locator('.icon-tile').first().waitFor({ state: 'visible' });
   evidence.searchAndInteraction.searchUndo = {
     query: 'undo',
@@ -240,6 +339,7 @@ try {
     value: document.querySelector('.icon-search')?.value,
     activeIsSearch: document.activeElement === document.querySelector('.icon-search'),
   }));
+  await openIconGroups();
   await page.keyboard.press('Tab');
   evidence.searchAndInteraction.keyboardFocus = await page.evaluate(() => {
     const element = document.activeElement;
@@ -259,8 +359,14 @@ try {
   await page.screenshot({ path: path.join(screenshotsDir, 'keyboard-focus-after-search-clear.png'), fullPage: false, animations: 'disabled' });
 
   const firstTile = page.locator('.icon-tile').first();
-  await firstTile.evaluate((element) => element.blur());
-  await firstTile.hover();
+  await firstTile.scrollIntoViewIfNeeded();
+  const hoverPoint = await firstTile.evaluate((element) => {
+    element.blur();
+    const rect = element.getBoundingClientRect();
+    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+  });
+  await page.mouse.move(hoverPoint.x, hoverPoint.y);
+  await delay(250);
   evidence.searchAndInteraction.hover = await firstTile.evaluate((element) => {
     const style = getComputedStyle(element);
     return {
@@ -276,9 +382,10 @@ try {
 
   evidence.searchAndInteraction.emptyLight = await contrastForEmptyState();
   evidence.searchAndInteraction.emptyLight.screenshot = 'screenshots/empty-state-light-desktop.png';
-  await page.screenshot({ path: path.join(screenshotsDir, evidence.searchAndInteraction.emptyLight.screenshot), fullPage: false, animations: 'disabled' });
+  await page.screenshot({ path: path.join(outDir, evidence.searchAndInteraction.emptyLight.screenshot), fullPage: false, animations: 'disabled' });
 
   await input.fill('');
+  await openIconGroups();
   await page.emulateMedia({ colorScheme: 'light', reducedMotion: 'reduce' });
   evidence.searchAndInteraction.reducedMotion = await page.evaluate(() => ({
     mediaMatches: matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -302,8 +409,15 @@ try {
 
   for (const variant of variants) {
     await loadPage(variant.width, variant.height, variant.hud);
+    const defaultGroups = await page.evaluate(() => ({
+      groupCount: document.querySelectorAll('details.icon-group').length,
+      initiallyOpenCount: document.querySelectorAll('details.icon-group[open]').length,
+    }));
+    await openIconGroups();
     const before = await pageMetrics();
     before.variant = variant.name;
+    before.defaultGroups = defaultGroups;
+    before.captureExpandedGroups = true;
     before.screenshot = `screenshots/${variant.name}-before-overlay.png`;
     before.overlayInjected = false;
     evidence.noOverlayWidths.push({
@@ -313,13 +427,16 @@ try {
       bodyScrollWidth: before.bodyScrollWidth,
       documentClientWidth: before.documentClientWidth,
       horizontalOverflow: before.horizontalOverflow,
+      englishKeyContrast: before.englishKeyContrast,
+      longestEnglishKey: before.longestEnglishKey,
+      longestEnglishKeyBox: before.longestEnglishKeyBox,
     });
     await page.screenshot({ path: path.join(outDir, before.screenshot), fullPage: true, animations: 'disabled' });
 
     if (variant.hud && variant.width === 1440) {
       evidence.searchAndInteraction.emptyHud = await contrastForEmptyState();
       evidence.searchAndInteraction.emptyHud.screenshot = 'screenshots/empty-state-hud-desktop.png';
-      await page.screenshot({ path: path.join(screenshotsDir, evidence.searchAndInteraction.emptyHud.screenshot), fullPage: false, animations: 'disabled' });
+      await page.screenshot({ path: path.join(outDir, evidence.searchAndInteraction.emptyHud.screenshot), fullPage: false, animations: 'disabled' });
       await input.fill('');
     }
 

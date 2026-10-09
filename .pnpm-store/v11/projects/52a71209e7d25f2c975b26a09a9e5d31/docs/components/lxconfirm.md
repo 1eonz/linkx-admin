@@ -1,6 +1,7 @@
 # LxConfirm 确认框
 
 危险操作二次确认：512px 居中，**危险 / 标准**双形态。返回 `Promise<boolean>`，无需 try/catch。
+确认框通过 Teleport 渲染到 `body`；需要继承局部主题时，可用 `customClass` 将主题类传到确认框根节点。
 
 <script setup lang="ts">
 import Basic from '../../src/components/LxConfirm/demo/basic.vue';
@@ -15,7 +16,7 @@ import Basic from '../../src/components/LxConfirm/demo/basic.vue';
 :::
 
 ```ts
-import { lxConfirm } from 'lx-ui';
+import { lxConfirm } from 'lx-ui'
 
 // 危险确认：红色 warning 图标 + 深红标题 + 红底主按钮
 const ok = await lxConfirm({
@@ -23,8 +24,10 @@ const ok = await lxConfirm({
   message: '将同步通知 18 名执勤警力撤出封控区，该操作不可逆。',
   confirmText: '强制解除警戒',
   danger: true,
-});
-if (ok) { /* 已确认 */ }
+})
+if (ok) {
+  /* 已确认 */
+}
 ```
 
 ## API
@@ -35,13 +38,14 @@ if (ok) { /* 已确认 */ }
 
 ### LxConfirmOptions
 
-| 名称 | 说明 | 类型 | 默认值 |
-|---|---|---|---|
-| title | 标题 | `string` | 危险态「确认执行该操作？」/ 标准「确认」 |
-| message | 正文（**必须写明不可逆后果**） | `string` | `''` |
-| confirmText | 确认按钮文案 | `string` | `确认` |
-| cancelText | 取消按钮文案 | `string` | `取消` |
-| danger | 危险模式（红标题 + 红底主按钮） | `boolean` | `false` |
+| 名称        | 说明                                             | 类型      | 默认值                                   |
+| ----------- | ------------------------------------------------ | --------- | ---------------------------------------- |
+| title       | 标题                                             | `string`  | 危险态「确认执行该操作？」/ 标准「确认」 |
+| message     | 正文（**必须写明不可逆后果**）                   | `string`  | `''`                                     |
+| confirmText | 确认按钮文案                                     | `string`  | `确认`                                   |
+| cancelText  | 取消按钮文案                                     | `string`  | `取消`                                   |
+| danger      | 危险模式（红标题 + 红底主按钮）                  | `boolean` | `false`                                  |
+| customClass | 追加到确认框根节点的类名；可用于传递局部主题令牌 | `string`  | 无                                       |
 
 ## 使用铁律
 

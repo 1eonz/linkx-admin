@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import en from 'element-plus/es/locale/lang/en'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 
 import { LxTreeSelect, type LxTreeSelectValue } from '../../../index'
 
@@ -51,6 +51,10 @@ watch(hud, setHud)
 function toggleMultiple(): void {
   multiple.value = !multiple.value
   selected.value = multiple.value ? ['bj-1'] : 'bj-1'
+}
+
+function clearSelection(): void {
+  selected.value = undefined
 }
 
 function toggleLoading(): void {
@@ -112,6 +116,9 @@ onBeforeUnmount(() => {
           >
             {{ multiple ? '单选模式' : '多选模式' }}
           </button>
+        </div>
+        <div role="group" aria-label="选择值">
+          <button type="button" @click="clearSelection">清空选择</button>
         </div>
         <div role="group" aria-label="数据状态">
           <button type="button" @click="empty = !empty">

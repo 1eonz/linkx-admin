@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 
 import LxFormItem from '../../LxForm/LxFormItem.vue'
 import LxIcon from '../../LxIcon/index.vue'
@@ -7,25 +7,59 @@ import LxDatePicker from '../index.vue'
 import type { LxDatePickerShortcut } from '../types'
 
 const hudTheme = ref(false)
+const showDualPanels = ref(false)
+const showWeekNumber = ref(false)
 
 /** 第一组区间示例：专项布控日期区间（标本 06 主形态，W-320px 触发器） */
-const controlRange = ref<[string, string]>(['2026-09-15', '2026-10-08'])
-const analysisRange = ref<[string, string]>(['2026-09-15', '2026-10-08'])
+const controlRange = ref<[string, string] | null>(['2026-09-15', '2026-10-08'])
+const analysisRange = ref<[string, string] | null>(['2026-09-15', '2026-10-08'])
 /** 单值示例：布控生效日期（标本 06 文案语境） */
-const effectiveDate = ref<string>('2026-09-15')
-const reviewMonth = ref<string>('2026-09')
-const annotatedDate = ref<string>('2026-09-15')
-const reviewDate = ref<string>('')
+const effectiveDate = ref<string | null>('2026-09-15')
+const reviewMonth = ref<string | null>('2026-09')
+const annotatedDate = ref<string | null>('2026-09-15')
+const reviewDate = ref<Date | null>(null)
 /** 带时间示例：告警汇聚窗口 */
-const windowTime = ref<string>('2026-09-29 08:00:00')
+const windowTime = ref<string | null>('2026-09-29 08:00:00')
 /** 禁用和只读示例 */
 const lockedRange = ref<[string, string]>(['2026-09-01', '2026-09-30'])
 
-const lastAction = ref('等待日期操作；演示数据仅保存在当前页面。')
+const actionMessages = reactive<Record<string, string>>({})
+let originalDark = false
+let originalHud = false
 
 function reportChange(field: string, value: unknown) {
-  lastAction.value = `${field} 已选：${Array.isArray(value) ? value.join(' 至 ') : value}`
+  const selectedValue = Array.isArray(value)
+    ? value.join(' 至 ')
+    : value == null
+      ? '已清空'
+      : value
+  actionMessages[field] = field + ' 已选：' + String(selectedValue)
 }
+
+function syncTheme() {
+  if (typeof document === 'undefined') return
+  document.documentElement.classList.toggle(
+    'dark',
+    hudTheme.value || originalDark,
+  )
+  document.documentElement.classList.toggle(
+    'lx-theme-hud',
+    hudTheme.value || originalHud,
+  )
+}
+
+watch(hudTheme, syncTheme)
+
+onMounted(() => {
+  originalDark = document.documentElement.classList.contains('dark')
+  originalHud = document.documentElement.classList.contains('lx-theme-hud')
+  syncTheme()
+})
+
+onBeforeUnmount(() => {
+  document.documentElement.classList.toggle('dark', originalDark)
+  document.documentElement.classList.toggle('lx-theme-hud', originalHud)
+})
 
 /** 周一锚定：返回给定日期所在周的周一（zh-cn 周一起始契约的快捷预设表达） */
 function getMonday(base: Date): Date {
@@ -73,7 +107,11 @@ const shortcuts: LxDatePickerShortcut[] = [
     <div class="lx-date-picker-demo__toolbar">
       <label>
         <input v-model="hudTheme" type="checkbox" />
-        HUD 深色主题
+        文档站整体深色（HUD）
+      </label>
+      <label>
+        <input v-model="showDualPanels" type="checkbox" />
+        显示双月日历
       </label>
     </div>
 
@@ -97,6 +135,8 @@ const shortcuts: LxDatePickerShortcut[] = [
           value-format="YYYY-MM-DD"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
+          :single-panel="showDualPanels ? false : undefined"
+          :show-week-number="showWeekNumber"
           unlink-panels
           @change="reportChange('专项布控区间', $event)"
         />
@@ -105,8 +145,14 @@ const shortcuts: LxDatePickerShortcut[] = [
         周一开周，左右月份可独立翻页，所选日期以连续色带显示。
       </p>
       <p class="lx-date-picker-demo__hint">聚焦后按 ArrowDown 打开日历。</p>
-      <p class="lx-date-picker-demo__status" aria-live="polite">
-        {{ lastAction }}
+      <p
+        v-if="actionMessages['专项布控区间']"
+        class="lx-date-picker-demo__status"
+        data-testid="date-action-range"
+        role="status"
+        aria-live="polite"
+      >
+        {{ actionMessages['专项布控区间'] }}
       </p>
     </section>
 
@@ -126,6 +172,15 @@ const shortcuts: LxDatePickerShortcut[] = [
             placeholder="请选择生效日期"
             @change="reportChange('布控生效日期', $event)"
           />
+          <p
+            v-if="actionMessages['布控生效日期']"
+            class="lx-date-picker-demo__status"
+            data-testid="date-action-effective"
+            role="status"
+            aria-live="polite"
+          >
+            {{ actionMessages['布控生效日期'] }}
+          </p>
         </div>
         <div class="lx-date-picker-demo__field">
           <label class="lx-date-picker-demo__label" for="demo-date-month"
@@ -140,6 +195,15 @@ const shortcuts: LxDatePickerShortcut[] = [
             placeholder="请选择月份"
             @change="reportChange('复盘月份', $event)"
           />
+          <p
+            v-if="actionMessages['复盘月份']"
+            class="lx-date-picker-demo__status"
+            data-testid="date-action-month"
+            role="status"
+            aria-live="polite"
+          >
+            {{ actionMessages['复盘月份'] }}
+          </p>
         </div>
       </div>
     </section>
@@ -173,9 +237,18 @@ const shortcuts: LxDatePickerShortcut[] = [
         >
           <template #range-separator>至</template>
         </LxDatePicker>
+        <p
+          v-if="actionMessages['研判时间范围']"
+          class="lx-date-picker-demo__status"
+          data-testid="date-action-analysis"
+          role="status"
+          aria-live="polite"
+        >
+          {{ actionMessages['研判时间范围'] }}
+        </p>
       </div>
       <p class="lx-date-picker-demo__hint">
-        "本周"从周一开始计算。选择预设后会回填日期并保持日历打开。
+        "本周"从周一开始计算。选择预设后会回填日期范围并关闭弹层；重新打开后可继续调整。
       </p>
     </section>
 
@@ -190,6 +263,7 @@ const shortcuts: LxDatePickerShortcut[] = [
           :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
           v-model="annotatedDate"
           value-format="YYYY-MM-DD"
+          @change="reportChange('专项复盘日期', $event)"
         >
           <template #default="cell">
             <div class="el-date-table-cell">
@@ -210,6 +284,15 @@ const shortcuts: LxDatePickerShortcut[] = [
             ><LxIcon name="chevron-right" :size="16"
           /></template>
         </LxDatePicker>
+        <p
+          v-if="actionMessages['专项复盘日期']"
+          class="lx-date-picker-demo__status"
+          data-testid="date-action-annotated"
+          role="status"
+          aria-live="polite"
+        >
+          {{ actionMessages['专项复盘日期'] }}
+        </p>
       </div>
     </section>
 
@@ -228,6 +311,15 @@ const shortcuts: LxDatePickerShortcut[] = [
           placeholder="请选择窗口起点"
           @change="reportChange('告警汇聚窗口', $event)"
         />
+        <p
+          v-if="actionMessages['告警汇聚窗口']"
+          class="lx-date-picker-demo__status"
+          data-testid="date-action-window"
+          role="status"
+          aria-live="polite"
+        >
+          {{ actionMessages['告警汇聚窗口'] }}
+        </p>
       </div>
     </section>
 
@@ -239,8 +331,18 @@ const shortcuts: LxDatePickerShortcut[] = [
           v-model="reviewDate"
           :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
           placeholder="请选择日期"
+          @change="reportChange('复核日期', $event)"
         />
       </LxFormItem>
+      <p
+        v-if="actionMessages['复核日期']"
+        class="lx-date-picker-demo__status"
+        data-testid="date-action-review"
+        role="status"
+        aria-live="polite"
+      >
+        {{ actionMessages['复核日期'] }}
+      </p>
     </section>
 
     <section class="lx-date-picker-demo__panel" data-testid="disabled">
@@ -295,6 +397,10 @@ const shortcuts: LxDatePickerShortcut[] = [
 
     <details class="lx-date-picker-demo__details">
       <summary>键盘操作与扩展参数</summary>
+      <label class="lx-date-picker-demo__advanced-toggle">
+        <input v-model="showWeekNumber" type="checkbox" />
+        显示周数
+      </label>
       <p class="lx-date-picker-demo__keyboard-note">
         方向键移动日期，Enter 选择，Escape 关闭日历。
       </p>
@@ -318,7 +424,9 @@ const shortcuts: LxDatePickerShortcut[] = [
 
 .lx-date-picker-demo__toolbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 12px;
   font-size: 13px;
 }
 
@@ -327,6 +435,12 @@ const shortcuts: LxDatePickerShortcut[] = [
   min-height: 32px;
   align-items: center;
   gap: 8px;
+}
+
+@media (max-width: 640px) {
+  .lx-date-picker-demo__toolbar label {
+    min-height: 44px;
+  }
 }
 
 .lx-date-picker-demo__panel {
@@ -426,5 +540,14 @@ const shortcuts: LxDatePickerShortcut[] = [
 
 .lx-date-picker-demo__details[open] summary {
   color: var(--lx-color-primary);
+}
+
+.lx-date-picker-demo__advanced-toggle {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--lx-text-secondary-strong);
 }
 </style>

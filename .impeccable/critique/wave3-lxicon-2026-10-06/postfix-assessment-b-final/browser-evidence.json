@@ -1,0 +1,3408 @@
+{
+  "targetUrl": "http://127.0.0.1:4174/components/lxicons.html",
+  "source": "linkx-fe/docs/components/lxicons.md",
+  "browser": {
+    "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "version": "Chrome/154.0.8037.95",
+    "isolatedBrowserContext": true,
+    "newTabs": 4
+  },
+  "interactions": {
+    "initial": {
+      "searchStatusConnectedBeforeSearch": true,
+      "searchStatusRoleBeforeSearch": "status",
+      "searchStatusAriaLiveBeforeSearch": "polite",
+      "copyStatusConnectedBeforeCopy": true,
+      "copyStatusRoleBeforeCopy": "status",
+      "copyStatusAriaLiveBeforeCopy": "polite",
+      "copyStatusInitiallyEmpty": true
+    },
+    "copySuccess": {
+      "message": "已复制：<LxIcon name=\"delete\" :size=\"20\" />",
+      "role": "status",
+      "ariaLive": "polite",
+      "className": "icon-copy-feedback",
+      "clipboardWrites": [
+        "<LxIcon name=\"delete\" :size=\"20\" />"
+      ],
+      "fallbackVisible": false,
+      "outsideNotifications": []
+    },
+    "copyFailure": {
+      "message": "复制失败，手动复制代码已就绪。",
+      "role": "status",
+      "ariaLive": "polite",
+      "className": "icon-copy-feedback is-error",
+      "fallbackVisible": true,
+      "fallbackValue": "<LxIcon name=\"edit\" :size=\"20\" />",
+      "fallbackFocused": true,
+      "fallbackSelected": true,
+      "outsideNotifications": []
+    },
+    "searchResult": {
+      "query": "dashboard",
+      "statusConnected": true,
+      "statusRole": "status",
+      "statusAriaLive": "polite",
+      "statusText": "",
+      "groupCount": 1,
+      "openGroupCount": 1,
+      "tileCount": 1,
+      "emptyVisual": {
+        "visible": false,
+        "ariaHidden": null,
+        "text": ""
+      }
+    },
+    "searchEmpty": {
+      "query": "__postfix_assessment_no_match__",
+      "statusConnected": true,
+      "statusRole": "status",
+      "statusAriaLive": "polite",
+      "statusText": "无匹配图标",
+      "groupCount": 0,
+      "openGroupCount": 0,
+      "tileCount": 0,
+      "emptyVisual": {
+        "visible": true,
+        "ariaHidden": "true",
+        "text": "无匹配图标"
+      }
+    }
+  },
+  "views": [
+    {
+      "name": "desktop-light",
+      "url": "http://127.0.0.1:4174/components/lxicons.html",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "mobile": false
+      },
+      "theme": "light",
+      "initialState": {
+        "documentTitle": "LxIcon 图标总览 | LxUI",
+        "htmlDark": false,
+        "htmlHud": false,
+        "viewportWidth": 1440,
+        "documentWidth": 1425,
+        "bodyWidth": 1425,
+        "catalogWidth": 688,
+        "p0": {
+          "exists": true,
+          "open": true,
+          "tileCount": 13,
+          "otherGroupsInitiallyOpen": 0
+        },
+        "searchStatus": {
+          "present": true,
+          "role": "status",
+          "ariaLive": "polite",
+          "ariaAtomic": "true",
+          "text": "",
+          "display": "block",
+          "rect": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        "copyStatus": {
+          "present": true,
+          "role": "status",
+          "ariaLive": "polite",
+          "ariaAtomic": "true",
+          "text": "",
+          "className": "icon-copy-feedback is-empty"
+        },
+        "arrowTransition": "transform 0.2s ease-out",
+        "tileTransition": "border-color 0.2s, color 0.2s, box-shadow 0.2s",
+        "catalogBackground": "rgba(0, 0, 0, 0)",
+        "hudPageToken": "#f0f2f5",
+        "checklist": {
+          "present": true,
+          "clientWidth": 688,
+          "scrollWidth": 688,
+          "rows": [
+            {
+              "title": "P0 高频核心",
+              "width": 688,
+              "scrollWidth": 688,
+              "codeWidth": 532,
+              "codeScrollWidth": 532
+            },
+            {
+              "title": "P1 业务语义",
+              "width": 688,
+              "scrollWidth": 688,
+              "codeWidth": 532,
+              "codeScrollWidth": 532
+            },
+            {
+              "title": "29 枚扩展",
+              "width": 688,
+              "scrollWidth": 688,
+              "codeWidth": 532,
+              "codeScrollWidth": 532
+            },
+            {
+              "title": "去重合计",
+              "width": 688,
+              "scrollWidth": 688,
+              "codeWidth": null,
+              "codeScrollWidth": null
+            }
+          ]
+        }
+      },
+      "motionReduced": {
+        "preference": "reduce",
+        "arrowTransition": "none 1e-05s",
+        "tileTransition": "none 1e-05s"
+      },
+      "injection": {
+        "preflight": true,
+        "scriptLoaded": true,
+        "scriptSrc": "http://localhost:8400/detect.js",
+        "detectorReady": true
+      },
+      "overlay": {
+        "count": 19,
+        "countsByScope": {
+          "docs-content": 4,
+          "component": 14,
+          "page-level-banner": 1
+        },
+        "hits": [
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "line length too long",
+            "scope": "docs-content",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "",
+              "text": "动效仅配置在 69 个名称上，其余名称保持静态。悬停或键盘聚焦时采用自然减速曲线；warning 与 email 使用短促的语义反馈，不使用弹性回弹。系统开启减少动效后停用图标动画。",
+              "ancestry": "p < div < div.vp-doc._components_lxicons < main.main < div.content-container < div.content"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "raster buried under a wash or opacity",
+            "scope": "docs-content",
+            "target": {
+              "tag": "button",
+              "id": "",
+              "className": "copy",
+              "text": "",
+              "ancestry": "button.copy < div.language-vue.vp-adaptive-theme < div < div.vp-doc._components_lxicons < main.main < div.content-container"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "line length too long",
+            "scope": "docs-content",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "",
+              "text": "默认尺寸为 18px，常用对照尺寸为 16 / 18 / 20px；设计稿中的 24px 是 SVG 画布预览尺寸，不是额外标准档。size 可按布局需要自定义。组件库导出由 LX_ICONS 键自动推导的 LxIconName；静态配置请使用该类型，外部字符串需先通过 resolveLxIconName 校验。未知运",
+              "ancestry": "p < div < div.vp-doc._components_lxicons < main.main < div.content-container < div.content"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "line length too long",
+            "scope": "docs-content",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "",
+              "text": "在 src/components/LxIcon/icons.ts 的 LX_ICONS 中按组追加图形，键为 kebab-case 名称，值为 24×24 viewBox 的 SVG path 数组。仅当设计或业务契约存在同义旧名称时，才在 LX_ICON_ALIASES 中映射到标准图形；LxIconName 和本页",
+              "ancestry": "p < div < div.vp-doc._components_lxicons < main.main < div.content-container < div.content"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "cube",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "server",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "key",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "map-pin",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "camera",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "alert",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "menu",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "user",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__meaning",
+              "text": "实时状态",
+              "ancestry": "span.icon-tile__meaning < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "pulse",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "circle-check",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "circle-x",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "circle-alert",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "report",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-banner",
+            "visible": true,
+            "labelText": "",
+            "scope": "page-level-banner",
+            "target": null
+          }
+        ]
+      },
+      "screenshot": "desktop-light.png",
+      "console": [
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "source": "Log.entryAdded",
+          "level": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "url": "http://127.0.0.1:4174/favicon.ico"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "startGroup",
+          "text": "%c[impeccable] 19 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%coverused-font%c Primary font: inter (67% of text) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"cube\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"server\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"key\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"map-pin\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"camera\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"alert\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"menu\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"user\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"实时状态\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"pulse\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-check\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-x\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-alert\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"report\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "endGroup",
+          "text": "console.groupEnd"
+        }
+      ],
+      "consoleAfterInjection": [
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "startGroup",
+          "text": "%c[impeccable] 19 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%coverused-font%c Primary font: inter (67% of text) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"cube\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"server\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"key\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"map-pin\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"camera\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"alert\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"menu\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"user\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"实时状态\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"pulse\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-check\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-x\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-alert\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"report\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "endGroup",
+          "text": "console.groupEnd"
+        }
+      ]
+    },
+    {
+      "name": "desktop-dark",
+      "url": "http://127.0.0.1:4174/components/lxicons.html",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "mobile": false
+      },
+      "theme": "dark",
+      "initialState": {
+        "documentTitle": "LxIcon 图标总览 | LxUI",
+        "htmlDark": true,
+        "htmlHud": false,
+        "viewportWidth": 1440,
+        "documentWidth": 1425,
+        "bodyWidth": 1425,
+        "catalogWidth": 688,
+        "p0": {
+          "exists": true,
+          "open": true,
+          "tileCount": 13,
+          "otherGroupsInitiallyOpen": 0
+        },
+        "searchStatus": {
+          "present": true,
+          "role": "status",
+          "ariaLive": "polite",
+          "ariaAtomic": "true",
+          "text": "",
+          "display": "block",
+          "rect": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        "copyStatus": {
+          "present": true,
+          "role": "status",
+          "ariaLive": "polite",
+          "ariaAtomic": "true",
+          "text": "",
+          "className": "icon-copy-feedback is-empty"
+        },
+        "arrowTransition": "transform 0.2s ease-out",
+        "tileTransition": "border-color 0.2s, color 0.2s, box-shadow 0.2s",
+        "catalogBackground": "rgba(0, 0, 0, 0)",
+        "hudPageToken": "#f0f2f5",
+        "checklist": {
+          "present": true,
+          "clientWidth": 688,
+          "scrollWidth": 688,
+          "rows": [
+            {
+              "title": "P0 高频核心",
+              "width": 688,
+              "scrollWidth": 688,
+              "codeWidth": 532,
+              "codeScrollWidth": 532
+            },
+            {
+              "title": "P1 业务语义",
+              "width": 688,
+              "scrollWidth": 688,
+              "codeWidth": 532,
+              "codeScrollWidth": 532
+            },
+            {
+              "title": "29 枚扩展",
+              "width": 688,
+              "scrollWidth": 688,
+              "codeWidth": 532,
+              "codeScrollWidth": 532
+            },
+            {
+              "title": "去重合计",
+              "width": 688,
+              "scrollWidth": 688,
+              "codeWidth": null,
+              "codeScrollWidth": null
+            }
+          ]
+        }
+      },
+      "motionReduced": null,
+      "injection": {
+        "preflight": true,
+        "scriptLoaded": true,
+        "scriptSrc": "http://localhost:8400/detect.js",
+        "detectorReady": true
+      },
+      "overlay": {
+        "count": 72,
+        "countsByScope": {
+          "outside-target": 49,
+          "docs-content": 8,
+          "component": 14,
+          "page-level-banner": 1
+        },
+        "hits": [
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "新增组件总览",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "基础控件桥接",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxButton 按钮",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxSidebar 侧边栏",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxNavbar 顶部导航",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxBreadcrumb 面包屑",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxTabsBar 页签栏",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxSplitLayout 分栏布局",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxSelectTree 组织树选择",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxProTable 数据表格",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxPageCard 页面容器",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxMetricCard 指标卡",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxDutyCalendar 排班日历",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxSectionTitle 区块标题",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxAuthImg 鉴权图片",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxDescriptions 详情描述",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxPagination 分页",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxVirtualTree 虚拟树",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxTransferPanel 双栏穿梭",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxStatusDot 状态点",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxTag 浅底标签",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxCodeSlot 代码槽",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxActionButtons 行内操作",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxEmpty 空态",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxGauge 圆环仪表",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxNodeBadge 节点徽章",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "权限消费",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxForm 表单",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxInput 输入框",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxTextarea 文本域",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxRadio 单选组",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxCheckbox 复选组",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxSwitch 开关",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxSelect 下拉选择",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxTreeSelect 树形下拉",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxCascader 级联选择",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxDatePicker 日期选择",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxInputNumber 数字输入",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxSearchBar 检索面板",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxDynamicForm 动态表单",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxStatusSwitch 状态开关",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxPasswordInput 密码输入框",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxUpload 文件上传",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxSelectPagination 远程分页选择",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxMessage 全局提示",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxConfirm 确认框",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxDialog 表单弹窗",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxDrawer 详情抽屉",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "low contrast text",
+            "scope": "outside-target",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "text",
+              "text": "LxFormErrorBanner 校验横幅",
+              "ancestry": "p.text < a.VPLink.link < div.item < div.VPSidebarItem.level-1 < div.items < section.VPSidebarItem.level-0"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "line length too long",
+            "scope": "docs-content",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "",
+              "text": "动效仅配置在 69 个名称上，其余名称保持静态。悬停或键盘聚焦时采用自然减速曲线；warning 与 email 使用短促的语义反馈，不使用弹性回弹。系统开启减少动效后停用图标动画。",
+              "ancestry": "p < div < div.vp-doc._components_lxicons < main.main < div.content-container < div.content"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "raster buried under a wash or opacity",
+            "scope": "docs-content",
+            "target": {
+              "tag": "button",
+              "id": "",
+              "className": "copy",
+              "text": "",
+              "ancestry": "button.copy < div.language-vue.vp-adaptive-theme < div < div.vp-doc._components_lxicons < main.main < div.content-container"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "line length too long",
+            "scope": "docs-content",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "",
+              "text": "默认尺寸为 18px，常用对照尺寸为 16 / 18 / 20px；设计稿中的 24px 是 SVG 画布预览尺寸，不是额外标准档。size 可按布局需要自定义。组件库导出由 LX_ICONS 键自动推导的 LxIconName；静态配置请使用该类型，外部字符串需先通过 resolveLxIconName 校验。未知运",
+              "ancestry": "p < div < div.vp-doc._components_lxicons < main.main < div.content-container < div.content"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "docs-content",
+            "target": {
+              "tag": "dt",
+              "id": "",
+              "className": "",
+              "text": "P0 高频核心",
+              "ancestry": "dt < div.icon-checklist__row < dl.icon-checklist < div < div.vp-doc._components_lxicons < main.main"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "docs-content",
+            "target": {
+              "tag": "dt",
+              "id": "",
+              "className": "",
+              "text": "P1 业务语义",
+              "ancestry": "dt < div.icon-checklist__row < dl.icon-checklist < div < div.vp-doc._components_lxicons < main.main"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "docs-content",
+            "target": {
+              "tag": "dt",
+              "id": "",
+              "className": "",
+              "text": "29 枚扩展",
+              "ancestry": "dt < div.icon-checklist__row < dl.icon-checklist < div < div.vp-doc._components_lxicons < main.main"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "docs-content",
+            "target": {
+              "tag": "dt",
+              "id": "",
+              "className": "",
+              "text": "去重合计",
+              "ancestry": "dt < div.icon-checklist__row < dl.icon-checklist < div < div.vp-doc._components_lxicons < main.main"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "line length too long",
+            "scope": "docs-content",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "",
+              "text": "在 src/components/LxIcon/icons.ts 的 LX_ICONS 中按组追加图形，键为 kebab-case 名称，值为 24×24 viewBox 的 SVG path 数组。仅当设计或业务契约存在同义旧名称时，才在 LX_ICON_ALIASES 中映射到标准图形；LxIconName 和本页",
+              "ancestry": "p < div < div.vp-doc._components_lxicons < main.main < div.content-container < div.content"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "cube",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "server",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "key",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "map-pin",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "camera",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "alert",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "menu",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "user",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__meaning",
+              "text": "实时状态",
+              "ancestry": "span.icon-tile__meaning < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "pulse",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "circle-check",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "circle-x",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "circle-alert",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "report",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-banner",
+            "visible": true,
+            "labelText": "",
+            "scope": "page-level-banner",
+            "target": null
+          }
+        ]
+      },
+      "screenshot": "desktop-dark.png",
+      "console": [
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "startGroup",
+          "text": "%c[impeccable] 72 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.1:1 (need 4.5:1) — text #1d2129 on #1b1b1f color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.1:1 (need 4.5:1) — text #1d2129 on #1b1b1f color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.1:1 (need 4.5:1) — text #1d2129 on #1b1b1f color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.1:1 (need 4.5:1) — text #1d2129 on #1b1b1f color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%coverused-font%c Primary font: inter (67% of text) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"cube\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"server\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"key\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"map-pin\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"camera\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"alert\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"menu\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"user\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"实时状态\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"pulse\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-check\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-x\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-alert\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"report\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "endGroup",
+          "text": "console.groupEnd"
+        }
+      ],
+      "consoleAfterInjection": [
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "startGroup",
+          "text": "%c[impeccable] 72 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 4.4:1 (need 4.5:1) — text #7d7d83 on #161618 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.text"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.1:1 (need 4.5:1) — text #1d2129 on #1b1b1f color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.1:1 (need 4.5:1) — text #1d2129 on #1b1b1f color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.1:1 (need 4.5:1) — text #1d2129 on #1b1b1f color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.1:1 (need 4.5:1) — text #1d2129 on #1b1b1f color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%coverused-font%c Primary font: inter (67% of text) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"cube\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"server\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"key\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"map-pin\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"camera\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"alert\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"menu\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"user\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"实时状态\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"pulse\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-check\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-x\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-alert\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"report\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "endGroup",
+          "text": "console.groupEnd"
+        }
+      ]
+    },
+    {
+      "name": "mobile-375-hud",
+      "url": "http://127.0.0.1:4174/components/lxicons.html",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "mobile": true
+      },
+      "theme": "hud",
+      "initialState": {
+        "documentTitle": "LxIcon 图标总览 | LxUI",
+        "htmlDark": false,
+        "htmlHud": true,
+        "viewportWidth": 375,
+        "documentWidth": 375,
+        "bodyWidth": 375,
+        "catalogWidth": 327,
+        "p0": {
+          "exists": true,
+          "open": true,
+          "tileCount": 13,
+          "otherGroupsInitiallyOpen": 0
+        },
+        "searchStatus": {
+          "present": true,
+          "role": "status",
+          "ariaLive": "polite",
+          "ariaAtomic": "true",
+          "text": "",
+          "display": "block",
+          "rect": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        "copyStatus": {
+          "present": true,
+          "role": "status",
+          "ariaLive": "polite",
+          "ariaAtomic": "true",
+          "text": "",
+          "className": "icon-copy-feedback is-empty"
+        },
+        "arrowTransition": "transform 0.2s ease-out",
+        "tileTransition": "border-color 0.2s, color 0.2s, box-shadow 0.2s",
+        "catalogBackground": "rgb(11, 18, 32)",
+        "hudPageToken": "#0b1220",
+        "checklist": {
+          "present": true,
+          "clientWidth": 327,
+          "scrollWidth": 327,
+          "rows": [
+            {
+              "title": "P0 高频核心",
+              "width": 327,
+              "scrollWidth": 327,
+              "codeWidth": 327,
+              "codeScrollWidth": 327
+            },
+            {
+              "title": "P1 业务语义",
+              "width": 327,
+              "scrollWidth": 327,
+              "codeWidth": 327,
+              "codeScrollWidth": 327
+            },
+            {
+              "title": "29 枚扩展",
+              "width": 327,
+              "scrollWidth": 327,
+              "codeWidth": 327,
+              "codeScrollWidth": 327
+            },
+            {
+              "title": "去重合计",
+              "width": 327,
+              "scrollWidth": 327,
+              "codeWidth": null,
+              "codeScrollWidth": null
+            }
+          ]
+        }
+      },
+      "motionReduced": null,
+      "injection": {
+        "preflight": true,
+        "scriptLoaded": true,
+        "scriptSrc": "http://localhost:8400/detect.js",
+        "detectorReady": true
+      },
+      "overlay": {
+        "count": 20,
+        "countsByScope": {
+          "outside-target": 1,
+          "component": 13,
+          "docs-content": 5,
+          "page-level-banner": 1
+        },
+        "hits": [
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "positioned child clipped by overflow container",
+            "scope": "outside-target",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "container",
+              "text": "",
+              "ancestry": "span.container < button.VPNavBarHamburger.hamburger < div.content-body < div.content < div.container < div.wrapper"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "✦ ai color palette",
+            "scope": "component",
+            "target": {
+              "tag": "p",
+              "id": "",
+              "className": "icon-copy-feedback is-empty",
+              "text": "",
+              "ancestry": "p.icon-copy-feedback.is-empty < div.icon-catalog < div < div.vp-doc._components_lxicons < main.main < div.content-container"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "raster buried under a wash or opacity",
+            "scope": "docs-content",
+            "target": {
+              "tag": "button",
+              "id": "",
+              "className": "copy",
+              "text": "",
+              "ancestry": "button.copy < div.language-vue.vp-adaptive-theme < div < div.vp-doc._components_lxicons < main.main < div.content-container"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "docs-content",
+            "target": {
+              "tag": "dt",
+              "id": "",
+              "className": "",
+              "text": "P0 高频核心",
+              "ancestry": "dt < div.icon-checklist__row < dl.icon-checklist < div < div.vp-doc._components_lxicons < main.main"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "docs-content",
+            "target": {
+              "tag": "dt",
+              "id": "",
+              "className": "",
+              "text": "P1 业务语义",
+              "ancestry": "dt < div.icon-checklist__row < dl.icon-checklist < div < div.vp-doc._components_lxicons < main.main"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "docs-content",
+            "target": {
+              "tag": "dt",
+              "id": "",
+              "className": "",
+              "text": "29 枚扩展",
+              "ancestry": "dt < div.icon-checklist__row < dl.icon-checklist < div < div.vp-doc._components_lxicons < main.main"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "low contrast text",
+            "scope": "docs-content",
+            "target": {
+              "tag": "dt",
+              "id": "",
+              "className": "",
+              "text": "去重合计",
+              "ancestry": "dt < div.icon-checklist__row < dl.icon-checklist < div < div.vp-doc._components_lxicons < main.main"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "bell",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "calendar",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__meaning",
+              "text": "设置",
+              "ancestry": "span.icon-tile__meaning < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__meaning",
+              "text": "安全防护",
+              "ancestry": "span.icon-tile__meaning < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__meaning",
+              "text": "向左返回",
+              "ancestry": "span.icon-tile__meaning < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "chevron-left",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__meaning",
+              "text": "收起侧栏",
+              "ancestry": "span.icon-tile__meaning < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "chevrons-left",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "circle-check",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "circle-x",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__meaning",
+              "text": "提示",
+              "ancestry": "span.icon-tile__meaning < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__meaning",
+              "text": "报告",
+              "ancestry": "span.icon-tile__meaning < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-banner",
+            "visible": true,
+            "labelText": "",
+            "scope": "page-level-banner",
+            "target": null
+          }
+        ]
+      },
+      "screenshot": "mobile-375-hud.png",
+      "console": [
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "startGroup",
+          "text": "%c[impeccable] 20 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.container"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.icon-copy-feedback.is-empty"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.2:1 (need 4.5:1) — text #e2e8f0 on #ffffff color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.2:1 (need 4.5:1) — text #e2e8f0 on #ffffff color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.2:1 (need 4.5:1) — text #e2e8f0 on #ffffff color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.2:1 (need 4.5:1) — text #e2e8f0 on #ffffff color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%coverused-font%c Primary font: inter (67% of text) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"bell\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"calendar\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"设置\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"安全防护\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"向左返回\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"chevron-left\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"收起侧栏\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"chevrons-left\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-check\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-x\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"提示\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"报告\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "endGroup",
+          "text": "console.groupEnd"
+        }
+      ],
+      "consoleAfterInjection": [
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "startGroup",
+          "text": "%c[impeccable] 20 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.container"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit p.icon-copy-feedback.is-empty"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.2:1 (need 4.5:1) — text #e2e8f0 on #ffffff color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.2:1 (need 4.5:1) — text #e2e8f0 on #ffffff color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.2:1 (need 4.5:1) — text #e2e8f0 on #ffffff color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clow-contrast%c 1.2:1 (need 4.5:1) — text #e2e8f0 on #ffffff color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%coverused-font%c Primary font: inter (67% of text) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"bell\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"calendar\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"设置\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"安全防护\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"向左返回\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"chevron-left\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"收起侧栏\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"chevrons-left\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-check\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-x\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"提示\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"报告\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "endGroup",
+          "text": "console.groupEnd"
+        }
+      ]
+    },
+    {
+      "name": "mobile-320-light",
+      "url": "http://127.0.0.1:4174/components/lxicons.html",
+      "viewport": {
+        "width": 320,
+        "height": 780,
+        "mobile": true
+      },
+      "theme": "light",
+      "initialState": {
+        "documentTitle": "LxIcon 图标总览 | LxUI",
+        "htmlDark": false,
+        "htmlHud": false,
+        "viewportWidth": 320,
+        "documentWidth": 320,
+        "bodyWidth": 320,
+        "catalogWidth": 272,
+        "p0": {
+          "exists": true,
+          "open": true,
+          "tileCount": 13,
+          "otherGroupsInitiallyOpen": 0
+        },
+        "searchStatus": {
+          "present": true,
+          "role": "status",
+          "ariaLive": "polite",
+          "ariaAtomic": "true",
+          "text": "",
+          "display": "block",
+          "rect": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        "copyStatus": {
+          "present": true,
+          "role": "status",
+          "ariaLive": "polite",
+          "ariaAtomic": "true",
+          "text": "",
+          "className": "icon-copy-feedback is-empty"
+        },
+        "arrowTransition": "transform 0.2s ease-out",
+        "tileTransition": "border-color 0.2s, color 0.2s, box-shadow 0.2s",
+        "catalogBackground": "rgba(0, 0, 0, 0)",
+        "hudPageToken": "#f0f2f5",
+        "checklist": {
+          "present": true,
+          "clientWidth": 272,
+          "scrollWidth": 272,
+          "rows": [
+            {
+              "title": "P0 高频核心",
+              "width": 272,
+              "scrollWidth": 272,
+              "codeWidth": 272,
+              "codeScrollWidth": 272
+            },
+            {
+              "title": "P1 业务语义",
+              "width": 272,
+              "scrollWidth": 272,
+              "codeWidth": 272,
+              "codeScrollWidth": 272
+            },
+            {
+              "title": "29 枚扩展",
+              "width": 272,
+              "scrollWidth": 272,
+              "codeWidth": 272,
+              "codeScrollWidth": 272
+            },
+            {
+              "title": "去重合计",
+              "width": 272,
+              "scrollWidth": 272,
+              "codeWidth": null,
+              "codeScrollWidth": null
+            }
+          ]
+        }
+      },
+      "motionReduced": null,
+      "injection": {
+        "preflight": true,
+        "scriptLoaded": true,
+        "scriptSrc": "http://localhost:8400/detect.js",
+        "detectorReady": true
+      },
+      "overlay": {
+        "count": 9,
+        "countsByScope": {
+          "outside-target": 1,
+          "docs-content": 1,
+          "component": 6,
+          "page-level-banner": 1
+        },
+        "hits": [
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "positioned child clipped by overflow container",
+            "scope": "outside-target",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "container",
+              "text": "",
+              "ancestry": "span.container < button.VPNavBarHamburger.hamburger < div.content-body < div.content < div.container < div.wrapper"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-visible",
+            "visible": true,
+            "labelText": "raster buried under a wash or opacity",
+            "scope": "docs-content",
+            "target": {
+              "tag": "button",
+              "id": "",
+              "className": "copy",
+              "text": "",
+              "ancestry": "button.copy < div.language-vue.vp-adaptive-theme < div < div.vp-doc._components_lxicons < main.main < div.content-container"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "bell",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "calendar",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__meaning",
+              "text": "向左返回",
+              "ancestry": "span.icon-tile__meaning < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__meaning",
+              "text": "收起侧栏",
+              "ancestry": "span.icon-tile__meaning < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "circle-check",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay",
+            "visible": false,
+            "labelText": "text occluded by an overlapping element",
+            "scope": "component",
+            "target": {
+              "tag": "span",
+              "id": "",
+              "className": "icon-tile__name",
+              "text": "circle-x",
+              "ancestry": "span.icon-tile__name < button.icon-tile < div.icon-grid < details.icon-group < div.icon-catalog < div"
+            }
+          },
+          {
+            "overlayClass": "impeccable-overlay impeccable-banner",
+            "visible": true,
+            "labelText": "",
+            "scope": "page-level-banner",
+            "target": null
+          }
+        ]
+      },
+      "screenshot": "mobile-320-light.png",
+      "console": [
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "startGroup",
+          "text": "%c[impeccable] 9 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.container"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%coverused-font%c Primary font: inter (67% of text) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"bell\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"calendar\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"向左返回\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"收起侧栏\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-check\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-x\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "endGroup",
+          "text": "console.groupEnd"
+        }
+      ],
+      "consoleAfterInjection": [
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "startGroup",
+          "text": "%c[impeccable] 9 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.container"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%coverused-font%c Primary font: inter (67% of text) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"bell\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"calendar\" is 50% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"向左返回\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__meaning \"收起侧栏\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__meaning"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-check\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "log",
+          "text": "%ctext-occlusion%c span.icon-tile__name \"circle-x\" is 100% covered by an opaque element (button.icon-tile) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.icon-tile__name"
+        },
+        {
+          "source": "Runtime.consoleAPICalled",
+          "type": "endGroup",
+          "text": "console.groupEnd"
+        }
+      ]
+    }
+  ]
+}

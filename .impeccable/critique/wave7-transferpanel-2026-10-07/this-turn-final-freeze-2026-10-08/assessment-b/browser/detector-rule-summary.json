@@ -1,0 +1,522 @@
+[
+  {
+    "key": "lxtransferpanel",
+    "viewport": "desktop",
+    "theme": "light",
+    "findingCount": "18",
+    "rules": {
+      "line-length": {
+        "count": 13,
+        "selectors": {
+          "p": 6,
+          "li": 7
+        },
+        "examples": [
+          "~108 chars/line (aim for <80)",
+          "~108 chars/line (aim for <80)"
+        ]
+      },
+      "buried-raster": {
+        "count": 3,
+        "selectors": {
+          "button.copy": 3
+        },
+        "examples": [
+          "raster background at opacity 0",
+          "raster background at opacity 0"
+        ]
+      },
+      "edge-flush-cards": {
+        "count": 1,
+        "selectors": {
+          "table": 1
+        },
+        "examples": [
+          "11 cards flush against the left edge of table at rest (1px gap, e.g. th)"
+        ]
+      },
+      "bounce-easing": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "cubic-bezier(.71, -.46, .29, 1.46)"
+        ]
+      },
+      "layout-transition": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "transition: height, padding-top, padding-bottom"
+        ]
+      }
+    },
+    "errors": []
+  },
+  {
+    "key": "lxtransferpanel",
+    "viewport": "desktop",
+    "theme": "dark",
+    "findingCount": "32",
+    "rules": {
+      "line-length": {
+        "count": 13,
+        "selectors": {
+          "p": 6,
+          "li": 7
+        },
+        "examples": [
+          "~108 chars/line (aim for <80)",
+          "~108 chars/line (aim for <80)"
+        ]
+      },
+      "buried-raster": {
+        "count": 3,
+        "selectors": {
+          "button.copy": 3
+        },
+        "examples": [
+          "raster background at opacity 0",
+          "raster background at opacity 0"
+        ]
+      },
+      "ai-color-palette": {
+        "count": 14,
+        "selectors": {
+          "span": 14
+        },
+        "examples": [
+          "Purple/violet neon text on dark background",
+          "Purple/violet neon text on dark background"
+        ]
+      },
+      "edge-flush-cards": {
+        "count": 1,
+        "selectors": {
+          "table": 1
+        },
+        "examples": [
+          "11 cards flush against the left edge of table at rest (1px gap, e.g. th)"
+        ]
+      },
+      "bounce-easing": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "cubic-bezier(.71, -.46, .29, 1.46)"
+        ]
+      },
+      "layout-transition": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "transition: height, padding-top, padding-bottom"
+        ]
+      }
+    },
+    "errors": []
+  },
+  {
+    "key": "lxtransferpanel",
+    "viewport": "mobile",
+    "theme": "light",
+    "findingCount": "186",
+    "rules": {
+      "clipped-overflow-container": {
+        "count": 1,
+        "selectors": {
+          "span.container": 1
+        },
+        "examples": [
+          "span.container clips a positioned child"
+        ]
+      },
+      "buried-raster": {
+        "count": 3,
+        "selectors": {
+          "button.copy": 3
+        },
+        "examples": [
+          "raster background at opacity 0",
+          "raster background at opacity 0"
+        ]
+      },
+      "ai-color-palette": {
+        "count": 179,
+        "selectors": {
+          "span": 179
+        },
+        "examples": [
+          "Purple/violet neon text on dark background",
+          "Purple/violet neon text on dark background"
+        ]
+      },
+      "text-occlusion": {
+        "count": 2,
+        "selectors": {
+          "button": 2
+        },
+        "examples": [
+          "button \"加载中\" is 33% covered by an opaque element (div.lx-transfer-panel__mobile-switch)",
+          "button \"加载失败\" is 33% covered by an opaque element (div.lx-transfer-panel__mobile-switch)"
+        ]
+      },
+      "bounce-easing": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "cubic-bezier(.71, -.46, .29, 1.46)"
+        ]
+      },
+      "layout-transition": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "transition: height, padding-top, padding-bottom"
+        ]
+      }
+    },
+    "errors": []
+  },
+  {
+    "key": "lxtransferpanel",
+    "viewport": "mobile",
+    "theme": "dark",
+    "findingCount": "22",
+    "rules": {
+      "clipped-overflow-container": {
+        "count": 1,
+        "selectors": {
+          "span.container": 1
+        },
+        "examples": [
+          "span.container clips a positioned child"
+        ]
+      },
+      "buried-raster": {
+        "count": 3,
+        "selectors": {
+          "button.copy": 3
+        },
+        "examples": [
+          "raster background at opacity 0",
+          "raster background at opacity 0"
+        ]
+      },
+      "low-contrast": {
+        "count": 1,
+        "selectors": {
+          "p#lx-doc-table-scroll-hint.lx-doc-table-scroll-hint": 1
+        },
+        "examples": [
+          "2.8:1 (need 4.5:1) — text #606266 on #1b1b1f"
+        ]
+      },
+      "ai-color-palette": {
+        "count": 14,
+        "selectors": {
+          "span": 14
+        },
+        "examples": [
+          "Purple/violet neon text on dark background",
+          "Purple/violet neon text on dark background"
+        ]
+      },
+      "text-occlusion": {
+        "count": 2,
+        "selectors": {
+          "button": 2
+        },
+        "examples": [
+          "button \"加载中\" is 33% covered by an opaque element (div.lx-transfer-panel__mobile-switch)",
+          "button \"加载失败\" is 33% covered by an opaque element (div.lx-transfer-panel__mobile-switch)"
+        ]
+      },
+      "bounce-easing": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "cubic-bezier(.71, -.46, .29, 1.46)"
+        ]
+      },
+      "layout-transition": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "transition: height, padding-top, padding-bottom"
+        ]
+      }
+    },
+    "errors": []
+  },
+  {
+    "key": "lxvirtualtree",
+    "viewport": "desktop",
+    "theme": "light",
+    "findingCount": "13",
+    "rules": {
+      "line-length": {
+        "count": 2,
+        "selectors": {
+          "p": 2
+        },
+        "examples": [
+          "~86 chars/line (aim for <80)",
+          "~86 chars/line (aim for <80)"
+        ]
+      },
+      "buried-raster": {
+        "count": 4,
+        "selectors": {
+          "button.copy": 4
+        },
+        "examples": [
+          "raster background at opacity 0",
+          "raster background at opacity 0"
+        ]
+      },
+      "text-occlusion": {
+        "count": 6,
+        "selectors": {
+          "button": 5,
+          "legend": 1
+        },
+        "examples": [
+          "button \"筛选第二个辖区\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)",
+          "button \"设置示例选择\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)"
+        ]
+      },
+      "layout-transition": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "transition: height, padding-top, padding-bottom"
+        ]
+      }
+    },
+    "errors": []
+  },
+  {
+    "key": "lxvirtualtree",
+    "viewport": "desktop",
+    "theme": "dark",
+    "findingCount": "34",
+    "rules": {
+      "line-length": {
+        "count": 2,
+        "selectors": {
+          "p": 2
+        },
+        "examples": [
+          "~86 chars/line (aim for <80)",
+          "~86 chars/line (aim for <80)"
+        ]
+      },
+      "low-contrast": {
+        "count": 9,
+        "selectors": {
+          "summary": 1,
+          "legend": 4,
+          "p.virtual-tree-demo__status": 1,
+          "p.lx-virtual-tree__selection-scope": 1,
+          "p.lx-virtual-tree__selection-status": 1,
+          "p.virtual-tree-demo__note": 1
+        },
+        "examples": [
+          "3.6:1 (need 4.5:1) — text #6b7280 on #1b1b1f",
+          "3.6:1 (need 4.5:1) — text #6b7280 on #1b1b1f"
+        ]
+      },
+      "text-occlusion": {
+        "count": 6,
+        "selectors": {
+          "legend": 1,
+          "button": 5
+        },
+        "examples": [
+          "legend \"行为选项\" is 33% covered by an opaque element (div.lx-virtual-tree__row.is-checked)",
+          "button \"筛选第二个辖区\" is 100% covered by an opaque element (label.lx-virtual-tree__filter)"
+        ]
+      },
+      "buried-raster": {
+        "count": 4,
+        "selectors": {
+          "button.copy": 4
+        },
+        "examples": [
+          "raster background at opacity 0",
+          "raster background at opacity 0"
+        ]
+      },
+      "ai-color-palette": {
+        "count": 13,
+        "selectors": {
+          "span": 13
+        },
+        "examples": [
+          "Purple/violet neon text on dark background",
+          "Purple/violet neon text on dark background"
+        ]
+      },
+      "layout-transition": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "transition: height, padding-top, padding-bottom"
+        ]
+      }
+    },
+    "errors": []
+  },
+  {
+    "key": "lxvirtualtree",
+    "viewport": "mobile",
+    "theme": "light",
+    "findingCount": "175",
+    "rules": {
+      "clipped-overflow-container": {
+        "count": 1,
+        "selectors": {
+          "span.container": 1
+        },
+        "examples": [
+          "span.container clips a positioned child"
+        ]
+      },
+      "buried-raster": {
+        "count": 4,
+        "selectors": {
+          "button.copy": 4
+        },
+        "examples": [
+          "raster background at opacity 0",
+          "raster background at opacity 0"
+        ]
+      },
+      "ai-color-palette": {
+        "count": 166,
+        "selectors": {
+          "span": 166
+        },
+        "examples": [
+          "Purple/violet neon text on dark background",
+          "Purple/violet neon text on dark background"
+        ]
+      },
+      "text-occlusion": {
+        "count": 3,
+        "selectors": {
+          "legend": 1,
+          "button": 2
+        },
+        "examples": [
+          "legend \"筛选\" is 67% covered by an opaque element (label.lx-virtual-tree__filter)",
+          "button \"设置示例选择\" is 50% covered by an opaque element (div.lx-virtual-tree__row.is-checked)"
+        ]
+      },
+      "layout-transition": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "transition: height, padding-top, padding-bottom"
+        ]
+      }
+    },
+    "errors": []
+  },
+  {
+    "key": "lxvirtualtree",
+    "viewport": "mobile",
+    "theme": "dark",
+    "findingCount": "197",
+    "rules": {
+      "clipped-overflow-container": {
+        "count": 1,
+        "selectors": {
+          "span.container": 1
+        },
+        "examples": [
+          "span.container clips a positioned child"
+        ]
+      },
+      "low-contrast": {
+        "count": 10,
+        "selectors": {
+          "summary": 1,
+          "legend": 4,
+          "p.virtual-tree-demo__status": 1,
+          "p.lx-virtual-tree__selection-scope": 1,
+          "p.lx-virtual-tree__selection-status": 1,
+          "p.virtual-tree-demo__note": 1,
+          "p#lx-doc-table-scroll-hint.lx-doc-table-scroll-hint": 1
+        },
+        "examples": [
+          "3.6:1 (need 4.5:1) — text #6b7280 on #1b1b1f",
+          "3.6:1 (need 4.5:1) — text #6b7280 on #1b1b1f"
+        ]
+      },
+      "text-occlusion": {
+        "count": 3,
+        "selectors": {
+          "legend": 1,
+          "button": 2
+        },
+        "examples": [
+          "legend \"筛选\" is 67% covered by an opaque element (label.lx-virtual-tree__filter)",
+          "button \"设置示例选择\" is 50% covered by an opaque element (div.lx-virtual-tree__row.is-checked)"
+        ]
+      },
+      "buried-raster": {
+        "count": 4,
+        "selectors": {
+          "button.copy": 4
+        },
+        "examples": [
+          "raster background at opacity 0",
+          "raster background at opacity 0"
+        ]
+      },
+      "ai-color-palette": {
+        "count": 179,
+        "selectors": {
+          "span": 179
+        },
+        "examples": [
+          "Purple/violet neon text on dark background",
+          "Purple/violet neon text on dark background"
+        ]
+      },
+      "layout-transition": {
+        "count": 1,
+        "selectors": {
+          "body": 1
+        },
+        "examples": [
+          "transition: height, padding-top, padding-bottom"
+        ]
+      }
+    },
+    "errors": []
+  }
+]

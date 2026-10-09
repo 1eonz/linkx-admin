@@ -1,0 +1,74 @@
+{
+  "method": "independent Assessment A post-fix verification in a fresh Edge/Playwright context",
+  "target": "http://127.0.0.1:4174/components/lxicons.html",
+  "detector": "not run",
+  "otherAssessmentArtifacts": "not opened or referenced",
+  "codeModified": false,
+  "versionEvidence": {
+    "p0GroupOpenByDefault": true,
+    "p0CardCount": 13,
+    "p0CardsVisibleAt375InitialViewport": 4,
+    "firstVisibleP0Card": "复制 delete（删除）图标用法",
+    "checklistDefinitionListCount": 1,
+    "checklistTermCount": 4,
+    "separateAliasTableCount": 1
+  },
+  "deltaChecks": [
+    {
+      "item": "P0 icons visible in first viewport",
+      "result": "pass",
+      "evidence": "375x812: group is open and four icon cards intersect the initial viewport"
+    },
+    {
+      "item": "Copy success and failure avoid mobile header",
+      "result": "pass visually; assistive announcement unconfirmed",
+      "evidence": "Both feedback states render in the content below the search field; no role=alert node was present"
+    },
+    {
+      "item": "Copy failure recovery is clear",
+      "result": "pass",
+      "evidence": "Fallback field is focused and all 33 characters are selected; two visible explanations repeat the manual-copy instruction"
+    },
+    {
+      "item": "Checklist definition list at 320 and 375 pixels",
+      "result": "pass",
+      "evidence": "Four term/definition pairs wrap; definition-list scrollWidth equals clientWidth at both widths"
+    },
+    {
+      "item": "Keyboard navigation and activation",
+      "result": "pass",
+      "evidence": "Skip link first; clear uses Enter and restores input focus; focused icon card copies with Enter"
+    },
+    {
+      "item": "Light/dark theme",
+      "result": "pass",
+      "evidence": "Desktop theme switch changes theme; both themes render at 375 pixels"
+    },
+    {
+      "item": "Empty state visual feedback",
+      "result": "pass",
+      "evidence": "No-match text is visible and the clear-filter control remains present"
+    },
+    {
+      "item": "Empty state live announcement",
+      "result": "pass; real screen-reader announcement unverified",
+      "evidence": "A persistent .icon-search-status node has role=status, aria-live=polite, and aria-atomic=true; its text changes from empty to 无匹配图标. The visible duplicate copy is aria-hidden=true."
+    },
+    {
+      "item": "Reduced motion and disclosure arrow",
+      "result": "pass",
+      "evidence": "Reduced-motion media query is active; expanded arrow points up with near-zero transition duration"
+    },
+    {
+      "item": "Page errors",
+      "result": "pass",
+      "evidence": "No pageerror events in this browser context"
+    }
+  ],
+  "boundary": [
+    "Clipboard rejection was simulated in the isolated page.",
+    "No real screen reader, Safari, or Firefox was used."
+  ],
+  "browserEvidence": "browser-evidence.json",
+  "liveStatusClarification": "live-status-clarification.json"
+}

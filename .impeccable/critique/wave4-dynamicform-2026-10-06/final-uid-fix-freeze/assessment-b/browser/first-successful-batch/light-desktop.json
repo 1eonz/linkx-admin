@@ -1,0 +1,939 @@
+{
+  "id": "light-desktop",
+  "description": "亮色桌面视图",
+  "context": {
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "deviceScaleFactor": 1,
+    "isMobile": false,
+    "hasTouch": false,
+    "colorScheme": "light"
+  },
+  "responseStatus": 200,
+  "theme": {
+    "method": "initial preference",
+    "before": {
+      "darkClass": false,
+      "dataTheme": null
+    },
+    "clicked": false
+  },
+  "pageState": {
+    "title": "LxDynamicForm 动态表单 | LxUI",
+    "htmlClass": "",
+    "htmlTheme": null,
+    "colorScheme": "light",
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "devicePixelRatio": 1
+    },
+    "pageSize": {
+      "width": 1440,
+      "height": 7278
+    },
+    "horizontalOverflow": false,
+    "bodyStyle": {
+      "color": "rgb(60, 60, 67)",
+      "backgroundColor": "rgb(255, 255, 255)"
+    },
+    "firstHeading": {
+      "tag": "h2",
+      "text": "新增组件"
+    },
+    "headings": [
+      {
+        "tag": "h2",
+        "text": "新增组件"
+      },
+      {
+        "tag": "h2",
+        "text": "基础"
+      },
+      {
+        "tag": "h2",
+        "text": "布局导航"
+      },
+      {
+        "tag": "h2",
+        "text": "数据展示"
+      },
+      {
+        "tag": "h2",
+        "text": "数据录入"
+      },
+      {
+        "tag": "h2",
+        "text": "反馈与浮层"
+      },
+      {
+        "tag": "h1",
+        "text": "LxDynamicForm 动态表单\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "最小配置\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "交互示例\n​"
+      },
+      {
+        "tag": "h3",
+        "text": "任务信息"
+      },
+      {
+        "tag": "h3",
+        "text": "附件"
+      },
+      {
+        "tag": "h2",
+        "text": "Props\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "字段 schema\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "Events\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "插槽与实例\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "使用边界\n​"
+      }
+    ],
+    "buttons": [
+      {
+        "text": "",
+        "ariaLabel": null,
+        "title": "Switch to dark theme",
+        "className": "VPSwitch VPSwitchAppearance"
+      },
+      {
+        "text": "",
+        "ariaLabel": "extra navigation",
+        "title": null,
+        "className": "button"
+      },
+      {
+        "text": "",
+        "ariaLabel": null,
+        "title": "Switch to dark theme",
+        "className": "VPSwitch VPSwitchAppearance"
+      },
+      {
+        "text": "",
+        "ariaLabel": "mobile navigation",
+        "title": null,
+        "className": "VPNavBarHamburger hamburger"
+      },
+      {
+        "text": "菜单",
+        "ariaLabel": null,
+        "title": null,
+        "className": "menu"
+      },
+      {
+        "text": "本页导航",
+        "ariaLabel": null,
+        "title": null,
+        "className": ""
+      },
+      {
+        "text": "",
+        "ariaLabel": null,
+        "title": "Copy Code",
+        "className": "copy"
+      },
+      {
+        "text": "自适应",
+        "ariaLabel": null,
+        "title": null,
+        "className": "el-button el-button--primary el-button--small lx-btn lx-btn--primary lx-btn--sm"
+      },
+      {
+        "text": "1 列",
+        "ariaLabel": null,
+        "title": null,
+        "className": "el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm"
+      },
+      {
+        "text": "2 列",
+        "ariaLabel": null,
+        "title": null,
+        "className": "el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm"
+      },
+      {
+        "text": "3 列",
+        "ariaLabel": null,
+        "title": null,
+        "className": "el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm"
+      },
+      {
+        "text": "取消查询",
+        "ariaLabel": null,
+        "title": null,
+        "className": "el-button el-button--default el-button--small is-disabled lx-btn lx-btn--default lx-btn--sm"
+      },
+      {
+        "text": "",
+        "ariaLabel": "显示密码",
+        "title": null,
+        "className": "lx-password-input__toggle"
+      },
+      {
+        "text": "浏览本地文件",
+        "ariaLabel": null,
+        "title": null,
+        "className": "lx-upload__browse"
+      },
+      {
+        "text": "浏览本地文件",
+        "ariaLabel": null,
+        "title": null,
+        "className": "lx-upload__browse"
+      },
+      {
+        "text": "全部清空",
+        "ariaLabel": null,
+        "title": null,
+        "className": "lx-upload__clear"
+      },
+      {
+        "text": "",
+        "ariaLabel": "移除 东门现场.jpg",
+        "title": null,
+        "className": "lx-upload__remove"
+      },
+      {
+        "text": "提交校验",
+        "ariaLabel": null,
+        "title": null,
+        "className": "el-button el-button--primary el-button--default lx-btn lx-btn--primary lx-btn--md"
+      },
+      {
+        "text": "重置",
+        "ariaLabel": null,
+        "title": null,
+        "className": "el-button el-button--default el-button--default lx-btn lx-btn--default lx-btn--md"
+      },
+      {
+        "text": "",
+        "ariaLabel": null,
+        "title": "Copy Code",
+        "className": "copy"
+      },
+      {
+        "text": "",
+        "ariaLabel": null,
+        "title": "Copy Code",
+        "className": "copy"
+      },
+      {
+        "text": "",
+        "ariaLabel": null,
+        "title": "Copy Code",
+        "className": "copy"
+      },
+      {
+        "text": "",
+        "ariaLabel": null,
+        "title": "Copy Code",
+        "className": "copy"
+      }
+    ],
+    "formCount": 2,
+    "inputCount": 15
+  },
+  "injection": {
+    "method": "script element loaded from the Impeccable live-server /detect.js endpoint",
+    "succeeded": true,
+    "error": null
+  },
+  "overlayState": {
+    "detectorApi": "function",
+    "detectionApi": "function",
+    "scriptSources": [
+      "http://127.0.0.1:4174/@vite/client",
+      "http://localhost:8400/detect.js",
+      "http://127.0.0.1:4174/@fs/F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_d79121d1713466f37394797ab7bb8f51/node_modules/vitepress/dist/client/app/index.js?t=1791289682954"
+    ],
+    "overlayCount": 16,
+    "labelCount": 15,
+    "bannerText": [
+      "✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×"
+    ],
+    "findings": [
+      {
+        "selector": "div.vp-doc > div > p:nth-of-type(1)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 168,
+          "width": 688,
+          "height": 118,
+          "top": 168,
+          "right": 1072,
+          "bottom": 286,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme:nth-of-type(1) > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1020,
+          "y": 463,
+          "width": 40,
+          "height": 40,
+          "top": 463,
+          "right": 1060,
+          "bottom": 503,
+          "left": 1020
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1003,
+          "y": 2189.953125,
+          "width": 40,
+          "height": 40,
+          "top": 2189.953125,
+          "right": 1043,
+          "bottom": 2229.953125,
+          "left": 1003
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(3)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 2194.953125,
+          "width": 688,
+          "height": 282,
+          "top": 2194.953125,
+          "right": 1072,
+          "bottom": 2476.953125,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(4)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 4389.953125,
+          "width": 688,
+          "height": 326,
+          "top": 4389.953125,
+          "right": 1072,
+          "bottom": 4715.953125,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(5)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 4731.953125,
+          "width": 688,
+          "height": 58,
+          "top": 4731.953125,
+          "right": 1072,
+          "bottom": 4789.953125,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(6)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 5451.953125,
+          "width": 688,
+          "height": 120,
+          "top": 5451.953125,
+          "right": 1072,
+          "bottom": 5571.953125,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(3) > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1020,
+          "y": 5599.953125,
+          "width": 40,
+          "height": 40,
+          "top": 5599.953125,
+          "right": 1060,
+          "bottom": 5639.953125,
+          "left": 1020
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(4) > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1020,
+          "y": 5810.421875,
+          "width": 40,
+          "height": 40,
+          "top": 5810.421875,
+          "right": 1060,
+          "bottom": 5850.421875,
+          "left": 1020
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1020,
+          "y": 5932.515625,
+          "width": 40,
+          "height": 40,
+          "top": 5932.515625,
+          "right": 1060,
+          "bottom": 5972.515625,
+          "left": 1020
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(9)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 6263.734375,
+          "width": 688,
+          "height": 88,
+          "top": 6263.734375,
+          "right": 1072,
+          "bottom": 6351.734375,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(10)",
+        "tagName": "p",
+        "rect": {
+          "x": 384,
+          "y": 6367.734375,
+          "width": 688,
+          "height": 148,
+          "top": 6367.734375,
+          "right": 1072,
+          "bottom": 6515.734375,
+          "left": 384
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-5",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-10",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-15",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "bounce-easing",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+            "ignoreValue": "",
+            "name": "Bounce or elastic easing",
+            "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+          },
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ]
+  },
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:4174/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:4174/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://127.0.0.1:4174/favicon.ico",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 16 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8159,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8169,
+        "columnNumber": 12
+      }
+    }
+  ],
+  "impeccableConsole": [
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 16 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8159,
+        "columnNumber": 12
+      }
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "screenshot": "light-desktop.png"
+}

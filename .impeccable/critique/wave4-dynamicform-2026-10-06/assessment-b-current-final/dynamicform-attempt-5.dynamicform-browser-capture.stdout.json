@@ -1,0 +1,203 @@
+{
+  "targetUrl": "http://127.0.0.1:4182/components/lxdynamicform",
+  "browser": {
+    "version": "154.0.8037.95",
+    "contextIsolation": "newContext per viewport/scenario; no persistent user data directory"
+  },
+  "injectionCount": 1,
+  "viewCount": 8,
+  "checks": [
+    {
+      "name": "navigation-desktop",
+      "passed": true,
+      "details": {
+        "status": 200,
+        "url": "http://127.0.0.1:4182/components/lxdynamicform"
+      }
+    },
+    {
+      "name": "css-viewport-width-desktop",
+      "passed": true,
+      "details": {
+        "requested": 1440,
+        "innerWidth": 1440,
+        "visualViewportWidth": 1440,
+        "clientWidth": 1440,
+        "documentWidth": 1440
+      }
+    },
+    {
+      "name": "touch-emulation-desktop",
+      "passed": true,
+      "details": {
+        "maxTouchPoints": 0,
+        "pointerCoarse": false,
+        "hoverNone": false
+      }
+    },
+    {
+      "name": "detector-injection-desktop",
+      "passed": true,
+      "details": {
+        "label": "desktop",
+        "preflight": {
+          "titleSet": true,
+          "scriptInserted": true,
+          "scriptUrl": "http://127.0.0.1:8400/detect.js"
+        },
+        "detectorReady": true,
+        "requestSeen": true,
+        "previousTitle": "LxDynamicForm 动态表单 | LxUI"
+      }
+    },
+    {
+      "name": "browser-overlay-visible-desktop-light-initial",
+      "passed": true,
+      "details": {
+        "findingCount": 19,
+        "overlayVisible": 10
+      }
+    },
+    {
+      "name": "dark-hud-rendered",
+      "passed": true,
+      "details": {
+        "light": {
+          "htmlClass": "",
+          "vpBackgroundToken": "#ffffff",
+          "lxCardToken": "#ffffff",
+          "demoBackground": "rgb(255, 255, 255)",
+          "inputBackground": "rgb(255, 255, 255)"
+        },
+        "darkHud": {
+          "htmlClass": "dark lx-theme-hud",
+          "vpBackgroundToken": "#1b1b1f",
+          "lxCardToken": "#101a2c",
+          "demoBackground": "rgb(255, 255, 255)",
+          "demoTextColor": "rgb(78, 89, 105)",
+          "inputBackground": "rgb(16, 26, 44)",
+          "inputLuminance": 0.010307971146801835
+        }
+      }
+    },
+    {
+      "name": "browser-overlay-visible-desktop-dark-hud",
+      "passed": true,
+      "details": {
+        "findingCount": 29,
+        "overlayVisible": 22
+      }
+    },
+    {
+      "name": "browser-overlay-visible-desktop-remote-loading",
+      "passed": true,
+      "details": {
+        "findingCount": 325,
+        "overlayVisible": 34
+      }
+    },
+    {
+      "name": "browser-overlay-visible-desktop-remote-results",
+      "passed": true,
+      "details": {
+        "findingCount": 328,
+        "overlayVisible": 34
+      }
+    },
+    {
+      "name": "browser-overlay-visible-desktop-remote-selected-result",
+      "passed": true,
+      "details": {
+        "findingCount": 331,
+        "overlayVisible": 36
+      }
+    },
+    {
+      "name": "browser-overlay-visible-desktop-remote-failure",
+      "passed": true,
+      "details": {
+        "findingCount": 331,
+        "overlayVisible": 37
+      }
+    },
+    {
+      "name": "browser-overlay-visible-desktop-remote-successful-retry",
+      "passed": true,
+      "details": {
+        "findingCount": 329,
+        "overlayVisible": 34
+      }
+    },
+    {
+      "name": "valid-form-submit",
+      "passed": true,
+      "details": {
+        "successMessage": "表单已校验：夜间巡防任务",
+        "validationErrors": [],
+        "passwordType": "password"
+      }
+    },
+    {
+      "name": "browser-overlay-visible-desktop-valid-form-submit",
+      "passed": true,
+      "details": {
+        "findingCount": 328,
+        "overlayVisible": 34
+      }
+    }
+  ],
+  "errors": [
+    {
+      "name": "Error",
+      "message": "locator.click: Error: strict mode violation: getByRole('button', { name: '失败', exact: true }) resolved to 2 elements:\n    1) <button type=\"button\" data-v-6188fab0=\"\" aria-pressed=\"false\" aria-disabled=\"false\" class=\"el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm\">…</button> aka getByLabel('候选人员模拟结果').getByRole('button', { name: '失败' })\n    2) <button type=\"button\" data-v-6188fab0=\"\" aria-pressed=\"false\" aria-disabled=\"false\" class=\"el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm\">…</button> aka getByLabel('预览候选模拟结果').getByRole('button', { name: '失败' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '失败', exact: true })\u001b[22m\n",
+      "stack": "locator.click: Error: strict mode violation: getByRole('button', { name: '失败', exact: true }) resolved to 2 elements:\n    1) <button type=\"button\" data-v-6188fab0=\"\" aria-pressed=\"false\" aria-disabled=\"false\" class=\"el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm\">…</button> aka getByLabel('候选人员模拟结果').getByRole('button', { name: '失败' })\n    2) <button type=\"button\" data-v-6188fab0=\"\" aria-pressed=\"false\" aria-disabled=\"false\" class=\"el-button el-button--default el-button--small lx-btn lx-btn--default lx-btn--sm\">…</button> aka getByLabel('预览候选模拟结果').getByRole('button', { name: '失败' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '失败', exact: true })\u001b[22m\n\n    at run (F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-b-current-final\\capture-dynamicform.mjs:396:71)\n    at async file:///F:/work/linkx-admin/.impeccable/critique/wave4-dynamicform-2026-10-06/assessment-b-current-final/capture-dynamicform.mjs:447:3"
+    }
+  ],
+  "consoleErrors": 0,
+  "pageErrors": 0,
+  "failedRequests": 0,
+  "httpFailures": 0,
+  "networkGuard": null,
+  "screenshots": [
+    {
+      "file": "screenshots/desktop-light-initial.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "screenshots/desktop-dark-hud.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "screenshots/desktop-remote-loading.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "screenshots/desktop-remote-results.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "screenshots/desktop-remote-selected-result.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "screenshots/desktop-remote-failure.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "screenshots/desktop-remote-successful-retry.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "screenshots/desktop-valid-form-submit.png",
+      "width": 1440,
+      "height": 1000
+    }
+  ]
+}

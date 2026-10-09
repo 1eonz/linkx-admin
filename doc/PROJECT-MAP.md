@@ -1,11 +1,22 @@
 # LinkX 项目地图
 
-## 2026-10-10 G2 组件入口（正式完成）
+## 2026-10-10 Wave 9 / LxUpload 回灌 abort 回归完成
 
-- `linkx-fe/src/components/LxSearchBar/`：已完成搜索区域语义、loading/折叠字段提示、移动触控和减少动效修复；单测 8/8、文档 E2E 3/3，Assessment A 25/40，B 三目标有效 `[]`/空 stderr/exit 0，浏览器证据已保存。
+- `other-admin/admin-vue3/tests/unit/lx-upload.test.ts` 已覆盖 fallback UID 生成后父级回灌，再由公开 `abort()` 取消和复位；单测 38/38 通过。
+- Upload 文档 E2E 合计 9/9：7 项批量运行通过，服务中途断开的 2 项已独立重跑通过；环境记录见 `.impeccable/critique/wave9-upload-2026-10-10/agent-notes.md`。
+- 下一地图入口：`LxDescriptions`、`LxVirtualTree` 当前版正式 A/B、浏览器证据和代码复审；真实上传协议仍属 UI-04。
+
+## 2026-10-10 G2 正式收口组件入口
+
+- SearchBar Demo 现在同时展示四字段标准态和多字段折叠态；StatusSwitch 现在覆盖确认影响/审计上下文及所有状态行的 ARIA 关联。
+- 修后定向单测 `26/26`，SearchBar E2E `3/3`、StatusSwitch E2E `4/4`，Assessment A/B 浏览器与 detector 证据已保存；综合报告见 `.impeccable/critique/g2-complete-2026-10-10/recheck-final/report.md`，两个目标 snapshot/trend 均已写入并返回 `39/40` 非空记录，代码复审无 P0-P2。当前先修复 TransferPanel 选择框尺寸反馈，再进入 `LxDescriptions`、`LxVirtualTree`。
+
+## 2026-10-10 G2 组件入口（历史记录，阶段性/降级未正式完成）
+
+- `linkx-fe/src/components/LxSearchBar/`：已完成搜索区域语义、loading/折叠字段提示、移动触控和减少动效修复；单测 8/8、文档 E2E 3/3。G2 Assessment A 为浏览器不可启动的降级评审，31/40（Good）；B 的 detector `[]`/空 stderr/exit 0 仅代表静态规则零命中，浏览器截图/DOM 已保存但 overlay 注入未稳定完成。
 - `linkx-fe/src/components/LxStatusSwitch/`：已完成确认竞态、外部 modelValue/权限源变化、loading/只读 ARIA 和键盘回归；单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6。
-- G2 交付地图入口为上述组件文档与 E2E；库构建、独立代码复审、综合 Impeccable 报告和 snapshot/trend 已完成。P3 单测增强、SearchBar 字段级错误契约、Escape 语义和设计 HTML 同步进入后续台账。
-- 375px 文档页整体横向宽度 615px 的来源是 API 表格/代码区域；组件自身没有横向溢出，后续在文档壳层任务跟踪。UI-10 仍为 0/52，Vue3 Element Plus 宿主替换继续后置。
+- 上述为历史阶段性记录；正式复验已补齐四字段同行、确认上下文、ARIA、HUD/Teleport、375px 无溢出、减少动效和 overlay 证据。detector `[]` 仅代表静态零命中，正式结论依赖完整 A/B、浏览器证据、stderr、退出码与 snapshot/trend。
+- 375px 文档页整体横向宽度 615px 目前归因于 API 表格/代码区域；组件自身无溢出，但仍需在可启动浏览器中完成复杂状态实图复验。UI-10 仍为 0/52，Vue3 Element Plus 宿主替换继续后置。
 
 ## 2026-10-10 Wave 7 已收口 / G2 启动
 

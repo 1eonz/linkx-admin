@@ -1,0 +1,218 @@
+{
+  "target": "http://127.0.0.1:4174/components/lxicons.html",
+  "browser": "Microsoft Edge headless, isolated temporary profile",
+  "captures": [
+    "desktop-light.png",
+    "desktop-hud.png",
+    "desktop-hud-sticky.png",
+    "mobile-375-light.png",
+    "mobile-375-hud-sticky.png",
+    "mobile-320-light.png",
+    "keyboard-search-clear-focus.png",
+    "keyboard-search-clear-return.png",
+    "copy-success.png",
+    "copy-failure-manual-fallback.png",
+    "reduced-motion-hover.png"
+  ],
+  "states": {
+    "page": {
+      "title": "LxIcon 图标总览 | LxUI",
+      "viewport": 1440,
+      "documentWidth": 1425,
+      "tileCount": 96,
+      "groups": [
+        {
+          "title": "侧边栏菜单（12）",
+          "open": false
+        },
+        {
+          "title": "交互（10）",
+          "open": false
+        },
+        {
+          "title": "反馈提示（4）",
+          "open": false
+        },
+        {
+          "title": "P0 高频核心（13）",
+          "open": true
+        },
+        {
+          "title": "P1 业务语义（26）",
+          "open": false
+        },
+        {
+          "title": "P2 通用补充（29）",
+          "open": false
+        },
+        {
+          "title": "兼容别名（2）",
+          "open": false
+        }
+      ],
+      "controls": [
+        {
+          "text": "",
+          "label": null,
+          "title": "Switch to dark theme",
+          "className": "VPSwitch VPSwitchAppearance"
+        },
+        {
+          "text": "",
+          "label": "extra navigation",
+          "title": "",
+          "className": "button"
+        },
+        {
+          "text": "",
+          "label": null,
+          "title": "Switch to dark theme",
+          "className": "VPSwitch VPSwitchAppearance"
+        },
+        {
+          "text": "",
+          "label": "mobile navigation",
+          "title": "",
+          "className": "VPNavBarHamburger hamburger"
+        },
+        {
+          "text": "Menu",
+          "label": null,
+          "title": "",
+          "className": "menu"
+        },
+        {
+          "text": "On this page",
+          "label": null,
+          "title": "",
+          "className": ""
+        },
+        {
+          "text": "",
+          "label": "复制 dashboard（仪表盘）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        },
+        {
+          "text": "",
+          "label": "复制 team（团队）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        },
+        {
+          "text": "",
+          "label": "复制 bell（通知）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        },
+        {
+          "text": "",
+          "label": "复制 calendar（日历）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        },
+        {
+          "text": "",
+          "label": "复制 setting（设置）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        },
+        {
+          "text": "",
+          "label": "复制 shield（安全防护）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        },
+        {
+          "text": "",
+          "label": "复制 cube（设备）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        },
+        {
+          "text": "",
+          "label": "复制 server（服务器）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        },
+        {
+          "text": "",
+          "label": "复制 key（密钥）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        },
+        {
+          "text": "",
+          "label": "复制 map-pin（地图定位）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        },
+        {
+          "text": "",
+          "label": "复制 camera（摄像头）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        },
+        {
+          "text": "",
+          "label": "复制 alert（警报）图标用法",
+          "title": "",
+          "className": "icon-tile"
+        }
+      ]
+    },
+    "hudTheme": {
+      "rootClass": "dark",
+      "bodyClass": "",
+      "background": "rgb(27, 27, 31)"
+    },
+    "mobile375": {
+      "viewport": 375,
+      "documentWidth": 375,
+      "horizontalOverflow": false,
+      "searchWidth": 327,
+      "gridWidth": 327
+    },
+    "mobile320": {
+      "viewport": 320,
+      "documentWidth": 320,
+      "horizontalOverflow": false,
+      "searchWidth": 272,
+      "gridWidth": 272
+    },
+    "keyboardSearch": {
+      "value": "用户",
+      "resultText": "找到 1 个匹配图标，分布在 1 个分类中",
+      "visibleTiles": 1,
+      "active": "按名称或中文用途筛选图标"
+    },
+    "keyboardClearFocus": {
+      "activeClass": "icon-search__clear",
+      "activeLabel": "清除筛选",
+      "focusVisible": true
+    },
+    "keyboardClearReturn": {
+      "value": "",
+      "focusedSearch": true,
+      "focusVisible": true
+    },
+    "copySuccess": {
+      "feedback": "已复制：<LxIcon name=\"delete\" :size=\"20\" />",
+      "fallback": false,
+      "clipboard": "<LxIcon name=\"delete\" :size=\"20\" />"
+    },
+    "copyFailure": {
+      "feedback": "复制失败，手动复制代码已就绪。",
+      "fallback": "<LxIcon name=\"delete\" :size=\"20\" />",
+      "focusedFallback": true,
+      "selected": true
+    },
+    "reducedMotion": {
+      "mediaMatches": true,
+      "transitionDuration": "0s",
+      "animationName": "none",
+      "transform": "none"
+    },
+    "permission": "granted"
+  }
+}

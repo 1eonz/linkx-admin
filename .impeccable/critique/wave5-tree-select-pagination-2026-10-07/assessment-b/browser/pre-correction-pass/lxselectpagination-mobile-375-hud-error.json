@@ -1,0 +1,4084 @@
+{
+  "scenario": "lxselectpagination-mobile-375-hud-error",
+  "route": "lxselectpagination",
+  "theme": "dark（Demo 控件标签为 HUD 深色主题；控件仅切换 html.dark）",
+  "requestedState": "窄屏，展开选择器并触发远程请求失败",
+  "viewport": {
+    "width": 375,
+    "height": 812,
+    "isMobile": true
+  },
+  "overlayInjection": {
+    "loaded": true,
+    "src": "http://127.0.0.1:8400/detect.js"
+  },
+  "preflight": {
+    "title": "[Human] lxselectpagination lxselectpagination-mobile-375-hud-error",
+    "mutableInjection": true,
+    "preflightScript": true
+  },
+  "actionResults": [
+    {
+      "action": "pagination-hud",
+      "result": "clicked HUD 深色主题"
+    },
+    {
+      "action": "pagination-error",
+      "result": "armed failure and dispatched pointer to el-select__wrapper el-tooltip__trigger el-tooltip__trigger"
+    }
+  ],
+  "browser": {
+    "title": "[Human] lxselectpagination lxselectpagination-mobile-375-hud-error",
+    "url": "http://127.0.0.1:4177/components/lxselectpagination",
+    "viewport": {
+      "width": 375,
+      "height": 812,
+      "isNarrow": true,
+      "visualWidth": 360,
+      "screenWidth": 375,
+      "devicePixelRatio": 1
+    },
+    "document": {
+      "scrollWidth": 600,
+      "clientWidth": 360,
+      "scrollHeight": 6696,
+      "bodyScrollWidth": 360
+    },
+    "theme": {
+      "dark": true,
+      "hud": true,
+      "classes": [
+        "dark",
+        "lx-theme-hud"
+      ]
+    },
+    "demoFound": true,
+    "demoText": "远程人员选择 当前多选值：POL-00001、POL-00002、POL-00003 HUD 深色主题 指派涉案警员 孙志国 (POL-00001) 李建华 (POL-00002) + 1 下次请求失败 下次请求延迟 显示空结果 禁用选择器 清空选择 Mock 请求 1 请求页码 1 已取消 0 最近变更 尚未修改已选人员",
+    "states": {
+      "loading": false,
+      "errorText": [
+        "选项暂时无法加载\n重新加载"
+      ],
+      "overlayNodeCount": 341,
+      "alerts": [
+        {
+          "role": null,
+          "text": "Mock 请求\n1\n请求页码\n1\n已取消\n0\n最近变更\n尚未修改已选人员",
+          "visible": true
+        },
+        {
+          "role": "alert",
+          "text": "选项暂时无法加载\n重新加载",
+          "visible": true
+        }
+      ]
+    },
+    "controls": [
+      {
+        "tag": "button",
+        "text": "搜索文档",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "mobile navigation",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "菜单",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "本页导航",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "input",
+        "text": "",
+        "role": null,
+        "type": "checkbox",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "div",
+        "text": "孙志国 (POL-00001)\n李建华 (POL-00002)\n+ 1",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "Close this tag",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "Close this tag",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "input",
+        "text": "",
+        "role": "combobox",
+        "type": "text",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "下次请求失败",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "下次请求延迟",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "显示空结果",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "禁用选择器",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "清空选择",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "input",
+        "text": "输入姓名、警号或部门检索",
+        "role": null,
+        "type": "text",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "重新加载",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "◉",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "×",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      }
+    ],
+    "selectPagination": {
+      "requestCount": "1",
+      "requestPages": "1",
+      "errorVisible": false,
+      "popperVisible": false,
+      "ariaExpanded": "true"
+    },
+    "overlayScripts": [
+      {
+        "src": "http://127.0.0.1:8400/detect.js",
+        "loaded": true
+      }
+    ]
+  },
+  "detectorConsole": {
+    "runs": [
+      "%c[impeccable] 171 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    ],
+    "findingCount": 171,
+    "ruleCounts": {
+      "ai-color-palette": 162,
+      "buried-raster": 3,
+      "clipped-overflow-container": 1,
+      "edge-flush-cards": 1,
+      "layout-transition": 1,
+      "text-occlusion": 3
+    },
+    "findings": [
+      {
+        "rule": "clipped-overflow-container",
+        "message": "span.container clips a positioned child",
+        "selector": "span.container",
+        "args": [
+          "%cclipped-overflow-container%c span.container clips a positioned child",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span.container"
+        ]
+      },
+      {
+        "rule": "buried-raster",
+        "message": "raster background at opacity 0",
+        "selector": "button.copy",
+        "args": [
+          "%cburied-raster%c raster background at opacity 0",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button.copy"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "buried-raster",
+        "message": "raster background at opacity 0",
+        "selector": "button.copy",
+        "args": [
+          "%cburied-raster%c raster background at opacity 0",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button.copy"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "buried-raster",
+        "message": "raster background at opacity 0",
+        "selector": "button.copy",
+        "args": [
+          "%cburied-raster%c raster background at opacity 0",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button.copy"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Cyan neon text on dark background",
+        "selector": "li#el-id-1024-2.el-select-dropdown__item.is-selected",
+        "args": [
+          "%cai-color-palette%c Cyan neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "li#el-id-1024-2.el-select-dropdown__item.is-selected"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Cyan neon text on dark background",
+        "selector": "div.lx-select-pagination__option",
+        "args": [
+          "%cai-color-palette%c Cyan neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "div.lx-select-pagination__option"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Cyan neon text on dark background",
+        "selector": "li#el-id-1024-3.el-select-dropdown__item.is-selected",
+        "args": [
+          "%cai-color-palette%c Cyan neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "li#el-id-1024-3.el-select-dropdown__item.is-selected"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Cyan neon text on dark background",
+        "selector": "div.lx-select-pagination__option",
+        "args": [
+          "%cai-color-palette%c Cyan neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "div.lx-select-pagination__option"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Cyan neon text on dark background",
+        "selector": "li#el-id-1024-4.el-select-dropdown__item.is-selected.is-hovering",
+        "args": [
+          "%cai-color-palette%c Cyan neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "li#el-id-1024-4.el-select-dropdown__item.is-selected.is-hovering"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Cyan neon text on dark background",
+        "selector": "div.lx-select-pagination__option",
+        "args": [
+          "%cai-color-palette%c Cyan neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "div.lx-select-pagination__option"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Cyan neon text on dark background",
+        "selector": "button",
+        "args": [
+          "%cai-color-palette%c Cyan neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button"
+        ]
+      },
+      {
+        "rule": "edge-flush-cards",
+        "message": "19 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+        "selector": "table",
+        "args": [
+          "%cedge-flush-cards%c 19 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "table"
+        ]
+      },
+      {
+        "rule": "text-occlusion",
+        "message": "button \"显示空结果\" is 33% covered by an opaque element (li.el-select-dropdown__item.is-selected)",
+        "selector": "button",
+        "args": [
+          "%ctext-occlusion%c button \"显示空结果\" is 33% covered by an opaque element (li.el-select-dropdown__item.is-selected)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button"
+        ]
+      },
+      {
+        "rule": "text-occlusion",
+        "message": "button \"清空选择\" is 100% covered by an opaque element (li.el-select-dropdown__item.is-selected)",
+        "selector": "button",
+        "args": [
+          "%ctext-occlusion%c button \"清空选择\" is 100% covered by an opaque element (li.el-select-dropdown__item.is-selected)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button"
+        ]
+      },
+      {
+        "rule": "text-occlusion",
+        "message": "dt \"Mock 请求\" is 61% covered by an opaque element (li.el-select-dropdown__item.is-selected.is-hovering)",
+        "selector": "dt",
+        "args": [
+          "%ctext-occlusion%c dt \"Mock 请求\" is 61% covered by an opaque element (li.el-select-dropdown__item.is-selected.is-hovering)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "dt"
+        ]
+      },
+      {
+        "rule": "layout-transition",
+        "message": "transition: height, padding-top, padding-bottom",
+        "selector": "body",
+        "args": [
+          "%clayout-transition%c transition: height, padding-top, padding-bottom",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "body"
+        ]
+      }
+    ]
+  },
+  "screenshot": "screenshots/lxselectpagination-mobile-375-hud-error.png",
+  "console": [
+    {
+      "type": "debug",
+      "args": [
+        "[vite] connecting..."
+      ],
+      "text": "[vite] connecting...",
+      "timestamp": 1791351162051.43
+    },
+    {
+      "type": "debug",
+      "args": [
+        "[vite] connected."
+      ],
+      "text": "[vite] connected.",
+      "timestamp": 1791351162065.463
+    },
+    {
+      "type": "startGroup",
+      "args": [
+        "%c[impeccable] 171 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "text": "%c[impeccable] 171 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "timestamp": 1791351178361.955
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cclipped-overflow-container%c span.container clips a positioned child",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span.container"
+      ],
+      "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.container",
+      "timestamp": 1791351178362.12
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button.copy"
+      ],
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy",
+      "timestamp": 1791351178362.413
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178362.535
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178362.645
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178362.739
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178363.007
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178363.133
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178363.247
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178363.341
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178363.478
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178363.588
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178363.691
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178363.785
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178363.885
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178363.993
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178364.087
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178364.188
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178364.278
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178364.382
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178364.482
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178364.58
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178364.671
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178364.769
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178364.858
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178364.957
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178365.053
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178365.163
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178365.256
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178365.337
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178365.436
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178365.536
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178365.644
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178365.742
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178365.83
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178365.927
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178366.033
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178366.13
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178366.221
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178366.324
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178366.428
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178366.525
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178366.612
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178366.719
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178366.812
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178366.899
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178367.002
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178367.108
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178367.212
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178367.839
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178367.981
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178368.073
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178368.187
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178368.289
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178368.383
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178368.48
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178368.572
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178368.665
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178368.759
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178368.853
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178368.961
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178369.078
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178369.192
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178369.322
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178369.415
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178369.511
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178369.625
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178369.721
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178369.82
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178369.91
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178370.003
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178370.09
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178370.19
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178370.28
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178370.379
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178370.466
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178370.553
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178370.64
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178370.73
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178370.833
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178370.926
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178371.02
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178371.108
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178371.197
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178371.352
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178371.46
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178371.555
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178371.657
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178371.757
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178371.856
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178371.943
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178372.03
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178372.116
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178372.2
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178372.284
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178372.371
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178372.457
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178372.543
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178372.628
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178372.727
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178372.838
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178372.926
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178373.01
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178373.093
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178373.179
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178373.265
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178373.348
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178373.433
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178373.528
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178373.62
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178373.726
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178373.835
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178373.964
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178374.073
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178374.181
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178374.293
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178374.408
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178374.516
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178374.623
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178374.728
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178374.859
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178375.018
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178375.217
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178375.351
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178375.503
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178375.633
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178375.746
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178375.893
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178376.018
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178376.161
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178376.275
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178376.396
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178376.506
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178376.623
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178376.739
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178376.851
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178376.979
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178377.1
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178377.227
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178377.355
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178377.491
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178377.605
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178377.717
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178377.848
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178377.964
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178378.087
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button.copy"
+      ],
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy",
+      "timestamp": 1791351178378.209
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178378.329
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178378.455
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178378.572
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178378.687
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178378.797
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button.copy"
+      ],
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy",
+      "timestamp": 1791351178378.906
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178379.025
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178379.132
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178379.253
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178379.354
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178379.457
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178379.586
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351178379.713
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Cyan neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "li#el-id-1024-2.el-select-dropdown__item.is-selected"
+      ],
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit li#el-id-1024-2.el-select-dropdown__item.is-selected",
+      "timestamp": 1791351178379.831
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Cyan neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "div.lx-select-pagination__option"
+      ],
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit div.lx-select-pagination__option",
+      "timestamp": 1791351178379.958
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Cyan neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "li#el-id-1024-3.el-select-dropdown__item.is-selected"
+      ],
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit li#el-id-1024-3.el-select-dropdown__item.is-selected",
+      "timestamp": 1791351178380.103
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Cyan neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "div.lx-select-pagination__option"
+      ],
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit div.lx-select-pagination__option",
+      "timestamp": 1791351178380.226
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Cyan neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "li#el-id-1024-4.el-select-dropdown__item.is-selected.is-hovering"
+      ],
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit li#el-id-1024-4.el-select-dropdown__item.is-selected.is-hovering",
+      "timestamp": 1791351178380.347
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Cyan neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "div.lx-select-pagination__option"
+      ],
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit div.lx-select-pagination__option",
+      "timestamp": 1791351178380.466
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Cyan neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button"
+      ],
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button",
+      "timestamp": 1791351178380.57
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cedge-flush-cards%c 19 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "table"
+      ],
+      "text": "%cedge-flush-cards%c 19 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit table",
+      "timestamp": 1791351178380.677
+    },
+    {
+      "type": "log",
+      "args": [
+        "%ctext-occlusion%c button \"显示空结果\" is 33% covered by an opaque element (li.el-select-dropdown__item.is-selected)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button"
+      ],
+      "text": "%ctext-occlusion%c button \"显示空结果\" is 33% covered by an opaque element (li.el-select-dropdown__item.is-selected) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button",
+      "timestamp": 1791351178380.856
+    },
+    {
+      "type": "log",
+      "args": [
+        "%ctext-occlusion%c button \"清空选择\" is 100% covered by an opaque element (li.el-select-dropdown__item.is-selected)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button"
+      ],
+      "text": "%ctext-occlusion%c button \"清空选择\" is 100% covered by an opaque element (li.el-select-dropdown__item.is-selected) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button",
+      "timestamp": 1791351178380.977
+    },
+    {
+      "type": "log",
+      "args": [
+        "%ctext-occlusion%c dt \"Mock 请求\" is 61% covered by an opaque element (li.el-select-dropdown__item.is-selected.is-hovering)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "dt"
+      ],
+      "text": "%ctext-occlusion%c dt \"Mock 请求\" is 61% covered by an opaque element (li.el-select-dropdown__item.is-selected.is-hovering) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit dt",
+      "timestamp": 1791351178381.089
+    },
+    {
+      "type": "log",
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "body"
+      ],
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body",
+      "timestamp": 1791351178381.214
+    },
+    {
+      "type": "endGroup",
+      "args": [
+        "console.groupEnd"
+      ],
+      "text": "console.groupEnd",
+      "timestamp": 1791351178381.343
+    }
+  ],
+  "runtimeExceptions": [],
+  "networkFailures": [],
+  "stateChecks": {
+    "viewportWidthMatches": true,
+    "narrowMediaQueryMatches": true,
+    "errorStateVisible": false,
+    "loadingStateVisible": true,
+    "darkThemeApplied": true,
+    "hudThemeClassApplied": null
+  }
+}

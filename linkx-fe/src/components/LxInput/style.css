@@ -88,9 +88,9 @@
 }
 
 /* ===== 触屏 ===== */
-/* 触屏（无 hover 能力）：44px 最小触控目标（与 Radio/Checkbox/Switch 同族契约；
+/* 触屏或窄屏：44px 最小触控目标（与 Radio/Checkbox/Switch 同族契约；
  * textarea 多行基线天然 ≥44px，无此需求） */
-@media (hover: none) {
+@media (hover: none), (max-width: 640px) {
   .lx-input .el-input__wrapper {
     min-height: 44px;
   }

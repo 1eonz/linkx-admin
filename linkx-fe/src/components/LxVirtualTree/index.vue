@@ -1086,11 +1086,21 @@ defineExpose(publicMethods)
 }
 
 .lx-virtual-tree__checkbox {
-  width: 14px;
-  height: 14px;
-  flex: 0 0 14px;
+  box-sizing: border-box;
+  width: var(--lx-tree-checkbox-size);
+  min-width: var(--lx-tree-checkbox-size);
+  max-width: var(--lx-tree-checkbox-size);
+  height: var(--lx-tree-checkbox-size);
+  min-height: var(--lx-tree-checkbox-size);
+  max-height: var(--lx-tree-checkbox-size);
+  flex: 0 0 var(--lx-tree-checkbox-size);
   margin: 0;
   accent-color: var(--lx-color-primary);
+}
+
+.lx-virtual-tree__checkbox:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
 }
 
 .lx-virtual-tree__node-icon {

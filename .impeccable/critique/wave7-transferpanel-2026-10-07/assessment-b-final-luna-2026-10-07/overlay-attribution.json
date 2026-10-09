@@ -1,0 +1,192 @@
+{
+  "command": "node \".impeccable/critique/wave7-transferpanel-2026-10-07/assessment-b-final-luna-2026-10-07/overlay-attribution.mjs\"",
+  "targetUrl": "http://127.0.0.1:4174/components/lxtransferpanel",
+  "responseStatus": 200,
+  "browserExecutable": "C:/Users/Administrator/AppData/Local/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-win64/chrome-headless-shell.exe",
+  "newIsolatedContext": true,
+  "overlayUrl": "http://127.0.0.1:8400/detect.js",
+  "overlayScriptPresent": true,
+  "overlayElements": [
+    {
+      "className": "impeccable-overlay impeccable-visible",
+      "text": "line length too long",
+      "rect": {
+        "x": 382,
+        "y": 166,
+        "width": 692,
+        "height": 90
+      }
+    },
+    {
+      "className": "impeccable-overlay",
+      "text": "raster buried under a wash or opacity",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      }
+    },
+    {
+      "className": "impeccable-overlay impeccable-visible",
+      "text": "cards flush against the scroller edge",
+      "rect": {
+        "x": 382,
+        "y": 1185,
+        "width": 692,
+        "height": 1366
+      }
+    },
+    {
+      "className": "impeccable-overlay impeccable-banner",
+      "text": "✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 36
+      }
+    }
+  ],
+  "overlayLabels": [
+    "line length too long",
+    "raster buried under a wash or opacity",
+    "cards flush against the scroller edge"
+  ],
+  "consoleFindings": [
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 4 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "target": {
+        "kind": "string",
+        "preview": "color: oklch(84% 0.19 80.46); font-weight: bold"
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "target": {
+        "kind": "element",
+        "tag": "p",
+        "id": null,
+        "className": "",
+        "selector": "div.content > div.content-container > main.main > div.vp-doc._components_lxtransferpanel > div > p",
+        "text": "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。",
+        "outerHTML": "<p>把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 <code>5:2:5</code>，两侧面板默认 <code>380px</code> 高并使用 <code>border-box</code>；窄屏纵向排列且保持两侧面板同高。</p>",
+        "rect": {
+          "x": 384,
+          "y": 168,
+          "width": 688,
+          "height": 86
+        },
+        "style": {
+          "opacity": "1",
+          "backgroundImage": "none",
+          "transitionProperty": "all",
+          "transitionTimingFunction": "ease"
+        }
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "target": {
+        "kind": "element",
+        "tag": "button",
+        "id": null,
+        "className": "copy",
+        "selector": "main.main > div.vp-doc._components_lxtransferpanel > div > details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "text": "",
+        "outerHTML": "<button title=\"Copy Code\" class=\"copy\"></button>",
+        "rect": {
+          "x": 1003,
+          "y": 1073,
+          "width": 40,
+          "height": 40
+        },
+        "style": {
+          "opacity": "0",
+          "backgroundImage": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='rgba(128,128,128,1)' stroke-linecap='round' stroke-linejoin='round' stroke",
+          "transitionProperty": "border-color, background-color, opacity",
+          "transitionTimingFunction": "ease, ease, ease"
+        }
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cedge-flush-cards%c 9 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "target": {
+        "kind": "element",
+        "tag": "table",
+        "id": null,
+        "className": "",
+        "selector": "div.content > div.content-container > main.main > div.vp-doc._components_lxtransferpanel > div > table",
+        "text": "名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配",
+        "outerHTML": "<table tabindex=\"0\"><thead><tr><th>名称</th><th>类型</th><th>默认值</th><th>说明</th></tr></thead><tbody><tr><td><code>treeData</code></td><td><code>LxTransferPanelNode[]</code></td><td><code>[]</code></td><td>左侧待选树。节点使用 <code>id</code>、<code>label</code>、<code>children</code> 和 <code>disabled</code>；可选元数据为 <code>code</code>、<code>status</code>、<code>statusTone</code>；节点键须唯一。</td></tr><tr><td><code>modelValue</code></td><td><code>(string | number)[]</code></td><td><code>[]</code></td><td>受控的已选节点键；可包含暂未加载到当前树中的既有键。</td></tr><tr><td><code>titles</code></td><td><code>[string, string]</code></td><td><code>",
+        "rect": {
+          "x": 384,
+          "y": 1187,
+          "width": 688,
+          "height": 1362
+        },
+        "style": {
+          "opacity": "1",
+          "backgroundImage": "none",
+          "transitionProperty": "all",
+          "transitionTimingFunction": "ease"
+        }
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "target": {
+        "kind": "element",
+        "tag": "body",
+        "id": null,
+        "className": "",
+        "selector": "html > body",
+        "text": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination ",
+        "outerHTML": "<body>\n    <div id=\"app\" data-v-app=\"\"><div data-v-65fc48a9=\"\" class=\"Layout\"><span data-v-204a6a42=\"\" tabindex=\"-1\"></span><a data-v-204a6a42=\"\" href=\"#VPContent\" class=\"VPSkipLink visually-hidden\">Skip to content</a><!--v-if--><header data-v-da8dd485=\"\" data-v-65fc48a9=\"\" class=\"VPNav\"><div data-v-1f2aba1b=\"\" data-v-da8dd485=\"\" class=\"VPNavBar has-sidebar top\"><div data-v-1f2aba1b=\"\" class=\"wrapper\"><div data-v-1f2aba1b=\"\" class=\"container\"><div data-v-1f2aba1b=\"\" class=\"title\"><div data-v-e5e4319a=\"\" data-v-1f2aba1b=\"\" class=\"VPNavBarTitle has-sidebar\"><a data-v-e5e4319a=\"\" class=\"title\" hr",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 4206
+        },
+        "style": {
+          "opacity": "1",
+          "backgroundImage": "none",
+          "transitionProperty": "all",
+          "transitionTimingFunction": "ease"
+        }
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "target": {
+        "kind": "element",
+        "tag": "body",
+        "id": null,
+        "className": "",
+        "selector": "html > body",
+        "text": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination ",
+        "outerHTML": "<body>\n    <div id=\"app\" data-v-app=\"\"><div data-v-65fc48a9=\"\" class=\"Layout\"><span data-v-204a6a42=\"\" tabindex=\"-1\"></span><a data-v-204a6a42=\"\" href=\"#VPContent\" class=\"VPSkipLink visually-hidden\">Skip to content</a><!--v-if--><header data-v-da8dd485=\"\" data-v-65fc48a9=\"\" class=\"VPNav\"><div data-v-1f2aba1b=\"\" data-v-da8dd485=\"\" class=\"VPNavBar has-sidebar top\"><div data-v-1f2aba1b=\"\" class=\"wrapper\"><div data-v-1f2aba1b=\"\" class=\"container\"><div data-v-1f2aba1b=\"\" class=\"title\"><div data-v-e5e4319a=\"\" data-v-1f2aba1b=\"\" class=\"VPNavBarTitle has-sidebar\"><a data-v-e5e4319a=\"\" class=\"title\" hr",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 4206
+        },
+        "style": {
+          "opacity": "1",
+          "backgroundImage": "none",
+          "transitionProperty": "all",
+          "transitionTimingFunction": "ease"
+        }
+      }
+    }
+  ],
+  "consoleEntryCount": 9
+}

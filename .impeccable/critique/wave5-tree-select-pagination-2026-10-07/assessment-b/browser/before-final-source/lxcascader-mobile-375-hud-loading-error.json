@@ -1,0 +1,644 @@
+{
+  "scenario": "lxcascader-mobile-375-hud-loading-error",
+  "route": "lxcascader",
+  "theme": "HUD 深色（由 DOM 注入，Demo 未提供切换控件）",
+  "requestedState": "窄屏，加载中且失败（加载态优先）",
+  "viewport": {
+    "width": 375,
+    "height": 812,
+    "isMobile": true
+  },
+  "overlayInjection": {
+    "loaded": true,
+    "src": "http://127.0.0.1:8400/detect.js"
+  },
+  "preflight": {
+    "title": "[Human] lxcascader lxcascader-mobile-375-hud-loading-error",
+    "mutableInjection": true,
+    "preflightScript": true
+  },
+  "actionResults": [
+    {
+      "action": "hud",
+      "result": "added dark and lx-theme-hud classes"
+    },
+    {
+      "action": "cascader-loading-error",
+      "result": "clicked 加载中且失败"
+    }
+  ],
+  "browser": {
+    "title": "[Human] lxcascader lxcascader-mobile-375-hud-loading-error",
+    "url": "http://127.0.0.1:4177/components/lxcascader",
+    "viewport": {
+      "width": 375,
+      "height": 812,
+      "isNarrow": true,
+      "visualWidth": 360,
+      "screenWidth": 375,
+      "devicePixelRatio": 1
+    },
+    "document": {
+      "scrollWidth": 600,
+      "clientWidth": 360,
+      "scrollHeight": 6090,
+      "bodyScrollWidth": 360
+    },
+    "theme": {
+      "dark": true,
+      "hud": true,
+      "classes": [
+        "dark",
+        "lx-theme-hud"
+      ]
+    },
+    "demoFound": true,
+    "demoText": "组织路径 加载中 演示状态 多选模式 加载中 失败 加载中且失败 禁用 控件英文 当前值：hangzhou / xihu / command 已回显组织路径",
+    "states": {
+      "loading": true,
+      "errorText": [],
+      "overlayNodeCount": 31,
+      "alerts": [
+        {
+          "role": "status",
+          "text": "加载中",
+          "visible": true
+        },
+        {
+          "role": "status",
+          "text": "已回显组织路径",
+          "visible": true
+        },
+        {
+          "role": "status",
+          "text": "加载中",
+          "visible": false
+        }
+      ]
+    },
+    "controls": [
+      {
+        "tag": "button",
+        "text": "搜索文档",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "mobile navigation",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "菜单",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "本页导航",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "input",
+        "text": "",
+        "role": null,
+        "type": "text",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "多选模式",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "加载中",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "失败",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "加载中且失败",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "禁用",
+        "role": null,
+        "type": "button",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "input",
+        "text": "",
+        "role": null,
+        "type": "checkbox",
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "◉",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      },
+      {
+        "tag": "button",
+        "text": "×",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      }
+    ],
+    "selectPagination": null,
+    "overlayScripts": [
+      {
+        "src": "http://127.0.0.1:8400/detect.js",
+        "loaded": true
+      }
+    ]
+  },
+  "detectorConsole": {
+    "runs": [
+      "%c[impeccable] 16 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    ],
+    "findingCount": 17,
+    "ruleCounts": {
+      "ai-color-palette": 12,
+      "buried-raster": 2,
+      "clipped-overflow-container": 1,
+      "layout-transition": 1,
+      "skipped-heading": 1
+    },
+    "findings": [
+      {
+        "rule": "clipped-overflow-container",
+        "message": "span.container clips a positioned child",
+        "selector": "span.container",
+        "args": [
+          "%cclipped-overflow-container%c span.container clips a positioned child",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span.container"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Cyan neon text on dark background",
+        "selector": "button",
+        "args": [
+          "%cai-color-palette%c Cyan neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button"
+        ]
+      },
+      {
+        "rule": "buried-raster",
+        "message": "raster background at opacity 0",
+        "selector": "button.copy",
+        "args": [
+          "%cburied-raster%c raster background at opacity 0",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button.copy"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "buried-raster",
+        "message": "raster background at opacity 0",
+        "selector": "button.copy",
+        "args": [
+          "%cburied-raster%c raster background at opacity 0",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "button.copy"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "ai-color-palette",
+        "message": "Purple/violet neon text on dark background",
+        "selector": "span",
+        "args": [
+          "%cai-color-palette%c Purple/violet neon text on dark background",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "span"
+        ]
+      },
+      {
+        "rule": "skipped-heading",
+        "message": "<h1> \"LxCascader 级联选择 ​\" followed by <h3> \"组件选型 ​\" (missing h2)",
+        "selector": "body",
+        "args": [
+          "%cskipped-heading%c <h1> \"LxCascader 级联选择 ​\" followed by <h3> \"组件选型 ​\" (missing h2)",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "body"
+        ]
+      },
+      {
+        "rule": "layout-transition",
+        "message": "transition: height, padding-top, padding-bottom",
+        "selector": "body",
+        "args": [
+          "%clayout-transition%c transition: height, padding-top, padding-bottom",
+          "color: oklch(84% 0.19 80.46); font-weight: bold",
+          "color: inherit",
+          "body"
+        ]
+      }
+    ]
+  },
+  "screenshot": "screenshots/lxcascader-mobile-375-hud-loading-error.png",
+  "console": [
+    {
+      "type": "debug",
+      "args": [
+        "[vite] connecting..."
+      ],
+      "text": "[vite] connecting...",
+      "timestamp": 1791351364081.227
+    },
+    {
+      "type": "debug",
+      "args": [
+        "[vite] connected."
+      ],
+      "text": "[vite] connected.",
+      "timestamp": 1791351364093.375
+    },
+    {
+      "type": "startGroup",
+      "args": [
+        "%c[impeccable] 16 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "text": "%c[impeccable] 16 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "timestamp": 1791351378443.114
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cclipped-overflow-container%c span.container clips a positioned child",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span.container"
+      ],
+      "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span.container",
+      "timestamp": 1791351378443.27
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Cyan neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button"
+      ],
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button",
+      "timestamp": 1791351378443.569
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button.copy"
+      ],
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy",
+      "timestamp": 1791351378443.715
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351378443.843
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351378443.971
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351378444.081
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351378444.188
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "button.copy"
+      ],
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit button.copy",
+      "timestamp": 1791351378444.293
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351378444.421
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351378444.58
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351378444.765
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351378444.913
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351378445.033
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351378445.133
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cai-color-palette%c Purple/violet neon text on dark background",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "span"
+      ],
+      "text": "%cai-color-palette%c Purple/violet neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit span",
+      "timestamp": 1791351378445.235
+    },
+    {
+      "type": "log",
+      "args": [
+        "%cskipped-heading%c <h1> \"LxCascader 级联选择 ​\" followed by <h3> \"组件选型 ​\" (missing h2)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "body"
+      ],
+      "text": "%cskipped-heading%c <h1> \"LxCascader 级联选择 ​\" followed by <h3> \"组件选型 ​\" (missing h2) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body",
+      "timestamp": 1791351378445.337
+    },
+    {
+      "type": "log",
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "body"
+      ],
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit body",
+      "timestamp": 1791351378445.452
+    },
+    {
+      "type": "endGroup",
+      "args": [
+        "console.groupEnd"
+      ],
+      "text": "console.groupEnd",
+      "timestamp": 1791351378445.544
+    }
+  ],
+  "runtimeExceptions": [],
+  "networkFailures": [],
+  "stateChecks": {
+    "viewportWidthMatches": true,
+    "narrowMediaQueryMatches": true,
+    "errorStateVisible": true,
+    "loadingStateVisible": true,
+    "darkThemeApplied": true,
+    "hudThemeClassApplied": true
+  }
+}

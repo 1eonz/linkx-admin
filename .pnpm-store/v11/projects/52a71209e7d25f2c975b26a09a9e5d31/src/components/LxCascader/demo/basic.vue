@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import en from 'element-plus/es/locale/lang/en'
 import { computed, ref } from 'vue'
+
 import LxCascader from '../index.vue'
 import type {
   LxCascaderModelValue,
@@ -30,8 +32,11 @@ const options: LxCascaderOption[] = [
 
 const path = ref<LxCascaderModelValue>(['hangzhou', 'xihu', 'command'])
 const multiple = ref(false)
+const englishLocale = ref(false)
+const darkTheme = ref(false)
 const state = ref<DemoState>('ready')
 const lastAction = ref('已回显组织路径')
+const locale = computed(() => (englishLocale.value ? en : undefined))
 
 const loading = computed(
   () => state.value === 'loading' || state.value === 'loading-error',
@@ -40,6 +45,15 @@ const error = computed(
   () => state.value === 'error' || state.value === 'loading-error',
 )
 const disabled = computed(() => state.value === 'disabled')
+const statusText = computed(() => {
+  if (state.value === 'loading') return '正在加载组织数据，暂不可选择。'
+  if (state.value === 'loading-error') {
+    return '正在加载组织数据，加载完成前保留当前路径。'
+  }
+  if (state.value === 'error') return '组织数据加载失败，请重试。'
+  if (state.value === 'disabled') return '组织路径控件当前已禁用。'
+  return lastAction.value
+})
 
 function formatPath(value: LxCascaderModelValue): string {
   if (!Array.isArray(value)) return value == null ? '未选择' : String(value)
@@ -79,18 +93,23 @@ function retry(): void {
 </script>
 
 <template>
-  <section class="cascader-demo">
+  <section
+    class="cascader-demo"
+    :class="{ dark: darkTheme, 'lx-theme-hud': darkTheme }"
+  >
     <div class="cascader-demo__field">
       <label id="cascader-demo-label" for="cascader-demo-path">组织路径</label>
       <LxCascader
-        :key="multiple ? 'multiple' : 'single'"
         id="cascader-demo-path"
+        :key="multiple ? 'multiple' : 'single'"
         :model-value="path"
         :options="options"
         :multiple="multiple"
         :loading="loading"
         :error="error"
         :disabled="disabled"
+        :locale="locale"
+        :popper-class="darkTheme ? 'dark lx-theme-hud' : undefined"
         clearable
         filterable
         collapse-tags
@@ -129,12 +148,22 @@ function retry(): void {
             {{ item.label }}
           </button>
         </div>
+        <div role="group" aria-label="显示语言">
+          <label
+            ><input v-model="englishLocale" type="checkbox" /> 控件英文</label
+          >
+        </div>
+        <div role="group" aria-label="显示主题">
+          <label
+            ><input v-model="darkTheme" type="checkbox" /> HUD 深色主题</label
+          >
+        </div>
       </div>
     </details>
 
     <p class="cascader-demo__value">当前值：{{ formatPath(path) }}</p>
     <p class="cascader-demo__status" role="status" aria-live="polite">
-      {{ lastAction }}
+      {{ statusText }}
     </p>
   </section>
 </template>
@@ -172,8 +201,16 @@ function retry(): void {
 }
 
 .cascader-demo__settings summary {
+  min-height: 32px;
+  align-items: center;
+  display: flex;
   width: fit-content;
   cursor: pointer;
+}
+
+.cascader-demo__settings summary:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
 }
 
 .cascader-demo__toolbar button {
@@ -198,7 +235,23 @@ function retry(): void {
   outline-offset: 2px;
 }
 
+.cascader-demo__toolbar label {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: var(--lx-space-xs);
+}
+
+.cascader-demo__toolbar input:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
 @media (hover: none), (max-width: 640px) {
+  .cascader-demo__settings summary {
+    min-height: 44px;
+  }
+
   .cascader-demo__toolbar button {
     min-height: 44px;
   }

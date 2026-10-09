@@ -1,0 +1,345 @@
+{
+  "hashChecks": {
+    "pre": {
+      "verified": true
+    },
+    "post": {
+      "verified": true
+    }
+  },
+  "views": [
+    {
+      "name": "01-light-desktop-initial",
+      "width": 1440,
+      "height": 1000,
+      "colorScheme": "light",
+      "screenshot": "01-light-desktop-initial.png"
+    },
+    {
+      "name": "02-light-desktop-after-browse-anchor",
+      "width": 1440,
+      "height": 1000,
+      "colorScheme": "light",
+      "screenshot": "02-light-desktop-after-browse-anchor.png"
+    },
+    {
+      "name": "03-light-desktop-preview-expanded",
+      "width": 1440,
+      "height": 1000,
+      "colorScheme": "light",
+      "screenshot": "03-light-desktop-preview-expanded.png"
+    },
+    {
+      "name": "04-light-desktop-category-menu",
+      "width": 1440,
+      "height": 1000,
+      "colorScheme": "light",
+      "screenshot": "04-light-desktop-category-menu.png"
+    },
+    {
+      "name": "06-light-desktop-search-keyboard",
+      "width": 1440,
+      "height": 1000,
+      "colorScheme": "light",
+      "screenshot": "06-light-desktop-search-keyboard.png"
+    },
+    {
+      "name": "07-light-desktop-validation-error",
+      "width": 1440,
+      "height": 1000,
+      "colorScheme": "light",
+      "screenshot": "07-light-desktop-validation-error.png"
+    },
+    {
+      "name": "08-dark-hud-field-types",
+      "width": 1440,
+      "height": 1000,
+      "colorScheme": "dark",
+      "screenshot": "08-dark-hud-field-types.png"
+    },
+    {
+      "name": "09-mobile-375-initial",
+      "width": 375,
+      "height": 812,
+      "colorScheme": "light",
+      "screenshot": "09-mobile-375-initial.png"
+    },
+    {
+      "name": "10-mobile-375-field-types",
+      "width": 375,
+      "height": 812,
+      "colorScheme": "light",
+      "screenshot": "10-mobile-375-field-types.png"
+    }
+  ],
+  "actions": [
+    {
+      "action": "click-browse-anchor",
+      "visible": true,
+      "count": 3
+    },
+    {
+      "action": "inspect-collapsed-summary",
+      "visible": true,
+      "details": {
+        "tag": "span",
+        "role": null,
+        "text": "可搜索 14 种",
+        "parentTag": "summary",
+        "parentRole": null,
+        "parentExpanded": null
+      },
+      "initiallyOpen": false
+    },
+    {
+      "action": "expand-all-field-types",
+      "expanded": true
+    },
+    {
+      "action": "open-field-type-menu",
+      "expanded": "true",
+      "groupCount": 5,
+      "groupLabels": [
+        "文本类字段",
+        "下拉选择字段",
+        "单选与多选",
+        "日期与数值",
+        "状态与附件"
+      ],
+      "optionCount": 14,
+      "menuOptions": [
+        "文本输入",
+        "密码输入",
+        "多行文本",
+        "下拉选择",
+        "远程选择",
+        "树形选择",
+        "单选组",
+        "多选组",
+        "数字输入",
+        "日期选择",
+        "日期范围",
+        "开关",
+        "文件上传",
+        "自定义插槽"
+      ],
+      "menuStructure": [
+        {
+          "tag": "summary",
+          "role": null,
+          "text": "演示设置",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "div",
+          "role": "group",
+          "text": "自适应 1 列 2 列 3 列",
+          "label": "表单列数",
+          "expanded": null
+        },
+        {
+          "tag": "div",
+          "role": "group",
+          "text": "任务封面（单张） 点击或拖拽文件到此处上传 支持图片，单文件不超过 10MB，最多 1 个文件 浏览本地文件",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "div",
+          "role": "group",
+          "text": "现场图片（多张） 点击或拖拽文件到此处上传 支持图片，单文件不超过 10MB，最多 5 个文件 浏览本地文件 已选 1 个文件 全部清空 东门现场.jpg 上传成功 180 KB",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "summary",
+          "role": null,
+          "text": "字段类型预览 可搜索 14 种",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "summary",
+          "role": null,
+          "text": "查看示例代码",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "ul",
+          "role": "listbox",
+          "text": "文本类字段 文本输入 密码输入 多行文本 下拉选择字段 下拉选择 远程选择 树形选择 单选与多选 单选组 多选组 日期与数值 数字输入 日期选择 日期范围 状态与附件 开关 文件上传 自定义插槽",
+          "label": "搜索或选择字段类型",
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "文本输入",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "密码输入",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "多行文本",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "下拉选择",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "远程选择",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "树形选择",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "单选组",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "多选组",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "数字输入",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "日期选择",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "日期范围",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "开关",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "文件上传",
+          "label": null,
+          "expanded": null
+        },
+        {
+          "tag": "li",
+          "role": "option",
+          "text": "自定义插槽",
+          "label": null,
+          "expanded": null
+        }
+      ]
+    },
+    {
+      "action": "expand-first-field-group",
+      "result": "no-collapsible-group-control-found",
+      "visibleGroups": [
+        "文本类字段",
+        "下拉选择字段",
+        "单选与多选",
+        "日期与数值",
+        "状态与附件"
+      ]
+    },
+    {
+      "action": "search-and-keyboard-select",
+      "query": "日期",
+      "inputDetails": {
+        "placeholder": null,
+        "ariaLabel": "搜索或选择字段类型",
+        "type": "text"
+      },
+      "visibleOptions": [
+        "日期选择",
+        "日期范围"
+      ],
+      "activeAfterArrow": {
+        "tag": "input",
+        "text": "",
+        "ariaSelected": null,
+        "ariaActiveDescendant": "el-id-1024-25"
+      },
+      "activeAfterEnter": {
+        "tag": "input",
+        "text": "",
+        "value": ""
+      },
+      "selectedText": "字段类型预览 可搜索 14 种 搜索或选择字段类型 日期选择 可按字段名称筛选，也可按类别浏览。 日期选择示例"
+    },
+    {
+      "action": "submit-empty-form",
+      "validation": {
+        "messages": [
+          "请输入任务名称",
+          "请输入访问密码",
+          "请填写标红的必填字段"
+        ],
+        "invalidControls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "label": null,
+            "describedBy": "lx-form-item-error-178"
+          },
+          {
+            "tag": "input",
+            "type": "password",
+            "label": null,
+            "describedBy": "lx-form-item-error-187"
+          }
+        ],
+        "active": "input"
+      }
+    },
+    {
+      "action": "tap-browse-anchor-mobile",
+      "result": "tapped"
+    },
+    {
+      "action": "expand-mobile-field-types"
+    }
+  ]
+}

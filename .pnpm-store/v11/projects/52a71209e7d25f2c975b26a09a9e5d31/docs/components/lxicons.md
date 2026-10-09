@@ -1,13 +1,11 @@
 # LxIcon 图标总览
 
-内置 SVG 图标集：24×24 画布 / stroke 1.5 / round cap，`currentColor` 继承文字色（跟随文字颜色，无需单独传色）。**点击图标卡片复制完整用法代码** `<LxIcon name="xxx" :size="20" />`。
-
-动效仅配置在 69 个名称上；其余名称保持静态。Hover/focus 微动效采用自然减速曲线；warning 与 email 使用短促的语义反馈，不使用弹性回弹。系统启用减少动效时停用图标运动。
+管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。
 
 ## 图标列表（94 个图形，96 个可用名称）
 
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 import {
   LxIcon,
   LX_ICON_29_NAMES,
@@ -15,7 +13,6 @@ import {
   LX_ICON_NAMES,
   LX_ICON_P0_NAMES,
   LX_ICON_P1_NAMES,
-  lxMessage,
   type LxIconName,
 } from '../../src';
 
@@ -69,7 +66,7 @@ const ICON_LABELS: Record<LxIconName, string> = {
   warning: '警告',
   people: '多人组织',
   file: '文件详情',
-  'file-check': '已授权文件',
+  'file-check': '已授权节点',
   star: '收藏',
   tag: '分类标签',
   image: '图片',
@@ -79,8 +76,8 @@ const ICON_LABELS: Record<LxIconName, string> = {
   share: '分享',
   'arrow-up': '上移',
   'arrow-down': '下移',
-  'arrow-left': '上一项',
-  'arrow-right': '下一项',
+  'arrow-left': '返回上一级',
+  'arrow-right': '前进',
   'caret-down': '下拉选项',
   close: '清除标签',
   switch: '停用',
@@ -216,6 +213,14 @@ const ICON_SEARCH_TERMS: Partial<Record<LxIconName, string>> = {
 
 const GROUPS: IconGroup[] = [
   {
+    title: 'P0 高频核心·常用操作',
+    names: ['delete', 'edit', 'plus', 'refresh'],
+  },
+  {
+    title: 'P0 高频核心·内容与状态',
+    names: ['undo', 'download', 'upload', 'eye', 'loading', 'more', 'folder', 'folder-open', 'warning'],
+  },
+  {
     title: '侧边栏菜单',
     names: ['dashboard', 'team', 'bell', 'calendar', 'setting', 'shield', 'cube', 'server', 'key', 'map-pin', 'camera', 'alert'],
   },
@@ -226,10 +231,6 @@ const GROUPS: IconGroup[] = [
   {
     title: '反馈提示',
     names: ['circle-check', 'circle-x', 'circle-alert', 'report'],
-  },
-  {
-    title: 'P0 高频核心',
-    names: ['delete', 'edit', 'plus', 'refresh', 'undo', 'download', 'upload', 'eye', 'loading', 'more', 'folder', 'folder-open', 'warning'],
   },
   {
     title: 'P1 业务语义',
@@ -252,6 +253,9 @@ if (others.length) GROUPS.push({ title: '其他', names: others });
 
 const keyword = ref('');
 const searchInput = ref<HTMLInputElement>();
+const copyFeedback = ref<{ type: 'success' | 'error'; message: string }>();
+const copyFallback = ref<{ name: LxIconName; snippet: string }>();
+const copyFallbackInput = ref<HTMLTextAreaElement>();
 const visibleGroups = computed(() =>
   GROUPS.map((group) => ({
     ...group,
@@ -262,33 +266,88 @@ const visibleGroups = computed(() =>
     }),
   })).filter((group) => group.names.length),
 );
+const searchStatus = computed(() => {
+  if (!keyword.value.trim()) return '';
+  const iconCount = visibleGroups.value.reduce((count, group) => count + group.names.length, 0);
+  return iconCount
+    ? `找到 ${iconCount} 个匹配图标，分布在 ${visibleGroups.value.length} 个分类中`
+    : '无匹配图标';
+});
+
+watch(keyword, () => {
+  copyFeedback.value = undefined;
+  copyFallback.value = undefined;
+});
 
 function clearSearch() {
   keyword.value = '';
   nextTick(() => searchInput.value?.focus());
 }
 
+function selectCopyFallback() {
+  copyFallbackInput.value?.focus();
+  copyFallbackInput.value?.select();
+}
+
 async function copy(name: LxIconName) {
   const snippet = `<LxIcon name="${name}" :size="20" />`;
+  copyFeedback.value = undefined;
+  copyFallback.value = undefined;
   try {
     await navigator.clipboard.writeText(snippet);
-    lxMessage.success(`已复制：${snippet}`);
+    copyFeedback.value = { type: 'success', message: `已复制：${snippet}` };
   } catch {
-    lxMessage.error('复制失败，请手动复制代码');
+    copyFeedback.value = { type: 'error', message: '复制失败，手动复制代码已就绪。' };
+    copyFallback.value = { name, snippet };
+    nextTick(selectCopyFallback);
   }
 }
 </script>
 
 <div class="icon-catalog">
 <div class="icon-searchbar" role="search" aria-label="图标目录筛选">
-  <input ref="searchInput" v-model="keyword" class="icon-search" type="text" aria-label="按名称或中文用途筛选图标" placeholder="输入英文名称或中文用途，如：undo / 重置 / 登出" />
+  <input ref="searchInput" v-model="keyword" class="icon-search" type="text" aria-label="按名称或中文用途筛选图标" placeholder="搜索图标名称或用途" />
   <button v-if="keyword" class="icon-search__clear" type="button" aria-label="清除筛选" title="清除筛选" @click="clearSearch">
     <LxIcon name="close" :size="16" />
   </button>
 </div>
 
-<template v-for="g in visibleGroups" :key="g.title">
-  <h3 class="icon-group-title">{{ g.title }}（{{ g.names.length }}）</h3>
+<p
+  class="icon-copy-feedback"
+  :class="{ 'is-empty': !copyFeedback, 'is-error': copyFeedback?.type === 'error' }"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  {{ copyFeedback?.message ?? '' }}
+</p>
+
+<div
+  v-if="copyFallback"
+  class="icon-copy-fallback"
+>
+  <p id="icon-copy-fallback-help">请使用下方已选中的代码进行手动复制：</p>
+  <textarea
+    ref="copyFallbackInput"
+    :aria-label="`LxIcon ${copyFallback.name} 用法代码`"
+    aria-describedby="icon-copy-fallback-help"
+    readonly
+    rows="1"
+    :value="copyFallback.snippet"
+    @focus="selectCopyFallback"
+  />
+</div>
+
+<details
+  v-for="g in visibleGroups"
+  :key="`${g.title}-${keyword.trim()}`"
+  class="icon-group"
+  :open="Boolean(keyword.trim()) || g.title === 'P0 高频核心·常用操作'"
+>
+  <summary class="icon-group-title">
+    <span>{{ g.title }}（{{ g.names.length }}）</span>
+    <LxIcon name="chevron-down" :size="16" aria-hidden="true" />
+  </summary>
   <div class="icon-grid">
     <button v-for="n in g.names" :key="n" class="icon-tile" type="button" :aria-label="`复制 ${n}（${ICON_LABELS[n]}）图标用法`" @click="copy(n)">
       <LxIcon :name="n" :size="20" />
@@ -296,10 +355,33 @@ async function copy(name: LxIconName) {
       <span class="icon-tile__name">{{ n }}</span>
     </button>
   </div>
-</template>
+</details>
 
-<p v-if="!visibleGroups.length" class="icon-empty">无匹配图标</p>
+<p class="icon-search-status" role="status" aria-live="polite" aria-atomic="true">
+  {{ searchStatus }}
+</p>
+<p v-if="!visibleGroups.length" class="icon-empty" aria-hidden="true">无匹配图标</p>
 </div>
+
+## 图标规格与动效
+
+内置 SVG 图标使用 24×24 画布、1.5px 描边和圆角端点；`currentColor` 继承文字颜色，无需单独传色。
+
+动效仅配置在 69 个名称上，其余名称保持静态。悬停或键盘聚焦时采用自然减速曲线；`warning` 与 `email` 使用短促的语义反馈，不使用弹性回弹。系统开启减少动效后停用图标动画。
+
+## 业务组合示例
+
+权限节点列表可以用主体、资源和状态图标一起说明授权关系：
+
+<figure class="icon-business-example" aria-labelledby="icon-business-example-title">
+  <figcaption id="icon-business-example-title">权限节点状态组合</figcaption>
+  <div class="icon-business-example__flow">
+    <span class="icon-business-example__node"><LxIcon name="people" :size="16" aria-hidden="true" />运维组</span>
+    <LxIcon name="arrow-right" :size="16" aria-hidden="true" />
+    <span class="icon-business-example__node"><LxIcon name="file-check" :size="16" aria-hidden="true" />设备管理</span>
+    <span class="icon-business-example__node"><LxIcon name="shield" :size="16" aria-hidden="true" />已授权</span>
+  </div>
+</figure>
 
 ## 使用
 
@@ -315,23 +397,16 @@ async function copy(name: LxIconName) {
 
 <p class="icon-count-note">P1 清单包含 27 个名称：图标卡片展示 26 个标准图形键，兼容别名 <code>date</code> 单列展示，不重复计入卡片。</p>
 
-<table>
-  <thead>
-    <tr><th>清单</th><th>数量</th><th>名称</th></tr>
-  </thead>
-  <tbody>
-    <tr v-for="list in MOTION_CHECKLISTS" :key="list.title">
-      <td>{{ list.title }}</td>
-      <td>{{ list.names.length }}</td>
-      <td><code>{{ list.names.join('、') }}</code></td>
-    </tr>
-    <tr>
-      <th>去重合计</th>
-      <td>{{ LX_ICON_MOTION_NAMES.length }}</td>
-      <td>别名按独立可用名称计数，动效复用标准图形。</td>
-    </tr>
-  </tbody>
-</table>
+<dl class="icon-checklist">
+  <div v-for="list in MOTION_CHECKLISTS" :key="list.title" class="icon-checklist__row">
+    <dt>{{ list.title }}</dt>
+    <dd><span>{{ list.names.length }} 个</span><code>{{ list.names.join('、') }}</code></dd>
+  </div>
+  <div class="icon-checklist__row">
+    <dt>去重合计</dt>
+    <dd><span>{{ LX_ICON_MOTION_NAMES.length }} 个</span><span>别名按独立可用名称计数，动效复用标准图形。</span></dd>
+  </div>
+</dl>
 
 ## 新增图标
 
@@ -339,10 +414,39 @@ async function copy(name: LxIconName) {
 
 ## 兼容别名
 
-| 名称     | 标准图形   | 来源      | 说明                                       |
-| -------- | ---------- | --------- | ------------------------------------------ |
-| `date`   | `calendar` | P1 清单   | 保留设计文档名称，复用已有日历图形。       |
-| `eye-on` | `eye`      | 29 枚清单 | 与现有可见状态图形同义，避免新增重复路径。 |
+<div
+  class="icon-alias-table-region"
+  role="region"
+  aria-label="兼容别名对应关系"
+  aria-describedby="icon-alias-table-hint"
+  tabindex="0"
+>
+  <p id="icon-alias-table-hint" class="icon-alias-table-hint">窄屏可在表格区域横向滚动查看完整说明。</p>
+  <table class="icon-alias-table">
+    <thead>
+      <tr>
+        <th scope="col">名称</th>
+        <th scope="col">标准图形</th>
+        <th scope="col">来源</th>
+        <th scope="col">说明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>date</code></td>
+        <td><code>calendar</code></td>
+        <td>P1 清单</td>
+        <td>保留设计文档名称，复用已有日历图形。</td>
+      </tr>
+      <tr>
+        <td><code>eye-on</code></td>
+        <td><code>eye</code></td>
+        <td>29 枚清单</td>
+        <td>与现有可见状态图形同义，避免新增重复路径。</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 业务存量值 `calendar`、`eye` 仍可照常使用；别名不会改变它们的序列化值。
 
@@ -350,6 +454,31 @@ async function copy(name: LxIconName) {
 .icon-catalog {
   box-sizing: border-box;
   width: 100%;
+}
+.icon-business-example {
+  margin: 12px 0 20px;
+  padding: 12px 0;
+  border-block: 1px solid var(--vp-c-divider);
+}
+.icon-business-example figcaption {
+  margin-bottom: 8px;
+  color: var(--vp-c-text-1);
+  font-size: 13px;
+  font-weight: 600;
+}
+.icon-business-example__flow,
+.icon-business-example__node {
+  display: flex;
+  align-items: center;
+}
+.icon-business-example__flow {
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  color: var(--vp-c-text-1);
+  font-size: 13px;
+}
+.icon-business-example__node {
+  gap: 6px;
 }
 .lx-theme-hud .vp-doc .icon-catalog {
   margin-block: 12px;
@@ -368,9 +497,6 @@ html.dark:not(.lx-theme-hud) .vp-doc .icon-catalog {
   --lx-text-secondary-strong: var(--vp-c-text-2);
 }
 .icon-searchbar {
-  position: sticky;
-  top: calc(var(--vp-nav-height, 64px) + 8px);
-  z-index: 10;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -421,9 +547,140 @@ html.dark:not(.lx-theme-hud) .vp-doc .icon-catalog {
 }
 .icon-group-title {
   margin: 16px 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: 14px;
   font-weight: 600;
   color: var(--lx-text-primary);
+  cursor: pointer;
+  list-style: none;
+}
+.icon-group-title::-webkit-details-marker {
+  display: none;
+}
+.icon-group-title .lx-icon {
+  flex: 0 0 auto;
+  transition: transform 0.2s ease-out;
+}
+.icon-group[open] > .icon-group-title .lx-icon {
+  transform: rotate(180deg);
+}
+.icon-copy-fallback {
+  margin: 0 0 16px;
+  padding: 12px;
+  border: 1px solid var(--lx-color-form-error);
+  border-radius: 4px;
+  background: var(--lx-bg-card);
+  color: var(--lx-text-primary);
+}
+.icon-copy-fallback p {
+  margin: 0 0 8px;
+  color: inherit;
+  font-size: 13px;
+}
+.icon-copy-fallback textarea {
+  box-sizing: border-box;
+  width: min(100%, 480px);
+  min-height: 36px;
+  padding: 8px;
+  border: 1px solid var(--lx-border);
+  border-radius: 2px;
+  background: var(--lx-bg-page);
+  color: var(--lx-text-primary);
+  font: 12px/1.4 var(--lx-font-mono);
+  resize: vertical;
+  user-select: all;
+}
+.icon-copy-feedback {
+  margin: 0 0 12px;
+  padding: 8px 10px;
+  border: 1px solid var(--lx-color-primary);
+  border-radius: 4px;
+  color: var(--lx-color-primary);
+  font-size: 13px;
+}
+.icon-copy-feedback.is-error {
+  border-color: var(--lx-color-form-error);
+  color: var(--lx-color-form-error);
+}
+.icon-copy-feedback.is-empty,
+.icon-search-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.icon-checklist {
+  margin: 16px 0 24px;
+  border-top: 1px solid var(--lx-border);
+}
+.icon-checklist__row {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 8px 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--lx-border);
+}
+.icon-checklist__row dt {
+  color: var(--vp-c-text-1);
+  font-weight: 600;
+}
+.icon-checklist__row dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  min-width: 0;
+  margin: 0;
+  color: var(--lx-text-regular);
+  overflow-wrap: anywhere;
+}
+.icon-checklist__row code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.icon-alias-table-region {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+}
+.icon-alias-table-region:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+.icon-alias-table-hint {
+  display: none;
+}
+.icon-alias-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 13px;
+}
+.icon-alias-table th,
+.icon-alias-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+.icon-alias-table th {
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  font-weight: 600;
+}
+.icon-alias-table td {
+  color: var(--vp-c-text-1);
+}
+.icon-alias-table tbody tr:last-child td {
+  border-bottom: 0;
 }
 .icon-grid {
   display: grid;
@@ -484,17 +741,29 @@ html.dark:not(.lx-theme-hud) .vp-doc .icon-catalog {
   text-align: center;
 }
 @media (max-width: 640px) {
-  .icon-searchbar {
-    top: calc(var(--vp-nav-height-mobile, 56px) + 8px);
-  }
   .icon-search__clear {
     flex-basis: 44px;
     width: 44px;
     height: 44px;
   }
+  .icon-checklist__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  .icon-alias-table-hint {
+    display: block;
+    margin: 0;
+    padding: 8px 10px;
+    color: var(--vp-c-text-2);
+    font-size: 12px;
+  }
+  .icon-alias-table {
+    min-width: 520px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .icon-tile {
+  .icon-tile,
+  .icon-group-title .lx-icon {
     transition: none;
   }
 }

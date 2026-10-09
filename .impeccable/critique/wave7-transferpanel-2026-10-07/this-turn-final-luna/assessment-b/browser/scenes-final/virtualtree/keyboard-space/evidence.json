@@ -1,0 +1,2399 @@
+{
+  "route": "virtualtree",
+  "url": "http://127.0.0.1:4174/components/lxvirtualtree",
+  "scene": "keyboard-space",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "requestedTheme": "Light",
+  "observedTheme": "light",
+  "hudNaming": "页面主题切换控件标记为 Switch to dark/light theme；页面没有可见的 HUD 标签。此 HUD 场景使用该暗色模式作为第二主题取证。",
+  "extra": {
+    "focus": {
+      "tag": "div",
+      "role": "treeitem",
+      "label": null,
+      "text": "执勤单元 02 已选",
+      "treeItemText": "执勤单元 02 已选",
+      "treeItemClass": "lx-virtual-tree__row is-checked"
+    },
+    "checkedTreeItems": [
+      "执勤单元 02 已选"
+    ],
+    "liveRegions": [
+      {
+        "role": null,
+        "live": "polite",
+        "text": "选中 2 项"
+      },
+      {
+        "role": "status",
+        "live": "polite",
+        "text": "本次新增 1 项，当前共选中 2 项。"
+      },
+      {
+        "role": "status",
+        "live": "polite",
+        "text": "筛选匹配到 12 个节点；路径祖先不计入数量。"
+      }
+    ],
+    "manualScan": {
+      "available": true,
+      "returnType": "object",
+      "resultCount": 7
+    }
+  },
+  "state": {
+    "title": "[Human] Assessment B virtualtree/interactive",
+    "url": "http://127.0.0.1:4174/components/lxvirtualtree",
+    "htmlClass": "",
+    "htmlDataTheme": null,
+    "themeMediaDark": false,
+    "bodyClass": "",
+    "colors": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColor": "rgb(60, 60, 67)",
+      "mainBackground": "rgba(0, 0, 0, 0)"
+    },
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "scrollWidth": 1440,
+      "horizontalOverflow": false
+    },
+    "headings": [
+      "新增组件",
+      "基础",
+      "布局导航",
+      "数据展示",
+      "表格、分页与详情",
+      "页面与指标",
+      "日历与组织",
+      "状态与辅助",
+      "图形与操作",
+      "数据录入",
+      "表单与基础字段",
+      "选项控件",
+      "树形与日期选择",
+      "检索与复杂字段",
+      "反馈与浮层",
+      "LxVirtualTree 虚拟树\n​",
+      "交互示例\n​",
+      "Props\n​",
+      "Events\n​",
+      "插槽\n​",
+      "实例方法\n​",
+      "状态与边界\n​"
+    ],
+    "controls": {
+      "inputs": [
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "过滤节点",
+          "title": null,
+          "placeholder": "过滤节点",
+          "type": "search",
+          "value": "执勤单元 02",
+          "checked": false,
+          "disabled": false,
+          "className": "",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 辖区单位 01",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 执勤单元 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": true,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 辖区单位 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 执勤单元 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 辖区单位 03",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 执勤单元 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 辖区单位 04",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 执勤单元 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 辖区单位 05",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 执勤单元 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 辖区单位 06",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 执勤单元 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 辖区单位 07",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 执勤单元 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 辖区单位 08",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 执勤单元 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 辖区单位 09",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 执勤单元 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 辖区单位 10",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 执勤单元 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 辖区单位 11",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        }
+      ],
+      "buttons": [
+        {
+          "tag": "button",
+          "role": null,
+          "text": "搜索文档 K",
+          "ariaLabel": "搜索文档",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "DocSearch DocSearch-Button"
+        },
+        {
+          "tag": "button",
+          "role": "switch",
+          "text": "",
+          "ariaLabel": null,
+          "title": "Switch to dark theme",
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "VPSwitch VPSwitchAppearance"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "新增组件",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "基础",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "布局导航",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "数据展示",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "表格、分页与详情",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "页面与指标",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "日历与组织",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "状态与辅助",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "图形与操作",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "数据录入",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "表单与基础字段",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "选项控件",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "树形与日期选择",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "检索与复杂字段",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "反馈与浮层",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "正常数据",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "空结果",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "加载中",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "加载失败",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "筛选第二个辖区",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "按编码筛选第二个辖区",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "清除筛选",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "设置示例选择",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "读取选中键",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "展开全部",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "收起全部",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "定位末尾节点",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "清除过滤",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": "Copy Code",
+          "placeholder": null,
+          "type": null,
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "copy"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": "Copy Code",
+          "placeholder": null,
+          "type": null,
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "copy"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": "Copy Code",
+          "placeholder": null,
+          "type": null,
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "copy"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": "Copy Code",
+          "placeholder": null,
+          "type": null,
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "copy"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "◉",
+          "ariaLabel": null,
+          "title": "Toggle overlay visibility",
+          "placeholder": null,
+          "type": null,
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "×",
+          "ariaLabel": null,
+          "title": "Dismiss banner",
+          "placeholder": null,
+          "type": null,
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        }
+      ]
+    },
+    "treeItems": [
+      {
+        "text": "辖区单位 01 20 个单元",
+        "label": null,
+        "level": "1",
+        "posinset": "1",
+        "setsize": "12",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "执勤单元 02 已选",
+        "label": null,
+        "level": "2",
+        "posinset": "1",
+        "setsize": "1",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "0",
+        "className": "lx-virtual-tree__row is-checked"
+      },
+      {
+        "text": "辖区单位 02 20 个单元",
+        "label": null,
+        "level": "1",
+        "posinset": "2",
+        "setsize": "12",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "执勤单元 02 单位",
+        "label": null,
+        "level": "2",
+        "posinset": "1",
+        "setsize": "1",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "辖区单位 03 20 个单元",
+        "label": null,
+        "level": "1",
+        "posinset": "3",
+        "setsize": "12",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "执勤单元 02 单位",
+        "label": null,
+        "level": "2",
+        "posinset": "1",
+        "setsize": "1",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "辖区单位 04 20 个单元",
+        "label": null,
+        "level": "1",
+        "posinset": "4",
+        "setsize": "12",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "执勤单元 02 单位",
+        "label": null,
+        "level": "2",
+        "posinset": "1",
+        "setsize": "1",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "辖区单位 05 20 个单元",
+        "label": null,
+        "level": "1",
+        "posinset": "5",
+        "setsize": "12",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "执勤单元 02 单位",
+        "label": null,
+        "level": "2",
+        "posinset": "1",
+        "setsize": "1",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "辖区单位 06 20 个单元",
+        "label": null,
+        "level": "1",
+        "posinset": "6",
+        "setsize": "12",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "执勤单元 02 单位",
+        "label": null,
+        "level": "2",
+        "posinset": "1",
+        "setsize": "1",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "辖区单位 07 20 个单元",
+        "label": null,
+        "level": "1",
+        "posinset": "7",
+        "setsize": "12",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "执勤单元 02 单位",
+        "label": null,
+        "level": "2",
+        "posinset": "1",
+        "setsize": "1",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "辖区单位 08 20 个单元",
+        "label": null,
+        "level": "1",
+        "posinset": "8",
+        "setsize": "12",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "执勤单元 02 单位",
+        "label": null,
+        "level": "2",
+        "posinset": "1",
+        "setsize": "1",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "辖区单位 09 20 个单元",
+        "label": null,
+        "level": "1",
+        "posinset": "9",
+        "setsize": "12",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "执勤单元 02 单位",
+        "label": null,
+        "level": "2",
+        "posinset": "1",
+        "setsize": "1",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "辖区单位 10 20 个单元",
+        "label": null,
+        "level": "1",
+        "posinset": "10",
+        "setsize": "12",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "执勤单元 02 单位",
+        "label": null,
+        "level": "2",
+        "posinset": "1",
+        "setsize": "1",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "辖区单位 11 20 个单元",
+        "label": null,
+        "level": "1",
+        "posinset": "11",
+        "setsize": "12",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      }
+    ],
+    "liveRegions": [
+      {
+        "role": null,
+        "live": "polite",
+        "text": "选中 2 项"
+      },
+      {
+        "role": "status",
+        "live": "polite",
+        "text": "本次新增 1 项，当前共选中 2 项。"
+      },
+      {
+        "role": "status",
+        "live": "polite",
+        "text": "筛选匹配到 12 个节点；路径祖先不计入数量。"
+      }
+    ],
+    "inheritInputs": [],
+    "overlays": [
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 166px; left: 382px; width: 692px; height: 62px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 382,
+          "y": 166,
+          "width": 692,
+          "height": 62
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 380,
+          "y": 146,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-overlay\" style=\"position: absolute; top: 1035px; left: 1001px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; display: none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div></div>",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div>",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 1040px; left: 382px; width: 692px; height: 144px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 382,
+          "y": 1040,
+          "width": 692,
+          "height": 144
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 380,
+          "y": 1020,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 2660px; left: 1018px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div></div>",
+        "rect": {
+          "x": 1018,
+          "y": 2660,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div>",
+        "rect": {
+          "x": 1016,
+          "y": 2640,
+          "width": 231.65625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 3010.75px; left: 1018px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div></div>",
+        "rect": {
+          "x": 1018,
+          "y": 3010.75,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div>",
+        "rect": {
+          "x": 1016,
+          "y": 2990.75,
+          "width": 231.65625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 3915.31px; left: 1018px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div></div>",
+        "rect": {
+          "x": 1018,
+          "y": 3915.3125,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div>",
+        "rect": {
+          "x": 1016,
+          "y": 3895.3125,
+          "width": 231.65625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-banner",
+        "text": "layout property animation: transition: height, padding-top, padding-bottom ◉ ×",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-banner\" style=\"position: fixed; top: 0px; left: 0px; right: 0px; z-index: 100000; background: oklch(0.84 0.19 80.46); color: oklch(0.04 0.004 95); font-family: system-ui, sans-serif; font-size: 13px; display: flex; align-items: center; pointer-events: auto; height: 36px; overflow: hidden; max-width: 100vw; transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);\"><div style=\"flex: 1 1 0%; min-width: 0px; overflow: auto hidden; display: flex; gap: 8px; align-items: center; padding: 0px 12px; scroll-snap-type: x mandatory; scrollbar-width: none;\"><span style=\"background: rgba(255, 255, 255, 0.15); padding: 2px 8px; border-radius: 3px; font-size: 12px; font-family: ui-monospace, monospace; white-space: nowrap; flex-shrink: 0; scroll-snap-align: start;\">layout property animation: transition: height, padding-top, padding-bottom</span></div><div style=\"display: flex; align-items: center; gap: 2px; padding: 0px 8px; flex-shrink: 0;\"><button title=\"Toggle overlay visibility\" style=\"background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: white; font-size: 16px; cursor: pointer; padding: 0px 4px; opacity: 0.85; transition: opacity 0.15s;\">◉</button><button title=\"Dismiss banner\" style=\"background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: white; font-size: 18px; cursor: pointer; padding: 0px 4px;\">×</button></div></div>",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 36
+        }
+      }
+    ],
+    "detectorGlobals": {
+      "detect": "function",
+      "scan": "function"
+    },
+    "focus": {
+      "tag": "div",
+      "role": "treeitem",
+      "label": null,
+      "text": "执勤单元 02 已选",
+      "treeItemText": "执勤单元 02 已选",
+      "treeItemClass": "lx-virtual-tree__row is-checked"
+    },
+    "relevantLines": [
+      "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+      "勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。",
+      "本次新增 1 项，当前共选中 2 项。",
+      "筛选匹配到 12 个节点；路径祖先不计入数量。",
+      "已选",
+      "加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。",
+      "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。",
+      "checkStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择当前节点及全部未禁用后代，包括筛选隐藏的节点。",
+      "filterMethod\t(node, keyword) => boolean\tundefined\t自定义节点匹配规则；keyword 已去除首尾空白并转为小写，节点字段需按相同规则规范化；命中节点的祖先会一并保留。未传时按节点名称不区分大小写匹配。",
+      "disabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf: false 可显示展开控制，但静态树组件不会为其加载子数据。",
+      "自定义过滤回调接收规范化后的关键字，匹配节点字段时也应转为小写。例如：",
+      "check-change\t(keys, nodes)\t勾选变化；nodes 为当前树数据中对应的已选节点。",
+      "getCheckedKeys()\t读取当前 modelValue 的副本。",
+      "setCheckedKeys(keys)\t仅保留当前树中存在且未禁用的键；发出 update:modelValue 和 check-change，不直接修改父级数据。",
+      "scrollToKey(key)\t将当前可见节点滚动到视口起点；过滤或折叠后不可见的节点不会滚动。",
+      "空数组始终显示“暂无数据”，即使仍保留筛选词；数据非空但筛选后没有匹配项时显示“未找到匹配节点”。",
+      "加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 data。",
+      "每个已渲染树项的 aria-posinset 和 aria-setsize 按筛选后的同级节点集合计算，不随虚拟窗口当前渲染的行数变化；筛选会保留命中节点及其祖先，并自动展开含匹配后代的分支。",
+      "输入筛选词后，可见状态区播报实际匹配节点数量；为维持树路径而显示的祖先节点不会计入数量，包括自定义 filterMethod 的筛选结果。",
+      "显示复选框且启用级联时，树项会通过可访问描述说明选择影响范围；可见状态区播报本次新增/取消数量及当前选中数。级联包含当前筛选隐藏的节点，但会跳过禁用节点。",
+      "树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。"
+    ],
+    "bodyText": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\n本页导航\n交互示例\nProps\nEvents\n插槽\n实例方法\n状态与边界\nLxVirtualTree 虚拟树\n​\n\n固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。\n\n交互示例\n​\n演示状态和更多操作\n\n选中 2 项\n\n勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。\n\n本次新增 1 项，当前共选中 2 项。\n\n筛选匹配到 12 个节点；路径祖先不计入数量。\n\n辖区单位 01\n20 个单元\n执勤单元 02\n已选\n辖区单位 02\n20 个单元\n执勤单元 02\n单位\n辖区单位 03\n20 个单元\n执勤单元 02\n单位\n辖区单位 04\n20 个单元\n执勤单元 02\n单位\n辖区单位 05\n20 个单元\n执勤单元 02\n单位\n辖区单位 06\n20 个单元\n执勤单元 02\n单位\n辖区单位 07\n20 个单元\n执勤单元 02\n单位\n辖区单位 08\n20 个单元\n执勤单元 02\n单位\n辖区单位 09\n20 个单元\n执勤单元 02\n单位\n辖区单位 10\n20 个单元\n执勤单元 02\n单位\n辖区单位 11\n20 个单元\n受控选中：2 项\nunit-1-1、unit-1-2\n公开方法读取：0 项\n\n加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。\n\n查看示例代码\n\n示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。\n\nProps\n​\n名称\t类型\t默认值\t说明\ndata\tLxVirtualTreeNode[]\t[]\t树数据；节点使用 id 作为默认键，也可配置 nodeKey。\nariaLabel\tstring\t'树形结构'\t树控件的可访问名称；建议按业务用途覆盖，例如“组织结构”。\nmodelValue\t(string | number)[]\t[]\t受控选中键；配合 v-model 使用。\nheight\tnumber\t360\t可视区域高度，单位 px。\nitemSize\tnumber\t32\t固定行高，单位 px；所有节点行使用相同行高以计算虚拟窗口。\nindent\tnumber\t16\t每层缩进，单位 px。\nnodeKey\tstring\t'id'\t节点唯一键字段。\nshowCheckbox\tboolean\tfalse\t是否显示复选框。\ncheckStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择当前节点及全部未禁用后代，包括筛选隐藏的节点。\nfilterable\tboolean\ttrue\t是否显示内置过滤框。\nfilterMethod\t(node, keyword) => boolean\tundefined\t自定义节点匹配规则；keyword 已去除首尾空白并转为小写，节点字段需按相同规则规范化；命中节点的祖先会一并保留。未传时按节点名称不区分大小写匹配。\ndefaultExpandedKeys\t(string | number)[]\t[]\t初始展开节点键；后续展开状态通过组件交互和 expandAll 管理。\nscrollbarWidth\tnumber\t4\t滚动条宽度，单位 px。\n\n节点类型：\n\nts\ninterface LxVirtualTreeNode {\n  id: string | number\n  label: string\n  children?: LxVirtualTreeNode[]\n  disabled?: boolean\n  isLeaf?: boolean\n  [key: string]: unknown\n}\n\ndisabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf: false 可显示展开控制，但静态树组件不会为其加载子数据。\n\n自定义过滤回调接收规范化后的关键字，匹配节点字段时也应转为小写。例如：\n\nts\nfunction filterNode(node: LxVirtualTreeNode, keyword: string) {\n  return [node.label, node.code].some(\n    (value) =>\n      typeof value === 'string' && value.toLocaleLowerCase().includes(keyword),\n  )\n}\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t选中键变化，用于 v-model。\ncheck-change\t(keys, nodes)\t勾选变化；nodes 为当前树数据中对应的已选节点。\nnode-click\tnode\t点击可用节点时触发。\nexpand-change\tkeys\t展开节点键集合变化。\n插槽\n​\n名称\t参数\t说明\nnode\t{ node, level, checked }\t在节点标签后追加状态或业务展示；保持内容单行以符合固定行高。\n实例方法\n​\n\n可通过模板引用调用：\n\nts\ninterface LxVirtualTreeExpose {\n  getCheckedKeys(): (string | number)[]\n  setCheckedKeys(keys: (string | number)[]): void\n  expandAll(expand?: boolean): void\n  filter(value: string): void\n  scrollToKey(key: string | number): void\n}\n方法\t说明\ngetCheckedKeys()\t读取当前 modelValue 的副本。\nsetCheckedKeys(keys)\t仅保留当前树中存在且未禁用的键；发出 update:modelValue 和 check-change，不直接修改父级数据。\nexpandAll(expand = true)\t展开或收起全部分支，并发出 expand-change。\nfilter(value)\t设置过滤关键字；空字符串清除过滤。\nscrollToKey(key)\t将当前可见节点滚动到视口起点；过滤或折叠后不可见的节点不会滚动。\n状态与边界\n​\n空数组始终显示“暂无数据”，即使仍保留筛选词；数据非空但筛选后没有匹配项时显示“未找到匹配节点”。\n加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 data。\n树容器以 role=\"tree\" 暴露，并提供默认可访问名称“树形结构”；可通过 aria-label/ariaLabel 按实际内容覆盖名称。\n每个已渲染树项的 aria-posinset 和 aria-setsize 按筛选后的同级节点集合计算，不随虚拟窗口当前渲染的行数变化；筛选会保留命中节点及其祖先，并自动展开含匹配后代的分支。\n输入筛选词后，可见状态区播报实际匹配节点数量；为维持树路径而显示的祖先节点不会计入数量，包括自定义 filterMethod 的筛选结果。\n显示复选框且启用级联时，树项会通过可访问描述说明选择影响范围；可见状态区播报本次新增/取消数量及当前选中数。级联包含当前筛选隐藏的节点，但会跳过禁用节点。\n树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。\n行高固定，节点插槽不应换行撑高行；长标签使用省略显示，完整内容保留在 title 属性中。\n虚拟树按 nodeKey 建立索引，同一棵树中该值必须唯一。\nPager\nPrevious page\nLxAuthImg 鉴权图片\nNext page\nLxTransferPanel 双栏穿梭\nline length too long\nline length too long\nraster buried under a wash or opacity\nraster buried under a wash or opacity\nraster buried under a wash or opacity\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×"
+  },
+  "detectorConsoleSummary": [
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "args": [
+        "%c[impeccable] 7 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "args": [
+        "%c[impeccable] 7 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "args": [
+        "%c[impeccable] 7 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "args": [
+        "%c[impeccable] 7 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "args": [
+        "%c[impeccable] 7 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    }
+  ],
+  "allConsoleEvents": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:4174/@vite/client",
+        "line": 494,
+        "column": 8,
+        "lineNumber": 494,
+        "columnNumber": 8
+      },
+      "args": [
+        "[vite] connecting..."
+      ]
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:4174/@vite/client",
+        "line": 617,
+        "column": 14,
+        "lineNumber": 617,
+        "columnNumber": 14
+      },
+      "args": [
+        "[vite] connected."
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8159,
+        "column": 12,
+        "lineNumber": 8159,
+        "columnNumber": 12
+      },
+      "args": [
+        "%c[impeccable] 7 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8169,
+        "column": 12,
+        "lineNumber": 8169,
+        "columnNumber": 12
+      },
+      "args": [
+        "console.groupEnd"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8159,
+        "column": 12,
+        "lineNumber": 8159,
+        "columnNumber": 12
+      },
+      "args": [
+        "%c[impeccable] 7 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8169,
+        "column": 12,
+        "lineNumber": 8169,
+        "columnNumber": 12
+      },
+      "args": [
+        "console.groupEnd"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8159,
+        "column": 12,
+        "lineNumber": 8159,
+        "columnNumber": 12
+      },
+      "args": [
+        "%c[impeccable] 7 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8169,
+        "column": 12,
+        "lineNumber": 8169,
+        "columnNumber": 12
+      },
+      "args": [
+        "console.groupEnd"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8159,
+        "column": 12,
+        "lineNumber": 8159,
+        "columnNumber": 12
+      },
+      "args": [
+        "%c[impeccable] 7 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8169,
+        "column": 12,
+        "lineNumber": 8169,
+        "columnNumber": 12
+      },
+      "args": [
+        "console.groupEnd"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8159,
+        "column": 12,
+        "lineNumber": 8159,
+        "columnNumber": 12
+      },
+      "args": [
+        "%c[impeccable] 7 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~86 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8169,
+        "column": 12,
+        "lineNumber": 8169,
+        "columnNumber": 12
+      },
+      "args": [
+        "console.groupEnd"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "errorResponses": []
+}

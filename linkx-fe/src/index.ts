@@ -196,7 +196,13 @@ export type {
   LxVirtualTreeNode,
   LxVirtualTreeProps,
 } from './components/LxVirtualTree/types'
-export type { LxTransferPanelProps } from './components/LxTransferPanel/types'
+export type {
+  LxTransferPanelItem,
+  LxTransferPanelMeta,
+  LxTransferPanelNode,
+  LxTransferPanelProps,
+  LxTransferPanelStatusTone,
+} from './components/LxTransferPanel/types'
 export type { LxAuthImgProps } from './components/LxAuthImg/types'
 export type {
   LxBreadcrumbItem,

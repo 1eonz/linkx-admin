@@ -1,0 +1,508 @@
+{
+  "browser": {
+    "name": "Microsoft Edge",
+    "version": "Edg/154.0.4258.53",
+    "executable": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+    "windowMode": "visible",
+    "launchProcessId": 25136,
+    "profileDir": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\impeccable-wave7-transferpanel-edge-W9nU9S",
+    "targetId": "0905F976084B616A6A79332EA2B4915E",
+    "tabTitle": "[Human] LxTransferPanel Assessment B",
+    "keptOpenForHumanReview": false,
+    "postCaptureStatus": "No matching Edge process or [Human] window was found after the CDP runner was interrupted."
+  },
+  "target": {
+    "url": "http://127.0.0.1:4174/components/lxtransferpanel.html",
+    "httpStatus": 200,
+    "responseBytes": 514,
+    "responseSha256": "9B2DFE0ACCF34DB6000387033642DE683DA3373A54A2F20DCD1EBB1D1025C1CA",
+    "loadedTitleBeforeMutation": "LxTransferPanel 双栏穿梭 | LxUI",
+    "loadedUrl": "http://127.0.0.1:4174/components/lxtransferpanel.html",
+    "documentDomSha256BeforeMutation": "00F5A7AA68907C9D3DF647D41E4573B16D8F77F7BBF97DD97DE29F8614938AFF",
+    "visibleTextExcerpt": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\n本页导航\n交互示例\nProps\nEvents\n节点元数据\n选择规则\n宿主持久化与清空确认\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。\n\n交互示例\n​\n示例状态与主题\n已载入组织权限数据\n组织与数据权限树（待选）\n市公安局指挥中心\nORG-01\n正常\n情指行一体化研判调度专班\nDEPT-03\n正常\n交警直属特勤一中队\nTRF-101\n处理中\n站前路派出所综合作战室\nSUB-22\n忙碌\n受限巡检单位\nRESTRICTED\n停用\n待授权特勤支队\nUNIT-PENDING-01\n正常\n历史归档单位 02\nARCHIVE-02\n停用\n历史归档单位 03\nARCHIVE-03\n停用\n历史归档单位 04\nARCHIVE-04\n停用\n历史归档单位 05\nARCHIVE-05\n停用\n历史归档单位 06\nARCHIVE-06\n停用\n历史归档单位 07\nARCHIVE-07\n停用\n历史归档单位 08\nARCHIVE-08\n停用\n历史归档单位 09\nARCHIVE-09\n停用\n历史归档单位 10\nARCHIVE-10\n停用\n历史归档单位 11\nARCHIVE-11\n停用\n历史归档单位 12\nARCHIVE-12\n停用\n历史归档单位 13\nARCHIVE-13\n停用\n历史归档单位 14\nARCHIVE-14\n停用\n历史归档单位 15\nARCHIVE-15\n停用\n历史归档单位 16\nARCHIVE-16\n停用\n待选池：1420 个节点\n全部加入\n已达上限 5 项\n已达到选择上限 5 项，不能继续加入待选节点\n全部移除\n已选数据权限清单\n市公安局指挥中心\nORG-01\n正常\n情指行一体化研判调度专班\nDEPT-03\n正常\n交警直属特勤一中队\nTRF-101\n处理中\n站前路派出所综合作战室\nSUB-22\n忙碌\n历史授权单位（记录中）：跨区域应急联动研判与协同处置权限\nLEGACY-08\n停用\n节点未加载\nlegacy-unit-08\n已选 5 项\n保留下级继承授权\n示例规则：仅向所选机构的直属下级继承；关闭后停止下级继承。\n当前已选 5 项\n待选树 1,420 个节点\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\nselectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配单位...', '在已选名单中检索...']\t左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\ndefaultExpandedKeys\t(string | number)[]\t[]\t左侧树首次展开的节点键；后续展开/收起由树组件内部管理。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\ninheritChildDescription\tstring\tundefined\t由宿主按当前业务规则提供具体的继承对象和关闭效果；显示在复选框旁，并通过 aria-describedby 关联到原生复选框。未提供时不显示。示例中的直属下级规则仅为本地演示假设。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t用户确认后通过中间“全部移除”清空非空列表时触发；在 update:modelValue 与 change 之后发出。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”，其它值原样显示。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。\n\n选择规则\n​\n中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。\n左侧搜索有内容时才显示“全选筛选结果”和“反选筛选结果”；只操作节点名称实际匹配搜索文本的可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。\n“全部加入”受上限或空树状态限制时，按钮旁显示简短原因；按钮的 aria-describedby 保留完整原因，便于读屏用户了解无法操作的具体原因。\n两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏下已选名称会换行显示，列表可通过键盘聚焦并滚动查看。\ninheritChildDescription 只由宿主提供业务确认后的说明。组件不会推断实际授权范围，并会在说明更新或移除时同步更新原生复选框的 aria-describedby。\n窄屏下待选标题、筛选批量操作与状态说明分行展示；文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。\n单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。全量操作只保留中间按钮，避免与筛选范围操作混淆。\n宿主持久化与清空确认\n​\n\n清空动作的事件顺序固定为 update:modelValue([])、change([], [])、clear-all。clear-all 是清空已发生后的通知，不是可取消的确认钩子。需要确认或撤销时，宿主应把组件绑定到本地草稿值，保存到后端时再提交；不要在 v-model 监听器中直接持久化每次变化。\n\n未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。全量清空确认期间如果宿主传入的 modelValue 发生变化，旧确认会失效并提示用户重新检查，不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：\n\nts\nconst draftKeys = ref<(string | number)[]>([...savedKeys.value])\nconst lastNonEmptyKeys = ref([...draftKeys.value])\nconst saving = ref(false)\nlet draftRevision = 0\n\nwa",
+    "headings": [
+      "新增组件",
+      "基础",
+      "布局导航",
+      "数据展示",
+      "表格、分页与详情",
+      "页面与指标",
+      "日历与组织",
+      "状态与辅助",
+      "图形与操作",
+      "数据录入",
+      "表单与基础字段",
+      "选项控件",
+      "树形与日期选择",
+      "检索与复杂字段",
+      "反馈与浮层",
+      "LxTransferPanel 双栏穿梭\n​",
+      "交互示例\n​",
+      "Props\n​",
+      "Events\n​",
+      "节点元数据\n​",
+      "选择规则\n​",
+      "宿主持久化与清空确认\n​"
+    ],
+    "buttonCount": 22,
+    "inputCount": 26
+  },
+  "hashes": {
+    "componentSource": {
+      "path": "F:/work/linkx-admin/linkx-fe/src/components/LxTransferPanel/index.vue",
+      "sha256": "9250D31A3A382A7D252459C671614CDA4CA681FE0DA0B3C791D3219D4684A0A1"
+    },
+    "documentSource": {
+      "path": "F:/work/linkx-admin/linkx-fe/docs/components/lxtransferpanel.md",
+      "sha256": "C13B6CF97C9FAB39E62CCC82D4CF3B9C71BAEC751D1C3EB4F968C1D33FBB9CC2"
+    },
+    "servedDocumentResponse": {
+      "url": "http://127.0.0.1:4174/components/lxtransferpanel.html",
+      "sha256": "9B2DFE0ACCF34DB6000387033642DE683DA3373A54A2F20DCD1EBB1D1025C1CA",
+      "bytes": 514
+    },
+    "browserDomBeforeMutation": {
+      "sha256": "00F5A7AA68907C9D3DF647D41E4573B16D8F77F7BBF97DD97DE29F8614938AFF",
+      "note": "document.documentElement.outerHTML after page load and before title/script preflight mutations"
+    }
+  },
+  "preflight": {
+    "titleChanged": true,
+    "scriptAppended": true,
+    "scriptExecuted": true,
+    "headMutable": true
+  },
+  "injection": {
+    "scriptUrl": "http://127.0.0.1:8400/detect.js",
+    "scriptAppended": true,
+    "responseStatus": 200,
+    "responseBytes": 424237,
+    "responseSha256": "A9EC563A2E11DABDFA6977837B373C0E2A4F96054DAB7AC2D7528BD35B124B22",
+    "loadEvent": true,
+    "loadError": false,
+    "detectorAvailable": true,
+    "detectorRan": true,
+    "findings": [
+      {
+        "selector": "div.vp-doc > div > p:nth-of-type(1)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 168,
+          "width": 865,
+          "height": 58,
+          "top": 168,
+          "right": 1201,
+          "bottom": 226,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1132,
+          "y": 1084,
+          "width": 40,
+          "height": 40,
+          "top": 1084,
+          "right": 1172,
+          "bottom": 1124,
+          "left": 1132
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(4)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 3405,
+          "width": 865,
+          "height": 88,
+          "top": 3405,
+          "right": 1201,
+          "bottom": 3493,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.vp-doc > div > ul > li:nth-of-type(2)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 3646,
+          "width": 845,
+          "height": 74,
+          "top": 3646,
+          "right": 1201,
+          "bottom": 3720,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~106 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.vp-doc > div > ul > li:nth-of-type(5)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 3842,
+          "width": 845,
+          "height": 52,
+          "top": 3842,
+          "right": 1201,
+          "bottom": 3894,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~106 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "li:nth-of-type(9)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 4000,
+          "width": 845,
+          "height": 74,
+          "top": 4000,
+          "right": 1201,
+          "bottom": 4074,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~106 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(5)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 4251,
+          "width": 865,
+          "height": 88,
+          "top": 4251,
+          "right": 1201,
+          "bottom": 4339,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(6)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 4355,
+          "width": 865,
+          "height": 88,
+          "top": 4355,
+          "right": 1201,
+          "bottom": 4443,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1149,
+          "y": 4471,
+          "width": 40,
+          "height": 40,
+          "top": 4471,
+          "right": 1189,
+          "bottom": 4511,
+          "left": 1149
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1149,
+          "y": 5314.375,
+          "width": 40,
+          "height": 40,
+          "top": 5314.375,
+          "right": 1189,
+          "bottom": 5354.375,
+          "left": 1149
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(7)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 5513.03125,
+          "width": 865,
+          "height": 116,
+          "top": 5513.03125,
+          "right": 1201,
+          "bottom": 5629.03125,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "table:nth-of-type(1)",
+        "tagName": "table",
+        "rect": {
+          "x": 336,
+          "y": 1198,
+          "width": 865,
+          "height": 1414,
+          "top": 1198,
+          "right": 1201,
+          "bottom": 2612,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "edge-flush-cards",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "11 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+            "ignoreValue": "",
+            "name": "Cards flush against the scroller edge",
+            "description": "Cards inside a horizontal scroller or tab panel sit flush against the container edge at rest while keeping a gutter on the other side, so their edges and rounded corners get cut off. Usually the panel is sized wider than its clip box. Keep a consistent inset on both sides."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "bounce-easing",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+            "ignoreValue": "",
+            "name": "Bounce or elastic easing",
+            "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+          },
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ],
+    "overlayCount": 13,
+    "overlayLabels": [
+      "line length too long",
+      "raster buried under a wash or opacity",
+      "line length too long",
+      "line length too long",
+      "line length too long",
+      "line length too long",
+      "line length too long",
+      "line length too long",
+      "raster buried under a wash or opacity",
+      "raster buried under a wash or opacity",
+      "line length too long",
+      "cards flush against the scroller edge"
+    ]
+  },
+  "pageStateAfterScan": {
+    "title": "[Human] LxTransferPanel Assessment B",
+    "url": "http://127.0.0.1:4174/components/lxtransferpanel.html",
+    "detectorLoaded": true,
+    "detectorAvailable": true,
+    "overlayCount": 13,
+    "scrollTop": 0
+  },
+  "mobileState": {
+    "width": 562,
+    "height": 1217,
+    "documentWidth": 562,
+    "documentHeight": 8407,
+    "horizontalOverflow": false
+  },
+  "console": {
+    "totalEvents": 35,
+    "findingCount": 3,
+    "findingsFile": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\assessment-b-final-2026-10-08\\browser-console.json"
+  },
+  "screenshots": {
+    "desktopBefore": {
+      "path": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\assessment-b-final-2026-10-08\\screenshots\\desktop-before-injection.png",
+      "sha256": "641C33DB8D884E1AC387C46773155105AC85318169CB440D32254A4F79BB441B"
+    },
+    "desktopAfter": {
+      "path": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\assessment-b-final-2026-10-08\\screenshots\\desktop-after-injection.png",
+      "sha256": "28ED5BD3EF6D49EF59D82C3FA5FED6E8B4205741615392DEDDDC0CDE7B6390F0"
+    },
+    "mobileAfter": {
+      "path": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\assessment-b-final-2026-10-08\\screenshots\\mobile-after-injection.png",
+      "sha256": "4063D4FFD80D443F0A6BC31399E8210535665335758F9DF4D5DBF76C02C793C7"
+    }
+  },
+  "automation": {
+    "method": "Fresh Edge tab controlled using built-in CDP over Node WebSocket",
+    "fallback": "Native browser automation interface and workspace Playwright/Puppeteer packages were unavailable.",
+      "userVisibleOverlayAtCapture": true,
+      "tabRemainsOpenAfterCapture": false
+  }
+}

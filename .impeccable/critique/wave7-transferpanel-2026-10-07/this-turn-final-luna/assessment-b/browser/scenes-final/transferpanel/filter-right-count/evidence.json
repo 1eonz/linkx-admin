@@ -1,0 +1,3214 @@
+{
+  "route": "transferpanel",
+  "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+  "scene": "filter-right-count",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "requestedTheme": "Light",
+  "observedTheme": "light",
+  "hudNaming": "页面主题切换控件标记为 Switch to dark/light theme；页面没有可见的 HUD 标签。此 HUD 场景使用该暗色模式作为第二主题取证。",
+  "extra": {
+    "filter": "指挥中心",
+    "before": {
+      "selectedItems": 4
+    },
+    "after": {
+      "selectedItems": 1,
+      "itemButtons": [
+        "移除 市公安局指挥中心"
+      ],
+      "relevantLines": [
+        "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。",
+        "仅反转已加载的可选节点；禁用项和树外已选键会保留。",
+        "仅反转当前已加载树中未禁用的可选节点，并保留禁用节点和树外已选键。",
+        "当前已选中 4 项。",
+        "已选数据权限清单",
+        "已选 4 项",
+        "当前已选 4 项",
+        "modelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。",
+        "selectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。",
+        "titles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。",
+        "filterPlaceholders\t[string, string]\t['输入机构名称/部门编码检索...', '在已选名单中检索...']\t左侧筛选匹配节点名称或部门编码；右侧筛选匹配标题、编码和状态。",
+        "maxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。",
+        "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+        "中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。",
+        "左侧树标题区始终提供“反选本树可选项”，它只反转当前已加载树中的未禁用节点，并保留禁用节点和树外已选键；无筛选时按钮下方会显示该操作范围，可访问说明也保留相同规则。左侧搜索有内容时另显示“全选筛选结果”和“反选筛选结果”；按节点名称或部门编码匹配可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，筛选批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+        "两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏树节点名称最多显示两行，超长文本以标题保留完整内容；编码和状态收在单行并省略超长值，不增加固定行高。虚拟行高在 360-420px 为 64px、359px 及以下为 80px，44px 触控控件与元数据各占独立网格行；视口跨断点时树会保留焦点行并重算滚动锚点。已选名称也会换行显示，列表可通过键盘聚焦并滚动查看。",
+        "窄屏下待选标题、筛选批量操作与状态说明分行展示；“待选/已选”切换按钮显示两侧数量并可通过键盘操作，隐藏面板从辅助技术和焦点顺序中移除。文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。",
+        "单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。",
+        "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，并使用名称/部门编码联合匹配；右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。筛选输入使用文本类型和搜索键盘提示，避免浏览器原生清除符号与自定义按钮重复。筛选清除按钮桌面点击区域为 32px，窄屏为 44px；窄屏树行的复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸保持 24×24px，两个控件占用独立网格列。已选列表可通过键盘聚焦并滚动查看；存在未显示内容时，列表外的状态提示会显示尚未完整进入视口的项数，通过 aria-describedby 关联到列表，并在滚动到底部后收起。移除单项后焦点移到下一项；若没有下一项则移到上一项，列表清空时回到列表容器。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+        "右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。中间穿梭按钮执行全量加入和移除；树标题区的全树反选与筛选结果反选分别明确标出操作范围。"
+      ],
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "已载入组织权限数据"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 4 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "全量加入需要 2 项，当前还可加入 1 项"
+        }
+      ]
+    },
+    "manualScan": {
+      "available": true,
+      "returnType": "object",
+      "resultCount": 18
+    }
+  },
+  "state": {
+    "title": "[Human] Assessment B transferpanel/interactive",
+    "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+    "htmlClass": "",
+    "htmlDataTheme": null,
+    "themeMediaDark": false,
+    "bodyClass": "",
+    "colors": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColor": "rgb(60, 60, 67)",
+      "mainBackground": "rgba(0, 0, 0, 0)"
+    },
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "scrollWidth": 1440,
+      "horizontalOverflow": false
+    },
+    "headings": [
+      "新增组件",
+      "基础",
+      "布局导航",
+      "数据展示",
+      "表格、分页与详情",
+      "页面与指标",
+      "日历与组织",
+      "状态与辅助",
+      "图形与操作",
+      "数据录入",
+      "表单与基础字段",
+      "选项控件",
+      "树形与日期选择",
+      "检索与复杂字段",
+      "反馈与浮层",
+      "LxTransferPanel 双栏穿梭\n​",
+      "交互示例\n​",
+      "Props\n​",
+      "Events\n​",
+      "节点元数据\n​",
+      "选择规则\n​",
+      "宿主持久化与清空确认\n​"
+    ],
+    "controls": {
+      "inputs": [
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": true,
+          "disabled": false,
+          "className": "",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": true,
+          "disabled": false,
+          "className": "",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "按机构名称或部门编码筛选待选节点",
+          "title": null,
+          "placeholder": "输入机构名称/部门编码检索...",
+          "type": "text",
+          "value": "",
+          "checked": false,
+          "disabled": false,
+          "className": "",
+          "labels": [],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 市公安局指挥中心",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": true,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 情指行一体化研判调度专班",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": true,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 交警直属特勤一中队",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": true,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 站前路派出所综合作战室",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 受限巡检单位",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 待授权特勤支队",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": false,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 02",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 03",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 04",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 05",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 06",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 07",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 08",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 09",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 10",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 11",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 12",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 13",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 14",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 15",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "选择 历史归档单位 16",
+          "title": null,
+          "placeholder": null,
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "disabled": true,
+          "className": "lx-virtual-tree__checkbox",
+          "labels": [
+            ""
+          ],
+          "describedBy": null,
+          "descriptionText": ""
+        },
+        {
+          "tag": "input",
+          "role": null,
+          "text": "",
+          "ariaLabel": "在已选项中检索",
+          "title": null,
+          "placeholder": "在已选名单中检索...",
+          "type": "text",
+          "value": "指挥中心",
+          "checked": false,
+          "disabled": false,
+          "className": "",
+          "labels": [],
+          "describedBy": null,
+          "descriptionText": ""
+        }
+      ],
+      "buttons": [
+        {
+          "tag": "button",
+          "role": null,
+          "text": "搜索文档 K",
+          "ariaLabel": "搜索文档",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "DocSearch DocSearch-Button"
+        },
+        {
+          "tag": "button",
+          "role": "switch",
+          "text": "",
+          "ariaLabel": null,
+          "title": "Switch to dark theme",
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "VPSwitch VPSwitchAppearance"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "新增组件",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "基础",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "布局导航",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "数据展示",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "表格、分页与详情",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "页面与指标",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "日历与组织",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "状态与辅助",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "图形与操作",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "数据录入",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "表单与基础字段",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "选项控件",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "树形与日期选择",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "检索与复杂字段",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "div",
+          "role": "button",
+          "text": "反馈与浮层",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": null,
+          "value": null,
+          "checked": null,
+          "disabled": null,
+          "className": "item"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "正常数据",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "空结果",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "加载中",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "加载失败",
+          "ariaLabel": null,
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "反选本树可选项",
+          "ariaLabel": "反选本树可选项",
+          "title": "反转当前树中全部可选节点，保留树外和禁用的已选键",
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "收起节点",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "lx-virtual-tree__toggle"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "全部加入",
+          "title": "全量加入需要 2 项，当前还可加入 1 项",
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": true,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "全部移除",
+          "title": "全部移除",
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "清除已选项筛选",
+          "title": "清除已选项筛选",
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": "移除 市公安局指挥中心",
+          "title": null,
+          "placeholder": null,
+          "type": "button",
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": "Copy Code",
+          "placeholder": null,
+          "type": null,
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "copy"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": "Copy Code",
+          "placeholder": null,
+          "type": null,
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "copy"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "",
+          "ariaLabel": null,
+          "title": "Copy Code",
+          "placeholder": null,
+          "type": null,
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": "copy"
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "◉",
+          "ariaLabel": null,
+          "title": "Toggle overlay visibility",
+          "placeholder": null,
+          "type": null,
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        },
+        {
+          "tag": "button",
+          "role": null,
+          "text": "×",
+          "ariaLabel": null,
+          "title": "Dismiss banner",
+          "placeholder": null,
+          "type": null,
+          "value": "",
+          "checked": null,
+          "disabled": false,
+          "className": ""
+        }
+      ]
+    },
+    "treeItems": [
+      {
+        "text": "市公安局指挥中心 ORG-01 正常",
+        "label": null,
+        "level": "1",
+        "posinset": "1",
+        "setsize": "20",
+        "selected": null,
+        "expanded": "true",
+        "tabIndex": "0",
+        "className": "lx-virtual-tree__row is-checked"
+      },
+      {
+        "text": "情指行一体化研判调度专班 DEPT-03 正常",
+        "label": null,
+        "level": "2",
+        "posinset": "1",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-checked"
+      },
+      {
+        "text": "交警直属特勤一中队 TRF-101 处理中",
+        "label": null,
+        "level": "2",
+        "posinset": "2",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-checked"
+      },
+      {
+        "text": "站前路派出所综合作战室 SUB-22 忙碌",
+        "label": null,
+        "level": "2",
+        "posinset": "3",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "受限巡检单位 RESTRICTED 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "4",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "待授权特勤支队 UNIT-PENDING-01 正常",
+        "label": null,
+        "level": "2",
+        "posinset": "5",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row"
+      },
+      {
+        "text": "历史归档单位 02 ARCHIVE-02 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "6",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 03 ARCHIVE-03 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "7",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 04 ARCHIVE-04 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "8",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 05 ARCHIVE-05 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "9",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 06 ARCHIVE-06 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "10",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 07 ARCHIVE-07 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "11",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 08 ARCHIVE-08 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "12",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 09 ARCHIVE-09 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "13",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 10 ARCHIVE-10 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "14",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 11 ARCHIVE-11 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "15",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 12 ARCHIVE-12 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "16",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 13 ARCHIVE-13 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "17",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 14 ARCHIVE-14 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "18",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 15 ARCHIVE-15 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "19",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      },
+      {
+        "text": "历史归档单位 16 ARCHIVE-16 停用",
+        "label": null,
+        "level": "2",
+        "posinset": "20",
+        "setsize": "70",
+        "selected": null,
+        "expanded": null,
+        "tabIndex": "-1",
+        "className": "lx-virtual-tree__row is-disabled"
+      }
+    ],
+    "liveRegions": [
+      {
+        "role": null,
+        "live": "polite",
+        "text": "已载入组织权限数据"
+      },
+      {
+        "role": "status",
+        "live": "polite",
+        "text": "当前已选中 4 项。"
+      },
+      {
+        "role": "status",
+        "live": "polite",
+        "text": "全量加入需要 2 项，当前还可加入 1 项"
+      }
+    ],
+    "inheritInputs": [],
+    "overlays": [
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 166px; left: 334px; width: 884px; height: 62px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 334,
+          "y": 166,
+          "width": 884,
+          "height": 62
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 332,
+          "y": 146,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 941px; left: 334px; width: 884px; height: 60px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 334,
+          "y": 941,
+          "width": 884,
+          "height": 60
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 332,
+          "y": 921,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-overlay\" style=\"position: absolute; top: 1082px; left: 1145px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; display: none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div></div>",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div>",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 3386px; left: 334px; width: 884px; height: 92px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 334,
+          "y": 3386,
+          "width": 884,
+          "height": 92
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 332,
+          "y": 3366,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 3627px; left: 354px; width: 864px; height: 126px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 354,
+          "y": 3627,
+          "width": 864,
+          "height": 126
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 352,
+          "y": 3607,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 3757px; left: 354px; width: 864px; height: 54px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 354,
+          "y": 3757,
+          "width": 864,
+          "height": 54
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 352,
+          "y": 3737,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 3815px; left: 354px; width: 864px; height: 100px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 354,
+          "y": 3815,
+          "width": 864,
+          "height": 100
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 352,
+          "y": 3795,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 3919px; left: 354px; width: 864px; height: 80px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 354,
+          "y": 3919,
+          "width": 864,
+          "height": 80
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 352,
+          "y": 3899,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 4003px; left: 354px; width: 864px; height: 52px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 354,
+          "y": 4003,
+          "width": 864,
+          "height": 52
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 352,
+          "y": 3983,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 4125px; left: 354px; width: 864px; height: 202px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 354,
+          "y": 4125,
+          "width": 864,
+          "height": 202
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 352,
+          "y": 4105,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 4331px; left: 354px; width: 864px; height: 52px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 354,
+          "y": 4331,
+          "width": 864,
+          "height": 52
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 352,
+          "y": 4311,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 4500px; left: 334px; width: 884px; height: 92px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 334,
+          "y": 4500,
+          "width": 884,
+          "height": 92
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 332,
+          "y": 4480,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 4604px; left: 334px; width: 884px; height: 120px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 334,
+          "y": 4604,
+          "width": 884,
+          "height": 120
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 332,
+          "y": 4584,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 4748px; left: 1162px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div></div>",
+        "rect": {
+          "x": 1162,
+          "y": 4748,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div>",
+        "rect": {
+          "x": 1160,
+          "y": 4728,
+          "width": 231.65625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 5591.38px; left: 1162px; width: 44px; height: 44px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div></div>",
+        "rect": {
+          "x": 1162,
+          "y": 5591.375,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "raster buried under a wash or opacity",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">raster buried under a wash or opacity</span></div>",
+        "rect": {
+          "x": 1160,
+          "y": 5571.375,
+          "width": 231.65625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 5790.03px; left: 334px; width: 884px; height: 120px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div></div>",
+        "rect": {
+          "x": 334,
+          "y": 5790.03125,
+          "width": 884,
+          "height": 120
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "line length too long",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">line length too long</span></div>",
+        "rect": {
+          "x": 332,
+          "y": 5770.03125,
+          "width": 129.90625,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-visible",
+        "text": "cards flush against the scroller edge",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-visible\" style=\"position: absolute; top: 1196px; left: 334px; width: 884px; height: 1427px; z-index: 99999; box-sizing: border-box; animation: auto ease 0s 1 normal none running none;\"><div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">cards flush against the scroller edge</span></div></div>",
+        "rect": {
+          "x": 334,
+          "y": 1196,
+          "width": 884,
+          "height": 1427
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-label",
+        "text": "cards flush against the scroller edge",
+        "outerHTML": "<div class=\"impeccable-label\" style=\"position: absolute; bottom: 100%; left: -2px; display: flex; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: oklch(0.04 0.004 95); line-height: 14px; background: oklch(0.84 0.19 80.46); font-family: system-ui, sans-serif; border-radius: 4px 4px 0px 0px;\"><span style=\"padding: 3px 8px;\">cards flush against the scroller edge</span></div>",
+        "rect": {
+          "x": 332,
+          "y": 1176,
+          "width": 223.71875,
+          "height": 20
+        }
+      },
+      {
+        "tag": "div",
+        "className": "impeccable-overlay impeccable-banner",
+        "text": "✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46) layout property animation: transition: height, padding-top, padding-bottom ◉ ×",
+        "outerHTML": "<div class=\"impeccable-overlay impeccable-banner\" style=\"position: fixed; top: 0px; left: 0px; right: 0px; z-index: 100000; background: oklch(0.84 0.19 80.46); color: oklch(0.04 0.004 95); font-family: system-ui, sans-serif; font-size: 13px; display: flex; align-items: center; pointer-events: auto; height: 36px; overflow: hidden; max-width: 100vw; transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);\"><div style=\"flex: 1 1 0%; min-width: 0px; overflow: auto hidden; display: flex; gap: 8px; align-items: center; padding: 0px 12px; scroll-snap-type: x mandatory; scrollbar-width: none;\"><span style=\"background: rgba(255, 255, 255, 0.15); padding: 2px 8px; border-radius: 3px; font-size: 12px; font-family: ui-monospace, monospace; white-space: nowrap; flex-shrink: 0; scroll-snap-align: start;\">✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)</span><span style=\"background: rgba(255, 255, 255, 0.15); padding: 2px 8px; border-radius: 3px; font-size: 12px; font-family: ui-monospace, monospace; white-space: nowrap; flex-shrink: 0; scroll-snap-align: start;\">layout property animation: transition: height, padding-top, padding-bottom</span></div><div style=\"display: flex; align-items: center; gap: 2px; padding: 0px 8px; flex-shrink: 0;\"><button title=\"Toggle overlay visibility\" style=\"background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: white; font-size: 16px; cursor: pointer; padding: 0px 4px; opacity: 0.85; transition: opacity 0.15s;\">◉</button><button title=\"Dismiss banner\" style=\"background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: white; font-size: 18px; cursor: pointer; padding: 0px 4px;\">×</button></div></div>",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 36
+        }
+      }
+    ],
+    "detectorGlobals": {
+      "detect": "function",
+      "scan": "function"
+    },
+    "focus": {
+      "tag": "input",
+      "role": null,
+      "label": "在已选项中检索",
+      "text": "",
+      "treeItemText": "",
+      "treeItemClass": null
+    },
+    "relevantLines": [
+      "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。",
+      "仅反转已加载的可选节点；禁用项和树外已选键会保留。",
+      "仅反转当前已加载树中未禁用的可选节点，并保留禁用节点和树外已选键。",
+      "当前已选中 4 项。",
+      "全量加入需要 2 项，当前还可加入 1 项",
+      "已选数据权限清单",
+      "已选 4 项",
+      "保留下级继承授权",
+      "本地演示假设：仅向所选机构的直属下级继承；关闭后仅保留该机构自身权限。",
+      "当前已选 4 项",
+      "包含一个当前树中未加载的既有选中键",
+      "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+      "默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；初始预选 4 项并保留 1 个名额，便于体验新增操作，滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。",
+      "modelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。",
+      "selectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。",
+      "titles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。",
+      "filterPlaceholders\t[string, string]\t['输入机构名称/部门编码检索...', '在已选名单中检索...']\t左侧筛选匹配节点名称或部门编码；右侧筛选匹配标题、编码和状态。",
+      "maxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。",
+      "inheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。",
+      "inheritChildDescription\tstring\tundefined\t建议宿主提供经业务确认的具体继承范围和关闭后的影响；说明固定显示在复选框旁并通过 aria-describedby 关联。缺失或纯空白时显示配置提示并禁用开关，组件不推断权限语义。",
+      "change\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。",
+      "update:inheritChild\tvalue\t下级继承开关变化。",
+      "clear-all\t无\t通过中间“全部移除”清空非空列表后触发；包含未加载节点时须先确认。事件在 update:modelValue 与 change 之后发出。",
+      "LxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：",
+      "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+      "中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。",
+      "左侧树标题区始终提供“反选本树可选项”，它只反转当前已加载树中的未禁用节点，并保留禁用节点和树外已选键；无筛选时按钮下方会显示该操作范围，可访问说明也保留相同规则。左侧搜索有内容时另显示“全选筛选结果”和“反选筛选结果”；按节点名称或部门编码匹配可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，筛选批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+      "“全部加入”受上限或空树状态限制时，按钮旁显示需要加入的数量和剩余名额；按钮的 aria-describedby 保留完整原因，便于读屏用户了解无法操作的具体原因。",
+      "两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏树节点名称最多显示两行，超长文本以标题保留完整内容；编码和状态收在单行并省略超长值，不增加固定行高。虚拟行高在 360-420px 为 64px、359px 及以下为 80px，44px 触控控件与元数据各占独立网格行；视口跨断点时树会保留焦点行并重算滚动锚点。已选名称也会换行显示，列表可通过键盘聚焦并滚动查看。",
+      "inheritChildDescription 是可选展示属性，但权限宿主应提供经业务确认的具体继承对象和关闭后的影响。组件不会推断实际授权范围；缺失或纯空白时显示配置提示并禁用开关，说明始终邻近复选框且通过 aria-describedby 关联。Demo 可关闭“提供继承说明”检查此状态。",
+      "窄屏下待选标题、筛选批量操作与状态说明分行展示；“待选/已选”切换按钮显示两侧数量并可通过键盘操作，隐藏面板从辅助技术和焦点顺序中移除。文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。",
+      "单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。",
+      "change 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。",
+      "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，并使用名称/部门编码联合匹配；右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。筛选输入使用文本类型和搜索键盘提示，避免浏览器原生清除符号与自定义按钮重复。筛选清除按钮桌面点击区域为 32px，窄屏为 44px；窄屏树行的复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸保持 24×24px，两个控件占用独立网格列。已选列表可通过键盘聚焦并滚动查看；存在未显示内容时，列表外的状态提示会显示尚未完整进入视口的项数，通过 aria-describedby 关联到列表，并在滚动到底部后收起。移除单项后焦点移到下一项；若没有下一项则移到上一项，列表清空时回到列表容器。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+      "右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。中间穿梭按钮执行全量加入和移除；树标题区的全树反选与筛选结果反选分别明确标出操作范围。",
+      "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。确认期间如果 modelValue 的键或顺序发生变化，旧确认会失效并提示用户重新检查；仅以新数组引用传入相同键序列不会使确认失效。失效时不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+      "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能自动撤销；服务端补偿仍由宿主按真实 API 契约实现。"
+    ],
+    "bodyText": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\n本页导航\n交互示例\nProps\nEvents\n节点元数据\n选择规则\n宿主持久化与清空确认\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。\n\n交互示例\n​\n示例状态与主题\n已载入组织权限数据\n组织与数据权限树（待选）\n反选本树可选项\n仅反转已加载的可选节点；禁用项和树外已选键会保留。\n仅反转当前已加载树中未禁用的可选节点，并保留禁用节点和树外已选键。\n\n当前已选中 4 项。\n\n市公安局指挥中心\nORG-01\n正常\n情指行一体化研判调度专班\nDEPT-03\n正常\n交警直属特勤一中队\nTRF-101\n处理中\n站前路派出所综合作战室\nSUB-22\n忙碌\n受限巡检单位\nRESTRICTED\n停用\n待授权特勤支队\nUNIT-PENDING-01\n正常\n历史归档单位 02\nARCHIVE-02\n停用\n历史归档单位 03\nARCHIVE-03\n停用\n历史归档单位 04\nARCHIVE-04\n停用\n历史归档单位 05\nARCHIVE-05\n停用\n历史归档单位 06\nARCHIVE-06\n停用\n历史归档单位 07\nARCHIVE-07\n停用\n历史归档单位 08\nARCHIVE-08\n停用\n历史归档单位 09\nARCHIVE-09\n停用\n历史归档单位 10\nARCHIVE-10\n停用\n历史归档单位 11\nARCHIVE-11\n停用\n历史归档单位 12\nARCHIVE-12\n停用\n历史归档单位 13\nARCHIVE-13\n停用\n历史归档单位 14\nARCHIVE-14\n停用\n历史归档单位 15\nARCHIVE-15\n停用\n历史归档单位 16\nARCHIVE-16\n停用\n待选池：1420 个节点\n全部加入\n需加入 2 项；仅剩 1 个名额\n全量加入需要 2 项，当前还可加入 1 项\n全部移除\n已选数据权限清单\n市公安局指挥中心\nORG-01\n正常\n已选 4 项\n保留下级继承授权\n本地演示假设：仅向所选机构的直属下级继承；关闭后仅保留该机构自身权限。\n当前已选 4 项\n待选树 1,420 个节点\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；初始预选 4 项并保留 1 个名额，便于体验新增操作，滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\nselectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['输入机构名称/部门编码检索...', '在已选名单中检索...']\t左侧筛选匹配节点名称或部门编码；右侧筛选匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\ndefaultExpandedKeys\t(string | number)[]\t[]\t左侧树首次展开的节点键；后续展开/收起由树组件内部管理。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\ninheritChildDescription\tstring\tundefined\t建议宿主提供经业务确认的具体继承范围和关闭后的影响；说明固定显示在复选框旁并通过 aria-describedby 关联。缺失或纯空白时显示配置提示并禁用开关，组件不推断权限语义。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t通过中间“全部移除”清空非空列表后触发；包含未加载节点时须先确认。事件在 update:modelValue 与 change 之后发出。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”，其它值原样显示。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。\n\n选择规则\n​\n中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。\n左侧树标题区始终提供“反选本树可选项”，它只反转当前已加载树中的未禁用节点，并保留禁用节点和树外已选键；无筛选时按钮下方会显示该操作范围，可访问说明也保留相同规则。左侧搜索有内容时另显示“全选筛选结果”和“反选筛选结果”；按节点名称或部门编码匹配可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，筛选批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。\n“全部加入”受上限或空树状态限制时，按钮旁显示需要加入的数量和剩余名额；按钮的 aria-describedby 保留完整原因，便于读屏用户了解无法操作的具体原因。\n两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏树节点名称最多显示两行，超长文本以标题保留完整内容；编码和状态收在单行并省略超长值，不增加固定行高。虚拟行高在 360-420px 为 64px、359px 及以下为 80px，44px 触控控件与元数据各占独立网格行；视口跨断点时树会保留焦点行并重算滚动锚点。已选名称也会换行显示，列表可通过键盘聚焦并滚动查看。\ninheritChildDescription 是可选展示属性，但权限宿主应提供经业务确认的具体继承对象和关闭后的影响。组件不会推断实际授权范围；缺失或纯空白时显示配置提示并禁用开关，说明始终邻近复选框且通过 aria-describedby 关联。Demo 可关闭“提供继承说明”检查此状态。\n窄屏下待选标题、筛选批量操作与状态说明分行展示；“待选/已选”切换按钮显示两侧数量并可通过键盘操作，隐藏面板从辅助技术和焦点顺序中移除。文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。\n单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，并使用名称/部门编码联合匹配；右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。筛选输入使用文本类型和搜索键盘提示，避免浏览器原生清除符号与自定义按钮重复。筛选清除按钮桌面点击区域为 32px，窄屏为 44px；窄屏树行的复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸保持 24×24px，两个控件占用独立网格列。已选列表可通过键盘聚焦并滚动查看；存在未显示内容时，列表外的状态提示会显示尚未完整进入视口的项数，通过 aria-describedby 关联到列表，并在滚动到底部后收起。移除单项后焦点移到下一项；若没有下一项则移到上一项，列表清空时回到列表容器。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。中间穿梭按钮执行全量加入和移除；树标题区的全树反选与筛选结果反选分别明确标出操作范围。\n宿主持久化与清空确认\n​\n\n清空动作的事件顺序固定为 update:modelValue([])、change([], [])、clear-all。clear-all 是清空已发生后的通知，不是可取消的确认钩子。需要确认或撤销时，宿主应把组件绑定到本地草稿值，保存到后端时再提交；不要在 v-model 监听器中直接持久化每次变化。\n\n未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。确认期间如果 modelValue 的键或顺序发生变化，旧确认会失效并提示用户重新检查；仅以新数组引用传入相同键序列不会使确认失效。失效时不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：\n\nts\nconst draftKeys = ref<(string | number)[]>([...savedKeys.value])\nconst lastNonEmptyKeys = ref([...draftKeys.value])\nconst saving = ref(false)\nlet draftRevision = 0\n\nwatch(draftKeys, (keys) => {\n  if (keys.length) lastNonEmptyKeys.value = [...keys]\n})\n\nfunction updateDraftKeys(keys: (string | number)[]) {\n  if (saving.value) return\n  draftRevision += 1\n  draftKeys.value = [...keys]\n}\n\nfunction onClearAll() {\n  if (saving.value) return\n  const submittedKeys = [...draftKeys.value]\n  const restoreKeys = [...lastNonEmptyKeys.value]\n  const submittedRevision = draftRevision\n  saving.value = true\n  Promise.resolve()\n    .then(() => savePermissionKeys(submittedKeys))\n    .then(() => {\n      savedKeys.value = [...submittedKeys]\n    })\n    .catch(() => {\n      if (draftRevision === submittedRevision) {\n        draftRevision += 1\n        draftKeys.value = restoreKeys\n      }\n    })\n    .finally(() => {\n      saving.value = false\n    })\n}\nvue\n<div :aria-busy=\"saving\" :inert=\"saving\">\n  <LxTransferPanel\n    :model-value=\"draftKeys\"\n    @update:model-value=\"updateDraftKeys\"\n    @clear-all=\"onClearAll\"\n  />\n</div>\n\n面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能自动撤销；服务端补偿仍由宿主按真实 API 契约实现。\n\nPager\nPrevious page\nLxVirtualTree 虚拟树\nNext page\nLxStatusDot 状态点\nline length too long\nline length too long\nline length too long\nline length too long\nline length too long\nline length too long\nline length too long\nline length too long\nline length too long\nline length too long\nline length too long\nline length too long\nraster buried under a wash or opacity\nraster buried under a wash or opacity\nline length too long\ncards flush against the scroller edge\n✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×"
+  },
+  "detectorConsoleSummary": [
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "args": [
+        "%c[impeccable] 18 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "args": [
+        "%c[impeccable] 18 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 19 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "args": [
+        "%c[impeccable] 19 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "args": [
+        "%c[impeccable] 18 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    }
+  ],
+  "allConsoleEvents": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:4174/@vite/client",
+        "line": 494,
+        "column": 8,
+        "lineNumber": 494,
+        "columnNumber": 8
+      },
+      "args": [
+        "[vite] connecting..."
+      ]
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:4174/@vite/client",
+        "line": 617,
+        "column": 14,
+        "lineNumber": 617,
+        "columnNumber": 14
+      },
+      "args": [
+        "[vite] connected."
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8159,
+        "column": 12,
+        "lineNumber": 8159,
+        "columnNumber": 12
+      },
+      "args": [
+        "%c[impeccable] 18 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cedge-flush-cards%c 11 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cedge-flush-cards%c 11 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8169,
+        "column": 12,
+        "lineNumber": 8169,
+        "columnNumber": 12
+      },
+      "args": [
+        "console.groupEnd"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8159,
+        "column": 12,
+        "lineNumber": 8159,
+        "columnNumber": 12
+      },
+      "args": [
+        "%c[impeccable] 18 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cedge-flush-cards%c 11 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cedge-flush-cards%c 11 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8169,
+        "column": 12,
+        "lineNumber": 8169,
+        "columnNumber": 12
+      },
+      "args": [
+        "console.groupEnd"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 19 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8159,
+        "column": 12,
+        "lineNumber": 8159,
+        "columnNumber": 12
+      },
+      "args": [
+        "%c[impeccable] 19 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%ctext-overflow%c span.lx-transfer-panel__title overflows its box by 132px color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%ctext-overflow%c span.lx-transfer-panel__title overflows its box by 132px",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cedge-flush-cards%c 11 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cedge-flush-cards%c 11 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8169,
+        "column": 12,
+        "lineNumber": 8169,
+        "columnNumber": 12
+      },
+      "args": [
+        "console.groupEnd"
+      ]
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8159,
+        "column": 12,
+        "lineNumber": 8159,
+        "columnNumber": 12
+      },
+      "args": [
+        "%c[impeccable] 18 anti-patterns found",
+        "color: oklch(84% 0.19 80.46); font-weight: bold"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~108 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cburied-raster%c raster background at opacity 0",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cline-length%c ~110 chars/line (aim for <80)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cedge-flush-cards%c 11 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cedge-flush-cards%c 11 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46)",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8165,
+        "column": 16,
+        "lineNumber": 8165,
+        "columnNumber": 16
+      },
+      "args": [
+        "%clayout-transition%c transition: height, padding-top, padding-bottom",
+        "color: oklch(84% 0.19 80.46); font-weight: bold",
+        "color: inherit",
+        "ref: <Node>"
+      ]
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://127.0.0.1:8400/detect.js",
+        "line": 8169,
+        "column": 12,
+        "lineNumber": 8169,
+        "columnNumber": 12
+      },
+      "args": [
+        "console.groupEnd"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "errorResponses": []
+}

@@ -138,9 +138,17 @@
 
   .lx-cascader__popper .el-cascader-node,
   .lx-cascader__popper .el-cascader__suggestion-item {
-    height: 44px;
+    height: auto;
     min-height: 44px;
-    line-height: 44px;
+    line-height: 20px;
+    padding-block: 12px;
+  }
+
+  .lx-cascader__popper .el-cascader-node__label {
+    overflow: visible;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-overflow: clip;
   }
 
   .lx-cascader__popper .el-cascader-menu {

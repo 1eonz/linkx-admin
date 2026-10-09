@@ -1,0 +1,81 @@
+{
+  "targetUrl": "http://127.0.0.1:4182/components/lxdynamicform",
+  "browser": {
+    "version": "154.0.8037.95",
+    "contextIsolation": "newContext per viewport/scenario; no persistent user data directory"
+  },
+  "injectionCount": 1,
+  "viewCount": 1,
+  "checks": [
+    {
+      "name": "navigation-desktop",
+      "passed": true,
+      "details": {
+        "status": 200,
+        "url": "http://127.0.0.1:4182/components/lxdynamicform"
+      }
+    },
+    {
+      "name": "css-viewport-width-desktop",
+      "passed": true,
+      "details": {
+        "requested": 1440,
+        "innerWidth": 1440,
+        "visualViewportWidth": 1440,
+        "clientWidth": 1440,
+        "documentWidth": 1440
+      }
+    },
+    {
+      "name": "touch-emulation-desktop",
+      "passed": true,
+      "details": {
+        "maxTouchPoints": 0,
+        "pointerCoarse": false,
+        "hoverNone": false
+      }
+    },
+    {
+      "name": "detector-injection-desktop",
+      "passed": true,
+      "details": {
+        "label": "desktop",
+        "preflight": {
+          "titleSet": true,
+          "scriptInserted": true,
+          "scriptUrl": "http://127.0.0.1:8400/detect.js"
+        },
+        "detectorReady": true,
+        "requestSeen": true,
+        "previousTitle": "LxDynamicForm 动态表单 | LxUI"
+      }
+    },
+    {
+      "name": "browser-overlay-visible-desktop-light-initial",
+      "passed": true,
+      "details": {
+        "findingCount": 19,
+        "overlayVisible": 10
+      }
+    }
+  ],
+  "errors": [
+    {
+      "name": "TimeoutError",
+      "message": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button.VPSwitchAppearance:visible').first()\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" role=\"switch\" data-v-89b0efab=\"\" data-v-202a7c55=\"\" data-v-e78a847c=\"\" aria-checked=\"false\" title=\"Switch to dark theme\" class=\"VPSwitch VPSwitchAppearance\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"impeccable-overlay impeccable-banner\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"impeccable-overlay impeccable-banner\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    57 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"impeccable-overlay impeccable-banner\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+      "stack": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button.VPSwitchAppearance:visible').first()\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" role=\"switch\" data-v-89b0efab=\"\" data-v-202a7c55=\"\" data-v-e78a847c=\"\" aria-checked=\"false\" title=\"Switch to dark theme\" class=\"VPSwitch VPSwitchAppearance\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"impeccable-overlay impeccable-banner\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"impeccable-overlay impeccable-banner\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    57 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"impeccable-overlay impeccable-banner\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at run (F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-b-current-final\\capture-dynamicform.mjs:330:20)\n    at async file:///F:/work/linkx-admin/.impeccable/critique/wave4-dynamicform-2026-10-06/assessment-b-current-final/capture-dynamicform.mjs:446:3"
+    }
+  ],
+  "consoleErrors": 0,
+  "pageErrors": 0,
+  "failedRequests": 0,
+  "httpFailures": 0,
+  "networkGuard": null,
+  "screenshots": [
+    {
+      "file": "screenshots/desktop-light-initial.png",
+      "width": 1440,
+      "height": 1000
+    }
+  ]
+}

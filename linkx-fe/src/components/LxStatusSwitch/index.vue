@@ -4,14 +4,14 @@
  * 开关本体复用 LxSwitch（inline 文字模式），胶囊色彩/几何/焦点/触屏规格统一由
  * LxSwitch style.css 固化，本组件只保留业务值映射、确认拦截与只读 Tag。
  */
-import { computed, ref, type PropType, watch } from 'vue'
+import { computed, ref, type PropType, useAttrs, watch } from 'vue'
 import LxSwitch from '../LxSwitch/index.vue'
 import LxTag from '../LxTag/index.vue'
 import { hasPermission } from '../../permissions'
 import { lxConfirm } from '../LxConfirm'
 import type { LxStatusSwitchConfirmOptions, LxStatusSwitchProps } from './types'
 
-defineOptions({ name: 'LxStatusSwitch' })
+defineOptions({ inheritAttrs: false, name: 'LxStatusSwitch' })
 
 const props = defineProps({
   modelValue: {
@@ -36,6 +36,35 @@ const emit = defineEmits<{
   'update:modelValue': [value: boolean | number]
   change: [value: boolean | number]
 }>()
+const attrs = useAttrs()
+const wrapperAttrs = computed(() =>
+  Object.fromEntries(
+    Object.entries(attrs).filter(
+      ([key]) =>
+        ![
+          'aria-label',
+          'aria-labelledby',
+          'aria-describedby',
+          'aria-busy',
+        ].includes(key),
+    ),
+  ),
+)
+const accessibleLabel = computed(() =>
+  typeof attrs['aria-label'] === 'string'
+    ? attrs['aria-label']
+    : `${props.onText} / ${props.offText}`,
+)
+const accessibleLabelledby = computed(() =>
+  typeof attrs['aria-labelledby'] === 'string'
+    ? attrs['aria-labelledby']
+    : undefined,
+)
+const accessibleDescribedby = computed(() =>
+  typeof attrs['aria-describedby'] === 'string'
+    ? attrs['aria-describedby']
+    : undefined,
+)
 
 const isNumericModel = computed(() => typeof props.modelValue === 'number')
 const isOn = computed(() =>
@@ -73,12 +102,21 @@ async function beforeChange(): Promise<boolean> {
       typeof props.confirm === 'string'
         ? { message: props.confirm }
         : props.confirm
+    const message = [
+      options.message,
+      options.targetEntity ? `目标实体：${options.targetEntity}` : undefined,
+      options.impact ? `影响范围：${options.impact}` : undefined,
+      options.audit ? `审计记录：${options.audit}` : undefined,
+    ]
+      .filter((item): item is string => Boolean(item))
+      .join('\n')
     const confirmed = await lxConfirm({
       title: options.title ?? '确认关闭？',
-      message: options.message ?? '',
+      message,
       confirmText: options.confirmText ?? '确认关闭',
       cancelText: options.cancelText ?? '取消',
       danger: options.type !== 'warning',
+      customClass: options.customClass,
     })
     // 确认框打开期间宿主可能已完成另一笔保存、切换账号或撤销权限；
     // 此时丢弃旧确认结果，避免异步回写覆盖最新状态。
@@ -104,7 +142,7 @@ function onChange(value: string | number | boolean) {
 </script>
 
 <template>
-  <span class="lx-status-switch">
+  <span v-bind="wrapperAttrs" class="lx-status-switch">
     <LxTag
       v-if="showFallbackTag"
       class="lx-status-switch__fallback"
@@ -114,6 +152,8 @@ function onChange(value: string | number | boolean) {
       :aria-label="
         permissionAllowed ? `${stateLabel}（只读）` : '无权限，禁用/只读'
       "
+      :aria-labelledby="accessibleLabelledby"
+      :aria-describedby="accessibleDescribedby"
       >{{ permissionAllowed ? `${stateLabel}（只读）` : '禁用/只读' }}</LxTag
     >
     <LxSwitch
@@ -125,7 +165,9 @@ function onChange(value: string | number | boolean) {
       :inactive-text="offText"
       :before-change="beforeChange"
       :aria-busy="loading ? 'true' : undefined"
-      :aria-label="`${onText} / ${offText}`"
+      :aria-label="accessibleLabel"
+      :aria-labelledby="accessibleLabelledby"
+      :aria-describedby="accessibleDescribedby"
       @change="onChange"
     />
   </span>

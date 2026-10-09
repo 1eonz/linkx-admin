@@ -32,11 +32,18 @@
   font-size: 20px;
 }
 
-/* 危险确认主按钮：红底白字加粗（EP danger 按钮走 error 令牌） */
-.lx-confirm .lx-confirm__btn-danger {
+/* 危险确认按钮覆盖全局主按钮规则，并沿用危险底色上的高对比文字令牌。 */
+.lx-confirm.el-message-box
+  .el-message-box__btns
+  .el-button.el-button--primary.lx-confirm__btn-danger {
   --el-button-bg-color: var(--lx-color-error);
   --el-button-border-color: var(--lx-color-error);
-  --el-button-hover-bg-color: var(--lx-color-error-strong);
-  --el-button-hover-border-color: var(--lx-color-error-strong);
+  --el-button-hover-bg-color: var(--lx-color-danger-hover);
+  --el-button-hover-border-color: var(--lx-color-danger-hover);
+  --el-button-active-bg-color: var(--lx-color-danger-hover);
+  --el-button-active-border-color: var(--lx-color-danger-hover);
+  --el-button-text-color: var(--lx-color-on-danger);
+  --el-button-hover-text-color: var(--lx-color-on-danger);
+  --el-button-active-text-color: var(--lx-color-on-danger);
   font-weight: 600;
 }

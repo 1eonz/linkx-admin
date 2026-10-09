@@ -1,0 +1,1105 @@
+{
+  "name": "320-hud",
+  "viewport": {
+    "width": 320,
+    "height": 844,
+    "theme": "hud"
+  },
+  "responseStatus": 200,
+  "preflight": {
+    "titleChanged": true,
+    "scriptConnected": true,
+    "inlineExecuted": true
+  },
+  "scriptConnected": true,
+  "scanFunction": true,
+  "detectFunction": true,
+  "scan": {
+    "elementCount": 47,
+    "findingCount": 48,
+    "rules": {
+      "clipped-overflow-container": 1,
+      "cramped-padding": 5,
+      "ai-color-palette": 37,
+      "buried-raster": 3,
+      "bounce-easing": 1,
+      "layout-transition": 1
+    },
+    "entries": [
+      {
+        "path": [
+          "span.container",
+          "button.VPNavBarHamburger.hamburger",
+          "div.content-body",
+          "div.content"
+        ],
+        "findings": [
+          {
+            "type": "clipped-overflow-container",
+            "detail": "span.container clips a positioned child"
+          }
+        ]
+      },
+      {
+        "path": [
+          "div.transfer-panel-demo__preview.lx-theme-hud",
+          "div.transfer-panel-demo",
+          "div",
+          "div.vp-doc._components_lxtransferpanel"
+        ],
+        "findings": [
+          {
+            "type": "cramped-padding",
+            "detail": "<div> \"transfer-panel-demo__preview\": children flush against bg on left (no inset)"
+          }
+        ]
+      },
+      {
+        "path": [
+          "span.lx-transfer-panel__mobile-count",
+          "button",
+          "div.lx-transfer-panel__mobile-switch",
+          "section.lx-transfer-panel"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "span.lx-transfer-panel__mobile-count",
+          "button",
+          "div.lx-transfer-panel__mobile-switch",
+          "section.lx-transfer-panel"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "summary",
+          "details.lx-transfer-panel__scope-actions",
+          "header.lx-transfer-panel__header.lx-transfer-panel__header--source",
+          "div#lx-transfer-panel-161-source-panel.lx-transfer-panel__panel.is-mobile-hidden"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "svg",
+          "summary",
+          "details.lx-transfer-panel__scope-actions",
+          "header.lx-transfer-panel__header.lx-transfer-panel__header--source"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "path",
+          "svg",
+          "summary",
+          "details.lx-transfer-panel__scope-actions"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "button",
+          "div.lx-transfer-panel__scope-action-content",
+          "details.lx-transfer-panel__scope-actions",
+          "header.lx-transfer-panel__header.lx-transfer-panel__header--source"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree",
+          "div.lx-transfer-panel__tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "label.lx-virtual-tree__checkbox-control",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "input.lx-virtual-tree__checkbox",
+          "label.lx-virtual-tree__checkbox-control",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "path",
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "path",
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "span.lx-virtual-tree__label",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "span.lx-transfer-panel__node-meta",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree",
+          "div.lx-transfer-panel__tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "span.lx-virtual-tree__toggle-placeholder",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "label.lx-virtual-tree__checkbox-control",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "input.lx-virtual-tree__checkbox",
+          "label.lx-virtual-tree__checkbox-control",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "path",
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "path",
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "path",
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "path",
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "span.lx-virtual-tree__label",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "span.lx-transfer-panel__node-meta",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree",
+          "div.lx-transfer-panel__tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "span.lx-virtual-tree__toggle-placeholder",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "label.lx-virtual-tree__checkbox-control",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "input.lx-virtual-tree__checkbox",
+          "label.lx-virtual-tree__checkbox-control",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "path",
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "path",
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "path",
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "path",
+          "svg",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "span.lx-virtual-tree__label",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "span.lx-transfer-panel__node-meta",
+          "div.lx-virtual-tree__row.is-checked",
+          "div.lx-virtual-tree__viewport",
+          "section.lx-virtual-tree"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "li.lx-transfer-panel__selected-item",
+          "ul.lx-transfer-panel__selected.has-overflow",
+          "div.lx-transfer-panel__selected-wrap",
+          "div#lx-transfer-panel-161-selected-panel.lx-transfer-panel__panel"
+        ],
+        "findings": [
+          {
+            "type": "cramped-padding",
+            "detail": "<li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset)"
+          }
+        ]
+      },
+      {
+        "path": [
+          "li.lx-transfer-panel__selected-item",
+          "ul.lx-transfer-panel__selected.has-overflow",
+          "div.lx-transfer-panel__selected-wrap",
+          "div#lx-transfer-panel-161-selected-panel.lx-transfer-panel__panel"
+        ],
+        "findings": [
+          {
+            "type": "cramped-padding",
+            "detail": "<li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset)"
+          }
+        ]
+      },
+      {
+        "path": [
+          "li.lx-transfer-panel__selected-item",
+          "ul.lx-transfer-panel__selected.has-overflow",
+          "div.lx-transfer-panel__selected-wrap",
+          "div#lx-transfer-panel-161-selected-panel.lx-transfer-panel__panel"
+        ],
+        "findings": [
+          {
+            "type": "cramped-padding",
+            "detail": "<li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset)"
+          }
+        ]
+      },
+      {
+        "path": [
+          "li.lx-transfer-panel__selected-item",
+          "ul.lx-transfer-panel__selected.has-overflow",
+          "div.lx-transfer-panel__selected-wrap",
+          "div#lx-transfer-panel-161-selected-panel.lx-transfer-panel__panel"
+        ],
+        "findings": [
+          {
+            "type": "cramped-padding",
+            "detail": "<li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top (no inset)"
+          }
+        ]
+      },
+      {
+        "path": [
+          "strong",
+          "span.lx-transfer-panel__selected-count",
+          "footer.lx-transfer-panel__footer",
+          "div#lx-transfer-panel-161-selected-panel.lx-transfer-panel__panel"
+        ],
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "detail": "Cyan neon text on dark background"
+          }
+        ]
+      },
+      {
+        "path": [
+          "button.copy",
+          "div.language-vue.vp-adaptive-theme",
+          "details.details.custom-block",
+          "div"
+        ],
+        "findings": [
+          {
+            "type": "buried-raster",
+            "detail": "raster background at opacity 0"
+          }
+        ]
+      },
+      {
+        "path": [
+          "button.copy",
+          "div.language-ts.vp-adaptive-theme",
+          "div",
+          "div.vp-doc._components_lxtransferpanel"
+        ],
+        "findings": [
+          {
+            "type": "buried-raster",
+            "detail": "raster background at opacity 0"
+          }
+        ]
+      },
+      {
+        "path": [
+          "button.copy",
+          "div.language-vue.vp-adaptive-theme",
+          "div",
+          "div.vp-doc._components_lxtransferpanel"
+        ],
+        "findings": [
+          {
+            "type": "buried-raster",
+            "detail": "raster background at opacity 0"
+          }
+        ]
+      },
+      {
+        "path": [
+          "body",
+          "html"
+        ],
+        "findings": [
+          {
+            "type": "bounce-easing",
+            "detail": "cubic-bezier(.71, -.46, .29, 1.46)"
+          },
+          {
+            "type": "layout-transition",
+            "detail": "transition: height, padding-top, padding-bottom"
+          }
+        ]
+      }
+    ]
+  },
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 47 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "log",
+      "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <div> \"transfer-panel-demo__preview\": children flush against bg on left (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 47 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "log",
+      "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <div> \"transfer-panel-demo__preview\": children flush against bg on left (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top/bottom (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%ccramped-padding%c <li> \"lx-transfer-panel__selected-item\": children flush against border+bg on top (no inset) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cai-color-palette%c Cyan neon text on dark background color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "badResponses": [],
+  "screenshot": ".impeccable\\critique\\wave7-transferpanel-2026-10-09\\assessment-b-selected-item-density\\browser\\overlay-screenshots\\320-hud.png"
+}

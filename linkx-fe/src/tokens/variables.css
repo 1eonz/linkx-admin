@@ -102,10 +102,10 @@
   --lx-color-text-main: #303133; /* 复选项等基础控件正文色（标本八件套） */
   --lx-text-regular: #4e5969; /* 正文、表格行 */
   --lx-text-label: #606266; /* 表单字段标签（标本八件套，弱于正文一档保证层级） */
-  --lx-text-secondary: #86909c; /* 辅助说明、时间戳 */
+  --lx-text-secondary: #6b7280; /* 白色表面上的辅助说明与时间戳，保证普通文本对比度 */
   --lx-text-secondary-strong: #606266; /* 白底上的辅助说明，保证 4.5:1 以上对比度 */
   --lx-color-on-input: #4e5969; /* 浅色输入表面上的正文与计数文字 */
-  --lx-text-placeholder: #c9cdd4;
+  --lx-text-placeholder: #6b7280; /* 浅色控件占位文字，满足白色表面上的文本对比度 */
   --lx-text-on-dark: #ffffff;
   --lx-color-success-text: #3f7e23; /* 成功浅底上的小字号文字 */
 
@@ -140,6 +140,8 @@
   --lx-table-header-height: 40px;
   --lx-tree-item-height: 32px;
   --lx-tree-indent: 16px;
+  /* 树节点视觉复选框尺寸；点击容器另按桌面/触屏目标尺寸处理。 */
+  --lx-tree-checkbox-size: 14px;
   --lx-scrollbar-width: 4px;
 
   /* ========== 间距（4/8/12/16/24 五档，禁止杂值） ========== */

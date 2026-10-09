@@ -8,6 +8,9 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'LxUI',
   description: 'LinkX 业务组件库 · Vue3 + Element Plus 二次封装 · 设计令牌驱动',
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+  ],
   vite: {
     // 关键：阻止 vitepress 加载根目录 vite.config.ts，避免 vue 插件重复注册
     // （重复注册会导致所有 .vue 被 transform 两次 → "At least one <template> or <script> is required"）

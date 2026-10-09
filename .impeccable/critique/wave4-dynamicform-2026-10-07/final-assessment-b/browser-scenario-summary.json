@@ -1,0 +1,412 @@
+{
+  "detectorTargets": 6,
+  "detectorStaticZeroHitCount": 6,
+  "scenarios": [
+    {
+      "scenario": "dform-desktop-light-default",
+      "navigationStatus": 200,
+      "heading": "LxDynamicForm 动态表单\n​",
+      "overlayRan": true,
+      "findingCount": 18,
+      "screenshot": {
+        "path": "screenshots/dform-desktop-light-default.png",
+        "dimensions": {
+          "width": 1440,
+          "height": 900
+        },
+        "matchesViewport": true,
+        "overlayIncluded": true,
+        "unmodifiedPng": true
+      },
+      "externalAttemptCount": 0,
+      "consoleErrorCount": null,
+      "pageErrorCount": 0,
+      "interaction": {
+        "demoVisible": true,
+        "theme": "light-default"
+      },
+      "postCaptureInteraction": null,
+      "errors": [],
+      "workflowStatus": "complete",
+      "findingGroupCount": 17,
+      "screenshotDimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "externalRequestAttempts": 0,
+      "httpErrors": 0
+    },
+    {
+      "scenario": "dform-desktop-hud-field-failure",
+      "navigationStatus": 200,
+      "heading": "LxDynamicForm 动态表单\n​",
+      "overlayRan": true,
+      "findingCount": 365,
+      "screenshot": {
+        "path": "screenshots/dform-desktop-hud-field-failure.png",
+        "dimensions": {
+          "width": 1440,
+          "height": 900
+        },
+        "matchesViewport": true,
+        "overlayIncluded": true,
+        "unmodifiedPng": true
+      },
+      "externalAttemptCount": 0,
+      "consoleErrorCount": null,
+      "pageErrorCount": 0,
+      "interaction": {
+        "themeChanged": true,
+        "failureModeSelected": true,
+        "fieldFailureVisible": true,
+        "fieldFailureText": "候选人员读取失败"
+      },
+      "postCaptureInteraction": null,
+      "errors": [],
+      "attempt1": {
+        "overlayRan": false,
+        "errors": [
+          "TimeoutError: locator.check: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.dynamic-form-demo__settings').getByRole('checkbox', { name: /文档站整体深色/ })\u001b[22m\n\u001b[2m    - locator resolved to <input type=\"checkbox\" class=\"el-checkbox__original\"/>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    58 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+        ],
+        "screenshot": {
+          "path": "screenshots/dform-desktop-hud-field-failure.png",
+          "dimensions": {
+            "width": 1440,
+            "height": 900
+          },
+          "matchesViewport": true,
+          "overlayIncluded": false,
+          "unmodifiedPng": true
+        }
+      },
+      "retrySucceeded": true,
+      "workflowStatus": "complete",
+      "findingGroupCount": 364,
+      "screenshotDimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "externalRequestAttempts": 0,
+      "httpErrors": 0
+    },
+    {
+      "scenario": "upload-desktop-light",
+      "navigationStatus": 200,
+      "heading": "LxUpload 文件上传\n​",
+      "overlayRan": true,
+      "findingCount": 10,
+      "screenshot": {
+        "path": "screenshots/upload-desktop-light.png",
+        "dimensions": {
+          "width": 1440,
+          "height": 900
+        },
+        "matchesViewport": true,
+        "overlayIncluded": true,
+        "unmodifiedPng": true
+      },
+      "externalAttemptCount": 0,
+      "consoleErrorCount": null,
+      "pageErrorCount": 0,
+      "interaction": {
+        "demoVisible": true,
+        "theme": "light-default",
+        "uploadIdle": true
+      },
+      "postCaptureInteraction": null,
+      "errors": [],
+      "workflowStatus": "complete",
+      "findingGroupCount": 10,
+      "screenshotDimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "externalRequestAttempts": 0,
+      "httpErrors": 0
+    },
+    {
+      "scenario": "upload-desktop-hud",
+      "navigationStatus": 200,
+      "heading": "LxUpload 文件上传\n​",
+      "overlayRan": true,
+      "findingCount": 166,
+      "screenshot": {
+        "path": "screenshots/upload-desktop-hud.png",
+        "dimensions": {
+          "width": 1440,
+          "height": 900
+        },
+        "matchesViewport": true,
+        "overlayIncluded": true,
+        "unmodifiedPng": true
+      },
+      "externalAttemptCount": 0,
+      "consoleErrorCount": null,
+      "pageErrorCount": 0,
+      "interaction": {
+        "demoVisible": true,
+        "themeChanged": true,
+        "theme": "hud"
+      },
+      "postCaptureInteraction": null,
+      "errors": [],
+      "workflowStatus": "complete",
+      "findingGroupCount": 166,
+      "screenshotDimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "externalRequestAttempts": 0,
+      "httpErrors": 0
+    },
+    {
+      "scenario": "upload-mobile-375x812-progress-cancel",
+      "navigationStatus": 200,
+      "heading": "LxUpload 文件上传\n​",
+      "overlayRan": true,
+      "findingCount": 4,
+      "screenshot": {
+        "path": "screenshots/upload-mobile-375x812-progress-cancel.png",
+        "dimensions": {
+          "width": 375,
+          "height": 812
+        },
+        "matchesViewport": true,
+        "overlayIncluded": true,
+        "unmodifiedPng": true
+      },
+      "externalAttemptCount": 0,
+      "consoleErrorCount": null,
+      "pageErrorCount": 0,
+      "interaction": {
+        "autoUpload": true,
+        "cancelVisible": true,
+        "progressValue": "20",
+        "fileName": "schedule.csv"
+      },
+      "postCaptureInteraction": {
+        "cancelClicked": false,
+        "cancelCount": "0",
+        "lastAction": "schedule.csv 上传成功"
+      },
+      "errors": [],
+      "workflowStatus": "partial",
+      "workflowNote": "首帧记录进度值 20 且取消按钮可见，但 overlay 扫描耗时期间 Mock 上传完成；随后取消没有触发，最终截图显示成功态。",
+      "findingGroupCount": 4,
+      "screenshotDimensions": {
+        "width": 375,
+        "height": 812
+      },
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "externalRequestAttempts": 0,
+      "httpErrors": 0
+    },
+    {
+      "scenario": "datepicker-desktop-light-open-range",
+      "navigationStatus": 200,
+      "heading": "LxDatePicker 日期选择器\n​",
+      "overlayRan": true,
+      "findingCount": 24,
+      "screenshot": {
+        "path": "screenshots/datepicker-desktop-light-open-range.png",
+        "dimensions": {
+          "width": 1440,
+          "height": 900
+        },
+        "matchesViewport": true,
+        "overlayIncluded": true,
+        "unmodifiedPng": true
+      },
+      "externalAttemptCount": 0,
+      "consoleErrorCount": null,
+      "pageErrorCount": 0,
+      "interaction": {
+        "panelVisible": false,
+        "theme": "light",
+        "openRange": true
+      },
+      "postCaptureInteraction": null,
+      "errors": [],
+      "workflowStatus": "complete",
+      "visualStateNote": "可见原始截图显示区间面板打开；Playwright 可见性 locator 返回 false，与页面像素证据矛盾，按截图核验为打开态并记录该探针误差。",
+      "findingGroupCount": 23,
+      "screenshotDimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "externalRequestAttempts": 0,
+      "httpErrors": 0
+    },
+    {
+      "scenario": "datepicker-desktop-hud-open-range",
+      "navigationStatus": 200,
+      "heading": "LxDatePicker 日期选择器\n​",
+      "overlayRan": true,
+      "findingCount": 50,
+      "screenshot": {
+        "path": "screenshots/datepicker-desktop-hud-open-range.png",
+        "dimensions": {
+          "width": 1440,
+          "height": 900
+        },
+        "matchesViewport": true,
+        "overlayIncluded": true,
+        "unmodifiedPng": true
+      },
+      "externalAttemptCount": 0,
+      "consoleErrorCount": null,
+      "pageErrorCount": 0,
+      "interaction": {
+        "themeChanged": true,
+        "panelVisible": false,
+        "theme": "hud",
+        "openRange": true
+      },
+      "postCaptureInteraction": null,
+      "errors": [],
+      "workflowStatus": "complete",
+      "visualStateNote": "可见原始截图显示区间面板打开；Playwright 可见性 locator 返回 false，与页面像素证据矛盾，按截图核验为打开态并记录该探针误差。",
+      "findingGroupCount": 49,
+      "screenshotDimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "externalRequestAttempts": 0,
+      "httpErrors": 0
+    },
+    {
+      "scenario": "datepicker-mobile-375x812-touch-popup",
+      "navigationStatus": 200,
+      "heading": "LxDatePicker 日期选择器\n​",
+      "overlayRan": true,
+      "findingCount": 18,
+      "screenshot": {
+        "path": "screenshots/datepicker-mobile-375x812-touch-popup.png",
+        "dimensions": {
+          "width": 375,
+          "height": 812
+        },
+        "matchesViewport": true,
+        "overlayIncluded": true,
+        "unmodifiedPng": true
+      },
+      "externalAttemptCount": 0,
+      "consoleErrorCount": null,
+      "pageErrorCount": 0,
+      "interaction": {
+        "panelVisible": false,
+        "interaction": "touch-tap",
+        "geometry": {
+          "panel": {
+            "x": 27,
+            "y": 214,
+            "width": 322,
+            "height": 363,
+            "right": 349,
+            "bottom": 577
+          },
+          "trigger": {
+            "x": 53,
+            "y": 157,
+            "width": 269,
+            "height": 44,
+            "right": 322,
+            "bottom": 201
+          },
+          "viewport": {
+            "width": 375,
+            "height": 812
+          },
+          "panelWithinViewport": true,
+          "panelClass": "el-picker-panel el-date-range-picker single-panel",
+          "monthHeaderCount": 0
+        }
+      },
+      "postCaptureInteraction": null,
+      "errors": [],
+      "workflowStatus": "complete",
+      "visualStateNote": "可见原始截图显示区间面板打开；Playwright 可见性 locator 返回 false，与页面像素证据矛盾，按截图核验为打开态并记录该探针误差。",
+      "findingGroupCount": 17,
+      "screenshotDimensions": {
+        "width": 375,
+        "height": 812
+      },
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "externalRequestAttempts": 0,
+      "httpErrors": 0
+    }
+  ],
+  "overlayRanCount": 8,
+  "allTargetNavigation200": true,
+  "allTargetViewportsMatched": true,
+  "runtime": {
+    "package": "F:\\work\\linkx-admin\\other-admin\\admin-vue3\\node_modules\\.pnpm\\@playwright+test@1.58.0\\node_modules\\@playwright\\test\\index.js",
+    "browserVersion": "149.0.7827.55",
+    "executablePath": "C:/Users/Administrator/AppData/Local/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-win64/chrome-headless-shell.exe",
+    "launchMethod": "Playwright Chromium API with the installed Playwright headless-shell executablePath; default Chromium 1208 was unavailable during installation.",
+    "headless": true
+  },
+  "serverLifecycle": {
+    "startMethod": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs\" --background",
+    "stopMethod": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs\" stop --keep-inject",
+    "startAttempts": [
+      {
+        "attempt": 1,
+        "command": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs\" --background",
+        "exitCode": 0,
+        "spawnError": null,
+        "port": 8400,
+        "stdout": "{\"pid\":17652,\"port\":8400,\"token\":\"[redacted]\"}\n",
+        "stderr": ""
+      }
+    ],
+    "port": 8400,
+    "portHealthBeforeStop": {
+      "reachable": true,
+      "status": 200
+    },
+    "stopExitCode": 0,
+    "portHealthAfterStop": {
+      "reachable": false,
+      "error": "TypeError: fetch failed"
+    },
+    "stopped": true,
+    "stopStdout": "Stopped live server on port 8400.\n",
+    "stopStderr": ""
+  },
+  "sourceIntegrity": {
+    "unchanged": true,
+    "changedTargets": [],
+    "targetCount": 6
+  },
+  "overlayScenarioCount": 8,
+  "overlayPassedCount": 8,
+  "workflowsPartial": [
+    {
+      "scenario": "upload-mobile-375x812-progress-cancel",
+      "note": "首帧记录进度值 20 且取消按钮可见，但 overlay 扫描耗时期间 Mock 上传完成；随后取消没有触发，最终截图显示成功态。"
+    }
+  ]
+}

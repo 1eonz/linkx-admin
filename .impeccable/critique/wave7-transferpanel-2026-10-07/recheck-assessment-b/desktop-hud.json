@@ -1,0 +1,436 @@
+{
+  "title": "[Human] LxTransferPanel recheck B",
+  "readyState": "complete",
+  "bodyText": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\n本页导航\n交互示例\nProps\nEvents\n节点元数据\n选择规则\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。\n\n交互示例\n​\n正常数据\n空结果\n加载中\n加载失败\n最多 5 项\nHUD 深色主题\n\n已载入组织权限数据\n\n组织与数据权限树（待选）\n全选\n/\n反选\n市公安局指挥中心\nORG-01\n正常\n待选池：5 个节点\n已选数据权限清单\n清空\n情指行一体化研判调度专班\nDEPT-03\n正常\nlegacy-unit-08\n已选 2 项\n保留下级继承授权\n当前已选 2 项\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配单位...', '在已选名单中检索...']\t左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t用户通过右侧清空或中间全部移除清空非空列表时触发。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表使用同一节点类型，因此暂未加载到当前树中的键仍能显示键名并移除；组件不会为未加载键臆造 code 或 status。\n\n选择规则\n​\n左侧“全选”和中间向右按钮会加入当前树中所有未禁用节点；上限不足时不做部分写入。\n左侧“反选”针对当前已加载树中的所有未禁用节点，不受树内搜索结果限制。树外既有键和禁用节点保持原值；选中数量超过上限时拒绝会增加数量的反选。\n单个禁用树节点不能从左侧新增。右侧删除和清空仍可移除已存在的节点，包括暂时不在当前树中的键。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例使用遮罩保留双栏上下文。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。\nPager\nPrevious page\nLxVirtualTree 虚拟树\nNext page\nLxStatusDot 状态点\nline length too long\ncramped padding\ncards flush against the scroller edge\n✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+  "layoutRect": {
+    "x": 376.5,
+    "y": 453,
+    "width": 688,
+    "height": 380
+  },
+  "gridTemplateColumns": "276.656px 110.672px 276.656px",
+  "gridTemplateRows": "380px",
+  "panelRects": [
+    {
+      "x": 376.5,
+      "y": 453,
+      "width": 276.65625,
+      "height": 380
+    },
+    {
+      "x": 787.828125,
+      "y": 453,
+      "width": 276.65625,
+      "height": 380
+    }
+  ],
+  "panelRows": [
+    "36px 45px 265px 32px",
+    "36px 45px 265px 32px"
+  ],
+  "controls": [
+    {
+      "aria": "全部加入",
+      "title": "全部加入",
+      "disabled": false,
+      "rect": {
+        "x": 702.484375,
+        "y": 603,
+        "width": 36,
+        "height": 36
+      }
+    },
+    {
+      "aria": "全部移除",
+      "title": "全部移除",
+      "disabled": false,
+      "rect": {
+        "x": 702.484375,
+        "y": 647,
+        "width": 36,
+        "height": 36
+      }
+    }
+  ],
+  "selectedItems": [
+    {
+      "text": "情指行一体化研判调度专班\nDEPT-03\n正常",
+      "rect": {
+        "x": 796.828125,
+        "y": 543,
+        "width": 258.65625,
+        "height": 34
+      }
+    },
+    {
+      "text": "legacy-unit-08",
+      "rect": {
+        "x": 796.828125,
+        "y": 589,
+        "width": 258.65625,
+        "height": 34
+      }
+    }
+  ],
+  "buttons": [
+    {
+      "text": "搜索文档\nK",
+      "aria": "搜索文档",
+      "disabled": false,
+      "rect": {
+        "x": 304,
+        "y": 12,
+        "width": 159,
+        "height": 40
+      }
+    },
+    {
+      "text": "",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 1353,
+        "y": 21,
+        "width": 40,
+        "height": 22
+      }
+    },
+    {
+      "text": "",
+      "aria": "extra navigation",
+      "disabled": false,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      }
+    },
+    {
+      "text": "",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      }
+    },
+    {
+      "text": "",
+      "aria": "mobile navigation",
+      "disabled": false,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      }
+    },
+    {
+      "text": "菜单",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      }
+    },
+    {
+      "text": "本页导航",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      }
+    },
+    {
+      "text": "正常数据",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 376.5,
+        "y": 375,
+        "width": 70,
+        "height": 34
+      }
+    },
+    {
+      "text": "空结果",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 450.5,
+        "y": 375,
+        "width": 57,
+        "height": 34
+      }
+    },
+    {
+      "text": "加载中",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 511.5,
+        "y": 375,
+        "width": 57,
+        "height": 34
+      }
+    },
+    {
+      "text": "加载失败",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 572.5,
+        "y": 375,
+        "width": 70,
+        "height": 34
+      }
+    },
+    {
+      "text": "全选",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 566.203125,
+        "y": 447.5,
+        "width": 30.40625,
+        "height": 48
+      }
+    },
+    {
+      "text": "反选",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 609.75,
+        "y": 447.5,
+        "width": 30.40625,
+        "height": 48
+      }
+    },
+    {
+      "text": "",
+      "aria": "展开节点",
+      "disabled": false,
+      "rect": {
+        "x": 385.5,
+        "y": 540,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "text": "",
+      "aria": "全部加入",
+      "disabled": false,
+      "rect": {
+        "x": 702.484375,
+        "y": 603,
+        "width": 36,
+        "height": 36
+      }
+    },
+    {
+      "text": "",
+      "aria": "全部移除",
+      "disabled": false,
+      "rect": {
+        "x": 702.484375,
+        "y": 647,
+        "width": 36,
+        "height": 36
+      }
+    },
+    {
+      "text": "清空",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 1001.484375,
+        "y": 457.5,
+        "width": 50,
+        "height": 28
+      }
+    },
+    {
+      "text": "",
+      "aria": "移除 情指行一体化研判调度专班",
+      "disabled": false,
+      "rect": {
+        "x": 1014.484375,
+        "y": 544,
+        "width": 32,
+        "height": 32
+      }
+    },
+    {
+      "text": "",
+      "aria": "移除 legacy-unit-08",
+      "disabled": false,
+      "rect": {
+        "x": 1014.484375,
+        "y": 590,
+        "width": 32,
+        "height": 32
+      }
+    },
+    {
+      "text": "",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 995.5,
+        "y": 982,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "text": "◉",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 1369.640625,
+        "y": 6,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "text": "×",
+      "aria": null,
+      "disabled": false,
+      "rect": {
+        "x": 1395.640625,
+        "y": 6,
+        "width": 21.359375,
+        "height": 24
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "aria": null,
+      "value": "on",
+      "rect": {
+        "x": 654.5,
+        "y": 385.5,
+        "width": 13,
+        "height": 13
+      }
+    },
+    {
+      "aria": null,
+      "value": "on",
+      "rect": {
+        "x": 744.71875,
+        "y": 385.5,
+        "width": 13,
+        "height": 13
+      }
+    },
+    {
+      "aria": "筛选待选节点",
+      "value": "",
+      "rect": {
+        "x": 403.5,
+        "y": 500,
+        "width": 240.65625,
+        "height": 24
+      }
+    },
+    {
+      "aria": "选择 市公安局指挥中心",
+      "value": "on",
+      "rect": {
+        "x": 417.5,
+        "y": 540,
+        "width": 22.3125,
+        "height": 24
+      }
+    },
+    {
+      "aria": "在已选项中检索",
+      "value": "",
+      "rect": {
+        "x": 814.828125,
+        "y": 500,
+        "width": 240.65625,
+        "height": 24
+      }
+    },
+    {
+      "aria": null,
+      "value": "on",
+      "rect": {
+        "x": 917.484375,
+        "y": 809.5,
+        "width": 0,
+        "height": 0
+      }
+    }
+  ],
+  "status": "已载入组织权限数据",
+  "selectedCount": "当前已选 2 项",
+  "activeElement": {
+    "tag": "BODY",
+    "aria": null,
+    "text": "Skip to contentLxUI搜索文档K Main Navigation 首页组件新增组件Appearance菜单本页导航 Sidebar Navigation 新增组件新增组件总览基础基础控件桥接LxButton 按钮LxIcon 图标总览布局导航LxSidebar 侧边栏LxNavbar 顶部导航LxBreadcrumb 面包屑LxTabsBar 页签栏LxSplitLayout 分栏布局LxSelectTree 组织树选择数据展示表格、分页与详情LxProTable 数据表格LxPagination 分页LxDescriptions 详情描述页面与指标LxPageCard 页面容器LxMetricCard 指标卡LxSectionTitle 区块标题日历与组织LxDutyCalendar 排班日历LxAuthImg 鉴权图片LxVirtualTree 虚拟树LxTransferPanel 双栏穿梭状态与辅助LxStatusDot 状态点LxTag 浅底标签LxNodeBadge 节点徽章LxEmpty 空态图形与操作LxCodeSlot 代码槽LxActionButtons 行内操作LxGauge 圆环仪表权限消费数据录入表单与基础字段LxForm 表单LxInput 输入框LxTextarea 文本域LxInputNumber 数字输入LxPasswordInput 密码输入框选项控件LxRadio 单选组LxCheckbox 复选组LxSwitch 开关LxSelect 下拉选择树形与日期选择LxTreeSelect 树形下拉LxCascader 级联选择LxDatePicker 日期选择检索与复杂字段LxSearchBar 检索面板LxDynamicForm 动态表单LxStatusSwitch 状态开关LxUpload 文件上传LxSelectPagination 远程分页选择反馈与浮层LxMessage 全局提示LxConfirm 确认框LxDialog 表单弹窗LxDrawer 详情抽屉LxFormErrorBanner 校验横幅本页导航交互示例PropsEvents节点元数据选择规则LxTransferPanel 双栏穿梭 ​把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。交互示例 ​ 正常数据  空结果  加载中  加载失败  最多 5 项 HUD 深色主题已载入组织权限数据组织与数据权限树（待选） 全选 / 反选 市公安局指挥中心ORG-01 正常 待选池：5 个节点 已选数据权限清单清空  情指行一体化研判调度专班DEPT-03正常 legacy-unit-08已选 2 项保留下级继承授权当前已选 2 项包含一个当前树中未加载的既有选中键 数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。 查看示例代码vue<script setup lang=\"ts\">\nimport { computed, ref } from 'vue'\nimport { LxTransferPanel, type LxTransferPanelNode } from '../../../index'\n\ntype HostState = 'ready' | 'loading' | 'error' | 'empty'\n\nconst hostState = ref<HostState>('ready')\nconst selectedKeys = ref<(string | number)[]>(['unit-01', 'legacy-unit-08'])\nconst maxCountEnabled = ref(true)\nconst darkTheme = ref(false)\nconst inheritChild = ref(true)\nconst lastAction = ref('已载入组织权限数据')\n\nconst treeData: LxTransferPanelNode[] = [\n  {\n    id: 'org-01',\n    label: '市公安局指挥中心',\n    code: 'ORG-01',\n    status: 'online',\n    statusTone: 'success',\n    children: [\n      {\n        id: 'unit-01',\n        label: '情指行一体化研判调度专班',\n        code: 'DEPT-03',\n        status: 'online',\n        statusTone: 'success',\n      },\n      {\n        id: 'unit-02',\n        label: '交警直属特勤一中队',\n        code: 'TRF-101',\n        status: 'processing',\n        statusTone: 'processing',\n      },\n      {\n        id: 'unit-03',\n        label: '站前路派出所综合作战室',\n        code: 'SUB-22',\n        status: 'busy',\n        statusTone: 'warning',\n      },\n      {\n        id: 'unit-locked',\n        label: '受限巡检单位',\n        code: 'RESTRICTED',\n        status: 'offline',\n        statusTone: 'offline',\n        disabled: true,\n      },\n    ],\n  },\n]\n\nconst visibleTreeData = computed(() =>\n  hostState.value === 'empty' ? [] : treeData,\n)\n\nfunction setHostState(state: HostState) {\n  hostState.value = state\n  lastAction.value = {\n    ready: '已载入组织权限数据',\n    loading: '宿主正在加载组织权限数据',\n    error: '组织权限数据加载失败，可重试',\n    empty: '宿主返回了空树数据',\n  }[state]\n}\n\nfunction onChange(keys: (string | number)[], nodes: LxTransferPanelNode[]) {\n  lastAction.value = `选中 ${keys.length} 项；当前树中可解析 ${nodes.length} 个节点`\n}\n\nfunction onClearAll() {\n  lastAction.value = '已清空全部选中项'\n}\n\nfunction onInheritChange(value: boolean) {\n  inheritChild.value = value\n  lastAction.value = value ? '已保留下级继承授权' : '已关闭下级继承授权'\n}\n</script>\n\n<template>\n  <div class=\"transfer-panel-demo\" :class=\"{ 'lx-theme-hud': darkTheme }\">\n    <div\n      class=\"transfer-panel-demo__toolbar\"\n      role=\"group\"\n      aria-label=\"宿主数据状态\"\n    >\n      <button\n        type=\"button\"\n        :aria-pressed=\"hostState === 'ready'\"\n        @click=\"setHostState('ready')\"\n      >\n        正常数据\n      </button>\n      <button\n        type=\"button\"\n        :aria-pressed=\"hostState === 'empty'\"\n        @click=\"setHostState('empty')\"\n      >\n        空结果\n      </button>\n      <button\n        type=\"button\"\n        :aria-pressed=\"hostState === 'loading'\"\n        @click=\"setHostState('loading')\"\n      >\n        加载中\n      </button>\n      <button\n        type=\"button\"\n        :aria-pressed=\"hostState === 'error'\"\n        @click=\"setHostState('error')\"\n      >\n        加载失败\n      </button>\n      <label\n        ><input v-model=\"maxCountEnabled\" type=\"checkbox\" /> 最多 5 项</label\n      >\n      <label><input v-model=\"darkTheme\" type=\"checkbox\" /> HUD 深色主题</label>\n    </div>\n\n    <p\n      class=\"transfer-panel-demo__status\"\n      data-testid=\"transfer-status\"\n      aria-live=\"polite\"\n    >\n      {{ lastAction }}\n    </p>\n\n    <div\n      class=\"transfer-panel-demo__surface\"\n      :class=\"{\n        'is-blocked': hostState === 'loading' || hostState === 'error',\n      }\"\n      :aria-busy=\"hostState === 'loading' ? 'true' : undefined\"\n    >\n      <LxTransferPanel\n        v-model=\"selectedKeys\"\n        :tree-data=\"visibleTreeData\"\n        :titles=\"['组织与数据权限树（待选）', '已选数据权限清单']\"\n        :panel-height=\"380\"\n        :max-count=\"maxCountEnabled ? 5 : undefined\"\n        :inherit-child=\"inheritChild\"\n        :inert=\"hostState === 'loading' || hostState === 'error'\"\n        @change=\"onChange\"\n        @clear-all=\"onClearAll\"\n        @update:inherit-child=\"onInheritChange\"\n      />\n      <div\n        v-if=\"hostState === 'loading'\"\n        class=\"transfer-panel-demo__message\"\n        role=\"status\"\n      >\n        组织权限数据加载中……\n      </div>\n      <div\n        v-else-if=\"hostState === 'error'\"\n        class=\"transfer-panel-demo__message\"\n        role=\"alert\"\n      >\n        <span>组织权限数据加载失败，当前选择仍然保留。</span>\n        <button type=\"button\" @click=\"setHostState('ready')\">重试</button>\n      </div>\n    </div>\n\n    <div class=\"transfer-panel-demo__summary\">\n      <span data-testid=\"selected-count\"\n        >当前已选 {{ selectedKeys.length }} 项</span\n      >\n      <span>包含一个当前树中未加载的既有选中键</span>\n    </div>\n    <p class=\"transfer-panel-demo__note\">\n      数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n    </p>\n  </div>\n</template>\n\n<style scoped>\n.transfer-panel-demo {\n  display: grid;\n  min-width: 0;\n  gap: var(--lx-space-md);\n  color: var(--lx-text-regular);\n  font-size: 13px;\n}\n\n.transfer-panel-demo__toolbar {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: var(--lx-space-xs);\n}\n\n.transfer-panel-demo button {\n  min-height: 32px;\n  padding: 4px var(--lx-space-sm);\n  border: 1px solid var(--lx-border);\n  border-radius: var(--lx-radius-sm);\n  background: var(--lx-bg-card);\n  color: var(--lx-text-regular);\n  cursor: pointer;\n  font: inherit;\n}\n\n.transfer-panel-demo button:hover,\n.transfer-panel-demo button[aria-pressed='true'] {\n  border-color: var(--lx-color-primary);\n  color: var(--lx-color-primary);\n}\n\n.transfer-panel-demo button:focus-visible,\n.transfer-panel-demo input:focus-visible {\n  outline: 2px solid var(--lx-color-primary);\n  outline-offset: 2px;\n}\n\n.transfer-panel-demo label {\n  display: inline-flex;\n  min-height: 32px;\n  align-items: center;\n  gap: var(--lx-space-xs);\n  padding-inline: var(--lx-space-xs);\n}\n\n.transfer-panel-demo input {\n  accent-color: var(--lx-color-primary);\n}\n\n.transfer-panel-demo__status,\n.transfer-panel-demo__summary,\n.transfer-panel-demo__note {\n  margin: 0;\n  line-height: 20px;\n}\n\n.transfer-panel-demo__status,\n.transfer-panel-demo__note {\n  color: var(--lx-text-secondary);\n}\n\n.transfer-panel-demo__summary {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: var(--lx-space-xs) var(--lx-space-md);\n}\n\n.transfer-panel-demo__surface {\n  position: relative;\n  min-width: 0;\n}\n\n.transfer-panel-demo__surface.is-blocked :deep(.lx-transfer-panel) {\n  pointer-events: none;\n  opacity: 0.62;\n}\n\n.transfer-panel-demo__message {\n  display: flex;\n  position: absolute;\n  inset: 0;\n  align-items: center;\n  justify-content: center;\n  gap: var(--lx-space-sm);\n  padding: var(--lx-space-md);\n  border: 1px solid var(--lx-border);\n  background: var(--lx-bg-card);\n  color: var(--lx-text-secondary);\n  text-align: center;\n}\n\n@media (max-width: 480px) {\n  .transfer-panel-demo button,\n  .transfer-panel-demo label {\n    min-height: 44px;\n  }\n}\n</style>Props ​名称类型默认值说明treeDataLxTransferPanelNode[][]左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。modelValue(string | number)[][]受控的已选节点键；可包含暂未加载到当前树中的既有键。titles[string, string]['待选资源', '已选资源']左右面板标题。filterPlaceholders[string, string]['快速过滤待分配单位...', '在已选名单中检索...']左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。panelHeightnumber380面板目标高度，单位 px。左侧树与右侧列表各自滚动。maxCountnumberundefined已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 表示不允许新增。inheritChildbooleantrue是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。Events ​事件参数说明update:modelValuekeys受控选中键变化，用于 v-model。change(keys, nodes)被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。update:inheritChildvalue下级继承开关变化。clear-all无用户通过右侧清空或中间全部移除清空非空列表时触发。节点元数据 ​LxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：字段类型展示位置codestring两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。statusLxStatus | string两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”。statusToneLxStatus | LxFeedback状态点和状态文本的语义色；不传时从 status 的标准状态值推断。右侧已选列表使用同一节点类型，因此暂未加载到当前树中的键仍能显示键名并移除；组件不会为未加载键臆造 code 或 status。选择规则 ​左侧“全选”和中间向右按钮会加入当前树中所有未禁用节点；上限不足时不做部分写入。左侧“反选”针对当前已加载树中的所有未禁用节点，不受树内搜索结果限制。树外既有键和禁用节点保持原值；选中数量超过上限时拒绝会增加数量的反选。单个禁用树节点不能从左侧新增。右侧删除和清空仍可移除已存在的节点，包括暂时不在当前树中的键。change 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例使用遮罩保留双栏上下文。右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。PagerPrevious pageLxVirtualTree 虚拟树Next pageLxStatusDot 状态点\n    \n  \nline length too longcramped paddingraster buried under a wash or opacitycards flush against the scroller edge✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)layout property animation: transition: height, padding-top, padding-bottom◉×"
+  },
+  "reducedMotion": false,
+  "overlayCandidates": [
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "impeccable-overlay impeccable-visible"
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "impeccable-label"
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "impeccable-overlay impeccable-visible"
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "impeccable-label"
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "impeccable-overlay"
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "impeccable-label"
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "impeccable-overlay impeccable-visible"
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "impeccable-label"
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "impeccable-overlay impeccable-banner"
+    }
+  ]
+}

@@ -55,13 +55,25 @@ test.describe('lx-ui LxStatusSwitch 文档示例', () => {
 
     await confirmTrack.click();
     const dialog = page.getByRole('dialog');
-    await expect(dialog).toContainText('关闭后将中断节点通信，并记录操作审计。');
+    await expect(dialog).toContainText('关闭后将中断节点通信。');
+    await expect(dialog).toContainText('目标实体：市局指挥中心主节点 NODE-MAIN-01');
+    await expect(dialog).toContainText('影响范围：核心节点、跨域调度中继及关联警力将暂时不可用。');
+    await expect(dialog).toContainText('审计记录：操作人、目标节点和变更原因将写入不可篡改审计日志。');
     await dialog.getByRole('button', { name: '取消' }).click();
     await expect(page.getByTestId('confirm-state')).toHaveText('开启');
 
     await confirmTrack.click();
     await dialog.getByRole('button', { name: '确认关闭' }).click();
     await expect(page.getByTestId('confirm-state')).toHaveText('关闭');
+  });
+
+  test('为只读与无权限状态保留行名关联', async ({ page }) => {
+    await page.goto('/components/lxstatusswitch');
+    for (const testId of ['loading-row', 'readonly-row', 'permission-row']) {
+      const row = page.getByTestId(testId);
+      const control = row.locator('[role="switch"], .lx-status-switch__fallback').first();
+      await expect(control).toHaveAttribute('aria-labelledby', `status-switch-${testId.replace('-row', '')}-label`);
+    }
   });
 
   test('模拟保存失败可恢复，窄屏触控、主题与减少动效可用', async ({ page }) => {

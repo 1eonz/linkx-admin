@@ -1,0 +1,53 @@
+{
+  "views": [
+    {
+      "name": "desktop-light",
+      "injectionSucceeded": true,
+      "baselineOverlayCount": 19,
+      "currentOverlayCount": 19,
+      "hitCountsMatch": true,
+      "screenshots": [
+        "docs-code-copy-hover.png",
+        "component-focus-desktop-light.png",
+        "motion-hover-delete.png",
+        "motion-hover-loading.png",
+        "motion-hover-spin-prop-clone.png",
+        "motion-reduced-spin-prop-clone.png"
+      ]
+    },
+    {
+      "name": "desktop-dark",
+      "injectionSucceeded": true,
+      "baselineOverlayCount": 72,
+      "currentOverlayCount": 23,
+      "hitCountsMatch": false,
+      "screenshots": [
+        "component-focus-desktop-dark.png",
+        "desktop-dark-checklist.png"
+      ]
+    },
+    {
+      "name": "mobile-375-hud",
+      "injectionSucceeded": true,
+      "baselineOverlayCount": 20,
+      "currentOverlayCount": 20,
+      "hitCountsMatch": true,
+      "screenshots": [
+        "component-focus-mobile-375-hud.png",
+        "mobile-375-hud-checklist.png",
+        "mobile-375-hud-empty-status.png"
+      ]
+    },
+    {
+      "name": "mobile-320-light",
+      "injectionSucceeded": true,
+      "baselineOverlayCount": 9,
+      "currentOverlayCount": 9,
+      "hitCountsMatch": true,
+      "screenshots": [
+        "component-focus-mobile-320-light.png"
+      ]
+    }
+  ],
+  "evidenceFile": "overlay-dom-recheck.json"
+}

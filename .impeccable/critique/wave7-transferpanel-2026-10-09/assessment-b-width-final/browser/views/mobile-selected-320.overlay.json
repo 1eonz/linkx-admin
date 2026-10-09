@@ -1,0 +1,108 @@
+{
+  "name": "mobile-selected-320",
+  "viewport": {
+    "width": 320,
+    "height": 844
+  },
+  "scan": {
+    "elementCount": 6,
+    "findingCount": 7,
+    "rules": {
+      "clipped-overflow-container": 1,
+      "gpt-thin-border-wide-shadow": 1,
+      "buried-raster": 3,
+      "bounce-easing": 1,
+      "layout-transition": 1
+    },
+    "entries": [
+      {
+        "path": [
+          "span.container",
+          "button.VPNavBarHamburger.hamburger",
+          "div.content-body",
+          "div.content"
+        ],
+        "findings": [
+          {
+            "type": "clipped-overflow-container",
+            "detail": "span.container clips a positioned child"
+          }
+        ]
+      },
+      {
+        "path": [
+          "div.lx-transfer-panel__scope-action-content",
+          "details.lx-transfer-panel__scope-actions",
+          "header.lx-transfer-panel__header.lx-transfer-panel__header--source",
+          "div#lx-transfer-panel-161-source-panel.lx-transfer-panel__panel.is-mobile-hidden"
+        ],
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "detail": "1px border + 16px shadow blur"
+          }
+        ]
+      },
+      {
+        "path": [
+          "button.copy",
+          "div.language-vue.vp-adaptive-theme",
+          "details.details.custom-block",
+          "div"
+        ],
+        "findings": [
+          {
+            "type": "buried-raster",
+            "detail": "raster background at opacity 0"
+          }
+        ]
+      },
+      {
+        "path": [
+          "button.copy",
+          "div.language-ts.vp-adaptive-theme",
+          "div",
+          "div.vp-doc._components_lxtransferpanel"
+        ],
+        "findings": [
+          {
+            "type": "buried-raster",
+            "detail": "raster background at opacity 0"
+          }
+        ]
+      },
+      {
+        "path": [
+          "button.copy",
+          "div.language-vue.vp-adaptive-theme",
+          "div",
+          "div.vp-doc._components_lxtransferpanel"
+        ],
+        "findings": [
+          {
+            "type": "buried-raster",
+            "detail": "raster background at opacity 0"
+          }
+        ]
+      },
+      {
+        "path": [
+          "body",
+          "html"
+        ],
+        "findings": [
+          {
+            "type": "bounce-easing",
+            "detail": "cubic-bezier(.71, -.46, .29, 1.46)"
+          },
+          {
+            "type": "layout-transition",
+            "detail": "transition: height, padding-top, padding-bottom"
+          }
+        ]
+      }
+    ]
+  },
+  "overlayElementCount": 6,
+  "screenshot": ".impeccable\\critique\\wave7-transferpanel-2026-10-09\\assessment-b-width-final\\browser\\overlay-screenshots\\mobile-selected-320.png"
+}

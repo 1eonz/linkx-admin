@@ -40,6 +40,8 @@ export interface LxDynamicFormField<
   key: string
   label: string
   type: LxDynamicFormFieldType
+  /** 在字段前显示通栏语义分组标题；标题不参与字段值、校验和提交。 */
+  sectionTitleBefore?: string
   required?: boolean
   span?: 1 | 2 | 3 | 4 | 6 | 8 | 12 | 24
   visible?: boolean | ((model: Model) => boolean)

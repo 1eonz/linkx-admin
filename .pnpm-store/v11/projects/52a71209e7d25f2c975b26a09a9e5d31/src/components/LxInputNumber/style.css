@@ -95,10 +95,10 @@
 }
 
 /* ===== 触屏 ===== */
-/* 触屏（无 hover 能力）：44px 最小触控目标 + 步进钮高度同步放大
+/* 触屏或窄屏：44px 最小触控目标 + 步进钮高度同步放大
  * （EP controls-right 钮高固定 15px 是按 32px 控件高 /2 计算，
  * 44px 时 (44-2)/2=21px 两钮才能铺满右侧无死区） */
-@media (hover: none) {
+@media (hover: none), (max-width: 640px) {
   .lx-input-number .el-input__wrapper {
     min-height: 44px;
   }

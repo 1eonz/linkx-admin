@@ -6,8 +6,8 @@
 import { computed, inject } from 'vue'
 import type { LxMenuItem } from './types'
 import { LX_SIDEBAR_KEY } from './context'
-import LxIcon from '../LxIcon/index.vue'
 import { resolveLxIconName } from '../LxIcon/icons'
+import LxIcon from '../LxIcon/index.vue'
 
 const props = withDefaults(
   defineProps<{

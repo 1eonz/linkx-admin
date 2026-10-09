@@ -1,0 +1,11 @@
+Playwright browser navigation attempt
+
+page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4174/components/lxvirtualtree
+Call log:
+  - navigating to "http://127.0.0.1:4174/components/lxvirtualtree", waiting until "domcontentloaded"
+
+Follow-up read-only checks:
+http://127.0.0.1:4174/components/lxvirtualtree -> actively refused
+http://localhost:4174/components/lxvirtualtree -> timed out
+
+No server lifecycle or configuration action was taken.

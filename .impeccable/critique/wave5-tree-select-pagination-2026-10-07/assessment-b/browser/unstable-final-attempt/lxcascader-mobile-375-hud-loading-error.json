@@ -1,0 +1,572 @@
+{
+  "scenario": "lxcascader-mobile-375-hud-loading-error",
+  "route": "lxcascader",
+  "theme": "HUD 深色（由 DOM 注入，Demo 未提供切换控件）",
+  "requestedState": "窄屏，加载中且失败（加载态优先）",
+  "viewport": {
+    "width": 375,
+    "height": 812,
+    "isMobile": true
+  },
+  "overlayInjection": {
+    "loaded": true,
+    "src": "http://127.0.0.1:8400/detect.js"
+  },
+  "preflight": {
+    "title": "[Human] lxcascader lxcascader-mobile-375-hud-loading-error",
+    "mutableInjection": true,
+    "preflightScript": true
+  },
+  "actionResults": [
+    {
+      "action": "hud",
+      "result": "added dark and lx-theme-hud classes"
+    },
+    {
+      "action": "cascader-loading-error",
+      "result": "loading-error button not found"
+    }
+  ],
+  "browser": {
+    "title": "[Human] lxcascader lxcascader-mobile-375-hud-loading-error",
+    "url": "http://127.0.0.1:4177/components/lxcascader",
+    "viewport": {
+      "width": 375,
+      "height": 812,
+      "isNarrow": true,
+      "visualWidth": 375,
+      "screenWidth": 375,
+      "devicePixelRatio": 1
+    },
+    "document": {
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "scrollHeight": 812,
+      "bodyScrollWidth": 359
+    },
+    "theme": {
+      "dark": true,
+      "hud": true,
+      "classes": [
+        "dark",
+        "lx-theme-hud"
+      ]
+    },
+    "demoFound": false,
+    "demoText": "",
+    "states": {
+      "loading": false,
+      "errorText": [],
+      "overlayNodeCount": 0,
+      "alerts": []
+    },
+    "controls": [],
+    "selectPagination": null,
+    "overlayScripts": [
+      {
+        "src": "http://127.0.0.1:8400/detect.js",
+        "loaded": true
+      }
+    ]
+  },
+  "detectorConsole": {
+    "runs": [],
+    "findingCount": 1,
+    "ruleCounts": {
+      "unparsed": 1
+    },
+    "findings": [
+      {
+        "rule": "unparsed",
+        "message": "%c[impeccable] No anti-patterns found.",
+        "selector": "color: #22c55e; font-weight: bold",
+        "args": [
+          "%c[impeccable] No anti-patterns found.",
+          "color: #22c55e; font-weight: bold"
+        ]
+      }
+    ]
+  },
+  "screenshot": "screenshots/lxcascader-mobile-375-hud-loading-error.png",
+  "console": [
+    {
+      "type": "debug",
+      "args": [
+        "[vite] connecting..."
+      ],
+      "text": "[vite] connecting...",
+      "timestamp": 1791351654395.654
+    },
+    {
+      "type": "debug",
+      "args": [
+        "[vite] connected."
+      ],
+      "text": "[vite] connected.",
+      "timestamp": 1791351654419.028
+    },
+    {
+      "type": "log",
+      "args": [
+        "[vite] server connection lost. Polling for restart..."
+      ],
+      "text": "[vite] server connection lost. Polling for restart...",
+      "timestamp": 1791351655198.772
+    },
+    {
+      "type": "log",
+      "args": [
+        "%c[impeccable] No anti-patterns found.",
+        "color: #22c55e; font-weight: bold"
+      ],
+      "text": "%c[impeccable] No anti-patterns found. color: #22c55e; font-weight: bold",
+      "timestamp": 1791351668043.778
+    }
+  ],
+  "runtimeExceptions": [],
+  "networkFailures": [
+    {
+      "url": "21644.239",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.240",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.241",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.242",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.243",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.244",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.245",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.246",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.247",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.248",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.249",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.250",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.251",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.252",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.253",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.254",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.255",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.256",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.257",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.258",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.259",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.260",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.261",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.262",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.263",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.264",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.265",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.266",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.267",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.268",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.269",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.270",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.271",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.233",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.234",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.235",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.236",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.238",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.237",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.272",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.273",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.274",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.275",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.276",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.277",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.278",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.279",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.280",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.281",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.282",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.283",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.284",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.285",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.286",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.287",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.288",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.289",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.290",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.291",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.292",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.293",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.294",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.295",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.296",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.297",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.298",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.299",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.300",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.301",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.302",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.303",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.304",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.305",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.306",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.307",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.308",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.309",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.310",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.311",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.312",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.313",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.314",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.316",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.317",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.318",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.319",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "21644.320",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    }
+  ],
+  "stateChecks": {
+    "viewportWidthMatches": true,
+    "narrowMediaQueryMatches": true,
+    "errorStateVisible": true,
+    "loadingStateVisible": false,
+    "darkThemeApplied": true,
+    "hudThemeClassApplied": true
+  }
+}

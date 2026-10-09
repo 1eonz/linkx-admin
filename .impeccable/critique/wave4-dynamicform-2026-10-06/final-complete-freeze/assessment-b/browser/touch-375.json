@@ -1,0 +1,979 @@
+{
+  "id": "touch-375",
+  "description": "375px 触屏",
+  "context": {
+    "freshContext": true,
+    "freshPage": true,
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "colorScheme": "light",
+    "isMobile": true,
+    "hasTouch": true
+  },
+  "responseStatus": 200,
+  "theme": {
+    "desired": "light",
+    "method": "initial appearance state",
+    "actual": {
+      "isDark": false,
+      "colorScheme": "light",
+      "backgroundColor": "rgb(255, 255, 255)"
+    }
+  },
+  "pageState": {
+    "title": "LxDynamicForm 动态表单 | LxUI",
+    "htmlClass": "",
+    "htmlTheme": null,
+    "colorScheme": "light",
+    "viewport": {
+      "width": 375,
+      "height": 812,
+      "devicePixelRatio": 1
+    },
+    "pageSize": {
+      "width": 375,
+      "height": 9602
+    },
+    "horizontalOverflow": false,
+    "bodyStyle": {
+      "color": "rgb(60, 60, 67)",
+      "backgroundColor": "rgb(255, 255, 255)"
+    },
+    "headings": [
+      {
+        "tag": "h2",
+        "text": "新增组件"
+      },
+      {
+        "tag": "h2",
+        "text": "基础"
+      },
+      {
+        "tag": "h2",
+        "text": "布局导航"
+      },
+      {
+        "tag": "h2",
+        "text": "数据展示"
+      },
+      {
+        "tag": "h2",
+        "text": "数据录入"
+      },
+      {
+        "tag": "h2",
+        "text": "反馈与浮层"
+      },
+      {
+        "tag": "h1",
+        "text": "LxDynamicForm 动态表单\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "最小配置\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "交互示例\n​"
+      },
+      {
+        "tag": "h3",
+        "text": "任务信息"
+      },
+      {
+        "tag": "h3",
+        "text": "任务状态"
+      },
+      {
+        "tag": "h3",
+        "text": "附件"
+      },
+      {
+        "tag": "h2",
+        "text": "Props\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "字段 schema\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "Events\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "插槽与实例\n​"
+      },
+      {
+        "tag": "h2",
+        "text": "使用边界\n​"
+      }
+    ],
+    "formCount": 2,
+    "inputCount": 15,
+    "themeButton": [
+      {
+        "title": "Switch to dark theme",
+        "ariaLabel": null
+      },
+      {
+        "title": "Switch to dark theme",
+        "ariaLabel": null
+      }
+    ]
+  },
+  "injection": {
+    "endpoint": "http://localhost:8400/detect.js",
+    "succeeded": true
+  },
+  "overlayState": {
+    "detectorApi": "function",
+    "detectionApi": "function",
+    "scriptSources": [
+      "http://127.0.0.1:4174/@vite/client",
+      "http://localhost:8400/detect.js",
+      "http://127.0.0.1:4174/@fs/F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_d79121d1713466f37394797ab7bb8f51/node_modules/vitepress/dist/client/app/index.js?t=1791292616472"
+    ],
+    "overlayCount": 10,
+    "labelCount": 9,
+    "bannerText": [
+      "✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×"
+    ]
+  },
+  "serializedFindings": [
+    {
+      "selector": "span.container",
+      "tagName": "span",
+      "rect": {
+        "x": 335,
+        "y": 25,
+        "width": 16,
+        "height": 14,
+        "top": 25,
+        "right": 351,
+        "bottom": 39,
+        "left": 335
+      },
+      "isPageLevel": false,
+      "isHidden": false,
+      "findings": [
+        {
+          "type": "clipped-overflow-container",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "span.container clips a positioned child",
+          "ignoreValue": "",
+          "name": "Positioned child clipped by overflow container",
+          "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip."
+        }
+      ],
+      "elementEvidence": {
+        "className": "container",
+        "textSnippet": "",
+        "ancestors": [
+          {
+            "tag": "span",
+            "id": null,
+            "className": "container"
+          },
+          {
+            "tag": "button",
+            "id": null,
+            "className": "VPNavBarHamburger hamburger"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "content-body"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "content"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "container"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "wrapper"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "VPNavBar has-sidebar top"
+          }
+        ],
+        "insideCode": false,
+        "insideDocsBody": false,
+        "insideNavigation": true,
+        "insideForm": false,
+        "insideOverlay": false,
+        "rendered": true
+      }
+    },
+    {
+      "selector": "div > div.language-vue.vp-adaptive-theme:nth-of-type(1) > button.copy",
+      "tagName": "button",
+      "rect": {
+        "x": 323,
+        "y": 607,
+        "width": 40,
+        "height": 40,
+        "top": 607,
+        "right": 363,
+        "bottom": 647,
+        "left": 323
+      },
+      "isPageLevel": false,
+      "isHidden": false,
+      "findings": [
+        {
+          "type": "buried-raster",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "raster background at opacity 0",
+          "ignoreValue": "",
+          "name": "Raster buried under a wash or opacity",
+          "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+        }
+      ],
+      "elementEvidence": {
+        "className": "copy",
+        "textSnippet": "",
+        "ancestors": [
+          {
+            "tag": "button",
+            "id": null,
+            "className": "copy"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "language-vue vp-adaptive-theme"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": ""
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "vp-doc _components_lxdynamicform"
+          },
+          {
+            "tag": "main",
+            "id": null,
+            "className": "main"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "content-container"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "content"
+          }
+        ],
+        "insideCode": true,
+        "insideDocsBody": true,
+        "insideNavigation": false,
+        "insideForm": false,
+        "insideOverlay": false,
+        "rendered": true
+      }
+    },
+    {
+      "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+      "tagName": "button",
+      "rect": {
+        "x": 282,
+        "y": 2638.78125,
+        "width": 40,
+        "height": 40,
+        "top": 2638.78125,
+        "right": 322,
+        "bottom": 2678.78125,
+        "left": 282
+      },
+      "isPageLevel": false,
+      "isHidden": true,
+      "findings": [
+        {
+          "type": "buried-raster",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "raster background at opacity 0",
+          "ignoreValue": "",
+          "name": "Raster buried under a wash or opacity",
+          "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+        }
+      ],
+      "elementEvidence": {
+        "className": "copy",
+        "textSnippet": "",
+        "ancestors": [
+          {
+            "tag": "button",
+            "id": null,
+            "className": "copy"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "language-vue vp-adaptive-theme"
+          },
+          {
+            "tag": "details",
+            "id": null,
+            "className": "details custom-block"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": ""
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "vp-doc _components_lxdynamicform"
+          },
+          {
+            "tag": "main",
+            "id": null,
+            "className": "main"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "content-container"
+          }
+        ],
+        "insideCode": true,
+        "insideDocsBody": true,
+        "insideNavigation": false,
+        "insideForm": false,
+        "insideOverlay": false,
+        "rendered": true
+      }
+    },
+    {
+      "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(3) > button.copy",
+      "tagName": "button",
+      "rect": {
+        "x": 323,
+        "y": 7429.78125,
+        "width": 40,
+        "height": 40,
+        "top": 7429.78125,
+        "right": 363,
+        "bottom": 7469.78125,
+        "left": 323
+      },
+      "isPageLevel": false,
+      "isHidden": false,
+      "findings": [
+        {
+          "type": "buried-raster",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "raster background at opacity 0",
+          "ignoreValue": "",
+          "name": "Raster buried under a wash or opacity",
+          "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+        }
+      ],
+      "elementEvidence": {
+        "className": "copy",
+        "textSnippet": "",
+        "ancestors": [
+          {
+            "tag": "button",
+            "id": null,
+            "className": "copy"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "language-vue vp-adaptive-theme"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": ""
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "vp-doc _components_lxdynamicform"
+          },
+          {
+            "tag": "main",
+            "id": null,
+            "className": "main"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "content-container"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "content"
+          }
+        ],
+        "insideCode": true,
+        "insideDocsBody": true,
+        "insideNavigation": false,
+        "insideForm": false,
+        "insideOverlay": false,
+        "rendered": true
+      }
+    },
+    {
+      "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(4) > button.copy",
+      "tagName": "button",
+      "rect": {
+        "x": 323,
+        "y": 7640.25,
+        "width": 40,
+        "height": 40,
+        "top": 7640.25,
+        "right": 363,
+        "bottom": 7680.25,
+        "left": 323
+      },
+      "isPageLevel": false,
+      "isHidden": false,
+      "findings": [
+        {
+          "type": "buried-raster",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "raster background at opacity 0",
+          "ignoreValue": "",
+          "name": "Raster buried under a wash or opacity",
+          "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+        }
+      ],
+      "elementEvidence": {
+        "className": "copy",
+        "textSnippet": "",
+        "ancestors": [
+          {
+            "tag": "button",
+            "id": null,
+            "className": "copy"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "language-vue vp-adaptive-theme"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": ""
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "vp-doc _components_lxdynamicform"
+          },
+          {
+            "tag": "main",
+            "id": null,
+            "className": "main"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "content-container"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "content"
+          }
+        ],
+        "insideCode": true,
+        "insideDocsBody": true,
+        "insideNavigation": false,
+        "insideForm": false,
+        "insideOverlay": false,
+        "rendered": true
+      }
+    },
+    {
+      "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+      "tagName": "button",
+      "rect": {
+        "x": 323,
+        "y": 7762.34375,
+        "width": 40,
+        "height": 40,
+        "top": 7762.34375,
+        "right": 363,
+        "bottom": 7802.34375,
+        "left": 323
+      },
+      "isPageLevel": false,
+      "isHidden": false,
+      "findings": [
+        {
+          "type": "buried-raster",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "raster background at opacity 0",
+          "ignoreValue": "",
+          "name": "Raster buried under a wash or opacity",
+          "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+        }
+      ],
+      "elementEvidence": {
+        "className": "copy",
+        "textSnippet": "",
+        "ancestors": [
+          {
+            "tag": "button",
+            "id": null,
+            "className": "copy"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "language-ts vp-adaptive-theme"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": ""
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "vp-doc _components_lxdynamicform"
+          },
+          {
+            "tag": "main",
+            "id": null,
+            "className": "main"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "content-container"
+          },
+          {
+            "tag": "div",
+            "id": null,
+            "className": "content"
+          }
+        ],
+        "insideCode": true,
+        "insideDocsBody": true,
+        "insideNavigation": false,
+        "insideForm": false,
+        "insideOverlay": false,
+        "rendered": true
+      }
+    },
+    {
+      "selector": "#el-id-1024-5",
+      "tagName": "div",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "isPageLevel": false,
+      "isHidden": true,
+      "findings": [
+        {
+          "type": "gpt-thin-border-wide-shadow",
+          "category": "slop",
+          "severity": "advisory",
+          "advisory": true,
+          "detail": "1px border + 16px shadow blur",
+          "ignoreValue": "",
+          "name": "Hairline border with wide shadow",
+          "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+        }
+      ],
+      "elementEvidence": {
+        "className": "el-popper is-pure is-light el-tooltip el-select__popper lx-select__popper",
+        "textSnippet": "日常巡防应急支援",
+        "ancestors": [
+          {
+            "tag": "div",
+            "id": "el-id-1024-5",
+            "className": "el-popper is-pure is-light el-tooltip el-select__popper lx-select__popper"
+          },
+          {
+            "tag": "div",
+            "id": "el-popper-container-1024",
+            "className": ""
+          },
+          {
+            "tag": "body",
+            "id": null,
+            "className": ""
+          },
+          {
+            "tag": "html",
+            "id": null,
+            "className": ""
+          }
+        ],
+        "insideCode": false,
+        "insideDocsBody": false,
+        "insideNavigation": false,
+        "insideForm": false,
+        "insideOverlay": false,
+        "rendered": false
+      }
+    },
+    {
+      "selector": "#el-id-1024-10",
+      "tagName": "div",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "isPageLevel": false,
+      "isHidden": true,
+      "findings": [
+        {
+          "type": "gpt-thin-border-wide-shadow",
+          "category": "slop",
+          "severity": "advisory",
+          "advisory": true,
+          "detail": "1px border + 16px shadow blur",
+          "ignoreValue": "",
+          "name": "Hairline border with wide shadow",
+          "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+        }
+      ],
+      "elementEvidence": {
+        "className": "el-popper is-pure is-light el-tooltip el-select__popper lx-select__popper",
+        "textSnippet": "李警官 · 指挥中心陈警官 · 一大队周警官 · 二大队",
+        "ancestors": [
+          {
+            "tag": "div",
+            "id": "el-id-1024-10",
+            "className": "el-popper is-pure is-light el-tooltip el-select__popper lx-select__popper"
+          },
+          {
+            "tag": "div",
+            "id": "el-popper-container-1024",
+            "className": ""
+          },
+          {
+            "tag": "body",
+            "id": null,
+            "className": ""
+          },
+          {
+            "tag": "html",
+            "id": null,
+            "className": ""
+          }
+        ],
+        "insideCode": false,
+        "insideDocsBody": false,
+        "insideNavigation": false,
+        "insideForm": false,
+        "insideOverlay": false,
+        "rendered": false
+      }
+    },
+    {
+      "selector": "#el-id-1024-15",
+      "tagName": "div",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "isPageLevel": false,
+      "isHidden": true,
+      "findings": [
+        {
+          "type": "gpt-thin-border-wide-shadow",
+          "category": "slop",
+          "severity": "advisory",
+          "advisory": true,
+          "detail": "1px border + 16px shadow blur",
+          "ignoreValue": "",
+          "name": "Hairline border with wide shadow",
+          "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+        }
+      ],
+      "elementEvidence": {
+        "className": "el-popper is-pure is-light el-tooltip el-select__popper lx-select__popper",
+        "textSnippet": "文本输入密码输入多行文本数字输入下拉选择远程选择树形选择日期选择日期范围开关单选组多选组文件上传自定义插槽",
+        "ancestors": [
+          {
+            "tag": "div",
+            "id": "el-id-1024-15",
+            "className": "el-popper is-pure is-light el-tooltip el-select__popper lx-select__popper"
+          },
+          {
+            "tag": "div",
+            "id": "el-popper-container-1024",
+            "className": ""
+          },
+          {
+            "tag": "body",
+            "id": null,
+            "className": ""
+          },
+          {
+            "tag": "html",
+            "id": null,
+            "className": ""
+          }
+        ],
+        "insideCode": false,
+        "insideDocsBody": false,
+        "insideNavigation": false,
+        "insideForm": false,
+        "insideOverlay": false,
+        "rendered": false
+      }
+    },
+    {
+      "selector": "body",
+      "tagName": "body",
+      "rect": null,
+      "isPageLevel": true,
+      "isHidden": false,
+      "findings": [
+        {
+          "type": "bounce-easing",
+          "category": "slop",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+          "ignoreValue": "",
+          "name": "Bounce or elastic easing",
+          "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+        },
+        {
+          "type": "layout-transition",
+          "category": "quality",
+          "severity": "warning",
+          "advisory": false,
+          "detail": "transition: height, padding-top, padding-bottom",
+          "ignoreValue": "",
+          "name": "Layout property animation",
+          "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+        }
+      ],
+      "elementEvidence": {
+        "className": "",
+        "textSnippet": "Skip to content LxUI 菜单 本页导航 Sidebar Navigation 新增组件 新增组件总览 基础 基础控件桥接 LxButton 按钮 LxIcon 图标总览 布局导航 LxSidebar 侧边栏 LxNavbar 顶部导航 LxBreadcrumb 面包屑 LxTabsBar 页签栏 LxSplitLayout 分栏布局 LxSelectTree 组织树选择 数据展示 LxProTable 数据表格 LxP",
+        "ancestors": [
+          {
+            "tag": "body",
+            "id": null,
+            "className": ""
+          },
+          {
+            "tag": "html",
+            "id": null,
+            "className": ""
+          }
+        ],
+        "insideCode": false,
+        "insideDocsBody": false,
+        "insideNavigation": false,
+        "insideForm": false,
+        "insideOverlay": false,
+        "rendered": true
+      }
+    }
+  ],
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:4174/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:4174/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 10 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8159,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8165,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8169,
+        "columnNumber": 12
+      }
+    }
+  ],
+  "impeccableConsole": [
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 10 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+      "location": {
+        "url": "http://localhost:8400/detect.js",
+        "lineNumber": 8159,
+        "columnNumber": 12
+      }
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "screenshot": "touch-375.png"
+}

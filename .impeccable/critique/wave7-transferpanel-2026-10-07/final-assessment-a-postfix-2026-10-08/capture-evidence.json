@@ -1,0 +1,3097 @@
+{
+  "target": "http://127.0.0.1:4174/components/lxtransferpanel",
+  "method": "Fresh Chromium browser with an isolated new context/page per scenario; no detector or Assessment B input.",
+  "browser": {
+    "version": "153.0.8010.12",
+    "executablePath": "C:/Users/Administrator/AppData/Local/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-win64/chrome-headless-shell.exe"
+  },
+  "sourceHashes": {
+    "before": {
+      "linkx-fe/src/components/LxTransferPanel/index.vue": "18DAFD31EB3FDC0D123F544D27424C34EAA5C60C48EF3283843B92B079637901",
+      "linkx-fe/src/components/LxTransferPanel/demo/basic.vue": "E9081F8E77306A2C282FA159213A30CE3F725FD3B307ED91D508C6FE61878240",
+      "linkx-fe/src/components/LxTransferPanel/types.ts": "934FAAE2D2CA0DF8388BFABD1556E1B67CEB8E0AE930B0E43FB0B7FCC1054AA8",
+      "linkx-fe/src/components/LxVirtualTree/index.vue": "E36B50875832C374FF98C0366493F6FC26AD1CBF6ABDFD056E863B155C2386B4",
+      "linkx-fe/src/components/LxConfirm/index.ts": "54B8496B99DC35679625A29D74C3C1D1D3216D410AE97A099446D185ABE01A80",
+      "linkx-fe/src/components/LxConfirm/style.css": "6DE908AED57E417500054658AC93D7FE9D5A777BD97E461F40707592777052E0",
+      "linkx-fe/src/tokens/variables.css": "7CF5BF056DED0FD77F72EB1E3007E4A439FC712C06DF8D3A1D53053924365F96",
+      "linkx-fe/src/tokens/theme-hud.css": "E462708E9DD12BDEC167081EAB5A38848DDDBD991306B0E34987DE4174F796AA",
+      "linkx-fe/docs/components/lxtransferpanel.md": "4E0956E739E6F93DDB5BB400F20A07FEBB637AAA2D09EED7DA1D7C63CA238545",
+      "linkx-fe/docs/.vitepress/theme/custom.css": "C1918DF03648C6414B283638C940D61FB658D0A9FDDFBCE6420C942671F3430D"
+    },
+    "after": {
+      "linkx-fe/src/components/LxTransferPanel/index.vue": "18DAFD31EB3FDC0D123F544D27424C34EAA5C60C48EF3283843B92B079637901",
+      "linkx-fe/src/components/LxTransferPanel/demo/basic.vue": "E9081F8E77306A2C282FA159213A30CE3F725FD3B307ED91D508C6FE61878240",
+      "linkx-fe/src/components/LxTransferPanel/types.ts": "934FAAE2D2CA0DF8388BFABD1556E1B67CEB8E0AE930B0E43FB0B7FCC1054AA8",
+      "linkx-fe/src/components/LxVirtualTree/index.vue": "E36B50875832C374FF98C0366493F6FC26AD1CBF6ABDFD056E863B155C2386B4",
+      "linkx-fe/src/components/LxConfirm/index.ts": "54B8496B99DC35679625A29D74C3C1D1D3216D410AE97A099446D185ABE01A80",
+      "linkx-fe/src/components/LxConfirm/style.css": "6DE908AED57E417500054658AC93D7FE9D5A777BD97E461F40707592777052E0",
+      "linkx-fe/src/tokens/variables.css": "7CF5BF056DED0FD77F72EB1E3007E4A439FC712C06DF8D3A1D53053924365F96",
+      "linkx-fe/src/tokens/theme-hud.css": "E462708E9DD12BDEC167081EAB5A38848DDDBD991306B0E34987DE4174F796AA",
+      "linkx-fe/docs/components/lxtransferpanel.md": "4E0956E739E6F93DDB5BB400F20A07FEBB637AAA2D09EED7DA1D7C63CA238545",
+      "linkx-fe/docs/.vitepress/theme/custom.css": "C1918DF03648C6414B283638C940D61FB658D0A9FDDFBCE6420C942671F3430D"
+    }
+  },
+  "captures": [
+    {
+      "name": "desktop-light",
+      "screenshot": "desktop-light.png",
+      "demoScreenshot": null,
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 631
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 666,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 710,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 41,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop-global-dark",
+      "screenshot": "desktop-global-dark.png",
+      "demoScreenshot": null,
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": true,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(223, 223, 214)",
+          "panel": "rgb(22, 22, 24)",
+          "panelText": "rgb(223, 223, 214)",
+          "lxBackgroundToken": "#161618",
+          "colorScheme": "dark"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 631
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 666,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 710,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 41,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop-hud-dark",
+      "screenshot": "desktop-hud-dark.png",
+      "demoScreenshot": null,
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": true,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(148, 163, 184)",
+          "panel": "rgb(16, 26, 44)",
+          "panelText": "rgb(148, 163, 184)",
+          "lxBackgroundToken": "#101a2c",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 667
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 534,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 534,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 684,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 728,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 41,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop-global-and-hud-dark",
+      "screenshot": "desktop-global-and-hud-dark.png",
+      "demoScreenshot": null,
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": true,
+        "hudDark": true,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(148, 163, 184)",
+          "panel": "rgb(16, 26, 44)",
+          "panelText": "rgb(148, 163, 184)",
+          "lxBackgroundToken": "#101a2c",
+          "colorScheme": "dark"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 667
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 534,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 534,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 684,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 728,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 41,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "mobile-375-light",
+      "screenshot": "mobile-375-light.png",
+      "demoScreenshot": "mobile-375-light-demo.png",
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 375,
+          "innerHeight": 812,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 375,
+          "bodyWidth": 375,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 24,
+            "y": 128,
+            "width": 327,
+            "height": 1193
+          },
+          "panels": [
+            {
+              "x": 24,
+              "y": 355,
+              "width": 327,
+              "height": 380
+            },
+            {
+              "x": 24,
+              "y": 815,
+              "width": 327,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 140,
+              "y": 753,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "x": 192,
+              "y": 753,
+              "width": 44,
+              "height": 44
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 325,
+            "height": 41,
+            "clientWidth": 325,
+            "scrollWidth": 325,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 44,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 44,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 44,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 44,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 44,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 44,
+            "scrollHeight": 44,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 44,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 44,
+            "scrollHeight": 44,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "mobile-375-global-dark",
+      "screenshot": "mobile-375-global-dark.png",
+      "demoScreenshot": "mobile-375-global-dark-demo.png",
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": true,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 375,
+          "innerHeight": 812,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 375,
+          "bodyWidth": 375,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(223, 223, 214)",
+          "panel": "rgb(22, 22, 24)",
+          "panelText": "rgb(223, 223, 214)",
+          "lxBackgroundToken": "#161618",
+          "colorScheme": "dark"
+        },
+        "layout": {
+          "demo": {
+            "x": 24,
+            "y": 128,
+            "width": 327,
+            "height": 1193
+          },
+          "panels": [
+            {
+              "x": 24,
+              "y": 355,
+              "width": 327,
+              "height": 380
+            },
+            {
+              "x": 24,
+              "y": 815,
+              "width": 327,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 140,
+              "y": 753,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "x": 192,
+              "y": 753,
+              "width": 44,
+              "height": 44
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 325,
+            "height": 41,
+            "clientWidth": 325,
+            "scrollWidth": 325,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 44,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 44,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 44,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 44,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 44,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 44,
+            "scrollHeight": 44,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 44,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 44,
+            "scrollHeight": 44,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "viewport-320-light",
+      "screenshot": "viewport-320-light.png",
+      "demoScreenshot": "viewport-320-light-demo.png",
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 320,
+          "innerHeight": 812,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 320,
+          "bodyWidth": 320,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 24,
+            "y": 128,
+            "width": 272,
+            "height": 1241
+          },
+          "panels": [
+            {
+              "x": 24,
+              "y": 403,
+              "width": 272,
+              "height": 380
+            },
+            {
+              "x": 24,
+              "y": 863,
+              "width": 272,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 112,
+              "y": 801,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "x": 164,
+              "y": 801,
+              "width": 44,
+              "height": 44
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 270,
+            "height": 41,
+            "clientWidth": 270,
+            "scrollWidth": 270,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 44,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 44,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 44,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 44,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 44,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 44,
+            "scrollHeight": 44,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 44,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 44,
+            "scrollHeight": 44,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "viewport-320-global-dark",
+      "screenshot": "viewport-320-global-dark.png",
+      "demoScreenshot": "viewport-320-global-dark-demo.png",
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": true,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 320,
+          "innerHeight": 812,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 320,
+          "bodyWidth": 320,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(223, 223, 214)",
+          "panel": "rgb(22, 22, 24)",
+          "panelText": "rgb(223, 223, 214)",
+          "lxBackgroundToken": "#161618",
+          "colorScheme": "dark"
+        },
+        "layout": {
+          "demo": {
+            "x": 24,
+            "y": 128,
+            "width": 272,
+            "height": 1241
+          },
+          "panels": [
+            {
+              "x": 24,
+              "y": 403,
+              "width": 272,
+              "height": 380
+            },
+            {
+              "x": 24,
+              "y": 863,
+              "width": 272,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 112,
+              "y": 801,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "x": 164,
+              "y": 801,
+              "width": 44,
+              "height": 44
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 270,
+            "height": 41,
+            "clientWidth": 270,
+            "scrollWidth": 270,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 44,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 44,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 44,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 44,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 44,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 44,
+            "scrollHeight": 44,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 44,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 44,
+            "scrollHeight": 44,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "viewport-320-dpr4-dark",
+      "screenshot": "viewport-320-dpr4-dark.png",
+      "demoScreenshot": "viewport-320-dpr4-dark-demo.png",
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": true,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 320,
+          "innerHeight": 812,
+          "devicePixelRatio": 4,
+          "visualViewportScale": 1,
+          "documentWidth": 320,
+          "bodyWidth": 320,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(223, 223, 214)",
+          "panel": "rgb(22, 22, 24)",
+          "panelText": "rgb(223, 223, 214)",
+          "lxBackgroundToken": "#161618",
+          "colorScheme": "dark"
+        },
+        "layout": {
+          "demo": {
+            "x": 24,
+            "y": 128,
+            "width": 272,
+            "height": 1241
+          },
+          "panels": [
+            {
+              "x": 24,
+              "y": 403,
+              "width": 272,
+              "height": 380
+            },
+            {
+              "x": 24,
+              "y": 863,
+              "width": 272,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 112,
+              "y": 801,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "x": 164,
+              "y": 801,
+              "width": 44,
+              "height": 44
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 270,
+            "height": 41,
+            "clientWidth": 270,
+            "scrollWidth": 270,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 44,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 44,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 44,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 44,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 42,
+            "scrollHeight": 42,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 44,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 44,
+            "scrollHeight": 44,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 44,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 44,
+            "scrollHeight": 44,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop-loading",
+      "screenshot": "desktop-loading.png",
+      "demoScreenshot": null,
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 689
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 666,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 710,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": "true",
+        "alert": "",
+        "emptyText": "",
+        "panelInert": true,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 41,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop-error",
+      "screenshot": "desktop-error.png",
+      "demoScreenshot": null,
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 699
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 666,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 710,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "组织权限数据加载失败，当前选择仍然保留。重试",
+        "emptyText": "",
+        "panelInert": true,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 41,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop-empty",
+      "screenshot": "desktop-empty.png",
+      "demoScreenshot": null,
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 631
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 666,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 710,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 0,
+        "treeSummary": "待选树 0 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "暂无数据",
+        "panelInert": false,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 41,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop-keyboard-tree",
+      "screenshot": "desktop-keyboard-tree.png",
+      "demoScreenshot": null,
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 580
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 465,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 465,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 615,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 659,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": false,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 40,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop-clear-confirm",
+      "screenshot": "desktop-clear-confirm.png",
+      "demoScreenshot": null,
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 580
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 465,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 465,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 615,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 659,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": false,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 40,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 0,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop-unloaded-remove-confirm",
+      "screenshot": "desktop-unloaded-remove-confirm.png",
+      "demoScreenshot": null,
+      "state": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 580
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 465,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 465,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 615,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 659,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "",
+        "panelInert": false,
+        "settingsOpen": false,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 40,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "light-theme-surface",
+      "passed": true,
+      "evidence": {
+        "page": "rgba(0, 0, 0, 0)",
+        "document": "rgba(0, 0, 0, 0)",
+        "demoShell": "rgba(0, 0, 0, 0)",
+        "demoText": "rgb(78, 89, 105)",
+        "panel": "rgb(255, 255, 255)",
+        "panelText": "rgb(78, 89, 105)",
+        "lxBackgroundToken": "#ffffff",
+        "colorScheme": "light"
+      }
+    },
+    {
+      "name": "global-dark-demo-surface",
+      "passed": true,
+      "evidence": {
+        "page": "rgba(0, 0, 0, 0)",
+        "panel": "rgb(22, 22, 24)",
+        "panelText": "rgb(223, 223, 214)"
+      }
+    },
+    {
+      "name": "hud-dark-demo-surface",
+      "passed": true,
+      "evidence": {
+        "page": "rgba(0, 0, 0, 0)",
+        "panel": "rgb(16, 26, 44)",
+        "panelText": "rgb(148, 163, 184)"
+      }
+    },
+    {
+      "name": "combined-dark-theme",
+      "passed": true,
+      "evidence": {
+        "page": "rgba(0, 0, 0, 0)",
+        "document": "rgba(0, 0, 0, 0)",
+        "demoShell": "rgba(0, 0, 0, 0)",
+        "demoText": "rgb(148, 163, 184)",
+        "panel": "rgb(16, 26, 44)",
+        "panelText": "rgb(148, 163, 184)",
+        "lxBackgroundToken": "#101a2c",
+        "colorScheme": "dark"
+      }
+    },
+    {
+      "name": "mobile-375-layout",
+      "passed": true,
+      "evidence": {
+        "viewport": {
+          "innerWidth": 375,
+          "innerHeight": 812,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 375,
+          "bodyWidth": 375,
+          "horizontalOverflow": false
+        },
+        "panels": [
+          {
+            "x": 24,
+            "y": 355,
+            "width": 327,
+            "height": 380
+          },
+          {
+            "x": 24,
+            "y": 815,
+            "width": 327,
+            "height": 380
+          }
+        ],
+        "controls": [
+          {
+            "x": 140,
+            "y": 753,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 192,
+            "y": 753,
+            "width": 44,
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "mobile-375-dark-reflow",
+      "passed": true,
+      "evidence": {
+        "viewport": {
+          "innerWidth": 375,
+          "innerHeight": 812,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 375,
+          "bodyWidth": 375,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(223, 223, 214)",
+          "panel": "rgb(22, 22, 24)",
+          "panelText": "rgb(223, 223, 214)",
+          "lxBackgroundToken": "#161618",
+          "colorScheme": "dark"
+        },
+        "panels": [
+          {
+            "x": 24,
+            "y": 355,
+            "width": 327,
+            "height": 380
+          },
+          {
+            "x": 24,
+            "y": 815,
+            "width": 327,
+            "height": 380
+          }
+        ]
+      }
+    },
+    {
+      "name": "viewport-320-light-reflow-and-settings",
+      "passed": true,
+      "evidence": {
+        "viewport": {
+          "innerWidth": 320,
+          "innerHeight": 812,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 320,
+          "bodyWidth": 320,
+          "horizontalOverflow": false
+        },
+        "dpr": 1,
+        "clippedSettings": [],
+        "panels": [
+          {
+            "x": 24,
+            "y": 403,
+            "width": 272,
+            "height": 380
+          },
+          {
+            "x": 24,
+            "y": 863,
+            "width": 272,
+            "height": 380
+          }
+        ]
+      }
+    },
+    {
+      "name": "viewport-320-global-dark-reflow-and-settings",
+      "passed": true,
+      "evidence": {
+        "viewport": {
+          "innerWidth": 320,
+          "innerHeight": 812,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 320,
+          "bodyWidth": 320,
+          "horizontalOverflow": false
+        },
+        "dpr": 1,
+        "clippedSettings": [],
+        "panels": [
+          {
+            "x": 24,
+            "y": 403,
+            "width": 272,
+            "height": 380
+          },
+          {
+            "x": 24,
+            "y": 863,
+            "width": 272,
+            "height": 380
+          }
+        ]
+      }
+    },
+    {
+      "name": "viewport-320-dpr4-dark-reflow-and-settings",
+      "passed": true,
+      "evidence": {
+        "viewport": {
+          "innerWidth": 320,
+          "innerHeight": 812,
+          "devicePixelRatio": 4,
+          "visualViewportScale": 1,
+          "documentWidth": 320,
+          "bodyWidth": 320,
+          "horizontalOverflow": false
+        },
+        "dpr": 4,
+        "clippedSettings": [],
+        "panels": [
+          {
+            "x": 24,
+            "y": 403,
+            "width": 272,
+            "height": 380
+          },
+          {
+            "x": 24,
+            "y": 863,
+            "width": 272,
+            "height": 380
+          }
+        ]
+      }
+    },
+    {
+      "name": "loading-state-preserves-selection-and-locks-panel",
+      "passed": true,
+      "evidence": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 689
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 666,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 710,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": "true",
+        "alert": "",
+        "emptyText": "",
+        "panelInert": true,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 41,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "error-state-preserves-selection-and-offers-retry",
+      "passed": true,
+      "evidence": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 699
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 666,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 710,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 21,
+        "treeSummary": "待选树 1,420 个节点",
+        "busy": null,
+        "alert": "组织权限数据加载失败，当前选择仍然保留。重试",
+        "emptyText": "",
+        "panelInert": true,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 41,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "empty-tree-keeps-existing-selection",
+      "passed": true,
+      "evidence": {
+        "title": "LxTransferPanel 双栏穿梭 | LxUI",
+        "siteDark": false,
+        "hudDark": false,
+        "viewport": {
+          "innerWidth": 1440,
+          "innerHeight": 1050,
+          "devicePixelRatio": 1,
+          "visualViewportScale": 1,
+          "documentWidth": 1440,
+          "bodyWidth": 1440,
+          "horizontalOverflow": false
+        },
+        "colors": {
+          "page": "rgba(0, 0, 0, 0)",
+          "document": "rgba(0, 0, 0, 0)",
+          "demoShell": "rgba(0, 0, 0, 0)",
+          "demoText": "rgb(78, 89, 105)",
+          "panel": "rgb(255, 255, 255)",
+          "panelText": "rgb(78, 89, 105)",
+          "lxBackgroundToken": "#ffffff",
+          "colorScheme": "light"
+        },
+        "layout": {
+          "demo": {
+            "x": 336,
+            "y": 347,
+            "width": 880,
+            "height": 631
+          },
+          "panels": [
+            {
+              "x": 336,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            },
+            {
+              "x": 859,
+              "y": 516,
+              "width": 357,
+              "height": 380
+            }
+          ],
+          "transferLayout": "5:2:5",
+          "transferControls": [
+            {
+              "x": 758,
+              "y": 666,
+              "width": 36,
+              "height": 36
+            },
+            {
+              "x": 758,
+              "y": 710,
+              "width": 36,
+              "height": 36
+            }
+          ]
+        },
+        "selectedCount": 5,
+        "selectedCountText": "当前已选 5 项",
+        "treeRowCount": 0,
+        "treeSummary": "待选树 0 个节点",
+        "busy": null,
+        "alert": "",
+        "emptyText": "暂无数据",
+        "panelInert": false,
+        "settingsOpen": true,
+        "settingsElements": [
+          {
+            "text": "示例状态与主题",
+            "width": 878,
+            "height": 41,
+            "clientWidth": 878,
+            "scrollWidth": 878,
+            "clientHeight": 40,
+            "scrollHeight": 40,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "正常数据",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "空结果",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载中",
+            "width": 57,
+            "height": 34,
+            "clientWidth": 55,
+            "scrollWidth": 55,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "加载失败",
+            "width": 70,
+            "height": 34,
+            "clientWidth": 68,
+            "scrollWidth": 68,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "最多 5 项",
+            "width": 86,
+            "height": 32,
+            "clientWidth": 86,
+            "scrollWidth": 86,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          },
+          {
+            "text": "HUD 深色主题",
+            "width": 116,
+            "height": 32,
+            "clientWidth": 116,
+            "scrollWidth": 116,
+            "clientHeight": 32,
+            "scrollHeight": 32,
+            "clippedX": false,
+            "clippedY": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "tree-keyboard-navigation-and-selection",
+      "passed": true,
+      "evidence": {
+        "firstFocus": "市公安局指挥中心ORG-01 正常",
+        "secondFocus": "情指行一体化研判调度专班DEPT-03 正常",
+        "deselected": 4,
+        "restored": 5
+      }
+    },
+    {
+      "name": "clear-confirm-escape-and-undo",
+      "passed": true,
+      "evidence": {
+        "dialog": {
+          "title": "清空已选授权",
+          "message": "已选项中包含未加载的节点，无法核对其当前名称。确认移除全部授权吗？",
+          "confirmColor": "rgb(0, 96, 169)",
+          "confirmText": "清空全部授权"
+        },
+        "escapeCount": 5,
+        "clearCount": 0,
+        "undoCount": 5
+      }
+    },
+    {
+      "name": "unloaded-remove-confirm-cancel-preserves-selection",
+      "passed": true,
+      "evidence": {
+        "dialog": {
+          "title": "移除未加载的授权",
+          "message": "“历史授权单位（记录中）”当前不在已加载的树中，键值为 legacy-unit-08。确认从已选授权中移除吗？",
+          "confirmText": "移除授权"
+        },
+        "selectedCount": 5
+      }
+    },
+    {
+      "name": "source-stable-during-capture",
+      "passed": true,
+      "evidence": {
+        "hashesBefore": {
+          "linkx-fe/src/components/LxTransferPanel/index.vue": "18DAFD31EB3FDC0D123F544D27424C34EAA5C60C48EF3283843B92B079637901",
+          "linkx-fe/src/components/LxTransferPanel/demo/basic.vue": "E9081F8E77306A2C282FA159213A30CE3F725FD3B307ED91D508C6FE61878240",
+          "linkx-fe/src/components/LxTransferPanel/types.ts": "934FAAE2D2CA0DF8388BFABD1556E1B67CEB8E0AE930B0E43FB0B7FCC1054AA8",
+          "linkx-fe/src/components/LxVirtualTree/index.vue": "E36B50875832C374FF98C0366493F6FC26AD1CBF6ABDFD056E863B155C2386B4",
+          "linkx-fe/src/components/LxConfirm/index.ts": "54B8496B99DC35679625A29D74C3C1D1D3216D410AE97A099446D185ABE01A80",
+          "linkx-fe/src/components/LxConfirm/style.css": "6DE908AED57E417500054658AC93D7FE9D5A777BD97E461F40707592777052E0",
+          "linkx-fe/src/tokens/variables.css": "7CF5BF056DED0FD77F72EB1E3007E4A439FC712C06DF8D3A1D53053924365F96",
+          "linkx-fe/src/tokens/theme-hud.css": "E462708E9DD12BDEC167081EAB5A38848DDDBD991306B0E34987DE4174F796AA",
+          "linkx-fe/docs/components/lxtransferpanel.md": "4E0956E739E6F93DDB5BB400F20A07FEBB637AAA2D09EED7DA1D7C63CA238545",
+          "linkx-fe/docs/.vitepress/theme/custom.css": "C1918DF03648C6414B283638C940D61FB658D0A9FDDFBCE6420C942671F3430D"
+        },
+        "hashesAfter": {
+          "linkx-fe/src/components/LxTransferPanel/index.vue": "18DAFD31EB3FDC0D123F544D27424C34EAA5C60C48EF3283843B92B079637901",
+          "linkx-fe/src/components/LxTransferPanel/demo/basic.vue": "E9081F8E77306A2C282FA159213A30CE3F725FD3B307ED91D508C6FE61878240",
+          "linkx-fe/src/components/LxTransferPanel/types.ts": "934FAAE2D2CA0DF8388BFABD1556E1B67CEB8E0AE930B0E43FB0B7FCC1054AA8",
+          "linkx-fe/src/components/LxVirtualTree/index.vue": "E36B50875832C374FF98C0366493F6FC26AD1CBF6ABDFD056E863B155C2386B4",
+          "linkx-fe/src/components/LxConfirm/index.ts": "54B8496B99DC35679625A29D74C3C1D1D3216D410AE97A099446D185ABE01A80",
+          "linkx-fe/src/components/LxConfirm/style.css": "6DE908AED57E417500054658AC93D7FE9D5A777BD97E461F40707592777052E0",
+          "linkx-fe/src/tokens/variables.css": "7CF5BF056DED0FD77F72EB1E3007E4A439FC712C06DF8D3A1D53053924365F96",
+          "linkx-fe/src/tokens/theme-hud.css": "E462708E9DD12BDEC167081EAB5A38848DDDBD991306B0E34987DE4174F796AA",
+          "linkx-fe/docs/components/lxtransferpanel.md": "4E0956E739E6F93DDB5BB400F20A07FEBB637AAA2D09EED7DA1D7C63CA238545",
+          "linkx-fe/docs/.vitepress/theme/custom.css": "C1918DF03648C6414B283638C940D61FB658D0A9FDDFBCE6420C942671F3430D"
+        }
+      }
+    }
+  ],
+  "runtimeErrors": [],
+  "zoomMethodNote": "Headless browser Ctrl+Equal did not alter DPR or viewport. The zoom reflow proxy uses a 320 CSS-pixel layout viewport at deviceScaleFactor 4; it models 1280/4 effective CSS width but is not actual browser zoom."
+}

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+
+import LxForm from '../../LxForm/index.vue'
 import LxSelectPagination from '../index.vue'
 import type {
   LxSelectPaginationItem,
@@ -7,7 +9,7 @@ import type {
   LxSelectPaginationValue,
 } from '../types'
 
-type DemoMode = 'normal' | 'failure'
+type DemoMode = 'normal' | 'failure' | 'slow'
 
 const officers = Array.from({ length: 12 }, (_, index) => ({
   policeCode: `POL-${String(index + 1).padStart(5, '0')}`,
@@ -20,6 +22,7 @@ const selectedIds = ref<LxSelectPaginationValue>([
   'POL-00002',
   'POL-00003',
 ])
+const formModel = ref<Record<string, unknown>>({})
 const selectRef = ref<{ reload: () => void } | null>(null)
 const targetMap = Object.fromEntries(
   officers.slice(0, 3).map((officer) => [officer.policeCode, officer]),
@@ -31,10 +34,12 @@ const disabled = ref(false)
 const emptyResults = ref(false)
 const nextMode = ref<DemoMode>('normal')
 const requestCount = ref(0)
+const requestPages = ref<number[]>([])
 const cancelledCount = ref(0)
 const lastChange = ref('尚未修改已选人员')
 const themeEnabled = ref(false)
 const originalDark = ref(false)
+const originalHud = ref(false)
 
 const selectedSummary = computed(() => {
   const values = Array.isArray(selectedIds.value)
@@ -51,38 +56,43 @@ const remoteMethod: LxSelectPaginationRemoteMethod = (
   options,
 ) => {
   requestCount.value += 1
+  requestPages.value.push(page)
   const pageSize = options?.pageSize ?? 4
   const signal = options?.signal
   const shouldFail = nextMode.value === 'failure'
+  const shouldDelay = nextMode.value === 'slow'
   nextMode.value = 'normal'
 
   return new Promise((resolve, reject) => {
-    const timer = window.setTimeout(() => {
-      signal?.removeEventListener('abort', onAbort)
-      if (shouldFail) {
-        reject(new Error('Mock 远程服务暂不可用'))
-        return
-      }
-      if (emptyResults.value) {
-        resolve({ list: [], total: 0, hasMore: false })
-        return
-      }
+    const timer = window.setTimeout(
+      () => {
+        signal?.removeEventListener('abort', onAbort)
+        if (shouldFail) {
+          reject(new Error('Mock 远程服务暂不可用'))
+          return
+        }
+        if (emptyResults.value) {
+          resolve({ list: [], total: 0, hasMore: false })
+          return
+        }
 
-      const normalized = keyword.trim().toLocaleLowerCase()
-      const matched = normalized
-        ? officers.filter((officer) =>
-            `${officer.name} ${officer.department} ${officer.policeCode}`
-              .toLocaleLowerCase()
-              .includes(normalized),
-          )
-        : officers
-      const start = (page - 1) * pageSize
-      resolve({
-        list: matched.slice(start, start + pageSize),
-        total: matched.length,
-        hasMore: start + pageSize < matched.length,
-      })
-    }, 180)
+        const normalized = keyword.trim().toLocaleLowerCase()
+        const matched = normalized
+          ? officers.filter((officer) =>
+              `${officer.name} ${officer.department} ${officer.policeCode}`
+                .toLocaleLowerCase()
+                .includes(normalized),
+            )
+          : officers
+        const start = (page - 1) * pageSize
+        resolve({
+          list: matched.slice(start, start + pageSize),
+          total: matched.length,
+          hasMore: start + pageSize < matched.length,
+        })
+      },
+      shouldDelay ? 1_000 : 180,
+    )
 
     function onAbort() {
       window.clearTimeout(timer)
@@ -110,16 +120,23 @@ function toggleEmptyResults() {
 
 onMounted(() => {
   originalDark.value = document.documentElement.classList.contains('dark')
+  originalHud.value =
+    document.documentElement.classList.contains('lx-theme-hud')
 })
 
 watch(themeEnabled, (enabled) => {
-  if (typeof document !== 'undefined')
-    document.documentElement.classList.toggle('dark', enabled)
+  if (typeof document === 'undefined') return
+  document.documentElement.classList.toggle(
+    'dark',
+    enabled || originalDark.value,
+  )
+  document.documentElement.classList.toggle('lx-theme-hud', enabled)
 })
 
 onBeforeUnmount(() => {
-  if (typeof document !== 'undefined')
-    document.documentElement.classList.toggle('dark', originalDark.value)
+  if (typeof document === 'undefined') return
+  document.documentElement.classList.toggle('dark', originalDark.value)
+  document.documentElement.classList.toggle('lx-theme-hud', originalHud.value)
 })
 </script>
 
@@ -139,31 +156,33 @@ onBeforeUnmount(() => {
       </label>
     </div>
 
-    <label class="lx-select-pagination-demo__field">
-      <span>指派涉案警员</span>
-      <LxSelectPagination
-        ref="selectRef"
-        v-model="selectedIds"
-        :remote-method="remoteMethod"
-        :target-map="targetMap"
-        :params="requestParams"
-        value-key="policeCode"
-        :label-key="formatOfficerLabel"
-        description-key="department"
-        search-placeholder="输入姓名、警号或部门检索"
-        placeholder="选择涉案警员"
-        multiple
-        :max="8"
-        :max-collapse-tags="2"
-        :page-size="4"
-        :debounce="300"
-        :disabled="disabled"
-        @change="onChange"
-      />
-    </label>
+    <LxForm :model="formModel" :disabled="disabled">
+      <label class="lx-select-pagination-demo__field">
+        <span>指派涉案警员</span>
+        <LxSelectPagination
+          ref="selectRef"
+          v-model="selectedIds"
+          :remote-method="remoteMethod"
+          :target-map="targetMap"
+          :params="requestParams"
+          value-key="policeCode"
+          :label-key="formatOfficerLabel"
+          description-key="department"
+          search-placeholder="输入姓名、警号或部门检索"
+          placeholder="选择涉案警员"
+          multiple
+          :max="8"
+          :max-collapse-tags="2"
+          :page-size="4"
+          :debounce="300"
+          @change="onChange"
+        />
+      </label>
+    </LxForm>
 
     <div class="lx-select-pagination-demo__actions" aria-label="演示状态">
       <button type="button" @click="nextMode = 'failure'">下次请求失败</button>
+      <button type="button" @click="nextMode = 'slow'">下次请求延迟</button>
       <button type="button" @click="toggleEmptyResults">
         {{ emptyResults ? '恢复成功结果' : '显示空结果' }}
       </button>
@@ -180,15 +199,21 @@ onBeforeUnmount(() => {
     <dl class="lx-select-pagination-demo__stats" aria-live="polite">
       <div>
         <dt>Mock 请求</dt>
-        <dd>{{ requestCount }}</dd>
+        <dd data-testid="request-count">{{ requestCount }}</dd>
+      </div>
+      <div>
+        <dt>请求页码</dt>
+        <dd data-testid="request-pages">
+          {{ requestPages.join('、') || '暂无' }}
+        </dd>
       </div>
       <div>
         <dt>已取消</dt>
-        <dd>{{ cancelledCount }}</dd>
+        <dd data-testid="cancelled-count">{{ cancelledCount }}</dd>
       </div>
       <div>
         <dt>最近变更</dt>
-        <dd>{{ lastChange }}</dd>
+        <dd data-testid="last-change">{{ lastChange }}</dd>
       </div>
     </dl>
   </section>
@@ -265,7 +290,7 @@ onBeforeUnmount(() => {
 
 .lx-select-pagination-demo__stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin: 0;
   padding-top: 16px;

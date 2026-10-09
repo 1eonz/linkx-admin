@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, ref } from 'vue'
+
 import {
   LxVirtualTree,
   type LxVirtualTreeNode,
@@ -21,6 +22,7 @@ const treeData: LxVirtualTreeNode[] = Array.from(
   (_, groupIndex) => ({
     id: `region-${groupIndex + 1}`,
     label: `辖区单位 ${String(groupIndex + 1).padStart(2, '0')}`,
+    code: `REGION-${String(groupIndex + 1).padStart(2, '0')}`,
     children: Array.from({ length: 20 }, (_, unitIndex) => ({
       id: `unit-${groupIndex + 1}-${unitIndex + 1}`,
       label: `执勤单元 ${String(unitIndex + 1).padStart(2, '0')}`,
@@ -34,6 +36,13 @@ const visibleData = computed(() => (state.value === 'empty' ? [] : treeData))
 const selectedSummary = computed(
   () => selectedKeys.value.slice(0, 6).join('、') || '无',
 )
+
+function filterNode(node: LxVirtualTreeNode, keyword: string) {
+  return [node.label, node.code].some(
+    (value) =>
+      typeof value === 'string' && value.toLocaleLowerCase().includes(keyword),
+  )
+}
 
 function setState(next: DemoState) {
   state.value = next
@@ -87,59 +96,96 @@ function onCheckChange(keys: (string | number)[]) {
 </script>
 
 <template>
-  <div class="virtual-tree-demo" :class="{ 'lx-theme-hud': darkTheme }">
-    <div
-      class="virtual-tree-demo__toolbar"
-      role="group"
-      aria-label="树状态示例"
-    >
-      <button
-        type="button"
-        :aria-pressed="state === 'ready'"
-        @click="setState('ready')"
+  <div class="virtual-tree-demo">
+    <details class="virtual-tree-demo__controls">
+      <summary>演示状态和更多操作</summary>
+      <div
+        class="virtual-tree-demo__toolbar"
+        role="group"
+        aria-label="树状态示例"
       >
-        正常数据
-      </button>
-      <button
-        type="button"
-        :aria-pressed="state === 'empty'"
-        @click="setState('empty')"
-      >
-        空结果
-      </button>
-      <button
-        type="button"
-        :aria-pressed="state === 'loading'"
-        @click="setState('loading')"
-      >
-        加载中
-      </button>
-      <button
-        type="button"
-        :aria-pressed="state === 'error'"
-        @click="setState('error')"
-      >
-        加载失败
-      </button>
-    </div>
+        <button
+          type="button"
+          :aria-pressed="state === 'ready'"
+          @click="setState('ready')"
+        >
+          正常数据
+        </button>
+        <button
+          type="button"
+          :aria-pressed="state === 'empty'"
+          @click="setState('empty')"
+        >
+          空结果
+        </button>
+        <button
+          type="button"
+          :aria-pressed="state === 'loading'"
+          @click="setState('loading')"
+        >
+          加载中
+        </button>
+        <button
+          type="button"
+          :aria-pressed="state === 'error'"
+          @click="setState('error')"
+        >
+          加载失败
+        </button>
+      </div>
 
-    <div class="virtual-tree-demo__actions" role="group" aria-label="树操作">
-      <button type="button" @click="applyRegionFilter">筛选第二个辖区</button>
-      <button type="button" @click="clearFilter">清除筛选</button>
-      <button type="button" @click="setExampleSelection">设置示例选择</button>
-      <button type="button" @click="readCheckedKeys">读取选中键</button>
-      <button type="button" @click="expandAll(true)">展开全部</button>
-      <button type="button" @click="expandAll(false)">收起全部</button>
-      <button type="button" @click="scrollToLastNode">定位末尾节点</button>
-      <label class="virtual-tree-demo__strict">
-        <input v-model="checkStrictly" type="checkbox" />
-        父子独立勾选
-      </label>
-      <label class="virtual-tree-demo__strict">
-        <input v-model="darkTheme" type="checkbox" />
-        HUD 深色主题
-      </label>
-    </div>
+      <div class="virtual-tree-demo__actions">
+        <fieldset class="virtual-tree-demo__action-group">
+          <legend>筛选</legend>
+          <div class="virtual-tree-demo__action-content">
+            <button type="button" @click="applyRegionFilter">
+              筛选第二个辖区
+            </button>
+            <button type="button" @click="treeRef?.filter('REGION-02')">
+              按编码筛选第二个辖区
+            </button>
+            <button type="button" @click="clearFilter">清除筛选</button>
+          </div>
+        </fieldset>
+        <fieldset class="virtual-tree-demo__action-group">
+          <legend>选中</legend>
+          <div class="virtual-tree-demo__action-content">
+            <button type="button" @click="setExampleSelection">
+              设置示例选择
+            </button>
+            <button type="button" @click="readCheckedKeys">读取选中键</button>
+          </div>
+        </fieldset>
+        <fieldset class="virtual-tree-demo__action-group">
+          <legend>展开与定位</legend>
+          <div class="virtual-tree-demo__action-content">
+            <button type="button" @click="expandAll(true)">展开全部</button>
+            <button type="button" @click="expandAll(false)">收起全部</button>
+            <button type="button" @click="scrollToLastNode">
+              定位末尾节点
+            </button>
+          </div>
+        </fieldset>
+        <fieldset class="virtual-tree-demo__action-group">
+          <legend>选择方式</legend>
+          <div class="virtual-tree-demo__action-content">
+            <label class="virtual-tree-demo__strict">
+              <input v-model="checkStrictly" type="checkbox" />
+              父子独立勾选
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="virtual-tree-demo__action-group">
+          <legend>外观主题</legend>
+          <div class="virtual-tree-demo__action-content">
+            <label class="virtual-tree-demo__strict">
+              <input v-model="darkTheme" type="checkbox" />
+              HUD 深色主题
+            </label>
+          </div>
+        </fieldset>
+      </div>
+    </details>
 
     <p class="virtual-tree-demo__status" aria-live="polite">{{ lastAction }}</p>
 
@@ -158,30 +204,39 @@ function onCheckChange(keys: (string | number)[]) {
       <span>组织数据加载失败。</span>
       <button type="button" @click="setState('ready')">重试</button>
     </div>
-    <LxVirtualTree
+    <div
       v-else
-      ref="treeRef"
-      v-model="selectedKeys"
-      :data="visibleData"
-      :height="280"
-      :item-size="32"
-      :show-checkbox="true"
-      :check-strictly="checkStrictly"
-      :default-expanded-keys="['region-1', 'region-2']"
-      @check-change="onCheckChange"
-      @node-click="lastAction = `查看节点：${$event.label}`"
-      @expand-change="lastAction = `展开分支：${$event.length} 个`"
+      class="virtual-tree-demo__preview"
+      :class="{ 'lx-theme-hud': darkTheme }"
     >
-      <template #node="{ node, level, checked }">
-        <span v-if="node.children?.length" class="virtual-tree-demo__count"
-          >{{ node.children.length }} 个单元</span
-        >
-        <span v-else-if="checked" class="virtual-tree-demo__selected"
-          >已选</span
-        >
-        <span v-else-if="level > 1" class="virtual-tree-demo__kind">单位</span>
-      </template>
-    </LxVirtualTree>
+      <LxVirtualTree
+        ref="treeRef"
+        v-model="selectedKeys"
+        aria-label="组织结构"
+        :data="visibleData"
+        :height="280"
+        :item-size="32"
+        :show-checkbox="true"
+        :check-strictly="checkStrictly"
+        :filter-method="filterNode"
+        :default-expanded-keys="['region-1', 'region-2']"
+        @check-change="onCheckChange"
+        @node-click="lastAction = `查看节点：${$event.label}`"
+        @expand-change="lastAction = `展开分支：${$event.length} 个`"
+      >
+        <template #node="{ node, level, checked }">
+          <span v-if="node.children?.length" class="virtual-tree-demo__count"
+            >{{ node.children.length }} 个单元</span
+          >
+          <span v-else-if="checked" class="virtual-tree-demo__selected"
+            >已选</span
+          >
+          <span v-else-if="level > 1" class="virtual-tree-demo__kind"
+            >单位</span
+          >
+        </template>
+      </LxVirtualTree>
+    </div>
 
     <div class="virtual-tree-demo__summary">
       <span>受控选中：{{ selectedKeys.length }} 项</span>
@@ -203,12 +258,62 @@ function onCheckChange(keys: (string | number)[]) {
   font-size: 13px;
 }
 
-.virtual-tree-demo__toolbar,
-.virtual-tree-demo__actions {
+.virtual-tree-demo__preview {
+  min-width: 0;
+}
+
+.virtual-tree-demo__preview.lx-theme-hud {
+  background-color: var(--lx-bg-page);
+}
+
+.virtual-tree-demo__toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--lx-space-xs);
+}
+
+.virtual-tree-demo__actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  align-items: start;
+  gap: var(--lx-space-md);
+}
+
+.virtual-tree-demo__action-group {
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 0 var(--lx-space-sm);
+  border: 0;
+  border-inline-start: 1px solid var(--lx-border-light);
+}
+
+.virtual-tree-demo__action-group legend {
+  margin-bottom: var(--lx-space-xs);
+  padding: 0;
+  color: var(--lx-text-secondary);
+  font-size: 12px;
+}
+
+.virtual-tree-demo__action-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--lx-space-xs);
+}
+
+.virtual-tree-demo__controls {
+  display: grid;
+  gap: var(--lx-space-sm);
+}
+
+.virtual-tree-demo__controls summary {
+  display: flex;
+  width: fit-content;
+  min-height: 32px;
+  align-items: center;
+  color: var(--lx-text-secondary);
+  cursor: pointer;
 }
 
 .virtual-tree-demo button {
@@ -291,5 +396,12 @@ function onCheckChange(keys: (string | number)[]) {
 
 .virtual-tree-demo__selected {
   color: var(--lx-color-primary);
+}
+
+@media (max-width: 640px) {
+  .virtual-tree-demo button,
+  .virtual-tree-demo__strict {
+    min-height: 44px;
+  }
 }
 </style>

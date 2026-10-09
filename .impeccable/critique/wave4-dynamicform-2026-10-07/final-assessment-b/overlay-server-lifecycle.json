@@ -1,0 +1,28 @@
+{
+  "startMethod": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs\" --background",
+  "stopMethod": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs\" stop --keep-inject",
+  "startAttempts": [
+    {
+      "attempt": 1,
+      "command": "node \"C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs\" --background",
+      "exitCode": 0,
+      "spawnError": null,
+      "port": 8400,
+      "stdout": "{\"pid\":17652,\"port\":8400,\"token\":\"[redacted]\"}\n",
+      "stderr": ""
+    }
+  ],
+  "port": 8400,
+  "portHealthBeforeStop": {
+    "reachable": true,
+    "status": 200
+  },
+  "stopExitCode": 0,
+  "portHealthAfterStop": {
+    "reachable": false,
+    "error": "TypeError: fetch failed"
+  },
+  "stopped": true,
+  "stopStdout": "Stopped live server on port 8400.\n",
+  "stopStderr": ""
+}

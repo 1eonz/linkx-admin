@@ -1,0 +1,261 @@
+{
+  "targetUrl": "http://127.0.0.1:4174/components/lxtransferpanel",
+  "browser": "Playwright Chromium in a new isolated browser context",
+  "browserExecutable": "C:/Users/Administrator/AppData/Local/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-win64/chrome-headless-shell.exe",
+  "viewportChecks": [
+    {
+      "label": "desktop-1440-light",
+      "viewportWidth": 1440,
+      "documentScrollWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "transferWidth": 688,
+      "panelWidths": [
+        277,
+        277
+      ],
+      "panelHeights": [
+        380,
+        380
+      ]
+    },
+    {
+      "label": "mobile-375-light",
+      "viewportWidth": 375,
+      "documentScrollWidth": 375,
+      "bodyScrollWidth": 375,
+      "horizontalOverflow": false,
+      "transferWidth": 327,
+      "panelWidths": [
+        327,
+        327
+      ],
+      "panelHeights": [
+        380,
+        380
+      ]
+    },
+    {
+      "label": "mobile-375-hud",
+      "viewportWidth": 375,
+      "documentScrollWidth": 375,
+      "bodyScrollWidth": 375,
+      "horizontalOverflow": false,
+      "transferWidth": 327,
+      "panelWidths": [
+        327,
+        327
+      ],
+      "panelHeights": [
+        380,
+        380
+      ]
+    },
+    {
+      "label": "mobile-320-light",
+      "viewportWidth": 320,
+      "documentScrollWidth": 320,
+      "bodyScrollWidth": 320,
+      "horizontalOverflow": false,
+      "transferWidth": 272,
+      "panelWidths": [
+        272,
+        272
+      ],
+      "panelHeights": [
+        380,
+        380
+      ]
+    }
+  ],
+  "states": [
+    {
+      "name": "desktop-1440-light-overlay",
+      "screenshot": "screenshots/desktop-1440-light-overlay.png"
+    },
+    {
+      "name": "desktop-1440-hud",
+      "screenshot": "screenshots/desktop-1440-hud.png"
+    },
+    {
+      "name": "mobile-375-light",
+      "screenshot": "screenshots/mobile-375-light.png"
+    },
+    {
+      "name": "mobile-375-hud",
+      "screenshot": "screenshots/mobile-375-hud.png"
+    },
+    {
+      "name": "mobile-320-light",
+      "screenshot": "screenshots/mobile-320-light.png"
+    },
+    {
+      "name": "state-loading",
+      "screenshot": "screenshots/state-loading.png",
+      "statusVisible": true,
+      "statusText": "组织权限数据加载中……",
+      "ariaBusy": "true",
+      "selectedCount": "当前已选 2 项"
+    },
+    {
+      "name": "state-error",
+      "screenshot": "screenshots/state-error.png",
+      "alertVisible": true,
+      "alertText": "组织权限数据加载失败，当前选择仍然保留。\n重试",
+      "retryVisible": true,
+      "selectedCount": "当前已选 2 项"
+    },
+    {
+      "name": "state-empty",
+      "screenshot": "screenshots/state-empty.png",
+      "emptyTextVisible": true,
+      "treeText": "暂无数据",
+      "selectedCount": "当前已选 2 项"
+    },
+    {
+      "name": "mobile-375-reduced-motion",
+      "screenshot": "screenshots/mobile-375-reduced-motion.png"
+    }
+  ],
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 4 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cedge-flush-cards%c 9 cards flush against the left edge of table at rest (1px gap, e.g. th) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "externalRequests": [],
+  "preflight": {
+    "originalTitle": "LxTransferPanel 双栏穿梭 | LxUI",
+    "mutatedTitle": "LxTransferPanel 双栏穿梭 | LxUI [mutable-preflight]",
+    "titleChanged": true,
+    "scriptTagPresent": true,
+    "inlineScriptExecuted": true
+  },
+  "overlay": {
+    "url": "http://127.0.0.1:8400/detect.js",
+    "scriptInjected": true,
+    "scriptRan": true,
+    "before": {
+      "elementCount": 2866,
+      "bodyChildren": 2,
+      "scriptCount": 5
+    },
+    "after": {
+      "scriptPresent": true,
+      "elementCount": 2884,
+      "bodyChildren": 6,
+      "scriptCount": 6,
+      "impeccableNamedElements": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-banner"
+        }
+      ]
+    },
+    "consoleMessages": [
+      {
+        "type": "startGroup",
+        "text": "%c[impeccable] 4 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      }
+    ]
+  },
+  "keyboard": {
+    "treeItemFocus": {
+      "active": true,
+      "role": "treeitem",
+      "tabIndex": "0"
+    },
+    "spaceActivationSelectionCount": "当前已选 3 项",
+    "reverseButtonFocus": {
+      "active": true,
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(0, 96, 169)"
+    },
+    "screenshot": "screenshots/keyboard-focus-mobile-375.png"
+  },
+  "reducedMotion": {
+    "mediaMatches": true,
+    "transitionDuration": "1e-05s",
+    "animationDuration": "1e-05s"
+  },
+  "navigation": {
+    "responseStatus": 200,
+    "finalUrl": "http://127.0.0.1:4174/components/lxtransferpanel"
+  },
+  "finalMetrics": {
+    "title": "LxTransferPanel 双栏穿梭 | LxUI",
+    "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "componentPresent": true
+  }
+}

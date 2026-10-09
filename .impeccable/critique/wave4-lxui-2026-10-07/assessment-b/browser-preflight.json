@@ -1,0 +1,439 @@
+[
+  {
+    "target": "lxdatepicker",
+    "url": "http://127.0.0.1:4174/components/lxdatepicker",
+    "navigation": {
+      "status": 200,
+      "error": null
+    },
+    "preflight": {
+      "title": "Assessment B injection preflight",
+      "marker": true,
+      "documentElement": "<html lang=\"zh-CN\" dir=\"ltr\"><head>\n    <script type=\"module\" src=\"/@vite/client\"></script>\n\n    <title>Assessment B injection preflight</title>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n    <meta name=\"description\" content=\"LinkX 业务组件库 · Vue3 + Element Plus 二次封装 · 设计令牌驱动\">\n  <style type=\"text/css\" data-vite-dev-id=\"F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_d79121d1713466f37394797ab7bb8f51/node_modules/vitepress/dist/client/theme-default/styles/fonts.css\">\n\n@font-face {\n  font-family: Inter;\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url('/@fs/F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_d79121d1713466f37394797ab7bb8f51/node_modules/vitepress/dist/client/theme-default/fonts/inter-roman-cyrillic-ext.woff2') format('woff2');\n  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,\n    U+FE2E-FE2F;\n}\n\n@font-face {\n  font-family: Inter;\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url('/@fs/F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_d79121d1713466f37394",
+      "headings": [
+        "新增组件",
+        "基础",
+        "布局导航",
+        "数据展示",
+        "数据录入",
+        "反馈与浮层",
+        "LxDatePicker 日期选择器\n​",
+        "交互示例\n​",
+        "日期区间",
+        "单日和月份",
+        "常用日期范围",
+        "日期标记",
+        "日期与时间",
+        "表单校验",
+        "禁用与只读",
+        "Props\n​",
+        "Events\n​",
+        "Exposes\n​",
+        "Slots\n​",
+        "低频 props 透传\n​",
+        "周一起始契约\n​",
+        "与标本的对齐说明\n​",
+        "可访问性\n​",
+        "Vue3 宿主适配\n​"
+      ],
+      "buttons": [
+        {
+          "text": "搜索文档\nK",
+          "ariaLabel": "搜索文档",
+          "title": "",
+          "className": "DocSearch DocSearch-Button"
+        },
+        {
+          "text": "",
+          "ariaLabel": null,
+          "title": "Switch to dark theme",
+          "className": "VPSwitch VPSwitchAppearance"
+        },
+        {
+          "text": "",
+          "ariaLabel": "extra navigation",
+          "title": "",
+          "className": "button"
+        },
+        {
+          "text": "",
+          "ariaLabel": null,
+          "title": "Switch to dark theme",
+          "className": "VPSwitch VPSwitchAppearance"
+        },
+        {
+          "text": "",
+          "ariaLabel": "mobile navigation",
+          "title": "",
+          "className": "VPNavBarHamburger hamburger"
+        },
+        {
+          "text": "菜单",
+          "ariaLabel": null,
+          "title": "",
+          "className": "menu"
+        },
+        {
+          "text": "本页导航",
+          "ariaLabel": null,
+          "title": "",
+          "className": ""
+        },
+        {
+          "text": "",
+          "ariaLabel": null,
+          "title": "Copy Code",
+          "className": "copy"
+        },
+        {
+          "text": "",
+          "ariaLabel": null,
+          "title": "Copy Code",
+          "className": "copy"
+        },
+        {
+          "text": "",
+          "ariaLabel": "前一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "上个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "后一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn is-disabled d-arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "下个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn is-disabled arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "前一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn is-disabled d-arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "上个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn is-disabled arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "后一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "下个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "前一年",
+          "title": "",
+          "className": "d-arrow-left el-picker-panel__icon-btn"
+        },
+        {
+          "text": "",
+          "ariaLabel": "上个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "下个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "后一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "前一年",
+          "title": "",
+          "className": "d-arrow-left el-picker-panel__icon-btn"
+        },
+        {
+          "text": "",
+          "ariaLabel": "上个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "下个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "后一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-right"
+        },
+        {
+          "text": "今日",
+          "ariaLabel": null,
+          "title": "",
+          "className": "el-picker-panel__shortcut"
+        },
+        {
+          "text": "本周",
+          "ariaLabel": null,
+          "title": "",
+          "className": "el-picker-panel__shortcut"
+        },
+        {
+          "text": "近30天",
+          "ariaLabel": null,
+          "title": "",
+          "className": "el-picker-panel__shortcut"
+        },
+        {
+          "text": "",
+          "ariaLabel": "前一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "上个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "后一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "下个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "前一年",
+          "title": "",
+          "className": "d-arrow-left el-picker-panel__icon-btn"
+        },
+        {
+          "text": "",
+          "ariaLabel": "上个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "下个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "后一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "前一年",
+          "title": "",
+          "className": "d-arrow-left el-picker-panel__icon-btn"
+        },
+        {
+          "text": "",
+          "ariaLabel": "上个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "下个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "后一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-right"
+        },
+        {
+          "text": "此刻",
+          "ariaLabel": null,
+          "title": "",
+          "className": "el-button el-button--small is-text el-picker-panel__link-btn"
+        },
+        {
+          "text": "确定",
+          "ariaLabel": null,
+          "title": "",
+          "className": "el-button el-button--small is-plain el-picker-panel__link-btn"
+        },
+        {
+          "text": "",
+          "ariaLabel": "前一年",
+          "title": "",
+          "className": "d-arrow-left el-picker-panel__icon-btn"
+        },
+        {
+          "text": "",
+          "ariaLabel": "上个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "下个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "后一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "前一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "上个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "后一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "下个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "前一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "上个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-left"
+        },
+        {
+          "text": "",
+          "ariaLabel": "后一年",
+          "title": "",
+          "className": "el-picker-panel__icon-btn d-arrow-right"
+        },
+        {
+          "text": "",
+          "ariaLabel": "下个月",
+          "title": "",
+          "className": "el-picker-panel__icon-btn arrow-right"
+        }
+      ],
+      "iframes": [],
+      "bodyText": "Skip to content\nLxUI\n搜索文档\nK\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n\nLxProTable 数据表格\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxDutyCalendar 排班日历\n\nLxSectionTitle 区块标题\n\nLxAuthImg 鉴权图片\n\nLxDescriptions 详情描述\n\nLxPagination 分页\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxEmpty 空态\n\nLxGauge 圆环仪表\n\nLxNodeBadge 节点徽章\n\n权限消费\n\n数据录入\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\nLxInputNumber 数字输入\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxPasswordInput 密码输入框\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\n本页导航\n交互示例\nProps\nEvents\nExposes\nSlots\n低频 props 透传\n周一起始契约\n与标本的对齐说明\n可访问性\nVue3 宿主适配\nLxDatePicker 日期选择器\n​\n\n封装 Element Plus 日期内核，默认周一起始，区间分隔符为“至”，窄屏切换单面板。\n\n交互示例\n​\nHUD 深色主题\n显示双月日历\n日期区间\n专项布控日期区间\n专项布控日期区间开始日期\n专项布控日期区间结束日期\n至\n\n周一开周，左右月份可独立翻页，所选日期以连续色带显示。\n\n聚焦后按 ArrowDown 打开日历。\n\n等待日期操作；演示数据仅保存在当前页面。\n\n单日和月份\n布控生效日期\n月份选择（月度复盘）\n常用日期范围\n研判时间范围\n研判时间范围开始日期\n研判时间范围结束日期\n至\n\n\"本周\"从周一开始计算。选择预设后会回填日期范围并关闭弹层；重新打开后可继续调整。\n\n日期标记\n专项复盘日期\n日期与时间\n告警汇聚窗口\n表单校验\n复核日期\n禁用与只读\n省厅锁定区间（禁用）\n省厅锁定区间开始日期\n省厅锁定区间结束日期\n至\n归档区间（只读）\n归档区间开始日期\n归档区间结束日期\n至\n键盘操作与扩展参数\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\nmodelValue\tstring | number | Date | (string|number|Date)[] | null\t—\t选中值（v-model；区间类型为二元数组，配 valueFormat 时为格式化字符串；默认清空值为 null）。\ntype\t'date' | 'daterange' | 'datetime' | 'datetimerange' | 'dates' | 'week' | 'month' | 'monthrange' | 'year' | 'yearrange'\t'date'\t面板类型；quarter 等新增类型经 attrs 透传扩展。\nplaceholder\tstring\t''\t占位文案（单值形态）。\nstartPlaceholder\tstring\t''\t区间起始占位（range 形态）。\nendPlaceholder\tstring\t''\t区间结束占位（range 形态）。\nrangeSeparator\tstring\t'至'\t区间分隔符；Lx 默认中文契约（EP 原生默认 -）。\ndisabled\tboolean\t—（undefined）\t禁用态：半透明 + 禁用手势。默认未设置：ElForm 禁用态可正常传导；显式传 true/false 才覆盖继承。\nreadonly\tboolean\tfalse\t只读态：可聚焦不可改值。\nclearable\tboolean\ttrue\t可清空：值非空时悬停清除按钮（EP 原生默认 true）。\nformat\tstring\t—\t显示格式（dayjs format，如 YYYY-MM-DD）。\nvalueFormat\tstring\t—\t值格式（不传则 v-model 为 Date 对象；传则按格式序列化）。\nshortcuts\t{ text: string; value: Date | (() => Date | [Date, Date]) }[]\t—\t快捷预设；桌面沿用 EP 侧栏，窄屏显示为日历上方横排按钮。\npopperClass\tstring\t—\tteleported 日期弹层的附加类；可响应式切换主题，不覆盖组件锚定类。\nsize\t'sm' | 'md' | 'lg'\t'md'\t工程尺寸：28 / 32 / 40px；档名区别于 EP 的 small/default/large。\nname\tstring\t—\t原生 name 属性。\nsinglePanel\tboolean\t按视口自适应\t区间日历单面板显示；视口不大于 640px 时默认开启，显式 true/false 可覆盖。\nEvents\n​\n名称\t参数\t说明\nupdate:modelValue\t(value)\t选中值变化；默认清空时发出 null。\nchange\t(value)\t面板确认/清除后值变化；默认清空时发出 null。\nvisible-change\t(visible: boolean)\t日期面板展开或收起。\nfocus\t(event: FocusEvent)\t聚焦。\nblur\t(event: FocusEvent)\t失焦。\nExposes\n​\n名称\t说明\nfocus\t聚焦触发器。\nblur\t移除焦点。\nSlots\n​\n名称\t参数\t说明\ndefault\tDateCell（Element Plus 导出类型）\t自定义日期单元，包含 text、dayjs、isCurrent 等内核原始字段；不提供时保留内核默认日期单元。\nrange-separator\t—\t自定义区间分隔符；不提供时使用 rangeSeparator。\nprev-month / next-month\t—\t前后月导航图标；不提供时使用内核默认图标。\nprev-year / next-year\t—\t前后年导航图标；面板支持对应导航时生效。\nsidebar\t{ class: string }\t面板侧栏，参数由内核传入；自定义内容须自行保留键盘与可访问名称。\n\n日期单元插槽保留 el-date-table-cell 与 el-date-table-cell__text 结构时，可继续使用内核的选中、范围和当前日期样式。\n\n低频 props 透传\n​\n\ndisabled-date（禁用日期谓词）、default-value、unlink-panels（开启后双面板独立翻页；默认随另一面板联动）、editable、calendar-change/panel-change 监听器等经 attrs 直达 EP 内核：\n\nvue\n<LxDatePicker\n  v-model=\"range\"\n  type=\"daterange\"\n  value-format=\"YYYY-MM-DD\"\n  unlink-panels\n  :disabled-date=\"(date: Date) => date.getTime() > Date.now()\"\n/>\n周一起始契约\n​\n\n组件通过 provideGlobalConfig({ locale: zhCn }) 为自身及日期面板提供中文 locale，并注册 Day.js zh-cn 数据。Element Plus 日期表格据此将单值和区间面板设为周一起始；组件不调用全局 dayjs.locale()，宿主当前 locale 保持不变。\n\n与标本的对齐说明\n​\n\n视觉规范源：design/表单控件八件套/code.html 06。\n\n契约项\t标本 06\t实现\n周表头\t一 二 三 四 五 六 日\t内置 zh-cn 语境（周一起始）\n区间分隔符\t\"至\"\t默认值差异（EP 原生 -）\n区间连贯带\t#ecf5ff 浅蓝带\t--lx-color-primary-light 经 EP 变量注入 popper（组件级固化）\n起止日期\t主色圆点与高对比文字\t圆点沿用 EP 内核；文字使用 --lx-color-on-primary\n前置图标\t日历图标主色\t--lx-color-primary 覆写\n值文字\tfont-mono\t--lx-font-mono\n快捷预设\t今日/本周/近30天\tshortcuts 契约；桌面左侧纵排，窄屏日历上方横排\n双月联动\t展开双月面板\tEP 原生 + unlink-panels 透传\n触控目标\t32px\t触屏（hover: none）44px（与输入类族同族契约）\n可访问性\n​\n\n区间双输入需成对关联 ID 和 label：:id=\"['start', 'end']\" 配 <label for=\"start\">、<label for=\"end\">。完整标注示例见上方交互 Demo。\n\n触发器为 combobox 语义（EP 内核）；单值与区间形态键盘可达：聚焦输入框后按 ArrowDown 打开日历并进入日期网格，方向键移动日期焦点，Enter 选择日期，Escape 关闭日历；区间形态可用 Tab 切换起止输入，窄屏单面板会把两个端点的焦点都放入当前可见网格。宿主通过 aria-describedby 传入的说明 ID 会同步到实际输入框，区间形态会关联开始和结束输入，相邻日期字段之间互不串联；错误态红底红边在 LxForm 校验上下文自动生效（组件级固化，脱离全局桥不漂移）；开启\"减少动效\"时边框过渡关闭。\n\n窄屏（视口宽度不大于 640px）下快捷预设改为日历上方的横排按钮，日期格与翻月按钮提供至少 44px 的触控区域。通过点击或 ArrowDown 打开面板前，组件会将触发器调整到可用位置，使弹层优先显示在字段下方；极短视口或弹层仍越界时，弹层保持贴近字段并限制最大高度，箭头隐藏，日期面板内部可滚动且滚动不会带动页面。弹层打开后会响应窗口和可视视口变化；组件关闭或恢复宽屏布局后继续使用 Element Plus 原生定位。窄屏显式设置 singlePanel=false 时保留双月布局，弹层内容可在面板内横向滚动。\n\n周首由已注册并注入日期对象的 Day.js zh-cn locale 决定；组件不会切换宿主的全局默认 locale。\n\nVue3 宿主适配\n​\n\n业务层直接使用 LxDatePicker（或全局组件名 <LxDatePicker />）。旧 Vue2 项目的 el-date-picker 周起始依赖全局 locale 配置，迁移后由组件内置语境保证，无需宿主重复配置；宿主存量 el-date-picker 直用页面按 UI-04 波次另行替换。\n"
+    },
+    "consoleMessages": [
+      {
+        "type": "debug",
+        "text": "[vite] connecting..."
+      },
+      {
+        "type": "debug",
+        "text": "[vite] connected."
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "target": "lxdynamicform",
+    "url": "http://127.0.0.1:4174/components/lxdynamicform",
+    "navigation": {
+      "status": 200,
+      "error": null
+    },
+    "preflight": {
+      "title": "Assessment B injection preflight",
+      "marker": true,
+      "documentElement": "<html><head>\n    <script type=\"module\" src=\"/@vite/client\"></script>\n\n    <title>Assessment B injection preflight</title>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n    <meta name=\"description\" content=\"\">\n  <style type=\"text/css\" data-vite-dev-id=\"F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_d79121d1713466f37394797ab7bb8f51/node_modules/vitepress/dist/client/theme-default/styles/fonts.css\">\n\n@font-face {\n  font-family: Inter;\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url('/@fs/F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_d79121d1713466f37394797ab7bb8f51/node_modules/vitepress/dist/client/theme-default/fonts/inter-roman-cyrillic-ext.woff2') format('woff2');\n  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,\n    U+FE2E-FE2F;\n}\n\n@font-face {\n  font-family: Inter;\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url('/@fs/F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_d79121d1713466f37394797ab7bb8f51/node_modules/vitepress/dist/client/theme-default/fonts/in",
+      "headings": [],
+      "buttons": [],
+      "iframes": [],
+      "bodyText": ""
+    },
+    "consoleMessages": [
+      {
+        "type": "debug",
+        "text": "[vite] connecting..."
+      },
+      {
+        "type": "debug",
+        "text": "[vite] connected."
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "target": "lxupload",
+    "url": "http://127.0.0.1:4174/components/lxupload",
+    "navigation": {
+      "status": 200,
+      "error": null
+    },
+    "preflight": {
+      "title": "Assessment B injection preflight",
+      "marker": true,
+      "documentElement": "<html><head>\n    <script type=\"module\" src=\"/@vite/client\"></script>\n\n    <title>Assessment B injection preflight</title>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n    <meta name=\"description\" content=\"\">\n  <style type=\"text/css\" data-vite-dev-id=\"F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_d79121d1713466f37394797ab7bb8f51/node_modules/vitepress/dist/client/theme-default/styles/fonts.css\">\n\n@font-face {\n  font-family: Inter;\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url('/@fs/F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_d79121d1713466f37394797ab7bb8f51/node_modules/vitepress/dist/client/theme-default/fonts/inter-roman-cyrillic-ext.woff2') format('woff2');\n  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,\n    U+FE2E-FE2F;\n}\n\n@font-face {\n  font-family: Inter;\n  font-style: normal;\n  font-weight: 100 900;\n  font-display: swap;\n  src: url('/@fs/F:/work/linkx-admin/linkx-fe/node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_d79121d1713466f37394797ab7bb8f51/node_modules/vitepress/dist/client/theme-default/fonts/in",
+      "headings": [],
+      "buttons": [],
+      "iframes": [],
+      "bodyText": ""
+    },
+    "consoleMessages": [
+      {
+        "type": "debug",
+        "text": "[vite] connecting..."
+      },
+      {
+        "type": "debug",
+        "text": "[vite] connected."
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  }
+]

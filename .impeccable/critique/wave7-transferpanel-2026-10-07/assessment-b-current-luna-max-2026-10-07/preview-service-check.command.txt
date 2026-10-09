@@ -1,0 +1,1 @@
+Get-NetTCPConnection -LocalPort 4174 -State Listen; Invoke-WebRequest -Uri 'http://127.0.0.1:4174/components/lxtransferpanel.html' -UseBasicParsing -TimeoutSec 8

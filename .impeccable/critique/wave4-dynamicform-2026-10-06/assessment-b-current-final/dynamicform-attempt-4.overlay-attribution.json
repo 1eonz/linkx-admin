@@ -1,0 +1,410 @@
+[
+  {
+    "view": "desktop-light-initial",
+    "requestedViewport": {
+      "width": 1440,
+      "height": 1000,
+      "mobile": false
+    },
+    "detectorReady": true,
+    "findingCount": 19,
+    "overlay": {
+      "elements": 35,
+      "visible": 10,
+      "banners": [
+        "✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×"
+      ],
+      "labels": [
+        "line length too long",
+        "raster buried under a wash or opacity",
+        "raster buried under a wash or opacity",
+        "line length too long",
+        "line length too long",
+        "line length too long",
+        "raster buried under a wash or opacity",
+        "raster buried under a wash or opacity",
+        "raster buried under a wash or opacity",
+        "line length too long",
+        "line length too long",
+        "✦ hairline border with wide shadow",
+        "✦ hairline border with wide shadow",
+        "✦ hairline border with wide shadow",
+        "text occluded by an overlapping element",
+        "text occluded by an overlapping element",
+        "text occluded by an overlapping element"
+      ]
+    },
+    "attributions": [
+      {
+        "selector": "div.vp-doc > div > p:nth-of-type(1)",
+        "tagName": "p",
+        "isPageLevel": false,
+        "isHidden": false,
+        "componentAttribution": "Docs content / LxDynamicForm 动态表单\n​",
+        "textSnippet": "通过字段 schema 组合 Lx* 基础控件，使用 v-model 或 value + change(nextValue) 受控值契约向宿主报告字段变化；两种写法都可在 Vue 模板或 TSX 中使用，Vue 项目仍推荐优先使用 v-model。每种字段类型由独立子组件管理；远",
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme:nth-of-type(1) > button.copy",
+        "tagName": "button",
+        "isPageLevel": false,
+        "isHidden": false,
+        "componentAttribution": "Docs content / 最小配置\n​",
+        "textSnippet": "",
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "isPageLevel": false,
+        "isHidden": true,
+        "componentAttribution": "Docs content / 交互示例\n​",
+        "textSnippet": "",
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(3)",
+        "tagName": "p",
+        "isPageLevel": false,
+        "isHidden": false,
+        "componentAttribution": "Docs content / 交互示例\n​",
+        "textSnippet": "示例默认先展示一张可填写的任务表单；低频的布局、禁用、主题和主表单 Mock 状态控制收在“演示设置”中。主表单展示任务类型联动、受控禁用、单张/多张图片上传、表单校验与重置；“字段类型预览”默认折叠，使用单一选择器逐项查看全部 14 种内置 schema 类型，不把所有控件堆入",
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(4)",
+        "tagName": "p",
+        "isPageLevel": false,
+        "isHidden": false,
+        "componentAttribution": "Docs content / 字段 schema\n​",
+        "textSnippet": "内置 type：input、password、textarea、number、select、remote-select、tree-select、date、daterange、switch、radio、checkbox、upload、slot。password 使用 LxPassw",
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(5)",
+        "tagName": "p",
+        "isPageLevel": false,
+        "isHidden": false,
+        "componentAttribution": "Docs content / 插槽与实例\n​",
+        "textSnippet": "具名字段插槽接收 { field, value, disabled, ariaDescribedBy, update }。宿主自定义控件应遵守 disabled，并通过 update(value) 通知组件；组件会发出 update:modelValue 和 field-chan",
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(3) > button.copy",
+        "tagName": "button",
+        "isPageLevel": false,
+        "isHidden": false,
+        "componentAttribution": "Docs content / 插槽与实例\n​",
+        "textSnippet": "",
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme:nth-of-type(4) > button.copy",
+        "tagName": "button",
+        "isPageLevel": false,
+        "isHidden": false,
+        "componentAttribution": "Docs content / 插槽与实例\n​",
+        "textSnippet": "",
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "isPageLevel": false,
+        "isHidden": false,
+        "componentAttribution": "Docs content / 插槽与实例\n​",
+        "textSnippet": "",
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(8)",
+        "tagName": "p",
+        "isPageLevel": false,
+        "isHidden": false,
+        "componentAttribution": "Docs content / 插槽与实例\n​",
+        "textSnippet": "feedback 只负责呈现宿主传入的状态。retry 只触发宿主的恢复流程，网络请求仍由宿主按 .then().catch().finally() 编排；状态为 loading 时重试按钮会禁用，避免重复发起请求。错误、加载和空结果不需要再在表单底部重复一份文案。",
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(9)",
+        "tagName": "p",
+        "isPageLevel": false,
+        "isHidden": false,
+        "componentAttribution": "Docs content / 插槽与实例\n​",
+        "textSnippet": "实例公开 validate()、validateField()、resetFields()、clearValidate() 和 scrollToField()。validate() 返回 Promise<boolean>，并发出 validate(valid, fields?)；",
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~86 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-4",
+        "tagName": "div",
+        "isPageLevel": false,
+        "isHidden": true,
+        "componentAttribution": "Docs content / 交互示例\n​",
+        "textSnippet": "日常巡防应急支援",
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-9",
+        "tagName": "div",
+        "isPageLevel": false,
+        "isHidden": true,
+        "componentAttribution": "Docs content / 交互示例\n​",
+        "textSnippet": "李警官 · 指挥中心陈警官 · 一大队周警官 · 二大队",
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "#el-id-1024-14",
+        "tagName": "div",
+        "isPageLevel": false,
+        "isHidden": true,
+        "componentAttribution": "Docs content / 交互示例\n​",
+        "textSnippet": "文本输入密码输入多行文本数字输入下拉选择远程选择树形选择日期选择日期范围开关单选组多选组文件上传自定义插槽",
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "label.el-checkbox.lx-checkbox:nth-of-type(1) > span.el-checkbox__label",
+        "tagName": "span",
+        "isPageLevel": false,
+        "isHidden": true,
+        "componentAttribution": "LxDynamicForm demo",
+        "textSnippet": "",
+        "findings": [
+          {
+            "type": "text-occlusion",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "span.el-checkbox__label \"禁用表单\" is 33% covered by an opaque element (div.el-input__wrapper)",
+            "ignoreValue": "",
+            "name": "Text occluded by an overlapping element",
+            "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+          }
+        ]
+      },
+      {
+        "selector": "span.dynamic-form-demo__status:nth-of-type(3)",
+        "tagName": "span",
+        "isPageLevel": false,
+        "isHidden": true,
+        "componentAttribution": "LxDynamicForm demo",
+        "textSnippet": "",
+        "findings": [
+          {
+            "type": "text-occlusion",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "span.dynamic-form-demo__status \"3 名候选人员\" is 67% covered by an opaque element (div.el-select__wrapper.el-tooltip__trigger.el-tooltip__trigger)",
+            "ignoreValue": "",
+            "name": "Text occluded by an overlapping element",
+            "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+          }
+        ]
+      },
+      {
+        "selector": "details.dynamic-form-demo__schema-preview > div.el-select.el-select--default > div.el-select__wrapper.el-tooltip__trigger > div.el-select__selection > div.el-select__selected-item.el-select__placeholder > span",
+        "tagName": "span",
+        "isPageLevel": false,
+        "isHidden": true,
+        "componentAttribution": "LxDynamicForm demo",
+        "textSnippet": "",
+        "findings": [
+          {
+            "type": "text-occlusion",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "span \"数字输入\" is 100% covered by overlapping text (span.lx-btn__label)",
+            "ignoreValue": "",
+            "name": "Text occluded by an overlapping element",
+            "description": "Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "isPageLevel": true,
+        "isHidden": false,
+        "componentAttribution": "Docs content / unattributed",
+        "textSnippet": "Skip to content LxUI Main Navigation 首页 组件 新增组件 Sidebar Navigation 新增组件 新增组件总览 基础 基础控件桥接 LxButton 按钮 LxIcon 图标总览 布局导航 LxSidebar 侧边栏 LxNavbar",
+        "findings": [
+          {
+            "type": "bounce-easing",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+            "ignoreValue": "",
+            "name": "Bounce or elastic easing",
+            "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+          },
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ]
+  }
+]

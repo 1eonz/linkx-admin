@@ -1,0 +1,41 @@
+{
+  "command": "node \".impeccable/critique/wave7-transferpanel-2026-10-07/assessment-b-final-luna-2026-10-07/verify-ports.mjs\"",
+  "results": [
+    {
+      "name": "user-preview-4174",
+      "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+      "expected": "available",
+      "reachable": true,
+      "status": 200,
+      "pageRootPresent": true,
+      "title": ""
+    },
+    {
+      "name": "existing-vitepress-4177",
+      "url": "http://127.0.0.1:4177/",
+      "expected": "untouched-by-assessment",
+      "reachable": false,
+      "status": null,
+      "error": "fetch failed"
+    },
+    {
+      "name": "assessment-live-server-8400",
+      "url": "http://127.0.0.1:8400/detect.js",
+      "expected": "stopped",
+      "reachable": false,
+      "status": null,
+      "error": "fetch failed"
+    }
+  ],
+  "checks": {
+    "userPreviewPreserved": true,
+    "assessmentServerStopped": true
+  },
+  "externalServiceObservation": {
+    "port": 4177,
+    "initiallyObservedListenerPid": 24920,
+    "finalReachable": false,
+    "assessmentInvokedStartOrStop": false
+  },
+  "allChecksPass": true
+}

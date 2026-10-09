@@ -1,10 +1,21 @@
 # lx-ui 路线图
 
-## 2026-10-10 G2 正式完成
+## 2026-10-10 Wave 9 / LxUpload 回灌 abort 回归完成
 
-- `LxSearchBar`：单测 8/8、文档 E2E 3/3、Assessment A 25/40；已完成搜索语义、loading/折叠字段提示、移动 44px 触控和减少动效处理。修后 B 的三个 detector 为有效 `[]`、stderr 空、exit 0，并有亮色/HUD、1440/375px 和交互证据。
+- 已补无 UID 文件生成 fallback UID、父级回灌后公开 `abort()` 的组合测试；单测 38/38 通过。
+- 文档 E2E 首次 7/9，两个连接拒绝用例独立重跑 2/2 通过，当前证据合计 9/9；环境细节见 `.impeccable/critique/wave9-upload-2026-10-10/agent-notes.md`。
+- 真实上传协议和业务页替换继续后置；下一入口为 `LxDescriptions`、`LxVirtualTree` 当前版正式复验。
+
+## 2026-10-10 G2 修复复验（待最终快照收口）
+
+- SearchBar Demo 已补四字段标准态并移除重复等待反馈；StatusSwitch 确认层已支持影响范围/审计提示，全部只读、loading、无权限行补齐可访问名称关联。
+- 定向单测 `26/26`，类型、目标格式和 ESLint 通过；Assessment A/B 修后证据已落盘，最终综合报告和 snapshot/trend 仍是 G2 正式关闭门槛。
+
+## 2026-10-10 G2 阶段性复核（历史记录，降级未正式完成）
+
+- `LxSearchBar`：单测 8/8、文档 E2E 3/3；已完成搜索语义、loading/折叠字段提示、移动 44px 触控和减少动效处理。Assessment A 因浏览器不可启动降级为 **31/40（Good）**；B 的三个 detector 为有效 `[]`、stderr 空、exit 0，截图/DOM 证据已保存，但 overlay 注入未稳定完成。
 - `LxStatusSwitch`：单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6；确认竞态、外部 modelValue/权限源变化、权限撤销、loading/只读 ARIA、Space 键盘和失败重试已覆盖。
-- 库构建、独立代码复审和综合 Impeccable 报告已完成；综合报告、snapshot/trend 位于 `.impeccable/critique/wave8-searchbar-2026-10-10/`。静态 detector `[]` 仍不能单独代表视觉通过；Vue3 宿主替换继续后置。
+- 库构建、单测/E2E、类型和目标格式检查已完成；本轮没有可用综合 Impeccable 报告、snapshot/trend，不能标记正式 Critique 通过。P1：SearchBar 四字段操作行与设计稿不一致、StatusSwitch HUD 与 Teleport 确认层可能脱节；P2：SearchBar 无 `meta` 时结果/错误状态、StatusSwitch 行名可访问名称、375px 复杂状态及确认/失败/只读路径实图、文档页 404 归因待补。Vue3 宿主替换继续后置。
 
 ## 2026-10-10 Wave 7 正式完成 / G2
 

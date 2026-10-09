@@ -1,0 +1,64 @@
+{
+  "method": "standalone Assessment A in a fresh isolated Edge/Playwright context",
+  "target": "http://127.0.0.1:4174/components/lxicons.html",
+  "source": "linkx-fe/docs/components/lxicons.md",
+  "mode": "Read",
+  "detector": "not run by request",
+  "assessmentB": "not opened",
+  "codeReview": "not opened",
+  "heuristics": [
+    { "id": 1, "name": "Visibility of System Status", "score": 4, "evidence": "Search counts, copy feedback, and empty state use explicit feedback; live statuses are present." },
+    { "id": 2, "name": "Match Between System and Real World", "score": 3, "evidence": "Chinese icon meanings and search terms are clear; P0/P1 and code key naming assume maintainer context." },
+    { "id": 3, "name": "User Control and Freedom", "score": 3, "evidence": "Search can be cleared with focus restored and categories can be collapsed." },
+    { "id": 4, "name": "Consistency and Standards", "score": 4, "evidence": "Native buttons and details/summary patterns are consistent and keyboard operable." },
+    { "id": 5, "name": "Error Prevention", "score": 3, "evidence": "Examples and labels reduce search mistakes; the task has no destructive action." },
+    { "id": 6, "name": "Recognition Rather Than Recall", "score": 4, "evidence": "Cards show Chinese meaning and English key; Chinese synonyms can be searched." },
+    { "id": 7, "name": "Flexibility and Efficiency of Use", "score": 3, "evidence": "Search, keyboard clear, and Enter copy work; no shortcuts or favorites were found." },
+    { "id": 8, "name": "Aesthetic and Minimalist Design", "score": 3, "evidence": "Catalog and reference sections are distinct; compatibility table is cramped at 320px." },
+    { "id": 9, "name": "Error Recovery", "score": 4, "evidence": "Copy failure explains recovery and focuses/selects the full code." },
+    { "id": 10, "name": "Help and Documentation", "score": 3, "evidence": "Usage, motion, checklist, and alias guidance are on-page but require scrolling." }
+  ],
+  "total": 34,
+  "applicableMaximum": 40,
+  "rating": "Good",
+  "designSpecificity": "Medium-strong; LinkX icon inventory and Chinese semantic search give the page a specific purpose, within a standard VitePress documentation frame.",
+  "cognitiveLoad": {
+    "rating": "moderate",
+    "failedItems": [
+      "Chunking: the default-open P0 group contains 13 items.",
+      "Minimal choices: seven category groups and 13 desktop-visible P0 tiles exceed the four-choice reference threshold."
+    ],
+    "passedItems": ["Single focus", "Grouping", "Visual hierarchy", "One thing at a time", "Working memory", "Progressive disclosure"]
+  },
+  "strengths": [
+    "P0 group exposes 13 labeled icons, with four visible at 375px and two at 320px.",
+    "Persistent polite live regions announce empty-search and copy states; visual empty copy is aria-hidden.",
+    "Clipboard failure selects the full fallback code; keyboard clear and Enter copy work."
+  ],
+  "priorityIssues": [
+    {
+      "priority": "P2",
+      "title": "Compatibility alias table is difficult to read at 320px",
+      "evidence": "alias table clientWidth=272, scrollWidth=302; explanation and source columns wrap vertically and extend past viewport edge",
+      "suggestedCommand": "/impeccable adapt"
+    }
+  ],
+  "noFindings": { "P0": true, "P1": true, "additionalP2": true },
+  "personas": ["Jordan (Confused First-Timer)", "Casey (Distracted Mobile User)", "Sam (Accessibility-Dependent User)"],
+  "browserEvidence": "browser-evidence.json",
+  "realScreenReaderTested": false,
+  "testsExecuted": false,
+  "captures": [
+    "desktop-1440-light.png",
+    "desktop-1440-dark.png",
+    "mobile-375-light.png",
+    "mobile-375-dark.png",
+    "mobile-375-fresh-context.png",
+    "mobile-320-light.png",
+    "mobile-320-alias-table.png",
+    "mobile-375-copy-success.png",
+    "mobile-375-copy-failure.png",
+    "mobile-375-empty-search.png",
+    "mobile-375-reduced-motion.png"
+  ]
+}

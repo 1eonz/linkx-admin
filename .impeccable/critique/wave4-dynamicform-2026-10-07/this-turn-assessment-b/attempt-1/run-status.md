@@ -1,0 +1,1 @@
+Attempt 1 failed before target navigation. Chrome started with an isolated profile, but Playwright Target.createTarget failed when creating an additional tab. No live detector server started and no product source changed. Evidence files were copied from the attempt root before retry.

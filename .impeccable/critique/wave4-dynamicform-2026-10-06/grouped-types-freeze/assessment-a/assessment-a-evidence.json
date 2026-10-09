@@ -1,0 +1,270 @@
+{
+  "assessment": "A",
+  "title": "LxDynamicForm 字段类型分组独立设计评估",
+  "target": "http://127.0.0.1:4174/components/lxdynamicform.html",
+  "method": {
+    "isolatedAssessment": true,
+    "browser": "Chrome/154.0.8037.95",
+    "browserAutomation": "Chrome DevTools Protocol with fresh browser contexts",
+    "detectorRun": false,
+    "priorAssessmentReportsRead": false,
+    "priorAssessmentScreenshotsRead": false,
+    "assessmentBResultsRead": false,
+    "notes": [
+      "本证据仅记录独立 Assessment A 的设计观察。",
+      "未运行 Detector，未注入检测脚本，也未触发真实后端写入。"
+    ]
+  },
+  "sourcesReviewed": [
+    "linkx-fe/src/components/LxDynamicForm/index.vue",
+    "linkx-fe/src/components/LxDynamicForm/demo/basic.vue",
+    "linkx-fe/docs/components/lxdynamicform.md",
+    "C:/Users/Administrator/.codex/skills/impeccable/SKILL.md",
+    "C:/Users/Administrator/.codex/skills/impeccable/reference/critique.md"
+  ],
+  "freezeVerification": {
+    "manifest": ".impeccable/critique/wave4-dynamicform-2026-10-06/grouped-types-freeze/source-hashes-freeze.json",
+    "declaredFiles": 39,
+    "beforeAssessment": {
+      "checked": 39,
+      "matched": 39,
+      "mismatches": 0
+    },
+    "afterAssessment": {
+      "verifiedAt": "2026-10-06T14:12:58.635Z",
+      "checked": 39,
+      "matched": 39,
+      "mismatches": 0
+    },
+    "result": "39/39 SHA-256 matched before and after visual assessment."
+  },
+  "viewports": [
+    {
+      "name": "desktop-light",
+      "width": 1440,
+      "height": 1000,
+      "colorScheme": "light",
+      "themeControl": "default light theme"
+    },
+    {
+      "name": "desktop-dark",
+      "width": 1440,
+      "height": 1000,
+      "colorScheme": "dark UI via demo control",
+      "themeControl": "深色主题（HUD） enabled; document classes dark and lx-theme-hud"
+    },
+    {
+      "name": "mobile-375-light",
+      "width": 375,
+      "height": 812,
+      "deviceScaleFactor": 1,
+      "touchEmulation": true,
+      "colorScheme": "light"
+    },
+    {
+      "name": "desktop-light-main-form",
+      "width": 1440,
+      "height": 1000,
+      "colorScheme": "light",
+      "browserContext": "fresh context for form validation and reset"
+    }
+  ],
+  "observedBehavior": {
+    "typeGroups": [
+      {
+        "label": "文本类字段",
+        "options": ["文本输入", "密码输入", "多行文本"]
+      },
+      {
+        "label": "选择类字段",
+        "options": ["下拉选择", "远程选择", "树形选择", "单选组", "多选组"]
+      },
+      {
+        "label": "日期与数值",
+        "options": ["数字输入", "日期选择", "日期范围"]
+      },
+      {
+        "label": "状态与附件",
+        "options": ["开关", "文件上传", "自定义插槽"]
+      }
+    ],
+    "searchFlow": {
+      "query": "上传",
+      "resultGroup": "状态与附件",
+      "results": ["文件上传"]
+    },
+    "keyboardFlow": {
+      "keys": ["ArrowDown", "Enter"],
+      "selectedLabel": "文件上传",
+      "result": "下拉关闭，预览呈现文件上传示例"
+    },
+    "initialMenuState": {
+      "selectedDefault": "数字输入",
+      "visualEffect": "列表滚动定位在选中类型附近，首组与末组不在初始可视区域内。"
+    },
+    "mainForm": {
+      "columns": 2,
+      "submitEmpty": {
+        "fieldErrors": ["请输入任务名称", "请输入访问密码"],
+        "focusedPlaceholder": "输入任务名称",
+        "alert": "请填写标红的必填字段"
+      },
+      "reset": {
+        "errorsCleared": true,
+        "status": "表单已恢复初始值",
+        "nameValue": "",
+        "passwordValue": ""
+      }
+    },
+    "responsive": {
+      "mobileWidth": 375,
+      "documentScrollWidth": 375,
+      "viewportWidth": 375,
+      "horizontalDocumentOverflow": false
+    }
+  },
+  "heuristics": {
+    "scores": {
+      "visibilityOfSystemStatus": 3,
+      "matchBetweenSystemAndRealWorld": 3,
+      "userControlAndFreedom": 3,
+      "consistencyAndStandards": 3,
+      "errorPrevention": 3,
+      "recognitionRatherThanRecall": 2,
+      "flexibilityAndEfficiency": 3,
+      "aestheticAndMinimalistDesign": 3,
+      "errorRecognitionAndRecovery": 3,
+      "helpAndDocumentation": 3
+    },
+    "total": 29,
+    "maximum": 40,
+    "rating": "Good",
+    "designSpecificity": 3,
+    "designSpecificityMaximum": 4
+  },
+  "cognitiveLoad": {
+    "failedItems": 2,
+    "rating": "moderate",
+    "failures": [
+      "Chunking: 選擇類字段 has five options.",
+      "Minimal choices: the first menu viewport shows around six type options and does not expose all four groups together."
+    ]
+  },
+  "priorityIssues": [
+    {
+      "id": "A1",
+      "priority": "P2",
+      "title": "First-open menu position hides part of the category map",
+      "evidence": [
+        "desktop-light-groups-open.png",
+        "mobile-375-light-groups-open.png"
+      ]
+    },
+    {
+      "id": "A2",
+      "priority": "P2",
+      "title": "Search affordance is not obvious while a current type is selected",
+      "evidence": [
+        "desktop-light-groups-open.png",
+        "desktop-light-search-upload.png"
+      ]
+    },
+    {
+      "id": "A3",
+      "priority": "P3",
+      "title": "Selection group has five entries, above the four-item chunking guide"
+    },
+    {
+      "id": "A4",
+      "priority": "P3",
+      "title": "Type preview is collapsed after the long main form example"
+    }
+  ],
+  "personaRisks": [
+    {
+      "persona": "Alex",
+      "risk": "Search and keyboard confirmation work; the selected value does not advertise that typing filters the list."
+    },
+    {
+      "persona": "Jordan",
+      "risk": "Category names are plain, but the initial menu scroll position shows only part of the taxonomy and the preview is below the main example."
+    },
+    {
+      "persona": "Casey",
+      "risk": "No document-level horizontal scroll at 375px; upward-opening menu overlays the preview area and requires list scrolling."
+    },
+    {
+      "persona": "Sam",
+      "risk": "A visible label and focus outline exist, but no screen-reader, announcement, or complete tab-order test was performed."
+    }
+  ],
+  "coverageLimits": [
+    "No screen-reader testing or formal WCAG contrast calculation.",
+    "No 200% zoom, 320px width, landscape, intermediate breakpoints, or touch target measurements.",
+    "No Escape, Home/End, or complete Tab order test.",
+    "No remote-select loading, empty, or error flow test.",
+    "No upload interaction test and no real backend interaction."
+  ],
+  "screenshots": [
+    {
+      "file": "desktop-dark-groups-open.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "e9c18489b3cb2ab8289e602a5678e5edebee9f2e184a044357c1923b9a5c50c9"
+    },
+    {
+      "file": "desktop-light-groups-open.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "e310f422ef0055e72451e2ee163b92322f81b8601230ab0e9817f9ed7a15c6c6"
+    },
+    {
+      "file": "desktop-light-keyboard-selection.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "222485bf6b918c4af700826dede2f657d952b66c2b261af6fd48b3c1738be3f2"
+    },
+    {
+      "file": "desktop-light-main-form-initial.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "1b2190b8d2a0bb7db02e06b5e4e054223e14a318bbf6d86d3ac72313ba5610e5"
+    },
+    {
+      "file": "desktop-light-main-form-reset.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "fc503c243e7fc0ce5f08d20f2b01cd3b3a40a96a04c44ec0efa87d52af20ff9f"
+    },
+    {
+      "file": "desktop-light-main-form-validation.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "999156f0653b8e97bef9b279f92196a15a4ec5cdb1dc0cfe9c9a552a6938573a"
+    },
+    {
+      "file": "desktop-light-search-upload.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "b3504a9b234b2bc849ffc2224d04b56ee638e2be25fee905356b7c06f32d4483"
+    },
+    {
+      "file": "mobile-375-light-groups-open.png",
+      "width": 375,
+      "height": 812,
+      "sha256": "4aa23d6a71e2025b78aefb95b7a91a3fa6f968a70586e580ae2f7393367ab11c"
+    },
+    {
+      "file": "mobile-375-light-keyboard-selection.png",
+      "width": 375,
+      "height": 812,
+      "sha256": "a18d54f4a2810b396e62d62cae7e78720212c19b41c272d02978cdce2592e27d"
+    },
+    {
+      "file": "mobile-375-light-search-upload.png",
+      "width": 375,
+      "height": 812,
+      "sha256": "61c091a7ca4ba5c245a96b7c5bff71c9b339e1578867787468a42fefefd30bdf"
+    }
+  ]
+}

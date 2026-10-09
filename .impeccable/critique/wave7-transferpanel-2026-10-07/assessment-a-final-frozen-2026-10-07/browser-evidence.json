@@ -1,0 +1,330 @@
+{
+  "targetUrl": "http://127.0.0.1:4174/components/lxtransferpanel",
+  "browser": "system Chrome via Playwright",
+  "context": "new isolated browser context and page",
+  "captures": [
+    "desktop-ready-surface.png",
+    "desktop-ready-page.png",
+    "desktop-hud-surface.png",
+    "desktop-source-filter.png",
+    "desktop-selected-code-filter.png",
+    "desktop-keyboard-tab-selected-clear.png",
+    "desktop-keyboard-tab-source-clear.png",
+    "desktop-keyboard-tree-focus.png",
+    "desktop-loading.png",
+    "desktop-error.png",
+    "desktop-retry-restored.png",
+    "desktop-empty-tree-900ms.png",
+    "desktop-clear-confirmation.png",
+    "desktop-empty-selection.png",
+    "desktop-clear-with-undo.png",
+    "desktop-after-undo.png",
+    "mobile-375-ready-page.png",
+    "mobile-375-ready-surface.png",
+    "mobile-375-hud-surface.png",
+    "mobile-375-reduced-motion.png",
+    "mobile-375-empty-tree-hud.png"
+  ],
+  "observations": {
+    "sourceFilter": {
+      "matchCount": 2,
+      "selectFilteredEnabled": false,
+      "invertFilteredEnabled": true
+    },
+    "sourceFilterClearReturnsFocus": true,
+    "selectedCodeFilterCount": 1,
+    "keyboardFocus": {
+      "tag": "BUTTON",
+      "label": "清除已选项筛选",
+      "className": "",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px",
+      "boxShadow": "none"
+    },
+    "selectedFilterClearReturnsFocus": true,
+    "selectedFilterClearCount": 5,
+    "keyboardTabPath": [
+      {
+        "tag": "BUTTON",
+        "label": "",
+        "text": "正常数据"
+      },
+      {
+        "tag": "BUTTON",
+        "label": "",
+        "text": "空结果"
+      },
+      {
+        "tag": "BUTTON",
+        "label": "",
+        "text": "加载中"
+      },
+      {
+        "tag": "BUTTON",
+        "label": "",
+        "text": "加载失败"
+      },
+      {
+        "tag": "INPUT",
+        "label": "",
+        "text": ""
+      },
+      {
+        "tag": "INPUT",
+        "label": "",
+        "text": ""
+      },
+      {
+        "tag": "INPUT",
+        "label": "筛选待选节点",
+        "text": ""
+      }
+    ],
+    "sourceClearKeyboardFocus": {
+      "label": "清除待选节点筛选",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px",
+      "boxShadow": "none"
+    },
+    "sourceFilterClearByKeyboardReturnsFocus": true,
+    "sourceFilterClearByKeyboardValue": "",
+    "treeFocusReachedByTab": true,
+    "treeItemTabIndex": "0",
+    "treeSpaceOperation": {
+      "selectedCountBefore": "当前已选 5 项",
+      "selectedCountAfterOneSpace": "当前已选 4 项",
+      "selectedCountAfterSecondSpace": "当前已选 5 项",
+      "focusedAfterOperation": true
+    },
+    "loading": {
+      "message": "组织权限数据加载中……",
+      "ariaBusy": "true",
+      "selectedCount": "当前已选 5 项"
+    },
+    "error": {
+      "message": "组织权限数据加载失败，当前选择仍然保留。\n重试",
+      "retryVisible": true,
+      "selectedCount": "当前已选 5 项"
+    },
+    "emptyTreeAfter900ms": {
+      "tree": {
+        "selector": "lx-transfer-panel__tree",
+        "top": 626,
+        "height": 265,
+        "minHeight": "0px",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "viewport": {
+        "selector": "lx-virtual-tree__viewport",
+        "top": 626,
+        "height": 265,
+        "minHeight": "auto",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "treeEmptyOrRow": {
+        "selector": "lx-virtual-tree__empty",
+        "top": 627,
+        "height": 76,
+        "minHeight": "0px",
+        "lineHeight": "28px",
+        "flex": "0 1 auto"
+      },
+      "selectedList": {
+        "selector": "lx-transfer-panel__selected",
+        "top": 626,
+        "height": 265,
+        "minHeight": "0px",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "selectedEmpty": null,
+      "selectedRow": {
+        "selector": "lx-transfer-panel__selected-item",
+        "top": 634,
+        "height": 86,
+        "minHeight": "32px",
+        "lineHeight": "24px",
+        "flex": "0 0 auto"
+      },
+      "viewportWidth": 1440,
+      "documentWidth": 1440
+    },
+    "unloadedRemovalConfirmation": {
+      "visible": true,
+      "text": "清空已选授权\n\n已选项中包含未加载的节点，无法核对其当前名称。确认移除全部授权吗？\n\n取消\n清空全部授权"
+    },
+    "emptySelection": {
+      "tree": {
+        "selector": "lx-transfer-panel__tree",
+        "top": 634,
+        "height": 265,
+        "minHeight": "0px",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "viewport": {
+        "selector": "lx-virtual-tree__viewport",
+        "top": 634,
+        "height": 265,
+        "minHeight": "auto",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "treeEmptyOrRow": {
+        "selector": "lx-virtual-tree__row",
+        "top": 635,
+        "height": 32,
+        "minHeight": "0px",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "selectedList": {
+        "selector": "lx-transfer-panel__selected",
+        "top": 634,
+        "height": 265,
+        "minHeight": "0px",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "selectedEmpty": {
+        "selector": "lx-transfer-panel__empty",
+        "top": 642,
+        "height": 72,
+        "minHeight": "auto",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "selectedRow": null,
+      "viewportWidth": 1440,
+      "documentWidth": 1440
+    },
+    "undoVisible": true,
+    "mobileReady": {
+      "tree": {
+        "selector": "lx-transfer-panel__tree",
+        "top": 350,
+        "height": 257,
+        "minHeight": "0px",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "viewport": {
+        "selector": "lx-virtual-tree__viewport",
+        "top": 350,
+        "height": 257,
+        "minHeight": "auto",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "treeEmptyOrRow": {
+        "selector": "lx-virtual-tree__row is-checked",
+        "top": 351,
+        "height": 32,
+        "minHeight": "0px",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "selectedList": {
+        "selector": "lx-transfer-panel__selected",
+        "top": 810,
+        "height": 257,
+        "minHeight": "0px",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "selectedEmpty": null,
+      "selectedRow": {
+        "selector": "lx-transfer-panel__selected-item",
+        "top": 818,
+        "height": 46,
+        "minHeight": "44px",
+        "lineHeight": "24px",
+        "flex": "0 0 auto"
+      },
+      "viewportWidth": 375,
+      "documentWidth": 375
+    },
+    "reducedMotionPreference": {
+      "mediaMatches": true,
+      "computedTransitionDurations": [
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s"
+      ],
+      "computedAnimationDurations": [
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s"
+      ]
+    },
+    "mobileEmptyTree": {
+      "tree": {
+        "selector": "lx-transfer-panel__tree",
+        "top": 350,
+        "height": 257,
+        "minHeight": "0px",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "viewport": {
+        "selector": "lx-virtual-tree__viewport",
+        "top": 350,
+        "height": 257,
+        "minHeight": "auto",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "treeEmptyOrRow": {
+        "selector": "lx-virtual-tree__empty",
+        "top": 351,
+        "height": 76,
+        "minHeight": "0px",
+        "lineHeight": "28px",
+        "flex": "0 1 auto"
+      },
+      "selectedList": {
+        "selector": "lx-transfer-panel__selected",
+        "top": 810,
+        "height": 257,
+        "minHeight": "0px",
+        "lineHeight": "24px",
+        "flex": "0 1 auto"
+      },
+      "selectedEmpty": null,
+      "selectedRow": {
+        "selector": "lx-transfer-panel__selected-item",
+        "top": 818,
+        "height": 58,
+        "minHeight": "44px",
+        "lineHeight": "24px",
+        "flex": "0 0 auto"
+      },
+      "viewportWidth": 375,
+      "documentWidth": 375
+    }
+  },
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "failedRequests": [],
+  "httpStatus": 200,
+  "documentTitle": "LxTransferPanel 双栏穿梭 | LxUI",
+  "viewport": {
+    "innerWidth": 375,
+    "clientWidth": 375,
+    "scrollWidth": 375
+  },
+  "httpErrors": []
+}

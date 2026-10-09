@@ -1,0 +1,563 @@
+{
+  "id": "desktop-light-clear-confirmation",
+  "viewport": {
+    "width": 1440,
+    "height": 1100
+  },
+  "colorScheme": "light",
+  "isMobile": false,
+  "hasTouch": false,
+  "startedAt": "2026-10-07T16:17:25.991Z",
+  "navigation": {
+    "httpStatus": 200,
+    "finalUrl": "http://127.0.0.1:4174/components/lxtransferpanel",
+    "title": "LxTransferPanel 双栏穿梭 | LxUI",
+    "demoVisible": true
+  },
+  "mutationPreflight": {
+    "titleSet": true,
+    "scriptAppended": true,
+    "scriptExecuted": true
+  },
+  "interactions": {
+    "dialogVisible": true,
+    "dialogText": "清空已选授权\n\n已选项中包含未加载的节点，无法核对其当前名称。确认移除全部授权吗？\n\n取消\n清空全部授权",
+    "buttonLabels": [
+      "",
+      "取消",
+      "清空全部授权"
+    ],
+    "cancelled": true
+  },
+  "injection": {
+    "succeeded": true,
+    "scriptSrc": "http://localhost:8400/detect.js"
+  },
+  "scan": {
+    "apiAvailable": true,
+    "scriptPresent": true,
+    "overlayCount": 11,
+    "bannerCount": 1,
+    "groupCount": 11,
+    "ruleCount": 12,
+    "rules": [
+      {
+        "selector": "div.vp-doc > div > p:nth-of-type(1)",
+        "tagName": "p",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~110 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "type": "buried-raster",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "name": "Raster buried under a wash or opacity"
+      },
+      {
+        "selector": "p:nth-of-type(4)",
+        "tagName": "p",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~110 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "div.vp-doc > div > ul > li:nth-of-type(2)",
+        "tagName": "li",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~108 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "div.vp-doc > div > ul > li:nth-of-type(6)",
+        "tagName": "li",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~108 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "p:nth-of-type(5)",
+        "tagName": "p",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~110 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "p:nth-of-type(6)",
+        "tagName": "p",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~110 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "type": "buried-raster",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "name": "Raster buried under a wash or opacity"
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "type": "buried-raster",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "raster background at opacity 0",
+        "name": "Raster buried under a wash or opacity"
+      },
+      {
+        "selector": "p:nth-of-type(7)",
+        "tagName": "p",
+        "type": "line-length",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "~110 chars/line (aim for <80)",
+        "name": "Line length too long"
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "type": "bounce-easing",
+        "severity": "warning",
+        "category": "slop",
+        "advisory": false,
+        "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+        "name": "Bounce or elastic easing"
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "type": "layout-transition",
+        "severity": "warning",
+        "category": "quality",
+        "advisory": false,
+        "detail": "transition: height, padding-top, padding-bottom",
+        "name": "Layout property animation"
+      }
+    ],
+    "groups": [
+      {
+        "selector": "div.vp-doc > div > p:nth-of-type(1)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 168,
+          "width": 880,
+          "height": 58,
+          "top": 168,
+          "right": 1216,
+          "bottom": 226,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1147,
+          "y": 1135,
+          "width": 40,
+          "height": 40,
+          "top": 1135,
+          "right": 1187,
+          "bottom": 1175,
+          "left": 1147
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(4)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 3423,
+          "width": 880,
+          "height": 88,
+          "top": 3423,
+          "right": 1216,
+          "bottom": 3511,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.vp-doc > div > ul > li:nth-of-type(2)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 3664,
+          "width": 860,
+          "height": 76,
+          "top": 3664,
+          "right": 1216,
+          "bottom": 3740,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.vp-doc > div > ul > li:nth-of-type(6)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 3846,
+          "width": 860,
+          "height": 74,
+          "top": 3846,
+          "right": 1216,
+          "bottom": 3920,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(5)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 4097,
+          "width": 880,
+          "height": 88,
+          "top": 4097,
+          "right": 1216,
+          "bottom": 4185,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(6)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 4201,
+          "width": 880,
+          "height": 88,
+          "top": 4201,
+          "right": 1216,
+          "bottom": 4289,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1164,
+          "y": 4317,
+          "width": 40,
+          "height": 40,
+          "top": 4317,
+          "right": 1204,
+          "bottom": 4357,
+          "left": 1164
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1164,
+          "y": 5160.375,
+          "width": 40,
+          "height": 40,
+          "top": 5160.375,
+          "right": 1204,
+          "bottom": 5200.375,
+          "left": 1164
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(7)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 5359.03125,
+          "width": 880,
+          "height": 116,
+          "top": 5359.03125,
+          "right": 1216,
+          "bottom": 5475.03125,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "bounce-easing",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+            "ignoreValue": "",
+            "name": "Bounce or elastic easing",
+            "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+          },
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ]
+  },
+  "browser": {
+    "title": "[Human] LxTransferPanel Assessment B",
+    "viewportWidth": 1440,
+    "documentWidth": 1440,
+    "horizontalOverflow": false,
+    "documentHeight": 5758,
+    "bodyClasses": "el-message-box-parent--hidden",
+    "themeClasses": [
+      "transfer-panel-demo"
+    ],
+    "activeElement": {
+      "tagName": "button",
+      "ariaLabel": null,
+      "text": "清空全部授权"
+    }
+  },
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 11 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~108 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cline-length%c ~110 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    }
+  ],
+  "pageErrors": [],
+  "requestFailures": [],
+  "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-2026-10-07\\desktop-light-clear-confirmation.png",
+  "finishedAt": "2026-10-07T16:17:32.308Z"
+}

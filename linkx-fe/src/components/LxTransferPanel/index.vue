@@ -2121,6 +2121,13 @@ function statusLabelOf(node: LxVirtualTreeNode): string {
   font-size: 11px;
 }
 
+/* 页脚继承开关与树节点复选框共用 14px 视觉盒，外层仍保留紧凑行高。 */
+.lx-transfer-panel__footer :deep(.el-checkbox__inner) {
+  box-sizing: border-box;
+  width: var(--lx-tree-checkbox-size);
+  height: var(--lx-tree-checkbox-size);
+}
+
 @media (max-width: 767px) {
   .lx-transfer-panel {
     grid-template-columns: minmax(0, 1fr);

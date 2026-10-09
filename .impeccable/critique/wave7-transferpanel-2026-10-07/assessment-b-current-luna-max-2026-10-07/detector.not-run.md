@@ -1,0 +1,1 @@
+Detector not run. The E2E frozen SHA256 supplied for `other-admin/admin-vue3/tests/e2e/lx-transfer-panel-docs.spec.ts` contains 65 hexadecimal characters and does not match the file's 64-character SHA256. Assessment B stopped at the required freeze gate. No detector stdout, stderr, or exit code exists.

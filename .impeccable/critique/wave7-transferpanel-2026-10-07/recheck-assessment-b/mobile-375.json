@@ -1,0 +1,3942 @@
+{
+  "mobileInitial": {
+    "title": "[Human] LxTransferPanel recheck B",
+    "readyState": "complete",
+    "bodyText": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。\n\n交互示例\n​\n正常数据\n空结果\n加载中\n加载失败\n最多 5 项\nHUD 深色主题\n\n已载入组织权限数据\n\n组织与数据权限树（待选）\n全选\n/\n反选\n市公安局指挥中心\nORG-01\n正常\n待选池：5 个节点\n已选数据权限清单\n清空\n情指行一体化研判调度专班\nDEPT-03\n正常\nlegacy-unit-08\n已选 2 项\n保留下级继承授权\n当前已选 2 项\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配单位...', '在已选名单中检索...']\t左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t用户通过右侧清空或中间全部移除清空非空列表时触发。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表使用同一节点类型，因此暂未加载到当前树中的键仍能显示键名并移除；组件不会为未加载键臆造 code 或 status。\n\n选择规则\n​\n左侧“全选”和中间向右按钮会加入当前树中所有未禁用节点；上限不足时不做部分写入。\n左侧“反选”针对当前已加载树中的所有未禁用节点，不受树内搜索结果限制。树外既有键和禁用节点保持原值；选中数量超过上限时拒绝会增加数量的反选。\n单个禁用树节点不能从左侧新增。右侧删除和清空仍可移除已存在的节点，包括暂时不在当前树中的键。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例使用遮罩保留双栏上下文。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。\nPager\nPrevious page\nLxVirtualTree 虚拟树\nNext page\nLxStatusDot 状态点\nline length too long\ncramped padding\ncards flush against the scroller edge\n✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+    "layoutRect": {
+      "x": 24,
+      "y": 669,
+      "width": 312,
+      "height": 840
+    },
+    "gridTemplateColumns": "312px",
+    "gridTemplateRows": "380px 56px 380px",
+    "panelRects": [
+      {
+        "x": 24,
+        "y": 669,
+        "width": 312,
+        "height": 380
+      },
+      {
+        "x": 24,
+        "y": 1129,
+        "width": 312,
+        "height": 380
+      }
+    ],
+    "panelRows": [
+      "45px 45px 256px 32px",
+      "45px 45px 256px 32px"
+    ],
+    "controls": [
+      {
+        "aria": "全部加入",
+        "title": "全部加入",
+        "disabled": false,
+        "rect": {
+          "x": 132,
+          "y": 1067,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "aria": "全部移除",
+        "title": "全部移除",
+        "disabled": false,
+        "rect": {
+          "x": 184,
+          "y": 1067,
+          "width": 44,
+          "height": 44
+        }
+      }
+    ],
+    "selectedItems": [
+      {
+        "text": "情指行一体化研判调度专班\nDEPT-03\n正常",
+        "rect": {
+          "x": 33,
+          "y": 1228,
+          "width": 294,
+          "height": 46
+        }
+      },
+      {
+        "text": "legacy-unit-08",
+        "rect": {
+          "x": 33,
+          "y": 1286,
+          "width": 294,
+          "height": 46
+        }
+      }
+    ],
+    "buttons": [
+      {
+        "text": "",
+        "aria": "搜索文档",
+        "disabled": false,
+        "rect": {
+          "x": 248,
+          "y": 4.5,
+          "width": 48,
+          "height": 55
+        }
+      },
+      {
+        "text": "",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "text": "",
+        "aria": "extra navigation",
+        "disabled": false,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "text": "",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "text": "",
+        "aria": "mobile navigation",
+        "disabled": false,
+        "rect": {
+          "x": 304,
+          "y": 0,
+          "width": 48,
+          "height": 64
+        }
+      },
+      {
+        "text": "菜单",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 0,
+          "y": 64,
+          "width": 94,
+          "height": 47
+        }
+      },
+      {
+        "text": "本页导航",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 276,
+          "y": 76,
+          "width": 64,
+          "height": 24
+        }
+      },
+      {
+        "text": "正常数据",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 24,
+          "y": 533,
+          "width": 70,
+          "height": 44
+        }
+      },
+      {
+        "text": "空结果",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 98,
+          "y": 533,
+          "width": 57,
+          "height": 44
+        }
+      },
+      {
+        "text": "加载中",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 159,
+          "y": 533,
+          "width": 57,
+          "height": 44
+        }
+      },
+      {
+        "text": "加载失败",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 220,
+          "y": 533,
+          "width": 70,
+          "height": 44
+        }
+      },
+      {
+        "text": "全选",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 245.859375,
+          "y": 670,
+          "width": 32,
+          "height": 44
+        }
+      },
+      {
+        "text": "反选",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 291,
+          "y": 670,
+          "width": 32,
+          "height": 44
+        }
+      },
+      {
+        "text": "",
+        "aria": "展开节点",
+        "disabled": false,
+        "rect": {
+          "x": 33,
+          "y": 765,
+          "width": 24,
+          "height": 24
+        }
+      },
+      {
+        "text": "",
+        "aria": "全部加入",
+        "disabled": false,
+        "rect": {
+          "x": 132,
+          "y": 1067,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "",
+        "aria": "全部移除",
+        "disabled": false,
+        "rect": {
+          "x": 184,
+          "y": 1067,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "清空",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 273,
+          "y": 1130,
+          "width": 50,
+          "height": 44
+        }
+      },
+      {
+        "text": "",
+        "aria": "移除 情指行一体化研判调度专班",
+        "disabled": false,
+        "rect": {
+          "x": 274,
+          "y": 1229,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "",
+        "aria": "移除 legacy-unit-08",
+        "disabled": false,
+        "rect": {
+          "x": 274,
+          "y": 1287,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 263,
+          "y": 1702,
+          "width": 44,
+          "height": 44
+        }
+      },
+      {
+        "text": "◉",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 304.640625,
+          "y": 6,
+          "width": 24,
+          "height": 24
+        }
+      },
+      {
+        "text": "×",
+        "aria": null,
+        "disabled": false,
+        "rect": {
+          "x": 330.640625,
+          "y": 6,
+          "width": 21.359375,
+          "height": 24
+        }
+      }
+    ],
+    "inputs": [
+      {
+        "aria": null,
+        "value": "on",
+        "rect": {
+          "x": 32,
+          "y": 596.5,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "aria": null,
+        "value": "on",
+        "rect": {
+          "x": 122.21875,
+          "y": 596.5,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "aria": "筛选待选节点",
+        "value": "",
+        "rect": {
+          "x": 51,
+          "y": 725,
+          "width": 276,
+          "height": 24
+        }
+      },
+      {
+        "aria": "选择 市公安局指挥中心",
+        "value": "on",
+        "rect": {
+          "x": 65,
+          "y": 765,
+          "width": 24,
+          "height": 24
+        }
+      },
+      {
+        "aria": "在已选项中检索",
+        "value": "",
+        "rect": {
+          "x": 51,
+          "y": 1185,
+          "width": 276,
+          "height": 24
+        }
+      },
+      {
+        "aria": null,
+        "value": "on",
+        "rect": {
+          "x": 189,
+          "y": 1485.5,
+          "width": 0,
+          "height": 0
+        }
+      }
+    ],
+    "status": "已载入组织权限数据",
+    "selectedCount": "当前已选 2 项",
+    "activeElement": {
+      "tag": "DIV",
+      "aria": null,
+      "text": "市公安局指挥中心ORG-01 正常"
+    },
+    "reducedMotion": false,
+    "overlayCandidates": [
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "impeccable-label"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "impeccable-label"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "impeccable-overlay"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "impeccable-label"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "impeccable-overlay impeccable-visible"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "impeccable-label"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "impeccable-overlay impeccable-banner"
+      }
+    ]
+  },
+  "mobileActions": {
+    "selectAllBefore": {
+      "title": "[Human] LxTransferPanel recheck B",
+      "readyState": "complete",
+      "bodyText": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。\n\n交互示例\n​\n正常数据\n空结果\n加载中\n加载失败\n最多 5 项\nHUD 深色主题\n\n已载入组织权限数据\n\n组织与数据权限树（待选）\n全选\n/\n反选\n市公安局指挥中心\nORG-01\n正常\n待选池：5 个节点\n已选数据权限清单\n清空\n情指行一体化研判调度专班\nDEPT-03\n正常\nlegacy-unit-08\n已选 2 项\n保留下级继承授权\n当前已选 2 项\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配单位...', '在已选名单中检索...']\t左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t用户通过右侧清空或中间全部移除清空非空列表时触发。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表使用同一节点类型，因此暂未加载到当前树中的键仍能显示键名并移除；组件不会为未加载键臆造 code 或 status。\n\n选择规则\n​\n左侧“全选”和中间向右按钮会加入当前树中所有未禁用节点；上限不足时不做部分写入。\n左侧“反选”针对当前已加载树中的所有未禁用节点，不受树内搜索结果限制。树外既有键和禁用节点保持原值；选中数量超过上限时拒绝会增加数量的反选。\n单个禁用树节点不能从左侧新增。右侧删除和清空仍可移除已存在的节点，包括暂时不在当前树中的键。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例使用遮罩保留双栏上下文。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。\nPager\nPrevious page\nLxVirtualTree 虚拟树\nNext page\nLxStatusDot 状态点\nline length too long\ncramped padding\ncards flush against the scroller edge\n✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+      "layoutRect": {
+        "x": 24,
+        "y": 669,
+        "width": 312,
+        "height": 840
+      },
+      "gridTemplateColumns": "312px",
+      "gridTemplateRows": "380px 56px 380px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 669,
+          "width": 312,
+          "height": 380
+        },
+        {
+          "x": 24,
+          "y": 1129,
+          "width": 312,
+          "height": 380
+        }
+      ],
+      "panelRows": [
+        "45px 45px 256px 32px",
+        "45px 45px 256px 32px"
+      ],
+      "controls": [
+        {
+          "aria": "全部加入",
+          "title": "全部加入",
+          "disabled": false,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "aria": "全部移除",
+          "title": "全部移除",
+          "disabled": false,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        }
+      ],
+      "selectedItems": [
+        {
+          "text": "情指行一体化研判调度专班\nDEPT-03\n正常",
+          "rect": {
+            "x": 33,
+            "y": 1228,
+            "width": 294,
+            "height": 46
+          }
+        },
+        {
+          "text": "legacy-unit-08",
+          "rect": {
+            "x": 33,
+            "y": 1286,
+            "width": 294,
+            "height": 46
+          }
+        }
+      ],
+      "buttons": [
+        {
+          "text": "",
+          "aria": "搜索文档",
+          "disabled": false,
+          "rect": {
+            "x": 248,
+            "y": 4.5,
+            "width": 48,
+            "height": 55
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "extra navigation",
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "mobile navigation",
+          "disabled": false,
+          "rect": {
+            "x": 304,
+            "y": 0,
+            "width": 48,
+            "height": 64
+          }
+        },
+        {
+          "text": "菜单",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 64,
+            "width": 94,
+            "height": 47
+          }
+        },
+        {
+          "text": "本页导航",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 276,
+            "y": 76,
+            "width": 64,
+            "height": 24
+          }
+        },
+        {
+          "text": "正常数据",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 24,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "空结果",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 98,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载中",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 159,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载失败",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 220,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "全选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 245.859375,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "反选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 291,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "展开节点",
+          "disabled": false,
+          "rect": {
+            "x": 33,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部加入",
+          "disabled": false,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部移除",
+          "disabled": false,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "清空",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 273,
+            "y": 1130,
+            "width": 50,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 情指行一体化研判调度专班",
+          "disabled": false,
+          "rect": {
+            "x": 274,
+            "y": 1229,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 legacy-unit-08",
+          "disabled": false,
+          "rect": {
+            "x": 274,
+            "y": 1287,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 263,
+            "y": 1702,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "◉",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 304.640625,
+            "y": 6,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "×",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 330.640625,
+            "y": 6,
+            "width": 21.359375,
+            "height": 24
+          }
+        }
+      ],
+      "inputs": [
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 32,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 122.21875,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": "筛选待选节点",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 725,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": "选择 市公安局指挥中心",
+          "value": "on",
+          "rect": {
+            "x": 65,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "aria": "在已选项中检索",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 1185,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 189,
+            "y": 1485.5,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "status": "已载入组织权限数据",
+      "selectedCount": "当前已选 2 项",
+      "activeElement": {
+        "tag": "DIV",
+        "aria": null,
+        "text": "市公安局指挥中心ORG-01 正常"
+      },
+      "reducedMotion": false,
+      "overlayCandidates": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-banner"
+        }
+      ]
+    },
+    "selectAllClicked": true,
+    "afterSelectAll": {
+      "title": "[Human] LxTransferPanel recheck B",
+      "readyState": "complete",
+      "bodyText": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。\n\n交互示例\n​\n正常数据\n空结果\n加载中\n加载失败\n最多 5 项\nHUD 深色主题\n\n选中 5 项；当前树中可解析 4 个节点\n\n组织与数据权限树（待选）\n全选\n/\n反选\n市公安局指挥中心\nORG-01\n正常\n待选池：5 个节点\n已选数据权限清单\n清空\n情指行一体化研判调度专班\nDEPT-03\n正常\nlegacy-unit-08\n市公安局指挥中心\nORG-01\n正常\n交警直属特勤一中队\nTRF-101\n处理中\n站前路派出所综合作战室\nSUB-22\n忙碌\n已选 5 项\n保留下级继承授权\n当前已选 5 项\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配单位...', '在已选名单中检索...']\t左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t用户通过右侧清空或中间全部移除清空非空列表时触发。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表使用同一节点类型，因此暂未加载到当前树中的键仍能显示键名并移除；组件不会为未加载键臆造 code 或 status。\n\n选择规则\n​\n左侧“全选”和中间向右按钮会加入当前树中所有未禁用节点；上限不足时不做部分写入。\n左侧“反选”针对当前已加载树中的所有未禁用节点，不受树内搜索结果限制。树外既有键和禁用节点保持原值；选中数量超过上限时拒绝会增加数量的反选。\n单个禁用树节点不能从左侧新增。右侧删除和清空仍可移除已存在的节点，包括暂时不在当前树中的键。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例使用遮罩保留双栏上下文。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。\nPager\nPrevious page\nLxVirtualTree 虚拟树\nNext page\nLxStatusDot 状态点\nline length too long\ncramped padding\ncards flush against the scroller edge\n✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+      "layoutRect": {
+        "x": 24,
+        "y": 669,
+        "width": 312,
+        "height": 840
+      },
+      "gridTemplateColumns": "312px",
+      "gridTemplateRows": "380px 56px 380px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 669,
+          "width": 312,
+          "height": 380
+        },
+        {
+          "x": 24,
+          "y": 1129,
+          "width": 312,
+          "height": 380
+        }
+      ],
+      "panelRows": [
+        "45px 45px 256px 32px",
+        "45px 45px 256px 32px"
+      ],
+      "controls": [
+        {
+          "aria": "全部加入",
+          "title": "已全部选择或达到选择上限",
+          "disabled": true,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "aria": "全部移除",
+          "title": "全部移除",
+          "disabled": false,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        }
+      ],
+      "selectedItems": [
+        {
+          "text": "情指行一体化研判调度专班\nDEPT-03\n正常",
+          "rect": {
+            "x": 33,
+            "y": 1228,
+            "width": 279,
+            "height": 44
+          }
+        },
+        {
+          "text": "legacy-unit-08",
+          "rect": {
+            "x": 33,
+            "y": 1284,
+            "width": 279,
+            "height": 44
+          }
+        },
+        {
+          "text": "市公安局指挥中心\nORG-01\n正常",
+          "rect": {
+            "x": 33,
+            "y": 1340,
+            "width": 279,
+            "height": 44
+          }
+        },
+        {
+          "text": "交警直属特勤一中队\nTRF-101\n处理中",
+          "rect": {
+            "x": 33,
+            "y": 1396,
+            "width": 279,
+            "height": 44
+          }
+        },
+        {
+          "text": "站前路派出所综合作战室\nSUB-22\n忙碌",
+          "rect": {
+            "x": 33,
+            "y": 1452,
+            "width": 279,
+            "height": 44
+          }
+        }
+      ],
+      "buttons": [
+        {
+          "text": "",
+          "aria": "搜索文档",
+          "disabled": false,
+          "rect": {
+            "x": 248,
+            "y": 4.5,
+            "width": 48,
+            "height": 55
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "extra navigation",
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "mobile navigation",
+          "disabled": false,
+          "rect": {
+            "x": 304,
+            "y": 0,
+            "width": 48,
+            "height": 64
+          }
+        },
+        {
+          "text": "菜单",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 64,
+            "width": 94,
+            "height": 47
+          }
+        },
+        {
+          "text": "本页导航",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 276,
+            "y": 76,
+            "width": 64,
+            "height": 24
+          }
+        },
+        {
+          "text": "正常数据",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 24,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "空结果",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 98,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载中",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 159,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载失败",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 220,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "全选",
+          "aria": null,
+          "disabled": true,
+          "rect": {
+            "x": 245.859375,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "反选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 291,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "展开节点",
+          "disabled": false,
+          "rect": {
+            "x": 33,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部加入",
+          "disabled": true,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部移除",
+          "disabled": false,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "清空",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 273,
+            "y": 1130,
+            "width": 50,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 情指行一体化研判调度专班",
+          "disabled": false,
+          "rect": {
+            "x": 259,
+            "y": 1228,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 legacy-unit-08",
+          "disabled": false,
+          "rect": {
+            "x": 259,
+            "y": 1284,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 市公安局指挥中心",
+          "disabled": false,
+          "rect": {
+            "x": 259,
+            "y": 1340,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 交警直属特勤一中队",
+          "disabled": false,
+          "rect": {
+            "x": 259,
+            "y": 1396,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 站前路派出所综合作战室",
+          "disabled": false,
+          "rect": {
+            "x": 259,
+            "y": 1452,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 263,
+            "y": 1702,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "◉",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 304.640625,
+            "y": 6,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "×",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 330.640625,
+            "y": 6,
+            "width": 21.359375,
+            "height": 24
+          }
+        }
+      ],
+      "inputs": [
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 32,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 122.21875,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": "筛选待选节点",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 725,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": "选择 市公安局指挥中心",
+          "value": "on",
+          "rect": {
+            "x": 65,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "aria": "在已选项中检索",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 1185,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 189,
+            "y": 1485.5,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "status": "选中 5 项；当前树中可解析 4 个节点",
+      "selectedCount": "当前已选 5 项",
+      "activeElement": {
+        "tag": "DIV",
+        "aria": null,
+        "text": "市公安局指挥中心ORG-01 正常"
+      },
+      "reducedMotion": false,
+      "overlayCandidates": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-banner"
+        }
+      ]
+    },
+    "rightStatusFilter": {
+      "title": "[Human] LxTransferPanel recheck B",
+      "readyState": "complete",
+      "bodyText": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。\n\n交互示例\n​\n正常数据\n空结果\n加载中\n加载失败\n最多 5 项\nHUD 深色主题\n\n选中 5 项；当前树中可解析 4 个节点\n\n组织与数据权限树（待选）\n全选\n/\n反选\n市公安局指挥中心\nORG-01\n正常\n待选池：5 个节点\n已选数据权限清单\n清空\n情指行一体化研判调度专班\nDEPT-03\n正常\n市公安局指挥中心\nORG-01\n正常\n已选 5 项\n保留下级继承授权\n当前已选 5 项\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配单位...', '在已选名单中检索...']\t左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t用户通过右侧清空或中间全部移除清空非空列表时触发。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表使用同一节点类型，因此暂未加载到当前树中的键仍能显示键名并移除；组件不会为未加载键臆造 code 或 status。\n\n选择规则\n​\n左侧“全选”和中间向右按钮会加入当前树中所有未禁用节点；上限不足时不做部分写入。\n左侧“反选”针对当前已加载树中的所有未禁用节点，不受树内搜索结果限制。树外既有键和禁用节点保持原值；选中数量超过上限时拒绝会增加数量的反选。\n单个禁用树节点不能从左侧新增。右侧删除和清空仍可移除已存在的节点，包括暂时不在当前树中的键。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例使用遮罩保留双栏上下文。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。\nPager\nPrevious page\nLxVirtualTree 虚拟树\nNext page\nLxStatusDot 状态点\nline length too long\ncramped padding\ncards flush against the scroller edge\n✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+      "layoutRect": {
+        "x": 24,
+        "y": 669,
+        "width": 312,
+        "height": 840
+      },
+      "gridTemplateColumns": "312px",
+      "gridTemplateRows": "380px 56px 380px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 669,
+          "width": 312,
+          "height": 380
+        },
+        {
+          "x": 24,
+          "y": 1129,
+          "width": 312,
+          "height": 380
+        }
+      ],
+      "panelRows": [
+        "45px 45px 256px 32px",
+        "45px 45px 256px 32px"
+      ],
+      "controls": [
+        {
+          "aria": "全部加入",
+          "title": "已全部选择或达到选择上限",
+          "disabled": true,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "aria": "全部移除",
+          "title": "全部移除",
+          "disabled": false,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        }
+      ],
+      "selectedItems": [
+        {
+          "text": "情指行一体化研判调度专班\nDEPT-03\n正常",
+          "rect": {
+            "x": 33,
+            "y": 1228,
+            "width": 294,
+            "height": 46
+          }
+        },
+        {
+          "text": "市公安局指挥中心\nORG-01\n正常",
+          "rect": {
+            "x": 33,
+            "y": 1286,
+            "width": 294,
+            "height": 46
+          }
+        }
+      ],
+      "buttons": [
+        {
+          "text": "",
+          "aria": "搜索文档",
+          "disabled": false,
+          "rect": {
+            "x": 248,
+            "y": 4.5,
+            "width": 48,
+            "height": 55
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "extra navigation",
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "mobile navigation",
+          "disabled": false,
+          "rect": {
+            "x": 304,
+            "y": 0,
+            "width": 48,
+            "height": 64
+          }
+        },
+        {
+          "text": "菜单",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 64,
+            "width": 94,
+            "height": 47
+          }
+        },
+        {
+          "text": "本页导航",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 276,
+            "y": 76,
+            "width": 64,
+            "height": 24
+          }
+        },
+        {
+          "text": "正常数据",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 24,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "空结果",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 98,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载中",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 159,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载失败",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 220,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "全选",
+          "aria": null,
+          "disabled": true,
+          "rect": {
+            "x": 245.859375,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "反选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 291,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "展开节点",
+          "disabled": false,
+          "rect": {
+            "x": 33,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部加入",
+          "disabled": true,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部移除",
+          "disabled": false,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "清空",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 273,
+            "y": 1130,
+            "width": 50,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "清除已选项筛选",
+          "disabled": false,
+          "rect": {
+            "x": 283,
+            "y": 1175,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 情指行一体化研判调度专班",
+          "disabled": false,
+          "rect": {
+            "x": 274,
+            "y": 1229,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 市公安局指挥中心",
+          "disabled": false,
+          "rect": {
+            "x": 274,
+            "y": 1287,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 263,
+            "y": 1702,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "◉",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 304.640625,
+            "y": 6,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "×",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 330.640625,
+            "y": 6,
+            "width": 21.359375,
+            "height": 24
+          }
+        }
+      ],
+      "inputs": [
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 32,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 122.21875,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": "筛选待选节点",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 725,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": "选择 市公安局指挥中心",
+          "value": "on",
+          "rect": {
+            "x": 65,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "aria": "在已选项中检索",
+          "value": "正常",
+          "rect": {
+            "x": 51,
+            "y": 1185,
+            "width": 228,
+            "height": 24
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 189,
+            "y": 1485.5,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "status": "选中 5 项；当前树中可解析 4 个节点",
+      "selectedCount": "当前已选 5 项",
+      "activeElement": {
+        "tag": "DIV",
+        "aria": null,
+        "text": "市公安局指挥中心ORG-01 正常"
+      },
+      "reducedMotion": false,
+      "overlayCandidates": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-banner"
+        }
+      ]
+    },
+    "rightClearPresent": true,
+    "afterRightClear": {
+      "title": "[Human] LxTransferPanel recheck B",
+      "readyState": "complete",
+      "bodyText": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。\n\n交互示例\n​\n正常数据\n空结果\n加载中\n加载失败\n最多 5 项\nHUD 深色主题\n\n选中 5 项；当前树中可解析 4 个节点\n\n组织与数据权限树（待选）\n全选\n/\n反选\n市公安局指挥中心\nORG-01\n正常\n待选池：5 个节点\n已选数据权限清单\n清空\n情指行一体化研判调度专班\nDEPT-03\n正常\nlegacy-unit-08\n市公安局指挥中心\nORG-01\n正常\n交警直属特勤一中队\nTRF-101\n处理中\n站前路派出所综合作战室\nSUB-22\n忙碌\n已选 5 项\n保留下级继承授权\n当前已选 5 项\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配单位...', '在已选名单中检索...']\t左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t用户通过右侧清空或中间全部移除清空非空列表时触发。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表使用同一节点类型，因此暂未加载到当前树中的键仍能显示键名并移除；组件不会为未加载键臆造 code 或 status。\n\n选择规则\n​\n左侧“全选”和中间向右按钮会加入当前树中所有未禁用节点；上限不足时不做部分写入。\n左侧“反选”针对当前已加载树中的所有未禁用节点，不受树内搜索结果限制。树外既有键和禁用节点保持原值；选中数量超过上限时拒绝会增加数量的反选。\n单个禁用树节点不能从左侧新增。右侧删除和清空仍可移除已存在的节点，包括暂时不在当前树中的键。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例使用遮罩保留双栏上下文。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。\nPager\nPrevious page\nLxVirtualTree 虚拟树\nNext page\nLxStatusDot 状态点\nline length too long\ncramped padding\ncards flush against the scroller edge\n✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+      "layoutRect": {
+        "x": 24,
+        "y": 669,
+        "width": 312,
+        "height": 840
+      },
+      "gridTemplateColumns": "312px",
+      "gridTemplateRows": "380px 56px 380px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 669,
+          "width": 312,
+          "height": 380
+        },
+        {
+          "x": 24,
+          "y": 1129,
+          "width": 312,
+          "height": 380
+        }
+      ],
+      "panelRows": [
+        "45px 45px 256px 32px",
+        "45px 45px 256px 32px"
+      ],
+      "controls": [
+        {
+          "aria": "全部加入",
+          "title": "已全部选择或达到选择上限",
+          "disabled": true,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "aria": "全部移除",
+          "title": "全部移除",
+          "disabled": false,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        }
+      ],
+      "selectedItems": [
+        {
+          "text": "情指行一体化研判调度专班\nDEPT-03\n正常",
+          "rect": {
+            "x": 33,
+            "y": 1228,
+            "width": 279,
+            "height": 44
+          }
+        },
+        {
+          "text": "legacy-unit-08",
+          "rect": {
+            "x": 33,
+            "y": 1284,
+            "width": 279,
+            "height": 44
+          }
+        },
+        {
+          "text": "市公安局指挥中心\nORG-01\n正常",
+          "rect": {
+            "x": 33,
+            "y": 1340,
+            "width": 279,
+            "height": 44
+          }
+        },
+        {
+          "text": "交警直属特勤一中队\nTRF-101\n处理中",
+          "rect": {
+            "x": 33,
+            "y": 1396,
+            "width": 279,
+            "height": 44
+          }
+        },
+        {
+          "text": "站前路派出所综合作战室\nSUB-22\n忙碌",
+          "rect": {
+            "x": 33,
+            "y": 1452,
+            "width": 279,
+            "height": 44
+          }
+        }
+      ],
+      "buttons": [
+        {
+          "text": "",
+          "aria": "搜索文档",
+          "disabled": false,
+          "rect": {
+            "x": 248,
+            "y": 4.5,
+            "width": 48,
+            "height": 55
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "extra navigation",
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "mobile navigation",
+          "disabled": false,
+          "rect": {
+            "x": 304,
+            "y": 0,
+            "width": 48,
+            "height": 64
+          }
+        },
+        {
+          "text": "菜单",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 64,
+            "width": 94,
+            "height": 47
+          }
+        },
+        {
+          "text": "本页导航",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 276,
+            "y": 76,
+            "width": 64,
+            "height": 24
+          }
+        },
+        {
+          "text": "正常数据",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 24,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "空结果",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 98,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载中",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 159,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载失败",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 220,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "全选",
+          "aria": null,
+          "disabled": true,
+          "rect": {
+            "x": 245.859375,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "反选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 291,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "展开节点",
+          "disabled": false,
+          "rect": {
+            "x": 33,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部加入",
+          "disabled": true,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部移除",
+          "disabled": false,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "清空",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 273,
+            "y": 1130,
+            "width": 50,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 情指行一体化研判调度专班",
+          "disabled": false,
+          "rect": {
+            "x": 259,
+            "y": 1228,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 legacy-unit-08",
+          "disabled": false,
+          "rect": {
+            "x": 259,
+            "y": 1284,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 市公安局指挥中心",
+          "disabled": false,
+          "rect": {
+            "x": 259,
+            "y": 1340,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 交警直属特勤一中队",
+          "disabled": false,
+          "rect": {
+            "x": 259,
+            "y": 1396,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 站前路派出所综合作战室",
+          "disabled": false,
+          "rect": {
+            "x": 259,
+            "y": 1452,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 263,
+            "y": 1702,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "◉",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 304.640625,
+            "y": 6,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "×",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 330.640625,
+            "y": 6,
+            "width": 21.359375,
+            "height": 24
+          }
+        }
+      ],
+      "inputs": [
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 32,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 122.21875,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": "筛选待选节点",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 725,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": "选择 市公安局指挥中心",
+          "value": "on",
+          "rect": {
+            "x": 65,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "aria": "在已选项中检索",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 1185,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 189,
+            "y": 1485.5,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "status": "选中 5 项；当前树中可解析 4 个节点",
+      "selectedCount": "当前已选 5 项",
+      "activeElement": {
+        "tag": "DIV",
+        "aria": null,
+        "text": "市公安局指挥中心ORG-01 正常"
+      },
+      "reducedMotion": false,
+      "overlayCandidates": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-banner"
+        }
+      ]
+    },
+    "invertClicked": true,
+    "afterInvert": {
+      "title": "[Human] LxTransferPanel recheck B",
+      "readyState": "complete",
+      "bodyText": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。\n\n交互示例\n​\n正常数据\n空结果\n加载中\n加载失败\n最多 5 项\nHUD 深色主题\n\n选中 1 项；当前树中可解析 0 个节点\n\n组织与数据权限树（待选）\n全选\n/\n反选\n市公安局指挥中心\nORG-01\n正常\n待选池：5 个节点\n已选数据权限清单\n清空\nlegacy-unit-08\n已选 1 项\n保留下级继承授权\n当前已选 1 项\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配单位...', '在已选名单中检索...']\t左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t用户通过右侧清空或中间全部移除清空非空列表时触发。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表使用同一节点类型，因此暂未加载到当前树中的键仍能显示键名并移除；组件不会为未加载键臆造 code 或 status。\n\n选择规则\n​\n左侧“全选”和中间向右按钮会加入当前树中所有未禁用节点；上限不足时不做部分写入。\n左侧“反选”针对当前已加载树中的所有未禁用节点，不受树内搜索结果限制。树外既有键和禁用节点保持原值；选中数量超过上限时拒绝会增加数量的反选。\n单个禁用树节点不能从左侧新增。右侧删除和清空仍可移除已存在的节点，包括暂时不在当前树中的键。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例使用遮罩保留双栏上下文。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。\nPager\nPrevious page\nLxVirtualTree 虚拟树\nNext page\nLxStatusDot 状态点\nline length too long\ncramped padding\ncards flush against the scroller edge\n✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+      "layoutRect": {
+        "x": 24,
+        "y": 669,
+        "width": 312,
+        "height": 840
+      },
+      "gridTemplateColumns": "312px",
+      "gridTemplateRows": "380px 56px 380px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 669,
+          "width": 312,
+          "height": 380
+        },
+        {
+          "x": 24,
+          "y": 1129,
+          "width": 312,
+          "height": 380
+        }
+      ],
+      "panelRows": [
+        "45px 45px 256px 32px",
+        "45px 45px 256px 32px"
+      ],
+      "controls": [
+        {
+          "aria": "全部加入",
+          "title": "全部加入",
+          "disabled": false,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "aria": "全部移除",
+          "title": "全部移除",
+          "disabled": false,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        }
+      ],
+      "selectedItems": [
+        {
+          "text": "legacy-unit-08",
+          "rect": {
+            "x": 33,
+            "y": 1228,
+            "width": 294,
+            "height": 46
+          }
+        }
+      ],
+      "buttons": [
+        {
+          "text": "",
+          "aria": "搜索文档",
+          "disabled": false,
+          "rect": {
+            "x": 248,
+            "y": 4.5,
+            "width": 48,
+            "height": 55
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "extra navigation",
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "mobile navigation",
+          "disabled": false,
+          "rect": {
+            "x": 304,
+            "y": 0,
+            "width": 48,
+            "height": 64
+          }
+        },
+        {
+          "text": "菜单",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 64,
+            "width": 94,
+            "height": 47
+          }
+        },
+        {
+          "text": "本页导航",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 276,
+            "y": 76,
+            "width": 64,
+            "height": 24
+          }
+        },
+        {
+          "text": "正常数据",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 24,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "空结果",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 98,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载中",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 159,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载失败",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 220,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "全选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 245.859375,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "反选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 291,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "展开节点",
+          "disabled": false,
+          "rect": {
+            "x": 33,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部加入",
+          "disabled": false,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部移除",
+          "disabled": false,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "清空",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 273,
+            "y": 1130,
+            "width": 50,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "移除 legacy-unit-08",
+          "disabled": false,
+          "rect": {
+            "x": 274,
+            "y": 1229,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 263,
+            "y": 1678,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "◉",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 304.640625,
+            "y": 6,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "×",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 330.640625,
+            "y": 6,
+            "width": 21.359375,
+            "height": 24
+          }
+        }
+      ],
+      "inputs": [
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 32,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 122.21875,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": "筛选待选节点",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 725,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": "选择 市公安局指挥中心",
+          "value": "on",
+          "rect": {
+            "x": 65,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "aria": "在已选项中检索",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 1185,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 189,
+            "y": 1485.5,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "status": "选中 1 项；当前树中可解析 0 个节点",
+      "selectedCount": "当前已选 1 项",
+      "activeElement": {
+        "tag": "DIV",
+        "aria": null,
+        "text": "市公安局指挥中心ORG-01 正常"
+      },
+      "reducedMotion": false,
+      "overlayCandidates": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-banner"
+        }
+      ]
+    },
+    "clearClicked": true,
+    "afterClear": {
+      "title": "[Human] LxTransferPanel recheck B",
+      "readyState": "complete",
+      "bodyText": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。\n\n交互示例\n​\n正常数据\n空结果\n加载中\n加载失败\n最多 5 项\nHUD 深色主题\n\n已清空全部选中项\n\n组织与数据权限树（待选）\n全选\n/\n反选\n市公安局指挥中心\nORG-01\n正常\n待选池：5 个节点\n已选数据权限清单\n清空\n暂无分配权限，请在左侧勾选\n已选 0 项\n保留下级继承授权\n当前已选 0 项\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配单位...', '在已选名单中检索...']\t左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t用户通过右侧清空或中间全部移除清空非空列表时触发。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表使用同一节点类型，因此暂未加载到当前树中的键仍能显示键名并移除；组件不会为未加载键臆造 code 或 status。\n\n选择规则\n​\n左侧“全选”和中间向右按钮会加入当前树中所有未禁用节点；上限不足时不做部分写入。\n左侧“反选”针对当前已加载树中的所有未禁用节点，不受树内搜索结果限制。树外既有键和禁用节点保持原值；选中数量超过上限时拒绝会增加数量的反选。\n单个禁用树节点不能从左侧新增。右侧删除和清空仍可移除已存在的节点，包括暂时不在当前树中的键。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例使用遮罩保留双栏上下文。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。\nPager\nPrevious page\nLxVirtualTree 虚拟树\nNext page\nLxStatusDot 状态点\nline length too long\ncramped padding\ncards flush against the scroller edge\n✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+      "layoutRect": {
+        "x": 24,
+        "y": 669,
+        "width": 312,
+        "height": 840
+      },
+      "gridTemplateColumns": "312px",
+      "gridTemplateRows": "380px 56px 380px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 669,
+          "width": 312,
+          "height": 380
+        },
+        {
+          "x": 24,
+          "y": 1129,
+          "width": 312,
+          "height": 380
+        }
+      ],
+      "panelRows": [
+        "45px 45px 256px 32px",
+        "45px 45px 256px 32px"
+      ],
+      "controls": [
+        {
+          "aria": "全部加入",
+          "title": "全部加入",
+          "disabled": false,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "aria": "全部移除",
+          "title": "全部移除",
+          "disabled": true,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        }
+      ],
+      "selectedItems": [],
+      "buttons": [
+        {
+          "text": "",
+          "aria": "搜索文档",
+          "disabled": false,
+          "rect": {
+            "x": 248,
+            "y": 4.5,
+            "width": 48,
+            "height": 55
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "extra navigation",
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "mobile navigation",
+          "disabled": false,
+          "rect": {
+            "x": 304,
+            "y": 0,
+            "width": 48,
+            "height": 64
+          }
+        },
+        {
+          "text": "菜单",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 64,
+            "width": 94,
+            "height": 47
+          }
+        },
+        {
+          "text": "本页导航",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 276,
+            "y": 76,
+            "width": 64,
+            "height": 24
+          }
+        },
+        {
+          "text": "正常数据",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 24,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "空结果",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 98,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载中",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 159,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载失败",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 220,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "全选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 245.859375,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "反选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 291,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "展开节点",
+          "disabled": false,
+          "rect": {
+            "x": 33,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部加入",
+          "disabled": false,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部移除",
+          "disabled": true,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "清空",
+          "aria": null,
+          "disabled": true,
+          "rect": {
+            "x": 273,
+            "y": 1130,
+            "width": 50,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 263,
+            "y": 1702,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "◉",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 304.640625,
+            "y": 6,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "×",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 330.640625,
+            "y": 6,
+            "width": 21.359375,
+            "height": 24
+          }
+        }
+      ],
+      "inputs": [
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 32,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 122.21875,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": "筛选待选节点",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 725,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": "选择 市公安局指挥中心",
+          "value": "on",
+          "rect": {
+            "x": 65,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "aria": "在已选项中检索",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 1185,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 189,
+            "y": 1485.5,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "status": "已清空全部选中项",
+      "selectedCount": "当前已选 0 项",
+      "activeElement": {
+        "tag": "DIV",
+        "aria": null,
+        "text": "市公安局指挥中心ORG-01 正常"
+      },
+      "reducedMotion": false,
+      "overlayCandidates": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-banner"
+        }
+      ]
+    },
+    "sourceFilter": {
+      "title": "[Human] LxTransferPanel recheck B",
+      "readyState": "complete",
+      "bodyText": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。\n\n交互示例\n​\n正常数据\n空结果\n加载中\n加载失败\n最多 5 项\nHUD 深色主题\n\n已载入组织权限数据\n\n组织与数据权限树（待选）\n全选\n/\n反选\n市公安局指挥中心\nORG-01\n正常\n情指行一体化研判调度专班\nDEPT-03\n正常\n待选池：5 个节点\n已选数据权限清单\n清空\n暂无分配权限，请在左侧勾选\n已选 0 项\n保留下级继承授权\n当前已选 0 项\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配单位...', '在已选名单中检索...']\t左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t用户通过右侧清空或中间全部移除清空非空列表时触发。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表使用同一节点类型，因此暂未加载到当前树中的键仍能显示键名并移除；组件不会为未加载键臆造 code 或 status。\n\n选择规则\n​\n左侧“全选”和中间向右按钮会加入当前树中所有未禁用节点；上限不足时不做部分写入。\n左侧“反选”针对当前已加载树中的所有未禁用节点，不受树内搜索结果限制。树外既有键和禁用节点保持原值；选中数量超过上限时拒绝会增加数量的反选。\n单个禁用树节点不能从左侧新增。右侧删除和清空仍可移除已存在的节点，包括暂时不在当前树中的键。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例使用遮罩保留双栏上下文。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。\nPager\nPrevious page\nLxVirtualTree 虚拟树\nNext page\nLxStatusDot 状态点\nline length too long\ncramped padding\ncards flush against the scroller edge\n✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+      "layoutRect": {
+        "x": 24,
+        "y": 669,
+        "width": 312,
+        "height": 840
+      },
+      "gridTemplateColumns": "312px",
+      "gridTemplateRows": "380px 56px 380px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 669,
+          "width": 312,
+          "height": 380
+        },
+        {
+          "x": 24,
+          "y": 1129,
+          "width": 312,
+          "height": 380
+        }
+      ],
+      "panelRows": [
+        "45px 45px 256px 32px",
+        "45px 45px 256px 32px"
+      ],
+      "controls": [
+        {
+          "aria": "全部加入",
+          "title": "全部加入",
+          "disabled": false,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "aria": "全部移除",
+          "title": "全部移除",
+          "disabled": true,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        }
+      ],
+      "selectedItems": [],
+      "buttons": [
+        {
+          "text": "",
+          "aria": "搜索文档",
+          "disabled": false,
+          "rect": {
+            "x": 248,
+            "y": 4.5,
+            "width": 48,
+            "height": 55
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "extra navigation",
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "mobile navigation",
+          "disabled": false,
+          "rect": {
+            "x": 304,
+            "y": 0,
+            "width": 48,
+            "height": 64
+          }
+        },
+        {
+          "text": "菜单",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 64,
+            "width": 94,
+            "height": 47
+          }
+        },
+        {
+          "text": "本页导航",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 276,
+            "y": 76,
+            "width": 64,
+            "height": 24
+          }
+        },
+        {
+          "text": "正常数据",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 24,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "空结果",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 98,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载中",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 159,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载失败",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 220,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "全选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 245.859375,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "反选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 291,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "清除待选节点筛选",
+          "disabled": false,
+          "rect": {
+            "x": 283,
+            "y": 715,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "展开节点",
+          "disabled": false,
+          "rect": {
+            "x": 33,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部加入",
+          "disabled": false,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部移除",
+          "disabled": true,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "清空",
+          "aria": null,
+          "disabled": true,
+          "rect": {
+            "x": 273,
+            "y": 1130,
+            "width": 50,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 263,
+            "y": 1702,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "◉",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 304.640625,
+            "y": 6,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "×",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 330.640625,
+            "y": 6,
+            "width": 21.359375,
+            "height": 24
+          }
+        }
+      ],
+      "inputs": [
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 32,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 122.21875,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": "筛选待选节点",
+          "value": "情指行",
+          "rect": {
+            "x": 51,
+            "y": 725,
+            "width": 228,
+            "height": 24
+          }
+        },
+        {
+          "aria": "选择 市公安局指挥中心",
+          "value": "on",
+          "rect": {
+            "x": 65,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "aria": "选择 情指行一体化研判调度专班",
+          "value": "on",
+          "rect": {
+            "x": 81,
+            "y": 797,
+            "width": 19.046875,
+            "height": 24
+          }
+        },
+        {
+          "aria": "在已选项中检索",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 1185,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 189,
+            "y": 1485.5,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "status": "已载入组织权限数据",
+      "selectedCount": "当前已选 0 项",
+      "activeElement": {
+        "tag": "DIV",
+        "aria": null,
+        "text": "市公安局指挥中心ORG-01 正常"
+      },
+      "reducedMotion": false,
+      "overlayCandidates": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-banner"
+        }
+      ]
+    },
+    "sourceClearPresent": true,
+    "afterSourceClear": {
+      "title": "[Human] LxTransferPanel recheck B",
+      "readyState": "complete",
+      "bodyText": "Skip to content\nLxUI\n菜单\n本页导航\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n表格、分页与详情\n\nLxProTable 数据表格\n\nLxPagination 分页\n\nLxDescriptions 详情描述\n\n页面与指标\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxSectionTitle 区块标题\n\n日历与组织\n\nLxDutyCalendar 排班日历\n\nLxAuthImg 鉴权图片\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\n状态与辅助\n\nLxStatusDot 状态点\n\nLxTag 浅底标签\n\nLxNodeBadge 节点徽章\n\nLxEmpty 空态\n\n图形与操作\n\nLxCodeSlot 代码槽\n\nLxActionButtons 行内操作\n\nLxGauge 圆环仪表\n\n权限消费\n\n数据录入\n表单与基础字段\n\nLxForm 表单\n\nLxInput 输入框\n\nLxTextarea 文本域\n\nLxInputNumber 数字输入\n\nLxPasswordInput 密码输入框\n\n选项控件\n\nLxRadio 单选组\n\nLxCheckbox 复选组\n\nLxSwitch 开关\n\nLxSelect 下拉选择\n\n树形与日期选择\n\nLxTreeSelect 树形下拉\n\nLxCascader 级联选择\n\nLxDatePicker 日期选择\n\n检索与复杂字段\n\nLxSearchBar 检索面板\n\nLxDynamicForm 动态表单\n\nLxStatusSwitch 状态开关\n\nLxUpload 文件上传\n\nLxSelectPagination 远程分页选择\n\n反馈与浮层\n\nLxMessage 全局提示\n\nLxConfirm 确认框\n\nLxDialog 表单弹窗\n\nLxDrawer 详情抽屉\n\nLxFormErrorBanner 校验横幅\n\nLxTransferPanel 双栏穿梭\n​\n\n把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。\n\n交互示例\n​\n正常数据\n空结果\n加载中\n加载失败\n最多 5 项\nHUD 深色主题\n\n已载入组织权限数据\n\n组织与数据权限树（待选）\n全选\n/\n反选\n市公安局指挥中心\nORG-01\n正常\n待选池：5 个节点\n已选数据权限清单\n清空\n暂无分配权限，请在左侧勾选\n已选 0 项\n保留下级继承授权\n当前已选 0 项\n包含一个当前树中未加载的既有选中键\n\n数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n\n查看示例代码\nProps\n​\n名称\t类型\t默认值\t说明\ntreeData\tLxTransferPanelNode[]\t[]\t左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。\nmodelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。\ntitles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。\nfilterPlaceholders\t[string, string]\t['快速过滤待分配单位...', '在已选名单中检索...']\t左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。\npanelHeight\tnumber\t380\t面板目标高度，单位 px。左侧树与右侧列表各自滚动。\nmaxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 表示不允许新增。\ninheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。\nEvents\n​\n事件\t参数\t说明\nupdate:modelValue\tkeys\t受控选中键变化，用于 v-model。\nchange\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。\nupdate:inheritChild\tvalue\t下级继承开关变化。\nclear-all\t无\t用户通过右侧清空或中间全部移除清空非空列表时触发。\n节点元数据\n​\n\nLxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：\n\n字段\t类型\t展示位置\ncode\tstring\t两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。\nstatus\tLxStatus | string\t两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”。\nstatusTone\tLxStatus | LxFeedback\t状态点和状态文本的语义色；不传时从 status 的标准状态值推断。\n\n右侧已选列表使用同一节点类型，因此暂未加载到当前树中的键仍能显示键名并移除；组件不会为未加载键臆造 code 或 status。\n\n选择规则\n​\n左侧“全选”和中间向右按钮会加入当前树中所有未禁用节点；上限不足时不做部分写入。\n左侧“反选”针对当前已加载树中的所有未禁用节点，不受树内搜索结果限制。树外既有键和禁用节点保持原值；选中数量超过上限时拒绝会增加数量的反选。\n单个禁用树节点不能从左侧新增。右侧删除和清空仍可移除已存在的节点，包括暂时不在当前树中的键。\nchange 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。\n左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例使用遮罩保留双栏上下文。\n右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。\nPager\nPrevious page\nLxVirtualTree 虚拟树\nNext page\nLxStatusDot 状态点\nline length too long\ncramped padding\ncards flush against the scroller edge\n✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-top, padding-bottom\n◉\n×",
+      "layoutRect": {
+        "x": 24,
+        "y": 669,
+        "width": 312,
+        "height": 840
+      },
+      "gridTemplateColumns": "312px",
+      "gridTemplateRows": "380px 56px 380px",
+      "panelRects": [
+        {
+          "x": 24,
+          "y": 669,
+          "width": 312,
+          "height": 380
+        },
+        {
+          "x": 24,
+          "y": 1129,
+          "width": 312,
+          "height": 380
+        }
+      ],
+      "panelRows": [
+        "45px 45px 256px 32px",
+        "45px 45px 256px 32px"
+      ],
+      "controls": [
+        {
+          "aria": "全部加入",
+          "title": "全部加入",
+          "disabled": false,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "aria": "全部移除",
+          "title": "全部移除",
+          "disabled": true,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        }
+      ],
+      "selectedItems": [],
+      "buttons": [
+        {
+          "text": "",
+          "aria": "搜索文档",
+          "disabled": false,
+          "rect": {
+            "x": 248,
+            "y": 4.5,
+            "width": 48,
+            "height": 55
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "extra navigation",
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "",
+          "aria": "mobile navigation",
+          "disabled": false,
+          "rect": {
+            "x": 304,
+            "y": 0,
+            "width": 48,
+            "height": 64
+          }
+        },
+        {
+          "text": "菜单",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 0,
+            "y": 64,
+            "width": 94,
+            "height": 47
+          }
+        },
+        {
+          "text": "本页导航",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 276,
+            "y": 76,
+            "width": 64,
+            "height": 24
+          }
+        },
+        {
+          "text": "正常数据",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 24,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "空结果",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 98,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载中",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 159,
+            "y": 533,
+            "width": 57,
+            "height": 44
+          }
+        },
+        {
+          "text": "加载失败",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 220,
+            "y": 533,
+            "width": 70,
+            "height": 44
+          }
+        },
+        {
+          "text": "全选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 245.859375,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "反选",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 291,
+            "y": 670,
+            "width": 32,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "展开节点",
+          "disabled": false,
+          "rect": {
+            "x": 33,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部加入",
+          "disabled": false,
+          "rect": {
+            "x": 132,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": "全部移除",
+          "disabled": true,
+          "rect": {
+            "x": 184,
+            "y": 1067,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "清空",
+          "aria": null,
+          "disabled": true,
+          "rect": {
+            "x": 273,
+            "y": 1130,
+            "width": 50,
+            "height": 44
+          }
+        },
+        {
+          "text": "",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 263,
+            "y": 1702,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "text": "◉",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 304.640625,
+            "y": 6,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "text": "×",
+          "aria": null,
+          "disabled": false,
+          "rect": {
+            "x": 330.640625,
+            "y": 6,
+            "width": 21.359375,
+            "height": 24
+          }
+        }
+      ],
+      "inputs": [
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 32,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 122.21875,
+            "y": 596.5,
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "aria": "筛选待选节点",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 725,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": "选择 市公安局指挥中心",
+          "value": "on",
+          "rect": {
+            "x": 65,
+            "y": 765,
+            "width": 24,
+            "height": 24
+          }
+        },
+        {
+          "aria": "在已选项中检索",
+          "value": "",
+          "rect": {
+            "x": 51,
+            "y": 1185,
+            "width": 276,
+            "height": 24
+          }
+        },
+        {
+          "aria": null,
+          "value": "on",
+          "rect": {
+            "x": 189,
+            "y": 1485.5,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "status": "已载入组织权限数据",
+      "selectedCount": "当前已选 0 项",
+      "activeElement": {
+        "tag": "DIV",
+        "aria": null,
+        "text": "市公安局指挥中心ORG-01 正常"
+      },
+      "reducedMotion": false,
+      "overlayCandidates": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-label"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "impeccable-overlay impeccable-banner"
+        }
+      ]
+    }
+  }
+}

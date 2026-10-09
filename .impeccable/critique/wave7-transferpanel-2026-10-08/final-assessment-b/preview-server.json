@@ -1,0 +1,54 @@
+{
+  "requestedUrl": "http://127.0.0.1:4174/components/lxtransferpanel",
+  "requestedUrlHeadRequest": {
+    "result": "connection refused",
+    "action": "no foreign process was stopped or modified"
+  },
+  "attempts": [
+    {
+      "command": "pnpm dev --host 127.0.0.1 --port 4174 --strictPort",
+      "cwd": "F:\\work\\linkx-admin\\linkx-fe",
+      "exitCode": 1,
+      "output": "failed to start server. error: Port 4174 is already in use",
+      "processStopped": true,
+      "stopResult": "Vite exited after reporting the port conflict; existing listener was left untouched"
+    },
+    {
+      "command": "pnpm dev --host 127.0.0.1 --port 4175 --strictPort",
+      "cwd": "F:\\work\\linkx-admin\\linkx-fe",
+      "terminalSession": 43675,
+      "started": true,
+      "usedBy": "first isolated Playwright evidence pass",
+      "stopMethod": "Ctrl+C in terminal session 43675",
+      "stopExitCode": 1,
+      "processStopped": true
+    },
+    {
+      "command": "pnpm dev --host 127.0.0.1 --port 4175 --strictPort",
+      "cwd": "F:\\work\\linkx-admin\\linkx-fe",
+      "terminalSession": 41171,
+      "started": true,
+      "usedBy": "final isolated Playwright evidence pass",
+      "stopMethod": "Ctrl+C in terminal session 41171",
+      "stopExitCode": 1,
+      "processStopped": true
+    }
+  ],
+  "assessmentLiveServer": {
+    "startedBy": "node C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs --background",
+    "startEvidence": "live-server-start.json",
+    "stoppedBy": "node C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs stop --keep-inject",
+    "stopEvidence": "live-server-stop.json",
+    "startedPid": 13484,
+    "port": 8400,
+    "stopped": true,
+    "postStopPortObservation": {
+      "processId": 2432,
+      "parentProcessId": 25836,
+      "processCreationLocal": "2026-10-08 12:42:20",
+      "commandLine": "node C:\\Users\\Administrator\\.codex\\skills\\impeccable\\scripts\\live-server.mjs",
+      "assessmentStopUtc": "2026-10-08T04:40:50Z",
+      "action": "A listener with a different PID was observed after this run had stopped; it was left untouched"
+    }
+  }
+}

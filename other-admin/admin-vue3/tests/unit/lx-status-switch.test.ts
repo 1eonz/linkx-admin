@@ -242,6 +242,36 @@ describe('LxStatusSwitch', () => {
     wrapper.unmount();
   });
 
+  it('keeps row naming on fallback tags and adds structured risk context', async () => {
+    const fallback = mountSwitch({
+      modelValue: true,
+      permission: 'demo:status-switch',
+      'aria-labelledby': 'row-name',
+      'aria-describedby': 'row-description',
+    });
+    expect(fallback.get('.lx-status-switch__fallback').attributes('aria-labelledby')).toBe('row-name');
+    expect(fallback.get('.lx-status-switch__fallback').attributes('aria-describedby')).toBe('row-description');
+    fallback.unmount();
+
+    const wrapper = mountSwitch({
+      modelValue: true,
+      confirm: {
+        message: '关闭后将中断节点通信。',
+        targetEntity: 'NODE-MAIN-01',
+        impact: '跨域调度将中断。',
+        audit: '写入审计日志。',
+      },
+    });
+    const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
+    await expect(beforeChange()).resolves.toBe(true);
+    expect(lxConfirmMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        message: '关闭后将中断节点通信。\n目标实体：NODE-MAIN-01\n影响范围：跨域调度将中断。\n审计记录：写入审计日志。',
+      }),
+    );
+    wrapper.unmount();
+  });
+
   it('does not ask for confirmation while turning a value on', async () => {
     const wrapper = mountSwitch({ modelValue: false, confirm: '关闭后停止服务。' });
     const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
@@ -274,6 +304,65 @@ describe('LxStatusSwitch', () => {
     });
     expect(warn.mock.calls.some(([message]) => String(message).includes('confirm'))).toBe(false);
     warn.mockRestore();
+    wrapper.unmount();
+  });
+
+  it('forwards row naming and confirmation theme class', async () => {
+    const wrapper = mountSwitch({
+      modelValue: true,
+      'aria-labelledby': 'row-name',
+      confirm: {
+        message: '确认关闭',
+        customClass: 'lx-theme-hud',
+      },
+    });
+    const control = wrapper.getComponent(SwitchStub);
+    expect(control.attributes('aria-labelledby')).toBe('row-name');
+
+    const beforeChange = control.props('beforeChange') as () => Promise<boolean>;
+    await beforeChange();
+    expect(lxConfirmMock).toHaveBeenCalledWith({
+      title: '确认关闭？',
+      message: '确认关闭',
+      confirmText: '确认关闭',
+      cancelText: '取消',
+      danger: true,
+      customClass: 'lx-theme-hud',
+    });
+    wrapper.unmount();
+  });
+
+  it('adds impact and audit context to the confirmation message', async () => {
+    const wrapper = mountSwitch({
+      modelValue: true,
+      confirm: {
+        message: '关闭后将中断节点通信。',
+        impact: '核心节点及关联警力暂时不可用。',
+        audit: '操作人和变更原因写入审计日志。',
+      },
+    });
+    const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
+
+    await expect(beforeChange()).resolves.toBe(true);
+    expect(lxConfirmMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        message:
+          '关闭后将中断节点通信。\n影响范围：核心节点及关联警力暂时不可用。\n审计记录：操作人和变更原因写入审计日志。',
+      }),
+    );
+    wrapper.unmount();
+  });
+
+  it('forwards row naming to a read-only fallback tag', () => {
+    const wrapper = mountSwitch({
+      modelValue: true,
+      disabled: true,
+      'aria-labelledby': 'readonly-row',
+      'aria-describedby': 'readonly-help',
+    });
+    const fallback = wrapper.get('.lx-status-switch__fallback');
+    expect(fallback.attributes('aria-labelledby')).toBe('readonly-row');
+    expect(fallback.attributes('aria-describedby')).toBe('readonly-help');
     wrapper.unmount();
   });
 });

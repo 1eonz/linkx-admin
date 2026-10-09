@@ -1,7 +1,13 @@
 import type { LxSize } from '../../tokens'
-import type { LxCascaderOption, LxCascaderOptionValue } from '../LxCascader/types'
+import type {
+  LxCascaderOption,
+  LxCascaderOptionValue,
+} from '../LxCascader/types'
 
-export type { LxCascaderOption, LxCascaderOptionValue } from '../LxCascader/types'
+export type {
+  LxCascaderOption,
+  LxCascaderOptionValue,
+} from '../LxCascader/types'
 
 export type LxSearchFieldType =
   | 'input'
@@ -47,5 +53,7 @@ export interface LxSearchBarProps {
   collapsed?: boolean
   searchText?: string
   resetText?: string
+  /** 未提供 meta 插槽时显示的默认状态；传空字符串可隐藏默认状态行。 */
+  statusText?: string
   size?: LxSize
 }

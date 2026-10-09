@@ -1,0 +1,128 @@
+{
+  "scenario": "lxselectpagination-desktop-hud-error",
+  "route": "lxselectpagination",
+  "theme": "dark（Demo 控件标签为 HUD 深色主题；控件仅切换 html.dark）",
+  "requestedState": "展开选择器并触发远程请求失败",
+  "viewport": {
+    "width": 1440,
+    "height": 1000,
+    "isMobile": false
+  },
+  "overlayInjection": {
+    "loaded": false,
+    "src": "http://127.0.0.1:8400/detect.js",
+    "error": "script load failed"
+  },
+  "preflight": {
+    "title": "[Human] lxselectpagination lxselectpagination-desktop-hud-error",
+    "mutableInjection": true,
+    "preflightScript": true
+  },
+  "actionResults": [
+    {
+      "action": "pagination-hud",
+      "result": "HUD checkbox not found"
+    },
+    {
+      "action": "pagination-error",
+      "result": "failure button not found"
+    }
+  ],
+  "browser": {
+    "title": "[Human] lxselectpagination lxselectpagination-desktop-hud-error",
+    "url": "chrome-error://chromewebdata/",
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "isNarrow": false,
+      "visualWidth": 1440,
+      "screenWidth": 1440,
+      "devicePixelRatio": 1
+    },
+    "document": {
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 1000,
+      "bodyScrollWidth": 1424
+    },
+    "theme": {
+      "dark": false,
+      "hud": false,
+      "classes": []
+    },
+    "demoFound": false,
+    "demoText": "",
+    "states": {
+      "loading": false,
+      "errorText": [],
+      "overlayNodeCount": 0,
+      "alerts": []
+    },
+    "controls": [
+      {
+        "tag": "button",
+        "text": "刷新",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      }
+    ],
+    "selectPagination": null,
+    "overlayScripts": [
+      {
+        "src": "http://127.0.0.1:8400/detect.js",
+        "loaded": true
+      }
+    ]
+  },
+  "detectorConsole": {
+    "runs": [],
+    "findingCount": 0,
+    "ruleCounts": {},
+    "findings": []
+  },
+  "screenshot": "screenshots/lxselectpagination-desktop-hud-error.png",
+  "console": [],
+  "runtimeExceptions": [],
+  "networkFailures": [
+    {
+      "url": "4351DAC61C463CADD19FB29A5B557733",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "8D0F2B3BBC4CCD549B02CF2C664B5C9D",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "8D0F2B3BBC4CCD549B02CF2C664B5C9D",
+      "errorText": "net::ERR_ABORTED",
+      "blockedReason": ""
+    },
+    {
+      "url": "4D7A2D689380E7E41AA37A65A8CB8BB2",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "4D7A2D689380E7E41AA37A65A8CB8BB2",
+      "errorText": "net::ERR_ABORTED",
+      "blockedReason": ""
+    },
+    {
+      "url": "23368.4",
+      "errorText": "net::ERR_FAILED",
+      "blockedReason": ""
+    }
+  ],
+  "stateChecks": {
+    "viewportWidthMatches": true,
+    "narrowMediaQueryMatches": true,
+    "errorStateVisible": false,
+    "loadingStateVisible": true,
+    "darkThemeApplied": false,
+    "hudThemeClassApplied": null
+  }
+}

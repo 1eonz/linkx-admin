@@ -1,0 +1,540 @@
+{
+  "appUrl": "http://127.0.0.1:4174/components/lxtransferpanel",
+  "detectUrl": "http://127.0.0.1:8400",
+  "browserVersion": "154.0.8037.95",
+  "scenarioCount": 7,
+  "scenarios": [
+    {
+      "id": "desktop-light-filter-keyboard",
+      "navigationStatus": 200,
+      "preflightSucceeded": true,
+      "injectionSucceeded": true,
+      "detectorApiAvailable": true,
+      "findingCount": 14,
+      "overlayCount": 13,
+      "preInjectionLayout": {
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "visualViewportOverflow": false,
+        "docsContainer": {
+          "left": 304,
+          "right": 1408,
+          "width": 1104
+        },
+        "demo": {
+          "left": 336,
+          "right": 1216,
+          "width": 880
+        },
+        "transferPanel": {
+          "left": 336,
+          "right": 1216,
+          "width": 880
+        },
+        "sourceTitle": {
+          "text": "组织与数据权限树（待选）",
+          "clientWidth": 150,
+          "scrollWidth": 176,
+          "bounds": {
+            "left": 349,
+            "right": 498.515625,
+            "width": 149.515625
+          },
+          "parentBounds": {
+            "left": 349,
+            "right": 679.65625,
+            "width": 330.65625
+          }
+        }
+      },
+      "preInjectionScreenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\pre-overlay-desktop-light-filter-keyboard.png",
+      "postInjectionViewport": {
+        "title": "[Human] LxTransferPanel Assessment B",
+        "viewportWidth": 1440,
+        "viewportHeight": 1100,
+        "screenWidth": 1440,
+        "screenHeight": 1100,
+        "devicePixelRatio": 1,
+        "visualViewportWidth": 1440,
+        "viewportMeta": "width=device-width,initial-scale=1",
+        "htmlClasses": "",
+        "documentWidth": 1440,
+        "horizontalOverflow": false,
+        "documentHeight": 5925,
+        "bodyClasses": "",
+        "themeClasses": [
+          "transfer-panel-demo"
+        ],
+        "activeElement": {
+          "tagName": "body",
+          "ariaLabel": null,
+          "text": "Skip to contentLxUI搜索文档K Main Navigation 首页组件新增组件Appearance菜单本页导航 Sidebar Navigation 新增组件新增组件总览基础基础控件桥接LxButton 按钮LxIcon 图标总览布局导航LxSidebar 侧边栏LxNavbar 顶部导航LxBreadcrumb 面包屑LxTabsBar 页签栏LxSplitLayout 分栏布局LxSelectTree 组织树选择数据展示表格、分页与详情LxProTable 数据表格LxPagination 分页LxDescriptions 详情描述页面与指标LxPageCard 页面容器LxMetricCard 指标卡LxSectionTitle 区块标题日历与组织LxDutyCalendar 排班日历LxAuthImg 鉴权图片LxVirtualTree 虚拟树LxTransferPanel 双栏穿梭状态与辅助LxStatusDot 状态点LxTag 浅底标签LxNodeBadge 节点徽章LxEmpty 空态图形与操作LxCodeSlot 代码槽LxActionButtons 行内操作LxGauge 圆环仪表权限消费数据录入表单与基础字段LxForm 表单LxInput 输入框LxTextarea 文本域LxInputNumber 数字输入LxPasswordInput 密码输入框选项控件LxRadio 单选组LxCheckbox 复选组LxSwitch 开关LxSelect 下拉选择树形与日期选择LxTreeSelect 树形下拉LxCascader 级联选择LxDatePicker 日期选择检索与复杂字段LxSearchBar 检索面板LxDynamicForm 动态表单LxStatusSwitch 状态开关LxUpload 文件上传LxSelectPagination 远程分页选择反馈与浮层LxMessage 全局提示LxConfirm 确认框LxDialog 表单弹窗LxDrawer 详情抽屉LxFormErrorBanner 校验横幅本页导航交互示例PropsEvents节点元数据选择规则宿主持久化与清空确认LxTransferPanel 双栏穿梭 ​把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。交互示例 ​示例状态与主题 正常数据  空结果  加载中  加载失败  最多 5 项 HUD 深色主题选中 6 项；当前树中可解析 5 个节点组织与数据权限树（待选） 全选筛选结果 / 反选筛选结果 筛选结果已全部选择，共 1 项市公安局指挥中心ORG-01 正常待授权特勤支队UNIT-PENDING-01 正常待选池：1420 个节点待选树中的可选节点已全部加入已选数据权限清单 市公安局指挥中心ORG-01正常 情指行一体化研判调度专班DEPT-03正常 交警直属特勤一中队TRF-101处理中 站前路派出所综合作战室SUB-22忙碌 历史授权单位（记录中）LEGACY-08停用 节点未加载 legacy-unit-08 待授权特勤支队UNIT-PENDING-01正常已选 6 项保留下级继承授权当前已选 6 项待选树 1,420 个节点包含一个当前树中未加载的既有选中键 数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。 默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。查看示例代码vue<script setup lang=\"ts\">\nimport { computed, ref, watch } from 'vue'\n\nimport { LxTransferPanel, type LxTransferPanelNode } from '../../../index'\n\ntype HostState = 'ready' | 'loading' | 'error' | 'empty'\n\nconst hostState = ref<HostState>('ready')\nconst selectedKeys = ref<(string | number)[]>([\n  'org-01',\n  'unit-01',\n  'unit-02',\n  'unit-03',\n  'legacy-unit-08',\n])\nconst maxCountEnabled = ref(true)\nconst darkTheme = ref(false)\nconst inheritChild = ref(true)\nconst lastAction = ref('已载入组织权限数据')\nconst undoKeys = ref<(string | number)[] | null>(null)\nconst lastNonEmptySelection = ref<(string | number)[]>([...selectedKeys.value])\n\nconst GROUP_COUNT = 20\nconst CHILD_COUNT = 70\n\nconst treeData: LxTransferPanelNode[] = [\n  {\n    id: 'org-01',\n    label: '市公安局指挥中心',\n    code: 'ORG-01',\n    status: 'online',\n    statusTone: 'success',\n    children: [\n      {\n        id: 'unit-01',\n        label: '情指行一体化研判调度专班',\n        code: 'DEPT-03',\n        status: 'online',\n        statusTone: 'success',\n      },\n      {\n        id: 'unit-02',\n        label: '交警直属特勤一中队',\n        code: 'TRF-101',\n        status: 'processing',\n        statusTone: 'processing',\n      },\n      {\n        id: 'unit-03',\n        label: '站前路派出所综合作战室',\n        code: 'SUB-22',\n        status: 'busy',\n        statusTone: 'warning',\n      },\n      {\n        id: 'unit-locked',\n        label: '受限巡检单位',\n        code: 'RESTRICTED',\n        status: 'offline',\n        statusTone: 'offline',\n        disabled: true,\n      },\n      ...Array.from({ length: CHILD_COUNT - 4 }, (_, index) => {\n        const sequence = String(index + 1).padStart(2, '0')\n        const assignable = index === 0\n        return {\n          id: `archive-unit-${sequence}`,\n          label: assignable ? '待授权特勤支队' : `历史归档单位 ${sequence}`,\n          code: assignable ? 'UNIT-PENDING-01' : `ARCHIVE-${sequence}`,\n          status: assignable ? 'online' : 'offline',\n          statusTone: assignable ? ('success' as const) : ('offline' as const),\n          disabled: !assignable,\n        }\n      }),\n    ],\n  },\n  ...Array.from({ length: GROUP_COUNT - 1 }, (_, index) => {\n    const group = index + 2\n    const groupSequence = String(group).padStart(2, '0')\n    return {\n      id: `division-${groupSequence}`,\n      label: `历史归档机构 ${groupSequence}`,\n      code: `ORG-${groupSequence}`,\n      status: 'offline',\n      statusTone: 'offline' as const,\n      disabled: true,\n      children: Array.from({ length: CHILD_COUNT }, (_, childIndex) => {\n        const childSequence = String(childIndex + 1).padStart(3, '0')\n        return {\n          id: `division-${groupSequence}-unit-${childSequence}`,\n          label: `历史归档机构 ${groupSequence} 单位 ${childSequence}`,\n          code: `D${groupSequence}-${childSequence}`,\n          status: 'offline',\n          statusTone: 'offline' as const,\n          disabled: true,\n        }\n      }),\n    }\n  }),\n]\nconst selectedItems = [\n  {\n    id: 'org-01',\n    label: '市公安局指挥中心',\n    code: 'ORG-01',\n    status: 'online',\n    statusTone: 'success',\n  },\n  {\n    id: 'unit-01',\n    label: '情指行一体化研判调度专班',\n    code: 'DEPT-03',\n    status: 'online',\n    statusTone: 'success',\n  },\n  {\n    id: 'unit-02',\n    label: '交警直属特勤一中队',\n    code: 'TRF-101',\n    status: 'processing',\n    statusTone: 'processing',\n  },\n  {\n    id: 'unit-03',\n    label: '站前路派出所综合作战室',\n    code: 'SUB-22',\n    status: 'busy',\n    statusTone: 'warning',\n  },\n  {\n    id: 'legacy-unit-08',\n    label: '历史授权单位（记录中）',\n    code: 'LEGACY-08',\n    status: 'offline',\n    statusTone: 'offline',\n  },\n] satisfies LxTransferPanelNode[]\n\nconst expandedGroupKeys = treeData.map((node) => node.id)\nconst visibleTreeData = computed(() =>\n  hostState.value === 'empty' ? [] : treeData,\n)\nconst visibleTreeNodeCount = computed(() =>\n  hostState.value === 'empty' ? 0 : GROUP_COUNT * (CHILD_COUNT + 1),\n)\n\nwatch(selectedKeys, (value, previousValue) => {\n  if (value.length) {\n    lastNonEmptySelection.value = [...value]\n    if (undoKeys.value && value !== previousValue) undoKeys.value = null\n  }\n})\n\nfunction setHostState(state: HostState) {\n  hostState.value = state\n  lastAction.value = {\n    ready: '已载入组织权限数据',\n    loading: '宿主正在加载组织权限数据',\n    error: '组织权限数据加载失败，可重试',\n    empty: '宿主返回了空树数据',\n  }[state]\n}\n\nfunction onChange(keys: (string | number)[], nodes: LxTransferPanelNode[]) {\n  lastAction.value = `选中 ${keys.length} 项；当前树中可解析 ${nodes.length} 个节点`\n}\n\nfunction onClearAll() {\n  undoKeys.value = [...lastNonEmptySelection.value]\n  lastAction.value = '已清空全部选中项，可撤销'\n}\n\nfunction undoClear() {\n  if (!undoKeys.value) return\n  selectedKeys.value = [...undoKeys.value]\n  undoKeys.value = null\n  lastAction.value = '已恢复清空前的选中项'\n}\n\nfunction onInheritChange(value: boolean) {\n  inheritChild.value = value\n  lastAction.value = value ? '已保留下级继承授权' : '已关闭下级继承授权'\n}\n</script>\n\n<template>\n  <div class=\"transfer-panel-demo\" :class=\"{ 'lx-theme-hud': darkTheme }\">\n    <details class=\"transfer-panel-demo__settings\">\n      <summary>示例状态与主题</summary>\n      <div class=\"transfer-panel-demo__toolbar\">\n        <div\n          class=\"transfer-panel-demo__toolbar-group\"\n          role=\"group\"\n          aria-label=\"宿主数据状态\"\n        >\n          <button\n            type=\"button\"\n            :aria-pressed=\"hostState === 'ready'\"\n            @click=\"setHostState('ready')\"\n          >\n            正常数据\n          </button>\n          <button\n            type=\"button\"\n            :aria-pressed=\"hostState === 'empty'\"\n            @click=\"setHostState('empty')\"\n          >\n            空结果\n          </button>\n          <button\n            type=\"button\"\n            :aria-pressed=\"hostState === 'loading'\"\n            @click=\"setHostState('loading')\"\n          >\n            加载中\n          </button>\n          <button\n            type=\"button\"\n            :aria-pressed=\"hostState === 'error'\"\n            @click=\"setHostState('error')\"\n          >\n            加载失败\n          </button>\n        </div>\n        <div\n          class=\"transfer-panel-demo__toolbar-group\"\n          role=\"group\"\n          aria-label=\"示例参数\"\n        >\n          <label\n            ><input v-model=\"maxCountEnabled\" type=\"checkbox\" /> 最多 5\n            项</label\n          >\n          <label\n            ><input v-model=\"darkTheme\" type=\"checkbox\" /> HUD 深色主题</label\n          >\n        </div>\n      </div>\n    </details>\n\n    <div\n      class=\"transfer-panel-demo__status\"\n      data-testid=\"transfer-status\"\n      aria-live=\"polite\"\n    >\n      <span>{{ lastAction }}</span>\n      <button v-if=\"undoKeys\" type=\"button\" @click=\"undoClear\">撤销清空</button>\n    </div>\n\n    <div\n      class=\"transfer-panel-demo__surface\"\n      :class=\"{\n        'is-blocked': hostState === 'loading' || hostState === 'error',\n      }\"\n      :aria-busy=\"hostState === 'loading' ? 'true' : undefined\"\n    >\n      <LxTransferPanel\n        v-model=\"selectedKeys\"\n        :tree-data=\"visibleTreeData\"\n        :selected-items=\"selectedItems\"\n        :titles=\"['组织与数据权限树（待选）', '已选数据权限清单']\"\n        :panel-height=\"380\"\n        :max-count=\"maxCountEnabled ? 5 : undefined\"\n        :default-expanded-keys=\"expandedGroupKeys\"\n        :inherit-child=\"inheritChild\"\n        :inert=\"hostState === 'loading' || hostState === 'error'\"\n        @change=\"onChange\"\n        @clear-all=\"onClearAll\"\n        @update:inherit-child=\"onInheritChange\"\n      />\n      <div\n        v-if=\"hostState === 'loading'\"\n        class=\"transfer-panel-demo__message\"\n        role=\"status\"\n      >\n        组织权限数据加载中……\n      </div>\n      <div\n        v-else-if=\"hostState === 'error'\"\n        class=\"transfer-panel-demo__message\"\n        role=\"alert\"\n      >\n        <span>组织权限数据加载失败，当前选择仍然保留。</span>\n        <button type=\"button\" @click=\"setHostState('ready')\">重试</button>\n      </div>\n    </div>\n\n    <div class=\"transfer-panel-demo__summary\">\n      <span data-testid=\"selected-count\"\n        >当前已选 {{ selectedKeys.length }} 项</span\n      >\n      <span data-testid=\"tree-node-count\"\n        >待选树 {{ visibleTreeNodeCount.toLocaleString('zh-CN') }} 个节点</span\n      >\n      <span>包含一个当前树中未加载的既有选中键</span>\n    </div>\n    <p class=\"transfer-panel-demo__note\">\n      数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。\n    </p>\n  </div>\n</template>\n\n<style scoped>\n.transfer-panel-demo {\n  display: grid;\n  min-width: 0;\n  gap: var(--lx-space-md);\n  color: var(--lx-text-regular);\n  font-size: 13px;\n}\n\n.transfer-panel-demo__toolbar {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: var(--lx-space-xs);\n}\n\n.transfer-panel-demo__toolbar-group {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: var(--lx-space-xs);\n}\n\n.transfer-panel-demo__settings {\n  border: 1px solid var(--lx-border);\n  border-radius: var(--lx-radius-sm);\n  background: var(--lx-bg-card);\n}\n\n.transfer-panel-demo__settings summary {\n  min-height: 36px;\n  box-sizing: border-box;\n  padding: 8px var(--lx-space-sm);\n  color: var(--lx-text-primary);\n  cursor: pointer;\n  font-weight: 600;\n}\n\n.transfer-panel-demo__settings[open] summary {\n  border-bottom: 1px solid var(--lx-border-light);\n}\n\n.transfer-panel-demo__settings .transfer-panel-demo__toolbar {\n  padding: var(--lx-space-sm);\n}\n\n.transfer-panel-demo button {\n  min-height: 32px;\n  padding: 4px var(--lx-space-sm);\n  border: 1px solid var(--lx-border);\n  border-radius: var(--lx-radius-sm);\n  background: var(--lx-bg-card);\n  color: var(--lx-text-regular);\n  cursor: pointer;\n  font: inherit;\n}\n\n.transfer-panel-demo button:hover,\n.transfer-panel-demo button[aria-pressed='true'] {\n  border-color: var(--lx-color-primary);\n  color: var(--lx-color-primary);\n}\n\n.transfer-panel-demo button:focus-visible,\n.transfer-panel-demo input:focus-visible {\n  outline: 2px solid var(--lx-color-primary);\n  outline-offset: 2px;\n}\n\n.transfer-panel-demo label {\n  display: inline-flex;\n  min-height: 32px;\n  align-items: center;\n  gap: var(--lx-space-xs);\n  padding-inline: var(--lx-space-xs);\n}\n\n.transfer-panel-demo input {\n  accent-color: var(--lx-color-primary);\n}\n\n.transfer-panel-demo__status,\n.transfer-panel-demo__summary,\n.transfer-panel-demo__note {\n  margin: 0;\n  line-height: 20px;\n}\n\n.transfer-panel-demo__status {\n  display: flex;\n  min-width: 0;\n  align-items: center;\n  justify-content: space-between;\n  gap: var(--lx-space-sm);\n}\n\n.transfer-panel-demo__status button {\n  min-height: 28px;\n  padding: 2px var(--lx-space-sm);\n  color: var(--lx-color-primary);\n  font-size: 12px;\n}\n\n.transfer-panel-demo__status,\n.transfer-panel-demo__note {\n  color: var(--lx-text-secondary);\n}\n\n.transfer-panel-demo.lx-theme-hud .transfer-panel-demo__status,\n.transfer-panel-demo.lx-theme-hud .transfer-panel-demo__summary {\n  padding: var(--lx-space-sm) var(--lx-space-md);\n  border: 1px solid var(--lx-border);\n  border-radius: var(--lx-radius-sm);\n  background: var(--lx-bg-card);\n  color: var(--lx-text-secondary-strong);\n}\n\n.transfer-panel-demo__summary {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: var(--lx-space-xs) var(--lx-space-md);\n}\n\n.transfer-panel-demo__surface {\n  position: relative;\n  display: grid;\n  min-width: 0;\n  gap: var(--lx-space-sm);\n}\n\n.transfer-panel-demo__surface.is-blocked :deep(.lx-transfer-panel) {\n  pointer-events: none;\n  opacity: 0.62;\n}\n\n.transfer-panel-demo__note {\n  padding: var(--lx-space-sm) var(--lx-space-md);\n  border: 1px solid var(--lx-border);\n  border-radius: var(--lx-radius-sm);\n  background: var(--lx-bg-card);\n}\n\n.transfer-panel-demo__message {\n  display: flex;\n  min-height: 40px;\n  align-items: center;\n  justify-content: center;\n  gap: var(--lx-space-sm);\n  padding: var(--lx-space-md);\n  border: 1px solid var(--lx-border);\n  border-radius: var(--lx-radius-sm);\n  background: var(--lx-bg-card-hover);\n  color: var(--lx-text-secondary-strong);\n  text-align: center;\n}\n\n@media (max-width: 480px) {\n  .transfer-panel-demo button,\n  .transfer-panel-demo label {\n    min-height: 44px;\n  }\n\n  .transfer-panel-demo__header-actions button {\n    min-width: 44px;\n  }\n}\n</style>Props ​名称类型默认值说明treeDataLxTransferPanelNode[][]左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。modelValue(string | number)[][]受控的已选节点键；可包含暂未加载到当前树中的既有键。selectedItemsLxTransferPanelItem[][]当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。titles[string, string]['待选资源', '已选资源']左右面板标题。filterPlaceholders[string, string]['快速过滤待分配单位...', '在已选名单中检索...']左、右筛选框占位文案；右侧筛选同时匹配标题、编码和状态。panelHeightnumber380面板目标高度，单位 px。左侧树与右侧列表各自滚动。defaultExpandedKeys(string | number)[][]左侧树首次展开的节点键；后续展开/收起由树组件内部管理。maxCountnumberundefined已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。inheritChildbooleantrue是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。Events ​事件参数说明update:modelValuekeys受控选中键变化，用于 v-model。change(keys, nodes)被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。update:inheritChildvalue下级继承开关变化。clear-all无用户确认后通过中间“全部移除”清空非空列表时触发；在 update:modelValue 与 change 之后发出。节点元数据 ​LxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：字段类型展示位置codestring两侧节点标题后的等宽编码标签，过长时省略并保留 title 完整文本。statusLxStatus | string两侧节点标题后的状态文本；online、processing、busy、error、offline 显示为“正常”“处理中”“忙碌”“异常”“停用”，其它值原样显示。statusToneLxStatus | LxFeedback状态点和状态文本的语义色；不传时从 status 的标准状态值推断。右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。选择规则 ​中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。左侧搜索有内容时才显示“全选筛选结果”和“反选筛选结果”；只操作节点名称实际匹配搜索文本的可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。窄屏下待选标题、筛选批量操作与状态说明分行展示；文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。change 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。全量操作只保留中间按钮，避免与筛选范围操作混淆。宿主持久化与清空确认 ​清空动作的事件顺序固定为 update:modelValue([])、change([], [])、clear-all。clear-all 是清空已发生后的通知，不是可取消的确认钩子。需要确认或撤销时，宿主应把组件绑定到本地草稿值，保存到后端时再提交；不要在 v-model 监听器中直接持久化每次变化。未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。全量清空确认期间如果宿主传入的 modelValue 发生变化，旧确认会失效并提示用户重新检查，不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：tsconst draftKeys = ref<(string | number)[]>([...savedKeys.value])\nconst lastNonEmptyKeys = ref([...draftKeys.value])\nconst saving = ref(false)\nlet draftRevision = 0\n\nwatch(draftKeys, (keys) => {\n  if (keys.length) lastNonEmptyKeys.value = [...keys]\n})\n\nfunction updateDraftKeys(keys: (string | number)[]) {\n  if (saving.value) return\n  draftRevision += 1\n  draftKeys.value = [...keys]\n}\n\nfunction onClearAll() {\n  if (saving.value) return\n  const submittedKeys = [...draftKeys.value]\n  const restoreKeys = [...lastNonEmptyKeys.value]\n  const submittedRevision = draftRevision\n  saving.value = true\n  Promise.resolve()\n    .then(() => savePermissionKeys(submittedKeys))\n    .then(() => {\n      savedKeys.value = [...submittedKeys]\n    })\n    .catch(() => {\n      if (draftRevision === submittedRevision) {\n        draftRevision += 1\n        draftKeys.value = restoreKeys\n      }\n    })\n    .finally(() => {\n      saving.value = false\n    })\n}vue<div :aria-busy=\"saving\" :inert=\"saving\">\n  <LxTransferPanel\n    :model-value=\"draftKeys\"\n    @update:model-value=\"updateDraftKeys\"\n    @clear-all=\"onClearAll\"\n  />\n</div>面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能自动撤销；服务端补偿仍由宿主按真实 API 契约实现。PagerPrevious pageLxVirtualTree 虚拟树Next pageLxStatusDot 状态点\n    \n  \nline length too longcontent overflowing its containerraster buried under a wash or opacityline length too longline length too longline length too longline length too longline length too longraster buried under a wash or opacityraster buried under a wash or opacityline length too longcards flush against the scroller edge✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)layout property animation: transition: height, padding-top, padding-bottom◉×"
+        }
+      },
+      "consoleFindingLines": [
+        "%c[impeccable] 13 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "pageErrors": [],
+      "requestFailures": [],
+      "error": null,
+      "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\desktop-light-filter-keyboard.png"
+    },
+    {
+      "id": "desktop-dark-loading",
+      "navigationStatus": 200,
+      "preflightSucceeded": true,
+      "injectionSucceeded": true,
+      "detectorApiAvailable": true,
+      "findingCount": 201,
+      "overlayCount": 199,
+      "preInjectionLayout": {
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "visualViewportOverflow": false,
+        "docsContainer": {
+          "left": 304,
+          "right": 1408,
+          "width": 1104
+        },
+        "demo": {
+          "left": 336,
+          "right": 1216,
+          "width": 880
+        },
+        "transferPanel": {
+          "left": 336,
+          "right": 1216,
+          "width": 880
+        },
+        "sourceTitle": {
+          "text": "组织与数据权限树（待选）",
+          "clientWidth": 331,
+          "scrollWidth": 331,
+          "bounds": {
+            "left": 349,
+            "right": 679.65625,
+            "width": 330.65625
+          },
+          "parentBounds": {
+            "left": 349,
+            "right": 679.65625,
+            "width": 330.65625
+          }
+        }
+      },
+      "preInjectionScreenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\pre-overlay-desktop-dark-loading.png",
+      "postInjectionViewport": {
+        "title": "[Human] LxTransferPanel Assessment B",
+        "viewportWidth": 1440,
+        "viewportHeight": 1100,
+        "screenWidth": 1440,
+        "screenHeight": 1100,
+        "devicePixelRatio": 1,
+        "visualViewportWidth": 1440,
+        "viewportMeta": "width=device-width,initial-scale=1",
+        "htmlClasses": "dark",
+        "documentWidth": 1440,
+        "horizontalOverflow": false,
+        "documentHeight": 6019,
+        "bodyClasses": "",
+        "themeClasses": [
+          "transfer-panel-demo lx-theme-hud"
+        ],
+        "activeElement": {
+          "tagName": "button",
+          "ariaLabel": null,
+          "text": "加载中"
+        }
+      },
+      "consoleFindingLines": [
+        "%c[impeccable] 199 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "pageErrors": [],
+      "requestFailures": [],
+      "error": null,
+      "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\desktop-dark-loading.png"
+    },
+    {
+      "id": "mobile-light-empty",
+      "navigationStatus": 200,
+      "preflightSucceeded": true,
+      "injectionSucceeded": true,
+      "detectorApiAvailable": true,
+      "findingCount": 7,
+      "overlayCount": 5,
+      "preInjectionLayout": {
+        "documentClientWidth": 375,
+        "documentScrollWidth": 375,
+        "horizontalOverflow": false,
+        "visualViewportOverflow": false,
+        "docsContainer": {
+          "left": 24,
+          "right": 351,
+          "width": 327
+        },
+        "demo": {
+          "left": 24,
+          "right": 351,
+          "width": 327
+        },
+        "transferPanel": {
+          "left": 24,
+          "right": 351,
+          "width": 327
+        },
+        "sourceTitle": {
+          "text": "组织与数据权限树（待选）",
+          "clientWidth": 301,
+          "scrollWidth": 301,
+          "bounds": {
+            "left": 37,
+            "right": 338,
+            "width": 301
+          },
+          "parentBounds": {
+            "left": 37,
+            "right": 338,
+            "width": 301
+          }
+        }
+      },
+      "preInjectionScreenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\pre-overlay-mobile-light-empty.png",
+      "postInjectionViewport": {
+        "title": "[Human] LxTransferPanel Assessment B",
+        "viewportWidth": 615,
+        "viewportHeight": 1385,
+        "screenWidth": 375,
+        "screenHeight": 844,
+        "devicePixelRatio": 1,
+        "visualViewportWidth": 375,
+        "viewportMeta": "width=device-width,initial-scale=1",
+        "htmlClasses": "",
+        "documentWidth": 615,
+        "horizontalOverflow": true,
+        "documentHeight": 8476,
+        "bodyClasses": "",
+        "themeClasses": [
+          "transfer-panel-demo"
+        ],
+        "activeElement": {
+          "tagName": "button",
+          "ariaLabel": null,
+          "text": "空结果"
+        }
+      },
+      "consoleFindingLines": [
+        "%c[impeccable] 5 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "pageErrors": [],
+      "requestFailures": [],
+      "error": null,
+      "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\mobile-light-empty.png"
+    },
+    {
+      "id": "mobile-320-reflow",
+      "navigationStatus": 200,
+      "preflightSucceeded": true,
+      "injectionSucceeded": true,
+      "detectorApiAvailable": true,
+      "findingCount": 7,
+      "overlayCount": 5,
+      "preInjectionLayout": {
+        "documentClientWidth": 320,
+        "documentScrollWidth": 320,
+        "horizontalOverflow": false,
+        "visualViewportOverflow": false,
+        "docsContainer": {
+          "left": 24,
+          "right": 296,
+          "width": 272
+        },
+        "demo": {
+          "left": 24,
+          "right": 296,
+          "width": 272
+        },
+        "transferPanel": {
+          "left": 24,
+          "right": 296,
+          "width": 272
+        },
+        "sourceTitle": {
+          "text": "组织与数据权限树（待选）",
+          "clientWidth": 246,
+          "scrollWidth": 246,
+          "bounds": {
+            "left": 37,
+            "right": 283,
+            "width": 246
+          },
+          "parentBounds": {
+            "left": 37,
+            "right": 283,
+            "width": 246
+          }
+        }
+      },
+      "preInjectionScreenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\pre-overlay-mobile-320-reflow.png",
+      "postInjectionViewport": {
+        "title": "[Human] LxTransferPanel Assessment B",
+        "viewportWidth": 560,
+        "viewportHeight": 1365,
+        "screenWidth": 320,
+        "screenHeight": 780,
+        "devicePixelRatio": 1,
+        "visualViewportWidth": 320,
+        "viewportMeta": "width=device-width,initial-scale=1",
+        "htmlClasses": "",
+        "documentWidth": 560,
+        "horizontalOverflow": true,
+        "documentHeight": 8958,
+        "bodyClasses": "",
+        "themeClasses": [
+          "transfer-panel-demo"
+        ],
+        "activeElement": {
+          "tagName": "summary",
+          "ariaLabel": null,
+          "text": "示例状态与主题"
+        }
+      },
+      "consoleFindingLines": [
+        "%c[impeccable] 5 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "pageErrors": [],
+      "requestFailures": [],
+      "error": null,
+      "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\mobile-320-reflow.png"
+    },
+    {
+      "id": "mobile-dark-error",
+      "navigationStatus": 200,
+      "preflightSucceeded": true,
+      "injectionSucceeded": true,
+      "detectorApiAvailable": true,
+      "findingCount": 195,
+      "overlayCount": 192,
+      "preInjectionLayout": {
+        "documentClientWidth": 375,
+        "documentScrollWidth": 375,
+        "horizontalOverflow": false,
+        "visualViewportOverflow": false,
+        "docsContainer": {
+          "left": 24,
+          "right": 351,
+          "width": 327
+        },
+        "demo": {
+          "left": 24,
+          "right": 351,
+          "width": 327
+        },
+        "transferPanel": {
+          "left": 24,
+          "right": 351,
+          "width": 327
+        },
+        "sourceTitle": {
+          "text": "组织与数据权限树（待选）",
+          "clientWidth": 301,
+          "scrollWidth": 301,
+          "bounds": {
+            "left": 37,
+            "right": 338,
+            "width": 301
+          },
+          "parentBounds": {
+            "left": 37,
+            "right": 338,
+            "width": 301
+          }
+        }
+      },
+      "preInjectionScreenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\pre-overlay-mobile-dark-error.png",
+      "postInjectionViewport": {
+        "title": "[Human] LxTransferPanel Assessment B",
+        "viewportWidth": 615,
+        "viewportHeight": 1332,
+        "screenWidth": 375,
+        "screenHeight": 812,
+        "devicePixelRatio": 1,
+        "visualViewportWidth": 375,
+        "viewportMeta": "width=device-width,initial-scale=1",
+        "htmlClasses": "dark",
+        "documentWidth": 615,
+        "horizontalOverflow": true,
+        "documentHeight": 8604,
+        "bodyClasses": "",
+        "themeClasses": [
+          "transfer-panel-demo lx-theme-hud"
+        ],
+        "activeElement": {
+          "tagName": "button",
+          "ariaLabel": null,
+          "text": "加载失败"
+        }
+      },
+      "consoleFindingLines": [
+        "%c[impeccable] 192 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "pageErrors": [],
+      "requestFailures": [],
+      "error": null,
+      "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\mobile-dark-error.png"
+    },
+    {
+      "id": "desktop-light-clear-confirmation",
+      "navigationStatus": 200,
+      "preflightSucceeded": true,
+      "injectionSucceeded": true,
+      "detectorApiAvailable": true,
+      "findingCount": 13,
+      "overlayCount": 12,
+      "preInjectionLayout": {
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "visualViewportOverflow": false,
+        "docsContainer": {
+          "left": 304,
+          "right": 1408,
+          "width": 1104
+        },
+        "demo": {
+          "left": 336,
+          "right": 1216,
+          "width": 880
+        },
+        "transferPanel": {
+          "left": 336,
+          "right": 1216,
+          "width": 880
+        },
+        "sourceTitle": {
+          "text": "组织与数据权限树（待选）",
+          "clientWidth": 331,
+          "scrollWidth": 331,
+          "bounds": {
+            "left": 349,
+            "right": 679.65625,
+            "width": 330.65625
+          },
+          "parentBounds": {
+            "left": 349,
+            "right": 679.65625,
+            "width": 330.65625
+          }
+        }
+      },
+      "preInjectionScreenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\pre-overlay-desktop-light-clear-confirmation.png",
+      "postInjectionViewport": {
+        "title": "[Human] LxTransferPanel Assessment B",
+        "viewportWidth": 1440,
+        "viewportHeight": 1100,
+        "screenWidth": 1440,
+        "screenHeight": 1100,
+        "devicePixelRatio": 1,
+        "visualViewportWidth": 1440,
+        "viewportMeta": "width=device-width,initial-scale=1",
+        "htmlClasses": "",
+        "documentWidth": 1440,
+        "horizontalOverflow": false,
+        "documentHeight": 5925,
+        "bodyClasses": "el-message-box-parent--hidden",
+        "themeClasses": [
+          "transfer-panel-demo"
+        ],
+        "activeElement": {
+          "tagName": "button",
+          "ariaLabel": null,
+          "text": "清空全部授权"
+        }
+      },
+      "consoleFindingLines": [
+        "%c[impeccable] 12 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "pageErrors": [],
+      "requestFailures": [],
+      "error": null,
+      "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\desktop-light-clear-confirmation.png"
+    },
+    {
+      "id": "desktop-400-percent-browser-zoom",
+      "navigationStatus": 200,
+      "preflightSucceeded": true,
+      "injectionSucceeded": true,
+      "detectorApiAvailable": true,
+      "findingCount": 13,
+      "overlayCount": 12,
+      "preInjectionLayout": {
+        "documentClientWidth": 1280,
+        "documentScrollWidth": 1280,
+        "horizontalOverflow": false,
+        "visualViewportOverflow": false,
+        "docsContainer": {
+          "left": 304,
+          "right": 1248,
+          "width": 944
+        },
+        "demo": {
+          "left": 336,
+          "right": 1056,
+          "width": 720
+        },
+        "transferPanel": {
+          "left": 336,
+          "right": 1056,
+          "width": 720
+        },
+        "sourceTitle": {
+          "text": "组织与数据权限树（待选）",
+          "clientWidth": 264,
+          "scrollWidth": 264,
+          "bounds": {
+            "left": 349,
+            "right": 613,
+            "width": 264
+          },
+          "parentBounds": {
+            "left": 349,
+            "right": 613,
+            "width": 264
+          }
+        }
+      },
+      "preInjectionScreenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\pre-overlay-desktop-400-percent-browser-zoom.png",
+      "postInjectionViewport": {
+        "title": "[Human] LxTransferPanel Assessment B",
+        "viewportWidth": 1280,
+        "viewportHeight": 1000,
+        "screenWidth": 1280,
+        "screenHeight": 1000,
+        "devicePixelRatio": 1,
+        "visualViewportWidth": 1280,
+        "viewportMeta": "width=device-width,initial-scale=1",
+        "htmlClasses": "",
+        "documentWidth": 1280,
+        "horizontalOverflow": false,
+        "documentHeight": 6171,
+        "bodyClasses": "",
+        "themeClasses": [
+          "transfer-panel-demo"
+        ],
+        "activeElement": {
+          "tagName": "summary",
+          "ariaLabel": null,
+          "text": "示例状态与主题"
+        }
+      },
+      "consoleFindingLines": [
+        "%c[impeccable] 12 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "pageErrors": [],
+      "requestFailures": [],
+      "error": null,
+      "screenshot": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\final-assessment-b-postfix-2026-10-08\\desktop-400-percent-browser-zoom.png"
+    }
+  ]
+}

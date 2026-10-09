@@ -11,6 +11,45 @@
   background: var(--lx-bg-card);
 }
 
+/* 宽屏下仅为双栏穿梭示例扩展正文列，并给页面目录保留可读宽度。 */
+@media (min-width: 1280px) {
+  .VPDoc:has(.transfer-panel-demo) .content-container {
+    width: auto !important;
+    max-width: none !important;
+    flex: 1 1 auto !important;
+  }
+
+  .VPDoc:has(.transfer-panel-demo) .aside {
+    width: 160px;
+    max-width: 160px;
+    flex: 0 0 160px;
+  }
+}
+
+@media (max-width: 960px) {
+  .VPDoc:has(.transfer-panel-demo) .container,
+  .VPDoc:has(.transfer-panel-demo) .content-container,
+  .VPDoc:has(.transfer-panel-demo) .vp-doc {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .VPDoc:has(.transfer-panel-demo) .vp-doc table {
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  /* 窄屏下收回 VitePress 代码块的全视口负边距，避免撑宽文档正文列。 */
+  .VPDoc:has(.transfer-panel-demo) .vp-doc [class*='language-'],
+  .VPDoc:has(.virtual-tree-demo) .vp-doc [class*='language-'] {
+    margin-inline: 0;
+  }
+
+  .VPDoc:has(.transfer-panel-demo) .transfer-panel-demo {
+    scroll-margin-block-start: calc(var(--vp-nav-height, 64px) + 48px + 16px);
+  }
+}
+
 .vp-doc #lx-passwordinput-demo {
   scroll-margin-block-start: calc(var(--vp-nav-height, 64px) + 16px);
 }
@@ -43,6 +82,40 @@
   --el-text-color-placeholder: var(--vp-c-text-2);
 }
 
+/* 文档站暗色主题下，穿梭与虚拟树示例继承文档表面和文字令牌。 */
+.dark .vp-doc .transfer-panel-demo:not(.lx-theme-hud),
+.dark .vp-doc .virtual-tree-demo:not(.lx-theme-hud) {
+  color-scheme: dark;
+  --lx-bg-page: var(--vp-c-bg);
+  --lx-bg-card: var(--vp-c-bg-alt);
+  --lx-bg-card-hover: var(--vp-c-bg-soft);
+  --lx-bg-table-header: var(--vp-c-bg-soft);
+  --lx-border: var(--vp-c-divider);
+  --lx-border-light: var(--vp-c-divider);
+  --lx-control-border: var(--vp-c-divider);
+  --lx-color-primary: var(--vp-c-brand-1);
+  --lx-color-primary-hover: var(--vp-c-brand-2);
+  --lx-color-primary-container: var(--vp-c-brand-1);
+  --lx-color-primary-light: var(--vp-c-brand-soft);
+  --lx-color-on-primary: var(--vp-c-bg);
+  --lx-color-success-light: rgb(103 194 58 / 15%);
+  --lx-color-success-text: #86efac;
+  --lx-color-warning-light: rgb(230 162 60 / 15%);
+  --lx-color-warning-text: #f6c76b;
+  --lx-color-error-light: rgb(245 108 108 / 15%);
+  --lx-color-error-strong: #f78989;
+  --lx-color-info-light: rgb(144 147 153 / 15%);
+  --lx-color-info-strong: var(--vp-c-text-2);
+  --lx-text-primary: var(--vp-c-text-1);
+  --lx-color-text-main: var(--vp-c-text-1);
+  --lx-text-regular: var(--vp-c-text-1);
+  --lx-text-label: var(--vp-c-text-2);
+  --lx-text-secondary: var(--vp-c-text-2);
+  --lx-text-secondary-strong: var(--vp-c-text-2);
+  --lx-color-on-input: var(--vp-c-text-1);
+  --lx-text-placeholder: var(--vp-c-text-2);
+}
+
 /* API 表在窄屏内自身滚动，避免文档列被长类型撑出视口。第一列和代码列保持
    单行便于扫描，横向滚动由表格自身承载，不影响页面主滚动。 */
 .vp-doc table {
@@ -55,6 +128,11 @@
   scrollbar-color: var(--lx-color-primary) var(--lx-bg-table-header);
 }
 
+.vp-doc table:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
 .vp-doc table th:first-child,
 .vp-doc table td:first-child,
 .vp-doc table code {
@@ -62,6 +140,10 @@
 }
 
 .vp-doc .lx-passwordinput-props-hint {
+  display: none;
+}
+
+.vp-doc .lx-doc-table-scroll-hint {
   display: none;
 }
 
@@ -111,7 +193,20 @@
 }
 
 @media (max-width: 640px) {
+  .vp-doc [class*='language-'] > button.copy {
+    width: 44px;
+    height: 44px;
+  }
+
   .vp-doc .lx-passwordinput-props-hint {
+    display: block;
+    margin: -4px 0 8px;
+    color: var(--lx-text-secondary-strong);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .vp-doc .lx-doc-table-scroll-hint {
     display: block;
     margin: -4px 0 8px;
     color: var(--lx-text-secondary-strong);
@@ -139,6 +234,14 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 4px 12px;
     margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 960px) {
+  .VPLocalNavOutlineDropdown .outline-link {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
   }
 }
 

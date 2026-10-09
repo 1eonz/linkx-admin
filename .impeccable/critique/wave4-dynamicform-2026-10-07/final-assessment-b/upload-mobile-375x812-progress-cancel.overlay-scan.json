@@ -1,0 +1,91 @@
+{
+  "scriptUrl": "http://localhost:8400/detect.js",
+  "injectionAttempts": [
+    {
+      "attempt": 1,
+      "loaded": true,
+      "error": null
+    }
+  ],
+  "scanFunctionAvailable": true,
+  "scanReturnedArray": true,
+  "findingCount": 4,
+  "findings": [
+    {
+      "el": "ref: <Node>",
+      "findings": [
+        {
+          "type": "clipped-overflow-container",
+          "detail": "span.container clips a positioned child"
+        }
+      ]
+    },
+    {
+      "el": "ref: <Node>",
+      "findings": [
+        {
+          "type": "cramped-padding",
+          "detail": "<div> \"el-upload-dragger\": children flush against border+bg on right/bottom/left (no inset)"
+        }
+      ]
+    },
+    {
+      "el": "ref: <Node>",
+      "findings": [
+        {
+          "type": "buried-raster",
+          "detail": "raster background at opacity 0"
+        }
+      ]
+    },
+    {
+      "el": "ref: <Node>",
+      "findings": [
+        {
+          "type": "layout-transition",
+          "detail": "transition: height, padding-top, padding-bottom"
+        }
+      ]
+    }
+  ],
+  "overlayDom": [
+    {
+      "className": "impeccable-overlay",
+      "text": "positioned child clipped by overflow container"
+    },
+    {
+      "className": "impeccable-label",
+      "text": "positioned child clipped by overflow container"
+    },
+    {
+      "className": "impeccable-overlay",
+      "text": "cramped padding"
+    },
+    {
+      "className": "impeccable-label",
+      "text": "cramped padding"
+    },
+    {
+      "className": "impeccable-overlay",
+      "text": "raster buried under a wash or opacity"
+    },
+    {
+      "className": "impeccable-label",
+      "text": "raster buried under a wash or opacity"
+    },
+    {
+      "className": "impeccable-overlay impeccable-banner",
+      "text": "layout property animation: transition: height, padding-top, padding-bottom\n◉\n×"
+    }
+  ],
+  "impeccableConsoleMessages": [
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 3 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "type": "startGroup",
+      "text": "%c[impeccable] 4 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    }
+  ]
+}

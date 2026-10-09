@@ -28,6 +28,9 @@ const props = withDefaults(
 defineOptions({ inheritAttrs: false, name: 'LxIcon' })
 
 const attrs = useAttrs()
+const safeName = computed(() =>
+  typeof props.name === 'string' ? props.name : '',
+)
 const resolvedName = computed(() => resolveLxIconName(props.name))
 const paths = computed<readonly string[]>(
   () => getLxIconPaths(resolvedName.value ?? 'circle-question') ?? [],
@@ -38,7 +41,13 @@ const motionName = computed(() =>
 )
 const isSpinning = computed(() => props.spin || props.name === 'loading')
 const accessibleLabel = computed(
-  () => props.label || (resolvedName.value ? '' : `未知图标：${props.name}`),
+  () =>
+    props.label ||
+    (resolvedName.value
+      ? ''
+      : safeName.value
+        ? `未知图标：${safeName.value}`
+        : '未知图标'),
 )
 </script>
 
@@ -54,7 +63,7 @@ const accessibleLabel = computed(
     stroke-linecap="round"
     stroke-linejoin="round"
     :class="{ 'is-spinning': isSpinning }"
-    :data-icon-name="name"
+    :data-icon-name="safeName"
     :data-lx-motion="motionName"
     :aria-hidden="accessibleLabel ? undefined : 'true'"
     :aria-label="accessibleLabel || undefined"
@@ -216,10 +225,10 @@ const accessibleLabel = computed(
   --lx-icon-hover-transform: translateX(2px);
 }
 
-.lx-icon[data-lx-motion]:is(:hover, :focus-visible),
+.lx-icon[data-lx-motion]:not(.is-spinning):is(:hover, :focus-visible),
 :global(
   :is(button, a, [role='button']):is(:hover, :focus-visible, :active)
-    .lx-icon[data-lx-motion]
+    .lx-icon[data-lx-motion]:not(.is-spinning)
 ) {
   animation: var(--lx-icon-hover-animation, none);
   filter: var(--lx-icon-hover-filter, none);

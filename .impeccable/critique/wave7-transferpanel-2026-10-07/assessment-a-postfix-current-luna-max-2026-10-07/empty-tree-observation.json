@@ -1,0 +1,49 @@
+{
+  "status": "provisional P1; final Assessment A and end-hash verification paused",
+  "target": "http://127.0.0.1:4174/components/lxtransferpanel",
+  "browser": "Google Chrome via Playwright; a fresh browser/context/page, closed after capture",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "capture": "empty-tree-settled-1440.png",
+  "reproduction": [
+    "Open the target in a new Chrome context/page.",
+    "Expand 示范状态与主题 (示例状态与主题).",
+    "Click 空结果.",
+    "Wait 900 ms for the layout to settle.",
+    "Inspect the selected list; all five selected nodes are marked 节点未加载 and their metadata lines overlap adjacent rows."
+  ],
+  "selectedList": {
+    "clientHeight": 265,
+    "scrollHeight": 279,
+    "overflowY": "auto"
+  },
+  "rows": [
+    {
+      "text": "市公安局指挥中心 ORG-01 正常 节点未加载 org-01",
+      "li": { "top": 634, "bottom": 674.1875, "height": 40.1875 },
+      "main": { "top": 626.09375, "bottom": 682.09375, "height": 56 }
+    },
+    {
+      "text": "情指行一体化研判调度专班 DEPT-03 正常 节点未加载 unit-01",
+      "li": { "top": 686.1875, "bottom": 726.390625, "height": 40.203125 },
+      "main": { "top": 664.296875, "bottom": 748.296875, "height": 84 }
+    },
+    {
+      "text": "交警直属特勤一中队 TRF-101 处理中 节点未加载 unit-02",
+      "li": { "top": 738.390625, "bottom": 778.59375, "height": 40.203125 },
+      "main": { "top": 716.5, "bottom": 800.5, "height": 84 }
+    },
+    {
+      "text": "站前路派出所综合作战室 SUB-22 忙碌 节点未加载 unit-03",
+      "li": { "top": 790.59375, "bottom": 830.796875, "height": 40.203125 },
+      "main": { "top": 768.703125, "bottom": 852.703125, "height": 84 }
+    },
+    {
+      "text": "历史授权单位（记录中） LEGACY-08 停用 节点未加载 legacy-unit-08",
+      "li": { "top": 842.796875, "bottom": 883, "height": 40.203125 },
+      "main": { "top": 820.90625, "bottom": 904.90625, "height": 84 }
+    }
+  ]
+}

@@ -1,0 +1,1587 @@
+{
+  "method": "independent Assessment A; fresh isolated Edge/Playwright browser context",
+  "target": "http://127.0.0.1:4174/components/lxicons.html",
+  "source": "linkx-fe/docs/components/lxicons.md",
+  "detector": "not run by request",
+  "AssessmentB": "not opened",
+  "codeReview": "not opened",
+  "captures": [
+    {
+      "file": "desktop-1440-light.png",
+      "fullPage": true
+    },
+    {
+      "file": "desktop-1440-dark.png",
+      "fullPage": true
+    },
+    {
+      "file": "mobile-375-light.png",
+      "fullPage": true
+    },
+    {
+      "file": "mobile-375-fresh-context.png",
+      "fullPage": true,
+      "note": "Captured in a second new context with a 375px viewport from initial navigation to rule out responsive sidebar transition residue."
+    },
+    {
+      "file": "mobile-375-dark.png",
+      "fullPage": true
+    },
+    {
+      "file": "mobile-320-light.png",
+      "fullPage": true
+    },
+    {
+      "file": "mobile-320-alias-table.png",
+      "fullPage": false,
+      "element": "compatibility alias table"
+    },
+    {
+      "file": "mobile-375-copy-success.png",
+      "fullPage": false
+    },
+    {
+      "file": "mobile-375-copy-failure.png",
+      "fullPage": false
+    },
+    {
+      "file": "mobile-375-empty-search.png",
+      "fullPage": false
+    },
+    {
+      "file": "mobile-375-reduced-motion.png",
+      "fullPage": false
+    }
+  ],
+  "checks": {
+    "desktop1440Light": {
+      "title": "LxIcon 图标总览 | LxUI",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageWidth": 1440,
+      "horizontalOverflow": false,
+      "theme": "light",
+      "heading": "LxIcon 图标总览\n​",
+      "intro": "管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。",
+      "search": {
+        "placeholder": "输入英文名称或中文用途，如：undo / 重置 / 登出",
+        "rect": {
+          "top": 345,
+          "left": 384,
+          "right": 744,
+          "bottom": 387,
+          "width": 360,
+          "height": 42,
+          "visible": true
+        }
+      },
+      "groups": {
+        "count": 7,
+        "open": [
+          "P0 高频核心（13）"
+        ],
+        "p0": {
+          "open": true,
+          "cardCount": 13,
+          "visibleCardsAtInitialViewport": 13,
+          "firstVisibleCard": "复制 delete（删除）图标用法"
+        }
+      },
+      "searchStatus": {
+        "exists": true,
+        "text": "",
+        "role": "status",
+        "ariaLive": "polite",
+        "ariaAtomic": "true"
+      },
+      "aliasTable": {
+        "rect": {
+          "top": 2701,
+          "left": 384,
+          "right": 1072,
+          "bottom": 2827,
+          "width": 688,
+          "height": 126,
+          "visible": true
+        },
+        "clientWidth": 688,
+        "scrollWidth": 688,
+        "rows": [
+          [
+            {
+              "text": "名称",
+              "rect": {
+                "top": 2702,
+                "left": 385,
+                "right": 472,
+                "bottom": 2743,
+                "width": 88,
+                "height": 41,
+                "visible": true
+              }
+            },
+            {
+              "text": "标准图形",
+              "rect": {
+                "top": 2702,
+                "left": 472,
+                "right": 575,
+                "bottom": 2743,
+                "width": 102,
+                "height": 41,
+                "visible": true
+              }
+            },
+            {
+              "text": "来源",
+              "rect": {
+                "top": 2702,
+                "left": 575,
+                "right": 671,
+                "bottom": 2743,
+                "width": 96,
+                "height": 41,
+                "visible": true
+              }
+            },
+            {
+              "text": "说明",
+              "rect": {
+                "top": 2702,
+                "left": 671,
+                "right": 998,
+                "bottom": 2743,
+                "width": 327,
+                "height": 41,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "date",
+              "rect": {
+                "top": 2743,
+                "left": 385,
+                "right": 472,
+                "bottom": 2785,
+                "width": 88,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "calendar",
+              "rect": {
+                "top": 2743,
+                "left": 472,
+                "right": 575,
+                "bottom": 2785,
+                "width": 102,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "P1 清单",
+              "rect": {
+                "top": 2743,
+                "left": 575,
+                "right": 671,
+                "bottom": 2785,
+                "width": 96,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "保留设计文档名称，复用已有日历图形。",
+              "rect": {
+                "top": 2743,
+                "left": 671,
+                "right": 998,
+                "bottom": 2785,
+                "width": 327,
+                "height": 42,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "eye-on",
+              "rect": {
+                "top": 2785,
+                "left": 385,
+                "right": 472,
+                "bottom": 2827,
+                "width": 88,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "eye",
+              "rect": {
+                "top": 2785,
+                "left": 472,
+                "right": 575,
+                "bottom": 2827,
+                "width": 102,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "29 枚清单",
+              "rect": {
+                "top": 2785,
+                "left": 575,
+                "right": 671,
+                "bottom": 2827,
+                "width": 96,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "与现有可见状态图形同义，避免新增重复路径。",
+              "rect": {
+                "top": 2785,
+                "left": 671,
+                "right": 998,
+                "bottom": 2827,
+                "width": 327,
+                "height": 42,
+                "visible": true
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "themeSwitch": {
+      "count": 1,
+      "initialTitle": "Switch to dark theme"
+    },
+    "desktop1440Dark": {
+      "title": "LxIcon 图标总览 | LxUI",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageWidth": 1440,
+      "horizontalOverflow": false,
+      "theme": "dark",
+      "heading": "LxIcon 图标总览\n​",
+      "intro": "管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。",
+      "search": {
+        "placeholder": "输入英文名称或中文用途，如：undo / 重置 / 登出",
+        "rect": {
+          "top": 345,
+          "left": 384,
+          "right": 744,
+          "bottom": 387,
+          "width": 360,
+          "height": 42,
+          "visible": true
+        }
+      },
+      "groups": {
+        "count": 7,
+        "open": [
+          "P0 高频核心（13）"
+        ],
+        "p0": {
+          "open": true,
+          "cardCount": 13,
+          "visibleCardsAtInitialViewport": 13,
+          "firstVisibleCard": "复制 delete（删除）图标用法"
+        }
+      },
+      "searchStatus": {
+        "exists": true,
+        "text": "",
+        "role": "status",
+        "ariaLive": "polite",
+        "ariaAtomic": "true"
+      },
+      "aliasTable": {
+        "rect": {
+          "top": 2701,
+          "left": 384,
+          "right": 1072,
+          "bottom": 2827,
+          "width": 688,
+          "height": 126,
+          "visible": true
+        },
+        "clientWidth": 688,
+        "scrollWidth": 688,
+        "rows": [
+          [
+            {
+              "text": "名称",
+              "rect": {
+                "top": 2702,
+                "left": 385,
+                "right": 472,
+                "bottom": 2743,
+                "width": 88,
+                "height": 41,
+                "visible": true
+              }
+            },
+            {
+              "text": "标准图形",
+              "rect": {
+                "top": 2702,
+                "left": 472,
+                "right": 575,
+                "bottom": 2743,
+                "width": 102,
+                "height": 41,
+                "visible": true
+              }
+            },
+            {
+              "text": "来源",
+              "rect": {
+                "top": 2702,
+                "left": 575,
+                "right": 671,
+                "bottom": 2743,
+                "width": 96,
+                "height": 41,
+                "visible": true
+              }
+            },
+            {
+              "text": "说明",
+              "rect": {
+                "top": 2702,
+                "left": 671,
+                "right": 998,
+                "bottom": 2743,
+                "width": 327,
+                "height": 41,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "date",
+              "rect": {
+                "top": 2743,
+                "left": 385,
+                "right": 472,
+                "bottom": 2785,
+                "width": 88,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "calendar",
+              "rect": {
+                "top": 2743,
+                "left": 472,
+                "right": 575,
+                "bottom": 2785,
+                "width": 102,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "P1 清单",
+              "rect": {
+                "top": 2743,
+                "left": 575,
+                "right": 671,
+                "bottom": 2785,
+                "width": 96,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "保留设计文档名称，复用已有日历图形。",
+              "rect": {
+                "top": 2743,
+                "left": 671,
+                "right": 998,
+                "bottom": 2785,
+                "width": 327,
+                "height": 42,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "eye-on",
+              "rect": {
+                "top": 2785,
+                "left": 385,
+                "right": 472,
+                "bottom": 2827,
+                "width": 88,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "eye",
+              "rect": {
+                "top": 2785,
+                "left": 472,
+                "right": 575,
+                "bottom": 2827,
+                "width": 102,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "29 枚清单",
+              "rect": {
+                "top": 2785,
+                "left": 575,
+                "right": 671,
+                "bottom": 2827,
+                "width": 96,
+                "height": 42,
+                "visible": true
+              }
+            },
+            {
+              "text": "与现有可见状态图形同义，避免新增重复路径。",
+              "rect": {
+                "top": 2785,
+                "left": 671,
+                "right": 998,
+                "bottom": 2827,
+                "width": 327,
+                "height": 42,
+                "visible": true
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "mobile375Light": {
+      "title": "LxIcon 图标总览 | LxUI",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "pageWidth": 375,
+      "horizontalOverflow": false,
+      "theme": "light",
+      "heading": "LxIcon 图标总览\n​",
+      "intro": "管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。",
+      "search": {
+        "placeholder": "输入英文名称或中文用途，如：undo / 重置 / 登出",
+        "rect": {
+          "top": 437,
+          "left": 24,
+          "right": 351,
+          "bottom": 479,
+          "width": 327,
+          "height": 42,
+          "visible": true
+        }
+      },
+      "groups": {
+        "count": 7,
+        "open": [
+          "P0 高频核心（13）"
+        ],
+        "p0": {
+          "open": true,
+          "cardCount": 13,
+          "visibleCardsAtInitialViewport": 4,
+          "firstVisibleCard": "复制 delete（删除）图标用法"
+        }
+      },
+      "searchStatus": {
+        "exists": true,
+        "text": "",
+        "role": "status",
+        "ariaLive": "polite",
+        "ariaAtomic": "true"
+      },
+      "aliasTable": {
+        "rect": {
+          "top": 3945,
+          "left": 24,
+          "right": 351,
+          "bottom": 4357,
+          "width": 327,
+          "height": 412,
+          "visible": true
+        },
+        "clientWidth": 327,
+        "scrollWidth": 327,
+        "rows": [
+          [
+            {
+              "text": "名称",
+              "rect": {
+                "top": 3946,
+                "left": 25,
+                "right": 112,
+                "bottom": 4011,
+                "width": 88,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "标准图形",
+              "rect": {
+                "top": 3946,
+                "left": 112,
+                "right": 215,
+                "bottom": 4011,
+                "width": 102,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "来源",
+              "rect": {
+                "top": 3946,
+                "left": 215,
+                "right": 268,
+                "bottom": 4011,
+                "width": 54,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "说明",
+              "rect": {
+                "top": 3946,
+                "left": 268,
+                "right": 351,
+                "bottom": 4011,
+                "width": 82,
+                "height": 65,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "date",
+              "rect": {
+                "top": 4011,
+                "left": 25,
+                "right": 112,
+                "bottom": 4172,
+                "width": 88,
+                "height": 161,
+                "visible": true
+              }
+            },
+            {
+              "text": "calendar",
+              "rect": {
+                "top": 4011,
+                "left": 112,
+                "right": 215,
+                "bottom": 4172,
+                "width": 102,
+                "height": 161,
+                "visible": true
+              }
+            },
+            {
+              "text": "P1 清单",
+              "rect": {
+                "top": 4011,
+                "left": 215,
+                "right": 268,
+                "bottom": 4172,
+                "width": 54,
+                "height": 161,
+                "visible": true
+              }
+            },
+            {
+              "text": "保留设计文档名称，复用已有日历图形。",
+              "rect": {
+                "top": 4011,
+                "left": 268,
+                "right": 351,
+                "bottom": 4172,
+                "width": 82,
+                "height": 161,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "eye-on",
+              "rect": {
+                "top": 4172,
+                "left": 25,
+                "right": 112,
+                "bottom": 4357,
+                "width": 88,
+                "height": 185,
+                "visible": true
+              }
+            },
+            {
+              "text": "eye",
+              "rect": {
+                "top": 4172,
+                "left": 112,
+                "right": 215,
+                "bottom": 4357,
+                "width": 102,
+                "height": 185,
+                "visible": true
+              }
+            },
+            {
+              "text": "29 枚清单",
+              "rect": {
+                "top": 4172,
+                "left": 215,
+                "right": 268,
+                "bottom": 4357,
+                "width": 54,
+                "height": 185,
+                "visible": true
+              }
+            },
+            {
+              "text": "与现有可见状态图形同义，避免新增重复路径。",
+              "rect": {
+                "top": 4172,
+                "left": 268,
+                "right": 351,
+                "bottom": 4357,
+                "width": 82,
+                "height": 185,
+                "visible": true
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "mobile375Dark": {
+      "title": "LxIcon 图标总览 | LxUI",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "pageWidth": 375,
+      "horizontalOverflow": false,
+      "theme": "dark",
+      "heading": "LxIcon 图标总览\n​",
+      "intro": "管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。",
+      "search": {
+        "placeholder": "输入英文名称或中文用途，如：undo / 重置 / 登出",
+        "rect": {
+          "top": 437,
+          "left": 24,
+          "right": 351,
+          "bottom": 479,
+          "width": 327,
+          "height": 42,
+          "visible": true
+        }
+      },
+      "groups": {
+        "count": 7,
+        "open": [
+          "P0 高频核心（13）"
+        ],
+        "p0": {
+          "open": true,
+          "cardCount": 13,
+          "visibleCardsAtInitialViewport": 4,
+          "firstVisibleCard": "复制 delete（删除）图标用法"
+        }
+      },
+      "searchStatus": {
+        "exists": true,
+        "text": "",
+        "role": "status",
+        "ariaLive": "polite",
+        "ariaAtomic": "true"
+      },
+      "aliasTable": {
+        "rect": {
+          "top": 3945,
+          "left": 24,
+          "right": 351,
+          "bottom": 4357,
+          "width": 327,
+          "height": 412,
+          "visible": true
+        },
+        "clientWidth": 327,
+        "scrollWidth": 327,
+        "rows": [
+          [
+            {
+              "text": "名称",
+              "rect": {
+                "top": 3946,
+                "left": 25,
+                "right": 112,
+                "bottom": 4011,
+                "width": 88,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "标准图形",
+              "rect": {
+                "top": 3946,
+                "left": 112,
+                "right": 215,
+                "bottom": 4011,
+                "width": 102,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "来源",
+              "rect": {
+                "top": 3946,
+                "left": 215,
+                "right": 268,
+                "bottom": 4011,
+                "width": 54,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "说明",
+              "rect": {
+                "top": 3946,
+                "left": 268,
+                "right": 351,
+                "bottom": 4011,
+                "width": 82,
+                "height": 65,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "date",
+              "rect": {
+                "top": 4011,
+                "left": 25,
+                "right": 112,
+                "bottom": 4172,
+                "width": 88,
+                "height": 161,
+                "visible": true
+              }
+            },
+            {
+              "text": "calendar",
+              "rect": {
+                "top": 4011,
+                "left": 112,
+                "right": 215,
+                "bottom": 4172,
+                "width": 102,
+                "height": 161,
+                "visible": true
+              }
+            },
+            {
+              "text": "P1 清单",
+              "rect": {
+                "top": 4011,
+                "left": 215,
+                "right": 268,
+                "bottom": 4172,
+                "width": 54,
+                "height": 161,
+                "visible": true
+              }
+            },
+            {
+              "text": "保留设计文档名称，复用已有日历图形。",
+              "rect": {
+                "top": 4011,
+                "left": 268,
+                "right": 351,
+                "bottom": 4172,
+                "width": 82,
+                "height": 161,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "eye-on",
+              "rect": {
+                "top": 4172,
+                "left": 25,
+                "right": 112,
+                "bottom": 4357,
+                "width": 88,
+                "height": 185,
+                "visible": true
+              }
+            },
+            {
+              "text": "eye",
+              "rect": {
+                "top": 4172,
+                "left": 112,
+                "right": 215,
+                "bottom": 4357,
+                "width": 102,
+                "height": 185,
+                "visible": true
+              }
+            },
+            {
+              "text": "29 枚清单",
+              "rect": {
+                "top": 4172,
+                "left": 215,
+                "right": 268,
+                "bottom": 4357,
+                "width": 54,
+                "height": 185,
+                "visible": true
+              }
+            },
+            {
+              "text": "与现有可见状态图形同义，避免新增重复路径。",
+              "rect": {
+                "top": 4172,
+                "left": 268,
+                "right": 351,
+                "bottom": 4357,
+                "width": 82,
+                "height": 185,
+                "visible": true
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "mobile320Light": {
+      "title": "LxIcon 图标总览 | LxUI",
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "pageWidth": 320,
+      "horizontalOverflow": false,
+      "theme": "light",
+      "heading": "LxIcon 图标总览\n​",
+      "intro": "管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。",
+      "search": {
+        "placeholder": "输入英文名称或中文用途，如：undo / 重置 / 登出",
+        "rect": {
+          "top": 465,
+          "left": 24,
+          "right": 296,
+          "bottom": 507,
+          "width": 272,
+          "height": 42,
+          "visible": true
+        }
+      },
+      "groups": {
+        "count": 7,
+        "open": [
+          "P0 高频核心（13）"
+        ],
+        "p0": {
+          "open": true,
+          "cardCount": 13,
+          "visibleCardsAtInitialViewport": 2,
+          "firstVisibleCard": "复制 delete（删除）图标用法"
+        }
+      },
+      "searchStatus": {
+        "exists": true,
+        "text": "",
+        "role": "status",
+        "ariaLive": "polite",
+        "ariaAtomic": "true"
+      },
+      "aliasTable": {
+        "rect": {
+          "top": 4129,
+          "left": 24,
+          "right": 296,
+          "bottom": 4733,
+          "width": 272,
+          "height": 604,
+          "visible": true
+        },
+        "clientWidth": 272,
+        "scrollWidth": 302,
+        "rows": [
+          [
+            {
+              "text": "名称",
+              "rect": {
+                "top": 4130,
+                "left": 25,
+                "right": 112,
+                "bottom": 4195,
+                "width": 88,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "标准图形",
+              "rect": {
+                "top": 4130,
+                "left": 112,
+                "right": 215,
+                "bottom": 4195,
+                "width": 102,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "来源",
+              "rect": {
+                "top": 4130,
+                "left": 215,
+                "right": 265,
+                "bottom": 4195,
+                "width": 50,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "说明",
+              "rect": {
+                "top": 4130,
+                "left": 265,
+                "right": 326,
+                "bottom": 4195,
+                "width": 61,
+                "height": 65,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "date",
+              "rect": {
+                "top": 4195,
+                "left": 25,
+                "right": 112,
+                "bottom": 4452,
+                "width": 88,
+                "height": 257,
+                "visible": true
+              }
+            },
+            {
+              "text": "calendar",
+              "rect": {
+                "top": 4195,
+                "left": 112,
+                "right": 215,
+                "bottom": 4452,
+                "width": 102,
+                "height": 257,
+                "visible": true
+              }
+            },
+            {
+              "text": "P1 清单",
+              "rect": {
+                "top": 4195,
+                "left": 215,
+                "right": 265,
+                "bottom": 4452,
+                "width": 50,
+                "height": 257,
+                "visible": true
+              }
+            },
+            {
+              "text": "保留设计文档名称，复用已有日历图形。",
+              "rect": {
+                "top": 4195,
+                "left": 265,
+                "right": 326,
+                "bottom": 4452,
+                "width": 61,
+                "height": 257,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "eye-on",
+              "rect": {
+                "top": 4452,
+                "left": 25,
+                "right": 112,
+                "bottom": 4733,
+                "width": 88,
+                "height": 281,
+                "visible": true
+              }
+            },
+            {
+              "text": "eye",
+              "rect": {
+                "top": 4452,
+                "left": 112,
+                "right": 215,
+                "bottom": 4733,
+                "width": 102,
+                "height": 281,
+                "visible": true
+              }
+            },
+            {
+              "text": "29 枚清单",
+              "rect": {
+                "top": 4452,
+                "left": 215,
+                "right": 265,
+                "bottom": 4733,
+                "width": 50,
+                "height": 281,
+                "visible": true
+              }
+            },
+            {
+              "text": "与现有可见状态图形同义，避免新增重复路径。",
+              "rect": {
+                "top": 4452,
+                "left": 265,
+                "right": 326,
+                "bottom": 4733,
+                "width": 61,
+                "height": 281,
+                "visible": true
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "copySuccessSetup": {
+      "p0Count": 1,
+      "initiallyOpen": true,
+      "cards": 13
+    },
+    "copySuccess": {
+      "tile": "复制 delete（删除）图标用法",
+      "clipboardText": "<LxIcon name=\"delete\" :size=\"20\" />",
+      "feedback": {
+        "message": "已复制：<LxIcon name=\"delete\" :size=\"20\" />",
+        "role": "status",
+        "ariaLive": "polite",
+        "ariaAtomic": "true",
+        "feedbackRect": {
+          "top": 495,
+          "left": 24,
+          "right": 351,
+          "bottom": 541,
+          "width": 327,
+          "height": 46
+        },
+        "fallback": null,
+        "navRect": {
+          "top": 0,
+          "left": 0,
+          "right": 375,
+          "bottom": 64,
+          "width": 375,
+          "height": 64
+        },
+        "brandRect": {
+          "top": 0,
+          "left": 24,
+          "right": 58,
+          "bottom": 64,
+          "width": 34,
+          "height": 64
+        },
+        "mobileMenuRect": {
+          "top": 0,
+          "left": 319,
+          "right": 367,
+          "bottom": 64,
+          "width": 48,
+          "height": 64
+        },
+        "overlapsNav": false,
+        "overlapsBrand": false,
+        "overlapsMobileMenu": false
+      }
+    },
+    "copyFailure": {
+      "message": "复制失败，手动复制代码已就绪。",
+      "role": "status",
+      "ariaLive": "polite",
+      "ariaAtomic": "true",
+      "feedbackRect": {
+        "top": 507,
+        "left": 24,
+        "right": 351,
+        "bottom": 553,
+        "width": 327,
+        "height": 46
+      },
+      "fallback": {
+        "text": "请使用下方已选中的代码进行手动复制：",
+        "role": null,
+        "ariaLive": null,
+        "textareaValue": "<LxIcon name=\"team\" :size=\"20\" />",
+        "focused": true,
+        "selectedLength": 33,
+        "rect": {
+          "top": 569,
+          "left": 24,
+          "right": 351,
+          "bottom": 673,
+          "width": 327,
+          "height": 104
+        }
+      },
+      "navRect": {
+        "top": 0,
+        "left": 0,
+        "right": 375,
+        "bottom": 64,
+        "width": 375,
+        "height": 64
+      },
+      "brandRect": {
+        "top": 0,
+        "left": 24,
+        "right": 58,
+        "bottom": 64,
+        "width": 34,
+        "height": 64
+      },
+      "mobileMenuRect": {
+        "top": 0,
+        "left": 319,
+        "right": 367,
+        "bottom": 64,
+        "width": 48,
+        "height": 64
+      },
+      "overlapsNav": false,
+      "overlapsBrand": false,
+      "overlapsMobileMenu": false
+    },
+    "emptyBefore": {
+      "title": "LxIcon 图标总览 | LxUI",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "pageWidth": 375,
+      "horizontalOverflow": false,
+      "theme": "light",
+      "heading": "LxIcon 图标总览\n​",
+      "intro": "管理台图标目录，覆盖 94 个图形、96 个可用名称。可按英文名称或中文用途搜索；点击图标卡片复制用法代码。",
+      "search": {
+        "placeholder": "输入英文名称或中文用途，如：undo / 重置 / 登出",
+        "rect": {
+          "top": 437,
+          "left": 24,
+          "right": 351,
+          "bottom": 479,
+          "width": 327,
+          "height": 42,
+          "visible": true
+        }
+      },
+      "groups": {
+        "count": 7,
+        "open": [
+          "P0 高频核心（13）"
+        ],
+        "p0": {
+          "open": true,
+          "cardCount": 13,
+          "visibleCardsAtInitialViewport": 4,
+          "firstVisibleCard": "复制 delete（删除）图标用法"
+        }
+      },
+      "searchStatus": {
+        "exists": true,
+        "text": "",
+        "role": "status",
+        "ariaLive": "polite",
+        "ariaAtomic": "true"
+      },
+      "aliasTable": {
+        "rect": {
+          "top": 3945,
+          "left": 24,
+          "right": 351,
+          "bottom": 4357,
+          "width": 327,
+          "height": 412,
+          "visible": true
+        },
+        "clientWidth": 327,
+        "scrollWidth": 327,
+        "rows": [
+          [
+            {
+              "text": "名称",
+              "rect": {
+                "top": 3946,
+                "left": 25,
+                "right": 112,
+                "bottom": 4011,
+                "width": 88,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "标准图形",
+              "rect": {
+                "top": 3946,
+                "left": 112,
+                "right": 215,
+                "bottom": 4011,
+                "width": 102,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "来源",
+              "rect": {
+                "top": 3946,
+                "left": 215,
+                "right": 268,
+                "bottom": 4011,
+                "width": 54,
+                "height": 65,
+                "visible": true
+              }
+            },
+            {
+              "text": "说明",
+              "rect": {
+                "top": 3946,
+                "left": 268,
+                "right": 351,
+                "bottom": 4011,
+                "width": 82,
+                "height": 65,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "date",
+              "rect": {
+                "top": 4011,
+                "left": 25,
+                "right": 112,
+                "bottom": 4172,
+                "width": 88,
+                "height": 161,
+                "visible": true
+              }
+            },
+            {
+              "text": "calendar",
+              "rect": {
+                "top": 4011,
+                "left": 112,
+                "right": 215,
+                "bottom": 4172,
+                "width": 102,
+                "height": 161,
+                "visible": true
+              }
+            },
+            {
+              "text": "P1 清单",
+              "rect": {
+                "top": 4011,
+                "left": 215,
+                "right": 268,
+                "bottom": 4172,
+                "width": 54,
+                "height": 161,
+                "visible": true
+              }
+            },
+            {
+              "text": "保留设计文档名称，复用已有日历图形。",
+              "rect": {
+                "top": 4011,
+                "left": 268,
+                "right": 351,
+                "bottom": 4172,
+                "width": 82,
+                "height": 161,
+                "visible": true
+              }
+            }
+          ],
+          [
+            {
+              "text": "eye-on",
+              "rect": {
+                "top": 4172,
+                "left": 25,
+                "right": 112,
+                "bottom": 4357,
+                "width": 88,
+                "height": 185,
+                "visible": true
+              }
+            },
+            {
+              "text": "eye",
+              "rect": {
+                "top": 4172,
+                "left": 112,
+                "right": 215,
+                "bottom": 4357,
+                "width": 102,
+                "height": 185,
+                "visible": true
+              }
+            },
+            {
+              "text": "29 枚清单",
+              "rect": {
+                "top": 4172,
+                "left": 215,
+                "right": 268,
+                "bottom": 4357,
+                "width": 54,
+                "height": 185,
+                "visible": true
+              }
+            },
+            {
+              "text": "与现有可见状态图形同义，避免新增重复路径。",
+              "rect": {
+                "top": 4172,
+                "left": 268,
+                "right": 351,
+                "bottom": 4357,
+                "width": 82,
+                "height": 185,
+                "visible": true
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "emptyAfter": {
+      "query": "no-icon-match-this-final-review",
+      "visibleGroupCount": 0,
+      "status": {
+        "exists": true,
+        "text": "无匹配图标",
+        "role": "status",
+        "ariaLive": "polite",
+        "ariaAtomic": "true"
+      },
+      "visualCopy": {
+        "exists": true,
+        "text": "无匹配图标",
+        "ariaHidden": "true",
+        "visible": true
+      }
+    },
+    "keyboard": {
+      "initialTabSequence": [
+        {
+          "tag": "A",
+          "label": null,
+          "text": "Skip to content",
+          "className": "VPSkipLink visually-hidden",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px"
+        },
+        {
+          "tag": "A",
+          "label": null,
+          "text": "LxUI",
+          "className": "title",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px"
+        },
+        {
+          "tag": "BUTTON",
+          "label": "mobile navigation",
+          "text": "",
+          "className": "VPNavBarHamburger hamburger",
+          "outlineStyle": "auto",
+          "outlineWidth": "4px"
+        },
+        {
+          "tag": "BUTTON",
+          "label": null,
+          "text": "Menu",
+          "className": "menu",
+          "outlineStyle": "auto",
+          "outlineWidth": "4px"
+        },
+        {
+          "tag": "BUTTON",
+          "label": null,
+          "text": "On this page",
+          "className": "",
+          "outlineStyle": "auto",
+          "outlineWidth": "4px"
+        },
+        {
+          "tag": "DIV",
+          "label": null,
+          "text": "新增组件",
+          "className": "item",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px"
+        },
+        {
+          "tag": "A",
+          "label": null,
+          "text": "新增组件总览",
+          "className": "VPLink link link",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px"
+        },
+        {
+          "tag": "DIV",
+          "label": null,
+          "text": "基础",
+          "className": "item",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px"
+        },
+        {
+          "tag": "A",
+          "label": null,
+          "text": "基础控件桥接",
+          "className": "VPLink link link",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px"
+        }
+      ],
+      "clearFocus": {
+        "tag": "BUTTON",
+        "label": "清除筛选",
+        "text": "",
+        "className": "icon-search__clear",
+        "outlineStyle": "auto",
+        "outlineWidth": "4px"
+      },
+      "valueAfterClear": "",
+      "focusAfterClear": {
+        "tag": "INPUT",
+        "label": "按名称或中文用途筛选图标",
+        "text": "",
+        "className": "icon-search",
+        "outlineStyle": "none",
+        "outlineWidth": "3px"
+      },
+      "tileFocus": {
+        "tabsAfterClear": 1,
+        "focused": {
+          "tag": "BUTTON",
+          "label": "复制 dashboard（仪表盘）图标用法",
+          "text": "仪表盘\ndashboard",
+          "className": "icon-tile",
+          "outlineStyle": "solid",
+          "outlineWidth": "2px"
+        }
+      },
+      "enterCopy": "<LxIcon name=\"dashboard\" :size=\"20\" />"
+    },
+    "loadingHover": {
+      "idle": {
+        "className": "lx-icon is-spinning",
+        "dataMotion": "loading",
+        "animationName": "lx-icon-spin-7c5539c6",
+        "animationDuration": "0.8s",
+        "transform": "matrix(-0.49937, -0.866389, 0.866389, -0.49937, 0, 0)"
+      },
+      "hover": {
+        "className": "lx-icon is-spinning",
+        "animationName": "lx-icon-spin-7c5539c6",
+        "animationDuration": "0.8s",
+        "transform": "matrix(0.608716, -0.793388, 0.793388, 0.608716, 0, 0)"
+      }
+    },
+    "reducedMotion": {
+      "preferenceActive": true,
+      "collapsedArrow": {
+        "transform": "none",
+        "transitionDuration": "1e-05s"
+      },
+      "expandedArrow": {
+        "transform": "matrix(-1, 0, 0, -1, 0, 0)",
+        "transitionDuration": "1e-05s"
+      },
+      "loadingIcon": {
+        "animationName": "none",
+        "animationDuration": "0s",
+        "transform": "none"
+      },
+      "tileTransitionDuration": "1e-05s"
+    },
+    "pageErrors": []
+  },
+  "context": {
+    "fresh": true,
+    "isolated": true,
+    "browser": "Microsoft Edge via Playwright",
+    "permissions": [
+      "clipboard-read",
+      "clipboard-write"
+    ],
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  "completedAt": "2026-10-05T23:44:19.825Z"
+}

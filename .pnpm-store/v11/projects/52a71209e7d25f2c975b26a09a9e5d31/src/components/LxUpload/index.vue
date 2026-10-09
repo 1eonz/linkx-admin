@@ -1,6 +1,5 @@
 <script setup lang="ts">
 /** 上传界面只处理前端校验与状态展示，网络传输由 Element Plus 或业务侧配置负责。 */
-import { computed, ref, useAttrs } from 'vue'
 import { ElUpload } from 'element-plus'
 import type {
   UploadFile,
@@ -13,13 +12,37 @@ import type {
   UploadStatus,
   UploadUserFile,
 } from 'element-plus'
-import LxIcon from '../LxIcon/index.vue'
-import type { LxIconName } from '../LxIcon/icons'
-import { lxMessage } from '../LxMessage'
+import {
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  ref,
+  useAttrs,
+  watch,
+} from 'vue'
+
 import type { LxUploadFile, LxUploadProps } from './types'
+import { createUploadInstanceUidPrefix } from './uid'
+import type { LxIconName } from '../LxIcon/icons'
+import LxIcon from '../LxIcon/index.vue'
+import { lxMessage } from '../LxMessage'
 import 'element-plus/es/components/upload/style/css'
 
 defineOptions({ name: 'LxUpload' })
+
+const generatedUidPrefix = createUploadInstanceUidPrefix()
+
+// 用私有标记保存宿主 UID，避免内部映射信息进入上传模型。
+const sourceUidKey: unique symbol = Symbol('lx-upload-source-uid')
+const sourceRawKey: unique symbol = Symbol('lx-upload-source-raw')
+
+type LxUploadUserFile = UploadUserFile & {
+  error?: Error
+  [sourceUidKey]?: number | string
+  [sourceRawKey]?: File
+}
 
 const props = withDefaults(defineProps<LxUploadProps>(), {
   modelValue: () => [],
@@ -51,13 +74,62 @@ const emit = defineEmits<{
 }>()
 
 const uploadRef = ref<UploadInstance>()
+const rootRef = ref<HTMLElement>()
 const announcement = ref('')
 const uploadErrors = ref<Record<number, string>>({})
+const activeUploadRequests = new Map<number, AbortController>()
+const internalUidBySource = new Map<string, number>()
+const sourceUidByInternal = new Map<number, string | number>()
+const sourceKeyByInternal = new Map<number, string>()
+const sourceRawByInternal = new Map<number, File>()
+// 无 UID 时按原始 File 对象区分同名同大小文件，避免列表重排转移请求身份。
+const fallbackSourceKeyByRaw = new WeakMap<File, string>()
+let fallbackSourceSequence = 0
+let forwardedDescriptionIds = new Set<string>()
+const elementRawByInternal = new Map<
+  number,
+  { source: UploadRawFile; upload: UploadRawFile }
+>()
 const attrs = useAttrs()
-function describedBy(): string | undefined {
+function synchronizeTriggerDescription(): void {
+  const trigger = rootRef.value?.querySelector<HTMLElement>(
+    '.el-upload[role="button"]',
+  )
   const value = attrs['aria-describedby']
-  return typeof value === 'string' ? value : undefined
+  if (!trigger) return
+
+  const suppliedIds =
+    typeof value === 'string' ? value.split(/\s+/).filter(Boolean) : []
+  const managedIds = new Set([...forwardedDescriptionIds, ...suppliedIds])
+  const preservedIds = (trigger.getAttribute('aria-describedby') ?? '')
+    .split(/\s+/)
+    .filter((id) => id && !managedIds.has(id))
+  const mergedIds = [...new Set([...preservedIds, ...suppliedIds])]
+  const nextValue = mergedIds.join(' ')
+  const currentValue = trigger.getAttribute('aria-describedby')
+
+  if (nextValue) {
+    if (currentValue !== nextValue)
+      trigger.setAttribute('aria-describedby', nextValue)
+  } else if (currentValue !== null) {
+    trigger.removeAttribute('aria-describedby')
+  }
+  forwardedDescriptionIds = new Set(suppliedIds)
 }
+
+onMounted(synchronizeTriggerDescription)
+onUpdated(synchronizeTriggerDescription)
+
+watch(
+  () => attrs['aria-describedby'],
+  () => nextTick(synchronizeTriggerDescription),
+  { flush: 'post' },
+)
+
+function setRootElement(element: unknown): void {
+  rootRef.value = element instanceof HTMLElement ? element : undefined
+}
+
 const draggable = computed(() => props.drag ?? props.draggable)
 
 const acceptLabels: Record<string, string> = {
@@ -124,9 +196,103 @@ function stableUid(
   return hash >>> 0
 }
 
+function sourceUidKeyFor(uid: string | number): string {
+  return `${typeof uid}:${uid}`
+}
+
+function fallbackSourceKeyFor(file: LxUploadUserFile, index: number): string {
+  const raw = file[sourceRawKey] ?? file.raw
+  if (!raw) return `fallback:${index}:${file.name}:${file.size ?? 0}`
+
+  const existing = fallbackSourceKeyByRaw.get(raw)
+  if (existing) return existing
+
+  fallbackSourceSequence += 1
+  const sourceKey = `fallback:${generatedUidPrefix}raw:${fallbackSourceSequence}`
+  fallbackSourceKeyByRaw.set(raw, sourceKey)
+  return sourceKey
+}
+
+function assignInternalUid(
+  sourceKey: string,
+  preferredUid: number,
+  sourceUid?: string | number,
+): number {
+  const existing = internalUidBySource.get(sourceKey)
+  if (existing !== undefined) return existing
+
+  // Element Plus 使用 uid ||= genFileId()，内部 UID 必须非零。
+  let uid =
+    Number.isSafeInteger(preferredUid) && preferredUid !== 0 ? preferredUid : 1
+  while (
+    sourceKeyByInternal.has(uid) &&
+    sourceKeyByInternal.get(uid) !== sourceKey
+  ) {
+    uid = uid === Number.MAX_SAFE_INTEGER ? Number.MIN_SAFE_INTEGER : uid + 1
+    if (uid === 0) uid = 1
+  }
+
+  internalUidBySource.set(sourceKey, uid)
+  sourceKeyByInternal.set(uid, sourceKey)
+  if (sourceUid !== undefined) sourceUidByInternal.set(uid, sourceUid)
+  return uid
+}
+
+function modelUidFor(internalUid: number): number | string {
+  const sourceUid = sourceUidByInternal.get(internalUid)
+  if (sourceUid !== undefined) return sourceUid
+
+  const sourceKey = sourceKeyByInternal.get(internalUid)
+  if (!sourceKey?.startsWith('fallback:')) return internalUid
+
+  const generatedUid = `${generatedUidPrefix}${internalUid}`
+  internalUidBySource.set(sourceUidKeyFor(generatedUid), internalUid)
+  sourceUidByInternal.set(internalUid, generatedUid)
+  return generatedUid
+}
+
+function uploadRequestUid(file: UploadUserFile): number {
+  if (typeof file.uid === 'number') return file.uid
+
+  const rawUid = recordOf(file.raw)?.uid
+  if (typeof rawUid === 'number') return rawUid
+  return file.uid ?? stableUid(file, 0, file.name, file.size)
+}
+
+function elementRawFile(
+  source: UploadRawFile,
+  internalUid: number,
+): UploadRawFile {
+  if (source.uid === internalUid) return source
+
+  const cached = elementRawByInternal.get(internalUid)
+  if (cached?.source === source) return cached.upload
+
+  const upload = Object.assign(
+    new File([source], source.name, {
+      type: source.type,
+      lastModified: source.lastModified,
+    }),
+    { uid: internalUid },
+  )
+  elementRawByInternal.set(internalUid, { source, upload })
+  return upload
+}
+
 function isUploadRawFile(value: unknown): value is UploadRawFile {
   if (typeof File === 'undefined' || !(value instanceof File)) return false
   return typeof (value as File & { uid?: unknown }).uid === 'number'
+}
+
+function toUploadRawFile(value: File, uid: number): UploadRawFile {
+  if (isUploadRawFile(value)) return value
+  return Object.assign(
+    new File([value], value.name, {
+      type: value.type,
+      lastModified: value.lastModified,
+    }),
+    { uid },
+  )
 }
 
 function uploadStatus(status: unknown): UploadStatus {
@@ -138,13 +304,20 @@ function uploadStatus(status: unknown): UploadStatus {
 function toUploadUserFile(
   value: unknown,
   index: number,
-): UploadUserFile | undefined {
+): LxUploadUserFile | undefined {
+  const sourceUid = recordOf(value)?.uid
   if (typeof File !== 'undefined' && value instanceof File) {
+    const uid = stableUid(value, index, value.name, value.size)
     return {
-      uid: stableUid(value, index, value.name, value.size),
+      uid,
       name: value.name || '未命名文件',
       size: value.size,
       status: 'ready',
+      raw: toUploadRawFile(value, uid),
+      [sourceRawKey]: value,
+      ...(typeof sourceUid === 'number' || typeof sourceUid === 'string'
+        ? { [sourceUidKey]: sourceUid }
+        : {}),
     }
   }
 
@@ -154,23 +327,116 @@ function toUploadUserFile(
   const name = record.name || '未命名文件'
   const size = typeof record.size === 'number' ? record.size : undefined
   const rawStatus = record.status === 'error' ? 'fail' : record.status
+  const error = record.error instanceof Error ? record.error : undefined
+  const sourceRaw =
+    typeof File !== 'undefined' && record.raw instanceof File
+      ? record.raw
+      : undefined
+  const uid = stableUid(value, index, name, size)
   return {
-    uid: stableUid(value, index, name, size),
+    uid,
     name,
     size,
     status: uploadStatus(rawStatus),
     percentage:
       typeof record.percentage === 'number' ? record.percentage : undefined,
-    raw: isUploadRawFile(record.raw) ? record.raw : undefined,
+    raw: sourceRaw ? toUploadRawFile(sourceRaw, uid) : undefined,
+    ...(sourceRaw ? { [sourceRawKey]: sourceRaw } : {}),
     url: typeof record.url === 'string' ? record.url : undefined,
+    ...(record.response === undefined ? {} : { response: record.response }),
+    ...(error === undefined ? {} : { error }),
+    ...(typeof sourceUid === 'number' || typeof sourceUid === 'string'
+      ? { [sourceUidKey]: sourceUid }
+      : {}),
   }
 }
 
-const files = computed<UploadUserFile[]>(() =>
-  props.modelValue
-    .map(toUploadUserFile)
-    .filter((file): file is UploadUserFile => file !== undefined),
-)
+function uniqueUploadFiles(values: unknown[]): LxUploadUserFile[] {
+  const mapped = values
+    .map((value, index) => ({
+      index,
+      file: toUploadUserFile(value, index),
+    }))
+    .filter(
+      (entry): entry is { index: number; file: LxUploadUserFile } =>
+        entry.file !== undefined,
+    )
+
+  // 先登记数值 UID，再登记字符串 UID，避免两种来源占用同一个内部编号。
+  for (const { file } of mapped) {
+    const sourceUid = file[sourceUidKey]
+    if (typeof sourceUid !== 'number') continue
+    assignInternalUid(sourceUidKeyFor(sourceUid), sourceUid, sourceUid)
+  }
+
+  const stringUids = [
+    ...new Set(
+      mapped.flatMap(({ file }) => {
+        const sourceUid = file[sourceUidKey]
+        return typeof sourceUid === 'string' ? [sourceUid] : []
+      }),
+    ),
+  ].sort()
+  for (const sourceUid of stringUids) {
+    const sourceFile = mapped.find(
+      ({ file }) => file[sourceUidKey] === sourceUid,
+    )?.file
+    const rawUid = sourceFile?.raw?.uid
+    assignInternalUid(
+      sourceUidKeyFor(sourceUid),
+      typeof rawUid === 'number'
+        ? rawUid
+        : stableUid({ uid: sourceUid }, 0, sourceUid),
+      sourceUid,
+    )
+  }
+
+  const next = mapped.map(({ index, file }) => {
+    const sourceUid = file[sourceUidKey]
+    const sourceKey =
+      typeof sourceUid === 'number' || typeof sourceUid === 'string'
+        ? sourceUidKeyFor(sourceUid)
+        : fallbackSourceKeyFor(file, index)
+    const uid = assignInternalUid(sourceKey, file.uid ?? 1, sourceUid)
+    const sourceRaw = file.raw
+    if (!sourceRaw) {
+      sourceRawByInternal.delete(uid)
+      elementRawByInternal.delete(uid)
+      return uid === file.uid ? file : { ...file, uid }
+    }
+
+    sourceRawByInternal.set(uid, file[sourceRawKey] ?? sourceRaw)
+    return {
+      ...file,
+      uid,
+      raw: elementRawFile(sourceRaw, uid),
+    }
+  })
+
+  const activeUids = new Set(next.map((file) => file.uid))
+  for (const uid of sourceRawByInternal.keys()) {
+    if (activeUids.has(uid)) continue
+    sourceRawByInternal.delete(uid)
+    elementRawByInternal.delete(uid)
+  }
+  return next
+}
+
+const files = computed(() => uniqueUploadFiles(props.modelValue))
+
+watch(files, (currentFiles, previousFiles) => {
+  const currentUids = new Set(
+    currentFiles.flatMap((file) =>
+      typeof file.uid === 'number' ? [file.uid] : [],
+    ),
+  )
+  for (const file of previousFiles) {
+    const uid = file.uid
+    if (typeof uid !== 'number' || currentUids.has(uid)) continue
+    invalidateUploadRequest(uid)
+    uploadRef.value?.abort(toUploadFile(file))
+  }
+})
 
 /** 拖区态C（上传中）：任一文件处于 uploading 即激活聚合进度面板 */
 const isUploading = computed(() =>
@@ -195,20 +461,82 @@ const aggregatePercent = computed(() => {
 const requestHandler = computed<UploadRequestHandler | undefined>(() => {
   if (!props.httpRequest) return undefined
   const handler = props.httpRequest
-  return (options: UploadRequestOptions) =>
-    handler({ ...options, chunkSize: Math.max(1, Math.floor(props.chunkSize)) })
+  return (options: UploadRequestOptions) => {
+    const uid = options.file.uid
+    invalidateUploadRequest(uid)
+    const controller = new AbortController()
+    const request = controller
+    activeUploadRequests.set(uid, request)
+    const isCurrent = () =>
+      activeUploadRequests.get(uid) === request && !controller.signal.aborted
+
+    // Element Plus 会在 Promise 完成后调用这些回调；必须隔离取消或重试前后的请求。
+    const onProgress = options.onProgress
+    const onSuccess = options.onSuccess
+    const onError = options.onError
+
+    options.onProgress = (...args) => {
+      if (isCurrent()) onProgress(...args)
+    }
+    options.onSuccess = (...args) => {
+      if (!isCurrent()) return
+      activeUploadRequests.delete(uid)
+      onSuccess(...args)
+    }
+    options.onError = (...args) => {
+      if (!isCurrent()) return
+      activeUploadRequests.delete(uid)
+      onError(...args)
+    }
+
+    try {
+      return handler({
+        ...options,
+        chunkSize: Math.max(1, Math.floor(props.chunkSize)),
+        signal: controller.signal,
+      })
+    } catch (error) {
+      if (activeUploadRequests.get(uid) === request) {
+        activeUploadRequests.delete(uid)
+      }
+      controller.abort()
+      throw error
+    }
+  }
+})
+
+function invalidateUploadRequest(uid: number) {
+  const controller = activeUploadRequests.get(uid)
+  if (!controller) return
+  activeUploadRequests.delete(uid)
+  controller.abort()
+}
+
+function invalidateAllUploadRequests() {
+  for (const uid of activeUploadRequests.keys()) invalidateUploadRequest(uid)
+}
+
+onBeforeUnmount(() => {
+  invalidateAllUploadRequests()
+  uploadRef.value?.abort()
 })
 
 function toLxFiles(source: UploadFiles): LxUploadFile[] {
-  return source.map((file) => ({
-    uid: file.uid,
-    name: file.name,
-    size: file.size,
-    type: file.raw?.type,
-    status: file.status === 'fail' ? 'error' : file.status,
-    percentage: file.percentage,
-    raw: file.raw,
-  }))
+  return source.map((file) => {
+    const error = recordOf(file)?.error
+    return {
+      uid: modelUidFor(file.uid),
+      name: file.name,
+      size: file.size,
+      type: file.raw?.type,
+      status: file.status === 'fail' ? 'error' : file.status,
+      percentage: file.percentage,
+      raw: sourceRawByInternal.get(file.uid) ?? file.raw,
+      ...(file.url === undefined ? {} : { url: file.url }),
+      ...(file.response === undefined ? {} : { response: file.response }),
+      ...(error instanceof Error ? { error } : {}),
+    }
+  })
 }
 
 function accepted(raw: UploadRawFile): boolean {
@@ -260,18 +588,21 @@ function onProgress(
     percentage: Math.round(event.percent),
   }
   const next = toLxFiles(list)
-  const index = next.findIndex((item) => item.uid === file.uid)
+  const index = next.findIndex((item) => item.uid === progressFile.uid)
   if (index === -1) next.push(progressFile)
   else next[index] = progressFile
   emit('update:modelValue', next)
   emit('progress', progressFile, next)
 }
 
-function onSuccess(_: unknown, file: UploadFile, list: UploadFiles) {
+function onSuccess(response: unknown, file: UploadFile, list: UploadFiles) {
   delete uploadErrors.value[file.uid]
-  const uploaded = toLxFiles([file])[0]
+  const uploaded = {
+    ...toLxFiles([file])[0],
+    ...(response === undefined ? {} : { response }),
+  }
   const next = toLxFiles(list)
-  const index = next.findIndex((item) => item.uid === file.uid)
+  const index = next.findIndex((item) => item.uid === uploaded.uid)
   if (index === -1) next.push(uploaded)
   else next[index] = uploaded
   emit('update:modelValue', next)
@@ -286,7 +617,7 @@ function onError(error: Error, file: UploadFile, list: UploadFiles) {
   }
   const failed = { ...toLxFiles([file])[0], error }
   const next = toLxFiles(list)
-  const index = next.findIndex((item) => item.uid === file.uid)
+  const index = next.findIndex((item) => item.uid === failed.uid)
   if (index === -1) next.push(failed)
   else next[index] = failed
   emit('update:modelValue', next)
@@ -319,20 +650,29 @@ function toUploadFile(file: UploadUserFile): UploadFile {
     percentage: file.percentage,
     raw: file.raw,
     url: file.url,
+    ...(file.response === undefined ? {} : { response: file.response }),
   }
 }
 
 function remove(file: UploadUserFile) {
   if (props.disabled) return
+  const requestUid = uploadRequestUid(file)
+  invalidateUploadRequest(requestUid)
+  uploadRef.value?.abort({ ...toUploadFile(file), uid: requestUid })
   uploadRef.value?.handleRemove(toUploadFile(file))
 }
 
-function retry(file: UploadUserFile) {
+async function retry(file: UploadUserFile) {
   if (!file.raw || props.disabled) return
+  const requestUid = uploadRequestUid(file)
+  invalidateUploadRequest(requestUid)
+  uploadRef.value?.abort({ ...toUploadFile(file), uid: requestUid })
   delete uploadErrors.value[file.uid ?? -1]
-  uploadRef.value?.handleRemove(toUploadFile(file))
+  await uploadRef.value?.handleRemove(toUploadFile(file))
+  await nextTick()
+  if (props.disabled || !uploadRef.value) return
   uploadRef.value?.handleStart(file.raw)
-  uploadRef.value?.submit()
+  submit()
 }
 
 function statusText(file: UploadUserFile): string {
@@ -353,8 +693,12 @@ function progressPercent(file: UploadUserFile): number {
   return Math.min(100, Math.max(0, Math.round(file.percentage ?? 0)))
 }
 
-function errorText(file: UploadUserFile): string {
-  return uploadErrors.value[file.uid ?? -1] ?? '上传失败，可重试'
+function errorText(file: LxUploadUserFile): string {
+  return (
+    uploadErrors.value[file.uid ?? -1] ??
+    file.error?.message ??
+    '上传失败，可重试'
+  )
 }
 
 function fileSize(size?: number): string {
@@ -365,25 +709,56 @@ function fileSize(size?: number): string {
 }
 
 function submit() {
-  if (!props.disabled) uploadRef.value?.submit()
+  if (props.disabled) return
+  uploadRef.value?.submit()
 }
 
 function clearFiles() {
   if (props.disabled) return
+  invalidateAllUploadRequests()
+  uploadRef.value?.abort()
   uploadRef.value?.clearFiles()
   emit('update:modelValue', [])
   announcement.value = '文件列表已清空'
 }
 
 function abort(file?: LxUploadFile) {
-  if (!file) {
+  // 父级同步回传生成 UID 时，按内部映射找回当前受控文件。
+  const target = file
+    ? files.value.find(
+        (item) =>
+          item[sourceUidKey] === file.uid ||
+          item.uid === file.uid ||
+          sourceUidByInternal.get(Number(item.uid)) === file.uid,
+      )
+    : undefined
+  const targets = file
+    ? target
+      ? [target]
+      : []
+    : files.value.filter((item) => item.status === 'uploading')
+  if (file) {
+    if (!target) return
+    const requestUid = uploadRequestUid(target)
+    invalidateUploadRequest(requestUid)
+    uploadRef.value?.abort({ ...toUploadFile(target), uid: requestUid })
+  } else {
+    invalidateAllUploadRequests()
     uploadRef.value?.abort()
-    return
   }
-  const target = files.value.find(
-    (item) => String(item.uid) === String(file.uid),
+
+  const targetUids = new Set(
+    targets
+      .filter((item) => item.status === 'uploading')
+      .map((item) => Number(item.uid)),
   )
-  if (target) uploadRef.value?.abort(toUploadFile(target))
+  if (!targetUids.size) return
+  const reset = files.value.map((item) =>
+    targetUids.has(Number(item.uid))
+      ? toUploadFile({ ...item, status: 'ready', percentage: 0 })
+      : toUploadFile(item),
+  )
+  emit('update:modelValue', toLxFiles(reset))
 }
 
 /**
@@ -393,13 +768,7 @@ function abort(file?: LxUploadFile) {
  */
 function cancelUpload() {
   if (props.disabled) return
-  uploadRef.value?.abort()
-  const reset = files.value.map((file) =>
-    file.status === 'uploading'
-      ? toUploadFile({ ...file, status: 'ready', percentage: 0 })
-      : toUploadFile(file),
-  )
-  emit('update:modelValue', toLxFiles(reset))
+  abort()
   announcement.value = '已取消上传，文件已回到队列'
 }
 
@@ -413,6 +782,7 @@ defineExpose({
 
 <template>
   <div
+    :ref="setRootElement"
     class="lx-upload"
     :class="{ 'is-disabled': disabled, 'is-uploading': isUploading }"
   >
@@ -432,7 +802,6 @@ defineExpose({
       :name="name"
       :with-credentials="withCredentials"
       :http-request="requestHandler"
-      :aria-describedby="describedBy()"
       :before-upload="beforeUpload"
       :on-change="onChange"
       :on-progress="onProgress"
@@ -496,14 +865,8 @@ defineExpose({
               <template v-if="maxSize">，单文件不超过 {{ maxSize }}MB</template>
               <template v-if="limit">，最多 {{ limit }} 个文件</template>
             </p>
-            <!-- 位于 .el-upload 触发器内，click 冒泡至根节点即打开文件选择（EP onKeydown 带 self 修饰，无键盘双触发） -->
-            <button
-              class="lx-upload__browse"
-              type="button"
-              :aria-describedby="describedBy()"
-            >
-              浏览本地文件
-            </button>
+            <!-- 外层上传触发器提供按钮语义；这里仅显示文件选择提示。 -->
+            <span class="lx-upload__browse"> 浏览本地文件 </span>
           </div>
           <div class="lx-upload__dropzone-over">
             <span class="lx-upload__drop-over-icon"
@@ -643,8 +1006,10 @@ defineExpose({
 }
 
 .lx-upload__trigger :deep(.el-upload-dragger) {
-  height: 120px;
+  height: auto;
+  min-height: 120px;
   overflow: hidden;
+  padding: 0;
   border: 2px dashed var(--lx-control-border);
   border-radius: var(--lx-radius-lg);
   background: var(--lx-bg-card-hover);
@@ -678,13 +1043,18 @@ defineExpose({
 }
 
 .lx-upload__dropzone {
+  box-sizing: border-box;
   display: grid;
-  height: 100%;
+  min-height: 120px;
+  min-width: 0;
+  padding: var(--lx-space-md) var(--lx-space-lg);
   place-content: center;
 }
 
 .lx-upload__dropzone-idle {
   display: grid;
+  max-width: 100%;
+  min-width: 0;
   justify-items: center;
   gap: var(--lx-space-xs);
 }
@@ -692,6 +1062,8 @@ defineExpose({
 /* 态B 内容切换：EP dragger 拖入时加 .is-dragover，纯 CSS 切换两块内容 */
 .lx-upload__dropzone-over {
   display: none;
+  max-width: 100%;
+  min-width: 0;
   justify-items: center;
   gap: var(--lx-space-xs);
 }
@@ -727,23 +1099,23 @@ defineExpose({
   line-height: 20px;
 }
 
-/* "浏览本地文件"链接：位于 .el-upload 触发器内，点击冒泡打开文件选择 */
 .lx-upload__browse {
+  display: inline-flex;
+  min-height: 18px;
+  align-items: center;
   padding: 0;
-  border: 0;
-  background: none;
   color: var(--lx-color-primary);
   cursor: pointer;
-  font: inherit;
+  font-family: inherit;
   font-size: 12px;
   line-height: 18px;
   text-decoration: underline;
 }
 
-.lx-upload__browse:focus-visible {
-  border-radius: var(--lx-radius-sm);
-  outline: 2px solid var(--lx-color-primary);
-  outline-offset: 2px;
+.lx-upload.is-disabled .lx-upload__browse {
+  color: var(--lx-text-secondary-strong);
+  cursor: not-allowed;
+  text-decoration: none;
 }
 
 /* 态C 聚合进度面板（裁剪版：总进度 + 8px 条纹条 + 取消上传） */
@@ -872,7 +1244,10 @@ defineExpose({
 
 .lx-upload__title,
 .lx-upload__hint {
+  max-width: 100%;
   margin: 0;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 
 .lx-upload__title {
@@ -1224,6 +1599,17 @@ defineExpose({
     padding-inline: var(--lx-space-sm);
   }
 
+  .lx-upload.is-uploading .lx-upload__trigger :deep(.el-upload-dragger) {
+    height: auto;
+    min-height: 120px;
+  }
+
+  .lx-upload.is-uploading .lx-upload__panel {
+    height: auto;
+    min-height: 120px;
+    padding-block: var(--lx-space-xs);
+  }
+
   .lx-upload__panel-track {
     width: 100%;
   }
@@ -1246,13 +1632,8 @@ defineExpose({
   }
 }
 
-/* 触屏：链接与取消按钮放大到最小触控目标 44px */
+/* 触屏：文件选择提示和操作按钮保留足够触控空间。 */
 @media (hover: none) {
-  .lx-upload__browse {
-    min-height: 44px;
-    align-items: center;
-  }
-
   .lx-upload__cancel {
     min-height: 44px;
   }

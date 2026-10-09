@@ -190,6 +190,10 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     const descriptionId = await description.getAttribute('id');
     expect(descriptionId).toBeTruthy();
     await expect(checkbox).toHaveAttribute('aria-describedby', new RegExp(descriptionId!));
+    const inheritVisualCheckbox = page.locator('.lx-transfer-panel__footer .el-checkbox__inner');
+    await expect(inheritVisualCheckbox).toHaveCSS('box-sizing', 'border-box');
+    await expect(inheritVisualCheckbox).toHaveCSS('width', '14px');
+    await expect(inheritVisualCheckbox).toHaveCSS('height', '14px');
 
     const checkDangerColors = async (hud: boolean) => {
       await page.getByRole('button', { name: '全部移除' }).click();
@@ -1303,6 +1307,9 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     const desktopCheckboxInput = sourcePanel.locator(
       '.lx-virtual-tree__row[data-lx-tree-key="org-01"] .lx-virtual-tree__checkbox',
     );
+    await expect(desktopCheckboxInput).toHaveCSS('box-sizing', 'border-box');
+    await expect(desktopCheckboxInput).toHaveCSS('width', '14px');
+    await expect(desktopCheckboxInput).toHaveCSS('height', '14px');
     const wasChecked = await desktopCheckboxInput.isChecked();
     await desktopCheckbox.click({ position: { x: 1, y: 1 } });
     await expect(desktopCheckboxInput).toBeChecked({ checked: !wasChecked });

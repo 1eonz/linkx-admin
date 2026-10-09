@@ -1,0 +1,672 @@
+{
+  "createdAt": "2026-10-07T19:34:59.8590340+00:00",
+  "source": "browser-evidence.json",
+  "attributionNotes": [
+    "insideDemoInclusive 包含嵌套的 LxTransferPanel 元素。",
+    "组件与 Demo 之外表示目标节点不在这两个业务 DOM 子树中；文档页的 main/article 祖先覆盖范围很广，不能用它独自认定目标属于页面外壳。"
+  ],
+  "views": [
+    {
+      "name": "light-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "panel": {
+        "selector": "section.lx-transfer-panel",
+        "x": 336,
+        "y": 465,
+        "width": 880,
+        "height": 380
+      },
+      "documentWidth": 1440,
+      "horizontalOverflow": false,
+      "impeccableConsole": [
+        "%c[impeccable] 13 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "findings": [
+        {
+          "rule": "cards flush against the scroller edge",
+          "total": 1,
+          "visible": 1,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 1,
+          "sampleTargets": [
+            {
+              "visible": true,
+              "selector": "table",
+              "text": "名称类型默认值说明treeDataLxTransferPanelNode[][]左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。modelValue(string | number)[][]受控的已选节点键；可包含暂未加载到当前树中的既有键。select",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        },
+        {
+          "rule": "line length too long",
+          "total": 8,
+          "visible": 8,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 8,
+          "sampleTargets": [
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "li",
+              "text": "左侧搜索有内容时才显示“全选筛选结果”和“反选筛选结果”；只操作节点名称实际匹配搜索文本的可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "li",
+              "text": "inheritChildDescription 只由宿主提供业务确认后的说明。组件不会推断实际授权范围，并会在说明更新或移除时同步更新原生复选框的 aria-describedby。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "li",
+              "text": "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "清空动作的事件顺序固定为 update:modelValue([])、change([], [])、clear-all。clear-all 是清空已发生后的通知，不是可取消的确认钩子。需要确认或撤销时，宿主应把组件绑定到本地草稿值，保存到后端时再提交；不要在 v-model 监听器中直接持久化每次变化。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。全量清空确认期间如果宿主传入的 modelValue 发生变化，旧确认会失效并提示用户重新检查，不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        },
+        {
+          "rule": "raster buried under a wash or opacity",
+          "total": 3,
+          "visible": 2,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 3,
+          "sampleTargets": [
+            {
+              "visible": false,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        }
+      ],
+      "cdpLog": [
+        {
+          "at": "2026-10-07T19:27:56.917Z",
+          "level": "error",
+          "source": "network",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "url": "http://127.0.0.1:4174/favicon.ico"
+        }
+      ],
+      "cdpNetworkErrors": [
+        {
+          "at": "2026-10-07T19:27:56.917Z",
+          "source": "CDP Network.responseReceived",
+          "status": 404,
+          "type": "Other",
+          "url": "http://127.0.0.1:4174/favicon.ico"
+        }
+      ],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "name": "docs-dark-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "panel": {
+        "selector": "section.lx-transfer-panel",
+        "x": 336,
+        "y": 465,
+        "width": 880,
+        "height": 380
+      },
+      "documentWidth": 1440,
+      "horizontalOverflow": false,
+      "impeccableConsole": [
+        "%c[impeccable] 203 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "findings": [
+        {
+          "rule": "✦ ai color palette",
+          "total": 190,
+          "visible": 14,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 190,
+          "sampleTargets": [
+            {
+              "visible": false,
+              "selector": "span",
+              "text": "setup",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": false,
+              "selector": "span",
+              "text": "lang",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": false,
+              "selector": "span",
+              "text": "HostState",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": false,
+              "selector": "span",
+              "text": "ref",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": false,
+              "selector": "span",
+              "text": "HostState",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": false,
+              "selector": "span",
+              "text": "ref",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": false,
+              "selector": "span",
+              "text": "ref",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": false,
+              "selector": "span",
+              "text": "ref",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        },
+        {
+          "rule": "cards flush against the scroller edge",
+          "total": 1,
+          "visible": 1,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 1,
+          "sampleTargets": [
+            {
+              "visible": true,
+              "selector": "table",
+              "text": "名称类型默认值说明treeDataLxTransferPanelNode[][]左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。modelValue(string | number)[][]受控的已选节点键；可包含暂未加载到当前树中的既有键。select",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        },
+        {
+          "rule": "line length too long",
+          "total": 8,
+          "visible": 8,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 8,
+          "sampleTargets": [
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "li",
+              "text": "左侧搜索有内容时才显示“全选筛选结果”和“反选筛选结果”；只操作节点名称实际匹配搜索文本的可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "li",
+              "text": "inheritChildDescription 只由宿主提供业务确认后的说明。组件不会推断实际授权范围，并会在说明更新或移除时同步更新原生复选框的 aria-describedby。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "li",
+              "text": "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "清空动作的事件顺序固定为 update:modelValue([])、change([], [])、clear-all。clear-all 是清空已发生后的通知，不是可取消的确认钩子。需要确认或撤销时，宿主应把组件绑定到本地草稿值，保存到后端时再提交；不要在 v-model 监听器中直接持久化每次变化。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。全量清空确认期间如果宿主传入的 modelValue 发生变化，旧确认会失效并提示用户重新检查，不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        },
+        {
+          "rule": "raster buried under a wash or opacity",
+          "total": 3,
+          "visible": 2,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 3,
+          "sampleTargets": [
+            {
+              "visible": false,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        }
+      ],
+      "cdpLog": [],
+      "cdpNetworkErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "name": "hud-dark-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "panel": {
+        "selector": "section.lx-transfer-panel",
+        "x": 336,
+        "y": 534,
+        "width": 880,
+        "height": 380
+      },
+      "documentWidth": 1440,
+      "horizontalOverflow": false,
+      "impeccableConsole": [
+        "%c[impeccable] 238 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "findings": [
+        {
+          "rule": "✦ ai color palette",
+          "total": 225,
+          "visible": 49,
+          "insideComponent": 34,
+          "insideDemoInclusive": 35,
+          "outsideComponentAndDemo": 190,
+          "sampleTargets": [
+            {
+              "visible": true,
+              "selector": "button",
+              "text": "正常数据",
+              "insideComponent": false,
+              "insideDemo": true
+            },
+            {
+              "visible": true,
+              "selector": "div.lx-virtual-tree__row.is-checked",
+              "text": "市公安局指挥中心ORG-01 正常",
+              "insideComponent": true,
+              "insideDemo": true
+            },
+            {
+              "visible": true,
+              "selector": "input.lx-virtual-tree__checkbox",
+              "text": "",
+              "insideComponent": true,
+              "insideDemo": true
+            },
+            {
+              "visible": true,
+              "selector": "svg",
+              "text": "",
+              "insideComponent": true,
+              "insideDemo": true
+            },
+            {
+              "visible": true,
+              "selector": "path",
+              "text": "",
+              "insideComponent": true,
+              "insideDemo": true
+            },
+            {
+              "visible": true,
+              "selector": "path",
+              "text": "",
+              "insideComponent": true,
+              "insideDemo": true
+            },
+            {
+              "visible": true,
+              "selector": "span.lx-virtual-tree__label",
+              "text": "市公安局指挥中心",
+              "insideComponent": true,
+              "insideDemo": true
+            },
+            {
+              "visible": true,
+              "selector": "div.lx-virtual-tree__row.is-checked",
+              "text": "情指行一体化研判调度专班DEPT-03 正常",
+              "insideComponent": true,
+              "insideDemo": true
+            }
+          ]
+        },
+        {
+          "rule": "cards flush against the scroller edge",
+          "total": 1,
+          "visible": 1,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 1,
+          "sampleTargets": [
+            {
+              "visible": true,
+              "selector": "table",
+              "text": "名称类型默认值说明treeDataLxTransferPanelNode[][]左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。modelValue(string | number)[][]受控的已选节点键；可包含暂未加载到当前树中的既有键。select",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        },
+        {
+          "rule": "line length too long",
+          "total": 8,
+          "visible": 8,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 8,
+          "sampleTargets": [
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏纵向排列且保持两侧面板同高。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "li",
+              "text": "左侧搜索有内容时才显示“全选筛选结果”和“反选筛选结果”；只操作节点名称实际匹配搜索文本的可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "li",
+              "text": "inheritChildDescription 只由宿主提供业务确认后的说明。组件不会推断实际授权范围，并会在说明更新或移除时同步更新原生复选框的 aria-describedby。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "li",
+              "text": "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "清空动作的事件顺序固定为 update:modelValue([])、change([], [])、clear-all。clear-all 是清空已发生后的通知，不是可取消的确认钩子。需要确认或撤销时，宿主应把组件绑定到本地草稿值，保存到后端时再提交；不要在 v-model 监听器中直接持久化每次变化。",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。全量清空确认期间如果宿主传入的 modelValue 发生变化，旧确认会失效并提示用户重新检查，不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "p",
+              "text": "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        },
+        {
+          "rule": "raster buried under a wash or opacity",
+          "total": 3,
+          "visible": 2,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 3,
+          "sampleTargets": [
+            {
+              "visible": false,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        }
+      ],
+      "cdpLog": [],
+      "cdpNetworkErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "name": "mobile-375",
+      "viewport": {
+        "width": 375,
+        "height": 900
+      },
+      "panel": {
+        "selector": "section.lx-transfer-panel",
+        "x": 24,
+        "y": 58,
+        "width": 327,
+        "height": 842
+      },
+      "documentWidth": 615,
+      "horizontalOverflow": true,
+      "impeccableConsole": [
+        "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      ],
+      "findings": [
+        {
+          "rule": "positioned child clipped by overflow container",
+          "total": 1,
+          "visible": 1,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 1,
+          "sampleTargets": [
+            {
+              "visible": true,
+              "selector": "span.container",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        },
+        {
+          "rule": "raster buried under a wash or opacity",
+          "total": 3,
+          "visible": 2,
+          "insideComponent": 0,
+          "insideDemoInclusive": 0,
+          "outsideComponentAndDemo": 3,
+          "sampleTargets": [
+            {
+              "visible": false,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            },
+            {
+              "visible": true,
+              "selector": "button.copy",
+              "text": "",
+              "insideComponent": false,
+              "insideDemo": false
+            }
+          ]
+        },
+        {
+          "rule": "text occluded by an overlapping element",
+          "total": 2,
+          "visible": 0,
+          "insideComponent": 0,
+          "insideDemoInclusive": 2,
+          "outsideComponentAndDemo": 0,
+          "sampleTargets": [
+            {
+              "visible": false,
+              "selector": "button",
+              "text": "加载中",
+              "insideComponent": false,
+              "insideDemo": true
+            },
+            {
+              "visible": false,
+              "selector": "button",
+              "text": "加载失败",
+              "insideComponent": false,
+              "insideDemo": true
+            }
+          ]
+        }
+      ],
+      "cdpLog": [],
+      "cdpNetworkErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    }
+  ]
+}

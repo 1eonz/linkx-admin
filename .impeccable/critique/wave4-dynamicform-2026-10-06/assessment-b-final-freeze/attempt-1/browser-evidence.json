@@ -1,0 +1,2550 @@
+{
+  "capturedAt": "2026-10-06T10:25:32.151Z",
+  "browserMethod": "Playwright 1.58.0 attached over CDP to a separately launched headed Chrome profile",
+  "browserAutomationFallback": "No native browser automation/evaluate tool is exposed in this session.",
+  "browserContext": {
+    "chromePid": 9444,
+    "chromeVersion": "Chrome/154.0.8037.95",
+    "remoteDebuggingPort": 62604,
+    "profileDir": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\impeccable-wave4-dynamicform-assessment-b-fFJAKa",
+    "isolatedProfile": true,
+    "headed": true,
+    "createdFreshPageContext": true,
+    "nativeBrowserAutomationAvailable": false,
+    "browserDisconnected": true,
+    "chromeLeftOpenForHumanReview": true
+  },
+  "targetResults": [
+    {
+      "key": "dynamicform",
+      "label": "LxDynamicForm",
+      "url": "http://127.0.0.1:4174/components/lxdynamicform.html",
+      "httpStatus": 200,
+      "title": "LxDynamicForm 动态表单 | LxUI",
+      "screenshots": [],
+      "preflight": {
+        "title": "[Human] LxDynamicForm Assessment B",
+        "scriptConnected": true,
+        "marker": true,
+        "scriptTag": "SCRIPT"
+      },
+      "injection": {
+        "title": "[Human] LxDynamicForm Assessment B",
+        "source": "http://127.0.0.1:8400/detect.js",
+        "scriptConnected": true,
+        "scanAvailable": true,
+        "detectAvailable": true,
+        "preflightMarker": true
+      },
+      "initialOverlayScan": {
+        "available": true,
+        "groupCount": 16,
+        "findingCount": 17,
+        "groups": [
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "通过字段 schema 组合 Lx* 基础控件，使用 v-model 或 value + change(nextValue) 受控值契约向宿主报告字段变化；两种写法都可在 Vue 模板或 TSX 中使用，Vue 项目仍推荐优先使用 v-model。每种字段类型由独立子组件管理；远程候选项和上传适配器由宿主提供，组件不访问业务接口。",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 113,
+              "y": 216,
+              "width": 688,
+              "height": 118,
+              "top": 216,
+              "right": 801,
+              "bottom": 334,
+              "left": 113
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 749,
+              "y": 511,
+              "width": 40,
+              "height": 40,
+              "top": 511,
+              "right": 789,
+              "bottom": 551,
+              "left": 749
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 732,
+              "y": 2237.953125,
+              "width": 40,
+              "height": 40,
+              "top": 2237.953125,
+              "right": 772,
+              "bottom": 2277.953125,
+              "left": 732
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "示例默认展示一张可填写的任务表单，并按“任务信息”“附件”分组；低频的布局、禁用、主题和主表单 Mock 状态控制收在“演示设置”中。主表单展示任务类型联动、受控禁用、单张/多张图片上传、表单校验与重置；多图列表仅预置一张图片，降低移动端纵向占用。“字段类型预览”默认折叠，使用单一选择器逐项查看全部 14 种内置 schema 类型，不把所有控件堆入同一张表",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 113,
+              "y": 2242.953125,
+              "width": 688,
+              "height": 282,
+              "top": 2242.953125,
+              "right": 801,
+              "bottom": 2524.953125,
+              "left": 113
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "内置 type：input、password、textarea、number、select、remote-select、tree-select、date、daterange、switch、radio、checkbox、upload、slot。password 使用 LxPasswordInput，props.type 不会将其改成明文输入；remote-se",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 113,
+              "y": 4452.953125,
+              "width": 688,
+              "height": 326,
+              "top": 4452.953125,
+              "right": 801,
+              "bottom": 4778.953125,
+              "left": 113
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "文档 Demo 的内存上传适配器不发起网络请求；文件名以 重试- 开头时首次上传会失败，重试后成功，用于演示单图和多图字段的错误恢复。该行为仅属于 Demo Mock。",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 113,
+              "y": 4794.953125,
+              "width": 688,
+              "height": 58,
+              "top": 4794.953125,
+              "right": 801,
+              "bottom": 4852.953125,
+              "left": 113
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "具名字段插槽接收 { field, value, disabled, ariaDescribedBy, update }。宿主自定义控件应遵守 disabled，并通过 update(value) 通知组件；组件会发出 update:modelValue 和 field-change。字段配置了 feedback 时，应把 ariaDescribedBy 绑",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 113,
+              "y": 5514.953125,
+              "width": 688,
+              "height": 120,
+              "top": 5514.953125,
+              "right": 801,
+              "bottom": 5634.953125,
+              "left": 113
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 749,
+              "y": 5662.953125,
+              "width": 40,
+              "height": 40,
+              "top": 5662.953125,
+              "right": 789,
+              "bottom": 5702.953125,
+              "left": 749
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 749,
+              "y": 5888.421875,
+              "width": 40,
+              "height": 40,
+              "top": 5888.421875,
+              "right": 789,
+              "bottom": 5928.421875,
+              "left": 749
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 749,
+              "y": 6010.515625,
+              "width": 40,
+              "height": 40,
+              "top": 6010.515625,
+              "right": 789,
+              "bottom": 6050.515625,
+              "left": 749
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "feedback 只负责呈现宿主传入的状态。retry 只触发宿主的恢复流程，网络请求仍由宿主按 .then().catch().finally() 编排；状态为 loading 时重试按钮会禁用，避免重复发起请求。错误、加载和空结果不需要再在表单底部重复一份文案。",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 113,
+              "y": 6341.734375,
+              "width": 688,
+              "height": 88,
+              "top": 6341.734375,
+              "right": 801,
+              "bottom": 6429.734375,
+              "left": 113
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "实例公开 validate()、validateField()、resetFields()、clearValidate() 和 scrollToField()。validate() 返回 Promise<boolean>，并发出 validate(valid, fields?)；仅全表成功时发出 submit。validateField() 保留 Eleme",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 113,
+              "y": 6445.734375,
+              "width": 688,
+              "height": 148,
+              "top": 6445.734375,
+              "right": 801,
+              "bottom": 6593.734375,
+              "left": 113
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "#el-id-1024-5",
+            "tagName": "div",
+            "id": "el-id-1024-5",
+            "classes": [
+              "el-popper",
+              "is-pure",
+              "is-light",
+              "el-tooltip",
+              "el-select__popper",
+              "lx-select__popper"
+            ],
+            "text": "日常巡防应急支援",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "gpt-thin-border-wide-shadow",
+                "name": "gpt-thin-border-wide-shadow",
+                "category": null,
+                "severity": null,
+                "detail": "1px border + 16px shadow blur",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "#el-id-1024-10",
+            "tagName": "div",
+            "id": "el-id-1024-10",
+            "classes": [
+              "el-popper",
+              "is-pure",
+              "is-light",
+              "el-tooltip",
+              "el-select__popper",
+              "lx-select__popper"
+            ],
+            "text": "李警官 · 指挥中心陈警官 · 一大队周警官 · 二大队",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "gpt-thin-border-wide-shadow",
+                "name": "gpt-thin-border-wide-shadow",
+                "category": null,
+                "severity": null,
+                "detail": "1px border + 16px shadow blur",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "#el-id-1024-15",
+            "tagName": "div",
+            "id": "el-id-1024-15",
+            "classes": [
+              "el-popper",
+              "is-pure",
+              "is-light",
+              "el-tooltip",
+              "el-select__popper",
+              "lx-select__popper"
+            ],
+            "text": "文本输入密码输入多行文本数字输入下拉选择远程选择树形选择日期选择日期范围开关单选组多选组文件上传自定义插槽",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "gpt-thin-border-wide-shadow",
+                "name": "gpt-thin-border-wide-shadow",
+                "category": null,
+                "severity": null,
+                "detail": "1px border + 16px shadow blur",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "body",
+            "tagName": "body",
+            "id": null,
+            "classes": [],
+            "text": "Skip to content\nLxUI\nMain Navigation\n首页\n组件\n新增组件\nMenu\nOn this page\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBread",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 914,
+              "height": 7355.734375,
+              "top": 0,
+              "right": 914,
+              "bottom": 7355.734375,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "bounce-easing",
+                "name": "bounce-easing",
+                "category": null,
+                "severity": null,
+                "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+                "ignoreValue": ""
+              },
+              {
+                "type": "layout-transition",
+                "name": "layout-transition",
+                "category": null,
+                "severity": null,
+                "detail": "transition: height, padding-top, padding-bottom",
+                "ignoreValue": ""
+              }
+            ]
+          }
+        ],
+        "overlayCount": 16,
+        "visibleOverlayCount": 1,
+        "overlays": [
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "✦ hairline border with wide shadow",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "✦ hairline border with wide shadow",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "✦ hairline border with wide shadow",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay impeccable-banner",
+            "text": "✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-to",
+            "visible": true,
+            "rect": {
+              "x": 0,
+              "y": -36,
+              "width": 914,
+              "height": 36,
+              "top": -36,
+              "right": 914,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "liveServer": {
+    "startedByAssessment": true,
+    "start": {
+      "command": "node \"C:/Users/Administrator/.codex/skills/impeccable/scripts/live-server.mjs\" \"--background\"\n",
+      "exitCode": 0,
+      "stdout": {
+        "pid": 2588,
+        "port": 8400,
+        "token": "[REDACTED]"
+      },
+      "stderr": ""
+    },
+    "stop": {
+      "command": "node \"C:/Users/Administrator/.codex/skills/impeccable/scripts/live-server.mjs\" \"stop\" \"--keep-inject\"\n",
+      "exitCode": 0,
+      "stdout": "Stopped live server on port 8400.\n",
+      "stderr": "",
+      "serverPidMatched": true
+    }
+  },
+  "console": [
+    {
+      "target": "dynamicform",
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "target": "dynamicform",
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "target": "dynamicform",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "target": "dynamicform",
+      "type": "startGroup",
+      "text": "%c[impeccable] 16 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    },
+    {
+      "target": "dynamicform",
+      "type": "startGroup",
+      "text": "%c[impeccable] 16 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    },
+    {
+      "target": "dynamicform",
+      "type": "startGroup",
+      "text": "%c[impeccable] 16 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cline-length%c ~86 chars/line (aim for <80) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    },
+    {
+      "target": "dynamicform",
+      "type": "startGroup",
+      "text": "%c[impeccable] 10 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cclipped-overflow-container%c span.container clips a positioned child color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cburied-raster%c raster background at opacity 0 color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cgpt-thin-border-wide-shadow%c 1px border + 16px shadow blur color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%cbounce-easing%c cubic-bezier(.71, -.46, .29, 1.46) color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "log",
+      "text": "%clayout-transition%c transition: height, padding-top, padding-bottom color: oklch(84% 0.19 80.46); font-weight: bold color: inherit JSHandle@node"
+    },
+    {
+      "target": "dynamicform",
+      "type": "endGroup",
+      "text": "console.groupEnd"
+    }
+  ],
+  "pageErrors": [],
+  "errors": [
+    "locator.check: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('checkbox', { name: 'HUD 深色主题' }).first()\u001b[22m\n\u001b[2m    - locator resolved to <input type=\"checkbox\" class=\"el-checkbox__original\"/>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    57 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at setHudTheme (F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-b-final-freeze\\capture-browser.mjs:315:46)\n    at async captureDynamicForm (F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-b-final-freeze\\capture-browser.mjs:368:3)\n    at async main (F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-b-final-freeze\\capture-browser.mjs:538:3)\n    at async file:///F:/work/linkx-admin/.impeccable/critique/wave4-dynamicform-2026-10-06/assessment-b-final-freeze/capture-browser.mjs:548:3"
+  ],
+  "screenshots": [
+    {
+      "target": "dynamicform",
+      "label": "desktop-light",
+      "screenshot": "screenshots/dynamicform-desktop-light.png",
+      "scan": {
+        "available": true,
+        "groupCount": 16,
+        "findingCount": 17,
+        "groups": [
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "通过字段 schema 组合 Lx* 基础控件，使用 v-model 或 value + change(nextValue) 受控值契约向宿主报告字段变化；两种写法都可在 Vue 模板或 TSX 中使用，Vue 项目仍推荐优先使用 v-model。每种字段类型由独立子组件管理；远程候选项和上传适配器由宿主提供，组件不访问业务接口。",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 376.5,
+              "y": 168,
+              "width": 688,
+              "height": 118,
+              "top": 168,
+              "right": 1064.5,
+              "bottom": 286,
+              "left": 376.5
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 1012.5,
+              "y": 463,
+              "width": 40,
+              "height": 40,
+              "top": 463,
+              "right": 1052.5,
+              "bottom": 503,
+              "left": 1012.5
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 995.5,
+              "y": 2189.953125,
+              "width": 40,
+              "height": 40,
+              "top": 2189.953125,
+              "right": 1035.5,
+              "bottom": 2229.953125,
+              "left": 995.5
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "示例默认展示一张可填写的任务表单，并按“任务信息”“附件”分组；低频的布局、禁用、主题和主表单 Mock 状态控制收在“演示设置”中。主表单展示任务类型联动、受控禁用、单张/多张图片上传、表单校验与重置；多图列表仅预置一张图片，降低移动端纵向占用。“字段类型预览”默认折叠，使用单一选择器逐项查看全部 14 种内置 schema 类型，不把所有控件堆入同一张表",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 376.5,
+              "y": 2194.953125,
+              "width": 688,
+              "height": 282,
+              "top": 2194.953125,
+              "right": 1064.5,
+              "bottom": 2476.953125,
+              "left": 376.5
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "内置 type：input、password、textarea、number、select、remote-select、tree-select、date、daterange、switch、radio、checkbox、upload、slot。password 使用 LxPasswordInput，props.type 不会将其改成明文输入；remote-se",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 376.5,
+              "y": 4404.953125,
+              "width": 688,
+              "height": 326,
+              "top": 4404.953125,
+              "right": 1064.5,
+              "bottom": 4730.953125,
+              "left": 376.5
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "文档 Demo 的内存上传适配器不发起网络请求；文件名以 重试- 开头时首次上传会失败，重试后成功，用于演示单图和多图字段的错误恢复。该行为仅属于 Demo Mock。",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 376.5,
+              "y": 4746.953125,
+              "width": 688,
+              "height": 58,
+              "top": 4746.953125,
+              "right": 1064.5,
+              "bottom": 4804.953125,
+              "left": 376.5
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "具名字段插槽接收 { field, value, disabled, ariaDescribedBy, update }。宿主自定义控件应遵守 disabled，并通过 update(value) 通知组件；组件会发出 update:modelValue 和 field-change。字段配置了 feedback 时，应把 ariaDescribedBy 绑",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 376.5,
+              "y": 5466.953125,
+              "width": 688,
+              "height": 120,
+              "top": 5466.953125,
+              "right": 1064.5,
+              "bottom": 5586.953125,
+              "left": 376.5
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 1012.5,
+              "y": 5614.953125,
+              "width": 40,
+              "height": 40,
+              "top": 5614.953125,
+              "right": 1052.5,
+              "bottom": 5654.953125,
+              "left": 1012.5
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 1012.5,
+              "y": 5840.421875,
+              "width": 40,
+              "height": 40,
+              "top": 5840.421875,
+              "right": 1052.5,
+              "bottom": 5880.421875,
+              "left": 1012.5
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 1012.5,
+              "y": 5962.515625,
+              "width": 40,
+              "height": 40,
+              "top": 5962.515625,
+              "right": 1052.5,
+              "bottom": 6002.515625,
+              "left": 1012.5
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "feedback 只负责呈现宿主传入的状态。retry 只触发宿主的恢复流程，网络请求仍由宿主按 .then().catch().finally() 编排；状态为 loading 时重试按钮会禁用，避免重复发起请求。错误、加载和空结果不需要再在表单底部重复一份文案。",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 376.5,
+              "y": 6293.734375,
+              "width": 688,
+              "height": 88,
+              "top": 6293.734375,
+              "right": 1064.5,
+              "bottom": 6381.734375,
+              "left": 376.5
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "p",
+            "tagName": "p",
+            "id": null,
+            "classes": [],
+            "text": "实例公开 validate()、validateField()、resetFields()、clearValidate() 和 scrollToField()。validate() 返回 Promise<boolean>，并发出 validate(valid, fields?)；仅全表成功时发出 submit。validateField() 保留 Eleme",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 376.5,
+              "y": 6397.734375,
+              "width": 688,
+              "height": 148,
+              "top": 6397.734375,
+              "right": 1064.5,
+              "bottom": 6545.734375,
+              "left": 376.5
+            },
+            "findings": [
+              {
+                "type": "line-length",
+                "name": "line-length",
+                "category": null,
+                "severity": null,
+                "detail": "~86 chars/line (aim for <80)",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "#el-id-1024-5",
+            "tagName": "div",
+            "id": "el-id-1024-5",
+            "classes": [
+              "el-popper",
+              "is-pure",
+              "is-light",
+              "el-tooltip",
+              "el-select__popper",
+              "lx-select__popper"
+            ],
+            "text": "日常巡防应急支援",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "gpt-thin-border-wide-shadow",
+                "name": "gpt-thin-border-wide-shadow",
+                "category": null,
+                "severity": null,
+                "detail": "1px border + 16px shadow blur",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "#el-id-1024-10",
+            "tagName": "div",
+            "id": "el-id-1024-10",
+            "classes": [
+              "el-popper",
+              "is-pure",
+              "is-light",
+              "el-tooltip",
+              "el-select__popper",
+              "lx-select__popper"
+            ],
+            "text": "李警官 · 指挥中心陈警官 · 一大队周警官 · 二大队",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "gpt-thin-border-wide-shadow",
+                "name": "gpt-thin-border-wide-shadow",
+                "category": null,
+                "severity": null,
+                "detail": "1px border + 16px shadow blur",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "#el-id-1024-15",
+            "tagName": "div",
+            "id": "el-id-1024-15",
+            "classes": [
+              "el-popper",
+              "is-pure",
+              "is-light",
+              "el-tooltip",
+              "el-select__popper",
+              "lx-select__popper"
+            ],
+            "text": "文本输入密码输入多行文本数字输入下拉选择远程选择树形选择日期选择日期范围开关单选组多选组文件上传自定义插槽",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "gpt-thin-border-wide-shadow",
+                "name": "gpt-thin-border-wide-shadow",
+                "category": null,
+                "severity": null,
+                "detail": "1px border + 16px shadow blur",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "body",
+            "tagName": "body",
+            "id": null,
+            "classes": [],
+            "text": "Skip to content\nLxUI\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsB",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 1425,
+              "height": 7307.734375,
+              "top": 0,
+              "right": 1425,
+              "bottom": 7307.734375,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "bounce-easing",
+                "name": "bounce-easing",
+                "category": null,
+                "severity": null,
+                "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+                "ignoreValue": ""
+              },
+              {
+                "type": "layout-transition",
+                "name": "layout-transition",
+                "category": null,
+                "severity": null,
+                "detail": "transition: height, padding-top, padding-bottom",
+                "ignoreValue": ""
+              }
+            ]
+          }
+        ],
+        "overlayCount": 16,
+        "visibleOverlayCount": 1,
+        "overlays": [
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "line length too long",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "✦ hairline border with wide shadow",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "✦ hairline border with wide shadow",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "✦ hairline border with wide shadow",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay impeccable-banner",
+            "text": "✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-to",
+            "visible": true,
+            "rect": {
+              "x": 0,
+              "y": -36,
+              "width": 1425,
+              "height": 36,
+              "top": -36,
+              "right": 1425,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        ]
+      },
+      "page": {
+        "title": "[Human] LxDynamicForm · desktop-light",
+        "url": "http://127.0.0.1:4174/components/lxdynamicform.html",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "themeClasses": [],
+        "reducedMotion": false,
+        "headings": [
+          "新增组件",
+          "基础",
+          "布局导航",
+          "数据展示",
+          "数据录入",
+          "反馈与浮层",
+          "LxDynamicForm 动态表单\n​",
+          "最小配置\n​",
+          "交互示例\n​",
+          "任务信息",
+          "附件",
+          "Props\n​",
+          "字段 schema\n​",
+          "Events\n​",
+          "插槽与实例\n​"
+        ],
+        "visibleDemoRoots": {
+          "dynamicform": true,
+          "upload": false,
+          "datepicker": false
+        },
+        "tokens": {
+          "dynamicform": {
+            "--lx-color-primary": "#0060a9",
+            "--lx-color-primary-light": "#ecf5ff",
+            "--lx-text-primary": "#1d2129",
+            "--lx-text-secondary": "#86909c",
+            "--lx-border-light": "#ebeef5",
+            "--lx-bg-card": "#ffffff",
+            "--lx-font-mono": "'JetBrains Mono', 'Cascadia Code', Consolas, monospace",
+            "--lx-space-sm": "8px"
+          },
+          "upload": null,
+          "datepicker": null
+        },
+        "rangeInputs": [],
+        "weekHeaders": [],
+        "bodyTextExcerpt": "Skip to content\nLxUI\nMain Navigation\n首页\n组件\n新增组件\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n\nLxProTable 数据表格\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxDutyCalendar 排班日历\n\nLxSectionTitle 区块标题\n\nLxAuthImg 鉴权图片\n\nLxDescriptions 详情描述\n\nLxPagination 分页\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿"
+      },
+      "screenshotSaved": true
+    },
+    {
+      "target": "dynamicform",
+      "label": "mobile-375-light",
+      "screenshot": "screenshots/dynamicform-mobile-375-light.png",
+      "scan": {
+        "available": true,
+        "groupCount": 10,
+        "findingCount": 11,
+        "groups": [
+          {
+            "selector": "span.container",
+            "tagName": "span",
+            "id": null,
+            "classes": [
+              "container"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": "button.VPNavBarHamburger.hamburger",
+            "rect": {
+              "x": 320,
+              "y": 25,
+              "width": 16,
+              "height": 14,
+              "top": 25,
+              "right": 336,
+              "bottom": 39,
+              "left": 320
+            },
+            "findings": [
+              {
+                "type": "clipped-overflow-container",
+                "name": "clipped-overflow-container",
+                "category": null,
+                "severity": null,
+                "detail": "span.container clips a positioned child",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 308,
+              "y": 647,
+              "width": 40,
+              "height": 40,
+              "top": 647,
+              "right": 348,
+              "bottom": 687,
+              "left": 308
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 267,
+              "y": 2583.78125,
+              "width": 40,
+              "height": 40,
+              "top": 2583.78125,
+              "right": 307,
+              "bottom": 2623.78125,
+              "left": 267
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 308,
+              "y": 7561.78125,
+              "width": 40,
+              "height": 40,
+              "top": 7561.78125,
+              "right": 348,
+              "bottom": 7601.78125,
+              "left": 308
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 308,
+              "y": 7787.25,
+              "width": 40,
+              "height": 40,
+              "top": 7787.25,
+              "right": 348,
+              "bottom": 7827.25,
+              "left": 308
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "button.copy",
+            "tagName": "button",
+            "id": null,
+            "classes": [
+              "copy"
+            ],
+            "text": "",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 308,
+              "y": 7924.34375,
+              "width": 40,
+              "height": 40,
+              "top": 7924.34375,
+              "right": 348,
+              "bottom": 7964.34375,
+              "left": 308
+            },
+            "findings": [
+              {
+                "type": "buried-raster",
+                "name": "buried-raster",
+                "category": null,
+                "severity": null,
+                "detail": "raster background at opacity 0",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "#el-id-1024-5",
+            "tagName": "div",
+            "id": "el-id-1024-5",
+            "classes": [
+              "el-popper",
+              "is-pure",
+              "is-light",
+              "el-tooltip",
+              "el-select__popper",
+              "lx-select__popper"
+            ],
+            "text": "日常巡防应急支援",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "gpt-thin-border-wide-shadow",
+                "name": "gpt-thin-border-wide-shadow",
+                "category": null,
+                "severity": null,
+                "detail": "1px border + 16px shadow blur",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "#el-id-1024-10",
+            "tagName": "div",
+            "id": "el-id-1024-10",
+            "classes": [
+              "el-popper",
+              "is-pure",
+              "is-light",
+              "el-tooltip",
+              "el-select__popper",
+              "lx-select__popper"
+            ],
+            "text": "李警官 · 指挥中心陈警官 · 一大队周警官 · 二大队",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "gpt-thin-border-wide-shadow",
+                "name": "gpt-thin-border-wide-shadow",
+                "category": null,
+                "severity": null,
+                "detail": "1px border + 16px shadow blur",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "#el-id-1024-15",
+            "tagName": "div",
+            "id": "el-id-1024-15",
+            "classes": [
+              "el-popper",
+              "is-pure",
+              "is-light",
+              "el-tooltip",
+              "el-select__popper",
+              "lx-select__popper"
+            ],
+            "text": "文本输入密码输入多行文本数字输入下拉选择远程选择树形选择日期选择日期范围开关单选组多选组文件上传自定义插槽",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "gpt-thin-border-wide-shadow",
+                "name": "gpt-thin-border-wide-shadow",
+                "category": null,
+                "severity": null,
+                "detail": "1px border + 16px shadow blur",
+                "ignoreValue": ""
+              }
+            ]
+          },
+          {
+            "selector": "body",
+            "tagName": "body",
+            "id": null,
+            "classes": [],
+            "text": "Skip to content\nLxUI\nMenu\nOn this page\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nL",
+            "componentOwner": null,
+            "docsShellAncestor": null,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 360,
+              "height": 9813.5625,
+              "top": 0,
+              "right": 360,
+              "bottom": 9813.5625,
+              "left": 0
+            },
+            "findings": [
+              {
+                "type": "bounce-easing",
+                "name": "bounce-easing",
+                "category": null,
+                "severity": null,
+                "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+                "ignoreValue": ""
+              },
+              {
+                "type": "layout-transition",
+                "name": "layout-transition",
+                "category": null,
+                "severity": null,
+                "detail": "transition: height, padding-top, padding-bottom",
+                "ignoreValue": ""
+              }
+            ]
+          }
+        ],
+        "overlayCount": 10,
+        "visibleOverlayCount": 1,
+        "overlays": [
+          {
+            "className": "impeccable-overlay",
+            "text": "positioned child clipped by overflow container",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "raster buried under a wash or opacity",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "✦ hairline border with wide shadow",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "✦ hairline border with wide shadow",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay",
+            "text": "✦ hairline border with wide shadow",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "className": "impeccable-overlay impeccable-banner",
+            "text": "✦ bounce or elastic easing: cubic-bezier(.71, -.46, .29, 1.46)\nlayout property animation: transition: height, padding-to",
+            "visible": true,
+            "rect": {
+              "x": 0,
+              "y": -36,
+              "width": 360,
+              "height": 36,
+              "top": -36,
+              "right": 360,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        ]
+      },
+      "page": {
+        "title": "[Human] LxDynamicForm · mobile-375-light",
+        "url": "http://127.0.0.1:4174/components/lxdynamicform.html",
+        "viewport": {
+          "width": 375,
+          "height": 812,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "themeClasses": [],
+        "reducedMotion": false,
+        "headings": [
+          "新增组件",
+          "基础",
+          "布局导航",
+          "数据展示",
+          "数据录入",
+          "反馈与浮层",
+          "LxDynamicForm 动态表单\n​",
+          "最小配置\n​",
+          "交互示例\n​",
+          "任务信息",
+          "附件",
+          "Props\n​",
+          "字段 schema\n​",
+          "Events\n​",
+          "插槽与实例\n​"
+        ],
+        "visibleDemoRoots": {
+          "dynamicform": true,
+          "upload": false,
+          "datepicker": false
+        },
+        "tokens": {
+          "dynamicform": {
+            "--lx-color-primary": "#0060a9",
+            "--lx-color-primary-light": "#ecf5ff",
+            "--lx-text-primary": "#1d2129",
+            "--lx-text-secondary": "#86909c",
+            "--lx-border-light": "#ebeef5",
+            "--lx-bg-card": "#ffffff",
+            "--lx-font-mono": "'JetBrains Mono', 'Cascadia Code', Consolas, monospace",
+            "--lx-space-sm": "8px"
+          },
+          "upload": null,
+          "datepicker": null
+        },
+        "rangeInputs": [],
+        "weekHeaders": [],
+        "bodyTextExcerpt": "Skip to content\nLxUI\nMenu\nOn this page\nSidebar Navigation\n新增组件\n\n新增组件总览\n\n基础\n\n基础控件桥接\n\nLxButton 按钮\n\nLxIcon 图标总览\n\n布局导航\n\nLxSidebar 侧边栏\n\nLxNavbar 顶部导航\n\nLxBreadcrumb 面包屑\n\nLxTabsBar 页签栏\n\nLxSplitLayout 分栏布局\n\nLxSelectTree 组织树选择\n\n数据展示\n\nLxProTable 数据表格\n\nLxPageCard 页面容器\n\nLxMetricCard 指标卡\n\nLxDutyCalendar 排班日历\n\nLxSectionTitle 区块标题\n\nLxAuthImg 鉴权图片\n\nLxDescriptions 详情描述\n\nLxPagination 分页\n\nLxVirtualTree 虚拟树\n\nLxTransferPanel 双栏穿梭\n\nLxStat"
+      },
+      "screenshotSaved": true
+    }
+  ],
+  "completedAt": "2026-10-06T10:26:15.562Z",
+  "preflightSucceeded": true
+}

@@ -10,7 +10,7 @@ const outputDir = path.resolve(
   process.cwd(),
   '.impeccable/critique/wave3-lxicon-2026-10-06/final-assessment-a',
 );
-const runId = 'current-2026-10-06';
+const runId = 'final-2026-10-06';
 const profileDir = await fs.mkdtemp(path.join(os.tmpdir(), 'lxicon-final-a-'));
 const results = {
   runId,
@@ -41,7 +41,9 @@ function rect(value) {
 
 async function registerPage(page) {
   page.on('console', (message) => {
-    if (message.type() === 'error') results.consoleErrors.push(message.text());
+    if (message.type() === 'error') {
+      results.consoleErrors.push({ text: message.text(), location: message.location() });
+    }
   });
   page.on('pageerror', (error) => results.pageErrors.push(error.message));
   page.on('response', (response) => {
@@ -257,7 +259,8 @@ try {
   await input.fill('重置');
   await desktop.waitForFunction(() => document.querySelectorAll('.icon-tile').length === 1);
   await input.press('Tab');
-  await input.press('Tab');
+  await desktop.keyboard.press('Tab');
+  await desktop.waitForFunction(() => document.activeElement?.matches('.icon-tile'));
   results.interactions.keyboardTileFocus = await desktop.evaluate(() => {
     const active = document.activeElement;
     const style = active ? getComputedStyle(active) : null;
@@ -272,7 +275,9 @@ try {
   });
   await saveScreenshot(desktop, 'search-keyboard-tile-focus');
   await desktop.keyboard.press('Enter');
-  await desktop.waitForTimeout(100);
+  await desktop.waitForFunction(async () =>
+    (await navigator.clipboard.readText()).includes('<LxIcon name="undo"'),
+  );
   results.interactions.keyboardCopy = {
     clipboardText: await desktop.evaluate(() => navigator.clipboard.readText()),
     feedback: await desktop.evaluate(() =>
@@ -323,6 +328,38 @@ try {
   });
   await saveScreenshot(desktop, 'reduced-motion-hover');
   await desktop.close();
+
+  const mobile = await openPage({ width: 375, height: 812 }, 'light');
+  const mobileInput = mobile.locator('.icon-search');
+  await mobileInput.fill('重置');
+  await mobile.waitForFunction(() => document.querySelectorAll('.icon-tile').length === 1);
+  results.interactions.mobileClearTarget = await mobile
+    .locator('.icon-search__clear')
+    .evaluate((element) => {
+      const value = element.getBoundingClientRect();
+      return {
+        rect: {
+          x: Math.round(value.x),
+          y: Math.round(value.y),
+          width: Math.round(value.width),
+          height: Math.round(value.height),
+        },
+        accessibleName: element.getAttribute('aria-label'),
+        viewportWidth: document.documentElement.clientWidth,
+        documentWidth: document.documentElement.scrollWidth,
+      };
+    });
+  await saveScreenshot(mobile, 'mobile-375-search-clear-visible');
+  await mobile.locator('.icon-search__clear').click();
+  await mobile.waitForFunction(() => document.querySelectorAll('.icon-tile').length === 96);
+  results.interactions.mobileClearRecovery = await mobile.evaluate(() => ({
+    query: document.querySelector('.icon-search')?.value,
+    inputFocused: document.activeElement === document.querySelector('.icon-search'),
+    tileCount: document.querySelectorAll('.icon-tile').length,
+    clearButtonPresent: Boolean(document.querySelector('.icon-search__clear')),
+  }));
+  await saveScreenshot(mobile, 'mobile-375-search-clear-recovered');
+  await mobile.close();
 } catch (error) {
   fatalError = error;
   results.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);

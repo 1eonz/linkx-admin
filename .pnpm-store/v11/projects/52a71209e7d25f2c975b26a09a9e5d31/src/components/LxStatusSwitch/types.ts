@@ -3,11 +3,19 @@ export interface LxStatusSwitchConfirmOptions {
   title?: string
   /** 关闭后的影响说明。 */
   message?: string
+  /** 可选的确认对象名称，例如节点名称与编号。 */
+  targetEntity?: string
+  /** 可选的影响范围摘要，展示在确认层正文中。 */
+  impact?: string
+  /** 可选的审计提示，展示在确认层正文中。 */
+  audit?: string
   /** 确认按钮文案。 */
   confirmText?: string
   /** 取消按钮文案。 */
   cancelText?: string
-  /** 保留设计稿的危险语义；当前关闭操作固定按危险样式呈现。 */
+  /** 追加到传送确认框根节点的类名，用于同步局部主题令牌。 */
+  customClass?: string
+  /** 确认层类型；danger 使用危险按钮，warning 使用普通确认按钮。 */
   type?: 'warning' | 'danger'
 }
 

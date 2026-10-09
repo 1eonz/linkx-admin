@@ -1,0 +1,140 @@
+{
+  "viewCount": 4,
+  "injectionCount": 4,
+  "views": [
+    {
+      "name": "desktop-light",
+      "width": 1440,
+      "theme": "light",
+      "p0InitiallyOpen": true,
+      "searchStatusPresent": true,
+      "checklistWidth": 688,
+      "checklistScrollWidth": 688,
+      "injectionSucceeded": true,
+      "overlayCount": 19,
+      "overlayScopes": {
+        "docs-content": 4,
+        "component": 14,
+        "page-level-banner": 1
+      },
+      "screenshot": "desktop-light.png"
+    },
+    {
+      "name": "desktop-dark",
+      "width": 1440,
+      "theme": "dark",
+      "p0InitiallyOpen": true,
+      "searchStatusPresent": true,
+      "checklistWidth": 688,
+      "checklistScrollWidth": 688,
+      "injectionSucceeded": true,
+      "overlayCount": 72,
+      "overlayScopes": {
+        "outside-target": 49,
+        "docs-content": 8,
+        "component": 14,
+        "page-level-banner": 1
+      },
+      "screenshot": "desktop-dark.png"
+    },
+    {
+      "name": "mobile-375-hud",
+      "width": 375,
+      "theme": "hud",
+      "p0InitiallyOpen": true,
+      "searchStatusPresent": true,
+      "checklistWidth": 327,
+      "checklistScrollWidth": 327,
+      "injectionSucceeded": true,
+      "overlayCount": 20,
+      "overlayScopes": {
+        "outside-target": 1,
+        "component": 13,
+        "docs-content": 5,
+        "page-level-banner": 1
+      },
+      "screenshot": "mobile-375-hud.png"
+    },
+    {
+      "name": "mobile-320-light",
+      "width": 320,
+      "theme": "light",
+      "p0InitiallyOpen": true,
+      "searchStatusPresent": true,
+      "checklistWidth": 272,
+      "checklistScrollWidth": 272,
+      "injectionSucceeded": true,
+      "overlayCount": 9,
+      "overlayScopes": {
+        "outside-target": 1,
+        "docs-content": 1,
+        "component": 6,
+        "page-level-banner": 1
+      },
+      "screenshot": "mobile-320-light.png"
+    }
+  ],
+  "interactions": {
+    "initial": {
+      "searchStatusConnectedBeforeSearch": true,
+      "searchStatusRoleBeforeSearch": "status",
+      "searchStatusAriaLiveBeforeSearch": "polite",
+      "copyStatusConnectedBeforeCopy": true,
+      "copyStatusRoleBeforeCopy": "status",
+      "copyStatusAriaLiveBeforeCopy": "polite",
+      "copyStatusInitiallyEmpty": true
+    },
+    "copySuccess": {
+      "message": "已复制：<LxIcon name=\"delete\" :size=\"20\" />",
+      "role": "status",
+      "ariaLive": "polite",
+      "className": "icon-copy-feedback",
+      "clipboardWrites": [
+        "<LxIcon name=\"delete\" :size=\"20\" />"
+      ],
+      "fallbackVisible": false,
+      "outsideNotifications": []
+    },
+    "copyFailure": {
+      "message": "复制失败，手动复制代码已就绪。",
+      "role": "status",
+      "ariaLive": "polite",
+      "className": "icon-copy-feedback is-error",
+      "fallbackVisible": true,
+      "fallbackValue": "<LxIcon name=\"edit\" :size=\"20\" />",
+      "fallbackFocused": true,
+      "fallbackSelected": true,
+      "outsideNotifications": []
+    },
+    "searchResult": {
+      "query": "dashboard",
+      "statusConnected": true,
+      "statusRole": "status",
+      "statusAriaLive": "polite",
+      "statusText": "",
+      "groupCount": 1,
+      "openGroupCount": 1,
+      "tileCount": 1,
+      "emptyVisual": {
+        "visible": false,
+        "ariaHidden": null,
+        "text": ""
+      }
+    },
+    "searchEmpty": {
+      "query": "__postfix_assessment_no_match__",
+      "statusConnected": true,
+      "statusRole": "status",
+      "statusAriaLive": "polite",
+      "statusText": "无匹配图标",
+      "groupCount": 0,
+      "openGroupCount": 0,
+      "tileCount": 0,
+      "emptyVisual": {
+        "visible": true,
+        "ariaHidden": "true",
+        "text": "无匹配图标"
+      }
+    }
+  }
+}

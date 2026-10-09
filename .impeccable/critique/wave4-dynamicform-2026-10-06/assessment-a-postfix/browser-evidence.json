@@ -1,0 +1,1434 @@
+{
+  "target": {
+    "source": "linkx-fe/src/components/LxDynamicForm/index.vue",
+    "url": "http://127.0.0.1:4181/components/lxdynamicform.html",
+    "critiqueSlug": "linkx-fe-src-components-lxdynamicform-index-vue"
+  },
+  "capture": {
+    "startedAt": "2026-10-06T05:07:32.000Z",
+    "browser": "Microsoft Edge via Playwright Chromium driver",
+    "browserPath": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+    "serverCommand": "pnpm dev --host 127.0.0.1 --port 4181 --strictPort",
+    "serverStopMethod": "Ctrl+C on the dedicated exec session after capture",
+    "contexts": [
+      {
+        "name": "desktop",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        }
+      },
+      {
+        "name": "mobile-375",
+        "viewport": {
+          "width": 375,
+          "height": 812
+        }
+      }
+    ],
+    "sourceSha256Before": {
+      "linkx-fe/src/components/LxDynamicForm/index.vue": "d5f5606af4a393828acf760acee288fdbc037c27ccc8278252ffa617bde08dde",
+      "linkx-fe/src/components/LxDynamicForm/demo/basic.vue": "b612b0c09c1258e1b1cb675e14c91b474931becb881e8b9b3899fb2618164768",
+      "linkx-fe/docs/components/lxdynamicform.md": "b4089aa12b2edb4174ad62ba2c68d609bfa205b6b45d2e1c6d5b1c5ded7095fd"
+    },
+    "browserVersion": "154.0.4258.53",
+    "sourceSha256After": {
+      "linkx-fe/src/components/LxDynamicForm/index.vue": "d5f5606af4a393828acf760acee288fdbc037c27ccc8278252ffa617bde08dde",
+      "linkx-fe/src/components/LxDynamicForm/demo/basic.vue": "b612b0c09c1258e1b1cb675e14c91b474931becb881e8b9b3899fb2618164768",
+      "linkx-fe/docs/components/lxdynamicform.md": "b4089aa12b2edb4174ad62ba2c68d609bfa205b6b45d2e1c6d5b1c5ded7095fd"
+    },
+    "completedAt": "2026-10-06T05:07:55.381Z",
+    "sourceHashesStable": true
+  },
+  "observations": {
+    "desktop": {
+      "title": "LxDynamicForm 动态表单 | LxUI",
+      "pageErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "initialPreviewOpen": false,
+      "initialFieldCount": 8,
+      "primaryFields": [
+        {
+          "label": "任务名称",
+          "controlClasses": [
+            "el-input el-input--default el-input--suffix lx-input lx-input--md"
+          ],
+          "controls": [
+            {
+              "tag": "input",
+              "type": "text",
+              "role": null,
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": "输入任务名称",
+              "text": ""
+            }
+          ],
+          "feedback": null
+        },
+        {
+          "label": "访问密码",
+          "controlClasses": [
+            "el-input el-input--default el-input--suffix lx-input lx-input--md lx-password-input"
+          ],
+          "controls": [
+            {
+              "tag": "input",
+              "type": "password",
+              "role": null,
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": "输入访问密码",
+              "text": ""
+            },
+            {
+              "tag": "button",
+              "type": "button",
+              "role": null,
+              "label": "显示密码",
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": ""
+            }
+          ],
+          "feedback": null
+        },
+        {
+          "label": "任务类型",
+          "controlClasses": [
+            "el-select el-select--default lx-select lx-select--md"
+          ],
+          "controls": [
+            {
+              "tag": "input",
+              "type": "text",
+              "role": "combobox",
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": ""
+            }
+          ],
+          "feedback": null
+        },
+        {
+          "label": "负责人",
+          "controlClasses": [
+            "el-select el-select--default lx-select lx-select--md"
+          ],
+          "controls": [
+            {
+              "tag": "input",
+              "type": "text",
+              "role": "combobox",
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": ""
+            }
+          ],
+          "feedback": null
+        },
+        {
+          "label": "启用任务",
+          "controlClasses": [
+            "el-switch is-checked lx-switch"
+          ],
+          "controls": [
+            {
+              "tag": "input",
+              "type": "checkbox",
+              "role": "switch",
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": ""
+            }
+          ],
+          "feedback": null
+        },
+        {
+          "label": "任务封面（单张）",
+          "controlClasses": [
+            "lx-upload"
+          ],
+          "controls": [
+            {
+              "tag": "button",
+              "type": "button",
+              "role": null,
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": "浏览本地文件"
+            },
+            {
+              "tag": "input",
+              "type": "file",
+              "role": null,
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": ""
+            }
+          ],
+          "feedback": null
+        },
+        {
+          "label": "现场图片（多张）",
+          "controlClasses": [
+            "lx-upload"
+          ],
+          "controls": [
+            {
+              "tag": "button",
+              "type": "button",
+              "role": null,
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": "浏览本地文件"
+            },
+            {
+              "tag": "input",
+              "type": "file",
+              "role": null,
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": ""
+            },
+            {
+              "tag": "button",
+              "type": "button",
+              "role": null,
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": "全部清空"
+            },
+            {
+              "tag": "button",
+              "type": "button",
+              "role": null,
+              "label": "移除 东门现场.jpg",
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": ""
+            },
+            {
+              "tag": "button",
+              "type": "button",
+              "role": null,
+              "label": "移除 西门现场.jpg",
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": ""
+            }
+          ],
+          "feedback": null
+        },
+        {
+          "label": "数字输入示例",
+          "controlClasses": [
+            "el-input-number el-input-number--default is-controls-right is-left lx-input-number"
+          ],
+          "controls": [
+            {
+              "tag": "input",
+              "type": "number",
+              "role": "spinbutton",
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": "",
+              "text": ""
+            }
+          ],
+          "feedback": null
+        }
+      ]
+    },
+    "validationError": {
+      "message": "请输入任务名称",
+      "focusedPlaceholder": "输入任务名称",
+      "invalid": "true",
+      "describedBy": "lx-form-item-error-176"
+    },
+    "validationSuccess": "提交校验\n重置\n表单已校验：夜间巡防任务",
+    "schemaTypes": [
+      {
+        "label": "文本输入示例",
+        "value": "input",
+        "controlClasses": [
+          "el-input el-input--default lx-input lx-input--md"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": "",
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "密码输入示例",
+        "value": "password",
+        "controlClasses": [
+          "el-input el-input--default el-input--suffix lx-input lx-input--md lx-password-input"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "password",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": "",
+            "text": ""
+          },
+          {
+            "tag": "button",
+            "type": "button",
+            "role": null,
+            "label": "显示密码",
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "多行文本示例",
+        "value": "textarea",
+        "controlClasses": [
+          "lx-textarea"
+        ],
+        "controls": [
+          {
+            "tag": "textarea",
+            "type": null,
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": "",
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "数字输入示例",
+        "value": "number",
+        "controlClasses": [
+          "el-input-number el-input-number--default is-controls-right is-left lx-input-number"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "number",
+            "role": "spinbutton",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": "",
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "下拉选择示例",
+        "value": "select",
+        "controlClasses": [
+          "el-select el-select--default lx-select lx-select--md"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "role": "combobox",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "远程选择示例",
+        "value": "remote-select",
+        "controlClasses": [
+          "el-select el-select--default lx-select lx-select--md"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "role": "combobox",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "树形选择示例",
+        "value": "tree-select",
+        "controlClasses": [
+          "el-select el-select--default lx-tree-select lx-tree-select--md lx-dynamic-tree-select"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "role": "combobox",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "日期选择示例",
+        "value": "date",
+        "controlClasses": [
+          "el-input el-input--default el-input--prefix el-input--suffix el-date-editor el-date-editor--date lx-date-picker lx-date-picker--md lx-date-picker--instance-464 el-tooltip__trigger"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "role": "combobox",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": "选择任务日期",
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "日期范围示例",
+        "value": "daterange",
+        "controlClasses": [
+          "el-date-editor el-date-editor--daterange el-input__wrapper el-range-editor el-range-editor--default lx-date-picker lx-date-picker--md lx-date-picker--instance-535 el-tooltip__trigger"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": null,
+            "role": "combobox",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": "开始日期",
+            "text": ""
+          },
+          {
+            "tag": "input",
+            "type": null,
+            "role": "combobox",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": "结束日期",
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "开关示例",
+        "value": "switch",
+        "controlClasses": [
+          "el-switch is-checked lx-switch"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "checkbox",
+            "role": "switch",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "单选组示例",
+        "value": "radio",
+        "controlClasses": [
+          "el-radio-group lx-radio-group"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "radio",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": ""
+          },
+          {
+            "tag": "input",
+            "type": "radio",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "多选组示例",
+        "value": "checkbox",
+        "controlClasses": [
+          "el-checkbox-group lx-checkbox-group"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "checkbox",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": ""
+          },
+          {
+            "tag": "input",
+            "type": "checkbox",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "文件上传示例",
+        "value": "upload",
+        "controlClasses": [
+          "lx-upload"
+        ],
+        "controls": [
+          {
+            "tag": "button",
+            "type": "button",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": "浏览本地文件"
+          },
+          {
+            "tag": "input",
+            "type": "file",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": ""
+          }
+        ],
+        "feedback": null
+      },
+      {
+        "label": "自定义插槽示例",
+        "value": "slot",
+        "controlClasses": [
+          "el-input el-input--default lx-input lx-input--md"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": "输入自定义字段内容",
+            "text": ""
+          }
+        ],
+        "feedback": null
+      }
+    ],
+    "remotePreviewFailure": {
+      "feedback": {
+        "label": "远程选择示例",
+        "controlClasses": [
+          "el-select el-select--default lx-select lx-select--md"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "role": "combobox",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65",
+            "placeholder": null,
+            "text": ""
+          },
+          {
+            "tag": "button",
+            "type": "button",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": "重试"
+          }
+        ],
+        "feedback": {
+          "text": "候选人员读取失败重试",
+          "role": "alert",
+          "live": "polite",
+          "id": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65"
+        }
+      },
+      "controlDescribedBy": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65",
+      "feedbackId": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65",
+      "retryVisible": true,
+      "optionsVisible": 0
+    },
+    "remotePreviewLoading": {
+      "feedback": {
+        "label": "远程选择示例",
+        "controlClasses": [
+          "el-select el-select--default lx-select lx-select--md"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "role": "combobox",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65",
+            "placeholder": null,
+            "text": ""
+          },
+          {
+            "tag": "button",
+            "type": "button",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": "重试"
+          }
+        ],
+        "feedback": {
+          "text": "候选人员读取失败重试",
+          "role": "alert",
+          "live": "polite",
+          "id": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65"
+        }
+      },
+      "loadingFeedbackVisible": false,
+      "successModePressed": "false",
+      "selectLoadingTextVisible": false
+    },
+    "remotePreviewSettled": {
+      "field": {
+        "label": "远程选择示例",
+        "controlClasses": [
+          "el-select el-select--default lx-select lx-select--md"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "role": "combobox",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65",
+            "placeholder": null,
+            "text": ""
+          },
+          {
+            "tag": "button",
+            "type": "button",
+            "role": null,
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": "重试"
+          }
+        ],
+        "feedback": {
+          "text": "候选人员读取失败重试",
+          "role": "alert",
+          "live": "polite",
+          "id": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65"
+        }
+      },
+      "successModePressed": "false"
+    },
+    "remotePreviewRetryRecovered": false,
+    "remotePreviewRecovery": {
+      "feedbackVisible": false,
+      "options": [
+        "李警官 · 指挥中心",
+        "陈警官 · 一大队",
+        "周警官 · 二大队"
+      ],
+      "selectedValueText": "远程选择示例"
+    },
+    "remotePreviewEmpty": {
+      "label": "远程选择示例",
+      "controlClasses": [
+        "el-select el-select--default lx-select lx-select--md"
+      ],
+      "controls": [
+        {
+          "tag": "input",
+          "type": "text",
+          "role": "combobox",
+          "label": null,
+          "labelledBy": null,
+          "describedBy": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65",
+          "placeholder": null,
+          "text": ""
+        }
+      ],
+      "feedback": {
+        "text": "暂无候选人员",
+        "role": "status",
+        "live": "polite",
+        "id": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65"
+      }
+    },
+    "mobile": {
+      "pageErrors": [],
+      "remotePreviewRetry": {
+        "field": {
+          "label": "远程选择示例",
+          "controlClasses": [
+            "el-select el-select--default lx-select lx-select--md"
+          ],
+          "controls": [
+            {
+              "tag": "input",
+              "type": "text",
+              "role": "combobox",
+              "label": null,
+              "labelledBy": null,
+              "describedBy": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65",
+              "placeholder": null,
+              "text": ""
+            },
+            {
+              "tag": "button",
+              "type": "button",
+              "role": null,
+              "label": null,
+              "labelledBy": null,
+              "describedBy": null,
+              "placeholder": null,
+              "text": "重试"
+            }
+          ],
+          "feedback": {
+            "text": "候选人员读取失败重试",
+            "role": "alert",
+            "live": "polite",
+            "id": "lx-dynamic-form-326-feedback-70-72-65-76-69-65-77-56-61-6c-75-65"
+          }
+        },
+        "successModePressed": "false"
+      },
+      "remotePreviewRetryRecovered": false,
+      "remoteFeedback": {
+        "label": "远程选择示例",
+        "controlClasses": [
+          "el-select el-select--default lx-select lx-select--md"
+        ],
+        "controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "role": "combobox",
+            "label": null,
+            "labelledBy": null,
+            "describedBy": null,
+            "placeholder": null,
+            "text": ""
+          }
+        ],
+        "feedback": null
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "name": "desktop-default-collapsed",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-default-collapsed-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-default-collapsed-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "clientWidth": 1440,
+          "scrollWidth": 1440,
+          "scrollHeight": 6940,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 384,
+          "y": -913,
+          "width": 688,
+          "height": 6545
+        },
+        "demo": {
+          "x": 384,
+          "y": 7,
+          "width": 688,
+          "height": 986
+        },
+        "preview": {
+          "open": false,
+          "rect": {
+            "x": 397,
+            "y": 842,
+            "width": 662,
+            "height": 85
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 2
+      }
+    },
+    {
+      "name": "desktop-validation-error",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-validation-error-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-validation-error-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "clientWidth": 1440,
+          "scrollWidth": 1440,
+          "scrollHeight": 6940,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 384,
+          "y": -906,
+          "width": 688,
+          "height": 6545
+        },
+        "demo": {
+          "x": 384,
+          "y": 14,
+          "width": 688,
+          "height": 986
+        },
+        "preview": {
+          "open": false,
+          "rect": {
+            "x": 397,
+            "y": 849,
+            "width": 662,
+            "height": 85
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 2
+      }
+    },
+    {
+      "name": "desktop-validation-success",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-validation-success-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-validation-success-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "clientWidth": 1440,
+          "scrollWidth": 1440,
+          "scrollHeight": 6940,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 384,
+          "y": -906,
+          "width": 688,
+          "height": 6545
+        },
+        "demo": {
+          "x": 384,
+          "y": 14,
+          "width": 688,
+          "height": 986
+        },
+        "preview": {
+          "open": false,
+          "rect": {
+            "x": 397,
+            "y": 849,
+            "width": 662,
+            "height": 85
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 2
+      }
+    },
+    {
+      "name": "desktop-preview-number",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-preview-number-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-preview-number-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "clientWidth": 1440,
+          "scrollWidth": 1440,
+          "scrollHeight": 7070,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 384,
+          "y": -920,
+          "width": 688,
+          "height": 6675
+        },
+        "demo": {
+          "x": 384,
+          "y": 0,
+          "width": 688,
+          "height": 1116
+        },
+        "preview": {
+          "open": true,
+          "rect": {
+            "x": 397,
+            "y": 835,
+            "width": 662,
+            "height": 215
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 2
+      }
+    },
+    {
+      "name": "desktop-schema-input",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-input.png"
+    },
+    {
+      "name": "desktop-schema-password",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-password.png"
+    },
+    {
+      "name": "desktop-schema-textarea",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-textarea.png"
+    },
+    {
+      "name": "desktop-schema-number",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-number.png"
+    },
+    {
+      "name": "desktop-schema-select",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-select.png"
+    },
+    {
+      "name": "desktop-schema-remote-select",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-remote-select.png"
+    },
+    {
+      "name": "desktop-schema-tree-select",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-tree-select.png"
+    },
+    {
+      "name": "desktop-schema-date",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-date.png"
+    },
+    {
+      "name": "desktop-schema-daterange",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-daterange.png"
+    },
+    {
+      "name": "desktop-schema-switch",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-switch.png"
+    },
+    {
+      "name": "desktop-schema-radio",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-radio.png"
+    },
+    {
+      "name": "desktop-schema-checkbox",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-checkbox.png"
+    },
+    {
+      "name": "desktop-schema-upload",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-upload.png"
+    },
+    {
+      "name": "desktop-schema-slot",
+      "panelPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-schema-slot.png"
+    },
+    {
+      "name": "desktop-remote-preview-error",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-remote-preview-error-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-remote-preview-error-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "clientWidth": 1440,
+          "scrollWidth": 1440,
+          "scrollHeight": 7287,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 384,
+          "y": -1113,
+          "width": 688,
+          "height": 6892
+        },
+        "demo": {
+          "x": 384,
+          "y": -193,
+          "width": 688,
+          "height": 1333
+        },
+        "preview": {
+          "open": true,
+          "rect": {
+            "x": 397,
+            "y": 823,
+            "width": 662,
+            "height": 251
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 2
+      }
+    },
+    {
+      "name": "desktop-remote-preview-retry-noop",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-remote-preview-retry-noop-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-remote-preview-retry-noop-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "clientWidth": 1440,
+          "scrollWidth": 1440,
+          "scrollHeight": 7287,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 384,
+          "y": -1253,
+          "width": 688,
+          "height": 6892
+        },
+        "demo": {
+          "x": 384,
+          "y": -333,
+          "width": 688,
+          "height": 1333
+        },
+        "preview": {
+          "open": true,
+          "rect": {
+            "x": 397,
+            "y": 683,
+            "width": 662,
+            "height": 251
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 2
+      }
+    },
+    {
+      "name": "desktop-remote-preview-recovered",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-remote-preview-recovered-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-remote-preview-recovered-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "clientWidth": 1440,
+          "scrollWidth": 1440,
+          "scrollHeight": 7215,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 384,
+          "y": -1114,
+          "width": 688,
+          "height": 6820
+        },
+        "demo": {
+          "x": 384,
+          "y": -194,
+          "width": 688,
+          "height": 1261
+        },
+        "preview": {
+          "open": true,
+          "rect": {
+            "x": 397,
+            "y": 786,
+            "width": 662,
+            "height": 215
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 2
+      }
+    },
+    {
+      "name": "desktop-remote-preview-empty",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-remote-preview-empty-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\desktop-remote-preview-empty-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "document": {
+          "clientWidth": 1440,
+          "scrollWidth": 1440,
+          "scrollHeight": 7259,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 384,
+          "y": -1113,
+          "width": 688,
+          "height": 6864
+        },
+        "demo": {
+          "x": 384,
+          "y": -193,
+          "width": 688,
+          "height": 1305
+        },
+        "preview": {
+          "open": true,
+          "rect": {
+            "x": 397,
+            "y": 809,
+            "width": 662,
+            "height": 237
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 2
+      }
+    },
+    {
+      "name": "mobile-375-default-collapsed",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-default-collapsed-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-default-collapsed-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "clientWidth": 375,
+          "scrollWidth": 375,
+          "scrollHeight": 9061,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 24,
+          "y": -1240,
+          "width": 327,
+          "height": 8592
+        },
+        "demo": {
+          "x": 24,
+          "y": -208,
+          "width": 327,
+          "height": 1228
+        },
+        "preview": {
+          "open": false,
+          "rect": {
+            "x": 37,
+            "y": 849,
+            "width": 301,
+            "height": 93
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 1
+      }
+    },
+    {
+      "name": "mobile-375-preview-number",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-preview-number-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-preview-number-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "clientWidth": 375,
+          "scrollWidth": 375,
+          "scrollHeight": 9203,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 24,
+          "y": -1590,
+          "width": 327,
+          "height": 8734
+        },
+        "demo": {
+          "x": 24,
+          "y": -558,
+          "width": 327,
+          "height": 1370
+        },
+        "preview": {
+          "open": true,
+          "rect": {
+            "x": 37,
+            "y": 499,
+            "width": 301,
+            "height": 235
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 1
+      }
+    },
+    {
+      "name": "mobile-375-schema-daterange",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-schema-daterange-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-schema-daterange-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "clientWidth": 375,
+          "scrollWidth": 375,
+          "scrollHeight": 9215,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 24,
+          "y": -1590,
+          "width": 327,
+          "height": 8746
+        },
+        "demo": {
+          "x": 24,
+          "y": -558,
+          "width": 327,
+          "height": 1382
+        },
+        "preview": {
+          "open": true,
+          "rect": {
+            "x": 37,
+            "y": 499,
+            "width": 301,
+            "height": 247
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 1
+      }
+    },
+    {
+      "name": "mobile-375-remote-preview-error",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-remote-preview-error-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-remote-preview-error-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "clientWidth": 375,
+          "scrollWidth": 375,
+          "scrollHeight": 9608,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 24,
+          "y": -2218,
+          "width": 327,
+          "height": 9139
+        },
+        "demo": {
+          "x": 24,
+          "y": -1186,
+          "width": 327,
+          "height": 1775
+        },
+        "preview": {
+          "open": true,
+          "rect": {
+            "x": 37,
+            "y": 216,
+            "width": 301,
+            "height": 295
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 1
+      }
+    },
+    {
+      "name": "mobile-375-remote-preview-retry-noop",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-remote-preview-retry-noop-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-remote-preview-retry-noop-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "clientWidth": 375,
+          "scrollWidth": 375,
+          "scrollHeight": 9608,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 24,
+          "y": -2218,
+          "width": 327,
+          "height": 9139
+        },
+        "demo": {
+          "x": 24,
+          "y": -1186,
+          "width": 327,
+          "height": 1775
+        },
+        "preview": {
+          "open": true,
+          "rect": {
+            "x": 37,
+            "y": 216,
+            "width": 301,
+            "height": 295
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 1
+      }
+    },
+    {
+      "name": "mobile-375-remote-preview-recovered",
+      "pagePath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-remote-preview-recovered-page.png",
+      "demoPath": "F:\\work\\linkx-admin\\.impeccable\\critique\\wave4-dynamicform-2026-10-06\\assessment-a-postfix\\mobile-375-remote-preview-recovered-demo.png",
+      "measurements": {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "document": {
+          "clientWidth": 375,
+          "scrollWidth": 375,
+          "scrollHeight": 9544,
+          "horizontalOverflow": false
+        },
+        "docsContent": {
+          "x": 24,
+          "y": -2136,
+          "width": 327,
+          "height": 9075
+        },
+        "demo": {
+          "x": 24,
+          "y": -1104,
+          "width": 327,
+          "height": 1711
+        },
+        "preview": {
+          "open": true,
+          "rect": {
+            "x": 37,
+            "y": 282,
+            "width": 301,
+            "height": 247
+          }
+        },
+        "visibleFormFieldCount": 8,
+        "formGridColumns": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+No screenshots were captured. The supplied E2E frozen SHA256 was 65 characters and did not match the target's 64-character SHA256, so the required freeze gate stopped browser inspection before a new browser context or overlay was created.

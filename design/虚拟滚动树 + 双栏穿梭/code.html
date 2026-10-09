@@ -702,18 +702,19 @@ export interface LxVirtualTreeProps&lt;T = any&gt; {
 <div class="rounded-lg border border-outline-variant bg-[#1e2430] p-4 text-[#e6edf4] font-mono text-xs overflow-x-auto shadow-sm">
 <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#37485d]">
 <span class="font-bold text-[#409eff]">interface LxTransferPanelProps</span>
-<span class="text-[10px] text-[#80dd52]">v2.4.0 Export</span>
+<span class="text-[10px] text-[#80dd52]">设计原型快照 · API 以中文组件文档为准</span>
 </div>
 <pre><code><span class="text-[#707784]">// LxTransferPanel 权限双栏穿梭研发契约</span>
 export interface LxTransferPanelProps {
-  <span class="text-[#409eff]">treeData</span>: Array&lt;Record&lt;string, any&gt;&gt;;  <span class="text-[#707784]">// 待选树形数据源</span>
-  <span class="text-[#409eff]">modelValue</span>: (string | number)[];      <span class="text-[#707784]">// 已选权限节点 key 列表</span>
-  <span class="text-[#409eff]">titles</span>?: [string, string];            <span class="text-[#707784]">// 默认 ['待选资源', '已授权节点']</span>
-  <span class="text-[#409eff]">panelHeight</span>?: number;                 <span class="text-[#707784]">// 默认 380px，最大 400px</span>
-  <span class="text-[#409eff]">maxCount</span>?: number;                    <span class="text-[#707784]">// 授权节点上限控制</span>
-  <span class="text-[#409eff]">inheritChild</span>?: boolean;               <span class="text-[#707784]">// 穿梭时保留下级授权开关</span>
-  <span class="text-[#409eff]">onNodeChange</span>?: (selected: any[]) =&gt; void;
-  <span class="text-[#409eff]">onClearAll</span>?: () =&gt; void;              <span class="text-[#707784]">// 右侧一键清空事件</span>
+  <span class="text-[#409eff]">treeData</span>: LxTransferPanelNode[];       <span class="text-[#707784]">// 左侧待选树</span>
+  <span class="text-[#409eff]">modelValue</span>?: (string | number)[];    <span class="text-[#707784]">// 受控已选键，默认空数组</span>
+  <span class="text-[#409eff]">titles</span>?: [string, string];            <span class="text-[#707784]">// 左右面板标题</span>
+  <span class="text-[#409eff]">panelHeight</span>?: number;                 <span class="text-[#707784]">// 默认 380px，最小值 240px</span>
+  <span class="text-[#409eff]">maxCount</span>?: number;                    <span class="text-[#707784]">// 已选键数量上限</span>
+  <span class="text-[#409eff]">inheritChild</span>?: boolean;               <span class="text-[#707784]">// 下级继承开关，默认开启</span>
+  <span class="text-[#409eff]">'update:modelValue'</span>(keys): void;      <span class="text-[#707784]">// v-model 更新</span>
+  <span class="text-[#409eff]">change</span>(keys, nodes): void;             <span class="text-[#707784]">// 已接受的选择变化</span>
+  <span class="text-[#409eff]">'clear-all'</span>(): void;                   <span class="text-[#707784]">// 清空后通知，不能取消</span>
 }</code></pre>
 </div>
 </div>

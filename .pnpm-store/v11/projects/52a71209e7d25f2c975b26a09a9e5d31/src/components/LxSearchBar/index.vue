@@ -3,7 +3,7 @@
  * LxSearchBar — 配置驱动的列表检索面板。
  * 请求、分页复位和字段联动均由宿主通过事件与 computed fields 控制。
  */
-import { computed, ref, watch } from 'vue'
+import { computed, ref, useSlots, watch } from 'vue'
 import LxButton from '../LxButton/index.vue'
 import LxCascader from '../LxCascader/index.vue'
 import LxDatePicker from '../LxDatePicker/index.vue'
@@ -28,6 +28,7 @@ const props = withDefaults(defineProps<LxSearchBarProps>(), {
   collapsed: true,
   searchText: '查询',
   resetText: '重置',
+  statusText: '等待查询',
   size: 'default',
 })
 
@@ -37,6 +38,8 @@ const emit = defineEmits<{
   reset: []
   'update:collapsed': [value: boolean]
 }>()
+
+const slots = useSlots()
 
 defineSlots<{
   /**
@@ -75,6 +78,15 @@ const controlSize = computed<'sm' | 'md' | 'lg'>(() => {
 })
 const visibleFields = computed(() =>
   isCollapsed.value ? props.fields.slice(0, 4) : props.fields,
+)
+const hiddenFieldCount = computed(() =>
+  Math.max(0, props.fields.length - visibleFields.value.length),
+)
+const inlineActions = computed(
+  () => props.fields.length === 4 && !canCollapse.value && !slots.filters,
+)
+const defaultStatusText = computed(() =>
+  props.loading ? '查询中' : props.statusText,
 )
 
 function defaults(): Record<string, unknown> {
@@ -217,10 +229,15 @@ function toggleCollapsed() {
     class="lx-search-bar"
     :class="`lx-search-bar--${size}`"
     v-bind="$attrs"
+    role="search"
     aria-label="检索条件"
+    :aria-busy="loading ? 'true' : undefined"
     @keyup.esc="reset"
   >
-    <div class="lx-search-bar__grid">
+    <div
+      class="lx-search-bar__grid"
+      :class="{ 'lx-search-bar__grid--inline-actions': inlineActions }"
+    >
       <template v-for="field in visibleFields" :key="field.key">
         <div
           class="lx-search-bar__field"
@@ -316,21 +333,65 @@ function toggleCollapsed() {
       <div v-if="$slots.filters" class="lx-search-bar__slot-fields">
         <slot name="filters" />
       </div>
+
+      <div
+        v-if="inlineActions"
+        class="lx-search-bar__actions lx-search-bar__actions--inline"
+      >
+        <slot
+          name="controls"
+          :search="search"
+          :reset="reset"
+          :can-reset="canReset"
+          :loading="loading"
+        >
+          <slot name="actions" />
+          <LxButton
+            type="primary"
+            :loading="loading"
+            :size="controlSize"
+            icon="search"
+            @click="search"
+          >
+            {{ searchText }}
+          </LxButton>
+          <LxButton
+            :disabled="loading || !canReset"
+            :size="controlSize"
+            @click="reset"
+          >
+            {{ resetText }}
+          </LxButton>
+        </slot>
+      </div>
     </div>
 
-    <div v-if="$slots.meta" class="lx-search-bar__meta">
-      <slot name="meta" :can-reset="canReset" :loading="loading" />
+    <div v-if="$slots.meta || defaultStatusText" class="lx-search-bar__meta">
+      <slot
+        v-if="$slots.meta"
+        name="meta"
+        :can-reset="canReset"
+        :loading="loading"
+      />
+      <span v-else role="status" aria-live="polite">{{
+        defaultStatusText
+      }}</span>
     </div>
 
-    <footer class="lx-search-bar__footer">
+    <footer v-if="!inlineActions" class="lx-search-bar__footer">
       <button
         v-if="canCollapse"
         class="lx-search-bar__collapse"
         type="button"
         :aria-expanded="!isCollapsed"
+        :aria-label="
+          isCollapsed
+            ? `展开检索条件，隐藏 ${hiddenFieldCount} 项`
+            : '收起检索条件'
+        "
         @click="toggleCollapsed"
       >
-        {{ isCollapsed ? '展开' : '收起' }}
+        {{ isCollapsed ? `展开（隐藏 ${hiddenFieldCount} 项）` : '收起' }}
         <LxIcon
           name="chevron-down"
           :size="14"
@@ -388,6 +449,14 @@ function toggleCollapsed() {
   gap: var(--lx-space-sm) var(--lx-space-lg);
 }
 
+.lx-search-bar__grid--inline-actions {
+  grid-template-columns: repeat(24, minmax(0, 1fr));
+}
+
+.lx-search-bar__grid--inline-actions .lx-search-bar__field {
+  grid-column: span 5;
+}
+
 .lx-search-bar__field {
   display: grid;
   min-width: 0;
@@ -442,6 +511,13 @@ function toggleCollapsed() {
   margin-inline-start: auto;
 }
 
+.lx-search-bar__actions--inline {
+  grid-column: span 4;
+  align-self: end;
+  min-width: 0;
+  margin-inline-start: 0;
+}
+
 .lx-search-bar__collapse {
   display: inline-flex;
   align-items: center;
@@ -491,6 +567,11 @@ function toggleCollapsed() {
     grid-column: 1 / -1;
   }
 
+  .lx-search-bar__grid--inline-actions .lx-search-bar__field,
+  .lx-search-bar__actions--inline {
+    grid-column: 1 / -1;
+  }
+
   .lx-search-bar__footer {
     align-items: flex-start;
     flex-direction: column;
@@ -498,6 +579,17 @@ function toggleCollapsed() {
 
   .lx-search-bar__actions {
     width: 100%;
+  }
+
+  .lx-search-bar__collapse,
+  .lx-search-bar__actions :deep(button) {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-search-bar__collapse .lx-icon {
+    transition: none;
   }
 }
 </style>

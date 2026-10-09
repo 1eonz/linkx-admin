@@ -1,0 +1,487 @@
+{
+  "target": [
+    "http://127.0.0.1:4174/components/lxtransferpanel",
+    "http://127.0.0.1:4174/components/lxvirtualtree"
+  ],
+  "browser": "独立 Playwright Chrome 实例与全新 browser context",
+  "checks": [
+    {
+      "name": "LxTransferPanel 页面加载",
+      "status": 200,
+      "title": "LxTransferPanel 双栏穿梭 | LxUI",
+      "pageErrors": []
+    },
+    {
+      "name": "LxVirtualTree 页面加载",
+      "status": 200,
+      "title": "LxVirtualTree 虚拟树 | LxUI",
+      "pageErrors": []
+    },
+    {
+      "name": "TransferPanel 桌面浅色",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "bodyScrollWidth": 1440
+      },
+      "component": {
+        "left": 336,
+        "right": 1216,
+        "width": 880,
+        "height": 380,
+        "clientWidth": 880,
+        "scrollWidth": 880
+      },
+      "transferPanels": [
+        {
+          "width": 357,
+          "hidden": false
+        },
+        {
+          "width": 357,
+          "hidden": true
+        }
+      ],
+      "treeRowHeight": 32,
+      "treeRowKey": "org-01",
+      "rootClasses": "",
+      "hudClassInDemo": false,
+      "focus": {
+        "tag": "BODY",
+        "role": null,
+        "treeKey": null,
+        "ariaLabel": null
+      }
+    },
+    {
+      "name": "VirtualTree 桌面浅色",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "bodyScrollWidth": 1440
+      },
+      "component": {
+        "left": 384,
+        "right": 1072,
+        "width": 688,
+        "height": 384,
+        "clientWidth": 688,
+        "scrollWidth": 688
+      },
+      "transferPanels": [],
+      "treeRowHeight": 32,
+      "treeRowKey": "region-1",
+      "rootClasses": "",
+      "hudClassInDemo": false,
+      "focus": {
+        "tag": "BODY",
+        "role": null,
+        "treeKey": null,
+        "ariaLabel": null
+      }
+    },
+    {
+      "name": "TransferPanel 桌面 HUD",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "bodyScrollWidth": 1440
+      },
+      "component": {
+        "left": 336,
+        "right": 1216,
+        "width": 880,
+        "height": 380,
+        "clientWidth": 880,
+        "scrollWidth": 880
+      },
+      "transferPanels": [
+        {
+          "width": 357,
+          "hidden": false
+        },
+        {
+          "width": 357,
+          "hidden": true
+        }
+      ],
+      "treeRowHeight": 32,
+      "treeRowKey": "org-01",
+      "rootClasses": "dark lx-theme-hud",
+      "hudClassInDemo": true,
+      "focus": {
+        "tag": "INPUT",
+        "role": null,
+        "treeKey": null,
+        "ariaLabel": null
+      }
+    },
+    {
+      "name": "VirtualTree 桌面 HUD",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "document": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "bodyScrollWidth": 1440
+      },
+      "component": {
+        "left": 384,
+        "right": 1072,
+        "width": 688,
+        "height": 384,
+        "clientWidth": 688,
+        "scrollWidth": 688
+      },
+      "transferPanels": [],
+      "treeRowHeight": 32,
+      "treeRowKey": "region-1",
+      "rootClasses": "",
+      "hudClassInDemo": true,
+      "focus": {
+        "tag": "INPUT",
+        "role": null,
+        "treeKey": null,
+        "ariaLabel": null
+      }
+    },
+    {
+      "name": "设计稿页面渲染",
+      "status": 200,
+      "title": "LxVirtualTree & LxTransferPanel 树组件与数据权限穿梭框规范标本",
+      "viewport": {
+        "width": 1440,
+        "documentWidth": 1440
+      }
+    },
+    {
+      "name": "TransferPanel 空结果",
+      "emptyTreeText": "暂无数据",
+      "selectedItems": 4,
+      "status": "宿主返回了空树数据"
+    },
+    {
+      "name": "TransferPanel 加载中",
+      "busy": "true",
+      "message": "组织权限数据加载中……"
+    },
+    {
+      "name": "TransferPanel 加载失败",
+      "alert": "组织权限数据加载失败，当前选择仍然保留。\n重试",
+      "retryButton": 1,
+      "busy": null
+    },
+    {
+      "name": "TransferPanel 缺少继承说明",
+      "checkboxDisabled": true,
+      "description": "尚未配置经确认的具体继承范围说明，当前不可更改此选项。"
+    },
+    {
+      "name": "VirtualTree 空结果",
+      "emptyText": "暂无数据",
+      "rowCount": 0
+    },
+    {
+      "name": "VirtualTree 加载中",
+      "messageRole": "status",
+      "message": "组织数据加载中……",
+      "treeUnmounted": true
+    },
+    {
+      "name": "VirtualTree 加载失败",
+      "alert": "组织数据加载失败。\n重试",
+      "retryButton": 1
+    },
+    {
+      "name": "VirtualTree 减少动效",
+      "mediaMatches": true,
+      "rowTransition": "1e-05s",
+      "rowAnimation": "1e-05s"
+    },
+    {
+      "name": "TransferPanel 减少动效",
+      "mediaMatches": true,
+      "rowTransition": "1e-05s",
+      "rowAnimation": "1e-05s"
+    },
+    {
+      "name": "TransferPanel 375px",
+      "viewport": {
+        "width": 375,
+        "height": 850
+      },
+      "document": {
+        "clientWidth": 375,
+        "scrollWidth": 375,
+        "bodyScrollWidth": 375
+      },
+      "component": {
+        "left": 24,
+        "right": 351,
+        "width": 327,
+        "height": 518,
+        "clientWidth": 327,
+        "scrollWidth": 327
+      },
+      "transferPanels": [
+        {
+          "width": 327,
+          "hidden": false
+        },
+        {
+          "width": 0,
+          "hidden": true
+        }
+      ],
+      "treeRowHeight": 64,
+      "treeRowKey": "org-01",
+      "rootClasses": "",
+      "hudClassInDemo": false,
+      "focus": {
+        "tag": "BUTTON",
+        "role": null,
+        "treeKey": null,
+        "ariaLabel": null
+      }
+    },
+    {
+      "name": "TransferPanel 375px 内容溢出",
+      "horizontalOverflow": false,
+      "activePanelScrollWidth": 0,
+      "treeRowHeight": 64
+    },
+    {
+      "name": "TransferPanel 已选列表 375px",
+      "panelScrollWidth": 0,
+      "listScrollWidth": 0,
+      "itemCount": 4,
+      "longItemVisible": 1
+    },
+    {
+      "name": "TransferPanel 320px",
+      "viewport": {
+        "width": 320,
+        "height": 850
+      },
+      "document": {
+        "clientWidth": 320,
+        "scrollWidth": 320,
+        "bodyScrollWidth": 320
+      },
+      "component": {
+        "left": 24,
+        "right": 296,
+        "width": 272,
+        "height": 518,
+        "clientWidth": 272,
+        "scrollWidth": 272
+      },
+      "transferPanels": [
+        {
+          "width": 272,
+          "hidden": false
+        },
+        {
+          "width": 0,
+          "hidden": true
+        }
+      ],
+      "treeRowHeight": 80,
+      "treeRowKey": "org-01",
+      "rootClasses": "",
+      "hudClassInDemo": false,
+      "focus": {
+        "tag": "BUTTON",
+        "role": null,
+        "treeKey": null,
+        "ariaLabel": "显示组织与数据权限树（待选），2 项待选"
+      }
+    },
+    {
+      "name": "TransferPanel 320px 内容溢出",
+      "horizontalOverflow": false,
+      "activePanelScrollWidth": 0,
+      "treeRowHeight": 80
+    },
+    {
+      "name": "TransferPanel 已选列表 320px",
+      "panelScrollWidth": 0,
+      "listScrollWidth": 0,
+      "itemCount": 4,
+      "longItemVisible": 1
+    },
+    {
+      "name": "TransferPanel 跨断点后方向键",
+      "beforeResizeFocus": {
+        "role": "treeitem",
+        "key": "unit-01",
+        "rowHeight": 80
+      },
+      "afterResizeFocus": {
+        "viewportWidth": 320,
+        "role": "treeitem",
+        "key": "unit-01",
+        "activeRowHeight": 80,
+        "firstRowHeight": 80,
+        "rowStyleHeight": "80px"
+      },
+      "afterArrowFocus": {
+        "role": "treeitem",
+        "key": "unit-02",
+        "rowHeight": 80
+      },
+      "rowHeightSettled": true,
+      "focusRestoredToTreeitem": true,
+      "arrowMoved": true
+    },
+    {
+      "name": "VirtualTree 375px",
+      "viewport": {
+        "width": 375,
+        "height": 850
+      },
+      "document": {
+        "clientWidth": 375,
+        "scrollWidth": 375,
+        "bodyScrollWidth": 375
+      },
+      "component": {
+        "left": 24,
+        "right": 351,
+        "width": 327,
+        "height": 412,
+        "clientWidth": 327,
+        "scrollWidth": 327
+      },
+      "transferPanels": [],
+      "treeRowHeight": 32,
+      "treeRowKey": "region-1",
+      "rootClasses": "",
+      "hudClassInDemo": false,
+      "focus": {
+        "tag": "BUTTON",
+        "role": null,
+        "treeKey": null,
+        "ariaLabel": null
+      }
+    },
+    {
+      "name": "VirtualTree 375px 内容溢出",
+      "horizontalOverflow": false,
+      "componentOverflow": false,
+      "treeRowHeight": 32
+    },
+    {
+      "name": "VirtualTree 320px",
+      "viewport": {
+        "width": 320,
+        "height": 850
+      },
+      "document": {
+        "clientWidth": 320,
+        "scrollWidth": 320,
+        "bodyScrollWidth": 320
+      },
+      "component": {
+        "left": 24,
+        "right": 296,
+        "width": 272,
+        "height": 412,
+        "clientWidth": 272,
+        "scrollWidth": 272
+      },
+      "transferPanels": [],
+      "treeRowHeight": 32,
+      "treeRowKey": "region-1",
+      "rootClasses": "",
+      "hudClassInDemo": false,
+      "focus": {
+        "tag": "BUTTON",
+        "role": null,
+        "treeKey": null,
+        "ariaLabel": null
+      }
+    },
+    {
+      "name": "VirtualTree 320px 内容溢出",
+      "horizontalOverflow": false,
+      "componentOverflow": false,
+      "treeRowHeight": 32
+    },
+    {
+      "name": "VirtualTree 方向键焦点",
+      "activeRole": "treeitem",
+      "activeKey": "unit-1-1",
+      "visibleFocus": true
+    },
+    {
+      "name": "TransferPanel 清空确认",
+      "message": "清空已选数据权限清单\n\n已选项中包含 1 个当前树中未加载的项目，无法核对其名称。确认移除全部 4 项吗？\n\n取消\n确认清空",
+      "selectionBeforeConfirmation": "当前已选 4 项",
+      "confirmButton": 1,
+      "cancelButton": 1
+    },
+    {
+      "name": "TransferPanel 取消清空",
+      "selectedCount": "当前已选 4 项",
+      "dialogClosed": true
+    },
+    {
+      "name": "TransferPanel 清空后",
+      "selectedCount": "当前已选 0 项",
+      "emptyText": "暂无分配权限，请在左侧勾选",
+      "undoButton": 1
+    },
+    {
+      "name": "TransferPanel 撤销清空",
+      "selectedCount": "当前已选 4 项",
+      "undoButton": 0
+    }
+  ],
+  "screenshots": [
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-desktop-light.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-component-light.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\tree-desktop-light.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\tree-component-light.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-desktop-hud.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-component-hud.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\tree-desktop-hud.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\tree-component-hud.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\design-desktop.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\design-virtual-tree-spec.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\design-transfer-panel-spec.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-empty.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-loading.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-error.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-inherit-disabled.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\tree-empty.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\tree-loading.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\tree-error.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\tree-reduced-motion.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-reduced-motion.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-375.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-selected-375.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-320.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-selected-320.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-320-keyboard-focus.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\tree-375.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\tree-320.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\tree-320-keyboard-focus.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-clear-confirm.png",
+    "F:\\work\\linkx-admin\\.impeccable\\critique\\wave7-transferpanel-2026-10-07\\formal-a-after-p2-2026-10-08\\transfer-cleared.png"
+  ]
+}

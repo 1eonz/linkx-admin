@@ -21,8 +21,7 @@ export function focusFirstInvalidFormField(root: HTMLElement): void {
     '[role="checkbox"]:not([aria-disabled="true"])',
     '[role="radio"]:not([aria-disabled="true"])',
     '[role="switch"]:not([aria-disabled="true"])',
-    '.lx-upload__browse:not([disabled])',
-    '.el-upload-dragger[tabindex]:not([tabindex="-1"])',
+    '.el-upload[role="button"][tabindex]:not([tabindex="-1"]):not([aria-disabled="true"])',
     'button:not([disabled])',
     '[tabindex]:not([tabindex="-1"])',
   ].join(',')

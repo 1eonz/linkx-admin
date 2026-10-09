@@ -1,0 +1,119 @@
+{
+  "scenario": "lxselectpagination-desktop-light",
+  "route": "lxselectpagination",
+  "theme": "light",
+  "requestedState": "默认多选，亮色桌面",
+  "viewport": {
+    "width": 1440,
+    "height": 1000,
+    "isMobile": false
+  },
+  "overlayInjection": {
+    "loaded": false,
+    "src": "http://127.0.0.1:8400/detect.js",
+    "error": "script load failed"
+  },
+  "preflight": {
+    "title": "[Human] lxselectpagination lxselectpagination-desktop-light",
+    "mutableInjection": true,
+    "preflightScript": true
+  },
+  "actionResults": [],
+  "browser": {
+    "title": "[Human] lxselectpagination lxselectpagination-desktop-light",
+    "url": "chrome-error://chromewebdata/",
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "isNarrow": false,
+      "visualWidth": 1440,
+      "screenWidth": 1440,
+      "devicePixelRatio": 1
+    },
+    "document": {
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 1000,
+      "bodyScrollWidth": 1424
+    },
+    "theme": {
+      "dark": false,
+      "hud": false,
+      "classes": []
+    },
+    "demoFound": false,
+    "demoText": "",
+    "states": {
+      "loading": false,
+      "errorText": [],
+      "overlayNodeCount": 0,
+      "alerts": []
+    },
+    "controls": [
+      {
+        "tag": "button",
+        "text": "刷新",
+        "role": null,
+        "type": null,
+        "disabled": false,
+        "ariaInvalid": null
+      }
+    ],
+    "selectPagination": null,
+    "overlayScripts": [
+      {
+        "src": "http://127.0.0.1:8400/detect.js",
+        "loaded": true
+      }
+    ]
+  },
+  "detectorConsole": {
+    "runs": [],
+    "findingCount": 0,
+    "ruleCounts": {},
+    "findings": []
+  },
+  "screenshot": "screenshots/lxselectpagination-desktop-light.png",
+  "console": [],
+  "runtimeExceptions": [],
+  "networkFailures": [
+    {
+      "url": "2208BD4CE98CA30649502AA78A0CFBE6",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "6FF4A65627D5304639841FE7AE432862",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "6FF4A65627D5304639841FE7AE432862",
+      "errorText": "net::ERR_ABORTED",
+      "blockedReason": ""
+    },
+    {
+      "url": "10D753C56A75279370EAEDC1F9C91CEB",
+      "errorText": "net::ERR_CONNECTION_REFUSED",
+      "blockedReason": ""
+    },
+    {
+      "url": "10D753C56A75279370EAEDC1F9C91CEB",
+      "errorText": "net::ERR_ABORTED",
+      "blockedReason": ""
+    },
+    {
+      "url": "26372.4",
+      "errorText": "net::ERR_FAILED",
+      "blockedReason": ""
+    }
+  ],
+  "stateChecks": {
+    "viewportWidthMatches": true,
+    "narrowMediaQueryMatches": true,
+    "errorStateVisible": true,
+    "loadingStateVisible": true,
+    "darkThemeApplied": true,
+    "hudThemeClassApplied": null
+  }
+}

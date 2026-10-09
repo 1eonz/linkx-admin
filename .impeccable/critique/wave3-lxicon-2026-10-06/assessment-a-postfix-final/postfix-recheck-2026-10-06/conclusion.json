@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-06",
+  "target": "http://127.0.0.1:4174/components/lxicons.html",
+  "sourceDocument": {
+    "path": "linkx-fe/docs/components/lxicons.md",
+    "sha256": "96DC323B1DE1A4039F817BFE60A399A3052F42CD098A98912F74B4AC05043D54",
+    "matchesCurrentAtReportTime": true,
+    "previousAssessmentRecordedSha256": false
+  },
+  "method": "定向修后复验；每个视口使用全新 Edge/Playwright context",
+  "viewports": [1440, 375, 320],
+  "themes": ["light", "dark", "hud"],
+  "httpStatuses": [200, 200, 200],
+  "pageErrors": [],
+  "pageHorizontalOverflow": false,
+  "tableRegion": {
+    "role": "region",
+    "accessibleName": "兼容别名对应关系",
+    "tabindex": "0",
+    "ariaDescribedBy": "icon-alias-table-hint",
+    "description": "窄屏可在表格区域横向滚动查看完整说明。",
+    "descriptionResolves": true,
+    "sizes": {
+      "1440": {"clientWidth": 686, "scrollWidth": 686, "hintVisible": false},
+      "375": {"clientWidth": 325, "scrollWidth": 520, "hintVisible": true},
+      "320": {"clientWidth": 270, "scrollWidth": 520, "hintVisible": true}
+    },
+    "keyboard": {
+      "320": {"focusVisibleOutline": "2px solid", "arrowRightScrollLeft": 11, "endScrollLeft": 250},
+      "375": {"arrowRightScrollLeft": 14, "endScrollLeft": 195}
+    }
+  },
+  "baselineScore": "34/40 retained; not rescored",
+  "screenshots": 14,
+  "detector": "not run by request",
+  "tests": "not run by request, including E2E",
+  "assessmentB": "not opened",
+  "codeReview": "not opened",
+  "conclusion": "窄屏兼容别名表已在局部区域横向滚动；320px 末端可读完整说明，页面本身无横向溢出。运行页面确认 aria-describedby 关联有效。",
+  "limitations": ["未运行新增 E2E 断言", "未进行屏幕阅读器或真实触屏设备验收"]
+}

@@ -397,12 +397,22 @@ interface Props {
   modelValue?: boolean | number // 支持 0/1
   loading?: boolean // default: false
   disabled?: boolean // default: false
-  /** 切换前确认（危险操作） */
-  confirm?: string | false // default: false
+  permission?: string // 宿主注入的权限码；未命中时按 fallbackTag 降级
+  fallbackTag?: boolean // default: true
+  /** 关闭前确认（危险操作）；支持文案或对象配置 */
+  confirm?: string | false | {
+    title?: string
+    message?: string
+    confirmText?: string
+    cancelText?: string
+    type?: 'warning' | 'danger'
+  }
+  onText?: string // default: '开启'
+  offText?: string // default: '关闭'
 }
 interface Events {
-  (e: 'update:modelValue', v: boolean): void
-  (e: 'change', v: boolean): void
+  (e: 'update:modelValue', v: boolean | number): void
+  (e: 'change', v: boolean | number): void
 }
 ```
 

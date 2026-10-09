@@ -1,0 +1,1413 @@
+{
+  "sceneResults": [
+    {
+      "route": "virtualtree",
+      "scene": "desktop-light",
+      "url": "http://127.0.0.1:4174/components/lxvirtualtree",
+      "status": 200,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 13,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "树数据已就绪"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 1 项。"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+        "勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。",
+        "当前已选中 1 项。",
+        "已选",
+        "加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。",
+        "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。",
+        "checkStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择当前节点及全部未禁用后代，包括筛选隐藏的节点。",
+        "filterMethod\t(node, keyword) => boolean\tundefined\t自定义节点匹配规则；keyword 已去除首尾空白并转为小写，节点字段需按相同规则规范化；命中节点的祖先会一并保留。未传时按节点名称不区分大小写匹配。",
+        "disabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf: false 可显示展开控制，但静态树组件不会为其加载子数据。",
+        "自定义过滤回调接收规范化后的关键字，匹配节点字段时也应转为小写。例如：",
+        "check-change\t(keys, nodes)\t勾选变化；nodes 为当前树数据中对应的已选节点。",
+        "getCheckedKeys()\t读取当前 modelValue 的副本。",
+        "setCheckedKeys(keys)\t仅保留当前树中存在且未禁用的键；发出 update:modelValue 和 check-change，不直接修改父级数据。",
+        "scrollToKey(key)\t将当前可见节点滚动到视口起点；过滤或折叠后不可见的节点不会滚动。",
+        "空数组始终显示“暂无数据”，即使仍保留筛选词；数据非空但筛选后没有匹配项时显示“未找到匹配节点”。",
+        "加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 data。",
+        "每个已渲染树项的 aria-posinset 和 aria-setsize 按筛选后的同级节点集合计算，不随虚拟窗口当前渲染的行数变化；筛选会保留命中节点及其祖先，并自动展开含匹配后代的分支。",
+        "输入筛选词后，可见状态区播报实际匹配节点数量；为维持树路径而显示的祖先节点不会计入数量，包括自定义 filterMethod 的筛选结果。",
+        "显示复选框且启用级联时，树项会通过可访问描述说明选择影响范围；可见状态区播报本次新增/取消数量及当前选中数。级联包含当前筛选隐藏的节点，但会跳过禁用节点。",
+        "树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "virtualtree",
+      "scene": "desktop-hud",
+      "url": "http://127.0.0.1:4174/components/lxvirtualtree",
+      "status": 200,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 13,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "树数据已就绪"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 1 项。"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+        "勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。",
+        "当前已选中 1 项。",
+        "已选",
+        "加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。",
+        "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。",
+        "checkStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择当前节点及全部未禁用后代，包括筛选隐藏的节点。",
+        "filterMethod\t(node, keyword) => boolean\tundefined\t自定义节点匹配规则；keyword 已去除首尾空白并转为小写，节点字段需按相同规则规范化；命中节点的祖先会一并保留。未传时按节点名称不区分大小写匹配。",
+        "disabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf: false 可显示展开控制，但静态树组件不会为其加载子数据。",
+        "自定义过滤回调接收规范化后的关键字，匹配节点字段时也应转为小写。例如：",
+        "check-change\t(keys, nodes)\t勾选变化；nodes 为当前树数据中对应的已选节点。",
+        "getCheckedKeys()\t读取当前 modelValue 的副本。",
+        "setCheckedKeys(keys)\t仅保留当前树中存在且未禁用的键；发出 update:modelValue 和 check-change，不直接修改父级数据。",
+        "scrollToKey(key)\t将当前可见节点滚动到视口起点；过滤或折叠后不可见的节点不会滚动。",
+        "空数组始终显示“暂无数据”，即使仍保留筛选词；数据非空但筛选后没有匹配项时显示“未找到匹配节点”。",
+        "加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 data。",
+        "每个已渲染树项的 aria-posinset 和 aria-setsize 按筛选后的同级节点集合计算，不随虚拟窗口当前渲染的行数变化；筛选会保留命中节点及其祖先，并自动展开含匹配后代的分支。",
+        "输入筛选词后，可见状态区播报实际匹配节点数量；为维持树路径而显示的祖先节点不会计入数量，包括自定义 filterMethod 的筛选结果。",
+        "显示复选框且启用级联时，树项会通过可访问描述说明选择影响范围；可见状态区播报本次新增/取消数量及当前选中数。级联包含当前筛选隐藏的节点，但会跳过禁用节点。",
+        "树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "virtualtree",
+      "scene": "mobile-375-light",
+      "url": "http://127.0.0.1:4174/components/lxvirtualtree",
+      "status": 200,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "scrollWidth": 615,
+        "horizontalOverflow": true
+      },
+      "horizontalOverflow": true,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 9 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 9 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 17,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "树数据已就绪"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 1 项。"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+        "勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。",
+        "当前已选中 1 项。",
+        "已选",
+        "加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。",
+        "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。",
+        "checkStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择当前节点及全部未禁用后代，包括筛选隐藏的节点。",
+        "filterMethod\t(node, keyword) => boolean\tundefined\t自定义节点匹配规则；keyword 已去除首尾空白并转为小写，节点字段需按相同规则规范化；命中节点的祖先会一并保留。未传时按节点名称不区分大小写匹配。",
+        "disabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf: false 可显示展开控制，但静态树组件不会为其加载子数据。",
+        "自定义过滤回调接收规范化后的关键字，匹配节点字段时也应转为小写。例如：",
+        "check-change\t(keys, nodes)\t勾选变化；nodes 为当前树数据中对应的已选节点。",
+        "getCheckedKeys()\t读取当前 modelValue 的副本。",
+        "setCheckedKeys(keys)\t仅保留当前树中存在且未禁用的键；发出 update:modelValue 和 check-change，不直接修改父级数据。",
+        "scrollToKey(key)\t将当前可见节点滚动到视口起点；过滤或折叠后不可见的节点不会滚动。",
+        "空数组始终显示“暂无数据”，即使仍保留筛选词；数据非空但筛选后没有匹配项时显示“未找到匹配节点”。",
+        "加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 data。",
+        "每个已渲染树项的 aria-posinset 和 aria-setsize 按筛选后的同级节点集合计算，不随虚拟窗口当前渲染的行数变化；筛选会保留命中节点及其祖先，并自动展开含匹配后代的分支。",
+        "输入筛选词后，可见状态区播报实际匹配节点数量；为维持树路径而显示的祖先节点不会计入数量，包括自定义 filterMethod 的筛选结果。",
+        "显示复选框且启用级联时，树项会通过可访问描述说明选择影响范围；可见状态区播报本次新增/取消数量及当前选中数。级联包含当前筛选隐藏的节点，但会跳过禁用节点。",
+        "树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "virtualtree",
+      "scene": "mobile-375-hud",
+      "url": "http://127.0.0.1:4174/components/lxvirtualtree",
+      "status": 200,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "scrollWidth": 615,
+        "horizontalOverflow": true
+      },
+      "horizontalOverflow": true,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 9 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 9 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 17,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "树数据已就绪"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 1 项。"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+        "勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。",
+        "当前已选中 1 项。",
+        "已选",
+        "加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。",
+        "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。",
+        "checkStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择当前节点及全部未禁用后代，包括筛选隐藏的节点。",
+        "filterMethod\t(node, keyword) => boolean\tundefined\t自定义节点匹配规则；keyword 已去除首尾空白并转为小写，节点字段需按相同规则规范化；命中节点的祖先会一并保留。未传时按节点名称不区分大小写匹配。",
+        "disabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf: false 可显示展开控制，但静态树组件不会为其加载子数据。",
+        "自定义过滤回调接收规范化后的关键字，匹配节点字段时也应转为小写。例如：",
+        "check-change\t(keys, nodes)\t勾选变化；nodes 为当前树数据中对应的已选节点。",
+        "getCheckedKeys()\t读取当前 modelValue 的副本。",
+        "setCheckedKeys(keys)\t仅保留当前树中存在且未禁用的键；发出 update:modelValue 和 check-change，不直接修改父级数据。",
+        "scrollToKey(key)\t将当前可见节点滚动到视口起点；过滤或折叠后不可见的节点不会滚动。",
+        "空数组始终显示“暂无数据”，即使仍保留筛选词；数据非空但筛选后没有匹配项时显示“未找到匹配节点”。",
+        "加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 data。",
+        "每个已渲染树项的 aria-posinset 和 aria-setsize 按筛选后的同级节点集合计算，不随虚拟窗口当前渲染的行数变化；筛选会保留命中节点及其祖先，并自动展开含匹配后代的分支。",
+        "输入筛选词后，可见状态区播报实际匹配节点数量；为维持树路径而显示的祖先节点不会计入数量，包括自定义 filterMethod 的筛选结果。",
+        "显示复选框且启用级联时，树项会通过可访问描述说明选择影响范围；可见状态区播报本次新增/取消数量及当前选中数。级联包含当前筛选隐藏的节点，但会跳过禁用节点。",
+        "树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "transferpanel",
+      "scene": "desktop-light",
+      "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+      "status": 200,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 35,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "已载入组织权限数据"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 4 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "全量加入需要 2 项，当前还可加入 1 项"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。",
+        "仅反转已加载的可选节点；禁用项和树外已选键会保留。",
+        "仅反转当前已加载树中未禁用的可选节点，并保留禁用节点和树外已选键。",
+        "当前已选中 4 项。",
+        "全量加入需要 2 项，当前还可加入 1 项",
+        "已选数据权限清单",
+        "节点未加载",
+        "已选 4 项",
+        "保留下级继承授权",
+        "本地演示假设：仅向所选机构的直属下级继承；关闭后仅保留该机构自身权限。",
+        "当前已选 4 项",
+        "包含一个当前树中未加载的既有选中键",
+        "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+        "默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；初始预选 4 项并保留 1 个名额，便于体验新增操作，滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。",
+        "modelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。",
+        "selectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。",
+        "titles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。",
+        "filterPlaceholders\t[string, string]\t['输入机构名称/部门编码检索...', '在已选名单中检索...']\t左侧筛选匹配节点名称或部门编码；右侧筛选匹配标题、编码和状态。",
+        "maxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。",
+        "inheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。",
+        "inheritChildDescription\tstring\tundefined\t建议宿主提供经业务确认的具体继承范围和关闭后的影响；说明固定显示在复选框旁并通过 aria-describedby 关联。缺失或纯空白时显示配置提示并禁用开关，组件不推断权限语义。",
+        "change\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。",
+        "update:inheritChild\tvalue\t下级继承开关变化。",
+        "clear-all\t无\t通过中间“全部移除”清空非空列表后触发；包含未加载节点时须先确认。事件在 update:modelValue 与 change 之后发出。",
+        "LxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：",
+        "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+        "中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。",
+        "左侧树标题区始终提供“反选本树可选项”，它只反转当前已加载树中的未禁用节点，并保留禁用节点和树外已选键；无筛选时按钮下方会显示该操作范围，可访问说明也保留相同规则。左侧搜索有内容时另显示“全选筛选结果”和“反选筛选结果”；按节点名称或部门编码匹配可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，筛选批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+        "“全部加入”受上限或空树状态限制时，按钮旁显示需要加入的数量和剩余名额；按钮的 aria-describedby 保留完整原因，便于读屏用户了解无法操作的具体原因。",
+        "两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏树节点名称最多显示两行，超长文本以标题保留完整内容；编码和状态收在单行并省略超长值，不增加固定行高。虚拟行高在 360-420px 为 64px、359px 及以下为 80px，44px 触控控件与元数据各占独立网格行；视口跨断点时树会保留焦点行并重算滚动锚点。已选名称也会换行显示，列表可通过键盘聚焦并滚动查看。",
+        "inheritChildDescription 是可选展示属性，但权限宿主应提供经业务确认的具体继承对象和关闭后的影响。组件不会推断实际授权范围；缺失或纯空白时显示配置提示并禁用开关，说明始终邻近复选框且通过 aria-describedby 关联。Demo 可关闭“提供继承说明”检查此状态。",
+        "窄屏下待选标题、筛选批量操作与状态说明分行展示；“待选/已选”切换按钮显示两侧数量并可通过键盘操作，隐藏面板从辅助技术和焦点顺序中移除。文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。",
+        "单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。",
+        "change 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。",
+        "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，并使用名称/部门编码联合匹配；右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。筛选输入使用文本类型和搜索键盘提示，避免浏览器原生清除符号与自定义按钮重复。筛选清除按钮桌面点击区域为 32px，窄屏为 44px；窄屏树行的复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸保持 24×24px，两个控件占用独立网格列。已选列表可通过键盘聚焦并滚动查看；存在未显示内容时，列表外的状态提示会显示尚未完整进入视口的项数，通过 aria-describedby 关联到列表，并在滚动到底部后收起。移除单项后焦点移到下一项；若没有下一项则移到上一项，列表清空时回到列表容器。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+        "右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。中间穿梭按钮执行全量加入和移除；树标题区的全树反选与筛选结果反选分别明确标出操作范围。",
+        "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。确认期间如果 modelValue 的键或顺序发生变化，旧确认会失效并提示用户重新检查；仅以新数组引用传入相同键序列不会使确认失效。失效时不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+        "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能自动撤销；服务端补偿仍由宿主按真实 API 契约实现。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "transferpanel",
+      "scene": "desktop-hud",
+      "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+      "status": 200,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 35,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "已载入组织权限数据"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 4 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "全量加入需要 2 项，当前还可加入 1 项"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。",
+        "仅反转已加载的可选节点；禁用项和树外已选键会保留。",
+        "仅反转当前已加载树中未禁用的可选节点，并保留禁用节点和树外已选键。",
+        "当前已选中 4 项。",
+        "全量加入需要 2 项，当前还可加入 1 项",
+        "已选数据权限清单",
+        "节点未加载",
+        "已选 4 项",
+        "保留下级继承授权",
+        "本地演示假设：仅向所选机构的直属下级继承；关闭后仅保留该机构自身权限。",
+        "当前已选 4 项",
+        "包含一个当前树中未加载的既有选中键",
+        "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+        "默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；初始预选 4 项并保留 1 个名额，便于体验新增操作，滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。",
+        "modelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。",
+        "selectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。",
+        "titles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。",
+        "filterPlaceholders\t[string, string]\t['输入机构名称/部门编码检索...', '在已选名单中检索...']\t左侧筛选匹配节点名称或部门编码；右侧筛选匹配标题、编码和状态。",
+        "maxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。",
+        "inheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。",
+        "inheritChildDescription\tstring\tundefined\t建议宿主提供经业务确认的具体继承范围和关闭后的影响；说明固定显示在复选框旁并通过 aria-describedby 关联。缺失或纯空白时显示配置提示并禁用开关，组件不推断权限语义。",
+        "change\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。",
+        "update:inheritChild\tvalue\t下级继承开关变化。",
+        "clear-all\t无\t通过中间“全部移除”清空非空列表后触发；包含未加载节点时须先确认。事件在 update:modelValue 与 change 之后发出。",
+        "LxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：",
+        "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+        "中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。",
+        "左侧树标题区始终提供“反选本树可选项”，它只反转当前已加载树中的未禁用节点，并保留禁用节点和树外已选键；无筛选时按钮下方会显示该操作范围，可访问说明也保留相同规则。左侧搜索有内容时另显示“全选筛选结果”和“反选筛选结果”；按节点名称或部门编码匹配可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，筛选批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+        "“全部加入”受上限或空树状态限制时，按钮旁显示需要加入的数量和剩余名额；按钮的 aria-describedby 保留完整原因，便于读屏用户了解无法操作的具体原因。",
+        "两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏树节点名称最多显示两行，超长文本以标题保留完整内容；编码和状态收在单行并省略超长值，不增加固定行高。虚拟行高在 360-420px 为 64px、359px 及以下为 80px，44px 触控控件与元数据各占独立网格行；视口跨断点时树会保留焦点行并重算滚动锚点。已选名称也会换行显示，列表可通过键盘聚焦并滚动查看。",
+        "inheritChildDescription 是可选展示属性，但权限宿主应提供经业务确认的具体继承对象和关闭后的影响。组件不会推断实际授权范围；缺失或纯空白时显示配置提示并禁用开关，说明始终邻近复选框且通过 aria-describedby 关联。Demo 可关闭“提供继承说明”检查此状态。",
+        "窄屏下待选标题、筛选批量操作与状态说明分行展示；“待选/已选”切换按钮显示两侧数量并可通过键盘操作，隐藏面板从辅助技术和焦点顺序中移除。文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。",
+        "单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。",
+        "change 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。",
+        "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，并使用名称/部门编码联合匹配；右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。筛选输入使用文本类型和搜索键盘提示，避免浏览器原生清除符号与自定义按钮重复。筛选清除按钮桌面点击区域为 32px，窄屏为 44px；窄屏树行的复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸保持 24×24px，两个控件占用独立网格列。已选列表可通过键盘聚焦并滚动查看；存在未显示内容时，列表外的状态提示会显示尚未完整进入视口的项数，通过 aria-describedby 关联到列表，并在滚动到底部后收起。移除单项后焦点移到下一项；若没有下一项则移到上一项，列表清空时回到列表容器。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+        "右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。中间穿梭按钮执行全量加入和移除；树标题区的全树反选与筛选结果反选分别明确标出操作范围。",
+        "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。确认期间如果 modelValue 的键或顺序发生变化，旧确认会失效并提示用户重新检查；仅以新数组引用传入相同键序列不会使确认失效。失效时不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+        "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能自动撤销；服务端补偿仍由宿主按真实 API 契约实现。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "transferpanel",
+      "scene": "mobile-375-light",
+      "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+      "status": 200,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "scrollWidth": 615,
+        "horizontalOverflow": true
+      },
+      "horizontalOverflow": true,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 13,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "已载入组织权限数据"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 4 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "全量加入需要 2 项，当前还可加入 1 项"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 17,
+      "relevantLines": [
+        "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。",
+        "已选数据权限清单",
+        "仅反转已加载的可选节点；禁用项和树外已选键会保留。",
+        "仅反转当前已加载树中未禁用的可选节点，并保留禁用节点和树外已选键。",
+        "当前已选中 4 项。",
+        "全量加入需要 2 项，当前还可加入 1 项",
+        "当前已选 4 项",
+        "包含一个当前树中未加载的既有选中键",
+        "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+        "默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；初始预选 4 项并保留 1 个名额，便于体验新增操作，滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。",
+        "modelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。",
+        "selectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。",
+        "titles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。",
+        "filterPlaceholders\t[string, string]\t['输入机构名称/部门编码检索...', '在已选名单中检索...']\t左侧筛选匹配节点名称或部门编码；右侧筛选匹配标题、编码和状态。",
+        "maxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。",
+        "inheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。",
+        "inheritChildDescription\tstring\tundefined\t建议宿主提供经业务确认的具体继承范围和关闭后的影响；说明固定显示在复选框旁并通过 aria-describedby 关联。缺失或纯空白时显示配置提示并禁用开关，组件不推断权限语义。",
+        "change\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。",
+        "update:inheritChild\tvalue\t下级继承开关变化。",
+        "clear-all\t无\t通过中间“全部移除”清空非空列表后触发；包含未加载节点时须先确认。事件在 update:modelValue 与 change 之后发出。",
+        "LxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：",
+        "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+        "中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。",
+        "左侧树标题区始终提供“反选本树可选项”，它只反转当前已加载树中的未禁用节点，并保留禁用节点和树外已选键；无筛选时按钮下方会显示该操作范围，可访问说明也保留相同规则。左侧搜索有内容时另显示“全选筛选结果”和“反选筛选结果”；按节点名称或部门编码匹配可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，筛选批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+        "“全部加入”受上限或空树状态限制时，按钮旁显示需要加入的数量和剩余名额；按钮的 aria-describedby 保留完整原因，便于读屏用户了解无法操作的具体原因。",
+        "两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏树节点名称最多显示两行，超长文本以标题保留完整内容；编码和状态收在单行并省略超长值，不增加固定行高。虚拟行高在 360-420px 为 64px、359px 及以下为 80px，44px 触控控件与元数据各占独立网格行；视口跨断点时树会保留焦点行并重算滚动锚点。已选名称也会换行显示，列表可通过键盘聚焦并滚动查看。",
+        "inheritChildDescription 是可选展示属性，但权限宿主应提供经业务确认的具体继承对象和关闭后的影响。组件不会推断实际授权范围；缺失或纯空白时显示配置提示并禁用开关，说明始终邻近复选框且通过 aria-describedby 关联。Demo 可关闭“提供继承说明”检查此状态。",
+        "窄屏下待选标题、筛选批量操作与状态说明分行展示；“待选/已选”切换按钮显示两侧数量并可通过键盘操作，隐藏面板从辅助技术和焦点顺序中移除。文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。",
+        "单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。",
+        "change 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。",
+        "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，并使用名称/部门编码联合匹配；右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。筛选输入使用文本类型和搜索键盘提示，避免浏览器原生清除符号与自定义按钮重复。筛选清除按钮桌面点击区域为 32px，窄屏为 44px；窄屏树行的复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸保持 24×24px，两个控件占用独立网格列。已选列表可通过键盘聚焦并滚动查看；存在未显示内容时，列表外的状态提示会显示尚未完整进入视口的项数，通过 aria-describedby 关联到列表，并在滚动到底部后收起。移除单项后焦点移到下一项；若没有下一项则移到上一项，列表清空时回到列表容器。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+        "右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。中间穿梭按钮执行全量加入和移除；树标题区的全树反选与筛选结果反选分别明确标出操作范围。",
+        "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。确认期间如果 modelValue 的键或顺序发生变化，旧确认会失效并提示用户重新检查；仅以新数组引用传入相同键序列不会使确认失效。失效时不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+        "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能自动撤销；服务端补偿仍由宿主按真实 API 契约实现。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "transferpanel",
+      "scene": "mobile-375-hud",
+      "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+      "status": 200,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "scrollWidth": 615,
+        "horizontalOverflow": true
+      },
+      "horizontalOverflow": true,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 13,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "已载入组织权限数据"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 4 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "全量加入需要 2 项，当前还可加入 1 项"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 17,
+      "relevantLines": [
+        "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。",
+        "已选数据权限清单",
+        "仅反转已加载的可选节点；禁用项和树外已选键会保留。",
+        "仅反转当前已加载树中未禁用的可选节点，并保留禁用节点和树外已选键。",
+        "当前已选中 4 项。",
+        "全量加入需要 2 项，当前还可加入 1 项",
+        "当前已选 4 项",
+        "包含一个当前树中未加载的既有选中键",
+        "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+        "默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；初始预选 4 项并保留 1 个名额，便于体验新增操作，滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。",
+        "modelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。",
+        "selectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。",
+        "titles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。",
+        "filterPlaceholders\t[string, string]\t['输入机构名称/部门编码检索...', '在已选名单中检索...']\t左侧筛选匹配节点名称或部门编码；右侧筛选匹配标题、编码和状态。",
+        "maxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。",
+        "inheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。",
+        "inheritChildDescription\tstring\tundefined\t建议宿主提供经业务确认的具体继承范围和关闭后的影响；说明固定显示在复选框旁并通过 aria-describedby 关联。缺失或纯空白时显示配置提示并禁用开关，组件不推断权限语义。",
+        "change\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。",
+        "update:inheritChild\tvalue\t下级继承开关变化。",
+        "clear-all\t无\t通过中间“全部移除”清空非空列表后触发；包含未加载节点时须先确认。事件在 update:modelValue 与 change 之后发出。",
+        "LxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：",
+        "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+        "中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。",
+        "左侧树标题区始终提供“反选本树可选项”，它只反转当前已加载树中的未禁用节点，并保留禁用节点和树外已选键；无筛选时按钮下方会显示该操作范围，可访问说明也保留相同规则。左侧搜索有内容时另显示“全选筛选结果”和“反选筛选结果”；按节点名称或部门编码匹配可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，筛选批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+        "“全部加入”受上限或空树状态限制时，按钮旁显示需要加入的数量和剩余名额；按钮的 aria-describedby 保留完整原因，便于读屏用户了解无法操作的具体原因。",
+        "两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏树节点名称最多显示两行，超长文本以标题保留完整内容；编码和状态收在单行并省略超长值，不增加固定行高。虚拟行高在 360-420px 为 64px、359px 及以下为 80px，44px 触控控件与元数据各占独立网格行；视口跨断点时树会保留焦点行并重算滚动锚点。已选名称也会换行显示，列表可通过键盘聚焦并滚动查看。",
+        "inheritChildDescription 是可选展示属性，但权限宿主应提供经业务确认的具体继承对象和关闭后的影响。组件不会推断实际授权范围；缺失或纯空白时显示配置提示并禁用开关，说明始终邻近复选框且通过 aria-describedby 关联。Demo 可关闭“提供继承说明”检查此状态。",
+        "窄屏下待选标题、筛选批量操作与状态说明分行展示；“待选/已选”切换按钮显示两侧数量并可通过键盘操作，隐藏面板从辅助技术和焦点顺序中移除。文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。",
+        "单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。",
+        "change 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。",
+        "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，并使用名称/部门编码联合匹配；右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。筛选输入使用文本类型和搜索键盘提示，避免浏览器原生清除符号与自定义按钮重复。筛选清除按钮桌面点击区域为 32px，窄屏为 44px；窄屏树行的复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸保持 24×24px，两个控件占用独立网格列。已选列表可通过键盘聚焦并滚动查看；存在未显示内容时，列表外的状态提示会显示尚未完整进入视口的项数，通过 aria-describedby 关联到列表，并在滚动到底部后收起。移除单项后焦点移到下一项；若没有下一项则移到上一项，列表清空时回到列表容器。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+        "右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。中间穿梭按钮执行全量加入和移除；树标题区的全树反选与筛选结果反选分别明确标出操作范围。",
+        "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。确认期间如果 modelValue 的键或顺序发生变化，旧确认会失效并提示用户重新检查；仅以新数组引用传入相同键序列不会使确认失效。失效时不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+        "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能自动撤销；服务端补偿仍由宿主按真实 API 契约实现。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    }
+  ],
+  "interactionResults": [
+    {
+      "route": "virtualtree",
+      "scene": "interactive-initial",
+      "url": "http://127.0.0.1:4174/components/lxvirtualtree",
+      "status": 200,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 13,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "树数据已就绪"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 1 项。"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+        "勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。",
+        "当前已选中 1 项。",
+        "已选",
+        "加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。",
+        "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。",
+        "checkStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择当前节点及全部未禁用后代，包括筛选隐藏的节点。",
+        "filterMethod\t(node, keyword) => boolean\tundefined\t自定义节点匹配规则；keyword 已去除首尾空白并转为小写，节点字段需按相同规则规范化；命中节点的祖先会一并保留。未传时按节点名称不区分大小写匹配。",
+        "disabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf: false 可显示展开控制，但静态树组件不会为其加载子数据。",
+        "自定义过滤回调接收规范化后的关键字，匹配节点字段时也应转为小写。例如：",
+        "check-change\t(keys, nodes)\t勾选变化；nodes 为当前树数据中对应的已选节点。",
+        "getCheckedKeys()\t读取当前 modelValue 的副本。",
+        "setCheckedKeys(keys)\t仅保留当前树中存在且未禁用的键；发出 update:modelValue 和 check-change，不直接修改父级数据。",
+        "scrollToKey(key)\t将当前可见节点滚动到视口起点；过滤或折叠后不可见的节点不会滚动。",
+        "空数组始终显示“暂无数据”，即使仍保留筛选词；数据非空但筛选后没有匹配项时显示“未找到匹配节点”。",
+        "加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 data。",
+        "每个已渲染树项的 aria-posinset 和 aria-setsize 按筛选后的同级节点集合计算，不随虚拟窗口当前渲染的行数变化；筛选会保留命中节点及其祖先，并自动展开含匹配后代的分支。",
+        "输入筛选词后，可见状态区播报实际匹配节点数量；为维持树路径而显示的祖先节点不会计入数量，包括自定义 filterMethod 的筛选结果。",
+        "显示复选框且启用级联时，树项会通过可访问描述说明选择影响范围；可见状态区播报本次新增/取消数量及当前选中数。级联包含当前筛选隐藏的节点，但会跳过禁用节点。",
+        "树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "virtualtree",
+      "scene": "filter-count",
+      "url": "http://127.0.0.1:4174/components/lxvirtualtree",
+      "status": null,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 13,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "树数据已就绪"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 1 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "筛选匹配到 12 个节点；路径祖先不计入数量。"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+        "勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。",
+        "当前已选中 1 项。",
+        "筛选匹配到 12 个节点；路径祖先不计入数量。",
+        "加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。",
+        "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。",
+        "checkStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择当前节点及全部未禁用后代，包括筛选隐藏的节点。",
+        "filterMethod\t(node, keyword) => boolean\tundefined\t自定义节点匹配规则；keyword 已去除首尾空白并转为小写，节点字段需按相同规则规范化；命中节点的祖先会一并保留。未传时按节点名称不区分大小写匹配。",
+        "disabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf: false 可显示展开控制，但静态树组件不会为其加载子数据。",
+        "自定义过滤回调接收规范化后的关键字，匹配节点字段时也应转为小写。例如：",
+        "check-change\t(keys, nodes)\t勾选变化；nodes 为当前树数据中对应的已选节点。",
+        "getCheckedKeys()\t读取当前 modelValue 的副本。",
+        "setCheckedKeys(keys)\t仅保留当前树中存在且未禁用的键；发出 update:modelValue 和 check-change，不直接修改父级数据。",
+        "scrollToKey(key)\t将当前可见节点滚动到视口起点；过滤或折叠后不可见的节点不会滚动。",
+        "空数组始终显示“暂无数据”，即使仍保留筛选词；数据非空但筛选后没有匹配项时显示“未找到匹配节点”。",
+        "加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 data。",
+        "每个已渲染树项的 aria-posinset 和 aria-setsize 按筛选后的同级节点集合计算，不随虚拟窗口当前渲染的行数变化；筛选会保留命中节点及其祖先，并自动展开含匹配后代的分支。",
+        "输入筛选词后，可见状态区播报实际匹配节点数量；为维持树路径而显示的祖先节点不会计入数量，包括自定义 filterMethod 的筛选结果。",
+        "显示复选框且启用级联时，树项会通过可访问描述说明选择影响范围；可见状态区播报本次新增/取消数量及当前选中数。级联包含当前筛选隐藏的节点，但会跳过禁用节点。",
+        "树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "virtualtree",
+      "scene": "keyboard-arrow-down",
+      "url": "http://127.0.0.1:4174/components/lxvirtualtree",
+      "status": null,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 13,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "树数据已就绪"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 1 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "筛选匹配到 12 个节点；路径祖先不计入数量。"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+        "勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。",
+        "当前已选中 1 项。",
+        "筛选匹配到 12 个节点；路径祖先不计入数量。",
+        "加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。",
+        "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。",
+        "checkStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择当前节点及全部未禁用后代，包括筛选隐藏的节点。",
+        "filterMethod\t(node, keyword) => boolean\tundefined\t自定义节点匹配规则；keyword 已去除首尾空白并转为小写，节点字段需按相同规则规范化；命中节点的祖先会一并保留。未传时按节点名称不区分大小写匹配。",
+        "disabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf: false 可显示展开控制，但静态树组件不会为其加载子数据。",
+        "自定义过滤回调接收规范化后的关键字，匹配节点字段时也应转为小写。例如：",
+        "check-change\t(keys, nodes)\t勾选变化；nodes 为当前树数据中对应的已选节点。",
+        "getCheckedKeys()\t读取当前 modelValue 的副本。",
+        "setCheckedKeys(keys)\t仅保留当前树中存在且未禁用的键；发出 update:modelValue 和 check-change，不直接修改父级数据。",
+        "scrollToKey(key)\t将当前可见节点滚动到视口起点；过滤或折叠后不可见的节点不会滚动。",
+        "空数组始终显示“暂无数据”，即使仍保留筛选词；数据非空但筛选后没有匹配项时显示“未找到匹配节点”。",
+        "加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 data。",
+        "每个已渲染树项的 aria-posinset 和 aria-setsize 按筛选后的同级节点集合计算，不随虚拟窗口当前渲染的行数变化；筛选会保留命中节点及其祖先，并自动展开含匹配后代的分支。",
+        "输入筛选词后，可见状态区播报实际匹配节点数量；为维持树路径而显示的祖先节点不会计入数量，包括自定义 filterMethod 的筛选结果。",
+        "显示复选框且启用级联时，树项会通过可访问描述说明选择影响范围；可见状态区播报本次新增/取消数量及当前选中数。级联包含当前筛选隐藏的节点，但会跳过禁用节点。",
+        "树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "virtualtree",
+      "scene": "keyboard-space",
+      "url": "http://127.0.0.1:4174/components/lxvirtualtree",
+      "status": null,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 7 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 7 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 13,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "选中 2 项"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "本次新增 1 项，当前共选中 2 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "筛选匹配到 12 个节点；路径祖先不计入数量。"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "固定行高窗口化组织树，适合节点数量较大的组织、部门和权限数据。筛选会保留匹配节点及其祖先；选中值通过 v-model 由宿主管理。组件不发起请求，加载和错误反馈由宿主提供。",
+        "勾选父节点会同步影响全部未禁用下级节点，包括当前筛选隐藏的节点；禁用节点会跳过。",
+        "本次新增 1 项，当前共选中 2 项。",
+        "筛选匹配到 12 个节点；路径祖先不计入数量。",
+        "已选",
+        "加载与错误状态由宿主负责；虚拟树只接收已准备好的节点数据。",
+        "示例包含 240 个节点、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，避免遮挡树区域。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。树区域支持方向键浏览；右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。",
+        "checkStrictly\tboolean\tfalse\t为 true 时父子独立勾选；默认级联选择当前节点及全部未禁用后代，包括筛选隐藏的节点。",
+        "filterMethod\t(node, keyword) => boolean\tundefined\t自定义节点匹配规则；keyword 已去除首尾空白并转为小写，节点字段需按相同规则规范化；命中节点的祖先会一并保留。未传时按节点名称不区分大小写匹配。",
+        "disabled 节点本身不可点击或勾选；级联勾选会跳过禁用后代。isLeaf: false 可显示展开控制，但静态树组件不会为其加载子数据。",
+        "自定义过滤回调接收规范化后的关键字，匹配节点字段时也应转为小写。例如：",
+        "check-change\t(keys, nodes)\t勾选变化；nodes 为当前树数据中对应的已选节点。",
+        "getCheckedKeys()\t读取当前 modelValue 的副本。",
+        "setCheckedKeys(keys)\t仅保留当前树中存在且未禁用的键；发出 update:modelValue 和 check-change，不直接修改父级数据。",
+        "scrollToKey(key)\t将当前可见节点滚动到视口起点；过滤或折叠后不可见的节点不会滚动。",
+        "空数组始终显示“暂无数据”，即使仍保留筛选词；数据非空但筛选后没有匹配项时显示“未找到匹配节点”。",
+        "加载中和请求错误不属于组件状态。宿主应在加载或错误时显示自己的提示与重试操作，成功后再传入 data。",
+        "每个已渲染树项的 aria-posinset 和 aria-setsize 按筛选后的同级节点集合计算，不随虚拟窗口当前渲染的行数变化；筛选会保留命中节点及其祖先，并自动展开含匹配后代的分支。",
+        "输入筛选词后，可见状态区播报实际匹配节点数量；为维持树路径而显示的祖先节点不会计入数量，包括自定义 filterMethod 的筛选结果。",
+        "显示复选框且启用级联时，树项会通过可访问描述说明选择影响范围；可见状态区播报本次新增/取消数量及当前选中数。级联包含当前筛选隐藏的节点，但会跳过禁用节点。",
+        "树项是树内唯一的 Tab 停靠点；筛选框和清除按钮仍位于树前的页面 Tab 顺序，行内展开按钮与复选框不参与 Tab 序列。树项获得焦点后，方向键、回车和空格完成展开、收起及勾选；鼠标和程序化聚焦仍可直接操作行内控件。过滤、折叠或更新数据移除当前焦点项时，焦点移至首个有效树项；重排保留当前焦点键并调整滚动位置。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "virtualtree",
+      "scene": "empty-state",
+      "skipped": "未找到按钮 空结果"
+    },
+    {
+      "route": "virtualtree",
+      "scene": "loading-state",
+      "skipped": "未找到按钮 加载中"
+    },
+    {
+      "route": "virtualtree",
+      "scene": "error-state",
+      "skipped": "未找到按钮 加载失败"
+    },
+    {
+      "route": "transferpanel",
+      "scene": "inherit-description-default",
+      "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+      "status": 200,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 35,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "已载入组织权限数据"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 4 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "全量加入需要 2 项，当前还可加入 1 项"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。",
+        "仅反转已加载的可选节点；禁用项和树外已选键会保留。",
+        "仅反转当前已加载树中未禁用的可选节点，并保留禁用节点和树外已选键。",
+        "当前已选中 4 项。",
+        "全量加入需要 2 项，当前还可加入 1 项",
+        "已选数据权限清单",
+        "节点未加载",
+        "已选 4 项",
+        "保留下级继承授权",
+        "本地演示假设：仅向所选机构的直属下级继承；关闭后仅保留该机构自身权限。",
+        "当前已选 4 项",
+        "包含一个当前树中未加载的既有选中键",
+        "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+        "默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；初始预选 4 项并保留 1 个名额，便于体验新增操作，滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。",
+        "modelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。",
+        "selectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。",
+        "titles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。",
+        "filterPlaceholders\t[string, string]\t['输入机构名称/部门编码检索...', '在已选名单中检索...']\t左侧筛选匹配节点名称或部门编码；右侧筛选匹配标题、编码和状态。",
+        "maxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。",
+        "inheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。",
+        "inheritChildDescription\tstring\tundefined\t建议宿主提供经业务确认的具体继承范围和关闭后的影响；说明固定显示在复选框旁并通过 aria-describedby 关联。缺失或纯空白时显示配置提示并禁用开关，组件不推断权限语义。",
+        "change\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。",
+        "update:inheritChild\tvalue\t下级继承开关变化。",
+        "clear-all\t无\t通过中间“全部移除”清空非空列表后触发；包含未加载节点时须先确认。事件在 update:modelValue 与 change 之后发出。",
+        "LxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：",
+        "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+        "中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。",
+        "左侧树标题区始终提供“反选本树可选项”，它只反转当前已加载树中的未禁用节点，并保留禁用节点和树外已选键；无筛选时按钮下方会显示该操作范围，可访问说明也保留相同规则。左侧搜索有内容时另显示“全选筛选结果”和“反选筛选结果”；按节点名称或部门编码匹配可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，筛选批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+        "“全部加入”受上限或空树状态限制时，按钮旁显示需要加入的数量和剩余名额；按钮的 aria-describedby 保留完整原因，便于读屏用户了解无法操作的具体原因。",
+        "两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏树节点名称最多显示两行，超长文本以标题保留完整内容；编码和状态收在单行并省略超长值，不增加固定行高。虚拟行高在 360-420px 为 64px、359px 及以下为 80px，44px 触控控件与元数据各占独立网格行；视口跨断点时树会保留焦点行并重算滚动锚点。已选名称也会换行显示，列表可通过键盘聚焦并滚动查看。",
+        "inheritChildDescription 是可选展示属性，但权限宿主应提供经业务确认的具体继承对象和关闭后的影响。组件不会推断实际授权范围；缺失或纯空白时显示配置提示并禁用开关，说明始终邻近复选框且通过 aria-describedby 关联。Demo 可关闭“提供继承说明”检查此状态。",
+        "窄屏下待选标题、筛选批量操作与状态说明分行展示；“待选/已选”切换按钮显示两侧数量并可通过键盘操作，隐藏面板从辅助技术和焦点顺序中移除。文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。",
+        "单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。",
+        "change 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。",
+        "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，并使用名称/部门编码联合匹配；右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。筛选输入使用文本类型和搜索键盘提示，避免浏览器原生清除符号与自定义按钮重复。筛选清除按钮桌面点击区域为 32px，窄屏为 44px；窄屏树行的复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸保持 24×24px，两个控件占用独立网格列。已选列表可通过键盘聚焦并滚动查看；存在未显示内容时，列表外的状态提示会显示尚未完整进入视口的项数，通过 aria-describedby 关联到列表，并在滚动到底部后收起。移除单项后焦点移到下一项；若没有下一项则移到上一项，列表清空时回到列表容器。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+        "右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。中间穿梭按钮执行全量加入和移除；树标题区的全树反选与筛选结果反选分别明确标出操作范围。",
+        "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。确认期间如果 modelValue 的键或顺序发生变化，旧确认会失效并提示用户重新检查；仅以新数组引用传入相同键序列不会使确认失效。失效时不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+        "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能自动撤销；服务端补偿仍由宿主按真实 API 契约实现。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "transferpanel",
+      "scene": "inherit-description-missing",
+      "skipped": "可见或展开的控件中没有标签包含“提供继承说明”的复选框"
+    },
+    {
+      "route": "transferpanel",
+      "scene": "filter-left-count",
+      "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+      "status": null,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 19 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 19 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 37,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "已载入组织权限数据"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "筛选到 1 项，已选 0 项"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 4 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "筛选匹配到 1 个节点；路径祖先不计入数量。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "全量加入需要 2 项，当前还可加入 1 项"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 2,
+      "relevantLines": [
+        "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。",
+        "全选筛选结果",
+        "反选筛选结果",
+        "筛选到 1 项，已选 0 项",
+        "仅反转当前已加载树中未禁用的可选节点，并保留禁用节点和树外已选键。",
+        "当前已选中 4 项。",
+        "筛选匹配到 1 个节点；路径祖先不计入数量。",
+        "全量加入需要 2 项，当前还可加入 1 项",
+        "已选数据权限清单",
+        "节点未加载",
+        "已选 4 项",
+        "保留下级继承授权",
+        "本地演示假设：仅向所选机构的直属下级继承；关闭后仅保留该机构自身权限。",
+        "当前已选 4 项",
+        "包含一个当前树中未加载的既有选中键",
+        "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+        "默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；初始预选 4 项并保留 1 个名额，便于体验新增操作，滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。",
+        "modelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。",
+        "selectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。",
+        "titles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。",
+        "filterPlaceholders\t[string, string]\t['输入机构名称/部门编码检索...', '在已选名单中检索...']\t左侧筛选匹配节点名称或部门编码；右侧筛选匹配标题、编码和状态。",
+        "maxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。",
+        "inheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。",
+        "inheritChildDescription\tstring\tundefined\t建议宿主提供经业务确认的具体继承范围和关闭后的影响；说明固定显示在复选框旁并通过 aria-describedby 关联。缺失或纯空白时显示配置提示并禁用开关，组件不推断权限语义。",
+        "change\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。",
+        "update:inheritChild\tvalue\t下级继承开关变化。",
+        "clear-all\t无\t通过中间“全部移除”清空非空列表后触发；包含未加载节点时须先确认。事件在 update:modelValue 与 change 之后发出。",
+        "LxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：",
+        "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+        "中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。",
+        "左侧树标题区始终提供“反选本树可选项”，它只反转当前已加载树中的未禁用节点，并保留禁用节点和树外已选键；无筛选时按钮下方会显示该操作范围，可访问说明也保留相同规则。左侧搜索有内容时另显示“全选筛选结果”和“反选筛选结果”；按节点名称或部门编码匹配可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，筛选批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+        "“全部加入”受上限或空树状态限制时，按钮旁显示需要加入的数量和剩余名额；按钮的 aria-describedby 保留完整原因，便于读屏用户了解无法操作的具体原因。",
+        "两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏树节点名称最多显示两行，超长文本以标题保留完整内容；编码和状态收在单行并省略超长值，不增加固定行高。虚拟行高在 360-420px 为 64px、359px 及以下为 80px，44px 触控控件与元数据各占独立网格行；视口跨断点时树会保留焦点行并重算滚动锚点。已选名称也会换行显示，列表可通过键盘聚焦并滚动查看。",
+        "inheritChildDescription 是可选展示属性，但权限宿主应提供经业务确认的具体继承对象和关闭后的影响。组件不会推断实际授权范围；缺失或纯空白时显示配置提示并禁用开关，说明始终邻近复选框且通过 aria-describedby 关联。Demo 可关闭“提供继承说明”检查此状态。",
+        "窄屏下待选标题、筛选批量操作与状态说明分行展示；“待选/已选”切换按钮显示两侧数量并可通过键盘操作，隐藏面板从辅助技术和焦点顺序中移除。文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。",
+        "单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。",
+        "change 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。",
+        "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，并使用名称/部门编码联合匹配；右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。筛选输入使用文本类型和搜索键盘提示，避免浏览器原生清除符号与自定义按钮重复。筛选清除按钮桌面点击区域为 32px，窄屏为 44px；窄屏树行的复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸保持 24×24px，两个控件占用独立网格列。已选列表可通过键盘聚焦并滚动查看；存在未显示内容时，列表外的状态提示会显示尚未完整进入视口的项数，通过 aria-describedby 关联到列表，并在滚动到底部后收起。移除单项后焦点移到下一项；若没有下一项则移到上一项，列表清空时回到列表容器。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+        "右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。中间穿梭按钮执行全量加入和移除；树标题区的全树反选与筛选结果反选分别明确标出操作范围。",
+        "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。确认期间如果 modelValue 的键或顺序发生变化，旧确认会失效并提示用户重新检查；仅以新数组引用传入相同键序列不会使确认失效。失效时不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+        "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能自动撤销；服务端补偿仍由宿主按真实 API 契约实现。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "transferpanel",
+      "scene": "filter-right-count",
+      "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+      "status": null,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 19 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 19 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 35,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "已载入组织权限数据"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 4 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "全量加入需要 2 项，当前还可加入 1 项"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。",
+        "仅反转已加载的可选节点；禁用项和树外已选键会保留。",
+        "仅反转当前已加载树中未禁用的可选节点，并保留禁用节点和树外已选键。",
+        "当前已选中 4 项。",
+        "全量加入需要 2 项，当前还可加入 1 项",
+        "已选数据权限清单",
+        "已选 4 项",
+        "保留下级继承授权",
+        "本地演示假设：仅向所选机构的直属下级继承；关闭后仅保留该机构自身权限。",
+        "当前已选 4 项",
+        "包含一个当前树中未加载的既有选中键",
+        "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+        "默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；初始预选 4 项并保留 1 个名额，便于体验新增操作，滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。",
+        "modelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。",
+        "selectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。",
+        "titles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。",
+        "filterPlaceholders\t[string, string]\t['输入机构名称/部门编码检索...', '在已选名单中检索...']\t左侧筛选匹配节点名称或部门编码；右侧筛选匹配标题、编码和状态。",
+        "maxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。",
+        "inheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。",
+        "inheritChildDescription\tstring\tundefined\t建议宿主提供经业务确认的具体继承范围和关闭后的影响；说明固定显示在复选框旁并通过 aria-describedby 关联。缺失或纯空白时显示配置提示并禁用开关，组件不推断权限语义。",
+        "change\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。",
+        "update:inheritChild\tvalue\t下级继承开关变化。",
+        "clear-all\t无\t通过中间“全部移除”清空非空列表后触发；包含未加载节点时须先确认。事件在 update:modelValue 与 change 之后发出。",
+        "LxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：",
+        "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+        "中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。",
+        "左侧树标题区始终提供“反选本树可选项”，它只反转当前已加载树中的未禁用节点，并保留禁用节点和树外已选键；无筛选时按钮下方会显示该操作范围，可访问说明也保留相同规则。左侧搜索有内容时另显示“全选筛选结果”和“反选筛选结果”；按节点名称或部门编码匹配可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，筛选批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+        "“全部加入”受上限或空树状态限制时，按钮旁显示需要加入的数量和剩余名额；按钮的 aria-describedby 保留完整原因，便于读屏用户了解无法操作的具体原因。",
+        "两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏树节点名称最多显示两行，超长文本以标题保留完整内容；编码和状态收在单行并省略超长值，不增加固定行高。虚拟行高在 360-420px 为 64px、359px 及以下为 80px，44px 触控控件与元数据各占独立网格行；视口跨断点时树会保留焦点行并重算滚动锚点。已选名称也会换行显示，列表可通过键盘聚焦并滚动查看。",
+        "inheritChildDescription 是可选展示属性，但权限宿主应提供经业务确认的具体继承对象和关闭后的影响。组件不会推断实际授权范围；缺失或纯空白时显示配置提示并禁用开关，说明始终邻近复选框且通过 aria-describedby 关联。Demo 可关闭“提供继承说明”检查此状态。",
+        "窄屏下待选标题、筛选批量操作与状态说明分行展示；“待选/已选”切换按钮显示两侧数量并可通过键盘操作，隐藏面板从辅助技术和焦点顺序中移除。文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。",
+        "单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。",
+        "change 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。",
+        "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，并使用名称/部门编码联合匹配；右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。筛选输入使用文本类型和搜索键盘提示，避免浏览器原生清除符号与自定义按钮重复。筛选清除按钮桌面点击区域为 32px，窄屏为 44px；窄屏树行的复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸保持 24×24px，两个控件占用独立网格列。已选列表可通过键盘聚焦并滚动查看；存在未显示内容时，列表外的状态提示会显示尚未完整进入视口的项数，通过 aria-describedby 关联到列表，并在滚动到底部后收起。移除单项后焦点移到下一项；若没有下一项则移到上一项，列表清空时回到列表容器。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+        "右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。中间穿梭按钮执行全量加入和移除；树标题区的全树反选与筛选结果反选分别明确标出操作范围。",
+        "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。确认期间如果 modelValue 的键或顺序发生变化，旧确认会失效并提示用户重新检查；仅以新数组引用传入相同键序列不会使确认失效。失效时不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+        "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能自动撤销；服务端补偿仍由宿主按真实 API 契约实现。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "transferpanel",
+      "scene": "keyboard-arrow-down",
+      "url": "http://127.0.0.1:4174/components/lxtransferpanel",
+      "status": null,
+      "observedTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "horizontalOverflow": false
+      },
+      "horizontalOverflow": false,
+      "detectorConsole": [
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 19 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 19 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        },
+        {
+          "type": "startGroup",
+          "text": "%c[impeccable] 18 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold",
+          "args": [
+            "%c[impeccable] 18 anti-patterns found",
+            "color: oklch(84% 0.19 80.46); font-weight: bold"
+          ]
+        }
+      ],
+      "overlayCount": 35,
+      "liveRegions": [
+        {
+          "role": null,
+          "live": "polite",
+          "text": "已载入组织权限数据"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "当前已选中 4 项。"
+        },
+        {
+          "role": "status",
+          "live": "polite",
+          "text": "全量加入需要 2 项，当前还可加入 1 项"
+        }
+      ],
+      "inheritInputs": [],
+      "treeItems": 21,
+      "relevantLines": [
+        "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。",
+        "仅反转已加载的可选节点；禁用项和树外已选键会保留。",
+        "仅反转当前已加载树中未禁用的可选节点，并保留禁用节点和树外已选键。",
+        "当前已选中 4 项。",
+        "全量加入需要 2 项，当前还可加入 1 项",
+        "已选数据权限清单",
+        "节点未加载",
+        "已选 4 项",
+        "保留下级继承授权",
+        "本地演示假设：仅向所选机构的直属下级继承；关闭后仅保留该机构自身权限。",
+        "当前已选 4 项",
+        "包含一个当前树中未加载的既有选中键",
+        "数据、加载状态和错误恢复由宿主提供；示例只使用本地内存数据。",
+        "默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；初始预选 4 项并保留 1 个名额，便于体验新增操作，滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。",
+        "modelValue\t(string | number)[]\t[]\t受控的已选节点键；可包含暂未加载到当前树中的既有键。",
+        "selectedItems\tLxTransferPanelItem[]\t[]\t当前树未加载时用于回显已选项的最近详情；只匹配 modelValue，且当前 treeData 中的节点优先。",
+        "titles\t[string, string]\t['待选资源', '已选资源']\t左右面板标题。",
+        "filterPlaceholders\t[string, string]\t['输入机构名称/部门编码检索...', '在已选名单中检索...']\t左侧筛选匹配节点名称或部门编码；右侧筛选匹配标题、编码和状态。",
+        "maxCount\tnumber\tundefined\t已选键上限。超限的新增或批量加入整体拒绝；移除和清空仍可用，即使初始值已经超过上限。0 或非法非有限值表示不允许新增。",
+        "inheritChild\tboolean\ttrue\t是否保留下级继承授权；组件只回传该开关，不解释后端授权语义。",
+        "inheritChildDescription\tstring\tundefined\t建议宿主提供经业务确认的具体继承范围和关闭后的影响；说明固定显示在复选框旁并通过 aria-describedby 关联。缺失或纯空白时显示配置提示并禁用开关，组件不推断权限语义。",
+        "change\t(keys, nodes)\t被接受的选中变化。nodes 只包含当前 treeData 中能解析的节点；未加载的既有键仍包含在 keys 中。",
+        "update:inheritChild\tvalue\t下级继承开关变化。",
+        "clear-all\t无\t通过中间“全部移除”清空非空列表后触发；包含未加载节点时须先确认。事件在 update:modelValue 与 change 之后发出。",
+        "LxTransferPanelNode 继承 LxVirtualTreeNode，并提供以下可选字段：",
+        "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+        "中间向右按钮加入当前树中所有未禁用节点；上限不足时不做部分写入。中间向左按钮移除全部已选项。",
+        "左侧树标题区始终提供“反选本树可选项”，它只反转当前已加载树中的未禁用节点，并保留禁用节点和树外已选键；无筛选时按钮下方会显示该操作范围，可访问说明也保留相同规则。左侧搜索有内容时另显示“全选筛选结果”和“反选筛选结果”；按节点名称或部门编码匹配可选节点，不包含仅用于显示路径的祖先行。操作区会可见说明匹配数量、已选状态、无可操作匹配项或选择上限，筛选批量按钮通过 aria-describedby 关联当前说明；超过选择上限时拒绝会增加数量的操作。",
+        "“全部加入”受上限或空树状态限制时，按钮旁显示需要加入的数量和剩余名额；按钮的 aria-describedby 保留完整原因，便于读屏用户了解无法操作的具体原因。",
+        "两个全量穿梭按钮在图标下方常驻显示“全部加入”和“全部移除”；筛选后仍与左侧的筛选结果操作区分。窄屏树节点名称最多显示两行，超长文本以标题保留完整内容；编码和状态收在单行并省略超长值，不增加固定行高。虚拟行高在 360-420px 为 64px、359px 及以下为 80px，44px 触控控件与元数据各占独立网格行；视口跨断点时树会保留焦点行并重算滚动锚点。已选名称也会换行显示，列表可通过键盘聚焦并滚动查看。",
+        "inheritChildDescription 是可选展示属性，但权限宿主应提供经业务确认的具体继承对象和关闭后的影响。组件不会推断实际授权范围；缺失或纯空白时显示配置提示并禁用开关，说明始终邻近复选框且通过 aria-describedby 关联。Demo 可关闭“提供继承说明”检查此状态。",
+        "窄屏下待选标题、筛选批量操作与状态说明分行展示；“待选/已选”切换按钮显示两侧数量并可通过键盘操作，隐藏面板从辅助技术和焦点顺序中移除。文档页只在宽屏扩展示例正文列，并保留页面目录和全站侧栏。",
+        "单个禁用树节点不能从左侧新增。右侧可逐项移除已选节点；移除未加载节点前需确认。",
+        "change 的 nodes 不为未加载键构造伪造节点数据。需要完整业务对象时，宿主应按键从自己的数据源解析。",
+        "左树继承 LxVirtualTree 的键盘操作；组件外层筛选框调用树的 filter() 方法，并使用名称/部门编码联合匹配；右侧筛选匹配标题、编码、原始状态值和可见状态文案，并提供独立清除按钮；清除后焦点回到对应输入框。筛选输入使用文本类型和搜索键盘提示，避免浏览器原生清除符号与自定义按钮重复。筛选清除按钮桌面点击区域为 32px，窄屏为 44px；窄屏树行的复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸保持 24×24px，两个控件占用独立网格列。已选列表可通过键盘聚焦并滚动查看；存在未显示内容时，列表外的状态提示会显示尚未完整进入视口的项数，通过 aria-describedby 关联到列表，并在滚动到底部后收起。移除单项后焦点移到下一项；若没有下一项则移到上一项，列表清空时回到列表容器。组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理，示例会禁用并降低面板透明度，状态消息显示在面板下方。",
+        "右侧无已选项时显示“暂无分配权限，请在左侧勾选”；右侧筛选无匹配项时显示“未找到匹配的已选项”。中间穿梭按钮执行全量加入和移除；树标题区的全树反选与筛选结果反选分别明确标出操作范围。",
+        "未加载节点的单项移除或全量清空由组件先执行危险确认；取消时不改变受控值。确认期间如果 modelValue 的键或顺序发生变化，旧确认会失效并提示用户重新检查；仅以新数组引用传入相同键序列不会使确认失效。失效时不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。下面是接入时序示意，savePermissionKeys 由宿主提供：",
+        "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复本地选择快照，不表示已经持久化的数据也能自动撤销；服务端补偿仍由宿主按真实 API 契约实现。"
+      ],
+      "errorResponses": [],
+      "pageErrors": []
+    },
+    {
+      "route": "transferpanel",
+      "scene": "empty-state",
+      "skipped": "未找到按钮 空结果"
+    },
+    {
+      "route": "transferpanel",
+      "scene": "loading-state",
+      "skipped": "未找到按钮 加载中"
+    },
+    {
+      "route": "transferpanel",
+      "scene": "error-state",
+      "skipped": "未找到按钮 加载失败"
+    }
+  ]
+}

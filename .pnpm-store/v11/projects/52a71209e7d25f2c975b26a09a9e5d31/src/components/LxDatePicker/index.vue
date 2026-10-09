@@ -114,17 +114,28 @@ const pickerRef = ref<DatePickerInstance>()
 const managedDescriptionIds = new WeakMap<HTMLInputElement, Set<string>>()
 const instanceClass = `lx-date-picker--instance-${getCurrentInstance()?.uid ?? 'unknown'}`
 const instancePopperClass = `lx-date-picker__popper--instance-${getCurrentInstance()?.uid ?? 'unknown'}`
+const dualPanelClass = 'lx-date-picker__popper--dual-panel'
 const viewportFitClass = 'lx-date-picker__popper--viewport-fit'
 const isNarrowViewport = ref(false)
 const singlePanel = computed(() => props.singlePanel ?? isNarrowViewport.value)
 let viewportQuery: MediaQueryList | undefined
 let viewportFitFrame: number | undefined
 
+function getViewportHeight(): number {
+  return Math.min(
+    window.innerHeight,
+    window.visualViewport?.height ?? window.innerHeight,
+  )
+}
+
 function updateViewportMode(): void {
   isNarrowViewport.value = viewportQuery?.matches ?? window.innerWidth <= 640
-  if (!isNarrowViewport.value) {
-    getPickerPopper()?.classList.remove(viewportFitClass)
-    return
+  const viewportHeight = getViewportHeight()
+  if (viewportHeight > 640 && !isNarrowViewport.value) {
+    const popper = getPickerPopper()
+    if (popper) clearViewportFit(popper)
+  } else {
+    if (getVisiblePopper()) preparePickerForOpen(true)
   }
 
   scheduleViewportFit()
@@ -176,22 +187,184 @@ function getPickerPopper(): HTMLElement | undefined {
   )
 }
 
+function clearViewportFit(popper: HTMLElement): void {
+  popper.classList.remove(viewportFitClass)
+  popper.style.removeProperty('--lx-date-picker-fit-top')
+  popper.style.removeProperty('--lx-date-picker-fit-left')
+  popper.style.removeProperty('--lx-date-picker-fit-max-width')
+  popper.style.removeProperty('--lx-date-picker-fit-max-height')
+  const panel = popper.querySelector<HTMLElement>('.el-picker-panel')
+  panel?.style.removeProperty('--lx-date-picker-fit-panel-height')
+}
+
+function getScrollableAncestor(element: HTMLElement): HTMLElement | undefined {
+  let ancestor = element.parentElement
+  while (
+    ancestor &&
+    ancestor !== document.body &&
+    ancestor !== document.documentElement
+  ) {
+    const overflowY = window.getComputedStyle(ancestor).overflowY
+    if (
+      /(auto|scroll|overlay)/.test(overflowY) &&
+      ancestor.scrollHeight > ancestor.clientHeight
+    ) {
+      return ancestor
+    }
+    ancestor = ancestor.parentElement
+  }
+  return undefined
+}
+
+function preparePickerForOpen(allowOpen = false): void {
+  const viewportHeight = getViewportHeight()
+  if (
+    (!isNarrowViewport.value && viewportHeight > 480) ||
+    (!allowOpen && getVisiblePopper())
+  ) {
+    return
+  }
+  const trigger = getPickerContainer()
+  if (!trigger || trigger.classList.contains('is-disabled')) return
+
+  const triggerBounds = trigger.getBoundingClientRect()
+  const viewportTop = window.visualViewport?.offsetTop ?? 0
+  const reservedPanelHeight = Math.min(480, Math.max(96, viewportHeight - 64))
+  const targetTop =
+    viewportTop +
+    Math.max(8, viewportHeight - reservedPanelHeight - triggerBounds.height - 8)
+  if (triggerBounds.top <= targetTop + 1) return
+
+  const scrollDistance = triggerBounds.top - targetTop
+  if (scrollDistance <= 1) return
+
+  const scrollableAncestor = getScrollableAncestor(trigger)
+  if (scrollableAncestor) {
+    scrollableAncestor.scrollBy({ top: scrollDistance, behavior: 'instant' })
+  } else {
+    window.scrollBy({ top: scrollDistance, behavior: 'instant' })
+  }
+}
+
+function handlePickerOpenFocus(event: FocusEvent): void {
+  const target = event.target
+  if (
+    target instanceof HTMLInputElement &&
+    getPickerContainer()?.contains(target)
+  ) {
+    preparePickerForOpen()
+  }
+}
+
+function handlePickerOpenClick(event: MouseEvent): void {
+  const trigger = getPickerContainer()
+  const target = event.target
+  if (
+    !(target instanceof Element) ||
+    !trigger?.contains(target) ||
+    target.closest('.el-input__clear')
+  ) {
+    return
+  }
+
+  if (
+    target instanceof HTMLInputElement ||
+    target.closest(
+      '.el-input__wrapper, .el-input__suffix, .el-range-input-wrap',
+    )
+  ) {
+    preparePickerForOpen(true)
+  }
+}
+
+function handlePickerOpenKeydown(event: KeyboardEvent): void {
+  const target = event.target
+  if (
+    event.key === 'ArrowDown' &&
+    target instanceof HTMLInputElement &&
+    getPickerContainer()?.contains(target)
+  ) {
+    preparePickerForOpen()
+  }
+}
+
 function syncViewportFit(): void {
   const popper = getVisiblePopper()
   if (!popper) return
 
-  popper.classList.remove(viewportFitClass)
-  // 等待 Element Plus 根据新视口完成弹层翻转后，再判断锚点位置是否仍越界。
-  viewportFitFrame = window.requestAnimationFrame(() => {
+  const viewportHeight = getViewportHeight()
+  if (viewportHeight > 640 && !isNarrowViewport.value) {
+    clearViewportFit(popper)
+    return
+  }
+
+  const applyViewportFit = () => {
     viewportFitFrame = undefined
     const currentPopper = getVisiblePopper()
-    if (!currentPopper) return
+    const trigger = getPickerContainer()
+    if (!currentPopper || !trigger) return
 
-    const { top, bottom } = currentPopper.getBoundingClientRect()
-    const overflowsViewport = top < 8 || bottom > window.innerHeight - 8
-    if (isNarrowViewport.value && overflowsViewport) {
-      currentPopper.classList.add(viewportFitClass)
-    }
+    const popperBounds = currentPopper.getBoundingClientRect()
+    const triggerBounds = trigger.getBoundingClientRect()
+    const viewport = window.visualViewport
+    const viewportTop = viewport?.offsetTop ?? 0
+    const viewportLeft = viewport?.offsetLeft ?? 0
+    const currentViewportHeight = getViewportHeight()
+    const viewportWidth = Math.min(
+      window.innerWidth,
+      viewport?.width ?? window.innerWidth,
+    )
+    const viewportBottom = viewportTop + currentViewportHeight
+    const overflowsViewport =
+      popperBounds.top < viewportTop + 8 ||
+      popperBounds.bottom > viewportBottom - 8
+    const overlapsTrigger =
+      popperBounds.top < triggerBounds.bottom &&
+      popperBounds.bottom > triggerBounds.top
+    const alreadyFitted = currentPopper.classList.contains(viewportFitClass)
+
+    if (!alreadyFitted && !overflowsViewport && !overlapsTrigger) return
+
+    const top = Math.min(
+      Math.max(triggerBounds.bottom + 8, viewportTop + 8),
+      viewportBottom - 96,
+    )
+    const maxWidth = Math.max(0, viewportWidth - 16)
+    const maxLeft = Math.max(
+      viewportLeft + 8,
+      viewportLeft + viewportWidth - maxWidth - 8,
+    )
+    const left = Math.min(
+      Math.max(triggerBounds.left, viewportLeft + 8),
+      maxLeft,
+    )
+    const maxHeight = Math.max(96, viewportBottom - top - 8)
+    const panel = currentPopper.querySelector<HTMLElement>('.el-picker-panel')
+
+    currentPopper.style.setProperty('--lx-date-picker-fit-top', `${top}px`)
+    currentPopper.style.setProperty('--lx-date-picker-fit-left', `${left}px`)
+    currentPopper.style.setProperty(
+      '--lx-date-picker-fit-max-width',
+      `${maxWidth}px`,
+    )
+    currentPopper.style.setProperty(
+      '--lx-date-picker-fit-max-height',
+      `${maxHeight}px`,
+    )
+    panel?.style.setProperty(
+      '--lx-date-picker-fit-panel-height',
+      `${maxHeight}px`,
+    )
+    currentPopper.classList.add(viewportFitClass)
+  }
+
+  if (popper.classList.contains(viewportFitClass)) {
+    applyViewportFit()
+    return
+  }
+
+  viewportFitFrame = window.requestAnimationFrame(() => {
+    viewportFitFrame = window.requestAnimationFrame(applyViewportFit)
   })
 }
 
@@ -209,7 +382,10 @@ function scheduleViewportFit(): void {
 function handlePickerVisibleChange(visible: boolean): void {
   emit('visible-change', visible)
   if (visible) {
-    scheduleViewportFit()
+    nextTick(scheduleViewportFit)
+  } else {
+    const popper = getPickerPopper()
+    if (popper) clearViewportFit(popper)
   }
 }
 
@@ -390,11 +566,12 @@ function handleDateRangeKeydown(event: KeyboardEvent): void {
     return
   }
 
+  const rowSize = currentCell.parentElement?.querySelectorAll('td').length ?? 7
   const movement: Record<string, number> = {
     ArrowLeft: -1,
     ArrowRight: 1,
-    ArrowUp: -7,
-    ArrowDown: 7,
+    ArrowUp: -rowSize,
+    ArrowDown: rowSize,
   }
   const step = movement[event.key]
   if (step !== undefined) {
@@ -403,7 +580,7 @@ function handleDateRangeKeydown(event: KeyboardEvent): void {
 
     const cells = Array.from(table.querySelectorAll<HTMLTableCellElement>('td'))
     const currentIndex = cells.indexOf(currentCell)
-    const stride = Math.abs(step) === 7 ? step : Math.sign(step)
+    const stride = step
     for (
       let targetIndex = currentIndex + step;
       targetIndex >= 0 && targetIndex < cells.length;
@@ -431,6 +608,9 @@ function handleDateRangeKeydown(event: KeyboardEvent): void {
 
 onMounted(() => {
   syncInputDescriptions()
+  document.addEventListener('focus', handlePickerOpenFocus, true)
+  document.addEventListener('click', handlePickerOpenClick, true)
+  document.addEventListener('keydown', handlePickerOpenKeydown, true)
   document.addEventListener('keydown', handleDateRangeKeydown, true)
   const query =
     typeof window.matchMedia === 'function'
@@ -448,10 +628,18 @@ onMounted(() => {
   window.addEventListener('resize', updateViewportMode)
   const stopResizeTracking = () =>
     window.removeEventListener('resize', updateViewportMode)
+  const visualViewport = window.visualViewport
+  visualViewport?.addEventListener('resize', updateViewportMode)
+  visualViewport?.addEventListener('scroll', scheduleViewportFit)
+  const stopVisualViewportTracking = () => {
+    visualViewport?.removeEventListener('resize', updateViewportMode)
+    visualViewport?.removeEventListener('scroll', scheduleViewportFit)
+  }
   const stopMediaQueryTracking = stopViewportTracking
   stopViewportTracking = () => {
     stopResizeTracking()
     stopMediaQueryTracking?.()
+    stopVisualViewportTracking()
   }
 })
 
@@ -459,6 +647,9 @@ let stopViewportTracking: (() => void) | undefined
 
 onBeforeUnmount(() => {
   stopViewportTracking?.()
+  document.removeEventListener('focus', handlePickerOpenFocus, true)
+  document.removeEventListener('click', handlePickerOpenClick, true)
+  document.removeEventListener('keydown', handlePickerOpenKeydown, true)
   document.removeEventListener('keydown', handleDateRangeKeydown, true)
   focusedRangeInput = undefined
   if (rangeFocusFrame !== undefined) {
@@ -507,6 +698,7 @@ defineExpose({
     :popper-class="[
       'lx-date-picker__popper',
       instancePopperClass,
+      !singlePanel ? dualPanelClass : undefined,
       props.popperClass,
     ]"
     :model-value="modelValue"

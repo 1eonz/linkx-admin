@@ -86,12 +86,45 @@ const fields: NonNullable<LxSearchBarProps['fields']> = [
   },
 ]
 
+const standardFields: NonNullable<LxSearchBarProps['fields']> = [
+  {
+    key: 'keyword',
+    label: '关键词',
+    type: 'input',
+    span: 6,
+    placeholder: '姓名 / 警号',
+  },
+  {
+    key: 'department',
+    label: '责任部门',
+    type: 'select',
+    span: 6,
+    options: [
+      { label: '指挥中心', value: 'command' },
+      { label: '巡防大队', value: 'patrol' },
+    ],
+  },
+  {
+    key: 'region',
+    label: '组织节点',
+    type: 'tree-select',
+    span: 6,
+    options: [
+      { label: '城东片区', value: 'east' },
+      { label: '城西片区', value: 'west' },
+    ],
+  },
+  { key: 'date', label: '日期范围', type: 'daterange', span: 6 },
+]
+
 const query = ref<Record<string, unknown>>({ count: 0, source: [100, 101] })
 const loading = ref(false)
 const mode = ref<Mode>('success')
 const rows = ref<string[]>([])
 const status = ref('等待查询')
 const collapsed = ref(true)
+const standardQuery = ref<Record<string, unknown>>({})
+const standardStatus = ref('等待查询')
 
 function runSearch() {
   loading.value = true
@@ -119,6 +152,13 @@ function runSearch() {
     })
 }
 
+function runStandardSearch() {
+  standardStatus.value = '查询中'
+  window.setTimeout(() => {
+    standardStatus.value = '查询到 2 条 · 86ms'
+  }, 250)
+}
+
 const resultText = computed(() =>
   rows.value.length ? rows.value.join('、') : '无结果',
 )
@@ -140,9 +180,23 @@ const resultText = computed(() =>
           }}
         </button>
       </div>
-      <span role="status" aria-live="polite">{{ status }}</span>
+    </div>
+    <div class="lx-search-demo__standard">
+      <div class="lx-search-demo__standard-heading">
+        <strong>四字段标准态</strong>
+        <span>桌面端字段与操作保持同一行，窄屏自动回落为单列。</span>
+      </div>
+      <LxSearchBar
+        data-testid="standard-search"
+        v-model="standardQuery"
+        :fields="standardFields"
+        :status-text="standardStatus"
+        @search="runStandardSearch"
+        @reset="standardStatus = '已重置，等待查询'"
+      />
     </div>
     <LxSearchBar
+      data-testid="advanced-search"
       v-model="query"
       :fields="fields"
       :loading="loading"
@@ -189,6 +243,25 @@ const resultText = computed(() =>
 }
 .lx-search-demo__toolbar {
   justify-content: space-between;
+}
+.lx-search-demo__standard {
+  display: grid;
+  gap: var(--lx-space-sm);
+  padding: var(--lx-space-md);
+  border: 1px solid var(--lx-border-light);
+  border-radius: var(--lx-radius-sm);
+  background: var(--lx-bg-page);
+}
+.lx-search-demo__standard-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--lx-space-sm);
+  font-size: 13px;
+}
+.lx-search-demo__standard-heading span {
+  color: var(--lx-text-secondary);
+  font-size: 12px;
 }
 .lx-search-demo__modes button {
   min-height: var(--lx-control-height);

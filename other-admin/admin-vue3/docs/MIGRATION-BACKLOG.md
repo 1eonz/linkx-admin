@@ -1,11 +1,18 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-09 lx-ui Wave 7 / LxTransferPanel 交接
+
+- 根据用户反馈，文档 Demo 预览最大宽度设为 `820px` 并居中，窄屏铺满正文可用宽度；保留组件默认 `panelHeight=380px` 与 Demo 默认紧凑 240px，且高度选择器常显。移动候选数量标签改为“待选”，文档在示例旁说明本地选择不是已保存权限。
+- 最终组件/Demo 与单测 **64/64**、TransferPanel 文档 E2E **30/30**；E2E 校验 1440px 居中和 390px 正文可用宽度、无横向溢出。lx-ui/Vue3 类型检查、目标 Prettier、203 模块 lx-ui 构建、Vue3 生产构建通过；VitePress 文档构建及最终 Impeccable A/B 正在收口。Luna 代码复审无 P0-P2，已修正旧完成记录的 29/29 和哈希；正式 snapshot/trend 生成后再转 G2。
+- UI-04 仍需按真实 `DataPermissionTree` props、exposes、父子勾选、跨页/树外已选值回显、change 回传和权限错误契约完成适配、Mock/E2E；真实权限/后端联调必须依据真实契约。保留 Vue3 宿主 `element-plus`。
+- A 遗留三项 P2：Demo 240px 首屏密度、移动“可加入”计数命名、宿主保存状态示例；列入后续 Demo/权限宿主任务，不关闭 UI-10。下一组件库波次为 G2：SearchBar 已有 8 项宿主单测但缺少组件 Demo Playwright；StatusSwitch 已有 8 项单测与 3 项文档 E2E。按白名单提交推送后进入 G2 `LxSearchBar` + `LxStatusSwitch`。
+
 ## 2026-10-07 Wave 5 选择器组件交接
 
 - `LxTreeSelect`、`LxCascader`、`LxSelectPagination` 当前版本行为闭环完成：定向单测 36/36、文档 E2E 15/15；覆盖键盘/清空、错误焦点与英文错误、窄屏触控、表单 disabled、取消与迟到请求、续页失败重试及禁用不请求。
 - 独立代码复审无 P0–P2；Impeccable A 32/40，B 9 个目标 detector 均为有效 `[]`/空 stderr/exit 0，9 个浏览器场景成功。四项 P2 和长节点 E2E P3 已写入项目台账；`[]` 不等于视觉通过。
 - 本波没有迁移 Vue3 业务页、权限菜单或 Element Plus 依赖；继续保留 `.then().catch().finally()` API 链和现有宿主契约。全库 lx-ui 门禁前不得删除宿主 `element-plus`。
-- 下一入口：按组件库顺序完成 Upload fallback UID/公开 abort 组合回归、Descriptions、VirtualTree、TransferPanel、MetricCard、SectionTitle、StatusSwitch、SearchBar，再进入宿主替换矩阵。
+- 下一入口：Upload fallback UID/公开 abort 组合回归已完成；继续完成 Descriptions、VirtualTree、TransferPanel、MetricCard、SectionTitle、StatusSwitch、SearchBar 的组件库证据，再进入宿主替换矩阵。
 
 ## 2026-10-07 lx-ui Wave 4 组件门禁收口
 
@@ -177,7 +184,7 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 
 本轮完成 `LxProTable` 独立 API/Demo 和文档浏览器 4/4；修复跨页选择在外部 `selectedKeys` 同步时丢失可见勾选的问题，并补充加载读屏状态、减少动效、方向键横向滚动和触屏选择范围。业务 ProTable 适配层仍待替换波次的真实页面回归，Vue3 Element Plus 依赖尚未进入删除门槛。
 
-`LxTransferPanel` 已对照 `design/虚拟滚动树 + 双栏穿梭/` 补齐全选/反选、批量按钮禁用、`maxCount` 原子上限、树外既有键及禁用键保留、右侧清空事件和 44px 移动端触控。独立 API/Demo、4 项单测及文档 Playwright 3/3 仅证明库级能力；Vue3 `DataPermissionTree` 仍是业务实现，后续 UI-04 必须逐项比对 props、实例 exposes、父子勾选、已选项映射和变更回传，再做该宿主的 Mock/E2E。
+`LxTransferPanel` 已对照 `design/虚拟滚动树 + 双栏穿梭/` 补齐 5:2:5、380px `border-box` 面板、左右筛选、筛选范围批量操作、`code/status/statusTone`、树外既有键与未加载回显/确认、空/加载/错误和 44px 移动端触控。TransferPanel 当前 30 项单测、文档 E2E 28/28；VirtualTree 当前 34 项单测、文档 E2E 13/13，合计单测 64/64。桌面树项基准行高为 32px，TransferPanel 在 320–420px 窄屏为 64px、421px 起为 44px，VirtualTree 窄屏行高为 44px。未知状态字符串按原值显示，原型键映射缺陷已由 `constructor` 回归关闭。Vue3 `DataPermissionTree` 仍是业务实现，UI-04 必须逐项比对 props、实例 exposes、父子勾选、已选项映射和变更回传，再做该宿主的 Mock/E2E。最终统一冻结版 Impeccable A/B、snapshot/trend 仍待归档，UI-10 仍为 0/52。
 
 `LxActionButtons` 库级证据已补齐：3 项单测和 3 项文档 Playwright 覆盖隐藏/禁用项、click 事件、溢出操作、键盘展开、Escape 焦点恢复、外部点击/焦点移出收起、375px 44×44px 触控、HUD 深色和减少动效。Vue3 的 29 处引用仍使用宿主组件；UI-04 需保留数组配置与预设动作、原图标映射、单项 `onClick`、gap、禁用及权限过滤语义，不能直接机械替换。
 

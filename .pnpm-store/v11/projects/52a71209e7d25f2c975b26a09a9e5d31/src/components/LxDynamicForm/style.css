@@ -16,6 +16,15 @@
   min-width: 0;
 }
 
+.lx-dynamic-form__section-title {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--lx-text-regular);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
 .lx-dynamic-form__item .el-form-item__content {
   min-width: 0;
 }
@@ -81,6 +90,12 @@
 
   .lx-dynamic-form__item {
     grid-column: 1 / -1 !important;
+  }
+}
+
+@container (max-width: 520px) {
+  .lx-form.lx-dynamic-form.lx-form--grid .lx-dynamic-form__item.is-error {
+    margin-block-end: var(--lx-space-md);
   }
 }
 

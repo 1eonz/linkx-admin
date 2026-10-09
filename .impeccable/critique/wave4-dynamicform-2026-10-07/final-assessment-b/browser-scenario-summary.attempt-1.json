@@ -1,0 +1,245 @@
+[
+  {
+    "scenario": "dform-desktop-light-default",
+    "navigationStatus": 200,
+    "heading": "LxDynamicForm 动态表单\n​",
+    "overlayRan": true,
+    "findingCount": 17,
+    "screenshot": {
+      "path": "screenshots/dform-desktop-light-default.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "matchesViewport": true,
+      "overlayIncluded": true,
+      "unmodifiedPng": true
+    },
+    "externalAttemptCount": 0,
+    "consoleErrorCount": null,
+    "pageErrorCount": 0,
+    "interaction": {
+      "demoVisible": true,
+      "theme": "light-default"
+    },
+    "postCaptureInteraction": null,
+    "errors": []
+  },
+  {
+    "scenario": "dform-desktop-hud-field-failure",
+    "navigationStatus": 200,
+    "heading": "LxDynamicForm 动态表单\n​",
+    "overlayRan": false,
+    "findingCount": null,
+    "screenshot": {
+      "path": "screenshots/dform-desktop-hud-field-failure.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "matchesViewport": true,
+      "overlayIncluded": false,
+      "unmodifiedPng": true
+    },
+    "externalAttemptCount": 0,
+    "consoleErrorCount": null,
+    "pageErrorCount": 0,
+    "interaction": null,
+    "postCaptureInteraction": null,
+    "errors": [
+      "TimeoutError: locator.check: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.dynamic-form-demo__settings').getByRole('checkbox', { name: /文档站整体深色/ })\u001b[22m\n\u001b[2m    - locator resolved to <input type=\"checkbox\" class=\"el-checkbox__original\"/>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    58 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+    ]
+  },
+  {
+    "scenario": "upload-desktop-light",
+    "navigationStatus": 200,
+    "heading": "LxUpload 文件上传\n​",
+    "overlayRan": true,
+    "findingCount": 10,
+    "screenshot": {
+      "path": "screenshots/upload-desktop-light.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "matchesViewport": true,
+      "overlayIncluded": true,
+      "unmodifiedPng": true
+    },
+    "externalAttemptCount": 0,
+    "consoleErrorCount": null,
+    "pageErrorCount": 0,
+    "interaction": {
+      "demoVisible": true,
+      "theme": "light-default",
+      "uploadIdle": true
+    },
+    "postCaptureInteraction": null,
+    "errors": []
+  },
+  {
+    "scenario": "upload-desktop-hud",
+    "navigationStatus": 200,
+    "heading": "LxUpload 文件上传\n​",
+    "overlayRan": true,
+    "findingCount": 166,
+    "screenshot": {
+      "path": "screenshots/upload-desktop-hud.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "matchesViewport": true,
+      "overlayIncluded": true,
+      "unmodifiedPng": true
+    },
+    "externalAttemptCount": 0,
+    "consoleErrorCount": null,
+    "pageErrorCount": 0,
+    "interaction": {
+      "demoVisible": true,
+      "themeChanged": true,
+      "theme": "hud"
+    },
+    "postCaptureInteraction": null,
+    "errors": []
+  },
+  {
+    "scenario": "upload-mobile-375x812-progress-cancel",
+    "navigationStatus": 200,
+    "heading": "LxUpload 文件上传\n​",
+    "overlayRan": true,
+    "findingCount": 4,
+    "screenshot": {
+      "path": "screenshots/upload-mobile-375x812-progress-cancel.png",
+      "dimensions": {
+        "width": 375,
+        "height": 812
+      },
+      "matchesViewport": true,
+      "overlayIncluded": true,
+      "unmodifiedPng": true
+    },
+    "externalAttemptCount": 0,
+    "consoleErrorCount": null,
+    "pageErrorCount": 0,
+    "interaction": {
+      "autoUpload": true,
+      "cancelVisible": true,
+      "progressValue": "20",
+      "fileName": "schedule.csv"
+    },
+    "postCaptureInteraction": {
+      "cancelClicked": false,
+      "cancelCount": "0",
+      "lastAction": "schedule.csv 上传成功"
+    },
+    "errors": []
+  },
+  {
+    "scenario": "datepicker-desktop-light-open-range",
+    "navigationStatus": 200,
+    "heading": "LxDatePicker 日期选择器\n​",
+    "overlayRan": true,
+    "findingCount": 23,
+    "screenshot": {
+      "path": "screenshots/datepicker-desktop-light-open-range.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "matchesViewport": true,
+      "overlayIncluded": true,
+      "unmodifiedPng": true
+    },
+    "externalAttemptCount": 0,
+    "consoleErrorCount": null,
+    "pageErrorCount": 0,
+    "interaction": {
+      "panelVisible": false,
+      "theme": "light",
+      "openRange": true
+    },
+    "postCaptureInteraction": null,
+    "errors": []
+  },
+  {
+    "scenario": "datepicker-desktop-hud-open-range",
+    "navigationStatus": 200,
+    "heading": "LxDatePicker 日期选择器\n​",
+    "overlayRan": true,
+    "findingCount": 49,
+    "screenshot": {
+      "path": "screenshots/datepicker-desktop-hud-open-range.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "matchesViewport": true,
+      "overlayIncluded": true,
+      "unmodifiedPng": true
+    },
+    "externalAttemptCount": 0,
+    "consoleErrorCount": null,
+    "pageErrorCount": 0,
+    "interaction": {
+      "themeChanged": true,
+      "panelVisible": false,
+      "theme": "hud",
+      "openRange": true
+    },
+    "postCaptureInteraction": null,
+    "errors": []
+  },
+  {
+    "scenario": "datepicker-mobile-375x812-touch-popup",
+    "navigationStatus": 200,
+    "heading": "LxDatePicker 日期选择器\n​",
+    "overlayRan": true,
+    "findingCount": 17,
+    "screenshot": {
+      "path": "screenshots/datepicker-mobile-375x812-touch-popup.png",
+      "dimensions": {
+        "width": 375,
+        "height": 812
+      },
+      "matchesViewport": true,
+      "overlayIncluded": true,
+      "unmodifiedPng": true
+    },
+    "externalAttemptCount": 0,
+    "consoleErrorCount": null,
+    "pageErrorCount": 0,
+    "interaction": {
+      "panelVisible": false,
+      "interaction": "touch-tap",
+      "geometry": {
+        "panel": {
+          "x": 27,
+          "y": 214,
+          "width": 322,
+          "height": 363,
+          "right": 349,
+          "bottom": 577
+        },
+        "trigger": {
+          "x": 53,
+          "y": 157,
+          "width": 269,
+          "height": 44,
+          "right": 322,
+          "bottom": 201
+        },
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "panelWithinViewport": true,
+        "panelClass": "el-picker-panel el-date-range-picker single-panel",
+        "monthHeaderCount": 0
+      }
+    },
+    "postCaptureInteraction": null,
+    "errors": []
+  }
+]

@@ -57,13 +57,14 @@ onBeforeUnmount(() => {
     <div class="status-switch-demo__rows">
       <div class="status-switch-demo__row" data-testid="boolean-row">
         <div>
-          <strong>布控服务</strong>
+          <strong id="status-switch-boolean-label">布控服务</strong>
           <span>布控视频中继集群</span>
         </div>
         <div class="status-switch-demo__control">
           <LxStatusSwitch
             :model-value="enabled"
             :loading="loading"
+            aria-labelledby="status-switch-boolean-label"
             @update:model-value="saveEnabled"
           />
           <span data-testid="boolean-state">{{
@@ -74,12 +75,13 @@ onBeforeUnmount(() => {
 
       <div class="status-switch-demo__row" data-testid="numeric-row">
         <div>
-          <strong>兼容旧状态值</strong>
+          <strong id="status-switch-numeric-label">兼容旧状态值</strong>
           <span>0 表示开启，1 表示关闭</span>
         </div>
         <div class="status-switch-demo__control">
           <LxStatusSwitch
             :model-value="numericValue"
+            aria-labelledby="status-switch-numeric-label"
             @update:model-value="numericValue = Number($event)"
           />
           <span data-testid="numeric-state">{{ numericValue }}</span>
@@ -88,35 +90,51 @@ onBeforeUnmount(() => {
 
       <div class="status-switch-demo__row" data-testid="loading-row">
         <div>
-          <strong>保存处理中</strong>
-          <span>提交期间锁定开关</span>
+          <strong id="status-switch-loading-label">保存处理中</strong>
+          <span id="status-switch-loading-description">提交期间锁定开关</span>
         </div>
         <LxStatusSwitch
           :model-value="false"
           loading
+          aria-labelledby="status-switch-loading-label"
+          aria-describedby="status-switch-loading-description"
           @change="lastAction = '加载中的开关不应触发 change 事件'"
         />
       </div>
 
       <div class="status-switch-demo__row" data-testid="readonly-row">
         <div>
-          <strong>只读状态</strong>
-          <span>保留当前业务状态，不提供切换入口</span>
+          <strong id="status-switch-readonly-label">只读状态</strong>
+          <span id="status-switch-readonly-description"
+            >保留当前业务状态，不提供切换入口</span
+          >
         </div>
-        <LxStatusSwitch :model-value="true" disabled />
+        <LxStatusSwitch
+          :model-value="true"
+          disabled
+          aria-labelledby="status-switch-readonly-label"
+          aria-describedby="status-switch-readonly-description"
+        />
       </div>
 
       <div class="status-switch-demo__row" data-testid="permission-row">
         <div>
-          <strong>权限不足</strong>
-          <span>未注入权限码时降级为浅灰 LxTag</span>
+          <strong id="status-switch-permission-label">权限不足</strong>
+          <span id="status-switch-permission-description"
+            >未注入权限码时降级为浅灰 LxTag</span
+          >
         </div>
-        <LxStatusSwitch :model-value="true" permission="demo:status-switch" />
+        <LxStatusSwitch
+          :model-value="true"
+          permission="demo:status-switch"
+          aria-labelledby="status-switch-permission-label"
+          aria-describedby="status-switch-permission-description"
+        />
       </div>
 
       <div class="status-switch-demo__row" data-testid="confirm-row">
         <div>
-          <strong>关闭前确认</strong>
+          <strong id="status-switch-confirm-label">关闭前确认</strong>
           <span>取消确认时维持原状态</span>
         </div>
         <div class="status-switch-demo__control">
@@ -124,9 +142,14 @@ onBeforeUnmount(() => {
             :model-value="confirmValue"
             :confirm="{
               title: '确认停用该节点？',
-              message: '关闭后将中断节点通信，并记录操作审计。',
+              message: '关闭后将中断节点通信。',
+              targetEntity: '市局指挥中心主节点 NODE-MAIN-01',
+              impact: '核心节点、跨域调度中继及关联警力将暂时不可用。',
+              audit: '操作人、目标节点和变更原因将写入不可篡改审计日志。',
               type: 'danger',
+              customClass: darkTheme ? 'lx-theme-hud' : undefined,
             }"
+            aria-labelledby="status-switch-confirm-label"
             @update:model-value="confirmValue = Boolean($event)"
           />
           <span data-testid="confirm-state">{{

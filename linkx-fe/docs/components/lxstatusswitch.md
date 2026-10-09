@@ -18,16 +18,18 @@ import Basic from '../../src/components/LxStatusSwitch/demo/basic.vue';
 
 ## Props
 
-| 名称          | 类型                        | 默认值      | 说明                                                                                             |
-| ------------- | --------------------------- | ----------- | ------------------------------------------------------------------------------------------------ |
-| `modelValue`  | `boolean \| number`         | `false`     | 当前状态；数字模式下 `0` 为开启、`1` 为关闭。                                                    |
-| `loading`     | `boolean`                   | `false`     | 阻止重复切换并显示加载状态。                                                                     |
-| `disabled`    | `boolean`                   | `false`     | 只读显示当前状态，不渲染开关。                                                                   |
-| `permission`  | `string`                    | `undefined` | 宿主注入的按钮权限码；无权限时按 `fallbackTag` 降级。                                            |
-| `fallbackTag` | `boolean`                   | `true`      | 无权限时显示浅灰 `LxTag`，避免灰色死开关造成误解。                                               |
-| `confirm`     | `string \| object \| false` | `false`     | 关闭前确认说明；可传 `title`、`message`、`confirmText`、`cancelText`、`type`；开启时不弹确认框。 |
-| `onText`      | `string`                    | `开启`      | 开启状态文案。                                                                                   |
-| `offText`     | `string`                    | `关闭`      | 关闭状态文案。                                                                                   |
+| 名称          | 类型                        | 默认值      | 说明                                                                                                                                                   |
+| ------------- | --------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `modelValue`  | `boolean \| number`         | `false`     | 当前状态；数字模式下 `0` 为开启、`1` 为关闭。                                                                                                          |
+| `loading`     | `boolean`                   | `false`     | 阻止重复切换并显示加载状态。                                                                                                                           |
+| `disabled`    | `boolean`                   | `false`     | 只读显示当前状态，不渲染开关。                                                                                                                         |
+| `permission`  | `string`                    | `undefined` | 宿主注入的按钮权限码；无权限时按 `fallbackTag` 降级。                                                                                                  |
+| `fallbackTag` | `boolean`                   | `true`      | 无权限时显示浅灰 `LxTag`，避免灰色死开关造成误解。                                                                                                     |
+| `confirm`     | `string \| object \| false` | `false`     | 关闭前确认说明；对象可传 `title`、`message`、`targetEntity`、`impact`、`audit`、`confirmText`、`cancelText`、`type`、`customClass`；开启时不弹确认框。 |
+| `onText`      | `string`                    | `开启`      | 开启状态文案。                                                                                                                                         |
+| `offText`     | `string`                    | `关闭`      | 关闭状态文案。                                                                                                                                         |
+
+`confirm` 对象还支持可选的 `targetEntity`、`impact` 和 `audit` 中文上下文，确认层会按目标实体、影响范围和审计记录追加说明；不传时保留原 `message` 行为。
 
 ## Events
 
@@ -43,7 +45,8 @@ import Basic from '../../src/components/LxStatusSwitch/demo/basic.vue';
 - `disabled` 是宿主提供的只读状态；`permission` 只消费宿主通过 `setupLxPermission` 注入的权限源，不请求接口。权限码未命中且 `fallbackTag` 为 `true` 时降级为浅灰 `LxTag`，不渲染可点击的灰色死开关。
 - `loading` 阻止连续切换并为开关暴露 `aria-busy="true"`。宿主应在保存 Promise 的 `finally()` 中释放 loading，并在失败时保留原值。
 - 确认框等待期间若宿主进入 loading、只读或权限失效状态，确认结果会被丢弃，避免旧弹窗回写最新状态。
-- 只读与无权限降级标签带有 `aria-disabled="true"`；标签文案仍保留当前开启/关闭状态，便于读屏用户识别。
+- 只读与无权限降级标签带有 `aria-disabled="true"`；标签文案仍保留当前开启/关闭状态，并透传 `aria-labelledby`/`aria-describedby` 行级关联，便于读屏用户识别对象和状态。
+- 组件会把 `aria-label`、`aria-labelledby` 和 `aria-describedby` 传给实际开关或只读标签；表格行建议用 `aria-labelledby` 关联业务名称。确认对象的 `impact` 和 `audit` 会追加到确认正文，`customClass` 会传给 Teleport 到 body 的确认框，用于同步 HUD 等局部主题。
 - 组件在窄屏提供至少 44×44px 的点按区域，同时保持 42×20px 视觉轨道；键盘焦点可见，系统启用减少动效时缩短开关过渡。
 
 ## 设计对照记录

@@ -1,0 +1,1 @@
+Test-NetConnection -ComputerName 127.0.0.1 -Port 4174 -WarningAction SilentlyContinue | Select-Object ComputerName,RemotePort,TcpTestSucceeded | ConvertTo-Json -Compress

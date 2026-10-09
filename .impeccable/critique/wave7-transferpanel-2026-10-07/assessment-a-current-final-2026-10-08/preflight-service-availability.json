@@ -1,0 +1,19 @@
+{
+  "classification": "environment preflight only; excluded from Assessment A findings",
+  "target": "http://127.0.0.1:4174/components/lxtransferpanel",
+  "firstPuppeteerAttempt": {
+    "outcome": "ERR_CONNECTION_REFUSED",
+    "date": "2026-10-08",
+    "captures": 0,
+    "sourceOrPageChanges": 0,
+    "reviewEvidence": false,
+    "servicePidTouched": false
+  },
+  "recovery": {
+    "restoredBy": "root agent",
+    "command": "original lx-ui docs service command",
+    "replacementPid": 13460,
+    "pid19068": "not running at verification; it was not stopped, killed, or otherwise touched by Assessment A",
+    "headStatusAfterRecovery": 200
+  }
+}

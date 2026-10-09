@@ -132,6 +132,8 @@ function displayValue(item: LxDescriptionItem): string {
 .lx-descriptions {
   display: grid;
   grid-template-columns: repeat(var(--lx-descriptions-columns), minmax(0, 1fr));
+  min-width: 0;
+  max-width: 100%;
   margin: 0;
   border-top: 1px solid var(--lx-border-light);
 }
@@ -163,20 +165,50 @@ function displayValue(item: LxDescriptionItem): string {
 }
 
 .lx-descriptions__label {
-  color: var(--lx-text-regular);
+  overflow-wrap: anywhere;
+  color: var(--lx-text-secondary);
+  font-weight: 400;
 }
 
 .lx-descriptions__value {
   justify-content: flex-end;
+  overflow-wrap: anywhere;
   color: var(--lx-text-primary);
+  font-weight: 500;
   text-align: end;
 }
 
 .lx-descriptions__value-text {
+  min-width: 0;
   overflow: hidden;
   max-width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* 内嵌展示件沿用值列层级，避免子组件的正文令牌冲淡详情值。 */
+.lx-descriptions__value :deep(.lx-status-dot) {
+  min-width: 0;
+  max-width: 100%;
+  color: inherit;
+  font-weight: inherit;
+}
+
+.lx-descriptions__value :deep(.lx-status-dot__text) {
+  min-width: 0;
+  overflow: hidden;
+  color: inherit;
+  text-overflow: ellipsis;
+}
+
+.lx-descriptions__value :deep(.lx-code-slot) {
+  color: inherit;
+  font-weight: inherit;
+}
+
+.lx-descriptions__value :deep(.lx-code-slot--copyable:hover),
+.lx-descriptions__value :deep(.lx-code-slot--copyable:focus-visible) {
+  color: var(--lx-color-primary);
 }
 
 .lx-descriptions.is-bordered {
@@ -208,6 +240,28 @@ function displayValue(item: LxDescriptionItem): string {
 
   .lx-descriptions__item {
     grid-column: 1;
+  }
+
+  .lx-descriptions__value-text {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .lx-descriptions__value :deep(.lx-status-dot__text) {
+    min-width: 0;
+    overflow: visible;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    text-overflow: clip;
+  }
+
+  .lx-descriptions__value
+    :deep(.lx-code-slot.is-ellipsis .lx-code-slot__content) {
+    overflow: visible;
+    overflow-wrap: anywhere;
+    text-overflow: clip;
+    white-space: normal;
   }
 }
 

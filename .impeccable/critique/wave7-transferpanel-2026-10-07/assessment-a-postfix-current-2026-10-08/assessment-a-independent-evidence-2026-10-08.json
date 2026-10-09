@@ -1,0 +1,349 @@
+{
+  "method": "独立 Chromium 新标签；CDP 浏览器自动化和可视截图；本轮不运行 detector。",
+  "pageUrl": "http://127.0.0.1:4175/components/lxtransferpanel.html",
+  "capturedAt": "2026-10-07T21:57:36.572Z",
+  "browser": {
+    "chromePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "version": "Chrome/154.0.8037.95",
+    "targetId": "6966AFE5DA296DB21ACA66ECAD462369"
+  },
+  "sourceSha256Before": "1E726F334A02924D1BE0C2D30450DD8D8592A92310769D49E41B92F174FF0D87",
+  "sourceSha256After": "1E726F334A02924D1BE0C2D30450DD8D8592A92310769D49E41B92F174FF0D87",
+  "screenshots": [
+    "independent-desktop-default-2026-10-08.png",
+    "independent-desktop-limit-2026-10-08.png",
+    "independent-desktop-selected-overflow-2026-10-08.png",
+    "independent-desktop-selected-empty-2026-10-08.png",
+    "independent-desktop-empty-2026-10-08.png",
+    "independent-desktop-loading-2026-10-08.png",
+    "independent-desktop-error-2026-10-08.png",
+    "independent-mobile-source-375-2026-10-08.png",
+    "independent-mobile-selected-375-2026-10-08.png",
+    "independent-mobile-selected-320-2026-10-08.png",
+    "independent-desktop-hud-2026-10-08.png",
+    "independent-desktop-reduced-motion-2026-10-08.png"
+  ],
+  "desktop": {
+    "viewport": {
+      "width": 1440,
+      "height": 900,
+      "documentWidth": 1425
+    },
+    "root": {
+      "x": 336,
+      "y": 260,
+      "width": 865,
+      "height": 380
+    },
+    "gridTemplateColumns": "350.406px 140.172px 350.422px",
+    "gridTracks": [
+      350.406,
+      140.172,
+      350.422
+    ],
+    "gap": "12px",
+    "panels": [
+      {
+        "x": 336,
+        "y": 260,
+        "width": 350,
+        "height": 380
+      },
+      {
+        "x": 851,
+        "y": 260,
+        "width": 350,
+        "height": 380
+      }
+    ],
+    "panelHeightsEqual": true,
+    "treeScroll": {
+      "clientHeight": 253,
+      "scrollHeight": 45440
+    },
+    "selectedScroll": {
+      "clientHeight": 212,
+      "scrollHeight": 212,
+      "describedBy": null
+    },
+    "scrollHint": null,
+    "titles": [
+      "组织与数据权限树（待选）",
+      "已选数据权限清单"
+    ],
+    "selectedOverflowAtTop": {
+      "list": {
+        "clientHeight": 180,
+        "scrollHeight": 304,
+        "describedBy": "lx-transfer-panel-161-selected-scroll-hint"
+      },
+      "hint": {
+        "text": "下方还有 3 项，向下滚动查看更多",
+        "role": "status",
+        "live": "polite",
+        "atomic": "true"
+      },
+      "selectedCount": 6
+    },
+    "scrollHintAtBottom": {
+      "describedBy": null,
+      "hintText": null,
+      "scrollTop": 92
+    },
+    "selectedEmptyState": {
+      "emptyText": "暂无分配权限，请在左侧勾选",
+      "selectedCount": 0,
+      "undoAvailable": true
+    },
+    "keyboardFocus": {
+      "tag": "BUTTON",
+      "text": "正常数据",
+      "label": null,
+      "focusVisible": true,
+      "outline": "rgb(0, 96, 169) solid 2px"
+    }
+  },
+  "filters": {
+    "leftByCode": {
+      "query": "UNIT-PENDING-01",
+      "visibleRows": [],
+      "viewportText": "未找到匹配节点"
+    },
+    "leftByName": {
+      "query": "待授权特勤支队",
+      "visibleRows": [
+        "市公安局指挥中心 ORG-01 正常",
+        "待授权特勤支队 UNIT-PENDING-01 正常"
+      ],
+      "viewportText": "市公安局指挥中心\nORG-01\n正常\n待授权特勤支队\nUNIT-PENDING-01\n正常"
+    },
+    "leftClearRestoresFocus": "按名称筛选待选节点",
+    "rightByCode": {
+      "labels": [
+        "历史授权单位（记录中）：跨区域应急联动研判与协同处置权限 LEGACY-08 停用 节点未加载 legacy-unit-08"
+      ],
+      "count": 1
+    },
+    "rightClearRestoresFocus": "在已选项中检索"
+  },
+  "limits": {
+    "buttonText": "全部加入",
+    "disabled": true,
+    "title": "全量加入需要 2 项，当前还可加入 1 项",
+    "visibleHint": "需加入 2 项；仅剩 1 个名额",
+    "accessibleReason": "全量加入需要 2 项，当前还可加入 1 项",
+    "initialSelectedCount": 4
+  },
+  "focusAndConfirmation": {
+    "loadedRemovalFocus": {
+      "tag": "BUTTON",
+      "label": "移除 历史授权单位（记录中）：跨区域应急联动研判与协同处置权限",
+      "text": ""
+    },
+    "dialog": {
+      "visible": true,
+      "text": "移除未加载的授权 “历史授权单位（记录中）：跨区域应急联动研判与协同处置权限”当前不在已加载的树中，键值为 legacy-unit-08。确认从已选授权中移除吗？ 取消 移除授权",
+      "buttons": [
+        "",
+        "取消",
+        "移除授权"
+      ]
+    },
+    "sameValueArrayAccepted": {
+      "available": true,
+      "keys": [
+        "org-01",
+        "unit-01",
+        "legacy-unit-08",
+        "unit-03",
+        "archive-unit-01"
+      ]
+    },
+    "afterConfirm": {
+      "dialogVisible": false,
+      "selectedCount": 4,
+      "selectedLabels": [
+        "市公安局指挥中心",
+        "情指行一体化研判调度专班",
+        "站前路派出所综合作战室",
+        "待授权特勤支队"
+      ],
+      "activeLabel": "移除 站前路派出所综合作战室",
+      "warningText": null
+    }
+  },
+  "mobile": {
+    "source": {
+      "viewportWidth": 375,
+      "documentWidth": 375,
+      "root": {
+        "x": 24,
+        "y": 148,
+        "width": 327,
+        "height": 516
+      },
+      "panels": [
+        {
+          "rect": {
+            "x": 24,
+            "y": 216,
+            "width": 327,
+            "height": 380
+          },
+          "hidden": false
+        },
+        {
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "hidden": true
+        }
+      ],
+      "switchTargets": [
+        {
+          "x": 29,
+          "y": 153,
+          "width": 157,
+          "height": 46
+        },
+        {
+          "x": 190,
+          "y": 153,
+          "width": 157,
+          "height": 46
+        }
+      ],
+      "operationTargets": [
+        {
+          "x": 92,
+          "y": 614,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "x": 192,
+          "y": 614,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "removeTargets": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      ],
+      "sourceTreeRow": {
+        "x": 25,
+        "y": 307,
+        "width": 325,
+        "height": 64
+      },
+      "sourceCheckbox": {
+        "x": 65,
+        "y": 313,
+        "width": 24,
+        "height": 24
+      },
+      "sourceFilterClear": null
+    },
+    "selected": {
+      "selectedPressed": "true",
+      "sourcePressed": "false",
+      "panels": [
+        {
+          "hidden": true,
+          "height": 0
+        },
+        {
+          "hidden": false,
+          "height": 380
+        }
+      ],
+      "documentWidth": 375
+    },
+    "narrow320": {
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "selectedPressed": "true",
+      "rootWidth": 272,
+      "visibleLabelWidths": [
+        {
+          "clientWidth": 184,
+          "scrollWidth": 184
+        },
+        {
+          "clientWidth": 184,
+          "scrollWidth": 184
+        },
+        {
+          "clientWidth": 184,
+          "scrollWidth": 184
+        },
+        {
+          "clientWidth": 184,
+          "scrollWidth": 184
+        }
+      ]
+    }
+  },
+  "states": {
+    "empty": {
+      "treeText": "暂无数据",
+      "selectedEmptyText": null,
+      "selectedCount": 4
+    },
+    "loading": {
+      "message": "组织权限数据加载中……",
+      "role": "status",
+      "inert": true,
+      "ariaBusy": "true"
+    },
+    "error": {
+      "message": "组织权限数据加载失败，当前选择仍然保留。 重试",
+      "role": "alert",
+      "retryLabel": [
+        "重试"
+      ],
+      "selectedCount": 4
+    }
+  },
+  "theme": {
+    "hud": {
+      "rootHasHud": true,
+      "demoHasHud": true,
+      "panelBackground": "rgb(16, 26, 44)",
+      "actionBackground": "rgb(56, 189, 248)"
+    }
+  },
+  "reducedMotion": {
+    "mediaMatches": true,
+    "actionTransitionDuration": "1e-05s",
+    "selectedTransitionDuration": "1e-05s",
+    "actionAnimationDuration": "1e-05s"
+  },
+  "browserEvents": [
+    {
+      "kind": "console",
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "kind": "console",
+      "type": "debug",
+      "text": "[vite] connected."
+    }
+  ],
+  "completedAt": "2026-10-07T21:57:45.240Z"
+}
