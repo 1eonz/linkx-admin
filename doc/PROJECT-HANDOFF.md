@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-10] G2 正式交接：LxSearchBar + LxStatusSwitch
+
+- **SearchBar 已完成的实现范围**：根节点 `role=search`，loading 暴露 `aria-busy`，折叠按钮提示隐藏字段数量，移动按钮最小高度 44px，`prefers-reduced-motion` 下关闭图标过渡；单测 8/8、文档 E2E 3/3、类型/Prettier/ESLint 已通过，Assessment A 25/40。
+- **StatusSwitch 已完成的实现范围**：确认等待期间检测 modelValue 版本、loading、disabled 和权限撤销，避免旧确认结果回写；loading 暴露 `aria-busy`，只读/无权限 Tag 暴露 `aria-disabled`；单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6。
+- **Impeccable 证据**：SearchBar 修后 B 的三个 detector 均为有效 JSON `[]`、stderr 空、exit 0，亮色/HUD、1440/375px、减少动效和交互浏览器证据已落盘，复验报告为 `.impeccable/critique/wave8-searchbar-2026-10-10/assessment-b/final-recheck/final-recheck-report.md`；综合报告为 `.impeccable/critique/wave8-searchbar-2026-10-10/final-report.md`，正式 snapshot 为 `.impeccable/critique/2026-10-09T18-16-30Z__linkx-fe-src-components-lxsearchbar-index-vue.md`。`[]` 只表示静态规则零命中；375px 整页 615px 宽度为文档 API 表格/代码区域，组件本身无溢出。
+- **下一位执行者**：G2 已交付，进入下一波组件库任务；保留 SearchBar 字段级错误契约、Escape 安全语义、隐藏条件 active 摘要、设计 HTML 同步和 ARIA 单测增强 P2/P3。API 请求必须保持 `.then().catch().finally()`；权限中心、字段权限、引导页继续延后。
+
 ## [2026-10-10] Wave 7 正式交接完成，进入 G2
 
 - **完成范围**：`LxTransferPanel` 与 `LxVirtualTree` 当前实现、中文 Demo/API、超长名称折叠展开、筛选恢复、滚动边界、触控按钮和文档预览宽度已冻结；API `panelHeight` 默认 380px，Demo 预览最大 820px。

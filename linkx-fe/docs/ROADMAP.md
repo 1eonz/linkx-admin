@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-10 G2 正式完成
+
+- `LxSearchBar`：单测 8/8、文档 E2E 3/3、Assessment A 25/40；已完成搜索语义、loading/折叠字段提示、移动 44px 触控和减少动效处理。修后 B 的三个 detector 为有效 `[]`、stderr 空、exit 0，并有亮色/HUD、1440/375px 和交互证据。
+- `LxStatusSwitch`：单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6；确认竞态、外部 modelValue/权限源变化、权限撤销、loading/只读 ARIA、Space 键盘和失败重试已覆盖。
+- 库构建、独立代码复审和综合 Impeccable 报告已完成；综合报告、snapshot/trend 位于 `.impeccable/critique/wave8-searchbar-2026-10-10/`。静态 detector `[]` 仍不能单独代表视觉通过；Vue3 宿主替换继续后置。
+
 ## 2026-10-10 Wave 7 正式完成 / G2
 
 `LxTransferPanel` 已完成组件级交付：定向单测 64/64、文档 E2E 32/32；组件与 Demo 采用 5:2:5 桌面布局，文档预览最大 820px，窄屏长名称两行折叠并支持全文展开，筛选隐藏后恢复展开状态，移除按钮在移动端保持 44×44px。lx-ui 类型检查、203 模块构建、VitePress 文档构建、目标格式/ESLint 和 Vue3 生产构建通过。

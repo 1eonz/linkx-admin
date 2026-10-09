@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-10 G2 正式核查
+
+- `LxSearchBar` 单测 8/8、文档 E2E 3/3、Assessment A 25/40；`LxStatusSwitch` 单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6。类型检查、库构建、目标 Prettier/ESLint 已通过。
+- SearchBar 修后 Assessment B 的组件、Demo、文档 detector 均为有效 JSON `[]`、stderr 空、退出码 0；亮色/HUD、1440/375px、减少动效和交互证据已归档。`[]` 仅代表静态规则零命中；375px 整页横溢出来自文档 API 表格/代码区域，组件自身无溢出。
+- **已完成门禁**：`F:\work\linkx-admin\linkx-fe` 下 `pnpm exec vite build` 已通过；SearchBar Assessment A 修后评分、G2 综合报告、snapshot/trend 与独立代码复审已完成。复审修后无 P0/P1/P2，P3 ARIA 单测增强进入后续台账；按两笔白名单提交推送后继续下一波。
+- UI-10 仍为 0/52；真实后端/权限联调及 Vue3 宿主 `element-plus` 删除继续冻结，API 请求链保持 `.then().catch().finally()`。
+
 ## 2026-10-10 Wave 7 / LxTransferPanel 正式收口
 
 - 组件、中文 Demo/API 与文档已同步；文档预览最大 820px，窄屏长名称折叠/展开、筛选恢复、滚动边界和 44×44px 移除按钮已回归。

@@ -1,5 +1,12 @@
 # LinkX 项目地图
 
+## 2026-10-10 G2 组件入口（正式完成）
+
+- `linkx-fe/src/components/LxSearchBar/`：已完成搜索区域语义、loading/折叠字段提示、移动触控和减少动效修复；单测 8/8、文档 E2E 3/3，Assessment A 25/40，B 三目标有效 `[]`/空 stderr/exit 0，浏览器证据已保存。
+- `linkx-fe/src/components/LxStatusSwitch/`：已完成确认竞态、外部 modelValue/权限源变化、loading/只读 ARIA 和键盘回归；单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6。
+- G2 交付地图入口为上述组件文档与 E2E；库构建、独立代码复审、综合 Impeccable 报告和 snapshot/trend 已完成。P3 单测增强、SearchBar 字段级错误契约、Escape 语义和设计 HTML 同步进入后续台账。
+- 375px 文档页整体横向宽度 615px 的来源是 API 表格/代码区域；组件自身没有横向溢出，后续在文档壳层任务跟踪。UI-10 仍为 0/52，Vue3 Element Plus 宿主替换继续后置。
+
 ## 2026-10-10 Wave 7 已收口 / G2 启动
 
 - `LxTransferPanel` 当前版已冻结：文档 Demo 最大 820px 居中，组件 API 默认 `panelHeight=380px`；窄屏长名称两行折叠、展开全文、筛选隐藏恢复、列表滚动边界和 44×44px 移除目标均有回归。

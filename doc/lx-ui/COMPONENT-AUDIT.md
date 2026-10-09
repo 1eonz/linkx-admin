@@ -1,5 +1,13 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-10 UI-10 / G2 SearchBar、StatusSwitch 正式审查
+
+`LxSearchBar` 已完成当前修复：`role=search`、loading/折叠字段 ARIA、移动 44px 触控和减少动效降级；单测 8/8、文档 E2E 3/3，Assessment A 25/40。`LxStatusSwitch` 已完成确认竞态、外部 modelValue/权限源变化和权限撤销保护、loading/只读 ARIA、Space 键盘和失败重试；单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6。
+
+SearchBar 修后 Assessment B 的组件、Demo、文档 detector 均为有效 JSON `[]`，stderr 为空、退出码 0，并已保存亮色/HUD、1440/375px、减少动效和交互证据；复验报告为 `.impeccable/critique/wave8-searchbar-2026-10-10/assessment-b/final-recheck/final-recheck-report.md`。`[]` 仅表示静态规则零命中。375px 页面 `scrollWidth=615` 归因于文档 API 表格/代码区域，组件自身无横向溢出。Assessment A 修后评分、统一综合报告和 snapshot/trend 尚待完成，故 G2 与全库 UI-10 **0/52** 均保持阶段性状态。
+
+当前门禁已关闭：`linkx-fe` 正确执行 `pnpm exec vite build`；独立代码复审修后无 P0/P1/P2，SearchBar B 三个 detector 为有效 `[]`/空 stderr/exit 0，综合报告和 snapshot/trend 已完成。P3 ARIA 单测增强及字段级错误、Escape、设计资产同步进入后续台账。Vue3 宿主 `element-plus`、权限中心、字段权限和引导页仍按计划冻结。
+
 ## 2026-10-10 UI-10 / Wave 7 LxTransferPanel 正式关闭
 
 `LxTransferPanel` 已完成当前源码冻结后的严格组件审查。定向单测 **64/64**，TransferPanel 文档 E2E **32/32**；覆盖 820px 文档预览、5:2:5 桌面布局、320/390px 长名称折叠展开、筛选恢复、键盘、触控和无横向溢出。Assessment A **32/40（Good）**；Assessment B 的组件、Demo、文档 detector 均为有效 JSON `[]`、stderr 空、退出码 0，并完成浅色/HUD × 1440/390/320px overlay 和浏览器测量。`[]` 仅表示静态规则零命中，不能替代视觉证据。独立代码复审无 P0–P3。

@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-10 G2 / LxSearchBar + LxStatusSwitch 正式收口
+
+- **LxSearchBar**：已补 `role=search`、loading 的 `aria-busy`、折叠按钮字段数量提示、移动端 44px 触控高度和减少动效降级；单测 8/8、文档 E2E 3/3，类型检查、目标格式检查通过。修后 Assessment A **25/40**；Assessment B 三个 detector 均为有效 JSON `[]`、stderr 为空、退出码 0，并完成浅色/HUD、1440/375px、减少动效和交互浏览器证据。375px 整页 `scrollWidth=615` 仅由文档 API 表格/代码区域产生，组件自身无横向溢出，列为文档壳层 P2。
+- **LxStatusSwitch**：已补确认等待期间 modelValue 版本、loading/disabled/权限撤销竞态隔离、loading `aria-busy`、只读/无权限 `aria-disabled`；单测 14/14、文档 E2E 3/3，G2 合并 E2E 6/6，类型、Prettier 和 ESLint 已通过。确认、取消、失败重试、Space 键盘、0/1 映射和原地权限源变化均有回归。
+- **正式审查**：独立代码复审修后无 P0/P1/P2，SearchBar ARIA/隐藏数量单测增强保留为 P3；综合报告为 `.impeccable/critique/wave8-searchbar-2026-10-10/final-report.md`，snapshot 为 `.impeccable/critique/2026-10-09T18-16-30Z__linkx-fe-src-components-lxsearchbar-index-vue.md`，trend 为 25/40 → 25/40。
+- **边界与下一步**：G2 已关闭，自动进入下一波组件库候选；在全库 UI-10 严格矩阵和 Vue3 页面迁移门禁完成前，继续保留 Vue3 宿主 `element-plus`，权限中心、字段权限和引导页按既定计划延后。
+
 ## 2026-10-10 Wave 7 / LxTransferPanel 正式收口
 
 - **实现与文档**：已完成 5:2:5 桌面布局、820px 文档预览限宽、窄屏待选/已选语义、超长名称两行折叠与展开、筛选隐藏后展开状态恢复、滚动边界和 44×44px 移除目标；中文 Demo/API/交接记录同步。
