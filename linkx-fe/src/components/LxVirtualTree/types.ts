@@ -11,13 +11,18 @@ export interface LxVirtualTreeProps {
   data?: LxVirtualTreeNode[]
   /** 树容器的可访问名称。 */
   ariaLabel?: string
+  /** 树容器的补充说明 ID，可关联键盘操作或选择范围提示。 */
+  ariaDescribedby?: string
   height?: number
+  /** 桌面固定行高（px）；非法值回退到 32px，触屏或窄屏下至少为 44px。 */
   itemSize?: number
   indent?: number
   nodeKey?: string
   showCheckbox?: boolean
   checkStrictly?: boolean
   filterable?: boolean
+  /** 自定义节点过滤规则。keyword 已去除首尾空白并转为小写；命中节点的祖先会保留。 */
+  filterMethod?: (node: LxVirtualTreeNode, keyword: string) => boolean
   defaultExpandedKeys?: (string | number)[]
   scrollbarWidth?: number
   modelValue?: (string | number)[]
