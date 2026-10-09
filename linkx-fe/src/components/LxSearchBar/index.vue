@@ -76,6 +76,9 @@ const controlSize = computed<'sm' | 'md' | 'lg'>(() => {
 const visibleFields = computed(() =>
   isCollapsed.value ? props.fields.slice(0, 4) : props.fields,
 )
+const hiddenFieldCount = computed(() =>
+  Math.max(0, props.fields.length - visibleFields.value.length),
+)
 
 function defaults(): Record<string, unknown> {
   return props.fields.reduce<Record<string, unknown>>((model, field) => {
@@ -217,7 +220,9 @@ function toggleCollapsed() {
     class="lx-search-bar"
     :class="`lx-search-bar--${size}`"
     v-bind="$attrs"
+    role="search"
     aria-label="检索条件"
+    :aria-busy="loading ? 'true' : undefined"
     @keyup.esc="reset"
   >
     <div class="lx-search-bar__grid">
@@ -328,9 +333,14 @@ function toggleCollapsed() {
         class="lx-search-bar__collapse"
         type="button"
         :aria-expanded="!isCollapsed"
+        :aria-label="
+          isCollapsed
+            ? `展开检索条件，隐藏 ${hiddenFieldCount} 项`
+            : '收起检索条件'
+        "
         @click="toggleCollapsed"
       >
-        {{ isCollapsed ? '展开' : '收起' }}
+        {{ isCollapsed ? `展开（隐藏 ${hiddenFieldCount} 项）` : '收起' }}
         <LxIcon
           name="chevron-down"
           :size="14"
@@ -498,6 +508,17 @@ function toggleCollapsed() {
 
   .lx-search-bar__actions {
     width: 100%;
+  }
+
+  .lx-search-bar__collapse,
+  .lx-search-bar__actions :deep(button) {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-search-bar__collapse .lx-icon {
+    transition: none;
   }
 }
 </style>

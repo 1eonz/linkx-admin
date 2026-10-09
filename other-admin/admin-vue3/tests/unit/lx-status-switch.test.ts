@@ -3,6 +3,8 @@ import { LxStatusSwitch } from 'lx-ui';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { defineComponent, h } from 'vue';
 
+import { setupLxPermission } from '../../../../linkx-fe/src/permissions';
+
 const { lxConfirmMock } = vi.hoisted(() => ({ lxConfirmMock: vi.fn() }));
 
 vi.mock('../../../../linkx-fe/src/components/LxConfirm', () => ({
@@ -87,6 +89,7 @@ describe('LxStatusSwitch', () => {
 
   it('blocks changes while loading', async () => {
     const wrapper = mountSwitch({ modelValue: true, loading: true, confirm: '关闭后停止服务。' });
+    expect(wrapper.getComponent(SwitchStub).attributes('aria-busy')).toBe('true');
     const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
 
     await expect(beforeChange()).resolves.toBe(false);
@@ -109,6 +112,133 @@ describe('LxStatusSwitch', () => {
 
     lxConfirmMock.mockResolvedValueOnce(false);
     await expect(beforeChange()).resolves.toBe(false);
+    wrapper.unmount();
+  });
+
+  it('drops a stale confirmation result when the host starts saving meanwhile', async () => {
+    let resolveConfirm: ((value: boolean) => void) | undefined;
+    lxConfirmMock.mockImplementation(
+      () =>
+        new Promise<boolean>((resolve) => {
+          resolveConfirm = resolve;
+        }),
+    );
+    const wrapper = mountSwitch({ modelValue: true, confirm: '关闭后停止服务。' });
+    const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
+
+    const pending = beforeChange();
+    await wrapper.setProps({ loading: true });
+    resolveConfirm?.(true);
+
+    await expect(pending).resolves.toBe(false);
+    expect(wrapper.emitted('change')).toBeUndefined();
+    wrapper.unmount();
+  });
+
+  it('drops a stale confirmation result when the host changes the model value', async () => {
+    let resolveConfirm: ((value: boolean) => void) | undefined;
+    lxConfirmMock.mockImplementation(
+      () =>
+        new Promise<boolean>((resolve) => {
+          resolveConfirm = resolve;
+        }),
+    );
+    const wrapper = mountSwitch({ modelValue: true, confirm: '关闭后停止服务。' });
+    const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
+
+    const pending = beforeChange();
+    await wrapper.setProps({ modelValue: false });
+    resolveConfirm?.(true);
+
+    await expect(pending).resolves.toBe(false);
+    wrapper.unmount();
+  });
+
+  it('drops a stale confirmation result when the host makes the switch read-only', async () => {
+    let resolveConfirm: ((value: boolean) => void) | undefined;
+    lxConfirmMock.mockImplementation(
+      () =>
+        new Promise<boolean>((resolve) => {
+          resolveConfirm = resolve;
+        }),
+    );
+    const wrapper = mountSwitch({ modelValue: true, confirm: '关闭后停止服务。' });
+    const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
+
+    const pending = beforeChange();
+    await wrapper.setProps({ disabled: true });
+    resolveConfirm?.(true);
+
+    await expect(pending).resolves.toBe(false);
+    wrapper.unmount();
+  });
+
+  it('drops a stale confirmation result when the permission prop is revoked', async () => {
+    const disposePermission = setupLxPermission(() => ({
+      codes: { authority: ['status:toggle'] },
+      current: () => 'authority',
+    }));
+    try {
+      let resolveConfirm: ((value: boolean) => void) | undefined;
+      lxConfirmMock.mockImplementation(
+        () =>
+          new Promise<boolean>((resolve) => {
+            resolveConfirm = resolve;
+          }),
+      );
+      const wrapper = mountSwitch({
+        modelValue: true,
+        permission: 'status:toggle',
+        confirm: '关闭后停止服务。',
+      });
+      const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
+
+      const pending = beforeChange();
+      await wrapper.setProps({ permission: 'status:toggle-revoked' });
+      resolveConfirm?.(true);
+
+      await expect(pending).resolves.toBe(false);
+      wrapper.unmount();
+    } finally {
+      disposePermission();
+    }
+  });
+
+  it('rechecks an in-place permission source change before accepting confirmation', async () => {
+    let allowed = true;
+    const disposePermission = setupLxPermission(() => ({
+      codes: { authority: allowed ? ['status:toggle'] : [] },
+      current: () => 'authority',
+    }));
+    try {
+      let resolveConfirm: ((value: boolean) => void) | undefined;
+      lxConfirmMock.mockImplementation(
+        () =>
+          new Promise<boolean>((resolve) => {
+            resolveConfirm = resolve;
+          }),
+      );
+      const wrapper = mountSwitch({
+        modelValue: true,
+        permission: 'status:toggle',
+        confirm: '关闭后停止服务。',
+      });
+      const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
+
+      const pending = beforeChange();
+      allowed = false;
+      resolveConfirm?.(true);
+
+      await expect(pending).resolves.toBe(false);
+      wrapper.unmount();
+    } finally {
+      disposePermission();
+    }
+  });
+
+  it('marks read-only fallback content as disabled for assistive technology', () => {
+    const wrapper = mountSwitch({ modelValue: 0, disabled: true });
+    expect(wrapper.get('.lx-status-switch__fallback').attributes('aria-disabled')).toBe('true');
     wrapper.unmount();
   });
 

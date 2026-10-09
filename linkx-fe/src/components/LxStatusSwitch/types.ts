@@ -7,7 +7,7 @@ export interface LxStatusSwitchConfirmOptions {
   confirmText?: string
   /** 取消按钮文案。 */
   cancelText?: string
-  /** 保留设计稿的危险语义；当前关闭操作固定按危险样式呈现。 */
+  /** 确认层类型；danger 使用危险按钮，warning 使用普通确认按钮。 */
   type?: 'warning' | 'danger'
 }
 

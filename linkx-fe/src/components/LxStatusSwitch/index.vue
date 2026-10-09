@@ -4,7 +4,7 @@
  * 开关本体复用 LxSwitch（inline 文字模式），胶囊色彩/几何/焦点/触屏规格统一由
  * LxSwitch style.css 固化，本组件只保留业务值映射、确认拦截与只读 Tag。
  */
-import { computed, type PropType } from 'vue'
+import { computed, ref, type PropType, watch } from 'vue'
 import LxSwitch from '../LxSwitch/index.vue'
 import LxTag from '../LxTag/index.vue'
 import { hasPermission } from '../../permissions'
@@ -42,11 +42,21 @@ const isOn = computed(() =>
   isNumericModel.value ? props.modelValue === 0 : Boolean(props.modelValue),
 )
 const stateLabel = computed(() => (isOn.value ? props.onText : props.offText))
-const permissionAllowed = computed(() =>
-  props.permission ? hasPermission(props.permission) : true,
-)
+function hasCurrentPermission(): boolean {
+  return props.permission ? hasPermission(props.permission) : true
+}
+
+const permissionAllowed = computed(hasCurrentPermission)
 const showFallbackTag = computed(
   () => props.disabled || (!permissionAllowed.value && props.fallbackTag),
+)
+const modelVersion = ref(0)
+
+watch(
+  () => props.modelValue,
+  () => {
+    modelVersion.value += 1
+  },
 )
 
 function businessValue(value: boolean): boolean | number {
@@ -57,17 +67,30 @@ async function beforeChange(): Promise<boolean> {
   if (props.loading || props.disabled || !permissionAllowed.value) return false
   if (!isOn.value && props.confirm) return true
   if (isOn.value && props.confirm) {
+    const requestVersion = modelVersion.value
+    const requestModelValue = props.modelValue
     const options: LxStatusSwitchConfirmOptions =
       typeof props.confirm === 'string'
         ? { message: props.confirm }
         : props.confirm
-    return lxConfirm({
+    const confirmed = await lxConfirm({
       title: options.title ?? '确认关闭？',
       message: options.message ?? '',
       confirmText: options.confirmText ?? '确认关闭',
       cancelText: options.cancelText ?? '取消',
       danger: options.type !== 'warning',
     })
+    // 确认框打开期间宿主可能已完成另一笔保存、切换账号或撤销权限；
+    // 此时丢弃旧确认结果，避免异步回写覆盖最新状态。
+    return (
+      confirmed &&
+      modelVersion.value === requestVersion &&
+      props.modelValue === requestModelValue &&
+      isOn.value &&
+      !props.loading &&
+      !props.disabled &&
+      hasCurrentPermission()
+    )
   }
   return true
 }
@@ -87,6 +110,7 @@ function onChange(value: string | number | boolean) {
       class="lx-status-switch__fallback"
       type="info"
       size="small"
+      aria-disabled="true"
       :aria-label="
         permissionAllowed ? `${stateLabel}（只读）` : '无权限，禁用/只读'
       "
@@ -100,6 +124,7 @@ function onChange(value: string | number | boolean) {
       :active-text="onText"
       :inactive-text="offText"
       :before-change="beforeChange"
+      :aria-busy="loading ? 'true' : undefined"
       :aria-label="`${onText} / ${offText}`"
       @change="onChange"
     />

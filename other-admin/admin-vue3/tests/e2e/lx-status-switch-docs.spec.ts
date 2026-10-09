@@ -41,6 +41,9 @@ test.describe('lx-ui LxStatusSwitch 文档示例', () => {
     expect(promptContrast).toBeGreaterThanOrEqual(4.5);
     await numericTrack.click();
     await expect(page.getByTestId('numeric-state')).toHaveText('1');
+    await numericRow.locator('.el-switch__input').focus();
+    await page.keyboard.press('Space');
+    await expect(page.getByTestId('numeric-state')).toHaveText('0');
 
     await expect(page.getByTestId('readonly-row')).toContainText('开启（只读）');
     await expect(page.getByTestId('readonly-row').locator('.el-switch')).toHaveCount(0);
@@ -76,6 +79,10 @@ test.describe('lx-ui LxStatusSwitch 文档示例', () => {
     await track.click();
     await expect(page.getByRole('alert')).toHaveText('保存失败，状态未修改；可以重新切换重试。');
     await expect(page.getByTestId('boolean-state')).toHaveText('开启');
+
+    await track.click();
+    await expect(page.getByTestId('boolean-state')).toHaveText('关闭');
+    await expect(page.getByTestId('last-action')).toHaveText('已保存为关闭');
 
     const switchBox = await booleanRow.locator('.el-switch').boundingBox();
     if (!switchBox) throw new Error('窄屏状态开关没有进入可视区域');
