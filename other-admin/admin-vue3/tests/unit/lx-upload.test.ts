@@ -705,6 +705,68 @@ describe('LxUpload', () => {
     wrapper.unmount();
   });
 
+  it('允许回灌生成 UID 后通过公开 abort 定位并复位无 UID 文件', async () => {
+    const pending = deferred<unknown>();
+    const adapter = vi.fn((_options: LxUploadRequestOptions) => pending.promise);
+    const rawFile = new File(['data'], 'rehydrated.csv');
+    const wrapper = mountUpload({
+      modelValue: [
+        {
+          name: rawFile.name,
+          size: rawFile.size,
+          raw: rawFile,
+          status: 'uploading',
+          percentage: 35,
+        },
+      ],
+      httpRequest: adapter,
+    });
+    const upload = wrapper.findComponent(ElUploadStub);
+    const sourceFile = (upload.props('fileList') as UploadUserFile[])[0] as UploadFile;
+    const requestOptions = createRequestOptions(sourceFile.raw as UploadRawFile);
+    const onSuccess = requestOptions.onSuccess;
+    const requestHandler = upload.props('httpRequest') as UploadRequestHandler;
+    const request = requestHandler(requestOptions);
+    const onProgress = upload.props('onProgress') as (
+      event: UploadProgressEvent,
+      currentFile: UploadFile,
+      files: UploadFile[],
+    ) => void;
+
+    onProgress(Object.assign(new ProgressEvent('progress'), { percent: 50 }), sourceFile, [sourceFile]);
+    const generated = wrapper.emitted('update:modelValue')?.at(-1)?.[0] as LxUploadFile[];
+    const generatedFile = generated[0]!;
+    expect(generatedFile.uid).toEqual(expect.stringMatching(/^__lx_upload_\d+_/));
+
+    // 模拟父级接收后重新创建文件对象，再回传组件生成的 UID。
+    // 真实受控场景通常会在状态管理或序列化过程中克隆这一层对象。
+    const rehydratedModel = generated.map((file) => ({
+      ...file,
+      status: 'uploading' as const,
+      percentage: 50,
+    }));
+    await wrapper.setProps({ modelValue: rehydratedModel });
+    const rehydrated = (upload.props('fileList') as UploadUserFile[])[0] as UploadFile;
+    const instance = wrapper.vm as unknown as LxUploadInstance;
+    instance.abort(rehydratedModel[0]!);
+
+    expect(adapter.mock.calls[0]?.[0].signal.aborted).toBe(true);
+    expect(uploadMethods.abort).toHaveBeenCalledWith(expect.objectContaining({ uid: rehydrated.uid }));
+    const cancelled = wrapper.emitted('update:modelValue')?.at(-1)?.[0] as LxUploadFile[];
+    expect(cancelled[0]).toMatchObject({
+      uid: generatedFile.uid,
+      status: 'ready',
+      percentage: 0,
+    });
+
+    pending.resolve({ fileUrl: '/files/rehydrated.csv' });
+    await request;
+    requestOptions.onSuccess({ fileUrl: '/files/rehydrated.csv' }, sourceFile.raw as UploadRawFile);
+    await flushPromises();
+    expect(onSuccess).not.toHaveBeenCalled();
+    wrapper.unmount();
+  });
+
   it.each(['abort', 'remove'] as const)(
     'uses the raw request uid for %s when a string model uid wraps a numbered raw file',
     async (action) => {
