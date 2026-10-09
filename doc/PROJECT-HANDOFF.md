@@ -1,5 +1,39 @@
 # LinkX 项目交接记录
 
+## [2026-10-10] Wave 7 正式交接完成，进入 G2
+
+- **完成范围**：`LxTransferPanel` 与 `LxVirtualTree` 当前实现、中文 Demo/API、超长名称折叠展开、筛选恢复、滚动边界、触控按钮和文档预览宽度已冻结；API `panelHeight` 默认 380px，Demo 预览最大 820px。
+- **验证与审查**：定向单测 64/64，TransferPanel 文档 E2E 32/32；lx-ui 类型/构建、VitePress 文档构建、Vue3 生产构建、目标格式与 ESLint 通过。Assessment A 32/40；Assessment B 三 detector 有效 `[]`、stderr 空、exit 0，浅色/HUD 六视图浏览器证据完整；代码复审无 P0–P3。
+- **证据**：综合报告 `.impeccable/critique/wave7-transferpanel-2026-10-09/final-density-61/final-report.md`，A/B、截图、overlay、JSON、stderr、退出码和哈希均在同目录；快照 `.impeccable/critique/2026-10-09T16-43-08Z__linkx-fe-src-components-lxtransferpanel-index-vue.md`。
+- **后续**：P2/P3 观察项进入后续密度优化；UI-04 保留真实权限保存状态和 `DataPermissionTree` 宿主契约。下一波为 G2 `LxSearchBar` + `LxStatusSwitch`，完成一波后继续自动推进。
+
+## [2026-10-09] Wave 7 / 320px 展开边界与筛选状态修复进度
+
+- 用户继续要求子 Agent 使用 GPT-6.1-sol 中高思考强度；最终设计评估与 detector/浏览器评估使用 high，代码复审使用 medium，三路隔离。
+- 修复前发现：320px 长历史项展开后滚到底时全文上沿与移除按钮被裁切；名称被筛选隐藏再恢复后原生收起状态与 `aria-expanded` 不一致。
+- 当前修复：两行折叠、展开全文利用条目宽度、移除按钮固定于展开标题旁、元数据显式行高、原始键值显式内距；`details.open` 绑定展开集合，下一帧滚动只处理仍连接且仍展开的条目，以条目整体定位。
+- 当前实测：320px 展开历史示例约 157px、列表视口约 168px。已补可见边界与按钮中心命中回归，新增筛选隐藏/恢复状态一致性用例。
+- 验证状态：Prettier、目标 ESLint、lx-ui 类型检查通过；定向单测、32 项 E2E、构建和最终隔离评审待收口。此前 31/31 为本轮修复前通过记录，不作为当前最终版全部完成证据。
+- 交接入口：`.impeccable/critique/wave7-transferpanel-2026-10-09/final-density-61/`。最终证据齐备后按本波白名单分别提交实现与文档并推送，再进入 G2。
+
+## [2026-10-09] Wave 7 / LxTransferPanel 文档预览宽度修复
+
+- **用户反馈与处理**：文档页穿梭选择区显得过宽；Demo 预览限制为最大 `820px` 并居中，窄屏铺满正文可用宽度，组件 API 宽度和默认 `panelHeight=380px` 不变。默认 `240px` 紧凑高度仍保留，高度选择器现常显于示例上方，另有 `300px`/`380px` 档位。
+- **评审建议处理**：窄屏标签和无障碍名称使用“待选”，不再把候选数量描述为可添加名额；批量操作提示单独说明剩余名额。组件文档在 Demo 旁明确示例只保存在本地内存，不代表权限已经保存。
+- **验证**：两组件定向单测 **64/64**、TransferPanel 文档 E2E **30/30**；覆盖 1440px 居中限宽、390px 对比正文容器可用宽度、窄屏无横向溢出与候选标签。lx-ui/Vue3 类型检查、目标 Prettier、203 模块 lx-ui 构建和 Vue3 生产构建通过；VitePress 文档构建待完成。生产构建保留既有 Less 导出、Element Plus circular chunk、动态导入和 chunk size 警告。
+- **代码复审**：独立 Luna 复审未发现 P0-P2；P3 记录为本交接旧测试计数/源码哈希过时，正在更新。正式 Impeccable A/B、综合报告及 snapshot/trend 正在最终收口；detector `[]` 只表示静态零命中。
+- **后续边界**：UI-10 仍为 0/52，Vue3 `DataPermissionTree` 适配和真实权限保存反馈仍属 UI-04；真实后端联调按真实契约进行，保留 Vue3 宿主 `element-plus`。完成最终复验及本波白名单提交推送后进入 G2 `LxSearchBar` + `LxStatusSwitch`。
+
+## [2026-10-08] Wave 7 LxTransferPanel 修后交接（正式审查收口中）
+
+- **范围与修复**：完成 `LxTransferPanel`/`LxVirtualTree` 的组件实现、中文 Demo/API 和状态回归；桌面采用 5:2:5 轨道与 380px `border-box` 同高面板，`panelHeight` 默认 380px、最小 240px，非有限值回退为 380px。桌面树项基准行高为 32px；普通短名称保持约 32px 紧凑单行，名称省略且编码/状态同行，未加载项标记与原始键值移至名称下第二行，实际截断的长名称才提供 disclosure；窄屏保持 380px 面板并完整换行，TransferPanel 在 320–420px 窄屏为 64px、421px 起为 44px，VirtualTree 窄屏行高为 44px。行高跨断点时焦点恢复到 `treeitem` 的 P2 已修，VitePress 文档站已加入 SVG favicon。
+- **验证**：`lx-transfer-panel.test.ts` 与 `lx-virtual-tree.test.ts` 合计 64/64，`lx-transfer-panel-docs.spec.ts` 28/28；VirtualTree 文档 E2E 的 13 项另行统计。lx-ui typecheck、TransferPanel E2E ESLint、目标 Prettier、`git diff --check`、lx-ui 203 modules build、VitePress docs build、Vue3 `build:prod` 均通过。后者保留既有 Less 导出、Element Plus circular chunk 和 chunk size 警告；VitePress 保留大 chunk 警告。
+- **断言修正**：Range 的逐片段 `top` 差异把单行数字与普通文字误判为两行；独立 Chrome 复现中单行元素盒高 15px、真实两行 29px。E2E 改为验证 `white-space: nowrap`、盒高不超过 `line-height + 1px`、文本无横向裁切；320/390/880px 用例现已通过。
+- **代码复审**：既有组件复审批准；本次 E2E 断言修订的最新独立复审待确认。
+- **Impeccable 状态**：旧 A/B 仅作为修复前基线，不计正式通过；当前冻结源码的 Assessment B 浏览器证据已完成 **20/20**，正在收口证据索引和综合 snapshot/trend。完成综合报告和 snapshot/trend 前，Wave 7 仍为正式审查收口中。
+- **边界**：UI-10 保持 0/52。Vue3 `DataPermissionTree` 替换仍属 UI-04，须对照真实 props/exposes/选择与回传契约完成 Mock/E2E；真实权限/后端联调需真实契约。保留 Vue3 `element-plus`。
+- **下一步**：新的严格隔离 A/B 正式完成后再提交、推送并进入 G2 `LxSearchBar` + `LxStatusSwitch`。
+
 ## [2026-10-07] UI-13 / Wave 5 选择器组件正式交接
 
 - **范围**：`LxTreeSelect`、`LxCascader`、`LxSelectPagination` 的当前实现、类型、Demo、中文文档、主题样式和 Vue3 文档 E2E；没有改业务 API、路由、权限键、真实后端协议或 Vue3 页面。
@@ -1989,8 +2023,24 @@
 
 ### 下一步交接
 
-进入 Wave 7 `LxTransferPanel`：严格对照 `design/虚拟滚动树 + 双栏穿梭/code.html` 和 `screen.png`，落实 5:2:5 栅格、380px 面板、32px 行高、节点 code/status、空/加载/错误、上限/禁用、窄屏 44px、HUD 和 `prefers-reduced-motion`；补单测、Mock/E2E、A/B、代码审核和 snapshot/trend。库级门禁完成后再回归 Vue3 `DataPermissionTree` 的 props、exposes、勾选与回传契约。
+进入 Wave 7 `LxTransferPanel`：严格对照 `design/虚拟滚动树 + 双栏穿梭/code.html` 和 `screen.png`，落实 5:2:5 栅格、380px 面板、桌面 32px 基准行高、TransferPanel 在 320–420px 窄屏 64px/421px 起 44px、VirtualTree 窄屏 44px、节点 code/status、空/加载/错误、上限/禁用、窄屏 44px 触控区、HUD 和 `prefers-reduced-motion`；补单测、Mock/E2E、A/B、代码审核和 snapshot/trend。库级门禁完成后再回归 Vue3 `DataPermissionTree` 的 props、exposes、勾选与回传契约。
 
 ### 提交约定
 
 实现和回归文件使用一笔 `fix(lx-ui): ...`；计划、交接、审计、审核和 Impeccable 证据使用一笔 `docs(project): ...`。只暂存本波白名单，排除 `.pnpm-store`、旧波次证据和运行时文件；两笔提交均需推送 `origin/main`。
+
+## [2026-10-07] Wave 7 / LxTransferPanel 修后交接
+
+- **本波完成**：`LxTransferPanel` 按双栏穿梭设计补齐 5:2:5 桌面轨道、380px `border-box` 同高面板、筛选结果批量操作、两侧 code/status 元数据、树外既有键与 `selectedItems` 回显、未加载键确认和移动端宽度约束。未知 `status` 文本原样展示，语义色仍使用白名单。
+- **代码复审与修复**：独立代码复审发现 `status="constructor"` 会读到普通对象原型成员；新增可复现单测并改用自有键判断。修后复审通过，未发现未关闭的 P0–P2。空白搜索边界与窄屏未加载长文本行高未由本波用例完全覆盖，按后续覆盖事项保留。
+- **验证**：定向单测 14/14、文档 Playwright 5/5；lx-ui typecheck、203 模块构建、VitePress 文档构建、Vue3 `vue-tsc --noEmit`、目标 Prettier、宿主单测 ESLint 和 `git diff --check` 通过。VitePress 保留既有大 chunk 警告；Vue3 ESLint 对 linkx-fe 文件的输出是 ignored，故不记作库 ESLint 通过。评审者首次 E2E 遇到内网代理超时，主会话随后用 `playwright.lxui.config.ts` 隔离到 4177 复跑 5/5。
+- **Impeccable 状态**：修复前截图和评估标为过程证据。当前 7 个目标文件的统一 SHA-256 冻结版由独立 A/B 最终复核；正式综合报告、overlay 归因、snapshot/trend 完成前，不标记 Critique 通过。
+- **边界**：UI-10 仍为 0/52；Vue3 `DataPermissionTree` 的 props、exposes、父子勾选、键回显与 change 回传仍需 UI-04 Mock/E2E；真实权限后端联调继续延期。Vue3 宿主 Element Plus 暂不移除。
+- **下一步交接**：Wave 7 A/B、综合报告和 snapshot/trend 收口后进入 G2 `LxSearchBar` + `LxStatusSwitch`。组件实现/Demo/API/测试和组件中文文档使用 `fix(lx-ui)`；项目计划、地图、台账、交接、评审及 Impeccable 证据使用 `docs(project)`；两笔均只暂存本波白名单并推送 `origin/main`。
+
+### [2026-10-08] Wave 7 修后回归补充
+
+- **修复内容**：确认期间仅当 `modelValue` 键序列变化时拒绝旧确认；仅更换相同键的新数组引用仍接受用户确认。移除已选项时先将焦点置于稳定列表，再移到下一项或前一项；列表清空时留在列表。溢出提示移除 `aria-hidden`，作为礼貌播报并通过 `aria-describedby` 关联到已选列表。
+- **文档与测试**：更正 `clear-all` 的条件确认说明；组件中文文档同步焦点回落、屏幕阅读器描述和确认版本规则。新增同值新数组单测和键盘移除焦点/读屏关联 E2E。
+- **验证**：定向单测 **20/20**，文档 Playwright **10/10**；lx-ui 类型检查、203 模块生产构建、VitePress 文档构建、Vue3 单测/E2E 文件 ESLint 和目标 Prettier 通过。VitePress 仍有既有大 chunk 警告，4174 用户预览仍返回 HTTP 200。独立代码复审及修后 Impeccable A/B 的正式结论待补入本节。
+- **范围边界**：本修复不关闭 UI-10 52 项严格矩阵；Vue3 `DataPermissionTree` 适配、真实权限联调和 Vue3 宿主 Element Plus 替换仍未完成。提交时只暂存本波实现/回归与本波计划、交接和审查证据白名单；按约定分为 `fix(lx-ui)` 与 `docs(project)` 两笔并推送 `origin/main`，再开始 G2。

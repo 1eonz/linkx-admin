@@ -1,5 +1,34 @@
 # lx-ui 交付核查
 
+## 2026-10-10 Wave 7 / LxTransferPanel 正式收口
+
+- 组件、中文 Demo/API 与文档已同步；文档预览最大 820px，窄屏长名称折叠/展开、筛选恢复、滚动边界和 44×44px 移除按钮已回归。
+- TransferPanel + VirtualTree 定向单测 **64/64**，TransferPanel 文档 E2E **32/32**；lx-ui 类型检查、203 模块构建、VitePress 文档构建、目标 Prettier/ESLint 和 Vue3 生产构建通过。
+- Impeccable A **32/40**；B 三个 detector 均为有效 JSON `[]`、stderr 空、退出码 0，浅色/HUD 六视图 overlay 与测量证据完整；独立代码复审无 P0–P3。`[]` 只表示静态规则零命中。
+- 证据目录：`.impeccable/critique/wave7-transferpanel-2026-10-09/final-density-61/`；当前进入 G2 `LxSearchBar` + `LxStatusSwitch`。UI-10、真实后端联调和 Vue3 `element-plus` 删除门禁保持未完成。
+
+## 2026-10-09 Wave 7 / 窄屏长名称与展开状态收口
+
+- 320–420px 已选超长名称默认收为两行；展开后全文使用条目可用宽度，移除按钮保留 44×44px，元数据显式行高及原始键值内距避免继承文档外壳的大行高。320px 示例展开条目实测约 157px，列表可视区约 168px。
+- 已展开名称绑定原生 `open`，筛选隐藏再恢复时同步展开内容、`aria-expanded` 和操作文案。展开定位按整条边界计算，并在下一帧确认条目仍连接且仍处于展开态。
+- 已补 320px 展开后滚到底的全文、焦点入口和移除按钮命中断言，以及筛选隐藏再恢复的展开状态回归。
+- 本轮目标格式、ESLint 和 lx-ui 类型检查已通过；32 项 E2E、定向单测、构建及 GPT-6.1-sol 隔离 A/B/代码复审正在完成。结果归档到 `.impeccable/critique/wave7-transferpanel-2026-10-09/final-density-61/`，当前不标记正式审查通过。
+
+## 2026-10-09 Wave 7 / LxTransferPanel 820px 预览复验
+
+- Demo 预览最大宽度 `820px` 并居中，窄屏铺满正文可用宽度；默认 `240px` 紧凑高度选择器常显于预览上方，可切换 `300px`/`380px`。组件 API 默认高度仍为 `380px`，窄屏至少 `352px`。组件与 Demo 局部重置 VitePress `summary` 外边距。
+- 修复超长名称展开后的紧凑列表裁切，并将反选说明浮层锚定到待选面板标题区；桌面、HUD、240/300/380px、长名称、反选浮层及 390px 窄屏均有独立浏览器证据。
+- 移动数量标签和无障碍名称改为“待选”；中文指南紧邻示例说明本地选择不代表权限已保存。
+- 单测 **64/64**、TransferPanel 文档 E2E **30/30**；E2E 断言 1440px 居中限宽、390px 正文可用宽度及无页面横向溢出。lx-ui/Vue3 类型检查、目标 Prettier、203 模块构建和 Vue3 生产构建通过；VitePress 文档构建待完成。
+- 代码复审未发现 P0-P2，P3 旧计数和哈希已修正；独立 Impeccable A/B、正式报告和 snapshot/trend 正在收口。detector `[]` 不单独代表视觉通过。UI-10 仍为 0/52，Vue3 `DataPermissionTree` 与真实权限联调继续留在 UI-04。
+
+## 2026-10-08 Wave 7 / LxTransferPanel 修后复验中
+
+- 设计对照和组件修复覆盖 5:2:5/380px 面板、名称/部门编码筛选、树外键回显/确认、错误/空/加载、键盘、HUD、窄屏和减少动效。`panelHeight` 默认 380px、最小 240px，非有限值回退为 380px；桌面树项基准行高为 32px，普通短名称保持约 32px 紧凑单行，名称省略且编码/状态同行，未加载项标记与原始键值移至名称下第二行，实际截断的长名称才提供 disclosure。TransferPanel 在 320–420px 窄屏为 64px、421px 起为 44px，VirtualTree 窄屏行高为 44px，窄屏名称完整换行；行高跨断点时焦点恢复到 `treeitem` 的 P2 已修，VitePress 文档站已加入 SVG favicon。
+- 两组件定向单测合计 64/64，`lx-transfer-panel-docs.spec.ts` 28/28；VirtualTree 文档 E2E 的 13 项另行统计。lx-ui typecheck、Vue3 `lint:ts`、目标 ESLint/Prettier、`git diff --check`、lx-ui 203 模块构建、VitePress 文档构建和 Vue3 `build:prod` 均通过。保留 Vue3 构建既有 Less 导出、Element Plus circular chunk、chunk size 警告及 VitePress 大 chunk 警告。独立代码复审批准，无 P0–P3。
+- 当前旧 A/B 只作修复前基线、不计正式通过；Assessment B 浏览器证据已完成 **20/20**，正在收口证据索引及综合 snapshot/trend。Wave 7 仍为**正式审查收口中**。UI-10 保持 0/52；Vue3 `DataPermissionTree` 替换属 UI-04，真实权限/后端联调需真实契约；保留 Vue3 Element Plus。
+- 下一入口为 G2 `LxSearchBar` + `LxStatusSwitch`；新的严格隔离 A/B 正式完成后再提交、推送并进入 G2。
+
 ## 2026-10-07 Wave 6 正式交付检查
 
 - `LxCascader`、`LxDescriptions`、`LxVirtualTree` 与文档侧栏已完成当前源码冻结后的实现、中文 Demo/API、行为回归和浏览器验收；VirtualTree/Descriptions 单测 18/18、6/6，文档 E2E 6/6，Vue3 全量 Vitest 58/457。
@@ -182,7 +211,7 @@ Impeccable `detect.mjs` 的源码输出 `[]` 且退出码为 0，只代表本次
 
 `LxEmpty` 有独立中文 API/Demo；5 项单测覆盖默认文案、status 语义、紧凑档、自定义尺寸校验、图标/操作插槽与宿主 class 透传。文档 Playwright 覆盖默认 64px、`image-size=80`、键盘操作、筛选恢复、两主题对比度、长描述和 375/320px 无横向溢出。阶段性启发式评审曾记 28/40，亮色浏览器 overlay 发现 5 项真实低对比度文字；已改用正文令牌并补对比度回归。后续流程审计确认该评分没有对应的 Impeccable Critique 快照，且设计评审未在独立新标签检查页面，因此不能视为正式 Impeccable 验收，需在 UI-11 按 skill 规范补齐。detector `[]` 仅表示静态规则零命中。Vue3 15 处 `el-empty` 仍待 UI-04 替换，组件证据不代表宿主页面已经采用。
 
-VirtualTree 已检查桌面浅色与 375px HUD 深色；TransferPanel 已通过 4 项单测及文档 Playwright 3/3，覆盖树外键/禁用键保留、全选/反选、上限与清空、宿主状态、375px 触控、键盘焦点及 HUD 深色；Dialog 已通过桌面手动检查和 375px Chromium 测试；SelectPagination 已通过跨页回显、搜索取消、失败恢复、空结果、375px 弹层和触屏按钮 Playwright 3/3；LxUpload 已通过手动 Mock 上传、进度、失败恢复、取消、校验及 375px 交互；LxDescriptions 已通过 6 项单测、3 项文档 Playwright 和阶段性组件级 Impeccable 定向检查（19/20），覆盖 32px 行高、复制键盘焦点、状态点、375/320px 抽屉边界、主题及减少动效；其 detector `[]` 仅代表静态规则零命中，不是正式 Critique 通过；LxMetricCard 已通过 6 项单测和 2 项文档 Playwright，覆盖旧宿主契约、趋势图标、语义色、进度读屏、对比度及 320px/HUD/减少动效；LxAuthImg 已通过 6 项单测和 3 项文档 Playwright，覆盖 Blob Mock、取消竞态、对象 URL 清理、失败回退、空源及 375px/HUD/减少动效；LxStatusSwitch 已通过 6 项单测和 3 项文档 Playwright，覆盖旧值映射、确认取消、只读、失败恢复、4.5:1 对比度、焦点、42×20px 轨道、375px 44×44px 点按区、HUD 深色和减少动效；LxActionButtons 已通过 3 项单测和文档 Playwright 3/3，覆盖 hidden/disabled、click 事件、键盘展开、Escape 焦点恢复、焦点移出/外部点击收起、375px 44×44px 点按区、HUD 深色和减少动效；基础控件桥接、DynamicForm 和 SearchBar 已检查桌面及 375px。这些证据不代表全部组件矩阵、Vue3 业务宿主回归或真实上传协议联调。文档站演示使用本地示例数据，上传网络接口需由宿主提供。
+VirtualTree 已检查桌面浅色与 375px HUD 深色；TransferPanel 当前 30 项单测、文档 E2E 28/28，VirtualTree 当前 34 项单测、文档 E2E 13/13，合计单测 64/64；覆盖树外键/禁用键保留、全选/反选、上限与清空、宿主状态、窄屏触控、键盘焦点及 HUD 深色。桌面树项基准行高为 32px，TransferPanel 在 320–420px 窄屏为 64px、421px 起为 44px，VirtualTree 窄屏行高为 44px。Dialog 已通过桌面手动检查和 375px Chromium 测试；SelectPagination 已通过跨页回显、搜索取消、失败恢复、空结果、375px 弹层和触屏按钮 Playwright 3/3；LxUpload 已通过手动 Mock 上传、进度、失败恢复、取消、校验及 375px 交互；LxDescriptions 已通过 6 项单测、3 项文档 Playwright 和阶段性组件级 Impeccable 定向检查（19/20），覆盖 32px 行高、复制键盘焦点、状态点、375/320px 抽屉边界、主题及减少动效；其 detector `[]` 仅代表静态规则零命中，不是正式 Critique 通过；LxMetricCard 已通过 6 项单测和 2 项文档 Playwright，覆盖旧宿主契约、趋势图标、语义色、进度读屏、对比度及 320px/HUD/减少动效；LxAuthImg 已通过 6 项单测和 3 项文档 Playwright，覆盖 Blob Mock、取消竞态、对象 URL 清理、失败回退、空源及 375px/HUD/减少动效；LxStatusSwitch 已通过 6 项单测和 3 项文档 Playwright，覆盖旧值映射、确认取消、只读、失败恢复、4.5:1 对比度、焦点、42×20px 轨道、375px 44×44px 点按区、HUD 深色和减少动效；LxActionButtons 已通过 3 项单测和文档 Playwright 3/3，覆盖 hidden/disabled、click 事件、键盘展开、Escape 焦点恢复、焦点移出/外部点击收起、375px 44×44px 点按区、HUD 深色和减少动效；基础控件桥接、DynamicForm 和 SearchBar 已检查桌面及 375px。这些证据不代表全部组件矩阵、Vue3 业务宿主回归或真实上传协议联调。文档站演示使用本地示例数据，上传网络接口需由宿主提供。
 
 ## 设计来源与宿主采用
 

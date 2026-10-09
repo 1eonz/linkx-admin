@@ -1,5 +1,29 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-10 Wave 7 / LxTransferPanel 正式收口
+
+- **实现与文档**：已完成 5:2:5 桌面布局、820px 文档预览限宽、窄屏待选/已选语义、超长名称两行折叠与展开、筛选隐藏后展开状态恢复、滚动边界和 44×44px 移除目标；中文 Demo/API/交接记录同步。
+- **验证**：TransferPanel + VirtualTree 定向单测 **64/64**，TransferPanel 文档 E2E **32/32**；lx-ui 类型检查、203 模块构建、VitePress 文档构建、目标 Prettier/ESLint 和 Vue3 生产构建通过。
+- **审查**：Assessment A **32/40（Good）**；Assessment B 三个 detector 均为有效 JSON `[]`、stderr 为空、退出码 `0`，六组浅色/HUD 与 1440/390/320px 浏览器 overlay、键盘、展开、按钮命中和无溢出证据已归档；独立代码复审无 P0–P3。综合报告、snapshot/trend 位于 `.impeccable/critique/wave7-transferpanel-2026-10-09/final-density-61/final-report.md` 和 `.impeccable/critique/2026-10-09T16-43-08Z__linkx-fe-src-components-lxtransferpanel-index-vue.md`。
+- **遗留与边界**：1024px 元信息碎片化、窄屏条目 `cramped-padding`、整树反选发现成本和列表内滚动提示列为 P2/P3；不阻断本波。UI-10 仍为 0/52，Vue3 `DataPermissionTree`、真实权限保存反馈和后端联调仍属 UI-04，继续保留 Vue3 `element-plus`。
+- **下一波**：自动进入 G2 `LxSearchBar` + `LxStatusSwitch`，先补设计对照、文档 Playwright、Mock 成功/空/失败恢复、键盘/375px 证据，再做独立代码复审和 Impeccable A/B。
+
+## 2026-10-09 Wave 7 / LxTransferPanel 文档预览宽度复验
+
+- **用户反馈与处理**：穿梭选择区在文档页显得过宽。仅将 Demo 预览限制为最大 `820px` 并居中，窄屏使用正文可用宽度；组件 API 的宽度和 `panelHeight` 默认 `380px` 契约不变。Demo 的 `240px` 紧凑高度仍为默认值，但高度选择器移到示例上方常显，并提供 `300px`/`380px` 档位。
+- **评审建议处理**：移动端候选数量标签改为“待选”，无障碍名称同步，名额剩余数仍由批量操作提示单独说明；组件文档在示例旁说明本地选择不代表权限已保存，真实宿主须按接口结果显示保存状态。
+- **验证**：`lx-transfer-panel.test.ts` + `lx-virtual-tree.test.ts` **64/64**；TransferPanel 文档 Playwright **30/30**，其中桌面 1440px 断言 820px 居中，390px 断言正文容器扣除内边距后的实际可用宽度，且页面无横向溢出。lx-ui/Vue3 类型检查、目标 Prettier、Vue3 生产构建和 203 模块 lx-ui 构建通过；VitePress 文档构建与新一轮独立 A/B 仍在收口。
+- **代码复审**：独立 Luna 复审未发现 P0-P2；指出项目交接中的 E2E 数字和 Demo 哈希过时，本节正在统一。UI-10 保持 0/52；Vue3 `DataPermissionTree` 真实宿主契约与权限联调仍属 UI-04，保留 Vue3 宿主 `element-plus`。
+- **下一步**：补齐最终 Impeccable A/B、正式报告与 snapshot/trend，完成本波白名单提交并推送后进入 G2 `LxSearchBar` + `LxStatusSwitch`。
+
+## 2026-10-08 Wave 7 / LxTransferPanel 最终复审进行中
+
+- **组件修复**：完成双栏穿梭的 5:2:5 桌面轨道、380px 同高面板、名称/部门编码筛选、筛选范围批量操作、节点元数据、未加载授权回显与确认边界；`panelHeight` 默认 380px、最小 240px，非有限值回退为 380px。跨断点焦点、虚拟树滚动后的 Tab 停靠项均有针对性修复。桌面树项基准行高为 32px；普通短名称保持约 32px 紧凑单行，名称省略且编码/状态同行，未加载项的标记与原始键值移至名称下第二行，实际被截断的长名称才提供 disclosure；TransferPanel 在 320–420px 窄屏为 64px、421px 起为 44px，VirtualTree 窄屏行高为 44px。树节点总数改为明确的“树节点总数”，窄屏名称完整换行。
+- **验证**：`lx-transfer-panel.test.ts` 与 `lx-virtual-tree.test.ts` 合计 **64/64**；`lx-transfer-panel-docs.spec.ts` **28/28**。`lx-virtual-tree-docs.spec.ts` 的 13 项文档回归单独统计，不并入本波 TransferPanel 数字。lx-ui TypeScript 检查、203 模块构建、VitePress 文档构建、目标 Prettier/ESLint 与 `git diff --check` 通过。保留构建既有大 chunk、pnpm 配置及 Element Plus chunk 警告。
+- **正式审查门槛**：三份较新的代码复审曾提出行内键盘导航、虚拟窗口 Tab 停靠和窄屏切回桌面的焦点问题；当前改动及直接回归已补，但等待本轮独立复审。Assessment B 的 DOM、overlay、截图和安全投影浏览器证据已完成 **20/20**，正在收口证据索引及综合 snapshot/trend；完成前不登记正式 Critique 通过。
+- **未完成事项**：Assessment A 对已选名称和计数语义的复验随本次修复进行；“已保存/未保存”只能由 UI-04 权限宿主 dirty 状态和真实保存结果显示，加入宿主迁移清单。Assessment B 中 375px 页面 `scrollWidth=615px` 只出现在注入 overlay 后；无 overlay 基线保持 375px 且组件无横向溢出，不能归因于组件。API 宽表仅在自身容器滚动的 320px 回归已通过，文档壳层仍按共享复验观察。
+- **边界与下一步**：UI-10 仍为 **0/52**；Vue3 `DataPermissionTree` 需在 UI-04 核对真实 props、exposes、父子勾选、跨页/树外回显、change 回传和权限错误，并通过 Mock/E2E；真实后端联调另列。保留 Vue3 宿主 `element-plus`。当前审查与两笔白名单提交推送完成后，进入 G2 `LxSearchBar` + `LxStatusSwitch`。
+
 ## 2026-10-07 Wave 6 / Cascader、Descriptions、VirtualTree 与文档侧栏正式收口
 
 - **完成内容**：修复 Cascader 传送弹层 HUD 变量继承、Descriptions 中文主题标签和侧栏术语；补齐 VirtualTree 行内控件键盘事件隔离、number/string 键区分、空字符串键过滤焦点恢复、移动触控高度和混合勾选语义；同步中文 Demo、API、E2E 断言和文档导航。

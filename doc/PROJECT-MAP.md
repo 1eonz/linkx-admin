@@ -1,12 +1,35 @@
 # LinkX 项目地图
 
+## 2026-10-10 Wave 7 已收口 / G2 启动
+
+- `LxTransferPanel` 当前版已冻结：文档 Demo 最大 820px 居中，组件 API 默认 `panelHeight=380px`；窄屏长名称两行折叠、展开全文、筛选隐藏恢复、列表滚动边界和 44×44px 移除目标均有回归。
+- 证据：定向单测 64/64、TransferPanel 文档 E2E 32/32；lx-ui 类型/203 模块构建、VitePress 文档构建、Vue3 生产构建通过。Impeccable A 32/40；B 三 detector 为有效 `[]`/空 stderr/exit 0，六组浅色/HUD 浏览器证据和代码复审已归档。
+- 交接：综合报告位于 `.impeccable/critique/wave7-transferpanel-2026-10-09/final-density-61/final-report.md`，正式快照位于 `.impeccable/critique/2026-10-09T16-43-08Z__linkx-fe-src-components-lxtransferpanel-index-vue.md`。UI-10 保持 0/52，Vue3 `DataPermissionTree` 宿主替换和真实权限联调仍在 UI-04。
+- 当前入口：G2 `LxSearchBar` + `LxStatusSwitch`；先完成组件库严格设计、行为、Mock、浏览器、代码复审和 A/B，再进入宿主替换。
+
+## 2026-10-09 Wave 7 / LxTransferPanel 820px 预览复验
+
+- **当前展示**：组件 API 默认面板高 `380px`；文档 Demo 预览限宽 `820px`、居中，窄屏铺满正文可用宽度。`240px` 紧凑高度保留为默认，选择器常显于示例上方，并提供 `300px`/`380px` 档位。
+- **评审建议处理**：窄屏数量标签及无障碍名称改为“待选”；组件文档在交互示例旁提示本地选择不代表已保存权限。真实保存状态仍由 UI-04 宿主按 dirty 状态和接口结果驱动。
+- **验证**：定向单测 **64/64**，TransferPanel 文档 Playwright **30/30**；E2E 比较 1440px 下 820px 居中以及 390px 下组件与正文实际可用宽度，并检查页面无横向溢出。lx-ui/Vue3 类型检查、目标 Prettier、203 模块库构建、Vue3 生产构建通过；文档构建、最终 A/B 和 snapshot/trend 收口中。
+- **审查状态与边界**：Luna 代码复审未发现 P0-P2，剩余 P3 为最新交接记录中的旧计数/哈希，本次同步修正。UI-10 保持 0/52；`DataPermissionTree` 替换及真实权限联调仍属 UI-04。本节取代下方 2026-10-08 的中间状态记录。
+
+## 2026-10-08 Wave 7 / LxTransferPanel 最终复审进行中
+
+- **入口**：`linkx-fe/src/components/LxTransferPanel/`、`linkx-fe/docs/components/lxtransferpanel.md`；行为回归和文档浏览器测试位于 Vue3 `tests/unit/lx-transfer-panel.test.ts`、`tests/e2e/lx-transfer-panel-docs.spec.ts`。设计基线为 `design/虚拟滚动树 + 双栏穿梭/code.html`。
+- **完成**：实现 5:2:5 与 380px 同高面板、名称/部门编码联合筛选、筛选结果批量操作、节点元数据、树外已选项快照、未加载节点确认边界和 `LxVirtualTree.filterMethod(node, keyword)`。`panelHeight` 默认 380px、最小 240px，非有限值回退为 380px；桌面树项基准行高为 32px，普通短名称保持约 32px 紧凑单行，名称省略且编码/状态同行，未加载项标记与原始键值在名称下第二行，实际截断的长名称才提供 disclosure。TransferPanel 在 320–420px 窄屏为 64px、421px 起为 44px，VirtualTree 窄屏行高为 44px；窄屏控件触控区为 44×44px。树节点总量标注文义清晰，窄屏名称完整换行。
+- **修复**：确认版本仅对键序列变化递增；删除未加载项后焦点回落至相邻项，列表为空时聚焦列表；滚动提示通过 `aria-describedby` 关联并作礼貌播报；虚拟滚动卸载焦点行后保留 Tab 停靠项；视口切回桌面时移动焦点不落在隐藏切换按钮。
+- **验证**：`lx-transfer-panel.test.ts` 与 `lx-virtual-tree.test.ts` 合计 **64/64**，`lx-transfer-panel-docs.spec.ts` **28/28**；VirtualTree 文档 E2E 的 13 项单独统计。lx-ui 类型检查、203 模块构建、VitePress 文档构建、目标 Prettier/ESLint 和 `git diff --check` 通过。VitePress 375px 取证中的 615px 整页宽度只出现在 detector overlay 注入后；无 overlay 基线与组件均不横向溢出，API 宽表自身滚动回归已通过。
+- **审查状态**：较新复审的问题已补实现和直接回归；Assessment B 浏览器证据已完成 **20/20**，正在收口证据索引及综合 snapshot/trend，独立代码复审、Assessment A 和综合结论尚待完成，不标记正式通过。UI-10 仍为 0/52；`DataPermissionTree` 与真实保存状态反馈属于 UI-04，真实权限/后端联调须依据真实契约。
+- **下一入口**：完成本轮独立复审及两笔白名单提交推送后进入 G2 `LxSearchBar` + `LxStatusSwitch`；宿主持久化显示继续列入 UI-04，保留 Vue3 `element-plus`。
+
 ## 2026-10-07 UI-13 / Wave 6 组件级正式验收
 
 - **入口**：`linkx-fe/src/components/LxCascader/`、`LxDescriptions/`、`LxVirtualTree/`，文档侧栏配置位于 `linkx-fe/docs/.vitepress/config.ts`；行为回归位于 Vue3 `tests/unit/lx-virtual-tree.test.ts`、`lx-descriptions.test.ts` 及对应文档 E2E。
 - **完成**：当前源码已通过 Cascader HUD 弹层、Descriptions 术语、VirtualTree 键盘/混合勾选/键碰撞/空键焦点和移动控件修复，中文文档与 E2E 同步。
 - **证据**：全量 Vitest 58/457；VirtualTree 18/18、Descriptions 6/6；文档 E2E 6/6；lx-ui 类型/库构建/文档构建和 Vue3 类型检查通过。A 35/40；B 7 个 detector 为有效 `[]`/空 stderr/exit 0，并完成四页浏览器 overlay 取证；代码复审批准。正式报告和原始证据见 `.impeccable/critique/wave6-descriptions-virtualtree-2026-10-07/`。
 - **边界**：`[]` 不等于视觉通过；Assessment B 使用隔离 Playwright fallback。Demo 控制密度、VirtualTree 插槽高度、Cascader loading 文案列入后续 P2/P3。全库 52 项严格矩阵、Vue3 `DataPermissionTree` 宿主替换和真实权限联调仍未完成。
-- **下一入口**：Wave 7 `LxTransferPanel`，对照 `design/虚拟滚动树 + 双栏穿梭/` 完成 5:2:5、380px、code/status、空/错/加载、键盘、HUD、窄屏和减少动效，再执行宿主契约回归。
+- **下一入口**：已转入 Wave 7 `LxTransferPanel`；当前组件级实现和行为回归完成，最终 Impeccable A/B 收口中。完成后进入 G2 `LxSearchBar` + `LxStatusSwitch`，随后再做 Vue3 `DataPermissionTree` 宿主契约回归。
 
 ## 2026-10-07 UI-13 / Wave 5 选择器组件验收
 
@@ -261,7 +284,7 @@ Vue3 鉴权图片链路：`src/api/authImage.ts` 按 Vue2 网关映射请求站�
 
 Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用 Lx 封装的控件，以及移除宿主直接依赖的门槛见 [ELEMENT-PLUS-LX-UI-MATRIX.md](../other-admin/admin-vue3/docs/ELEMENT-PLUS-LX-UI-MATRIX.md)。该项已完成盘点，Vue3 源码和 Vite 配置尚未切换，宿主直接依赖目前不能删除。
 
-执行顺序已调整为：先完成将由 Vue3 采用的高频 lx-ui 组件契约、Demo、行为测试和浏览器检查；再统一宿主导入、类型、自动导入、插件、样式与分包；随后按共享组件影响面分批替换页面，并在每批后回归受影响业务；全部迁移后才删除 Vue3 宿主的 element-plus 直接依赖。业务 API、字段、状态和 Vue2 已有菜单/按钮权限契约继续按源代码核对，不依赖该替换顺序。新权限中心、文本/字段权限及页面引导延期。`LxVirtualTree` 独立中文 API/Demo、8 项行为单测、桌面方向键交互及 375px HUD 深色检查通过；`LxTransferPanel` 独立 API/Demo、4 项单测与 3 项文档浏览器用例覆盖全选/反选、树外键与禁用键保留、上限、清空和窄屏触控。二者均尚未替换 Vue3 `DataPermissionTree`，真实业务契约回归仍待 UI-04。
+执行顺序已调整为：先完成将由 Vue3 采用的高频 lx-ui 组件契约、Demo、行为测试和浏览器检查；再统一宿主导入、类型、自动导入、插件、样式与分包；随后按共享组件影响面分批替换页面，并在每批后回归受影响业务；全部迁移后才删除 Vue3 宿主的 element-plus 直接依赖。业务 API、字段、状态和 Vue2 已有菜单/按钮权限契约继续按源代码核对，不依赖该替换顺序。新权限中心、文本/字段权限及页面引导延期。当前 `LxVirtualTree` 与 `LxTransferPanel` 定向单测合计 64/64；`LxTransferPanel` 文档 E2E 28/28，含自定义筛选、键盘/焦点、触控和窄屏交互。VirtualTree 文档 E2E 13 项另行统计。二者均尚未替换 Vue3 `DataPermissionTree`，真实业务契约回归仍待 UI-04。
 
 基础控件桥接焦点样式记录在 `linkx-fe/docs/components/element-bridge.md`：输入等字段使用贴边 1px 边线与紧邻 2px、15% 浅色光晕；单选与多选下拉统一以自身 1px 边框表示焦点，不在控件外显示第二圈，错误态保留错误色边线；复选框保留自身 1px 状态边线，在 14px 方框外零间隙显示 2px 焦点环。Demo 和浏览器验收覆盖单选/多选、浅色/HUD、错误态、键盘展开、实际未选中/已选中/半选及窄屏状态。
 

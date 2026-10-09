@@ -1,0 +1,577 @@
+{
+  "groups": [
+    {
+      "tag": "P",
+      "class": "",
+      "text": "把虚拟树中的可选节点与受控已选列表同步展示。组件只处理展示和选择交互，不请求数据，也不判断业务权限。桌面布局固定为 5:2:5，两侧面板默认 380px 高并使用 border-box；窄屏提供待选/已选切换，一次展示一个面板并保留面板内滚动。下方文档示例的预览最大宽度为 820px 并居中，窄屏仍使用全部可用宽度；示",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 336,
+        "y": 168,
+        "width": 880,
+        "height": 118
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~110 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "DIV",
+      "class": "lx-transfer-panel__scope-action-content",
+      "text": "包括筛选隐藏项；不可选项和未加载到当前组织树的已选项保持不变。  反选本树可选项",
+      "component": true,
+      "demo": true,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "visible": false,
+      "hiddenAncestor": true,
+      "findings": [
+        {
+          "type": "gpt-thin-border-wide-shadow",
+          "detail": "1px border + 16px shadow blur"
+        }
+      ]
+    },
+    {
+      "tag": "P",
+      "class": "",
+      "text": "默认样例在本地生成 1,420 个树节点，包含多层级、状态元数据和大量禁用归档项；初始预选 4 项并保留 1 个名额，便于体验新增操作，滚动只渲染可视窗口。样例不请求后端，也不代表真实接口性能验收。",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 336,
+        "y": 947,
+        "width": 880,
+        "height": 56
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~110 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "BUTTON",
+      "class": "copy",
+      "text": "",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 1147,
+        "y": 1088,
+        "width": 40,
+        "height": 40
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "buried-raster",
+          "detail": "raster background at opacity 0"
+        }
+      ]
+    },
+    {
+      "tag": "P",
+      "class": "",
+      "text": "右侧已选列表优先使用当前树节点，其次使用 selectedItems 中匹配键的最近详情；无法解析时仍显示原始键，并标记“节点未加载”。对未加载项执行移除前会弹出危险确认框。懒加载宿主应把最后已知详情传入 selectedItems；旧数据若只有 ID，则按 ID 明确降级显示。",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 336,
+        "y": 3466,
+        "width": 880,
+        "height": 88
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~110 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "P",
+      "class": "",
+      "text": "桌面短名称普通项按设计稿保持约 32px 的紧凑单行布局，名称省略显示，编码与状态和名称同行；带键盘展开入口的长名称可自然增高，未加载历史项的附加标记及原始键值另行展示，避免挤压名称。只有实际被截断的名称才提供展开入口，短名称保持静态，不增加 Tab 停靠点。聚焦长名称后可用 Enter 或空格展开完整文本，再次操作即",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 336,
+        "y": 3570,
+        "width": 880,
+        "height": 200
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~110 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "P",
+      "class": "",
+      "text": "modelValue 表示宿主当前传入的受控选择，不区分草稿与服务器已保存状态。宿主必须独立展示保存中、保存成功和保存失败状态；保存失败时保留用户选择并提供重试或恢复方式，不能把本地选择变化当成保存成功。窄屏或短屏中如需增加树的可视行数，宿主可结合页面可用高度传入更大的 panelHeight；默认值仍按设计稿保持 3",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 336,
+        "y": 3786,
+        "width": 880,
+        "height": 118
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~110 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "LI",
+      "class": "",
+      "text": "左侧筛选： 树标题区以“更多反选选项”显示折叠操作，无障碍名称补充说明包含筛选隐藏项；展开后显示“反选本树可选项”，并说明包含筛选隐藏项，不可选项和未加载到当前组织树的已选项保持不变。说明以锚定浮层呈现，定位在待选面板标题区内并位于筛选框与树视口之间，不改变树视口高度或覆盖筛选框；方向键提示在窄屏常驻显示，在桌面树获得",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 356,
+        "y": 4638,
+        "width": 860,
+        "height": 198
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~108 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "LI",
+      "class": "",
+      "text": "右侧筛选： 匹配已选项的标题、编码、原始状态值和可见状态文案。左右筛选框都有独立清除按钮；清除后焦点回到对应输入框。输入采用文本类型和搜索键盘提示，避免与浏览器原生清除符号重复。清除按钮的点击区域桌面为 32px、窄屏为 44px。",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 356,
+        "y": 4844,
+        "width": 860,
+        "height": 72
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~108 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "LI",
+      "class": "",
+      "text": "选择上限： 只有会增加已选数量并使总数超过上限的操作会被拒绝，整次操作不部分写入；反选若会减少或保持已选数量仍可执行，移除和清空也不受上限阻挡，即使初始值已超限。",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 356,
+        "y": 4924,
+        "width": 860,
+        "height": 48
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~108 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "LI",
+      "class": "",
+      "text": "上限提示： “全部加入”不可用时，按钮旁显示待加入数量、剩余名额或无可加入节点的简要原因；按钮的 aria-describedby 关联完整原因。筛选操作按钮也关联当前状态说明。",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 356,
+        "y": 4980,
+        "width": 860,
+        "height": 52
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~108 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "LI",
+      "class": "",
+      "text": "右侧列表可通过键盘聚焦和滚动查看。内容未完整进入视口时，列表外的提示显示尚未完整显示的项数，并通过 aria-describedby 关联到列表；滚动到底部后提示收起。展开长名称后，组件会在列表内滚动以完整显示该名称。",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 356,
+        "y": 5140,
+        "width": 860,
+        "height": 52
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~108 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "LI",
+      "class": "",
+      "text": "普通已选名称在桌面保持单行省略，只有被截断的名称才提供 Enter/空格展开入口；短名称不进入额外键盘停靠点。编码与状态同行，保持设计稿的紧凑核对节奏。未加载历史项同时展示未加载标记及原始键值；320–420px 窄屏名称超过两行时折叠，可按需展开全文。名称完整值仍保留在 title 中。展开时列表按条目整体边界调整滚",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 356,
+        "y": 5200,
+        "width": 860,
+        "height": 98
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~108 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "LI",
+      "class": "",
+      "text": "组件没有额外 slots 或实例方法；加载、错误和重试状态由宿主包裹处理。Demo 的禁用状态只禁用操作控件并弱化这些控件，树和列表内容仍可读，状态消息显示在面板下方。",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 356,
+        "y": 5396,
+        "width": 860,
+        "height": 48
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~108 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "LI",
+      "class": "",
+      "text": "窄屏下切换按钮使用“待选/已选”短标签和两侧数量，完整标题仍保留在按钮无障碍名称与提示中；“待选”数量统计当前已加载树中未禁用且尚未选择的节点，选择名额另由批量操作提示说明。筛选批量操作和状态说明分行展示。待选树页脚说明方向键移动或展开、Space/Enter 选择；所有尺寸下的已选数量均保持单行。隐藏面板会从辅助技术",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 356,
+        "y": 5584,
+        "width": 860,
+        "height": 96
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~108 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "LI",
+      "class": "",
+      "text": "窄屏树节点名称最多显示两行，完整文本保留在标题中；编码和状态在同一行省略。320-420px 内嵌树固定使用 64px 虚拟行高，包含 44px 触控区、两行名称和单行元数据，避免视口较窄时元数据换行撑高行；复选框和展开按钮触控区均为 44×44px，复选框视觉尺寸为 14×14px，两个控件各占独立网格列；已选列表条",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 356,
+        "y": 5688,
+        "width": 860,
+        "height": 120
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~108 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "P",
+      "class": "",
+      "text": "inheritChildDescription 是可选展示属性。权限宿主应提供经业务确认的具体继承对象和关闭后的影响；组件不会推断实际授权范围。说明缺失或纯空白时会显示配置提示并禁用开关，说明始终邻近复选框且通过 aria-describedby 关联。Demo 可关闭“提供继承说明”检查此状态。",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 336,
+        "y": 5916,
+        "width": 880,
+        "height": 88
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~110 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "P",
+      "class": "",
+      "text": "清空动作的确认通过后，事件顺序固定为 update:modelValue([])、change([], [])、clear-all。组件对所有非空列表先显示危险确认；存在未加载节点时会明确告知无法核对节点名称。clear-all 是清空已发生后的通知，不是可取消的确认钩子。宿主仍应把组件绑定到本地草稿值，保存到后端时再",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 336,
+        "y": 6125,
+        "width": 880,
+        "height": 90
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~110 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "P",
+      "class": "",
+      "text": "组件只反映当前受控选择，不知道该值是否已经提交。权限宿主应显示“有未保存更改/已保存”及保存成功或失败反馈，并在失败时提供恢复草稿的路径；这些状态必须由宿主的 dirty 状态和真实保存结果驱动，不能从组件的 modelValue 推断为已保存。",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 336,
+        "y": 6231,
+        "width": 880,
+        "height": 86
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~110 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "P",
+      "class": "",
+      "text": "未加载节点的单项移除和全部清空由组件先执行危险确认；取消时不改变受控值。确认期间如果 modelValue 的键或顺序发生变化，旧确认会失效并提示用户重新检查；仅以新数组引用传入相同键序列不会使确认失效。失效时不会清除新值或发出清空事件。宿主仍需要维护最近一次非空值，保存失败时用该快照恢复草稿；确认通过后才提交空数组。",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 336,
+        "y": 6333,
+        "width": 880,
+        "height": 116
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~110 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "BUTTON",
+      "class": "copy",
+      "text": "",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 1164,
+        "y": 6477,
+        "width": 40,
+        "height": 40
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "buried-raster",
+          "detail": "raster background at opacity 0"
+        }
+      ]
+    },
+    {
+      "tag": "BUTTON",
+      "class": "copy",
+      "text": "",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 1164,
+        "y": 7320.375,
+        "width": 40,
+        "height": 40
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "buried-raster",
+          "detail": "raster background at opacity 0"
+        }
+      ]
+    },
+    {
+      "tag": "P",
+      "class": "",
+      "text": "面板应通过 :model-value 和 @update:model-value 交给草稿更新函数处理，并在保存期间用 :inert=\"saving\" 锁定交互。这样 savePermissionKeys 只接收清空后的不可变提交快照，成功回写该快照；失败时仅在草稿版本未变化时恢复清空前快照。示例中的“撤销清空”只恢复",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 336,
+        "y": 7519.03125,
+        "width": 880,
+        "height": 116
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "line-length",
+          "detail": "~110 chars/line (aim for <80)"
+        }
+      ]
+    },
+    {
+      "tag": "TABLE",
+      "class": "",
+      "text": "名称类型默认值说明treeDataLxTransferPanelNode[][]左侧待选树。节点使用 id、label、children 和 disabled；可选元数据为 code、status、statusTone；节点键须唯一。modelValue(string | number)[][]受控的已选节点键；可包含",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 336,
+        "y": 1202,
+        "width": 880,
+        "height": 1497
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "edge-flush-cards",
+          "detail": "11 cards flush against the left edge of table at rest (1px gap, e.g. th)"
+        }
+      ]
+    },
+    {
+      "tag": "BUTTON",
+      "class": "",
+      "text": "空结果",
+      "component": false,
+      "demo": true,
+      "rect": {
+        "x": 419,
+        "y": 456,
+        "width": 57,
+        "height": 34
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "text-occlusion",
+          "detail": "button \"空结果\" is 100% covered by an opaque element (select)"
+        }
+      ]
+    },
+    {
+      "tag": "BUTTON",
+      "class": "",
+      "text": "加载中",
+      "component": false,
+      "demo": true,
+      "rect": {
+        "x": 480,
+        "y": 456,
+        "width": 57,
+        "height": 34
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "text-occlusion",
+          "detail": "button \"加载中\" is 83% covered by an opaque element (select)"
+        }
+      ]
+    },
+    {
+      "tag": "BODY",
+      "class": "",
+      "text": "Skip to contentLxUI搜索文档K Main Navigation 首页组件新增组件Appearance菜单本页导航 Sidebar Navigation 新增组件新增组件总览基础基础控件桥接LxButton 按钮LxIcon 图标总览布局导航LxSidebar 侧边栏LxNavbar 顶部导航LxBre",
+      "component": false,
+      "demo": false,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 7918.03125
+      },
+      "visible": true,
+      "hiddenAncestor": false,
+      "findings": [
+        {
+          "type": "bounce-easing",
+          "detail": "cubic-bezier(.71, -.46, .29, 1.46)"
+        },
+        {
+          "type": "layout-transition",
+          "detail": "transition: height, padding-top, padding-bottom"
+        }
+      ]
+    }
+  ],
+  "overlayCount": 27,
+  "bannerCount": 1
+}

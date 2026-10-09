@@ -1,16 +1,26 @@
 # LinkX 后续任务完整拆分与执行规范
 
-> 更新时间：2026-10-07
+> 更新时间：2026-10-09
 >
 > 本文是 `doc/PROJECT-DELIVERY-PLAN.md` 的执行拆分入口。它把当前仍未完成、证据不足或明确阻塞的工作按依赖顺序拆成可交付波次。每个波次完成后，必须先完成验证、代码审核、样式与动效审查，再进入下一波；不得用“代码已经存在”“构建通过”或 detector 输出 `[]` 代替交付证据。
 
-### 当前执行指针（2026-10-07）
+### 2026-10-10 执行指针：Wave 7 已关闭，进入 G2
+
+Wave 7 `LxTransferPanel` 已完成并通过正式收口：定向单测 64/64、TransferPanel 文档 E2E 32/32、A 32/40、B 三目标有效 `[]`/空 stderr/exit 0、六组浏览器 overlay 与源码哈希证据齐备，代码复审无 P0–P3。P2/P3 仅保留中等宽度扫描密度、窄屏条目内距、整树反选发现成本和滚动提示位置。综合报告为 `.impeccable/critique/wave7-transferpanel-2026-10-09/final-density-61/final-report.md`。
+
+当前自动执行 G2：`LxSearchBar` + `LxStatusSwitch`。SearchBar 需要补组件级 Playwright（成功/空/失败恢复、重置、loading、展开、Enter/Escape、焦点和 375px）；StatusSwitch 需要核对 `0/1`、`change(number)`、确认/取消、只读、加载和失败恢复。G2 完成前不推进 Vue3 宿主替换，不删除 `element-plus`。
+
+### 当前执行指针（2026-10-09）
 
 Wave 5 选择器组件已完成正式收口：TreeSelect/Cascader/SelectPagination 定向单测 36/36、文档 E2E 15/15，A 32/40，B 9 个 detector 有效 `[]`/空 stderr/exit 0 且 9 个浏览器场景完成 overlay，代码复审无 P0–P2。当前指针转入下一批复杂组件；四项 P2（移动换行密度、错误旧状态、主题入口不对称、侧栏同级密度）与长节点 E2E P3 保持登记，不能在下游迁移中遗失。
 
 Wave 6（`LxCascader`、`LxDescriptions`、`LxVirtualTree` 与文档侧栏）已完成当前源码冻结后的组件级正式收口。A 为 35/40（Good），B 的 7 个 detector 均为有效 JSON `[]`、stderr 空、退出码 0，并在四个新标签完成 overlay、键盘、HUD、错误/空态和 375px 取证；代码审核批准。全库 52 项严格矩阵仍未关闭，宿主 Element Plus 替换继续冻结。
 
-当前执行指针转入 Wave 7：先完成 `LxTransferPanel` 的设计稿严格对照、行为回归、Mock/E2E、独立代码审核和 Impeccable A/B；然后按台账继续 MetricCard、SectionTitle、StatusSwitch、SearchBar、AuthImg、Navbar/Sidebar 余项，最后才进入 Vue3 宿主替换。
+Wave 7 `LxTransferPanel` 已补树节点总量文案、桌面两行长名称、窄屏完整换行，以及虚拟滚动和响应式断点下的键盘焦点回归。组件 API `panelHeight` 默认 380px、最小 240px，非有限值回退为 380px；根据用户对页面选择区仍显过宽的反馈，文档 Demo 预览最大宽度改为 820px 并居中，窄屏按正文实际可用宽度铺开。Demo 默认仍为 240px 紧凑档，高度选择器移至示例上方常显，并提供 300px/380px 档位。桌面待选标题和反选入口同行以保留紧凑档至少 120px 树视口；超长名称展开按全文边界调整列表滚动，避免裁切。VitePress 的 `details summary` 全局外边距已在组件和 Demo 局部归零，桌面标题区由 95px 收到 63px，树视口由 125px 增至 157px。窄屏计数与无障碍名称统一为“待选”，组件文档在示例旁说明本地选择不代表已保存权限。`lx-transfer-panel.test.ts` 与 `lx-virtual-tree.test.ts` 合计 **64/64**；TransferPanel 文档 E2E **30/30**，其中检查 1440px 居中、390px 正文可用宽度和无横向溢出；VirtualTree 文档 E2E 的 13 项单独统计。Luna 代码复审未发现 P0-P2，旧交接数据 P3 已修正。最终 Impeccable A/B、报告和 snapshot/trend 仍在收口；完成后才标记 Wave 7 正式完成并进入 G2。UI-10 保持 0/52。
+
+Wave 7 的跨层跟进已拆入计划：UI-04 权限宿主需显示 dirty/已保存状态及真实保存成功/失败反馈，并在失败时提供草稿恢复；Assessment B 中 375px 整页 615px 宽度只由注入 overlay 产生，无 overlay 基线与组件均不溢出，API 表格自身滚动的窄屏回归已通过。真实权限/后端联调依据真实契约。两笔白名单提交推送且独立复审完成后，再进入 G2 `LxSearchBar` + `LxStatusSwitch`。
+
+G2 按设计稿、Vue2 原组件、Vue3 适配器和实际调用方逐项核对字段密度、组织/日期筛选、`action(key)`、`org-change`、实例方法、`0/1` 映射及 `change(number)`。SearchBar 现有 8 项单测，但缺少直接操作组件 Demo 的 Playwright；需补成功/空/失败恢复、重置、loading、字段展开、Enter/Escape、键盘焦点和 375px 窄屏 E2E。StatusSwitch 现有 8 项单测与 3 项文档 Playwright，按设计复核 `0/1`、`change(number)`、确认/取消及只读/失败恢复。宿主替换留在 UI-04，不删除 Element Plus。
 
 每个子批次必须同步设计差异、中文 Demo/API、单测、Mock、浏览器证据、独立代码复审、Impeccable A/B、snapshot/trend 和交接记录；检测器输出 `[]` 必须同时保留 stderr 与退出码，不能单独作为通过依据。业务 API 继续使用 `.then().catch().finally()`，所有新增文档和注释使用中文。
 
