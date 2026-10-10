@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-11 lx-ui Wave 10 / TransferPanel 组件库复验完成
+
+- lx-ui 的 `LxVirtualTree`/`LxTransferPanel` 复选框视觉盒已定为 14×14px，树节点桌面/窄屏点击区保留 24×24px / 44×44px；页脚继承开关继续由 `LxCheckbox` label 提供点击区。
+- 文档 Demo 桌面节点元数据拥挤已修，状态/主题折叠摘要已补；320px P2 经证据确认是误报。改后 TransferPanel 文档 E2E 33/33，类型、库构建、文档构建和格式/Lint 通过。
+- 最终 A 为 35/40，B 三 detector 均为有效 `[]`/空 stderr/exit 0，浏览器 overlay 证据完成，独立代码复审无 P0–P3；综合报告及 snapshot/trend 见 `.impeccable/critique/transferpanel-final-2026-10-11/`。本轮未修改 Vue3 宿主 API、路由或业务页面，不表示 `DataPermissionTree` 替换或真实权限联调完成；下一项先处理 `LxDescriptions` Demo 控件密度，再复验 `LxVirtualTree` 当前版。
+
 ## 2026-10-09 lx-ui Wave 7 / LxTransferPanel 交接
 
 - 根据用户反馈，文档 Demo 预览最大宽度设为 `820px` 并居中，窄屏铺满正文可用宽度；保留组件默认 `panelHeight=380px` 与 Demo 默认紧凑 240px，且高度选择器常显。移动候选数量标签改为“待选”，文档在示例旁说明本地选择不是已保存权限。

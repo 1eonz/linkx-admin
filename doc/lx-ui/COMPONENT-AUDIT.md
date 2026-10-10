@@ -1,5 +1,13 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-11 UI-10 / Wave 10 TransferPanel 选择框与桌面树行复验完成
+
+树节点与页脚继承复选框的视觉盒统一为 14×14px；树节点点击区桌面保留 24×24px、窄屏保留 44×44px，页脚 `LxCheckbox` 标签点击区桌面最小高度 32px、无悬停设备最小高度 44px。键盘焦点和原有树行键盘模型保留。尺寸修复已合入 `ad797971`。
+
+修前独立 Assessment A 为 33/40（Good）：桌面 820px Demo 树行名称、编码和状态挤压的 P2 由截图确认，已使元数据可收缩并由 title 保留完整值；320px 动作区拥挤的 P2 经浏览器 DOM、按钮位置和整页宽度测量排除为误报；状态/主题默认折叠的 P3 已通过动态摘要处理。Demo 交互用例现在覆盖摘要更新。
+
+改后验证：`linkx-fe` 类型检查、203 模块构建、VitePress 文档构建、TransferPanel 文档 E2E 33/33、目标 ESLint/Prettier 和 `git diff --check` 通过。正式 A 为 35/40（Good）；B 三个目标 detector 均为有效 JSON `[]`、空 stderr、退出码 0，浏览器 overlay 成功并完成桌面/窄屏浅色/HUD 取证；隔离代码复审无 P0–P3。综合报告与 snapshot/trend 见 `.impeccable/critique/transferpanel-final-2026-10-11/`。宿主保存状态归 UI-04，元信息字号和触屏长编码全文入口留给 VirtualTree 复验。本波不增加 UI-10 52 项矩阵关闭数。
+
 ## 2026-10-10 UI-13 / Wave 9 LxUpload 回灌 abort 回归
 
 `LxUpload` 已补 fallback UID 回灌后公开 `abort()` 的组合回归，单测 38/38；文档 E2E 首次为 7/9，服务恢复后两个用例独立重跑 2/2，当前证据合计 9/9。记录见 `.impeccable/critique/wave9-upload-2026-10-10/agent-notes.md`。真实上传协议和服务端 AbortSignal 联调仍属 UI-04，下一项进入 `LxDescriptions`、`LxVirtualTree` 当前版正式审查。

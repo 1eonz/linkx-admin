@@ -1,5 +1,12 @@
 # LinkX 项目地图
 
+## 2026-10-11 Wave 10 / TransferPanel 选择框与桌面行密度复验完成
+
+- `LxVirtualTree` 和 TransferPanel 页脚复选框的可见框统一锁定为 14×14px。树节点控制区桌面为 24×24px、窄屏为 44×44px；页脚使用 `LxCheckbox` 标签点击区，桌面最小高度为 32px、无悬停设备为 44px，宽度随标签内容变化。
+- 修复已合入 `ad797971`。修后桌面树行编码/状态可在列宽内收缩，Demo 折叠摘要显示数据状态和主题；TransferPanel 文档 E2E `33/33`、`linkx-fe` 类型检查、203 模块构建、VitePress 文档构建和目标 ESLint/Prettier 通过。
+- 修前 A 的桌面行溢出观察由浏览器证据确认并处理；320px 拥挤观察经 DOM 和截图证实为误报，移除 overlay 注入节点后页面基线宽度恢复。改后 A **35/40**；B 三 detector 为有效 `[]`/空 stderr/exit 0，浏览器 overlay/主题/视口证据齐全；代码复审无 P0–P3。综合报告、非空 snapshot/trend 位于 `.impeccable/critique/transferpanel-final-2026-10-11/` 与根目录 snapshot。
+- 宿主保存状态归 UI-04；元信息字号与触屏长编码查看列入 VirtualTree 复验。下一步先处理 `LxDescriptions` Demo 控件密度 P2，再审当前版 VirtualTree 固定插槽行高和 TransferPanel 联回归；UI-10 仍不因本轮关闭全库 52 项矩阵。
+
 ## 2026-10-10 Wave 9 / LxUpload 回灌 abort 回归完成
 
 - `other-admin/admin-vue3/tests/unit/lx-upload.test.ts` 已覆盖 fallback UID 生成后父级回灌，再由公开 `abort()` 取消和复位；单测 38/38 通过。

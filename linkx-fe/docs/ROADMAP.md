@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-11 Wave 10 / TransferPanel 密度复验完成
+
+- 已修复复选框视觉尺寸，树节点元数据可在 820px 文档预览列宽内收缩；折叠的 Demo 状态/主题区显示当前选择摘要。
+- 修后文档 E2E 33/33，类型检查、203 模块库构建、VitePress 文档构建、目标 ESLint/Prettier 通过。窄屏拥挤观察复核为误报，桌面树行拥挤已处理。
+- 最终 A 35/40，B 三 detector 为有效 `[]`/空 stderr/exit 0 且浏览器 overlay/截图证据齐备，代码复审无 P0–P3；综合报告与 snapshot/trend 已完成，详见 `.impeccable/critique/transferpanel-final-2026-10-11/`。先处理 `LxDescriptions` Demo 控件密度，再复验 `LxVirtualTree` 当前版固定插槽行高与 TransferPanel 联回归。
+
 ## 2026-10-10 Wave 9 / LxUpload 回灌 abort 回归完成
 
 - 已补无 UID 文件生成 fallback UID、父级回灌后公开 `abort()` 的组合测试；单测 38/38 通过。

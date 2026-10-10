@@ -13,6 +13,21 @@
 - 定向单测 `26/26`，`vue-tsc --noEmit`、203 模块库构建、VitePress 文档构建、目标 ESLint、Prettier、SearchBar E2E `3/3`、StatusSwitch E2E `4/4` 通过。独立代码复审无 P0-P2；综合报告与正式 snapshot/trend 已收口，两个目标趋势均为非空 `39/40` 记录。当前先处理用户新增的 TransferPanel 选择框尺寸反馈，再进入 `LxDescriptions`、`LxVirtualTree`。
 - 综合报告：`.impeccable/critique/g2-complete-2026-10-10/recheck-final/report.md`；正式快照：`.impeccable/critique/2026-10-09T19-51-41Z__linkx-fe-src-components-lxsearchbar-index-vue.md`、`.impeccable/critique/2026-10-09T19-51-41Z__linkx-fe-src-components-lxstatusswitch-index-vue.md`。`[]` 仅代表静态零命中，正式结论同时依赖独立 A/B、浏览器 overlay、stderr、退出码和快照。
 
+## [2026-10-11] Wave 10 正式交接完成：TransferPanel 选择框视觉尺寸与密度复验
+
+- 用户反馈文档页选择框过大；修复将树节点与页脚继承选框的视觉尺寸统一为 14×14px，保留树节点桌面 24×24px、窄屏 44×44px 点击区；页脚 `LxCheckbox` 标签点击区为桌面最小高 32px、触屏最小高 44px。代码已随提交 `ad797971` 合入。
+- 修前 Assessment A 评分 33/40（Good），报告中的桌面树行信息拥挤已由浏览器截图确认并修复；320px 动作区拥挤为误报，页面/组件外框没有横向溢出。Demo 折叠项增加状态和主题摘要。改后 TransferPanel 文档 E2E 33/33、类型检查、203 模块库构建、VitePress 文档构建、目标 ESLint/Prettier 和 `git diff --check` 通过。
+- 改后 A 为 35/40（Good）；B 的三个 detector 均为 JSON `[]`、空 stderr、退出码 0，且浏览器 overlay 成功覆盖桌面/窄屏亮色与 HUD。console 分组报告 28 项、逐条日志 29 项，差异已保留并逐项归因；320px 根滚动宽度增加由 overlay 标注层造成，移除 8 个注入节点后恢复。独立代码复审无 P0–P3。
+- 证据见 `.impeccable/critique/transferpanel-final-2026-10-11/final-report.md`、`assessment-a/`、`assessment-b/` 与 `code-review/report.md`；当前目标 snapshot/trend 由 `critique-storage.mjs` 写入。A 的宿主保存状态进入 UI-04，11px 元信息和触屏长编码全文查看进入 VirtualTree 后续复验。
+- 本波改后 E2E 33/33、类型检查、203 模块构建、VitePress 文档构建、目标 ESLint/Prettier 与 `git diff --check` 通过。收尾时 8400、43620、4174 均无监听；4174 本轮未重启。`.pnpm-store` 包缓存镜像不纳入提交。
+- 下一入口按计划为 `LxDescriptions` Demo 控件密度 P2，再为 `LxVirtualTree` 当前版自定义插槽固定行高、滚动与 TransferPanel 共享回归。UI-10 52 项矩阵、Vue3 宿主组件替换和真实权限/后端联调不因本波关闭。
+
+### 下一波执行清单
+
+- **先做 LxDescriptions**：对照 `design/详情描述行 Descriptions/screen.png`、`code.html` 复核 32px 描述行、标签/值层级、复制字段、状态点、抽屉以及 320/375px。修复 Demo 控件密度：布局组增加可见组名；四个演示状态从平铺按钮改为有标签的状态选择器；布局仍用分段控件，边框和主题继续用复选框。文档 E2E 更新状态切换，并覆盖 375px 无横向溢出及边框开关实际生效；保留 6 项组件单测和既有主题、布局回归。完成库类型/构建、文档构建、目标格式/Lint、浏览器状态与键盘焦点检查后做独立 A/B、代码复审和 snapshot/trend。
+- **再做 LxVirtualTree**：先冻结当前源码指纹并正式复验，不引用 Wave 6 的旧版截图或报告。确认自定义 `node` 插槽的固定行高契约；当前实现按固定高度虚拟滚动，文档要求单行但组件边界没有约束整个插槽。优先保留固定行高，在组件层限制行内容并使长文本仍可访问；只有确需多行时才设计可测量高度模式。补长文本与块级/多行插槽回归，覆盖桌面 32px、窄屏 44px、相邻行不覆盖、滚动偏移、`scrollToKey` 和焦点恢复。复验分组 Demo、键盘/级联选择、过滤、空/加载/错误、HUD、320/375px 和大量节点；改动后联跑 VirtualTree 单测/E2E、TransferPanel 单测及文档 E2E，再做独立 A/B、代码复审和 snapshot/trend。
+- 每一波按已约定的两笔提交分开提交实现/回归与中文计划/审查证据，推送后再自动进入下一波；`DataPermissionTree` 宿主替换、真实权限保存和 UI-10 全库矩阵继续单独登记。
+
 ## [2026-10-10] G2 阶段性交接（历史记录，降级未正式收口）：LxSearchBar + LxStatusSwitch
 
 - **SearchBar 已完成的实现范围**：根节点 `role=search`，loading 暴露 `aria-busy`，折叠按钮提示隐藏字段数量，移动按钮最小高度 44px，`prefers-reduced-motion` 下关闭图标过渡；单测 8/8、文档 E2E 3/3、类型/Prettier/ESLint 已通过。Assessment A 因浏览器不可启动为降级评审，评分 31/40（Good）。

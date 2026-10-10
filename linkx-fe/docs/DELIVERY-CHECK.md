@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-11 Wave 10 / LxTransferPanel 选择框与桌面树行复验完成
+
+- 树节点和页脚继承复选框可见框为 14×14px；树节点点击区桌面 24×24px、窄屏 44×44px，页脚 `LxCheckbox` 标签点击区桌面最小高 32px、触屏最小高 44px。尺寸修复已合入 `ad797971`。
+- 修前 Assessment A 33/40（Good）提出的桌面树行元数据挤压已在 Demo 节点插槽中处理；编码/状态允许收缩，完整值保留在 title。320px 动作区 P2 经浏览器 DOM 和截图证实为误报，页面、body、组件根节点均无横向溢出。
+- 示例折叠栏标题会显示数据状态与主题。改后 TransferPanel 文档 E2E 33/33、类型检查、203 模块构建、文档构建、目标 ESLint/Prettier 通过。正式 A 35/40，B 三 detector 为有效 `[]`/空 stderr/exit 0 且浏览器 overlay/截图证据齐备，代码复审无 P0–P3；综合报告与 snapshot/trend 见 `.impeccable/critique/transferpanel-final-2026-10-11/`。宿主保存状态及触屏长编码查看分别保留在 UI-04 和后续 VirtualTree 工作中。
+
 ## 2026-10-10 Wave 9 / LxUpload 正式核查
 
 - fallback UID 回灌后公开 `abort()` 组合回归已补齐；LxUpload 单测 38/38，文档 E2E 证据合计 9/9。

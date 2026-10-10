@@ -12,6 +12,13 @@
 - 已处理 A 的 P1/P2：StatusSwitch 支持 `impact`/`audit` 确认上下文并为 loading、只读、无权限状态保留行名关联；SearchBar Demo 增加四字段标准态并移除重复状态。定向单测 `26/26`、类型检查和目标格式校验通过。
 - G2 仍需完成修后独立 A/B、综合报告、`.impeccable/critique` snapshot/trend 和代码复审，不能仅以 detector `[]` 关闭；完成后按两笔 Conventional Commit 推送并自动进入 `LxDescriptions`/`LxVirtualTree` 当前版复核。
 
+### 2026-10-11 Wave 10 已完成：TransferPanel 选择框修复后复验
+
+- 用户指出 `LxTransferPanel` 示例中的复选框视觉过大；已把树节点与页脚继承复选框的视觉盒锁定到 14×14px，树节点桌面/窄屏点击区分别保留 24×24px 与 44×44px，页脚 `LxCheckbox` 标签点击区保持桌面最小高 32px、触屏最小高 44px，并补尺寸回归。修复已合入 `ad797971`。
+- 修后严格检查发现 820px 桌面示例树列的元数据曾挤压名称并引发树视口内部横向滚动；已让编码和状态在现有列宽内收缩，完整值仍可查看。320px P2 经浏览器尺寸、截图和 DOM 测量确认是误报：页面、body、组件根节点没有横向溢出，主要按钮完整可见。Demo 状态/主题折叠项现通过标题摘要显示当前值。
+- 当前版本定向单测 64/64、改后 TransferPanel 文档 E2E 33/33、`linkx-fe` 类型检查与 203 模块构建、VitePress 文档构建、目标 ESLint/Prettier、`git diff --check` 均通过。最终 A 为 35/40，B 三 detector 均为有效 `[]`/空 stderr/exit 0 且浏览器 overlay 证据齐备，代码复审无 P0–P3；综合报告、snapshot/trend 已收口，证据见 `.impeccable/critique/transferpanel-final-2026-10-11/`。
+- A 留下的宿主保存状态归 UI-04；11px 元信息与触屏全文查看列入 VirtualTree 复验。随后按顺序处理 `LxDescriptions` Demo 控件密度 P2，再复核 `LxVirtualTree` 当前版插槽固定行高与滚动契约；每一步更新组件审计、项目地图、迁移台账和交接。可信后端契约缺失的权限/业务联调继续明确保留。
+
 ### 2026-10-10 G2 当前交接快照（历史记录）
 
 - `LxSearchBar` 的实现、中文文档和行为回归已完成：单测 8/8、文档 E2E 3/3。G2 Assessment A 因浏览器不可启动降级为 **31/40（Good）**；B 的 detector 有效 `[]`/空 stderr/exit 0 仅代表静态规则零命中，虽有截图和 DOM 证据，overlay 注入未稳定完成，不能登记正式视觉通过。证据见 `.impeccable/critique/g2-complete-2026-10-10/assessment-a/report.md` 与 `assessment-b/report.md`。

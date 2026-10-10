@@ -14,6 +14,16 @@
 - **正式结论**：G2 以 `39/40` 收口，P0/P1/P2/P3 为 0；detector `[]` 仅记录静态零命中，正式结论同时依赖独立 A/B、浏览器 overlay、stderr、退出码、快照和趋势证据。VitePress 文档壳长行与复制按钮提示列为观察项，不回写为组件缺陷。
 - **下一步**：按用户新增反馈先修复并复验 `LxTransferPanel` 选择框尺寸；该修复完成后进入 `LxDescriptions`、`LxVirtualTree` 当前版正式 A/B。
 
+## 2026-10-11 Wave 10 / TransferPanel 复选框视觉尺寸与当前版复验完成
+
+- **用户反馈与修复**：`LxTransferPanel` 文档样例树节点复选框显得过大。统一增加 `--lx-tree-checkbox-size: 14px` 令牌，`LxVirtualTree` 树节点和 TransferPanel 页脚继承复选框的视觉盒固定为 14×14px；键盘焦点环保留，桌面 24×24px 与窄屏 44×44px 点击区域及行高不变。E2E 增加树节点、页脚真实计算尺寸断言。
+- **实现验证**：`lx-ui` 类型检查、203 模块构建、VirtualTree + TransferPanel 单测 **64/64**、TransferPanel 文档 E2E **32/32**、目标 Prettier、`git diff --check` 通过；复选框尺寸修复已包含在提交 `ad797971`。
+- **本轮复验发现与处理**：修复前 Assessment A 为 **33/40（Good）**，发现桌面 820px 示例中树行名称、编码和状态挤压（P2）、320px 示例动作区拥挤（P2）及状态/主题入口默认折叠（P3）。浏览器证据显示 320px 视口、body 和组件根节点均无横向溢出，加入/移除按钮在视口内，因此将该窄屏 P2 记为误报。桌面树视口确有内部横向滚动和元数据挤压；已调整节点编码/状态允许收缩，并保留 `title` 完整值。Demo 折叠摘要现显示当前数据状态和主题。
+- **改后验证**：`linkx-fe` 类型检查、203 模块构建、VitePress 文档构建、目标 Prettier、E2E ESLint、`git diff --check` 通过；TransferPanel 文档 E2E **33/33**，覆盖新增的桌面树行/元数据不溢出和折叠摘要状态更新。一次默认 Playwright 配置误启 Vue3 业务服务并出现后端 GET 超时，已中止；改用 `playwright.lxui.config.ts` 后所有验证仅访问本地文档站。`.pnpm-store` 为 Git 跟踪的包缓存镜像，不纳入本波提交。
+- **最终审查状态**：改后 Assessment A 为 **35/40（Good）**；Assessment B 的组件、Demo、文档三个 detector 均为 JSON `[]`、空 stderr、退出码 `0`，浏览器 overlay 注入成功并完成桌面/窄屏浅色/HUD 检查；逐条记录 29 项命中并归类文档壳、预期省略及误报。独立代码复审无 P0–P3。综合报告见 `.impeccable/critique/transferpanel-final-2026-10-11/final-report.md`，snapshot/trend 在本次写入后登记。
+- **遗留边界**：宿主未保存/保存失败提示归 UI-04；约 11px 的树元信息和触屏长编码全文入口列入 VirtualTree 后续复验。Detector overlay 造成的 320px 根宽度变化已通过注入前/后/移除后的测量归因为工具层，不是产品页面缺陷。收尾检查确认 8400、43620、4174 均无监听；4174 未在本轮重启。
+- **下一步**：按顺序完成 `LxDescriptions` Demo 控件密度 P2，再对当前版 `LxVirtualTree` 做严格 A/B、插槽固定行高契约与 TransferPanel 联回归。本轮不关闭 UI-10 全库 52 项矩阵，也不代表 Vue3 权限宿主替换或真实后端联调完成。
+
 ## 2026-10-10 G2 / LxSearchBar + LxStatusSwitch 阶段性复核（历史记录）
 
 - **LxSearchBar**：已补 `role=search`、loading 的 `aria-busy`、折叠按钮字段数量提示、移动端 44px 触控高度和减少动效降级；单测 8/8、文档 E2E 3/3，类型检查、目标格式检查通过。G2 Assessment A 报告为浏览器不可启动的降级评审，评分 **31/40（Good）**；Assessment B 的 detector JSON `[]`/空 stderr/退出码 0 只说明静态规则零命中，浏览器截图和 DOM 证据已保存，但 overlay 注入未稳定完成，不能据此登记正式视觉通过。报告见 `.impeccable/critique/g2-complete-2026-10-10/assessment-a/report.md` 与 `assessment-b/report.md`。
