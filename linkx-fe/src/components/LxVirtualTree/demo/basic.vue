@@ -2,6 +2,7 @@
 import { computed, nextTick, ref } from 'vue'
 
 import {
+  LxIcon,
   LxVirtualTree,
   type LxVirtualTreeNode,
   type LxVirtualTreeExpose,
@@ -31,18 +32,18 @@ const treeData: LxVirtualTreeNode[] = Array.from(
       disabled: groupIndex === 1 && unitIndex === 4,
       isLeaf: true,
     })),
-  })
+  }),
 )
 
 const visibleData = computed(() => (state.value === 'empty' ? [] : treeData))
 const selectedSummary = computed(
-  () => selectedKeys.value.slice(0, 6).join('、') || '无'
+  () => selectedKeys.value.slice(0, 6).join('、') || '无',
 )
 
 function filterNode(node: LxVirtualTreeNode, keyword: string) {
   return [node.label, node.code].some(
     (value) =>
-      typeof value === 'string' && value.toLocaleLowerCase().includes(keyword)
+      typeof value === 'string' && value.toLocaleLowerCase().includes(keyword),
   )
 }
 
@@ -105,7 +106,15 @@ function summarizeNode({ node, checked }: LxVirtualTreeNodeSlotProps) {
 <template>
   <div class="virtual-tree-demo">
     <details class="virtual-tree-demo__controls">
-      <summary>演示状态和更多操作</summary>
+      <summary>
+        <span>演示状态和更多操作</span>
+        <LxIcon
+          class="virtual-tree-demo__summary-icon"
+          name="chevron-down"
+          :size="14"
+          aria-hidden="true"
+        />
+      </summary>
       <div
         class="virtual-tree-demo__toolbar"
         role="group"
@@ -140,8 +149,16 @@ function summarizeNode({ node, checked }: LxVirtualTreeNodeSlotProps) {
           加载失败
         </button>
       </div>
-      <details class="virtual-tree-demo__advanced" open>
-        <summary>数据操作与定位</summary>
+      <details class="virtual-tree-demo__advanced">
+        <summary>
+          <span>数据操作与定位</span>
+          <LxIcon
+            class="virtual-tree-demo__summary-icon"
+            name="chevron-down"
+            :size="14"
+            aria-hidden="true"
+          />
+        </summary>
         <div class="virtual-tree-demo__actions">
           <fieldset class="virtual-tree-demo__action-group">
             <legend>筛选</legend>
@@ -177,7 +194,15 @@ function summarizeNode({ node, checked }: LxVirtualTreeNodeSlotProps) {
         </div>
       </details>
       <details class="virtual-tree-demo__advanced">
-        <summary>边界与外观</summary>
+        <summary>
+          <span>边界与外观</span>
+          <LxIcon
+            class="virtual-tree-demo__summary-icon"
+            name="chevron-down"
+            :size="14"
+            aria-hidden="true"
+          />
+        </summary>
         <div class="virtual-tree-demo__actions">
           <fieldset class="virtual-tree-demo__action-group">
             <legend>选择方式</legend>
@@ -344,8 +369,30 @@ function summarizeNode({ node, checked }: LxVirtualTreeNodeSlotProps) {
   width: fit-content;
   min-height: 32px;
   align-items: center;
+  gap: var(--lx-space-xs);
+  list-style: none;
   color: var(--lx-text-secondary);
   cursor: pointer;
+}
+
+.virtual-tree-demo__controls summary::marker,
+.virtual-tree-demo__advanced summary::marker {
+  content: '';
+}
+
+.virtual-tree-demo__controls summary::-webkit-details-marker,
+.virtual-tree-demo__advanced summary::-webkit-details-marker {
+  display: none;
+}
+
+.virtual-tree-demo__summary-icon {
+  flex: 0 0 auto;
+  transition: transform 160ms ease;
+}
+
+.virtual-tree-demo__controls[open] > summary .virtual-tree-demo__summary-icon,
+.virtual-tree-demo__advanced[open] > summary .virtual-tree-demo__summary-icon {
+  transform: rotate(180deg);
 }
 
 .virtual-tree-demo__advanced {
@@ -358,6 +405,12 @@ function summarizeNode({ node, checked }: LxVirtualTreeNodeSlotProps) {
   color: var(--lx-text-regular);
   font-size: 12px;
   font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .virtual-tree-demo__summary-icon {
+    transition: none;
+  }
 }
 
 .virtual-tree-demo button {

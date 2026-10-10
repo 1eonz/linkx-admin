@@ -1,7 +1,17 @@
 import { expect, test, type Page } from '@playwright/test';
 
 async function openBoundaryControls(page: Page) {
-  await page.locator('details.virtual-tree-demo__advanced summary').filter({ hasText: '边界与外观' }).click();
+  const details = page.locator('details.virtual-tree-demo__advanced').filter({ hasText: '边界与外观' });
+  if (!(await details.evaluate((element) => (element as HTMLDetailsElement).open))) {
+    await details.locator('summary').click();
+  }
+}
+
+async function openDataControls(page: Page) {
+  const details = page.locator('details.virtual-tree-demo__advanced').filter({ hasText: '数据操作与定位' });
+  if (!(await details.evaluate((element) => (element as HTMLDetailsElement).open))) {
+    await details.locator('summary').click();
+  }
 }
 
 test.describe('lx-ui LxVirtualTree 文档示例', () => {
@@ -21,11 +31,41 @@ test.describe('lx-ui LxVirtualTree 文档示例', () => {
   test('选择规则和外观主题使用独立的演示分组', async ({ page }) => {
     await page.goto('/components/lxvirtualtree');
     await page.locator('summary').filter({ hasText: '演示状态和更多操作' }).click();
+    const dataControls = page.locator('details.virtual-tree-demo__advanced').filter({ hasText: '数据操作与定位' });
+    await expect(dataControls).not.toHaveAttribute('open', '');
     await openBoundaryControls(page);
 
     await expect(page.getByRole('group', { name: '选择方式' })).toContainText('父子独立勾选');
     await expect(page.getByRole('group', { name: '外观主题' })).toContainText('HUD 深色主题');
     await expect(page.getByRole('group', { name: '选择方式' })).not.toContainText('HUD 深色主题');
+  });
+
+  test('高级控制按组渐进展开，数据操作组默认收起', async ({ page }) => {
+    await page.goto('/components/lxvirtualtree');
+    await page.locator('summary').filter({ hasText: '演示状态和更多操作' }).click();
+
+    const dataControls = page.locator('details.virtual-tree-demo__advanced').filter({ hasText: '数据操作与定位' });
+    const boundaryControls = page.locator('details.virtual-tree-demo__advanced').filter({ hasText: '边界与外观' });
+    const summaryIcons = page.locator('.virtual-tree-demo__summary-icon');
+    await expect(summaryIcons).toHaveCount(3);
+    expect(
+      await summaryIcons.evaluateAll((icons) => icons.every((icon) => icon.getAttribute('aria-hidden') === 'true')),
+    ).toBe(true);
+    await expect(summaryIcons.first()).not.toHaveCSS('transform', 'none');
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    const reducedMotionDuration = await summaryIcons.first().evaluate((icon) => {
+      const duration = getComputedStyle(icon).transitionDuration;
+      return Number.parseFloat(duration);
+    });
+    expect(reducedMotionDuration).toBeLessThan(0.01);
+    await expect(dataControls).not.toHaveAttribute('open', '');
+    await expect(boundaryControls).not.toHaveAttribute('open', '');
+
+    await openDataControls(page);
+    await expect(page.getByRole('button', { name: '展开全部' })).toBeVisible();
+    await expect(boundaryControls).not.toHaveAttribute('open', '');
+    await openBoundaryControls(page);
+    await expect(page.getByRole('checkbox', { name: 'HUD 深色主题' })).toBeVisible();
   });
 
   test('HUD 主题只作用于树预览，次级说明文字保持可读对比度', async ({ page }) => {
@@ -234,6 +274,7 @@ test.describe('lx-ui LxVirtualTree 文档示例', () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto('/components/lxvirtualtree');
     await page.locator('summary').filter({ hasText: '演示状态和更多操作' }).click();
+    await openDataControls(page);
     await page.getByRole('button', { name: '展开全部' }).click();
 
     const tree = page.getByRole('tree', { name: '组织结构' });

@@ -291,7 +291,7 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     await expect(checkbox).toHaveAttribute('aria-describedby', new RegExp(descriptionId!));
   });
 
-  test('桌面预览默认 240px，可切换 300px 和标准 380px 并保持 5:2:5', async ({ page }) => {
+  test('桌面预览默认标准 380px，可切换紧凑 240px 和适中 300px 并保持 5:2:5', async ({ page }) => {
     await page.goto('/components/lxtransferpanel');
     const summaryLayout = await page
       .locator('.transfer-panel-demo__settings summary, .lx-transfer-panel__scope-actions summary')
@@ -317,11 +317,11 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     const defaultPanelHeights = await page
       .locator('.lx-transfer-panel__panel')
       .evaluateAll((panels) => panels.map((panel) => Math.round(panel.getBoundingClientRect().height)));
-    expect(defaultPanelHeights).toEqual([240, 240]);
-    const compactTreeViewportHeight = await page
+    expect(defaultPanelHeights).toEqual([380, 380]);
+    const defaultTreeViewportHeight = await page
       .locator('.lx-virtual-tree__viewport')
       .evaluate((element) => element.getBoundingClientRect().height);
-    expect(compactTreeViewportHeight).toBeGreaterThanOrEqual(120);
+    expect(defaultTreeViewportHeight).toBeGreaterThan(200);
     await page.getByLabel('面板高度').selectOption('300');
     await expect
       .poll(() =>
@@ -878,8 +878,8 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
 
     const sourceTab = page.getByTestId('mobile-source-panel');
     const selectedTab = page.getByTestId('mobile-selected-panel');
-    await expect(sourceTab.locator('.lx-transfer-panel__mobile-short-title')).toHaveText('待选');
-    await expect(sourceTab).toHaveAttribute('aria-label', /^显示组织与数据权限树（待选），当前树中 \d+ 个待选节点$/);
+    await expect(sourceTab.locator('.lx-transfer-panel__mobile-short-title')).toHaveText('可加入');
+    await expect(sourceTab).toHaveAttribute('aria-label', /^显示组织与数据权限树（待选），当前树中 \d+ 个可加入节点$/);
     await expect(selectedTab.locator('.lx-transfer-panel__mobile-short-title')).toHaveText('已选');
     await expect(selectedTab).toHaveAttribute('aria-label', /^显示已选数据权限清单，4 项已选$/);
     await expect(page.locator('.lx-transfer-panel__keyboard-hint')).toContainText(
@@ -897,6 +897,13 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     await page.getByTestId('mobile-selected-panel').click();
 
     await expectSingleLineSelectedCount(page);
+    const firstScreenCount = await page.locator('.lx-transfer-panel__selected').evaluate((list) => {
+      const bounds = list.getBoundingClientRect();
+      return [...list.querySelectorAll<HTMLElement>('.lx-transfer-panel__selected-item')].filter(
+        (item) => item.getBoundingClientRect().bottom <= bounds.bottom + 1,
+      ).length;
+    });
+    expect(firstScreenCount).toBeGreaterThanOrEqual(3);
     const disclosure = page
       .locator('.lx-transfer-panel__selected-name-disclosure')
       .filter({ hasText: '历史授权单位（记录中）' });
@@ -997,8 +1004,10 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     expect(summaryLayout.itemHeight).toBeLessThan(60);
     await summary.focus();
     await expect(summary).toHaveAttribute('aria-expanded', 'false');
+    await expect(summary.locator('.lx-transfer-panel__selected-name-action')).toHaveText('查看全文');
     await summary.press('Enter');
     await expect(summary).toHaveAttribute('aria-expanded', 'true');
+    await expect(summary.locator('.lx-transfer-panel__selected-name-action')).toHaveText('收起');
     await expect(summary).toHaveAccessibleName(`收起完整名称：${fullName}`);
 
     const expandedName = disclosure.locator('.lx-transfer-panel__selected-name-full');
@@ -1206,7 +1215,7 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     expect(arrowBox.height).toBeGreaterThanOrEqual(44);
     const compactHint = page.getByTestId('select-all-compact-hint');
     await expect(compactHint).toBeVisible();
-    await expect(compactHint).toHaveText('需加入 2 项；仅剩 1 个名额');
+    await expect(compactHint).toHaveText('剩余 1 个名额');
     const compactHintBox = await compactHint.boundingBox();
     if (!compactHintBox) throw new Error('选择上限短提示没有进入可视区域');
     expect(compactHintBox.y).toBeGreaterThanOrEqual(arrowBox.y + arrowBox.height - 1);
@@ -1447,7 +1456,7 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     await page.goto('/components/lxtransferpanel');
     const heightSelect = page.getByLabel('面板高度');
     await expect(heightSelect).toBeVisible();
-    await expect(heightSelect).toHaveValue('240');
+    await expect(heightSelect).toHaveValue('380');
     await openDemoSettings(page);
     await heightSelect.selectOption('240');
 
@@ -1542,6 +1551,8 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
 
     await expect(page.locator('.lx-transfer-panel__controls-label--add')).toHaveText('全部加入');
     await expect(page.locator('.lx-transfer-panel__controls-label--remove')).toHaveText('全部移除');
+    await expect(page.locator('.lx-transfer-panel__controls-count').first()).toContainText('可加入');
+    await expect(page.locator('.lx-transfer-panel__controls-count').nth(1)).toContainText('已选');
 
     await page.getByLabel('最多 5 项').uncheck();
     await page.getByRole('treeitem', { name: /站前路派出所综合作战室/ }).press('Space');

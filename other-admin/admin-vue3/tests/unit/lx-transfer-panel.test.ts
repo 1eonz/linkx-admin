@@ -117,6 +117,10 @@ describe('LxTransferPanel', () => {
       '全部加入',
       '全部移除',
     ]);
+    expect(wrapper.findAll('.lx-transfer-panel__controls-count').map((count) => count.text())).toEqual([
+      '可加入 2 项',
+      '已选 2 项',
+    ]);
     await wrapper.get('button[aria-label="全部加入"]').trigger('click');
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([['legacy-key', 'leaf', 'root', 'other']]);
     expect(wrapper.emitted('change')?.[0]?.[1]).toEqual([treeData[0]?.children?.[0], treeData[0], treeData[1]]);
@@ -150,7 +154,7 @@ describe('LxTransferPanel', () => {
     const wrapper = mountPanel({ modelValue: ['leaf'], maxCount: 2 });
 
     expect(wrapper.get('.lx-transfer-panel__caption').text()).toContain('树节点总数：4 个');
-    expect(wrapper.get('[data-testid="select-all-compact-hint"]').text()).toContain('需加入');
+    expect(wrapper.get('[data-testid="select-all-compact-hint"]').text()).toBe('剩余 1 个名额');
     wrapper.unmount();
   });
 
@@ -168,7 +172,7 @@ describe('LxTransferPanel', () => {
     const sourceButton = wrapper.get('[data-testid="mobile-source-panel"]');
     const selectedButton = wrapper.get('[data-testid="mobile-selected-panel"]');
 
-    expect(sourceButton.attributes('aria-label')).toBe('显示待选资源，当前树中 2 个待选节点');
+    expect(sourceButton.attributes('aria-label')).toBe('显示待选资源，当前树中 2 个可加入节点');
     expect(sourceButton.attributes('aria-controls')).toBe(wrapper.get('.lx-transfer-panel__panel').attributes('id'));
     expect(sourceButton.attributes('aria-pressed')).toBe('true');
     expect(selectedButton.attributes('aria-pressed')).toBe('false');
@@ -255,8 +259,10 @@ describe('LxTransferPanel', () => {
     expect(selectAllReason.text()).toBe('全量加入需要 2 项，当前还可加入 1 项');
     expect(selectAllReason.classes()).toContain('lx-transfer-panel__visually-hidden');
     expect(selectAllReason.element.parentElement?.classList.contains('lx-transfer-panel__controls-action')).toBe(true);
-    expect(wrapper.get('[data-testid="select-all-compact-hint"]').text()).toBe('需加入 2 项；仅剩 1 个名额');
-    expect(selectAllButton.attributes('aria-describedby')).toBe(selectAllReason.attributes('id'));
+    expect(wrapper.get('[data-testid="select-all-compact-hint"]').text()).toBe('剩余 1 个名额');
+    const selectAllDescriptionIds = selectAllButton.attributes('aria-describedby')?.split(/\s+/);
+    expect(selectAllDescriptionIds).toContain(selectAllReason.attributes('id'));
+    expect(selectAllDescriptionIds).toContain(wrapper.get('[id$="-select-all-count"]').attributes('id'));
 
     await wrapper.getComponent(TreeStub).vm.$emit('update:modelValue', ['leaf', 'root', 'other']);
     expect(lxMessageWarningMock).toHaveBeenCalledWith('最多可选择 2 项');

@@ -13,7 +13,7 @@ const selectedKeys = ref<(string | number)[]>([
   'legacy-unit-08',
 ])
 const maxCountEnabled = ref(true)
-const panelHeight = ref(240)
+const panelHeight = ref(380)
 const darkTheme = ref(false)
 const inheritChild = ref(true)
 const inheritDescriptionProvided = ref(true)
@@ -264,9 +264,9 @@ function onInheritChange(value: boolean) {
       <label>
         面板高度
         <select v-model.number="panelHeight" aria-label="面板高度">
-          <option :value="240">紧凑 240px（默认）</option>
+          <option :value="240">紧凑 240px</option>
           <option :value="300">适中 300px</option>
-          <option :value="380">标准 380px</option>
+          <option :value="380">标准 380px（默认）</option>
         </select>
       </label>
     </div>

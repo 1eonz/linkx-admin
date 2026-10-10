@@ -17,7 +17,7 @@ useResponsiveDocTable();
 <<< ../../src/components/LxVirtualTree/demo/basic.vue
 :::
 
-示例包含 252 个节点（12 个分组和每组 20 个子节点）、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，展开后拆为“数据操作与定位”和“边界与外观”两组，单组最多展示 3–4 个同类动作，避免一次出现过多平级决策。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。触屏或视口宽度不超过 640px 时，行高至少为 44px，虚拟滚动偏移与触控目标同步调整，筛选清除按钮也使用至少 44×44px 的点按区域；HUD 深色主题仅作用于树组件预览。树区域支持方向键浏览；方向键也可从行内展开按钮或复选框继续移动焦点，右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。
+示例包含 252 个节点（12 个分组和每组 20 个子节点）、受控勾选、禁用节点、父子级联切换、筛选、节点插槽、公开方法，以及宿主处理的加载/错误/空结果状态；高级演示操作默认收起，展开后仍需按需打开“数据操作与定位”或“边界与外观”，避免首次进入时同时出现过多平级决策。每组最多展示 3–4 个同类动作。默认级联模式会在树前说明勾选范围，并反馈本次变更数量和当前已选数。筛选会展开匹配路径，结果分组可手动收起；清除筛选后恢复筛选前的展开状态。触屏或视口宽度不超过 640px 时，行高至少为 44px，虚拟滚动偏移与触控目标同步调整，筛选清除按钮也使用至少 44×44px 的点按区域；HUD 深色主题仅作用于树组件预览。树区域支持方向键浏览；方向键也可从行内展开按钮或复选框继续移动焦点，右方向键展开或进入子级，左方向键收起或回到父级，空格/回车切换勾选。
 
 ## Props
 
@@ -63,7 +63,7 @@ interface LxVirtualTreeNode {
 function filterNode(node: LxVirtualTreeNode, keyword: string) {
   return [node.label, node.code].some(
     (value) =>
-      typeof value === 'string' && value.toLocaleLowerCase().includes(keyword)
+      typeof value === 'string' && value.toLocaleLowerCase().includes(keyword),
   )
 }
 ```
@@ -89,7 +89,7 @@ function filterNode(node: LxVirtualTreeNode, keyword: string) {
 function nodeSummary({ node, checked }: LxVirtualTreeNodeSlotProps) {
   return [node.code, node.status, checked ? '已选' : undefined]
     .filter(
-      (value): value is string => typeof value === 'string' && value.length > 0
+      (value): value is string => typeof value === 'string' && value.length > 0,
     )
     .join('，')
 }
