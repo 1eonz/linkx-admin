@@ -650,6 +650,61 @@ describe('LxVirtualTree', () => {
     wrapper.unmount();
   });
 
+  it('将多行节点插槽限制在固定行容器内并保留完整文本', () => {
+    const wrapper = mount(LxVirtualTree, {
+      props: { data: treeData },
+      slots: {
+        node: () =>
+          h('div', { class: 'custom-node-multiline' }, [
+            h('span', '第一行附加信息'),
+            h('br'),
+            h('span', '第二行完整信息'),
+          ]),
+      },
+    });
+
+    const extra = wrapper.get('.lx-virtual-tree__node-extra');
+    expect(extra.text()).toBe('第一行附加信息第二行完整信息');
+    expect(extra.element.querySelector('.custom-node-multiline')).toBeTruthy();
+    expect(wrapper.get('[role="treeitem"]').element.style.getPropertyValue('--lx-tree-row-height')).toBe('32px');
+    wrapper.unmount();
+  });
+
+  it('公开 stacked 行布局并把行高契约用于虚拟窗口', () => {
+    const wrapper = mount(LxVirtualTree, {
+      props: {
+        data: treeData,
+        filterable: false,
+        height: 128,
+        itemSize: 32,
+        rowLayout: 'stacked',
+        showCheckbox: true,
+      },
+      slots: { node: () => h('span', '状态') },
+    });
+
+    expect(wrapper.get('.lx-virtual-tree').attributes('data-row-layout')).toBe('stacked');
+    expect(wrapper.get('[role="treeitem"]').element.style.getPropertyValue('--lx-tree-row-height')).toBe('64px');
+    expect(wrapper.get('.lx-virtual-tree__node-extra').exists()).toBe(true);
+    wrapper.unmount();
+  });
+
+  it('将 nodeSummary 暴露为插槽包装层的可访问摘要', () => {
+    const wrapper = mount(LxVirtualTree, {
+      props: {
+        data: treeData,
+        filterable: false,
+        nodeSummary: ({ node, checked }) => `${node.label}，${checked ? '已选' : '未选'}`,
+      },
+      slots: { node: () => h('span', '状态') },
+    });
+
+    const extra = wrapper.get('.lx-virtual-tree__node-extra');
+    expect(extra.attributes('aria-label')).toBe('杭州市，未选');
+    expect(extra.attributes('title')).toBe('杭州市，未选');
+    wrapper.unmount();
+  });
+
   it('自定义节点键不是字符串或数字时回退到节点 id', () => {
     const wrapper = mount(LxVirtualTree, {
       props: {

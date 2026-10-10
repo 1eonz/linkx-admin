@@ -1,4 +1,8 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+async function openBoundaryControls(page: Page) {
+  await page.locator('details.virtual-tree-demo__advanced summary').filter({ hasText: '边界与外观' }).click();
+}
 
 test.describe('lx-ui LxVirtualTree 文档示例', () => {
   test('文档站 favicon 使用可加载的 SVG 资源', async ({ page }) => {
@@ -17,6 +21,7 @@ test.describe('lx-ui LxVirtualTree 文档示例', () => {
   test('选择规则和外观主题使用独立的演示分组', async ({ page }) => {
     await page.goto('/components/lxvirtualtree');
     await page.locator('summary').filter({ hasText: '演示状态和更多操作' }).click();
+    await openBoundaryControls(page);
 
     await expect(page.getByRole('group', { name: '选择方式' })).toContainText('父子独立勾选');
     await expect(page.getByRole('group', { name: '外观主题' })).toContainText('HUD 深色主题');
@@ -27,6 +32,7 @@ test.describe('lx-ui LxVirtualTree 文档示例', () => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/components/lxvirtualtree');
     await page.locator('summary').filter({ hasText: '演示状态和更多操作' }).click();
+    await openBoundaryControls(page);
     await page.getByRole('checkbox', { name: 'HUD 深色主题' }).check();
 
     const demo = page.locator('.virtual-tree-demo');
@@ -337,5 +343,40 @@ test.describe('lx-ui LxVirtualTree 文档示例', () => {
     if (!parentCheckbox || !childCheckbox) throw new Error('树节点复选框未进入可视区域');
 
     expect(Math.round(childCheckbox.x - parentCheckbox.x)).toBe(16);
+  });
+
+  test('多行节点插槽不会撑高或覆盖相邻树行', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/components/lxvirtualtree');
+    await page.locator('summary').filter({ hasText: '演示状态和更多操作' }).click();
+    await openBoundaryControls(page);
+    await page.getByLabel('多行插槽压力测试').check();
+
+    const tree = page.getByRole('tree', { name: '组织结构' });
+    const rows = tree.getByRole('treeitem');
+    const firstLeaf = rows.filter({ hasText: '执勤单元 01' }).first();
+    await expect(firstLeaf.locator('.virtual-tree-demo__slot-stress')).toBeVisible();
+    await expect(firstLeaf).toHaveCSS('height', '32px');
+
+    const geometry = await firstLeaf.evaluate((element) => {
+      const extra = element.querySelector<HTMLElement>('.lx-virtual-tree__node-extra');
+      const next = element.nextElementSibling as HTMLElement | null;
+      if (!extra || !next) throw new Error('插槽边界或相邻树行缺失');
+      const row = element.getBoundingClientRect();
+      const extraBox = extra.getBoundingClientRect();
+      const nextBox = next.getBoundingClientRect();
+      return {
+        rowHeight: row.height,
+        extraHeight: extraBox.height,
+        nextTop: nextBox.top,
+        rowBottom: row.bottom,
+        extraScrollHeight: extra.scrollHeight,
+      };
+    });
+
+    expect(geometry.rowHeight).toBe(32);
+    expect(geometry.extraHeight).toBe(20);
+    expect(geometry.extraScrollHeight).toBeGreaterThan(geometry.extraHeight);
+    expect(geometry.nextTop).toBeGreaterThanOrEqual(geometry.rowBottom);
   });
 });

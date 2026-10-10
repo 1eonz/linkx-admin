@@ -9,6 +9,7 @@ import type {
   LxVirtualTreeExpose,
   LxVirtualTreeNode,
   LxVirtualTreeProps,
+  LxVirtualTreeSlots,
 } from './types'
 import LxIcon from '../LxIcon/index.vue'
 
@@ -30,6 +31,8 @@ const props = withDefaults(defineProps<LxVirtualTreeProps>(), {
   ariaDescribedby: undefined,
   height: 360,
   itemSize: 32,
+  rowLayout: 'single',
+  nodeSummary: undefined,
   indent: 16,
   nodeKey: 'id',
   showCheckbox: false,
@@ -40,11 +43,25 @@ const props = withDefaults(defineProps<LxVirtualTreeProps>(), {
   modelValue: () => [],
 })
 
+defineSlots<LxVirtualTreeSlots>()
+
 const isTouchOrNarrowViewport = ref(false)
-const effectiveItemSize = computed(() => {
+const requestedItemSize = computed(() => {
   const itemSize =
     Number.isFinite(props.itemSize) && props.itemSize > 0 ? props.itemSize : 32
-  return Math.max(itemSize, isTouchOrNarrowViewport.value ? 44 : 0)
+  return itemSize
+})
+const effectiveRowLayout = computed(() => {
+  if (props.rowLayout === 'responsive')
+    return requestedItemSize.value >= 64 ? 'stacked' : 'single'
+  return props.rowLayout
+})
+const effectiveItemSize = computed(() => {
+  return Math.max(
+    requestedItemSize.value,
+    isTouchOrNarrowViewport.value ? 44 : 0,
+    effectiveRowLayout.value === 'stacked' ? 64 : 0
+  )
 })
 const controlSize = computed(() => (isTouchOrNarrowViewport.value ? 44 : 24))
 
@@ -85,7 +102,7 @@ onMounted(() => {
   updateTouchOrNarrowViewport()
   responsiveViewportQuery?.addEventListener(
     'change',
-    updateTouchOrNarrowViewport,
+    updateTouchOrNarrowViewport
   )
   window.addEventListener('resize', updateTouchOrNarrowViewport)
 })
@@ -93,7 +110,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   responsiveViewportQuery?.removeEventListener(
     'change',
-    updateTouchOrNarrowViewport,
+    updateTouchOrNarrowViewport
   )
   if (typeof window !== 'undefined')
     window.removeEventListener('resize', updateTouchOrNarrowViewport)
@@ -129,7 +146,7 @@ const treeIndex = computed(() => {
 
   const visit = (
     node: LxVirtualTreeNode,
-    parent?: string | number,
+    parent?: string | number
   ): (string | number)[] => {
     const key = keyOf(node)
     nodes.set(key, node)
@@ -145,7 +162,7 @@ const treeIndex = computed(() => {
 })
 
 const normalizedKeyword = computed(() =>
-  keyword.value.trim().toLocaleLowerCase(),
+  keyword.value.trim().toLocaleLowerCase()
 )
 
 // 单次遍历同时保留路径祖先和真实命中数，避免把结构节点计入筛选结果。
@@ -176,7 +193,7 @@ const filterResults = computed(() => {
 const matchingKeys = computed(() => filterResults.value.matchingKeys)
 const matchingNodeCount = computed(() => filterResults.value.matchingNodeCount)
 const filterStatus = computed(
-  () => `筛选匹配到 ${matchingNodeCount.value} 个节点；路径祖先不计入数量。`,
+  () => `筛选匹配到 ${matchingNodeCount.value} 个节点；路径祖先不计入数量。`
 )
 
 const filteredBranchKeys = computed(() => {
@@ -185,7 +202,7 @@ const filteredBranchKeys = computed(() => {
   const branches: (string | number)[] = []
   const visit = (node: LxVirtualTreeNode) => {
     const filteredChildren = childrenOf(node).filter((child) =>
-      matchingKeys.value.has(keyOf(child)),
+      matchingKeys.value.has(keyOf(child))
     )
     if (filteredChildren.length) branches.push(keyOf(node))
     filteredChildren.forEach(visit)
@@ -198,14 +215,14 @@ const filteredBranchKeys = computed(() => {
 })
 
 const filteredExpandedKeys = computed(() =>
-  filteredBranchKeys.value.filter((key) => !filterCollapsed.value.has(key)),
+  filteredBranchKeys.value.filter((key) => !filterCollapsed.value.has(key))
 )
 
 const flatNodes = computed<FlatNode[]>(() => {
   const rows: FlatNode[] = []
   const filter = normalizedKeyword.value
   const roots = props.data.filter(
-    (node) => !filter || matchingKeys.value.has(keyOf(node)),
+    (node) => !filter || matchingKeys.value.has(keyOf(node))
   )
 
   const walk = (
@@ -213,7 +230,7 @@ const flatNodes = computed<FlatNode[]>(() => {
     level: number,
     parent?: string | number,
     posInSet = 1,
-    setSize = 1,
+    setSize = 1
   ) => {
     const key = keyOf(node)
     const children = childrenOf(node)
@@ -231,13 +248,13 @@ const flatNodes = computed<FlatNode[]>(() => {
       : expanded.value.has(key)
     if (revealChildren) {
       visibleChildren.forEach((child, index) =>
-        walk(child, level + 1, key, index + 1, visibleChildren.length),
+        walk(child, level + 1, key, index + 1, visibleChildren.length)
       )
     }
   }
 
   roots.forEach((node, index) =>
-    walk(node, 1, undefined, index + 1, roots.length),
+    walk(node, 1, undefined, index + 1, roots.length)
   )
   return rows
 })
@@ -245,7 +262,7 @@ const flatNodes = computed<FlatNode[]>(() => {
 const windowRange = computed(() => {
   const start = Math.max(
     0,
-    Math.floor(scrollTop.value / effectiveItemSize.value) - overscan,
+    Math.floor(scrollTop.value / effectiveItemSize.value) - overscan
   )
   const amount =
     Math.ceil(props.height / effectiveItemSize.value) + overscan * 2
@@ -254,12 +271,12 @@ const windowRange = computed(() => {
 })
 
 const visibleRows = computed(() =>
-  flatNodes.value.slice(windowRange.value.start, windowRange.value.end),
+  flatNodes.value.slice(windowRange.value.start, windowRange.value.end)
 )
 const topPad = computed(() => windowRange.value.start * effectiveItemSize.value)
 const bottomPad = computed(
   () =>
-    (flatNodes.value.length - windowRange.value.end) * effectiveItemSize.value,
+    (flatNodes.value.length - windowRange.value.end) * effectiveItemSize.value
 )
 const checked = computed(() => new Set(props.modelValue))
 const selectionStatus = computed(() => {
@@ -274,7 +291,7 @@ const selectionStatus = computed(() => {
     : `当前已选中 ${checked.value.size} 项。`
 })
 const emptyText = computed(() =>
-  props.data.length && normalizedKeyword.value ? '未找到匹配节点' : '暂无数据',
+  props.data.length && normalizedKeyword.value ? '未找到匹配节点' : '暂无数据'
 )
 
 watch(
@@ -288,7 +305,7 @@ watch(
     ) {
       selectionFeedback.value = undefined
     }
-  },
+  }
 )
 
 function resetViewport() {
@@ -321,8 +338,8 @@ function focusTreeTarget(key: string | number, activeElement?: Element | null) {
   const selector = activeElement?.classList.contains('lx-virtual-tree__toggle')
     ? '.lx-virtual-tree__toggle'
     : activeElement?.classList.contains('lx-virtual-tree__checkbox')
-      ? '.lx-virtual-tree__checkbox'
-      : undefined
+    ? '.lx-virtual-tree__checkbox'
+    : undefined
   const target = selector ? row.querySelector<HTMLElement>(selector) : undefined
   if (target) target.focus()
   else row.focus()
@@ -331,11 +348,11 @@ function focusTreeTarget(key: string | number, activeElement?: Element | null) {
 function restoreViewport(
   previousScrollTop: number,
   restoreFocus: boolean,
-  activeElement?: Element | null,
+  activeElement?: Element | null
 ) {
   const maxScrollTop = Math.max(
     0,
-    flatNodes.value.length * effectiveItemSize.value - props.height,
+    flatNodes.value.length * effectiveItemSize.value - props.height
   )
   const nextScrollTop = Math.min(Math.max(0, previousScrollTop), maxScrollTop)
   scrollTop.value = nextScrollTop
@@ -359,7 +376,7 @@ watch([flatNodes, normalizedKeyword], ([rows, filter], [, previousFilter]) => {
       ? rows.find(
           (row) =>
             String(row.key) === activeKey &&
-            keyTypeOf(row.key) === activeKeyType,
+            keyTypeOf(row.key) === activeKeyType
         )
       : undefined
   const hasTreeFocus = Boolean(activeItem) || activeElement === rootRef.value
@@ -370,10 +387,10 @@ watch([flatNodes, normalizedKeyword], ([rows, filter], [, previousFilter]) => {
     scrollTop.value = 0
     const focusedRowIsVisible = rows.some((row) => row.key === focusedKey.value)
     focusedKey.value = activeItem
-      ? (activeRow?.key ?? rows[0]?.key)
+      ? activeRow?.key ?? rows[0]?.key
       : focusedRowIsVisible
-        ? focusedKey.value
-        : rows[0]?.key
+      ? focusedKey.value
+      : rows[0]?.key
     if (hasTreeFocus) {
       if (focusedKey.value !== undefined) focusKey(focusedKey.value)
       else focusCurrentItem()
@@ -402,8 +419,8 @@ watch([flatNodes, normalizedKeyword], ([rows, filter], [, previousFilter]) => {
       focusedTop < previousScrollTop
         ? focusedTop
         : focusedBottom > previousScrollTop + props.height
-          ? focusedBottom - props.height
-          : previousScrollTop
+        ? focusedBottom - props.height
+        : previousScrollTop
     restoreViewport(nextScrollTop, true, activeElement)
     return
   }
@@ -411,7 +428,7 @@ watch([flatNodes, normalizedKeyword], ([rows, filter], [, previousFilter]) => {
   if (focusedKey.value === undefined) {
     const fallbackIndex = Math.min(
       Math.floor(previousScrollTop / effectiveItemSize.value),
-      rows.length - 1,
+      rows.length - 1
     )
     focusedKey.value = rows[Math.max(0, fallbackIndex)]?.key
   }
@@ -430,7 +447,7 @@ watch(effectiveItemSize, (itemSize, previousItemSize) => {
   const activeKeyType = activeItem?.dataset.lxTreeKeyType
   const activeRow = flatNodes.value.find(
     (row) =>
-      String(row.key) === activeKey && keyTypeOf(row.key) === activeKeyType,
+      String(row.key) === activeKey && keyTypeOf(row.key) === activeKeyType
   )
   const hasTreeFocus = Boolean(activeItem) || activeElement === root
   const anchorRow =
@@ -457,8 +474,8 @@ watch(effectiveItemSize, (itemSize, previousItemSize) => {
       0,
       Math.min(
         Math.floor(previousScrollTop / Math.max(1, previousItemSize)),
-        flatNodes.value.length - 1,
-      ),
+        flatNodes.value.length - 1
+      )
     )
     const rowOffset = previousScrollTop - anchorIndex * previousItemSize
     nextScrollTop = anchorIndex * itemSize + rowOffset
@@ -474,11 +491,21 @@ function nodeStyle(row: FlatNode) {
   }
 }
 
+function nodeSummaryOf(row: FlatNode): string | undefined {
+  const summary = props.nodeSummary?.({
+    node: row.node,
+    level: row.level,
+    checked: isChecked(row),
+  })
+  const normalized = summary?.trim()
+  return normalized || undefined
+}
+
 function isChecked(row: FlatNode): boolean {
   if (checked.value.has(row.key) || props.checkStrictly)
     return checked.value.has(row.key)
   const selectable = (treeIndex.value.descendants.get(row.key) ?? []).filter(
-    (key) => !treeIndex.value.nodes.get(key)?.disabled,
+    (key) => !treeIndex.value.nodes.get(key)?.disabled
   )
   return (
     selectable.length > 0 && selectable.every((key) => checked.value.has(key))
@@ -497,7 +524,7 @@ function isExpanded(row: FlatNode): boolean {
 function isIndeterminate(row: FlatNode): boolean {
   if (props.checkStrictly) return false
   const selectable = (treeIndex.value.descendants.get(row.key) ?? []).filter(
-    (key) => !treeIndex.value.nodes.get(key)?.disabled,
+    (key) => !treeIndex.value.nodes.get(key)?.disabled
   )
   if (!selectable.length) return false
   const selected = selectable.filter((key) => checked.value.has(key)).length
@@ -513,7 +540,7 @@ function changeChecked(row: FlatNode, next: boolean) {
       : [row.key, ...(treeIndex.value.descendants.get(row.key) ?? [])]
   ).filter((key) => !treeIndex.value.nodes.get(key)?.disabled)
   const changedCount = affected.filter((key) =>
-    next ? !keys.has(key) : keys.has(key),
+    next ? !keys.has(key) : keys.has(key)
   ).length
   affected.forEach((key) => (next ? keys.add(key) : keys.delete(key)))
   const nextKeys = [...keys]
@@ -529,7 +556,7 @@ function changeChecked(row: FlatNode, next: boolean) {
     nextKeys,
     nextKeys
       .map((key) => treeIndex.value.nodes.get(key))
-      .filter((node): node is LxVirtualTreeNode => Boolean(node)),
+      .filter((node): node is LxVirtualTreeNode => Boolean(node))
   )
 }
 
@@ -537,7 +564,7 @@ function toggleExpanded(row: FlatNode) {
   if (!row.hasChildren) return
   if (normalizedKeyword.value) {
     const hasFilteredChildren = childrenOf(row.node).some((child) =>
-      matchingKeys.value.has(keyOf(child)),
+      matchingKeys.value.has(keyOf(child))
     )
     if (!hasFilteredChildren) return
 
@@ -570,13 +597,13 @@ function elementForKey(key: string | number): HTMLElement | undefined {
   ].find(
     (element) =>
       element.dataset.lxTreeKey === String(key) &&
-      element.dataset.lxTreeKeyType === keyTypeOf(key),
+      element.dataset.lxTreeKeyType === keyTypeOf(key)
   )
 }
 
 function syncTabStopWithViewport(
   root: HTMLElement,
-  previousActiveItem?: HTMLElement,
+  previousActiveItem?: HTMLElement
 ) {
   nextTick(() => {
     if (rootRef.value !== root) return
@@ -602,7 +629,7 @@ function syncTabStopWithViewport(
 
     const index = Math.min(
       Math.max(Math.floor(root.scrollTop / effectiveItemSize.value), 0),
-      rows.length - 1,
+      rows.length - 1
     )
     const target = rows[index]
     if (!target) return
@@ -649,7 +676,7 @@ function focusKey(key: string | number) {
 
 function focusRelative(row: FlatNode, direction: number) {
   const index = flatNodes.value.findIndex(
-    (candidate) => candidate.key === row.key,
+    (candidate) => candidate.key === row.key
   )
   const target = flatNodes.value[index + direction]
   if (!target) return
@@ -697,7 +724,7 @@ function setCheckedKeys(keys: (string | number)[]) {
   const known = [...new Set(keys)].filter(
     (key) =>
       treeIndex.value.nodes.has(key) &&
-      !treeIndex.value.nodes.get(key)?.disabled,
+      !treeIndex.value.nodes.get(key)?.disabled
   )
   emit('update:modelValue', known)
   emit(
@@ -705,7 +732,7 @@ function setCheckedKeys(keys: (string | number)[]) {
     known,
     known
       .map((key) => treeIndex.value.nodes.get(key))
-      .filter((node): node is LxVirtualTreeNode => Boolean(node)),
+      .filter((node): node is LxVirtualTreeNode => Boolean(node))
   )
 }
 
@@ -755,6 +782,11 @@ defineExpose(publicMethods)
 <template>
   <section
     class="lx-virtual-tree"
+    :class="{
+      'is-row-stacked': effectiveRowLayout === 'stacked',
+      'has-checkbox': showCheckbox,
+    }"
+    :data-row-layout="effectiveRowLayout"
     :style="{ '--lx-tree-control-size': `${controlSize}px` }"
   >
     <label v-if="filterable" class="lx-virtual-tree__filter">
@@ -907,12 +939,18 @@ defineExpose(publicMethods)
         <span class="lx-virtual-tree__label" :title="row.node.label">{{
           row.node.label
         }}</span>
-        <slot
-          name="node"
-          :node="row.node"
-          :level="row.level"
-          :checked="isChecked(row)"
-        />
+        <span
+          class="lx-virtual-tree__node-extra"
+          :aria-label="nodeSummaryOf(row)"
+          :title="nodeSummaryOf(row)"
+        >
+          <slot
+            name="node"
+            :node="row.node"
+            :level="row.level"
+            :checked="isChecked(row)"
+          />
+        </span>
       </div>
       <div :style="{ height: `${bottomPad}px` }" aria-hidden="true" />
       <p v-if="!flatNodes.length" class="lx-virtual-tree__empty">
@@ -1113,12 +1151,95 @@ defineExpose(publicMethods)
 }
 
 .lx-virtual-tree__label {
+  flex: 1 1 auto;
   overflow: hidden;
   min-width: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 13px;
   line-height: 20px;
+}
+
+.lx-virtual-tree__node-extra {
+  display: inline-flex;
+  min-width: 0;
+  width: auto;
+  max-width: none;
+  height: 20px;
+  flex: 0 1 auto;
+  align-items: center;
+  overflow: hidden;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.lx-virtual-tree__node-extra:empty {
+  display: none;
+}
+
+/* stacked 布局是公开的宿主契约：组件同时控制行高、占位和焦点可见区域。 */
+.lx-virtual-tree.is-row-stacked .lx-virtual-tree__row {
+  display: grid;
+  box-sizing: border-box;
+  grid-template-columns: 44px 44px 15px minmax(0, 1fr);
+  grid-template-rows: minmax(44px, 1fr) 16px;
+  row-gap: 2px;
+  align-items: center;
+  padding-block: 1px;
+}
+
+.lx-virtual-tree.is-row-stacked:not(.has-checkbox) .lx-virtual-tree__row {
+  grid-template-columns: 44px 15px minmax(0, 1fr);
+}
+
+.lx-virtual-tree.is-row-stacked .lx-virtual-tree__toggle,
+.lx-virtual-tree.is-row-stacked .lx-virtual-tree__toggle-placeholder,
+.lx-virtual-tree.is-row-stacked .lx-virtual-tree__node-icon,
+.lx-virtual-tree.is-row-stacked .lx-virtual-tree__checkbox-control {
+  grid-row: 1;
+}
+
+.lx-virtual-tree.is-row-stacked .lx-virtual-tree__toggle,
+.lx-virtual-tree.is-row-stacked .lx-virtual-tree__toggle-placeholder {
+  width: 44px;
+  height: 44px;
+  flex-basis: 44px;
+}
+
+.lx-virtual-tree.is-row-stacked .lx-virtual-tree__checkbox-control {
+  width: 44px;
+  height: 44px;
+  flex-basis: 44px;
+}
+
+.lx-virtual-tree.is-row-stacked .lx-virtual-tree__label {
+  grid-column: 4;
+  grid-row: 1;
+  display: -webkit-box;
+  max-height: 36px;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  line-height: 18px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.lx-virtual-tree.is-row-stacked:not(.has-checkbox) .lx-virtual-tree__label,
+.lx-virtual-tree.is-row-stacked:not(.has-checkbox)
+  .lx-virtual-tree__node-extra {
+  grid-column: 3;
+}
+
+.lx-virtual-tree.is-row-stacked .lx-virtual-tree__node-extra {
+  grid-column: 4;
+  grid-row: 2;
+  width: 100%;
+  max-width: none;
+  height: 16px;
+  max-height: 16px;
+  flex: 0 1 auto;
+  align-self: start;
 }
 
 .lx-virtual-tree__empty {

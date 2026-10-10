@@ -193,8 +193,11 @@ export type {
 export type { LxPasswordInputProps } from './components/LxPasswordInput/types'
 export type {
   LxVirtualTreeExpose,
+  LxVirtualTreeNodeSlotProps,
   LxVirtualTreeNode,
   LxVirtualTreeProps,
+  LxVirtualTreeRowLayout,
+  LxVirtualTreeSlots,
 } from './components/LxVirtualTree/types'
 export type {
   LxTransferPanelItem,

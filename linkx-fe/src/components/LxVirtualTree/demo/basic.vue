@@ -5,6 +5,7 @@ import {
   LxVirtualTree,
   type LxVirtualTreeNode,
   type LxVirtualTreeExpose,
+  type LxVirtualTreeNodeSlotProps,
 } from '../../../index'
 
 type DemoState = 'ready' | 'loading' | 'error' | 'empty'
@@ -13,6 +14,7 @@ const treeRef = ref<LxVirtualTreeExpose>()
 const state = ref<DemoState>('ready')
 const checkStrictly = ref(false)
 const darkTheme = ref(false)
+const stressNodeSlot = ref(false)
 const selectedKeys = ref<(string | number)[]>(['unit-1-1'])
 const keysFromExpose = ref<(string | number)[]>([])
 const lastAction = ref('树数据已就绪')
@@ -29,18 +31,18 @@ const treeData: LxVirtualTreeNode[] = Array.from(
       disabled: groupIndex === 1 && unitIndex === 4,
       isLeaf: true,
     })),
-  }),
+  })
 )
 
 const visibleData = computed(() => (state.value === 'empty' ? [] : treeData))
 const selectedSummary = computed(
-  () => selectedKeys.value.slice(0, 6).join('、') || '无',
+  () => selectedKeys.value.slice(0, 6).join('、') || '无'
 )
 
 function filterNode(node: LxVirtualTreeNode, keyword: string) {
   return [node.label, node.code].some(
     (value) =>
-      typeof value === 'string' && value.toLocaleLowerCase().includes(keyword),
+      typeof value === 'string' && value.toLocaleLowerCase().includes(keyword)
   )
 }
 
@@ -93,6 +95,11 @@ function scrollToLastNode() {
 function onCheckChange(keys: (string | number)[]) {
   lastAction.value = `选中 ${keys.length} 项`
 }
+
+function summarizeNode({ node, checked }: LxVirtualTreeNodeSlotProps) {
+  if (node.children?.length) return `${node.children.length} 个单元`
+  return checked ? '已选' : '单位'
+}
 </script>
 
 <template>
@@ -133,58 +140,74 @@ function onCheckChange(keys: (string | number)[]) {
           加载失败
         </button>
       </div>
-
-      <div class="virtual-tree-demo__actions">
-        <fieldset class="virtual-tree-demo__action-group">
-          <legend>筛选</legend>
-          <div class="virtual-tree-demo__action-content">
-            <button type="button" @click="applyRegionFilter">
-              筛选第二个辖区
-            </button>
-            <button type="button" @click="treeRef?.filter('REGION-02')">
-              按编码筛选第二个辖区
-            </button>
-            <button type="button" @click="clearFilter">清除筛选</button>
-          </div>
-        </fieldset>
-        <fieldset class="virtual-tree-demo__action-group">
-          <legend>选中</legend>
-          <div class="virtual-tree-demo__action-content">
-            <button type="button" @click="setExampleSelection">
-              设置示例选择
-            </button>
-            <button type="button" @click="readCheckedKeys">读取选中键</button>
-          </div>
-        </fieldset>
-        <fieldset class="virtual-tree-demo__action-group">
-          <legend>展开与定位</legend>
-          <div class="virtual-tree-demo__action-content">
-            <button type="button" @click="expandAll(true)">展开全部</button>
-            <button type="button" @click="expandAll(false)">收起全部</button>
-            <button type="button" @click="scrollToLastNode">
-              定位末尾节点
-            </button>
-          </div>
-        </fieldset>
-        <fieldset class="virtual-tree-demo__action-group">
-          <legend>选择方式</legend>
-          <div class="virtual-tree-demo__action-content">
-            <label class="virtual-tree-demo__strict">
-              <input v-model="checkStrictly" type="checkbox" />
-              父子独立勾选
-            </label>
-          </div>
-        </fieldset>
-        <fieldset class="virtual-tree-demo__action-group">
-          <legend>外观主题</legend>
-          <div class="virtual-tree-demo__action-content">
-            <label class="virtual-tree-demo__strict">
-              <input v-model="darkTheme" type="checkbox" />
-              HUD 深色主题
-            </label>
-          </div>
-        </fieldset>
-      </div>
+      <details class="virtual-tree-demo__advanced" open>
+        <summary>数据操作与定位</summary>
+        <div class="virtual-tree-demo__actions">
+          <fieldset class="virtual-tree-demo__action-group">
+            <legend>筛选</legend>
+            <div class="virtual-tree-demo__action-content">
+              <button type="button" @click="applyRegionFilter">
+                筛选第二个辖区
+              </button>
+              <button type="button" @click="treeRef?.filter('REGION-02')">
+                按编码筛选第二个辖区
+              </button>
+              <button type="button" @click="clearFilter">清除筛选</button>
+            </div>
+          </fieldset>
+          <fieldset class="virtual-tree-demo__action-group">
+            <legend>选中</legend>
+            <div class="virtual-tree-demo__action-content">
+              <button type="button" @click="setExampleSelection">
+                设置示例选择
+              </button>
+              <button type="button" @click="readCheckedKeys">读取选中键</button>
+            </div>
+          </fieldset>
+          <fieldset class="virtual-tree-demo__action-group">
+            <legend>展开与定位</legend>
+            <div class="virtual-tree-demo__action-content">
+              <button type="button" @click="expandAll(true)">展开全部</button>
+              <button type="button" @click="expandAll(false)">收起全部</button>
+              <button type="button" @click="scrollToLastNode">
+                定位末尾节点
+              </button>
+            </div>
+          </fieldset>
+        </div>
+      </details>
+      <details class="virtual-tree-demo__advanced">
+        <summary>边界与外观</summary>
+        <div class="virtual-tree-demo__actions">
+          <fieldset class="virtual-tree-demo__action-group">
+            <legend>选择方式</legend>
+            <div class="virtual-tree-demo__action-content">
+              <label class="virtual-tree-demo__strict">
+                <input v-model="checkStrictly" type="checkbox" />
+                父子独立勾选
+              </label>
+            </div>
+          </fieldset>
+          <fieldset class="virtual-tree-demo__action-group">
+            <legend>外观主题</legend>
+            <div class="virtual-tree-demo__action-content">
+              <label class="virtual-tree-demo__strict">
+                <input v-model="darkTheme" type="checkbox" />
+                HUD 深色主题
+              </label>
+            </div>
+          </fieldset>
+          <fieldset class="virtual-tree-demo__action-group">
+            <legend>插槽边界</legend>
+            <div class="virtual-tree-demo__action-content">
+              <label class="virtual-tree-demo__strict">
+                <input v-model="stressNodeSlot" type="checkbox" />
+                多行插槽压力测试
+              </label>
+            </div>
+          </fieldset>
+        </div>
+      </details>
     </details>
 
     <p class="virtual-tree-demo__status" aria-live="polite">{{ lastAction }}</p>
@@ -218,6 +241,7 @@ function onCheckChange(keys: (string | number)[]) {
         :item-size="32"
         :show-checkbox="true"
         :check-strictly="checkStrictly"
+        :node-summary="summarizeNode"
         :filter-method="filterNode"
         :default-expanded-keys="['region-1', 'region-2']"
         @check-change="onCheckChange"
@@ -228,6 +252,13 @@ function onCheckChange(keys: (string | number)[]) {
           <span v-if="node.children?.length" class="virtual-tree-demo__count"
             >{{ node.children.length }} 个单元</span
           >
+          <span
+            v-else-if="stressNodeSlot"
+            class="virtual-tree-demo__slot-stress"
+            title="插槽内容保持在固定树行内"
+          >
+            已选状态说明<br />不应撑高相邻树行
+          </span>
           <span v-else-if="checked" class="virtual-tree-demo__selected"
             >已选</span
           >
@@ -307,13 +338,26 @@ function onCheckChange(keys: (string | number)[]) {
   gap: var(--lx-space-sm);
 }
 
-.virtual-tree-demo__controls summary {
+.virtual-tree-demo__controls summary,
+.virtual-tree-demo__advanced summary {
   display: flex;
   width: fit-content;
   min-height: 32px;
   align-items: center;
   color: var(--lx-text-secondary);
   cursor: pointer;
+}
+
+.virtual-tree-demo__advanced {
+  display: grid;
+  gap: var(--lx-space-sm);
+  min-width: 0;
+}
+
+.virtual-tree-demo__advanced summary {
+  color: var(--lx-text-regular);
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .virtual-tree-demo button {
@@ -396,6 +440,11 @@ function onCheckChange(keys: (string | number)[]) {
 
 .virtual-tree-demo__selected {
   color: var(--lx-color-primary);
+}
+
+.virtual-tree-demo__slot-stress {
+  display: inline-block;
+  line-height: 18px;
 }
 
 @media (max-width: 640px) {

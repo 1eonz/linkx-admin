@@ -51,6 +51,9 @@ const TreeStub = defineComponent({
     data: { type: Array, default: () => [] },
     height: { type: Number, default: 0 },
     modelValue: { type: Array, default: () => [] },
+    itemSize: { type: Number, default: 0 },
+    rowLayout: { type: String, default: 'single' },
+    nodeSummary: { type: Function, default: undefined },
   },
   emits: ['update:modelValue'],
   setup(_, { emit, expose }) {
@@ -436,6 +439,7 @@ describe('LxTransferPanel', () => {
 
   it('暴露 5:2:5 版式、380px 面板高度及左右筛选契约', async () => {
     const wrapper = mountPanel({ modelValue: ['leaf'] });
+    const tree = wrapper.findComponent(TreeStub);
 
     expect(wrapper.get('.lx-transfer-panel').attributes('data-lx-transfer-layout')).toBe('5:2:5');
     expect(wrapper.get('.lx-transfer-panel').attributes('style')).toContain('--lx-transfer-panel-height: 380px');
@@ -450,6 +454,8 @@ describe('LxTransferPanel', () => {
     expect(wrapper.get('input[aria-label="在已选项中检索"]').attributes('inputmode')).toBe('search');
     expect(wrapper.get('[data-lx-transfer-code="UNIT-01"]')).toBeTruthy();
     expect(wrapper.get('[data-status-tone="processing"]').text()).toContain('处理中');
+    expect(tree.props('rowLayout')).toBe('responsive');
+    expect(tree.props('nodeSummary')).toEqual(expect.any(Function));
 
     await wrapper.get('input[aria-label="按机构名称或部门编码筛选待选节点"]').setValue('直属');
     expect(treeFilterMock).toHaveBeenLastCalledWith('直属');

@@ -23,6 +23,7 @@ import LxVirtualTree from '../LxVirtualTree/index.vue'
 import type {
   LxVirtualTreeExpose,
   LxVirtualTreeNode,
+  LxVirtualTreeNodeSlotProps,
 } from '../LxVirtualTree/types'
 
 defineOptions({ name: 'LxTransferPanel' })
@@ -87,14 +88,14 @@ const inheritChildDescriptionId = `${instanceId}-inherit-child-description`
 const managedInheritDescriptionIds = new Set<string>()
 const selectedScrollHintId = `${instanceId}-selected-scroll-hint`
 const inheritChildDescription = computed(
-  () => props.inheritChildDescription?.trim() ?? '',
+  () => props.inheritChildDescription?.trim() ?? ''
 )
 
 const panelHeight = computed(() =>
   Math.max(
     240,
-    Math.floor(Number.isFinite(props.panelHeight) ? props.panelHeight : 380),
-  ),
+    Math.floor(Number.isFinite(props.panelHeight) ? props.panelHeight : 380)
+  )
 )
 const treeHeight = ref(Math.max(120, panelHeight.value - 116))
 const panelStyle = computed(() => ({
@@ -121,20 +122,20 @@ const statusLabels: Record<string, string> = {
 
 watch(
   () => props.inheritChild,
-  (value) => (inherit.value = value),
+  (value) => (inherit.value = value)
 )
 
 function syncInheritChildDescription() {
   const checkbox =
     inheritCheckboxContainer.value?.querySelector<HTMLInputElement>(
-      'input[type="checkbox"]',
+      'input[type="checkbox"]'
     )
   if (!checkbox) return
 
   syncAriaDescribedBy(
     checkbox,
     inheritChildDescriptionId,
-    managedInheritDescriptionIds,
+    managedInheritDescriptionIds
   )
 }
 
@@ -150,7 +151,7 @@ watch(
     observedModelValue = [...value]
     selectionRevision.value += 1
   },
-  { deep: true, flush: 'sync' },
+  { deep: true, flush: 'sync' }
 )
 
 watch(sourceFilter, (value) => applySourceFilter(value))
@@ -171,29 +172,29 @@ const nodeMap = computed(() => {
   return nodes
 })
 const selectedItemMap = computed(
-  () => new Map(props.selectedItems.map((item) => [item.id, item])),
+  () => new Map(props.selectedItems.map((item) => [item.id, item]))
 )
 
 const allKeys = computed(() =>
-  [...nodeMap.value.keys()].filter((key) => !nodeMap.value.get(key)?.disabled),
+  [...nodeMap.value.keys()].filter((key) => !nodeMap.value.get(key)?.disabled)
 )
 const selectedKeySet = computed(() => new Set(props.modelValue))
 const maxCount = computed(() =>
   props.maxCount == null
     ? null
     : Number.isFinite(props.maxCount)
-      ? Math.max(0, Math.floor(props.maxCount))
-      : 0,
+    ? Math.max(0, Math.floor(props.maxCount))
+    : 0
 )
 const missingKeys = computed(() =>
-  allKeys.value.filter((key) => !selectedKeySet.value.has(key)),
+  allKeys.value.filter((key) => !selectedKeySet.value.has(key))
 )
 function matchesSourceNode(node: LxVirtualTreeNode, keyword: string): boolean {
   const query = keyword.trim().toLocaleLowerCase()
   if (!query) return true
   return [node.label, node.code].some(
     (value) =>
-      typeof value === 'string' && value.toLocaleLowerCase().includes(query),
+      typeof value === 'string' && value.toLocaleLowerCase().includes(query)
   )
 }
 
@@ -207,7 +208,7 @@ const sourceFilterMatches = computed(() => {
   return matches.filter((key) => !nodeMap.value.get(key)?.disabled)
 })
 const filteredMissingKeys = computed(() =>
-  sourceFilterMatches.value.filter((key) => !selectedKeySet.value.has(key)),
+  sourceFilterMatches.value.filter((key) => !selectedKeySet.value.has(key))
 )
 const canSelectAll = computed(() => {
   if (!missingKeys.value.length) return false
@@ -280,7 +281,7 @@ const selectedNodes = computed(() =>
     if (treeNode) return treeNode
     const selectedItem = selectedItemMap.value.get(key)
     return selectedItem ?? { id: key, label: String(key) }
-  }),
+  })
 )
 const visibleSelectedNodes = computed(() => {
   const query = selectedFilter.value.trim().toLocaleLowerCase()
@@ -289,7 +290,7 @@ const visibleSelectedNodes = computed(() => {
     : selectedNodes.value.filter((node) =>
         [node.label, node.code, node.status, statusLabelOf(node)]
           .filter((value): value is string => typeof value === 'string')
-          .some((value) => value.toLocaleLowerCase().includes(query)),
+          .some((value) => value.toLocaleLowerCase().includes(query))
       )
 })
 
@@ -300,7 +301,7 @@ function updateSelectedListObserverTargets() {
   selectedListResizeObserver.disconnect()
   selectedListResizeObserver.observe(list)
   Array.from(list.children).forEach((item) =>
-    selectedListResizeObserver?.observe(item),
+    selectedListResizeObserver?.observe(item)
   )
   list
     .querySelectorAll<HTMLElement>('.lx-transfer-panel__selected-name')
@@ -320,7 +321,7 @@ function updateSelectedNameOverflow() {
     visibleSelectedNodes.value.map((node) => [
       selectedNameKey(node.id),
       node.id,
-    ]),
+    ])
   )
   const overflowingKeys = new Set<string | number>()
 
@@ -343,14 +344,14 @@ function updateSelectedNameOverflow() {
 
       if (isNarrow) {
         const textNode = [...name.childNodes].find(
-          (node) => node.nodeType === Node.TEXT_NODE,
+          (node) => node.nodeType === Node.TEXT_NODE
         )
         if (!textNode) return
 
         const range = document.createRange()
         range.selectNodeContents(textNode)
         const lineTops = new Set(
-          [...range.getClientRects()].map((rect) => Math.round(rect.top)),
+          [...range.getClientRects()].map((rect) => Math.round(rect.top))
         )
         if (lineTops.size > 2) overflowingKeys.add(id)
         return
@@ -389,7 +390,7 @@ function updateSelectedScrollHint() {
 
   const listBottom = list.getBoundingClientRect().bottom
   const items = list.querySelectorAll<HTMLElement>(
-    '.lx-transfer-panel__selected-item',
+    '.lx-transfer-panel__selected-item'
   )
   let firstRemainingIndex = 0
   while (firstRemainingIndex < items.length) {
@@ -423,7 +424,7 @@ function updateSelectedNameExpansion(id: string | number, event: Event) {
 
         const listBounds = list.getBoundingClientRect()
         const item = details.closest<HTMLElement>(
-          '.lx-transfer-panel__selected-item',
+          '.lx-transfer-panel__selected-item'
         )
         const itemBounds = item?.getBoundingClientRect()
         const visibleTop = listBounds.top + list.clientTop
@@ -431,7 +432,7 @@ function updateSelectedNameExpansion(id: string | number, event: Event) {
         const visibleHeight = visibleBottom - visibleTop
         const scrollPadding = Math.min(
           8,
-          Math.max(0, (visibleHeight - (itemBounds?.height ?? 0)) / 2),
+          Math.max(0, (visibleHeight - (itemBounds?.height ?? 0)) / 2)
         )
 
         if (itemBounds && itemBounds.top < visibleTop + scrollPadding) {
@@ -539,12 +540,12 @@ watch(
     updateSelectedListObserverTargets()
     updateSelectedScrollHint()
   },
-  { flush: 'post' },
+  { flush: 'post' }
 )
 
 function selectionMatchesSnapshot(
   snapshot: (string | number)[],
-  revision: number,
+  revision: number
 ) {
   return (
     selectionRevision.value === revision &&
@@ -554,7 +555,7 @@ function selectionMatchesSnapshot(
 
 function sameKeySequence(
   first: readonly (string | number)[],
-  second: readonly (string | number)[],
+  second: readonly (string | number)[]
 ) {
   return (
     first.length === second.length &&
@@ -566,7 +567,7 @@ function update(keys: (string | number)[]) {
   const unique = [...new Set(keys)].filter(
     (key) =>
       props.modelValue.includes(key) ||
-      (nodeMap.value.has(key) && !nodeMap.value.get(key)?.disabled),
+      (nodeMap.value.has(key) && !nodeMap.value.get(key)?.disabled)
   )
   if (
     maxCount.value !== null &&
@@ -587,7 +588,7 @@ function update(keys: (string | number)[]) {
     unique,
     unique
       .map((key) => nodeMap.value.get(key))
-      .filter((node): node is LxTransferPanelNode => Boolean(node)),
+      .filter((node): node is LxTransferPanelNode => Boolean(node))
   )
 }
 
@@ -609,7 +610,7 @@ function invertAll() {
     return !node || node.disabled
   })
   const invertedKeys = allKeys.value.filter(
-    (key) => !selectedKeySet.value.has(key),
+    (key) => !selectedKeySet.value.has(key)
   )
   update([...retainedKeys, ...invertedKeys])
 }
@@ -623,7 +624,7 @@ const canInvertAll = computed(() => {
     return !node || node.disabled
   })
   const invertedKeys = allKeys.value.filter(
-    (key) => !selectedKeySet.value.has(key),
+    (key) => !selectedKeySet.value.has(key)
   )
   const nextCount = retainedKeys.length + invertedKeys.length
   return nextCount <= maxCount.value || nextCount <= selectedKeySet.value.size
@@ -637,7 +638,7 @@ function invertFilteredSelection() {
   const filteredKeys = new Set(sourceFilterMatches.value)
   const retainedKeys = props.modelValue.filter((key) => !filteredKeys.has(key))
   const nextKeys = sourceFilterMatches.value.filter(
-    (key) => !selectedKeySet.value.has(key),
+    (key) => !selectedKeySet.value.has(key)
   )
   update([...retainedKeys, ...nextKeys])
 }
@@ -649,7 +650,7 @@ const canInvertFiltered = computed(() => {
   const nextKeys = [
     ...props.modelValue.filter((key) => !filteredKeys.has(key)),
     ...sourceFilterMatches.value.filter(
-      (key) => !selectedKeySet.value.has(key),
+      (key) => !selectedKeySet.value.has(key)
     ),
   ]
   return (
@@ -723,7 +724,7 @@ function remove(node: LxTransferPanelNode, event: MouseEvent) {
   const removeSelectedNode = () => {
     const currentVisibleNodes = [...visibleSelectedNodes.value]
     const removedIndex = currentVisibleNodes.findIndex(
-      (item) => item.id === node.id,
+      (item) => item.id === node.id
     )
     const focusTargetId =
       currentVisibleNodes[removedIndex + 1]?.id ??
@@ -754,7 +755,9 @@ function remove(node: LxTransferPanelNode, event: MouseEvent) {
   const customClass = localThemeClass(event)
   lxConfirm({
     title: '移除未加载的授权',
-    message: `“${node.label}”当前不在已加载的树中，键值为 ${String(node.id)}。确认从已选授权中移除吗？`,
+    message: `“${node.label}”当前不在已加载的树中，键值为 ${String(
+      node.id
+    )}。确认从已选授权中移除吗？`,
     confirmText: '移除授权',
     danger: true,
     ...(customClass ? { customClass } : {}),
@@ -790,7 +793,7 @@ function statusOf(node: LxVirtualTreeNode): string {
 }
 
 function isTransferStatusTone(
-  value: unknown,
+  value: unknown
 ): value is LxTransferPanelStatusTone {
   return (
     typeof value === 'string' &&
@@ -809,6 +812,10 @@ function statusLabelOf(node: LxVirtualTreeNode): string {
   return Object.prototype.hasOwnProperty.call(statusLabels, status)
     ? statusLabels[status]
     : status
+}
+
+function nodeSummaryOf({ node }: LxVirtualTreeNodeSlotProps): string {
+  return [codeOf(node), statusLabelOf(node)].filter(Boolean).join('，')
 }
 </script>
 
@@ -971,6 +978,8 @@ function statusLabelOf(node: LxVirtualTreeNode): string {
           :data="treeData"
           :height="treeHeight"
           :item-size="treeItemSize"
+          row-layout="responsive"
+          :node-summary="nodeSummaryOf"
           :model-value="modelValue"
           :default-expanded-keys="defaultExpandedKeys"
           aria-label="待选资源树"
@@ -1152,7 +1161,9 @@ function statusLabelOf(node: LxVirtualTreeNode): string {
               >
                 <summary
                   :aria-expanded="expandedSelectedNameKeys.has(node.id)"
-                  :aria-label="`${expandedSelectedNameKeys.has(node.id) ? '收起' : '查看'}完整名称：${node.label}`"
+                  :aria-label="`${
+                    expandedSelectedNameKeys.has(node.id) ? '收起' : '查看'
+                  }完整名称：${node.label}`"
                   :title="
                     expandedSelectedNameKeys.has(node.id)
                       ? '使用 Enter 或空格收起完整名称'
@@ -1181,6 +1192,13 @@ function statusLabelOf(node: LxVirtualTreeNode): string {
                     aria-hidden="true"
                   >
                     <LxIcon name="chevron-down" :size="14" />
+                  </span>
+                  <span class="lx-transfer-panel__selected-name-action">
+                    {{
+                      expandedSelectedNameKeys.has(node.id)
+                        ? '收起'
+                        : '查看全文'
+                    }}
                   </span>
                 </summary>
                 <span class="lx-transfer-panel__selected-name-full">
@@ -1936,6 +1954,15 @@ function statusLabelOf(node: LxVirtualTreeNode): string {
   color: var(--lx-text-secondary);
 }
 
+.lx-transfer-panel__selected-name-action {
+  display: none;
+  flex: 0 0 auto;
+  color: var(--lx-color-primary);
+  font-size: 11px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
 .lx-transfer-panel__selected-name-disclosure[open]
   summary
   .lx-transfer-panel__selected-name-icon {
@@ -2088,10 +2115,6 @@ function statusLabelOf(node: LxVirtualTreeNode): string {
   font-family: var(--lx-font-mono);
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.lx-transfer-panel__tree :deep(.lx-virtual-tree__label) {
-  flex: 1 1 auto;
 }
 
 .lx-transfer-panel__selected-item button {
@@ -2328,6 +2351,12 @@ function statusLabelOf(node: LxVirtualTreeNode): string {
     padding-inline-end: 44px;
   }
 
+  .lx-transfer-panel__selected-name-action {
+    display: inline-flex;
+    min-height: 24px;
+    align-items: center;
+  }
+
   .lx-transfer-panel__selected-item.is-name-expanded > button {
     position: absolute;
     top: 2px;
@@ -2367,48 +2396,6 @@ function statusLabelOf(node: LxVirtualTreeNode): string {
 
   .lx-transfer-panel__selected-main > .lx-transfer-panel__selected-name {
     flex-basis: 100%;
-  }
-
-  .lx-transfer-panel__panel :deep(.lx-virtual-tree__row) {
-    display: grid;
-    box-sizing: border-box;
-    grid-template-columns: 44px 44px 15px minmax(0, 1fr);
-    grid-template-rows: minmax(44px, 1fr) 16px;
-    row-gap: 2px;
-    padding-block: 1px;
-  }
-
-  .lx-transfer-panel__panel :deep(.lx-virtual-tree__toggle),
-  .lx-transfer-panel__panel :deep(.lx-virtual-tree__toggle-placeholder),
-  .lx-transfer-panel__panel :deep(.lx-virtual-tree__node-icon) {
-    grid-row: 1;
-  }
-
-  .lx-transfer-panel__panel :deep(.lx-virtual-tree__toggle),
-  .lx-transfer-panel__panel :deep(.lx-virtual-tree__toggle-placeholder) {
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-  }
-
-  .lx-transfer-panel__panel :deep(.lx-virtual-tree__checkbox-control) {
-    grid-row: 1;
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-  }
-
-  .lx-transfer-panel__panel :deep(.lx-virtual-tree__label) {
-    grid-column: 4;
-    grid-row: 1;
-    display: -webkit-box;
-    max-height: 36px;
-    overflow: hidden;
-    overflow-wrap: anywhere;
-    white-space: normal;
-    line-height: 18px;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
   }
 
   .lx-transfer-panel__node-meta {
