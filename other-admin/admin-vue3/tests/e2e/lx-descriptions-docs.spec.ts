@@ -1,4 +1,20 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+async function selectPreviewState(page: Page, label: string) {
+  const selectTrigger = page.getByRole('combobox', { name: '数据状态' });
+  await selectTrigger.evaluate((element) => element.scrollIntoView({ block: 'center' }));
+  await selectTrigger.focus();
+  await selectTrigger.press('Enter');
+  await page.getByRole('option', { name: label, exact: true }).click();
+}
+
+async function selectLoadingStateByKeyboard(page: Page) {
+  const selectTrigger = page.getByRole('combobox', { name: '数据状态' });
+  await selectTrigger.focus();
+  await selectTrigger.press('Enter');
+  await selectTrigger.press('ArrowDown');
+  await selectTrigger.press('Enter');
+}
 
 function contrastRatio(foreground: string, background: string): number {
   const luminance = (color: string) => {
@@ -61,6 +77,10 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
 
   test('桌面双列、375px 单列和 480px 抽屉都不产生页面横向溢出', async ({ page }) => {
     await page.goto('/components/lxdescriptions');
+
+    await expect(page.getByRole('group', { name: '布局' })).toBeVisible();
+    await expect(page.getByRole('region', { name: '详情描述示例' }).getByText('布局', { exact: true })).toBeVisible();
+    await expect(page.getByLabel('数据状态')).toBeVisible();
     await page.getByRole('button', { name: '双列' }).click();
 
     const descriptions = page.locator('.lx-descriptions').first();
@@ -70,7 +90,32 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     expect(desktopColumns).toBe(2);
     await expect(page.locator('.lx-descriptions--grid')).toBeVisible();
 
+    const borderedToggle = page.getByLabel('网格边框');
+    await borderedToggle.check();
+    await expect(descriptions).toHaveClass(/is-bordered/);
+    await borderedToggle.uncheck();
+    await expect(descriptions).not.toHaveClass(/is-bordered/);
+
     await page.setViewportSize({ width: 375, height: 812 });
+    const toolbar = page.locator('.lx-descriptions-demo__controls');
+    const toolbarMetrics = await toolbar.evaluate((element) => ({
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+    }));
+    expect(toolbarMetrics.scrollWidth).toBeLessThanOrEqual(toolbarMetrics.clientWidth);
+
+    await page.getByRole('button', { name: '双列' }).focus();
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    const stateSelect = page.getByRole('combobox', { name: '数据状态' });
+    await expect(stateSelect).toBeFocused();
+    expect(
+      await page
+        .locator('.lx-descriptions-demo__state-select .el-select__wrapper')
+        .evaluate((element) => getComputedStyle(element).boxShadow),
+    ).not.toBe('none');
+
     const mobileColumns = await descriptions.evaluate(
       (element) => getComputedStyle(element).gridTemplateColumns.split(' ').length,
     );
@@ -117,15 +162,21 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
 
   test('宿主加载、空、错误恢复、主题与减少动效状态可见', async ({ page }) => {
     await page.goto('/components/lxdescriptions');
+    const demo = page.getByRole('region', { name: '详情描述示例' });
+    const mainPreview = demo.locator('.lx-descriptions-demo__main');
 
-    await page.getByRole('button', { name: '读取中' }).click();
-    await expect(page.getByRole('status')).toHaveAttribute('aria-busy', 'true');
-    await page.getByRole('button', { name: '空结果' }).click();
-    await expect(page.getByRole('status')).toHaveText('暂无可展示的详情。');
-    await page.getByRole('button', { name: '错误' }).click();
-    await expect(page.getByRole('alert')).toContainText('详情读取失败。');
-    await page.getByRole('button', { name: '重试' }).click();
-    await expect(page.locator('.lx-descriptions__item').first()).toBeVisible();
+    await expect(mainPreview).toBeVisible();
+    await selectLoadingStateByKeyboard(page);
+    await expect(demo.getByRole('status')).toHaveAttribute('aria-busy', 'true');
+    await expect(mainPreview).toHaveCount(0);
+    await selectPreviewState(page, '空结果');
+    await expect(demo.getByRole('status')).toHaveText('暂无可展示的详情。');
+    await selectPreviewState(page, '错误');
+    await expect(demo.getByRole('alert')).toContainText('详情读取失败。');
+    await demo.getByRole('button', { name: '重试' }).click();
+    await expect(mainPreview).toBeVisible();
+    await selectPreviewState(page, '详情');
+    await expect(mainPreview).toBeVisible();
 
     await page.getByLabel('HUD 深色主题（整页）').check();
     await expect(page.locator('html')).toHaveClass(/lx-theme-hud/);

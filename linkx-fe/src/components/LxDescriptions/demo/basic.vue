@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { LxDescriptions, type LxDescriptionItem } from '../../../index'
+
+import {
+  LxDescriptions,
+  LxSelect,
+  type LxDescriptionItem,
+  type LxSelectModelValue,
+  type LxSelectOption,
+} from '../../../index'
 
 type PreviewState = 'ready' | 'loading' | 'empty' | 'error'
 
-const previewStates = [
+const previewStates: LxSelectOption[] = [
   { value: 'ready', label: '详情' },
   { value: 'loading', label: '读取中' },
   { value: 'empty', label: '空结果' },
@@ -52,6 +59,17 @@ const items: LxDescriptionItem[] = [
 
 const drawerItems = items.slice(0, 6)
 
+function isPreviewState(value: LxSelectModelValue): value is PreviewState {
+  return (
+    typeof value === 'string' &&
+    previewStates.some((state) => state.value === value)
+  )
+}
+
+function updatePreviewState(value: LxSelectModelValue) {
+  if (isPreviewState(value)) previewState.value = value
+}
+
 function setTheme(enabled: boolean) {
   if (typeof document === 'undefined') return
   document.documentElement.classList.toggle('dark', enabled || originalDark)
@@ -79,25 +97,33 @@ onBeforeUnmount(() => {
 <template>
   <section class="lx-descriptions-demo" aria-label="详情描述示例">
     <div class="lx-descriptions-demo__controls">
-      <div
-        class="lx-descriptions-demo__segmented"
-        role="group"
-        aria-label="详情布局"
-      >
-        <button
-          type="button"
-          :aria-pressed="layout === 'two-ends'"
-          @click="layout = 'two-ends'"
+      <div class="lx-descriptions-demo__control-group">
+        <span
+          id="lx-descriptions-demo-layout-label"
+          class="lx-descriptions-demo__control-label"
         >
-          单列
-        </button>
-        <button
-          type="button"
-          :aria-pressed="layout === 'grid'"
-          @click="layout = 'grid'"
+          布局
+        </span>
+        <div
+          class="lx-descriptions-demo__segmented"
+          role="group"
+          aria-labelledby="lx-descriptions-demo-layout-label"
         >
-          双列
-        </button>
+          <button
+            type="button"
+            :aria-pressed="layout === 'two-ends'"
+            @click="layout = 'two-ends'"
+          >
+            单列
+          </button>
+          <button
+            type="button"
+            :aria-pressed="layout === 'grid'"
+            @click="layout = 'grid'"
+          >
+            双列
+          </button>
+        </div>
       </div>
       <label class="lx-descriptions-demo__toggle">
         <input v-model="bordered" type="checkbox" />
@@ -107,20 +133,20 @@ onBeforeUnmount(() => {
         <input v-model="hudTheme" type="checkbox" />
         HUD 深色主题（整页）
       </label>
-      <div
-        class="lx-descriptions-demo__segmented"
-        role="group"
-        aria-label="数据状态"
-      >
-        <button
-          v-for="state in previewStates"
-          :key="state.value"
-          type="button"
-          :aria-pressed="previewState === state.value"
-          @click="previewState = state.value"
+      <div class="lx-descriptions-demo__control-group">
+        <label
+          class="lx-descriptions-demo__control-label"
+          for="lx-descriptions-demo-state"
         >
-          {{ state.label }}
-        </button>
+          数据状态
+        </label>
+        <LxSelect
+          id="lx-descriptions-demo-state"
+          class="lx-descriptions-demo__state-select"
+          :model-value="previewState"
+          :options="previewStates"
+          @update:model-value="updatePreviewState"
+        />
       </div>
     </div>
 
@@ -184,6 +210,23 @@ onBeforeUnmount(() => {
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
+}
+
+.lx-descriptions-demo__control-group {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+}
+
+.lx-descriptions-demo__control-label {
+  color: var(--lx-text-secondary);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.lx-descriptions-demo__state-select {
+  width: 136px;
 }
 
 .lx-descriptions-demo__segmented {
