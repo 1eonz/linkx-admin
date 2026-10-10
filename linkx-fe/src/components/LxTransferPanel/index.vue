@@ -1994,6 +1994,17 @@ function statusLabelOf(node: LxVirtualTreeNode): string {
   gap: var(--lx-space-xs);
 }
 
+/* 部门短编码用于核对，优先保留完整宽度；状态标签仍可收缩以避免树行横向溢出。 */
+.lx-transfer-panel__node-meta > .lx-transfer-panel__node-code {
+  min-width: 0;
+  flex: 0 0 auto;
+}
+
+.lx-transfer-panel__node-meta > .lx-transfer-panel__node-status {
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
 .lx-transfer-panel__node-status {
   max-width: 72px;
   gap: var(--lx-space-xs);

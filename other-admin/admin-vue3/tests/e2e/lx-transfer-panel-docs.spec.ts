@@ -152,6 +152,18 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     expect(await surfaceTextContrast(page, '.transfer-panel-demo__note')).toBeGreaterThanOrEqual(4.5);
   });
 
+  test('折叠的示例设置摘要显示当前数据状态与主题', async ({ page }) => {
+    await page.goto('/components/lxtransferpanel');
+
+    const summary = page.locator('.transfer-panel-demo__settings summary');
+    await expect(summary).toHaveText('示例状态与主题（正常数据，亮色主题）');
+    await openDemoSettings(page);
+    await page.getByRole('button', { name: '空结果' }).click();
+    await expect(summary).toHaveText('示例状态与主题（空结果，亮色主题）');
+    await page.getByLabel('HUD 深色主题').check();
+    await expect(summary).toHaveText('示例状态与主题（空结果，HUD 深色主题）');
+  });
+
   test('HUD 主题只作用于组件预览并保留文档站主题', async ({ page }) => {
     await page.goto('/components/lxtransferpanel');
     await setDocsTheme(page, false);
@@ -327,6 +339,68 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
       .locator('.lx-transfer-panel__panel')
       .evaluateAll((panels) => panels.map((panel) => panel.getBoundingClientRect().width));
     expect(Math.min(...desktopPanelWidths)).toBeGreaterThanOrEqual(280);
+    const treeViewportLayout = await page.locator('.lx-virtual-tree__viewport').evaluate((viewport) => {
+      const row = viewport.querySelector<HTMLElement>('.lx-virtual-tree__row:has([data-lx-transfer-code="DEPT-03"])');
+      if (!row) throw new Error('桌面布局检查未找到 DEPT-03 树节点');
+      const metadata = row.querySelector<HTMLElement>('.lx-transfer-panel__node-meta');
+      if (!metadata) throw new Error('DEPT-03 树节点缺少元信息区域');
+      const nodeCode = metadata.querySelector<HTMLElement>('.lx-transfer-panel__node-code');
+      const nodeStatus = metadata.querySelector<HTMLElement>('.lx-transfer-panel__node-status');
+      if (!nodeCode || !nodeStatus) throw new Error('DEPT-03 树节点缺少编码或状态信息');
+      const rowBounds = row.getBoundingClientRect();
+      const metadataBounds = metadata.getBoundingClientRect();
+      const nodeCodeBounds = nodeCode.getBoundingClientRect();
+      const nodeStatusBounds = nodeStatus.getBoundingClientRect();
+      return {
+        viewportClientWidth: viewport.clientWidth,
+        viewportScrollWidth: viewport.scrollWidth,
+        rowClientWidth: row.clientWidth,
+        rowScrollWidth: row.scrollWidth,
+        metadataRight: metadataBounds.right,
+        rowRight: rowBounds.right,
+        metadataWidth: metadataBounds.width,
+        nodeCodeWidth: nodeCodeBounds.width,
+        nodeCodeClientWidth: nodeCode.clientWidth,
+        nodeCodeScrollWidth: nodeCode.scrollWidth,
+        nodeCodeText: nodeCode.textContent?.trim() ?? '',
+        nodeCodeTitle: nodeCode.getAttribute('title') ?? '',
+        nodeCodeValue: nodeCode.getAttribute('data-lx-transfer-code') ?? '',
+        nodeStatusWidth: nodeStatusBounds.width,
+      };
+    });
+    expect(treeViewportLayout.viewportScrollWidth).toBeLessThanOrEqual(treeViewportLayout.viewportClientWidth);
+    expect(treeViewportLayout.rowScrollWidth).toBeLessThanOrEqual(treeViewportLayout.rowClientWidth);
+    expect(treeViewportLayout.metadataRight).toBeLessThanOrEqual(treeViewportLayout.rowRight + 1);
+    expect(treeViewportLayout.metadataWidth).toBeGreaterThan(0);
+    expect(treeViewportLayout.nodeCodeWidth).toBeGreaterThan(0);
+    expect(treeViewportLayout.nodeCodeScrollWidth).toBeLessThanOrEqual(treeViewportLayout.nodeCodeClientWidth);
+    expect(treeViewportLayout.nodeCodeText).toBe('DEPT-03');
+    expect(treeViewportLayout.nodeCodeTitle).toBe('DEPT-03');
+    expect(treeViewportLayout.nodeCodeValue).toBe('DEPT-03');
+    expect(treeViewportLayout.nodeStatusWidth).toBeGreaterThan(0);
+
+    const longCode = 'ARCHIVE-UNIT-2026-REGION-070';
+    const longCodeNode = page.locator(
+      `.lx-virtual-tree__row:has([data-lx-transfer-code="${longCode}"]) .lx-transfer-panel__node-code`,
+    );
+    await expect(longCodeNode).toBeVisible();
+    const longCodeLayout = await longCodeNode.evaluate((element) => ({
+      text: element.textContent?.trim() ?? '',
+      title: element.getAttribute('title') ?? '',
+      value: element.getAttribute('data-lx-transfer-code') ?? '',
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+      textOverflow: getComputedStyle(element).textOverflow,
+      whiteSpace: getComputedStyle(element).whiteSpace,
+    }));
+    expect(longCodeLayout.text).toBe(longCode);
+    expect(longCodeLayout.title).toBe(longCode);
+    expect(longCodeLayout.value).toBe(longCode);
+    expect(longCodeLayout.clientWidth).toBeLessThanOrEqual(96);
+    expect(longCodeLayout.scrollWidth).toBeGreaterThan(longCodeLayout.clientWidth);
+    expect(longCodeLayout.textOverflow).toBe('ellipsis');
+    expect(longCodeLayout.whiteSpace).toBe('nowrap');
+
     const demoBounds = await page.locator('.transfer-panel-demo').boundingBox();
     const documentBounds = await page.locator('.VPDoc .container').boundingBox();
     if (!demoBounds || !documentBounds) throw new Error('桌面文档示例边界不可用');
@@ -1168,7 +1242,11 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     expect(Math.min(...(await selectedStatusContrast(page)))).toBeGreaterThanOrEqual(4.5);
     expect(await surfaceTextContrast(page, '.transfer-panel-demo__note')).toBeGreaterThanOrEqual(4.5);
     expect(await effectiveTextContrast(page, '.lx-transfer-panel__node-unloaded')).toBeGreaterThanOrEqual(4.5);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(375);
+    const pageWidths = await page.evaluate(() => ({
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }));
+    expect(pageWidths.scrollWidth).toBeLessThanOrEqual(pageWidths.clientWidth);
 
     const demo = page.locator('.transfer-panel-demo');
     await demo.evaluate((element) => element.scrollIntoView({ block: 'start' }));
@@ -1535,7 +1613,11 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     expect(overflow.hasOverflow).toBe(true);
     expect(overflow.scrollTop).toBeGreaterThan(0);
     expect(overflow.lastItemVisible).toBe(true);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+    const pageWidths = await page.evaluate(() => ({
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }));
+    expect(pageWidths.scrollWidth).toBeLessThanOrEqual(pageWidths.clientWidth);
   });
 
   test('320px 下 Props 表格仅在自身横向滚动且正文列不溢出', async ({ page }) => {
@@ -1563,7 +1645,11 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     await expect(propsTable).toBeFocused();
     await page.keyboard.press('ArrowRight');
     await expect.poll(() => propsTable.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+    const pageWidths = await page.evaluate(() => ({
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }));
+    expect(pageWidths.scrollWidth).toBeLessThanOrEqual(pageWidths.clientWidth);
   });
 
   test('视口跨树行高断点时保留键盘焦点和滚动锚点', async ({ page }) => {
@@ -1727,7 +1813,11 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     await expect(selectedPanel).toBeVisible();
     await expect(focusedAction).toBeFocused();
     await expect(page.getByTestId('mobile-selected-panel')).toHaveAttribute('aria-pressed', 'true');
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(375);
+    const pageWidths = await page.evaluate(() => ({
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }));
+    expect(pageWidths.scrollWidth).toBeLessThanOrEqual(pageWidths.clientWidth);
   });
 
   test('从窄屏切回桌面时将待选面板切换焦点交给待选筛选框', async ({ page }) => {

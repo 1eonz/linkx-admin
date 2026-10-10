@@ -50,6 +50,14 @@
   }
 }
 
+@media (max-width: 320px) {
+  /* 视口宽度扣除系统滚动条后会低于默认最小宽度，避免页面整体横移。 */
+  body:has(.VPDoc .transfer-panel-demo) {
+    width: auto;
+    min-width: 0;
+  }
+}
+
 .vp-doc #lx-passwordinput-demo {
   scroll-margin-block-start: calc(var(--vp-nav-height, 64px) + 16px);
 }

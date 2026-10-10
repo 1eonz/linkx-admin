@@ -66,7 +66,11 @@ const treeData: LxTransferPanelNode[] = [
         return {
           id: `archive-unit-${sequence}`,
           label: assignable ? '待授权特勤支队' : `历史归档单位 ${sequence}`,
-          code: assignable ? 'UNIT-PENDING-01' : `ARCHIVE-${sequence}`,
+          code: assignable
+            ? 'UNIT-PENDING-01'
+            : sequence === '02'
+              ? 'ARCHIVE-UNIT-2026-REGION-070'
+              : `ARCHIVE-${sequence}`,
           status: assignable ? 'online' : 'offline',
           statusTone: assignable ? ('success' as const) : ('offline' as const),
           disabled: !assignable,
@@ -141,6 +145,15 @@ const expandedGroupKeys = treeData.map((node) => node.id)
 const visibleTreeData = computed(() =>
   hostState.value === 'empty' ? [] : treeData,
 )
+const hostStateLabel = computed(
+  () =>
+    ({
+      ready: '正常数据',
+      loading: '加载中',
+      error: '加载失败',
+      empty: '空结果',
+    })[hostState.value],
+)
 watch(selectedKeys, (value, previousValue) => {
   if (value.length) {
     lastNonEmptySelection.value = [...value]
@@ -183,7 +196,11 @@ function onInheritChange(value: boolean) {
 <template>
   <div class="transfer-panel-demo">
     <details class="transfer-panel-demo__settings">
-      <summary>示例状态与主题</summary>
+      <summary>
+        示例状态与主题（{{ hostStateLabel }}，{{
+          darkTheme ? 'HUD 深色主题' : '亮色主题'
+        }}）
+      </summary>
       <div class="transfer-panel-demo__toolbar">
         <div
           class="transfer-panel-demo__toolbar-group"
