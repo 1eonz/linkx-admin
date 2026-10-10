@@ -327,6 +327,15 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 基础控件桥接焦点样式记录在 `linkx-fe/docs/components/element-bridge.md`：输入等字段使用贴边 1px 边线与紧邻 2px、15% 浅色光晕；单选与多选下拉统一以自身 1px 边框表示焦点，不在控件外显示第二圈，错误态保留错误色边线；复选框保留自身 1px 状态边线，在 14px 方框外零间隙显示 2px 焦点环。Demo 和浏览器验收覆盖单选/多选、浅色/HUD、错误态、键盘展开、实际未选中/已选中/半选及窄屏状态。
 
+## 2026-10-11 Wave 11 P2 / TransferPanel 与 VirtualTree 当前交接
+
+- **入口**：`linkx-fe/src/components/LxTransferPanel/`、`linkx-fe/src/components/LxVirtualTree/`；文档为 `linkx-fe/docs/components/lxtransferpanel.md` 与 `lxvirtualtree.md`；回归为 `other-admin/admin-vue3/tests/unit/lx-transfer-panel.test.ts`、`tests/e2e/lx-transfer-panel-docs.spec.ts` 和 `tests/e2e/lx-virtual-tree-docs.spec.ts`。
+- **当前能力**：标准 380px Demo 首屏、240/300px 边界档、桌面/窄屏长名称 disclosure、树折叠 LxIcon、批量计数和短禁用摘要、完整 ARIA 原因、节点数量计算、减少动效和无 marker 双箭头。
+- **验收**：组件单测 67/67、文档 E2E 48/48；lx-ui typecheck/203 modules build、VitePress、Vue3 build:prod、目标格式检查和 diff 检查通过。正式 Impeccable A 36/40；B 5 个 detector 为合法 `[]`/空 stderr/0，9 个浏览器视图证据完整；代码复审批准。
+- **证据**：综合报告 `.impeccable/critique/transferpanel-p2-2026-10-11/final-report.md`，A/B/代码复审目录同级，正式 snapshot `.impeccable/critique/2026-10-10T23-03-08Z__linkx-fe-src-components-lxtransferpanel-index-vue.md`。趋势 `32/40 → 35/40 → 36/40`。静态 `[]` 不单独代表审查通过。
+- **架构边界**：两组件只负责展示和通用选择交互，不请求 API、不读取 Pinia、不持有登录凭据；Vue3 `DataPermissionTree` 仍保留业务适配层，需以后按 props/exposes/父子勾选/回传契约逐页迁移。权限、文本/字段权限、引导页和真实后端联调继续后置，Vue3 `element-plus` 仍不能删除。
+- **下一入口**：按组件库优先顺序进入 `LxMetricCard` 与 `LxSectionTitle` 的当前版严格审查；随后收口 G2 `LxSearchBar`/`LxStatusSwitch`，再按矩阵逐批替换 Vue3 Element Plus。每波同步此地图、交接、审计和迁移台账。
+
 ## 2026-09-30 UI-13 LxForm 首错焦点
 
 - lx-ui `LxForm` 继续由公开 `LxFormItem` 与基础 `Lx*` 控件组合；校验失败聚焦真实首个错误输入，证据和 E2E 见 `.impeccable/critique/form-focus-postfix-2026-09-30/`。

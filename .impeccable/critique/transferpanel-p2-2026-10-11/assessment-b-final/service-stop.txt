@@ -1,0 +1,5 @@
+Assessment B temporary-service cleanup
+Stopped launcher PIDs: 9432 (VitePress, port 4189), 6500 (Overlay live-server, port 8499).
+Child-process check: no remaining VitePress dev process or Overlay live-server process was found after stopping the launchers.
+Final listener check: Get-NetTCPConnection -LocalPort 4189,8499 -State Listen returned no rows.
+Final status: ports 4189 and 8499 are free.

@@ -475,3 +475,11 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 ## 2026-10-04 Wave 0 复验记录
 
 `LxDatePicker` 的单值说明更新/移除、相邻单值实例、区间起止输入及相邻区间实例隔离已通过行为回归。该修复只关闭可访问性关联缺陷；输入边界、弹层、范围视觉、窄屏和正式 Impeccable Critique 仍按基础控件批次复核，52 项严格关闭数不变。
+
+## 2026-10-11 Wave 11 P2 审计结论：LxTransferPanel 与 LxVirtualTree
+
+- **设计对照**：完成 `design/虚拟滚动树 + 双栏穿梭/` 对应的 5:2:5 桌面轨道、380px 标准高度、240/300px 边界、窄屏分段、树行元数据、长名称 disclosure、批量操作和 VirtualTree 折叠入口复核。
+- **行为与可访问性**：节点视觉盒与触控区保持分离；可加入数量只统计已加载、未禁用且未选节点；达到上限的短提示与完整 `title`/`aria-describedby` 分层；键盘、焦点、错误/空/加载、HUD 和 `prefers-reduced-motion` 均有证据。
+- **验证**：单测合计 67/67，文档 E2E 合计 48/48；类型、203 modules 构建、文档构建、Vue3 生产构建和目标格式检查通过；代码复审批准，无 P0-P3。
+- **正式审查**：Assessment A 36/40；Assessment B 5 个静态目标均为合法 `[]`/空 stderr/退出码 0，9 个浏览器视图注入和截图成功；综合报告与 snapshot/trend 见 `.impeccable/critique/transferpanel-p2-2026-10-11/` 和 `.impeccable/critique/2026-10-10T23-03-08Z__linkx-fe-src-components-lxtransferpanel-index-vue.md`。本条关闭当前组件批次证据，不增加 UI-10 全库 52 项计数。
+- **后续待办**：Demo 设置区展开后的控制项密度列为 P3；宿主保存状态、真实权限后端、读屏器专项、`DataPermissionTree` 适配和 Vue3 Element Plus 替换仍按 UI-04。下一组件批次为 `LxMetricCard` + `LxSectionTitle`，先做独立 A/B 和浏览器证据，再处理 G2 未关闭项。

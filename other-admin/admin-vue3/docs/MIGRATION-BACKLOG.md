@@ -235,6 +235,13 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 
 2026-09-30 UI-13 LxForm 首错焦点修复：LxForm 现在保存真实表单根节点并在校验 Promise reject 后聚焦首个错误输入；桌面/375px 浏览器证据和 3/3 文档 E2E 已通过。该修复不代表 Form 正式 Impeccable 关闭；组件库全量 UI-10/UI-11 完成前不进入宿主 Element Plus 依赖移除。
 
+## 2026-10-11 UI-04 前置组件证据：TransferPanel 与 VirtualTree P2 结项
+
+- lx-ui 当前版已完成双栏穿梭/虚拟树的组件级严格审查：单测合计 67/67，文档 E2E 合计 48/48；TransferPanel 与 VirtualTree 的 props、事件、插槽、键盘和窄屏边界继续由库组件负责，业务请求和权限判断仍由宿主注入。
+- Assessment A 为 36/40；Assessment B 的 5 个 detector 均保存 JSON `[]`、stderr 空、退出码 0，并完成 9 个浏览器视图的 overlay/截图/DOM/键盘证据；代码复审批准。证据见 `.impeccable/critique/transferpanel-p2-2026-10-11/`，snapshot 为 `.impeccable/critique/2026-10-10T23-03-08Z__linkx-fe-src-components-lxtransferpanel-index-vue.md`。
+- `DataPermissionTree` 仍不能机械替换为 `LxVirtualTree`/`LxTransferPanel`：UI-04 必须先对照节点字段、父子勾选、跨页/树外已选键、exposes、change 回传、加载/空/错和真实权限 API，再用 Mock 覆盖成功、空、失败、权限不足、取消、分页和重复提交。
+- Vue3 `element-plus` 直接依赖继续保留；全量替换必须等待组件库剩余正式 Critique、宿主页面组合回归和整站 Impeccable。下一批先审查 `LxMetricCard` + `LxSectionTitle`，G2 `LxSearchBar`/`LxStatusSwitch` 随后处理；权限中心、文本/字段权限和引导页继续延后。
+
 ## 2026-10-04 Wave 0 迁移影响
 
 当前仅修复 lx-ui `LxDatePicker` 对实际输入框的说明 ID 关联，没有改动 Vue3 业务 API、路由、权限或后端协议。当前工作区 DynamicForm 日期字段回归与 DatePicker 合计 36/36；本波提交不包含既存 DynamicForm 实现改动。Wave 1 先完成基础控件审查，宿主 Element Plus 替换顺序不变。

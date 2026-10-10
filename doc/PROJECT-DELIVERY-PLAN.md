@@ -1037,3 +1037,13 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - Impeccable A/B 综合 32/40，是三项有界修后评分，基线 29/40 的其他分项未重评。三份 detector 为有效 `[]`、stderr 空、退出码 0；只说明静态规则零命中。移动根宽异常归因于注入标记；无用户可见 overlay 声明。正式快照为 `.impeccable/critique/2026-10-05T13-00-21Z__linkx-fe-src-components-lxswitch-index-vue.md`，目标首次正式记录，趋势为 32/40。
 - P2 移动文档侧栏隐藏时的键盘顺序转入共享壳层复验；生产高影响动作的确认、授权审计及失败补偿转入 Vue3 宿主迁移，必须以真实业务/API 契约为依据。P3 术语说明保留为中文文档改进，不扩大通用组件 API。
 - 下一执行项为 `LxPasswordInput` 的设计严格对照与正式复核；随后完成动态图标，再开展 `LxDynamicForm` 专项。Vue3 Element Plus 替换继续冻结，直到基础组件与动态图标门槛满足。实现/E2E 与计划、审计、交接及 Critique 证据必须按 `fix(lx-ui)`、`docs(project)` 分开提交并推送；每次暂存仅包含本波白名单。
+
+## 2026-10-11 Wave 11 P2 / LxTransferPanel 与 LxVirtualTree 结项
+
+- **目标**：完成双栏穿梭与虚拟树当前源码冻结版的 P2 视觉、交互、可访问性和响应式收口，并按 Impeccable 规则完成独立 Assessment A、Assessment B、综合报告、snapshot/trend 和代码复审。
+- **实现**：TransferPanel Demo 默认高度改为标准 `380px`，保留 `240px` 紧凑档和 `300px` 适中档；桌面/窄屏长名称提供“查看全文/收起”；VirtualTree 折叠入口使用 `LxIcon chevron` 并尊重减少动效；批量操作显示可加入/已选计数；达到上限时视觉层只显示“剩余 N 个名额”，完整原因继续通过 `title` 和 `aria-describedby` 提供；原生 `details` marker 隐藏以避免双箭头；`selectableAddCount` 按全部已加载、未禁用且未选节点计算。
+- **证据**：TransferPanel 与 VirtualTree 单测合计 67/67，文档 E2E 合计 48/48；lx-ui `vue-tsc`、203 modules 库构建、VitePress 构建、Vue3 生产构建、目标 Prettier、`git diff --check` 通过；ESLint 0 errors，仅保留既有 `SidebarItem.vue` import/order warning。代码复审批准，P0/P1/P2/P3 均无。
+- **Impeccable**：Assessment A 36/40（Good，90%），P0/P1/P2 为 0，仅 Demo 设置区展开后选项较多一项 P3；Assessment B 的 5 个 detector 目标均为合法 `[]`、stderr 为空、退出码 0，并完成 9 个独立浏览器视图的导航、交互、脚本注入、overlay、DOM/键盘和截图证据。正式综合报告见 `.impeccable/critique/transferpanel-p2-2026-10-11/final-report.md`，正式 snapshot 为 `.impeccable/critique/2026-10-10T23-03-08Z__linkx-fe-src-components-lxtransferpanel-index-vue.md`，趋势为 `32/40 → 35/40 → 36/40`。`[]` 只表示静态规则零命中，不能单独代替浏览器证据。
+- **范围边界**：本波不关闭宿主“已选择/已保存”状态、真实权限保存失败恢复、真实权限后端联调、读屏器专项和 Vue3 `DataPermissionTree` 替换；这些继续归 UI-04。UI-10 统一 52 项计数保持现行口径，不能把组件级 Critique 当成 Vue3 页面迁移完成。Vue3 `element-plus` 直接依赖继续保留。
+- **下一波**：先进入 `LxMetricCard` 与 `LxSectionTitle` 的当前源码严格 UI 复核；对已有库级行为证据补独立 A/B、浏览器主题/状态/窄屏/减少动效证据、综合 snapshot/trend 和代码复审。随后按台账处理 G2 `LxSearchBar`/`LxStatusSwitch` 未关闭项，再开始 Vue3 Element Plus 分批替换。权限中心、文本/字段权限和引导页继续后置。
+- **交付约定**：实现、Demo、测试和组件中文文档使用 `fix(lx-ui): ...`；计划、地图、审计、交接、迁移台账和 Impeccable 证据使用 `docs(project): ...`。两笔提交均只暂存本波白名单，完成检查后推送 `origin/main`，再启动下一波 Agent。

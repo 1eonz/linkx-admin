@@ -2094,3 +2094,13 @@
 - **文档与测试**：更正 `clear-all` 的条件确认说明；组件中文文档同步焦点回落、屏幕阅读器描述和确认版本规则。新增同值新数组单测和键盘移除焦点/读屏关联 E2E。
 - **验证**：定向单测 **20/20**，文档 Playwright **10/10**；lx-ui 类型检查、203 模块生产构建、VitePress 文档构建、Vue3 单测/E2E 文件 ESLint 和目标 Prettier 通过。VitePress 仍有既有大 chunk 警告，4174 用户预览仍返回 HTTP 200。独立代码复审及修后 Impeccable A/B 的正式结论待补入本节。
 - **范围边界**：本修复不关闭 UI-10 52 项严格矩阵；Vue3 `DataPermissionTree` 适配、真实权限联调和 Vue3 宿主 Element Plus 替换仍未完成。提交时只暂存本波实现/回归与本波计划、交接和审查证据白名单；按约定分为 `fix(lx-ui)` 与 `docs(project)` 两笔并推送 `origin/main`，再开始 G2。
+
+## [2026-10-11] Wave 11 P2 / LxTransferPanel 与 LxVirtualTree 最终交接
+
+- **完成内容**：TransferPanel Demo 默认值为标准 `380px`，保留 `240px`/`300px` 边界；桌面和窄屏长名称支持键盘或点击查看全文；VirtualTree 三组折叠入口统一使用 `LxIcon chevron`，减少动效时不旋转；批量栏增加可加入/已选计数，紧凑布局只显示“剩余 N 个名额”，完整拒绝原因仍在 `title` 和 `aria-describedby`；隐藏原生 details marker，修正可加入数量计算。
+- **涉及文件**：`linkx-fe/src/components/LxTransferPanel/**`、`linkx-fe/src/components/LxVirtualTree/**`、两份中文组件文档、TransferPanel 单测和 TransferPanel/VirtualTree 文档 E2E。`.pnpm-store` 镜像目录中的同名文件属于生成镜像，不进入本波提交。
+- **验证结论**：组件单测合计 67/67，文档 E2E 合计 48/48；lx-ui 类型检查、203 modules 构建、VitePress、Vue3 生产构建、目标 Prettier、差异检查通过；代码复审批准且没有 P0-P3。ESLint 仅有既有 `SidebarItem.vue` import/order warning。
+- **Impeccable 结论**：A 36/40（Good），P0/P1/P2 为 0，唯一 P3 为 Demo 设置区展开后选项较多；B 的 5 个 detector 三件套均为 `[]`/空 stderr/退出码 0，9/9 浏览器视图完成导航、交互、注入、overlay 和截图。正式报告、证据和停止记录位于 `.impeccable/critique/transferpanel-p2-2026-10-11/`；snapshot 为 `.impeccable/critique/2026-10-10T23-03-08Z__linkx-fe-src-components-lxtransferpanel-index-vue.md`。`[]` 不作为单独的视觉通过凭据。
+- **未关闭边界**：宿主保存状态、真实权限 API、`DataPermissionTree` 业务契约、读屏器专项和 Vue3 Element Plus 替换仍未完成；权限中心、文本/字段权限和引导页继续后置。组件级结项不增加 UI-10 全库 52 项关闭数。
+- **下一波交接**：`LxMetricCard` + `LxSectionTitle` 严格 UI A/B 复核；完成后处理台账中的 G2 `LxSearchBar`/`LxStatusSwitch`。下一波仍须先执行组件库验证和 Impeccable，再进入 Vue3 页面替换。
+- **提交与推送**：实现白名单提交 `fix(lx-ui): ...`，文档/证据白名单提交 `docs(project): ...`；提交前确认无 `.pnpm-store`、旧评估目录或其他协作者文件，随后推送 `origin/main`。所有后续 API 请求继续使用 `.then().catch().finally()`，新增注释和文档使用中文。

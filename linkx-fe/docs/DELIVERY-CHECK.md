@@ -280,3 +280,10 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 - 当前工作区 DatePicker/DynamicForm 定向单测 36/36；lx-ui 类型、构建、文档构建通过，DatePicker 文档 E2E 1/1。
 - 代码审核未发现可复现缺陷；新增区间起止和相邻区间说明 ID 隔离断言。
 - 正式 Impeccable A/B、overlay 和 snapshot/trend 仍待完成；该行为修复不代表基础控件严格视觉矩阵关闭。
+
+## 2026-10-11 Wave 11 P2 交付检查：TransferPanel 与 VirtualTree
+
+- **实现检查**：TransferPanel 标准 380px 默认档与 240/300px 边界、桌面/窄屏长名称 disclosure、批量可加入/已选计数、短禁用摘要、完整 `title`/`aria-describedby`；VirtualTree LxIcon chevron、减少动效、隐藏原生 marker 和节点数量计算均已核对。
+- **自动化检查**：两组件单测合计 67/67，文档 E2E 合计 48/48；lx-ui typecheck、203 modules build、VitePress build、Vue3 production build、Prettier 和 `git diff --check` 通过。代码复审批准，无 P0-P3。
+- **Impeccable 检查**：A 36/40；B 的 5 个静态目标分别保存 stdout JSON、stderr 和退出码，均为 `[]`/空/0；9 个浏览器视图完成导航、交互、注入、overlay、截图和 DOM/键盘记录。正式报告、证据和 snapshot/trend 已保存，不能把 `[]` 单独标为通过。
+- **未完成门槛**：真实权限保存和后端联调、读屏器专项、Vue3 `DataPermissionTree` 适配、全库 UI-11 和 Element Plus 移除仍未完成；权限中心、文本/字段权限及引导页继续后置。下一检查批次为 `LxMetricCard` + `LxSectionTitle`。

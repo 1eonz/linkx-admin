@@ -269,3 +269,10 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 ## 2026-10-04 Wave 0 复验
 
 `LxDatePicker` 字段说明已按实例同步到实际输入，单值、区间和相邻实例回归通过；当前工作区 DatePicker/DynamicForm 单测 36/36，组件库类型、构建和文档构建通过。正式 Impeccable A/B 和修复后 overlay/snapshot 仍待补；进入 Wave 1 基础控件第一组。
+
+### 2026-10-11 UI-10 Wave 11 P2：TransferPanel 与 VirtualTree 结项
+
+- `LxTransferPanel` 与 `LxVirtualTree` 完成当前源码冻结版的 P2 收口：Demo 标准高度默认为 380px，支持 240/300px 边界；长名称可展开；VirtualTree summary 使用 LxIcon chevron；批量栏显示可加入/已选计数，禁用摘要短提示与完整 ARIA 原因分层；减少动效和原生 details marker 均已处理。
+- 单测合计 67/67，文档 E2E 合计 48/48；类型检查、203 modules 构建、VitePress、Vue3 生产构建、目标 Prettier 和 diff 检查通过。新增注释和文档均使用中文，API 请求规则未改变。
+- Impeccable 正式双路已完成：A 36/40（Good），B 5 个 detector 为合法 `[]`/空 stderr/退出码 0，9 个独立浏览器视图完成 overlay、DOM、键盘和截图证据；代码复审 P0-P3 全部为 0。综合报告和正式 snapshot/trend 见 `.impeccable/critique/transferpanel-p2-2026-10-11/`。
+- `[]` 仅表示静态 detector 零命中；本波只有 Demo 设置区展开后选项较多的 P3。宿主保存状态、真实权限联调、读屏器专项和 `DataPermissionTree` 迁移仍未完成。下一步进入 `LxMetricCard` + `LxSectionTitle` 严格审查，再收口 G2 `LxSearchBar`/`LxStatusSwitch`。
