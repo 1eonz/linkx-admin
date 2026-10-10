@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-11 lx-ui Wave 11 / LxVirtualTree 插槽布局与 TransferPanel 联回归完成
+
+- lx-ui 已公开 `LxVirtualTree` 的 `rowLayout`、`nodeSummary` 和插槽 scope 类型；`LxTransferPanel` 已采用公开行布局，窄屏长名称支持键盘全文展开。该波没有修改 Vue3 业务页面、API、路由、权限键或 `element-plus` 依赖。
+- VirtualTree + TransferPanel 定向单测 **67/67**，VirtualTree 文档 E2E **14/14**，TransferPanel 文档 E2E **33/33**；类型、库/文档/生产构建、目标格式和差异检查通过。Impeccable A **31/40**；B 四个 detector 均为有效 `[]`/空 stderr/exit 0，六个视图 overlay/DOM/键盘证据完成；代码复审批准。详细证据见 `.impeccable/critique/lxvirtualtree-wave11-2026-10-11/`。
+- 固定行虚拟化下，业务 slot 只能放展示型单行元信息，完整摘要由 `nodeSummary` 提供；窄屏已选首屏、批量动作层级和 Demo 控制密度列后续组件库任务。下一步继续按 UI-10 门禁推进剩余 lx-ui 组件和整库审查，之后才进入 `DataPermissionTree`/Element Plus 替换。
+
 ## 2026-10-11 lx-ui Wave 11 / LxDescriptions Demo 控件密度阶段性收口
 
 - `LxDescriptions` Demo 已补可见布局组名，数据状态改用 `LxSelect`；文档 E2E 3/3 覆盖状态切换、边框生效、375/320px 无溢出、HUD、减少动效和键盘路径。组件单测 6/6，类型、格式、代码复审和差异检查通过。
@@ -227,7 +233,7 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 
 2026-09-28 多选下拉内侧边线对齐复修：用户仍反馈外圈观感不协调。经真实 DOM 对照，选择器原先使用实体 border，输入类控件使用内部 inset 边线；现统一为无实体 border、1px inset 状态线，普通/悬停/聚焦/错误仅切换 token 颜色，保留 32px 和原交互。4174 计算样式及 Element Bridge 定向 Playwright 已验证；正式 Impeccable 双路复评待当前样式稳定后补录。
 
-2026-09-30 UI-13 LxForm 首错焦点修复：LxForm 现在保存真实表单根节点并在校验 Promise reject 后聚焦首个错误输入；桌面/375px浏览器证据和 3/3 文档 E2E 已通过。该修复不代表 Form 正式 Impeccable 关闭；组件库全量 UI-10/UI-11 完成前不进入宿主 Element Plus 依赖移除。
+2026-09-30 UI-13 LxForm 首错焦点修复：LxForm 现在保存真实表单根节点并在校验 Promise reject 后聚焦首个错误输入；桌面/375px 浏览器证据和 3/3 文档 E2E 已通过。该修复不代表 Form 正式 Impeccable 关闭；组件库全量 UI-10/UI-11 完成前不进入宿主 Element Plus 依赖移除。
 
 ## 2026-10-04 Wave 0 迁移影响
 

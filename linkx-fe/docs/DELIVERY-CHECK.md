@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-11 Wave 11 / LxVirtualTree 插槽布局与 TransferPanel 联回归完成
+
+- `LxVirtualTree` 已完成公开行布局和插槽摘要契约；`LxTransferPanel` 使用 `rowLayout="responsive"`，不再通过 `:deep` 覆盖树行。窄屏长名称支持“查看全文/收起”，Demo 高级操作按数据定位与边界外观分组。
+- 定向单测 **67/67**、VirtualTree 文档 E2E **14/14**、TransferPanel 文档 E2E **33/33**；类型、203 modules 库构建、VitePress、Vue3 生产构建、目标 Prettier/ESLint 和 `git diff --check` 通过。
+- Assessment A **31/40（Good）**；Assessment B 四个 detector 目标均为合法 JSON `[]`、stderr 空、退出码 `0`，六个独立视图 overlay、DOM、键盘与长筛选证据已归档。代码复审无 P0-P3，原 P3 类型注释已处理。`[]` 不单独代表视觉通过，综合报告和 snapshot/trend 见 `.impeccable/critique/lxvirtualtree-wave11-2026-10-11/`。
+- 固定行虚拟化下，多行 slot 不会撑高相邻行；调用方需使用展示型单行元信息并通过 `nodeSummary` 提供完整摘要。窄屏选中列表密度、批量动作层级和 Demo 控制密度进入后续 P2；UI-10、宿主替换、真实权限联调继续开放。
+
 ## 2026-10-11 Wave 11 / LxDescriptions Demo 控件密度阶段性核查
 
 - 完成 Demo 控件分组和状态选择器替换；E2E 3/3，组件单测 6/6，类型、目标 Prettier、代码复审和 `git diff --check` 通过。

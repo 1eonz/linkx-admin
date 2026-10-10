@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-11 UI-10 / Wave 11 LxVirtualTree 插槽布局与 TransferPanel 联回归
+
+`LxVirtualTree` 已补齐 `rowLayout`、`nodeSummary`、公开插槽 scope 类型及固定行虚拟化契约；`LxTransferPanel` 改用公开行布局，移除树行元信息的 `:deep` 依赖，窄屏长名称提供全文展开入口。定向单测 **67/67**、VirtualTree 文档 E2E **14/14**、TransferPanel 文档 E2E **33/33**，类型、203 modules 构建、VitePress、Vue3 生产构建和目标格式/Lint 通过。
+
+Assessment A **31/40（Good）**；Assessment B 四个源码目标的 detector 均为有效 JSON `[]`、stderr 空、退出码 `0`，六个浅色/HUD × 桌面/窄屏 context 成功注入 overlay，并保存长筛选、DOM、键盘和截图证据。独立代码复审批准，无 P0-P3；旧 P3 类型注释已修正。固定行虚拟化不支持任意多行 slot 撑高，完整信息由 `nodeSummary` 的 `aria-label/title` 兜底；窄屏首屏密度、批量操作层级和 Demo 控件墙记为后续 P2。本条不增加 UI-10 `0/52` 关闭数，不代表 Vue3 页面替换或真实权限联调完成。完整证据见 `.impeccable/critique/lxvirtualtree-wave11-2026-10-11/`。
+
 ## 2026-10-11 UI-10 / Wave 11 LxDescriptions Demo 控件密度阶段性核查
 
 `LxDescriptions` Demo 已完成控件分组和状态选择器改造，组件单测 6/6、文档 E2E 3/3、类型/格式检查和修后代码复审通过。Assessment A 为 31/40；Assessment B 三个 detector 均为合法 `[]`、空 stderr、退出码 0，但 Edge 启动失败、overlay 缺失，因此只登记阶段性证据。首屏控件密度、状态可发现性、HUD 影响范围和复制触达高度进入后续 P1/P2；本条不增加 UI-10 52 项关闭数。
@@ -212,7 +218,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxProTable`         | `DESIGN-SPEC.md` + ProTable API/Demo              | 待严格复核；表头/行密度、选择、空错态和滚动                                                                                                                                                |
 | `LxRadio`            | `design/表单控件八件套/`                          | A/B 与行为完成；中文播报、触屏和减少动效通过；窄屏 API 表格 P2 待处理                                                                                                                      |
 | `LxRadioGroup`       | `design/表单控件八件套/`                          | A/B、键盘及禁用态验收完成；随 API 表格 P2 保持开放                                                                                                                                         |
-| `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 单测 9/9、文档 E2E 3/3；修后 A/B 已补独立浏览器/overlay 证据，Demo 增加四字段标准态；最终综合快照待收口，严格矩阵保持打开 |
+| `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 单测 9/9、文档 E2E 3/3；修后 A/B 已补独立浏览器/overlay 证据，Demo 增加四字段标准态；最终综合快照待收口，严格矩阵保持打开                                                                  |
 | `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                                                                                                       |
 | `LxSelect`           | `design/表单控件八件套/`                          | 实现与行为验收：单测 10/10、文档 E2E 3/3；当前严格 Critique 待修后 A/B、overlay/snapshot；桌面 32px、窄屏 44px                                                                             |
 | `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                                                                          |
@@ -224,7 +230,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxSidebarItem`      | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；选中/禁用/悬停/键盘态                                                                                                                                                          |
 | `LxSplitLayout`      | `DESIGN-SPEC.md` + SplitLayout API/Demo           | 待严格复核；分栏比例、拖动、键盘和折叠态                                                                                                                                                   |
 | `LxStatusDot`        | `DESIGN-SPEC.md` §2 + 状态点 API/Demo             | 待严格复核；状态语义、动画和减少动效                                                                                                                                                       |
-| `LxStatusSwitch`     | `design/状态开关 StatusSwitch/`                   | 单测 17/17、文档 E2E 3/3；修后 A/B 已覆盖 HUD Teleport、ARIA 行名、确认影响/审计上下文和 375px 路径；最终综合快照待收口，Vue3 宿主替换仍待 UI-04 |
+| `LxStatusSwitch`     | `design/状态开关 StatusSwitch/`                   | 单测 17/17、文档 E2E 3/3；修后 A/B 已覆盖 HUD Teleport、ARIA 行名、确认影响/审计上下文和 375px 路径；最终综合快照待收口，Vue3 宿主替换仍待 UI-04                                           |
 | `LxSwitch`           | `design/表单控件八件套/`                          | 组件级复核已完成；共享壳层与宿主契约仍跟踪，暂不计入全库严格关闭                                                                                                                           |
 | `LxTabsBar`          | `DESIGN-SPEC.md` + TabsBar API/Demo               | 待严格复核；页签层级、关闭/拖动和横向滚动                                                                                                                                                  |
 | `LxTag`              | `DESIGN-SPEC.md` §2 + Tag API/Demo                | 待严格复核；语义色、尺寸、关闭态与对比度                                                                                                                                                   |

@@ -1,5 +1,12 @@
 # LinkX 项目地图
 
+## 2026-10-11 Wave 11 / LxVirtualTree 插槽布局与 TransferPanel 联回归完成
+
+- `LxVirtualTree` 已公开 `rowLayout`（`single`/`stacked`/`responsive`）和 `nodeSummary`，同步导出插槽 scope 类型；固定行高、虚拟窗口、滚动定位和焦点恢复使用同一行几何。节点插槽明确为展示型元信息，不承载按钮或链接。
+- `LxTransferPanel` 使用公开行布局契约，树行不再由宿主 `:deep` 改写；窄屏长名称提供可键盘操作的“查看全文/收起”。Demo 高级操作分为数据定位与边界外观两级。
+- 证据：定向单测 **67/67**、VirtualTree 文档 E2E **14/14**、TransferPanel 文档 E2E **33/33**；lx-ui 类型/203 modules 构建、VitePress、Vue3 生产构建、目标格式/Lint 和差异检查通过。A **31/40**；B 四个 detector 目标均为有效 `[]`/空 stderr/exit 0，六视图 overlay/键盘/长筛选证据齐备；代码复审批准，无 P0-P3。完整证据见 `.impeccable/critique/lxvirtualtree-wave11-2026-10-11/`。
+- 窄屏选中列表首屏密度、批量动作层级和 Demo 控制密度列后续 P2；`nodeSummary` 是多行插槽在固定行虚拟化下的完整可访问摘要。UI-10 仍 `0/52`，Vue3 `element-plus` 删除、权限宿主和真实联调继续后置。
+
 ## 2026-10-11 Wave 11 / LxDescriptions Demo 控件密度阶段性收口
 
 - Demo 控件区新增“布局”组名，数据状态改用带标签的 `LxSelect`，保留边框和 HUD 开关；对应 E2E 增加分组、边框生效、375/320px 无溢出和键盘状态切换断言。

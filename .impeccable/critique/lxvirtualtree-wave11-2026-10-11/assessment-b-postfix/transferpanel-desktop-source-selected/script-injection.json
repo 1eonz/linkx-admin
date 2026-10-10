@@ -1,0 +1,729 @@
+{
+  "label": "LxTransferPanel 桌面待选已选长名称键盘",
+  "route": "/components/lxtransferpanel",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "reducedMotion": "no-preference",
+  "overlay": {
+    "preflight": {
+      "title": "[Human] LxTransferPanel 桌面待选已选长名称键盘",
+      "bodyPresent": true,
+      "mutationAvailable": true
+    },
+    "injection": {
+      "ok": true,
+      "src": "http://127.0.0.1:8427/detect.js"
+    },
+    "detectResult": [
+      {
+        "selector": "div.vp-doc > div > p:nth-of-type(1)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 168,
+          "width": 880,
+          "height": 118,
+          "top": 168,
+          "right": 1216,
+          "bottom": 286,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-transfer-panel__scope-action-content",
+        "tagName": "div",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "gpt-thin-border-wide-shadow",
+            "category": "slop",
+            "severity": "advisory",
+            "advisory": true,
+            "detail": "1px border + 16px shadow blur",
+            "ignoreValue": "",
+            "name": "Hairline border with wide shadow",
+            "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(3)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 998,
+          "width": 880,
+          "height": 56,
+          "top": 998,
+          "right": 1216,
+          "bottom": 1054,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "details.details.custom-block > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1147,
+          "y": 1139,
+          "width": 40,
+          "height": 40,
+          "top": 1139,
+          "right": 1187,
+          "bottom": 1179,
+          "left": 1147
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(6)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 3517,
+          "width": 880,
+          "height": 88,
+          "top": 3517,
+          "right": 1216,
+          "bottom": 3605,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(7)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 3621,
+          "width": 880,
+          "height": 200,
+          "top": 3621,
+          "right": 1216,
+          "bottom": 3821,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(8)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 3837,
+          "width": 880,
+          "height": 118,
+          "top": 3837,
+          "right": 1216,
+          "bottom": 3955,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.vp-doc > div > ul:nth-of-type(1) > li:nth-of-type(1)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 4689,
+          "width": 860,
+          "height": 198,
+          "top": 4689,
+          "right": 1216,
+          "bottom": 4887,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.vp-doc > div > ul:nth-of-type(1) > li:nth-of-type(2)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 4895,
+          "width": 860,
+          "height": 72,
+          "top": 4895,
+          "right": 1216,
+          "bottom": 4967,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.vp-doc > div > ul:nth-of-type(1) > li:nth-of-type(3)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 4975,
+          "width": 860,
+          "height": 48,
+          "top": 4975,
+          "right": 1216,
+          "bottom": 5023,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.vp-doc > div > ul:nth-of-type(1) > li:nth-of-type(4)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 5031,
+          "width": 860,
+          "height": 52,
+          "top": 5031,
+          "right": 1216,
+          "bottom": 5083,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "ul:nth-of-type(2) > li:nth-of-type(1)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 5191,
+          "width": 860,
+          "height": 52,
+          "top": 5191,
+          "right": 1216,
+          "bottom": 5243,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "ul:nth-of-type(2) > li:nth-of-type(2)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 5251,
+          "width": 860,
+          "height": 122,
+          "top": 5251,
+          "right": 1216,
+          "bottom": 5373,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "ul:nth-of-type(2) > li:nth-of-type(5)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 5471,
+          "width": 860,
+          "height": 48,
+          "top": 5471,
+          "right": 1216,
+          "bottom": 5519,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "ul:nth-of-type(3) > li:nth-of-type(2)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 5659,
+          "width": 860,
+          "height": 96,
+          "top": 5659,
+          "right": 1216,
+          "bottom": 5755,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "ul:nth-of-type(3) > li:nth-of-type(3)",
+        "tagName": "li",
+        "rect": {
+          "x": 356,
+          "y": 5763,
+          "width": 860,
+          "height": 120,
+          "top": 5763,
+          "right": 1216,
+          "bottom": 5883,
+          "left": 356
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~108 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(9)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 5991,
+          "width": 880,
+          "height": 88,
+          "top": 5991,
+          "right": 1216,
+          "bottom": 6079,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(10)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 6200,
+          "width": 880,
+          "height": 90,
+          "top": 6200,
+          "right": 1216,
+          "bottom": 6290,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(11)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 6306,
+          "width": 880,
+          "height": 86,
+          "top": 6306,
+          "right": 1216,
+          "bottom": 6392,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(12)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 6408,
+          "width": 880,
+          "height": 116,
+          "top": 6408,
+          "right": 1216,
+          "bottom": 6524,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1164,
+          "y": 6552,
+          "width": 40,
+          "height": 40,
+          "top": 6552,
+          "right": 1204,
+          "bottom": 6592,
+          "left": 1164
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div > div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 1164,
+          "y": 7395.375,
+          "width": 40,
+          "height": 40,
+          "top": 7395.375,
+          "right": 1204,
+          "bottom": 7435.375,
+          "left": 1164
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "p:nth-of-type(13)",
+        "tagName": "p",
+        "rect": {
+          "x": 336,
+          "y": 7594.03125,
+          "width": 880,
+          "height": 116,
+          "top": 7594.03125,
+          "right": 1216,
+          "bottom": 7710.03125,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "line-length",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "~110 chars/line (aim for <80)",
+            "ignoreValue": "",
+            "name": "Line length too long",
+            "description": "Text lines wider than ~80 characters are hard to read. The eye loses its place tracking back to the start of the next line. Add a max-width (65ch to 75ch) to text containers."
+          }
+        ]
+      },
+      {
+        "selector": "table:nth-of-type(1)",
+        "tagName": "table",
+        "rect": {
+          "x": 336,
+          "y": 1253,
+          "width": 880,
+          "height": 1497,
+          "top": 1253,
+          "right": 1216,
+          "bottom": 2750,
+          "left": 336
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "edge-flush-cards",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "11 cards flush against the left edge of table at rest (1px gap, e.g. th)",
+            "ignoreValue": "",
+            "name": "Cards flush against the scroller edge",
+            "description": "Cards inside a horizontal scroller or tab panel sit flush against the container edge at rest while keeping a gutter on the other side, so their edges and rounded corners get cut off. Usually the panel is sized wider than its clip box. Keep a consistent inset on both sides."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "bounce-easing",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "cubic-bezier(.71, -.46, .29, 1.46)",
+            "ignoreValue": "",
+            "name": "Bounce or elastic easing",
+            "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead."
+          },
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ],
+    "overlayState": {
+      "scriptPresent": true,
+      "overlayCount": 25,
+      "bannerCount": 1
+    }
+  },
+  "interactionError": null
+}

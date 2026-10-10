@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## [2026-10-11] Wave 11 交接：LxVirtualTree 插槽行布局与 TransferPanel 联回归完成
+
+- **完成范围**：`LxVirtualTree` 新增公开 `rowLayout`、`nodeSummary`、`LxVirtualTreeNodeSlotProps` 和 `LxVirtualTreeSlots`；`stacked`/`responsive` 统一行高、虚拟占位、滚动偏移和焦点恢复。`LxTransferPanel` 已改用该公开契约，移除树行元信息的 `:deep` 覆盖；窄屏长名称提供“查看全文/收起”。
+- **验证**：VirtualTree + TransferPanel 定向单测 **67/67**；VirtualTree 文档 E2E **14/14**；TransferPanel 文档 E2E **33/33**；lx-ui 类型检查、203 modules 构建、VitePress 构建、Vue3 生产构建、目标 Prettier/ESLint、`git diff --check` 通过。未改变业务 API、路由、权限键、真实协议或 Vue3 `element-plus` 依赖。
+- **Impeccable**：Assessment A **31/40（Good）**。Assessment B 四个 detector 目标的 JSON、stderr、退出码分别为 `[]`、空、`0`；浅色/HUD 桌面和窄屏六个独立 context 均 HTTP 200、注入成功、无 page error，并保存 overlay、DOM、长筛选和键盘证据。合法 `[]` 只表示源码静态零命中，浏览器命中已按文档壳、HUD 令牌和标注层归因。证据目录为 `.impeccable/critique/lxvirtualtree-wave11-2026-10-11/`。
+- **代码复审**：结论批准，无 P0-P3；原 P3 类型注释已修正为“固定行容器、`stacked`/`responsive` 可使用第二行、仅展示型元信息”。剩余 `:deep` 仅为树容器、选择信息、viewport 布局和 Element Plus checkbox 内核尺寸，当前无行为回归。
+- **遗留与下一步**：多行 slot 的可见内容仍受固定行契约约束，完整文本由 `nodeSummary` 的 `aria-label/title` 兜底；窄屏已选列表首屏密度、批量按钮层级和 Demo 控制密度记录为后续 P2。宿主保存状态、`DataPermissionTree` 替换、真实权限联调及 UI-10 `0/52` 保持开放。完成两笔提交/推送后进入下一组件审查批次。
+
 ## [2026-10-11] Wave 11 交接：LxDescriptions Demo 控件密度阶段性收口
 
 - **完成范围**：`linkx-fe/src/components/LxDescriptions/demo/basic.vue` 增加布局组名，数据状态改用 `LxSelect`；`lx-descriptions-docs.spec.ts` 覆盖分组、边框、375/320px、状态恢复和键盘选择。
@@ -278,7 +286,7 @@
 - 根据独立 Assessment A（29/40）修正自适应布局：`LxDynamicForm` 自适应字段不再将三列 span 写入行内 `grid-column`，避免约 600px 文档容器中两列断点被覆盖；固定列和 `span="full"` 仍保持原契约。
 - 新增 `linkx-fe/src/components/LxTreeSelect/`，DynamicForm 树字段已切换到公开 `LxTreeSelect`。Element Plus 只作为封装内部内核，组件导出类型、文档、导航和减少动效样式已同步。
 - 两个 LxForm Demo 已切换为 `LxInput`/`LxSelect`/`LxTextarea`；业务存量兼容的 `ElFormItem` 能力仍保留在 LxForm 说明中，但新示例不再把 `El*` 当作设计组件使用。
-- 复验：`linkx-fe pnpm typecheck`、`pnpm build`、`pnpm build:docs`、修改文件 Prettier 通过。DynamicForm 本地 Vitest 首轮 7 项中 6 项通过，重置初始值断言已修正实现，需使用 `other-admin/admin-vue3/node_modules/.bin/vitest.CMD` 重跑；根级 Vitest 缺 jsdom不代表代码失败。
+- 复验：`linkx-fe pnpm typecheck`、`pnpm build`、`pnpm build:docs`、修改文件 Prettier 通过。DynamicForm 本地 Vitest 首轮 7 项中 6 项通过，重置初始值断言已修正实现，需使用 `other-admin/admin-vue3/node_modules/.bin/vitest.CMD` 重跑；根级 Vitest 缺 jsdom 不代表代码失败。
 - 审查状态：A 报告已落盘；B 目录已落盘 detector `[]`/stderr/exit-code，浏览器证据尚待独立 Agent 结束后读取。当前不能标记正式 Impeccable 通过。
 - 下一步：完成 B/A 综合快照和代码审核；然后按 `design/` 逐项盘点其余组件，每项同步实现、Demo、Mock、浏览器证据和交接，再进入 Vue3 Element Plus 替换。
 

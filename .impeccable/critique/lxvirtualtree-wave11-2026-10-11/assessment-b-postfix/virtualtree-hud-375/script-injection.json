@@ -1,0 +1,579 @@
+{
+  "label": "LxVirtualTree 375px HUD",
+  "route": "/components/lxvirtualtree",
+  "viewport": {
+    "width": 375,
+    "height": 812
+  },
+  "reducedMotion": "no-preference",
+  "overlay": {
+    "preflight": {
+      "title": "[Human] LxVirtualTree 375px HUD",
+      "bodyPresent": true,
+      "mutationAvailable": true
+    },
+    "injection": {
+      "ok": true,
+      "src": "http://127.0.0.1:8427/detect.js"
+    },
+    "detectResult": [
+      {
+        "selector": "span.container",
+        "tagName": "span",
+        "rect": {
+          "x": 335,
+          "y": -540,
+          "width": 16,
+          "height": 14,
+          "top": -540,
+          "right": 351,
+          "bottom": -526,
+          "left": 335
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "clipped-overflow-container",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "span.container clips a positioned child",
+            "ignoreValue": "",
+            "name": "Positioned child clipped by overflow container",
+            "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip."
+          }
+        ]
+      },
+      {
+        "selector": "div.virtual-tree-demo__preview.lx-theme-hud",
+        "tagName": "div",
+        "rect": {
+          "x": 24,
+          "y": 730,
+          "width": 327,
+          "height": 412,
+          "top": 730,
+          "right": 351,
+          "bottom": 1142,
+          "left": 24
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "cramped-padding",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "<div> \"virtual-tree-demo__preview\": children flush against bg on right/bottom/left (no inset)",
+            "ignoreValue": "",
+            "name": "Cramped padding",
+            "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-virtual-tree__row.is-checked",
+        "tagName": "div",
+        "rect": {
+          "x": 25,
+          "y": 907,
+          "width": 325,
+          "height": 44,
+          "top": 907,
+          "right": 350,
+          "bottom": 951,
+          "left": 25
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-virtual-tree__row.is-checked > span.lx-virtual-tree__toggle-placeholder",
+        "tagName": "span",
+        "rect": {
+          "x": 49,
+          "y": 907,
+          "width": 44,
+          "height": 44,
+          "top": 907,
+          "right": 93,
+          "bottom": 951,
+          "left": 49
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-virtual-tree__row.is-checked > label.lx-virtual-tree__checkbox-control",
+        "tagName": "label",
+        "rect": {
+          "x": 97,
+          "y": 907,
+          "width": 44,
+          "height": 44,
+          "top": 907,
+          "right": 141,
+          "bottom": 951,
+          "left": 97
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-virtual-tree__row.is-checked > label.lx-virtual-tree__checkbox-control > input.lx-virtual-tree__checkbox",
+        "tagName": "input",
+        "rect": {
+          "x": 112,
+          "y": 922,
+          "width": 14,
+          "height": 14,
+          "top": 922,
+          "right": 126,
+          "bottom": 936,
+          "left": 112
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-virtual-tree__row.is-checked > svg.lx-icon.lx-virtual-tree__node-icon",
+        "tagName": "svg",
+        "rect": {
+          "x": 145,
+          "y": 921.5,
+          "width": 15,
+          "height": 15,
+          "top": 921.5,
+          "right": 160,
+          "bottom": 936.5,
+          "left": 145
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-virtual-tree__row.is-checked > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(1)",
+        "tagName": "path",
+        "rect": {
+          "x": 148.75,
+          "y": 923.375,
+          "width": 7.5,
+          "height": 11.25,
+          "top": 923.375,
+          "right": 156.25,
+          "bottom": 934.625,
+          "left": 148.75
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-virtual-tree__row.is-checked > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(2)",
+        "tagName": "path",
+        "rect": {
+          "x": 153.75,
+          "y": 923.375,
+          "width": 3.125,
+          "height": 3.125,
+          "top": 923.375,
+          "right": 156.875,
+          "bottom": 926.5,
+          "left": 153.75
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-virtual-tree__row.is-checked > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(3)",
+        "tagName": "path",
+        "rect": {
+          "x": 150.625,
+          "y": 929.625,
+          "width": 3.75,
+          "height": 0,
+          "top": 929.625,
+          "right": 154.375,
+          "bottom": 929.625,
+          "left": 150.625
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-virtual-tree__row.is-checked > svg.lx-icon.lx-virtual-tree__node-icon > path:nth-of-type(4)",
+        "tagName": "path",
+        "rect": {
+          "x": 150.625,
+          "y": 932.125,
+          "width": 3.75,
+          "height": 0,
+          "top": 932.125,
+          "right": 154.375,
+          "bottom": 932.125,
+          "left": 150.625
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-virtual-tree__row.is-checked > span.lx-virtual-tree__label",
+        "tagName": "span",
+        "rect": {
+          "x": 164,
+          "y": 919,
+          "width": 152,
+          "height": 20,
+          "top": 919,
+          "right": 316,
+          "bottom": 939,
+          "left": 164
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "div.lx-virtual-tree__row.is-checked > span.lx-virtual-tree__node-extra",
+        "tagName": "span",
+        "rect": {
+          "x": 320,
+          "y": 919,
+          "width": 22,
+          "height": 20,
+          "top": 919,
+          "right": 342,
+          "bottom": 939,
+          "left": 320
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "span.virtual-tree-demo__selected",
+        "tagName": "span",
+        "rect": {
+          "x": 320,
+          "y": 919,
+          "width": 22,
+          "height": 20,
+          "top": 919,
+          "right": 342,
+          "bottom": 939,
+          "left": 320
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "ai-color-palette",
+            "category": "slop",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "Cyan neon text on dark background",
+            "ignoreValue": "",
+            "name": "AI color palette",
+            "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-vue.vp-adaptive-theme > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 278,
+          "y": 1320,
+          "width": 44,
+          "height": 44,
+          "top": 1320,
+          "right": 322,
+          "bottom": 1364,
+          "left": 278
+        },
+        "isPageLevel": false,
+        "isHidden": true,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(2) > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 295,
+          "y": 3861,
+          "width": 44,
+          "height": 44,
+          "top": 3861,
+          "right": 339,
+          "bottom": 3905,
+          "left": 295
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(3) > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 295,
+          "y": 4269.75,
+          "width": 44,
+          "height": 44,
+          "top": 4269.75,
+          "right": 339,
+          "bottom": 4313.75,
+          "left": 295
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(4) > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 295,
+          "y": 5539.3125,
+          "width": 44,
+          "height": 44,
+          "top": 5539.3125,
+          "right": 339,
+          "bottom": 5583.3125,
+          "left": 295
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "div.language-ts.vp-adaptive-theme:nth-of-type(5) > button.copy",
+        "tagName": "button",
+        "rect": {
+          "x": 295,
+          "y": 5898.96875,
+          "width": 44,
+          "height": 44,
+          "top": 5898.96875,
+          "right": 339,
+          "bottom": 5942.96875,
+          "left": 295
+        },
+        "isPageLevel": false,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "buried-raster",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "raster background at opacity 0",
+            "ignoreValue": "",
+            "name": "Raster buried under a wash or opacity",
+            "description": "A background image under a near-opaque gradient wash, or a raster on an element at near-zero opacity, never reaches the screen: the page shows the wash, and the produced texture or photo ships as a compliance token. Let the material show (a tint under 0.9 alpha, a blend mode, an opacity you can see) or remove the file."
+          }
+        ]
+      },
+      {
+        "selector": "body",
+        "tagName": "body",
+        "rect": null,
+        "isPageLevel": true,
+        "isHidden": false,
+        "findings": [
+          {
+            "type": "layout-transition",
+            "category": "quality",
+            "severity": "warning",
+            "advisory": false,
+            "detail": "transition: height, padding-top, padding-bottom",
+            "ignoreValue": "",
+            "name": "Layout property animation",
+            "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations."
+          }
+        ]
+      }
+    ],
+    "overlayState": {
+      "scriptPresent": true,
+      "overlayCount": 20,
+      "bannerCount": 1
+    }
+  },
+  "interactionError": null
+}
