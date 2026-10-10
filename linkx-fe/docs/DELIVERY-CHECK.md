@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-11 Wave 11 / LxDescriptions Demo 控件密度阶段性核查
+
+- 完成 Demo 控件分组和状态选择器替换；E2E 3/3，组件单测 6/6，类型、目标 Prettier、代码复审和 `git diff --check` 通过。
+- A 31/40（Good），B basic/index/docs detector 均为有效 `[]`、空 stderr、退出码 0；Edge 启动失败、无 overlay，不能记为正式视觉通过。完整报告和原始证据见 `.impeccable/critique/lxdescriptions-p2-2026-10-11/`。
+- UI-10、Vue3 宿主替换和真实权限联调不因本波关闭；下一波进入 VirtualTree 插槽固定行高和 TransferPanel 联回归。
+
 ## 2026-10-11 Wave 10 / LxTransferPanel 选择框与桌面树行复验完成
 
 - 树节点和页脚继承复选框可见框为 14×14px；树节点点击区桌面 24×24px、窄屏 44×44px，页脚 `LxCheckbox` 标签点击区桌面最小高 32px、触屏最小高 44px。尺寸修复已合入 `ad797971`。

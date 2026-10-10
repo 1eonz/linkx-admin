@@ -1,5 +1,12 @@
 # LinkX 项目地图
 
+## 2026-10-11 Wave 11 / LxDescriptions Demo 控件密度阶段性收口
+
+- Demo 控件区新增“布局”组名，数据状态改用带标签的 `LxSelect`，保留边框和 HUD 开关；对应 E2E 增加分组、边框生效、375/320px 无溢出和键盘状态切换断言。
+- `lx-descriptions.test.ts` 6/6、文档 E2E 3/3、`linkx-fe` 类型检查、目标 Prettier、修后代码复审和 `git diff --check` 通过。业务 API、路由、权限键和 Vue3 宿主未修改。
+- Assessment A 为 31/40（Good），Assessment B 三个 detector 为有效 `[]`/空 stderr/exit 0；Edge 新 profile 启动失败，overlay 未注入，因此本波是阶段性 Critique，不能记为正式视觉通过。A/B/代码复审与 snapshot/trend 见 `.impeccable/critique/lxdescriptions-p2-2026-10-11/` 和 `.impeccable/critique/2026-10-10T18-32-43Z__kx-fe-src-components-lxdescriptions-demo-basic-vue.md`。
+- 下一入口为当前版 `LxVirtualTree` 固定插槽行高、长文本/块级插槽、滚动偏移和焦点恢复回归，并联跑 TransferPanel；UI-10 全库矩阵、Vue3 `element-plus` 删除、权限宿主和真实联调继续开放。
+
 ## 2026-10-11 Wave 10 / TransferPanel 选择框与桌面行密度复验完成
 
 - `LxVirtualTree` 和 TransferPanel 页脚复选框的可见框统一锁定为 14×14px。树节点控制区桌面为 24×24px、窄屏为 44×44px；页脚使用 `LxCheckbox` 标签点击区，桌面最小高度为 32px、无悬停设备为 44px，宽度随标签内容变化。

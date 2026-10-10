@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-11 lx-ui Wave 11 / LxDescriptions Demo 控件密度阶段性收口
+
+- `LxDescriptions` Demo 已补可见布局组名，数据状态改用 `LxSelect`；文档 E2E 3/3 覆盖状态切换、边框生效、375/320px 无溢出、HUD、减少动效和键盘路径。组件单测 6/6，类型、格式、代码复审和差异检查通过。
+- 修后复审关闭了选择器键盘回归 P2 和 Element Plus 内部类名交互定位 P3。A 31/40；B 的三个 detector 均为有效 `[]`/空 stderr/exit 0，但 Edge 启动失败导致 overlay 缺失，正式 Critique 保持未关闭。
+- 不代表 Vue3 业务详情页已经替换、权限菜单已联调或 Element Plus 可删除；下一项先复验当前 `LxVirtualTree` 并联跑 TransferPanel。
+
 ## 2026-10-11 lx-ui Wave 10 / TransferPanel 组件库复验完成
 
 - lx-ui 的 `LxVirtualTree`/`LxTransferPanel` 复选框视觉盒已定为 14×14px，树节点桌面/窄屏点击区保留 24×24px / 44×44px；页脚继承开关继续由 `LxCheckbox` label 提供点击区。

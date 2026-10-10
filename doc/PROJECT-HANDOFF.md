@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-11] Wave 11 交接：LxDescriptions Demo 控件密度阶段性收口
+
+- **完成范围**：`linkx-fe/src/components/LxDescriptions/demo/basic.vue` 增加布局组名，数据状态改用 `LxSelect`；`lx-descriptions-docs.spec.ts` 覆盖分组、边框、375/320px、状态恢复和键盘选择。
+- **验证**：组件单测 6/6、文档 E2E 3/3、类型、目标格式、修后代码复审和 `git diff --check` 通过。代码复审原 P2/P3 已关闭：交互定位统一使用可访问 `combobox`，键盘路径为 Enter/ArrowDown/Enter。
+- **审查边界**：A 31/40，有桌面/窄屏截图；B 三个 detector 合法 `[]`、空 stderr、exit 0，但 Edge 新 profile 启动失败、overlay 未注入，不能登记正式视觉 Critique。证据与报告见 `.impeccable/critique/lxdescriptions-p2-2026-10-11/`。
+- **下一步**：冻结并复验当前 `LxVirtualTree` 的自定义 node 插槽固定行高、长文本、滚动和焦点，联跑 TransferPanel；继续保持 Vue3 页面替换和权限/真实后端联调后置。
+
 ## [2026-10-10] Wave 9 正式交接：LxUpload 回灌 UID 与公开 abort
 
 - **完成范围**：补充无 UID 文件生成 fallback UID、父级原样回灌后调用公开 `abort(file?)` 的组合回归；验证请求取消、队列状态复位和受控值 UID 保持一致。

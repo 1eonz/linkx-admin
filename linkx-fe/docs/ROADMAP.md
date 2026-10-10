@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-11 Wave 11 / LxDescriptions Demo 控件密度阶段性收口
+
+- Demo 已将布局控制增加可见组名，数据状态统一为带标签的 `LxSelect`，保留边框、HUD、加载/空/错误/重试演示；状态 E2E 使用可访问 `combobox` 并覆盖键盘打开、移动和确认。
+- 单测 6/6、文档 E2E 3/3、类型、目标格式和差异检查通过；A 31/40。B 三个 detector 为合法 `[]`/空 stderr/exit 0，但 Edge 启动失败，未形成 overlay，正式 Critique 仍未关闭。
+- 后续 P1/P2：状态选项可发现性、窄屏首屏控件密度、HUD 影响范围和复制入口触达高度；下一项为当前版 `LxVirtualTree` 固定插槽行高与 TransferPanel 联回归。
+
 ## 2026-10-11 Wave 10 / TransferPanel 密度复验完成
 
 - 已修复复选框视觉尺寸，树节点元数据可在 820px 文档预览列宽内收缩；折叠的 Demo 状态/主题区显示当前选择摘要。

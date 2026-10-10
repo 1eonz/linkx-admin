@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-11 Wave 11 / LxDescriptions Demo 控件密度阶段性收口
+
+- 完成 Demo 控件分组：布局增加可见组名，数据状态由平铺按钮改为 `LxSelect`，边框和 HUD 继续用复选框；E2E helper 使用可访问 `combobox`，新增 Enter、ArrowDown、Enter 键盘状态切换。
+- 验证：组件单测 6/6，文档 E2E 3/3，`linkx-fe` `vue-tsc --noEmit`、目标 Prettier、修后代码复审和 `git diff --check` 通过。API 链式 `.then().catch().finally()` 规则不变。
+- Assessment A 31/40；B 的 basic/index/docs 三个 detector 均为 `[]`、stderr 空、退出码 0，但 Edge 启动失败导致没有 overlay，故只登记阶段性 Critique。综合报告 `.impeccable/critique/lxdescriptions-p2-2026-10-11/final-report.md`，snapshot/trend 已写入根目录。
+- 遗留：首屏控件密度、状态可发现性、HUD 影响范围和复制触达高度列为后续 P1/P2；下一波进入 VirtualTree 当前版固定插槽行高与 TransferPanel 联回归。
+
 ## 2026-10-10 Wave 9 / LxUpload 回灌 UID 与公开 abort 回归完成
 
 - 已确认 fallback UID 在父级回灌后仍可由公开 `abort(file?)` 精确定位；新增组合回归，验证请求取消、队列复位和受控值保持一致。
