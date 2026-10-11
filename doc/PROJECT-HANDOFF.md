@@ -1,5 +1,16 @@
 # LinkX 项目交接记录
 
+## [2026-10-11] UI-10 / Wave 12 交接：LxMetricCard 与 LxSectionTitle
+
+- **目标**：完成指标卡与区块标题的当前版设计、行为、无障碍、窄屏和动效审查，并修复复评发现的契约缺口。
+- **改动文件**：`linkx-fe/src/components/LxMetricCard/index.vue`、`LxSectionTitle/index.vue`/`types.ts`/Demo、`LxTag/index.vue`；`other-admin/admin-vue3/src/components/SectionTitle/index.vue`；对应中文文档、单测和文档 E2E；`linkx-fe/src/index.ts` 增加 `LxSectionTitleHeadingLevel` 根出口。
+- **完成内容**：指标状态读屏文本和进度 ARIA；标题层级、副标题、长标题换行和 Demo 键盘反馈；LxTag 紧凑尺寸对齐设计；适配器保留旧 props/slots 并透传新层级类型。
+- **实际验证**：定向单测 32/32、文档 E2E 4/4、宿主/lx-ui 类型检查、203 modules 库构建、VitePress 构建、Vue3 生产构建、目标 ESLint/Prettier、差异检查通过。Impeccable A 37/40；B 三 detector `[]`/空 stderr/exit 0，10 个视图 overlay 成功；代码复审无 P0–P2。
+- **审查说明**：B 的 `cramped-padding` 指向示例 LxTag，`2px 6px` 有 `design/区块标题 SectionTitle/code.html` 依据；窄屏 Props 表格只在自身容器滚动。不能把 detector `[]` 单独当作视觉通过。
+- **未完成/阻塞**：Vue3 详情抽屉 6 处 MetricCard 和配置页真实 SectionTitle 组合回归；真实后端、权限、读屏器和上传协议；全库 UI-10；Element Plus 删除门禁。4174 未触碰。
+- **下一步**：对 `LxDescriptions` 当前版补正式 A/B/overlay/snapshot/trend；再按组件矩阵处理剩余基础控件和页面宿主替换。
+- **提交范围**：第一笔仅本波组件、适配器、测试和组件文档，使用 `fix(lx-ui): ...`；第二笔仅计划、交接、审计、迁移和 Impeccable 综合证据，使用 `docs(project): ...`。提交前复跑目标门禁并推送 `origin/main`。
+
 ## [2026-10-11] Wave 11 交接：LxVirtualTree 插槽行布局与 TransferPanel 联回归完成
 
 - **完成范围**：`LxVirtualTree` 新增公开 `rowLayout`、`nodeSummary`、`LxVirtualTreeNodeSlotProps` 和 `LxVirtualTreeSlots`；`stacked`/`responsive` 统一行高、虚拟占位、滚动偏移和焦点恢复。`LxTransferPanel` 已改用该公开契约，移除树行元信息的 `:deep` 覆盖；窄屏长名称提供“查看全文/收起”。

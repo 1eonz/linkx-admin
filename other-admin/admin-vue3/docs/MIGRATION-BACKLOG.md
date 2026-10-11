@@ -1,5 +1,12 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-11 lx-ui Wave 12 / MetricCard 与 SectionTitle 组件库收口
+
+- `LxMetricCard` 与 `LxSectionTitle` 已完成当前版组件库审查；适配器透传标题层级并由根入口导出 `LxSectionTitleHeadingLevel`。本波未修改业务 API、路由、权限键或 Element Plus 依赖。
+- 单测 32/32、文档 E2E 4/4，类型、构建、文档、目标格式/Lint 通过；A 37/40，B 三 detector 合法 `[]`/空 stderr/exit 0，10 个浏览器视图 overlay 完成，代码复审无 P0–P2。
+- `ClientDetailDrawer.vue` 的 6 处 MetricCard 与配置页 SectionTitle 仍需逐页核对旧 props/slots、真实权限状态、请求 loading/error、抽屉窄屏布局；库级证据不能替代宿主迁移。
+- 下一步先完成 `LxDescriptions` 正式 A/B 和后续 P2，再按矩阵替换宿主控件；Vue3 `element-plus` 继续保留，权限中心、字段权限和引导页后置。
+
 ## 2026-10-11 lx-ui Wave 11 / LxVirtualTree 插槽布局与 TransferPanel 联回归完成
 
 - lx-ui 已公开 `LxVirtualTree` 的 `rowLayout`、`nodeSummary` 和插槽 scope 类型；`LxTransferPanel` 已采用公开行布局，窄屏长名称支持键盘全文展开。该波没有修改 Vue3 业务页面、API、路由、权限键或 `element-plus` 依赖。

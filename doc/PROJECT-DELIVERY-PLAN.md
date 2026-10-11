@@ -1,5 +1,14 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-11 UI-10 / Wave 12 LxMetricCard 与 LxSectionTitle 正式收口
+
+- 完成 `LxMetricCard` 状态读屏文本、进度 ARIA、边界/RTL/减少动效和窄屏处理；保留旧 `valueType`、`title`、`footer`、`extra` props/slots 契约。
+- 完成 `LxSectionTitle` `headingLevel`、副标题、插槽、长标题换行、Demo 键盘反馈和 `aria-live`；Vue3 适配器透传标题层级，并从 lx-ui 根入口导出 `LxSectionTitleHeadingLevel`。
+- 按设计稿修正 `LxTag` 紧凑档为 `11px/16px`、上下 `2px`、左右 `6px`；B 的 `cramped-padding` 命中与设计稿一致，登记为观察项而非缺陷。
+- 验证：定向单测 **32/32**、文档 E2E **4/4**、Vue3/lx-ui 类型检查、库构建 **203 modules**、VitePress 构建、Vue3 生产构建、目标 ESLint/Prettier 和 `git diff --check` 通过。API 请求链保持 `.then().catch().finally()`。
+- Impeccable A **37/40（Excellent）**；B 三个 detector 均为合法 JSON `[]`、stderr 空、退出码 `0`，10 个独立浏览器视图完成注入与 overlay；Puppeteer 专用路径缺失，Playwright Core + Chrome 替代采集成功。综合报告见 `.impeccable/critique/metric-section-wave-2026-10-11/final-report.md`，A/B/代码复审证据位于同目录。
+- 本波不关闭 UI-10 全库计数、不代表 Vue3 宿主页面已替换、不代表真实权限/读屏器/后端联调完成；保留宿主 `element-plus`。下一步先处理仍为阶段性状态的 `LxDescriptions` 正式 A/B，再按矩阵推进剩余组件。
+
 ## 2026-10-11 Wave 11 / LxVirtualTree 插槽布局与 TransferPanel 联回归完成
 
 - 完成 `LxVirtualTree` 公开 `rowLayout`、`nodeSummary` 和 `LxVirtualTreeNodeSlotProps`/`LxVirtualTreeSlots` 契约；`stacked` 与 `responsive` 的行高、虚拟占位、滚动定位和焦点恢复使用同一几何规则。`LxTransferPanel` 改用公开行布局，不再通过 `:deep` 覆盖树行元信息。

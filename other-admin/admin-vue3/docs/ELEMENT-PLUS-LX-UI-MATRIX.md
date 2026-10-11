@@ -1,5 +1,12 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-11 UI-04 前置组件证据：MetricCard 与 SectionTitle
+
+- `LxMetricCard` 已具备旧宿主 `valueType`/`title`/`footer`/`extra` 兼容层和进度可访问性；`LxSectionTitle` 适配器已透传 `headingLevel`、`size`、`tag`、`tagType`，并补齐根入口类型出口。
+- 组件库证据：定向单测 32/32、文档 E2E 4/4、A 37/40、B 三 detector 合法 `[]`/空 stderr/exit 0、10 个视图 overlay、代码复审无 P0–P2。库级完成不等于宿主替换完成。
+- `ClientDetailDrawer.vue` 中 6 处 MetricCard 标记为 **待 UI-04 宿主回归**；配置页 SectionTitle 同样需核对真实组合、权限反馈、loading/error、插槽和窄屏，不得只改标签名。
+- 当前 UI-10 全库门禁未完成，Vue3 `element-plus` 直接依赖与 `@element-plus/icons-vue` 保持；只有剩余组件、宿主组合回归和整站 Impeccable 完成后才评估删除。
+
 ## 2026-10-09 Wave 7 当前状态
 
 - Wave 7 `LxTransferPanel`/`LxVirtualTree` 定向单测合计 **64/64**、`LxTransferPanel` 文档 E2E **29/29**，VirtualTree 文档 E2E 的 13 项单独统计；`panelHeight` 默认 380px、最小 240px，Demo 默认 240px，长名称展开和反选浮层定位已修复。指定类型、Lint、格式、构建检查已通过；独立代码复审无 P0–P3。Assessment A **33/40**；Assessment B 两个 detector 均为有效 `[]`/空 stderr/exit 0，并完成独立浏览器证据。完整材料见 `.impeccable/critique/wave7-transferpanel-2026-10-09/`。

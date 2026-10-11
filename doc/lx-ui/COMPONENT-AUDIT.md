@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-11 UI-10 / Wave 12 LxMetricCard 与 LxSectionTitle 正式复核
+
+- `LxMetricCard` 完成设计稿对照、状态读屏、进度 ARIA、趋势图标、RTL、减少动效和 320/375px 验收；`LxSectionTitle` 完成三变体、标题层级、副标题/插槽、长标题和键盘反馈验收。
+- A **37/40**；B 三个 detector 输出均为合法 `[]`、stderr 空、退出码 `0`，10 个新浏览器 context 的注入/overlay/DOM 证据完整；独立代码复审关闭根入口类型缺口后无 P0–P2。证据见 `.impeccable/critique/metric-section-wave-2026-10-11/`。
+- LxTag 紧凑档 `padding: 2px 6px` 是设计稿 `py-0.5 px-1.5` 的实现，B 的紧凑留白命中保留为设计观察项；不因 detector 数字改规格。
+- 状态：**组件库当前版正式复核完成，宿主组合回归待 UI-04**。UI-10 全库 52 项仍不因本波增加关闭数；权限、真实联调和 Vue3 Element Plus 删除继续后置。
+
 ## 2026-10-11 UI-10 / Wave 11 LxVirtualTree 插槽布局与 TransferPanel 联回归
 
 `LxVirtualTree` 已补齐 `rowLayout`、`nodeSummary`、公开插槽 scope 类型及固定行虚拟化契约；`LxTransferPanel` 改用公开行布局，移除树行元信息的 `:deep` 依赖，窄屏长名称提供全文展开入口。定向单测 **67/67**、VirtualTree 文档 E2E **14/14**、TransferPanel 文档 E2E **33/33**，类型、203 modules 构建、VitePress、Vue3 生产构建和目标格式/Lint 通过。

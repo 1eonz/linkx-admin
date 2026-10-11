@@ -1,5 +1,13 @@
 # lx-ui 路线图
 
+## 2026-10-11 UI-10 / Wave 12 LxMetricCard 与 LxSectionTitle 正式收口
+
+- `LxMetricCard` 已补正常/成功/警告/危险读屏文本、进度 ARIA、0–100 边界、RTL 和减少动效；旧宿主 `valueType`、`title`、`footer`、`extra` props/slots 保留。
+- `LxSectionTitle` 已补 `headingLevel`、副标题、插槽、320/375px 长标题换行和 Demo “查看”键盘反馈；Vue3 适配器与 `LxSectionTitleHeadingLevel` 根入口类型同步。
+- `LxTag` small 为 `11px/16px`、上下 2px、左右 6px，来自设计稿 `py-0.5 px-1.5`。B 的 `cramped-padding` 命中因此记录为设计依据观察项。
+- 定向单测 **32/32**、文档 E2E **4/4**、类型、203 modules 构建、VitePress、Vue3 生产构建、目标 ESLint/Prettier 和差异检查通过。A **37/40**；B 三 detector 为合法 `[]`/空 stderr/exit 0，10 个视图 overlay 成功；代码复审无 P0–P2。报告见 `.impeccable/critique/metric-section-wave-2026-10-11/`。
+- 本波不关闭 UI-10 全库矩阵或宿主迁移；下一项是 `LxDescriptions` 正式 A/B，随后继续基础控件和 Vue3 页面组合回归。宿主 `element-plus`、权限和真实后端继续保留/后置。
+
 ## 2026-10-11 Wave 11 / LxVirtualTree 插槽布局与 TransferPanel 联回归完成
 
 - `LxVirtualTree` 新增 `rowLayout`、`nodeSummary` 及公开插槽类型；`stacked`/`responsive` 统一固定行高和虚拟占位，`node` 插槽限定为展示型元信息，完整摘要通过 `nodeSummary` 暴露给辅助技术和标题提示。

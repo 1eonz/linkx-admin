@@ -1,5 +1,12 @@
 # LinkX 后续任务完整拆分与执行规范
 
+## 2026-10-11 已执行波次：LxMetricCard + LxSectionTitle
+
+- **实现**：完成状态语义、进度可访问性、标题语义层级、长标题响应式、Demo 键盘反馈、适配器类型透传和公共类型根出口；LxTag 紧凑档遵循设计稿。
+- **证据**：A 37/40；B detector 三件套合法 `[]`/空 stderr/exit 0，10 个浏览器视图 overlay 成功；代码复审无 P0–P2；定向单测 32/32、文档 E2E 4/4 和构建门禁通过。
+- **记录规则**：B 的 `[]` 只表示静态零命中，报告必须同时保存 stderr、退出码、浏览器注入、overlay 和截图；本波 Puppeteer 缺失已记录，Playwright 替代证据完整。API 继续 `.then().catch().finally()`，新增文档和注释使用中文。
+- **下一波顺序**：1）LxDescriptions 当前版正式 A/B 和代码复审；2）补其 P1/P2（控件首屏密度、状态可发现性、HUD 范围、复制触达）并有界复验；3）继续基础控件严格矩阵；4）库级门禁完成后才进入 Vue3 Element Plus 替换；权限中心、文本/字段权限和引导页继续后置。
+
 ### 2026-10-10 Wave 9 当前交接：LxUpload 回灌 UID/公开 abort 已完成
 
 - 已补无 UID 文件生成 fallback UID、父级原样回灌后通过公开 `abort()` 取消并复位的组合回归；LxUpload 单测 38/38 通过。

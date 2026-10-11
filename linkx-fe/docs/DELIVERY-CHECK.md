@@ -1,5 +1,13 @@
 # lx-ui 交付核查
 
+## 2026-10-11 UI-10 / Wave 12 LxMetricCard 与 LxSectionTitle
+
+- 当前版组件、Demo、中文文档和 Vue3 SectionTitle 适配器已同步；公共 `LxSectionTitleHeadingLevel` 已从根入口导出。
+- 定向单测 **32/32**、文档 E2E **4/4**、类型/库构建（203 modules）/VitePress/Vue3 生产构建、目标格式和 ESLint 通过。
+- Assessment A **37/40（Excellent）**；Assessment B 三个 detector 均为合法 JSON `[]`、stderr 为空、退出码 0；10 个独立视图完成注入、扫描和可见 overlay。Puppeteer 缺失已记录，Playwright Core + Chrome 证据完整；代码复审无 P0–P2。
+- `cramped-padding` 指向 SectionTitle 示例内 LxTag，2px/6px 与设计稿一致；Props 表格内部滚动及 HUD 令牌命中归属于文档/主题层。`[]` 不单独代表正式通过。
+- 真实宿主组合、后端权限、读屏器、全库 UI-10 和 Element Plus 删除门禁继续开放；下一检查批次为 `LxDescriptions` 当前版正式复验。
+
 ## 2026-10-11 Wave 11 / LxVirtualTree 插槽布局与 TransferPanel 联回归完成
 
 - `LxVirtualTree` 已完成公开行布局和插槽摘要契约；`LxTransferPanel` 使用 `rowLayout="responsive"`，不再通过 `:deep` 覆盖树行。窄屏长名称支持“查看全文/收起”，Demo 高级操作按数据定位与边界外观分组。

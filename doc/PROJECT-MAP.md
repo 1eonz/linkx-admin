@@ -1,5 +1,13 @@
 # LinkX 项目地图
 
+## 2026-10-11 UI-10 / Wave 12 LxMetricCard 与 LxSectionTitle
+
+- **组件入口**：`linkx-fe/src/components/LxMetricCard/` 与 `LxSectionTitle/`；设计源为 `design/指标卡 MetricCard/`、`design/区块标题 SectionTitle/`；中文 API 位于 `linkx-fe/docs/components/lxmetriccard.md`、`lxsectiontitle.md`。
+- **宿主入口**：`other-admin/admin-vue3/src/components/SectionTitle/index.vue` 已透传 `headingLevel`、`size`、`tag`、`tagType`；`ClientDetailDrawer.vue` 的 6 处 MetricCard 仍在 UI-04 逐页迁移清单中。
+- **验证入口**：`tests/unit/lx-metric-card.test.ts`、`lx-section-title.test.ts`、`lx-tag.test.ts`、`section-title-adapter.test.ts`；文档 E2E 为对应 MetricCard/SectionTitle 规格页。
+- **证据关系**：综合报告 `.impeccable/critique/metric-section-wave-2026-10-11/final-report.md`；A/B/代码复审证据在同目录。公共类型 `LxSectionTitleHeadingLevel` 已从 `linkx-fe/src/index.ts` 导出。
+- **边界**：组件库不请求 API、不持有权限；业务保存、权限状态和真实数据由宿主提供。当前 UI-10 全库仍开放，Vue3 `element-plus` 仍保留。
+
 ## 2026-10-11 Wave 11 / LxVirtualTree 插槽布局与 TransferPanel 联回归完成
 
 - `LxVirtualTree` 已公开 `rowLayout`（`single`/`stacked`/`responsive`）和 `nodeSummary`，同步导出插槽 scope 类型；固定行高、虚拟窗口、滚动定位和焦点恢复使用同一行几何。节点插槽明确为展示型元信息，不承载按钮或链接。
