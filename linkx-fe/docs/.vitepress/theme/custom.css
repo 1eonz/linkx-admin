@@ -151,8 +151,12 @@
   display: none;
 }
 
-.vp-doc .lx-doc-table-scroll-hint {
-  display: none;
+.vp-doc .lx-doc-table-scroll-hint.is-scrollable {
+  display: block;
+  margin: -4px 0 8px;
+  color: var(--lx-text-secondary-strong);
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .vp-doc .lx-switch-props {
@@ -207,14 +211,6 @@
   }
 
   .vp-doc .lx-passwordinput-props-hint {
-    display: block;
-    margin: -4px 0 8px;
-    color: var(--lx-text-secondary-strong);
-    font-size: 12px;
-    line-height: 1.5;
-  }
-
-  .vp-doc .lx-doc-table-scroll-hint {
     display: block;
     margin: -4px 0 8px;
     color: var(--lx-text-secondary-strong);

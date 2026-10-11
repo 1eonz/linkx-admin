@@ -107,6 +107,71 @@ describe('LxDescriptions', () => {
     wrapper.unmount();
   });
 
+  it('makes long values discoverable to keyboard and assistive technology', () => {
+    const wrapper = mount(LxDescriptions, {
+      props: {
+        items: [
+          {
+            key: 'organization',
+            label: '所属组织',
+            value: '市局指挥中心 / 联合情报研判战队以及跨网段联合调度组',
+          },
+        ],
+      },
+    });
+
+    const value = wrapper.get('.lx-descriptions__value-text');
+    expect(value.attributes('tabindex')).toBe('0');
+    expect(value.attributes('aria-label')).toBe('所属组织：市局指挥中心 / 联合情报研判战队以及跨网段联合调度组');
+    wrapper.unmount();
+  });
+
+  it('makes long status descriptions keyboard accessible without clipping the status indicator', () => {
+    const statusDescription = '在线（在岗备勤），当前负责跨辖区视频联动与加密调度';
+    const wrapper = mount(LxDescriptions, {
+      props: {
+        items: [
+          {
+            key: 'status',
+            label: '运行状态',
+            value: statusDescription,
+            statusDot: 'online',
+          },
+        ],
+      },
+    });
+
+    const status = wrapper.get('.lx-status-dot');
+    expect(status.attributes('tabindex')).toBe('0');
+    expect(status.attributes('aria-label')).toBe(statusDescription);
+    expect(status.attributes('title')).toBe(statusDescription);
+    expect(status.classes()).toContain('is-long-value');
+    wrapper.unmount();
+  });
+
+  it('keeps short status descriptions keyboard readable in narrow columns', () => {
+    const wrapper = mount(LxDescriptions, {
+      props: {
+        columns: 3,
+        labelWidth: 112,
+        items: [
+          {
+            key: 'connection',
+            label: '连接状态',
+            value: '在线',
+            statusDot: 'online',
+          },
+        ],
+      },
+    });
+
+    const status = wrapper.get('.lx-status-dot');
+    expect(status.attributes('tabindex')).toBeUndefined();
+    expect(status.attributes('title')).toBe('在线');
+    expect(status.attributes('aria-label')).toBe('在线');
+    wrapper.unmount();
+  });
+
   it('lets a named item slot replace the default value renderer', () => {
     const wrapper = mount(LxDescriptions, {
       props: {

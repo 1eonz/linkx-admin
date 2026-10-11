@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import {
   LxDescriptions,
+  LxEmpty,
+  LxIcon,
   LxSelect,
   type LxDescriptionItem,
   type LxSelectModelValue,
@@ -23,22 +25,29 @@ const hudTheme = ref(false)
 const previewState = ref<PreviewState>('ready')
 let originalDark = false
 let originalHud = false
+let retryTimeout: number | undefined
 
 const items: LxDescriptionItem[] = [
   { key: 'name', label: '姓名', value: '孙志国' },
   { key: 'policeId', label: '警号', value: '005882', copyable: true },
-  { key: 'phone', label: '联系电话', value: '138-0010-8921' },
   {
     key: 'organization',
     label: '所属组织',
     value: '市局指挥中心 / 联合情报研判战队',
     span: 2,
   },
+  { key: 'phone', label: '联系电话', value: '138-0010-8921' },
   { key: 'role', label: '角色分配', value: '一级协同 / 系统副管理员' },
   {
     key: 'status',
     label: '运行状态',
     value: '在线（在岗备勤），当前负责跨辖区视频联动与加密调度',
+    statusDot: 'online',
+  },
+  {
+    key: 'connection',
+    label: '连接状态',
+    value: '在线',
     statusDot: 'online',
   },
   { key: 'createdAt', label: '创建时间', value: '2026-09-22 14:35:10' },
@@ -59,6 +68,11 @@ const items: LxDescriptionItem[] = [
 
 const drawerItems = items.slice(0, 6)
 
+const previewStateLabel = computed(
+  () =>
+    previewStates.find((state) => state.value === previewState.value)?.label,
+)
+
 function isPreviewState(value: LxSelectModelValue): value is PreviewState {
   return (
     typeof value === 'string' &&
@@ -67,7 +81,19 @@ function isPreviewState(value: LxSelectModelValue): value is PreviewState {
 }
 
 function updatePreviewState(value: LxSelectModelValue) {
-  if (isPreviewState(value)) previewState.value = value
+  if (!isPreviewState(value)) return
+  if (retryTimeout !== undefined) window.clearTimeout(retryTimeout)
+  retryTimeout = undefined
+  previewState.value = value
+}
+
+function retryPreview() {
+  if (retryTimeout !== undefined) window.clearTimeout(retryTimeout)
+  previewState.value = 'loading'
+  retryTimeout = window.setTimeout(() => {
+    previewState.value = 'ready'
+    retryTimeout = undefined
+  }, 500)
 }
 
 function setTheme(enabled: boolean) {
@@ -88,6 +114,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  if (retryTimeout !== undefined) window.clearTimeout(retryTimeout)
   if (typeof document === 'undefined') return
   document.documentElement.classList.toggle('dark', originalDark)
   document.documentElement.classList.toggle('lx-theme-hud', originalHud)
@@ -125,14 +152,6 @@ onBeforeUnmount(() => {
           </button>
         </div>
       </div>
-      <label class="lx-descriptions-demo__toggle">
-        <input v-model="bordered" type="checkbox" />
-        网格边框
-      </label>
-      <label class="lx-descriptions-demo__toggle">
-        <input v-model="hudTheme" type="checkbox" />
-        HUD 深色主题（整页）
-      </label>
       <div class="lx-descriptions-demo__control-group">
         <label
           class="lx-descriptions-demo__control-label"
@@ -148,6 +167,25 @@ onBeforeUnmount(() => {
           @update:model-value="updatePreviewState"
         />
       </div>
+      <p class="lx-descriptions-demo__state-summary" aria-live="polite">
+        当前预览：{{ previewStateLabel }}
+      </p>
+      <details class="lx-descriptions-demo__advanced">
+        <summary>更多预览设置</summary>
+        <div class="lx-descriptions-demo__advanced-content">
+          <label class="lx-descriptions-demo__toggle">
+            <input v-model="bordered" type="checkbox" />
+            网格边框
+          </label>
+          <label class="lx-descriptions-demo__toggle">
+            <input v-model="hudTheme" type="checkbox" />
+            HUD 深色主题（整页）
+          </label>
+          <span class="lx-descriptions-demo__advanced-hint">
+            仅影响当前文档示例，离开页面会恢复原主题。
+          </span>
+        </div>
+      </details>
     </div>
 
     <div v-if="previewState === 'ready'" class="lx-descriptions-demo__main">
@@ -169,28 +207,37 @@ onBeforeUnmount(() => {
       role="status"
       aria-busy="true"
     >
-      正在读取详情…
+      <LxIcon name="loading" :size="18" aria-hidden="true" />
+      <span class="lx-descriptions-demo__state-title">正在读取详情…</span>
     </p>
-    <div
+    <LxEmpty
       v-else-if="previewState === 'empty'"
-      class="lx-descriptions-demo__state"
-      role="status"
+      class="lx-descriptions-demo__empty"
+      description="暂无可展示的人员详情。"
+    />
+    <div
+      v-else
+      class="lx-descriptions-demo__state lx-descriptions-demo__error"
+      role="alert"
     >
-      暂无可展示的详情。
-    </div>
-    <div v-else class="lx-descriptions-demo__state is-error" role="alert">
-      <span>详情读取失败。</span>
-      <button type="button" @click="previewState = 'ready'">重试</button>
+      <span>人员档案暂时无法读取。</span>
+      <button type="button" @click="retryPreview">重新读取详情</button>
     </div>
 
-    <section class="lx-descriptions-demo__drawer" aria-label="480 像素详情抽屉">
-      <h3>人员档案</h3>
-      <LxDescriptions
-        :items="drawerItems"
-        layout="two-ends"
-        :label-width="88"
-      />
-    </section>
+    <details
+      v-if="previewState === 'ready'"
+      class="lx-descriptions-demo__drawer"
+    >
+      <summary>480 像素详情抽屉组合示例</summary>
+      <section aria-label="480 像素详情抽屉">
+        <h3>人员档案</h3>
+        <LxDescriptions
+          :items="drawerItems"
+          layout="two-ends"
+          :label-width="88"
+        />
+      </section>
+    </details>
   </section>
 </template>
 
@@ -209,7 +256,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 8px 12px;
 }
 
 .lx-descriptions-demo__control-group {
@@ -229,6 +276,51 @@ onBeforeUnmount(() => {
   width: 136px;
 }
 
+.lx-descriptions-demo__state-summary {
+  align-self: center;
+  margin: 0;
+  color: var(--lx-text-secondary);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.lx-descriptions-demo__advanced {
+  min-width: 0;
+  border: 1px solid var(--lx-border-light);
+  border-radius: var(--lx-radius-sm);
+  background: var(--lx-bg-card);
+}
+
+.lx-descriptions-demo__advanced summary,
+.lx-descriptions-demo__drawer summary {
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  color: var(--lx-text-regular);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 44px;
+}
+
+.lx-descriptions-demo__advanced summary:focus-visible,
+.lx-descriptions-demo__drawer summary:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+.lx-descriptions-demo__advanced-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 0 10px 8px;
+}
+
+.lx-descriptions-demo__advanced-hint {
+  color: var(--lx-text-secondary);
+  font-size: 12px;
+}
+
 .lx-descriptions-demo__segmented {
   display: inline-flex;
   flex-wrap: wrap;
@@ -239,8 +331,7 @@ onBeforeUnmount(() => {
   background: var(--lx-bg-card);
 }
 
-.lx-descriptions-demo__segmented button,
-.lx-descriptions-demo__state button {
+.lx-descriptions-demo__segmented button {
   min-height: 44px;
   padding: 0 10px;
   border: 0;
@@ -275,6 +366,7 @@ onBeforeUnmount(() => {
 
 .lx-descriptions-demo__state {
   display: flex;
+  flex-wrap: wrap;
   min-height: 64px;
   align-items: center;
   justify-content: center;
@@ -284,25 +376,38 @@ onBeforeUnmount(() => {
   color: var(--lx-text-secondary);
 }
 
-.lx-descriptions-demo__state.is-error {
+.lx-descriptions-demo__error {
   color: var(--lx-color-error-strong);
 }
 
-.lx-descriptions-demo__state button {
+.lx-descriptions-demo__state-title {
+  font-weight: 500;
+}
+
+.lx-descriptions-demo__error button {
+  min-height: 44px;
+  padding: 0 10px;
   border: 1px solid var(--lx-border);
+  border-radius: var(--lx-radius-sm);
   background: var(--lx-bg-card);
   color: var(--lx-text-primary);
+  cursor: pointer;
 }
 
 .lx-descriptions-demo__drawer {
+  display: block;
   width: min(480px, 100%);
   max-width: 100%;
   box-sizing: border-box;
   min-width: 0;
   justify-self: end;
-  padding: 16px;
+  padding: 0;
   border: 1px solid var(--lx-border-light);
   background: var(--lx-bg-card);
+}
+
+.lx-descriptions-demo__drawer section {
+  padding: 16px;
 }
 
 .lx-descriptions-demo__drawer h3 {
@@ -327,7 +432,7 @@ onBeforeUnmount(() => {
 }
 
 .lx-descriptions-demo__segmented button:focus-visible,
-.lx-descriptions-demo__state button:focus-visible,
+.lx-descriptions-demo__error button:focus-visible,
 .lx-descriptions-demo__toggle input:focus-visible {
   outline: 2px solid var(--lx-color-primary);
   outline-offset: 2px;
@@ -335,7 +440,7 @@ onBeforeUnmount(() => {
 
 @media (prefers-reduced-motion: reduce) {
   .lx-descriptions-demo__segmented button,
-  .lx-descriptions-demo__state button {
+  .lx-descriptions-demo__error button {
     transition: none;
   }
 }
@@ -343,7 +448,14 @@ onBeforeUnmount(() => {
 @media (max-width: 600px) {
   .lx-descriptions-demo__drawer {
     justify-self: stretch;
+  }
+
+  .lx-descriptions-demo__drawer section {
     padding: 12px;
+  }
+
+  .lx-descriptions-demo__state-summary {
+    flex-basis: 100%;
   }
 }
 </style>

@@ -16,6 +16,13 @@ async function selectLoadingStateByKeyboard(page: Page) {
   await selectTrigger.press('Enter');
 }
 
+async function openAdvancedSettings(page: Page) {
+  const details = page.locator('.lx-descriptions-demo__advanced');
+  if ((await details.getAttribute('open')) === null) {
+    await details.locator('summary').click();
+  }
+}
+
 function contrastRatio(foreground: string, background: string): number {
   const luminance = (color: string) => {
     const channels = color
@@ -71,8 +78,12 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     );
     expect(focusWidth).toBeGreaterThanOrEqual(2);
 
-    const remarks = page.locator('.lx-descriptions__value-text[title]');
+    const remarks = page
+      .locator('.lx-descriptions__item')
+      .filter({ hasText: '业务备注' })
+      .locator('.lx-descriptions__value-text');
     await expect(remarks).toHaveAttribute('title', /跨网段加密调度二级权限/);
+    await expect(remarks).toHaveAttribute('aria-label', /业务备注：/);
   });
 
   test('桌面双列、375px 单列和 480px 抽屉都不产生页面横向溢出', async ({ page }) => {
@@ -90,13 +101,75 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     expect(desktopColumns).toBe(2);
     await expect(page.locator('.lx-descriptions--grid')).toBeVisible();
 
+    const statusDescription = '在线（在岗备勤），当前负责跨辖区视频联动与加密调度';
+    const statusDot = descriptions
+      .locator('.lx-descriptions__item')
+      .filter({ hasText: '运行状态' })
+      .locator('.lx-status-dot');
+    await expect(statusDot).toHaveAttribute('tabindex', '0');
+    await expect(statusDot).toHaveAttribute('title', statusDescription);
+    await expect(statusDot).toHaveAccessibleName(statusDescription);
+    expect(await statusDot.evaluate((element) => getComputedStyle(element).overflow)).toBe('visible');
+    await statusDot.focus();
+    await expect(statusDot).toBeFocused();
+    await expect(statusDot.locator('.lx-status-dot__text')).toHaveCSS('white-space', 'normal');
+    await expect(statusDot.locator('.lx-status-dot__text')).toHaveCSS('overflow', 'visible');
+    const focusedStatusMetrics = await statusDot.evaluate((element) => {
+      const text = element.querySelector<HTMLElement>('.lx-status-dot__text');
+      if (!text) throw new Error('长状态文本节点未渲染');
+      return {
+        height: text.getBoundingClientRect().height,
+        clientHeight: text.clientHeight,
+        scrollHeight: text.scrollHeight,
+        clientWidth: text.clientWidth,
+        scrollWidth: text.scrollWidth,
+      };
+    });
+    expect(focusedStatusMetrics.height).toBeGreaterThan(20);
+    expect(focusedStatusMetrics.scrollHeight).toBeLessThanOrEqual(focusedStatusMetrics.clientHeight);
+    expect(focusedStatusMetrics.scrollWidth).toBeLessThanOrEqual(focusedStatusMetrics.clientWidth);
+
+    const shortStatus = descriptions
+      .locator('.lx-descriptions__item')
+      .filter({ hasText: '连接状态' })
+      .locator('.lx-status-dot');
+    await expect(shortStatus).not.toHaveAttribute('tabindex');
+    await expect(shortStatus).toHaveAttribute('title', '在线');
+    await expect(shortStatus.locator('.lx-status-dot__text')).toHaveCSS('white-space', 'normal');
+
+    await openAdvancedSettings(page);
     const borderedToggle = page.getByLabel('网格边框');
     await borderedToggle.check();
     await expect(descriptions).toHaveClass(/is-bordered/);
     await borderedToggle.uncheck();
     await expect(descriptions).not.toHaveClass(/is-bordered/);
 
+    await page.getByText('480 像素详情抽屉组合示例', { exact: true }).click();
+    const desktopDrawer = await page.locator('.lx-descriptions-demo__drawer').boundingBox();
+    expect(desktopDrawer?.width).toBe(480);
+
     await page.setViewportSize({ width: 375, height: 812 });
+    const mobileLabel = descriptions.locator('.lx-descriptions__label').first();
+    const mobileLabelColor = await mobileLabel.evaluate((element) => getComputedStyle(element).color);
+    expect(contrastRatio(mobileLabelColor, 'rgb(242, 244, 248)')).toBeGreaterThanOrEqual(4.5);
+
+    const tableHints = page.locator('.vp-doc p.lx-doc-table-scroll-hint');
+    await expect(tableHints).toHaveCount(2);
+    for (const index of [0, 1]) {
+      const hint = tableHints.nth(index);
+      await expect(hint).toBeVisible();
+      const table = hint.locator('xpath=following-sibling::table[1]');
+      const tableMetrics = await table.evaluate((element) => ({
+        clientWidth: element.clientWidth,
+        scrollWidth: element.scrollWidth,
+      }));
+      expect(tableMetrics.scrollWidth).toBeGreaterThan(tableMetrics.clientWidth);
+      await expect(table).toHaveAttribute('tabindex', '0');
+      const hintId = await hint.getAttribute('id');
+      if (!hintId) throw new Error('窄屏 API 表格缺少滚动说明 ID');
+      await expect(table).toHaveAttribute('aria-describedby', hintId);
+    }
+
     const toolbar = page.locator('.lx-descriptions-demo__controls');
     const toolbarMetrics = await toolbar.evaluate((element) => ({
       clientWidth: element.clientWidth,
@@ -104,11 +177,8 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     }));
     expect(toolbarMetrics.scrollWidth).toBeLessThanOrEqual(toolbarMetrics.clientWidth);
 
-    await page.getByRole('button', { name: '双列' }).focus();
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
     const stateSelect = page.getByRole('combobox', { name: '数据状态' });
+    await stateSelect.focus();
     await expect(stateSelect).toBeFocused();
     expect(
       await page
@@ -149,6 +219,14 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     }));
     expect(statusMetrics.clientHeight).toBeGreaterThan(20);
     expect(statusMetrics.scrollWidth).toBeLessThanOrEqual(statusMetrics.clientWidth);
+    const mobileCopyButton = descriptions
+      .locator('.lx-descriptions__item')
+      .filter({ hasText: '警号' })
+      .getByRole('button')
+      .first();
+    const mobileCopyBox = await mobileCopyButton.boundingBox();
+    if (!mobileCopyBox) throw new Error('移动端复制按钮未进入可视区域');
+    expect(mobileCopyBox.height).toBeGreaterThanOrEqual(44);
     const drawerBox = await page.getByRole('region', { name: '480 像素详情抽屉' }).boundingBox();
     expect(mobileColumns).toBe(1);
     expect(drawerBox?.width).toBeLessThanOrEqual(375);
@@ -168,16 +246,22 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     await expect(mainPreview).toBeVisible();
     await selectLoadingStateByKeyboard(page);
     await expect(demo.getByRole('status')).toHaveAttribute('aria-busy', 'true');
+    await expect(demo.locator('.lx-icon[data-icon-name="loading"]')).toBeVisible();
     await expect(mainPreview).toHaveCount(0);
     await selectPreviewState(page, '空结果');
-    await expect(demo.getByRole('status')).toHaveText('暂无可展示的详情。');
+    await expect(demo.getByRole('status')).toHaveText('暂无可展示的人员详情。');
+    await expect(demo.getByRole('region', { name: '480 像素详情抽屉' })).toHaveCount(0);
     await selectPreviewState(page, '错误');
-    await expect(demo.getByRole('alert')).toContainText('详情读取失败。');
-    await demo.getByRole('button', { name: '重试' }).click();
+    await expect(demo.getByRole('alert')).toContainText('人员档案暂时无法读取');
+    await expect(demo.locator('.lx-error-banner')).toHaveCount(0);
+    await demo.getByRole('button', { name: '重新读取详情' }).click();
+    await expect(demo.getByRole('status')).toHaveAttribute('aria-busy', 'true');
+    await expect(mainPreview).toHaveCount(0);
     await expect(mainPreview).toBeVisible();
     await selectPreviewState(page, '详情');
     await expect(mainPreview).toBeVisible();
 
+    await openAdvancedSettings(page);
     await page.getByLabel('HUD 深色主题（整页）').check();
     await expect(page.locator('html')).toHaveClass(/lx-theme-hud/);
     const hudLabelColor = await page

@@ -101,9 +101,12 @@ function displayValue(item: LxDescriptionItem): string {
         <slot :name="`item-${item.key}`" :item="item" :value="item.value">
           <LxStatusDot
             v-if="item.statusDot && !isMasked(item)"
+            :class="{ 'is-long-value': Boolean(titleOf(item)) }"
             :status="item.statusDot"
             :size="6"
             :status-desc="displayValue(item)"
+            :title="displayValue(item)"
+            :tabindex="titleOf(item) ? 0 : undefined"
             show-text
           />
           <LxCodeSlot
@@ -118,7 +121,12 @@ function displayValue(item: LxDescriptionItem): string {
           <span
             v-else
             class="lx-descriptions__value-text"
+            :class="{ 'is-long-value': Boolean(titleOf(item)) }"
             :title="titleOf(item)"
+            :aria-label="
+              titleOf(item) ? `${item.label}：${displayValue(item)}` : undefined
+            "
+            :tabindex="titleOf(item) ? 0 : undefined"
           >
             {{ displayValue(item) }}
           </span>
@@ -166,7 +174,7 @@ function displayValue(item: LxDescriptionItem): string {
 
 .lx-descriptions__label {
   overflow-wrap: anywhere;
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
   font-weight: 400;
 }
 
@@ -180,10 +188,27 @@ function displayValue(item: LxDescriptionItem): string {
 
 .lx-descriptions__value-text {
   min-width: 0;
-  overflow: hidden;
   max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.lx-descriptions__value-text.is-long-value {
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.lx-descriptions__value-text.is-long-value:focus-visible {
+  border-radius: var(--lx-radius-sm);
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+.lx-descriptions__value-text.is-long-value:focus {
+  overflow: visible;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 /* 内嵌展示件沿用值列层级，避免子组件的正文令牌冲淡详情值。 */
@@ -194,11 +219,36 @@ function displayValue(item: LxDescriptionItem): string {
   font-weight: inherit;
 }
 
+.lx-descriptions__value :deep(.lx-status-dot.is-long-value:focus) {
+  flex-wrap: wrap;
+  max-width: 100%;
+  border-radius: var(--lx-radius-sm);
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+.lx-descriptions__value
+  :deep(.lx-status-dot.is-long-value:focus .lx-status-dot__text) {
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.lx-descriptions__value :deep(.lx-status-dot:focus-visible) {
+  border-radius: var(--lx-radius-sm);
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
 .lx-descriptions__value :deep(.lx-status-dot__text) {
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
+  overflow-wrap: anywhere;
   color: inherit;
-  text-overflow: ellipsis;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 .lx-descriptions__value :deep(.lx-code-slot) {
@@ -242,8 +292,10 @@ function displayValue(item: LxDescriptionItem): string {
     grid-column: 1;
   }
 
-  .lx-descriptions__value-text {
+  .lx-descriptions__value-text,
+  .lx-descriptions__value-text.is-long-value {
     overflow: visible;
+    overflow-wrap: anywhere;
     text-overflow: clip;
     white-space: normal;
   }
@@ -262,6 +314,27 @@ function displayValue(item: LxDescriptionItem): string {
     overflow-wrap: anywhere;
     text-overflow: clip;
     white-space: normal;
+  }
+
+  .lx-descriptions__value :deep(.lx-code-slot--copyable) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    align-items: center;
+    gap: 0;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 0;
+  }
+
+  .lx-descriptions__value
+    :deep(.lx-code-slot--copyable .lx-code-slot__content) {
+    min-width: 0;
+    padding: 10px 6px;
+  }
+
+  .lx-descriptions__value :deep(.lx-code-slot--copyable .lx-code-slot__icon) {
+    justify-self: center;
+    align-self: center;
   }
 }
 
