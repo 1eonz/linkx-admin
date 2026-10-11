@@ -7,6 +7,17 @@ yarn-error.log*
 package-lock.json
 tests/**/coverage/
 
+# 本地包管理缓存，不纳入仓库
+.pnpm-store/
+
+# Impeccable 运行态目录；正式审查报告与快照仍保留
+**/.impeccable/live/
+**/.impeccable/**/chrome-profile*/
+**/.impeccable/**/browser-profile*/
+**/.impeccable/**/live-root/
+**/.impeccable/**/.live-server-root/
+**/.impeccable/**/.impeccable/
+
 # Editor directories and files
 .idea
 *.suo
