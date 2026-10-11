@@ -1,1 +1,0 @@
-Get-NetTCPConnection -LocalPort 4174 -State Listen | Select-Object LocalAddress,LocalPort,OwningProcess | ConvertTo-Json -Compress
