@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-11] SCOPE / 页面操作引导暂缓执行
+
+- 用户决定页面操作引导暂时不执行，后续确有需要时再恢复。
+- 已同步更新 `doc/GUIDE-CONTENT-PLAN.md`、`doc/PROJECT-DELIVERY-PLAN.md`、`doc/PROJECT-FOLLOWUP-BREAKDOWN.md`、`doc/PROJECT-MAP.md` 和 `doc/lx-ui/MENU-CONFIG-DESIGN.md`：该项不进入当前执行队列、不自动排期、不阻塞 lx-ui 收口或 Vue3 Element Plus 替换；恢复前重新确认页面范围、文案、交互、后端契约和技术方案。
+- 本次仅调整计划备注与交接，不代表页面引导功能已经实现或完成验收。
+
 ## [2026-10-11] Wave 11 交接：LxDescriptions 当前版正式 A/B 收口
 
 - **完成范围**：完成长值和长状态的键盘可读性、状态点完整名称、复制按钮 44px 触控底线、错误重试、窄屏表格焦点/方向键、HUD、主题和 reduced-motion 复核；同步 Demo 分组、中文 API、响应式表格提示、9 项单测和 3 项文档 E2E。
