@@ -33,6 +33,13 @@ const statusLight: Record<LxStatus, string> = {
   error: 'var(--lx-color-error-light)',
   offline: 'var(--lx-color-info-light)',
 }
+const statusBorder: Record<LxStatus, string> = {
+  online: 'var(--lx-color-success-border)',
+  processing: 'var(--lx-border)',
+  busy: 'var(--lx-color-warning-border)',
+  error: 'var(--lx-color-error-border)',
+  offline: 'var(--lx-border)',
+}
 
 const metricValueColors: Record<LxMetricCardStatus, string> = {
   normal: 'var(--lx-color-primary)',
@@ -54,8 +61,24 @@ const metricStatus = computed<LxMetricCardStatus>(() => {
   return 'normal'
 })
 const metricBadge = computed(() => props.badgeText || props.badge)
+const metricStatusDot: Record<LxMetricCardStatus, LxStatus | undefined> = {
+  normal: undefined,
+  success: 'online',
+  warning: 'busy',
+  danger: 'error',
+}
+const metricStatusDotStatus = computed(
+  () => metricStatusDot[metricStatus.value],
+)
+const metricStatusLabel: Record<LxMetricCardStatus, string> = {
+  normal: '正常',
+  success: '成功',
+  warning: '警告',
+  danger: '危险',
+}
 const badgeStyle = computed(() => ({
   '--lx-metric-badge-bg': statusLight[props.badgeStatus],
+  '--lx-metric-badge-border': statusBorder[props.badgeStatus],
 }))
 const metricColorStyle = computed(() => ({
   '--lx-metric-value-color': metricValueColors[metricStatus.value],
@@ -73,10 +96,22 @@ const progressPercent = computed(() => {
     :style="metricColorStyle"
   >
     <header class="lx-metric-card__header">
-      <span class="lx-metric-card__label">
-        <slot v-if="$slots.title" name="title">{{ metricTitle }}</slot>
-        <slot v-else name="label">{{ metricTitle }}</slot>
-      </span>
+      <div class="lx-metric-card__title">
+        <LxStatusDot
+          v-if="metricStatusDotStatus"
+          :status="metricStatusDotStatus"
+          :size="8"
+          :pulse="metricStatusDotStatus === 'online'"
+          aria-hidden="true"
+        />
+        <span class="lx-metric-card__label">
+          <slot v-if="$slots.title" name="title">{{ metricTitle }}</slot>
+          <slot v-else name="label">{{ metricTitle }}</slot>
+        </span>
+        <span class="lx-metric-card__visually-hidden">
+          状态：{{ metricStatusLabel[metricStatus] }}
+        </span>
+      </div>
       <span
         v-if="metricBadge"
         class="lx-metric-card__badge"
@@ -106,28 +141,29 @@ const progressPercent = computed(() => {
       />{{ trend }}
     </p>
 
-    <div
-      v-if="progress !== undefined && (progressLabel || progressValue)"
-      class="lx-metric-card__progress-caption"
-    >
-      <span>{{ progressLabel }}</span>
-      <strong>{{ progressValue }}</strong>
-    </div>
+    <div v-if="progress !== undefined" class="lx-metric-card__progress-section">
+      <div
+        v-if="progressLabel || progressValue"
+        class="lx-metric-card__progress-caption"
+      >
+        <span>{{ progressLabel }}</span>
+        <strong v-if="progressValue">{{ progressValue }}</strong>
+      </div>
 
-    <div
-      v-if="progress !== undefined"
-      class="lx-metric-card__progress"
-      role="progressbar"
-      :aria-label="progressLabel || `${metricTitle || '指标'}进度`"
-      :aria-valuenow="progressPercent"
-      :aria-valuetext="progressValue || `${progressPercent}%`"
-      aria-valuemin="0"
-      aria-valuemax="100"
-    >
-      <span
-        class="lx-metric-card__progress-value"
-        :style="{ '--lx-metric-progress-scale': progressPercent / 100 }"
-      />
+      <div
+        class="lx-metric-card__progress"
+        role="progressbar"
+        :aria-label="progressLabel || `${metricTitle || '指标'}进度`"
+        :aria-valuenow="progressPercent"
+        :aria-valuetext="progressValue || `${progressPercent}%`"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <span
+          class="lx-metric-card__progress-value"
+          :style="{ '--lx-metric-progress-scale': progressPercent / 100 }"
+        />
+      </div>
     </div>
 
     <footer
@@ -172,17 +208,41 @@ const progressPercent = computed(() => {
   border-radius: var(--lx-radius-md);
   background: var(--lx-bg-card);
   box-shadow: var(--lx-shadow-card);
+  transition: box-shadow var(--lx-transition);
+}
+
+@media (hover: hover) {
+  .lx-metric-card:hover {
+    box-shadow: var(--lx-shadow-pop);
+  }
 }
 
 .lx-metric-card__header,
 .lx-metric-card__value-row,
-.lx-metric-card__footer,
-.lx-metric-card__progress-caption {
+.lx-metric-card__footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--lx-space-sm);
   min-width: 0;
+}
+
+.lx-metric-card__title {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: var(--lx-space-xs);
+}
+
+.lx-metric-card__visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .lx-metric-card__label {
@@ -191,6 +251,7 @@ const progressPercent = computed(() => {
   overflow-wrap: anywhere;
   color: var(--lx-text-regular);
   font-size: 13px;
+  font-weight: 500;
   line-height: 20px;
 }
 
@@ -209,6 +270,7 @@ const progressPercent = computed(() => {
   align-items: center;
   gap: var(--lx-space-xs);
   padding: 1px var(--lx-space-sm);
+  border: 1px solid var(--lx-metric-badge-border);
   border-radius: var(--lx-radius-sm);
   background: var(--lx-metric-badge-bg);
   color: var(--lx-text-regular);
@@ -269,6 +331,25 @@ const progressPercent = computed(() => {
   background: var(--lx-border-light);
 }
 
+.lx-metric-card__progress-section {
+  display: grid;
+  gap: var(--lx-space-sm);
+  padding-top: var(--lx-space-sm);
+  border-top: 1px solid var(--lx-border-light);
+}
+
+.lx-metric-card__progress-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lx-space-sm);
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--lx-text-regular);
+  font-size: 12px;
+  line-height: 18px;
+}
+
 .lx-metric-card__progress-value {
   display: block;
   width: 100%;
@@ -323,7 +404,17 @@ const progressPercent = computed(() => {
   --lx-metric-error-text: var(--lx-color-error-strong);
 }
 
-:global([dir='rtl']) .lx-metric-card__progress-value {
+:dir(rtl) .lx-metric-card__progress-value {
   transform-origin: right center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-metric-card {
+    transition: box-shadow 0.01ms linear;
+  }
+
+  .lx-metric-card__progress-value {
+    transition: transform 0.01ms linear;
+  }
 }
 </style>

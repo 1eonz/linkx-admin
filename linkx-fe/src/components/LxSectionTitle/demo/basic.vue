@@ -71,10 +71,10 @@ const lastAction = ref('标题仅负责分组和说明，不加载业务数据�
         title="预警推送策略"
         variant="plain"
         :size="size"
-        subtitle="用于配置警情处置流程与责任人分派机制。"
         tag="待确认"
         tag-type="warning"
       >
+        <template #subtitle> 用于配置警情处置流程与责任人分派机制。 </template>
         <template #extra>
           <button
             class="lx-section-title-demo__action"
@@ -93,13 +93,18 @@ const lastAction = ref('标题仅负责分组和说明，不加载业务数据�
     >
       <LxSectionTitle
         title="辖区协同指挥中心公共安全设备与网络凭证综合配置"
+        :heading-level="4"
         variant="border"
         :size="size"
         tag="配置中"
         tag-type="info"
       >
         <template #extra>
-          <button class="lx-section-title-demo__action" type="button">
+          <button
+            class="lx-section-title-demo__action"
+            type="button"
+            @click="lastAction = '查看辖区协同指挥中心配置详情'"
+          >
             查看
           </button>
         </template>

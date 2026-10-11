@@ -10,7 +10,7 @@ import type { Component } from 'vue';
 
 defineOptions({ name: 'SectionTitle' });
 
-interface Props extends Pick<LxSectionTitleProps, 'size' | 'tag' | 'tagType'> {
+interface Props extends Pick<LxSectionTitleProps, 'headingLevel' | 'size' | 'tag' | 'tagType'> {
   title?: string;
   icon?: Component;
   iconColor?: string;
@@ -50,6 +50,7 @@ const lxIconName = computed(() => {
   <LxSectionTitle
     :title="title"
     :variant="variant"
+    :heading-level="headingLevel"
     :size="size"
     :icon="lxIconName"
     :icon-color="iconColor"

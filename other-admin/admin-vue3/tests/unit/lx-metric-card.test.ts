@@ -103,4 +103,43 @@ describe('LxMetricCard', () => {
     expect(omitted.find('[role="progressbar"]').exists()).toBe(false);
     omitted.unmount();
   });
+
+  it('shows a semantic status dot and keeps footer label/value fallbacks readable', () => {
+    const wrapper = mount(LxMetricCard, {
+      props: {
+        title: '待处理警情',
+        status: 'warning',
+        footerLabel: '处置进度',
+        footerValue: '待复核',
+      },
+    });
+
+    expect(wrapper.get('.lx-metric-card__title .lx-status-dot--busy').attributes('aria-hidden')).toBe('true');
+    expect(wrapper.get('.lx-metric-card__visually-hidden').text()).toBe('状态：警告');
+    expect(wrapper.get('.lx-metric-card__footer').text()).toBe('处置进度待复核');
+    wrapper.unmount();
+  });
+
+  it.each([
+    ['normal', '正常'],
+    ['success', '成功'],
+    ['warning', '警告'],
+    ['danger', '危险'],
+  ] as const)('announces the %s status without relying on color', (status, label) => {
+    const wrapper = mount(LxMetricCard, { props: { status } });
+
+    expect(wrapper.get('.lx-metric-card__visually-hidden').text()).toBe(`状态：${label}`);
+    wrapper.unmount();
+  });
+
+  it('does not render an empty progress value when only the label is provided', () => {
+    const wrapper = mount(LxMetricCard, {
+      props: { title: '在线设备', progress: 0, progressLabel: '在线率' },
+    });
+
+    expect(wrapper.get('.lx-metric-card__progress-caption').text()).toBe('在线率');
+    expect(wrapper.get('[role="progressbar"]').attributes('aria-valuetext')).toBe('0%');
+    expect(wrapper.find('.lx-metric-card__progress-caption strong').exists()).toBe(false);
+    wrapper.unmount();
+  });
 });

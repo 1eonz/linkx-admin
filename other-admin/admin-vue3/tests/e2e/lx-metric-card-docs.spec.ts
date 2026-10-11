@@ -26,12 +26,26 @@ test.describe('LxMetricCard 文档示例', () => {
     await expect(page.getByText('高危未处理警情', { exact: true })).toBeVisible();
     await expect(page.getByText('今日警情总数', { exact: true })).toBeVisible();
     await expect(page.getByText('较昨日增加 12%', { exact: true })).toBeVisible();
+    await expect(page.locator('.metric-card-demo__grid .lx-metric-card__title .lx-status-dot')).toHaveCount(3);
+    await expect(page.locator('.metric-card-demo__grid .lx-metric-card__visually-hidden')).toHaveText([
+      '状态：成功',
+      '状态：警告',
+      '状态：危险',
+    ]);
     await expect(page.locator('.metric-card-demo__grid [data-icon-name="arrow-up"]')).toHaveCount(2);
     await expect(page.locator('.metric-card-demo__grid [data-icon-name="arrow-down"]')).toHaveCount(1);
 
     const progress = page.getByRole('progressbar', { name: '在线健康指标' });
     await expect(progress).toHaveAttribute('aria-valuenow', '99.9');
     await expect(progress).toHaveAttribute('aria-valuetext', '12,842 / 12,850 台');
+    await expect(progress.locator('xpath=..')).toHaveCSS('border-top-width', '1px');
+  });
+
+  test('兼容宿主 valueType 时仍向屏幕阅读器提供状态含义', async ({ page }) => {
+    await page.goto('/components/lxmetriccard');
+
+    const legacyCard = page.locator('.metric-card-demo__legacy .lx-metric-card');
+    await expect(legacyCard.locator('.lx-metric-card__visually-hidden')).toHaveText('状态：警告');
   });
 
   test('在 320px 下保持卡片边界，主题和减少动效令牌生效', async ({ page }) => {
@@ -137,6 +151,22 @@ test.describe('LxMetricCard 文档示例', () => {
     expect(Number.parseFloat(transition)).toBeLessThanOrEqual(0.001);
     expect(transitionProperty).toBe('transform');
     expect(Number.parseFloat(iconTransition)).toBe(0);
+
+    await page.locator('html').evaluate((element) => {
+      element.setAttribute('dir', 'rtl');
+    });
+    await expect
+      .poll(() =>
+        card.locator('.lx-metric-card__progress-value').evaluate((element) => {
+          const styles = getComputedStyle(element);
+          const [originX] = styles.transformOrigin.split(' ');
+          return Math.abs(Number.parseFloat(originX) - element.getBoundingClientRect().width) <= 1;
+        }),
+      )
+      .toBe(true);
+    await page.locator('html').evaluate((element) => {
+      element.removeAttribute('dir');
+    });
     await page.screenshot({ path: 'test-results/lx-metric-card-320.png' });
   });
 });

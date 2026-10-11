@@ -54,11 +54,11 @@ import Basic from '../../src/components/LxMetricCard/demo/basic.vue';
 
 ## 设计与边界
 
-- 标题为 13px、说明和单位为 12px，文字使用高对比正文令牌；指标值使用 24px 等宽字体和 `tabular-nums`。卡片圆角、阴影、边框、间距和颜色均使用 lx-ui 令牌。
+- 标题为 13px、说明和单位为 12px，文字使用高对比正文令牌；带 `status` 语义时标题前显示状态点，并为屏幕阅读器提供“状态：正常/成功/警告/危险”文本，指标值使用 24px 等宽字体和 `tabular-nums`。卡片圆角、阴影、边框、间距和颜色均使用 lx-ui 令牌，桌面悬停时抬升至 pop 阴影。
 - 数值和进度条共享 `status` 颜色：normal 使用主色，success 使用成功色，warning 使用警告色，danger 使用错误色。角标另由 `badgeStatus` 控制。
 - 浅色主题下 warning 数值会加深至至少 3:1 的大号文字对比度；HUD 主题沿用警告强调令牌。趋势说明保留 `trendStatus` 语义色，并在浅色主题下加深到至少 4.5:1；方向使用 LxIcon `arrow-up` / `arrow-down` 并由文案说明。
-- 进度条高度为 6px。进度值超出范围时视觉宽度和 `aria-valuenow` 都限制到 `0–100`；`progressLabel` 和 `progressValue` 分别映射到 `aria-label` 与 `aria-valuetext`。
+- 进度区以浅色分隔线与卡片主体分开，进度条高度为 6px。进度值超出范围时视觉宽度和 `aria-valuenow` 都限制到 `0–100`；`progressLabel` 和 `progressValue` 分别映射到 `aria-label` 与 `aria-valuetext`。
 - 进度填充使用 `transform` 缩放固定轨道，不改变周边布局；`dir="rtl"` 时从右侧展开。
 - 卡片是纯展示组件，不提供 loading、empty、error 或 disabled 属性；宿主根据数据流程组合相应状态和重试操作。
 - 详情抽屉中的统计仍可沿用 Vue3 旧组件的 `title`、`valueType`、`footer` 属性及 `title` / `value` / `footer` / `extra` 插槽。宿主切换到 lx-ui 前仍需进行实际页面组合回归。
-- 组件无交互焦点；进度条是唯一使用 ARIA 状态角色的元素。进度填充过渡沿用全局减少动效令牌。
+- 组件无交互焦点；状态文本以视觉隐藏方式提供给屏幕阅读器，进度条使用 ARIA 状态角色。进度填充过渡沿用全局减少动效令牌。

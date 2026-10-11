@@ -39,8 +39,27 @@ test.describe('LxSectionTitle 文档示例', () => {
 
     const primaryTag = page.getByTestId('variant-border').locator('.lx-tag--primary');
     await expect(primaryTag).toHaveText('8 项字段');
+    const tagPadding = await primaryTag.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return {
+        blockStart: style.paddingBlockStart,
+        blockEnd: style.paddingBlockEnd,
+        inlineStart: style.paddingInlineStart,
+        inlineEnd: style.paddingInlineEnd,
+      };
+    });
+    expect(tagPadding).toEqual({
+      blockStart: '2px',
+      blockEnd: '2px',
+      inlineStart: '6px',
+      inlineEnd: '6px',
+    });
     await expect(page.getByTestId('variant-dashed').locator('.lx-tag--success')).toBeVisible();
     await expect(page.getByTestId('variant-plain').locator('.lx-tag--warning')).toBeVisible();
+    await expect(page.getByTestId('variant-plain').locator('.lx-section-title__subtitle')).toHaveText(
+      '用于配置警情处置流程与责任人分派机制。',
+    );
+    await expect(page.getByTestId('long-title-case').locator('h4.lx-section-title__text')).toBeVisible();
 
     const refresh = page.getByRole('button', { name: '刷新' });
     await refresh.focus();
@@ -51,6 +70,12 @@ test.describe('LxSectionTitle 文档示例', () => {
     await page.getByRole('checkbox', { name: 'HUD 深色主题' }).check();
     await expect(page.locator('.lx-section-title-demo')).toHaveClass(/lx-theme-hud/);
 
+    const viewButton = page.getByRole('button', { name: '查看' });
+    await viewButton.focus();
+    await expect(viewButton).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(page.getByText('查看辖区协同指挥中心配置详情', { exact: true })).toBeVisible();
+
     for (const width of [375, 320]) {
       await page.setViewportSize({ width, height: 780 });
       const longTitle = page.getByTestId('long-title-case').locator('.lx-section-title');
@@ -59,11 +84,19 @@ test.describe('LxSectionTitle 文档示例', () => {
       await expect
         .poll(() =>
           titleLabel.evaluate((element) => ({
-            fits: element.scrollWidth > element.clientWidth,
-            overflow: getComputedStyle(element).textOverflow,
+            whiteSpace: getComputedStyle(element).whiteSpace,
+            textOverflow: getComputedStyle(element).textOverflow,
+            overflowWrap: getComputedStyle(element).overflowWrap,
           })),
         )
-        .toEqual({ fits: true, overflow: 'ellipsis' });
+        .toEqual({ whiteSpace: 'normal', textOverflow: 'clip', overflowWrap: 'anywhere' });
+      const titleGeometry = await titleLabel.evaluate((element) => ({
+        scrollWidth: element.scrollWidth,
+        clientWidth: element.clientWidth,
+        height: element.getBoundingClientRect().height,
+      }));
+      expect(titleGeometry.scrollWidth).toBeLessThanOrEqual(titleGeometry.clientWidth);
+      expect(titleGeometry.height).toBeGreaterThan(24);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
       await page.screenshot({ path: `test-results/lx-section-title-${width}.png` });
     }

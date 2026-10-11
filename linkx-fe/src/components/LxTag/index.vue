@@ -51,7 +51,7 @@ const emit = defineEmits<{ close: [e: MouseEvent] }>()
 .lx-tag--small {
   font-size: 11px;
   line-height: 16px;
-  padding: 0 6px;
+  padding: 2px 6px;
 }
 
 /* 深浅成对（禁止交叉混搭，DESIGN-SPEC §3.2） */

@@ -48,4 +48,31 @@ describe('LxSectionTitle design variants', () => {
       expect(wrapper.get('h3 .lx-tag').text()).toBe('8 项字段');
     },
   );
+
+  it('allows the subtitle slot to replace the subtitle prop', () => {
+    const wrapper = mount(LxSectionTitle, {
+      props: { title: '预警策略', subtitle: '属性说明' },
+      slots: { subtitle: '<strong data-testid="subtitle-slot">插槽说明</strong>' },
+    });
+
+    expect(wrapper.get('.lx-section-title__subtitle').text()).toBe('插槽说明');
+    expect(wrapper.get('[data-testid="subtitle-slot"]').element.tagName).toBe('STRONG');
+  });
+
+  it('keeps numeric zero tags visible', () => {
+    const wrapper = mount(LxSectionTitle, {
+      props: { title: '空结果', tag: 0, tagType: 'info' },
+    });
+
+    expect(wrapper.get('.lx-section-title__text .lx-tag').text()).toBe('0');
+  });
+
+  it('uses the requested heading level without changing the title styling hook', () => {
+    const wrapper = mount(LxSectionTitle, {
+      props: { title: '设备配置', headingLevel: 2 },
+    });
+
+    expect(wrapper.get('h2.lx-section-title__text').text()).toBe('设备配置');
+    expect(wrapper.find('h3.lx-section-title__text').exists()).toBe(false);
+  });
 });

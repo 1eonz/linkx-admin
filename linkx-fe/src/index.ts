@@ -144,6 +144,7 @@ export type { LxDrawerProps } from './components/LxDrawer/types'
 export type { LxFormErrorBannerProps } from './components/LxFormErrorBanner/types'
 export type { LxPageCardProps } from './components/LxPageCard/types'
 export type {
+  LxSectionTitleHeadingLevel,
   LxSectionTitleProps,
   LxSectionTitleSize,
   LxSectionTitleTagType,

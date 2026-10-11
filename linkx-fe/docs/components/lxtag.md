@@ -3,6 +3,7 @@
 P1 例外场景组件：状态标记必须用 LxStatusDot，仅当需要**携带文字信息**（关键词、检索条件、已选项）时才用 LxTag。浅底深字，包含品牌主色和四种反馈语义色。
 
 小字可读性：success/warning 的底色和边框保留语义色，文字使用正文令牌，确保浅色主题达到正文对比度要求；深色主题随令牌同步。
+紧凑尺寸使用 11px 字号、16px 行高、上下 2px 和左右 6px 内距，与设计标本保持一致。
 
 <script setup lang="ts">
 import { LxTag } from '../../src';
@@ -11,7 +12,7 @@ import { LxTag } from '../../src';
 ## 基础用法
 
 <div class="demo-box" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-  <LxTag type="primary">8 项字段</LxTag><LxTag type="success">在线</LxTag><LxTag type="warning">降级</LxTag><LxTag type="error">高危</LxTag><LxTag type="info" closable>检索条件</LxTag>
+  <LxTag type="primary">8 项字段</LxTag><LxTag size="small" type="primary">紧凑标签</LxTag><LxTag type="success">在线</LxTag><LxTag type="warning">降级</LxTag><LxTag type="error">高危</LxTag><LxTag type="info" closable>检索条件</LxTag>
 </div>
 
 ```vue

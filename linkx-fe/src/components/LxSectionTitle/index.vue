@@ -1,17 +1,26 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import LxIcon from '../LxIcon/index.vue'
 import LxTag from '../LxTag/index.vue'
 import type { LxSectionTitleProps } from './types'
 
 defineOptions({ name: 'LxSectionTitle' })
 
-withDefaults(defineProps<LxSectionTitleProps>(), {
+const props = withDefaults(defineProps<LxSectionTitleProps>(), {
   title: '',
   subtitle: '',
+  headingLevel: 3,
   variant: 'border',
   size: 'default',
   iconColor: '',
   tagType: 'info',
+})
+
+const headingTag = computed(() => {
+  const level = props.headingLevel
+  return Number.isInteger(level) && level >= 1 && level <= 6
+    ? `h${level}`
+    : 'h3'
 })
 </script>
 
@@ -36,7 +45,7 @@ withDefaults(defineProps<LxSectionTitleProps>(), {
         /></slot>
       </span>
       <div class="lx-section-title__copy">
-        <h3 class="lx-section-title__text">
+        <component :is="headingTag" class="lx-section-title__text">
           <span class="lx-section-title__label"
             ><slot>{{ title }}</slot></span
           >
@@ -47,8 +56,13 @@ withDefaults(defineProps<LxSectionTitleProps>(), {
           >
             {{ tag }}
           </LxTag>
-        </h3>
-        <p v-if="subtitle" class="lx-section-title__subtitle">{{ subtitle }}</p>
+        </component>
+        <p
+          v-if="$slots.subtitle || subtitle"
+          class="lx-section-title__subtitle"
+        >
+          <slot name="subtitle">{{ subtitle }}</slot>
+        </p>
       </div>
     </div>
     <div v-if="$slots.extra" class="lx-section-title__extra">
@@ -69,6 +83,7 @@ withDefaults(defineProps<LxSectionTitleProps>(), {
 
 .lx-section-title__heading {
   display: flex;
+  flex: 1 1 auto;
   min-width: 0;
   align-items: center;
   gap: var(--lx-space-sm);
@@ -91,6 +106,7 @@ withDefaults(defineProps<LxSectionTitleProps>(), {
 
 .lx-section-title__copy {
   display: grid;
+  flex: 1 1 auto;
   min-width: 0;
   gap: var(--lx-space-xs);
 }
@@ -171,5 +187,19 @@ withDefaults(defineProps<LxSectionTitleProps>(), {
 
 .lx-section-title--plain .lx-section-title__heading {
   align-items: flex-start;
+}
+
+@media (max-width: 400px) {
+  .lx-section-title__text {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .lx-section-title__label {
+    overflow: visible;
+    overflow-wrap: anywhere;
+    text-overflow: clip;
+    white-space: normal;
+  }
 }
 </style>

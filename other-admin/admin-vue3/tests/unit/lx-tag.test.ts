@@ -3,6 +3,16 @@ import { LxTag } from 'lx-ui';
 import { describe, expect, it } from 'vitest';
 
 describe('LxTag', () => {
+  it('applies the compact size class', () => {
+    const wrapper = mount(LxTag, {
+      props: { size: 'small' },
+      slots: { default: () => '紧凑标签' },
+    });
+
+    expect(wrapper.classes()).toContain('lx-tag--small');
+    wrapper.unmount();
+  });
+
   it('renders semantic classes and forwards the disabled state to assistive technology', () => {
     const wrapper = mount(LxTag, {
       props: { type: 'warning', disabled: true },
