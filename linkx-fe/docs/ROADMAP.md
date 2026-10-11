@@ -1,5 +1,12 @@
 # lx-ui 路线图
 
+## 2026-10-11 Wave 11 / LxDescriptions 当前版正式收口
+
+- `LxDescriptions` 当前版已完成 Demo 控件、长值/长状态、复制触控、窄屏 API 表格、错误重试、HUD 和 reduced-motion 的严格复核；中文文档、9 项单测和 3 项文档 E2E 同步。
+- `typecheck`、203 modules 库构建、VitePress 构建、目标 Prettier 和差异检查通过。Assessment A 原始 4.1/5，综合按 0-4 口径为 31/40；Assessment B 42/42 视图完整，当前 detector 三件套为有效 `[]`、空 stderr、退出码 0。
+- overlay 命中已归因到 VitePress 壳层、代码区、隐藏折叠内容或主题令牌；`[]` 不单独代表视觉通过。报告、snapshot/trend 和停服证据见 `.impeccable/critique/descriptions-wave-2026-10-11/`。
+- 后续观察为桌面表格提示一致性和采集 role 字段；真实读屏器、后端、宿主页面迁移和 Vue3 `element-plus` 删除仍未关闭。下一项按组件审计矩阵进入未正式关闭的基础控件批次。
+
 ## 2026-10-11 UI-10 / Wave 12 LxMetricCard 与 LxSectionTitle 正式收口
 
 - `LxMetricCard` 已补正常/成功/警告/危险读屏文本、进度 ARIA、0–100 边界、RTL 和减少动效；旧宿主 `valueType`、`title`、`footer`、`extra` props/slots 保留。

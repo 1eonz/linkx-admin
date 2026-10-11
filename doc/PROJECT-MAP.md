@@ -1,5 +1,12 @@
 # LinkX 项目地图
 
+## 2026-10-11 Wave 11 / LxDescriptions 当前版正式复核
+
+- **组件入口**：`linkx-fe/src/components/LxDescriptions/`；Demo 为 `demo/basic.vue`，中文文档为 `linkx-fe/docs/components/lxdescriptions.md`。文档表格响应式逻辑位于 `docs/.vitepress/theme/useResponsiveDocTable.ts`，共享样式位于 `custom.css`。
+- **验证入口**：`other-admin/admin-vue3/tests/unit/lx-descriptions.test.ts`（9/9）与 `tests/e2e/lx-descriptions-docs.spec.ts`（3/3）；lx-ui 类型检查、203 modules 构建、VitePress 构建和目标格式检查通过。
+- **Impeccable 证据**：A 原始 4.1/5，综合按 0-4 口径 31/40；B 42/42 浏览器样本、当前 detector 三件套 `[]`/空 stderr/exit 0、目标指纹闭环；正式报告与快照见 `.impeccable/critique/descriptions-wave-2026-10-11/`。
+- **边界**：组件不请求 API、不读取权限或 Pinia；宿主真实数据、权限、读屏器、后端联调和 Vue3 Element Plus 替换仍归 UI-04/UI-10，不能由组件级 Critique 代替。
+
 ## 2026-10-11 UI-10 / Wave 12 LxMetricCard 与 LxSectionTitle
 
 - **组件入口**：`linkx-fe/src/components/LxMetricCard/` 与 `LxSectionTitle/`；设计源为 `design/指标卡 MetricCard/`、`design/区块标题 SectionTitle/`；中文 API 位于 `linkx-fe/docs/components/lxmetriccard.md`、`lxsectiontitle.md`。

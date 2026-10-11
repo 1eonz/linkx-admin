@@ -1,5 +1,13 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-11 UI-10 / Wave 11 LxDescriptions 当前版正式 A/B 收口
+
+`LxDescriptions` 已完成当前源码、Demo 和中文文档的正式双路复核。长值和长状态支持键盘读取，复制目标在窄屏达到 44px，状态/错误/重试、HUD、主题、表格焦点和 reduced-motion 均有证据；单测 **9/9**、文档 E2E **3/3**、类型、203 modules 构建、VitePress 构建、目标 Prettier 和差异检查通过。
+
+Assessment A 原始评分 **4.1/5**，综合按 0-4 口径为 **31/40（Good）**，未确认 P0-P3。Assessment B 完成 42 个独立浏览器样本；三个当前目标 detector 均为合法 `[]`、stderr 空、退出码 0，扫描前后指纹一致。动态 overlay 归因为文档壳层、代码区、隐藏折叠内容和 HUD 令牌，不能把 `[]` 单独作为视觉通过依据。完整报告、snapshot/trend、代码复审和停服证据见 `.impeccable/critique/descriptions-wave-2026-10-11/`。
+
+本条关闭 `LxDescriptions` 当前版组件级审查，不增加 UI-10 全库计数；桌面滚动提示一致性、采集 role 指标、真实读屏器/缩放/跨浏览器/剪贴板/后端联调和 Vue3 宿主替换仍开放。下一批按本文件基础控件矩阵继续，组件库门禁完成前保留 Vue3 `element-plus`。
+
 ## 2026-10-11 UI-10 / Wave 12 LxMetricCard 与 LxSectionTitle 正式复核
 
 - `LxMetricCard` 完成设计稿对照、状态读屏、进度 ARIA、趋势图标、RTL、减少动效和 320/375px 验收；`LxSectionTitle` 完成三变体、标题层级、副标题/插槽、长标题和键盘反馈验收。

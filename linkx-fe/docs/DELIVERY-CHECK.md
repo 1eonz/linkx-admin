@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-11 Wave 11 / LxDescriptions 当前版正式核查
+
+- 组件、Demo、中文 API、响应式文档表格和状态示例已同步；单测 **9/9**、文档 E2E **3/3**、类型检查、203 modules 构建、VitePress 构建、目标 Prettier 和 `git diff --check` 通过。
+- Assessment A 原始评分 **4.1/5**，当前综合口径记录 **31/40（Good）**，无 P0-P3。Assessment B 完成 **42/42** 独立浏览器视图，覆盖 light/HUD、1440/375/320px、全部状态和 reduced-motion；无页面异常、失败请求或 HTTP 错误。
+- 当前版本三个 detector 均为合法 JSON `[]`、stderr 空、退出码 0，目标 SHA 在扫描前后保持一致。早期退出码异常文件已标明无效，动态 overlay 命中已按文档壳层、折叠内容和令牌归因；不能把空数组单独标记为通过。
+- 正式报告和快照见 `.impeccable/critique/descriptions-wave-2026-10-11/`。本条只关闭组件库当前版复核，不关闭 UI-10 全库、宿主页面替换、权限、真实后端或 Element Plus 删除门禁。
+
 ## 2026-10-11 UI-10 / Wave 12 LxMetricCard 与 LxSectionTitle
 
 - 当前版组件、Demo、中文文档和 Vue3 SectionTitle 适配器已同步；公共 `LxSectionTitleHeadingLevel` 已从根入口导出。

@@ -1,5 +1,14 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-11 Wave 11 / LxDescriptions 当前版正式 A/B 收口
+
+- 完成 `LxDescriptions` 长值/长状态可读性、键盘焦点、复制触控尺寸、错误恢复、响应式文档表格和 Demo 状态控制的当前版复核；组件、Demo、中文文档、单测和文档 E2E 已同步。
+- 验证：组件单测 **9/9**、文档 E2E **3/3**、lx-ui 类型检查、203 modules 库构建、VitePress 文档构建、目标 Prettier 和 `git diff --check` 通过；构建保留既有大 chunk 警告。业务 API 请求规则仍为 `.then().catch().finally()`。
+- Impeccable Assessment A 原始评分 **4.1/5**；按当前 0-4 综合口径记录为 **31/40（Good）**，未确认 P0-P3。Assessment B 完成 **42/42** 独立浏览器样本，light/HUD、1440/375/320px、ready/loading/empty/error/retry 和 reduced-motion 均覆盖；页面异常、失败请求和 HTTP 错误均为 0。
+- 三份当前目标 detector 均为合法 JSON `[]`、stderr 为空、退出码 `0`，扫描前后目标指纹一致；旧退出码异常三件套已标记为无效记录。动态 overlay 命中已归因到文档壳层、代码区、隐藏折叠内容或主题令牌，不能把 `[]` 单独当作视觉通过。
+- 综合报告、snapshot/trend、A/B、代码复审和停服证据见 `.impeccable/critique/descriptions-wave-2026-10-11/`。本波不增加 UI-10 全库计数，不代表 Vue3 宿主页面、权限中心、字段权限、引导页、真实后端或 Element Plus 删除完成。
+- 观察项：桌面 API 表格无溢出时仍显示滚动提示；指标采集曾出现错误态 role 为空但 DOM 为 `role=alert`；真实读屏器、200% 缩放、跨浏览器、真实剪贴板和后端联调继续后置。下一步按组件审计矩阵处理仍未正式关闭的基础控件，再进入 Vue3 Element Plus 分批替换门禁。
+
 ## 2026-10-11 UI-10 / Wave 12 LxMetricCard 与 LxSectionTitle 正式收口
 
 - 完成 `LxMetricCard` 状态读屏文本、进度 ARIA、边界/RTL/减少动效和窄屏处理；保留旧 `valueType`、`title`、`footer`、`extra` props/slots 契约。

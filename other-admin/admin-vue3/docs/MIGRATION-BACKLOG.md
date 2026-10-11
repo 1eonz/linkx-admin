@@ -1,5 +1,12 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-11 lx-ui Wave 11 / LxDescriptions 当前版正式复核完成
+
+- `LxDescriptions` 组件库当前版已完成长值、长状态、复制、错误恢复、窄屏表格和 reduced-motion 的 A/B 与浏览器证据；宿主业务页面未在本波改动。
+- 单测 9/9、文档 E2E 3/3、lx-ui 类型/库构建、VitePress 构建、目标格式检查通过；综合 Critique 按当前 0-4 口径为 31/40，B 为 42/42 浏览器样本，三份当前 detector `[]`/空 stderr/exit 0。详细证据见 `.impeccable/critique/descriptions-wave-2026-10-11/`。
+- `LxDescriptions` 通过不等于 Vue3 详情页替换完成。宿主仍需逐页核对旧 props/slots、真实权限状态、请求 loading/error、抽屉窄屏布局和 `.then().catch().finally()` 错误处理。
+- 下一步继续按 `ELEMENT-PLUS-LX-UI-MATRIX.md` 和组件审计矩阵处理基础控件；在 lx-ui 组件与整库审查门槛完成前保留 Vue3 `element-plus`，权限中心、字段权限和引导页按既定计划后置。
+
 ## 2026-10-11 lx-ui Wave 12 / MetricCard 与 SectionTitle 组件库收口
 
 - `LxMetricCard` 与 `LxSectionTitle` 已完成当前版组件库审查；适配器透传标题层级并由根入口导出 `LxSectionTitleHeadingLevel`。本波未修改业务 API、路由、权限键或 Element Plus 依赖。

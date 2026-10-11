@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## [2026-10-11] Wave 11 交接：LxDescriptions 当前版正式 A/B 收口
+
+- **完成范围**：完成长值和长状态的键盘可读性、状态点完整名称、复制按钮 44px 触控底线、错误重试、窄屏表格焦点/方向键、HUD、主题和 reduced-motion 复核；同步 Demo 分组、中文 API、响应式表格提示、9 项单测和 3 项文档 E2E。
+- **实际验证**：单测 9/9、文档 E2E 3/3、lx-ui `typecheck`、203 modules `build`、VitePress `build:docs`、目标 Prettier 和 `git diff --check` 通过；保留既有 chunk 大小警告。API 请求链保持 `.then().catch().finally()`。
+- **Impeccable**：A 原始评分 4.1/5；按当前综合表记录 31/40（Good），无 P0-P3。B 42 个独立 context 全部 HTTP 200、注入成功、无页面/控制台/请求错误；当前三份 detector 为 JSON `[]`、空 stderr、退出码 0，旧退出码异常记录已标为无效。报告、snapshot/trend、代码复审和停服证据在 `.impeccable/critique/descriptions-wave-2026-10-11/`。
+- **未完成/边界**：API 表格无溢出时的滚动提示一致性、指标采集 role 字段核对、真实屏幕阅读器/缩放/跨浏览器/剪贴板/后端联调列入后续；不关闭 UI-10 全库计数，不代表 Vue3 页面迁移、权限中心、字段权限、引导页或 Element Plus 删除完成。
+- **下一步**：按 `doc/lx-ui/COMPONENT-AUDIT.md` 继续基础控件严格设计对照和正式 A/B，完成组件库门禁后再进入 Vue3 Element Plus 分批替换。实现提交与项目文档提交继续分开使用 `fix(lx-ui): ...` / `docs(project): ...` 并推送 `origin/main`。
+
 ## [2026-10-11] UI-10 / Wave 12 交接：LxMetricCard 与 LxSectionTitle
 
 - **目标**：完成指标卡与区块标题的当前版设计、行为、无障碍、窄屏和动效审查，并修复复评发现的契约缺口。
