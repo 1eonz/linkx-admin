@@ -1,5 +1,13 @@
 # LinkX 项目地图
 
+## 2026-10-13 Wave 16 / LxTextarea 当前版组件级复核完成
+
+- **组件入口**：`linkx-fe/src/components/LxTextarea/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxtextarea.md`；设计依据为 `design/表单控件八件套/`。
+- **验证入口**：`other-admin/admin-vue3/tests/unit/lx-textarea.test.ts`（14/14）与 `tests/e2e/lx-base-controls-docs.spec.ts`（11/11，共享基础控件文档回归）；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建和定向代码质量检查通过。
+- **正式评审**：Impeccable Assessment A 31/40（Good），未发现 P0–P3；B 对组件与 Demo 的 detector 均为合法 JSON `[]`、stderr 空、退出码 0，六个 Light/站点深色/HUD × 桌面/移动视图均成功注入。初始到限/超限静默、正常状态转到限/超限仅播报一次；禁用/只读校验状态隐藏计数且保留错误说明。独立代码审查无 P0–P3。
+- **Overlay 归因与边界**：移动根文档宽度 390px → 630px 仅发生在 overlay 注入后；注入前及无 overlay 的 320/375px E2E 无横向溢出，组件 Demo 宽度不变，归为检测覆盖层/页面外壳副作用。未执行 NVDA/VoiceOver 人工读屏。只关闭组件级审查，不增加 UI-10 全库 0/52 口径，也不代表 Vue3 宿主替换。
+- **下一入口**：按基础控件审计矩阵进入 `LxSelect`；后续继续其他基础控件和动态图标，再进入 `LxDynamicForm` 与其余 lx-ui 组件。页面操作引导当前不考虑、不纳入队列或排期，后续有需要时再重新评估。
+
 ## 2026-10-12 Wave 14 / LxInput 当前版组件级复核完成
 
 - **组件入口**：`linkx-fe/src/components/LxInput/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxinput.md`；设计依据为 `design/表单控件八件套/`。
@@ -7,7 +15,7 @@
 - **复核结论**：当前版 Assessment A 34/40（Good），未发现 P0–P2；组件与 Demo detector 为合法 JSON `[]`、stderr 空、退出码 0。Light/HUD × 1440/390px 四视图均成功注入，错误对比度、44px 触控目标、`inputmode=tel`、键盘清空与表单禁用继承通过。
 - **Overlay 归因**：行长命中落在文档正文和 Demo 说明，移动裁切命中为 VitePress 导航，遮罩命中为代码块复制控件；未命中输入框。注入标记使文档宽度扩张，注入前页面无横向溢出。综合报告、snapshot/trend 和证据见 `.impeccable/critique/lxinput-wave-2026-10-12/`。
 - **遗留建议**：codeview 无 P0–P2；联系电话计数和窄屏工具栏键盘焦点两项 P3 测试增强继续登记，不阻塞下一波。
-- **边界与下一步**：不增加 UI-10 全库矩阵关闭数，不代表宿主表单或 Vue3 Element Plus 替换完成。下一基础控件为 `LxInputNumber`。页面操作引导暂缓，后续按需再评估。
+- **边界与下一步**：不增加 UI-10 全库矩阵关闭数，不代表宿主表单或 Vue3 Element Plus 替换完成。下一基础控件为 `LxInputNumber`。页面操作引导当前暂不考虑、不纳入执行队列或排期；后续有需要时再重新评估。
 
 ## 2026-10-12 Wave 13 / LxButton 当前版正式收口
 

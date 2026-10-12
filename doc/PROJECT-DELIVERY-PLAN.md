@@ -1,9 +1,17 @@
 # LinkX 项目交付计划与完成台账
 
-## 2026-10-12 范围备注：页面操作引导暂缓，后续按需执行
+## 2026-10-13 范围备注：页面操作引导暂不考虑，后续有需要再启动
 
-- 页面操作引导暂不纳入当前执行队列，不主动排期，也不阻塞 lx-ui 组件收口、Vue3 Element Plus 替换或其他迁移任务。
-- `doc/GUIDE-CONTENT-PLAN.md` 仅作为需求/文案草案保留；后续确有需要时，再重新确认页面范围、文案、交互和技术方案，并评估实施排期。
+- 当前阶段暂不考虑实施页面操作引导；不纳入当前执行队列、不主动排期，也不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
+- `doc/GUIDE-CONTENT-PLAN.md` 仅保留为历史需求/文案草案。后续确有需要时，再重新确认页面范围、文案、交互、技术方案及后端契约，单独评估并安排实施；本备注不代表功能已实现或验收。
+
+## 2026-10-13 lx-ui Wave 16 / LxTextarea 当前版组件级复核完成
+
+- **完成范围**：按 `design/表单控件八件套/` 对照 `LxTextarea` 当前组件、Demo、中文 API、明暗/HUD 主题、焦点/错误、硬截断/校验、禁用/只读和窄屏状态。初始已到限或超限保持 live region 静默；状态从正常转为到限/超限时只播报一次。校验模式下禁用/只读隐藏计数，但保留可见错误说明。
+- **验证**：定向单测 14/14，共享基础控件文档 E2E 11/11；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 `build:prod`、定向 ESLint、Prettier 和 `git diff --check` 通过。组件 CSS 与 HUD token 的 Stylelint 通过；VitePress `custom.css` 报告的 14 个属性顺序问题均位于本次未改动行，本次新增规则未触发顺序错误。生产构建保留既有 Less 导出、Element Plus circular chunk、大 chunk 和动态/静态导入警告。
+- **Impeccable**：正式双 Agent Critique 已完成；Assessment A 31/40（Good），无 P0–P3；Assessment B 的组件和 Demo detector 均为 JSON `[]`、stderr 空、退出码 0，并完成 Light、站点深色、HUD × 桌面/移动六视图。overlay 注入后移动根文档宽度为 630px，但注入前为 390px 且无溢出，Demo 尺寸不变；无 overlay 的 E2E 在 320/375px 均通过，因此归因于检测覆盖层/页面外壳副作用，不归为组件缺陷。原始 A/B、截图、overlay、源码哈希及代码审查见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`；正式综合 snapshot 为 `.impeccable/critique/2026-10-12T20-00-21Z__linkx-fe-src-components-lxtextarea-index-vue.md`，趋势首次记录 31/40。
+- **审查与边界**：独立代码复审无 P0–P3；当前版 `LxTextarea` 组件审查行关闭，但不增加 UI-10 全库 0/52 口径，不代表 Vue3 宿主页面替换或真实读屏器验收完成。未执行 NVDA/VoiceOver 人工验证。页面操作引导继续不纳入队列或排期。
+- **下一步**：按基础控件矩阵进入 `LxSelect`；随后继续其他基础控件和动态图标，再进入 `LxDynamicForm`、其余 lx-ui 组件与正式整库审查，之后才进行 Vue3 Element Plus 分批替换。
 
 ## 2026-10-12 lx-ui Wave 15 / LxInputNumber 当前版组件级复核完成
 
@@ -615,13 +623,13 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 
 ### P2：配置化架构和清理
 
-| 编号    | 任务                | 产出                                                     | 验收                           | 状态                                   |
-| ------- | ------------------- | -------------------------------------------------------- | ------------------------------ | -------------------------------------- |
-| ARCH-01 | menu-config S1 Mock | `menu-config`、PageRegistry、TabHost、校验、feature flag | 菜单/路由/tab/占位页全链路演示 | 待开始                                 |
-| ARCH-02 | 引导系统            | GuideRegistry、driver.js、pageId、TabHost 协议           | 页面引导和重播可用             | 暂缓；后续确有需要时重新评估并安排实施 |
-| ARCH-03 | S2 后端菜单契约     | `/api/menu/config` 契约、后台字段校验、灰度方案          | legacy/config 同账号一致       | 阻塞                                   |
-| ARCH-04 | 旧链路清理          | OAuth 占位映射、死文件、历史 API 和无效 Mock 分类清理    | 无现役入口指向占位页           | 待开始                                 |
-| ARCH-05 | Vue2 技术债治理     | Vue2/EOL、旧 Axios、依赖构建脚本和停止维护边界           | 风险和停止线有记录             | 待开始                                 |
+| 编号    | 任务                | 产出                                                     | 验收                           | 状态                                                           |
+| ------- | ------------------- | -------------------------------------------------------- | ------------------------------ | -------------------------------------------------------------- |
+| ARCH-01 | menu-config S1 Mock | `menu-config`、PageRegistry、TabHost、校验、feature flag | 菜单/路由/tab/占位页全链路演示 | 待开始                                                         |
+| ARCH-02 | 引导系统            | GuideRegistry、driver.js、pageId、TabHost 协议           | 页面引导和重播可用             | 当前不纳入执行队列或排期；后续确有需要时重新评估并单独安排实施 |
+| ARCH-03 | S2 后端菜单契约     | `/api/menu/config` 契约、后台字段校验、灰度方案          | legacy/config 同账号一致       | 阻塞                                                           |
+| ARCH-04 | 旧链路清理          | OAuth 占位映射、死文件、历史 API 和无效 Mock 分类清理    | 无现役入口指向占位页           | 待开始                                                         |
+| ARCH-05 | Vue2 技术债治理     | Vue2/EOL、旧 Axios、依赖构建脚本和停止维护边界           | 风险和停止线有记录             | 待开始                                                         |
 
 ## 4. 权限完成标准
 

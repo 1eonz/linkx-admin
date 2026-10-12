@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-13 UI-10 / Wave 16 LxTextarea 当前版严格 UI 复核完成
+
+- 对照 `design/表单控件八件套/` 完成当前版组件、Demo、中文 API、主题、焦点/错误、硬截断/校验、禁用/只读和窄屏审查。初始到限/超限保持播报静默；正常状态转为到限/超限时播报一次。disabled/readonly 校验态隐藏计数并保留错误说明。
+- 单测 14/14、共享基础控件文档 E2E 11/11；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建、目标 ESLint/Prettier、组件 CSS/HUD token Stylelint 和差异检查通过。VitePress `custom.css` 的 14 个属性顺序问题均位于未改动行。
+- Assessment A 31/40（Good），无 P0–P3；Assessment B 两个 detector 为合法 `[]`/空 stderr/退出码 0，六个主题/视口 overlay 证据完成。overlay 注入后移动根文档宽度从 390px 扩至 630px，注入前页面无溢出、Demo 宽 342px；无 overlay 的 320/375px E2E 均通过，归因于 overlay/页面外壳副作用。独立代码复审无 P0–P3。完整证据见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
+- `LxTextarea` 当前版组件审查行关闭；全库 UI-10 仍保持 0/52，不代表 Vue3 页面替换或人工读屏验收。下一项按矩阵进入 `LxSelect`。
+
 ## 2026-10-12 Wave 15 / LxInputNumber 当前版组件级复核完成
 
 - 按表单控件设计源复核组件、Demo、中文 API、状态和键盘行为；sm/md/lg 外框 28/32/40px，右侧上下步进贴合无间隙，`controls` 可切换显示。readonly 步进、边界禁用、长按及清理路径有测试；修正 min/max 禁用方向文案，并避免合成方向键触发宿主快捷键。
@@ -64,7 +71,7 @@ Assessment A **31/40（Good）**；Assessment B 四个源码目标的 detector �
 
 SearchBar 修后 Assessment B 的组件、Demo、文档 detector 均为有效 JSON `[]`，stderr 为空、退出码 0，并已保存亮色/HUD、1440/375px、减少动效和交互截图/DOM 证据；overlay 注入未稳定完成，`[]` 仅表示静态规则零命中。Assessment A 因浏览器不可启动为降级评审，评分 **31/40（Good）**。报告位于 `.impeccable/critique/g2-complete-2026-10-10/assessment-a/report.md` 与 `assessment-b/report.md`；没有可用统一综合报告、snapshot/trend，故 G2 与全库 UI-10 **0/52** 均保持阶段性状态。
 
-当前仅关闭实现级检查：`linkx-fe` 的库构建、定向单测/E2E、类型和格式检查通过。不能把构建、Mock 或 detector `[]` 当作正式 Critique 通过。P1：SearchBar 四字段操作行与设计稿不一致、StatusSwitch HUD 与 Teleport 确认层可能脱节；P2：SearchBar 无 `meta` 时结果/错误状态不可见、StatusSwitch 行名未进入可访问名称、375px 复杂状态及确认/失败/只读路径缺少完整实图、文档页资源 404 待归因。Vue3 宿主 `element-plus`、权限中心、字段权限和引导页仍按计划冻结。
+当前仅关闭实现级检查：`linkx-fe` 的库构建、定向单测/E2E、类型和格式检查通过。不能把构建、Mock 或 detector `[]` 当作正式 Critique 通过。P1：SearchBar 四字段操作行与设计稿不一致、StatusSwitch HUD 与 Teleport 确认层可能脱节；P2：SearchBar 无 `meta` 时结果/错误状态不可见、StatusSwitch 行名未进入可访问名称、375px 复杂状态及确认/失败/只读路径缺少完整实图、文档页资源 404 待归因。Vue3 宿主 `element-plus`、权限中心和字段权限仍按计划冻结；页面操作引导当前不考虑，后续按需重新评估。
 
 ## 2026-10-10 UI-10 / Wave 7 LxTransferPanel 正式关闭
 
@@ -270,7 +277,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxSwitch`           | `design/表单控件八件套/`                          | 组件级复核已完成；共享壳层与宿主契约仍跟踪，暂不计入全库严格关闭                                                                                                                           |
 | `LxTabsBar`          | `DESIGN-SPEC.md` + TabsBar API/Demo               | 待严格复核；页签层级、关闭/拖动和横向滚动                                                                                                                                                  |
 | `LxTag`              | `DESIGN-SPEC.md` §2 + Tag API/Demo                | 待严格复核；语义色、尺寸、关闭态与对比度                                                                                                                                                   |
-| `LxTextarea`         | `design/表单控件八件套/`                          | 待严格复核；行高、字数、错误/焦点与窄屏                                                                                                                                                    |
+| `LxTextarea`         | `design/表单控件八件套/`                          | 当前版组件级严格复核完成；单测、文档 E2E、主题/状态浏览器证据、正式 Impeccable A/B 与代码复审通过；全库 UI-10 0/52 口径不变                                                                |
 | `LxTransferPanel`    | `design/虚拟滚动树 + 双栏穿梭/`                   | 当前实现、30 项单测、文档 E2E 28/28、名称/编码筛选及移动触控修复完成；桌面 32px 基准行高、320–420px 为 64px、421px 起为 44px；最新断言修订代码复审与正式 A/B 收口中；全库严格矩阵仍为 0/52 |
 | `LxTreeSelect`       | `design/表单控件八件套/` + TreeSelect API/Demo    | 当前版单测/E2E、A/B 和代码复审完成；P3 为长节点换行 E2E 覆盖增强，严格矩阵仍待全库复验                                                                                                     |
 | `LxUpload`           | `design/上传拖拽区 Upload/`                       | 受控模型、进度/失败/重试/取消/移除已有组件行为证据；设计图严格对照、提示文字视觉复核、正式 Critique 收口中                                                                                 |

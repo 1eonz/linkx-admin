@@ -1,5 +1,18 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-13 范围备注：页面操作引导暂不考虑
+
+- 页面操作引导当前不纳入 Vue3 迁移任务队列或排期，也不作为 lx-ui 收口及 Element Plus 替换的前置条件。
+- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 保留为历史需求和未来设计基线；后续确有需要时，再确认页面范围、文案、交互、技术方案及后端契约，并单独评估实施安排。
+- 此范围备注不代表页面操作引导已经实现或验收，也不改变当前 lx-ui 和 Vue3 组件迁移顺序。
+
+## 2026-10-13 lx-ui Wave 16 / LxTextarea 当前版组件复核完成
+
+- `LxTextarea` 当前组件、Demo、中文 API 和主题/状态按设计源复核完成；初始到限/超限保持播报静默，正常转到限/超限只播报一次。disabled/readonly 校验态隐藏计数但保留错误说明。
+- 单测 14/14、共享基础控件文档 E2E 11/11；lx-ui typecheck、206 modules build、VitePress build、Vue3 `build:prod`、定向 ESLint/Prettier、组件 CSS/HUD token Stylelint 与 diff check 通过。`custom.css` 既有 14 个属性顺序错误均在本次未改动行。
+- Impeccable A 31/40（Good），无 P0–P3；B detector `[]`/空 stderr/退出码 0，六个 Light/站点深色/HUD × 桌面/移动视图已完成。overlay 注入后移动根文档宽 630px，基线 390px 无溢出，E2E 无 overlay 的 320/375px 通过；归为检测覆盖层/页面外壳副作用。代码复审无 P0–P3，证据见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
+- 本波仅关闭 LxTextarea 组件级审查，不代表 Vue3 Textarea 宿主已替换，也不增加 UI-10 全库 0/52 计数。下一项按组件矩阵进入 `LxSelect`；基础控件及动态图标、`LxDynamicForm` 和其余 lx-ui 门禁完成后再开展 Vue3 Element Plus 分批替换。页面操作引导不纳入当前排期。
+
 ## 2026-10-12 lx-ui Wave 15 / LxInputNumber 当前版组件级复核完成
 
 - `LxInputNumber` 的组件、Demo、中文 API、边界语义、键盘/长按交互与设计尺寸已复核；sm/md/lg 外框 28/32/40px，按钮贴合无间距，`controls` 参数生效。Vue3 业务页面本波未进行批量替换。

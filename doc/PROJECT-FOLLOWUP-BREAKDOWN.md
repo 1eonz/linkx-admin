@@ -1,9 +1,16 @@
 # LinkX 后续任务完整拆分与执行规范
 
-## 当前范围备注（2026-10-12）
+## 当前范围备注（2026-10-13）
 
-- 页面操作引导暂不纳入执行队列，不主动排期，也不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
-- 保留 `doc/GUIDE-CONTENT-PLAN.md` 作为需求/文案草案；后续确有需要时，再重新确认范围、交互和技术方案，并评估实施排期。
+- 当前阶段暂不考虑实施页面操作引导；不纳入执行队列、不主动排期，也不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
+- 保留 `doc/GUIDE-CONTENT-PLAN.md` 作为历史需求/文案草案；后续确有需要时，再重新确认页面范围、文案、交互、技术方案和后端契约，单独评估并安排实施。
+
+## 2026-10-13 当前交接：LxTextarea 组件级复核完成，下一步 LxSelect
+
+- `LxTextarea` 按表单控件设计源完成当前组件、Demo、中文 API、主题、错误/焦点、长度边界、禁用/只读和窄屏复核。初始到限/超限不播报；正常状态转到限或超限时播报一次。校验模式下 disabled/readonly 隐藏计数并保留错误说明。
+- 单测 14/14、共享基础控件文档 E2E 11/11；lx-ui 类型、206 modules 构建、VitePress、Vue3 生产构建、目标 ESLint/Prettier、组件样式和 HUD token Stylelint、差异检查通过。VitePress `custom.css` 上 14 个既有属性顺序错误均不在本次改动行。
+- Impeccable 双 Agent 正式 Critique：A 31/40（Good），无 P0–P3；B 两个源码 detector 为 `[]`/空 stderr/退出码 0，Light/站点深色/HUD × 桌面/移动六视图证据齐全。overlay 注入后移动根文档从 390px 扩至 630px，但注入前无溢出且 Demo 尺寸未变；无 overlay 的 320/375px E2E 通过，归因于 overlay/页面外壳副作用。独立代码复审无 P0–P3；证据见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
+- 当前版 `LxTextarea` 组件审查完成；全库 UI-10 仍为 0/52，不代表宿主页面迁移或人工屏幕阅读器验收完成。下一波按矩阵进入 `LxSelect`，之后继续其他基础控件和动态图标，再实施 `LxDynamicForm`。
 
 ## 2026-10-12 当前交接：LxInputNumber 组件级复核完成，下一步 LxTextarea
 

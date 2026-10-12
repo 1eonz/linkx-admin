@@ -1,5 +1,19 @@
 # LinkX 项目交接记录
 
+## [2026-10-13] SCOPE / 页面操作引导暂不考虑，后续有需要再启动
+
+- 用户确认页面操作引导当前暂不考虑；该项不进入当前执行队列、不主动排期，也不阻塞 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务。
+- 已同步更新总交付计划、后续任务拆分、引导文案草案、项目地图和 `MENU-CONFIG-DESIGN.md`。相关草案仅作历史需求与未来设计基线保留；重启前需重新确认页面范围、文案、交互、技术方案及后端契约，并单独评估排期。
+- 本次仅调整计划备注与交接，不代表页面引导功能已实现或通过验收。
+
+## [2026-10-13] lx-ui Wave 16 / LxTextarea 当前版组件级复核交接
+
+- **完成范围**：按 `design/表单控件八件套/` 复核 `LxTextarea` 组件、Demo、中文 API、主题和长度/错误/焦点/禁用/只读状态；初始到限/超限不播报，正常转到限或超限只播报一次；disabled/readonly 校验字段隐藏计数且保留错误说明。
+- **验证结果**：定向单测 14/14、共享基础控件文档 E2E 11/11、lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 生产构建、定向 ESLint/Prettier、组件 CSS/HUD token Stylelint 与差异检查通过。`custom.css` 的 14 个属性排序问题都在未改动行；生产构建保留既有 Less/Element Plus/chunk 警告。
+- **Impeccable 与代码复审**：Assessment A 31/40（Good），无 P0–P3；B 的两个 detector 为 `[]`/空 stderr/退出码 0，六个 Light/站点深色/HUD × 桌面/移动视图注入成功。移动根文档扩宽仅出现在 overlay 注入后（390px → 630px），基线及无 overlay E2E 无溢出，归因为覆盖层/页面外壳副作用。独立代码复审无 P0–P3。报告、18 张 overlay 截图、浏览器证据、源码指纹和正式综合 snapshot/trend 见 `.impeccable/critique/lxtextarea-wave-2026-10-13/`。
+- **边界与下一步**：仅关闭 `LxTextarea` 当前组件级审查，不增加 UI-10 全库 0/52 计数，不代表宿主页面替换、真实后端或 NVDA/VoiceOver 人工验收完成。下一项为 `LxSelect`，随后按既定顺序完成其他基础控件、动态图标、`LxDynamicForm`、其余组件与整库审查，再替换 Vue3 Element Plus。
+- **提交约定**：组件、Demo、行为测试和组件 API 文档使用 `fix(lx-ui): ...`；计划、审计、项目地图、迁移台账和交接使用 `docs(project): ...`，按本波文件白名单分开提交并推送。
+
 ## [2026-10-12] SCOPE / 页面操作引导暂缓，后续按需执行
 
 - 页面操作引导暂不纳入当前执行队列、不主动排期，也不阻塞 lx-ui 收口或 Vue3 Element Plus 替换。
