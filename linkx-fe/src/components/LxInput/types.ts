@@ -23,7 +23,12 @@ export interface LxInputProps {
   disabled?: boolean
   /** 只读态：可聚焦不可改值 */
   readonly?: boolean
-  /** 可清空：值非空时右侧出现清除按钮（标本八件套 01 默认行 cancel 图标） */
+  /** 原生必填语义；业务表单校验规则仍由 LxForm 管理 */
+  required?: boolean
+  /**
+   * 可清空：有值且输入框聚焦、悬停或清除按钮获焦时显示；禁用或只读时不可清空。
+   * （标本八件套 01 默认行图标）
+   */
   clearable?: boolean
   /** 密码可见切换（仅 type="password" 生效，EP 内核行为） */
   showPassword?: boolean
@@ -40,8 +45,8 @@ export interface LxInputProps {
   mono?: boolean
   /** 工程尺寸档：sm=28px / md=32px（基准）/ lg=40px */
   size?: LxInputSize
-  /** 原生 name 属性（表单序列化 / 读屏关联） */
+  /** 原生 name 属性（用于表单提交与序列化，不提供控件可访问名称） */
   name?: string
-  /** 自动完成提示；涉密字段宿主应传 'off'（默认不走浏览器记忆） */
+  /** 原生自动完成提示；浏览器或密码管理器可能忽略，不能作为敏感信息保护措施 */
   autocomplete?: string
 }

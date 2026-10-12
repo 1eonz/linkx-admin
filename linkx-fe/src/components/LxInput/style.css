@@ -19,9 +19,20 @@
   transition: box-shadow var(--lx-transition);
 }
 
-/* 禁用态：半透明（标本 01 上级锁定行） */
+/* 禁用态保留灰色表面，同时维持值的可读性。 */
 .lx-input.is-disabled .el-input__wrapper {
-  opacity: 0.6;
+  opacity: 1;
+  background-color: var(--lx-bg-card-hover);
+}
+
+.lx-input.is-disabled .el-input__inner {
+  color: var(--lx-text-regular);
+  -webkit-text-fill-color: var(--lx-text-regular);
+}
+
+/* 输入值在两种主题下都使用输入表面专属正文令牌。 */
+.lx-input .el-input__inner {
+  color: var(--lx-color-on-input);
 }
 
 /* hover：描边转主色 */
@@ -30,7 +41,7 @@
 }
 
 /* 键盘焦点：1px 主色内描边 + 2px 光环（不在控件外溢出第二圈） */
-.lx-input .el-input__wrapper.is-focus {
+html:root .lx-input .el-input__wrapper.is-focus {
   outline: none;
   outline-offset: 0;
   box-shadow:
@@ -39,12 +50,12 @@
 }
 
 /* 错误态：使用表单专属校验令牌，依赖 ElForm/LxForm 上下文。 */
-.el-form-item.is-error .lx-input .el-input__wrapper {
+html:root .el-form-item.is-error .lx-input .el-input__wrapper {
   background-color: var(--lx-color-form-error-bg);
   box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
 }
 
-.el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
+html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
   outline: none;
   outline-offset: 0;
   box-shadow:
@@ -77,6 +88,12 @@
   background-color: var(--lx-bg-card);
 }
 
+.lx-input .el-input-group__prepend,
+.lx-input .el-input-group__append {
+  background-color: var(--lx-bg-card-hover);
+  color: var(--lx-text-regular);
+}
+
 .el-form-item.is-error .lx-input .el-input__count-inner {
   background-color: transparent;
 }
@@ -87,11 +104,49 @@
   color: var(--lx-color-error-strong);
 }
 
+/* 使用真实按钮承载清空操作，使其可以通过键盘访问。 */
+.lx-input .lx-input__clear {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: 2px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--lx-radius-sm);
+  background: transparent;
+  color: var(--lx-text-secondary-strong);
+  cursor: pointer;
+  transition:
+    color var(--lx-transition),
+    background-color var(--lx-transition);
+}
+
+.lx-input .lx-input__clear:hover {
+  background-color: var(--el-fill-color-light);
+  color: var(--lx-color-primary);
+}
+
+.lx-input .lx-input__clear:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 1px;
+}
+
+.lx-input.is-disabled .lx-input__clear {
+  display: none;
+}
+
 /* ===== 触屏 ===== */
 /* 触屏或窄屏：44px 最小触控目标（与 Radio/Checkbox/Switch 同族契约；
  * textarea 多行基线天然 ≥44px，无此需求） */
 @media (hover: none), (max-width: 640px) {
   .lx-input .el-input__wrapper {
     min-height: 44px;
+  }
+
+  .lx-input .lx-input__clear {
+    width: 44px;
+    height: 44px;
   }
 }

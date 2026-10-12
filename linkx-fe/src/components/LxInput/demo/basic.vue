@@ -3,17 +3,27 @@ import { onMounted, reactive, ref } from 'vue'
 import type { FormRules } from 'element-plus'
 import LxInput from '../index.vue'
 import type { LxInputSize } from '../types'
-import { LxForm, LxFormItem } from '../../../index'
+import { LxForm, LxFormItem, LxIcon } from '../../../index'
 import type { LxFormInstance } from '../../../index'
+
+type LxInputExposes = {
+  focus: () => void
+  blur: () => void
+  select: () => void
+}
 
 const size = ref<LxInputSize>('md')
 const hudTheme = ref(false)
 
 /** 各示例字段独立状态，避免共用 model 互相覆盖 */
-const officerName = ref('')
+const officerName = ref('张文远')
+const officerNameInputRef = ref<LxInputExposes>()
 const officerId = ref('33010619890401')
+const caseCode = ref('2026-0001')
+const password = ref('')
 const phoneFormRef = ref<LxFormInstance>()
 const phoneForm = reactive({ phone: '1390000' })
+const inheritedDisabledForm = reactive({ value: '继承表单禁用状态' })
 const phoneRules: FormRules = {
   phone: [
     {
@@ -24,6 +34,7 @@ const phoneRules: FormRules = {
   ],
 }
 const readonlyNode = ref('杭州市公安局西湖区分局 (自动指派)')
+const readonlyNote = ref('涉密核验已完成，可选择并复制')
 const lastAction = ref('输入内容观察状态；演示数据仅存在于页面内存。')
 
 onMounted(() => {
@@ -32,6 +43,11 @@ onMounted(() => {
 
 function reportChange(field: string, value: string) {
   lastAction.value = `${field} 已输入：${value || '(空)'}`
+}
+
+function runInputMethod(method: keyof LxInputExposes) {
+  officerNameInputRef.value?.[method]()
+  lastAction.value = `已调用 LxInput.${method}()`
 }
 </script>
 
@@ -53,14 +69,16 @@ function reportChange(field: string, value: string) {
     </div>
 
     <section class="lx-input-demo__panel" data-testid="states">
-      <h4>基础状态（标本八件套 01 四态）</h4>
+      <h3>基础状态（标本八件套 01 四态）</h3>
       <div class="lx-input-demo__grid">
         <div class="lx-input-demo__field">
           <label class="lx-input-demo__label" for="demo-officer-name"
             >警员姓名 / 警号</label
           >
           <LxInput
+            ref="officerNameInputRef"
             id="demo-officer-name"
+            name="officerName"
             v-model="officerName"
             :size="size"
             placeholder="请输入警员姓名/警号"
@@ -68,16 +86,33 @@ function reportChange(field: string, value: string) {
             @change="reportChange('警员姓名', officerName)"
             @clear="lastAction = '警员姓名已清空'"
           />
-          <p class="lx-input-demo__tip">默认态，支持 clearable 清除</p>
+          <p class="lx-input-demo__tip">当前为示例值；聚焦或悬停后可清空</p>
+          <div
+            class="lx-input-demo__exposes"
+            role="group"
+            aria-label="输入框公开方法"
+          >
+            <button type="button" @click="runInputMethod('focus')">
+              聚焦（focus）
+            </button>
+            <button type="button" @click="runInputMethod('select')">
+              全选（select）
+            </button>
+            <button type="button" @click="runInputMethod('blur')">
+              失焦（blur）
+            </button>
+          </div>
         </div>
         <div class="lx-input-demo__field">
           <label class="lx-input-demo__label" for="demo-officer-id">
-            <span class="lx-input-demo__required">*</span>身份标识编码
+            <span class="lx-input-demo__required" aria-hidden="true">*</span
+            >身份标识编码
           </label>
           <LxInput
             id="demo-officer-id"
             v-model="officerId"
             :size="size"
+            required
             mono
             :maxlength="18"
             @change="reportChange('身份标识编码', officerId)"
@@ -86,6 +121,43 @@ function reportChange(field: string, value: string) {
             mono 等宽值：聚焦主色边框 + 光环（全局桥供给）
           </p>
         </div>
+        <div class="lx-input-demo__field">
+          <label
+            class="lx-input-demo__label lx-input-demo__label--disabled"
+            for="demo-node"
+          >
+            所属分局系统节点（禁用）
+          </label>
+          <LxInput
+            id="demo-node"
+            v-model="readonlyNode"
+            :size="size"
+            disabled
+          />
+          <p class="lx-input-demo__tip">禁用态：不可聚焦、不可编辑</p>
+        </div>
+        <div class="lx-input-demo__field">
+          <label class="lx-input-demo__label" for="demo-readonly-note">
+            归档说明（只读，可选择复制）
+          </label>
+          <LxInput
+            id="demo-readonly-note"
+            v-model="readonlyNote"
+            :size="size"
+            readonly
+          />
+          <p class="lx-input-demo__tip">只读态：可以聚焦和选择内容</p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="lx-input-demo__panel"
+      data-testid="validation"
+      aria-labelledby="lx-input-validation-title"
+    >
+      <h3 id="lx-input-validation-title">表单校验状态</h3>
+      <div class="lx-input-demo__grid">
         <div class="lx-input-demo__field">
           <LxForm
             ref="phoneFormRef"
@@ -99,6 +171,7 @@ function reportChange(field: string, value: string) {
                 id="demo-phone"
                 v-model="phoneForm.phone"
                 :size="size"
+                inputmode="tel"
                 mono
                 :maxlength="11"
                 show-word-limit
@@ -106,30 +179,33 @@ function reportChange(field: string, value: string) {
               />
             </LxFormItem>
           </LxForm>
-          <p class="lx-input-demo__tip">
-            当前以无效号码展示真实校验错误；改为 11 位手机号后错误会清除
-          </p>
+          <p class="lx-input-demo__tip">改为 11 位手机号后，错误提示会清除。</p>
         </div>
-        <div class="lx-input-demo__field">
-          <label
-            class="lx-input-demo__label lx-input-demo__label--disabled"
-            for="demo-node"
-          >
-            所属分局系统节点 (只读)
-          </label>
-          <LxInput
-            id="demo-node"
-            v-model="readonlyNode"
-            :size="size"
+        <div class="lx-input-demo__field" data-testid="inherited-disabled">
+          <LxForm
+            class="lx-input-demo__validation-form"
+            :model="inheritedDisabledForm"
             disabled
-          />
-          <p class="lx-input-demo__tip">禁用只读态：灰底锁定不可变</p>
+            label-position="top"
+          >
+            <LxFormItem label="继承表单禁用（含可清空输入框）" prop="value">
+              <LxInput
+                id="demo-form-disabled"
+                v-model="inheritedDisabledForm.value"
+                :size="size"
+                clearable
+              />
+            </LxFormItem>
+          </LxForm>
+          <p class="lx-input-demo__tip">
+            表单级禁用会传给字段，清空按钮不可用。
+          </p>
         </div>
       </div>
     </section>
 
     <section class="lx-input-demo__panel" data-testid="addons">
-      <h4>前后缀 / 密码 / 透传</h4>
+      <h3>前后缀 / 密码 / 透传</h3>
       <div class="lx-input-demo__grid">
         <div class="lx-input-demo__field">
           <label class="lx-input-demo__label" for="demo-case-code"
@@ -137,13 +213,15 @@ function reportChange(field: string, value: string) {
           >
           <LxInput
             id="demo-case-code"
-            v-model="officerName"
+            v-model="caseCode"
             :size="size"
             mono
             placeholder="AJ-2026-0001"
           >
             <template #prepend>AJ</template>
             <template #append>号</template>
+            <template #prefix><LxIcon name="file" :size="14" /></template>
+            <template #suffix><LxIcon name="tag" :size="14" /></template>
           </LxInput>
           <p class="lx-input-demo__tip">
             prepend/append 复合输入（EP 内核契约）
@@ -155,7 +233,7 @@ function reportChange(field: string, value: string) {
           >
           <LxInput
             id="demo-secret"
-            v-model="officerName"
+            v-model="password"
             :size="size"
             type="password"
             show-password
@@ -163,7 +241,8 @@ function reportChange(field: string, value: string) {
             placeholder="输入后可切换明文"
           />
           <p class="lx-input-demo__tip">
-            showPassword 明暗切换；涉密字段 autocomplete 关闭
+            showPassword 明暗切换；autocomplete="off"
+            仅为浏览器提示，不能保护涉密信息
           </p>
         </div>
       </div>
@@ -219,7 +298,7 @@ function reportChange(field: string, value: string) {
   background: var(--lx-bg-card);
 }
 
-.lx-input-demo__panel h4 {
+.lx-input-demo__panel h3 {
   margin: 0;
   font-size: 13px;
   font-weight: 600;
@@ -228,7 +307,7 @@ function reportChange(field: string, value: string) {
 
 .lx-input-demo__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 16px;
 }
 
@@ -246,6 +325,39 @@ function reportChange(field: string, value: string) {
   margin-bottom: 0;
 }
 
+:deep(.lx-input-demo__validation-form .el-form-item__error) {
+  position: static;
+  margin-top: 4px;
+  padding-top: 0;
+  line-height: 16px;
+}
+
+.lx-input-demo__exposes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lx-input-demo__exposes button {
+  min-height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--lx-border);
+  border-radius: var(--lx-radius-sm);
+  background: var(--lx-bg-card);
+  color: var(--lx-text-regular);
+  cursor: pointer;
+}
+
+.lx-input-demo__exposes button:hover {
+  border-color: var(--lx-color-primary);
+  color: var(--lx-color-primary);
+}
+
+.lx-input-demo__exposes button:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
 .lx-input-demo__label {
   font-size: 12px;
   font-weight: 500;
@@ -253,7 +365,7 @@ function reportChange(field: string, value: string) {
 }
 
 .lx-input-demo__label--disabled {
-  color: var(--lx-text-placeholder);
+  color: var(--lx-text-regular);
 }
 
 .lx-input-demo__required {
@@ -271,6 +383,20 @@ function reportChange(field: string, value: string) {
 }
 
 .lx-input-demo__note {
-  color: var(--lx-color-warning-strong);
+  color: var(--lx-color-warning-text);
+}
+
+@media (hover: none), (max-width: 640px) {
+  .lx-input-demo__toolbar label {
+    min-height: 44px;
+  }
+
+  .lx-input-demo__toolbar select {
+    min-height: 44px;
+  }
+
+  .lx-input-demo__exposes button {
+    min-height: 44px;
+  }
 }
 </style>

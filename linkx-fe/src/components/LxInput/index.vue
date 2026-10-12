@@ -8,10 +8,11 @@
  * 避免内核内容行高撑开外框（mono 值字体、计数器外观也见 style.css）。
  * 未声明的 EP props（formatter/parser 等）经 $attrs 透传，兼容旧用法。
  */
-import { ref } from 'vue'
-import { ElInput } from 'element-plus'
+import { computed, inject, ref } from 'vue'
+import { ElInput, formContextKey } from 'element-plus'
 import type { InputInstance } from 'element-plus'
 import type { LxInputProps, LxInputSize } from './types'
+import LxIcon from '../LxIcon/index.vue'
 import 'element-plus/es/components/input/style/css'
 import './style.css'
 
@@ -26,6 +27,7 @@ const props = withDefaults(defineProps<LxInputProps>(), {
   // 才不会被短路；删掉默认值不行——无 default 的 Boolean 会被 cast 成 false
   disabled: undefined,
   readonly: false,
+  required: false,
   clearable: false,
   showPassword: false,
   maxlength: undefined,
@@ -48,12 +50,49 @@ const emit = defineEmits<{
 
 /** EP 内核实例引用：focus/blur/select 方法透传给调用方 */
 const inputRef = ref<InputInstance>()
+const formContext = inject(formContextKey, undefined)
+const isFocused = ref(false)
+const isHovered = ref(false)
+const isClearFocused = ref(false)
+const isDisabled = computed(
+  () => props.disabled ?? formContext?.disabled ?? false,
+)
+
+const clearButtonEnabled = computed(() => {
+  const hasValue = String(props.modelValue ?? '').length > 0
+
+  return props.clearable && !isDisabled.value && !props.readonly && hasValue
+})
+
+const clearButtonVisible = computed(() => {
+  return (
+    clearButtonEnabled.value &&
+    (isFocused.value || isHovered.value || isClearFocused.value)
+  )
+})
 
 /** 档位映射：Lx 工程档名 → EP 内核档（高度由全局令牌桥收敛 28/32/40px） */
 const SIZE_MAP: Record<LxInputSize, 'small' | 'default' | 'large'> = {
   sm: 'small',
   md: 'default',
   lg: 'large',
+}
+
+function handleFocus(event: FocusEvent) {
+  isFocused.value = true
+  emit('focus', event)
+}
+
+function handleBlur(event: FocusEvent) {
+  isFocused.value = false
+  emit('blur', event)
+}
+
+function clearInput(event: MouseEvent) {
+  if (!clearButtonEnabled.value) return
+
+  inputRef.value?.clear(event)
+  inputRef.value?.focus()
 }
 
 defineExpose({
@@ -75,8 +114,9 @@ defineExpose({
     :type="type"
     :placeholder="placeholder"
     :disabled="disabled"
+    :required="required"
     :readonly="readonly"
-    :clearable="clearable"
+    :clearable="false"
     :show-password="showPassword"
     :maxlength="maxlength"
     :minlength="minlength"
@@ -85,15 +125,36 @@ defineExpose({
     :name="name"
     :autocomplete="autocomplete"
     v-bind="$attrs"
+    @mouseenter="isHovered = true"
+    @mouseleave="isHovered = false"
     @update:model-value="emit('update:modelValue', $event)"
     @input="emit('input', $event)"
     @change="emit('change', $event)"
-    @focus="emit('focus', $event)"
-    @blur="emit('blur', $event)"
+    @focus="handleFocus"
+    @blur="handleBlur"
     @clear="emit('clear')"
   >
     <template v-if="$slots.prefix" #prefix><slot name="prefix" /></template>
-    <template v-if="$slots.suffix" #suffix><slot name="suffix" /></template>
+    <template v-if="$slots.suffix || clearable" #suffix>
+      <slot name="suffix" />
+      <button
+        v-if="clearable"
+        class="lx-input__clear"
+        type="button"
+        :disabled="!clearButtonEnabled"
+        :tabindex="clearButtonEnabled ? 0 : -1"
+        :aria-hidden="clearButtonEnabled ? undefined : 'true'"
+        aria-label="清空输入框"
+        title="清空输入"
+        :style="{ visibility: clearButtonVisible ? 'visible' : 'hidden' }"
+        @mousedown.prevent
+        @focus="isClearFocused = true"
+        @blur="isClearFocused = false"
+        @click="clearInput"
+      >
+        <LxIcon name="x" :size="14" />
+      </button>
+    </template>
     <template v-if="$slots.prepend" #prepend><slot name="prepend" /></template>
     <template v-if="$slots.append" #append><slot name="append" /></template>
   </ElInput>

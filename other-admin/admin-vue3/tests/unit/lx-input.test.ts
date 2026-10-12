@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { LxInput } from 'lx-ui';
+import { LxForm, LxInput } from 'lx-ui';
 import { describe, expect, it } from 'vitest';
 import { nextTick } from 'vue';
 
@@ -52,12 +52,58 @@ describe('LxInput', () => {
     wrapper.unmount();
   });
 
-  it('blocks editing when disabled', () => {
-    const wrapper = mount(LxInput, { props: { disabled: true, modelValue: 'x' } });
+  it('blocks editing and clearing when explicitly disabled', async () => {
+    const wrapper = mount(LxInput, {
+      props: { disabled: true, clearable: true, modelValue: 'x' },
+    });
 
     const input = wrapper.get('input.el-input__inner');
     expect(input.attributes('disabled')).toBeDefined();
     expect(wrapper.classes()).toContain('is-disabled');
+    await wrapper.trigger('mouseenter');
+    const clear = wrapper.get('button.lx-input__clear');
+    expect(clear.attributes('disabled')).toBeDefined();
+    expect(clear.attributes('tabindex')).toBe('-1');
+    await clear.trigger('click');
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+    wrapper.unmount();
+  });
+
+  it('blocks clearing when readonly', async () => {
+    const wrapper = mount(LxInput, {
+      props: { readonly: true, clearable: true, modelValue: 'x' },
+    });
+
+    const input = wrapper.get('input.el-input__inner');
+    expect(input.attributes('readonly')).toBeDefined();
+    await wrapper.trigger('mouseenter');
+    const clear = wrapper.get('button.lx-input__clear');
+    expect(clear.attributes('disabled')).toBeDefined();
+    expect(clear.attributes('tabindex')).toBe('-1');
+    await clear.trigger('click');
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+    wrapper.unmount();
+  });
+
+  it('inherits form-level disabled state for the clearable action', async () => {
+    const wrapper = mount(
+      {
+        components: { LxForm, LxInput },
+        data: () => ({ value: '330106' }),
+        template: '<LxForm disabled><LxInput v-model="value" clearable /></LxForm>',
+      },
+      { attachTo: document.body },
+    );
+
+    await wrapper.get('input.el-input__inner').trigger('mouseenter');
+    const clear = wrapper.get('button.lx-input__clear');
+
+    expect(wrapper.get('input.el-input__inner').attributes('disabled')).toBeDefined();
+    expect(clear.attributes('disabled')).toBeDefined();
+    expect(clear.attributes('tabindex')).toBe('-1');
+    await clear.trigger('click');
+    expect(wrapper.vm.value).toBe('330106');
+
     wrapper.unmount();
   });
 
@@ -76,13 +122,24 @@ describe('LxInput', () => {
       props: { modelValue: '330106', clearable: true },
     });
 
-    // EP 内核在 hover 后渲染清除按钮（focused || hovering 契约）
+    // 清除按钮在聚焦或悬停时进入可访问状态，并保留 EP 内核清空事件契约。
     await wrapper.trigger('mouseenter');
-    const clear = wrapper.get('.el-input__clear');
+    const clear = wrapper.get('button.lx-input__clear');
+    expect(clear.attributes('aria-label')).toBe('清空输入框');
+    expect(clear.attributes('tabindex')).toBe('0');
     await clear.trigger('click');
 
     expect(wrapper.emitted('clear')).toHaveLength(1);
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['']);
+    expect(wrapper.emitted('change')?.at(-1)).toEqual(['']);
+    expect(wrapper.emitted('input')?.at(-1)).toEqual(['']);
+    wrapper.unmount();
+  });
+
+  it('passes native required semantics to the real input', () => {
+    const wrapper = mount(LxInput, { props: { required: true } });
+
+    expect(wrapper.get('input.el-input__inner').attributes('required')).toBeDefined();
     wrapper.unmount();
   });
 

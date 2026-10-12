@@ -38,8 +38,18 @@ test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用',
     'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")]',
   );
   const counterRoot = demo.locator('.lx-input-demo__validation-form .lx-input');
+  const addons = demo.locator('.lx-input .el-input-group__prepend, .lx-input .el-input-group__append');
+  const validationInput = demo.locator('#demo-phone');
+  const validationItem = validationInput.locator(
+    'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " el-form-item ")]',
+  );
+  const validationError = validationItem.locator('.el-form-item__error');
 
   await expect(name).toHaveCount(1);
+  await expect(name).toHaveValue('张文远');
+  await expect(name).toHaveAttribute('name', 'officerName');
+  await expect(demo.locator('[data-testid="states"] .lx-input-demo__field')).toHaveCount(4);
+  await expect(demo.locator('[data-testid="validation"] .lx-input-demo__field')).toHaveCount(2);
   for (const [option, expectedHeight] of [
     ['sm', 28],
     ['md', 32],
@@ -104,27 +114,245 @@ test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用',
     });
   const lightCounterContrast = await getInputCounterContrast();
   expect(lightCounterContrast.ratio, JSON.stringify(lightCounterContrast)).toBeGreaterThanOrEqual(4.5);
+  const getContrastRatios = (elements: typeof addons) =>
+    elements.evaluateAll((nodes) => {
+      const luminance = (rgb: number[]) => {
+        const linear = rgb.map((channel) => {
+          const value = channel / 255;
+          return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+        });
+        return linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
+      };
+      const parseColor = (color: string) => {
+        const channels = color.match(/[\d.]+/g)?.map(Number);
+        if (!channels || channels.length < 3) throw new Error(`无法解析颜色值：${color}`);
+        return { rgb: channels.slice(0, 3), alpha: channels[3] ?? 1 };
+      };
+
+      return nodes.map((element) => {
+        const foreground = luminance(parseColor(getComputedStyle(element).color).rgb);
+        const backgrounds: Array<{ rgb: number[]; alpha: number }> = [];
+        for (let ancestor: Element | null = element; ancestor; ancestor = ancestor.parentElement) {
+          const background = parseColor(getComputedStyle(ancestor).backgroundColor);
+          if (background.alpha > 0) backgrounds.push(background);
+          if (background.alpha >= 1) break;
+        }
+        let visibleBackground = [255, 255, 255];
+        for (let index = backgrounds.length - 1; index >= 0; index -= 1) {
+          const layer = backgrounds[index];
+          visibleBackground = layer.rgb.map(
+            (channel, channelIndex) => channel * layer.alpha + visibleBackground[channelIndex] * (1 - layer.alpha),
+          );
+        }
+        const background = luminance(visibleBackground);
+        return (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05);
+      });
+    });
+  const note = demo.locator('.lx-input-demo__note');
+  const lightAddonContrast = await getContrastRatios(addons);
+  expect(lightAddonContrast).toHaveLength(2);
+  expect(lightAddonContrast.every((ratio) => ratio >= 4.5)).toBe(true);
+  const lightNoteContrast = await getContrastRatios(note);
+  expect(lightNoteContrast).toHaveLength(1);
+  expect(lightNoteContrast[0]).toBeGreaterThanOrEqual(4.5);
+  const disabledInput = demo.locator('#demo-node');
+  const disabledLabel = demo.locator('label[for="demo-node"]');
+  const readableInputs = demo.locator('#demo-officer-name, #demo-officer-id, #demo-readonly-note');
+  await expect(validationItem).toHaveClass(/is-error/);
+  await expect(validationError).toBeVisible();
+  const lightValidationInputContrast = await getContrastRatios(validationInput);
+  const lightValidationErrorContrast = await getContrastRatios(validationError);
+  expect(lightValidationInputContrast).toHaveLength(1);
+  expect(lightValidationInputContrast[0]).toBeGreaterThanOrEqual(4.5);
+  expect(lightValidationErrorContrast).toHaveLength(1);
+  expect(lightValidationErrorContrast[0]).toBeGreaterThanOrEqual(4.5);
+  const disabledContrast = await getContrastRatios(disabledInput);
+  expect(disabledContrast).toHaveLength(1);
+  expect(disabledContrast[0]).toBeGreaterThanOrEqual(4.5);
+  const lightDisabledLabelContrast = await getContrastRatios(disabledLabel);
+  expect(lightDisabledLabelContrast).toHaveLength(1);
+  expect(lightDisabledLabelContrast[0], JSON.stringify(lightDisabledLabelContrast)).toBeGreaterThanOrEqual(4.5);
+  await expect(
+    disabledInput.locator(
+      'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " el-input__wrapper ")]',
+    ),
+  ).toHaveCSS('opacity', '1');
   await demo.getByLabel('HUD 深色主题', { exact: true }).setChecked(true);
   const hudCounterContrast = await getInputCounterContrast();
   expect(hudCounterContrast.ratio, JSON.stringify(hudCounterContrast)).toBeGreaterThanOrEqual(4.5);
+  const hudAddonContrast = await getContrastRatios(addons);
+  expect(hudAddonContrast).toHaveLength(2);
+  expect(hudAddonContrast.every((ratio) => ratio >= 4.5)).toBe(true);
+  const hudNoteContrast = await getContrastRatios(note);
+  expect(hudNoteContrast).toHaveLength(1);
+  expect(hudNoteContrast[0]).toBeGreaterThanOrEqual(4.5);
+  const hudDisabledContrast = await getContrastRatios(disabledInput);
+  expect(hudDisabledContrast).toHaveLength(1);
+  expect(hudDisabledContrast[0]).toBeGreaterThanOrEqual(4.5);
+  const hudDisabledLabelContrast = await getContrastRatios(disabledLabel);
+  expect(hudDisabledLabelContrast).toHaveLength(1);
+  expect(hudDisabledLabelContrast[0], JSON.stringify(hudDisabledLabelContrast)).toBeGreaterThanOrEqual(4.5);
+  const hudReadableContrast = await getContrastRatios(readableInputs);
+  expect(hudReadableContrast).toHaveLength(3);
+  expect(
+    hudReadableContrast.every((ratio) => ratio >= 4.5),
+    JSON.stringify(hudReadableContrast),
+  ).toBe(true);
+  await expect(validationItem).toHaveClass(/is-error/);
+  const hudValidationInputContrast = await getContrastRatios(validationInput);
+  const hudValidationErrorContrast = await getContrastRatios(validationError);
+  expect(hudValidationInputContrast).toHaveLength(1);
+  expect(hudValidationInputContrast[0], JSON.stringify(hudValidationInputContrast)).toBeGreaterThanOrEqual(4.5);
+  expect(hudValidationErrorContrast).toHaveLength(1);
+  expect(hudValidationErrorContrast[0], JSON.stringify(hudValidationErrorContrast)).toBeGreaterThanOrEqual(4.5);
+
+  await demo.getByLabel('HUD 深色主题', { exact: true }).setChecked(false);
+  const lightReadableContrast = await getContrastRatios(readableInputs);
+  expect(lightReadableContrast).toHaveLength(3);
+  expect(
+    lightReadableContrast.every((ratio) => ratio >= 4.5),
+    JSON.stringify(lightReadableContrast),
+  ).toBe(true);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const toolbarLabels = demo.locator('.lx-input-demo__toolbar label');
+  const toolbarSelect = demo.locator('.lx-input-demo__toolbar select');
+  const toolbarLabelHeights = await toolbarLabels.evaluateAll((labels) =>
+    labels.map((label) => label.getBoundingClientRect().height),
+  );
+  expect(toolbarLabelHeights).toHaveLength(2);
+  expect(toolbarLabelHeights.every((height) => height >= 44)).toBe(true);
+  expect(await toolbarSelect.evaluate((element) => element.getBoundingClientRect().height)).toBeGreaterThanOrEqual(44);
 
   await size.selectOption('md');
   await name.focus();
   await expect(name).toBeFocused();
+  const focusWrapper = inputRoot.locator('.el-input__wrapper');
+  await expect
+    .poll(() => focusWrapper.evaluate((element) => getComputedStyle(element).boxShadow))
+    .toContain('0px 0px 0px 2px');
   await name.fill('张文远');
   await name.locator('xpath=..').hover();
-  const clearButton = inputRoot.locator('.el-input__clear');
+  const clearButton = inputRoot.getByRole('button', { name: '清空输入框', exact: true });
   await expect(clearButton).toBeVisible();
   await clearButton.click();
   await expect(name).toHaveValue('');
   await expect(demo.locator('.lx-input-demo__status')).toContainText('已清空');
-  await expect(demo.getByLabel('所属分局系统节点 (只读)', { exact: true })).toBeDisabled();
+  await expect(demo.getByLabel('所属分局系统节点（禁用）', { exact: true })).toBeDisabled();
+  const inheritedDisabled = demo.locator('#demo-form-disabled');
+  await expect(inheritedDisabled).toBeDisabled();
+  await expect(demo.locator('[data-testid="inherited-disabled"] button[aria-label="清空输入框"]')).toBeDisabled();
+  await expect(demo.locator('[data-testid="inherited-disabled"] button[aria-label="清空输入框"]')).toHaveAttribute(
+    'tabindex',
+    '-1',
+  );
 
   await page.setViewportSize({ width: 320, height: 812 });
   await demo.getByLabel('HUD 深色主题', { exact: true }).setChecked(true);
   await expect(name).toBeVisible();
   expect(await demo.evaluate((element) => element.classList.contains('lx-theme-hud'))).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+});
+
+test('Input 必填语义、只读/禁用差异、公开方法与示例值隔离正确', async ({ page }) => {
+  await page.goto('/components/lxinput');
+  const demo = page.locator('.lx-input-demo');
+  const name = demo.getByLabel('警员姓名 / 警号', { exact: true });
+  const officerId = demo.getByLabel('身份标识编码', { exact: false });
+  const caseCode = demo.getByLabel('案件编码', { exact: true });
+  const password = demo.getByLabel('涉密核验口令', { exact: true });
+  const phone = demo.getByLabel('联系电话', { exact: true });
+  const disabledNode = demo.getByLabel('所属分局系统节点（禁用）', { exact: true });
+  const readonlyNote = demo.getByLabel('归档说明（只读，可选择复制）', { exact: true });
+
+  await expect(officerId).toHaveAttribute('required', '');
+  await expect(demo.locator('.lx-input-demo__required')).toHaveAttribute('aria-hidden', 'true');
+  await expect(disabledNode).toBeDisabled();
+  await expect(disabledNode).not.toHaveAttribute('readonly');
+  await expect(readonlyNote).toHaveAttribute('readonly', '');
+  await expect(readonlyNote).toBeEnabled();
+  await readonlyNote.selectText();
+  expect(await readonlyNote.evaluate((element: HTMLInputElement) => element.selectionStart)).toBe(0);
+
+  await name.fill('王明');
+  await expect(caseCode).toHaveValue('2026-0001');
+  await expect(password).toHaveValue('');
+  await expect(phone).toHaveAttribute('inputmode', 'tel');
+
+  const caseCodeRoot = caseCode.locator(
+    'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")]',
+  );
+  await expect(caseCodeRoot.locator('.el-input__prefix .lx-icon')).toBeVisible();
+  await expect(caseCodeRoot.locator('.el-input__suffix .lx-icon')).toBeVisible();
+  await expect(caseCodeRoot.locator('.el-input-group__prepend')).toContainText('AJ');
+  await expect(caseCodeRoot.locator('.el-input-group__append')).toContainText('号');
+
+  await demo.getByRole('button', { name: '聚焦（focus）' }).click();
+  await expect(name).toBeFocused();
+  await name.fill('330106');
+  await demo.getByRole('button', { name: '全选（select）' }).click();
+  expect(await name.evaluate((element: HTMLInputElement) => [element.selectionStart, element.selectionEnd])).toEqual([
+    0, 6,
+  ]);
+  await demo.getByRole('button', { name: '失焦（blur）' }).click();
+  await expect(name).not.toBeFocused();
+});
+
+test('Input 清除按钮支持键盘操作，校验提示在桌面和窄屏不重叠', async ({ page }) => {
+  await page.goto('/components/lxinput');
+  const demo = page.locator('.lx-input-demo');
+  const name = demo.getByLabel('警员姓名 / 警号', { exact: true });
+  const clear = demo.getByRole('button', { name: '清空输入框', exact: true });
+
+  await name.fill('待清除的警员姓名');
+  await expect(clear).toBeVisible();
+  await name.press('Tab');
+  await expect(clear).toBeFocused();
+  await page.keyboard.press('Space');
+  await expect(name).toHaveValue('');
+  await expect(name).toBeFocused();
+  await expect(demo.locator('.lx-input-demo__status')).toContainText('已清空');
+
+  const error = demo.locator('.lx-input-demo__validation-form .el-form-item__error');
+  const helper = demo.getByText('改为 11 位手机号后，错误提示会清除。', { exact: true });
+  const validationInput = demo.locator('#demo-phone');
+  const validationInputRoot = validationInput.locator(
+    'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")]',
+  );
+  await validationInput.focus();
+  const errorFocusWrapper = validationInputRoot.locator('.el-input__wrapper');
+  await expect
+    .poll(() => errorFocusWrapper.evaluate((element) => getComputedStyle(element).boxShadow))
+    .toContain('0px 0px 0px 2px');
+  for (const width of [1440, 390, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    const [errorBox, helperBox] = await Promise.all([error.boundingBox(), helper.boundingBox()]);
+    expect(errorBox, '宽度 ' + width + 'px 时应显示表单错误').not.toBeNull();
+    expect(helperBox, '宽度 ' + width + 'px 时应显示校验说明').not.toBeNull();
+    expect(errorBox!.y + errorBox!.height).toBeLessThanOrEqual(helperBox!.y);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+  }
+
+  await page.setViewportSize({ width: 320, height: 900 });
+  await name.fill('窄屏触控目标');
+  await name.focus();
+  const clearBox = await clear.boundingBox();
+  expect(clearBox?.width).toBeGreaterThanOrEqual(44);
+  expect(clearBox?.height).toBeGreaterThanOrEqual(44);
+
+  const statesPanel = demo.locator('[data-testid="states"]');
+  const layout = await statesPanel.evaluate((panel) => {
+    const input = panel.querySelector<HTMLElement>('.lx-input');
+    if (!input) throw new Error('找不到状态示例中的输入框');
+    const style = getComputedStyle(panel);
+    const panelContentRight =
+      panel.getBoundingClientRect().right -
+      Number.parseFloat(style.borderRightWidth) -
+      Number.parseFloat(style.paddingRight);
+
+    return { inputRight: input.getBoundingClientRect().right, panelContentRight };
+  });
+  expect(layout.inputRight).toBeLessThanOrEqual(layout.panelContentRight + 0.5);
 });
 
 test('DatePicker 双输入各有标签，自定义日期与导航插槽保留内核选择', async ({ page }) => {

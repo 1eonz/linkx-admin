@@ -25,26 +25,27 @@ import Basic from '../../src/components/LxInput/demo/basic.vue';
 | `placeholder`   | `string`               | `''`             | 占位文案。                                                                                                           |
 | `disabled`      | `boolean`              | —（`undefined`） | 禁用态：灰底 + 禁用手势（标本 01 禁用行）。默认未设置：`ElForm` 禁用态可正常传导；显式传 `true`/`false` 才覆盖继承。 |
 | `readonly`      | `boolean`              | `false`          | 只读态：可聚焦不可改值。                                                                                             |
-| `clearable`     | `boolean`              | `false`          | 可清空：值非空时右侧清除按钮。                                                                                       |
+| `required`      | `boolean`              | `false`          | 原生必填语义；业务表单规则仍由 `LxForm` 管理。                                                                       |
+| `clearable`     | `boolean`              | `false`          | 可清空：有值且输入框聚焦、悬停或清除按钮获焦时显示；禁用或只读时不可清空。                                           |
 | `showPassword`  | `boolean`              | `false`          | 密码明暗切换（仅 `type="password"` 生效）。                                                                          |
 | `maxlength`     | `number`               | —                | 最大长度；与 `showWordLimit` 联动出现计数器（硬截断）。                                                              |
 | `minlength`     | `number`               | —                | 最小长度（表单校验契约，不产生视觉反馈）。                                                                           |
 | `showWordLimit` | `boolean`              | `false`          | 显示字数统计（等宽 11px 右下角）。                                                                                   |
 | `mono`          | `boolean`              | `false`          | 值用等宽字体：警号、证件号、编码等机器读数字段开启（标本 01 font-mono）。                                            |
 | `size`          | `'sm' \| 'md' \| 'lg'` | `'md'`           | 工程尺寸：28 / 32 / 40px；档名区别于 EP 的 `small/default/large`。                                                   |
-| `name`          | `string`               | —                | 原生 name 属性。                                                                                                     |
-| `autocomplete`  | `string`               | `'off'`          | 自动完成提示；默认关闭浏览器记忆，涉密场景保持默认。                                                                 |
+| `name`          | `string`               | —                | 原生 name 属性，用于表单提交和序列化；不会提供控件可访问名称。                                                       |
+| `autocomplete`  | `string`               | `'off'`          | 原生自动完成提示；浏览器或密码管理器可能忽略该值，不能作为敏感信息保护措施。                                         |
 
 ## Events
 
-| 名称                | 参数                  | 说明                      |
-| ------------------- | --------------------- | ------------------------- |
-| `update:modelValue` | `(value: string)`     | 输入值变化。              |
-| `input`             | `(value: string)`     | 输入事件（EP 内核原生）。 |
-| `change`            | `(value: string)`     | 失焦且值变化时派发。      |
-| `focus`             | `(event: FocusEvent)` | 聚焦。                    |
-| `blur`              | `(event: FocusEvent)` | 失焦。                    |
-| `clear`             | —                     | 点击清除按钮。            |
+| 名称                | 参数                  | 说明                                       |
+| ------------------- | --------------------- | ------------------------------------------ |
+| `update:modelValue` | `(value: string)`     | 输入值变化。                               |
+| `input`             | `(value: string)`     | 输入事件（EP 内核原生）。                  |
+| `change`            | `(value: string)`     | 输入后失焦且值变化时派发；清空时立即派发。 |
+| `focus`             | `(event: FocusEvent)` | 聚焦。                                     |
+| `blur`              | `(event: FocusEvent)` | 失焦。                                     |
+| `clear`             | —                     | 点击清除按钮。                             |
 
 ## Slots
 
@@ -77,7 +78,11 @@ import Basic from '../../src/components/LxInput/demo/basic.vue';
 
 ## 可访问性
 
-键盘焦点主色边框 + 光环（组件级固化，脱离全局桥不漂移）；`name`/`id` 供读屏关联；`autocomplete="off"` 默认防涉密字段浏览器记忆（高频可自动填充字段可按需覆写）；开启"减少动效"系统偏好时过渡动画全局关闭。
+- 使用可见 `<label for="...">` 与唯一 `id` 关联，或使用宿主表单的标签能力，为输入框提供可访问名称。
+- `name` 仅用于表单提交和序列化，不会为控件命名；`required` 传递原生必填语义。
+- `clearable` 使用带“清空输入框”名称的按钮，可通过 Tab、Enter 和空格键操作。
+- `disabled` 或 `readonly` 时清空按钮禁用并退出键盘顺序；按钮通过键盘获焦后会保持显示。
+- `autocomplete="off"` 仅为浏览器提示，部分浏览器或密码管理器仍可能自动填充，不能保护涉密信息；开启“减少动效”偏好时过渡动画会关闭。
 
 ## Vue3 宿主适配
 
