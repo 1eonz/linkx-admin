@@ -1,5 +1,13 @@
 # LinkX 项目地图
 
+## 2026-10-12 Wave 13 / LxButton 当前版正式收口
+
+- **组件入口**：`linkx-fe/src/components/LxButton/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxbutton.md`；按钮令牌位于 `linkx-fe/src/tokens/` 与 `linkx-fe/src/styles/`，设计依据为 `design/按钮体系/DESIGN.md`。
+- **回归入口**：`other-admin/admin-vue3/tests/unit/lx-button.test.ts`（33/33）与 `tests/e2e/lx-button-docs.spec.ts`（19/19）；E2E 使用 `playwright.lxui.config.ts`、Mock 后端和隔离浏览器文档站。
+- **构建验证**：lx-ui `vue-tsc --noEmit`、205 modules 构建、VitePress 文档构建、目标 ESLint/Prettier 与 `git diff --check` 通过。`md` 字号为 14px；Tooltip 关闭 Element Plus 默认淡入淡出；单测覆盖触摸/键盘聚焦，多视图 E2E 覆盖提示互斥和触屏点击。
+- **评审状态**：当前冻结版 Assessment A、Assessment B（detector/浏览器）及代码复审已完成，正式报告与 snapshot/trend 已保存；静态 detector `[]` 不能单独作为视觉通过证据。
+- **边界**：本波只处理组件库，不代表 Vue3 业务页全面使用 LxButton，不增加 UI-10 全库完成数，也不引入按钮权限或真实后端请求。
+
 ## 2026-10-11 Wave 11 / LxDescriptions 当前版正式复核
 
 - **组件入口**：`linkx-fe/src/components/LxDescriptions/`；Demo 为 `demo/basic.vue`，中文文档为 `linkx-fe/docs/components/lxdescriptions.md`。文档表格响应式逻辑位于 `docs/.vitepress/theme/useResponsiveDocTable.ts`，共享样式位于 `custom.css`。
@@ -326,7 +334,7 @@ Vue3 鉴权图片链路：`src/api/authImage.ts` 按 Vue2 网关映射请求站�
 ## 复用规则
 
 - Vue3 宿主业务 API 调用按 `AGENTS.md` 使用 `.then().catch().finally()`；历史代码按交付计划 CODE-01 分模块收敛。弹窗、表单校验等非 API 异步流程不作机械转换。
-- 用户于 2026-09-26 确认：Vue2 已有菜单、按钮权限码和管理员例外属于迁移基线；超出旧版的细粒度权限扩展、文本/字段权限、新权限中心工作流及页面引导系统延期。页面操作引导当前不纳入执行队列、不自动排期且不阻塞其他迁移；仅在用户再次明确提出后恢复评估。其他权限扩展的恢复条件见交付计划和权限契约清单。
+- 用户于 2026-09-26 确认：Vue2 已有菜单、按钮权限码和管理员例外属于迁移基线；超出旧版的细粒度权限扩展、文本/字段权限、新权限中心工作流及页面引导系统延期。页面操作引导当前不纳入执行队列、不主动排期且不阻塞其他迁移；后续确有需要时再恢复评估并安排实施。其他权限扩展的恢复条件见交付计划和权限契约清单。
 - 已收敛模块：基础数据、登录/登出、会话心跳、权限与 License 初始化、Navbar 绑定人员读取及同步进度工具、权限中心菜单/角色/人员/数据树/自定义部门请求、协同岗查询与写入请求、第三方接口统一通信/智能体/南向/应用/警单/北向请求、排班、全部 H5 页面、位置、仪表盘、虚拟用户，以及组织树/绑定弹窗/远程分页选择/ProTable API；`useTable`、`useFetch`、菜单与 License 路由初始化、HTTP 401 会话结束及登出流程均已按 Promise 链收敛。全源静态扫描无直接业务 API `await`，本地异步交互保留原写法；401 原请求错误透传和提示门恢复由 `auth-http.test.ts` 回归。
 - 无响应式副作用的格式化、校验、映射和协议解析放 `src/utils`。
 - 有响应式状态或生命周期的逻辑放 `src/composables`，并提供清理机制。
@@ -341,6 +349,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 执行顺序已调整为：先完成将由 Vue3 采用的高频 lx-ui 组件契约、Demo、行为测试和浏览器检查；再统一宿主导入、类型、自动导入、插件、样式与分包；随后按共享组件影响面分批替换页面，并在每批后回归受影响业务；全部迁移后才删除 Vue3 宿主的 element-plus 直接依赖。业务 API、字段、状态和 Vue2 已有菜单/按钮权限契约继续按源代码核对，不依赖该替换顺序。新权限中心、文本/字段权限及页面引导延期。当前 `LxVirtualTree` 与 `LxTransferPanel` 定向单测合计 64/64；`LxTransferPanel` 文档 E2E 28/28，含自定义筛选、键盘/焦点、触控和窄屏交互。VirtualTree 文档 E2E 13 项另行统计。二者均尚未替换 Vue3 `DataPermissionTree`，真实业务契约回归仍待 UI-04。
 
 基础控件桥接焦点样式记录在 `linkx-fe/docs/components/element-bridge.md`：输入等字段使用贴边 1px 边线与紧邻 2px、15% 浅色光晕；单选与多选下拉统一以自身 1px 边框表示焦点，不在控件外显示第二圈，错误态保留错误色边线；复选框保留自身 1px 状态边线，在 14px 方框外零间隙显示 2px 焦点环。Demo 和浏览器验收覆盖单选/多选、浅色/HUD、错误态、键盘展开、实际未选中/已选中/半选及窄屏状态。
+
+2026-10-12 已完成 lx-ui Wave 13 `LxButton` 当前版组件级复核：单测 33/33、文档 E2E 19/19、A 32/40、B 三个 detector 的 JSON/stderr/退出码为 `[]`/空/0，8/8 Light/HUD 视图注入成功。E2E 真实覆盖 Ctrl+点击时原页状态保持，以及主题迁移后可见 Tooltip 与按钮位置；代码复审发现的两项测试缺口已关闭。只关闭组件当前版审查，不增加 UI-10 全库 52 项关闭数；下一入口为基础控件 `LxInput`。页面操作引导暂不进入当前执行队列、不主动排期且不阻塞其他迁移；后续确有需要时再恢复评估并安排实施。
 
 ## 2026-10-11 Wave 11 P2 / TransferPanel 与 VirtualTree 当前交接
 

@@ -1,5 +1,13 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-12 lx-ui Wave 13 / LxButton 组件库交接完成
+
+- 组件库 `LxButton` 当前版已完成设计对照实现、中文 Demo/API、纯图标提示并发协调、明暗主题、减少动效、窄屏标签和摘要 44px 触达高度回归；Tooltip 保留 200ms 延迟且不使用 Element Plus 默认淡入淡出；Vue3 业务页面本波未替换按钮。
+- 单测 **33/33**、组件文档 E2E **19/19**；lx-ui 类型检查、205 modules 库构建、VitePress 构建、目标 ESLint/Prettier、`git diff --check` 通过。E2E 经 `playwright.lxui.config.ts` 运行并复用共用 Mock，未向真实后端发送请求。`md` 字号为 14px；Tooltip 触摸聚焦不显示，键盘聚焦正常显示。
+- 最终复审提出的 Ctrl+点击原页状态与主题迁移 Tooltip 可见/定位两项 E2E 缺口已关闭；修后全量文档 Playwright 19/19，通过真实 Ctrl+点击断言原页 hash、滚动位置和焦点保持。
+- 旧 SHA-256 指纹下的评估证据已作废；当前冻结版 A **32/40（Good）**、B 三 detector 合法 `[]`/空 stderr/退出码 0 且 8 个 Light/HUD 视图注入成功，代码复审无未关闭发现。桌面标签 P2 与测试可见性 P3 已关闭；窄屏工具栏高度和整段 region 焦点框两项 P3 决定后置。完整报告、overlay 归因、snapshot/trend 与原始证据见 `.impeccable/critique/lxbutton-wave-2026-10-12/final-after-label-fix/`。
+- 本组件库波次不关闭 Vue3 Element Plus 依赖迁移、UI-10 全库 52 项矩阵、业务按钮权限或真实后端联调。下一波按基础控件顺序复核 `LxInput`，之后继续其余基础控件和动态图标；基础控件与动态图标门槛完成后再进入 `LxDynamicForm`，最后进行 Vue3 Element Plus 分批替换。
+
 ## 2026-10-11 lx-ui Wave 11 / LxDescriptions 当前版正式复核完成
 
 - `LxDescriptions` 组件库当前版已完成长值、长状态、复制、错误恢复、窄屏表格和 reduced-motion 的 A/B 与浏览器证据；宿主业务页面未在本波改动。

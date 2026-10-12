@@ -1,5 +1,19 @@
 # LinkX 项目交接记录
 
+## [2026-10-12] SCOPE / 页面操作引导暂缓，后续按需执行
+
+- 页面操作引导暂不纳入当前执行队列、不主动排期，也不阻塞 lx-ui 收口或 Vue3 Element Plus 替换。
+- 后续确有需要时，再重新确认页面范围、文案、交互、后端契约，并评估实施排期；`doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅作为需求草案和未来设计基线。
+- 本次只调整范围备注，不代表引导功能已实施或完成验收。
+
+## [2026-10-12] lx-ui Wave 13 / LxButton 组件级正式收口
+
+- **完成范围**：按钮实现、Tooltip 并发协调和动画约束、尺寸与明暗主题、纯图标短标签、窄屏触控、键盘锚点、中文 Demo/API 和行为回归已按当前源码冻结完成。
+- **验证结果**：定向单测 33/33、文档 Playwright 19/19；`pnpm typecheck`、205 modules `pnpm build`、`pnpm build:docs`、目标 ESLint/Prettier、`git diff --check` 均通过。E2E 使用 `playwright.lxui.config.ts` 和共用 Mock。
+- **Impeccable**：A 32/40（Good），桌面纯图标标签 P2 已关闭；320px 工具栏高度与完整演示 region 焦点框两项 P3 决定后置。B 三 detector 均为有效 JSON `[]`、stderr 空、退出码 0；8/8 Light/HUD × 320/375/1024/1280 视图注入成功。overlay 宽度增加由 detector 标签坐标归因，未注入页面本身无横向溢出。综合报告、snapshot/trend、A/B 和代码复审见 `.impeccable/critique/lxbutton-wave-2026-10-12/final-after-label-fix/`。
+- **边界**：不增加 UI-10 全库计数，不代表 Vue3 业务按钮全面替换、真实权限或后端联调完成。页面操作引导继续暂缓。下一步按计划进入 `LxInput` 基础控件严格复核。
+- **提交约定**：组件实现与 E2E 使用 `fix(lx-ui): ...`；路线图、交付计划、审计、地图、迁移台账和交接记录使用 `docs(project): ...`；按本波白名单分开提交并推送。
+
 ## [2026-10-11] SCOPE / 页面操作引导暂缓执行
 
 - 用户决定页面操作引导暂时不执行，后续确有需要时再恢复。
@@ -2129,3 +2143,13 @@
 - **未关闭边界**：宿主保存状态、真实权限 API、`DataPermissionTree` 业务契约、读屏器专项和 Vue3 Element Plus 替换仍未完成；权限中心、文本/字段权限和引导页继续后置。组件级结项不增加 UI-10 全库 52 项关闭数。
 - **下一波交接**：`LxMetricCard` + `LxSectionTitle` 严格 UI A/B 复核；完成后处理台账中的 G2 `LxSearchBar`/`LxStatusSwitch`。下一波仍须先执行组件库验证和 Impeccable，再进入 Vue3 页面替换。
 - **提交与推送**：实现白名单提交 `fix(lx-ui): ...`，文档/证据白名单提交 `docs(project): ...`；提交前确认无 `.pnpm-store`、旧评估目录或其他协作者文件，随后推送 `origin/main`。所有后续 API 请求继续使用 `.then().catch().finally()`，新增注释和文档使用中文。
+
+## [2026-10-12] Wave 13 / LxButton 当前交接（正式收口补记）
+
+- **组件与设计入口**：`linkx-fe/src/components/LxButton/`、`linkx-fe/docs/components/lxbutton.md`、`design/按钮体系/DESIGN.md`；共享纯图标浮层协调器为 `icon-tooltip-coordinator.ts`。
+- **实现与行为**：补齐语义按钮样式、图标提示唯一性、禁用/加载时浮层关闭、窄屏纯图标可见短标签、块级主操作互斥 Demo、危险操作宿主确认边界、明暗主题和减少动效；320/375px 下摘要触达高度至少 44px。
+- **验证**：单测 **33/33**、文档 E2E **19/19**、lx-ui 类型检查、205 modules 构建、VitePress 构建、目标 ESLint/Prettier 与 `git diff --check` 通过。Playwright 使用 `playwright.lxui.config.ts`，所有后端请求由共用 Mock 拦截。首屏 E2E 使用真实 Ctrl+点击并拦截新标签默认动作，确认原页 hash、滚动位置和焦点不变；主题迁移用例在迁移后聚焦按钮，确认 Tooltip 实际可见、跟随 HUD 主题且位于按钮上方。Tooltip 保留 200ms 延迟并关闭 Element Plus 默认淡入淡出；`md` 字号为 14px；触摸聚焦不触发提示，键盘聚焦仍可触发。
+- **复审整改**：关闭首屏 Ctrl+点击保护与主题迁移 Tooltip 可见性/位置两项 E2E 覆盖发现，修后完整文档 E2E **19/19** 通过。
+- **当前状态**：两轮代码复审发现的动效白名单、字号和触屏聚焦问题均已修复，并补充浏览器/单测覆盖。当前冻结版 A/B、综合报告、detector 三件套、snapshot/trend 和代码复审已完成；A 为 32/40，代码复审无未关闭发现。静态 `[]` 只表示零条静态规则命中。
+- **范围边界**：不代表 Vue3 业务页面完成按钮替换，不关闭 UI-10 的 52 项全库审计，不修改权限/API/后端契约。页面操作引导计划已按用户决定暂缓，后续有需要再恢复排期。
+- **下一步与提交**：完成评审建议及有界复验后，更新路线图、交付检查、迁移台账、项目地图和本交接。实现/回归/组件中文文档使用一笔 `fix(lx-ui)`；项目计划/评审/审查证据使用一笔 `docs(project)`，只暂存本波白名单并推送 `origin/main`，再按组件审计矩阵继续下一组件。
