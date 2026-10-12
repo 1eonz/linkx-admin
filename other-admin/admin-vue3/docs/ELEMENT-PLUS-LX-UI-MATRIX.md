@@ -138,4 +138,4 @@ Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过 2 �
 - `LxTransferPanel` 与 `LxVirtualTree` 已完成当前版组件级严格 UI/交互审查：单测合计 67/67、文档 E2E 合计 48/48，类型、203 modules 构建、文档构建和 Vue3 生产构建通过；代码复审无 P0-P3。Assessment A 36/40；Assessment B 5 个 detector 均为有效 `[]`/空 stderr/0，9 个浏览器视图证据完整。
 - 这只表示库组件契约和演示证据完成，不表示 Vue3 `DataPermissionTree` 已替换。宿主仍需逐项核对数据字段、父子级联、树外已选键、exposes、批量上限、加载/空/错、取消和真实权限 API，并在 UI-04 补 Mock/E2E。
 - `el-tree` 的 15 处使用不能机械替换；`LxVirtualTree` 适用于虚拟树契约，`LxTransferPanel` 适用于双栏授权场景，其他页面继续保留 Element Plus 或使用 lx-ui 导出的桥接控件，直到适配矩阵有明确证据。
-- 下一库级严格审查批次为 `LxMetricCard` + `LxSectionTitle`；之后处理 G2 `LxSearchBar`/`LxStatusSwitch` 未关闭项。Vue3 Element Plus 依赖删除门槛、权限中心/文本权限/引导页延期规则和 `.then().catch().finally()` API 请求规范保持不变。
+- `LxMetricCard` + `LxSectionTitle` 已完成组件级复核；基础控件按顺序继续复核 `LxTextarea`。之后仍需处理 UI-10 其他未关闭项，再进入 Vue3 Element Plus 分批替换。宿主依赖删除门槛、权限中心/文本权限/页面操作引导延期规则和 `.then().catch().finally()` API 请求规范保持不变。

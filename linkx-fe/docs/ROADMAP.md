@@ -1,5 +1,13 @@
 # lx-ui 路线图
 
+## 2026-10-12 Wave 15 / LxInputNumber 当前版组件级复核完成
+
+- 组件、Demo 和中文 API 已按表单控件设计源复核；sm/md/lg 外框严格为 28/32/40px，步进按钮中间无间距，`controls` 参数可显示或隐藏。readonly 仍允许步进但不允许直接键入，边界禁用、方向键、Enter/空格、长按和卸载清理均有回归。
+- 单测 18/18、文档 E2E 2/2；类型检查、206 modules 构建、VitePress、Vue3 类型检查与生产构建、目标 Stylelint/ESLint/Prettier 和 `git diff --check` 通过。最终生产构建保留仓库既有的 Element Plus 大 chunk、Less 变量导出和循环 chunk 警告。
+- Impeccable A 31/40（Good）；B 两个 detector 为合法 JSON `[]`、stderr 空、退出码 0，四个 Light/HUD × 1440/390px 浏览器场景成功注入，页面错误和失败请求为 0。A/B 原始证据见 `.impeccable/critique/lxinput-wave-2026-10-12/final-stepper-event-fix/`；综合 snapshot 为 `.impeccable/critique/2026-10-12T14-02-10Z__127-0-0-1-components-lxinputnumber.md`，趋势首条 31/40。
+- 桌面上下步进目标约 13/15/19px 高度保留为设计权衡：设计稿限定外框和分半布局；窄屏目标 44×44px，键盘操作已实测。该记录不代表桌面指针目标达到 24px 下限。表单错误态 Demo、重复尾注保留为 P3 后续项。
+- 桌面目标高度 P2 尚待设计决策，严格矩阵行保持开放；下一项仍进入 `LxTextarea` 独立严格复核。页面操作引导保持暂缓，历史草案不计入当前任务和排期。
+
 ## 2026-10-12 Wave 14 / LxInput 当前版组件级复核完成
 
 - 已对照表单控件设计源复核 `LxInput`、Demo 与中文 API；清空按钮支持键盘操作，触屏目标为 44×44px，补齐必填语义、禁用/只读差异、公开方法示例和窄屏布局。Demo 分组标题改为连续的 H2/H3 层级。

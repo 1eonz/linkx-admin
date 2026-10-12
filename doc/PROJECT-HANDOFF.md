@@ -6,6 +6,15 @@
 - 后续确有需要时，再重新确认页面范围、文案、交互、后端契约，并评估实施排期；`doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅作为需求草案和未来设计基线。
 - 本次只调整范围备注，不代表引导功能已实施或完成验收。
 
+## [2026-10-12] lx-ui Wave 15 / LxInputNumber 当前版组件级复核交接
+
+- **完成范围**：按 `design/表单控件八件套/code.html` 05 复核组件、Demo、中文 API 和尺寸；sm/md/lg 外框为 28/32/40px，步进器按钮连续贴合，`controls` 参数可隐藏步进器。readonly 保留步进操作但禁止直接输入；修正 min/max 中文禁用说明，并阻止合成方向键冒泡到宿主快捷键。
+- **验证结果**：单测 18/18、InputNumber 文档 E2E 2/2、lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查与生产构建、目标 Stylelint/ESLint/Prettier、`git diff --check` 通过。生产构建警告来自既有 Element Plus 大 chunk、Less 变量导出和循环 chunk。
+- **Impeccable**：Assessment A 31/40（Good）；Assessment B 组件和 Demo detector 为合法 JSON `[]`、stderr 空、退出码 0，四个 Light/HUD × 桌面/窄屏视图注入成功，页面错误和失败请求为 0。A/B 原始报告、逐项命中归因、截图和指纹位于 `.impeccable/critique/lxinput-wave-2026-10-12/final-stepper-event-fix/`；综合 snapshot 为 `.impeccable/critique/2026-10-12T14-02-10Z__127-0-0-1-components-lxinputnumber.md`，趋势首条 31/40。
+- **审查处置**：代码复审无新的 P0–P3。桌面按钮目标高度 13/15/19px 按设计源上下均分结构保留，作为待设计决策观察项；不宣称满足桌面 24px 指针目标下限。窄屏步进目标为 44×44px，键盘路径实测通过。表单错误态 Demo、尾注重复列为后续 P3。
+- **边界与下一步**：桌面步进目标高度 P2 尚待设计决策，`LxInputNumber` 严格矩阵行保持开放且不增加 UI-10 全库关闭数；可并行进入下一项 `LxTextarea` 复核。本波不代表 Vue3 Element Plus 替换、真实权限或后端联调完成。页面操作引导继续暂缓、后续按需恢复。
+- **提交约定**：组件、Demo、行为测试和组件 API 文档使用 `fix(lx-ui): ...`；交付计划、审计、路线图、项目地图、迁移台账和交接使用 `docs(project): ...`，按文件白名单分开提交并推送。
+
 ## [2026-10-12] lx-ui Wave 14 / LxInput 当前版组件级复核交接完成
 
 - **完成范围**：按表单控件设计源复核 LxInput、Demo 与中文 API；清空按钮支持键盘操作和 44×44px 触屏目标，必填、禁用/只读、公开方法、错误提示排版、320px 网格及 Demo 标题层级均已核对。codeview 发现并修复父级 `LxForm disabled` 未同步禁用自定义清空按钮的问题。`autocomplete="off"` 已明确为不可靠的浏览器提示，不能作为敏感信息保护措施。

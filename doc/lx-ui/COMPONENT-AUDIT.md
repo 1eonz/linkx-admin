@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-12 Wave 15 / LxInputNumber 当前版组件级复核完成
+
+- 按表单控件设计源复核组件、Demo、中文 API、状态和键盘行为；sm/md/lg 外框 28/32/40px，右侧上下步进贴合无间隙，`controls` 可切换显示。readonly 步进、边界禁用、长按及清理路径有测试；修正 min/max 禁用方向文案，并避免合成方向键触发宿主快捷键。
+- 单测 18/18、文档 E2E 2/2、lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查和生产构建、目标格式/Lint 通过。正式 A 31/40（Good）；B 两个 detector 为合法 `[]`/空 stderr/退出码 0，四个 Light/HUD × 1440/390px 视图注入成功。A/B 原始证据见 `.impeccable/critique/lxinput-wave-2026-10-12/final-stepper-event-fix/`；综合 snapshot 为 `.impeccable/critique/2026-10-12T14-02-10Z__127-0-0-1-components-lxinputnumber.md`。
+- 代码复审无新的 P0–P3。桌面步进目标 13/15/19px 高度依照设计稿固定外框与上下均分规则保留为待设计决策项；窄屏按钮 44×44px，键盘路径通过。错误态 Demo 和重复说明为后续 P3。桌面目标高度 P2 尚未决策，故 `LxInputNumber` 严格矩阵行保持开放，不增加 UI-10 全库 52 项关闭数；该项不阻止下一基础控件 `LxTextarea` 独立复核。
+
 ## 2026-10-12 Wave 14 / LxInput 当前版组件级复核完成
 
 - 当前版组件、Demo 和中文 API 已按 `design/表单控件八件套/` 对照复核；已修正必填语义、清空按钮键盘支持与 44×44px 触屏目标、禁用/只读演示差异及 320px Demo 网格边界。Demo 的分组标题层级已修复为 H2 → H3。
@@ -238,7 +244,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                                                                                                     |
 | `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | A/B 与代码复审通过；真实读屏及权限菜单数据未覆盖，暂不计入严格矩阵                                                                                                                         |
 | `LxInput`            | `design/表单控件八件套/`                          | Wave 14 当前版组件级 A/B 与代码复审完成；两项 P3 测试增强建议待后续，宿主组合与 UI-10 全库门槛仍开放                                                                                          |
-| `LxInputNumber`      | `design/表单控件八件套/`                          | 下一严格复核项；32px、步进按钮、边界与键盘                                                                                                                                                 |
+| `LxInputNumber`      | `design/表单控件八件套/`                          | Wave 15 当前版组件级 A/B 与代码复审完成；保留桌面步进目标尺寸设计权衡和 Demo P3，不增加 UI-10 全库关闭数                                                                                      |
 | `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 待严格复核；数值、语义色、趋势、进度和窄屏                                                                                                                                                 |
 | `LxNavbar`           | `DESIGN-SPEC.md` + Navbar API/Demo                | 待严格复核；导航密度、焦点、菜单与窄屏                                                                                                                                                     |
 | `LxNodeBadge`        | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；节点状态、字号和对齐                                                                                                                                                           |

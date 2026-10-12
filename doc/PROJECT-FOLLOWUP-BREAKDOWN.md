@@ -5,6 +5,14 @@
 - 页面操作引导暂不纳入执行队列，不主动排期，也不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
 - 保留 `doc/GUIDE-CONTENT-PLAN.md` 作为需求/文案草案；后续确有需要时，再重新确认范围、交互和技术方案，并评估实施排期。
 
+## 2026-10-12 当前交接：LxInputNumber 组件级复核完成，下一步 LxTextarea
+
+- `LxInputNumber` 当前版实现、Demo、中文 API 与设计源已核对；sm/md/lg 为 28/32/40px，步进按钮连续贴合且无空隙，`controls` 显示开关、readonly 步进、边界禁用、键盘操作和长按清理均已覆盖。API 中 `min`/`max` 禁用方向已修正，合成方向键设置为不冒泡。
+- 定向单测 18/18、文档 E2E 2/2；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查和最终生产构建、目标 Stylelint/ESLint/Prettier、差异检查通过。生产构建有既有 Element Plus 大 chunk、Less 变量导出及循环 chunk 警告。
+- 最终 Impeccable A 31/40（Good）；B 两个 detector 为合法 JSON `[]`、stderr 空、退出码 0，Light/HUD × 1440/390px 四视图成功注入。代码复审无新的 P0–P3。A/B 原始证据位于 `.impeccable/critique/lxinput-wave-2026-10-12/final-stepper-event-fix/`；综合 snapshot 为 `.impeccable/critique/2026-10-12T14-02-10Z__127-0-0-1-components-lxinputnumber.md`，本目标趋势首条为 31/40。
+- 桌面步进按钮 13/15/19px 高度保留为设计权衡项：设计源固定控件外框与上下均分结构；窄屏提供 44×44px 按钮，键盘操作可用，不据此声称桌面指针目标满足 24px 下限。错误态 Demo 与重复尾注为后续 P3。
+- `LxInputNumber` 桌面步进目标高度 P2 尚待设计决策，严格矩阵行保持开放；此项不阻止按顺序独立复核 `LxTextarea`。后续继续完成动态图标、`LxDynamicForm` 和其余组件库门禁，再推进 Vue3 Element Plus 批量替换。页面操作引导草案不计入当前任务或排期。
+
 ## 2026-10-12 当前交接：LxInput 已完成，下一步 LxInputNumber
 
 - Wave 14 `LxInput` 实现与定向验证已完成：单测 13/13，LxInput 文档 E2E 3/3，邻接 InputNumber E2E 1/1；lx-ui/Vue3 类型检查、205 个模块的库构建、VitePress 文档构建、目标 ESLint/Prettier 与差异检查通过。共享基础控件 E2E 全量 6/8 的两个既有标签断言失配见交接记录，不属于本波输入框回归。Stylelint 因缺少 `postcss-less` 无法启动。

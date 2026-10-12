@@ -1,5 +1,13 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-12 lx-ui Wave 15 / LxInputNumber 当前版组件级复核完成
+
+- `LxInputNumber` 的组件、Demo、中文 API、边界语义、键盘/长按交互与设计尺寸已复核；sm/md/lg 外框 28/32/40px，按钮贴合无间距，`controls` 参数生效。Vue3 业务页面本波未进行批量替换。
+- 单测 18/18、文档 E2E 2/2、lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查及生产构建、目标 Lint/格式检查通过。最终生产构建包含既有 Element Plus 大 chunk、Less 变量导出和循环 chunk 警告。
+- Impeccable A 31/40；B detector 为合法 `[]`/空 stderr/exit 0，Light/HUD × 1440/390px 四视图证据齐备；代码复审无新的 P0–P3。A/B 报告与截图见 `.impeccable/critique/lxinput-wave-2026-10-12/final-stepper-event-fix/`；综合 snapshot 为 `.impeccable/critique/2026-10-12T14-02-10Z__127-0-0-1-components-lxinputnumber.md`，趋势首条 31/40。
+- 桌面按钮目标高度约 13/15/19px 按严格设计尺寸保留为待设计决策观察；窄屏 44×44px，键盘替代路径通过。Demo 错误态与重复尾注保留为 P3。
+- 桌面按钮高度 P2 尚待设计决策，`LxInputNumber` 严格矩阵行保持开放，不增加 UI-10 全库关闭数；该项不阻止下一批独立复核 `LxTextarea`，之后继续基础控件、动态图标和 `LxDynamicForm`。lx-ui 与整站 Impeccable 门禁仍先于 Vue3 Element Plus 批量替换。页面操作引导、权限中心和字段权限继续后置。
+
 ## 2026-10-12 lx-ui Wave 14 / LxInput 当前版组件级复核完成
 
 - `LxInput` 组件库当前版已按设计稿完成组件、Demo、中文 API、键盘清空、必填、禁用/只读、触屏目标和窄屏复核；Vue3 业务页面本波未做批量替换。

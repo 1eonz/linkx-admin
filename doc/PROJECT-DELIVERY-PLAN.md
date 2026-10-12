@@ -5,6 +5,14 @@
 - 页面操作引导暂不纳入当前执行队列，不主动排期，也不阻塞 lx-ui 组件收口、Vue3 Element Plus 替换或其他迁移任务。
 - `doc/GUIDE-CONTENT-PLAN.md` 仅作为需求/文案草案保留；后续确有需要时，再重新确认页面范围、文案、交互和技术方案，并评估实施排期。
 
+## 2026-10-12 lx-ui Wave 15 / LxInputNumber 当前版组件级复核完成
+
+- 完成 `LxInputNumber` 当前实现、Demo、中文 API 与设计源对照：sm/md/lg 外框稳定为 28/32/40px，步进按钮贴合且中间无空隙；`controls` 可控制显示，readonly 仍允许步进但禁止直接输入。方向键、Enter/空格、边界禁用、长按重复与卸载清理均有回归覆盖；`min`/`max` API 文案方向已更正，合成方向键不再冒泡至宿主快捷键。
+- 验证：定向单测 18/18、InputNumber 文档 E2E 2/2；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查及最终生产构建、目标 Stylelint/ESLint/Prettier、`git diff --check` 通过。生产构建保留仓库既有的 Element Plus 大 chunk、Less 变量导出及循环 chunk 警告。
+- 正式 Impeccable：A 31/40（Good）；B 两个源码 detector 均为合法 JSON `[]`、stderr 为空、退出码 0，Light/HUD × 1440/390px 四视图注入成功且浏览器错误为 0。A/B、命中归因、截图和源码指纹见 `.impeccable/critique/lxinput-wave-2026-10-12/final-stepper-event-fix/`；综合 snapshot 为 `.impeccable/critique/2026-10-12T14-02-10Z__127-0-0-1-components-lxinputnumber.md`，趋势首条为 31/40。
+- A 提出的桌面步进目标高度 13/15/19px 属于设计权衡：设计源明确规定 28/32/40px 外框与上下均分的右侧步进栏；扩大为两个互不重叠的 24px 高目标会改变视觉规格或增加高度。当前保留窄屏 44×44px 触控目标和完整键盘路径，不宣称桌面指针目标满足 24px 下限；该项列为待设计决策观察。表单错误态 Demo 与重复尾注两项 P3 后续处理，不阻塞本次组件交接。
+- 代码复审未发现新的 P0–P3；此前宿主快捷键冒泡问题已关闭。桌面目标高度 P2 尚待设计决策，因此 `LxInputNumber` 的 UI-10 严格矩阵行保持开放，本波不增加全库 52 项关闭数。该项不阻止下一基础控件 `LxTextarea` 独立复核；本波也不代表 Vue3 Element Plus 替换、真实权限或后端联调完成。页面操作引导继续暂缓，不计入待办和排期。
+
 ## 2026-10-12 lx-ui Wave 14 / LxInput 当前版组件级复核完成
 
 - **完成**：完成 LxInput 设计对照、Demo 和中文 API 复核；补齐原生必填语义、清空按钮键盘可达性与 44×44px 触屏目标、禁用/只读状态差异、公开方法演示、窄屏布局和连续标题层级。codeview 另发现并修复父级 `LxForm disabled` 未禁用自定义清空按钮的问题。`autocomplete="off"` 文案已更正为浏览器提示，不承诺阻止浏览器或密码管理器自动填充。

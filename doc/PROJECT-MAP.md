@@ -359,6 +359,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 基础控件桥接焦点样式记录在 `linkx-fe/docs/components/element-bridge.md`：输入等字段使用贴边 1px 边线与紧邻 2px、15% 浅色光晕；单选与多选下拉统一以自身 1px 边框表示焦点，不在控件外显示第二圈，错误态保留错误色边线；复选框保留自身 1px 状态边线，在 14px 方框外零间隙显示 2px 焦点环。Demo 和浏览器验收覆盖单选/多选、浅色/HUD、错误态、键盘展开、实际未选中/已选中/半选及窄屏状态。
 
+2026-10-12 已完成 lx-ui Wave 15 `LxInputNumber` 当前版组件级复核：单测 18/18、文档 E2E 2/2、lx-ui 类型检查及 206 modules 构建、VitePress、Vue3 类型检查与生产构建通过；A 31/40，B 的两个 detector 均为合法 `[]`/空 stderr/退出码 0，四个 Light/HUD × 1440/390px 视图注入成功。设计源限定 28/32/40px 外框及上下均分步进区，桌面目标尺寸观察保留为待设计决策，不宣称满足 24px 下限；窄屏目标 44×44px，键盘路径通过。独立代码复审无新的 P0–P3。该 P2 尚待决策，故 `LxInputNumber` 严格矩阵行保持开放且不增加 UI-10 全库 52 项关闭数；下一入口为可独立复核的 `LxTextarea`。页面操作引导草案继续暂缓、不计入当前任务或排期。A/B 原始证据见 `.impeccable/critique/lxinput-wave-2026-10-12/final-stepper-event-fix/`，综合 snapshot 为 `.impeccable/critique/2026-10-12T14-02-10Z__127-0-0-1-components-lxinputnumber.md`。
+
 2026-10-12 已完成 lx-ui Wave 13 `LxButton` 当前版组件级复核：单测 33/33、文档 E2E 19/19、A 32/40、B 三个 detector 的 JSON/stderr/退出码为 `[]`/空/0，8/8 Light/HUD 视图注入成功。E2E 真实覆盖 Ctrl+点击时原页状态保持，以及主题迁移后可见 Tooltip 与按钮位置；代码复审发现的两项测试缺口已关闭。只关闭组件当前版审查，不增加 UI-10 全库 52 项关闭数；下一入口为基础控件 `LxInput`。页面操作引导暂不进入当前执行队列、不主动排期且不阻塞其他迁移；后续确有需要时再恢复评估并安排实施。
 
 ## 2026-10-11 Wave 11 P2 / TransferPanel 与 VirtualTree 当前交接

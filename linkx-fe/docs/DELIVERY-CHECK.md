@@ -1,5 +1,13 @@
 # lx-ui 交付核查
 
+## 2026-10-12 Wave 15 / LxInputNumber 当前版组件级复核完成
+
+- `LxInputNumber` 实现、Demo 与中文 API 已按设计源核验；sm/md/lg 外框为 28/32/40px，步进按钮贴合无间距，`controls` 开关和 readonly 步进语义有回归。修正 min/max 文案，合成方向键不冒泡。
+- 定向单测 18/18、文档 E2E 2/2；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查和生产构建、目标 Stylelint/ESLint/Prettier、差异检查通过。生产构建仍显示既有 chunk、Less 变量导出和循环 chunk 警告。
+- Assessment A 31/40（Good）；Assessment B 两个 detector 为有效 JSON `[]`/空 stderr/退出码 0，四个浏览器视图 overlay 注入成功。代码复审无新的 P0–P3。A/B 原始证据见 `.impeccable/critique/lxinput-wave-2026-10-12/final-stepper-event-fix/`；综合 snapshot 为 `.impeccable/critique/2026-10-12T14-02-10Z__127-0-0-1-components-lxinputnumber.md`。
+- 桌面上下按钮高度约 13/15/19px 作为设计约束观察项保留；窄屏为 44×44px，键盘路径通过，不声称桌面鼠标目标达到 24px 下限。错误态 Demo 与重复尾注列为 P3。
+- 桌面按钮高度 P2 尚待设计决策，`LxInputNumber` 严格矩阵行保持开放；本波不增加 UI-10 全库关闭数，也不代表 Vue3 页面替换或真实后端联调完成。下一基础控件为 `LxTextarea`，可独立继续；页面操作引导暂缓且不自动排期。
+
 ## 2026-10-12 Wave 14 / LxInput 当前版组件级复核完成
 
 - 组件、Demo 与中文 API 已按表单控件设计源复核；清空按钮具备键盘名称和操作，触屏目标为 44×44px，必填、禁用/只读、公开方法和窄屏状态均有回归覆盖。Demo 的分组标题已修为 H2 → H3。
