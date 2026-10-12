@@ -144,6 +144,53 @@
   --lx-text-placeholder: var(--vp-c-text-2);
 }
 
+/* 文档站暗色主题下，文本域示例同步切换表面、焦点、错误和 Element Plus 控件令牌。 */
+.dark .vp-doc .lx-textarea-demo:not(.lx-theme-hud) {
+  color-scheme: dark;
+  --lx-bg-page: var(--vp-c-bg);
+  --lx-bg-card: var(--vp-c-bg-alt);
+  --lx-bg-card-hover: var(--vp-c-bg-soft);
+  --lx-border: var(--vp-c-divider);
+  --lx-control-border: var(--vp-c-divider);
+  --lx-control-focus-halo-color: color-mix(
+    in srgb,
+    var(--vp-c-brand-1) 15%,
+    transparent
+  );
+  --lx-color-primary: var(--vp-c-brand-1);
+  --lx-color-primary-light: color-mix(
+    in srgb,
+    var(--vp-c-brand-1) 12%,
+    transparent
+  );
+  --lx-color-form-error: #f78989;
+  --lx-color-form-error-bg: rgb(245 108 108 / 15%);
+  --lx-color-error-strong: #f78989;
+  --lx-text-primary: var(--vp-c-text-1);
+  --lx-color-text-main: var(--vp-c-text-1);
+  --lx-text-regular: var(--vp-c-text-1);
+  --lx-text-label: var(--vp-c-text-1);
+  --lx-text-secondary-strong: var(--vp-c-text-2);
+  --lx-text-placeholder: var(--vp-c-text-2);
+  --lx-color-on-input: var(--vp-c-text-1);
+  --el-color-primary: var(--vp-c-brand-1);
+  --el-color-danger: #f78989;
+  --el-bg-color: var(--vp-c-bg-alt);
+  --el-fill-color-blank: var(--vp-c-bg-alt);
+  --el-fill-color-light: var(--vp-c-bg-soft);
+  --el-border-color: var(--vp-c-divider);
+  --el-text-color-primary: var(--vp-c-text-1);
+  --el-text-color-regular: var(--vp-c-text-1);
+  --el-text-color-secondary: var(--vp-c-text-2);
+  --el-text-color-placeholder: var(--vp-c-text-2);
+  --el-input-bg-color: var(--vp-c-bg-alt);
+  --el-input-text-color: var(--vp-c-text-1);
+  --el-input-border-color: var(--vp-c-divider);
+  --el-disabled-bg-color: var(--vp-c-bg-soft);
+  --el-disabled-text-color: var(--vp-c-text-2);
+  --el-disabled-border-color: var(--vp-c-divider);
+}
+
 /* API 表在窄屏内自身滚动，避免文档列被长类型撑出视口。第一列和代码列保持
    单行便于扫描，横向滚动由表格自身承载，不影响页面主滚动。 */
 .vp-doc table {
@@ -177,6 +224,28 @@
   color: var(--lx-text-secondary-strong);
   font-size: 12px;
   line-height: 1.5;
+}
+
+.vp-doc .lx-textarea-doc-table-hint {
+  display: none;
+}
+
+/* 横向滚动时固定文本域参数表首列，方便持续核对字段名称。 */
+.vp-doc .lx-textarea-doc-table-hint.is-scrollable + table th:first-child,
+.vp-doc .lx-textarea-doc-table-hint.is-scrollable + table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  box-shadow: 1px 0 0 var(--lx-border-light);
+}
+
+.vp-doc .lx-textarea-doc-table-hint.is-scrollable + table th:first-child {
+  z-index: 2;
+  background-color: var(--lx-bg-table-header);
+}
+
+.vp-doc .lx-textarea-doc-table-hint.is-scrollable + table td:first-child {
+  background-color: var(--lx-bg-card);
 }
 
 .vp-doc .lx-switch-props {

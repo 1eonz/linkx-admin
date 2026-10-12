@@ -8,26 +8,58 @@
  */
 
 .lx-textarea {
+  position: relative;
   display: grid;
+  gap: 0;
   min-width: 0;
-  gap: 4px;
 }
 
-/* 内边距 8/12px + 行高 20px（标本 08 p-2.5 与 body-md 行高契约；标本 10px
- * 内衬取整为令牌五档 sm 8px）+ 核心几何：圆角 + 1px 控件描边 + 竖向 resize */
+.lx-textarea__control-shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+}
+
+/* 正文 12px 对齐标本 text-xs；8/12px 内边距、20px 行高与核心控件几何保持统一。 */
 .lx-textarea__control .el-textarea__inner {
   padding: var(--lx-space-sm) var(--lx-space-md);
+  font-size: 12px;
   line-height: 20px;
+  color: var(--lx-color-on-input);
+  resize: vertical;
+  background-color: var(--lx-bg-card);
   border-radius: var(--lx-radius-md);
   box-shadow: 0 0 0 1px var(--lx-control-border) inset;
   transition:
     box-shadow var(--lx-transition),
     background-color var(--lx-transition);
-  resize: vertical;
 }
 
-/* hover：描边转主色 */
-.lx-textarea__control .el-textarea__inner:hover {
+.lx-textarea__control--count-inside .el-textarea__inner {
+  padding-bottom: calc(var(--lx-space-sm) + 16px);
+}
+
+.lx-textarea__control .el-textarea__inner[readonly]:not(:disabled) {
+  cursor: text;
+  background-color: var(--lx-color-primary-light);
+}
+
+.lx-textarea__control .el-textarea__inner:disabled {
+  color: var(--lx-text-regular);
+  -webkit-text-fill-color: var(--lx-text-regular);
+  cursor: not-allowed;
+  background-color: var(--lx-bg-card-hover);
+  border-color: var(--lx-border-light);
+  box-shadow: 0 0 0 1px var(--lx-border-light) inset;
+}
+
+.lx-textarea__control .el-textarea__inner::placeholder {
+  color: var(--lx-text-placeholder);
+}
+
+/* 可编辑态悬停时描边转主色，禁用态保持禁用边框。 */
+.lx-textarea__control .el-textarea__inner:not(:disabled):hover {
   box-shadow: 0 0 0 1px var(--lx-color-primary) inset;
 }
 
@@ -42,9 +74,9 @@
 
 /* 错误态：使用表单专属校验令牌（标本八件套错误行，依赖 ElForm/LxForm 上下文）。 */
 .el-form-item.is-error .lx-textarea__control .el-textarea__inner {
+  color: var(--lx-color-form-error);
   background-color: var(--lx-color-form-error-bg);
   box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
-  color: var(--lx-color-form-error);
 }
 
 .el-form-item.is-error .lx-textarea__control .el-textarea__inner:focus {
@@ -55,24 +87,54 @@
     0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
-/* 字数计数器：等宽 11px（标本 08 "42 / 200" 右对齐微型计数，10px 过小
- * 影响可读统一抬到 11px）；文字色用 label 档 #606266（约 6.1:1 达 AA），
- * secondary 3.2:1 未达 AA（critique 2026-09-29 P2，与 LxInput 同口径） */
-.lx-textarea__control .el-input__count {
+/* 自有计数器避免逐字更新被 Element Plus 的 live region 连续播报。 */
+.lx-textarea__count {
+  z-index: 1;
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
   font-family: var(--lx-font-mono);
-  font-size: 11px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
   color: var(--lx-text-label);
 }
 
-/* 无 maxlength 的开口计数（EP is-outside 落在域外下方）同样走等宽规格 */
-.lx-textarea__control .el-input__count.is-outside {
+.lx-textarea__count--outside {
+  justify-self: end;
   padding-top: 2px;
+  line-height: 16px;
+}
+
+.lx-textarea__count--inside {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  padding-left: 4px;
+  line-height: 16px;
+  pointer-events: none;
+  background-color: var(--lx-bg-card);
+}
+
+.lx-textarea__count.is-at-limit {
+  font-weight: 600;
+}
+
+.lx-textarea__limit-label {
+  font-family: var(--lx-font-sans);
+  font-weight: 600;
+}
+
+.lx-textarea.is-readonly
+  :is(.lx-textarea__count, .lx-textarea__validation-count),
+.lx-textarea:has(.lx-textarea__control.is-disabled)
+  :is(.lx-textarea__count, .lx-textarea__validation-count) {
+  display: none;
 }
 
 .lx-textarea.is-overflow .lx-textarea__control .el-textarea__inner {
+  color: var(--lx-color-form-error);
   background-color: var(--lx-color-form-error-bg);
   box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
-  color: var(--lx-color-form-error);
 }
 
 .lx-textarea.is-overflow .lx-textarea__control .el-textarea__inner:focus {
@@ -83,36 +145,52 @@
 
 .lx-textarea__feedback {
   display: flex;
-  min-width: 0;
+  gap: var(--lx-space-sm);
   align-items: center;
   justify-content: space-between;
-  gap: var(--lx-space-sm);
-  margin-top: 1px;
+  min-width: 0;
+  margin-top: 4px;
 }
 
 .lx-textarea__overflow-message {
   display: inline-flex;
-  min-width: 0;
-  align-items: center;
   gap: 4px;
+  align-items: center;
+  min-width: 0;
   margin: 0;
-  color: var(--lx-color-error-strong);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   line-height: 16px;
+  color: var(--lx-color-error-strong);
+}
+
+.lx-textarea__overflow-message span {
+  min-width: 0;
 }
 
 .lx-textarea__validation-count {
   flex: 0 0 auto;
-  color: var(--lx-text-secondary-strong);
   font-family: var(--lx-font-mono);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 16px;
+  color: var(--lx-text-secondary-strong);
+}
+
+.lx-textarea__announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .lx-textarea__validation-count.is-overflow {
-  color: var(--lx-color-error-strong);
   font-weight: 700;
+  color: var(--lx-color-error-strong);
 }
 
 @media (max-width: 480px) {

@@ -591,24 +591,209 @@ test('InputNumber 窄屏步进按钮保持触控尺寸与 HUD 输入底色', asy
 test('Textarea 默认硬截断；校验模式保留超限内容并呈现可访问错误', async ({ page }) => {
   await page.goto('/components/lxtextarea');
   const demo = page.locator('.lx-textarea-demo');
+  const advancedStates = demo.getByTestId('advanced-states');
   const hardLimit = demo.getByLabel('处置要求及布控指令说明', { exact: true });
   const overflow = demo.getByLabel('涉密核验备忘（溢出校验态）', { exact: true });
+  const overflowComponent = demo.locator('.lx-textarea:has(#demo-overflow)');
+  const insideCount = demo.getByLabel('值班简报（内嵌计数）', { exact: true });
+  await expect(hardLimit).toBeVisible();
+  await expect(overflow).toBeVisible();
+  await expect(advancedStates.locator('summary')).toContainText('其他状态与交互');
+  await expect(advancedStates.locator('summary')).toHaveCSS('min-height', '44px');
+  await expect(demo.getByLabel('布控执勤特情备注', { exact: true })).toBeHidden();
+  await advancedStates.locator('summary').click();
+  await expect(demo.getByRole('heading', { name: '尺寸与编辑状态' })).toBeVisible();
+  await expect(demo.getByRole('heading', { name: '公开聚焦控制' })).toBeVisible();
+  const disabled = demo.getByLabel('涉密核验备忘（锁定）', { exact: true });
+  await expect(disabled).toBeDisabled();
+  const disabledCounterState = await disabled.evaluate((element) => {
+    const component = element.closest('.lx-textarea');
+    const counter = component?.querySelector('.lx-textarea__count');
+    return {
+      text: counter?.textContent?.trim() ?? null,
+      display: counter ? getComputedStyle(counter).display : null,
+    };
+  });
+  expect(disabledCounterState).toEqual({ text: '17 / 200', display: 'none' });
+  const disabledValidationCountState = await demo
+    .getByLabel('禁用的超限核验备忘', { exact: true })
+    .evaluate((element) => {
+      const counter = element.closest('.lx-textarea')?.querySelector('.lx-textarea__validation-count');
+      return {
+        text: counter?.textContent?.trim() ?? null,
+        display: counter ? getComputedStyle(counter).display : null,
+      };
+    });
+  expect(disabledValidationCountState).toEqual({ text: '205 / 200', display: 'none' });
+  const insideCounterLayout = () =>
+    insideCount.evaluate((element) => {
+      const component = element.closest('.lx-textarea');
+      const counter = component?.querySelector('.lx-textarea__count');
+      if (!counter) throw new Error('找不到内嵌长度计数器');
+      const controlBounds = element.getBoundingClientRect();
+      const counterBounds = counter.getBoundingClientRect();
+      const controlStyle = getComputedStyle(element);
+      return {
+        display: getComputedStyle(counter).display,
+        position: getComputedStyle(counter).position,
+        fontSize: getComputedStyle(counter).fontSize,
+        lineHeight: getComputedStyle(counter).lineHeight,
+        paddingBottom: Number.parseFloat(controlStyle.paddingBottom),
+        insideControl:
+          counterBounds.left >= controlBounds.left &&
+          counterBounds.right <= controlBounds.right &&
+          counterBounds.top >= controlBounds.top &&
+          counterBounds.bottom <= controlBounds.bottom,
+      };
+    });
+  const initialInsideLayout = await insideCounterLayout();
+  expect(initialInsideLayout).toMatchObject({
+    display: 'flex',
+    position: 'absolute',
+    fontSize: '12px',
+    lineHeight: '16px',
+  });
+  expect(initialInsideLayout.paddingBottom).toBeGreaterThanOrEqual(24);
+  expect(initialInsideLayout.insideControl).toBe(true);
+  const themeToggle = demo.getByLabel('HUD 深色主题', { exact: true });
+  await themeToggle.check();
+  await expect(demo).toHaveClass(/lx-theme-hud/);
+  const disabledBorder = await disabled.evaluate((element) => {
+    const themeRoot = element.closest('.lx-textarea-demo');
+    if (!themeRoot) throw new Error('找不到文本域 Demo 主题容器');
+    const probe = document.createElement('span');
+    probe.style.border = '1px solid var(--lx-border-light)';
+    themeRoot.append(probe);
+    const tokenColor = getComputedStyle(probe).borderTopColor;
+    probe.remove();
+    return {
+      actual: getComputedStyle(element).borderTopColor,
+      token: tokenColor,
+    };
+  });
+  expect(disabledBorder.actual).toBe(disabledBorder.token);
+  const disabledShadow = `${disabledBorder.token} 0px 0px 0px 1px inset`;
+  await expect.poll(() => disabled.evaluate((element) => getComputedStyle(element).boxShadow)).toBe(disabledShadow);
+  await disabled.hover();
+  await expect.poll(() => disabled.evaluate((element) => element.matches(':hover'))).toBe(true);
+  await expect.poll(() => disabled.evaluate((element) => getComputedStyle(element).boxShadow)).toBe(disabledShadow);
+  await expect
+    .poll(() => disabled.evaluate((element) => getComputedStyle(element).borderTopColor))
+    .toBe(disabledBorder.token);
+  await page.mouse.move(0, 0);
+  await themeToggle.uncheck();
+  const supplemental = demo.getByLabel('补充核验说明', { exact: true });
+
+  await expect(supplemental).toHaveValue('');
+  await expect(demo.locator('.lx-textarea__count').last()).toContainText('0 / 120');
+  await demo.getByRole('button', { name: '聚焦文本域', exact: true }).click();
+  await expect(supplemental).toBeFocused();
+  await expect(demo.locator('.lx-textarea-demo__status')).toContainText('补充核验说明 已聚焦');
+  const supplementalValue = '待复核数据';
+  await supplemental.fill(supplementalValue);
+  await expect(demo.locator('.lx-textarea-demo__status')).toContainText(
+    `补充核验说明 正在输入，当前内容长度 ${supplementalValue.length}`,
+  );
+  await supplemental.focus();
+  await expect(supplemental).toBeFocused();
+  await demo.getByRole('button', { name: '移除焦点', exact: true }).dispatchEvent('click');
+  await expect(demo.locator('[data-testid="change-event"]')).toContainText(
+    `补充核验说明 内容长度为 ${supplementalValue.length}`,
+  );
+  await expect(supplemental).not.toBeFocused();
+  await expect(demo.locator('.lx-textarea-demo__status')).toContainText('补充核验说明 已失焦');
+
+  const readOnly = demo.getByLabel('只读交接记录', { exact: true });
+  await expect(readOnly).toHaveAttribute('readonly', '');
+  await expect(readOnly).not.toHaveAttribute('disabled');
+  await expect
+    .poll(() =>
+      readOnly.evaluate((element) => {
+        const counter = element.closest('.lx-textarea')?.querySelector('.lx-textarea__count');
+        return counter ? getComputedStyle(counter).display : null;
+      }),
+    )
+    .toBe('none');
+  const readOnlyValidationCountState = await demo
+    .getByLabel('只读的超限核验备忘', { exact: true })
+    .evaluate((element) => {
+      const counter = element.closest('.lx-textarea')?.querySelector('.lx-textarea__validation-count');
+      return {
+        text: counter?.textContent?.trim() ?? null,
+        display: counter ? getComputedStyle(counter).display : null,
+      };
+    });
+  expect(readOnlyValidationCountState).toEqual({ text: '205 / 200', display: 'none' });
+  const readOnlyValue = await readOnly.inputValue();
+  await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+  await readOnly.selectText();
+  await expect(readOnly).toHaveJSProperty('selectionStart', 0);
+  await expect(readOnly).toHaveJSProperty('selectionEnd', readOnlyValue.length);
+  await page.keyboard.press('Control+C');
+  await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe(readOnlyValue);
+  await readOnly.focus();
+  await expect(readOnly).toBeFocused();
+  await readOnly.pressSequentially('不得写入');
+  await expect(readOnly).toHaveValue(readOnlyValue);
+  const editableBackground = await hardLimit.evaluate((element) => getComputedStyle(element).backgroundColor);
+  const readOnlyBackground = await readOnly.evaluate((element) => getComputedStyle(element).backgroundColor);
+  expect(readOnlyBackground).not.toBe(editableBackground);
+
+  await expect(hardLimit).toHaveAttribute('aria-describedby', 'demo-instruction-limit-hint');
+  await expect(demo.locator('#demo-instruction-limit-hint')).toContainText('达到上限后继续输入不会写入');
+
+  const defaultCounter = demo.locator('.lx-textarea__count').first();
+  await expect(defaultCounter).toHaveClass(/lx-textarea__count--outside/);
+  const textareaBox = await hardLimit.boundingBox();
+  const counterBox = await defaultCounter.boundingBox();
+  if (!textareaBox || !counterBox) {
+    throw new Error('无法读取文本域与长度计数器的布局位置');
+  }
+  expect(counterBox.y).toBeGreaterThanOrEqual(textareaBox.y + textareaBox.height);
 
   await hardLimit.fill('');
   await hardLimit.pressSequentially('a'.repeat(210));
   await expect(hardLimit).toHaveValue('a'.repeat(200));
-  await expect(demo.locator('.lx-textarea-demo__tip').first()).toContainText('最多 200 字；达到上限后继续输入不会写入');
+  const hardLimitComponent = demo.locator('.lx-textarea:has(#demo-instruction)');
+  await expect(hardLimitComponent.locator('.lx-textarea__limit-announcement')).toHaveText('已达到内容长度上限。');
+  await expect(hardLimitComponent.locator('.lx-textarea__count')).toContainText('已达上限');
+  await hardLimit.pressSequentially('b');
+  await expect(hardLimitComponent.locator('.lx-textarea__limit-announcement')).toHaveText('已达到内容长度上限。');
+  await expect(demo.locator('.lx-textarea-demo__tip').first()).toContainText(
+    '长度上限为 200；达到上限后继续输入不会写入',
+  );
+  expect(await demo.locator('#demo-noresize').evaluate((element) => getComputedStyle(element).resize)).toBe('none');
+  expect(await hardLimit.evaluate((element) => getComputedStyle(element).resize)).toBe('vertical');
 
   const initialOverflowValue = await overflow.inputValue();
   expect(initialOverflowValue.length).toBeGreaterThan(200);
   await expect(overflow).toHaveAttribute('aria-invalid', 'true');
   const descriptionId = (await overflow.getAttribute('aria-describedby'))?.split(' ').at(-1);
   expect(descriptionId).toBeTruthy();
-  await expect(demo.locator(`#${descriptionId}`)).toContainText('字数超出上限 200 字');
-  await expect(demo.locator('.lx-textarea__validation-count')).toHaveText(`${initialOverflowValue.length} / 200`);
+  await expect(demo.locator(`#${descriptionId}`)).toContainText('内容长度已超过上限，请删减后继续。');
+  await expect(overflowComponent.locator('.lx-textarea__overflow-message')).toHaveCSS('font-size', '12px');
+  await expect(overflowComponent.locator('.lx-textarea__validation-count')).toHaveText(
+    `${initialOverflowValue.length} / 200`,
+  );
+  const overflowAnnouncement = demo.locator(
+    '.lx-textarea:has(#demo-overflow) .lx-textarea__announcement[role="alert"]',
+  );
+  const firstOverflowAnnouncement = await overflowAnnouncement.textContent();
+  await expect(overflowAnnouncement).toBeEmpty();
 
-  const counter = demo.locator('.lx-textarea__validation-count');
-  await expect(counter).toHaveCSS('font-size', '11px');
+  const updatedOverflowValue = `${initialOverflowValue}补充`;
+  await overflow.fill(updatedOverflowValue);
+  await expect(overflowAnnouncement).toHaveText(firstOverflowAnnouncement ?? '');
+  await expect(overflowComponent.locator('.lx-textarea__overflow-message')).toHaveText(
+    '内容长度已超过上限，请删减后继续。',
+  );
+  await overflow.fill('核验完成');
+  await expect(overflowAnnouncement).toHaveText('');
+  await overflow.fill('复核'.repeat(103));
+  await expect(overflowAnnouncement).toHaveText('内容长度已超过上限。');
+
+  const counter = overflowComponent.locator('.lx-textarea__validation-count');
+  await expect(counter).toHaveCSS('font-size', '12px');
   const getCounterContrast = () =>
     counter.evaluate((element) => {
       const panel = element.closest('.lx-textarea-demo__panel');
@@ -644,9 +829,248 @@ test('Textarea 默认硬截断；校验模式保留超限内容并呈现可访�
 
   for (const width of [375, 320]) {
     await page.setViewportSize({ width, height: 812 });
-    await expect(demo.locator('.lx-textarea__overflow-message')).toBeVisible();
+    await expect(overflowComponent.locator('.lx-textarea__overflow-message')).toBeVisible();
+    const insideLayout = await insideCounterLayout();
+    expect(insideLayout.insideControl).toBe(true);
+    expect(insideLayout.paddingBottom).toBeGreaterThanOrEqual(24);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   }
+});
+
+test('Textarea 示例跟随文档站暗色主题并为窄屏主题开关保留触控高度', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/components/lxtextarea');
+  const demo = page.locator('.lx-textarea-demo');
+  await expect(demo).toBeVisible();
+  await demo.locator('details[data-testid="advanced-states"]').evaluate((element) => {
+    if (!(element instanceof HTMLDetailsElement)) {
+      throw new Error('无法展开文本域高级状态示例');
+    }
+
+    element.open = true;
+  });
+  await page.evaluate(() => document.documentElement.classList.add('dark'));
+  const readColors = () =>
+    page.evaluate(() => {
+      const demoElement = document.querySelector('.lx-textarea-demo');
+      const panel = document.querySelector('.lx-textarea-demo__panel');
+      const input = document.querySelector('.lx-textarea-demo textarea');
+      const readonlyInput = document.querySelector('#demo-readonly');
+      const disabledInput = document.querySelector('#demo-locked');
+      const errorInput = document.querySelector('.lx-textarea.is-overflow textarea');
+      const errorMessage = document.querySelector('.lx-textarea__overflow-message');
+      const validationCount = document.querySelector('.lx-textarea__validation-count');
+      if (
+        !(demoElement instanceof HTMLElement) ||
+        !(panel instanceof HTMLElement) ||
+        !(input instanceof HTMLTextAreaElement) ||
+        !(readonlyInput instanceof HTMLTextAreaElement) ||
+        !(disabledInput instanceof HTMLTextAreaElement) ||
+        !(errorInput instanceof HTMLTextAreaElement) ||
+        !(errorMessage instanceof HTMLElement) ||
+        !(validationCount instanceof HTMLElement)
+      ) {
+        throw new Error('无法读取文本域文档主题样式');
+      }
+
+      const resolveToken = (token: string, property: 'background-color' | 'color') => {
+        const probe = document.createElement('span');
+        probe.style.position = 'fixed';
+        probe.style.visibility = 'hidden';
+        probe.style.pointerEvents = 'none';
+        probe.style.setProperty(property, getComputedStyle(demoElement).getPropertyValue(token));
+        demoElement.append(probe);
+        const color = getComputedStyle(probe).getPropertyValue(property);
+        probe.remove();
+        return color;
+      };
+
+      errorInput.focus();
+      const errorFocusShadow = getComputedStyle(errorInput).boxShadow;
+
+      return {
+        page: getComputedStyle(demoElement).backgroundColor,
+        pageToken: resolveToken('--vp-c-bg', 'background-color'),
+        lxPageToken: resolveToken('--lx-bg-page', 'background-color'),
+        panel: getComputedStyle(panel).backgroundColor,
+        panelToken: resolveToken('--vp-c-bg-alt', 'background-color'),
+        cardToken: resolveToken('--lx-bg-card', 'background-color'),
+        hoverToken: resolveToken('--lx-bg-card-hover', 'background-color'),
+        readonlySurfaceToken: resolveToken('--lx-color-primary-light', 'background-color'),
+        control: getComputedStyle(input).backgroundColor,
+        textareaFontSize: getComputedStyle(input).fontSize,
+        controlText: getComputedStyle(input).color,
+        inputTextToken: resolveToken('--lx-color-on-input', 'color'),
+        readonlyControl: getComputedStyle(readonlyInput).backgroundColor,
+        disabledControl: getComputedStyle(disabledInput).backgroundColor,
+        disabledText: getComputedStyle(disabledInput).color,
+        disabledTextToken: resolveToken('--lx-text-regular', 'color'),
+        disabledToken: resolveToken('--vp-c-bg-soft', 'background-color'),
+        textToken: resolveToken('--vp-c-text-1', 'color'),
+        errorControl: getComputedStyle(errorInput).backgroundColor,
+        errorControlText: getComputedStyle(errorInput).color,
+        errorBackgroundToken: resolveToken('--lx-color-form-error-bg', 'background-color'),
+        errorTextToken: resolveToken('--lx-color-form-error', 'color'),
+        errorStrongToken: resolveToken('--lx-color-error-strong', 'color'),
+        errorMessageText: getComputedStyle(errorMessage).color,
+        validationCountText: getComputedStyle(validationCount).color,
+        focusHaloToken: resolveToken('--lx-control-focus-halo-color', 'color'),
+        errorFocusShadow,
+      };
+    });
+  await expect
+    .poll(async () => {
+      const colors = await readColors();
+      return (
+        colors.page === colors.pageToken &&
+        colors.panel === colors.panelToken &&
+        colors.control === colors.panelToken &&
+        colors.textareaFontSize === '12px' &&
+        colors.controlText === colors.textToken &&
+        colors.readonlyControl === colors.readonlySurfaceToken &&
+        colors.disabledControl === colors.disabledToken &&
+        colors.readonlyControl !== colors.disabledControl &&
+        colors.disabledText === colors.disabledTextToken &&
+        colors.errorControl === colors.errorBackgroundToken &&
+        colors.errorControlText === colors.errorTextToken &&
+        colors.errorMessageText === colors.errorStrongToken &&
+        colors.validationCountText === colors.errorStrongToken &&
+        colors.errorFocusShadow.includes(colors.focusHaloToken)
+      );
+    })
+    .toBe(true);
+  const colors = await readColors();
+
+  expect(colors.page).toBe(colors.pageToken);
+  expect(colors.panel).toBe(colors.panelToken);
+  expect(colors.control).toBe(colors.panelToken);
+  expect(colors.textareaFontSize).toBe('12px');
+  expect(colors.controlText).toBe(colors.textToken);
+  expect(colors.readonlyControl).toBe(colors.readonlySurfaceToken);
+  expect(colors.disabledControl).toBe(colors.disabledToken);
+  expect(colors.readonlyControl).not.toBe(colors.disabledControl);
+  expect(colors.disabledText).toBe(colors.disabledTextToken);
+  expect(colors.errorControl).toBe(colors.errorBackgroundToken);
+  expect(colors.errorControlText).toBe(colors.errorTextToken);
+  expect(colors.errorMessageText).toBe(colors.errorStrongToken);
+  expect(colors.validationCountText).toBe(colors.errorStrongToken);
+  expect(colors.errorFocusShadow).toContain(colors.focusHaloToken);
+
+  const themeToggle = demo.getByLabel('HUD 深色主题', { exact: true });
+  await themeToggle.setChecked(true);
+  await expect(demo).toHaveClass(/lx-theme-hud/);
+  await expect
+    .poll(async () => {
+      const hudColors = await readColors();
+      return {
+        page: hudColors.page === hudColors.lxPageToken,
+        panel: hudColors.panel === hudColors.cardToken,
+        control: hudColors.control === hudColors.cardToken,
+        textareaFontSize: hudColors.textareaFontSize === '12px',
+        controlText: hudColors.controlText === hudColors.inputTextToken,
+        readonlyControl: hudColors.readonlyControl === hudColors.readonlySurfaceToken,
+        disabledControl: hudColors.disabledControl === hudColors.hoverToken,
+        disabledText: hudColors.disabledText === hudColors.disabledTextToken,
+        errorControl: hudColors.errorControl === hudColors.errorBackgroundToken,
+        errorControlText: hudColors.errorControlText === hudColors.errorTextToken,
+        errorMessageText: hudColors.errorMessageText === hudColors.errorStrongToken,
+        validationCountText: hudColors.validationCountText === hudColors.errorStrongToken,
+        focusHalo: hudColors.errorFocusShadow.includes(hudColors.focusHaloToken),
+      };
+    })
+    .toEqual({
+      page: true,
+      panel: true,
+      control: true,
+      textareaFontSize: true,
+      controlText: true,
+      readonlyControl: true,
+      disabledControl: true,
+      disabledText: true,
+      errorControl: true,
+      errorControlText: true,
+      errorMessageText: true,
+      validationCountText: true,
+      focusHalo: true,
+    });
+  const hudColors = await readColors();
+  expect(hudColors.control).toBe(hudColors.cardToken);
+  expect(hudColors.textareaFontSize).toBe('12px');
+  expect(hudColors.controlText).toBe(hudColors.inputTextToken);
+  expect(hudColors.readonlyControl).toBe(hudColors.readonlySurfaceToken);
+  expect(hudColors.disabledControl).toBe(hudColors.hoverToken);
+  expect(hudColors.readonlyControl).not.toBe(hudColors.disabledControl);
+  expect(hudColors.disabledText).toBe(hudColors.disabledTextToken);
+  expect(hudColors.errorControl).toBe(hudColors.errorBackgroundToken);
+  expect(hudColors.errorFocusShadow).toContain(hudColors.focusHaloToken);
+
+  await page.setViewportSize({ width: 375, height: 812 });
+  const toggleBounds = await themeToggle.locator('..').boundingBox();
+  expect(toggleBounds?.height).toBeGreaterThanOrEqual(44);
+});
+
+test('Textarea 文档按溢出状态显示表格提示并固定窄屏首列', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 812 });
+  await page.goto('/components/lxtextarea');
+
+  const hintIds = [
+    'lx-textarea-input-table-hint',
+    'lx-textarea-length-table-hint',
+    'lx-textarea-state-table-hint',
+    'lx-textarea-native-table-hint',
+    'lx-textarea-events-table-hint',
+    'lx-textarea-deviations-table-hint',
+  ];
+  let overflowTableCount = 0;
+
+  for (const hintId of hintIds) {
+    const hint = page.locator(`#${hintId}`);
+    const table = hint.locator('xpath=following-sibling::table[1]');
+    await expect
+      .poll(() =>
+        table.evaluate((element) => {
+          const hintElement = element.previousElementSibling;
+          const overflows = element.scrollWidth > element.clientWidth;
+          const hasScrollHint = hintElement?.classList.contains('is-scrollable') ?? false;
+          return overflows ? hasScrollHint && element.tabIndex === 0 : !hasScrollHint && element.tabIndex !== 0;
+        }),
+      )
+      .toBe(true);
+    const overflows = await table.evaluate((element) => element.scrollWidth > element.clientWidth);
+
+    if (!overflows) {
+      await expect(hint).toBeHidden();
+      continue;
+    }
+
+    overflowTableCount += 1;
+    await expect(hint).toBeVisible();
+    await expect(table).toHaveAttribute('tabindex', '0');
+    await expect(table).toHaveAttribute('aria-describedby', hintId);
+    await expect(table.locator('th:first-child')).toHaveCSS('position', 'sticky');
+    await table.evaluate((element) => {
+      element.scrollLeft = 80;
+    });
+    const firstColumnOffset = await table.evaluate((element) => {
+      const firstCell = element.querySelector('th:first-child');
+      if (!(firstCell instanceof HTMLElement)) throw new Error('找不到表格首列');
+      return firstCell.getBoundingClientRect().left - element.getBoundingClientRect().left;
+    });
+    expect(Math.abs(firstColumnOffset)).toBeLessThanOrEqual(2);
+  }
+  expect(overflowTableCount).toBeGreaterThan(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect
+    .poll(() =>
+      page.locator('#lx-textarea-events-table-hint').evaluate((hint) => {
+        const table = hint.nextElementSibling;
+        return table ? table.scrollWidth <= table.clientWidth : false;
+      }),
+    )
+    .toBe(true);
+  await expect(page.locator('#lx-textarea-events-table-hint')).toBeHidden();
 });
 
 test('三个 Demo 在 375/320px 和局部 HUD 下标签、禁用状态与页面宽度稳定', async ({ page }, testInfo) => {
