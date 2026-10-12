@@ -1,5 +1,13 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-13 UI-10 / Wave 17 LxSelect 当前版严格复核完成
+
+- `LxSelect` 按 `design/表单控件八件套/` 完成实现、Demo、中文 API、禁用/错误/远程状态、键盘和窄屏对照；禁用值在 Light/HUD 均保持可读，390px 下触发器和选项行均为 44px，320px 文档页无注入前横向溢出。
+- 单测 11/11、文档 E2E 3/3；本波复验的定向 ESLint、Prettier、`git diff --check` 通过。lx-ui 类型检查、206 modules 构建、VitePress 文档构建和 Vue3 生产构建已在本波实现阶段通过。
+- Impeccable Assessment A 33/40（Good），无 P0–P3；B 两个源码 detector 均为 JSON `[]`、stderr 空、退出码 0，Light/HUD 桌面与窄屏及站点深色桌面五种浏览器状态均成功注入且无浏览器错误。原始 overlay 命中主要落在文档段落/属性表/代码复制控件和页面外壳；少量 Select 标签及选项命中已对照设计令牌和实测对比度检查，不构成组件缺陷。移动根文档 390px → 630px 只发生在 overlay 注入后，body 和 Demo 宽度不变。
+- 独立代码复审无 P0–P3；证据与综合 snapshot/trend 见 `.impeccable/critique/lxselect-wave-2026-10-13/`。此结论只关闭 LxSelect 当前版组件级复核，UI-10 全库严格矩阵仍为 0/52，不代表 Vue3 Element Plus 替换或真实后端联调完成。
+- 下一项处理 `LxCheckbox`/`LxCheckboxGroup` 与 `LxRadio`/`LxRadioGroup` 在 375px API 表格可读性 P2，随后继续按矩阵逐项复核；页面操作引导不进入当前队列或排期，后续有需要时重新评估。
+
 ## 2026-10-13 UI-10 / Wave 16 LxTextarea 当前版严格 UI 复核完成
 
 - 对照 `design/表单控件八件套/` 完成当前版组件、Demo、中文 API、主题、焦点/错误、硬截断/校验、禁用/只读和窄屏审查。初始到限/超限保持播报静默；正常状态转为到限/超限时播报一次。disabled/readonly 校验态隐藏计数并保留错误说明。
@@ -263,7 +271,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxRadioGroup`       | `design/表单控件八件套/`                          | A/B、键盘及禁用态验收完成；随 API 表格 P2 保持开放                                                                                                                                         |
 | `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 单测 9/9、文档 E2E 3/3；修后 A/B 已补独立浏览器/overlay 证据，Demo 增加四字段标准态；最终综合快照待收口，严格矩阵保持打开                                                                  |
 | `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                                                                                                       |
-| `LxSelect`           | `design/表单控件八件套/`                          | 实现与行为验收：单测 10/10、文档 E2E 3/3；当前严格 Critique 待修后 A/B、overlay/snapshot；桌面 32px、窄屏 44px                                                                             |
+| `LxSelect`           | `design/表单控件八件套/`                          | Wave 17 当前版 A/B、overlay、代码复审完成；单测 11/11、文档 E2E 3/3；桌面 32px、窄屏 44px；UI-10 全库仍为 0/52                                                                         |
 | `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                                                                          |
 | `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                                                                                               |
 | `LxSidebar`          | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；rail/expanded、菜单态、动效和抽屉                                                                                                                                              |

@@ -5,12 +5,19 @@
 - 当前阶段暂不考虑实施页面操作引导；不纳入执行队列、不主动排期，也不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
 - 保留 `doc/GUIDE-CONTENT-PLAN.md` 作为历史需求/文案草案；后续确有需要时，再重新确认页面范围、文案、交互、技术方案和后端契约，单独评估并安排实施。
 
+## 2026-10-13 当前交接：LxSelect 组件级复核完成，下一步 Checkbox/Radio 文档 P2
+
+- `LxSelect` 按表单控件设计源完成当前实现、Demo、中文 API、主题、禁用、远程空/错/重试、键盘和窄屏复核；禁用值对比度通过，桌面高度 32px，窄屏触发器和选项行 44px。
+- 单测 11/11、文档 E2E 3/3；lx-ui 类型、206 modules 构建、VitePress、Vue3 生产构建和定向 ESLint/Prettier/diff check 通过。Impeccable A 33/40；B 两个 detector `[]`/空 stderr/退出码 0，五种浏览器状态注入成功、错误为 0；独立代码复审无 P0–P3。
+- overlay 命中按节点归因为文档长段/属性表、代码复制按钮、页面外壳和有设计依据的令牌；移动根宽度仅在注入后变化，body 与 Demo 宽度不变。原始 A/B、综合报告和 snapshot/trend 见 `.impeccable/critique/lxselect-wave-2026-10-13/`。
+- 本波仅关闭 LxSelect 当前版组件审查，不增加 UI-10 全库 0/52 计数，不代表宿主替换、真实后端或人工读屏验收。下一波处理 Checkbox/CheckboxGroup、Radio/RadioGroup 文档在 375px 下的 API 表格可读性 P2，再继续其他基础控件和动态图标，之后完成 `LxDynamicForm` 与其余库级门禁。
+
 ## 2026-10-13 当前交接：LxTextarea 组件级复核完成，下一步 LxSelect
 
 - `LxTextarea` 按表单控件设计源完成当前组件、Demo、中文 API、主题、错误/焦点、长度边界、禁用/只读和窄屏复核。初始到限/超限不播报；正常状态转到限或超限时播报一次。校验模式下 disabled/readonly 隐藏计数并保留错误说明。
 - 单测 14/14、共享基础控件文档 E2E 11/11；lx-ui 类型、206 modules 构建、VitePress、Vue3 生产构建、目标 ESLint/Prettier、组件样式和 HUD token Stylelint、差异检查通过。VitePress `custom.css` 上 14 个既有属性顺序错误均不在本次改动行。
 - Impeccable 双 Agent 正式 Critique：A 31/40（Good），无 P0–P3；B 两个源码 detector 为 `[]`/空 stderr/退出码 0，Light/站点深色/HUD × 桌面/移动六视图证据齐全。overlay 注入后移动根文档从 390px 扩至 630px，但注入前无溢出且 Demo 尺寸未变；无 overlay 的 320/375px E2E 通过，归因于 overlay/页面外壳副作用。独立代码复审无 P0–P3；证据见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
-- 当前版 `LxTextarea` 组件审查完成；全库 UI-10 仍为 0/52，不代表宿主页面迁移或人工屏幕阅读器验收完成。下一波按矩阵进入 `LxSelect`，之后继续其他基础控件和动态图标，再实施 `LxDynamicForm`。
+- 当前版 `LxTextarea` 组件审查完成；全库 UI-10 仍为 0/52，不代表宿主页面迁移或人工屏幕阅读器验收完成。本条交接中的下一波 `LxSelect` 已完成；接着处理 Checkbox/Radio 文档 375px API 表格可读性 P2，再继续其他基础控件和动态图标，之后实施 `LxDynamicForm`。
 
 ## 2026-10-12 当前交接：LxInputNumber 组件级复核完成，下一步 LxTextarea
 

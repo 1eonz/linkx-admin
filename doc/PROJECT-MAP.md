@@ -1,12 +1,20 @@
 # LinkX 项目地图
 
+## 2026-10-13 Wave 17 / LxSelect 当前版组件级复核完成
+
+- **组件入口**：`linkx-fe/src/components/LxSelect/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxselect.md`；设计依据为 `design/表单控件八件套/`。
+- **验证入口**：`other-admin/admin-vue3/tests/unit/lx-select.test.ts`（11/11）及 `tests/e2e/lx-select-docs.spec.ts`（3/3）；定向 ESLint、Prettier、`git diff --check` 复验通过。lx-ui 类型检查、206 modules 构建、VitePress 文档构建与 Vue3 生产构建在实现阶段通过。
+- **正式评审**：Impeccable Assessment A 33/40（Good），无 P0–P3；B 的两个 detector 为合法 JSON `[]`、stderr 空、退出码 0，Light/HUD 桌面与窄屏、站点深色桌面五种状态均成功注入且浏览器错误为 0。独立代码复审无 P0–P3。
+- **命中归因与边界**：overlay 命中主要落在文档段落、API 表格、代码复制控件与站点外壳；Select 标签/选项命中已按设计令牌、对比度和实际显示逐项核对。移动根宽度 390px → 630px 仅发生于 overlay 注入后，body 与 Demo 尺寸不变，注入前无溢出。完整报告、截图、指纹与 snapshot/trend 见 `.impeccable/critique/lxselect-wave-2026-10-13/`。
+- **下一入口与完成口径**：先处理 `LxCheckbox`/`LxCheckboxGroup`、`LxRadio`/`LxRadioGroup` 的 375px API 表格可读性 P2，再继续基础控件和动态图标，随后 `LxDynamicForm` 及剩余 lx-ui 门禁。UI-10 全库仍为 0/52；本波不代表 Vue3 Element Plus 替换或真实后端联调。页面操作引导当前不考虑、不纳入队列或排期。
+
 ## 2026-10-13 Wave 16 / LxTextarea 当前版组件级复核完成
 
 - **组件入口**：`linkx-fe/src/components/LxTextarea/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxtextarea.md`；设计依据为 `design/表单控件八件套/`。
 - **验证入口**：`other-admin/admin-vue3/tests/unit/lx-textarea.test.ts`（14/14）与 `tests/e2e/lx-base-controls-docs.spec.ts`（11/11，共享基础控件文档回归）；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建和定向代码质量检查通过。
 - **正式评审**：Impeccable Assessment A 31/40（Good），未发现 P0–P3；B 对组件与 Demo 的 detector 均为合法 JSON `[]`、stderr 空、退出码 0，六个 Light/站点深色/HUD × 桌面/移动视图均成功注入。初始到限/超限静默、正常状态转到限/超限仅播报一次；禁用/只读校验状态隐藏计数且保留错误说明。独立代码审查无 P0–P3。
 - **Overlay 归因与边界**：移动根文档宽度 390px → 630px 仅发生在 overlay 注入后；注入前及无 overlay 的 320/375px E2E 无横向溢出，组件 Demo 宽度不变，归为检测覆盖层/页面外壳副作用。未执行 NVDA/VoiceOver 人工读屏。只关闭组件级审查，不增加 UI-10 全库 0/52 口径，也不代表 Vue3 宿主替换。
-- **下一入口**：按基础控件审计矩阵进入 `LxSelect`；后续继续其他基础控件和动态图标，再进入 `LxDynamicForm` 与其余 lx-ui 组件。页面操作引导当前不考虑、不纳入队列或排期，后续有需要时再重新评估。
+- **下一入口**：本条交接时的下一项 `LxSelect` 已于 Wave 17 收口；随后先处理 Checkbox/Radio 文档 375px API 表格可读性 P2，再继续其他基础控件和动态图标、`LxDynamicForm` 与其余 lx-ui 组件。页面操作引导当前不考虑、不纳入队列或排期，后续有需要时再重新评估。
 
 ## 2026-10-12 Wave 14 / LxInput 当前版组件级复核完成
 

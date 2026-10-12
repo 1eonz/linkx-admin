@@ -1,5 +1,19 @@
 # lx-ui 交付核查
 
+## 2026-10-13 Wave 17 / LxSelect 当前版组件级复核完成
+
+- `LxSelect` 实现、Demo 和中文 API 已按设计源复核，覆盖禁用值可读性、键盘操作、远程空/错/重试和窄屏触控；Light/HUD 下禁用值与图标对比度通过，390px 触发器和选项行均为 44px。
+- 单测 11/11、文档 E2E 3/3；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 生产构建及定向 ESLint/Prettier/diff check 通过。生产构建保留既有依赖分包警告。
+- Impeccable A 33/40（Good）；B 两个源码 detector 为有效 JSON `[]`、stderr 空、退出码 0。Light/HUD × 桌面/窄屏及站点深色桌面五状态均完成浏览器注入，错误为 0；overlay 原始命中已按组件节点、文档、复制控件和页面外壳逐项归因。代码复审无 P0–P3。报告、快照和趋势见 `.impeccable/critique/lxselect-wave-2026-10-13/`。
+- 本波关闭 LxSelect 当前版组件级复核，不增加 UI-10 全库 0/52 计数，不代表宿主替换或真实后端联调。下一项为 Checkbox/Radio 文档 375px API 表格 P2；页面操作引导暂缓、不进入当前排期。
+
+## 2026-10-13 Wave 16 / LxTextarea 当前版组件级复核完成
+
+- `LxTextarea` 按设计源复核组件、Demo、中文 API、主题、错误/焦点、长度、禁用/只读和窄屏状态；初始到限/超限不播报，正常转入到限/超限只播报一次。
+- 单测 14/14、共享文档 E2E 11/11；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建、定向格式/Lint 和组件 Stylelint 通过。文档样式既有错误均不在本波修改行。
+- Assessment A 31/40（Good），无 P0–P3；B 两个 detector 为 `[]`/空 stderr/退出码 0，六个 Light/站点深色/HUD × 桌面/移动视图证据完成；代码复审无 P0–P3。完整报告和 snapshot/trend 见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
+- 本波仅关闭 LxTextarea 当前版组件级复核，不代表 Vue3 宿主替换、NVDA/VoiceOver 人工读屏或 UI-10 全库 0/52 已完成。随后 LxSelect 已于 Wave 17 收口，再处理 Checkbox/Radio 文档 P2。
+
 ## 2026-10-12 Wave 15 / LxInputNumber 当前版组件级复核完成
 
 - `LxInputNumber` 实现、Demo 与中文 API 已按设计源核验；sm/md/lg 外框为 28/32/40px，步进按钮贴合无间距，`controls` 开关和 readonly 步进语义有回归。修正 min/max 文案，合成方向键不冒泡。

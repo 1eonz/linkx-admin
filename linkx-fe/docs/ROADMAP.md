@@ -1,5 +1,19 @@
 # lx-ui 路线图
 
+## 2026-10-13 Wave 17 / LxSelect 当前版组件级复核完成
+
+- `LxSelect` 的实现、Demo 与中文 API 已按 `design/表单控件八件套/` 对照，覆盖 Light/HUD、禁用值对比度、远程空/错与重试、键盘操作及窄屏触控。390px 下触发器、选项行均为 44px；320px 注入前页面无横向溢出。
+- 单测 11/11、文档 E2E 3/3；定向 ESLint、Prettier、`git diff --check` 通过。lx-ui 类型检查、206 modules 构建、VitePress 文档构建与 Vue3 生产构建在本波实现阶段通过。
+- 正式 Impeccable A 33/40（Good），无 P0–P3；B 两个 detector 为 JSON `[]`/空 stderr/退出码 0，五种浏览器状态注入成功、浏览器错误为 0。overlay 命中按目标节点归因到文档内容、代码复制控件、页面外壳及设计令牌；注入导致的窄屏根宽变化未影响 body 或 Select Demo。独立代码复审无 P0–P3；完整 A/B、综合报告、snapshot/trend 见 `.impeccable/critique/lxselect-wave-2026-10-13/`。
+- 本波关闭 LxSelect 当前版组件级复核，不增加 UI-10 全库 0/52 计数，也不代表 Vue3 宿主替换或真实后端联调完成。下一项修复 Checkbox/Radio 文档在 375px 下的 API 表格可读性 P2，再继续动态图标、`LxDynamicForm` 和其余矩阵项目。页面操作引导暂缓且不排期。
+
+## 2026-10-13 Wave 16 / LxTextarea 当前版组件级复核完成
+
+- `LxTextarea` 当前组件、Demo、中文 API 和主题/状态按设计源复核完成；初始到限/超限保持播报静默，正常转到到限/超限只播报一次。disabled/readonly 校验态隐藏计数但保留错误说明。
+- 单测 14/14、共享基础控件文档 E2E 11/11；lx-ui typecheck、206 modules build、VitePress build、Vue3 `build:prod`、定向 ESLint/Prettier、组件 CSS/HUD token Stylelint 与 diff check 通过。`custom.css` 既有 14 个属性顺序错误均在本次未改动行。
+- Impeccable A 31/40（Good），无 P0–P3；B detector `[]`/空 stderr/退出码 0，六个 Light/站点深色/HUD × 桌面/移动视图已完成。overlay 注入后移动根文档宽 630px，基线 390px 无溢出，E2E 无 overlay 的 320/375px 通过；归为检测覆盖层/页面外壳副作用。代码复审无 P0–P3，证据见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
+- 本波仅关闭 LxTextarea 组件级审查，不代表 Vue3 Textarea 宿主已替换，也不增加 UI-10 全库 0/52 计数。其后顺序为 LxSelect（已由 Wave 17 收口）、Checkbox/Radio 文档 P2、其他基础控件和动态图标，再进入 `LxDynamicForm` 与全库门禁。页面操作引导暂缓且不排期。
+
 ## 2026-10-12 Wave 15 / LxInputNumber 当前版组件级复核完成
 
 - 组件、Demo 和中文 API 已按表单控件设计源复核；sm/md/lg 外框严格为 28/32/40px，步进按钮中间无间距，`controls` 参数可显示或隐藏。readonly 仍允许步进但不允许直接键入，边界禁用、方向键、Enter/空格、长按和卸载清理均有回归。
