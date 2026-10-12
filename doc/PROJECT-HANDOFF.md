@@ -6,6 +6,15 @@
 - 后续确有需要时，再重新确认页面范围、文案、交互、后端契约，并评估实施排期；`doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅作为需求草案和未来设计基线。
 - 本次只调整范围备注，不代表引导功能已实施或完成验收。
 
+## [2026-10-12] lx-ui Wave 14 / LxInput 当前版组件级复核交接完成
+
+- **完成范围**：按表单控件设计源复核 LxInput、Demo 与中文 API；清空按钮支持键盘操作和 44×44px 触屏目标，必填、禁用/只读、公开方法、错误提示排版、320px 网格及 Demo 标题层级均已核对。codeview 发现并修复父级 `LxForm disabled` 未同步禁用自定义清空按钮的问题。`autocomplete="off"` 已明确为不可靠的浏览器提示，不能作为敏感信息保护措施。
+- **验证结果**：最终单测 13/13；LxInput 文档 E2E 3/3，邻接 InputNumber E2E 1/1。共享基础控件 E2E 全量运行 6/8，另两项旧断言分别将 LxSelect 的“指挥中心（可过滤）”误写为“指挥中心”，以及将 DatePicker 的“文档站整体深色（HUD）”误写为“HUD 深色主题”，详见测试输出；这两项不是 LxInput 回归。lx-ui 类型检查、205 个模块的库构建、VitePress 文档构建、Vue3 类型检查、目标 ESLint/Prettier 和 `git diff --check` 通过。Stylelint 因环境缺少 `postcss-less` 无法启动。
+- **Impeccable**：最终 Assessment A 34/40（Good），无 P0–P2。组件与 Demo detector 均为合法 JSON `[]`、stderr 空、退出码 0；Light/HUD × 1440/390px 四视图均成功注入 overlay。命中归因、源码指纹、截图、停服记录和 snapshot/trend 见 `.impeccable/critique/lxinput-wave-2026-10-12/`。静态 `[]` 只表示静态规则零命中。
+- **代码复审与遗留项**：父级禁用、`change` 事件说明、显式禁用/只读清空测试和 `clearable` 类型注释均已修正；最终 codeview 未发现 P0–P2。保留联系电话计数精确文案及窄屏工具栏键盘焦点两项 P3 测试增强建议，不阻塞下一波。
+- **范围边界**：本波不增加 UI-10 全库 52 项关闭数，不代表宿主表单、真实权限/后端、Vue3 Element Plus 替换完成；页面操作引导继续暂缓。下一步按组件矩阵进入 `LxInputNumber`。
+- **提交约定**：组件/Demo/测试使用 `fix(lx-ui): ...`；路线图、审计、项目地图、迁移台账和交接使用 `docs(project): ...`，按文件白名单分开提交并推送。
+
 ## [2026-10-12] lx-ui Wave 13 / LxButton 组件级正式收口
 
 - **完成范围**：按钮实现、Tooltip 并发协调和动画约束、尺寸与明暗主题、纯图标短标签、窄屏触控、键盘锚点、中文 Demo/API 和行为回归已按当前源码冻结完成。

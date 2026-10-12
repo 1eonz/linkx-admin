@@ -1,5 +1,14 @@
 # LinkX 项目地图
 
+## 2026-10-12 Wave 14 / LxInput 当前版组件级复核完成
+
+- **组件入口**：`linkx-fe/src/components/LxInput/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxinput.md`；设计依据为 `design/表单控件八件套/`。
+- **验证入口**：`other-admin/admin-vue3/tests/unit/lx-input.test.ts`（13/13，含父级表单禁用、显式禁用和只读清空）与 `tests/e2e/lx-base-controls-docs.spec.ts` 中 LxInput 用例（3/3）及邻接 InputNumber 用例（1/1）。共享基础控件 E2E 全量为 6/8，两个既有标签断言失配详见交接记录。lx-ui 类型检查、205 个模块的构建、VitePress 构建、Vue3 类型检查、目标 ESLint/Prettier 与差异检查通过。
+- **复核结论**：当前版 Assessment A 34/40（Good），未发现 P0–P2；组件与 Demo detector 为合法 JSON `[]`、stderr 空、退出码 0。Light/HUD × 1440/390px 四视图均成功注入，错误对比度、44px 触控目标、`inputmode=tel`、键盘清空与表单禁用继承通过。
+- **Overlay 归因**：行长命中落在文档正文和 Demo 说明，移动裁切命中为 VitePress 导航，遮罩命中为代码块复制控件；未命中输入框。注入标记使文档宽度扩张，注入前页面无横向溢出。综合报告、snapshot/trend 和证据见 `.impeccable/critique/lxinput-wave-2026-10-12/`。
+- **遗留建议**：codeview 无 P0–P2；联系电话计数和窄屏工具栏键盘焦点两项 P3 测试增强继续登记，不阻塞下一波。
+- **边界与下一步**：不增加 UI-10 全库矩阵关闭数，不代表宿主表单或 Vue3 Element Plus 替换完成。下一基础控件为 `LxInputNumber`。页面操作引导暂缓，后续按需再评估。
+
 ## 2026-10-12 Wave 13 / LxButton 当前版正式收口
 
 - **组件入口**：`linkx-fe/src/components/LxButton/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxbutton.md`；按钮令牌位于 `linkx-fe/src/tokens/` 与 `linkx-fe/src/styles/`，设计依据为 `design/按钮体系/DESIGN.md`。

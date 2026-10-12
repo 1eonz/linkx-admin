@@ -1,12 +1,20 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-12 lx-ui Wave 14 / LxInput 当前版组件级复核完成
+
+- `LxInput` 组件库当前版已按设计稿完成组件、Demo、中文 API、键盘清空、必填、禁用/只读、触屏目标和窄屏复核；Vue3 业务页面本波未做批量替换。
+- 单测 13/13（含父级 `LxForm disabled`、显式禁用和只读清空），LxInput 文档 E2E 3/3、邻接 InputNumber E2E 1/1；共享基础控件 E2E 全量 6/8 的两项既有标签断言失配见交接记录。lx-ui 类型检查、205 个模块构建、VitePress 文档构建、Vue3 类型检查、相关 ESLint/Prettier 和差异检查通过。Stylelint 因缺少 `postcss-less` 无法启动。
+- 最终 Assessment A 为 34/40（Good），未发现 P0–P2；组件与 Demo detector 均为合法 JSON `[]`、stderr 空、退出码 0，Light/HUD × 1440/390px 四视图 overlay 注入成功。综合报告、snapshot/trend、overlay 归因及生命周期证据见 `.impeccable/critique/lxinput-wave-2026-10-12/`。
+- codeview 提出的 `change` 事件说明、显式禁用/只读回归和 `clearable` 类型注释问题已修正；最终复审无 P0–P2。联系电话计数断言和窄屏工具栏键盘焦点断言两项 P3 建议保留为后续覆盖增强。
+- 下一批按 lx-ui 矩阵进入 `LxInputNumber`；组件库剩余基础控件、动态图标、`LxDynamicForm` 和整站 Impeccable 门禁仍先于 Vue3 Element Plus 批量替换。页面操作引导、权限中心和字段权限继续后置。
+
 ## 2026-10-12 lx-ui Wave 13 / LxButton 组件库交接完成
 
 - 组件库 `LxButton` 当前版已完成设计对照实现、中文 Demo/API、纯图标提示并发协调、明暗主题、减少动效、窄屏标签和摘要 44px 触达高度回归；Tooltip 保留 200ms 延迟且不使用 Element Plus 默认淡入淡出；Vue3 业务页面本波未替换按钮。
 - 单测 **33/33**、组件文档 E2E **19/19**；lx-ui 类型检查、205 modules 库构建、VitePress 构建、目标 ESLint/Prettier、`git diff --check` 通过。E2E 经 `playwright.lxui.config.ts` 运行并复用共用 Mock，未向真实后端发送请求。`md` 字号为 14px；Tooltip 触摸聚焦不显示，键盘聚焦正常显示。
 - 最终复审提出的 Ctrl+点击原页状态与主题迁移 Tooltip 可见/定位两项 E2E 缺口已关闭；修后全量文档 Playwright 19/19，通过真实 Ctrl+点击断言原页 hash、滚动位置和焦点保持。
 - 旧 SHA-256 指纹下的评估证据已作废；当前冻结版 A **32/40（Good）**、B 三 detector 合法 `[]`/空 stderr/退出码 0 且 8 个 Light/HUD 视图注入成功，代码复审无未关闭发现。桌面标签 P2 与测试可见性 P3 已关闭；窄屏工具栏高度和整段 region 焦点框两项 P3 决定后置。完整报告、overlay 归因、snapshot/trend 与原始证据见 `.impeccable/critique/lxbutton-wave-2026-10-12/final-after-label-fix/`。
-- 本组件库波次不关闭 Vue3 Element Plus 依赖迁移、UI-10 全库 52 项矩阵、业务按钮权限或真实后端联调。下一波按基础控件顺序复核 `LxInput`，之后继续其余基础控件和动态图标；基础控件与动态图标门槛完成后再进入 `LxDynamicForm`，最后进行 Vue3 Element Plus 分批替换。
+- 本组件库波次不关闭 Vue3 Element Plus 依赖迁移、UI-10 全库 52 项矩阵、业务按钮权限或真实后端联调。下一波 `LxInput` 已于 Wave 14 完成，之后继续 `LxInputNumber` 等基础控件和动态图标；基础控件与动态图标门槛完成后再进入 `LxDynamicForm`，最后进行 Vue3 Element Plus 分批替换。
 
 ## 2026-10-11 lx-ui Wave 11 / LxDescriptions 当前版正式复核完成
 

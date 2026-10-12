@@ -1,5 +1,13 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-12 Wave 14 / LxInput 当前版组件级复核完成
+
+- 当前版组件、Demo 和中文 API 已按 `design/表单控件八件套/` 对照复核；已修正必填语义、清空按钮键盘支持与 44×44px 触屏目标、禁用/只读演示差异及 320px Demo 网格边界。Demo 的分组标题层级已修复为 H2 → H3。
+- 最终 Assessment A 为 34/40（Good），未发现 P0–P2；组件与 Demo detector 均为合法 JSON `[]`、stderr 空、退出码 0，Light/HUD × 1440/390px 四个浏览器视图均成功注入。完整报告、overlay 归因、截图和 snapshot/trend 见 `.impeccable/critique/lxinput-wave-2026-10-12/`。
+- 代码复审发现的 `autocomplete="off"` 隐私保障误述、父级表单禁用时清空按钮仍可用、清空时 `change` 说明及缺少显式禁用/只读回归均已修正。1440px 旧版文档行长命中不再作为当前结论。
+- 单测 **13/13**（含父级表单禁用继承）、LxInput 文档 E2E **3/3**、邻接 InputNumber E2E **1/1**；共享基础控件 E2E 全量 6/8 的两个既有标签断言失配见交接记录。类型检查、205 个模块构建、VitePress 文档构建、Vue3 类型检查、相关 ESLint/Prettier 和差异检查通过。Stylelint 因缺少 `postcss-less` 未能启动。
+- 当前版组件级复核完成；两项 P3 测试增强建议保留待后续处理。本条不增加 UI-10 全库 52 项关闭数，也不代表宿主表单、真实权限/后端或 Vue3 Element Plus 替换完成。下一基础控件项为 `LxInputNumber`。
+
 ## 2026-10-12 Wave 13 / LxButton 组件级正式复核
 
 - 当前版 A **32/40（Good）**；Assessment B 三个 detector 均为有效 JSON `[]`、stderr 空、退出码 0，8 个 Light/HUD × 320/375/1024/1280 浏览器视图注入成功；独立代码复审无未关闭发现。
@@ -229,8 +237,8 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxFormItem`         | `design/表单控件八件套/`                          | UI-13 本波；错误/必填 ARIA 与样式待正式 Critique                                                                                                                                           |
 | `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                                                                                                     |
 | `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | A/B 与代码复审通过；真实读屏及权限菜单数据未覆盖，暂不计入严格矩阵                                                                                                                         |
-| `LxInput`            | `design/表单控件八件套/`                          | 下一严格复核项；核验 32px、边界、清空、错误/禁用/焦点、键盘、窄屏与主题                                                                                                                    |
-| `LxInputNumber`      | `design/表单控件八件套/`                          | 待严格复核；32px、步进按钮、边界与键盘                                                                                                                                                     |
+| `LxInput`            | `design/表单控件八件套/`                          | Wave 14 当前版组件级 A/B 与代码复审完成；两项 P3 测试增强建议待后续，宿主组合与 UI-10 全库门槛仍开放                                                                                          |
+| `LxInputNumber`      | `design/表单控件八件套/`                          | 下一严格复核项；32px、步进按钮、边界与键盘                                                                                                                                                 |
 | `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 待严格复核；数值、语义色、趋势、进度和窄屏                                                                                                                                                 |
 | `LxNavbar`           | `DESIGN-SPEC.md` + Navbar API/Demo                | 待严格复核；导航密度、焦点、菜单与窄屏                                                                                                                                                     |
 | `LxNodeBadge`        | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；节点状态、字号和对齐                                                                                                                                                           |

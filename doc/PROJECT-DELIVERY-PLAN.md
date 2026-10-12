@@ -5,12 +5,21 @@
 - 页面操作引导暂不纳入当前执行队列，不主动排期，也不阻塞 lx-ui 组件收口、Vue3 Element Plus 替换或其他迁移任务。
 - `doc/GUIDE-CONTENT-PLAN.md` 仅作为需求/文案草案保留；后续确有需要时，再重新确认页面范围、文案、交互和技术方案，并评估实施排期。
 
+## 2026-10-12 lx-ui Wave 14 / LxInput 当前版组件级复核完成
+
+- **完成**：完成 LxInput 设计对照、Demo 和中文 API 复核；补齐原生必填语义、清空按钮键盘可达性与 44×44px 触屏目标、禁用/只读状态差异、公开方法演示、窄屏布局和连续标题层级。codeview 另发现并修复父级 `LxForm disabled` 未禁用自定义清空按钮的问题。`autocomplete="off"` 文案已更正为浏览器提示，不承诺阻止浏览器或密码管理器自动填充。
+- **验证**：最终单测 13/13；LxInput 文档 E2E 3/3，邻接 InputNumber E2E 1/1。共享基础控件 E2E 全量 6/8，两个旧标签断言失配详见交接记录，不属于本波 LxInput 回归。lx-ui 类型检查、205 个模块的构建、VitePress 构建、Vue3 类型检查、目标 ESLint/Prettier 和差异检查通过。Stylelint 因缺少 `postcss-less` 无法启动，单独记录为环境限制。
+- **正式审查**：最终 Assessment A **34/40（Good）**，未发现 P0–P2；Assessment B 的组件与 Demo detector 均为合法 JSON `[]`、stderr 空、退出码 0，Light/HUD × 桌面/390px 四个新浏览器 context 均成功注入。对比度、触屏目标、电话输入模式、禁用继承和窄屏均通过。overlay 行长命中指向文档与 Demo 说明，裁切命中指向 VitePress 移动导航，遮罩命中指向代码块复制控件；输入组件本身无命中。完整报告和 snapshot/trend 见 `.impeccable/critique/lxinput-wave-2026-10-12/`。
+- **代码复审与遗留项**：未发现 P0–P2。两项 P3 建议是联系电话计数文案断言及窄屏工具栏键盘焦点断言，列为后续测试增强，不阻塞当前组件复核或下一波。
+
+- **边界与下一步**：本波不增加 UI-10 全库严格矩阵关闭数，不代表 Vue3 页面替换、权限或真实后端联调完成。下一步按矩阵复核 `LxInputNumber`，然后继续基础控件与动态图标；达到既定门槛后再进入 `LxDynamicForm` 和 Vue3 Element Plus 替换。页面操作引导继续暂缓，后续按需再执行。
+
 ## 2026-10-12 lx-ui Wave 13 / LxButton 正式交接
 
 - **完成**：LxButton 当前源码、Demo、中文 API、Tooltip 协调、明暗主题、减少动效、纯图标短标签、键盘/触屏与锚点行为均已复核；测试可见性 P3 已补齐。
 - **验证**：定向单测 33/33、文档 Playwright 19/19、lx-ui 类型检查、205 modules 库构建、VitePress 文档构建、目标 ESLint/Prettier 和 `git diff --check` 通过。E2E 覆盖真实 Ctrl+点击时原页 hash、滚动与焦点保持，以及主题迁移后 Tooltip 可见性、主题和相对按钮位置。Impeccable A 32/40；B 三个 detector 为合法 JSON `[]`、stderr 空、退出码 0，8/8 Light/HUD 浏览器场景注入成功；snapshot/trend 及证据见 `.impeccable/critique/lxbutton-wave-2026-10-12/final-after-label-fix/`。
 - **建议处置**：桌面纯图标标签 P2 已关闭；320px 工具栏 136px 高和完整演示区 624×1609px 焦点框两项 P3 暂缓，不改变 44px 触控下限和可访问 region/键盘跳转契约。检测覆盖层在 320/375/1024px 带来的 240/240/112px 文档宽度变化已由标签 `x + width` 归因；页面注入前无横向溢出。HUD 配色命中属于既有主题令牌观察，不作为组件缺陷。
-- **边界与下一步**：本波不增加 UI-10 全库严格矩阵关闭数，不代表 Vue3 业务页按钮替换、权限接入或真实后端联调完成。下一波复核 `LxInput`，随后继续基础控件与动态图标；按既定顺序完成后才进入 `LxDynamicForm`，之后开展 Vue3 Element Plus 替换。页面操作引导继续暂缓、不自动排期。
+- **边界与下一步**：本波不增加 UI-10 全库严格矩阵关闭数，不代表 Vue3 业务页按钮替换、权限接入或真实后端联调完成。下一波 `LxInput` 已于 Wave 14 完成；之后继续基础控件与动态图标，按既定顺序完成后才进入 `LxDynamicForm`，再开展 Vue3 Element Plus 替换。页面操作引导继续暂缓、不自动排期。
 
 ## 2026-10-11 Wave 11 / LxDescriptions 当前版正式 A/B 收口
 

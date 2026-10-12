@@ -5,12 +5,19 @@
 - 页面操作引导暂不纳入执行队列，不主动排期，也不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
 - 保留 `doc/GUIDE-CONTENT-PLAN.md` 作为需求/文案草案；后续确有需要时，再重新确认范围、交互和技术方案，并评估实施排期。
 
-## 2026-10-12 当前交接：LxButton 已完成，下一步 LxInput
+## 2026-10-12 当前交接：LxInput 已完成，下一步 LxInputNumber
+
+- Wave 14 `LxInput` 实现与定向验证已完成：单测 13/13，LxInput 文档 E2E 3/3，邻接 InputNumber E2E 1/1；lx-ui/Vue3 类型检查、205 个模块的库构建、VitePress 文档构建、目标 ESLint/Prettier 与差异检查通过。共享基础控件 E2E 全量 6/8 的两个既有标签断言失配见交接记录，不属于本波输入框回归。Stylelint 因缺少 `postcss-less` 无法启动。
+- `autocomplete="off"` 不能当成隐私保障的误述、父级表单禁用时仍可清空、清空时 `change` 事件说明、显式禁用/只读回归和 `clearable` 类型注释均已修正；最终 Assessment A 为 34/40（Good），无 P0–P2，B 的静态与浏览器证据已完成并归档。
+- Demo H2 → H4 标题跳级已调整为 H2 → H3。保留两项 P3 测试增强建议；综合报告、detector 三件套、overlay 归因、截图、源码指纹和停服记录见 `.impeccable/critique/lxinput-wave-2026-10-12/`。
+- 下一步按组件审计矩阵进入 `LxInputNumber`；后续基础控件与动态图标、`LxDynamicForm`、剩余组件库审查和 Vue3 Element Plus 替换顺序不变。页面操作引导继续暂缓、后续按需执行。
+
+## 2026-10-12 交接记录：LxButton 完成后转入 LxInput
 
 - Wave 13 `LxButton` 组件库正式复核完成：定向单测 33/33、文档 E2E 19/19、类型检查、205 modules 构建、文档构建、目标 ESLint/Prettier 和差异检查通过；A 32/40，B 三个有效 detector 三件套为 `[]`/空/0，8/8 浏览器视图成功注入，最终代码复审无未关闭发现。
 - 最终复审提出的两项 E2E 覆盖问题已关闭：首屏使用真实 Ctrl+点击并拦截新标签默认动作，验证原页 hash、滚动位置和焦点不变；主题迁移用例隔离其他按钮的悬停，再断言迁移后焦点、实际可见 Tooltip 及浮层相对按钮的位置。修后完整文档 E2E 为 19/19。
 - 桌面纯图标可见短标签 P2 与 E2E 逐项可见性 P3 已关闭。320px 工具栏占高和完整演示 region 大焦点框两项 P3 经 A 复验仍成立，但不阻断组件使用，本轮决定后置；保留 44px 触控目标、可访问名称与键盘跳转。
-- 执行顺序：下一波严格复核 `LxInput`；继续未关闭的基础控件与动态图标矩阵；其后按既定设计完成 `LxDynamicForm`；完成其余 lx-ui 组件与 Impeccable 库级审查后，才替换 Vue3 Element Plus。Vue3 业务 API 继续使用 `.then().catch().finally()`，新增文档/注释使用中文，Mock 浏览器不得访问真实后端。
+- 执行顺序：下一波严格复核 `LxInput`（已于 Wave 14 完成），然后继续未关闭的基础控件与动态图标矩阵；其后按既定设计完成 `LxDynamicForm`；完成其余 lx-ui 组件与 Impeccable 库级审查后，才替换 Vue3 Element Plus。Vue3 业务 API 继续使用 `.then().catch().finally()`，新增文档/注释使用中文，Mock 浏览器不得访问真实后端。
 - Critique 综合报告与证据位于 `.impeccable/critique/lxbutton-wave-2026-10-12/final-after-label-fix/`；detector `[]` 仅代表静态规则零命中。页面操作引导按范围备注暂缓，不自动排期。
 
 ## 2026-10-11 已执行波次：LxMetricCard + LxSectionTitle

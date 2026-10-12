@@ -1,12 +1,20 @@
 # lx-ui 交付核查
 
+## 2026-10-12 Wave 14 / LxInput 当前版组件级复核完成
+
+- 组件、Demo 与中文 API 已按表单控件设计源复核；清空按钮具备键盘名称和操作，触屏目标为 44×44px，必填、禁用/只读、公开方法和窄屏状态均有回归覆盖。Demo 的分组标题已修为 H2 → H3。
+- 单测 **13/13**（含父级 `LxForm disabled`、显式禁用和只读清空）、LxInput 文档 E2E **3/3**、邻接 InputNumber E2E **1/1**；共享基础控件 E2E 全量 6/8 的两项既有标签断言失配见项目交接。类型检查、205 个模块的库构建、VitePress 文档构建、Vue3 类型检查、相关 ESLint/Prettier 和 `git diff --check` 通过。Stylelint 未能启动：环境缺少 `postcss-less`。
+- 最终 Assessment A **34/40（Good）**、无 P0–P2；B 的组件与 Demo detector 为合法 JSON `[]`、stderr 空、退出码 0；Light/HUD × 1440/390px 四视图 overlay 注入成功，页面错误和失败请求均为 0。综合报告、snapshot/trend 和原始证据见 `.impeccable/critique/lxinput-wave-2026-10-12/`。
+- overlay 命中已逐项归因到文档行长、Demo 说明、VitePress 导航裁切和代码块复制控件；没有命中输入框组件。代码复审此前问题均已修正，最终无 P0–P2；保留两项 P3 测试增强建议。
+- 当前范围不关闭 UI-10 全库 52 项、Vue3 `element-plus` 替换、权限接入或真实后端联调。下一批按矩阵进入 `LxInputNumber`；页面操作引导暂缓、不自动排期。
+
 ## 2026-10-12 Wave 13 / LxButton 当前版正式收口
 
 - 已完成基础按钮、Demo、中文 API 和回归更新；纯图标浮层采用共享协调器，触屏窄屏补可见短标签，Demo 高级示例渐进展开；Tooltip 保留 200ms 延迟并关闭 Element Plus 默认淡入淡出，避免新旧提示重叠；摘要触达高度至少 44px。
 - 定向单测 **33/33**、LxButton 文档 E2E **19/19**、lx-ui 类型检查、205 modules 构建、VitePress 构建、目标 ESLint/Prettier 和差异检查通过。E2E 全部后端请求由共用 Mock 拦截；`md` 字号为 14px，触摸聚焦 tooltip 行为已有单测和浏览器覆盖。
 - 旧指纹下的评审证据已标记作废；当前源码正式 A/B、overlay 归因、snapshot/trend 和代码复审均已完成。A **32/40（Good）**；桌面短标签 P2 已处理，320px 工具栏高度与完整演示 region 焦点框两项 P3 决定后置。B 三个 detector 为合法 `[]`/空 stderr/退出码 0，8/8 Light/HUD 视图注入成功；注入层造成的宽度变化已归因到 detector 标签。详细证据见 `.impeccable/critique/lxbutton-wave-2026-10-12/final-after-label-fix/`。静态 `[]` 只代表静态规则零命中。
 - 定向代码复审无未关闭发现；新增四个短标签逐项可见断言后，文档 Playwright **19/19** 通过。后续复审提出的 Ctrl+点击原页状态与主题迁移 Tooltip 可见/定位缺口已补入用例，完整文档 E2E 仍为 **19/19**。类型检查、205 modules 库构建、VitePress 构建、目标 ESLint/Prettier 和 `git diff --check` 通过。
-- 当前范围不包含 Vue3 业务页全面替换、UI-10 全库 52 项关闭、权限接入或真实后端联调。下一批按基础控件顺序复核 `LxInput`；页面操作引导保持暂缓，不自动排期。
+- 当前范围不包含 Vue3 业务页全面替换、UI-10 全库 52 项关闭、权限接入或真实后端联调。下一批按基础控件顺序复核 `LxInput`（已于 Wave 14 完成），随后进入 `LxInputNumber`；页面操作引导保持暂缓，不自动排期。
 
 ## 2026-10-11 Wave 11 / LxDescriptions 当前版正式核查
 

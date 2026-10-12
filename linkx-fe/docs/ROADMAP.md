@@ -1,5 +1,16 @@
 # lx-ui 路线图
 
+## 2026-10-12 Wave 14 / LxInput 当前版组件级复核完成
+
+- 已对照表单控件设计源复核 `LxInput`、Demo 与中文 API；清空按钮支持键盘操作，触屏目标为 44×44px，补齐必填语义、禁用/只读差异、公开方法示例和窄屏布局。Demo 分组标题改为连续的 H2/H3 层级。
+- 复审发现 `autocomplete="off"` 不应描述为隐私保障，现已在组件类型、API 文档和 Demo 中明确它只是浏览器提示，浏览器或密码管理器可能忽略，不能用来保护敏感信息。
+- 单测 **13/13**（含父级 `LxForm disabled`、显式禁用和只读清空）、LxInput 文档 E2E **3/3**、邻接 InputNumber E2E **1/1**；共享基础控件 E2E 全量 6/8 的两项既有标签断言失配见交接记录。类型检查、205 个模块的库构建、VitePress 文档构建、Vue3 类型检查、相关 ESLint/Prettier 和 `git diff --check` 通过。Stylelint 因环境缺少 `postcss-less` 未能启动。
+- 最终 Assessment A **34/40（Good）**，未发现 P0–P2；B 的组件与 Demo detector 均为合法 JSON `[]`、stderr 空、退出码 0。Light/HUD × 1440/390px 四视图成功注入，页面错误和失败请求均为 0。截图、overlay 归因、源码指纹和停服证据见 `.impeccable/critique/lxinput-wave-2026-10-12/`。
+- overlay 行长命中在文档与 Demo 说明，移动裁切命中在 VitePress 导航，遮罩命中在代码块复制控件；未命中 LxInput 输入控件。注入造成的文档宽度变化属于标记层影响，注入前页面无横向溢出。
+- codeview 提出的涉密文案、清空时 `change` 事件说明、显式禁用/只读清空回归与 `clearable` 类型注释问题均已修复；静态 detector 的 `[]` 只表示零条静态规则命中。
+- codeview 未发现 P0–P2；联系电话计数文案与窄屏工具栏键盘焦点两项 P3 测试增强建议留待后续，不阻塞下一波。
+- 本波不增加 UI-10 全库 52 项关闭数，不代表 Vue3 业务页替换、真实权限或后端联调完成。下一基础控件严格复核项为 `LxInputNumber`；页面操作引导继续暂缓，后续有需要再执行。
+
 ## 2026-10-12 Wave 13 / LxButton 当前版正式收口
 
 - `LxButton` 已按按钮体系设计补齐语义变体、纯图标提示协调、明暗主题、减少动效、窄屏可见图标标签及 Demo 渐进展示；提示延迟 200ms，关闭 Element Plus 默认淡入淡出以避免提示重叠；320px/375px 折叠摘要触达高度至少 44px。
@@ -7,7 +18,7 @@
 - 代码复审原发现的 Tooltip 动效白名单、`md` 字号、触摸聚焦和标签可见断言问题均已修复。A 为 **32/40（Good）**，桌面纯图标标签 P2 已关闭；320px 工具栏高度与完整演示区焦点框两项 P3 决定保留并后置。B 的三个 detector 均为合法 JSON `[]`、stderr 空、退出码 0；8/8 Light/HUD 浏览器视图注入成功。overlay 命中归因、源码指纹和停服证据已归档；静态 `[]` 只代表零命中。
 - 最终复审提出的 Ctrl+点击原页状态、主题迁移 Tooltip 可见性和位置两项 E2E 缺口已关闭：新增用例实际触发 Ctrl+点击，并检查迁移后 Tooltip 在按钮上方可见；没有增加组件实现改动。
 - 组件单测 **33/33**、文档 Playwright **19/19**、`vue-tsc --noEmit`、205 modules 库构建、VitePress 构建、目标 ESLint/Prettier、差异检查及最终代码复审均通过。正式报告和 snapshot/trend 见 `.impeccable/critique/lxbutton-wave-2026-10-12/final-after-label-fix/`。
-- 本波仅完成 lx-ui 组件与 Demo，不代表 Vue3 业务页按钮已全面替换，也不增加 UI-10 全库矩阵关闭数；下一波按基础控件顺序严格复核 `LxInput`，随后继续表单基础控件与动态图标矩阵，再进入 `LxDynamicForm`。
+- 本波仅完成 lx-ui 组件与 Demo，不代表 Vue3 业务页按钮已全面替换，也不增加 UI-10 全库矩阵关闭数；后续先严格复核 `LxInput`（已于 Wave 14 完成），再继续表单基础控件与动态图标矩阵，随后进入 `LxDynamicForm`。
 
 ## 2026-10-11 Wave 11 / LxDescriptions 当前版正式收口
 
