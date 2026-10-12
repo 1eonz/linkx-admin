@@ -1,6 +1,8 @@
 import { mount } from '@vue/test-utils';
 import { LxButton, type LxButtonSize, type LxButtonType } from 'lx-ui';
-import { describe, expect, it } from 'vitest';
+import { createIconTooltipController } from 'lx-ui/src/components/LxButton/icon-tooltip-coordinator';
+import { describe, expect, it, vi } from 'vitest';
+import { defineComponent, h, nextTick, ref } from 'vue';
 
 const TYPES: LxButtonType[] = ['primary', 'success', 'warning', 'danger', 'default', 'text'];
 
@@ -106,6 +108,17 @@ describe('LxButton', () => {
     wrapper.unmount();
   });
 
+  it('keeps aria-busy true while loading even when attrs provides false', () => {
+    const wrapper = mount(LxButton, {
+      props: { loading: true },
+      attrs: { 'aria-busy': 'false' },
+      slots: { default: '正在提交' },
+    });
+
+    expect(wrapper.attributes('aria-busy')).toBe('true');
+    wrapper.unmount();
+  });
+
   it('keeps the original label while loading without loadingText', async () => {
     const wrapper = mount(LxButton, {
       props: { loading: true, loadingText: '' },
@@ -152,7 +165,7 @@ describe('LxButton', () => {
     wrapper.unmount();
   });
 
-  it('renders an icon-only text button without an empty label node', () => {
+  it('renders an icon-only text button without an empty label node and applies icon-only geometry', () => {
     const wrapper = mount(LxButton, {
       props: { type: 'text', icon: 'refresh', iconPosition: 'left' },
       attrs: { 'aria-label': '刷新数据' },
@@ -160,21 +173,203 @@ describe('LxButton', () => {
 
     expect(wrapper.find('.lx-btn__label').exists()).toBe(false);
     expect(wrapper.get('.lx-icon').attributes('data-icon-name')).toBe('refresh');
+    expect(wrapper.classes()).toContain('lx-btn--icon-only');
     // attrs 透传到内核 button，纯图标形态依赖调用方提供可访问名称
     expect(wrapper.attributes('aria-label')).toBe('刷新数据');
     wrapper.unmount();
   });
 
-  it('renders a tooltip carrying the aria-label for icon-only buttons', () => {
-    // 纯图标 + aria-label：悬停提示对视觉用户可见（读屏用户仍读 aria-label 本身）
+  it('marks the default icon-only button and preserves its accessible name', () => {
+    const wrapper = mount(LxButton, {
+      props: { type: 'default', icon: 'refresh' },
+      attrs: { 'aria-label': '刷新数据' },
+    });
+
+    expect(wrapper.classes()).toContain('lx-btn--icon-only');
+    expect(wrapper.attributes('aria-label')).toBe('刷新数据');
+    expect(wrapper.find('.lx-btn__label').exists()).toBe(false);
+    wrapper.unmount();
+  });
+
+  it('updates the icon-only tooltip when aria-label is added, changed, or removed', async () => {
+    const label = ref<string | undefined>(undefined);
+    const wrapper = mount(
+      defineComponent({
+        setup() {
+          return () =>
+            h(LxButton, {
+              type: 'text',
+              icon: 'refresh',
+              'aria-label': label.value,
+            });
+        },
+      }),
+    );
+    const button = wrapper.get('button');
+
+    expect(wrapper.findComponent({ name: 'ElTooltip' }).exists()).toBe(false);
+
+    label.value = '刷新数据';
+    await nextTick();
+    await nextTick();
+    expect(button.attributes('aria-label')).toBe('刷新数据');
+    expect(wrapper.findComponent({ name: 'ElTooltip' }).props('content')).toBe('刷新数据');
+
+    label.value = '同步数据';
+    await nextTick();
+    await nextTick();
+    expect(button.attributes('aria-label')).toBe('同步数据');
+    expect(wrapper.findComponent({ name: 'ElTooltip' }).props('content')).toBe('同步数据');
+
+    label.value = undefined;
+    await nextTick();
+    await nextTick();
+    expect(button.attributes('aria-label')).toBeUndefined();
+    expect(wrapper.findComponent({ name: 'ElTooltip' }).exists()).toBe(false);
+    wrapper.unmount();
+  });
+
+  it('shows a newly available tooltip for an already hovered and focused button', async () => {
+    vi.useFakeTimers();
+    const label = ref<string | undefined>(undefined);
+    const wrapper = mount(
+      defineComponent({
+        setup() {
+          return () =>
+            h(LxButton, {
+              type: 'text',
+              icon: 'refresh',
+              'aria-label': label.value,
+            });
+        },
+      }),
+      { attachTo: document.body },
+    );
+    const button = wrapper.get('button');
+
+    try {
+      button.element.focus();
+      await nextTick();
+      await button.trigger('pointerenter', { pointerType: 'mouse' });
+      label.value = '刷新数据';
+      await nextTick();
+      await nextTick();
+
+      const tooltip = wrapper.findComponent({ name: 'ElTooltip' });
+      expect(tooltip.exists()).toBe(true);
+      expect(tooltip.props('visible')).toBe(false);
+
+      await vi.advanceTimersByTimeAsync(200);
+      await nextTick();
+      expect(tooltip.props('visible')).toBe(true);
+
+      await button.trigger('pointerleave', { pointerType: 'mouse' });
+      expect(tooltip.props('visible')).toBe(true);
+
+      await button.trigger('blur');
+      expect(tooltip.props('visible')).toBe(false);
+    } finally {
+      wrapper.unmount();
+      vi.useRealTimers();
+    }
+  });
+
+  it('shows a newly available tooltip for an already hovered button without focus', async () => {
+    vi.useFakeTimers();
+    const label = ref<string | undefined>(undefined);
+    const wrapper = mount(
+      defineComponent({
+        setup() {
+          return () =>
+            h(LxButton, {
+              type: 'text',
+              icon: 'refresh',
+              'aria-label': label.value,
+            });
+        },
+      }),
+    );
+    const button = wrapper.get('button');
+
+    try {
+      await button.trigger('pointerenter', { pointerType: 'mouse' });
+      label.value = '刷新数据';
+      await nextTick();
+      await nextTick();
+
+      const tooltip = wrapper.findComponent({ name: 'ElTooltip' });
+      expect(tooltip.exists()).toBe(true);
+      await vi.advanceTimersByTimeAsync(200);
+      await nextTick();
+      expect(tooltip.props('visible')).toBe(true);
+
+      await button.trigger('pointerleave', { pointerType: 'mouse' });
+      expect(tooltip.props('visible')).toBe(false);
+    } finally {
+      wrapper.unmount();
+      vi.useRealTimers();
+    }
+  });
+
+  it('switches icon-only geometry while loading text is shown', async () => {
+    const wrapper = mount(LxButton, {
+      props: { icon: 'refresh', loading: false, loadingText: '正在刷新' },
+      attrs: { 'aria-label': '刷新数据' },
+    });
+
+    expect(wrapper.classes()).toContain('lx-btn--icon-only');
+    await wrapper.setProps({ loading: true });
+    expect(wrapper.classes()).not.toContain('lx-btn--icon-only');
+    expect(wrapper.get('.lx-btn__label').text()).toBe('正在刷新');
+    wrapper.unmount();
+  });
+
+  it('coordinates icon-only tooltips across buttons and restores the focused hint after hover', async () => {
+    vi.useFakeTimers();
     const wrapper = mount(LxButton, {
       props: { type: 'text', icon: 'refresh' },
       attrs: { 'aria-label': '刷新数据' },
+      attachTo: document.body,
     });
-    expect(wrapper.findComponent({ name: 'ElTooltip' }).exists()).toBe(true);
-    wrapper.unmount();
+    const hovered = mount(LxButton, {
+      props: { type: 'text', icon: 'close' },
+      attrs: { 'aria-label': '关闭筛选' },
+      attachTo: document.body,
+    });
+    const focusedTooltip = wrapper.findComponent({ name: 'ElTooltip' });
+    const hoveredTooltip = hovered.findComponent({ name: 'ElTooltip' });
 
-    // 有文字的按钮不挂 tooltip（aria-label 仅服务读屏）
+    try {
+      expect(focusedTooltip.props('trigger')).toEqual([]);
+      expect(focusedTooltip.props('triggerKeys')).toEqual([]);
+      expect(focusedTooltip.props('visible')).toBe(false);
+
+      wrapper.get('button').element.focus();
+      await nextTick();
+      await vi.advanceTimersByTimeAsync(200);
+      await nextTick();
+      expect(focusedTooltip.props('visible')).toBe(true);
+
+      await hovered.get('button').trigger('pointerenter', { pointerType: 'mouse' });
+      await vi.advanceTimersByTimeAsync(200);
+      await nextTick();
+      expect({
+        focused: focusedTooltip.props('visible'),
+        hovered: hoveredTooltip.props('visible'),
+      }).toEqual({ focused: false, hovered: true });
+
+      await hovered.get('button').trigger('pointerleave', { pointerType: 'mouse' });
+      await vi.advanceTimersByTimeAsync(200);
+      await nextTick();
+      expect(focusedTooltip.props('visible')).toBe(true);
+      expect(hoveredTooltip.props('visible')).toBe(false);
+    } finally {
+      wrapper.unmount();
+      hovered.unmount();
+      vi.useRealTimers();
+    }
+
+    // 有文字的按钮不挂 tooltip（aria-label 仅服务读屏）。
     const labeled = mount(LxButton, {
       props: { type: 'text', icon: 'search' },
       attrs: { 'aria-label': '检索详情' },
@@ -182,6 +377,301 @@ describe('LxButton', () => {
     });
     expect(labeled.findComponent({ name: 'ElTooltip' }).exists()).toBe(false);
     labeled.unmount();
+  });
+
+  it('closes the focused icon tooltip with Escape and shows it again after refocus', async () => {
+    vi.useFakeTimers();
+    const wrapper = mount(LxButton, {
+      props: { type: 'text', icon: 'refresh' },
+      attrs: { 'aria-label': '刷新数据' },
+      attachTo: document.body,
+    });
+    const button = wrapper.get('button');
+    const tooltip = wrapper.findComponent({ name: 'ElTooltip' });
+
+    try {
+      button.element.focus();
+      await nextTick();
+      await vi.advanceTimersByTimeAsync(200);
+      await nextTick();
+      expect(tooltip.props('visible')).toBe(true);
+
+      await button.trigger('keydown', { key: 'Escape' });
+      await nextTick();
+      expect(tooltip.props('visible')).toBe(false);
+      expect(document.activeElement).toBe(button.element);
+
+      button.element.blur();
+      await nextTick();
+      button.element.focus();
+      await nextTick();
+      await vi.advanceTimersByTimeAsync(200);
+      await nextTick();
+      expect(tooltip.props('visible')).toBe(true);
+    } finally {
+      wrapper.unmount();
+      vi.useRealTimers();
+    }
+  });
+
+  it('keeps the hovered hint when another button receives focus', async () => {
+    vi.useFakeTimers();
+    const hovered = createIconTooltipController();
+    const focused = createIconTooltipController();
+
+    try {
+      hovered.mouseEnter();
+      focused.focus();
+      await vi.advanceTimersByTimeAsync(200);
+
+      expect(hovered.visible.value).toBe(true);
+      expect(focused.visible.value).toBe(false);
+
+      focused.blur();
+      expect(hovered.visible.value).toBe(true);
+
+      hovered.focus();
+      hovered.blur();
+      expect(hovered.visible.value).toBe(true);
+    } finally {
+      hovered.clear();
+      focused.clear();
+      vi.useRealTimers();
+    }
+  });
+
+  it('isolates icon hints between documents in the same runtime', async () => {
+    vi.useFakeTimers();
+    const mainDocument = document.implementation.createHTMLDocument('主文档');
+    const frameDocument = document.implementation.createHTMLDocument('子文档');
+    const main = createIconTooltipController();
+    const frame = createIconTooltipController();
+
+    try {
+      main.bindDocument(mainDocument);
+      frame.bindDocument(frameDocument);
+      main.mouseEnter();
+      frame.mouseEnter();
+      await vi.advanceTimersByTimeAsync(200);
+
+      expect(main.visible.value).toBe(true);
+      expect(frame.visible.value).toBe(true);
+    } finally {
+      main.clear();
+      frame.clear();
+      vi.useRealTimers();
+    }
+  });
+
+  it('binds iframe tooltips to their own document and detects keyboard focus across realms', async () => {
+    vi.useFakeTimers();
+    const frame = document.createElement('iframe');
+    document.body.append(frame);
+    const frameDocument = frame.contentDocument;
+    if (!frameDocument?.body) throw new Error('iframe 文档未创建 body');
+
+    const main = mount(LxButton, {
+      props: { type: 'text', icon: 'refresh' },
+      attrs: { 'aria-label': '主文档刷新' },
+      attachTo: document.body,
+    });
+    const insideFrame = mount(LxButton, {
+      props: { type: 'text', icon: 'refresh' },
+      attrs: { 'aria-label': '子文档刷新' },
+      attachTo: frameDocument.body,
+    });
+
+    try {
+      await main.get('button').trigger('pointerenter', { pointerType: 'mouse' });
+      await insideFrame.get('button').trigger('pointerenter', { pointerType: 'mouse' });
+      await vi.advanceTimersByTimeAsync(200);
+
+      expect(main.findComponent({ name: 'ElTooltip' }).props('visible')).toBe(true);
+      expect(insideFrame.findComponent({ name: 'ElTooltip' }).props('visible')).toBe(true);
+      expect(main.findComponent({ name: 'ElTooltip' }).props('appendTo')).toBe(document.body);
+      expect(insideFrame.findComponent({ name: 'ElTooltip' }).props('appendTo')).toBe(frameDocument.body);
+
+      await main.get('button').trigger('pointerleave');
+      await insideFrame.get('button').trigger('pointerleave');
+      await vi.runOnlyPendingTimersAsync();
+
+      const frameButton = insideFrame.get('button').element;
+      const matches = vi.spyOn(frameButton, 'matches').mockReturnValue(true);
+      await insideFrame.get('button').trigger('focus');
+      await vi.advanceTimersByTimeAsync(200);
+      await nextTick();
+
+      expect(matches).toHaveBeenCalledWith(':focus-visible');
+      expect(insideFrame.findComponent({ name: 'ElTooltip' }).props('visible')).toBe(true);
+    } finally {
+      main.unmount();
+      insideFrame.unmount();
+      frame.remove();
+      vi.useRealTimers();
+    }
+  });
+
+  it('closes a keyboard tooltip when touch presses the already focused button', async () => {
+    vi.useFakeTimers();
+    const wrapper = mount(LxButton, {
+      props: { type: 'text', icon: 'refresh' },
+      attrs: { 'aria-label': '刷新数据' },
+      attachTo: document.body,
+    });
+    const button = wrapper.get('button');
+    const matches = vi.spyOn(button.element, 'matches').mockReturnValue(true);
+    const tooltip = wrapper.findComponent({ name: 'ElTooltip' });
+
+    try {
+      button.element.focus();
+      await nextTick();
+      await vi.advanceTimersByTimeAsync(200);
+      expect(tooltip.props('visible')).toBe(true);
+
+      await button.trigger('pointerdown', { pointerType: 'touch' });
+      await nextTick();
+      expect(tooltip.props('visible')).toBe(false);
+      expect(document.activeElement).toBe(button.element);
+      expect(matches).toHaveBeenCalledWith(':focus-visible');
+
+      await button.trigger('pointerup', { pointerType: 'touch' });
+    } finally {
+      wrapper.unmount();
+      vi.useRealTimers();
+    }
+  });
+
+  it('rebinds theme observation after the button moves into a new HUD ancestor', async () => {
+    vi.useFakeTimers();
+    const wrapper = mount(LxButton, {
+      props: { type: 'text', icon: 'refresh' },
+      attrs: { 'aria-label': '刷新数据' },
+      attachTo: document.body,
+    });
+    const button = wrapper.get('button');
+    vi.spyOn(button.element, 'matches').mockReturnValue(true);
+    const tooltip = wrapper.findComponent({ name: 'ElTooltip' });
+    const hud = document.createElement('div');
+    hud.className = 'lx-theme-hud';
+
+    try {
+      await button.trigger('focus');
+      await vi.advanceTimersByTimeAsync(200);
+      expect(tooltip.props('popperClass')).toBe('lx-button-icon-tooltip');
+
+      document.body.append(hud);
+      hud.append(button.element);
+      await nextTick();
+      await Promise.resolve();
+      expect(tooltip.props('popperClass')).toBe('lx-button-icon-tooltip lx-theme-hud');
+
+      vi.useRealTimers();
+      hud.classList.remove('lx-theme-hud');
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await nextTick();
+      expect(tooltip.props('popperClass')).toBe('lx-button-icon-tooltip');
+    } finally {
+      wrapper.unmount();
+      hud.remove();
+      vi.useRealTimers();
+    }
+  });
+
+  it('does not register a theme observer when the button has no icon tooltip', async () => {
+    const observe = vi.spyOn(MutationObserver.prototype, 'observe');
+    const wrapper = mount(LxButton, {
+      props: { type: 'primary' },
+      slots: { default: '保存' },
+      attachTo: document.body,
+    });
+
+    try {
+      await nextTick();
+      const themeObservations = observe.mock.calls.filter(([, options]) => options.attributeFilter?.includes('class'));
+      expect(themeObservations).toHaveLength(0);
+    } finally {
+      wrapper.unmount();
+      observe.mockRestore();
+    }
+  });
+
+  it('does not rebuild the theme observer for an unrelated body portal', async () => {
+    const observe = vi.spyOn(MutationObserver.prototype, 'observe');
+    const wrapper = mount(LxButton, {
+      props: { type: 'text', icon: 'refresh' },
+      attrs: { 'aria-label': '刷新数据' },
+      attachTo: document.body,
+    });
+    const portal = document.createElement('div');
+
+    try {
+      await nextTick();
+      const themeObservationCount = observe.mock.calls.filter(([, options]) =>
+        options.attributeFilter?.includes('class'),
+      ).length;
+      expect(themeObservationCount).toBeGreaterThan(0);
+
+      document.body.append(portal);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const nextThemeObservationCount = observe.mock.calls.filter(([, options]) =>
+        options.attributeFilter?.includes('class'),
+      ).length;
+      expect(nextThemeObservationCount).toBe(themeObservationCount);
+    } finally {
+      wrapper.unmount();
+      portal.remove();
+      observe.mockRestore();
+    }
+  });
+
+  it('does not show icon tooltip for touch focus but keeps keyboard focus support', async () => {
+    vi.useFakeTimers();
+    const wrapper = mount(LxButton, {
+      props: { icon: 'refresh' },
+      attrs: { 'aria-label': '刷新数据' },
+    });
+    const button = wrapper.get('button');
+    const matches = vi.spyOn(button.element, 'matches').mockReturnValue(true);
+
+    try {
+      await button.trigger('pointerdown', { pointerType: 'touch' });
+      await button.trigger('focus');
+      await vi.advanceTimersByTimeAsync(200);
+
+      expect(matches).not.toHaveBeenCalled();
+      expect(wrapper.findComponent({ name: 'ElTooltip' }).props('visible')).toBe(false);
+
+      await button.trigger('pointerup', { pointerType: 'touch' });
+      await button.trigger('blur');
+      await button.trigger('focus');
+      await vi.advanceTimersByTimeAsync(200);
+
+      expect(matches).toHaveBeenCalledWith(':focus-visible');
+      expect(wrapper.findComponent({ name: 'ElTooltip' }).props('visible')).toBe(true);
+    } finally {
+      wrapper.unmount();
+      vi.useRealTimers();
+    }
+  });
+
+  it('removes the icon-only tooltip while the button is disabled or loading', async () => {
+    const wrapper = mount(LxButton, {
+      props: { icon: 'refresh' },
+      attrs: { 'aria-label': '刷新数据' },
+    });
+
+    expect(wrapper.findComponent({ name: 'ElTooltip' }).exists()).toBe(true);
+
+    await wrapper.setProps({ disabled: true });
+    expect(wrapper.findComponent({ name: 'ElTooltip' }).exists()).toBe(false);
+
+    await wrapper.setProps({ disabled: false, loading: true });
+    expect(wrapper.findComponent({ name: 'ElTooltip' }).exists()).toBe(false);
+
+    await wrapper.setProps({ loading: false });
+    expect(wrapper.findComponent({ name: 'ElTooltip' }).exists()).toBe(true);
+    wrapper.unmount();
   });
 
   it('does not emit click while disabled', async () => {

@@ -62,9 +62,29 @@
   scroll-margin-block-start: calc(var(--vp-nav-height, 64px) + 16px);
 }
 
-@media (max-width: 960px) {
+.vp-doc #lx-button-demo-anchor {
+  scroll-margin-block-start: calc(var(--vp-nav-height, 64px) + 16px);
+}
+
+.vp-doc #lx-button-demo-anchor:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+@media (min-width: 960px) and (max-width: 1279px) {
+  .vp-doc #lx-button-demo-anchor {
+    scroll-margin-block-start: calc(var(--vp-nav-height, 64px) + 48px + 16px);
+  }
+
   .vp-doc #lx-passwordinput-demo {
     scroll-margin-block-start: calc(var(--vp-nav-height, 64px) + 48px + 16px);
+  }
+}
+
+@media (max-width: 959px) {
+  .vp-doc #lx-button-demo-anchor,
+  .vp-doc #lx-passwordinput-demo {
+    scroll-margin-block-start: calc(48px + 16px);
   }
 }
 

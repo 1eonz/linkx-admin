@@ -574,11 +574,10 @@ html:root .lx-confirm.lx-theme-hud {
   --lx-btn-primary-hover: var(--el-color-primary-light-3);
   --lx-btn-primary-active: var(--el-color-primary-dark-2);
   --lx-btn-ring: 0 0 0 2px rgba(56, 189, 248, 0.25);
-  /* 次按钮/文字形态禁用色偏移：亮色 #f5f7fa/#ebeef5/#c0c4cc 深底不可见，
-   * 换 HUD 表面/边框/占位色阶 */
+  /* 禁用状态跟随 HUD 表面、边框和可读标签色。 */
   --lx-btn-disabled-bg: var(--el-fill-color-light);
   --lx-btn-disabled-border: var(--el-border-color);
-  --lx-btn-disabled-text: var(--el-text-color-placeholder);
+  --lx-btn-disabled-text: var(--lx-text-label);
 }
 
 /* 传送下拉只在自身范围覆盖 Lx 主色，避免影响页面其他组件。 */

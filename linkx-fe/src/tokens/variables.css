@@ -69,14 +69,12 @@
   /* 高危操作：#f56c6c 实底，hover #e65d5d（标本 danger 行 / 令牌契约） */
   --lx-btn-danger-bg: var(--lx-color-error);
   --lx-btn-danger-hover: var(--lx-color-danger-hover);
-  /* 禁用与加载透明度（标本 primary/danger 禁用 0.45 / loading 0.8） */
-  --lx-btn-disabled-opacity: 0.45;
+  /* 禁用按钮改用中性表面和可读正文色，不以整体透明度冲淡文字。 */
   --lx-btn-loading-opacity: 0.8;
-  /* 次按钮/文字形态禁用专用色（标本 default 禁用行 #f5f7fa/#ebeef5/#c0c4cc；
-   * 透明度会把文字冲淡到不可读，这两档形态改用专用禁用色表达） */
+  /* 所有禁用按钮统一使用中性状态，语义色不再暗示仍可操作。 */
   --lx-btn-disabled-bg: #f5f7fa;
   --lx-btn-disabled-border: #ebeef5;
-  --lx-btn-disabled-text: #c0c4cc;
+  --lx-btn-disabled-text: #606266;
   /* hover 光晕（标本 ring-2 20%）：默认主色环，危险红环 */
   --lx-btn-ring: 0 0 0 2px rgba(0, 96, 169, 0.2);
   --lx-btn-ring-danger: 0 0 0 2px rgba(245, 108, 108, 0.3);

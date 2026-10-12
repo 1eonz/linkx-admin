@@ -3,9 +3,9 @@ import type { LxIconName } from '../LxIcon/icons'
 /**
  * LxButton 类型契约
  *
- * 视觉源：design/按钮体系/code.html（拍板 #11）
+ * 视觉规范：design/按钮体系/DESIGN.md
  * 档名用 sm/md/lg 区别于 EP 的 small/default/large，映射关系见组件内 SIZE_MAP。
- * 拍板 #11 铁律：表格行内禁止 primary 实底；同屏 primary 上限 1 个。
+ * 表格行内使用文字形态；同一业务区域最多展示一个 primary。
  */
 export type LxButtonType =
   'primary' | 'success' | 'warning' | 'danger' | 'default' | 'text'
@@ -14,7 +14,7 @@ export type LxButtonType =
 export type LxButtonSize = 'sm' | 'md' | 'lg'
 
 export interface LxButtonProps {
-  /** 按钮形态；text 为表格行内等轻量场景的无底色文字形态 */
+  /** 按钮形态；text 为行内无底色形态，success 仅用于“启用”类状态切换动作。 */
   type?: LxButtonType
   /**
    * 无底色文字形态开关，与 type 组合使用（如 type="danger" + text 即标本"移出布控"行内高危操作）。

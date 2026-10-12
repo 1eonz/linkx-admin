@@ -121,6 +121,7 @@ spacing:
 This design system is engineered specifically for mission-critical police coordination, command dispatch, asset surveillance, and administrative operations. The aesthetic draws upon the proven, high-density principles of enterprise desktop suites (Element Plus / Vue Element Admin architecture), prioritized around high legibility, strict status distinction, and rapid operator triage.
 
 ### Brand Personality & Philosophy
+
 - **Authoritative & Trustworthy:** A disciplined, institutional visual structure with deep navy-slate navigation anchors (`#304156`), clean white card surfaces, and crisp 1px delineation.
 - **Clarity Under Pressure:** Zero-distraction UI. Minimalist ornamentation, high data density, structured grid alignments, and distinct functional color semantics allow dispatchers and law enforcement administrators to assess critical alerts in split seconds.
 - **Systematic & Predictable:** Familiar component models, standard 4px boundary radii, uniform control heights (32px / 40px), and clear interactive visual cues (hover, active, focus states).
@@ -130,20 +131,23 @@ This design system is engineered specifically for mission-critical police coordi
 The palette adheres to standard enterprise police administration conventions, combining high-contrast operational status tokens with low-fatigue workspace neutrals.
 
 ### Primary & Navigation Accents
-- **Primary (`#409EFF`):** Focus triggers, primary operational actions, active menu highlights, and active breadcrumbs.
-- **Primary Hover (`#66b1ff`):** Interactive mouseover state for interactive primary controls.
-- **Primary Active (`#3a8ee6`):** Depressed button states and operational locks.
+
+- **Primary Container (`#409EFF`):** 浅色容器与处理中强调色；主操作实底和键盘焦点使用主色 `#0060a9`。
+- **Primary Hover (`#00508f`):** 主操作按钮悬停态，沿用工程主色加深一档。
+- **Primary Active (`#00447c`):** 主操作按钮按下态，再加深一档以反馈激活。
 - **Sidebar Slate (`#304156`):** Navigation background anchoring the operational hierarchy.
 - **Sidebar Hover (`#263445`) & Submenu (`#1f2d3d`):** Strict progressive disclosure for multi-tier police bureau organizational units.
 - **Sidebar Text (`#bfcbd9`) & Sidebar Active (`#409EFF`):** High contrast legibility in variable lighting environments.
 
 ### Operational Status Tokens
+
 - **Success (`#67C23A`):** Normal patrol status, verified personnel, active GPS link, cleared incident, and authenticated badge.
 - **Warning (`#E6A23C`):** Pending patrol handover, medium-level perimeter trigger, geofence exit, low battery alert on field bodycam.
 - **Danger / Severe Alert (`#F56C6C`):** Red alert dispatch, emergency beacon, perimeter breach, armed response request, system lockout.
 - **Info (`#909399`):** Routine audit log, standby vehicle, passive checkpoint telemetry.
 
 ### Surfaces & Typography Tones
+
 - **Workspace Background (`#f0f2f5`):** Low-glare canvas offering distinct depth separation from white panels.
 - **Card & Header Canvas (`#ffffff`):** Pure light background for maximum tabular and metric legibility.
 - **Border Dividers (`#dcdfe6` base, `#e4e7ed` light):** Crisp structural dividers.
@@ -156,6 +160,7 @@ The palette adheres to standard enterprise police administration conventions, co
 Typography prioritizes tabular legibility, rapid data scanning, and clear visual hierarchy for Chinese and Western alphanumeric strings.
 
 ### Font Hierarchy & Font Stack
+
 The primary font token is systematically paired with platform system fallbacks:
 `"Inter", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif`.
 
@@ -172,6 +177,7 @@ The primary font token is systematically paired with platform system fallbacks:
 The architecture operates on an 8px/4px atomic grid designed for dense multi-monitor desktop stations (1920x1080 and above) while cleanly adapting to standard laptop displays.
 
 ### Layout Model
+
 - **Dual-Pane Shell:** Fixed-width collapsable dark sidebar (210px expanded, 64px icon-only rail collapsed) combined with a horizontal utility top navigation bar (50px height).
 - **Workspace Canvas:** Outer margins are set at a uniform `20px` (`margin`) across desktop surfaces, separating the `#f0f2f5` background from pure white container surfaces.
 - **Grid Gutters:** Grid layouts utilize a `16px` (`gutter`) spacing between operational cards, map splits, and KPI metric tiles.
@@ -187,6 +193,7 @@ The architecture operates on an 8px/4px atomic grid designed for dense multi-mon
 Visual hierarchy employs low-contrast outlines supplemented by disciplined, subtle ambient diffusion to maintain focus on complex law enforcement data.
 
 ### Elevation Levels
+
 - **Canvas Base (Level 0):** `#f0f2f5` main layout surface.
 - **Card & Data Surface (Level 1):** `#ffffff` panels bordered by `1px solid #e4e7ed` with a soft baseline shadow: `box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08)`. This keeps distinct data blocks isolated without heavy dropshadow clutter.
 - **Hover & Active Panels (Level 2):** Quick-action tiles, asset cards on hover: `box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1)`.
@@ -198,6 +205,7 @@ Visual hierarchy employs low-contrast outlines supplemented by disciplined, subt
 The design system standardizes on a disciplined **4px** roundedness rule (`roundedness: 1` equivalent to enterprise soft geometry), matching classic Element Plus conventions.
 
 ### Geometry Specifications
+
 - **Base Geometry (`4px`):** Applied across all interactive buttons, text inputs, selects, table container borders, modal windows, and information cards.
 - **Compact Geometry (`2px`):** Used strictly for micro tags, status indicators, and miniature pagination blocks.
 - **Circular (`50%`):** Reserved solely for officer profile avatars, patrol map radar beacons, and pulsating emergency broadcast pins.
@@ -205,23 +213,31 @@ The design system standardizes on a disciplined **4px** roundedness rule (`round
 ## Components
 
 ### Buttons
-- **Primary:** Background `#409EFF`, border `#409EFF`, text `#ffffff`. Hover `#66b1ff`, active `#3a8ee6`. Border-radius `4px`.
-- **Success / Warning / Danger:** Solid fills `#67C23A`, `#E6A23C`, `#F56C6C` with matching hover tints. Danger is reserved for high-stakes triggers (Dispatch SWAT, Lock Down Zone, Revoke Credentials).
+
+- **Primary：** 背景与边框使用工程契约中的 `#0060a9`，文字为白色；悬停 `#00508f`、按下 `#00447c`，圆角 `4px`。`#409EFF` 保留为辅助容器与强调色，不作为主操作实底。
+- **HUD Primary：** 局部或全局 HUD 主题使用 `#38bdf8` 背景、`#7dd3fc` 悬停、`#2d97c6` 按下与 `#0b1220` 文字，保持深色表面上的文字对比度。
+- **Disabled：** 亮色主题的禁用按钮统一使用中性表面 `#f5f7fa`、边框 `#ebeef5` 与正文灰字 `#606266`；文字形态保持透明底和透明边框。使用原生禁用状态表达不可操作，不降低整体透明度，也不保留危险、成功等可操作语义色。
+- **HUD Disabled：** 禁用按钮使用深色表面 `#16233a`、边框 `#1e2f47` 与灰字 `#cbd5e1`；文字形态保持透明底和透明边框，避免亮色主题禁用块进入深色 HUD。
+- **Success：** 绿色实底仅用于“启用”类状态切换动作；审批、确认等普通操作不使用绿色按钮，完成后的正向结果由成功状态反馈表达。此边界与 `doc/lx-ui/DESIGN-SPEC.md` §3.2 一致。
+- **Warning / Danger：** 警示与危险形态按对应语义令牌使用。危险实底仅用于高风险操作，例如下发特警、封锁区域和撤销凭据。
 - **Default / Secondary:** Background `#ffffff`, border `1px solid #dcdfe6`, text `#606266`. Hover text & border `#409EFF`, background `#ecf5ff`.
 - **Sizes:** Default (32px height, 14px font), Small (28px height, 12px font), Large (40px height, 14px font).
 
 ### Form Inputs & Selects
+
 - **Text Inputs:** Height 32px (standard), background `#ffffff`, border `1px solid #dcdfe6`, border radius `4px`, text `#606266`, placeholder `#c0c4cc`.
 - **Focus State:** Border `#409EFF`, outline none, transition `border-color .2s cubic-bezier(.645,.045,.355,1)`.
 - **Error State:** Border `#F56C6C` with validation text rendered in 12px below input.
 
 ### Data Tables
+
 - **Header:** Background `#f5f7fa`, text `#909399`, font size `12px` or `14px`, weight `600`, border bottom `1px solid #ebeef5`.
 - **Body Rows:** Height 44px (regular) or 36px (compact density). Border bottom `1px solid #ebeef5`. Zebra striping optional on dense tables (`#fafafa`).
 - **Hover State:** Row background `#f5f7fa`.
 - **Selection:** Checkbox cell alignment strictly centered.
 
 ### Tags & Chips (Incident & Asset States)
+
 - Height 24px, radius `4px`, padding `0 8px`, font size `12px`.
 - **Primary (Patrol In Progress):** Background `#ecf5ff`, border `#d9ecff`, text `#409EFF`.
 - **Success (Online / Regular):** Background `#f0f9eb`, border `#e1f3d8`, text `#67C23A`.
@@ -229,10 +245,12 @@ The design system standardizes on a disciplined **4px** roundedness rule (`round
 - **Danger (Emergency Dispatch / Critical Alarm):** Background `#fef0f0`, border `#fde2e2`, text `#F56C6C`.
 
 ### Cards & Container Panels
+
 - White background (`#ffffff`), `1px solid #ebeef5`, border-radius `4px`.
 - **Header Section:** Height 48px, horizontal padding 16px, bottom border `1px solid #ebeef5`, flex-aligned with title on left and operational action tools on right.
 
 ### Specialized Police System Components
+
 - **Dispatch Action Drawer:** Right-sliding panel (width 480px or 640px) with header status pill, real-time map preview thumbnail, unit timeline audit list, and bottom-anchored command action bar.
 - **Incident Badge & Pulsing Radar Dot:** 8px circular status indicator with continuous radial ping animation using Danger (`#F56C6C`) or Warning (`#E6A23C`) for unassigned or escalating emergency dispatches.
 - **Plate & ID Tag:** Monospaced alphanumeric display with subtle inset background `#f4f4f5`, border `#e9e9eb`, text `#303133`, optimized for fast visual pattern matching.

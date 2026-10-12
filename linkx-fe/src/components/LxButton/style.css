@@ -1,5 +1,5 @@
 /**
- * LxButton 终态样式（design/按钮体系/code.html 标本，拍板 #11）
+ * LxButton 组件样式，依据 design/按钮体系/DESIGN.md 实现。
  *
  * 挂载方式：非 scoped 全局类 + .lx-btn 前缀（参照 LxForm 作用域模式）。
  * 色值全部引用 --lx-btn-* / --lx-* 令牌（P8 铁律），EP 内核变量做桥接点；
@@ -12,7 +12,7 @@
   height: var(--lx-btn-height-md);
   padding: 0 var(--lx-btn-padding-x-md);
   border-radius: var(--lx-radius-md);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -179,6 +179,25 @@
   --el-button-active-text-color: var(--lx-color-on-warning);
 }
 
+/* 纯图标按钮按档位保持正方形，匹配按钮设计稿中的刷新控件。 */
+.lx-btn.el-button.lx-btn--icon-only:not(.lx-btn--block) {
+  width: var(--lx-btn-height-md);
+  height: var(--lx-btn-height-md);
+  padding-inline: 0;
+}
+
+.lx-btn.el-button.lx-btn--icon-only.lx-btn--sm:not(.lx-btn--block) {
+  width: var(--lx-btn-height-sm);
+  height: var(--lx-btn-height-sm);
+  /* 文字按钮桥接规则默认最小高度为 32px，小号纯图标需覆盖该默认值。 */
+  min-height: var(--lx-btn-height-sm);
+}
+
+.lx-btn.el-button.lx-btn--icon-only.lx-btn--lg:not(.lx-btn--block) {
+  width: var(--lx-btn-height-lg);
+  height: var(--lx-btn-height-lg);
+}
+
 /* ===== 悬停光晕与禁用/加载 ===== */
 
 /* 主/危险操作 hover：ring 光晕（标本 ring-2 20%），次按钮与文字形态不加环保持轻量 */
@@ -192,23 +211,32 @@
   box-shadow: var(--lx-btn-ring-danger);
 }
 
-/* 禁用：实底形态整体 0.45 透明度 + 禁用手势（标本 primary/danger 禁用行） */
+/* 禁用：统一中性表面和可读文字；原生 disabled 负责阻止交互。 */
 .lx-btn.el-button.is-disabled {
-  opacity: var(--lx-btn-disabled-opacity);
-}
-
-/* 次按钮禁用：专用禁用色替代透明度（标本 default 禁用行 #f5f7fa/#ebeef5/#c0c4cc；
- * 透明度会把正文色冲淡到不可读，专用色保住"为什么不可用"的信息可读性） */
-.lx-btn.el-button--default:not(.is-text).is-disabled {
   opacity: 1;
-  --el-button-bg-color: var(--lx-btn-disabled-bg);
-  --el-button-border-color: var(--lx-btn-disabled-border);
-  --el-button-text-color: var(--lx-btn-disabled-text);
+  color: var(--lx-btn-disabled-text);
+  --el-button-disabled-bg-color: var(--lx-btn-disabled-bg);
+  --el-button-disabled-border-color: var(--lx-btn-disabled-border);
+  --el-button-disabled-text-color: var(--lx-btn-disabled-text);
 }
 
-/* 文字形态禁用：灰字 #c0c4cc、无透明度（标本 text 禁用行"无权审批"） */
+/* HUD 禁用：Element Plus 读取独立的 disabled 变量，必须在组件边界同步绑定；
+ * 深色表面不再使用亮色禁用块，也不降低整枚按钮的可读性。 */
+.lx-theme-hud .lx-btn.el-button {
+  --el-button-disabled-bg-color: var(--lx-btn-disabled-bg);
+  --el-button-disabled-border-color: var(--lx-btn-disabled-border);
+  --el-button-disabled-text-color: var(--lx-btn-disabled-text);
+}
+
+/* 文字形态禁用：保留透明表面，只将文字切换为中性色。 */
 .lx-btn.el-button.is-text.is-disabled {
   opacity: 1;
+  color: var(--lx-btn-disabled-text);
+  background-color: transparent;
+  border-color: transparent;
+  --el-button-disabled-bg-color: transparent;
+  --el-button-disabled-border-color: transparent;
+  --el-button-disabled-text-color: var(--lx-btn-disabled-text);
   --el-button-text-color: var(--lx-btn-disabled-text);
   --el-button-hover-bg-color: transparent;
 }
@@ -225,6 +253,12 @@
   outline-offset: 2px;
 }
 
+/* 由同文档协调器切换图标提示，关闭 Element Plus 默认淡入淡出以避免提示重叠。 */
+.lx-btn-tooltip-static-enter-active,
+.lx-btn-tooltip-static-leave-active {
+  transition: none;
+}
+
 /* 后置图标：与文字间距对齐 EP 内核前置图标的 gap */
 .lx-btn__icon-right {
   flex: 0 0 auto;
@@ -238,11 +272,19 @@
     min-height: 44px;
     min-width: 44px;
   }
+
+  .lx-btn.el-button.lx-btn--icon-only.lx-btn--sm:not(.lx-btn--block) {
+    min-height: 44px;
+  }
 }
 
 /* 减少动效偏好：关闭过渡动画 */
 @media (prefers-reduced-motion: reduce) {
   .lx-btn.el-button {
     transition: none;
+  }
+
+  .lx-btn.el-button .el-icon.is-loading {
+    animation: none;
   }
 }

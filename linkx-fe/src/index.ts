@@ -5,6 +5,8 @@
 import type { App, Component } from 'vue'
 // EP 变量桥接（先于组件加载，保证令牌生效）
 import './styles/element-theme.css'
+// HUD 主题令牌随公共入口发布，宿主只引入 lx-ui/style.css 也能切换深色主题。
+import './tokens/theme-hud.css'
 import LxIcon from './components/LxIcon/index.vue'
 import LxStatusDot from './components/LxStatusDot/index.vue'
 import LxSidebar from './components/LxSidebar/index.vue'

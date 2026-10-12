@@ -5,6 +5,7 @@
  * 规范源：doc/lx-ui/DESIGN-SPEC.md §7.2
  * 验收标准：任何组件两主题切换零残缺（P8 token 强制保证）
  */
+html.lx-theme-hud,
 .lx-theme-hud {
   /* 表面与边框：深空画布 */
   --lx-bg-page: #0b1220;
@@ -28,9 +29,20 @@
   /* 主色：sky 侵入（HUD 语境下品牌向战术蓝偏移） */
   --lx-color-primary: #38bdf8;
   --lx-color-primary-hover: #7dd3fc;
+  --lx-color-primary-active: #2d97c6;
   --lx-color-primary-container: #0ea5e9;
   --lx-color-primary-light: rgba(56, 189, 248, 0.12);
   --lx-color-on-primary: #0b1220;
+
+  /* 重新绑定按钮专属令牌，避免根节点计算值覆盖局部 HUD 主色。 */
+  --lx-btn-primary-bg: var(--lx-color-primary);
+  --lx-btn-primary-hover: var(--lx-color-primary-hover);
+  --lx-btn-primary-active: var(--lx-color-primary-active);
+  --lx-btn-ring: 0 0 0 2px rgba(56, 189, 248, 0.25);
+  /* 禁用按钮沿用 HUD 深色表面，避免回落到亮色 EP 禁用块。 */
+  --lx-btn-disabled-bg: var(--lx-bg-card-hover);
+  --lx-btn-disabled-border: var(--lx-border);
+  --lx-btn-disabled-text: var(--lx-text-label);
 
   /* 功能色：浅底变深底半透明（深色下亮字） */
   --lx-color-success-light: rgba(103, 194, 58, 0.15);

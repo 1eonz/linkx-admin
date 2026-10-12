@@ -99,6 +99,10 @@ export default defineConfig({
           items: [
             { text: '基础控件桥接', link: '/components/element-bridge' },
             { text: 'LxButton 按钮', link: '/components/lxbutton' },
+            {
+              text: 'LxButton 宿主集成示例',
+              link: '/components/lxbutton-integration',
+            },
             { text: 'LxIcon 图标总览', link: '/components/lxicons' },
           ],
         },
