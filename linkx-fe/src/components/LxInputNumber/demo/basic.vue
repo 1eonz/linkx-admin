@@ -10,6 +10,10 @@ const showControls = ref(true)
 const quota = ref<number>(30)
 /** 告警确认时限：与巡逻配额相互独立 */
 const acknowledgementMinutes = ref<number>(30)
+/** 尺寸示例独立取值，避免操作一档时意外改动其他档位。 */
+const smallQuota = ref<number>(30)
+const mediumQuota = ref<number>(30)
+const largeQuota = ref<number>(30)
 /** Panel 2 极值：最高并发处警上限（max=100，达到后减少钮禁用） */
 const maxConcurrency = ref<number>(100)
 /** Panel 3 小数步长与精度 */
@@ -37,14 +41,10 @@ function reportChange(
         <input v-model="hudTheme" type="checkbox" />
         HUD 深色主题
       </label>
-      <label>
-        <input v-model="showControls" type="checkbox" />
-        显示步进器
-      </label>
     </div>
 
     <section class="lx-input-number-demo__panel" data-testid="basic">
-      <h4>基础步进（160px 宽 + 右侧垂直拆分步进钮 + 值文字 mono 左对齐）</h4>
+      <h3>基础步进（160px 宽 + 右侧垂直拆分步进钮 + 值文字 mono 左对齐）</h3>
       <div class="lx-input-number-demo__row">
         <div class="lx-input-number-demo__field">
           <label class="lx-input-number-demo__label" for="demo-number-quota"
@@ -82,12 +82,12 @@ function reportChange(
       </div>
       <p class="lx-input-number-demo__hint">
         步进钮 hover 时图标转主色 + 浅灰底；步长 5 + step-strictly
-        示例只允许输入 5 的倍数。
+        示例只允许输入 5 的倍数；方向键按 step 步进。
       </p>
     </section>
 
     <section class="lx-input-number-demo__panel" data-testid="limit">
-      <h4>极值边界（max=100：达到上限后增加钮禁用半透明）</h4>
+      <h3>极值边界（max=100：达到上限后增加钮禁用半透明）</h3>
       <div class="lx-input-number-demo__field">
         <label class="lx-input-number-demo__label" for="demo-number-limit"
           >最高并发处警上限</label
@@ -97,6 +97,7 @@ function reportChange(
           v-model="maxConcurrency"
           :min="1"
           :max="100"
+          readonly
           @change="
             (currentValue, oldValue) =>
               reportChange('并发处警上限', currentValue, oldValue)
@@ -104,13 +105,12 @@ function reportChange(
         />
       </div>
       <p class="lx-input-number-demo__hint">
-        已触发最大值阈值限制（Max =
-        100）；减少钮仍可操作，回落后增加钮恢复可用。
+        输入框禁止直接键入；达到 Max = 100 时增加钮禁用，减少钮仍可调整数值。
       </p>
     </section>
 
     <section class="lx-input-number-demo__panel" data-testid="precision">
-      <h4>小数步长与精度（step 0.1 / precision 1：值守灵敏度系数）</h4>
+      <h3>小数步长与精度（step 0.1 / precision 1：值守灵敏度系数）</h3>
       <div class="lx-input-number-demo__row">
         <div class="lx-input-number-demo__field">
           <label class="lx-input-number-demo__label" for="demo-number-threshold"
@@ -148,7 +148,11 @@ function reportChange(
     </section>
 
     <section class="lx-input-number-demo__panel" data-testid="sizes">
-      <h4>尺寸档（sm=28px / md=32px 基准 / lg=40px）</h4>
+      <h3>尺寸档（sm=28px / md=32px 基准 / lg=40px）</h3>
+      <label class="lx-input-number-demo__sizes-toggle">
+        <input v-model="showControls" type="checkbox" />
+        尺寸示例显示步进按钮
+      </label>
       <div class="lx-input-number-demo__row">
         <div class="lx-input-number-demo__field">
           <label class="lx-input-number-demo__label" for="demo-number-small"
@@ -156,7 +160,7 @@ function reportChange(
           >
           <LxInputNumber
             id="demo-number-small"
-            v-model="quota"
+            v-model="smallQuota"
             size="sm"
             :controls="showControls"
             :min="0"
@@ -169,7 +173,7 @@ function reportChange(
           >
           <LxInputNumber
             id="demo-number-medium"
-            v-model="quota"
+            v-model="mediumQuota"
             size="md"
             :controls="showControls"
             :min="0"
@@ -182,7 +186,7 @@ function reportChange(
           >
           <LxInputNumber
             id="demo-number-large"
-            v-model="quota"
+            v-model="largeQuota"
             size="lg"
             :controls="showControls"
             :min="0"
@@ -193,7 +197,7 @@ function reportChange(
     </section>
 
     <section class="lx-input-number-demo__panel" data-testid="disabled">
-      <h4>禁用态（半透明 + 禁用手势）</h4>
+      <h3>禁用态（半透明 + 禁用手势）</h3>
       <div class="lx-input-number-demo__field">
         <label class="lx-input-number-demo__label" for="demo-number-locked"
           >省厅锁定配额（禁用）</label
@@ -231,14 +235,28 @@ function reportChange(
 .lx-input-number-demo__toolbar {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
   font-size: 13px;
 }
 
-.lx-input-number-demo__toolbar label {
+.lx-input-number-demo__toolbar label,
+.lx-input-number-demo__sizes-toggle {
   display: inline-flex;
-  min-height: 32px;
+  min-height: 44px;
   align-items: center;
   gap: 8px;
+}
+
+.lx-input-number-demo__sizes-toggle {
+  width: fit-content;
+  color: var(--lx-text-regular);
+  font-size: 13px;
+}
+
+.lx-input-number-demo__toolbar input,
+.lx-input-number-demo__sizes-toggle input {
+  accent-color: var(--lx-color-primary);
 }
 
 .lx-input-number-demo__panel {
@@ -251,7 +269,7 @@ function reportChange(
   background: var(--lx-bg-card);
 }
 
-.lx-input-number-demo__panel h4 {
+.lx-input-number-demo__panel h3 {
   margin: 0;
   font-size: 13px;
   font-weight: 600;
@@ -287,6 +305,6 @@ function reportChange(
 }
 
 .lx-input-number-demo__note {
-  color: var(--lx-color-warning-strong);
+  color: var(--lx-text-secondary-strong);
 }
 </style>

@@ -11,13 +11,20 @@ test.beforeEach(async ({ page }) => {
 test('Select 可见标签关联真实输入，并支持键盘选择', async ({ page }) => {
   await page.goto('/components/lxselect');
   const demo = page.locator('.lx-select-demo');
-  for (const name of ['布控等级', '处置通道（可清空）', '协同单位', '指挥中心', '值班警员', '应急链路（锁定）']) {
+  for (const name of [
+    '布控等级',
+    '处置通道（可清空）',
+    '协同单位',
+    '指挥中心（可过滤）',
+    '值班警员',
+    '应急链路（锁定）',
+  ]) {
     const input = demo.getByLabel(name, { exact: true });
     await expect(input).toHaveCount(1);
     expect(await input.evaluate((element) => element.tagName)).toBe('INPUT');
   }
 
-  const center = demo.getByLabel('指挥中心', { exact: true });
+  const center = demo.getByLabel('指挥中心（可过滤）', { exact: true });
   await center.focus();
   await center.press('ArrowDown');
   const popper = page.locator('.el-select-dropdown.lx-select__popper:visible');
@@ -415,35 +422,170 @@ test('InputNumber 全部可见标签关联原生数值输入，键盘步进保�
   }
   const quota = demo.getByLabel('巡逻车组配置配额（步长 1）', { exact: true });
   const timeout = demo.getByLabel('告警确认时限（分钟，步长 5）', { exact: true });
+  const quotaRoot = quota.locator(
+    'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " el-input-number ")][1]',
+  );
+  const quotaIncrease = quotaRoot.locator('.lx-input-number__stepper-button--increase');
+  const quotaDecrease = quotaRoot.locator('.lx-input-number__stepper-button--decrease');
   await expect(quota).toHaveValue('30');
   await expect(quota).toHaveAttribute('name', 'patrolQuota');
+  await expect(quotaIncrease).toHaveAttribute('aria-label', '增加数值');
+  await expect(quotaIncrease).toHaveAttribute('aria-disabled', 'false');
+  await expect(quotaIncrease).toHaveAttribute('tabindex', '0');
   await expect(timeout).toHaveValue('30');
   await quota.fill('31');
   await expect(timeout).toHaveValue('30');
+  await expect(demo.getByLabel('紧凑档 sm', { exact: true })).toHaveValue('30');
   await timeout.fill('35');
   await expect(quota).toHaveValue('31');
   const limit = demo.getByLabel('最高并发处警上限', { exact: true });
   await expect(limit).toHaveValue('100');
+  const limitRoot = limit.locator(
+    'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " el-input-number ")][1]',
+  );
+  await expect(limit).toHaveAttribute('readonly', '');
+  await expect(limit).not.toBeEditable();
+  await expect(limitRoot.locator('.lx-input-number__stepper-button--increase')).toBeDisabled();
+  await expect(limitRoot.locator('.lx-input-number__stepper-button--increase')).toHaveAttribute('tabindex', '-1');
+  const limitDecrease = limitRoot.locator('.lx-input-number__stepper-button--decrease');
+  await expect(limitDecrease).toBeEnabled();
+  await limitDecrease.click();
+  await expect(limit).toHaveValue('99');
+  await expect(limitRoot.locator('.lx-input-number__stepper-button--increase')).toBeEnabled();
   await expect(demo.getByLabel('省厅锁定配额（禁用）', { exact: true })).toBeDisabled();
 
-  const sizeControls = demo.locator('[data-testid="sizes"] .lx-input-number');
+  await quota.focus();
+  await page.keyboard.press('Tab');
+  await expect(quotaIncrease).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(quotaDecrease).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(timeout).toBeFocused();
+
+  await quotaIncrease.focus();
+  await page.keyboard.press('Enter');
+  await expect(quota).toHaveValue('32');
+  await page.keyboard.press('Space');
+  await expect(quota).toHaveValue('33');
+
+  const beforeRepeat = Number(await quota.inputValue());
+  const increaseBox = await quotaIncrease.boundingBox();
+  if (!increaseBox) throw new Error('增加按钮未呈现可测量区域');
+  await page.mouse.move(increaseBox.x + increaseBox.width / 2, increaseBox.y + increaseBox.height / 2);
+  await page.mouse.down();
+  await page.waitForTimeout(750);
+  await page.mouse.up();
+  await expect.poll(async () => Number(await quota.inputValue())).toBeGreaterThan(beforeRepeat + 1);
+
+  const sizeControls = demo.locator('[data-testid="sizes"] .el-input-number');
   for (const index of [0, 1, 2]) {
     const geometry = await sizeControls.nth(index).evaluate((element) => {
-      const increase = element.querySelector<HTMLElement>('.el-input-number__increase');
-      const decrease = element.querySelector<HTMLElement>('.el-input-number__decrease');
-      if (!increase || !decrease) throw new Error('尺寸示例缺少步进按钮');
+      const increase = element.querySelector<HTMLElement>('.lx-input-number__stepper-button--increase');
+      const decrease = element.querySelector<HTMLElement>('.lx-input-number__stepper-button--decrease');
+      const wrapper = element.querySelector<HTMLElement>('.el-input__wrapper');
+      if (!increase || !decrease || !wrapper) throw new Error('尺寸示例缺少步进按钮或输入框');
       return {
         increaseBottom: increase.getBoundingClientRect().bottom,
         decreaseTop: decrease.getBoundingClientRect().top,
+        controlHeight: element.getBoundingClientRect().height,
+        wrapperHeight: wrapper.getBoundingClientRect().height,
       };
     });
     expect(Math.abs(geometry.increaseBottom - geometry.decreaseTop)).toBeLessThanOrEqual(0.5);
+    expect(Math.abs(geometry.controlHeight - [28, 32, 40][index])).toBeLessThanOrEqual(0.5);
+    expect(Math.abs(geometry.wrapperHeight - [28, 32, 40][index])).toBeLessThanOrEqual(0.5);
   }
-  await page.getByLabel('显示步进器', { exact: true }).uncheck();
-  await expect(sizeControls.locator('.el-input-number__increase')).toHaveCount(0);
-  await expect(sizeControls.locator('.el-input-number__decrease')).toHaveCount(0);
-  await page.getByLabel('显示步进器', { exact: true }).check();
-  await expect(sizeControls.locator('.el-input-number__increase')).toHaveCount(3);
+  await page.getByLabel('尺寸示例显示步进按钮', { exact: true }).uncheck();
+  await expect(sizeControls.locator('.lx-input-number__stepper')).toHaveCount(0);
+  await expect(demo.locator('[data-testid="basic"] .lx-input-number__stepper')).toHaveCount(2);
+  await page.getByLabel('尺寸示例显示步进按钮', { exact: true }).check();
+  await expect(sizeControls.locator('.lx-input-number__stepper')).toHaveCount(3);
+});
+
+test('InputNumber 窄屏步进按钮保持触控尺寸与 HUD 输入底色', async ({ page }, testInfo) => {
+  const widths = [375, 320];
+
+  await page.goto('/components/lxinputnumber');
+  const demo = page.locator('.lx-input-number-demo');
+  const quota = demo.locator('#demo-number-quota');
+  const root = quota.locator(
+    'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " el-input-number ")][1]',
+  );
+
+  for (const width of widths) {
+    await page.setViewportSize({ width, height: 812 });
+
+    for (const hud of [false, true]) {
+      await demo.getByLabel('HUD 深色主题', { exact: true }).setChecked(hud);
+      await expect(quota).toBeVisible();
+      expect(await demo.evaluate((element) => element.classList.contains('lx-theme-hud'))).toBe(hud);
+      await expect
+        .poll(() => root.locator('.el-input__wrapper').evaluate((element) => getComputedStyle(element).backgroundColor))
+        .toBe(hud ? 'rgb(16, 26, 44)' : 'rgb(255, 255, 255)');
+
+      const measurements = await root.evaluate((element) => {
+        const wrapper = element.querySelector<HTMLElement>('.el-input__wrapper');
+        const input = element.querySelector<HTMLInputElement>('.el-input__inner');
+        const increase = element.querySelector<HTMLElement>('.lx-input-number__stepper-button--increase');
+        const decrease = element.querySelector<HTMLElement>('.lx-input-number__stepper-button--decrease');
+        if (!wrapper || !input || !increase || !decrease) return null;
+
+        const increaseRect = increase.getBoundingClientRect();
+        const decreaseRect = decrease.getBoundingClientRect();
+        const colors = [getComputedStyle(input).color, getComputedStyle(wrapper).backgroundColor].map((color) =>
+          color
+            .match(/[\d.]+/g)
+            ?.slice(0, 3)
+            .map(Number),
+        );
+        if (!colors[0] || !colors[1]) throw new Error('无法读取 InputNumber 前景与背景颜色');
+        const luminance = (rgb: number[]) => {
+          const channels = rgb.map((channel) => {
+            const value = channel / 255;
+            return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+          });
+          return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+        };
+        const foreground = luminance(colors[0]);
+        const background = luminance(colors[1]);
+        return {
+          increase: { width: increaseRect.width, height: increaseRect.height },
+          decrease: { width: decreaseRect.width, height: decreaseRect.height },
+          horizontalGap: Math.abs(decreaseRect.left - increaseRect.right),
+          inputBackground: getComputedStyle(wrapper).backgroundColor,
+          controlHeight: element.getBoundingClientRect().height,
+          textContrast: (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05),
+        };
+      });
+
+      expect(measurements).not.toBeNull();
+      expect(measurements?.increase).toEqual({ width: 44, height: 44 });
+      expect(measurements?.decrease).toEqual({ width: 44, height: 44 });
+      expect(measurements?.horizontalGap).toBeLessThanOrEqual(0.5);
+      expect(measurements?.controlHeight).toBe(44);
+      if (hud) {
+        expect(measurements?.inputBackground).toBe('rgb(16, 26, 44)');
+        expect(measurements?.textContrast).toBeGreaterThanOrEqual(4.5);
+      } else {
+        expect(measurements?.inputBackground).toBe('rgb(255, 255, 255)');
+      }
+
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+      await page.screenshot({
+        path: testInfo.outputPath(`inputnumber-${width}-${hud ? 'hud' : 'light'}.png`),
+        fullPage: true,
+      });
+    }
+  }
+
+  await demo.getByLabel('尺寸示例显示步进按钮', { exact: true }).uncheck();
+  const withoutControls = demo.locator('[data-testid="sizes"] .el-input-number').first();
+  const inputWrapper = withoutControls.locator('.el-input__wrapper');
+  await expect(withoutControls).toHaveClass(/is-without-controls/);
+  await expect(withoutControls.locator('.lx-input-number__stepper')).toHaveCount(0);
+  await expect
+    .poll(() => inputWrapper.evaluate((element) => Number.parseFloat(getComputedStyle(element).paddingRight)))
+    .toBeLessThanOrEqual(20);
 });
 
 test('Textarea 默认硬截断；校验模式保留超限内容并呈现可访问错误', async ({ page }) => {
@@ -510,18 +652,17 @@ test('Textarea 默认硬截断；校验模式保留超限内容并呈现可访�
 test('三个 Demo 在 375/320px 和局部 HUD 下标签、禁用状态与页面宽度稳定', async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   const surfaces = [
-    ['lxselect', '.lx-select-demo', '布控等级'],
-    ['lxdatepicker', '.lx-date-picker-demo', '布控生效日期'],
-    ['lxinputnumber', '.lx-input-number-demo', '巡逻车组配置配额（步长 1）'],
-    ['lxtextarea', '.lx-textarea-demo', '处置要求及布控指令说明'],
+    ['lxselect', '.lx-select-demo', '布控等级', 'HUD 深色主题'],
+    ['lxdatepicker', '.lx-date-picker-demo', '布控生效日期', '文档站整体深色（HUD）'],
+    ['lxtextarea', '.lx-textarea-demo', '处置要求及布控指令说明', 'HUD 深色主题'],
   ];
-  for (const [route, selector, name] of surfaces) {
+  for (const [route, selector, name, themeLabel] of surfaces) {
     await page.goto(`/components/${route}`);
     const demo = page.locator(selector);
     for (const width of [375, 320]) {
       await page.setViewportSize({ width, height: 812 });
       for (const hud of [false, true]) {
-        await demo.getByLabel('HUD 深色主题', { exact: true }).setChecked(hud);
+        await demo.getByLabel(themeLabel, { exact: true }).setChecked(hud);
         await expect(demo.getByLabel(name, { exact: true })).toBeVisible();
         expect(await demo.evaluate((element) => element.classList.contains('lx-theme-hud'))).toBe(hud);
         expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);

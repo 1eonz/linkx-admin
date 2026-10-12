@@ -25,7 +25,10 @@
       "./dist/*": "./dist/*"
     }
   },
-  "files": ["src", "dist"],
+  "files": [
+    "src",
+    "dist"
+  ],
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vite build",
@@ -37,11 +40,15 @@
     "vue": "^3.4.0"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "2.3.1",
     "dayjs": "^1.11.23",
     "element-plus": "^2.9.0"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "vue-demi"]
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "vue-demi"
+    ]
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",

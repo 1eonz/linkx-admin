@@ -19,9 +19,9 @@ export type LxInputNumberAlign = 'left' | 'right' | 'center'
 export interface LxInputNumberProps {
   /** 选中值（v-model；清空后为 undefined） */
   modelValue?: number | undefined
-  /** 最小值（达到后增加钮禁用；EP 原生默认 -Infinity） */
+  /** 最小值（达到后减少钮禁用；EP 原生默认 -Infinity） */
   min?: number
-  /** 最大值（达到后减少钮禁用；EP 原生默认 Infinity） */
+  /** 最大值（达到后增加钮禁用；EP 原生默认 Infinity） */
   max?: number
   /** 步长 */
   step?: number
@@ -34,6 +34,8 @@ export interface LxInputNumberProps {
    * ?? 继承链，ElForm/LxForm 禁用态可正常传导；显式传 true/false 才覆盖
    */
   disabled?: boolean
+  /** 限制输入框直接键入；独立步进钮仍可调整，边界方向按 min/max 禁用 */
+  readonly?: boolean
   /** 是否显示步进钮（false 时纯数字输入） */
   controls?: boolean
   /** 步进钮位置：Lx 默认 right（右侧垂直拆分）；'' 为 EP 两侧形态 */
