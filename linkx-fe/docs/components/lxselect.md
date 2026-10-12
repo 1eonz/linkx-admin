@@ -20,20 +20,20 @@ import Basic from '../../src/components/LxSelect/demo/basic.vue';
 
 配置式 `options` 保留值类型：数字 `1` 与字符串 `'1'`、布尔值 `true` 与字符串 `'true'` 是不同选项，动态重排后仍分别返回原始类型。字段通过 `id` 与外部 `<label for>` 关联；`id` 经 attrs 传入内核输入。
 
-| 名称                  | 类型                                             | 默认值           | 说明                                                                                                 |
-| --------------------- | ------------------------------------------------ | ---------------- | ---------------------------------------------------------------------------------------------------- |
-| `modelValue`          | `string \| number \| boolean \| object \| array` | —                | 选中值（v-model；多选为数组）。                                                                      |
-| `placeholder`         | `string`                                         | `''`             | 占位文案。                                                                                           |
-| `disabled`            | `boolean`                                        | —（`undefined`） | 禁用态：半透明 + 禁用手势。默认未设置：`ElForm` 禁用态可正常传导；显式传 `true`/`false` 才覆盖继承。 |
-| `clearable`           | `boolean`                                        | `false`          | 可清空：单选值非空时右侧清除按钮。                                                                   |
-| `filterable`          | `boolean`                                        | `false`          | 本地过滤：输入关键字检索选项。                                                                       |
-| `multiple`            | `boolean`                                        | `false`          | 多选：选中项渲染为标签，配合 `collapseTags` 折叠。                                                   |
-| `collapseTags`        | `boolean`                                        | `false`          | 多选超出折叠为 +N。                                                                                  |
-| `collapseTagsTooltip` | `boolean`                                        | `false`          | 折叠标签悬停提示完整列表。                                                                           |
-| `loading`             | `boolean`                                        | `false`          | 远程检索加载态（面板显示加载文案）。                                                                 |
-| `options`             | `LxSelectOption[]`                               | —                | 配置式选项；每项包含 `label`、`value`，可选 `disabled` 和 `description`。                            |
-| `size`                | `'sm' \| 'md' \| 'lg'`                           | `'md'`           | 工程尺寸：28 / 32 / 40px；档名区别于 EP 的 `small/default/large`。                                   |
-| `name`                | `string`                                         | —                | 原生 name 属性。                                                                                     |
+| 名称                  | 类型                                             | 默认值           | 说明                                                                                                                              |
+| --------------------- | ------------------------------------------------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `modelValue`          | `string \| number \| boolean \| object \| array` | —                | 选中值（v-model；多选为数组）。                                                                                                   |
+| `placeholder`         | `string`                                         | `''`             | 占位文案。                                                                                                                        |
+| `disabled`            | `boolean`                                        | —（`undefined`） | 禁用态：使用禁用背景和手势，同时保留当前值的可读对比度。默认未设置：`ElForm` 禁用态可正常传导；显式传 `true`/`false` 才覆盖继承。 |
+| `clearable`           | `boolean`                                        | `false`          | 可清空：单选值非空时右侧清除按钮。                                                                                                |
+| `filterable`          | `boolean`                                        | `false`          | 本地过滤：输入关键字检索选项。                                                                                                    |
+| `multiple`            | `boolean`                                        | `false`          | 多选：选中项渲染为标签，配合 `collapseTags` 折叠。                                                                                |
+| `collapseTags`        | `boolean`                                        | `false`          | 多选超出折叠为 +N。                                                                                                               |
+| `collapseTagsTooltip` | `boolean`                                        | `false`          | 折叠标签悬停提示完整列表；触屏可展开下拉查看各项选择状态。                                                                        |
+| `loading`             | `boolean`                                        | `false`          | 远程检索加载态（面板显示加载文案）。                                                                                              |
+| `options`             | `LxSelectOption[]`                               | —                | 配置式选项；每项包含 `label`、`value`，可选 `disabled` 和 `description`。                                                         |
+| `size`                | `'sm' \| 'md' \| 'lg'`                           | `'md'`           | 工程尺寸：28 / 32 / 40px；档名区别于 EP 的 `small/default/large`。                                                                |
+| `name`                | `string`                                         | —                | 原生 name 属性。                                                                                                                  |
 
 配置式选项适合 schema 或接口映射后的固定候选项；也可以通过默认插槽传入 `ElOption`。两种来源可组合使用，但同一候选项只维护一处，避免列表重复。
 
@@ -54,6 +54,7 @@ const levels = [
       <span>{{ option.label }}</span>
       <small v-if="option.description">{{ option.description }}</small>
     </template>
+    <template #label="{ label, value }"> {{ label }}（{{ value }}） </template>
   </LxSelect>
 </template>
 ```
@@ -72,14 +73,15 @@ const levels = [
 
 ## 插槽
 
-| 名称     | 参数                         | 说明                                                |
-| -------- | ---------------------------- | --------------------------------------------------- |
-| 默认插槽 | —                            | 手动提供 `ElOption` 列表。                          |
-| `option` | `{ option: LxSelectOption }` | 自定义配置式选项内容；不提供时显示 `option.label`。 |
-| `prefix` | —                            | 触发器内的前置内容。                                |
-| `empty`  | —                            | 无可显示选项时的内容；默认显示 Element Plus 空态。  |
-| `header` | —                            | 下拉面板顶部内容。                                  |
-| `footer` | —                            | 下拉面板底部内容。                                  |
+| 名称     | 参数                                                           | 说明                                                       |
+| -------- | -------------------------------------------------------------- | ---------------------------------------------------------- |
+| 默认插槽 | —                                                              | 手动提供 `ElOption` 列表。                                 |
+| `option` | `{ option: LxSelectOption }`                                   | 自定义配置式选项内容；不提供时显示 `option.label`。        |
+| `label`  | `{ value: LxSelectOptionValue, label: string, index: number }` | 自定义已选值展示，可将必要的业务说明保留在闭合态触发器中。 |
+| `prefix` | —                                                              | 触发器内的前置内容。                                       |
+| `empty`  | —                                                              | 无可显示选项时的内容；默认显示 Element Plus 空态。         |
+| `header` | —                                                              | 下拉面板顶部内容。                                         |
+| `footer` | —                                                              | 下拉面板底部内容。                                         |
 
 ```vue
 <LxSelect v-model="center" filterable>
@@ -121,13 +123,15 @@ const levels = [
 | hover      | 02 字段样本为灰色加深 `#c0c4cc`；综合演练卡为 `border-primary` | 当前统一采用综合演练卡的主色描边；02 字段样本保留为基础字段 hover 参考，两者来源不同 |
 | 展开态     | 主色边框 + 已选文字主色                                        | 500 字重 + `:not(.is-transparent)` 排除占位误染                                      |
 | 选项行高   | 桌面 32px                                                      | 桌面按 02 固化；触屏/窄屏提升为 44px 便于点按                                        |
-| 选中项     | `#f5f7fa` 底 + 主色 + Check                                    | 主色文字 + 500 字重 + Check 由 EP 原生提供                                           |
+| 选中项     | `#f5f7fa` 底 + 主色 + Check                                    | 主色文字 + 500 字重；单选勾选由 LxSelect 样式补齐，多选沿用 EP 内核勾选              |
 | 面板阴影   | `0 4px 16px` pop 档                                            | `--lx-shadow-pop` 令牌                                                               |
 | 触控目标   | 桌面 32px                                                      | 触屏或视口宽度不大于 640px 时，触发器与选项行均为 44px                               |
 
 ## 可访问性
 
 combobox 语义输入框（EP 内核 `role="combobox"` + `aria-expanded`/`aria-activedescendant`）承载键盘可达性；键盘可见焦点除主色边框外还有 2px 焦点光环；错误态红底红边在 `LxForm` 校验上下文自动生效（组件级固化，脱离全局桥不漂移）。本示例由宿主处理远程失败：错误说明与输入框关联，弹层打开时在底部提供重试按钮，弹层关闭时将错误说明和重试按钮放回控件旁；重试成功后清除错误说明及其 `aria-describedby` 关系。开启"减少动效"时边框过渡关闭。
+
+键盘操作沿用 combobox 约定：方向键浏览选项，Enter 选择，Esc 收起面板并保留触发器焦点。
 
 ## Vue3 宿主适配
 

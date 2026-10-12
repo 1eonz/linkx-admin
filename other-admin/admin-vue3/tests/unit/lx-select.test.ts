@@ -56,6 +56,21 @@ describe('LxSelect', () => {
     wrapper.unmount();
   });
 
+  it('forwards the label slot to the selected value', async () => {
+    const wrapper = mount(LxSelect, {
+      props: { modelValue: '1' },
+      slots: {
+        default: '<ElOption label="一级布控" value="1" />',
+        label: ({ label }) => `当前：${label}`,
+      },
+      global: { components: { ElOption } },
+    });
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(wrapper.find('.el-select__placeholder').text()).toBe('当前：一级布控');
+    wrapper.unmount();
+  });
+
   it('emits update:modelValue when an option is picked', async () => {
     const wrapper = mount(LxSelect, {
       props: { modelValue: '' },

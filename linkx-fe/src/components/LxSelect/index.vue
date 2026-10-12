@@ -33,6 +33,12 @@ defineOptions({ name: 'LxSelect', inheritAttrs: false })
 defineSlots<{
   /** 选项内容插槽；不传时使用 option.label。 */
   option?: (scope: { option: LxSelectOption }) => unknown
+  /** 已选值展示插槽；可补充选中后仍需保留的业务说明。 */
+  label?: (scope: {
+    value: LxSelectOptionValue
+    label: string
+    index: number
+  }) => unknown
   prefix?: () => unknown
   empty?: () => unknown
   header?: () => unknown
@@ -132,6 +138,9 @@ defineExpose({
     @focus="emit('focus', $event)"
     @blur="emit('blur', $event)"
   >
+    <template v-if="$slots.label" #label="scope">
+      <slot name="label" v-bind="scope" />
+    </template>
     <template v-if="$slots.prefix" #prefix><slot name="prefix" /></template>
     <template v-if="$slots.empty" #empty><slot name="empty" /></template>
     <template v-if="$slots.header" #header><slot name="header" /></template>

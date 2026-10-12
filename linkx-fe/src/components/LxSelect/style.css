@@ -12,13 +12,29 @@
 /* 闭合态：真实 1px 控件边框承载状态色（EP 默认 box-shadow 伪边框），32px 高由令牌桥供给 */
 .lx-select.el-select .el-select__wrapper {
   box-sizing: border-box;
-  border: 1px solid var(--lx-control-border);
   padding: 3px 11px;
+  color: var(--lx-text-primary);
+  background-color: var(--lx-bg-card);
+  border: 1px solid var(--lx-control-border);
   box-shadow: none;
   transition:
     border-color var(--lx-transition),
     background-color var(--lx-transition),
     box-shadow var(--lx-transition);
+}
+
+/* 局部 HUD 主题与根级主题使用相同的深色触发器令牌。 */
+.lx-theme-hud .lx-select.el-select .el-select__wrapper {
+  color: var(--lx-text-primary);
+  background-color: var(--lx-bg-card);
+}
+
+.lx-theme-hud .lx-select.el-select .el-select__placeholder {
+  color: var(--lx-text-primary);
+}
+
+.lx-theme-hud .lx-select.el-select .el-select__placeholder.is-transparent {
+  color: var(--lx-text-secondary);
 }
 
 /* hover：描边转主色（标本 02 综合演练卡 hover:border-primary 契约；
@@ -32,9 +48,9 @@
  * :not(.is-transparent) 排除空值占位态，避免误染 placeholder */
 .lx-select.el-select .el-select__wrapper.is-focused {
   border-color: var(--lx-color-primary);
-  box-shadow: none;
   outline: none;
   outline-offset: 0;
+  box-shadow: none;
 }
 
 /* 键盘焦点使用独立光环，避免只靠 hover 和边框颜色表达焦点。 */
@@ -46,13 +62,27 @@
 .lx-select.el-select
   .el-select__wrapper.is-focused
   .el-select__placeholder:not(.is-transparent) {
-  color: var(--lx-color-primary);
   font-weight: 500;
+  color: var(--lx-color-primary);
 }
 
-/* 禁用态：半透明（标本 02 禁用选项同族表达） */
+/* 禁用态保留专属底色，同时维持当前值与箭头的可读对比度。 */
 .lx-select.el-select .el-select__wrapper.is-disabled {
-  opacity: 0.6;
+  color: var(--lx-btn-disabled-text);
+  background-color: var(--lx-btn-disabled-bg);
+  opacity: 1;
+  --el-input-text-color: var(--lx-btn-disabled-text);
+  --el-select-input-color: var(--lx-btn-disabled-text);
+}
+
+.lx-theme-hud .lx-select.el-select .el-select__wrapper.is-disabled {
+  background-color: var(--lx-bg-card-hover);
+}
+
+.lx-select.el-select
+  .el-select__wrapper.is-disabled
+  :is(.el-select__placeholder, .el-select__caret) {
+  color: var(--lx-btn-disabled-text);
 }
 
 /* 错误态：使用表单专属校验令牌，依赖 ElForm/LxForm 上下文。 */
@@ -88,11 +118,26 @@
   line-height: 32px;
 }
 
-/* 选中项：#f5f7fa 底 + 主色文字 + 500 字重 + 右侧 Check（EP 原生） */
+/* 选中项：#f5f7fa 底 + 主色文字 + 500 字重。 */
 .lx-select__popper.el-select__popper .el-select-dropdown__item.is-selected {
-  color: var(--lx-color-primary);
   font-weight: 500;
+  color: var(--lx-color-primary);
   background-color: var(--lx-bg-table-header);
+}
+
+/* 单选项使用与设计标本一致的右侧勾选，补足非颜色状态提示。 */
+.lx-select__popper.el-select__popper
+  .el-select-dropdown:not(.is-multiple)
+  .el-select-dropdown__item.is-selected::after {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 6px;
+  height: 10px;
+  content: '';
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-60%) rotate(45deg);
 }
 
 /* HUD 深色：传送到 body 的菜单通过 popper 自身主题类切换选中底色。 */

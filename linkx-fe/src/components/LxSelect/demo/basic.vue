@@ -47,6 +47,11 @@ function reportChange(field: string, value: unknown) {
   lastAction.value = `${field} 已选：${Array.isArray(value) ? value.join('、') : value}`
 }
 
+function getControlLevelDescription(value: unknown) {
+  return controlLevelOptions.find((option) => option.value === value)
+    ?.description
+}
+
 /** 远程检索模拟：由宿主提供数据、错误和重试处理，不发起真实请求。 */
 function searchOfficer(query: string) {
   const seed = ++remoteSeed
@@ -92,7 +97,7 @@ onBeforeUnmount(() => {
     </div>
 
     <section class="lx-select-demo__panel" data-testid="basic">
-      <h4>单选、清空与过滤</h4>
+      <h3>单选、清空与过滤</h3>
       <div class="lx-select-demo__row">
         <div class="lx-select-demo__field">
           <label class="lx-select-demo__label" for="demo-select-level"
@@ -115,6 +120,14 @@ onBeforeUnmount(() => {
                 class="lx-select-demo__option-description"
                 >{{ option.description }}</small
               >
+            </template>
+            <template #label="{ label, value }">
+              <span class="lx-select-demo__selected-label">
+                {{ label }}
+                <template v-if="getControlLevelDescription(value)">
+                  （{{ getControlLevelDescription(value) }}）
+                </template>
+              </span>
             </template>
           </LxSelect>
         </div>
@@ -164,7 +177,7 @@ onBeforeUnmount(() => {
     </section>
 
     <section class="lx-select-demo__panel" data-testid="multiple">
-      <h4>多选与折叠（超出折叠为 +N，悬停可见完整列表）</h4>
+      <h3>多选与折叠（超出折叠为 +N，打开下拉查看完整列表）</h3>
       <div class="lx-select-demo__field">
         <label class="lx-select-demo__label" for="demo-select-units"
           >协同单位</label
@@ -183,7 +196,6 @@ onBeforeUnmount(() => {
           <ElOption label="市局指挥中心" value="city-bureau" />
           <ElOption label="分局合成作战中心" value="branch" />
           <ElOption label="交警支队" value="traffic" />
-          <ElOption label="特巡警支队" value="patrol" />
           <ElOption
             label="反恐怖与特巡警支队（离线）"
             value="counter-terrorism"
@@ -194,7 +206,7 @@ onBeforeUnmount(() => {
     </section>
 
     <section class="lx-select-demo__panel" data-testid="remote">
-      <h4>远程检索</h4>
+      <h3>远程检索</h3>
       <label class="lx-select-demo__scenario">
         模拟结果
         <select
@@ -270,7 +282,7 @@ onBeforeUnmount(() => {
     </section>
 
     <section class="lx-select-demo__panel" data-testid="disabled">
-      <h4>禁用态（半透明 + 禁用手势）</h4>
+      <h3>禁用态（保留值可读性 + 禁用手势）</h3>
       <div class="lx-select-demo__field">
         <label class="lx-select-demo__label" for="demo-select-locked"
           >应急链路（锁定）</label
@@ -296,8 +308,8 @@ onBeforeUnmount(() => {
   display: grid;
   gap: 16px;
   padding: 16px;
-  background: var(--lx-bg-page);
   color: var(--lx-text-primary);
+  background: var(--lx-bg-page);
 }
 
 .lx-select-demo__toolbar {
@@ -308,28 +320,38 @@ onBeforeUnmount(() => {
 
 .lx-select-demo__toolbar label {
   display: inline-flex;
-  min-height: 32px;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+  min-height: 32px;
 }
 
 .lx-select-demo__scenario {
   display: inline-flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
   min-height: 32px;
   font-size: 12px;
   color: var(--lx-text-label);
 }
 
 .lx-select-demo__scenario select {
-  min-height: 32px;
   max-width: 100%;
+  min-height: 32px;
   padding: 4px 8px;
+  color: var(--lx-text-primary);
+  background: var(--lx-bg-card);
   border: 1px solid var(--lx-control-border);
   border-radius: var(--lx-radius-sm);
-  background: var(--lx-bg-card);
-  color: var(--lx-text-primary);
+}
+
+@media (max-width: 640px) {
+  .lx-select-demo__toolbar label {
+    min-height: 44px;
+  }
+
+  .lx-select-demo__scenario select {
+    min-height: 44px;
+  }
 }
 
 .lx-select-demo__scenario select:focus-visible {
@@ -342,28 +364,36 @@ onBeforeUnmount(() => {
 }
 
 .lx-select-demo__option-description {
-  color: var(--lx-text-secondary);
   font-size: 11px;
+  color: var(--lx-text-secondary-strong);
+}
+
+.lx-select-demo__selected-label {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .lx-select-demo__slot-note {
   display: block;
-  color: var(--lx-text-secondary);
   font-size: 12px;
   line-height: 1.5;
+  color: var(--lx-text-secondary);
 }
 
 .lx-select-demo__panel {
   display: grid;
-  min-width: 0;
   gap: 12px;
+  min-width: 0;
   padding: 12px;
+  background: var(--lx-bg-card);
   border: 1px solid var(--lx-border);
   border-radius: var(--lx-radius-sm);
-  background: var(--lx-bg-card);
 }
 
-.lx-select-demo__panel h4 {
+.lx-select-demo__panel h3 {
   margin: 0;
   font-size: 13px;
   font-weight: 600;
@@ -398,16 +428,16 @@ onBeforeUnmount(() => {
   margin: 0;
   font-size: 12px;
   line-height: 1.6;
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-secondary-strong);
 }
 
 .lx-select-demo__remote-error {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 8px;
-  color: var(--lx-color-error-strong);
+  align-items: center;
   font-size: 12px;
+  color: var(--lx-color-error-strong);
 }
 
 .lx-select-demo__remote-error--visually-hidden {
@@ -423,15 +453,15 @@ onBeforeUnmount(() => {
 
 .lx-select-demo__remote-retry {
   display: block;
-  margin: 0 auto;
   min-width: 44px;
   min-height: 44px;
   padding: 0 8px;
-  border: 1px solid var(--lx-color-error);
-  border-radius: var(--lx-radius-sm);
-  background: var(--lx-bg-card);
+  margin: 0 auto;
   color: var(--lx-color-error-strong);
   cursor: pointer;
+  background: var(--lx-bg-card);
+  border: 1px solid var(--lx-color-error);
+  border-radius: var(--lx-radius-sm);
 }
 
 .lx-select-demo__remote-retry:focus-visible {
