@@ -1,20 +1,22 @@
 # LinkX 项目交接记录
 
-## [2026-10-13] SCOPE / 页面操作引导暂缓，后续按需恢复
+## [2026-10-13] SCOPE / 页面操作引导当前不执行，后续按需纳入计划
 
-- 页面操作引导当前不纳入执行队列或排期，也不作为其他迁移任务的前置条件；后续确有需要时再恢复评估和排期。
-- `doc/GUIDE-CONTENT-PLAN.md` 与 `MENU-CONFIG-DESIGN.md` 相关内容作为需求与设计基线保留；恢复时需重新确认页面范围、文案、交互、技术方案及后端契约。
+- 页面操作引导当前不执行、不纳入待办、执行队列或排期，也不作为其他迁移任务的前置条件；后续明确有需要时再重新确认并纳入计划。
+- `doc/GUIDE-CONTENT-PLAN.md` 与 `MENU-CONFIG-DESIGN.md` 相关内容仅作需求与设计基线保留；重新启动时需确认页面范围、文案、交互、技术方案及后端契约。
 - 该范围决定不改变基础控件与动态图标、`LxDynamicForm`、Vue3 Element Plus 替换的既定顺序，也不代表页面引导功能已实现或通过验收。
 
 ## [2026-10-13] lx-ui Wave 18 / Checkbox 与 Radio 当前版复核及窄屏 P2 收口
 
 - **完成范围**：Checkbox Demo 将知情确认和通知渠道分组，并演示授权范围必填校验；Radio Demo 分离当前选项与历史只读快照，并演示响应通道必填校验。同步复核 Checkbox 禁用勾选/半选标记、Radio hover/纵向选中/禁用文字、中文组件 API 和 `disabled` 文档说明。
-- **验证结果**：定向单测 20/20、当前文档 Playwright 10/10；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 Prettier、E2E 文件 ESLint 和 `git diff --check` 通过。Vue3 ESLint 将 `linkx-fe` 组件源码标记为 ignored，因此没有将它记录为库源码 ESLint 通过。历史计划文档未整篇重排。
-- **Impeccable 结论**：Assessment A 34/40（Good）；Checkbox 分组及 Radio 历史态容器两个 P3 已由独立 Light/HUD 桌面与 375px 复验关闭，无开放 P0–P2。B 四个 detector 均为有效 JSON `[]`、stderr 空、退出码 0；8 个独立浏览器视图注入成功，无页面错误或失败请求。Radio HUD 两个标签颜色与主色令牌及设计参考一致，属 detector 误报；375px 根宽从 375 增至 615 仅发生在 overlay 注入后，基线无页面溢出。独立代码复审确认旧证据 P2 已在所有台账关闭，无开放 P0–P2。
+- **验证结果**：定向单测 23/23、当前文档 Playwright 16/16；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 Prettier、E2E 文件 ESLint 和 `git diff --check` 通过。Vue3 ESLint 将 `linkx-fe` 组件源码标记为 ignored，因此没有将它记录为库源码 ESLint 通过。历史计划文档未整篇重排。
+- **Impeccable 结论**：最终全量 Assessment A 36/40（Excellent）；Checkbox 分组及 Radio 历史态容器两个 P3 已由独立 Light/HUD 桌面与 375px 复验关闭，无开放 P0–P2。B 的 8 个静态扫描目标均为有效 JSON `[]`、stderr 空、退出码 0；8 个独立浏览器视图注入成功，无页面错误或失败请求。Radio HUD 两个标签颜色与主色令牌及设计参考一致，属 detector 误报；375px 根宽从 375 增至 615 仅发生在 overlay 注入后，基线无页面溢出。独立代码复审关闭了空错误断言真空通过的 P2；共享页内目录密度和未来可编辑表格键盘处理为非阻塞 P3。
 - **后续 P3**：桌面 VitePress 组件页本页导航约有 8–10 个同级锚点，留作共享文档外壳的信息架构评估，不作为组件缺陷或本波阻塞项。
 - **证据版本**：旧记录的 8/8 与六视图结果只代表文档 P2 初验，不能代表新增表单示例后的当前版本。当前报告、A/B、截图、源码指纹与复审材料见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`；合法静态 detector `[]` 不单独代表视觉通过。
-- **边界与下一步**：当前变更不关闭 Checkbox、CheckboxGroup、Radio、RadioGroup 的 UI-10 严格设计矩阵行，全库仍为 0/52；不代表 Vue3 页面替换、移除 Element Plus 或真实后端联调。按 `COMPONENT-AUDIT.md` 补齐这四个组件未关闭的矩阵证据，再继续基础组件、动态图标、`LxDynamicForm` 和 Vue3 Element Plus 分批替换。页面操作引导当前暂缓，后续确有需要时再恢复评估和排期。
+- **边界与下一步**：当前变更不关闭 Checkbox、CheckboxGroup、Radio、RadioGroup 的 UI-10 严格设计矩阵行，全库仍为 0/52；不代表 Vue3 页面替换、移除 Element Plus 或真实后端联调。按 `COMPONENT-AUDIT.md` 补齐这四个组件未关闭的矩阵证据，再继续基础组件、动态图标、`LxDynamicForm` 和 Vue3 Element Plus 分批替换。页面操作引导当前不执行、不纳入待办或排期；后续明确有需要时再重新纳入计划。
 - **环境清理**：Assessment B 已停止 VitePress 与 detector 服务，端口 4177/8400 均无监听进程；当前复验的浏览器页面已关闭。
+
+- **最终补记**：真实 `LxForm` 空错误节点探针在 Checkbox/Radio 两条恢复用例中通过，覆盖隐藏、零高度、无图标及无可见残留；空数组真空通过的 P2 已由独立代码复审确认关闭。综合报告、A/B 证据和复审文件均在 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`。
 
 ## [2026-10-13] lx-ui Wave 17 / LxSelect 当前版组件级复核交接
 

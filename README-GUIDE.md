@@ -63,11 +63,11 @@
 
 | 顺序 | 文档 | 说明 |
 |---|---|---|
-| 1 | `doc/lx-ui/MENU-CONFIG-DESIGN.md` | **核心契约**：数据模型、形态推导规则、PageRegistry、TabHost、权限体系（v-auth 指令/配置下沉）、校验规则、迁移三阶段（S1 mock 先行）；**§14 引导系统智能适配**（吸收 Vue2 引导需求：注册键 route.path→pageId、tab 智能切换协议、形态漂移自适应——tab 挪走变页面时引导步骤自动跳过/跟随） |
+| 1 | `doc/lx-ui/MENU-CONFIG-DESIGN.md` | **核心契约**：数据模型、形态推导规则、PageRegistry、TabHost、权限体系（v-auth 指令/配置下沉）、校验规则、迁移三阶段（S1 mock 先行）；§14 页面引导智能适配为暂缓设计草案，后续用户明确提出需要时再评估 |
 | 2 | `doc/ARCHITECTURE-vue3.md` | V3 目标架构（工程迁移整体蓝图） |
-| 3 | `doc/GUIDE-CONTENT-PLAN.md` | 引导步骤与文案清单（17 页约 85 步，Vue2 调研产出；Vue3 复用文案，注册键换 pageId） |
+| 3 | `doc/GUIDE-CONTENT-PLAN.md` | 页面引导需求与文案草案（17 页约 85 步，Vue2 调研产出；当前暂不执行，后续用户明确提出需要时再评估） |
 
-**开发起点**：S1 阶段——在 V3 工程（other-admin/admin-vue3）实现 menu-config 模块（types/validate/buildRoutes/TabHost/PageRegistry/v-auth），用本地 mock 配置全链路验证；**不依赖后端**，接口就绪后单点切换数据源。引导系统（MENU-CONFIG-DESIGN §14）在 S1 完成后接入。
+**开发起点**：S1 阶段——在 V3 工程（other-admin/admin-vue3）实现 menu-config 模块（types/validate/buildRoutes/TabHost/PageRegistry/v-auth），用本地 mock 配置全链路验证；**不依赖后端**，接口就绪后单点切换数据源。页面操作引导（MENU-CONFIG-DESIGN §14）仅保留设计草案，不在 S1 后自动接入；用户后续明确提出需要时，再确认范围并纳入计划。
 
 **给后端**：`MENU-CONFIG-DESIGN.md` §3（数据模型 + 接口契约）+ §11.3（后端改造 5 项清单）可直接作为改造依据。
 

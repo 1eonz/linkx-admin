@@ -1,19 +1,21 @@
 # LinkX 项目交付计划与完成台账
 
-## 2026-10-13 范围备注：页面操作引导暂缓，后续按需恢复
+## 2026-10-13 范围备注：页面操作引导暂不执行，后续按需纳入计划
 
-- 页面操作引导当前暂缓，不纳入当前执行队列或排期，也不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
-- `doc/GUIDE-CONTENT-PLAN.md` 暂作需求与文案草案保留；后续确有需要时，再恢复页面范围、文案与交互、技术方案及后端契约确认，并单独评估排期后实施。当前不计入待办，也不代表功能已实现或验收。
+- 页面操作引导当前不执行、不纳入待办、执行队列或排期，也不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
+- `doc/GUIDE-CONTENT-PLAN.md` 仅保留需求与文案草案；后续明确有需要时，再重新确认页面范围、文案与交互、技术方案及后端契约，并纳入计划执行。当前状态不代表功能已实现或验收。
 
 ## 2026-10-13 lx-ui Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
 - **完成范围**：保留 Checkbox/Radio 文档 `disabled` 长说明的折叠呈现、至少 44px 摘要和可见键盘焦点；375px 下 7 张明显溢出表可提示、固定首列、方向键滚动并关联 `aria-describedby`，3 张短溢出表不增加无效提示或 Tab 停靠。Checkbox Demo 将知情确认与通知渠道分组并加入授权范围必填校验；Radio Demo 将历史只读快照独立展示并加入响应通道必填校验。同步修正禁用勾选/半选标记对比度、Radio hover/纵向选中/禁用文字样式和中文文档。
-- **验证**：Checkbox/Radio 定向单测 20/20、当前版文档 E2E 10/10；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 Prettier、E2E 测试文件 ESLint 与 `git diff --check` 通过。Vue3 ESLint 对 `linkx-fe` 源文件报告为 ignored，不计作组件库 ESLint 通过；历史计划/交接 Markdown 未整篇格式化。
-- **Impeccable 与复审**：Assessment A 34/40（Good）；知情确认/通知渠道分组及 Radio 历史快照隔离两项 P3 经 Light/HUD 桌面与 375px 复验已关闭，无开放 P0–P2。Assessment B 四个 detector 均为 JSON `[]`、stderr 空、退出码 0；8 个 Light/HUD × 桌面/375px 视图均注入成功，无页面错误或失败请求。Radio HUD 两条选中态命中与 `--lx-color-primary` 一致，归为令牌误报；375px 页面根宽仅在 overlay 注入后变为 615px，注入前无页面溢出。独立代码复审确认旧证据 P2 已在所有台账关闭，无开放 P0–P2。
+- **验证**：Checkbox/Radio 定向单测 23/23、当前版文档 E2E 16/16；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 Prettier、E2E 测试文件 ESLint 与 `git diff --check` 通过。Vue3 ESLint 对 `linkx-fe` 源文件报告为 ignored，不计作组件库 ESLint 通过；历史计划/交接 Markdown 未整篇格式化。
+- **Impeccable 与复审**：最终全量 Assessment A 36/40（Excellent）；知情确认/通知渠道分组及 Radio 历史快照隔离两项 P3 经 Light/HUD 桌面与 375px 复验已关闭，无开放 P0–P2。Assessment B 的 8 个静态扫描目标均为合法 JSON `[]`、stderr 空、退出码 0；8 个 Light/HUD × 桌面/375px 视图均注入成功，无页面错误或失败请求。Radio HUD 两条选中态命中与 `--lx-color-primary` 一致，归为令牌误报；375px 页面根宽仅在 overlay 注入后变为 615px，注入前无页面溢出。独立代码复审关闭了空错误断言真空通过的 P2；桌面页内目录密度及未来可编辑表格方向键处理作为非阻塞 P3 跟踪。
 - **后续 P3**：桌面 VitePress 组件页导航同时展示约 8–10 个同级锚点，作为共享文档外壳的信息架构建议单独评估；它不是 Checkbox/Radio 组件缺陷，也不阻塞本波。
 - **证据版本**：旧版 8/8 和六视图记录仅作为文档窄屏 P2 初验历史，不覆盖当前 Demo。当前 A/B、源码指纹、截图、detector 三件套、交互记录、综合 Critique 与代码复审位于 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`；`[]` 仅表示静态规则零命中，不单独代表视觉审查通过。
-- **边界**：本波关闭当前 Demo/文档发现的问题，但不关闭 Checkbox、CheckboxGroup、Radio、RadioGroup 的 UI-10 严格矩阵行；全库仍为 0/52。不代表 Vue3 页面替换、Element Plus 移除或真实后端联调完成。页面操作引导当前暂缓，后续确有需要时再恢复评估和排期。
+- **边界**：本波关闭当前 Demo/文档发现的问题，但不关闭 Checkbox、CheckboxGroup、Radio、RadioGroup 的 UI-10 严格矩阵行；全库仍为 0/52。不代表 Vue3 页面替换、Element Plus 移除或真实后端联调完成。页面操作引导当前不执行、不纳入待办或排期；后续明确有需要时再重新纳入计划。
 - **下一步**：按 `doc/lx-ui/COMPONENT-AUDIT.md` 补齐 Checkbox、CheckboxGroup、Radio、RadioGroup 尚未关闭的严格设计矩阵证据，再依序推进其余组件、动态图标、`LxDynamicForm`、全库门禁与 Vue3 Element Plus 分批替换。
+
+- **最终补记**：Checkbox/Radio 恢复校验用例已在实际 `LxForm` 根节点插入空错误 DOM，断言隐藏、零高度、无伪元素图标和无可见空行；两条针对用例通过。代码复审关闭了此前 `every()` 空数组导致的 P2 测试缺口。综合评审、A/B、源码指纹及代码复审均归档于 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`。
 
 ## 2026-10-13 lx-ui Wave 17 / LxSelect 当前版组件级复核完成
 
@@ -644,7 +646,7 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 | 编号    | 任务                | 产出                                                     | 验收                           | 状态                                                           |
 | ------- | ------------------- | -------------------------------------------------------- | ------------------------------ | -------------------------------------------------------------- |
 | ARCH-01 | menu-config S1 Mock | `menu-config`、PageRegistry、TabHost、校验、feature flag | 菜单/路由/tab/占位页全链路演示 | 待开始                                                         |
-| ARCH-02 | 引导系统            | GuideRegistry、driver.js、pageId、TabHost 协议           | 页面引导和重播可用             | 当前暂缓、不纳入执行队列；后续确有需要时恢复评估并单独排期实施 |
+| ARCH-02 | 引导系统            | GuideRegistry、driver.js、pageId、TabHost 协议           | 页面引导和重播可用             | 当前不执行、不纳入待办或排期；后续明确有需要时再纳入计划 |
 | ARCH-03 | S2 后端菜单契约     | `/api/menu/config` 契约、后台字段校验、灰度方案          | legacy/config 同账号一致       | 阻塞                                                           |
 | ARCH-04 | 旧链路清理          | OAuth 占位映射、死文件、历史 API 和无效 Mock 分类清理    | 无现役入口指向占位页           | 待开始                                                         |
 | ARCH-05 | Vue2 技术债治理     | Vue2/EOL、旧 Axios、依赖构建脚本和停止维护边界           | 风险和停止线有记录             | 待开始                                                         |

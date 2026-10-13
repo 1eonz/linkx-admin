@@ -4,11 +4,11 @@
 
 - Checkbox/Radio API 表格中的 `disabled` 长说明改为短摘要加折叠详情；主题颜色、HUD 状态及 `LxCheckboxGroup`/`LxRadioGroup`、`ElForm` 禁用继承边界均保留。折叠摘要最小高度 44px，键盘焦点使用品牌色外框；375px 下 7 张明显溢出表有提示、首列固定、方向键和 ARIA，3 张短溢出表不产生多余停靠。
 - Checkbox Demo 区分知情确认与通知渠道，并展示授权范围必填校验、错误恢复和重置；Radio Demo 将历史只读快照独立呈现，并展示响应通道必填校验。禁用勾选/半选标记、Radio hover/纵向选中/禁用文字与中文文档同步按设计调整。
-- 定向单测 20/20、当前文档 E2E 10/10；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 Prettier、E2E 测试文件 ESLint 和差异检查通过。Vue3 ESLint 忽略 `linkx-fe` 文件，不计作组件库 ESLint 通过。
-- Assessment A 为 34/40（Good）；Checkbox 分组及 Radio 历史态容器两项 P3 经 Light/HUD 桌面与 375px 复验关闭，无开放 P0–P2。B 四个 detector 均为合法 `[]`/空 stderr/退出码 0，8 个浏览器视图均成功注入且无失败请求或页面错误。Radio HUD 两个颜色命中符合主题主色令牌；375px 根宽增加由注入的 overlay 导致。
-- 独立代码复审确认旧版证据 P2 已在组件审计摘要和交付台账全仓关闭，无开放 P0–P2。桌面 VitePress 文档页内导航含约 8–10 个同级锚点，作为共享文档外壳 P3 留待单独评估，不归为本组件缺陷。
+- 定向单测 23/23、当前文档 E2E 16/16；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 Prettier、E2E 测试文件 ESLint 和差异检查通过。Vue3 ESLint 忽略 `linkx-fe` 文件，不计作组件库 ESLint 通过。
+- 最终全量 Assessment A 为 36/40（Excellent）；Checkbox 分组及 Radio 历史态容器两项 P3 经 Light/HUD 桌面与 375px 复验关闭，无开放 P0–P2。B 的 8 个静态目标均为合法 `[]`/空 stderr/退出码 0，8 个浏览器视图均成功注入且无失败请求或页面错误。Radio HUD 两个颜色命中符合主题主色令牌；375px 根宽增加由注入的 overlay 导致。
+- 独立代码复审确认空错误断言真空通过的 P2 已关闭。共享页内导航含约 8–10 个同级锚点，作为 VitePress 文档外壳 P3 留待单独评估；helper 未来如用于带可编辑后代的表格，应避免接管其左右方向键。两项均不阻塞当前静态 API 表格验收。
 - 旧版文档窄屏 P2 的 8/8、六视图、A 33/40 和旧证据目录只保留为历史初验，不代表当前 Demo。当前版 A/B、代码复审、detector 三件套、截图、源码指纹、综合报告与趋势见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`。
-- 本波没有关闭 Checkbox/CheckboxGroup/Radio/RadioGroup 的 UI-10 严格矩阵行；全库仍为 0/52，不代表 Vue3 Element Plus 替换或真实后端联调完成。页面操作引导整体暂缓，用户明确重新提出需要时才恢复评估。
+- 本波没有关闭 Checkbox/CheckboxGroup/Radio/RadioGroup 的 UI-10 严格矩阵行；全库仍为 0/52，不代表 Vue3 Element Plus 替换或真实后端联调完成。页面操作引导当前不执行、不纳入待办、自动执行队列或排期；仅保留需求/设计草案，用户后续明确提出时再重新确认范围和计划。
 
 ## 2026-10-13 UI-10 / Wave 17 LxSelect 当前版严格复核完成
 
