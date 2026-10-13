@@ -7,7 +7,10 @@
 ## 交互示例
 
 <script setup lang="ts">
+import { useResponsiveDocTable } from '../.vitepress/theme/useResponsiveDocTable';
 import Basic from '../../src/components/LxCheckbox/demo/basic.vue';
+
+useResponsiveDocTable(24);
 </script>
 
 <Basic />
@@ -18,25 +21,45 @@ import Basic from '../../src/components/LxCheckbox/demo/basic.vue';
 
 ## LxCheckbox Props
 
-| 名称            | 类型                          | 默认值           | 说明                                                                                                                                                                                              |
-| --------------- | ----------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `modelValue`    | `string \| number \| boolean` | —                | v-model（独立使用时 boolean，组内由 Group 接管）。                                                                                                                                                |
-| `value`         | `string \| number`            | —                | 组内该项的选中值（配合 `LxCheckboxGroup`；组选项值不支持 boolean）。                                                                                                                              |
-| `label`         | `string`                      | `''`             | 无插槽时的文字回退；未传 `value` 时兼作选中值（EP 旧契约兼容）。                                                                                                                                  |
-| `disabled`      | `boolean`                     | —（`undefined`） | 禁用态：浅色主题文字使用 `--lx-color-info`（`#909399`），HUD 下跟随 HUD 次级文字色；灰底状态对照标本 04“需支队审批”行。默认未设置：不阻断 `LxCheckboxGroup` / `ElForm` 禁用继承；显式传值才覆盖。 |
-| `indeterminate` | `boolean`                     | `false`          | 半选态：主色填充 + 白色横杠；不修改值，并向辅助技术暴露混合态。                                                                                                                                   |
-| `name`          | `string`                      | —                | 原生 name；组内缺省由 Group 注入。                                                                                                                                                                |
+<p id="lx-checkbox-props-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
+
+| 名称            | 类型                          | 默认值           | 说明                                                                 |
+| --------------- | ----------------------------- | ---------------- | -------------------------------------------------------------------- |
+| `modelValue`    | `string \| number \| boolean` | —                | v-model（独立使用时 boolean，组内由 Group 接管）。                   |
+| `value`         | `string \| number`            | —                | 组内该项的选中值（配合 `LxCheckboxGroup`；组选项值不支持 boolean）。 |
+| `label`         | `string`                      | `''`             | 无插槽时的文字回退；未传 `value` 时兼作选中值（EP 旧契约兼容）。     |
+| `disabled`      | `boolean`                     | —（`undefined`） | 禁用态主题与继承规则见下方说明。                                     |
+| `indeterminate` | `boolean`                     | `false`          | 半选态：主色填充 + 白色横杠；不修改值，并向辅助技术暴露混合态。      |
+| `name`          | `string`                      | —                | 原生 name；组内缺省由 Group 注入。                                   |
+
+<details class="lx-selection-control-doc-details">
+<summary>禁用态主题与继承规则</summary>
+
+浅色主题文字使用 `--lx-color-info`（`#909399`），灰底状态见标本 04“需支队审批”行；HUD 深色主题跟随 HUD 次级文字色。`disabled` 默认未设置时不阻断 `LxCheckboxGroup` / `ElForm` 的禁用继承；显式传入 `true` 或 `false` 才覆盖继承。
+
+</details>
 
 ## LxCheckboxGroup Props
 
-| 名称         | 类型                   | 默认值           | 说明                                                                            |
-| ------------ | ---------------------- | ---------------- | ------------------------------------------------------------------------------- |
-| `modelValue` | `(string \| number)[]` | `[]`             | 当前选中值集合（v-model）；组选项值只支持字符串或数字。                         |
-| `disabled`   | `boolean`              | —（`undefined`） | 整组禁用；缺省时继承 `ElForm` 禁用状态，显式传入 `true` 或 `false` 时覆盖继承。 |
-| `vertical`   | `boolean`              | `false`          | 垂直排布（标本 04 权限列表）。                                                  |
-| `name`       | `string`               | —                | 原生 name，注入组内全部 `LxCheckbox`。                                          |
+<p id="lx-checkbox-group-props-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
+
+| 名称         | 类型                   | 默认值           | 说明                                                    |
+| ------------ | ---------------------- | ---------------- | ------------------------------------------------------- |
+| `modelValue` | `(string \| number)[]` | `[]`             | 当前选中值集合（v-model）；组选项值只支持字符串或数字。 |
+| `disabled`   | `boolean`              | —（`undefined`） | 禁用整组；继承规则见下方说明。                          |
+| `vertical`   | `boolean`              | `false`          | 垂直排布（标本 04 权限列表）。                          |
+| `name`       | `string`               | —                | 原生 name，注入组内全部 `LxCheckbox`。                  |
+
+<details class="lx-selection-control-doc-details">
+<summary>分组禁用继承规则</summary>
+
+未显式设置 `disabled` 时，`LxCheckboxGroup` 继承 `ElForm` 的禁用状态；显式设置 `true` 或 `false` 时覆盖继承。
+
+</details>
 
 ## Events
+
+<p id="lx-checkbox-events-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
 
 | 组件              | 事件                | 参数                   | 说明               |
 | ----------------- | ------------------- | ---------------------- | ------------------ |
@@ -46,6 +69,8 @@ import Basic from '../../src/components/LxCheckbox/demo/basic.vue';
 | `LxCheckboxGroup` | `change`            | `(string \| number)[]` | 选中集合变化。     |
 
 ## Slots
+
+<p id="lx-checkbox-slots-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
 
 | 组件              | 名称      | 说明                              |
 | ----------------- | --------- | --------------------------------- |
@@ -84,13 +109,15 @@ function toggleAll(next: boolean) {
 
 ## 与标本的对齐说明
 
+<p id="lx-checkbox-design-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
+
 | 契约项    | 标本 04              | 实现                                    |
 | --------- | -------------------- | --------------------------------------- |
 | 选中/半选 | 主色填充白勾/横杠    | EP 原生契约，组件级固化防漂移           |
 | hover     | 描边与文字同步转主色 | 组件级固化                              |
 | 水平间距  | 16px                 | `--lx-space-lg`，覆盖 EP 默认 32px 右距 |
 | 垂直行距  | space-y-3（12px）    | `--lx-space-md`                         |
-| HUD 深色  | —                    | 填充跟随 HUD 战术蓝（el-* 变量）        |
+| HUD 深色  | —                    | 填充跟随 HUD 战术蓝（el-\* 变量）       |
 
 ## 可访问性
 

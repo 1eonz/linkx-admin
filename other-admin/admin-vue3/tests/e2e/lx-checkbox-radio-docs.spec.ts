@@ -1,5 +1,13 @@
 import { expect, test } from '@playwright/test';
 
+test.beforeEach(async ({ page }) => {
+  // 文档页不访问外部服务，避免浏览器验收触达真实后端。
+  await page.route('**/*', (route) => {
+    const url = new URL(route.request().url());
+    return ['127.0.0.1', 'localhost'].includes(url.hostname) ? route.continue() : route.abort();
+  });
+});
+
 test.describe('LxCheckbox 文档示例', () => {
   test('按设计呈现三态与纵向权限列表，并在 HUD 下保留可读状态', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
@@ -252,3 +260,184 @@ test.describe('LxRadio 文档示例', () => {
     }
   });
 });
+
+for (const item of [
+  {
+    title: '复选框',
+    path: '/components/lxcheckbox',
+    propsHintId: 'lx-checkbox-props-hint',
+    groupPropsHintId: 'lx-checkbox-group-props-hint',
+    scrollableHintIds: [
+      'lx-checkbox-props-hint',
+      'lx-checkbox-group-props-hint',
+      'lx-checkbox-events-hint',
+      'lx-checkbox-slots-hint',
+    ],
+    shortOverflowHintIds: ['lx-checkbox-design-hint'],
+  },
+  {
+    title: '单选框',
+    path: '/components/lxradio',
+    propsHintId: 'lx-radio-props-hint',
+    groupPropsHintId: 'lx-radio-group-props-hint',
+    scrollableHintIds: ['lx-radio-props-hint', 'lx-radio-group-props-hint', 'lx-radio-events-hint'],
+    shortOverflowHintIds: ['lx-radio-slots-hint', 'lx-radio-design-hint'],
+  },
+]) {
+  test(`${item.title}文档在375px下可浏览溢出表格并压缩禁用行`, async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(item.path);
+
+    for (const hintId of item.scrollableHintIds) {
+      const hint = page.locator(`#${hintId}`);
+      const table = page.locator(`#${hintId} + table`);
+      await expect(hint).toBeVisible();
+      await expect(table).toHaveAttribute('aria-describedby', hintId);
+      await expect(table).toHaveAttribute('tabindex', '0');
+
+      const initialState = await table.evaluate((element) => {
+        const firstColumn = element.querySelector('td:first-child');
+        return {
+          clientWidth: element.clientWidth,
+          scrollWidth: element.scrollWidth,
+          firstColumnPosition: firstColumn ? getComputedStyle(firstColumn).position : 'missing',
+        };
+      });
+      expect(initialState.scrollWidth - initialState.clientWidth).toBeGreaterThanOrEqual(24);
+      expect(initialState.firstColumnPosition).toBe('sticky');
+
+      await table.focus();
+      await table.press('ArrowRight');
+      await expect.poll(() => table.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+
+      const middleScroll = await table.evaluate((element) =>
+        Math.min(120, (element.scrollWidth - element.clientWidth) / 2),
+      );
+      await table.evaluate((element, scrollLeft) => {
+        element.scrollLeft = scrollLeft;
+      }, middleScroll);
+      await table.press('ArrowRight');
+      await expect.poll(() => table.evaluate((element) => element.scrollLeft)).toBeGreaterThan(middleScroll);
+      const scrollAfterRight = await table.evaluate((element) => element.scrollLeft);
+      await table.press('ArrowLeft');
+      await expect.poll(() => table.evaluate((element) => element.scrollLeft)).toBeLessThan(scrollAfterRight);
+    }
+
+    for (const hintId of item.shortOverflowHintIds) {
+      const hint = page.locator(`#${hintId}`);
+      const table = page.locator(`#${hintId} + table`);
+      await expect(hint).toBeHidden();
+      await expect(table).not.toHaveAttribute('tabindex');
+      await expect(table).not.toHaveAttribute('aria-describedby');
+
+      const shortOverflowState = await table.evaluate((element) => {
+        const firstCell = element.querySelector('td:first-child');
+        return {
+          overflowWidth: element.scrollWidth - element.clientWidth,
+          firstColumnPosition: firstCell ? getComputedStyle(firstCell).position : 'missing',
+        };
+      });
+      expect(shortOverflowState.overflowWidth).toBeGreaterThan(0);
+      expect(shortOverflowState.overflowWidth).toBeLessThan(24);
+      expect(shortOverflowState.firstColumnPosition).toBe('static');
+    }
+
+    const pageWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(pageWidth).toBe(375);
+
+    const disabledRowHeights = await Promise.all(
+      [item.propsHintId, item.groupPropsHintId].map(async (hintId) => {
+        const table = page.locator(`#${hintId} + table`);
+        return table
+          .locator('tbody tr')
+          .evaluateAll((rows) =>
+            rows
+              .filter((row) => row.querySelector('td:first-child')?.textContent?.trim() === 'disabled')
+              .map((row) => row.getBoundingClientRect().height),
+          );
+      }),
+    );
+    expect(disabledRowHeights.flat()).toHaveLength(2);
+    for (const height of disabledRowHeights.flat()) {
+      expect(height).toBeLessThanOrEqual(96);
+    }
+  });
+}
+
+for (const item of [
+  {
+    title: '复选框',
+    path: '/components/lxcheckbox',
+    expandedTexts: [/--lx-color-info/, /标本 04“需支队审批”行/],
+    groupExpandedText: /LxCheckboxGroup 继承 ElForm 的禁用状态/,
+  },
+  {
+    title: '单选框',
+    path: '/components/lxradio',
+    expandedTexts: [/HUD 深色主题使用中性灰阶/],
+    groupExpandedText: /LxRadioGroup 继承 ElForm 的禁用状态/,
+  },
+]) {
+  test(`${item.title}禁用规则可由键盘展开且摘要高度与焦点样式正确`, async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(item.path);
+
+    const details = page.locator('details.lx-selection-control-doc-details');
+    const singleDetails = details.nth(0);
+    const groupDetails = details.nth(1);
+    const summary = singleDetails.locator('summary');
+    await expect(details).toHaveCount(2);
+    await expect(singleDetails).not.toHaveAttribute('open');
+    await expect(groupDetails).not.toHaveAttribute('open');
+
+    const summaryBox = await summary.boundingBox();
+    expect(summaryBox?.height ?? 0).toBeGreaterThanOrEqual(44);
+
+    await summary.focus();
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Shift+Tab');
+    await expect(summary).toBeFocused();
+
+    const focusStyle = await summary.evaluate((element) => {
+      const probe = document.createElement('span');
+      probe.style.color = 'var(--lx-color-primary)';
+      document.body.append(probe);
+      const brandColor = getComputedStyle(probe).color;
+      probe.remove();
+
+      const style = getComputedStyle(element);
+      return {
+        visible: element.matches(':focus-visible'),
+        outlineStyle: style.outlineStyle,
+        outlineWidth: style.outlineWidth,
+        outlineColor: style.outlineColor,
+        brandColor,
+      };
+    });
+    expect(focusStyle.visible).toBe(true);
+    expect(focusStyle.outlineStyle).toBe('solid');
+    expect(focusStyle.outlineWidth).toBe('2px');
+    expect(focusStyle.outlineColor).toBe(focusStyle.brandColor);
+
+    await page.keyboard.press('Space');
+    await expect(singleDetails).toHaveAttribute('open', '');
+    for (const expandedText of item.expandedTexts) {
+      await expect(singleDetails).toContainText(expandedText);
+    }
+    await expect(singleDetails).toContainText(/不阻断 Lx(?:Checkbox|Radio)Group \/ ElForm 的禁用继承/);
+    await page.keyboard.press('Space');
+    await expect(singleDetails).not.toHaveAttribute('open');
+    await page.keyboard.press('Enter');
+    await expect(singleDetails).toHaveAttribute('open', '');
+    await page.keyboard.press('Enter');
+    await expect(singleDetails).not.toHaveAttribute('open');
+
+    const groupSummary = groupDetails.locator('summary');
+    await groupSummary.focus();
+    await page.keyboard.press('Space');
+    await expect(groupDetails).toHaveAttribute('open', '');
+    await expect(groupDetails).toContainText(item.groupExpandedText);
+    await page.keyboard.press('Space');
+    await expect(groupDetails).not.toHaveAttribute('open');
+  });
+}

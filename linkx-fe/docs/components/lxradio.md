@@ -7,7 +7,10 @@
 ## 交互示例
 
 <script setup lang="ts">
+import { useResponsiveDocTable } from '../.vitepress/theme/useResponsiveDocTable';
 import Basic from '../../src/components/LxRadio/demo/basic.vue';
+
+useResponsiveDocTable(24);
 </script>
 
 <Basic />
@@ -18,24 +21,44 @@ import Basic from '../../src/components/LxRadio/demo/basic.vue';
 
 ## LxRadio Props
 
-| 名称         | 类型                          | 默认值           | 说明                                                                                                               |
-| ------------ | ----------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `modelValue` | `string \| number \| boolean` | —                | 独立使用时的当前值（v-model）；组内值由 `LxRadioGroup` 管理。                                                      |
-| `value`      | `string \| number \| boolean` | —                | 该项的选中值（配合 `LxRadioGroup` v-model）。                                                                      |
-| `label`      | `string`                      | `''`             | 无插槽时的文字回退；未传 `value` 时兼作选中值（EP 旧契约兼容）。                                                   |
-| `disabled`   | `boolean`                     | —（`undefined`） | 禁用态：灰底描边 + 灰字（标本 03 禁用行）。默认未设置：不阻断 `LxRadioGroup` / `ElForm` 禁用继承；显式传值才覆盖。 |
-| `name`       | `string`                      | —                | 原生 name；组内缺省由 Group 注入。                                                                                 |
+<p id="lx-radio-props-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
+
+| 名称         | 类型                          | 默认值           | 说明                                                             |
+| ------------ | ----------------------------- | ---------------- | ---------------------------------------------------------------- |
+| `modelValue` | `string \| number \| boolean` | —                | 独立使用时的当前值（v-model）；组内值由 `LxRadioGroup` 管理。    |
+| `value`      | `string \| number \| boolean` | —                | 该项的选中值（配合 `LxRadioGroup` v-model）。                    |
+| `label`      | `string`                      | `''`             | 无插槽时的文字回退；未传 `value` 时兼作选中值（EP 旧契约兼容）。 |
+| `disabled`   | `boolean`                     | —（`undefined`） | 禁用态主题与继承规则见下方说明。                                 |
+| `name`       | `string`                      | —                | 原生 name；组内缺省由 Group 注入。                               |
+
+<details class="lx-selection-control-doc-details">
+<summary>禁用态主题与继承规则</summary>
+
+浅色主题禁用项为灰底描边与灰字（标本 03 禁用行），HUD 深色主题使用中性灰阶。`disabled` 默认未设置时不阻断 `LxRadioGroup` / `ElForm` 的禁用继承；显式传入 `true` 或 `false` 才覆盖继承。
+
+</details>
 
 ## LxRadioGroup Props
 
-| 名称         | 类型                          | 默认值           | 说明                                                                            |
-| ------------ | ----------------------------- | ---------------- | ------------------------------------------------------------------------------- |
-| `modelValue` | `string \| number \| boolean` | —                | 当前选中项的值（v-model）；未选中时为 `undefined`。                             |
-| `disabled`   | `boolean`                     | —（`undefined`） | 整组禁用；缺省时继承 `ElForm` 禁用状态，显式传入 `true` 或 `false` 时覆盖继承。 |
-| `vertical`   | `boolean`                     | `false`          | 垂直排布（标本 03 处置通道优先级行）。                                          |
-| `name`       | `string`                      | —                | 原生 name，注入组内全部 `LxRadio`。                                             |
+<p id="lx-radio-group-props-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
+
+| 名称         | 类型                          | 默认值           | 说明                                                |
+| ------------ | ----------------------------- | ---------------- | --------------------------------------------------- |
+| `modelValue` | `string \| number \| boolean` | —                | 当前选中项的值（v-model）；未选中时为 `undefined`。 |
+| `disabled`   | `boolean`                     | —（`undefined`） | 禁用整组；继承规则见下方说明。                      |
+| `vertical`   | `boolean`                     | `false`          | 垂直排布（标本 03 处置通道优先级行）。              |
+| `name`       | `string`                      | —                | 原生 name，注入组内全部 `LxRadio`。                 |
+
+<details class="lx-selection-control-doc-details">
+<summary>分组禁用继承规则</summary>
+
+未显式设置 `disabled` 时，`LxRadioGroup` 继承 `ElForm` 的禁用状态；显式设置 `true` 或 `false` 时覆盖继承。
+
+</details>
 
 ## Events
+
+<p id="lx-radio-events-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
 
 | 组件           | 事件                | 参数                                 | 说明                                     |
 | -------------- | ------------------- | ------------------------------------ | ---------------------------------------- |
@@ -45,6 +68,8 @@ import Basic from '../../src/components/LxRadio/demo/basic.vue';
 | `LxRadio`      | `change`            | `(value: LxRadioValue \| undefined)` | 单项选中（EP 契约）。                    |
 
 ## Slots
+
+<p id="lx-radio-slots-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
 
 | 组件           | 名称      | 说明                              |
 | -------------- | --------- | --------------------------------- |
@@ -64,14 +89,16 @@ import Basic from '../../src/components/LxRadio/demo/basic.vue';
 
 ## 与标本的对齐说明
 
-| 契约项     | 标本 03                  | 实现                                      |
-| ---------- | ------------------------ | ----------------------------------------- |
-| 选中态     | 白底 + 蓝描边 + 6px 靶心 | 组件级固化（替代 EP 默认蓝底白心）        |
-| hover      | 描边与文字同步转主色     | 组件级固化                                |
-| 选中 label | 主色 + 500 字重          | 组件级固化                                |
-| 水平间距   | gap-4（16px）            | `--lx-space-lg`，覆盖 EP 默认 32px 右距   |
-| 垂直行距   | space-y-2（8px）         | `--lx-space-sm`                           |
-| HUD 深色   | —                        | 靶环底色/靶心跟随 HUD 战术蓝（el-* 变量） |
+<p id="lx-radio-design-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
+
+| 契约项     | 标本 03                  | 实现                                       |
+| ---------- | ------------------------ | ------------------------------------------ |
+| 选中态     | 白底 + 蓝描边 + 6px 靶心 | 组件级固化（替代 EP 默认蓝底白心）         |
+| hover      | 描边与文字同步转主色     | 组件级固化                                 |
+| 选中 label | 主色 + 500 字重          | 组件级固化                                 |
+| 水平间距   | gap-4（16px）            | `--lx-space-lg`，覆盖 EP 默认 32px 右距    |
+| 垂直行距   | space-y-2（8px）         | `--lx-space-sm`                            |
+| HUD 深色   | —                        | 靶环底色/靶心跟随 HUD 战术蓝（el-\* 变量） |
 
 ## 可访问性
 

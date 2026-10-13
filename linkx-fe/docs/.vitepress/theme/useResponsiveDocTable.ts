@@ -2,14 +2,20 @@ import { onMounted, onUnmounted } from 'vue'
 
 const hintedTableSelector = '.vp-doc p.lx-doc-table-scroll-hint + table'
 
-export function useResponsiveDocTable() {
+/**
+ * 为需要横向浏览的文档表格添加提示、键盘停靠和无障碍关联。
+ * @param minOverflowPx 显示滚动提示并进入键盘顺序所需的最小溢出宽度，默认不设阈值
+ */
+export function useResponsiveDocTable(minOverflowPx = 0) {
   let tables: HTMLTableElement[] = []
   const observers: ResizeObserver[] = []
 
   const syncKeyboardAccess = (table: HTMLTableElement) => {
     const hint = table.previousElementSibling
 
-    if (table.scrollWidth > table.clientWidth) {
+    const overflowWidth = table.scrollWidth - table.clientWidth
+
+    if (overflowWidth > 0 && overflowWidth >= minOverflowPx) {
       table.tabIndex = 0
       if (hint instanceof HTMLElement && hint.id) {
         hint.classList.add('is-scrollable')
