@@ -1,5 +1,11 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-13 Wave 19 UI-10 组件矩阵进度
+
+- `LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 已完成统一严格矩阵登记；UI-10 当前 **4/52**。本次只更新 lx-ui 组件审计，不代表 Vue3 宿主组件已替换，也不代表 Element Plus 可以移除。
+- 下一步先复核 `LxInputNumber` 桌面步进目标尺寸 P2，再继续基础控件、动态图标、`LxDynamicForm` 与剩余组件门禁；Vue3 Element Plus 分批替换仍在其后。
+- 页面操作引导当前不执行、不纳入待办、执行队列或排期；后续明确有需要时再重新确认范围并纳入计划。
+
 ## 2026-10-13 Wave 18 范围进度
 
 - Checkbox/Radio 文档 375px 可读性 P2 已关闭；文档 E2E 8/8，正式 A/B 和独立代码复审通过。

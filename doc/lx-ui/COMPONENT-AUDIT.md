@@ -1,5 +1,13 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-13 UI-10 / Wave 19 Checkbox 与 Radio 四项严格矩阵登记
+
+- **设计依据与映射**：唯一对照源为 `design/表单控件八件套/screen.png` 与 `code.html` 第 03/04 区。Radio 为 14px 靶环、6px 主色靶心，选中面保持卡片底色；hover 只强调圆环；横向选中标签用主色中字重，纵向列表保持正文色和常规字重。Checkbox 为 14px 选框，选中/半选以主色填充并显示白勾/横杠；标签 12px，图标间距 10px，横向组间距 16px、纵向 Checkbox/Radio 行距分别为 12px/8px。实现使用 `--lx-*` 与 HUD 主题令牌，并在组件级固定样式，避免依赖全局 Element Plus 桥接后发生漂移。
+- **契约与适用状态**：四项均覆盖默认、选中、hover、键盘焦点、禁用、组级/`ElForm` 禁用继承、Light/HUD 和触屏 44px。Checkbox 另覆盖半选及旧 `label` 值兼容；Radio 覆盖组内方向键、中文状态播报、横向/纵向选中差异、历史只读值与减少动效。loading/empty 不适用于单个同步选项及纯选项组；字段错误由 `LxForm` 承载，已在真实表单流程验证失败、修正恢复和空错误行收敛。
+- **Demo、API 与行为证据**：中文 API 文档列明标本映射、继承边界及不可适用状态；Demo 覆盖独立项、组选项、半选、旧契约、禁用、表单校验和状态反馈。Checkbox/Radio 定向单测合计 23/23，文档 E2E 16/16；包括 375px 触控尺寸、键盘、表单禁用继承、主题、窄屏文档表格及真实 `LxForm` 空错误节点探针。当前版类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 Prettier/ESLint 及 `git diff --check` 均通过。
+- **正式评审**：独立 Assessment A 36/40（Excellent）；Assessment B 的 8 个静态目标均为合法 JSON `[]`、stderr 为空、退出码 0，8 个 Light/HUD × 桌面/375px 浏览器视图注入成功且无页面错误或失败请求。`[]` 仅表示静态规则零命中，不单独代表视觉通过。综合报告与 A/B 原始材料见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`；正式快照见 `.impeccable/critique/2026-10-13T09-44-41Z__linkx-fe-src-components-lxcheckbox-index-vue.md`，趋势为 34/40 → 36/40。独立代码复审关闭了空错误断言空数组真空通过的 P2。
+- **剩余项**：无当前组件级 P0/P1/P2。桌面文档页内目录密度及未来将表格 helper 用于可编辑单元格时的方向键边界，按共享文档外壳 P3 跟踪；两项均不阻塞本次静态 API 表格与四项组件验收。真实屏幕阅读器和 Vue3 业务宿主替换属于其他交付门槛。
+
 ## 2026-10-13 UI-10 / Wave 18 Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
 - Checkbox/Radio API 表格中的 `disabled` 长说明改为短摘要加折叠详情；主题颜色、HUD 状态及 `LxCheckboxGroup`/`LxRadioGroup`、`ElForm` 禁用继承边界均保留。折叠摘要最小高度 44px，键盘焦点使用品牌色外框；375px 下 7 张明显溢出表有提示、首列固定、方向键和 ARIA，3 张短溢出表不产生多余停靠。
@@ -244,7 +252,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 
 ### 52 个公开组件逐项验收矩阵
 
-本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **0/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但 P2 与全库设计矩阵仍未关闭。
+本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **4/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
 
 | 公开组件             | 唯一对照源                                        | 当前矩阵状态                                                                                                                                                                               |
 | -------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -253,8 +261,8 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxBreadcrumb`       | `DESIGN-SPEC.md` + 导航规范                       | 待严格复核；保留现有宿主导航契约                                                                                                                                                           |
 | `LxButton`           | `design/按钮体系/`                                | 当前版 A 32/40，B 8/8 浏览器场景，代码复审无未关闭发现；桌面标签 P2 已关闭，两项 P3 后置；不增加 UI-10 全库关闭数                                                                          |
 | `LxCascader`         | `design/表单控件八件套/`（无专属画板）            | 当前版单测/E2E、A/B 和代码复审完成；P2 为移动换行密度、错误旧状态、主题入口；按 Select 控件外形与状态令牌映射                                                                              |
-| `LxCheckbox`         | `design/表单控件八件套/`                          | A/B 与行为证据完成；文档窄屏 P2 已关闭；UI-10 严格设计矩阵仍开放                                                                                                                           |
-| `LxCheckboxGroup`    | `design/表单控件八件套/`                          | A/B、半选、禁用与触屏验收完成；文档窄屏 P2 已关闭；UI-10 严格设计矩阵仍开放                                                                                                                |
+| `LxCheckbox`         | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；14px 三态、hover/focus/disabled、旧 label 兼容、Light/HUD 与 44px 触屏均有当前版证据；23/23 单测及 16/16 合并 E2E 见 Wave 19 记录 |
+| `LxCheckboxGroup`    | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/12px 垂直间距、半选、禁用继承、值过滤及键盘/触屏行为均有当前版证据；剩余仅非阻塞 P3          |
 | `LxCodeSlot`         | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；代码区层级、复制反馈与窄屏                                                                                                                                                     |
 | `LxDatePicker`       | `design/表单控件八件套/`                          | Wave 2 E2E 16/16、单测 39/39；A 31/40、B 9 场景、代码复审通过；4 项 P2/P3 未结，严格矩阵行保持打开                                                                                         |
 | `LxDescriptions`     | `design/详情描述行 Descriptions/`                 | 部分证据；19/20 阶段审查不是正式关闭                                                                                                                                                       |
@@ -277,11 +285,11 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxPagination`       | `DESIGN-SPEC.md` + Pagination API/Demo            | 待严格复核；密度、分页按钮、背景与窄屏                                                                                                                                                     |
 | `LxPasswordInput`    | `design/表单控件八件套/` + PasswordInput API/Demo | A 32/40、B overlay/浏览器、代码复审通过；10/10 单测、9/9 E2E；宿主校验失败集成示例 P2 待 Form 波次，因此严格行保持打开                                                                     |
 | `LxProTable`         | `DESIGN-SPEC.md` + ProTable API/Demo              | 待严格复核；表头/行密度、选择、空错态和滚动                                                                                                                                                |
-| `LxRadio`            | `design/表单控件八件套/`                          | A/B 与行为证据完成；中文播报、触屏和减少动效通过；文档窄屏 P2 已关闭，UI-10 严格设计矩阵仍开放                                                                                             |
-| `LxRadioGroup`       | `design/表单控件八件套/`                          | A/B、键盘及禁用态验收完成；文档窄屏 P2 已关闭；UI-10 严格设计矩阵仍开放                                                                                                                    |
+| `LxRadio`            | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；14px 靶环/6px 靶心、横纵选中色差、中文播报、禁用、减少动效与 44px 触屏均有当前版证据                    |
+| `LxRadioGroup`       | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/8px 垂直间距、方向键、禁用继承、历史只读值及 Light/HUD 行为均有当前版证据                   |
 | `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 单测 9/9、文档 E2E 3/3；修后 A/B 已补独立浏览器/overlay 证据，Demo 增加四字段标准态；最终综合快照待收口，严格矩阵保持打开                                                                  |
 | `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                                                                                                       |
-| `LxSelect`           | `design/表单控件八件套/`                          | Wave 17 当前版 A/B、overlay、代码复审完成；单测 11/11、文档 E2E 3/3；桌面 32px、窄屏 44px；UI-10 全库仍为 0/52                                                                             |
+| `LxSelect`           | `design/表单控件八件套/`                          | Wave 17 当前版 A/B、overlay、代码复审完成；单测 11/11、文档 E2E 3/3；桌面 32px、窄屏 44px；本项仍待 UI-10 严格矩阵复核（全库当前 4/52）                                                    |
 | `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                                                                          |
 | `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                                                                                               |
 | `LxSidebar`          | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；rail/expanded、菜单态、动效和抽屉                                                                                                                                              |

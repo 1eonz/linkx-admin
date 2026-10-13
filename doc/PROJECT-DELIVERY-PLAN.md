@@ -5,6 +5,13 @@
 - 页面操作引导当前不执行、不纳入待办、执行队列或排期，也不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
 - `doc/GUIDE-CONTENT-PLAN.md` 仅保留需求与文案草案；后续明确有需要时，再重新确认页面范围、文案与交互、技术方案及后端契约，并纳入计划执行。当前状态不代表功能已实现或验收。
 
+## 2026-10-13 UI-10 / Wave 19 Checkbox 与 Radio 四项严格矩阵登记
+
+- **关闭项**：`LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 已按设计标本、主题/状态、Demo/API、行为和浏览器证据完成统一口径登记；UI-10 当前为 **4/52**。设计尺寸和实现映射、状态适用性及剩余项详见 `doc/lx-ui/COMPONENT-AUDIT.md` Wave 19。
+- **证据**：直接对照 `design/表单控件八件套/screen.png` 与 `code.html` 第 03/04 区；定向单测 23/23，文档 E2E 16/16，当前版类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标格式/Lint 与差异检查通过。Impeccable A 36/40；B 的 8 个静态目标为有效 `[]`/空 stderr/退出码 0，8 个 Light/HUD × 桌面/375px 视图注入成功。独立代码复审关闭空错误断言 P2；正式报告、证据、snapshot/trend 见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/` 与 `.impeccable/critique/2026-10-13T09-44-41Z__linkx-fe-src-components-lxcheckbox-index-vue.md`。
+- **剩余与边界**：共享文档导航密度、未来可编辑表格方向键边界为非阻塞 P3；人工读屏仍未覆盖。组件矩阵关闭不代表 Vue3 宿主替换、真实后端联调、其余 48 项关闭或 Element Plus 可以移除。
+- **下一步**：按矩阵进入 `LxInputNumber`，先复核桌面步进目标高度的既有 P2，并按同一标准记录设计依据、交互、A/B、浏览器证据与复审结论；完成后再按组件审计顺序推进余下基础控件、动态图标、`LxDynamicForm`、其余组件及整库门禁。页面操作引导不纳入待办或自动排期。
+
 ## 2026-10-13 lx-ui Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
 - **完成范围**：保留 Checkbox/Radio 文档 `disabled` 长说明的折叠呈现、至少 44px 摘要和可见键盘焦点；375px 下 7 张明显溢出表可提示、固定首列、方向键滚动并关联 `aria-describedby`，3 张短溢出表不增加无效提示或 Tab 停靠。Checkbox Demo 将知情确认与通知渠道分组并加入授权范围必填校验；Radio Demo 将历史只读快照独立展示并加入响应通道必填校验。同步修正禁用勾选/半选标记对比度、Radio hover/纵向选中/禁用文字样式和中文文档。

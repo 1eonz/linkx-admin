@@ -1,5 +1,12 @@
 # LinkX 项目地图
 
+## 2026-10-13 Wave 19 / Checkbox 与 Radio 四项 UI-10 严格矩阵登记
+
+- **组件与设计源**：`LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 对照 `design/表单控件八件套/screen.png` 与 `code.html` 第 03/04 区；组件矩阵记录了尺寸/间距、主题令牌、交互差异和不适用状态。
+- **验证与审查**：单测 23/23、文档 E2E 16/16；lx-ui 类型检查/构建、VitePress、Vue3 类型检查、目标格式/Lint 通过。Impeccable A 36/40；B 8 个 detector 为合法 `[]`/空 stderr/退出码 0，8 个 Light/HUD × 桌面/375px 视图注入成功；独立代码复审关闭空错误断言 P2。
+- **证据与边界**：报告和浏览器原始证据在 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`，正式快照在 `.impeccable/critique/2026-10-13T09-44-41Z__linkx-fe-src-components-lxcheckbox-index-vue.md`。UI-10 当前 **4/52**；不代表 Vue3 宿主替换、真实后端联调或全库门禁完成。两个非阻塞共享文档 P3 留在审计记录中。
+- **下一入口**：`doc/lx-ui/COMPONENT-AUDIT.md` 中 `LxInputNumber` 桌面步进目标尺寸 P2；页面操作引导当前不执行、不纳入待办或排期。
+
 ## 2026-10-13 Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
 - **组件与 Demo**：`LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 的样式和中文文档按设计稿复核。Checkbox Demo 分开知情确认/通知渠道并演示必填校验；Radio Demo 独立展示只读历史快照并演示必填校验。

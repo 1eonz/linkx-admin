@@ -1,5 +1,12 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-13 UI-10 / Wave 19 Checkbox 与 Radio 四项严格矩阵登记
+
+- `LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 按 `design/表单控件八件套/` 完成矩阵所需的设计源映射、状态适用性、Demo/API、行为和浏览器证据登记；当前 UI-10 为 **4/52**。
+- 定向单测 23/23、文档 E2E 16/16；正式 Impeccable A 36/40，B 的 8 个静态目标均为合法 `[]`/空 stderr/退出码 0，8 个主题/视口浏览器视图注入成功；独立代码复审关闭空错误断言 P2。完整报告、代码复审与 snapshot/trend 见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/` 和 `.impeccable/critique/2026-10-13T09-44-41Z__linkx-fe-src-components-lxcheckbox-index-vue.md`。
+- 无开放组件级 P0–P2；共享文档导航密度、未来可编辑表格键盘边界为非阻塞 P3。此矩阵登记不代表 Vue3 业务组件替换或真实后端联调完成。
+- 下一步进入 `LxInputNumber` 桌面步进目标高度 P2 的严格复核，然后继续基础控件、动态图标、`LxDynamicForm`、其余 lx-ui 组件及正式整库门禁。页面操作引导当前不执行、不纳入待办、执行队列或排期。
+
 ## 2026-10-13 lx-ui Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
 - Checkbox/Radio 文档将 `disabled` API 长说明移入折叠详情；375px 下 7 张明显溢出表格有提示、键盘滚动、首列固定和 ARIA，3 张短溢出表不进入 Tab 顺序。Checkbox/Radio Demo 已加入 LxForm 必填失败、修正恢复和重置场景，并按业务语义拆分知情确认、通知渠道及历史只读快照。
