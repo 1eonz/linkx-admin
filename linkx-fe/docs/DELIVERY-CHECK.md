@@ -1,12 +1,13 @@
 # lx-ui 交付核查
 
-## 2026-10-13 Wave 18 / Checkbox 与 Radio 文档窄屏 P2 已完成
+## 2026-10-13 Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
-- 两份组件中文文档将冗长 `disabled` 说明从 API 表格移入折叠详情；摘要高度不低于 44px，键盘焦点环使用主题品牌色。
-- `useResponsiveDocTable(24)` 对 7 张明显溢出表启用滚动提示、键盘访问、首列固定和描述关联；3 张短溢出表不增加无效提示或焦点停靠。
-- 定向文档 E2E **8/8**；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 ESLint/Prettier 及差异检查通过。Assessment A **33/40（Good）**，无 P0–P2；B 两个 detector 为合法 `[]`/空 stderr/退出码 0，六个视图注入成功且无浏览器错误、失败请求或页面溢出。代码复审无开放 P0–P3。
-- 正式 A/B、detector 三件套、浏览器证据、综合报告、snapshot 和趋势记录见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`。Detector `[]` 不单独代表视觉审查通过。
-- 本波不增加 UI-10 全库 0/52 关闭数，不代表宿主替换、Element Plus 移除或真实后端联调。下一步进入 Checkbox/Radio 四个组件的严格设计矩阵复核；页面操作引导暂缓、不纳入当前排期。
+- 组件中文文档将冗长 `disabled` 说明移入折叠详情；摘要至少 44px，键盘焦点环使用主题品牌色。`useResponsiveDocTable(24)` 对 7 张明显溢出表提供提示、键盘访问、首列固定和描述关联；3 张短溢出表不增加无效提示或焦点停靠。
+- Checkbox Demo 区分知情确认/通知渠道并含必填校验；Radio Demo 单独呈现历史只读快照并含必填校验。定向单测 **20/20**，当前版文档 E2E **10/10**。
+- lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 Prettier、E2E 测试文件 ESLint 和差异检查通过。Vue3 ESLint 忽略 `linkx-fe` 组件源文件，不作为组件库 ESLint 通过依据。
+- Impeccable A **34/40（Good）**，两项示例分组 P3 已经复验关闭，无开放 P0–P2。B 四个 detector 为合法 `[]`/空 stderr/退出码 0；8 个浏览器视图注入成功，无浏览器错误或失败请求。Radio HUD 两条选中态命中与主题主色一致，移动端根宽变化来自注入的 overlay。独立代码复审确认旧版证据 P2 已在全部台账关闭，无开放 P0–P2。桌面 VitePress 文档导航密度作为共享外壳 P3 单独跟踪。
+- A/B、detector 三件套、浏览器证据、当前源码指纹与综合报告见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`；旧版 8/8 和六视图只作历史记录，静态 `[]` 不单独代表视觉审查通过。
+- 本波不增加 UI-10 全库 0/52 关闭数，不代表四个组件矩阵全部关闭、宿主替换、Element Plus 移除或真实后端联调。页面操作引导不纳入当前或后续自动执行队列，用户明确重新提出后再评估。
 
 ## 2026-10-13 Wave 17 / LxSelect 当前版组件级复核完成
 

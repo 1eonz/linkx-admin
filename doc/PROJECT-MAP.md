@@ -1,12 +1,14 @@
 # LinkX 项目地图
 
-## 2026-10-13 Wave 18 / Checkbox 与 Radio 文档窄屏 P2 已完成
+## 2026-10-13 Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
-- **组件文档**：`linkx-fe/docs/components/lxcheckbox.md` 与 `lxradio.md` 将禁用样式、主题令牌和表单继承规则移出长表格行，统一为折叠说明；摘要最小高度 44px，并使用品牌色键盘焦点环。
-- **响应式表格**：`useResponsiveDocTable(24)` 在明显溢出时提供横向提示、键盘滚动和固定首列；7 张表启用，3 张短溢出表保持非焦点停靠。
-- **入口与验证**：回归见 `other-admin/admin-vue3/tests/e2e/lx-checkbox-radio-docs.spec.ts`（8/8）；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 Lint/Prettier 及差异检查通过。Assessment A 33/40（Good），无 P0–P2；B 两个 detector 均为 `[]`/空 stderr/退出码 0，六个浏览器视图无失败请求、页面错误或根节点横向溢出；独立代码复审无开放 P0–P3。
-- **证据**：原始 A/B、代码复审和综合报告、snapshot、趋势记录见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`。静态 detector `[]` 只表示对应源码规则零命中。
-- **边界与下一步**：本波只关闭文档可读性 P2，四个组件的 UI-10 严格矩阵行仍开放，全库口径保持 0/52；不代表 Vue3 宿主替换或移除 Element Plus。页面操作引导仍暂缓；随后按组件审计矩阵严格复核 Checkbox/CheckboxGroup/Radio/RadioGroup。
+- **组件与 Demo**：`LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 的样式和中文文档按设计稿复核。Checkbox Demo 分开知情确认/通知渠道并演示必填校验；Radio Demo 独立展示只读历史快照并演示必填校验。
+- **响应式表格**：`useResponsiveDocTable(24)` 在明显溢出时提供横向提示、键盘滚动和固定首列；7 张表启用，3 张短溢出表保持非焦点停靠。长 `disabled` 说明移入折叠详情，摘要至少 44px 并显示品牌色焦点环。
+- **入口与验证**：定向单测 20/20、当前文档 E2E 10/10；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 Prettier、E2E 文件 ESLint 和差异检查通过。Vue3 ESLint 忽略 `linkx-fe` 组件源码，未计为组件库 ESLint 通过。
+- **正式复核**：Assessment A 34/40（Good），两个组件示例分组 P3 已在 Light/HUD 桌面及 375px 复验关闭，无开放 P0–P2。B 四个 detector 三件套均为 `[]`/空 stderr/退出码 0，8 个新页面上下文无页面错误和失败请求；Radio HUD 两条命中符合主色令牌，移动根宽变化发生在 overlay 注入之后。独立代码复审确认旧证据 P2 已在所有台账关闭，无开放 P0–P2。
+- **后续 P3**：桌面 VitePress 组件页导航同时展示约 8–10 个同级锚点；作为共享文档外壳的信息架构事项单独评估，不归为组件缺陷，不阻塞本波。
+- **证据与边界**：当前 A/B、代码复审、截图、源码指纹与综合报告见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`；旧版文档 P2 的 8/8、六视图仅作历史记录。当前变更不关闭四个组件的 UI-10 严格矩阵行，全库仍为 0/52，也不代表 Vue3 宿主替换或 Element Plus 移除。页面操作引导不纳入自动执行队列，用户明确重新提出后才评估。
+- **下一步**：按 `doc/lx-ui/COMPONENT-AUDIT.md` 补齐四个组件尚未关闭的严格矩阵证据，再继续基础控件、动态图标、`LxDynamicForm` 和 Vue3 Element Plus 替换。
 
 ## 2026-10-13 Wave 17 / LxSelect 当前版组件级复核完成
 

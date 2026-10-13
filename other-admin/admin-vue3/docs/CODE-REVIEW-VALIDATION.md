@@ -1,10 +1,17 @@
 # GLM 代码评审复核与修复台账
 
-## 2026-10-13 Wave 18 / Checkbox 与 Radio 文档窄屏 P2
+## 2026-10-13 Wave 18 / Checkbox 与 Radio 当前版交付复审
+
+- **范围**：Checkbox/Radio 组件样式、Demo 必填校验、中文文档、文档 E2E 和 Wave 18 计划/交接记录。
+- **结果**：当前版文档 E2E 10/10；Assessment A 34/40，Checkbox/Radio Demo 两项分组 P3 经 Light/HUD 桌面和 375px 复验关闭；Assessment B 四个 detector 均为合法 `[]`/空 stderr/退出码 0，8 个视图无页面错误或失败请求。旧记录的 8/8 明确限定为历史窄屏文档 P2 初验。
+- **代码复审**：两轮独立复核确认旧版 8/8、六视图、A 33/40 和旧证据目录均已限定为历史初验；组件审计摘要、计划、地图、交接、迁移和库内交付台账已同步当前版 10/10 E2E、A 34/40 与 B 八视图。旧证据 P2 全仓关闭，无开放 P0–P2。桌面 VitePress 文档页内导航约有 8–10 个同级锚点，作为共享文档外壳 P3 单独跟踪，不是组件缺陷。
+- **验证边界**：lx-ui ESLint 未由 Vue3 工程证明，因为该 ESLint 将 `linkx-fe` 路径标记为 ignored；已通过的是 E2E 文件 ESLint。静态 detector `[]` 仅表示静态规则零命中。
+
+## 2026-10-13 Wave 18 / Checkbox 与 Radio 文档窄屏 P2 初审（历史版本）
 
 - **范围**：`lxcheckbox.md`、`lxradio.md`、VitePress 组件文档主题 CSS、响应式文档表格逻辑和 Checkbox/Radio 文档 E2E。
-- **结论**：独立只读代码复审未发现开放 P0–P3。复审提出的 Checkbox 灰底标本出处保真问题已补回折叠说明，并加强 E2E 对出处、Space 和 Enter 开合的断言；24px 溢出阈值保留默认调用兼容，回归覆盖 7 张滚动表和 3 张短溢出表。
-- **主任务验证**：最终文档 E2E 8/8、lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 ESLint/Prettier、`git diff --check` 通过。Assessment A 33/40（Good），无 P0–P2；B 两个 detector 均为合法 `[]`/空 stderr/退出码 0，六个浏览器视图无失败请求、浏览器错误或页面横向溢出。
+- **结论**：独立只读代码复审未发现开放实现问题。复审提出的 Checkbox 灰底标本出处保真问题已补回折叠说明，并加强 E2E 对出处、Space 和 Enter 开合的断言；24px 溢出阈值保留默认调用兼容，回归覆盖 7 张滚动表和 3 张短溢出表。当前工作区新增 Demo 校验后，旧版 8/8 不再作为当前交付结果。
+- **初审验证**：该阶段文档 E2E 为 8/8，Assessment A 33/40（Good），B 完成六个浏览器视图。此数据仅代表当时窄屏文档 P2 初验；当前版本数值和证据见上方 Wave 18 当前版记录。
 - **复审证据**：综合报告、A/B 原始证据与复审记录见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`。静态 detector `[]` 只说明静态规则零命中。
 
 ## 2026-10-07 Wave 6 lx-ui 组件审核收口

@@ -1,16 +1,16 @@
 # Vue2 到 Vue3 迁移 Backlog
 
-## 2026-10-13 lx-ui Wave 18 / Checkbox 与 Radio 文档窄屏 P2 已完成
+## 2026-10-13 lx-ui Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
-- Checkbox/Radio 文档将 `disabled` API 长说明移入折叠详情，摘要高度至少 44px 并提供品牌色键盘焦点环；主题值及组件组/ElForm 禁用继承说明完整保留。
-- 375px 下 7 张明显溢出表格保留横向提示、键盘滚动、首列固定和 ARIA；3 张短溢出表不进入 Tab 顺序。定向文档 E2E 8/8。
-- lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 ESLint/Prettier、差异检查通过；文档 E2E 8/8。Assessment A 33/40（Good），无 P0–P2；B 的静态 detector 与六个浏览器视图正式完成；独立代码复审无开放 P0–P3。
-- 本波仅关闭组件文档可读性 P2，不改变 Element Plus 替换矩阵、UI-10 全库 0/52 或 Vue3 宿主依赖；页面操作引导仍不排期。下一步按组件矩阵严格复核 Checkbox、CheckboxGroup、Radio、RadioGroup。正式证据见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`。
+- Checkbox/Radio 文档将 `disabled` API 长说明移入折叠详情；375px 下 7 张明显溢出表格有提示、键盘滚动、首列固定和 ARIA，3 张短溢出表不进入 Tab 顺序。Checkbox/Radio Demo 已加入 LxForm 必填失败、修正恢复和重置场景，并按业务语义拆分知情确认、通知渠道及历史只读快照。
+- 定向单测 **20/20**、当前文档 E2E **10/10**；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 Prettier、E2E 文件 ESLint 和差异检查通过。Vue3 ESLint 忽略 `linkx-fe` 源文件，不计作组件库 ESLint 通过。
+- Assessment A 34/40（Good），两个示例分组 P3 已在 Light/HUD 桌面与 375px 视口复验关闭；B 四个 detector 三件套均为有效 `[]`/空 stderr/退出码 0，8 个视图无页面错误或失败请求。Radio HUD 主色命中属于设计令牌误报；移动根宽增加只发生在 overlay 注入后。独立代码复审确认旧版证据 P2 已在组件审计摘要及各交付台账关闭，无开放 P0–P2。桌面文档导航密度 P3 属于共享 VitePress 外壳，单独评估。
+- 旧版 8/8 和六视图结果只作为窄屏文档 P2 的历史初验，当前证据见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`。本波不关闭 UI-10 全库 0/52 或四个组件严格矩阵，也不改变 Element Plus 替换矩阵、Vue3 宿主依赖或真实后端联调范围。页面操作引导整体暂缓，用户重新提出后再评估。
 
-## 2026-10-13 范围备注：页面操作引导暂不考虑
+## 2026-10-13 范围备注：页面操作引导整体暂缓
 
-- 页面操作引导当前不纳入 Vue3 迁移任务队列或排期，也不作为 lx-ui 收口及 Element Plus 替换的前置条件。
-- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 保留为历史需求和未来设计基线；后续确有需要时，再确认页面范围、文案、交互、技术方案及后端契约，并单独评估实施安排。
+- 页面操作引导不纳入当前或后续自动推进的执行队列，不安排开发、评审或验收，也不作为 lx-ui 收口及 Element Plus 替换的前置条件。
+- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅保留为历史需求和设计基线；只有用户之后明确重新提出需要时，才重新确认页面范围、文案、交互、技术方案及后端契约，并单独评估排期。
 - 此范围备注不代表页面操作引导已经实现或验收，也不改变当前 lx-ui 和 Vue3 组件迁移顺序。
 
 ## 2026-10-13 lx-ui Wave 17 / LxSelect 当前版组件复核完成

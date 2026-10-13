@@ -1,12 +1,12 @@
 # lx-ui 路线图
 
-## 2026-10-13 Wave 18 / Checkbox 与 Radio 文档窄屏 P2 已完成
+## 2026-10-13 Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
-- Checkbox/Radio 的 `disabled` 行已简化，主题与表单禁用继承说明改用共同折叠结构；摘要至少 44px 高，键盘焦点使用品牌色外框。
-- 375px 浏览器回归覆盖 7 张明显溢出表的提示、固定首列、ARIA 和方向键，以及 3 张短溢出表不进入 Tab 顺序；disabled 折叠项覆盖键盘展开/关闭和主题契约。
-- 文档 E2E **8/8**、lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 ESLint/Prettier 和 `git diff --check` 通过。A **33/40（Good）**，无 P0–P2；B 两个 detector 为合法 `[]`/空 stderr/退出码 0，六个视图无失败请求、浏览器错误和页面横向溢出；代码复审无开放 P0–P3。
-- A/B、detector 三件套、截图、源码指纹、综合报告、snapshot 与趋势记录见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`；`[]` 只代表静态扫描规则零命中。
-- 本波不改变 UI-10 全库 **0/52** 口径，不代表 Vue3 页面组件替换或真实后端联调。下一步按审计矩阵复核 Checkbox/CheckboxGroup/Radio/RadioGroup；页面操作引导暂缓且不排期。
+- Checkbox/Radio 样式、Demo 与中文 API 按设计稿复核。Checkbox Demo 区分知情确认和通知渠道并演示 LxForm 必填校验；Radio Demo 分离当前选择和只读历史快照并演示必填校验。禁用勾选/半选、Radio hover/纵向选中/禁用文字均按设计与主题令牌调整。
+- 375px 浏览器回归覆盖 7 张明显溢出表的提示、固定首列、ARIA 和方向键，以及 3 张短溢出表不进入 Tab 顺序。定向单测 **20/20**、当前文档 E2E **10/10**；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 Prettier、E2E 测试文件 ESLint 和 `git diff --check` 通过。Vue3 ESLint 忽略 `linkx-fe` 源文件，未计作组件库 ESLint 通过。
+- Assessment A **34/40（Good）**；两个示例分组 P3 已由 Light/HUD 桌面与 375px 视觉复验关闭，无开放 P0–P2。B 四个 detector 均为合法 `[]`/空 stderr/退出码 0，8 个独立视图无页面错误或失败请求。Radio HUD 两个选中标签命中符合主色令牌；375px 根宽增加仅发生在 overlay 注入后。独立代码复审确认旧版证据 P2 已在各交付台账关闭，无开放 P0–P2。桌面 VitePress 文档导航密度留为共享外壳 P3 单独评估。
+- 当前 A/B、截图、源码指纹、综合报告和代码复审见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`。旧版文档 P2 的 **8/8** 和六视图是历史结果；detector `[]` 只表示静态规则零命中。
+- 本波不改变 UI-10 全库 **0/52** 口径，不代表四个组件严格矩阵全部关闭、Vue3 页面替换或真实后端联调。下一步按审计矩阵补齐 Checkbox/CheckboxGroup/Radio/RadioGroup 尚未关闭项；页面操作引导整体暂缓，只有用户重新提出需要时才恢复评估。
 
 ## 2026-10-13 Wave 17 / LxSelect 当前版组件级复核完成
 
