@@ -15,7 +15,7 @@ export interface LxCheckboxProps {
   modelValue?: LxCheckboxValue
   /** 组内该项的选中值（配合 LxCheckboxGroup，仅支持 string 或 number） */
   value?: string | number
-  /** 无插槽时的文字回退内容；未传 value 时按 EP 旧契约兼作选中值 */
+  /** 无插槽时的文字回退内容；未传 value 时兼作组选中值，由组件映射到内核的 value */
   label?: string
   /**
    * 禁用态：浅色主题文字使用 --lx-color-info（#909399），HUD 下跟随 HUD 次级文字色。

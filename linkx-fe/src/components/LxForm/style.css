@@ -47,13 +47,19 @@
   font-size: 11px;
 }
 
+/* 校验状态防抖退出时可能短暂保留空节点，不让空提示占位或显示错误图标。 */
+.lx-form .el-form-item__error:empty,
+.lx-form-item .el-form-item__error:empty {
+  display: none;
+}
+
 .lx-form .el-form-item.is-error .el-form-item__error,
 .lx-form-item.el-form-item.is-error .el-form-item__error {
   color: var(--lx-color-form-error);
 }
 
-.lx-form .el-form-item__error::before,
-.lx-form-item .el-form-item__error::before {
+.lx-form .el-form-item__error:not(:empty)::before,
+.lx-form-item .el-form-item__error:not(:empty)::before {
   content: '';
   flex-shrink: 0;
   width: 12px;

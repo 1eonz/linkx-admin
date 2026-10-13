@@ -9,13 +9,26 @@ const hintedTableSelector = '.vp-doc p.lx-doc-table-scroll-hint + table'
 export function useResponsiveDocTable(minOverflowPx = 0) {
   let tables: HTMLTableElement[] = []
   const observers: ResizeObserver[] = []
+  const removeKeydownListeners: (() => void)[] = []
+
+  const getMinOverflowPx = (table: HTMLTableElement) => {
+    const hint = table.previousElementSibling
+    const override =
+      hint instanceof HTMLElement ? hint.dataset.minOverflowPx : undefined
+    const parsedOverride =
+      override === undefined ? Number.NaN : Number(override)
+
+    return Number.isFinite(parsedOverride) && parsedOverride >= 0
+      ? parsedOverride
+      : minOverflowPx
+  }
 
   const syncKeyboardAccess = (table: HTMLTableElement) => {
     const hint = table.previousElementSibling
-
+    const minOverflow = getMinOverflowPx(table)
     const overflowWidth = table.scrollWidth - table.clientWidth
 
-    if (overflowWidth > 0 && overflowWidth >= minOverflowPx) {
+    if (overflowWidth > 0 && overflowWidth >= minOverflow) {
       table.tabIndex = 0
       if (hint instanceof HTMLElement && hint.id) {
         hint.classList.add('is-scrollable')
@@ -42,12 +55,43 @@ export function useResponsiveDocTable(minOverflowPx = 0) {
       const observer = new ResizeObserver(() => syncKeyboardAccess(table))
       if (table.parentElement) observer.observe(table.parentElement)
       observers.push(observer)
+
+      const handleKeydown = (event: KeyboardEvent) => {
+        if (
+          event.altKey ||
+          event.ctrlKey ||
+          event.metaKey ||
+          !['ArrowLeft', 'ArrowRight'].includes(event.key)
+        ) {
+          return
+        }
+
+        const maxScrollLeft = table.scrollWidth - table.clientWidth
+        if (maxScrollLeft < getMinOverflowPx(table)) return
+
+        const step = Math.max(32, Math.floor(table.clientWidth * 0.8))
+        const direction = event.key === 'ArrowRight' ? 1 : -1
+        const nextScrollLeft = Math.max(
+          0,
+          Math.min(maxScrollLeft, table.scrollLeft + direction * step),
+        )
+        if (nextScrollLeft === table.scrollLeft) return
+
+        event.preventDefault()
+        table.scrollLeft = nextScrollLeft
+      }
+
+      table.addEventListener('keydown', handleKeydown)
+      removeKeydownListeners.push(() =>
+        table.removeEventListener('keydown', handleKeydown),
+      )
     }
     window.addEventListener('resize', syncAllKeyboardAccess)
   })
 
   onUnmounted(() => {
     observers.forEach((observer) => observer.disconnect())
+    removeKeydownListeners.forEach((removeListener) => removeListener())
     window.removeEventListener('resize', syncAllKeyboardAccess)
   })
 }

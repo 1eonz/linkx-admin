@@ -14,9 +14,17 @@ const { isDark } = useData()
 /** 组内多选：关联授权业务权限（标本 04）；组值集合对齐 EP 契约（string | number 数组） */
 const permissions = ref<(string | number)[]>(['video'])
 const horizontalPermissions = ref<(string | number)[]>(['briefing'])
+const legacyPermissions = ref<(string | number)[]>(['video'])
+const disabledGroupPermissions = ref<(string | number)[]>(['video'])
+const disabledForm = reactive({
+  agreed: true,
+  channels: ['briefing'] as (string | number)[],
+})
 /** 独立复选：单条承诺确认 */
 const agreed = ref(false)
 const dispatchIndeterminate = ref(true)
+const permissionChangeMessage = ref('勾选后在此显示更新的组选中值')
+const legacyChangeMessage = ref('旧 label 组初始选中值：视频巡查权限')
 const validationFormRef = ref<LxFormInstance>()
 const validationForm = reactive({ permissions: [] as string[] })
 const validationFeedback = ref('')
@@ -53,10 +61,21 @@ function formatSelected(
     : '无'
 }
 
+function reportPermissionChange(values: (string | number)[]) {
+  permissionChangeMessage.value =
+    '组选中值已更新：' + formatSelected(values, permissionLabels)
+}
+
+function reportLegacyChange(values: (string | number)[]) {
+  legacyChangeMessage.value =
+    '旧 label 组选中值已更新：' + formatSelected(values, permissionLabels)
+}
+
 function validatePermissions() {
   validationFormRef.value
     ?.validate()
     .then(() => {
+      validationFormRef.value?.clearValidate('permissions')
       validationFeedbackIsError.value = false
       validationFeedback.value = '权限校验通过'
     })
@@ -128,6 +147,7 @@ onBeforeUnmount(() => {
         v-model="permissions"
         vertical
         aria-label="关联授权业务权限"
+        @change="reportPermissionChange"
       >
         <LxCheckbox value="video">视频巡查权限 (已授权)</LxCheckbox>
         <LxCheckbox
@@ -143,6 +163,13 @@ onBeforeUnmount(() => {
         >
       </LxCheckboxGroup>
       <p class="lx-checkbox-demo__tip">半选表示部分授权；禁用项不可更改</p>
+      <p
+        class="lx-checkbox-demo__status"
+        data-testid="permission-change-message"
+        aria-live="polite"
+      >
+        {{ permissionChangeMessage }}
+      </p>
     </section>
 
     <section class="lx-checkbox-demo__panel" data-testid="standalone">
@@ -165,18 +192,6 @@ onBeforeUnmount(() => {
       <p class="lx-checkbox-demo__tip">
         独立复选框使用布尔值；组内选项使用字符串或数字值
       </p>
-    </section>
-
-    <section
-      class="lx-checkbox-demo__panel"
-      data-testid="disabled-states"
-      aria-label="禁用复选框的选中与半选回显"
-    >
-      <h3>禁用状态的选中与半选回显</h3>
-      <LxCheckbox :model-value="true" disabled>已分配的受限权限</LxCheckbox>
-      <LxCheckbox :model-value="false" indeterminate disabled>
-        部分分配的受限权限
-      </LxCheckbox>
     </section>
 
     <section class="lx-checkbox-demo__panel" data-testid="validation">
@@ -232,6 +247,84 @@ onBeforeUnmount(() => {
     <p class="lx-checkbox-demo__note">
       示例状态只保存在当前页面，不会写入业务系统。
     </p>
+
+    <details
+      class="lx-checkbox-demo__advanced"
+      data-testid="checkbox-advanced-examples"
+    >
+      <summary>旧值兼容与禁用继承示例</summary>
+      <div class="lx-checkbox-demo__advanced-content">
+        <section class="lx-checkbox-demo__panel" data-testid="legacy">
+          <h3>旧版 label 组选中值兼容</h3>
+          <LxCheckboxGroup
+            v-model="legacyPermissions"
+            aria-label="旧版 label 权限范围"
+            @change="reportLegacyChange"
+          >
+            <LxCheckbox label="video">视频巡查权限</LxCheckbox>
+            <LxCheckbox label="broadcast">全网广播调度</LxCheckbox>
+          </LxCheckboxGroup>
+          <p
+            class="lx-checkbox-demo__status"
+            data-testid="legacy-change-message"
+            aria-live="polite"
+          >
+            {{ legacyChangeMessage }}
+          </p>
+        </section>
+
+        <section
+          class="lx-checkbox-demo__panel"
+          data-testid="disabled-states"
+          aria-label="禁用复选框的选中与半选回显"
+        >
+          <h3>禁用状态的选中与半选回显</h3>
+          <LxCheckbox :model-value="true" disabled>已分配的受限权限</LxCheckbox>
+          <LxCheckbox :model-value="false" indeterminate disabled>
+            部分分配的受限权限
+          </LxCheckbox>
+          <div
+            class="lx-checkbox-demo__example"
+            data-testid="checkbox-group-disabled"
+          >
+            <h4>整组禁用</h4>
+            <LxCheckboxGroup
+              v-model="disabledGroupPermissions"
+              disabled
+              aria-label="整组禁用的授权范围"
+            >
+              <LxCheckbox value="video">视频巡查权限</LxCheckbox>
+              <LxCheckbox value="broadcast">全网广播调度</LxCheckbox>
+            </LxCheckboxGroup>
+          </div>
+          <div
+            class="lx-checkbox-demo__example"
+            data-testid="checkbox-form-disabled"
+          >
+            <h4>LxForm 禁用继承</h4>
+            <LxForm :model="disabledForm" disabled label-position="top">
+              <LxFormItem label="独立确认" prop="agreed">
+                <LxCheckbox
+                  v-model="disabledForm.agreed"
+                  aria-label="继承表单禁用的独立确认"
+                >
+                  已知晓涉密核验义务
+                </LxCheckbox>
+              </LxFormItem>
+              <LxFormItem label="通知渠道" prop="channels">
+                <LxCheckboxGroup
+                  v-model="disabledForm.channels"
+                  aria-label="继承表单禁用的通知渠道"
+                >
+                  <LxCheckbox value="briefing">警情简报</LxCheckbox>
+                  <LxCheckbox value="dispatch">勤务调度</LxCheckbox>
+                </LxCheckboxGroup>
+              </LxFormItem>
+            </LxForm>
+          </div>
+        </section>
+      </div>
+    </details>
   </div>
 </template>
 
@@ -240,8 +333,8 @@ onBeforeUnmount(() => {
   display: grid;
   gap: 16px;
   padding: 16px;
-  background: var(--lx-bg-page);
   color: var(--lx-text-primary);
+  background: var(--lx-bg-page);
 }
 
 .lx-checkbox-demo__toolbar {
@@ -252,12 +345,12 @@ onBeforeUnmount(() => {
 
 .lx-checkbox-demo__toolbar label {
   display: inline-flex;
-  min-height: 44px;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+  min-height: 44px;
   padding-inline: 4px;
-  border-radius: var(--lx-radius-sm);
   cursor: pointer;
+  border-radius: var(--lx-radius-sm);
 }
 
 .lx-checkbox-demo__theme-toggle:focus-within {
@@ -267,32 +360,59 @@ onBeforeUnmount(() => {
 
 .lx-checkbox-demo__panel {
   display: grid;
-  min-width: 0;
   gap: 12px;
+  min-width: 0;
   padding: 12px;
+  background: var(--lx-bg-card);
   border: 1px solid var(--lx-border);
   border-radius: var(--lx-radius-sm);
-  background: var(--lx-bg-card);
 }
 
 .lx-checkbox-demo__panel h3 {
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--lx-text-regular);
 }
 
 .lx-checkbox-demo__example {
   display: grid;
-  min-width: 0;
   gap: 8px;
+  min-width: 0;
 }
 
 .lx-checkbox-demo__example h4 {
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--lx-text-regular);
+}
+
+.lx-checkbox-demo__advanced {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.lx-checkbox-demo__advanced summary {
+  min-height: 44px;
+  padding: 10px 4px;
+  color: var(--lx-text-regular);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lx-checkbox-demo__advanced summary:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+  border-radius: var(--lx-radius-sm);
+}
+
+.lx-checkbox-demo__advanced-content {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
 }
 
 .lx-checkbox-demo__actions {
@@ -306,7 +426,7 @@ onBeforeUnmount(() => {
 .lx-checkbox-demo__tip,
 .lx-checkbox-demo__feedback {
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--lx-text-regular);
 }
 

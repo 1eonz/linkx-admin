@@ -1,8 +1,6 @@
 # LxRadio / LxRadioGroup 单选组
 
-基于 Element Plus `el-radio` / `el-radio-group` 内核封装，支持独立单选、组内单选和横纵排布。Demo 另展示只读历史值；禁用值位于组外，不影响组内键盘停靠。
-
-视觉规范源：`design/表单控件八件套/code.html` 03。
+用于在多个候选项中选择一项，例如权限范围或勤务响应等级；支持独立单选、组内单选和横纵排布。
 
 ## 交互示例
 
@@ -17,11 +15,15 @@ useResponsiveDocTable(24);
 
 ## 表单校验与错误恢复
 
-Demo 包含必填响应通道组。未选择时提交会显示字段错误；选择一个通道后再次提交即可通过，也可重置表单。示例只使用 `LxForm`、`LxFormItem` 和组件库控件，不会发送业务请求。
+Demo 包含必填响应通道组。未选择时提交会显示字段错误；选择一个通道后再次提交即可通过，也可重置表单。独立控件示例通过共享 `v-model` 与原生 `name` 同步选项。示例只使用 `LxForm`、`LxFormItem` 和组件库控件，不会发送业务请求。
 
 ::: details 查看示例代码
 <<< ../../src/components/LxRadio/demo/basic.vue
 :::
+
+## 实现与辅助示例
+
+组件封装 Element Plus `el-radio` / `el-radio-group`，保留组内键盘操作和旧版 `label` 值兼容。Demo 首屏展示独立 `LxRadio` 的父级共享模型与勤务响应等级组；只读历史值、旧版 `label` 用法、整组禁用及 `LxForm` 禁用继承位于默认折叠的辅助示例中。
 
 ## LxRadio Props
 
@@ -73,7 +75,7 @@ Demo 包含必填响应通道组。未选择时提交会显示字段错误；选
 
 ## Slots
 
-<p id="lx-radio-slots-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
+<p id="lx-radio-slots-hint" data-min-overflow-px="1" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
 
 | 组件           | 名称      | 说明                              |
 | -------------- | --------- | --------------------------------- |
@@ -92,6 +94,8 @@ Demo 包含必填响应通道组。未选择时提交会显示字段错误；选
 ```
 
 ## 与标本的对齐说明
+
+视觉对照来源：`design/表单控件八件套/code.html` 03。
 
 <p id="lx-radio-design-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
 

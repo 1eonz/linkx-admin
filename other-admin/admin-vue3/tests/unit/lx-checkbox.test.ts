@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { ElForm } from 'element-plus';
 import { LxCheckbox, LxCheckboxGroup } from 'lx-ui';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { h } from 'vue';
 
 /** 组装"组 + 多项"的测试挂载 */
@@ -129,7 +129,11 @@ describe('LxCheckbox', () => {
     wrapper.unmount();
   });
 
-  it('falls back to the label prop as the option value (EP legacy contract)', () => {
+  it('兼容 label 作为组选中值的旧用法，且不触发 Element Plus 弃用警告', () => {
+    const warnings: string[] = [];
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation((...args) => {
+      warnings.push(args.map(String).join(' '));
+    });
     const wrapper = mount(LxCheckboxGroup, {
       props: { modelValue: ['video'] },
       slots: {
@@ -140,9 +144,50 @@ describe('LxCheckbox', () => {
       },
     });
 
-    const [first, second] = wrapper.findAll('.lx-checkbox');
-    expect(first?.classes()).toContain('is-checked');
-    expect(second?.classes()).not.toContain('is-checked');
+    try {
+      const [first, second] = wrapper.findAll('.lx-checkbox');
+      expect(first?.classes()).toContain('is-checked');
+      expect(second?.classes()).not.toContain('is-checked');
+      expect(warnings.join('\n')).not.toContain('label act as value');
+    } finally {
+      wrapper.unmount();
+      warnSpy.mockRestore();
+    }
+  });
+
+  it('旧 label 用法切换后仍以 label 值更新组数组', async () => {
+    const wrapper = mount(LxCheckboxGroup, {
+      props: { modelValue: ['video'] },
+      slots: {
+        default: () => [
+          h(LxCheckbox, { label: 'video' }, { default: () => '视频巡查权限' }),
+          h(LxCheckbox, { label: 'broadcast' }, { default: () => '全网广播调度' }),
+        ],
+      },
+    });
+
+    await wrapper.findAll('input[type="checkbox"]')[1]?.setValue(true);
+
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['video', 'broadcast']]);
+    expect(wrapper.emitted('change')?.at(-1)).toEqual([['video', 'broadcast']]);
+    wrapper.unmount();
+  });
+
+  it('显式 value 优先于 label 作为组选中值', async () => {
+    const wrapper = mount(LxCheckboxGroup, {
+      props: { modelValue: ['video'] },
+      slots: {
+        default: () => [h(LxCheckbox, { value: 'video', label: 'broadcast' }, { default: () => '视频巡查权限' })],
+      },
+    });
+
+    const checkbox = wrapper.find('.lx-checkbox');
+    expect(checkbox.classes()).toContain('is-checked');
+
+    await wrapper.find('input[type="checkbox"]').setValue(false);
+
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([[]]);
+    expect(wrapper.emitted('change')?.at(-1)).toEqual([[]]);
     wrapper.unmount();
   });
 
@@ -169,5 +214,17 @@ describe('LxCheckbox', () => {
     expect(indeterminate.find('input[type="checkbox"]').attributes('disabled')).toBeDefined();
     checked.unmount();
     indeterminate.unmount();
+  });
+
+  it('disabled 未显式设置时继承 ElForm 的禁用状态', () => {
+    const wrapper = mount(ElForm, {
+      props: { model: {}, disabled: true },
+      slots: {
+        default: () => h(LxCheckbox, { modelValue: false }, () => '已知晓涉密核验义务'),
+      },
+    });
+
+    expect(wrapper.find('input[type="checkbox"]').attributes('disabled')).toBeDefined();
+    wrapper.unmount();
   });
 });

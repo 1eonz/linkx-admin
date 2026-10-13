@@ -16,6 +16,9 @@ const { isDark } = useData()
 const responseLevel = ref<LxRadioValue>('daily')
 /** 垂直排布：处置通道优先级（标本 03 下行） */
 const channel = ref<LxRadioValue>('encrypted')
+const standaloneChannel = ref<LxRadioValue>('encrypted')
+const disabledGroupLevel = ref<LxRadioValue>('daily')
+const disabledForm = reactive<{ channel: LxRadioValue }>({ channel: 'fiber' })
 /** 旧 label 用法独立演示，避免与垂直组选项状态串联。 */
 const legacyChannel = ref<LxRadioValue>('encrypted')
 const validationFormRef = ref<LxFormInstance>()
@@ -88,6 +91,7 @@ function validateChannel() {
   validationFormRef.value
     ?.validate()
     .then(() => {
+      validationFormRef.value?.clearValidate('channel')
       validationFeedbackIsError.value = false
       validationFeedback.value = '响应通道校验通过'
     })
@@ -159,27 +163,33 @@ watch(
       </p>
     </section>
 
-    <section class="lx-radio-demo__panel" data-testid="readonly-history">
-      <h3>历史配置回显（只读快照）</h3>
-      <div class="lx-radio-demo__readonly" data-testid="checked-disabled">
-        <LxRadio model-value="satellite" value="satellite" disabled>
-          卫星链路直通（链路维护中）
-        </LxRadio>
-      </div>
-    </section>
-
-    <section class="lx-radio-demo__panel" data-testid="legacy">
-      <h3>旧值兼容</h3>
-      <LxRadioGroup
-        v-model="legacyChannel"
-        aria-label="旧版单选值用法"
-        @change="reportChange('旧契约通道', $event, legacyChannelLabels)"
+    <section class="lx-radio-demo__panel" data-testid="standalone">
+      <h3>独立 LxRadio 组合</h3>
+      <fieldset
+        class="lx-radio-demo__standalone"
+        data-testid="standalone-radio-options"
       >
-        <!-- 未传 value 时 label 按 EP 旧契约兼作选中值，存量代码迁移零改动 -->
-        <LxRadio label="encrypted">高密加密专线</LxRadio>
-        <LxRadio label="fiber">光纤骨干网</LxRadio>
-      </LxRadioGroup>
-      <p class="lx-radio-demo__tip">未传 value 时以 label 作为选中值</p>
+        <legend>响应网络（不使用 LxRadioGroup）</legend>
+        <LxRadio
+          v-model="standaloneChannel"
+          value="encrypted"
+          name="standalone-channel"
+          @change="reportChange('独立响应网络', $event, channelLabels)"
+        >
+          高密加密专线
+        </LxRadio>
+        <LxRadio
+          v-model="standaloneChannel"
+          value="fiber"
+          name="standalone-channel"
+          @change="reportChange('独立响应网络', $event, channelLabels)"
+        >
+          光纤骨干网
+        </LxRadio>
+      </fieldset>
+      <p class="lx-radio-demo__tip">
+        两个独立选项共享父级 v-model 和原生 name，change 状态会同步显示
+      </p>
     </section>
 
     <section class="lx-radio-demo__panel" data-testid="validation">
@@ -226,6 +236,72 @@ watch(
     <p class="lx-radio-demo__note">
       示例状态只保存在当前页面，不会写入业务系统。
     </p>
+
+    <details
+      class="lx-radio-demo__advanced"
+      data-testid="radio-advanced-examples"
+    >
+      <summary>旧值兼容与禁用继承示例</summary>
+      <div class="lx-radio-demo__advanced-content">
+        <section class="lx-radio-demo__panel" data-testid="readonly-history">
+          <h3>历史配置回显（只读快照）</h3>
+          <div class="lx-radio-demo__readonly" data-testid="checked-disabled">
+            <LxRadio model-value="satellite" value="satellite" disabled>
+              卫星链路直通（链路维护中）
+            </LxRadio>
+          </div>
+        </section>
+
+        <section
+          class="lx-radio-demo__panel"
+          data-testid="disabled-inheritance"
+        >
+          <h3>组级与表单禁用继承</h3>
+          <div
+            class="lx-radio-demo__example"
+            data-testid="radio-group-disabled"
+          >
+            <h4>整组禁用</h4>
+            <LxRadioGroup
+              v-model="disabledGroupLevel"
+              disabled
+              aria-label="整组禁用的响应等级"
+            >
+              <LxRadio value="daily">日常勤务</LxRadio>
+              <LxRadio value="emergency">应急处突</LxRadio>
+            </LxRadioGroup>
+          </div>
+          <div class="lx-radio-demo__example" data-testid="radio-form-disabled">
+            <h4>LxForm 禁用继承</h4>
+            <LxForm :model="disabledForm" disabled label-position="top">
+              <LxFormItem label="响应等级" prop="channel">
+                <LxRadioGroup
+                  v-model="disabledForm.channel"
+                  aria-label="继承表单禁用的响应等级"
+                >
+                  <LxRadio value="fiber">光纤骨干网</LxRadio>
+                  <LxRadio value="satellite">卫星链路直通</LxRadio>
+                </LxRadioGroup>
+              </LxFormItem>
+            </LxForm>
+          </div>
+        </section>
+
+        <section class="lx-radio-demo__panel" data-testid="legacy">
+          <h3>旧值兼容</h3>
+          <LxRadioGroup
+            v-model="legacyChannel"
+            aria-label="旧版单选值用法"
+            @change="reportChange('旧契约通道', $event, legacyChannelLabels)"
+          >
+            <!-- 未传 value 时 label 按 EP 旧契约兼作选中值，存量代码迁移零改动 -->
+            <LxRadio label="encrypted">高密加密专线</LxRadio>
+            <LxRadio label="fiber">光纤骨干网</LxRadio>
+          </LxRadioGroup>
+          <p class="lx-radio-demo__tip">未传 value 时以 label 作为选中值</p>
+        </section>
+      </div>
+    </details>
   </div>
 </template>
 
@@ -234,8 +310,8 @@ watch(
   display: grid;
   gap: 16px;
   padding: 16px;
-  background: var(--lx-bg-page);
   color: var(--lx-text-primary);
+  background: var(--lx-bg-page);
 }
 
 .lx-radio-demo__toolbar {
@@ -246,12 +322,12 @@ watch(
 
 .lx-radio-demo__toolbar label {
   display: inline-flex;
-  min-height: 44px;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+  min-height: 44px;
   padding-inline: 4px;
-  border-radius: var(--lx-radius-sm);
   cursor: pointer;
+  border-radius: var(--lx-radius-sm);
 }
 
 .lx-radio-demo__theme-toggle:focus-within {
@@ -261,12 +337,12 @@ watch(
 
 .lx-radio-demo__panel {
   display: grid;
-  min-width: 0;
   gap: 12px;
+  min-width: 0;
   padding: 12px;
+  background: var(--lx-bg-card);
   border: 1px solid var(--lx-border);
   border-radius: var(--lx-radius-sm);
-  background: var(--lx-bg-card);
 }
 
 .lx-radio-demo__readonly {
@@ -274,11 +350,66 @@ watch(
   gap: 8px;
 }
 
+.lx-radio-demo__standalone {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.lx-radio-demo__standalone legend {
+  padding: 0;
+  font-size: 14px;
+  color: var(--lx-text-regular);
+}
+
 .lx-radio-demo__panel h3 {
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--lx-text-regular);
+}
+
+.lx-radio-demo__example {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.lx-radio-demo__example h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--lx-text-regular);
+}
+
+.lx-radio-demo__advanced {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.lx-radio-demo__advanced summary {
+  min-height: 44px;
+  padding: 10px 4px;
+  color: var(--lx-text-regular);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lx-radio-demo__advanced summary:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+  border-radius: var(--lx-radius-sm);
+}
+
+.lx-radio-demo__advanced-content {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
 }
 
 .lx-radio-demo__actions {
@@ -292,7 +423,7 @@ watch(
 .lx-radio-demo__tip,
 .lx-radio-demo__feedback {
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--lx-text-regular);
 }
 

@@ -1,4 +1,35 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Locator } from '@playwright/test';
+
+async function expectClearedErrorRowsHidden(form: Locator) {
+  const probe = await form.evaluate((formElement) => {
+    const emptyError = document.createElement('div');
+    emptyError.className = 'el-form-item__error';
+    formElement.append(emptyError);
+
+    const result = {
+      display: getComputedStyle(emptyError).display,
+      height: emptyError.getBoundingClientRect().height,
+      pseudoContent: getComputedStyle(emptyError, '::before').content,
+    };
+
+    emptyError.remove();
+    return result;
+  });
+
+  expect(probe.display).toBe('none');
+  expect(probe.height).toBe(0);
+  expect(['none', 'normal']).toContain(probe.pseudoContent);
+
+  const visibleEmptyErrors = await form.locator('.el-form-item__error').evaluateAll(
+    (errors) =>
+      errors.filter((error) => {
+        if (error.textContent?.trim()) return false;
+        const style = getComputedStyle(error);
+        return style.display !== 'none' && error.getBoundingClientRect().height > 0;
+      }).length,
+  );
+  expect(visibleEmptyErrors).toBe(0);
+}
 
 test.beforeEach(async ({ page }) => {
   // 文档页不访问外部服务，避免浏览器验收触达真实后端。
@@ -12,7 +43,9 @@ test.describe('LxCheckbox 文档示例', () => {
   test('按设计呈现三态与纵向权限列表，并在 HUD 下保留可读状态', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto('/components/lxcheckbox');
+    await page.getByTestId('checkbox-advanced-examples').locator('summary').click();
     const summary = page.getByTestId('selection-summary');
+    await expect(page.getByTestId('permission-change-message')).toHaveText('勾选后在此显示更新的组选中值');
     await expect(summary).toContainText('完全授权：视频巡查权限');
     await expect(summary).toContainText('部分授权：警单流转');
     await expect(summary).toContainText('通知渠道：警情简报； 承诺未勾选');
@@ -109,12 +142,18 @@ test.describe('LxCheckbox 文档示例', () => {
       )
       .not.toBe('none');
 
+    await page.keyboard.press('Space');
+    await expect(selected).not.toBeChecked();
+    await page.keyboard.press('Space');
+    await expect(selected).toBeChecked();
+
     await partialControl.click();
     await expect(partial).toBeChecked();
     await expect(partial).toHaveJSProperty('indeterminate', false);
     await expect(partialControl).not.toHaveAttribute('aria-checked', 'mixed');
     await expect(summary).toContainText('完全授权：视频巡查权限 / 警单流转');
     await expect(summary).toContainText('部分授权：无');
+    await expect(page.getByTestId('permission-change-message')).toHaveText('组选中值已更新：视频巡查权限 / 警单流转');
 
     await selectedControl.hover();
     await expect
@@ -189,6 +228,11 @@ test.describe('LxCheckbox 文档示例', () => {
         uncheckedControl.locator('.el-checkbox__label').evaluate((element) => getComputedStyle(element).color),
       )
       .toBe('rgb(56, 189, 248)');
+    await uncheckedControl.click();
+    await expect(unchecked).toBeChecked();
+    await expect(page.getByTestId('permission-change-message')).toHaveText(
+      '组选中值已更新：视频巡查权限 / 警单流转 / 全网广播调度',
+    );
     await expect
       .poll(() =>
         checkedDisabledControl
@@ -271,6 +315,10 @@ test.describe('LxCheckbox 文档示例', () => {
     const page = await context.newPage();
 
     try {
+      await context.route('**/*', (route) => {
+        const url = new URL(route.request().url());
+        return ['127.0.0.1', 'localhost'].includes(url.hostname) ? route.continue() : route.abort();
+      });
       await page.goto('/components/lxcheckbox');
       const first = page
         .getByRole('group', { name: '关联授权业务权限' })
@@ -281,12 +329,53 @@ test.describe('LxCheckbox 文档示例', () => {
 
       await expect.poll(async () => (await firstControl.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
       await expect.poll(async () => (await themeToggle.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
+      const firstBounds = await firstControl.boundingBox();
+      if (!firstBounds) throw new Error('无法读取复选项的触控区域');
+      await page.touchscreen.tap(firstBounds.x + firstBounds.width / 2, firstBounds.y + firstBounds.height / 2);
+      await expect(first).not.toBeChecked();
+      await expect(page.getByTestId('permission-change-message')).toHaveText('组选中值已更新：无');
       expect(
         await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth),
       ).toBe(0);
     } finally {
       await context.close();
     }
+  });
+
+  test('旧 label 组选中值兼容并向外报告 change', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/components/lxcheckbox');
+    await page.getByTestId('checkbox-advanced-examples').locator('summary').click();
+    const group = page.getByRole('group', { name: '旧版 label 权限范围' });
+    const video = group.getByRole('checkbox', { name: '视频巡查权限' });
+    const broadcast = group.getByRole('checkbox', { name: '全网广播调度' });
+
+    await expect(video).toBeChecked();
+    await expect(broadcast).not.toBeChecked();
+    await broadcast.locator('xpath=ancestor::label[1]').click();
+    await expect(video).toBeChecked();
+    await expect(broadcast).toBeChecked();
+    await expect(page.getByTestId('legacy-change-message')).toHaveText(
+      '旧 label 组选中值已更新：视频巡查权限 / 全网广播调度',
+    );
+  });
+
+  test('复选组级禁用及 LxForm 禁用继承对单项和组选项生效', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/components/lxcheckbox');
+    await page.getByTestId('checkbox-advanced-examples').locator('summary').click();
+
+    const disabledGroup = page.getByRole('group', { name: '整组禁用的授权范围' });
+    await expect(disabledGroup.getByRole('checkbox', { name: '视频巡查权限' })).toBeDisabled();
+    await expect(disabledGroup.getByRole('checkbox', { name: '视频巡查权限' })).toBeChecked();
+    await expect(disabledGroup.getByRole('checkbox', { name: '全网广播调度' })).toBeDisabled();
+
+    const inherited = page.getByTestId('checkbox-form-disabled');
+    await expect(inherited.getByRole('checkbox', { name: '继承表单禁用的独立确认' })).toBeDisabled();
+    const inheritedGroup = inherited.getByRole('group', { name: '继承表单禁用的通知渠道' });
+    await expect(inheritedGroup.getByRole('checkbox', { name: '警情简报' })).toBeDisabled();
+    await expect(inheritedGroup.getByRole('checkbox', { name: '警情简报' })).toBeChecked();
+    await expect(inheritedGroup.getByRole('checkbox', { name: '勤务调度' })).toBeDisabled();
   });
 
   test('必填权限组校验失败后可通过选择恢复', async ({ page }) => {
@@ -300,6 +389,8 @@ test.describe('LxCheckbox 文档示例', () => {
     await form.getByRole('checkbox', { name: '视频巡查权限' }).locator('xpath=ancestor::label[1]').click();
     await form.getByRole('button', { name: '提交校验' }).click();
     await expect(page.getByTestId('checkbox-validation-feedback')).toHaveText('权限校验通过');
+    await expectClearedErrorRowsHidden(form);
+    await expect(form.locator('.el-form-item__error')).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
   });
 });
@@ -308,6 +399,7 @@ test.describe('LxRadio 文档示例', () => {
   test('方向键跳过禁用项、保持焦点可见并应用 HUD 靶环', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto('/components/lxradio');
+    await page.getByTestId('radio-advanced-examples').locator('summary').click();
 
     const horizontal = page.getByRole('radiogroup', { name: '勤务响应等级' });
     const daily = horizontal.getByRole('radio', { name: '日常勤务' });
@@ -377,8 +469,11 @@ test.describe('LxRadio 文档示例', () => {
       .poll(() => emergencyLabel.evaluate((element) => getComputedStyle(element).color))
       .toBe('rgb(0, 96, 169)');
     await expect.poll(() => emergencyLabel.evaluate((element) => getComputedStyle(element).fontWeight)).toBe('500');
+    await expect.poll(() => emergencyDot.evaluate((element) => getComputedStyle(element).borderWidth)).toBe('2px');
     await expect.poll(() => dailyLabel.evaluate((element) => getComputedStyle(element).color)).toBe('rgb(48, 49, 51)');
-    expect(await dailyDot.boundingBox()).toEqual(beforeFocus);
+    const afterFocus = await dailyDot.boundingBox();
+    expect(afterFocus?.width).toBe(beforeFocus?.width);
+    expect(afterFocus?.height).toBe(beforeFocus?.height);
 
     await expect(disabled).toBeDisabled();
     await expect(disabled).not.toBeChecked();
@@ -509,7 +604,44 @@ test.describe('LxRadio 文档示例', () => {
     await form.getByRole('radio', { name: '应急处突' }).locator('xpath=ancestor::label[1]').click();
     await form.getByRole('button', { name: '提交校验' }).click();
     await expect(page.getByTestId('radio-validation-feedback')).toHaveText('响应通道校验通过');
+    await expectClearedErrorRowsHidden(form);
+    await expect(form.locator('.el-form-item__error')).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
+  });
+
+  test('独立 LxRadio 通过共享模型同步选项并反馈 change', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/components/lxradio');
+
+    const group = page.getByRole('group', { name: '响应网络（不使用 LxRadioGroup）' });
+    const encrypted = group.getByRole('radio', { name: '高密加密专线' });
+    const fiber = group.getByRole('radio', { name: '光纤骨干网' });
+
+    await expect(encrypted).toBeChecked();
+    await expect(fiber).not.toBeChecked();
+    await encrypted.focus();
+    await page.keyboard.press('ArrowRight');
+    await expect(fiber).toBeChecked();
+    await expect(encrypted).not.toBeChecked();
+    await expect(page.locator('.lx-radio-demo__status')).toHaveText('独立响应网络 选中：光纤骨干网');
+  });
+
+  test('单选组级禁用与 LxForm 禁用继承保持生效', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/components/lxradio');
+    await page.getByTestId('radio-advanced-examples').locator('summary').click();
+
+    const disabledGroup = page.getByRole('radiogroup', { name: '整组禁用的响应等级' });
+    await expect(disabledGroup.getByRole('radio', { name: '日常勤务' })).toBeDisabled();
+    await expect(disabledGroup.getByRole('radio', { name: '日常勤务' })).toBeChecked();
+    await expect(disabledGroup.getByRole('radio', { name: '应急处突' })).toBeDisabled();
+
+    const inheritedGroup = page
+      .getByTestId('radio-form-disabled')
+      .getByRole('radiogroup', { name: '继承表单禁用的响应等级' });
+    await expect(inheritedGroup.getByRole('radio', { name: '光纤骨干网' })).toBeDisabled();
+    await expect(inheritedGroup.getByRole('radio', { name: '光纤骨干网' })).toBeChecked();
+    await expect(inheritedGroup.getByRole('radio', { name: '卫星链路直通' })).toBeDisabled();
   });
 
   test('375px 触屏视口下单选控件保留 44px 触控高度', async ({ browser }) => {
@@ -522,14 +654,25 @@ test.describe('LxRadio 文档示例', () => {
     const page = await context.newPage();
 
     try {
+      await context.route('**/*', (route) => {
+        const url = new URL(route.request().url());
+        return ['127.0.0.1', 'localhost'].includes(url.hostname) ? route.continue() : route.abort();
+      });
       await page.goto('/components/lxradio');
       const first = page.getByRole('radiogroup', { name: '勤务响应等级' }).getByRole('radio', { name: '日常勤务' });
       const firstControl = first.locator('xpath=ancestor::label[1]');
+      const second = page.getByRole('radiogroup', { name: '勤务响应等级' }).getByRole('radio', { name: '应急处突' });
+      const secondControl = second.locator('xpath=ancestor::label[1]');
       const themeToggle = page.locator('.lx-radio-demo__theme-toggle');
       expect(await page.evaluate(() => matchMedia('(hover: none)').matches)).toBe(true);
 
       await expect.poll(async () => (await firstControl.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
       await expect.poll(async () => (await themeToggle.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
+      const secondBounds = await secondControl.boundingBox();
+      if (!secondBounds) throw new Error('无法读取单选项的触控区域');
+      await page.touchscreen.tap(secondBounds.x + secondBounds.width / 2, secondBounds.y + secondBounds.height / 2);
+      await expect(second).toBeChecked();
+      await expect(page.locator('.lx-radio-demo__status')).toHaveText('响应等级 选中：应急处突');
       expect(
         await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth),
       ).toBe(0);
@@ -563,9 +706,10 @@ for (const item of [
       'lx-radio-props-hint',
       'lx-radio-group-props-hint',
       'lx-radio-events-hint',
+      'lx-radio-slots-hint',
       'lx-radio-design-hint',
     ],
-    shortOverflowHintIds: ['lx-radio-slots-hint'],
+    shortOverflowHintIds: [],
   },
 ]) {
   test(`${item.title}文档在375px下可浏览溢出表格并压缩禁用行`, async ({ page }) => {
@@ -575,6 +719,7 @@ for (const item of [
     for (const hintId of item.scrollableHintIds) {
       const hint = page.locator(`#${hintId}`);
       const table = page.locator(`#${hintId} + table`);
+      const minOverflowPx = hintId === 'lx-radio-slots-hint' ? 1 : 24;
       await expect(hint).toBeVisible();
       await expect(table).toHaveAttribute('aria-describedby', hintId);
       await expect(table).toHaveAttribute('tabindex', '0');
@@ -587,12 +732,19 @@ for (const item of [
           firstColumnPosition: firstColumn ? getComputedStyle(firstColumn).position : 'missing',
         };
       });
-      expect(initialState.scrollWidth - initialState.clientWidth).toBeGreaterThanOrEqual(24);
+      expect(initialState.scrollWidth - initialState.clientWidth).toBeGreaterThanOrEqual(minOverflowPx);
+      if (hintId === 'lx-radio-slots-hint') {
+        expect(initialState.scrollWidth - initialState.clientWidth).toBeLessThan(24);
+      }
       expect(initialState.firstColumnPosition).toBe('sticky');
 
       await table.focus();
       await table.press('ArrowRight');
       await expect.poll(() => table.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+      const firstStep = await table.evaluate((element) => element.scrollLeft);
+      const maxScrollLeft = initialState.scrollWidth - initialState.clientWidth;
+      expect(firstStep).toBeGreaterThanOrEqual(Math.min(80, maxScrollLeft));
+      expect(firstStep).toBeLessThanOrEqual(maxScrollLeft);
 
       const middleScroll = await table.evaluate((element) =>
         Math.min(120, (element.scrollWidth - element.clientWidth) / 2),
@@ -601,10 +753,25 @@ for (const item of [
         element.scrollLeft = scrollLeft;
       }, middleScroll);
       await table.press('ArrowRight');
-      await expect.poll(() => table.evaluate((element) => element.scrollLeft)).toBeGreaterThan(middleScroll);
+      await expect
+        .poll(() => table.evaluate((element) => element.scrollLeft))
+        .toBeGreaterThanOrEqual(middleScroll + Math.min(80, maxScrollLeft - middleScroll));
       const scrollAfterRight = await table.evaluate((element) => element.scrollLeft);
       await table.press('ArrowLeft');
-      await expect.poll(() => table.evaluate((element) => element.scrollLeft)).toBeLessThan(scrollAfterRight);
+      await expect
+        .poll(() => table.evaluate((element) => element.scrollLeft))
+        .toBeLessThanOrEqual(scrollAfterRight - Math.min(80, scrollAfterRight));
+
+      await table.evaluate((element, scrollLeft) => {
+        element.scrollLeft = scrollLeft;
+      }, maxScrollLeft);
+      await table.press('ArrowRight');
+      await expect.poll(() => table.evaluate((element) => element.scrollLeft)).toBe(maxScrollLeft);
+      await table.evaluate((element) => {
+        element.scrollLeft = 0;
+      });
+      await table.press('ArrowLeft');
+      await expect.poll(() => table.evaluate((element) => element.scrollLeft)).toBe(0);
     }
 
     for (const hintId of item.shortOverflowHintIds) {
@@ -723,5 +890,65 @@ for (const item of [
     await expect(groupDetails).toContainText(item.groupExpandedText);
     await page.keyboard.press('Space');
     await expect(groupDetails).not.toHaveAttribute('open');
+  });
+}
+
+for (const item of [
+  {
+    title: '复选框',
+    path: '/components/lxcheckbox',
+    detailsTestId: 'checkbox-advanced-examples',
+    hiddenTestIds: ['legacy', 'disabled-states', 'checkbox-group-disabled', 'checkbox-form-disabled'],
+    controlLabelSelector: '.lx-checkbox .el-checkbox__label',
+  },
+  {
+    title: '单选框',
+    path: '/components/lxradio',
+    detailsTestId: 'radio-advanced-examples',
+    hiddenTestIds: ['readonly-history', 'legacy', 'radio-group-disabled', 'radio-form-disabled'],
+    controlLabelSelector: '.lx-radio .el-radio__label',
+  },
+]) {
+  test(`${item.title} Demo 辅助示例默认收起且可由键盘展开`, async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(item.path);
+
+    const details = page.getByTestId(item.detailsTestId);
+    const summary = details.locator('summary');
+    await expect(details).not.toHaveAttribute('open');
+    for (const testId of item.hiddenTestIds) {
+      await expect(page.getByTestId(testId)).toBeHidden();
+    }
+
+    const summaryBox = await summary.boundingBox();
+    expect(summaryBox?.height ?? 0).toBeGreaterThanOrEqual(44);
+    await expect(summary).toHaveCSS('font-size', '15px');
+
+    await summary.focus();
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Shift+Tab');
+    await expect(summary).toBeFocused();
+    await expect.poll(() => summary.evaluate((element) => element.matches(':focus-visible'))).toBe(true);
+    await page.keyboard.press('Space');
+    await expect(details).toHaveAttribute('open', '');
+    for (const testId of item.hiddenTestIds) {
+      await expect(page.getByTestId(testId)).toBeVisible();
+    }
+
+    await expect(details.locator('.lx-checkbox-demo__panel h3, .lx-radio-demo__panel h3').first()).toHaveCSS(
+      'font-size',
+      '15px',
+    );
+    await expect(details.locator('.lx-checkbox-demo__example h4, .lx-radio-demo__example h4').first()).toHaveCSS(
+      'font-size',
+      '14px',
+    );
+    await expect(details.locator(item.controlLabelSelector).first()).toHaveCSS('font-size', '12px');
+
+    await page.keyboard.press('Space');
+    await expect(details).not.toHaveAttribute('open');
+    for (const testId of item.hiddenTestIds) {
+      await expect(page.getByTestId(testId)).toBeHidden();
+    }
   });
 }

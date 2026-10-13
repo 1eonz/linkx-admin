@@ -36,8 +36,7 @@ const emit = defineEmits<{
   <ElCheckbox
     class="lx-checkbox"
     :model-value="modelValue"
-    :value="value"
-    :label="label || undefined"
+    :value="value ?? (label || undefined)"
     :disabled="disabled"
     :indeterminate="indeterminate"
     :name="name"
