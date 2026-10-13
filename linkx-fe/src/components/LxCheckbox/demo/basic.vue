@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import type { FormRules } from 'element-plus'
 import { useData } from 'vitepress'
-import LxCheckbox from '../index.vue'
+import { onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+
+import { LxButton, LxForm, LxFormItem } from '../../../index'
+import type { LxFormInstance } from '../../../index'
 import LxCheckboxGroup from '../../LxCheckboxGroup/index.vue'
+import LxCheckbox from '../index.vue'
 
 const hudTheme = ref(false)
 const { isDark } = useData()
@@ -13,6 +17,21 @@ const horizontalPermissions = ref<(string | number)[]>(['briefing'])
 /** 独立复选：单条承诺确认 */
 const agreed = ref(false)
 const dispatchIndeterminate = ref(true)
+const validationFormRef = ref<LxFormInstance>()
+const validationForm = reactive({ permissions: [] as string[] })
+const validationFeedback = ref('')
+const validationFeedbackIsError = ref(false)
+const validationRules: FormRules = {
+  permissions: [
+    {
+      type: 'array',
+      required: true,
+      min: 1,
+      message: '至少选择一项权限',
+      trigger: 'change',
+    },
+  ],
+}
 
 const permissionLabels: Record<string, string> = {
   video: '视频巡查权限',
@@ -33,6 +52,36 @@ function formatSelected(
     ? values.map((value) => labels[String(value)] ?? String(value)).join(' / ')
     : '无'
 }
+
+function validatePermissions() {
+  validationFormRef.value
+    ?.validate()
+    .then(() => {
+      validationFeedbackIsError.value = false
+      validationFeedback.value = '权限校验通过'
+    })
+    .catch(() => {
+      validationFeedbackIsError.value = true
+      validationFeedback.value = '请先修正授权范围'
+    })
+}
+
+function resetValidationForm() {
+  validationFormRef.value?.resetFields()
+  validationFeedbackIsError.value = false
+  validationFeedback.value = ''
+}
+
+watch(
+  validationForm,
+  () => {
+    if (validationFeedbackIsError.value) {
+      validationFeedbackIsError.value = false
+      validationFeedback.value = ''
+    }
+  },
+  { deep: true },
+)
 
 let originalDark = false
 let originalHud = false
@@ -98,15 +147,21 @@ onBeforeUnmount(() => {
 
     <section class="lx-checkbox-demo__panel" data-testid="standalone">
       <h3>独立确认与通知渠道</h3>
-      <LxCheckbox v-model="agreed">已知晓涉密核验义务并承诺遵守</LxCheckbox>
-      <LxCheckboxGroup
-        v-model="horizontalPermissions"
-        aria-label="水平排布的通知渠道"
-      >
-        <LxCheckbox value="briefing">警情简报</LxCheckbox>
-        <LxCheckbox value="dispatch">勤务调度</LxCheckbox>
-        <LxCheckbox value="broadcast">协同通知</LxCheckbox>
-      </LxCheckboxGroup>
+      <div class="lx-checkbox-demo__example">
+        <h4>知情确认</h4>
+        <LxCheckbox v-model="agreed">已知晓涉密核验义务并承诺遵守</LxCheckbox>
+      </div>
+      <div class="lx-checkbox-demo__example">
+        <h4>通知渠道</h4>
+        <LxCheckboxGroup
+          v-model="horizontalPermissions"
+          aria-label="水平排布的通知渠道"
+        >
+          <LxCheckbox value="briefing">警情简报</LxCheckbox>
+          <LxCheckbox value="dispatch">勤务调度</LxCheckbox>
+          <LxCheckbox value="broadcast">协同通知</LxCheckbox>
+        </LxCheckboxGroup>
+      </div>
       <p class="lx-checkbox-demo__tip">
         独立复选框使用布尔值；组内选项使用字符串或数字值
       </p>
@@ -124,14 +179,55 @@ onBeforeUnmount(() => {
       </LxCheckbox>
     </section>
 
+    <section class="lx-checkbox-demo__panel" data-testid="validation">
+      <h3>授权范围必填校验</h3>
+      <LxForm
+        ref="validationFormRef"
+        data-testid="checkbox-validation-form"
+        :model="validationForm"
+        :rules="validationRules"
+        label-position="top"
+        scroll-to-error
+      >
+        <LxFormItem label="授权范围" prop="permissions">
+          <LxCheckboxGroup
+            v-model="validationForm.permissions"
+            aria-label="待确认权限范围"
+          >
+            <LxCheckbox value="video">视频巡查权限</LxCheckbox>
+            <LxCheckbox value="dispatch">警单流转</LxCheckbox>
+          </LxCheckboxGroup>
+        </LxFormItem>
+        <LxFormItem>
+          <div class="lx-checkbox-demo__actions">
+            <LxButton type="primary" @click="validatePermissions">
+              提交校验
+            </LxButton>
+            <LxButton @click="resetValidationForm">重置</LxButton>
+          </div>
+        </LxFormItem>
+      </LxForm>
+      <p
+        v-if="validationFeedback"
+        data-testid="checkbox-validation-feedback"
+        class="lx-checkbox-demo__feedback"
+        :class="{ 'is-error': validationFeedbackIsError }"
+        :role="validationFeedbackIsError ? 'alert' : 'status'"
+        aria-live="polite"
+      >
+        {{ validationFeedback }}
+      </p>
+    </section>
+
     <p
       class="lx-checkbox-demo__status"
       data-testid="selection-summary"
       aria-live="polite"
     >
-      当前授权：{{ formatSelected(permissions, permissionLabels) }}；
-      通知渠道：{{ formatSelected(horizontalPermissions, channelLabels) }}；
-      承诺{{ agreed ? '已' : '未' }}勾选
+      完全授权：{{ formatSelected(permissions, permissionLabels) }}；
+      部分授权：{{ dispatchIndeterminate ? '警单流转' : '无' }}； 通知渠道：{{
+        formatSelected(horizontalPermissions, channelLabels)
+      }}； 承诺{{ agreed ? '已' : '未' }}勾选
     </p>
     <p class="lx-checkbox-demo__note">
       示例状态只保存在当前页面，不会写入业务系统。
@@ -186,11 +282,35 @@ onBeforeUnmount(() => {
   color: var(--lx-text-regular);
 }
 
+.lx-checkbox-demo__example {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+}
+
+.lx-checkbox-demo__example h4 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--lx-text-regular);
+}
+
+.lx-checkbox-demo__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .lx-checkbox-demo__status,
 .lx-checkbox-demo__note,
-.lx-checkbox-demo__tip {
+.lx-checkbox-demo__tip,
+.lx-checkbox-demo__feedback {
   margin: 0;
   font-size: 12px;
   color: var(--lx-text-regular);
+}
+
+.lx-checkbox-demo__feedback.is-error {
+  color: var(--lx-color-form-error);
 }
 </style>

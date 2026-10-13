@@ -15,6 +15,10 @@ useResponsiveDocTable(24);
 
 <Basic />
 
+## 表单校验与错误恢复
+
+Demo 包含必填权限组。未选择时提交会显示字段错误；选择至少一项后再次提交即可通过，也可重置表单。示例只使用 `LxForm`、`LxFormItem` 和组件库控件，不会发送业务请求。
+
 ::: details 查看示例代码
 <<< ../../src/components/LxCheckbox/demo/basic.vue
 :::
@@ -23,14 +27,14 @@ useResponsiveDocTable(24);
 
 <p id="lx-checkbox-props-hint" class="lx-doc-table-scroll-hint lx-selection-control-doc-table-hint">表格可横向滚动；聚焦表格后可用方向键浏览。</p>
 
-| 名称            | 类型                          | 默认值           | 说明                                                                 |
-| --------------- | ----------------------------- | ---------------- | -------------------------------------------------------------------- |
-| `modelValue`    | `string \| number \| boolean` | —                | v-model（独立使用时 boolean，组内由 Group 接管）。                   |
-| `value`         | `string \| number`            | —                | 组内该项的选中值（配合 `LxCheckboxGroup`；组选项值不支持 boolean）。 |
-| `label`         | `string`                      | `''`             | 无插槽时的文字回退；未传 `value` 时兼作选中值（EP 旧契约兼容）。     |
-| `disabled`      | `boolean`                     | —（`undefined`） | 禁用态主题与继承规则见下方说明。                                     |
-| `indeterminate` | `boolean`                     | `false`          | 半选态：主色填充 + 白色横杠；不修改值，并向辅助技术暴露混合态。      |
-| `name`          | `string`                      | —                | 原生 name；组内缺省由 Group 注入。                                   |
+| 名称            | 类型                          | 默认值           | 说明                                                                                                  |
+| --------------- | ----------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------- |
+| `modelValue`    | `string \| number \| boolean` | —                | v-model（独立使用时 boolean，组内由 Group 接管）。                                                    |
+| `value`         | `string \| number`            | —                | 组内该项的选中值（配合 `LxCheckboxGroup`；组选项值不支持 boolean）。                                  |
+| `label`         | `string`                      | `''`             | 无插槽时的文字回退；未传 `value` 时兼作选中值（EP 旧契约兼容）。                                      |
+| `disabled`      | `boolean`                     | —（`undefined`） | 禁用态主题与继承规则见下方说明。                                                                      |
+| `indeterminate` | `boolean`                     | `false`          | 半选态：可操作时主色填充 + 白色横杠；禁用时保留灰底并使用中性横杠；不修改值，并向辅助技术暴露混合态。 |
+| `name`          | `string`                      | —                | 原生 name；组内缺省由 Group 注入。                                                                    |
 
 <details class="lx-selection-control-doc-details">
 <summary>禁用态主题与继承规则</summary>
@@ -115,13 +119,14 @@ function toggleAll(next: boolean) {
 | --------- | -------------------- | --------------------------------------- |
 | 选中/半选 | 主色填充白勾/横杠    | EP 原生契约，组件级固化防漂移           |
 | hover     | 描边与文字同步转主色 | 组件级固化                              |
+| 图标间距  | 10px                 | `.el-checkbox__label` 左内距为 10px     |
 | 水平间距  | 16px                 | `--lx-space-lg`，覆盖 EP 默认 32px 右距 |
 | 垂直行距  | space-y-3（12px）    | `--lx-space-md`                         |
 | HUD 深色  | —                    | 填充跟随 HUD 战术蓝（el-\* 变量）       |
 
 ## 可访问性
 
-原生 `input[type=checkbox]` 语义；半选态同步设置原生 `indeterminate` 属性和 `aria-checked="mixed"`，不修改 v-model 值。触屏设备整个 label 的最小高度为 44px。HUD 深色主题下禁用项使用深色中性底和可辨认的浅色文字；已选或半选的禁用项不会套用可操作状态的主色填充。
+原生 `input[type=checkbox]` 语义；半选态同步设置原生 `indeterminate` 属性和 `aria-checked="mixed"`，不修改 v-model 值。触屏设备整个 label 的最小高度为 44px。HUD 深色主题下禁用项使用深色中性底和可辨认的浅色文字；已选或半选的禁用项保留灰底，勾和横杠使用 `--lx-text-regular` 正文中性色。
 
 ## Vue3 宿主适配
 

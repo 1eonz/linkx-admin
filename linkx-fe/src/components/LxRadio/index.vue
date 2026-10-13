@@ -3,7 +3,7 @@
  * LxRadio — 单选项（Element Plus el-radio 内核二次封装）
  * 视觉源：design/表单控件八件套/code.html 03
  *   选中态为"白底蓝心靶环"（14px 圆环 + 6px 主色靶心，非 EP 默认蓝底白心），
- *   hover 时描边与文字同步转主色——样式在 style.css 组件级固化；
+ *   hover 时仅描边转主色，文字保持原色——样式在 style.css 组件级固化；
  *   element-theme.css 的同款全局覆写保留过渡期（存量 el-radio 直用页面迁移完成后摘除）。
  * 与 LxRadioGroup 配合使用；单项独立使用时亦可 v-model（EP 内核契约）。
  */

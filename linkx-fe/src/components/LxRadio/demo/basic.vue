@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import type { FormRules } from 'element-plus'
 import { useData } from 'vitepress'
-import LxRadio from '../index.vue'
+import { onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+
+import { LxButton, LxForm, LxFormItem } from '../../../index'
+import type { LxFormInstance } from '../../../index'
 import LxRadioGroup from '../../LxRadioGroup/index.vue'
+import LxRadio from '../index.vue'
 import type { LxRadioValue } from '../types'
 
 const hudTheme = ref(false)
@@ -14,6 +18,17 @@ const responseLevel = ref<LxRadioValue>('daily')
 const channel = ref<LxRadioValue>('encrypted')
 /** 旧 label 用法独立演示，避免与垂直组选项状态串联。 */
 const legacyChannel = ref<LxRadioValue>('encrypted')
+const validationFormRef = ref<LxFormInstance>()
+const validationForm = reactive<{ channel: LxRadioValue | undefined }>({
+  channel: undefined,
+})
+const validationFeedback = ref('')
+const validationFeedbackIsError = ref(false)
+const validationRules: FormRules = {
+  channel: [
+    { required: true, message: '请选择一个响应通道', trigger: 'change' },
+  ],
+}
 
 const responseLevelLabels: Record<string, string> = {
   daily: '日常勤务',
@@ -68,6 +83,36 @@ function reportChange(
   const label = value == null ? '未选择' : (labels[String(value)] ?? '未知选项')
   lastAction.value = `${field} 选中：${label}`
 }
+
+function validateChannel() {
+  validationFormRef.value
+    ?.validate()
+    .then(() => {
+      validationFeedbackIsError.value = false
+      validationFeedback.value = '响应通道校验通过'
+    })
+    .catch(() => {
+      validationFeedbackIsError.value = true
+      validationFeedback.value = '请先修正响应通道'
+    })
+}
+
+function resetValidationForm() {
+  validationFormRef.value?.resetFields()
+  validationFeedbackIsError.value = false
+  validationFeedback.value = ''
+}
+
+watch(
+  validationForm,
+  () => {
+    if (validationFeedbackIsError.value) {
+      validationFeedbackIsError.value = false
+      validationFeedback.value = ''
+    }
+  },
+  { deep: true },
+)
 </script>
 
 <template>
@@ -104,14 +149,19 @@ function reportChange(
         @change="reportChange('处置通道', $event, channelLabels)"
       >
         <LxRadio value="encrypted">高密加密专线</LxRadio>
-        <LxRadio value="satellite" disabled>卫星链路直通（未联通）</LxRadio>
+        <LxRadio value="satellite" disabled
+          >卫星链路直通（当前链路尚未接通）</LxRadio
+        >
         <LxRadio value="fiber">光纤骨干网</LxRadio>
       </LxRadioGroup>
       <p class="lx-radio-demo__tip">
         方向键会跳过禁用项；当前组值保存在页面内存
       </p>
+    </section>
+
+    <section class="lx-radio-demo__panel" data-testid="readonly-history">
+      <h3>历史配置回显（只读快照）</h3>
       <div class="lx-radio-demo__readonly" data-testid="checked-disabled">
-        <span class="lx-radio-demo__tip">历史配置回显（只读）</span>
         <LxRadio model-value="satellite" value="satellite" disabled>
           卫星链路直通（链路维护中）
         </LxRadio>
@@ -130,6 +180,46 @@ function reportChange(
         <LxRadio label="fiber">光纤骨干网</LxRadio>
       </LxRadioGroup>
       <p class="lx-radio-demo__tip">未传 value 时以 label 作为选中值</p>
+    </section>
+
+    <section class="lx-radio-demo__panel" data-testid="validation">
+      <h3>响应通道必填校验</h3>
+      <LxForm
+        ref="validationFormRef"
+        data-testid="radio-validation-form"
+        :model="validationForm"
+        :rules="validationRules"
+        label-position="top"
+        scroll-to-error
+      >
+        <LxFormItem label="响应通道" prop="channel">
+          <LxRadioGroup
+            v-model="validationForm.channel"
+            aria-label="待确认响应通道"
+          >
+            <LxRadio value="daily">日常勤务</LxRadio>
+            <LxRadio value="emergency">应急处突</LxRadio>
+          </LxRadioGroup>
+        </LxFormItem>
+        <LxFormItem>
+          <div class="lx-radio-demo__actions">
+            <LxButton type="primary" @click="validateChannel">
+              提交校验
+            </LxButton>
+            <LxButton @click="resetValidationForm">重置</LxButton>
+          </div>
+        </LxFormItem>
+      </LxForm>
+      <p
+        v-if="validationFeedback"
+        data-testid="radio-validation-feedback"
+        class="lx-radio-demo__feedback"
+        :class="{ 'is-error': validationFeedbackIsError }"
+        :role="validationFeedbackIsError ? 'alert' : 'status'"
+        aria-live="polite"
+      >
+        {{ validationFeedback }}
+      </p>
     </section>
 
     <p class="lx-radio-demo__status" aria-live="polite">{{ lastAction }}</p>
@@ -181,9 +271,7 @@ function reportChange(
 
 .lx-radio-demo__readonly {
   display: grid;
-  gap: 4px;
-  padding-top: 8px;
-  border-top: 1px solid var(--lx-border);
+  gap: 8px;
 }
 
 .lx-radio-demo__panel h3 {
@@ -193,11 +281,22 @@ function reportChange(
   color: var(--lx-text-regular);
 }
 
+.lx-radio-demo__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .lx-radio-demo__status,
 .lx-radio-demo__note,
-.lx-radio-demo__tip {
+.lx-radio-demo__tip,
+.lx-radio-demo__feedback {
   margin: 0;
   font-size: 12px;
   color: var(--lx-text-regular);
+}
+
+.lx-radio-demo__feedback.is-error {
+  color: var(--lx-color-form-error);
 }
 </style>

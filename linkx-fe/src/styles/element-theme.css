@@ -374,7 +374,7 @@ html:root .el-date-editor .el-range-input {
 /* ===== 单选/复选终态（design/表单控件八件套 03/04，EP 2.14.6 类名锚定）=====
  * 标本契约：选项文字 12px；未选描边 #dcdfe6；
  * 单选选中为"白底蓝心靶环"（非 EP 默认整圆填充），靶心 6px；
- * hover 时描边与文字同步提亮到主色。
+ * hover 描边转主色；复选标签同步变色，单选标签保持原文字色。
  */
 .el-radio,
 .el-checkbox {
@@ -388,13 +388,12 @@ html:root .el-checkbox__inner {
   border-color: var(--lx-control-border);
 }
 
-/* hover：描边与 label 同步转主色（标本 03/04 group-hover 契约），禁用态除外 */
+/* hover 描边转主色，禁用态除外 */
 html:root .el-radio:not(.is-disabled):hover .el-radio__inner,
 html:root .el-checkbox:not(.is-disabled):hover .el-checkbox__inner {
   border-color: var(--lx-color-primary);
 }
 
-.el-radio:not(.is-disabled):hover .el-radio__label,
 .el-checkbox:not(.is-disabled):hover .el-checkbox__label {
   color: var(--lx-color-primary);
 }

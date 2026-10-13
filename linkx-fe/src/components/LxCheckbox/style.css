@@ -14,6 +14,12 @@
   font-size: 12px;
 }
 
+.lx-checkbox .el-checkbox__label {
+  padding-left: 10px;
+  font-size: 12px;
+  color: var(--lx-color-text-main);
+}
+
 /* 未选描边：#dcdfe6（--lx-control-border 专属控件态） */
 .lx-checkbox .el-checkbox__inner {
   border-color: var(--lx-control-border);
@@ -44,6 +50,20 @@
   background: var(--lx-color-primary);
 }
 
+/* 禁用态沿用中性灰底；勾和半选横杠使用正文中性色，避免标记过淡。 */
+.lx-checkbox
+  .el-checkbox__input.is-checked.is-disabled
+  .el-checkbox__inner::after {
+  border-color: var(--lx-text-regular);
+}
+
+.lx-checkbox
+  .el-checkbox__input.is-indeterminate.is-disabled
+  .el-checkbox__inner::before {
+  background-color: var(--lx-text-regular);
+  border-color: var(--lx-text-regular);
+}
+
 /* 选中态仍用正文色表达文字，避免与图稿中仅强调勾选框的层级冲突。 */
 .lx-checkbox
   .el-checkbox__input.is-checked:not(.is-disabled)
@@ -70,6 +90,19 @@ html.dark.lx-theme-hud
   .el-checkbox__inner {
   border-color: var(--el-color-primary);
   background: var(--el-color-primary);
+}
+
+html.dark.lx-theme-hud
+  .lx-checkbox.el-checkbox:not(.is-disabled):hover
+  .el-checkbox__input:not(.is-checked):not(.is-indeterminate)
+  .el-checkbox__inner {
+  border-color: var(--el-color-primary);
+}
+
+html.dark.lx-theme-hud
+  .lx-checkbox.el-checkbox:not(.is-disabled):hover
+  .el-checkbox__label {
+  color: var(--el-color-primary);
 }
 
 /* ===== 键盘焦点环（与全局桥同款，组件级固化防桥退役后丢失 WCAG 2.4.7）=====

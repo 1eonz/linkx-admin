@@ -13,7 +13,9 @@ test.describe('LxCheckbox 文档示例', () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto('/components/lxcheckbox');
     const summary = page.getByTestId('selection-summary');
-    await expect(summary).toContainText('当前授权：视频巡查权限； 通知渠道：警情简报； 承诺未勾选');
+    await expect(summary).toContainText('完全授权：视频巡查权限');
+    await expect(summary).toContainText('部分授权：警单流转');
+    await expect(summary).toContainText('通知渠道：警情简报； 承诺未勾选');
 
     const permissions = page.getByRole('group', { name: '关联授权业务权限' });
     const selected = permissions.getByRole('checkbox', { name: /视频巡查权限/ });
@@ -27,6 +29,10 @@ test.describe('LxCheckbox 文档示例', () => {
     const checkedDisabledControl = checkedDisabled.locator('xpath=ancestor::label[1]');
     const mixedDisabled = disabledStates.getByRole('checkbox', { name: '部分分配的受限权限' });
     const mixedDisabledControl = mixedDisabled.locator('xpath=ancestor::label[1]');
+    const horizontalPermissions = page.getByRole('group', { name: '水平排布的通知渠道' });
+    const unchecked = permissions.getByRole('checkbox', { name: /全网广播调度/ });
+    const uncheckedControl = unchecked.locator('xpath=ancestor::label[1]');
+    const themeToggle = page.getByRole('checkbox', { name: 'HUD 深色主题' });
 
     await expect(selected).toBeChecked();
     await expect(partial).toHaveJSProperty('indeterminate', true);
@@ -38,6 +44,45 @@ test.describe('LxCheckbox 文档示例', () => {
     await expect(mixedDisabled).toBeDisabled();
     await expect(mixedDisabled).toHaveJSProperty('indeterminate', true);
     await expect(mixedDisabledControl).toHaveAttribute('aria-checked', 'mixed');
+    await expect
+      .poll(() =>
+        checkedDisabledControl
+          .locator('.el-checkbox__inner')
+          .evaluate((element) => getComputedStyle(element, '::after').borderColor),
+      )
+      .toBe('rgb(78, 89, 105)');
+    await expect
+      .poll(() =>
+        mixedDisabledControl
+          .locator('.el-checkbox__inner')
+          .evaluate((element) => getComputedStyle(element, '::before').backgroundColor),
+      )
+      .toBe('rgb(78, 89, 105)');
+    await expect
+      .poll(() => selectedControl.evaluate((element) => Math.round(element.getBoundingClientRect().height)))
+      .toBe(32);
+    await expect
+      .poll(() => selectedControl.locator('.el-checkbox__inner').evaluate((element) => getComputedStyle(element).width))
+      .toBe('14px');
+    await expect
+      .poll(() =>
+        selectedControl.locator('.el-checkbox__inner').evaluate((element) => getComputedStyle(element).height),
+      )
+      .toBe('14px');
+    await expect
+      .poll(() =>
+        selectedControl.locator('.el-checkbox__label').evaluate((element) => getComputedStyle(element).paddingLeft),
+      )
+      .toBe('10px');
+    await expect
+      .poll(() => selectedControl.locator('.el-checkbox__label').evaluate((element) => getComputedStyle(element).color))
+      .toBe('rgb(48, 49, 51)');
+    await expect
+      .poll(() =>
+        selectedControl.locator('.el-checkbox__label').evaluate((element) => getComputedStyle(element).fontSize),
+      )
+      .toBe('12px');
+    await expect.poll(() => horizontalPermissions.evaluate((element) => getComputedStyle(element).gap)).toBe('16px');
     await expect(disabledControl.locator('.el-checkbox__label')).toHaveCSS('color', 'rgb(144, 147, 153)');
     await expect(checkedDisabledControl.locator('.el-checkbox__label')).toHaveCSS('color', 'rgb(144, 147, 153)');
     await expect(mixedDisabledControl.locator('.el-checkbox__label')).toHaveCSS('color', 'rgb(144, 147, 153)');
@@ -53,23 +98,67 @@ test.describe('LxCheckbox 文档示例', () => {
       .poll(() => selectedControl.locator('.el-checkbox__label').evaluate((element) => getComputedStyle(element).color))
       .toBe('rgb(48, 49, 51)');
 
+    const selectedInput = selectedControl.locator('.el-checkbox__original');
+    await themeToggle.focus();
+    await page.keyboard.press('Tab');
+    await expect(selectedInput).toBeFocused();
+    await expect.poll(() => selectedInput.evaluate((element) => element.matches(':focus-visible'))).toBe(true);
+    await expect
+      .poll(() =>
+        selectedControl.locator('.el-checkbox__inner').evaluate((element) => getComputedStyle(element).boxShadow),
+      )
+      .not.toBe('none');
+
     await partialControl.click();
     await expect(partial).toBeChecked();
     await expect(partial).toHaveJSProperty('indeterminate', false);
     await expect(partialControl).not.toHaveAttribute('aria-checked', 'mixed');
-    await expect(summary).toContainText('当前授权：视频巡查权限 / 警单流转');
+    await expect(summary).toContainText('完全授权：视频巡查权限 / 警单流转');
+    await expect(summary).toContainText('部分授权：无');
 
     await selectedControl.hover();
     await expect
       .poll(() => selectedControl.locator('.el-checkbox__label').evaluate((element) => getComputedStyle(element).color))
       .toBe('rgb(0, 96, 169)');
+    await uncheckedControl.hover();
+    await expect
+      .poll(() =>
+        uncheckedControl.locator('.el-checkbox__inner').evaluate((element) => getComputedStyle(element).borderColor),
+      )
+      .toBe('rgb(0, 96, 169)');
+    await expect
+      .poll(() =>
+        uncheckedControl.locator('.el-checkbox__label').evaluate((element) => getComputedStyle(element).color),
+      )
+      .toBe('rgb(0, 96, 169)');
+    const disabledLightAppearance = await disabledControl.evaluate((element) => {
+      const inner = element.querySelector('.el-checkbox__inner');
+      const label = element.querySelector('.el-checkbox__label');
+      return {
+        borderColor: inner ? getComputedStyle(inner).borderColor : '',
+        labelColor: label ? getComputedStyle(label).color : '',
+      };
+    });
+    await disabledControl.hover();
+    await expect
+      .poll(() =>
+        disabledControl.evaluate((element) => {
+          const inner = element.querySelector('.el-checkbox__inner');
+          const label = element.querySelector('.el-checkbox__label');
+          return {
+            borderColor: inner ? getComputedStyle(inner).borderColor : '',
+            labelColor: label ? getComputedStyle(label).color : '',
+          };
+        }),
+      )
+      .toEqual(disabledLightAppearance);
 
     const root = page.locator('html');
     const initialTheme = await root.evaluate((element) => ({
       dark: element.classList.contains('dark'),
       hud: element.classList.contains('lx-theme-hud'),
     }));
-    await page.getByRole('checkbox', { name: 'HUD 深色主题' }).check();
+    await themeToggle.check();
     await expect(root).toHaveClass(/dark/);
     await expect(root).toHaveClass(/lx-theme-hud/);
     await expect
@@ -80,6 +169,26 @@ test.describe('LxCheckbox 文档示例', () => {
     await expect
       .poll(() => selectedControl.locator('.el-checkbox__label').evaluate((element) => getComputedStyle(element).color))
       .toBe('rgb(226, 232, 240)');
+    await selectedControl.hover();
+    await expect
+      .poll(() =>
+        selectedControl.locator('.el-checkbox__inner').evaluate((element) => getComputedStyle(element).borderColor),
+      )
+      .toBe('rgb(56, 189, 248)');
+    await expect
+      .poll(() => selectedControl.locator('.el-checkbox__label').evaluate((element) => getComputedStyle(element).color))
+      .toBe('rgb(56, 189, 248)');
+    await uncheckedControl.hover();
+    await expect
+      .poll(() =>
+        uncheckedControl.locator('.el-checkbox__inner').evaluate((element) => getComputedStyle(element).borderColor),
+      )
+      .toBe('rgb(56, 189, 248)');
+    await expect
+      .poll(() =>
+        uncheckedControl.locator('.el-checkbox__label').evaluate((element) => getComputedStyle(element).color),
+      )
+      .toBe('rgb(56, 189, 248)');
     await expect
       .poll(() =>
         checkedDisabledControl
@@ -96,6 +205,43 @@ test.describe('LxCheckbox 文档示例', () => {
       .toBe('rgb(22, 35, 58)');
     await expect(checkedDisabledControl.locator('.el-checkbox__label')).toHaveCSS('color', 'rgb(148, 163, 184)');
     await expect(mixedDisabledControl.locator('.el-checkbox__label')).toHaveCSS('color', 'rgb(148, 163, 184)');
+    await expect
+      .poll(() =>
+        checkedDisabledControl
+          .locator('.el-checkbox__inner')
+          .evaluate((element) => getComputedStyle(element, '::after').borderColor),
+      )
+      .toBe('rgb(148, 163, 184)');
+    await expect
+      .poll(() =>
+        mixedDisabledControl
+          .locator('.el-checkbox__inner')
+          .evaluate((element) => getComputedStyle(element, '::before').backgroundColor),
+      )
+      .toBe('rgb(148, 163, 184)');
+    const disabledHudAppearance = await checkedDisabledControl.evaluate((element) => {
+      const inner = element.querySelector('.el-checkbox__inner');
+      const label = element.querySelector('.el-checkbox__label');
+      return {
+        borderColor: inner ? getComputedStyle(inner).borderColor : '',
+        backgroundColor: inner ? getComputedStyle(inner).backgroundColor : '',
+        labelColor: label ? getComputedStyle(label).color : '',
+      };
+    });
+    await checkedDisabledControl.hover();
+    await expect
+      .poll(() =>
+        checkedDisabledControl.evaluate((element) => {
+          const inner = element.querySelector('.el-checkbox__inner');
+          const label = element.querySelector('.el-checkbox__label');
+          return {
+            borderColor: inner ? getComputedStyle(inner).borderColor : '',
+            backgroundColor: inner ? getComputedStyle(inner).backgroundColor : '',
+            labelColor: label ? getComputedStyle(label).color : '',
+          };
+        }),
+      )
+      .toEqual(disabledHudAppearance);
 
     const appearanceSwitch = page.getByRole('switch');
     if ((await appearanceSwitch.getAttribute('aria-checked')) !== 'true') {
@@ -142,6 +288,20 @@ test.describe('LxCheckbox 文档示例', () => {
       await context.close();
     }
   });
+
+  test('必填权限组校验失败后可通过选择恢复', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto('/components/lxcheckbox');
+    const form = page.getByTestId('checkbox-validation-form');
+
+    await form.getByRole('button', { name: '提交校验' }).click();
+    await expect(form).toContainText('至少选择一项权限');
+
+    await form.getByRole('checkbox', { name: '视频巡查权限' }).locator('xpath=ancestor::label[1]').click();
+    await form.getByRole('button', { name: '提交校验' }).click();
+    await expect(page.getByTestId('checkbox-validation-feedback')).toHaveText('权限校验通过');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
+  });
 });
 
 test.describe('LxRadio 文档示例', () => {
@@ -164,23 +324,89 @@ test.describe('LxRadio 文档示例', () => {
     await expect(dailyInput).toBeFocused();
     await expect.poll(() => dailyInput.evaluate((element) => element.matches(':focus-visible'))).toBe(true);
     await expect.poll(() => dailyDot.evaluate((element) => getComputedStyle(element).outlineStyle)).toBe('solid');
+    await expect
+      .poll(() => dailyDot.evaluate((element) => getComputedStyle(element).outlineColor))
+      .toBe('rgb(0, 96, 169)');
+
+    const vertical = page.getByRole('radiogroup', { name: '处置通道优先级' });
+    const encrypted = vertical.getByRole('radio', { name: /高密加密专线/ });
+    const encryptedControl = encrypted.locator('xpath=ancestor::label[1]');
+    const encryptedLabel = encryptedControl.locator('.el-radio__label');
+    const disabled = vertical.getByRole('radio', { name: /卫星链路直通/ });
+    const disabledControl = disabled.locator('xpath=ancestor::label[1]');
+    const fiber = vertical.getByRole('radio', { name: '光纤骨干网' });
+    const fiberControl = fiber.locator('xpath=ancestor::label[1]');
+    const fiberDot = fiberControl.locator('.el-radio__inner');
+    const fiberLabel = fiberControl.locator('.el-radio__label');
+    const checkedDisabled = page.getByTestId('checked-disabled').getByRole('radio');
+    const checkedDisabledLabel = checkedDisabled.locator('xpath=ancestor::label[1]').locator('.el-radio__label');
+    const dailyLabel = dailyControl.locator('.el-radio__label');
+    const emergencyLabel = emergencyControl.locator('.el-radio__label');
+
+    await expect.poll(() => horizontal.evaluate((element) => getComputedStyle(element).gap)).toBe('16px');
+    await expect.poll(() => vertical.evaluate((element) => getComputedStyle(element).gap)).toBe('8px');
+    await expect
+      .poll(() => dailyControl.evaluate((element) => Math.round(element.getBoundingClientRect().height)))
+      .toBe(32);
+    await expect.poll(() => dailyDot.evaluate((element) => getComputedStyle(element).width)).toBe('14px');
+    await expect.poll(() => dailyDot.evaluate((element) => getComputedStyle(element).height)).toBe('14px');
+    await expect.poll(() => dailyLabel.evaluate((element) => getComputedStyle(element).fontSize)).toBe('12px');
+    await expect.poll(() => dailyLabel.evaluate((element) => getComputedStyle(element).color)).toBe('rgb(0, 96, 169)');
+    await expect.poll(() => dailyLabel.evaluate((element) => getComputedStyle(element).fontWeight)).toBe('500');
+    await expect
+      .poll(() => encryptedLabel.evaluate((element) => getComputedStyle(element).color))
+      .toBe('rgb(48, 49, 51)');
+    await expect.poll(() => encryptedLabel.evaluate((element) => getComputedStyle(element).fontWeight)).toBe('400');
+    await expect
+      .poll(() => emergencyLabel.evaluate((element) => getComputedStyle(element).color))
+      .toBe('rgb(48, 49, 51)');
+
+    await emergencyControl.hover();
+    await expect
+      .poll(() => emergencyDot.evaluate((element) => getComputedStyle(element).borderColor))
+      .toBe('rgb(0, 96, 169)');
+    await expect
+      .poll(() => emergencyLabel.evaluate((element) => getComputedStyle(element).color))
+      .toBe('rgb(48, 49, 51)');
+
     await page.keyboard.press('ArrowRight');
     await expect(emergency).toBeChecked();
     await expect(page.locator('.lx-radio-demo__status')).toHaveText('响应等级 选中：应急处突');
     await expect(page.locator('.lx-radio-demo__status')).not.toContainText('emergency');
+    await expect
+      .poll(() => emergencyLabel.evaluate((element) => getComputedStyle(element).color))
+      .toBe('rgb(0, 96, 169)');
+    await expect.poll(() => emergencyLabel.evaluate((element) => getComputedStyle(element).fontWeight)).toBe('500');
+    await expect.poll(() => dailyLabel.evaluate((element) => getComputedStyle(element).color)).toBe('rgb(48, 49, 51)');
     expect(await dailyDot.boundingBox()).toEqual(beforeFocus);
-
-    const vertical = page.getByRole('radiogroup', { name: '处置通道优先级' });
-    const encrypted = vertical.getByRole('radio', { name: /高密加密专线/ });
-    const disabled = vertical.getByRole('radio', { name: /卫星链路直通/ });
-    const disabledControl = disabled.locator('xpath=ancestor::label[1]');
-    const fiber = vertical.getByRole('radio', { name: '光纤骨干网' });
-    const checkedDisabled = page.getByTestId('checked-disabled').getByRole('radio');
 
     await expect(disabled).toBeDisabled();
     await expect(disabled).not.toBeChecked();
+    const disabledAppearance = await disabledControl.evaluate((element) => {
+      const inner = element.querySelector('.el-radio__inner');
+      const label = element.querySelector('.el-radio__label');
+      return {
+        borderColor: inner ? getComputedStyle(inner).borderColor : '',
+        labelColor: label ? getComputedStyle(label).color : '',
+      };
+    });
+    await disabledControl.hover();
+    await expect
+      .poll(() =>
+        disabledControl.evaluate((element) => {
+          const inner = element.querySelector('.el-radio__inner');
+          const label = element.querySelector('.el-radio__label');
+          return {
+            borderColor: inner ? getComputedStyle(inner).borderColor : '',
+            labelColor: label ? getComputedStyle(label).color : '',
+          };
+        }),
+      )
+      .toEqual(disabledAppearance);
+    await expect(disabledControl.locator('.el-radio__label')).toHaveCSS('color', 'rgb(144, 147, 153)');
     await expect(checkedDisabled).toBeDisabled();
     await expect(checkedDisabled).toBeChecked();
+    await expect(checkedDisabledLabel).toHaveCSS('color', 'rgb(144, 147, 153)');
     await page.keyboard.press('Tab');
     await expect(encrypted).toBeFocused();
     await page.keyboard.press('ArrowDown');
@@ -205,6 +431,20 @@ test.describe('LxRadio 文档示例', () => {
     await expect
       .poll(() => emergencyDot.evaluate((element) => getComputedStyle(element, '::after').backgroundColor))
       .toBe('rgb(56, 189, 248)');
+    await expect
+      .poll(() => emergencyLabel.evaluate((element) => getComputedStyle(element).color))
+      .toBe('rgb(56, 189, 248)');
+    await expect
+      .poll(() => encryptedLabel.evaluate((element) => getComputedStyle(element).color))
+      .toBe('rgb(226, 232, 240)');
+    await expect.poll(() => encryptedLabel.evaluate((element) => getComputedStyle(element).fontWeight)).toBe('400');
+    await fiberControl.hover();
+    await expect
+      .poll(() => fiberDot.evaluate((element) => getComputedStyle(element).borderColor))
+      .toBe('rgb(56, 189, 248)');
+    await expect
+      .poll(() => fiberLabel.evaluate((element) => getComputedStyle(element).color))
+      .toBe('rgb(226, 232, 240)');
 
     await expect
       .poll(() =>
@@ -214,6 +454,30 @@ test.describe('LxRadio 文档示例', () => {
     await expect
       .poll(() => disabledControl.locator('.el-radio__label').evaluate((element) => getComputedStyle(element).color))
       .toBe('rgb(148, 163, 184)');
+    await expect(checkedDisabledLabel).toHaveCSS('color', 'rgb(148, 163, 184)');
+    const disabledHudAppearance = await disabledControl.evaluate((element) => {
+      const inner = element.querySelector('.el-radio__inner');
+      const label = element.querySelector('.el-radio__label');
+      return {
+        borderColor: inner ? getComputedStyle(inner).borderColor : '',
+        backgroundColor: inner ? getComputedStyle(inner).backgroundColor : '',
+        labelColor: label ? getComputedStyle(label).color : '',
+      };
+    });
+    await disabledControl.hover();
+    await expect
+      .poll(() =>
+        disabledControl.evaluate((element) => {
+          const inner = element.querySelector('.el-radio__inner');
+          const label = element.querySelector('.el-radio__label');
+          return {
+            borderColor: inner ? getComputedStyle(inner).borderColor : '',
+            backgroundColor: inner ? getComputedStyle(inner).backgroundColor : '',
+            labelColor: label ? getComputedStyle(label).color : '',
+          };
+        }),
+      )
+      .toEqual(disabledHudAppearance);
 
     const fullMotionDuration = await emergencyDot.evaluate(
       (element) => getComputedStyle(element, '::after').transitionDuration,
@@ -232,6 +496,20 @@ test.describe('LxRadio 文档示例', () => {
       );
     expect(seconds(fullMotionDuration)).toBeGreaterThan(seconds(reducedMotionDuration));
     expect(seconds(reducedMotionDuration)).toBeLessThanOrEqual(0.001);
+  });
+
+  test('必填响应通道校验失败后可通过选择恢复', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto('/components/lxradio');
+    const form = page.getByTestId('radio-validation-form');
+
+    await form.getByRole('button', { name: '提交校验' }).click();
+    await expect(form).toContainText('请选择一个响应通道');
+
+    await form.getByRole('radio', { name: '应急处突' }).locator('xpath=ancestor::label[1]').click();
+    await form.getByRole('button', { name: '提交校验' }).click();
+    await expect(page.getByTestId('radio-validation-feedback')).toHaveText('响应通道校验通过');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
   });
 
   test('375px 触屏视口下单选控件保留 44px 触控高度', async ({ browser }) => {
@@ -272,16 +550,22 @@ for (const item of [
       'lx-checkbox-group-props-hint',
       'lx-checkbox-events-hint',
       'lx-checkbox-slots-hint',
+      'lx-checkbox-design-hint',
     ],
-    shortOverflowHintIds: ['lx-checkbox-design-hint'],
+    shortOverflowHintIds: [],
   },
   {
     title: '单选框',
     path: '/components/lxradio',
     propsHintId: 'lx-radio-props-hint',
     groupPropsHintId: 'lx-radio-group-props-hint',
-    scrollableHintIds: ['lx-radio-props-hint', 'lx-radio-group-props-hint', 'lx-radio-events-hint'],
-    shortOverflowHintIds: ['lx-radio-slots-hint', 'lx-radio-design-hint'],
+    scrollableHintIds: [
+      'lx-radio-props-hint',
+      'lx-radio-group-props-hint',
+      'lx-radio-events-hint',
+      'lx-radio-design-hint',
+    ],
+    shortOverflowHintIds: ['lx-radio-slots-hint'],
   },
 ]) {
   test(`${item.title}文档在375px下可浏览溢出表格并压缩禁用行`, async ({ page }) => {
