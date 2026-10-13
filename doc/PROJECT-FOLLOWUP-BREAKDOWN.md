@@ -2,8 +2,8 @@
 
 ## 当前范围备注（2026-10-13）
 
-- 页面操作引导整体暂缓：不纳入当前或后续自动推进的执行队列，不安排开发、评审或验收，也不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
-- 保留 `doc/GUIDE-CONTENT-PLAN.md` 作为历史需求/文案草案；只有用户之后明确重新提出需要时，才重新确认页面范围、文案、交互、技术方案和后端契约，并单独评估排期。此前不计入当前待办或执行计划。
+- 页面操作引导当前暂缓，不纳入当前执行队列或排期，也不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
+- 保留 `doc/GUIDE-CONTENT-PLAN.md` 作为需求与文案草案；后续确有需要时，再确认页面范围、文案、交互、技术方案和后端契约，单独评估排期后执行。当前不计入待办或执行计划。
 
 ## 2026-10-13 当前交接：Wave 18 Checkbox/Radio 当前版复核与窄屏 P2 收口
 
@@ -11,7 +11,7 @@
 - 窄屏文档保留 7 张明显溢出表的提示、固定首列、方向键与 ARIA 关联；3 张短表不增加无效停靠。单测 20/20、当前文档 E2E 10/10；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 Prettier、E2E 文件 ESLint 和差异检查通过。Vue3 ESLint 将 `linkx-fe` 文件忽略，未作为组件库 ESLint 通过记录。
 - Impeccable A 34/40；两项示例分组 P3 经 Light/HUD 桌面和 375px 复验关闭，无开放 P0–P2。B 四个 detector 为 `[]`/空 stderr/退出码 0，8 个独立视图注入成功；Radio HUD 两个选中标签命中符合主色令牌，移动端根宽增加仅由 overlay 注入造成。独立代码复审确认旧版证据 P2 已全仓关闭，无开放 P0–P2；桌面文档导航密度作为共享外壳 P3 单独评估。
 - 旧文档窄屏 P2 记录中的 8/8 和六视图仅作历史初验；当前版本验收证据见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`。本波不关闭四个 Checkbox/Radio 组件 UI-10 严格矩阵行，全库仍为 0/52，也不代表宿主替换或真实后端联调。
-- 下一步按组件审计矩阵补齐 Checkbox、CheckboxGroup、Radio、RadioGroup 剩余严格证据，再继续基础组件、动态图标、`LxDynamicForm` 和 Vue3 Element Plus 分批替换。页面操作引导整体暂缓；只有用户明确重新提出时才恢复评估和排期。
+- 下一步按组件审计矩阵补齐 Checkbox、CheckboxGroup、Radio、RadioGroup 剩余严格证据，再继续基础组件、动态图标、`LxDynamicForm` 和 Vue3 Element Plus 分批替换。页面操作引导当前暂缓，后续确有需要时再恢复评估和排期。
 
 ## 2026-10-13 当前交接：LxSelect 组件级复核完成，下一步 Checkbox/Radio 文档 P2
 

@@ -7,7 +7,7 @@
 - **入口与验证**：定向单测 20/20、当前文档 E2E 10/10；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 Prettier、E2E 文件 ESLint 和差异检查通过。Vue3 ESLint 忽略 `linkx-fe` 组件源码，未计为组件库 ESLint 通过。
 - **正式复核**：Assessment A 34/40（Good），两个组件示例分组 P3 已在 Light/HUD 桌面及 375px 复验关闭，无开放 P0–P2。B 四个 detector 三件套均为 `[]`/空 stderr/退出码 0，8 个新页面上下文无页面错误和失败请求；Radio HUD 两条命中符合主色令牌，移动根宽变化发生在 overlay 注入之后。独立代码复审确认旧证据 P2 已在所有台账关闭，无开放 P0–P2。
 - **后续 P3**：桌面 VitePress 组件页导航同时展示约 8–10 个同级锚点；作为共享文档外壳的信息架构事项单独评估，不归为组件缺陷，不阻塞本波。
-- **证据与边界**：当前 A/B、代码复审、截图、源码指纹与综合报告见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`；旧版文档 P2 的 8/8、六视图仅作历史记录。当前变更不关闭四个组件的 UI-10 严格矩阵行，全库仍为 0/52，也不代表 Vue3 宿主替换或 Element Plus 移除。页面操作引导不纳入自动执行队列，用户明确重新提出后才评估。
+- **证据与边界**：当前 A/B、代码复审、截图、源码指纹与综合报告见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`；旧版文档 P2 的 8/8、六视图仅作历史记录。当前变更不关闭四个组件的 UI-10 严格矩阵行，全库仍为 0/52，也不代表 Vue3 宿主替换或 Element Plus 移除。页面操作引导当前暂缓，后续确有需要时再恢复评估和排期。
 - **下一步**：按 `doc/lx-ui/COMPONENT-AUDIT.md` 补齐四个组件尚未关闭的严格矩阵证据，再继续基础控件、动态图标、`LxDynamicForm` 和 Vue3 Element Plus 替换。
 
 ## 2026-10-13 Wave 17 / LxSelect 当前版组件级复核完成
