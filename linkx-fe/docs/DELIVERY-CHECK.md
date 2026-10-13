@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-13 LxInputNumber 当前版复核：桌面 P2 未关闭
+
+- Impeccable Assessment A **29/40（Good）**；B 的 4 个目标 detector 都是合法 JSON `[]`、stderr 空、退出码 `0`。Light/HUD × 桌面/375px 四视图成功注入；无浏览器错误、失败请求或横向溢出。overlay 命中按实测归因为文档、VitePress 外壳及主题令牌。
+- 桌面步进目标实测高 13/15/19px，低于 24px；须等设计决策，不能用触屏 44×44px 或键盘可用性代替桌面指针目标验收。当前不关闭 `LxInputNumber` 严格矩阵行，也不增加 UI-10 全库关闭数。
+- A/B、截图、指纹、detector 和停服记录见 `.impeccable/critique/lxinputnumber-wave19-current-2026-10-13/`。`LxTextarea` 已完成当前版组件级复核；下一项核验尚未关闭严格矩阵行的 `LxSelect`。
+
 ## 2026-10-13 Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
 - 组件中文文档将冗长 `disabled` 说明移入折叠详情；摘要至少 44px，键盘焦点环使用主题品牌色。`useResponsiveDocTable(24)` 对 7 张明显溢出表提供提示、键盘访问、首列固定和描述关联；3 张短溢出表不增加无效提示或焦点停靠。

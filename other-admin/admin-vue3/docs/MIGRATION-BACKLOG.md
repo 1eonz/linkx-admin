@@ -1,11 +1,17 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-13 当前交接：LxInputNumber 桌面目标尺寸 P2 复核完成但未关闭
+
+- Impeccable Assessment A **29/40（Good）**；Assessment B 的四个静态 detector 均为合法 JSON `[]`/空 stderr/退出码 `0`，Light/HUD × 桌面/375px 浏览器视图成功注入且无横向溢出或页面错误。
+- 桌面步进目标高 13/15/19px，低于 24px，等待设计决策；既有 28/32/40px 外框与竖向均分布局不能同时满足双按钮 24px 高，未获设计确认前不改横排。触屏目标为 44×44px。
+- `LxInputNumber` 严格矩阵行保持开放，不增加 UI-10 全库关闭数；本轮无产品源码变更。A/B 原始证据在 `.impeccable/critique/lxinputnumber-wave19-current-2026-10-13/`。`LxTextarea` 已完成当前版组件级复核；下一项核验尚未关闭严格矩阵行的 `LxSelect`。
+
 ## 2026-10-13 UI-10 / Wave 19 Checkbox 与 Radio 四项严格矩阵登记
 
 - `LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 按 `design/表单控件八件套/` 完成矩阵所需的设计源映射、状态适用性、Demo/API、行为和浏览器证据登记；当前 UI-10 为 **4/52**。
 - 定向单测 23/23、文档 E2E 16/16；正式 Impeccable A 36/40，B 的 8 个静态目标均为合法 `[]`/空 stderr/退出码 0，8 个主题/视口浏览器视图注入成功；独立代码复审关闭空错误断言 P2。完整报告、代码复审与 snapshot/trend 见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/` 和 `.impeccable/critique/2026-10-13T09-44-41Z__linkx-fe-src-components-lxcheckbox-index-vue.md`。
 - 无开放组件级 P0–P2；共享文档导航密度、未来可编辑表格键盘边界为非阻塞 P3。此矩阵登记不代表 Vue3 业务组件替换或真实后端联调完成。
-- 下一步进入 `LxInputNumber` 桌面步进目标高度 P2 的严格复核，然后继续基础控件、动态图标、`LxDynamicForm`、其余 lx-ui 组件及正式整库门禁。页面操作引导当前不执行、不纳入待办、执行队列或排期。
+- `LxInputNumber` 桌面步进目标高度 P2 已复核但尚未关闭；`LxTextarea` 已完成当前版组件级复核，下一步核验尚未关闭严格矩阵行的 `LxSelect`，再继续基础控件、动态图标、`LxDynamicForm`、其余 lx-ui 组件及正式整库门禁。页面操作引导当前不执行、不纳入待办、执行队列或排期。
 
 ## 2026-10-13 lx-ui Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 

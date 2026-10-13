@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-13 UI-10 / LxInputNumber 当前版严格复核，桌面目标尺寸 P2 保持开放
+
+- **评审对象与评分**：本轮独立 Impeccable Assessment A 为 **29/40（Good）**；Assessment B 对组件、样式、Demo 和中文文档逐项执行 detector，均为合法 JSON `[]`、stderr 为空、退出码 `0`。`[]` 只表示静态规则零命中，不代表视觉审查通过。
+- **浏览器证据**：Light/HUD × 1440px 桌面/375px 触屏四视图均成功注入 overlay。桌面 sm/md/lg 外框为 28/32/40px，步进目标高 13/15/19px；触屏目标均为 44×44px。键盘方向键、Tab、Enter、空格、边界禁用和步进反馈有效，页面无横向溢出。HUD 青色命中符合主题令牌；其余命中归因到文档长行与 VitePress 外壳。A/B 原始证据见 `.impeccable/critique/lxinputnumber-wave19-current-2026-10-13/`。
+- **未关闭问题**：桌面步进目标高度仍低于 24px，列为 **P2**。在保留 28/32/40px 外框和上下竖向等分设计时，两个按钮无法各自达到 24px 高；不得将键盘或触屏证据写成桌面指针目标达标，也不得静默更改设计稿。须由设计决策确认接受密度取舍，或改版目标尺寸和排列后再复验。
+- **边界与后续**：本轮没有组件源码改动，不增加 UI-10 全库关闭数；`LxInputNumber` 严格矩阵行继续开放。`LxTextarea` 已在 Wave 16 完成当前版组件级复核；下一项按未关闭的基础控件矩阵进入 `LxSelect` 严格矩阵核验。页面操作引导不在当前待办或排期中，后续由用户明确提出时再确认并纳入计划。
+
 ## 2026-10-13 UI-10 / Wave 19 Checkbox 与 Radio 四项严格矩阵登记
 
 - **设计依据与映射**：唯一对照源为 `design/表单控件八件套/screen.png` 与 `code.html` 第 03/04 区。Radio 为 14px 靶环、6px 主色靶心，选中面保持卡片底色；hover 只强调圆环；横向选中标签用主色中字重，纵向列表保持正文色和常规字重。Checkbox 为 14px 选框，选中/半选以主色填充并显示白勾/横杠；标签 12px，图标间距 10px，横向组间距 16px、纵向 Checkbox/Radio 行距分别为 12px/8px。实现使用 `--lx-*` 与 HUD 主题令牌，并在组件级固定样式，避免依赖全局 Element Plus 桥接后发生漂移。
@@ -277,7 +284,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                                                                                                     |
 | `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | A/B 与代码复审通过；真实读屏及权限菜单数据未覆盖，暂不计入严格矩阵                                                                                                                         |
 | `LxInput`            | `design/表单控件八件套/`                          | Wave 14 当前版组件级 A/B 与代码复审完成；两项 P3 测试增强建议待后续，宿主组合与 UI-10 全库门槛仍开放                                                                                       |
-| `LxInputNumber`      | `design/表单控件八件套/`                          | Wave 15 当前版组件级 A/B 与代码复审完成；保留桌面步进目标尺寸设计权衡和 Demo P3，不增加 UI-10 全库关闭数                                                                                   |
+| `LxInputNumber`      | `design/表单控件八件套/`                          | 当前版 A 29/40、B 四目标 detector 均为合法 `[]`，四个 Light/HUD × 桌面/375px 视图有证据；桌面步进目标 13/15/19px 的 P2 未决，严格矩阵行开放，不增加 UI-10 全库关闭数 |
 | `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 待严格复核；数值、语义色、趋势、进度和窄屏                                                                                                                                                 |
 | `LxNavbar`           | `DESIGN-SPEC.md` + Navbar API/Demo                | 待严格复核；导航密度、焦点、菜单与窄屏                                                                                                                                                     |
 | `LxNodeBadge`        | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；节点状态、字号和对齐                                                                                                                                                           |
@@ -303,8 +310,8 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxSwitch`           | `design/表单控件八件套/`                          | 组件级复核已完成；共享壳层与宿主契约仍跟踪，暂不计入全库严格关闭                                                                                                                           |
 | `LxTabsBar`          | `DESIGN-SPEC.md` + TabsBar API/Demo               | 待严格复核；页签层级、关闭/拖动和横向滚动                                                                                                                                                  |
 | `LxTag`              | `DESIGN-SPEC.md` §2 + Tag API/Demo                | 待严格复核；语义色、尺寸、关闭态与对比度                                                                                                                                                   |
-| `LxTextarea`         | `design/表单控件八件套/`                          | 当前版组件级严格复核完成；单测、文档 E2E、主题/状态浏览器证据、正式 Impeccable A/B 与代码复审通过；全库 UI-10 0/52 口径不变                                                                |
-| `LxTransferPanel`    | `design/虚拟滚动树 + 双栏穿梭/`                   | 当前实现、30 项单测、文档 E2E 28/28、名称/编码筛选及移动触控修复完成；桌面 32px 基准行高、320–420px 为 64px、421px 起为 44px；最新断言修订代码复审与正式 A/B 收口中；全库严格矩阵仍为 0/52 |
+| `LxTextarea`         | `design/表单控件八件套/`                          | 当前版组件级严格复核完成；单测、文档 E2E、主题/状态浏览器证据、正式 Impeccable A/B 与代码复审通过；本项不增加全库计数，当前为 4/52                                                                |
+| `LxTransferPanel`    | `design/虚拟滚动树 + 双栏穿梭/`                   | 当前实现、30 项单测、文档 E2E 28/28、名称/编码筛选及移动触控修复完成；桌面 32px 基准行高、320–420px 为 64px、421px 起为 44px；最新断言修订代码复审与正式 A/B 收口中；全库严格矩阵当前为 4/52 |
 | `LxTreeSelect`       | `design/表单控件八件套/` + TreeSelect API/Demo    | 当前版单测/E2E、A/B 和代码复审完成；P3 为长节点换行 E2E 覆盖增强，严格矩阵仍待全库复验                                                                                                     |
 | `LxUpload`           | `design/上传拖拽区 Upload/`                       | 受控模型、进度/失败/重试/取消/移除已有组件行为证据；设计图严格对照、提示文字视觉复核、正式 Critique 收口中                                                                                 |
 | `LxVirtualTree`      | `design/虚拟滚动树 + 双栏穿梭/`                   | 当前 34 项行为单测、文档 E2E 13/13，含自定义 `filterMethod`、44px 移动触控和跨行高断点焦点回归；与 TransferPanel 联合参与本次严格 A/B，UI-10 全库矩阵仍待关闭                              |

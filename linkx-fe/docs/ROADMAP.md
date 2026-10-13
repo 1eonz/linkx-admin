@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-13 LxInputNumber 当前版复核：桌面目标尺寸 P2 保持开放
+
+- 独立 Assessment A **29/40（Good）**；Assessment B 对组件、样式、Demo 和中文文档执行四次 detector，均为合法 JSON `[]`、stderr 为空、退出码 `0`。Light/HUD × 1440px 桌面/375px 触屏四视图均完成浏览器注入。
+- sm/md/lg 桌面外框为 28/32/40px，步进目标高 13/15/19px；触屏目标均为 44×44px。键盘操作、边界禁用和焦点可见；无页面横向溢出。overlay 命中归因到文档及 VitePress 外壳、HUD 令牌，不将静态 `[]` 单独作为视觉通过。
+- 桌面目标低于 24px 的 P2 尚待设计决策；未获确认前保留设计稿竖向布局，不增加 UI-10 关闭数，`LxInputNumber` 严格矩阵行保持开放。完整 A/B 及截图见 `.impeccable/critique/lxinputnumber-wave19-current-2026-10-13/`。`LxTextarea` 已完成当前版组件级复核；下一项核验尚未关闭严格矩阵行的 `LxSelect`。
+
 ## 2026-10-13 Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
 - Checkbox/Radio 样式、Demo 与中文 API 按设计稿复核。Checkbox Demo 区分知情确认和通知渠道并演示 LxForm 必填校验；Radio Demo 分离当前选择和只读历史快照并演示必填校验。禁用勾选/半选、Radio hover/纵向选中/禁用文字均按设计与主题令牌调整。

@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-13 UI-10 / LxInputNumber 当前版复核交接
+
+- 当前版独立 Impeccable Assessment A **29/40（Good）**；B 的 4 个目标 detector 均为合法 JSON `[]`、stderr 为空、退出码 `0`。Light/HUD × 桌面/375px 四视图注入成功，浏览器无横向溢出或页面错误；overlay 命中已归因到文档、VitePress 外壳及设计令牌。
+- 桌面 sm/md/lg 步进按钮实测高 13/15/19px，低于 24px，保留为未关闭 P2。当前设计的 28/32/40px 外框和上下均分布局无法同时容纳两个 24px 高的独立按钮；未经设计决策不得擅改为横排。触屏目标为 44×44px，键盘路径有效，但不替代桌面指针尺寸要求。
+- 本轮未修改组件源码，不增加 UI-10 全库关闭计数；`LxInputNumber` 严格矩阵行保持开放。证据位于 `.impeccable/critique/lxinputnumber-wave19-current-2026-10-13/`。`LxTextarea` 已完成当前版组件级复核；下一项进入仍未关闭严格矩阵行的 `LxSelect`，InputNumber 的 P2 继续留在台账中。
+
 ## 2026-10-13 范围备注：页面操作引导暂不执行，后续按需纳入计划
 
 - 页面操作引导当前不执行、不纳入待办、执行队列或排期，也不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
@@ -10,7 +16,7 @@
 - **关闭项**：`LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 已按设计标本、主题/状态、Demo/API、行为和浏览器证据完成统一口径登记；UI-10 当前为 **4/52**。设计尺寸和实现映射、状态适用性及剩余项详见 `doc/lx-ui/COMPONENT-AUDIT.md` Wave 19。
 - **证据**：直接对照 `design/表单控件八件套/screen.png` 与 `code.html` 第 03/04 区；定向单测 23/23，文档 E2E 16/16，当前版类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标格式/Lint 与差异检查通过。Impeccable A 36/40；B 的 8 个静态目标为有效 `[]`/空 stderr/退出码 0，8 个 Light/HUD × 桌面/375px 视图注入成功。独立代码复审关闭空错误断言 P2；正式报告、证据、snapshot/trend 见 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/` 与 `.impeccable/critique/2026-10-13T09-44-41Z__linkx-fe-src-components-lxcheckbox-index-vue.md`。
 - **剩余与边界**：共享文档导航密度、未来可编辑表格方向键边界为非阻塞 P3；人工读屏仍未覆盖。组件矩阵关闭不代表 Vue3 宿主替换、真实后端联调、其余 48 项关闭或 Element Plus 可以移除。
-- **下一步**：按矩阵进入 `LxInputNumber`，先复核桌面步进目标高度的既有 P2，并按同一标准记录设计依据、交互、A/B、浏览器证据与复审结论；完成后再按组件审计顺序推进余下基础控件、动态图标、`LxDynamicForm`、其余组件及整库门禁。页面操作引导不纳入待办或自动排期。
+- **下一步**：`LxInputNumber` 当前版 A/B 已复核，但桌面目标尺寸 P2 仍待设计决策，严格矩阵行保持开放；`LxTextarea` 已完成当前版组件级复核，下一项核验尚未关闭严格矩阵行的 `LxSelect`，再推进余下基础控件、动态图标、`LxDynamicForm`、其余组件及整库门禁。页面操作引导不纳入待办或自动排期。
 
 ## 2026-10-13 lx-ui Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 

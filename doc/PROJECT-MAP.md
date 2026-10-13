@@ -1,11 +1,17 @@
 # LinkX 项目地图
 
+## 2026-10-13 LxInputNumber 当前版审查入口
+
+- **审查结果**：Impeccable Assessment A 为 29/40；B 的四个静态 detector 均为合法 `[]`/空 stderr/退出码 0，Light/HUD × 桌面/375px 浏览器视图均注入成功。完整归因和证据见 `.impeccable/critique/lxinputnumber-wave19-current-2026-10-13/`。
+- **未关闭项**：桌面步进按钮高 13/15/19px 的 P2 尚待设计决策；`LxInputNumber` 严格矩阵行保持开放，UI-10 仍为 4/52。本轮没有产品代码改动。
+- **下一入口**：`LxTextarea` 已完成当前版组件级复核；按仍未关闭的基础控件严格矩阵进入 `LxSelect` 核验，桌面目标 P2 保留跟踪。页面操作引导当前不执行、不纳入待办或排期，后续有需要时再由用户提出并重新评估。
+
 ## 2026-10-13 Wave 19 / Checkbox 与 Radio 四项 UI-10 严格矩阵登记
 
 - **组件与设计源**：`LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 对照 `design/表单控件八件套/screen.png` 与 `code.html` 第 03/04 区；组件矩阵记录了尺寸/间距、主题令牌、交互差异和不适用状态。
 - **验证与审查**：单测 23/23、文档 E2E 16/16；lx-ui 类型检查/构建、VitePress、Vue3 类型检查、目标格式/Lint 通过。Impeccable A 36/40；B 8 个 detector 为合法 `[]`/空 stderr/退出码 0，8 个 Light/HUD × 桌面/375px 视图注入成功；独立代码复审关闭空错误断言 P2。
 - **证据与边界**：报告和浏览器原始证据在 `.impeccable/critique/checkbox-radio-component-final-2026-10-13/`，正式快照在 `.impeccable/critique/2026-10-13T09-44-41Z__linkx-fe-src-components-lxcheckbox-index-vue.md`。UI-10 当前 **4/52**；不代表 Vue3 宿主替换、真实后端联调或全库门禁完成。两个非阻塞共享文档 P3 留在审计记录中。
-- **下一入口**：`doc/lx-ui/COMPONENT-AUDIT.md` 中 `LxInputNumber` 桌面步进目标尺寸 P2；页面操作引导当前不执行、不纳入待办或排期。
+- **下一入口**：`doc/lx-ui/COMPONENT-AUDIT.md` 中 `LxInputNumber` 桌面步进目标尺寸 P2 已于 2026-10-13 完成本轮复核但仍未关闭；`LxTextarea` 已完成组件级复核，下一项为尚未关闭严格矩阵行的 `LxSelect`。页面操作引导当前不执行、不纳入待办或排期。
 
 ## 2026-10-13 Wave 18 / Checkbox 与 Radio 当前版复核及文档窄屏 P2 收口
 
