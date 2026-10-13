@@ -1,5 +1,13 @@
 # lx-ui 路线图
 
+## 2026-10-13 Wave 18 / Checkbox 与 Radio 文档窄屏 P2 已完成
+
+- Checkbox/Radio 的 `disabled` 行已简化，主题与表单禁用继承说明改用共同折叠结构；摘要至少 44px 高，键盘焦点使用品牌色外框。
+- 375px 浏览器回归覆盖 7 张明显溢出表的提示、固定首列、ARIA 和方向键，以及 3 张短溢出表不进入 Tab 顺序；disabled 折叠项覆盖键盘展开/关闭和主题契约。
+- 文档 E2E **8/8**、lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 ESLint/Prettier 和 `git diff --check` 通过。A **33/40（Good）**，无 P0–P2；B 两个 detector 为合法 `[]`/空 stderr/退出码 0，六个视图无失败请求、浏览器错误和页面横向溢出；代码复审无开放 P0–P3。
+- A/B、detector 三件套、截图、源码指纹、综合报告、snapshot 与趋势记录见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`；`[]` 只代表静态扫描规则零命中。
+- 本波不改变 UI-10 全库 **0/52** 口径，不代表 Vue3 页面组件替换或真实后端联调。下一步按审计矩阵复核 Checkbox/CheckboxGroup/Radio/RadioGroup；页面操作引导暂缓且不排期。
+
 ## 2026-10-13 Wave 17 / LxSelect 当前版组件级复核完成
 
 - `LxSelect` 的实现、Demo 与中文 API 已按 `design/表单控件八件套/` 对照，覆盖 Light/HUD、禁用值对比度、远程空/错与重试、键盘操作及窄屏触控。390px 下触发器、选项行均为 44px；320px 注入前页面无横向溢出。

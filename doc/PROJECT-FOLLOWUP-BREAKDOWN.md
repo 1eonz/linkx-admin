@@ -5,6 +5,13 @@
 - 当前阶段暂不考虑实施页面操作引导；不纳入执行队列、不主动排期，也不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
 - 保留 `doc/GUIDE-CONTENT-PLAN.md` 作为历史需求/文案草案；后续确有需要时，再重新确认页面范围、文案、交互、技术方案和后端契约，单独评估并安排实施。
 
+## 2026-10-13 当前交接：Wave 18 Checkbox/Radio 文档 P2 已关闭
+
+- 375px 下 Checkbox/Radio 的 `disabled` API 长说明已移入折叠详情；摘要至少 44px，提供品牌色可见焦点。7 张明显溢出表具备横向提示、首列固定、键盘浏览与 ARIA 关联，3 张短溢出表不增加无效停靠。
+- 文档 E2E 8/8；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 ESLint/Prettier、差异检查通过。Assessment A 33/40（Good），B 两个静态 detector 均为有效 `[]`/空 stderr/退出码 0，六视图浏览器检查通过；独立代码复审无开放 P0–P3。
+- 本波只关闭文档可读性 P2，不关闭 Checkbox、CheckboxGroup、Radio、RadioGroup 的 UI-10 严格矩阵行；全库仍为 0/52。下一步按组件审计矩阵完成这四个组件的严格设计复核，再继续动态图标、`LxDynamicForm` 和剩余组件库门禁。
+- 综合 Critique、snapshot、趋势记录和 A/B 原始证据见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`。页面操作引导继续暂缓、后续有需要再重评估。
+
 ## 2026-10-13 当前交接：LxSelect 组件级复核完成，下一步 Checkbox/Radio 文档 P2
 
 - `LxSelect` 按表单控件设计源完成当前实现、Demo、中文 API、主题、禁用、远程空/错/重试、键盘和窄屏复核；禁用值对比度通过，桌面高度 32px，窄屏触发器和选项行 44px。

@@ -1,5 +1,13 @@
 # lx-ui 交付核查
 
+## 2026-10-13 Wave 18 / Checkbox 与 Radio 文档窄屏 P2 已完成
+
+- 两份组件中文文档将冗长 `disabled` 说明从 API 表格移入折叠详情；摘要高度不低于 44px，键盘焦点环使用主题品牌色。
+- `useResponsiveDocTable(24)` 对 7 张明显溢出表启用滚动提示、键盘访问、首列固定和描述关联；3 张短溢出表不增加无效提示或焦点停靠。
+- 定向文档 E2E **8/8**；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 ESLint/Prettier 及差异检查通过。Assessment A **33/40（Good）**，无 P0–P2；B 两个 detector 为合法 `[]`/空 stderr/退出码 0，六个视图注入成功且无浏览器错误、失败请求或页面溢出。代码复审无开放 P0–P3。
+- 正式 A/B、detector 三件套、浏览器证据、综合报告、snapshot 和趋势记录见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`。Detector `[]` 不单独代表视觉审查通过。
+- 本波不增加 UI-10 全库 0/52 关闭数，不代表宿主替换、Element Plus 移除或真实后端联调。下一步进入 Checkbox/Radio 四个组件的严格设计矩阵复核；页面操作引导暂缓、不纳入当前排期。
+
 ## 2026-10-13 Wave 17 / LxSelect 当前版组件级复核完成
 
 - `LxSelect` 实现、Demo 和中文 API 已按设计源复核，覆盖禁用值可读性、键盘操作、远程空/错/重试和窄屏触控；Light/HUD 下禁用值与图标对比度通过，390px 触发器和选项行均为 44px。

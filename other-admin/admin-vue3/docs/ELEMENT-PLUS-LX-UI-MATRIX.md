@@ -1,5 +1,11 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-13 Wave 18 范围进度
+
+- Checkbox/Radio 文档 375px 可读性 P2 已关闭；文档 E2E 8/8，正式 A/B 和独立代码复审通过。
+- 此项不关闭 Checkbox、CheckboxGroup、Radio、RadioGroup 的 UI-10 严格矩阵行，全库仍为 0/52；也不改变 Vue3 Element Plus 直接依赖保留至替换门槛满足后的规则。
+- 页面操作引导继续暂缓、不进入当前替换计划，后续确有需要时再重评估。
+
 ## 2026-10-11 UI-04 前置组件证据：MetricCard 与 SectionTitle
 
 - `LxMetricCard` 已具备旧宿主 `valueType`/`title`/`footer`/`extra` 兼容层和进度可访问性；`LxSectionTitle` 适配器已透传 `headingLevel`、`size`、`tag`、`tagType`，并补齐根入口类型出口。

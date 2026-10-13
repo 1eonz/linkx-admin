@@ -5,6 +5,15 @@
 - 当前阶段暂不考虑实施页面操作引导；不纳入当前执行队列、不主动排期，也不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
 - `doc/GUIDE-CONTENT-PLAN.md` 仅保留为历史需求/文案草案。后续确有需要时，再重新确认页面范围、文案、交互、技术方案及后端契约，单独评估并安排实施；本备注不代表功能已实现或验收。
 
+## 2026-10-13 lx-ui Wave 18 / Checkbox 与 Radio 文档窄屏 P2
+
+- **完成范围**：Checkbox、Radio 的 `disabled` API 表格行改为简短摘要，主题色与 `LxCheckboxGroup`/`LxRadioGroup`、`ElForm` 继承边界统一收进原生折叠说明。折叠摘要使用至少 44px 的触控高度，并以品牌色显示键盘 `focus-visible` 外框。
+- **表格浏览**：375px 下 7 张明显横向溢出的表格保留提示、首列固定、方向键浏览和 `aria-describedby`；3 张溢出不足 24px 的短表格不增加提示或 Tab 停靠。
+- **验证**：文档 Playwright 8/8；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、定向 ESLint/Prettier、`git diff --check` 全部通过。Impeccable Assessment A 为 33/40（Good），未发现 P0–P2；B 两个 detector 的 JSON 均为 `[]`、stderr 空、退出码 0，六个 Light/HUD × 桌面/窄屏视图均成功注入，无失败请求、浏览器错误或页面横向溢出。独立代码复审无未关闭 P0–P3。
+- **正式证据**：A/B 原始截图、浏览器记录、源码指纹、detector 三件套及代码复审见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`；综合报告、snapshot 和趋势记录位于同一目录。Detector 的 `[]` 仅表示静态规则零命中，不单独代表视觉审查通过。
+- **边界**：本波只关闭 Checkbox/Radio 文档窄屏可读性 P2；四个组件的 UI-10 严格设计矩阵行仍开放，全库仍为 0/52；不代表 Vue3 页面替换、Element Plus 移除或真实后端联调完成。页面操作引导继续暂缓、不纳入当前队列，后续有需要再重评估。
+- **下一步**：按 `doc/lx-ui/COMPONENT-AUDIT.md` 对 Checkbox、CheckboxGroup、Radio、RadioGroup 继续严格设计矩阵复核，再依序推进其余组件、动态图标、`LxDynamicForm`、全库门禁与 Vue3 Element Plus 分批替换。
+
 ## 2026-10-13 lx-ui Wave 17 / LxSelect 当前版组件级复核完成
 
 - **完成范围**：按 `design/表单控件八件套/` 对照 LxSelect 实现、Demo、中文 API、禁用值、键盘、远程空/错/重试与 Light/HUD 状态；桌面基准 32px，390px 下触发器/选项行 44px。

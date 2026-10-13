@@ -1,5 +1,12 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-13 lx-ui Wave 18 / Checkbox 与 Radio 文档窄屏 P2 已完成
+
+- Checkbox/Radio 文档将 `disabled` API 长说明移入折叠详情，摘要高度至少 44px 并提供品牌色键盘焦点环；主题值及组件组/ElForm 禁用继承说明完整保留。
+- 375px 下 7 张明显溢出表格保留横向提示、键盘滚动、首列固定和 ARIA；3 张短溢出表不进入 Tab 顺序。定向文档 E2E 8/8。
+- lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 ESLint/Prettier、差异检查通过；文档 E2E 8/8。Assessment A 33/40（Good），无 P0–P2；B 的静态 detector 与六个浏览器视图正式完成；独立代码复审无开放 P0–P3。
+- 本波仅关闭组件文档可读性 P2，不改变 Element Plus 替换矩阵、UI-10 全库 0/52 或 Vue3 宿主依赖；页面操作引导仍不排期。下一步按组件矩阵严格复核 Checkbox、CheckboxGroup、Radio、RadioGroup。正式证据见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`。
+
 ## 2026-10-13 范围备注：页面操作引导暂不考虑
 
 - 页面操作引导当前不纳入 Vue3 迁移任务队列或排期，也不作为 lx-ui 收口及 Element Plus 替换的前置条件。

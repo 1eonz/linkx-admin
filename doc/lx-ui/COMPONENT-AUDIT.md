@@ -1,5 +1,13 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-13 UI-10 / Wave 18 Checkbox 与 Radio 文档窄屏 P2 已关闭
+
+- Checkbox/Radio API 表格中的 `disabled` 长说明已改为短摘要加折叠详情；主题颜色、HUD 状态及 `LxCheckboxGroup`/`LxRadioGroup`、`ElForm` 禁用继承边界均保留。
+- 折叠摘要最小高度 44px，键盘焦点使用品牌色外框。375px 下 7 张明显溢出表保留提示、首列固定、方向键和 ARIA；3 张短溢出表不产生多余停靠。
+- 文档 E2E 8/8，lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 ESLint/Prettier 和差异检查通过。Assessment A 为 33/40（Good），未发现 P0–P2；B 两个 detector 均为有效 `[]`/空 stderr/退出码 0，六个浏览器视图均成功注入；独立代码复审无开放 P0–P3。
+- 综合报告、snapshot、趋势和原始 A/B 证据见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`。`[]` 仅代表静态扫描规则零命中。
+- 本波仅关闭文档阅读 P2；Checkbox/CheckboxGroup/Radio/RadioGroup 的 UI-10 严格矩阵行仍开放，全库仍为 0/52。页面操作引导继续暂缓，不作为前置条件。
+
 ## 2026-10-13 UI-10 / Wave 17 LxSelect 当前版严格复核完成
 
 - `LxSelect` 按 `design/表单控件八件套/` 完成实现、Demo、中文 API、禁用/错误/远程状态、键盘和窄屏对照；禁用值在 Light/HUD 均保持可读，390px 下触发器和选项行均为 44px，320px 文档页无注入前横向溢出。
@@ -243,8 +251,8 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxBreadcrumb`       | `DESIGN-SPEC.md` + 导航规范                       | 待严格复核；保留现有宿主导航契约                                                                                                                                                           |
 | `LxButton`           | `design/按钮体系/`                                | 当前版 A 32/40，B 8/8 浏览器场景，代码复审无未关闭发现；桌面标签 P2 已关闭，两项 P3 后置；不增加 UI-10 全库关闭数                                                                          |
 | `LxCascader`         | `design/表单控件八件套/`（无专属画板）            | 当前版单测/E2E、A/B 和代码复审完成；P2 为移动换行密度、错误旧状态、主题入口；按 Select 控件外形与状态令牌映射                                                                              |
-| `LxCheckbox`         | `design/表单控件八件套/`                          | A/B 与行为完成；窄屏 API 表格 P2 待处理                                                                                                                                                    |
-| `LxCheckboxGroup`    | `design/表单控件八件套/`                          | A/B、半选、禁用与触屏验收完成；随 API 表格 P2 保持开放                                                                                                                                     |
+| `LxCheckbox`         | `design/表单控件八件套/`                          | A/B 与行为证据完成；文档窄屏 P2 已关闭；UI-10 严格设计矩阵仍开放                                                                                                                           |
+| `LxCheckboxGroup`    | `design/表单控件八件套/`                          | A/B、半选、禁用与触屏验收完成；文档窄屏 P2 已关闭；UI-10 严格设计矩阵仍开放                                                                                                                |
 | `LxCodeSlot`         | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；代码区层级、复制反馈与窄屏                                                                                                                                                     |
 | `LxDatePicker`       | `design/表单控件八件套/`                          | Wave 2 E2E 16/16、单测 39/39；A 31/40、B 9 场景、代码复审通过；4 项 P2/P3 未结，严格矩阵行保持打开                                                                                         |
 | `LxDescriptions`     | `design/详情描述行 Descriptions/`                 | 部分证据；19/20 阶段审查不是正式关闭                                                                                                                                                       |
@@ -258,8 +266,8 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxFormItem`         | `design/表单控件八件套/`                          | UI-13 本波；错误/必填 ARIA 与样式待正式 Critique                                                                                                                                           |
 | `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                                                                                                     |
 | `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | A/B 与代码复审通过；真实读屏及权限菜单数据未覆盖，暂不计入严格矩阵                                                                                                                         |
-| `LxInput`            | `design/表单控件八件套/`                          | Wave 14 当前版组件级 A/B 与代码复审完成；两项 P3 测试增强建议待后续，宿主组合与 UI-10 全库门槛仍开放                                                                                          |
-| `LxInputNumber`      | `design/表单控件八件套/`                          | Wave 15 当前版组件级 A/B 与代码复审完成；保留桌面步进目标尺寸设计权衡和 Demo P3，不增加 UI-10 全库关闭数                                                                                      |
+| `LxInput`            | `design/表单控件八件套/`                          | Wave 14 当前版组件级 A/B 与代码复审完成；两项 P3 测试增强建议待后续，宿主组合与 UI-10 全库门槛仍开放                                                                                       |
+| `LxInputNumber`      | `design/表单控件八件套/`                          | Wave 15 当前版组件级 A/B 与代码复审完成；保留桌面步进目标尺寸设计权衡和 Demo P3，不增加 UI-10 全库关闭数                                                                                   |
 | `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 待严格复核；数值、语义色、趋势、进度和窄屏                                                                                                                                                 |
 | `LxNavbar`           | `DESIGN-SPEC.md` + Navbar API/Demo                | 待严格复核；导航密度、焦点、菜单与窄屏                                                                                                                                                     |
 | `LxNodeBadge`        | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；节点状态、字号和对齐                                                                                                                                                           |
@@ -267,11 +275,11 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxPagination`       | `DESIGN-SPEC.md` + Pagination API/Demo            | 待严格复核；密度、分页按钮、背景与窄屏                                                                                                                                                     |
 | `LxPasswordInput`    | `design/表单控件八件套/` + PasswordInput API/Demo | A 32/40、B overlay/浏览器、代码复审通过；10/10 单测、9/9 E2E；宿主校验失败集成示例 P2 待 Form 波次，因此严格行保持打开                                                                     |
 | `LxProTable`         | `DESIGN-SPEC.md` + ProTable API/Demo              | 待严格复核；表头/行密度、选择、空错态和滚动                                                                                                                                                |
-| `LxRadio`            | `design/表单控件八件套/`                          | A/B 与行为完成；中文播报、触屏和减少动效通过；窄屏 API 表格 P2 待处理                                                                                                                      |
-| `LxRadioGroup`       | `design/表单控件八件套/`                          | A/B、键盘及禁用态验收完成；随 API 表格 P2 保持开放                                                                                                                                         |
+| `LxRadio`            | `design/表单控件八件套/`                          | A/B 与行为证据完成；中文播报、触屏和减少动效通过；文档窄屏 P2 已关闭，UI-10 严格设计矩阵仍开放                                                                                             |
+| `LxRadioGroup`       | `design/表单控件八件套/`                          | A/B、键盘及禁用态验收完成；文档窄屏 P2 已关闭；UI-10 严格设计矩阵仍开放                                                                                                                    |
 | `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 单测 9/9、文档 E2E 3/3；修后 A/B 已补独立浏览器/overlay 证据，Demo 增加四字段标准态；最终综合快照待收口，严格矩阵保持打开                                                                  |
 | `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                                                                                                       |
-| `LxSelect`           | `design/表单控件八件套/`                          | Wave 17 当前版 A/B、overlay、代码复审完成；单测 11/11、文档 E2E 3/3；桌面 32px、窄屏 44px；UI-10 全库仍为 0/52                                                                         |
+| `LxSelect`           | `design/表单控件八件套/`                          | Wave 17 当前版 A/B、overlay、代码复审完成；单测 11/11、文档 E2E 3/3；桌面 32px、窄屏 44px；UI-10 全库仍为 0/52                                                                             |
 | `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                                                                          |
 | `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                                                                                               |
 | `LxSidebar`          | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；rail/expanded、菜单态、动效和抽屉                                                                                                                                              |

@@ -6,6 +6,15 @@
 - 已同步更新总交付计划、后续任务拆分、引导文案草案、项目地图和 `MENU-CONFIG-DESIGN.md`。相关草案仅作历史需求与未来设计基线保留；重启前需重新确认页面范围、文案、交互、技术方案及后端契约，并单独评估排期。
 - 本次仅调整计划备注与交接，不代表页面引导功能已实现或通过验收。
 
+## [2026-10-13] lx-ui Wave 18 / Checkbox 与 Radio 文档窄屏 P2 收口
+
+- **完成范围**：将 Checkbox/Radio 的长 `disabled` 说明移入折叠详情，恢复 Checkbox 灰底状态的标本 04 来源说明；折叠摘要最小高度 44px，带品牌色键盘焦点环。明显溢出的表格支持提示、首列固定、方向键浏览与 ARIA 描述关联；短溢出表不进入多余的键盘停靠顺序。
+- **验证结果**：最终文档 E2E 8/8，lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 ESLint/Prettier 和 `git diff --check` 通过。Assessment A 33/40（Good），未发现 P0–P2；Assessment B 两个静态 detector 为 `[]`/空 stderr/退出码 0，六视图无失败请求、浏览器错误或页面横向溢出。独立代码复审无开放 P0–P3。
+- **键盘复核**：项目 E2E 和 A 的实际浏览器键盘接口均验证 Space、Enter 可以开合原生 disclosure。B 的低层 CDP Enter 首轮未生成 `keypress`；补充标准文本键序列后四个 disclosure 均产生可信任的展开事件，归因于探针注入路径，不是产品缺陷。
+- **Impeccable 结论**：detector 命中逐项按实际节点归因，源码 `[]` 仅表示静态规则零命中。综合报告、snapshot、趋势、A/B 截图/指纹和 detector 三件套见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`。
+- **边界与下一步**：只关闭文档窄屏可读性 P2，不关闭四个组件的 UI-10 严格矩阵行；全库仍为 0/52，不代表 Vue3 页面替换、Element Plus 移除或真实后端联调。下一波按审计矩阵继续 Checkbox、CheckboxGroup、Radio、RadioGroup 严格设计复核；页面操作引导继续暂缓。
+- **环境清理**：VitePress 与 detector 服务均已停止，端口 4174/8400 无监听者。一个无进程引用的临时 Chrome profile 因自动命令审查拒绝递归删除而保留；该残留不在仓库内，也不影响验收结果。
+
 ## [2026-10-13] lx-ui Wave 17 / LxSelect 当前版组件级复核交接
 
 - **完成范围**：按 `design/表单控件八件套/` 完成 LxSelect 当前实现、Demo、中文 API、禁用值对比度、键盘、远程空/错/重试、Light/HUD 与窄屏状态复核。桌面 32px，390px 下触发器和选项行 44px；320px 注入前页面无横向溢出。

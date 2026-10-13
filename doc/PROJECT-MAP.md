@@ -1,5 +1,13 @@
 # LinkX 项目地图
 
+## 2026-10-13 Wave 18 / Checkbox 与 Radio 文档窄屏 P2 已完成
+
+- **组件文档**：`linkx-fe/docs/components/lxcheckbox.md` 与 `lxradio.md` 将禁用样式、主题令牌和表单继承规则移出长表格行，统一为折叠说明；摘要最小高度 44px，并使用品牌色键盘焦点环。
+- **响应式表格**：`useResponsiveDocTable(24)` 在明显溢出时提供横向提示、键盘滚动和固定首列；7 张表启用，3 张短溢出表保持非焦点停靠。
+- **入口与验证**：回归见 `other-admin/admin-vue3/tests/e2e/lx-checkbox-radio-docs.spec.ts`（8/8）；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标 Lint/Prettier 及差异检查通过。Assessment A 33/40（Good），无 P0–P2；B 两个 detector 均为 `[]`/空 stderr/退出码 0，六个浏览器视图无失败请求、页面错误或根节点横向溢出；独立代码复审无开放 P0–P3。
+- **证据**：原始 A/B、代码复审和综合报告、snapshot、趋势记录见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`。静态 detector `[]` 只表示对应源码规则零命中。
+- **边界与下一步**：本波只关闭文档可读性 P2，四个组件的 UI-10 严格矩阵行仍开放，全库口径保持 0/52；不代表 Vue3 宿主替换或移除 Element Plus。页面操作引导仍暂缓；随后按组件审计矩阵严格复核 Checkbox/CheckboxGroup/Radio/RadioGroup。
+
 ## 2026-10-13 Wave 17 / LxSelect 当前版组件级复核完成
 
 - **组件入口**：`linkx-fe/src/components/LxSelect/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxselect.md`；设计依据为 `design/表单控件八件套/`。

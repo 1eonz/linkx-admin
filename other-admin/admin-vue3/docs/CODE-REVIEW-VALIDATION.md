@@ -1,5 +1,12 @@
 # GLM 代码评审复核与修复台账
 
+## 2026-10-13 Wave 18 / Checkbox 与 Radio 文档窄屏 P2
+
+- **范围**：`lxcheckbox.md`、`lxradio.md`、VitePress 组件文档主题 CSS、响应式文档表格逻辑和 Checkbox/Radio 文档 E2E。
+- **结论**：独立只读代码复审未发现开放 P0–P3。复审提出的 Checkbox 灰底标本出处保真问题已补回折叠说明，并加强 E2E 对出处、Space 和 Enter 开合的断言；24px 溢出阈值保留默认调用兼容，回归覆盖 7 张滚动表和 3 张短溢出表。
+- **主任务验证**：最终文档 E2E 8/8、lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查、目标 ESLint/Prettier、`git diff --check` 通过。Assessment A 33/40（Good），无 P0–P2；B 两个 detector 均为合法 `[]`/空 stderr/退出码 0，六个浏览器视图无失败请求、浏览器错误或页面横向溢出。
+- **复审证据**：综合报告、A/B 原始证据与复审记录见 `.impeccable/critique/checkbox-radio-docs-p2-2026-10-13/postfix-after-copy-fix/`。静态 detector `[]` 只说明静态规则零命中。
+
 ## 2026-10-07 Wave 6 lx-ui 组件审核收口
 
 - 审核范围：`LxCascader`、`LxDescriptions`、`LxVirtualTree`、中文 Demo/文档、文档侧栏以及 Vue3 对应单测/E2E。
