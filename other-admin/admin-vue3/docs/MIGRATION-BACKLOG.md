@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-14 Wave 21：LxTextarea 严格矩阵收口与 E2E 复验
+
+- lx-ui `LxTextarea` 当前 UI-10 严格矩阵行已关闭，全库更新为 **6/52**。组件沿用已完成的设计、主题/状态、行为与 Impeccable 证据；Textarea 单测 14/14，共享文档 E2E 11/11，隔离端口 4179 完整重跑通过。独立代码复审批准 Select E2E 状态定位修改；单独复核尝试曾被旧服务/代理超时阻断，隔离重跑后目标用例和全文件均通过。
+- 设计源 `p-2.5` 对应 10px 内边距，组件使用 8px 垂直/12px 水平令牌；基准高度约 74px、实测 76px。此差异已登记在 `doc/lx-ui/COMPONENT-AUDIT.md`，当前评审未列为组件级 P0–P3，不宣称像素完全一致。
+- `LxTextarea` 的关闭不代表 Vue3 宿主替换、真实后端或人工读屏完成。`LxInputNumber` 桌面目标尺寸 P2 继续等待设计决策；下一项处理未阻塞的 `LxInput`，之后继续动态图标、`LxDynamicForm` 与其余组件门禁。页面操作引导继续暂缓，不进入待办或排期。
+
 ## 2026-10-14 Wave 20：LxSelect 组件门禁与全菜单 Mock 预览
 
 - lx-ui `LxSelect` 已完成 UI-10 当前严格矩阵行，定向单测 15/15、文档 E2E 8/8；Vue3 全量 Vitest 565/565。Impeccable A 36/40、B 四个 detector 与六个浏览器上下文均完成，独立代码复审无未关闭 P0–P2；UI-10 更新为 5/52。此状态不代表 Vue3 业务页已替换 `ElSelect`，也不减少 Vue3 宿主的 `element-plus` 使用量。

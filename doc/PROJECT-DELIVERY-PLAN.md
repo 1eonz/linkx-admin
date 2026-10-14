@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-14 UI-10 / Wave 21 LxTextarea 严格矩阵关闭
+
+- **关闭项与设计差异**：`LxTextarea` 按 `design/表单控件八件套/code.html` 第 08 区完成组件、Demo、中文 API、状态、交互、主题与窄屏严格核验，UI-10 更新为 **6/52**。设计稿 `p-2.5` 为 10px 内边距，现有组件以 8px 垂直/12px 水平令牌实现；样例高度约 74px、浏览器实测 76px。将约 2px 的视觉差异登记在组件矩阵，不宣称像素完全一致；正式评估未发现组件级 P0–P3。
+- **验证与评审**：Textarea 定向单测 14/14，共享基础控件文档 E2E 11/11；隔离端口 4179 完整重跑通过，Select 状态断言限定在 basic Demo 并检查节点唯一。lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建、目标 ESLint/Prettier、Stylelint 和 `git diff --check` 通过。Impeccable A 31/40（Good）；B 两个 detector 为合法 JSON `[]`、stderr 空、退出码 0，Light/站点深色/HUD × 桌面/移动六视图证据齐全；独立代码复审无 P0–P3。正式材料见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
+- **边界与后续**：本次仅关闭 `LxTextarea` 的 UI-10 严格矩阵行，不代表 Vue3 宿主 Textarea 替换、真实后端联调或 NVDA/VoiceOver 人工读屏完成。`LxInputNumber` 桌面目标尺寸 P2 继续等待设计决策；下一项选择未阻塞的 `LxInput`。页面操作引导仍暂缓，不纳入待办或排期。
+
 ## 2026-10-14 UI-10 / Wave 20 LxSelect 严格矩阵关闭
 
 - **关闭项**：`LxSelect` 已按 `design/表单控件八件套/` 对照尺寸、边框/焦点、错误、禁用、清空、过滤、多选折叠、远程加载/空/失败/重试、主题、键盘、窄屏和减少动效；组件矩阵登记为已关闭，UI-10 当前为 **5/52**。

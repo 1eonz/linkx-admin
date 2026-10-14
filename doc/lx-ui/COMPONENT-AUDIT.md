@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-14 UI-10 / Wave 21 LxTextarea 严格矩阵关闭
+
+- **设计对照与差异**：依据 `design/表单控件八件套/code.html` 第 08 区，复核三行基准、`resize-y`、错误态、长度计数与焦点反馈。设计样例使用 `p-2.5`（10px 内边距），组件使用 8px 垂直、12px 水平间距令牌；设计标本高度约 74px，浏览器实测为 76px。2px 内边距映射差与约 2px 高度差如实登记；当前正式复核未将其判为组件级 P0–P3，不宣称像素值完全一致。
+- **行为与浏览器证据**：覆盖硬截断/超限校验、初始状态静默与状态变化仅播报一次、禁用/只读计数隐藏和错误说明保留、键盘焦点、Light/站点深色/HUD、320/375px 窄屏及减少动效；overlay 注入后移动根节点扩宽属于检测覆盖层副作用，注入前页面无横向溢出。
+- **验证与审查**：定向单测 14/14，共享基础控件文档 E2E 11/11；本次以隔离端口 4179 完整重跑，Select 状态断言限定在 basic Demo 且唯一性断言生效。lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建、目标 ESLint/Prettier、组件 CSS/HUD token Stylelint 和差异检查通过。Assessment A 31/40（Good），无 P0–P3；Assessment B 两个 detector 均为合法 JSON `[]`、stderr 空、退出码 0，六个主题/视口浏览器状态完成；独立代码复审无 P0–P3。
+- **证据与边界**：正式 A/B、截图、源码锁和代码复审见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`；detector `[]` 只表示静态规则零命中。矩阵关闭仅表示当前组件满足本轮已记录的严格验收口径，不代表 Vue3 宿主替换、真实后端联调或 NVDA/VoiceOver 人工读屏完成。UI-10 当前 **6/52**；下一项进入 `LxInput`，`LxInputNumber` 桌面目标尺寸 P2 继续等待设计决策。
+
 ## 2026-10-14 UI-10 / Wave 20 LxSelect 严格矩阵关闭
 
 - **设计映射**：`design/表单控件八件套/`；桌面触发器基准 32px，390px 触屏下触发器与选项行 44px。按设计令牌复核默认/hover/focus/error/disabled、单选/多选、清空、过滤、远程加载/空/失败/重试、Light/HUD 与 `prefers-reduced-motion`；不适用的同步控件状态在 Demo/API 说明中界定。
@@ -266,7 +273,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 
 ### 52 个公开组件逐项验收矩阵
 
-本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **5/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
+本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **6/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
 
 | 公开组件             | 唯一对照源                                        | 当前矩阵状态                                                                                                                                                                               |
 | -------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -317,8 +324,8 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxSwitch`           | `design/表单控件八件套/`                          | 组件级复核已完成；共享壳层与宿主契约仍跟踪，暂不计入全库严格关闭                                                                                                                           |
 | `LxTabsBar`          | `DESIGN-SPEC.md` + TabsBar API/Demo               | 待严格复核；页签层级、关闭/拖动和横向滚动                                                                                                                                                  |
 | `LxTag`              | `DESIGN-SPEC.md` §2 + Tag API/Demo                | 待严格复核；语义色、尺寸、关闭态与对比度                                                                                                                                                   |
-| `LxTextarea`         | `design/表单控件八件套/`                          | 当前版组件级严格复核完成；单测、文档 E2E、主题/状态浏览器证据、正式 Impeccable A/B 与代码复审通过；本项不增加全库计数，当前为 4/52                                                                |
-| `LxTransferPanel`    | `design/虚拟滚动树 + 双栏穿梭/`                   | 当前实现、30 项单测、文档 E2E 28/28、名称/编码筛选及移动触控修复完成；桌面 32px 基准行高、320–420px 为 64px、421px 起为 44px；最新断言修订代码复审与正式 A/B 收口中；全库严格矩阵当前为 4/52 |
+| `LxTextarea`         | `design/表单控件八件套/`                          | 严格矩阵已关闭；单测 14/14、文档 E2E 11/11、主题/状态浏览器证据、正式 Impeccable A/B 与代码复审通过；记录 8/12px 间距令牌对照设计稿 10px 及约 2px 高度差；全库 6/52                                               |
+| `LxTransferPanel`    | `design/虚拟滚动树 + 双栏穿梭/`                   | 当前实现、30 项单测、文档 E2E 28/28、名称/编码筛选及移动触控修复完成；桌面 32px 基准行高、320–420px 为 64px、421px 起为 44px；最新断言修订代码复审与正式 A/B 收口中；全库严格矩阵当前为 6/52 |
 | `LxTreeSelect`       | `design/表单控件八件套/` + TreeSelect API/Demo    | 当前版单测/E2E、A/B 和代码复审完成；P3 为长节点换行 E2E 覆盖增强，严格矩阵仍待全库复验                                                                                                     |
 | `LxUpload`           | `design/上传拖拽区 Upload/`                       | 受控模型、进度/失败/重试/取消/移除已有组件行为证据；设计图严格对照、提示文字视觉复核、正式 Critique 收口中                                                                                 |
 | `LxVirtualTree`      | `design/虚拟滚动树 + 双栏穿梭/`                   | 当前 34 项行为单测、文档 E2E 13/13，含自定义 `filterMethod`、44px 移动触控和跨行高断点焦点回归；与 TransferPanel 联合参与本次严格 A/B，UI-10 全库矩阵仍待关闭                              |

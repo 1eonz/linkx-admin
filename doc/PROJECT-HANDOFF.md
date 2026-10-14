@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## [2026-10-14] UI-10 / Wave 21 LxTextarea 严格矩阵交接
+
+- **完成范围**：关闭 `LxTextarea` 当前 UI-10 严格矩阵行，组件库全库计数更新为 **6/52**。三行基准、长度截断/校验、错误和焦点、禁用/只读、主题、键盘、窄屏及减少动效均按 `design/表单控件八件套/code.html` 第 08 区核验。
+- **验证结果**：定向单测 14/14、共享基础控件文档 E2E 11/11；Playwright 使用隔离端口 4179，Select 状态断言限定 basic Demo 并断言唯一节点。lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建、目标 ESLint/Prettier、Stylelint 与 `git diff --check` 通过。生产构建既有告警见 Wave 16 记录。
+- **设计差异**：设计稿 `p-2.5` 为 10px 内边距，当前组件为 8px 垂直/12px 水平令牌；基准高度约 74px，实测 76px。矩阵如实记录约 2px 的映射与高度差；当前 A/B 和代码复审未发现组件级 P0–P3，但不写作像素值完全一致。
+- **Impeccable 与代码复审**：Assessment A 31/40（Good），无 P0–P3；Assessment B 两个 detector 为合法 `[]`/空 stderr/退出码 0，六个主题/视口视图完成。独立代码复审批准 E2E 定位修改；它的独立运行在到达新断言前遇到服务代理超时，随后以隔离端口重跑，目标用例和 11 项全量均通过。原始证据见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
+- **边界与下一步**：不代表 Vue3 宿主替换、真实后端联调或 NVDA/VoiceOver 人工读屏完成。`LxInputNumber` 桌面目标尺寸 P2 仍等待设计决策；下一项转入未阻塞的 `LxInput` 严格矩阵复核。页面操作引导不在待办或排期中，只有后续明确提出需要时才重新评估。
+
 ## [2026-10-14] UI-10 / Wave 20 LxSelect 严格矩阵交接
 
 - **完成范围**：LxSelect 按 `design/表单控件八件套/` 完成当前组件、Demo、中文 API、主题/状态、键盘、窄屏与远程状态复核；登记 UI-10 第 5/52 项关闭。无组件级 P0–P2；参考页 9 个章节的目录密度为 P3 后续整理。

@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-14 UI-10 / Wave 21 LxTextarea 严格矩阵关闭
+
+- `LxTextarea` 按 `design/表单控件八件套/code.html` 第 08 区完成严格矩阵核验；定向单测 14/14、共享基础控件文档 E2E 11/11，隔离端口 4179 完整通过。lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建及目标格式/Lint/Stylelint 通过。
+- Assessment A 31/40（Good），无组件级 P0–P3；Assessment B 两个 detector 为有效 JSON `[]`、stderr 空、退出码 0，六个主题/视口浏览器视图完成；独立代码复审无 P0–P3。detector `[]` 只代表静态规则零命中。A/B 与代码复审材料见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
+- 设计稿 `p-2.5` 的 10px 内边距与现有 8px 垂直/12px 水平令牌、约 74px 与实测 76px 高度差已在矩阵如实登记；本次结论不表示像素值完全一致。UI-10 当前 **6/52**。下一项进入 `LxInput`；`LxInputNumber` 桌面目标尺寸 P2 保持开放，待设计决策后复验；Vue3 Element Plus 替换继续等待全库门禁。
+
 ## 2026-10-14 UI-10 / Wave 20 LxSelect 严格矩阵关闭
 
 - `LxSelect` 按 `design/表单控件八件套/` 完成组件、Demo、中文 API、状态和交互严格复核；定向单测 15/15、文档 E2E 8/8，Vue3 全量 Vitest 565/565，隔离 Mock 预览与竞态 E2E 10/10。

@@ -1,5 +1,12 @@
 # LinkX 项目地图
 
+## 2026-10-14 Wave 21 / LxTextarea UI-10 严格矩阵关闭
+
+- **组件入口**：`linkx-fe/src/components/LxTextarea/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxtextarea.md`；设计源为 `design/表单控件八件套/code.html` 第 08 区。
+- **验证入口**：`other-admin/admin-vue3/tests/unit/lx-textarea.test.ts` 14/14；共享基础控件文档 E2E `tests/e2e/lx-base-controls-docs.spec.ts` 11/11，隔离端口 4179；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建和定向代码质量检查通过。
+- **正式评审**：Impeccable A 31/40（Good），无 P0–P3；B 两个 detector 均为合法 JSON `[]`、stderr 空、退出码 0，Light/站点深色/HUD × 桌面/移动六视图完成；独立代码复审无 P0–P3。`[]` 只表示静态规则零命中。证据见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
+- **差异、边界与下一入口**：设计稿使用 `p-2.5`（10px），实现为 8px 垂直/12px 水平令牌；约 74px 标本与实测 76px 的差异已登记，不宣称像素完全一致。UI-10 当前 **6/52**；本波不代表 Vue3 宿主替换、真实后端或人工读屏完成。下一项为 `LxInput`，`LxInputNumber` 桌面尺寸 P2 等待设计决策。页面操作引导仍暂缓且不在执行队列或排期。
+
 ## 2026-10-14 Wave 20 / LxSelect UI-10 严格矩阵关闭
 
 - **组件入口**：`linkx-fe/src/components/LxSelect/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxselect.md`；设计依据为 `design/表单控件八件套/`。
