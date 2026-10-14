@@ -1,24 +1,74 @@
 <script setup lang="ts">
+import { Search } from '@element-plus/icons-vue'
 import { ElOption } from 'element-plus'
-import { onBeforeUnmount, ref } from 'vue'
+import type { FormRules } from 'element-plus'
+import { nextTick, onBeforeUnmount, reactive, ref } from 'vue'
 
+import { LxButton, LxForm, LxFormItem } from '../../../index'
+import type { LxFormInstance } from '../../../index'
 import LxSelect from '../index.vue'
 
 const hudTheme = ref(false)
 
+type DemoSelectOption = {
+  label: string
+  value: string
+  description?: string
+  disabled?: boolean
+}
+
 /** 示例段一：基础单选布控等级，对照标本 02 的业务文案。 */
 const controlLevel = ref<string>('2')
-const controlLevelOptions = [
+const controlLevelOptions: DemoSelectOption[] = [
   { label: '一级布控', value: '1', description: '重点目标' },
   { label: '二级布控', value: '2', description: '持续关注' },
   { label: '三级布控', value: '3', description: '常规监测' },
 ]
 /** 可清空单选：处置通道 */
 const channel = ref<string>('encrypted')
+const channelOptions: DemoSelectOption[] = [
+  { label: '高密加密专线', value: 'encrypted' },
+  { label: '卫星应急链路', value: 'satellite' },
+  { label: '视频会商通道', value: 'video' },
+]
 /** 示例段二：所属单位多选与折叠展示。 */
-const units = ref<string[]>(['city-bureau', 'branch'])
+const unitsFormRef = ref<LxFormInstance>()
+const unitsSelectRef = ref<{ focus: () => void }>()
+const unitsForm = reactive({ units: ['city-bureau', 'branch'] })
+const minimumUnitsSelection = 3
+const unitsFormRules: FormRules = {
+  units: [
+    {
+      validator: (_rule, value: unknown) =>
+        Array.isArray(value) && value.length >= minimumUnitsSelection
+          ? Promise.resolve()
+          : Promise.reject(
+              new Error(`至少选择 ${minimumUnitsSelection} 个协同单位`),
+            ),
+      trigger: 'change',
+    },
+  ],
+}
+const unitsValidationFeedback = ref('')
+const unitsValidationIsError = ref(false)
+const unitOptions: DemoSelectOption[] = [
+  { label: '市局指挥中心', value: 'city-bureau' },
+  { label: '分局合成作战中心', value: 'branch' },
+  { label: '交警支队', value: 'traffic' },
+  {
+    label: '反恐怖与特巡警支队（离线）',
+    value: 'counter-terrorism',
+    disabled: true,
+  },
+]
 /** 示例段三：可过滤的指挥中心。 */
 const commandCenter = ref<string>('')
+const commandCenterOptions: DemoSelectOption[] = [
+  { label: '市局指挥中心', value: 'city' },
+  { label: '城东分局指挥室', value: 'east' },
+  { label: '城西分局指挥室', value: 'west' },
+  { label: '高新区指挥室', value: 'hi-tech' },
+]
 /** 示例段四：本地模拟值班警员远程检索，不请求后端。 */
 const dutyOfficer = ref<string>('')
 const remoteLoading = ref(false)
@@ -33,18 +83,90 @@ const remotePool = [
   '孙丽华 031243',
   '李建军 031096',
 ]
+const remoteFeedbackOptions: DemoSelectOption[] = remotePool.map((item) => ({
+  label: item,
+  value: item,
+}))
 let remoteSeed = 0
 let remoteTimer: ReturnType<typeof setTimeout> | undefined
 
 /** 示例段五：禁用状态。 */
 const lockedChannel = ref<string>('satellite')
+const lockedUnits = ['city-bureau', 'branch', 'traffic']
 
-const lastAction = ref(
-  '选择选项观察触发器与面板行为；演示数据仅存在于页面内存。',
-)
+const actionStatus = reactive({
+  basic: '',
+  units: '',
+  remote: '',
+})
 
-function reportChange(field: string, value: unknown) {
-  lastAction.value = `${field} 已选：${Array.isArray(value) ? value.join('、') : value}`
+function reportChange(
+  group: keyof typeof actionStatus,
+  field: string,
+  value: unknown,
+  options: readonly DemoSelectOption[],
+) {
+  const values = Array.isArray(value) ? value : [value]
+  const labels = values.map((selectedValue) => {
+    if (selectedValue == null) return '未选择'
+    return (
+      options.find((option) => option.value === selectedValue)?.label ??
+      '未命名选项'
+    )
+  })
+  actionStatus[group] = `${field} 已选：${labels.join('、')}`
+}
+
+function reportUnitRemoval(value: unknown) {
+  const label =
+    unitOptions.find((option) => option.value === value)?.label ?? '未命名选项'
+  actionStatus.units = `已移除：${label}`
+}
+
+function updateUnits(value: unknown) {
+  if (!Array.isArray(value)) return
+  const selectedValues = value.filter(
+    (item): item is string => typeof item === 'string',
+  )
+  if (selectedValues.length === value.length) {
+    unitsForm.units = selectedValues
+    unitsValidationFeedback.value = ''
+    unitsValidationIsError.value = false
+  }
+}
+
+function validateUnits() {
+  unitsFormRef.value
+    ?.validate()
+    .then(() => {
+      unitsValidationIsError.value = false
+      unitsValidationFeedback.value = `校验通过：已选择 ${unitsForm.units.length} 个协同单位`
+    })
+    .catch(() => {
+      unitsValidationIsError.value = true
+      const remaining = minimumUnitsSelection - unitsForm.units.length
+      unitsValidationFeedback.value = `当前已选 ${unitsForm.units.length} 项，还需 ${remaining} 项`
+      void nextTick(() => unitsSelectRef.value?.focus())
+    })
+}
+
+function getUnitsSummaryLabel(count?: number): string {
+  return count === undefined
+    ? '展开选择列表'
+    : `展开选择列表，另有 ${count} 项已选`
+}
+
+function resetUnits() {
+  unitsFormRef.value?.resetFields()
+  actionStatus.units = `已恢复示例默认选择：${unitsForm.units
+    .map(
+      (value) =>
+        unitOptions.find((option) => option.value === value)?.label ??
+        '未命名选项',
+    )
+    .join('、')}`
+  unitsValidationFeedback.value = ''
+  unitsValidationIsError.value = false
 }
 
 function getControlLevelDescription(value: unknown) {
@@ -109,7 +231,9 @@ onBeforeUnmount(() => {
             :options="controlLevelOptions"
             :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
             placeholder="请选择布控等级"
-            @change="reportChange('布控等级', $event)"
+            @change="
+              reportChange('basic', '布控等级', $event, controlLevelOptions)
+            "
           >
             <template #option="{ option }">
               <span class="lx-select-demo__option-label">{{
@@ -141,12 +265,15 @@ onBeforeUnmount(() => {
             clearable
             :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
             placeholder="请选择处置通道"
-            @change="reportChange('处置通道', $event)"
-            @clear="lastAction = '处置通道已清空'"
+            @change="reportChange('basic', '处置通道', $event, channelOptions)"
+            @clear="actionStatus.basic = '处置通道已清空'"
           >
-            <ElOption label="高密加密专线" value="encrypted" />
-            <ElOption label="卫星应急链路" value="satellite" />
-            <ElOption label="视频会商通道" value="video" />
+            <ElOption
+              v-for="option in channelOptions"
+              :key="option.value"
+              :label="option.label"
+              :value="option.value"
+            />
           </LxSelect>
         </div>
         <div class="lx-select-demo__field">
@@ -157,52 +284,88 @@ onBeforeUnmount(() => {
             id="demo-select-center"
             v-model="commandCenter"
             filterable
+            :suffix-icon="Search"
             :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
             placeholder="输入关键字检索"
-            @change="reportChange('指挥中心', $event)"
+            @change="
+              reportChange('basic', '指挥中心', $event, commandCenterOptions)
+            "
           >
             <template #header>
               <span class="lx-select-demo__slot-note">按区域筛选</span>
             </template>
-            <ElOption label="市局指挥中心" value="city" />
-            <ElOption label="城东分局指挥室" value="east" />
-            <ElOption label="城西分局指挥室" value="west" />
-            <ElOption label="高新区指挥室" value="hi-tech" />
+            <ElOption
+              v-for="option in commandCenterOptions"
+              :key="option.value"
+              :label="option.label"
+              :value="option.value"
+            />
             <template #footer>
               <span class="lx-select-demo__slot-note">共 4 个指挥中心</span>
             </template>
           </LxSelect>
         </div>
       </div>
+      <p class="lx-select-demo__status" aria-live="polite">
+        {{ actionStatus.basic }}
+      </p>
     </section>
 
     <section class="lx-select-demo__panel" data-testid="multiple">
       <h3>多选与折叠（超出折叠为 +N，打开下拉查看完整列表）</h3>
-      <div class="lx-select-demo__field">
-        <label class="lx-select-demo__label" for="demo-select-units"
-          >协同单位</label
-        >
-        <LxSelect
-          id="demo-select-units"
-          v-model="units"
-          multiple
-          collapse-tags
-          collapse-tags-tooltip
-          :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
-          placeholder="请选择协同单位"
-          @change="reportChange('协同单位', $event)"
-          @remove-tag="lastAction = `已移除：${$event}`"
-        >
-          <ElOption label="市局指挥中心" value="city-bureau" />
-          <ElOption label="分局合成作战中心" value="branch" />
-          <ElOption label="交警支队" value="traffic" />
-          <ElOption
-            label="反恐怖与特巡警支队（离线）"
-            value="counter-terrorism"
-            disabled
-          />
-        </LxSelect>
-      </div>
+      <LxForm
+        ref="unitsFormRef"
+        class="lx-select-demo__validation-form"
+        :model="unitsForm"
+        :rules="unitsFormRules"
+        label-position="top"
+        :data-selected-count="unitsForm.units.length"
+      >
+        <LxFormItem label="协同单位" prop="units">
+          <LxSelect
+            ref="unitsSelectRef"
+            id="demo-select-units"
+            :model-value="unitsForm.units"
+            multiple
+            collapse-tags
+            collapse-tags-tooltip
+            :collapse-summary-aria-label="getUnitsSummaryLabel"
+            :popper-class="hudTheme ? 'lx-theme-hud' : undefined"
+            aria-describedby="demo-select-units-help"
+            placeholder="请选择协同单位"
+            @update:modelValue="updateUnits"
+            @change="reportChange('units', '协同单位', $event, unitOptions)"
+            @remove-tag="reportUnitRemoval($event)"
+          >
+            <ElOption
+              v-for="option in unitOptions"
+              :key="option.value"
+              :label="option.label"
+              :value="option.value"
+              :disabled="option.disabled"
+            />
+          </LxSelect>
+          <p id="demo-select-units-help" class="lx-select-demo__hint">
+            默认已选市局指挥中心和分局合成作战中心；至少选择 3 个协同单位。
+          </p>
+        </LxFormItem>
+        <div class="lx-select-demo__validation-actions">
+          <LxButton type="primary" @click="validateUnits">提交校验</LxButton>
+          <LxButton @click="resetUnits">恢复示例默认值</LxButton>
+        </div>
+      </LxForm>
+      <p class="lx-select-demo__status" aria-live="polite">
+        {{ actionStatus.units }}
+      </p>
+      <p
+        v-if="unitsValidationFeedback"
+        class="lx-select-demo__status"
+        :class="{ 'is-error': unitsValidationIsError }"
+        role="status"
+        aria-live="polite"
+      >
+        {{ unitsValidationFeedback }}
+      </p>
     </section>
 
     <section class="lx-select-demo__panel" data-testid="remote">
@@ -235,7 +398,9 @@ onBeforeUnmount(() => {
             remoteError ? 'demo-select-officer-error' : undefined
           "
           placeholder="输入警号或姓名检索"
-          @change="reportChange('值班警员', $event)"
+          @change="
+            reportChange('remote', '值班警员', $event, remoteFeedbackOptions)
+          "
           @visible-change="remoteVisible = $event"
         >
           <ElOption
@@ -245,8 +410,11 @@ onBeforeUnmount(() => {
             :value="item"
           />
           <template #empty>
-            <span v-if="remoteError" aria-hidden="true">{{ remoteError }}</span>
-            <span v-else>没有匹配的值班警员</span>
+            <span v-if="remoteLoading" role="status">正在检索值班警员…</span>
+            <span v-else-if="remoteError" aria-hidden="true">{{
+              remoteError
+            }}</span>
+            <span v-else>没有匹配的值班警员，请调整姓名或警号后重试</span>
           </template>
           <template v-if="remoteError && remoteVisible" #footer>
             <button
@@ -279,6 +447,9 @@ onBeforeUnmount(() => {
         </div>
       </div>
       <p class="lx-select-demo__hint">示例只使用本地数据，不发起网络请求。</p>
+      <p class="lx-select-demo__status" aria-live="polite">
+        {{ actionStatus.remote }}
+      </p>
     </section>
 
     <section class="lx-select-demo__panel" data-testid="disabled">
@@ -297,9 +468,29 @@ onBeforeUnmount(() => {
           <ElOption label="高密加密专线" value="encrypted" />
         </LxSelect>
       </div>
+      <div class="lx-select-demo__field">
+        <label class="lx-select-demo__label" for="demo-select-locked-units"
+          >协同单位（禁用）</label
+        >
+        <LxSelect
+          id="demo-select-locked-units"
+          :model-value="lockedUnits"
+          multiple
+          collapse-tags
+          collapse-tags-tooltip
+          :max-collapse-tags="1"
+          disabled
+        >
+          <ElOption
+            v-for="option in unitOptions"
+            :key="option.value"
+            :label="option.label"
+            :value="option.value"
+            :disabled="option.disabled"
+          />
+        </LxSelect>
+      </div>
     </section>
-
-    <p class="lx-select-demo__status" aria-live="polite">{{ lastAction }}</p>
   </div>
 </template>
 
@@ -335,10 +526,12 @@ onBeforeUnmount(() => {
 }
 
 .lx-select-demo__scenario select {
+  min-width: 132px;
   max-width: 100%;
   min-height: 32px;
   padding: 4px 8px;
   color: var(--lx-text-primary);
+  cursor: pointer;
   background: var(--lx-bg-card);
   border: 1px solid var(--lx-control-border);
   border-radius: var(--lx-radius-sm);
@@ -429,6 +622,20 @@ onBeforeUnmount(() => {
   font-size: 12px;
   line-height: 1.6;
   color: var(--lx-text-secondary-strong);
+}
+
+.lx-select-demo__status.is-error {
+  color: var(--lx-color-form-error);
+}
+
+.lx-select-demo__validation-form {
+  max-width: 480px;
+}
+
+.lx-select-demo__validation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .lx-select-demo__remote-error {

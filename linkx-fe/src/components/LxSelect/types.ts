@@ -1,3 +1,5 @@
+import type { Component } from 'vue'
+
 /**
  * LxSelect 类型契约
  *
@@ -10,10 +12,7 @@
 
 /** 单个选项的值；记录对象保持 Element Plus 的原始引用语义。 */
 export type LxSelectOptionValue =
-  | string
-  | number
-  | boolean
-  | Record<string, unknown>
+  string | number | boolean | Record<string, unknown>
 
 /** LxSelect 内置选项；用于 schema/配置驱动场景，也可继续使用默认插槽。 */
 export interface LxSelectOption {
@@ -49,12 +48,16 @@ export interface LxSelectProps {
   collapseTags?: boolean
   /** 折叠项悬停提示完整列表（EP 原生契约） */
   collapseTagsTooltip?: boolean
+  /** 自定义折叠摘要无障碍名称；参数为折叠数量，无数量时为 undefined。 */
+  collapseSummaryAriaLabel?: (count?: number) => string
   /** 远程/过滤加载态：面板显示加载中 */
   loading?: boolean
   /** 配置驱动选项；与默认插槽可同时使用，适合动态表单。 */
   options?: LxSelectOption[]
   /** 工程尺寸档：sm=28px / md=32px（基准）/ lg=40px */
   size?: LxSelectSize
+  /** 自定义后缀图标；支持图标名称或 Vue 组件，传入后保留原图标。 */
+  suffixIcon?: string | Component
   /** 原生 name 属性（表单序列化 / 读屏关联） */
   name?: string
 }

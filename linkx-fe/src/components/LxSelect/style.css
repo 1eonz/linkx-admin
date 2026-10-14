@@ -37,6 +37,55 @@
   color: var(--lx-text-secondary);
 }
 
+/* HUD 下的已选标签与折叠计数沿用深色表面，避免回落到浅色信息标签。 */
+.lx-theme-hud .lx-select.el-select .el-select__selection .el-tag.el-tag--info {
+  color: var(--lx-text-primary);
+  background-color: var(--lx-bg-card-hover);
+  border-color: var(--lx-border);
+}
+
+/* 浅色已选标签使用正文对比度令牌，覆盖 Element Plus 的浅灰信息文字。 */
+.lx-select.el-select .el-select__selection .el-tag.el-tag--info,
+.lx-select__popper.el-tooltip .el-select__selection .el-tag.el-tag--info {
+  color: var(--lx-text-secondary-strong);
+}
+
+.lx-theme-hud .lx-select.el-select .el-tag__close {
+  color: var(--lx-text-secondary);
+}
+
+.lx-theme-hud .lx-select.el-select .el-tag__close:hover {
+  color: var(--lx-color-on-primary);
+  background-color: var(--lx-color-primary);
+}
+
+.lx-select.el-select .el-select__selection .el-tag__close,
+.lx-select__popper.el-tooltip .el-select__selection .el-tag__close {
+  color: var(--lx-text-secondary-strong);
+}
+
+/* 折叠标签提示层被 Teleport 到 body，通过自身主题类恢复 HUD 标签配色。 */
+.lx-select__popper.el-tooltip.lx-theme-hud
+  .el-select__selection
+  .el-tag.el-tag--info {
+  color: var(--lx-text-primary);
+  background-color: var(--lx-bg-card-hover);
+  border-color: var(--lx-border);
+}
+
+.lx-select__popper.el-tooltip.lx-theme-hud
+  .el-select__selection
+  .el-tag__close {
+  color: var(--lx-text-secondary);
+}
+
+.lx-select__popper.el-tooltip.lx-theme-hud
+  .el-select__selection
+  .el-tag__close:hover {
+  color: var(--lx-color-on-primary);
+  background-color: var(--lx-color-primary);
+}
+
 /* hover：描边转主色（标本 02 综合演练卡 hover:border-primary 契约；
  * 主卡片的 #c0c4cc 灰加深方案已在波 1 拍板弃用） */
 .lx-select.el-select .el-select__wrapper:hover {
@@ -55,7 +104,9 @@
 
 /* 键盘焦点使用独立光环，避免只靠 hover 和边框颜色表达焦点。 */
 .lx-select.el-select .el-select__wrapper:focus-visible,
-.lx-select.el-select .el-select__wrapper:has(input:focus-visible) {
+.lx-select.el-select .el-select__wrapper:has(input:focus-visible),
+.lx-select.el-select
+  .el-select__wrapper:has(.el-select__collapse-item:focus-visible) {
   box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
@@ -85,6 +136,35 @@
   color: var(--lx-btn-disabled-text);
 }
 
+/* 还原标本中的实心下拉三角；展开方向继续由 Element Plus caret 状态旋转。 */
+.lx-select.el-select:not(.lx-select--custom-suffix-icon)
+  .el-select__caret:not(.el-select__clear)
+  > svg {
+  display: none;
+}
+
+.lx-select.el-select:not(.lx-select--custom-suffix-icon)
+  .el-select__caret:not(.el-select__clear)::after {
+  display: block;
+  width: 12px;
+  height: 8px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  content: '';
+  background-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-select.el-select .el-select__wrapper,
+  .lx-select.el-select .el-select__caret {
+    transition: none;
+  }
+
+  .lx-select__popper.el-zoom-in-top-enter-active,
+  .lx-select__popper.el-zoom-in-top-leave-active {
+    transition: none;
+  }
+}
+
 /* 错误态：使用表单专属校验令牌，依赖 ElForm/LxForm 上下文。 */
 .el-form-item.is-error .lx-select.el-select .el-select__wrapper {
   background-color: var(--lx-color-form-error-bg);
@@ -101,6 +181,13 @@
 .el-form-item.is-error
   .lx-select.el-select
   .el-select__wrapper:has(input:focus-visible) {
+  border-color: var(--lx-color-form-error);
+  box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+.el-form-item.is-error
+  .lx-select.el-select
+  .el-select__wrapper:has(.el-select__collapse-item:focus-visible) {
   border-color: var(--lx-color-form-error);
   box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
 }

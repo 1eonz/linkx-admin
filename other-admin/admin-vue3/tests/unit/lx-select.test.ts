@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
-import { ElOption } from 'element-plus';
-import { LxSelect } from 'lx-ui';
+import { ElConfigProvider, ElOption } from 'element-plus';
+import en from 'element-plus/es/locale/lang/en';
+import { LxForm, LxSelect } from 'lx-ui';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 // EP select 的 popper teleport 到 body 且卸载后节点残留，
@@ -176,6 +177,113 @@ describe('LxSelect', () => {
     const popper = document.body.querySelector('.lx-select__popper');
     expect(popper).not.toBeNull();
     expect((popper as HTMLElement).style.display).toBe('none');
+    wrapper.unmount();
+  });
+
+  it('禁用的折叠多选摘要不可聚焦且标记为禁用', async () => {
+    const wrapper = mount(LxSelect, {
+      props: {
+        modelValue: ['1', '2', '3'],
+        disabled: true,
+        multiple: true,
+        collapseTags: true,
+        maxCollapseTags: 1,
+      },
+      slots: {
+        default: [
+          '<ElOption label="一级布控" value="1" />',
+          '<ElOption label="二级布控" value="2" />',
+          '<ElOption label="三级布控" value="3" />',
+        ],
+      },
+      global: { components: { ElOption } },
+    });
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const summary = wrapper.find('.el-select__collapse-item');
+    expect(wrapper.find('.el-select__wrapper').classes()).toContain('is-disabled');
+    expect(summary.exists()).toBe(true);
+    expect(summary.attributes('tabindex')).toBe('-1');
+    expect(summary.attributes('aria-disabled')).toBe('true');
+
+    wrapper.unmount();
+  });
+
+  it('折叠摘要默认沿用宿主语言并允许自定义完整名称', async () => {
+    const wrapper = mount({
+      components: { ElConfigProvider, ElOption, LxSelect },
+      data: () => ({
+        locale: en,
+        modelValue: ['1', '2', '3'],
+        useCustomLabel: false,
+        customLabel: (count?: number) =>
+          count === undefined ? 'Open selected options' : `Open selected options, ${count} more selected`,
+      }),
+      template: `
+        <ElConfigProvider :locale="locale">
+          <LxSelect
+            v-model="modelValue"
+            multiple
+            collapse-tags
+            :max-collapse-tags="1"
+            :collapse-summary-aria-label="useCustomLabel ? customLabel : undefined"
+          >
+            <ElOption label="First" value="1" />
+            <ElOption label="Second" value="2" />
+            <ElOption label="Third" value="3" />
+          </LxSelect>
+        </ElConfigProvider>
+      `,
+    });
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const summary = wrapper.find('.el-select__collapse-item');
+    expect(summary.attributes('aria-label')).toBe('Toggle Dropdown (+2)');
+
+    await wrapper.setData({ useCustomLabel: true });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(summary.attributes('aria-label')).toBe('Open selected options, 2 more selected');
+
+    wrapper.unmount();
+  });
+
+  it('表单运行时切换禁用状态会同步折叠摘要语义', async () => {
+    const wrapper = mount(
+      {
+        components: { ElForm: LxForm, ElOption, LxSelect },
+        data: () => ({
+          formDisabled: false,
+          modelValue: ['1', '2', '3'],
+        }),
+        template: `
+          <ElForm :disabled="formDisabled">
+            <LxSelect v-model="modelValue" multiple collapse-tags :max-collapse-tags="1">
+              <ElOption label="First" value="1" />
+              <ElOption label="Second" value="2" />
+              <ElOption label="Third" value="3" />
+            </LxSelect>
+          </ElForm>
+        `,
+      },
+      { attachTo: document.body },
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const summary = wrapper.find('.el-select__collapse-item');
+    expect(summary.attributes('tabindex')).toBe('0');
+    expect(summary.attributes('aria-disabled')).toBe('false');
+
+    await wrapper.setData({ formDisabled: true });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(wrapper.find('.el-select__wrapper').classes()).toContain('is-disabled');
+    expect(summary.attributes('tabindex')).toBe('-1');
+    expect(summary.attributes('aria-disabled')).toBe('true');
+
+    await wrapper.setData({ formDisabled: false });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(summary.attributes('tabindex')).toBe('0');
+    expect(summary.attributes('aria-disabled')).toBe('false');
+
     wrapper.unmount();
   });
 
