@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-14 Wave 20：LxSelect 组件门禁与全菜单 Mock 预览
+
+- lx-ui `LxSelect` 已完成 UI-10 当前严格矩阵行，定向单测 15/15、文档 E2E 8/8；Vue3 全量 Vitest 565/565。Impeccable A 36/40、B 四个 detector 与六个浏览器上下文均完成，独立代码复审无未关闭 P0–P2；UI-10 更新为 5/52。此状态不代表 Vue3 业务页已替换 `ElSelect`，也不减少 Vue3 宿主的 `element-plus` 使用量。
+- Mock 预览回归 10/10，其中首个用例核对首页及 32 个现役子菜单入口和每页首屏样例数据；其余覆盖 ColForm 远程搜索竞态、北向 CRUD、轮播分页及 AuthImg 错误恢复。修正南向接口预览频率样例值，避免页面显示 `NaN分钟`。本轮使用隔离端口 `31849`，未复用现有预览服务；写操作仍由本地 Mock 接管。
+- **后续宿主迁移要求**：等 lx-ui 全库 UI-10 与 UI-11 门禁通过后，才按页面迁移矩阵替换 Vue3 `ElSelect`；届时逐页核对 `modelValue` 类型、默认插槽/配置式选项、错误焦点、清空/多选和远程状态契约，并补宿主 Mock/E2E。真实后端、权限身份和人工读屏不由本次库级或 Mock 验收代替。页面操作引导暂缓，仅在用户后续明确提出需要时再恢复评估。
+
 ## 2026-10-13 当前交接：LxInputNumber 桌面目标尺寸 P2 复核完成但未关闭
 
 - Impeccable Assessment A **29/40（Good）**；Assessment B 的四个静态 detector 均为合法 JSON `[]`/空 stderr/退出码 `0`，Light/HUD × 桌面/375px 浏览器视图成功注入且无横向溢出或页面错误。

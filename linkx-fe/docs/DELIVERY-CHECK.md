@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-14 UI-10 / Wave 20 LxSelect 严格矩阵关闭
+
+- 组件、Demo 和中文 API 按 `design/表单控件八件套/` 核对；桌面 32px，390px 触控目标与选项行 44px。禁用折叠摘要、表单校验焦点与恢复、远程 loading/empty/error/retry、HUD、窄屏、键盘及减少动效均有行为或浏览器证据。
+- LxSelect 定向单测 15/15、文档 E2E 8/8、Vue3 全量 Vitest 565/565、隔离 Mock 预览与竞态 E2E 10/10；类型、构建、文档、生产构建和目标 Prettier/ESLint 通过。Vue3 ESLint 将 `linkx-fe` 源文件忽略，不算作组件库 ESLint 通过。
+- 双代理 Assessment A 36/40（Excellent）；Assessment B 四个 detector 均为有效 JSON `[]`/空 stderr/退出码 0，六个浏览器场景成功；独立代码复审无未关闭 P0–P2。共享文档目录密度 P3 留作后续，loading E2E 断言通过但没有可信的 loading 专属截图。源码锁、A/B、综合报告与趋势见 `.impeccable/critique/lxselect-final-2026-10-14-post-fix/` 和 `.impeccable/critique/2026-10-14T00-42-11Z__linkx-fe-src-components-lxselect-index-vue.md`（33/40 → 35/40 → 36/40）。
+- 本波 UI-10 全库更新为 5/52，不代表 Vue3 宿主替换、真实后端联调或人工读屏完成。详情见 `doc/lx-ui/COMPONENT-AUDIT.md` Wave 20。
+
 ## 2026-10-13 LxInputNumber 当前版复核：桌面 P2 未关闭
 
 - Impeccable Assessment A **29/40（Good）**；B 的 4 个目标 detector 都是合法 JSON `[]`、stderr 空、退出码 `0`。Light/HUD × 桌面/375px 四视图成功注入；无浏览器错误、失败请求或横向溢出。overlay 命中按实测归因为文档、VitePress 外壳及主题令牌。

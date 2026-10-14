@@ -1,9 +1,17 @@
 # LinkX 项目交接记录
 
+## [2026-10-14] UI-10 / Wave 20 LxSelect 严格矩阵交接
+
+- **完成范围**：LxSelect 按 `design/表单控件八件套/` 完成当前组件、Demo、中文 API、主题/状态、键盘、窄屏与远程状态复核；登记 UI-10 第 5/52 项关闭。无组件级 P0–P2；参考页 9 个章节的目录密度为 P3 后续整理。
+- **验证结果**：LxSelect 定向单测 15/15（两个文件）、文档 E2E 8/8、Vue3 全量 Vitest 565/565、隔离全菜单/预览 E2E 10/10；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查/生产构建及目标格式/Lint 通过。Vue3 ESLint 忽略库源码，未记作库 ESLint 通过。
+- **Impeccable 与代码复审**：双代理 Assessment A 36/40（Excellent）；B 四个 detector 均为有效 `[]`/空 stderr/退出码 0，六个浏览器上下文均完成，无页面错误、失败请求或 HTTP 错误响应。静态 `[]` 只表示规则零命中。loading 有确定性 E2E 断言但缺少可信专属截图；共享 VitePress 目录密度为 P3。独立代码复审无未关闭 P0–P2。A/B 与源码锁见 `.impeccable/critique/lxselect-final-2026-10-14-post-fix/`，snapshot 为 `.impeccable/critique/2026-10-14T00-42-11Z__linkx-fe-src-components-lxselect-index-vue.md`，趋势 33/40 → 35/40 → 36/40。
+- **下一步**：对 `LxTextarea` 完成全库 UI-10 严格矩阵取证；InputNumber 桌面步进目标尺寸 P2 继续等待设计决策。全库门禁完成前继续保留 Vue3 宿主 Element Plus。页面操作引导不在待办、队列或排期中，后续仅在用户明确提出需要时再恢复评估。
+- **提交边界**：组件、Demo、中文 API 与行为测试使用 `fix(lx-ui)`；Mock 预览与项目文档按白名单分开提交；项目计划、审计、地图、交接和路线图使用 `docs(project)`。`.pnpm-store/`、`.impeccable/`、`docs/.vitepress/cache/` 及根目录用户文件 `0` 均不得纳入提交。
+
 ## [2026-10-14] SCOPE / 页面操作引导暂缓，后续按需恢复
 
 - 页面操作引导现阶段暂不考虑实施，不纳入待办、执行队列或排期，也不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
-- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅保留需求和设计基线；后续确有需要时，再重新确认页面范围、文案、交互、技术方案及后端契约，届时恢复计划并执行。
+- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅保留需求和设计基线；仅在用户后续明确提出需要时，才重新确认页面范围、文案、交互、技术方案及后端契约，并恢复计划执行。
 - 此范围调整不表示功能已经实现或验收，也不改变当前 lx-ui 与 Vue3 组件迁移顺序。
 
 ## [2026-10-13] SCOPE / 页面操作引导当前不执行，后续按需纳入计划

@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-14 UI-10 / Wave 20 LxSelect 严格矩阵关闭
+
+- **关闭项**：`LxSelect` 已按 `design/表单控件八件套/` 对照尺寸、边框/焦点、错误、禁用、清空、过滤、多选折叠、远程加载/空/失败/重试、主题、键盘、窄屏和减少动效；组件矩阵登记为已关闭，UI-10 当前为 **5/52**。
+- **验证**：LxSelect 定向单测 **15/15**（两个测试文件）、当前文档 E2E **8/8**；Vue3 全量 Vitest **565/565**；隔离全菜单与预览回归 **10/10**。Mock 首屏逐项检查首页和 32 个现役子菜单，另覆盖 ColForm 请求竞态、北向 CRUD、轮播分页和 AuthImg 错误恢复；本次隔离端口为 `31849`。lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查与生产构建、目标 Prettier/ESLint 和 `git diff --check` 通过。Vue3 ESLint 对 `linkx-fe` 源文件报告为 ignored，不计作组件库 ESLint 通过。
+- **Impeccable 与代码复审**：双代理 Assessment A **36/40（Excellent）**；独立代码复审无未关闭 P0–P2。B 四个 detector 均为合法 JSON `[]`、stderr 空、退出码 `0`；六个独立浏览器上下文均成功注入，无页面错误、失败请求或 HTTP 错误响应。静态 `[]` 仅表示规则零命中。文档页约 10 个目录锚点作为共享 VitePress 外壳 P3；loading 有确定性 E2E 文案断言，但没有可信的 loading 专属截图。A/B 当前源码指纹与原始证据见 `.impeccable/critique/lxselect-final-2026-10-14-post-fix/`，综合快照为 `.impeccable/critique/2026-10-14T00-42-11Z__linkx-fe-src-components-lxselect-index-vue.md`，趋势 **33/40 → 35/40 → 36/40**。
+- **范围边界与后续**：本次只关闭 `LxSelect` 的 UI-10 严格矩阵行；不代表 Vue3 宿主替换、真实后端联调、读屏器人工验收或其余 47 项完成。下一步对已完成组件级复核、但仍未关闭全库严格矩阵的 `LxTextarea` 按同一门槛取证；`LxInputNumber` 桌面目标尺寸 P2 仍等待设计决策。保留 Vue3 宿主 `element-plus` 直依赖，直到全库组件与动效门禁通过。页面操作引导暂缓且不进入待办、执行队列或排期。
+- **提交拆分**：组件、Demo、中文 API 与行为测试使用 `fix(lx-ui)`；Mock 预览适配与全菜单用例按文件白名单独立提交；项目计划、审计、地图、交接与路线图使用 `docs(project)`。`.pnpm-store/`、`.impeccable/` 和本地 VitePress 缓存不纳入提交。
+
 ## 2026-10-13 UI-10 / LxInputNumber 当前版复核交接
 
 - 当前版独立 Impeccable Assessment A **29/40（Good）**；B 的 4 个目标 detector 均为合法 JSON `[]`、stderr 为空、退出码 `0`。Light/HUD × 桌面/375px 四视图注入成功，浏览器无横向溢出或页面错误；overlay 命中已归因到文档、VitePress 外壳及设计令牌。
@@ -9,7 +17,7 @@
 ## 2026-10-14 范围备注：页面操作引导暂缓，后续按需恢复
 
 - 页面操作引导现阶段暂不考虑实施，不纳入待办、执行队列或排期，也不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
-- `doc/GUIDE-CONTENT-PLAN.md` 仅保留需求与文案草案；后续确有需要时，再重新确认页面范围、文案与交互、技术方案及后端契约，届时恢复计划并执行。当前状态不代表功能已实现或验收。
+- `doc/GUIDE-CONTENT-PLAN.md` 仅保留需求与文案草案；仅在用户后续明确提出需要时，才重新确认页面范围、文案与交互、技术方案及后端契约，并恢复计划执行。当前状态不代表功能已实现或验收。
 
 ## 2026-10-13 UI-10 / Wave 19 Checkbox 与 Radio 四项严格矩阵登记
 

@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-14 UI-10 / Wave 20 LxSelect 严格矩阵关闭
+
+- **设计映射**：`design/表单控件八件套/`；桌面触发器基准 32px，390px 触屏下触发器与选项行 44px。按设计令牌复核默认/hover/focus/error/disabled、单选/多选、清空、过滤、远程加载/空/失败/重试、Light/HUD 与 `prefers-reduced-motion`；不适用的同步控件状态在 Demo/API 说明中界定。
+- **行为与浏览器证据**：折叠多选摘要支持键盘展开并按表单上下文同步禁用语义；校验失败后焦点进入 combobox，修正后错误节点及播报清除。远程 loading 有确定性 E2E 文案断言，但没有可信的 loading 专属截图；六个独立浏览器上下文覆盖 Light、多选校验恢复、HUD、390px、远程失败恢复和禁用摘要。
+- **验证与审查**：定向单测 15/15（两个文件）、文档 E2E 8/8；全量 Vue3 Vitest 565/565、隔离全菜单与预览回归 10/10；lx-ui 类型检查/构建、VitePress、Vue3 类型检查/生产构建和目标格式/Lint 通过。Assessment A 36/40（Excellent）；Assessment B 四个 detector 均为合法 JSON `[]`、stderr 空、退出码 0；六个独立浏览器上下文成功注入，无页面错误、失败请求或 HTTP 错误响应；独立代码复审无未关闭 P0–P2。
+- **剩余与边界**：无组件级 P0–P2；文档页约 10 个目录锚点作为共享 VitePress 外壳 P3 后续整理。loading 有确定性 E2E 文案断言，但没有可信的 loading 专属截图；detector `[]` 仅表示静态规则零命中。此矩阵关闭不代表 Vue3 宿主替换、真实后端联调或读屏器人工验收完成。A/B 当前源码锁、报告、浏览器与截图证据见 `.impeccable/critique/lxselect-final-2026-10-14-post-fix/`，综合快照见 `.impeccable/critique/2026-10-14T00-42-11Z__linkx-fe-src-components-lxselect-index-vue.md`，趋势为 33/40 → 35/40 → 36/40。
+
 ## 2026-10-13 UI-10 / LxInputNumber 当前版严格复核，桌面目标尺寸 P2 保持开放
 
 - **评审对象与评分**：本轮独立 Impeccable Assessment A 为 **29/40（Good）**；Assessment B 对组件、样式、Demo 和中文文档逐项执行 detector，均为合法 JSON `[]`、stderr 为空、退出码 `0`。`[]` 只表示静态规则零命中，不代表视觉审查通过。
@@ -259,7 +266,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 
 ### 52 个公开组件逐项验收矩阵
 
-本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **4/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
+本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **5/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
 
 | 公开组件             | 唯一对照源                                        | 当前矩阵状态                                                                                                                                                                               |
 | -------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -296,7 +303,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxRadioGroup`       | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/8px 垂直间距、方向键、禁用继承、历史只读值及 Light/HUD 行为均有当前版证据                   |
 | `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 单测 9/9、文档 E2E 3/3；修后 A/B 已补独立浏览器/overlay 证据，Demo 增加四字段标准态；最终综合快照待收口，严格矩阵保持打开                                                                  |
 | `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                                                                                                       |
-| `LxSelect`           | `design/表单控件八件套/`                          | Wave 17 当前版 A/B、overlay、代码复审完成；单测 11/11、文档 E2E 3/3；桌面 32px、窄屏 44px；本项仍待 UI-10 严格矩阵复核（全库当前 4/52）                                                    |
+| `LxSelect`           | `design/表单控件八件套/`                          | **已关闭（Wave 20）**；桌面 32px、390px 触控目标/选项行 44px；定向单测 15/15、文档 E2E 8/8、A/B 36/40 与六场景浏览器证据、代码复审无未关闭 P0–P2；目录密度 P3 留后续整理 |
 | `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                                                                          |
 | `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                                                                                               |
 | `LxSidebar`          | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；rail/expanded、菜单态、动效和抽屉                                                                                                                                              |

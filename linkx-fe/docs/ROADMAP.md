@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-14 UI-10 / Wave 20 LxSelect 严格矩阵关闭
+
+- `LxSelect` 按 `design/表单控件八件套/` 完成组件、Demo、中文 API、状态和交互严格复核；定向单测 15/15、文档 E2E 8/8，Vue3 全量 Vitest 565/565，隔离 Mock 预览与竞态 E2E 10/10。
+- Impeccable 双代理 Assessment A 36/40（Excellent），无开放 P0–P2；B 四个 detector 为有效 JSON `[]`、stderr 空、退出码 0，六个浏览器上下文注入成功，无页面错误、失败请求或 HTTP 错误响应。`[]` 只表示静态规则零命中。loading 有确定性 E2E 文案断言，但没有可信的 loading 专属截图。当前源码锁、A/B 和复审材料见 `.impeccable/critique/lxselect-final-2026-10-14-post-fix/`；综合 snapshot 和趋势见 `.impeccable/critique/2026-10-14T00-42-11Z__linkx-fe-src-components-lxselect-index-vue.md`、33/40 → 35/40 → 36/40。
+- UI-10 当前 **5/52**；共享参考页约 10 项目录锚点为 P3 后续整理。该关闭仅针对 LxSelect 严格矩阵，不代表 Vue3 宿主替换、真实后端联调或人工读屏完成。下一步对 `LxTextarea` 取证后继续其他未关闭矩阵组件和已登记 P1/P2；Vue3 Element Plus 保留至全库门禁完成；页面操作引导暂缓、不列入待办或排期。
+
 ## 2026-10-13 LxInputNumber 当前版复核：桌面目标尺寸 P2 保持开放
 
 - 独立 Assessment A **29/40（Good）**；Assessment B 对组件、样式、Demo 和中文文档执行四次 detector，均为合法 JSON `[]`、stderr 为空、退出码 `0`。Light/HUD × 1440px 桌面/375px 触屏四视图均完成浏览器注入。

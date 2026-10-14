@@ -1,5 +1,13 @@
 # LinkX 项目地图
 
+## 2026-10-14 Wave 20 / LxSelect UI-10 严格矩阵关闭
+
+- **组件入口**：`linkx-fe/src/components/LxSelect/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxselect.md`；设计依据为 `design/表单控件八件套/`。
+- **验证入口**：`other-admin/admin-vue3/tests/unit/lx-select.test.ts` 与 locale fallback 定向单测合计 15/15、`tests/e2e/lx-select-docs.spec.ts` 8/8、全量 Vue3 Vitest 565/565；隔离全菜单/预览 E2E 10/10。lx-ui 类型检查/构建、VitePress、Vue3 类型/生产构建及目标格式/Lint 通过；Vue3 ESLint 对库源码返回 ignored，不计作库 ESLint 通过。
+- **正式评审**：双代理 Impeccable A 36/40（Excellent），无开放 P0–P2；B 四个 detector 均为有效 JSON `[]`、stderr 空、退出码 0，六个独立浏览器上下文成功注入，无页面错误、失败请求或 HTTP 错误响应。loading 有确定性 E2E 文案断言，但未取得可信的 loading 专属截图；静态 `[]` 仅代表规则零命中。
+- **证据、遗留与边界**：A/B 当前源码锁与浏览器证据见 `.impeccable/critique/lxselect-final-2026-10-14-post-fix/`，综合 snapshot 为 `.impeccable/critique/2026-10-14T00-42-11Z__linkx-fe-src-components-lxselect-index-vue.md`，趋势 33/40 → 35/40 → 36/40。文档页约 10 项目录作为共享外壳 P3 后续整理；UI-10 当前 **5/52**。本波不代表 Vue3 宿主替换、真实后端联调或人工读屏完成；页面操作引导仍暂缓且不在执行队列或排期。
+- **下一入口**：对已完成组件级复核、但仍未关闭全库严格矩阵的 `LxTextarea` 按 UI-10 统一门槛取证；`LxInputNumber` 桌面步进目标尺寸 P2 继续等待设计决策，不擅自改变设计稿。
+
 ## 2026-10-13 LxInputNumber 当前版审查入口
 
 - **审查结果**：Impeccable Assessment A 为 29/40；B 的四个静态 detector 均为合法 `[]`/空 stderr/退出码 0，Light/HUD × 桌面/375px 浏览器视图均注入成功。完整归因和证据见 `.impeccable/critique/lxinputnumber-wave19-current-2026-10-13/`。
