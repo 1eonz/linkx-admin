@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-15] 全菜单 Mock 预览 E2E 复验与下一入口
+
+- **验证结果**：在 `other-admin/admin-vue3` 将 `MOCK_PREVIEW_PORT` 设为 `31853` 后运行 `pnpm exec playwright test --config=playwright.preview.config.ts`，10/10 通过。关联人员搜索竞态 4 项、全菜单/样例与北向 CRUD/轮播/AuthImg 场景 6 项均通过；服务器使用本地 Mock，未占用 `30847` 用户预览端口。
+- **范围边界**：本次只复验 Mock 预览与交互，不代表真实后端联调；没有变更业务代码或 UI-10 关闭数（仍为 7/52）。
+- **下一步**：按 `doc/lx-ui/COMPONENT-AUDIT.md` 的未关闭矩阵顺序进入 `LxActionButtons` UI-10 严格复核。`LxInputNumber` 桌面步进目标尺寸 P2 继续等待设计决策；页面操作引导暂不实施、不继续拆分，也不纳入待办、执行队列或排期；后续明确有需要时再恢复计划并执行。
+
 ## [2026-10-15] lx-ui / Wave 23 LxButton Demo 键盘焦点复验
 
 - **完成范围**：完整演示锚点现在将键盘焦点交给可见标题，命名区域由标题命名；尺寸选择框键盘聚焦时显示 2px 主色外框。没有修改 `LxButton` 公开 API 或业务行为。

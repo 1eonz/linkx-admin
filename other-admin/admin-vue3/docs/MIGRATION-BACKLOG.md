@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-15 全菜单 Mock 预览 E2E 复验
+
+- 将环境变量 `MOCK_PREVIEW_PORT` 设为 `31853` 后运行 `pnpm exec playwright test --config=playwright.preview.config.ts` 隔离重跑，共 **10/10 通过**；覆盖菜单与首屏样例、ColForm 请求竞态、北向 Mock CRUD、轮播分页、AuthImg 错误恢复和减少动效。
+- 此结果仅验证本地 Mock 预览与交互，不代表真实后端联调；未占用 `30847` 用户预览端口。下一项按组件审计矩阵进入 `LxActionButtons` UI-10 严格复核。页面操作引导暂不实施、不继续拆分，也不纳入待办、执行队列或排期；后续明确有需要时再恢复计划并执行。
+
 ## 2026-10-14 Wave 21：LxTextarea 严格矩阵收口与 E2E 复验
 
 - lx-ui `LxTextarea` 当前 UI-10 严格矩阵行已关闭，全库更新为 **6/52**。组件沿用已完成的设计、主题/状态、行为与 Impeccable 证据；Textarea 单测 14/14，共享文档 E2E 11/11，隔离端口 4179 完整重跑通过。独立代码复审批准 Select E2E 状态定位修改；单独复核尝试曾被旧服务/代理超时阻断，隔离重跑后目标用例和全文件均通过。

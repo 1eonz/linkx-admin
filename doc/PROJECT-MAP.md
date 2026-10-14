@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-15 全菜单 Mock 预览回归复验
+
+- **入口与结果**：在 `other-admin/admin-vue3` 使用独立端口 `31853` 重跑 `playwright.preview.config.ts`，全菜单与预览 E2E **10/10 通过**；包含全部菜单首屏数据、搜索竞态、Mock CRUD、轮播分页及 AuthImg 错误恢复/键盘重试/减少动效。
+- **边界与下一入口**：全部写操作由本地 Mock 接管；结果不表示真实后端联调。下一项进入 `LxActionButtons` UI-10 严格矩阵核查，组件库收口和 Vue3 Element Plus 替换门槛不变。页面操作引导暂不实施、不继续拆分，也不纳入待办、执行队列或排期；后续明确有需要时再恢复计划并执行。
+
 ## 2026-10-15 Wave 23 / LxButton Demo 键盘焦点与锚点复验
 
 - **入口与变化**：`linkx-fe/src/components/LxButton/demo/basic.vue` 为完整演示区提供可见标题锚点，并给尺寸选择框增加 `:focus-visible` 外框；`linkx-fe/docs/components/lxbutton.md` 将演示区命名关联到该标题。
