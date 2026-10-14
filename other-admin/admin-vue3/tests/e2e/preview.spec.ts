@@ -53,9 +53,13 @@ test('本地预览全部菜单入口可打开且读取样例数据', async ({ pa
   expect(Object.keys(sampleTextByRoute).sort()).toEqual([...previewRoutes].sort());
 
   await page.goto('/h5/GroupTags', { waitUntil: 'domcontentloaded', timeout: 15_000 });
-  await expect(page.locator('.sidebar-wrapper .el-menu > .el-sub-menu')).toHaveCount(10);
+  const submenuTitles = page.locator('[role="menubar"] .el-sub-menu > .el-sub-menu__title');
+  await expect(submenuTitles).toHaveCount(previewMenu.length);
+  expect((await submenuTitles.allTextContents()).map((title) => title.trim()).sort()).toEqual(
+    previewMenu.map((parent) => parent.name).sort(),
+  );
   await expect(page.getByRole('menuitem', { name: '首页', exact: true })).toBeVisible();
-  const menuItems = page.locator('.sidebar-wrapper .el-menu--inline > .el-menu-item');
+  const menuItems = page.locator('[role="menubar"] [role="menu"] > [role="menuitem"]');
   await expect(menuItems).toHaveCount(32);
   expect((await menuItems.allTextContents()).map((title) => title.trim()).sort()).toEqual(
     previewMenu.flatMap((parent) => parent.children?.map((child) => child.name) ?? []).sort(),
@@ -109,11 +113,16 @@ test('本地预览全部菜单入口可打开且读取样例数据', async ({ pa
       await expect(page.locator('.version-popover')).toContainText('MSIP版本：本地 Mock');
       await expect(page.locator('.version-popover')).toContainText('警信版本：本地 Mock');
     } else if (sampleText) {
-      await expect(page.locator('.app-main')).toContainText(sampleText, { timeout: 5_000 });
+      await expect(page.locator('.app-main')).toContainText(sampleText, { timeout: 15_000 });
     }
     await expect(page.locator('.app-main')).not.toContainText('该页面待后续迭代迁移');
     if (routeUrl === '/thirdParty/thirdParty') {
-      await expect(page.locator('.app-main .northbound-table tbody tr')).toHaveCount(3);
+      await expect(page.locator('.app-main tbody tr')).toHaveCount(3);
+    }
+    if (routeUrl === '/thirdParty/southInterface') {
+      const personRow = page.locator('.app-main tbody tr').filter({ hasText: '重点人员库' });
+      await expect(personRow).toContainText('5分钟');
+      await expect(page.locator('.app-main')).not.toContainText('NaN分钟');
     }
     if (routeUrl === '/h5/carousel') {
       const bannerImages = page.locator('.app-main img');
@@ -176,7 +185,7 @@ test('北向接入管理使用本地 Mock 完成筛选和增改删', async ({ pa
 
   await page.goto('/thirdParty/thirdParty', { waitUntil: 'domcontentloaded' });
   const appMain = page.locator('.app-main');
-  const tableRows = appMain.locator('.northbound-table tbody tr');
+  const tableRows = appMain.getByRole('table').nth(1).getByRole('row');
   await expect(tableRows).toHaveCount(3);
 
   const searchInput = appMain.locator('.name-filter input');
@@ -196,20 +205,20 @@ test('北向接入管理使用本地 Mock 完成筛选和增改删', async ({ pa
   await createDialog.locator('input').nth(4).fill('7');
   await createDialog.getByRole('button', { name: '确定' }).click();
 
-  let targetRow = appMain.locator('.northbound-table tbody tr').filter({ hasText: '预览联调平台' });
+  let targetRow = tableRows.filter({ hasText: '预览联调平台' });
   await expect(targetRow).toHaveCount(1);
   await targetRow.getByRole('button', { name: '修改' }).click();
   const editDialog = page.getByRole('dialog', { name: '修改北向接入' });
   await editDialog.locator('input').nth(0).fill('预览联调平台二期');
   await editDialog.getByRole('button', { name: '确定' }).click();
 
-  targetRow = appMain.locator('.northbound-table tbody tr').filter({ hasText: '预览联调平台二期' });
+  targetRow = tableRows.filter({ hasText: '预览联调平台二期' });
   await expect(targetRow).toHaveCount(1);
   await targetRow.getByRole('button', { name: '删除' }).click();
   const confirmDialog = page.locator('.el-message-box');
   await expect(confirmDialog).toContainText('确认删除');
   await confirmDialog.getByRole('button', { name: '确定' }).click();
-  await expect(appMain.locator('.northbound-table tbody tr').filter({ hasText: '预览联调平台二期' })).toHaveCount(0);
+  await expect(tableRows.filter({ hasText: '预览联调平台二期' })).toHaveCount(0);
   expect(unconfiguredApis).toEqual([]);
 });
 

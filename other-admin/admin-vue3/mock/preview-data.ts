@@ -865,7 +865,7 @@ export function getPreviewData(method: string, path: string, url: URL, body: unk
             databaseName: 'preview_db',
             dbType: 'PostgreSQL',
             account: 'preview_readonly',
-            period: '5m',
+            period: '5',
             gmtCreated: '2026-06-08 16:00:00',
           },
         ],
