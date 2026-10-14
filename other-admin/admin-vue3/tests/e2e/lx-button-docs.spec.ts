@@ -93,6 +93,7 @@ test.describe('lx-ui 基础按钮设计回归', () => {
     const content = page.locator('.vp-doc');
     expect((await content.locator('h2').allTextContents()).map((text) => text.replace(/\u200b/g, '').trim())).toEqual([
       '快速使用',
+      '完整交互演示',
       '状态与操作',
       'API',
       '宿主接入',
@@ -121,7 +122,8 @@ test.describe('lx-ui 基础按钮设计回归', () => {
     if (!demoJumpBounds) throw new Error('完整演示入口没有可见边界');
     expect(demoJumpBounds.y + demoJumpBounds.height).toBeLessThanOrEqual(720);
 
-    const fullDemo = page.locator('#lx-button-demo-anchor');
+    const fullDemo = page.getByRole('region', { name: '完整交互演示' });
+    const demoHeading = page.getByRole('heading', { name: '完整交互演示', exact: true });
     await demoJump.focus();
     await page.evaluate(() => {
       document.addEventListener(
@@ -147,7 +149,7 @@ test.describe('lx-ui 基础按钮设计回归', () => {
     expect(await page.evaluate(() => window.location.hash)).toBe(originalPageState.hash);
     expect(await page.evaluate(() => window.scrollY)).toBe(originalPageState.scrollY);
     await expect(demoJump).toBeFocused();
-    await expect(fullDemo).not.toBeFocused();
+    await expect(demoHeading).not.toBeFocused();
 
     const behaviorList = content.getByRole('heading', { name: '示例说明' }).locator('xpath=following-sibling::ul[1]');
     const behaviorItems = behaviorList.getByRole('listitem');
@@ -202,14 +204,17 @@ test.describe('lx-ui 基础按钮设计回归', () => {
 
     await demoJump.focus();
     await page.keyboard.press('Enter');
-    await expect(fullDemo).toBeFocused();
-    await expect(fullDemo).toHaveCSS('outline-style', 'solid');
-    await expect(fullDemo).toHaveCSS('outline-width', '2px');
+    await expect(demoHeading).toBeFocused();
+    await expect(demoHeading).toHaveCSS('outline-style', 'solid');
+    await expect(demoHeading).toHaveCSS('outline-width', '2px');
     await expect(fullDemo.locator('.lx-button-demo')).toBeVisible();
-    const demoBounds = await fullDemo.boundingBox();
+    const demoBounds = await demoHeading.boundingBox();
+    const regionBounds = await fullDemo.boundingBox();
     const mobileNavigationBottom = await getNavigationBottom(page);
     expect(demoBounds?.y).toBeGreaterThanOrEqual(mobileNavigationBottom + 8);
     expect(demoBounds?.y).toBeLessThanOrEqual(mobileNavigationBottom + 32);
+    expect(demoBounds?.height).toBeLessThanOrEqual(40);
+    expect(demoBounds?.width).toBeLessThan((regionBounds?.width ?? 0) / 2);
 
     await openAdvancedExamples(page);
     const sectionNav = fullDemo.getByRole('navigation', { name: '更多按钮示例目录' });
@@ -251,9 +256,10 @@ test.describe('lx-ui 基础按钮设计回归', () => {
     const desktopJump = page.getByRole('link', { name: '跳转到完整交互演示' });
     await desktopJump.focus();
     await page.keyboard.press('Enter');
-    const desktopTarget = page.locator('#lx-button-demo-anchor');
-    await expect(desktopTarget).toBeFocused();
-    const desktopBounds = await desktopTarget.boundingBox();
+    const desktopTarget = page.getByRole('region', { name: '完整交互演示' });
+    const desktopHeading = page.locator('#lx-button-demo-anchor');
+    await expect(desktopHeading).toBeFocused();
+    const desktopBounds = await desktopHeading.boundingBox();
     const desktopNavBottom = await getNavigationBottom(page);
     expect(desktopBounds?.y).toBeGreaterThanOrEqual(desktopNavBottom + 8);
     expect(desktopBounds?.y).toBeLessThanOrEqual(desktopNavBottom + 32);
@@ -284,9 +290,10 @@ test.describe('lx-ui 基础按钮设计回归', () => {
     const mediumJump = page.getByRole('link', { name: '跳转到完整交互演示' });
     await mediumJump.focus();
     await page.keyboard.press('Enter');
-    const mediumTarget = page.locator('#lx-button-demo-anchor');
-    await expect(mediumTarget).toBeFocused();
-    const mediumBounds = await mediumTarget.boundingBox();
+    const mediumTarget = page.getByRole('region', { name: '完整交互演示' });
+    const mediumHeading = page.locator('#lx-button-demo-anchor');
+    await expect(mediumHeading).toBeFocused();
+    const mediumBounds = await mediumHeading.boundingBox();
     const mediumNavigationBottom = await getNavigationBottom(page);
     expect(mediumBounds?.y).toBeGreaterThanOrEqual(mediumNavigationBottom + 8);
     expect(mediumBounds?.y).toBeLessThanOrEqual(mediumNavigationBottom + 32);
@@ -596,6 +603,43 @@ test.describe('lx-ui 基础按钮设计回归', () => {
     await page.goto('/components/lxbutton.html');
     await openAdvancedExamples(page);
     const demo = page.locator('.lx-button-demo');
+    const sizeSelect = page.getByLabel('按钮尺寸档', { exact: true });
+    const themeToggle = page.getByLabel('组件示例深色预览（HUD）', { exact: true });
+    for (const { width, hud, outlineColor } of [
+      { width: 1280, hud: false, outlineColor: 'rgb(0, 96, 169)' },
+      { width: 320, hud: false, outlineColor: 'rgb(0, 96, 169)' },
+      { width: 1280, hud: true, outlineColor: 'rgb(56, 189, 248)' },
+      { width: 320, hud: true, outlineColor: 'rgb(56, 189, 248)' },
+    ]) {
+      await page.setViewportSize({ width, height: 812 });
+      if ((await themeToggle.isChecked()) !== hud) {
+        if (hud) await themeToggle.check();
+        else await themeToggle.uncheck();
+      }
+
+      await themeToggle.focus();
+      await page.keyboard.press('Shift+Tab');
+      await expect(sizeSelect).toBeFocused();
+      expect(await sizeSelect.evaluate((element) => element.matches(':focus-visible'))).toBe(true);
+      await expect(sizeSelect).toHaveCSS('outline-style', 'solid');
+      await expect(sizeSelect).toHaveCSS('outline-color', outlineColor);
+      await expect(sizeSelect).toHaveCSS('outline-width', '2px');
+      await expect(sizeSelect).toHaveCSS('outline-offset', '2px');
+
+      const focusBounds = await sizeSelect.boundingBox();
+      const toolbarBounds = await demo.locator('.lx-button-demo__toolbar').boundingBox();
+      if (!focusBounds || !toolbarBounds) throw new Error('尺寸选择框缺少可见边界');
+      expect(focusBounds.x - 4).toBeGreaterThanOrEqual(toolbarBounds.x);
+      expect(focusBounds.y - 4).toBeGreaterThanOrEqual(toolbarBounds.y);
+      expect(focusBounds.x + focusBounds.width + 4).toBeLessThanOrEqual(toolbarBounds.x + toolbarBounds.width);
+      expect(focusBounds.y + focusBounds.height + 4).toBeLessThanOrEqual(toolbarBounds.y + toolbarBounds.height);
+      expect(focusBounds.x - 4).toBeGreaterThanOrEqual(0);
+      expect(focusBounds.x + focusBounds.width + 4).toBeLessThanOrEqual(width);
+    }
+
+    if (await themeToggle.isChecked()) await themeToggle.uncheck();
+    await page.setViewportSize({ width: 1280, height: 720 });
+
     const primary = demo.getByRole('button', { name: '主操作按钮', exact: true });
     const refresh = demo.getByRole('button', { name: '刷新数据', exact: true });
     const textIcon = demo.getByRole('button', { name: '文字刷新', exact: true });

@@ -155,6 +155,13 @@ function handleBlockExampleToggle(event: Event) {
 
 <template>
   <div class="lx-button-demo" :class="{ 'lx-theme-hud': hudTheme }">
+    <h2
+      id="lx-button-demo-anchor"
+      class="lx-button-demo__title lx-button-demo__anchor"
+      tabindex="-1"
+    >
+      完整交互演示
+    </h2>
     <div class="lx-button-demo__toolbar">
       <label>
         尺寸档
@@ -554,9 +561,15 @@ function handleBlockExampleToggle(event: Event) {
   gap: 8px;
 }
 
-.lx-button-demo__scope {
-  color: var(--lx-text-secondary-strong);
-  font-size: 12px;
+.lx-button-demo__title {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
 }
 
 .lx-button-demo__toolbar input[type='checkbox'] {
@@ -578,6 +591,11 @@ function handleBlockExampleToggle(event: Event) {
   border-radius: var(--lx-radius-sm);
   background: var(--lx-bg-card);
   color: var(--lx-text-primary);
+}
+
+.lx-button-demo__toolbar select:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
 }
 
 .lx-button-demo__panel {

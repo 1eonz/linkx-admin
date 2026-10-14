@@ -69,10 +69,8 @@ import LxButton from '../../src/components/LxButton/index.vue';
 - **请求范围**：所有示例只更新本地状态，不请求后端；失败与重试示例展示错误保留和恢复反馈，不执行真实请求。
 
 <div
-  id="lx-button-demo-anchor"
   role="region"
-  aria-label="LxButton 完整交互演示"
-  tabindex="-1"
+  aria-labelledby="lx-button-demo-anchor"
 >
   <Basic />
 </div>
