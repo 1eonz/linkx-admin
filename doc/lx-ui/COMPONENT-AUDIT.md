@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-15 lx-ui / Wave 23 LxButton Demo 键盘焦点复验
+
+- **范围**：完整演示区以可见标题承接锚点焦点，命名区域通过标题建立名称；尺寸选择框增加键盘 `:focus-visible` 外框。该修复属于文档 Demo，不修改公开组件 API，也不表示 Vue3 业务宿主按钮迁移完成。
+- **验证**：文档 E2E 19/19，使用 lx-ui 专用配置、隔离端口 4177；新增主题色断言后焦点专项回归 1/1。覆盖键盘到达、`:focus-visible`、Light/HUD 计算色、2px 实线外框和边界。Prettier、目标 ESLint、`git diff --check` 通过。
+- **Impeccable 与代码复审**：A 初评 30/40（Good），尺寸选择器 P2 经 Light/HUD × 1440/320px 四视图复验关闭，旧 320px 工具栏 P3 未复现。B 三个源码检测器输出均为有效 JSON `[]`、stderr 空、退出码 0；四个 Light/HUD × 桌面/390px 视图注入成功且无页面错误、失败请求或 HTTP 错误。覆盖层命中逐项归因：HUD 按钮符合 `--lx-color-primary` 设计令牌，复制按钮、长文档容器、正文规则和导航图标属文档外壳或规则覆盖，不作为按钮 Demo 缺陷；`[]` 只表示静态规则零命中。代码复审曾发现焦点颜色断言缺口，已补齐并复验；最终批准，无未关闭 P0–P3。正式快照见 `.impeccable/critique/2026-10-14T16-33-46Z__linkx-fe-src-components-lxbutton-index-vue.md`。
+- **矩阵边界**：不增加 UI-10 全库关闭数，仍为 **7/52**。`LxButton` 的全库严格矩阵行保持开放；既有组件审查与本次文档 Demo 修复均不替代完整 UI-10 行验收。A/B 证据见 `.impeccable/critique/lxbutton-wave-2026-10-14-final/`。
+
 ## 2026-10-14 UI-10 / Wave 22 LxInput 严格矩阵关闭
 
 - **设计对照与差异**：依据 `design/表单控件八件套/code.html` 第 01 区，核验 32px 基准高度、4px 圆角、焦点/错误/禁用/只读状态、清空入口和窄屏触控目标。设计标本默认态清空图标常驻；当前实现桌面有值时 hover/focus 显示，触屏或视口不超过 640px 时有值即显示，禁用/只读不允许清空。此差异已在 API、Demo 和复核记录中说明，未发现阻塞问题。
@@ -288,7 +295,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxActionButtons`    | `design/按钮体系/`                                | 待严格复核；保留既有键盘/窄屏行为证据                                                                                                                                                      |
 | `LxAuthImg`          | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；真实鉴权联调另列                                                                                                                                                               |
 | `LxBreadcrumb`       | `DESIGN-SPEC.md` + 导航规范                       | 待严格复核；保留现有宿主导航契约                                                                                                                                                           |
-| `LxButton`           | `design/按钮体系/`                                | 当前版 A 32/40，B 8/8 浏览器场景，代码复审无未关闭发现；桌面标签 P2 已关闭，两项 P3 后置；不增加 UI-10 全库关闭数                                                                          |
+| `LxButton`           | `design/按钮体系/`                                | 2026-10-12 A 32/40、B 8/8 场景；2026-10-15 Demo 锚点/焦点复验 A 初评 30/40，尺寸选择器 P2 已关闭、旧窄屏工具栏 P3 未复现；主题色测试复审 P3 已关闭；全库 UI-10 严格行仍开放，不增加关闭数 |
 | `LxCascader`         | `design/表单控件八件套/`（无专属画板）            | 当前版单测/E2E、A/B 和代码复审完成；P2 为移动换行密度、错误旧状态、主题入口；按 Select 控件外形与状态令牌映射                                                                              |
 | `LxCheckbox`         | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；14px 三态、hover/focus/disabled、旧 label 兼容、Light/HUD 与 44px 触屏均有当前版证据；23/23 单测及 16/16 合并 E2E 见 Wave 19 记录 |
 | `LxCheckboxGroup`    | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/12px 垂直间距、半选、禁用继承、值过滤及键盘/触屏行为均有当前版证据；剩余仅非阻塞 P3          |

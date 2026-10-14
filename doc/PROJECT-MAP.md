@@ -1,11 +1,17 @@
 # LinkX 项目地图
 
+## 2026-10-15 Wave 23 / LxButton Demo 键盘焦点与锚点复验
+
+- **入口与变化**：`linkx-fe/src/components/LxButton/demo/basic.vue` 为完整演示区提供可见标题锚点，并给尺寸选择框增加 `:focus-visible` 外框；`linkx-fe/docs/components/lxbutton.md` 将演示区命名关联到该标题。
+- **验证与复审**：LxButton 文档 E2E 19/19（lx-ui 专用配置、隔离端口 4177）；补充 Light/HUD 焦点颜色断言后专项回归 1/1。Prettier、目标 ESLint、差异检查通过。Impeccable A 初评 30/40，尺寸选择框 P2 经 Light/HUD × 桌面/320px 四视图复验关闭；B 三个源码检测器为有效 JSON `[]`、stderr 空、退出码 0，四个 Light/HUD × 桌面/390px 视图成功注入，无页面错误或失败请求。覆盖层命中归因为 VitePress 外壳、代码示例和 HUD 主色令牌。代码复审最终批准，无未关闭 P0–P3；正式快照见 `.impeccable/critique/2026-10-14T16-33-46Z__linkx-fe-src-components-lxbutton-index-vue.md`。静态 `[]` 不代表视觉审查通过。
+- **边界与下一入口**：只修复文档演示的锚点与键盘焦点，不增加 UI-10 全库关闭数，当前仍为 **7/52**；不代表宿主页面替换或真实联调。下一项继续未关闭的 UI-10 矩阵，`LxInputNumber` 桌面目标尺寸 P2 等待设计决策。页面操作引导需求暂缓但未取消，后续用户提出需要时再重新评估。
+
 ## 2026-10-14 Wave 22 / LxInput UI-10 严格矩阵关闭
 
 - **组件入口**：`linkx-fe/src/components/LxInput/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxinput.md`；设计源为 `design/表单控件八件套/code.html` 第 01 区。
 - **验证入口**：定向单测 13/13、共享基础控件文档 E2E 11/11、最终提示断行复验 1/1；lx-ui 类型/构建、VitePress、Vue3 类型/生产构建和目标代码质量检查通过。
 - **正式评审**：Impeccable A 34/40（Good），清空入口发现性、窄屏方法区布局及提示断行 P3 均已关闭；B 三个 detector 为合法 JSON `[]`、stderr 空、退出码 0，Light/HUD × 桌面/390px 四视图注入成功；独立代码复审无 P0–P3。A/B 证据与综合 snapshot 位于 `.impeccable/critique/lxinput-wave-2026-10-14/`，趋势最近三次均为 34/40。
-- **差异、边界与下一入口**：设计标本默认态清空图标常驻，当前桌面仅在有值且 hover/focus 时显示，触屏或 640px 以下有值即显示；该差异已在 API/Demo 说明。UI-10 当前 **7/52**；不代表 Vue3 宿主替换、真实后端或人工读屏完成。`LxInputNumber` 桌面目标尺寸 P2 仍待设计决策。页面操作引导暂不考虑、不继续拆分或排期，仅保留历史草案。
+- **差异、边界与下一入口**：设计标本默认态清空图标常驻，当前桌面仅在有值且 hover/focus 时显示，触屏或 640px 以下有值即显示；该差异已在 API/Demo 说明。UI-10 当前 **7/52**；不代表 Vue3 宿主替换、真实后端或人工读屏完成。`LxInputNumber` 桌面目标尺寸 P2 仍待设计决策。页面操作引导需求暂缓但未取消，不进入当前待办或排期，后续用户提出需要时再恢复评估。
 
 ## 2026-10-14 Wave 21 / LxTextarea UI-10 严格矩阵关闭
 
