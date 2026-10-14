@@ -31,7 +31,9 @@ test('Select 可见标签关联真实输入，并支持键盘选择', async ({ p
   await expect(popper).toBeVisible();
   await center.press('ArrowDown');
   await center.press('Enter');
-  await expect(demo.locator('.lx-select-demo__status')).toContainText('指挥中心 已选：');
+  const basicStatus = demo.getByTestId('basic').locator('.lx-select-demo__status');
+  await expect(basicStatus).toHaveCount(1);
+  await expect(basicStatus).toContainText('指挥中心 已选：');
   await expect(popper).toBeHidden();
   await expect(demo.getByLabel('应急链路（锁定）', { exact: true })).toBeDisabled();
 });
