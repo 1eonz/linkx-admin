@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
 import type { FormRules } from 'element-plus'
-import LxInput from '../index.vue'
-import type { LxInputSize } from '../types'
+import { onMounted, reactive, ref } from 'vue'
+
 import { LxForm, LxFormItem, LxIcon } from '../../../index'
 import type { LxFormInstance } from '../../../index'
+import LxInput from '../index.vue'
+import type { LxInputSize } from '../types'
 
 type LxInputExposes = {
   focus: () => void
@@ -69,24 +70,27 @@ function runInputMethod(method: keyof LxInputExposes) {
     </div>
 
     <section class="lx-input-demo__panel" data-testid="states">
-      <h3>基础状态（标本八件套 01 四态）</h3>
+      <h3>基础四态（设计源 01）</h3>
       <div class="lx-input-demo__grid">
         <div class="lx-input-demo__field">
           <label class="lx-input-demo__label" for="demo-officer-name"
             >警员姓名 / 警号</label
           >
           <LxInput
-            ref="officerNameInputRef"
             id="demo-officer-name"
-            name="officerName"
             v-model="officerName"
+            ref="officerNameInputRef"
+            name="officerName"
             :size="size"
             placeholder="请输入警员姓名/警号"
             clearable
             @change="reportChange('警员姓名', officerName)"
             @clear="lastAction = '警员姓名已清空'"
           />
-          <p class="lx-input-demo__tip">当前为示例值；聚焦或悬停后可清空</p>
+          <p class="lx-input-demo__tip lx-input-demo__tip--clear">
+            <span>桌面有值：悬停/聚焦后显示；</span>
+            <span>触屏/窄屏有值：直接显示</span>
+          </p>
           <div
             class="lx-input-demo__exposes"
             role="group"
@@ -111,53 +115,17 @@ function runInputMethod(method: keyof LxInputExposes) {
           <LxInput
             id="demo-officer-id"
             v-model="officerId"
+            class="lx-input-demo__focus-example"
             :size="size"
             required
             mono
             :maxlength="18"
             @change="reportChange('身份标识编码', officerId)"
           />
-          <p class="lx-input-demo__tip">
-            mono 等宽值：聚焦主色边框 + 光环（全局桥供给）
+          <p class="lx-input-demo__tip lx-input-demo__tip--focus">
+            聚焦态示意：主色边框与 2px 光环；实际键盘聚焦样式一致
           </p>
         </div>
-        <div class="lx-input-demo__field">
-          <label
-            class="lx-input-demo__label lx-input-demo__label--disabled"
-            for="demo-node"
-          >
-            所属分局系统节点（禁用）
-          </label>
-          <LxInput
-            id="demo-node"
-            v-model="readonlyNode"
-            :size="size"
-            disabled
-          />
-          <p class="lx-input-demo__tip">禁用态：不可聚焦、不可编辑</p>
-        </div>
-        <div class="lx-input-demo__field">
-          <label class="lx-input-demo__label" for="demo-readonly-note">
-            归档说明（只读，可选择复制）
-          </label>
-          <LxInput
-            id="demo-readonly-note"
-            v-model="readonlyNote"
-            :size="size"
-            readonly
-          />
-          <p class="lx-input-demo__tip">只读态：可以聚焦和选择内容</p>
-        </div>
-      </div>
-    </section>
-
-    <section
-      class="lx-input-demo__panel"
-      data-testid="validation"
-      aria-labelledby="lx-input-validation-title"
-    >
-      <h3 id="lx-input-validation-title">表单校验状态</h3>
-      <div class="lx-input-demo__grid">
         <div class="lx-input-demo__field">
           <LxForm
             ref="phoneFormRef"
@@ -179,7 +147,46 @@ function runInputMethod(method: keyof LxInputExposes) {
               />
             </LxFormItem>
           </LxForm>
-          <p class="lx-input-demo__tip">改为 11 位手机号后，错误提示会清除。</p>
+          <p class="lx-input-demo__tip">
+            错误态：修正为 11 位手机号后提示会清除。
+          </p>
+        </div>
+        <div class="lx-input-demo__field">
+          <label
+            class="lx-input-demo__label lx-input-demo__label--disabled"
+            for="demo-node"
+          >
+            所属分局系统节点（禁用）
+          </label>
+          <LxInput
+            id="demo-node"
+            v-model="readonlyNode"
+            :size="size"
+            disabled
+          />
+          <p class="lx-input-demo__tip">禁用态：不可聚焦、不可编辑</p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="lx-input-demo__panel"
+      data-testid="validation"
+      aria-labelledby="lx-input-validation-title"
+    >
+      <h3 id="lx-input-validation-title">只读与表单禁用继承</h3>
+      <div class="lx-input-demo__grid">
+        <div class="lx-input-demo__field">
+          <label class="lx-input-demo__label" for="demo-readonly-note">
+            归档说明（只读，可选择复制）
+          </label>
+          <LxInput
+            id="demo-readonly-note"
+            v-model="readonlyNote"
+            :size="size"
+            readonly
+          />
+          <p class="lx-input-demo__tip">只读态：可以聚焦和选择内容</p>
         </div>
         <div class="lx-input-demo__field" data-testid="inherited-disabled">
           <LxForm
@@ -321,6 +328,12 @@ function runInputMethod(method: keyof LxInputExposes) {
   min-width: 0;
 }
 
+:deep(.lx-input-demo__focus-example .el-input__wrapper) {
+  box-shadow:
+    0 0 0 1px var(--lx-color-primary) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
 :deep(.lx-input-demo__validation-form .el-form-item) {
   margin-bottom: 0;
 }
@@ -386,6 +399,10 @@ function runInputMethod(method: keyof LxInputExposes) {
   color: var(--lx-color-warning-text);
 }
 
+.lx-input-demo__tip--focus {
+  color: var(--lx-color-primary);
+}
+
 @media (hover: none), (max-width: 640px) {
   .lx-input-demo__toolbar label {
     min-height: 44px;
@@ -397,6 +414,20 @@ function runInputMethod(method: keyof LxInputExposes) {
 
   .lx-input-demo__exposes button {
     min-height: 44px;
+  }
+
+  .lx-input-demo__exposes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lx-input-demo__exposes button {
+    min-width: 0;
+    padding-inline: 4px;
+  }
+
+  .lx-input-demo__tip--clear span {
+    display: block;
   }
 }
 </style>

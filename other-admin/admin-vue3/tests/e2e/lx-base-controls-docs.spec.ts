@@ -46,6 +46,7 @@ test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用',
   const inputRoot = name.locator(
     'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")]',
   );
+  const clearButton = inputRoot.getByRole('button', { name: '清空输入框', exact: true });
   const counterRoot = demo.locator('.lx-input-demo__validation-form .lx-input');
   const addons = demo.locator('.lx-input .el-input-group__prepend, .lx-input .el-input-group__append');
   const validationInput = demo.locator('#demo-phone');
@@ -57,6 +58,7 @@ test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用',
   await expect(name).toHaveCount(1);
   await expect(name).toHaveValue('张文远');
   await expect(name).toHaveAttribute('name', 'officerName');
+  await expect(clearButton).toBeHidden();
   await expect(demo.locator('[data-testid="states"] .lx-input-demo__field')).toHaveCount(4);
   await expect(demo.locator('[data-testid="validation"] .lx-input-demo__field')).toHaveCount(2);
   for (const [option, expectedHeight] of [
@@ -75,6 +77,7 @@ test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用',
 
   const counter = counterRoot.locator('.el-input__count-inner');
   await expect(counter).toBeVisible();
+  await expect(counter).toHaveText('7 / 11');
   const getInputCounterContrast = () =>
     counter.evaluate((element) => {
       const luminance = (color: string) => {
@@ -167,6 +170,10 @@ test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用',
   const disabledInput = demo.locator('#demo-node');
   const disabledLabel = demo.locator('label[for="demo-node"]');
   const readableInputs = demo.locator('#demo-officer-name, #demo-officer-id, #demo-readonly-note');
+  const focusExample = demo.locator('.lx-input-demo__focus-example .el-input__wrapper');
+  await expect
+    .poll(() => focusExample.evaluate((element) => getComputedStyle(element).boxShadow))
+    .toContain('0px 0px 0px 2px');
   await expect(validationItem).toHaveClass(/is-error/);
   await expect(validationError).toBeVisible();
   const lightValidationInputContrast = await getContrastRatios(validationInput);
@@ -224,6 +231,12 @@ test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用',
   ).toBe(true);
 
   await page.setViewportSize({ width: 390, height: 844 });
+  await page.mouse.move(0, 0);
+  await expect(name).not.toBeFocused();
+  await expect(clearButton).toBeVisible();
+  const clearTarget = await clearButton.boundingBox();
+  expect(clearTarget?.width).toBeGreaterThanOrEqual(44);
+  expect(clearTarget?.height).toBeGreaterThanOrEqual(44);
   const toolbarLabels = demo.locator('.lx-input-demo__toolbar label');
   const toolbarSelect = demo.locator('.lx-input-demo__toolbar select');
   const toolbarLabelHeights = await toolbarLabels.evaluateAll((labels) =>
@@ -232,6 +245,10 @@ test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用',
   expect(toolbarLabelHeights).toHaveLength(2);
   expect(toolbarLabelHeights.every((height) => height >= 44)).toBe(true);
   expect(await toolbarSelect.evaluate((element) => element.getBoundingClientRect().height)).toBeGreaterThanOrEqual(44);
+  await toolbarSelect.focus();
+  await expect(toolbarSelect).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(demo.getByLabel('HUD 深色主题', { exact: true })).toBeFocused();
 
   await size.selectOption('md');
   await name.focus();
@@ -242,7 +259,6 @@ test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用',
     .toContain('0px 0px 0px 2px');
   await name.fill('张文远');
   await name.locator('xpath=..').hover();
-  const clearButton = inputRoot.getByRole('button', { name: '清空输入框', exact: true });
   await expect(clearButton).toBeVisible();
   await clearButton.click();
   await expect(name).toHaveValue('');
@@ -259,6 +275,18 @@ test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用',
   await page.setViewportSize({ width: 320, height: 812 });
   await demo.getByLabel('HUD 深色主题', { exact: true }).setChecked(true);
   await expect(name).toBeVisible();
+  const exposes = demo.locator('.lx-input-demo__exposes button');
+  await expect(exposes).toHaveCount(3);
+  const exposeTargets = await exposes.evaluateAll((buttons) =>
+    buttons.map((button) => {
+      const { x, y, width, height } = button.getBoundingClientRect();
+      return { x, y, width, height };
+    }),
+  );
+  expect(exposeTargets.every((target) => target.height >= 44)).toBe(true);
+  expect(new Set(exposeTargets.map((target) => target.y)).size).toBe(1);
+  expect(exposeTargets[0].x + exposeTargets[0].width).toBeLessThan(exposeTargets[1].x);
+  expect(exposeTargets[1].x + exposeTargets[1].width).toBeLessThan(exposeTargets[2].x);
   expect(await demo.evaluate((element) => element.classList.contains('lx-theme-hud'))).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
 });
@@ -323,7 +351,7 @@ test('Input 清除按钮支持键盘操作，校验提示在桌面和窄屏不�
   await expect(demo.locator('.lx-input-demo__status')).toContainText('已清空');
 
   const error = demo.locator('.lx-input-demo__validation-form .el-form-item__error');
-  const helper = demo.getByText('改为 11 位手机号后，错误提示会清除。', { exact: true });
+  const helper = demo.getByText('错误态：修正为 11 位手机号后提示会清除。', { exact: true });
   const validationInput = demo.locator('#demo-phone');
   const validationInputRoot = validationInput.locator(
     'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")]',
@@ -340,6 +368,30 @@ test('Input 清除按钮支持键盘操作，校验提示在桌面和窄屏不�
     expect(helperBox, '宽度 ' + width + 'px 时应显示校验说明').not.toBeNull();
     expect(errorBox!.y + errorBox!.height).toBeLessThanOrEqual(helperBox!.y);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+  }
+
+  const clearTip = demo
+    .locator('[data-testid="states"] .lx-input-demo__field')
+    .first()
+    .locator('.lx-input-demo__tip--clear');
+  await expect(clearTip.locator('span')).toHaveText(['桌面有值：悬停/聚焦后显示；', '触屏/窄屏有值：直接显示']);
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    const wrappedLines = await clearTip.evaluate((element) => {
+      return Array.from(element.querySelectorAll('span'), (span) => {
+        const range = document.createRange();
+        range.selectNodeContents(span);
+        return Array.from(range.getClientRects(), (rect) => rect.width);
+      });
+    });
+    expect(
+      wrappedLines.map((lines) => lines.length),
+      `${width}px 时清空说明的两段内容都应保持单行`,
+    ).toEqual([1, 1]);
+    expect(
+      wrappedLines.flat().every((lineWidth) => lineWidth > 24),
+      `${width}px 时清空说明不应出现孤字末行`,
+    ).toBe(true);
   }
 
   await page.setViewportSize({ width: 320, height: 900 });

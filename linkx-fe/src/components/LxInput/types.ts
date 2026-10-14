@@ -26,7 +26,7 @@ export interface LxInputProps {
   /** 原生必填语义；业务表单校验规则仍由 LxForm 管理 */
   required?: boolean
   /**
-   * 可清空：有值且输入框聚焦、悬停或清除按钮获焦时显示；禁用或只读时不可清空。
+   * 可清空：桌面有值时聚焦或悬停可见；触屏或窄屏有值时直接显示；禁用或只读时不可清空。
    * （标本八件套 01 默认行图标）
    */
   clearable?: boolean

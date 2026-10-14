@@ -8,9 +8,10 @@
  * 避免内核内容行高撑开外框（mono 值字体、计数器外观也见 style.css）。
  * 未声明的 EP props（formatter/parser 等）经 $attrs 透传，兼容旧用法。
  */
-import { computed, inject, ref } from 'vue'
-import { ElInput, formContextKey } from 'element-plus'
 import type { InputInstance } from 'element-plus'
+import { ElInput, formContextKey } from 'element-plus'
+import { computed, inject, ref } from 'vue'
+
 import type { LxInputProps, LxInputSize } from './types'
 import LxIcon from '../LxIcon/index.vue'
 import 'element-plus/es/components/input/style/css'
@@ -140,6 +141,7 @@ defineExpose({
       <button
         v-if="clearable"
         class="lx-input__clear"
+        :class="{ 'lx-input__clear--touch-visible': clearButtonEnabled }"
         type="button"
         :disabled="!clearButtonEnabled"
         :tabindex="clearButtonEnabled ? 0 : -1"

@@ -127,6 +127,7 @@ describe('LxInput', () => {
     const clear = wrapper.get('button.lx-input__clear');
     expect(clear.attributes('aria-label')).toBe('清空输入框');
     expect(clear.attributes('tabindex')).toBe('0');
+    expect(clear.classes()).toContain('lx-input__clear--touch-visible');
     await clear.trigger('click');
 
     expect(wrapper.emitted('clear')).toHaveLength(1);

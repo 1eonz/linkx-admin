@@ -12,8 +12,8 @@
 .lx-input .el-input__wrapper {
   box-sizing: border-box;
   height: var(--el-input-height);
-  border-radius: var(--lx-radius-md);
   background-color: var(--lx-bg-card);
+  border-radius: var(--lx-radius-md);
   box-shadow: 0 0 0 1px var(--lx-control-border) inset;
   /* 前景与表面令牌需同步切换，避免主题过渡期间文字对比度骤降。 */
   transition: box-shadow var(--lx-transition);
@@ -21,8 +21,8 @@
 
 /* 禁用态保留灰色表面，同时维持值的可读性。 */
 .lx-input.is-disabled .el-input__wrapper {
-  opacity: 1;
   background-color: var(--lx-bg-card-hover);
+  opacity: 1;
 }
 
 .lx-input.is-disabled .el-input__inner {
@@ -90,8 +90,8 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
 
 .lx-input .el-input-group__prepend,
 .lx-input .el-input-group__append {
-  background-color: var(--lx-bg-card-hover);
   color: var(--lx-text-regular);
+  background-color: var(--lx-bg-card-hover);
 }
 
 .el-form-item.is-error .lx-input .el-input__count-inner {
@@ -107,25 +107,25 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
 /* 使用真实按钮承载清空操作，使其可以通过键盘访问。 */
 .lx-input .lx-input__clear {
   display: inline-flex;
-  width: 24px;
-  height: 24px;
   align-items: center;
   justify-content: center;
-  margin-inline-start: 2px;
+  width: 24px;
+  height: 24px;
   padding: 0;
-  border: 0;
-  border-radius: var(--lx-radius-sm);
-  background: transparent;
+  margin-inline-start: 2px;
   color: var(--lx-text-secondary-strong);
   cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: var(--lx-radius-sm);
   transition:
     color var(--lx-transition),
     background-color var(--lx-transition);
 }
 
 .lx-input .lx-input__clear:hover {
-  background-color: var(--el-fill-color-light);
   color: var(--lx-color-primary);
+  background-color: var(--el-fill-color-light);
 }
 
 .lx-input .lx-input__clear:focus-visible {
@@ -143,6 +143,10 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
 @media (hover: none), (max-width: 640px) {
   .lx-input .el-input__wrapper {
     min-height: 44px;
+  }
+
+  .lx-input .lx-input__clear--touch-visible {
+    visibility: visible !important;
   }
 
   .lx-input .lx-input__clear {
