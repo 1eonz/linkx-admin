@@ -2,10 +2,17 @@
 
 ## 当前范围备注（2026-10-14）
 
-- 页面操作引导当前不执行，不纳入待办、执行队列或排期，也不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
-- `doc/GUIDE-CONTENT-PLAN.md` 仅保留需求与文案草案；仅在用户后续明确提出需要时，才重新确认页面范围、文案、交互、技术方案和后端契约，并恢复计划执行。当前状态不代表功能已实现或验收。
+- 页面操作引导现阶段暂不考虑实施，也不继续拆分任务；不纳入待办、执行队列或排期，不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
+- `doc/GUIDE-CONTENT-PLAN.md` 仅保留需求与文案历史草案。后续确有需要时再恢复计划并执行，届时重新核对页面范围、文案、交互、技术方案和后端契约；当前状态不代表功能已实现或验收。
 
-## 2026-10-14 当前交接：Wave 20 LxSelect 已关闭，转入未关闭矩阵项
+## 2026-10-14 当前交接：Wave 22 LxInput 严格矩阵已关闭
+
+- `LxInput` 已按设计源完成组件、Demo、中文 API、行为回归、窄屏/键盘/主题证据及正式 A/B 复核，UI-10 当前为 **7/52**。单测 13/13、共享基础控件文档 E2E 11/11、最终提示断行复验 1/1；Impeccable A 34/40，B 三个 detector 均为合法 `[]`/空 stderr/退出码 0，四个 Light/HUD × 桌面/390px 视图成功注入，独立代码复审无 P0–P3。
+- 设计标本默认态清空图标常驻，当前桌面有值 hover/focus 才显现，触屏或 640px 以下有值即显示；该差异有意保留且已同步 API/Demo。组件严格矩阵已关闭，不代表 Vue3 宿主替换、真实后端联调或人工读屏完成。
+- **下一步**：继续未关闭组件矩阵；`LxInputNumber` 桌面步进目标尺寸 P2 维持待设计决策，页面操作引导保持暂缓、不继续拆分或排期。
+- A 路最终报告、320/390px 测量数据与截图位于 `.impeccable/critique/lxinput-wave-2026-10-14/assessment-a-final-reverify-2026-10-14/`；B 路源码、浏览器、detector 和截图证据位于 `.impeccable/critique/lxinput-wave-2026-10-14/assessment-b-final-content-2026-10-14/`。综合 snapshot 为 `.impeccable/critique/2026-10-14T02-31-56Z__linkx-fe-src-components-lxinput-index-vue.md`，趋势最近三次均为 34/40。
+
+## 2026-10-14 历史交接：Wave 20 LxSelect 已关闭，转入未关闭矩阵项
 
 - `LxSelect` 当前版已按表单控件设计完成组件、Demo、中文 API、严格 UI-10 矩阵、行为回归和 A/B 浏览器审查；定向单测 15/15、文档 E2E 8/8、全量 Vue3 Vitest 565/565，隔离 Mock 预览与竞态 E2E 10/10。UI-10 当前为 **5/52**，证据见 `doc/lx-ui/COMPONENT-AUDIT.md`。
 - Assessment A 36/40（Excellent），没有开放组件级 P0–P2；B 四个 detector 均为有效 `[]`/空 stderr/退出码 0，六个 Light/校验/HUD/窄屏/远程失败恢复/禁用摘要上下文有浏览器证据。独立代码复审无未关闭 P0–P2。共享参考页目录密度为 P3；loading 有确定性 E2E 文案断言，但缺少可信 loading 专属截图。完整资料见 `.impeccable/critique/lxselect-final-2026-10-14-post-fix/`，趋势为 33/40 → 35/40 → 36/40。

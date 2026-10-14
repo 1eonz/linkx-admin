@@ -1,10 +1,16 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-14 UI-10 / Wave 22 LxInput 严格矩阵关闭
+
+- **关闭项与设计差异**：`LxInput` 按 `design/表单控件八件套/code.html` 第 01 区完成当前组件、Demo、中文 API、状态和交互核验，UI-10 更新为 **7/52**。设计标本默认态清空图标常驻；实现桌面有值时 hover/focus 显示，触屏或视口不超过 640px 时有值即显示，禁用/只读不可清空。此有意差异已写入 API 和 Demo，不宣称与静态标本完全一致。
+- **验证与评审**：定向单测 13/13、共享基础控件文档 E2E 11/11，最终文案窄屏复验 1/1；lx-ui 类型检查、组件构建、VitePress 文档构建、Vue3 类型检查/生产构建、目标 ESLint/Prettier 与 `git diff --check` 通过。Assessment A 34/40（Good），桌面入口发现性、窄屏方法区布局和提示断行 P3 已关闭；B 三个 detector 为合法 JSON `[]`、stderr 空、退出码 0，Light/HUD × 桌面/390px 四视图注入成功，无页面错误、失败请求或异常响应；独立代码复审无 P0–P3。A 路原始证据见 `.impeccable/critique/lxinput-wave-2026-10-14/assessment-a-final-reverify-2026-10-14/`，B 路见 `.impeccable/critique/lxinput-wave-2026-10-14/assessment-b-final-content-2026-10-14/`；综合快照为 `.impeccable/critique/2026-10-14T02-31-56Z__linkx-fe-src-components-lxinput-index-vue.md`，趋势最近三次均为 34/40。
+- **范围边界与下一步**：仅关闭 `LxInput` 的 UI-10 严格矩阵行，不代表 Vue3 宿主替换、真实后端联调或人工读屏完成。继续按剩余矩阵推进；`LxInputNumber` 桌面步进目标高度 P2 仍待设计决策，不擅自改变外框或按钮排列。页面操作引导仍暂缓，不继续拆分、不进入待办、执行队列或排期，仅保留历史需求和文案草案。
+
 ## 2026-10-14 UI-10 / Wave 21 LxTextarea 严格矩阵关闭
 
 - **关闭项与设计差异**：`LxTextarea` 按 `design/表单控件八件套/code.html` 第 08 区完成组件、Demo、中文 API、状态、交互、主题与窄屏严格核验，UI-10 更新为 **6/52**。设计稿 `p-2.5` 为 10px 内边距，现有组件以 8px 垂直/12px 水平令牌实现；样例高度约 74px、浏览器实测 76px。将约 2px 的视觉差异登记在组件矩阵，不宣称像素完全一致；正式评估未发现组件级 P0–P3。
 - **验证与评审**：Textarea 定向单测 14/14，共享基础控件文档 E2E 11/11；隔离端口 4179 完整重跑通过，Select 状态断言限定在 basic Demo 并检查节点唯一。lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建、目标 ESLint/Prettier、Stylelint 和 `git diff --check` 通过。Impeccable A 31/40（Good）；B 两个 detector 为合法 JSON `[]`、stderr 空、退出码 0，Light/站点深色/HUD × 桌面/移动六视图证据齐全；独立代码复审无 P0–P3。正式材料见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
-- **边界与后续**：本次仅关闭 `LxTextarea` 的 UI-10 严格矩阵行，不代表 Vue3 宿主 Textarea 替换、真实后端联调或 NVDA/VoiceOver 人工读屏完成。`LxInputNumber` 桌面目标尺寸 P2 继续等待设计决策；下一项选择未阻塞的 `LxInput`。页面操作引导仍暂缓，不纳入待办或排期。
+- **边界与后续**：本次仅关闭 `LxTextarea` 的 UI-10 严格矩阵行，不代表 Vue3 宿主 Textarea 替换、真实后端联调或 NVDA/VoiceOver 人工读屏完成。`LxInput` 已在 Wave 22 关闭；`LxInputNumber` 桌面目标尺寸 P2 继续等待设计决策。页面操作引导仍暂缓，不继续拆分、不纳入待办或排期。
 
 ## 2026-10-14 UI-10 / Wave 20 LxSelect 严格矩阵关闭
 
@@ -20,10 +26,10 @@
 - 桌面 sm/md/lg 步进按钮实测高 13/15/19px，低于 24px，保留为未关闭 P2。当前设计的 28/32/40px 外框和上下均分布局无法同时容纳两个 24px 高的独立按钮；未经设计决策不得擅改为横排。触屏目标为 44×44px，键盘路径有效，但不替代桌面指针尺寸要求。
 - 本轮未修改组件源码，不增加 UI-10 全库关闭计数；`LxInputNumber` 严格矩阵行保持开放。证据位于 `.impeccable/critique/lxinputnumber-wave19-current-2026-10-13/`。`LxTextarea` 已完成当前版组件级复核；下一项进入仍未关闭严格矩阵行的 `LxSelect`，InputNumber 的 P2 继续留在台账中。
 
-## 2026-10-14 范围备注：页面操作引导暂缓，后续按需恢复
+## 2026-10-14 范围备注：页面操作引导暂缓，不继续拆分或排期
 
-- 页面操作引导现阶段暂不考虑实施，不纳入待办、执行队列或排期，也不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
-- `doc/GUIDE-CONTENT-PLAN.md` 仅保留需求与文案草案；仅在用户后续明确提出需要时，才重新确认页面范围、文案与交互、技术方案及后端契约，并恢复计划执行。当前状态不代表功能已实现或验收。
+- 页面操作引导现阶段暂不考虑实施，也不继续拆分任务；不纳入待办、执行队列或排期，不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
+- `doc/GUIDE-CONTENT-PLAN.md` 仅保留需求与文案历史草案。后续确有需要时再恢复计划并执行，届时按当前菜单、页面和后端契约重新核对范围；当前状态不代表功能已实现或验收。
 
 ## 2026-10-13 UI-10 / Wave 19 Checkbox 与 Radio 四项严格矩阵登记
 
@@ -673,7 +679,7 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 | 编号    | 任务                | 产出                                                     | 验收                           | 状态                                                           |
 | ------- | ------------------- | -------------------------------------------------------- | ------------------------------ | -------------------------------------------------------------- |
 | ARCH-01 | menu-config S1 Mock | `menu-config`、PageRegistry、TabHost、校验、feature flag | 菜单/路由/tab/占位页全链路演示 | 待开始                                                         |
-| ARCH-02 | 引导系统            | GuideRegistry、driver.js、pageId、TabHost 协议           | 页面引导和重播可用             | 当前不执行、不纳入待办或排期；后续明确有需要时再纳入计划 |
+| ARCH-02 | 引导系统            | GuideRegistry、driver.js、pageId、TabHost 协议           | 页面引导和重播可用             | 当前暂不考虑实施、不继续拆分或排期；后续确有需要时再恢复计划 |
 | ARCH-03 | S2 后端菜单契约     | `/api/menu/config` 契约、后台字段校验、灰度方案          | legacy/config 同账号一致       | 阻塞                                                           |
 | ARCH-04 | 旧链路清理          | OAuth 占位映射、死文件、历史 API 和无效 Mock 分类清理    | 无现役入口指向占位页           | 待开始                                                         |
 | ARCH-05 | Vue2 技术债治理     | Vue2/EOL、旧 Axios、依赖构建脚本和停止维护边界           | 风险和停止线有记录             | 待开始                                                         |

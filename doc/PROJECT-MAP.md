@@ -1,11 +1,18 @@
 # LinkX 项目地图
 
+## 2026-10-14 Wave 22 / LxInput UI-10 严格矩阵关闭
+
+- **组件入口**：`linkx-fe/src/components/LxInput/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxinput.md`；设计源为 `design/表单控件八件套/code.html` 第 01 区。
+- **验证入口**：定向单测 13/13、共享基础控件文档 E2E 11/11、最终提示断行复验 1/1；lx-ui 类型/构建、VitePress、Vue3 类型/生产构建和目标代码质量检查通过。
+- **正式评审**：Impeccable A 34/40（Good），清空入口发现性、窄屏方法区布局及提示断行 P3 均已关闭；B 三个 detector 为合法 JSON `[]`、stderr 空、退出码 0，Light/HUD × 桌面/390px 四视图注入成功；独立代码复审无 P0–P3。A/B 证据与综合 snapshot 位于 `.impeccable/critique/lxinput-wave-2026-10-14/`，趋势最近三次均为 34/40。
+- **差异、边界与下一入口**：设计标本默认态清空图标常驻，当前桌面仅在有值且 hover/focus 时显示，触屏或 640px 以下有值即显示；该差异已在 API/Demo 说明。UI-10 当前 **7/52**；不代表 Vue3 宿主替换、真实后端或人工读屏完成。`LxInputNumber` 桌面目标尺寸 P2 仍待设计决策。页面操作引导暂不考虑、不继续拆分或排期，仅保留历史草案。
+
 ## 2026-10-14 Wave 21 / LxTextarea UI-10 严格矩阵关闭
 
 - **组件入口**：`linkx-fe/src/components/LxTextarea/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxtextarea.md`；设计源为 `design/表单控件八件套/code.html` 第 08 区。
 - **验证入口**：`other-admin/admin-vue3/tests/unit/lx-textarea.test.ts` 14/14；共享基础控件文档 E2E `tests/e2e/lx-base-controls-docs.spec.ts` 11/11，隔离端口 4179；lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建和定向代码质量检查通过。
 - **正式评审**：Impeccable A 31/40（Good），无 P0–P3；B 两个 detector 均为合法 JSON `[]`、stderr 空、退出码 0，Light/站点深色/HUD × 桌面/移动六视图完成；独立代码复审无 P0–P3。`[]` 只表示静态规则零命中。证据见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
-- **差异、边界与下一入口**：设计稿使用 `p-2.5`（10px），实现为 8px 垂直/12px 水平令牌；约 74px 标本与实测 76px 的差异已登记，不宣称像素完全一致。UI-10 当前 **6/52**；本波不代表 Vue3 宿主替换、真实后端或人工读屏完成。下一项为 `LxInput`，`LxInputNumber` 桌面尺寸 P2 等待设计决策。页面操作引导仍暂缓且不在执行队列或排期。
+- **差异、边界与下一入口**：设计稿使用 `p-2.5`（10px），实现为 8px 垂直/12px 水平令牌；约 74px 标本与实测 76px 的差异已登记，不宣称像素完全一致。UI-10 当时为 **6/52**；`LxInput` 已于 Wave 22 关闭后更新为 7/52。本波不代表 Vue3 宿主替换、真实后端或人工读屏完成。`LxInputNumber` 桌面尺寸 P2 仍待设计决策；页面操作引导暂不考虑、不继续拆分或排期，仅保留历史需求与文案草案。
 
 ## 2026-10-14 Wave 20 / LxSelect UI-10 严格矩阵关闭
 

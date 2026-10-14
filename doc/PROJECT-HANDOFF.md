@@ -1,12 +1,19 @@
 # LinkX 项目交接记录
 
+## [2026-10-14] UI-10 / Wave 22 LxInput 严格矩阵交接
+
+- **完成范围**：关闭 `LxInput` 当前 UI-10 严格矩阵行，全库计数更新为 **7/52**。按设计稿复核 32px 基准、四态、焦点/错误/禁用/只读、清空交互、键盘和窄屏目标；桌面清空入口 hover/focus 显示、触屏或 640px 以下有值即显示，作为已记录的有意设计差异。
+- **验证结果**：单测 13/13、共享基础控件文档 E2E 11/11、最终两段提示断行复验 1/1；lx-ui 类型检查/构建、VitePress、Vue3 类型检查/生产构建、目标 ESLint/Prettier 与差异检查通过。Impeccable A 34/40；B 三个 detector 均为 JSON `[]`/空 stderr/退出码 0，Light/HUD × 桌面/390px 四视图注入成功。独立代码复审无 P0–P3。`[]` 只表示静态规则零命中。
+- **复验和归因**：320/390px 提示各自单行显示，没有孤字或拆词；无 overlay 页面宽度正常。overlay 的长行命中落在文档和 Demo 说明，复制按钮遮罩属于 VitePress 代码块，HUD 命中符合令牌；根宽变化仅在 overlay 注入后出现。A 路最终报告和截图见 `.impeccable/critique/lxinput-wave-2026-10-14/assessment-a-final-reverify-2026-10-14/`；B 路完整报告、detector 原始输出、DOM、截图和源码指纹见 `.impeccable/critique/lxinput-wave-2026-10-14/assessment-b-final-content-2026-10-14/`；综合 snapshot 为 `.impeccable/critique/2026-10-14T02-31-56Z__linkx-fe-src-components-lxinput-index-vue.md`。
+- **范围边界与下一步**：不代表 Vue3 宿主替换、真实后端联调或人工读屏完成。继续未关闭 UI-10 矩阵；`LxInputNumber` 桌面步进目标尺寸 P2 等待设计决策。页面操作引导暂不考虑、不继续拆分、不纳入待办或排期，后续确有需要时再恢复计划。
+
 ## [2026-10-14] UI-10 / Wave 21 LxTextarea 严格矩阵交接
 
 - **完成范围**：关闭 `LxTextarea` 当前 UI-10 严格矩阵行，组件库全库计数更新为 **6/52**。三行基准、长度截断/校验、错误和焦点、禁用/只读、主题、键盘、窄屏及减少动效均按 `design/表单控件八件套/code.html` 第 08 区核验。
 - **验证结果**：定向单测 14/14、共享基础控件文档 E2E 11/11；Playwright 使用隔离端口 4179，Select 状态断言限定 basic Demo 并断言唯一节点。lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建、目标 ESLint/Prettier、Stylelint 与 `git diff --check` 通过。生产构建既有告警见 Wave 16 记录。
 - **设计差异**：设计稿 `p-2.5` 为 10px 内边距，当前组件为 8px 垂直/12px 水平令牌；基准高度约 74px，实测 76px。矩阵如实记录约 2px 的映射与高度差；当前 A/B 和代码复审未发现组件级 P0–P3，但不写作像素值完全一致。
 - **Impeccable 与代码复审**：Assessment A 31/40（Good），无 P0–P3；Assessment B 两个 detector 为合法 `[]`/空 stderr/退出码 0，六个主题/视口视图完成。独立代码复审批准 E2E 定位修改；它的独立运行在到达新断言前遇到服务代理超时，随后以隔离端口重跑，目标用例和 11 项全量均通过。原始证据见 `.impeccable/critique/lxtextarea-wave-2026-10-13/current-final/`。
-- **边界与下一步**：不代表 Vue3 宿主替换、真实后端联调或 NVDA/VoiceOver 人工读屏完成。`LxInputNumber` 桌面目标尺寸 P2 仍等待设计决策；下一项转入未阻塞的 `LxInput` 严格矩阵复核。页面操作引导不在待办或排期中，只有后续明确提出需要时才重新评估。
+- **边界与下一步**：不代表 Vue3 宿主替换、真实后端联调或 NVDA/VoiceOver 人工读屏完成。`LxInput` 已于 Wave 22 关闭；`LxInputNumber` 桌面目标尺寸 P2 仍等待设计决策。页面操作引导不在待办或排期中，后续确有需要时再恢复计划。
 
 ## [2026-10-14] UI-10 / Wave 20 LxSelect 严格矩阵交接
 
@@ -18,8 +25,8 @@
 
 ## [2026-10-14] SCOPE / 页面操作引导暂缓，后续按需恢复
 
-- 页面操作引导现阶段暂不考虑实施，不纳入待办、执行队列或排期，也不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
-- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅保留需求和设计基线；仅在用户后续明确提出需要时，才重新确认页面范围、文案、交互、技术方案及后端契约，并恢复计划执行。
+- 页面操作引导现阶段暂不考虑实施，也不继续拆分任务；不纳入待办、执行队列或排期，也不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
+- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅保留需求和设计历史草案。后续确有需要时再恢复计划并执行，届时重新核对页面范围、文案、交互、技术方案及后端契约。
 - 此范围调整不表示功能已经实现或验收，也不改变当前 lx-ui 与 Vue3 组件迁移顺序。
 
 ## [2026-10-13] SCOPE / 页面操作引导当前不执行，后续按需纳入计划

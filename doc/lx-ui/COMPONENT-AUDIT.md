@@ -1,5 +1,13 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-14 UI-10 / Wave 22 LxInput 严格矩阵关闭
+
+- **设计对照与差异**：依据 `design/表单控件八件套/code.html` 第 01 区，核验 32px 基准高度、4px 圆角、焦点/错误/禁用/只读状态、清空入口和窄屏触控目标。设计标本默认态清空图标常驻；当前实现桌面有值时 hover/focus 显示，触屏或视口不超过 640px 时有值即显示，禁用/只读不允许清空。此差异已在 API、Demo 和复核记录中说明，未发现阻塞问题。
+- **行为与浏览器证据**：单测 13/13；共享基础控件文档 E2E 11/11，覆盖计数文案、窄屏工具栏键盘焦点、320/390px 清空入口显现与 44px 触控目标、键盘清空、值变化播报、表单禁用继承及标签/主题/页面宽度。针对最终两段清空说明的 320/390px 目标复验 1/1，无孤字、拆词、额外段距或横向溢出。
+- **验证与审查**：lx-ui 类型检查、组件构建、VitePress 文档构建、Vue3 类型检查/生产构建、目标 ESLint/Prettier 与 `git diff --check` 通过。Impeccable Assessment A 34/40（Good），清空说明末行孤字、窄屏方法按钮失衡和桌面清空入口发现性 P3 均已复验关闭；B 的组件、Demo、文档 detector 均为合法 JSON `[]`、stderr 空、退出码 0。Light/HUD × 桌面/390px 四视图均可访问并成功注入 overlay；无页面错误、失败请求或异常响应。独立代码复审无 P0–P3。
+- **命中归因、证据与边界**：detector 的 `[]` 只表示静态规则零命中。overlay 的长行命中位于文档说明/Demo 注释，遮罩命中位于 VitePress 代码复制按钮，HUD 命中对应主题令牌；移动端根文档宽度扩张只在 overlay 注入后出现，注入前无横向溢出。A 路最终报告、截图和测量数据见 `.impeccable/critique/lxinput-wave-2026-10-14/assessment-a-final-reverify-2026-10-14/`；B 路原始证据见 `.impeccable/critique/lxinput-wave-2026-10-14/assessment-b-final-content-2026-10-14/`；综合快照为 `.impeccable/critique/2026-10-14T02-31-56Z__linkx-fe-src-components-lxinput-index-vue.md`，趋势最近三次均为 34/40。UI-10 当前 **7/52**；关闭仅表示 LxInput 组件严格矩阵通过，不代表 Vue3 宿主替换、真实后端联调或人工读屏完成。
+- **下一入口**：继续处理未关闭的 UI-10 组件矩阵；`LxInputNumber` 桌面步进目标尺寸 P2 仍待设计决策，不擅自改变现有 28/32/40px 外框与上下布局。
+
 ## 2026-10-14 UI-10 / Wave 21 LxTextarea 严格矩阵关闭
 
 - **设计对照与差异**：依据 `design/表单控件八件套/code.html` 第 08 区，复核三行基准、`resize-y`、错误态、长度计数与焦点反馈。设计样例使用 `p-2.5`（10px 内边距），组件使用 8px 垂直、12px 水平间距令牌；设计标本高度约 74px，浏览器实测为 76px。2px 内边距映射差与约 2px 高度差如实登记；当前正式复核未将其判为组件级 P0–P3，不宣称像素值完全一致。
@@ -273,7 +281,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 
 ### 52 个公开组件逐项验收矩阵
 
-本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **6/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
+本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **7/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
 
 | 公开组件             | 唯一对照源                                        | 当前矩阵状态                                                                                                                                                                               |
 | -------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -297,7 +305,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxFormItem`         | `design/表单控件八件套/`                          | UI-13 本波；错误/必填 ARIA 与样式待正式 Critique                                                                                                                                           |
 | `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                                                                                                     |
 | `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | A/B 与代码复审通过；真实读屏及权限菜单数据未覆盖，暂不计入严格矩阵                                                                                                                         |
-| `LxInput`            | `design/表单控件八件套/`                          | Wave 14 当前版组件级 A/B 与代码复审完成；两项 P3 测试增强建议待后续，宿主组合与 UI-10 全库门槛仍开放                                                                                       |
+| `LxInput`            | `design/表单控件八件套/`                          | **已关闭（Wave 22）**；13 项单测、共享文档 E2E 11/11、Impeccable A 34/40、B 三目标 detector 与四视图证据、代码复审通过；桌面清空入口差异已记录                                               |
 | `LxInputNumber`      | `design/表单控件八件套/`                          | 当前版 A 29/40、B 四目标 detector 均为合法 `[]`，四个 Light/HUD × 桌面/375px 视图有证据；桌面步进目标 13/15/19px 的 P2 未决，严格矩阵行开放，不增加 UI-10 全库关闭数 |
 | `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 待严格复核；数值、语义色、趋势、进度和窄屏                                                                                                                                                 |
 | `LxNavbar`           | `DESIGN-SPEC.md` + Navbar API/Demo                | 待严格复核；导航密度、焦点、菜单与窄屏                                                                                                                                                     |
