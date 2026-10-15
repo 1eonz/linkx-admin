@@ -2,6 +2,13 @@
 
 > **范围备注（2026-10-15）**：页面操作引导暂缓考虑与实施，不继续拆分，也不纳入待办、自动执行队列或排期；它不作为 lx-ui 收口或 Vue3 Element Plus 替换的前置条件。本文和 `doc/GUIDE-CONTENT-PLAN.md`、`doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 保留历史需求与设计基线；后续确有需要时再恢复计划，届时重新确认页面范围、文案、交互、技术方案及后端契约。当前其余交付顺序不变。
 
+## 2026-10-16 LxSectionTitle 波次交接（当前版）
+
+- 补齐 Vue3 `SectionTitle` 适配器的 `subtitle` 属性/插槽透传，以及 `leading` 插槽优先级；自定义前置内容现在可覆盖映射图标和未映射 Element Plus 图标回退。组件库本体保持三变体、三档字号、标题层级、标签、extra、窄屏和减少动效实现。
+- 定向单测 **18/18**、文档 E2E **1/1**、Vue3 类型检查、ESLint、Prettier 和 `git diff --check` 通过。Assessment A 未发现 P0–P2；Assessment B 证据见 `.impeccable/critique/sectiontitle-assessment-b-2026-10-16/`，8 个主题/尺寸/RTL/减少动效视图无页面错误、失败请求或横向溢出。
+- 三个静态 detector 均为合法 `[]`、空 stderr、退出码 `0`；组件/Demo 的 7 个 HUD 颜色命中和 1 个 LxTag 紧凑尺寸命中均有设计依据或低风险提示，其他命中归因于 VitePress 壳层/overlay，不能按命中总数判缺陷。
+- `doc/lx-ui/COMPONENT-SPEC.md` 的历史“单一 variant”文字已标记为过时基线，当前规范以 `border`/`dashed`/`plain` 三变体为准。宿主真实业务组合、extra loading、权限、后端联调和读屏器仍未完成；下一波进入 G2 `LxSearchBar`/`LxStatusSwitch`。
+
 ## 2026-10-16 LxMetricCard 波次交接（当前版）
 
 - 已完成趋势语义补强：新增 `trendDirection` 显式控制上升、下降、持平；未传时按旧 `trendStatus` 回退，避免破坏现有宿主调用。Badge 状态点标记为装饰性内容，保留文字状态。

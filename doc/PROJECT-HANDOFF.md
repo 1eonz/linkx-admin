@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-16] UI-04 前置组件：LxSectionTitle 当前版适配器交接
+
+- **实现**：Vue3 `SectionTitle` 适配器透传 `subtitle` 属性和插槽；转发 `leading` 插槽并让其优先于映射的 `LxIcon` 和未映射图标的 Element Plus 回退，保留旧 `dashed` 默认、标题插槽、extra 和现有 props。库组件三变体、三档字号、标题层级、标签、窄屏和减少动效契约保持不变。
+- **验证**：组件与适配器单测 **18/18**；`lx-section-title-docs.spec.ts` **1/1**；Vue3 类型检查、ESLint、Prettier、`git diff --check` 通过。
+- **Impeccable B**：`.impeccable/critique/sectiontitle-assessment-b-2026-10-16/assessment-b-report.md` 保存 8 个 Light/HUD 桌面/移动、RTL、减少动效视图、DOM 和静态 detector 三件套。三目标为合法 `[]`/空 stderr/0；8/8 视图无横溢出、页面错误或失败请求。运行时 8 条组件命中是 HUD 令牌与 LxTag 紧凑尺寸提示，88 条为文档壳层/overlay，未发现组件 P0–P2。
+- **审查边界**：Assessment A/B 已完成；真实业务组合、extra loading/失败恢复、权限、后端联调和读屏器仍待宿主波次。`COMPONENT-SPEC.md` 的单 variant 为历史冲突，当前三 variant 规范已补注。下一波为 G2 `LxSearchBar`/`LxStatusSwitch`。
+
 ## [2026-10-16] UI-04 前置组件：LxMetricCard 当前版趋势语义交接
 
 - **实现**：`LxMetricCard` 新增 `trendDirection` 类型与计算图标，显式 `down`/`flat` 不再由状态颜色猜测；未传入时保留 `trendStatus === 'error'` 下行、其他上行的旧兼容规则。Badge 内 `LxStatusDot` 增加 `aria-hidden="true"`，文字仍提供状态信息。

@@ -1,5 +1,12 @@
 # lx-ui 路线图
 
+## 2026-10-16 UI-04 前置组件：LxSectionTitle 当前版复核
+
+- Vue3 `SectionTitle` 适配器已补 `subtitle` 属性/插槽和 `leading` 插槽优先级，兼容旧标题、图标、extra 与 `dashed` 默认；库组件继续保留 `border`/`dashed`/`plain` 三变体。
+- 单测 **18/18**、文档 Playwright **1/1**、类型检查、ESLint、Prettier 通过。Assessment A/B 无 P0–P2；B 证据覆盖 Light/HUD、1280/375/320、RTL、减少动效，8/8 无横溢出、页面错误或失败请求。
+- 三个静态 detector 均为有效 `[]`/空 stderr/0；8 条组件/Demo 命中按 HUD 令牌和 LxTag 设计尺寸归类，其他命中为 VitePress 壳层。历史组件规范中的单 variant 表述已标记为过时。
+- 真实宿主组合、权限/后端联调和读屏器仍后置；下一波进入 G2 `LxSearchBar`/`LxStatusSwitch`。
+
 ## 2026-10-16 UI-04 前置组件：LxMetricCard 趋势语义补强
 
 - `LxMetricCard` 新增可选 `trendDirection`，支持 `up`、`down`、`flat`；未传入时按旧 `trendStatus` 推断，保持现有宿主兼容。Badge 状态点改为装饰性读屏隐藏。

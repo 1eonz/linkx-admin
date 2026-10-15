@@ -1,5 +1,11 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-16 UI-04 前置组件：LxSectionTitle 适配器复核
+
+- Vue3 `SectionTitle` 已补 `subtitle` 与 `leading` 插槽透传，`leading` 可覆盖映射图标和未映射 Element Plus 图标回退；库组件继续使用三变体设计。
+- 单测 **18/18**、文档 E2E **1/1**、类型/ESLint/Prettier 通过；B 证据目录 `.impeccable/critique/sectiontitle-assessment-b-2026-10-16/` 保存 8 视图截图、DOM 和 detector 三件套。静态 `[]` 仅代表零命中，浏览器无错误、失败请求和横溢出。
+- 真实宿主组合与权限/后端联调未完成，不能据此删除 `element-plus`；下一替换候选为 G2 `LxSearchBar`/`LxStatusSwitch`。
+
 ## 2026-10-16 UI-04 前置组件：LxMetricCard 当前版语义复核
 
 - `LxMetricCard` 公开 `trendDirection` 类型，显式控制上升/下降/持平图标；不传值继续按旧 `trendStatus` 回退。Badge 状态点已标记为装饰性内容，避免重复读屏。

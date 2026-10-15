@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-16 UI-04 前置组件：LxSectionTitle 当前版交接
+
+- `SectionTitle` 适配器已透传 `subtitle` 属性/插槽，并转发优先级最高的 `leading` 插槽；映射与未映射图标回退保持兼容。定向单测 **18/18**、文档 E2E **1/1**，类型、ESLint、Prettier 通过。
+- Assessment B 证据 `.impeccable/critique/sectiontitle-assessment-b-2026-10-16/` 覆盖 Light/HUD、桌面/375/320、RTL、减少动效；8/8 无页面错误、失败请求和横向溢出。静态 detector 三件套为合法 `[]`、空 stderr、退出码 `0`，未发现组件 P0–P2。
+- 真实配置页组合、extra loading/失败恢复、权限和后端联调仍待 UI-04；不删除 Element Plus。历史单 variant 规范冲突已登记，当前按三变体实现维护。
+
 ## 2026-10-16 UI-04 前置组件：LxMetricCard 趋势语义交接
 
 - lx-ui `LxMetricCard` 增加 `trendDirection`（`up`/`down`/`flat`），未传入时兼容旧 `trendStatus` 推断；Badge 状态点设为 `aria-hidden`。定向单测 **15/15**、文档 E2E **3/3**，类型检查、构建和目标格式检查通过；独立 E2E 复跑受登录鉴权和代理超时阻断，记录为环境失败。

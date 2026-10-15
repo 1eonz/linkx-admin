@@ -43,4 +43,4 @@ import Basic from '../../src/components/LxSectionTitle/demo/basic.vue';
 
 ## Vue3 宿主适配
 
-Vue3 的 `SectionTitle` 适配器保留原有 `title`、`icon`、`iconColor`、`variant`、默认/前置/extra 插槽及 `dashed` 默认变体，并透传 `headingLevel`、`size`、`tag`、`tagType`。Vue2 运行时不直接加载本 Vue3 组件。
+Vue3 的 `SectionTitle` 适配器保留原有 `title`、`icon`、`iconColor`、`variant`、默认/前置/副标题/extra 插槽及 `dashed` 默认变体，并透传 `headingLevel`、`size`、`subtitle`、`tag`、`tagType`。自定义 `leading` 插槽优先于适配器的图标映射和未映射图标回退。Vue2 运行时不直接加载本 Vue3 组件。

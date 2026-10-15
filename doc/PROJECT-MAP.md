@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-16 UI-04 前置组件交接：LxSectionTitle 适配器复核
+
+- `other-admin/admin-vue3/src/components/SectionTitle/index.vue` 已补 `subtitle` 属性/插槽透传与 `leading` 插槽优先级；映射图标和未映射图标回退不再吞掉调用方自定义前置内容。
+- 库/适配器单测 **18/18**、文档 Playwright **1/1**、类型、ESLint、Prettier 和差异检查通过。Assessment B 证据 `.impeccable/critique/sectiontitle-assessment-b-2026-10-16/` 覆盖 8 个视图，页面错误、失败请求和横溢出均为 0；静态 detector 三件套为 `[]`/空/0。
+- HUD 颜色与 LxTag 紧凑尺寸命中已按设计依据归类；VitePress 壳层/overlay 命中不归因组件。宿主真实业务组合、权限和后端联调仍未完成，下一入口为 G2 `LxSearchBar`/`LxStatusSwitch`。
+
 ## 2026-10-16 UI-04 前置组件交接：LxMetricCard 趋势语义复核
 
 - `LxMetricCard` 增加可选 `trendDirection`（`up`/`down`/`flat`），显式传值优先；未传值继续按旧 `trendStatus` 推断，保留 Vue3 宿主兼容行为。指标角标内的状态点标记为装饰性内容，避免重复读屏。

@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-16 LxSectionTitle 当前版复核记录
+
+- 适配器补齐 `subtitle` 属性/插槽与 `leading` 插槽优先级；自定义前置内容可覆盖映射及未映射图标回退。库组件三变体、标题层级、标签、extra、窄屏和减少动效证据保持同步。
+- 自动化：库/适配器单测 **18/18**，文档 Playwright **1/1**，类型、ESLint、Prettier、`git diff --check` 通过。B 证据 8/8 视图无页面错误、失败请求和横溢出。
+- Impeccable：`.impeccable/critique/sectiontitle-assessment-b-2026-10-16/` 保存 detector JSON、stderr、退出码、截图和 DOM。三个静态目标均为有效 `[]`/空/0；运行时组件命中为 HUD 令牌与 LxTag 紧凑尺寸提示，文档壳层命中已分离。
+- 交付边界：未执行真实后端、权限、读屏器和宿主组合回归；历史 `COMPONENT-SPEC.md` 单 variant 文字已标注过时，当前以三变体设计为准。下一波为 G2 搜索栏与状态切换。
+
 ## 2026-10-16 LxMetricCard 当前版复核记录
 
 - 组件行为：`trendDirection` 显式控制趋势图标，未传值保留旧 `trendStatus` 回退；Badge 内状态点设置 `aria-hidden`，避免与文本重复播报。

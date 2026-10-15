@@ -322,7 +322,7 @@ interface Slots {
 
 ## 13. LxSectionTitle — 区块标题
 
-收敛为单一 variant（border 左竖条风格，stitch 主风格）。
+历史基线曾计划收敛为单一 `border` variant；当前设计与实现保留 `border`、`dashed`、`plain` 三种变体，具体契约以 `COMPONENT-STYLE-INTERACTION.md`、组件 Demo 和本库中文 API 文档为准。
 
 ```ts
 interface Props {
