@@ -27,13 +27,17 @@ test.describe('LxMetricCard 文档示例', () => {
     await expect(page.getByText('今日警情总数', { exact: true })).toBeVisible();
     await expect(page.getByText('较昨日增加 12%', { exact: true })).toBeVisible();
     await expect(page.locator('.metric-card-demo__grid .lx-metric-card__title .lx-status-dot')).toHaveCount(3);
-    await expect(page.locator('.metric-card-demo__grid .lx-metric-card__visually-hidden')).toHaveText([
-      '状态：成功',
-      '状态：警告',
-      '状态：危险',
-    ]);
-    await expect(page.locator('.metric-card-demo__grid [data-icon-name="arrow-up"]')).toHaveCount(2);
-    await expect(page.locator('.metric-card-demo__grid [data-icon-name="arrow-down"]')).toHaveCount(1);
+    await expect
+      .poll(() =>
+        page
+          .locator('.metric-card-demo__grid .lx-metric-card__visually-hidden')
+          .evaluateAll((elements) => elements.map((element) => element.textContent?.trim() ?? '')),
+      )
+      .toEqual(['状态：成功', '状态：警告', '状态：危险', '状态：正常']);
+    await expect(page.locator('.metric-card-demo__grid [data-icon-name="arrow-up"]')).toHaveCount(1);
+    await expect(page.locator('.metric-card-demo__grid [data-icon-name="arrow-down"]')).toHaveCount(2);
+    await expect(page.locator('.metric-card-demo__grid [data-icon-name="minus"]')).toHaveCount(1);
+    await expect(page.getByText('策略同步任务', { exact: true })).toBeVisible();
 
     const progress = page.getByRole('progressbar', { name: '在线健康指标' });
     await expect(progress).toHaveAttribute('aria-valuenow', '99.9');

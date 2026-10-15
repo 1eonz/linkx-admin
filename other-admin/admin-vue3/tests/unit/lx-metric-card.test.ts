@@ -52,6 +52,19 @@ describe('LxMetricCard', () => {
     down.unmount();
   });
 
+  it.each([
+    ['up', 'arrow-up'],
+    ['down', 'arrow-down'],
+    ['flat', 'minus'],
+  ] as const)('uses the explicit %s trend direction', (direction, iconName) => {
+    const wrapper = mount(LxMetricCard, {
+      props: { trend: '显式趋势', trendStatus: 'error', trendDirection: direction },
+    });
+
+    expect(wrapper.get('.lx-metric-card__trend [data-icon-name="' + iconName + '"]').exists()).toBe(true);
+    wrapper.unmount();
+  });
+
   it('prefers the title slot, badgeText and footer slot over compatibility fallbacks', () => {
     const wrapper = mount(LxMetricCard, {
       props: { title: '属性标题', label: '旧标题', badgeText: '新角标', badge: '旧角标', footer: '旧底栏' },

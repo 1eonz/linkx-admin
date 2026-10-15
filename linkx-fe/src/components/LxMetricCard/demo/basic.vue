@@ -27,6 +27,7 @@ import LxMetricCard from '../index.vue'
         badge-status="busy"
         trend="跨专网隧道回查耗时轻微回退"
         trend-status="busy"
+        trend-direction="down"
         :progress="84"
         progress-label="预警处置阈值"
         progress-value="84.0% 负荷"
@@ -43,6 +44,17 @@ import LxMetricCard from '../index.vue'
         :progress="62.5"
         progress-label="待办积压率"
         progress-value="62.5%"
+      />
+      <LxMetricCard
+        title="策略同步任务"
+        :value="128"
+        unit="项"
+        status="normal"
+        badge-text="保持稳定"
+        badge-status="processing"
+        trend="近 24 小时任务完成量保持稳定"
+        trend-status="online"
+        trend-direction="flat"
       />
     </div>
 

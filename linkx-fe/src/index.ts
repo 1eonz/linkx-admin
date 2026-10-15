@@ -155,6 +155,7 @@ export type {
 export type {
   LxMetricCardProps,
   LxMetricCardStatus,
+  LxMetricCardTrendDirection,
   LxMetricCardValueType,
 } from './components/LxMetricCard/types'
 export type {

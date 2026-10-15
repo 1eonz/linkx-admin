@@ -18,6 +18,7 @@ const props = withDefaults(defineProps<LxMetricCardProps>(), {
   badgeStatus: 'online',
   trend: '',
   trendStatus: 'online',
+  trendDirection: undefined,
   progress: undefined,
   progressLabel: '',
   progressValue: '',
@@ -83,6 +84,12 @@ const badgeStyle = computed(() => ({
 const metricColorStyle = computed(() => ({
   '--lx-metric-value-color': metricValueColors[metricStatus.value],
 }))
+const trendIconName = computed(() => {
+  if (props.trendDirection === 'up') return 'arrow-up'
+  if (props.trendDirection === 'down') return 'arrow-down'
+  if (props.trendDirection === 'flat') return 'minus'
+  return props.trendStatus === 'error' ? 'arrow-down' : 'arrow-up'
+})
 const progressPercent = computed(() => {
   const value = Number(props.progress ?? 0)
   return Number.isFinite(value) ? Math.max(0, Math.min(100, value)) : 0
@@ -117,7 +124,12 @@ const progressPercent = computed(() => {
         class="lx-metric-card__badge"
         :style="badgeStyle"
       >
-        <LxStatusDot :status="badgeStatus" :size="6" :pulse="false" />
+        <LxStatusDot
+          :status="badgeStatus"
+          :size="6"
+          :pulse="false"
+          aria-hidden="true"
+        />
         {{ metricBadge }}
       </span>
     </header>
@@ -135,10 +147,7 @@ const progressPercent = computed(() => {
     </div>
 
     <p v-if="trend" class="lx-metric-card__trend" :class="`is-${trendStatus}`">
-      <LxIcon
-        :name="trendStatus === 'error' ? 'arrow-down' : 'arrow-up'"
-        :size="12"
-      />{{ trend }}
+      <LxIcon :name="trendIconName" :size="12" />{{ trend }}
     </p>
 
     <div v-if="progress !== undefined" class="lx-metric-card__progress-section">

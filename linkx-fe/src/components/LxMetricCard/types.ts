@@ -2,6 +2,7 @@ import type { LxStatus } from '../../tokens'
 
 export type LxMetricCardStatus = 'normal' | 'success' | 'warning' | 'danger'
 export type LxMetricCardValueType = 'default' | 'success' | 'warning' | 'danger'
+export type LxMetricCardTrendDirection = 'up' | 'down' | 'flat'
 
 export interface LxMetricCardProps {
   /** 指标标题；与旧版 label 同时传入时优先使用 title。 */
@@ -20,6 +21,8 @@ export interface LxMetricCardProps {
   badgeStatus?: LxStatus
   trend?: string
   trendStatus?: LxStatus
+  /** 趋势方向；未传入时兼容旧版按 trendStatus 推断。 */
+  trendDirection?: LxMetricCardTrendDirection
   progress?: number
   /** 进度条左侧说明。 */
   progressLabel?: string
