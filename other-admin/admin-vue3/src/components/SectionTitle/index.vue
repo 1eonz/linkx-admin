@@ -10,7 +10,7 @@ import type { Component } from 'vue';
 
 defineOptions({ name: 'SectionTitle' });
 
-interface Props extends Pick<LxSectionTitleProps, 'headingLevel' | 'size' | 'tag' | 'tagType'> {
+interface Props extends Pick<LxSectionTitleProps, 'headingLevel' | 'size' | 'tag' | 'tagType' | 'subtitle'> {
   title?: string;
   icon?: Component;
   iconColor?: string;
@@ -52,6 +52,7 @@ const lxIconName = computed(() => {
     :variant="variant"
     :heading-level="headingLevel"
     :size="size"
+    :subtitle="subtitle"
     :icon="lxIconName"
     :icon-color="iconColor"
     :tag="tag"
@@ -61,7 +62,9 @@ const lxIconName = computed(() => {
     <template #default
       ><slot>{{ title }}</slot></template
     >
-    <template v-if="icon && !lxIconName" #leading>
+    <template v-if="$slots.subtitle" #subtitle><slot name="subtitle" /></template>
+    <template v-if="$slots.leading" #leading><slot name="leading" /></template>
+    <template v-else-if="icon && !lxIconName" #leading>
       <el-icon class="title-icon" :color="iconColor"><component :is="icon" /></el-icon>
     </template>
     <template v-if="$slots.extra" #extra><slot name="extra" /></template>

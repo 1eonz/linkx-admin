@@ -43,4 +43,33 @@ describe('SectionTitle lx-ui adapter', () => {
     expect(wrapper.get('h4 .lx-tag').classes()).toContain('lx-tag--primary');
     wrapper.unmount();
   });
+
+  it('forwards subtitle props and slots to lx-ui', () => {
+    const propWrapper = mount(SectionTitle, {
+      props: { title: '基础信息', subtitle: '配置说明' },
+      global: { components: { ElIcon } },
+    });
+    const slotWrapper = mount(SectionTitle, {
+      props: { title: '基础信息', subtitle: '旧说明' },
+      slots: { subtitle: '<strong data-testid="subtitle-slot">自定义说明</strong>' },
+      global: { components: { ElIcon } },
+    });
+
+    expect(propWrapper.get('.lx-section-title__subtitle').text()).toBe('配置说明');
+    expect(slotWrapper.get('[data-testid="subtitle-slot"]').text()).toBe('自定义说明');
+    propWrapper.unmount();
+    slotWrapper.unmount();
+  });
+
+  it('lets the leading slot override mapped and fallback icons', () => {
+    const wrapper = mount(SectionTitle, {
+      props: { title: '自定义标题', icon: MapLocationIcon },
+      slots: { leading: '<span data-testid="leading-slot">自定义图标</span>' },
+      global: { components: { ElIcon } },
+    });
+
+    expect(wrapper.get('[data-testid="leading-slot"]').text()).toBe('自定义图标');
+    expect(wrapper.find('[data-icon-name="map-pin"]').exists()).toBe(false);
+    wrapper.unmount();
+  });
 });
