@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-16 Wave 25：LxAuthImg 组件修复完成，宿主迁移保持冻结
+
+- lx-ui `LxAuthImg` 已完成当前竞态修复和回归：**17/17** 单测、文档 E2E **5/5**，覆盖鉴权 Blob、取消、失败回退、空地址复用、旧图片事件和显式小尺寸；请求失败并显示 fallback 时的 `error-actions` 重试契约已补测。B 路当前证据已归档于 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`；这不代表 Vue3 旧 `AuthImg` 宿主适配器已替换。
+- `other-admin/admin-vue3` 的鉴权图片适配仍需保留旧 props/事件、请求取消、Blob URL 回收和真实网关鉴权头，待可信后端契约与全库 UI-10/UI-11 门禁后单独实施并补 Mock/浏览器回归。宿主 `element-plus` 继续保留。下一入口为 `LxMetricCard` 与 `LxSectionTitle`，随后进入 G2 `LxSearchBar` 与 `LxStatusSwitch`。
+
 ## 2026-10-15 全菜单 Mock 预览 E2E 复验
 
 - 将环境变量 `MOCK_PREVIEW_PORT` 设为 `31853` 后运行 `pnpm exec playwright test --config=playwright.preview.config.ts` 隔离重跑，共 **10/10 通过**；覆盖菜单与首屏样例、ColForm 请求竞态、北向 Mock CRUD、轮播分页、AuthImg 错误恢复和减少动效。

@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## [2026-10-16] UI-10 / Wave 25 LxAuthImg 当前版审查收口交接
+
+- **修复范围**：`linkx-fe/src/components/LxAuthImg/index.vue` 记录已加载地址并在复用时补发完成事件；用当前图片元素身份与地址双重校验隔离 A→B→A 迟到事件；显式宽高下移除 frame 的加载期最小尺寸。单测补充空地址复用、旧节点事件和 12×14 小尺寸加载时序。
+- **验证结果**：`other-admin/admin-vue3/tests/unit/lx-auth-img.test.ts` **17/17**；`tests/e2e/lx-auth-img-docs.spec.ts` **5/5**；lx-ui `vue-tsc`、库构建 206 modules、VitePress 构建、Vue3 `vue-tsc`、目标 Prettier 和 `git diff --check` 通过。pnpm 构建仅保留已有配置及大 chunk 警告；linkx-fe 未安装独立 ESLint CLI，命令失败属于环境门禁缺失，不是代码错误。
+- **Impeccable B**：`.impeccable/critique/authimg-assessment-b-final-2026-10-16/` 及同目录 detector、截图、DOM、源码指纹和停止证据。detector JSON `[]`、stderr 空、exit 0；Light/HUD × 桌面/375px 四视图全部 HTTP 200、注入成功，页面错误、失败请求和 HTTP 400+ 响应为 0；运行时命中均为文档壳层、代码示例、props 滚动容器或 HUD 令牌，未命中组件节点。空数组不是视觉通过的单独证明。
+- **A 路与综合结论**：当前版独立 A 为 **37/40（Good）**，四视图均 HTTP 200，页面错误和失败请求为 0；综合报告、趋势和复验材料均位于 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`。代码复审未发现可复现 P0–P2。
+- **矩阵状态**：UI-10 从 8/52 更新为 **9/52**，仅表示 LxAuthImg 组件严格矩阵收口。真实鉴权后端联调、Vue3 AuthImg 适配和全库 Element Plus 替换仍冻结；下一入口为 `LxMetricCard` 与 `LxSectionTitle`，随后进入 G2 `LxSearchBar` 与 `LxStatusSwitch`；页面操作引导继续暂缓、不进入排期。
+
 ## [2026-10-15] UI-10 / Wave 24 LxActionButtons 严格矩阵关闭与下一入口
 
 - **完成范围**：按 `design/按钮体系/` 严格复核 LxActionButtons 组件、Demo、中文 API、权限语义、Light/HUD、桌面/375px 和键盘/溢出菜单行为。省略 `auth` 为公开操作；显式空字符串、空数组、缺少权限源或无匹配权限时隐藏。A 路关闭原权限示例 P2。
@@ -48,7 +56,7 @@
 ## [2026-10-15] SCOPE / 页面操作引导暂缓，后续按需再执行
 
 - 页面操作引导当前暂缓：不实施、不继续拆分，也不纳入待办、执行队列或排期；不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
-- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅保留历史需求和设计基线。后续确有需要时再恢复计划并执行，届时按当时的页面范围、文案、交互、技术方案及后端契约重新确认。
+- 本次已将此范围决定补充到 `doc/PROJECT-DELIVERY-PLAN.md` 首页；`doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 仅保留历史需求和设计基线。后续确有需要时再恢复计划并执行，届时按当时的页面范围、文案、交互、技术方案及后端契约重新确认。
 - 此范围说明不表示功能已经实现或验收，也不改变当前 lx-ui 与 Vue3 组件迁移顺序。
 
 ## [2026-10-13] SCOPE / 页面操作引导当前不执行，后续按需纳入计划

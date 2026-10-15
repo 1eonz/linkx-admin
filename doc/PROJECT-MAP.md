@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-16 UI-10 / Wave 25 LxAuthImg 严格矩阵收口
+
+- `LxAuthImg` 已修复已加载回退图复用时的错误 loading、回退图 A→B→A 迟到事件污染及显式小尺寸加载框被最小尺寸撑大的问题；组件仍由宿主注入 Blob 请求，不持有 Token 或请求库。
+- 定向单测 **17/17**、文档 E2E **5/5**、lx-ui 类型检查/206 modules 构建、VitePress、Vue3 类型检查、目标格式和差异检查通过。B 路四视图 HTTP 200、注入成功、页面错误/失败请求/异常响应均为 0；静态 detector 为合法 `[]`/空 stderr/退出码 0，命中均归因文档壳层或主题规则。请求失败并显示 fallback 时的 `error-actions` 重试契约已补测。证据目录为 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`。
+- 当前版独立 Assessment A 为 **37/40（Good）**，四视图页面错误与失败请求为 0；A/B 综合报告、趋势和复验材料均位于 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`，代码复审无可复现 P0–P2。UI-10 更新为 **9/52**；真实鉴权适配器、Vue3 宿主替换和全库 Element Plus 删除仍属 UI-04/全库门禁，下一入口为 `LxMetricCard` 与 `LxSectionTitle`，随后进入 G2 `LxSearchBar` 与 `LxStatusSwitch`；页面操作引导继续暂缓。
+
 ## 2026-10-15 UI-10 / Wave 24 LxActionButtons 严格矩阵关闭
 
 - **组件库状态**：按 `design/按钮体系/` 完成 LxActionButtons 当前实现、Demo、中文 API 和权限边界严格复核。A 33/40，原显式空权限对照 P2 关闭；B 四个源码 detector 为有效 `[]`/空 stderr/退出码 0，8 个 Light/HUD × 桌面/375px 浏览器视图成功注入；独立代码复审无开放 P0–P3。

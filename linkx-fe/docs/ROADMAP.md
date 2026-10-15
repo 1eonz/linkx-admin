@@ -1,5 +1,12 @@
 # lx-ui 路线图
 
+## 2026-10-16 UI-10 / Wave 25 LxAuthImg 竞态与加载尺寸修复
+
+- 修复 `LxAuthImg` 在已成功加载的同一回退图被主图切为空地址时错误保持 loading 的问题；复用已加载资源时补发一次完成事件。回退图 A→B→A 切换增加当前 DOM 图片身份校验，迟到事件不会污染新状态；显式 `width`/`height` 不再被加载期最小尺寸撑大。
+- 定向单测 **17/17**、LxAuthImg 文档 Playwright **5/5**、lx-ui 类型检查、206 modules 库构建、VitePress 文档构建、Vue3 类型检查、目标 Prettier 与 `git diff --check` 通过。linkx-fe 没有独立 ESLint CLI 配置，不能把宿主 ESLint 命令失败误记为组件源码失败。
+- Assessment B 已完成：源码 detector 为合法 JSON `[]`、stderr 空、退出码 0；Light/HUD × 1280×800/375×812 四个新浏览器上下文均 HTTP 200、可变注入成功，page error、失败请求和 HTTP 400+ 响应均为 0；overlay 命中归因于 VitePress 壳层、代码块、props 滚动容器和 HUD 主题规则，未命中 `.lx-auth-img*`。证据见 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`。`[]` 仅代表静态规则零命中。
+- 当前版 Assessment A **37/40（Good）**，B 四视图与 detector 证据有效，代码复审无可复现 P0–P2；综合报告与趋势见 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`。UI-10 更新为 **9/52**。请求失败并显示 fallback 时的 `error-actions` 重试契约已补测；真实鉴权后端联调、Vue3 宿主适配与整库 Element Plus 删除仍待可信契约及全库门禁。下一入口为 `LxMetricCard` 与 `LxSectionTitle`，随后进入 G2 `LxSearchBar` 与 `LxStatusSwitch`。
+
 ## 2026-10-14 UI-10 / Wave 21 LxTextarea 严格矩阵关闭
 
 - `LxTextarea` 按 `design/表单控件八件套/code.html` 第 08 区完成严格矩阵核验；定向单测 14/14、共享基础控件文档 E2E 11/11，隔离端口 4179 完整通过。lx-ui 类型检查、206 modules 构建、VitePress、Vue3 生产构建及目标格式/Lint/Stylelint 通过。

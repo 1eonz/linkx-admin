@@ -1,5 +1,11 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-16 LxAuthImg 组件库修复，宿主适配未启动
+
+- lx-ui `LxAuthImg` 当前版已修复回退图复用、旧元素迟到事件和小尺寸加载 frame，单测 **17/17**、文档 E2E **5/5**，B 路证据见 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`。
+- 当前版 Assessment A **37/40（Good）**；请求失败并显示 fallback 时的 `error-actions` 重试契约已补测。宿主 `AuthImg` 适配、真实鉴权联调和全库 UI-10/UI-11 门禁仍未完成。
+- Vue3 旧 `AuthImg` 的鉴权请求头、取消、Blob URL 生命周期和业务失败契约仍需适配层保留；在全库 UI-10/UI-11 与宿主组合回归完成前，不删除 Vue3 `element-plus` 直接依赖，也不把组件库 B 证据当作宿主替换证据。
+
 ## 2026-10-13 Wave 19 UI-10 组件矩阵进度
 
 - `LxCheckbox`、`LxCheckboxGroup`、`LxRadio`、`LxRadioGroup` 已完成统一严格矩阵登记；UI-10 当前 **4/52**。本次只更新 lx-ui 组件审计，不代表 Vue3 宿主组件已替换，也不代表 Element Plus 可以移除。

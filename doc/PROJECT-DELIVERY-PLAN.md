@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+> **范围备注（2026-10-15）**：页面操作引导暂缓考虑与实施，不继续拆分，也不纳入待办、自动执行队列或排期；它不作为 lx-ui 收口或 Vue3 Element Plus 替换的前置条件。本文和 `doc/GUIDE-CONTENT-PLAN.md`、`doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 保留历史需求与设计基线；后续确有需要时再恢复计划，届时重新确认页面范围、文案、交互、技术方案及后端契约。当前其余交付顺序不变。
+
+## 2026-10-16 UI-10 / Wave 25 LxAuthImg 严格矩阵关闭
+
+- 当前版独立 Assessment A **37/40（Good）**；Assessment B detector 为有效 `[]`、stderr 为空、退出码 0，Light/HUD × 桌面/375px 浏览器证据无页面错误、失败请求或异常响应；代码复审无可复现 P0–P2。
+- 定向单测 **17/17**、文档 E2E **5/5**、lx-ui 类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标格式和差异检查通过。综合报告、源码指纹、截图和趋势见 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`；`[]` 仅代表静态规则零命中。
+- UI-10 当前为 **9/52**。请求失败并显示 fallback 时的 `error-actions` 重试契约已补测；真实鉴权、Vue3 AuthImg 宿主适配、整库 UI-11 和 Element Plus 删除门禁仍未完成。下一入口为 `LxMetricCard` 与 `LxSectionTitle`，随后进入 G2 `LxSearchBar` 与 `LxStatusSwitch`；页面操作引导继续暂缓、不进入排期。
+
 ## 2026-10-15 UI-10 / Wave 24 LxActionButtons 严格矩阵关闭
 
 - `LxActionButtons` 已按 `design/按钮体系/` 完成当前组件、Demo、中文 API 和权限语义严格复核。省略 `auth` 显示公开操作；显式空字符串/空数组、缺少权限源或无权时隐藏。A 路确认原权限对照 P2 关闭，最终 **33/40（Good）**，无开放 P0–P3。
@@ -1177,3 +1185,11 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **范围边界**：本波不关闭宿主“已选择/已保存”状态、真实权限保存失败恢复、真实权限后端联调、读屏器专项和 Vue3 `DataPermissionTree` 替换；这些继续归 UI-04。UI-10 统一 52 项计数保持现行口径，不能把组件级 Critique 当成 Vue3 页面迁移完成。Vue3 `element-plus` 直接依赖继续保留。
 - **下一波**：先进入 `LxMetricCard` 与 `LxSectionTitle` 的当前源码严格 UI 复核；对已有库级行为证据补独立 A/B、浏览器主题/状态/窄屏/减少动效证据、综合 snapshot/trend 和代码复审。随后按台账处理 G2 `LxSearchBar`/`LxStatusSwitch` 未关闭项，再开始 Vue3 Element Plus 分批替换。权限中心、文本/字段权限和引导页继续后置。
 - **交付约定**：实现、Demo、测试和组件中文文档使用 `fix(lx-ui): ...`；计划、地图、审计、交接、迁移台账和 Impeccable 证据使用 `docs(project): ...`。两笔提交均只暂存本波白名单，完成检查后推送 `origin/main`，再启动下一波 Agent。
+
+## 2026-10-16 Wave 12 / LxAuthImg P2 收口
+
+- **完成内容**：完成鉴权图片的 Blob 请求注入、AbortSignal 取消、请求序号防旧响应回写、对象 URL 回收、回退图与空地址状态、失败恢复插槽、ARIA 状态播报、加载指示和减少动效；Demo 覆盖成功、延迟、失败、空地址、回退图、取消旧请求、主题和窄屏。
+- **验证**：LxAuthImg 单测 16/16，文档 E2E 5/5；lx-ui 类型检查与 206 modules 构建通过；Vue3 `vue-tsc --noEmit`、目标 ESLint（0 errors，保留 1 个既有 Sidebar import/order warning）、Prettier、`git diff --check` 通过。E2E 未访问真实后端，仅使用文档站本地 Mock。
+- **Impeccable A/B**：A 37/40（Good，92.5%），P0/P1/P2 为 0，保留两个 P3：调试摘要为 32px、宿主主动替换 `src` 时焦点责任需由宿主明确。B 两个静态目标均为合法 JSON `[]`、stderr 0 bytes、退出码 0；四个 Light/HUD 视图均完成独立浏览器注入、overlay、截图和 DOM 证据，HTTP/page errors/failed requests 均为 0。证据与 snapshot/trend 见 `.impeccable/critique/authimg-assessment-a-final-2026-10-16/`、`.impeccable/critique/authimg-assessment-b-final-2026-10-16/`。
+- **边界**：`[]` 只表示静态 detector 零命中，不能单独代表通过；文档外壳的移动滚动容器和 HUD 代码高亮命中已从组件问题中归因分离。Demo 重试会主动切换 `src`，因此恢复前焦点由宿主换源语义决定，恢复后组件将焦点放到 status 节点。
+- **下一步**：按既定顺序进入下一项 lx-ui 组件的当前源码严格复核；页面操作引导、权限中心、文本/字段权限继续暂缓。Vue3 Element Plus 替换仍等待组件库批次和整库审查门禁。

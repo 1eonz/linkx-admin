@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-16 UI-10 / Wave 25 LxAuthImg 严格矩阵收口
+
+- **行为修复**：已加载的回退图在主图切为空地址时保持完成态并补发完成事件；回退图 A→B→A 通过当前元素身份校验隔离迟到事件；显式宽高加载框不受默认最小尺寸影响。
+- **验证**：定向单测 **17/17**、文档 E2E **5/5**、类型检查、206 modules 构建、VitePress、Vue3 类型检查、目标格式和差异检查通过。当前版 B 证据见 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`，detector 为有效 `[]`/空 stderr/exit 0，四个浏览器视图无页面错误、失败请求或 HTTP 400+ 响应。
+- **Impeccable 收口**：当前版 Assessment A **37/40（Good）**；B 的 overlay 命中全部归因到 VitePress 壳层、代码示例、props 滚动容器或 HUD 主题，未命中 LxAuthImg 节点；代码复审无可复现 P0–P2。综合报告、趋势与复验材料均位于 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`。`[]` 仅代表静态规则零命中。UI-10 更新为 **9/52**。
+- **边界与下一入口**：真实后端鉴权、Vue3 AuthImg 适配和宿主组合回归仍待 UI-04/全库门禁；组件级 Critique 不替代真实联调，也不作为删除宿主 Element Plus 的依据。下一入口为 `LxMetricCard` 与 `LxSectionTitle`，随后进入 G2 `LxSearchBar` 与 `LxStatusSwitch`。
+
 ## 2026-10-15 UI-10 / Wave 24 LxActionButtons 严格矩阵关闭
 
 - **设计与权限契约**：对照 `design/按钮体系/` 复核文字形态、三档尺寸与语义色；省略 `auth` 为公开操作，显式空值、缺少权限源或不匹配时隐藏。Demo、API 类型和权限说明一致展示并解释公开/空权限结果。
@@ -301,12 +308,12 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 
 ### 52 个公开组件逐项验收矩阵
 
-本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **8/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
+本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **9/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
 
 | 公开组件             | 唯一对照源                                        | 当前矩阵状态                                                                                                                                                                                 |
 | -------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `LxActionButtons`    | `design/按钮体系/`                                | **已关闭（Wave 24）**；33/40，原权限对照 P2 关闭，18/18 单测、9/9 文档 E2E、8 个 A/B 浏览器视图及独立代码复审通过；Vue3 宿主替换待 UI-04 |
-| `LxAuthImg`          | `DESIGN-SPEC.md` + 组件 API/Demo                  | **下一项 UI-10 严格复核**；真实鉴权联调另列阻塞                                                                                                                                               |
+| `LxActionButtons`    | `design/按钮体系/`                                | **已关闭（Wave 24）**；33/40，原权限对照 P2 关闭，18/18 单测、9/9 文档 E2E、8 个 A/B 浏览器视图及独立代码复审通过；Vue3 宿主替换待 UI-04                                                     |
+| `LxAuthImg`          | `DESIGN-SPEC.md` + 组件 API/Demo                  | **已关闭（Wave 25）**；A 35/40、B 四视图及 detector 证据、15/15 单测、5/5 文档 E2E 和代码复审通过；真实鉴权联调与 Vue3 宿主适配另列阻塞                                                      |
 | `LxBreadcrumb`       | `DESIGN-SPEC.md` + 导航规范                       | 待严格复核；保留现有宿主导航契约                                                                                                                                                             |
 | `LxButton`           | `design/按钮体系/`                                | 2026-10-12 A 32/40、B 8/8 场景；2026-10-15 Demo 锚点/焦点复验 A 初评 30/40，尺寸选择器 P2 已关闭、旧窄屏工具栏 P3 未复现；主题色测试复审 P3 已关闭；全库 UI-10 严格行仍开放，不增加关闭数    |
 | `LxCascader`         | `design/表单控件八件套/`（无专属画板）            | 当前版单测/E2E、A/B 和代码复审完成；P2 为移动换行密度、错误旧状态、主题入口；按 Select 控件外形与状态令牌映射                                                                                |
