@@ -14,3 +14,16 @@ export interface LxAuthImgProps {
   /** 图片填充方式。 */
   fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
 }
+
+/** `error-actions` 插槽向宿主提供的失败恢复上下文。 */
+export interface LxAuthImgErrorActionsSlot {
+  /** 重新执行当前图片加载流程。 */
+  retry: () => void
+  /** 当前是否正在执行重试请求；宿主应在此期间禁用恢复控件。 */
+  loading: boolean
+}
+
+/** LxAuthImg 的公开插槽契约。 */
+export interface LxAuthImgSlots {
+  'error-actions'?: (scope: LxAuthImgErrorActionsSlot) => unknown
+}

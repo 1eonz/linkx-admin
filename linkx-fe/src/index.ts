@@ -209,7 +209,11 @@ export type {
   LxTransferPanelProps,
   LxTransferPanelStatusTone,
 } from './components/LxTransferPanel/types'
-export type { LxAuthImgProps } from './components/LxAuthImg/types'
+export type {
+  LxAuthImgErrorActionsSlot,
+  LxAuthImgProps,
+  LxAuthImgSlots,
+} from './components/LxAuthImg/types'
 export type {
   LxBreadcrumbItem,
   LxBreadcrumbProps,
