@@ -1,5 +1,12 @@
 # lx-ui 路线图
 
+## 2026-10-16 UI-04 前置组件：LxMetricCard 趋势语义补强
+
+- `LxMetricCard` 新增可选 `trendDirection`，支持 `up`、`down`、`flat`；未传入时按旧 `trendStatus` 推断，保持现有宿主兼容。Badge 状态点改为装饰性读屏隐藏。
+- 定向单测 **15/15**、文档 Playwright **3/3**、lx-ui 类型检查/构建通过；E2E 覆盖显式上升/下降/持平箭头、旧 `error` 回退、进度 ARIA、320px、HUD 与减少动效。独立复跑受登录鉴权和代理超时阻断，单列为环境失败。
+- B 证据目录为 `.impeccable/critique/metriccard-assessment-b-2026-10-16-recheck/`，detector 的 `[]`、空 stderr、0 只记录静态零命中；浏览器五视图无页面错误或失败请求，非零命中归因于文档壳层。A/B 复核未发现组件 P0–P2。
+- 本波不关闭 UI-10 严格矩阵，不替换 Vue3 业务页，不删除宿主 `element-plus`；下一入口为 `LxSectionTitle`，然后继续基础控件、动态图标和 `LxDynamicForm`。
+
 ## 2026-10-16 UI-10 / Wave 25 LxAuthImg 竞态与加载尺寸修复
 
 - 修复 `LxAuthImg` 在已成功加载的同一回退图被主图切为空地址时错误保持 loading 的问题；复用已加载资源时补发一次完成事件。回退图 A→B→A 切换增加当前 DOM 图片身份校验，迟到事件不会污染新状态；显式 `width`/`height` 不再被加载期最小尺寸撑大。

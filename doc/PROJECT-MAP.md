@@ -1,5 +1,12 @@
 # LinkX 项目地图
 
+## 2026-10-16 UI-04 前置组件交接：LxMetricCard 趋势语义复核
+
+- `LxMetricCard` 增加可选 `trendDirection`（`up`/`down`/`flat`），显式传值优先；未传值继续按旧 `trendStatus` 推断，保留 Vue3 宿主兼容行为。指标角标内的状态点标记为装饰性内容，避免重复读屏。
+- 定向单测 **15/15**、文档 Playwright **3/3**、lx-ui 类型检查和构建、Vue3 目标格式检查通过；文档 E2E 覆盖显式上行/下行/持平趋势、旧 `error` 下行回退、进度 ARIA、320px、HUD 和减少动效。独立复跑因登录鉴权和外部代理超时阻断，已单列为环境失败。
+- Assessment B 证据目录 `.impeccable/critique/metriccard-assessment-b-2026-10-16-recheck/` 已保存 detector JSON、stderr、退出码、Light/HUD 桌面与移动截图及 DOM 记录；三目标静态 `[]`、空 stderr、退出码 `0`，浏览器无页面错误或失败请求，非零命中归因于文档壳层。静态 `[]` 仅表示规则零命中。
+- 本次仍不增加 UI-10 严格矩阵计数，不替换 `ClientDetailDrawer.vue` 的 6 处宿主实例，不删除 Vue3 `element-plus`；下一入口为 `LxSectionTitle`，随后按既定顺序继续基础组件和 G2 组件，页面操作引导、权限中心和字段权限保持后置。
+
 ## 2026-10-16 UI-10 / Wave 25 LxAuthImg 严格矩阵收口
 
 - `LxAuthImg` 已修复已加载回退图复用时的错误 loading、回退图 A→B→A 迟到事件污染及显式小尺寸加载框被最小尺寸撑大的问题；组件仍由宿主注入 Blob 请求，不持有 Token 或请求库。

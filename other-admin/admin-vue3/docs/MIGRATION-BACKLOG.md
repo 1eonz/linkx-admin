@@ -1,5 +1,12 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-16 UI-04 前置组件：LxMetricCard 趋势语义交接
+
+- lx-ui `LxMetricCard` 增加 `trendDirection`（`up`/`down`/`flat`），未传入时兼容旧 `trendStatus` 推断；Badge 状态点设为 `aria-hidden`。定向单测 **15/15**、文档 E2E **3/3**，类型检查、构建和目标格式检查通过；独立 E2E 复跑受登录鉴权和代理超时阻断，记录为环境失败。
+- Assessment B 证据见 `.impeccable/critique/metriccard-assessment-b-2026-10-16-recheck/`，三个目标 detector JSON 为合法 `[]`、stderr 为空、退出码为 `0`，同时已保存 Light/HUD 桌面与移动浏览器证据；五视图无页面错误或失败请求，浏览器命中归因于文档壳层，`[]` 不单独代表视觉通过。A/B 未发现组件 P0–P2。
+- Assessment A 已修复趋势方向错误和 Badge 重复读屏两项问题；只读 hover 暗示与标题 heading 语义暂列低优先级跟踪。宿主 6 处 MetricCard、真实后端和人工读屏仍待 UI-04/联调波次。
+- 本波不改变 UI-10 计数、不删除 Vue3 `element-plus`，下一入口为 `LxSectionTitle`，随后继续 G2 和 `LxDynamicForm` 前置门槛。
+
 ## 2026-10-16 Wave 25：LxAuthImg 组件修复完成，宿主迁移保持冻结
 
 - lx-ui `LxAuthImg` 已完成当前竞态修复和回归：**17/17** 单测、文档 E2E **5/5**，覆盖鉴权 Blob、取消、失败回退、空地址复用、旧图片事件和显式小尺寸；请求失败并显示 fallback 时的 `error-actions` 重试契约已补测。B 路当前证据已归档于 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`；这不代表 Vue3 旧 `AuthImg` 宿主适配器已替换。

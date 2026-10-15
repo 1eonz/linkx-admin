@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-16 LxMetricCard 当前版复核记录
+
+- 组件行为：`trendDirection` 显式控制趋势图标，未传值保留旧 `trendStatus` 回退；Badge 内状态点设置 `aria-hidden`，避免与文本重复播报。
+- 自动化：定向单测 **15/15**，文档 Playwright **3/3**；覆盖上行/下行/持平趋势、旧属性兼容、进度条可访问性、320px、HUD 和减少动效。lx-ui 类型检查、构建与目标格式检查通过；独立 E2E 复跑受登录鉴权和代理超时影响，单列为环境失败。
+- Impeccable：`.impeccable/critique/metriccard-assessment-b-2026-10-16-recheck/` 保存三个目标的 detector JSON、stderr、退出码、截图和 DOM；合法 `[]`/空 stderr/0 仅为静态结果，浏览器五视图无页面错误或失败请求，命中归因于文档壳层，必须结合独立审查结论。
+- 交付边界：未执行真实读屏器、真实后端联调或 Vue3 宿主替换；不增加 UI-10 关闭计数。只读 hover 和标题 heading 语义作为低优先级后续检查项，下一波进入 `LxSectionTitle`。
+
 ## 2026-10-14 UI-10 / Wave 20 LxSelect 严格矩阵关闭
 
 - 组件、Demo 和中文 API 按 `design/表单控件八件套/` 核对；桌面 32px，390px 触控目标与选项行 44px。禁用折叠摘要、表单校验焦点与恢复、远程 loading/empty/error/retry、HUD、窄屏、键盘及减少动效均有行为或浏览器证据。

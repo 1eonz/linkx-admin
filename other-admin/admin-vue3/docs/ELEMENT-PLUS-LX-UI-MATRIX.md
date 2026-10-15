@@ -1,5 +1,12 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-16 UI-04 前置组件：LxMetricCard 当前版语义复核
+
+- `LxMetricCard` 公开 `trendDirection` 类型，显式控制上升/下降/持平图标；不传值继续按旧 `trendStatus` 回退。Badge 状态点已标记为装饰性内容，避免重复读屏。
+- 定向单测 **15/15**、文档 Playwright **3/3**，lx-ui 类型检查、构建和目标格式检查通过。B 证据目录 `.impeccable/critique/metriccard-assessment-b-2026-10-16-recheck/` 保存三个目标 detector 三件套与 Light/HUD 桌面/移动浏览器证据；静态 `[]` 仅为零命中，浏览器无页面错误或失败请求，命中归因于文档壳层。
+- 该项仍属于 UI-04 前置组件语义收口，不增加 UI-10 52 项关闭数；`ClientDetailDrawer.vue` 的 6 处实例、宿主组合回归、真实后端和全库 UI-11 仍未完成。Vue3 `element-plus` 继续保留。
+- 当前独立 A/B 复核完成后再记录最终评分；下一入口为 `LxSectionTitle`，之后继续基础控件、动态图标和 `LxDynamicForm`。
+
 ## 2026-10-16 LxAuthImg 组件库修复，宿主适配未启动
 
 - lx-ui `LxAuthImg` 当前版已修复回退图复用、旧元素迟到事件和小尺寸加载 frame，单测 **17/17**、文档 E2E **5/5**，B 路证据见 `.impeccable/critique/authimg-assessment-b-final-2026-10-16/`。

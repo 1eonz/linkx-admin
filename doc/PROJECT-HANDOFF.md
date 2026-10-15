@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## [2026-10-16] UI-04 前置组件：LxMetricCard 当前版趋势语义交接
+
+- **实现**：`LxMetricCard` 新增 `trendDirection` 类型与计算图标，显式 `down`/`flat` 不再由状态颜色猜测；未传入时保留 `trendStatus === 'error'` 下行、其他上行的旧兼容规则。Badge 内 `LxStatusDot` 增加 `aria-hidden="true"`，文字仍提供状态信息。
+- **验证**：组件定向单测 **15/15**；`lx-metric-card-docs.spec.ts` **3/3**；lx-ui 类型检查、构建及目标格式检查通过。E2E 断言覆盖显式上行/下行/持平示例和旧错误态下行回退；独立复跑因登录鉴权和代理超时阻断，记录为环境失败，不改写此前通过的 Mock 证据。
+- **Impeccable B 证据**：`.impeccable/critique/metriccard-assessment-b-2026-10-16-recheck/` 含三个目标的 `stdout.json`、`stderr.log`、退出码、Light/HUD 桌面和移动截图及 DOM 记录。三件套均为合法 JSON `[]`、空 stderr、退出码 `0`；浏览器五视图无页面错误或失败请求，命中归因于 VitePress 文档壳层。`[]` 只代表静态规则零命中，不能替代浏览器证据。
+- **审查边界**：Assessment A 的趋势方向与 Badge 重复读屏问题已修复，最终 A/B 复核未发现组件 P0–P2；只读 hover 可点击暗示和标题 heading 语义保留为低优先级后续评估。未执行真实读屏器、真实后端联调和宿主组合迁移。
+- **交接下一步**：不修改权限中心、字段权限、页面操作引导或 Vue3 `element-plus` 依赖；下一波进入 `LxSectionTitle`，之后继续基础组件和 `LxDynamicForm` 门槛。
+
 ## [2026-10-16] UI-10 / Wave 25 LxAuthImg 当前版审查收口交接
 
 - **修复范围**：`linkx-fe/src/components/LxAuthImg/index.vue` 记录已加载地址并在复用时补发完成事件；用当前图片元素身份与地址双重校验隔离 A→B→A 迟到事件；显式宽高下移除 frame 的加载期最小尺寸。单测补充空地址复用、旧节点事件和 12×14 小尺寸加载时序。

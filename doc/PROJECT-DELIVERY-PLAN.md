@@ -2,6 +2,13 @@
 
 > **范围备注（2026-10-15）**：页面操作引导暂缓考虑与实施，不继续拆分，也不纳入待办、自动执行队列或排期；它不作为 lx-ui 收口或 Vue3 Element Plus 替换的前置条件。本文和 `doc/GUIDE-CONTENT-PLAN.md`、`doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 保留历史需求与设计基线；后续确有需要时再恢复计划，届时重新确认页面范围、文案、交互、技术方案及后端契约。当前其余交付顺序不变。
 
+## 2026-10-16 LxMetricCard 波次交接（当前版）
+
+- 已完成趋势语义补强：新增 `trendDirection` 显式控制上升、下降、持平；未传时按旧 `trendStatus` 回退，避免破坏现有宿主调用。Badge 状态点标记为装饰性内容，保留文字状态。
+- 已通过定向单测 **15/15**、文档 E2E **3/3**、lx-ui 类型检查/构建和目标格式检查。独立 Assessment A 重跑 E2E 时因登录鉴权重定向和外部代理超时阻断，单测仍为 **15/15**；此前通过的 `3/3` 保留为有效 Mock 文档证据，环境失败不归因于组件断言。证据目录为 `.impeccable/critique/metriccard-assessment-b-2026-10-16-recheck/`，其中 detector JSON、stderr、退出码和浏览器截图均已一并核验；`[]` 不单独作为通过依据。
+- Assessment A 发现的趋势箭头语义问题和 Badge 重复读屏问题已修复；Assessment B 五个视图无页面错误或失败请求，静态三目标均为合法 `[]`/空 stderr/0，浏览器命中归因于 VitePress 文档壳层，未发现组件 P0–P2。只读卡片 hover 暗示与标题 heading 语义属于低优先级后续项。宿主组合、真实后端和人工读屏不在本波完成定义内。
+- 本波不增加 UI-10 52 项关闭数，不启动 Element Plus 删除或业务页批量替换。下一波为 `LxSectionTitle` 严格复核；完成后继续基础组件、动态图标、`LxDynamicForm` 和其余 lx-ui 门禁。
+
 ## 2026-10-16 UI-10 / Wave 25 LxAuthImg 严格矩阵关闭
 
 - 当前版独立 Assessment A **37/40（Good）**；Assessment B detector 为有效 `[]`、stderr 为空、退出码 0，Light/HUD × 桌面/375px 浏览器证据无页面错误、失败请求或异常响应；代码复审无可复现 P0–P2。
