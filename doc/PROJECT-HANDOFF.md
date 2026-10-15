@@ -1,17 +1,26 @@
 # LinkX 项目交接记录
 
+## [2026-10-15] UI-10 / Wave 24 LxActionButtons 严格矩阵关闭与下一入口
+
+- **完成范围**：按 `design/按钮体系/` 严格复核 LxActionButtons 组件、Demo、中文 API、权限语义、Light/HUD、桌面/375px 和键盘/溢出菜单行为。省略 `auth` 为公开操作；显式空字符串、空数组、缺少权限源或无匹配权限时隐藏。A 路关闭原权限示例 P2。
+- **验证结果**：单测 **18/18**、文档 Playwright **9/9**；Vue3 类型检查和目标 ESLint、lx-ui 类型检查/206 模块构建、VitePress 文档构建、Stylelint、目标 Prettier、`git diff --check` 通过。构建只有已知 pnpm 配置和 VitePress 大 chunk 警告。
+- **Impeccable 与代码复审**：A **33/40（Good）**，无开放 P0–P3；B 四个 detector 为有效 JSON `[]`、stderr 空、退出码 `0`，8 个浏览器视图 overlay 均成功注入，无页面错误、失败请求或 HTTP 错误。HUD 命中按主题令牌核对；移动根宽变化仅由注入 overlay 造成。独立代码复审批准，无可复现 P0–P3。
+- **证据与边界**：A 复验位于 `.impeccable/critique/assessment-a-actionbuttons-auth-contrast-20261015/`；B 证据位于 `.impeccable/critique/actionbuttons-assessment-b-final-64a2951-2026-10-15/`；综合快照为 `.impeccable/critique/2026-10-15T03-34-29Z__linkx-fe-src-components-lxactionbuttons-index-vue.md`，趋势首条 33/40。UI-10 为 **8/52**；Vue3 29 处宿主引用仍待 UI-04，真实权限后端未联调。
+- **下一步**：按未关闭组件矩阵进入 `LxAuthImg`；真实鉴权联调等待可信后端契约与环境。页面操作引导继续暂缓、不进入待办或排期。
+- **提交边界**：按约定将本波实现/回归与项目计划/审计/地图/交接按白名单分开提交并推送；不得包含根目录用户文件 `0`、`.pnpm-store/` 或 `.impeccable/`。
+
 ## [2026-10-15] 全菜单 Mock 预览 E2E 复验与下一入口
 
 - **验证结果**：在 `other-admin/admin-vue3` 将 `MOCK_PREVIEW_PORT` 设为 `31853` 后运行 `pnpm exec playwright test --config=playwright.preview.config.ts`，10/10 通过。关联人员搜索竞态 4 项、全菜单/样例与北向 CRUD/轮播/AuthImg 场景 6 项均通过；服务器使用本地 Mock，未占用 `30847` 用户预览端口。
-- **范围边界**：本次只复验 Mock 预览与交互，不代表真实后端联调；没有变更业务代码或 UI-10 关闭数（仍为 7/52）。
-- **下一步**：按 `doc/lx-ui/COMPONENT-AUDIT.md` 的未关闭矩阵顺序进入 `LxActionButtons` UI-10 严格复核。`LxInputNumber` 桌面步进目标尺寸 P2 继续等待设计决策；页面操作引导暂不实施、不继续拆分，也不纳入待办、执行队列或排期；后续明确有需要时再恢复计划并执行。
+- **范围边界**：本次只复验 Mock 预览与交互，不代表真实后端联调；当时 UI-10 计数为 7/52，此后 LxActionButtons 已关闭并更新至 8/52。
+- **当时下一步**：随后按矩阵进入的 LxActionButtons 已在 Wave 24 完成；当前交接入口为 `LxAuthImg`。`LxInputNumber` 桌面步进目标尺寸 P2 继续等待设计决策；页面操作引导暂缓，不实施、不拆分、不排期。
 
 ## [2026-10-15] lx-ui / Wave 23 LxButton Demo 键盘焦点复验
 
 - **完成范围**：完整演示锚点现在将键盘焦点交给可见标题，命名区域由标题命名；尺寸选择框键盘聚焦时显示 2px 主色外框。没有修改 `LxButton` 公开 API 或业务行为。
 - **验证结果**：文档 E2E 19/19；补充主题色断言后焦点专项回归 1/1。目标 Prettier、E2E 文件 ESLint、`git diff --check` 通过；断言覆盖键盘到达、`:focus-visible`、Light/HUD 计算色、2px 实线外框和窄屏边界。
 - **Impeccable 与代码复审**：A 初评 30/40（Good）；尺寸选择框 P2 经 A 路 Light/HUD × 桌面/320px 四视图复验关闭，旧 320px 工具栏 P3 未复现。B 三个源码检测器均为有效 `[]`/空 stderr/退出码 0；四个 Light/HUD × 桌面/390px 浏览器上下文的覆盖层注入成功，无页面错误、失败请求或 HTTP 错误。命中归因到 VitePress 代码复制控件、文档外壳/长内容及 HUD `--lx-color-primary` 令牌，不作为按钮 Demo 缺陷。代码复审指出的主题色断言 P3 已修复并复验；最终批准，无未关闭 P0–P3。
-- **证据与边界**：A 初评和复验位于 `.impeccable/critique/lxbutton-wave-2026-10-14-final/assessment-a/`，B 的检测器输出、stderr、退出码、源码指纹、浏览器 JSON 和截图位于同目录 `assessment-b/`；正式综合快照为 `.impeccable/critique/2026-10-14T16-33-46Z__linkx-fe-src-components-lxbutton-index-vue.md`。本波不增加 UI-10 全库计数，仍为 **7/52**；不代表 Vue3 宿主替换或真实后端联调。后续继续未关闭 UI-10 矩阵，`LxInputNumber` P2 等待设计决策。
+- **证据与边界**：A 初评和复验位于 `.impeccable/critique/lxbutton-wave-2026-10-14-final/assessment-a/`，B 的检测器输出、stderr、退出码、源码指纹、浏览器 JSON 和截图位于同目录 `assessment-b/`；正式综合快照为 `.impeccable/critique/2026-10-14T16-33-46Z__linkx-fe-src-components-lxbutton-index-vue.md`。本波记录时 UI-10 为 **7/52**；后续更新见 Wave 24。该记录不代表 Vue3 宿主替换或真实后端联调；`LxInputNumber` P2 仍等待设计决策。
 
 ## [2026-10-14] UI-10 / Wave 22 LxInput 严格矩阵交接
 
@@ -36,11 +45,11 @@
 - **下一步**：对 `LxTextarea` 完成全库 UI-10 严格矩阵取证；InputNumber 桌面步进目标尺寸 P2 继续等待设计决策。全库门禁完成前继续保留 Vue3 宿主 Element Plus。页面操作引导不在待办、队列或排期中，后续仅在用户明确提出需要时再恢复评估。
 - **提交边界**：组件、Demo、中文 API 与行为测试使用 `fix(lx-ui)`；Mock 预览与项目文档按白名单分开提交；项目计划、审计、地图、交接和路线图使用 `docs(project)`。`.pnpm-store/`、`.impeccable/`、`docs/.vitepress/cache/` 及根目录用户文件 `0` 均不得纳入提交。
 
-## [2026-10-15] SCOPE / 页面操作引导当前搁置，后续有需要再启动
+## [2026-10-15] SCOPE / 页面操作引导暂缓，后续按需再执行
 
-- 页面操作引导从当前执行计划中搁置：现阶段不考虑实施、不继续拆分，也不纳入待办、执行队列或排期；不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
-- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅保留需求和设计基线。后续确有需要时，按当时的页面范围、文案、交互、技术方案及后端契约重新确认，并启动实施计划。
-- 此范围调整不表示功能已经实现或验收，也不改变当前 lx-ui 与 Vue3 组件迁移顺序。
+- 页面操作引导当前暂缓：不实施、不继续拆分，也不纳入待办、执行队列或排期；不作为 lx-ui 收口、Vue3 Element Plus 替换或其他迁移任务的前置条件。
+- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅保留历史需求和设计基线。后续确有需要时再恢复计划并执行，届时按当时的页面范围、文案、交互、技术方案及后端契约重新确认。
+- 此范围说明不表示功能已经实现或验收，也不改变当前 lx-ui 与 Vue3 组件迁移顺序。
 
 ## [2026-10-13] SCOPE / 页面操作引导当前不执行，后续按需纳入计划
 

@@ -2,14 +2,21 @@
 
 ## 当前范围备注（2026-10-15）
 
-- 页面操作引导需求暂缓但未取消：当前不实施、不继续拆分，也不纳入待办、执行队列或排期；不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
-- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 保留需求和设计基线。后续用户提出需要时，重新核对页面范围、文案、交互、技术方案和后端契约，再恢复评估、拆分与排期；当前状态不代表功能已实现或验收。
+- 页面操作引导当前暂缓：不实施、不继续拆分，也不纳入待办、执行队列或排期；不作为 lx-ui 组件收口或 Vue3 Element Plus 替换的前置条件。
+- `doc/GUIDE-CONTENT-PLAN.md` 与 `doc/lx-ui/MENU-CONFIG-DESIGN.md` 仅保留历史需求和设计基线。后续确有需要时再恢复计划并执行，届时重新核对页面范围、文案、交互、技术方案和后端契约；当前状态不代表功能已实现或验收。
 
-## 2026-10-15 当前交接：Wave 23 LxButton Demo 键盘焦点复验
+## 2026-10-15 当前交接：Wave 24 LxActionButtons UI-10 严格矩阵已关闭
+
+- `LxActionButtons` 按 `design/按钮体系/` 完成严格复核，省略 `auth` 显示公开操作，显式空值/无权限时隐藏；单测 18/18、文档 E2E 9/9。Impeccable A 33/40，原权限对照 P2 关闭；B 四个 detector 均为合法 `[]`/空 stderr/退出码 0，8 个浏览器视图注入成功；独立代码复审批准，无开放 P0–P3。
+- Vue3 类型、目标 ESLint、lx-ui 类型/206 模块构建、VitePress、Stylelint、目标 Prettier 与 `git diff --check` 通过。UI-10 当前 **8/52**；不代表 Vue3 29 处宿主替换或真实权限后端联调完成。
+- A/B 原始证据和源码指纹见 `.impeccable/critique/assessment-a-actionbuttons-auth-contrast-20261015/`、`.impeccable/critique/actionbuttons-assessment-b-final-64a2951-2026-10-15/`；综合 snapshot 为 `.impeccable/critique/2026-10-15T03-34-29Z__linkx-fe-src-components-lxactionbuttons-index-vue.md`。
+- **下一波**：进入 `LxAuthImg` UI-10 严格矩阵复核；真实鉴权联调仍须等待可信后端契约与环境。页面操作引导继续暂缓，不拆分、不排期。
+
+## 2026-10-15 历史交接：Wave 23 LxButton Demo 键盘焦点复验
 
 - 完整演示区锚点聚焦到可见标题，命名区域关联标题；尺寸选择框的键盘焦点外框已补齐。文档 E2E 19/19；主题色断言补齐后焦点专项回归 1/1，Prettier、目标 ESLint 和差异检查通过。
 - Impeccable A 初评 30/40；尺寸选择器 P2 已由 A 路在 Light/HUD × 桌面/320px 四视图复验关闭，旧 320px 工具栏高度 P3 未复现。B 的三个源码检测器均为有效 `[]`/空 stderr/退出码 0；四个 Light/HUD × 桌面/390px 浏览器视图成功注入且无页面错误或失败请求。覆盖层命中已按实际元素归因；代码复审提出的主题色断言 P3 已修复，最终批准，无未关闭 P0–P3。正式快照见 `.impeccable/critique/2026-10-14T16-33-46Z__linkx-fe-src-components-lxbutton-index-vue.md`。
-- 本次不关闭 LxButton 的 UI-10 严格矩阵行，全库仍为 **7/52**。下一项继续未关闭严格矩阵；`LxInputNumber` 桌面步进尺寸 P2 仍等待设计决策。页面操作引导需求暂缓但未取消，后续由用户提出时恢复评估。
+- 本次不关闭 LxButton 的 UI-10 严格矩阵行；当时全库为 **7/52**。此后 Wave 24 关闭 LxActionButtons，当前为 8/52。`LxInputNumber` 桌面步进尺寸 P2 仍等待设计决策；页面操作引导保持暂缓，不进入待办或排期。
 
 ## 2026-10-14 当前交接：Wave 22 LxInput 严格矩阵已关闭
 

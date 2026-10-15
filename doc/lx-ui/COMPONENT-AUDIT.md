@@ -1,16 +1,24 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
-## 2026-10-15 UI-10 下一项交接：LxActionButtons
+## 2026-10-15 UI-10 / Wave 24 LxActionButtons 严格矩阵关闭
+
+- **设计与权限契约**：对照 `design/按钮体系/` 复核文字形态、三档尺寸与语义色；省略 `auth` 为公开操作，显式空值、缺少权限源或不匹配时隐藏。Demo、API 类型和权限说明一致展示并解释公开/空权限结果。
+- **验证**：定向单测 **18/18**，文档 Playwright **9/9**；Vue3 类型检查/目标 ESLint，lx-ui 类型检查与 206 模块构建、VitePress 文档构建、Stylelint、目标 Prettier 和 `git diff --check` 均通过。Mock 不连接真实权限服务。
+- **Impeccable 与代码复审**：Assessment A **33/40（Good）**，原权限对照 P2 已关闭，无开放 P0–P3；Assessment B 四个 detector 为有效 JSON `[]`、stderr 空、退出码 `0`，Light/HUD × 桌面/375px 的 8 个浏览器视图成功注入且无页面错误或失败请求。overlay 命中逐项归因，移动端 615px 根宽只在注入后出现，属于 detector 标注层副作用。独立代码复审批准，无可复现 P0–P3。
+- **证据与边界**：A 复验见 `.impeccable/critique/assessment-a-actionbuttons-auth-contrast-20261015/assessment-a-recheck.md`；B 原始证据见 `.impeccable/critique/actionbuttons-assessment-b-final-64a2951-2026-10-15/`；综合快照 `.impeccable/critique/2026-10-15T03-34-29Z__linkx-fe-src-components-lxactionbuttons-index-vue.md`，当前趋势首条 **33/40**。UI-10 更新为 **8/52**；这只关闭组件严格矩阵行，不代表 Vue3 29 处宿主替换或真实权限联调完成。
+- **下一入口**：按未关闭矩阵进入 `LxAuthImg` 严格复核；真实鉴权联调继续单独阻塞等待可信后端契约与环境。
+
+## 2026-10-15 UI-10 历史交接：LxActionButtons
 
 - 全菜单 Mock 预览与竞态 E2E 使用隔离端口 `31853` 复验 **10/10 通过**；该结果不改变 UI-10 组件矩阵关闭数 **7/52**，也不代表真实后端联调。
-- 按未关闭矩阵顺序进入 `LxActionButtons` 严格复核；已有键盘与窄屏行为证据作为支持材料，仍需按设计依据补齐当前组件、Demo、中文 API、状态、主题、响应式和浏览器证据。页面操作引导暂不实施、不继续拆分，也不纳入待办、执行队列或排期；后续明确有需要时再恢复计划并执行。
+- 当时按未关闭矩阵顺序进入 `LxActionButtons` 严格复核；该组件已于 Wave 24 关闭。旧交接时 UI-10 为 7/52，当前计数见本文件顶部 Wave 24 记录。页面操作引导继续暂缓，不进入待办、执行队列或排期。
 
 ## 2026-10-15 lx-ui / Wave 23 LxButton Demo 键盘焦点复验
 
 - **范围**：完整演示区以可见标题承接锚点焦点，命名区域通过标题建立名称；尺寸选择框增加键盘 `:focus-visible` 外框。该修复属于文档 Demo，不修改公开组件 API，也不表示 Vue3 业务宿主按钮迁移完成。
 - **验证**：文档 E2E 19/19，使用 lx-ui 专用配置、隔离端口 4177；新增主题色断言后焦点专项回归 1/1。覆盖键盘到达、`:focus-visible`、Light/HUD 计算色、2px 实线外框和边界。Prettier、目标 ESLint、`git diff --check` 通过。
 - **Impeccable 与代码复审**：A 初评 30/40（Good），尺寸选择器 P2 经 Light/HUD × 1440/320px 四视图复验关闭，旧 320px 工具栏 P3 未复现。B 三个源码检测器输出均为有效 JSON `[]`、stderr 空、退出码 0；四个 Light/HUD × 桌面/390px 视图注入成功且无页面错误、失败请求或 HTTP 错误。覆盖层命中逐项归因：HUD 按钮符合 `--lx-color-primary` 设计令牌，复制按钮、长文档容器、正文规则和导航图标属文档外壳或规则覆盖，不作为按钮 Demo 缺陷；`[]` 只表示静态规则零命中。代码复审曾发现焦点颜色断言缺口，已补齐并复验；最终批准，无未关闭 P0–P3。正式快照见 `.impeccable/critique/2026-10-14T16-33-46Z__linkx-fe-src-components-lxbutton-index-vue.md`。
-- **矩阵边界**：不增加 UI-10 全库关闭数，仍为 **7/52**。`LxButton` 的全库严格矩阵行保持开放；既有组件审查与本次文档 Demo 修复均不替代完整 UI-10 行验收。A/B 证据见 `.impeccable/critique/lxbutton-wave-2026-10-14-final/`。
+- **矩阵边界**：本记录产生时不增加 UI-10 全库关闭数，当时为 **7/52**。`LxButton` 的全库严格矩阵行保持开放；既有组件审查与本次文档 Demo 修复均不替代完整 UI-10 行验收。A/B 证据见 `.impeccable/critique/lxbutton-wave-2026-10-14-final/`。
 
 ## 2026-10-14 UI-10 / Wave 22 LxInput 严格矩阵关闭
 
@@ -293,62 +301,62 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 
 ### 52 个公开组件逐项验收矩阵
 
-本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **7/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
+本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **8/52 已按统一严格口径关闭**；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
 
-| 公开组件             | 唯一对照源                                        | 当前矩阵状态                                                                                                                                                                               |
-| -------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `LxActionButtons`    | `design/按钮体系/`                                | **下一项 UI-10 严格复核**；保留既有键盘/窄屏行为证据，仍需补齐设计对照、状态/主题、响应式与浏览器审查证据                                                                                  |
-| `LxAuthImg`          | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；真实鉴权联调另列                                                                                                                                                               |
-| `LxBreadcrumb`       | `DESIGN-SPEC.md` + 导航规范                       | 待严格复核；保留现有宿主导航契约                                                                                                                                                           |
-| `LxButton`           | `design/按钮体系/`                                | 2026-10-12 A 32/40、B 8/8 场景；2026-10-15 Demo 锚点/焦点复验 A 初评 30/40，尺寸选择器 P2 已关闭、旧窄屏工具栏 P3 未复现；主题色测试复审 P3 已关闭；全库 UI-10 严格行仍开放，不增加关闭数 |
-| `LxCascader`         | `design/表单控件八件套/`（无专属画板）            | 当前版单测/E2E、A/B 和代码复审完成；P2 为移动换行密度、错误旧状态、主题入口；按 Select 控件外形与状态令牌映射                                                                              |
-| `LxCheckbox`         | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；14px 三态、hover/focus/disabled、旧 label 兼容、Light/HUD 与 44px 触屏均有当前版证据；23/23 单测及 16/16 合并 E2E 见 Wave 19 记录 |
-| `LxCheckboxGroup`    | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/12px 垂直间距、半选、禁用继承、值过滤及键盘/触屏行为均有当前版证据；剩余仅非阻塞 P3          |
-| `LxCodeSlot`         | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；代码区层级、复制反馈与窄屏                                                                                                                                                     |
-| `LxDatePicker`       | `design/表单控件八件套/`                          | Wave 2 E2E 16/16、单测 39/39；A 31/40、B 9 场景、代码复审通过；4 项 P2/P3 未结，严格矩阵行保持打开                                                                                         |
-| `LxDescriptions`     | `design/详情描述行 Descriptions/`                 | 部分证据；19/20 阶段审查不是正式关闭                                                                                                                                                       |
-| `LxDialog`           | `DESIGN-SPEC.md` + Dialog API/Demo                | Wave 5 实现/17 项定向单测与文档证据完成；正式 Critique 待收口（焦点、确认、窄屏和动效）                                                                                                    |
-| `LxDrawer`           | `DESIGN-SPEC.md` + Drawer API/Demo                | Wave 5 实现/文档证据完成；移动端稳态截图已复拍；正式 Critique 待收口（宽度、焦点、遮罩与窄屏）                                                                                             |
-| `LxDutyCalendar`     | `DESIGN-SPEC.md` + Calendar API/Demo              | 待严格复核；无专属画板，需记录规范映射                                                                                                                                                     |
-| `LxDynamicForm`      | `design/表单控件八件套/`                          | 实现、46 项单测、13 项文档 E2E 和代码复审通过；正式 Critique 收口中；`LxForm` 设计差异及统一 UI-10 严格矩阵仍开放                                                                          |
-| `LxEmpty`            | `DESIGN-SPEC.md` + Empty API/Demo                 | Wave 5 实现/文档证据完成；正式 Critique 待收口，阶段性评分不替代本矩阵                                                                                                                     |
-| `LxForm`             | `design/表单控件八件套/`                          | UI-13 实现/回归通过；首错焦点已修复并有桌面/375px 浏览器证据；正式 Critique 仍待综合关闭（移动提示层级与整库门槛）                                                                         |
-| `LxFormErrorBanner`  | `DESIGN-SPEC.md` + 表单错误态规范                 | Wave 5 实现/文档证据完成；正式 Critique 待收口（图标、文案、语义色及窄屏）                                                                                                                 |
-| `LxFormItem`         | `design/表单控件八件套/`                          | UI-13 本波；错误/必填 ARIA 与样式待正式 Critique                                                                                                                                           |
-| `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                                                                                                     |
-| `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | A/B 与代码复审通过；真实读屏及权限菜单数据未覆盖，暂不计入严格矩阵                                                                                                                         |
+| 公开组件             | 唯一对照源                                        | 当前矩阵状态                                                                                                                                                                                 |
+| -------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LxActionButtons`    | `design/按钮体系/`                                | **已关闭（Wave 24）**；33/40，原权限对照 P2 关闭，18/18 单测、9/9 文档 E2E、8 个 A/B 浏览器视图及独立代码复审通过；Vue3 宿主替换待 UI-04 |
+| `LxAuthImg`          | `DESIGN-SPEC.md` + 组件 API/Demo                  | **下一项 UI-10 严格复核**；真实鉴权联调另列阻塞                                                                                                                                               |
+| `LxBreadcrumb`       | `DESIGN-SPEC.md` + 导航规范                       | 待严格复核；保留现有宿主导航契约                                                                                                                                                             |
+| `LxButton`           | `design/按钮体系/`                                | 2026-10-12 A 32/40、B 8/8 场景；2026-10-15 Demo 锚点/焦点复验 A 初评 30/40，尺寸选择器 P2 已关闭、旧窄屏工具栏 P3 未复现；主题色测试复审 P3 已关闭；全库 UI-10 严格行仍开放，不增加关闭数    |
+| `LxCascader`         | `design/表单控件八件套/`（无专属画板）            | 当前版单测/E2E、A/B 和代码复审完成；P2 为移动换行密度、错误旧状态、主题入口；按 Select 控件外形与状态令牌映射                                                                                |
+| `LxCheckbox`         | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；14px 三态、hover/focus/disabled、旧 label 兼容、Light/HUD 与 44px 触屏均有当前版证据；23/23 单测及 16/16 合并 E2E 见 Wave 19 记录                                     |
+| `LxCheckboxGroup`    | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/12px 垂直间距、半选、禁用继承、值过滤及键盘/触屏行为均有当前版证据；剩余仅非阻塞 P3                                                                         |
+| `LxCodeSlot`         | `DESIGN-SPEC.md` + 组件 API/Demo                  | 待严格复核；代码区层级、复制反馈与窄屏                                                                                                                                                       |
+| `LxDatePicker`       | `design/表单控件八件套/`                          | Wave 2 E2E 16/16、单测 39/39；A 31/40、B 9 场景、代码复审通过；4 项 P2/P3 未结，严格矩阵行保持打开                                                                                           |
+| `LxDescriptions`     | `design/详情描述行 Descriptions/`                 | 部分证据；19/20 阶段审查不是正式关闭                                                                                                                                                         |
+| `LxDialog`           | `DESIGN-SPEC.md` + Dialog API/Demo                | Wave 5 实现/17 项定向单测与文档证据完成；正式 Critique 待收口（焦点、确认、窄屏和动效）                                                                                                      |
+| `LxDrawer`           | `DESIGN-SPEC.md` + Drawer API/Demo                | Wave 5 实现/文档证据完成；移动端稳态截图已复拍；正式 Critique 待收口（宽度、焦点、遮罩与窄屏）                                                                                               |
+| `LxDutyCalendar`     | `DESIGN-SPEC.md` + Calendar API/Demo              | 待严格复核；无专属画板，需记录规范映射                                                                                                                                                       |
+| `LxDynamicForm`      | `design/表单控件八件套/`                          | 实现、46 项单测、13 项文档 E2E 和代码复审通过；正式 Critique 收口中；`LxForm` 设计差异及统一 UI-10 严格矩阵仍开放                                                                            |
+| `LxEmpty`            | `DESIGN-SPEC.md` + Empty API/Demo                 | Wave 5 实现/文档证据完成；正式 Critique 待收口，阶段性评分不替代本矩阵                                                                                                                       |
+| `LxForm`             | `design/表单控件八件套/`                          | UI-13 实现/回归通过；首错焦点已修复并有桌面/375px 浏览器证据；正式 Critique 仍待综合关闭（移动提示层级与整库门槛）                                                                           |
+| `LxFormErrorBanner`  | `DESIGN-SPEC.md` + 表单错误态规范                 | Wave 5 实现/文档证据完成；正式 Critique 待收口（图标、文案、语义色及窄屏）                                                                                                                   |
+| `LxFormItem`         | `design/表单控件八件套/`                          | UI-13 本波；错误/必填 ARIA 与样式待正式 Critique                                                                                                                                             |
+| `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                                                                                                       |
+| `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | A/B 与代码复审通过；真实读屏及权限菜单数据未覆盖，暂不计入严格矩阵                                                                                                                           |
 | `LxInput`            | `design/表单控件八件套/`                          | **已关闭（Wave 22）**；13 项单测、共享文档 E2E 11/11、Impeccable A 34/40、B 三目标 detector 与四视图证据、代码复审通过；桌面清空入口差异已记录                                               |
-| `LxInputNumber`      | `design/表单控件八件套/`                          | 当前版 A 29/40、B 四目标 detector 均为合法 `[]`，四个 Light/HUD × 桌面/375px 视图有证据；桌面步进目标 13/15/19px 的 P2 未决，严格矩阵行开放，不增加 UI-10 全库关闭数 |
-| `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 待严格复核；数值、语义色、趋势、进度和窄屏                                                                                                                                                 |
-| `LxNavbar`           | `DESIGN-SPEC.md` + Navbar API/Demo                | 待严格复核；导航密度、焦点、菜单与窄屏                                                                                                                                                     |
-| `LxNodeBadge`        | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；节点状态、字号和对齐                                                                                                                                                           |
-| `LxPageCard`         | `DESIGN-SPEC.md` + PageCard API/Demo              | Wave 5 实现/文档证据完成；正式 Critique 待收口（表面、内距、加载及插槽态）                                                                                                                 |
-| `LxPagination`       | `DESIGN-SPEC.md` + Pagination API/Demo            | 待严格复核；密度、分页按钮、背景与窄屏                                                                                                                                                     |
-| `LxPasswordInput`    | `design/表单控件八件套/` + PasswordInput API/Demo | A 32/40、B overlay/浏览器、代码复审通过；10/10 单测、9/9 E2E；宿主校验失败集成示例 P2 待 Form 波次，因此严格行保持打开                                                                     |
-| `LxProTable`         | `DESIGN-SPEC.md` + ProTable API/Demo              | 待严格复核；表头/行密度、选择、空错态和滚动                                                                                                                                                |
-| `LxRadio`            | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；14px 靶环/6px 靶心、横纵选中色差、中文播报、禁用、减少动效与 44px 触屏均有当前版证据                    |
-| `LxRadioGroup`       | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/8px 垂直间距、方向键、禁用继承、历史只读值及 Light/HUD 行为均有当前版证据                   |
-| `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 单测 9/9、文档 E2E 3/3；修后 A/B 已补独立浏览器/overlay 证据，Demo 增加四字段标准态；最终综合快照待收口，严格矩阵保持打开                                                                  |
-| `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                                                                                                       |
-| `LxSelect`           | `design/表单控件八件套/`                          | **已关闭（Wave 20）**；桌面 32px、390px 触控目标/选项行 44px；定向单测 15/15、文档 E2E 8/8、A/B 36/40 与六场景浏览器证据、代码复审无未关闭 P0–P2；目录密度 P3 留后续整理 |
-| `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                                                                          |
-| `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                                                                                               |
-| `LxSidebar`          | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；rail/expanded、菜单态、动效和抽屉                                                                                                                                              |
-| `LxSidebarBrand`     | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；品牌锁定区、折叠态与对齐                                                                                                                                                       |
-| `LxSidebarFooter`    | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；底部操作、焦点与窄屏                                                                                                                                                           |
-| `LxSidebarGroup`     | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；分组层级、展开态和动效                                                                                                                                                         |
-| `LxSidebarItem`      | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；选中/禁用/悬停/键盘态                                                                                                                                                          |
-| `LxSplitLayout`      | `DESIGN-SPEC.md` + SplitLayout API/Demo           | 待严格复核；分栏比例、拖动、键盘和折叠态                                                                                                                                                   |
-| `LxStatusDot`        | `DESIGN-SPEC.md` §2 + 状态点 API/Demo             | 待严格复核；状态语义、动画和减少动效                                                                                                                                                       |
-| `LxStatusSwitch`     | `design/状态开关 StatusSwitch/`                   | 单测 17/17、文档 E2E 3/3；修后 A/B 已覆盖 HUD Teleport、ARIA 行名、确认影响/审计上下文和 375px 路径；最终综合快照待收口，Vue3 宿主替换仍待 UI-04                                           |
-| `LxSwitch`           | `design/表单控件八件套/`                          | 组件级复核已完成；共享壳层与宿主契约仍跟踪，暂不计入全库严格关闭                                                                                                                           |
-| `LxTabsBar`          | `DESIGN-SPEC.md` + TabsBar API/Demo               | 待严格复核；页签层级、关闭/拖动和横向滚动                                                                                                                                                  |
-| `LxTag`              | `DESIGN-SPEC.md` §2 + Tag API/Demo                | 待严格复核；语义色、尺寸、关闭态与对比度                                                                                                                                                   |
-| `LxTextarea`         | `design/表单控件八件套/`                          | 严格矩阵已关闭；单测 14/14、文档 E2E 11/11、主题/状态浏览器证据、正式 Impeccable A/B 与代码复审通过；记录 8/12px 间距令牌对照设计稿 10px 及约 2px 高度差；全库 6/52                                               |
+| `LxInputNumber`      | `design/表单控件八件套/`                          | 当前版 A 29/40、B 四目标 detector 均为合法 `[]`，四个 Light/HUD × 桌面/375px 视图有证据；桌面步进目标 13/15/19px 的 P2 未决，严格矩阵行开放，不增加 UI-10 全库关闭数                         |
+| `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 待严格复核；数值、语义色、趋势、进度和窄屏                                                                                                                                                   |
+| `LxNavbar`           | `DESIGN-SPEC.md` + Navbar API/Demo                | 待严格复核；导航密度、焦点、菜单与窄屏                                                                                                                                                       |
+| `LxNodeBadge`        | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；节点状态、字号和对齐                                                                                                                                                             |
+| `LxPageCard`         | `DESIGN-SPEC.md` + PageCard API/Demo              | Wave 5 实现/文档证据完成；正式 Critique 待收口（表面、内距、加载及插槽态）                                                                                                                   |
+| `LxPagination`       | `DESIGN-SPEC.md` + Pagination API/Demo            | 待严格复核；密度、分页按钮、背景与窄屏                                                                                                                                                       |
+| `LxPasswordInput`    | `design/表单控件八件套/` + PasswordInput API/Demo | A 32/40、B overlay/浏览器、代码复审通过；10/10 单测、9/9 E2E；宿主校验失败集成示例 P2 待 Form 波次，因此严格行保持打开                                                                       |
+| `LxProTable`         | `DESIGN-SPEC.md` + ProTable API/Demo              | 待严格复核；表头/行密度、选择、空错态和滚动                                                                                                                                                  |
+| `LxRadio`            | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；14px 靶环/6px 靶心、横纵选中色差、中文播报、禁用、减少动效与 44px 触屏均有当前版证据                                                                                  |
+| `LxRadioGroup`       | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/8px 垂直间距、方向键、禁用继承、历史只读值及 Light/HUD 行为均有当前版证据                                                                                   |
+| `LxSearchBar`        | `design/检索面板 SearchBar/`                      | 单测 9/9、文档 E2E 3/3；修后 A/B 已补独立浏览器/overlay 证据，Demo 增加四字段标准态；最终综合快照待收口，严格矩阵保持打开                                                                    |
+| `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 待严格复核；变体、图标、标签和长标题                                                                                                                                                         |
+| `LxSelect`           | `design/表单控件八件套/`                          | **已关闭（Wave 20）**；桌面 32px、390px 触控目标/选项行 44px；定向单测 15/15、文档 E2E 8/8、A/B 36/40 与六场景浏览器证据、代码复审无未关闭 P0–P2；目录密度 P3 留后续整理                     |
+| `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                                                                            |
+| `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                                                                                                 |
+| `LxSidebar`          | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；rail/expanded、菜单态、动效和抽屉                                                                                                                                                |
+| `LxSidebarBrand`     | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；品牌锁定区、折叠态与对齐                                                                                                                                                         |
+| `LxSidebarFooter`    | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；底部操作、焦点与窄屏                                                                                                                                                             |
+| `LxSidebarGroup`     | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；分组层级、展开态和动效                                                                                                                                                           |
+| `LxSidebarItem`      | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；选中/禁用/悬停/键盘态                                                                                                                                                            |
+| `LxSplitLayout`      | `DESIGN-SPEC.md` + SplitLayout API/Demo           | 待严格复核；分栏比例、拖动、键盘和折叠态                                                                                                                                                     |
+| `LxStatusDot`        | `DESIGN-SPEC.md` §2 + 状态点 API/Demo             | 待严格复核；状态语义、动画和减少动效                                                                                                                                                         |
+| `LxStatusSwitch`     | `design/状态开关 StatusSwitch/`                   | 单测 17/17、文档 E2E 3/3；修后 A/B 已覆盖 HUD Teleport、ARIA 行名、确认影响/审计上下文和 375px 路径；最终综合快照待收口，Vue3 宿主替换仍待 UI-04                                             |
+| `LxSwitch`           | `design/表单控件八件套/`                          | 组件级复核已完成；共享壳层与宿主契约仍跟踪，暂不计入全库严格关闭                                                                                                                             |
+| `LxTabsBar`          | `DESIGN-SPEC.md` + TabsBar API/Demo               | 待严格复核；页签层级、关闭/拖动和横向滚动                                                                                                                                                    |
+| `LxTag`              | `DESIGN-SPEC.md` §2 + Tag API/Demo                | 待严格复核；语义色、尺寸、关闭态与对比度                                                                                                                                                     |
+| `LxTextarea`         | `design/表单控件八件套/`                          | 严格矩阵已关闭；单测 14/14、文档 E2E 11/11、主题/状态浏览器证据、正式 Impeccable A/B 与代码复审通过；记录 8/12px 间距令牌对照设计稿 10px 及约 2px 高度差；全库 6/52                          |
 | `LxTransferPanel`    | `design/虚拟滚动树 + 双栏穿梭/`                   | 当前实现、30 项单测、文档 E2E 28/28、名称/编码筛选及移动触控修复完成；桌面 32px 基准行高、320–420px 为 64px、421px 起为 44px；最新断言修订代码复审与正式 A/B 收口中；全库严格矩阵当前为 6/52 |
-| `LxTreeSelect`       | `design/表单控件八件套/` + TreeSelect API/Demo    | 当前版单测/E2E、A/B 和代码复审完成；P3 为长节点换行 E2E 覆盖增强，严格矩阵仍待全库复验                                                                                                     |
-| `LxUpload`           | `design/上传拖拽区 Upload/`                       | 受控模型、进度/失败/重试/取消/移除已有组件行为证据；设计图严格对照、提示文字视觉复核、正式 Critique 收口中                                                                                 |
-| `LxVirtualTree`      | `design/虚拟滚动树 + 双栏穿梭/`                   | 当前 34 项行为单测、文档 E2E 13/13，含自定义 `filterMethod`、44px 移动触控和跨行高断点焦点回归；与 TransferPanel 联合参与本次严格 A/B，UI-10 全库矩阵仍待关闭                              |
+| `LxTreeSelect`       | `design/表单控件八件套/` + TreeSelect API/Demo    | 当前版单测/E2E、A/B 和代码复审完成；P3 为长节点换行 E2E 覆盖增强，严格矩阵仍待全库复验                                                                                                       |
+| `LxUpload`           | `design/上传拖拽区 Upload/`                       | 受控模型、进度/失败/重试/取消/移除已有组件行为证据；设计图严格对照、提示文字视觉复核、正式 Critique 收口中                                                                                   |
+| `LxVirtualTree`      | `design/虚拟滚动树 + 双栏穿梭/`                   | 当前 34 项行为单测、文档 E2E 13/13，含自定义 `filterMethod`、44px 移动触控和跨行高断点焦点回归；与 TransferPanel 联合参与本次严格 A/B，UI-10 全库矩阵仍待关闭                                |
 
 ---
 
@@ -513,14 +521,14 @@ el-divider(12)、el-color-picker(6)、el-menu(3)、el-alert(3)、el-collapse(2)�
 
 ### B. 已覆盖但存在交互差异 ⚠️（需设计决策）
 
-| #   | 差异点                 | 项目现状                                                               | lx-ui 现状                                    | 建议                                                                            |
-| --- | ---------------------- | ---------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------- |
-| 1   | **表格数据模式**       | fetchApi 三模式 + 竞态取消 + mutate 乐观更新 + formatter 兼容 4 种后端 | 纯受控 data/total（P7 零请求铁律）            | 保持 P7；竞态取消/乐观更新下沉到 **useTable composable**（纯前端逻辑不违反 P7） |
-| 2   | **Message 时长**       | 3s                                                                     | 设计稿 1.6s                                   | 设计稿为准；duration 参数已有可覆盖                                             |
-| 3   | **ActionButtons 图标** | V3 带图标 + 预设语义（view/edit/delete 自动配色）                      | 纯文字（设计稿 P2 铁律"禁止图标按钮"）        | **冲突点待拍板**：遵循设计稿纯文字 vs 保留预设语义映射                          |
-| 4   | **控件密度**           | V3 `size='large'`（40px）                                              | `--lx-control-height: 32px`（设计稿紧凑密度） | 设计稿为准；迁移时控件变紧凑属预期视觉升级                                      |
-| 5   | **分页回第 1 页**      | 封装内置"切 pageSize 回第 1 页" + autoScroll                           | 纯受控，业务自行处理                          | 可加可选 `autoReset`，或文档推荐惯用法                                          |
-| 6   | **弹窗宽度**           | 500~800px 不等                                                         | 默认 672                                      | width 可覆盖，兼容 ✅                                                           |
+| #   | 差异点                 | 项目现状                                                               | lx-ui 现状                                           | 建议                                                                            |
+| --- | ---------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------- |
+| 1   | **表格数据模式**       | fetchApi 三模式 + 竞态取消 + mutate 乐观更新 + formatter 兼容 4 种后端 | 纯受控 data/total（P7 零请求铁律）                   | 保持 P7；竞态取消/乐观更新下沉到 **useTable composable**（纯前端逻辑不违反 P7） |
+| 2   | **Message 时长**       | 3s                                                                     | 设计稿 1.6s                                          | 设计稿为准；duration 参数已有可覆盖                                             |
+| 3   | **ActionButtons 图标** | V3 带图标 + 预设语义（view/edit/delete 自动配色）                      | 默认纯文字；按设计拍板 #2 可选左置图标，文字标签必需 | **已解决**：以具体拍板 #2 为准；禁止纯图标，保留既有语义映射                    |
+| 4   | **控件密度**           | V3 `size='large'`（40px）                                              | `--lx-control-height: 32px`（设计稿紧凑密度）        | 设计稿为准；迁移时控件变紧凑属预期视觉升级                                      |
+| 5   | **分页回第 1 页**      | 封装内置"切 pageSize 回第 1 页" + autoScroll                           | 纯受控，业务自行处理                                 | 可加可选 `autoReset`，或文档推荐惯用法                                          |
+| 6   | **弹窗宽度**           | 500~800px 不等                                                         | 默认 672                                             | width 可覆盖，兼容 ✅                                                           |
 
 ### C. 未覆盖 — EP 原生组件（不封装，但**桥接样式层需补齐**）⚠️
 

@@ -3,7 +3,7 @@
 ## 2026-10-15 全菜单 Mock 预览 E2E 复验
 
 - 将环境变量 `MOCK_PREVIEW_PORT` 设为 `31853` 后运行 `pnpm exec playwright test --config=playwright.preview.config.ts` 隔离重跑，共 **10/10 通过**；覆盖菜单与首屏样例、ColForm 请求竞态、北向 Mock CRUD、轮播分页、AuthImg 错误恢复和减少动效。
-- 此结果仅验证本地 Mock 预览与交互，不代表真实后端联调；未占用 `30847` 用户预览端口。下一项按组件审计矩阵进入 `LxActionButtons` UI-10 严格复核。页面操作引导暂不实施、不继续拆分，也不纳入待办、执行队列或排期；后续明确有需要时再恢复计划并执行。
+- 此结果仅验证本地 Mock 预览与交互，不代表真实后端联调；未占用 `30847` 用户预览端口。随后进入的 `LxActionButtons` UI-10 严格复核已于 Wave 24 关闭；当前组件矩阵下一项为 `LxAuthImg`。页面操作引导暂缓，不实施、不拆分、不排期。
 
 ## 2026-10-14 Wave 21：LxTextarea 严格矩阵收口与 E2E 复验
 
@@ -299,7 +299,7 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 
 `LxTransferPanel` 已对照 `design/虚拟滚动树 + 双栏穿梭/` 补齐 5:2:5、380px `border-box` 面板、左右筛选、筛选范围批量操作、`code/status/statusTone`、树外既有键与未加载回显/确认、空/加载/错误和 44px 移动端触控。TransferPanel 当前 30 项单测、文档 E2E 28/28；VirtualTree 当前 34 项单测、文档 E2E 13/13，合计单测 64/64。桌面树项基准行高为 32px，TransferPanel 在 320–420px 窄屏为 64px、421px 起为 44px，VirtualTree 窄屏行高为 44px。未知状态字符串按原值显示，原型键映射缺陷已由 `constructor` 回归关闭。Vue3 `DataPermissionTree` 仍是业务实现，UI-04 必须逐项比对 props、实例 exposes、父子勾选、已选项映射和变更回传，再做该宿主的 Mock/E2E。最终统一冻结版 Impeccable A/B、snapshot/trend 仍待归档，UI-10 仍为 0/52。
 
-`LxActionButtons` 库级证据已补齐：3 项单测和 3 项文档 Playwright 覆盖隐藏/禁用项、click 事件、溢出操作、键盘展开、Escape 焦点恢复、外部点击/焦点移出收起、375px 44×44px 触控、HUD 深色和减少动效。Vue3 的 29 处引用仍使用宿主组件；UI-04 需保留数组配置与预设动作、原图标映射、单项 `onClick`、gap、禁用及权限过滤语义，不能直接机械替换。
+`LxActionButtons` 已完成 UI-10 严格复核：当前单测 18/18、文档 Playwright 9/9，A 33/40、B 八视图 overlay 与独立代码复审通过。Vue3 的 29 处引用仍使用宿主组件；UI-04 需保留数组配置与预设动作、原图标映射、单项 `onClick`、gap、禁用及权限过滤语义，不能直接机械替换。当前 UI-10 计数为 8/52；下一矩阵项是 `LxAuthImg`。
 
 `LxSplitLayout` 库级 API/Demo、3 项单测和 3 项文档 Playwright 已完成；桌面折叠/键盘拖动限宽、375px 局部滚动与主题状态通过。该组件目前尚未接入 Vue3 业务页；UI-04 需按页面对照树/表工作区契约并回归。正式 Impeccable Critique 仍待 UI-10 候选闭环后执行。
 

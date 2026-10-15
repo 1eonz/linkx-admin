@@ -304,7 +304,7 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 | 其他高频组件         | 类型检查、组件库构建及文档构建通过                                                                                                                                                                                                                                                   | 按宿主实际采用范围补行为单测、状态 Demo、键盘/窄屏/主题浏览器验收                                                                                                              |
 | `LxEmpty`            | API/Demo 已对齐 64px/48px 尺寸、`imageSize` 兼容和 `default`/`footer` 插槽；历史阶段性评审 28/40、修正后 34/40，均未满足 skill 正式 Critique 的独立评审和快照要求；detector `[]` 只表示对应源码静态零命中                                                                            | UI-11 正式组件/动效审查仍待 UI-10 闭环后按 skill 补齐；Vue3 15 处 `el-empty` 尚未替换，之后按实际 `image-size`/`class` 用法逐页回归                                            |
 
-`LxActionButtons` 已补 disabled 原生按钮、可点按的「更多」展开、Escape 焦点返回、失焦/外部点击收起和长文本窄屏约束；独立 API 示例配有 3 项单测与 3 项文档 Playwright，覆盖操作事件、隐藏项、键盘、375px 44×44px 触控尺寸、HUD 深色和减少动效。Vue3 仍有 29 处使用宿主 `ActionButtons`，组件替换和契约适配尚未开始；整库 Impeccable 审查仍在候选组件闭环之后。
+`LxActionButtons` 已按 `design/按钮体系/` 完成 UI-10 严格矩阵复核；当前 18 项单测、9 项文档 Playwright、A 33/40、B 八视图和代码复审均通过，显式空权限与公开操作的 Demo P2 已关闭。Vue3 仍有 29 处使用宿主 `ActionButtons`，组件替换和契约适配尚未开始；真实权限后端未联调，整库 Impeccable 审查仍待全部候选闭环。
 
 ## 多场景矩阵
 

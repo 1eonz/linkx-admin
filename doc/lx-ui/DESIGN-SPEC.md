@@ -39,10 +39,10 @@ Element Plus 桥接缺口已登记：`linkx-fe/src/components/LxForm/demo/contro
 - **Why**：管理端单屏状态元素可达数百个（表格每行 1-3 个状态），色块标签会形成大面积噪声；圆点面积小、颜色语义唯一，扫视效率最高。stitch 设计源中所有表格行、侧边栏徽章、时间线节点均遵循此规则。
 - **何时不适用**：状态需要携带**文字信息**且该文字不能从行内其他列推断时（如"临时离岗(巡查)"），改用 `LxTag`（浅底深字），但仍建议前置 `LxStatusDot`。
 
-### P2. 表格行内操作用纯文字
+### P2. 表格行内操作保留文字标签
 
-- **定义**：表格行内操作按钮一律纯文字链接（`LxActionButtons`），禁止图标按钮。
-- **Why**：行内操作数量多（编辑/删除/授权/重置密码...），图标需记忆、易歧义；文字按钮零学习成本。溢出折叠进"更多"下拉。
+- **定义**：`LxActionButtons` 默认使用纯文字链接；可按设计拍板 #2 在文字左侧添加辅助图标，但每项必须保留文字标签，禁止纯图标行内操作。
+- **Why**：行内操作数量多（编辑/删除/授权/重置密码...），文字标签能直接表达操作含义；图标只辅助识别，不得替代文字。超出项折叠进"更多"下拉。
 - **何时不适用**：卡片角落、工具栏（toolbar）等**非行内**场景可以用图标按钮（面积大、密度低）。
 
 ### P3. 输入框纯净
@@ -87,15 +87,15 @@ Element Plus 桥接缺口已登记：`linkx-fe/src/components/LxForm/demo/contro
 
 ### 2.1 状态总表
 
-| LxStatus | 色彩 token | 圆点色值 | 浅背景 token | 语义（唯一） | 典型业务场景 |
-|---|---|---|---|---|---|
-| `online` | `--lx-color-success` | `#67c23a` | `--lx-color-success-light` (#f0f9eb) | 正常/在线/在岗/已连接 | 设备在线、人员在岗、网关连通、License 正常 |
-| `processing` | `--lx-color-primary-container` | `#409eff` | `--lx-color-primary-light` (#ecf5ff) | 进行中/流转中/换班中 | 任务流转、数据同步中、审批中 |
-| `busy` | `--lx-color-warning` | `#e6a23c` | `--lx-color-warning-light` (#fdf6ec) | 忙碌/临时离岗/降级/待处理 | 临时离岗(巡查)、队列积压、License 即将到期 |
-| `error` | `--lx-color-error` | `#f56c6c` | `--lx-color-error-light` (#fef0f0) | 错误/断开/紧急/高危 | 设备离线故障、布控告警、紧急警情、鉴权失败 |
-| `offline` | `--lx-color-info` | `#909399` | `--lx-color-info-light` (#f4f4f5) | 离线/停用/归档/只读 | 停用账号、归档群组、历史数据 |
-| `success` | 同 `online` | — | — | （别名）动作成功反馈场景 | 保存成功 toast、任务办结 |
-| `warning` | 同 `busy` | — | — | （别名）警示反馈场景 | 确认框警示文案 |
+| LxStatus     | 色彩 token                     | 圆点色值  | 浅背景 token                         | 语义（唯一）              | 典型业务场景                               |
+| ------------ | ------------------------------ | --------- | ------------------------------------ | ------------------------- | ------------------------------------------ |
+| `online`     | `--lx-color-success`           | `#67c23a` | `--lx-color-success-light` (#f0f9eb) | 正常/在线/在岗/已连接     | 设备在线、人员在岗、网关连通、License 正常 |
+| `processing` | `--lx-color-primary-container` | `#409eff` | `--lx-color-primary-light` (#ecf5ff) | 进行中/流转中/换班中      | 任务流转、数据同步中、审批中               |
+| `busy`       | `--lx-color-warning`           | `#e6a23c` | `--lx-color-warning-light` (#fdf6ec) | 忙碌/临时离岗/降级/待处理 | 临时离岗(巡查)、队列积压、License 即将到期 |
+| `error`      | `--lx-color-error`             | `#f56c6c` | `--lx-color-error-light` (#fef0f0)   | 错误/断开/紧急/高危       | 设备离线故障、布控告警、紧急警情、鉴权失败 |
+| `offline`    | `--lx-color-info`              | `#909399` | `--lx-color-info-light` (#f4f4f5)    | 离线/停用/归档/只读       | 停用账号、归档群组、历史数据               |
+| `success`    | 同 `online`                    | —         | —                                    | （别名）动作成功反馈场景  | 保存成功 toast、任务办结                   |
+| `warning`    | 同 `busy`                      | —         | —                                    | （别名）警示反馈场景      | 确认框警示文案                             |
 
 > **备注**：`success/warning` 是给**动作反馈**（Toast/Tag）用的别名，状态指示（Dot/Switch/Metric）一律用 `online/busy`。这样"状态点绿=设备在岗"、"toast 绿=操作成功"两个心智模型互不干扰。
 
@@ -106,24 +106,30 @@ Element Plus 桥接缺口已登记：`linkx-fe/src/components/LxForm/demo/contro
 ```ts
 // apps/admin-vue3/src/views/nodeManage/statusMap.ts —— 业务侧职责
 export const NODE_STATUS: Record<number, LxStatus> = {
-  0: 'offline', 1: 'processing', 2: 'processing', 3: 'error',
-  4: 'online',  5: 'busy',       6: 'error',      7: 'processing',
-};
+  0: 'offline',
+  1: 'processing',
+  2: 'processing',
+  3: 'error',
+  4: 'online',
+  5: 'busy',
+  6: 'error',
+  7: 'processing',
+}
 ```
 
 现有 `StatusDot.code`(0-7) 兼容逻辑已覆盖上述映射，迁移期保留，稳定后业务侧收敛到显式映射。
 
 ### 2.3 状态 × 组件适用矩阵
 
-| 组件 | online | processing | busy | error | offline |
-|---|:-:|:-:|:-:|:-:|:-:|
-| LxStatusDot | ✅+呼吸动画 | ✅ | ✅ | ✅（可叠加 tacticalBlink） | ✅ |
-| LxTag | ✅ | ✅ | ✅ | ✅ | ✅ |
-| LxMetricCard.badge | ✅ | ✅ | ✅ | ✅ | ✅ |
-| LxNavbar.networkStatus | ✅ | — | ✅ | ✅ | — |
-| LxSidebarItem.badgeType | ✅ | ✅ | ✅ | ✅ | — |
-| LxToast | —（用 success） | — | warning | error | info* |
-| LxConfirmDialog | — | — | — | danger 属性 | — |
+| 组件                    |     online      | processing |  busy   |           error            | offline |
+| ----------------------- | :-------------: | :--------: | :-----: | :------------------------: | :-----: |
+| LxStatusDot             |   ✅+呼吸动画   |     ✅     |   ✅    | ✅（可叠加 tacticalBlink） |   ✅    |
+| LxTag                   |       ✅        |     ✅     |   ✅    |             ✅             |   ✅    |
+| LxMetricCard.badge      |       ✅        |     ✅     |   ✅    |             ✅             |   ✅    |
+| LxNavbar.networkStatus  |       ✅        |     —      |   ✅    |             ✅             |    —    |
+| LxSidebarItem.badgeType |       ✅        |     ✅     |   ✅    |             ✅             |    —    |
+| LxToast                 | —（用 success） |     —      | warning |           error            |  info*  |
+| LxConfirmDialog         |        —        |     —      |    —    |        danger 属性         |    —    |
 
 *LxToast 沿用 el-message 四型：success/warning/error/info，不接入 LxStatus 枚举（反馈≠状态）。
 
@@ -133,69 +139,69 @@ export const NODE_STATUS: Record<number, LxStatus> = {
 
 ### 3.1 品牌色
 
-| Token | 值 | 备注（用途 / 边界 / 替代） |
-|---|---|---|
-| `--lx-color-primary` | `#0060a9` | **唯一主色**。主按钮、激活 Tab、链接、选中态、图标强调。**禁用**于大面积背景（会压过内容）；大面积请用 `--lx-color-primary-light`。hover 态用 `#00508f`（计算值，token 化为 `--lx-color-primary-hover`） |
-| `--lx-color-primary-container` | `#409eff` | 亮一档的容器蓝。用于：深色侧边栏上的激活文字/图标（对比 `#0060a9` 在深底上不够亮）、`processing` 状态色、进度条填充（stitch Card2 用法）。**注意**：不是按钮色，按钮一律 `primary` |
-| `--lx-color-primary-light` | `#ecf5ff` | 主色 95% 浅底。用于：Tag 浅底、hover 行背景替代灰、选中项底色。当需要"主色暗示但零攻击性"时用它 |
-| `--lx-color-on-primary` | `#ffffff` | 主色底上的文字。**禁止**直接写 `#fff` |
+| Token                          | 值        | 备注（用途 / 边界 / 替代）                                                                                                                                                                               |
+| ------------------------------ | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--lx-color-primary`           | `#0060a9` | **唯一主色**。主按钮、激活 Tab、链接、选中态、图标强调。**禁用**于大面积背景（会压过内容）；大面积请用 `--lx-color-primary-light`。hover 态用 `#00508f`（计算值，token 化为 `--lx-color-primary-hover`） |
+| `--lx-color-primary-container` | `#409eff` | 亮一档的容器蓝。用于：深色侧边栏上的激活文字/图标（对比 `#0060a9` 在深底上不够亮）、`processing` 状态色、进度条填充（stitch Card2 用法）。**注意**：不是按钮色，按钮一律 `primary`                       |
+| `--lx-color-primary-light`     | `#ecf5ff` | 主色 95% 浅底。用于：Tag 浅底、hover 行背景替代灰、选中项底色。当需要"主色暗示但零攻击性"时用它                                                                                                          |
+| `--lx-color-on-primary`        | `#ffffff` | 主色底上的文字。**禁止**直接写 `#fff`                                                                                                                                                                    |
 
 ### 3.2 功能语义色
 
 均遵循 `深(文字/圆点) + 浅(背景)` 成对使用，**禁止交叉混搭**（如 warning 深色配 error 浅底）。
 
-| Token 对 | 深值 | 浅值 | 备注 |
-|---|---|---|---|
-| success | `#67c23a` | `#f0f9eb` | 唯一"正常"色。**不得**用于普通操作按钮（绿色按钮仅限"启用"类开关型动作） |
-| warning | `#e6a23c` | `#fdf6ec` | 唯一"注意"色。文字在浅底上对比度 3.1:1，**仅用于 ≥12px 粗体**文字；细小文字场景加深为 `#cf8a1e` |
-| error | `#f56c6c`（实底）/ `#b54747`（链接文字） | `#fef0f0` | 唯一"危险"色。实底危险按钮使用配套反色文字；删除链接使用深值，白底文字对比度不低于 4.5:1；HUD 深色使用 `#f78989`。**不得**用于装饰 |
-| `--lx-color-form-error` / `--lx-color-form-error-bg` | `#ba1a1a`（HUD：`#f78989`） | `#fff5f5`（HUD：`rgba(245,108,108,.15)`） | 仅用于字段校验错误文案、输入值、控件边线和浅底；与危险按钮/删除链接语义分离，来源为 `design/表单控件八件套/` |
-| info | `#909399` | `#f4f4f5` | 唯一"中性"色。次要文字、禁用态、归档态、LxCodeSlot 底色 |
+| Token 对                                             | 深值                                     | 浅值                                      | 备注                                                                                                                               |
+| ---------------------------------------------------- | ---------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| success                                              | `#67c23a`                                | `#f0f9eb`                                 | 唯一"正常"色。**不得**用于普通操作按钮（绿色按钮仅限"启用"类开关型动作）                                                           |
+| warning                                              | `#e6a23c`                                | `#fdf6ec`                                 | 唯一"注意"色。文字在浅底上对比度 3.1:1，**仅用于 ≥12px 粗体**文字；细小文字场景加深为 `#cf8a1e`                                    |
+| error                                                | `#f56c6c`（实底）/ `#b54747`（链接文字） | `#fef0f0`                                 | 唯一"危险"色。实底危险按钮使用配套反色文字；删除链接使用深值，白底文字对比度不低于 4.5:1；HUD 深色使用 `#f78989`。**不得**用于装饰 |
+| `--lx-color-form-error` / `--lx-color-form-error-bg` | `#ba1a1a`（HUD：`#f78989`）              | `#fff5f5`（HUD：`rgba(245,108,108,.15)`） | 仅用于字段校验错误文案、输入值、控件边线和浅底；与危险按钮/删除链接语义分离，来源为 `design/表单控件八件套/`                       |
+| info                                                 | `#909399`                                | `#f4f4f5`                                 | 唯一"中性"色。次要文字、禁用态、归档态、LxCodeSlot 底色                                                                            |
 
 ### 3.3 表面与边框
 
-| Token | 值 | 备注 |
-|---|---|---|
-| `--lx-bg-page` | `#f0f2f5` | 页面画布。与卡片 `#fff` 形成 5% 明度差，足够区分且不刺眼（stitch 工作区标准） |
-| `--lx-bg-card` | `#ffffff` | 所有卡片/表格/弹窗容器 |
-| `--lx-bg-card-hover` | `#f2f4f8` | 卡片 hover（诊断微卡场景，stitch 底部微卡用法） |
-| `--lx-border` | `#e4e7ed` | 卡片、表格容器外框 |
-| `--lx-border-light` | `#ebeef5` | 表格行分隔线、卡片 header 下分隔线（比外框浅，体现"外实内虚"） |
+| Token                | 值        | 备注                                                                          |
+| -------------------- | --------- | ----------------------------------------------------------------------------- |
+| `--lx-bg-page`       | `#f0f2f5` | 页面画布。与卡片 `#fff` 形成 5% 明度差，足够区分且不刺眼（stitch 工作区标准） |
+| `--lx-bg-card`       | `#ffffff` | 所有卡片/表格/弹窗容器                                                        |
+| `--lx-bg-card-hover` | `#f2f4f8` | 卡片 hover（诊断微卡场景，stitch 底部微卡用法）                               |
+| `--lx-border`        | `#e4e7ed` | 卡片、表格容器外框                                                            |
+| `--lx-border-light`  | `#ebeef5` | 表格行分隔线、卡片 header 下分隔线（比外框浅，体现"外实内虚"）                |
 
 ### 3.4 文字
 
-| Token | 值 | 用途 | 禁用场景 |
-|---|---|---|---|
-| `--lx-text-primary` | `#1d2129` | 标题、表头、指标数值 | 正文（过重） |
-| `--lx-text-regular` | `#4e5969` | 正文、表格行 | — |
+| Token                 | 值        | 用途                   | 禁用场景             |
+| --------------------- | --------- | ---------------------- | -------------------- |
+| `--lx-text-primary`   | `#1d2129` | 标题、表头、指标数值   | 正文（过重）         |
+| `--lx-text-regular`   | `#4e5969` | 正文、表格行           | —                    |
 | `--lx-text-secondary` | `#86909c` | 辅助说明、时间戳、占位 | 长正文（对比度不足） |
-| `--lx-text-on-dark` | `#ffffff` | 深底反白 | — |
+| `--lx-text-on-dark`   | `#ffffff` | 深底反白               | —                    |
 
 ### 3.5 侧边栏专项（设计源：stitch_侧边栏 `_2` 展开态）
 
-| Token | 值 | 备注 |
-|---|---|---|
-| `--lx-sidebar-bg` | `#0c1424` | 展开态背景（`_2`）。比 rail 态 `#131b27` 更深——因为展开态有标题文字，需要更深底衬托；rail 态只有图标，背景可略浅 |
-| `--lx-sidebar-bg-rail` | `#131b27` | rail 态背景（`_1`） |
-| `--lx-sidebar-bg-header` | `#090f1b` | 品牌区底色，比主体更深一档形成"帽檐" |
-| `--lx-sidebar-border` | `#1e2f47` | 右侧分隔线。**刻意偏蓝**（非纯灰），呼应 HUD 战术风格 |
-| `--lx-sidebar-submenu-bg` | `#0e1728` | 二级菜单组容器底（`_2` 的 `bg-[#0e1728]/70`） |
-| `--lx-sidebar-text` | `#cbd5e1` | 一级文字（slate-300） |
-| `--lx-sidebar-text-muted` | `#94a3b8` | 图标、二级文字（slate-400） |
-| `--lx-sidebar-active-text` | `#7dd3fc` | 激活态文字（sky-300）。**注意**：激活文字是青蓝不是 primary 蓝——深底上 `#409eff` 亮度和饱和度不够"通电感"，stitch 设计源明确用 sky 系 |
-| `--lx-sidebar-active-glow` | `#38bdf8` | 激活竖条颜色 + `box-shadow: 0 0 8px` 光晕源色（sky-400） |
-| `--lx-sidebar-hover-bg` | `rgba(255,255,255,0.05)` | hover 底。白 5% 透明，比实色更柔 |
+| Token                      | 值                       | 备注                                                                                                                                  |
+| -------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `--lx-sidebar-bg`          | `#0c1424`                | 展开态背景（`_2`）。比 rail 态 `#131b27` 更深——因为展开态有标题文字，需要更深底衬托；rail 态只有图标，背景可略浅                      |
+| `--lx-sidebar-bg-rail`     | `#131b27`                | rail 态背景（`_1`）                                                                                                                   |
+| `--lx-sidebar-bg-header`   | `#090f1b`                | 品牌区底色，比主体更深一档形成"帽檐"                                                                                                  |
+| `--lx-sidebar-border`      | `#1e2f47`                | 右侧分隔线。**刻意偏蓝**（非纯灰），呼应 HUD 战术风格                                                                                 |
+| `--lx-sidebar-submenu-bg`  | `#0e1728`                | 二级菜单组容器底（`_2` 的 `bg-[#0e1728]/70`）                                                                                         |
+| `--lx-sidebar-text`        | `#cbd5e1`                | 一级文字（slate-300）                                                                                                                 |
+| `--lx-sidebar-text-muted`  | `#94a3b8`                | 图标、二级文字（slate-400）                                                                                                           |
+| `--lx-sidebar-active-text` | `#7dd3fc`                | 激活态文字（sky-300）。**注意**：激活文字是青蓝不是 primary 蓝——深底上 `#409eff` 亮度和饱和度不够"通电感"，stitch 设计源明确用 sky 系 |
+| `--lx-sidebar-active-glow` | `#38bdf8`                | 激活竖条颜色 + `box-shadow: 0 0 8px` 光晕源色（sky-400）                                                                              |
+| `--lx-sidebar-hover-bg`    | `rgba(255,255,255,0.05)` | hover 底。白 5% 透明，比实色更柔                                                                                                      |
 
 ### 3.6 尺寸
 
-| Token | 值 | 备注 |
-|---|---|---|
-| `--lx-sidebar-width` | `252px` | 展开态宽度（`_2` 实测值）。8 的倍数，容纳 7 字标题 + 图标 + 箭头 + padding 富余 |
-| `--lx-sidebar-rail-width` | `64px` | rail 态宽度（`_1`）。容纳 40px 图标区 + 两侧 12px padding |
-| `--lx-sidebar-item-height` | `40px` | 一级项高（`_2` 激活态含 border 实高；设计拍板 #4，token 实现为准） |
-| `--lx-sidebar-subitem-height` | `28px` | 二级项高（`_2` h-7） |
-| `--lx-navbar-height` | `56px` | 顶栏（h-14，双方案一致） |
-| `--lx-tabsbar-height` | `36px` | 页签栏（h-9） |
+| Token                         | 值      | 备注                                                                            |
+| ----------------------------- | ------- | ------------------------------------------------------------------------------- |
+| `--lx-sidebar-width`          | `252px` | 展开态宽度（`_2` 实测值）。8 的倍数，容纳 7 字标题 + 图标 + 箭头 + padding 富余 |
+| `--lx-sidebar-rail-width`     | `64px`  | rail 态宽度（`_1`）。容纳 40px 图标区 + 两侧 12px padding                       |
+| `--lx-sidebar-item-height`    | `40px`  | 一级项高（`_2` 激活态含 border 实高；设计拍板 #4，token 实现为准）              |
+| `--lx-sidebar-subitem-height` | `28px`  | 二级项高（`_2` h-7）                                                            |
+| `--lx-navbar-height`          | `56px`  | 顶栏（h-14，双方案一致）                                                        |
+| `--lx-tabsbar-height`         | `36px`  | 页签栏（h-9）                                                                   |
 
 ### 3.7 间距 / 圆角 / 阴影 / 动效令牌
 
@@ -226,12 +232,12 @@ export const NODE_STATUS: Record<number, LxStatus> = {
 
 ### 4.2 双形态切换规则
 
-| 触发 | 行为 |
-|---|---|
+| 触发                | 行为                                                                                                    |
+| ------------------- | ------------------------------------------------------------------------------------------------------- |
 | 用户点击底部 toggle | `mode` 受控切换，业务侧持久化（cookie/localStorage，参考 admin-vue3 现有 appStore.sidebar.opened 机制） |
-| 窗口 < 768px | 业务层切 `mobile` 抽屉模式（overlay + 遮罩），组件提供 `mobile` prop |
-| 768 ≤ 窗口 < 1366 | 业务层建议切 rail（1366 笔记本折叠腾空间，沿用现有策略） |
-| 进入 HUD 大屏模式 | 业务层切 `mode="rail"` + `lx-theme-hud` 主题类 |
+| 窗口 < 768px        | 业务层切 `mobile` 抽屉模式（overlay + 遮罩），组件提供 `mobile` prop                                    |
+| 768 ≤ 窗口 < 1366   | 业务层建议切 rail（1366 笔记本折叠腾空间，沿用现有策略）                                                |
+| 进入 HUD 大屏模式   | 业务层切 `mode="rail"` + `lx-theme-hud` 主题类                                                          |
 
 ### 4.3 栅格
 
@@ -245,11 +251,11 @@ export const NODE_STATUS: Record<number, LxStatus> = {
 
 全库**只有 3 种动画**，参数固定，禁止自造。
 
-| 名称 | 定义 | 时长/曲线 | 用途 | 禁用场景 |
-|---|---|---|---|---|
-| **color-fade** | `transition: color/background-color/border-color` | `0.2s cubic-bezier(.645,.045,.355,1)` | 一切 hover/激活态 | — |
-| **hudPulse** | opacity 0.35→0.85 + scale 1→1.05 循环 | `3.5s ease-in-out infinite` | 侧边栏品牌区同心环、在线状态呼吸点 | 同屏超过 20 个呼吸点（噪声） |
-| **tacticalBlink** | opacity 1→0.25 循环 | `1.4s ease-in-out infinite` | 高危未处理告警（error 级且需行动） | 一般 warning（闪烁是稀缺资源） |
+| 名称              | 定义                                              | 时长/曲线                             | 用途                               | 禁用场景                       |
+| ----------------- | ------------------------------------------------- | ------------------------------------- | ---------------------------------- | ------------------------------ |
+| **color-fade**    | `transition: color/background-color/border-color` | `0.2s cubic-bezier(.645,.045,.355,1)` | 一切 hover/激活态                  | —                              |
+| **hudPulse**      | opacity 0.35→0.85 + scale 1→1.05 循环             | `3.5s ease-in-out infinite`           | 侧边栏品牌区同心环、在线状态呼吸点 | 同屏超过 20 个呼吸点（噪声）   |
+| **tacticalBlink** | opacity 1→0.25 循环                               | `1.4s ease-in-out infinite`           | 高危未处理告警（error 级且需行动） | 一般 warning（闪烁是稀缺资源） |
 
 **prefers-reduced-motion**：三种动画在用户系统开启减少动效时全部禁用（组件库全局处理，业务无需关心）。
 
@@ -257,17 +263,17 @@ export const NODE_STATUS: Record<number, LxStatus> = {
 
 ## 6. 字体与排版
 
-| 层级 | 字号/字重/行高 | 用途 |
-|---|---|---|
-| display-lg | 28px / 600 / 36 | 大屏核心指标 |
+| 层级        | 字号/字重/行高  | 用途                                                             |
+| ----------- | --------------- | ---------------------------------------------------------------- |
+| display-lg  | 28px / 600 / 36 | 大屏核心指标                                                     |
 | headline-lg | 20px / 600 / 28 | 页面主标题（LxPageCard.title 用 16px 版本，页面 banner 用 20px） |
-| headline-md | 16px / 600 / 24 | 卡片标题 |
-| label-lg | 14px / 500 / 20 | 一级菜单文字、按钮 |
-| body-lg | 14px / 400 / 22 | 表单、正文 |
-| body-md | 13px / 400 / 20 | 表格行（admin 紧凑惯例） |
-| label-md | 12px / 500 / 16 | 二级菜单、Tag、徽章 |
-| body-sm | 12px / 400 / 18 | 时间戳、辅助说明 |
-| label-sm | 11px / 500 / 14 | 微徽章（NODE-01、SLA 数值） |
+| headline-md | 16px / 600 / 24 | 卡片标题                                                         |
+| label-lg    | 14px / 500 / 20 | 一级菜单文字、按钮                                               |
+| body-lg     | 14px / 400 / 22 | 表单、正文                                                       |
+| body-md     | 13px / 400 / 20 | 表格行（admin 紧凑惯例）                                         |
+| label-md    | 12px / 500 / 16 | 二级菜单、Tag、徽章                                              |
+| body-sm     | 12px / 400 / 18 | 时间戳、辅助说明                                                 |
+| label-sm    | 11px / 500 / 14 | 微徽章（NODE-01、SLA 数值）                                      |
 
 **字体栈**：`'HarmonyOS Sans SC', 'PingFang SC', 'Microsoft YaHei', Inter, sans-serif`（保留现有中文字体优先决策）；等宽：`'JetBrains Mono', Consolas, monospace`（数值/编号）。
 
@@ -283,17 +289,17 @@ CSS 变量 + 根元素 class 切换，**运行时生效，无需重编译**：
 
 ```ts
 // lx-tokens 导出的切换工具（业务侧也可直接操作 class）
-import { setTheme } from 'lx-tokens';
-setTheme('hud');    // <html class="lx-theme-hud">
-setTheme('light');   // 移除
+import { setTheme } from 'lx-tokens'
+setTheme('hud') // <html class="lx-theme-hud">
+setTheme('light') // 移除
 ```
 
 ### 7.2 HUD 深色主题覆盖范围（`.lx-theme-hud`）
 
 ```css
 .lx-theme-hud {
-  --lx-bg-page: #0b1220;         /* 深空画布 */
-  --lx-bg-card: #101a2c;         /* 深色卡片 */
+  --lx-bg-page: #0b1220; /* 深空画布 */
+  --lx-bg-card: #101a2c; /* 深色卡片 */
   --lx-text-primary: #e2e8f0;
   --lx-text-regular: #94a3b8;
   --lx-border: #1e2f47;
@@ -313,42 +319,42 @@ setTheme('light');   // 移除
 
 ## 8. 组件通用行为约定
 
-| 约定 | 内容 | 备注（Why） |
-|---|---|---|
-| **受控优先** | 显隐/值/激活态一律 `modelValue` 或显式 prop + `update:xxx` | 父组件随时可接管状态；测试容易；参考 EP el-input 模式 |
-| **事件命名** | `update:modelValue`、`update:page` 等 kebab 事件 + `change/select/close` 语义事件 | 双事件：update 给 v-model，语义事件给监听 |
-| **slot 命名** | `header-extra`（标题右侧）、`toolbar`（工具区）、`footer`（底部）、`leading/trailing`（前/后缀）、`cell-${key}`（表格列） | 命名统一后业务方跨组件零查文档 |
-| **透传属性** | 未声明 props 自动 `$attrs` 落到根元素（inheritAttrs 按需关闭手动绑定） | class/style 透传是隐式需求 |
-| **加载态** | 有异步可能的组件必须实现 `loading` prop（转圈/骨架） | 数据无关 ≠ 不管加载视觉 |
-| **空态** | 有列表语义的组件内置 `LxEmpty` 兜底 | — |
-| **禁用态** | 交互组件必须支持 `disabled`（视觉：40% 透明 + cursor not-allowed） | — |
-| **尺寸** | 三档 `small/default/large`，默认 `default` | **不沿用** admin-vue3 的全局 large（见 DESIGN.md §8 决策 3） |
+| 约定          | 内容                                                                                                                      | 备注（Why）                                                  |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| **受控优先**  | 显隐/值/激活态一律 `modelValue` 或显式 prop + `update:xxx`                                                                | 父组件随时可接管状态；测试容易；参考 EP el-input 模式        |
+| **事件命名**  | `update:modelValue`、`update:page` 等 kebab 事件 + `change/select/close` 语义事件                                         | 双事件：update 给 v-model，语义事件给监听                    |
+| **slot 命名** | `header-extra`（标题右侧）、`toolbar`（工具区）、`footer`（底部）、`leading/trailing`（前/后缀）、`cell-${key}`（表格列） | 命名统一后业务方跨组件零查文档                               |
+| **透传属性**  | 未声明 props 自动 `$attrs` 落到根元素（inheritAttrs 按需关闭手动绑定）                                                    | class/style 透传是隐式需求                                   |
+| **加载态**    | 有异步可能的组件必须实现 `loading` prop（转圈/骨架）                                                                      | 数据无关 ≠ 不管加载视觉                                      |
+| **空态**      | 有列表语义的组件内置 `LxEmpty` 兜底                                                                                       | —                                                            |
+| **禁用态**    | 交互组件必须支持 `disabled`（视觉：40% 透明 + cursor not-allowed）                                                        | —                                                            |
+| **尺寸**      | 三档 `small/default/large`，默认 `default`                                                                                | **不沿用** admin-vue3 的全局 large（见 DESIGN.md §8 决策 3） |
 
 ---
 
 ## 9. 可访问性规范
 
-| 项 | 要求 |
-|---|---|
-| 对比度 | 正文 ≥ 4.5:1；大标题/图标 ≥ 3:1。已知风险：warning 深色 #e6a23c 在白底 3.1:1——仅限 ≥12px 粗体（§3.2 已注明） |
-| 焦点 | 自绘交互件必须 `:focus-visible` 样式（2px primary 外圈，offset 2px） |
-| aria | 图标按钮 `aria-label`（rail 模式依赖 title，同时补 aria）；弹窗 `role="dialog"`；侧边栏 `role="navigation"` + `aria-current="page"` |
-| 键盘 | 侧边栏 ↑↓ 导航、Enter 展开、Esc 收起；弹窗 focus trap；抽屉 Esc 关闭 |
-| 动效 | `prefers-reduced-motion` 全局禁用动画（§5） |
+| 项     | 要求                                                                                                                                |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| 对比度 | 正文 ≥ 4.5:1；大标题/图标 ≥ 3:1。已知风险：warning 深色 #e6a23c 在白底 3.1:1——仅限 ≥12px 粗体（§3.2 已注明）                        |
+| 焦点   | 自绘交互件必须 `:focus-visible` 样式（2px primary 外圈，offset 2px）                                                                |
+| aria   | 图标按钮 `aria-label`（rail 模式依赖 title，同时补 aria）；弹窗 `role="dialog"`；侧边栏 `role="navigation"` + `aria-current="page"` |
+| 键盘   | 侧边栏 ↑↓ 导航、Enter 展开、Esc 收起；弹窗 focus trap；抽屉 Esc 关闭                                                                |
+| 动效   | `prefers-reduced-motion` 全局禁用动画（§5）                                                                                         |
 
 ---
 
 ## 10. 命名规约
 
-| 对象 | 规约 | 正例 / 反例 |
-|---|---|---|
-| 组件 | `Lx` + PascalCase | `LxSidebar` ✅ / `LxSideBar` ❌ |
-| 组件目录 | PascalCase，内 `index.vue` + `types.ts` + `demo/` | `LxSidebar/` |
-| CSS 类 | `lx-` + BEM | `lx-sidebar__item--active` |
-| props/events | camelCase，布尔不加 is 前缀（跟随 Vue 风格） | `activeKey` / `showText` |
-| emit 值事件 | `update:modelValue` / `update:mode` | — |
-| CSS 变量 | `--lx-` + 分类前缀（color/bg/text/sidebar/shadow/radius） | `--lx-sidebar-active-glow` |
-| TS 类型 | `Lx` 前缀导出 | `LxMenuItem` |
+| 对象         | 规约                                                      | 正例 / 反例                     |
+| ------------ | --------------------------------------------------------- | ------------------------------- |
+| 组件         | `Lx` + PascalCase                                         | `LxSidebar` ✅ / `LxSideBar` ❌ |
+| 组件目录     | PascalCase，内 `index.vue` + `types.ts` + `demo/`         | `LxSidebar/`                    |
+| CSS 类       | `lx-` + BEM                                               | `lx-sidebar__item--active`      |
+| props/events | camelCase，布尔不加 is 前缀（跟随 Vue 风格）              | `activeKey` / `showText`        |
+| emit 值事件  | `update:modelValue` / `update:mode`                       | —                               |
+| CSS 变量     | `--lx-` + 分类前缀（color/bg/text/sidebar/shadow/radius） | `--lx-sidebar-active-glow`      |
+| TS 类型      | `Lx` 前缀导出                                             | `LxMenuItem`                    |
 
 ---
 
@@ -358,7 +364,7 @@ setTheme('light');   // 移除
 2. ❌ 样式硬编码色值（stylelint `declaration-property-value-disallowed-list` 强制）
 3. ❌ 第 4 种动画 / 第 4 档阴影 / 非法圆角
 4. ❌ 状态用色块而非圆点（P1）
-5. ❌ 表格行内图标按钮（P2）
+5. ❌ 表格行内纯图标按钮（P2）；行内操作必须保留文字标签，辅助图标可选
 6. ❌ 组件内 `console.log` / 递增 zIndex 魔法数（浮层 z-index 统一：popover 2000 / modal 3000 / message 4000）
 7. ❌ 文档 demo 引入 mock 数据以外的业务依赖
 8. ❌ 修改 Element Plus 全局变量绕过 `lx-tokens`

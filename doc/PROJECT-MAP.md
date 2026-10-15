@@ -1,22 +1,29 @@
 # LinkX 项目地图
 
+## 2026-10-15 UI-10 / Wave 24 LxActionButtons 严格矩阵关闭
+
+- **组件库状态**：按 `design/按钮体系/` 完成 LxActionButtons 当前实现、Demo、中文 API 和权限边界严格复核。A 33/40，原显式空权限对照 P2 关闭；B 四个源码 detector 为有效 `[]`/空 stderr/退出码 0，8 个 Light/HUD × 桌面/375px 浏览器视图成功注入；独立代码复审无开放 P0–P3。
+- **验证**：单测 18/18、文档 E2E 9/9、Vue3 类型/目标 ESLint、lx-ui 类型/206 模块构建、VitePress、Stylelint、Prettier 与差异检查通过。移动 overlay 注入后根文档宽增至 615px，注入前页面基线为 375px，已归因为 detector 标注副作用。
+- **边界与下一入口**：UI-10 更新为 **8/52**；Vue3 29 处宿主 ActionButtons 仍待 UI-04 适配，真实权限服务未联调。下一项按矩阵进入 `LxAuthImg`；页面操作引导不进入待办或排期。
+- **评审证据**：综合 snapshot `.impeccable/critique/2026-10-15T03-34-29Z__linkx-fe-src-components-lxactionbuttons-index-vue.md`；A/B 原始材料见同级 `assessment-a-actionbuttons-auth-contrast-20261015/` 与 `actionbuttons-assessment-b-final-64a2951-2026-10-15/`。
+
 ## 2026-10-15 全菜单 Mock 预览回归复验
 
 - **入口与结果**：在 `other-admin/admin-vue3` 使用独立端口 `31853` 重跑 `playwright.preview.config.ts`，全菜单与预览 E2E **10/10 通过**；包含全部菜单首屏数据、搜索竞态、Mock CRUD、轮播分页及 AuthImg 错误恢复/键盘重试/减少动效。
-- **边界与下一入口**：全部写操作由本地 Mock 接管；结果不表示真实后端联调。下一项进入 `LxActionButtons` UI-10 严格矩阵核查，组件库收口和 Vue3 Element Plus 替换门槛不变。页面操作引导暂不实施、不继续拆分，也不纳入待办、执行队列或排期；后续明确有需要时再恢复计划并执行。
+- **当时边界与后续**：全部写操作由本地 Mock 接管，结果不表示真实后端联调。该次复验后的 `LxActionButtons` 矩阵核查已于 Wave 24 完成；当前下一入口见本文件顶部，进入 `LxAuthImg`。页面操作引导继续暂缓、不进入待办或排期。
 
 ## 2026-10-15 Wave 23 / LxButton Demo 键盘焦点与锚点复验
 
 - **入口与变化**：`linkx-fe/src/components/LxButton/demo/basic.vue` 为完整演示区提供可见标题锚点，并给尺寸选择框增加 `:focus-visible` 外框；`linkx-fe/docs/components/lxbutton.md` 将演示区命名关联到该标题。
 - **验证与复审**：LxButton 文档 E2E 19/19（lx-ui 专用配置、隔离端口 4177）；补充 Light/HUD 焦点颜色断言后专项回归 1/1。Prettier、目标 ESLint、差异检查通过。Impeccable A 初评 30/40，尺寸选择框 P2 经 Light/HUD × 桌面/320px 四视图复验关闭；B 三个源码检测器为有效 JSON `[]`、stderr 空、退出码 0，四个 Light/HUD × 桌面/390px 视图成功注入，无页面错误或失败请求。覆盖层命中归因为 VitePress 外壳、代码示例和 HUD 主色令牌。代码复审最终批准，无未关闭 P0–P3；正式快照见 `.impeccable/critique/2026-10-14T16-33-46Z__linkx-fe-src-components-lxbutton-index-vue.md`。静态 `[]` 不代表视觉审查通过。
-- **边界与下一入口**：只修复文档演示的锚点与键盘焦点，不增加 UI-10 全库关闭数，当前仍为 **7/52**；不代表宿主页面替换或真实联调。下一项继续未关闭的 UI-10 矩阵，`LxInputNumber` 桌面目标尺寸 P2 等待设计决策。页面操作引导需求暂缓但未取消，后续用户提出需要时再重新评估。
+- **边界与下一入口**：只修复文档演示的锚点与键盘焦点，不增加 UI-10 全库关闭数；该记录时全库为 **7/52**，当前状态见顶部 Wave 24。此项不代表宿主页面替换或真实联调。`LxInputNumber` 桌面目标尺寸 P2 等待设计决策；页面操作引导继续暂缓，不进入当前待办或排期。
 
 ## 2026-10-14 Wave 22 / LxInput UI-10 严格矩阵关闭
 
 - **组件入口**：`linkx-fe/src/components/LxInput/`，Demo 为 `demo/basic.vue`，中文 API 为 `linkx-fe/docs/components/lxinput.md`；设计源为 `design/表单控件八件套/code.html` 第 01 区。
 - **验证入口**：定向单测 13/13、共享基础控件文档 E2E 11/11、最终提示断行复验 1/1；lx-ui 类型/构建、VitePress、Vue3 类型/生产构建和目标代码质量检查通过。
 - **正式评审**：Impeccable A 34/40（Good），清空入口发现性、窄屏方法区布局及提示断行 P3 均已关闭；B 三个 detector 为合法 JSON `[]`、stderr 空、退出码 0，Light/HUD × 桌面/390px 四视图注入成功；独立代码复审无 P0–P3。A/B 证据与综合 snapshot 位于 `.impeccable/critique/lxinput-wave-2026-10-14/`，趋势最近三次均为 34/40。
-- **差异、边界与下一入口**：设计标本默认态清空图标常驻，当前桌面仅在有值且 hover/focus 时显示，触屏或 640px 以下有值即显示；该差异已在 API/Demo 说明。UI-10 当前 **7/52**；不代表 Vue3 宿主替换、真实后端或人工读屏完成。`LxInputNumber` 桌面目标尺寸 P2 仍待设计决策。页面操作引导需求暂缓但未取消，不进入当前待办或排期，后续用户提出需要时再恢复评估。
+- **差异、边界与下一入口**：设计标本默认态清空图标常驻，当前桌面仅在有值且 hover/focus 时显示，触屏或 640px 以下有值即显示；该差异已在 API/Demo 说明。该记录时 UI-10 为 **7/52**，后续状态见顶部 Wave 24；不代表 Vue3 宿主替换、真实后端或人工读屏完成。`LxInputNumber` 桌面目标尺寸 P2 仍待设计决策。页面操作引导继续暂缓，不进入当前待办或排期。
 
 ## 2026-10-14 Wave 21 / LxTextarea UI-10 严格矩阵关闭
 
@@ -368,7 +375,7 @@ flowchart TD
 
 lx-ui 当前执行顺序固定为 `design/` 基础控件与动态图标 → `LxDynamicForm` → 其他宿主候选组件、完整库级验收和 Impeccable 审查 → Vue3 Element Plus 组件替换。前两项库级浏览器验收已完成；SearchBar 已补 3 项行为测试及成功/空/错、失败恢复和 375px 全字段浏览器证据；Dialog 已补 4 项行为测试和 3 项文档 Playwright；ProTable 已补跨页选择修复、加载/减少动效、空错恢复、排序、375px 方向键滚动/44px 点按及 HUD 主题 4 项文档 Playwright；SelectPagination 已补 3 项文档 Playwright，覆盖跨页回显、取消、错误恢复和 375px 触屏；Upload 已补 4 项单测、3 项文档 Playwright；Descriptions 已补 6 项单测、3 项文档 Playwright，并完成组件级 Impeccable 定向检查；StatusSwitch 已补 6 项单测、3 项文档 Playwright；AuthImg 已补 6 项单测、3 项文档 Playwright，覆盖 Blob Mock、取消竞态、资源清理、失败回退和 375px/HUD/减少动效；LxSidebar 键盘分组/rail 焦点、移动模态抽屉和减少动效文档 E2E 2/2 通过。整库 Impeccable 审查尚未完成，Vue3 批量替换仍须等待 UI-10/UI-11 门槛。详细状态见 `linkx-fe/docs/ROADMAP.md` 和 `other-admin/admin-vue3/docs/MIGRATION-BACKLOG.md`。
 
-`LxActionButtons` 已补 disabled 原生语义、键盘可操作的溢出项、Escape 焦点恢复和 375px 浏览器验收（3 项单测、3 项 Playwright，含 44×44px 点按与焦点/外部点击收起）。Vue3 29 处宿主 `ActionButtons` 尚未替换，适配契约见 `ELEMENT-PLUS-LX-UI-MATRIX.md`；本步仍在组件库阶段，不改变既定 Impeccable 和替换门槛。
+`LxActionButtons` 已按 `design/按钮体系/` 完成 UI-10 严格复核：当前单测 18/18、文档 Playwright 9/9、Impeccable A 33/40、B 八视图与独立代码复审均通过，UI-10 更新为 8/52。Vue3 29 处宿主 ActionButtons 尚未替换，适配契约见 `ELEMENT-PLUS-LX-UI-MATRIX.md`；需保留 `buttons`/预设 `actions`、逐项回调、图标映射、gap、disabled 与权限语义，宿主替换仍属于后续 UI-04。
 
 `LxSplitLayout` 已补独立中文 API/Demo、3 项宿主单测和 3 项文档 Playwright；修复折叠时主区换行，并验证桌面拖动/键盘限宽、375px 纵向布局、表格局部滚动、HUD 深色与减少动效。宿主业务页面仍未采用该组件；UI-11 整库 Impeccable Critique 仍待 UI-10 完成，detector `[]` 不作为审查通过。
 
