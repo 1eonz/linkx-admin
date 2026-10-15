@@ -17,21 +17,41 @@ const basicActions: LxActionItem[] = [
   { label: '删除', type: 'danger' },
 ]
 
+/** 表格行内示例：保留用户记录上下文并展示操作折叠。 */
+const tableRowActions: LxActionItem[] = [
+  { label: '查看' },
+  { label: '编辑' },
+  { label: '重置密码', type: 'warning' },
+  { label: '删除', type: 'danger' },
+]
+
 /** 全语义色档：多按钮行的视觉区分（用户管理典型行） */
 const semanticActions: LxActionItem[] = [
   { label: '编辑' },
   { label: '重置密码', type: 'warning' },
   { label: '删除', type: 'danger' },
-  { label: '停用', type: 'danger' },
-  { label: '暂不可执行', disabled: true },
+  { label: '授权', type: 'success' },
 ]
 
-/** 图标 + 文字：常用操作提速识别；纯文字高密度场景降噪 */
+/** 图标仅辅助识别；按钮始终保留文字标签 */
 const iconActions: LxActionItem[] = [
   { label: '查看', icon: 'search' },
   { label: '编辑', icon: 'setting' },
   { label: '授权', type: 'success', icon: 'key' },
   { label: '删除', type: 'danger', icon: 'circle-x' },
+]
+
+/** 窄列长文案：展示表格列宽受限时的自动换行 */
+const narrowActions: LxActionItem[] = [
+  { label: '查看完整告警关联设备记录' },
+  { label: '撤销当前跨区域布控任务', type: 'danger' },
+]
+
+/** 对照公开操作与显式空权限码；示例不授予或模拟真实权限。 */
+const publicActions: LxActionItem[] = [{ label: '公开查看' }]
+const emptyAuthActions: LxActionItem[] = [
+  { label: '空字符串权限', auth: '' },
+  { label: '空数组权限', auth: [] },
 ]
 
 /** onClick per-item 回调：与统一 click 事件并存，免父级按 key 分发 */
@@ -51,9 +71,6 @@ const callbackActions: LxActionItem[] = [
 const overflowActions: LxActionItem[] = [
   { label: '设置角色' },
   { label: '数据权限' },
-  { label: '设备调度权限' },
-  { label: '停用', type: 'danger' },
-  { label: '摄像头权限' },
   { label: '重置密码', type: 'warning' },
   { label: '删除', type: 'danger' },
 ]
@@ -73,14 +90,52 @@ function onAction(action: LxActionItem) {
 <template>
   <div class="lx-actions-demo">
     <section class="lx-actions-demo__panel" data-testid="basic">
-      <h4>基础组合（编辑蓝 + 删除红）</h4>
+      <h3>基础组合（编辑蓝 + 删除红）</h3>
       <div class="lx-actions-demo__row">
         <LxActionButtons :actions="basicActions" @click="onAction" />
       </div>
     </section>
 
+    <section class="lx-actions-demo__panel" data-testid="table-row">
+      <h3>表格行内使用</h3>
+      <div
+        class="lx-actions-demo__table-scroll"
+        role="region"
+        aria-label="用户列表示例"
+        tabindex="0"
+      >
+        <table class="lx-actions-demo__table">
+          <caption>
+            用户列表
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">用户</th>
+              <th scope="col">角色</th>
+              <th scope="col">状态</th>
+              <th scope="col">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">测试账号-037</th>
+              <td>系统管理员</td>
+              <td>启用</td>
+              <td>
+                <LxActionButtons
+                  :actions="tableRowActions"
+                  :max="2"
+                  @click="onAction"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section class="lx-actions-demo__panel" data-testid="semantic">
-      <h4>全语义色档</h4>
+      <h3>全语义色档</h3>
       <div class="lx-actions-demo__row">
         <LxActionButtons :actions="semanticActions" @click="onAction" />
       </div>
@@ -90,29 +145,63 @@ function onAction(action: LxActionItem) {
       </p>
     </section>
 
-    <section class="lx-actions-demo__panel" data-testid="icons">
-      <h4>图标与禁用</h4>
+    <section class="lx-actions-demo__panel" data-testid="states">
+      <h3>图标辅助识别与受限状态</h3>
       <div class="lx-actions-demo__row">
-        <LxActionButtons :actions="iconActions" :max="4" @click="onAction" />
+        <LxActionButtons :actions="iconActions" @click="onAction" />
       </div>
-      <div class="lx-actions-demo__row">
-        <LxActionButtons :actions="disabledActions" @click="onAction" />
+      <div class="lx-actions-demo__row" data-testid="disabled-actions">
+        <LxActionButtons
+          :actions="disabledActions"
+          :max="1"
+          @click="onAction"
+        />
+      </div>
+      <div class="lx-actions-demo__narrow-row" data-testid="narrow-actions">
+        <LxActionButtons :actions="narrowActions" :max="1" @click="onAction" />
+      </div>
+    </section>
+
+    <section
+      class="lx-actions-demo__panel"
+      data-testid="auth-boundary"
+      aria-labelledby="lx-actions-demo-auth-title"
+    >
+      <h3 id="lx-actions-demo-auth-title">权限配置边界</h3>
+      <p class="lx-actions-demo__tip">
+        未传 auth
+        的操作按公开操作显示；显式传入空字符串或空数组时，按无权处理并隐藏。真实权限码由宿主注入权限源后校验。
+      </p>
+      <div class="lx-actions-demo__auth-comparison">
+        <div data-testid="auth-omitted">
+          <h4>省略 auth</h4>
+          <p class="lx-actions-demo__tip">公开操作会显示。</p>
+          <LxActionButtons :actions="publicActions" />
+        </div>
+        <div data-testid="auth-empty">
+          <h4>显式空权限码</h4>
+          <p class="lx-actions-demo__tip">空字符串和空数组均不会渲染。</p>
+          <LxActionButtons :actions="emptyAuthActions" />
+          <p class="lx-actions-demo__empty-result" role="status">
+            当前没有可显示的操作
+          </p>
+        </div>
       </div>
     </section>
 
     <section class="lx-actions-demo__panel" data-testid="callback">
-      <h4>onClick 回调（免父级分发）</h4>
+      <h3>onClick 回调（免父级分发）</h3>
       <div class="lx-actions-demo__row">
         <LxActionButtons :actions="callbackActions" @click="onAction" />
       </div>
     </section>
 
     <section class="lx-actions-demo__panel" data-testid="overflow">
-      <h4>禁用项与事件反馈</h4>
+      <h3>溢出菜单与事件反馈</h3>
       <div class="lx-actions-demo__row">
         <LxActionButtons
           :actions="overflowActions"
-          :max="3"
+          :max="2"
           @click="onAction"
         />
       </div>
@@ -137,25 +226,98 @@ function onAction(action: LxActionItem) {
   display: grid;
   gap: 16px;
   padding: 16px;
-  background: var(--lx-bg-page);
   color: var(--lx-text-primary);
+  background: var(--lx-bg-page);
 }
 
 .lx-actions-demo__panel {
   display: grid;
-  min-width: 0;
   gap: 12px;
+  min-width: 0;
   padding: 12px;
+  background: var(--lx-bg-card);
   border: 1px solid var(--lx-border);
   border-radius: var(--lx-radius-sm);
-  background: var(--lx-bg-card);
 }
 
-.lx-actions-demo__panel h4 {
+.lx-actions-demo__panel h3 {
   margin: 0;
   font-size: 13px;
   font-weight: 600;
   color: var(--lx-text-regular);
+}
+
+.lx-actions-demo__auth-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.lx-actions-demo__auth-comparison h4 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.lx-actions-demo__empty-result {
+  display: flex;
+  align-items: center;
+  min-height: var(--lx-btn-height-sm);
+  margin: 0;
+  font-size: 12px;
+  color: var(--lx-text-secondary-strong);
+}
+
+.lx-actions-demo__table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--lx-border);
+  border-radius: var(--lx-radius-sm);
+}
+
+.lx-actions-demo__table-scroll:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+.lx-actions-demo__table {
+  width: 100%;
+  min-width: 600px;
+  font-size: 12px;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.lx-actions-demo__table caption {
+  padding: 10px 12px;
+  font-weight: 600;
+  color: var(--lx-text-regular);
+  text-align: left;
+}
+
+.lx-actions-demo__table th,
+.lx-actions-demo__table td {
+  padding: 10px 12px;
+  vertical-align: middle;
+  border-top: 1px solid var(--lx-border);
+}
+
+.lx-actions-demo__table thead {
+  color: var(--lx-text-regular);
+  background: var(--lx-bg-page);
+}
+
+.lx-actions-demo__table thead th {
+  font-weight: 600;
+}
+
+.lx-actions-demo__table tbody th {
+  font-weight: 500;
+}
+
+.lx-actions-demo__table th:last-child,
+.lx-actions-demo__table td:last-child {
+  min-width: 200px;
 }
 
 .lx-actions-demo__row {
@@ -164,10 +326,20 @@ function onAction(action: LxActionItem) {
   align-items: center;
 }
 
+.lx-actions-demo__narrow-row {
+  width: min(100%, 144px);
+}
+
 .lx-actions-demo__status,
 .lx-actions-demo__tip {
   margin: 0;
   font-size: 12px;
   color: var(--lx-text-secondary-strong);
+}
+
+@media (max-width: 520px) {
+  .lx-actions-demo__auth-comparison {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 </style>

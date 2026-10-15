@@ -6,7 +6,7 @@ export interface LxActionItem {
   key?: string
   /** 显示文字 */
   label: string
-  /** 可选图标（默认纯文字；传入时显示在文字左侧，尺寸跟 LxButton 文字形态图标档） */
+  /** 可选辅助图标，显示在文字左侧；行内操作必须保留文字标签。 */
   icon?: LxIconName
   /**
    * 语义色档（2026-09-29 两项目 192 例全量调研拍板的映射规律）：
@@ -21,7 +21,7 @@ export interface LxActionItem {
   textColor?: string
   /** 权限/条件隐藏（业务侧过滤后传入） */
   hidden?: boolean
-  /** 权限码；未传入时保持兼容行为。 */
+  /** 未传时按公开操作显示；显式空权限码、无权限源或权限不匹配时隐藏。 */
   auth?: string | string[]
   /** 禁用该项并阻止点击事件。 */
   disabled?: boolean
@@ -38,7 +38,7 @@ export interface LxActionItem {
 export interface LxActionButtonsProps {
   /** 操作列表 */
   actions?: LxActionItem[]
-  /** 直接显示的数量，超出折叠进"更多"；随权限过滤/条件显隐动态变化时自动增减 */
+  /** 最多直接显示的数量；小数向下取整，负数按 0 处理，超出项折叠进"更多"；表格场景建议不超过 3 项。 */
   max?: number
   /** 折叠菜单触发文字 */
   moreText?: string

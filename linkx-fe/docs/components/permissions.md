@@ -14,9 +14,11 @@ setupLxPermission(() => ({
 
 `hasPermission(code)` 和 `hasPermission(['edit', 'delete'])` 可用于脚本逻辑；后者命中任意一个码即返回 `true`。`isFieldMasked(field)` 用于检查字段是否需要脱敏。`setupLxPermission` 返回清理函数，测试或账号切换时可恢复上一份来源。
 
+未配置权限源时，`hasPermission` 返回 `false`；依赖权限码的操作按无权处理并隐藏。宿主应在渲染依赖权限码的组件前调用 `setupLxPermission`。
+
 ## 行内操作
 
-`LxActionButtons` 的操作项支持 `auth`。未传 `auth` 保持原有显示行为；传入后组件会在渲染前过滤无权限操作。
+`LxActionButtons` 的操作项支持 `auth`。省略 `auth` 表示公开操作并保持显示；显式传入空字符串、空白值、空数组或不具备的权限码时，组件按无权处理并隐藏该项。未配置权限源时，所有依赖权限码的操作也会隐藏。若宿主希望权限数据变化后自动更新外显项与「更多」列表，`setupLxPermission` 的 getter 必须读取 Vue 响应式数据（例如 `ref` 或 `computed`）；普通变量或非响应式集合变化不会触发组件重新计算。
 
 ```vue
 <LxActionButtons

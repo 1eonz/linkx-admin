@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
-import { LxActionButtons, type LxActionItem } from 'lx-ui';
+import { LxActionButtons, setupLxPermission, type LxActionItem } from 'lx-ui';
 import { describe, expect, it, vi } from 'vitest';
+import { nextTick, ref } from 'vue';
 
 describe('LxActionButtons', () => {
   it('filters hidden items, honors max and moreText, and emits the original overflow action', async () => {
@@ -31,6 +32,24 @@ describe('LxActionButtons', () => {
     expect(wrapper.emitted('click')).toEqual([[overflowAction]]);
     expect(actionGroup.attributes('style')).toContain('display: none');
     wrapper.unmount();
+  });
+
+  it('normalizes max to a non-negative integer before splitting actions', async () => {
+    const fractional = mount(LxActionButtons, {
+      props: { max: 1.8, actions: [{ label: '查看' }, { label: '编辑' }] },
+    });
+    expect(fractional.findAll('.lx-actions__item')).toHaveLength(2);
+    await fractional.get('button[aria-controls]').trigger('click');
+    expect(fractional.findAll('.lx-actions__menu-item')).toHaveLength(1);
+    fractional.unmount();
+
+    const negative = mount(LxActionButtons, {
+      props: { max: -1, actions: [{ label: '查看' }, { label: '编辑' }] },
+    });
+    expect(negative.findAll('.lx-actions__item')).toHaveLength(1);
+    await negative.get('button[aria-controls]').trigger('click');
+    expect(negative.findAll('.lx-actions__menu-item')).toHaveLength(2);
+    negative.unmount();
   });
 
   it('maps every semantic type onto the LxButton text variant', () => {
@@ -102,6 +121,297 @@ describe('LxActionButtons', () => {
 
     expect(wrapper.get('.lx-actions__item').attributes('style')).toContain('--lx-btn-text-color: #7c3aed');
     wrapper.unmount();
+  });
+
+  it('renders an optional icon while keeping the action text label', () => {
+    const wrapper = mount(LxActionButtons, {
+      props: { actions: [{ label: '查看', icon: 'search' }] },
+    });
+
+    expect(wrapper.get('button').text()).toContain('查看');
+    expect(wrapper.find('svg').exists()).toBe(true);
+    wrapper.unmount();
+  });
+
+  it('hides auth-gated actions when no permission source is configured', () => {
+    const restorePermission = setupLxPermission(() => undefined);
+    const wrapper = mount(LxActionButtons, {
+      props: { actions: [{ label: '查看', auth: 'user:read' }] },
+    });
+
+    expect(wrapper.find('.lx-actions').exists()).toBe(false);
+    wrapper.unmount();
+    restorePermission();
+  });
+
+  it('keeps auth-omitted actions visible and hides explicit empty auth values', () => {
+    const restorePermission = setupLxPermission(() => undefined);
+    const wrapper = mount(LxActionButtons, {
+      props: {
+        actions: [{ label: '公开查看' }, { label: '空字符串权限', auth: '' }, { label: '空数组权限', auth: [] }],
+      },
+    });
+
+    try {
+      expect(wrapper.findAll('.lx-actions__item').map((button) => button.text())).toEqual(['公开查看']);
+    } finally {
+      wrapper.unmount();
+      restorePermission();
+    }
+  });
+
+  it('fails closed for empty auth codes, even when the permission source contains them', () => {
+    const restorePermission = setupLxPermission(() => ({
+      codes: { users: ['', ' ', 'user:read'] },
+      current: () => 'users',
+    }));
+    const wrapper = mount(LxActionButtons, {
+      props: {
+        actions: [
+          { label: '空权限码', auth: '' },
+          { label: '空白权限码', auth: ' ' },
+          { label: '空权限数组', auth: [] },
+          { label: '空数组项', auth: [''] },
+          { label: '有效权限', auth: 'user:read' },
+        ],
+      },
+    });
+
+    try {
+      expect(wrapper.findAll('.lx-actions__item').map((button) => button.text())).toEqual(['有效权限']);
+    } finally {
+      wrapper.unmount();
+      restorePermission();
+    }
+  });
+
+  it('updates permission-filtered actions and restores focus when an overflow action disappears', async () => {
+    const permissionCodes = ref<string[]>(['user:delete']);
+    const restorePermission = setupLxPermission(() => ({
+      codes: { users: permissionCodes.value },
+      current: () => 'users',
+    }));
+    const wrapper = mount(LxActionButtons, {
+      attachTo: document.body,
+      props: {
+        max: 1,
+        actions: [{ label: '查看' }, { label: '删除', type: 'danger', auth: 'user:delete' }],
+      },
+    });
+
+    try {
+      const moreButton = wrapper.get('button[aria-controls]');
+      await moreButton.trigger('click');
+      const overflowAction = wrapper.get('.lx-actions__menu-item');
+      overflowAction.element.focus();
+      expect(document.activeElement).toBe(overflowAction.element);
+
+      permissionCodes.value = [];
+      await nextTick();
+      await nextTick();
+
+      expect(wrapper.find('.lx-actions__menu').exists()).toBe(false);
+      expect(wrapper.find('button[aria-controls]').exists()).toBe(false);
+      expect(document.activeElement).toBe(wrapper.get('.lx-actions__item').element);
+    } finally {
+      wrapper.unmount();
+      restorePermission();
+    }
+  });
+
+  it('repositions an open menu when reactive permissions move the more button', async () => {
+    const permissionCodes = ref<string[]>(['user:edit']);
+    const restorePermission = setupLxPermission(() => ({
+      codes: { users: permissionCodes.value },
+      current: () => 'users',
+    }));
+    const wrapper = mount(LxActionButtons, {
+      attachTo: document.body,
+      props: {
+        max: 2,
+        actions: [{ label: '查看' }, { label: '编辑', auth: 'user:edit' }, { label: '删除' }, { label: '导出' }],
+      },
+    });
+
+    try {
+      const moreButton = wrapper.get('button[aria-controls]');
+      const buttonLeft = vi.fn(() => (permissionCodes.value.length ? 120 : 80));
+      moreButton.element.getBoundingClientRect = () =>
+        ({
+          left: buttonLeft(),
+          right: buttonLeft() + 44,
+          top: 120,
+          bottom: 148,
+          width: 44,
+          height: 28,
+          x: buttonLeft(),
+          y: 120,
+          toJSON: () => ({}),
+        }) as DOMRect;
+      wrapper.get('.lx-actions__menu').element.getBoundingClientRect = () =>
+        ({
+          left: 0,
+          right: 96,
+          top: 0,
+          bottom: 100,
+          width: 96,
+          height: 100,
+          x: 0,
+          y: 0,
+          toJSON: () => ({}),
+        }) as DOMRect;
+
+      await moreButton.trigger('click');
+      await nextTick();
+      expect(wrapper.get('.lx-actions__menu').attributes('style')).toContain('left: 68px');
+
+      permissionCodes.value = [];
+      await nextTick();
+      await nextTick();
+
+      expect(wrapper.findAll('.lx-actions__menu-item')).toHaveLength(1);
+      expect(wrapper.get('.lx-actions__menu').attributes('style')).toContain('left: 28px');
+    } finally {
+      wrapper.unmount();
+      restorePermission();
+    }
+  });
+
+  it('repositions an open menu when max changes and overflow remains', async () => {
+    const wrapper = mount(LxActionButtons, {
+      attachTo: document.body,
+      props: {
+        max: 1,
+        actions: [{ label: '查看' }, { label: '编辑' }, { label: '删除' }, { label: '导出' }],
+      },
+    });
+
+    try {
+      const moreButton = wrapper.get('button[aria-controls]');
+      moreButton.element.getBoundingClientRect = () => {
+        const left = wrapper.props('max') === 1 ? 120 : 80;
+        return {
+          left,
+          right: left + 44,
+          top: 120,
+          bottom: 148,
+          width: 44,
+          height: 28,
+          x: left,
+          y: 120,
+          toJSON: () => ({}),
+        } as DOMRect;
+      };
+      wrapper.get('.lx-actions__menu').element.getBoundingClientRect = () =>
+        ({
+          left: 0,
+          right: 96,
+          top: 0,
+          bottom: 100,
+          width: 96,
+          height: 100,
+          x: 0,
+          y: 0,
+          toJSON: () => ({}),
+        }) as DOMRect;
+
+      await moreButton.trigger('click');
+      await nextTick();
+      expect(wrapper.get('.lx-actions__menu').attributes('style')).toContain('left: 68px');
+
+      await wrapper.setProps({ max: 2 });
+      await nextTick();
+      expect(wrapper.findAll('.lx-actions__menu-item')).toHaveLength(2);
+      expect(wrapper.get('.lx-actions__menu').attributes('style')).toContain('left: 28px');
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it('keeps focus on an action that moves from the menu into the visible list', async () => {
+    const wrapper = mount(LxActionButtons, {
+      attachTo: document.body,
+      props: {
+        max: 1,
+        actions: [{ label: '查看' }, { label: '编辑' }, { label: '删除' }],
+      },
+    });
+
+    try {
+      await wrapper.get('button[aria-controls]').trigger('click');
+      const menuAction = wrapper.get('.lx-actions__menu-item[data-action-key="编辑-1"]');
+      menuAction.element.focus();
+      expect(document.activeElement).toBe(menuAction.element);
+
+      await wrapper.setProps({ max: 2 });
+      await nextTick();
+
+      const visibleAction = wrapper.get('.lx-actions__item[data-action-key="编辑-1"]');
+      expect(document.activeElement).toBe(visibleAction.element);
+      expect(wrapper.get('button[aria-controls]').attributes('aria-expanded')).toBe('true');
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it('keeps focus on the matching duplicate-label action when max changes', async () => {
+    const wrapper = mount(LxActionButtons, {
+      attachTo: document.body,
+      props: {
+        max: 1,
+        actions: [{ label: '查看' }, { label: '重复操作' }, { label: '重复操作' }, { label: '删除' }],
+      },
+    });
+
+    try {
+      await wrapper.get('button[aria-controls]').trigger('click');
+      const secondDuplicate = wrapper.get('.lx-actions__menu-item[data-action-key="重复操作-2"]');
+      secondDuplicate.element.focus();
+      expect(secondDuplicate.attributes('data-action-key')).toBe('重复操作-2');
+      expect(document.activeElement).toBe(secondDuplicate.element);
+
+      await wrapper.setProps({ max: 3 });
+      await nextTick();
+
+      const matchingAction = wrapper.get('.lx-actions__item[data-action-key="重复操作-2"]');
+      expect(document.activeElement).toBe(matchingAction.element);
+      expect(wrapper.get('button[aria-controls]').attributes('aria-expanded')).toBe('true');
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it('keeps focus when an earlier permission-filtered action disappears', async () => {
+    const permissionCodes = ref<string[]>(['user:restricted']);
+    const restorePermission = setupLxPermission(() => ({
+      codes: { users: permissionCodes.value },
+      current: () => 'users',
+    }));
+    const wrapper = mount(LxActionButtons, {
+      attachTo: document.body,
+      props: {
+        max: 1,
+        actions: [{ label: '受限操作', auth: 'user:restricted' }, { label: '查看' }, { label: '删除' }],
+      },
+    });
+
+    try {
+      await wrapper.get('button[aria-controls]').trigger('click');
+      const targetAction = wrapper.get('.lx-actions__menu-item[data-action-key="删除-2"]');
+      targetAction.element.focus();
+      expect(document.activeElement).toBe(targetAction.element);
+
+      permissionCodes.value = [];
+      await nextTick();
+      await nextTick();
+
+      const retainedAction = wrapper.get('.lx-actions__menu-item[data-action-key="删除-2"]');
+      expect(document.activeElement).toBe(retainedAction.element);
+      expect(wrapper.get('button[aria-controls]').attributes('aria-expanded')).toBe('true');
+    } finally {
+      wrapper.unmount();
+      restorePermission();
+    }
   });
 
   it('renders disabled actions as native disabled buttons and suppresses their events', async () => {
