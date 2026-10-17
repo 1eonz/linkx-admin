@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只维护 lx-ui 组件路线和组件级未完成项，不重复记录全局波次台账。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，交接与审查证据见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxStatusSwitch 当前版复验
+
+- 单测 **18/18**、文档 E2E **4/4**、Vue3 类型检查通过；新 Assessment B 证据见 `.impeccable/critique/statusswitch-assessment-b-2026-10-17/`。
+- detector 三件套均为合法 `[]`/空 stderr/退出码 0，浏览器覆盖确认竞态、权限降级、失败恢复、窄屏、HUD 和减少动效；当前组件范围无 P0-P2。
+- Vue3 宿主仍待 UI-04 逐页替换，整库正式 Impeccable 仍待 UI-10/UI-11 门禁。
+
 ## 2026-10-16 UI-04 前置组件：LxSectionTitle 当前版复核
 
 - Vue3 `SectionTitle` 适配器已补 `subtitle` 属性/插槽和 `leading` 插槽优先级，兼容旧标题、图标、extra 与 `dashed` 默认；库组件继续保留 `border`/`dashed`/`plain` 三变体。

@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只保留组件交付证据摘要和 `.impeccable/critique` 路径，不再复制全局计划或交接正文。当前波次入口见 `doc/PROJECT-DELIVERY-PLAN.md`，完整交接见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxStatusSwitch Assessment B 复验
+
+- 单测 **18/18**、文档 Playwright **4/4**、Vue3 类型检查通过；覆盖 `0/1` 映射、确认取消、只读/无权限、失败恢复、窄屏触控、HUD 和减少动效。
+- `.impeccable/critique/statusswitch-assessment-b-2026-10-17/` 保存三路 detector JSON、stderr、退出码和 Chromium 结果。三路静态输出为合法 `[]`、stderr 为空、退出码 `0`；空数组不单独代表正式视觉通过。
+- 本波未发现组件范围内 P0-P2；Vue3 真实宿主替换和整库 Impeccable 仍按总计划后置。
+
 ## 2026-10-16 LxSectionTitle 当前版复核记录
 
 - 适配器补齐 `subtitle` 属性/插槽与 `leading` 插槽优先级；自定义前置内容可覆盖映射及未映射图标回退。库组件三变体、标题层级、标签、extra、窄屏和减少动效证据保持同步。
