@@ -10,8 +10,8 @@
 
 ## 2026-10-17 LxStatusSwitch 当前版复验
 
-- 单测 **18/18**、文档 E2E **4/4**、Vue3 类型检查通过；新 Assessment B 证据见 `.impeccable/critique/statusswitch-assessment-b-2026-10-17/`。
-- detector 三件套均为合法 `[]`/空 stderr/退出码 0，浏览器覆盖确认竞态、权限降级、失败恢复、窄屏、HUD 和减少动效；当前组件范围无 P0-P2。
+- 单测 **21/21**、文档 Playwright **4/4**、Vue3 类型检查通过；新增 `contextKey`、确认互斥和自定义 `aria-label` 保留。复验 B 证据见 `.impeccable/critique/statusswitch-assessment-b-2026-10-17-reverify/`。
+- 三路 detector 均为合法 `[]`/空 stderr/退出码 0，浏览器 JSON 可解析且退出码 0，覆盖确认竞态、权限降级、失败恢复、窄屏、HUD 和减少动效；当前组件范围无 P0-P2。
 - Vue3 宿主仍待 UI-04 逐页替换，整库正式 Impeccable 仍待 UI-10/UI-11 门禁。
 
 ## 2026-10-16 UI-04 前置组件：LxSectionTitle 当前版复核

@@ -2,6 +2,14 @@
 
 > **文档职责（2026-10-17）**：本文件是唯一的时间序列交接与审查证据索引。新波次只追加一条中文交接记录，包含实现、验证、A/B 证据、未完成边界和下一入口；不要把同一状态复制到多个全局计划文件。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，架构定位见 `doc/PROJECT-MAP.md`，历史拆分文档不再新增状态。
 
+## [2026-10-17] LxStatusSwitch 确认竞态修复交接
+
+- **实现**：新增 `contextKey` 用于绑定行/实体上下文；确认等待期间同时校验状态版本、业务值、实体键、loading、只读和权限。加入单实例确认互斥锁，避免重复 Space 或程序调用打开多个确认框；确认配置做快照，避免宿主原地修改对象影响已打开的确认。只读/无权限标签保留调用方自定义 `aria-label`。
+- **验证**：定向单测 **21/21**；lx-ui 与 Vue3 `vue-tsc --noEmit` 通过；目标 Prettier 已通过。宿主 ESLint 对 `linkx-fe` 跨目录文件按配置忽略，未将该警告计为代码失败。
+- **复验**：文档 Playwright **4/4** 通过；新的 Assessment B 证据见 `.impeccable/critique/statusswitch-assessment-b-2026-10-17-reverify/`。三路 detector JSON/stderr/退出码均核验为合法 `[]`、空 stderr、退出码 `0`，浏览器 JSON 可解析且退出码 `0`。空数组未单独作为通过依据。
+- **边界**：未发现组件范围内可复现 P0-P2；Vue3 宿主替换、权限后端和 Element Plus 删除仍后置。
+- **下一入口**：进入下一项未关闭 lx-ui 基础组件严格矩阵。
+
 ## [2026-10-17] LxStatusSwitch 当前版 Assessment B 复验
 
 - **验证**：单测 **18/18**、文档 E2E **4/4**、Vue3 类型检查通过；覆盖 `0/1` 映射、确认竞态、只读/无权限降级、失败恢复、窄屏触控、HUD 和减少动效。

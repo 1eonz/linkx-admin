@@ -8,10 +8,10 @@
 - `.impeccable/critique/dynamicform-assessment-b-2026-10-17/` 保存三路 detector JSON、stderr、退出码和浏览器结果。三路静态输出为合法 `[]`/空 stderr/退出码 `0`；空数组不单独代表正式视觉通过。
 - E2E 白名单已补齐 `favicon.svg`，首次环境误报已消除。真实业务 API、权限、上传协议和宿主替换仍未完成。
 
-## 2026-10-17 LxStatusSwitch Assessment B 复验
+## 2026-10-17 LxStatusSwitch 确认竞态修复
 
-- 单测 **18/18**、文档 Playwright **4/4**、Vue3 类型检查通过；覆盖 `0/1` 映射、确认取消、只读/无权限、失败恢复、窄屏触控、HUD 和减少动效。
-- `.impeccable/critique/statusswitch-assessment-b-2026-10-17/` 保存三路 detector JSON、stderr、退出码和 Chromium 结果。三路静态输出为合法 `[]`、stderr 为空、退出码 `0`；空数组不单独代表正式视觉通过。
+- 单测 **21/21**、文档 Playwright **4/4**、Vue3 类型检查通过；新增 `contextKey`、确认互斥和只读自定义 `aria-label` 回归。
+- `.impeccable/critique/statusswitch-assessment-b-2026-10-17-reverify/` 保存三路 detector JSON、stderr、退出码和 Chromium JSON 结果。三路静态输出为合法 `[]`、stderr 为空、退出码 `0`；空数组不单独代表正式视觉通过。
 - 本波未发现组件范围内 P0-P2；Vue3 真实宿主替换和整库 Impeccable 仍按总计划后置。
 
 ## 2026-10-16 LxSectionTitle 当前版复核记录

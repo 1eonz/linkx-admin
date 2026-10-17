@@ -2,11 +2,11 @@
 
 > **范围备注（2026-10-15）**：页面操作引导暂缓考虑与实施，不继续拆分，也不纳入待办、自动执行队列或排期；它不作为 lx-ui 收口或 Vue3 Element Plus 替换的前置条件。本文和 `doc/GUIDE-CONTENT-PLAN.md`、`doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 保留历史需求与设计基线；后续确有需要时再恢复计划，届时重新确认页面范围、文案、交互、技术方案及后端契约。当前其余交付顺序不变。
 
-## 2026-10-17 LxStatusSwitch 当前版复验交接
+## 2026-10-17 LxStatusSwitch 确认竞态修复（当前波次）
 
-- 单测 **18/18**、文档 E2E **4/4**、Vue3 类型检查通过；覆盖旧 `0/1` 值、确认取消、只读/无权限、失败恢复、窄屏、HUD 和减少动效。
-- Assessment B 证据见 `.impeccable/critique/statusswitch-assessment-b-2026-10-17/`：三路 detector JSON、stderr、退出码均核验，结果为合法 `[]`、空 stderr、退出码 `0`；浏览器证据 4/4，无页面错误或失败请求。空数组不单独作为正式通过依据。
-- 本波关闭组件级复验，不关闭 Vue3 宿主替换、真实权限/后端联调、整库 Impeccable 或 Element Plus 删除门禁。下一入口按依赖顺序进入剩余基础组件与 `LxDynamicForm` 门槛。
+- 定向单测 **21/21**、文档 Playwright **4/4**、lx-ui 与 Vue3 类型检查通过、目标格式化通过；新增 `contextKey` 实体绑定、确认互斥锁、确认配置快照和只读自定义 `aria-label` 保留。
+- Assessment B 复验见 `.impeccable/critique/statusswitch-assessment-b-2026-10-17-reverify/`：三路 detector JSON、stderr、退出码均核验，结果为合法 `[]`、空 stderr、退出码 `0`；浏览器 JSON 可解析且退出码 `0`。空数组不单独作为正式通过依据。
+- 本波组件级复验完成且未发现 P0-P2；Vue3 宿主替换、真实权限/后端联调、整库 Impeccable 或 Element Plus 删除门禁继续后置。下一入口进入下一项未关闭 lx-ui 基础组件严格矩阵。
 
 ## 2026-10-17 LxDynamicForm 当前版复验交接
 
