@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-17 LxDynamicForm/LxForm 窄屏与错误焦点修复
+
+- 密码输入在窄屏/触屏下的输入外框统一为 44px；静态 `LxForm` 错误选择器只保留错误边框，动态表单继续保留键盘焦点环，避免跨宿主契约相互覆盖。
+- DynamicForm/Form 单测 **30/30**、文档 E2E **15/15**，类型检查和目标差异检查通过。Assessment A **28/40（Good）**；其 P1 观察和源码 detector 的降级限制待 Assessment B 独立证据确认。
+
 ## 2026-10-17 LxInput 前后缀高度修复
 
 - 复合输入的 prepend/append 高度固定跟随 `--el-input-height`；窄屏/触屏下与输入框一起满足 44px 高度。浏览器 E2E 覆盖 sm/md/lg、prefix/suffix 垂直中心，以及 390px 视口。

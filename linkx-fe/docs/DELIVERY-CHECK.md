@@ -1,5 +1,10 @@
 # lx-ui 交付核查
 
+## 2026-10-17 LxDynamicForm/LxForm 窄屏与错误焦点修复
+
+- 密码输入窄屏/触屏输入外框统一 44px；静态 LxForm 错误选择器去除叠加焦点环，DynamicForm 保留键盘焦点环。
+- DynamicForm/Form 单测 **30/30**、文档 E2E **15/15**、类型检查和差异检查通过。Assessment A 及 detector 降级说明见 `doc/PROJECT-HANDOFF.md`，B 证据仍待独立收口。
+
 > **文档职责（2026-10-17）**：本文只保留组件交付证据摘要和 `.impeccable/critique` 路径，不再复制全局计划或交接正文。当前波次入口见 `doc/PROJECT-DELIVERY-PLAN.md`，完整交接见 `doc/PROJECT-HANDOFF.md`。
 
 ## 2026-10-17 LxInput 前后缀复合高度二次修复

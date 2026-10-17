@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-17 LxDynamicForm/LxForm 窄屏与错误焦点修复（进行中）
+
+- 修复动态表单窄屏密码输入外框未达到 44px 的缺陷；静态 `LxForm` 错误选择器与 `LxDynamicForm` 错误选择器分别维持已验证的焦点边界契约。
+- 单测 **30/30**、DynamicForm/Form 文档 E2E **15/15**、lx-ui 类型检查和差异检查通过。
+- Assessment A **28/40（Good）** 与 Assessment B 已归档；B 的四个 detector 均为合法 `[]`、空 stderr、退出码 `0`，并保存 Light/HUD、桌面/375px、错误、禁用和键盘证据。无覆盖层基线仍记录 DynamicForm `474`、LxForm `525` 移动宽度异常，需定位文档代码块/表格来源；空数组不单独作为正式通过依据。
+- **当前指针**：修复/归因移动文档横溢出并完成代码复审、正式 snapshot/trend；随后继续剩余组件门禁。Vue3 Element Plus 替换、权限中心、真实后端联调和页面引导继续后置。
+
 > **范围备注（2026-10-15）**：页面操作引导暂缓考虑与实施，不继续拆分，也不纳入待办、自动执行队列或排期；它不作为 lx-ui 收口或 Vue3 Element Plus 替换的前置条件。本文和 `doc/GUIDE-CONTENT-PLAN.md`、`doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 保留历史需求与设计基线；后续确有需要时再恢复计划，届时重新确认页面范围、文案、交互、技术方案及后端契约。当前其余交付顺序不变。
 
 ## 2026-10-17 G2 SearchBar 布局修复与审查收口
@@ -18,6 +25,12 @@
 - **当前进度**：G2 `LxSearchBar`/`LxStatusSwitch` 自动化门禁已完成（全量单测 **598/598**、文档 E2E **8/8**、类型检查、206 modules 构建、VitePress 构建通过）；Impeccable 已更新至 **0.1.15**。下一动作是正式 A/B、代码复审和综合证据收口，完成后直接进入下一组件批次。
 - **新引擎复验**：初次 SearchBar 命中来自 Demo 外层卡片嵌套与标准态说明文字对比度；已移除 Demo 卡片壳、改为分组布局并提升说明文字对比度。修后 SearchBar 与 StatusSwitch URL detector 均返回合法 JSON `[]`、stderr 为空、exit `0`。该修复只影响 Demo 展示，G2 仍需完成正式独立 A/B、代码复审和综合 snapshot/trend。
 - **窄屏复验**：使用新引擎 `--viewport 375x812` 对两个 URL 独立扫描，均返回合法 JSON `[]`、stderr 为空、exit `0`；PowerShell 对空 stderr 的显示异常不影响文件内容和进程状态。
+
+## 当前执行指针：UI-10 组件严格矩阵下一波
+
+- G2 `LxSearchBar` 与 `LxStatusSwitch` 已登记为 UI-10 **11/52**，组件级 A/B、浏览器证据、代码审查和 snapshot/trend 已完成；宿主替换仍冻结到全库门禁之后。
+- 下一波先收口 `LxDynamicForm`/`LxForm` 的正式 Impeccable Critique、设计图差异和 Upload fallback UID/`abort()` 组合回归；随后按组件审计矩阵继续未关闭基础组件。
+- `LxInputNumber` 桌面步进器目标尺寸仍是设计决策阻塞，不擅自改变 28/32/40px 外框和上下布局；权限中心、文本/字段权限、真实后端联调和页面操作引导继续按范围后置。
 
 ## 2026-10-17 预警推送 Mock 业务验收
 

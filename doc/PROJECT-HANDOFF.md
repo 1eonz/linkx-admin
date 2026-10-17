@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-17] LxDynamicForm/LxForm 窄屏与错误焦点修复
+
+- **实现**：密码输入在窄屏或触屏下的真实输入外框统一为 `44px`；`LxForm` 的错误选择器只保留自身错误边框，避免与外层焦点环叠加；`LxDynamicForm` 保留错误选择器键盘焦点环，分别满足两个宿主的既有交互契约。
+- **验证**：`LxDynamicForm` 单测 **30/30**；DynamicForm/Form 文档 Playwright **15/15**；窄屏触控、密码字段 ARIA、静态表单错误态和 HUD 状态均通过；lx-ui `vue-tsc --noEmit`、目标 `git diff --check` 通过。Prettier 使用 Vue3 宿主已安装 CLI 修复并复查目标文件；linkx-fe 本地未安装独立 prettier CLI，不能把缺少 CLI 误报为代码失败。
+- **Impeccable**：Assessment A **28/40（Good）**，证据见 `.impeccable/critique/dynamicform-form-assessment-a-2026-10-17/`；Assessment B 已完成，证据见 `.impeccable/critique/dynamicform-form-assessment-b-2026-10-17/`。四个 detector 均为合法 `[]`、stderr 为空、退出码 `0`，浏览器 Light/HUD、桌面/375px、错误态、禁用态和键盘证据完整；无覆盖层基线仍记录 DynamicForm `474`、LxForm `525` 的移动宽度异常，需继续定位文档代码块/表格来源。空数组不单独作为正式通过依据，当前不关闭 Critique。
+- **边界与下一步**：本波关闭可复现的密码框触控高度和静态表单错误焦点缺陷，不关闭 UI-10 全库、Vue3 宿主替换、真实上传/后端协议或权限任务；等待 B 证据后继续 P1/P2 收口和组件门禁。
+
 ## [2026-10-17] LxInput 前后缀复合高度二次修复
 
 - **问题与实现**：此前只约束了 prepend/append 自身高度，部分 Element Plus 布局下复合根节点仍可能没有与输入框处于同一拉伸轨道，导致视觉边界不齐。现为 `.lx-input.el-input-group` 明确设置尺寸高度和 `stretch` 对齐，并让输入内框与两侧外块统一拉伸；窄屏/触屏继续统一为 44px。
