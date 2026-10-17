@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-18 LxVirtualTree/TransferPanel 组合复验
+
+- 文档 Playwright **48/48** 通过；覆盖固定行、插槽摘要、筛选/批量、长名称、未加载授权、窄屏触控、焦点恢复、HUD、暗色、减少动效和状态恢复。
+- lx-ui `vue-tsc --noEmit`、206 modules 生产构建通过。组件库没有独立 ESLint CLI，本轮不把无匹配 glob 误记为通过。
+- 真实权限保存、宿主组合和跨浏览器/人工读屏仍未完成；下一步是剩余组件矩阵与 Vue3 Element Plus 替换契约。
+
 ## 2026-10-18 LxDescriptions 当前版复验
 
 - 定向单测 **9/9**、lx-ui 文档 Playwright **3/3**；全量 Vue3 Vitest **61 文件/603 测试**通过。

@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-18 LxVirtualTree/TransferPanel 组合 P2 复验
+
+- 固定行虚拟化、`nodeSummary`、筛选隐藏项、批量上下限、长名称、未加载项、320/375px、键盘焦点恢复和主题状态通过当前文档证据复验。
+- `lx-virtual-tree-docs.spec.ts` 与 `lx-transfer-panel-docs.spec.ts` 合计 **48/48**；`pnpm typecheck`、206 modules 构建通过。未发现组件级 P0/P1/P2。
+- 宿主 `DataPermissionTree` 的保存/权限 API 仍需真实契约，继续留在 UI-04；下一入口是剩余基础组件矩阵和 Vue3 分批替换准备。
+
 ## 2026-10-18 LxDescriptions 当前版门禁复验
 
 - 当前组件、Demo、中文 API 与设计稿对照重新冻结；两端布局、双列/窄屏单列、32px 行高、长值/状态键盘读取、复制、抽屉和状态组合均保持契约。

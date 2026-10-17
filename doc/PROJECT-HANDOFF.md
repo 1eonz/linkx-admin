@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] LxVirtualTree/TransferPanel 组合复验交接
+
+- **本轮结论**：`LxVirtualTree` 固定行与插槽摘要、`LxTransferPanel` 批量/筛选/已选列表组合的 P2 复验完成；48/48 文档 E2E 通过，未复现组件级 P0/P1/P2。
+- **覆盖证据**：桌面 32px、窄屏 44/64px 行高、长名称全文入口、未加载项、筛选隐藏项、批量上下限、键盘方向键、虚拟滚动卸载后的焦点恢复、HUD/暗色/减少动效、空/加载/错误恢复均有浏览器断言；`pnpm typecheck` 和 lx-ui 206 modules 构建通过。
+- **边界**：`DataPermissionTree` 宿主保存状态、真实权限接口、跨浏览器/人工读屏和 Vue3 页面替换未完成。组件库无独立 ESLint CLI，不能用错误 glob 的“无文件”结果冒充通过。
+- **交接下一波**：盘点剩余 UI-10 基础组件与 Element Plus 直接用法，按页面契约分批替换；业务 API 继续使用 `.then().catch().finally()`，不臆造权限或后端字段。
+
 ## [2026-10-18] LxDescriptions 当前版复验交接
 
 - **本轮结论**：当前源码、Demo、中文文档与设计稿契约已冻结复验，未发现需要修改的 P0/P1/P2 组件缺陷。已验证两端布局、双列转单列、32px 行高、长值和长状态键盘可读性、复制按钮、480px 抽屉、空/加载/错误恢复、HUD 和 `prefers-reduced-motion`。

@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-18 LxVirtualTree/TransferPanel 组合复验
+
+- 入口：`linkx-fe/src/components/LxVirtualTree/`、`linkx-fe/src/components/LxTransferPanel/`；设计依据：`design/虚拟滚动树 + 双栏穿梭/`；测试：`other-admin/admin-vue3/tests/e2e/lx-virtual-tree-docs.spec.ts`、`lx-transfer-panel-docs.spec.ts`。
+- 当前证据：文档 E2E **48/48**、lx-ui 类型检查和 206 modules 构建通过；宿主 `DataPermissionTree` 的真实保存与权限接口仍定位在 UI-04 迁移台账。
+
 ## 2026-10-18 LxDescriptions 当前版复验
 
 - 入口：`linkx-fe/src/components/LxDescriptions/`；设计依据：`design/详情描述行 Descriptions/`；单测：`other-admin/admin-vue3/tests/unit/lx-descriptions.test.ts`；文档 E2E：`other-admin/admin-vue3/tests/e2e/lx-descriptions-docs.spec.ts`。

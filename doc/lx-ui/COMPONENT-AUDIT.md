@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-18 LxVirtualTree/TransferPanel 组合 P2 复验
+
+- `LxVirtualTree` 与 `LxTransferPanel` 当前版固定行、插槽摘要、筛选/批量、长名称、未加载项、窄屏触控和焦点恢复已用文档浏览器重新核对，合计 **48/48** 通过。
+- lx-ui `vue-tsc --noEmit` 与 206 modules 构建通过；没有复现组件级 P0/P1/P2。组件库无独立 ESLint 配置，错误路径 glob 的无匹配结果不记为通过。
+- `DataPermissionTree` 宿主保存与真实权限联调继续开放；下一步转入剩余基础组件矩阵和 Vue3 Element Plus 替换前置契约审计。
+
 ## 2026-10-18 LxDescriptions 当前版门禁复验
 
 - 当前 `LxDescriptions` 源码、Demo、中文 API 和设计稿对照已重新冻结；默认两端布局、双列响应式、32px 行高、长值/状态焦点、复制字段、480px 抽屉、空/加载/错误、HUD 和减少动效均有当前证据。
