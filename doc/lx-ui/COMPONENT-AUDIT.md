@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-18 LxDescriptions/LxCodeSlot 双路审查与动态标签回归
+
+- `LxCodeSlot` 现在在初始渲染和组件更新时同步宿主 `aria-label`；`LxDescriptions` 新增字段标签变化回归，单测 **10/10**，文档 E2E **3/3**，CodeSlot E2E **1/1**。
+- Assessment A **32/40（Good）**，无 P0，三个 P1 仍开放：Demo 首屏竞争、长值截断发现性、复制中/失败反馈可见性。Assessment B 四个 detector 为合法 `[]`/空 stderr/退出码 `0`，8 个 Light/HUD × 桌面/移动视图注入成功，页面错误和页级横溢出为 0。
+- 本条只记录当前版证据和代码回归，不关闭 UI-10 严格矩阵；真实读屏器、剪贴板、跨浏览器和 Vue3 宿主替换仍未完成。证据目录为 `linkx-fe/.impeccable/critique/descriptions-codeslot-browser/`。
+
 ## 2026-10-18 LxInput 普通前后缀高度轨道补强
 
 - `linkx-fe/src/components/LxInput/style.css` 将高度轨道提升到所有 `LxInput` 根节点，统一 `box-sizing`、最小高度和 flex 伸展；复合 `prefix/suffix`、`prepend/append`、窄屏 44px 规则与原事件/插槽契约保持不变。

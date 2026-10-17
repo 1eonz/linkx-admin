@@ -1,5 +1,14 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-18 LxDescriptions/LxCodeSlot 动态可访问名称与双路审查
+
+- **实现**：`LxCodeSlot` 的宿主 `aria-label` 采用初始值加 `onUpdated` 同步，字段标签变化时复制按钮名称不会残留旧值；`LxDescriptions` 移动端 E2E 改为验证组件既定的换行与外层边界，不把长文本节点的 `scrollWidth` 误判为页面横溢出。
+- **验证**：`lx-descriptions.test.ts` **10/10**；`lx-descriptions-docs.spec.ts` **3/3**；`lx-codeslot-docs.spec.ts` **1/1**；lx-ui 类型检查、206 modules 构建、VitePress 文档构建、目标 Prettier、E2E 文件 ESLint 和 `git diff --check` 通过。
+- **Assessment A**：独立设计评审 **32/40（Good）**，无 P0，开放 3 个 P1：Demo 首屏控件竞争、长值截断发现性、复制中/失败反馈可见性。
+- **Assessment B**：LxDescriptions/LxCodeSlot 源码及两份文档共四个 detector 均为合法 JSON `[]`、stderr 空、退出码 `0`；Light/HUD × 1280/375 共 8 个新浏览器上下文注入成功，页面错误/失败请求/HTTP 失败为 `0`，页面级宽度无溢出，移动复制按钮为 `44px`。证据见 `linkx-fe/.impeccable/critique/descriptions-codeslot-browser/`。
+- **审查边界**：HUD 命中主要归因 VitePress 文档壳层；`[]` 不单独代表通过。综合报告和 snapshot 已写入 `linkx-fe/.impeccable/critique/descriptions-codeslot-assessment-2026-10-18/` 与根 `.impeccable/critique/`。由于 3 个 P1 未关闭，本波不增加 UI-10 严格矩阵计数。
+- **下一入口**：按 P1 台账继续收口长值交互、复制状态和 Demo 信息架构；真实读屏器、剪贴板权限、跨浏览器、宿主替换与后端联调保持开放。
+
 ## 2026-10-18 LxCodeSlot 当前版复核与无障碍/窄屏补强
 
 - **Assessment A**：独立设计评审 **30/40（Good）**；确认固定 `aria-label` 遮蔽字段和值、独立组件窄屏复制命中区不足、复制竞态/空值静默及设计标本语义漂移。

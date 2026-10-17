@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-18 LxDescriptions/LxCodeSlot 可访问名称与双路审查
+
+- 入口：`linkx-fe/src/components/LxDescriptions/`、`linkx-fe/src/components/LxCodeSlot/`；文档测试为 `lx-descriptions-docs.spec.ts`、`lx-codeslot-docs.spec.ts`，单测为 `lx-descriptions.test.ts`。
+- 当前证据：单测 **10/10**、Descriptions 文档 E2E **3/3**、CodeSlot 文档 E2E **1/1**；类型检查、构建和文档构建通过。宿主标签动态变化会同步复制按钮 `aria-label`。
+- A **32/40**，开放三个 P1；B 四个 detector 为合法 `[]`/空 stderr/退出码 `0`，8 个 Light/HUD、桌面/移动上下文注入成功且无页面级横溢出。组件门禁暂不关闭，后续优先处理长值发现性、复制反馈和 Demo 信息架构。
+
 ## 2026-10-18 LxCodeSlot 当前版复核
 
 - 入口：`linkx-fe/src/components/LxCodeSlot/`；设计依据为 `DESIGN-SPEC.md`、`design/详情描述行 Descriptions/code.html`；中文文档为 `linkx-fe/docs/components/lxcodeslot.md`。
