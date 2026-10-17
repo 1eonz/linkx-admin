@@ -2,6 +2,11 @@
 
 范围以根目录 `src/router/modules/*.js` 中未注释的路由为准。下表“源码”仅表示核对入口、调用和已知接口契约；“单测”仅表示对应 Vitest 用例通过；Mock 与真实联调必须有实际运行记录才能标为通过。业务 Mock 交互与入口渲染 Smoke 分开记录。Vue2 已注释的历史菜单不纳入迁移目标，Vue3 多出的入口另列。
 
+## 2026-10-17 LxPageCard
+
+- 库级门禁：单测 **3/3**、文档 E2E **1/1**、Assessment A **33/40**、B 五视图浏览器证据有效。
+- 宿主替换保留 region、`aria-busy`、loading 和具名 slots；Vue3 `element-plus` 暂不删除。
+
 ## 2026-10-17 LxFormErrorBanner
 
 - 组件行为门禁：单测 **2/2**、文档 E2E **1/1**、Assessment A **32/40**；B 的移动 overlay 横溢出已由无覆盖层基线排除组件缺陷。

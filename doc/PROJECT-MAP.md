@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-17 LxPageCard 正式审查
+
+- 组件入口 `linkx-fe/src/components/LxPageCard/`，文档 `linkx-fe/docs/components/lxpagecard.md`；单测 **3/3**、文档 E2E **1/1**。
+- Assessment A **33/40**；B 五视图证据有效，迁移时保留 region、`aria-busy`、loading 和具名 slots。
+
 ## 2026-10-17 LxFormErrorBanner 阶段审查
 
 - 组件入口 `linkx-fe/src/components/LxFormErrorBanner/`，文档 `linkx-fe/docs/components/lxformerrorbanner.md`；单测 **2/2**、文档 E2E **1/1**。

@@ -2,6 +2,11 @@
 
 > **文档职责（2026-10-17）**：本文只维护逐页迁移缺口、旧契约和业务适配备注；不再复制 lx-ui 全局波次状态。全局计划和下一入口以 `doc/PROJECT-DELIVERY-PLAN.md` 为准。
 
+## 2026-10-17 LxPageCard 组件审查复核
+
+- lx-ui `LxPageCard` 已通过单测 **3/3**、文档 E2E **1/1** 和正式 A/B 证据；报告见 `.impeccable/critique/pagecard-assessment-b-2026-10-17/assessment-report.md`。
+- 页面迁移时保留标题 region、loading 覆盖、`aria-busy`、`header-extra`/`footer` 插槽和 body padding 语义。
+
 ## 2026-10-17 LxFormErrorBanner 审查复核
 
 - lx-ui 组件行为已通过单测 **2/2**、文档 E2E **1/1** 和 A/B 阶段证据；报告见 `.impeccable/critique/formerrorbanner-assessment-b-2026-10-17/assessment-report.md`。

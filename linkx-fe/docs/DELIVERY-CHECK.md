@@ -2,6 +2,11 @@
 
 > **文档职责（2026-10-17）**：本文只保留组件交付证据摘要和 `.impeccable/critique` 路径，不再复制全局计划或交接正文。当前波次入口见 `doc/PROJECT-DELIVERY-PLAN.md`，完整交接见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxPageCard 正式审查
+
+- 单测 **3/3**、文档 E2E **1/1**；B 证据 `.impeccable/critique/pagecard-assessment-b-2026-10-17/`，detector 与浏览器证据有效。
+- 迁移边界：保留具名插槽、loading、`aria-busy` 和窄屏布局。
+
 ## 2026-10-17 LxFormErrorBanner 阶段审查
 
 - 单测 **2/2**、文档 E2E **1/1**；B 证据见 `.impeccable/critique/formerrorbanner-assessment-b-2026-10-17/`，detector 和五视图证据有效。
