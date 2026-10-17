@@ -2,6 +2,11 @@
 
 > **文档职责（2026-10-17）**：本文只维护 lx-ui 组件路线和组件级未完成项，不重复记录全局波次台账。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，交接与审查证据见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxFormErrorBanner 阶段审查
+
+- 单测 **2/2**、文档 Playwright **1/1**；Assessment A **32/40（Good）**，B detector 为合法 `[]`/空 stderr/退出码 0，五视图注入成功。
+- 移动文档视图出现 `scrollWidth=462 > 375`，需区分壳层与组件并完成无覆盖层基线；正式窄屏收口暂缓。
+
 ## 2026-10-17 LxPagination 正式审查
 
 - 单测 **5/5**、文档 Playwright **3/3**；Assessment A **32/40（Good）**，B detector 为合法 `[]`/空 stderr/退出码 0，五视图注入成功。

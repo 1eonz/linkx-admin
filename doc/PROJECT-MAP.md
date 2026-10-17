@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-17 LxFormErrorBanner 阶段审查
+
+- 组件入口 `linkx-fe/src/components/LxFormErrorBanner/`，文档 `linkx-fe/docs/components/lxformerrorbanner.md`；单测 **2/2**、文档 E2E **1/1**。
+- Assessment A **32/40**、B detector/浏览器证据有效；移动文档视图存在 `462/375` 横溢出观察，待基线定位后再正式关闭。
+
 ## 2026-10-17 LxPagination 正式审查
 
 - 组件入口 `linkx-fe/src/components/LxPagination/`，文档 `linkx-fe/docs/components/lxpagination.md`；单测 **5/5**、文档 E2E **3/3**。

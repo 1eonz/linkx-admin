@@ -2,6 +2,12 @@
 
 > **范围备注（2026-10-15）**：页面操作引导暂缓考虑与实施，不继续拆分，也不纳入待办、自动执行队列或排期；它不作为 lx-ui 收口或 Vue3 Element Plus 替换的前置条件。本文和 `doc/GUIDE-CONTENT-PLAN.md`、`doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 保留历史需求与设计基线；后续确有需要时再恢复计划，届时重新确认页面范围、文案、交互、技术方案及后端契约。当前其余交付顺序不变。
 
+## 2026-10-17 LxFormErrorBanner 审查阶段交接
+
+- 定向单测 **2/2**、文档 Playwright **1/1**；Assessment A **32/40（Good）**，detector 合法 `[]`、stderr 空、退出码 `0`，五视图浏览器注入成功。
+- 移动文档视图记录 `scrollWidth=462 > clientWidth=375`，来源尚需无覆盖层基线区分 Demo/文档壳层与组件自身；因此本波保留 P1，不登记为窄屏正式完全通过。
+- 组件语义和错误边界已验证；下一步先定位移动横溢出并复验，再收口正式 Critique。Vue3 宿主替换和 Element Plus 删除继续后置。
+
 ## 2026-10-17 LxPagination 正式组件审查交接
 
 - 定向单测 **5/5**、文档 Playwright **3/3**；Assessment A **32/40（Good）**。
