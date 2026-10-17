@@ -80,9 +80,12 @@ describe('LxStatusSwitch', () => {
     wrapper.unmount();
   });
 
-  it('falls back to a read-only tag when an injected permission is absent', () => {
+  it('shows and describes the current state when permission is absent', () => {
     const wrapper = mountSwitch({ modelValue: true, permission: 'demo:status-switch' });
-    expect(wrapper.get('.lx-status-switch__fallback').text()).toContain('禁用/只读');
+    const fallback = wrapper.get('.lx-status-switch__fallback');
+    expect(fallback.text()).toContain('开启（无权限，只读）');
+    expect(fallback.attributes('aria-label')).toBe('开启（无权限，只读）');
+    expect(fallback.attributes('aria-description')).toContain('开启，当前状态');
     expect(wrapper.findComponent(SwitchStub).exists()).toBe(false);
     wrapper.unmount();
   });

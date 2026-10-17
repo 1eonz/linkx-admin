@@ -25,7 +25,7 @@ import Basic from '../../src/components/LxStatusSwitch/demo/basic.vue';
 | `disabled`    | `boolean`                   | `false`     | 只读显示当前状态，不渲染开关。                                                                                                                         |
 | `permission`  | `string`                    | `undefined` | 宿主注入的按钮权限码；无权限时按 `fallbackTag` 降级。                                                                                                  |
 | `contextKey`  | `string \| number`          | `undefined` | 当前行或实体的稳定标识；确认等待期间变化时会丢弃旧结果，避免旧确认作用于新实体。                                                                       |
-| `fallbackTag` | `boolean`                   | `true`      | 无权限时显示浅灰 `LxTag`，避免灰色死开关造成误解。                                                                                                     |
+| `fallbackTag` | `boolean`                   | `true`      | 无权限时显示浅灰 `LxTag`，同时展示并播报当前开启/关闭状态及只读原因，避免灰色死开关造成误解。                                                          |
 | `confirm`     | `string \| object \| false` | `false`     | 关闭前确认说明；对象可传 `title`、`message`、`targetEntity`、`impact`、`audit`、`confirmText`、`cancelText`、`type`、`customClass`；开启时不弹确认框。 |
 | `onText`      | `string`                    | `开启`      | 开启状态文案。                                                                                                                                         |
 | `offText`     | `string`                    | `关闭`      | 关闭状态文案。                                                                                                                                         |

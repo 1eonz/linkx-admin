@@ -49,6 +49,7 @@ const wrapperAttrs = computed(() =>
           'aria-label',
           'aria-labelledby',
           'aria-describedby',
+          'aria-description',
           'aria-busy',
         ].includes(key),
     ),
@@ -64,7 +65,24 @@ const fallbackAccessibleLabel = computed(() =>
     ? attrs['aria-label']
     : permissionAllowed.value
       ? `${stateLabel.value}（只读）`
-      : '无权限，禁用/只读',
+      : `${stateLabel.value}（无权限，只读）`,
+)
+const fallbackAccessibleDescription = computed(() => {
+  const suppliedDescription = attrs['aria-description']
+  const permissionDescription = permissionAllowed.value
+    ? undefined
+    : `${stateLabel.value}，当前状态；无权限，只读。`
+  return [
+    typeof suppliedDescription === 'string' ? suppliedDescription : undefined,
+    permissionDescription,
+  ]
+    .filter((description): description is string => Boolean(description))
+    .join('；')
+})
+const accessibleDescription = computed(() =>
+  typeof attrs['aria-description'] === 'string'
+    ? attrs['aria-description']
+    : undefined,
 )
 const accessibleLabelledby = computed(() =>
   typeof attrs['aria-labelledby'] === 'string'
@@ -172,7 +190,12 @@ function onChange(value: string | number | boolean) {
       :aria-label="fallbackAccessibleLabel"
       :aria-labelledby="accessibleLabelledby"
       :aria-describedby="accessibleDescribedby"
-      >{{ permissionAllowed ? `${stateLabel}（只读）` : '禁用/只读' }}</LxTag
+      :aria-description="fallbackAccessibleDescription || undefined"
+      >{{
+        permissionAllowed
+          ? `${stateLabel}（只读）`
+          : `${stateLabel}（无权限，只读）`
+      }}</LxTag
     >
     <LxSwitch
       v-else
@@ -186,6 +209,7 @@ function onChange(value: string | number | boolean) {
       :aria-label="accessibleLabel"
       :aria-labelledby="accessibleLabelledby"
       :aria-describedby="accessibleDescribedby"
+      :aria-description="accessibleDescription"
       @change="onChange"
     />
   </span>

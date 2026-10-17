@@ -74,6 +74,9 @@ test.describe('lx-ui LxStatusSwitch 文档示例', () => {
       const control = row.locator('[role="switch"], .lx-status-switch__fallback').first();
       await expect(control).toHaveAttribute('aria-labelledby', `status-switch-${testId.replace('-row', '')}-label`);
     }
+    const permissionFallback = page.getByTestId('permission-row').locator('.lx-status-switch__fallback');
+    await expect(permissionFallback).toContainText('开启（无权限，只读）');
+    await expect(permissionFallback).toHaveAttribute('aria-description', /开启，当前状态/);
   });
 
   test('模拟保存失败可恢复，窄屏触控、主题与减少动效可用', async ({ page }) => {
