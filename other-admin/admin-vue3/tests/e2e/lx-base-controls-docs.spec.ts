@@ -85,6 +85,10 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
       `${option} 档根节点与输入框下边界对齐`,
     ).toBeLessThanOrEqual(1);
     expect(geometry.wrapper.height).toBe(expectedHeight);
+    expect(
+      await compoundInput.evaluate((root) => getComputedStyle(root).overflow),
+      `${option} 档复合输入应裁切统一外框`,
+    ).toBe('hidden');
     expect(geometry.prefix.height, `${option} 档 prefix 高度`).toBe(expectedHeight);
     expect(geometry.suffix.height, `${option} 档 suffix 高度`).toBe(expectedHeight);
     for (const addon of ['prepend', 'append'] as const) {
@@ -126,6 +130,21 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
     }),
   );
   expect(touchSlotHeights, '窄屏前后缀槽位应与输入框同高').toEqual([44, 44, 44, 44]);
+
+  const focusRing = await compoundInput.evaluate((root) => {
+    const input = root.querySelector<HTMLInputElement>('.el-input__inner');
+    if (!input) throw new Error('缺少复合输入真实输入框');
+    input.focus();
+    const rootStyle = getComputedStyle(root);
+    const wrapper = root.querySelector<HTMLElement>('.el-input__wrapper');
+    if (!wrapper) throw new Error('缺少复合输入内框');
+    return {
+      rootShadow: rootStyle.boxShadow,
+      wrapperShadow: getComputedStyle(wrapper).boxShadow,
+    };
+  });
+  expect(focusRing.rootShadow, '聚焦时统一外框应承载焦点环').toContain('0px 0px 0px 2px');
+  expect(focusRing.wrapperShadow, '聚焦时内框不应再绘制第二个焦点环').toBe('none');
 });
 
 test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用', async ({ page }) => {

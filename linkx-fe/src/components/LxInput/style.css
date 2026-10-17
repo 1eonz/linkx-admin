@@ -22,9 +22,13 @@
 
 /* 复合输入按同一条高度轨道拉伸，避免内框与前后缀在不同内核布局下错位。 */
 .lx-input.el-input-group {
+  box-sizing: border-box;
   height: var(--el-input-height);
   min-height: var(--el-input-height);
   align-items: stretch;
+  overflow: hidden;
+  border-radius: var(--lx-radius-md);
+  box-shadow: 0 0 0 1px var(--lx-control-border) inset;
 }
 
 .lx-input.el-input-group > .el-input-group__prepend,
@@ -39,6 +43,26 @@
 .lx-input.el-input-group > .el-input__wrapper {
   height: 100%;
   flex: 1 1 auto;
+  min-height: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* 复合输入只保留一个连续外框，避免内框焦点环与前后缀边线出现高低错层。 */
+.lx-input.el-input-group > .el-input-group__prepend,
+.lx-input.el-input-group > .el-input-group__append {
+  border-radius: 0;
+}
+
+/* 复合输入聚焦时由根节点承载完整焦点环，前后缀和输入框共享同一条边界。 */
+html:root .lx-input.el-input-group:focus-within {
+  box-shadow:
+    0 0 0 1px var(--lx-color-primary) inset,
+    0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
+  box-shadow: none;
 }
 
 /* 禁用态保留灰色表面，同时维持值的可读性。 */
