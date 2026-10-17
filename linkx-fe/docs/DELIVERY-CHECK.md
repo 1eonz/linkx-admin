@@ -4,6 +4,11 @@
 
 ## 2026-10-17 G2 当前版自动化门禁补记
 
+### SearchBar 修后布局
+
+- 第四字段采用 `span 12` 集成列，前三个字段各为 `span 4`；选择器与查询/重置按钮桌面同排底边对齐，375px 操作组独占下一行且选择器保持全宽。定向单测 **10/10**、文档 E2E **5/5**、类型与 VitePress 构建通过。
+- 修后源码和 Demo detector 均为合法 `[]`、stderr 为空、退出码 `0`；Assessment A/B 已独立复验，八视图浏览器证据无页面错误/失败请求，综合报告为 **34/40（Good）**。snapshot 已写入并读取 trend；历史评分口径不同，不能只按 `[]` 标记通过。
+
 - Vue3 全量单测 **598/598**，`LxSearchBar`/`LxStatusSwitch` 文档 Playwright **8/8**；覆盖成功、空、失败恢复、重置、loading、折叠、确认取消、确认失败、权限降级、窄屏、HUD 和减少动效。
 - lx-ui 类型检查、206 modules 构建、VitePress 构建通过；构建日志中的 chunk 大小提示为既有告警。
 - `npx impeccable update` 已成功更新引擎至 **0.1.15**（exit 0）。正式审查仍须按 A/B 隔离流程执行，并同时记录 JSON、stderr、退出码和浏览器证据。

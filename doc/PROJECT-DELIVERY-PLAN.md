@@ -2,6 +2,14 @@
 
 > **范围备注（2026-10-15）**：页面操作引导暂缓考虑与实施，不继续拆分，也不纳入待办、自动执行队列或排期；它不作为 lx-ui 收口或 Vue3 Element Plus 替换的前置条件。本文和 `doc/GUIDE-CONTENT-PLAN.md`、`doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 保留历史需求与设计基线；后续确有需要时再恢复计划，届时重新确认页面范围、文案、交互、技术方案及后端契约。当前其余交付顺序不变。
 
+## 2026-10-17 G2 SearchBar 布局修复与审查收口
+
+- **本轮实现**：`LxSearchBar` 第四字段的选择器与查询/重置按钮现处于同一桌面行并底边对齐；前三个字段各占 4 列，集成操作字段占 12 列，避免选择器被压成 0px；按钮保持不换行，375px 窄屏时操作组独占下一行。文本输入 Escape 仍重置，选择器/日期/级联 Escape 只关闭自身弹层。
+- **回归证据**：SearchBar 定向单测 **10/10**，文档 Playwright **5/5**，lx-ui `vue-tsc --noEmit` 与 VitePress 构建通过。修后 Assessment A 已独立复核，Assessment B 覆盖 Light/HUD × 1440/375，四个 detector 均为合法 JSON `[]`、stderr 为空、退出码 `0`，八个浏览器视图 HTTP 200、无页面错误和失败请求；375px 页面级宽度异常仍只出现在 overlay/文档壳层。
+- **Critique 状态**：修后综合报告为 **34/40（Good）**，无开放 P0/P1；P2/P3 观察与证据已归档到 `.impeccable/critique/g2-searchbar-postfix-2026-10-17/`。`[]` 仅作为静态零命中证据，未单独作为通过依据。
+- **快照记录**：已写入 Impeccable snapshot `2026-10-17T09-20-56Z__linkx-fe-src-components-lxsearchbar-index-vue.md`，trend 已读取；历史记录最大分数不完全一致，不能把不同评分口径直接横向比较。
+- **下一动作**：按白名单提交和推送；随后进入下一项未关闭的 lx-ui 基础组件门禁。Vue3 Element Plus 替换、真实权限/后端联调及页面引导仍按冻结顺序后置。
+
 ## 2026-10-17 交付流程压缩规则与 G2 自动推进
 
 - **单波次只保留三份主文档**：本文件维护全局计划和完成台账，`doc/PROJECT-HANDOFF.md` 维护交接与边界，`linkx-fe/docs/ROADMAP.md` 维护组件路线；`linkx-fe/docs/DELIVERY-CHECK.md` 只保留验证摘要和证据路径。新增零散审查说明必须归档到 `.impeccable/critique/<波次>/`，不再新建同义 Markdown。
@@ -10,6 +18,12 @@
 - **当前进度**：G2 `LxSearchBar`/`LxStatusSwitch` 自动化门禁已完成（全量单测 **598/598**、文档 E2E **8/8**、类型检查、206 modules 构建、VitePress 构建通过）；Impeccable 已更新至 **0.1.15**。下一动作是正式 A/B、代码复审和综合证据收口，完成后直接进入下一组件批次。
 - **新引擎复验**：初次 SearchBar 命中来自 Demo 外层卡片嵌套与标准态说明文字对比度；已移除 Demo 卡片壳、改为分组布局并提升说明文字对比度。修后 SearchBar 与 StatusSwitch URL detector 均返回合法 JSON `[]`、stderr 为空、exit `0`。该修复只影响 Demo 展示，G2 仍需完成正式独立 A/B、代码复审和综合 snapshot/trend。
 - **窄屏复验**：使用新引擎 `--viewport 375x812` 对两个 URL 独立扫描，均返回合法 JSON `[]`、stderr 为空、exit `0`；PowerShell 对空 stderr 的显示异常不影响文件内容和进程状态。
+
+## 2026-10-17 预警推送 Mock 业务验收
+
+- 新增 `tests/e2e/alert-push-workflow.spec.ts`，隔离拦截全部后端请求，覆盖任务逾期/无人值守标签分类、搜索与重置参数、批量删除失败后保留数据及重试成功，并验证无人值守新增切换群组后调用群组查询、显示并提交 `groupName`；Playwright **2/2**、Vue3 `vue-tsc --noEmit`、目标 ESLint、Prettier 和 `git diff --check` 通过。
+- 四个新增/编辑表单现根据接收人类型响应式切换查询 API、重建分页选择器，并使用群组名称字段。当前 E2E 只验收无人值守新增群组流程；其他新增/编辑组合、分页回显、受限账号及真实后端仍未验收，不改变 API 契约，也不代表业务模块整体迁移完成。
+- G2 正式独立 Critique 仍是 lx-ui/宿主接入之前置门禁。当前证据目录缺少计划引用的 SearchBar/StatusSwitch 存档，指定 `gpt-6-luna` 的 A/B 子代理及本轮独立复试均返回 HTTP 503；不得将旧计划中的 detector 摘要当作现存存档或宣布正式 A/B 通过。下一入口仍为恢复 G2 的独立 A/B、代码复审和可核验综合归档。
 
 ## 2026-10-17 LxPageCard 正式组件审查交接
 

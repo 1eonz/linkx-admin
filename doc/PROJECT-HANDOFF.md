@@ -1,5 +1,19 @@
 # LinkX 项目交接记录
 
+## [2026-10-17] G2 SearchBar 布局修复与修后验证
+
+- **实现**：前三个字段各占 4 列，最后集成字段占 12 列；选择器与查询/重置按钮桌面同排底边对齐，操作按钮禁止在桌面换行；375px 时选择器全宽、操作组回落为独占行。同步中文 API/设计对照说明，并增加桌面几何与移动边界 E2E 断言。
+- **验证**：SearchBar 单测 **10/10**、文档 Playwright **5/5**、lx-ui 类型检查和 VitePress 构建通过；修后源码/Demo detector 均为合法 `[]`、空 stderr、退出码 `0`。Assessment A/B 已独立复验，八个 Light/HUD × 1440/375 视图 HTTP 200、无页面错误和失败请求。
+- **Critique 边界**：综合报告为 **34/40（Good）**，无开放 P0/P1；375px 的 `document` 宽度异常仅在 overlay 注入后出现，`.VPDoc` 与组件基线保持 375px，归因于文档壳层/overlay。证据目录为 `.impeccable/critique/g2-searchbar-postfix-2026-10-17/`；snapshot 已写入 `.impeccable/critique/2026-10-17T09-20-56Z__linkx-fe-src-components-lxsearchbar-index-vue.md`，trend 已读取。
+- **下一入口**：按白名单提交推送；继续下一未关闭 lx-ui 组件。Vue3 宿主替换、权限/真实后端联调和引导页保持后置。
+
+## [2026-10-17] 预警推送 Mock 业务验收
+
+- **实现与验证**：新增 `other-admin/admin-vue3/tests/e2e/alert-push-workflow.spec.ts`，Mock 拦截所有后端请求，覆盖任务逾期/无人值守分类、搜索/重置参数、批量删除失败后重试成功，以及无人值守新增切换群组后按 `groupName` 查询、显示并提交。Playwright **2/2**、Vue3 `vue-tsc --noEmit`、目标 ESLint、Prettier 和 `git diff --check` 通过。
+- **失败定位**：首轮测试遇到隐藏 Tab 内同名输入框和 Element Plus 隐藏原生 checkbox；已按可访问 `tabpanel` 和可见复选框外壳修正定位，最终测试通过。这些是测试定位问题，不是生产代码缺陷。
+- **表单修复与边界**：四个新增/编辑表单的通知对象 API 随类型响应式更新；切换类型时重建分页选择器，群组选项使用 `groupName` 回显。新增流程的群组场景已有端到端证据；编辑表单与任务逾期新增场景仍待覆盖。分页回显、受限账号及真实后端联调仍未完成，不代表模块整体迁移完成。
+- **下一入口**：按全局计划完成 G2 `LxSearchBar`/`LxStatusSwitch` 的可核验独立审查；指定模型通道此前返回 HTTP 503，正式 Critique 尚未闭环。
+
 ## [2026-10-17] LxInput 前后缀高度修复
 
 - **问题与实现**：复合输入在 sm 档实测 wrapper 为 28px，而 prepend/append 为 37.33px；将外侧 addon 约束为当前输入尺寸令牌高度，并在窄屏/触屏下统一为 44px。prefix/suffix 原先已垂直居中，保留并加入回归断言。

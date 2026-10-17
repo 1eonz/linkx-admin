@@ -9,6 +9,11 @@
 
 ## 2026-10-17 G2 当前版验证补记
 
+### 修后布局增量
+
+- SearchBar 四字段标准态前三项各占 4 列，最后集成字段占 12 列；选择器与查询/重置按钮桌面同排、底边对齐，375px 时操作组独占下一行，选择器保持 44px 全宽。
+- 定向单测 **10/10**、文档 Playwright **5/5**、类型检查和 VitePress 构建通过；修后 detector 三件套（源码、Demo）均为合法 `[]`、空 stderr、退出码 `0`，浏览器八视图完成复验。Assessment A/B、代码复审和综合报告已收口，snapshot 已写入并读取 trend；历史评分口径不同，趋势仅作记录。
+
 - `LxSearchBar` 与 `LxStatusSwitch` 当前实现已通过 Vue3 全量单测 **598/598**，其中定向组件单测分别为 **9/9**、**21/21**；文档 Playwright **8/8**。
 - lx-ui `vue-tsc --noEmit`、206 modules 库构建和 VitePress 文档构建均通过。VitePress 仅保留既有大 chunk 警告，不影响构建退出码。
 - 已执行 `npx impeccable update`，退出码 **0**，Impeccable 引擎更新为 **0.1.15**；后续 Critique 必须继续保存 detector JSON、stderr、退出码和 Light/HUD、桌面/窄屏浏览器证据，不能以 `[]` 单独结论通过。
