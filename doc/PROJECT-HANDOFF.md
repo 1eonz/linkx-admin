@@ -1,5 +1,20 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] LxInput 前后缀复合轨道再次收敛
+
+- **问题**：部分主题或尺寸下，Element Plus 输入内框按内容尺寸参与 flex 计算，导致前后缀状态下输入框与外侧前后缀的上下边界看起来不一致。
+- **实现**：`LxInput` 复合根节点、输入内框和 `prepend/append` 统一采用伸展高度轨道；内框显式继承 `--el-input-height`，并保留窄屏 44px 触控规则。新增 E2E 根节点与内框上下边界断言。
+- **验证要求**：运行定向复合输入 E2E、lx-ui 类型检查、目标格式/差异检查，并按 Impeccable 规则记录浏览器证据、detector JSON、stderr 与退出码；detector 返回 `[]` 不能单独作为通过依据。
+- **边界**：本修复只涉及 `LxInput` 视觉几何，不改变事件、表单校验或 API 请求链式风格；Vue3 全量替换和 UI-10 整库门禁仍按原计划推进。
+
+## [2026-10-18] LxTag 关闭操作、尺寸和禁用态复核
+
+- **实现**：关闭按钮统一使用 `LxIcon name="x"`，可见名称和提示为“关闭标签”；补齐 `large` 尺寸，三档标签设置稳定最小高度；禁用态使用 `--lx-btn-disabled-*` 令牌，不再使用整体 `opacity: 0.4`；长内容在可用宽度内省略。Demo 与中文说明补充 large、disabled 和键盘焦点状态。
+- **验证**：定向单测 **5/5**、LxTag 文档 Playwright **2/2**；lx-ui `typecheck`、库构建、VitePress 文档构建、宿主 ESLint/Prettier 和差异检查通过。文档构建保留既有大 chunk 警告。
+- **代码复审**：修前 Assessment A 发现 disabled 文字对比度约 1.89:1、`large` 类型未实现、长文本窄屏风险；修后代码复核确认关闭按钮仍为原生 button，disabled 不渲染关闭操作，`LxIcon` 作为装饰图标隐藏于辅助技术，不改变 `close` 事件契约。
+- **Impeccable**：Assessment A **27/40（Good）**；修后 Assessment B 证据见 `.impeccable/critique/lxtag-assessment-b-2026-10-18-recheck/`，五个 Light/HUD、桌面/375px、减少动效视图均无页面错误或失败请求，detector JSON/stderr/退出码为合法 `[]`/空/`0`。唯一组件命中 `cramped-padding` 与设计稿 `small` 档内距一致，其余命中为文档壳层。
+- **边界与下一步**：本波只完成 LxTag 组件级门禁，不增加 Vue3 Element Plus 替换、权限中心、真实后端联调或页面操作引导完成度；继续按 UI-10 未关闭组件矩阵推进。
+
 ## [2026-10-17] DynamicForm/Form 正式双路 Critique 归档
 
 - **审查结论**：A/B 均由独立 `gpt-6.1-sol` 完成，综合 **28/40（Good）**；A 的原始 P1（375px 横溢出、字段错误可见性）已由 B 稳定重跑关闭，当前只保留文档信息密度、HUD 层级和键盘效率提示三个 P2/P3 观察。
@@ -2462,6 +2477,7 @@
 - 新引擎在线 detector 初次命中 SearchBar Demo 卡片嵌套和说明文字对比度；已移除 Demo 卡片壳并提升文字对比度。修后 SearchBar 与 StatusSwitch 均为合法 JSON `[]`、stderr 空、exit `0`。该结果只关闭静态 detector 阻断，G2 正式 Critique 仍需独立 A/B、代码复审和综合 snapshot/trend。
 - 375×812 窄屏 detector 复验同样为合法 JSON `[]`、stderr 空、exit `0`；该证据与现有 8/8 文档 E2E 一并作为 G2 正式 A/B 的输入。
 - 该阻断不改变已通过的实现级自动化门禁，也不引入未经设计确认的样式修改。处理完成后继续独立 Assessment A/B、代码复审、综合 snapshot/trend，再进入下一组件批次。
+
 ## 2026-10-18 LxInput 前后置复合块修复
 
 - **改动**：`linkx-fe/src/components/LxInput/style.css` 将 `prepend/append` 设为完整高度的 inline-flex 居中轨道，去除上下内边距并统一行高，修复 Demo 中输入框与前后置块的视觉高度不一致。

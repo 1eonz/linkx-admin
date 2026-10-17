@@ -1,5 +1,17 @@
 # lx-ui 交付核查
 
+## 2026-10-18 LxInput 前后缀复合轨道补强
+
+- 复合输入根节点、输入内框和 `prepend/append` 显式使用同一伸展高度；内框不再由 Element Plus 内容尺寸单独决定，修复特定主题/尺寸下前后缀与输入框上下边界不一致。
+- 几何 E2E 增加根节点与内框上下边界断言；本条完成后需重新运行定向 E2E、类型检查、格式检查和 Impeccable 双路证据。detector `[]` 必须同时保留 stderr 与退出码，不能单独作为通过依据。
+
+## 2026-10-18 LxTag 组件门禁复核
+
+- 实现与 Demo：关闭按钮使用 `LxIcon`，small/default/large 三档有稳定高度；disabled 使用禁用背景、边框和文字令牌；文档覆盖语义色、关闭、禁用、键盘焦点与窄屏长文本。
+- 验证：LxTag 单测 **5/5**、文档 Playwright **2/2**、lx-ui 类型检查/库构建/VitePress 构建、目标格式和 ESLint 通过。VitePress 仍有既有大 chunk 警告。
+- Impeccable：修后 B 证据 `.impeccable/critique/lxtag-assessment-b-2026-10-18-recheck/`，detector 合法 `[]`/空 stderr/0；五视图无页面错误、失败请求或页面级横溢出。组件命中的紧凑内距符合设计依据，未将其误记为缺陷。
+- 边界：组件级复核不代表 Vue3 宿主已替换、权限/真实后端联调或 UI-11 整站审查完成。
+
 ## 2026-10-17 DynamicForm/Form 正式双路 Critique
 
 - A/B 综合 **28/40（Good）**，报告：`.impeccable/critique/lxform-dynamicform-assessment-b-2026-10-17/assessment-report.md`；A/B 原始证据目录分别为 `dynamicform-form-assessment-a-2026-10-17/` 和 `dynamicform-form-assessment-b-2026-10-17/`。

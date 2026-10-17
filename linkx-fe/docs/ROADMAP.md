@@ -1,5 +1,16 @@
 # lx-ui 路线图
 
+## 2026-10-18 LxInput 复合前缀内框高度收敛
+
+- 复合输入根节点、输入内框、`prepend/append` 统一使用同一伸展轨道，内框明确继承 `--el-input-height`，避免 Element Plus 内容尺寸在特定主题或尺寸下造成前后缀与输入框边界不一致。
+- 几何 E2E 增加根节点与输入框上下边界断言；后续验证需同时记录浏览器证据、detector JSON、stderr 和退出码，`[]` 仅表示静态规则零命中。
+
+## 2026-10-18 LxTag 关闭操作与状态契约复核
+
+- `LxTag` 关闭按钮改用 `LxIcon`，补齐“关闭标签”名称和提示；实现 `large` 独立尺寸，并为三档标签设置稳定最小高度；disabled 使用专用禁用令牌保持文字可读性，长文本在可用宽度内省略。
+- 单测 **5/5**、文档 Playwright **2/2**、lx-ui typecheck/build、VitePress build、Prettier/ESLint 通过。修后 B 五视图和 detector 证据见 `.impeccable/critique/lxtag-assessment-b-2026-10-18-recheck/`；detector `[]` 只作为静态零命中记录。
+- Assessment A **27/40（Good）** 的禁用对比度与 large 缺口已修复；`cramped-padding` 命中与设计稿 small 档 2px/6px 内距一致。宿主迁移与 UI-10 全库门禁仍后置。
+
 ## 2026-10-18 LxInput 前后置复合块视觉对齐修复
 
 - `prepend/append` 统一采用完整高度的 flex 居中轨道，清除 Element Plus 默认上下内边距并收敛行高，避免外侧复合块文字与输入框边界看起来不等高。
