@@ -1,5 +1,16 @@
 # lx-ui 路线图
 
+## 2026-10-17 DynamicForm/Form 正式 Critique 归档
+
+- Assessment A/B 综合 **28/40（Good）**；两页 detector 的 JSON/stderr/退出码分别为 `[]`/空/`0`，Light/HUD 与 375px 浏览器证据已归档。
+- 375px 页面级横溢出和字段错误可见性 P1 已关闭；P2 文档信息密度、HUD 层级和 P3 键盘效率提示保留在后续文档优化队列。该项不增加 UI-10 完成计数。
+
+## 2026-10-17 DynamicForm/Form 文档信息层级复验（阶段性）
+
+- DynamicForm 最小配置已前置；LxForm API 与设计/迁移说明分组折叠；`.lx-doc-details` summary 统一 44px 触达区、焦点环、开合态和减少动效。
+- 文档 Playwright **17/17**，VitePress 构建成功；Markdown detector 合法 `[]`/空 stderr/退出码 `0`，仅记录静态零命中。
+- Assessment A **30/40（Good）**；Luna B 通道两次 503，正式双路 Critique 未完成。P2 表格提示、outline 与折叠粒度继续开放。
+
 ## 2026-10-17 DynamicForm/Form Assessment B 宽度归因复验
 
 - `browser-evidence.mjs` 在首次加载和每次视口切换后增加 250ms 布局稳定等待并重跑；DynamicForm、LxForm 在 375px 下的页面级 `document/body.scrollWidth` 均为 375，overlay 后仍为 375。旧报告中的 474/525 属于未稳定布局的测量中间态，代码块长行和 API 表格内部滚动由各自容器承载，不构成页面级横溢出。

@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-17 DynamicForm/Form 正式双路 Critique 归档
+
+- **结论**：Assessment A 与 B 已由独立 `gpt-6.1-sol` 评估完成，综合评分 **28/40（Good）**。A 关注文档信息密度与键盘效率；B 核对 detector 三件套和浏览器证据。
+- **证据**：`dynamicform-form-assessment-a-2026-10-17/`、`dynamicform-form-assessment-b-2026-10-17/` 保存截图、浏览器 JSON、detector JSON/stderr/退出码；两页 375px 清洁页面宽度均为 375，原 474/525 中间态不再作为缺陷。综合报告为 `lxform-dynamicform-assessment-b-2026-10-17/assessment-report.md`，两个文档 snapshot/trend 已写入。
+- **开放项**：P2 文档首屏信息密度、P2 HUD 层级、P3 键盘效率提示；无 P0/P1。该波不增加 UI-10 完成数，不代表 UI-11 整库审查、真实上传联调或 Vue3 宿主替换完成。
+- **下一步**：按组件审计矩阵继续未关闭 lx-ui 组件和 P1/P2 硬化项；UI-10 全库门禁完成后执行整库 Impeccable，再进入 Vue3 Element Plus 分批替换。
+
 ## 2026-10-17 DynamicForm/Form 文档信息层级与折叠复验（阶段性）
 
 - **本轮修复**：DynamicForm 最小配置前置到交互示例之后；LxForm 将 API 与设计/迁移说明拆成两个原生折叠；`.lx-doc-details` 增加 44px 触达区、令牌化焦点环、开合态和减少动效规则。

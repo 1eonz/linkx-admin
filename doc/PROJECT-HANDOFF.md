@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-17] DynamicForm/Form 正式双路 Critique 归档
+
+- **审查结论**：A/B 均由独立 `gpt-6.1-sol` 完成，综合 **28/40（Good）**；A 的原始 P1（375px 横溢出、字段错误可见性）已由 B 稳定重跑关闭，当前只保留文档信息密度、HUD 层级和键盘效率提示三个 P2/P3 观察。
+- **证据路径**：`.impeccable/critique/dynamicform-form-assessment-a-2026-10-17/`、`.impeccable/critique/dynamicform-form-assessment-b-2026-10-17/`、`.impeccable/critique/lxform-dynamicform-assessment-b-2026-10-17/assessment-report.md`；两个文档 snapshot/trend 已写入，detector 均为合法 `[]`、空 stderr、退出码 `0`。
+- **边界**：不把 `[]` 单独当作视觉通过，不关闭 UI-10/UI-11；真实上传协议、权限和 Vue3 宿主替换继续按原计划后置。下一入口为剩余组件门禁与已登记硬化项。
+
 ## [2026-10-17] DynamicForm/Form 文档信息层级与折叠复验（阶段性）
 
 - **实现**：最小配置已移到 DynamicForm Demo 后；LxForm 的 API 与设计/迁移说明分为两个 `<details>`；`custom.css` 为 `.lx-doc-details > summary` 固化 44px 触达尺寸、2px `focus-visible`、主题令牌颜色和减少动效。

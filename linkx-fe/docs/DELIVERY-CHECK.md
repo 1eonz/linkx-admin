@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-17 DynamicForm/Form 正式双路 Critique
+
+- A/B 综合 **28/40（Good）**，报告：`.impeccable/critique/lxform-dynamicform-assessment-b-2026-10-17/assessment-report.md`；A/B 原始证据目录分别为 `dynamicform-form-assessment-a-2026-10-17/` 和 `dynamicform-form-assessment-b-2026-10-17/`。
+- 两页 detector 均核验为合法 `[]`、stderr 为空、退出码 `0`；Light/HUD、桌面/375px、键盘 details 和干净页面宽度证据通过。`[]` 只表示静态零命中，不能单独替代浏览器审查。
+- 当前开放：P2 文档信息密度、P2 HUD 层级、P3 键盘效率提示；不关闭 UI-10/UI-11。
+
 ## 2026-10-17 DynamicForm/Form 文档信息层级复验（阶段性）
 
 - 修改入口：`docs/components/lxdynamicform.md`、`docs/components/lxform.md`、`docs/.vitepress/theme/custom.css`；最小配置前置，API 分组折叠，summary 具备 44px 触达和 2px 焦点环。

@@ -1,5 +1,27 @@
 # LinkX 项目地图
 
+## 2026-10-17 DynamicForm/Form Critique 归档
+
+- 文档入口 `linkx-fe/docs/components/lxdynamicform.md`、`linkx-fe/docs/components/lxform.md` 已完成独立 A/B 证据归档；组件入口仍为 `linkx-fe/src/components/LxDynamicForm/` 与 `linkx-fe/src/components/LxForm/`，本次未改变业务 API 或宿主依赖关系。
+- 两个文档 snapshot/trend 分别对应 `linkx-fe-docs-components-lxdynamicform-md` 与 `linkx-fe-docs-components-lxform-md`，综合评分 28/40；P1 横溢出和字段错误可见性已由稳定浏览器重跑关闭，剩余为文档信息密度及键盘提示观察。
+
+## 2026-10-17 DynamicForm/Form 文档门禁阶段性复验
+
+- 文档入口 `linkx-fe/docs/components/lxdynamicform.md`、`linkx-fe/docs/components/lxform.md`：最小配置、API 折叠和中文文档样式已调整；VitePress 构建成功，文档 Playwright **17/17**。
+- 组件业务入口仍为 `linkx-fe/src/components/LxDynamicForm/`、`linkx-fe/src/components/LxForm/`；本轮只改文档展示与文档站主题，不改变组件 Props、事件、API 或宿主迁移契约。
+- A **30/40** 已记录；B 因 Luna 通道 503 未形成新独立证据，不能将文档门禁映射为 UI-10/UI-11 完成。
+
+## 2026-10-17 G2 SearchBar 与 StatusSwitch 组件门禁收口
+
+- 入口 `linkx-fe/src/components/LxSearchBar/`：四字段标准态前三项各占 4 列，最后集成字段占 12 列；选择器与操作组桌面同排底边对齐，375px 回落为独占操作行；文档 E2E **5/5** 与单测 **10/10** 已覆盖。
+- 入口 `linkx-fe/src/components/LxStatusSwitch/`：旧值映射、关闭确认竞态、只读/权限降级、HUD、窄屏和减少动效已完成；文档 E2E **4/4** 与单测 **21/21** 已覆盖。组件门禁综合收口，SearchBar A **34/40**，无开放 P0/P1。
+- 两个组件不发起业务请求；Vue2 组织树、日期格式、参数协议与宿主保存 API 继续由 Vue3 适配器/页面注入。UI-10 当前 **11/52**，宿主真实替换和 Element Plus 删除仍未开始。
+
+## 2026-10-17 预警推送 Mock 验收入口
+
+- Vue2 对照入口为 `src/router/modules/alert.js` / `src/views/notification/alertPush/`；Vue3 实施入口为 `other-admin/admin-vue3/src/router/modules/alert.ts`、`src/views/notification/alertPush/` 与 `src/api/notification/alertPush.ts`。
+- Mock E2E 位于 `other-admin/admin-vue3/tests/e2e/alert-push-workflow.spec.ts`，已验证双标签列表、筛选/重置参数、批量删除失败恢复和无人值守新增群组流程；四个表单的类型切换/API/群组名称映射已修复，编辑组合、受限账号和真实后端仍未验收。
+
 ## 2026-10-17 LxInput 复合输入高度修复
 
 - 入口 `linkx-fe/src/components/LxInput/`，prepend/append 与输入框统一尺寸档高度，窄屏/触屏统一为 44px；E2E 断言覆盖三档桌面尺寸和 390px 触屏。
