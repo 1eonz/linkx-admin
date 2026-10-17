@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-18 DynamicForm/Form 文档门禁复验
+
+- `linkx-fe/docs/components/lxdynamicform.md` 与 `linkx-fe/docs/components/lxform.md` 当前隔离文档 E2E 合计 **20/20**（DynamicForm 14/14、LxForm 6/6），覆盖窄屏、键盘、主题、错误/禁用、上传恢复和远程竞态。
+- 该证据只覆盖组件文档与 Mock 行为；真实业务页面、真实上传接口、Vue3 宿主替换和 UI-10/UI-11 全库门禁仍按迁移台账追踪。
+
 ## 2026-10-18 LxTag 组件门禁复核
 
 - 组件入口 `linkx-fe/src/components/LxTag/`，中文文档 `linkx-fe/docs/components/lxtag.md`；关闭操作使用 `LxIcon`，并覆盖 small/default/large、语义色、disabled、closable 和长文本省略。

@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-18 DynamicForm/Form 当前版文档门禁复验
+
+- **浏览器验证**：隔离 lx-ui 文档配置下 `LxDynamicForm` 文档 Playwright **14/14**、`LxForm` 文档 Playwright **6/6**，合计 **20/20**；覆盖 375/320px、键盘展开与方向键表格、HUD/普通暗色、错误/禁用、密码 ARIA、上传单图/多图失败恢复、远程取消与迟到响应隔离。
+- **静态证据**：当前源码与文档 detector 均返回合法 JSON `[]`，stderr 为空、退出码为 `0`；该结果只表示静态规则零命中，不能替代独立视觉证据。既有 Assessment B 证据位于 `.impeccable/critique/dynamicform-form-assessment-b-2026-10-17/`。
+- **收口边界**：文档 P2 和当前浏览器回归已收口；`LxForm` 设计稿逐项像素对照、真实上传协议联调、Vue3 宿主替换及 UI-10/UI-11 全库门禁仍未完成，不将本条计为全库完成。
+
 ## 2026-10-18 LxTag 严格复核完成
 
 - **实现**：关闭操作统一为 `LxIcon`，补齐 `large` 尺寸和稳定最小高度；disabled 改用专用禁用令牌，长文本在可用宽度内省略；中文 Demo/API 同步覆盖 large、disabled、closable、键盘焦点和窄屏。

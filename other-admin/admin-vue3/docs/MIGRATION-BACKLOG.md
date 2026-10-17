@@ -2,11 +2,11 @@
 
 > **文档职责（2026-10-17）**：本文只维护逐页迁移缺口、旧契约和业务适配备注；不再复制 lx-ui 全局波次状态。全局计划和下一入口以 `doc/PROJECT-DELIVERY-PLAN.md` 为准。
 
-## 2026-10-17 DynamicForm/Form 文档门禁记录
+## 2026-10-18 DynamicForm/Form 文档门禁当前版复验
 
-- 本轮仅调整 lx-ui 文档信息层级和文档站 summary 样式，未改变 `LxDynamicForm`/`LxForm` 的 Props、事件、插槽、校验或宿主 API 契约。
-- 文档 Playwright **17/17** 与 VitePress 构建通过；组件真实业务页面、API/权限/上传协议和 Element Plus 替换仍按原迁移缺口执行。
-- Impeccable A **30/40**；B 因 Luna 通道 503 未完成，不能把文档门禁当作业务迁移完成。
+- 本轮使用隔离 lx-ui 文档配置复验 `LxDynamicForm` **14/14** 与 `LxForm` **6/6**，合计 **20/20**；未改变组件 Props、事件、插槽、校验或宿主 API 契约。
+- 覆盖窄屏、键盘、主题、错误/禁用、上传失败恢复和远程竞态；组件真实业务页面、API/权限、真实上传协议和 Element Plus 替换仍按原迁移缺口执行。
+- 既有 Assessment B 与 detector 证据已归档；静态 `[]` 不代表业务迁移或正式全库 Critique 完成。
 
 ## 2026-10-17 G2 组件门禁完成，宿主契约保留
 

@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] DynamicForm/Form 文档门禁当前版复验
+
+- **验证**：使用隔离 lx-ui 文档配置和本机 Chrome，`lx-dynamic-form-docs.spec.ts` **14/14**、`lx-form-docs.spec.ts` **6/6**，合计 **20/20**；测试未连接真实后端。
+- **覆盖**：窄屏自适应、API 表格可访问滚动、键盘顺序、HUD/普通暗色、校验错误与恢复、密码字段 ARIA、单图/多图上传失败重试与取消、远程查询取消及迟到响应隔离。
+- **证据与边界**：既有独立 B 证据和 detector 三件套见 `.impeccable/critique/dynamicform-form-assessment-b-2026-10-17/`；detector 的 `[]` 仅表示静态零命中。LxForm 设计稿逐项对照、真实上传协议和 Vue3 宿主替换仍未完成，不能据此关闭 UI-10/UI-11。
+
 ## [2026-10-18] LxInput 前后缀复合轨道再次收敛
 
 - **问题**：部分主题或尺寸下，Element Plus 输入内框按内容尺寸参与 flex 计算，导致前后缀状态下输入框与外侧前后缀的上下边界看起来不一致。
