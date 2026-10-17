@@ -2,6 +2,13 @@
 
 > **文档职责（2026-10-17）**：本文件是唯一的时间序列交接与审查证据索引。新波次只追加一条中文交接记录，包含实现、验证、A/B 证据、未完成边界和下一入口；不要把同一状态复制到多个全局计划文件。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，架构定位见 `doc/PROJECT-MAP.md`，历史拆分文档不再新增状态。
 
+## [2026-10-17] LxTransferPanel 与 LxVirtualTree 当前版复验交接
+
+- **验证**：定向单测 **67/67**；TransferPanel 文档 Playwright **33/33**。覆盖桌面/窄屏、键盘、筛选批量、空/错/加载、确认清空、长名称、HUD 和减少动效。
+- **Impeccable B**：证据目录 `.impeccable/critique/transferpanel-virtualtree-assessment-b-2026-10-17/`。四路 detector JSON/stderr/退出码均为合法 `[]`、空 stderr、退出码 `0`；浏览器 JSON 可解析且退出码 `0`。空数组未单独作为通过依据。
+- **尺寸结论**：桌面筛选/操作按钮 32px，移动端 44px 触控目标；当前没有证据支持缩小移动选择框。`LxInputNumber` 桌面步进 P2 继续等待设计决策。
+- **下一入口**：继续未关闭的基础组件与已登记 P1/P2，完成组件库全库门禁后再进入 Vue3 宿主替换。
+
 ## [2026-10-17] LxCascader 与 LxTreeSelect 组件门禁交接
 
 - **验证**：定向单测 **32/32**（Cascader 18、TreeSelect 14）；文档 Playwright **10/10**；覆盖键盘、单选/多选、空态、loading、失败重试、禁用、Escape、窄屏、HUD 和减少动效。
