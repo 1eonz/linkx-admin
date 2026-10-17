@@ -23,7 +23,9 @@ const attrs = useAttrs()
 const contentRef = ref<HTMLElement>()
 const copyTitle = ref('点击复制')
 const copyValue = ref('')
-const providedAriaLabel = ref('')
+const normalizeAriaLabel = (value: unknown) =>
+  typeof value === 'string' ? value.trim() : ''
+const providedAriaLabel = ref(normalizeAriaLabel(attrs['aria-label']))
 const copying = ref(false)
 let mounted = true
 
@@ -40,9 +42,7 @@ const externallyDisabled = computed(() => {
 function updateCopyTitle() {
   const value = contentRef.value?.textContent?.trim() ?? ''
   copyValue.value = value
-  const ariaLabel = attrs['aria-label']
-  providedAriaLabel.value =
-    typeof ariaLabel === 'string' ? ariaLabel.trim() : ''
+  providedAriaLabel.value = normalizeAriaLabel(attrs['aria-label'])
   const title =
     props.ellipsis && value
       ? `${props.copyable ? '点击复制：' : '完整内容：'}${value}`

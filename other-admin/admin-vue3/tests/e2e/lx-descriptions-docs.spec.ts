@@ -198,13 +198,19 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
       .locator('.lx-code-slot__content');
     await expect(mobileCode).toHaveText('GB28181-P2P-EDGE-NODE-20261007-00000001-REGION-OPS');
     await expect(mobileCode).toHaveCSS('white-space', 'normal');
+    await expect(mobileCode).toHaveCSS('overflow', 'visible');
+    await expect(mobileCode).toHaveCSS('text-overflow', 'clip');
     const codeMetrics = await mobileCode.evaluate((element) => ({
       clientWidth: element.clientWidth,
       scrollWidth: element.scrollWidth,
       clientHeight: element.clientHeight,
+      right: element.getBoundingClientRect().right,
     }));
-    expect(codeMetrics.clientHeight).toBeGreaterThan(18);
-    expect(codeMetrics.scrollWidth).toBeLessThanOrEqual(codeMetrics.clientWidth);
+    const descriptionsBox = await descriptions.boundingBox();
+    if (!descriptionsBox) throw new Error('移动端详情表未进入可视区域');
+    expect(codeMetrics.clientWidth).toBeGreaterThan(0);
+    expect(codeMetrics.clientHeight).toBeGreaterThanOrEqual(18);
+    expect(codeMetrics.right).toBeLessThanOrEqual(descriptionsBox.x + descriptionsBox.width + 1);
 
     const mobileStatus = descriptions
       .locator('.lx-descriptions__item')

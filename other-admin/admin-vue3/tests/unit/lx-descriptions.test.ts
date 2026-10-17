@@ -107,6 +107,21 @@ describe('LxDescriptions', () => {
     wrapper.unmount();
   });
 
+  it('updates the copy control name when the host field label changes', async () => {
+    const wrapper = mount(LxDescriptions, {
+      props: {
+        items: [{ key: 'policeId', label: '警号', value: '005882', copyable: true }],
+      },
+    });
+
+    await wrapper.setProps({
+      items: [{ key: 'policeId', label: '证件号', value: '005882', copyable: true }],
+    });
+
+    expect(wrapper.get('.lx-code-slot--copyable').attributes('aria-label')).toBe('复制证件号：005882');
+    wrapper.unmount();
+  });
+
   it('makes long values discoverable to keyboard and assistive technology', () => {
     const wrapper = mount(LxDescriptions, {
       props: {
