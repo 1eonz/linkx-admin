@@ -2,6 +2,12 @@
 
 > **范围备注（2026-10-15）**：页面操作引导暂缓考虑与实施，不继续拆分，也不纳入待办、自动执行队列或排期；它不作为 lx-ui 收口或 Vue3 Element Plus 替换的前置条件。本文和 `doc/GUIDE-CONTENT-PLAN.md`、`doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 保留历史需求与设计基线；后续确有需要时再恢复计划，届时重新确认页面范围、文案、交互、技术方案及后端契约。当前其余交付顺序不变。
 
+## 2026-10-17 LxDrawer 正式组件审查交接
+
+- 定向单测 **4/4**、文档 Playwright **1/1**、浏览器五视图注入成功；detector JSON/stderr/退出码为合法 `[]`、空 stderr、`0`。
+- Assessment A **32/40（Good）**；B 证据见 `.impeccable/critique/drawer-assessment-b-2026-10-17/assessment-report.md`，桌面/移动/主题/减少动效均无页面错误或横溢出。
+- 组件级审查完成；长标题提示、移动 footer 操作顺序和高缩放标题可读性作为 P2 观察。未保存数据继续由宿主通过 `closeOnPressEsc=false` 管理，Vue3 替换和 Element Plus 删除后置。
+
 ## 2026-10-17 LxDialog 正式组件审查交接
 
 - 定向单测 **4/4**、文档 Playwright **3/3**、lx-ui `vue-tsc --noEmit` 和目标 Prettier 检查通过。

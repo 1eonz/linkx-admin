@@ -2,6 +2,11 @@
 
 > **文档职责（2026-10-17）**：本文只维护 lx-ui 组件路线和组件级未完成项，不重复记录全局波次台账。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，交接与审查证据见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxDrawer 正式审查
+
+- 单测 **4/4**、文档 Playwright **1/1**；Assessment A **32/40（Good）**，B 五视图注入成功，detector 为合法 `[]`/空 stderr/退出码 0。
+- 详情抽屉的 480px 设计、视口约束、HUD、键盘和减少动效通过；长标题、移动 footer 和高缩放标题可读性列为 P2。
+
 ## 2026-10-17 LxDialog 正式审查
 
 - 定向单测 **4/4**、文档 Playwright **3/3**、类型检查和目标格式检查通过；Assessment A **28/40（Good）**。

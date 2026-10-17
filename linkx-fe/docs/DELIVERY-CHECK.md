@@ -2,6 +2,11 @@
 
 > **文档职责（2026-10-17）**：本文只保留组件交付证据摘要和 `.impeccable/critique` 路径，不再复制全局计划或交接正文。当前波次入口见 `doc/PROJECT-DELIVERY-PLAN.md`，完整交接见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxDrawer 正式审查
+
+- 单测 **4/4**、文档 E2E **1/1**、浏览器五视图注入成功；detector `[]`、stderr 空、退出码 `0` 已核验。
+- 证据见 `.impeccable/critique/drawer-assessment-b-2026-10-17/`；Assessment A **32/40（Good）**，P2 观察已登记。
+
 ## 2026-10-17 LxDialog 正式审查
 
 - 单测 **4/4**、文档 E2E **3/3**、lx-ui 类型检查和目标格式检查通过。

@@ -2,6 +2,11 @@
 
 > **文档职责（2026-10-17）**：本文只维护逐页迁移缺口、旧契约和业务适配备注；不再复制 lx-ui 全局波次状态。全局计划和下一入口以 `doc/PROJECT-DELIVERY-PLAN.md` 为准。
 
+## 2026-10-17 LxDrawer 组件审查复核
+
+- lx-ui `LxDrawer` 已通过单测 **4/4**、文档 E2E **1/1** 和正式 A/B 证据；报告见 `.impeccable/critique/drawer-assessment-b-2026-10-17/assessment-report.md`。
+- 迁移详情页时保留数字 `size` 的视口约束、footer 插槽、Escape 配置及未保存数据处理；P2 视觉观察不阻塞本波。
+
 ## 2026-10-17 LxDialog 组件审查复核
 
 - lx-ui `LxDialog` 已有单测 **4/4**、文档 E2E **3/3**、类型检查和正式 Impeccable A/B 证据；报告见 `.impeccable/critique/dialog-assessment-b-2026-10-17/assessment-report.md`。

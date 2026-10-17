@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-17 LxDrawer 正式审查
+
+- 组件入口 `linkx-fe/src/components/LxDrawer/`，文档 `linkx-fe/docs/components/lxdrawer.md`；单测 **4/4**、文档 E2E **1/1**。
+- Assessment A **32/40**；B 证据见 `.impeccable/critique/drawer-assessment-b-2026-10-17/`，五视图注入、主题、减少动效和窄屏证据有效。
+- `closeOnPressEsc=false` 的未保存数据契约必须在宿主迁移中保留；库级审查不代表宿主替换完成。
+
 ## 2026-10-17 LxDialog 正式审查
 
 - 组件入口 `linkx-fe/src/components/LxDialog/`，中文文档 `linkx-fe/docs/components/lxdialog.md`；组件级单测 **4/4**、文档 E2E **3/3**。
