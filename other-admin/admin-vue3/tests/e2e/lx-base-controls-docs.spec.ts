@@ -61,6 +61,10 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
       };
       const rootBounds = root.getBoundingClientRect();
       return {
+        trackHeight: getComputedStyle(root).getPropertyValue('--lx-input-track-height').trim(),
+        innerLineHeight: Number.parseFloat(
+          getComputedStyle(root.querySelector<HTMLElement>('.el-input__inner')!).lineHeight,
+        ),
         root: {
           top: rootBounds.top,
           height: rootBounds.height,
@@ -76,6 +80,8 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
       };
     });
     expect(geometry.root.height, `${option} 档复合输入根节点高度`).toBe(expectedHeight);
+    expect(geometry.trackHeight, `${option} 档前后缀高度轨道令牌`).toBe(`${expectedHeight}px`);
+    expect(geometry.innerLineHeight, `${option} 档输入内容行高`).toBe(expectedHeight - 2);
     expect(
       Math.abs(geometry.root.top - geometry.wrapper.top),
       `${option} 档根节点与输入框上边界对齐`,
@@ -136,6 +142,10 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
     }),
   );
   expect(touchSlotHeights, '窄屏前后缀槽位应与输入框同高').toEqual([44, 44, 44, 44]);
+  const touchInnerLineHeight = await compoundInput
+    .locator('.el-input__inner')
+    .evaluate((input) => Number.parseFloat(getComputedStyle(input).lineHeight));
+  expect(touchInnerLineHeight, '窄屏输入内容行高应跟随 44px 轨道').toBe(42);
 
   const focusRing = await compoundInput.evaluate((root) => {
     const input = root.querySelector<HTMLInputElement>('.el-input__inner');

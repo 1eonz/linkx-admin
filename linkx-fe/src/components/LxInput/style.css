@@ -8,10 +8,16 @@
  */
 
 /* ===== 核心态固化（与全局桥同款，锚定 .lx-input 前缀提特异性）===== */
+/* 输入框及其所有前后缀槽位共用一条高度轨道，避免内核令牌在切换时分别计算。 */
+.lx-input {
+  --lx-input-track-height: var(--el-input-height);
+}
+
 /* 基础几何：圆角 + 1px 控件描边（--lx-control-border 专属控件态档） */
 .lx-input .el-input__wrapper {
   box-sizing: border-box;
-  height: var(--el-input-height);
+  height: var(--lx-input-track-height);
+  min-height: var(--lx-input-track-height);
   padding-block: 0;
   background-color: var(--lx-bg-card);
   border-radius: var(--lx-radius-md);
@@ -23,8 +29,8 @@
 /* 复合输入按同一条高度轨道拉伸，避免内框与前后缀在不同内核布局下错位。 */
 .lx-input.el-input-group {
   box-sizing: border-box;
-  height: var(--el-input-height);
-  min-height: var(--el-input-height);
+  height: var(--lx-input-track-height);
+  min-height: var(--lx-input-track-height);
   align-items: stretch;
   overflow: hidden;
   border-radius: var(--lx-radius-md);
@@ -80,6 +86,7 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
 /* 输入值在两种主题下都使用输入表面专属正文令牌。 */
 .lx-input .el-input__inner {
   height: 100%;
+  min-height: 0;
   color: var(--lx-color-on-input);
 }
 
@@ -232,18 +239,25 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
 /* 触屏或窄屏：44px 最小触控目标（与 Radio/Checkbox/Switch 同族契约；
  * textarea 多行基线天然 ≥44px，无此需求） */
 @media (hover: none), (max-width: 640px) {
+  .lx-input {
+    --lx-input-track-height: 44px;
+    --el-input-height: var(--lx-input-track-height);
+    --el-input-inner-height: calc(var(--lx-input-track-height) - 2px);
+  }
+
   .lx-input .el-input__wrapper {
-    min-height: 44px;
+    height: var(--lx-input-track-height);
+    min-height: var(--lx-input-track-height);
   }
 
   .lx-input.el-input-group {
-    height: 44px;
+    height: var(--lx-input-track-height);
   }
 
   .lx-input .el-input-group__prepend,
   .lx-input .el-input-group__append {
-    height: 44px;
-    min-height: 44px;
+    height: var(--lx-input-track-height);
+    min-height: var(--lx-input-track-height);
   }
 
   .lx-input .lx-input__clear--touch-visible {
