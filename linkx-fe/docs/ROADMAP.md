@@ -497,3 +497,4 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 
 2026-10-17：`LxMetricCard` 与 `LxSectionTitle` 单测 33/33、文档 E2E 4/4；两个 detector 为 `[]`/空 stderr/0，1280px/375px 浏览器注入通过。独立评审代理服务 503，本轮为降级设计评估，待恢复后补完整 A；下一批进入 G2 搜索栏/状态开关。
 2026-10-18 `LxDynamicForm`/`LxForm` 文档 P2 收口：20/20 文档 E2E、lx-ui 类型检查和 VitePress 构建通过；折叠 API、44px 键盘 summary、窄屏表格导航、普通暗色令牌桥接及 SPA 重绑定已完成。四个 detector 均为合法 `[]`/空 stderr/0，清洁 Light/HUD 桌面/移动浏览器证据无页面级溢出；`[]` 不单独作为正式 Critique 通过。首列 sticky、API 锚点、真实读屏器和 MutationObserver 性能仍开放。
+2026-10-18 `LxStatusSwitch` 无权限状态可访问性补强：无权限降级标签保留当前状态并播报只读原因，支持 `aria-description` 透传；组件单测 21/21、宿主适配器单测 2/2、文档 E2E 4/4、typecheck/build 通过。detector 三件套均为 `[]`/空 stderr/0，静态结果不单独代表正式 Critique；真实权限保存和宿主全量迁移仍后置。

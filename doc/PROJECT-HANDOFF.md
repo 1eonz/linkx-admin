@@ -2481,3 +2481,9 @@
 - **验证**：文档 E2E **20/20**；lx-ui `typecheck`、VitePress `build:docs`、目标 Prettier、`git diff --check` 通过。浏览器复验覆盖 Light/HUD、1280/375、减少动效、错误/禁用、键盘和 overlay 注入；清洁页面无横向溢出与页面错误，overlay 造成的 547px 扩展已单独归因。
 - **审查**：四个 detector 的 stdout/stderr/退出码分别为合法 `[]`/空/`0`。已有独立 Assessment A/B 基线与本轮修后浏览器证据均已保留；本轮未新增独立评分，不把空数组当作正式通过。代码复核未发现新的 P0/P1/P2。
 - **后续**：首列 sticky、API 子分区锚点、真实读屏器和 MutationObserver 性能继续作为 P2；不改变宿主 API、业务请求链式写法、权限和迁移顺序。
+
+## 2026-10-18 G2 LxStatusSwitch 无权限状态可访问性补强
+
+- **改动**：无权限 `fallbackTag` 现在显示当前状态和“无权限，只读”原因，并向只读标签写入 `aria-label`/`aria-description`；`aria-description` 同时支持调用方透传。Vue3 `StatusSwitch` 适配层改为复用 `LxStatusSwitch`，保留旧数字状态值、文案 props 和数字 `change` 事件。
+- **验证**：lx-ui 单测 **21/21**、宿主适配器单测 **2/2**、文档 E2E **4/4**；lx-ui typecheck/build、目标 Prettier 与差异检查通过。detector 三件套为合法 `[]`/空 stderr/0，浏览器用例覆盖无权限只读播报、确认取消、失败恢复、HUD、窄屏和减少动效。
+- **代码边界**：未向 lx-ui 引入 API、Router、Pinia 或权限请求；真实权限后端和宿主全量迁移仍未完成。该波不关闭 UI-11 整库审查。

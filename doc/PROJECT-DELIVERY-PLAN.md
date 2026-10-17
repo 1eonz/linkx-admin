@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-18 G2 LxStatusSwitch 无权限状态可访问性补强
+
+- **实现**：无权限降级标签保留当前开启/关闭状态，并通过 `aria-label` 与 `aria-description` 明确播报“无权限，只读”；组件继续只消费宿主注入权限源，不请求业务 API。Vue3 `StatusSwitch` 适配器改用 `LxStatusSwitch`，保留 `value=0/1`、`normalText/forbiddenText` 和 `change(number)` 旧契约。
+- **验证**：lx-ui 单测 **21/21**、StatusSwitch 适配器单测 **2/2**、文档 E2E **4/4**；lx-ui `typecheck`、`build`、目标 Prettier 和 `git diff --check` 通过。三个目标 detector 均为合法 JSON `[]`、stderr 为空、退出码 `0`；`[]` 不单独作为正式视觉审查依据。
+- **边界**：组件级浏览器证据覆盖只读/无权限、确认、失败恢复、窄屏、HUD 和减少动效；真实权限接口、后端保存、全库 UI-11 和 Element Plus 删除仍按 UI-04/UI-10/UI-11 后置。
+
 ## 2026-10-18 DynamicForm/Form 文档 P2 收口
 
 - **完成内容**：文档首屏保留可运行示例，将 Props、schema、事件、实例与迁移说明拆为原生 `details` 折叠；折叠标题提供 44px 触达区和可见焦点，API 表格在窄屏支持 `tabindex`、`aria-describedby`、左右方向键横向滚动；VitePress SPA 路由切换后会重新绑定表格行为，普通暗色主题补充文档表面令牌桥接。

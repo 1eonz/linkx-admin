@@ -498,3 +498,5 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 2026-10-18 `LxInput` 前后缀高度补强：prefix/suffix 容器与内部槽位显式使用 `border-box` 和完整高度 flex 轨道；390px 窄屏新增 4 个槽位 44px 高度断言。复合前后缀 E2E 1/1、lx-ui typecheck/build、目标 Prettier 与差异检查通过；本轮基础控件套件另有 2 项既有清空按钮角色查询失败，未归因于本次样式改动。detector `[]` 仍只表示静态零命中。
 
 2026-10-18 `LxDynamicForm`/`LxForm` 文档 P2 收口：文档 Playwright **20/20**，lx-ui typecheck、VitePress build、目标 Prettier 和差异检查通过；四个 detector 的 JSON/stderr/退出码为 `[]`/空/0。Light/HUD、1280/375、错误/禁用、减少动效和键盘浏览器证据已复验，清洁页面无横向溢出；overlay 造成的宽度扩展不计为页面缺陷。P2 首列 sticky、API 锚点、真实读屏器和 MutationObserver 性能仍开放。
+
+2026-10-18 `LxStatusSwitch` 无权限播报与适配器收口：组件单测 21/21、宿主适配器单测 2/2、文档 E2E 4/4；lx-ui typecheck/build、目标 Prettier 和差异检查通过。组件、文档和适配器 detector 的 JSON/stderr/退出码为 `[]`/空/0；浏览器证据覆盖无权限只读、确认取消、失败恢复、HUD、窄屏和减少动效。真实权限 API 与全库替换仍后置。
