@@ -19,6 +19,18 @@
   transition: box-shadow var(--lx-transition);
 }
 
+/* 复合输入按同一条高度轨道拉伸，避免内框与前后缀在不同内核布局下错位。 */
+.lx-input.el-input-group {
+  height: var(--el-input-height);
+  align-items: stretch;
+}
+
+.lx-input.el-input-group > .el-input-group__prepend,
+.lx-input.el-input-group > .el-input__wrapper,
+.lx-input.el-input-group > .el-input-group__append {
+  align-self: stretch;
+}
+
 /* 禁用态保留灰色表面，同时维持值的可读性。 */
 .lx-input.is-disabled .el-input__wrapper {
   background-color: var(--lx-bg-card-hover);
@@ -146,6 +158,10 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
 @media (hover: none), (max-width: 640px) {
   .lx-input .el-input__wrapper {
     min-height: 44px;
+  }
+
+  .lx-input.el-input-group {
+    height: 44px;
   }
 
   .lx-input .el-input-group__prepend,
