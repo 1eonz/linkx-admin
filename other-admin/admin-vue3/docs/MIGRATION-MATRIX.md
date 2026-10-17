@@ -95,3 +95,5 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 - 库级 API、Demo、单测 **5/5**、文档 E2E **1/1** 已完成；`imageSize` 兼容现有两处 `image-size=80`，根节点 `class` 可透传。
 - 15 处宿主 `el-empty` 继续留在 UI-04 逐页迁移，需按页面保留描述、插槽和空/错/加载契约；不提前删除 `element-plus`。
+
+`LxPasswordInput` 组件级证据已完成：单测 11/11、文档 E2E 9/9；移动端清空/显隐键盘顺序和 44px 触控区已回归。该条只关闭 lx-ui 组件门禁，不代表 Vue3 登录页替换或真实认证联调；下一组件为 `LxMetricCard` 与 `LxSectionTitle`。

@@ -2375,3 +2375,11 @@
 - **当前状态**：两轮代码复审发现的动效白名单、字号和触屏聚焦问题均已修复，并补充浏览器/单测覆盖。当前冻结版 A/B、综合报告、detector 三件套、snapshot/trend 和代码复审已完成；A 为 32/40，代码复审无未关闭发现。静态 `[]` 只表示零条静态规则命中。
 - **范围边界**：不代表 Vue3 业务页面完成按钮替换，不关闭 UI-10 的 52 项全库审计，不修改权限/API/后端契约。页面操作引导计划已按用户决定暂缓，后续有需要再恢复排期。
 - **下一步与提交**：完成评审建议及有界复验后，更新路线图、交付检查、迁移台账、项目地图和本交接。实现/回归/组件中文文档使用一笔 `fix(lx-ui)`；项目计划/评审/审查证据使用一笔 `docs(project)`，只暂存本波白名单并推送 `origin/main`，再按组件审计矩阵继续下一组件。
+
+## 2026-10-17 Wave 14 / LxPasswordInput 修后交接
+
+- 清空按钮保留 `.el-input__clear` 兼容选择器并移出 Tab 顺序；窄屏显隐按钮采用绝对定位，保持 44px 触控目标且不撑高 sm/md/lg 外框。
+- 单测 11/11、文档 E2E 9/9、`vue-tsc --noEmit` 和目标 Prettier 通过。linkx-fe 文件被宿主 ESLint 配置判定为 outside base path，未将其冒充为库 ESLint 通过。
+- Impeccable A 32/40；B detector 为合法 `[]`、stderr 空、退出码 0；1280px/375px 浏览器注入成功且无横向溢出。快照 `.impeccable/critique/2026-10-17T05-26-20Z__linkx-fe-src-components-lxpasswordinput-index-vue.md`，报告 `.impeccable/critique/password-input-assessment-b-2026-10-17.md`。
+- `npx impeccable update` 因 GitHub 下载连接超时退出码 1，已安装 4.6.0 未被覆盖；临时 live-server 已停止，临时 E2E 已删除。真实登录/改密和后端联调仍未执行。
+- 下一波进入 `LxMetricCard` + `LxSectionTitle`，随后处理 G2 `LxSearchBar`/`LxStatusSwitch`；权限中心、文本/字段权限、页面引导和 Vue3 Element Plus 移除继续后置。

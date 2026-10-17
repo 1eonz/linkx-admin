@@ -443,3 +443,5 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 - 单测合计 67/67，文档 E2E 合计 48/48；类型检查、203 modules 构建、VitePress、Vue3 生产构建、目标 Prettier 和 diff 检查通过。新增注释和文档均使用中文，API 请求规则未改变。
 - Impeccable 正式双路已完成：A 36/40（Good），B 5 个 detector 为合法 `[]`/空 stderr/退出码 0，9 个独立浏览器视图完成 overlay、DOM、键盘和截图证据；代码复审 P0-P3 全部为 0。综合报告和正式 snapshot/trend 见 `.impeccable/critique/transferpanel-p2-2026-10-11/`。
 - `[]` 仅表示静态 detector 零命中；本波只有 Demo 设置区展开后选项较多的 P3。宿主保存状态、真实权限联调、读屏器专项和 `DataPermissionTree` 迁移仍未完成。下一步进入 `LxMetricCard` + `LxSectionTitle` 严格审查，再收口 G2 `LxSearchBar`/`LxStatusSwitch`。
+
+2026-10-17：`LxPasswordInput` 修后验证完成，单测 11/11、文档 E2E 9/9；清空操作不抢占显隐按钮后的 Tab 顺序，窄屏 44px 触控按钮不改变尺寸档外框。Impeccable A 32/40，B detector `[]`/空 stderr/退出码 0，桌面与 375px 浏览器证据通过。下一批为 `LxMetricCard` 与 `LxSectionTitle`。

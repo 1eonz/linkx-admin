@@ -441,3 +441,5 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 - **自动化检查**：两组件单测合计 67/67，文档 E2E 合计 48/48；lx-ui typecheck、203 modules build、VitePress build、Vue3 production build、Prettier 和 `git diff --check` 通过。代码复审批准，无 P0-P3。
 - **Impeccable 检查**：A 36/40；B 的 5 个静态目标分别保存 stdout JSON、stderr 和退出码，均为 `[]`/空/0；9 个浏览器视图完成导航、交互、注入、overlay、截图和 DOM/键盘记录。正式报告、证据和 snapshot/trend 已保存，不能把 `[]` 单独标为通过。
 - **未完成门槛**：真实权限保存和后端联调、读屏器专项、Vue3 `DataPermissionTree` 适配、全库 UI-11 和 Element Plus 移除仍未完成；权限中心、文本/字段权限及引导页继续后置。下一检查批次为 `LxMetricCard` + `LxSectionTitle`。
+
+2026-10-17 `LxPasswordInput`：单测 11/11、文档 E2E 9/9、类型检查和 Prettier 通过；A 32/40；B detector JSON `[]`、stderr 为空、退出码 0；1280px/375px 浏览器注入和无横向溢出证据已归档。`npx impeccable update` 因下载超时失败，未覆盖现有 4.6.0。下一批为 `LxMetricCard` 与 `LxSectionTitle`。

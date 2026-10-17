@@ -1280,6 +1280,12 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **下一波**：先进入 `LxMetricCard` 与 `LxSectionTitle` 的当前源码严格 UI 复核；对已有库级行为证据补独立 A/B、浏览器主题/状态/窄屏/减少动效证据、综合 snapshot/trend 和代码复审。随后按台账处理 G2 `LxSearchBar`/`LxStatusSwitch` 未关闭项，再开始 Vue3 Element Plus 分批替换。权限中心、文本/字段权限和引导页继续后置。
 - **交付约定**：实现、Demo、测试和组件中文文档使用 `fix(lx-ui): ...`；计划、地图、审计、交接、迁移台账和 Impeccable 证据使用 `docs(project): ...`。两笔提交均只暂存本波白名单，完成检查后推送 `origin/main`，再启动下一波 Agent。
 
+## 2026-10-17 Wave 14 / LxPasswordInput
+
+- 修复清空按钮键盘顺序和窄屏显隐按钮尺寸；单测 11/11、文档 E2E 9/9、类型检查和 Prettier 通过。
+- Impeccable A 32/40；B 为合法 JSON `[]`、空 stderr、退出码 0；1280px/375px 浏览器注入无横向溢出。`npx impeccable update` 因下载连接超时失败，4.6.0 保持不变。
+- 真实认证/改密、宿主密码策略、权限中心、文本/字段权限、页面引导和 Element Plus 删除继续后置；下一波为 `LxMetricCard` + `LxSectionTitle`。
+
 ## 2026-10-16 Wave 12 / LxAuthImg P2 收口
 
 - **完成内容**：完成鉴权图片的 Blob 请求注入、AbortSignal 取消、请求序号防旧响应回写、对象 URL 回收、回退图与空地址状态、失败恢复插槽、ARIA 状态播报、加载指示和减少动效；Demo 覆盖成功、延迟、失败、空地址、回退图、取消旧请求、主题和窄屏。
