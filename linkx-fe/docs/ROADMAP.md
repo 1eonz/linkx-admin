@@ -547,3 +547,9 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 2026-10-17：`LxMetricCard` 与 `LxSectionTitle` 单测 33/33、文档 E2E 4/4；两个 detector 为 `[]`/空 stderr/0，1280px/375px 浏览器注入通过。独立评审代理服务 503，本轮为降级设计评估，待恢复后补完整 A；下一批进入 G2 搜索栏/状态开关。
 2026-10-18 `LxDynamicForm`/`LxForm` 文档 P2 收口：20/20 文档 E2E、lx-ui 类型检查和 VitePress 构建通过；折叠 API、44px 键盘 summary、窄屏表格导航、普通暗色令牌桥接及 SPA 重绑定已完成。四个 detector 均为合法 `[]`/空 stderr/0，清洁 Light/HUD 桌面/移动浏览器证据无页面级溢出；`[]` 不单独作为正式 Critique 通过。首列 sticky、API 锚点、真实读屏器和 MutationObserver 性能仍开放。
 2026-10-18 `LxStatusSwitch` 无权限状态可访问性补强：无权限降级标签保留当前状态并播报只读原因，支持 `aria-description` 透传；组件单测 21/21、宿主适配器单测 2/2、文档 E2E 4/4、typecheck/build 通过。detector 三件套均为 `[]`/空 stderr/0，静态结果不单独代表正式 Critique；真实权限保存和宿主全量迁移仍后置。
+
+## 2026-10-18 LxInput 前后缀统一高度轨道
+
+- **问题**：仅依赖 Element Plus `--el-input-height` 时，输入内容、prefix/suffix 与 prepend/append 在主题或尺寸切换时可能分别计算高度，出现上下边界不一致。
+- **改动**：新增组件级 `--lx-input-track-height`，由输入框根节点统一提供；所有输入内框、内容输入节点、前后缀槽位及外侧复合块从同一轨道取值，窄屏触控态统一切换为 44px，并同步 Element Plus 输入行高变量。
+- **验证**：复合前后缀文档 E2E 增加轨道令牌与输入行高断言，覆盖 sm/md/lg 与 390px 窄屏；类型检查、构建、格式、单测 13/13 通过。Impeccable A 32/40；B detector 合法 `[]`/空 stderr/退出码 0，8/8 浏览器视图注入成功。移动文档壳层横向溢出保留为待归因信号。

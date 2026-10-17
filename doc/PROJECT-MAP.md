@@ -585,3 +585,9 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 `LxDatePicker` 通过 Vue 实例 UID 定位自身触发器，向单值和区间原生输入同步字段说明；相邻实例互不串联。当前工作区 36 项 DatePicker/DynamicForm 单测、lx-ui 构建和 DatePicker 文档 E2E 通过。当前按 Wave 1 检查 Button/ActionButtons/Input/Textarea/InputNumber/PasswordInput；Vue3 页面替换继续等待 lx-ui 全库门禁。
 
 2026-10-17：`LxPasswordInput` 修后交付，单测 11/11、文档 E2E 9/9；Impeccable A 32/40，B `[]`/空 stderr/退出码 0，1280px 与 375px 浏览器证据无横向溢出。下一批为 `LxMetricCard` 与 `LxSectionTitle`，真实认证和宿主 Element Plus 替换未进入门槛。
+
+### LxInput 前后缀高度轨道（2026-10-18）
+
+- **入口**：`linkx-fe/src/components/LxInput/index.vue` 与 `style.css`
+- **设计/文档**：`linkx-fe/docs/components/lxinput.md`、`linkx-fe/docs/ROADMAP.md`
+- **验证**：`other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts` 的复合前后缀几何用例；组件级 `--lx-input-track-height` 统一输入框及前后缀高度。

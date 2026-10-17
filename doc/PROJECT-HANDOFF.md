@@ -2571,3 +2571,10 @@
 - **改动**：无权限 `fallbackTag` 现在显示当前状态和“无权限，只读”原因，并向只读标签写入 `aria-label`/`aria-description`；`aria-description` 同时支持调用方透传。Vue3 `StatusSwitch` 适配层改为复用 `LxStatusSwitch`，保留旧数字状态值、文案 props 和数字 `change` 事件。
 - **验证**：lx-ui 单测 **21/21**、宿主适配器单测 **2/2**、文档 E2E **4/4**；lx-ui typecheck/build、目标 Prettier 与差异检查通过。detector 三件套为合法 `[]`/空 stderr/0，浏览器用例覆盖无权限只读播报、确认取消、失败恢复、HUD、窄屏和减少动效。
 - **代码边界**：未向 lx-ui 引入 API、Router、Pinia 或权限请求；真实权限后端和宿主全量迁移仍未完成。该波不关闭 UI-11 整库审查。
+
+## 2026-10-18 LxInput 前后缀高度轨道修复
+
+- **问题**：`LxInput` 的输入内容、prefix/suffix 与 prepend/append 依赖 Element Plus 内部高度变量分别计算，尺寸或主题切换时可能产生上下边界视觉差异。
+- **实现**：新增组件级 `--lx-input-track-height`，输入内框、真实输入节点、前后缀容器/内部槽位及外侧复合块统一使用同一高度轨道；窄屏触控态统一覆盖为 44px，并同步 Element Plus 输入行高变量。
+- **验证**：lx-ui `vue-tsc --noEmit`、生产构建通过；`LxInput` 单测 **13/13**；4177 文档服务浏览器几何复验覆盖 `sm/md/lg` 与 390px 窄屏，前后缀及输入内容轨道一致。Impeccable A **32/40**；B detector 为合法 `[]`/空 stderr/退出码 0，8/8 Light/HUD 视图注入成功且无页面错误。综合报告与快照见 `linkx-fe/.impeccable/critique/lxinput-height-wave-2026-10-18/assessment-report.md` 与 `.impeccable/critique/2026-10-17T19-42-24Z__linkx-fe-src-components-lxinput-index-vue.md`。
+- **边界**：本波只修复组件高度轨道，不改变 props、事件、插槽或 Vue3 宿主迁移范围；真实后端联调、权限任务和整站替换仍按总计划执行。

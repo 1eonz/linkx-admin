@@ -665,3 +665,9 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 - **验证**：单测合计 67/67，文档 E2E 合计 48/48；类型、203 modules 构建、文档构建、Vue3 生产构建和目标格式检查通过；代码复审批准，无 P0-P3。
 - **正式审查**：Assessment A 36/40；Assessment B 5 个静态目标均为合法 `[]`/空 stderr/退出码 0，9 个浏览器视图注入和截图成功；综合报告与 snapshot/trend 见 `.impeccable/critique/transferpanel-p2-2026-10-11/` 和 `.impeccable/critique/2026-10-10T23-03-08Z__linkx-fe-src-components-lxtransferpanel-index-vue.md`。本条关闭当前组件批次证据，不增加 UI-10 全库 52 项计数。
 - **后续待办**：Demo 设置区展开后的控制项密度列为 P3；宿主保存状态、真实权限后端、读屏器专项、`DataPermissionTree` 适配和 Vue3 Element Plus 替换仍按 UI-04。下一组件批次为 `LxMetricCard` + `LxSectionTitle`，先做独立 A/B 和浏览器证据，再处理 G2 未关闭项。
+
+### LxInput 前后缀高度轨道复验（2026-10-18）
+
+- **修复**：组件根节点新增 `--lx-input-track-height`，输入内框、prefix/suffix、prepend/append 及内部槽位统一读取同一轨道；窄屏统一为 44px，并同步 Element Plus 输入行高变量。
+- **证据**：类型检查和生产构建通过；复合前后缀 Playwright 用例新增 `sm/md/lg` 轨道令牌断言并保留 390px 窄屏覆盖。
+- **审查状态**：Assessment A **32/40**；B detector 为合法 `[]`/空 stderr/退出码 0，8 个 Light/HUD 桌面/窄屏视图注入成功。综合报告、截图和快照见 `linkx-fe/.impeccable/critique/lxinput-height-wave-2026-10-18/` 与 `.impeccable/critique/2026-10-17T19-42-24Z__linkx-fe-src-components-lxinput-index-vue.md`。移动文档壳层 `scrollWidth=630` 保留为待归因信号；本条不增加 UI-10 关闭数。
