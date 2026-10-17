@@ -2615,3 +2615,9 @@
 - **实现**：新增组件级 `--lx-input-track-height`，输入内框、真实输入节点、前后缀容器/内部槽位及外侧复合块统一使用同一高度轨道；窄屏触控态统一覆盖为 44px，并同步 Element Plus 输入行高变量。
 - **验证**：lx-ui `vue-tsc --noEmit`、生产构建通过；`LxInput` 单测 **13/13**；4177 文档服务浏览器几何复验覆盖 `sm/md/lg` 与 390px 窄屏，前后缀及输入内容轨道一致。Impeccable A **32/40**；B detector 为合法 `[]`/空 stderr/退出码 0，8/8 Light/HUD 视图注入成功且无页面错误。综合报告与快照见 `linkx-fe/.impeccable/critique/lxinput-height-wave-2026-10-18/assessment-report.md` 与 `.impeccable/critique/2026-10-17T19-42-24Z__linkx-fe-src-components-lxinput-index-vue.md`。
 - **边界**：本波只修复组件高度轨道，不改变 props、事件、插槽或 Vue3 宿主迁移范围；真实后端联调、权限任务和整站替换仍按总计划执行。
+
+## [2026-10-18] LxInput 前后缀高度反馈复验
+
+- **反馈**：用户指出 `prefix/suffix` 状态下输入框与前后缀高度不一致。
+- **复验**：使用 `playwright.lxui.config.ts` 运行 `lx-base-controls-docs.spec.ts` 中复合前后缀和普通根节点两条用例，结果 **2/2 通过**；覆盖 `sm/md/lg`、390px 窄屏、根节点、输入内框、前后缀内外槽位及 `prepend/append`。
+- **结论**：当前 `.lx-input` 统一高度轨道已生效，无需重复修改组件样式。后续继续按 UI-10 组件门禁推进，保留 API 链式调用、中文文档和临时产物白名单规则。

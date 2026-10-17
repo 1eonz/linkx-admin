@@ -1474,3 +1474,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **正式快照**：分别写入 `.impeccable/critique/2026-10-17T20-43-58Z__linkx-fe-src-components-lxmetriccard-index-vue.md` 与 `...lxsectiontitle-index-vue.md`；趋势分别为 `37/40 → 30/40 → 32/40`、`37/40 → 33/40`。双路归档见 `linkx-fe/.impeccable/critique/metric-section-assessment-2026-10-18/`。
 - **边界**：375px 的 `scrollWidth=615` 归因到 VitePress 文档外壳/代码区，不能直接记为组件缺陷；两个 Demo 没有 loading/error/empty/disabled 入口，因此这些状态仍未完成组件级浏览器验收。当前不增加 UI-10 统一 52 项关闭数，宿主组合回归和整库 UI-11 仍开放。
 - **下一步**：按台账继续处理可独立验收的 lx-ui 候选和宿主适配；Vue3 Element Plus 批量替换仍等待 UI-10/UI-11 门禁，权限中心、文本/字段权限和页面操作引导继续后置。
+
+## 2026-10-18 LxInput 前后缀高度复验完成
+
+- **复验范围**：针对用户反馈的 `prefix/suffix` 与输入框上下边界不一致，使用 lx-ui 专用 Playwright 配置复跑 `Input 复合前后缀与输入框在各尺寸及窄屏下保持同高` 与 `Input 普通根节点与输入包装器保持同高` 两条几何用例。
+- **结果**：**2/2 通过**。`sm/md/lg` 的根节点、输入内框、`prefix/suffix` 内外槽位和 `prepend/append` 分别保持 `28/32/40px` 同高；390px 窄屏保持 `44px` 触控轨道；普通输入根节点与内框上下边界对齐。
+- **结论**：前一波高度轨道修复已覆盖本次反馈，不追加重复样式改动。测试运行产生的 `test-results` 与 Impeccable 临时文件继续按白名单排除，不纳入交付提交。
