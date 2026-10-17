@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] UI-13 / Wave 28 LxUpload 进度真实性与 Demo 可访问结构收口
+
+- **改动**：批量上传进度改为按文件大小加权；受控文件缺少大小时使用等权回退，不把未知大小伪装成字节精度。Demo 外层字段改为普通容器，使用 `aria-labelledby` 关联“上传文件”标题，避免嵌套 `label` 造成重复文件选择。
+- **验证**：LxUpload 单测 **39/39**；lx-ui 类型检查、206 modules 生产构建、目标 Prettier 和差异检查通过。Assessment A **29/40**；Assessment B 8 个视图全部可访问且无页面错误/失败请求，detector 三件套为合法 `[]`/空 stderr/退出码 `0`。
+- **审查**：综合报告位于 `linkx-fe/.impeccable/critique/upload-wave-2026-10-18/assessment-report.md`，snapshot/trend 已写入并读取。B 的 HUD 大量命中来自 VitePress 壳层；没有将静态 `[]` 单独当作视觉通过。
+- **边界**：LxUpload UI-10 严格矩阵仍开放；真实上传 URL、鉴权请求头、服务端取消协议和 Vue3 宿主迁移没有可信联调环境。宿主文档 E2E 当前固定使用 `30846`，本次超时属于配置入口错配，不能覆盖 `4177` 文档证据。
+- **下一步**：继续统一 UI-10 未关闭组件和 P1/P2 台账；完成组件库门禁后再迁移 Vue3 Element Plus。页面操作引导继续暂缓，API 请求保持 `.then().catch().finally()`。
+
 ## [2026-10-18] LxInput 前后缀尺寸切换高度修复
 
 - **问题与根因**：`LxInput` Demo 在切换 `sm/md/lg` 时，Element Plus 对 `prefix/suffix` 默认应用 `transition: all`，高度处于过渡帧，造成输入框与前后缀的上下边界短暂不一致。

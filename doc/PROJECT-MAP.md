@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-18 LxUpload 批量进度与 Demo 可访问性
+
+- `linkx-fe/src/components/LxUpload/` 的聚合进度按文件大小加权，缺少文件大小时回退等权平均；对应单测位于 `other-admin/admin-vue3/tests/unit/lx-upload.test.ts`。
+- `linkx-fe/src/components/LxUpload/demo/basic.vue` 使用 `aria-labelledby` 关联上传字段标题，不再用嵌套 `label` 包裹内部文件选择控件。
+- 组件级 A/B 和浏览器证据位于 `linkx-fe/.impeccable/critique/upload-wave-2026-10-18/`；真实上传协议和 Vue3 宿主页面仍在迁移台账中。
+
 ## 2026-10-18 全菜单 Mock 首屏预览复验
 
 - `other-admin/admin-vue3/mock/preview-menu.ts` 当前覆盖 10 个分组、32 个动态子菜单及首页，共 33 个可见菜单入口；`tests/e2e/preview.spec.ts` 已逐页核对壳层和首屏样例数据。

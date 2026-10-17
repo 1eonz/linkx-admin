@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-18 UI-13 / Wave 28 LxUpload 进度真实性与 Demo 可访问结构收口
+
+- 批量上传进度在文件大小完整时按字节权重计算，未知大小回退等权平均；新增大/小文件进度回归。Demo 上传字段改为普通容器并通过 `aria-labelledby` 关联标题，避免嵌套 `label`。
+- LxUpload 单测 **39/39**、lx-ui 类型检查/构建、目标 Prettier 和差异检查通过；Assessment A **29/40**，B 8 视图浏览器证据有效，detector `[]` 仅表示静态零命中。
+- 本波不关闭 UI-10；真实上传协议和宿主迁移仍开放。综合报告和快照见 `linkx-fe/.impeccable/critique/upload-wave-2026-10-18/` 与 `.impeccable/critique/2026-10-17T19-25-22Z__linkx-fe-src-components-lxupload-index-vue.md`。
+
 ## 2026-10-18 LxInput 前后缀尺寸切换过渡修复
 
 - **根因**：Element Plus 的 `prefix/suffix` 默认使用 `transition: all`，Demo 切换 `sm/md/lg` 时高度在过渡帧中介于旧值和新值之间，造成输入框与前后缀上下边界短暂不一致。

@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-18 UI-13 / Wave 28 LxUpload 进度真实性与 Demo 可访问结构收口
+
+- **实现**：批量进度在所有文件有正数大小时按文件大小加权，缺少大小时回退等权平均；新增回归覆盖 900/100 文件的 90%/0% 进度。Demo 上传字段移除嵌套 `label`，改为 `aria-labelledby` 显式关联标题，避免文件选择器重复触发。
+- **验证**：`lx-upload.test.ts` **39/39**、lx-ui `vue-tsc --noEmit`、206 modules 生产构建、目标 Prettier 和 `git diff --check` 通过。Assessment A **29/40**；Assessment B 8 个 Light/HUD、桌面/375px、失败重试、取消、禁用、减少动效视图全部注入成功，detector JSON/stderr/退出码为合法 `[]`/空/`0`。
+- **证据**：综合报告 `linkx-fe/.impeccable/critique/upload-wave-2026-10-18/assessment-report.md`；正式 snapshot 已写入 `.impeccable/critique/2026-10-17T19-25-22Z__linkx-fe-src-components-lxupload-index-vue.md`，trend 已读取。HUD overlay 命中归因到 VitePress 文档壳层，不作为组件缺陷。
+- **边界**：本波修复 P1 进度误导和 Demo 结构问题，不关闭 LxUpload UI-10 严格矩阵；真实上传协议、鉴权、服务端取消和 Vue3 宿主替换仍阻塞。宿主 `lx-upload-docs.spec.ts` 固定访问 `30846`，本次超时未作为成功证据，后续统一到 `4177` 文档入口。
+- **下一入口**：继续 UI-10 未关闭组件及已登记 P1/P2，优先处理 `LxDescriptions`/Transfer/Tree/Form 的统一矩阵状态，之后再进入 Vue3 Element Plus 分批替换。
+
 ## 2026-10-18 LxInput 前后缀尺寸切换高度修复
 
 - **完成内容**：修复 Element Plus `prefix/suffix` 的 `transition: all` 导致尺寸档切换过渡帧高度漂移的问题；槽位固定在 Lx 尺寸轨道内，仅保留颜色过渡，窄屏 44px 规则不变。

@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-18 UI-13 / Wave 28 LxUpload 进度真实性与 Demo 可访问结构收口
+
+- 批量进度由文件百分比简单平均改为按正数文件大小加权；受控文件缺少大小时回退等权平均。Demo 外层上传字段移除嵌套 `label`，用 `aria-labelledby` 关联标题。
+- 单测 **39/39**、类型检查、206 modules 构建、目标格式检查通过；Assessment A **29/40**，Assessment B 8 个 Light/HUD、桌面/375px 状态视图通过，detector 三件套为合法 `[]`/空/`0`。
+- 本波修复 P1 进度认知风险，不关闭 LxUpload UI-10 严格矩阵；真实协议、鉴权、服务端取消和宿主迁移仍需可信环境。正式证据见 `linkx-fe/.impeccable/critique/upload-wave-2026-10-18/`。
+
 ## 2026-10-18 LxForm 通栏文本域宽度回归
 
 - **实现**：`LxTextarea` 根节点补充 `width: 100%`，修复 `LxFormItem span="full"` 在双列网格中仅占左半列的设计差异；控制壳和计数反馈沿用原有状态与可访问性契约。
