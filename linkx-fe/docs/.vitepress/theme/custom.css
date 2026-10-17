@@ -241,6 +241,74 @@
   outline-offset: 2px;
 }
 
+/* DynamicForm/Form 文档的低频说明使用统一的原生折叠触达区和焦点态，
+   不依赖浏览器默认的窄小 summary 样式；保留原生 marker 以传达开合状态。 */
+.vp-doc .lx-doc-details {
+  margin: 20px 0;
+  border: 1px solid var(--lx-border);
+  border-radius: 4px;
+  background: var(--lx-bg-card);
+}
+
+/* VitePress 自身的暗色模式不一定挂载 lx-ui 组件令牌，文档折叠块单独桥接
+   文档主题令牌；HUD 模式继续由 lx-theme-hud 的全局令牌接管。 */
+html.dark:not(.lx-theme-hud) .vp-doc .lx-doc-details {
+  --lx-bg-card: var(--vp-c-bg-alt);
+  --lx-bg-card-hover: var(--vp-c-bg-soft);
+  --lx-bg-table-header: var(--vp-c-bg-soft);
+  --lx-border: var(--vp-c-divider);
+  --lx-text-regular: var(--vp-c-text-1);
+  --lx-text-secondary-strong: var(--vp-c-text-2);
+  --lx-color-primary: var(--vp-c-brand-1);
+}
+
+.vp-doc .lx-doc-details > summary {
+  min-height: 44px;
+  padding: 10px 12px;
+  color: var(--lx-text-regular);
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.vp-doc .lx-doc-details > summary::marker {
+  color: var(--lx-color-primary);
+}
+
+.vp-doc .lx-doc-details > summary:hover {
+  color: var(--lx-color-primary);
+  background: var(--lx-bg-card-hover);
+}
+
+.vp-doc .lx-doc-details > summary:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
+}
+
+.vp-doc .lx-doc-details[open] > summary {
+  color: var(--lx-color-primary);
+  border-bottom: 1px solid var(--lx-border);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.vp-doc .lx-doc-details > :not(summary) {
+  margin-inline: 12px;
+}
+
+/* details 内容统一内缩时，表格需要扣除两侧间距，避免 100% 宽度叠加外边距撑出容器。 */
+.vp-doc .lx-doc-details > table {
+  box-sizing: border-box;
+  width: calc(100% - 24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vp-doc .lx-doc-details > summary {
+    transition: none;
+  }
+}
+
 .vp-doc .lx-selection-control-doc-table-hint.is-scrollable {
   display: block;
 }

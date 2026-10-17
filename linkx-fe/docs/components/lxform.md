@@ -48,7 +48,12 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 </LxForm>
 ```
 
+<details class="lx-doc-details">
+<summary>查看 API 与实例方法</summary>
+
 ## API — LxForm
+
+<p id="lx-form-api-table-hint" class="lx-doc-table-scroll-hint">表格可横向滚动；聚焦表格后可用左右方向键浏览完整 API。</p>
 
 | Prop           | 说明                                           | 类型                         | 默认值  |
 | -------------- | ---------------------------------------------- | ---------------------------- | ------- |
@@ -75,6 +80,8 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 
 ## API — LxFormItem
 
+<p id="lx-form-item-api-table-hint" class="lx-doc-table-scroll-hint">表格可横向滚动；聚焦表格后可用左右方向键浏览字段参数。</p>
+
 | Prop     | 说明                                                             | 类型               | 默认值 |
 | -------- | ---------------------------------------------------------------- | ------------------ | ------ |
 | label    | 字段标签                                                         | `string`           | —      |
@@ -84,6 +91,11 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 | span     | 桌面网格跨列：`1` / `2…` / `'full'` 通栏；窄屏时字段自动占满单列 | `number \| 'full'` | `1`    |
 
 插槽全量转发（含 `#error` 自定义错误渲染、`#label`）。
+
+</details>
+
+<details class="lx-doc-details">
+<summary>查看设计、迁移与错误恢复说明</summary>
 
 ## 设计说明
 
@@ -102,3 +114,5 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 ## 可访问性与错误恢复
 
 开启 `scroll-to-error` 后，校验失败会滚动并聚焦第一个可操作的错误控件；错误控件带 `aria-invalid="true"`，错误文案 ID 会通过 `aria-describedby` 关联。组件内部不发起请求，宿主继续使用 `.then().catch().finally()` 管理提交、失败提示和 loading。
+
+</details>

@@ -1,6 +1,50 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('lx-ui LxForm 文档示例', () => {
+  test('长 API 说明默认收起并支持键盘展开', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 844 });
+    await page.goto('/components/lxform');
+
+    const details = page.locator('details.lx-doc-details');
+    await expect(details).toHaveCount(2);
+    const apiDetails = details.first();
+    const summary = apiDetails.locator('summary');
+    await expect(apiDetails).not.toHaveAttribute('open', '');
+    await expect(summary).toHaveCSS('min-height', '44px');
+    await summary.focus();
+    await expect(summary).toBeFocused();
+    await expect.poll(() => summary.evaluate((element) => getComputedStyle(element).outlineWidth)).toBe('2px');
+    await page.keyboard.press('Enter');
+    await expect(apiDetails).toHaveAttribute('open', '');
+    await expect(apiDetails.getByText('API — LxForm', { exact: true })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+  });
+
+  test('窄屏 API 表格提供可访问的横向滚动提示和方向键操作', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 844 });
+    await page.goto('/components/lxform');
+    const apiDetails = page.locator('details.lx-doc-details').first();
+    await apiDetails.locator('summary').click();
+    const hint = page.locator('#lx-form-api-table-hint');
+    const table = hint.locator('xpath=following-sibling::table[1]');
+    await expect(hint).toBeVisible();
+    await expect(table).toHaveAttribute('tabindex', '0');
+    await expect(table).toHaveAttribute('aria-describedby', 'lx-form-api-table-hint');
+    const bounds = await table.evaluate((element) => {
+      const details = element.closest('details');
+      if (!details) throw new Error('表格不在 API details 内');
+      const tableRect = element.getBoundingClientRect();
+      const detailsRect = details.getBoundingClientRect();
+      return { tableRight: tableRect.right, detailsRight: detailsRect.right };
+    });
+    expect(bounds.tableRight).toBeLessThanOrEqual(bounds.detailsRight + 1);
+    const before = await table.evaluate((element) => element.scrollLeft);
+    await table.focus();
+    await table.press('ArrowRight');
+    const after = await table.evaluate((element) => element.scrollLeft);
+    expect(after).toBeGreaterThan(before);
+  });
+
   test('桌面保留双列间距和通栏字段', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -154,5 +198,20 @@ test.describe('lx-ui LxForm 文档示例', () => {
     await expect
       .poll(() => errorControl.evaluate((element) => getComputedStyle(element).boxShadow))
       .toContain('rgb(247, 137, 137)');
+  });
+
+  test('VitePress普通暗色模式下详情块使用文档表面令牌', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 844 });
+    await page.goto('/components/lxform');
+    await page.locator('html').evaluate((element) => element.classList.add('dark'));
+    const details = page.locator('details.lx-doc-details').first();
+    const summary = details.locator('summary');
+    await summary.click();
+    const colors = await details.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return { background: style.backgroundColor, border: style.borderTopColor };
+    });
+    expect(colors.background).not.toBe('rgb(255, 255, 255)');
+    expect(colors.border).not.toBe('rgb(228, 231, 237)');
   });
 });

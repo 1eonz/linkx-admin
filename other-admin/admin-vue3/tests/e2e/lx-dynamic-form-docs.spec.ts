@@ -107,6 +107,48 @@ test.afterEach(async ({ page }, testInfo) => {
 });
 
 test.describe('lx-ui LxDynamicForm 文档示例', () => {
+  test('长 API 说明默认收起并支持键盘展开', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 844 });
+    await page.goto('/components/lxdynamicform');
+
+    const details = page.locator('details.lx-doc-details').first();
+    const summary = details.locator('summary');
+    await expect(details).not.toHaveAttribute('open', '');
+    await expect(summary).toHaveCSS('min-height', '44px');
+    await summary.focus();
+    await expect(summary).toBeFocused();
+    await expect.poll(() => summary.evaluate((element) => getComputedStyle(element).outlineWidth)).toBe('2px');
+    await page.keyboard.press('Enter');
+    await expect(details).toHaveAttribute('open', '');
+    await expect(details.getByText('字段 schema', { exact: true })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+  });
+
+  test('窄屏 API 表格提供可访问的横向滚动提示和方向键操作', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 844 });
+    await page.goto('/components/lxdynamicform');
+    const apiDetails = page.locator('details.lx-doc-details').first();
+    await apiDetails.locator('summary').click();
+    const hint = page.locator('#lx-dynamic-form-props-table-hint');
+    const table = hint.locator('xpath=following-sibling::table[1]');
+    await expect(hint).toBeVisible();
+    await expect(table).toHaveAttribute('tabindex', '0');
+    await expect(table).toHaveAttribute('aria-describedby', 'lx-dynamic-form-props-table-hint');
+    const bounds = await table.evaluate((element) => {
+      const details = element.closest('details');
+      if (!details) throw new Error('表格不在 API details 内');
+      const tableRect = element.getBoundingClientRect();
+      const detailsRect = details.getBoundingClientRect();
+      return { tableRight: tableRect.right, detailsRight: detailsRect.right };
+    });
+    expect(bounds.tableRight).toBeLessThanOrEqual(bounds.detailsRight + 1);
+    const before = await table.evaluate((element) => element.scrollLeft);
+    await table.focus();
+    await table.press('ArrowRight');
+    const after = await table.evaluate((element) => element.scrollLeft);
+    expect(after).toBeGreaterThan(before);
+  });
+
   test('移动端先呈现交互表单且辅助操作具备完整触控区域', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/components/lxdynamicform');

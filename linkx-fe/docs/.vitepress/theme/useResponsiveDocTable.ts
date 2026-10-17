@@ -10,6 +10,7 @@ export function useResponsiveDocTable(minOverflowPx = 0) {
   let tables: HTMLTableElement[] = []
   const observers: ResizeObserver[] = []
   const removeKeydownListeners: (() => void)[] = []
+  let contentObserver: MutationObserver | undefined
 
   const getMinOverflowPx = (table: HTMLTableElement) => {
     const hint = table.previousElementSibling
@@ -44,11 +45,19 @@ export function useResponsiveDocTable(minOverflowPx = 0) {
   const syncAllKeyboardAccess = () =>
     tables.forEach((table) => syncKeyboardAccess(table))
 
-  onMounted(() => {
+  const clearBindings = () => {
+    observers.splice(0).forEach((observer) => observer.disconnect())
+    removeKeydownListeners
+      .splice(0)
+      .forEach((removeListener) => removeListener())
+    tables = []
+  }
+
+  const bindTables = () => {
+    clearBindings()
     tables = Array.from(
       document.querySelectorAll<HTMLTableElement>(hintedTableSelector),
     )
-    if (tables.length === 0) return
 
     for (const table of tables) {
       syncKeyboardAccess(table)
@@ -86,12 +95,21 @@ export function useResponsiveDocTable(minOverflowPx = 0) {
         table.removeEventListener('keydown', handleKeydown),
       )
     }
+  }
+
+  onMounted(() => {
+    bindTables()
+    const content = document.querySelector('.VPContent')
+    if (content) {
+      contentObserver = new MutationObserver(() => bindTables())
+      contentObserver.observe(content, { childList: true, subtree: true })
+    }
     window.addEventListener('resize', syncAllKeyboardAccess)
   })
 
   onUnmounted(() => {
-    observers.forEach((observer) => observer.disconnect())
-    removeKeydownListeners.forEach((removeListener) => removeListener())
+    contentObserver?.disconnect()
+    clearBindings()
     window.removeEventListener('resize', syncAllKeyboardAccess)
   })
 }
