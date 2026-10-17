@@ -2394,5 +2394,5 @@
 ## 2026-10-17 G2 自动化门禁与 Critique 阻断记录
 
 - G2 当前版全量单测 **598/598**、文档 Playwright **8/8**，lx-ui 类型检查、206 modules 构建和 VitePress 构建通过；`npx impeccable update` 已成功更新引擎至 **0.1.15**。
-- 新引擎在线 detector 对 SearchBar 返回 exit `2`，命中两条文档卡片嵌套和一条低对比度建议；StatusSwitch 返回空 stdout/exit `0`，不是合法 JSON `[]`。两者均不能标记正式 Critique 通过，需先完成文档壳层归因、稳定 JSON 输出和独立浏览器证据。
+- 新引擎在线 detector 初次命中 SearchBar Demo 卡片嵌套和说明文字对比度；已移除 Demo 卡片壳并提升文字对比度。修后 SearchBar 与 StatusSwitch 均为合法 JSON `[]`、stderr 空、exit `0`。该结果只关闭静态 detector 阻断，G2 正式 Critique 仍需独立 A/B、代码复审和综合 snapshot/trend。
 - 该阻断不改变已通过的实现级自动化门禁，也不引入未经设计确认的样式修改。处理完成后继续独立 Assessment A/B、代码复审、综合 snapshot/trend，再进入下一组件批次。
