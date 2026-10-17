@@ -217,6 +217,17 @@ function reset() {
   emit('search')
 }
 
+function handleKeyup(event: KeyboardEvent) {
+  const target = event.target
+  if (
+    target instanceof Element &&
+    target.closest('.el-select, .el-date-editor, .el-cascader')
+  ) {
+    return
+  }
+  reset()
+}
+
 function toggleCollapsed() {
   const next = !collapsedState.value
   collapsedState.value = next
@@ -232,7 +243,7 @@ function toggleCollapsed() {
     role="search"
     aria-label="检索条件"
     :aria-busy="loading ? 'true' : undefined"
-    @keyup.esc="reset"
+    @keyup.esc="handleKeyup"
   >
     <div
       class="lx-search-bar__grid"
@@ -458,7 +469,12 @@ function toggleCollapsed() {
 }
 
 .lx-search-bar__grid--inline-actions .lx-search-bar__field {
-  grid-column: span 6;
+  grid-column: span 4;
+}
+
+/* 集成查询操作的最后一列需要同时容纳选择器和两个按钮，保留可用的选择器宽度。 */
+.lx-search-bar__grid--inline-actions .lx-search-bar__field--inline-actions {
+  grid-column: span 12;
 }
 
 .lx-search-bar__field {
@@ -470,6 +486,12 @@ function toggleCollapsed() {
 
 .lx-search-bar__field--inline-actions {
   grid-column: span 6;
+  grid-template-columns: minmax(80px, 1fr) auto;
+  align-items: end;
+}
+
+.lx-search-bar__field--inline-actions > .lx-search-bar__label {
+  grid-column: 1 / -1;
 }
 
 .lx-search-bar__label {
@@ -520,11 +542,12 @@ function toggleCollapsed() {
 }
 
 .lx-search-bar__actions--inline {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
-  align-items: end;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--lx-space-sm);
   min-width: 0;
-  margin-block-start: var(--lx-space-xs);
+  grid-column: 2 / -1;
   margin-inline-start: 0;
 }
 
@@ -577,13 +600,21 @@ function toggleCollapsed() {
     grid-column: 1 / -1;
   }
 
+  .lx-search-bar__field--inline-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .lx-search-bar__grid--inline-actions .lx-search-bar__field {
+    grid-column: 1 / -1;
+  }
+
+  .lx-search-bar__grid--inline-actions .lx-search-bar__field--inline-actions {
     grid-column: 1 / -1;
   }
 
   .lx-search-bar__actions--inline {
     display: flex;
-    grid-column: 1 / -1;
+    grid-column: 1;
     margin-block-start: 0;
   }
 

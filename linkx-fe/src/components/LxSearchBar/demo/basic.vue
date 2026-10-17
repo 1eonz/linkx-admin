@@ -114,7 +114,19 @@ const standardFields: NonNullable<LxSearchBarProps['fields']> = [
       { label: '城西片区', value: 'west' },
     ],
   },
-  { key: 'date', label: '日期范围', type: 'daterange', span: 6 },
+  {
+    key: 'status',
+    label: '在线/协同状态',
+    type: 'select',
+    span: 6,
+    options: [
+      { label: '全部协同状态', value: 'all' },
+      { label: '正在执行（协同中）', value: 'active' },
+      { label: '备勤驻守', value: 'standby' },
+      { label: '离线状态', value: 'offline' },
+    ],
+    defaultValue: 'all',
+  },
 ]
 
 const query = ref<Record<string, unknown>>({ count: 0, source: [100, 101] })
@@ -216,7 +228,8 @@ const resultText = computed(() =>
           }}<template v-if="rows.length"> · 共 {{ rows.length }} 条</template>
         </span>
         <span class="lx-search-demo__meta-hint">
-          快捷键：<kbd>Enter</kbd> 查询 / <kbd>Esc</kbd> 重置
+          快捷键：文本条件按 <kbd>Enter</kbd> 查询 /
+          <kbd>Esc</kbd> 重置；选择器按 Esc 关闭弹层
         </span>
       </template>
     </LxSearchBar>
@@ -290,7 +303,8 @@ const resultText = computed(() =>
 }
 .lx-search-demo__meta-hint {
   color: var(--lx-text-secondary-strong);
-  white-space: nowrap;
+  flex-wrap: wrap;
+  white-space: normal;
 }
 .lx-search-demo__meta-hint kbd {
   padding: 0 4px;
