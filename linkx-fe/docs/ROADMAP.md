@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只维护 lx-ui 组件路线和组件级未完成项，不重复记录全局波次台账。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，交接与审查证据见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxEmpty 组件门禁
+
+- 定向单测 **5/5**、文档 Playwright **1/1**、lx-ui 类型检查通过；Assessment A **35/40（Good）**。
+- Assessment B 证据见 `.impeccable/critique/empty-assessment-b-2026-10-17/`；三路 detector 为合法 `[]`/空 stderr/退出码 0，浏览器 JSON 可解析且退出码 0。
+- UI-10 严格矩阵登记为 **12/52**；Vue3 15 处 `el-empty` 仍待 UI-04 逐页迁移和空/错/加载回归。
+
 ## 2026-10-17 LxTransferPanel 与 LxVirtualTree 当前版复验
 
 - 定向单测 **67/67**、TransferPanel 文档 Playwright **33/33**；覆盖桌面/窄屏、键盘、筛选批量、空/错/加载、确认清空、长名称、HUD 和减少动效。

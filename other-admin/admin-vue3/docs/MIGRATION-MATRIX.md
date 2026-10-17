@@ -65,3 +65,8 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 - 上表没有完整业务 Mock 或真实后端联调通过记录；GroupTags 的列表/增改删/失败重试/批删及窄屏滚动有自动化 Mock/E2E，图标映射保留接口旧值。Vitest 仅模拟 HTTP 返回并断言请求和局部失败行为，不证明后端兼容。仍需自动化覆盖权限、取消、重复操作与保存后重开。
 
 验证命令：`pnpm exec vitest run tests/unit/business-migration.test.ts`（10 项通过）、`pnpm lint:ts`（上一轮通过，本轮未修改类型代码）、修改文件定向 `pnpm exec eslint ...`（通过）、变更文件 Prettier `--check`（通过）。
+
+## 2026-10-17 LxEmpty
+
+- 库级 API、Demo、单测 **5/5**、文档 E2E **1/1** 已完成；`imageSize` 兼容现有两处 `image-size=80`，根节点 `class` 可透传。
+- 15 处宿主 `el-empty` 继续留在 UI-04 逐页迁移，需按页面保留描述、插槽和空/错/加载契约；不提前删除 `element-plus`。

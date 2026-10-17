@@ -2,6 +2,11 @@
 
 > **文档职责（2026-10-17）**：本文只维护逐页迁移缺口、旧契约和业务适配备注；不再复制 lx-ui 全局波次状态。全局计划和下一入口以 `doc/PROJECT-DELIVERY-PLAN.md` 为准。
 
+## 2026-10-17 LxEmpty 组件门禁复核
+
+- lx-ui `LxEmpty` 已通过单测 **5/5**、文档 Playwright **1/1**、类型检查和 Assessment A/B；证据见 `.impeccable/critique/empty-assessment-b-2026-10-17/`。
+- Vue3 当前仍有 15 处 `el-empty`。逐页迁移时保留 `description`、`image-size`/`imageSize`、`class`、footer 插槽以及页面自己的空/错/加载条件；库级门禁不代表宿主替换完成。
+
 ## 2026-10-17 LxDynamicForm 组件级复验
 
 - lx-ui 当前版单测 **30/30**、文档 E2E **12/12**，Assessment B 证据已保存；此前 E2E 失败由 `favicon.svg` 白名单遗漏造成，已修正。

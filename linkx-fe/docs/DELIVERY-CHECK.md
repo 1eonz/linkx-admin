@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只保留组件交付证据摘要和 `.impeccable/critique` 路径，不再复制全局计划或交接正文。当前波次入口见 `doc/PROJECT-DELIVERY-PLAN.md`，完整交接见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxEmpty 组件门禁
+
+- 定向单测 **5/5**、文档 Playwright **1/1**、lx-ui 类型检查通过；覆盖尺寸、插槽、焦点、筛选恢复、HUD、窄屏和减少动效。
+- `.impeccable/critique/empty-assessment-b-2026-10-17/` 保存三路 detector 三件套和浏览器 JSON；`[]`、stderr、退出码均已核验，空数组不单独代表正式视觉通过。
+- UI-10 严格矩阵登记为 **12/52**；15 处 Vue3 `el-empty` 仍待逐页替换。
+
 ## 2026-10-17 LxTransferPanel 与 LxVirtualTree 当前版复验
 
 - 定向单测 **67/67**、TransferPanel 文档 Playwright **33/33**；桌面/窄屏、键盘、筛选批量、状态反馈、确认清空和主题证据通过。

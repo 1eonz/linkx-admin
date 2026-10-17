@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-17 LxEmpty 组件门禁
+
+- 组件入口：`linkx-fe/src/components/LxEmpty/`；中文文档：`linkx-fe/docs/components/lxempty.md`；Vue3 使用盘点：15 处 `el-empty`，迁移契约记录在 `other-admin/admin-vue3/docs/MIGRATION-BACKLOG.md` 和 `MIGRATION-MATRIX.md`。
+- 单测 **5/5**、文档 E2E **1/1**、lx-ui 类型检查通过；Assessment A **35/40**，B 证据见 `.impeccable/critique/empty-assessment-b-2026-10-17/`。
+- 库级完成不代表宿主采用；逐页迁移必须保留 `description`、`imageSize`、`class`、footer 插槽和空/错/加载状态契约。
+
 ## 2026-10-16 UI-04 前置组件交接：LxSectionTitle 适配器复核
 
 - `other-admin/admin-vue3/src/components/SectionTitle/index.vue` 已补 `subtitle` 属性/插槽透传与 `leading` 插槽优先级；映射图标和未映射图标回退不再吞掉调用方自定义前置内容。
