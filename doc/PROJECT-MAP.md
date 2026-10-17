@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-18 全菜单 Mock 首屏预览复验
+
+- `other-admin/admin-vue3/mock/preview-menu.ts` 当前覆盖 10 个分组、32 个动态子菜单及首页，共 33 个可见菜单入口；`tests/e2e/preview.spec.ts` 已逐页核对壳层和首屏样例数据。
+- 隔离 Mock 预览 **6/6** 通过，覆盖菜单目录/搜索、所有入口、北向筛选增改删、分页文章、鉴权图片失败恢复、减少动效和 320/390px 窄屏；未发现 501 未配置接口或页面级横溢出。
+- 该证据只覆盖本地 Mock 首屏和指定工作流；真实权限、深层业务流程、后端联调和 Vue3 Element Plus 替换仍按迁移台账推进。
+
 ## 2026-10-18 LxForm 通栏文本域布局修复
 
 - `linkx-fe/src/components/LxTextarea/style.css` 的 `.lx-textarea` 现在占满父级宽度，支持 `LxFormItem span="full"` 在双列网格中渲染真正的通栏文本域。
