@@ -12,13 +12,15 @@ import { LxTag } from '../../src';
 ## 基础用法
 
 <div class="demo-box" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-  <LxTag type="primary">8 项字段</LxTag><LxTag size="small" type="primary">紧凑标签</LxTag><LxTag type="success">在线</LxTag><LxTag type="warning">降级</LxTag><LxTag type="error">高危</LxTag><LxTag type="info" closable>检索条件</LxTag>
+  <LxTag type="primary">8 项字段</LxTag><LxTag size="small" type="primary">紧凑标签</LxTag><LxTag size="large" type="success">在线</LxTag><LxTag type="warning">降级</LxTag><LxTag type="error">高危</LxTag><LxTag type="info" closable>检索条件</LxTag><LxTag type="info" disabled>只读标签</LxTag>
 </div>
 
 ```vue
 <LxTag type="success">在线</LxTag>
 <LxTag type="primary">8 项字段</LxTag>
 <LxTag type="info" closable>检索条件</LxTag>
+<LxTag size="large" type="success">大号标签</LxTag>
+<LxTag type="info" disabled>只读标签</LxTag>
 ```
 
 ## API
@@ -40,9 +42,11 @@ import { LxTag } from '../../src';
 
 ### Slots
 
-`default` — 标签文字内容。
+`default` — 标签文字内容。长文本会在可用宽度内省略，完整内容应由宿主通过 `title` 或辅助说明补充。
 
 ## 使用铁律
 
 - **选型**：状态展示用 LxStatusDot（点 + 文字），LxTag 只用于携带文字信息的场景（关键词、条件、已选人）。
+- `small`、`default`、`large` 分别提供 24px、24px、28px 的稳定最小高度；关闭按钮始终是可键盘触达的原生按钮。
+- `disabled` 表示只读标签，不渲染关闭操作；它使用专用禁用令牌保持文字可读性，不依赖整体透明度表达状态。
 - `type` 是反馈语义（成功/警告/错误/中性），不要用它表达设备状态机。
