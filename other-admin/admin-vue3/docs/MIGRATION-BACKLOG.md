@@ -1,10 +1,17 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+> **文档职责（2026-10-17）**：本文只维护逐页迁移缺口、旧契约和业务适配备注；不再复制 lx-ui 全局波次状态。全局计划和下一入口以 `doc/PROJECT-DELIVERY-PLAN.md` 为准。
+
 ## 2026-10-16 UI-04 前置组件：LxSectionTitle 当前版交接
 
 - `SectionTitle` 适配器已透传 `subtitle` 属性/插槽，并转发优先级最高的 `leading` 插槽；映射与未映射图标回退保持兼容。定向单测 **18/18**、文档 E2E **1/1**，类型、ESLint、Prettier 通过。
 - Assessment B 证据 `.impeccable/critique/sectiontitle-assessment-b-2026-10-16/` 覆盖 Light/HUD、桌面/375/320、RTL、减少动效；8/8 无页面错误、失败请求和横向溢出。静态 detector 三件套为合法 `[]`、空 stderr、退出码 `0`，未发现组件 P0–P2。
 - 真实配置页组合、extra loading/失败恢复、权限和后端联调仍待 UI-04；不删除 Element Plus。历史单 variant 规范冲突已登记，当前按三变体实现维护。
+
+## 2026-10-16 G2 LxSearchBar 当前修复
+
+- 适配器已恢复批量 action 的 `key`/`selectedCount` 禁用并隐藏库默认状态行；库标准态第四字段内含操作组，符合设计四列布局。库单测 **9/9**、适配器单测 **11/11**、文档 E2E **4/4**。
+- Vue2 `SearchBar` 的组织树、日期格式、`getSearchParams`、`org-change` 和实例方法依赖业务接口，不能由通用 lx-ui 适配器臆造；逐页迁移时使用 `fields`、`filters` 和业务 composable 完成参数映射。
 
 ## 2026-10-16 UI-04 前置组件：LxMetricCard 趋势语义交接
 

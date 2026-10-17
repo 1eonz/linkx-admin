@@ -6,6 +6,11 @@
 - 单测 **18/18**、文档 E2E **1/1**、类型/ESLint/Prettier 通过；B 证据目录 `.impeccable/critique/sectiontitle-assessment-b-2026-10-16/` 保存 8 视图截图、DOM 和 detector 三件套。静态 `[]` 仅代表零命中，浏览器无错误、失败请求和横溢出。
 - 真实宿主组合与权限/后端联调未完成，不能据此删除 `element-plus`；下一替换候选为 G2 `LxSearchBar`/`LxStatusSwitch`。
 
+## 2026-10-16 G2 LxSearchBar 当前修复
+
+- `LxSearchBar` 标准态第四字段内部承载查询/重置，适配器恢复批量 action `selectedCount` 禁用和 `action` key 事件，并隐藏默认状态行。
+- 库单测 **9/9**、适配器单测 **11/11**、文档 E2E **4/4**，类型和格式检查通过。组织树、日期格式和旧业务参数契约仍是逐页迁移缺口，不能据此删除 `element-plus`。
+
 ## 2026-10-16 UI-04 前置组件：LxMetricCard 当前版语义复核
 
 - `LxMetricCard` 公开 `trendDirection` 类型，显式控制上升/下降/持平图标；不传值继续按旧 `trendStatus` 回退。Badge 状态点已标记为装饰性内容，避免重复读屏。

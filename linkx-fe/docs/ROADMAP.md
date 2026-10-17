@@ -1,11 +1,18 @@
 # lx-ui 路线图
 
+> **文档职责（2026-10-17）**：本文只维护 lx-ui 组件路线和组件级未完成项，不重复记录全局波次台账。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，交接与审查证据见 `doc/PROJECT-HANDOFF.md`。
+
 ## 2026-10-16 UI-04 前置组件：LxSectionTitle 当前版复核
 
 - Vue3 `SectionTitle` 适配器已补 `subtitle` 属性/插槽和 `leading` 插槽优先级，兼容旧标题、图标、extra 与 `dashed` 默认；库组件继续保留 `border`/`dashed`/`plain` 三变体。
 - 单测 **18/18**、文档 Playwright **1/1**、类型检查、ESLint、Prettier 通过。Assessment A/B 无 P0–P2；B 证据覆盖 Light/HUD、1280/375/320、RTL、减少动效，8/8 无横溢出、页面错误或失败请求。
 - 三个静态 detector 均为有效 `[]`/空 stderr/0；8 条组件/Demo 命中按 HUD 令牌和 LxTag 设计尺寸归类，其他命中为 VitePress 壳层。历史组件规范中的单 variant 表述已标记为过时。
 - 真实宿主组合、权限/后端联调和读屏器仍后置；下一波进入 G2 `LxSearchBar`/`LxStatusSwitch`。
+
+## 2026-10-16 G2 LxSearchBar 当前修复
+
+- 四字段标准态按设计稿改为四列 `span 6`，第四列内含查询/重置操作；Vue3 适配器隐藏默认状态行，恢复批量操作 `selectedCount` 禁用与 `action` key 事件。
+- 库单测 **9/9**、适配器单测 **11/11**、文档 E2E **4/4**；组织树、日期格式和旧参数协议仍按页面迁移清单逐项接入。
 
 ## 2026-10-16 UI-04 前置组件：LxMetricCard 趋势语义补强
 

@@ -6,6 +6,11 @@
 - 库/适配器单测 **18/18**、文档 Playwright **1/1**、类型、ESLint、Prettier 和差异检查通过。Assessment B 证据 `.impeccable/critique/sectiontitle-assessment-b-2026-10-16/` 覆盖 8 个视图，页面错误、失败请求和横溢出均为 0；静态 detector 三件套为 `[]`/空/0。
 - HUD 颜色与 LxTag 紧凑尺寸命中已按设计依据归类；VitePress 壳层/overlay 命中不归因组件。宿主真实业务组合、权限和后端联调仍未完成，下一入口为 G2 `LxSearchBar`/`LxStatusSwitch`。
 
+## 2026-10-16 G2 LxSearchBar 当前修复
+
+- `LxSearchBar` 四字段标准态为四个 `span 6` 栅格，第四列内部承载操作；`SearchBar` 适配器恢复批量 action 的 `selectedCount` 禁用和 `action` key 事件，并隐藏默认状态行。
+- 库单测 **9/9**、适配器单测 **11/11**、文档 E2E **4/4**，类型/格式检查通过。旧 Vue2 组织树、日期格式和参数回传契约仍需按页面逐项映射，不以通用适配器冒充完成。
+
 ## 2026-10-16 UI-04 前置组件交接：LxMetricCard 趋势语义复核
 
 - `LxMetricCard` 增加可选 `trendDirection`（`up`/`down`/`flat`），显式传值优先；未传值继续按旧 `trendStatus` 推断，保留 Vue3 宿主兼容行为。指标角标内的状态点标记为装饰性内容，避免重复读屏。

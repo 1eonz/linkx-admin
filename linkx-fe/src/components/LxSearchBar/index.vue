@@ -238,10 +238,14 @@ function toggleCollapsed() {
       class="lx-search-bar__grid"
       :class="{ 'lx-search-bar__grid--inline-actions': inlineActions }"
     >
-      <template v-for="field in visibleFields" :key="field.key">
+      <template v-for="(field, fieldIndex) in visibleFields" :key="field.key">
         <div
           class="lx-search-bar__field"
-          :style="{ '--lx-search-span': fieldSpan(field) }"
+          :class="{
+            'lx-search-bar__field--inline-actions':
+              inlineActions && fieldIndex === 3,
+          }"
+          :style="{ '--lx-search-span': inlineActions ? 6 : fieldSpan(field) }"
         >
           <label class="lx-search-bar__label" :for="fieldLabelTarget(field)">{{
             field.label
@@ -327,42 +331,42 @@ function toggleCollapsed() {
             :size="controlSize"
             @update:model-value="updateField(field, $event)"
           />
+
+          <div
+            v-if="inlineActions && fieldIndex === 3"
+            class="lx-search-bar__actions lx-search-bar__actions--inline"
+          >
+            <slot
+              name="controls"
+              :search="search"
+              :reset="reset"
+              :can-reset="canReset"
+              :loading="loading"
+            >
+              <slot name="actions" />
+              <LxButton
+                type="primary"
+                :loading="loading"
+                :size="controlSize"
+                icon="search"
+                @click="search"
+              >
+                {{ searchText }}
+              </LxButton>
+              <LxButton
+                :disabled="loading || !canReset"
+                :size="controlSize"
+                @click="reset"
+              >
+                {{ resetText }}
+              </LxButton>
+            </slot>
+          </div>
         </div>
       </template>
 
       <div v-if="$slots.filters" class="lx-search-bar__slot-fields">
         <slot name="filters" />
-      </div>
-
-      <div
-        v-if="inlineActions"
-        class="lx-search-bar__actions lx-search-bar__actions--inline"
-      >
-        <slot
-          name="controls"
-          :search="search"
-          :reset="reset"
-          :can-reset="canReset"
-          :loading="loading"
-        >
-          <slot name="actions" />
-          <LxButton
-            type="primary"
-            :loading="loading"
-            :size="controlSize"
-            icon="search"
-            @click="search"
-          >
-            {{ searchText }}
-          </LxButton>
-          <LxButton
-            :disabled="loading || !canReset"
-            :size="controlSize"
-            @click="reset"
-          >
-            {{ resetText }}
-          </LxButton>
-        </slot>
       </div>
     </div>
 
@@ -454,7 +458,7 @@ function toggleCollapsed() {
 }
 
 .lx-search-bar__grid--inline-actions .lx-search-bar__field {
-  grid-column: span 5;
+  grid-column: span 6;
 }
 
 .lx-search-bar__field {
@@ -462,6 +466,10 @@ function toggleCollapsed() {
   min-width: 0;
   grid-column: span var(--lx-search-span);
   gap: var(--lx-space-xs);
+}
+
+.lx-search-bar__field--inline-actions {
+  grid-column: span 6;
 }
 
 .lx-search-bar__label {
@@ -512,9 +520,11 @@ function toggleCollapsed() {
 }
 
 .lx-search-bar__actions--inline {
-  grid-column: span 4;
-  align-self: end;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: end;
   min-width: 0;
+  margin-block-start: var(--lx-space-xs);
   margin-inline-start: 0;
 }
 
@@ -567,9 +577,14 @@ function toggleCollapsed() {
     grid-column: 1 / -1;
   }
 
-  .lx-search-bar__grid--inline-actions .lx-search-bar__field,
-  .lx-search-bar__actions--inline {
+  .lx-search-bar__grid--inline-actions .lx-search-bar__field {
     grid-column: 1 / -1;
+  }
+
+  .lx-search-bar__actions--inline {
+    display: flex;
+    grid-column: 1 / -1;
+    margin-block-start: 0;
   }
 
   .lx-search-bar__footer {

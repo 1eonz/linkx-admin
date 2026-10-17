@@ -2,12 +2,29 @@
 
 > **范围备注（2026-10-15）**：页面操作引导暂缓考虑与实施，不继续拆分，也不纳入待办、自动执行队列或排期；它不作为 lx-ui 收口或 Vue3 Element Plus 替换的前置条件。本文和 `doc/GUIDE-CONTENT-PLAN.md`、`doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 保留历史需求与设计基线；后续确有需要时再恢复计划，届时重新确认页面范围、文案、交互、技术方案及后端契约。当前其余交付顺序不变。
 
+## 文档职责与提速规则（2026-10-17）
+
+为减少重复维护，后续只把以下三份文档作为全局交付事实来源：
+
+- 本文 `doc/PROJECT-DELIVERY-PLAN.md`：维护目标、依赖顺序、当前执行指针、完成定义和未完成任务；每个波次只保留一条当前状态。
+- `doc/PROJECT-HANDOFF.md`：维护按时间倒序的交接、代码审查结论、Impeccable 证据目录和下一步入口；历史记录只追加，不复制到其他计划文档。
+- `doc/PROJECT-MAP.md`：维护模块入口、页面/API/组件关系和迁移定位；仅在架构入口变化时更新。
+
+其余文档的职责收窄：`PROJECT-FOLLOWUP-BREAKDOWN.md` 作为历史拆分归档，不再新增全局状态；`linkx-fe/docs/ROADMAP.md` 只维护组件库路线与组件级未完成项；`linkx-fe/docs/DELIVERY-CHECK.md` 只维护组件交付证据索引；Vue3 `docs/MIGRATION-BACKLOG.md`、`MIGRATION-MATRIX.md` 和 `ELEMENT-PLUS-LX-UI-MATRIX.md` 只维护逐页迁移契约与缺口。它们不得再次复制完整波次台账。
+
+每个波次采用单循环：实现与定向验证 → Assessment A/B 与代码审查 → 修复并复验 → 更新本文一条状态、交接文档一条记录和领域索引一条记录 → 两次 Conventional Commit 并推送。静态 detector 的 `[]` 仍必须结合 stderr、退出码和浏览器证据，不能单独作为通过条件。未完成项只登记一次，后续引用原条目。
+
 ## 2026-10-16 LxSectionTitle 波次交接（当前版）
 
 - 补齐 Vue3 `SectionTitle` 适配器的 `subtitle` 属性/插槽透传，以及 `leading` 插槽优先级；自定义前置内容现在可覆盖映射图标和未映射 Element Plus 图标回退。组件库本体保持三变体、三档字号、标题层级、标签、extra、窄屏和减少动效实现。
 - 定向单测 **18/18**、文档 E2E **1/1**、Vue3 类型检查、ESLint、Prettier 和 `git diff --check` 通过。Assessment A 未发现 P0–P2；Assessment B 证据见 `.impeccable/critique/sectiontitle-assessment-b-2026-10-16/`，8 个主题/尺寸/RTL/减少动效视图无页面错误、失败请求或横向溢出。
 - 三个静态 detector 均为合法 `[]`、空 stderr、退出码 `0`；组件/Demo 的 7 个 HUD 颜色命中和 1 个 LxTag 紧凑尺寸命中均有设计依据或低风险提示，其他命中归因于 VitePress 壳层/overlay，不能按命中总数判缺陷。
 - `doc/lx-ui/COMPONENT-SPEC.md` 的历史“单一 variant”文字已标记为过时基线，当前规范以 `border`/`dashed`/`plain` 三变体为准。宿主真实业务组合、extra loading、权限、后端联调和读屏器仍未完成；下一波进入 G2 `LxSearchBar`/`LxStatusSwitch`。
+
+## 2026-10-16 G2 LxSearchBar 当前修复记录
+
+- 四字段标准态改为 24 列四等分，第四字段内部承载查询/重置按钮；适配器隐藏默认“等待查询”状态行，恢复 `selectedCount` 对批量 action 的禁用及 `action` key 事件。
+- 库单测 **9/9**、适配器定向单测 **11/11**、文档 E2E **4/4**、类型与格式检查通过。Vue2 组织树、日期格式和 `getSearchParams` 仍依赖页面接口，未臆造数据源，登记为逐页迁移缺口。
 
 ## 2026-10-16 LxMetricCard 波次交接（当前版）
 

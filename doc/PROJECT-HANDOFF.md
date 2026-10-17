@@ -1,11 +1,19 @@
 # LinkX 项目交接记录
 
+> **文档职责（2026-10-17）**：本文件是唯一的时间序列交接与审查证据索引。新波次只追加一条中文交接记录，包含实现、验证、A/B 证据、未完成边界和下一入口；不要把同一状态复制到多个全局计划文件。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，架构定位见 `doc/PROJECT-MAP.md`，历史拆分文档不再新增状态。
+
 ## [2026-10-16] UI-04 前置组件：LxSectionTitle 当前版适配器交接
 
 - **实现**：Vue3 `SectionTitle` 适配器透传 `subtitle` 属性和插槽；转发 `leading` 插槽并让其优先于映射的 `LxIcon` 和未映射图标的 Element Plus 回退，保留旧 `dashed` 默认、标题插槽、extra 和现有 props。库组件三变体、三档字号、标题层级、标签、窄屏和减少动效契约保持不变。
 - **验证**：组件与适配器单测 **18/18**；`lx-section-title-docs.spec.ts` **1/1**；Vue3 类型检查、ESLint、Prettier、`git diff --check` 通过。
 - **Impeccable B**：`.impeccable/critique/sectiontitle-assessment-b-2026-10-16/assessment-b-report.md` 保存 8 个 Light/HUD 桌面/移动、RTL、减少动效视图、DOM 和静态 detector 三件套。三目标为合法 `[]`/空 stderr/0；8/8 视图无横溢出、页面错误或失败请求。运行时 8 条组件命中是 HUD 令牌与 LxTag 紧凑尺寸提示，88 条为文档壳层/overlay，未发现组件 P0–P2。
 - **审查边界**：Assessment A/B 已完成；真实业务组合、extra loading/失败恢复、权限、后端联调和读屏器仍待宿主波次。`COMPONENT-SPEC.md` 的单 variant 为历史冲突，当前三 variant 规范已补注。下一波为 G2 `LxSearchBar`/`LxStatusSwitch`。
+
+## [2026-10-16] G2 LxSearchBar 布局与适配器修复交接
+
+- **实现**：标准四字段使用 `span 6` 四列，第四列内部渲染查询/重置操作；Vue3 `SearchBar` 适配器隐藏库默认状态行，支持 action `key`、`selectedCount` 批量禁用和 `action` 事件。
+- **验证**：库单测 **9/9**、适配器单测 **11/11**、文档 E2E **4/4**；类型检查、Prettier 和差异检查通过。
+- **迁移边界**：旧 Vue2 的组织树、日期格式、`getSearchParams`/`org-change`/实例方法依赖具体业务 API，当前只登记为迁移缺口，不伪造通用接口。后续逐页用 lx-ui `fields`/`filters` 和业务参数映射完成。
 
 ## [2026-10-16] UI-04 前置组件：LxMetricCard 当前版趋势语义交接
 

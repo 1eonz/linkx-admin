@@ -59,6 +59,7 @@ import type { Component } from 'vue';
 defineOptions({ name: 'SearchBar' });
 
 interface ActionItem {
+  key?: string;
   label: string;
   type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default';
   icon?: Component;
@@ -74,6 +75,7 @@ interface Props {
   showOrg?: boolean;
   showDateRange?: boolean;
   actions?: ActionItem[];
+  selectedCount?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -82,12 +84,14 @@ const props = withDefaults(defineProps<Props>(), {
   showOrg: false,
   showDateRange: false,
   actions: () => [],
+  selectedCount: 0,
 });
 
 const emit = defineEmits<{
   (e: 'update:searchKey', value: string): void;
   (e: 'search'): void;
   (e: 'reset'): void;
+  (e: 'action', key: string): void;
 }>();
 
 const slots = useSlots();
@@ -105,12 +109,21 @@ function handleReset(): void {
 }
 
 function handleAction(action: ActionItem): void {
+  emit('action', action.key ?? action.label);
   action.onClick?.();
+}
+
+function isBatchAction(action: ActionItem): boolean {
+  return ['batchEdit', 'batchDelete', 'batchDownload'].includes(action.key ?? '');
+}
+
+function isActionDisabled(action: ActionItem): boolean {
+  return Boolean(action.disabled || (isBatchAction(action) && props.selectedCount === 0));
 }
 </script>
 
 <template>
-  <LxSearchBar class="search-bar" :collapsible="false">
+  <LxSearchBar class="search-bar" :collapsible="false" status-text="">
     <template #filters>
       <div class="search-bar__left">
         <!-- 自定义筛选字段插槽优先于默认关键字输入框。 -->
@@ -145,7 +158,7 @@ function handleAction(action: ActionItem): void {
           class="search-bar__item"
           :type="action.type || 'default'"
           :icon="action.icon"
-          :disabled="action.disabled"
+          :disabled="isActionDisabled(action)"
           :loading="action.loading"
           :aria-busy="action.loading ? 'true' : undefined"
           @click="handleAction(action)"
