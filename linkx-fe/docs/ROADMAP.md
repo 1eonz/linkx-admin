@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-17 LxInput 前后缀高度修复
+
+- 复合输入的 prepend/append 高度固定跟随 `--el-input-height`；窄屏/触屏下与输入框一起满足 44px 高度。浏览器 E2E 覆盖 sm/md/lg、prefix/suffix 垂直中心，以及 390px 视口。
+- 此项是已完成 `LxInput` 的局部回归修复，不增加 UI-10 严格矩阵计数；整库 Impeccable、Vue3 宿主替换和真实后端联调状态不变。
+
 > **文档职责（2026-10-17）**：本文只维护 lx-ui 组件路线和组件级未完成项，不重复记录全局波次台账。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，交接与审查证据见 `doc/PROJECT-HANDOFF.md`。
 
 ## 2026-10-17 G2 当前版验证补记

@@ -1,6 +1,6 @@
 # LxInput 文本输入框
 
-基于 Element Plus `el-input` 内核二次封装的文本输入框。32px 基准高、4px 圆角、主色焦点光环；错误态红边浅红底深红值由全局令牌桥承接 `LxForm` 校验上下文自动生效；`mono` 开启等宽值呈现。未声明的 EP props（`formatter`/`parser` 等）经 attrs 透传，兼容旧用法。
+基于 Element Plus `el-input` 内核二次封装的文本输入框。32px 基准高、4px 圆角、主色焦点光环；prepend/append 外侧区与输入框保持同高，窄屏和触屏下共同满足 44px 触控高度；错误态红边浅红底深红值由全局令牌桥承接 `LxForm` 校验上下文自动生效；`mono` 开启等宽值呈现。未声明的 EP props（`formatter`/`parser` 等）经 attrs 透传，兼容旧用法。
 
 视觉规范源：`design/表单控件八件套/code.html` 01。
 

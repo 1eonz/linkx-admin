@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-17] LxInput 前后缀高度修复
+
+- **问题与实现**：复合输入在 sm 档实测 wrapper 为 28px，而 prepend/append 为 37.33px；将外侧 addon 约束为当前输入尺寸令牌高度，并在窄屏/触屏下统一为 44px。prefix/suffix 原先已垂直居中，保留并加入回归断言。
+- **验证状态**：新增几何浏览器 E2E **1/1**，覆盖 sm/md/lg、prepend/append 等高、prefix/suffix 垂直居中及 390px 触屏高度；lx-ui `vue-tsc --noEmit`、206 modules 构建、目标 Prettier/ESLint 和 `git diff --check` 通过。旧综合 E2E 在窄屏清空按钮的可访问角色查询处失败（按钮带 `aria-hidden` 时无法由 `getByRole` 查到），与本次 addon 样式无关；该旧断言需另行评估。
+- **Impeccable 状态**：正式双路 Critique 未完成；Assessment A/B 子任务均因指定的 6-luna 模型通道返回 HTTP 503 而未启动，未运行 detector，也未将本次改动标记为正式视觉审查通过。后续需在模型通道恢复后补齐。
+- **边界**：属于已完成组件的局部回归修复，不增加 UI-10 严格矩阵计数，也不代表正式 Impeccable Critique、宿主替换或真实后端联调完成。
+
 > **文档职责（2026-10-17）**：本文件是唯一的时间序列交接与审查证据索引。新波次只追加一条中文交接记录，包含实现、验证、A/B 证据、未完成边界和下一入口；不要把同一状态复制到多个全局计划文件。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，架构定位见 `doc/PROJECT-MAP.md`，历史拆分文档不再新增状态。
 
 ## [2026-10-17] LxPageCard 正式组件审查

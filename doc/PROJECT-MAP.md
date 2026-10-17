@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-17 LxInput 复合输入高度修复
+
+- 入口 `linkx-fe/src/components/LxInput/`，prepend/append 与输入框统一尺寸档高度，窄屏/触屏统一为 44px；E2E 断言覆盖三档桌面尺寸和 390px 触屏。
+- 不增加 UI-10 完成数；组件库其余门禁、Vue3 宿主替换及 Element Plus 删除仍按交付计划执行。
+
 ## 2026-10-17 LxPageCard 正式审查
 
 - 组件入口 `linkx-fe/src/components/LxPageCard/`，文档 `linkx-fe/docs/components/lxpagecard.md`；单测 **3/3**、文档 E2E **1/1**。
