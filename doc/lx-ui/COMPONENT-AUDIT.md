@@ -1,5 +1,18 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-18 LxTag 严格复核完成
+
+- **实现**：关闭操作统一为 `LxIcon`，补齐 `large` 尺寸和稳定最小高度；disabled 改用专用禁用令牌，长文本在可用宽度内省略；中文 Demo/API 同步覆盖 large、disabled、closable、键盘焦点和窄屏。
+- **验证**：单测 **5/5**、文档 E2E **2/2**、lx-ui typecheck/build、VitePress build、目标 Prettier/ESLint/diff check 通过。构建保留既有大 chunk 警告。
+- **Critique**：A **27/40（Good）**；B 修后证据 `.impeccable/critique/lxtag-assessment-b-2026-10-18-recheck/`，detector JSON/stderr/退出码为合法 `[]`/空/0，Light/HUD × 桌面/375px/减少动效五视图注入成功。唯一组件命中 `cramped-padding` 与设计稿 small 档 `2px 6px` 一致；文档壳层命中逐项归因。
+- **边界**：本条只收口 LxTag 当前组件门禁，不增加宿主 Element Plus 替换、权限中心、真实后端联调或页面引导完成度；宿主接入仍需保留 `close` 事件和 disabled 只读语义。
+
+## 2026-10-17 DynamicForm/Form 文档信息层级复验（阶段性）
+
+- 文档 Demo 后置最小配置、API 分组折叠和 summary 触达/焦点样式已完成；DynamicForm/Form 文档 E2E **17/17**，VitePress 构建成功。
+- 两个 Markdown detector 均为合法 `[]`、stderr 为空、退出码 `0`；独立 A **30/40（Good）**。Luna B 子代理两次 HTTP 503，未形成新的浏览器 overlay/快照，因此不登记正式 Critique 通过。
+- P2：窄屏表格滚动提示、折叠内 H2 的 VitePress outline 行为和更细任务分组待下一次独立 B 复验；不增加 UI-10 关闭数。
+
 ## 2026-10-17 DynamicForm/Form Assessment B 宽度归因复验
 
 - 证据脚本在视口切换后补充布局稳定等待并重跑；两页 375px 页面级 `document/body.scrollWidth` 均为 375，overlay 后仍为 375。旧版 `474/525` 属于测量时序中间态，代码块/API 表格内部滚动不等同于页面横溢出。

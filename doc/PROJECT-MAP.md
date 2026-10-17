@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-18 LxTag 组件门禁复核
+
+- 组件入口 `linkx-fe/src/components/LxTag/`，中文文档 `linkx-fe/docs/components/lxtag.md`；关闭操作使用 `LxIcon`，并覆盖 small/default/large、语义色、disabled、closable 和长文本省略。
+- 定向单测 **5/5**、文档 Playwright **2/2**、lx-ui 类型检查/构建/文档构建通过；修后 B 证据位于 `.impeccable/critique/lxtag-assessment-b-2026-10-18-recheck/`。
+- Vue3 宿主仍保留既有 Element Plus 使用，组件级复核不等于 UI-10 全库完成；宿主迁移需保留标签语义、关闭事件和只读禁用契约。
+
 ## 2026-10-17 DynamicForm/Form Critique 归档
 
 - 文档入口 `linkx-fe/docs/components/lxdynamicform.md`、`linkx-fe/docs/components/lxform.md` 已完成独立 A/B 证据归档；组件入口仍为 `linkx-fe/src/components/LxDynamicForm/` 与 `linkx-fe/src/components/LxForm/`，本次未改变业务 API 或宿主依赖关系。

@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-18 LxTag 严格复核与关闭操作统一
+
+- **实现**：`LxTag` 关闭操作改用 `LxIcon` 的 `x` 图标，按钮名称统一为“关闭标签”；补齐 `large` 尺寸契约，`small/default/large` 维持稳定最小高度；禁用态改用专用禁用背景、边框和文字令牌，避免整体透明度导致文字对比度降至约 1.89:1；长标签在可用宽度内省略。中文文档新增 large、disabled 和键盘行为说明。
+- **验证**：`LxTag` 单测 **5/5**、文档 Playwright **2/2**、lx-ui `typecheck`、`build`、`build:docs`、目标 Prettier、ESLint 和 `git diff --check` 通过。构建保留既有大 chunk 警告。
+- **Impeccable**：Assessment A **27/40（Good）**；修后 B 五视图覆盖 Light/HUD、1280/375、减少动效、large/disabled/closable，均渲染 7 个标签，关闭按钮可聚焦，页面错误和失败请求为 0。修后 detector JSON 为合法 `[]`、stderr 为空、退出码 `0`；组件相关 `cramped-padding` 归因为设计稿紧凑内距，其他命中为文档壳层。
+- **证据**：修后 B 证据位于 `.impeccable/critique/lxtag-assessment-b-2026-10-18-recheck/`；本波不把 `[]` 单独当作通过依据。UI-10 仍按全库门禁口径登记，Vue3 宿主替换、真实权限/后端联调和页面引导继续后置。
+
 ## 2026-10-18 G2 LxStatusSwitch 无权限状态可访问性补强
 
 - **实现**：无权限降级标签保留当前开启/关闭状态，并通过 `aria-label` 与 `aria-description` 明确播报“无权限，只读”；组件继续只消费宿主注入权限源，不请求业务 API。Vue3 `StatusSwitch` 适配器改用 `LxStatusSwitch`，保留 `value=0/1`、`normalText/forbiddenText` 和 `change(number)` 旧契约。
