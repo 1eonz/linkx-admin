@@ -139,13 +139,28 @@ describe('LxSearchBar', () => {
     wrapper.unmount();
   });
 
-  it('renders host status and resets from Escape in a text input', async () => {
+  it('renders host status and does not reset from Escape by default', async () => {
     const wrapper = mount(LxSearchBar, {
       props: { fields, modelValue: { keyword: '值班员', status: 'online' } },
       slots: { meta: '<span data-testid="meta">结果状态</span>' },
     });
 
     expect(wrapper.get('[data-testid="meta"]').text()).toBe('结果状态');
+    await wrapper.get('input[type="text"]').trigger('keyup.esc');
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+    expect(wrapper.emitted('search')).toBeUndefined();
+    wrapper.unmount();
+  });
+
+  it('supports legacy Escape reset when explicitly enabled', async () => {
+    const wrapper = mount(LxSearchBar, {
+      props: {
+        fields,
+        escapeReset: true,
+        modelValue: { keyword: '值班员', status: 'online' },
+      },
+    });
+
     await wrapper.get('input[type="text"]').trigger('keyup.esc');
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([{ status: 'all' }]);
     expect(wrapper.emitted('search')).toHaveLength(1);

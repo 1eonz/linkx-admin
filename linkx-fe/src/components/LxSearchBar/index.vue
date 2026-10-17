@@ -29,6 +29,7 @@ const props = withDefaults(defineProps<LxSearchBarProps>(), {
   searchText: '查询',
   resetText: '重置',
   statusText: '等待查询',
+  escapeReset: false,
   size: 'default',
 })
 
@@ -218,6 +219,7 @@ function reset() {
 }
 
 function handleKeyup(event: KeyboardEvent) {
+  if (!props.escapeReset) return
   const target = event.target
   if (
     target instanceof Element &&

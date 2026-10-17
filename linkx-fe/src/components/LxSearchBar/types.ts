@@ -55,5 +55,7 @@ export interface LxSearchBarProps {
   resetText?: string
   /** 未提供 meta 插槽时显示的默认状态；传空字符串可隐藏默认状态行。 */
   statusText?: string
+  /** 是否将文本输入框的 Escape 解释为重置全部条件；默认关闭以遵循控件原生退出语义。 */
+  escapeReset?: boolean
   size?: LxSize
 }

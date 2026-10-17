@@ -228,8 +228,8 @@ const resultText = computed(() =>
           }}<template v-if="rows.length"> · 共 {{ rows.length }} 条</template>
         </span>
         <span class="lx-search-demo__meta-hint">
-          快捷键：文本条件按 <kbd>Enter</kbd> 查询 /
-          <kbd>Esc</kbd> 重置；选择器按 Esc 关闭弹层
+          快捷键：文本条件按 <kbd>Enter</kbd> 查询；
+          <kbd>Esc</kbd> 退出当前控件；请使用“重置”清空全部条件
         </span>
       </template>
     </LxSearchBar>

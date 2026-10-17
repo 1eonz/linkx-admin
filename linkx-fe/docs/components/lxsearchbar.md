@@ -14,14 +14,15 @@ import Basic from '../../src/components/LxSearchBar/demo/basic.vue';
 
 ## Props
 
-| 名称                        | 类型                              | 默认值          | 说明                                                               |
-| --------------------------- | --------------------------------- | --------------- | ------------------------------------------------------------------ |
-| `fields`                    | `LxSearchField[]`                 | `[]`            | 支持 input、select、date、daterange、number、tree-select、cascader |
-| `modelValue`                | `Record<string, unknown>`         | `{}`            | 受控查询值                                                         |
-| `loading`                   | `boolean`                         | `false`         | 查询中禁用搜索/重置并展示按钮加载态                                |
-| `collapsible` / `collapsed` | `boolean`                         | `true` / `true` | 字段超过 8 个时支持收起和展开                                      |
-| `statusText`                | `string`                          | `等待查询`      | 未提供 `meta` 插槽时显示的默认状态；传空字符串可隐藏状态行         |
-| `size`                      | `'small' \| 'default' \| 'large'` | `'default'`     | 透传按钮尺寸                                                       |
+| 名称                        | 类型                              | 默认值          | 说明                                                                                                      |
+| --------------------------- | --------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------- |
+| `fields`                    | `LxSearchField[]`                 | `[]`            | 支持 input、select、date、daterange、number、tree-select、cascader                                        |
+| `modelValue`                | `Record<string, unknown>`         | `{}`            | 受控查询值                                                                                                |
+| `loading`                   | `boolean`                         | `false`         | 查询中禁用搜索/重置并展示按钮加载态                                                                       |
+| `collapsible` / `collapsed` | `boolean`                         | `true` / `true` | 字段超过 8 个时支持收起和展开                                                                             |
+| `statusText`                | `string`                          | `等待查询`      | 未提供 `meta` 插槽时显示的默认状态；传空字符串可隐藏状态行                                                |
+| `escapeReset`               | `boolean`                         | `false`         | 是否将文本输入框的 `Escape` 解释为重置全部条件并立即查询；默认关闭，选择器和日期弹层仍由自身处理 `Escape` |
+| `size`                      | `'small' \| 'default' \| 'large'` | `'default'`     | 透传按钮尺寸                                                                                              |
 
 ## Events 与插槽
 
@@ -33,7 +34,7 @@ import Basic from '../../src/components/LxSearchBar/demo/basic.vue';
 - `controls`：接管查询/重置按钮，作用域提供 `search`、`reset`、`canReset` 和 `loading`。
 - `actions`：在默认查询/重置按钮前追加操作。
 
-字段超过 8 个时默认显示前 4 项；收起按钮会明确播报隐藏字段数量。字段恰好 4 个且没有 `filters` 插槽时，查询/重置会与字段在同一行呈现，窄屏自动回落为全宽操作行。组件根节点使用 `role="search"`，查询中暴露 `aria-busy="true"`，窄屏查询/重置/展开控件保持至少 44px 点按高度。字段的树和级联选项使用递归 `children`；组件不发起请求，也不保存列表数据。输入框回车触发 `search`；文本输入条件按 `Esc` 执行重置，Select、日期和级联控件按 `Esc` 时仅关闭自身弹层，避免误清其他条件。`meta` 插槽可呈现结果数量、耗时和快捷键等宿主状态；未提供插槽时由 `statusText` 提供最小可见状态。Demo 的成功、空结果和失败均为宿主侧内存 Mock，业务 API 仍由宿主按 `.then().catch().finally()` 编排。
+字段超过 8 个时默认显示前 4 项；收起按钮会明确播报隐藏字段数量。字段恰好 4 个且没有 `filters` 插槽时，查询/重置会与字段在同一行呈现，窄屏自动回落为全宽操作行。组件根节点使用 `role="search"`，查询中暴露 `aria-busy="true"`，窄屏查询/重置/展开控件保持至少 44px 点按高度。字段的树和级联选项使用递归 `children`；组件不发起请求，也不保存列表数据。输入框回车触发 `search`；默认情况下 `Escape` 不会重置整组条件，避免把控件退出操作误解释为提交动作；需要兼容旧页面时可显式设置 `escapeReset`。Select、日期和级联控件按 `Escape` 时仅关闭自身弹层。`meta` 插槽可呈现结果数量、耗时和快捷键等宿主状态；未提供插槽时由 `statusText` 提供最小可见状态。Demo 的成功、空结果和失败均为宿主侧内存 Mock，业务 API 仍由宿主按 `.then().catch().finally()` 编排。
 
 普通选择及树选择选项的值支持字符串、数字或布尔值。级联选项遵循 Element Plus Cascader 契约，支持字符串、数字和记录对象值，不接受布尔值、数组或函数作为单个节点值；记录对象（包括含 `call` 或 `Symbol.iterator` 业务字段的对象）和混合路径会按原类型传入，并从 `update:modelValue` 原样发出。
 
