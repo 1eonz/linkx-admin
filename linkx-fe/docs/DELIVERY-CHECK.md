@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-18 LxInput 前后缀尺寸切换过渡修复
+
+- **问题**：Element Plus `prefix/suffix` 的 `transition: all` 会在 Demo 选择尺寸档后产生高度过渡帧，导致输入框和前后缀看起来不等高。
+- **实现**：前后缀及内部槽位锁定 Lx 尺寸令牌，过渡属性收窄为颜色，sm/md/lg 与窄屏 44px 高度不改变。
+- **验证**：定向复合前后缀 E2E **1/1**，LxInput 单测 **13/13**，lx-ui `vue-tsc --noEmit`、生产构建、目标 Prettier 和 `git diff --check` 通过。完整 Input 相关 E2E 为 **5/6**，唯一失败为既有清空按钮可见性查询，与本次样式无关。
+- **Impeccable**：detector stdout 为合法 `[]`，stderr 为空，退出码 `0`；按规则不把静态 `[]` 单独记为正式 Critique 通过。
+
 ## 2026-10-18 UI-13 / Wave 27 LxUpload 组合回归收口
 
 - `LxUpload` fallback UID、跨实例隔离、受控回灌后公开 `abort()`、对应请求取消和迟到回调隔离已由单测 **38/38** 覆盖。

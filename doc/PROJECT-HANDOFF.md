@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] LxInput 前后缀尺寸切换高度修复
+
+- **问题与根因**：`LxInput` Demo 在切换 `sm/md/lg` 时，Element Plus 对 `prefix/suffix` 默认应用 `transition: all`，高度处于过渡帧，造成输入框与前后缀的上下边界短暂不一致。
+- **改动**：保留前后缀和内部槽位已有的完整高度 flex 轨道，将 Element Plus 的 `transition: all` 收窄为颜色过渡，避免尺寸切换时高度参与动画；窄屏 44px 触控高度、统一焦点环和 prepend/append 结构保持原契约。
+- **验证**：复合前后缀 Playwright **1/1**、`lx-input.test.ts` **13/13**、lx-ui 类型检查/生产构建、目标格式检查和 `git diff --check` 通过。完整 Input 相关 E2E **5/6**，唯一失败是既有清空按钮在鼠标移出后的可见性断言，不属于本次高度修复，已保留为后续独立回归项。
+- **Impeccable**：detector JSON 合法 `[]`、stderr 为空、退出码 `0`；该静态结果仅代表规则零命中，不宣称新增正式双路 Critique 通过。`npx impeccable update` 已执行，因网络无法下载引擎但本地 skill/hook 更新完成。
+- **交接边界**：本波不增加 UI-10 关闭数，不改变 API、事件、校验或 Vue3 API 链式风格；Element Plus 替换、真实后端/权限联调和页面引导继续按既定计划后置。
+
 ## [2026-10-18] UI-13 / Wave 27 LxUpload fallback UID 与 abort 组合回归
 
 - **交接结果**：确认 `LxUpload` 的 fallback UID 生成与稳定性、多个实例隔离、受控模型回灌、内部 Element Plus UID 映射、公开 `abort()`、对应请求取消以及迟到 success/error 回调忽略均已有当前实现和回归覆盖。
