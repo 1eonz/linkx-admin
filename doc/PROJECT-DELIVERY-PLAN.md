@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-18 DynamicForm/Form 文档 P2 收口
+
+- **完成内容**：文档首屏保留可运行示例，将 Props、schema、事件、实例与迁移说明拆为原生 `details` 折叠；折叠标题提供 44px 触达区和可见焦点，API 表格在窄屏支持 `tabindex`、`aria-describedby`、左右方向键横向滚动；VitePress SPA 路由切换后会重新绑定表格行为，普通暗色主题补充文档表面令牌桥接。
+- **验证**：DynamicForm/Form 文档 Playwright **20/20**；lx-ui `pnpm typecheck` 通过，`pnpm build:docs` 通过（保留既有大 chunk 警告）；目标 Prettier 和 `git diff --check` 通过。
+- **Impeccable 证据**：四个 detector 均为合法 JSON `[]`、stderr 为空、退出码 `0`；浏览器复验覆盖 DynamicForm/LxForm、Light/HUD、1280/375、减少动效、错误/禁用、键盘和 overlay 注入。清洁页面两页均为 `scrollWidth=viewport` 且无页面错误；overlay 后的 547px 宽度归因于检测层，不作为页面溢出缺陷。`[]` 不单独代表正式视觉通过。
+- **代码复核**：未发现新的 P0/P1/P2；现有独立 Assessment A/B 基线报告仍保留，修后以本轮 20/20 与浏览器证据复验为依据，未伪造新的独立评分。
+- **开放项**：首列 sticky、API 子分区锚点、真实读屏器验证和 MutationObserver 性能优化继续登记为 P2；真实后端上传、Vue3 宿主替换、权限中心、文本/字段权限、页面引导和 Element Plus 删除仍按既定顺序后置。
+
 ## 2026-10-17 DynamicForm/Form 正式双路 Critique 归档
 
 - **结论**：Assessment A 与 B 已由独立 `gpt-6.1-sol` 评估完成，综合评分 **28/40（Good）**。A 关注文档信息密度与键盘效率；B 核对 detector 三件套和浏览器证据。
