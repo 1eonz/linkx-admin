@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只保留组件交付证据摘要和 `.impeccable/critique` 路径，不再复制全局计划或交接正文。当前波次入口见 `doc/PROJECT-DELIVERY-PLAN.md`，完整交接见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxInput 前后缀复合高度二次修复
+
+- 复合根节点现在与输入内框、prepend、append 使用同一高度轨道并显式拉伸；窄屏/触屏保持 44px，修复部分内核布局下外侧块与输入边界视觉不齐的问题。
+- 复合前后缀 Playwright 几何测试 **1/1**、`LxInput` 单测 **13/13**；类型检查、目标 Prettier、目标 ESLint 和 `git diff --check` 通过。
+- 本次属于已完成组件的局部回归修复，不增加 UI-10 严格矩阵计数；正式 Impeccable 双路证据仍沿用既有门禁，不以 detector `[]` 单独判定通过。
+
 ## 2026-10-17 G2 当前版自动化门禁补记
 
 ### SearchBar 修后布局
