@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-17 LxPagination 正式审查
+
+- 组件入口 `linkx-fe/src/components/LxPagination/`，文档 `linkx-fe/docs/components/lxpagination.md`；单测 **5/5**、文档 E2E **3/3**。
+- Assessment A **32/40**；B 五视图浏览器证据和 detector 三件套有效。迁移时保留受控分页、自动重置和局部滚动。
+
 ## 2026-10-17 LxDrawer 正式审查
 
 - 组件入口 `linkx-fe/src/components/LxDrawer/`，文档 `linkx-fe/docs/components/lxdrawer.md`；单测 **4/4**、文档 E2E **1/1**。
