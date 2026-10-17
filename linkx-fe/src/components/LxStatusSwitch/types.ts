@@ -28,6 +28,8 @@ export interface LxStatusSwitchProps {
   disabled?: boolean
   /** 宿主注入的权限码；传入后由 lx-ui 权限源判断是否可操作。 */
   permission?: string
+  /** 当前行或实体的稳定标识；确认等待期间变化时会丢弃旧结果。 */
+  contextKey?: string | number
   /** 无权限时是否降级为 LxTag，而不是渲染灰色死开关。 */
   fallbackTag?: boolean
   /** 关闭操作前的确认说明；开启时不弹确认框。 */

@@ -154,6 +154,48 @@ describe('LxStatusSwitch', () => {
     wrapper.unmount();
   });
 
+  it('drops a stale confirmation result when the host changes the entity context', async () => {
+    let resolveConfirm: ((value: boolean) => void) | undefined;
+    lxConfirmMock.mockImplementation(
+      () =>
+        new Promise<boolean>((resolve) => {
+          resolveConfirm = resolve;
+        }),
+    );
+    const wrapper = mountSwitch({
+      modelValue: true,
+      contextKey: 'row-a',
+      confirm: '关闭后停止服务。',
+    });
+    const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
+
+    const pending = beforeChange();
+    await wrapper.setProps({ contextKey: 'row-b' });
+    resolveConfirm?.(true);
+
+    await expect(pending).resolves.toBe(false);
+    wrapper.unmount();
+  });
+
+  it('只允许一个确认框处于等待状态', async () => {
+    let resolveConfirm: ((value: boolean) => void) | undefined;
+    lxConfirmMock.mockImplementation(
+      () =>
+        new Promise<boolean>((resolve) => {
+          resolveConfirm = resolve;
+        }),
+    );
+    const wrapper = mountSwitch({ modelValue: true, confirm: '关闭后停止服务。' });
+    const beforeChange = wrapper.getComponent(SwitchStub).props('beforeChange') as () => Promise<boolean>;
+
+    const first = beforeChange();
+    await expect(beforeChange()).resolves.toBe(false);
+    expect(lxConfirmMock).toHaveBeenCalledTimes(1);
+    resolveConfirm?.(true);
+    await expect(first).resolves.toBe(true);
+    wrapper.unmount();
+  });
+
   it('drops a stale confirmation result when the host makes the switch read-only', async () => {
     let resolveConfirm: ((value: boolean) => void) | undefined;
     lxConfirmMock.mockImplementation(
@@ -363,6 +405,16 @@ describe('LxStatusSwitch', () => {
     const fallback = wrapper.get('.lx-status-switch__fallback');
     expect(fallback.attributes('aria-labelledby')).toBe('readonly-row');
     expect(fallback.attributes('aria-describedby')).toBe('readonly-help');
+    wrapper.unmount();
+  });
+
+  it('保留调用方为只读行提供的自定义 aria-label', () => {
+    const wrapper = mountSwitch({
+      modelValue: true,
+      disabled: true,
+      'aria-label': '主节点启用状态',
+    });
+    expect(wrapper.get('.lx-status-switch__fallback').attributes('aria-label')).toBe('主节点启用状态');
     wrapper.unmount();
   });
 });

@@ -21,6 +21,10 @@ const props = defineProps({
   loading: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   permission: { type: String, default: undefined },
+  contextKey: {
+    type: [String, Number] as PropType<string | number>,
+    default: undefined,
+  },
   fallbackTag: { type: Boolean, default: true },
   confirm: {
     type: [String, Boolean, Object] as PropType<
@@ -55,6 +59,13 @@ const accessibleLabel = computed(() =>
     ? attrs['aria-label']
     : `${props.onText} / ${props.offText}`,
 )
+const fallbackAccessibleLabel = computed(() =>
+  typeof attrs['aria-label'] === 'string'
+    ? attrs['aria-label']
+    : permissionAllowed.value
+      ? `${stateLabel.value}（只读）`
+      : '无权限，禁用/只读',
+)
 const accessibleLabelledby = computed(() =>
   typeof attrs['aria-labelledby'] === 'string'
     ? attrs['aria-labelledby']
@@ -80,9 +91,10 @@ const showFallbackTag = computed(
   () => props.disabled || (!permissionAllowed.value && props.fallbackTag),
 )
 const modelVersion = ref(0)
+const pendingConfirm = ref(false)
 
 watch(
-  () => props.modelValue,
+  () => [props.modelValue, props.contextKey],
   () => {
     modelVersion.value += 1
   },
@@ -96,12 +108,15 @@ async function beforeChange(): Promise<boolean> {
   if (props.loading || props.disabled || !permissionAllowed.value) return false
   if (!isOn.value && props.confirm) return true
   if (isOn.value && props.confirm) {
+    if (pendingConfirm.value) return false
+    pendingConfirm.value = true
     const requestVersion = modelVersion.value
     const requestModelValue = props.modelValue
     const options: LxStatusSwitchConfirmOptions =
       typeof props.confirm === 'string'
         ? { message: props.confirm }
-        : props.confirm
+        : { ...props.confirm }
+    const requestContextKey = props.contextKey
     const message = [
       options.message,
       options.targetEntity ? `目标实体：${options.targetEntity}` : undefined,
@@ -110,25 +125,30 @@ async function beforeChange(): Promise<boolean> {
     ]
       .filter((item): item is string => Boolean(item))
       .join('\n')
-    const confirmed = await lxConfirm({
-      title: options.title ?? '确认关闭？',
-      message,
-      confirmText: options.confirmText ?? '确认关闭',
-      cancelText: options.cancelText ?? '取消',
-      danger: options.type !== 'warning',
-      customClass: options.customClass,
-    })
-    // 确认框打开期间宿主可能已完成另一笔保存、切换账号或撤销权限；
-    // 此时丢弃旧确认结果，避免异步回写覆盖最新状态。
-    return (
-      confirmed &&
-      modelVersion.value === requestVersion &&
-      props.modelValue === requestModelValue &&
-      isOn.value &&
-      !props.loading &&
-      !props.disabled &&
-      hasCurrentPermission()
-    )
+    try {
+      const confirmed = await lxConfirm({
+        title: options.title ?? '确认关闭？',
+        message,
+        confirmText: options.confirmText ?? '确认关闭',
+        cancelText: options.cancelText ?? '取消',
+        danger: options.type !== 'warning',
+        customClass: options.customClass,
+      })
+      // 确认框打开期间宿主可能已完成另一笔保存、切换账号、切换行或撤销权限；
+      // 此时丢弃旧确认结果，避免异步回写覆盖最新状态。
+      return (
+        confirmed &&
+        modelVersion.value === requestVersion &&
+        props.contextKey === requestContextKey &&
+        props.modelValue === requestModelValue &&
+        isOn.value &&
+        !props.loading &&
+        !props.disabled &&
+        hasCurrentPermission()
+      )
+    } finally {
+      pendingConfirm.value = false
+    }
   }
   return true
 }
@@ -149,9 +169,7 @@ function onChange(value: string | number | boolean) {
       type="info"
       size="small"
       aria-disabled="true"
-      :aria-label="
-        permissionAllowed ? `${stateLabel}（只读）` : '无权限，禁用/只读'
-      "
+      :aria-label="fallbackAccessibleLabel"
       :aria-labelledby="accessibleLabelledby"
       :aria-describedby="accessibleDescribedby"
       >{{ permissionAllowed ? `${stateLabel}（只读）` : '禁用/只读' }}</LxTag
