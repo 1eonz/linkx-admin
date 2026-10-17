@@ -2646,5 +2646,4 @@
 - **改动**：复制按钮忙态显示加载图标、中文标题和 `aria-busy`，防止复制请求未完成时重复提交；文档补充该状态说明，E2E 使用受控剪贴板 Promise 断言中间态。
 - **验证**：lx-ui 专用 Playwright **1/1**、lx-ui typecheck、目标 Prettier 和差异检查通过。默认 Vue3 Playwright 配置命中登录页，已改用 `playwright.lxui.config.ts` 重新执行并获得有效结果。
 - **代码审查**：未发现 P0/P1/P2；状态由组件内部维护，未引入 API、Router、Pinia 或权限依赖。临时 `code-slot-e2e.json`、test-results 和其他协作者文件不纳入提交。
-- **下一步**：继续 LxDescriptions 与 UI-10 未关闭候选；保持中文注释、Promise 链请求风格和白名单提交规则。
-
+- **下一步**：继续 LxDescriptions 与 UI-10 未关闭候选；保持中文注释、Promise 链请求风格和白名单提交规则。\n

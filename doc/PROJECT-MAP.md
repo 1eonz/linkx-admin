@@ -629,5 +629,4 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 ## 2026-10-18 LxCodeSlot 复制反馈
 
 - `linkx-fe/src/components/LxCodeSlot/index.vue` 的复制中态使用 `LxIcon loading`、`aria-busy` 和禁用状态；`lxcodeslot-docs.spec.ts` 通过受控剪贴板验证中间态。
-- 该组件不请求业务 API；真实剪贴板权限和宿主组合仍属于后续验收边界。
-
+- 该组件不请求业务 API；真实剪贴板权限和宿主组合仍属于后续验收边界。\n

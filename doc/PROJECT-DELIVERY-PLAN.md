@@ -1508,5 +1508,4 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **实现**：复制进行中按钮显示 `LxIcon loading`、`title="正在复制"` 和 `aria-busy="true"`，同时禁用重复点击；复制完成后恢复复制图标和原提示。保留既有成功/失败事件与 Promise 链边界。
 - **验证**：使用 lx-ui 专用 Playwright 配置运行 `lx-codeslot-docs.spec.ts` **1/1**；覆盖键盘复制、复制中状态、HUD、窄屏与长值。目标 Prettier、lx-ui typecheck 和 `git diff --check` 通过；默认 Vue3 配置误指向登录页的失败已归因于配置入口，不作为组件失败证据。
 - **边界**：该项只收口组件复制反馈，不代表系统剪贴板权限、真实宿主组合或 UI-10 全库矩阵已完成；真实读屏器和跨浏览器仍开放。
-- **下一步**：继续处理 `LxDescriptions` 长值发现性/复制反馈和其余 UI-10 候选，随后执行整库 Impeccable 与 Vue3 宿主替换。
-
+- **下一步**：继续处理 `LxDescriptions` 长值发现性/复制反馈和其余 UI-10 候选，随后执行整库 Impeccable 与 Vue3 宿主替换。\n
