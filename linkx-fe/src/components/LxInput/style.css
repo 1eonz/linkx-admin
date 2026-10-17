@@ -103,6 +103,8 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
   align-self: stretch;
   padding-block: 0;
   line-height: 1;
+  /* EP 默认 transition: all 会让尺寸切换时槽位短暂变高，导致边界错位。 */
+  transition: color var(--lx-transition);
 }
 
 .lx-input .el-input__prefix-inner,
@@ -114,6 +116,7 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
   align-self: stretch;
   flex: 0 0 auto;
   line-height: 1;
+  transition: color var(--lx-transition);
 }
 
 /* hover：描边转主色 */
