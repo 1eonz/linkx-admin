@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-17 LxDialog 正式审查
+
+- 组件入口 `linkx-fe/src/components/LxDialog/`，中文文档 `linkx-fe/docs/components/lxdialog.md`；组件级单测 **4/4**、文档 E2E **3/3**。
+- Assessment A **28/40**；B 证据见 `.impeccable/critique/dialog-assessment-b-2026-10-17/`，五视图浏览器注入重试成功，初次 live-server 失败已单独记录。
+- 当前台账保留提交中关闭、脏表单保护、长内容滚动、重复错误反馈和拖拽/标题提示等后续硬化项；库级审查通过不代表 Vue3 宿主已替换。
+
 ## 2026-10-17 LxEmpty 组件门禁
 
 - 组件入口：`linkx-fe/src/components/LxEmpty/`；中文文档：`linkx-fe/docs/components/lxempty.md`；Vue3 使用盘点：15 处 `el-empty`，迁移契约记录在 `other-admin/admin-vue3/docs/MIGRATION-BACKLOG.md` 和 `MIGRATION-MATRIX.md`。

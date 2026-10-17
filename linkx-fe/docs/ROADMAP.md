@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只维护 lx-ui 组件路线和组件级未完成项，不重复记录全局波次台账。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，交接与审查证据见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxDialog 正式审查
+
+- 定向单测 **4/4**、文档 Playwright **3/3**、类型检查和目标格式检查通过；Assessment A **28/40（Good）**。
+- Assessment B 证据见 `.impeccable/critique/dialog-assessment-b-2026-10-17/`；detector 三件套为合法 `[]`/空 stderr/退出码 0，五个 Light/HUD/减少动效视图在启动 8400 live-server 后重试注入成功。
+- P1/P2 观察项已登记：提交中关闭、脏表单离开保护、长内容滚动、重复错误反馈、拖拽光标、长标题和 danger 文案范围；本波不改变现有关闭契约。
+
 ## 2026-10-17 LxEmpty 组件门禁
 
 - 定向单测 **5/5**、文档 Playwright **1/1**、lx-ui 类型检查通过；Assessment A **35/40（Good）**。

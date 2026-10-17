@@ -2,6 +2,13 @@
 
 > **范围备注（2026-10-15）**：页面操作引导暂缓考虑与实施，不继续拆分，也不纳入待办、自动执行队列或排期；它不作为 lx-ui 收口或 Vue3 Element Plus 替换的前置条件。本文和 `doc/GUIDE-CONTENT-PLAN.md`、`doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 保留历史需求与设计基线；后续确有需要时再恢复计划，届时重新确认页面范围、文案、交互、技术方案及后端契约。当前其余交付顺序不变。
 
+## 2026-10-17 LxDialog 正式组件审查交接
+
+- 定向单测 **4/4**、文档 Playwright **3/3**、lx-ui `vue-tsc --noEmit` 和目标 Prettier 检查通过。
+- Impeccable Assessment A **28/40（Good）**；B 证据见 `.impeccable/critique/dialog-assessment-b-2026-10-17/assessment-report.md`，detector JSON/stderr/退出码已核验，浏览器五视图重试注入成功。初次 8400 端口失败已保留并明确不作为通过依据。
+- 审查发现 P1 为提交中仍可关闭、脏表单无离开保护；P2 为长内容滚动契约、重复错误反馈、拖拽光标/长标题提示和危险模式文案范围。当前仅登记，未擅自改变关闭语义。
+- LxDialog 组件级正式审查完成；宿主逐页替换、权限/后端联调及 Element Plus 删除继续后置。下一入口为剩余 lx-ui 组件和 P1/P2 硬化台账。
+
 ## 2026-10-17 LxEmpty 组件门禁交接
 
 - 定向单测 **5/5**、文档 Playwright **1/1**、lx-ui 类型检查通过；覆盖尺寸、插槽、操作焦点、筛选恢复、HUD、窄屏和减少动效。

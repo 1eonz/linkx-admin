@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只保留组件交付证据摘要和 `.impeccable/critique` 路径，不再复制全局计划或交接正文。当前波次入口见 `doc/PROJECT-DELIVERY-PLAN.md`，完整交接见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxDialog 正式审查
+
+- 单测 **4/4**、文档 E2E **3/3**、lx-ui 类型检查和目标格式检查通过。
+- `.impeccable/critique/dialog-assessment-b-2026-10-17/` 保存 detector、五视图截图/JSON 和综合报告；`[]` 已同时核对 stderr 与退出码，浏览器注入经 live-server 重试成功。
+- Assessment A **28/40（Good）**；P1/P2 硬化项转入全局台账，不代表宿主替换完成。
+
 ## 2026-10-17 LxEmpty 组件门禁
 
 - 定向单测 **5/5**、文档 Playwright **1/1**、lx-ui 类型检查通过；覆盖尺寸、插槽、焦点、筛选恢复、HUD、窄屏和减少动效。
