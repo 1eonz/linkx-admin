@@ -13,6 +13,14 @@
 - **验证**：`lx-input.test.ts` **13/13**；`linkx-fe` `pnpm run typecheck`、`pnpm run build`、`pnpm run build:docs`、目标 Prettier 均通过。使用 `playwright.lxui.config.ts` 正确指向 4177 文档服务后，复合前后缀与普通根节点几何 E2E **2/2** 通过；此前 30846 宿主配置失败属于入口错配，不计为代码失败。
 - **Impeccable**：Assessment A 与 B 由独立子代理完成。B 的组件源码 detector 为合法 JSON `[]`、stderr 为空、退出码 `0`；Light/HUD、桌面/390px、sm/md/lg 共 8/8 视图成功注入，复合根、prepend、append、prefix、suffix 高度分别稳定为 28/32/40px，窄屏为 44px，页面错误和失败请求均为 0。原始证据见 `linkx-fe/.impeccable/critique/lxinput-height-wave-2026-10-18/assessment-b/`；移动页面 `scrollWidth=630` 与 detector 命中仍待归因，不能把命中数直接视为组件缺陷。A 提出减少动效和触屏清空语义问题，登记为后续独立任务。
 - **工具状态**：已执行 `npx impeccable update`，因 GitHub skill bundle 下载连接超时未安装更新；没有改动本地组件库版本。页面操作引导继续暂缓，Vue3 API 请求链继续保持 `.then().catch().finally()`。
+
+## [2026-10-18] LxMetricCard 与 LxSectionTitle 双路复核交接
+
+- **交付**：完成当前源码、Demo 和组件目录的 Assessment A/B 隔离复核；A 分别为 `32/40` 与 `33/40`，B 六个 detector 为合法 `[]`/空 stderr/退出码 `0`，六个 Light/HUD、桌面/375px 场景注入成功。
+- **发现**：MetricCard 需要明确 `status`、`badgeStatus`、`trendStatus` 的独立维度并补充宿主错误/空态组合规范；SectionTitle 需要继续处理窄屏 extra 与长标题竞争、标题层级责任和 tag 的读屏策略。没有 P0/P1 实现阻塞，但评审建议仍开放。
+- **证据**：B 证据见 `linkx-fe/.impeccable/critique/metric-section-assessment-b-2026-10-18/`；双路快照见根 `.impeccable/critique/2026-10-17T20-43-58Z__linkx-fe-src-components-lxmetriccard-index-vue.md` 和 `...lxsectiontitle-index-vue.md`；综合归档见 `linkx-fe/.impeccable/critique/metric-section-assessment-2026-10-18/`。
+- **边界**：375px `scrollWidth=615` 是文档壳层/代码区信号，不能直接归因组件；Demo 未提供 loading/error/empty/disabled 入口。当前不增加 UI-10 52 项关闭数，也不开始 Vue3 Element Plus 删除。
+- **下一入口**：继续当前 UI-10 候选的设计、行为和宿主契约回归；保留业务 API `.then().catch().finally()`、中文注释及白名单提交规则。
 - **下一波**：继续当前 UI-10 未关闭组件门禁；取得可用浏览器后补跑 LxInput 普通前后缀的几何 E2E 与截图证据，再进入下一个组件。保持白名单暂存，避免提交 `.pnpm-store`、`.impeccable-*`、`test-results` 和日志。
 
 ## [2026-10-18] LxVirtualTree/TransferPanel 组合复验交接

@@ -1466,3 +1466,11 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **Impeccable A/B**：A 37/40（Good，92.5%），P0/P1/P2 为 0，保留两个 P3：调试摘要为 32px、宿主主动替换 `src` 时焦点责任需由宿主明确。B 两个静态目标均为合法 JSON `[]`、stderr 0 bytes、退出码 0；四个 Light/HUD 视图均完成独立浏览器注入、overlay、截图和 DOM 证据，HTTP/page errors/failed requests 均为 0。证据与 snapshot/trend 见 `.impeccable/critique/authimg-assessment-a-final-2026-10-16/`、`.impeccable/critique/authimg-assessment-b-final-2026-10-16/`。
 - **边界**：`[]` 只表示静态 detector 零命中，不能单独代表通过；文档外壳的移动滚动容器和 HUD 代码高亮命中已从组件问题中归因分离。Demo 重试会主动切换 `src`，因此恢复前焦点由宿主换源语义决定，恢复后组件将焦点放到 status 节点。
 - **下一步**：按既定顺序进入下一项 lx-ui 组件的当前源码严格复核；页面操作引导、权限中心、文本/字段权限继续暂缓。Vue3 Element Plus 替换仍等待组件库批次和整库审查门禁。
+
+## 2026-10-18 Wave 15 / LxMetricCard + LxSectionTitle 双路复核
+
+- **Assessment A**：独立设计评审完成。`LxMetricCard` 32/40，指出多维状态组合、宿主错误/空态责任、窄卡辅助信息竞争和趋势方向语义；`LxSectionTitle` 33/40，指出窄屏 extra 挤压、标题层级责任、变体语义发现成本和标签读屏策略。
+- **Assessment B**：六个 detector 目标均为合法 JSON `[]`、stderr 为空、退出码 `0`；Light/HUD、桌面/375px、reduced-motion 六个浏览器场景全部注入成功，页面错误、失败请求和 HTTP 失败均为 `0`。证据目录为 `linkx-fe/.impeccable/critique/metric-section-assessment-b-2026-10-18/`。
+- **正式快照**：分别写入 `.impeccable/critique/2026-10-17T20-43-58Z__linkx-fe-src-components-lxmetriccard-index-vue.md` 与 `...lxsectiontitle-index-vue.md`；趋势分别为 `37/40 → 30/40 → 32/40`、`37/40 → 33/40`。双路归档见 `linkx-fe/.impeccable/critique/metric-section-assessment-2026-10-18/`。
+- **边界**：375px 的 `scrollWidth=615` 归因到 VitePress 文档外壳/代码区，不能直接记为组件缺陷；两个 Demo 没有 loading/error/empty/disabled 入口，因此这些状态仍未完成组件级浏览器验收。当前不增加 UI-10 统一 52 项关闭数，宿主组合回归和整库 UI-11 仍开放。
+- **下一步**：按台账继续处理可独立验收的 lx-ui 候选和宿主适配；Vue3 Element Plus 批量替换仍等待 UI-10/UI-11 门禁，权限中心、文本/字段权限和页面操作引导继续后置。

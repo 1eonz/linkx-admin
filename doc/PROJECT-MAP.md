@@ -602,6 +602,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 2026-10-17：`LxPasswordInput` 修后交付，单测 11/11、文档 E2E 9/9；Impeccable A 32/40，B `[]`/空 stderr/退出码 0，1280px 与 375px 浏览器证据无横向溢出。下一批为 `LxMetricCard` 与 `LxSectionTitle`，真实认证和宿主 Element Plus 替换未进入门槛。
 
+2026-10-18：`LxMetricCard` 与 `LxSectionTitle` 完成独立 Assessment A/B。A 分别为 32/40、33/40；B 六个 detector 为合法 `[]`/空 stderr/退出码 0，六个 Light/HUD、桌面/375px 视图注入成功，错误请求为 0。375px 页面级 `scrollWidth=615` 归因文档壳层/代码区，Demo 状态入口缺失继续记录；不增加 UI-10 统一关闭数，进入下一候选和宿主契约回归。
+
 ### LxInput 前后缀高度轨道（2026-10-18）
 
 - **入口**：`linkx-fe/src/components/LxInput/index.vue` 与 `style.css`
