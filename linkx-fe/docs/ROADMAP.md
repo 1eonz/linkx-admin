@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-18 LxInput 前后置复合块视觉对齐修复
+
+- `prepend/append` 统一采用完整高度的 flex 居中轨道，清除 Element Plus 默认上下内边距并收敛行高，避免外侧复合块文字与输入框边界看起来不等高。
+- 定向 Playwright **1/1**（sm/md/lg、390px 触屏及上下边界对齐）、lx-ui `vue-tsc --noEmit`、`git diff --check` 通过；detector JSON 为合法 `[]`、stderr 为空、退出码 `0`。静态零命中不替代浏览器证据或正式双路 Critique。
+
 ## 2026-10-17 DynamicForm/Form 正式 Critique 归档
 
 - Assessment A/B 综合 **28/40（Good）**；两页 detector 的 JSON/stderr/退出码分别为 `[]`/空/`0`，Light/HUD 与 375px 浏览器证据已归档。

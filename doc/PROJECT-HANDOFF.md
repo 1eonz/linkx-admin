@@ -2462,3 +2462,9 @@
 - 新引擎在线 detector 初次命中 SearchBar Demo 卡片嵌套和说明文字对比度；已移除 Demo 卡片壳并提升文字对比度。修后 SearchBar 与 StatusSwitch 均为合法 JSON `[]`、stderr 空、exit `0`。该结果只关闭静态 detector 阻断，G2 正式 Critique 仍需独立 A/B、代码复审和综合 snapshot/trend。
 - 375×812 窄屏 detector 复验同样为合法 JSON `[]`、stderr 空、exit `0`；该证据与现有 8/8 文档 E2E 一并作为 G2 正式 A/B 的输入。
 - 该阻断不改变已通过的实现级自动化门禁，也不引入未经设计确认的样式修改。处理完成后继续独立 Assessment A/B、代码复审、综合 snapshot/trend，再进入下一组件批次。
+## 2026-10-18 LxInput 前后置复合块修复
+
+- **改动**：`linkx-fe/src/components/LxInput/style.css` 将 `prepend/append` 设为完整高度的 inline-flex 居中轨道，去除上下内边距并统一行高，修复 Demo 中输入框与前后置块的视觉高度不一致。
+- **验证**：`lx-base-controls-docs.spec.ts` 的复合前后缀用例 **1/1**；覆盖 sm、md、lg、390px 触屏高度及新增上下边界对齐断言。`pnpm typecheck`、`git diff --check` 通过。
+- **Impeccable 证据**：`detect.mjs --json linkx-fe/src/components/LxInput/index.vue` 退出码 `0`，JSON 为合法 `[]`，stderr 为空；该静态结果只表示零规则命中，浏览器几何回归作为本次修复依据，未宣称新的正式双路 Critique 已完成。
+- **后续**：保持 Vue3 Element Plus 替换、真实后端联调及页面操作引导的既定后置安排；继续按组件门禁推进下一项。

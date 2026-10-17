@@ -130,8 +130,12 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
 .lx-input .el-input-group__prepend,
 .lx-input .el-input-group__append {
   box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
   height: var(--el-input-height);
   min-height: var(--el-input-height);
+  padding-block: 0;
+  line-height: 1;
   color: var(--lx-text-regular);
   background-color: var(--lx-bg-card-hover);
 }
