@@ -90,14 +90,18 @@ onBeforeUnmount(() => {
     :class="{ 'is-ellipsis': ellipsis }"
     type="button"
     v-bind="attrs"
-    :title="copyTitle"
+    :title="copying ? '正在复制' : copyTitle"
     :aria-label="copyAriaLabel"
     :aria-busy="copying"
     :disabled="externallyDisabled || copying"
     @click="copy"
   >
     <span ref="contentRef" class="lx-code-slot__content"><slot /></span>
-    <LxIcon name="copy" :size="14" class="lx-code-slot__icon" />
+    <LxIcon
+      :name="copying ? 'loading' : 'copy'"
+      :size="14"
+      class="lx-code-slot__icon"
+    />
   </button>
   <span
     v-else

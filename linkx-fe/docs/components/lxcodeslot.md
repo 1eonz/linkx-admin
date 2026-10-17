@@ -1,6 +1,6 @@
 # LxCodeSlot 编号代码槽
 
-用于警号、节点编号、车牌和案件号等需要等宽显示的短标识。默认支持键盘可达的复制动作，纯展示场景可关闭复制。
+用于警号、节点编号、车牌和案件号等需要等宽显示的短标识。默认支持键盘可达的复制动作，纯展示场景可关闭复制；复制进行中会显示加载图标和“正在复制”提示，并锁定重复操作。
 
 <script setup lang="ts">
 import Basic from '../../src/components/LxCodeSlot/demo/basic.vue'

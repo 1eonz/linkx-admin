@@ -12,8 +12,11 @@ test.describe('lx-ui LxCodeSlot 文档示例', () => {
       Object.defineProperty(navigator, 'clipboard', {
         configurable: true,
         value: {
-          writeText: async (value: string) => {
+          writeText: (value: string) => {
             (window as Window & { __copiedText?: string }).__copiedText = value;
+            return new Promise<void>((resolve) => {
+              (window as Window & { __resolveClipboard?: () => void }).__resolveClipboard = resolve;
+            });
           },
         },
       });
@@ -58,6 +61,12 @@ test.describe('lx-ui LxCodeSlot 文档示例', () => {
     await copyButton.focus();
     await expect(copyButton).toBeFocused();
     await page.keyboard.press('Enter');
+    await expect(copyButton).toHaveAttribute('aria-busy', 'true');
+    await expect(copyButton.locator('[data-icon-name="loading"]')).toBeVisible();
+    await expect(copyButton).toHaveAttribute('title', '正在复制');
+    await page.evaluate(() => {
+      (window as Window & { __resolveClipboard?: () => void }).__resolveClipboard?.();
+    });
     await expect(demo.getByRole('status')).toHaveText('已复制：NODE-01');
     await expect(page.locator('.lx-message')).toContainText('已复制');
     expect(await page.evaluate(() => (window as Window & { __copiedText?: string }).__copiedText)).toBe('NODE-01');
