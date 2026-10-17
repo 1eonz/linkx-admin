@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] LxInput 前后缀高度轨道最终收敛
+
+- **问题**：前后缀容器与输入框虽然已有高度断言，但 Element Plus 内部 flex 项仍混用 `min-height: 100%`、令牌高度和内容尺寸，主题或尺寸切换时可能出现视觉上下边界不齐。
+- **实现**：`linkx-fe/src/components/LxInput/style.css` 将复合根节点、输入内框、`prepend/append` 和 `prefix/suffix` 内部槽位统一为完整高度 `border-box` 伸展轨道；不改变事件、校验、公开方法或业务 API。
+- **验证**：复合前后缀 Playwright **1/1**，覆盖 sm/md/lg、390px 触屏、根/内框/前后缀上下边界、内部槽位高度和统一焦点环；LxInput 单测 **13/13**；lx-ui typecheck/build、目标 ESLint/Prettier、`git diff --check` 通过。
+- **审查边界**：detector 的 JSON、stderr、退出码必须一起读取；`[]` 仅表示静态零命中。本轮没有伪造独立 Assessment A/B 或 snapshot/trend，不增加 UI-10 关闭数；下一入口继续按未关闭 lx-ui 组件门禁推进。
+
 ## [2026-10-18] LxForm 通栏文本域宽度收口
 
 - **问题与修复**：双列弹窗中 `span="full"` 的表单项虽然跨列，`LxTextarea` 根节点却没有宽度约束，实际只占左侧约半列。现已让 `LxTextarea` 根节点占满父级内容轨道，通栏备注与设计稿一致。

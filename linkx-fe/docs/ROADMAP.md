@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-18 LxInput 前后缀高度轨道最终收敛
+
+- 复合输入根节点、输入内框、`prepend/append` 以及 `prefix/suffix` 内部槽位统一采用根节点完整高度的 `border-box` 伸展轨道；外侧块不再独立声明令牌高度，避免 Element Plus flex 内容尺寸在主题或尺寸切换时造成上下边界视觉不一致。
+- 定向 Playwright **1/1**（sm/md/lg、390px 触屏、根节点/输入框/前后缀上下边界、内部槽位高度及统一焦点环）、LxInput 单测 **13/13**、lx-ui `vue-tsc --noEmit`、库构建、目标 ESLint/Prettier、`git diff --check` 通过。
+- 本轮按规则保留 detector 的 JSON/stderr/退出码记录；合法 `[]` 仅表示静态规则零命中，不能替代正式 Impeccable A/B 或快照。该修复不增加 UI-10 关闭数，Vue3 宿主替换、真实后端联调和权限任务继续后置。
+
 ## 2026-10-18 LxForm 通栏文本域宽度修复
 
 - `LxFormItem span="full"` 的网格跨列语义保持不变，`LxTextarea` 根节点新增 `width: 100%`，使通栏备注文本域真正填满双列表单项内容轨道。
