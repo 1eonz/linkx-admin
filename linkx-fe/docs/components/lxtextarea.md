@@ -1,6 +1,6 @@
 # LxTextarea 文本域
 
-基于 Element Plus `el-input type="textarea"` 内核二次封装的多行文本域，默认三行基准高度、8/12px 内边距与 `resize: vertical`。
+基于 Element Plus `el-input type="textarea"` 内核二次封装的多行文本域，默认三行基准高度、8/12px 内边距与 `resize: vertical`。组件根节点默认占满父级内容宽度，适合 `LxFormItem span="full"` 通栏字段。
 
 设置非负 `maxlength` 后，字段处于可编辑状态时默认显示右对齐等宽的内容长度计数；禁用或只读时隐藏计数，也可通过 `:show-word-limit="false"` 关闭。`maxlength="0"` 会显示 `0 / 0` 和“已达上限”。计数遵循浏览器原生 `textarea maxlength` 规则，即按 UTF-16 代码单元计算；部分 emoji 会占用多个单位。`maxlengthMode="truncate"` 保留原生硬截断；长度从未到限变为到限时，计数旁显示“已达上限”并向辅助技术播报一次。`maxlengthMode="validate"` 允许内容暂时超过阈值，可见错误提示修正方式，计数持续显示当前长度，长度首次进入超限状态时，辅助技术收到一次简短提醒。初始值已到限或超限时不主动播报，用户聚焦字段后可从计数器的可访问名称或关联的错误说明读取当前长度和状态。
 

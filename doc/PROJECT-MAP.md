@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-18 LxForm 通栏文本域布局修复
+
+- `linkx-fe/src/components/LxTextarea/style.css` 的 `.lx-textarea` 现在占满父级宽度，支持 `LxFormItem span="full"` 在双列网格中渲染真正的通栏文本域。
+- `other-admin/admin-vue3/tests/e2e/lx-form-docs.spec.ts` 新增通栏内容区与文本域宽度相等断言；LxTextarea 单测和 LxForm 文档 E2E 均通过。
+- 该修复属于 lx-ui 设计对照，不代表 Vue3 业务页面已完成组件替换或 Element Plus 删除。
+
 ## 2026-10-18 LxInput 复合输入视觉边界修复
 
 - 组件入口 `linkx-fe/src/components/LxInput/`：复合输入根节点统一外框和裁切轨道，内框与 `prepend/append` 共享完整高度；聚焦环覆盖整个复合输入，避免分段边界错层。

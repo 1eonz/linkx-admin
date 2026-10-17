@@ -30,7 +30,7 @@ import DialogDemo from '../../src/components/LxForm/demo/dialog.vue';
 <<< ../../src/components/LxForm/demo/dialog.vue
 :::
 
-要点：`columns="2"` 桌面双列网格按设计稿使用 `16px` 间距；视口宽度不大于 `640px` 时自动折为单列，所有字段（含 `span="full"`）占满表单宽度。桌面多列模式仍保留 `span` 跨列语义。打开弹窗回显数据后 `nextTick(() => formRef.value?.clearValidate())` 清残留校验 —— 这是全项目弹窗表单的惯用法。
+要点：`columns="2"` 桌面双列网格按设计稿使用 `16px` 间距；视口宽度不大于 `640px` 时自动折为单列，所有字段（含 `span="full"`）占满表单宽度，`LxTextarea` 通栏时会填满表单项内容轨道。桌面多列模式仍保留 `span` 跨列语义。打开弹窗回显数据后 `nextTick(() => formRef.value?.clearValidate())` 清残留校验 —— 这是全项目弹窗表单的惯用法。
 
 ## 行内搜索表单（inline）
 

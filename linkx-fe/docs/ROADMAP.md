@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-18 LxForm 通栏文本域宽度修复
+
+- `LxFormItem span="full"` 的网格跨列语义保持不变，`LxTextarea` 根节点新增 `width: 100%`，使通栏备注文本域真正填满双列表单项内容轨道。
+- LxTextarea 单测 **14/14**、LxForm 文档 E2E **6/6**、lx-ui 类型检查、目标格式/Lint 通过；浏览器实测 608px 通栏宽度一致。LxForm/LxTextarea detector 为合法 `[]`、stderr 空、退出码 `0`，不把静态零命中单独作为 Critique 通过依据。
+- 该项不增加 UI-10 全库关闭数；后续仍按计划进行 LxForm 逐项设计收口、正式 Critique 和 Vue3 宿主替换。
+
 ## 2026-10-18 LxInput 复合输入统一外框修复
 
 - 复合输入根节点现在裁切为单一圆角外框，输入内框取消独立圆角和焦点环，`prepend/append` 仅保留内部垂直分隔线；聚焦时由整个复合控件承载同一焦点环，避免前后缀与输入框边界出现视觉高低差。
