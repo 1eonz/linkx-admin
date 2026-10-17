@@ -2383,3 +2383,10 @@
 - Impeccable A 32/40；B detector 为合法 `[]`、stderr 空、退出码 0；1280px/375px 浏览器注入成功且无横向溢出。快照 `.impeccable/critique/2026-10-17T05-26-20Z__linkx-fe-src-components-lxpasswordinput-index-vue.md`，报告 `.impeccable/critique/password-input-assessment-b-2026-10-17.md`。
 - `npx impeccable update` 因 GitHub 下载连接超时退出码 1，已安装 4.6.0 未被覆盖；临时 live-server 已停止，临时 E2E 已删除。真实登录/改密和后端联调仍未执行。
 - 下一波进入 `LxMetricCard` + `LxSectionTitle`，随后处理 G2 `LxSearchBar`/`LxStatusSwitch`；权限中心、文本/字段权限、页面引导和 Vue3 Element Plus 移除继续后置。
+
+## 2026-10-17 Wave 15 / LxMetricCard 与 LxSectionTitle 复核
+
+- 单测 33/33、文档 E2E 4/4；两个 detector 均为 JSON `[]`、stderr 空、退出码 0。
+- 1280px/375px 四个浏览器视图注入成功，控制台返回 `No anti-patterns found`，无横向溢出。
+- 独立 Luna Assessment A 代理因服务 503 失败，本波为降级设计评估，不能冒充完整双代理 Critique；报告见 `.impeccable/critique/metric-section-assessment-2026-10-17.md`。
+- 下一波为 G2 `LxSearchBar` 与 `LxStatusSwitch`；真实读屏器、宿主组合、后端联调和 Element Plus 移除仍未执行。

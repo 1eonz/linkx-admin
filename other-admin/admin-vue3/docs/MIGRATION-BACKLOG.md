@@ -402,6 +402,8 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 - `DataPermissionTree` 仍不能机械替换为 `LxVirtualTree`/`LxTransferPanel`：UI-04 必须先对照节点字段、父子勾选、跨页/树外已选键、exposes、change 回传、加载/空/错和真实权限 API，再用 Mock 覆盖成功、空、失败、权限不足、取消、分页和重复提交。
 - Vue3 `element-plus` 直接依赖继续保留；全量替换必须等待组件库剩余正式 Critique、宿主页面组合回归和整站 Impeccable。下一批先审查 `LxMetricCard` + `LxSectionTitle`，G2 `LxSearchBar`/`LxStatusSwitch` 随后处理；权限中心、文本/字段权限和引导页继续延后。
 
+2026-10-17：`LxMetricCard` 与 `LxSectionTitle` 组件级证据完成（单测 33/33、文档 E2E 4/4、detector `[]`/空/0、桌面与移动浏览器证据）。独立设计评审代理服务 503，标记降级评估；下一宿主迁移前置为补完整 A 后进入 G2 搜索/状态组件。
+
 2026-10-17：`LxPasswordInput` 组件级交付已收口（单测 11/11、文档 E2E 9/9、Impeccable A 32/40、B `[]`/空/0、桌面与 375px 浏览器证据）。不代表 Vue3 登录页真实联调完成；下一宿主迁移前置为 `LxMetricCard`、`LxSectionTitle` 和 G2 搜索/状态组件审查。
 
 ## 2026-10-04 Wave 0 迁移影响

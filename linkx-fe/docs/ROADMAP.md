@@ -445,3 +445,5 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 - `[]` 仅表示静态 detector 零命中；本波只有 Demo 设置区展开后选项较多的 P3。宿主保存状态、真实权限联调、读屏器专项和 `DataPermissionTree` 迁移仍未完成。下一步进入 `LxMetricCard` + `LxSectionTitle` 严格审查，再收口 G2 `LxSearchBar`/`LxStatusSwitch`。
 
 2026-10-17：`LxPasswordInput` 修后验证完成，单测 11/11、文档 E2E 9/9；清空操作不抢占显隐按钮后的 Tab 顺序，窄屏 44px 触控按钮不改变尺寸档外框。Impeccable A 32/40，B detector `[]`/空 stderr/退出码 0，桌面与 375px 浏览器证据通过。下一批为 `LxMetricCard` 与 `LxSectionTitle`。
+
+2026-10-17：`LxMetricCard` 与 `LxSectionTitle` 单测 33/33、文档 E2E 4/4；两个 detector 为 `[]`/空 stderr/0，1280px/375px 浏览器注入通过。独立评审代理服务 503，本轮为降级设计评估，待恢复后补完整 A；下一批进入 G2 搜索栏/状态开关。

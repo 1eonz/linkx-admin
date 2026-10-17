@@ -443,3 +443,5 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 - **未完成门槛**：真实权限保存和后端联调、读屏器专项、Vue3 `DataPermissionTree` 适配、全库 UI-11 和 Element Plus 移除仍未完成；权限中心、文本/字段权限及引导页继续后置。下一检查批次为 `LxMetricCard` + `LxSectionTitle`。
 
 2026-10-17 `LxPasswordInput`：单测 11/11、文档 E2E 9/9、类型检查和 Prettier 通过；A 32/40；B detector JSON `[]`、stderr 为空、退出码 0；1280px/375px 浏览器注入和无横向溢出证据已归档。`npx impeccable update` 因下载超时失败，未覆盖现有 4.6.0。下一批为 `LxMetricCard` 与 `LxSectionTitle`。
+
+2026-10-17 `LxMetricCard` + `LxSectionTitle`：单测 33/33、文档 E2E 4/4；detector 两目标均为 `[]`/空 stderr/0，四视图浏览器证据完成。独立 A 代理服务 503，按规则记为降级审查，不标完整 Critique；报告见 `.impeccable/critique/metric-section-assessment-2026-10-17.md`。

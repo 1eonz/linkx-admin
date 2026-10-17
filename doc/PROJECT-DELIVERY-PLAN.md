@@ -1286,6 +1286,12 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - Impeccable A 32/40；B 为合法 JSON `[]`、空 stderr、退出码 0；1280px/375px 浏览器注入无横向溢出。`npx impeccable update` 因下载连接超时失败，4.6.0 保持不变。
 - 真实认证/改密、宿主密码策略、权限中心、文本/字段权限、页面引导和 Element Plus 删除继续后置；下一波为 `LxMetricCard` + `LxSectionTitle`。
 
+## 2026-10-17 Wave 15 / LxMetricCard + LxSectionTitle
+
+- 行为与文档验证完成：33/33 单测、4/4 文档 E2E；两个 detector 为 `[]`/空 stderr/0；四个桌面/移动浏览器视图注入成功且无横向溢出。
+- 独立 Assessment A 代理因服务 503 失败，本波保留降级评估记录，不标完整双路 Critique；服务恢复后补设计评审。
+- 下一波进入 G2 搜索栏与状态开关；宿主 Element Plus 删除、权限中心、文本/字段权限和引导页保持后置。
+
 ## 2026-10-16 Wave 12 / LxAuthImg P2 收口
 
 - **完成内容**：完成鉴权图片的 Blob 请求注入、AbortSignal 取消、请求序号防旧响应回写、对象 URL 回收、回退图与空地址状态、失败恢复插槽、ARIA 状态播报、加载指示和减少动效；Demo 覆盖成功、延迟、失败、空地址、回退图、取消旧请求、主题和窄屏。
