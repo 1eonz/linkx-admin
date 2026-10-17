@@ -67,8 +67,13 @@ test.describe('lx-ui LxForm 文档示例', () => {
     const nameLabelBox = await nameItem.locator('.el-form-item__label').boundingBox();
     const codeControlBox = await codeItem.locator('.el-input__wrapper').boundingBox();
     const nameControlBox = await nameItem.locator('.el-input__wrapper').boundingBox();
+    const remarkContentBox = await remarkItem.locator('.el-form-item__content').boundingBox();
+    const remarkTextareaBox = await remarkItem.locator('.lx-textarea').boundingBox();
     if (!codeBox || !nameBox || !codeLabelBox || !nameLabelBox || !codeControlBox || !nameControlBox) {
       throw new Error('桌面双列表单字段未进入布局');
+    }
+    if (!remarkContentBox || !remarkTextareaBox) {
+      throw new Error('通栏备注文本域未进入布局');
     }
 
     expect(nameBox.x).toBeGreaterThan(codeBox.x + codeBox.width);
@@ -80,6 +85,7 @@ test.describe('lx-ui LxForm 文档示例', () => {
     await expect(codeItem.locator('.el-input__wrapper')).toHaveCSS('border-radius', '4px');
     await expect(remarkItem).toHaveCSS('grid-column-start', '1');
     await expect(remarkItem).toHaveCSS('grid-column-end', '-1');
+    expect(Math.abs(remarkTextareaBox.width - remarkContentBox.width)).toBeLessThanOrEqual(1);
     await expect(form).toHaveCSS('column-gap', '16px');
   });
 
