@@ -8,6 +8,12 @@
 - Assessment B 证据见 `.impeccable/critique/statusswitch-assessment-b-2026-10-17/`：三路 detector JSON、stderr、退出码均核验，结果为合法 `[]`、空 stderr、退出码 `0`；浏览器证据 4/4，无页面错误或失败请求。空数组不单独作为正式通过依据。
 - 本波关闭组件级复验，不关闭 Vue3 宿主替换、真实权限/后端联调、整库 Impeccable 或 Element Plus 删除门禁。下一入口按依赖顺序进入剩余基础组件与 `LxDynamicForm` 门槛。
 
+## 2026-10-17 LxDynamicForm 当前版复验交接
+
+- 单测 **30/30**、文档 E2E **12/12**、组件类型检查通过；独立字段 renderer、Lx 基础控件、受控值、上传/远程候选、自适应列、校验/ARIA、主题和减少动效均有证据。
+- Assessment B 证据见 `.impeccable/critique/dynamicform-assessment-b-2026-10-17/`；三路 detector JSON、stderr、退出码均核验，浏览器证据完整。首次 E2E 的 `favicon.svg` 误报已修正。
+- 本波关闭 DynamicForm 组件级结构和交互复验，不关闭真实业务 API、权限、上传协议、Vue3 宿主替换或 Element Plus 删除门禁。下一入口为剩余 lx-ui 组件门禁与基础组件整库复验。
+
 ## 文档职责与提速规则（2026-10-17）
 
 为减少重复维护，后续只把以下三份文档作为全局交付事实来源：

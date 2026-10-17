@@ -8,6 +8,12 @@
 - **Impeccable B**：证据目录为 `.impeccable/critique/statusswitch-assessment-b-2026-10-17/`。组件、文档、Demo 三路 detector 均保存 JSON/stderr/退出码，均为合法 `[]`、空 stderr、退出码 `0`；Chromium 4/4 通过，无页面错误或失败请求。空数组不是单独通过条件。
 - **边界**：组件级复验无新增 P0-P2；Vue3 真实 `StatusSwitch` 适配器、权限后端、宿主 Promise 链和 Element Plus 删除继续后置到 UI-04/UI-10/UI-11 门禁。
 
+## [2026-10-17] LxDynamicForm 当前版复验
+
+- **验证**：单测 **30/30**、文档 E2E **12/12**、类型检查通过；覆盖独立字段 renderer、Lx 基础控件、`value + change` 受控调用、`v-model`、单图/多图上传、远程候选取消/失败/迟到保护、自适应 3/2/1 列、校验/ARIA、主题和减少动效。
+- **Impeccable B**：证据目录为 `.impeccable/critique/dynamicform-assessment-b-2026-10-17/`。三路 detector 均保存 JSON/stderr/退出码，结果为合法 `[]`、空 stderr、退出码 `0`；浏览器 12/12 通过。首次 E2E 的 `favicon.svg` 白名单误报已修正并复验。
+- **边界**：组件级复验无 P0-P2；真实 API、权限、上传协议和 Vue3 宿主替换仍按 UI-04/UI-10/UI-11 后置。下一入口继续剩余组件门禁和整库审查准备。
+
 ## [2026-10-16] UI-04 前置组件：LxSectionTitle 当前版适配器交接
 
 - **实现**：Vue3 `SectionTitle` 适配器透传 `subtitle` 属性和插槽；转发 `leading` 插槽并让其优先于映射的 `LxIcon` 和未映射图标的 Element Plus 回退，保留旧 `dashed` 默认、标题插槽、extra 和现有 props。库组件三变体、三档字号、标题层级、标签、窄屏和减少动效契约保持不变。
