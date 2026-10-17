@@ -1,5 +1,11 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-17 LxCascader 与 LxTreeSelect 组件门禁
+
+- lx-ui 组件、Demo、中文文档和宿主 Mock 浏览器证据已完成；定向单测 **32/32**、文档 E2E **10/10**。
+- Assessment B 证据见 `.impeccable/critique/treeselect-cascader-assessment-b-2026-10-17/`，六路 detector 三件套与浏览器 JSON 均已核验；静态 `[]` 不是单独通过条件。
+- UI-10 当前 **11/52**。Vue3 业务页面仍需按真实 props、事件、表单上下文和错误恢复逐页替换，不能据此删除宿主 `element-plus`。
+
 ## 2026-10-16 UI-04 前置组件：LxSectionTitle 适配器复核
 
 - Vue3 `SectionTitle` 已补 `subtitle` 与 `leading` 插槽透传，`leading` 可覆盖映射图标和未映射 Element Plus 图标回退；库组件继续使用三变体设计。

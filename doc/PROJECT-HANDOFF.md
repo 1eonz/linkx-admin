@@ -2,6 +2,13 @@
 
 > **文档职责（2026-10-17）**：本文件是唯一的时间序列交接与审查证据索引。新波次只追加一条中文交接记录，包含实现、验证、A/B 证据、未完成边界和下一入口；不要把同一状态复制到多个全局计划文件。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，架构定位见 `doc/PROJECT-MAP.md`，历史拆分文档不再新增状态。
 
+## [2026-10-17] LxCascader 与 LxTreeSelect 组件门禁交接
+
+- **验证**：定向单测 **32/32**（Cascader 18、TreeSelect 14）；文档 Playwright **10/10**；覆盖键盘、单选/多选、空态、loading、失败重试、禁用、Escape、窄屏、HUD 和减少动效。
+- **Impeccable B**：证据目录为 `.impeccable/critique/treeselect-cascader-assessment-b-2026-10-17/`。六路 detector JSON/stderr/退出码均核验为合法 `[]`、空 stderr、退出码 `0`；浏览器 JSON 可解析且退出码 `0`。空数组未单独作为通过依据。
+- **结论**：当前组件范围未发现可复现 P0-P2，UI-10 严格矩阵登记为 11/52。真实宿主替换、权限/后端联调、整库 Impeccable 和 Element Plus 删除仍后置。
+- **下一入口**：继续处理未关闭的基础组件正式审查与已登记 P1/P2，之后才进入 Vue3 宿主分批替换。
+
 ## [2026-10-17] LxStatusSwitch 确认竞态修复交接
 
 - **实现**：新增 `contextKey` 用于绑定行/实体上下文；确认等待期间同时校验状态版本、业务值、实体键、loading、只读和权限。加入单实例确认互斥锁，避免重复 Space 或程序调用打开多个确认框；确认配置做快照，避免宿主原地修改对象影响已打开的确认。只读/无权限标签保留调用方自定义 `aria-label`。

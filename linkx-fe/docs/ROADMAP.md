@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只维护 lx-ui 组件路线和组件级未完成项，不重复记录全局波次台账。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，交接与审查证据见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxCascader 与 LxTreeSelect 正式组件门禁
+
+- 定向单测 **32/32**、文档 Playwright **10/10**；覆盖键盘、单选/多选、空态、loading、失败重试、禁用、Escape、窄屏、HUD 和减少动效。
+- Assessment B 证据见 `.impeccable/critique/treeselect-cascader-assessment-b-2026-10-17/`；六路 detector 为合法 `[]`/空 stderr/退出码 0，浏览器 JSON 可解析且退出码 0。当前组件范围无 P0-P2。
+- UI-10 严格矩阵登记为 **11/52**；真实宿主替换、权限/后端联调和整库正式 Critique 继续后置。
+
 ## 2026-10-17 LxDynamicForm 当前版复验
 
 - 单测 **30/30**、文档 E2E **12/12**；schema 字段 renderer、Lx 基础控件、单图/多图上传、远程状态、受控值和自适应列布局均有证据。

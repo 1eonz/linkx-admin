@@ -2,6 +2,12 @@
 
 > **范围备注（2026-10-15）**：页面操作引导暂缓考虑与实施，不继续拆分，也不纳入待办、自动执行队列或排期；它不作为 lx-ui 收口或 Vue3 Element Plus 替换的前置条件。本文和 `doc/GUIDE-CONTENT-PLAN.md`、`doc/lx-ui/MENU-CONFIG-DESIGN.md` §14 保留历史需求与设计基线；后续确有需要时再恢复计划，届时重新确认页面范围、文案、交互、技术方案及后端契约。当前其余交付顺序不变。
 
+## 2026-10-17 LxCascader 与 LxTreeSelect 组件门禁交接
+
+- 定向单测 **32/32**、文档 Playwright **10/10**；Assessment B 六路 detector 均为合法 `[]`、空 stderr、退出码 `0`，浏览器 JSON 可解析且退出码 `0`。
+- 当前组件范围未发现可复现 P0-P2，UI-10 严格矩阵登记为 **11/52**。真实宿主替换、权限/后端联调、整库 Impeccable 和 Element Plus 删除继续后置。
+- 下一入口：继续未关闭基础组件与已登记 P1/P2，完成 lx-ui 全库门禁后再进入 Vue3 Element Plus 分批替换。
+
 ## 2026-10-17 LxStatusSwitch 确认竞态修复（当前波次）
 
 - 定向单测 **21/21**、文档 Playwright **4/4**、lx-ui 与 Vue3 类型检查通过、目标格式化通过；新增 `contextKey` 实体绑定、确认互斥锁、确认配置快照和只读自定义 `aria-label` 保留。

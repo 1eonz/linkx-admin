@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只保留组件交付证据摘要和 `.impeccable/critique` 路径，不再复制全局计划或交接正文。当前波次入口见 `doc/PROJECT-DELIVERY-PLAN.md`，完整交接见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxCascader 与 LxTreeSelect 组件门禁
+
+- 定向单测 **32/32**、文档 Playwright **10/10**；覆盖键盘、单选/多选、空态、loading、失败重试、禁用、Escape、窄屏、HUD 和减少动效。
+- `.impeccable/critique/treeselect-cascader-assessment-b-2026-10-17/` 保存六路 detector JSON、stderr、退出码和浏览器 JSON。静态输出均为合法 `[]`/空 stderr/退出码 `0`；空数组不单独代表正式视觉通过。
+- 当前 UI-10 严格矩阵更新为 **11/52**；宿主替换和真实后端联调仍未完成。
+
 ## 2026-10-17 LxDynamicForm 当前版复验
 
 - 单测 **30/30**、文档 Playwright **12/12**；覆盖独立字段 renderer、Lx 基础控件、自适应 3/2/1 列、受控值、上传、远程候选、校验/ARIA、主题和减少动效。
