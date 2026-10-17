@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] UI-13 / Wave 27 LxUpload fallback UID 与 abort 组合回归
+
+- **交接结果**：确认 `LxUpload` 的 fallback UID 生成与稳定性、多个实例隔离、受控模型回灌、内部 Element Plus UID 映射、公开 `abort()`、对应请求取消以及迟到 success/error 回调忽略均已有当前实现和回归覆盖。
+- **验证证据**：`lx-upload.test.ts` **38/38**；`lx-upload-docs.spec.ts` **9/9**。本次命令串行执行，未连接真实后端；文档 E2E 覆盖成功、空/失败/重试、取消、移除、禁用、HUD、320/375px 和拖拽悬停状态。
+- **边界与交接**：真实上传 URL、鉴权请求头、服务端取消协议、下载/上传业务权限和 Vue3 宿主替换仍未完成，不能用 Mock 证据替代；`LxUpload` UI-10 设计严格矩阵仍保持开放，正式 Critique 需另按 A/B、detector 三件套和浏览器证据执行。
+- **下一步**：继续审计矩阵中的 `LxDescriptions`、`LxVirtualTree`/`LxTransferPanel`、`LxForm`/`LxDynamicForm` 及剩余基础组件；完成 lx-ui 门禁前保留 Vue3 `element-plus`。
+
 ## [2026-10-18] UI-10 / Wave 26 LxTag 严格矩阵关闭
 
 - **矩阵状态**：`LxTag` 从待严格复核正式更新为已关闭，UI-10 由 **11/52** 更新为 **12/52**；依据为当前版实现、中文 Demo/API、单测、文档 E2E、Impeccable A/B、浏览器视图和代码复审证据。

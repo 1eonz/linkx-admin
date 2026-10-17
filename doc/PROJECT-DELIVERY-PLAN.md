@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-18 UI-13 / Wave 27 LxUpload fallback UID 与 abort 组合回归收口
+
+- **完成内容**：核对并补记 `LxUpload` fallback UID、跨实例隔离、受控模型回灌后公开 `abort()`、字符串/数字 UID 映射、取消对应请求及迟到回调隔离等组合路径；现有实现和测试均已覆盖，不再保留“组合测试未完成”的旧台账描述。
+- **验证**：`tests/unit/lx-upload.test.ts` **38/38**；`tests/e2e/lx-upload-docs.spec.ts` **9/9**。文档示例覆盖成功、失败重试、取消、移除、格式校验、禁用、HUD、窄屏 320/375px 和拖拽提示恢复。
+- **边界**：本波只收口组件行为回归，不代表真实上传协议、服务端 `AbortSignal`、鉴权文件请求或 Vue3 宿主页面迁移完成；这些继续按 UI-04/宿主迁移门槛阻塞。也不增加 UI-10 严格矩阵关闭数，正式设计对照和 Critique 仍需独立取证。
+- **下一入口**：继续 UI-10 未关闭组件的设计严格矩阵，优先处理已登记 P1/P2 的 `LxDescriptions`、`LxVirtualTree`/`LxTransferPanel`、`LxForm`/`LxDynamicForm` 和其余基础组件。
+
 ## 2026-10-18 全菜单 Mock 首屏预览复验
 
 - **验证范围**：隔离 `mock-preview` 服务逐项访问首页和 32 个动态子菜单，共 33 个入口；核对菜单分组、全部菜单目录、菜单搜索、未知 API、页面壳层、首屏样例数据及 320/390px 窄屏布局。
@@ -108,7 +115,7 @@
 ## 当前执行指针：UI-10 组件严格矩阵下一波
 
 - G2 `LxSearchBar` 与 `LxStatusSwitch`、本波 `LxTag` 已登记为 UI-10 **12/52**；组件级 A/B、浏览器证据、代码审查和 snapshot/trend 已完成；宿主替换仍冻结到全库门禁之后。
-- 下一波先收口 `LxDynamicForm`/`LxForm` 的正式 Impeccable Critique、设计图差异和 Upload fallback UID/`abort()` 组合回归；随后按组件审计矩阵继续未关闭基础组件。
+- `LxDynamicForm`/`LxForm` 的正式 Impeccable Critique、设计图差异和 Upload fallback UID/`abort()` 组合回归已分别记录；Upload 组合回归为 38/38 单测、9/9 文档 E2E。下一波按组件审计矩阵继续未关闭基础组件和已登记 P1/P2。
 - `LxInputNumber` 桌面步进器目标尺寸仍是设计决策阻塞，不擅自改变 28/32/40px 外框和上下布局；权限中心、文本/字段权限、真实后端联调和页面操作引导继续按范围后置。
 
 ## 2026-10-17 预警推送 Mock 业务验收
