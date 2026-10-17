@@ -60,6 +60,22 @@
   color: var(--lx-text-secondary);
 }
 
+/* 动态表单保留错误控件的键盘焦点环；静态 LxForm 可按页面契约关闭它。 */
+.lx-form.lx-dynamic-form
+  .el-form-item.is-error
+  .lx-select.el-select
+  .el-select__wrapper.is-focused,
+.lx-form.lx-dynamic-form
+  .el-form-item.is-error
+  .lx-select.el-select
+  .el-select__wrapper:focus-visible,
+.lx-form.lx-dynamic-form
+  .el-form-item.is-error
+  .lx-select.el-select
+  .el-select__wrapper:has(input:focus-visible) {
+  box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
 .lx-dynamic-form__item
   :where(
     .lx-input,

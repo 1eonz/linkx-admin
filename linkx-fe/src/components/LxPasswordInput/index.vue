@@ -179,9 +179,10 @@ defineExpose({
   cursor: not-allowed;
 }
 
-@media (max-width: 480px) {
+/* 窄屏或触屏时，密码框必须继承输入族的 44px 触控高度。 */
+@media (hover: none), (max-width: 640px) {
   :deep(.lx-password-input .el-input__wrapper) {
-    min-height: var(--el-input-height);
+    min-height: 44px;
   }
 
   :deep(.lx-password-input .el-input__suffix) {

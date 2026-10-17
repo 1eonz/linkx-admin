@@ -109,6 +109,31 @@
   outline-offset: 0;
 }
 
+/* LxForm 的选择器错误态只保留自身错误边框；DynamicForm 等宿主仍可保留焦点环。 */
+.lx-form
+  .el-form-item.is-error
+  .lx-select.el-select
+  .el-select__wrapper.is-focused,
+.lx-form-item.el-form-item.is-error
+  .lx-select.el-select
+  .el-select__wrapper.is-focused,
+.lx-form
+  .el-form-item.is-error
+  .lx-select.el-select
+  .el-select__wrapper:focus-visible,
+.lx-form-item.el-form-item.is-error
+  .lx-select.el-select
+  .el-select__wrapper:focus-visible,
+.lx-form
+  .el-form-item.is-error
+  .lx-select.el-select
+  .el-select__wrapper:has(input:focus-visible),
+.lx-form-item.el-form-item.is-error
+  .lx-select.el-select
+  .el-select__wrapper:has(input:focus-visible) {
+  box-shadow: none;
+}
+
 /* ========== 双列/多列网格（对齐设计稿 672px 弹窗 grid-cols-2） ========== */
 .lx-form--grid {
   display: grid;
