@@ -148,11 +148,12 @@ onBeforeUnmount(() => {
       </label>
     </div>
 
-    <label class="lx-upload-demo__field">
-      <span>上传文件</span>
+    <div class="lx-upload-demo__field">
+      <span id="lx-upload-demo-label">上传文件</span>
       <LxUpload
         ref="uploadRef"
         v-model="files"
+        aria-labelledby="lx-upload-demo-label"
         action="mock://upload"
         accept=".xlsx,.csv"
         :limit="5"
@@ -167,7 +168,7 @@ onBeforeUnmount(() => {
         @success="handleSuccess"
         @error="handleError"
       />
-    </label>
+    </div>
 
     <div class="lx-upload-demo__actions" aria-label="上传操作">
       <button

@@ -447,15 +447,40 @@ const uploadingCount = computed(
   () => files.value.filter((file) => file.status === 'uploading').length,
 )
 
-/** 聚合总进度：上传中文件的平均进度（裁剪版不含速率/分片/批次，见审计 §三 #2） */
+/**
+ * 聚合总进度：优先按文件大小加权，避免小文件完成后把大文件的进度抬高。
+ * 受控文件缺少大小时回退为等权平均，保持进度可用但不伪造字节精度。
+ */
 const aggregatePercent = computed(() => {
-  const uploading = files.value.filter((file) => file.status === 'uploading')
-  if (!uploading.length) return 0
-  const total = uploading.reduce(
-    (sum, file) => sum + Math.min(100, Math.max(0, file.percentage ?? 0)),
+  if (!isUploading.value) return 0
+
+  const progressFiles = files.value.filter((file) => file.status !== undefined)
+  if (!progressFiles.length) return 0
+
+  const normalized = progressFiles.map((file) => ({
+    file,
+    percent:
+      file.status === 'success'
+        ? 100
+        : Math.min(100, Math.max(0, file.percentage ?? 0)),
+  }))
+  const hasCompleteSizes = normalized.every(
+    ({ file }) => typeof file.size === 'number' && file.size > 0,
+  )
+
+  if (!hasCompleteSizes) {
+    return Math.round(
+      normalized.reduce((sum, item) => sum + item.percent, 0) /
+        normalized.length,
+    )
+  }
+
+  const totalSize = normalized.reduce((sum, item) => sum + item.file.size!, 0)
+  const weightedProgress = normalized.reduce(
+    (sum, item) => sum + item.percent * item.file.size!,
     0,
   )
-  return Math.round(total / uploading.length)
+  return Math.round(weightedProgress / totalSize)
 })
 
 const requestHandler = computed<UploadRequestHandler | undefined>(() => {
@@ -811,7 +836,7 @@ defineExpose({
       :on-exceed="onExceed"
     >
       <template v-if="draggable">
-        <!-- 态C 上传中：拖区整体变形为聚合进度面板（裁剪版，见审计 §三 #2） -->
+        <!-- 态C 上传中：拖区整体变形为聚合进度面板。 -->
         <div v-if="isUploading" class="lx-upload__panel">
           <div class="lx-upload__panel-info">
             <p class="lx-upload__panel-title">

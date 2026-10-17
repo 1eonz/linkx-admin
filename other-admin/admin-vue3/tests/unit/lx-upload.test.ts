@@ -607,6 +607,19 @@ describe('LxUpload', () => {
     wrapper.unmount();
   });
 
+  it('按文件大小加权计算批量进度，避免小文件抬高总进度', () => {
+    const wrapper = mountUpload({
+      modelValue: [
+        { uid: 1, name: 'large.csv', size: 900, status: 'uploading', percentage: 90 },
+        { uid: 2, name: 'small.csv', size: 100, status: 'uploading', percentage: 0 },
+      ],
+      action: 'mock://upload',
+    });
+
+    expect(wrapper.get('[role="progressbar"]').attributes('aria-valuenow')).toBe('81');
+    wrapper.unmount();
+  });
+
   it('aborts all requests and restores the queue when cancelling the batch upload', async () => {
     const file: LxUploadFile = {
       uid: 9,
