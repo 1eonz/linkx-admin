@@ -30,6 +30,8 @@ export interface LxInputProps {
    * （标本八件套 01 默认行图标）
    */
   clearable?: boolean
+  /** 清空按钮是否参与键盘 Tab 顺序；带有同级显隐操作的复合输入可关闭。 */
+  clearButtonTabbable?: boolean
   /** 密码可见切换（仅 type="password" 生效，EP 内核行为） */
   showPassword?: boolean
   /** 最大输入长度；与 showWordLimit 联动出现计数器 */

@@ -30,6 +30,7 @@ const props = withDefaults(defineProps<LxInputProps>(), {
   readonly: false,
   required: false,
   clearable: false,
+  clearButtonTabbable: true,
   showPassword: false,
   maxlength: undefined,
   minlength: undefined,
@@ -140,12 +141,14 @@ defineExpose({
       <slot name="suffix" />
       <button
         v-if="clearable"
-        class="lx-input__clear"
+        class="lx-input__clear el-input__clear"
         :class="{ 'lx-input__clear--touch-visible': clearButtonEnabled }"
         type="button"
         :disabled="!clearButtonEnabled"
-        :tabindex="clearButtonEnabled ? 0 : -1"
-        :aria-hidden="clearButtonEnabled ? undefined : 'true'"
+        :tabindex="clearButtonVisible && clearButtonTabbable ? 0 : -1"
+        :aria-hidden="
+          clearButtonVisible && clearButtonTabbable ? undefined : 'true'
+        "
         aria-label="清空输入框"
         title="清空输入"
         :style="{ visibility: clearButtonVisible ? 'visible' : 'hidden' }"

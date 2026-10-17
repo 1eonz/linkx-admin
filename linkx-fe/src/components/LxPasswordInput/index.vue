@@ -109,6 +109,7 @@ defineExpose({
       :placeholder="props.placeholder"
       :disabled="props.disabled"
       :clearable="props.clearable"
+      :clear-button-tabbable="false"
       :show-password="false"
       :maxlength="maxLength"
       :minlength="minLength"
@@ -179,12 +180,21 @@ defineExpose({
 }
 
 @media (max-width: 480px) {
+  :deep(.lx-password-input .el-input__wrapper) {
+    min-height: var(--el-input-height);
+  }
+
+  :deep(.lx-password-input .el-input__suffix) {
+    position: relative;
+  }
+
   :deep(.lx-password-input__toggle) {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: 0;
     width: 44px;
     height: 44px;
-    flex: 0 0 44px;
-    /* 触控区域保持 44px，负外边距抵消布局增量，让输入框外框仍对齐尺寸令牌。 */
-    margin-block: calc((var(--el-input-height) - 46px) / 2);
+    transform: translateY(-50%);
   }
 
   :deep(.lx-password-input__toggle:focus-visible) {
