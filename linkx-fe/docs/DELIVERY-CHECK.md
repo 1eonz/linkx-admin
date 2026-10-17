@@ -561,3 +561,9 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 - 文本输入框 `Escape` 默认只退出当前控件，不再清空全部检索条件；新增 `escapeReset` 兼容开关，Demo、中文 API 和回归测试已同步。
 - SearchBar 及宿主适配单测 **13/13**；文档 E2E **5/5**；typecheck、构建、文档构建、目标格式和差异检查通过。
 - Assessment A 修后综合 **34/40**；Assessment B 的 detector JSON/stderr/退出码为 `[]`/空/`0`，Light/HUD × 1440/375 浏览器证据已归档。空数组不单独代表视觉通过。\n
+## 2026-10-18 LxCodeSlot 复制中反馈
+
+- 复制进行中显示加载图标和中文忙态标题，设置 `aria-busy` 并禁用重复提交；原有成功/失败提示保持不变。
+- lx-ui 专用 Playwright **1/1**、typecheck、目标 Prettier 和差异检查通过。必须使用 `playwright.lxui.config.ts`，默认 Vue3 配置会打开登录页。
+- 真实剪贴板权限、读屏器和宿主组合仍未完成；静态 detector `[]` 不单独作为视觉审查结论。
+

@@ -1503,3 +1503,10 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **验证**：SearchBar 与适配器单测 **13/13**；文档 E2E 已有 **5/5** 证据；lx-ui typecheck/build/build:docs、目标 Prettier、ESLint 和 `git diff --check` 通过。此前独立 Assessment A **30/40**，修后综合报告 **34/40（Good）**；Assessment B 的 SearchBar/StatusSwitch 源码与 Demo detector 均记录 JSON `[]`、空 stderr、退出码 `0`，Light/HUD × 1440/375 浏览器证据已归档。
 - **边界**：组合文档壳层的 side-tab 命中归因于文档示例外壳，不作为组件缺陷；真实权限、宿主全量替换、人工读屏和后端联调仍未完成。`npx impeccable update` 本轮因 GitHub 下载连接超时未更新本地引擎，未覆盖已安装版本。
 - **下一步**：G2 组件证据收口后进入 UI-10 其余未关闭候选和宿主契约回归；完成 UI-10/UI-11 门槛后再分批替换 Vue3 Element Plus。权限中心、文本/字段权限和页面操作引导继续后置。\n
+## 2026-10-18 LxCodeSlot 复制中反馈 P1 收口
+
+- **实现**：复制进行中按钮显示 `LxIcon loading`、`title="正在复制"` 和 `aria-busy="true"`，同时禁用重复点击；复制完成后恢复复制图标和原提示。保留既有成功/失败事件与 Promise 链边界。
+- **验证**：使用 lx-ui 专用 Playwright 配置运行 `lx-codeslot-docs.spec.ts` **1/1**；覆盖键盘复制、复制中状态、HUD、窄屏与长值。目标 Prettier、lx-ui typecheck 和 `git diff --check` 通过；默认 Vue3 配置误指向登录页的失败已归因于配置入口，不作为组件失败证据。
+- **边界**：该项只收口组件复制反馈，不代表系统剪贴板权限、真实宿主组合或 UI-10 全库矩阵已完成；真实读屏器和跨浏览器仍开放。
+- **下一步**：继续处理 `LxDescriptions` 长值发现性/复制反馈和其余 UI-10 候选，随后执行整库 Impeccable 与 Vue3 宿主替换。
+

@@ -2641,3 +2641,10 @@
 - **证据**：`lx-search-bar.test.ts` 与 `search-bar-adapter.test.ts` 共 **13/13**；SearchBar 文档 E2E **5/5**；lx-ui 类型检查、构建、文档构建、目标格式与差异检查通过。G2 Assessment A 修后综合 **34/40**；Assessment B 已保存 detector JSON、stderr、退出码及 Light/HUD、1440/375 证据。
 - **审查边界**：`[]` 仅表示静态 detector 零命中，正式结论依赖 A 评审、浏览器证据和回归测试。文档总览 `NewComponentsDemo.vue` 的 side-tab 命中属于文档壳层 P3 观察。`npx impeccable update` 因网络超时未更新。
 - **下一交接**：继续 UI-10 未关闭组件矩阵和宿主替换准备；保持 Promise 链请求、中文文档注释及白名单提交规则。不要把本轮 SearchBar 文件与 CodeSlot、临时 detector、test-results 共同提交。\n
+## 2026-10-18 LxCodeSlot 复制中反馈交接
+
+- **改动**：复制按钮忙态显示加载图标、中文标题和 `aria-busy`，防止复制请求未完成时重复提交；文档补充该状态说明，E2E 使用受控剪贴板 Promise 断言中间态。
+- **验证**：lx-ui 专用 Playwright **1/1**、lx-ui typecheck、目标 Prettier 和差异检查通过。默认 Vue3 Playwright 配置命中登录页，已改用 `playwright.lxui.config.ts` 重新执行并获得有效结果。
+- **代码审查**：未发现 P0/P1/P2；状态由组件内部维护，未引入 API、Router、Pinia 或权限依赖。临时 `code-slot-e2e.json`、test-results 和其他协作者文件不纳入提交。
+- **下一步**：继续 LxDescriptions 与 UI-10 未关闭候选；保持中文注释、Promise 链请求风格和白名单提交规则。
+
