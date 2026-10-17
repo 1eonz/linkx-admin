@@ -5,7 +5,7 @@
 ## 2026-10-17 LxFormErrorBanner 审查复核
 
 - lx-ui 组件行为已通过单测 **2/2**、文档 E2E **1/1** 和 A/B 阶段证据；报告见 `.impeccable/critique/formerrorbanner-assessment-b-2026-10-17/assessment-report.md`。
-- Vue3 页面迁移时继续区分表单整体阻断与字段错误；移动横溢出 P1 尚待定位，不提前替换宿主 `el-alert`。
+- Vue3 页面迁移时继续区分表单整体阻断与字段错误；移动 overlay 横溢出已由无覆盖层基线排除组件缺陷，宿主替换仍按全库顺序执行。
 
 ## 2026-10-17 LxPagination 组件审查复核
 

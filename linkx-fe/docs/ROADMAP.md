@@ -5,7 +5,7 @@
 ## 2026-10-17 LxFormErrorBanner 阶段审查
 
 - 单测 **2/2**、文档 Playwright **1/1**；Assessment A **32/40（Good）**，B detector 为合法 `[]`/空 stderr/退出码 0，五视图注入成功。
-- 移动文档视图出现 `scrollWidth=462 > 375`，需区分壳层与组件并完成无覆盖层基线；正式窄屏收口暂缓。
+- 移动 overlay 的 `scrollWidth=462 > 375` 已由无覆盖层 Playwright 基线归因为检测覆盖层/文档壳层；组件窄屏正式收口，高缩放说明文字保留为 P2。
 
 ## 2026-10-17 LxPagination 正式审查
 

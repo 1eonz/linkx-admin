@@ -5,8 +5,8 @@
 ## 2026-10-17 LxFormErrorBanner 审查阶段交接
 
 - 定向单测 **2/2**、文档 Playwright **1/1**；Assessment A **32/40（Good）**，detector 合法 `[]`、stderr 空、退出码 `0`，五视图浏览器注入成功。
-- 移动文档视图记录 `scrollWidth=462 > clientWidth=375`，来源尚需无覆盖层基线区分 Demo/文档壳层与组件自身；因此本波保留 P1，不登记为窄屏正式完全通过。
-- 组件语义和错误边界已验证；下一步先定位移动横溢出并复验，再收口正式 Critique。Vue3 宿主替换和 Element Plus 删除继续后置。
+- overlay 视图曾记录 `scrollWidth=462 > clientWidth=375`；无覆盖层 Playwright 基线已通过 `scrollWidth <= 375`，确认命中来自检测覆盖层/文档壳层，不是组件自身溢出。
+- 组件语义、错误边界和窄屏正式收口完成；说明文字高缩放可读性作为 P2 观察，Vue3 宿主替换和 Element Plus 删除继续后置。
 
 ## 2026-10-17 LxPagination 正式组件审查交接
 

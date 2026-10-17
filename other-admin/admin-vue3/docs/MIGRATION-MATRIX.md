@@ -4,7 +4,7 @@
 
 ## 2026-10-17 LxFormErrorBanner
 
-- 组件行为门禁：单测 **2/2**、文档 E2E **1/1**、Assessment A **32/40**；B 证据已保存，但移动文档视图横溢出仍待基线定位。
+- 组件行为门禁：单测 **2/2**、文档 E2E **1/1**、Assessment A **32/40**；B 的移动 overlay 横溢出已由无覆盖层基线排除组件缺陷。
 - 宿主替换暂缓，保留整体阻断、`role=alert`、slot 操作和字段错误边界；Vue3 `element-plus` 继续保留。
 
 ## 2026-10-17 LxPagination

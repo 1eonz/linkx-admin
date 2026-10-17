@@ -5,7 +5,7 @@
 ## 2026-10-17 LxFormErrorBanner 阶段审查
 
 - 单测 **2/2**、文档 E2E **1/1**；B 证据见 `.impeccable/critique/formerrorbanner-assessment-b-2026-10-17/`，detector 和五视图证据有效。
-- 移动横溢出 P1 尚未关闭，不能把本波记为正式窄屏完全通过。
+- 移动 overlay 横溢出已由无覆盖层基线排除组件缺陷；窄屏正式收口，高缩放文字可读性为 P2 观察。
 
 ## 2026-10-17 LxPagination 正式审查
 
