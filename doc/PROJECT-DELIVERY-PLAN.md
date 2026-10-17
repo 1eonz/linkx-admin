@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-18 LxInput 前后缀令牌高度回归收敛
+
+- **实现**：`LxInput` 的 `prefix/suffix` 及内部槽位由父级 `height: 100%` 改为直接读取 `--lx-input-track-height`，避免 Element Plus flex 内容尺寸或主题重算时产生高度回退；不改变尺寸、事件、校验和插槽契约。
+- **验证**：复合前后缀 Playwright **1/1**、`lx-input.test.ts` **13/13**；lx-ui typecheck、206 modules 库构建、VitePress 文档构建、目标 ESLint、Prettier 和 `git diff --check` 均通过。
+- **审查边界**：独立 Impeccable A/B 复验需同时保留 detector JSON、stderr、退出码和 Light/HUD 浏览器证据；静态 `[]` 不能单独作为通过依据。本轮不增加 UI-10 关闭数。
+- **交接**：继续按未关闭组件门禁推进；页面操作引导、权限中心、真实后端联调和 Vue3 Element Plus 删除保持后置，业务 API 链继续使用 `.then().catch().finally()`。
+
 ## 2026-10-18 LxDescriptions/LxCodeSlot 动态可访问名称与双路审查
 
 - **实现**：`LxCodeSlot` 的宿主 `aria-label` 采用初始值加 `onUpdated` 同步，字段标签变化时复制按钮名称不会残留旧值；`LxDescriptions` 移动端 E2E 改为验证组件既定的换行与外层边界，不把长文本节点的 `scrollWidth` 误判为页面横溢出。

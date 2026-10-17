@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-18 LxInput 前后缀直接令牌高度回归
+
+- `prefix/suffix` 及内部槽位直接使用组件级 `--lx-input-track-height`，避免父级 `100%` 在 Element Plus flex 重算时出现视觉高度漂移。
+- 复合前后缀 Playwright **1/1**、LxInput 单测 **13/13**；lx-ui typecheck/build/build:docs、目标 ESLint/Prettier 和 `git diff --check` 通过。
+- 静态 detector 的 `[]` 仅代表规则零命中；正式 Impeccable 复验仍需独立 A/B、stderr/退出码和 Light/HUD 浏览器证据，本轮不关闭 UI-10。
+
 ## 2026-10-18 LxVirtualTree/TransferPanel 组合复验
 
 - 文档 Playwright **48/48** 通过；覆盖固定行、插槽摘要、筛选/批量、长名称、未加载授权、窄屏触控、焦点恢复、HUD、暗色、减少动效和状态恢复。

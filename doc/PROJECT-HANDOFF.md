@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] LxInput 前后缀高度令牌回归交接
+
+- **改动**：`prefix/suffix` 及内部槽位直接使用 `--lx-input-track-height`，不再依赖父级 `100%` 传递；复合输入在 sm/md/lg 与窄屏 44px 下继续与输入框共用同一高度轨道。
+- **验证**：复合前后缀 E2E **1/1**、LxInput 单测 **13/13**、lx-ui typecheck/build/build:docs、目标 ESLint/Prettier 和 `git diff --check` 通过。
+- **边界**：本轮只修复视觉几何，不改变 API、事件、表单校验或 Promise 链式风格；不增加 UI-10 关闭数。Impeccable 复验必须按 A/B 隔离执行，`[]` 只记录静态零命中。
+- **下一步**：等待独立 A/B 证据后归档 snapshot/trend；继续组件库未关闭门禁，再进入 Vue3 Element Plus 分批替换。
+
 ## [2026-10-18] LxDescriptions/LxCodeSlot 动态标签与双路审查交接
 
 - **交付**：修复 `LxCodeSlot` 自定义 `aria-label` 在宿主字段标签变化后可能残留旧值的问题；移动端 Descriptions E2E 改为验证响应式换行和外层边界；新增动态字段标签单测。

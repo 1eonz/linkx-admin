@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-18 LxInput 前后缀直接令牌高度回归
+
+- `prefix/suffix` 及内部槽位直接绑定 `--lx-input-track-height`，消除 Element Plus 内容尺寸参与 flex 计算时的高度回退；sm/md/lg、390px 44px 触屏和统一焦点环契约保持不变。
+- 复合前后缀 E2E **1/1**、LxInput 单测 **13/13**、lx-ui typecheck/build/build:docs、目标 ESLint/Prettier 和差异检查通过。
+- 本轮不增加 UI-10 关闭数；Impeccable A/B 仍必须同时记录 detector JSON、stderr、退出码和浏览器证据，静态 `[]` 不代表正式通过。
+
 ## 2026-10-18 LxCodeSlot 当前版复核与窄屏补强
 
 - 独立 Assessment A **30/40（Good）**；修复固定 aria 名称覆盖、复制竞态/空值静默、窄屏触控高度和长值 flex 溢出，中文 API、文档 E2E 和交接台账已同步。

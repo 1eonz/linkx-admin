@@ -101,7 +101,7 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
 .lx-input .el-input__prefix-inner,
 .lx-input .el-input__suffix-inner {
   box-sizing: border-box;
-  height: 100%;
+  height: var(--lx-input-track-height);
   min-height: 0;
 }
 
@@ -121,7 +121,7 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
 .lx-input .el-input__prefix-inner,
 .lx-input .el-input__suffix-inner {
   display: inline-flex;
-  height: 100%;
+  height: var(--lx-input-track-height);
   min-height: 0;
   align-items: center;
   align-self: stretch;

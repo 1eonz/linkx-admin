@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-18 LxInput 前后缀高度令牌回归
+
+- 入口：`linkx-fe/src/components/LxInput/style.css`；浏览器回归：`other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`。
+- 当前行为：`prefix/suffix` 与内部槽位直接读取 `--lx-input-track-height`，sm/md/lg 和 390px 触屏分别保持 28/32/40px 与 44px；复合输入外框、输入内框和 `prepend/append` 仍共用同一轨道。
+- 证据：复合前后缀 E2E **1/1**、LxInput 单测 **13/13**、lx-ui 类型检查/构建/文档构建通过；正式 UI-10 矩阵、宿主替换和真实后端仍开放。
+
 ## 2026-10-18 LxDescriptions/LxCodeSlot 可访问名称与双路审查
 
 - 入口：`linkx-fe/src/components/LxDescriptions/`、`linkx-fe/src/components/LxCodeSlot/`；文档测试为 `lx-descriptions-docs.spec.ts`、`lx-codeslot-docs.spec.ts`，单测为 `lx-descriptions.test.ts`。

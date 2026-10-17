@@ -77,6 +77,12 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
         prefixInner: rect('.el-input__prefix-inner'),
         suffix: rect('.el-input__suffix'),
         suffixInner: rect('.el-input__suffix-inner'),
+        slotHeightTokens: {
+          prefix: getComputedStyle(root.querySelector<HTMLElement>('.el-input__prefix')!).height,
+          prefixInner: getComputedStyle(root.querySelector<HTMLElement>('.el-input__prefix-inner')!).height,
+          suffix: getComputedStyle(root.querySelector<HTMLElement>('.el-input__suffix')!).height,
+          suffixInner: getComputedStyle(root.querySelector<HTMLElement>('.el-input__suffix-inner')!).height,
+        },
       };
     });
     expect(geometry.root.height, `${option} 档复合输入根节点高度`).toBe(expectedHeight);
@@ -122,6 +128,12 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
         `${option} 档 ${slot} 垂直位置`,
       ).toBeLessThanOrEqual(1);
     }
+    expect(geometry.slotHeightTokens, `${option} 档前后缀应直接使用统一高度轨道`).toEqual({
+      prefix: `${expectedHeight}px`,
+      prefixInner: `${expectedHeight}px`,
+      suffix: `${expectedHeight}px`,
+      suffixInner: `${expectedHeight}px`,
+    });
   }
 
   await page.setViewportSize({ width: 390, height: 844 });
