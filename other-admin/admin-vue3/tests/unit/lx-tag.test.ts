@@ -13,6 +13,18 @@ describe('LxTag', () => {
     wrapper.unmount();
   });
 
+  it('保留 large 尺寸契约并为禁用标签使用独立状态类', () => {
+    const wrapper = mount(LxTag, {
+      props: { size: 'large', disabled: true },
+      slots: { default: () => '只读标签' },
+    });
+
+    expect(wrapper.classes()).toContain('lx-tag--large');
+    expect(wrapper.classes()).toContain('is-disabled');
+    expect(wrapper.find('button.lx-tag__close').exists()).toBe(false);
+    wrapper.unmount();
+  });
+
   it('renders semantic classes and forwards the disabled state to assistive technology', () => {
     const wrapper = mount(LxTag, {
       props: { type: 'warning', disabled: true },
@@ -33,7 +45,9 @@ describe('LxTag', () => {
 
     const close = wrapper.get('button.lx-tag__close');
     expect(close.attributes('type')).toBe('button');
-    expect(close.attributes('aria-label')).toBe('关闭');
+    expect(close.attributes('aria-label')).toBe('关闭标签');
+    expect(close.attributes('title')).toBe('关闭标签');
+    expect(close.find('.lx-icon').exists()).toBe(true);
     await close.trigger('click');
     expect(wrapper.emitted('close')).toHaveLength(1);
     wrapper.unmount();

@@ -4,6 +4,7 @@
  * 使用边界：需携带文字信息且不能从行内推断时（P1 例外），状态优先 LxStatusDot
  */
 import type { LxTagProps } from './types'
+import LxIcon from '../LxIcon/index.vue'
 
 withDefaults(defineProps<LxTagProps>(), {
   type: 'info',
@@ -26,10 +27,11 @@ const emit = defineEmits<{ close: [e: MouseEvent] }>()
       v-if="closable && !disabled"
       class="lx-tag__close"
       type="button"
-      aria-label="关闭"
+      aria-label="关闭标签"
+      title="关闭标签"
       @click.stop="emit('close', $event)"
     >
-      ×
+      <LxIcon name="x" :size="14" aria-hidden="true" />
     </button>
   </span>
 </template>
@@ -39,6 +41,7 @@ const emit = defineEmits<{ close: [e: MouseEvent] }>()
   display: inline-flex;
   align-items: center;
   gap: var(--lx-space-xs);
+  min-height: 24px;
   padding: 1px var(--lx-space-sm);
   border-radius: var(--lx-radius-sm);
   font-size: 12px;
@@ -49,9 +52,23 @@ const emit = defineEmits<{ close: [e: MouseEvent] }>()
 }
 
 .lx-tag--small {
+  min-height: 24px;
   font-size: 11px;
   line-height: 16px;
   padding: 2px 6px;
+}
+
+.lx-tag--large {
+  min-height: 28px;
+  padding: 3px 10px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.lx-tag__content {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* 深浅成对（禁止交叉混搭，DESIGN-SPEC §3.2） */
@@ -84,7 +101,9 @@ const emit = defineEmits<{ close: [e: MouseEvent] }>()
 }
 
 .lx-tag.is-disabled {
-  opacity: 0.4;
+  color: var(--lx-btn-disabled-text);
+  background: var(--lx-btn-disabled-bg);
+  border-color: var(--lx-btn-disabled-border);
   cursor: not-allowed;
 }
 
