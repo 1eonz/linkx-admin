@@ -5,6 +5,7 @@
 - **实现**：复合输入各层统一为根节点完整高度的 `border-box` 伸展轨道；`prefix/suffix` 内部槽位增加独立高度断言，`prepend/append` 同时校验上下边界，覆盖 Element Plus 内容尺寸参与 flex 计算时的视觉错位风险。
 - **验证**：复合前后缀文档 Playwright **1/1**、LxInput 单测 **13/13**、lx-ui 类型检查和生产构建、目标 ESLint/Prettier、`git diff --check` 通过。
 - **审查边界**：detector JSON、stderr 与退出码需成套保存；本轮 `[]` 只作静态零命中记录，浏览器几何证据是本次回归依据，不能单独标记正式 Impeccable Critique 通过。
+- **URL 扫描补充**：Impeccable `0.1.15` 扫描完整文档页退出码为 **2**，低对比度命中来自 VitePress 壳层和代码语法高亮，已与组件 DOM 分离归因；该结果不视为 LxInput 视觉 Critique 通过。
 
 ## 2026-10-18 LxInput 前后缀复合轨道补强
 

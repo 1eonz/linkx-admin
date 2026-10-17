@@ -5,6 +5,7 @@
 - 复合输入根节点、输入内框、`prepend/append` 以及 `prefix/suffix` 内部槽位统一采用根节点完整高度的 `border-box` 伸展轨道；外侧块不再独立声明令牌高度，避免 Element Plus flex 内容尺寸在主题或尺寸切换时造成上下边界视觉不一致。
 - 定向 Playwright **1/1**（sm/md/lg、390px 触屏、根节点/输入框/前后缀上下边界、内部槽位高度及统一焦点环）、LxInput 单测 **13/13**、lx-ui `vue-tsc --noEmit`、库构建、目标 ESLint/Prettier、`git diff --check` 通过。
 - 本轮按规则保留 detector 的 JSON/stderr/退出码记录；合法 `[]` 仅表示静态规则零命中，不能替代正式 Impeccable A/B 或快照。该修复不增加 UI-10 关闭数，Vue3 宿主替换、真实后端联调和权限任务继续后置。
+- 新版 URL detector 对完整 VitePress 页面返回退出码 **2**，命中归因于文档壳层辅助文本和代码高亮色；组件本身未发现对应颜色缺陷，不能将 URL 扫描写成全页通过。
 
 ## 2026-10-18 LxForm 通栏文本域宽度修复
 
