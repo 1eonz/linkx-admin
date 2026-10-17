@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-18 LxInput 复合输入视觉边界修复
+
+- 组件入口 `linkx-fe/src/components/LxInput/`：复合输入根节点统一外框和裁切轨道，内框与 `prepend/append` 共享完整高度；聚焦环覆盖整个复合输入，避免分段边界错层。
+- 验证入口 `other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`：覆盖 sm/md/lg、390px 触屏、前后缀与输入框边界及统一焦点环；单测仍为 **13/13**。
+- 该修复不代表 Vue3 业务页面替换或 Element Plus 删除完成，宿主迁移继续等待组件库全库门禁。
+
 ## 2026-10-18 DynamicForm/Form 文档门禁复验
 
 - `linkx-fe/docs/components/lxdynamicform.md` 与 `linkx-fe/docs/components/lxform.md` 当前隔离文档 E2E 合计 **20/20**（DynamicForm 14/14、LxForm 6/6），覆盖窄屏、键盘、主题、错误/禁用、上传恢复和远程竞态。

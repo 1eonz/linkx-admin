@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-18 LxInput 复合输入统一外框修复
+
+- 复合输入根节点现在裁切为单一圆角外框，输入内框取消独立圆角和焦点环，`prepend/append` 仅保留内部垂直分隔线；聚焦时由整个复合控件承载同一焦点环，避免前后缀与输入框边界出现视觉高低差。
+- 定向 Playwright **1/1**（sm/md/lg、390px 触屏、前后缀/输入框上下边界及统一焦点环）、LxInput 单测 **13/13**、lx-ui `vue-tsc --noEmit`、目标 ESLint/Prettier、`git diff --check` 通过。Impeccable detector JSON 为合法 `[]`、stderr 为空、退出码 `0`；该结果只表示静态规则零命中，浏览器证据仍是本次视觉回归依据。
+- 本次不改变事件、校验、API 或 `.then().catch().finally()` 风格，不增加 UI-10 全库关闭数；Vue3 Element Plus 替换、真实后端联调和页面操作引导继续按既定顺序后置。
+
 ## 2026-10-18 LxInput 复合前缀内框高度收敛
 
 - 复合输入根节点、输入内框、`prepend/append` 统一使用同一伸展轨道，内框明确继承 `--el-input-height`，避免 Element Plus 内容尺寸在特定主题或尺寸下造成前后缀与输入框边界不一致。

@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] LxInput 复合前后缀统一外框
+
+- **问题与修复**：复合输入的输入内框焦点环与 `prepend/append` 分段边线在视觉上不共边。现由复合根节点统一圆角、外框和焦点环，内框取消独立圆角/焦点环，外侧块仅保留分隔线；高度轨道和窄屏 44px 规则保持不变。
+- **验证**：定向 Playwright **1/1**、LxInput 单测 **13/13**、lx-ui `vue-tsc --noEmit`、目标 ESLint/Prettier、`git diff --check` 通过。detector JSON 为合法 `[]`、stderr 为空、退出码 `0`；浏览器实际核对 sm/md/lg、390px、上下边界和焦点环。
+- **审查边界**：`[]` 仅记录静态规则零命中；本轮没有伪造独立 Assessment A/B 或 snapshot/trend。正式双路 Critique、UI-10 全库门禁、Vue3 宿主替换和真实后端联调仍按计划执行。
+
 ## [2026-10-18] DynamicForm/Form 文档门禁当前版复验
 
 - **验证**：使用隔离 lx-ui 文档配置和本机 Chrome，`lx-dynamic-form-docs.spec.ts` **14/14**、`lx-form-docs.spec.ts` **6/6**，合计 **20/20**；测试未连接真实后端。
