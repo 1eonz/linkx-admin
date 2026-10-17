@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只保留组件交付证据摘要和 `.impeccable/critique` 路径，不再复制全局计划或交接正文。当前波次入口见 `doc/PROJECT-DELIVERY-PLAN.md`，完整交接见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 G2 当前版自动化门禁补记
+
+- Vue3 全量单测 **598/598**，`LxSearchBar`/`LxStatusSwitch` 文档 Playwright **8/8**；覆盖成功、空、失败恢复、重置、loading、折叠、确认取消、确认失败、权限降级、窄屏、HUD 和减少动效。
+- lx-ui 类型检查、206 modules 构建、VitePress 构建通过；构建日志中的 chunk 大小提示为既有告警。
+- `npx impeccable update` 已成功更新引擎至 **0.1.15**（exit 0）。正式审查仍须按 A/B 隔离流程执行，并同时记录 JSON、stderr、退出码和浏览器证据。
+
 ## 2026-10-17 LxPageCard 正式审查
 
 - 单测 **3/3**、文档 E2E **1/1**；B 证据 `.impeccable/critique/pagecard-assessment-b-2026-10-17/`，detector 与浏览器证据有效。

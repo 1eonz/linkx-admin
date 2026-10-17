@@ -2,6 +2,13 @@
 
 > **文档职责（2026-10-17）**：本文只维护 lx-ui 组件路线和组件级未完成项，不重复记录全局波次台账。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，交接与审查证据见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 G2 当前版验证补记
+
+- `LxSearchBar` 与 `LxStatusSwitch` 当前实现已通过 Vue3 全量单测 **598/598**，其中定向组件单测分别为 **9/9**、**21/21**；文档 Playwright **8/8**。
+- lx-ui `vue-tsc --noEmit`、206 modules 库构建和 VitePress 文档构建均通过。VitePress 仅保留既有大 chunk 警告，不影响构建退出码。
+- 已执行 `npx impeccable update`，退出码 **0**，Impeccable 引擎更新为 **0.1.15**；后续 Critique 必须继续保存 detector JSON、stderr、退出码和 Light/HUD、桌面/窄屏浏览器证据，不能以 `[]` 单独结论通过。
+- 本补记只确认当前实现验证，不提前关闭整库 UI-10 或 Vue3 宿主替换；下一步为 G2 正式独立 Assessment A/B、代码复审和综合 snapshot/trend。
+
 ## 2026-10-17 LxPageCard 正式审查
 
 - 单测 **3/3**、文档 Playwright **1/1**；Assessment A **33/40（Good）**，B detector 合法 `[]`/空 stderr/退出码 0，五视图注入成功。
