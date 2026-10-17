@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-18 LxInput 普通前后缀高度轨道补强
+
+- `linkx-fe/src/components/LxInput/style.css` 将高度轨道提升到所有 `LxInput` 根节点，统一 `box-sizing`、最小高度和 flex 伸展；复合 `prefix/suffix`、`prepend/append`、窄屏 44px 规则与原事件/插槽契约保持不变。
+- LxInput 单测 **13/13**，lx-ui 类型检查、206 modules 库构建、VitePress 文档构建和目标 Prettier 通过；使用 `playwright.lxui.config.ts` 指向 4177 文档服务后，新增文档 E2E 与既有复合断言合计 **2/2**，覆盖根节点、包装器及槽位上下边界。
+- 独立 Impeccable A/B：B 的源码 detector 为合法 JSON `[]`、stderr 空、退出码 `0`；Light/HUD × 桌面/390px 的 8/8 视图已保存截图、DOM、几何和 overlay 证据，复合根及前后缀在 28/32/40px、窄屏 44px 下对齐。移动文档壳层 `scrollWidth=630` 和 detector 命中保留待归因；静态空数组不替代综合判断，本条不关闭 UI-10 矩阵行。
+- 后续登记：A 发现的 `prefers-reduced-motion`、触屏清空按钮 aria/可见性一致性，以及可用浏览器后的 Light/HUD、桌面/窄屏几何证据；`npx impeccable update` 因网络超时未改变本地引擎。
+
 ## 2026-10-18 LxVirtualTree/TransferPanel 组合 P2 复验
 
 - `LxVirtualTree` 与 `LxTransferPanel` 当前版固定行、插槽摘要、筛选/批量、长名称、未加载项、窄屏触控和焦点恢复已用文档浏览器重新核对，合计 **48/48** 通过。

@@ -11,6 +11,10 @@
 /* 输入框及其所有前后缀槽位共用一条高度轨道，避免内核令牌在切换时分别计算。 */
 .lx-input {
   --lx-input-track-height: var(--el-input-height);
+  box-sizing: border-box;
+  height: var(--lx-input-track-height);
+  min-height: var(--lx-input-track-height);
+  align-items: stretch;
 }
 
 /* 基础几何：圆角 + 1px 控件描边（--lx-control-border 专属控件态档） */

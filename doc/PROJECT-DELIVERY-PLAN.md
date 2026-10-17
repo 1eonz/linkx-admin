@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-18 LxInput 普通前后缀高度轨道补强
+
+- **范围**：修复普通 `LxInput` 根节点仅依赖 Element Plus 默认 flex/行高、导致 `prefix/suffix` 与输入框在尺寸切换或主题状态下可能出现上下边界差异的问题。
+- **实现**：根节点统一使用 `--lx-input-track-height`，补充 `box-sizing: border-box`、`height`、`min-height` 与 `align-items: stretch`；既有输入内框、前后缀、`prepend/append` 轨道和窄屏 44px 触控规则保持不变。
+- **验证**：LxInput 单测 **13/13**；lx-ui `vue-tsc --noEmit`、生产构建、VitePress 文档构建和目标 Prettier 通过。使用 `playwright.lxui.config.ts` 指向 4177 文档服务后，复合前后缀与普通根节点几何 E2E **2/2** 通过。
+- **审查口径**：独立 Assessment A/B 已完成。B detector 的 JSON、stderr、退出码为合法 `[]`/空/`0`；8/8 Light/HUD、桌面/390px 视图完成注入并保存截图/DOM/几何证据，`prefix/suffix` 与复合块高度一致。移动文档壳层 `scrollWidth=630` 和 detector 命中保留待归因，不以空数组或命中数量直接关闭视觉门禁。`npx impeccable update` 因网络连接超时未更新本地引擎。
+- **计划状态**：本轮只收口 LxInput 局部几何，不增加 UI-10 全库关闭计数；减少动效、触屏清空语义、真实读屏器和可用浏览器几何截图列入后续硬化项。Vue3 Element Plus 替换、权限和页面引导仍按原顺序后置。
+
 ## 2026-10-18 LxVirtualTree/TransferPanel 组合 P2 复验
 
 - **复验范围**：固定行虚拟化、`nodeSummary`/展示型插槽、筛选与批量选择、长名称展开、未加载项、320/375px 触控、视口行高切换后的滚动与焦点恢复、HUD、暗色和减少动效。

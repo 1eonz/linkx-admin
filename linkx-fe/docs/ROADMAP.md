@@ -1,5 +1,12 @@
 # lx-ui 路线图
 
+## 2026-10-18 LxInput 普通前后缀根节点高度补强
+
+- **改动**：普通 `LxInput` 根节点现在与 `--lx-input-track-height` 同步设置 `box-sizing`、`height`、`min-height` 和 `align-items: stretch`，使输入包装器、`prefix/suffix` 内槽与外侧复合块共享同一条高度轨道；不改变尺寸、事件、校验和插槽契约。
+- **验证**：LxInput 单测 **13/13**；lx-ui 类型检查、生产库构建、VitePress 文档构建、目标 Prettier 通过。使用 `playwright.lxui.config.ts` 指向 4177 文档服务后，文档 E2E **2/2** 通过，覆盖根节点、包装器和前后缀上下边界。
+- **Impeccable 边界**：独立 A/B 已完成；B detector 的 JSON/stderr/退出码为合法 `[]`/空/`0`，Light/HUD × 桌面/390px 共 8/8 视图完成截图、DOM、几何和 overlay 证据。390px 文档壳层 `scrollWidth=630` 与 detector 命中保留待归因；`[]` 仅表示静态零命中，不能脱离浏览器证据代表正式 Critique 通过，本轮不增加 UI-10 关闭数。
+- **后续**：继续处理减少动效、触屏清空语义和真实浏览器证据；页面操作引导、Vue3 Element Plus 替换、权限与真实后端联调仍按既定优先级后置。
+
 ## 2026-10-18 LxVirtualTree/TransferPanel 组合 P2 复验
 
 - 固定行虚拟化、`nodeSummary`、筛选隐藏项、批量上下限、长名称、未加载项、320/375px、键盘焦点恢复和主题状态通过当前文档证据复验。

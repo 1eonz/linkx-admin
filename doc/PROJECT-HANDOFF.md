@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] LxInput 前后缀与输入框高度轨道补强
+
+- **问题与实现**：普通 `LxInput` 根节点此前仍依赖 Element Plus 的 `line-height` 和 flex 默认拉伸，带 `prefix/suffix` 或切换尺寸时可能出现输入框与槽位上下边界不一致。现由 `.lx-input` 根节点统一声明 `box-sizing`、`height`、`min-height` 和 `align-items: stretch`，与既有 `--lx-input-track-height`、sm/md/lg 和窄屏 44px 轨道一致；不改变值、事件、校验、插槽或公开方法契约。
+- **验证**：`lx-input.test.ts` **13/13**；`linkx-fe` `pnpm run typecheck`、`pnpm run build`、`pnpm run build:docs`、目标 Prettier 均通过。使用 `playwright.lxui.config.ts` 正确指向 4177 文档服务后，复合前后缀与普通根节点几何 E2E **2/2** 通过；此前 30846 宿主配置失败属于入口错配，不计为代码失败。
+- **Impeccable**：Assessment A 与 B 由独立子代理完成。B 的组件源码 detector 为合法 JSON `[]`、stderr 为空、退出码 `0`；Light/HUD、桌面/390px、sm/md/lg 共 8/8 视图成功注入，复合根、prepend、append、prefix、suffix 高度分别稳定为 28/32/40px，窄屏为 44px，页面错误和失败请求均为 0。原始证据见 `linkx-fe/.impeccable/critique/lxinput-height-wave-2026-10-18/assessment-b/`；移动页面 `scrollWidth=630` 与 detector 命中仍待归因，不能把命中数直接视为组件缺陷。A 提出减少动效和触屏清空语义问题，登记为后续独立任务。
+- **工具状态**：已执行 `npx impeccable update`，因 GitHub skill bundle 下载连接超时未安装更新；没有改动本地组件库版本。页面操作引导继续暂缓，Vue3 API 请求链继续保持 `.then().catch().finally()`。
+- **下一波**：继续当前 UI-10 未关闭组件门禁；取得可用浏览器后补跑 LxInput 普通前后缀的几何 E2E 与截图证据，再进入下一个组件。保持白名单暂存，避免提交 `.pnpm-store`、`.impeccable-*`、`test-results` 和日志。
+
 ## [2026-10-18] LxVirtualTree/TransferPanel 组合复验交接
 
 - **本轮结论**：`LxVirtualTree` 固定行与插槽摘要、`LxTransferPanel` 批量/筛选/已选列表组合的 P2 复验完成；48/48 文档 E2E 通过，未复现组件级 P0/P1/P2。

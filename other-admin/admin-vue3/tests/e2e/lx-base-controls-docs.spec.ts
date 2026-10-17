@@ -163,6 +163,34 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
   expect(focusRing.wrapperShadow, '聚焦时内框不应再绘制第二个焦点环').toBe('none');
 });
 
+test('Input 普通根节点与输入包装器保持同高', async ({ page }) => {
+  await page.goto('/components/lxinput');
+  const demo = page.locator('.lx-input-demo');
+  const input = demo
+    .getByLabel('警员姓名 / 警号', { exact: true })
+    .locator('xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")]');
+
+  const geometry = await input.evaluate((root) => {
+    const rect = (selector: string) => {
+      const element = root.querySelector<HTMLElement>(selector);
+      if (!element) throw new Error(`缺少输入节点：${selector}`);
+      const bounds = element.getBoundingClientRect();
+      return { top: bounds.top, bottom: bounds.bottom, height: bounds.height };
+    };
+    const rootBounds = root.getBoundingClientRect();
+    return {
+      root: { top: rootBounds.top, bottom: rootBounds.bottom, height: rootBounds.height },
+      wrapper: rect('.el-input__wrapper'),
+    };
+  });
+
+  for (const slot of ['wrapper'] as const) {
+    expect(geometry[slot].height, `${slot} 应与根节点同高`).toBe(geometry.root.height);
+    expect(Math.abs(geometry[slot].top - geometry.root.top), `${slot} 上边界应对齐`).toBeLessThanOrEqual(1);
+    expect(Math.abs(geometry[slot].bottom - geometry.root.bottom), `${slot} 下边界应对齐`).toBeLessThanOrEqual(1);
+  }
+});
+
 test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用', async ({ page }) => {
   await page.goto('/components/lxinput');
   const demo = page.locator('.lx-input-demo');
