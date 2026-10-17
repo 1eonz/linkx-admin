@@ -27,6 +27,12 @@
 - **验证**：定向 E2E **1/1**、LxInput 单测 **13/13**、lx-ui 类型检查、目标 ESLint/Prettier、`git diff --check` 通过；detector 合法 `[]`、stderr 空、退出码 `0`，并已核对浏览器实际计算尺寸与焦点样式。
 - **边界**：本波只修复组件视觉几何，不改变事件、校验、业务 API、权限逻辑或 Promise 链风格；不增加 UI-10 关闭数。正式双路 Impeccable Critique 仍须按独立评估流程登记，不能由静态 `[]` 单独替代。
 
+## 2026-10-18 UI-10 / Wave 26 LxTag 严格矩阵关闭
+
+- **矩阵收口**：`LxTag` 已满足 UI-10 统一门槛，组件矩阵由 **11/52** 更新为 **12/52**。关闭按钮使用 `LxIcon`，small/default/large、disabled、closable、长文本省略和键盘焦点均有当前版实现与设计依据。
+- **证据**：单测 **5/5**、文档 Playwright **2/2**、lx-ui typecheck/build、VitePress build、目标 Prettier/ESLint 和 `git diff --check` 通过；Assessment A **27/40（Good）**，修后 B 五视图与 detector 三件套见 `.impeccable/critique/lxtag-assessment-b-2026-10-18-recheck/`，组件无开放 P0–P2。
+- **边界**：`cramped-padding` 命中与设计稿 small 档 `2px 6px` 内距一致，文档壳层命中已归因；本波只关闭 lx-ui `LxTag` 严格矩阵行，不代表 Vue3 宿主替换、真实权限/后端联调、UI-11 整库审查或页面引导完成。
+
 ## 2026-10-18 LxTag 严格复核与关闭操作统一
 
 - **实现**：`LxTag` 关闭操作改用 `LxIcon` 的 `x` 图标，按钮名称统一为“关闭标签”；补齐 `large` 尺寸契约，`small/default/large` 维持稳定最小高度；禁用态改用专用禁用背景、边框和文字令牌，避免整体透明度导致文字对比度降至约 1.89:1；长标签在可用宽度内省略。中文文档新增 large、disabled 和键盘行为说明。
@@ -101,7 +107,7 @@
 
 ## 当前执行指针：UI-10 组件严格矩阵下一波
 
-- G2 `LxSearchBar` 与 `LxStatusSwitch` 已登记为 UI-10 **11/52**，组件级 A/B、浏览器证据、代码审查和 snapshot/trend 已完成；宿主替换仍冻结到全库门禁之后。
+- G2 `LxSearchBar` 与 `LxStatusSwitch`、本波 `LxTag` 已登记为 UI-10 **12/52**；组件级 A/B、浏览器证据、代码审查和 snapshot/trend 已完成；宿主替换仍冻结到全库门禁之后。
 - 下一波先收口 `LxDynamicForm`/`LxForm` 的正式 Impeccable Critique、设计图差异和 Upload fallback UID/`abort()` 组合回归；随后按组件审计矩阵继续未关闭基础组件。
 - `LxInputNumber` 桌面步进器目标尺寸仍是设计决策阻塞，不擅自改变 28/32/40px 外框和上下布局；权限中心、文本/字段权限、真实后端联调和页面操作引导继续按范围后置。
 

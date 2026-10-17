@@ -17,7 +17,7 @@
 - 实现与 Demo：关闭按钮使用 `LxIcon`，small/default/large 三档有稳定高度；disabled 使用禁用背景、边框和文字令牌；文档覆盖语义色、关闭、禁用、键盘焦点与窄屏长文本。
 - 验证：LxTag 单测 **5/5**、文档 Playwright **2/2**、lx-ui 类型检查/库构建/VitePress 构建、目标格式和 ESLint 通过。VitePress 仍有既有大 chunk 警告。
 - Impeccable：修后 B 证据 `.impeccable/critique/lxtag-assessment-b-2026-10-18-recheck/`，detector 合法 `[]`/空 stderr/0；五视图无页面错误、失败请求或页面级横溢出。组件命中的紧凑内距符合设计依据，未将其误记为缺陷。
-- 边界：组件级复核不代表 Vue3 宿主已替换、权限/真实后端联调或 UI-11 整站审查完成。
+- UI-10 严格矩阵本波由 **11/52** 更新为 **12/52**；组件级复核不代表 Vue3 宿主已替换、权限/真实后端联调或 UI-11 整站审查完成。
 
 ## 2026-10-17 DynamicForm/Form 正式双路 Critique
 

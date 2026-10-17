@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] UI-10 / Wave 26 LxTag 严格矩阵关闭
+
+- **矩阵状态**：`LxTag` 从待严格复核正式更新为已关闭，UI-10 由 **11/52** 更新为 **12/52**；依据为当前版实现、中文 Demo/API、单测、文档 E2E、Impeccable A/B、浏览器视图和代码复审证据。
+- **验证**：单测 **5/5**、文档 Playwright **2/2**、lx-ui typecheck/build、VitePress build、目标格式/Lint 和差异检查通过；B 证据目录为 `.impeccable/critique/lxtag-assessment-b-2026-10-18-recheck/`，detector JSON/stderr/退出码为合法 `[]`/空/`0`，五视图无页面错误、失败请求或页面级横溢出。
+- **交接边界**：small 档 `2px 6px` 紧凑内距有 `DESIGN-SPEC.md` 设计依据；Vue3 宿主仍待 UI-04 逐页替换，需保留标签语义、`close` 事件、disabled 只读和长文本契约。真实权限/后端联调、UI-11 整库审查、Element Plus 删除及页面引导不因本波提前。
+- **下一步**：继续 UI-10 未关闭组件矩阵；完成全库组件/动效 Impeccable 后，再进入 Vue3 Element Plus 分批替换。
+
 ## [2026-10-18] 全菜单 Mock 首屏预览复验
 
 - **结果**：`other-admin/admin-vue3/tests/e2e/preview.spec.ts` 在隔离 `mock-preview` 服务下 **6/6** 通过，覆盖首页与 32 个动态子菜单（总目录 33 项）。
