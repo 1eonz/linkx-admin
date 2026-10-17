@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { onMounted, onUpdated, ref } from 'vue'
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  ref,
+  useAttrs,
+} from 'vue'
 import LxIcon from '../LxIcon/index.vue'
 import { lxMessage } from '../LxMessage'
 import type { LxCodeSlotProps } from './types'
 
-defineOptions({ name: 'LxCodeSlot' })
+defineOptions({ name: 'LxCodeSlot', inheritAttrs: false })
 
 const props = withDefaults(defineProps<LxCodeSlotProps>(), {
   copyable: true,
@@ -12,11 +19,30 @@ const props = withDefaults(defineProps<LxCodeSlotProps>(), {
 })
 
 const emit = defineEmits<{ copy: [value: string] }>()
+const attrs = useAttrs()
 const contentRef = ref<HTMLElement>()
 const copyTitle = ref('点击复制')
+const copyValue = ref('')
+const providedAriaLabel = ref('')
+const copying = ref(false)
+let mounted = true
+
+const copyAriaLabel = computed(() => {
+  if (providedAriaLabel.value) return providedAriaLabel.value
+  return copyValue.value ? `复制代码：${copyValue.value}` : '点击复制代码'
+})
+
+const externallyDisabled = computed(() => {
+  const value = attrs.disabled
+  return value === '' || value === true || value === 'true'
+})
 
 function updateCopyTitle() {
   const value = contentRef.value?.textContent?.trim() ?? ''
+  copyValue.value = value
+  const ariaLabel = attrs['aria-label']
+  providedAriaLabel.value =
+    typeof ariaLabel === 'string' ? ariaLabel.trim() : ''
   const title =
     props.ellipsis && value
       ? `${props.copyable ? '点击复制：' : '完整内容：'}${value}`
@@ -30,19 +56,31 @@ onMounted(updateCopyTitle)
 onUpdated(updateCopyTitle)
 
 async function copy() {
-  if (!props.copyable) return
-  const value = contentRef.value?.textContent?.trim() ?? ''
-  if (!value) return
+  if (!props.copyable || externallyDisabled.value || copying.value) return
+  const value = copyValue.value
+  if (!value) {
+    lxMessage.warning('暂无可复制内容')
+    return
+  }
 
+  copying.value = true
   try {
     if (!navigator.clipboard) throw new Error('Clipboard API is unavailable')
     await navigator.clipboard.writeText(value)
+    if (!mounted) return
     emit('copy', value)
     lxMessage.success('已复制')
   } catch {
+    if (!mounted) return
     lxMessage.error('复制失败，请手动复制')
+  } finally {
+    if (mounted) copying.value = false
   }
 }
+
+onBeforeUnmount(() => {
+  mounted = false
+})
 </script>
 
 <template>
@@ -51,8 +89,11 @@ async function copy() {
     class="lx-code-slot lx-code-slot--copyable"
     :class="{ 'is-ellipsis': ellipsis }"
     type="button"
+    v-bind="attrs"
     :title="copyTitle"
-    aria-label="点击复制代码"
+    :aria-label="copyAriaLabel"
+    :aria-busy="copying"
+    :disabled="externallyDisabled || copying"
     @click="copy"
   >
     <span ref="contentRef" class="lx-code-slot__content"><slot /></span>
@@ -63,6 +104,7 @@ async function copy() {
     ref="contentRef"
     class="lx-code-slot"
     :class="{ 'is-ellipsis': ellipsis }"
+    v-bind="attrs"
     :title="copyTitle || undefined"
     ><slot
   /></span>
@@ -105,11 +147,18 @@ async function copy() {
   outline-offset: 2px;
 }
 
+.lx-code-slot--copyable:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
 .lx-code-slot__content {
   min-width: 0;
 }
 
 .lx-code-slot.is-ellipsis .lx-code-slot__content {
+  width: 0;
+  flex: 1 1 auto;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -123,6 +172,12 @@ async function copy() {
 @media (prefers-reduced-motion: reduce) {
   .lx-code-slot--copyable {
     transition: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .lx-code-slot--copyable {
+    min-height: 44px;
   }
 }
 </style>

@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-18 LxCodeSlot 当前版复核
+
+- 入口：`linkx-fe/src/components/LxCodeSlot/`；设计依据为 `DESIGN-SPEC.md`、`design/详情描述行 Descriptions/code.html`；中文文档为 `linkx-fe/docs/components/lxcodeslot.md`。
+- 本轮补齐复制按钮 aria 名称合并、复制忙态/空值提示、窄屏 44px 触控和长值省略收缩；文档 E2E **1/1**，类型检查/构建通过，Assessment A **30/40**，B 四视图页面错误/失败请求为 0。
+- 真实读屏器、系统剪贴板和 `LxDescriptions` 宿主组合仍归 UI-04/全库门禁，不能由组件 Demo 证据替代。
+
 ## 2026-10-18 LxVirtualTree/TransferPanel 组合复验
 
 - 入口：`linkx-fe/src/components/LxVirtualTree/`、`linkx-fe/src/components/LxTransferPanel/`；设计依据：`design/虚拟滚动树 + 双栏穿梭/`；测试：`other-admin/admin-vue3/tests/e2e/lx-virtual-tree-docs.spec.ts`、`lx-transfer-panel-docs.spec.ts`。

@@ -3,10 +3,7 @@ import { resolve } from 'node:path';
 
 import { expect, test } from '@playwright/test';
 
-const evidenceDirectory = resolve(
-  process.cwd(),
-  '../../.impeccable/critique/wave4-content-2026-09-30',
-);
+const evidenceDirectory = resolve(process.cwd(), '../../.impeccable/critique/wave4-content-2026-09-30');
 
 test.describe('lx-ui LxCodeSlot 文档示例', () => {
   test('复制、长内容提示、键盘焦点、HUD 主题和窄屏布局可用', async ({ page }) => {
@@ -27,16 +24,33 @@ test.describe('lx-ui LxCodeSlot 文档示例', () => {
 
     await expect(page.getByRole('heading', { name: 'LxCodeSlot 编号代码槽' })).toBeVisible();
     const demo = page.getByRole('region', { name: '代码槽示例' });
-    const copyButton = demo.getByRole('button', { name: '点击复制代码' }).first();
+    const copyButton = demo.getByRole('button', { name: /复制代码/ }).first();
     const longCode = demo.locator('.lx-code-slot.is-ellipsis').filter({
       hasText: 'GB28181-P2P-EDGE-NODE-20260930-0001',
     });
 
-    await expect(longCode).toHaveAttribute(
-      'title',
-      '点击复制：GB28181-P2P-EDGE-NODE-20260930-0001',
-    );
-    await expect(demo.getByRole('button', { name: '点击复制代码' })).toHaveCount(2);
+    await expect(longCode).toHaveAttribute('title', '点击复制：GB28181-P2P-EDGE-NODE-20260930-0001');
+    await expect(demo.getByRole('button', { name: /复制代码/ })).toHaveCount(2);
+    await expect(copyButton).toHaveAttribute('aria-label', '复制代码：NODE-01');
+    await expect(longCode).toHaveAttribute('aria-label', '复制代码：GB28181-P2P-EDGE-NODE-20260930-0001');
+    const longCodeGeometry = await longCode.evaluate((element) => {
+      const content = element.querySelector<HTMLElement>('.lx-code-slot__content');
+      if (!content) throw new Error('缺少长值内容节点');
+      const box = element.getBoundingClientRect();
+      const style = getComputedStyle(content);
+      return {
+        right: box.right,
+        viewport: window.innerWidth,
+        overflow: style.overflow,
+        textOverflow: style.textOverflow,
+        whiteSpace: style.whiteSpace,
+      };
+    });
+    expect(longCodeGeometry.right).toBeLessThanOrEqual(longCodeGeometry.viewport);
+    expect(longCodeGeometry.overflow).toBe('hidden');
+    expect(longCodeGeometry.textOverflow).toBe('ellipsis');
+    expect(longCodeGeometry.whiteSpace).toBe('nowrap');
+    expect(await copyButton.evaluate((element) => element.getBoundingClientRect().height)).toBeGreaterThanOrEqual(44);
     await expect(demo.getByText('ZONE-A-07')).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
 
@@ -46,11 +60,7 @@ test.describe('lx-ui LxCodeSlot 文档示例', () => {
     await page.keyboard.press('Enter');
     await expect(demo.getByRole('status')).toHaveText('已复制：NODE-01');
     await expect(page.locator('.lx-message')).toContainText('已复制');
-    expect(
-      await page.evaluate(
-        () => (window as Window & { __copiedText?: string }).__copiedText,
-      ),
-    ).toBe('NODE-01');
+    expect(await page.evaluate(() => (window as Window & { __copiedText?: string }).__copiedText)).toBe('NODE-01');
 
     const lightBackground = await longCode.evaluate((element) => getComputedStyle(element).backgroundColor);
     await demo.getByRole('checkbox', { name: 'HUD 深色主题' }).check();

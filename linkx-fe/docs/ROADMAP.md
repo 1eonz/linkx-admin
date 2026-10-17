@@ -1,5 +1,12 @@
 # lx-ui 路线图
 
+## 2026-10-18 LxCodeSlot 当前版复核与窄屏补强
+
+- 独立 Assessment A **30/40（Good）**；修复固定 aria 名称覆盖、复制竞态/空值静默、窄屏触控高度和长值 flex 溢出，中文 API、文档 E2E 和交接台账已同步。
+- 文档 Playwright **1/1**，lx-ui 类型检查/构建/目标格式检查通过。B 的 Light/HUD × 桌面/窄屏 4 视图均注入成功，页面错误和失败请求为 0；源码/Demo/文档 detector 的 JSON/stderr/退出码为合法 `[]`/空/`0`。
+- 文档壳层与示例代码高亮命中已归因，不能替代正式视觉结论；真实读屏器、系统剪贴板和宿主组合仍开放。下一入口继续 UI-10 未关闭矩阵。
+- 独立代码复审后的外部禁用透传、动态 aria 名称和卸载竞态已修复；复修后文档 E2E、类型检查和构建通过。
+
 ## 2026-10-18 LxInput 普通前后缀根节点高度补强
 
 - **改动**：普通 `LxInput` 根节点现在与 `--lx-input-track-height` 同步设置 `box-sizing`、`height`、`min-height` 和 `align-items: stretch`，使输入包装器、`prefix/suffix` 内槽与外侧复合块共享同一条高度轨道；不改变尺寸、事件、校验和插槽契约。

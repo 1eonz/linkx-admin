@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-18] LxCodeSlot 当前版复核交接
+
+- **交付内容**：补齐复制按钮可访问名称合并、复制忙态与重复提交保护、空值提示、窄屏 44px 触控高度和长值 flex 收缩；同步中文文档及文档 E2E。
+- **证据**：文档 E2E **1/1**；lx-ui 类型检查、生产构建、目标 Prettier 通过。Assessment A **30/40（Good）**；Assessment B 四视图注入成功，页面错误/失败请求为 0，detector JSON/stderr/退出码为合法 `[]`/空/`0`。证据目录：`linkx-fe/.impeccable/critique/lxcodeslot-assessment-b-2026-10-18/`。
+- **注意事项**：detector 对文档壳层、代码高亮和 HUD 示例的命中已归因；真实 NVDA/VoiceOver、系统剪贴板和宿主组合仍未完成，业务 API 风格未改动。
+- **代码复审补强**：独立复审发现并已修复外部 `disabled` 被内部忙态覆盖、动态 `aria-label` 不更新和剪贴板 Promise 卸载后回写三个问题；复修后 E2E **1/1**、类型检查和构建再次通过。键盘、空值、失败和重复提交的深度单测仍列为后续共享组件回归增强项。
+
 ## [2026-10-18] LxInput 前后缀与输入框高度轨道补强
 
 - **问题与实现**：普通 `LxInput` 根节点此前仍依赖 Element Plus 的 `line-height` 和 flex 默认拉伸，带 `prefix/suffix` 或切换尺寸时可能出现输入框与槽位上下边界不一致。现由 `.lx-input` 根节点统一声明 `box-sizing`、`height`、`min-height` 和 `align-items: stretch`，与既有 `--lx-input-track-height`、sm/md/lg 和窄屏 44px 轨道一致；不改变值、事件、校验、插槽或公开方法契约。
