@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-18 LxDescriptions 当前版复验
+
+- 入口：`linkx-fe/src/components/LxDescriptions/`；设计依据：`design/详情描述行 Descriptions/`；单测：`other-admin/admin-vue3/tests/unit/lx-descriptions.test.ts`；文档 E2E：`other-admin/admin-vue3/tests/e2e/lx-descriptions-docs.spec.ts`。
+- 当前证据：单测 **9/9**、文档 E2E **3/3**、全量 Vue3 Vitest **603/603**；覆盖响应式详情、状态组合和键盘/主题/减少动效。下一定位入口为 `LxVirtualTree`/`LxTransferPanel`，宿主详情页仍在 UI-04 迁移台账。
+
 ## 2026-10-18 LxUpload 批量进度与 Demo 可访问性
 
 - `linkx-fe/src/components/LxUpload/` 的聚合进度按文件大小加权，缺少文件大小时回退等权平均；对应单测位于 `other-admin/admin-vue3/tests/unit/lx-upload.test.ts`。

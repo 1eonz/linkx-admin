@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-18 LxDescriptions 当前版复验
+
+- 定向单测 **9/9**、lx-ui 文档 Playwright **3/3**；全量 Vue3 Vitest **61 文件/603 测试**通过。
+- 覆盖 32px 行高、双列/375px 与 320px 单列、长值/状态键盘读取、复制按钮、480px 抽屉、空/加载/错误恢复、HUD 和减少动效。
+- 本轮无源码缺陷修复；既有 A/B 证据见 `.impeccable/critique/descriptions-wave-2026-10-11/`。静态 `[]` 不单独代表正式视觉通过，真实宿主替换和后端联调仍开放。
+
 ## 2026-10-18 UI-13 / Wave 28 LxUpload 进度真实性与 Demo 可访问结构收口
 
 - 批量进度改为按文件大小加权，未知大小回退等权平均；Demo 移除嵌套 `label`，使用 `aria-labelledby` 关联字段标题。

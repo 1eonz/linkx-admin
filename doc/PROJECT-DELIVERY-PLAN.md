@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-18 LxDescriptions 当前版门禁复验与执行指针推进
+
+- **复验范围**：冻结当前 `LxDescriptions` 源码、Demo、中文 API 和设计稿对照；核对默认两端布局、双列响应式、32px 行高、长值/状态键盘读取、复制字段、边框、480px 抽屉组合、空/加载/错误恢复、HUD 和减少动效。
+- **验证结果**：`tests/unit/lx-descriptions.test.ts` 全量 **9/9**；`tests/e2e/lx-descriptions-docs.spec.ts` 在 lx-ui 专用配置和 `4177` 文档入口 **3/3**；当前工作区全量 Vitest **61 文件/603 测试**通过。该波没有发现需要修改的组件代码缺陷。
+- **审查边界**：本次是已有组件正式证据补齐，不把静态 detector `[]` 单独当作视觉通过，也不关闭真实读屏器、跨浏览器、剪贴板、后端联调或 Vue3 宿主替换门槛；既有 Critique 证据继续以 `.impeccable/critique/descriptions-wave-2026-10-11/` 为准。
+- **下一入口**：进入 `LxVirtualTree`/`LxTransferPanel` 当前版 P2 收口和宿主组合契约复核；完成 lx-ui 全库门禁后再开始 Vue3 Element Plus 分批替换。页面操作引导仍按既定规则暂缓。
+
 ## 2026-10-18 UI-13 / Wave 28 LxUpload 进度真实性与 Demo 可访问结构收口
 
 - **实现**：批量进度在所有文件有正数大小时按文件大小加权，缺少大小时回退等权平均；新增回归覆盖 900/100 文件的 90%/0% 进度。Demo 上传字段移除嵌套 `label`，改为 `aria-labelledby` 显式关联标题，避免文件选择器重复触发。

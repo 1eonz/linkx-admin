@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-18 LxDescriptions 当前版门禁复验
+
+- 当前 `LxDescriptions` 源码、Demo、中文 API 和设计稿对照已重新冻结；默认两端布局、双列响应式、32px 行高、长值/状态焦点、复制字段、480px 抽屉、空/加载/错误、HUD 和减少动效均有当前证据。
+- 定向单测 **9/9**、lx-ui 文档 E2E **3/3**；全量 Vue3 Vitest **61 文件/603 测试**通过。既有正式 A/B 证据仍见 `.impeccable/critique/descriptions-wave-2026-10-11/`。
+- 本次未发现组件级 P0/P1/P2；真实读屏器、跨浏览器、剪贴板、后端联调和 Vue3 宿主替换继续开放。下一个组件门禁为 `LxVirtualTree`/`LxTransferPanel` 的固定行与组合 P2。
+
 ## 2026-10-18 UI-13 / Wave 28 LxUpload 进度真实性与 Demo 可访问结构收口
 
 - 批量进度由文件百分比简单平均改为按正数文件大小加权；受控文件缺少大小时回退等权平均。Demo 外层上传字段移除嵌套 `label`，用 `aria-labelledby` 关联标题。
