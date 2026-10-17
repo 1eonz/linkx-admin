@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-18 UI-13 / Wave 27 LxUpload 组合回归收口
+
+- `LxUpload` fallback UID、跨实例隔离、受控回灌后公开 `abort()`、对应请求取消和迟到回调隔离已由单测 **38/38** 覆盖。
+- 文档 Playwright **9/9** 通过，覆盖成功、失败重试、取消、移除、格式校验、禁用、HUD、320/375px 窄屏和拖拽悬停恢复。
+- 本条不代表真实上传协议、服务端 `AbortSignal`、鉴权文件请求、宿主迁移或 UI-10 正式 Critique 完成；静态 detector `[]` 若后续出现仍须与 stderr、退出码和浏览器证据一起解释。
+
 ## 2026-10-18 LxInput 前后缀高度轨道最终收敛
 
 - **实现**：复合输入各层统一为根节点完整高度的 `border-box` 伸展轨道；`prefix/suffix` 内部槽位增加独立高度断言，`prepend/append` 同时校验上下边界，覆盖 Element Plus 内容尺寸参与 flex 计算时的视觉错位风险。

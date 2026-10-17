@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-18 LxUpload fallback UID 与 abort 组合回归
+
+- 已确认 fallback UID 生成、跨实例隔离、受控模型回灌后的公开 `abort()`、字符串/数字 UID 映射、单请求取消和迟到回调隔离均有当前测试覆盖。
+- `other-admin/admin-vue3/tests/unit/lx-upload.test.ts` **38/38**；`lx-upload-docs.spec.ts` **9/9**，覆盖成功、失败重试、取消、移除、格式校验、禁用、HUD、320/375px 触控和拖拽提示恢复。
+- 该波只收口行为回归，不关闭 `LxUpload` UI-10 严格矩阵；设计图逐项对照、正式 Impeccable、真实上传协议与宿主迁移仍开放。
+
 ## 2026-10-18 LxInput 前后缀高度轨道最终收敛
 
 - 复合输入根节点、输入内框、`prepend/append` 以及 `prefix/suffix` 内部槽位统一采用根节点完整高度的 `border-box` 伸展轨道；外侧块不再独立声明令牌高度，避免 Element Plus flex 内容尺寸在主题或尺寸切换时造成上下边界视觉不一致。
