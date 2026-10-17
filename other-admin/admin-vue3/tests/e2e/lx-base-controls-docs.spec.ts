@@ -109,6 +109,15 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
     }),
   );
   expect(touchHeights).toEqual([44, 44, 44]);
+
+  const touchSlotHeights = await compoundInput.evaluate((root) =>
+    ['.el-input__prefix', '.el-input__prefix-inner', '.el-input__suffix', '.el-input__suffix-inner'].map((selector) => {
+      const element = root.querySelector<HTMLElement>(selector);
+      if (!element) throw new Error(`缺少窄屏输入节点：${selector}`);
+      return element.getBoundingClientRect().height;
+    }),
+  );
+  expect(touchSlotHeights, '窄屏前后缀槽位应与输入框同高').toEqual([44, 44, 44, 44]);
 });
 
 test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用', async ({ page }) => {
