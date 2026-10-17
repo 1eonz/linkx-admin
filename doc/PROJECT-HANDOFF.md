@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文件是唯一的时间序列交接与审查证据索引。新波次只追加一条中文交接记录，包含实现、验证、A/B 证据、未完成边界和下一入口；不要把同一状态复制到多个全局计划文件。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，架构定位见 `doc/PROJECT-MAP.md`，历史拆分文档不再新增状态。
 
+## [2026-10-17] LxStatusSwitch 当前版 Assessment B 复验
+
+- **验证**：单测 **18/18**、文档 E2E **4/4**、Vue3 类型检查通过；覆盖 `0/1` 映射、确认竞态、只读/无权限降级、失败恢复、窄屏触控、HUD 和减少动效。
+- **Impeccable B**：证据目录为 `.impeccable/critique/statusswitch-assessment-b-2026-10-17/`。组件、文档、Demo 三路 detector 均保存 JSON/stderr/退出码，均为合法 `[]`、空 stderr、退出码 `0`；Chromium 4/4 通过，无页面错误或失败请求。空数组不是单独通过条件。
+- **边界**：组件级复验无新增 P0-P2；Vue3 真实 `StatusSwitch` 适配器、权限后端、宿主 Promise 链和 Element Plus 删除继续后置到 UI-04/UI-10/UI-11 门禁。
+
 ## [2026-10-16] UI-04 前置组件：LxSectionTitle 当前版适配器交接
 
 - **实现**：Vue3 `SectionTitle` 适配器透传 `subtitle` 属性和插槽；转发 `leading` 插槽并让其优先于映射的 `LxIcon` 和未映射图标的 Element Plus 回退，保留旧 `dashed` 默认、标题插槽、extra 和现有 props。库组件三变体、三档字号、标题层级、标签、窄屏和减少动效契约保持不变。
