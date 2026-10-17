@@ -228,10 +228,6 @@ const resultText = computed(() =>
 .lx-search-demo {
   display: grid;
   gap: var(--lx-space-md);
-  padding: var(--lx-space-lg);
-  border: 1px solid var(--lx-border);
-  border-radius: var(--lx-radius-md);
-  background: var(--lx-bg-card);
   color: var(--lx-text-regular);
 }
 .lx-search-demo__toolbar,
@@ -247,10 +243,6 @@ const resultText = computed(() =>
 .lx-search-demo__standard {
   display: grid;
   gap: var(--lx-space-sm);
-  padding: var(--lx-space-md);
-  border: 1px solid var(--lx-border-light);
-  border-radius: var(--lx-radius-sm);
-  background: var(--lx-bg-page);
 }
 .lx-search-demo__standard-heading {
   display: flex;
@@ -260,7 +252,7 @@ const resultText = computed(() =>
   font-size: 13px;
 }
 .lx-search-demo__standard-heading span {
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-regular);
   font-size: 12px;
 }
 .lx-search-demo__modes button {
