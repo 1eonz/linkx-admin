@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只保留组件交付证据摘要和 `.impeccable/critique` 路径，不再复制全局计划或交接正文。当前波次入口见 `doc/PROJECT-DELIVERY-PLAN.md`，完整交接见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxDynamicForm 当前版复验
+
+- 单测 **30/30**、文档 Playwright **12/12**；覆盖独立字段 renderer、Lx 基础控件、自适应 3/2/1 列、受控值、上传、远程候选、校验/ARIA、主题和减少动效。
+- `.impeccable/critique/dynamicform-assessment-b-2026-10-17/` 保存三路 detector JSON、stderr、退出码和浏览器结果。三路静态输出为合法 `[]`/空 stderr/退出码 `0`；空数组不单独代表正式视觉通过。
+- E2E 白名单已补齐 `favicon.svg`，首次环境误报已消除。真实业务 API、权限、上传协议和宿主替换仍未完成。
+
 ## 2026-10-17 LxStatusSwitch Assessment B 复验
 
 - 单测 **18/18**、文档 Playwright **4/4**、Vue3 类型检查通过；覆盖 `0/1` 映射、确认取消、只读/无权限、失败恢复、窄屏触控、HUD 和减少动效。

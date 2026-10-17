@@ -2,6 +2,11 @@
 
 > **文档职责（2026-10-17）**：本文只维护逐页迁移缺口、旧契约和业务适配备注；不再复制 lx-ui 全局波次状态。全局计划和下一入口以 `doc/PROJECT-DELIVERY-PLAN.md` 为准。
 
+## 2026-10-17 LxDynamicForm 组件级复验
+
+- lx-ui 当前版单测 **30/30**、文档 E2E **12/12**，Assessment B 证据已保存；此前 E2E 失败由 `favicon.svg` 白名单遗漏造成，已修正。
+- `LxDynamicForm` 已使用独立字段 renderer 和 `Lx*` 基础控件，支持受控 `value + change`、上传/远程状态及容器自适应列；Vue3 真实业务页面尚未替换，真实 API/权限/上传联调仍为迁移缺口。
+
 ## 2026-10-17 LxStatusSwitch 组件级复验
 
 - lx-ui 当前版单测 **18/18**、文档 E2E **4/4**、类型检查通过，Assessment B 证据已保存；组件本体无新增 P0-P2。

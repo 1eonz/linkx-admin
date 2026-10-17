@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只维护 lx-ui 组件路线和组件级未完成项，不重复记录全局波次台账。全局计划见 `doc/PROJECT-DELIVERY-PLAN.md`，交接与审查证据见 `doc/PROJECT-HANDOFF.md`。
 
+## 2026-10-17 LxDynamicForm 当前版复验
+
+- 单测 **30/30**、文档 E2E **12/12**；schema 字段 renderer、Lx 基础控件、单图/多图上传、远程状态、受控值和自适应列布局均有证据。
+- Assessment B 证据见 `.impeccable/critique/dynamicform-assessment-b-2026-10-17/`；静态 detector 三件套有效，浏览器状态覆盖窄屏、主题、减少动效、校验/ARIA 和全部字段类型。
+- 组件库复验通过；真实宿主 API、权限和上传联调，以及 Element Plus 替换继续后置。
+
 ## 2026-10-17 LxStatusSwitch 当前版复验
 
 - 单测 **18/18**、文档 E2E **4/4**、Vue3 类型检查通过；新 Assessment B 证据见 `.impeccable/critique/statusswitch-assessment-b-2026-10-17/`。

@@ -64,7 +64,7 @@ test.beforeEach(async ({ page }) => {
     const isDynamicFormSource = ['/components/lxdynamicform.md', '/components/lxdynamicform/index.md'].includes(
       url.pathname,
     );
-    const isFavicon = url.pathname === '/favicon.ico';
+    const isFavicon = ['/favicon.ico', '/favicon.svg'].includes(url.pathname);
     const isDocsGet =
       request.method() === 'GET' &&
       !isBackendPath &&
