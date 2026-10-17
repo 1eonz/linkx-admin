@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-17 DynamicForm/Form Assessment B 宽度归因复验
+
+- 证据脚本在视口切换后补充布局稳定等待并重跑；两页 375px 页面级 `document/body.scrollWidth` 均为 375，overlay 后仍为 375。旧版 `474/525` 属于测量时序中间态，代码块/API 表格内部滚动不等同于页面横溢出。
+- DynamicForm/Form 文档 Playwright **15/15** 通过，覆盖移动单列、错误/ARIA、键盘、禁用、HUD、减少动效、上传失败恢复和远程竞态；A 报告的两个 P1 观察已由当前证据关闭。
+- P2 文档信息密度、HUD 层级、P3 键盘效率提示仍开放；正式 snapshot/trend、独立代码复审和 UI-10 矩阵登记继续后置，不增加全库关闭数。
+
 ## 2026-10-17 LxDynamicForm/LxForm 窄屏与错误焦点修复（B 待收口）
 
 - DynamicForm/Form 单测 **30/30**、文档 E2E **15/15**；密码输入窄屏真实输入外框统一 44px，静态 LxForm 选择器错误态去除外圈，DynamicForm 保留键盘焦点环。

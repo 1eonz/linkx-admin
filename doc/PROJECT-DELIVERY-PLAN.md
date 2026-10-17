@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-17 DynamicForm/Form Assessment B 宽度归因与 E2E 复验
+
+- **复验结论**：`browser-evidence.mjs` 在视口切换后补充布局稳定等待并重跑；DynamicForm、LxForm 的 375px 页面级 `document/body.scrollWidth` 均为 375，overlay 后仍为 375。旧报告中的 474/525 属于未稳定布局中间态，代码块长行和 API 表格内部滚动不构成页面横溢出。
+- **验证**：DynamicForm/Form 文档 Playwright **15/15**；覆盖 375/320px 单列、错误/ARIA、键盘、禁用、HUD、减少动效、自适应列、上传失败恢复和远程请求竞态。B 重跑退出码 0、stderr 为空，Light/HUD、桌面/窄屏截图与 JSON 已更新。
+- **当前指针**：A 的两个 P1 观察已由当前 E2E/B 证据关闭；P2 文档信息密度、HUD 文档层级和 P3 键盘效率提示仍保留。下一步整理表单文档首屏和可折叠 API，再完成正式 snapshot/trend 与代码复审；本波不增加 UI-10 关闭数。
+
 ## 2026-10-17 LxInput 前后缀内容轨道高度修复
 
 - **问题与实现**：复合输入的外层 prepend/append 已经同高，但 Element Plus 默认上下内边距仍使输入值、prefix、suffix 子轨道比控件外框少 2px，造成前后缀与输入框视觉高度不一致。`LxInput` 现将垂直内边距收敛为 0，并让输入值及 prefix/suffix 填满 `--el-input-height`，保留左右内边距、边框内描边和窄屏 44px 触控规则。

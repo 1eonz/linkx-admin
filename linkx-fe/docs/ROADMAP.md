@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-17 DynamicForm/Form Assessment B 宽度归因复验
+
+- `browser-evidence.mjs` 在首次加载和每次视口切换后增加 250ms 布局稳定等待并重跑；DynamicForm、LxForm 在 375px 下的页面级 `document/body.scrollWidth` 均为 375，overlay 后仍为 375。旧报告中的 474/525 属于未稳定布局的测量中间态，代码块长行和 API 表格内部滚动由各自容器承载，不构成页面级横溢出。
+- 文档 Playwright **15/15** 通过，覆盖 375/320px 单列、错误/ARIA、首错聚焦、HUD、禁用、减少动效、自适应列、上传失败恢复和远程请求竞态；B 重跑退出码 `0`、stderr 为空。A 的两个 P1 观察已由当前证据关闭。
+- P2 文档信息密度、HUD 文档层级和 P3 键盘效率提示仍开放；正式 snapshot/trend 与独立代码复审完成前，不将本次复验登记为 UI-10 或 UI-11 全库关闭。
+
 ## 2026-10-17 LxInput 前后缀内容轨道回归修复
 
 - Element Plus wrapper 的默认上下内边距使输入值、prefix、suffix 少 2px；现已统一填满 `--el-input-height`，复合输入在 sm/md/lg 及 390px 触屏视口中保持同高，左右内边距和 44px 触控规则不变。

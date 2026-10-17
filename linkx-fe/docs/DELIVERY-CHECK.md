@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-17 DynamicForm/Form Assessment B 宽度归因复验
+
+- 证据脚本：`.impeccable/critique/dynamicform-form-assessment-b-2026-10-17/browser-evidence.mjs`；重跑退出码 `0`，stderr 为空，Light/HUD、桌面/375px 结果已更新。
+- DynamicForm、LxForm 的 375px 页面级 `document/body.scrollWidth` 均为 375，overlay 后仍为 375；旧版 474/525 是布局尚未稳定时的中间态，代码块/API 表格的横向滚动属于内部容器行为。
+- DynamicForm/Form 文档 Playwright **15/15** 通过，覆盖移动单列、错误/ARIA、键盘、禁用、HUD、减少动效、上传失败恢复和远程竞态。P2 文档信息密度、HUD 层级与 P3 键盘效率提示仍开放；正式 snapshot/trend 与代码复审未完成前不宣称正式 Critique 通过。
+
 ## 2026-10-17 LxInput 前后缀内容轨道高度回归
 
 - 修复 Element Plus 默认上下内边距造成的 2px 高度差：输入值、prefix、suffix 现在与 wrapper、prepend、append 共用完整尺寸轨道；sm/md/lg 和 390px 窄屏继续满足组件尺寸与 44px 触控要求。
