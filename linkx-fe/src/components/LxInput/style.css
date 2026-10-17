@@ -90,6 +90,9 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
 
 .lx-input .el-input-group__prepend,
 .lx-input .el-input-group__append {
+  box-sizing: border-box;
+  height: var(--el-input-height);
+  min-height: var(--el-input-height);
   color: var(--lx-text-regular);
   background-color: var(--lx-bg-card-hover);
 }
@@ -142,6 +145,12 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
  * textarea 多行基线天然 ≥44px，无此需求） */
 @media (hover: none), (max-width: 640px) {
   .lx-input .el-input__wrapper {
+    min-height: 44px;
+  }
+
+  .lx-input .el-input-group__prepend,
+  .lx-input .el-input-group__append {
+    height: 44px;
     min-height: 44px;
   }
 

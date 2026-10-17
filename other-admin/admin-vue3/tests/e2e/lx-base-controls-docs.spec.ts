@@ -38,6 +38,58 @@ test('Select 可见标签关联真实输入，并支持键盘选择', async ({ p
   await expect(demo.getByLabel('应急链路（锁定）', { exact: true })).toBeDisabled();
 });
 
+test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', async ({ page }) => {
+  await page.goto('/components/lxinput');
+  const demo = page.locator('.lx-input-demo');
+  const compoundInput = demo
+    .getByLabel('案件编码', { exact: true })
+    .locator('xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")]');
+  const size = demo.getByLabel('输入框尺寸档', { exact: true });
+
+  for (const [option, expectedHeight] of [
+    ['sm', 28],
+    ['md', 32],
+    ['lg', 40],
+  ] as const) {
+    await size.selectOption(option);
+    const geometry = await compoundInput.evaluate((root) => {
+      const rect = (selector: string) => {
+        const element = root.querySelector<HTMLElement>(selector);
+        if (!element) throw new Error(`缺少复合输入节点：${selector}`);
+        const bounds = element.getBoundingClientRect();
+        return { top: bounds.top, height: bounds.height, center: bounds.top + bounds.height / 2 };
+      };
+      return {
+        wrapper: rect('.el-input__wrapper'),
+        prepend: rect('.el-input-group__prepend'),
+        append: rect('.el-input-group__append'),
+        prefix: rect('.el-input__prefix'),
+        suffix: rect('.el-input__suffix'),
+      };
+    });
+    expect(geometry.wrapper.height).toBe(expectedHeight);
+    for (const addon of ['prepend', 'append'] as const) {
+      expect(geometry[addon].height, `${option} 档 ${addon} 高度`).toBe(expectedHeight);
+    }
+    for (const slot of ['prefix', 'suffix'] as const) {
+      expect(
+        Math.abs(geometry[slot].center - geometry.wrapper.center),
+        `${option} 档 ${slot} 垂直位置`,
+      ).toBeLessThanOrEqual(1);
+    }
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const touchHeights = await compoundInput.evaluate((root) =>
+    ['.el-input__wrapper', '.el-input-group__prepend', '.el-input-group__append'].map((selector) => {
+      const element = root.querySelector<HTMLElement>(selector);
+      if (!element) throw new Error(`缺少窄屏输入节点：${selector}`);
+      return element.getBoundingClientRect().height;
+    }),
+  );
+  expect(touchHeights).toEqual([44, 44, 44]);
+});
+
 test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用', async ({ page }) => {
   await page.goto('/components/lxinput');
   const demo = page.locator('.lx-input-demo');
