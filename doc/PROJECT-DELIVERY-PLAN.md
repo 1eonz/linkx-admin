@@ -9,6 +9,7 @@
 - **批次化执行**：组件库基础组件、复合组件、宿主替换分别按批次推进；同一批次内共享一次环境启动和构建，避免每个小项重复安装、重复启动和重复写交接。权限中心、文本/字段权限、真实后端联调和页面引导继续按现有冻结规则后置。
 - **当前进度**：G2 `LxSearchBar`/`LxStatusSwitch` 自动化门禁已完成（全量单测 **598/598**、文档 E2E **8/8**、类型检查、206 modules 构建、VitePress 构建通过）；Impeccable 已更新至 **0.1.15**。下一动作是正式 A/B、代码复审和综合证据收口，完成后直接进入下一组件批次。
 - **新引擎复验**：初次 SearchBar 命中来自 Demo 外层卡片嵌套与标准态说明文字对比度；已移除 Demo 卡片壳、改为分组布局并提升说明文字对比度。修后 SearchBar 与 StatusSwitch URL detector 均返回合法 JSON `[]`、stderr 为空、exit `0`。该修复只影响 Demo 展示，G2 仍需完成正式独立 A/B、代码复审和综合 snapshot/trend。
+- **窄屏复验**：使用新引擎 `--viewport 375x812` 对两个 URL 独立扫描，均返回合法 JSON `[]`、stderr 为空、exit `0`；PowerShell 对空 stderr 的显示异常不影响文件内容和进程状态。
 
 ## 2026-10-17 LxPageCard 正式组件审查交接
 
