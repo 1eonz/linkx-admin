@@ -139,16 +139,32 @@ describe('LxSearchBar', () => {
     wrapper.unmount();
   });
 
-  it('renders the host status slot and resets from Escape', async () => {
+  it('renders host status and resets from Escape in a text input', async () => {
     const wrapper = mount(LxSearchBar, {
       props: { fields, modelValue: { keyword: '值班员', status: 'online' } },
       slots: { meta: '<span data-testid="meta">结果状态</span>' },
     });
 
     expect(wrapper.get('[data-testid="meta"]').text()).toBe('结果状态');
-    await wrapper.get('.lx-search-bar').trigger('keyup.esc');
+    await wrapper.get('input[type="text"]').trigger('keyup.esc');
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([{ status: 'all' }]);
     expect(wrapper.emitted('search')).toHaveLength(1);
+    wrapper.unmount();
+  });
+
+  it('does not reset query conditions when Escape closes a composite control', async () => {
+    const wrapper = mount(LxSearchBar, {
+      props: {
+        fields: [{ key: 'date', label: '日期', type: 'date' }],
+        modelValue: { date: '2026-10-17' },
+      },
+    });
+
+    await wrapper.get('.el-date-editor').trigger('keyup.esc');
+
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+    expect(wrapper.emitted('reset')).toBeUndefined();
+    expect(wrapper.emitted('search')).toBeUndefined();
     wrapper.unmount();
   });
 

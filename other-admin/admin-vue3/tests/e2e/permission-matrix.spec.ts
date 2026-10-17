@@ -381,7 +381,7 @@ test('后台用户没有更新权限时状态开关不可操作', async ({ page 
   await expect(page).toHaveURL(/authority\/adminPerson$/);
   await expect(page.locator('.el-table__body-wrapper')).toContainText('后台账号');
   await expect(page.locator('.status-switch')).toHaveCount(0);
-  await expect(page.locator('.el-table__body-wrapper .status-tag')).toContainText('正常');
+  await expect(page.locator('.el-table__body-wrapper .lx-status-switch__fallback')).toContainText('正常');
 });
 
 test('停用菜单即使权限 ID 仍存在也不能注册页面路由', async ({ page }) => {

@@ -90,7 +90,7 @@ const rules: FormRules<TaskDueEditForm> = {
 };
 
 /** 通知对象下拉的 API */
-const targetApi = form.targetType === 1 ? queryUserInfo : queryGroupInfo;
+const targetApi = computed(() => (form.targetType === 1 ? queryUserInfo : queryGroupInfo));
 
 /** 通知对象下拉的初始化参数 */
 function getTargetInitParams(): Record<string, unknown> {
@@ -110,7 +110,7 @@ function handleTargetTypeChange(): void {
 /** 通知对象变化：填充名称与身份证号 */
 function handleTargetChange(ids: string[], items: Record<string, unknown>[]): void {
   const item = items[0] || {};
-  form.targetName = String(item.name ?? '');
+  form.targetName = String(item.name ?? item.groupName ?? '');
   form.idCard = String(item.idCard ?? '');
 }
 
@@ -154,10 +154,12 @@ function handleSubmit(): void {
       </el-form-item>
       <el-form-item label="预警通知对象" prop="targetId">
         <SelectPagination
+          :key="form.targetType"
           v-model="form.targetId"
           :api="targetApi"
           :init-params="getTargetInitParams()"
           :trans="form.targetType === 2 ? { to: 'id', from: 'groupId' } : undefined"
+          :show-field="form.targetType === 2 ? 'groupName' : 'name'"
           :value-map="targetMap"
           placeholder="请选择预警通知对象"
           @change="handleTargetChange"

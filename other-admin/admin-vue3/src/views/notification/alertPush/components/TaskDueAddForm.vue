@@ -25,7 +25,7 @@
  * Methods: 无
  */
 import type { FormInstance, FormRules } from 'element-plus';
-import { reactive, ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
 
 import type { DepartmentNode } from '@/api/h5/collaboration';
 import { queryGroupInfo, queryUserInfo, type TargetType } from '@/api/notification/alertPush';
@@ -82,7 +82,7 @@ const rules: FormRules<TaskDueForm> = {
 };
 
 /** 通知对象下拉的 API */
-const targetApi = form.targetType === 1 ? queryUserInfo : queryGroupInfo;
+const targetApi = computed(() => (form.targetType === 1 ? queryUserInfo : queryGroupInfo));
 
 /** 通知对象下拉的初始化参数 */
 function getTargetInitParams(): Record<string, unknown> {
@@ -131,7 +131,7 @@ function handleTargetTypeChange(): void {
 
 /** 通知对象变化：填充名称与身份证号 */
 function handleTargetChange(ids: string[], items: Record<string, unknown>[]): void {
-  form.targetName = items.map((i) => String(i.name ?? ''));
+  form.targetName = items.map((i) => String(i.name ?? i.groupName ?? ''));
   form.idCard = items.map((i) => String(i.idCard ?? '')).filter(Boolean);
 }
 
@@ -182,10 +182,12 @@ function handleSubmit(): void {
       </el-form-item>
       <el-form-item label="预警通知对象" prop="targetId">
         <SelectPagination
+          :key="form.targetType"
           v-model="form.targetId"
           multiple
           :api="targetApi"
           :init-params="getTargetInitParams()"
+          :show-field="form.targetType === 2 ? 'groupName' : 'name'"
           :trans="form.targetType === 2 ? { to: 'id', from: 'groupId' } : undefined"
           placeholder="请选择预警通知对象"
           @change="handleTargetChange"
