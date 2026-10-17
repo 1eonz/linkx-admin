@@ -12,8 +12,9 @@
 ## 2026-10-16 LxSearchBar 当前修复记录
 
 - 设计对照：四字段标准态使用四个 `span 6` 栅格，第四字段内部承载查询/重置，窄屏仍回落单列。
-- 自动化：库单测 **9/9**、适配器单测 **11/11**、文档 Playwright **4/4**，类型、Prettier、`git diff --check` 通过。
+- 自动化：库单测 **9/9**、适配器单测 **2/2**（合计定向测试 **11/11**）、文档 Playwright **4/4**，类型、Prettier、`git diff --check` 通过。
 - 适配器边界：批量 action 的 `selectedCount` 禁用和 `action` key 已恢复；Vue2 组织树、日期格式与业务参数映射不具备通用数据源，继续列为逐页迁移任务。
+- Assessment B 复验目录：`.impeccable/critique/searchbar-assessment-b-2026-10-17/`。三路 detector 的 JSON/stderr/退出码均有效，Chromium 文档 E2E **4/4** 通过；空数组不单独代表正式视觉通过。
 
 ## 2026-10-16 LxMetricCard 当前版复核记录
 

@@ -10,7 +10,7 @@
 
 ## 2026-10-16 G2 LxSearchBar 当前修复
 
-- 适配器已恢复批量 action 的 `key`/`selectedCount` 禁用并隐藏库默认状态行；库标准态第四字段内含操作组，符合设计四列布局。库单测 **9/9**、适配器单测 **11/11**、文档 E2E **4/4**。
+- 适配器已恢复批量 action 的 `key`/`selectedCount` 禁用并隐藏库默认状态行；库标准态第四字段内含操作组，符合设计四列布局。库单测 **9/9**、适配器单测 **2/2**（合计定向测试 **11/11**）、文档 E2E **4/4**。
 - Vue2 `SearchBar` 的组织树、日期格式、`getSearchParams`、`org-change` 和实例方法依赖业务接口，不能由通用 lx-ui 适配器臆造；逐页迁移时使用 `fields`、`filters` 和业务 composable 完成参数映射。
 
 ## 2026-10-16 UI-04 前置组件：LxMetricCard 趋势语义交接

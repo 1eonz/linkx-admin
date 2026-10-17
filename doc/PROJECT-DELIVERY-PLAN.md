@@ -24,7 +24,8 @@
 ## 2026-10-16 G2 LxSearchBar 当前修复记录
 
 - 四字段标准态改为 24 列四等分，第四字段内部承载查询/重置按钮；适配器隐藏默认“等待查询”状态行，恢复 `selectedCount` 对批量 action 的禁用及 `action` key 事件。
-- 库单测 **9/9**、适配器定向单测 **11/11**、文档 E2E **4/4**、类型与格式检查通过。Vue2 组织树、日期格式和 `getSearchParams` 仍依赖页面接口，未臆造数据源，登记为逐页迁移缺口。
+- 库单测 **9/9**、适配器定向单测 **2/2**（合计定向测试 **11/11**）、文档 E2E **4/4**、类型与格式检查通过。Vue2 组织树、日期格式和 `getSearchParams` 仍依赖页面接口，未臆造数据源，登记为逐页迁移缺口。
+- Assessment B 复验已保存至 `.impeccable/critique/searchbar-assessment-b-2026-10-17/`；三路 detector 的 JSON、stderr 和退出码均核验，浏览器证据覆盖成功/空/错、loading、重置、375px 和四字段布局。
 
 ## 2026-10-16 LxMetricCard 波次交接（当前版）
 

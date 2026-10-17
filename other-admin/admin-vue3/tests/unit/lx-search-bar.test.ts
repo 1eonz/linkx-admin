@@ -207,6 +207,7 @@ describe('LxSearchBar', () => {
 
     expect(wrapper.find('.lx-search-bar__grid--inline-actions').exists()).toBe(true);
     expect(wrapper.find('.lx-search-bar__actions--inline').exists()).toBe(true);
+    expect(wrapper.findAll('.lx-search-bar__field')[3].find('.lx-search-bar__actions--inline').exists()).toBe(true);
     expect(wrapper.find('.lx-search-bar__footer').exists()).toBe(false);
     expect(wrapper.get('[role="status"]').text()).toBe('暂无结果');
     wrapper.unmount();

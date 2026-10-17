@@ -12,8 +12,10 @@
 ## [2026-10-16] G2 LxSearchBar 布局与适配器修复交接
 
 - **实现**：标准四字段使用 `span 6` 四列，第四列内部渲染查询/重置操作；Vue3 `SearchBar` 适配器隐藏库默认状态行，支持 action `key`、`selectedCount` 批量禁用和 `action` 事件。
-- **验证**：库单测 **9/9**、适配器单测 **11/11**、文档 E2E **4/4**；类型检查、Prettier 和差异检查通过。
+- **验证**：库单测 **9/9**、适配器单测 **2/2**（合计定向测试 **11/11**）、文档 E2E **4/4**；类型检查、Prettier 和差异检查通过。
 - **迁移边界**：旧 Vue2 的组织树、日期格式、`getSearchParams`/`org-change`/实例方法依赖具体业务 API，当前只登记为迁移缺口，不伪造通用接口。后续逐页用 lx-ui `fields`/`filters` 和业务参数映射完成。
+
+- **Assessment B 复验**：`.impeccable/critique/searchbar-assessment-b-2026-10-17/assessment-b-report.md` 保存三路 detector JSON、stderr、退出码及 Chromium 结果。三路静态输出为合法 `[]`、stderr 为空、退出码 `0`；文档 E2E **4/4** 通过，覆盖成功/空/错恢复、重置、loading、375px 和四字段同行布局。空数组未单独作为视觉通过依据。
 
 ## [2026-10-16] UI-04 前置组件：LxMetricCard 当前版趋势语义交接
 
