@@ -76,6 +76,14 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
       };
     });
     expect(geometry.root.height, `${option} 档复合输入根节点高度`).toBe(expectedHeight);
+    expect(
+      Math.abs(geometry.root.top - geometry.wrapper.top),
+      `${option} 档根节点与输入框上边界对齐`,
+    ).toBeLessThanOrEqual(1);
+    expect(
+      Math.abs(geometry.root.top + geometry.root.height - (geometry.wrapper.top + geometry.wrapper.height)),
+      `${option} 档根节点与输入框下边界对齐`,
+    ).toBeLessThanOrEqual(1);
     expect(geometry.wrapper.height).toBe(expectedHeight);
     expect(geometry.prefix.height, `${option} 档 prefix 高度`).toBe(expectedHeight);
     expect(geometry.suffix.height, `${option} 档 suffix 高度`).toBe(expectedHeight);

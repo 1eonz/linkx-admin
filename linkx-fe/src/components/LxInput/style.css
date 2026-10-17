@@ -23,13 +23,22 @@
 /* 复合输入按同一条高度轨道拉伸，避免内框与前后缀在不同内核布局下错位。 */
 .lx-input.el-input-group {
   height: var(--el-input-height);
+  min-height: var(--el-input-height);
   align-items: stretch;
 }
 
 .lx-input.el-input-group > .el-input-group__prepend,
 .lx-input.el-input-group > .el-input__wrapper,
 .lx-input.el-input-group > .el-input-group__append {
+  box-sizing: border-box;
   align-self: stretch;
+  min-height: 100%;
+}
+
+/* 复合输入的内框是可伸展项，明确继承组高，避免内置内容尺寸把外框撑成不一致的高度。 */
+.lx-input.el-input-group > .el-input__wrapper {
+  height: 100%;
+  flex: 1 1 auto;
 }
 
 /* 禁用态保留灰色表面，同时维持值的可读性。 */
