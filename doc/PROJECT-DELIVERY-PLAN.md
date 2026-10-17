@@ -8,6 +8,7 @@
 - **每波固定顺序**：实现与回归 → 定向单测/E2E → 类型/构建 → Impeccable detector 三件套 → 浏览器 Light/HUD × 桌面/窄屏 → 独立代码复审 → 综合报告与 snapshot/trend → 两笔白名单提交并推送 → 自动进入下一波。任一证据缺失只能标记阶段性或降级，不能标记正式通过。
 - **批次化执行**：组件库基础组件、复合组件、宿主替换分别按批次推进；同一批次内共享一次环境启动和构建，避免每个小项重复安装、重复启动和重复写交接。权限中心、文本/字段权限、真实后端联调和页面引导继续按现有冻结规则后置。
 - **当前进度**：G2 `LxSearchBar`/`LxStatusSwitch` 自动化门禁已完成（全量单测 **598/598**、文档 E2E **8/8**、类型检查、206 modules 构建、VitePress 构建通过）；Impeccable 已更新至 **0.1.15**。下一动作是正式 A/B、代码复审和综合证据收口，完成后直接进入下一组件批次。
+- **新引擎复验**：`npx impeccable detect http://127.0.0.1:4177/components/lxsearchbar` 返回 exit `2`，命中 2 条 `nested-cards` 和 1 条低对比度 advisory，尚未完成文档壳层与组件节点归因；StatusSwitch URL detector 返回空 stdout/exit `0`，不是合法 JSON `[]`，按规则记为扫描证据不完整。G2 暂不登记正式 Critique 通过，后续先补可重复的 detector 输出、DOM 归因和独立浏览器视图。
 
 ## 2026-10-17 LxPageCard 正式组件审查交接
 

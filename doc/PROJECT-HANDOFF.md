@@ -2390,3 +2390,9 @@
 - 1280px/375px 四个浏览器视图注入成功，控制台返回 `No anti-patterns found`，无横向溢出。
 - 独立 Luna Assessment A 代理因服务 503 失败，本波为降级设计评估，不能冒充完整双代理 Critique；报告见 `.impeccable/critique/metric-section-assessment-2026-10-17.md`。
 - 下一波为 G2 `LxSearchBar` 与 `LxStatusSwitch`；真实读屏器、宿主组合、后端联调和 Element Plus 移除仍未执行。
+
+## 2026-10-17 G2 自动化门禁与 Critique 阻断记录
+
+- G2 当前版全量单测 **598/598**、文档 Playwright **8/8**，lx-ui 类型检查、206 modules 构建和 VitePress 构建通过；`npx impeccable update` 已成功更新引擎至 **0.1.15**。
+- 新引擎在线 detector 对 SearchBar 返回 exit `2`，命中两条文档卡片嵌套和一条低对比度建议；StatusSwitch 返回空 stdout/exit `0`，不是合法 JSON `[]`。两者均不能标记正式 Critique 通过，需先完成文档壳层归因、稳定 JSON 输出和独立浏览器证据。
+- 该阻断不改变已通过的实现级自动化门禁，也不引入未经设计确认的样式修改。处理完成后继续独立 Assessment A/B、代码复审、综合 snapshot/trend，再进入下一组件批次。
