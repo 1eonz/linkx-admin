@@ -59,6 +59,21 @@
   min-height: 0;
 }
 
+/* 前后缀内容使用与控件相同的居中轨道，避免 EP 的内行高让图标或文字
+ * 看起来比输入框边框高出或低下。 */
+.lx-input .el-input__prefix,
+.lx-input .el-input__suffix {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.lx-input .el-input__prefix-inner,
+.lx-input .el-input__suffix-inner {
+  align-items: center;
+  line-height: 1;
+}
+
 /* hover：描边转主色 */
 .lx-input .el-input__wrapper:hover {
   box-shadow: 0 0 0 1px var(--lx-color-primary) inset;

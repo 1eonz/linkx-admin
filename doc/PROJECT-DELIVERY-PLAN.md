@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-17 DynamicForm/Form 文档信息层级与折叠复验（阶段性）
+
+- **本轮修复**：DynamicForm 最小配置前置到交互示例之后；LxForm 将 API 与设计/迁移说明拆成两个原生折叠；`.lx-doc-details` 增加 44px 触达区、令牌化焦点环、开合态和减少动效规则。
+- **验证**：DynamicForm/Form 文档 Playwright **17/17**，覆盖默认收起、键盘展开、44px summary、2px 焦点环、375/320px 单列、HUD、错误/ARIA、上传恢复和远程竞态；VitePress 构建成功；两份文档 detector 均为合法 `[]`、stderr 为空、退出码 `0`。
+- **Critique 状态**：独立 Assessment A 为 **30/40（Good）**；Assessment B 的 Luna 子代理两次返回 HTTP 503，未形成新的独立浏览器证据，本轮只能记为降级阶段性检查，不能以 `[]` 或 E2E 单独宣称正式通过。P2 折叠粒度、窄屏表格提示和 VitePress outline 仍开放。
+
 ## 2026-10-17 DynamicForm/Form Assessment B 宽度归因与 E2E 复验
 
 - **复验结论**：`browser-evidence.mjs` 在视口切换后补充布局稳定等待并重跑；DynamicForm、LxForm 的 375px 页面级 `document/body.scrollWidth` 均为 375，overlay 后仍为 375。旧报告中的 474/525 属于未稳定布局中间态，代码块长行和 API 表格内部滚动不构成页面横溢出。
@@ -8,8 +14,8 @@
 
 ## 2026-10-17 LxInput 前后缀内容轨道高度修复
 
-- **问题与实现**：复合输入的外层 prepend/append 已经同高，但 Element Plus 默认上下内边距仍使输入值、prefix、suffix 子轨道比控件外框少 2px，造成前后缀与输入框视觉高度不一致。`LxInput` 现将垂直内边距收敛为 0，并让输入值及 prefix/suffix 填满 `--el-input-height`，保留左右内边距、边框内描边和窄屏 44px 触控规则。
-- **验证**：复合前后缀文档 Playwright **1/1**，覆盖 sm/md/lg 的输入值、prefix、suffix、prepend、append 同高及 390px 窄屏 44px；`LxInput` 单测 **13/13**；lx-ui `vue-tsc --noEmit`、目标 Prettier 和 `git diff --check` 通过。Impeccable detector 输出合法 `[]`、stderr 为空、退出码 0；该静态结果只记录规则零命中，不单独作为正式 Critique 通过依据。
+- **问题与实现**：复合输入的外层 prepend/append 已经同高，但 Element Plus 默认上下内边距仍使输入值、prefix、suffix 子轨道比控件外框少 2px，造成前后缀与输入框视觉高度不一致。`LxInput` 现将垂直内边距收敛为 0，让输入值及 prefix/suffix 填满 `--el-input-height`，并将前后缀容器和内部槽位设为完整高度的 flex 居中轨道，保留左右内边距、边框内描边和窄屏 44px 触控规则。
+- **验证**：复合前后缀文档 Playwright **1/1**，覆盖 sm/md/lg 的输入值、prefix、suffix 内外槽位、prepend、append 同高及 390px 窄屏 44px；`LxInput` 单测 **13/13**；目标 Prettier 和 `git diff --check` 通过。Impeccable detector 输出合法 `[]`、stderr 为空、退出码 0；该静态结果只记录规则零命中，不单独作为正式 Critique 通过依据。
 - **范围边界与下一步**：这是已完成 `LxInput` 的局部视觉回归，不增加 UI-10 严格矩阵计数，不改变 Vue3 Element Plus 替换、权限、真实后端联调或页面操作引导的冻结顺序；继续处理当前组件门禁队列。
 
 ## 2026-10-17 LxDynamicForm/LxForm 窄屏与错误焦点修复（进行中）

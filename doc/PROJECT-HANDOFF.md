@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-17] DynamicForm/Form 文档信息层级与折叠复验（阶段性）
+
+- **实现**：最小配置已移到 DynamicForm Demo 后；LxForm 的 API 与设计/迁移说明分为两个 `<details>`；`custom.css` 为 `.lx-doc-details > summary` 固化 44px 触达尺寸、2px `focus-visible`、主题令牌颜色和减少动效。
+- **证据**：文档 Playwright **17/17**、VitePress 构建成功；两份 Markdown detector 均合法 `[]`、stderr 为空、退出码 `0`。新增用例实际验证默认收起、Enter 展开、44px 高度、焦点环和页面无横溢出。
+- **审查边界**：独立 A **30/40（Good）**；B 两次使用 `gpt-6-luna` 均因 HTTP 503 无法完成，故本轮不写正式 snapshot/trend，不标记 UI-10/UI-11 关闭。P2 表格滚动提示、outline 影响和更细折叠粒度交给下一轮可用 B 通道复验。
+
 ## [2026-10-17] DynamicForm/Form Assessment B 宽度归因复验
 
 - **脚本修正**：`browser-evidence.mjs` 在首次加载和每次视口切换后等待 250ms，再读取页面级滚动宽度；重跑退出码 `0`、stderr 为空。
@@ -2437,6 +2443,12 @@
 - 1280px/375px 四个浏览器视图注入成功，控制台返回 `No anti-patterns found`，无横向溢出。
 - 独立 Luna Assessment A 代理因服务 503 失败，本波为降级设计评估，不能冒充完整双代理 Critique；报告见 `.impeccable/critique/metric-section-assessment-2026-10-17.md`。
 - 下一波为 G2 `LxSearchBar` 与 `LxStatusSwitch`；真实读屏器、宿主组合、后端联调和 Element Plus 移除仍未执行。
+
+## 2026-10-17 LxInput 前后缀轨道复验
+
+- **修复**：前后缀容器及内部槽位改为明确的完整高度 flex 居中轨道，并将行高收敛为 `1`，避免输入框边框与前后缀内容出现上下错位。
+- **验证**：复合前后缀文档 E2E 1/1、`LxInput` 单测 13/13、目标 Prettier 和 `git diff --check` 通过；覆盖 sm、md、lg 与 390px 窄屏。
+- **Impeccable 取证**：组件样式 detector 为合法 JSON `[]`、stderr 为空、退出码 0；该静态结果只表示零规则命中，浏览器 E2E 的几何断言作为本次复验依据。
 
 ## 2026-10-17 G2 自动化门禁与 Critique 阻断记录
 

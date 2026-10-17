@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-17 DynamicForm/Form 文档信息层级复验（阶段性）
+
+- 修改入口：`docs/components/lxdynamicform.md`、`docs/components/lxform.md`、`docs/.vitepress/theme/custom.css`；最小配置前置，API 分组折叠，summary 具备 44px 触达和 2px 焦点环。
+- 验证：文档 Playwright **17/17**，VitePress 构建成功；两个 Markdown detector JSON 合法 `[]`、stderr 为空、退出码 `0`。
+- A **30/40**；B 因 `gpt-6-luna` 通道连续 HTTP 503 未完成独立浏览器证据，不能标正式 Critique 通过。P2 表格滚动提示、outline 和折叠粒度待后续复验。
+
 ## 2026-10-17 DynamicForm/Form Assessment B 宽度归因复验
 
 - 证据脚本：`.impeccable/critique/dynamicform-form-assessment-b-2026-10-17/browser-evidence.mjs`；重跑退出码 `0`，stderr 为空，Light/HUD、桌面/375px 结果已更新。
@@ -478,3 +484,5 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 2026-10-17 `LxPasswordInput`：单测 11/11、文档 E2E 9/9、类型检查和 Prettier 通过；A 32/40；B detector JSON `[]`、stderr 为空、退出码 0；1280px/375px 浏览器注入和无横向溢出证据已归档。`npx impeccable update` 因下载超时失败，未覆盖现有 4.6.0。下一批为 `LxMetricCard` 与 `LxSectionTitle`。
 
 2026-10-17 `LxMetricCard` + `LxSectionTitle`：单测 33/33、文档 E2E 4/4；detector 两目标均为 `[]`/空 stderr/0，四视图浏览器证据完成。独立 A 代理服务 503，按规则记为降级审查，不标完整 Critique；报告见 `.impeccable/critique/metric-section-assessment-2026-10-17.md`。
+
+2026-10-17 `LxInput` 前后缀轨道复验：前后缀容器及内部槽位使用完整高度 flex 居中轨道，sm/md/lg 与 390px 窄屏复合输入几何 E2E 1/1，`LxInput` 单测 13/13；样式 detector 为合法 `[]`、stderr 为空、退出码 0。`[]` 仅表示静态规则零命中，不能替代浏览器证据。
