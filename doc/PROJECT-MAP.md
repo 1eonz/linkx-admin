@@ -621,3 +621,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - **入口**：`linkx-fe/src/components/LxInput/index.vue` 与 `style.css`
 - **设计/文档**：`linkx-fe/docs/components/lxinput.md`、`linkx-fe/docs/ROADMAP.md`
 - **验证**：`other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts` 的复合前后缀几何用例；组件级 `--lx-input-track-height` 统一输入框及前后缀高度。
+## 2026-10-18 G2 SearchBar 交互契约更新
+
+- `linkx-fe/src/components/LxSearchBar/` 的文本 Escape 默认遵循控件退出语义；`escapeReset` 仅作为旧页面兼容开关。文档、Demo 和 Vue3 单测同步维护。
+- G2 SearchBar/StatusSwitch 的独立 A/B 证据位于 `linkx-fe/.impeccable/critique/g2-assessment-b-2026-10-17/` 与 `g2-searchbar-postfix-2026-10-17/`；静态 `[]` 需与 stderr、退出码和浏览器证据一起解释。
+- 组件库仍是 Vue3 宿主迁移的唯一展示来源；权限中心、文本/字段权限、页面引导和真实后端联调继续按计划后置。\n

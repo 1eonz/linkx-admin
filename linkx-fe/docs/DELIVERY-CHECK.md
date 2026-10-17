@@ -556,3 +556,8 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 2026-10-18 `LxDynamicForm`/`LxForm` 文档 P2 收口：文档 Playwright **20/20**，lx-ui typecheck、VitePress build、目标 Prettier 和差异检查通过；四个 detector 的 JSON/stderr/退出码为 `[]`/空/0。Light/HUD、1280/375、错误/禁用、减少动效和键盘浏览器证据已复验，清洁页面无横向溢出；overlay 造成的宽度扩展不计为页面缺陷。P2 首列 sticky、API 锚点、真实读屏器和 MutationObserver 性能仍开放。
 
 2026-10-18 `LxStatusSwitch` 无权限播报与适配器收口：组件单测 21/21、宿主适配器单测 2/2、文档 E2E 4/4；lx-ui typecheck/build、目标 Prettier 和差异检查通过。组件、文档和适配器 detector 的 JSON/stderr/退出码为 `[]`/空/0；浏览器证据覆盖无权限只读、确认取消、失败恢复、HUD、窄屏和减少动效。真实权限 API 与全库替换仍后置。
+## 2026-10-18 G2 LxSearchBar Escape 语义修复
+
+- 文本输入框 `Escape` 默认只退出当前控件，不再清空全部检索条件；新增 `escapeReset` 兼容开关，Demo、中文 API 和回归测试已同步。
+- SearchBar 及宿主适配单测 **13/13**；文档 E2E **5/5**；typecheck、构建、文档构建、目标格式和差异检查通过。
+- Assessment A 修后综合 **34/40**；Assessment B 的 detector JSON/stderr/退出码为 `[]`/空/`0`，Light/HUD × 1440/375 浏览器证据已归档。空数组不单独代表视觉通过。\n

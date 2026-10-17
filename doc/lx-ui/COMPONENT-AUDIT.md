@@ -696,3 +696,8 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 - **修复**：组件根节点新增 `--lx-input-track-height`，输入内框、prefix/suffix、prepend/append 及内部槽位统一读取同一轨道；窄屏统一为 44px，并同步 Element Plus 输入行高变量。
 - **证据**：类型检查和生产构建通过；复合前后缀 Playwright 用例新增 `sm/md/lg` 轨道令牌断言并保留 390px 窄屏覆盖。
 - **审查状态**：Assessment A **32/40**；B detector 为合法 `[]`/空 stderr/退出码 0，8 个 Light/HUD 桌面/窄屏视图注入成功。综合报告、截图和快照见 `linkx-fe/.impeccable/critique/lxinput-height-wave-2026-10-18/` 与 `.impeccable/critique/2026-10-17T19-42-24Z__linkx-fe-src-components-lxinput-index-vue.md`。移动文档壳层 `scrollWidth=630` 保留为待归因信号；本条不增加 UI-10 关闭数。
+## 2026-10-18 G2 LxSearchBar 当前版复核
+
+- **契约**：新增 `escapeReset`，默认关闭文本 Escape 全量重置；显式开启保留兼容行为，复合控件 Escape 仍由自身处理。
+- **证据**：单测与适配器 **13/13**，文档 E2E **5/5**；独立 A 修后综合 **34/40（Good）**。B 的源码/Demo detector 三件套均为合法 JSON `[]`、空 stderr、退出码 `0`，Light/HUD × 桌面/375px 浏览器视图已保存。
+- **结论**：G2 组件级交互收口；文档壳层 side-tab 作为 P3 观察登记，不归因于组件。宿主全量迁移、真实权限和后端联调仍开放。\n

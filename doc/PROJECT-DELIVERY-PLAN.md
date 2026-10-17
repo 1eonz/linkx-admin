@@ -1496,3 +1496,10 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **复验范围**：针对用户反馈的 `prefix/suffix` 与输入框上下边界不一致，使用 lx-ui 专用 Playwright 配置复跑 `Input 复合前后缀与输入框在各尺寸及窄屏下保持同高` 与 `Input 普通根节点与输入包装器保持同高` 两条几何用例。
 - **结果**：**2/2 通过**。`sm/md/lg` 的根节点、输入内框、`prefix/suffix` 内外槽位和 `prepend/append` 分别保持 `28/32/40px` 同高；390px 窄屏保持 `44px` 触控轨道；普通输入根节点与内框上下边界对齐。
 - **结论**：前一波高度轨道修复已覆盖本次反馈，不追加重复样式改动。测试运行产生的 `test-results` 与 Impeccable 临时文件继续按白名单排除，不纳入交付提交。
+## 2026-10-18 G2 / LxSearchBar Escape 语义修复与双路证据收口
+
+- **问题与修复**：文本输入框的 `Escape` 原先会清空全部查询条件并立即查询，容易把“退出当前控件”误操作成“重置筛选”。新增 `escapeReset`，默认关闭；旧页面可显式传 `escapeReset=true` 保留兼容行为。Select、日期和级联控件的 `Escape` 仍只关闭自身弹层。
+- **同步内容**：更新 LxSearchBar 类型、组件、中文 Demo、API 文档和 Vue3 适配回归；业务 API 请求风格保持 `.then().catch().finally()`。
+- **验证**：SearchBar 与适配器单测 **13/13**；文档 E2E 已有 **5/5** 证据；lx-ui typecheck/build/build:docs、目标 Prettier、ESLint 和 `git diff --check` 通过。此前独立 Assessment A **30/40**，修后综合报告 **34/40（Good）**；Assessment B 的 SearchBar/StatusSwitch 源码与 Demo detector 均记录 JSON `[]`、空 stderr、退出码 `0`，Light/HUD × 1440/375 浏览器证据已归档。
+- **边界**：组合文档壳层的 side-tab 命中归因于文档示例外壳，不作为组件缺陷；真实权限、宿主全量替换、人工读屏和后端联调仍未完成。`npx impeccable update` 本轮因 GitHub 下载连接超时未更新本地引擎，未覆盖已安装版本。
+- **下一步**：G2 组件证据收口后进入 UI-10 其余未关闭候选和宿主契约回归；完成 UI-10/UI-11 门槛后再分批替换 Vue3 Element Plus。权限中心、文本/字段权限和页面操作引导继续后置。\n

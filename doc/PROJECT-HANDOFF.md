@@ -2635,3 +2635,9 @@
 - **反馈**：用户指出 `prefix/suffix` 状态下输入框与前后缀高度不一致。
 - **复验**：使用 `playwright.lxui.config.ts` 运行 `lx-base-controls-docs.spec.ts` 中复合前后缀和普通根节点两条用例，结果 **2/2 通过**；覆盖 `sm/md/lg`、390px 窄屏、根节点、输入内框、前后缀内外槽位及 `prepend/append`。
 - **结论**：当前 `.lx-input` 统一高度轨道已生效，无需重复修改组件样式。后续继续按 UI-10 组件门禁推进，保留 API 链式调用、中文文档和临时产物白名单规则。
+## 2026-10-18 G2 / LxSearchBar Escape 语义修复交接
+
+- **实现**：`LxSearchBar` 新增 `escapeReset`，默认 `false`，文本输入按 Escape 不再重置整组条件；显式开启时保留旧行为。Demo 快捷键提示、中文 API 和单测同步更新。
+- **证据**：`lx-search-bar.test.ts` 与 `search-bar-adapter.test.ts` 共 **13/13**；SearchBar 文档 E2E **5/5**；lx-ui 类型检查、构建、文档构建、目标格式与差异检查通过。G2 Assessment A 修后综合 **34/40**；Assessment B 已保存 detector JSON、stderr、退出码及 Light/HUD、1440/375 证据。
+- **审查边界**：`[]` 仅表示静态 detector 零命中，正式结论依赖 A 评审、浏览器证据和回归测试。文档总览 `NewComponentsDemo.vue` 的 side-tab 命中属于文档壳层 P3 观察。`npx impeccable update` 因网络超时未更新。
+- **下一交接**：继续 UI-10 未关闭组件矩阵和宿主替换准备；保持 Promise 链请求、中文文档注释及白名单提交规则。不要把本轮 SearchBar 文件与 CodeSlot、临时 detector、test-results 共同提交。\n
