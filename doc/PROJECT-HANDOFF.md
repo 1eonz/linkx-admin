@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-17] LxInput 前后缀内容轨道高度修复
+
+- **问题与实现**：Element Plus 默认 wrapper 上下内边距使输入值、prefix、suffix 的可见子轨道比 28/32/40px 外框少 2px。`LxInput` 现在移除垂直内边距，并让输入值、prefix、suffix 使用完整控件高度；prepend/append、焦点内描边、左右内边距和 44px 窄屏触控规则保持不变。
+- **验证**：文档复合输入 Playwright **1/1**，sm/md/lg 和 390px 视口均通过；`LxInput` 单测 **13/13**；lx-ui 类型检查、目标 Prettier、`git diff --check` 通过。静态 detector 返回合法 `[]`、stderr 为空、退出码 0；根据规则，未把空数组单独当作视觉审查通过，浏览器几何断言作为本次回归证据。
+- **边界**：本次只修复组件级高度轨道，不增加 UI-10 关闭数，不代表全库 Impeccable Critique、Vue3 Element Plus 替换、权限或真实后端联调完成。下一波按组件门禁顺序继续。
+
 ## [2026-10-17] LxDynamicForm/LxForm 窄屏与错误焦点修复
 
 - **实现**：密码输入在窄屏或触屏下的真实输入外框统一为 `44px`；`LxForm` 的错误选择器只保留自身错误边框，避免与外层焦点环叠加；`LxDynamicForm` 保留错误选择器键盘焦点环，分别满足两个宿主的既有交互契约。

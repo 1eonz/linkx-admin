@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-17 LxInput 前后缀内容轨道高度修复
+
+- **问题与实现**：复合输入的外层 prepend/append 已经同高，但 Element Plus 默认上下内边距仍使输入值、prefix、suffix 子轨道比控件外框少 2px，造成前后缀与输入框视觉高度不一致。`LxInput` 现将垂直内边距收敛为 0，并让输入值及 prefix/suffix 填满 `--el-input-height`，保留左右内边距、边框内描边和窄屏 44px 触控规则。
+- **验证**：复合前后缀文档 Playwright **1/1**，覆盖 sm/md/lg 的输入值、prefix、suffix、prepend、append 同高及 390px 窄屏 44px；`LxInput` 单测 **13/13**；lx-ui `vue-tsc --noEmit`、目标 Prettier 和 `git diff --check` 通过。Impeccable detector 输出合法 `[]`、stderr 为空、退出码 0；该静态结果只记录规则零命中，不单独作为正式 Critique 通过依据。
+- **范围边界与下一步**：这是已完成 `LxInput` 的局部视觉回归，不增加 UI-10 严格矩阵计数，不改变 Vue3 Element Plus 替换、权限、真实后端联调或页面操作引导的冻结顺序；继续处理当前组件门禁队列。
+
 ## 2026-10-17 LxDynamicForm/LxForm 窄屏与错误焦点修复（进行中）
 
 - 修复动态表单窄屏密码输入外框未达到 44px 的缺陷；静态 `LxForm` 错误选择器与 `LxDynamicForm` 错误选择器分别维持已验证的焦点边界契约。

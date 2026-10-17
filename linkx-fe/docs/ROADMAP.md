@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-17 LxInput 前后缀内容轨道回归修复
+
+- Element Plus wrapper 的默认上下内边距使输入值、prefix、suffix 少 2px；现已统一填满 `--el-input-height`，复合输入在 sm/md/lg 及 390px 触屏视口中保持同高，左右内边距和 44px 触控规则不变。
+- 定向 Playwright **1/1**、`LxInput` 单测 **13/13**、lx-ui 类型检查和目标格式检查通过。detector 合法 `[]` 仅作为静态零命中证据，不替代浏览器和正式 Impeccable A/B；本次不增加 UI-10 关闭数。
+
 ## 2026-10-17 LxDynamicForm/LxForm 窄屏与错误焦点修复
 
 - 密码输入在窄屏/触屏下的输入外框统一为 44px；静态 `LxForm` 错误选择器只保留错误边框，动态表单继续保留键盘焦点环，避免跨宿主契约相互覆盖。

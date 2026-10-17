@@ -12,6 +12,7 @@
 .lx-input .el-input__wrapper {
   box-sizing: border-box;
   height: var(--el-input-height);
+  padding-block: 0;
   background-color: var(--lx-bg-card);
   border-radius: var(--lx-radius-md);
   box-shadow: 0 0 0 1px var(--lx-control-border) inset;
@@ -44,7 +45,18 @@
 
 /* 输入值在两种主题下都使用输入表面专属正文令牌。 */
 .lx-input .el-input__inner {
+  height: 100%;
   color: var(--lx-color-on-input);
+}
+
+/* 输入内容与 prefix/suffix 共用完整控件高度，避免 EP 默认上下内边距造成
+ * 图标槽位比输入框少 2px；焦点和边框仍由 wrapper 的内描边承载。 */
+.lx-input .el-input__prefix,
+.lx-input .el-input__suffix,
+.lx-input .el-input__prefix-inner,
+.lx-input .el-input__suffix-inner {
+  height: 100%;
+  min-height: 0;
 }
 
 /* hover：描边转主色 */

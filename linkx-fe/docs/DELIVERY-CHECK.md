@@ -1,5 +1,10 @@
 # lx-ui 交付核查
 
+## 2026-10-17 LxInput 前后缀内容轨道高度回归
+
+- 修复 Element Plus 默认上下内边距造成的 2px 高度差：输入值、prefix、suffix 现在与 wrapper、prepend、append 共用完整尺寸轨道；sm/md/lg 和 390px 窄屏继续满足组件尺寸与 44px 触控要求。
+- 复合前后缀 Playwright **1/1**、`LxInput` 单测 **13/13**；lx-ui 类型检查、目标 Prettier 和差异检查通过。detector 为合法 `[]`、stderr 为空、退出码 0，按规则仅记录静态零命中，不宣称正式 Critique 通过。
+
 ## 2026-10-17 LxDynamicForm/LxForm 窄屏与错误焦点修复
 
 - 密码输入窄屏/触屏输入外框统一 44px；静态 LxForm 错误选择器去除叠加焦点环，DynamicForm 保留键盘焦点环。

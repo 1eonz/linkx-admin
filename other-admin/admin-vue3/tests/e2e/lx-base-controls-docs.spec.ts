@@ -75,6 +75,8 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
     });
     expect(geometry.root.height, `${option} 档复合输入根节点高度`).toBe(expectedHeight);
     expect(geometry.wrapper.height).toBe(expectedHeight);
+    expect(geometry.prefix.height, `${option} 档 prefix 高度`).toBe(expectedHeight);
+    expect(geometry.suffix.height, `${option} 档 suffix 高度`).toBe(expectedHeight);
     for (const addon of ['prepend', 'append'] as const) {
       expect(geometry[addon].height, `${option} 档 ${addon} 高度`).toBe(expectedHeight);
     }
