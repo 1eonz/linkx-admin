@@ -2468,3 +2468,9 @@
 - **验证**：`lx-base-controls-docs.spec.ts` 的复合前后缀用例 **1/1**；覆盖 sm、md、lg、390px 触屏高度及新增上下边界对齐断言。`pnpm typecheck`、`git diff --check` 通过。
 - **Impeccable 证据**：`detect.mjs --json linkx-fe/src/components/LxInput/index.vue` 退出码 `0`，JSON 为合法 `[]`，stderr 为空；该静态结果只表示零规则命中，浏览器几何回归作为本次修复依据，未宣称新的正式双路 Critique 已完成。
 - **后续**：保持 Vue3 Element Plus 替换、真实后端联调及页面操作引导的既定后置安排；继续按组件门禁推进下一项。
+
+## 2026-10-18 LxInput 前后缀槽位高度补强
+
+- **改动**：`LxInput` 的 prefix/suffix 容器和内部槽位补充 `border-box`、完整高度 flex 轨道、零上下内边距和显式 `inline-flex`，使图标前后缀在 sm、md、lg 及窄屏状态与输入框外框保持同高。
+- **验证**：复合前后缀文档 E2E **1/1**；新增 390px 窄屏 prefix、prefix-inner、suffix、suffix-inner 均为 44px 的断言；基础控件套件本轮 10/12 通过，另有 2 项既有清空按钮角色查询失败，失败与本次高度规则无关，已单独记录。
+- **质量门禁**：lx-ui `pnpm typecheck`、`pnpm build`、目标 Prettier 和 `git diff --check` 通过；`detect.mjs --json` 输出合法 JSON `[]`、stderr 为空、退出码 `0`，仅表示静态规则零命中，不能替代浏览器证据或正式 Impeccable A/B。

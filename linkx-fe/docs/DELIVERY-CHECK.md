@@ -494,3 +494,5 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 2026-10-18 `LxInput` 前后置复合块对齐修复：`prepend/append` 清除默认上下内边距并使用完整高度 flex 居中轨道，补充 sm/md/lg 上边界对齐断言；定向 E2E **1/1**、lx-ui 类型检查和差异检查通过。detector JSON `[]`、stderr 为空、退出码 `0`，仅作为静态证据，不能替代浏览器验收与正式 Impeccable A/B。
 
 2026-10-17 `LxInput` 前后缀轨道复验：前后缀容器及内部槽位使用完整高度 flex 居中轨道，sm/md/lg 与 390px 窄屏复合输入几何 E2E 1/1，`LxInput` 单测 13/13；样式 detector 为合法 `[]`、stderr 为空、退出码 0。`[]` 仅表示静态规则零命中，不能替代浏览器证据。
+
+2026-10-18 `LxInput` 前后缀高度补强：prefix/suffix 容器与内部槽位显式使用 `border-box` 和完整高度 flex 轨道；390px 窄屏新增 4 个槽位 44px 高度断言。复合前后缀 E2E 1/1、lx-ui typecheck/build、目标 Prettier 与差异检查通过；本轮基础控件套件另有 2 项既有清空按钮角色查询失败，未归因于本次样式改动。detector `[]` 仍只表示静态零命中。
