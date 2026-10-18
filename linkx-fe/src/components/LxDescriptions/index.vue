@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import LxCodeSlot from '../LxCodeSlot/index.vue'
 import LxStatusDot from '../LxStatusDot/index.vue'
 import { isFieldMasked, maskValue } from '../../permissions'
@@ -23,6 +23,7 @@ const resolvedColumns = computed(() =>
 const resolvedSize = computed(() =>
   resolvedLayout.value === 'compact' ? 'small' : props.size,
 )
+const expandedKeys = ref(new Set<string>())
 
 const rootStyle = computed(() => ({
   '--lx-descriptions-columns': resolvedColumns.value,
@@ -75,6 +76,22 @@ function displayValue(item: LxDescriptionItem): string {
     typeof item.mask === 'string' ? item.mask : '***',
   )
 }
+
+function isExpanded(item: LxDescriptionItem): boolean {
+  return expandedKeys.value.has(item.key)
+}
+
+function toggleExpanded(key: string) {
+  const next = new Set(expandedKeys.value)
+  if (next.has(key)) next.delete(key)
+  else next.add(key)
+  expandedKeys.value = next
+}
+
+function expansionDescription(item: LxDescriptionItem): string | undefined {
+  if (!titleOf(item)) return undefined
+  return isExpanded(item) ? '点击收起完整内容' : '点击展开完整内容'
+}
 </script>
 
 <template>
@@ -99,14 +116,31 @@ function displayValue(item: LxDescriptionItem): string {
       <dt class="lx-descriptions__label">{{ item.label }}</dt>
       <dd class="lx-descriptions__value">
         <slot :name="`item-${item.key}`" :item="item" :value="item.value">
+          <button
+            v-if="item.statusDot && !isMasked(item) && titleOf(item)"
+            type="button"
+            class="lx-descriptions__status-toggle"
+            :class="{ 'is-expanded': isExpanded(item) }"
+            :aria-expanded="isExpanded(item)"
+            :aria-label="`${item.label}：${displayValue(item)}`"
+            :title="displayValue(item)"
+            :aria-description="expansionDescription(item)"
+            @click="toggleExpanded(item.key)"
+          >
+            <LxStatusDot
+              :status="item.statusDot"
+              :size="6"
+              :status-desc="displayValue(item)"
+              :tabindex="-1"
+              show-text
+            />
+          </button>
           <LxStatusDot
-            v-if="item.statusDot && !isMasked(item)"
-            :class="{ 'is-long-value': Boolean(titleOf(item)) }"
+            v-else-if="item.statusDot && !isMasked(item)"
             :status="item.statusDot"
             :size="6"
             :status-desc="displayValue(item)"
             :title="displayValue(item)"
-            :tabindex="titleOf(item) ? 0 : undefined"
             show-text
           />
           <LxCodeSlot
@@ -118,16 +152,23 @@ function displayValue(item: LxDescriptionItem): string {
           >
             {{ displayValue(item) }}
           </LxCodeSlot>
-          <span
-            v-else
+          <button
+            v-else-if="titleOf(item)"
+            type="button"
             class="lx-descriptions__value-text"
-            :class="{ 'is-long-value': Boolean(titleOf(item)) }"
+            :class="{
+              'is-long-value': Boolean(titleOf(item)),
+              'is-expanded': isExpanded(item),
+            }"
             :title="titleOf(item)"
-            :aria-label="
-              titleOf(item) ? `${item.label}：${displayValue(item)}` : undefined
-            "
-            :tabindex="titleOf(item) ? 0 : undefined"
+            :aria-label="`${item.label}：${displayValue(item)}`"
+            :aria-description="expansionDescription(item)"
+            :aria-expanded="isExpanded(item)"
+            @click="toggleExpanded(item.key)"
           >
+            {{ displayValue(item) }}
+          </button>
+          <span v-else class="lx-descriptions__value-text">
             {{ displayValue(item) }}
           </span>
         </slot>
@@ -193,9 +234,23 @@ function displayValue(item: LxDescriptionItem): string {
 }
 
 .lx-descriptions__value-text.is-long-value {
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: end;
+  cursor: pointer;
+}
+
+.lx-descriptions__value-text.is-long-value {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-decoration: underline dotted
+    color-mix(in srgb, currentColor 45%, transparent);
+  text-underline-offset: 3px;
 }
 
 .lx-descriptions__value-text.is-long-value:focus-visible {
@@ -209,6 +264,33 @@ function displayValue(item: LxDescriptionItem): string {
   overflow-wrap: anywhere;
   text-overflow: clip;
   white-space: normal;
+}
+
+.lx-descriptions__value-text.is-long-value.is-expanded {
+  overflow: visible;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.lx-descriptions__status-toggle {
+  display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: end;
+  cursor: pointer;
+}
+
+.lx-descriptions__status-toggle:focus-visible {
+  border-radius: var(--lx-radius-sm);
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 2px;
 }
 
 /* 内嵌展示件沿用值列层级，避免子组件的正文令牌冲淡详情值。 */
@@ -227,6 +309,20 @@ function displayValue(item: LxDescriptionItem): string {
   outline-offset: 2px;
 }
 
+.lx-descriptions__status-toggle :deep(.lx-status-dot__text) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lx-descriptions__status-toggle.is-expanded :deep(.lx-status-dot__text) {
+  overflow: visible;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
+}
+
 .lx-descriptions__value
   :deep(.lx-status-dot.is-long-value:focus .lx-status-dot__text) {
   max-width: 100%;
@@ -234,6 +330,12 @@ function displayValue(item: LxDescriptionItem): string {
   overflow-wrap: anywhere;
   text-overflow: clip;
   white-space: normal;
+}
+
+.lx-descriptions__value :deep(.lx-status-dot.is-long-value) {
+  text-decoration: underline dotted
+    color-mix(in srgb, currentColor 45%, transparent);
+  text-underline-offset: 3px;
 }
 
 .lx-descriptions__value :deep(.lx-status-dot:focus-visible) {
@@ -298,6 +400,14 @@ function displayValue(item: LxDescriptionItem): string {
     overflow-wrap: anywhere;
     text-overflow: clip;
     white-space: normal;
+    text-decoration: none;
+  }
+
+  .lx-descriptions__status-toggle :deep(.lx-status-dot__text) {
+    overflow: visible;
+    overflow-wrap: anywhere;
+    text-overflow: clip;
+    white-space: normal;
   }
 
   .lx-descriptions__value :deep(.lx-status-dot__text) {
@@ -306,6 +416,10 @@ function displayValue(item: LxDescriptionItem): string {
     overflow-wrap: anywhere;
     white-space: normal;
     text-overflow: clip;
+  }
+
+  .lx-descriptions__value :deep(.lx-status-dot.is-long-value) {
+    text-decoration: none;
   }
 
   .lx-descriptions__value

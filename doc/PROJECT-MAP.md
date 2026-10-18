@@ -627,6 +627,13 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - **入口**：`linkx-fe/src/components/LxInput/style.css`
 - **设计/文档**：`linkx-fe/src/tokens/variables.css`、`linkx-fe/docs/components/lxinput.md`
 - **行为**：sm/md/lg 使用 lx-ui 控件高度令牌，窄屏统一使用 44px 触控轨道；prefix/suffix 与 prepend/append 共用轨道。
+
+## 2026-10-19 LxDescriptions 长值交互
+
+- **入口**：`linkx-fe/src/components/LxDescriptions/index.vue`
+- **设计/文档**：`linkx-fe/docs/components/lxdescriptions.md`
+- **行为**：长值和长状态提供原生按钮展开/收起；短值、脱敏值和自定义插槽不增加无意义的键盘停靠位。
+- **验证**：`other-admin/admin-vue3/tests/unit/lx-descriptions.test.ts`、`tests/e2e/lx-descriptions-docs.spec.ts`；正式双路 Critique 仍待新增证据。
 ## 2026-10-18 G2 SearchBar 交互契约更新
 
 - `linkx-fe/src/components/LxSearchBar/` 的文本 Escape 默认遵循控件退出语义；`escapeReset` 仅作为旧页面兼容开关。文档、Demo 和 Vue3 单测同步维护。

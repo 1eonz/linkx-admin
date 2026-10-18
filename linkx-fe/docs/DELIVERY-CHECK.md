@@ -561,6 +561,12 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 
 - `sm/md/lg` 轨道直接使用 lx-ui 控件高度令牌，触屏覆盖为 44px；输入框、prefix/suffix 与 prepend/append 保持同高。
 - 复合前后缀 E2E **1/1**、LxInput 单测 **13/13**、lx-ui typecheck 和目标格式检查通过。detector 为合法 `[]`、空 stderr、退出码 `0`，仅作静态证据。
+
+## 2026-10-19 LxDescriptions 长值展开交互
+
+- 长普通值和长状态使用按钮切换完整内容，支持键盘和触屏；短状态、脱敏值和自定义插槽保持原行为。
+- 单测 **10/10**、文档 E2E **3/3**、typecheck、目标 Prettier 和差异检查通过；detector JSON/stderr/退出码为合法 `[]`/空/`0`，不单独代表视觉审查通过。
+- 新一轮独立 A/B、浏览器多主题证据和综合 snapshot/trend待补。
 ## 2026-10-18 G2 LxSearchBar Escape 语义修复
 
 - 文本输入框 `Escape` 默认只退出当前控件，不再清空全部检索条件；新增 `escapeReset` 兼容开关，Demo、中文 API 和回归测试已同步。

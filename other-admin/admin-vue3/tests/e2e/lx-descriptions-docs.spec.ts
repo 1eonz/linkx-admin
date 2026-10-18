@@ -82,8 +82,13 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
       .locator('.lx-descriptions__item')
       .filter({ hasText: '业务备注' })
       .locator('.lx-descriptions__value-text');
+    await expect(remarks).toHaveRole('button');
     await expect(remarks).toHaveAttribute('title', /跨网段加密调度二级权限/);
     await expect(remarks).toHaveAttribute('aria-label', /业务备注：/);
+    await expect(remarks).toHaveAttribute('aria-expanded', 'false');
+    await remarks.click();
+    await expect(remarks).toHaveAttribute('aria-expanded', 'true');
+    await expect(remarks).toHaveAttribute('aria-description', '点击收起完整内容');
   });
 
   test('桌面双列、375px 单列和 480px 抽屉都不产生页面横向溢出', async ({ page }) => {
@@ -102,19 +107,20 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     await expect(page.locator('.lx-descriptions--grid')).toBeVisible();
 
     const statusDescription = '在线（在岗备勤），当前负责跨辖区视频联动与加密调度';
-    const statusDot = descriptions
+    const statusToggle = descriptions
       .locator('.lx-descriptions__item')
       .filter({ hasText: '运行状态' })
-      .locator('.lx-status-dot');
-    await expect(statusDot).toHaveAttribute('tabindex', '0');
-    await expect(statusDot).toHaveAttribute('title', statusDescription);
-    await expect(statusDot).toHaveAccessibleName(statusDescription);
-    expect(await statusDot.evaluate((element) => getComputedStyle(element).overflow)).toBe('visible');
-    await statusDot.focus();
-    await expect(statusDot).toBeFocused();
-    await expect(statusDot.locator('.lx-status-dot__text')).toHaveCSS('white-space', 'normal');
-    await expect(statusDot.locator('.lx-status-dot__text')).toHaveCSS('overflow', 'visible');
-    const focusedStatusMetrics = await statusDot.evaluate((element) => {
+      .locator('.lx-descriptions__status-toggle');
+    await expect(statusToggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(statusToggle).toHaveAttribute('title', statusDescription);
+    await expect(statusToggle).toHaveAccessibleName(`运行状态：${statusDescription}`);
+    await expect(statusToggle).toHaveAttribute('aria-description', '点击展开完整内容');
+    await statusToggle.focus();
+    await expect(statusToggle).toBeFocused();
+    await statusToggle.click();
+    await expect(statusToggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(statusToggle).toHaveAttribute('aria-description', '点击收起完整内容');
+    const focusedStatusMetrics = await statusToggle.evaluate((element) => {
       const text = element.querySelector<HTMLElement>('.lx-status-dot__text');
       if (!text) throw new Error('长状态文本节点未渲染');
       return {

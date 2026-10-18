@@ -1509,6 +1509,12 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **改动**：`LxInput` 的 `sm/md/lg` 高度轨道直接绑定 lx-ui 的 `--lx-control-height-sm`、`--lx-control-height`、`--lx-control-height-lg`，不再让前后缀高度间接依赖 Element Plus 主题变量；窄屏仍统一覆盖为 44px。
 - **验证**：复合前后缀文档 E2E **1/1**、LxInput 单测 **13/13**、lx-ui `typecheck`、目标 Prettier 和 `git diff --check` 通过；detector JSON 为合法 `[]`、stderr 为空、退出码 `0`。
 - **边界**：`[]` 仅表示静态规则零命中，几何 E2E 才是本次修复依据；本波不改变 props、事件、插槽或宿主迁移范围。
+
+## 2026-10-19 LxDescriptions 长值展开交互
+
+- **实现**：长普通值改为可访问展开/收起按钮；长状态使用独立按钮包裹状态点，触屏不再依赖 title 或悬停；短状态和脱敏、自定义插槽契约保持不变。
+- **验证**：LxDescriptions 单测 **10/10**、文档 E2E **3/3**、lx-ui typecheck、目标 Prettier 和差异检查通过；detector JSON 为合法 `[]`、stderr 为空、退出码 `0`。
+- **审查状态**：本轮为 P1 行为修复和静态/浏览器回归，新的独立 Assessment A/B 与综合 snapshot/trend 尚未收口，不能将 `[]` 视为正式 Critique 通过。
 ## 2026-10-18 LxCodeSlot 复制中反馈 P1 收口
 
 - **实现**：复制进行中按钮显示 `LxIcon loading`、`title="正在复制"` 和 `aria-busy="true"`，同时禁用重复点击；复制完成后恢复复制图标和原提示。保留既有成功/失败事件与 Promise 链边界。

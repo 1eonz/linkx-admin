@@ -122,7 +122,7 @@ describe('LxDescriptions', () => {
     wrapper.unmount();
   });
 
-  it('makes long values discoverable to keyboard and assistive technology', () => {
+  it('makes long values discoverable to keyboard and assistive technology', async () => {
     const wrapper = mount(LxDescriptions, {
       props: {
         items: [
@@ -136,12 +136,17 @@ describe('LxDescriptions', () => {
     });
 
     const value = wrapper.get('.lx-descriptions__value-text');
-    expect(value.attributes('tabindex')).toBe('0');
+    expect(value.element.tagName).toBe('BUTTON');
     expect(value.attributes('aria-label')).toBe('所属组织：市局指挥中心 / 联合情报研判战队以及跨网段联合调度组');
+    expect(value.attributes('aria-expanded')).toBe('false');
+    expect(value.attributes('aria-description')).toBe('点击展开完整内容');
+    await value.trigger('click');
+    expect(value.attributes('aria-expanded')).toBe('true');
+    expect(value.attributes('aria-description')).toBe('点击收起完整内容');
     wrapper.unmount();
   });
 
-  it('makes long status descriptions keyboard accessible without clipping the status indicator', () => {
+  it('makes long status descriptions keyboard accessible without clipping the status indicator', async () => {
     const statusDescription = '在线（在岗备勤），当前负责跨辖区视频联动与加密调度';
     const wrapper = mount(LxDescriptions, {
       props: {
@@ -156,11 +161,15 @@ describe('LxDescriptions', () => {
       },
     });
 
-    const status = wrapper.get('.lx-status-dot');
-    expect(status.attributes('tabindex')).toBe('0');
-    expect(status.attributes('aria-label')).toBe(statusDescription);
-    expect(status.attributes('title')).toBe(statusDescription);
-    expect(status.classes()).toContain('is-long-value');
+    const toggle = wrapper.get('.lx-descriptions__status-toggle');
+    expect(toggle.element.tagName).toBe('BUTTON');
+    expect(toggle.attributes('aria-expanded')).toBe('false');
+    expect(toggle.attributes('aria-label')).toBe(`运行状态：${statusDescription}`);
+    expect(toggle.attributes('aria-description')).toBe('点击展开完整内容');
+    expect(toggle.get('.lx-status-dot').attributes('tabindex')).toBe('-1');
+    await toggle.trigger('click');
+    expect(toggle.attributes('aria-expanded')).toBe('true');
+    expect(toggle.attributes('aria-description')).toBe('点击收起完整内容');
     wrapper.unmount();
   });
 

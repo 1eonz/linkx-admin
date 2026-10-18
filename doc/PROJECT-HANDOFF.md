@@ -2653,3 +2653,9 @@
 - 将 `sm/md/lg` 的统一高度轨道绑定到 lx-ui 控件高度令牌，降低 Element Plus 主题变量覆盖导致输入框与 prefix/suffix、prepend/append 高度漂移的风险。
 - 复合前后缀 E2E **1/1**、LxInput 单测 **13/13**、lx-ui 类型检查通过；Impeccable detector 为合法 `[]`、空 stderr、退出码 `0`，未将空数组单独当作正式视觉通过。
 - 继续沿用中文文档、Promise 链 API 风格和白名单提交；权限、真实后端联调、Vue3 Element Plus 分批替换仍按总计划后置。
+
+## 2026-10-19 LxDescriptions 长值展开交互
+
+- 长普通值使用原生按钮切换展开/收起，长状态使用按钮包裹 `LxStatusDot`；状态点内部退出 Tab 顺序，保留标签和值的完整可访问名称。
+- 单测 **10/10**、文档 E2E **3/3**、lx-ui typecheck、目标格式检查通过；detector 合法 `[]`、空 stderr、退出码 `0`，仅代表静态零命中。
+- 新独立 Impeccable A/B、综合报告和 snapshot/trend 待补；后续复验必须覆盖 Light/HUD、窄屏、减少动效和展开前后状态。
