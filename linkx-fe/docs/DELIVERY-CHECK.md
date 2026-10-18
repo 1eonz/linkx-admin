@@ -556,13 +556,18 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 2026-10-18 `LxDynamicForm`/`LxForm` 文档 P2 收口：文档 Playwright **20/20**，lx-ui typecheck、VitePress build、目标 Prettier 和差异检查通过；四个 detector 的 JSON/stderr/退出码为 `[]`/空/0。Light/HUD、1280/375、错误/禁用、减少动效和键盘浏览器证据已复验，清洁页面无横向溢出；overlay 造成的宽度扩展不计为页面缺陷。P2 首列 sticky、API 锚点、真实读屏器和 MutationObserver 性能仍开放。
 
 2026-10-18 `LxStatusSwitch` 无权限播报与适配器收口：组件单测 21/21、宿主适配器单测 2/2、文档 E2E 4/4；lx-ui typecheck/build、目标 Prettier 和差异检查通过。组件、文档和适配器 detector 的 JSON/stderr/退出码为 `[]`/空/0；浏览器证据覆盖无权限只读、确认取消、失败恢复、HUD、窄屏和减少动效。真实权限 API 与全库替换仍后置。
+
+## 2026-10-19 LxInput 前后缀高度令牌
+
+- `sm/md/lg` 轨道直接使用 lx-ui 控件高度令牌，触屏覆盖为 44px；输入框、prefix/suffix 与 prepend/append 保持同高。
+- 复合前后缀 E2E **1/1**、LxInput 单测 **13/13**、lx-ui typecheck 和目标格式检查通过。detector 为合法 `[]`、空 stderr、退出码 `0`，仅作静态证据。
 ## 2026-10-18 G2 LxSearchBar Escape 语义修复
 
 - 文本输入框 `Escape` 默认只退出当前控件，不再清空全部检索条件；新增 `escapeReset` 兼容开关，Demo、中文 API 和回归测试已同步。
 - SearchBar 及宿主适配单测 **13/13**；文档 E2E **5/5**；typecheck、构建、文档构建、目标格式和差异检查通过。
-- Assessment A 修后综合 **34/40**；Assessment B 的 detector JSON/stderr/退出码为 `[]`/空/`0`，Light/HUD × 1440/375 浏览器证据已归档。空数组不单独代表视觉通过。\n
+- Assessment A 修后综合 **34/40**；Assessment B 的 detector JSON/stderr/退出码为 `[]`/空/`0`，Light/HUD × 1440/375 浏览器证据已归档。空数组不单独代表视觉通过。
 ## 2026-10-18 LxCodeSlot 复制中反馈
 
 - 复制进行中显示加载图标和中文忙态标题，设置 `aria-busy` 并禁用重复提交；原有成功/失败提示保持不变。
 - lx-ui 专用 Playwright **1/1**、typecheck、目标 Prettier 和差异检查通过。必须使用 `playwright.lxui.config.ts`，默认 Vue3 配置会打开登录页。
-- 真实剪贴板权限、读屏器和宿主组合仍未完成；静态 detector `[]` 不单独作为视觉审查结论。\n
+- 真实剪贴板权限、读屏器和宿主组合仍未完成；静态 detector `[]` 不单独作为视觉审查结论。

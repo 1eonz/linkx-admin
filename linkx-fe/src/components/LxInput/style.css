@@ -17,6 +17,20 @@
   align-items: stretch;
 }
 
+/* LxInput 以自身工程令牌作为高度唯一来源，避免主题覆盖 EP 变量后
+ * 输入内容、prefix/suffix 与 prepend/append 重新出现高度漂移。 */
+.lx-input--sm {
+  --lx-input-track-height: var(--lx-control-height-sm);
+}
+
+.lx-input--md {
+  --lx-input-track-height: var(--lx-control-height);
+}
+
+.lx-input--lg {
+  --lx-input-track-height: var(--lx-control-height-lg);
+}
+
 /* 基础几何：圆角 + 1px 控件描边（--lx-control-border 专属控件态档） */
 .lx-input .el-input__wrapper {
   box-sizing: border-box;
