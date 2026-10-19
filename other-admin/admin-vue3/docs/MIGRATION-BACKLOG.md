@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 Sidebar 菜单输入迁移
+
+- [x] 侧栏菜单搜索、全部菜单筛选改用 `LxInput`，保留 `size="sm"`、清空、前缀图标和菜单过滤行为；类型/格式与 Mock 全菜单 **10/10** 通过。
+- [ ] 虚拟用户表单暂不迁移：`VirtualUserForm` 的文本字段当前声明为 number，直接接入 `LxInput` 会产生真实类型错误；需先确认 API 字段类型或建立明确适配转换。
+
 ## 2026-10-20 SearchBar 默认输入迁移
 
 - [x] `src/components/SearchBar/index.vue` 默认 `el-input` 改用 `LxInput`，保留受控值、清空、回车和前缀插槽契约。

@@ -1,5 +1,10 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-20 Sidebar 菜单输入迁移
+
+- 侧栏两个菜单输入已改用 `LxInput`，保留 `size="sm"`、clearable、prefix、回车/搜索状态和目录筛选契约。
+- 虚拟用户表单的普通、密码和 textarea 输入暂保留 `el-input`：当前接口类型把文本字段声明为 number，与 `LxInput` 字符串 `v-model` 契约不一致，待类型来源确认后再迁移。
+
 ## 2026-10-20 SearchBar 默认输入迁移
 
 - 共享 `SearchBar` 的默认关键字输入改用 `LxInput`，保留 `clearable`、回车、前缀图标和 `update:searchKey` 事件；自定义 filters 插槽不受影响。

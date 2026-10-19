@@ -3098,3 +3098,9 @@
 - **验证**：目标 Prettier/ESLint、`vue-tsc --noEmit`、SearchBar 适配器单测 **2/2**、隔离 Mock 全菜单 Playwright **10/10** 通过。
 - **边界**：未改变页面搜索 API、权限或请求链；页面级密码/textarea/复合前后缀输入仍需按旧 props、校验和错误恢复逐项迁移。Element Plus 删除、正式 Impeccable 和真实后端门禁仍未完成。
 - **下一步**：继续选择低风险页面输入场景，迁移前补齐 Demo/Mock/表单上下文证据并保持中文文档和链式 API 风格。
+# 2026-10-20 Sidebar 菜单输入迁移交接
+
+- **实现**：`layout/components/Sidebar/index.vue` 的菜单搜索和全部菜单筛选由 `el-input` 改用 `LxInput`；旧 `size="small"` 映射为 lx-ui `size="sm"`，前缀图标、清空和过滤状态保持。
+- **验证**：目标 Prettier/ESLint、`vue-tsc --noEmit` 和隔离 Mock Playwright **10/10** 通过。
+- **阻塞**：尝试迁移 `policeExtend/virtualUser/EditVirtualUser.vue` 时，类型检查确认 `VirtualUserForm` 的 userName/contactNumber/appId/appSecret/remark 被声明为 number，而 `LxInput` 明确要求字符串值；已撤回该部分，未使用 `as any` 或强制断言掩盖问题。
+- **下一步**：继续迁移字符串类型明确的页面输入；虚拟用户待 API/类型契约核实后再处理，Element Plus 删除门禁、权限和真实后端仍未完成。

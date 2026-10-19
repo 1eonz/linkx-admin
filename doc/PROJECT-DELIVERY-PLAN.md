@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 Sidebar 菜单输入迁移
+
+- **实现**：侧栏菜单搜索和“全部菜单”筛选输入由 `el-input` 改用 `LxInput`；首个输入使用 `size="sm"` 映射旧小尺寸，保留清空、前缀图标、菜单搜索结果和目录筛选行为。
+- **验证**：目标 Prettier/ESLint、Vue3 `vue-tsc --noEmit` 和隔离 Mock 全菜单 Playwright **10/10** 通过。
+- **阻塞记录**：虚拟用户表单暂未迁移；其现有 `VirtualUserForm` 将文本输入绑定到 number 类型，`LxInput` 的字符串契约会触发类型错误，不能用断言掩盖，待确认 API 类型后再处理。
+- **下一入口**：继续选择字符串契约明确的页面输入，密码/textarea/数字字段分别核对后再替换。
+
 ## 2026-10-20 SearchBar 默认输入迁移
 
 - **实现**：共享 `SearchBar` 的默认关键字输入由 `el-input` 改用 `LxInput`；保留受控 `searchKey`、清空、回车搜索、前缀图标和事件转发。
