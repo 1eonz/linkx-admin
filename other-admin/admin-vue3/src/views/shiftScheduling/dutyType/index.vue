@@ -10,6 +10,7 @@
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import {
@@ -224,7 +225,7 @@ function handleDialogOpen(): void {
         style="width: 400px; margin-left: 20px"
       >
         <el-form-item label="排班类型名称" prop="name">
-          <el-input v-model="temp.name" placeholder="请输入排班类型名称" maxlength="100" />
+          <LxInput v-model="temp.name as string" placeholder="请输入排班类型名称" :maxlength="100" />
         </el-form-item>
       </el-form>
       <template #footer>
