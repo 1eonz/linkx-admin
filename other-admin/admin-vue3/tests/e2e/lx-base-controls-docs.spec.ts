@@ -311,6 +311,7 @@ test('Input 前后缀、密码和透传场景保留可见外边框', async ({ pa
     );
     await expect(wrapper).toHaveCSS('border-top-width', '1px');
     await expect(wrapper).toHaveCSS('border-top-style', 'solid');
+    await expect(wrapper).not.toHaveCSS('border-top-color', 'rgba(0, 0, 0, 0)');
   }
 
   const compound = fields[0].locator(
@@ -318,6 +319,7 @@ test('Input 前后缀、密码和透传场景保留可见外边框', async ({ pa
   );
   await expect(compound).toHaveCSS('border-top-width', '1px');
   await expect(compound).toHaveCSS('border-top-style', 'solid');
+  await expect(compound).not.toHaveCSS('border-top-color', 'rgba(0, 0, 0, 0)');
 });
 
 test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用', async ({ page }) => {
