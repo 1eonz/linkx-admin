@@ -1,5 +1,14 @@
 # LinkX 项目地图
 
+## 2026-10-20 代码审查状态索引
+
+- `linkx-fe/src/index.ts`：通过 `componentRegistry` 按公开名称注册 lx-ui 组件，宿主安装回归见 `other-admin/admin-vue3/tests/unit/lx-ui-install.test.ts`。
+- `linkx-fe/src/components/LxSearchBar`：级联字段保留数字、混合值和对象路径，回归见 `lx-search-bar.test.ts`。
+- `linkx-fe/src/components/LxSelectTree`：懒加载失败通过 `load-error` 和重试入口恢复，回归见 `lx-select-tree.test.ts`。
+- `other-admin/admin-vue3/src/composables/useFetch.ts` / `useTable.ts`：通过 signal 与请求序号丢弃过期结果，回归见 `use-fetch.test.ts`。
+
+以上为当前代码证据索引；业务权限、真实 API、页面组合和 Element Plus 删除仍需按迁移台账逐页验证。
+
 ## 2026-10-20 LxMetricCard 当前入口变更
 
 - 组件入口：`linkx-fe/src/components/LxMetricCard/index.vue`；中文 API：`linkx-fe/docs/components/lxmetriccard.md`。

@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 代码审查历史问题状态复核
+
+- **复核范围**：对 `CODE-REVIEW.md` 中 Major #1/#2/#3 与异步基础设施 #5/#6 进行当前源码和回归测试核对。
+- **当前结果**：全局组件显式注册、SearchBar 级联值保留、SelectTree 懒加载失败恢复、useFetch/useTable 请求序号与 AbortSignal 均已有实现；对应单测合计 **24/24**（安装 1、SearchBar 11、SelectTree 3、useFetch 9）。
+- **计划影响**：这些历史 Major 不再重复排期；其余提交锁、License 失败保留、远程搜索触底、宿主 AuthImg、类型治理和页面级权限/后端联调仍按原台账保持开放或阻塞。Vue3 Element Plus 替换仍等待 lx-ui 全库门禁。
+- **边界**：本波只同步审计状态和可执行证据，没有把测试通过扩大解释为正式 Impeccable A/B、真实后端联调或权限验收。
+
 ## 2026-10-20 LxMetricCard 只读语义与标题运行时收口
 
 - **问题与实现**：纯展示指标卡移除桌面 hover 抬升，避免制造可点击暗示；长趋势说明最多显示两行，并通过 `title`/`aria-label` 保留完整文本；指标值保留 `title` 提示。同步修复文档站直接编译路径中 `headingLevel` 未从 `props` 读取的问题，避免标题节点退化为注释而导致 Demo 内容不可见。

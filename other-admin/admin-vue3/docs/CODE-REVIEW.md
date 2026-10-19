@@ -10,6 +10,17 @@
 
 ## 1. 总体结论
 
+### 2026-10-20 后续复核说明
+
+本报告中的部分 Major 项目是 2026-09-28 的历史快照，不能直接作为当前未修复状态。当前代码与回归测试已确认：
+
+- #1 全局组件注册已改为 `componentRegistry` 显式名称注册，`lx-ui-install.test.ts` 验证全部公开组件可注册且不存在空注册名。
+- #2 `LxSearchBar` 级联字段已保留数字、混合值和记录对象，`lx-search-bar.test.ts` 覆盖回显与更新回传。
+- #3 `LxSelectTree` 已有懒加载失败记录、`load-error` 事件和重试入口，当前实现不再是无 catch 的永久 loading 路径。
+- #5/#6 已接入 `fetchFnWithSignal`、请求序号和过期结果丢弃，`use-fetch.test.ts` 覆盖迟到响应、取消和 AbortSignal。
+
+本轮复核命令为 `pnpm exec vitest run tests/unit/lx-ui-install.test.ts tests/unit/lx-search-bar.test.ts tests/unit/lx-select-tree.test.ts`，结果 **15/15**；`use-fetch.test.ts` 结果 **9/9**。以上证据只更新历史问题状态，不代表其余条目或整库代码审查全部完成。
+
 两个工程的架构纪律执行良好：API 层 63 处 `await` 逐处核对全部为本地异步（表单校验、弹窗确认、动态 import），`@ts-ignore`/`@ts-expect-error`/`console.log`/`debugger` 全 src 零命中，权限码与契约文档一致，登出/账号切换的权限+动态路由+页面缓存清理完整，ProTable 远程模式竞态防护正确，未发现 Token 泄漏与"吞异常提示成功"路径。
 
 问题集中在两类：

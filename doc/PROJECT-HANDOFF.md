@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] 历史代码审查 Major 状态复核
+
+- **复核范围**：核对 `CODE-REVIEW.md` 的全局注册、SearchBar 级联值、SelectTree 懒加载以及 useFetch/useTable 竞态条目。
+- **当前证据**：安装注册、SearchBar 和 SelectTree 单测 **15/15**；useFetch/useTable 竞态与取消单测 **9/9**。当前实现已分别使用显式组件注册表、原值级联传递、失败重试事件和 signal/请求序号保护。
+- **交接结论**：上述历史 Major 不再重复排期；提交锁、License 失败保留、触底分页、宿主 AuthImg、ColForm 远程搜索以及页面级权限/真实 API 联调仍保持开放。测试结果不替代正式 Impeccable A/B 或 UI-10 全库门禁。
+
 ## [2026-10-20] LxInput 前后缀/密码/透传边框当前运行时复核
 
 - **复核结论**：问题属于 `LxInput` 组件样式层，不是 Demo 外壳。当前 4177 文档运行时中，案件编码复合输入、涉密核验密码输入、联系电话透传输入的 `.el-input__wrapper` 均计算为 `1px solid rgb(220, 223, 230)`；复合输入根节点也保留同样的连续外框。
