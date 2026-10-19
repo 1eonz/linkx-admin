@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxSwitch 第二批宿主替换
+
+- [x] AgentConfig 两个布尔开关、地图编辑激活状态、第三方应用编辑状态改用 `LxSwitch`，保留 `1/0` 和布尔值契约。
+- [x] 类型检查、目标 ESLint/Prettier、差异检查和隔离 Mock 全菜单 **10/10** 通过。
+- [ ] 剩余直接 `el-switch` 10 处需继续核对异步保存、确认、loading、权限和插槽能力，不能按数量直接清零。
+
 ## 2026-10-20 LxStatusSwitch 首批宿主替换
 
 - [x] `eventType/thirdParty` 编辑表单的 `el-switch` 改用 `LxStatusSwitch`，保留启用 `1`、停用 `0` 的提交值和表单校验。

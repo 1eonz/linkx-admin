@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxSwitch 第二批宿主替换
+
+- **实现**：AgentConfig 的分离部署/启用审批、地图编辑激活状态、第三方应用编辑状态共 4 处 `el-switch` 改用 `LxSwitch`；保留布尔值、`1/0` 值映射、文案、`inline-prompt` 和表单提交契约。
+- **验证**：Vue3 `vue-tsc --noEmit`、4 个目标文件 ESLint/Prettier、`git diff --check` 和隔离 Mock 全菜单 Playwright **10/10** 通过。
+- **边界**：未修改 API、权限键、表单校验或请求链；剩余 10 处 `el-switch` 需继续按异步保存、确认、loading 和插槽契约逐项判断，不能机械替换。
+- **下一入口**：继续核对统一通信、南向配置和布局配置中的开关；有前置保存/失败回滚的页面先登记能力差异。
+
 ## 2026-10-20 LxStatusSwitch 首批宿主替换
 
 - **实现**：`eventType/thirdParty` 编辑表单的状态控件由 `el-switch` 改为 `LxStatusSwitch`；通过布尔显示值与业务 `1=启用/0=停用` 映射函数保留表单提交契约、文案和校验字段。

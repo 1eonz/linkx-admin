@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxSwitch 第二批宿主替换
+
+- AgentConfig、地图编辑和第三方应用编辑表单的 4 个基础开关已接入 `LxSwitch`，布尔值与 `1/0` 值域保持不变。
+- Vue3 业务源码直接 `<el-switch>` 当前为 **10** 处；剩余场景需按保存钩子、loading、确认和插槽逐项核对。
+
 ## 2026-10-20 LxStatusSwitch 首批宿主替换
 
 - `eventType/thirdParty` 编辑表单状态已接入 `LxStatusSwitch`，`form.status` 的 `1/0` 业务值通过页面映射保留，提交入口与校验逻辑不变。

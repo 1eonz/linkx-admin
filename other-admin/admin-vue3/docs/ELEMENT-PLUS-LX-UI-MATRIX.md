@@ -1,5 +1,11 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-20 LxSwitch 第二批宿主替换
+
+- AgentConfig、`baseData/mapConfig/EditMap.vue`、`baseData/thirdParty/thirdPartyEdit.vue` 共 4 个简单表单开关改用 `LxSwitch`；保留 `v-model`、`active-value/inactive-value`、文字和 `inline-prompt`。
+- 重新扫描 Vue3 业务源码后直接 `<el-switch>` 为 **10** 处；剩余场景含统一通信、南向配置、警务上报、布局配置、协同或异步状态保存，需按契约继续迁移。
+- 本批不删除 `element-plus`，不改变 API、权限或请求链。
+
 ## 2026-10-20 LxStatusSwitch 首批宿主替换
 
 - `eventType/thirdParty/index.vue` 的编辑表单状态已改用 `LxStatusSwitch`；页面将 `form.status === 1` 映射为开启布尔值，事件回写为 `1/0`，不改变提交 API。

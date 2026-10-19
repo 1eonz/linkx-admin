@@ -3074,3 +3074,9 @@
 - **代码边界**：未修改接口、权限键、表单校验或请求链；API 调用继续使用 `.then().catch().finally()`。注释和交接记录使用中文。
 - **能力差异**：`thirdInterface/app/AppManage.vue` 仍使用 `el-switch`，因为现有页面要求开启/关闭均弹确认并在 API 成功后才切换，而 `LxStatusSwitch` 当前只拦截关闭；待组件契约明确后再扩展或迁移。
 - **下一步**：继续核对剩余 15 个 `el-switch` 场景，优先无前置保存钩子的表单；全库 UI-10/UI-11、权限中心、真实后端、页面引导和 Element Plus 删除门禁仍未完成。
+# 2026-10-20 LxSwitch 第二批宿主替换交接
+
+- **实现**：`AgentConfig.vue` 的分离部署/审批开关、`EditMap.vue` 激活状态、`thirdPartyEdit.vue` 应用状态共 4 处改用 `LxSwitch`；组件透传原有 `active-value/inactive-value`、文字和 `inline-prompt`，页面数据与提交契约保持不变。
+- **验证**：`vue-tsc --noEmit`、目标 ESLint/Prettier、`git diff --check` 和隔离 Mock Playwright **10/10** 通过；源码直接 `el-switch` 从 14 降到 **10**。
+- **边界**：未改变接口、权限、表单校验和链式请求；剩余 10 处包含异步保存、确认、权限或复杂配置，需按能力差异继续评估。正式 Impeccable 全库门禁、真实后端和 Element Plus 删除仍未完成。
+- **下一步**：继续处理统一通信、南向配置与布局配置中的简单开关，复杂前置保存场景暂保留并登记。
