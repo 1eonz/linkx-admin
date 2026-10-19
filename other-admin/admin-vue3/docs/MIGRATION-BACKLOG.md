@@ -563,3 +563,8 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 
 - 已完成：宿主 `ProTable` 按 `ITableColumn.hide` 过滤列；单测 **5/5**、LxProTable 文档 E2E **4/4**、目标格式和 ESLint 通过。
 - 待办：逐页核对字段权限是否正确生成 `hide`，补真实 API/权限联调和页面级空、失败、取消、重复提交证据；正式 Impeccable A/B 仍开放。
+
+## 2026-10-19 LxPagination 当前版证据
+
+- 已复验：文档 E2E **3/3**，覆盖翻页、条数切换、布局/主题、窄屏局部滚动和键盘焦点；detector 合法 `[]`/空/0。
+- 待办：补隔离 Assessment A/B、可写 overlay、截图和 snapshot/trend；业务分页 API、权限不足、取消、失败和真实联调仍按页面批次处理。

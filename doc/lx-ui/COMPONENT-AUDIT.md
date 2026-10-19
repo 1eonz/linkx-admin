@@ -820,3 +820,8 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 
 - 本波审计对象是 Vue3 `ProTable` 适配层；`ITableColumn.hide` 已在宿主模板中生效，隐藏字段不再生成表格列。
 - 宿主单测 **5/5**、LxProTable 文档 E2E **4/4**；detector 合法 `[]`/空/0 仅为静态零命中，未关闭 lx-ui ProTable 正式 Impeccable A/B。
+
+## 2026-10-19 LxPagination 当前版复验边界
+
+- 文档 E2E **3/3** 通过，覆盖受控翻页、条数切换、布局/主题、375px 局部滚动和键盘焦点；源码 detector 合法 `[]`/空/0。
+- 本次没有隔离 Assessment A/B、可写 overlay、截图和 snapshot/trend，已按降级证据归档；不能因此关闭 LxPagination 的正式 UI-10 行。

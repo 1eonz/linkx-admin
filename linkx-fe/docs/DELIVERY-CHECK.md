@@ -701,3 +701,8 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 
 - 宿主适配层按 `ITableColumn.hide` 过滤隐藏列，单测 **5/5**；LxProTable 文档 E2E **4/4**，覆盖选择、状态、窄屏滚动和 HUD。
 - 目标 Prettier、ESLint、`git diff --check` 通过；detector JSON/stderr/退出码为 `[]`/空/`0`，不替代正式浏览器 Assessment A/B。
+
+## 2026-10-19 LxPagination 当前版浏览器验收
+
+- 文档 E2E **3/3** 通过，受控翻页、条数切换、布局、主题、375px 局部滚动和键盘焦点均有回归。
+- detector JSON/stderr/退出码为合法 `[]`/空/`0`；隔离 A/B、overlay、截图和 snapshot/trend 缺失，正式 Critique 不关闭。

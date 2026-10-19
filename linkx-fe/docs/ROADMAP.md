@@ -709,6 +709,11 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 - 自定义 `footer` 插槽现在完全替代默认按钮栏；`hideFooter` 且无插槽时不渲染空 footer，和中文 API 文档保持一致。
 - 单测 **6/6**、文档 E2E **3/3**；正式 Impeccable A/B 未因本波自动关闭，真实宿主组合仍需 UI-04 验收。
 
+## 2026-10-19 LxPagination 当前版浏览器复验
+
+- 文档 Playwright **3/3** 通过，覆盖受控翻页、条数切换、布局/主题和 375px 键盘局部滚动；detector `[]` 仅作为静态零命中证据。
+- 当前缺少隔离 A/B、可写 overlay 和正式 snapshot/trend，按降级复验记录，UI-10 严格行继续开放。
+
 ## 2026-10-19 ProTable 隐藏列宿主契约
 
 - Vue3 `ProTable` 适配层已消费 `ITableColumn.hide`，隐藏列不再渲染；本次不修改 lx-ui 公共组件 API。

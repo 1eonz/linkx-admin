@@ -2803,3 +2803,9 @@
 - `other-admin/admin-vue3/src/components/ProTable/index.vue` 已按 `ITableColumn.hide` 跳过隐藏列，适配层仍保留可见列属性和插槽。
 - 单测 **5/5**、LxProTable 文档 E2E **4/4**，目标格式、ESLint 和差异检查通过；detector `[]`/空 stderr/退出码 `0` 只表示静态扫描零命中。
 - 真实业务列表、权限字段来源、正式 Impeccable A/B 和其他 Element Plus 表格替换继续开放；API 请求仍须使用 `.then().catch().finally()`。
+
+## 2026-10-19 LxPagination 当前版复验交接
+
+- 文档行为 E2E **3/3** 通过；覆盖翻页、条数切换、布局、主题、375px 局部滚动和键盘焦点。
+- detector 三件套为合法 `[]`、空 stderr、退出码 `0`；因缺少隔离 A/B 与可写 overlay，本次为降级复验，证据见 `linkx-fe/.impeccable/critique/lxpagination-assessment-b-current-2026-10-19/`。
+- 正式 UI-10、真实宿主分页 API、权限联调和跨浏览器仍未完成；不得把本条写成组件正式 Critique 通过。

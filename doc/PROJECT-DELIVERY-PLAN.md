@@ -1667,3 +1667,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **实现**：Vue3 `ProTable` 按 `ITableColumn.hide` 跳过隐藏列，保留可见列顺序、属性和插槽；测试改用真实 `mount` 验证渲染结果。
 - **验证**：ProTable 单测 **5/5**、LxProTable 文档 E2E **4/4**、目标 Prettier、ESLint 和 `git diff --check` 通过。detector JSON 为合法 `[]`、stderr 为空、退出码 `0`，仅记录静态零命中。
 - **边界**：本波不改变业务接口、权限码、分页/选择语义或 API 请求链；正式 Assessment A/B、宿主真实数据和其余 Element Plus 替换仍开放。
+
+## 2026-10-19 LxPagination 当前版浏览器复验
+
+- **验证**：LxPagination 文档 Playwright **3/3** 通过，覆盖受控翻页、条数切换、布局/主题、375px 局部滚动和键盘焦点；源码 detector JSON/stderr/退出码为合法 `[]`/空/`0`。
+- **审查边界**：当前会话未运行独立 Assessment A/B，也没有可写 overlay 注入和正式 snapshot/trend；已降级记录于 `linkx-fe/.impeccable/critique/lxpagination-assessment-b-current-2026-10-19/`，因此不关闭 UI-10。
+- **下一步**：补隔离 Critique 证据后再处理剩余 P2；宿主真实分页、权限和 Element Plus 替换继续后置。

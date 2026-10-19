@@ -208,3 +208,8 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 - Vue3 `ProTable` 适配层已按 `ITableColumn.hide` 不渲染隐藏列，保留可见列属性、插槽和顺序；单测 **5/5**、LxProTable 文档 E2E **4/4**。
 - 该修复不等于业务字段权限完成；真实权限源、列表 API、空/错/取消和深层操作仍需逐页迁移验证，API 请求继续采用 `.then().catch().finally()`。
+
+## 2026-10-19 LxPagination 宿主门禁
+
+- 组件文档 E2E **3/3** 通过，证明当前公开分页交互可供宿主复用；不代表业务页面真实 API、权限和分页协议已验证。
+- 正式 Impeccable A/B 与跨浏览器仍开放；页面迁移继续按 `.then().catch().finally()` 保留请求状态和错误恢复。

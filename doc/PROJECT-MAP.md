@@ -752,3 +752,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - `other-admin/admin-vue3/src/components/ProTable/index.vue` 现在消费 `ITableColumn.hide`，隐藏字段不会进入 `el-table-column` 渲染树；回归测试位于 `tests/unit/pro-table.test.ts`。
 - 本波只修复宿主列渲染契约，不改变 lx-ui `LxProTable`、业务 API、权限源或 Element Plus 依赖。
+
+## 2026-10-19 LxPagination 当前版证据
+
+- 文档入口 `/components/lxpagination` 的当前行为回归为 3/3；证据覆盖分页控制、主题、窄屏局部滚动和键盘焦点。
+- detector 为合法 `[]`/空/0，但缺少隔离 A/B、overlay 和 snapshot/trend；组件正式 UI-10 仍开放。
