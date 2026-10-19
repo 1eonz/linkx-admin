@@ -838,3 +838,9 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 
 - 修复 Demo 使用未注册 `settings` 图标造成的类型检查失败，改用现有 `setting` 图标并同步 E2E 断言。
 - lx-ui typecheck、单测 **14/14**、文档 E2E **1/1** 和格式检查通过；不增加 UI-10 关闭数。
+
+## 2026-10-20 LxSectionTitle Demo 操作契约补强
+
+- 当前 Demo 增加 `icon` 属性可见示例和两个 `extra` 操作，并保留 `leading` 插槽覆盖 `icon` 的优先级；文档同步说明。
+- 单测 **14/14**、文档 E2E **1/1**，覆盖图标优先级、键盘焦点、Enter 状态反馈、HUD、减少动效和 320/375px 场景。
+- 该项只补当前版 Demo 证据，不关闭 UI-10；375px 页面级横溢出归因、正式 Critique、业务权限和 Vue3 宿主迁移仍开放。

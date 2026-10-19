@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxSectionTitle Demo 操作契约
+
+- [x] `icon` 属性、自定义 `leading` 优先级和多项 `extra` 操作均有真实 Demo。
+- [x] 单测 **14/14**、4177 文档 E2E **1/1**、键盘反馈、typecheck、目标 Prettier 和差异检查通过。
+- [ ] 不以本波关闭 UI-10；正式 Critique、页面级横溢出归因和真实宿主权限/接口仍待完成。
+
 ## 2026-10-20 LxDescriptions Demo 工具栏
 
 - [x] 桌面布局/状态分组，摘要与高级设置整行显示；600px 以下单列。

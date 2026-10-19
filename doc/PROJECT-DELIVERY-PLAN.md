@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxSectionTitle Demo 操作契约补强
+
+- **实现**：边框变体展示 `icon` 属性，接口配置变体展示两个可聚焦 `extra` 操作；保留自定义 `leading` 插槽覆盖 `icon` 的契约，并补充中文说明。
+- **验证**：LxSectionTitle 单测 **14/14**、4177 文档 E2E **1/1**、键盘操作/图标优先级断言、lx-ui `vue-tsc --noEmit`、目标 Prettier 和 `git diff --check` 通过。
+- **边界**：本波只补 Demo 内容和公开契约证据，不关闭 UI-10；375px 页面级横溢出归因、正式 Impeccable A/B、真实宿主权限与业务迁移仍开放。
+
 ## 2026-10-20 LxDescriptions Demo 工具栏密度收口
 
 - **问题**：布局切换、数据状态、预览摘要和高级设置原先共享一个可换行工具栏，桌面和窄屏下控件层级不清晰。

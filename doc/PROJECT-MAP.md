@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxSectionTitle Demo 操作契约
+
+- `linkx-fe/src/components/LxSectionTitle/demo/basic.vue` 同时覆盖 `icon` 属性、`leading` 插槽优先级和多个 `extra` 操作；E2E 验证操作可聚焦并能反馈状态。
+- 该证据只覆盖组件 Demo，不代表业务配置页的权限过滤、真实数据或 Element Plus 替换已完成。
+
 ## 2026-10-20 LxDescriptions Demo 工具栏
 
 - `linkx-fe/src/components/LxDescriptions/demo/basic.vue` 的布局/状态控制采用响应式网格，桌面分组、窄屏单列；状态摘要与高级设置不会和主控制竞争同一行。

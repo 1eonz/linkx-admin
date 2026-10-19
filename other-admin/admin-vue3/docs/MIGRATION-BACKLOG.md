@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxSectionTitle Demo 操作契约
+
+- [x] 增加 `icon` 属性示例、`leading` 优先级示例和多项 `extra` 操作。
+- [x] 单测 **14/14**、4177 文档 E2E **1/1**、键盘/Enter 反馈、typecheck 和格式检查通过。
+- [ ] 配置页真实权限过滤、业务数据、空/错状态和页面级 Mock/E2E 仍待可信契约；组件证据不替代宿主迁移。
+
 ## 2026-10-20 LxDescriptions Demo 工具栏密度
 
 - [x] 文档 Demo 工具栏改为桌面双列、600px 以下单列，摘要和高级设置独占整行。

@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-20 LxSectionTitle Demo 迁移前置记录
+
+- 组件 Demo 已覆盖 `icon` 属性、`leading` 插槽覆盖、多个 `extra` 操作和键盘状态反馈；宿主仍需按配置页权限过滤操作。
+- 页面迁移需保留 `headingLevel`、`tag`、`subtitle`、操作顺序和 `.then().catch().finally()` 请求编排；缺少真实权限码和接口字段时继续阻塞，不删除 `element-plus`。
+
 ## 2026-10-20 LxDescriptions Demo 迁移前置记录
 
 - 组件 Demo 的布局/状态工具栏已按响应式网格收口，375px 下单列且无横向溢出；不改变宿主 `LxDescriptions` 的 `items`、`columns`、状态组合和插槽契约。
