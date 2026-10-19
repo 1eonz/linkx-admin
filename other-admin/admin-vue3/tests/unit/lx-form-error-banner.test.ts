@@ -36,8 +36,9 @@ describe('LxFormErrorBanner', () => {
   it('does not create an empty live region when no message content is provided', () => {
     const wrapper = mount(LxFormErrorBanner);
 
-    expect(wrapper.get('[role="alert"]').attributes('aria-live')).toBeUndefined();
-    expect(wrapper.get('[role="alert"]').attributes('aria-atomic')).toBeUndefined();
+    expect(wrapper.attributes('role')).toBeUndefined();
+    expect(wrapper.attributes('aria-live')).toBeUndefined();
+    expect(wrapper.attributes('aria-atomic')).toBeUndefined();
     expect(wrapper.find('.lx-error-banner__title').exists()).toBe(false);
     wrapper.unmount();
   });

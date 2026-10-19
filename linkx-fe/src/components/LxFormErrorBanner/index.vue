@@ -20,7 +20,7 @@ const hasAnnouncement = computed(() =>
 <template>
   <div
     class="lx-error-banner"
-    role="alert"
+    :role="hasAnnouncement ? 'alert' : undefined"
     :aria-live="hasAnnouncement ? 'assertive' : undefined"
     :aria-atomic="hasAnnouncement ? 'true' : undefined"
   >
