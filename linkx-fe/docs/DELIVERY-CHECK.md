@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxFormErrorBanner 空内容播报语义
+
+- [x] 仅有标题、说明或默认插槽时输出 `role="alert"` 与 assertive live region；空内容不输出播报角色和属性。
+- [x] 单测 **3/3**、4177 文档 E2E **1/1**、`vue-tsc --noEmit` 和目标格式检查通过。
+- [ ] 真实 NVDA/VoiceOver、宿主首错聚焦/重试及 UI-10/UI-11 全库门禁仍开放。
+
 ## 2026-10-20 LxFormErrorBanner 双路 Critique 与说明可读性修复
 
 - [x] 说明文字从 11px 调整为 12px、1.5 倍行高；中文 API 与 E2E 同步。

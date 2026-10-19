@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxFormErrorBanner 空内容语义
+
+- 有标题、说明或默认插槽时组件提供 `role="alert"` 和 assertive live region；空内容时不输出播报角色与属性，避免空紧急区域进入辅助技术树。
+- 回归入口：`other-admin/admin-vue3/tests/unit/lx-form-error-banner.test.ts`、`tests/e2e/lx-form-error-banner-docs.spec.ts`；真实读屏器和业务宿主恢复契约仍未验证。
+
 ## 2026-10-20 LxFormErrorBanner 入口与审查证据
 
 - 组件入口：`linkx-fe/src/components/LxFormErrorBanner/index.vue`；中文 API：`linkx-fe/docs/components/lxformerrorbanner.md`；宿主回归：`other-admin/admin-vue3/tests/unit/lx-form-error-banner.test.ts` 与 `tests/e2e/lx-form-error-banner-docs.spec.ts`。

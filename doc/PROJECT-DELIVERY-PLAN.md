@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxFormErrorBanner 空内容播报语义收口
+
+- **实现**：`LxFormErrorBanner` 仅在标题、说明或默认插槽有内容时输出 `role="alert"`、`aria-live="assertive"` 和 `aria-atomic="true"`；空内容不再暴露紧急播报语义。
+- **验证**：单测 **3/3**、文档 E2E **1/1**、`vue-tsc --noEmit` 和目标测试格式检查通过；有内容的主题、键盘和窄屏行为保持不变。
+- **边界**：真实 NVDA/VoiceOver、宿主首错聚焦、重试动作和动态清单播报仍需可信业务契约；不改变 Props、插槽、请求链、权限或 Element Plus 迁移顺序。
+
 ## 2026-10-20 LxFormErrorBanner 双路 Critique 与可读性修复
 
 - **Assessment A**：独立设计评审 **27/40（Good）**，无 P0；P1 为宿主没有统一的首错字段/恢复路径，P2 为动态字段清单与 `aria-atomic` 播报分层、说明字号过小和 Demo 业务文案过重，P3 为空内容仍保留 `role="alert"`。首错跳转、重试动作和 live region 契约依赖可信业务宿主，暂不臆造公共 API。

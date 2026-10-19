@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxFormErrorBanner 空内容播报语义收口
+
+- **改动**：根节点 `role` 改为按内容条件输出；空内容同时移除 `aria-live` 与 `aria-atomic`，避免读屏器把空横幅当作紧急区域。
+- **验证**：单测 **3/3**、文档 E2E **1/1**、`vue-tsc --noEmit` 和目标测试格式检查通过；有内容场景仍保持主题、键盘、窄屏和 assertive 播报。
+- **后续**：真实读屏器、首错字段聚焦、重试动作及动态清单播报仍需宿主契约，不新增业务 API。
+
 ## [2026-10-20] 历史代码审查 Major 状态复核
 
 - **复核范围**：核对 `CODE-REVIEW.md` 的全局注册、SearchBar 级联值、SelectTree 懒加载以及 useFetch/useTable 竞态条目。
