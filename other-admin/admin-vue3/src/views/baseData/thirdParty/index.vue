@@ -5,7 +5,7 @@
 import { Plus, View, Edit, Delete } from '@element-plus/icons-vue';
 import { useWindowSize } from '@vueuse/core';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxTag } from 'lx-ui';
+import { LxInput, LxTag } from 'lx-ui';
 import { ref, reactive, computed, markRaw } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -190,7 +190,7 @@ function getIndex(scope: any): number {
       <!-- 复用 SearchBar -->
       <SearchBar :placeholder="searchPlaceholder" :actions="actions" @search="handleSearch" @reset="handleReset">
         <template #filters>
-          <el-input
+          <LxInput
             v-model="searchParams.clientName as string"
             :placeholder="t('index.list.thirdPartyApp')"
             class="filter-item"
@@ -232,7 +232,7 @@ function getIndex(scope: any): number {
 
         <!-- 应用密钥列：password + show-password + disabled -->
         <template #clientSecret="scope">
-          <el-input :model-value="getRow(scope).clientSecret" type="password" show-password disabled />
+          <LxInput :model-value="getRow(scope).clientSecret" type="password" show-password disabled />
         </template>
 
         <!-- 状态列：0→danger 红色「停用」，1→默认色「启用」 -->
