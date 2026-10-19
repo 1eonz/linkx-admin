@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { LxEmpty } from 'lx-ui';
+
 defineOptions({ name: 'Placeholder' });
 </script>
 
 <template>
   <div class="placeholder-container">
-    <el-empty description="该页面尚未实现，待后续模块迁移后补充" />
+    <LxEmpty description="该页面尚未实现，待后续模块迁移后补充" />
   </div>
 </template>
 
