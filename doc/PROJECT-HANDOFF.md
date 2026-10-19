@@ -2986,3 +2986,9 @@
 - Assessment B 独立证据见 `tmp-sectiontitle-followup-b.md` 与 `tmp-sectiontitle-followup-b/`：1280/420/375/320px、Light/HUD、normal/reduced-motion 共 16 视图，页面错误、失败请求、页面横溢出和操作越界均为 0；detector 三件套均为 `[]`/空/0，未单独解释为通过。
 - Assessment A **32/40（Good）**，P0/P1 为 0；其主题并发竞争建议已在卸载恢复中加入状态所有权判断。默认 Vue3 E2E 因真实后端代理超时未形成页面证据，需使用 lx-ui 4177 文档服务或专用 Mock 配置复验。
 - 下一步：按 UI-10 继续处理剩余组件的正式双路 Critique；完成组件库门禁后再替换 Vue3 Element Plus。权限、真实后端和页面引导仍后置。
+# 2026-10-20 LxDynamicForm schema 诊断交接
+
+- **改动**：`LxDynamicForm` 开发环境诊断重复字段 key、未知字段 type、radio/checkbox 不支持的 option value 类型；不阻断生产渲染，不改变 `value/change`、校验、提交、上传或远程请求边界。文档同步值域和 520/760px 断点定义。
+- **验证**：`lx-dynamic-form.test.ts` **31/31**；`lx-dynamic-form-docs.spec.ts` **14/14**；lx-ui `vue-tsc --noEmit` 通过。API 请求链规则未改变。
+- **审查**：Assessment A **32/40**。Assessment B 三个 detector 的 JSON 虽为空数组，但退出码均为 **1**，记录为扫描失败；浏览器目录保留为阶段性证据，不关闭 UI-10/UI-11。
+- **下一步**：恢复可执行 detector 后重跑 Light/HUD、桌面/窄屏、reduced-motion 和 overlay；再决定 feedback 与 required 的错误播报优先级。真实上传、远程接口、权限和 Element Plus 删除继续阻塞。

@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxDynamicForm schema 防错收口
+
+- **实现**：开发环境对重复 `key`、未知 `type` 以及 radio/checkbox 不支持的选项值输出中文诊断；保留现有线上渲染行为，不改变表单值、校验、提交和业务 API 契约。中文 API 同步说明各选择类型的值域，并将容器断点措辞统一为“不大于 760px/520px”。
+- **验证**：DynamicForm 单测 **31/31**、文档 Playwright **14/14**、lx-ui `vue-tsc --noEmit` 通过；测试中的 async-validator required stderr 为主动错误态验证，进程退出码为 `0`。
+- **审查边界**：Assessment A **32/40（Good）**；本轮 Assessment B 的三个 detector 输出空数组但退出码均为 **1**，按失败处理，不能记为正式 Critique。浏览器证据目录已生成，但需在 detector 可执行环境恢复后重跑三件套并补独立综合快照。
+- **下一入口**：继续 DynamicForm 的正式 B 证据与 feedback/required 错误优先级评估；完成当前组件门禁后再进入剩余 lx-ui 组件和 Vue3 Element Plus 分批替换。权限中心、文本/字段权限、页面引导和真实后端仍后置。
+
 ## 2026-10-20 LxPagination P1 修复与默认契约阻塞
 
 - **修复**：新增 `ariaLabel`（默认“分页导航”）并用语义 `nav` 包裹分页器；窄屏分页按钮、页码和条数触发器的实际命中区提升到至少 44px，桌面紧凑尺寸保持不变。

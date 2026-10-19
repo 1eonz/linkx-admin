@@ -69,20 +69,20 @@ const fields: LxDynamicFormField[] = [
 
 <p id="lx-dynamic-form-schema-table-hint" class="lx-doc-table-scroll-hint">表格可横向滚动；聚焦表格后可用左右方向键浏览完整 schema 说明。</p>
 
-| 字段                   | 类型                                         | 说明                                                                                                                                                                                    |
-| ---------------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `key`、`label`、`type` | `string`、`string`、`LxDynamicFormFieldType` | 字段键、可见标签和控件类型。                                                                                                                                                            |
-| `required`             | `boolean`                                    | 生成默认必填校验；复选/多选字段要求非空数组，日期范围要求同类型、真实有效且开始不晚于结束的两个端点，必填开关需匹配 `activeValue`（默认 `true`）；自定义规则由 `rules` 追加。           |
-| `span`                 | `1 \| 2 \| 3 \| 4 \| 6 \| 8 \| 12 \| 24`     | 24 栅格单位。实际占用列数按当前 `columns` 向上取整，`24` 通栏。                                                                                                                         |
-| `visible`              | `boolean \| (model) => boolean`              | 依据当前表单 model 控制显示。                                                                                                                                                           |
-| `sectionTitleBefore`   | `string`                                     | 在字段前输出占满网格的语义分组标题，不进入表单值或校验。                                                                                                                                |
-| `disabled`             | `boolean \| (model) => boolean`              | 依据当前表单 model 控制字段禁用。                                                                                                                                                       |
-| `defaultValue`         | `unknown`                                    | `modelValue[key] === undefined` 时作为初始显示值和校验值；不会在挂载时主动修改父级对象。                                                                                                |
-| `props`                | `Record<string, unknown>`                    | 传给对应 `Lx*` 控件的属性；密码字段始终保持遮罩；日期范围可传 `valueFormat`；远程选择默认可检索，可用 `filterable: false` 关闭；上传可配置 `accept`、`multiple`、`limit` 与宿主适配器。 |
-| `options`              | `LxDynamicFormOption[]`                      | 选择、单选和复选项，包含 `label`、`value`、可选 `disabled`。                                                                                                                            |
-| `feedback`             | `LxDynamicFormFieldFeedback`                 | 可选的字段级状态文案；可提供 `status`、`message` 与 `retry`，让远程失败和恢复动作紧贴字段显示。                                                                                         |
-| `rules`                | `FormItemRule[]`                             | 字段校验规则。                                                                                                                                                                          |
-| `slot`                 | `string`                                     | `slot`、`upload` 等自定义字段的具名插槽；默认使用 `key`。                                                                                                                               |
+| 字段                   | 类型                                         | 说明                                                                                                                                                                                                           |
+| ---------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `key`、`label`、`type` | `string`、`string`、`LxDynamicFormFieldType` | 字段键、可见标签和控件类型。                                                                                                                                                                                   |
+| `required`             | `boolean`                                    | 生成默认必填校验；复选/多选字段要求非空数组，日期范围要求同类型、真实有效且开始不晚于结束的两个端点，必填开关需匹配 `activeValue`（默认 `true`）；自定义规则由 `rules` 追加。                                  |
+| `span`                 | `1 \| 2 \| 3 \| 4 \| 6 \| 8 \| 12 \| 24`     | 24 栅格单位。实际占用列数按当前 `columns` 向上取整，`24` 通栏。                                                                                                                                                |
+| `visible`              | `boolean \| (model) => boolean`              | 依据当前表单 model 控制显示。                                                                                                                                                                                  |
+| `sectionTitleBefore`   | `string`                                     | 在字段前输出占满网格的语义分组标题，不进入表单值或校验。                                                                                                                                                       |
+| `disabled`             | `boolean \| (model) => boolean`              | 依据当前表单 model 控制字段禁用。                                                                                                                                                                              |
+| `defaultValue`         | `unknown`                                    | `modelValue[key] === undefined` 时作为初始显示值和校验值；不会在挂载时主动修改父级对象。                                                                                                                       |
+| `props`                | `Record<string, unknown>`                    | 传给对应 `Lx*` 控件的属性；密码字段始终保持遮罩；日期范围可传 `valueFormat`；远程选择默认可检索，可用 `filterable: false` 关闭；上传可配置 `accept`、`multiple`、`limit` 与宿主适配器。                        |
+| `options`              | `LxDynamicFormOption[]`                      | 选择、单选和复选项，包含 `label`、`value`、可选 `disabled`。`select`/`remote-select` 可使用字符串、数字或对象值；`radio` 支持字符串、数字、布尔值；`checkbox` 支持字符串或数字。开发环境会提示不支持的值类型。 |
+| `feedback`             | `LxDynamicFormFieldFeedback`                 | 可选的字段级状态文案；可提供 `status`、`message` 与 `retry`，让远程失败和恢复动作紧贴字段显示。                                                                                                                |
+| `rules`                | `FormItemRule[]`                             | 字段校验规则。                                                                                                                                                                                                 |
+| `slot`                 | `string`                                     | `slot`、`upload` 等自定义字段的具名插槽；默认使用 `key`。                                                                                                                                                      |
 
 内置 `type`：`input`、`password`、`textarea`、`number`、`select`、`remote-select`、`tree-select`、`date`、`daterange`、`switch`、`radio`、`checkbox`、`upload`、`slot`。`password` 使用 `LxPasswordInput`，`props.type` 不会将其改成明文输入；`remote-select` 强制远程模式，默认启用检索，由宿主将候选项和 `remoteMethod` 经 `options`、`props` 传入；`daterange` 接受同类型的两个字符串、时间戳或 `Date`，开始时间不能晚于结束时间，传入 `valueFormat` 时按该格式严格解析字符串；使用默认日期清空行为时字段值为 `null`。`upload` 默认使用 `LxUpload`，根据 `props.multiple` 管理文件值：单文件字段发出 `LxUploadFile | null`，多文件字段发出 `LxUploadFile[]`；初始 URL 字符串可用于回显，展示文件名时会排除 query 和 hash，但文件对象仍保留完整 URL；字段更新后发出文件对象。上传成功响应和失败 `Error` 均随受控文件值保留，业务字段由宿主解释。文件控件支持进度、失败重试、取消和移除；同名具名插槽存在时继续使用旧的自定义上传契约。
 
@@ -150,7 +150,7 @@ const fields = [
 
 - 表单数据由宿主持有；默认值只用于缺失字段，显式 `null`、`false`、`0` 和空字符串不会被覆盖。
 - 字段按 schema 数组顺序连续渲染。较长表单由宿主按业务语义添加分区标题或拆成步骤；组件自身不负责分步导航和分区状态。
-- `span` 按 24 栅格折算；默认自适应以三列为基准，容器小于 760px 折为两列，小于 520px 折为单列，所有字段占满一行。
+- `span` 按 24 栅格折算；默认自适应以三列为基准，容器宽度不大于 760px 折为两列，不大于 520px 折为单列，所有字段占满一行。
 - 远程候选请求的取消、状态和恢复由宿主适配层处理；需要贴近字段显示时，给字段传入 `feedback`，由 `retry` 触发宿主重试。Demo 的内存 Mock 仅验证组件交互，不代表真实后端联调。
 - 上传控件由 `LxUpload` 管理文件列表和状态，上传请求、鉴权和业务提交仍由宿主通过 `httpRequest`/adapter 注入；单文件字段在 `change` 中返回首个 `LxUploadFile` 或 `null`，多文件字段返回 `LxUploadFile[]`。已存在的 URL 字符串会映射为成功文件用于回显；上传成功响应原样保存在 `response`，组件不推断服务器字段。
 

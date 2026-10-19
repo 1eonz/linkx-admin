@@ -882,3 +882,7 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - `linkx-fe/src/components/LxSectionTitle/` 已覆盖标题、标签、extra 操作区的窄屏收缩与 HUD 主题生命周期；420/375/320px 下操作按钮分行且不越界。
 - 独立 B 证据位于 `tmp-sectiontitle-followup-b.md` 和 `tmp-sectiontitle-followup-b/`，detector JSON/stderr/退出码为 `[]`/空/0；该结果与浏览器矩阵结合使用，不能把静态空数组单独当作 Critique 通过。
 - Vue3 宿主 E2E 默认代理本次因真实后端不可达而失败，未改变组件结论；后续仍需用专用 Mock/组件文档配置做宿主组合回归。
+# 项目地图更新（2026-10-20）
+
+- `linkx-fe/src/components/LxDynamicForm/index.vue` 新增开发期 schema 诊断：重复 `key`、未知 `type`、radio/checkbox 非法选项值会输出中文警告；生产行为和宿主 API 边界保持不变。
+- DynamicForm 证据入口：`other-admin/admin-vue3/tests/unit/lx-dynamic-form.test.ts`（31/31）与 `tests/e2e/lx-dynamic-form-docs.spec.ts`（14/14）。当前 Assessment B detector 退出码为 1，正式视觉门禁仍开放。
