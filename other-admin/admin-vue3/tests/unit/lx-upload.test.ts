@@ -180,6 +180,22 @@ describe('LxUpload', () => {
     wrapper.unmount();
   });
 
+  it('explains the manual submit step and announces queued files', async () => {
+    const wrapper = mountUpload({ httpRequest: vi.fn() });
+    const upload = wrapper.findComponent(ElUploadStub);
+    const onChange = upload.props('onChange') as (currentFile: UploadFile, files: UploadFile[]) => void;
+    const file = { uid: 9, name: 'table.csv', status: 'ready' } as UploadFile;
+
+    expect(wrapper.get('.lx-upload__title').text()).toContain('选择后再上传');
+    expect(wrapper.get('.lx-upload__hint').text()).toContain('点击上传按钮提交');
+
+    onChange(file, [file]);
+    await nextTick();
+
+    expect(wrapper.get('.lx-upload__announcement').text()).toContain('已加入待上传队列，请点击上传按钮提交');
+    wrapper.unmount();
+  });
+
   it('submits a controlled string-uid file with the raw uid Element Plus indexes by', () => {
     const raw = Object.assign(new File(['data'], 'remote.csv'), { uid: 73 }) as UploadRawFile;
     const wrapper = mountUpload({

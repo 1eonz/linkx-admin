@@ -600,6 +600,9 @@ function onChange(file: UploadFile, list: UploadFiles) {
   const next = toLxFiles(list)
   emit('update:modelValue', next)
   emit('change', toLxFiles([file])[0], next)
+  if (!props.autoUpload) {
+    announcement.value = `${file.name} 已加入待上传队列，请点击上传按钮提交`
+  }
 }
 
 function onProgress(
@@ -883,12 +886,19 @@ defineExpose({
             <span class="lx-upload__drop-icon"
               ><LxIcon name="upload" :size="36"
             /></span>
-            <p class="lx-upload__title">点击或拖拽文件到此处上传</p>
+            <p class="lx-upload__title">
+              {{
+                autoUpload
+                  ? '点击或拖拽文件到此处上传'
+                  : '点击或拖拽文件到此处，选择后再上传'
+              }}
+            </p>
             <p class="lx-upload__hint">
               <template v-if="accept">支持{{ acceptLabel(accept) }}</template>
               <template v-else>支持常见文件格式</template>
               <template v-if="maxSize">，单文件不超过 {{ maxSize }}MB</template>
               <template v-if="limit">，最多 {{ limit }} 个文件</template>
+              <template v-if="!autoUpload">，选择后需点击上传按钮提交</template>
             </p>
             <!-- 外层上传触发器提供按钮语义；这里仅显示文件选择提示。 -->
             <span class="lx-upload__browse"> 浏览本地文件 </span>
@@ -904,7 +914,7 @@ defineExpose({
       <template v-else>
         <span class="lx-upload__button">
           <LxIcon name="upload" :size="16" />
-          选择文件
+          {{ autoUpload ? '选择文件' : '选择文件，稍后上传' }}
         </span>
       </template>
     </ElUpload>

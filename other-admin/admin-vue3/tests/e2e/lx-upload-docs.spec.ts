@@ -60,6 +60,7 @@ test.describe('lx-ui LxUpload 文档示例', () => {
     });
 
     await expect(page.locator('.lx-upload__file-status')).toHaveText('排队中');
+    await expect(page.locator('.lx-upload__announcement')).toContainText('已加入待上传队列，请点击上传按钮提交');
     await page.getByRole('button', { name: '上传全部待传文件' }).click();
     await expect(page.getByRole('progressbar', { name: '排班数据.csv 上传进度' })).toBeVisible();
     await expect(page.getByRole('progressbar', { name: '排班数据.csv 上传进度' })).toHaveAttribute(
