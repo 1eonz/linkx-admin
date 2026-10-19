@@ -1991,3 +1991,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 类型检查、目标 Prettier、ESLint 及隔离 Mock 全菜单回归 **10/10** 通过；未改变权限码、接口参数、请求链式写法或搜索竞态处理。
 - `LxInput` 前后缀、密码和透传场景的边框缺失已确认是组件样式问题，组件已使用真实 `1px` 外边框并由专项 E2E **2/2** 覆盖；Demo 仅作为复现和回归入口。
 - 本批不代表其余人员表单、权限字段权限或 Element Plus 全库替换完成；后续继续逐页核对字符串契约、校验、禁用/只读和失败恢复。
+
+## 2026-10-20 dutyType 弹窗输入迁移
+
+- `shiftScheduling/dutyType/index.vue` 的排班类型名称字段已由 `el-input` 切换为 `LxInput`，保留表单校验、最大长度 100、弹窗提交和原接口契约。
+- `vue-tsc --noEmit`、目标 Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过；属性类型按 `LxInput` 契约使用数字绑定。
+- 本批不改变请求链式写法、权限标识或 Element Plus 依赖删除门槛；复杂表单和 number 类型字段继续逐项核实。

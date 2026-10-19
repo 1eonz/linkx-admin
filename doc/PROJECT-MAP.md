@@ -957,6 +957,7 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - `linkx-fe/src/components/LxDynamicForm/index.vue` 新增开发期 schema 诊断：重复 `key`、未知 `type`、radio/checkbox 非法选项值会输出中文警告；生产行为和宿主 API 边界保持不变。
 - `other-admin/admin-vue3/src/views/authority/person/index.vue` 与 `authority/imPerson/index.vue` 的 4 个筛选输入已采用 `LxInput`，页面仍由宿主负责搜索请求、清空和回车触发。
 - `LxInput` 前后缀、密码、透传边框问题定位在 `linkx-fe/src/components/LxInput/style.css`；真实外边框和复合输入连续边界由组件统一处理，相关 Demo 只承担可视回归。
+- `shiftScheduling/dutyType/index.vue` 的排班类型名称弹窗字段已采用 `LxInput`；宿主仍负责 `el-form` 校验、弹窗状态和接口请求。
 - DynamicForm 证据入口：`other-admin/admin-vue3/tests/unit/lx-dynamic-form.test.ts`（31/31）与 `tests/e2e/lx-dynamic-form-docs.spec.ts`（14/14）。Assessment B 三件套为合法 `[]`/空 stderr/0，8 个浏览器视图通过；综合 snapshot/trend 尚缺，正式视觉门禁仍开放。
 # 项目地图更新（2026-10-20）
 

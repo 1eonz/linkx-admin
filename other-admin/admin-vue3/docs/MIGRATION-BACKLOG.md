@@ -810,3 +810,8 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 - 已保留 `v-model`、`clearable`、回车搜索、原占位文案和字符串类型适配；类型检查、格式、Lint 与隔离 Mock **10/10** 通过。
 - 下一批候选：`authority/userManage/components/EditUser.vue`、人员角色弹窗及第三方配置表单；迁移前必须核实 `LxInput` 的字符串值契约、密码/透传/文本域属性和表单校验上下文。
 - 阻塞项：`policeExtend/virtualUser/EditVirtualUser.vue` 的若干字段当前声明为 number，不能直接绑定 `LxInput`，待核实接口类型后再处理。
+
+## 2026-10-20 dutyType 弹窗输入迁移
+
+- 排班类型管理的名称字段已改用 `LxInput`，保留最大长度、表单校验和弹窗提交语义；类型、格式、Lint 与 Mock **10/10** 通过。
+- 后续继续处理字符串契约明确的表单输入；涉及 number、密码、textarea 或复合插槽的字段必须先核实 LxInput props 与表单校验上下文。

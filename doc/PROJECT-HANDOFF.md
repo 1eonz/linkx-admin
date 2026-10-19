@@ -3116,3 +3116,8 @@
 - 本批改动：`authority/person/index.vue`、`authority/imPerson/index.vue` 共 4 个姓名/身份证筛选框改用 `LxInput`，保留清空、回车搜索、占位文案和原请求契约。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；未修改 API、权限标识或 `.then().catch().finally()` 规则。
 - LxInput 边框问题已在组件层处理：普通、密码、透传使用真实 `1px` 边框，复合前后缀由根节点提供连续外框；专项 E2E **2/2**。其余 authority 表单和真实权限联调仍未完成。
+
+# 2026-10-20 dutyType 输入迁移交接
+
+- `shiftScheduling/dutyType/index.vue` 的排班类型名称字段改用 `LxInput`，保留 `maxlength=100`、表单校验、弹窗提交和接口契约；`maxlength` 使用数字绑定以符合组件类型。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；未改变权限、请求链或 Element Plus 删除门槛。
