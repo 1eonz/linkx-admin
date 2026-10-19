@@ -727,3 +727,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - `linkx-fe/src/components/LxPagination/` 当前行为与文档回归通过：单测 7/7、文档 E2E 3/3。
 - 正式 Impeccable B 目录当前缺失，历史静态结果不关闭 UI-10；宿主分页、权限源、真实 API 和 Vue3 Element Plus 替换仍待后续迁移批次。
+
+## 2026-10-19 Mock 预览当前版复验
+
+- `other-admin/admin-vue3/tests/e2e/preview.spec.ts` 与 `col-form-search-race.spec.ts` 在 `playwright.preview.config.ts` 下 **10/10** 通过。
+- `mock/preview-menu.ts` 的首页、10 个分组、32 个动态子菜单共 33 个入口均完成首屏样例核对；专用 Mock 服务不代理真实后端，未知接口仍受保护。

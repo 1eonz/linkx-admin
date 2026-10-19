@@ -1629,3 +1629,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 组件与适配器单测 **7/7**、文档 Playwright **3/3** 通过，覆盖受控翻页、条数切换、`autoReset`、自定义布局、主题、键盘和 375px 局部滚动。
 - `linkx-fe/.impeccable/critique/pagination-assessment-b-2026-10-17/` 当前不存在；历史“正式 B”描述降级为待补记录，不能以静态 `[]` 或旧文字关闭 UI-10。
 - `npx impeccable update` 已成功完成；后续补独立 Assessment A/B、浏览器多主题证据和 snapshot/trend 后再评估组件矩阵状态。
+
+## 2026-10-19 隔离 Mock 全菜单预览复验
+
+- 使用 `pnpm exec playwright test --config=playwright.preview.config.ts --reporter=line` 在专用 Mock 服务上重跑 **10/10**。
+- 覆盖首页、10 个菜单组、32 个动态入口共 33 个首屏样例；同时覆盖菜单搜索/目录、关联人员搜索竞态、北向筛选增改删、轮播分页、AuthImg 失败恢复、键盘重试和 reduced-motion。
+- 本次仍只访问本地 Mock，不代表真实后端或完整业务写操作联调；未知 API 继续保持未代理保护。

@@ -2767,3 +2767,9 @@
 - 独立证据目录：`linkx-fe/.impeccable/critique/lxsectiontitle-assessment-b-2026-10-19-recheck/`；组件源码与文档 detector 为合法 `[]`、stderr 为空、退出码 `0`。
 - Light/HUD、1280/375/320px、键盘、`leading` 优先级和 reduced-motion 均已执行；375px/320px 页面 `scrollWidth` 分别为 615/560，属于文档外壳级溢出观察，不能直接归因组件，但当前版正式 Critique 保持开放。
 - VitePress 外壳 transition/动画命中已在证据中标记为误报；后续需要单独收口文档壳层窄屏溢出，再评估 UI-10。
+
+## 2026-10-19 隔离 Mock 全菜单预览复验
+
+- `playwright.preview.config.ts` 隔离运行 **10/10** 通过，覆盖 33 个现役入口的首屏样例和全部预览专项场景。
+- 通过项包括菜单目录与搜索、关联人员远程搜索迟到响应、北向接入筛选/增改删、轮播文章分页、鉴权图片失败恢复/键盘重试和减少动效。
+- 证据范围仍是本地 Mock；真实权限、真实后端、深层页面操作和写接口联调继续保持阻塞标记。

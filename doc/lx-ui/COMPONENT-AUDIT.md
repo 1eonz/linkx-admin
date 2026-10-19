@@ -794,3 +794,8 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 - 证据目录为 `linkx-fe/.impeccable/critique/lxsectiontitle-assessment-b-2026-10-19-recheck/`；组件、Demo 和文档 detector 均为合法 `[]`、stderr 空、退出码 `0`。
 - 浏览器覆盖 Light/HUD、1280/375/320px、键盘、`leading` 插槽优先级和 reduced-motion；375/320px 文档页出现 `scrollWidth=615/560`，命中节点主要属于 VitePress 外壳，暂记文档壳层 P2，不关闭组件矩阵。
 - 后续需区分文档壳层溢出与组件自身布局，并在修复后复验 snapshot/trend；空数组不能单独代表正式 Critique 通过。
+
+## 2026-10-19 宿主 Mock 预览复验边界
+
+- Vue3 隔离 Mock 预览套件 **10/10** 通过，覆盖 33 个现役菜单首屏和关联人员、北向接入、轮播、鉴权图片专项行为。
+- 该结果只证明宿主入口与本地 Mock 的可执行性，不改变 lx-ui 组件正式 Critique、真实权限/后端联调或 Element Plus 分批替换门禁。

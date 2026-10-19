@@ -675,3 +675,8 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 
 - 独立浏览器证据已保存至 `linkx-fe/.impeccable/critique/lxsectiontitle-assessment-b-2026-10-19-recheck/`，detector JSON/stderr/退出码为 `[]`/空/`0`。
 - Light/HUD、1280/375/320px、键盘、leading 插槽和 reduced-motion 已覆盖；375/320px 文档壳层 `scrollWidth` 为 615/560，当前记为文档外壳 P2 观察，不能据此宣称组件正式通过。
+
+## 2026-10-19 宿主 Mock 全菜单预览
+
+- 使用 Vue3 专用 `playwright.preview.config.ts` 重跑 **10/10**；首页及 10 个分组、32 个动态入口共 33 个首屏样例均可访问。
+- 关联人员搜索竞态、北向 CRUD、轮播分页、AuthImg 失败/键盘重试和 reduced-motion 均通过；所有请求由隔离 Mock 处理，未知接口不代理真实后端。

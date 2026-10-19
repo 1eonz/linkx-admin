@@ -536,3 +536,9 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 - 组件/适配器单测 **7/7**、文档 Playwright **3/3** 已通过；迁移适配继续保留 `change(page, pageSize)`、`autoReset`、`autoScroll` 和窄屏局部滚动契约。
 - 历史记录引用的 `linkx-fe/.impeccable/critique/pagination-assessment-b-2026-10-17/` 当前缺失，正式 A/B 与 snapshot/trend 待补；不可用旧文字或静态 `[]` 关闭 UI-10。
 - 真实业务分页请求、空/错/取消/重复提交和权限联调继续按页面迁移批次处理，Element Plus 仍保留。
+
+## 2026-10-19 隔离 Mock 全菜单预览复验
+
+- `pnpm exec playwright test --config=playwright.preview.config.ts --reporter=line` **10/10** 通过，首页及 33 个现役入口首屏样例可重复验收。
+- 专项覆盖关联人员搜索竞态、关闭重开后的迟到响应、北向接入 Mock CRUD、轮播分页和 AuthImg 失败/键盘重试/减少动效。
+- 待办仍为每个业务入口的深层空/失败/取消/权限不足/重复提交状态，以及真实后端联调；本轮不提前删除 Element Plus。
