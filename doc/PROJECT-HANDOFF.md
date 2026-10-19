@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxFormErrorBanner 空播报修复交接
+
+- **改动**：空内容的错误横幅不再创建空 live region；有标题、说明或默认插槽时继续使用 `role="alert"`、assertive live region 和原子播报。
+- **验证**：组件单测 **3/3**、4177 文档 Playwright **1/1**、lx-ui typecheck、206 modules 库构建、目标格式和差异检查通过。
+- **后续**：正式 Impeccable A/B、真实读屏器、宿主表单组合和权限/后端联调仍未完成；业务 API 请求继续使用 `.then().catch().finally()`。
+
 ## [2026-10-20] LxPagination 嵌套滚动修复交接
 
 - **改动**：`autoScroll` 优先滚动最近的可滚动祖先，只有找不到祖先时才调用 `window.scrollTo`；保留 reduced-motion 即时滚动和原有事件顺序。

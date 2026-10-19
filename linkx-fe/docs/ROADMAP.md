@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-20 LxFormErrorBanner 空播报修复
+
+- 空 props 不再生成空的 assertive live region；有标题、说明或默认插槽时保持原有错误播报语义。
+- 单测 **3/3**、文档 E2E **1/1**、typecheck、206 modules 构建和目标格式检查通过；正式 Critique、真实读屏器和宿主表单组合仍开放。
+
 ## 2026-10-20 LxPagination 嵌套滚动修复
 
 - `autoScroll` 现在优先定位最近的可滚动祖先，避免嵌套列表或抽屉切页时滚动整个窗口；无祖先时保留窗口回顶兼容行为。

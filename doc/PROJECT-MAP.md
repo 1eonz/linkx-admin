@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxFormErrorBanner 可访问播报
+
+- `linkx-fe/src/components/LxFormErrorBanner/` 现在根据实际内容决定是否启用 assertive live region，并隐藏空标题节点；文档与单测同步覆盖空内容边界。
+- 该项属于组件级可访问性收口，不代表真实表单页面、权限反馈或读屏器联调完成。
+
 ## 2026-10-20 LxPagination 审查资源阻塞
 
 - `linkx-fe/src/components/LxPagination/` 当前行为证据仍为单测 7/7、文档 E2E 3/3。

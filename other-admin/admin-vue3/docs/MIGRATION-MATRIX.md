@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-20 LxFormErrorBanner 宿主契约
+
+- 宿主传入标题、说明或默认插槽时继续得到 assertive 错误播报；空内容不会制造空的 live region。
+- 页面仍需负责错误字段聚焦、权限反馈、提交锁和 API 错误处理，组件证据不替代业务 Mock/E2E 或真实联调。
+
 ## 2026-10-20 LxPagination 滚动契约更新
 
 - 宿主继续使用 `autoScroll` 时，组件会优先回滚最近可滚动列表/抽屉容器；没有滚动祖先时才回滚窗口，原 `change(page, pageSize)` 事件顺序不变。

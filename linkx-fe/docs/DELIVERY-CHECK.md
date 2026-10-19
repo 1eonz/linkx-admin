@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxFormErrorBanner 空播报验收
+
+- 有内容时保留 `role="alert"`、`aria-live="assertive"` 和 `aria-atomic="true"`；空内容时移除 live region 属性并不渲染空标题节点。
+- 单测 **3/3**、4177 文档 E2E **1/1**、typecheck、生产构建、目标 Prettier 和差异检查通过。
+- 本波只收口组件可访问性 P3，不关闭 UI-10；正式 A/B、读屏器和业务宿主验收仍待完成。
+
 ## 2026-10-20 LxPagination 嵌套滚动验收
 
 - `autoScroll` 已改为最近可滚动祖先优先，未找到祖先时回退窗口；reduced-motion、分页事件顺序和 `autoReset` 保持不变。

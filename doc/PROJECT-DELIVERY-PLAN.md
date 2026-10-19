@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxFormErrorBanner 空播报修复
+
+- **问题**：`title` 是可选属性，但空 props 仍会生成空的 assertive live region；这会给辅助技术发送无内容播报。
+- **实现**：仅在标题、说明或默认插槽有内容时设置 `aria-live="assertive"` 和 `aria-atomic="true"`，空标题节点不再渲染；现有有内容调用契约不变。
+- **验证**：单测 **3/3**、4177 文档 E2E **1/1**、lx-ui `vue-tsc --noEmit`、206 modules 生产构建、目标 Prettier 和 `git diff --check` 通过。
+- **边界**：本波只收口组件可访问性 P3，不改变表单提交、权限、API 或请求链；正式 Impeccable A/B 和宿主迁移仍按 UI-10/UI-04 门禁执行。
+
 ## 2026-10-20 LxPagination 嵌套滚动修复
 
 - **问题**：`autoScroll` 原先无条件调用 `window.scrollTo`，分页器位于抽屉或列表滚动容器时会打断宿主阅读位置。
