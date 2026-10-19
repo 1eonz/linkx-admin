@@ -482,5 +482,9 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
   .lx-descriptions__item {
     transition: none;
   }
+
+  .lx-descriptions__expand-icon {
+    transition: none;
+  }
 }
 </style>
