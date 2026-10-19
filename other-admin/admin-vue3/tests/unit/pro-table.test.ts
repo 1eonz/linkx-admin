@@ -1,7 +1,7 @@
-import { flushPromises, shallowMount } from '@vue/test-utils';
+import { flushPromises, mount } from '@vue/test-utils';
 import { LxProTable } from 'lx-ui';
 import { describe, expect, it, vi } from 'vitest';
-import { defineComponent } from 'vue';
+import { defineComponent, h } from 'vue';
 
 import ProTable from '@/components/ProTable/index.vue';
 
@@ -12,13 +12,20 @@ const Table = defineComponent({
       return this;
     },
   },
-  template: '<div>{{ JSON.stringify(data) }}<slot name="empty" /></div>',
+  template: '<div>{{ JSON.stringify(data) }}<slot /><slot name="empty" /></div>',
+});
+const TableColumn = defineComponent({
+  name: 'ElTableColumn',
+  props: { prop: { type: String, default: '' } },
+  setup(props) {
+    return () => h('el-table-column', { prop: props.prop });
+  },
 });
 function mountTable(props: Record<string, unknown>) {
-  return shallowMount(ProTable, {
+  return mount(ProTable, {
     props: { columns: [{ prop: 'name', label: '名称' }], immediate: false, ...props },
     global: {
-      stubs: { LxProTable: Table, ElTableColumn: true, ElEmpty: true, ElIcon: true },
+      stubs: { LxProTable: Table, ElTableColumn: TableColumn, ElEmpty: true, ElIcon: true },
       directives: { loading: () => {} },
     },
   });
@@ -78,6 +85,19 @@ describe('business table compatibility', () => {
     expect(wrapper.findComponent(LxProTable).props('data')).toEqual([{ id: 1 }]);
     expect(wrapper.emitted('response')).toHaveLength(1);
     expect(wrapper.emitted('response-error')).toHaveLength(1);
+    wrapper.unmount();
+  });
+
+  it('does not render columns explicitly marked as hidden', () => {
+    const wrapper = mountTable({
+      columns: [
+        { prop: 'name', label: '名称' },
+        { prop: 'secret', label: '内部字段', hide: true },
+      ],
+    });
+
+    expect(wrapper.findAllComponents(TableColumn)).toHaveLength(1);
+    expect(wrapper.findComponent(TableColumn).props('prop')).toBe('name');
     wrapper.unmount();
   });
 });

@@ -577,6 +577,7 @@ watch(
 
       <template v-for="col in columns" :key="col.prop">
         <el-table-column
+          v-if="!col.hide"
           :prop="col.prop"
           :label="col.label"
           :width="col.width"
