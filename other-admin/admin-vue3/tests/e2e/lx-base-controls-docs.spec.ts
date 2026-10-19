@@ -1,5 +1,8 @@
 import { expect, test } from '@playwright/test';
 
+// 该文件验证 lx-ui 文档页，统一使用本地文档服务，避免误打到 Vue3 宿主应用。
+test.use({ baseURL: 'http://127.0.0.1:4177' });
+
 test.beforeEach(async ({ page }) => {
   // 文档 Demo 仅运行本地交互，阻止意外的外部请求。
   await page.route('**/*', (route) => {
@@ -299,24 +302,25 @@ test('Input 普通根节点与输入包装器保持同高', async ({ page }) => 
 test('Input 前后缀、密码和透传场景保留可见外边框', async ({ page }) => {
   await page.goto('/components/lxinput');
   const demo = page.locator('.lx-input-demo');
-  const fields = [
-    demo.getByLabel('案件编码', { exact: true }),
-    demo.getByLabel('涉密核验口令', { exact: true }),
-    demo.getByLabel('联系电话', { exact: true }),
-  ];
+  const fieldIds = ['demo-case-code', 'demo-secret', 'demo-phone'];
+  for (const id of fieldIds) {
+    await expect(demo.locator(`#${id}`)).toBeVisible();
+  }
 
-  for (const field of fields) {
-    const wrapper = field.locator(
-      'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")]//div[contains(concat(" ", normalize-space(@class), " "), " el-input__wrapper ")] ',
-    );
+  const inputRoots = fieldIds.map((id) =>
+    demo
+      .locator(`#${id}`)
+      .locator('xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")][1]'),
+  );
+
+  for (const root of inputRoots) {
+    const wrapper = root.locator('.el-input__wrapper');
     await expect(wrapper).toHaveCSS('border-top-width', '1px');
     await expect(wrapper).toHaveCSS('border-top-style', 'solid');
     await expect(wrapper).not.toHaveCSS('border-top-color', 'rgba(0, 0, 0, 0)');
   }
 
-  const compound = fields[0].locator(
-    'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")] ',
-  );
+  const compound = inputRoots[0];
   await expect(compound).toHaveCSS('border-top-width', '1px');
   await expect(compound).toHaveCSS('border-top-style', 'solid');
   await expect(compound).not.toHaveCSS('border-top-color', 'rgba(0, 0, 0, 0)');
