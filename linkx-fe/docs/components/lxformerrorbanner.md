@@ -28,7 +28,7 @@ import Basic from '../../src/components/LxFormErrorBanner/demo/basic.vue';
 | 名称        | 说明                          | 类型     | 默认值 |
 | ----------- | ----------------------------- | -------- | ------ |
 | title       | 主文案（12px 粗体深红，可选） | `string` | —      |
-| description | 补充说明（11px）              | `string` | —      |
+| description | 补充说明（12px，1.5 倍行高） | `string` | —      |
 
 ### Slots
 
@@ -41,5 +41,5 @@ import Basic from '../../src/components/LxFormErrorBanner/demo/basic.vue';
 ## 使用铁律
 
 - 定位是**业务规则阻断**（封控期禁新增、配额用尽等表单整体无法提交的场景），单字段格式错误走 LxForm 的行内错误态。
-- 视觉规格：report 图标与文字顶部对齐、表单专用错误底色 `--lx-color-form-error-bg`、深红文字 `--lx-color-form-error`；与字段错误态共用令牌。
+- 视觉规格：report 图标与文字顶部对齐、表单专用错误底色 `--lx-color-form-error-bg`、深红文字 `--lx-color-form-error`；标题 12px，说明 12px/1.5 倍行高；与字段错误态共用令牌。
 - 出现在表单顶部，打开弹窗若业务校验失败即展示，修复后消失。

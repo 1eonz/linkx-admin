@@ -67,8 +67,9 @@ const hasAnnouncement = computed(() =>
 
 .lx-error-banner__desc {
   margin: 0;
-  font-size: 11px;
-  line-height: 1.6;
+  /* 错误说明属于可执行信息，使用 12px 与明确行高保证窄屏和放大阅读可读。 */
+  font-size: 12px;
+  line-height: 1.5;
   color: var(--lx-color-form-error);
   opacity: 0.85;
 }

@@ -11,6 +11,8 @@ test.describe('lx-ui LxFormErrorBanner 文档示例', () => {
     await expect(alert).toHaveAttribute('aria-live', 'assertive');
     await expect(alert).toHaveAttribute('aria-atomic', 'true');
     await expect(alert).toContainText('校验阻断');
+    await expect(alert.locator('.lx-error-banner__desc')).toHaveCSS('font-size', '12px');
+    await expect(alert.locator('.lx-error-banner__desc')).toHaveCSS('line-height', '18px');
 
     const details = page.getByRole('button', { name: '查看受影响字段' });
     await details.click();
