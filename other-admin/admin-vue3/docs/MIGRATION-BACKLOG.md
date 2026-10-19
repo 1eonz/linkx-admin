@@ -815,3 +815,8 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 
 - 排班类型管理的名称字段已改用 `LxInput`，保留最大长度、表单校验和弹窗提交语义；类型、格式、Lint 与 Mock **10/10** 通过。
 - 后续继续处理字符串契约明确的表单输入；涉及 number、密码、textarea 或复合插槽的字段必须先核实 LxInput props 与表单校验上下文。
+
+## 2026-10-20 userManage 用户名称输入迁移
+
+- `authority/userManage/components/EditUser.vue` 的用户名称字段已改用 `LxInput`，保留禁用态、失焦清理、正则校验和最大长度；类型、格式、Lint 与 Mock **10/10** 通过。
+- DataPermissionTree 和提交 API 未改动；后续继续迁移低风险字符串字段，复杂权限表单仍需单独回归。

@@ -270,6 +270,11 @@ Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过适�
 - `shiftScheduling/dutyType/index.vue` 的排班类型名称输入已由 `el-input` 改为 `LxInput`，保留表单校验和最大长度 100。
 - LxInput 的数值属性使用显式数字绑定；页面请求、权限和弹窗契约未改变。剩余 `el-input` 继续按页面和字段类型逐项迁移。
 
+## 2026-10-20 userManage 输入计数更新
+
+- `authority/userManage/components/EditUser.vue` 的用户名称 `el-input` 已替换为 `LxInput`，保留禁用、校验和长度限制。
+- 数据权限树仍是业务宿主组件，不能因单个输入替换而扩大解释为权限迁移完成；`element-plus` 删除门槛仍未满足。
+
 ## 2026-10-11 Wave 11 P2 影响更新
 
 - `LxTransferPanel` 与 `LxVirtualTree` 已完成当前版组件级严格 UI/交互审查：单测合计 67/67、文档 E2E 合计 48/48，类型、203 modules 构建、文档构建和 Vue3 生产构建通过；代码复审无 P0-P3。Assessment A 36/40；Assessment B 5 个 detector 均为有效 `[]`/空 stderr/0，9 个浏览器视图证据完整。
