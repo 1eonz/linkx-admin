@@ -11,6 +11,11 @@
 - **当前实现**：`v-loadmore` 已通过控件 `aria-controls` 定位 teleported 下拉，兼容 Element Plus 滚动容器，并在打开、DOM 变化和卸载时同步/解绑监听。
 - **验证**：`loadmore.test.ts` **3/3**，与 `use-fetch.test.ts` 联跑 **12/12**。这证明指令层查找和清理契约，不代表三处页面真实 API 或权限联调完成。
 
+## [2026-10-20] Major #7–#11 当前实现复核
+
+- **结论**：License 失败保留、AuthImg 失败与取消清理、写操作提交锁、ColForm 远程查询竞态均已在当前代码中处理。
+- **证据**：`auth-store.test.ts`、`auth-img.test.ts`、`business-migration.test.ts` **21/21**；业务请求链仍为 Promise 链。页面级 Mock 组合和真实后端/权限联调继续开放。
+
 ## [2026-10-20] LxInput 前后缀/密码/透传边框当前运行时复核
 
 - **复核结论**：问题属于 `LxInput` 组件样式层，不是 Demo 外壳。当前 4177 文档运行时中，案件编码复合输入、涉密核验密码输入、联系电话透传输入的 `.el-input__wrapper` 均计算为 `1px solid rgb(220, 223, 230)`；复合输入根节点也保留同样的连续外框。
