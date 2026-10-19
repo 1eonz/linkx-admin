@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-19] LxFormErrorBanner 当前版复验与 Critique 证据更正
+
+- **验证**：LxFormErrorBanner 单测 **2/2**、4177 文档 Playwright **1/1**、lx-ui typecheck 通过；未发现可复现 P0–P2，角色、播报属性、错误令牌、slot 操作和 375px 布局保持当前契约。
+- **证据边界**：未找到独立 FormErrorBanner Critique 快照；`g2-assessment-b-2026-10-17` 的浏览器证据目标是 SearchBar/StatusSwitch，不能作为本组件视觉 A/B，已按阶段性源码/行为复验记录处理。
+- **待办**：空 props 会产生空 assertive live region，当前仅记录 P3，待真实调用面明确后决定 title 必填或空内容降级；页面迁移、权限和真实后端继续开放。
+
 ## [2026-10-19] LxEmpty 当前版门禁复验交接
 
 - **复验**：覆盖默认/紧凑空态、自定义图标、footer 操作、创建和筛选恢复、长描述、HUD、键盘焦点及 320/375px 窄屏。

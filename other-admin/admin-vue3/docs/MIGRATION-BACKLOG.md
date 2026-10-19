@@ -2,6 +2,12 @@
 
 > **文档职责（2026-10-17）**：本文只维护逐页迁移缺口、旧契约和业务适配备注；不再复制 lx-ui 全局波次状态。全局计划和下一入口以 `doc/PROJECT-DELIVERY-PLAN.md` 为准。
 
+## 2026-10-19 LxFormErrorBanner 页面接入前置条件
+
+- 组件行为已复验：单测 **2/2**、4177 文档 E2E **1/1**、typecheck 通过；接入页必须提供有意义的标题和恢复/定位操作。
+- 独立视觉 Critique 证据尚不存在，G2 SearchBar/StatusSwitch 证据不得复用；页面替换前需补独立 Mock/E2E、按钮权限和窄屏截图。
+- 空 props live region 的 P3 留待真实调用面确认，不能凭空修改 Vue2 业务契约。
+
 ## 2026-10-19 LxEmpty 页面替换前置条件
 
 - 组件库已复验 `LxEmpty` 的默认/紧凑尺寸、`image-size`、图标与 footer 插槽，单测 **5/5**、4177 文档 E2E **1/1**。

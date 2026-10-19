@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-19 LxFormErrorBanner 宿主迁移备注
+
+- 组件当前版单测 **2/2**、4177 文档 E2E **1/1**；宿主接入需保留整体阻断语义、`role=alert`、字段清单 slot 和 375px 换行。
+- 组件库没有独立 FormErrorBanner Critique 快照；不可把 G2 SearchBar/StatusSwitch 浏览器证据计为本组件视觉通过。业务页替换仍需单独补 Mock、权限按钮和失败恢复证据。
+- 空标题调用暂记 P3，缺少真实页面契约前不改变 `title` 公共类型；Vue3 `element-plus` 继续保留。
+
 ## 2026-10-19 LxEmpty 宿主迁移备注
 
 - `LxEmpty` 当前版单测 **5/5**、4177 文档 E2E **1/1**，默认/紧凑空态、图标尺寸、footer 操作和窄屏状态契约已复验；组件不访问业务 API。

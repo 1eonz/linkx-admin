@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-19 LxFormErrorBanner 当前版复验与证据边界更正
+
+- **结果**：实现、类型、Demo 和中文 API 与表单阻断设计一致；单测 **2/2**、4177 文档 Playwright **1/1**、lx-ui typecheck 通过，未发现可复现 P0–P2。
+- **证据更正**：仓库没有独立的 FormErrorBanner Impeccable 快照；`g2-assessment-b-2026-10-17` 的浏览器证据实际针对 SearchBar/StatusSwitch，仅在导航中出现该组件文本，不能作为 FormErrorBanner A/B。相关记录降级为定向源码/行为证据，正式 Critique 保持开放。
+- **后续 P3**：`title` 当前为可选，空 props 会渲染空的 assertive live region；现有真实调用均提供标题，暂不改变公开契约，后续补空内容约束或明确必填决策。
+
 ## 2026-10-19 LxEmpty 当前版门禁复验
 
 - **复验范围**：空态默认/紧凑尺寸、自定义图标尺寸、默认图标插槽、footer 操作、创建后恢复空态、筛选清除恢复、长描述、HUD、键盘焦点和 320/375px 窄屏。

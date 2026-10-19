@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-19 LxFormErrorBanner 当前版复验与证据修正
+
+- 当前实现、Demo、API、单测 **2/2** 和 4177 文档 E2E **1/1** 已复核；组件没有业务 API，slot 操作由宿主提供。
+- 正式 Impeccable A/B 仍开放，不能复用 G2 SearchBar/StatusSwitch 浏览器证据；空 `title` live region 记录为后续 P3。
+
 ## 2026-10-19 LxEmpty 当前版复验
 
 - 当前版行为已复核：默认/紧凑尺寸、图标尺寸、图标与 footer 插槽、创建/筛选恢复、HUD、键盘及窄屏状态均有证据；单测 **5/5**、4177 文档 E2E **1/1**。

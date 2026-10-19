@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-19 LxFormErrorBanner 当前版复验与证据边界更正
+
+- **结果**：实现/类型/Demo/中文 API 与设计约束一致；单测 **2/2**、4177 文档 E2E **1/1**、lx-ui typecheck 通过，未发现可复现 P0–P2。
+- **正式审查状态**：没有独立 FormErrorBanner Critique 快照。`g2-assessment-b-2026-10-17` 的实际浏览器目标是 SearchBar/StatusSwitch，导航文本命中不构成该组件视觉证据；此前关联记录降级，不关闭 UI-10。
+- **后续 P3**：`title` 可选导致空 props 生成空 assertive live region；当前真实调用均有标题，待调用契约确认后再决定必填或空状态约束。
+
 ## 2026-10-19 LxEmpty 当前版门禁复验
 
 - **结果**：当前实现、类型、Demo、中文 API 与既有设计依据一致，未发现可复现 P0–P2；单测 **5/5**、4177 文档 Playwright **1/1**、lx-ui typecheck 和文档构建通过。

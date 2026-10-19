@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-19 LxFormErrorBanner 当前版复验
+
+- 单测 **2/2**、4177 文档 Playwright **1/1**、lx-ui typecheck 通过；未发现可复现 P0–P2，当前实现与表单阻断设计和中文 API 一致。
+- 正式 Impeccable A/B 暂不通过：仓库缺少独立 FormErrorBanner 快照，G2 目录的浏览器证据实际属于 SearchBar/StatusSwitch；相关记录已降级为行为/源码复验。
+- 空 `title` 造成空 assertive live region 记为 P3，待真实调用契约后处理，不增加 UI-10 关闭数。
+
 ## 2026-10-19 LxEmpty 当前版门禁复验
 
 - 单测 **5/5**、4177 文档 Playwright **1/1**、lx-ui typecheck 和文档构建通过；覆盖默认/紧凑、图标尺寸、footer 操作、创建/筛选恢复、HUD、键盘和 320/375px。

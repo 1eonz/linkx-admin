@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-19 LxFormErrorBanner 当前版复验
+
+- 入口：`linkx-fe/src/components/LxFormErrorBanner/index.vue`、`demo/basic.vue`；文档：`linkx-fe/docs/components/lxformerrorbanner.md`。
+- 组件使用 `role=alert`、`aria-live=assertive`、`aria-atomic=true`，由宿主提供 slot 操作，不请求业务 API；单测 **2/2**、4177 文档 E2E **1/1**、typecheck 通过。
+- 正式 Impeccable A/B 尚无独立快照；既有 G2 证据属于 SearchBar/StatusSwitch，已从本组件证据中排除。UI-10 严格行继续开放。
+
 ## 2026-10-19 LxEmpty 当前版门禁复验
 
 - 入口：`linkx-fe/src/components/LxEmpty/index.vue`、`linkx-fe/src/components/LxEmpty/demo/basic.vue`；文档：`linkx-fe/docs/components/lxempty.md`。
