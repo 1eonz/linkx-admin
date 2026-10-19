@@ -2,6 +2,7 @@
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox, ElTree } from 'element-plus';
 import type { FormInstance, FormItemRule } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { ref, reactive, watch } from 'vue';
 
 import { labelDetail, labelList, labelSave, labelDelete, labelBatchDelete, type LabelItem } from '@/api/h5/quick';
@@ -356,7 +357,7 @@ getList();
       >
         <el-form ref="formRef" :model="formData" :rules="rules" label-width="100px" label-position="right">
           <el-form-item label="标签名称" prop="name">
-            <el-input v-model="formData.name" :maxlength="maxlength" show-word-limit placeholder="请输入标签名称" />
+            <LxInput v-model="formData.name" :maxlength="maxlength" show-word-limit placeholder="请输入标签名称" />
           </el-form-item>
           <el-form-item label="标签类型" prop="type">
             <el-select
@@ -379,11 +380,11 @@ getList();
             </el-select>
           </el-form-item>
           <el-form-item label="图标" prop="icon">
-            <el-input v-model="formData.icon" placeholder="请输入图标类名（如 fas fa-home）" />
+            <LxInput v-model="formData.icon" placeholder="请输入图标类名（如 fas fa-home）" />
           </el-form-item>
           <el-form-item label="颜色" prop="color">
             <el-color-picker v-model="formData.color" />
-            <el-input v-model="formData.color" style="width: 200px; margin-left: 10px" placeholder="颜色值" />
+            <LxInput v-model="formData.color" style="width: 200px; margin-left: 10px" placeholder="颜色值" />
           </el-form-item>
         </el-form>
         <template #footer>
