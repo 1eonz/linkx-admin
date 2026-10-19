@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-19] LxDynamicForm 当前版行为验证交接
+
+- **证据**：DynamicForm 单测 **30/30**、文档 Playwright **14/14**、lx-ui `pnpm typecheck` 通过；当前文档服务使用 `playwright.lxui.config.ts` 指向 4177 入口。
+- **覆盖**：schema 类型独立渲染、受控 `value`/`change`、密码字段错误与 ARIA、单图/多图上传失败重试/取消/移除、日期范围回写、远程候选取消与迟到响应、自适应 1/2/3 列和窄屏触控。
+- **边界**：async-validator required stderr 是测试主动触发的预期校验输出，测试退出码为 0；不代表代码失败。当前只完成行为复验，不能替代独立 Impeccable A/B、overlay、snapshot/trend，也不能代表真实上传协议、权限接口或 Vue3 业务页迁移完成。
+- **交接要求**：后续宿主接入继续保留 `value + change(nextValue)` 与旧 schema 语义，业务请求使用 `.then().catch().finally()`；缺少可信后端契约的上传、权限和字段映射保持阻塞。
+
 ## [2026-10-19] LxSectionTitle 当前版双路评审交接
 
 - **验证**：单测 **14/14**、文档 E2E **1/1**、lx-ui typecheck 和 Vue3 项目已安装 Prettier 校验通过；覆盖 375/320px、HUD、键盘、减少动效、360px 容器查询。

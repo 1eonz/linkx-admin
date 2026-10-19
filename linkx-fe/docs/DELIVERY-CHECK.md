@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-19 LxDynamicForm 当前版行为证据复核
+
+- 单测 **30/30**、文档 Playwright **14/14**、lx-ui `pnpm typecheck` 通过；覆盖 schema 渲染、受控值、密码校验/ARIA、上传状态、日期范围、远程请求取消与迟到响应、自适应列和窄屏触控。
+- 单测输出的 async-validator required 文案属于主动错误态断言，退出码为 `0`；没有把它记录为失败。
+- 本条不替代独立 Assessment A/B、浏览器 overlay、snapshot/trend，也不关闭 UI-10；真实后端上传、权限和 Vue3 宿主迁移继续按门禁处理。
+
 ## 2026-10-19 LxSectionTitle Demo 与主题证据补强
 
 - 自定义 `leading` 示例使用 `LxIcon`，当同时传入 `icon` 时由插槽内容优先；中文说明已同步。

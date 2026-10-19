@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-19 DynamicForm 行为证据更新
+
+- `LxDynamicForm` 当前版单测 **30/30**、文档 E2E **14/14**、lx-ui typecheck 通过；覆盖字段 renderer、密码/ARIA、上传、日期范围、远程竞态和响应式列。
+- 这只是组件库行为证据，不能替代真实页面 API、权限、上传协议、空/错/取消状态和 Mock/E2E；宿主 `element-plus` 依赖保持，业务 API 继续使用 Promise 链。
+
 ## 2026-10-19 LxSectionTitle 宿主契约补强
 
 - lx-ui Demo 已验证 `leading` 插槽覆盖 `icon` 属性，宿主适配时应保留 `leading`、`subtitle`、`headingLevel`、`tag` 和 `extra` 插槽/属性契约。

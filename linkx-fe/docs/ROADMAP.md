@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-19 LxDynamicForm 当前版行为复验
+
+- DynamicForm 单测 **30/30**、文档 E2E **14/14**、lx-ui `pnpm typecheck` 通过；覆盖全部内置 schema 类型、受控值回写、密码/ARIA、上传单图与多图、日期范围、远程取消与竞态、自适应列和窄屏触控。
+- async-validator 的 required stderr 来自测试主动验证错误态，进程退出码为 0；不新增缺陷记录。
+- 当前只更新行为证据，不关闭 UI-10 严格矩阵；正式独立 Critique、真实上传/权限联调和 Vue3 宿主替换仍开放。
+
 ## 2026-10-19 LxSectionTitle Demo 契约回归
 
 - Demo 增加自定义 `leading` 图标并验证其优先级；文档明确 `leading` 插槽覆盖 `icon` 属性。

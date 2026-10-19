@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-19 LxDynamicForm 当前版行为验证复核
+
+- **验证**：`other-admin/admin-vue3/tests/unit/lx-dynamic-form.test.ts` **30/30**；`lx-dynamic-form-docs.spec.ts` **14/14**；`linkx-fe` `pnpm typecheck` 通过。覆盖 schema 类型渲染、受控值回写、密码校验与 ARIA、单图/多图上传、日期范围、远程查询取消与迟到响应、失败恢复、自适应列和窄屏触控。
+- **结果**：未发现新的可复现 P0–P2；单测 stderr 中的 async-validator required 文案来自测试主动触发错误态，进程退出码为 `0`，不视为失败。
+- **审查边界**：本轮只补当前版行为证据，不把历史 detector `[]` 当作正式 Critique；独立 Assessment A/B、可写 overlay、snapshot/trend 仍需按 Impeccable 门禁补齐。真实上传协议、后端权限、Vue3 业务页面接入和 Element Plus 删除继续后置。
+- **下一入口**：继续收口剩余 lx-ui 组件/审查证据；完成 UI-10/UI-11 后再进入 Vue3 Element Plus 分批替换，业务 API 保持 `.then().catch().finally()`。
+
 ## 2026-10-19 LxSectionTitle Demo 契约与 HUD 证据补强
 
 - Demo 增加真实 `leading` 插槽图标，并验证它优先于 `icon` 属性；中文文档明确插槽优先级和宿主操作责任。

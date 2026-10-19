@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-19 LxDynamicForm 当前版行为复验
+
+- lx-ui DynamicForm 当前版单测 **30/30**、4177 文档 E2E **14/14**、库类型检查通过；组件行为覆盖不等于 Vue3 业务页面已接入。
+- 迁移时继续保留 schema 的字段类型、`value + change(nextValue)` 受控契约、上传单/多文件值形状、远程查询取消和 `.then().catch().finally()` 请求编排；真实 API、权限字段、上传协议和宿主页面 Mock/E2E 仍待 UI-04。
+- 正式 Impeccable A/B 与整库 UI-11 未因本轮行为复验关闭，Vue3 `element-plus` 继续保留。
+
 ## 2026-10-19 LxSectionTitle Demo 契约回归
 
 - 组件 Demo 新增 `leading` 自定义图标并覆盖 `icon` 优先级；单测 **14/14**、文档 E2E **1/1**、格式检查通过。
