@@ -664,3 +664,14 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 
 - 宿主适配器单测 **4/4**，文档 Playwright **4/4**；覆盖跨页选择、取消当前页后保留其他页、公开方法全量清空、加载/空态/错误重试、排序、375px 局部滚动、方向键、44px 复选目标、HUD 和减少动效。
 - `vue-tsc`、生产构建、VitePress 构建、目标 Prettier 和 `git diff --check` 通过。Assessment A 29/40（Good）；detector JSON/stderr/退出码为合法 `[]`/空/`0`，headless 页面截图为空白，不能单独代表 Impeccable 通过；正式 A/B overlay 及 snapshot/trend 保持开放。
+
+## 2026-10-19 LxPagination 当前版回归与证据边界
+
+- 单测 **7/7**、文档 Playwright **3/3** 通过；受控翻页、`autoReset`、自定义布局、主题、键盘和 375px 局部滚动均已验证。
+- `linkx-fe/.impeccable/critique/pagination-assessment-b-2026-10-17/` 当前不存在，历史“正式 B”文字降级为待补证据；detector `[]` 不单独作为视觉验收。
+- 后续补齐独立 A/B、浏览器多主题视图及 snapshot/trend；宿主真实分页接口和权限契约保持开放。
+
+## 2026-10-19 LxSectionTitle Assessment B 当前版
+
+- 独立浏览器证据已保存至 `linkx-fe/.impeccable/critique/lxsectiontitle-assessment-b-2026-10-19-recheck/`，detector JSON/stderr/退出码为 `[]`/空/`0`。
+- Light/HUD、1280/375/320px、键盘、leading 插槽和 reduced-motion 已覆盖；375/320px 文档壳层 `scrollWidth` 为 615/560，当前记为文档外壳 P2 观察，不能据此宣称组件正式通过。

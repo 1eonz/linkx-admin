@@ -2755,3 +2755,15 @@
 - **浏览器证据**：Assessment B 覆盖 Light/HUD、1280/375px、默认/聚焦/展开/收起、reduced-motion；4 场景无页面错误、失败请求和横向溢出。detector JSON/stderr/退出码为合法 `[]`/空/0，未把空数组单独当作通过。
 - **记录**：综合说明为 `doc/lx-ui/IMPECCABLE-LXDESCRIPTIONS-2026-10-19.md`；真实读屏器、跨浏览器、业务宿主、真实权限及 UI-10/UI-11 全库门禁仍开放。
 - **下一步**：继续剩余 UI-10 组件当前版门禁和正式双路 Critique，再进入 Vue3 Element Plus 分批替换；业务 API 保持 `.then().catch().finally()`。
+
+## 2026-10-19 LxPagination 当前版证据核对
+
+- 组件/适配器单测 **7/7**、文档 Playwright **3/3** 通过，分页事件顺序、自动重置、布局、主题、键盘和窄屏局部滚动均有回归。
+- 当前正式 B 证据目录 `linkx-fe/.impeccable/critique/pagination-assessment-b-2026-10-17/` 不存在；历史“正式审查”描述不作为当前交付依据，UI-10 继续开放。
+- `npx impeccable update` 执行成功；补证据时必须同时保存 detector JSON、stderr、退出码、独立浏览器视图和 snapshot/trend，空数组不能单独代表通过。
+
+## 2026-10-19 LxSectionTitle Assessment B 当前版复验
+
+- 独立证据目录：`linkx-fe/.impeccable/critique/lxsectiontitle-assessment-b-2026-10-19-recheck/`；组件源码与文档 detector 为合法 `[]`、stderr 为空、退出码 `0`。
+- Light/HUD、1280/375/320px、键盘、`leading` 优先级和 reduced-motion 均已执行；375px/320px 页面 `scrollWidth` 分别为 615/560，属于文档外壳级溢出观察，不能直接归因组件，但当前版正式 Critique 保持开放。
+- VitePress 外壳 transition/动画命中已在证据中标记为误报；后续需要单独收口文档壳层窄屏溢出，再评估 UI-10。

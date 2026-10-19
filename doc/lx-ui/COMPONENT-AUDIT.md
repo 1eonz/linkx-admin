@@ -782,3 +782,15 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 ## 2026-10-19 LxInput 前后缀完整高度
 
 - 输入节点、prefix/suffix 及内部槽位改用完整 `--lx-input-track-height`，修复内容轨道比外框少 2px 的视觉差异；窄屏使用 44px 完整触控轨道。E2E **1/1**、单测 **13/13**、typecheck 通过。
+
+## 2026-10-19 LxPagination 当前版门禁复核
+
+- 单测 **7/7**、文档 Playwright **3/3** 通过，覆盖受控分页、条数切换、`autoReset`、自定义布局、主题、键盘和 375px 局部滚动。
+- 复核确认 `linkx-fe/.impeccable/critique/pagination-assessment-b-2026-10-17/` 当前不存在；旧台账中的正式 B 结论降级为历史记录，不能把 detector `[]` 当作正式 Critique 通过。
+- 待补独立 A/B、浏览器证据和 snapshot/trend；宿主分页请求、权限和真实后端继续由迁移适配层负责。
+
+## 2026-10-19 LxSectionTitle Assessment B 当前版复验
+
+- 证据目录为 `linkx-fe/.impeccable/critique/lxsectiontitle-assessment-b-2026-10-19-recheck/`；组件、Demo 和文档 detector 均为合法 `[]`、stderr 空、退出码 `0`。
+- 浏览器覆盖 Light/HUD、1280/375/320px、键盘、`leading` 插槽优先级和 reduced-motion；375/320px 文档页出现 `scrollWidth=615/560`，命中节点主要属于 VitePress 外壳，暂记文档壳层 P2，不关闭组件矩阵。
+- 后续需区分文档壳层溢出与组件自身布局，并在修复后复验 snapshot/trend；空数组不能单独代表正式 Critique 通过。

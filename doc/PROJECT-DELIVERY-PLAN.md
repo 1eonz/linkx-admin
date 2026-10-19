@@ -1623,3 +1623,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **验证**：使用 lx-ui 专用 Playwright 配置运行 `lx-codeslot-docs.spec.ts` **1/1**；覆盖键盘复制、复制中状态、HUD、窄屏与长值。目标 Prettier、lx-ui typecheck 和 `git diff --check` 通过；默认 Vue3 配置误指向登录页的失败已归因于配置入口，不作为组件失败证据。
 - **边界**：该项只收口组件复制反馈，不代表系统剪贴板权限、真实宿主组合或 UI-10 全库矩阵已完成；真实读屏器和跨浏览器仍开放。
 - **下一步**：继续处理 `LxDescriptions` 长值发现性/复制反馈和其余 UI-10 候选，随后执行整库 Impeccable 与 Vue3 宿主替换。
+
+## 2026-10-19 LxPagination 当前版证据边界复核
+
+- 组件与适配器单测 **7/7**、文档 Playwright **3/3** 通过，覆盖受控翻页、条数切换、`autoReset`、自定义布局、主题、键盘和 375px 局部滚动。
+- `linkx-fe/.impeccable/critique/pagination-assessment-b-2026-10-17/` 当前不存在；历史“正式 B”描述降级为待补记录，不能以静态 `[]` 或旧文字关闭 UI-10。
+- `npx impeccable update` 已成功完成；后续补独立 Assessment A/B、浏览器多主题证据和 snapshot/trend 后再评估组件矩阵状态。

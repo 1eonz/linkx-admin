@@ -530,3 +530,9 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 - 组件库长值/长状态展开收起已完成当前版行为与浏览器回归：单测 10/10、文档 E2E 3/3、typecheck 通过。
 - 宿主详情页仍需按旧页面字段、脱敏、复制、具名插槽、空/错/加载和权限契约逐页替换；真实 API 调用继续使用 `.then().catch().finally()`。
 - Assessment B 及综合记录只证明组件 Demo 当前版状态，不关闭业务迁移、真实权限、后端联调或 Element Plus 删除门禁。
+
+## 2026-10-19 LxPagination 当前版证据复核
+
+- 组件/适配器单测 **7/7**、文档 Playwright **3/3** 已通过；迁移适配继续保留 `change(page, pageSize)`、`autoReset`、`autoScroll` 和窄屏局部滚动契约。
+- 历史记录引用的 `linkx-fe/.impeccable/critique/pagination-assessment-b-2026-10-17/` 当前缺失，正式 A/B 与 snapshot/trend 待补；不可用旧文字或静态 `[]` 关闭 UI-10。
+- 真实业务分页请求、空/错/取消/重复提交和权限联调继续按页面迁移批次处理，Element Plus 仍保留。
