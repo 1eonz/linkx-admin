@@ -144,10 +144,12 @@ const headingTag = computed(() => {
 
 .lx-section-title__extra {
   display: flex;
-  flex-shrink: 0;
+  flex: 0 1 auto;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--lx-space-sm);
+  max-width: 100%;
+  min-width: 0;
   row-gap: var(--lx-space-xs);
 }
 

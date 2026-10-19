@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import LxIcon from '../../LxIcon/index.vue'
 import LxSectionTitle from '../index.vue'
 import type { LxSectionTitleSize } from '../types'
@@ -7,6 +7,38 @@ import type { LxSectionTitleSize } from '../types'
 const size = ref<LxSectionTitleSize>('default')
 const hudTheme = ref(false)
 const lastAction = ref('标题仅负责分组和说明，不加载业务数据。')
+let originalDark = false
+let originalHud = false
+let appliedDark = false
+let appliedHud = false
+
+function setTheme(enabled: boolean) {
+  if (typeof document === 'undefined') return
+  appliedDark = enabled || originalDark
+  appliedHud = enabled || originalHud
+  document.documentElement.classList.toggle('dark', appliedDark)
+  document.documentElement.classList.toggle('lx-theme-hud', appliedHud)
+}
+
+watch(hudTheme, setTheme)
+
+onMounted(() => {
+  originalDark = document.documentElement.classList.contains('dark')
+  originalHud = document.documentElement.classList.contains('lx-theme-hud')
+  setTheme(hudTheme.value)
+})
+
+onBeforeUnmount(() => {
+  if (typeof document === 'undefined') return
+  const root = document.documentElement
+  // 宿主在 Demo 存活期间若接管了主题，卸载时保留宿主最新状态。
+  if (root.classList.contains('dark') === appliedDark) {
+    root.classList.toggle('dark', originalDark)
+  }
+  if (root.classList.contains('lx-theme-hud') === appliedHud) {
+    root.classList.toggle('lx-theme-hud', originalHud)
+  }
+})
 </script>
 
 <template>

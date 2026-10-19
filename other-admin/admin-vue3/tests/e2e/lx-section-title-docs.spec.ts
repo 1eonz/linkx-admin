@@ -85,6 +85,8 @@ test.describe('LxSectionTitle 文档示例', () => {
 
     await page.getByRole('checkbox', { name: 'HUD 深色主题' }).check();
     await expect(page.locator('.lx-section-title-demo')).toHaveClass(/lx-theme-hud/);
+    await expect(page.locator('html')).toHaveClass(/dark/);
+    await expect(page.locator('html')).toHaveClass(/lx-theme-hud/);
     const hudSurface = await page.getByTestId('variant-border').evaluate((element) => {
       const title = element.querySelector<HTMLElement>('.lx-section-title__text');
       const root = element.querySelector<HTMLElement>('.lx-section-title');
@@ -166,5 +168,27 @@ test.describe('LxSectionTitle 文档示例', () => {
       return result;
     });
     expect(nestedLayout).toEqual({ extraBelowHeading: true, extraRight: true });
+
+    const mediumHostLayout = await page.evaluate(() => {
+      const source = document.querySelector<HTMLElement>('[data-testid="variant-dashed"] .lx-section-title');
+      if (!source) throw new Error('找不到中等宽度区块标题');
+      const host = document.createElement('div');
+      host.style.width = '420px';
+      host.style.containerType = 'inline-size';
+      host.append(source.cloneNode(true));
+      document.body.append(host);
+      const title = host.querySelector<HTMLElement>('.lx-section-title');
+      const heading = host.querySelector<HTMLElement>('.lx-section-title__heading');
+      const extra = host.querySelector<HTMLElement>('.lx-section-title__extra');
+      if (!title || !heading || !extra) throw new Error('中等宽度标题结构缺失');
+      const result = {
+        extraRight: extra.getBoundingClientRect().right <= title.getBoundingClientRect().right,
+        documentWidth: document.documentElement.scrollWidth,
+      };
+      host.remove();
+      return result;
+    });
+    expect(mediumHostLayout.extraRight).toBe(true);
+    expect(mediumHostLayout.documentWidth).toBeLessThanOrEqual(1280);
   });
 });
