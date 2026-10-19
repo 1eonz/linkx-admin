@@ -3110,3 +3110,9 @@
 - **验证**：目标 Prettier/ESLint、`vue-tsc --noEmit`、隔离 Mock Playwright **10/10** 通过。
 - **边界**：未修改列表 API、权限或请求链；虚拟用户表单因文本字段 number 类型与 `LxInput` 字符串契约冲突仍未迁移。
 - **下一步**：继续字符串类型明确的页面输入，补齐密码/textarea/前后缀和错误态证据后再扩大批次。
+
+# 2026-10-20 authority 人员输入迁移交接
+
+- 本批改动：`authority/person/index.vue`、`authority/imPerson/index.vue` 共 4 个姓名/身份证筛选框改用 `LxInput`，保留清空、回车搜索、占位文案和原请求契约。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；未修改 API、权限标识或 `.then().catch().finally()` 规则。
+- LxInput 边框问题已在组件层处理：普通、密码、透传使用真实 `1px` 边框，复合前后缀由根节点提供连续外框；专项 E2E **2/2**。其余 authority 表单和真实权限联调仍未完成。

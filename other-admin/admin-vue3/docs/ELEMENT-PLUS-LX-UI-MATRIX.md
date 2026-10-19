@@ -258,6 +258,13 @@ Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过适�
 
 当前状态：用量和依赖入口盘点已完成；lx-ui 高频组件浏览器验收、代码替换及宿主直依赖移除尚未完成。按总交付计划，组件库和接入层先于业务页面深交互验收；直接依赖在全部迁移后移除。
 
+## 2026-10-20 输入控件迁移计数更新
+
+- `authority/person/index.vue` 与 `authority/imPerson/index.vue` 共 4 个筛选 `el-input` 已替换为 `LxInput`，保留清空、回车和原值类型适配。
+- 本批完成后 `el-input` 计数应以最新源码盘点为准；不要将组件库 Demo 中的 Element Plus 内核实现计入业务页面未迁移数量。
+- `LxInput` 普通、密码、透传及复合前后缀边框由组件样式统一提供真实 `1px` 边界，专项 E2E **2/2**；Demo 问题反馈先按组件层、主题变量、宿主覆盖三层排查。
+- 仍需逐页处理剩余输入、选择、弹窗和表单项；`element-plus` 依赖删除门槛未满足。
+
 ## 2026-10-11 Wave 11 P2 影响更新
 
 - `LxTransferPanel` 与 `LxVirtualTree` 已完成当前版组件级严格 UI/交互审查：单测合计 67/67、文档 E2E 合计 48/48，类型、203 modules 构建、文档构建和 Vue3 生产构建通过；代码复审无 P0-P3。Assessment A 36/40；Assessment B 5 个 detector 均为有效 `[]`/空 stderr/0，9 个浏览器视图证据完整。

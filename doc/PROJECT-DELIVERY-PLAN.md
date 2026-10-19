@@ -1984,3 +1984,10 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **验证**：lx-ui `vue-tsc --noEmit`、生产构建（206 modules）、目标 Prettier 和差异检查通过；独立 Assessment B 覆盖 1280/420/375/320px × Light/HUD × normal/reduced-motion 共 16 视图，页面错误、失败请求、页面横溢出和 extra 越界均为 0。
 - **Impeccable 证据**：组件、Demo、文档 detector 的 JSON/stderr/退出码为合法 `[]`/空/`0`，仅表示静态零命中；B 报告与浏览器证据见 `tmp-sectiontitle-followup-b.md` 和 `tmp-sectiontitle-followup-b/`。Assessment A 评分 **32/40（Good）**，无 P0/P1，主题并发与嵌套容器建议已处理或记录为后续观察。
 - **边界**：默认 Vue3 E2E 配置本次因真实后端代理 `172.16.23.8:30844` 超时而未渲染页面，不能作为代码失败或通过证据；4177 独立浏览器矩阵才是本波页面证据。真实后端、权限中心、页面操作引导和 Element Plus 分批替换继续后置。
+
+## 2026-10-20 authority 人员筛选输入迁移
+
+- `authority/person` 与 `authority/imPerson` 的姓名、身份证四个筛选输入已由 `el-input` 切换为 `LxInput`，保留 `v-model`、清空、回车搜索、占位文案和原有字符串类型适配。
+- 类型检查、目标 Prettier、ESLint 及隔离 Mock 全菜单回归 **10/10** 通过；未改变权限码、接口参数、请求链式写法或搜索竞态处理。
+- `LxInput` 前后缀、密码和透传场景的边框缺失已确认是组件样式问题，组件已使用真实 `1px` 外边框并由专项 E2E **2/2** 覆盖；Demo 仅作为复现和回归入口。
+- 本批不代表其余人员表单、权限字段权限或 Element Plus 全库替换完成；后续继续逐页核对字符串契约、校验、禁用/只读和失败恢复。

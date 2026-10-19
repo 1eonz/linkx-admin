@@ -803,3 +803,10 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 - Vue3 宿主可继续通过 `lx-ui` 使用 TransferPanel；当前文档 E2E **33/33**，但真实 `DataPermissionTree` 的接口、保存中锁定、错误恢复和权限源仍需迁移批次验证。
 - 桌面 24/32px 紧凑按钮与移动 44px 触控目标是组件当前分档；未取得设计决策前不擅自改变宿主布局。
 - Assessment A **29/40** 为静态建议，不代表真实权限或后端联调通过；Element Plus 删除继续等待全库门禁。
+
+## 2026-10-20 authority 人员筛选输入迁移
+
+- `authority/person`、`authority/imPerson` 的姓名和身份证筛选输入共 4 处已改为 `LxInput`。
+- 已保留 `v-model`、`clearable`、回车搜索、原占位文案和字符串类型适配；类型检查、格式、Lint 与隔离 Mock **10/10** 通过。
+- 下一批候选：`authority/userManage/components/EditUser.vue`、人员角色弹窗及第三方配置表单；迁移前必须核实 `LxInput` 的字符串值契约、密码/透传/文本域属性和表单校验上下文。
+- 阻塞项：`policeExtend/virtualUser/EditVirtualUser.vue` 的若干字段当前声明为 number，不能直接绑定 `LxInput`，待核实接口类型后再处理。
