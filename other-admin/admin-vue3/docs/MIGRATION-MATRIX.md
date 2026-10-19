@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-20 LxMetricCard 宿主接入边界
+
+- 组件侧已明确状态优先级：显式 `status` 优先于 `valueType`，`trendDirection` 只控制图标，`badgeStatus` 独立控制角标。
+- 宿主接入必须保留 loading/empty/error/stale 的真实状态和重试反馈，失败不得改写为 0；真实 API、权限键和页面数据契约未确认前继续阻塞。
+
 ## 2026-10-20 LxSectionTitle 视觉证据边界
 
 - 组件文档 E2E **1/1** 已确认窄屏标题与 `extra` 操作边界；独立 fallback 截图的裁切信号仍标记为文档壳层/运行时待归因。

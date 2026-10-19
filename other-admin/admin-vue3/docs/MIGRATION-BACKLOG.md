@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxMetricCard 状态优先级与失败契约
+
+- [x] Demo 展示 `status`/`valueType`、`trendDirection`/`trendStatus` 冲突时的优先级，补充中文决策矩阵。
+- [x] 记录 loading、empty、error、stale 由宿主负责，失败不得伪装为 0 或成功卡片；单测 **15/15**、文档 E2E **3/3**。
+- [ ] 业务指标页仍待真实字段、权限过滤、失败恢复和 Mock/E2E 契约，缺少可信后端时不开始页面替换。
+
 ## 2026-10-20 LxSectionTitle 宽度证据归因
 
 - [x] 使用现有 `playwright.lxui.config.ts` 重跑 375/320px 标题、标签和 `extra` 边界，文档 E2E **1/1** 通过。

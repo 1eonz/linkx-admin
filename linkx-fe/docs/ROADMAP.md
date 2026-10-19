@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-20 LxMetricCard 状态决策矩阵
+
+- Demo 增加冲突状态示例，API 文档明确 `status`、`valueType`、`trendDirection`、`trendStatus` 和 `badgeStatus` 的优先级与独立维度。
+- 宿主 loading/empty/error/stale 契约已写明；单测 **15/15**、文档 E2E **3/3**、typecheck 和格式检查通过。两个 P1 语义风险仍待正式 Critique，不关闭 UI-10。
+
 ## 2026-10-20 LxSectionTitle Assessment B 归因
 
 - detector 三目标为合法 `[]`/空 stderr/0；仓库 Playwright 文档 E2E **1/1** 通过 375/320px 操作区边界和页面宽度断言。

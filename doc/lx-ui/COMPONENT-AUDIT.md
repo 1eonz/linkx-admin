@@ -1,5 +1,10 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-20 LxMetricCard 状态决策矩阵补强
+
+- Demo 增加状态冲突示例，中文 API 明确显式 `status` 覆盖旧 `valueType`、`trendDirection` 决定图标、`badgeStatus` 独立控制角标；宿主失败/stale 不得转为 0。
+- 单测 **15/15**、4177 文档 E2E **3/3**、typecheck、目标格式和差异检查通过；Assessment A 记录的两个 P1 语义风险仍待正式 A/B 和真实宿主契约，不关闭 UI-10。
+
 ## 2026-10-19 LxSectionTitle Demo 契约与主题证据补强
 
 - Demo 增加 `leading` 自定义 `LxIcon`，实测它覆盖同时传入的 `icon`；中文 API 补充插槽优先级说明。

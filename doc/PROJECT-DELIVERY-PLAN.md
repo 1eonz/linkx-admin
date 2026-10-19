@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxMetricCard 状态维度与宿主失败契约
+
+- **实现**：Demo 增加冲突状态示例，明确 `status` 覆盖旧 `valueType`、`trendDirection` 覆盖趋势图标、`badgeStatus` 独立生效；中文 API 增加状态决策矩阵和 loading/empty/error/stale 宿主边界。
+- **验证**：LxMetricCard 单测 **15/15**、4177 文档 E2E **3/3**、新增冲突示例断言、`vue-tsc --noEmit`、目标 Prettier 和 `git diff --check` 通过。
+- **边界**：本波只澄清组件公开语义和 Demo 证据，不改变请求/API/权限；正式 Impeccable A/B 仍保留两个 P1 语义风险，不增加 UI-10 关闭数。
+
 ## 2026-10-20 LxSectionTitle 当前版 Assessment B 证据归因
 
 - **结果**：独立 detector 三目标均为合法 JSON `[]`、stderr 为空、退出码 `0`；独立浏览器 fallback 在 1280px 正常，但 375/320px 截图出现文档壳层右侧内容裁切信号。

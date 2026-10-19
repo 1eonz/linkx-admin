@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxMetricCard 状态决策与宿主失败边界交接
+
+- **改动**：Demo 增加显式 `status` 与旧 `valueType` 冲突、趋势方向与趋势状态分离、角标独立状态的可见示例；中文文档补充优先级矩阵及 stale/失败不转 0 规则。
+- **验证**：单测 **15/15**、4177 文档 E2E **3/3**、typecheck、目标 Prettier 和差异检查通过；E2E 确认冲突示例显示 `success` 状态和上行图标。
+- **后续**：两个 P1 仍需正式 Impeccable A/B 与宿主业务契约确认；真实接口、权限、页面迁移和 Element Plus 保留策略不变。
+
 ## [2026-10-20] LxSectionTitle Assessment B 降级归因交接
 
 - **证据**：三路 detector 均为 `[]`/空 stderr/退出码 `0`；独立 headless fallback 在 375/320px 记录右侧裁切，但仓库 Playwright 配置下 `lx-section-title-docs.spec.ts` **1/1** 通过，操作区边界和 `documentElement.scrollWidth` 断言均通过。

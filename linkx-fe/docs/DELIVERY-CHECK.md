@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxMetricCard 状态维度与宿主失败契约
+
+- [x] Demo 增加冲突状态优先级示例；中文 API 补充状态决策矩阵与 stale/失败边界。
+- [x] 单测 **15/15**、4177 文档 E2E **3/3**、新增冲突断言、typecheck、目标 Prettier 和差异检查通过。
+- [ ] 正式 Impeccable A/B 的两个 P1 语义风险仍开放；不把本波行为证据当作 UI-10 关闭。
+
 ## 2026-10-20 LxSectionTitle Assessment B 归因补充
 
 - [x] detector 三目标 JSON/stderr/退出码核对为 `[]`/空/`0`；现有 Playwright 配置下窄屏操作区与页面宽度回归 **1/1**。

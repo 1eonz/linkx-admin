@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxMetricCard 状态决策
+
+- `LxMetricCard` Demo 现在展示状态维度冲突时的确定性优先级；组件仍为纯展示组件，不访问 API，不把失败结果转换为 0。
+- 单测 **15/15**、文档 E2E **3/3** 已覆盖冲突示例和宿主 loading/empty/error；真实指标页权限与接口映射仍由 Vue3 迁移台账管理。
+
 ## 2026-10-20 LxSectionTitle 当前版审查证据
 
 - 组件、Demo 和中文文档 detector 均为合法 `[]`/空 stderr/退出码 `0`；独立 fallback 截图的窄屏裁切信号已与仓库 Playwright **1/1** 交叉核对，当前不归因于组件源码。
