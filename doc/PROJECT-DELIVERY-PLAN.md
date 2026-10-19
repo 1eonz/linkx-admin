@@ -1592,6 +1592,11 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 前后缀、内部槽位及 prepend/append 的行高统一使用 lx-input-content-height，修复 Element Plus line-height: 1 造成的文字轨道偏差；外框尺寸和 44px 窄屏规则不变。
 - 复合前后缀 E2E 1/1、lx-ui typecheck/build、目标 Prettier、ESLint 和差异检查通过；A 31/40，B 为合法 []、空 stderr、退出码 0，并有桌面、HUD、窄屏浏览器证据。
 - B 的一次聚焦读数误选了其他 Demo 节点，已由复合输入正式焦点断言复核，不作为缺陷；[] 不单独代表视觉通过。可访问命名、错误关联和语义前后缀说明列入后续表单可访问性任务。
+
+## 2026-10-19 LxInput 前后缀完整高度修复
+
+- 输入节点、prefix/suffix 及内部槽位统一改用完整 `--lx-input-track-height`，解决 32/44px 外框与 30/42px 内部元素的视觉落差；prepend/append、焦点环和尺寸契约保持不变。
+- 复合前后缀 E2E **1/1**、LxInput 单测 **13/13**、lx-ui typecheck 通过；静态 detector `[]` 不单独代表视觉审查通过。
 ## 2026-10-18 LxCodeSlot 复制中反馈 P1 收口
 
 - **实现**：复制进行中按钮显示 `LxIcon loading`、`title="正在复制"` 和 `aria-busy="true"`，同时禁用重复点击；复制完成后恢复复制图标和原提示。保留既有成功/失败事件与 Promise 链边界。

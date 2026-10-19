@@ -705,3 +705,5 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - `linkx-fe/src/components/LxProTable/` 当前版行为门禁已复验：跨页选择按当前页差集合并，公开清空方法清除全部页，加载/空/错状态、局部滚动和键盘路径均有单测或文档 E2E 证据。
 - 组件库 `LxProTable` 的静态 detector 已保存三件套，但独立 Impeccable A/B 与正式 snapshot/trend 仍未完成；不要据此标记 UI-10 关闭。
 - Vue3 业务宿主仍通过适配层保留 `tableAttrs`、自定义列、脱敏和旧事件契约，真实 API、权限联调与 Element Plus 删除保持后置。
+
+- `linkx-fe/src/components/LxInput/` 的输入节点、prefix/suffix、内部槽位和 prepend/append 当前统一完整高度轨道；几何回归入口为 `other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`。

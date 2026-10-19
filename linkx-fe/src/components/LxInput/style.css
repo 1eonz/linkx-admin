@@ -11,8 +11,8 @@
 /* 输入框及其所有前后缀槽位共用一条高度轨道，避免内核令牌在切换时分别计算。 */
 .lx-input {
   --lx-input-track-height: var(--el-input-height);
-  /* wrapper 使用 border-box，内部内容轨道需要扣除上下各 1px 描边。 */
-  --lx-input-content-height: calc(var(--lx-input-track-height) - 2px);
+  /* 输入值与前后缀直接共用完整控件轨道，避免用户看到 2px 高度落差。 */
+  --lx-input-content-height: var(--lx-input-track-height);
   box-sizing: border-box;
   height: var(--lx-input-track-height);
   min-height: var(--lx-input-track-height);
@@ -105,7 +105,7 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
 
 /* 输入值在两种主题下都使用输入表面专属正文令牌。 */
 .lx-input .el-input__inner {
-  /* 真实输入元素也必须落在描边内的内容轨道，否则会比 prefix/suffix 高 2px。 */
+  /* 真实输入元素与 prefix/suffix 使用同一完整高度，视觉边界保持一致。 */
   height: var(--lx-input-content-height);
   min-height: 0;
   align-self: center;
@@ -113,8 +113,7 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
   line-height: var(--lx-input-content-height);
 }
 
-/* 输入内容与 prefix/suffix 共用 wrapper 的内部内容轨道，避免槽位越过
- * 上下 1px 描边；完整控件高度仍由 wrapper 自身承载。 */
+/* 输入内容与 prefix/suffix 共用完整控件轨道，避免槽位与输入框出现上下差异。 */
 .lx-input .el-input__prefix,
 .lx-input .el-input__suffix,
 .lx-input .el-input__prefix-inner,
@@ -264,7 +263,7 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
 @media (hover: none), (max-width: 640px) {
   .lx-input {
     --lx-input-track-height: 44px;
-    --lx-input-content-height: 42px;
+    --lx-input-content-height: var(--lx-input-track-height);
     --el-input-height: var(--lx-input-track-height);
     --el-input-inner-height: calc(var(--lx-input-track-height) - 2px);
   }

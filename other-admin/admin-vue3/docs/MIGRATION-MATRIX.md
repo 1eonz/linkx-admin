@@ -151,6 +151,11 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 - Vue3 适配继续通过 lx-ui 的 LxInput；本波只修复库内样式和文档 E2E，不改变宿主 props、事件、插槽或 Promise 链 API 请求写法。
 - 复合输入尺寸、390px 触屏和焦点环回归通过；Element Plus 全量替换仍等待 UI-10/UI-11 门禁。
+
+## 2026-10-19 LxInput 前后缀完整高度
+
+- lx-ui 输入节点、prefix/suffix、内部槽位和 prepend/append 已统一完整高度轨道；宿主适配不需要再覆盖 Element Plus 高度样式。
+- 组件级 E2E **1/1**、单测 **13/13**；业务页面、权限源、真实 API 和 Element Plus 删除仍未完成。
 # 2026-10-19 LxProTable 迁移契约复验
 
 - Vue3 宿主适配继续保留 `tableAttrs`、自定义列/表头/单元格插槽、按当前页差集合并的跨页选择、排序、局部滚动和 `maskValue` 权限脱敏边界。

@@ -2730,6 +2730,11 @@
 - 长普通值使用原生按钮切换展开/收起，长状态使用按钮包裹 `LxStatusDot`；状态点内部退出 Tab 顺序，保留标签和值的完整可访问名称。
 - 单测 **10/10**、文档 E2E **3/3**、lx-ui typecheck、目标格式检查通过；detector 合法 `[]`、空 stderr、退出码 `0`，仅代表静态零命中。
 - 新独立 Impeccable A/B、综合报告和 snapshot/trend 待补；后续复验必须覆盖 Light/HUD、窄屏、减少动效和展开前后状态。
+
+## 2026-10-19 LxInput 前后缀完整高度交接
+
+- 输入、prefix/suffix、内部槽位与 prepend/append 已统一完整高度轨道，解决前后缀比 32/44px 外框少 2px 的视觉差异；未改变 props、事件、插槽或 API 请求风格。
+- 定向 E2E **1/1**、单测 **13/13**、lx-ui typecheck 通过；后续仍需遵守 Impeccable A/B 独立证据和临时产物白名单。
 # [2026-10-19] LxProTable 当前版行为门禁复验
 
 - **交接结果**：修复 `selection-change` 当前页差集逻辑，并为暴露的 `clearSelection()` 增加全量清空路径；取消当前页行不会误删其他页选择，清空操作也不会残留远端页 key。跨页受控选择、加载/空态/错误重试、排序、375px 局部滚动、方向键、44px 复选目标、HUD 和卸载清理复核均通过。

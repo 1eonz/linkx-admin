@@ -765,3 +765,7 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 - **行为**：跨页 `selectedKeys` 由当前页差集合并，公开 `clearSelection()` 清除全部页，受控选择、排序、加载/空态/错误重试、局部横向滚动、方向键、44px 复选目标、HUD 和 `ResizeObserver` 卸载清理均有当前版证据。
 - **结果**：单测 4/4、文档 E2E 4/4、类型/构建/文档构建/格式检查通过，未发现可复现 P0–P2。
 - **审查**：Assessment A 29/40（Good）；跨页选择 P1 已修复。Demo 危险操作、工具栏密度和横向滚动可发现性仍列为后续 P1/P2。`maskValue` 仍只消费宿主注入权限源；真实权限和后端契约未联调。detector 合法 `[]`/空 stderr/0 不替代独立 A/B，UI-10 严格矩阵保持开放。
+
+## 2026-10-19 LxInput 前后缀完整高度
+
+- 输入节点、prefix/suffix 及内部槽位改用完整 `--lx-input-track-height`，修复内容轨道比外框少 2px 的视觉差异；窄屏使用 44px 完整触控轨道。E2E **1/1**、单测 **13/13**、typecheck 通过。
