@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxTag 首批宿主替换
+
+- `baseData/globals` 与 `nodeManage/serverManage` 的状态/标签列已接入 `lx-ui` `LxTag`，保留页面数据和表格插槽契约。
+- 当前 Vue3 源码直接 `<el-tag>` 实际为 35 处；剩余页面需按 `effect`、关闭和插槽能力逐页归因后迁移。
+
 ## 2026-10-20 LxEmpty 宿主空态迁移完成
 
 - `other-admin/admin-vue3/src/views` 已无直接 `<el-empty>`；最后 5 处复杂空态迁移到 `LxEmpty`，保留表格空插槽、条件、尺寸和 class。

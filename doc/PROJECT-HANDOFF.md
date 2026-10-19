@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxTag 首批宿主替换
+
+- **改动**：`baseData/globals` 状态列与 `nodeManage/serverManage` 标签列改用 `LxTag`；Element Plus `danger` 映射为 `error`，保留原文案、条件和表格插槽。
+- **事实**：源码重新扫描后直接 `<el-tag>` 为 **35** 处，旧矩阵的 38 处已校正；剩余场景含 effect、关闭、插槽或状态组合差异，不能一次性替换。
+- **验证**：Vue3 `vue-tsc --noEmit`、两个目标文件 Prettier 通过；UI-10/UI-11、页面 Mock 状态和真实后端联调仍开放。
+
 ## [2026-10-20] Vue3 剩余 LxEmpty 宿主替换
 
 - **改动**：5 个复杂空态改用 `LxEmpty`，覆盖表格 `#empty` 插槽、详情条件空态和两个字段映射弹窗；保留 `v-if`、原文案、`image-size="80"` 与 `mapper-empty` class。

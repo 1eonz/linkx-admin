@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxTag 首批宿主替换
+
+- [x] `baseData/globals` 状态列、`nodeManage/serverManage` 标签列改用 `LxTag`，保留表格 slot 和状态文案；`danger` 映射为 `error`。
+- [x] 源码实际直接 `<el-tag>` 由历史记录 38 校正为 **35**；类型检查和目标 Prettier 通过。
+- [ ] 剩余 35 个标签需按 `effect`、关闭语义、插槽和权限状态逐页迁移，不能机械替换；UI-10/UI-11 和 Element Plus 删除门禁仍未满足。
+
 ## 2026-10-20 LxEmpty 宿主替换完成
 
 - [x] 剩余 5 个复杂 `el-empty` 已改用 `LxEmpty`，保留表格 `#empty` 插槽、`v-if`、`image-size="80"`、class 和原有中文文案。
