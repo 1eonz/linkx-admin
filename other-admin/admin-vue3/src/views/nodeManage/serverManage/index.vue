@@ -12,6 +12,7 @@
  */
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import ConnectionStatusDot from '../components/ConnectionStatusDot.vue';
@@ -201,7 +202,7 @@ onBeforeUnmount(() => {
 
         <!-- 标签列 -->
         <template #tag="scope">
-          <el-tag v-if="getRow(scope).tag" type="info">{{ getRow(scope).tag }}</el-tag>
+          <LxTag v-if="getRow(scope).tag" type="info">{{ getRow(scope).tag }}</LxTag>
           <span v-else>-</span>
         </template>
 

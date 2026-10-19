@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Delete, Edit, MagicStick, Plus, Refresh, Search } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -342,9 +343,9 @@ onBeforeUnmount(() => {
         </template>
         <!-- 状态列：el-tag success/danger -->
         <template #status="scope">
-          <el-tag :type="getRow(scope).status === 0 ? 'success' : 'danger'">
+          <LxTag :type="getRow(scope).status === 0 ? 'success' : 'error'">
             {{ getRow(scope).status === 0 ? t('index.list.normal') : t('index.list.forbidden') }}
-          </el-tag>
+          </LxTag>
         </template>
 
         <!-- 操作列：编辑/删除/恢复 三态 -->
