@@ -10,6 +10,7 @@
  */
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { onMounted, ref } from 'vue';
 
 import EditPcTabModal from './EditPcTabModal.vue';
@@ -266,9 +267,9 @@ onMounted(loadConfig);
       <el-table-column prop="order" label="排序" width="100" align="center" />
       <el-table-column label="打开方式" width="140" align="center">
         <template #default="scope">
-          <el-tag :type="getRow(scope).openWay === 1 ? 'warning' : 'info'">
+          <LxTag :type="getRow(scope).openWay === 1 ? 'warning' : 'info'">
             {{ getRow(scope).openWay === 1 ? '弹窗' : 'iframe 嵌入' }}
-          </el-tag>
+          </LxTag>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="180" align="center" fixed="right">

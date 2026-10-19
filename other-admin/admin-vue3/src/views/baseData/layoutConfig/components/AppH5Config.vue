@@ -10,6 +10,7 @@
  */
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { computed, onMounted, ref } from 'vue';
 
 import EditSectionModal from './EditSectionModal.vue';
@@ -236,16 +237,16 @@ onMounted(getList);
     <ProTable :columns="columns" :data="list" :loading="listLoading" :show-pagination="false">
       <!-- 板块类型 -->
       <template #type="scope">
-        <el-tag :type="getRow(scope).type === 4 ? 'warning' : 'info'">
+        <LxTag :type="getRow(scope).type === 4 ? 'warning' : 'info'">
           {{ getTypeText(getRow(scope).type) }}
-        </el-tag>
+        </LxTag>
       </template>
 
       <!-- 是否显示 -->
       <template #show="scope">
-        <el-tag :type="getRow(scope).show === 1 ? 'success' : 'danger'">
+        <LxTag :type="getRow(scope).show === 1 ? 'success' : 'error'">
           {{ getRow(scope).show === 1 ? '显示' : '隐藏' }}
-        </el-tag>
+        </LxTag>
       </template>
 
       <!-- 操作列 -->

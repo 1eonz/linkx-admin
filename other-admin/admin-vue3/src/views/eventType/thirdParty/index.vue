@@ -2,7 +2,7 @@
 import { Delete, Edit, Plus, View } from '@element-plus/icons-vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxEmpty, LxPagination } from 'lx-ui';
+import { LxEmpty, LxPagination, LxTag } from 'lx-ui';
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import type { NorthboundAppForm, NorthboundAppItem, NorthboundAppListQuery } from '@/api/resource/thirdApp';
@@ -247,9 +247,9 @@ onBeforeUnmount(() => {
           </el-table-column>
           <el-table-column label="状态" width="90" align="center">
             <template #default="scope">
-              <el-tag :type="scope.row.status === 1 ? 'success' : 'info'">
+              <LxTag :type="scope.row.status === 1 ? 'success' : 'info'">
                 {{ scope.row.status === 1 ? '启用' : '停用' }}
-              </el-tag>
+              </LxTag>
             </template>
           </el-table-column>
           <el-table-column prop="expired" label="过期时间" min-width="165" show-overflow-tooltip />
