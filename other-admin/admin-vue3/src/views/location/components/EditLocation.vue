@@ -14,6 +14,7 @@
  */
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import { createLocation, updateLocation, type LocationItem } from '@/api/resource/location';
@@ -162,7 +163,7 @@ defineExpose({ init });
         />
       </el-form-item>
       <el-form-item label="经纬度" prop="location">
-        <el-input v-model="form.location" placeholder="例如：116.2420,39.5248" maxlength="25" />
+        <LxInput v-model="form.location as string" placeholder="例如：116.2420,39.5248" :maxlength="25" />
       </el-form-item>
     </el-form>
     <template #footer>
