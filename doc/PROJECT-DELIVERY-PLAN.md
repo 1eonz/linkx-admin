@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxSwitch 剩余宿主替换完成
+
+- **实现**：统一通信设备类型、ICP 子部门筛选、警务上报编辑/列表、协同成员、第三方应用上架共 6 处 `el-switch` 改用 `LxSwitch`；透传 `active-value/inactive-value`、`before-change`、`@change`、loading 和禁用契约。
+- **验证**：Vue3 `vue-tsc --noEmit`、六个目标文件 ESLint/Prettier、`git diff --check` 和隔离 Mock 全菜单 Playwright **10/10** 通过；业务页面直接 `<el-switch>` 归零。
+- **边界**：归零仅表示页面直接引用已迁移，Element Plus 仍被其他控件和 lx-ui 内核使用，不能删除；真实后端、权限联调、跨浏览器和正式整库 Impeccable 仍未完成。
+- **下一入口**：切换到剩余 Element Plus 组件矩阵，优先核对 `el-input`、`el-select`、`el-dialog` 等已有 lx-ui 适配器；每批继续保持页面契约和链式 API 请求。
+
 ## 2026-10-20 LxSwitch 第三批宿主替换
 
 - **实现**：南向任务配置的任务派发/紧急开关、PC 页签打开方式、H5 板块显示状态共 4 处 `el-switch` 改用 `LxSwitch`；保留数值 `1/0`、表单条件、文案和保存时机。

@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxSwitch 剩余宿主替换完成
+
+- [x] 统一通信设备类型/ICP 筛选、警务上报编辑/列表、协同成员和第三方应用上架共 6 处开关改用 `LxSwitch`。
+- [x] 保留 `active-value/inactive-value`、`before-change`、loading、失败回滚和 `@change` 事件；类型、格式和 Mock 全菜单 **10/10** 通过。
+- [x] Vue3 业务页面直接 `<el-switch>` 已归零；[ ] Element Plus 删除门禁仍未满足，其他组件和 lx-ui 内核依赖继续保留。
+
 ## 2026-10-20 LxSwitch 第三批宿主替换
 
 - [x] 南向任务配置、PC 页签和 H5 板块编辑的 4 个表单开关改用 `LxSwitch`，保留 `1/0` 值域、条件渲染和保存契约。

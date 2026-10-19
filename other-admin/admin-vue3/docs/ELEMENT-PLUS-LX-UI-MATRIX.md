@@ -1,5 +1,11 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-20 LxSwitch 宿主替换完成
+
+- 统一通信、警务上报、协同成员和第三方应用页面的剩余 6 个开关改用 `LxSwitch`；页面原有异步 `@change`、loading、失败回滚和 AppManage `before-change` 均保留。
+- 重新扫描 `other-admin/admin-vue3/src` 后业务页面直接 `<el-switch>` 为 **0**；该事实不等于可以删除 `element-plus`，其他组件迁移和 lx-ui 内核依赖仍在。
+- 下一批转入 `el-input`/`el-select`/`el-dialog` 等矩阵项，继续按真实 props、事件、插槽和表单上下文核对。
+
 ## 2026-10-20 LxSwitch 第三批宿主替换
 
 - 南向 `TaskConfigModal`、PC 页签编辑和 H5 板块编辑共 4 处表单开关改用 `LxSwitch`；保留 `active-value/inactive-value`、`v-model`、表单条件和提交时机。

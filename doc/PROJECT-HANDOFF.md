@@ -3086,3 +3086,9 @@
 - **验证**：`vue-tsc --noEmit`、目标 ESLint/Prettier、`git diff --check`、隔离 Mock Playwright **10/10** 通过；源码直接 `el-switch` 从 10 降到 **6**。
 - **边界**：未改变接口、权限、校验和链式 API 请求；剩余 6 处涉及异步表格保存、权限筛选或失败回滚，暂不机械替换。正式 Impeccable 全库门禁、真实后端和 Element Plus 删除仍未完成。
 - **下一步**：继续核对统一通信与警务上报开关的 loading、失败恢复和权限语义，确认可由 `LxSwitch` 或 `LxStatusSwitch` 完整承接后再迁移。
+# 2026-10-20 LxSwitch 剩余宿主替换交接
+
+- **实现**：六个剩余页面开关已全部由 `el-switch` 改用 `LxSwitch`：设备类型、ICP 子部门筛选、警务上报编辑/列表、协同成员、第三方应用上架。`LxSwitch` 透传 `active-value/inactive-value`、`before-change` 和 `@change`，页面 loading、失败回滚和确认逻辑保持。
+- **验证**：`vue-tsc --noEmit`、六个目标文件 ESLint/Prettier、`git diff --check`、隔离 Mock Playwright **10/10** 通过；业务页面直接 `el-switch` 扫描为 **0**。
+- **边界**：没有删除 Vue3 `element-plus`，因为其他 Element Plus 控件及 lx-ui 内核仍依赖它；权限、真实后端、跨浏览器、正式 Impeccable 全库审查和页面引导仍按计划后置。
+- **下一步**：转入剩余 `el-input`、`el-select`、`el-dialog` 等矩阵项；组件迁移仍须保留中文文档、Promise 链 API 风格和页面原有业务契约。
