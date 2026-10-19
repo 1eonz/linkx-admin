@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-19 LxSectionTitle 窄屏 extra 布局修复
+
+- 窄屏（400px 及以下）将标题区与 `extra` 操作区拆为两行，长标题继续换行，操作区右对齐并保留宿主 44px 触控目标，避免标题与操作互相挤压。
+- 单测 **14/14**、文档 E2E **1/1**、lx-ui typecheck、生产构建、目标 Prettier、定向 ESLint 和 `git diff --check` 通过；覆盖 375px/320px、HUD、减少动效和键盘操作。
+- 当前 B 证据三路 detector 为合法 `[]`/空 stderr/退出码 `0`；Assessment A 使用 2026-10-18 基线，正式 UI-10 严格矩阵行和整库 Critique 仍开放。
+
 ## 2026-10-19 LxDescriptions 长值展开状态修复
 
 - 长值与长状态的焦点、收起、展开视觉状态已统一；新增 `chevron-down` 旋转图标，避免仅靠悬停或辅助技术描述推断状态。

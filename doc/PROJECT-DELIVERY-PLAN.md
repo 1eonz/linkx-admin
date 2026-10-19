@@ -1522,6 +1522,12 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **实现**：长普通值改为可访问展开/收起按钮；长状态使用独立按钮包裹状态点，触屏不再依赖 title 或悬停；短状态和脱敏、自定义插槽契约保持不变。
 - **验证**：LxDescriptions 单测 **10/10**、文档 E2E **3/3**、lx-ui typecheck、目标 Prettier 和差异检查通过；detector JSON 为合法 `[]`、stderr 为空、退出码 `0`。
 - **审查状态**：独立 Assessment A **27/40** 的两个 P1 已修复；Assessment B 已完成 Light/HUD、1280/375px（含窄屏减少动效）4 场景、28 个状态步骤，页面错误、失败请求和横向溢出均为 0。组件、Demo、文档三路 detector 的 JSON/stderr/退出码均为合法 `[]`/空/`0`，证据见 `linkx-fe/.impeccable/critique/lxdescriptions-toggle-assessment-b-2026-10-19/assessment-b-report.md`。`[]` 只表示静态规则零命中，正式 UI-10 全库关闭和整库 Critique 仍未完成。
+
+## 2026-10-19 LxSectionTitle 窄屏 extra 布局修复
+
+- **实现**：400px 及以下将标题与 `extra` 操作区拆为两行，标题区完整占据首行，操作区右对齐；长标题保留当前换行语义，未改变 `headingLevel`、tag、subtitle 或具名插槽契约。
+- **验证**：`lx-section-title.test.ts` **14/14**、`lx-section-title-docs.spec.ts` **1/1**；覆盖 375px/320px、HUD、减少动效、键盘操作和无横向溢出；lx-ui typecheck/build、目标 Prettier、定向 ESLint 和 `git diff --check` 通过。三路 detector JSON/stderr/退出码为合法 `[]`/空/`0`。
+- **边界**：本波只改善组件窄屏布局，不增加 UI-10 全库关闭数；当前使用既有 Assessment A 基线，新的独立 A 与正式 snapshot/trend 尚未收口，不能把本波标为正式 Critique 通过。Vue3 Element Plus 替换、权限中心、文本/字段权限、真实后端和页面操作引导继续后置。
 ## 2026-10-18 LxCodeSlot 复制中反馈 P1 收口
 
 - **实现**：复制进行中按钮显示 `LxIcon loading`、`title="正在复制"` 和 `aria-busy="true"`，同时禁用重复点击；复制完成后恢复复制图标和原提示。保留既有成功/失败事件与 Promise 链边界。

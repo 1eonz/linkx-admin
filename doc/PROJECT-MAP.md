@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-19 LxSectionTitle 窄屏布局修复
+
+- 入口：`linkx-fe/src/components/LxSectionTitle/index.vue`；文档回归：`other-admin/admin-vue3/tests/e2e/lx-section-title-docs.spec.ts`。
+- 400px 及以下标题与 `extra` 拆为标题行/操作行，长标题保持可见换行，操作区不横向溢出；单测 **14/14**、文档 E2E **1/1**、类型、构建、格式和定向 ESLint 通过。
+- 组件 detector JSON/stderr/退出码为合法 `[]`/空/`0`；正式 UI-10 行仍开放，宿主页面替换和真实业务联调不因组件证据完成。
+
 ## 2026-10-19 LxDescriptions 长值展开状态修复
 
 - 入口：`linkx-fe/src/components/LxDescriptions/index.vue`；测试：`other-admin/admin-vue3/tests/unit/lx-descriptions.test.ts`、`tests/e2e/lx-descriptions-docs.spec.ts`。

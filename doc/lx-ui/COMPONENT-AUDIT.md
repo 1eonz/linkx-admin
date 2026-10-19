@@ -426,7 +426,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxRadio`            | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；14px 靶环/6px 靶心、横纵选中色差、中文播报、禁用、减少动效与 44px 触屏均有当前版证据                                                                                  |
 | `LxRadioGroup`       | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/8px 垂直间距、方向键、禁用继承、历史只读值及 Light/HUD 行为均有当前版证据                                                                                   |
 | `LxSearchBar`        | `design/检索面板 SearchBar/`                      | **已关闭（G2，2026-10-17）**；单测 10/10、文档 E2E 5/5、综合 34/40；第四字段 4/4/4/12 栅格、桌面同行和窄屏独占操作行已复验；宿主业务参数映射仍待 UI-04 |
-| `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 2026-10-18 Assessment A 33/40；B 三目标 `[]`/空 stderr/0，Light/HUD、桌面/375px 六视图注入成功；窄屏 extra、标题层级和 tag 读屏策略列为后续建议，UI-10 严格行仍开放 |
+| `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 2026-10-19 修复 400px 以下窄屏 extra 与标题挤压，单测 14/14、文档 E2E 1/1；既有 A 33/40 与 B 六视图证据保留，标题层级和 tag 读屏策略仍列后续建议，UI-10 严格行仍开放 |
 | `LxSelect`           | `design/表单控件八件套/`                          | **已关闭（Wave 20）**；桌面 32px、390px 触控目标/选项行 44px；定向单测 15/15、文档 E2E 8/8、A/B 36/40 与六场景浏览器证据、代码复审无未关闭 P0–P2；目录密度 P3 留后续整理                     |
 | `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                                                                            |
 | `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                                                                                                 |

@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-19] LxSectionTitle 窄屏布局修复交接
+
+- **问题与实现**：400px 及以下标题和 `extra` 操作区改为两行布局，标题区完整占据第一行，操作区右对齐并保留宿主操作的 44px 触控目标；长标题仍按当前设计换行，不改变 Props、插槽或标题层级契约。
+- **验证**：`lx-section-title.test.ts` **14/14**；`lx-section-title-docs.spec.ts` **1/1**；覆盖 375px/320px、HUD、减少动效、键盘操作及无横向溢出；lx-ui typecheck/build、目标 Prettier、定向 ESLint 和 `git diff --check` 通过。
+- **审查边界**：三路 detector 为合法 `[]`、空 stderr、退出码 `0`，仅作静态 B 证据；当前使用既有 Assessment A 基线，未将本波标为正式 UI-10/整库 Critique 通过。
+- **下一步**：继续 UI-10 未关闭组件与正式独立 A/B 评审；Vue3 Element Plus 替换、权限中心、文本/字段权限、真实后端和页面操作引导保持后置。
+
 ## [2026-10-19] LxDescriptions 长值展开状态修复交接
 
 - **改动**：移除长值按钮 `:focus` 无条件展开规则，修复收起态与 `aria-expanded` 不一致；调整 `LxStatusDot` 深层样式顺序，确保长状态收起时稳定省略；长值/长状态加入 `chevron-down` 旋转图标，窄屏采用两行收起预览，展开后显示完整内容。
