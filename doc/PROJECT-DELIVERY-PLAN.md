@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxTag 第三批宿主替换
+
+- **实现**：节点管理入向、出向和客户端管理三页的标签及授权状态列改用 `LxTag`，保留条件分支、表格 slot、授权/过期文案和空值占位。
+- **事实校正**：Vue3 `src` 直接 `<el-tag>` 由 31 降为 **22**；`danger` 统一转换为 `error`。
+- **验证**：目标文件 Prettier、Vue3 `vue-tsc --noEmit`、Mock 全菜单 Playwright **6/6** 通过；未改变 API、Promise 链、权限键或 Element Plus 删除门禁。
+- **下一入口**：继续处理没有特殊 effect/关闭/插槽契约的标签场景；有能力缺口时登记并保留 lx-ui 导出的 Element Plus 控件。
+
 ## 2026-10-20 LxTag 第二批宿主替换
 
 - **实现**：第三方应用列表/详情和地图配置激活状态列改用 `LxTag`，保留紧凑/标准视图条件、文案和页面 class；`danger` 映射为 `error`。

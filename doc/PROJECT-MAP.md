@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxTag 第三批宿主替换
+
+- 节点管理入向、出向和客户端管理页已使用 `LxTag` 展示标签/授权状态，保留页面条件和表格 slot。
+- Vue3 源码直接 `<el-tag>` 当前为 22 处；剩余页面仍需按组件能力和权限契约逐项迁移。
+
 ## 2026-10-20 LxTag 第二批宿主替换
 
 - `baseData/thirdParty`、第三方详情和 `baseData/mapConfig` 的状态标签已接入 `LxTag`，保留原页面条件和样式 class。
