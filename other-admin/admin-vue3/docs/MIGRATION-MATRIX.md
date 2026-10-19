@@ -221,3 +221,7 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 - Vue3 宿主接入时可直接传入业务需要的 `debounce` 毫秒数；组件不改变请求取消、分页和失败恢复语义。
 - 本波不改变页面权限码、API 协议或 `.then().catch().finally()` 请求风格；真实页面仍需 Mock/E2E 和后端契约验证。
+## 2026-10-19 LxSectionTitle 图标名契约
+
+- Vue3 宿主继续通过 lx-ui `LxSectionTitle`，组件 Demo 的图标名称已与注册表统一为 `setting`；不改变页面标题、插槽或权限契约。
+- 本波只修复库级类型门禁，页面迁移仍需按 Mock、权限和真实 API 逐页验证。

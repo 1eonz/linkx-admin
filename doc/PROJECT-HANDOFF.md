@@ -2819,3 +2819,8 @@
 - `debounce` 现在按调用方传入毫秒数执行；非有限值使用 300ms，负数按 0ms 处理，不再静默限制到 250–400ms。
 - 单测 **5/5**、文档 E2E **6/6**；detector 为合法 `[]`/空 stderr/退出码 `0`。未改变远程搜索取消、分页、失败恢复和宿主 API 请求链。
 - 因本波没有独立 A/B、可写 overlay 和 snapshot/trend，只记为降级复验；不得把空数组写成正式 Impeccable 通过。
+## 2026-10-19 LxSectionTitle Demo 图标名交接
+
+- Demo 与 E2E 断言已将不存在的 `settings` 统一修正为已注册的 `setting`；不增加图标别名，不改变组件公开契约。
+- lx-ui 类型检查通过；SectionTitle 单测 **14/14**、文档 E2E **1/1**、目标格式检查通过。
+- 该修复只解除 Demo 类型门禁，不关闭 UI-10/UI-11，也不触发 Vue3 Element Plus 替换或权限任务。

@@ -1685,3 +1685,8 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **实现**：保留有限值；非法值回退 300ms，负数归一为 0ms；补充中文类型、Demo 文档和 700ms 回归测试，不改变远程请求、取消、分页或 Promise 链契约。
 - **验证**：单测 **5/5**、LxSelectPagination 文档 E2E **6/6**、目标 Prettier/ESLint 和差异检查通过；detector JSON/stderr/退出码为合法 `[]`/空/`0`。
 - **审查边界**：当前为降级复验，缺少隔离 Assessment A/B、可写 overlay 和 snapshot/trend，不关闭 UI-10；真实宿主分页、权限和后端联调继续开放。
+## 2026-10-19 LxSectionTitle Demo 图标契约修复
+
+- **根因**：Demo 使用不存在的 `settings` 图标名，阻断 lx-ui `vue-tsc`，且文档 E2E 仍按错误名称断言。
+- **修复**：统一改为图标注册表已有的 `setting`，同步更新文档 E2E 选择器；不新增别名、不改变 `LxSectionTitle` API 或视觉行为。
+- **验证**：lx-ui `pnpm typecheck`、SectionTitle 单测 **14/14**、文档 E2E **1/1**、目标 Prettier 通过。

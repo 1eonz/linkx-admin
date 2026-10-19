@@ -727,3 +727,7 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 
 - 防抖参数按调用方配置执行，非法值使用 300ms，负数按 0ms 处理；中文 API 和回归测试已同步。
 - 单测 **5/5**、文档 E2E **6/6**、目标格式/ESLint 通过；detector `[]` 仅是静态零命中。缺少独立 A/B、overlay 和 snapshot/trend，UI-10 保持开放。
+## 2026-10-19 LxSectionTitle Demo 图标契约修复
+
+- Demo 与文档测试统一使用已注册 `setting` 图标，解除 lx-ui 类型检查阻断，不引入 `settings` 别名。
+- 类型检查、单测 **14/14**、文档 E2E **1/1** 通过；正式 Critique 和宿主迁移门禁保持开放。

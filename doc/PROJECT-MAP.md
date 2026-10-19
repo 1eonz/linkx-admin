@@ -765,3 +765,7 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - 入口：`linkx-fe/src/components/LxSelectPagination/`；防抖时长不再被组件内部静默截断，非法值和负数行为已写入中文类型与文档。
 - 单测 **5/5**、文档 E2E **6/6**；组件不拥有业务 API，宿主仍负责远程请求、取消、权限和分页状态。
+## 2026-10-19 LxSectionTitle Demo 图标契约
+
+- `linkx-fe/src/components/LxSectionTitle/demo/basic.vue` 使用注册表中的 `setting` 图标；对应 SectionTitle 文档 E2E 断言已同步。
+- 类型检查、单测 **14/14** 和文档 E2E **1/1** 通过；组件 API、业务页面和权限边界不变。

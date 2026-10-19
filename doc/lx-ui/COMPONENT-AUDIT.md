@@ -834,3 +834,7 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 
 - 修复公开 `debounce` 与实现不一致的问题：有限值原样保留，非法值 300ms，负数 0ms。
 - 单测 **5/5**、文档 E2E **6/6**、detector 合法 `[]`/空/0；当前没有独立 A/B 和 snapshot/trend，不关闭 UI-10。
+## 2026-10-19 LxSectionTitle Demo 图标名复验
+
+- 修复 Demo 使用未注册 `settings` 图标造成的类型检查失败，改用现有 `setting` 图标并同步 E2E 断言。
+- lx-ui typecheck、单测 **14/14**、文档 E2E **1/1** 和格式检查通过；不增加 UI-10 关闭数。

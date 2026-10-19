@@ -716,3 +716,8 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 - [x] 保留调用方防抖时长；非法值 300ms，负数 0ms。
 - [x] 单测 **5/5**、文档 E2E **6/6**、目标格式/ESLint 通过；detector JSON/stderr/退出码为 `[]`/空/0。
 - [ ] 正式 Impeccable A/B、overlay、snapshot/trend 和宿主真实分页联调仍未完成。
+## 2026-10-19 LxSectionTitle Demo 图标修复
+
+- [x] Demo 与 E2E 断言由未注册 `settings` 统一改为 `setting`。
+- [x] lx-ui typecheck、单测 **14/14**、文档 E2E **1/1**、目标格式检查通过。
+- [ ] UI-10/UI-11 正式审查、宿主迁移和真实后端仍未完成。
