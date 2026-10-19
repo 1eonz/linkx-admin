@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxUpload 手动队列与双路评审
+
+- [x] `autoUpload=false` 的选择/提交语义在拖拽区、按钮和 live region 中明确；自动模式文案保持即时上传。
+- [x] LxUpload 单测 **40/40**、4178 文档 E2E **9/9**、目标 Prettier 和差异检查通过。
+- [x] Assessment A **29/40**；Assessment B detector JSON/stderr/退出码为合法 `[]`/空/`0`，浏览器覆盖 Light/HUD、1440/375/320px、reduced-motion 和成功/失败/取消/禁用/拖拽。
+- [ ] 宿主错误文案归一化、批量失败摘要、Demo 文档 IA、正式 snapshot/trend 和 UI-10 严格矩阵仍待完成；Mock 失败控制台日志属于预期测试输出。
+
 ## 2026-10-20 LxMetricCard 趋势与标题语义
 
 - [x] 趋势方向改为显式 `trendDirection`，未传入时不猜测；新增 `headingLevel`，默认使用 `h3` 并导出类型。

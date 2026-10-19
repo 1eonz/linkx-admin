@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxUpload 手动队列语义与双路复核
+
+- **修复**：`autoUpload=false` 时拖拽区和按钮明确提示“选择后再上传”，选择文件后通过 `aria-live` 播报“已加入待上传队列，请点击上传按钮提交”；自动上传模式保持即时上传文案。同步中文 API、单测和文档 E2E。
+- **验证**：LxUpload 单测 **40/40**；4178 隔离文档 E2E **9/9**，新增手动队列播报断言；目标 Prettier 和差异检查通过。Assessment A **29/40（Good）**；Assessment B 三目标 detector 均为 JSON `[]`、stderr 为空、退出码 `0`，Light/HUD、1440/375/320px、reduced-motion 及成功/失败/取消/禁用/拖拽浏览器证据均无页面错误、失败请求和横溢出。
+- **保留问题**：A 的宿主 `error.message` 原样展示、批量上传聚合面板缺少失败摘要、Demo 测试控件密度列为 P1/P2；B 记录预期失败 Mock 的 `UploadAjaxError` 控制台输出和文档长页密度。它们分别需要错误文案契约、批量状态设计或文档 IA 决策，本波不臆造后端协议。
+- **边界**：两路证据已保存于 `tmp-upload-assessment-a-current.md`、`tmp-upload-assessment-b-current.md` 及对应证据目录；detector `[]` 不单独代表正式 Critique，独立 snapshot/trend、UI-10 严格矩阵、真实上传/权限和 Vue3 宿主替换仍开放。
+
 ## 2026-10-20 LxMetricCard 趋势语义与标题层级收口
 
 - **实现**：`trendStatus` 不再推断方向，只有显式 `trendDirection` 才渲染趋势图标；新增 `headingLevel`，默认 `h3`，并从库入口导出类型。Demo、中文 API 和单测同步，首张指标卡补充显式 `up`。

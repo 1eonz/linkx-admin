@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-20 LxUpload 手动队列语义与双路评审
+
+- 手动模式的触发区、按钮和 `aria-live` 明确“选择后再上传/点击上传按钮提交”；自动模式维持即时上传语义。
+- 单测 **40/40**、4178 文档 E2E **9/9**；Assessment A **29/40**，Assessment B 三路 detector 为合法 `[]`/空 stderr/0，Light/HUD、1440/375/320px、reduced-motion 和上传状态浏览器证据无页面错误、失败请求和横溢出。
+- 宿主错误安全文案、批量失败摘要和 Demo 信息架构列为后续 P1/P2；正式 Critique snapshot/trend、真实上传协议、权限和 Vue3 宿主替换仍开放。
+
 ## 2026-10-20 LxMetricCard 趋势语义与标题层级
 
 - `trendStatus` 只负责趋势文案颜色，`trendDirection` 只有显式传入时才显示箭头或横线；新增 `headingLevel`（默认 `h3`）提供正确标题层级。

@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxUpload 队列语义与评审证据
+
+- `linkx-fe/src/components/LxUpload/` 的手动模式现在显示“选择后再上传”，并在选择后播报待提交队列；组件仍只负责展示、前端校验和宿主注入适配器。
+- 证据：单测 **40/40**、4178 文档 E2E **9/9**；Assessment A **29/40**；Assessment B 的 detector JSON/stderr/退出码为 `[]`/空/`0`，Light/HUD、桌面/窄屏/reduced-motion 和状态操作浏览器证据无页面错误、失败请求、横溢出。
+- 未完成：错误文案归一化、批量失败摘要、Demo 文档密度、正式 snapshot/trend、真实上传协议和业务页 Element Plus 替换仍按 UI-04/UI-10/UI-11 追踪。
+
 ## 2026-10-20 LxMetricCard 语义收口
 
 - 入口：`linkx-fe/src/components/LxMetricCard/`；组件标题默认使用 `h3`，可通过 `headingLevel` 选择宿主层级；趋势方向只由显式 `trendDirection` 控制。

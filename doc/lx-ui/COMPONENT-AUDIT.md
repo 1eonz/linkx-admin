@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-20 LxUpload 手动队列语义与双路评审
+
+- **实现**：默认手动模式不再用“上传”暗示选择后已发送；触发区和按钮明确下一步，`onChange` 通过 live region 播报文件已加入待上传队列。自动上传模式保持原有文案和行为。
+- **证据**：单测 **40/40**、4178 文档 E2E **9/9**；三路 detector 均为合法 JSON `[]`、stderr 空、退出码 `0`。B 浏览器覆盖 Light/HUD、1440/375/320px、reduced-motion、成功/失败/取消/禁用/拖拽，页面错误、失败请求和横溢出均为 0；触控主操作均达到 44px。
+- **Assessment A**：**29/40（Good）**；P1 为手动语义（已处理）和宿主错误原文展示（待错误契约），P2 为批量聚合面板信息不足、Demo 测试控件与产品路径混杂。
+- **边界**：B 记录预期失败 Mock 的 `UploadAjaxError` 控制台输出和文档长页密度，均不归因组件运行失败；detector `[]` 不单独代表正式 Critique。独立 snapshot/trend、UI-10、真实上传协议、权限和宿主迁移继续开放。
+
 ## 2026-10-20 LxMetricCard 趋势方向与标题层级复验
 
 - **实现**：移除按 `trendStatus` 自动猜测方向的行为；仅显式 `trendDirection` 渲染 `arrow-up`、`arrow-down` 或 `minus`。新增 `headingLevel`（默认 `h3`），并从库入口导出类型；Demo、中文 API 和测试同步。
