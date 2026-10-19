@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxPagination 嵌套滚动修复
+
+- **问题**：`autoScroll` 原先无条件调用 `window.scrollTo`，分页器位于抽屉或列表滚动容器时会打断宿主阅读位置。
+- **实现**：优先查找最近的可滚动祖先并回到顶部；没有可滚动祖先时保持窗口回顶兼容行为，减少动效模式继续使用即时滚动。
+- **验证**：Pagination 与适配器单测 **8/8**、4177 文档 E2E **3/3**、lx-ui `vue-tsc --noEmit`、206 modules 生产构建、目标 Prettier 和 `git diff --check` 通过。
+- **边界**：本波只修复公共组件滚动上下文，不改变 `change(page, pageSize)`、`autoReset`、请求链或权限契约；正式 Impeccable Assessment B 仍受 403 额度阻塞，UI-10 不关闭。
+
 ## 2026-10-20 LxPagination Assessment B 额度阻塞记录
 
 - **行为状态**：`LxPagination` 单测 **7/7**、4177 文档 Playwright **3/3** 已通过；当前没有新的可复现组件行为故障。

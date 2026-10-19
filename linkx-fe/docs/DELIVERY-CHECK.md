@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxPagination 嵌套滚动验收
+
+- `autoScroll` 已改为最近可滚动祖先优先，未找到祖先时回退窗口；reduced-motion、分页事件顺序和 `autoReset` 保持不变。
+- 组件/适配器单测 **8/8**、4177 文档 E2E **3/3**、typecheck、生产构建、目标 Prettier 和差异检查通过。
+- 独立 Assessment B 本波因评估服务 HTTP 403 额度不足未生成报告；UI-10 严格行保持开放，不能以静态 `[]` 或行为测试单独替代视觉审查。
+
 ## 2026-10-19 LxDynamicForm 当前版行为证据复核
 
 - 单测 **30/30**、文档 Playwright **14/14**、lx-ui `pnpm typecheck` 通过；覆盖 schema 渲染、受控值、密码校验/ARIA、上传状态、日期范围、远程请求取消与迟到响应、自适应列和窄屏触控。

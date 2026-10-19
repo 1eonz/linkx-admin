@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxPagination 嵌套滚动修复交接
+
+- **改动**：`autoScroll` 优先滚动最近的可滚动祖先，只有找不到祖先时才调用 `window.scrollTo`；保留 reduced-motion 即时滚动和原有事件顺序。
+- **验证**：组件/适配器单测 **8/8**、4177 文档 E2E **3/3**、lx-ui typecheck、206 modules 库构建、目标 Prettier 和差异检查通过。
+- **后续**：宿主分页仍需逐页验证空/失败/取消/权限不足和真实接口；Assessment B 因评估服务 403 额度不足待重跑，静态 `[]` 不代表正式 Critique 通过。
+
 ## [2026-10-19] LxDynamicForm 当前版行为验证交接
 
 - **证据**：DynamicForm 单测 **30/30**、文档 Playwright **14/14**、lx-ui `pnpm typecheck` 通过；当前文档服务使用 `playwright.lxui.config.ts` 指向 4177 入口。

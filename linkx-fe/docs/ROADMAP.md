@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-20 LxPagination 嵌套滚动修复
+
+- `autoScroll` 现在优先定位最近的可滚动祖先，避免嵌套列表或抽屉切页时滚动整个窗口；无祖先时保留窗口回顶兼容行为。
+- 单测 **8/8**、文档 E2E **3/3**、typecheck、206 modules 构建、目标格式检查通过；Assessment B 仍因 403 额度不足待重跑，不能将 detector `[]` 记为正式 Critique 通过。
+
 ## 2026-10-19 LxDynamicForm 当前版行为复验
 
 - DynamicForm 单测 **30/30**、文档 E2E **14/14**、lx-ui `pnpm typecheck` 通过；覆盖全部内置 schema 类型、受控值回写、密码/ARIA、上传单图与多图、日期范围、远程取消与竞态、自适应列和窄屏触控。

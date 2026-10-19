@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-20 LxPagination 滚动契约更新
+
+- 宿主继续使用 `autoScroll` 时，组件会优先回滚最近可滚动列表/抽屉容器；没有滚动祖先时才回滚窗口，原 `change(page, pageSize)` 事件顺序不变。
+- 本次组件/适配器单测 **8/8**、文档 E2E **3/3**；页面 API、权限和加载状态仍由宿主负责，真实业务页面需要单独 Mock/E2E。
+
 ## 2026-10-20 LxPagination 迁移门禁
 
 - 组件行为和文档 Demo 当前可供宿主复用，单测 7/7、文档 E2E 3/3；`change(page, pageSize)`、`autoReset`、`autoScroll` 语义未改变。
