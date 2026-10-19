@@ -187,8 +187,10 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     const toolbarMetrics = await toolbar.evaluate((element) => ({
       clientWidth: element.clientWidth,
       scrollWidth: element.scrollWidth,
+      columns: getComputedStyle(element).gridTemplateColumns,
     }));
     expect(toolbarMetrics.scrollWidth).toBeLessThanOrEqual(toolbarMetrics.clientWidth);
+    expect(toolbarMetrics.columns.split(' ').length).toBe(1);
 
     const stateSelect = page.getByRole('combobox', { name: '数据状态' });
     await stateSelect.focus();
