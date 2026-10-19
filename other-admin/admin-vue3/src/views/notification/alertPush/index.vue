@@ -11,7 +11,7 @@
  */
 import { Plus, Delete, Edit, Search, Refresh } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxPagination } from 'lx-ui';
+import { LxInput, LxPagination } from 'lx-ui';
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 
 import TaskDueAddForm from './components/TaskDueAddForm.vue';
@@ -342,7 +342,7 @@ onMounted(() => {
           <!-- 搜索区 -->
           <el-form :inline="true" class="search-form" @submit.prevent="handleSearch">
             <el-form-item label="组织名称">
-              <el-input
+              <LxInput
                 v-model="queryParams.businessName"
                 clearable
                 placeholder="组织名称"
@@ -356,7 +356,7 @@ onMounted(() => {
               </el-select>
             </el-form-item>
             <el-form-item label="预警通知对象">
-              <el-input
+              <LxInput
                 v-model="queryParams.targetName"
                 clearable
                 placeholder="预警通知对象"
@@ -419,7 +419,7 @@ onMounted(() => {
           <!-- 搜索区 -->
           <el-form :inline="true" class="search-form" @submit.prevent="handleSearch">
             <el-form-item label="协同岗名称">
-              <el-input
+              <LxInput
                 v-model="queryParams.businessName"
                 clearable
                 placeholder="协同岗名称"
@@ -433,7 +433,7 @@ onMounted(() => {
               </el-select>
             </el-form-item>
             <el-form-item label="预警通知对象">
-              <el-input
+              <LxInput
                 v-model="queryParams.targetName"
                 clearable
                 placeholder="预警通知对象"
