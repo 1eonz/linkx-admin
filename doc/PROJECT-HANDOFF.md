@@ -3146,3 +3146,8 @@
 
 - `h5/quick/index.vue` 标签编辑弹窗的名称、图标类名、颜色值改用 `LxInput`，保留动态长度、字数统计、颜色选择器同步、校验、License 分支和保存请求。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；权限和真实后端联调仍未执行。
+
+# 2026-10-20 alertPush 搜索输入交接
+
+- `notification/alertPush/index.vue` 双 Tab 的组织/协同岗名称和预警通知对象共 4 个输入改用 `LxInput`，保留清空、回车、类型筛选、分页、增改删和请求链。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；预警表单权限和真实后端联调未执行。

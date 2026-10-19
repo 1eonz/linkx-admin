@@ -2027,3 +2027,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `h5/quick/index.vue` 标签编辑弹窗的名称、图标类名、颜色值三个字符串输入已由 `el-input` 切换为 `LxInput`。
 - 保留动态 `maxlength`、字数统计、颜色选择器同步、标签类型/作用域禁用规则、校验和 Promise 链；`vue-tsc`、Prettier、ESLint 与隔离 Mock **10/10** 通过。
 - 标签权限、License 分支和真实后端仍未联调，Element Plus 删除门槛不变。
+
+## 2026-10-20 alertPush 搜索输入迁移
+
+- `notification/alertPush/index.vue` 双 Tab 搜索区的组织/协同岗名称与预警通知对象共 4 个输入已由 `el-input` 切换为 `LxInput`。
+- 保留两 Tab 查询状态、清空、回车搜索、类型筛选、分页、增改删和 `.then().catch().finally()` 请求链；`vue-tsc`、Prettier、ESLint 与隔离 Mock **10/10** 通过。
+- 预警表单、权限校验和真实后端联调仍按计划后置。

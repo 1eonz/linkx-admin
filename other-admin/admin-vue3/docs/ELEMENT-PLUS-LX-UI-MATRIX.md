@@ -295,6 +295,11 @@ Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过适�
 - `h5/quick/index.vue` 的名称、图标、颜色三个 `el-input` 已替换为 `LxInput`，保留长度、统计、颜色同步和校验。
 - 标签树、下拉和颜色选择器仍按业务契约保留；`element-plus` 删除门槛未满足。
 
+## 2026-10-20 alertPush 输入计数更新
+
+- `notification/alertPush/index.vue` 双 Tab 搜索区的 4 个 `el-input` 已替换为 `LxInput`，保留清空、回车和查询契约。
+- 类型选择、表格、分页和写操作仍按页面契约保留；`element-plus` 删除门槛未满足。
+
 ## 2026-10-11 Wave 11 P2 影响更新
 
 - `LxTransferPanel` 与 `LxVirtualTree` 已完成当前版组件级严格 UI/交互审查：单测合计 67/67、文档 E2E 合计 48/48，类型、203 modules 构建、文档构建和 Vue3 生产构建通过；代码复审无 P0-P3。Assessment A 36/40；Assessment B 5 个 detector 均为有效 `[]`/空 stderr/0，9 个浏览器视图证据完整。
