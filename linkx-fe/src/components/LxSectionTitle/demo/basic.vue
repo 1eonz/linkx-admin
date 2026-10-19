@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import LxIcon from '../../LxIcon/index.vue'
 import LxSectionTitle from '../index.vue'
 import type { LxSectionTitleSize } from '../types'
 
@@ -54,6 +55,9 @@ const lastAction = ref('标题仅负责分组和说明，不加载业务数据�
         tag="运行正常"
         tag-type="success"
       >
+        <template #leading>
+          <LxIcon name="settings" :size="16" aria-label="接口设置" />
+        </template>
         <template #extra>
           <button
             class="lx-section-title-demo__action"

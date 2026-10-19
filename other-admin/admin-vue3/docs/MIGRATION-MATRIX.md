@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-19 LxSectionTitle 宿主契约补强
+
+- lx-ui Demo 已验证 `leading` 插槽覆盖 `icon` 属性，宿主适配时应保留 `leading`、`subtitle`、`headingLevel`、`tag` 和 `extra` 插槽/属性契约。
+- 组件库单测 **14/14**、文档 E2E **1/1**；这不是 Vue3 业务配置页迁移证据。真实配置数据、按钮权限和后端联调仍需页面级 Mock/E2E 与可信接口字段。
+- Vue3 `element-plus` 继续保留，API 请求仍按 `.then().catch().finally()` 编排。
+
 ## 2026-10-19 LxSectionTitle 组件侧门禁
 
 - lx-ui 组件侧已通过单测 **14/14**、文档 E2E **1/1** 和当前版双路 Critique（A **32/40**；B 证据见 `linkx-fe/.impeccable/critique/lxsectiontitle-assessment-b-2026-10-19/`）。

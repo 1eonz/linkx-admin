@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-19 LxSectionTitle Demo 与主题证据补强
+
+- 自定义 `leading` 示例使用 `LxIcon`，当同时传入 `icon` 时由插槽内容优先；中文说明已同步。
+- LxSectionTitle 单测 **14/14**、文档 E2E **1/1**、格式检查通过；组件/Demo/文档 detector 均为合法 `[]`，stderr 为空，退出码 `0`。
+- E2E 覆盖 HUD 主题、键盘操作、320/375px 无溢出；静态 `[]` 只作为零命中证据，不单独代表正式全库 Critique 通过。
+
 ## 2026-10-19 LxSectionTitle 当前版评审
 
 - [x] 单测 **14/14**、文档 E2E **1/1**、typecheck 和目标格式检查通过。

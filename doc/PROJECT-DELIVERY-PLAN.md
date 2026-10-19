@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-19 LxSectionTitle Demo 契约与 HUD 证据补强
+
+- Demo 增加真实 `leading` 插槽图标，并验证它优先于 `icon` 属性；中文文档明确插槽优先级和宿主操作责任。
+- 文档 E2E **1/1**、单测 **14/14**、目标 Prettier 通过；组件、Demo、文档 detector 均为合法 `[]`，stderr 为空，退出码 `0`。E2E 覆盖 HUD 主题、键盘操作、320/375px 无横溢出和 `leading` 优先级。
+- 本波未修改组件公开 Props、业务 API 或权限契约；UI-10 全库计数、Vue3 宿主替换、真实后端和页面操作引导状态保持原值。
+
 ## 2026-10-19 LxSectionTitle 当前版双路 Impeccable 复核
 
 - **行为验证**：`lx-section-title.test.ts` **14/14**、`lx-section-title-docs.spec.ts` **1/1**；覆盖 375/320px、HUD、减少动效、键盘操作、1280px 下 360px 容器查询；lx-ui typecheck、目标 Prettier 通过。

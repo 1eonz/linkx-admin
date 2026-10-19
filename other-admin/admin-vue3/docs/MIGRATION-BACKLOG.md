@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-19 LxSectionTitle Demo 契约回归
+
+- 组件 Demo 新增 `leading` 自定义图标并覆盖 `icon` 优先级；单测 **14/14**、文档 E2E **1/1**、格式检查通过。
+- 页面迁移仍需逐页核对标题层级、标签/副标题、extra 操作的权限过滤和窄屏布局；组件库证据不等于业务页面完成。
+- 本波不删除 `element-plus`，不引入权限键或真实后端假设；页面操作引导继续暂缓。
+
 ## 2026-10-19 LxSectionTitle 迁移备注
 
 - [ ] 按配置页真实字段和权限契约接入 `LxSectionTitle`，保留 `headingLevel`、`tag`、`subtitle`、`extra` 插槽及 `.then().catch().finally()` 请求编排。

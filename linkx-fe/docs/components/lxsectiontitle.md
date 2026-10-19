@@ -14,7 +14,7 @@ import Basic from '../../src/components/LxSectionTitle/demo/basic.vue';
 <<< ../../src/components/LxSectionTitle/demo/basic.vue
 :::
 
-示例可切换三档字号和 HUD 深色主题，展示三种变体、标签颜色、超长标题和可聚焦的右侧操作；数据仅存在于页面内存。
+示例可切换三档字号和 HUD 深色主题，展示三种变体、标签颜色、超长标题、自定义 `leading` 前置图标和可聚焦的右侧操作；`leading` 插槽优先于 `icon` 属性，数据仅存在于页面内存。
 
 ## Props
 

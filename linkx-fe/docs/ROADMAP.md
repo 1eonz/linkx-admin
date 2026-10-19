@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-19 LxSectionTitle Demo 契约回归
+
+- Demo 增加自定义 `leading` 图标并验证其优先级；文档明确 `leading` 插槽覆盖 `icon` 属性。
+- 文档 E2E **1/1**、单测 **14/14**、目标 Prettier 通过；三路 detector 合法 `[]`/空 stderr/退出码 `0`，并保留 HUD、键盘、320/375px 证据。
+- 组件公开 API、业务 API、权限和宿主 Element Plus 依赖未改变，正式全库 UI-10/UI-11 仍开放。
+
 ## 2026-10-19 LxSectionTitle 当前版双路评审
 
 - 当前版单测 **14/14**、文档 E2E **1/1**、typecheck 和目标 Prettier 通过；A **32/40（Good）**，B 已保存 detector 三件套与 Light/HUD、1280/375/320px、键盘、reduced-motion、360px 容器浏览器证据。

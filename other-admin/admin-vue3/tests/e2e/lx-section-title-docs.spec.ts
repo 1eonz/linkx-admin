@@ -56,6 +56,12 @@ test.describe('LxSectionTitle 文档示例', () => {
       inlineEnd: '6px',
     });
     await expect(page.getByTestId('variant-dashed').locator('.lx-tag--success')).toBeVisible();
+    await expect(
+      page.getByTestId('variant-dashed').locator('.lx-section-title__leading [data-icon-name="settings"]'),
+    ).toBeVisible();
+    await expect(
+      page.getByTestId('variant-dashed').locator('.lx-section-title__leading [data-icon-name="link"]'),
+    ).toHaveCount(0);
     await expect(page.getByTestId('variant-plain').locator('.lx-tag--warning')).toBeVisible();
     await expect(page.getByTestId('variant-plain').locator('.lx-section-title__subtitle')).toHaveText(
       '用于配置警情处置流程与责任人分派机制。',
@@ -70,6 +76,17 @@ test.describe('LxSectionTitle 文档示例', () => {
 
     await page.getByRole('checkbox', { name: 'HUD 深色主题' }).check();
     await expect(page.locator('.lx-section-title-demo')).toHaveClass(/lx-theme-hud/);
+    const hudSurface = await page.getByTestId('variant-border').evaluate((element) => {
+      const title = element.querySelector<HTMLElement>('.lx-section-title__text');
+      const root = element.querySelector<HTMLElement>('.lx-section-title');
+      if (!title || !root) throw new Error('标题 HUD 结构缺失');
+      return {
+        title: getComputedStyle(title).color,
+        surface: getComputedStyle(root).color,
+      };
+    });
+    expect(hudSurface.title).not.toBe('');
+    expect(hudSurface.surface).not.toBe('');
 
     const viewButton = page.getByRole('button', { name: '查看' });
     await viewButton.focus();

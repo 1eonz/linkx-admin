@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-19 LxSectionTitle Demo 契约回归
+
+- `linkx-fe/src/components/LxSectionTitle/demo/basic.vue` 现在以 `LxIcon` 展示自定义 `leading`，覆盖 `leading` 优先于 `icon` 的公开契约；文档入口仍为 `/components/lxsectiontitle`。
+- `lx-section-title-docs.spec.ts` **1/1**、单测 **14/14**；当前版 detector 三目标合法 `[]`/空 stderr/退出码 `0`，并覆盖 HUD、键盘、320/375px 窄屏。
+- 该变更只增强组件库证据，不表示业务配置页已经替换 Element Plus 或完成权限/后端联调。
+
 ## 2026-10-19 LxSectionTitle 当前版 Critique 证据
 
 - 入口：`linkx-fe/src/components/LxSectionTitle/`；设计源为 `design/区块标题 SectionTitle/`，Vue3 测试为 `lx-section-title.test.ts` 与 `lx-section-title-docs.spec.ts`。
