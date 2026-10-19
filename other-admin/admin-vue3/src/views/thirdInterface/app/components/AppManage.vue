@@ -15,7 +15,7 @@
  */
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxSwitch, LxTag } from 'lx-ui';
+import { LxInput, LxSwitch, LxTag } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import AppForm from './AppForm.vue';
@@ -227,7 +227,7 @@ function getRow(scope: any): AppItem {
   <div class="app-manage">
     <SearchBar :placeholder="searchPlaceholder" :actions="actions" @search="handleSearch" @reset="handleReset">
       <template #filters>
-        <el-input
+        <LxInput
           v-model="searchParams.name as string"
           :placeholder="searchPlaceholder"
           class="filter-item"

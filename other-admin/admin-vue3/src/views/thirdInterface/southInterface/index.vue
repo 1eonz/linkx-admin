@@ -11,7 +11,7 @@
  */
 import { Plus, View, Edit, Delete, Connection, Setting } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxTag } from 'lx-ui';
+import { LxInput, LxTag } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import AppsManageDetailModal from './components/AppsManageDetailModal.vue';
@@ -190,7 +190,7 @@ function getRow(scope: any): CallableApp {
     <el-card shadow="always" class="card">
       <SearchBar :placeholder="searchPlaceholder" :actions="actions" @search="handleSearch" @reset="handleReset">
         <template #filters>
-          <el-input
+          <LxInput
             v-model="searchParams.name as string"
             :placeholder="searchPlaceholder"
             class="filter-item"
