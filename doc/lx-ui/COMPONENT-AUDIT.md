@@ -1,5 +1,16 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-19 LxInput 前后缀槽位垂直居中修复
+
+- `prefix/suffix` 及内部槽位改为在完整输入外框内垂直居中，保留扣除上下 1px 描边的内容轨道；`prepend/append` 仍使用完整控件高度。
+- sm/md/lg 与 390px 窄屏几何回归通过，单测 **13/13**、文档 E2E **1/1**、typecheck/build 和目标格式检查通过。
+- detector 页面存在既有低对比度建议；更新技能包因网络失败，不能将本轮记作正式 Impeccable A/B 通过。
+
+## 2026-10-19 LxSectionTitle 容器响应式与标签语义修复
+
+- 修复 Assessment A P2：保留 viewport 回退并增加宿主容器查询；`extra` 多操作换行；`tag` 增加中文 `aria-label`。
+- 单测 **14/14**、文档 E2E **1/1**、typecheck/build 通过；静态 detector 为合法 `[]`/空/0。因双路评估代理返回 503，本条仅记为修复后阶段性审查，正式 A/B/snapshot 待补。
+
 ## 2026-10-19 LxInput 前后缀内容轨道修复
 
 - 状态：实现与定向回归完成，正式 A/B 视觉审查待独立证据归档。

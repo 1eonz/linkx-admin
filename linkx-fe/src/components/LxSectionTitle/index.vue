@@ -53,6 +53,7 @@ const headingTag = computed(() => {
             v-if="tag !== undefined && tag !== ''"
             :type="tagType"
             size="small"
+            :aria-label="`标题标记：${tag}`"
           >
             {{ tag }}
           </LxTag>
@@ -74,6 +75,7 @@ const headingTag = computed(() => {
 <style scoped>
 .lx-section-title {
   display: flex;
+  container-type: inline-size;
   align-items: center;
   justify-content: space-between;
   gap: var(--lx-space-md);
@@ -143,8 +145,10 @@ const headingTag = computed(() => {
 .lx-section-title__extra {
   display: flex;
   flex-shrink: 0;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--lx-space-sm);
+  row-gap: var(--lx-space-xs);
 }
 
 .lx-section-title--small {
@@ -191,6 +195,38 @@ const headingTag = computed(() => {
 
 @media (max-width: 400px) {
   /* 窄屏将标题和操作拆成两行，避免 extra 挤压标题或截断操作。 */
+  .lx-section-title {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    row-gap: var(--lx-space-xs);
+  }
+
+  .lx-section-title__heading {
+    flex: 1 1 100%;
+    align-items: flex-start;
+  }
+
+  .lx-section-title__extra {
+    flex: 1 1 100%;
+    justify-content: flex-end;
+    min-width: 0;
+  }
+
+  .lx-section-title__text {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .lx-section-title__label {
+    overflow: visible;
+    overflow-wrap: anywhere;
+    text-overflow: clip;
+    white-space: normal;
+  }
+}
+
+/* 组件嵌入宽度受限的卡片或抽屉时，由宿主容器触发同一套窄屏布局。 */
+@container (max-width: 400px) {
   .lx-section-title {
     flex-wrap: wrap;
     align-items: flex-start;

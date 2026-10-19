@@ -467,3 +467,12 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 ## 2026-10-04 Wave 0 迁移影响
 
 当前仅修复 lx-ui `LxDatePicker` 对实际输入框的说明 ID 关联，没有改动 Vue3 业务 API、路由、权限或后端协议。当前工作区 DynamicForm 日期字段回归与 DatePicker 合计 36/36；本波提交不包含既存 DynamicForm 实现改动。Wave 1 先完成基础控件审查，宿主 Element Plus 替换顺序不变。
+# LxInput 宿主迁移补充
+
+- `prefix/suffix` 槽位已在完整输入外框内居中，宿主页面复用 lx-ui 时不需要额外覆盖 Element Plus 高度样式；复合 `prepend/append` 仍按完整控件高度布局。
+- 组件 E2E **1/1**、LxInput 单测 **13/13**、库 typecheck/build 通过；宿主页面组合、真实后端联调和权限契约没有因本次样式修复提前关闭。
+
+# SectionTitle 宿主迁移补充
+
+- 组件库已支持 viewport 回退与宿主 `@container` 窄屏拆行，标签包含中文辅助名称；Vue3 配置页真实组合回归仍属于 UI-04，不能以组件库 E2E 代替。
+- 组件侧单测 **14/14**、文档 E2E **1/1**；真实后端、权限码和宿主页面迁移继续按矩阵执行。

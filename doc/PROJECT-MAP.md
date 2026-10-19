@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-19 LxSectionTitle 容器响应式与标签语义修复
+
+- 入口：`linkx-fe/src/components/LxSectionTitle/index.vue`；测试：`other-admin/admin-vue3/tests/unit/lx-section-title.test.ts`、`tests/e2e/lx-section-title-docs.spec.ts`。
+- 组件支持 viewport 回退和宿主容器查询，嵌套窄容器标题/操作区可拆行，`extra` 多控件可换行，`tag` 具备中文辅助名称。
+- 单测 **14/14**、文档 E2E **1/1**、类型检查、构建和格式检查通过；组件宿主迁移和正式 UI-10 综合审查仍开放。
+
 ## 2026-10-19 LxInput 前后缀内容轨道对齐
 
 - 入口：`linkx-fe/src/components/LxInput/style.css`；几何回归：`other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`。
@@ -661,3 +667,7 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - `linkx-fe/src/components/LxCodeSlot/index.vue` 的复制中态使用 `LxIcon loading`、`aria-busy` 和禁用状态；`lxcodeslot-docs.spec.ts` 通过受控剪贴板验证中间态。
 - 该组件不请求业务 API；真实剪贴板权限和宿主组合仍属于后续验收边界。
+# LxInput 组件变更补充
+
+- `linkx-fe/src/components/LxInput/style.css` 的 `prefix/suffix` 及内部槽位在统一内容轨道内垂直居中，外框高度与窄屏触控规则不变。
+- 几何回归入口：`other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`；业务 API、权限和 Vue3 宿主迁移仍按现有矩阵执行。

@@ -1,5 +1,17 @@
 # LinkX 项目交接记录
 
+## [2026-10-19] LxInput 前后缀槽位垂直居中修复交接
+
+- **问题与实现**：`prefix/suffix` 及内部槽位原本已经使用 30/42px 内容轨道，但 flex 拉伸从外框顶部开始，造成底部少 2px。改为在完整 32/44px 输入外框内居中，保留上下描边内缩和 `prepend/append` 完整高度契约。
+- **验证**：LxInput 单测 **13/13**；复合前后缀文档 Playwright **1/1**；lx-ui typecheck、206 modules 生产构建、目标 Prettier 通过；浏览器实测 sm/md/lg 与 390px 窄屏上下边界各 1px 对齐。
+- **审查边界**：页面 detector 报告既有低对比度建议（2.9:1），与本次几何修复无关；`npx impeccable update` 因网络超时未更新技能包，不能记为正式 Impeccable A/B 通过。未改变 Props、事件、表单校验或 Promise 链式 API。
+
+## [2026-10-19] LxSectionTitle 容器响应式与标签语义修复交接
+
+- **改动**：增加宿主 `@container` 窄屏规则并保留 viewport 回退；`extra` 多控件支持换行；标题标签增加中文辅助名称。
+- **验证**：单测 **14/14**、文档 E2E **1/1**，覆盖 375/320px、HUD、减少动效、键盘及 1280px viewport 下 360px 嵌套容器；lx-ui typecheck/build 和格式检查通过。
+- **边界**：正式 Impeccable A/B/snapshot 尚未完成（本轮 luna 代理服务 503）；Vue3 宿主配置页组合回归、权限和真实后端保持原阻塞。
+
 ## [2026-10-19] LxInput 前后缀内容轨道对齐交接
 
 - **改动**：修复 wrapper 内部 `prefix/suffix` 槽位比真实输入内容多 2px 的问题；新增 `--lx-input-content-height`，sm/md/lg 使用 26/30/38px，窄屏使用 42px。外层输入框和 `prepend/append` 仍为完整 28/32/40px 或 44px。

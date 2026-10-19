@@ -119,12 +119,28 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
     for (const slot of ['prefix', 'suffix'] as const) {
       expect(geometry[slot].height, `${option} 档 ${slot} 内容高度`).toBe(expectedHeight - 2);
       expect(
+        Math.abs(geometry[slot].top - (geometry.wrapper.top + 1)),
+        `${option} 档 ${slot} 上下边界应在描边内对称对齐`,
+      ).toBeLessThanOrEqual(0.5);
+      expect(
+        Math.abs(geometry[slot].top + geometry[slot].height - (geometry.wrapper.top + expectedHeight - 1)),
+        `${option} 档 ${slot} 下边界应在描边内对称对齐`,
+      ).toBeLessThanOrEqual(0.5);
+      expect(
         Math.abs(geometry[slot].center - geometry.wrapper.center),
         `${option} 档 ${slot} 垂直位置`,
       ).toBeLessThanOrEqual(1);
     }
     for (const slot of ['prefixInner', 'suffixInner'] as const) {
       expect(geometry[slot].height, `${option} 档 ${slot} 内容高度`).toBe(expectedHeight - 2);
+      expect(
+        Math.abs(geometry[slot].top - (geometry.wrapper.top + 1)),
+        `${option} 档 ${slot} 上下边界应在描边内对称对齐`,
+      ).toBeLessThanOrEqual(0.5);
+      expect(
+        Math.abs(geometry[slot].top + geometry[slot].height - (geometry.wrapper.top + expectedHeight - 1)),
+        `${option} 档 ${slot} 下边界应在描边内对称对齐`,
+      ).toBeLessThanOrEqual(0.5);
       expect(
         Math.abs(geometry[slot].center - geometry.wrapper.center),
         `${option} 档 ${slot} 垂直位置`,
@@ -156,6 +172,30 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
     }),
   );
   expect(touchSlotHeights, '窄屏前后缀槽位应与输入框内容轨道同高').toEqual([42, 42, 42, 42]);
+  const touchSlotGeometry = await compoundInput.evaluate((root) => {
+    const wrapper = root.querySelector<HTMLElement>('.el-input__wrapper');
+    if (!wrapper) throw new Error('缺少窄屏输入框内框');
+    const wrapperBounds = wrapper.getBoundingClientRect();
+    return ['.el-input__prefix', '.el-input__prefix-inner', '.el-input__suffix', '.el-input__suffix-inner'].map(
+      (selector) => {
+        const element = root.querySelector<HTMLElement>(selector);
+        if (!element) throw new Error(`缺少窄屏输入节点：${selector}`);
+        const bounds = element.getBoundingClientRect();
+        return {
+          top: bounds.top,
+          bottom: bounds.bottom,
+          expectedTop: wrapperBounds.top + 1,
+          expectedBottom: wrapperBounds.bottom - 1,
+        };
+      },
+    );
+  });
+  for (const geometry of touchSlotGeometry) {
+    expect(Math.abs(geometry.top - geometry.expectedTop), '窄屏前后缀上边界应在描边内对齐').toBeLessThanOrEqual(0.5);
+    expect(Math.abs(geometry.bottom - geometry.expectedBottom), '窄屏前后缀下边界应在描边内对齐').toBeLessThanOrEqual(
+      0.5,
+    );
+  }
   const touchInnerLineHeight = await compoundInput
     .locator('.el-input__inner')
     .evaluate((input) => Number.parseFloat(getComputedStyle(input).lineHeight));

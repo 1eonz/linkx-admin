@@ -1,5 +1,17 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-19 LxInput 前后缀槽位垂直居中修复
+
+- **问题**：`prefix/suffix` 内容轨道虽已扣除上下描边，但 flex 槽位从外框顶部起算，导致底部少 2px，视觉上与输入框不齐。
+- **实现**：槽位及内部槽位改为在完整输入外框内居中；32px 档为 30px 内容轨道，窄屏 44px 档为 42px 内容轨道，上下均保留 1px 描边内缩。
+- **验证**：LxInput 单测 **13/13**、复合前后缀 Playwright **1/1**、lx-ui typecheck/build、目标 Prettier 通过。页面 detector 的 2.9:1 低对比度建议属于既有页面问题；`npx impeccable update` 因网络超时未完成，正式 A/B 不关闭。
+
+## 2026-10-19 LxSectionTitle 容器响应式与标签语义修复
+
+- **问题**：原窄屏规则只按 viewport 判断，嵌套在窄卡片/抽屉时不会拆行；多个 `extra` 操作可能挤压标题；标题标签缺少明确的辅助技术名称。
+- **实现**：保留 viewport 兼容回退，新增宿主 `@container (max-width: 400px)` 布局；`extra` 开启自身换行；标签增加 `标题标记：...` 中文 `aria-label`。
+- **验证**：`lx-section-title.test.ts` **14/14**、`lx-section-title-docs.spec.ts` **1/1**（含 1280px viewport 下 360px 嵌套容器）、lx-ui typecheck/build、目标格式和差异检查通过。正式 Assessment B/综合 snapshot 因子代理服务不可用仍保持开放。
+
 ## 2026-10-19 LxInput 前后缀内容轨道修复
 
 - **问题**：`prefix/suffix` 内部槽位被强制设置为完整控件高度，而 `el-input__wrapper` 使用 `border-box` 后内容区实际少上下各 1px，导致图标/文字槽位与输入内容视觉不齐。

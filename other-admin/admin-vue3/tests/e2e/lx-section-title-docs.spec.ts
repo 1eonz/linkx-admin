@@ -39,6 +39,7 @@ test.describe('LxSectionTitle 文档示例', () => {
 
     const primaryTag = page.getByTestId('variant-border').locator('.lx-tag--primary');
     await expect(primaryTag).toHaveText('8 项字段');
+    await expect(primaryTag).toHaveAttribute('aria-label', '标题标记：8 项字段');
     const tagPadding = await primaryTag.evaluate((element) => {
       const style = getComputedStyle(element);
       return {
@@ -116,5 +117,28 @@ test.describe('LxSectionTitle 文档示例', () => {
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
       await page.screenshot({ path: `test-results/lx-section-title-${width}.png` });
     }
+
+    await page.setViewportSize({ width: 1280, height: 780 });
+    const nestedLayout = await page.evaluate(() => {
+      const target = document.querySelector<HTMLElement>('[data-testid="long-title-case"]');
+      if (!target) throw new Error('找不到区块标题窄容器');
+      const host = document.createElement('div');
+      host.style.width = '360px';
+      host.style.containerType = 'inline-size';
+      host.style.padding = '0';
+      host.append(target.cloneNode(true));
+      document.body.append(host);
+      const title = host.querySelector<HTMLElement>('.lx-section-title');
+      const heading = host.querySelector<HTMLElement>('.lx-section-title__heading');
+      const extra = host.querySelector<HTMLElement>('.lx-section-title__extra');
+      if (!title || !heading || !extra) throw new Error('窄容器标题结构缺失');
+      const result = {
+        extraBelowHeading: extra.getBoundingClientRect().top >= heading.getBoundingClientRect().bottom,
+        extraRight: extra.getBoundingClientRect().right <= title.getBoundingClientRect().right,
+      };
+      host.remove();
+      return result;
+    });
+    expect(nestedLayout).toEqual({ extraBelowHeading: true, extraRight: true });
   });
 });

@@ -46,6 +46,7 @@ describe('LxSectionTitle design variants', () => {
       expect(wrapper.get('h3').text()).toContain('基础信息档案');
       expect(wrapper.get('h3 .lx-tag').classes()).toContain(`lx-tag--${tagType}`);
       expect(wrapper.get('h3 .lx-tag').text()).toBe('8 项字段');
+      expect(wrapper.get('h3 .lx-tag').attributes('aria-label')).toBe('标题标记：8 项字段');
     },
   );
 

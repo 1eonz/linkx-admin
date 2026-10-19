@@ -1,5 +1,16 @@
 # lx-ui 交付核查
 
+## 2026-10-19 LxInput 前后缀槽位垂直居中修复
+
+- 修复 `prefix/suffix` 及内部槽位虽使用内容轨道、但从外框顶部起算造成底部少 2px 的问题；槽位现在在 32/44px 外框内垂直居中，sm/md/lg 与窄屏均保持上下各 1px 描边内缩。
+- 复合前后缀 Playwright **1/1**、LxInput 单测 **13/13**、lx-ui typecheck/build 和目标 Prettier 通过；`npx impeccable detect http://127.0.0.1:4177/components/lxinput` 发现页面既有低对比度建议（2.9:1），不归因于本次几何修复。
+- `npx impeccable update` 因 GitHub 下载连接超时未完成；本轮没有把 detector 输出或更新失败标记为正式 Impeccable 通过。
+
+## 2026-10-19 LxSectionTitle 容器响应式与标签语义修复
+
+- 增加宿主容器查询回退，修复嵌套窄容器不拆行；`extra` 多操作允许换行，标题标签提供中文辅助名称。
+- 单测 **14/14**、文档 Playwright **1/1**、typecheck/build、目标 Prettier 和差异检查通过；detector 为合法 `[]`/空 stderr/退出码 `0`，不将静态结果单独视为正式视觉审查通过。
+
 ## 2026-10-19 LxInput 前后缀内容轨道对齐
 
 - `prefix/suffix` 与内部槽位改用 `--lx-input-content-height`，扣除 wrapper 上下边框，避免槽位越过描边后造成视觉高度不一致；`prepend/append` 与输入外框继续保留完整控件高度。

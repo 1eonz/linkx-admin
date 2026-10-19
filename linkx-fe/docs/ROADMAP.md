@@ -1,5 +1,15 @@
 # lx-ui 路线图
 
+## 2026-10-19 LxInput 前后缀槽位垂直居中修复
+
+- `prefix/suffix` 及内部槽位保留扣除上下描边后的内容高度，并在完整输入外框内居中，修复槽位顶部贴边、底部少 2px 的视觉错位；窄屏 44px 外框同样适用。
+- Playwright **1/1**、LxInput 单测 **13/13**、typecheck/build 和目标格式检查通过；页面 detector 的低对比度建议登记为既有页面问题，未扩大本波组件范围。
+
+## 2026-10-19 LxSectionTitle 容器响应式与标签语义修复
+
+- 窄屏布局保留 viewport 回退，并增加宿主 `@container` 规则，使嵌套卡片/抽屉在 400px 以下也能将标题与操作区拆行；`extra` 支持多控件换行并保持操作目标间距。
+- `tag` 增加中文 `aria-label`（标题标记），单测 **14/14**、文档 E2E **1/1**、lx-ui typecheck/build、目标格式检查和 `git diff --check` 通过；detector JSON/stderr/退出码为合法 `[]`/空/`0`，正式双路 Critique 仍需独立代理可用后补齐。
+
 ## 2026-10-19 LxInput 前后缀内容轨道对齐
 
 - 修复 `prefix/suffix` 及内部槽位被错误拉伸到完整控件高度的问题：wrapper 保留 `sm/md/lg` 与窄屏 44px 外框，内部槽位改用扣除上下 1px 描边后的内容轨道（26/30/38px，窄屏 42px），与真实输入内容行高一致。
