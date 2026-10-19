@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxDescriptions Demo 工具栏密度收口交接
+
+- **改动**：文档 Demo 工具栏使用响应式网格，桌面并列布局/状态控制，摘要与高级设置独占整行；600px 以下单列，避免首屏控件竞争和窄屏横溢出。
+- **验证**：LxDescriptions 单测 **10/10**、4177 文档 Playwright **3/3**、375px 工具栏单列几何断言、lx-ui typecheck、目标 Prettier 和差异检查通过。
+- **后续**：组件正式 Critique、真实详情 API、权限/错误恢复宿主组合和 Vue3 Element Plus 替换仍未完成；API 请求继续使用 `.then().catch().finally()`。
+
 ## [2026-10-20] LxFormErrorBanner 空播报修复交接
 
 - **改动**：空内容的错误横幅不再创建空 live region；有标题、说明或默认插槽时继续使用 `role="alert"`、assertive live region 和原子播报。
@@ -2726,12 +2732,14 @@
 - **反馈**：用户指出 `prefix/suffix` 状态下输入框与前后缀高度不一致。
 - **复验**：使用 `playwright.lxui.config.ts` 运行 `lx-base-controls-docs.spec.ts` 中复合前后缀和普通根节点两条用例，结果 **2/2 通过**；覆盖 `sm/md/lg`、390px 窄屏、根节点、输入内框、前后缀内外槽位及 `prepend/append`。
 - **结论**：当前 `.lx-input` 统一高度轨道已生效，无需重复修改组件样式。后续继续按 UI-10 组件门禁推进，保留 API 链式调用、中文文档和临时产物白名单规则。
+
 ## 2026-10-18 G2 / LxSearchBar Escape 语义修复交接
 
 - **实现**：`LxSearchBar` 新增 `escapeReset`，默认 `false`，文本输入按 Escape 不再重置整组条件；显式开启时保留旧行为。Demo 快捷键提示、中文 API 和单测同步更新。
 - **证据**：`lx-search-bar.test.ts` 与 `search-bar-adapter.test.ts` 共 **13/13**；SearchBar 文档 E2E **5/5**；lx-ui 类型检查、构建、文档构建、目标格式与差异检查通过。G2 Assessment A 修后综合 **34/40**；Assessment B 已保存 detector JSON、stderr、退出码及 Light/HUD、1440/375 证据。
 - **审查边界**：`[]` 仅表示静态 detector 零命中，正式结论依赖 A 评审、浏览器证据和回归测试。文档总览 `NewComponentsDemo.vue` 的 side-tab 命中属于文档壳层 P3 观察。`npx impeccable update` 因网络超时未更新。
 - **下一交接**：继续 UI-10 未关闭组件矩阵和宿主替换准备；保持 Promise 链请求、中文文档注释及白名单提交规则。不要把本轮 SearchBar 文件与 CodeSlot、临时 detector、test-results 共同提交。
+
 ## 2026-10-18 LxCodeSlot 复制中反馈交接
 
 - **改动**：复制按钮忙态显示加载图标、中文标题和 `aria-busy`，防止复制请求未完成时重复提交；文档补充该状态说明，E2E 使用受控剪贴板 Promise 断言中间态。
@@ -2773,6 +2781,7 @@
 - 修复自定义 `footer` 插槽与 `hideFooter` 的分支：自定义底栏不会再混入默认取消/确认按钮；隐藏且无插槽时不渲染空 footer。
 - 单测 **6/6**、文档 E2E **3/3**；detector JSON/stderr/退出码为合法 `[]`/空/`0`，未把空数组单独作为 Impeccable 通过。
 - 代码和测试保持中文注释、现有组件纯展示边界和宿主 Promise 链请求规则；临时 detector 文件不提交。
+
 # [2026-10-19] LxProTable 当前版行为门禁复验
 
 - **交接结果**：修复 `selection-change` 当前页差集逻辑，并为暴露的 `clearSelection()` 增加全量清空路径；取消当前页行不会误删其他页选择，清空操作也不会残留远端页 key。跨页受控选择、加载/空态/错误重试、排序、375px 局部滚动、方向键、44px 复选目标、HUD 和卸载清理复核均通过。
@@ -2828,16 +2837,19 @@
 - 文档行为 E2E **3/3** 通过；覆盖翻页、条数切换、布局、主题、375px 局部滚动和键盘焦点。
 - detector 三件套为合法 `[]`、空 stderr、退出码 `0`；因缺少隔离 A/B 与可写 overlay，本次为降级复验，证据见 `linkx-fe/.impeccable/critique/lxpagination-assessment-b-current-2026-10-19/`。
 - 正式 UI-10、真实宿主分页 API、权限联调和跨浏览器仍未完成；不得把本条写成组件正式 Critique 通过。
+
 ## 2026-10-19 LxInput 普通边框可见性交接
 
 - 普通、密码、透传 `LxInput` 的 `.el-input__wrapper` 现在使用真实 `1px` 外边框；复合 prepend/append 继续由根节点提供连续外框，焦点光环和错误态语义保持不变。
 - LxInput 单测 **13/13**；前后缀/密码/透传边框专项与复合尺寸 E2E **2/2**；目标 Prettier 通过。完整基础控件 E2E 的既有清空按钮失败不属于本波。
 - 未改变 API、权限、业务请求链和宿主 Element Plus 依赖；正式 Critique 仍需独立 A/B、浏览器证据和 snapshot/trend，空数组不能单独作为通过。
+
 ## 2026-10-19 LxSelectPagination 防抖交接
 
 - `debounce` 现在按调用方传入毫秒数执行；非有限值使用 300ms，负数按 0ms 处理，不再静默限制到 250–400ms。
 - 单测 **5/5**、文档 E2E **6/6**；detector 为合法 `[]`/空 stderr/退出码 `0`。未改变远程搜索取消、分页、失败恢复和宿主 API 请求链。
 - 因本波没有独立 A/B、可写 overlay 和 snapshot/trend，只记为降级复验；不得把空数组写成正式 Impeccable 通过。
+
 ## 2026-10-19 LxSectionTitle Demo 图标名交接
 
 - Demo 与 E2E 断言已将不存在的 `settings` 统一修正为已注册的 `setting`；不增加图标别名，不改变组件公开契约。

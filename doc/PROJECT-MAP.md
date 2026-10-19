@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxDescriptions Demo 工具栏
+
+- `linkx-fe/src/components/LxDescriptions/demo/basic.vue` 的布局/状态控制采用响应式网格，桌面分组、窄屏单列；状态摘要与高级设置不会和主控制竞争同一行。
+- 文档 E2E **3/3** 和单测 **10/10** 已覆盖窄屏无溢出与状态交互；这只属于组件 Demo 证据，不代表业务详情页迁移或真实权限联调完成。
+
 ## 2026-10-20 LxFormErrorBanner 可访问播报
 
 - `linkx-fe/src/components/LxFormErrorBanner/` 现在根据实际内容决定是否启用 assertive live region，并隐藏空标题节点；文档与单测同步覆盖空内容边界。
@@ -705,15 +710,18 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - **设计/文档**：`linkx-fe/docs/components/lxdescriptions.md`
 - **行为**：长值和长状态提供原生按钮展开/收起；短值、脱敏值和自定义插槽不增加无意义的键盘停靠位。
 - **验证**：`other-admin/admin-vue3/tests/unit/lx-descriptions.test.ts`、`tests/e2e/lx-descriptions-docs.spec.ts`；正式双路 Critique 仍待新增证据。
+
 ## 2026-10-18 G2 SearchBar 交互契约更新
 
 - `linkx-fe/src/components/LxSearchBar/` 的文本 Escape 默认遵循控件退出语义；`escapeReset` 仅作为旧页面兼容开关。文档、Demo 和 Vue3 单测同步维护。
 - G2 SearchBar/StatusSwitch 的独立 A/B 证据位于 `linkx-fe/.impeccable/critique/g2-assessment-b-2026-10-17/` 与 `g2-searchbar-postfix-2026-10-17/`；静态 `[]` 需与 stderr、退出码和浏览器证据一起解释。
 - 组件库仍是 Vue3 宿主迁移的唯一展示来源；权限中心、文本/字段权限、页面引导和真实后端联调继续按计划后置。
+
 ## 2026-10-18 LxCodeSlot 复制反馈
 
 - `linkx-fe/src/components/LxCodeSlot/index.vue` 的复制中态使用 `LxIcon loading`、`aria-busy` 和禁用状态；`lxcodeslot-docs.spec.ts` 通过受控剪贴板验证中间态。
 - 该组件不请求业务 API；真实剪贴板权限和宿主组合仍属于后续验收边界。
+
 # LxInput 组件变更补充
 
 - `linkx-fe/src/components/LxInput/style.css` 的 `prefix/suffix` 及内部槽位在统一内容轨道内垂直居中，外框高度与窄屏触控规则不变。
@@ -723,6 +731,7 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - prefix/suffix、内部槽位和 prepend/append 的行高统一使用内容轨道令牌；外框仍由组件高度令牌控制，窄屏保持 44px。
 - 组件样式、文档 E2E 和宿主迁移边界已同步；可访问命名与错误描述关联进入后续表单专项。
+
 # 项目地图更新（2026-10-19）
 
 - `linkx-fe/src/components/LxProTable/` 当前版行为门禁已复验：跨页选择按当前页差集合并，公开清空方法清除全部页，加载/空/错状态、局部滚动和键盘路径均有单测或文档 E2E 证据。
@@ -767,14 +776,17 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - 文档入口 `/components/lxpagination` 的当前行为回归为 3/3；证据覆盖分页控制、主题、窄屏局部滚动和键盘焦点。
 - detector 为合法 `[]`/空/0，但缺少隔离 A/B、overlay 和 snapshot/trend；组件正式 UI-10 仍开放。
+
 ## 2026-10-19 LxInput 普通边框可见性修复
 
 - 入口：`linkx-fe/src/components/LxInput/`；普通、密码和透传场景由 `.el-input__wrapper` 提供真实 `1px` 边框，复合前后缀由根节点提供连续边框。
 - 单测 **13/13**；边框专项与复合尺寸文档 E2E **2/2**。该证据只覆盖组件库当前行为，不代表 Vue3 业务页面迁移或正式 UI-10 Critique 完成。
+
 ## 2026-10-19 LxSelectPagination 防抖契约
 
 - 入口：`linkx-fe/src/components/LxSelectPagination/`；防抖时长不再被组件内部静默截断，非法值和负数行为已写入中文类型与文档。
 - 单测 **5/5**、文档 E2E **6/6**；组件不拥有业务 API，宿主仍负责远程请求、取消、权限和分页状态。
+
 ## 2026-10-19 LxSectionTitle Demo 图标契约
 
 - `linkx-fe/src/components/LxSectionTitle/demo/basic.vue` 使用注册表中的 `setting` 图标；对应 SectionTitle 文档 E2E 断言已同步。

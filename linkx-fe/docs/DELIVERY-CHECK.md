@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxDescriptions Demo 工具栏
+
+- [x] 桌面布局/状态分组，摘要与高级设置整行显示；600px 以下单列。
+- [x] 单测 **10/10**、4177 文档 E2E **3/3**、375px 工具栏无溢出、typecheck、目标 Prettier 和差异检查通过。
+- [ ] 不以本波关闭 UI-10；正式 Impeccable A/B、真实详情接口、权限和宿主迁移仍待完成。
+
 ## 2026-10-20 LxFormErrorBanner 空播报验收
 
 - 有内容时保留 `role="alert"`、`aria-live="assertive"` 和 `aria-atomic="true"`；空内容时移除 live region 属性并不渲染空标题节点。
@@ -658,11 +664,13 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 - 长普通值和长状态使用按钮切换完整内容，支持键盘和触屏；短状态、脱敏值和自定义插槽保持原行为。
 - 单测 **10/10**、文档 E2E **3/3**、typecheck、目标 Prettier 和差异检查通过；detector JSON/stderr/退出码为合法 `[]`/空/`0`，不单独代表视觉审查通过。
 - 新一轮独立 A/B、浏览器多主题证据和综合 snapshot/trend待补。
+
 ## 2026-10-18 G2 LxSearchBar Escape 语义修复
 
 - 文本输入框 `Escape` 默认只退出当前控件，不再清空全部检索条件；新增 `escapeReset` 兼容开关，Demo、中文 API 和回归测试已同步。
 - SearchBar 及宿主适配单测 **13/13**；文档 E2E **5/5**；typecheck、构建、文档构建、目标格式和差异检查通过。
 - Assessment A 修后综合 **34/40**；Assessment B 的 detector JSON/stderr/退出码为 `[]`/空/`0`，Light/HUD × 1440/375 浏览器证据已归档。空数组不单独代表视觉通过。
+
 ## 2026-10-18 LxCodeSlot 复制中反馈
 
 - 复制进行中显示加载图标和中文忙态标题，设置 `aria-busy` 并禁用重复提交；原有成功/失败提示保持不变。
@@ -678,6 +686,7 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 
 - 输入内容、prefix/suffix 及内部槽位统一使用完整控件高度，解决真实输入框与前后缀少 2px 的视觉差异；窄屏统一为 44px。
 - 复合前后缀 Playwright **1/1**、LxInput 单测 **13/13**、lx-ui typecheck 通过；未执行的新一轮正式 Critique 不标记为通过。
+
 # 2026-10-19 LxProTable 当前版门禁
 
 - 宿主适配器单测 **4/4**，文档 Playwright **4/4**；覆盖跨页选择、取消当前页后保留其他页、公开方法全量清空、加载/空态/错误重试、排序、375px 局部滚动、方向键、44px 复选目标、HUD 和减少动效。
@@ -724,16 +733,19 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 
 - 文档 E2E **3/3** 通过，受控翻页、条数切换、布局、主题、375px 局部滚动和键盘焦点均有回归。
 - detector JSON/stderr/退出码为合法 `[]`/空/`0`；隔离 A/B、overlay、截图和 snapshot/trend 缺失，正式 Critique 不关闭。
+
 ## 2026-10-19 LxInput 普通输入边框复验
 
 - [x] 普通、密码、透传包装器真实 `1px` 边框；复合前后缀根节点连续边框。
 - [x] LxInput 单测 **13/13**；边框专项与复合尺寸 E2E **2/2**；目标 Prettier 通过。
 - [ ] 完整基础控件 E2E 仍有既有清空按钮窄屏可见性失败；正式双路 Impeccable、UI-10 全库门禁和宿主迁移未完成。
+
 ## 2026-10-19 LxSelectPagination 防抖契约
 
 - [x] 保留调用方防抖时长；非法值 300ms，负数 0ms。
 - [x] 单测 **5/5**、文档 E2E **6/6**、目标格式/ESLint 通过；detector JSON/stderr/退出码为 `[]`/空/0。
 - [ ] 正式 Impeccable A/B、overlay、snapshot/trend 和宿主真实分页联调仍未完成。
+
 ## 2026-10-19 LxSectionTitle Demo 图标修复
 
 - [x] Demo 与 E2E 断言由未注册 `settings` 统一改为 `setting`。

@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxDescriptions Demo 工具栏密度收口
+
+- **问题**：布局切换、数据状态、预览摘要和高级设置原先共享一个可换行工具栏，桌面和窄屏下控件层级不清晰。
+- **实现**：Demo 工具栏改为响应式网格；桌面布局/状态并列，摘要与高级设置独占整行，600px 以下自动单列；保留现有状态、主题、边框和键盘契约。
+- **验证**：LxDescriptions 单测 **10/10**、4177 文档 E2E **3/3**、375px 工具栏无横向溢出且为单列、lx-ui `vue-tsc --noEmit`、目标 Prettier 和 `git diff --check` 通过。
+- **边界**：本波仅收口文档 Demo 信息层级，不关闭 UI-10；正式 Impeccable A/B、真实详情接口、权限和宿主迁移仍按门禁执行。
+
 ## 2026-10-20 LxFormErrorBanner 空播报修复
 
 - **问题**：`title` 是可选属性，但空 props 仍会生成空的 assertive live region；这会给辅助技术发送无内容播报。
@@ -1603,6 +1610,7 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **复验范围**：针对用户反馈的 `prefix/suffix` 与输入框上下边界不一致，使用 lx-ui 专用 Playwright 配置复跑 `Input 复合前后缀与输入框在各尺寸及窄屏下保持同高` 与 `Input 普通根节点与输入包装器保持同高` 两条几何用例。
 - **结果**：**2/2 通过**。`sm/md/lg` 的根节点、输入内框、`prefix/suffix` 内外槽位和 `prepend/append` 分别保持 `28/32/40px` 同高；390px 窄屏保持 `44px` 触控轨道；普通输入根节点与内框上下边界对齐。
 - **结论**：前一波高度轨道修复已覆盖本次反馈，不追加重复样式改动。测试运行产生的 `test-results` 与 Impeccable 临时文件继续按白名单排除，不纳入交付提交。
+
 ## 2026-10-18 G2 / LxSearchBar Escape 语义修复与双路证据收口
 
 - **问题与修复**：文本输入框的 `Escape` 原先会清空全部查询条件并立即查询，容易把“退出当前控件”误操作成“重置筛选”。新增 `escapeReset`，默认关闭；旧页面可显式传 `escapeReset=true` 保留兼容行为。Select、日期和级联控件的 `Escape` 仍只关闭自身弹层。
@@ -1658,6 +1666,7 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **实现**：`hideFooter=true` 且提供 `footer` 插槽时只渲染调用方底栏；没有自定义插槽时不传空 footer；默认按钮栏仅在 `hideFooter=false` 时渲染。
 - **验证**：LxDialog 单测 **6/6**、文档 Playwright **3/3**、目标 ESLint/Prettier 和差异检查通过。组件 detector JSON 为合法 `[]`、stderr 为空、退出码 `0`；`[]` 不单独代表视觉审查通过。
 - **边界**：本波不改变弹窗 props、事件、业务请求或权限契约；正式 Assessment A/B、真实读屏器和宿主页面组合仍按 UI-10/UI-04 门禁开放。
+
 ## 2026-10-18 LxCodeSlot 复制中反馈 P1 收口
 
 - **实现**：复制进行中按钮显示 `LxIcon loading`、`title="正在复制"` 和 `aria-busy="true"`，同时禁用重复点击；复制完成后恢复复制图标和原提示。保留既有成功/失败事件与 Promise 链边界。
@@ -1701,18 +1710,21 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **验证**：LxPagination 文档 Playwright **3/3** 通过，覆盖受控翻页、条数切换、布局/主题、375px 局部滚动和键盘焦点；源码 detector JSON/stderr/退出码为合法 `[]`/空/`0`。
 - **审查边界**：当前会话未运行独立 Assessment A/B，也没有可写 overlay 注入和正式 snapshot/trend；已降级记录于 `linkx-fe/.impeccable/critique/lxpagination-assessment-b-current-2026-10-19/`，因此不关闭 UI-10。
 - **下一步**：补隔离 Critique 证据后再处理剩余 P2；宿主真实分页、权限和 Element Plus 替换继续后置。
+
 ## 2026-10-19 LxInput 普通输入边框可见性修复
 
 - **根因**：普通、密码和透传场景的 `.el-input__wrapper` 仅使用内阴影承载边界；在 Demo 的复合背景和浅色表面下边界对比不足，原生输入节点本身又没有边框，容易被误判为边框丢失。
 - **实现**：LxInput 包装器增加真实 `1px` 控件边框，保留既有内阴影焦点环、错误态和复合输入根节点外框；错误态同步切换真实边框颜色，不改变 props、事件、插槽或 `.then().catch().finally()` 规则。
 - **验证**：LxInput 单测 **13/13**；新增前后缀、密码、透传边框专项 E2E 与既有复合尺寸 E2E **2/2**；目标 Prettier 通过。完整基础控件 E2E **12/13**，唯一失败仍为既有清空按钮窄屏可见性契约，与本次边框改动无关。
 - **审查边界**：本波只完成组件几何和可见性回归，不关闭 UI-10/UI-11；正式 Impeccable 双路证据、Vue3 Element Plus 分批替换、权限和真实后端联调继续按门禁后置。detector 的 `[]` 不能单独代表视觉通过。
+
 ## 2026-10-19 LxSelectPagination 防抖契约修复
 
 - **问题**：组件公开了 `debounce`，但实现把调用方传入值静默限制在 250–400ms，长防抖配置无法生效。
 - **实现**：保留有限值；非法值回退 300ms，负数归一为 0ms；补充中文类型、Demo 文档和 700ms 回归测试，不改变远程请求、取消、分页或 Promise 链契约。
 - **验证**：单测 **5/5**、LxSelectPagination 文档 E2E **6/6**、目标 Prettier/ESLint 和差异检查通过；detector JSON/stderr/退出码为合法 `[]`/空/`0`。
 - **审查边界**：当前为降级复验，缺少隔离 Assessment A/B、可写 overlay 和 snapshot/trend，不关闭 UI-10；真实宿主分页、权限和后端联调继续开放。
+
 ## 2026-10-19 LxSectionTitle Demo 图标契约修复
 
 - **根因**：Demo 使用不存在的 `settings` 图标名，阻断 lx-ui `vue-tsc`，且文档 E2E 仍按错误名称断言。

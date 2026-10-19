@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-20 LxDescriptions Demo 迁移前置记录
+
+- 组件 Demo 的布局/状态工具栏已按响应式网格收口，375px 下单列且无横向溢出；不改变宿主 `LxDescriptions` 的 `items`、`columns`、状态组合和插槽契约。
+- 业务详情页迁移仍需补真实 API、空/失败/权限不足、长值复制与抽屉窄屏 Mock/E2E；缺少可信接口字段时继续阻塞，不删除宿主 `element-plus`。
+
 ## 2026-10-20 LxFormErrorBanner 宿主契约
 
 - 宿主传入标题、说明或默认插槽时继续得到 assertive 错误播报；空内容不会制造空的 live region。
@@ -111,7 +116,7 @@
 | 协同岗、快捷标签                                    | `src/router/modules/collaboration.js` 的 `index`、`quick`；Vue3 `src/router/modules/collaboration.ts`、`src/views/collaboration`、`src/views/quick`。协同岗挂载管理、层级、功能、编辑和上下岗记录。                                                                                                                                                                                                             | 入口与主要调用已对照；下岗接口、最后一人确认和管理员 `switchType=3` 载荷与 Vue2 一致；快捷标签 API 已按 Promise 链风格收敛          | 未新增专项单测                                                                                                | `tests/e2e/collaboration-workflow.spec.ts`：1/1；验证最后一人提示、下岗失败重试、成功关闭弹窗/刷新列表；全请求由 Mock 拦截                  | 未执行   | 组织/职能树、层级挂靠、记录筛选/导出、批量操作等深交互验收跟随 lx-ui 对应组件替换波次；API/字段及 Vue2 已有权限契约可并行核查；已注释的 `share` 不纳入。 |
 | H5 群组标签 `GroupTags`                             | Vue2 `src/api/h5/groupTags.js`、`src/views/h5/groupTags`；Vue3 OAuth `GroupTags` 映射至 `src/views/h5/groupTags`，API 使用 `/collaboration/v1/tags/*`。旧 Font Awesome 字符串由 `src/views/h5/groupTags/iconMap.ts` 映射为 lx-ui `LxIcon`。                                                                                                                                                                     | 列表、分页、详情、增改删和批删已对照并迁移；API 已按 Promise 链风格收敛；移动端表格和分页可在各自容器滚动                           | `tests/unit/group-tags.test.ts` 2 项；旧图标映射 22 项通过                                                    | Mock E2E 4/4：列表/新增、详情/编辑/单删、查询失败重试/批删、375px 表格与分页滚动；接口仍保存旧图标字符串                                    | 未执行   | 补完整权限、取消/重复操作边界和真实联调；没有可信按钮权限码，暂不猜测。                                                                                  |
 | 排班类型、排班信息                                  | Vue2 `src/views/shiftScheduling/{dutyType,dutyInformation}` 与 `src/api/shiftScheduling/*`；Vue3 同名路由、`src/views/shiftScheduling/*`、`src/api/shiftScheduling/*`。核对 `type=0` 内置保护及值班列表/日历/导入/模板/批删契约。                                                                                                                                                                               | 入口、字段、主要交互和 API 已对照；宿主 API 按 Promise 链风格收敛                                                                   | 未新增专项单测                                                                                                | `tests/e2e/shift-scheduling-workflow.spec.ts`：4/4；类型 CRUD、筛选、日历失败恢复/切月、导入错误、模板下载和批量删除失败重试；全部请求 Mock | 未执行   | 补协同岗组织树、挂靠/上下岗、导入导出和失败恢复；真实联调按 P1-07 跟踪。已注释的协同减员不纳入。                                                         |
-| 预警推送                                            | `src/router/modules/alert.js` 的 `alertPush`；Vue3 同名路由、`src/views/notification/alertPush`、`src/api/notification/alertPush.ts`。                                                                                                                                                                                                                                                                          | 列表与增删改调用已对照；四个新增/编辑表单按接收人类型切换查询 API 和群组名称字段                                                                                                              | 未新增专项单测                                                                                                | `tests/e2e/alert-push-workflow.spec.ts`：2/2；列表分类/搜索/重置、删除重试、无人值守新增群组查询与提交均由 Mock 拦截                                                        | 未执行   | 补齐其余新增/编辑组合、分页回显、受限账号及真实后端联调；不臆造无可信来源的权限码。                                                          |
+| 预警推送                                            | `src/router/modules/alert.js` 的 `alertPush`；Vue3 同名路由、`src/views/notification/alertPush`、`src/api/notification/alertPush.ts`。                                                                                                                                                                                                                                                                          | 列表与增删改调用已对照；四个新增/编辑表单按接收人类型切换查询 API 和群组名称字段                                                    | 未新增专项单测                                                                                                | `tests/e2e/alert-push-workflow.spec.ts`：2/2；列表分类/搜索/重置、删除重试、无人值守新增群组查询与提交均由 Mock 拦截                        | 未执行   | 补齐其余新增/编辑组合、分页回显、受限账号及真实后端联调；不臆造无可信来源的权限码。                                                                      |
 | 权限中心：角色、人员、用户、IM/后台权限、自定义部门 | `src/router/modules/authority.js` 与 Vue3 `src/router/modules/authority.ts` 的 10 个未注释子路由；Vue3 `src/views/authority/*`、`src/api/authority/*`、`src/api/permission/*`。                                                                                                                                                                                                                                 | 入口和主要调用已对照；菜单/数据树失败保护、人员按钮码与管理员例外已补；后台角色成员回显仍阻塞                                       | 未覆盖                                                                                                        | 默认业务 E2E 86/86；权限矩阵 14 项、`authority-bind-workflow.spec.ts` 3 项通过，后端均由 Mock 拦截                                          | 未执行   | 补 IM 权限配置和人员设角工作流；后台角色成员读取契约待后端确认。                                                                                         |
 | 基础数据：全局配置、地图、布局                      | `src/router/modules/baseData.js` 的 `globals`、`mapConfig`、`layoutConfig`；Vue3 同名路由、`src/views/baseData/*`、`src/api/baseData/*`。                                                                                                                                                                                                                                                                       | 全局参数 CRUD/权限、地图文件/地理编码/区划、App H5 板块 CRUD、协同群组配置创建/ID 回填、PC 页签写回和统计 Excel 文件流均有 Mock E2E | 已通过                                                                                                        | `base-data-workflow.spec.ts`：33/33 通过；所有请求由 Mock 截获                                                                              | 未执行   | 基础数据 Mock/E2E 验收完成；真实后端联调按 P1-07 跟踪。                                                                                                  |
 | 场所                                                | 两代 `src/router/modules/location.*`、`src/views/location/index.vue`；Vue3 沿用 Vue2 的 `/admin/role/create`、`update`、`delete` 按钮权限标识。                                                                                                                                                                                                                                                                 | 列表/编辑/删除、权限标识已对照；宿主 API 已按 Promise 链风格收敛                                                                    | 未覆盖                                                                                                        | 未执行                                                                                                                                      | 未执行   | 用受限账号验证按钮及回显；权限名虽含 role，仍是 Vue2 既有契约。                                                                                          |
@@ -176,6 +181,7 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 - 15 处宿主 `el-empty` 继续留在 UI-04 逐页迁移，需按页面保留描述、插槽和空/错/加载契约；不提前删除 `element-plus`。
 
 `LxPasswordInput` 组件级证据已完成：单测 11/11、文档 E2E 9/9；移动端清空/显隐键盘顺序和 44px 触控区已回归。该条只关闭 lx-ui 组件门禁，不代表 Vue3 登录页替换或真实认证联调；下一组件为 `LxMetricCard` 与 `LxSectionTitle`。
+
 - `LxSectionTitle` 组件库已完成窄容器响应式与标签辅助名称修复，组件 E2E **1/1**；配置页真实组合仍登记为 UI-04 未完成，不能标记页面迁移完成。
 
 ## 2026-10-19 LxInput 前后缀行高
@@ -192,6 +198,7 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 - lx-ui 当前版长值/长状态按钮已通过单测 10/10、文档 E2E 3/3；宿主详情页迁移时需保留 `items`、`columns`、`layout`、`rowHeight`、`copyable`、脱敏和具名插槽契约。
 - 业务 API、权限源、真实详情数据和错误恢复仍由页面适配层负责；缺少可信后端契约时不新增字段或权限码。真实宿主回归属于 UI-04，不能用 Demo 证据替代。
+
 # 2026-10-19 LxProTable 迁移契约复验
 
 - Vue3 宿主适配继续保留 `tableAttrs`、自定义列/表头/单元格插槽、按当前页差集合并的跨页选择、排序、局部滚动和 `maskValue` 权限脱敏边界。
@@ -233,14 +240,17 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 - 组件文档 E2E **3/3** 通过，证明当前公开分页交互可供宿主复用；不代表业务页面真实 API、权限和分页协议已验证。
 - 正式 Impeccable A/B 与跨浏览器仍开放；页面迁移继续按 `.then().catch().finally()` 保留请求状态和错误恢复。
+
 ## 2026-10-19 LxInput 普通边框契约
 
 - Vue3 业务页继续通过 lx-ui `LxInput` 复用边框令牌；普通、密码、透传包装器和复合前后缀已有组件级边框回归，不在宿主复制样式。
 - 本波不改变页面 props、事件、权限码或 Promise 链请求；Element Plus 全量替换仍等待 UI-10/UI-11 门禁与逐页 Mock/E2E。
+
 ## 2026-10-19 LxSelectPagination 防抖宿主契约
 
 - Vue3 宿主接入时可直接传入业务需要的 `debounce` 毫秒数；组件不改变请求取消、分页和失败恢复语义。
 - 本波不改变页面权限码、API 协议或 `.then().catch().finally()` 请求风格；真实页面仍需 Mock/E2E 和后端契约验证。
+
 ## 2026-10-19 LxSectionTitle 图标名契约
 
 - Vue3 宿主继续通过 lx-ui `LxSectionTitle`，组件 Demo 的图标名称已与注册表统一为 `setting`；不改变页面标题、插槽或权限契约。
