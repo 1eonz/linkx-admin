@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import LxCodeSlot from '../LxCodeSlot/index.vue'
+import LxIcon from '../LxIcon/index.vue'
 import LxStatusDot from '../LxStatusDot/index.vue'
 import { isFieldMasked, maskValue } from '../../permissions'
 import type { LxDescriptionItem, LxDescriptionsProps } from './types'
@@ -134,6 +135,13 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
               :tabindex="-1"
               show-text
             />
+            <LxIcon
+              class="lx-descriptions__expand-icon"
+              :class="{ 'is-expanded': isExpanded(item) }"
+              name="chevron-down"
+              :size="14"
+              aria-hidden="true"
+            />
           </button>
           <LxStatusDot
             v-else-if="item.statusDot && !isMasked(item)"
@@ -166,7 +174,16 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
             :aria-expanded="isExpanded(item)"
             @click="toggleExpanded(item.key)"
           >
-            {{ displayValue(item) }}
+            <span class="lx-descriptions__value-label">{{
+              displayValue(item)
+            }}</span>
+            <LxIcon
+              class="lx-descriptions__expand-icon"
+              :class="{ 'is-expanded': isExpanded(item) }"
+              name="chevron-down"
+              :size="14"
+              aria-hidden="true"
+            />
           </button>
           <span v-else class="lx-descriptions__value-text">
             {{ displayValue(item) }}
@@ -259,18 +276,34 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
   outline-offset: 2px;
 }
 
-.lx-descriptions__value-text.is-long-value:focus {
+.lx-descriptions__value-text.is-long-value.is-expanded {
   overflow: visible;
   overflow-wrap: anywhere;
   text-overflow: clip;
   white-space: normal;
 }
 
-.lx-descriptions__value-text.is-long-value.is-expanded {
+.lx-descriptions__value-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lx-descriptions__value-text.is-expanded .lx-descriptions__value-label {
   overflow: visible;
   overflow-wrap: anywhere;
   text-overflow: clip;
   white-space: normal;
+}
+
+.lx-descriptions__expand-icon {
+  flex: 0 0 auto;
+  margin-inline-start: var(--lx-space-xs);
+  transition: transform var(--lx-transition);
+}
+
+.lx-descriptions__expand-icon.is-expanded {
+  transform: rotate(180deg);
 }
 
 .lx-descriptions__status-toggle {
@@ -301,37 +334,6 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
   font-weight: inherit;
 }
 
-.lx-descriptions__value :deep(.lx-status-dot.is-long-value:focus) {
-  flex-wrap: wrap;
-  max-width: 100%;
-  border-radius: var(--lx-radius-sm);
-  outline: 2px solid var(--lx-color-primary);
-  outline-offset: 2px;
-}
-
-.lx-descriptions__status-toggle :deep(.lx-status-dot__text) {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.lx-descriptions__status-toggle.is-expanded :deep(.lx-status-dot__text) {
-  overflow: visible;
-  overflow-wrap: anywhere;
-  text-overflow: clip;
-  white-space: normal;
-}
-
-.lx-descriptions__value
-  :deep(.lx-status-dot.is-long-value:focus .lx-status-dot__text) {
-  max-width: 100%;
-  overflow: visible;
-  overflow-wrap: anywhere;
-  text-overflow: clip;
-  white-space: normal;
-}
-
 .lx-descriptions__value :deep(.lx-status-dot.is-long-value) {
   text-decoration: underline dotted
     color-mix(in srgb, currentColor 45%, transparent);
@@ -346,9 +348,24 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
 
 .lx-descriptions__value :deep(.lx-status-dot__text) {
   min-width: 0;
+  max-width: 100%;
   overflow: visible;
   overflow-wrap: anywhere;
   color: inherit;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.lx-descriptions__status-toggle:not(.is-expanded) :deep(.lx-status-dot__text) {
+  overflow: hidden;
+  overflow-wrap: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lx-descriptions__status-toggle.is-expanded :deep(.lx-status-dot__text) {
+  overflow: visible;
+  overflow-wrap: anywhere;
   text-overflow: clip;
   white-space: normal;
 }
@@ -396,38 +413,43 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
 
   .lx-descriptions__value-text,
   .lx-descriptions__value-text.is-long-value {
-    overflow: visible;
-    overflow-wrap: anywhere;
-    text-overflow: clip;
+    display: flex;
+    align-items: flex-start;
     white-space: normal;
-    text-decoration: none;
+    text-decoration: underline dotted
+      color-mix(in srgb, currentColor 45%, transparent);
   }
 
-  .lx-descriptions__status-toggle :deep(.lx-status-dot__text) {
-    overflow: visible;
+  .lx-descriptions__value-text.is-long-value:not(.is-expanded)
+    .lx-descriptions__value-label {
+    display: -webkit-box;
+    overflow: hidden;
     overflow-wrap: anywhere;
-    text-overflow: clip;
-    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
   }
 
-  .lx-descriptions__value :deep(.lx-status-dot__text) {
-    min-width: 0;
+  .lx-descriptions__value-text.is-long-value.is-expanded
+    .lx-descriptions__value-label {
     overflow: visible;
     overflow-wrap: anywhere;
     white-space: normal;
     text-overflow: clip;
   }
 
-  .lx-descriptions__value :deep(.lx-status-dot.is-long-value) {
-    text-decoration: none;
+  .lx-descriptions__status-toggle {
+    align-items: flex-start;
   }
 
-  .lx-descriptions__value
-    :deep(.lx-code-slot.is-ellipsis .lx-code-slot__content) {
-    overflow: visible;
+  .lx-descriptions__status-toggle:not(.is-expanded)
+    :deep(.lx-status-dot__text) {
+    display: -webkit-box;
+    overflow: hidden;
     overflow-wrap: anywhere;
-    text-overflow: clip;
-    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
   }
 
   .lx-descriptions__value :deep(.lx-code-slot--copyable) {
@@ -443,7 +465,11 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
   .lx-descriptions__value
     :deep(.lx-code-slot--copyable .lx-code-slot__content) {
     min-width: 0;
+    overflow: visible;
+    overflow-wrap: anywhere;
     padding: 10px 6px;
+    text-overflow: clip;
+    white-space: normal;
   }
 
   .lx-descriptions__value :deep(.lx-code-slot--copyable .lx-code-slot__icon) {

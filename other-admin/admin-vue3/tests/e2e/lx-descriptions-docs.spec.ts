@@ -86,9 +86,11 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     await expect(remarks).toHaveAttribute('title', /跨网段加密调度二级权限/);
     await expect(remarks).toHaveAttribute('aria-label', /业务备注：/);
     await expect(remarks).toHaveAttribute('aria-expanded', 'false');
+    await expect(remarks.locator('.lx-descriptions__expand-icon')).not.toHaveClass(/is-expanded/);
     await remarks.click();
     await expect(remarks).toHaveAttribute('aria-expanded', 'true');
     await expect(remarks).toHaveAttribute('aria-description', '点击收起完整内容');
+    await expect(remarks.locator('.lx-descriptions__expand-icon')).toHaveClass(/is-expanded/);
   });
 
   test('桌面双列、375px 单列和 480px 抽屉都不产生页面横向溢出', async ({ page }) => {
@@ -134,6 +136,11 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     expect(focusedStatusMetrics.height).toBeGreaterThan(20);
     expect(focusedStatusMetrics.scrollHeight).toBeLessThanOrEqual(focusedStatusMetrics.clientHeight);
     expect(focusedStatusMetrics.scrollWidth).toBeLessThanOrEqual(focusedStatusMetrics.clientWidth);
+    await statusToggle.click();
+    await expect(statusToggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(statusToggle.locator('.lx-descriptions__expand-icon')).not.toHaveClass(/is-expanded/);
+    await statusToggle.click();
+    await expect(statusToggle).toHaveAttribute('aria-expanded', 'true');
 
     const shortStatus = descriptions
       .locator('.lx-descriptions__item')

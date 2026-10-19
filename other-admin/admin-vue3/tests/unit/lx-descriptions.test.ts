@@ -140,9 +140,11 @@ describe('LxDescriptions', () => {
     expect(value.attributes('aria-label')).toBe('所属组织：市局指挥中心 / 联合情报研判战队以及跨网段联合调度组');
     expect(value.attributes('aria-expanded')).toBe('false');
     expect(value.attributes('aria-description')).toBe('点击展开完整内容');
+    expect(value.get('.lx-descriptions__expand-icon').classes()).not.toContain('is-expanded');
     await value.trigger('click');
     expect(value.attributes('aria-expanded')).toBe('true');
     expect(value.attributes('aria-description')).toBe('点击收起完整内容');
+    expect(value.get('.lx-descriptions__expand-icon').classes()).toContain('is-expanded');
     wrapper.unmount();
   });
 
@@ -167,9 +169,11 @@ describe('LxDescriptions', () => {
     expect(toggle.attributes('aria-label')).toBe(`运行状态：${statusDescription}`);
     expect(toggle.attributes('aria-description')).toBe('点击展开完整内容');
     expect(toggle.get('.lx-status-dot').attributes('tabindex')).toBe('-1');
+    expect(toggle.get('.lx-descriptions__expand-icon').classes()).not.toContain('is-expanded');
     await toggle.trigger('click');
     expect(toggle.attributes('aria-expanded')).toBe('true');
     expect(toggle.attributes('aria-description')).toBe('点击收起完整内容');
+    expect(toggle.get('.lx-descriptions__expand-icon').classes()).toContain('is-expanded');
     wrapper.unmount();
   });
 
