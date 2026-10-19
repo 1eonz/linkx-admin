@@ -38,6 +38,7 @@ const tableWrapperRef = ref<HTMLDivElement>()
 const hasHorizontalOverflow = ref(false)
 const selectedRows = new Map<string | number, Record<string, any>>()
 let syncing = false
+let clearingAll = false
 let resizeObserver: ResizeObserver | undefined
 
 function getTableScrollArea(): HTMLElement | undefined {
@@ -128,15 +129,36 @@ onMounted(() => {
 onBeforeUnmount(() => resizeObserver?.disconnect())
 
 function onSelectionChange(rows: Record<string, any>[]) {
-  if (syncing) return
-  const keys = rows.map((r) => r[props.rowKey] as string | number)
-  rows.forEach((row, index) => selectedRows.set(keys[index], row))
-  const selected = new Set(keys)
-  selectedRows.forEach((_, key) => {
-    if (!selected.has(key)) selectedRows.delete(key)
+  if (syncing || clearingAll) return
+  // Element Plus 在启用 reserve-selection 时通常会返回跨页选中行，但这里
+  // 只把当前页视为可变集合，避免内核在换页或刷新时遗漏其他页的选中项。
+  const currentSelectedKeys = new Set(
+    rows
+      .map((row) => row[props.rowKey] as string | number | undefined)
+      .filter(
+        (key): key is string | number => key !== undefined && key !== null,
+      ),
+  )
+
+  props.data.forEach((row) => {
+    const key = row[props.rowKey] as string | number | undefined
+    if (key === undefined || key === null) return
+    if (currentSelectedKeys.has(key)) selectedRows.set(key, row)
+    else selectedRows.delete(key)
   })
+
+  const keys = Array.from(selectedRows.keys())
   emit('update:selected-keys', keys)
-  emit('select-change', keys, rows)
+  emit('select-change', keys, Array.from(selectedRows.values()))
+}
+
+function clearAllSelection() {
+  selectedRows.clear()
+  clearingAll = true
+  tableRef.value?.clearSelection()
+  emit('update:selected-keys', [])
+  emit('select-change', [], [])
+  nextTick(() => (clearingAll = false))
 }
 
 function onRowClick(row: Record<string, any>) {
@@ -172,7 +194,7 @@ function displayCell(
 // 保留 Element Plus 表格实例能力，供已有业务表格逐步迁移。
 defineExpose({
   getTableRef: () => tableRef.value,
-  clearSelection: () => tableRef.value?.clearSelection(),
+  clearSelection: clearAllSelection,
   toggleRowSelection: (row: Record<string, any>, selected?: boolean) =>
     tableRef.value?.toggleRowSelection(row, selected),
   getSelectionRows: () => tableRef.value?.getSelectionRows() ?? [],

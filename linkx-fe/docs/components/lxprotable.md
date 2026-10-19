@@ -57,7 +57,7 @@ import Basic from '../../src/components/LxProTable/demo/basic.vue';
 
 ### 交互边界
 
-- 受控 `selectedKeys` 是选择状态来源；换页后当前页复选框与已选行计数保持一致。清空由父级更新 `selectedKeys` 或调用 `clearSelection()`。
+- 受控 `selectedKeys` 是选择状态来源；组件按当前页差集更新选择，换页或取消当前页行时保留其他页已选 key，当前页复选框与已选行总计数保持一致。清空由父级更新 `selectedKeys` 或调用 `clearSelection()`。
 - `loading` 会在表格区域设置 `aria-busy`，并提供可读的加载状态；系统减少动效时停止旋转动画，保留状态文字。
 - 复选控件提供 44×44px 点按范围。表格存在横向溢出时，滚动区域可用 Tab 聚焦，再用左右方向键滚动；页面本身不会因列宽而横向溢出。
 - 错误态属于宿主的数据请求状态，不是组件 prop。宿主可通过 `#empty` 提供错误信息和重试操作。

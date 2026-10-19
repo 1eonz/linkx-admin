@@ -20,8 +20,24 @@ test.describe('lx-ui LxProTable 文档示例', () => {
     await page.locator('.el-pager li').nth(1).click();
     await expect(eleventhRow.getByRole('checkbox')).toBeChecked();
 
+    await eleventhRow.locator('label.el-checkbox').click();
+    await expect(page.getByText('已选 1 项', { exact: true })).toBeVisible();
+    await page.locator('.el-pager li').first().click();
+    await expect(firstRow.getByRole('checkbox')).toBeChecked();
+
     await page.getByRole('button', { name: '清空选择' }).click();
     await expect(page.getByText('已选 0 项', { exact: true })).toBeVisible();
+    await page.locator('.el-pager li').nth(1).click();
+    await expect(eleventhRow.getByRole('checkbox')).not.toBeChecked();
+
+    await page.locator('.el-pager li').first().click();
+    await firstRow.locator('label.el-checkbox').click();
+    await page.locator('.el-pager li').nth(1).click();
+    await eleventhRow.locator('label.el-checkbox').click();
+    await page.locator('.el-pager li').first().click();
+    await page.getByRole('button', { name: '清空选择' }).click();
+    await expect(page.getByText('已选 0 项', { exact: true })).toBeVisible();
+    await page.locator('.el-pager li').nth(1).click();
     await expect(eleventhRow.getByRole('checkbox')).not.toBeChecked();
   });
 
