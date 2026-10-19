@@ -15,6 +15,7 @@
  */
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import AppForm from './AppForm.vue';
@@ -257,7 +258,7 @@ function getRow(scope: any): AppItem {
 
       <!-- 应用类型列 -->
       <template #type="scope">
-        <el-tag>{{ typeMap[getRow(scope).type] ?? '-' }}</el-tag>
+        <LxTag>{{ typeMap[getRow(scope).type] ?? '-' }}</LxTag>
       </template>
 
       <!-- 应用展示范围列：scopeList 转文本 -->

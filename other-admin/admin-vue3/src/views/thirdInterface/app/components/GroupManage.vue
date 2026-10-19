@@ -11,6 +11,7 @@
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import type { FormInstance, FormItemRule } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { computed, nextTick, reactive, ref } from 'vue';
 
 import {
@@ -271,9 +272,9 @@ function getRow(scope: any): AppGroup {
       <!-- 绑定应用列 -->
       <template #appList="scope">
         <template v-if="getRow(scope).appList?.length">
-          <el-tag v-for="app in getRow(scope).appList" :key="app.id" class="app-tag" type="info">
+          <LxTag v-for="app in getRow(scope).appList" :key="app.id" class="app-tag" type="info">
             {{ app.name }}
-          </el-tag>
+          </LxTag>
         </template>
         <span v-else class="empty-text">-</span>
       </template>

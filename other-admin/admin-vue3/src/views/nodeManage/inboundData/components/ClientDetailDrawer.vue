@@ -24,7 +24,7 @@
  * ```
  */
 import { Refresh } from '@element-plus/icons-vue';
-import { LxEmpty } from 'lx-ui';
+import { LxEmpty, LxTag } from 'lx-ui';
 import { computed, ref, watch } from 'vue';
 
 import ConnectionStatusDot from '../../components/ConnectionStatusDot.vue';
@@ -100,7 +100,7 @@ const grantStatusInfo = computed(() => {
   const data = props.clientData;
   if (!data) return { text: '未授权', type: 'info' as const };
   if (data.grant === 1 && !data.expired) return { text: '已授权', type: 'success' as const };
-  if (data.expired) return { text: '已过期', type: 'danger' as const };
+  if (data.expired) return { text: '已过期', type: 'error' as const };
   return { text: '未授权', type: 'info' as const };
 });
 
@@ -273,7 +273,7 @@ function getRelatedUserCount(row: CoopDataItem): number {
             <div class="info-grid">
               <div class="info-item">
                 <span class="info-label">授权状态</span>
-                <el-tag :type="grantStatusInfo.type" size="small">{{ grantStatusInfo.text }}</el-tag>
+                <LxTag :type="grantStatusInfo.type" size="small">{{ grantStatusInfo.text }}</LxTag>
               </div>
               <div class="info-item">
                 <span class="info-label">有效期至</span>

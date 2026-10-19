@@ -10,6 +10,7 @@
 import { Plus, Edit, Delete, Search, Refresh } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { computed, onMounted, reactive, ref } from 'vue';
 
 import {
@@ -213,9 +214,9 @@ onMounted(() => {
       <el-table-column prop="name" label="名称" min-width="140" show-overflow-tooltip />
       <el-table-column prop="method" label="请求方式" width="100" align="center">
         <template #default="scope">
-          <el-tag :type="getRow(scope).method === 'GET' ? 'info' : 'warning'">
+          <LxTag :type="getRow(scope).method === 'GET' ? 'info' : 'warning'">
             {{ getRow(scope).method }}
-          </el-tag>
+          </LxTag>
         </template>
       </el-table-column>
       <el-table-column prop="ip" label="IP" min-width="120" show-overflow-tooltip />
