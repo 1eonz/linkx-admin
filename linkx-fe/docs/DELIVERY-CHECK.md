@@ -706,3 +706,8 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 
 - 文档 E2E **3/3** 通过，受控翻页、条数切换、布局、主题、375px 局部滚动和键盘焦点均有回归。
 - detector JSON/stderr/退出码为合法 `[]`/空/`0`；隔离 A/B、overlay、截图和 snapshot/trend 缺失，正式 Critique 不关闭。
+## 2026-10-19 LxInput 普通输入边框复验
+
+- [x] 普通、密码、透传包装器真实 `1px` 边框；复合前后缀根节点连续边框。
+- [x] LxInput 单测 **13/13**；边框专项与复合尺寸 E2E **2/2**；目标 Prettier 通过。
+- [ ] 完整基础控件 E2E 仍有既有清空按钮窄屏可见性失败；正式双路 Impeccable、UI-10 全库门禁和宿主迁移未完成。

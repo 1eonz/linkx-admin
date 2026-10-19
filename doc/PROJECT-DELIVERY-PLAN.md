@@ -1673,3 +1673,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **验证**：LxPagination 文档 Playwright **3/3** 通过，覆盖受控翻页、条数切换、布局/主题、375px 局部滚动和键盘焦点；源码 detector JSON/stderr/退出码为合法 `[]`/空/`0`。
 - **审查边界**：当前会话未运行独立 Assessment A/B，也没有可写 overlay 注入和正式 snapshot/trend；已降级记录于 `linkx-fe/.impeccable/critique/lxpagination-assessment-b-current-2026-10-19/`，因此不关闭 UI-10。
 - **下一步**：补隔离 Critique 证据后再处理剩余 P2；宿主真实分页、权限和 Element Plus 替换继续后置。
+## 2026-10-19 LxInput 普通输入边框可见性修复
+
+- **根因**：普通、密码和透传场景的 `.el-input__wrapper` 仅使用内阴影承载边界；在 Demo 的复合背景和浅色表面下边界对比不足，原生输入节点本身又没有边框，容易被误判为边框丢失。
+- **实现**：LxInput 包装器增加真实 `1px` 控件边框，保留既有内阴影焦点环、错误态和复合输入根节点外框；错误态同步切换真实边框颜色，不改变 props、事件、插槽或 `.then().catch().finally()` 规则。
+- **验证**：LxInput 单测 **13/13**；新增前后缀、密码、透传边框专项 E2E 与既有复合尺寸 E2E **2/2**；目标 Prettier 通过。完整基础控件 E2E **12/13**，唯一失败仍为既有清空按钮窄屏可见性契约，与本次边框改动无关。
+- **审查边界**：本波只完成组件几何和可见性回归，不关闭 UI-10/UI-11；正式 Impeccable 双路证据、Vue3 Element Plus 分批替换、权限和真实后端联调继续按门禁后置。detector 的 `[]` 不能单独代表视觉通过。

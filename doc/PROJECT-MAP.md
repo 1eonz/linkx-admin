@@ -757,3 +757,7 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - 文档入口 `/components/lxpagination` 的当前行为回归为 3/3；证据覆盖分页控制、主题、窄屏局部滚动和键盘焦点。
 - detector 为合法 `[]`/空/0，但缺少隔离 A/B、overlay 和 snapshot/trend；组件正式 UI-10 仍开放。
+## 2026-10-19 LxInput 普通边框可见性修复
+
+- 入口：`linkx-fe/src/components/LxInput/`；普通、密码和透传场景由 `.el-input__wrapper` 提供真实 `1px` 边框，复合前后缀由根节点提供连续边框。
+- 单测 **13/13**；边框专项与复合尺寸文档 E2E **2/2**。该证据只覆盖组件库当前行为，不代表 Vue3 业务页面迁移或正式 UI-10 Critique 完成。

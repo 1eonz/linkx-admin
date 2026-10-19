@@ -2809,3 +2809,8 @@
 - 文档行为 E2E **3/3** 通过；覆盖翻页、条数切换、布局、主题、375px 局部滚动和键盘焦点。
 - detector 三件套为合法 `[]`、空 stderr、退出码 `0`；因缺少隔离 A/B 与可写 overlay，本次为降级复验，证据见 `linkx-fe/.impeccable/critique/lxpagination-assessment-b-current-2026-10-19/`。
 - 正式 UI-10、真实宿主分页 API、权限联调和跨浏览器仍未完成；不得把本条写成组件正式 Critique 通过。
+## 2026-10-19 LxInput 普通边框可见性交接
+
+- 普通、密码、透传 `LxInput` 的 `.el-input__wrapper` 现在使用真实 `1px` 外边框；复合 prepend/append 继续由根节点提供连续外框，焦点光环和错误态语义保持不变。
+- LxInput 单测 **13/13**；前后缀/密码/透传边框专项与复合尺寸 E2E **2/2**；目标 Prettier 通过。完整基础控件 E2E 的既有清空按钮失败不属于本波。
+- 未改变 API、权限、业务请求链和宿主 Element Plus 依赖；正式 Critique 仍需独立 A/B、浏览器证据和 snapshot/trend，空数组不能单独作为通过。
