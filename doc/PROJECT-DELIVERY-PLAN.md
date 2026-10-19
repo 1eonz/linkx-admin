@@ -2045,3 +2045,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `thirdInterface/unifiedComm/components/IcpAuthManage.vue` 的姓名、身份证号和组织树筛选三个输入已由 `el-input` 切换为 `LxInput`，树筛选尺寸映射为 `sm`。
 - 保留清空、回车查询、部门树过滤、包含子部门开关、权限按钮和授权弹窗；`vue-tsc`、Prettier、ESLint 与隔离 Mock **10/10** 通过。
 - 真实权限数据、授权接口和服务配置字段仍需后端契约/联调，继续作为明确阻塞。
+
+## 2026-10-20 IcpServerConfig 文本输入迁移
+
+- `thirdInterface/unifiedComm/components/IcpServerConfig.vue` 的 IP、WSS 地址、用户名、只读组织/摄像头和树搜索字段已由 `el-input` 切换为 `LxInput`。
+- 保留复合 append 操作、只读语义、树选择、表单校验和提交请求；密码、端口等敏感/数值控件暂不替换。`vue-tsc`、Prettier、ESLint 与隔离 Mock **10/10** 通过。
+- 服务配置真实接口和权限联调仍需可信后端，继续保留为阻塞。

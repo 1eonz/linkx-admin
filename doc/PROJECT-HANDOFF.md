@@ -3161,3 +3161,8 @@
 
 - `thirdInterface/unifiedComm/components/IcpAuthManage.vue` 的姓名、身份证号、组织树筛选改用 `LxInput`，树筛选使用 `size="sm"`；保留清空、回车查询、部门过滤、开关、权限按钮和授权弹窗。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；真实权限数据与授权后端联调仍未执行。
+
+# 2026-10-20 IcpServerConfig 文本输入交接
+
+- `thirdInterface/unifiedComm/components/IcpServerConfig.vue` 的 IP、WSS、用户名、只读组织/摄像头及树搜索改用 `LxInput`，保留 append 操作、树选择、表单校验和提交契约；密码、端口未改动。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；服务配置真实后端联调仍未执行。
