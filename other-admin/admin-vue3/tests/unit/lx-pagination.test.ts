@@ -120,6 +120,27 @@ describe('LxPagination', () => {
     wrapper.unmount();
   });
 
+  it('scrolls the nearest scrollable ancestor before falling back to the window', async () => {
+    const host = document.createElement('div');
+    host.style.overflowY = 'auto';
+    Object.defineProperty(host, 'scrollHeight', { configurable: true, value: 400 });
+    Object.defineProperty(host, 'clientHeight', { configurable: true, value: 200 });
+    host.scrollTo = vi.fn();
+    document.body.append(host);
+    const windowScrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => undefined);
+    const wrapper = mount(LxPagination, {
+      attachTo: host,
+      props: { page: 2 },
+    });
+
+    await wrapper.get('button').trigger('click');
+
+    expect(host.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
+    expect(windowScrollTo).not.toHaveBeenCalled();
+    wrapper.unmount();
+    host.remove();
+  });
+
   it('supports an explicit layout, background buttons and compact size', () => {
     const wrapper = mountPagination({
       layout: 'total, prev, pager, next, jumper',

@@ -3,7 +3,7 @@
  * LxPagination — 分页器（Element Plus el-pagination 二次封装）
  * 纯受控：页码计算与请求由业务负责，样式由 token 桥接层接管
  */
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { ElPagination } from 'element-plus'
 import type { LxPaginationProps } from './types'
 import 'element-plus/es/components/pagination/style/css'
@@ -29,6 +29,8 @@ const emit = defineEmits<{
   change: [page: number, size: number]
 }>()
 
+const paginationRef = ref<{ $el?: HTMLElement }>()
+
 const resolvedLayout = computed(
   () =>
     props.layout ??
@@ -44,18 +46,37 @@ const resolvedLayout = computed(
       .join(', '),
 )
 
-/** 切页回顶：定位组件所在文档位置回滚（列表容器内滚动时业务可关掉自行处理）。
- * 系统开启减少动效时改用即时滚动，避免组件主动制造平滑动画。
- */
+/** 查找分页器所在的可滚动祖先，避免嵌套列表翻页时把整个页面拉回顶部。 */
+function findScrollableAncestor(element: HTMLElement | undefined) {
+  let parent = element?.parentElement
+  while (parent && parent !== document.body) {
+    const style = getComputedStyle(parent)
+    const canScrollVertically = /(auto|scroll|overlay)/.test(style.overflowY)
+    if (canScrollVertically && parent.scrollHeight > parent.clientHeight) {
+      return parent
+    }
+    parent = parent.parentElement
+  }
+  return undefined
+}
+
+/** 切页回顶：优先定位最近的滚动容器，找不到时兼容原有窗口回顶行为。 */
 function scrollToTop() {
-  if (typeof window === 'undefined' || typeof window.scrollTo !== 'function')
-    return
+  if (typeof window === 'undefined') return
   const mediaQuery =
     typeof window.matchMedia === 'function'
       ? window.matchMedia('(prefers-reduced-motion: reduce)')
       : null
   const reducedMotion = mediaQuery?.matches ?? false
-  window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' })
+  const behavior = reducedMotion ? 'auto' : 'smooth'
+  const container = findScrollableAncestor(paginationRef.value?.$el)
+  if (container && typeof container.scrollTo === 'function') {
+    container.scrollTo({ top: 0, behavior })
+    return
+  }
+  if (typeof window.scrollTo === 'function') {
+    window.scrollTo({ top: 0, behavior })
+  }
 }
 
 function onPage(p: number) {
@@ -75,6 +96,7 @@ function onSize(s: number) {
 
 <template>
   <ElPagination
+    ref="paginationRef"
     class="lx-pagination"
     :class="`lx-pagination--${size}`"
     :current-page="page"

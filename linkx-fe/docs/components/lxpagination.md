@@ -27,7 +27,7 @@ Demo 可切换默认/自定义布局、背景样式、切换条数回第一页�
 | page-sizes                           | 条数可选项                                                             | `number[]`                    | `[10,20,50,100]`      |
 | show-size / show-total / show-jumper | 条数选择器 / 总数 / 跳页                                               | `boolean`                     | `true`/`true`/`false` |
 | auto-reset                           | 切换条数自动回第 1 页                                                  | `boolean`                     | `true`                |
-| auto-scroll                          | 切页后窗口平滑回顶（列表容器内滚动场景可关）                           | `boolean`                     | `true`                |
+| auto-scroll                          | 切页后最近可滚动祖先平滑回顶；无祖先时回滚窗口                         | `boolean`                     | `true`                |
 | size                                 | 尺寸                                                                   | `'small'\|'default'\|'large'` | `default`             |
 | layout                               | 覆盖分页项排列；未传时由 `show-total`、`show-size`、`show-jumper` 组合 | `string`                      | 按显示开关计算        |
 | background                           | 是否显示页码按钮背景                                                   | `boolean`                     | `false`               |
@@ -40,4 +40,4 @@ Demo 可切换默认/自定义布局、背景样式、切换条数回第一页�
 | `update:page-size` | `size: number`                     | 每页条数变化                                              |
 | `change`           | `(page: number, pageSize: number)` | 翻页或切换每页条数后触发，供宿主统一发起查询              |
 
-切换每页条数时，组件先发出 `update:page-size`，随后按 `auto-reset` 发出 `update:page`，最后发出 `change`。组件本身不请求数据；`auto-scroll` 只控制窗口滚动，不改变列表容器的滚动位置。
+切换每页条数时，组件先发出 `update:page-size`，随后按 `auto-reset` 发出 `update:page`，最后发出 `change`。组件本身不请求数据；`auto-scroll` 优先滚动最近的可滚动祖先，找不到时才滚动窗口。宿主如果需要自行定位，可关闭该开关。
