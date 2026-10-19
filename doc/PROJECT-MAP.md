@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-19 LxEmpty 当前版门禁复验
+
+- 入口：`linkx-fe/src/components/LxEmpty/index.vue`、`linkx-fe/src/components/LxEmpty/demo/basic.vue`；文档：`linkx-fe/docs/components/lxempty.md`。
+- 当前行为覆盖默认/紧凑尺寸、图标插槽、footer 操作、创建和筛选恢复、HUD、键盘焦点及窄屏布局；组件不请求业务 API。
+- 证据：`other-admin/admin-vue3/tests/unit/lx-empty.test.ts` **5/5**、`tests/e2e/lx-empty-docs.spec.ts`（4177 lx-ui 文档入口）**1/1**；无新增 P0–P2，正式 UI-10 仍开放。
+
 ## 2026-10-19 LxMetricCard 窄卡与状态组合
 
 - 入口：`linkx-fe/src/components/LxMetricCard/index.vue`、`linkx-fe/src/components/LxMetricCard/demo/basic.vue`；文档：`linkx-fe/docs/components/lxmetriccard.md`。

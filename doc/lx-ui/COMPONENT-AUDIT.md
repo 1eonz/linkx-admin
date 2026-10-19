@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-19 LxEmpty 当前版门禁复验
+
+- **结果**：当前实现、类型、Demo、中文 API 与既有设计依据一致，未发现可复现 P0–P2；单测 **5/5**、4177 文档 Playwright **1/1**、lx-ui typecheck 和文档构建通过。
+- **审查证据**：既有 Assessment A **35/40** 与 B 浏览器证据继续有效；本轮没有新的独立 Impeccable A/B，因此不把历史 detector 或静态 `[]` 当作当前正式 Critique 通过。
+- **入口约定**：LxEmpty 文档 E2E 使用 `playwright.lxui.config.ts` 和 4177 文档服务；宿主 Vite 入口缺少文档页，相关失败属于环境目标错误。
+- **矩阵状态**：无源码改动，不增加 UI-10 关闭数；业务页面迁移、权限按钮/文本/字段契约和真实后端联调仍按 UI-04 保持开放。
+
 ## 2026-10-19 LxInput 真实输入盒模型与前后缀高度复验
 
 - **修复**：`.el-input__inner` 从完整外框高度改为读取 `--lx-input-content-height`，与 `prefix/suffix` 及内部槽位共用描边内内容轨道；内容元素在外框内居中，避免输入元素比前后缀高 2px。
