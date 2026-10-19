@@ -3156,3 +3156,8 @@
 
 - `eventType/thirdParty/index.vue` 搜索区应用名称改用 `LxInput`，保留 SearchBar 插槽、清空、回车搜索和查询请求；密码、数字有效期、textarea 字段未改动。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；复杂字段待契约核对后再迁移。
+
+# 2026-10-20 IcpAuthManage 搜索交接
+
+- `thirdInterface/unifiedComm/components/IcpAuthManage.vue` 的姓名、身份证号、组织树筛选改用 `LxInput`，树筛选使用 `size="sm"`；保留清空、回车查询、部门过滤、开关、权限按钮和授权弹窗。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；真实权限数据与授权后端联调仍未执行。

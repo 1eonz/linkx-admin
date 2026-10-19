@@ -305,6 +305,11 @@ Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过适�
 - `eventType/thirdParty/index.vue` 搜索区的应用名称 `el-input` 已替换为 `LxInput`。
 - 密码、数字有效期和 textarea 仍属于待核对复杂字段，不计为已完成的全页替换；依赖删除门槛未满足。
 
+## 2026-10-20 IcpAuthManage 输入计数更新
+
+- `IcpAuthManage.vue` 的姓名、身份证号、组织树三个 `el-input` 已替换为 `LxInput`，保留树过滤和查询契约。
+- 授权树与后端权限字段仍待联调；不能据此关闭权限迁移或 Element Plus 删除门禁。
+
 ## 2026-10-11 Wave 11 P2 影响更新
 
 - `LxTransferPanel` 与 `LxVirtualTree` 已完成当前版组件级严格 UI/交互审查：单测合计 67/67、文档 E2E 合计 48/48，类型、203 modules 构建、文档构建和 Vue3 生产构建通过；代码复审无 P0-P3。Assessment A 36/40；Assessment B 5 个 detector 均为有效 `[]`/空 stderr/0，9 个浏览器视图证据完整。

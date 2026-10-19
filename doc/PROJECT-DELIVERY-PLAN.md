@@ -2039,3 +2039,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `eventType/thirdParty/index.vue` 搜索区的应用名称输入已由 `el-input` 切换为 `LxInput`，保留 SearchBar 插槽、清空、回车搜索和请求竞态处理。
 - `vue-tsc --noEmit`、目标 Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过。
 - 该页密码、数字有效期和 textarea 字段暂不机械替换，待分别核对类型、校验和组件契约后处理；Element Plus 删除门槛保持开放。
+
+## 2026-10-20 IcpAuthManage 搜索输入迁移
+
+- `thirdInterface/unifiedComm/components/IcpAuthManage.vue` 的姓名、身份证号和组织树筛选三个输入已由 `el-input` 切换为 `LxInput`，树筛选尺寸映射为 `sm`。
+- 保留清空、回车查询、部门树过滤、包含子部门开关、权限按钮和授权弹窗；`vue-tsc`、Prettier、ESLint 与隔离 Mock **10/10** 通过。
+- 真实权限数据、授权接口和服务配置字段仍需后端契约/联调，继续作为明确阻塞。
