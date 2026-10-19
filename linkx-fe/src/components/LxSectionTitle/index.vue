@@ -190,6 +190,24 @@ const headingTag = computed(() => {
 }
 
 @media (max-width: 400px) {
+  /* 窄屏将标题和操作拆成两行，避免 extra 挤压标题或截断操作。 */
+  .lx-section-title {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    row-gap: var(--lx-space-xs);
+  }
+
+  .lx-section-title__heading {
+    flex: 1 1 100%;
+    align-items: flex-start;
+  }
+
+  .lx-section-title__extra {
+    flex: 1 1 100%;
+    justify-content: flex-end;
+    min-width: 0;
+  }
+
   .lx-section-title__text {
     flex-wrap: wrap;
     align-items: flex-start;

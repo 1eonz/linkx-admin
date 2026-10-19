@@ -97,6 +97,22 @@ test.describe('LxSectionTitle 文档示例', () => {
       }));
       expect(titleGeometry.scrollWidth).toBeLessThanOrEqual(titleGeometry.clientWidth);
       expect(titleGeometry.height).toBeGreaterThan(24);
+      const layout = await longTitle.evaluate((element) => {
+        const heading = element.querySelector<HTMLElement>('.lx-section-title__heading');
+        const extra = element.querySelector<HTMLElement>('.lx-section-title__extra');
+        if (!heading || !extra) throw new Error('标题或操作区缺失');
+        const root = element.getBoundingClientRect();
+        const headingBox = heading.getBoundingClientRect();
+        const extraBox = extra.getBoundingClientRect();
+        return {
+          extraBelowHeading: extraBox.top >= headingBox.bottom,
+          extraRight: extraBox.right <= root.right,
+          extraHeight: extraBox.height,
+        };
+      });
+      expect(layout.extraBelowHeading).toBe(true);
+      expect(layout.extraRight).toBe(true);
+      expect(layout.extraHeight).toBeGreaterThanOrEqual(44);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
       await page.screenshot({ path: `test-results/lx-section-title-${width}.png` });
     }
