@@ -2,6 +2,7 @@
 import { Edit, Plus } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import type { UploadFile } from 'element-plus';
+import { LxSwitch } from 'lx-ui';
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import {
@@ -184,7 +185,7 @@ onBeforeUnmount(() => {
       >
       <el-table-column label="是否展示" width="140" align="center">
         <template #default="scope">
-          <el-switch
+          <LxSwitch
             v-model="getRow(scope).isShow"
             :loading="togglingIds.includes(getRow(scope).id)"
             :disabled="togglingIds.includes(getRow(scope).id)"

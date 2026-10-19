@@ -12,6 +12,7 @@
  */
 import { ElMessage } from 'element-plus';
 import type ElTree from 'element-plus/es/components/tree/index';
+import { LxSwitch } from 'lx-ui';
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 
 import AuthTreeModal from './AuthTreeModal.vue';
@@ -438,7 +439,7 @@ onMounted(() => {
       />
       <div class="switch-filter">
         <span class="switch-label">包含子部门</span>
-        <el-switch
+        <LxSwitch
           v-model="listQuery.isChildren"
           :active-value="1"
           :inactive-value="0"

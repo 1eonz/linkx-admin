@@ -15,7 +15,7 @@
  */
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxTag } from 'lx-ui';
+import { LxSwitch, LxTag } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import AppForm from './AppForm.vue';
@@ -280,7 +280,7 @@ function getRow(scope: any): AppItem {
       <!-- 仅使用 before-change：弹确认 + 调 API，成功才返回 true 让 switch 切换 -->
       <!-- 不使用 @change：避免数据初始化 / refresh 时 v-model 值变化误触发 API -->
       <template #status="scope">
-        <el-switch
+        <LxSwitch
           v-model="getRow(scope).status"
           :loading="statusLoadingMap[getRow(scope).id]"
           active-text="上架"

@@ -11,7 +11,7 @@
 /* global localStorage */
 import { Plus } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxEmpty } from 'lx-ui';
+import { LxEmpty, LxSwitch } from 'lx-ui';
 import { computed, ref, reactive } from 'vue';
 
 import CoopBindDialog, { type CoopBindDialogInstance } from './CoopBindDialog.vue';
@@ -356,7 +356,7 @@ function getRow(scope: any): FunctionalDeptMember {
             @response="handleResponse"
           >
             <template #checked="scope">
-              <el-switch
+              <LxSwitch
                 v-model="getRow(scope).checked"
                 :disabled="isDisabled"
                 inline-prompt

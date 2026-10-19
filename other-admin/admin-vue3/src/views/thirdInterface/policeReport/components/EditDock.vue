@@ -26,6 +26,7 @@
 import { Download } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormItemRule } from 'element-plus';
+import { LxSwitch } from 'lx-ui';
 import { computed, nextTick, reactive, ref } from 'vue';
 
 import { saveDock, updateDock, type DockItem } from '@/api/thirdInterface/policeReport';
@@ -309,7 +310,7 @@ function transform(Params, Config) {
 
       <!-- 状态 -->
       <el-form-item label="状态" prop="status">
-        <el-switch
+        <LxSwitch
           v-model="formData.status as 0 | 1"
           active-text="启用"
           inactive-text="禁用"

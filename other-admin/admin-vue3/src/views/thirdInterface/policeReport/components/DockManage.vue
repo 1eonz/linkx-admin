@@ -15,6 +15,7 @@
  */
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxSwitch } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import EditDock from './EditDock.vue';
@@ -225,7 +226,7 @@ function getRow(scope: any): DockItem {
 
       <!-- 状态列：v-model 直接绑定 row.status，切换时由 handleStatusChange 处理确认/回滚 -->
       <template #status="scope">
-        <el-switch
+        <LxSwitch
           v-model="getRow(scope).status"
           :loading="statusLoadingMap[getRow(scope).id as string]"
           active-text="启用"
