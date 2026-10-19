@@ -118,6 +118,23 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
       await compoundInput.evaluate((root) => getComputedStyle(root).overflow),
       `${option} 档复合输入应裁切统一外框`,
     ).toBe('hidden');
+    const border = await compoundInput.evaluate((root) => {
+      const style = getComputedStyle(root);
+      return {
+        widths: [style.borderTopWidth, style.borderRightWidth, style.borderBottomWidth, style.borderLeftWidth],
+        color: style.borderTopColor,
+      };
+    });
+    expect(border.widths, `${option} 档复合输入应使用真实外边框`).toEqual(['1px', '1px', '1px', '1px']);
+    const borderToken = await compoundInput.evaluate((root) => {
+      const probe = document.createElement('span');
+      probe.style.color = 'var(--lx-control-border)';
+      root.append(probe);
+      const value = getComputedStyle(probe).color;
+      probe.remove();
+      return value;
+    });
+    expect(border.color, `${option} 档复合输入边框应使用控件边框令牌`).toBe(borderToken);
     expect(geometry.prefix.height, `${option} 档 prefix 高度`).toBe(expectedHeight);
     expect(geometry.suffix.height, `${option} 档 suffix 高度`).toBe(expectedHeight);
     for (const addon of ['prepend', 'append'] as const) {
@@ -174,6 +191,19 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
       suffixInner: `${expectedHeight}px`,
     });
   }
+
+  const passwordInput = demo
+    .getByLabel('涉密核验口令', { exact: true })
+    .locator('xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")]');
+  const passwordBorder = await passwordInput.locator('.el-input__wrapper').evaluate((wrapper) => {
+    const style = getComputedStyle(wrapper);
+    return {
+      width: style.boxShadow.includes('0px 0px 0px 1px') ? '1px' : style.borderTopWidth,
+      color: style.boxShadow,
+    };
+  });
+  expect(passwordBorder.width, '密码输入框应保留可见边框').toBe('1px');
+  expect(passwordBorder.color, '密码输入框边框应由控件描边绘制').toContain('0px 0px 0px 1px');
 
   await page.setViewportSize({ width: 390, height: 844 });
   const touchHeights = await compoundInput.evaluate((root) =>

@@ -54,7 +54,9 @@
   align-items: stretch;
   overflow: hidden;
   border-radius: var(--lx-radius-md);
-  box-shadow: 0 0 0 1px var(--lx-control-border) inset;
+  /* 使用真实外边框，避免 overflow:hidden 时子槽背景遮住 inset 阴影。 */
+  border: 1px solid var(--lx-control-border);
+  box-shadow: none;
 }
 
 .lx-input.el-input-group > .el-input-group__prepend,
@@ -62,13 +64,15 @@
 .lx-input.el-input-group > .el-input-group__append {
   box-sizing: border-box;
   align-self: stretch;
-  height: 100%;
+  /* 外边框占用两条像素后，内部轨道向外补回 1px，保持内容与根节点同高。 */
+  height: calc(100% + 2px);
   min-height: 0;
+  margin-block: -1px;
 }
 
 /* 复合输入的内框是可伸展项，明确继承组高，避免内置内容尺寸把外框撑成不一致的高度。 */
 .lx-input.el-input-group > .el-input__wrapper {
-  height: 100%;
+  height: calc(100% + 2px);
   flex: 1 1 auto;
   min-height: 0;
   border-radius: 0;
@@ -83,13 +87,16 @@
 
 /* 复合输入聚焦时由根节点承载完整焦点环，前后缀和输入框共享同一条边界。 */
 html:root .lx-input.el-input-group:focus-within {
-  box-shadow:
-    0 0 0 1px var(--lx-color-primary) inset,
-    0 0 0 2px var(--lx-control-focus-halo-color);
+  border-color: var(--lx-color-primary);
+  box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
 html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
   box-shadow: none;
+}
+
+.lx-input.el-input-group:hover {
+  border-color: var(--lx-color-primary);
 }
 
 /* 禁用态保留灰色表面，同时维持值的可读性。 */
@@ -168,12 +175,21 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper {
   box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
 }
 
+html:root .el-form-item.is-error .lx-input.el-input-group {
+  border-color: var(--lx-color-form-error);
+}
+
 html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
   outline: none;
   outline-offset: 0;
   box-shadow:
     0 0 0 1px var(--lx-color-form-error) inset,
     0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+html:root .el-form-item.is-error .lx-input.el-input-group:focus-within {
+  border-color: var(--lx-color-form-error);
+  box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
 /* 表单校验错误输入值与边线使用同一表单专属令牌。 */
