@@ -1578,6 +1578,12 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **实现**：400px 及以下将标题与 `extra` 操作区拆为两行，标题区完整占据首行，操作区右对齐；长标题保留当前换行语义，未改变 `headingLevel`、tag、subtitle 或具名插槽契约。
 - **验证**：`lx-section-title.test.ts` **14/14**、`lx-section-title-docs.spec.ts` **1/1**；覆盖 375px/320px、HUD、减少动效、键盘操作和无横向溢出；lx-ui typecheck/build、目标 Prettier、定向 ESLint 和 `git diff --check` 通过。三路 detector JSON/stderr/退出码为合法 `[]`/空/`0`。
 - **边界**：本波只改善组件窄屏布局，不增加 UI-10 全库关闭数；当前使用既有 Assessment A 基线，新的独立 A 与正式 snapshot/trend 尚未收口，不能把本波标为正式 Critique 通过。Vue3 Element Plus 替换、权限中心、文本/字段权限、真实后端和页面操作引导继续后置。
+
+## 2026-10-19 LxInput 前后缀行高修复
+
+- 前后缀、内部槽位及 prepend/append 的行高统一使用 lx-input-content-height，修复 Element Plus line-height: 1 造成的文字轨道偏差；外框尺寸和 44px 窄屏规则不变。
+- 复合前后缀 E2E 1/1、lx-ui typecheck/build、目标 Prettier、ESLint 和差异检查通过；A 31/40，B 为合法 []、空 stderr、退出码 0，并有桌面、HUD、窄屏浏览器证据。
+- B 的一次聚焦读数误选了其他 Demo 节点，已由复合输入正式焦点断言复核，不作为缺陷；[] 不单独代表视觉通过。可访问命名、错误关联和语义前后缀说明列入后续表单可访问性任务。
 ## 2026-10-18 LxCodeSlot 复制中反馈 P1 收口
 
 - **实现**：复制进行中按钮显示 `LxIcon loading`、`title="正在复制"` 和 `aria-busy="true"`，同时禁用重复点击；复制完成后恢复复制图标和原提示。保留既有成功/失败事件与 Promise 链边界。

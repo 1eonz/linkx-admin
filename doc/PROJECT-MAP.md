@@ -695,3 +695,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - `linkx-fe/src/components/LxInput/style.css` 的 `prefix/suffix` 及内部槽位在统一内容轨道内垂直居中，外框高度与窄屏触控规则不变。
 - 几何回归入口：`other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`；业务 API、权限和 Vue3 宿主迁移仍按现有矩阵执行。
+
+## 2026-10-19 LxInput 前后缀行高
+
+- prefix/suffix、内部槽位和 prepend/append 的行高统一使用内容轨道令牌；外框仍由组件高度令牌控制，窄屏保持 44px。
+- 组件样式、文档 E2E 和宿主迁移边界已同步；可访问命名与错误描述关联进入后续表单专项。

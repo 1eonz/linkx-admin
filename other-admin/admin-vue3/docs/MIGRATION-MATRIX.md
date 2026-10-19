@@ -146,3 +146,8 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 `LxPasswordInput` 组件级证据已完成：单测 11/11、文档 E2E 9/9；移动端清空/显隐键盘顺序和 44px 触控区已回归。该条只关闭 lx-ui 组件门禁，不代表 Vue3 登录页替换或真实认证联调；下一组件为 `LxMetricCard` 与 `LxSectionTitle`。
 - `LxSectionTitle` 组件库已完成窄容器响应式与标签辅助名称修复，组件 E2E **1/1**；配置页真实组合仍登记为 UI-04 未完成，不能标记页面迁移完成。
+
+## 2026-10-19 LxInput 前后缀行高
+
+- Vue3 适配继续通过 lx-ui 的 LxInput；本波只修复库内样式和文档 E2E，不改变宿主 props、事件、插槽或 Promise 链 API 请求写法。
+- 复合输入尺寸、390px 触屏和焦点环回归通过；Element Plus 全量替换仍等待 UI-10/UI-11 门禁。

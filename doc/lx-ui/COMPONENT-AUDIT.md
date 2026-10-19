@@ -754,3 +754,9 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 - 复制按钮在异步剪贴板尚未完成时显示加载图标、`title="正在复制"`、`aria-busy` 并禁用重复操作；成功/失败提示和 `copy` 事件契约保持不变。
 - lx-ui 专用文档 E2E **1/1**，覆盖键盘、HUD、窄屏、长值和复制中状态；默认 Vue3 配置误指向登录页的失败已记录为配置问题。
 - 真实剪贴板权限、读屏器、跨浏览器和宿主组合仍开放，不增加 UI-10 全库关闭数。\n
+
+## 2026-10-19 LxInput 前后缀行高修复
+
+- 改动：prefix/suffix、内部槽位及 prepend/append 的行高绑定内容轨道令牌，消除 Element Plus 默认 line-height 对文字和图标垂直位置的影响。
+- 证据：复合前后缀 E2E 1/1；lx-ui typecheck/build、目标格式和 ESLint 通过；sm/md/lg 与 390px 窄屏几何保持稳定。
+- 审查：A 31/40；B detector JSON/stderr/退出码为合法 []/空/0，桌面/HUD/窄屏浏览器证据已保存。一次错误节点的焦点读数由复合输入断言排除，[] 不单独表示正式 Critique 通过。

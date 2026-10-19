@@ -132,7 +132,7 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
   align-items: center;
   align-self: center;
   padding-block: 0;
-  line-height: 1;
+  line-height: var(--lx-input-content-height);
   /* EP 默认 transition: all 会让尺寸切换时槽位短暂变高，导致边界错位。 */
   transition: color var(--lx-transition);
 }
@@ -145,7 +145,7 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
   align-items: center;
   align-self: center;
   flex: 0 0 auto;
-  line-height: 1;
+  line-height: var(--lx-input-content-height);
   transition: color var(--lx-transition);
 }
 
@@ -210,7 +210,7 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
   height: 100%;
   min-height: 0;
   padding-block: 0;
-  line-height: 1;
+  line-height: var(--lx-input-content-height);
   color: var(--lx-text-regular);
   background-color: var(--lx-bg-card-hover);
 }

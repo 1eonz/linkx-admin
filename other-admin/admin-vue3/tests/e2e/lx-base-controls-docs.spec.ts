@@ -85,6 +85,12 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
           suffix: getComputedStyle(root.querySelector<HTMLElement>('.el-input__suffix')!).height,
           suffixInner: getComputedStyle(root.querySelector<HTMLElement>('.el-input__suffix-inner')!).height,
         },
+        slotLineHeights: {
+          prefix: getComputedStyle(root.querySelector<HTMLElement>('.el-input__prefix')!).lineHeight,
+          prefixInner: getComputedStyle(root.querySelector<HTMLElement>('.el-input__prefix-inner')!).lineHeight,
+          suffix: getComputedStyle(root.querySelector<HTMLElement>('.el-input__suffix')!).lineHeight,
+          suffixInner: getComputedStyle(root.querySelector<HTMLElement>('.el-input__suffix-inner')!).lineHeight,
+        },
       };
     });
     expect(geometry.root.height, `${option} 档复合输入根节点高度`).toBe(expectedHeight);
@@ -157,6 +163,12 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
       ).toBeLessThanOrEqual(1);
     }
     expect(geometry.slotHeightTokens, `${option} 档前后缀应直接使用统一高度轨道`).toEqual({
+      prefix: `${expectedHeight - 2}px`,
+      prefixInner: `${expectedHeight - 2}px`,
+      suffix: `${expectedHeight - 2}px`,
+      suffixInner: `${expectedHeight - 2}px`,
+    });
+    expect(geometry.slotLineHeights, `${option} 档前后缀行高应与内容轨道一致`).toEqual({
       prefix: `${expectedHeight - 2}px`,
       prefixInner: `${expectedHeight - 2}px`,
       suffix: `${expectedHeight - 2}px`,

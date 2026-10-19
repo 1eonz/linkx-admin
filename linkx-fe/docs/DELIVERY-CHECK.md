@@ -635,3 +635,8 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 - 复制进行中显示加载图标和中文忙态标题，设置 `aria-busy` 并禁用重复提交；原有成功/失败提示保持不变。
 - lx-ui 专用 Playwright **1/1**、typecheck、目标 Prettier 和差异检查通过。必须使用 `playwright.lxui.config.ts`，默认 Vue3 配置会打开登录页。
 - 真实剪贴板权限、读屏器和宿主组合仍未完成；静态 detector `[]` 不单独作为视觉审查结论。
+
+## 2026-10-19 LxInput 前后缀行高修复
+
+- prefix/suffix、内部槽位和 prepend/append 的行高统一为 lx-input-content-height，输入文字与图标不再受 Element Plus 默认行高影响。
+- 复合前后缀 E2E 1/1、typecheck/build、目标 Prettier 和 ESLint 通过；A 31/40，B 为合法 []/空/0 并有独立浏览器尺寸证据。空数组不单独代表 Critique 通过。

@@ -2713,6 +2713,12 @@
 - **代码审查**：未发现 P0/P1/P2；状态由组件内部维护，未引入 API、Router、Pinia 或权限依赖。临时 `code-slot-e2e.json`、test-results 和其他协作者文件不纳入提交。
 - **下一步**：继续 LxDescriptions 与 UI-10 未关闭候选；保持中文注释、Promise 链请求风格和白名单提交规则。
 
+## 2026-10-19 LxInput 前后缀行高交接
+
+- LxInput 的 prefix/suffix、内部槽位和 prepend/append 已绑定内容轨道行高，未修改 props、事件、插槽或 API 请求边界。
+- 复合前后缀 E2E 1/1；lx-ui typecheck/build、目标格式和 ESLint 通过；sm/md/lg 为 28/32/40px，390px 触屏为 44px。
+- Impeccable A 31/40；B detector JSON/stderr/退出码为 []/空/0，浏览器证据已保存。焦点环误读由复合输入正式断言排除；临时截图、日志和 detector 文件不提交。
+
 ## 2026-10-19 LxInput 前后缀高度令牌补强
 
 - 将 `sm/md/lg` 的统一高度轨道绑定到 lx-ui 控件高度令牌，降低 Element Plus 主题变量覆盖导致输入框与 prefix/suffix、prepend/append 高度漂移的风险。
