@@ -10,6 +10,7 @@
 import { Search } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import { debounce } from 'lodash-es';
+import { LxPagination } from 'lx-ui';
 import { computed, ref } from 'vue';
 
 import type { CollaborationItem } from '@/api/h5/collaboration';
@@ -163,8 +164,9 @@ function submitBind(): Promise<void> {
     });
 }
 
-function handlePageChange(v: number): void {
-  page.value = v;
+function handlePaginationChange(nextPage: number, nextPageSize: number): void {
+  page.value = nextPage;
+  pageSize.value = nextPageSize;
   fetchList();
 }
 
@@ -206,13 +208,16 @@ defineExpose({ open });
       />
 
       <div class="pagination-wrap">
-        <el-pagination
-          background
-          :current-page="page"
+        <LxPagination
+          :page="page"
           :page-size="pageSize"
           :total="total"
           layout="total, prev, pager, next"
-          @current-change="handlePageChange"
+          :background="true"
+          :auto-scroll="false"
+          @update:page="page = $event"
+          @update:page-size="pageSize = $event"
+          @change="handlePaginationChange"
         />
       </div>
     </div>

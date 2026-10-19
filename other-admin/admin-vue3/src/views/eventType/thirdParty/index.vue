@@ -2,6 +2,7 @@
 import { Delete, Edit, Plus, View } from '@element-plus/icons-vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxPagination } from 'lx-ui';
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import type { NorthboundAppForm, NorthboundAppItem, NorthboundAppListQuery } from '@/api/resource/thirdApp';
@@ -137,11 +138,6 @@ function handleSearch(): void {
 
 function handleReset(): void {
   query.systemName = '';
-  query.pageNum = 1;
-  void loadList();
-}
-
-function handlePageSizeChange(): void {
   query.pageNum = 1;
   void loadList();
 }
@@ -292,16 +288,16 @@ onBeforeUnmount(() => {
         </el-table>
       </div>
 
-      <el-pagination
-        v-model:current-page="query.pageNum"
+      <LxPagination
+        v-model:page="query.pageNum"
         v-model:page-size="query.pageSize"
         class="northbound-pagination"
         :page-sizes="[10, 20, 50]"
         :total="total"
-        background
+        :background="true"
+        :auto-scroll="false"
         layout="total, sizes, prev, pager, next, jumper"
-        @current-change="loadList"
-        @size-change="handlePageSizeChange"
+        @change="loadList"
       />
     </el-card>
 

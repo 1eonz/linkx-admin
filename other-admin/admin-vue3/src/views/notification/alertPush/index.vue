@@ -11,6 +11,7 @@
  */
 import { Plus, Delete, Edit, Search, Refresh } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxPagination } from 'lx-ui';
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 
 import TaskDueAddForm from './components/TaskDueAddForm.vue';
@@ -134,14 +135,9 @@ function handleReset(): void {
 }
 
 // ===== 分页 =====
-function handleSizeChange(size: number): void {
-  pagination.pageSize = size;
-  pagination.pageNum = 1;
-  getWarningList();
-}
-
-function handleCurrentChange(page: number): void {
+function handlePaginationChange(page: number, size: number): void {
   pagination.pageNum = page;
+  pagination.pageSize = size;
   getWarningList();
 }
 
@@ -402,16 +398,19 @@ onMounted(() => {
           </el-table>
 
           <!-- 分页 -->
-          <el-pagination
+          <LxPagination
             v-show="taskOverdueTotal > 0"
             class="pagination"
-            :current-page="pagination.pageNum"
+            :page="pagination.pageNum"
             :page-size="pagination.pageSize"
             :total="taskOverdueTotal"
             :page-sizes="[10, 20, 50, 100]"
             layout="total, sizes, prev, pager, next"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
+            :background="false"
+            :auto-scroll="false"
+            @update:page="pagination.pageNum = $event"
+            @update:page-size="pagination.pageSize = $event"
+            @change="handlePaginationChange"
           />
         </el-tab-pane>
 
@@ -476,16 +475,19 @@ onMounted(() => {
           </el-table>
 
           <!-- 分页 -->
-          <el-pagination
+          <LxPagination
             v-show="unattendedTotal > 0"
             class="pagination"
-            :current-page="pagination.pageNum"
+            :page="pagination.pageNum"
             :page-size="pagination.pageSize"
             :total="unattendedTotal"
             :page-sizes="[10, 20, 50, 100]"
             layout="total, sizes, prev, pager, next"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
+            :background="false"
+            :auto-scroll="false"
+            @update:page="pagination.pageNum = $event"
+            @update:page-size="pagination.pageSize = $event"
+            @change="handlePaginationChange"
           />
         </el-tab-pane>
       </el-tabs>
