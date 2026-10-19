@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxDescriptions 移动端展开入口收口
+
+- **评审**：当前版 Assessment A **32/40（Good）**；Assessment B 的三个 detector 均为合法 `[]`、stderr 为空、退出码 `0`，并完成 Light/HUD、桌面/窄屏、reduced-motion 浏览器证据。`[]` 不单独代表正式通过；A 的自动化截图受环境限制，B 的合成 Enter 路径仍需真实键盘复验。
+- **修复**：移动断点下普通长值和长状态展开按钮统一 `min-height: 44px` 并保留多行换行；新增文档 E2E 几何断言。
+- **验证**：LxDescriptions 单测 **10/10**、文档 E2E **3/3**、lx-ui `vue-tsc --noEmit` 和目标 Prettier 通过。
+- **保留项**：长状态嵌套读屏语义、`unknown` 复杂值格式化、复制失败替代路径和 Demo 多实例主题竞态列为 P2/P3；正式 UI-10/UI-11 仍开放。
+
 ## 2026-10-20 LxInput 边框专项复跑
 
 - **结果**：重新运行复合前后缀及前后缀/密码/透传边框用例，当前结果为 **2/2** 通过。

@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxDescriptions 移动端展开入口收口
+
+- [x] 普通长值和长状态移动端展开按钮统一至少 44px，保留多行换行。
+- [x] LxDescriptions 单测 **10/10**、文档 E2E **3/3**、组件 `vue-tsc --noEmit`、目标 Prettier 通过。
+- [x] Assessment A **32/40（Good）**；Assessment B 三目标 detector 为合法 `[]`/空 stderr/`0`，隔离浏览器 6 视图无页面错误、失败请求和横溢出。
+- [ ] A 的自动化截图、B 的真实键盘 Enter、正式 snapshot/trend 和 UI-10/UI-11 仍未关闭；`[]` 不单独代表通过。
+
 ## 2026-10-20 LxInput 边框专项复跑
 
 - [x] 复合前后缀与前后缀/密码/透传边框 Playwright 用例 **2/2** 通过。

@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxDescriptions 移动端展开入口
+
+- `linkx-fe/src/components/LxDescriptions/index.vue` 在移动断点为普通长值与长状态展开按钮提供至少 44px 触控高度；`other-admin/admin-vue3/tests/e2e/lx-descriptions-docs.spec.ts` 覆盖几何回归。
+- 当前组件行为证据为单测 **10/10**、文档 E2E **3/3**；正式 Impeccable 全库门禁仍未关闭，P2/P3 评审意见保留在交接记录。
+
 ## 2026-10-20 LxInput 边框专项复跑
 
 - 入口：`linkx-fe/src/components/LxInput/`；回归位于 `other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`。

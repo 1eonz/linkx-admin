@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxDescriptions 移动端展开入口收口
+
+- **Assessment A**：当前源码评审 **32/40（Good）**，无 P0；P1 为普通长值/长状态展开入口缺少 44px 触控高度，P2/P3 详见 `tmp-descriptions-assessment-a-current.md`。
+- **Assessment B**：三个 detector 均为合法 `[]`、stderr 空、退出码 `0`；隔离 4180 文档服务完成 6 个主题/窄屏/减少动效视图，页面错误、失败请求和横溢出为 0，证据见 `tmp-descriptions-assessment-b-current.md`。A 未形成可靠自动化截图，B 的 CDP 合成 Enter 未切换状态，均不能替代正式真实键盘复验。
+- **修复与验证**：移动断点的普通长值、长状态按钮增加 `min-height: 44px` 和上下内边距；单测 **10/10**、文档 E2E **3/3**、组件类型检查和目标 Prettier 通过。
+- **未关闭**：长状态嵌套 `role=img`、复杂 `unknown` 值、复制失败恢复、主题多实例竞态及正式 UI-10/UI-11 继续开放。
+
 ## [2026-10-20] LxInput 边框专项复跑
 
 - **验证**：运行 `lx-base-controls-docs.spec.ts` 的复合前后缀及前后缀/密码/透传边框用例，结果 **2/2** 通过。
