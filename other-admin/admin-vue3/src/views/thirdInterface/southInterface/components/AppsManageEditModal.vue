@@ -11,6 +11,7 @@
 import { Bottom, Delete, Right, Top } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import type { FormInstance, FormItemRule } from 'element-plus';
+import { LxEmpty } from 'lx-ui';
 import { computed, nextTick, reactive, ref } from 'vue';
 
 import { createCallableApp, getCallableAppDetail, updateCallableApp } from '@/api/thirdInterface/southInterface';
@@ -964,7 +965,7 @@ function handleSubmit(): Promise<void> | void {
             </div>
           </div>
 
-          <el-empty
+          <LxEmpty
             v-if="mapperList.length === 0"
             description="暂无映射配置，请点击添加映射"
             :image-size="80"

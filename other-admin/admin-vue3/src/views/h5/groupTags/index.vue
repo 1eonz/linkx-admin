@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxIcon } from 'lx-ui';
+import { LxEmpty, LxIcon } from 'lx-ui';
 import { onMounted, reactive, ref } from 'vue';
 
 import GroupTagsForm from './GroupTagsForm.vue';
@@ -154,7 +154,7 @@ onMounted(fetchList);
               </el-button>
             </template>
           </el-table-column>
-          <template #empty><el-empty description="暂无标签数据" /></template>
+          <template #empty><LxEmpty description="暂无标签数据" /></template>
         </el-table>
       </div>
       <Pagination

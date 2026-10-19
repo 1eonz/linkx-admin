@@ -11,6 +11,7 @@
  */
 import { ArrowDown, ArrowUp, Delete, Right } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxEmpty } from 'lx-ui';
 import { ref } from 'vue';
 
 import type { CallableApp } from '@/api/thirdInterface/southInterface';
@@ -278,7 +279,7 @@ defineExpose({ open });
       </div>
 
       <!-- 空状态 -->
-      <el-empty
+      <LxEmpty
         v-if="mapperList.length === 0"
         description="暂无映射配置，请点击添加映射"
         :image-size="80"

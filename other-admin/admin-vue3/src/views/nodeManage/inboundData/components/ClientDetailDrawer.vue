@@ -24,6 +24,7 @@
  * ```
  */
 import { Refresh } from '@element-plus/icons-vue';
+import { LxEmpty } from 'lx-ui';
 import { computed, ref, watch } from 'vue';
 
 import ConnectionStatusDot from '../../components/ConnectionStatusDot.vue';
@@ -318,7 +319,7 @@ function getRelatedUserCount(row: CoopDataItem): number {
         </SectionTitle>
 
         <!-- 空数据提示 -->
-        <el-empty v-if="isEmpty" description="暂无数据，请检查连接状态及是否授权" />
+        <LxEmpty v-if="isEmpty" description="暂无数据，请检查连接状态及是否授权" />
 
         <template v-else>
           <!-- 统计卡片（6 个，使用 MetricCard 组件） -->

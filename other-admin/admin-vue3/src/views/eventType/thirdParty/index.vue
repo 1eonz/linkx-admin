@@ -2,7 +2,7 @@
 import { Delete, Edit, Plus, View } from '@element-plus/icons-vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxPagination } from 'lx-ui';
+import { LxEmpty, LxPagination } from 'lx-ui';
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import type { NorthboundAppForm, NorthboundAppItem, NorthboundAppListQuery } from '@/api/resource/thirdApp';
@@ -283,7 +283,7 @@ onBeforeUnmount(() => {
             </template>
           </el-table-column>
           <template #empty>
-            <el-empty description="暂无北向接入应用" />
+            <LxEmpty description="暂无北向接入应用" />
           </template>
         </el-table>
       </div>
