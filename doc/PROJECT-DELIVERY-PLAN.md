@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxSectionTitle 当前版 Assessment B 证据归因
+
+- **结果**：独立 detector 三目标均为合法 JSON `[]`、stderr 为空、退出码 `0`；独立浏览器 fallback 在 1280px 正常，但 375/320px 截图出现文档壳层右侧内容裁切信号。
+- **交叉验证**：使用仓库现有 `playwright.lxui.config.ts` 重跑 `lx-section-title-docs.spec.ts`，结果 **1/1**；HUD、键盘、标题换行、操作区边界和页面宽度断言均通过。
+- **结论**：fallback 截图不能直接归因于组件，也不能替代可变浏览器 overlay；当前版保留 P1 归因任务和正式 Critique 开放状态，不增加 UI-10 关闭数。后续先保留文档壳层/组件容器宽度回归，资源可用时补 overlay 与 snapshot/trend。
+
 ## 2026-10-20 LxSectionTitle Demo 操作契约补强
 
 - **实现**：边框变体展示 `icon` 属性，接口配置变体展示两个可聚焦 `extra` 操作；保留自定义 `leading` 插槽覆盖 `icon` 的契约，并补充中文说明。

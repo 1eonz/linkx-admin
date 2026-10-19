@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-20 LxSectionTitle 视觉证据边界
+
+- 组件文档 E2E **1/1** 已确认窄屏标题与 `extra` 操作边界；独立 fallback 截图的裁切信号仍标记为文档壳层/运行时待归因。
+- 页面迁移仍需真实字段、按钮权限、空/失败/权限不足 Mock 和 `.then().catch().finally()` 请求编排；不因组件证据替换业务页或删除 `element-plus`。
+
 ## 2026-10-20 LxSectionTitle Demo 迁移前置记录
 
 - 组件 Demo 已覆盖 `icon` 属性、`leading` 插槽覆盖、多个 `extra` 操作和键盘状态反馈；宿主仍需按配置页权限过滤操作。

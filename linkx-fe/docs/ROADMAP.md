@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-20 LxSectionTitle Assessment B 归因
+
+- detector 三目标为合法 `[]`/空 stderr/0；仓库 Playwright 文档 E2E **1/1** 通过 375/320px 操作区边界和页面宽度断言。
+- 独立 headless fallback 的窄屏裁切截图保留为待归因证据；HUD/reduced-motion runtime 与 overlay 未验证，不关闭 UI-10。
+
 ## 2026-10-20 LxSectionTitle Demo 操作契约
 
 - Demo 同时展示 `icon` 属性、自定义 `leading` 优先级和两个 `extra` 操作，覆盖真实内容与键盘反馈。

@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxSectionTitle 当前版审查证据
+
+- 组件、Demo 和中文文档 detector 均为合法 `[]`/空 stderr/退出码 `0`；独立 fallback 截图的窄屏裁切信号已与仓库 Playwright **1/1** 交叉核对，当前不归因于组件源码。
+- 可执行 E2E 覆盖标题换行、`extra` 操作边界、键盘、HUD 类名和页面级宽度；正式 overlay、可变 HUD/reduced-motion 运行态和 snapshot/trend 仍未完成。
+
 ## 2026-10-20 LxSectionTitle Demo 操作契约
 
 - `linkx-fe/src/components/LxSectionTitle/demo/basic.vue` 同时覆盖 `icon` 属性、`leading` 插槽优先级和多个 `extra` 操作；E2E 验证操作可聚焦并能反馈状态。

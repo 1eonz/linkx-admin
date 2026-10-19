@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxSectionTitle Assessment B 降级归因交接
+
+- **证据**：三路 detector 均为 `[]`/空 stderr/退出码 `0`；独立 headless fallback 在 375/320px 记录右侧裁切，但仓库 Playwright 配置下 `lx-section-title-docs.spec.ts` **1/1** 通过，操作区边界和 `documentElement.scrollWidth` 断言均通过。
+- **判断**：裁切信号暂归为独立脚本运行时/文档壳层待归因，不直接修改组件布局；没有可变浏览器 API，HUD 点击、Tab 全序列、reduced-motion runtime 和 overlay 未验证。
+- **后续**：保留 P1 归因项，补可用浏览器运行时后再做正式 A/B、overlay、snapshot/trend；UI-10、真实业务权限和 Vue3 宿主迁移继续开放。
+
 ## [2026-10-20] LxSectionTitle Demo 操作契约补强交接
 
 - **改动**：边框变体增加 `icon` 属性示例；接口配置变体增加“刷新”和“查看日志”两个操作；保留 `leading` 插槽覆盖 `icon` 的优先级示例。

@@ -844,3 +844,8 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 - 当前 Demo 增加 `icon` 属性可见示例和两个 `extra` 操作，并保留 `leading` 插槽覆盖 `icon` 的优先级；文档同步说明。
 - 单测 **14/14**、文档 E2E **1/1**，覆盖图标优先级、键盘焦点、Enter 状态反馈、HUD、减少动效和 320/375px 场景。
 - 该项只补当前版 Demo 证据，不关闭 UI-10；375px 页面级横溢出归因、正式 Critique、业务权限和 Vue3 宿主迁移仍开放。
+
+## 2026-10-20 LxSectionTitle Assessment B 归因补充
+
+- detector 的组件、Demo、文档目标均为合法 JSON `[]`、stderr 为空、退出码 `0`；仓库 Playwright 配置下 `lx-section-title-docs.spec.ts` **1/1** 通过，包含 375/320px 操作区边界和页面宽度断言。
+- 独立 headless fallback 的窄屏裁切截图与当前可执行 E2E 结果不一致，暂归为运行时/文档壳层信号；HUD 点击、Tab 全序列、reduced-motion runtime 和 overlay 未完成，不能关闭 UI-10 严格行或宣称正式 Critique 通过。

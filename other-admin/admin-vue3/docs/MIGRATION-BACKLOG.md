@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxSectionTitle 宽度证据归因
+
+- [x] 使用现有 `playwright.lxui.config.ts` 重跑 375/320px 标题、标签和 `extra` 边界，文档 E2E **1/1** 通过。
+- [ ] 独立 Critique fallback 的文档壳层裁切信号仍需可变浏览器 overlay 或真实宿主页面复核；在可信权限/API 契约出现前不开始配置页迁移。
+
 ## 2026-10-20 LxSectionTitle Demo 操作契约
 
 - [x] 增加 `icon` 属性示例、`leading` 优先级示例和多项 `extra` 操作。

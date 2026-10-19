@@ -1,5 +1,10 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxSectionTitle Assessment B 归因补充
+
+- [x] detector 三目标 JSON/stderr/退出码核对为 `[]`/空/`0`；现有 Playwright 配置下窄屏操作区与页面宽度回归 **1/1**。
+- [ ] 独立 fallback 截图的文档壳层裁切、HUD/reduced-motion runtime 和 overlay 仍待可用浏览器运行时复验；不以空数组关闭 UI-10。
+
 ## 2026-10-20 LxSectionTitle Demo 操作契约
 
 - [x] `icon` 属性、自定义 `leading` 优先级和多项 `extra` 操作均有真实 Demo。
