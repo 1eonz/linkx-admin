@@ -6,6 +6,13 @@
 - `src/components/Pagination` 已使用 `LxPagination`，保留旧 `page/limit/pagination` 输入和 `change(page, pageSize)` 到宿主事件的转换。
 - 仍需验证真实分页接口、空/失败/权限不足/取消、嵌套滚动和页面级 Mock；适配器完成不等于业务页面验收完成。
 
+## 2026-10-20 LxEmpty 首批宿主替换
+
+- [x] 6 个纯占位页面改用 `LxEmpty`，文案、布局和路由入口保持不变。
+- [x] Vue3 类型检查、目标 Prettier、Mock 全菜单回归 **6/6** 通过。
+- [ ] 剩余 9 个 `el-empty` 含条件渲染、插槽或业务状态，需逐页核对空/加载/失败/权限状态后迁移。
+- [ ] 全库 UI-10/UI-11 和 Element Plus 删除门禁仍未满足。
+
 ## 2026-10-20 LxPagination P1 修复与迁移边界
 
 - Vue3 宿主可通过 `ariaLabel` 区分多个分页器；窄屏直接复用 lx-ui 的 44px 命中区，不在页面复制样式。
