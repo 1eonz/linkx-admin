@@ -296,6 +296,30 @@ test('Input 普通根节点与输入包装器保持同高', async ({ page }) => 
   }
 });
 
+test('Input 前后缀、密码和透传场景保留可见外边框', async ({ page }) => {
+  await page.goto('/components/lxinput');
+  const demo = page.locator('.lx-input-demo');
+  const fields = [
+    demo.getByLabel('案件编码', { exact: true }),
+    demo.getByLabel('涉密核验口令', { exact: true }),
+    demo.getByLabel('联系电话', { exact: true }),
+  ];
+
+  for (const field of fields) {
+    const wrapper = field.locator(
+      'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")]//div[contains(concat(" ", normalize-space(@class), " "), " el-input__wrapper ")] ',
+    );
+    await expect(wrapper).toHaveCSS('border-top-width', '1px');
+    await expect(wrapper).toHaveCSS('border-top-style', 'solid');
+  }
+
+  const compound = fields[0].locator(
+    'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")] ',
+  );
+  await expect(compound).toHaveCSS('border-top-width', '1px');
+  await expect(compound).toHaveCSS('border-top-style', 'solid');
+});
+
 test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用', async ({ page }) => {
   await page.goto('/components/lxinput');
   const demo = page.locator('.lx-input-demo');

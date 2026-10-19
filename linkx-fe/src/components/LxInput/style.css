@@ -41,6 +41,8 @@
   padding-block: 0;
   background-color: var(--lx-bg-card);
   border-radius: var(--lx-radius-md);
+  /* 使用真实边框确保普通、密码和透传场景在浅色背景上仍有清晰外缘。 */
+  border: 1px solid var(--lx-control-border);
   box-shadow: 0 0 0 1px var(--lx-control-border) inset;
   /* 前景与表面令牌需同步切换，避免主题过渡期间文字对比度骤降。 */
   transition: box-shadow var(--lx-transition);
@@ -172,6 +174,7 @@ html:root .lx-input .el-input__wrapper.is-focus {
 /* 错误态：使用表单专属校验令牌，依赖 ElForm/LxForm 上下文。 */
 html:root .el-form-item.is-error .lx-input .el-input__wrapper {
   background-color: var(--lx-color-form-error-bg);
+  border-color: var(--lx-color-form-error);
   box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
 }
 
