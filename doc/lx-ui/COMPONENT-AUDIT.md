@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-20 LxMetricCard 只读语义与运行时复验
+
+- 纯展示卡移除 hover 抬升；趋势文本两行截断并保留 `title`/`aria-label`，值保留完整 `title`，降低长文案和可点击暗示风险。
+- 修复 VitePress 直接编译路径使用未暴露 `headingLevel` 的问题，改为读取 `props.headingLevel`；标题节点现可正常渲染。
+- 当前证据：单测 **17/17**、文档 E2E **3/3**、类型检查、206 modules 构建、ESLint、Prettier 和差异检查通过。正式 A/B、overlay、snapshot/trend 和 UI-10 全库行仍开放；detector `[]` 不能单独作为通过依据。
+
 ## 2026-10-20 LxUpload 手动队列语义与双路评审
 
 - **实现**：默认手动模式不再用“上传”暗示选择后已发送；触发区和按钮明确下一步，`onChange` 通过 live region 播报文件已加入待上传队列。自动上传模式保持原有文案和行为。

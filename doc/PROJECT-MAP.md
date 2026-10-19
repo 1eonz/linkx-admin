@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxMetricCard 当前入口变更
+
+- 组件入口：`linkx-fe/src/components/LxMetricCard/index.vue`；中文 API：`linkx-fe/docs/components/lxmetriccard.md`。
+- 当前契约：只读卡片不通过 hover 暗示点击；长趋势和值保留完整文本提示；标题由 `props.headingLevel` 生成真实 heading 节点。
+- 验证入口：`other-admin/admin-vue3/tests/unit/lx-metric-card.test.ts` 与 `tests/e2e/lx-metric-card-docs.spec.ts`；宿主详情页仍待 UI-04 迁移波次，不能把文档 Demo 视为业务页替换完成。
+
 ## 2026-10-20 LxUpload 队列语义与评审证据
 
 - `linkx-fe/src/components/LxUpload/` 的手动模式现在显示“选择后再上传”，并在选择后播报待提交队列；组件仍只负责展示、前端校验和宿主注入适配器。

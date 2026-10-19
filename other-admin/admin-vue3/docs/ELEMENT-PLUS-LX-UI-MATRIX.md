@@ -181,3 +181,7 @@ Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过 2 �
 - 这只表示库组件契约和演示证据完成，不表示 Vue3 `DataPermissionTree` 已替换。宿主仍需逐项核对数据字段、父子级联、树外已选键、exposes、批量上限、加载/空/错、取消和真实权限 API，并在 UI-04 补 Mock/E2E。
 - `el-tree` 的 15 处使用不能机械替换；`LxVirtualTree` 适用于虚拟树契约，`LxTransferPanel` 适用于双栏授权场景，其他页面继续保留 Element Plus 或使用 lx-ui 导出的桥接控件，直到适配矩阵有明确证据。
 - `LxMetricCard` + `LxSectionTitle`、`LxTextarea` 已完成组件级复核；基础控件下一项按顺序进入 `LxSelect`。之后仍需处理 UI-10 其他未关闭项，再进入 Vue3 Element Plus 分批替换。宿主依赖删除门槛、权限中心/文本权限/页面操作引导延期规则和 `.then().catch().finally()` API 请求规范保持不变。
+## 2026-10-20 LxMetricCard 组件层复验
+
+- 组件库当前版已修复标题运行时缺陷并收口只读语义；文档 E2E **3/3**、单测 **17/17**。Vue3 详情宿主仍保留 Element Plus/旧适配器，需等 UI-10/UI-11 门禁后逐页替换和组合回归。
+

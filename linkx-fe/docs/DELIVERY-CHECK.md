@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxMetricCard 只读语义与标题运行时
+
+- [x] 只读卡片不再通过 hover 阴影暗示可点击；趋势和值保留完整文本提示，窄卡趋势最多显示两行。
+- [x] VitePress 直接编译路径的标题使用 `props.headingLevel`，真实标题节点正常渲染。
+- [x] 单测 **17/17**、文档 E2E **3/3**、typecheck、206 modules 构建、目标 ESLint/Prettier 和差异检查通过。
+- [ ] 正式 Impeccable A/B、overlay、snapshot/trend、真实详情宿主和 UI-10 全库门禁仍待完成。
+
 ## 2026-10-20 LxUpload 手动队列与双路评审
 
 - [x] `autoUpload=false` 的选择/提交语义在拖拽区、按钮和 live region 中明确；自动模式文案保持即时上传。

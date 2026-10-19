@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxMetricCard 只读语义与标题运行时收口
+
+- **问题与实现**：纯展示指标卡移除桌面 hover 抬升，避免制造可点击暗示；长趋势说明最多显示两行，并通过 `title`/`aria-label` 保留完整文本；指标值保留 `title` 提示。同步修复文档站直接编译路径中 `headingLevel` 未从 `props` 读取的问题，避免标题节点退化为注释而导致 Demo 内容不可见。
+- **验证**：LxMetricCard 单测 **17/17**；4177 文档 Playwright **3/3**；`vue-tsc --noEmit`、206 modules lx-ui 构建、目标 ESLint、Prettier 和 `git diff --check` 通过。重启旧 4177 Vite 进程后，浏览器控制台不再出现 `headingLevel` 未定义警告，标题节点和完整提示属性均可观察。
+- **边界**：本波只修复公共组件语义、可发现性和 Demo 运行时路径，不改变业务 API、权限、请求链或宿主迁移。正式 Impeccable A/B、overlay、snapshot/trend、UI-10 全库门禁和真实业务详情宿主仍开放；不能用本波行为证据或 detector `[]` 宣布整库通过。
+- **下一入口**：继续按组件审计矩阵处理未关闭的正式视觉证据与 P1/P2；完成 UI-10/UI-11 后再进入 Vue3 Element Plus 分批替换，页面引导、权限中心和真实后端联调保持后置。
+
 ## 2026-10-20 LxUpload 手动队列语义与双路复核
 
 - **修复**：`autoUpload=false` 时拖拽区和按钮明确提示“选择后再上传”，选择文件后通过 `aria-live` 播报“已加入待上传队列，请点击上传按钮提交”；自动上传模式保持即时上传文案。同步中文 API、单测和文档 E2E。

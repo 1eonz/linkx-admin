@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxMetricCard 只读语义与标题运行时交接
+
+- **改动**：移除只读卡片桌面 hover 抬升；趋势文本改为两行截断并保留完整 `title`/`aria-label`，值保留完整 `title`；模板显式使用 `props.headingLevel`，修复 VitePress 直接编译时标题节点不渲染的问题。
+- **验证**：LxMetricCard 单测 **17/17**、4177 文档 E2E **3/3**、lx-ui `vue-tsc`、206 modules 构建、目标 ESLint、Prettier 和差异检查通过。重启旧文档进程后页面标题、卡片标题和提示属性均可见。
+- **审查边界**：本次是行为与可用性 P2 收口，不替代正式 Impeccable A/B；历史 A **31/40** 与 B 的窄屏文档壳层横溢出归因仍需独立 snapshot/trend 和 UI-10 归档。真实详情宿主、权限和后端联调不在本波。
+- **后续**：按组件矩阵继续收口剩余正式视觉证据；业务 API 仍保持 `.then().catch().finally()`，Vue3 Element Plus 替换继续等待全库门禁。
+
 ## [2026-10-20] LxUpload 手动队列提示与双路评审
 
 - **改动**：手动模式的拖拽区、非拖拽按钮和选择后 live region 现在明确区分“加入队列”和“真正提交”；自动上传模式不变。新增单测和文档 E2E 断言。
