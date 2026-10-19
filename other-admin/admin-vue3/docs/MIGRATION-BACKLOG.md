@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxMetricCard detector 记录
+
+- 当前 detector 三目标均为 JSON `[]`、退出码 `0`，stderr 含 npm 弃用警告；不关闭组件视觉门禁。
+- 业务指标页仍需页面级 Mock、权限、失败/stale 恢复和真实字段契约，组件行为证据不能替代迁移验收。
+
 ## 2026-10-20 LxMetricCard 状态优先级与失败契约
 
 - [x] Demo 展示 `status`/`valueType`、`trendDirection`/`trendStatus` 冲突时的优先级，补充中文决策矩阵。

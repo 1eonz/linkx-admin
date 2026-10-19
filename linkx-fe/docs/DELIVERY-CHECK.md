@@ -1,5 +1,10 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxMetricCard detector 复验
+
+- [x] 三目标 detector JSON 为合法 `[]`，进程退出码均为 `0`；单测 **15/15**、文档 E2E **3/3**。
+- [ ] stderr 含 npm 配置弃用警告，不能记为干净扫描；正式 Impeccable A/B、overlay 和 snapshot/trend 仍未关闭。
+
 ## 2026-10-20 LxMetricCard 状态维度与宿主失败契约
 
 - [x] Demo 增加冲突状态优先级示例；中文 API 补充状态决策矩阵与 stale/失败边界。

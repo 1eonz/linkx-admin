@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxMetricCard detector 证据
+
+- 当前组件/Demo/文档 detector 为合法 `[]`、退出码 `0`，但 stderr 含 npm 警告；仅能记录静态零命中，不能替代正式视觉 Critique。
+- 当前可执行行为证据为单测 **15/15** 和文档 E2E **3/3**，宿主 API/权限/真实接口仍未接入。
+
 ## 2026-10-20 LxMetricCard 状态决策
 
 - `LxMetricCard` Demo 现在展示状态维度冲突时的确定性优先级；组件仍为纯展示组件，不访问 API，不把失败结果转换为 0。

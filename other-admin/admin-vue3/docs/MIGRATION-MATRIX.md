@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-20 LxMetricCard 审查状态
+
+- 组件 detector 输出 `[]` 且退出码为 `0`，但 stderr 存在 npm 配置警告；正式视觉审查仍开放。
+- 页面迁移需继续保留状态优先级、宿主 loading/empty/error/stale 语义和 Promise 链请求风格。
+
 ## 2026-10-20 LxMetricCard 宿主接入边界
 
 - 组件侧已明确状态优先级：显式 `status` 优先于 `valueType`，`trendDirection` 只控制图标，`badgeStatus` 独立控制角标。

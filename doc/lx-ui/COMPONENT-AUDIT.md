@@ -1,5 +1,10 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-20 LxMetricCard detector 复验边界
+
+- 组件、Demo、中文文档 detector 均输出合法 JSON `[]`、退出码 `0`，stderr 含 npm 项目配置弃用警告；静态零命中不等于正式 Critique 通过。
+- 当前行为证据为单测 **15/15**、文档 E2E **3/3**；两个 P1 语义风险、独立 A/B、overlay 和 snapshot/trend 仍开放。
+
 ## 2026-10-20 LxMetricCard 状态决策矩阵补强
 
 - Demo 增加状态冲突示例，中文 API 明确显式 `status` 覆盖旧 `valueType`、`trendDirection` 决定图标、`badgeStatus` 独立控制角标；宿主失败/stale 不得转为 0。

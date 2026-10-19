@@ -1,5 +1,10 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxMetricCard Impeccable detector 复验边界
+
+- 组件、Demo、中文文档 detector 均为 JSON `[]`、退出码 `0`，但 stderr 有 npm 项目配置弃用警告；按规则不能伪称干净空 stderr 或正式 Critique 通过。
+- 文档 Playwright **3/3**、单测 **15/15** 继续作为当前行为证据；需要可变浏览器运行时后补 Light/HUD、窄屏、reduced-motion、overlay 和 snapshot/trend。
+
 ## [2026-10-20] LxMetricCard 状态决策与宿主失败边界交接
 
 - **改动**：Demo 增加显式 `status` 与旧 `valueType` 冲突、趋势方向与趋势状态分离、角标独立状态的可见示例；中文文档补充优先级矩阵及 stale/失败不转 0 规则。

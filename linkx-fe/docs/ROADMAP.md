@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-20 LxMetricCard detector 复验
+
+- 组件、Demo、中文文档 detector 均为 `[]`/退出码 `0`，stderr 记录 npm 配置弃用警告；不以空数组关闭 UI-10。
+- 单测 **15/15**、文档 E2E **3/3** 已通过；正式 A/B、overlay 和 snapshot/trend 仍待可用浏览器运行时。
+
 ## 2026-10-20 LxMetricCard 状态决策矩阵
 
 - Demo 增加冲突状态示例，API 文档明确 `status`、`valueType`、`trendDirection`、`trendStatus` 和 `badgeStatus` 的优先级与独立维度。

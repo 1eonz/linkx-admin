@@ -1,5 +1,9 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxMetricCard detector 复验边界
+
+- 三个当前目标 detector 均输出合法 JSON `[]`、退出码 `0`；stderr 含 npm 配置弃用警告，不能记为“stderr 为空”。结合文档 E2E **3/3** 仅作为阶段性静态/行为证据，正式 Impeccable A/B、overlay 和 snapshot/trend 仍开放。
+
 ## 2026-10-20 LxMetricCard 状态维度与宿主失败契约
 
 - **实现**：Demo 增加冲突状态示例，明确 `status` 覆盖旧 `valueType`、`trendDirection` 覆盖趋势图标、`badgeStatus` 独立生效；中文 API 增加状态决策矩阵和 loading/empty/error/stale 宿主边界。
