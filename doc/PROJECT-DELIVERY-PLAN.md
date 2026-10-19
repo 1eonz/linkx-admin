@@ -2033,3 +2033,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `notification/alertPush/index.vue` 双 Tab 搜索区的组织/协同岗名称与预警通知对象共 4 个输入已由 `el-input` 切换为 `LxInput`。
 - 保留两 Tab 查询状态、清空、回车搜索、类型筛选、分页、增改删和 `.then().catch().finally()` 请求链；`vue-tsc`、Prettier、ESLint 与隔离 Mock **10/10** 通过。
 - 预警表单、权限校验和真实后端联调仍按计划后置。
+
+## 2026-10-20 eventType 第三方搜索输入迁移
+
+- `eventType/thirdParty/index.vue` 搜索区的应用名称输入已由 `el-input` 切换为 `LxInput`，保留 SearchBar 插槽、清空、回车搜索和请求竞态处理。
+- `vue-tsc --noEmit`、目标 Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过。
+- 该页密码、数字有效期和 textarea 字段暂不机械替换，待分别核对类型、校验和组件契约后处理；Element Plus 删除门槛保持开放。

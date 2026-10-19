@@ -3151,3 +3151,8 @@
 
 - `notification/alertPush/index.vue` 双 Tab 的组织/协同岗名称和预警通知对象共 4 个输入改用 `LxInput`，保留清空、回车、类型筛选、分页、增改删和请求链。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；预警表单权限和真实后端联调未执行。
+
+# 2026-10-20 eventType 第三方搜索交接
+
+- `eventType/thirdParty/index.vue` 搜索区应用名称改用 `LxInput`，保留 SearchBar 插槽、清空、回车搜索和查询请求；密码、数字有效期、textarea 字段未改动。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；复杂字段待契约核对后再迁移。

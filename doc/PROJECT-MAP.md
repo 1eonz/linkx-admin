@@ -964,6 +964,7 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - `h5/quick/LookLabel.vue` 的警员姓名搜索已采用 `LxInput`；标签树、详情请求和前端列表过滤仍由页面宿主负责。
 - `h5/quick/index.vue` 标签编辑弹窗的名称、图标和颜色输入已采用 `LxInput`；标签树、License 分支和保存请求仍由页面宿主负责。
 - `notification/alertPush/index.vue` 双 Tab 搜索区的组织/协同岗名称与通知对象输入已采用 `LxInput`；类型筛选、分页、增改删和请求仍由页面宿主负责。
+- `eventType/thirdParty/index.vue` 搜索区的应用名称已采用 `LxInput`；密码、数字有效期、textarea 和写操作仍由页面按原契约维护。
 - DynamicForm 证据入口：`other-admin/admin-vue3/tests/unit/lx-dynamic-form.test.ts`（31/31）与 `tests/e2e/lx-dynamic-form-docs.spec.ts`（14/14）。Assessment B 三件套为合法 `[]`/空 stderr/0，8 个浏览器视图通过；综合 snapshot/trend 尚缺，正式视觉门禁仍开放。
 # 项目地图更新（2026-10-20）
 
