@@ -47,6 +47,12 @@
 - [x] 计算样式确认真实 `1px` 外边框及 `--lx-control-border` 令牌生效；不在 Demo 重复补边框。
 - [ ] 正式 Impeccable A/B、overlay、snapshot/trend 和 UI-10/UI-11 仍未关闭。
 
+## 2026-10-20 LxInput 边框测试定位修复
+
+- [x] 文档测试固定使用 4177 lx-ui 文档服务，避免误连 Vue3 宿主应用；按输入节点 `id` 等待 Demo 渲染并定位最近的 `LxInput` 根节点。
+- [x] 前后缀、密码和透传边框专项 **1/1** 通过；失败原因确认为测试定位/服务入口问题，组件计算样式保持真实非透明 `1px` 边框。
+- [ ] 正式 Impeccable A/B、overlay、snapshot/trend 和 UI-10/UI-11 仍未关闭。
+
 ## 2026-10-20 LxFormErrorBanner 空内容播报语义
 
 - [x] 仅有标题、说明或默认插槽时输出 `role="alert"` 与 assertive live region；空内容不输出播报角色和属性。

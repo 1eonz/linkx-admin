@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxInput 边框测试定位修复
+
+- **排查结论**：`LxInput` 前后缀、密码和透传场景的计算样式均保留 `1px solid` 外边框；此前专项测试失败是测试误使用 Vue3 宿主服务且通过 `label` 祖先关系定位，未命中文档 Demo 控件，不是组件或 Demo 样式缺失。
+- **处理**：基础控件文档测试固定使用本地 4177 文档服务，按真实输入节点 `id` 等待渲染，再定位最近的 `LxInput` 根节点和 wrapper；不在 Demo 增加重复边框样式。
+- **验证**：边框专项 Playwright **1/1**、目标文件 Prettier 通过；4177 页面计算样式确认普通、密码、透传 wrapper 及复合根节点均为非透明 `1px` 边框。
+- **边界**：正式 Impeccable A/B、overlay、snapshot/trend 和 UI-10/UI-11 全库门禁仍按原计划开放。
+
 ## [2026-10-20] Vue3 分页迁移矩阵事实校正
 
 - **复核**：重新扫描 `other-admin/admin-vue3/src`，业务页面直接使用 `el-pagination` 为 **0**；共享 `src/components/Pagination` 内部已使用 `LxPagination` 并保留旧 `page/limit/pagination` 事件适配。
