@@ -3131,3 +3131,8 @@
 
 - `location/components/EditLocation.vue` 的经纬度字段改用 `LxInput`，保留格式/范围校验、最大长度 25、组织选择和保存接口。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；请求链、权限和弹窗契约未改变。
+
+# 2026-10-20 dutyInformation 搜索输入迁移交接
+
+- `shiftScheduling/dutyInformation/components/DutySearchBar.vue` 的人员 ID、姓名两个输入改用 `LxInput`，保留清空、回车搜索和查询字段；排班类型分页、日期筛选、上传功能未改动。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；权限和 API 契约未改变。

@@ -2009,3 +2009,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `location/components/EditLocation.vue` 的经纬度字段已由 `el-input` 切换为 `LxInput`，保留坐标格式/范围校验、最大长度 25、组织选择和保存请求契约。
 - `vue-tsc --noEmit`、目标 Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过；未改变请求链、权限或弹窗行为。
 - 复杂表单、number 类型字段和剩余 Element Plus 控件继续逐页核实，依赖删除门槛不变。
+
+## 2026-10-20 dutyInformation 搜索输入迁移
+
+- `shiftScheduling/dutyInformation/components/DutySearchBar.vue` 的人员 ID、姓名两个搜索输入已由 `el-input` 切换为 `LxInput`，保留清空、回车搜索和原查询字段。
+- `vue-tsc --noEmit`、目标 Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过；排班类型远程分页、日期筛选、上传和请求链未改变。
+- 继续按字符串契约逐页迁移，复杂表单、权限联调和 Element Plus 删除门槛保持开放。
