@@ -469,6 +469,11 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 当前仅修复 lx-ui `LxDatePicker` 对实际输入框的说明 ID 关联，没有改动 Vue3 业务 API、路由、权限或后端协议。当前工作区 DynamicForm 日期字段回归与 DatePicker 合计 36/36；本波提交不包含既存 DynamicForm 实现改动。Wave 1 先完成基础控件审查，宿主 Element Plus 替换顺序不变。
 # LxInput 宿主迁移补充
 
+# LxMetricCard 宿主迁移补充
+
+- lx-ui 已提供 320px 以下窄卡分层和 loading/empty/error 宿主状态示例；宿主页面接入时继续由页面负责 API、权限和失败恢复，不能把组件 Demo 当作真实业务联调。
+- `status`、`badgeStatus`、`trendStatus` 需按业务字段分别映射；缺少后端契约时保持阻塞，不新增按钮权限码或状态字段。
+
 - `prefix/suffix` 槽位已在完整输入外框内居中，宿主页面复用 lx-ui 时不需要额外覆盖 Element Plus 高度样式；复合 `prepend/append` 仍按完整控件高度布局。
 - 组件 E2E **1/1**、LxInput 单测 **13/13**、库 typecheck/build 通过；宿主页面组合、真实后端联调和权限契约没有因本次样式修复提前关闭。
 

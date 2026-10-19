@@ -14,32 +14,32 @@ import Basic from '../../src/components/LxMetricCard/demo/basic.vue';
 <<< ../../src/components/LxMetricCard/demo/basic.vue
 :::
 
-示例对照 `design/指标卡 MetricCard/`，覆盖主色、成功、警告、危险语义色、角标、说明、上行/下行/持平趋势、进度标签、格式化进度值，以及 Vue3 宿主旧版属性和 `extra` 插槽。数据为静态演示内容。
+示例对照 `design/指标卡 MetricCard/`，覆盖主色、成功、警告、危险语义色、角标、说明、上行/下行/持平趋势、进度标签、格式化进度值，以及 Vue3 宿主旧版属性和 `extra` 插槽。数据为静态演示内容；下方 loading、empty、error 是宿主状态组合示例，组件本身不请求数据，也不会把失败结果默认显示为 0。
 
 ## Props
 
-| 名称             | 类型                                              | 默认值                | 说明                                                                                                 |
-| ---------------- | ------------------------------------------------- | --------------------- | ---------------------------------------------------------------------------------------------------- |
-| `title`          | `string`                                          | `''`                  | 指标标题；同时传入 `label` 时优先使用。                                                              |
-| `label`          | `string`                                          | `''`                  | 原 lx-ui 标题属性，继续兼容。                                                                        |
-| `value`          | `number \| string`                                | `''`                  | 指标值；字符串可传入已格式化的大数值。                                                               |
-| `unit`           | `string`                                          | `''`                  | 数值单位，如“人”“件”或“%”。                                                                          |
-| `status`         | `'normal' \| 'success' \| 'warning' \| 'danger'`  | 按 `valueType` 推断   | 数值和进度条的语义色；显式设置后优先级高于 `valueType`。                                             |
-| `valueType`      | `'default' \| 'success' \| 'warning' \| 'danger'` | `default`             | 兼容 Vue3 宿主旧组件；映射为主色、成功、警告、危险语义色。                                           |
-| `badgeText`      | `string`                                          | `''`                  | 设计稿角标文案；同时传入 `badge` 时优先使用。                                                        |
-| `badge`          | `string`                                          | `''`                  | 原 lx-ui 角标属性，继续兼容。                                                                        |
-| `badgeStatus`    | `LxStatus`                                        | `online`              | 角标状态点和浅底颜色。                                                                               |
-| `trend`          | `string`                                          | `''`                  | 指标下方的状态/趋势说明；文本本身说明状态，不只依赖颜色。                                            |
-| `trendStatus`    | `LxStatus`                                        | `online`              | 控制趋势说明的状态色和默认方向图标；浅色状态色加深以满足小字对比度，`error` 默认向下，其余默认向上。 |
-| `trendDirection` | `'up' \| 'down' \| 'flat'`                        | 按 `trendStatus` 推断 | 显式控制趋势图标方向，分别使用上箭头、下箭头或横线；传入后优先于 `trendStatus` 的默认推断。          |
-| `progress`       | `number`                                          | 未设置                | 进度百分比；未设置时不显示进度区，数值会限制在 `0–100`，非有限值按 `0` 处理。                        |
-| `progressLabel`  | `string`                                          | `''`                  | 进度条左侧说明，同时作为读屏进度名称。                                                               |
-| `progressValue`  | `string`                                          | `''`                  | 进度条右侧格式化说明，同时作为读屏文本值；未设置时使用实际百分比。                                   |
-| `footer`         | `string`                                          | `''`                  | 兼容 Vue3 宿主旧组件的底部说明属性；优先于 `footerLabel` / `footerValue` 默认渲染。                  |
-| `footerLabel`    | `string`                                          | `''`                  | 原 lx-ui 底部说明左侧文案。                                                                          |
-| `footerValue`    | `string`                                          | `''`                  | 原 lx-ui 底部说明右侧文案。                                                                          |
+| 名称             | 类型                                              | 默认值                | 说明                                                                                                                        |
+| ---------------- | ------------------------------------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `title`          | `string`                                          | `''`                  | 指标标题；同时传入 `label` 时优先使用。                                                                                     |
+| `label`          | `string`                                          | `''`                  | 原 lx-ui 标题属性，继续兼容。                                                                                               |
+| `value`          | `number \| string`                                | `''`                  | 指标值；字符串可传入已格式化的大数值。                                                                                      |
+| `unit`           | `string`                                          | `''`                  | 数值单位，如“人”“件”或“%”。                                                                                                 |
+| `status`         | `'normal' \| 'success' \| 'warning' \| 'danger'`  | 按 `valueType` 推断   | 数值和进度条的语义色；显式设置后优先级高于 `valueType`，只描述指标结果维度。                                                |
+| `valueType`      | `'default' \| 'success' \| 'warning' \| 'danger'` | `default`             | 兼容 Vue3 宿主旧组件；映射为主色、成功、警告、危险语义色。                                                                  |
+| `badgeText`      | `string`                                          | `''`                  | 设计稿角标文案；同时传入 `badge` 时优先使用。                                                                               |
+| `badge`          | `string`                                          | `''`                  | 原 lx-ui 角标属性，继续兼容。                                                                                               |
+| `badgeStatus`    | `LxStatus`                                        | `online`              | 角标状态点和浅底颜色，独立描述标签/连接维度，不自动覆盖 `status`。                                                          |
+| `trend`          | `string`                                          | `''`                  | 指标下方的状态/趋势说明；文本本身说明状态，不只依赖颜色。                                                                   |
+| `trendStatus`    | `LxStatus`                                        | `online`              | 控制趋势说明的状态色和默认方向图标，独立描述趋势/请求维度；浅色状态色加深以满足小字对比度，`error` 默认向下，其余默认向上。 |
+| `trendDirection` | `'up' \| 'down' \| 'flat'`                        | 按 `trendStatus` 推断 | 显式控制趋势图标方向，分别使用上箭头、下箭头或横线；传入后优先于 `trendStatus` 的默认推断。                                 |
+| `progress`       | `number`                                          | 未设置                | 进度百分比；未设置时不显示进度区，数值会限制在 `0–100`，非有限值按 `0` 处理。                                               |
+| `progressLabel`  | `string`                                          | `''`                  | 进度条左侧说明，同时作为读屏进度名称。                                                                                      |
+| `progressValue`  | `string`                                          | `''`                  | 进度条右侧格式化说明，同时作为读屏文本值；未设置时使用实际百分比。                                                          |
+| `footer`         | `string`                                          | `''`                  | 兼容 Vue3 宿主旧组件的底部说明属性；优先于 `footerLabel` / `footerValue` 默认渲染。                                         |
+| `footerLabel`    | `string`                                          | `''`                  | 原 lx-ui 底部说明左侧文案。                                                                                                 |
+| `footerValue`    | `string`                                          | `''`                  | 原 lx-ui 底部说明右侧文案。                                                                                                 |
 
-`status` 未传入时，`valueType="success" | "warning" | "danger"` 会映射到相同语义色；`valueType="default"` 映射为 `normal`。`status` 显式值优先。
+`status` 未传入时，`valueType="success" | "warning" | "danger"` 会映射到相同语义色；`valueType="default"` 映射为 `normal`。`status` 显式值优先。`status`、`badgeStatus` 和 `trendStatus` 是三个独立维度，页面需要根据业务语义组合文案，组件不会替宿主推断“趋势好坏”。
 
 ## Slots
 
@@ -61,5 +61,7 @@ import Basic from '../../src/components/LxMetricCard/demo/basic.vue';
 - 进度区以浅色分隔线与卡片主体分开，进度条高度为 6px。进度值超出范围时视觉宽度和 `aria-valuenow` 都限制到 `0–100`；`progressLabel` 和 `progressValue` 分别映射到 `aria-label` 与 `aria-valuetext`。
 - 进度填充使用 `transform` 缩放固定轨道，不改变周边布局；`dir="rtl"` 时从右侧展开。
 - 卡片是纯展示组件，不提供 loading、empty、error 或 disabled 属性；宿主根据数据流程组合相应状态和重试操作。
+- 宿主状态推荐顺序：请求中显示 loading；成功但无记录显示 empty；请求失败显示带文字原因和“重试”操作的 error。失败响应不得转换为 `value=0` 或正常态指标后继续渲染。
+- 窄卡（容器宽度不超过 320px）会把标题、角标、数值和 `extra` 分层换行，保留完整文案和可见焦点；长数值仍应由宿主通过 `value` 插槽或格式化字符串提供可读文本。
 - 详情抽屉中的统计仍可沿用 Vue3 旧组件的 `title`、`valueType`、`footer` 属性及 `title` / `value` / `footer` / `extra` 插槽。宿主切换到 lx-ui 前仍需进行实际页面组合回归。
 - 组件无交互焦点；状态文本以视觉隐藏方式提供给屏幕阅读器，进度条使用 ARIA 状态角色。进度填充过渡沿用全局减少动效令牌。

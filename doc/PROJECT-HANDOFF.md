@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-19] LxMetricCard 窄卡与宿主状态契约补强交接
+
+- **改动**：指标卡新增 `@container (max-width: 320px)` 布局，标题/角标/数值/补充内容在窄卡中分层换行；Demo 增加 loading、empty、error 宿主组合和可观察的重试反馈。
+- **契约**：`status` 表示指标结果，`badgeStatus` 表示角标/连接状态，`trendStatus` 表示趋势/请求状态，三者不互相推断；数据请求和失败恢复仍由宿主使用 Promise 链编排。
+- **验证**：`lx-metric-card.test.ts` **15/15**；`lx-metric-card-docs.spec.ts` **3/3**；320px 浏览器几何、typecheck/build、目标 Prettier/ESLint 通过。
+- **边界**：未引入 API、Pinia、Router 或权限逻辑；正式独立 Impeccable A/B、真实后端和 Vue3 页面组合仍开放。
+
 ## [2026-10-19] LxInput 前后缀槽位垂直居中修复交接
 
 - **问题与实现**：`prefix/suffix` 及内部槽位原本已经使用 30/42px 内容轨道，但 flex 拉伸从外框顶部开始，造成底部少 2px。改为在完整 32/44px 输入外框内居中，保留上下描边内缩和 `prepend/append` 完整高度契约。

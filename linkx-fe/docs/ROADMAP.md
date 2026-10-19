@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-19 LxMetricCard 窄卡与宿主状态契约补强
+
+- 指标卡在自身容器不超过 320px 时将标题、角标、数值和 `extra` 分层，避免长内容横向竞争；Demo 增加宿主 loading/empty/error 组合和重试反馈。
+- `status`、`badgeStatus`、`trendStatus` 的独立语义写入中文 API；单测 **15/15**、文档 E2E **3/3**、typecheck/build、目标格式和 ESLint 通过。正式 UI-10 关闭和宿主迁移仍开放。
+
 ## 2026-10-19 LxInput 前后缀槽位垂直居中修复
 
 - `prefix/suffix` 及内部槽位保留扣除上下描边后的内容高度，并在完整输入外框内居中，修复槽位顶部贴边、底部少 2px 的视觉错位；窄屏 44px 外框同样适用。

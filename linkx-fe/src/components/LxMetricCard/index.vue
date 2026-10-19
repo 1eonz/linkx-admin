@@ -217,6 +217,7 @@ const progressPercent = computed(() => {
   border-radius: var(--lx-radius-md);
   background: var(--lx-bg-card);
   box-shadow: var(--lx-shadow-card);
+  container-type: inline-size;
   transition: box-shadow var(--lx-transition);
 }
 
@@ -403,6 +404,35 @@ const progressPercent = computed(() => {
   .lx-metric-card__header {
     align-items: flex-start;
     flex-wrap: wrap;
+  }
+}
+
+/* 窄卡先保证标题和角标各自完整，再让数值与补充内容换行，避免信息互相挤压。 */
+@container (max-width: 320px) {
+  .lx-metric-card__header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .lx-metric-card__title {
+    flex-basis: 100%;
+  }
+
+  .lx-metric-card__badge {
+    margin-inline-start: auto;
+  }
+
+  .lx-metric-card__value-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .lx-metric-card__value-wrap {
+    flex-basis: 100%;
+  }
+
+  .lx-metric-card__extra {
+    margin-inline-start: auto;
   }
 }
 

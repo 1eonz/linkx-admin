@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-19 LxMetricCard 窄卡与宿主状态契约补强
+
+- **实现**：指标卡增加自身容器查询；容器不超过 320px 时标题、角标、数值和 `extra` 分层换行，避免长文案互相挤压。Demo 增加宿主 loading、empty、error 状态组合，错误状态提供可操作的重试反馈。
+- **契约**：明确 `status`、`badgeStatus`、`trendStatus` 是独立维度；LxMetricCard 只展示成功数据，不请求 API，也不把失败结果转换为 0。
+- **验证**：单测 **15/15**、文档 Playwright **3/3**、320px 几何回归、typecheck/build、目标 Prettier/ESLint 通过。正式 Assessment A/B 仍需独立证据门禁，detector 不能单独作为通过结论。
+
 ## 2026-10-19 LxInput 前后缀槽位垂直居中修复
 
 - **问题**：`prefix/suffix` 内容轨道虽已扣除上下描边，但 flex 槽位从外框顶部起算，导致底部少 2px，视觉上与输入框不齐。

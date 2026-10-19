@@ -26,6 +26,13 @@ test.describe('LxMetricCard 文档示例', () => {
     await expect(page.getByText('高危未处理警情', { exact: true })).toBeVisible();
     await expect(page.getByText('今日警情总数', { exact: true })).toBeVisible();
     await expect(page.getByText('较昨日增加 12%', { exact: true })).toBeVisible();
+    await expect(page.getByTestId('host-loading')).toHaveAttribute('aria-busy', 'true');
+    await expect(page.getByTestId('host-empty')).toContainText('暂无指标数据');
+    await expect(page.getByTestId('host-error')).toHaveAttribute('role', 'alert');
+    const retry = page.getByTestId('host-error').getByRole('button', { name: '重试' });
+    await expect(retry).toBeVisible();
+    await retry.click();
+    await expect(page.getByTestId('host-error')).toContainText('重试请求已提交');
     await expect(page.locator('.metric-card-demo__grid .lx-metric-card__title .lx-status-dot')).toHaveCount(3);
     await expect
       .poll(() =>
@@ -61,6 +68,27 @@ test.describe('LxMetricCard 文档示例', () => {
     expect(cardBox?.x).toBeGreaterThanOrEqual(0);
     expect((cardBox?.x ?? 0) + (cardBox?.width ?? 0)).toBeLessThanOrEqual(320);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+
+    const narrowCardGeometry = await page.locator('.metric-card-demo__grid .lx-metric-card').evaluateAll((cards) =>
+      cards.map((element) => {
+        const card = element.getBoundingClientRect();
+        const title = element.querySelector<HTMLElement>('.lx-metric-card__title');
+        const badge = element.querySelector<HTMLElement>('.lx-metric-card__badge');
+        const valueRow = element.querySelector<HTMLElement>('.lx-metric-card__value-row');
+        const value = element.querySelector<HTMLElement>('.lx-metric-card__value-wrap');
+        if (!title || !valueRow || !value) throw new Error('窄卡结构缺失');
+        const badgeBounds = badge?.getBoundingClientRect();
+        const titleBounds = title.getBoundingClientRect();
+        return {
+          cardFits: card.width >= 0 && element.scrollWidth <= element.clientWidth,
+          badgeFits: !badge || badge.scrollWidth <= badge.clientWidth,
+          badgeAfterTitle: !badgeBounds || badgeBounds.top >= titleBounds.bottom - 1,
+          valueFits: value.scrollWidth <= value.clientWidth,
+          valueRowFits: valueRow.scrollWidth <= valueRow.clientWidth,
+        };
+      }),
+    );
+    expect(narrowCardGeometry.every((geometry) => Object.values(geometry).every(Boolean))).toBe(true);
 
     const lightColors = await card.evaluate((element) => {
       const title = element.querySelector('.lx-metric-card__label');

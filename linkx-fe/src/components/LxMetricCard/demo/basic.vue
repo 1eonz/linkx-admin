@@ -1,5 +1,10 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
+import LxIcon from '../../LxIcon/index.vue'
 import LxMetricCard from '../index.vue'
+
+const retryMessage = ref('')
 </script>
 
 <template>
@@ -72,6 +77,43 @@ import LxMetricCard from '../index.vue'
         >
       </LxMetricCard>
     </div>
+
+    <section class="metric-card-demo__host-states" aria-label="宿主状态组合">
+      <h3>宿主状态组合（数据请求由页面负责）</h3>
+      <div class="metric-card-demo__state-grid">
+        <div
+          class="metric-card-demo__state"
+          data-testid="host-loading"
+          aria-busy="true"
+        >
+          <LxIcon
+            class="metric-card-demo__state-icon"
+            name="loading"
+            :size="16"
+            aria-hidden="true"
+          />
+          <strong>指标加载中</strong>
+          <span>请求完成后再渲染 LxMetricCard</span>
+        </div>
+        <div class="metric-card-demo__state" data-testid="host-empty">
+          <strong>暂无指标数据</strong>
+          <span>调整筛选条件或等待下一次采集</span>
+        </div>
+        <div
+          class="metric-card-demo__state metric-card-demo__state--error"
+          data-testid="host-error"
+          role="alert"
+        >
+          <strong>指标加载失败</strong>
+          <span aria-live="polite">{{
+            retryMessage || '请检查网络后重试，失败不会显示为 0'
+          }}</span>
+          <button type="button" @click="retryMessage = '重试请求已提交'">
+            重试
+          </button>
+        </div>
+      </div>
+    </section>
   </section>
 </template>
 
@@ -94,5 +136,56 @@ import LxMetricCard from '../index.vue'
 .metric-card-demo__extra {
   color: var(--lx-text-secondary);
   font-size: 12px;
+}
+
+.metric-card-demo__host-states {
+  display: grid;
+  gap: var(--lx-space-sm);
+}
+
+.metric-card-demo__host-states h3 {
+  margin: 0;
+  color: var(--lx-text-regular);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.metric-card-demo__state-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--lx-space-sm);
+}
+
+.metric-card-demo__state {
+  display: grid;
+  min-width: 0;
+  gap: var(--lx-space-xs);
+  padding: var(--lx-space-md);
+  border: 1px solid var(--lx-border);
+  border-radius: var(--lx-radius-sm);
+  background: var(--lx-bg-card);
+  color: var(--lx-text-regular);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.metric-card-demo__state-icon {
+  color: var(--lx-color-primary);
+}
+
+.metric-card-demo__state--error {
+  border-color: var(--lx-color-error-border);
+  background: var(--lx-color-form-error-bg);
+}
+
+.metric-card-demo__state button {
+  width: fit-content;
+  min-height: 44px;
+  padding: 0 var(--lx-space-sm);
+  border: 1px solid var(--lx-color-error);
+  border-radius: var(--lx-radius-sm);
+  background: transparent;
+  color: var(--lx-color-error-strong);
+  cursor: pointer;
 }
 </style>

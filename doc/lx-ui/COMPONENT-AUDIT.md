@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-19 LxMetricCard 窄卡与宿主状态契约补强
+
+- 处理 Assessment A 的窄卡信息竞争和状态契约建议：新增卡片容器查询，在 320px 以下让标题/角标/数值/extra 分层；Demo 增加宿主 loading、empty、error 和重试反馈。
+- 文档明确 `status`、`badgeStatus`、`trendStatus` 是独立维度，失败不得默认渲染为 0；组件仍保持纯展示和宿主注入边界。
+- 单测 **15/15**、文档 E2E **3/3**、typecheck/build、目标格式和 ESLint 通过；本条不关闭 UI-10 严格矩阵，正式 A/B 仍需独立复验。
+
 ## 2026-10-19 LxInput 前后缀槽位垂直居中修复
 
 - `prefix/suffix` 及内部槽位改为在完整输入外框内垂直居中，保留扣除上下 1px 描边的内容轨道；`prepend/append` 仍使用完整控件高度。

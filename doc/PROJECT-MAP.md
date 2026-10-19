@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-19 LxMetricCard 窄卡与状态组合
+
+- 入口：`linkx-fe/src/components/LxMetricCard/index.vue`、`linkx-fe/src/components/LxMetricCard/demo/basic.vue`；文档：`linkx-fe/docs/components/lxmetriccard.md`。
+- 容器宽度不超过 320px 时标题、角标、数值和 `extra` 自动分层；Demo 提供宿主 loading/empty/error 与重试状态，组件本身不访问业务 API。
+- 回归：`other-admin/admin-vue3/tests/unit/lx-metric-card.test.ts` **15/15**、`tests/e2e/lx-metric-card-docs.spec.ts` **3/3**；宿主页面迁移和真实联调按现有矩阵继续开放。
+
 ## 2026-10-19 LxSectionTitle 容器响应式与标签语义修复
 
 - 入口：`linkx-fe/src/components/LxSectionTitle/index.vue`；测试：`other-admin/admin-vue3/tests/unit/lx-section-title.test.ts`、`tests/e2e/lx-section-title-docs.spec.ts`。

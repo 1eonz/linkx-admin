@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-19 LxMetricCard 窄卡与宿主状态契约补强
+
+- 新增卡片容器查询：宽度不超过 320px 时标题、角标、数值和 `extra` 分层换行；Demo 新增 loading、empty、error 组合，错误状态重试按钮可观察地更新反馈。
+- 中文 API 明确 `status`、`badgeStatus`、`trendStatus` 独立描述结果、角标和趋势维度；LxMetricCard 不请求数据、不把失败转换为 0。
+- 单测 **15/15**、文档 Playwright **3/3**、320px 几何回归、typecheck/build、Prettier/ESLint 通过；正式 Impeccable A/B 仍需独立证据，不以 detector 结果单独通过。
+
 ## 2026-10-19 LxInput 前后缀槽位垂直居中修复
 
 - 修复 `prefix/suffix` 及内部槽位虽使用内容轨道、但从外框顶部起算造成底部少 2px 的问题；槽位现在在 32/44px 外框内垂直居中，sm/md/lg 与窄屏均保持上下各 1px 描边内缩。
