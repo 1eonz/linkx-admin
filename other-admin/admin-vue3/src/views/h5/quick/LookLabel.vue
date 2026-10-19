@@ -14,6 +14,7 @@
 import { Search } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import type ElTree from 'element-plus/es/components/tree/index';
+import { LxInput } from 'lx-ui';
 import { computed, onMounted, ref } from 'vue';
 
 import { labelDetail, labelList, type LabelItem } from '@/api/h5/quick';
@@ -205,7 +206,7 @@ function onNodeClick(data: unknown): void {
 
       <!-- 顶部搜索 -->
       <div class="search-bar">
-        <el-input
+        <LxInput
           v-model="searchName"
           placeholder="请输入警员姓名"
           clearable
