@@ -2814,3 +2814,8 @@
 - 普通、密码、透传 `LxInput` 的 `.el-input__wrapper` 现在使用真实 `1px` 外边框；复合 prepend/append 继续由根节点提供连续外框，焦点光环和错误态语义保持不变。
 - LxInput 单测 **13/13**；前后缀/密码/透传边框专项与复合尺寸 E2E **2/2**；目标 Prettier 通过。完整基础控件 E2E 的既有清空按钮失败不属于本波。
 - 未改变 API、权限、业务请求链和宿主 Element Plus 依赖；正式 Critique 仍需独立 A/B、浏览器证据和 snapshot/trend，空数组不能单独作为通过。
+## 2026-10-19 LxSelectPagination 防抖交接
+
+- `debounce` 现在按调用方传入毫秒数执行；非有限值使用 300ms，负数按 0ms 处理，不再静默限制到 250–400ms。
+- 单测 **5/5**、文档 E2E **6/6**；detector 为合法 `[]`/空 stderr/退出码 `0`。未改变远程搜索取消、分页、失败恢复和宿主 API 请求链。
+- 因本波没有独立 A/B、可写 overlay 和 snapshot/trend，只记为降级复验；不得把空数组写成正式 Impeccable 通过。

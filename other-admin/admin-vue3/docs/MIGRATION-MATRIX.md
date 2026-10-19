@@ -217,3 +217,7 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 - Vue3 业务页继续通过 lx-ui `LxInput` 复用边框令牌；普通、密码、透传包装器和复合前后缀已有组件级边框回归，不在宿主复制样式。
 - 本波不改变页面 props、事件、权限码或 Promise 链请求；Element Plus 全量替换仍等待 UI-10/UI-11 门禁与逐页 Mock/E2E。
+## 2026-10-19 LxSelectPagination 防抖宿主契约
+
+- Vue3 宿主接入时可直接传入业务需要的 `debounce` 毫秒数；组件不改变请求取消、分页和失败恢复语义。
+- 本波不改变页面权限码、API 协议或 `.then().catch().finally()` 请求风格；真实页面仍需 Mock/E2E 和后端契约验证。

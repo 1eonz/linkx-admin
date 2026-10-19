@@ -761,3 +761,7 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - 入口：`linkx-fe/src/components/LxInput/`；普通、密码和透传场景由 `.el-input__wrapper` 提供真实 `1px` 边框，复合前后缀由根节点提供连续边框。
 - 单测 **13/13**；边框专项与复合尺寸文档 E2E **2/2**。该证据只覆盖组件库当前行为，不代表 Vue3 业务页面迁移或正式 UI-10 Critique 完成。
+## 2026-10-19 LxSelectPagination 防抖契约
+
+- 入口：`linkx-fe/src/components/LxSelectPagination/`；防抖时长不再被组件内部静默截断，非法值和负数行为已写入中文类型与文档。
+- 单测 **5/5**、文档 E2E **6/6**；组件不拥有业务 API，宿主仍负责远程请求、取消、权限和分页状态。

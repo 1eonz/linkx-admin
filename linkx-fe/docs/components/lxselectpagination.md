@@ -98,6 +98,8 @@ const remoteMethod: LxSelectPaginationRemoteMethod = (
 | `change`            | `(value, items)` | 值变化及相应候选项；没有历史元数据时保留至少包含 `valueKey` 的对象。 |
 | `load`              | `(items, total)` | 一页加载成功后发出。                                                 |
 
+`debounce` 按调用方传入的毫秒数执行；未传或传入非有限数值时使用 300ms，负数按 0ms 处理，不会被静默限制到其他档位。
+
 ## Exposes
 
 | 方法         | 说明                                         |
