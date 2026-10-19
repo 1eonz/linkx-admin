@@ -56,6 +56,24 @@ describe('LxMetricCard', () => {
     wrapper.unmount();
   });
 
+  it('exposes complete text for truncated values and trends', () => {
+    const wrapper = mount(LxMetricCard, {
+      props: {
+        value: '超长指标值-2026-0001',
+        trend: '这是一段在窄卡中可能需要截断的完整趋势说明',
+      },
+    });
+
+    expect(wrapper.get('.lx-metric-card__value').attributes('title')).toBe('超长指标值-2026-0001');
+    expect(wrapper.get('.lx-metric-card__trend').attributes('title')).toBe(
+      '这是一段在窄卡中可能需要截断的完整趋势说明',
+    );
+    expect(wrapper.get('.lx-metric-card__trend').attributes('aria-label')).toBe(
+      '趋势：这是一段在窄卡中可能需要截断的完整趋势说明',
+    );
+    wrapper.unmount();
+  });
+
   it.each([
     ['up', 'arrow-up'],
     ['down', 'arrow-down'],

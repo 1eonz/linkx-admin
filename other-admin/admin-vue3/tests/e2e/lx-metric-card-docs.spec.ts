@@ -50,6 +50,17 @@ test.describe('LxMetricCard 文档示例', () => {
     await expect(page.locator('.metric-card-demo__grid [data-icon-name="minus"]')).toHaveCount(1);
     await expect(page.getByText('策略同步任务', { exact: true })).toBeVisible();
 
+    const firstCard = page.locator('.metric-card-demo__grid .lx-metric-card').first();
+    await expect(firstCard.locator('.lx-metric-card__trend')).toHaveAttribute(
+      'title',
+      '全部边缘节点与接入感知终端运行正常',
+    );
+    await expect(firstCard.locator('.lx-metric-card__trend')).toHaveAttribute(
+      'aria-label',
+      '趋势：全部边缘节点与接入感知终端运行正常',
+    );
+    await expect(firstCard.locator('.lx-metric-card__value')).toHaveAttribute('title', '99.9');
+
     const progress = page.getByRole('progressbar', { name: '在线健康指标' });
     await expect(progress).toHaveAttribute('aria-valuenow', '99.9');
     await expect(progress).toHaveAttribute('aria-valuetext', '12,842 / 12,850 台');

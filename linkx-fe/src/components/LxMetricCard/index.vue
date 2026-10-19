@@ -112,7 +112,7 @@ const progressPercent = computed(() => {
           :pulse="metricStatusDotStatus === 'online'"
           aria-hidden="true"
         />
-        <component :is="headingLevel" class="lx-metric-card__label">
+        <component :is="props.headingLevel" class="lx-metric-card__label">
           <slot v-if="$slots.title" name="title">{{ metricTitle }}</slot>
           <slot v-else name="label">{{ metricTitle }}</slot>
         </component>
@@ -137,7 +137,7 @@ const progressPercent = computed(() => {
 
     <div class="lx-metric-card__value-row">
       <div class="lx-metric-card__value-wrap">
-        <strong class="lx-metric-card__value">
+        <strong class="lx-metric-card__value" :title="String(value)">
           <slot name="value">{{ value }}</slot>
         </strong>
         <span v-if="unit" class="lx-metric-card__unit">{{ unit }}</span>
@@ -147,13 +147,19 @@ const progressPercent = computed(() => {
       </div>
     </div>
 
-    <p v-if="trend" class="lx-metric-card__trend" :class="`is-${trendStatus}`">
+    <p
+      v-if="trend"
+      class="lx-metric-card__trend"
+      :class="`is-${trendStatus}`"
+      :title="trend"
+      :aria-label="`趋势：${trend}`"
+    >
       <LxIcon
         v-if="trendIconName"
         :name="trendIconName"
         :size="12"
         aria-hidden="true"
-      />{{ trend }}
+      /><span class="lx-metric-card__trend-text">{{ trend }}</span>
     </p>
 
     <div v-if="progress !== undefined" class="lx-metric-card__progress-section">
@@ -225,12 +231,6 @@ const progressPercent = computed(() => {
   box-shadow: var(--lx-shadow-card);
   container-type: inline-size;
   transition: box-shadow var(--lx-transition);
-}
-
-@media (hover: hover) {
-  .lx-metric-card:hover {
-    box-shadow: var(--lx-shadow-pop);
-  }
 }
 
 .lx-metric-card__header,
@@ -323,6 +323,17 @@ const progressPercent = computed(() => {
   align-items: center;
   gap: var(--lx-space-xs);
   margin: 0;
+  min-width: 0;
+}
+
+.lx-metric-card__trend-text {
+  min-width: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  overflow-wrap: anywhere;
+  line-height: 18px;
 }
 
 .lx-metric-card__trend.is-online,
@@ -455,7 +466,7 @@ const progressPercent = computed(() => {
 
 @media (prefers-reduced-motion: reduce) {
   .lx-metric-card {
-    transition: box-shadow 0.01ms linear;
+    transition: none;
   }
 
   .lx-metric-card__progress-value {
