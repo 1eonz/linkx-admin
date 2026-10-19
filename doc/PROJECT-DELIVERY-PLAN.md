@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxPagination Assessment B 当前版证据
+
+- **静态证据**：组件、Demo、中文文档 detector 均为合法 JSON `[]`，stderr 为空，退出码 `0`；`[]` 只表示静态规则零命中。
+- **浏览器证据**：隔离 4179 文档服务和新 Chrome context 覆盖 1280/375/320px、Light/HUD、reduced-motion；HTTP 200，page errors、failed requests、console errors 均为 `0`，页面无横溢出，窄屏分页区域局部横滚、键盘焦点和下一页切换通过。
+- **边界**：overlay 的 7 个命中均需归因到 VitePress 壳层、API 表格、复制按钮或全局样式；尚无独立 Assessment A、综合 snapshot/trend，故不关闭 UI-10。真实分页 API、权限和宿主迁移仍开放。
+
 ## 2026-10-20 LxDescriptions 长状态播报语义收口
 
 - **修复**：长状态展开按钮已提供完整字段和值名称，内部 `LxStatusDot` 改为 `aria-hidden="true"` 视觉子节点，避免读屏器重复播报；短状态展示语义不变。

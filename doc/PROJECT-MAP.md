@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxPagination Assessment B 当前版证据
+
+- 回归入口：`linkx-fe/src/components/LxPagination/`、`other-admin/admin-vue3/tests/e2e/lx-pagination-docs.spec.ts`。
+- B 证据目录：`tmp-pagination-assessment-b-current/`；6 个主题/尺寸视图和分页局部滚动通过，但独立 A、snapshot/trend 与 UI-10 严格关闭仍未完成。
+
 ## 2026-10-20 LxDescriptions 长状态播报语义
 
 - 长状态展开入口由按钮统一承担可访问名称，内部状态点仅作为视觉节点隐藏于辅助技术树；短状态仍保留状态点语义。

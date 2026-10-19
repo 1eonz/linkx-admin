@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxPagination Assessment B 当前版
+
+- 组件行为证据已覆盖主题、窄屏局部滚动和键盘分页，Vue3 页面迁移应复用 `LxPagination` 的 `change(page, pageSize)`、`autoReset`、`autoScroll` 契约。
+- 仍需独立 Assessment A、snapshot/trend、真实分页 API/权限联调；在 lx-ui 全库门禁完成前保留 Vue3 `element-plus`。
+
 ## 2026-10-20 LxDescriptions 长状态播报语义
 
 - Vue3 页面复用 lx-ui 长状态按钮时，状态点仅作为视觉子节点，不再重复进入辅助技术树；页面不应在外层重复添加状态播报。

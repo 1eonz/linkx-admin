@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxPagination Assessment B 当前版证据
+
+- **静态**：三个目标 detector 均输出合法 `[]`，stderr 为空，退出码 `0`；原始文件保存在 `tmp-pagination-assessment-b-current/`。
+- **浏览器**：隔离 4179 服务 + 新 CDP context 完成 Light/HUD、1280/375/320px、reduced-motion 6 视图；HTTP 200、页面错误/失败请求/console error 为 0，窄屏分页区域局部横向滚动，分页 region 可键盘聚焦，下一页可从 4 切换到 5。
+- **审查边界**：overlay 7 项命中归属于文档壳层、API 表格、复制按钮或全局样式，需综合评审逐条归因；Assessment A、正式 snapshot/trend、真实后端和 UI-10 仍未完成。
+
 ## [2026-10-20] LxDescriptions 长状态播报语义收口
 
 - **改动**：长状态展开按钮内部的 `LxStatusDot` 增加 `aria-hidden="true"`，按钮自身保留字段和值的完整可访问名称；短状态不受影响。
