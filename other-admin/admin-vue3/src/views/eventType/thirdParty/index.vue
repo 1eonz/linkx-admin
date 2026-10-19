@@ -2,7 +2,7 @@
 import { Delete, Edit, Plus, View } from '@element-plus/icons-vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxEmpty, LxPagination, LxTag } from 'lx-ui';
+import { LxEmpty, LxPagination, LxStatusSwitch, LxTag } from 'lx-ui';
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import type { NorthboundAppForm, NorthboundAppItem, NorthboundAppListQuery } from '@/api/resource/thirdApp';
@@ -44,6 +44,12 @@ function defaultForm(): NorthboundAppForm {
 }
 
 const form = reactive<NorthboundAppForm>(defaultForm());
+
+/** 将 LxStatusSwitch 的开启布尔值映射回北向接入的 1/0 状态值。 */
+function setFormStatus(value: boolean | number): void {
+  form.status = (typeof value === 'number' ? value === 0 : value) ? 1 : 0;
+}
+
 const formRules: FormRules = {
   systemName: [
     { required: true, message: '请输入应用名称', trigger: 'blur' },
@@ -328,12 +334,12 @@ onBeforeUnmount(() => {
           </el-form-item>
         </div>
         <el-form-item label="状态" prop="status">
-          <el-switch
-            v-model="form.status"
-            active-text="启用"
-            inactive-text="停用"
-            :active-value="1"
-            :inactive-value="0"
+          <LxStatusSwitch
+            :model-value="form.status === 1"
+            on-text="启用"
+            off-text="停用"
+            aria-label="北向接入状态"
+            @update:model-value="setFormStatus"
           />
         </el-form-item>
         <el-form-item label="过期时间" prop="expired">
