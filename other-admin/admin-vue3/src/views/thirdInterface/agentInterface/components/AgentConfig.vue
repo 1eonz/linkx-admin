@@ -10,6 +10,7 @@
 import { Upload, Download } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules, UploadRawFile } from 'element-plus';
+import { LxSwitch } from 'lx-ui';
 import { computed, nextTick, onMounted, reactive, ref } from 'vue';
 
 import {
@@ -293,7 +294,7 @@ onMounted(() => {
     <el-form ref="deployRef" :model="deployForm" :rules="deployRules" label-width="160px" class="config-form">
       <el-divider content-position="left">部署配置</el-divider>
       <el-form-item label="分离部署">
-        <el-switch v-model="deployForm.separatedDeploy" />
+        <LxSwitch v-model="deployForm.separatedDeploy" />
         <span class="form-tip">开启后 AI 服务与前端使用不同地址</span>
       </el-form-item>
       <el-form-item label="AI 服务地址" prop="groupAiHost">
@@ -314,7 +315,7 @@ onMounted(() => {
     <el-form ref="approvalRef" :model="approvalForm" :rules="approvalRules" label-width="160px" class="config-form">
       <el-divider content-position="left">审批配置</el-divider>
       <el-form-item label="启用审批">
-        <el-switch v-model="approvalForm.approvalEnabled" inline-prompt />
+        <LxSwitch v-model="approvalForm.approvalEnabled" inline-prompt />
       </el-form-item>
       <template v-if="approvalForm.approvalEnabled">
         <el-form-item label="审批子模式">

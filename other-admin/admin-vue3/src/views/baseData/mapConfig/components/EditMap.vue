@@ -28,6 +28,7 @@
  */
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormItemRule } from 'element-plus';
+import { LxSwitch } from 'lx-ui';
 import { computed, nextTick, reactive, ref } from 'vue';
 
 import { createMap, updateMap, type MapItem } from '@/api/baseData/mapConfig';
@@ -341,7 +342,7 @@ function handleDialogClosed(): void {
         </el-select>
       </el-form-item>
       <el-form-item label="激活状态：" prop="activation">
-        <el-switch
+        <LxSwitch
           v-model="formData.activation"
           active-text="激活"
           inline-prompt

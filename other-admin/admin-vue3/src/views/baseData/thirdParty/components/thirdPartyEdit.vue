@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { FormInstance, FormItemRule } from 'element-plus';
 import { ElMessage } from 'element-plus';
+import { LxSwitch } from 'lx-ui';
 import { ref, reactive, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -207,7 +208,7 @@ defineExpose({ init });
         </el-input>
       </el-form-item>
       <el-form-item :label="t('index.list.thirdPartyAppStatus')" prop="status">
-        <el-switch
+        <LxSwitch
           v-model="thirdAppForm.status"
           active-text="启用"
           inline-prompt
