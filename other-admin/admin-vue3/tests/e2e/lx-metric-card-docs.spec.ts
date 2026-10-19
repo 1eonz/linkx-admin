@@ -26,6 +26,10 @@ test.describe('LxMetricCard 文档示例', () => {
     await expect(page.getByText('高危未处理警情', { exact: true })).toBeVisible();
     await expect(page.getByText('今日警情总数', { exact: true })).toBeVisible();
     await expect(page.getByText('较昨日增加 12%', { exact: true })).toBeVisible();
+    const decision = page.getByLabel('状态组合决策示例');
+    await expect(decision).toBeVisible();
+    await expect(decision.locator('.lx-metric-card')).toHaveClass(/is-success/);
+    await expect(decision.locator('[data-icon-name="arrow-up"]')).toBeVisible();
     await expect(page.getByTestId('host-loading')).toHaveAttribute('aria-busy', 'true');
     await expect(page.getByTestId('host-empty')).toContainText('暂无指标数据');
     await expect(page.getByTestId('host-error')).toHaveAttribute('role', 'alert');

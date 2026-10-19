@@ -78,6 +78,27 @@ const retryMessage = ref('')
       </LxMetricCard>
     </div>
 
+    <section class="metric-card-demo__decision" aria-label="状态组合决策示例">
+      <div class="metric-card-demo__decision-copy">
+        <h3>状态组合决策</h3>
+        <p>
+          显式 status 覆盖旧 valueType；trendDirection
+          只决定趋势图标；badgeStatus 独立描述角标状态。
+        </p>
+      </div>
+      <LxMetricCard
+        title="冲突状态示例"
+        value="需人工确认"
+        value-type="danger"
+        status="success"
+        badge-text="接口正常"
+        badge-status="online"
+        trend="数值异常但趋势向上"
+        trend-status="error"
+        trend-direction="up"
+      />
+    </section>
+
     <section class="metric-card-demo__host-states" aria-label="宿主状态组合">
       <h3>宿主状态组合（数据请求由页面负责）</h3>
       <div class="metric-card-demo__state-grid">
@@ -138,6 +159,39 @@ const retryMessage = ref('')
   font-size: 12px;
 }
 
+.metric-card-demo__decision {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  gap: var(--lx-space-md);
+  align-items: start;
+  padding: var(--lx-space-md);
+  border: 1px dashed var(--lx-border);
+  border-radius: var(--lx-radius-sm);
+  background: var(--lx-bg-page);
+}
+
+.metric-card-demo__decision-copy {
+  min-width: 0;
+}
+
+.metric-card-demo__decision-copy h3,
+.metric-card-demo__decision-copy p {
+  margin: 0;
+}
+
+.metric-card-demo__decision-copy h3 {
+  color: var(--lx-text-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.metric-card-demo__decision-copy p {
+  margin-block-start: var(--lx-space-xs);
+  color: var(--lx-text-secondary);
+  font-size: 12px;
+  line-height: 18px;
+}
+
 .metric-card-demo__host-states {
   display: grid;
   gap: var(--lx-space-sm);
@@ -176,6 +230,12 @@ const retryMessage = ref('')
 .metric-card-demo__state--error {
   border-color: var(--lx-color-error-border);
   background: var(--lx-color-form-error-bg);
+}
+
+@media (max-width: 640px) {
+  .metric-card-demo__decision {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .metric-card-demo__state button {
