@@ -3080,3 +3080,9 @@
 - **验证**：`vue-tsc --noEmit`、目标 ESLint/Prettier、`git diff --check` 和隔离 Mock Playwright **10/10** 通过；源码直接 `el-switch` 从 14 降到 **10**。
 - **边界**：未改变接口、权限、表单校验和链式请求；剩余 10 处包含异步保存、确认、权限或复杂配置，需按能力差异继续评估。正式 Impeccable 全库门禁、真实后端和 Element Plus 删除仍未完成。
 - **下一步**：继续处理统一通信、南向配置与布局配置中的简单开关，复杂前置保存场景暂保留并登记。
+# 2026-10-20 LxSwitch 第三批宿主替换交接
+
+- **实现**：`TaskConfigModal.vue`、`EditPcTabModal.vue`、`EditSectionModal.vue` 共 4 个表单开关改用 `LxSwitch`；保留 1/0 值域、表单条件、文案和保存时机。
+- **验证**：`vue-tsc --noEmit`、目标 ESLint/Prettier、`git diff --check`、隔离 Mock Playwright **10/10** 通过；源码直接 `el-switch` 从 10 降到 **6**。
+- **边界**：未改变接口、权限、校验和链式 API 请求；剩余 6 处涉及异步表格保存、权限筛选或失败回滚，暂不机械替换。正式 Impeccable 全库门禁、真实后端和 Element Plus 删除仍未完成。
+- **下一步**：继续核对统一通信与警务上报开关的 loading、失败恢复和权限语义，确认可由 `LxSwitch` 或 `LxStatusSwitch` 完整承接后再迁移。
