@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-19 LxPagination 宿主迁移备注
+
+- 组件当前版单测 **5/5**、4177 文档 E2E **3/3**；宿主接入保留 `change(page, pageSize)` 顺序、`autoReset`、`autoScroll` 和窄屏局部滚动容器。
+- 独立 Pagination Critique 快照尚未在工作区核验到，组件行为证据不等于视觉矩阵关闭；业务页仍需补真实 API/Mock、空结果、失败恢复、权限和分页回显。
+- 缺少可信分页字段契约前不替换页面 `element-plus`，不臆造接口参数。
+
 ## 2026-10-19 LxFormErrorBanner 宿主迁移备注
 
 - 组件当前版单测 **2/2**、4177 文档 E2E **1/1**；宿主接入需保留整体阻断语义、`role=alert`、字段清单 slot 和 375px 换行。

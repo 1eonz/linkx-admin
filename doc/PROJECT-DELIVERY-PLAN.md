@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-19 LxPagination 当前版复验与证据核对
+
+- **验证**：LxPagination 单测 **5/5**、4177 文档 Playwright **3/3**，覆盖受控分页事件顺序、`autoReset`、`autoScroll`、自定义布局、背景状态、主题切换、键盘焦点和 375px 局部滚动；未发现可复现 P0–P2。
+- **证据核对**：计划历史记录引用的 `linkx-fe/.impeccable/critique/pagination-assessment-b-2026-10-17/` 当前不存在，不能把历史文字或 detector `[]` 视为现存正式 A/B 快照；组件严格 UI-10 行保持开放。
+- **迁移边界**：宿主仍需保留 `change(page, pageSize)` 顺序、`autoReset`、`autoScroll` 和列表容器局部滚动语义；真实分页 API、权限和页面迁移继续等待可信契约。
+
 ## 2026-10-19 LxFormErrorBanner 当前版复验与证据边界更正
 
 - **结果**：实现、类型、Demo 和中文 API 与表单阻断设计一致；单测 **2/2**、4177 文档 Playwright **1/1**、lx-ui typecheck 通过，未发现可复现 P0–P2。

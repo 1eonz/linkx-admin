@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-19] LxPagination 当前版复验与 Critique 快照核对
+
+- **验证**：单测 **5/5**、4177 文档 Playwright **3/3**；受控页码/条数事件、自动回第一页、滚动开关、自定义布局、背景、HUD、键盘和 375px 局部滚动均通过。
+- **审查边界**：历史台账引用的 `pagination-assessment-b-2026-10-17` 目录当前不存在，未找到独立当前版 A/B 快照；本轮只登记源码审查和可执行行为证据，不关闭 UI-10。
+- **接入要求**：业务页替换时保留 `change` 参数顺序、局部滚动而非强制修改容器滚动、分页请求由宿主按 `.then().catch().finally()` 编排。
+
 ## [2026-10-19] LxFormErrorBanner 当前版复验与 Critique 证据更正
 
 - **验证**：LxFormErrorBanner 单测 **2/2**、4177 文档 Playwright **1/1**、lx-ui typecheck 通过；未发现可复现 P0–P2，角色、播报属性、错误令牌、slot 操作和 375px 布局保持当前契约。

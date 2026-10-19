@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-19 LxPagination 当前版复验与证据核对
+
+- **验证**：单测 **5/5**、4177 文档 Playwright **3/3**，覆盖事件顺序、`autoReset`、`autoScroll`、自定义布局、背景、主题、键盘和 375px 局部滚动；未发现可复现 P0–P2。
+- **证据状态**：`linkx-fe/.impeccable/critique/pagination-assessment-b-2026-10-17/` 当前不存在，不能把计划旧文案或静态 `[]` 视为正式独立 A/B；组件矩阵行继续开放。
+- **宿主边界**：请求、跨页选择、分页回显和权限由宿主负责，接入须保留 `change(page, pageSize)`、`autoReset`、`autoScroll` 契约。
+
 ## 2026-10-19 LxFormErrorBanner 当前版复验与证据边界更正
 
 - **结果**：实现/类型/Demo/中文 API 与设计约束一致；单测 **2/2**、4177 文档 E2E **1/1**、lx-ui typecheck 通过，未发现可复现 P0–P2。

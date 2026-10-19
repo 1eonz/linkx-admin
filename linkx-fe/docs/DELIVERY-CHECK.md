@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-19 LxPagination 当前版复验与证据缺口
+
+- 单测 **5/5**、4177 文档 Playwright **3/3**，覆盖受控事件、`autoReset`/`autoScroll`、布局/背景、主题、键盘和 375px 局部滚动；当前未发现可复现 P0–P2。
+- `pagination-assessment-b-2026-10-17` 独立目录在当前工作区不存在，历史摘要和静态 detector 不能单独作为正式 Critique；UI-10 行保持开放。
+- 宿主页面替换、真实分页 API、权限和跨页选择仍需单独验收。
+
 ## 2026-10-19 LxFormErrorBanner 当前版复验
 
 - 单测 **2/2**、4177 文档 Playwright **1/1**、lx-ui typecheck 通过；未发现可复现 P0–P2，当前实现与表单阻断设计和中文 API 一致。

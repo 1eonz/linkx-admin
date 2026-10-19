@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-19 LxPagination 当前版复验
+
+- 入口：`linkx-fe/src/components/LxPagination/index.vue`、`demo/basic.vue`；文档：`linkx-fe/docs/components/lxpagination.md`。
+- 当前行为通过单测 **5/5** 和 4177 文档 E2E **3/3**，覆盖受控事件、条数切换、布局/背景、主题、键盘及窄屏局部滚动；组件不请求业务 API。
+- 独立 `pagination-assessment-b-2026-10-17` 快照当前缺失，不能使用历史摘要关闭 UI-10；宿主页面迁移和真实分页契约保持开放。
+
 ## 2026-10-19 LxFormErrorBanner 当前版复验
 
 - 入口：`linkx-fe/src/components/LxFormErrorBanner/index.vue`、`demo/basic.vue`；文档：`linkx-fe/docs/components/lxformerrorbanner.md`。
