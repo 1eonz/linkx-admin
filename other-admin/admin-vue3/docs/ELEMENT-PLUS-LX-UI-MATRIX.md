@@ -1,5 +1,11 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-20 LxTag 第六批宿主替换
+
+- 南向接口应用类型、用户选择弹窗状态、代理管理分类/优先级/可见范围改用 `LxTag`；保留循环、关闭回调、条件和文案。
+- 代理优先级的 `danger` 映射为 `error`；LxTag 的 `close` 事件通过原分类删除闭包承接。
+- 重新扫描后 Vue3 直接 `<el-tag>` 为 **9** 处，剩余均为权限树路径或用户/角色权限状态场景，按后置策略跟踪。
+
 ## 2026-10-20 LxTag 第五批宿主替换
 
 - 客户端详情授权状态、第三方应用分组/类型、代理文件请求方式改用 `LxTag`；保留循环、条件、文案和现有 class。
@@ -131,7 +137,7 @@ Vue3 目前有 103 个 Vue/TS 源文件直接从 element-plus 包导入组件、
 | el-form / el-form-item                 | 58 / 278 | LxForm / LxFormItem                                                    |
 | el-pagination                          |        0 | LxPagination                                                           |
 | el-table / el-table-column             |  10 / 73 | LxProTable；宿主 ProTable 已使用该组件，但页面中的原始表格仍需逐页迁移 |
-| el-tag                                 |       14 | LxTag                                                                  |
+| el-tag                                 |        9 | LxTag                                                                  |
 | el-upload                              |        8 | LxUpload                                                               |
 | el-switch                              |       16 | LxStatusSwitch；校验值映射和开关事件契约                               |
 
