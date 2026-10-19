@@ -2051,3 +2051,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `thirdInterface/unifiedComm/components/IcpServerConfig.vue` 的 IP、WSS 地址、用户名、只读组织/摄像头和树搜索字段已由 `el-input` 切换为 `LxInput`。
 - 保留复合 append 操作、只读语义、树选择、表单校验和提交请求；密码、端口等敏感/数值控件暂不替换。`vue-tsc`、Prettier、ESLint 与隔离 Mock **10/10** 通过。
 - 服务配置真实接口和权限联调仍需可信后端，继续保留为阻塞。
+
+## 2026-10-20 南向与应用管理搜索输入迁移
+
+- `thirdInterface/southInterface/index.vue` 与 `thirdInterface/app/components/AppManage.vue` 的应用名称搜索输入已由 `el-input` 切换为 `LxInput`。
+- 保留 SearchBar 插槽、清空、回车搜索、分页、状态开关、图标和映射操作；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
+- 南向任务配置、映射弹窗和真实第三方接口仍按原契约后置联调。

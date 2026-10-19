@@ -315,6 +315,11 @@ Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过适�
 - `IcpServerConfig.vue` 的 IP、WSS、用户名、只读节点和树搜索 `el-input` 已替换为 `LxInput`。
 - 密码、端口及服务配置接口仍按原契约保留；复杂字段未完成前不能关闭 Element Plus 删除门槛。
 
+## 2026-10-20 南向与应用管理输入计数更新
+
+- `southInterface/index.vue`、`app/components/AppManage.vue` 的应用名称 `el-input` 已替换为 `LxInput`。
+- 映射、任务配置、状态和真实第三方接口仍按页面契约保留；全库依赖删除门槛未满足。
+
 ## 2026-10-11 Wave 11 P2 影响更新
 
 - `LxTransferPanel` 与 `LxVirtualTree` 已完成当前版组件级严格 UI/交互审查：单测合计 67/67、文档 E2E 合计 48/48，类型、203 modules 构建、文档构建和 Vue3 生产构建通过；代码复审无 P0-P3。Assessment A 36/40；Assessment B 5 个 detector 均为有效 `[]`/空 stderr/0，9 个浏览器视图证据完整。

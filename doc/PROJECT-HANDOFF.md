@@ -3166,3 +3166,8 @@
 
 - `thirdInterface/unifiedComm/components/IcpServerConfig.vue` 的 IP、WSS、用户名、只读组织/摄像头及树搜索改用 `LxInput`，保留 append 操作、树选择、表单校验和提交契约；密码、端口未改动。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；服务配置真实后端联调仍未执行。
+
+# 2026-10-20 南向与应用管理搜索交接
+
+- `thirdInterface/southInterface/index.vue`、`thirdInterface/app/components/AppManage.vue` 的应用名称搜索改用 `LxInput`，保留 SearchBar、清空、回车、分页、状态和映射操作。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；任务配置、映射和真实第三方接口未改变。
