@@ -2,7 +2,7 @@
 import { Delete, Edit, Plus, View } from '@element-plus/icons-vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxEmpty, LxPagination, LxStatusSwitch, LxTag } from 'lx-ui';
+import { LxEmpty, LxInput, LxPagination, LxStatusSwitch, LxTag } from 'lx-ui';
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import type { NorthboundAppForm, NorthboundAppItem, NorthboundAppListQuery } from '@/api/resource/thirdApp';
@@ -229,7 +229,7 @@ onBeforeUnmount(() => {
     <el-card shadow="never" class="northbound-card">
       <SearchBar :placeholder="'应用名称'" :actions="searchActions" @search="handleSearch" @reset="handleReset">
         <template #filters>
-          <el-input
+          <LxInput
             v-model="query.systemName"
             class="name-filter"
             clearable
