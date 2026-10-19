@@ -680,3 +680,9 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 
 - 使用 Vue3 专用 `playwright.preview.config.ts` 重跑 **10/10**；首页及 10 个分组、32 个动态入口共 33 个首屏样例均可访问。
 - 关联人员搜索竞态、北向 CRUD、轮播分页、AuthImg 失败/键盘重试和 reduced-motion 均通过；所有请求由隔离 Mock 处理，未知接口不代理真实后端。
+
+## 2026-10-19 LxPagination 宿主接入首批
+
+- 预警推送双 Tab、北向接入列表和协同岗挂靠弹窗的业务分页已替换为 `LxPagination`。
+- Vue3 `vue-tsc`、三文件 ESLint、Prettier 和差异检查通过；全菜单首屏及北向 CRUD Mock 回归通过。
+- 页面请求和权限契约仍由宿主负责，组件级正式 Impeccable 与真实后端联调未因本批提前关闭。

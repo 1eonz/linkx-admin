@@ -799,3 +799,9 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 
 - Vue3 隔离 Mock 预览套件 **10/10** 通过，覆盖 33 个现役菜单首屏和关联人员、北向接入、轮播、鉴权图片专项行为。
 - 该结果只证明宿主入口与本地 Mock 的可执行性，不改变 lx-ui 组件正式 Critique、真实权限/后端联调或 Element Plus 分批替换门禁。
+
+## 2026-10-19 LxPagination 首批宿主接入
+
+- 三个业务宿主场景已改用 `LxPagination`：双 Tab 预警推送、北向接入列表、协同岗挂靠弹窗。
+- 适配保留 `pageNum/pageSize`、`change(page, pageSize)`、请求序号、注入式 `fetchList` 和局部滚动语义；组件仍不请求业务 API。
+- 该批只证明宿主接入类型和 Mock 行为可运行，不关闭 LxPagination 正式 Impeccable A/B 或 UI-10 严格矩阵。

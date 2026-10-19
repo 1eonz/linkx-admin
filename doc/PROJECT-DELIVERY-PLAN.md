@@ -1635,3 +1635,10 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 使用 `pnpm exec playwright test --config=playwright.preview.config.ts --reporter=line` 在专用 Mock 服务上重跑 **10/10**。
 - 覆盖首页、10 个菜单组、32 个动态入口共 33 个首屏样例；同时覆盖菜单搜索/目录、关联人员搜索竞态、北向筛选增改删、轮播分页、AuthImg 失败恢复、键盘重试和 reduced-motion。
 - 本次仍只访问本地 Mock，不代表真实后端或完整业务写操作联调；未知 API 继续保持未代理保护。
+
+## 2026-10-19 Wave 9 / 分页宿主首批替换
+
+- 将 `notification/alertPush` 双 Tab、`eventType/thirdParty` 北向接入和 `collaboration/components/CoopBindDialog` 的业务 `el-pagination` 替换为 `LxPagination`。
+- 保留旧页面契约：通知页继续使用 `pageNum/pageSize` 和链式请求；北向页保留 `change(page, pageSize)` 触发查询、竞态请求保护和 `autoReset`；挂靠弹窗保留受控选择、页码回显和注入式 `fetchList`。
+- 三个页面的 `auto-scroll` 均关闭，由页面自身滚动容器负责位置；分页事件不再直接依赖 Element Plus 的 `size-change/current-change`。
+- 验证：Vue3 `vue-tsc --noEmit`、三文件 ESLint、Prettier、`git diff --check` 通过；全菜单首屏 Mock **1/1**、北向接入 Mock CRUD **1/1**。本批不改变权限码和真实 API 契约。

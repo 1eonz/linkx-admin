@@ -732,3 +732,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - `other-admin/admin-vue3/tests/e2e/preview.spec.ts` 与 `col-form-search-race.spec.ts` 在 `playwright.preview.config.ts` 下 **10/10** 通过。
 - `mock/preview-menu.ts` 的首页、10 个分组、32 个动态子菜单共 33 个入口均完成首屏样例核对；专用 Mock 服务不代理真实后端，未知接口仍受保护。
+
+## 2026-10-19 分页宿主替换
+
+- `notification/alertPush`、`eventType/thirdParty` 和 `collaboration/CoopBindDialog` 的分页入口已统一使用 `lx-ui` 的 `LxPagination`。
+- 页面 API 请求、分页状态、加载/错误恢复和注入式列表查询仍由宿主负责；Vue3 其他业务页的 4 处直接分页清单需继续逐页核对。

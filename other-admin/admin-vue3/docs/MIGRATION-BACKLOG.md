@@ -542,3 +542,9 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 - `pnpm exec playwright test --config=playwright.preview.config.ts --reporter=line` **10/10** 通过，首页及 33 个现役入口首屏样例可重复验收。
 - 专项覆盖关联人员搜索竞态、关闭重开后的迟到响应、北向接入 Mock CRUD、轮播分页和 AuthImg 失败/键盘重试/减少动效。
 - 待办仍为每个业务入口的深层空/失败/取消/权限不足/重复提交状态，以及真实后端联调；本轮不提前删除 Element Plus。
+
+## 2026-10-19 LxPagination 宿主首批迁移
+
+- 三个业务场景完成分页替换：预警推送双 Tab、北向接入、协同岗挂靠弹窗；旧分页状态、事件顺序、请求竞态和注入式查询契约保持不变。
+- 类型检查、目标 ESLint、Prettier、全菜单首屏 Mock 和北向 CRUD Mock 均通过。
+- 仍待迁移其他直接 `el-pagination` 使用点，并补页面级空/失败/取消/权限不足和真实接口联调；Element Plus 继续保留。

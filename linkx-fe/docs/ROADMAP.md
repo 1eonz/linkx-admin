@@ -693,3 +693,8 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 
 - Vue3 隔离预览 **10/10** 通过，作为 lx-ui 组件库之外的宿主入口证据，覆盖全部 33 个现役菜单首屏和已登记的竞态、分页、失败恢复场景。
 - 该证据不替代组件级 Impeccable A/B，也不代表真实后端、权限或 Element Plus 删除已完成。
+
+## 2026-10-19 LxPagination 宿主接入首批
+
+- Vue3 三个业务场景已接入 `LxPagination`，保留旧分页状态和 `change(page, pageSize)` 事件适配；业务请求仍由宿主按 `.then().catch().finally()` 管理。
+- 组件库正式 A/B、真实分页 API、权限联调及剩余直接 `el-pagination` 页面继续开放。

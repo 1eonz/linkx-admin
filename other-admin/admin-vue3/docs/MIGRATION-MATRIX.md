@@ -187,3 +187,9 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 - 专用预览配置下 **10/10** 通过；首页、10 个菜单组、32 个动态入口共 33 个页面均核对首屏样例和路由可达性。
 - 另覆盖菜单目录/搜索、远程搜索迟到响应、北向筛选增改删、轮播分页、鉴权图片失败恢复/键盘重试和减少动效。
 - 该证据不关闭真实 API、权限码、深层业务操作或 Element Plus 替换门禁。
+
+## 2026-10-19 LxPagination 宿主首批迁移
+
+- 已替换 `notification/alertPush` 双分页、`eventType/thirdParty` 分页和 `collaboration/CoopBindDialog` 分页；均使用 `LxPagination` 并保留原页面数据请求和分页状态。
+- 验证：类型检查、目标 ESLint、Prettier、差异检查；全菜单首屏和北向 Mock CRUD 通过。
+- 剩余直接 `el-pagination` 页面及真实后端/权限联调继续登记，不删除 Vue3 `element-plus` 直接依赖。
