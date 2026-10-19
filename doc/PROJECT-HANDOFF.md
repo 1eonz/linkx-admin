@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxDescriptions 长状态播报语义收口
+
+- **改动**：长状态展开按钮内部的 `LxStatusDot` 增加 `aria-hidden="true"`，按钮自身保留字段和值的完整可访问名称；短状态不受影响。
+- **验证**：LxDescriptions 单测 **10/10**、文档 E2E **3/3**、组件类型检查和目标 Prettier 通过。E2E 已从 `role="img"` 查询调整为视觉节点查询，避免把预期隐藏的子节点当作失败。
+- **未完成**：真实 NVDA/VoiceOver、复杂值格式化、复制失败恢复和正式 UI-10/UI-11 仍开放。
+
 ## [2026-10-20] LxDescriptions 移动端展开入口收口
 
 - **Assessment A**：当前源码评审 **32/40（Good）**，无 P0；P1 为普通长值/长状态展开入口缺少 44px 触控高度，P2/P3 详见 `tmp-descriptions-assessment-a-current.md`。

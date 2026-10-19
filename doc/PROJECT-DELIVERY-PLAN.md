@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxDescriptions 长状态播报语义收口
+
+- **修复**：长状态展开按钮已提供完整字段和值名称，内部 `LxStatusDot` 改为 `aria-hidden="true"` 视觉子节点，避免读屏器重复播报；短状态展示语义不变。
+- **验证**：单测 **10/10**、文档 E2E **3/3**、组件类型检查和目标 Prettier 通过。
+- **边界**：未进行真实 NVDA/VoiceOver 联调；复杂 `unknown` 值、复制失败替代路径、Demo 多实例主题竞态及正式 UI-10/UI-11 仍开放。
+
 ## 2026-10-20 LxDescriptions 移动端展开入口收口
 
 - **评审**：当前版 Assessment A **32/40（Good）**；Assessment B 的三个 detector 均为合法 `[]`、stderr 为空、退出码 `0`，并完成 Light/HUD、桌面/窄屏、reduced-motion 浏览器证据。`[]` 不单独代表正式通过；A 的自动化截图受环境限制，B 的合成 Enter 路径仍需真实键盘复验。

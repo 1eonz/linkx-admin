@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxDescriptions 长状态播报语义
+
+- 长状态展开入口由按钮统一承担可访问名称，内部状态点仅作为视觉节点隐藏于辅助技术树；短状态仍保留状态点语义。
+- 回归入口：`other-admin/admin-vue3/tests/unit/lx-descriptions.test.ts` 与 `tests/e2e/lx-descriptions-docs.spec.ts`，当前 **10/10 + 3/3** 通过。
+
 ## 2026-10-20 LxDescriptions 移动端展开入口
 
 - `linkx-fe/src/components/LxDescriptions/index.vue` 在移动断点为普通长值与长状态展开按钮提供至少 44px 触控高度；`other-admin/admin-vue3/tests/e2e/lx-descriptions-docs.spec.ts` 覆盖几何回归。
