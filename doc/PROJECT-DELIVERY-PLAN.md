@@ -7,6 +7,12 @@
 - **计划影响**：这些历史 Major 不再重复排期；其余提交锁、License 失败保留、远程搜索触底、宿主 AuthImg、类型治理和页面级权限/后端联调仍按原台账保持开放或阻塞。Vue3 Element Plus 替换仍等待 lx-ui 全库门禁。
 - **边界**：本波只同步审计状态和可执行证据，没有把测试通过扩大解释为正式 Impeccable A/B、真实后端联调或权限验收。
 
+## 2026-10-20 v-loadmore Teleport 触底分页复核
+
+- **复核结论**：`v-loadmore` 已通过控件 `aria-controls` 定位 teleported 下拉，兼容 `.el-select-dropdown__wrap` 与 `.el-scrollbar__wrap`，并由 MutationObserver 处理首次展开和卸载解绑。
+- **验证**：`loadmore.test.ts` 与 `use-fetch.test.ts` 合计 **12/12** 通过；未改变业务页面的 Promise 链请求写法。真实接口分页、权限不足和页面级 Mock 仍需迁移批次验证。
+- **边界**：不把指令单测扩大解释为三处业务页真实后端联调，也不提前删除 Element Plus。
+
 ## 2026-10-20 LxMetricCard 只读语义与标题运行时收口
 
 - **问题与实现**：纯展示指标卡移除桌面 hover 抬升，避免制造可点击暗示；长趋势说明最多显示两行，并通过 `title`/`aria-label` 保留完整文本；指标值保留 `title` 提示。同步修复文档站直接编译路径中 `headingLevel` 未从 `props` 读取的问题，避免标题节点退化为注释而导致 Demo 内容不可见。

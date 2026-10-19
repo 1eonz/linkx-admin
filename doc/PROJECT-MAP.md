@@ -6,6 +6,7 @@
 - `linkx-fe/src/components/LxSearchBar`：级联字段保留数字、混合值和对象路径，回归见 `lx-search-bar.test.ts`。
 - `linkx-fe/src/components/LxSelectTree`：懒加载失败通过 `load-error` 和重试入口恢复，回归见 `lx-select-tree.test.ts`。
 - `other-admin/admin-vue3/src/composables/useFetch.ts` / `useTable.ts`：通过 signal 与请求序号丢弃过期结果，回归见 `use-fetch.test.ts`。
+- `other-admin/admin-vue3/src/directives/loadmore.ts`：通过 `aria-controls`、MutationObserver 和滚动容器兼容逻辑支持 teleported 下拉，回归见 `loadmore.test.ts`。
 
 以上为当前代码证据索引；业务权限、真实 API、页面组合和 Element Plus 删除仍需按迁移台账逐页验证。
 
