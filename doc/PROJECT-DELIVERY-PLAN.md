@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-19 LxDescriptions 长值展开状态修复
+
+- **问题**：长值按钮获得焦点时会无条件显示全文，收起后的 `aria-expanded=false` 与视觉状态不一致；长状态的通用深层样式还会覆盖收起态省略规则。
+- **实现**：移除焦点即展开规则；长值和长状态增加可见的 `chevron-down` 展开图标并随状态旋转；桌面和窄屏收起态分别保持单行/两行省略，展开后显示完整内容；复制值窄屏继续允许换行。
+- **验证**：`lx-descriptions.test.ts` **10/10**、`lx-descriptions-docs.spec.ts` **3/3**、lx-ui `vue-tsc --noEmit`、目标 Prettier、`git diff --check` 通过；Impeccable detector JSON 为合法 `[]`、stderr 无检测错误、退出码 `0`。静态 `[]` 只表示零规则命中，尚不替代独立 B 的浏览器 Critique。
+- **审查结论**：Assessment A **27/40（Acceptable）** 的两个 P1 已修复；窄屏展开状态现在有真实视觉变化。独立 B、完整 snapshot/trend 和代码审查归档完成后再决定是否关闭组件门禁；宿主 Element Plus、权限、真实后端和页面引导仍按原顺序后置。
+
 ## 2026-10-18 LxInput 前后缀令牌高度回归收敛
 
 - **实现**：`LxInput` 的 `prefix/suffix` 及内部槽位由父级 `height: 100%` 改为直接读取 `--lx-input-track-height`，避免 Element Plus flex 内容尺寸或主题重算时产生高度回退；不改变尺寸、事件、校验和插槽契约。

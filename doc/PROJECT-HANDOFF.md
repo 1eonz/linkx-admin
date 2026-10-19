@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-19] LxDescriptions 长值展开状态修复交接
+
+- **改动**：移除长值按钮 `:focus` 无条件展开规则，修复收起态与 `aria-expanded` 不一致；调整 `LxStatusDot` 深层样式顺序，确保长状态收起时稳定省略；长值/长状态加入 `chevron-down` 旋转图标，窄屏采用两行收起预览，展开后显示完整内容。
+- **验证**：`tests/unit/lx-descriptions.test.ts` **10/10**；`tests/e2e/lx-descriptions-docs.spec.ts` **3/3**；lx-ui typecheck、目标 Prettier、`git diff --check` 通过。detector JSON 合法 `[]`、stderr 无检测错误、退出码 `0`。
+- **审查**：独立 Assessment A **27/40** 发现的两个 P1 已处理；报告位于 `linkx-fe/.impeccable/critique/lxdescriptions-toggle-assessment-a-2026-10-19/assessment.md`。B 浏览器证据和正式 snapshot/trend 仍待归档，不能仅凭 `[]` 宣布正式 Critique 通过。
+- **边界**：没有改变 Props、事件、权限、请求或 Promise 链；宿主页面替换、真实后端联调和 UI-10 全库计数继续保持开放。
+
 ## [2026-10-18] LxInput 前后缀高度令牌回归交接
 
 - **改动**：`prefix/suffix` 及内部槽位直接使用 `--lx-input-track-height`，不再依赖父级 `100%` 传递；复合输入在 sm/md/lg 与窄屏 44px 下继续与输入框共用同一高度轨道。

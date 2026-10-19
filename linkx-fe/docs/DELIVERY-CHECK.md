@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-19 LxDescriptions 长值展开状态修复
+
+- 移除焦点即展开的冲突样式；长值和长状态新增可见展开/收起图标，桌面单行省略、窄屏两行省略和展开态行为与 `aria-expanded` 一致。
+- 单测 **10/10**、文档 Playwright **3/3**、lx-ui typecheck、目标 Prettier 和 `git diff --check` 通过；detector JSON/stderr/退出码为合法 `[]`/空检测错误/`0`。
+- Assessment A **27/40** 的两个 P1 已修复；正式 B 浏览器证据、snapshot/trend 和 UI-10 全库关闭仍待完成。
+
 ## 2026-10-18 LxInput 前后缀直接令牌高度回归
 
 - `prefix/suffix` 及内部槽位直接使用组件级 `--lx-input-track-height`，避免父级 `100%` 在 Element Plus flex 重算时出现视觉高度漂移。

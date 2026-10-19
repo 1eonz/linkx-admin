@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-19 LxDescriptions 长值展开状态修复
+
+- 入口：`linkx-fe/src/components/LxDescriptions/index.vue`；测试：`other-admin/admin-vue3/tests/unit/lx-descriptions.test.ts`、`tests/e2e/lx-descriptions-docs.spec.ts`。
+- 长值与长状态现在使用可见旋转图标表达展开/收起；焦点不会改变展开状态，桌面收起态省略、窄屏两行收起预览与展开态分别有明确样式。
+- 证据：单测 **10/10**、文档 E2E **3/3**、类型检查通过；Assessment A 的两个 P1 已修复，独立 B 与正式 UI-10 关闭仍开放。
+
 ## 2026-10-18 LxInput 前后缀高度令牌回归
 
 - 入口：`linkx-fe/src/components/LxInput/style.css`；浏览器回归：`other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`。
