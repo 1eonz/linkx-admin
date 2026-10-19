@@ -785,3 +785,9 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 
 - Demo 与文档测试统一使用已注册 `setting` 图标，解除 lx-ui 类型检查阻断，不引入 `settings` 别名。
 - 类型检查、单测 **14/14**、文档 E2E **1/1** 通过；正式 Critique 和宿主迁移门禁保持开放。
+-
+## 2026-10-20 LxSectionTitle 当前版窄屏与 HUD 复验
+
+- `extra` 操作区支持收缩和窄屏分行；HUD Demo 同步根节点主题 class，卸载仅恢复仍由 Demo 写入的状态。
+- 4177 独立浏览器 Assessment B 已覆盖 16 个 Light/HUD、normal/reduced-motion、1280/420/375/320px 视图；无页面错误、失败请求、页面横溢出或操作越界。
+- 组件、Demo、文档 detector 均为合法 `[]`、空 stderr、退出码 0；静态结果不替代视觉证据。正式 UI-10 全库门禁和 Vue3 Element Plus 替换继续开放。

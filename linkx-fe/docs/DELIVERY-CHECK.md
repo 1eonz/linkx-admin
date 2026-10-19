@@ -780,3 +780,10 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 - [x] Demo 与 E2E 断言由未注册 `settings` 统一改为 `setting`。
 - [x] lx-ui typecheck、单测 **14/14**、文档 E2E **1/1**、目标格式检查通过。
 - [ ] UI-10/UI-11 正式审查、宿主迁移和真实后端仍未完成。
+-
+## 2026-10-20 LxSectionTitle 当前版复验
+
+- [x] `extra` 窄屏分行、HUD 主题同步与宿主主题并发恢复逻辑完成。
+- [x] `vue-tsc`、生产构建、目标 Prettier、差异检查通过；Assessment B 16 视图浏览器证据无页面错误、失败请求、页面横溢出和操作越界。
+- [x] detector 三件套 JSON/stderr/退出码为合法 `[]`/空/0；已与浏览器证据共同记录。
+- [ ] 默认 Vue3 E2E 因真实后端代理超时未形成页面证据；正式 UI-10 全库 A/B、snapshot/trend、真实后端与宿主迁移仍未完成。

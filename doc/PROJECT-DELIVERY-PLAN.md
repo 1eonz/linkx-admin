@@ -1752,3 +1752,10 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **根因**：Demo 使用不存在的 `settings` 图标名，阻断 lx-ui `vue-tsc`，且文档 E2E 仍按错误名称断言。
 - **修复**：统一改为图标注册表已有的 `setting`，同步更新文档 E2E 选择器；不新增别名、不改变 `LxSectionTitle` API 或视觉行为。
 - **验证**：lx-ui `pnpm typecheck`、SectionTitle 单测 **14/14**、文档 E2E **1/1**、目标 Prettier 通过。
+-
+## 2026-10-20 LxSectionTitle 当前版窄屏与主题复验
+
+- **实现**：Demo 的 HUD 主题开关同步 `html.dark` 与 `html.lx-theme-hud`，卸载时仅在状态仍由 Demo 持有时恢复初始主题，避免覆盖宿主并发主题变化；`extra` 操作区允许收缩并在窄容器中完整换行。
+- **验证**：lx-ui `vue-tsc --noEmit`、生产构建（206 modules）、目标 Prettier 和差异检查通过；独立 Assessment B 覆盖 1280/420/375/320px × Light/HUD × normal/reduced-motion 共 16 视图，页面错误、失败请求、页面横溢出和 extra 越界均为 0。
+- **Impeccable 证据**：组件、Demo、文档 detector 的 JSON/stderr/退出码为合法 `[]`/空/`0`，仅表示静态零命中；B 报告与浏览器证据见 `tmp-sectiontitle-followup-b.md` 和 `tmp-sectiontitle-followup-b/`。Assessment A 评分 **32/40（Good）**，无 P0/P1，主题并发与嵌套容器建议已处理或记录为后续观察。
+- **边界**：默认 Vue3 E2E 配置本次因真实后端代理 `172.16.23.8:30844` 超时而未渲染页面，不能作为代码失败或通过证据；4177 独立浏览器矩阵才是本波页面证据。真实后端、权限中心、页面操作引导和 Element Plus 分批替换继续后置。

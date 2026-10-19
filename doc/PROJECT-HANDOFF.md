@@ -2885,3 +2885,10 @@
 - Demo 与 E2E 断言已将不存在的 `settings` 统一修正为已注册的 `setting`；不增加图标别名，不改变组件公开契约。
 - lx-ui 类型检查通过；SectionTitle 单测 **14/14**、文档 E2E **1/1**、目标格式检查通过。
 - 该修复只解除 Demo 类型门禁，不关闭 UI-10/UI-11，也不触发 Vue3 Element Plus 替换或权限任务。
+-
+## 2026-10-20 LxSectionTitle 当前版交接
+
+- 组件 `extra` 使用可收缩布局并保留 400px 以下分行；Demo HUD 主题同步文档根节点，卸载恢复逻辑不会覆盖宿主在生命周期内接管的主题状态。
+- Assessment B 独立证据见 `tmp-sectiontitle-followup-b.md` 与 `tmp-sectiontitle-followup-b/`：1280/420/375/320px、Light/HUD、normal/reduced-motion 共 16 视图，页面错误、失败请求、页面横溢出和操作越界均为 0；detector 三件套均为 `[]`/空/0，未单独解释为通过。
+- Assessment A **32/40（Good）**，P0/P1 为 0；其主题并发竞争建议已在卸载恢复中加入状态所有权判断。默认 Vue3 E2E 因真实后端代理超时未形成页面证据，需使用 lx-ui 4177 文档服务或专用 Mock 配置复验。
+- 下一步：按 UI-10 继续处理剩余组件的正式双路 Critique；完成组件库门禁后再替换 Vue3 Element Plus。权限、真实后端和页面引导仍后置。

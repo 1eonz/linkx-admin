@@ -811,3 +811,9 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - `linkx-fe/src/components/LxSectionTitle/demo/basic.vue` 使用注册表中的 `setting` 图标；对应 SectionTitle 文档 E2E 断言已同步。
 - 类型检查、单测 **14/14** 和文档 E2E **1/1** 通过；组件 API、业务页面和权限边界不变。
+-
+## 2026-10-20 LxSectionTitle 当前版证据
+
+- `linkx-fe/src/components/LxSectionTitle/` 已覆盖标题、标签、extra 操作区的窄屏收缩与 HUD 主题生命周期；420/375/320px 下操作按钮分行且不越界。
+- 独立 B 证据位于 `tmp-sectiontitle-followup-b.md` 和 `tmp-sectiontitle-followup-b/`，detector JSON/stderr/退出码为 `[]`/空/0；该结果与浏览器矩阵结合使用，不能把静态空数组单独当作 Critique 通过。
+- Vue3 宿主 E2E 默认代理本次因真实后端不可达而失败，未改变组件结论；后续仍需用专用 Mock/组件文档配置做宿主组合回归。
