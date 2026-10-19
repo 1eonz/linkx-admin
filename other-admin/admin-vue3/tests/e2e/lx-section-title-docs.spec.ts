@@ -57,7 +57,7 @@ test.describe('LxSectionTitle 文档示例', () => {
     });
     await expect(page.getByTestId('variant-dashed').locator('.lx-tag--success')).toBeVisible();
     await expect(
-      page.getByTestId('variant-dashed').locator('.lx-section-title__leading [data-icon-name="settings"]'),
+      page.getByTestId('variant-dashed').locator('.lx-section-title__leading [data-icon-name="setting"]'),
     ).toBeVisible();
     await expect(
       page.getByTestId('variant-dashed').locator('.lx-section-title__leading [data-icon-name="link"]'),

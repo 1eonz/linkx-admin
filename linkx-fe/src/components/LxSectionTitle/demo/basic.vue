@@ -56,7 +56,7 @@ const lastAction = ref('标题仅负责分组和说明，不加载业务数据�
         tag-type="success"
       >
         <template #leading>
-          <LxIcon name="settings" :size="16" aria-label="接口设置" />
+          <LxIcon name="setting" :size="16" aria-label="接口设置" />
         </template>
         <template #extra>
           <button
