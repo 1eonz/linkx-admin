@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxPagination Assessment B 额度阻塞记录
+
+- **行为状态**：`LxPagination` 单测 **7/7**、4177 文档 Playwright **3/3** 已通过；当前没有新的可复现组件行为故障。
+- **审查状态**：Assessment B 评估代理返回 HTTP **403 Forbidden**（预扣费额度不足），本次没有生成独立 B 报告；不能把该次失败、历史 detector `[]` 或已有浏览器回归误记为正式 Critique 通过。
+- **处理**：保留组件严格 UI-10 行开放，资源可用后重新执行 detector 三件套、Light/HUD 浏览器证据、snapshot/trend，并核对退出码与 stderr。
+- **不受影响**：不修改组件 API、宿主请求链或迁移状态；真实分页接口、权限源和 Vue3 Element Plus 替换继续按原顺序后置。
+
 ## 2026-10-19 LxDynamicForm 当前版行为验证复核
 
 - **验证**：`other-admin/admin-vue3/tests/unit/lx-dynamic-form.test.ts` **30/30**；`lx-dynamic-form-docs.spec.ts` **14/14**；`linkx-fe` `pnpm typecheck` 通过。覆盖 schema 类型渲染、受控值回写、密码校验与 ARIA、单图/多图上传、日期范围、远程查询取消与迟到响应、失败恢复、自适应列和窄屏触控。

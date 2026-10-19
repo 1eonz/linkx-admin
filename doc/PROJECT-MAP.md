@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxPagination 审查资源阻塞
+
+- `linkx-fe/src/components/LxPagination/` 当前行为证据仍为单测 7/7、文档 E2E 3/3。
+- 独立 Assessment B 因评估服务返回 HTTP 403 额度错误未生成报告；UI-10 严格矩阵保持开放，不能以静态 `[]` 或已有行为测试替代正式 Critique。
+
 ## 2026-10-19 LxSectionTitle Demo 契约回归
 
 - `linkx-fe/src/components/LxSectionTitle/demo/basic.vue` 现在以 `LxIcon` 展示自定义 `leading`，覆盖 `leading` 优先于 `icon` 的公开契约；文档入口仍为 `/components/lxsectiontitle`。

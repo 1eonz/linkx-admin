@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxPagination Assessment B 待重跑
+
+- 组件/适配器单测 7/7、4177 文档 E2E 3/3 已通过。
+- 独立 Assessment B 本轮因评估代理 HTTP 403（额度不足）失败，正式 Impeccable A/B、overlay 和 snapshot/trend 仍是待办；不得将失败视为组件缺陷或审查通过。
+
 ## 2026-10-19 LxDynamicForm 当前版行为复验
 
 - lx-ui DynamicForm 当前版单测 **30/30**、4177 文档 E2E **14/14**、库类型检查通过；组件行为覆盖不等于 Vue3 业务页面已接入。

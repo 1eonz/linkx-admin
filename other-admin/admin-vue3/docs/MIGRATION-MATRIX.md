@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-20 LxPagination 迁移门禁
+
+- 组件行为和文档 Demo 当前可供宿主复用，单测 7/7、文档 E2E 3/3；`change(page, pageSize)`、`autoReset`、`autoScroll` 语义未改变。
+- Assessment B 因评估服务 HTTP 403 额度不足未完成，不能关闭组件视觉门禁；业务分页页面仍需逐页补空/失败/取消/权限不足和真实 API 证据。
+
 ## 2026-10-19 DynamicForm 行为证据更新
 
 - `LxDynamicForm` 当前版单测 **30/30**、文档 E2E **14/14**、lx-ui typecheck 通过；覆盖字段 renderer、密码/ARIA、上传、日期范围、远程竞态和响应式列。
