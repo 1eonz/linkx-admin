@@ -19,6 +19,11 @@
 - **验证**：`auth-store.test.ts`、`auth-img.test.ts`、`business-migration.test.ts` 合计 **21/21**；源码核对确认业务 API 仍使用 `.then().catch().finally()`。
 - **仍开放**：页面级 Mock 的重复提交/权限不足/取消/失败组合和真实后端联调；这些不能由单元测试替代。
 
+## 2026-10-20 评估产物忽略规则
+
+- `.pnpm-store/` 与 `.impeccable/` 已有忽略规则；本次补充 `.impeccable-*`，覆盖 detector JSON、stderr、退出码、截图和临时浏览器证据文件。
+- 正式审查结论仍必须同步到计划、审计和交接文档；忽略规则只防止临时产物进入提交，不删除现有工作区文件。
+
 ## 2026-10-20 LxMetricCard 只读语义与标题运行时收口
 
 - **问题与实现**：纯展示指标卡移除桌面 hover 抬升，避免制造可点击暗示；长趋势说明最多显示两行，并通过 `title`/`aria-label` 保留完整文本；指标值保留 `title` 提示。同步修复文档站直接编译路径中 `headingLevel` 未从 `props` 读取的问题，避免标题节点退化为注释而导致 Demo 内容不可见。
