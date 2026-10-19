@@ -9,6 +9,7 @@
  */
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue';
 
 import {
@@ -210,7 +211,7 @@ onMounted(() => {
         </el-col>
         <el-col :span="12">
           <el-form-item label="IP 地址" prop="ip">
-            <el-input v-model="form.ip" placeholder="如 192.168.1.100" />
+            <LxInput v-model="form.ip" placeholder="如 192.168.1.100" />
           </el-form-item>
         </el-col>
       </el-row>
@@ -222,14 +223,14 @@ onMounted(() => {
         </el-col>
         <el-col :span="12">
           <el-form-item label="WSS 地址" prop="wssUrl">
-            <el-input v-model="form.wssUrl" placeholder="如 wss://192.168.1.100/ws" />
+            <LxInput v-model="form.wssUrl" placeholder="如 wss://192.168.1.100/ws" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row :gutter="16">
         <el-col :span="12">
           <el-form-item label="用户名" prop="username">
-            <el-input v-model="form.username" placeholder="请输入用户名" />
+            <LxInput v-model="form.username" placeholder="请输入用户名" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -247,7 +248,7 @@ onMounted(() => {
       <el-row :gutter="16">
         <el-col :span="12">
           <el-form-item label="关联组织">
-            <el-input
+            <LxInput
               :model-value="form.departmentName"
               placeholder="请选择组织"
               readonly
@@ -257,12 +258,12 @@ onMounted(() => {
                 <el-button @click="openTreeDialog('dept')">选择</el-button>
                 <el-button v-if="form.departmentId" @click="clearDept">清除</el-button>
               </template>
-            </el-input>
+            </LxInput>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="摄像头层级">
-            <el-input
+            <LxInput
               :model-value="form.cameraLevelName"
               placeholder="请选择摄像头层级"
               readonly
@@ -272,7 +273,7 @@ onMounted(() => {
                 <el-button @click="openTreeDialog('camera')">选择</el-button>
                 <el-button v-if="form.cameraLevelId" @click="clearCamera">清除</el-button>
               </template>
-            </el-input>
+            </LxInput>
           </el-form-item>
         </el-col>
       </el-row>
@@ -292,7 +293,7 @@ onMounted(() => {
       :close-on-click-modal="false"
     >
       <div v-loading="treeLoading" class="tree-select-modal">
-        <el-input v-model="treeFilter" placeholder="搜索节点" clearable size="default" style="margin-bottom: 8px" />
+        <LxInput v-model="treeFilter" placeholder="搜索节点" clearable style="margin-bottom: 8px" />
         <div class="tree-container">
           <el-tree
             ref="treeRef"
