@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LxIcon } from 'lx-ui';
+import { LxIcon, LxInput } from 'lx-ui';
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
@@ -119,11 +119,11 @@ const activeMenu = computed(() => {
     <Logo />
     <div class="sidebar-scroll">
       <div v-if="appStore.sidebar.opened" class="sidebar-menu-search">
-        <el-input v-model="menuSearch" aria-label="搜索菜单" clearable placeholder="搜索菜单" size="small">
+        <LxInput v-model="menuSearch" aria-label="搜索菜单" clearable placeholder="搜索菜单" size="sm">
           <template #prefix>
             <LxIcon name="search" :size="16" />
           </template>
-        </el-input>
+        </LxInput>
         <el-button
           class="sidebar-menu-directory-trigger"
           text
@@ -179,7 +179,7 @@ const activeMenu = computed(() => {
       top="5vh"
       destroy-on-close
     >
-      <el-input v-model="directorySearch" aria-label="筛选全部菜单" clearable placeholder="筛选菜单" />
+      <LxInput v-model="directorySearch" aria-label="筛选全部菜单" clearable placeholder="筛选菜单" />
       <nav aria-label="全部菜单目录" class="sidebar-menu-directory-groups">
         <section v-for="group in visibleMenuDirectoryGroups" :key="group.title" class="sidebar-menu-directory-group">
           <h3>{{ group.title }}</h3>
