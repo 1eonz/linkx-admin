@@ -16,10 +16,32 @@
   font-weight: 500;
 }
 
+/* 接管 EP 图标槽的行盒，避免字体基线或 EP 版本差异让图标视觉偏移。 */
+.lx-btn.el-button > .el-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--lx-btn-icon-size-md);
+  height: var(--lx-btn-icon-size-md);
+  margin: 0;
+  line-height: 0;
+}
+
+.lx-btn.el-button > .el-icon > .lx-icon {
+  display: block;
+  line-height: 0;
+}
+
 .lx-btn--sm.el-button {
   height: var(--lx-btn-height-sm);
   padding: 0 var(--lx-btn-padding-x-sm);
   font-size: 12px;
+}
+
+.lx-btn--sm.el-button > .el-icon {
+  width: var(--lx-btn-icon-size-sm);
+  height: var(--lx-btn-icon-size-sm);
 }
 
 .lx-btn--lg.el-button {
@@ -27,6 +49,11 @@
   padding: 0 var(--lx-btn-padding-x-lg);
   font-size: 14px;
   font-weight: 600;
+}
+
+.lx-btn--lg.el-button > .el-icon {
+  width: var(--lx-btn-icon-size-lg);
+  height: var(--lx-btn-icon-size-lg);
 }
 
 /* 块级撑满 */
@@ -184,6 +211,15 @@
   width: var(--lx-btn-height-md);
   height: var(--lx-btn-height-md);
   padding-inline: 0;
+}
+
+.lx-btn.el-button.lx-btn--icon-only > .el-icon {
+  margin: 0;
+}
+
+/* 纯图标 tooltip 使用虚拟触发空节点；不能继承 EP 图标后的文字间距，否则会把图标推离中心。 */
+.lx-btn.el-button.lx-btn--icon-only > .el-icon + span {
+  margin-left: 0;
 }
 
 .lx-btn.el-button.lx-btn--icon-only.lx-btn--sm:not(.lx-btn--block) {

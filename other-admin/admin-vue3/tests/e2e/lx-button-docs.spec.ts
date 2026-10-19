@@ -659,6 +659,23 @@ test.describe('lx-ui 基础按钮设计回归', () => {
       const textIconBounds = await textIcon.boundingBox();
       expect(textIconBounds?.height, `${size} 档文字形态纯图标高度`).toBe(height);
       expect(textIconBounds?.width, `${size} 档文字形态纯图标宽度`).toBe(height);
+
+      for (const [button, label] of [
+        [refresh, '纯图标按钮'],
+        [textIcon, '文字形态纯图标按钮'],
+      ] as const) {
+        const buttonBounds = await button.boundingBox();
+        const innerIconBounds = await button.locator('.lx-icon').boundingBox();
+        if (!buttonBounds || !innerIconBounds) throw new Error(`${label}缺少可见边界`);
+        expect(
+          Math.abs(innerIconBounds.x + innerIconBounds.width / 2 - (buttonBounds.x + buttonBounds.width / 2)),
+          `${size} 档${label}水平居中`,
+        ).toBeLessThanOrEqual(0.5);
+        expect(
+          Math.abs(innerIconBounds.y + innerIconBounds.height / 2 - (buttonBounds.y + buttonBounds.height / 2)),
+          `${size} 档${label}垂直居中`,
+        ).toBeLessThanOrEqual(0.5);
+      }
     }
 
     const submit = demo.getByRole('button', { name: '确认下发指令', exact: true });
