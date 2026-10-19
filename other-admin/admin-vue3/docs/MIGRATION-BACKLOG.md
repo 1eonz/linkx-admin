@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxPagination P1 修复与迁移边界
+
+- Vue3 宿主可通过 `ariaLabel` 区分多个分页器；窄屏直接复用 lx-ui 的 44px 命中区，不在页面复制样式。
+- 迁移适配继续保留 `change(page, pageSize)`、`autoReset`、`autoScroll`；默认 10/不含 jumper 与设计目标冲突待产品决策，真实 loading/失败/重试仍由宿主提供。
+
 ## 2026-10-20 LxPagination Assessment B 当前版
 
 - 组件行为证据已覆盖主题、窄屏局部滚动和键盘分页，Vue3 页面迁移应复用 `LxPagination` 的 `change(page, pageSize)`、`autoReset`、`autoScroll` 契约。

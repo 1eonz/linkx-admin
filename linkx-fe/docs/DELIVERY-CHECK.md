@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxPagination P1 修复与默认契约
+
+- [x] 新增 `ariaLabel` 导航名称，语义 `nav` 可区分同页多个分页器。
+- [x] 窄屏 prev/next/页码/条数触发器命中区至少 44px；单测 **7/7**、文档 E2E **3/3**、typecheck 和目标 Prettier 通过。
+- [x] Assessment A **27/40**；Assessment B detector 为合法 `[]`/空 stderr/`0`，6 个浏览器视图无运行时错误和页面横溢出。
+- [ ] 设计默认 20 条/含 jumper 与兼容默认 10 条/不含 jumper 的冲突待产品决策；正式 snapshot/trend、真实宿主状态和 UI-10/UI-11 未关闭。
+
 ## 2026-10-20 LxPagination Assessment B 当前版
 
 - [x] 三目标 detector 为合法 `[]`/空 stderr/退出码 `0`；6 个 Light/HUD、桌面/窄屏/reduced-motion 浏览器视图完成。

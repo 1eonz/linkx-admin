@@ -149,7 +149,7 @@
 
 ### 2.2 LxPagination 分页 ✅｜V2 26 处封装
 
-**样式**：右对齐（列表页底部，距表格 12px）；布局 `total, sizes, prev, pager, next, jumper`；按钮 28px 圆角 4px；激活页主色；`pageSizes [10,20,50,100]` 默认 20。
+**样式**：右对齐（列表页底部，距表格 12px）；设计目标布局为 `total, sizes, prev, pager, next, jumper`；按钮 28px 圆角 4px；激活页主色；`pageSizes [10,20,50,100]`。当前实现为兼容现有宿主默认 `pageSize=10`、不含 `jumper`，需产品确认后再统一到设计目标，避免无意改变分页契约。
 
 **交互**：
 

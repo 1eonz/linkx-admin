@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxPagination P1 修复与契约状态
+
+- `linkx-fe/src/components/LxPagination/` 新增可配置导航名称，窄屏操作命中区至少 44px；当前回归 **7/7 + 3/3** 通过。
+- 设计目标默认值与现有兼容默认值仍有冲突，已记录为待产品决策；在决策前不改变宿主分页行为。正式 UI-10 仍开放。
+
 ## 2026-10-20 LxPagination Assessment B 当前版证据
 
 - 回归入口：`linkx-fe/src/components/LxPagination/`、`other-admin/admin-vue3/tests/e2e/lx-pagination-docs.spec.ts`。

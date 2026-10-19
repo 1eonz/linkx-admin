@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxPagination P1 修复与默认值冲突
+
+- **改动**：`LxPagination` 新增 `ariaLabel`，由语义 `nav` 提供分页导航名称；移动断点将 prev/next/页码/条数触发器命中区提升到 44px，桌面仍保持 28px 紧凑视觉。
+- **验证**：单测 **7/7**、文档 E2E **3/3**、lx-ui 类型检查和目标 Prettier 通过；现有业务调用均显式传入分页大小，未改变页面请求参数。
+- **评审**：A **27/40（Acceptable）**；B 三目标 detector 为合法 `[]`/空/`0`，独立 4179 服务 6 视图无页面错误、失败请求和页面横溢出。overlay 命中均需归因，正式 snapshot/trend 尚未完成。
+- **阻塞**：设计规范建议默认 20 条并含 jumper，当前实现兼容默认 10 条且不含 jumper；已更新规范说明，待产品确认后统一，不臆改默认值。加载/失败/重试状态继续由宿主组合。
+
 ## [2026-10-20] LxPagination Assessment B 当前版证据
 
 - **静态**：三个目标 detector 均输出合法 `[]`，stderr 为空，退出码 `0`；原始文件保存在 `tmp-pagination-assessment-b-current/`。

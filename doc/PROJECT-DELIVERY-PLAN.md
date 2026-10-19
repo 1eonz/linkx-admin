@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxPagination P1 修复与默认契约阻塞
+
+- **修复**：新增 `ariaLabel`（默认“分页导航”）并用语义 `nav` 包裹分页器；窄屏分页按钮、页码和条数触发器的实际命中区提升到至少 44px，桌面紧凑尺寸保持不变。
+- **验证**：单测 **7/7**、文档 E2E **3/3**、lx-ui `vue-tsc --noEmit`、目标 Prettier 通过；E2E 覆盖自定义导航名称和 375px 按钮几何。
+- **待决策**：设计规范建议默认 20 条且包含 jumper，当前实现为兼容既有宿主保持 10 条且不含 jumper；该冲突已在 `COMPONENT-STYLE-INTERACTION.md` 明确，待产品确认后再改默认值。
+- **审查边界**：Assessment A **27/40（Acceptable）**；Assessment B 三目标 detector 为合法 `[]`/空 stderr/`0`，6 个浏览器视图无页面错误、失败请求和页面横溢出。独立 snapshot/trend 尚未形成，UI-10 不关闭。
+
 ## 2026-10-20 LxPagination Assessment B 当前版证据
 
 - **静态证据**：组件、Demo、中文文档 detector 均为合法 JSON `[]`，stderr 为空，退出码 `0`；`[]` 只表示静态规则零命中。
