@@ -1,5 +1,11 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-20 LxEmpty 宿主空态迁移完成
+
+- 5 个剩余复杂空态已改用 `LxEmpty`：保留表格 `#empty` 插槽、条件渲染、`image-size="80"`、自定义 class 和原有业务文案。
+- Vue3 源码直接使用 `el-empty` 数量由 5 降为 **0**；类型、目标格式和 Mock 全菜单回归需在本波交付记录中核对。
+- 组件库和宿主仍保留 Element Plus 作为传递/兼容依赖；UI-10/UI-11 和删除门禁未完成前不得删除。
+
 ## 2026-10-17 LxCascader 与 LxTreeSelect 组件门禁
 
 - lx-ui 组件、Demo、中文文档和宿主 Mock 浏览器证据已完成；定向单测 **32/32**、文档 E2E **10/10**。
@@ -84,14 +90,14 @@ Vue3 目前有 103 个 Vue/TS 源文件直接从 element-plus 包导入组件、
 
 这些组件可以先逐页核对 props、事件、插槽、实例方法和样式，再替换为对应 Lx 组件。
 
-`LxEmpty` 已补齐 `description`、`image-size` 到 `imageSize` 的显示映射和根节点 `class` 透传，并通过 5 项单测和文档 Playwright 1/1。Vue3 当前 15 处 `el-empty` 尚未替换；替换时继续核对每页描述、尺寸和实际插槽，不将库级验收当作宿主完成。
+`LxEmpty` 已补齐 `description`、`image-size` 到 `imageSize` 的显示映射和根节点 `class` 透传，并通过 5 项单测和文档 Playwright 1/1。Vue3 当前已无直接 `el-empty`；宿主迁移仍需继续核对每页空/加载/失败/权限状态，不将库级验收当作业务完成。
 
 | Vue3 当前标签                          |     次数 | lx-ui 候选                                                             |
 | -------------------------------------- | -------: | ---------------------------------------------------------------------- |
 | el-descriptions / el-descriptions-item |   9 / 33 | LxDescriptions                                                         |
 | el-dialog                              |       57 | LxDialog                                                               |
 | el-drawer                              |        1 | LxDrawer                                                               |
-| el-empty                               |        5 | LxEmpty                                                                |
+| el-empty                               |        0 | LxEmpty                                                                |
 | el-form / el-form-item                 | 58 / 278 | LxForm / LxFormItem                                                    |
 | el-pagination                          |        0 | LxPagination                                                           |
 | el-table / el-table-column             |  10 / 73 | LxProTable；宿主 ProTable 已使用该组件，但页面中的原始表格仍需逐页迁移 |
@@ -103,7 +109,7 @@ Vue3 目前有 103 个 Vue/TS 源文件直接从 element-plus 包导入组件、
 
 Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过适配器单测验证旧 `page/limit/pagination` 事件映射、`hidden`、layout/background 和宿主禁用自动滚动。当前源码盘点显示业务页面直接使用 `el-pagination` 的数量为 **0**；仅共享适配器内部保留分页组件适配。页面的真实接口、空结果、失败恢复、权限不足和嵌套滚动容器仍需在 Mock/真实契约门禁中继续验证，不能把适配器已接入扩大解释为所有分页业务已完成验收。
 
-首批 6 个纯占位空态页面和第二批 4 个条件空态页面已改用 `LxEmpty`。这些页面没有空态专用 props、事件或插槽契约，替换后通过 Vue3 类型检查和 Mock 全菜单回归；剩余 5 个 `el-empty` 用法包含更复杂的条件、插槽或业务状态，必须逐页保留原有行为后再迁移。
+首批 6 个纯占位空态、第二批 4 个条件空态以及最后 5 个复杂空态页面均已改用 `LxEmpty`。最后一批保留了表格空插槽、条件表达式、`image-size` 和页面 class；后续仍需补齐各页面的空/加载/失败/权限状态回归，不能把标签归零解释为业务验收完成。
 
 ### 仅部分场景适用的封装
 

@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 Vue3 LxEmpty 宿主替换完成
+
+- **实现**：完成最后 5 处复杂空态替换，覆盖北向应用表格空插槽、H5 标签表格、客户端详情数据概览、南向字段映射新增/编辑弹窗；保留原有条件、文案、`image-size="80"`、class 和业务列表逻辑。
+- **迁移事实**：Vue3 `src/views` 直接使用 `el-empty` 数量由 5 降为 **0**，但不代表所有页面空/加载/失败/权限状态已完成业务验收。
+- **验证要求**：本波继续执行 Vue3 类型检查、目标文件 Prettier、Mock 全菜单回归，并在交接中记录真实执行结果；组件库 UI-10/UI-11 和 Element Plus 删除门禁仍开放。
+- **下一入口**：继续按矩阵选择已有 `lx-ui` 封装且可独立回归的 Element Plus 使用点，页面权限和真实后端联调继续后置。
+
 ## 2026-10-20 Vue3 分页迁移矩阵事实校正
 
 - **盘点**：重新扫描 `other-admin/admin-vue3/src` 后，业务页面直接使用 `el-pagination` 的数量为 **0**；共享 `src/components/Pagination` 已通过 `LxPagination` 适配旧的 `page/limit/pagination` 契约。

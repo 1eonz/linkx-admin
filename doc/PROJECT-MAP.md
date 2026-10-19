@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxEmpty 宿主空态迁移完成
+
+- `other-admin/admin-vue3/src/views` 已无直接 `<el-empty>`；最后 5 处复杂空态迁移到 `LxEmpty`，保留表格空插槽、条件、尺寸和 class。
+- 验证入口为 Vue3 类型检查、目标文件格式检查和 Mock 全菜单回归；真实接口状态、权限不足和失败恢复仍由页面迁移台账跟踪。
+
 ## 2026-10-20 LxPagination P1 修复与契约状态
 
 - `linkx-fe/src/components/LxPagination/` 新增可配置导航名称，窄屏操作命中区至少 44px；当前回归 **7/7 + 3/3** 通过。
