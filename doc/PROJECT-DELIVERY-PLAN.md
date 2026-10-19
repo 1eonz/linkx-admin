@@ -1,5 +1,11 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-19 LxInput 前后缀内容轨道修复
+
+- **问题**：`prefix/suffix` 内部槽位被强制设置为完整控件高度，而 `el-input__wrapper` 使用 `border-box` 后内容区实际少上下各 1px，导致图标/文字槽位与输入内容视觉不齐。
+- **实现**：新增 `--lx-input-content-height`，将内部前后缀容器和槽位绑定到 `--lx-input-track-height - 2px`；外层 wrapper、根节点、`prepend/append` 和窄屏触控外框规则保持不变。
+- **验证**：定向 Playwright **1/1**、`lx-input.test.ts` **13/13**、lx-ui typecheck、206 modules 构建、目标 Prettier 和 `git diff --check` 通过。Impeccable A/B 需继续保留独立浏览器证据，静态 `[]` 不单独作为通过结论。
+
 ## 2026-10-19 LxDescriptions 长值展开状态修复
 
 - **问题**：长值按钮获得焦点时会无条件显示全文，收起后的 `aria-expanded=false` 与视觉状态不一致；长状态的通用深层样式还会覆盖收起态省略规则。

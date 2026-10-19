@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-19 LxInput 前后缀内容轨道修复
+
+- 状态：实现与定向回归完成，正式 A/B 视觉审查待独立证据归档。
+- 修复：`prefix/suffix` 及内部槽位由完整外框高度改为扣除上下描边后的内容轨道；`prepend/append` 仍使用完整控件高度。
+- 证据：E2E **1/1**、单测 **13/13**、typecheck/build 通过；静态 detector 的 `[]` 不单独作为审查通过。
+
 ## 2026-10-18 LxDescriptions/LxCodeSlot 双路审查与动态标签回归
 
 - `LxCodeSlot` 现在在初始渲染和组件更新时同步宿主 `aria-label`；`LxDescriptions` 新增字段标签变化回归，单测 **10/10**，文档 E2E **3/3**，CodeSlot E2E **1/1**。

@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-19 LxInput 前后缀内容轨道对齐
+
+- 入口：`linkx-fe/src/components/LxInput/style.css`；几何回归：`other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`。
+- `prefix/suffix` 内部槽位使用 `--lx-input-content-height`（外框高度减 2px），与真实输入内容轨道对齐；外层 wrapper、`prepend/append` 和窄屏触控高度保持原契约。
+- 定向 E2E **1/1**、单测 **13/13**、类型检查、构建、格式和差异检查通过；正式 Impeccable A/B 与 UI-10 关闭仍开放。
+
 ## 2026-10-19 LxSectionTitle 窄屏布局修复
 
 - 入口：`linkx-fe/src/components/LxSectionTitle/index.vue`；文档回归：`other-admin/admin-vue3/tests/e2e/lx-section-title-docs.spec.ts`。

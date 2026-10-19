@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-19] LxInput 前后缀内容轨道对齐交接
+
+- **改动**：修复 wrapper 内部 `prefix/suffix` 槽位比真实输入内容多 2px 的问题；新增 `--lx-input-content-height`，sm/md/lg 使用 26/30/38px，窄屏使用 42px。外层输入框和 `prepend/append` 仍为完整 28/32/40px 或 44px。
+- **验证**：复合前后缀 E2E **1/1**、单测 **13/13**、typecheck/build、目标格式和 `git diff --check` 通过。
+- **边界**：未改变 props、事件、表单校验和 Promise 链式风格；Impeccable 正式 A/B、代码审查及 UI-10 关闭数仍需按证据门禁处理。
+
 ## [2026-10-19] LxSectionTitle 窄屏布局修复交接
 
 - **问题与实现**：400px 及以下标题和 `extra` 操作区改为两行布局，标题区完整占据第一行，操作区右对齐并保留宿主操作的 44px 触控目标；长标题仍按当前设计换行，不改变 Props、插槽或标题层级契约。

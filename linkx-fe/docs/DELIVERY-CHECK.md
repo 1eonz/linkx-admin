@@ -1,5 +1,10 @@
 # lx-ui 交付核查
 
+## 2026-10-19 LxInput 前后缀内容轨道对齐
+
+- `prefix/suffix` 与内部槽位改用 `--lx-input-content-height`，扣除 wrapper 上下边框，避免槽位越过描边后造成视觉高度不一致；`prepend/append` 与输入外框继续保留完整控件高度。
+- 复合前后缀 Playwright **1/1**、LxInput 单测 **13/13**、typecheck/build、目标格式和差异检查通过。静态 detector 或 `[]` 不单独构成 Impeccable 通过。
+
 ## 2026-10-19 LxSectionTitle 窄屏 extra 布局修复
 
 - 窄屏标题与 `extra` 操作区改为两行布局，长标题完整换行，操作区不再与标题争用同一行；操作目标继续由宿主 Demo 保持 44px。

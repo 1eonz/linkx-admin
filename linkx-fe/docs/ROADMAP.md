@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-19 LxInput 前后缀内容轨道对齐
+
+- 修复 `prefix/suffix` 及内部槽位被错误拉伸到完整控件高度的问题：wrapper 保留 `sm/md/lg` 与窄屏 44px 外框，内部槽位改用扣除上下 1px 描边后的内容轨道（26/30/38px，窄屏 42px），与真实输入内容行高一致。
+- 定向 Playwright **1/1**、LxInput 单测 **13/13**、lx-ui typecheck、206 modules 生产构建、目标 Prettier 和 `git diff --check` 通过；后续 Impeccable A/B 仍按独立证据门禁执行。
+
 ## 2026-10-19 LxSectionTitle 窄屏 extra 布局修复
 
 - 窄屏（400px 及以下）将标题区与 `extra` 操作区拆为两行，长标题继续换行，操作区右对齐并保留宿主 44px 触控目标，避免标题与操作互相挤压。
