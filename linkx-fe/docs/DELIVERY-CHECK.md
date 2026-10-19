@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxInput 边框专项复跑
+
+- [x] 复合前后缀与前后缀/密码/透传边框 Playwright 用例 **2/2** 通过。
+- [x] 计算样式确认真实 `1px` 外边框及 `--lx-control-border` 令牌生效；不在 Demo 重复补边框。
+- [ ] 正式 Impeccable A/B、overlay、snapshot/trend 和 UI-10/UI-11 仍未关闭。
+
 ## 2026-10-20 LxFormErrorBanner 空内容播报语义
 
 - [x] 仅有标题、说明或默认插槽时输出 `role="alert"` 与 assertive live region；空内容不输出播报角色和属性。

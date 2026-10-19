@@ -1,5 +1,10 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxInput 边框专项复跑
+
+- **验证**：运行 `lx-base-controls-docs.spec.ts` 的复合前后缀及前后缀/密码/透传边框用例，结果 **2/2** 通过。
+- **结论**：当前边框由 `LxInput` 组件的 `--lx-control-border` 和复合根节点规则提供，不是 Demo 缺少样式。正式 Impeccable A/B、UI-10/UI-11 和真实后端联调仍开放。
+
 ## [2026-10-20] LxFormErrorBanner 空内容播报语义收口
 
 - **改动**：根节点 `role` 改为按内容条件输出；空内容同时移除 `aria-live` 与 `aria-atomic`，避免读屏器把空横幅当作紧急区域。

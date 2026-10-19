@@ -1,5 +1,10 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxInput 边框专项复跑
+
+- **结果**：重新运行复合前后缀及前后缀/密码/透传边框用例，当前结果为 **2/2** 通过。
+- **结论**：运行时边框仍由 `LxInput` 的 `--lx-control-border` 和复合根节点规则提供；无需在 Demo 增加重复样式。该证据不关闭正式 Impeccable A/B、UI-10 或 UI-11。
+
 ## 2026-10-20 LxFormErrorBanner 空内容播报语义收口
 
 - **实现**：`LxFormErrorBanner` 仅在标题、说明或默认插槽有内容时输出 `role="alert"`、`aria-live="assertive"` 和 `aria-atomic="true"`；空内容不再暴露紧急播报语义。

@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxInput 边框专项复跑
+
+- 组件级回归 **2/2** 通过，确认前后缀、密码和透传场景的边框由 lx-ui 组件提供。
+- 页面迁移继续复用 `LxInput`，不在业务 Demo 或页面层复制边框样式；正式 UI-10/UI-11 门禁完成前不删除 Vue3 `element-plus`。
+
 ## 2026-10-20 LxFormErrorBanner 空内容语义收口
 
 - [x] 空内容时不再输出 `role="alert"`、`aria-live` 或 `aria-atomic`；有内容时的阻断播报契约保持。

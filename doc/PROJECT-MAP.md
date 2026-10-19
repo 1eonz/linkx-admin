@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxInput 边框专项复跑
+
+- 入口：`linkx-fe/src/components/LxInput/`；回归位于 `other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`。
+- 证据：复合前后缀和前后缀/密码/透传边框场景 **2/2** 通过，边框仍由组件样式令牌提供；不在 Demo 层复制边框规则。
+
 ## 2026-10-20 LxFormErrorBanner 空内容语义
 
 - 有标题、说明或默认插槽时组件提供 `role="alert"` 和 assertive live region；空内容时不输出播报角色与属性，避免空紧急区域进入辅助技术树。
