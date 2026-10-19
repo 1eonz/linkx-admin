@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 SearchBar 默认输入迁移
+
+- **实现**：共享 `SearchBar` 的默认关键字输入由 `el-input` 改用 `LxInput`；保留受控 `searchKey`、清空、回车搜索、前缀图标和事件转发。
+- **验证**：目标 Prettier/ESLint、Vue3 `vue-tsc --noEmit`、SearchBar 适配器单测 **2/2** 和隔离 Mock 全菜单 Playwright **10/10** 通过。
+- **边界**：自定义 `filters` 插槽仍由页面负责，未修改搜索请求、权限或 Promise 链；Element Plus 删除门禁和其余页面输入框继续按矩阵推进。
+- **下一入口**：继续处理页面级低风险 `el-input`，先核对密码、前后缀、textarea、表单校验和 `v-model` 类型契约。
+
 ## 2026-10-20 LxSwitch 剩余宿主替换完成
 
 - **实现**：统一通信设备类型、ICP 子部门筛选、警务上报编辑/列表、协同成员、第三方应用上架共 6 处 `el-switch` 改用 `LxSwitch`；透传 `active-value/inactive-value`、`before-change`、`@change`、loading 和禁用契约。

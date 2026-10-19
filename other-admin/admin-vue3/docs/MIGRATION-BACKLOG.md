@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 SearchBar 默认输入迁移
+
+- [x] `src/components/SearchBar/index.vue` 默认 `el-input` 改用 `LxInput`，保留受控值、清空、回车和前缀插槽契约。
+- [x] 适配器单测 **2/2**、类型/格式/Lint 和隔离 Mock 全菜单 **10/10** 通过。
+- [ ] 页面级输入框仍需逐项核对密码、textarea、前后缀、表单校验和旧 `v-model` 类型，不机械替换。
+
 ## 2026-10-20 LxSwitch 剩余宿主替换完成
 
 - [x] 统一通信设备类型/ICP 筛选、警务上报编辑/列表、协同成员和第三方应用上架共 6 处开关改用 `LxSwitch`。

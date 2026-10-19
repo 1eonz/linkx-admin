@@ -1,5 +1,10 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-20 SearchBar 默认输入迁移
+
+- 共享 `SearchBar` 的默认关键字输入改用 `LxInput`，保留 `clearable`、回车、前缀图标和 `update:searchKey` 事件；自定义 filters 插槽不受影响。
+- 业务页面直接 `el-input` 计数减少 1；页面级输入仍需按类型、表单上下文、插槽和校验规则继续核对，不能据数量删除 `element-plus`。
+
 ## 2026-10-20 LxSwitch 宿主替换完成
 
 - 统一通信、警务上报、协同成员和第三方应用页面的剩余 6 个开关改用 `LxSwitch`；页面原有异步 `@change`、loading、失败回滚和 AppManage `before-change` 均保留。

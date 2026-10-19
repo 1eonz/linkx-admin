@@ -3092,3 +3092,9 @@
 - **验证**：`vue-tsc --noEmit`、六个目标文件 ESLint/Prettier、`git diff --check`、隔离 Mock Playwright **10/10** 通过；业务页面直接 `el-switch` 扫描为 **0**。
 - **边界**：没有删除 Vue3 `element-plus`，因为其他 Element Plus 控件及 lx-ui 内核仍依赖它；权限、真实后端、跨浏览器、正式 Impeccable 全库审查和页面引导仍按计划后置。
 - **下一步**：转入剩余 `el-input`、`el-select`、`el-dialog` 等矩阵项；组件迁移仍须保留中文文档、Promise 链 API 风格和页面原有业务契约。
+# 2026-10-20 SearchBar 默认输入迁移交接
+
+- **实现**：共享 `SearchBar` 默认关键字输入已由 `el-input` 改为 `LxInput`；保留 `searchKey` 受控更新、清空、回车搜索、前缀图标和自定义筛选插槽边界。
+- **验证**：目标 Prettier/ESLint、`vue-tsc --noEmit`、SearchBar 适配器单测 **2/2**、隔离 Mock 全菜单 Playwright **10/10** 通过。
+- **边界**：未改变页面搜索 API、权限或请求链；页面级密码/textarea/复合前后缀输入仍需按旧 props、校验和错误恢复逐项迁移。Element Plus 删除、正式 Impeccable 和真实后端门禁仍未完成。
+- **下一步**：继续选择低风险页面输入场景，迁移前补齐 Demo/Mock/表单上下文证据并保持中文文档和链式 API 风格。
