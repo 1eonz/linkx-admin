@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxInput 前后缀/密码/透传边框当前运行时复核
+
+- **复核结论**：问题属于 `LxInput` 组件样式层，不是 Demo 外壳。当前 4177 文档运行时中，案件编码复合输入、涉密核验密码输入、联系电话透传输入的 `.el-input__wrapper` 均计算为 `1px solid rgb(220, 223, 230)`；复合输入根节点也保留同样的连续外框。
+- **验证**：运行 `Input 前后缀、密码和透传场景保留可见外边框` Playwright 专项 **1/1** 通过；直接读取 `/components/lxinput` 页面计算样式确认普通 wrapper、复合根节点和 `--lx-control-border` 令牌均生效。Node/npm 弃用提示属于环境输出，不是页面或代码失败。
+- **处理建议**：若浏览器仍显示无边框，先硬刷新 `/components/lxinput`（或重启旧的 4177 Vite 进程）以清除旧 CSS/HMR 缓存；不在 Demo 中添加重复边框规则。
+- **边界**：本次是运行时复核，不改变 props、事件、插槽或 API 请求风格；正式 Impeccable A/B、overlay、snapshot/trend 和 UI-10 全库门禁仍开放。
+
 ## [2026-10-20] LxMetricCard 只读语义与标题运行时交接
 
 - **改动**：移除只读卡片桌面 hover 抬升；趋势文本改为两行截断并保留完整 `title`/`aria-label`，值保留完整 `title`；模板显式使用 `props.headingLevel`，修复 VitePress 直接编译时标题节点不渲染的问题。

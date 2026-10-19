@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxInput 边框运行时复核
+
+- [x] 4177 当前运行页面中，前后缀复合输入、密码输入和透传输入的 wrapper 均保持真实 `1px solid` 外边框；复合根节点继续提供连续外框。
+- [x] Playwright 边框专项 **1/1** 通过，并直接读取计算样式确认 `--lx-control-border` 令牌生效；该结论归因于组件样式，不在 Demo 重复添加边框。
+- [ ] 正式 Impeccable A/B、overlay、snapshot/trend 和 UI-10 全库门禁仍未关闭。
+
 ## 2026-10-20 LxMetricCard 只读语义与标题运行时
 
 - [x] 只读卡片不再通过 hover 阴影暗示可点击；趋势和值保留完整文本提示，窄卡趋势最多显示两行。
