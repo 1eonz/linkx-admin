@@ -1,9 +1,27 @@
 import { flushPromises, mount } from '@vue/test-utils';
-import { LxDynamicForm, type LxDynamicFormSlotProps, type LxUploadFile } from 'lx-ui';
+import { LxDynamicForm, type LxDynamicFormField, type LxDynamicFormSlotProps, type LxUploadFile } from 'lx-ui';
 import { describe, expect, it, vi } from 'vitest';
 import { h, nextTick } from 'vue';
 
 describe('LxDynamicForm', () => {
+  it('在开发环境提示重复 key、未知 type 和不支持的选项值', () => {
+    const warning = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const wrapper = mount(LxDynamicForm, {
+      props: {
+        fields: [
+          { key: 'mode', label: '模式', type: 'radio', options: [{ label: '对象', value: { id: 1 } }] },
+          { key: 'mode', label: '重复模式', type: 'unknown' as LxDynamicFormField['type'] },
+        ],
+      },
+    });
+
+    expect(warning).toHaveBeenCalledWith(expect.stringContaining('字段 key「mode」重复'));
+    expect(warning).toHaveBeenCalledWith(expect.stringContaining('未知 type「unknown」'));
+    expect(warning).toHaveBeenCalledWith(expect.stringContaining('radio 选项值类型「object」不会被渲染'));
+    warning.mockRestore();
+    wrapper.unmount();
+  });
+
   it('uses schema default values when the controlled model omits a field', () => {
     const wrapper = mount(LxDynamicForm, {
       props: {

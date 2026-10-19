@@ -88,6 +88,52 @@ const fieldComponents: Partial<Record<LxDynamicFormField['type'], Component>> =
     upload: LxDynamicFieldUpload,
   }
 
+let lastSchemaDiagnosticSignature = ''
+
+/**
+ * 仅在开发环境提示 schema 配置错误，保留现有渲染行为以兼容线上调用方。
+ * 诊断不参与表单值、校验或提交，避免把开发期提示变成业务副作用。
+ */
+function diagnoseSchema(fields: LxDynamicFormField[]): void {
+  if (!import.meta.env.DEV) return
+
+  const diagnostics: string[] = []
+  const seenKeys = new Map<string, number>()
+  fields.forEach((field, index) => {
+    const previousIndex = seenKeys.get(field.key)
+    if (previousIndex !== undefined) {
+      diagnostics.push(
+        `字段 key「${field.key}」重复（第 ${previousIndex + 1} 项与第 ${index + 1} 项）`,
+      )
+    } else {
+      seenKeys.set(field.key, index)
+    }
+
+    if (field.type !== 'slot' && !fieldComponents[field.type]) {
+      diagnostics.push(`字段「${field.key}」使用未知 type「${field.type}」`)
+    }
+
+    if (field.type === 'radio' || field.type === 'checkbox') {
+      field.options?.forEach((option, optionIndex) => {
+        const supported =
+          field.type === 'radio'
+            ? ['string', 'number', 'boolean'].includes(typeof option.value)
+            : ['string', 'number'].includes(typeof option.value)
+        if (!supported) {
+          diagnostics.push(
+            `字段「${field.key}」的第 ${optionIndex + 1} 个 ${field.type} 选项值类型「${typeof option.value}」不会被渲染`,
+          )
+        }
+      })
+    }
+  })
+
+  const signature = diagnostics.join('|')
+  if (!signature || signature === lastSchemaDiagnosticSignature) return
+  lastSchemaDiagnosticSignature = signature
+  console.warn(`[LxDynamicForm] schema 配置诊断：${diagnostics.join('；')}`)
+}
+
 const formRef = ref<FormInstance>()
 const dynamicFormContainer = ref<HTMLElement>()
 const formInstanceId = getCurrentInstance()?.uid ?? 0
@@ -111,6 +157,12 @@ const sourceModel = computed<Record<string, unknown>>(
 const formModel = ref(modelWithDefaults(sourceModel.value, props.fields))
 const initialModel = ref({ ...formModel.value })
 const layoutColumns = computed(() => (props.adaptive ? 3 : props.columns))
+
+watch(
+  () => props.fields,
+  (fields) => diagnoseSchema(fields),
+  { immediate: true, deep: true },
+)
 
 function fieldStyle(field: LxDynamicFormField): Record<string, string> {
   const spanUnits = field.span ?? 8
