@@ -1,5 +1,11 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-20 LxTag 第四批宿主替换
+
+- 事件类型第三方状态、PC 布局打开方式、H5 布局类型和显示状态改用 `LxTag`，保留表格 slot、状态条件和中文文案。
+- `danger` 映射为 `error`；本批没有关闭事件、effect 或自定义内容契约。
+- 重新扫描后 Vue3 直接 `<el-tag>` 为 **18** 处。
+
 ## 2026-10-20 LxTag 第三批宿主替换
 
 - `nodeManage/inboundData`、`outboundData`、`clientManage` 的标签和授权状态列改用 `LxTag`，保留原条件、文案和表格插槽。
@@ -119,7 +125,7 @@ Vue3 目前有 103 个 Vue/TS 源文件直接从 element-plus 包导入组件、
 | el-form / el-form-item                 | 58 / 278 | LxForm / LxFormItem                                                    |
 | el-pagination                          |        0 | LxPagination                                                           |
 | el-table / el-table-column             |  10 / 73 | LxProTable；宿主 ProTable 已使用该组件，但页面中的原始表格仍需逐页迁移 |
-| el-tag                                 |       22 | LxTag                                                                  |
+| el-tag                                 |       18 | LxTag                                                                  |
 | el-upload                              |        8 | LxUpload                                                               |
 | el-switch                              |       16 | LxStatusSwitch；校验值映射和开关事件契约                               |
 
