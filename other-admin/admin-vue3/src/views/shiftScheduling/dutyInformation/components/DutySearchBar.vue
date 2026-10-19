@@ -2,6 +2,7 @@
 import { Search, Refresh, Download, Upload as UploadIcon, Delete } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import type { UploadInstance } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { ref, reactive, onMounted, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -164,7 +165,7 @@ onMounted(() => {
 
 <template>
   <div class="filter-container">
-    <el-input
+    <LxInput
       v-model="listQuery.userId"
       placeholder="人员ID"
       class="filter-item"
@@ -172,7 +173,7 @@ onMounted(() => {
       clearable
       @keyup.enter="handleSearch"
     />
-    <el-input
+    <LxInput
       v-model="listQuery.userName"
       placeholder="姓名"
       class="filter-item"
