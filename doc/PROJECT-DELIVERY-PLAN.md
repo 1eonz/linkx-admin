@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxStatusSwitch 首批宿主替换
+
+- **实现**：`eventType/thirdParty` 编辑表单的状态控件由 `el-switch` 改为 `LxStatusSwitch`；通过布尔显示值与业务 `1=启用/0=停用` 映射函数保留表单提交契约、文案和校验字段。
+- **验证**：Vue3 `vue-tsc --noEmit`、目标 ESLint/Prettier、`StatusSwitch` 与 `LxStatusSwitch` 单测 **23/23**、隔离 Mock 全菜单及专项场景 Playwright **10/10** 通过。
+- **边界**：本批没有修改 API、权限键或 `.then().catch().finally()` 请求链；`AppManage` 的双向确认与 API 前置保存语义暂不机械迁移，继续登记为能力差异。Vue3 `element-plus`、权限中心、真实后端和页面引导仍按门禁后置。
+- **下一入口**：继续核对剩余 `el-switch`，优先处理无 `before-change`、无自定义插槽且能保留数值映射的表单场景；确认能力缺口后再决定是否扩展适配器。
+
 ## 2026-10-20 LxTag 第六批宿主替换
 
 - **实现**：南向接口应用类型、用户选择弹窗状态、代理管理分类/优先级/可见范围改用 `LxTag`；保留分类关闭回调、循环标签、权限条件和文案，`danger` 转为 `error`。

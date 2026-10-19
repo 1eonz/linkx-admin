@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxStatusSwitch 首批宿主替换
+
+- `eventType/thirdParty` 编辑表单状态已接入 `LxStatusSwitch`，`form.status` 的 `1/0` 业务值通过页面映射保留，提交入口与校验逻辑不变。
+- 验证入口为 Vue3 类型检查、目标 ESLint/Prettier、状态开关单测 **23/23** 和隔离 Mock 全菜单 **10/10**；`AppManage` 的 API 前置确认仍保留为未迁移能力差异。
+
 ## 2026-10-20 LxTag 第六批宿主替换
 
 - 南向接口、用户选择和代理管理页已接入 `LxTag`，分类关闭回调、优先级语义和表格 slot 保持不变。

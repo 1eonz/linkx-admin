@@ -1,5 +1,11 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-20 LxStatusSwitch 首批宿主替换
+
+- `eventType/thirdParty/index.vue` 的编辑表单状态已改用 `LxStatusSwitch`；页面将 `form.status === 1` 映射为开启布尔值，事件回写为 `1/0`，不改变提交 API。
+- Vue3 业务页面直接 `el-switch` 由历史 **15** 降为 **14**；剩余场景需逐一核对 `before-change`、数值映射、插槽、loading 和权限契约。
+- `AppManage` 的双向确认及 API 成功前置切换不满足当前组件语义，暂保留 Element Plus 并列入能力差异，不删除宿主 `element-plus`。
+
 ## 2026-10-20 LxTag 第六批宿主替换
 
 - 南向接口应用类型、用户选择弹窗状态、代理管理分类/优先级/可见范围改用 `LxTag`；保留循环、关闭回调、条件和文案。

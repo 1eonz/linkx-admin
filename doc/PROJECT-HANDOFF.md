@@ -3067,3 +3067,10 @@
 - Assessment A **29/40**，仅做静态源码/设计评估，未执行浏览器、detector、overlay 或 console。桌面删除/清除按钮的紧凑命中区和宿主保存状态列为后续设计/契约决策，不在本波擅自改大桌面布局。
 - 当前已有 TransferPanel B 证据不因本次 A 重评自动复用为新增正式快照；需按当前源码重新核对 B、snapshot/trend 和 UI-10 状态。
 
+# 2026-10-20 LxStatusSwitch 首批宿主替换交接
+
+- **实现**：`other-admin/admin-vue3/src/views/eventType/thirdParty/index.vue` 已将编辑表单状态 `el-switch` 替换为 `LxStatusSwitch`；页面通过 `setFormStatus` 将 `true/false` 映射为原业务 `1/0`，保留启用/停用文案和提交契约。
+- **验证**：`vue-tsc --noEmit`、目标 ESLint/Prettier、`status-switch-adapter` 与 `lx-status-switch` 单测 **23/23**、隔离 Mock Playwright **10/10** 通过。
+- **代码边界**：未修改接口、权限键、表单校验或请求链；API 调用继续使用 `.then().catch().finally()`。注释和交接记录使用中文。
+- **能力差异**：`thirdInterface/app/AppManage.vue` 仍使用 `el-switch`，因为现有页面要求开启/关闭均弹确认并在 API 成功后才切换，而 `LxStatusSwitch` 当前只拦截关闭；待组件契约明确后再扩展或迁移。
+- **下一步**：继续核对剩余 15 个 `el-switch` 场景，优先无前置保存钩子的表单；全库 UI-10/UI-11、权限中心、真实后端、页面引导和 Element Plus 删除门禁仍未完成。

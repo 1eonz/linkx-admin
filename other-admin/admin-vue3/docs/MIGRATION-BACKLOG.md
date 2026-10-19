@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxStatusSwitch 首批宿主替换
+
+- [x] `eventType/thirdParty` 编辑表单的 `el-switch` 改用 `LxStatusSwitch`，保留启用 `1`、停用 `0` 的提交值和表单校验。
+- [x] 目标类型、格式、状态开关单测 **23/23** 和隔离 Mock 全菜单 **10/10** 通过。
+- [ ] `thirdInterface/app/AppManage` 仍需要关闭/开启均确认且 API 成功后才允许切换；现有 `LxStatusSwitch` 只拦截关闭，继续保留 `el-switch` 并登记能力缺口，不能机械替换。
+
 ## 2026-10-20 LxTag 第六批宿主替换
 
 - [x] 南向接口应用类型、用户选择弹窗状态、代理管理分类/优先级/可见范围改用 `LxTag`，保留原循环/关闭/条件契约。
