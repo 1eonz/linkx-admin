@@ -4,7 +4,7 @@
 
 - 入口：`linkx-fe/src/components/LxDescriptions/index.vue`；测试：`other-admin/admin-vue3/tests/unit/lx-descriptions.test.ts`、`tests/e2e/lx-descriptions-docs.spec.ts`。
 - 长值与长状态现在使用可见旋转图标表达展开/收起；焦点不会改变展开状态，桌面收起态省略、窄屏两行收起预览与展开态分别有明确样式。
-- 证据：单测 **10/10**、文档 E2E **3/3**、类型检查通过；Assessment A 的两个 P1 已修复，独立 B 与正式 UI-10 关闭仍开放。
+- 证据：单测 **10/10**、文档 E2E **3/3**、类型检查通过；Assessment A **27/40** 的两个 P1 已修复。Assessment B 已完成 Light/HUD、1280/375px（含窄屏减少动效）4 场景浏览器取证，页面错误、失败请求和横向溢出均为 0；三路 detector JSON 为合法 `[]`、stderr 为空、退出码 `0`。正式 UI-10 全库关闭仍开放。
 
 ## 2026-10-18 LxInput 前后缀高度令牌回归
 
