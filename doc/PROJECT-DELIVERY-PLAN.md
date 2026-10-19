@@ -2015,3 +2015,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `shiftScheduling/dutyInformation/components/DutySearchBar.vue` 的人员 ID、姓名两个搜索输入已由 `el-input` 切换为 `LxInput`，保留清空、回车搜索和原查询字段。
 - `vue-tsc --noEmit`、目标 Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过；排班类型远程分页、日期筛选、上传和请求链未改变。
 - 继续按字符串契约逐页迁移，复杂表单、权限联调和 Element Plus 删除门槛保持开放。
+
+## 2026-10-20 H5 标签查看搜索迁移
+
+- `h5/quick/LookLabel.vue` 的警员姓名搜索已由 `el-input` 切换为 `LxInput`，保留前端过滤、清空、回车搜索、前缀图标和分页行为。
+- `vue-tsc --noEmit`、目标 Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过；标签树、详情请求和错误恢复未改变。
+- H5 其余表单及权限相关功能继续按契约逐项核对，真实后端联调仍保持阻塞记录。

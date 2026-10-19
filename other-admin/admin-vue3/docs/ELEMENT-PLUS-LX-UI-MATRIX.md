@@ -285,6 +285,11 @@ Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过适�
 - `shiftScheduling/dutyInformation/components/DutySearchBar.vue` 的人员 ID、姓名 `el-input` 已替换为 `LxInput`，保留搜索和清空行为。
 - 日期、下拉和上传控件仍按各自契约保留；`element-plus` 删除门槛未满足。
 
+## 2026-10-20 H5 输入计数更新
+
+- `h5/quick/LookLabel.vue` 的警员姓名 `el-input` 已替换为 `LxInput`，保留前端过滤与键盘搜索。
+- 标签树和详情接口仍由页面维护；剩余 H5 输入继续逐项迁移，不能据此关闭全库门禁。
+
 ## 2026-10-11 Wave 11 P2 影响更新
 
 - `LxTransferPanel` 与 `LxVirtualTree` 已完成当前版组件级严格 UI/交互审查：单测合计 67/67、文档 E2E 合计 48/48，类型、203 modules 构建、文档构建和 Vue3 生产构建通过；代码复审无 P0-P3。Assessment A 36/40；Assessment B 5 个 detector 均为有效 `[]`/空 stderr/0，9 个浏览器视图证据完整。

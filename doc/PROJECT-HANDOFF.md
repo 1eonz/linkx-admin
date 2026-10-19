@@ -3136,3 +3136,8 @@
 
 - `shiftScheduling/dutyInformation/components/DutySearchBar.vue` 的人员 ID、姓名两个输入改用 `LxInput`，保留清空、回车搜索和查询字段；排班类型分页、日期筛选、上传功能未改动。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；权限和 API 契约未改变。
+
+# 2026-10-20 H5 标签查看搜索交接
+
+- `h5/quick/LookLabel.vue` 的警员姓名搜索改用 `LxInput`，保留前缀搜索图标、清空、回车搜索、前端过滤和分页；标签树与详情请求未改动。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；真实后端和权限联调仍未执行。
