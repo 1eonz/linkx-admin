@@ -17,6 +17,7 @@
  */
 import { Edit, Delete, Key, CircleClose } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import ConnectionStatusDot from '../components/ConnectionStatusDot.vue';
@@ -176,7 +177,9 @@ function handleRejectSubmit(payload: { peerId: string; desc: string }): void {
       refresh();
     })
     .catch(() => ElMessage.error('拒绝失败，请重试'))
-    .finally(() => { rejectLoading.value = false; });
+    .finally(() => {
+      rejectLoading.value = false;
+    });
 }
 
 // ===== 删除 =====
@@ -258,15 +261,15 @@ onBeforeUnmount(() => {
       >
         <!-- 标签列 -->
         <template #tag="scope">
-          <el-tag v-if="getRow(scope).tag" type="info">{{ getRow(scope).tag }}</el-tag>
+          <LxTag v-if="getRow(scope).tag" type="info">{{ getRow(scope).tag }}</LxTag>
           <span v-else>-</span>
         </template>
 
         <!-- 授权状态列 -->
         <template #grantStatus="scope">
-          <el-tag v-if="getRow(scope).grant === 1 && !getRow(scope).expired" type="success"> 已授权 </el-tag>
-          <el-tag v-else-if="getRow(scope).expired" type="danger">已过期</el-tag>
-          <el-tag v-else type="info">未授权</el-tag>
+          <LxTag v-if="getRow(scope).grant === 1 && !getRow(scope).expired" type="success"> 已授权 </LxTag>
+          <LxTag v-else-if="getRow(scope).expired" type="error">已过期</LxTag>
+          <LxTag v-else type="info">未授权</LxTag>
         </template>
 
         <!-- 连接状态列 -->
@@ -303,7 +306,12 @@ onBeforeUnmount(() => {
       :loading="authorizeLoading"
       @submit="handleAuthorizeSubmit"
     />
-    <RejectDialog v-model:visible="rejectDialogVisible" :client-data="currentClient" :loading="rejectLoading" @submit="handleRejectSubmit" />
+    <RejectDialog
+      v-model:visible="rejectDialogVisible"
+      :client-data="currentClient"
+      :loading="rejectLoading"
+      @submit="handleRejectSubmit"
+    />
   </div>
 </template>
 
