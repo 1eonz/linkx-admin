@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxTag 第二批宿主替换
+
+- `baseData/thirdParty`、第三方详情和 `baseData/mapConfig` 的状态标签已接入 `LxTag`，保留原页面条件和样式 class。
+- Vue3 源码直接 `<el-tag>` 当前为 31 处；剩余标签继续按 effect、关闭、插槽和权限状态逐页归因。
+
 ## 2026-10-20 LxTag 首批宿主替换
 
 - `baseData/globals` 与 `nodeManage/serverManage` 的状态/标签列已接入 `lx-ui` `LxTag`，保留页面数据和表格插槽契约。

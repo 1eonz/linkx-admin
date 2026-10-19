@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxTag 第二批宿主替换
+
+- **改动**：第三方应用列表、第三方详情弹窗和地图配置激活列改用 `LxTag`；保留紧凑/标准状态条件、文案和 class，`danger` 映射为 `error`。
+- **事实**：源码直接 `<el-tag>` 由 35 降为 **31**；剩余标签含不同 effect、关闭、插槽或权限状态，继续逐页核对。
+- **验证**：Vue3 `vue-tsc --noEmit`、目标文件 Prettier、Mock 全菜单 **6/6** 通过；UI-10/UI-11、真实后端和 Element Plus 删除门禁仍开放。
+
 ## [2026-10-20] LxTag 首批宿主替换
 
 - **改动**：`baseData/globals` 状态列与 `nodeManage/serverManage` 标签列改用 `LxTag`；Element Plus `danger` 映射为 `error`，保留原文案、条件和表格插槽。

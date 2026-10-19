@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxTag 第二批宿主替换
+
+- [x] 第三方应用列表/详情和地图配置状态列改用 `LxTag`，保留条件、文案和页面 class，`danger` 映射为 `error`。
+- [x] Vue3 源码直接 `<el-tag>` 由 35 修正为 **31**；类型检查、目标 Prettier 和 Mock 全菜单 **6/6** 通过。
+- [ ] 剩余 31 个标签需逐页核对 effect、关闭语义、插槽和状态权限，不能机械替换。
+
 ## 2026-10-20 LxTag 首批宿主替换
 
 - [x] `baseData/globals` 状态列、`nodeManage/serverManage` 标签列改用 `LxTag`，保留表格 slot 和状态文案；`danger` 映射为 `error`。
