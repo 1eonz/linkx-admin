@@ -805,3 +805,8 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 - 三个业务宿主场景已改用 `LxPagination`：双 Tab 预警推送、北向接入列表、协同岗挂靠弹窗。
 - 适配保留 `pageNum/pageSize`、`change(page, pageSize)`、请求序号、注入式 `fetchList` 和局部滚动语义；组件仍不请求业务 API。
 - 该批只证明宿主接入类型和 Mock 行为可运行，不关闭 LxPagination 正式 Impeccable A/B 或 UI-10 严格矩阵。
+
+## 2026-10-19 LxInput 复合边框
+
+- 根因是复合输入 inset 阴影被 prepend/append 背景遮挡；已改为真实 1px 外边框并保留焦点、悬停、错误态。
+- 组件单测 **13/13**、复合文档 E2E **1/1**；detector 合法 `[]`/空/0，仅代表静态零命中，正式 A/B 仍按 UI-10 门禁记录。

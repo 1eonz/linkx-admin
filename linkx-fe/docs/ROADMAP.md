@@ -698,3 +698,8 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 
 - Vue3 三个业务场景已接入 `LxPagination`，保留旧分页状态和 `change(page, pageSize)` 事件适配；业务请求仍由宿主按 `.then().catch().finally()` 管理。
 - 组件库正式 A/B、真实分页 API、权限联调及剩余直接 `el-pagination` 页面继续开放。
+
+## 2026-10-19 LxInput 复合边框修复
+
+- 复合输入改用真实 1px 外边框，修复 prepend/append 子槽背景遮挡 inset 阴影导致的边框消失；内部高度补偿保持 28/32/40px 和窄屏 44px。
+- 单测 **13/13**、复合文档 E2E **1/1**；静态 detector `[]` 不单独作为视觉通过，正式 Critique 继续按双路证据执行。

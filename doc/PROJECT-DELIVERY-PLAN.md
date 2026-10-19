@@ -1617,6 +1617,13 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 
 - 输入节点、prefix/suffix 及内部槽位统一改用完整 `--lx-input-track-height`，解决 32/44px 外框与 30/42px 内部元素的视觉落差；prepend/append、焦点环和尺寸契约保持不变。
 - 复合前后缀 E2E **1/1**、LxInput 单测 **13/13**、lx-ui typecheck 通过；静态 detector `[]` 不单独代表视觉审查通过。
+
+## 2026-10-19 LxInput 复合边框修复
+
+- **根因**：复合输入原先使用 inset 阴影，`overflow: hidden` 下被 prepend/append 子槽背景遮挡，导致前后缀示例的复合外框视觉消失。
+- **实现**：复合 `LxInput` 改用 `1px` 真实外边框，焦点、悬停和错误态由根节点承载；内部三段向外补回边框占用的 1px，保持 sm/md/lg 与窄屏 44px 完整轨道。
+- **验证**：复合前后缀 Playwright **1/1**、LxInput 单测 **13/13**、目标 ESLint/Prettier 通过；全基础控件 E2E **12/13**，唯一失败为既有清空按钮 aria-hidden 与窄屏显示契约冲突，未触及本次边框改动。detector JSON 为合法 `[]`、stderr 为空、退出码 `0`；`[]` 不单独代表视觉通过。
+- **边界**：密码输入内框边框回归已加入断言；真实后端、权限接入、Vue3 Element Plus 分批替换和正式双路 Impeccable 仍按门禁开放。
 ## 2026-10-18 LxCodeSlot 复制中反馈 P1 收口
 
 - **实现**：复制进行中按钮显示 `LxIcon loading`、`title="正在复制"` 和 `aria-busy="true"`，同时禁用重复点击；复制完成后恢复复制图标和原提示。保留既有成功/失败事件与 Promise 链边界。
@@ -1635,6 +1642,12 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 使用 `pnpm exec playwright test --config=playwright.preview.config.ts --reporter=line` 在专用 Mock 服务上重跑 **10/10**。
 - 覆盖首页、10 个菜单组、32 个动态入口共 33 个首屏样例；同时覆盖菜单搜索/目录、关联人员搜索竞态、北向筛选增改删、轮播分页、AuthImg 失败恢复、键盘重试和 reduced-motion。
 - 本次仍只访问本地 Mock，不代表真实后端或完整业务写操作联调；未知 API 继续保持未代理保护。
+
+## 2026-10-19 LxButton 纯图标居中修复
+
+- 纯图标 tooltip 虚拟触发空节点不再继承 Element Plus 图标后间距；LxButton 统一接管图标槽的尺寸、行高和 flex 对齐，文字图标间距保持不变。
+- 单测 33/33、按钮文档 Playwright 19/19，新增 sm/md/lg 纯图标与文字形态图标中心断言；目标 ESLint、Prettier、差异检查通过。
+- detector 为合法 []、stderr 为 npm 配置警告、退出码 0；空数组不单独代表视觉通过。独立 Assessment A 与正式 snapshot/trend 未在本波重跑，UI-10 继续开放。
 
 ## 2026-10-19 Wave 9 / 分页宿主首批替换
 

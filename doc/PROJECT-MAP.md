@@ -737,3 +737,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - `notification/alertPush`、`eventType/thirdParty` 和 `collaboration/CoopBindDialog` 的分页入口已统一使用 `lx-ui` 的 `LxPagination`。
 - 页面 API 请求、分页状态、加载/错误恢复和注入式列表查询仍由宿主负责；Vue3 其他业务页的 4 处直接分页清单需继续逐页核对。
+
+## 2026-10-19 LxInput 复合边框
+
+- 组件入口 `linkx-fe/src/components/LxInput/style.css` 已修复复合输入真实外边框；文档回归位于 `other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`。
+- 复合前后缀和密码边框有自动化断言；本次不改变宿主 API、权限码或请求链式风格。

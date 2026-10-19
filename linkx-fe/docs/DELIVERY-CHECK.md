@@ -686,3 +686,8 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 - 预警推送双 Tab、北向接入列表和协同岗挂靠弹窗的业务分页已替换为 `LxPagination`。
 - Vue3 `vue-tsc`、三文件 ESLint、Prettier 和差异检查通过；全菜单首屏及北向 CRUD Mock 回归通过。
 - 页面请求和权限契约仍由宿主负责，组件级正式 Impeccable 与真实后端联调未因本批提前关闭。
+
+## 2026-10-19 LxInput 复合边框验收
+
+- 复合输入外框由真实 1px border 绘制，焦点/悬停/错误态仍由根节点统一管理；密码输入 wrapper 的边框也纳入回归断言。
+- 复合 E2E **1/1**、单测 **13/13**；全量基础控件存在一个既有清空按钮失败，已与本次组件边框问题隔离记录。

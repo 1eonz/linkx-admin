@@ -193,3 +193,8 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 - 已替换 `notification/alertPush` 双分页、`eventType/thirdParty` 分页和 `collaboration/CoopBindDialog` 分页；均使用 `LxPagination` 并保留原页面数据请求和分页状态。
 - 验证：类型检查、目标 ESLint、Prettier、差异检查；全菜单首屏和北向 Mock CRUD 通过。
 - 剩余直接 `el-pagination` 页面及真实后端/权限联调继续登记，不删除 Vue3 `element-plus` 直接依赖。
+
+## 2026-10-19 LxInput 复合边框
+
+- Vue3 适配继续直接复用 lx-ui `LxInput`，不在宿主复制边框样式；复合 prepend/append 和密码边框已纳入文档回归。
+- 本波不改变页面权限、API 请求链或 Element Plus 依赖，业务页面迁移仍按 UI-04/UI-10 门禁推进。
