@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] Vue3 分页迁移矩阵事实校正
+
+- **复核**：重新扫描 `other-admin/admin-vue3/src`，业务页面直接使用 `el-pagination` 为 **0**；共享 `src/components/Pagination` 内部已使用 `LxPagination` 并保留旧 `page/limit/pagination` 事件适配。
+- **处理**：迁移矩阵已将分页计数由 4 修正为 0，避免把历史盘点误当作当前待迁移页面数量。
+- **边界**：真实分页接口、空/错/权限不足/取消、嵌套滚动和页面级 Mock 仍需按页面契约验收；本项不代表 Vue3 `element-plus` 可删除或 UI-04/UI-10/UI-11 已完成。
+
 ## [2026-10-20] LxPagination P1 修复与默认值冲突
 
 - **改动**：`LxPagination` 新增 `ariaLabel`，由语义 `nav` 提供分页导航名称；移动断点将 prev/next/页码/条数触发器命中区提升到 44px，桌面仍保持 28px 紧凑视觉。

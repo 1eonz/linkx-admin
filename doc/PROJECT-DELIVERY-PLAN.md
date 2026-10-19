@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 Vue3 分页迁移矩阵事实校正
+
+- **盘点**：重新扫描 `other-admin/admin-vue3/src` 后，业务页面直接使用 `el-pagination` 的数量为 **0**；共享 `src/components/Pagination` 已通过 `LxPagination` 适配旧的 `page/limit/pagination` 契约。
+- **文档修正**：`ELEMENT-PLUS-LX-UI-MATRIX.md` 的分页数量由 4 修正为 0，并明确适配器内部使用与业务页面直接引用的边界。
+- **边界**：分页真实接口、空/错/权限不足/取消、嵌套滚动和页面级 Mock 仍需逐场景验证；本次事实校正不关闭 UI-04/UI-10/UI-11，也不提前删除 Vue3 `element-plus`。
+- **下一入口**：继续盘点剩余 Element Plus 标签和共享适配器契约，优先选择已有 lx-ui 组件且页面行为可独立回归的批次。
+
 ## 2026-10-20 LxTransferPanel 当前版复验与 Assessment A
 
 - **验证**：当前 TransferPanel 文档 Playwright **33/33** 通过，覆盖桌面/窄屏、复选框视觉盒、44px 触控目标、筛选/批量、清空确认、键盘焦点、HUD 和状态恢复；此前“选择框过大”修复仍有效。

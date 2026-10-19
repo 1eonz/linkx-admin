@@ -93,7 +93,7 @@ Vue3 目前有 103 个 Vue/TS 源文件直接从 element-plus 包导入组件、
 | el-drawer                              |        1 | LxDrawer                                                               |
 | el-empty                               |       15 | LxEmpty                                                                |
 | el-form / el-form-item                 | 58 / 278 | LxForm / LxFormItem                                                    |
-| el-pagination                          |        4 | LxPagination                                                           |
+| el-pagination                          |        0 | LxPagination                                                           |
 | el-table / el-table-column             |  10 / 73 | LxProTable；宿主 ProTable 已使用该组件，但页面中的原始表格仍需逐页迁移 |
 | el-tag                                 |       38 | LxTag                                                                  |
 | el-upload                              |        8 | LxUpload                                                               |
@@ -101,7 +101,7 @@ Vue3 目前有 103 个 Vue/TS 源文件直接从 element-plus 包导入组件、
 
 `LxForm` 桌面多列采用设计稿 16px 列距；视口不大于 640px 时自动单列，保留桌面跨列语义并让窄屏字段通栏。基础控件桥接页的输入、数字、日期和文本域焦点使用贴边 1px 主色边线与紧邻的 2px、15% 主色光晕；单选和多选下拉统一使用控件自身 1px `border-box` 实体边框，不在控件外加第二圈，错误态保留错误色边框；焦点时控件尺寸不变。文档 Playwright 覆盖键盘展开、浅色/HUD、普通/错误状态及 375px 窄屏；多选单边线复修及 Impeccable 复评结果见交接。此为组件库级证据，Vue3 的 58 处 `el-form` 和 278 处 `el-form-item` 仍须逐场景适配，不能据此标记宿主替换完成。
 
-Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过 2 项单测验证旧 `page/limit/pagination` 事件映射、`hidden`、layout/background 和宿主禁用自动滚动。源码中仍有 4 个业务页面直接使用 `el-pagination`，须按对应页面的加载、空结果和滚动容器契约逐页替换；上述库/适配器测试不表示这 4 个页面已完成迁移。
+Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过适配器单测验证旧 `page/limit/pagination` 事件映射、`hidden`、layout/background 和宿主禁用自动滚动。当前源码盘点显示业务页面直接使用 `el-pagination` 的数量为 **0**；仅共享适配器内部保留分页组件适配。页面的真实接口、空结果、失败恢复、权限不足和嵌套滚动容器仍需在 Mock/真实契约门禁中继续验证，不能把适配器已接入扩大解释为所有分页业务已完成验收。
 
 ### 仅部分场景适用的封装
 
@@ -181,7 +181,7 @@ Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过 2 �
 - 这只表示库组件契约和演示证据完成，不表示 Vue3 `DataPermissionTree` 已替换。宿主仍需逐项核对数据字段、父子级联、树外已选键、exposes、批量上限、加载/空/错、取消和真实权限 API，并在 UI-04 补 Mock/E2E。
 - `el-tree` 的 15 处使用不能机械替换；`LxVirtualTree` 适用于虚拟树契约，`LxTransferPanel` 适用于双栏授权场景，其他页面继续保留 Element Plus 或使用 lx-ui 导出的桥接控件，直到适配矩阵有明确证据。
 - `LxMetricCard` + `LxSectionTitle`、`LxTextarea` 已完成组件级复核；基础控件下一项按顺序进入 `LxSelect`。之后仍需处理 UI-10 其他未关闭项，再进入 Vue3 Element Plus 分批替换。宿主依赖删除门槛、权限中心/文本权限/页面操作引导延期规则和 `.then().catch().finally()` API 请求规范保持不变。
+
 ## 2026-10-20 LxMetricCard 组件层复验
 
 - 组件库当前版已修复标题运行时缺陷并收口只读语义；文档 E2E **3/3**、单测 **17/17**。Vue3 详情宿主仍保留 Element Plus/旧适配器，需等 UI-10/UI-11 门禁后逐页替换和组合回归。
-

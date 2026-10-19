@@ -891,3 +891,9 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - `linkx-fe/src/components/LxTransferPanel/` 当前文档回归 **33/33**；复选框视觉尺寸与移动 44px 触控目标已覆盖。Assessment A 29/40 的桌面紧凑按钮和宿主保存状态问题仍开放。
 - 宿主入口 `other-admin/admin-vue3` 的 `DataPermissionTree` 仍需在 UI-04 迁移批次验证持久化、权限和真实接口；组件库本身不拥有业务请求。
 
+## 2026-10-20 Vue3 分页迁移矩阵事实校正
+
+- **入口**：`other-admin/admin-vue3/src/components/Pagination/index.vue` 已使用 `LxPagination`；源码扫描确认业务页面直接引用 `el-pagination` 为 **0**。
+- **同步**：`other-admin/admin-vue3/docs/ELEMENT-PLUS-LX-UI-MATRIX.md` 已将分页计数由 4 修正为 0，区分共享适配器内部实现与业务页迁移状态。
+- **边界**：适配器回归不代表真实分页 API、空/错/权限不足/取消或嵌套滚动场景全部完成；Vue3 `element-plus` 删除继续等待全库门禁。
+

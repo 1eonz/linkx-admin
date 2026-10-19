@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 分页事实校正
+
+- `el-pagination` 业务页面直接引用：**0**。
+- `src/components/Pagination` 已使用 `LxPagination`，保留旧 `page/limit/pagination` 输入和 `change(page, pageSize)` 到宿主事件的转换。
+- 仍需验证真实分页接口、空/失败/权限不足/取消、嵌套滚动和页面级 Mock；适配器完成不等于业务页面验收完成。
+
 ## 2026-10-20 LxPagination P1 修复与迁移边界
 
 - Vue3 宿主可通过 `ariaLabel` 区分多个分页器；窄屏直接复用 lx-ui 的 44px 命中区，不在页面复制样式。
@@ -673,6 +679,7 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 
 - 组件 Demo 已修复未注册图标名，类型检查和文档 E2E 恢复通过。
 - 页面接入仍需核对标题层级、`leading`/`icon` 优先级、extra 操作权限和窄屏布局；不因该修复提前替换 Element Plus。
+
 ## 2026-10-20 LxMetricCard 运行时标题与只读语义
 
 - 组件层已移除纯展示卡 hover 抬升，长趋势和值提供完整文本提示；修复 VitePress 直接编译时 `headingLevel` 未从 `props` 读取导致标题节点缺失的问题。
@@ -705,4 +712,3 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 - Vue3 宿主可继续通过 `lx-ui` 使用 TransferPanel；当前文档 E2E **33/33**，但真实 `DataPermissionTree` 的接口、保存中锁定、错误恢复和权限源仍需迁移批次验证。
 - 桌面 24/32px 紧凑按钮与移动 44px 触控目标是组件当前分档；未取得设计决策前不擅自改变宿主布局。
 - Assessment A **29/40** 为静态建议，不代表真实权限或后端联调通过；Element Plus 删除继续等待全库门禁。
-
