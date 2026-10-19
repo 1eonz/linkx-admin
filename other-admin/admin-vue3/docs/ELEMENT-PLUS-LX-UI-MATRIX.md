@@ -1,5 +1,10 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-20 三方应用输入迁移
+
+- `baseData/thirdParty/index.vue` 的搜索输入和只读密码输入改用 `LxInput`，保留前端过滤事件、密码显隐和禁用状态。
+- 页面级直接 `el-input` 再减少 2 处；不能据此删除 `element-plus`，其余输入继续按契约迁移。
+
 ## 2026-10-20 Sidebar 菜单输入迁移
 
 - 侧栏两个菜单输入已改用 `LxInput`，保留 `size="sm"`、clearable、prefix、回车/搜索状态和目录筛选契约。

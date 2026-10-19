@@ -3104,3 +3104,9 @@
 - **验证**：目标 Prettier/ESLint、`vue-tsc --noEmit` 和隔离 Mock Playwright **10/10** 通过。
 - **阻塞**：尝试迁移 `policeExtend/virtualUser/EditVirtualUser.vue` 时，类型检查确认 `VirtualUserForm` 的 userName/contactNumber/appId/appSecret/remark 被声明为 number，而 `LxInput` 明确要求字符串值；已撤回该部分，未使用 `as any` 或强制断言掩盖问题。
 - **下一步**：继续迁移字符串类型明确的页面输入；虚拟用户待 API/类型契约核实后再处理，Element Plus 删除门禁、权限和真实后端仍未完成。
+# 2026-10-20 三方应用输入迁移交接
+
+- **实现**：`baseData/thirdParty/index.vue` 的应用名称搜索与只读应用密钥改用 `LxInput`；保留 clearable、回车搜索、`type=password`、show-password 和 disabled。
+- **验证**：目标 Prettier/ESLint、`vue-tsc --noEmit`、隔离 Mock Playwright **10/10** 通过。
+- **边界**：未修改列表 API、权限或请求链；虚拟用户表单因文本字段 number 类型与 `LxInput` 字符串契约冲突仍未迁移。
+- **下一步**：继续字符串类型明确的页面输入，补齐密码/textarea/前后缀和错误态证据后再扩大批次。
