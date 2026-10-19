@@ -707,3 +707,5 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - Vue3 业务宿主仍通过适配层保留 `tableAttrs`、自定义列、脱敏和旧事件契约，真实 API、权限联调与 Element Plus 删除保持后置。
 
 - `linkx-fe/src/components/LxInput/` 的输入节点、prefix/suffix、内部槽位和 prepend/append 当前统一完整高度轨道；几何回归入口为 `other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`。
+
+- `linkx-fe/src/components/LxDescriptions/` 当前版长值/长状态展开收起已完成键盘、窄屏、HUD 和 reduced-motion 回归；证据与边界记录见 `doc/lx-ui/IMPECCABLE-LXDESCRIPTIONS-2026-10-19.md`。业务详情宿主仍待 UI-04 迁移。

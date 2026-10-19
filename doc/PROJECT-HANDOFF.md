@@ -2741,3 +2741,10 @@
 - **验证**：宿主适配器单测 **4/4**，4177 文档 Playwright **4/4**；lx-ui 类型检查、生产构建、文档构建、目标 Prettier 和差异检查通过。
 - **审查边界**：Assessment A **29/40（Good）**；其跨页选择 P1 已修复，Demo 危险动作、工具栏密度和横向滚动提示列为后续 P1/P2。detector JSON/stderr/退出码为合法 `[]`/空/`0`，但 headless 页面截图为空白，未形成可靠 overlay 或 snapshot/trend，不能宣称正式 Impeccable 通过，UI-10 行保持开放。
 - **下一步**：继续补齐剩余组件的当前版门禁与正式双路 Critique；完成 lx-ui 全库门禁后，再按迁移契约分批替换 Vue3 Element Plus。真实权限、后端联调和页面操作引导继续后置。
+
+## 2026-10-19 LxDescriptions 当前版 Critique 复验
+
+- **结果**：旧 Assessment A 的 27/40 为修前基线；当前版已吸收其焦点状态错位、长状态层叠、窄屏无可见反馈和展开 affordance 建议。当前单测 10/10、文档 E2E 3/3、typecheck 通过。
+- **浏览器证据**：Assessment B 覆盖 Light/HUD、1280/375px、默认/聚焦/展开/收起、reduced-motion；4 场景无页面错误、失败请求和横向溢出。detector JSON/stderr/退出码为合法 `[]`/空/0，未把空数组单独当作通过。
+- **记录**：综合说明为 `doc/lx-ui/IMPECCABLE-LXDESCRIPTIONS-2026-10-19.md`；真实读屏器、跨浏览器、业务宿主、真实权限及 UI-10/UI-11 全库门禁仍开放。
+- **下一步**：继续剩余 UI-10 组件当前版门禁和正式双路 Critique，再进入 Vue3 Element Plus 分批替换；业务 API 保持 `.then().catch().finally()`。

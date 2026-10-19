@@ -205,6 +205,8 @@
 - `.impeccable/critique/treeselect-cascader-assessment-b-2026-10-17/` 保存六路 detector JSON、stderr、退出码和浏览器 JSON。静态输出均为合法 `[]`/空 stderr/退出码 `0`；空数组不单独代表正式视觉通过。
 - 当前 UI-10 严格矩阵更新为 **11/52**；宿主替换和真实后端联调仍未完成。
 
+2026-10-19 `LxDescriptions` 当前版复验：单测 10/10、文档 Playwright 3/3、typecheck 通过；旧 Assessment A 的 P1/P2 已由当前代码和 B 浏览器证据复核为历史问题。B 覆盖 Light/HUD、1280/375px、展开/收起和 reduced-motion，4 场景无页面错误、失败请求和横向溢出。detector `[]` 只表示静态零命中，真实读屏器、业务宿主和 UI-11 全库 Critique 仍开放。
+
 ## 2026-10-17 LxDynamicForm 当前版复验
 
 - 单测 **30/30**、文档 Playwright **12/12**；覆盖独立字段 renderer、Lx 基础控件、自适应 3/2/1 列、受控值、上传、远程候选、校验/ARIA、主题和减少动效。

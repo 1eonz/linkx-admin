@@ -519,6 +519,8 @@ Wave 5 独立 Assessment A 为 34/40；Assessment B 覆盖亮色/HUD、桌面/37
 
 `LxDynamicForm` 已完成字段子组件拆分、Lx 基础控件组合、`value`/`change` 受控契约、单/多文件列表和容器自适应布局；自适应 span 覆盖问题已修复。`tree-select` 已由公开 `LxTreeSelect` 承接，TreeSelect/Cascader 的文档行为验收已完成；当前正式组件 Critique 尚未完成。LxForm 设计稿逐项浏览器证据、基础控件及全库 UI-10 和 UI-11 Critique 仍未完成。
 
+2026-10-19：`LxDescriptions` 当前版复验收口。单测 10/10、文档 E2E 3/3、typecheck 通过；长值/长状态的键盘、触屏、HUD、375px 和 reduced-motion 状态已验证。旧 Assessment A 的 27/40 标为修前基线，Assessment B 当前版证据已归档；真实业务详情宿主和 UI-11 整库 Critique 仍未完成。
+
 Vue3 页面中的共享控件替换会重复影响表单、弹窗、表格、搜索、树、键盘焦点和窄屏行为，因此组件库的高频契约先于整页深交互验收。执行时保留 API、字段、状态值和 Vue2 既有菜单/按钮权限等不依赖视觉组件的核查；已通过的页面测试作为基线，不因排期变化作废。
 
 | 顺序 | 工作                                                                                      | 进入下一步的条件                                                                                                                               |

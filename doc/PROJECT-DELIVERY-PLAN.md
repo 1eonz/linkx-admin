@@ -1593,6 +1593,12 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 复合前后缀 E2E 1/1、lx-ui typecheck/build、目标 Prettier、ESLint 和差异检查通过；A 31/40，B 为合法 []、空 stderr、退出码 0，并有桌面、HUD、窄屏浏览器证据。
 - B 的一次聚焦读数误选了其他 Demo 节点，已由复合输入正式焦点断言复核，不作为缺陷；[] 不单独代表视觉通过。可访问命名、错误关联和语义前后缀说明列入后续表单可访问性任务。
 
+## 2026-10-19 LxDescriptions 当前版复验收口
+
+- **当前版验证**：单测 10/10、文档 Playwright 3/3、lx-ui typecheck 通过；长值/长状态展开收起、键盘焦点、HUD、375px、错误/空/加载和 reduced-motion 均有回归。
+- **证据修正**：旧 Assessment A 的 27/40 标记为修前基线；当前版 B 的 4 场景浏览器快照与 detector 三件套保存在 `linkx-fe/.impeccable/critique/lxdescriptions-toggle-assessment-b-2026-10-19/`，综合说明见 `doc/lx-ui/IMPECCABLE-LXDESCRIPTIONS-2026-10-19.md`。
+- **边界**：不据此关闭 UI-10/UI-11 全库 Critique；真实读屏器、跨浏览器、业务详情宿主、真实权限/后端和 Element Plus 分批替换仍未完成。
+
 ## 2026-10-19 LxInput 前后缀完整高度修复
 
 - 输入节点、prefix/suffix 及内部槽位统一改用完整 `--lx-input-track-height`，解决 32/44px 外框与 30/42px 内部元素的视觉落差；prepend/append、焦点环和尺寸契约保持不变。
