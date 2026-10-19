@@ -207,6 +207,9 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     const mobileRemarks = descriptions.locator('.lx-descriptions__value-text').filter({ hasText: '重点高架合流区' });
     await expect(mobileRemarks).toHaveText('重点高架合流区视频快反联动专员，具有跨网段加密调度二级权限。');
     await expect(mobileRemarks).toHaveCSS('white-space', 'normal');
+    const mobileRemarksBox = await mobileRemarks.boundingBox();
+    if (!mobileRemarksBox) throw new Error('移动端长值展开按钮未进入可视区域');
+    expect(mobileRemarksBox.height).toBeGreaterThanOrEqual(44);
     const mobileCode = descriptions
       .locator('.lx-descriptions__item')
       .filter({ hasText: '设备标识' })
@@ -230,10 +233,14 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     const mobileStatus = descriptions
       .locator('.lx-descriptions__item')
       .filter({ hasText: '运行状态' })
-      .locator('.lx-status-dot__text');
-    await expect(mobileStatus).toHaveText('在线（在岗备勤），当前负责跨辖区视频联动与加密调度');
-    await expect(mobileStatus).toHaveCSS('white-space', 'normal');
-    const statusMetrics = await mobileStatus.evaluate((element) => ({
+      .locator('.lx-descriptions__status-toggle');
+    const mobileStatusBox = await mobileStatus.boundingBox();
+    if (!mobileStatusBox) throw new Error('移动端长状态展开按钮未进入可视区域');
+    expect(mobileStatusBox.height).toBeGreaterThanOrEqual(44);
+    const mobileStatusText = mobileStatus.locator('.lx-status-dot__text');
+    await expect(mobileStatusText).toHaveText('在线（在岗备勤），当前负责跨辖区视频联动与加密调度');
+    await expect(mobileStatusText).toHaveCSS('white-space', 'normal');
+    const statusMetrics = await mobileStatusText.evaluate((element) => ({
       clientWidth: element.clientWidth,
       scrollWidth: element.scrollWidth,
       clientHeight: element.clientHeight,

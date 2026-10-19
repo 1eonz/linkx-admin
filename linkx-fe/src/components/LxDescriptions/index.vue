@@ -420,6 +420,14 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
       color-mix(in srgb, currentColor 45%, transparent);
   }
 
+  /* 移动端展开入口保持 44px 触控高度，多行内容仍按值列宽度换行。 */
+  .lx-descriptions__value-text.is-long-value,
+  .lx-descriptions__status-toggle {
+    box-sizing: border-box;
+    min-height: 44px;
+    padding-block: 10px;
+  }
+
   .lx-descriptions__value-text.is-long-value:not(.is-expanded)
     .lx-descriptions__value-label {
     display: -webkit-box;
