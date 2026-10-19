@@ -3126,3 +3126,8 @@
 
 - `authority/userManage/components/EditUser.vue` 的用户名称输入改用 `LxInput`，保留新增/编辑禁用、失焦去空格、正则校验和最大长度 20；DataPermissionTree 与提交请求未改变。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**。复杂权限联调和剩余输入迁移仍未完成。
+
+# 2026-10-20 location 输入迁移交接
+
+- `location/components/EditLocation.vue` 的经纬度字段改用 `LxInput`，保留格式/范围校验、最大长度 25、组织选择和保存接口。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；请求链、权限和弹窗契约未改变。

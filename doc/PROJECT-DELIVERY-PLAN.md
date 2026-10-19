@@ -2003,3 +2003,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `authority/userManage/components/EditUser.vue` 的用户名称字段已由 `el-input` 切换为 `LxInput`，保留新增/编辑禁用语义、失焦去空格、正则校验和最大长度 20。
 - `vue-tsc --noEmit`、目标 Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过；数据权限树、提交 API 和 Promise 链未改变。
 - 本批不代表数据权限树或权限中心完成联调；number 类型字段、复杂表单和剩余 Element Plus 输入继续逐项核实。
+
+## 2026-10-20 location 经纬度输入迁移
+
+- `location/components/EditLocation.vue` 的经纬度字段已由 `el-input` 切换为 `LxInput`，保留坐标格式/范围校验、最大长度 25、组织选择和保存请求契约。
+- `vue-tsc --noEmit`、目标 Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过；未改变请求链、权限或弹窗行为。
+- 复杂表单、number 类型字段和剩余 Element Plus 控件继续逐页核实，依赖删除门槛不变。
