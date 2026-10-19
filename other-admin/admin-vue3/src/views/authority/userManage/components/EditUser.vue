@@ -25,6 +25,7 @@
  */
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { nextTick, reactive, ref } from 'vue';
 
 import { createAdminUser, getAdminUserById, updateAdminUser, type AdminUserItem } from '@/api/authority/adminUser';
@@ -224,10 +225,10 @@ function resetForm(): void {
       label-position="right"
     >
       <el-form-item label="用户名称" prop="idCard">
-        <el-input
+        <LxInput
           v-model="userForm.idCard"
           placeholder="请输入用户名称（不支持中文和空格）"
-          maxlength="20"
+          :maxlength="20"
           :disabled="!isAdd"
           @blur="handleIdCardBlur"
         />
