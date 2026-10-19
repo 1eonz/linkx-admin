@@ -1,5 +1,12 @@
 # LinkX 项目地图
 
+## 2026-10-19 LxSectionTitle 当前版 Critique 证据
+
+- 入口：`linkx-fe/src/components/LxSectionTitle/`；设计源为 `design/区块标题 SectionTitle/`，Vue3 测试为 `lx-section-title.test.ts` 与 `lx-section-title-docs.spec.ts`。
+- 行为门禁：单测 **14/14**、文档 E2E **1/1**，覆盖变体、尺寸、标签、键盘、HUD、减少动效、320/375px 和 360px 容器查询；类型与格式检查通过。
+- A **32/40（Good）**；B detector 三目标为合法 `[]`/空/0，浏览器证据覆盖 Light/HUD、1280/375/320px 和容器查询。375px 的 `documentWidth=478` 作为待归因信号保留，HUD 主题证据不完整。
+- UI-10 严格行保持开放；真实配置页组合、权限/后端联调、Vue3 Element Plus 替换和页面引导不因本条完成。
+
 ## 2026-10-19 LxPagination 当前版复验
 
 - 入口：`linkx-fe/src/components/LxPagination/index.vue`、`demo/basic.vue`；文档：`linkx-fe/docs/components/lxpagination.md`。

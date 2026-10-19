@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-19 LxSectionTitle 当前版双路 Impeccable 复核
+
+- **行为验证**：`lx-section-title.test.ts` **14/14**、`lx-section-title-docs.spec.ts` **1/1**；覆盖 375/320px、HUD、减少动效、键盘操作、1280px 下 360px 容器查询；lx-ui typecheck、目标 Prettier 通过。
+- **Assessment A**：独立设计评审 **32/40（Good）**。无 P0/P1；P2 为真实内容 Demo、`extra` 数量/状态契约、leading 无障碍命名和 HUD 主题证据，P3 为中等宽度长标题发现性及动作反馈位置。
+- **Assessment B**：组件、Demo、文档 detector 均为合法 JSON `[]`、stderr 为空、退出码 `0`；Light/HUD、1280/375/320px、键盘、reduced-motion、360px 容器查询浏览器证据已保存于 `linkx-fe/.impeccable/critique/lxsectiontitle-assessment-b-2026-10-19/`。375px 记录 `documentWidth=478` 的页面级横溢出信号，HUD 未形成完整主题切换证据；`[]` 不单独代表通过。
+- **计划状态**：本轮不关闭 UI-10 严格矩阵；下一步先补真实内容 Demo、明确 `extra`/`leading` 契约并归因 375px 横溢出，再做有界复验。Vue3 宿主替换、权限、真实后端和页面引导继续后置。
+- **环境**：`npx impeccable update` 因 GitHub skill bundle 网络超时失败，本地 skill 未改变。
+
 ## 2026-10-19 LxProTable 当前版行为门禁复验
 
 - **复验范围**：核对 `LxProTable` 的跨页受控选择、`selectedKeys`/`select-change` 事件、`ResizeObserver` 卸载清理、加载/空态/错误重试、排序、局部横向滚动、方向键、44px 复选目标、HUD 主题和 `maskValue` 展示边界。

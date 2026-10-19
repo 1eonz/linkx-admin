@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-19 LxSectionTitle 当前版评审
+
+- [x] 单测 **14/14**、文档 E2E **1/1**、typecheck 和目标格式检查通过。
+- [x] Assessment A **32/40**；Assessment B detector JSON/stderr/退出码为合法 `[]`/空/`0`，浏览器证据已归档。
+- [ ] 375px 页面级横溢出与 HUD 主题证据仍需归因/补强；真实内容 Demo、`extra`/`leading` 契约和宿主组合回归未完成。
+- [ ] 不以本条关闭 UI-10，不提前替换 Vue3 Element Plus 或处理真实权限/后端。
+
 ## 2026-10-19 LxPagination 当前版复验与证据缺口
 
 - 单测 **5/5**、4177 文档 Playwright **3/3**，覆盖受控事件、`autoReset`/`autoScroll`、布局/背景、主题、键盘和 375px 局部滚动；当前未发现可复现 P0–P2。

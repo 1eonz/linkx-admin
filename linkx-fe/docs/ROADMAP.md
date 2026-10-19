@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-19 LxSectionTitle 当前版双路评审
+
+- 当前版单测 **14/14**、文档 E2E **1/1**、typecheck 和目标 Prettier 通过；A **32/40（Good）**，B 已保存 detector 三件套与 Light/HUD、1280/375/320px、键盘、reduced-motion、360px 容器浏览器证据。
+- B 记录 375px `documentWidth=478` 页面级横溢出信号和不完整 HUD 主题证据，需继续归因；真实内容 Demo、extra/leading 契约列为 P2。UI-10 行不关闭，宿主迁移与全站 Critique 继续后置。
+
 ## 2026-10-19 LxPagination 当前版复验
 
 - 当前实现与中文 API、Demo 和迁移契约一致；单测 **5/5**、4177 文档 E2E **3/3**，覆盖受控分页、条数切换、滚动、主题和窄屏局部滚动。

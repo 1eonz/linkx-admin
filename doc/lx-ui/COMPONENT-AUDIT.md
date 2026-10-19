@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-19 LxSectionTitle 当前版双路复核
+
+- 当前版单测 **14/14**、文档 E2E **1/1**、typecheck 和格式检查通过；覆盖变体、尺寸、标签、键盘、HUD、减少动效、320/375px 与 360px 容器查询。
+- Assessment A **32/40（Good）**，无 P0/P1；P2 为真实内容 Demo、`extra`/`leading` 契约和 HUD 主题验证，P3 为中等宽度标题发现性与动作反馈位置。
+- Assessment B 证据见 `linkx-fe/.impeccable/critique/lxsectiontitle-assessment-b-2026-10-19/`；三路 detector 为合法 `[]`/空 stderr/0，浏览器证据已保存。375px `documentWidth=478` 与 HUD 主题不完整证据保持开放。
+- 本条不增加 UI-10 关闭计数；Vue3 宿主配置页、真实权限/后端和 Element Plus 替换仍按 UI-04/UI-11 后置。
+
 ## 2026-10-19 LxPagination 当前版复验与证据核对
 
 - **验证**：单测 **5/5**、4177 文档 Playwright **3/3**，覆盖事件顺序、`autoReset`、`autoScroll`、自定义布局、背景、主题、键盘和 375px 局部滚动；未发现可复现 P0–P2。
@@ -474,7 +481,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxRadio`            | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；14px 靶环/6px 靶心、横纵选中色差、中文播报、禁用、减少动效与 44px 触屏均有当前版证据                                                                                  |
 | `LxRadioGroup`       | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/8px 垂直间距、方向键、禁用继承、历史只读值及 Light/HUD 行为均有当前版证据                                                                                   |
 | `LxSearchBar`        | `design/检索面板 SearchBar/`                      | **已关闭（G2，2026-10-17）**；单测 10/10、文档 E2E 5/5、综合 34/40；第四字段 4/4/4/12 栅格、桌面同行和窄屏独占操作行已复验；宿主业务参数映射仍待 UI-04 |
-| `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 2026-10-19 修复 400px 以下窄屏 extra 与标题挤压，单测 14/14、文档 E2E 1/1；既有 A 33/40 与 B 六视图证据保留，标题层级和 tag 读屏策略仍列后续建议，UI-10 严格行仍开放 |
+| `LxSectionTitle`     | `design/区块标题 SectionTitle/`                   | 当前版 A 32/40；B 三路 detector 合法 `[]`/空/0，Light/HUD、1280/375/320px、键盘、减少动效和 360px 容器证据已归档；375px 页面级横溢出与 HUD 主题证据待归因，真实内容 Demo、extra/leading 契约仍为 P2，UI-10 严格行开放 |
 | `LxSelect`           | `design/表单控件八件套/`                          | **已关闭（Wave 20）**；桌面 32px、390px 触控目标/选项行 44px；定向单测 15/15、文档 E2E 8/8、A/B 36/40 与六场景浏览器证据、代码复审无未关闭 P0–P2；目录密度 P3 留后续整理                     |
 | `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                                                                            |
 | `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                                                                                                 |

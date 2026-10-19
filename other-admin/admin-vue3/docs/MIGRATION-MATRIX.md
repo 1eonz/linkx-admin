@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-19 LxSectionTitle 组件侧门禁
+
+- lx-ui 组件侧已通过单测 **14/14**、文档 E2E **1/1** 和当前版双路 Critique（A **32/40**；B 证据见 `linkx-fe/.impeccable/critique/lxsectiontitle-assessment-b-2026-10-19/`）。
+- 业务页迁移仍需保留标题层级、标签语义、长标题、extra 键盘焦点和权限过滤；375px 页面级横溢出与 HUD 证据尚有待归因，不能把组件证据计为页面完成。
+
 ## 2026-10-19 LxPagination 宿主迁移备注
 
 - 组件当前版单测 **5/5**、4177 文档 E2E **3/3**；宿主接入保留 `change(page, pageSize)` 顺序、`autoReset`、`autoScroll` 和窄屏局部滚动容器。
