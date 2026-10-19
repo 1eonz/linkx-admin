@@ -26,6 +26,7 @@
  * - cancel: 点击取消按钮时触发
  */
 import type { FormInstance, FormRules } from 'element-plus';
+import { LxSwitch } from 'lx-ui';
 import { reactive, ref } from 'vue';
 
 import type { PcNavTab } from '@/api/baseData/layoutConfig';
@@ -139,7 +140,7 @@ function handleSubmit(): void {
         <el-input-number v-model="formData.order" :min="0" :max="999" />
       </el-form-item>
       <el-form-item label="打开方式" prop="openWay">
-        <el-switch
+        <LxSwitch
           v-model="formData.openWay"
           :active-value="1"
           :inactive-value="0"

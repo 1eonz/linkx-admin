@@ -31,6 +31,7 @@
 import { Delete, Upload } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules, UploadFile } from 'element-plus';
+import { LxSwitch } from 'lx-ui';
 import { computed, reactive, ref, watch } from 'vue';
 
 import type { LayoutSection, LayoutSectionType } from '@/api/baseData/layoutConfig';
@@ -262,7 +263,7 @@ function handleSubmit(): void {
         </el-select>
       </el-form-item>
       <el-form-item label="是否显示" prop="show">
-        <el-switch
+        <LxSwitch
           v-model="formData.show"
           :active-value="1"
           :inactive-value="0"

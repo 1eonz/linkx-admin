@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
+import { LxSwitch } from 'lx-ui';
 import { reactive, ref, watch } from 'vue';
 
 import {
@@ -193,7 +194,7 @@ defineExpose({ open });
   >
     <div v-loading="loading" class="task-config">
       <div class="config-row">
-        <span>开启任务派发：</span><el-switch v-model="enableTask" :active-value="1" :inactive-value="0" />
+        <span>开启任务派发：</span><LxSwitch v-model="enableTask" :active-value="1" :inactive-value="0" />
       </div>
       <el-result v-if="loadError" icon="error" title="任务标准件配置加载失败" sub-title="请重试后再保存"
         ><template #extra
@@ -230,7 +231,7 @@ defineExpose({ open });
               :label="option"
               :value="option" /></el-select
         ></el-form-item>
-        <el-form-item label="是否紧急"><el-switch v-model="config.urgent.value.default as boolean" /></el-form-item>
+        <el-form-item label="是否紧急"><LxSwitch v-model="config.urgent.value.default as boolean" /></el-form-item>
       </el-form>
     </div>
     <template #footer
