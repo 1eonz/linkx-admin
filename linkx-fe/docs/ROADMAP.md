@@ -1,5 +1,11 @@
 # lx-ui 路线图
 
+## 2026-10-20 LxMetricCard 趋势语义与标题层级
+
+- `trendStatus` 只负责趋势文案颜色，`trendDirection` 只有显式传入时才显示箭头或横线；新增 `headingLevel`（默认 `h3`）提供正确标题层级。
+- 单测 **16/16**、4178 隔离文档 E2E **3/3**、typecheck、206 modules 构建、目标格式和差异检查通过；Demo 已补齐显式上行方向。
+- 三路 detector 为合法 JSON `[]`、退出码 `0`，但 stderr 有 npm 配置弃用警告；Assessment A **31/40**、Assessment B 窄屏页面级溢出待归因，正式 Impeccable A/B、overlay、snapshot/trend 和 UI-10 不关闭。
+
 ## 2026-10-20 LxInput 边框与触屏清空入口复验
 
 - `LxInput` 普通、密码、透传及复合前后缀场景统一由组件样式绘制真实 `1px` 控件边框；本次复核确认 Demo 没有单独覆盖边框，问题属于组件样式，已有实现继续生效。

@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxMetricCard 趋势语义与标题层级收口
+
+- **修复**：趋势图标不再根据 `trendStatus` 猜测上升/下降；只有显式传入 `trendDirection=up/down/flat` 才渲染对应图标，避免将在线、忙碌等状态误读为趋势。标题默认使用 `h3`，新增 `headingLevel` 类型并保留标题/标签插槽契约。
+- **同步**：Demo 首张卡补充显式上行方向；中文 API 文档和单测同步更新。
+- **验证**：LxMetricCard 单测 **16/16**；4178 隔离文档 Playwright **3/3**；lx-ui typecheck、生产构建、目标 Prettier 和 `git diff --check` 通过。组件、Demo、文档 detector 均为合法 JSON `[]`、退出码 `0`；stderr 含 npm 配置弃用警告，不能称为干净扫描。
+- **审查边界**：Assessment A **31/40** 记录只读卡 hover 暗示可点击、Demo 首屏密度和长值截断等 P2；Assessment B 发现窄屏页面级约 `630px > 390px` 横溢出，卡片自身边界正常，暂归文档壳层/表格待归因。未取得独立视觉 overlay/snapshot，正式 Impeccable 与 UI-10 仍开放。
+- **后续**：继续按组件门禁队列处理未关闭项；权限、页面引导、真实后端和 Vue3 Element Plus 替换保持后置。业务 API 继续使用 `.then().catch().finally()`。
+
 ## [2026-10-20] LxInput 边框与触屏清空入口交接
 
 - **排查结论**：前后缀、密码和透传输入框的边框缺失属于组件样式层问题，不是 Demo 问题；`LxInput` 已统一使用控件边框令牌绘制普通 wrapper 和复合根节点外框。

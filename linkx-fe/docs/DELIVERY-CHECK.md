@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxMetricCard 趋势与标题语义
+
+- [x] 趋势方向改为显式 `trendDirection`，未传入时不猜测；新增 `headingLevel`，默认使用 `h3` 并导出类型。
+- [x] Demo、中文 API、单测同步；LxMetricCard 单测 **16/16**、4178 隔离文档 E2E **3/3**、typecheck、构建、Prettier 和差异检查通过。
+- [x] 组件、Demo、文档 detector JSON 均为合法 `[]`，退出码均为 `0`；stderr 已单独记录 npm 配置弃用警告。
+- [ ] Assessment A **31/40** 的 P2、Assessment B 窄屏页面级横溢出归因、独立 overlay/snapshot/trend 与正式 UI-10 仍待完成；不以行为测试或空数组代替视觉审查。
+
 ## 2026-10-20 LxInput 边框与触屏清空入口
 
 - [x] 普通、密码、透传及复合前后缀输入框保留组件真实 `1px` 外边框，边框来源为 `--lx-control-border`，不是 Demo 临时样式。

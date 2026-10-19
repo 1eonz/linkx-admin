@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-20 LxMetricCard 趋势方向与标题层级复验
+
+- **实现**：移除按 `trendStatus` 自动猜测方向的行为；仅显式 `trendDirection` 渲染 `arrow-up`、`arrow-down` 或 `minus`。新增 `headingLevel`（默认 `h3`），并从库入口导出类型；Demo、中文 API 和测试同步。
+- **证据**：LxMetricCard 单测 **16/16**、4178 隔离文档 E2E **3/3**、typecheck、206 modules 构建、目标 Prettier 和差异检查通过。组件、Demo、文档 detector 均为合法 JSON `[]`、退出码 `0`；stderr 含 npm 配置弃用警告。
+- **Assessment**：A **31/40**；B 浏览器覆盖 Light/HUD、桌面/窄屏/reduced-motion，卡片自身边界正常，但发现约 `630px > 390px` 的页面级横溢出，暂归文档壳层/表格待归因。
+- **边界**：P2（只读 hover 暗示可点击、Demo 密度、长值截断）、正式独立 overlay/snapshot/trend、UI-10 严格矩阵、业务 API/权限和 Vue3 Element Plus 替换继续开放；detector `[]` 不单独代表通过。
+
 ## 2026-10-20 LxInput 边框与清空按钮复验
 
 - **边框归因**：前后缀、密码和透传场景的外框由 `LxInput` 组件样式统一绘制；Demo 仅提供插槽和属性示例，不承担控件边框契约。

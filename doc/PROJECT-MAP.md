@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxMetricCard 语义收口
+
+- 入口：`linkx-fe/src/components/LxMetricCard/`；组件标题默认使用 `h3`，可通过 `headingLevel` 选择宿主层级；趋势方向只由显式 `trendDirection` 控制。
+- 证据：单测 **16/16**、4178 隔离文档 E2E **3/3**、typecheck/build 和目标格式检查通过；三路 detector 为 JSON `[]`/退出码 `0`，stderr 的 npm 警告已记录。
+- 评审边界：Assessment A **31/40**；Assessment B 的窄屏页面级横溢出暂归文档壳层/表格待归因，卡片自身边界正常。正式视觉 Critique、宿主指标 API、权限和 Vue3 Element Plus 替换仍未完成。
+
 ## 2026-10-20 LxMetricCard detector 证据
 
 - 当前组件/Demo/文档 detector 为合法 `[]`、退出码 `0`，但 stderr 含 npm 警告；仅能记录静态零命中，不能替代正式视觉 Critique。

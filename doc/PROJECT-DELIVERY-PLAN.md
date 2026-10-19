@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxMetricCard 趋势语义与标题层级收口
+
+- **实现**：`trendStatus` 不再推断方向，只有显式 `trendDirection` 才渲染趋势图标；新增 `headingLevel`，默认 `h3`，并从库入口导出类型。Demo、中文 API 和单测同步，首张指标卡补充显式 `up`。
+- **验证**：LxMetricCard 单测 **16/16**；4178 隔离文档 Playwright **3/3**；lx-ui typecheck、206 modules 构建、目标 Prettier 与 `git diff --check` 通过。组件、Demo、文档 detector 均为合法 JSON `[]`、退出码 `0`，stderr 含 npm 配置弃用警告。
+- **评审结论**：Assessment A **31/40**；Assessment B 覆盖 Light/HUD、桌面/窄屏/reduced-motion，卡片自身边界正常，但存在约 `630px > 390px` 的页面级横溢出，暂归文档壳层/表格待归因。P2、独立 overlay/snapshot/trend 和正式 UI-10 仍开放；空数组不单独代表 Critique 通过。
+- **下一步**：继续未关闭组件门禁和正式视觉证据；权限中心、页面操作引导、真实后端联调与 Vue3 Element Plus 替换保持后置，API 请求继续 `.then().catch().finally()`。
+
 ## 2026-10-20 LxMetricCard detector 复验边界
 
 - 三个当前目标 detector 均输出合法 JSON `[]`、退出码 `0`；stderr 含 npm 配置弃用警告，不能记为“stderr 为空”。结合文档 E2E **3/3** 仅作为阶段性静态/行为证据，正式 Impeccable A/B、overlay 和 snapshot/trend 仍开放。
