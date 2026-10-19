@@ -3,10 +3,13 @@ import type { LxStatus } from '../../tokens'
 export type LxMetricCardStatus = 'normal' | 'success' | 'warning' | 'danger'
 export type LxMetricCardValueType = 'default' | 'success' | 'warning' | 'danger'
 export type LxMetricCardTrendDirection = 'up' | 'down' | 'flat'
+export type LxMetricCardHeadingLevel = 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div'
 
 export interface LxMetricCardProps {
   /** 指标标题；与旧版 label 同时传入时优先使用 title。 */
   title?: string
+  /** 标题语义层级；默认使用 h3，纯装饰或由宿主包裹标题时可使用 div。 */
+  headingLevel?: LxMetricCardHeadingLevel
   /** 保留原有 lx-ui 属性，兼容旧版调用。 */
   label?: string
   value?: number | string
@@ -21,7 +24,7 @@ export interface LxMetricCardProps {
   badgeStatus?: LxStatus
   trend?: string
   trendStatus?: LxStatus
-  /** 趋势方向；未传入时兼容旧版按 trendStatus 推断。 */
+  /** 趋势方向；未传入时不猜测方向，只展示趋势文案。 */
   trendDirection?: LxMetricCardTrendDirection
   progress?: number
   /** 进度条左侧说明。 */

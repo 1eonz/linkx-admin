@@ -36,7 +36,7 @@ describe('LxMetricCard', () => {
     wrapper.unmount();
   });
 
-  it('uses the matching LxIcon arrow for the trend status', () => {
+  it('does not infer a trend direction from status', () => {
     const up = mount(LxMetricCard, {
       props: { trend: '趋势上行', trendStatus: 'online' },
     });
@@ -44,12 +44,16 @@ describe('LxMetricCard', () => {
       props: { trend: '趋势下行', trendStatus: 'error' },
     });
 
-    expect(up.get('.lx-metric-card__trend [data-icon-name="arrow-up"]').exists()).toBe(true);
-    expect(down.get('.lx-metric-card__trend [data-icon-name="arrow-down"]').exists()).toBe(true);
-    expect(up.get('.lx-metric-card__trend svg').attributes('aria-hidden')).toBe('true');
-    expect(down.get('.lx-metric-card__trend svg').attributes('aria-hidden')).toBe('true');
+    expect(up.find('.lx-metric-card__trend [data-icon-name="arrow-up"]').exists()).toBe(false);
+    expect(down.find('.lx-metric-card__trend [data-icon-name="arrow-down"]').exists()).toBe(false);
     up.unmount();
     down.unmount();
+  });
+
+  it('renders the configured heading level', () => {
+    const wrapper = mount(LxMetricCard, { props: { title: '详情指标', headingLevel: 'h4' } });
+    expect(wrapper.get('h4.lx-metric-card__label').text()).toBe('详情指标');
+    wrapper.unmount();
   });
 
   it.each([

@@ -9,6 +9,7 @@ defineOptions({ name: 'LxMetricCard' })
 
 const props = withDefaults(defineProps<LxMetricCardProps>(), {
   title: '',
+  headingLevel: 'h3',
   label: '',
   value: '',
   unit: '',
@@ -88,7 +89,7 @@ const trendIconName = computed(() => {
   if (props.trendDirection === 'up') return 'arrow-up'
   if (props.trendDirection === 'down') return 'arrow-down'
   if (props.trendDirection === 'flat') return 'minus'
-  return props.trendStatus === 'error' ? 'arrow-down' : 'arrow-up'
+  return undefined
 })
 const progressPercent = computed(() => {
   const value = Number(props.progress ?? 0)
@@ -111,10 +112,10 @@ const progressPercent = computed(() => {
           :pulse="metricStatusDotStatus === 'online'"
           aria-hidden="true"
         />
-        <span class="lx-metric-card__label">
+        <component :is="headingLevel" class="lx-metric-card__label">
           <slot v-if="$slots.title" name="title">{{ metricTitle }}</slot>
           <slot v-else name="label">{{ metricTitle }}</slot>
-        </span>
+        </component>
         <span class="lx-metric-card__visually-hidden">
           状态：{{ metricStatusLabel[metricStatus] }}
         </span>
@@ -147,7 +148,12 @@ const progressPercent = computed(() => {
     </div>
 
     <p v-if="trend" class="lx-metric-card__trend" :class="`is-${trendStatus}`">
-      <LxIcon :name="trendIconName" :size="12" />{{ trend }}
+      <LxIcon
+        v-if="trendIconName"
+        :name="trendIconName"
+        :size="12"
+        aria-hidden="true"
+      />{{ trend }}
     </p>
 
     <div v-if="progress !== undefined" class="lx-metric-card__progress-section">

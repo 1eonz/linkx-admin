@@ -19,6 +19,7 @@ const retryMessage = ref('')
         badge-status="online"
         trend="全部边缘节点与接入感知终端运行正常"
         trend-status="online"
+        trend-direction="up"
         :progress="99.9"
         progress-label="在线健康指标"
         progress-value="12,842 / 12,850 台"
@@ -46,6 +47,7 @@ const retryMessage = ref('')
         badge-status="error"
         trend="含 3 起控制柜失联告警与专网中断事件"
         trend-status="error"
+        trend-direction="down"
         :progress="62.5"
         progress-label="待办积压率"
         progress-value="62.5%"
@@ -96,6 +98,7 @@ const retryMessage = ref('')
         trend="数值异常但趋势向上"
         trend-status="error"
         trend-direction="up"
+        heading-level="h4"
       />
     </section>
 

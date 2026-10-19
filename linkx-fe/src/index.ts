@@ -154,6 +154,7 @@ export type {
 } from './components/LxSectionTitle/types'
 export type {
   LxMetricCardProps,
+  LxMetricCardHeadingLevel,
   LxMetricCardStatus,
   LxMetricCardTrendDirection,
   LxMetricCardValueType,
