@@ -640,3 +640,7 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 
 - prefix/suffix、内部槽位和 prepend/append 的行高统一为 lx-input-content-height，输入文字与图标不再受 Element Plus 默认行高影响。
 - 复合前后缀 E2E 1/1、typecheck/build、目标 Prettier 和 ESLint 通过；A 31/40，B 为合法 []/空/0 并有独立浏览器尺寸证据。空数组不单独代表 Critique 通过。
+# 2026-10-19 LxProTable 当前版门禁
+
+- 宿主适配器单测 **4/4**，文档 Playwright **4/4**；覆盖跨页选择、取消当前页后保留其他页、公开方法全量清空、加载/空态/错误重试、排序、375px 局部滚动、方向键、44px 复选目标、HUD 和减少动效。
+- `vue-tsc`、生产构建、VitePress 构建、目标 Prettier 和 `git diff --check` 通过。Assessment A 29/40（Good）；detector JSON/stderr/退出码为合法 `[]`/空/`0`，headless 页面截图为空白，不能单独代表 Impeccable 通过；正式 A/B overlay 及 snapshot/trend 保持开放。

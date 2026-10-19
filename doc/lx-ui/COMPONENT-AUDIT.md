@@ -760,3 +760,8 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 - 改动：prefix/suffix、内部槽位及 prepend/append 的行高绑定内容轨道令牌，消除 Element Plus 默认 line-height 对文字和图标垂直位置的影响。
 - 证据：复合前后缀 E2E 1/1；lx-ui typecheck/build、目标格式和 ESLint 通过；sm/md/lg 与 390px 窄屏几何保持稳定。
 - 审查：A 31/40；B detector JSON/stderr/退出码为合法 []/空/0，桌面/HUD/窄屏浏览器证据已保存。一次错误节点的焦点读数由复合输入断言排除，[] 不单独表示正式 Critique 通过。
+# 2026-10-19 LxProTable 当前版复验
+
+- **行为**：跨页 `selectedKeys` 由当前页差集合并，公开 `clearSelection()` 清除全部页，受控选择、排序、加载/空态/错误重试、局部横向滚动、方向键、44px 复选目标、HUD 和 `ResizeObserver` 卸载清理均有当前版证据。
+- **结果**：单测 4/4、文档 E2E 4/4、类型/构建/文档构建/格式检查通过，未发现可复现 P0–P2。
+- **审查**：Assessment A 29/40（Good）；跨页选择 P1 已修复。Demo 危险操作、工具栏密度和横向滚动可发现性仍列为后续 P1/P2。`maskValue` 仍只消费宿主注入权限源；真实权限和后端契约未联调。detector 合法 `[]`/空 stderr/0 不替代独立 A/B，UI-10 严格矩阵保持开放。

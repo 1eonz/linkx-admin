@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-19 LxProTable 当前版行为门禁复验
+
+- **复验范围**：核对 `LxProTable` 的跨页受控选择、`selectedKeys`/`select-change` 事件、`ResizeObserver` 卸载清理、加载/空态/错误重试、排序、局部横向滚动、方向键、44px 复选目标、HUD 主题和 `maskValue` 展示边界。
+- **修复**：`selection-change` 现在按当前页差集更新，保留其他页已选行，再统一发出全量 `selectedKeys` 与 `select-change`；暴露的 `clearSelection()` 增加独立全量清空路径，避免把“清空所有页”误判为“取消当前页”。新增取消当前页和跨页全量清空回归，避免依赖 Element Plus 跨页事件返回的内部细节。
+- **验证结果**：宿主适配器单测 **4/4**、4177 文档 Playwright **4/4**、lx-ui `vue-tsc --noEmit`、206 modules 生产构建、VitePress 文档构建、目标 Prettier 和 `git diff --check` 通过；代码复审未发现新的 P0–P2。
+- **Impeccable 证据边界**：源码 detector JSON 为合法 `[]`，stderr 为空，退出码 `0`；Assessment A **29/40（Good）** 识别出已修复的跨页选择 P1，以及 Demo 危险操作、工具栏密度和横向滚动发现性 P1/P2。4177 页面 HTTP 200，但独立 headless 截图为空白，未形成可靠 overlay；本波不关闭 UI-10 严格矩阵行，正式浏览器 A/B 与 snapshot/trend 仍待完成。
+- **迁移边界**：`tableAttrs`、自定义列插槽、权限脱敏和跨页选择语义继续作为宿主适配契约；真实分页/权限后端、业务页面替换和 Element Plus 删除仍按全库门禁后置。API 请求继续使用 `.then().catch().finally()`。
+
 ## 2026-10-19 LxPagination 当前版复验与证据核对
 
 - **验证**：LxPagination 单测 **5/5**、4177 文档 Playwright **3/3**，覆盖受控分页事件顺序、`autoReset`、`autoScroll`、自定义布局、背景状态、主题切换、键盘焦点和 375px 局部滚动；未发现可复现 P0–P2。

@@ -2730,3 +2730,9 @@
 - 长普通值使用原生按钮切换展开/收起，长状态使用按钮包裹 `LxStatusDot`；状态点内部退出 Tab 顺序，保留标签和值的完整可访问名称。
 - 单测 **10/10**、文档 E2E **3/3**、lx-ui typecheck、目标格式检查通过；detector 合法 `[]`、空 stderr、退出码 `0`，仅代表静态零命中。
 - 新独立 Impeccable A/B、综合报告和 snapshot/trend 待补；后续复验必须覆盖 Light/HUD、窄屏、减少动效和展开前后状态。
+# [2026-10-19] LxProTable 当前版行为门禁复验
+
+- **交接结果**：修复 `selection-change` 当前页差集逻辑，并为暴露的 `clearSelection()` 增加全量清空路径；取消当前页行不会误删其他页选择，清空操作也不会残留远端页 key。跨页受控选择、加载/空态/错误重试、排序、375px 局部滚动、方向键、44px 复选目标、HUD 和卸载清理复核均通过。
+- **验证**：宿主适配器单测 **4/4**，4177 文档 Playwright **4/4**；lx-ui 类型检查、生产构建、文档构建、目标 Prettier 和差异检查通过。
+- **审查边界**：Assessment A **29/40（Good）**；其跨页选择 P1 已修复，Demo 危险动作、工具栏密度和横向滚动提示列为后续 P1/P2。detector JSON/stderr/退出码为合法 `[]`/空/`0`，但 headless 页面截图为空白，未形成可靠 overlay 或 snapshot/trend，不能宣称正式 Impeccable 通过，UI-10 行保持开放。
+- **下一步**：继续补齐剩余组件的当前版门禁与正式双路 Critique；完成 lx-ui 全库门禁后，再按迁移契约分批替换 Vue3 Element Plus。真实权限、后端联调和页面操作引导继续后置。
