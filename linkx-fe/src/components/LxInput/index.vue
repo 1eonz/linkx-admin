@@ -146,9 +146,6 @@ defineExpose({
         type="button"
         :disabled="!clearButtonEnabled"
         :tabindex="clearButtonVisible && clearButtonTabbable ? 0 : -1"
-        :aria-hidden="
-          clearButtonVisible && clearButtonTabbable ? undefined : 'true'
-        "
         aria-label="清空输入框"
         title="清空输入"
         :style="{ visibility: clearButtonVisible ? 'visible' : 'hidden' }"
