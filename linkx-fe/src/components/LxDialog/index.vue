@@ -121,8 +121,9 @@ function onConfirm() {
 
     <!-- 底部：顶 1px 分隔线，按钮右对齐：取消（次按钮）在左、主操作在右（stitch 按钮律）。
      按钮内核切换为 LxButton（EP 内核）：loading 时呈现 spinner 并拦截点击 -->
-    <template v-if="!hideFooter" #footer>
-      <div class="lx-dialog__footer">
+    <template v-if="!hideFooter || $slots.footer" #footer>
+      <slot v-if="$slots.footer" name="footer" />
+      <div v-else class="lx-dialog__footer">
         <LxButton size="md" :disabled="loading" @click="onCancel">{{
           cancelText
         }}</LxButton>

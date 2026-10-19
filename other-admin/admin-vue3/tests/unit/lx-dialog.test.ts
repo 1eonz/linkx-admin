@@ -20,7 +20,7 @@ const DialogStub = defineComponent({
               }),
             ),
             h('main', slots.default?.()),
-            h('footer', slots.footer?.()),
+            slots.footer ? h('footer', slots.footer()) : null,
           ])
         : null;
   },
@@ -89,6 +89,13 @@ describe('LxDialog', () => {
 
     expect(wrapper.get('footer button').text()).toBe('完成');
     expect(wrapper.find('.lx-btn').exists()).toBe(false);
+    wrapper.unmount();
+  });
+
+  it('does not render an empty footer when it is hidden without a slot', () => {
+    const wrapper = mountDialog({ hideFooter: true });
+
+    expect(wrapper.find('footer').exists()).toBe(false);
     wrapper.unmount();
   });
 });
