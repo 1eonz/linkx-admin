@@ -59,146 +59,148 @@ test.describe('LxMetricCard 文档示例', () => {
     await expect(legacyCard.locator('.lx-metric-card__visually-hidden')).toHaveText('状态：警告');
   });
 
-  test('在 320px 下保持卡片边界，主题和减少动效令牌生效', async ({ page }) => {
-    await page.setViewportSize({ width: 320, height: 760 });
-    await page.goto('/components/lxmetriccard');
+  test('在 320px 和 375px 下保持卡片边界，主题和减少动效令牌生效', async ({ page }) => {
+    for (const viewportWidth of [320, 375]) {
+      await page.setViewportSize({ width: viewportWidth, height: 760 });
+      await page.goto('/components/lxmetriccard');
 
-    const card = page.locator('.metric-card-demo__grid .lx-metric-card').first();
-    const cardBox = await card.boundingBox();
-    expect(cardBox?.x).toBeGreaterThanOrEqual(0);
-    expect((cardBox?.x ?? 0) + (cardBox?.width ?? 0)).toBeLessThanOrEqual(320);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+      const card = page.locator('.metric-card-demo__grid .lx-metric-card').first();
+      const cardBox = await card.boundingBox();
+      expect(cardBox?.x).toBeGreaterThanOrEqual(0);
+      expect((cardBox?.x ?? 0) + (cardBox?.width ?? 0)).toBeLessThanOrEqual(viewportWidth);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(viewportWidth);
 
-    const narrowCardGeometry = await page.locator('.metric-card-demo__grid .lx-metric-card').evaluateAll((cards) =>
-      cards.map((element) => {
-        const card = element.getBoundingClientRect();
-        const title = element.querySelector<HTMLElement>('.lx-metric-card__title');
-        const badge = element.querySelector<HTMLElement>('.lx-metric-card__badge');
-        const valueRow = element.querySelector<HTMLElement>('.lx-metric-card__value-row');
-        const value = element.querySelector<HTMLElement>('.lx-metric-card__value-wrap');
-        if (!title || !valueRow || !value) throw new Error('窄卡结构缺失');
-        const badgeBounds = badge?.getBoundingClientRect();
-        const titleBounds = title.getBoundingClientRect();
-        return {
-          cardFits: card.width >= 0 && element.scrollWidth <= element.clientWidth,
-          badgeFits: !badge || badge.scrollWidth <= badge.clientWidth,
-          badgeAfterTitle: !badgeBounds || badgeBounds.top >= titleBounds.bottom - 1,
-          valueFits: value.scrollWidth <= value.clientWidth,
-          valueRowFits: valueRow.scrollWidth <= valueRow.clientWidth,
-        };
-      }),
-    );
-    expect(narrowCardGeometry.every((geometry) => Object.values(geometry).every(Boolean))).toBe(true);
-
-    const lightColors = await card.evaluate((element) => {
-      const title = element.querySelector('.lx-metric-card__label');
-      const trend = element.querySelector('.lx-metric-card__trend');
-      const value = element.querySelector('.lx-metric-card__value');
-      if (!title || !trend || !value) throw new Error('指标卡缺少标题、说明或数值');
-      return {
-        background: getComputedStyle(element).backgroundColor,
-        title: getComputedStyle(title).color,
-        trend: getComputedStyle(trend).color,
-        value: getComputedStyle(value).color,
-      };
-    });
-    expect(contrastRatio(lightColors.title, lightColors.background)).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio(lightColors.trend, lightColors.background)).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio(lightColors.value, lightColors.background)).toBeGreaterThanOrEqual(3);
-
-    const semanticTrendColors = await page.locator('.metric-card-demo__grid .lx-metric-card').evaluateAll((cards) =>
-      cards.slice(0, 3).map((element) => {
-        const trend = element.querySelector('.lx-metric-card__trend');
-        if (!trend) throw new Error('指标卡缺少趋势说明');
-        return {
-          background: getComputedStyle(element).backgroundColor,
-          color: getComputedStyle(trend).color,
-        };
-      }),
-    );
-    expect(new Set(semanticTrendColors.map(({ color }) => color)).size).toBe(3);
-    expect(semanticTrendColors.every(({ color, background }) => contrastRatio(color, background) >= 4.5)).toBe(true);
-
-    const warningCard = page.locator('.metric-card-demo__grid .lx-metric-card').nth(1);
-    const warningColors = await warningCard.evaluate((element) => {
-      const value = element.querySelector('.lx-metric-card__value');
-      if (!value) throw new Error('指标卡缺少数值');
-      return {
-        background: getComputedStyle(element).backgroundColor,
-        value: getComputedStyle(value).color,
-      };
-    });
-    expect(contrastRatio(warningColors.value, warningColors.background)).toBeGreaterThanOrEqual(3);
-
-    const longTitleFits = await card.evaluate((element) => {
-      const title = element.querySelector('.lx-metric-card__label');
-      if (!title) return false;
-      const previousText = title.textContent;
-      title.textContent = '连续监测接入感知终端运行状态的超长指标标题'.repeat(4);
-      const fits = title.scrollWidth <= title.clientWidth;
-      title.textContent = previousText;
-      return fits;
-    });
-    expect(longTitleFits).toBe(true);
-
-    const lightCardSurface = await card.evaluate((element) => getComputedStyle(element).backgroundColor);
-    await page.locator('html').evaluate((element) => element.classList.add('lx-theme-hud'));
-    const hudCardSurface = await card.evaluate((element) => getComputedStyle(element).backgroundColor);
-    expect(hudCardSurface).not.toBe(lightCardSurface);
-    const hudTextContrast = await card.evaluate((element) => {
-      const title = element.querySelector('.lx-metric-card__label');
-      const trend = element.querySelector('.lx-metric-card__trend');
-      if (!title || !trend) throw new Error('指标卡缺少标题或说明');
-      return {
-        background: getComputedStyle(element).backgroundColor,
-        title: getComputedStyle(title).color,
-        trend: getComputedStyle(trend).color,
-      };
-    });
-    expect(contrastRatio(hudTextContrast.title, hudTextContrast.background)).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio(hudTextContrast.trend, hudTextContrast.background)).toBeGreaterThanOrEqual(4.5);
-    const hudTrendColors = await page.locator('.metric-card-demo__grid .lx-metric-card').evaluateAll((cards) =>
-      cards.slice(0, 3).map((element) => {
-        const trend = element.querySelector('.lx-metric-card__trend');
-        if (!trend) throw new Error('指标卡缺少趋势说明');
-        return {
-          background: getComputedStyle(element).backgroundColor,
-          color: getComputedStyle(trend).color,
-        };
-      }),
-    );
-    expect(hudTrendColors.every(({ color, background }) => contrastRatio(color, background) >= 4.5)).toBe(true);
-
-    await page.emulateMedia({ reducedMotion: 'reduce' });
-    const transition = await card
-      .locator('.lx-metric-card__progress-value')
-      .evaluate((element) => getComputedStyle(element).transitionDuration);
-    const transitionProperty = await card
-      .locator('.lx-metric-card__progress-value')
-      .evaluate((element) => getComputedStyle(element).transitionProperty);
-    const iconTransition = await card
-      .locator('.lx-metric-card__trend [data-icon-name]')
-      .first()
-      .evaluate((element) => getComputedStyle(element).transitionDuration);
-    expect(Number.parseFloat(transition)).toBeLessThanOrEqual(0.001);
-    expect(transitionProperty).toBe('transform');
-    expect(Number.parseFloat(iconTransition)).toBe(0);
-
-    await page.locator('html').evaluate((element) => {
-      element.setAttribute('dir', 'rtl');
-    });
-    await expect
-      .poll(() =>
-        card.locator('.lx-metric-card__progress-value').evaluate((element) => {
-          const styles = getComputedStyle(element);
-          const [originX] = styles.transformOrigin.split(' ');
-          return Math.abs(Number.parseFloat(originX) - element.getBoundingClientRect().width) <= 1;
+      const narrowCardGeometry = await page.locator('.metric-card-demo__grid .lx-metric-card').evaluateAll((cards) =>
+        cards.map((element) => {
+          const card = element.getBoundingClientRect();
+          const title = element.querySelector<HTMLElement>('.lx-metric-card__title');
+          const badge = element.querySelector<HTMLElement>('.lx-metric-card__badge');
+          const valueRow = element.querySelector<HTMLElement>('.lx-metric-card__value-row');
+          const value = element.querySelector<HTMLElement>('.lx-metric-card__value-wrap');
+          if (!title || !valueRow || !value) throw new Error('窄卡结构缺失');
+          const badgeBounds = badge?.getBoundingClientRect();
+          const titleBounds = title.getBoundingClientRect();
+          return {
+            cardFits: card.width >= 0 && element.scrollWidth <= element.clientWidth,
+            badgeFits: !badge || badge.scrollWidth <= badge.clientWidth,
+            badgeAfterTitle: !badgeBounds || badgeBounds.top >= titleBounds.bottom - 1,
+            valueFits: value.scrollWidth <= value.clientWidth,
+            valueRowFits: valueRow.scrollWidth <= valueRow.clientWidth,
+          };
         }),
-      )
-      .toBe(true);
-    await page.locator('html').evaluate((element) => {
-      element.removeAttribute('dir');
-    });
-    await page.screenshot({ path: 'test-results/lx-metric-card-320.png' });
+      );
+      expect(narrowCardGeometry.every((geometry) => Object.values(geometry).every(Boolean))).toBe(true);
+
+      const lightColors = await card.evaluate((element) => {
+        const title = element.querySelector('.lx-metric-card__label');
+        const trend = element.querySelector('.lx-metric-card__trend');
+        const value = element.querySelector('.lx-metric-card__value');
+        if (!title || !trend || !value) throw new Error('指标卡缺少标题、说明或数值');
+        return {
+          background: getComputedStyle(element).backgroundColor,
+          title: getComputedStyle(title).color,
+          trend: getComputedStyle(trend).color,
+          value: getComputedStyle(value).color,
+        };
+      });
+      expect(contrastRatio(lightColors.title, lightColors.background)).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(lightColors.trend, lightColors.background)).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(lightColors.value, lightColors.background)).toBeGreaterThanOrEqual(3);
+
+      const semanticTrendColors = await page.locator('.metric-card-demo__grid .lx-metric-card').evaluateAll((cards) =>
+        cards.slice(0, 3).map((element) => {
+          const trend = element.querySelector('.lx-metric-card__trend');
+          if (!trend) throw new Error('指标卡缺少趋势说明');
+          return {
+            background: getComputedStyle(element).backgroundColor,
+            color: getComputedStyle(trend).color,
+          };
+        }),
+      );
+      expect(new Set(semanticTrendColors.map(({ color }) => color)).size).toBe(3);
+      expect(semanticTrendColors.every(({ color, background }) => contrastRatio(color, background) >= 4.5)).toBe(true);
+
+      const warningCard = page.locator('.metric-card-demo__grid .lx-metric-card').nth(1);
+      const warningColors = await warningCard.evaluate((element) => {
+        const value = element.querySelector('.lx-metric-card__value');
+        if (!value) throw new Error('指标卡缺少数值');
+        return {
+          background: getComputedStyle(element).backgroundColor,
+          value: getComputedStyle(value).color,
+        };
+      });
+      expect(contrastRatio(warningColors.value, warningColors.background)).toBeGreaterThanOrEqual(3);
+
+      const longTitleFits = await card.evaluate((element) => {
+        const title = element.querySelector('.lx-metric-card__label');
+        if (!title) return false;
+        const previousText = title.textContent;
+        title.textContent = '连续监测接入感知终端运行状态的超长指标标题'.repeat(4);
+        const fits = title.scrollWidth <= title.clientWidth;
+        title.textContent = previousText;
+        return fits;
+      });
+      expect(longTitleFits).toBe(true);
+
+      const lightCardSurface = await card.evaluate((element) => getComputedStyle(element).backgroundColor);
+      await page.locator('html').evaluate((element) => element.classList.add('lx-theme-hud'));
+      const hudCardSurface = await card.evaluate((element) => getComputedStyle(element).backgroundColor);
+      expect(hudCardSurface).not.toBe(lightCardSurface);
+      const hudTextContrast = await card.evaluate((element) => {
+        const title = element.querySelector('.lx-metric-card__label');
+        const trend = element.querySelector('.lx-metric-card__trend');
+        if (!title || !trend) throw new Error('指标卡缺少标题或说明');
+        return {
+          background: getComputedStyle(element).backgroundColor,
+          title: getComputedStyle(title).color,
+          trend: getComputedStyle(trend).color,
+        };
+      });
+      expect(contrastRatio(hudTextContrast.title, hudTextContrast.background)).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(hudTextContrast.trend, hudTextContrast.background)).toBeGreaterThanOrEqual(4.5);
+      const hudTrendColors = await page.locator('.metric-card-demo__grid .lx-metric-card').evaluateAll((cards) =>
+        cards.slice(0, 3).map((element) => {
+          const trend = element.querySelector('.lx-metric-card__trend');
+          if (!trend) throw new Error('指标卡缺少趋势说明');
+          return {
+            background: getComputedStyle(element).backgroundColor,
+            color: getComputedStyle(trend).color,
+          };
+        }),
+      );
+      expect(hudTrendColors.every(({ color, background }) => contrastRatio(color, background) >= 4.5)).toBe(true);
+
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      const transition = await card
+        .locator('.lx-metric-card__progress-value')
+        .evaluate((element) => getComputedStyle(element).transitionDuration);
+      const transitionProperty = await card
+        .locator('.lx-metric-card__progress-value')
+        .evaluate((element) => getComputedStyle(element).transitionProperty);
+      const iconTransition = await card
+        .locator('.lx-metric-card__trend [data-icon-name]')
+        .first()
+        .evaluate((element) => getComputedStyle(element).transitionDuration);
+      expect(Number.parseFloat(transition)).toBeLessThanOrEqual(0.001);
+      expect(transitionProperty).toBe('transform');
+      expect(Number.parseFloat(iconTransition)).toBe(0);
+
+      await page.locator('html').evaluate((element) => {
+        element.setAttribute('dir', 'rtl');
+      });
+      await expect
+        .poll(() =>
+          card.locator('.lx-metric-card__progress-value').evaluate((element) => {
+            const styles = getComputedStyle(element);
+            const [originX] = styles.transformOrigin.split(' ');
+            return Math.abs(Number.parseFloat(originX) - element.getBoundingClientRect().width) <= 1;
+          }),
+        )
+        .toBe(true);
+      await page.locator('html').evaluate((element) => {
+        element.removeAttribute('dir');
+      });
+      await page.screenshot({ path: `test-results/lx-metric-card-${viewportWidth}.png` });
+    }
   });
 });

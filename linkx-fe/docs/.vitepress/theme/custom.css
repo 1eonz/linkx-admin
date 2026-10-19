@@ -34,6 +34,29 @@
     max-width: 100%;
   }
 
+  /* 指标卡文档在中等窄屏仍保留正文列宽，避免 VitePress 侧栏布局把 Demo 压成窄条。 */
+  .VPDoc:has(.metric-card-demo) .container,
+  .VPDoc:has(.metric-card-demo) .content-container,
+  .VPDoc:has(.metric-card-demo) .vp-doc,
+  .VPDoc:has(.metric-card-demo) .metric-card-demo {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* API 表格自身允许横向滚动，不能把页面根节点撑出视口。 */
+  .VPDoc:has(.metric-card-demo) .vp-doc table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .VPDoc:has(.metric-card-demo) .vp-doc table th,
+  .VPDoc:has(.metric-card-demo) .vp-doc table td {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
   .VPDoc:has(.transfer-panel-demo) .vp-doc table {
     box-sizing: border-box;
     min-width: 0;
