@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxFormErrorBanner 双路 Critique 与说明可读性修复
+
+- [x] 说明文字从 11px 调整为 12px、1.5 倍行高；中文 API 与 E2E 同步。
+- [x] Assessment A **27/40（Good）**；Assessment B 三目标 detector 为合法 `[]`/空/`0`，Light/HUD 桌面/窄屏/reduced-motion 四视图 overlay 注入成功，页面错误、失败请求和错误响应为 0。
+- [ ] P1 首错字段/恢复路径、P2 动态 live region 分层、P3 空 `role="alert"` 与正式 UI-10/UI-11 仍开放；窄屏页面级裁切属于 VitePress 隐藏侧栏，不归因组件。
+
 ## 2026-10-20 LxInput 边框运行时复核
 
 - [x] 4177 当前运行页面中，前后缀复合输入、密码输入和透传输入的 wrapper 均保持真实 `1px solid` 外边框；复合根节点继续提供连续外框。

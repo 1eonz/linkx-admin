@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-20 LxFormErrorBanner 入口与审查证据
+
+- 组件入口：`linkx-fe/src/components/LxFormErrorBanner/index.vue`；中文 API：`linkx-fe/docs/components/lxformerrorbanner.md`；宿主回归：`other-admin/admin-vue3/tests/unit/lx-form-error-banner.test.ts` 与 `tests/e2e/lx-form-error-banner-docs.spec.ts`。
+- 当前实现：表单整体阻断横幅，说明使用 12px/1.5 倍行高；`title`、`description` 和默认插槽契约保持不变。
+- 证据：Assessment A 27/40；Assessment B 三路 detector 为 `[]`/空/0，四视图 overlay 注入成功；正式宿主首错聚焦、权限和真实后端仍未验证。
+
 ## 2026-10-20 代码审查状态索引
 
 - `linkx-fe/src/index.ts`：通过 `componentRegistry` 按公开名称注册 lx-ui 组件，宿主安装回归见 `other-admin/admin-vue3/tests/unit/lx-ui-install.test.ts`。

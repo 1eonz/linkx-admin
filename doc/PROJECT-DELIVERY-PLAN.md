@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxFormErrorBanner 双路 Critique 与可读性修复
+
+- **Assessment A**：独立设计评审 **27/40（Good）**，无 P0；P1 为宿主没有统一的首错字段/恢复路径，P2 为动态字段清单与 `aria-atomic` 播报分层、说明字号过小和 Demo 业务文案过重，P3 为空内容仍保留 `role="alert"`。首错跳转、重试动作和 live region 契约依赖可信业务宿主，暂不臆造公共 API。
+- **Assessment B**：组件、Demo、文档 detector 均为合法 JSON `[]`、stderr 为空、退出码 `0`；Light/HUD 桌面/窄屏及 reduced-motion 四视图 overlay 注入成功，页面错误、失败请求和 4xx/5xx 为 `0`。组件自身无横溢出；窄屏页面 `scrollWidth=630` 归因隐藏 VitePress 侧栏。有效组件命中为描述文字 11px。
+- **实现**：说明正文提升为 `12px`、`1.5` 倍行高；同步中文 API 和文档 E2E 断言。未改变 Props、插槽、请求链、权限或 `role` 契约。
+- **验证**：单测 **3/3**、文档 Playwright **1/1**、描述字号/行高断言、`vue-tsc --noEmit` 和目标 Prettier 通过。正式全库 UI-10/UI-11、真实读屏器、宿主权限/首错聚焦及真实后端仍开放。
+- **证据**：`tmp-formerror-assessment-a.md`、`tmp-formerror-assessment-b.md` 及 `tmp-formerror-assessment-b/`；`[]` 仅表示静态零命中，不单独代表通过。
+
 ## 2026-10-20 代码审查历史问题状态复核
 
 - **复核范围**：对 `CODE-REVIEW.md` 中 Major #1/#2/#3 与异步基础设施 #5/#6 进行当前源码和回归测试核对。

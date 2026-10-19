@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-20 LxFormErrorBanner Critique 与宿主前置条件
+
+- [x] 组件说明正文调整为 12px/1.5 倍行高；单测 **3/3**、文档 E2E **1/1**、类型与格式检查通过。
+- [x] 当前版独立 Assessment A **27/40**；Assessment B detector JSON/stderr/退出码为 `[]`/空/`0`，Light/HUD 桌面/窄屏/reduced-motion 四视图 overlay 注入成功；组件自身无横溢出。
+- [ ] 宿主仍需定义首错字段聚焦、重试/字段清单动作和动态 live region 分层；需真实表单、权限不足、失败恢复及读屏器证据后再进入页面替换，不删除 `element-plus`。
+
 ## 2026-10-20 LxMetricCard detector 记录
 
 - 当前 detector 三目标均为 JSON `[]`、退出码 `0`，stderr 含 npm 弃用警告；不关闭组件视觉门禁。

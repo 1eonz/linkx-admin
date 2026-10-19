@@ -21,6 +21,14 @@
 - 根 `.gitignore` 新增 `.impeccable-*`，与已有 `.pnpm-store/`、`.impeccable/` 规则配合，避免 detector 和截图临时文件进入暂存区。
 - 未删除或重置任何既有评估产物；正式报告仍按文档路径单独归档。
 
+## [2026-10-20] LxFormErrorBanner 双路 Critique 与说明可读性修复
+
+- **评审**：Assessment A 独立评分 **27/40（Good）**，无 P0；P1 为宿主首错字段/恢复路径未形成统一契约，P2 为动态 live region 分层、Demo 信息密度和正文可读性，P3 为空内容仍保留 `role="alert"`。
+- **Assessment B**：组件、Demo、文档 detector 均为合法 JSON `[]`、stderr 为空、退出码 `0`；Light/HUD 桌面/窄屏及 reduced-motion 四视图 overlay 注入成功，页面错误、失败请求和错误响应均为 `0`。窄屏页面宽度信号来自隐藏 VitePress 侧栏，组件自身无横溢出。
+- **修复**：说明正文由 11px 调整为 12px、1.5 倍行高，中文 API 与 E2E 同步；单测 **3/3**、文档 E2E **1/1**、`vue-tsc --noEmit` 通过。未改变组件 Props、插槽、请求链或权限契约。
+- **证据**：正式快照已写入 `.impeccable/critique/2026-10-19T19-09-55Z__rc-components-lxformerrorbanner-index-vue-94bff5bd.md`；A/B 原始记录在本地临时评审文件中。静态 `[]` 不单独代表正式全库门禁通过。
+- **后续**：真实宿主需确认首错字段聚焦、重试动作、字段清单播报和空 `role="alert"` 的 NVDA/VoiceOver 语义；在可信业务契约前不新增公共 API、不开始该页面迁移。
+
 ## [2026-10-20] LxInput 前后缀/密码/透传边框当前运行时复核
 
 - **复核结论**：问题属于 `LxInput` 组件样式层，不是 Demo 外壳。当前 4177 文档运行时中，案件编码复合输入、涉密核验密码输入、联系电话透传输入的 `.el-input__wrapper` 均计算为 `1px solid rgb(220, 223, 230)`；复合输入根节点也保留同样的连续外框。
