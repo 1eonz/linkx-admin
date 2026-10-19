@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxTransferPanel 当前版复验
+
+- [x] 文档 Playwright **33/33**；复选框视觉盒、桌面/窄屏、筛选批量、清空确认、键盘、HUD 和 44px 移动命中区通过。
+- [x] Assessment A **29/40** 已归档；用户反馈的选择框尺寸修复保持有效。
+- [ ] 桌面紧凑删除/清除命中区、宿主保存状态契约、当前版 Assessment B/snapshot/trend 和 UI-10/UI-11 仍开放；A 本身未执行浏览器/detector。
+
+
 ## 2026-10-20 LxDynamicForm schema 防错
 
 - [x] 开发环境诊断重复 key、未知 type 和 radio/checkbox 不支持的选项值；同步中文 API 值域和容器断点说明。

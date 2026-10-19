@@ -886,3 +886,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - `linkx-fe/src/components/LxDynamicForm/index.vue` 新增开发期 schema 诊断：重复 `key`、未知 `type`、radio/checkbox 非法选项值会输出中文警告；生产行为和宿主 API 边界保持不变。
 - DynamicForm 证据入口：`other-admin/admin-vue3/tests/unit/lx-dynamic-form.test.ts`（31/31）与 `tests/e2e/lx-dynamic-form-docs.spec.ts`（14/14）。Assessment B 三件套为合法 `[]`/空 stderr/0，8 个浏览器视图通过；综合 snapshot/trend 尚缺，正式视觉门禁仍开放。
+# 项目地图更新（2026-10-20）
+
+- `linkx-fe/src/components/LxTransferPanel/` 当前文档回归 **33/33**；复选框视觉尺寸与移动 44px 触控目标已覆盖。Assessment A 29/40 的桌面紧凑按钮和宿主保存状态问题仍开放。
+- 宿主入口 `other-admin/admin-vue3` 的 `DataPermissionTree` 仍需在 UI-04 迁移批次验证持久化、权限和真实接口；组件库本身不拥有业务请求。
+

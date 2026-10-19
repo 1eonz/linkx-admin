@@ -2992,3 +2992,9 @@
 - **验证**：`lx-dynamic-form.test.ts` **31/31**；`lx-dynamic-form-docs.spec.ts` **14/14**；lx-ui `vue-tsc --noEmit` 通过。API 请求链规则未改变。
 - **审查**：Assessment A **32/40**。Assessment B 三个 detector 均为合法 `[]`、stderr 为空、退出码 `0`；独立浏览器 8/8 视图覆盖 Light/HUD、桌面/窄屏和 reduced-motion，无页面错误、失败请求或业务横溢出。缺少综合 snapshot/trend，仍不关闭 UI-10/UI-11。
 - **下一步**：恢复可执行 detector 后重跑 Light/HUD、桌面/窄屏、reduced-motion 和 overlay；再决定 feedback 与 required 的错误播报优先级。真实上传、远程接口、权限和 Element Plus 删除继续阻塞。
+# 2026-10-20 LxTransferPanel 当前版复验
+
+- 文档 E2E **33/33** 通过；桌面复选框视觉盒保持 14px，窄屏触控目标保持 44px，用户反馈的“选择框太大”修复未回归。
+- Assessment A **29/40**，仅做静态源码/设计评估，未执行浏览器、detector、overlay 或 console。桌面删除/清除按钮的紧凑命中区和宿主保存状态列为后续设计/契约决策，不在本波擅自改大桌面布局。
+- 当前已有 TransferPanel B 证据不因本次 A 重评自动复用为新增正式快照；需按当前源码重新核对 B、snapshot/trend 和 UI-10 状态。
+

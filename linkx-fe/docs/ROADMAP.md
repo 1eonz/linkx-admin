@@ -809,3 +809,8 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 - `extra` 操作区支持收缩和窄屏分行；HUD Demo 同步根节点主题 class，卸载仅恢复仍由 Demo 写入的状态。
 - 4177 独立浏览器 Assessment B 已覆盖 16 个 Light/HUD、normal/reduced-motion、1280/420/375/320px 视图；无页面错误、失败请求、页面横溢出或操作越界。
 - 组件、Demo、文档 detector 均为合法 `[]`、空 stderr、退出码 0；静态结果不替代视觉证据。正式 UI-10 全库门禁和 Vue3 Element Plus 替换继续开放。
+# 2026-10-20 LxTransferPanel 当前版复验
+
+- 当前文档 E2E **33/33** 通过，复选框视觉盒 14px、窄屏 44px 触控目标和用户反馈的选择框尺寸修复保持稳定。
+- Assessment A **29/40** 仅为静态评估；桌面删除/清除按钮尺寸和宿主保存状态列为开放决策。未执行新的浏览器/detector，不关闭既有 UI-10 状态。
+

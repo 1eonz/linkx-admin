@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-20 LxTransferPanel 当前版复验与 Assessment A
+
+- **验证**：当前 TransferPanel 文档 Playwright **33/33** 通过，覆盖桌面/窄屏、复选框视觉盒、44px 触控目标、筛选/批量、清空确认、键盘焦点、HUD 和状态恢复；此前“选择框过大”修复仍有效。
+- **Assessment A**：**29/40**。P1 观察为桌面删除按钮 24px、筛选清除按钮 32px，以及宿主保存中的 loading/error 契约不统一；当前桌面紧凑尺寸与移动端 44px 触控规则是有意分档，放大桌面目标需设计决策，暂不改变布局。P2 为 HUD 对比度和 reduced-motion 运行时证据。
+- **边界**：本波无源码改动；Assessment A 未执行浏览器/detector，故不能替代已有 B 或宣称新增正式 Critique。宿主 `DataPermissionTree` 持久化、真实权限和后端联调仍属于 UI-04 阻塞。
+- **下一入口**：继续补 TransferPanel 当前版 Assessment B/主题与动效证据，随后按矩阵处理剩余组件；完成 lx-ui 门禁前不删除 Vue3 `element-plus`。
+
 ## 2026-10-20 LxDynamicForm schema 防错收口
 
 - **实现**：开发环境对重复 `key`、未知 `type` 以及 radio/checkbox 不支持的选项值输出中文诊断；保留现有线上渲染行为，不改变表单值、校验、提交和业务 API 契约。中文 API 同步说明各选择类型的值域，并将容器断点措辞统一为“不大于 760px/520px”。
