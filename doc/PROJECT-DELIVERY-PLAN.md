@@ -15,6 +15,14 @@
 - **边界**：本批不删除 Vue3 `element-plus`，不改变页面 API、权限或请求链；剩余 9 个空态需按真实 props/插槽/条件状态逐页迁移，正式 UI-10/UI-11 仍开放。
 - **下一入口**：继续处理剩余 `LxEmpty` 场景中最简单的条件空态，并为每页补空/加载/失败或权限状态回归。
 
+## 2026-10-20 Vue3 第二批 LxEmpty 宿主替换
+
+- **实现**：将 `ColFunctionTab`、`colLevelManage`、`customDepartment` 和 `AuthTreeModal` 的条件空态改用 `LxEmpty`；保留原 `v-if` 条件、文案和业务树/表格逻辑。
+- **验证**：Vue3 `vue-tsc --noEmit`、4 个目标文件 Prettier 通过；本地 Mock 全菜单及已登记业务场景 Playwright **6/6** 通过。
+- **迁移事实**：矩阵中的 `el-empty` 直接使用数量由 9 修正为 5。
+- **边界**：本批不改业务请求、权限、加载/失败状态或 Element Plus 删除门槛；剩余 5 个复杂空态仍需逐页契约回归，正式 UI-10/UI-11 保持开放。
+- **下一入口**：进入剩余空态中带插槽或加载状态的页面，先补测试确认 LxEmpty footer/条件渲染契约后再替换。
+
 ## 2026-10-20 LxTransferPanel 当前版复验与 Assessment A
 
 - **验证**：当前 TransferPanel 文档 Playwright **33/33** 通过，覆盖桌面/窄屏、复选框视觉盒、44px 触控目标、筛选/批量、清空确认、键盘焦点、HUD 和状态恢复；此前“选择框过大”修复仍有效。

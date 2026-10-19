@@ -91,7 +91,7 @@ Vue3 目前有 103 个 Vue/TS 源文件直接从 element-plus 包导入组件、
 | el-descriptions / el-descriptions-item |   9 / 33 | LxDescriptions                                                         |
 | el-dialog                              |       57 | LxDialog                                                               |
 | el-drawer                              |        1 | LxDrawer                                                               |
-| el-empty                               |        9 | LxEmpty                                                                |
+| el-empty                               |        5 | LxEmpty                                                                |
 | el-form / el-form-item                 | 58 / 278 | LxForm / LxFormItem                                                    |
 | el-pagination                          |        0 | LxPagination                                                           |
 | el-table / el-table-column             |  10 / 73 | LxProTable；宿主 ProTable 已使用该组件，但页面中的原始表格仍需逐页迁移 |
@@ -103,7 +103,7 @@ Vue3 目前有 103 个 Vue/TS 源文件直接从 element-plus 包导入组件、
 
 Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过适配器单测验证旧 `page/limit/pagination` 事件映射、`hidden`、layout/background 和宿主禁用自动滚动。当前源码盘点显示业务页面直接使用 `el-pagination` 的数量为 **0**；仅共享适配器内部保留分页组件适配。页面的真实接口、空结果、失败恢复、权限不足和嵌套滚动容器仍需在 Mock/真实契约门禁中继续验证，不能把适配器已接入扩大解释为所有分页业务已完成验收。
 
-首批 6 个纯占位空态页面已改用 `LxEmpty`：`placeholder`、`eventType/globals`、`thirdInterface/policeReport` 下的 `typeManage`/`manage`/`dock`，以及 `h5/collaboration`。这些页面没有业务 props、事件或插槽契约，替换后通过 Vue3 类型检查和 Mock 全菜单回归；其余 9 个 `el-empty` 用法包含条件渲染、插槽或业务状态，必须逐页保留原有行为后再迁移。
+首批 6 个纯占位空态页面和第二批 4 个条件空态页面已改用 `LxEmpty`。这些页面没有空态专用 props、事件或插槽契约，替换后通过 Vue3 类型检查和 Mock 全菜单回归；剩余 5 个 `el-empty` 用法包含更复杂的条件、插槽或业务状态，必须逐页保留原有行为后再迁移。
 
 ### 仅部分场景适用的封装
 

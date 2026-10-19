@@ -903,3 +903,9 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - **证据**：Vue3 类型检查、目标格式检查和 Mock 全菜单回归 **6/6** 通过；矩阵中的 `el-empty` 数量由 15 修正为 9。
 - **边界**：剩余 9 个空态含条件渲染、插槽或业务状态，需逐页适配；本批不代表 Element Plus 可删除或 UI-10/UI-11 完成。
 
+## 2026-10-20 Vue3 第二批 LxEmpty 宿主替换
+
+- **入口**：`ColFunctionTab`、`colLevelManage`、`customDepartment` 和 `AuthTreeModal` 的条件空态已切换为 `LxEmpty`，保留原条件和文案。
+- **证据**：Vue3 类型/格式检查与 Mock 全菜单回归 **6/6** 通过；矩阵中的 `el-empty` 数量由 9 修正为 5。
+- **边界**：剩余 5 个复杂空态涉及业务状态或插槽，需按页面契约继续迁移；不代表 Element Plus 删除或整库 UI-10 完成。
+
