@@ -57,6 +57,9 @@ test.describe('LxSectionTitle 文档示例', () => {
     });
     await expect(page.getByTestId('variant-dashed').locator('.lx-tag--success')).toBeVisible();
     await expect(
+      page.getByTestId('variant-border').locator('.lx-section-title__leading [data-icon-name="folder"]'),
+    ).toBeVisible();
+    await expect(
       page.getByTestId('variant-dashed').locator('.lx-section-title__leading [data-icon-name="setting"]'),
     ).toBeVisible();
     await expect(
@@ -74,6 +77,12 @@ test.describe('LxSectionTitle 文档示例', () => {
     await page.keyboard.press('Enter');
     await expect(page.getByText('刷新接口配置', { exact: true })).toBeVisible();
 
+    const logs = page.getByRole('button', { name: '查看日志' });
+    await logs.focus();
+    await expect(logs).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(page.getByText('查看接口调用日志', { exact: true })).toBeVisible();
+
     await page.getByRole('checkbox', { name: 'HUD 深色主题' }).check();
     await expect(page.locator('.lx-section-title-demo')).toHaveClass(/lx-theme-hud/);
     const hudSurface = await page.getByTestId('variant-border').evaluate((element) => {
@@ -88,7 +97,7 @@ test.describe('LxSectionTitle 文档示例', () => {
     expect(hudSurface.title).not.toBe('');
     expect(hudSurface.surface).not.toBe('');
 
-    const viewButton = page.getByRole('button', { name: '查看' });
+    const viewButton = page.getByTestId('long-title-case').getByRole('button', { name: '查看', exact: true });
     await viewButton.focus();
     await expect(viewButton).toBeFocused();
     await page.keyboard.press('Enter');

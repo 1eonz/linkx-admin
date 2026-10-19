@@ -31,6 +31,7 @@ const lastAction = ref('标题仅负责分组和说明，不加载业务数据�
         title="基础信息档案"
         variant="border"
         :size="size"
+        icon="folder"
         tag="8 项字段"
         tag-type="primary"
       >
@@ -65,6 +66,13 @@ const lastAction = ref('标题仅负责分组和说明，不加载业务数据�
             @click="lastAction = '刷新接口配置'"
           >
             刷新
+          </button>
+          <button
+            class="lx-section-title-demo__action"
+            type="button"
+            @click="lastAction = '查看接口调用日志'"
+          >
+            查看日志
           </button>
         </template>
       </LxSectionTitle>
