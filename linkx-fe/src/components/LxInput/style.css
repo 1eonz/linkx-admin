@@ -11,6 +11,8 @@
 /* 输入框及其所有前后缀槽位共用一条高度轨道，避免内核令牌在切换时分别计算。 */
 .lx-input {
   --lx-input-track-height: var(--el-input-height);
+  /* wrapper 使用 border-box，内部内容轨道需要扣除上下各 1px 描边。 */
+  --lx-input-content-height: calc(var(--lx-input-track-height) - 2px);
   box-sizing: border-box;
   height: var(--lx-input-track-height);
   min-height: var(--lx-input-track-height);
@@ -108,14 +110,14 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
   color: var(--lx-color-on-input);
 }
 
-/* 输入内容与 prefix/suffix 共用完整控件高度，避免 EP 默认上下内边距造成
- * 图标槽位比输入框少 2px；焦点和边框仍由 wrapper 的内描边承载。 */
+/* 输入内容与 prefix/suffix 共用 wrapper 的内部内容轨道，避免槽位越过
+ * 上下 1px 描边；完整控件高度仍由 wrapper 自身承载。 */
 .lx-input .el-input__prefix,
 .lx-input .el-input__suffix,
 .lx-input .el-input__prefix-inner,
 .lx-input .el-input__suffix-inner {
   box-sizing: border-box;
-  height: var(--lx-input-track-height);
+  height: var(--lx-input-content-height);
   min-height: 0;
 }
 
@@ -135,7 +137,7 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
 .lx-input .el-input__prefix-inner,
 .lx-input .el-input__suffix-inner {
   display: inline-flex;
-  height: var(--lx-input-track-height);
+  height: var(--lx-input-content-height);
   min-height: 0;
   align-items: center;
   align-self: stretch;
@@ -259,6 +261,7 @@ html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
 @media (hover: none), (max-width: 640px) {
   .lx-input {
     --lx-input-track-height: 44px;
+    --lx-input-content-height: 42px;
     --el-input-height: var(--lx-input-track-height);
     --el-input-inner-height: calc(var(--lx-input-track-height) - 2px);
   }
