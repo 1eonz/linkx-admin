@@ -28,6 +28,7 @@
  */
 import { ElMessage } from 'element-plus';
 import type ElTree from 'element-plus/es/components/tree/index';
+import { LxEmpty } from 'lx-ui';
 import { computed, nextTick, ref, watch } from 'vue';
 
 import type { ApiResponse } from '#/axios';
@@ -337,7 +338,7 @@ function handleCancel(): void {
           default-expand-all
           :filter-node-method="filterNodeMethod"
         />
-        <el-empty v-if="!loading && rawTreeData.length === 0" description="暂无数据" />
+        <LxEmpty v-if="!loading && rawTreeData.length === 0" description="暂无数据" />
       </div>
     </div>
 

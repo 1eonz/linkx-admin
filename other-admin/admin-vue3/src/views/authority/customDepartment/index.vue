@@ -24,6 +24,7 @@
 import { CircleClose, Delete, Edit, Files, More, Plus, Search } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
+import { LxEmpty } from 'lx-ui';
 import type ElTree from 'element-plus/es/components/tree/index';
 import { computed, nextTick, onMounted, reactive, ref, useTemplateRef } from 'vue';
 
@@ -836,7 +837,7 @@ onMounted(() => {
 
       <!-- 未选中节点占位 -->
       <div v-if="!currentNode" class="empty-placeholder">
-        <el-empty description="请在左侧选择一个部门节点" />
+        <LxEmpty description="请在左侧选择一个部门节点" />
       </div>
 
       <!-- 已选中节点 -->

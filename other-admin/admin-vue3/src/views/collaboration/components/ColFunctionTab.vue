@@ -11,6 +11,7 @@
 /* global localStorage */
 import { Plus } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxEmpty } from 'lx-ui';
 import { computed, ref, reactive } from 'vue';
 
 import CoopBindDialog, { type CoopBindDialogInstance } from './CoopBindDialog.vue';
@@ -327,7 +328,7 @@ function getRow(scope: any): FunctionalDeptMember {
 
       <!-- 未选中职能占位 -->
       <div v-if="!currentNode" class="empty-placeholder">
-        <el-empty description="请在左侧选择一个职能" />
+        <LxEmpty description="请在左侧选择一个职能" />
       </div>
 
       <!-- 已选中职能 -->

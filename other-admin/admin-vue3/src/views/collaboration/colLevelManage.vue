@@ -13,6 +13,7 @@
  */
 import { CircleClose, Plus, Search } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxEmpty } from 'lx-ui';
 import { computed, nextTick, onMounted, reactive, ref } from 'vue';
 
 import CoopBindDialog, { type CoopBindDialogInstance } from './components/CoopBindDialog.vue';
@@ -356,7 +357,7 @@ onMounted(() => {
 
       <!-- 未选中层级占位 -->
       <div v-if="!currentNode" class="empty-placeholder">
-        <el-empty description="请在左侧选择一个层级" />
+        <LxEmpty description="请在左侧选择一个层级" />
       </div>
 
       <!-- 已选中层级 -->
