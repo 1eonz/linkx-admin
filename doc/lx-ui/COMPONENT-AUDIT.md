@@ -815,3 +815,8 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 
 - `hideFooter` 与 `footer` 插槽已按 API 说明实现互斥分支：自定义底栏只显示调用方内容，隐藏且无插槽时没有空 footer。
 - 单测 **6/6**、文档 E2E **3/3**；组件 detector 为合法 `[]`/空/0，正式 UI-10 A/B 仍保持开放。
+
+## 2026-10-19 ProTable 宿主隐藏列契约
+
+- 本波审计对象是 Vue3 `ProTable` 适配层；`ITableColumn.hide` 已在宿主模板中生效，隐藏字段不再生成表格列。
+- 宿主单测 **5/5**、LxProTable 文档 E2E **4/4**；detector 合法 `[]`/空/0 仅为静态零命中，未关闭 lx-ui ProTable 正式 Impeccable A/B。

@@ -708,3 +708,8 @@ LxIcon 图标总览页已有一次正式单目标 Critique，评分 27/40，快�
 
 - 自定义 `footer` 插槽现在完全替代默认按钮栏；`hideFooter` 且无插槽时不渲染空 footer，和中文 API 文档保持一致。
 - 单测 **6/6**、文档 E2E **3/3**；正式 Impeccable A/B 未因本波自动关闭，真实宿主组合仍需 UI-04 验收。
+
+## 2026-10-19 ProTable 隐藏列宿主契约
+
+- Vue3 `ProTable` 适配层已消费 `ITableColumn.hide`，隐藏列不再渲染；本次不修改 lx-ui 公共组件 API。
+- 宿主单测 **5/5**、LxProTable 文档 E2E **4/4**，目标格式和 ESLint 通过；静态 detector `[]` 不单独作为 Impeccable 通过。

@@ -696,3 +696,8 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 
 - 自定义底栏、默认底栏和隐藏底栏三种状态均有单测覆盖；自定义 footer 不再与默认按钮重复渲染。
 - 单测 **6/6**、文档 Playwright **3/3**、目标格式和 ESLint 通过；静态 detector `[]` 只作辅助证据。
+
+## 2026-10-19 ProTable 隐藏列验收
+
+- 宿主适配层按 `ITableColumn.hide` 过滤隐藏列，单测 **5/5**；LxProTable 文档 E2E **4/4**，覆盖选择、状态、窄屏滚动和 HUD。
+- 目标 Prettier、ESLint、`git diff --check` 通过；detector JSON/stderr/退出码为 `[]`/空/`0`，不替代正式浏览器 Assessment A/B。

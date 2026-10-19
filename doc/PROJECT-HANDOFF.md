@@ -2797,3 +2797,9 @@
 - `alertPush/index.vue` 两个分页、`thirdParty/index.vue` 北向分页和 `CoopBindDialog.vue` 分页均改用 `LxPagination`，不再直接渲染 `el-pagination`。
 - 页面仍由宿主维护请求、加载、错误和滚动：通知页按 `change(page, size)` 查询，北向页保留请求序号防迟到响应，挂靠弹窗继续通过 `fetchList` 注入数据。
 - 验证已完成：类型检查、目标 ESLint、Prettier、差异检查；Mock 首屏与北向 CRUD 各 1/1。真实分页协议、权限和其他页面的深层操作仍未联调。
+
+## 2026-10-19 ProTable 隐藏列交接
+
+- `other-admin/admin-vue3/src/components/ProTable/index.vue` 已按 `ITableColumn.hide` 跳过隐藏列，适配层仍保留可见列属性和插槽。
+- 单测 **5/5**、LxProTable 文档 E2E **4/4**，目标格式、ESLint 和差异检查通过；detector `[]`/空 stderr/退出码 `0` 只表示静态扫描零命中。
+- 真实业务列表、权限字段来源、正式 Impeccable A/B 和其他 Element Plus 表格替换继续开放；API 请求仍须使用 `.then().catch().finally()`。

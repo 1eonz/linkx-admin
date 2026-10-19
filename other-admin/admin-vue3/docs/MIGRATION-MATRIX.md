@@ -203,3 +203,8 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 - Vue3 宿主复用 lx-ui `LxDialog` 时，`hideFooter` 与自定义 `#footer` 已保持单一底栏；页面不需要复制条件样式或默认按钮。
 - 本波不改变业务弹窗 API、提交锁、权限码和请求链；真实宿主组合仍需逐页回归。
+
+## 2026-10-19 ProTable 隐藏列
+
+- Vue3 `ProTable` 适配层已按 `ITableColumn.hide` 不渲染隐藏列，保留可见列属性、插槽和顺序；单测 **5/5**、LxProTable 文档 E2E **4/4**。
+- 该修复不等于业务字段权限完成；真实权限源、列表 API、空/错/取消和深层操作仍需逐页迁移验证，API 请求继续采用 `.then().catch().finally()`。

@@ -1661,3 +1661,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 保留旧页面契约：通知页继续使用 `pageNum/pageSize` 和链式请求；北向页保留 `change(page, pageSize)` 触发查询、竞态请求保护和 `autoReset`；挂靠弹窗保留受控选择、页码回显和注入式 `fetchList`。
 - 三个页面的 `auto-scroll` 均关闭，由页面自身滚动容器负责位置；分页事件不再直接依赖 Element Plus 的 `size-change/current-change`。
 - 验证：Vue3 `vue-tsc --noEmit`、三文件 ESLint、Prettier、`git diff --check` 通过；全菜单首屏 Mock **1/1**、北向接入 Mock CRUD **1/1**。本批不改变权限码和真实 API 契约。
+
+## 2026-10-19 ProTable 隐藏列契约修复
+
+- **实现**：Vue3 `ProTable` 按 `ITableColumn.hide` 跳过隐藏列，保留可见列顺序、属性和插槽；测试改用真实 `mount` 验证渲染结果。
+- **验证**：ProTable 单测 **5/5**、LxProTable 文档 E2E **4/4**、目标 Prettier、ESLint 和 `git diff --check` 通过。detector JSON 为合法 `[]`、stderr 为空、退出码 `0`，仅记录静态零命中。
+- **边界**：本波不改变业务接口、权限码、分页/选择语义或 API 请求链；正式 Assessment A/B、宿主真实数据和其余 Element Plus 替换仍开放。

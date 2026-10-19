@@ -747,3 +747,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - `linkx-fe/src/components/LxDialog/index.vue` 已明确默认 footer 与自定义 `footer` 插槽的互斥渲染；`hideFooter` 无插槽时不创建空底栏。
 - 组件行为由 `other-admin/admin-vue3/tests/unit/lx-dialog.test.ts` 和 `tests/e2e/lx-dialog-docs.spec.ts` 覆盖。
+
+## 2026-10-19 ProTable 隐藏列
+
+- `other-admin/admin-vue3/src/components/ProTable/index.vue` 现在消费 `ITableColumn.hide`，隐藏字段不会进入 `el-table-column` 渲染树；回归测试位于 `tests/unit/pro-table.test.ts`。
+- 本波只修复宿主列渲染契约，不改变 lx-ui `LxProTable`、业务 API、权限源或 Element Plus 依赖。
