@@ -4,6 +4,7 @@
  */
 import { Plus, Edit, Delete, Lock, Unlock, Key, User } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { ref, reactive, onMounted, computed, markRaw } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -293,7 +294,7 @@ onMounted(() => {
       <!-- 搜索区：复用 SearchBar，使用 filters 插槽自定义筛选字段 -->
       <SearchBar :placeholder="searchPlaceholder" :actions="actions" @search="handleSearch" @reset="handleReset">
         <template #filters>
-          <el-input
+          <LxInput
             v-model="searchParams.name as string"
             :placeholder="t('index.list.compellation')"
             class="filter-item"
@@ -301,7 +302,7 @@ onMounted(() => {
             clearable
             @keyup.enter="handleSearch"
           />
-          <el-input
+          <LxInput
             v-model="searchParams.idCard as string"
             :placeholder="t('index.list.IDNumber')"
             class="filter-item"
