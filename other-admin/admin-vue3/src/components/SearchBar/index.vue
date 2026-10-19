@@ -52,7 +52,7 @@
  * Methods（defineExpose 暴露的方法）:
  * - 无
  */
-import { LxIcon, LxSearchBar } from 'lx-ui';
+import { LxIcon, LxInput, LxSearchBar } from 'lx-ui';
 import { computed, useSlots } from 'vue';
 import type { Component } from 'vue';
 
@@ -129,7 +129,7 @@ function isActionDisabled(action: ActionItem): boolean {
         <!-- 自定义筛选字段插槽优先于默认关键字输入框。 -->
         <slot name="filters" />
         <template v-if="!hasFiltersSlot">
-          <el-input
+          <LxInput
             :model-value="searchKey"
             :placeholder="placeholder"
             class="search-bar__item search-bar__input"
@@ -138,7 +138,7 @@ function isActionDisabled(action: ActionItem): boolean {
             @update:model-value="(value) => emit('update:searchKey', String(value ?? ''))"
           >
             <template #prefix><LxIcon name="search" :size="16" /></template>
-          </el-input>
+          </LxInput>
         </template>
       </div>
     </template>
