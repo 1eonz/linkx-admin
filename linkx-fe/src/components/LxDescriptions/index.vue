@@ -133,6 +133,7 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
               :size="6"
               :status-desc="displayValue(item)"
               :tabindex="-1"
+              aria-hidden="true"
               show-text
             />
             <LxIcon

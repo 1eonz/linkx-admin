@@ -169,6 +169,7 @@ describe('LxDescriptions', () => {
     expect(toggle.attributes('aria-label')).toBe(`运行状态：${statusDescription}`);
     expect(toggle.attributes('aria-description')).toBe('点击展开完整内容');
     expect(toggle.get('.lx-status-dot').attributes('tabindex')).toBe('-1');
+    expect(toggle.get('.lx-status-dot').attributes('aria-hidden')).toBe('true');
     expect(toggle.get('.lx-descriptions__expand-icon').classes()).not.toContain('is-expanded');
     await toggle.trigger('click');
     expect(toggle.attributes('aria-expanded')).toBe('true');

@@ -56,7 +56,7 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     expect(await firstValue.evaluate((element) => getComputedStyle(element).fontWeight)).toBe('500');
     const lightLabelColor = await firstLabel.evaluate((element) => getComputedStyle(element).color);
     expect(contrastRatio(lightLabelColor, 'rgb(255, 255, 255)')).toBeGreaterThanOrEqual(4.5);
-    await expect(page.getByRole('img', { name: '在线（在岗备勤）' }).first()).toBeVisible();
+    await expect(page.locator('.lx-descriptions__value .lx-status-dot').first()).toBeVisible();
     const statusText = page.locator('.lx-descriptions__value .lx-status-dot__text').first();
     expect(await statusText.evaluate((element) => getComputedStyle(element).color)).toBe(
       await firstValue.evaluate((element) => getComputedStyle(element).color),
@@ -117,6 +117,7 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     await expect(statusToggle).toHaveAttribute('title', statusDescription);
     await expect(statusToggle).toHaveAccessibleName(`运行状态：${statusDescription}`);
     await expect(statusToggle).toHaveAttribute('aria-description', '点击展开完整内容');
+    await expect(statusToggle.locator('.lx-status-dot')).toHaveAttribute('aria-hidden', 'true');
     await statusToggle.focus();
     await expect(statusToggle).toBeFocused();
     await statusToggle.click();
