@@ -6,22 +6,27 @@
  */
 import type { LxFormErrorBannerProps } from './types'
 import LxIcon from '../LxIcon/index.vue'
+import { computed, useSlots } from 'vue'
 
 defineOptions({ name: 'LxFormErrorBanner' })
 
-defineProps<LxFormErrorBannerProps>()
+const props = defineProps<LxFormErrorBannerProps>()
+const slots = useSlots()
+const hasAnnouncement = computed(() =>
+  Boolean(props.title || props.description || slots.default),
+)
 </script>
 
 <template>
   <div
     class="lx-error-banner"
     role="alert"
-    aria-live="assertive"
-    aria-atomic="true"
+    :aria-live="hasAnnouncement ? 'assertive' : undefined"
+    :aria-atomic="hasAnnouncement ? 'true' : undefined"
   >
     <LxIcon name="report" :size="18" class="lx-error-banner__icon" />
     <div class="lx-error-banner__body">
-      <p class="lx-error-banner__title">{{ title }}</p>
+      <p v-if="title" class="lx-error-banner__title">{{ title }}</p>
       <p v-if="description" class="lx-error-banner__desc">{{ description }}</p>
       <slot />
     </div>

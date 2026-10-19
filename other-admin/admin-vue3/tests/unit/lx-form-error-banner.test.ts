@@ -32,4 +32,13 @@ describe('LxFormErrorBanner', () => {
     expect(wrapper.get('.lx-error-banner__icon').exists()).toBe(true);
     wrapper.unmount();
   });
+
+  it('does not create an empty live region when no message content is provided', () => {
+    const wrapper = mount(LxFormErrorBanner);
+
+    expect(wrapper.get('[role="alert"]').attributes('aria-live')).toBeUndefined();
+    expect(wrapper.get('[role="alert"]').attributes('aria-atomic')).toBeUndefined();
+    expect(wrapper.find('.lx-error-banner__title').exists()).toBe(false);
+    wrapper.unmount();
+  });
 });

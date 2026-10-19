@@ -1,6 +1,6 @@
 # LxFormErrorBanner 校验横幅
 
-浅红底 + 深红文字的表单校验阻断横幅（内联组件，非浮层）：用于表单提交前的**批量校验阻断**提示，区别于单字段行内错误。根节点使用 `role="alert"`、`aria-live="assertive"` 和 `aria-atomic="true"`，保证阻断原因及时播报。
+浅红底 + 深红文字的表单校验阻断横幅（内联组件，非浮层）：用于表单提交前的**批量校验阻断**提示，区别于单字段行内错误。根节点有标题、说明或默认插槽内容时使用 `role="alert"`、`aria-live="assertive"` 和 `aria-atomic="true"`；空内容不会创建空的 live region。
 
 <script setup lang="ts">
 import Basic from '../../src/components/LxFormErrorBanner/demo/basic.vue';
@@ -25,10 +25,10 @@ import Basic from '../../src/components/LxFormErrorBanner/demo/basic.vue';
 
 ### Props
 
-| 名称        | 说明                    | 类型     | 默认值 |
-| ----------- | ----------------------- | -------- | ------ |
-| title       | 主文案（12px 粗体深红） | `string` | —      |
-| description | 补充说明（11px）        | `string` | —      |
+| 名称        | 说明                          | 类型     | 默认值 |
+| ----------- | ----------------------------- | -------- | ------ |
+| title       | 主文案（12px 粗体深红，可选） | `string` | —      |
+| description | 补充说明（11px）              | `string` | —      |
 
 ### Slots
 
