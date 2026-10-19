@@ -2021,3 +2021,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `h5/quick/LookLabel.vue` 的警员姓名搜索已由 `el-input` 切换为 `LxInput`，保留前端过滤、清空、回车搜索、前缀图标和分页行为。
 - `vue-tsc --noEmit`、目标 Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过；标签树、详情请求和错误恢复未改变。
 - H5 其余表单及权限相关功能继续按契约逐项核对，真实后端联调仍保持阻塞记录。
+
+## 2026-10-20 H5 快捷标签表单输入迁移
+
+- `h5/quick/index.vue` 标签编辑弹窗的名称、图标类名、颜色值三个字符串输入已由 `el-input` 切换为 `LxInput`。
+- 保留动态 `maxlength`、字数统计、颜色选择器同步、标签类型/作用域禁用规则、校验和 Promise 链；`vue-tsc`、Prettier、ESLint 与隔离 Mock **10/10** 通过。
+- 标签权限、License 分支和真实后端仍未联调，Element Plus 删除门槛不变。

@@ -3141,3 +3141,8 @@
 
 - `h5/quick/LookLabel.vue` 的警员姓名搜索改用 `LxInput`，保留前缀搜索图标、清空、回车搜索、前端过滤和分页；标签树与详情请求未改动。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；真实后端和权限联调仍未执行。
+
+# 2026-10-20 H5 快捷标签表单交接
+
+- `h5/quick/index.vue` 标签编辑弹窗的名称、图标类名、颜色值改用 `LxInput`，保留动态长度、字数统计、颜色选择器同步、校验、License 分支和保存请求。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；权限和真实后端联调仍未执行。
