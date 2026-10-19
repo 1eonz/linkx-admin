@@ -5,6 +5,7 @@
 import { Plus, View, Edit, Delete } from '@element-plus/icons-vue';
 import { useWindowSize } from '@vueuse/core';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { ref, reactive, computed, markRaw } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -214,13 +215,13 @@ function getIndex(scope: any): number {
         <template #clientName="scope">
           <div class="third-party-client-name">
             <span class="third-party-client-name__text">{{ getRow(scope).clientName }}</span>
-            <el-tag
+            <LxTag
               v-if="isCompact"
-              :type="getRow(scope).status === 1 ? 'info' : 'danger'"
+              :type="getRow(scope).status === 1 ? 'info' : 'error'"
               :class="getRow(scope).status === 1 ? 'third-party-status--enabled' : 'third-party-status--disabled'"
             >
               {{ getRow(scope).status === 1 ? t('index.list.AppOpen') : t('index.list.AppClose') }}
-            </el-tag>
+            </LxTag>
           </div>
         </template>
 
@@ -236,12 +237,12 @@ function getIndex(scope: any): number {
 
         <!-- 状态列：0→danger 红色「停用」，1→默认色「启用」 -->
         <template #status="scope">
-          <el-tag
-            :type="getRow(scope).status === 1 ? 'info' : 'danger'"
+          <LxTag
+            :type="getRow(scope).status === 1 ? 'info' : 'error'"
             :class="getRow(scope).status === 1 ? 'third-party-status--enabled' : 'third-party-status--disabled'"
           >
             {{ getRow(scope).status === 1 ? t('index.list.AppOpen') : t('index.list.AppClose') }}
-          </el-tag>
+          </LxTag>
         </template>
 
         <!-- 操作列：详情/修改/删除 -->

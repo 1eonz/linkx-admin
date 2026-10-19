@@ -19,6 +19,7 @@ import { Delete, Edit, Plus, Upload, View } from '@element-plus/icons-vue';
 import { useDebounceFn } from '@vueuse/core';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import type { UploadFile } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { computed, nextTick, onMounted, reactive, ref } from 'vue';
 
 import EditMap from './components/EditMap.vue';
@@ -548,9 +549,9 @@ onMounted(() => {
               <el-button type="primary" link @click="handleViewConfig(getMapRow(scope))"> 查看配置 </el-button>
             </template>
             <template #activation="scope">
-              <el-tag :type="getMapRow(scope).activation === 1 ? 'success' : 'info'">
+              <LxTag :type="getMapRow(scope).activation === 1 ? 'success' : 'info'">
                 {{ getMapRow(scope).activation === 1 ? '已激活' : '未激活' }}
-              </el-tag>
+              </LxTag>
             </template>
             <template #actions="scope">
               <ActionButtons

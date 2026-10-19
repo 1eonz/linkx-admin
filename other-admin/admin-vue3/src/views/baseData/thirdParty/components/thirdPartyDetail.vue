@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { LxTag } from 'lx-ui';
 import { ref, reactive, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -100,9 +101,9 @@ defineExpose({ init });
         <el-col :span="12">
           <div>
             <span class="label">状态：</span>
-            <el-tag class="status-tag" :type="thirdAppForm.status === 0 ? 'danger' : 'info'">
+            <LxTag class="status-tag" :type="thirdAppForm.status === 0 ? 'error' : 'info'">
               {{ thirdAppForm.status === 0 ? '停用' : '启用' }}
-            </el-tag>
+            </LxTag>
           </div>
         </el-col>
       </el-row>
