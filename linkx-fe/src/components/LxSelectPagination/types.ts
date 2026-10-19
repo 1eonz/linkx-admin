@@ -60,6 +60,7 @@ export interface LxSelectPaginationProps {
   descriptionKey?: string
   targetMap?: Record<string, LxSelectPaginationItem>
   valueMap?: Record<string, LxSelectPaginationValueMapItem>
+  /** 搜索防抖时长（毫秒）；非法值使用 300，负数按 0 处理。 */
   debounce?: number
   maxCollapseTags?: number
   /** 禁用态；未显式设置时继承 Element Plus 的 ElForm/LxForm 禁用状态。 */

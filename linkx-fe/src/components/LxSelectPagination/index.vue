@@ -331,8 +331,9 @@ function scheduleSearch(value: string) {
   pageHasMore.value = undefined
   failedPage.value = undefined
   page.value = 1
+  // 保留宿主传入的防抖时长，只将非法值和负数归一为默认值/零，避免静默改变调用方节奏。
   const configuredDelay = Number.isFinite(props.debounce) ? props.debounce : 300
-  const delay = Math.min(400, Math.max(250, configuredDelay))
+  const delay = Math.max(0, configuredDelay)
   queryTimer = setTimeout(() => load(true), delay)
 }
 

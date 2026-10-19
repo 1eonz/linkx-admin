@@ -221,4 +221,30 @@ describe('LxSelectPagination', () => {
     expect(wrapper.text()).toContain('第二页结果');
     wrapper.unmount();
   });
+
+  it('按调用方 debounce 时长触发搜索，不静默缩短长延迟', async () => {
+    vi.useFakeTimers();
+    try {
+      const api: LxSelectPaginationApi = vi.fn().mockResolvedValue({ records: [], total: 0 });
+      const wrapper = mount(LxSelectPagination, {
+        props: { api, debounce: 700, teleported: false },
+        attachTo: document.body,
+      });
+      await wrapper.find('.el-select__wrapper').trigger('click');
+      await flushPromises();
+      (api as ReturnType<typeof vi.fn>).mockClear();
+
+      wrapper.findComponent(LxInput).vm.$emit('update:modelValue', '长延迟');
+      await vi.advanceTimersByTimeAsync(400);
+      await flushPromises();
+      expect(api).not.toHaveBeenCalled();
+
+      await vi.advanceTimersByTimeAsync(300);
+      await flushPromises();
+      expect(api).toHaveBeenCalledWith(expect.objectContaining({ keyword: '长延迟' }));
+      wrapper.unmount();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });
