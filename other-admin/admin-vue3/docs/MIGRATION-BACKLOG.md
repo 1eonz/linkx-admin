@@ -698,5 +698,5 @@ UI-09 的 46 种标签映射、25 种没有通用 Lx 封装的控件、103 个 E
 
 - Vue3 宿主使用 `lx-ui` 的 DynamicForm 时，开发环境会提示重复 key、未知 type 和 radio/checkbox 非法选项值；不改变宿主 `change` 回写、Promise 链请求、上传适配器或权限边界。
 - 当前行为证据：单测 **31/31**、文档 E2E **14/14**、lx-ui 类型检查通过。真实业务 schema、远程接口和上传协议仍需宿主迁移批次验证。
-- Assessment B detector 退出码为 1，不能把空数组写成视觉通过；正式组件门禁完成前不删除 Vue3 `element-plus`。
+- Assessment B 三个 detector 为合法 `[]`、空 stderr、退出码 `0`，浏览器 8/8 视图无业务错误；缺少综合 snapshot/trend，不能把本项扩大解释为整库视觉通过。正式组件门禁完成前不删除 Vue3 `element-plus`。
 

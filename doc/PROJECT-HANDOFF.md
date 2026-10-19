@@ -2990,5 +2990,5 @@
 
 - **改动**：`LxDynamicForm` 开发环境诊断重复字段 key、未知字段 type、radio/checkbox 不支持的 option value 类型；不阻断生产渲染，不改变 `value/change`、校验、提交、上传或远程请求边界。文档同步值域和 520/760px 断点定义。
 - **验证**：`lx-dynamic-form.test.ts` **31/31**；`lx-dynamic-form-docs.spec.ts` **14/14**；lx-ui `vue-tsc --noEmit` 通过。API 请求链规则未改变。
-- **审查**：Assessment A **32/40**。Assessment B 三个 detector 的 JSON 虽为空数组，但退出码均为 **1**，记录为扫描失败；浏览器目录保留为阶段性证据，不关闭 UI-10/UI-11。
+- **审查**：Assessment A **32/40**。Assessment B 三个 detector 均为合法 `[]`、stderr 为空、退出码 `0`；独立浏览器 8/8 视图覆盖 Light/HUD、桌面/窄屏和 reduced-motion，无页面错误、失败请求或业务横溢出。缺少综合 snapshot/trend，仍不关闭 UI-10/UI-11。
 - **下一步**：恢复可执行 detector 后重跑 Light/HUD、桌面/窄屏、reduced-motion 和 overlay；再决定 feedback 与 required 的错误播报优先级。真实上传、远程接口、权限和 Element Plus 删除继续阻塞。

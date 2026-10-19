@@ -4,7 +4,8 @@
 
 - [x] 开发环境诊断重复 key、未知 type 和 radio/checkbox 不支持的选项值；同步中文 API 值域和容器断点说明。
 - [x] 单测 **31/31**、文档 E2E **14/14**、`vue-tsc --noEmit` 通过。
-- [ ] Assessment B detector 三项目标退出码为 **1**，空 JSON 不能视为通过；正式 overlay、snapshot/trend 和 UI-10/UI-11 仍开放。
+- [x] Assessment B 三个 detector 为合法 `[]`、空 stderr、退出码 `0`；独立浏览器 8/8 视图通过，overlay 后宽度变化归因检测层。
+- [ ] 综合 snapshot/trend、真实读屏器、真实宿主和 UI-10/UI-11 仍开放；空数组不单独代表正式 Critique。
 
 
 ## 2026-10-20 LxPagination P1 修复与默认契约

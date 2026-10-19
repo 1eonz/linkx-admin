@@ -885,4 +885,4 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 # 项目地图更新（2026-10-20）
 
 - `linkx-fe/src/components/LxDynamicForm/index.vue` 新增开发期 schema 诊断：重复 `key`、未知 `type`、radio/checkbox 非法选项值会输出中文警告；生产行为和宿主 API 边界保持不变。
-- DynamicForm 证据入口：`other-admin/admin-vue3/tests/unit/lx-dynamic-form.test.ts`（31/31）与 `tests/e2e/lx-dynamic-form-docs.spec.ts`（14/14）。当前 Assessment B detector 退出码为 1，正式视觉门禁仍开放。
+- DynamicForm 证据入口：`other-admin/admin-vue3/tests/unit/lx-dynamic-form.test.ts`（31/31）与 `tests/e2e/lx-dynamic-form-docs.spec.ts`（14/14）。Assessment B 三件套为合法 `[]`/空 stderr/0，8 个浏览器视图通过；综合 snapshot/trend 尚缺，正式视觉门禁仍开放。
