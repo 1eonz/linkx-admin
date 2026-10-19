@@ -20,19 +20,19 @@ import Basic from '../../src/components/LxDialog/demo/basic.vue';
 
 ### Props
 
-| 名称                       | 说明                                      | 类型               | 默认值                    |
-| -------------------------- | ----------------------------------------- | ------------------ | ------------------------- |
-| v-model                    | 显隐                                      | `boolean`          | `false`                   |
-| title                      | 标题（14px 加粗）                         | `string`           | —                         |
-| icon                       | 标题图标                                  | `LxIconName`       | —                         |
-| width                      | 最大宽度；窄屏时受视口宽度约束            | `number \| string` | `672`（设计稿 max-w-2xl） |
-| danger                     | 危险模式（红图标 / 红标题 / 红底确认）    | `boolean`          | `false`                   |
-| confirm-text / cancel-text | 按钮文案                                  | `string`           | `确认` / `取消`           |
-| loading                    | 确认按钮加载态                            | `boolean`          | `false`                   |
-| close-on-click-modal       | 点遮罩关闭                                | `boolean`          | `false`（防误触）         |
-| close-on-press-esc         | 按 ESC 关闭（脏数据敏感场景可关）         | `boolean`          | `true`                    |
-| draggable                  | 头部拖拽移动弹窗位置（header 即拖拽把手） | `boolean`          | `true`                    |
-| hide-footer                | 隐藏默认按钮栏                            | `boolean`          | `false`                   |
+| 名称                       | 说明                                               | 类型               | 默认值                    |
+| -------------------------- | -------------------------------------------------- | ------------------ | ------------------------- |
+| v-model                    | 显隐                                               | `boolean`          | `false`                   |
+| title                      | 标题（14px 加粗）                                  | `string`           | —                         |
+| icon                       | 标题图标                                           | `LxIconName`       | —                         |
+| width                      | 最大宽度；窄屏时受视口宽度约束                     | `number \| string` | `672`（设计稿 max-w-2xl） |
+| danger                     | 危险模式（红图标 / 红标题 / 红底确认）             | `boolean`          | `false`                   |
+| confirm-text / cancel-text | 按钮文案                                           | `string`           | `确认` / `取消`           |
+| loading                    | 确认按钮加载态；提交期间锁定取消、关闭、遮罩和 ESC | `boolean`          | `false`                   |
+| close-on-click-modal       | 点遮罩关闭                                         | `boolean`          | `false`（防误触）         |
+| close-on-press-esc         | 按 ESC 关闭（脏数据敏感场景可关）                  | `boolean`          | `true`                    |
+| draggable                  | 头部拖拽移动弹窗位置（header 即拖拽把手）          | `boolean`          | `true`                    |
+| hide-footer                | 隐藏默认按钮栏                                     | `boolean`          | `false`                   |
 
 固定行为：**屏幕垂直居中**（align-center）、append-to-body、8px 圆角；标题通过 `aria-labelledby` 关联，缺少标题时使用“对话框”作为可访问名称。关闭按钮保持 44px 触控目标，窄屏表单自动改为单列。portal 浮层跟随 `html.lx-theme-hud` 根主题。
 
@@ -52,5 +52,6 @@ import Basic from '../../src/components/LxDialog/demo/basic.vue';
 
 - **弹窗选型**：表单用 LxDialog；详情用 LxDrawer（设计稿明确「详情不走弹窗」）；纯确认用 lxConfirm。
 - 提交时 `loading` 置 true 防重复；校验不通过弹窗不关，配 LxFormErrorBanner 提示。
+- 提交期间保持弹窗可见，直到宿主结束 `loading`；此时取消、标题关闭、遮罩和 ESC 均不会关闭弹窗。
 - `hide-footer` 仅在同时提供 `footer` 插槽时渲染自定义底栏；未提供插槽时不会留下空 footer。
 - 关闭回调里清空表单与校验残留（`nextTick(clearValidate)`）。

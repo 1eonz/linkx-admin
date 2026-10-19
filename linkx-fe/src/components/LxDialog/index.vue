@@ -38,6 +38,13 @@ const emit = defineEmits<{
 }>()
 
 const visible = computed(() => props.modelValue)
+const canClose = computed(() => !props.loading)
+const effectiveCloseOnClickModal = computed(
+  () => props.closeOnClickModal && canClose.value,
+)
+const effectiveCloseOnPressEsc = computed(
+  () => props.closeOnPressEsc && canClose.value,
+)
 
 const headerIcon = computed(() => (props.danger ? 'alert' : props.icon))
 const titleColor = computed(() =>
@@ -48,10 +55,13 @@ const iconColor = computed(() =>
 )
 
 function close() {
+  // 提交期间保持弹窗可见，避免异步结果回写到已卸载的业务上下文。
+  if (!canClose.value) return
   emit('update:modelValue', false)
 }
 
 function onCancel() {
+  if (!canClose.value) return
   emit('cancel')
   close()
 }
@@ -67,8 +77,8 @@ function onConfirm() {
     class="lx-dialog"
     :model-value="visible"
     :width="width"
-    :close-on-click-modal="closeOnClickModal"
-    :close-on-press-escape="closeOnPressEsc"
+    :close-on-click-modal="effectiveCloseOnClickModal"
+    :close-on-press-escape="effectiveCloseOnPressEsc"
     :draggable="draggable"
     :show-close="false"
     :aria-label="title ? undefined : '对话框'"
@@ -78,7 +88,7 @@ function onConfirm() {
   >
     <!-- 标题栏：图标 + 标题 + X，底 1px 分隔线（stitch 三段式） -->
     <template #header="{ titleId, titleClass }">
-      <div class="lx-dialog__header">
+      <div :class="['lx-dialog__header', { 'is-draggable': draggable }]">
         <div class="lx-dialog__title-wrap">
           <LxIcon
             v-if="headerIcon"
@@ -90,6 +100,7 @@ function onConfirm() {
           <span
             :id="titleId"
             :class="['lx-dialog__title', titleClass]"
+            :title="title || undefined"
             :style="{ color: titleColor }"
             >{{ title }}</span
           >
@@ -97,6 +108,7 @@ function onConfirm() {
         <button
           class="lx-dialog__close"
           type="button"
+          :disabled="loading"
           aria-label="关闭"
           @click="close"
         >
@@ -111,7 +123,9 @@ function onConfirm() {
      按钮内核切换为 LxButton（EP 内核）：loading 时呈现 spinner 并拦截点击 -->
     <template v-if="!hideFooter" #footer>
       <div class="lx-dialog__footer">
-        <LxButton size="md" @click="onCancel">{{ cancelText }}</LxButton>
+        <LxButton size="md" :disabled="loading" @click="onCancel">{{
+          cancelText
+        }}</LxButton>
         <LxButton
           size="md"
           :type="danger ? 'danger' : 'primary'"
@@ -165,6 +179,9 @@ function onConfirm() {
   justify-content: space-between;
   padding: var(--lx-space-md) var(--lx-space-lg);
   border-bottom: 1px solid var(--lx-border-light);
+}
+
+.lx-dialog__header.is-draggable {
   cursor: move; /* 默认 draggable=true，头部即拖拽把手（设计拍板 #9） */
 }
 
@@ -208,6 +225,11 @@ function onConfirm() {
 .lx-dialog__close:hover {
   background: var(--lx-bg-card-hover);
   color: var(--lx-text-primary);
+}
+
+.lx-dialog__close:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .lx-dialog__footer {

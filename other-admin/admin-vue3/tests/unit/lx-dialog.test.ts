@@ -73,6 +73,17 @@ describe('LxDialog', () => {
     closeWrapper.unmount();
   });
 
+  it('locks every close path while loading', async () => {
+    const wrapper = mountDialog({ loading: true, closeOnClickModal: true });
+
+    await wrapper.get('.lx-dialog__close').trigger('click');
+    await wrapper.get('.lx-btn--default').trigger('click');
+    expect(wrapper.emitted('cancel')).toBeUndefined();
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+    expect(wrapper.get('.lx-dialog__close').attributes('disabled')).toBeDefined();
+    wrapper.unmount();
+  });
+
   it('renders a consumer footer when the default footer is hidden', () => {
     const wrapper = mountDialog({ hideFooter: true }, { footer: '<button type="button">完成</button>' });
 

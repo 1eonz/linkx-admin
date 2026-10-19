@@ -61,7 +61,12 @@ function close() {
           <span v-if="icon" class="lx-drawer__icon">
             <LxIcon :name="icon" :size="16" />
           </span>
-          <span :id="titleId" class="lx-drawer__title">{{ title }}</span>
+          <span
+            :id="titleId"
+            class="lx-drawer__title"
+            :title="title || undefined"
+            >{{ title }}</span
+          >
         </div>
         <button
           class="lx-drawer__close"
