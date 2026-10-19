@@ -691,3 +691,8 @@ Vue3 的 SearchBar、ProTable、PasswordInput、Breadcrumb、Navbar、SectionTit
 
 - 复合输入外框由真实 1px border 绘制，焦点/悬停/错误态仍由根节点统一管理；密码输入 wrapper 的边框也纳入回归断言。
 - 复合 E2E **1/1**、单测 **13/13**；全量基础控件存在一个既有清空按钮失败，已与本次组件边框问题隔离记录。
+
+## 2026-10-19 LxDialog footer 验收
+
+- 自定义底栏、默认底栏和隐藏底栏三种状态均有单测覆盖；自定义 footer 不再与默认按钮重复渲染。
+- 单测 **6/6**、文档 Playwright **3/3**、目标格式和 ESLint 通过；静态 detector `[]` 只作辅助证据。

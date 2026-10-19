@@ -810,3 +810,8 @@ _调研方法：Grep count 实测 + 关键文件精读（appForm.vue / editPerso
 
 - 根因是复合输入 inset 阴影被 prepend/append 背景遮挡；已改为真实 1px 外边框并保留焦点、悬停、错误态。
 - 组件单测 **13/13**、复合文档 E2E **1/1**；detector 合法 `[]`/空/0，仅代表静态零命中，正式 A/B 仍按 UI-10 门禁记录。
+
+## 2026-10-19 LxDialog footer 契约
+
+- `hideFooter` 与 `footer` 插槽已按 API 说明实现互斥分支：自定义底栏只显示调用方内容，隐藏且无插槽时没有空 footer。
+- 单测 **6/6**、文档 E2E **3/3**；组件 detector 为合法 `[]`/空/0，正式 UI-10 A/B 仍保持开放。

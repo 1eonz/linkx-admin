@@ -1624,6 +1624,12 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **实现**：复合 `LxInput` 改用 `1px` 真实外边框，焦点、悬停和错误态由根节点承载；内部三段向外补回边框占用的 1px，保持 sm/md/lg 与窄屏 44px 完整轨道。
 - **验证**：复合前后缀 Playwright **1/1**、LxInput 单测 **13/13**、目标 ESLint/Prettier 通过；全基础控件 E2E **12/13**，唯一失败为既有清空按钮 aria-hidden 与窄屏显示契约冲突，未触及本次边框改动。detector JSON 为合法 `[]`、stderr 为空、退出码 `0`；`[]` 不单独代表视觉通过。
 - **边界**：密码输入内框边框回归已加入断言；真实后端、权限接入、Vue3 Element Plus 分批替换和正式双路 Impeccable 仍按门禁开放。
+
+## 2026-10-19 LxDialog 自定义 footer 契约修复
+
+- **实现**：`hideFooter=true` 且提供 `footer` 插槽时只渲染调用方底栏；没有自定义插槽时不传空 footer；默认按钮栏仅在 `hideFooter=false` 时渲染。
+- **验证**：LxDialog 单测 **6/6**、文档 Playwright **3/3**、目标 ESLint/Prettier 和差异检查通过。组件 detector JSON 为合法 `[]`、stderr 为空、退出码 `0`；`[]` 不单独代表视觉审查通过。
+- **边界**：本波不改变弹窗 props、事件、业务请求或权限契约；正式 Assessment A/B、真实读屏器和宿主页面组合仍按 UI-10/UI-04 门禁开放。
 ## 2026-10-18 LxCodeSlot 复制中反馈 P1 收口
 
 - **实现**：复制进行中按钮显示 `LxIcon loading`、`title="正在复制"` 和 `aria-busy="true"`，同时禁用重复点击；复制完成后恢复复制图标和原提示。保留既有成功/失败事件与 Promise 链边界。

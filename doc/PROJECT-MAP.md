@@ -742,3 +742,8 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 
 - 组件入口 `linkx-fe/src/components/LxInput/style.css` 已修复复合输入真实外边框；文档回归位于 `other-admin/admin-vue3/tests/e2e/lx-base-controls-docs.spec.ts`。
 - 复合前后缀和密码边框有自动化断言；本次不改变宿主 API、权限码或请求链式风格。
+
+## 2026-10-19 LxDialog footer
+
+- `linkx-fe/src/components/LxDialog/index.vue` 已明确默认 footer 与自定义 `footer` 插槽的互斥渲染；`hideFooter` 无插槽时不创建空底栏。
+- 组件行为由 `other-admin/admin-vue3/tests/unit/lx-dialog.test.ts` 和 `tests/e2e/lx-dialog-docs.spec.ts` 覆盖。

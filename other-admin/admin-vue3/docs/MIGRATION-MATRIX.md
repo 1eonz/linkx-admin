@@ -198,3 +198,8 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 - Vue3 适配继续直接复用 lx-ui `LxInput`，不在宿主复制边框样式；复合 prepend/append 和密码边框已纳入文档回归。
 - 本波不改变页面权限、API 请求链或 Element Plus 依赖，业务页面迁移仍按 UI-04/UI-10 门禁推进。
+
+## 2026-10-19 LxDialog footer
+
+- Vue3 宿主复用 lx-ui `LxDialog` 时，`hideFooter` 与自定义 `#footer` 已保持单一底栏；页面不需要复制条件样式或默认按钮。
+- 本波不改变业务弹窗 API、提交锁、权限码和请求链；真实宿主组合仍需逐页回归。
