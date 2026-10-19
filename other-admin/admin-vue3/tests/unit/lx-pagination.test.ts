@@ -61,7 +61,15 @@ describe('LxPagination', () => {
       'data-total': '63',
       'data-layout': 'total, sizes, prev, pager, next',
     });
+    expect(wrapper.get('nav').attributes('aria-label')).toBe('分页导航');
 
+    wrapper.unmount();
+  });
+
+  it('supports a custom accessible name for pages with multiple pagers', () => {
+    const wrapper = mountPagination({ ariaLabel: '人员列表分页' });
+
+    expect(wrapper.get('nav').attributes('aria-label')).toBe('人员列表分页');
     wrapper.unmount();
   });
 

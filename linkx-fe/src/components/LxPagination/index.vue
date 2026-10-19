@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<LxPaginationProps>(), {
   size: 'default',
   layout: undefined,
   background: false,
+  ariaLabel: '分页导航',
 })
 
 const emit = defineEmits<{
@@ -95,20 +96,22 @@ function onSize(s: number) {
 </script>
 
 <template>
-  <ElPagination
-    ref="paginationRef"
-    class="lx-pagination"
-    :class="`lx-pagination--${size}`"
-    :current-page="page"
-    :page-size="pageSize"
-    :page-sizes="pageSizes"
-    :total="total"
-    :layout="resolvedLayout"
-    :background="background"
-    :small="size === 'small'"
-    @update:current-page="onPage"
-    @update:page-size="onSize"
-  />
+  <nav class="lx-pagination-nav" :aria-label="ariaLabel">
+    <ElPagination
+      ref="paginationRef"
+      class="lx-pagination"
+      :class="`lx-pagination--${size}`"
+      :current-page="page"
+      :page-size="pageSize"
+      :page-sizes="pageSizes"
+      :total="total"
+      :layout="resolvedLayout"
+      :background="background"
+      :small="size === 'small'"
+      @update:current-page="onPage"
+      @update:page-size="onSize"
+    />
+  </nav>
 </template>
 
 <style scoped>
@@ -123,6 +126,11 @@ function onSize(s: number) {
   --el-pagination-button-disabled-bg-color: var(--lx-bg-table-header);
   color: var(--lx-text-regular);
   justify-content: flex-end;
+}
+
+.lx-pagination-nav {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .lx-pagination--default {
@@ -140,5 +148,16 @@ function onSize(s: number) {
   --el-pagination-font-size: 13px;
   --el-pagination-button-width: var(--lx-control-height-lg);
   --el-pagination-button-height: var(--lx-control-height-lg);
+}
+
+@media (max-width: 767px) {
+  /* 窄屏保留紧凑布局，同时把分页操作的实际触控命中区提升到 44px。 */
+  .lx-pagination :deep(.btn-prev),
+  .lx-pagination :deep(.btn-next),
+  .lx-pagination :deep(.el-pager li),
+  .lx-pagination :deep(.el-pagination__sizes .el-select__wrapper) {
+    min-width: 44px;
+    min-height: 44px;
+  }
 }
 </style>

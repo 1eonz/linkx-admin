@@ -26,4 +26,6 @@ export interface LxPaginationProps {
   layout?: string
   /** Element Plus 背景分页样式 */
   background?: boolean
+  /** 分页导航的可访问名称；页面有多个分页器时应分别传入 */
+  ariaLabel?: string
 }

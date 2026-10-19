@@ -63,6 +63,15 @@ test.describe('lx-ui LxPagination 文档示例', () => {
     await region.focus();
     await expect(region).toBeFocused();
     await expect(region).toHaveCSS('outline-width', '2px');
+    for (const button of [
+      region.locator('.btn-prev'),
+      region.locator('.el-pager li').first(),
+      region.locator('.btn-next'),
+    ]) {
+      const box = await button.boundingBox();
+      if (!box) throw new Error('窄屏分页操作未进入可视区域');
+      expect(box.height).toBeGreaterThanOrEqual(44);
+    }
     const before = await region.evaluate((element) => element.scrollLeft);
     await region.press('ArrowRight');
     await expect.poll(() => region.evaluate((element) => element.scrollLeft)).toBeGreaterThan(before);
