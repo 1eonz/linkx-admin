@@ -12,7 +12,7 @@
  */
 import { ElMessage } from 'element-plus';
 import type ElTree from 'element-plus/es/components/tree/index';
-import { LxSwitch } from 'lx-ui';
+import { LxInput, LxSwitch } from 'lx-ui';
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 
 import AuthTreeModal from './AuthTreeModal.vue';
@@ -423,14 +423,8 @@ onMounted(() => {
   <div class="icp-auth-manage">
     <!-- 顶部搜索栏 -->
     <div class="header-bar">
-      <el-input
-        v-model="listQuery.name"
-        placeholder="姓名"
-        style="width: 150px"
-        clearable
-        @keyup.enter="handleFilter"
-      />
-      <el-input
+      <LxInput v-model="listQuery.name" placeholder="姓名" style="width: 150px" clearable @keyup.enter="handleFilter" />
+      <LxInput
         v-model="listQuery.idCard"
         placeholder="身份证号"
         style="width: 180px"
@@ -466,13 +460,7 @@ onMounted(() => {
             <span class="panel-title">组织部门</span>
           </div>
           <div class="panel-content">
-            <el-input
-              v-model="treeFilterText"
-              placeholder="搜索部门"
-              clearable
-              size="small"
-              class="tree-filter-input"
-            />
+            <LxInput v-model="treeFilterText" placeholder="搜索部门" clearable size="sm" class="tree-filter-input" />
             <div v-loading="treeLoading" class="tree-scroll">
               <el-tree
                 ref="treeRef"
