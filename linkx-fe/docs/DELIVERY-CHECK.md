@@ -1,5 +1,12 @@
 # lx-ui 交付核查
 
+## 2026-10-20 LxInput 边框与触屏清空入口
+
+- [x] 普通、密码、透传及复合前后缀输入框保留组件真实 `1px` 外边框，边框来源为 `--lx-control-border`，不是 Demo 临时样式。
+- [x] 窄屏清空按钮在 CSS 显示时不再被 `aria-hidden` 从可访问树排除；桌面隐藏、禁用/只读状态和 `tabindex` 规则保持不变。
+- [x] LxInput 单测 **13/13**、基础控件文档 Playwright **14/14**、目标 Prettier 通过。
+- [ ] 本波不关闭正式 Impeccable A/B、overlay、snapshot/trend 或 UI-10；npm 运行时弃用警告仍需在评审证据中单独记录。
+
 ## 2026-10-20 LxMetricCard detector 复验
 
 - [x] 三目标 detector JSON 为合法 `[]`，进程退出码均为 `0`；单测 **15/15**、文档 E2E **3/3**。

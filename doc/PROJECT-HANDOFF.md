@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-20] LxInput 边框与触屏清空入口交接
+
+- **排查结论**：前后缀、密码和透传输入框的边框缺失属于组件样式层问题，不是 Demo 问题；`LxInput` 已统一使用控件边框令牌绘制普通 wrapper 和复合根节点外框。
+- **本次修复**：清空按钮在 390px 窄屏由 CSS 设置为可见，但模板的 `aria-hidden` 仍使可访问角色查询不到；已移除冗余 `aria-hidden`，保留隐藏态视觉规则、禁用/只读限制和键盘顺序控制。
+- **验证**：LxInput 单测 **13/13**；基础控件文档 Playwright **14/14**；目标文件 Prettier 通过。运行日志中的 Node/npm 弃用警告属于环境输出，不计为代码失败。
+- **后续**：正式 Impeccable A/B、浏览器 overlay 与 snapshot/trend 证据仍未完成，不能用 detector `[]` 单独宣布 UI-10 通过；Vue3 页面替换、权限和真实后端联调继续后置。业务 API 仍保持 `.then().catch().finally()`。
+
 ## [2026-10-20] LxMetricCard Impeccable detector 复验边界
 
 - 组件、Demo、中文文档 detector 均为 JSON `[]`、退出码 `0`，但 stderr 有 npm 项目配置弃用警告；按规则不能伪称干净空 stderr 或正式 Critique 通过。
