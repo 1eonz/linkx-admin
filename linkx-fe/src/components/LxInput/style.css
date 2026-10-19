@@ -105,9 +105,12 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
 
 /* 输入值在两种主题下都使用输入表面专属正文令牌。 */
 .lx-input .el-input__inner {
-  height: 100%;
+  /* 真实输入元素也必须落在描边内的内容轨道，否则会比 prefix/suffix 高 2px。 */
+  height: var(--lx-input-content-height);
   min-height: 0;
+  align-self: center;
   color: var(--lx-color-on-input);
+  line-height: var(--lx-input-content-height);
 }
 
 /* 输入内容与 prefix/suffix 共用 wrapper 的内部内容轨道，避免槽位越过

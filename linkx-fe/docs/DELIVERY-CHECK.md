@@ -1,5 +1,11 @@
 # lx-ui 交付核查
 
+## 2026-10-19 LxInput 真实输入高度对齐
+
+- 输入元素现与 `prefix/suffix` 使用同一描边内内容轨道，修复真实输入盒模型仍为完整外框高度造成的 2px 视觉差异；`prepend/append` 继续使用完整外框高度。
+- 复合前后缀 Playwright **1/1**、LxInput 单测 **13/13**、typecheck/build 和目标格式检查通过；md 档浏览器实测输入、prefix、suffix 均为 30px。
+- 本轮不把 detector `[]` 单独当作 Impeccable 通过，不改变 UI-10 关闭计数。
+
 ## 2026-10-19 LxMetricCard 窄卡与宿主状态契约补强
 
 - 新增卡片容器查询：宽度不超过 320px 时标题、角标、数值和 `extra` 分层换行；Demo 新增 loading、empty、error 组合，错误状态重试按钮可观察地更新反馈。

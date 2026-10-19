@@ -1,5 +1,10 @@
 # lx-ui 路线图
 
+## 2026-10-19 LxInput 真实输入盒模型高度修复
+
+- `.el-input__inner`、`prefix`、`suffix` 和内部槽位统一使用描边内内容轨道；32px 档为 30px，窄屏 44px 档为 42px，外侧复合块不变。
+- 定向 Playwright **1/1**、LxInput 单测 **13/13**、typecheck/build 和目标格式检查通过；后续视觉审查仍需保留独立 Impeccable A/B 证据，静态 `[]` 不单独代表通过。
+
 ## 2026-10-19 LxMetricCard 窄卡与宿主状态契约补强
 
 - 指标卡在自身容器不超过 320px 时将标题、角标、数值和 `extra` 分层，避免长内容横向竞争；Demo 增加宿主 loading/empty/error 组合和重试反馈。

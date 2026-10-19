@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-19 LxInput 真实输入盒模型高度对齐
+
+- **问题**：复合 `LxInput` 中真实 `.el-input__inner` 仍使用完整 `100%` 高度，而 `prefix/suffix` 已使用扣除上下描边后的内容轨道；32px 外框下实际表现为输入元素 32px、前后缀 30px，造成视觉高度不一致。
+- **实现**：输入元素改用 `--lx-input-content-height`，并在内容轨道内垂直居中、同步行高；外框、焦点环、`prepend/append`、窄屏 44px 触控高度和 API 契约不变。
+- **验证**：复合前后缀 Playwright **1/1**，新增输入元素上下边界断言；LxInput 单测 **13/13**；lx-ui `vue-tsc --noEmit`、206 modules 生产构建、目标 Prettier 通过。浏览器实测 32px 档输入元素、prefix、suffix 均为 30px，三者上下边界一致。
+- **审查边界**：本次是局部几何修复；Impeccable detector 的既有页面低对比度建议不归因于本改动，静态 `[]` 不单独作为正式 Critique 通过；UI-10 全库计数不变。
+
 ## 2026-10-19 LxMetricCard 窄卡与宿主状态契约补强
 
 - **实现**：指标卡增加自身容器查询；容器不超过 320px 时标题、角标、数值和 `extra` 分层换行，避免长文案互相挤压。Demo 增加宿主 loading、empty、error 状态组合，错误状态提供可操作的重试反馈。

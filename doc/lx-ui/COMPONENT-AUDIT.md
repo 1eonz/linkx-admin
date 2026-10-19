@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-19 LxInput 真实输入盒模型与前后缀高度复验
+
+- **修复**：`.el-input__inner` 从完整外框高度改为读取 `--lx-input-content-height`，与 `prefix/suffix` 及内部槽位共用描边内内容轨道；内容元素在外框内居中，避免输入元素比前后缀高 2px。
+- **验证**：复合前后缀 Playwright **1/1**、`lx-input.test.ts` **13/13**、lx-ui typecheck/build、目标格式检查通过；浏览器实际几何确认 32px 档内容三者均为 30px，390px 窄屏均为 42px。
+- **门禁**：本轮只修复局部几何，不增加 UI-10 严格矩阵关闭数。Impeccable 静态 `[]` 仍需与 stderr、退出码及独立浏览器证据一起解释；页面既有低对比度建议保持原归因。
+
 ## 2026-10-19 LxMetricCard 窄卡与宿主状态契约补强
 
 - 处理 Assessment A 的窄卡信息竞争和状态契约建议：新增卡片容器查询，在 320px 以下让标题/角标/数值/extra 分层；Demo 增加宿主 loading、empty、error 和重试反馈。

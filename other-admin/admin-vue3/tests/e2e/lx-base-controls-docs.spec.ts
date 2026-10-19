@@ -72,6 +72,7 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
           center: rootBounds.top + rootBounds.height / 2,
         },
         wrapper: rect('.el-input__wrapper'),
+        input: rect('.el-input__inner'),
         prepend: rect('.el-input-group__prepend'),
         append: rect('.el-input-group__append'),
         prefix: rect('.el-input__prefix'),
@@ -99,6 +100,15 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
       `${option} 档根节点与输入框下边界对齐`,
     ).toBeLessThanOrEqual(1);
     expect(geometry.wrapper.height).toBe(expectedHeight);
+    expect(geometry.input.height, `${option} 档输入元素内容高度`).toBe(expectedHeight - 2);
+    expect(
+      Math.abs(geometry.input.top - (geometry.wrapper.top + 1)),
+      `${option} 档输入元素上边界应在描边内对齐`,
+    ).toBeLessThanOrEqual(0.5);
+    expect(
+      Math.abs(geometry.input.top + geometry.input.height - (geometry.wrapper.top + expectedHeight - 1)),
+      `${option} 档输入元素下边界应在描边内对齐`,
+    ).toBeLessThanOrEqual(0.5);
     expect(
       await compoundInput.evaluate((root) => getComputedStyle(root).overflow),
       `${option} 档复合输入应裁切统一外框`,

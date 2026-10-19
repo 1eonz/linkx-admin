@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## [2026-10-19] LxInput 真实输入元素与前后缀高度对齐交接
+
+- **根因**：`prefix/suffix` 及内部槽位已经是描边内 30/42px 内容轨道，但真实输入元素仍为 `height: 100%`，在 32/44px 外框中比前后缀高 2px。
+- **修复**：输入元素改为 `--lx-input-content-height`，`align-self: center`，并同步 `line-height`；外侧复合块继续使用完整控件高度。
+- **证据**：复合前后缀 Playwright **1/1**、LxInput 单测 **13/13**、lx-ui typecheck/build、目标 Prettier 通过；浏览器测量确认 md 档输入元素、prefix、suffix 均为 30px，窄屏内容轨道为 42px。
+- **边界**：没有改变 props、事件、校验、Promise 链式 API 或焦点环；正式 Impeccable A/B 仍需按独立 JSON、stderr、退出码及浏览器证据门禁执行，detector `[]` 不单独代表通过。
+
 ## [2026-10-19] LxMetricCard 窄卡与宿主状态契约补强交接
 
 - **改动**：指标卡新增 `@container (max-width: 320px)` 布局，标题/角标/数值/补充内容在窄卡中分层换行；Demo 增加 loading、empty、error 宿主组合和可观察的重试反馈。
