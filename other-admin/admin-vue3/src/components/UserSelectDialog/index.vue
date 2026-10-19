@@ -13,6 +13,7 @@
  * - emit: update:visible / confirm
  */
 import { computed, nextTick, ref, watch } from 'vue';
+import { LxTag } from 'lx-ui';
 
 import { getAdminUserList, type AdminUserItem } from '@/api/authority/adminUser';
 import { defaultTableFormatter } from '@/components/ProTable/formatter';
@@ -193,9 +194,9 @@ function getUser(scope: any): AdminUserItem {
       @selection-change="handleSelectionChange"
     >
       <template #status="scope">
-        <el-tag :type="getUser(scope).status === 0 ? 'success' : 'danger'" size="small">
+        <LxTag :type="getUser(scope).status === 0 ? 'success' : 'error'" size="small">
           {{ getUser(scope).status === 0 ? '正常' : '禁用' }}
-        </el-tag>
+        </LxTag>
       </template>
     </ProTable>
 

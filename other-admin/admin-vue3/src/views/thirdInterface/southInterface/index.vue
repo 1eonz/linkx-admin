@@ -11,6 +11,7 @@
  */
 import { Plus, View, Edit, Delete, Connection, Setting } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import AppsManageDetailModal from './components/AppsManageDetailModal.vue';
@@ -212,9 +213,9 @@ function getRow(scope: any): CallableApp {
       >
         <!-- 应用类型列 -->
         <template #type="scope">
-          <el-tag :type="getRow(scope).type === 1 ? 'success' : 'warning'">
+          <LxTag :type="getRow(scope).type === 1 ? 'success' : 'warning'">
             {{ typeMap[getRow(scope).type] ?? '-' }}
-          </el-tag>
+          </LxTag>
         </template>
 
         <!-- 展示范围列 -->

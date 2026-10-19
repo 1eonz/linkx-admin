@@ -13,6 +13,7 @@
  */
 import { Edit, Delete, Plus, Connection } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxTag } from 'lx-ui';
 import { computed, onMounted, reactive, ref } from 'vue';
 
 import AgentBindVirtualUser from './AgentBindVirtualUser.vue';
@@ -63,8 +64,8 @@ const newCategoryName = ref('');
 const categorySubmitting = ref(false);
 
 // 优先级 tag 类型映射
-function getPriorityTagType(priority: number): 'danger' | 'warning' | 'info' {
-  if (priority === 0) return 'danger';
+function getPriorityTagType(priority: number): 'error' | 'warning' | 'info' {
+  if (priority === 0) return 'error';
   if (priority === 1) return 'warning';
   return 'info';
 }
@@ -308,7 +309,7 @@ onMounted(() => {
 
     <div class="category-bar">
       <span class="label">分类管理：</span>
-      <el-tag
+      <LxTag
         v-for="cat in categoryList"
         :key="cat.id ?? cat.name"
         closable
@@ -316,7 +317,7 @@ onMounted(() => {
         @close="handleDeleteCategory(cat)"
       >
         {{ cat.name }}
-      </el-tag>
+      </LxTag>
       <el-button :icon="Plus" size="small" link @click="openCategoryDialog">新建分类</el-button>
     </div>
 
@@ -341,14 +342,14 @@ onMounted(() => {
         <span v-else>-</span>
       </template>
       <template #priority="scope">
-        <el-tag :type="getPriorityTagType(getRow(scope).priority)">
+        <LxTag :type="getPriorityTagType(getRow(scope).priority)">
           {{ getPriorityText(getRow(scope).priority) }}
-        </el-tag>
+        </LxTag>
       </template>
       <template #isRestricted="scope">
-        <el-tag :type="getRow(scope).isRestricted === 1 ? 'warning' : 'success'">
+        <LxTag :type="getRow(scope).isRestricted === 1 ? 'warning' : 'success'">
           {{ getRow(scope).isRestricted === 1 ? '受限' : '全员' }}
-        </el-tag>
+        </LxTag>
       </template>
       <template #actions="scope">
         <el-button type="primary" link :icon="Edit" @click="handleEdit(getRow(scope))">编辑</el-button>
