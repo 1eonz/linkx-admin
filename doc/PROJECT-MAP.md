@@ -4,6 +4,7 @@
 
 - 入口 `linkx-fe/src/components/LxInput/index.vue`（语义密码按钮/EP公开状态）、`style.css`（单层描边/状态/框外统计/局部主题），类型与 `demo/basic.vue`、`docs/components/lxinput.md` 同步。
 - 回归位于Vue3 `tests/unit/lx-input.test.ts`（19/19）、`tests/e2e/lx-base-controls-docs.spec.ts`（Input9/9及最终专项1/1）；Mock预览11/11。正式A/B36/40、快照和边界以交付计划/交接当前条目为准，无新增业务API。下一入口DatePicker旧问题当前态核对。
+- DatePicker定位入口 `linkx-fe/src/components/LxDatePicker/index.vue` 的 `preparePickerForOpen` / `syncViewportFit` 与 `style.css`；增量回归入口Vue3 `tests/e2e/lx-date-picker-docs.spec.ts`。8状态前置证据与当前4项缺口集中见交付计划当前子节，尚未修改实现。
 
 ## 2026-10-21 按钮加载稳定布局入口
 
