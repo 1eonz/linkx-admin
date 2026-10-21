@@ -3206,3 +3206,8 @@
 
 - `EditDialog.vue` 的名称、备注、标签改用 `LxInput`，保留最大长度、提交事件和 loading；拒绝理由 textarea 未改动。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；客户端 API 契约未改变。
+
+# 2026-10-21 协同与 H5 搜索交接
+
+- `colLevelManage.vue`、`ColSearch.vue`、`globals/index.vue`、`archivedTable/index.vue` 共 5 个字符串搜索输入改用 `LxInput`，保留清空、回车、前缀、组织选择、时间筛选和归档操作。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；协同权限和归档真实接口未改变。

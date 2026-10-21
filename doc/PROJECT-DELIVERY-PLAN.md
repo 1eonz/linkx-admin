@@ -2098,3 +2098,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 
 - `nodeManage/clientManage/components/EditDialog.vue` 的名称、备注、标签三个字符串字段已由 `el-input` 切换为 `LxInput`。
 - 保留最大长度、提交事件、loading 和客户端 API 边界；拒绝理由 textarea 未改动。`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
+
+## 2026-10-21 协同与 H5 搜索输入迁移
+
+- `collaboration/colLevelManage.vue`、`collaboration/components/ColSearch.vue`、`baseData/globals/index.vue`、`h5/archivedTable/index.vue` 的字符串搜索输入共 5 个已由 `el-input` 切换为 `LxInput`。
+- 保留 SearchBar、前缀图标、清空、回车搜索、组织选择、配置过滤、时间筛选和归档下载/删除逻辑；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
+- 协同权限、归档接口和真实后端状态继续按原计划后置。
