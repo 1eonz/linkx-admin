@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-21 三方应用编辑文本输入
+
+- 入口：`other-admin/admin-vue3/src/views/baseData/thirdParty/components/thirdPartyEdit.vue`；应用名称和应用 ID 使用 `LxInput`，类型来源为 `src/api/resource/thirdApp.ts` 的 `ThirdAppForm`。
+- 校验、回显、提交锁和链式 API 由宿主维护；密码、数字有效期、textarea 和选择器仍保留原控件。类型/格式/Lint 通过，隔离 Mock 既有回归 **10/10**，不涵盖本弹窗提交。
+
 ## 2026-10-20 三方应用输入迁移
 
 - `baseData/thirdParty` 的应用名称搜索与只读应用密钥已接入 `LxInput`，密码显隐和禁用语义保持。

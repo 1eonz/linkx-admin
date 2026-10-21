@@ -1,5 +1,10 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-21 三方应用编辑文本输入迁移
+
+- `baseData/thirdParty/components/thirdPartyEdit.vue` 两个普通字符串输入改用 `LxInput`；剩余密码、数字有效期、textarea 和隐藏选择器未迁移。
+- 当前源码 `src` 的直接 `<el-input>`（排除 `el-input-number`）为 **123** 处；计数只表示引用情况，不代表业务验收或依赖删除门禁通过。
+
 ## 2026-10-20 三方应用输入迁移
 
 - `baseData/thirdParty/index.vue` 的搜索输入和只读密码输入改用 `LxInput`，保留前端过滤事件、密码显隐和禁用状态。

@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-21 三方应用编辑文本输入迁移
+
+- [x] `thirdPartyEdit.vue` 的应用名称、应用 ID 改用 `LxInput`，保留字符串值、回显和失焦校验；类型/格式/Lint 及隔离 Mock 既有回归 **10/10** 通过。
+- [ ] 密码、数字有效期、textarea 和隐藏选择器继续按能力契约迁移；本弹窗提交专项 Mock/E2E 与真实后端联调未完成，不用全菜单 Smoke 代替。
+
 ## 2026-10-20 三方应用输入迁移
 
 - [x] 三方应用列表搜索和只读密钥输入改用 `LxInput`，保留 clearable、回车、password、show-password 和 disabled；类型/格式和 Mock 全菜单 **10/10** 通过。
