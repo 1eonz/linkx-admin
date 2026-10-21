@@ -2104,3 +2104,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `collaboration/colLevelManage.vue`、`collaboration/components/ColSearch.vue`、`baseData/globals/index.vue`、`h5/archivedTable/index.vue` 的字符串搜索输入共 5 个已由 `el-input` 切换为 `LxInput`。
 - 保留 SearchBar、前缀图标、清空、回车搜索、组织选择、配置过滤、时间筛选和归档下载/删除逻辑；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
 - 协同权限、归档接口和真实后端状态继续按原计划后置。
+
+## 2026-10-21 预警编辑只读文本迁移
+
+- `notification/alertPush/components/TaskDueEditForm.vue` 与 `UnattendedEditForm.vue` 的组织/协同岗及所属组织共 4 个只读字符串字段已由 `el-input` 切换为 `LxInput`。
+- 保留 disabled 展示、通知对象选择、表单校验、提交事件和请求契约；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
+- 复杂通知对象选择和真实后端权限联调继续后置。
