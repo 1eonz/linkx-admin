@@ -2057,3 +2057,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `thirdInterface/southInterface/index.vue` 与 `thirdInterface/app/components/AppManage.vue` 的应用名称搜索输入已由 `el-input` 切换为 `LxInput`。
 - 保留 SearchBar 插槽、清空、回车搜索、分页、状态开关、图标和映射操作；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
 - 南向任务配置、映射弹窗和真实第三方接口仍按原契约后置联调。
+
+## 2026-10-21 应用分类与授权树文本输入迁移
+
+- `thirdInterface/app/components/GroupManage.vue` 的分类名称搜索和编辑字段、`thirdInterface/unifiedComm/components/AuthTreeModal.vue` 的授权树过滤字段已由 `el-input` 切换为 `LxInput`。
+- 保留清空、搜索、分类名称最大长度 32、树过滤和授权弹窗契约；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过。
+- 排序数字、应用编辑条件字段、权限保存和真实后端联调继续单独处理，Element Plus 删除门槛不变。

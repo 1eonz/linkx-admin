@@ -3171,3 +3171,8 @@
 
 - `thirdInterface/southInterface/index.vue`、`thirdInterface/app/components/AppManage.vue` 的应用名称搜索改用 `LxInput`，保留 SearchBar、清空、回车、分页、状态和映射操作。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；任务配置、映射和真实第三方接口未改变。
+
+# 2026-10-21 应用分类与授权树输入交接
+
+- `GroupManage.vue` 的分类搜索/名称字段和 `AuthTreeModal.vue` 的树过滤字段改用 `LxInput`，保留清空、长度限制、树过滤、排序/应用选择和授权保存边界。
+- 验证：类型检查、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；数字排序、应用编辑条件字段和真实权限接口未改动。

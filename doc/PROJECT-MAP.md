@@ -968,6 +968,7 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - `thirdInterface/unifiedComm/components/IcpAuthManage.vue` 的姓名、身份证号和组织树搜索已采用 `LxInput`；权限树、授权弹窗和后端数据仍由宿主负责。
 - `thirdInterface/unifiedComm/components/IcpServerConfig.vue` 的 IP、WSS、用户名、只读节点和树搜索已采用 `LxInput`；密码、端口和服务请求仍由宿主维护。
 - `thirdInterface/southInterface/index.vue`、`thirdInterface/app/components/AppManage.vue` 的应用名称搜索已采用 `LxInput`；映射、状态和第三方接口仍由页面宿主负责。
+- `thirdInterface/app/components/GroupManage.vue` 分类名称输入及 `unifiedComm/AuthTreeModal.vue` 授权树过滤已采用 `LxInput`；排序、应用选择和权限保存仍由宿主负责。
 - DynamicForm 证据入口：`other-admin/admin-vue3/tests/unit/lx-dynamic-form.test.ts`（31/31）与 `tests/e2e/lx-dynamic-form-docs.spec.ts`（14/14）。Assessment B 三件套为合法 `[]`/空 stderr/0，8 个浏览器视图通过；综合 snapshot/trend 尚缺，正式视觉门禁仍开放。
 # 项目地图更新（2026-10-20）
 
