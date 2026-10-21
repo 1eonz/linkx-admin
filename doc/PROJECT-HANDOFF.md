@@ -3201,3 +3201,8 @@
 
 - `DockManage.vue` 系统名/IP/路径搜索与 `EditDock.vue` 名称、系统名、系统编码、IP、路径共 8 个普通字段改用 `LxInput`，保留 SearchBar、长度、启用开关、端口、JSON/脚本 textarea 和保存契约。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；警务真实接口和复杂文本内容未改动。
+
+# 2026-10-21 客户端编辑输入交接
+
+- `EditDialog.vue` 的名称、备注、标签改用 `LxInput`，保留最大长度、提交事件和 loading；拒绝理由 textarea 未改动。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；客户端 API 契约未改变。

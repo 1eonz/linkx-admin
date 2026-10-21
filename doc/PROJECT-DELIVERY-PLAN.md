@@ -2093,3 +2093,8 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `thirdInterface/policeReport/components/DockManage.vue` 的系统名称/IP/路径搜索和 `EditDock.vue` 的名称、系统名称、系统编码、IP、路径共 8 个普通字段已由 `el-input` 切换为 `LxInput`。
 - 保留 SearchBar、清空、回车搜索、长度限制、启用开关、JSON/脚本 textarea、端口和保存请求；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
 - JSON/脚本内容、端口和真实警务接口继续单独联调。
+
+## 2026-10-21 客户端编辑文本输入迁移
+
+- `nodeManage/clientManage/components/EditDialog.vue` 的名称、备注、标签三个字符串字段已由 `el-input` 切换为 `LxInput`。
+- 保留最大长度、提交事件、loading 和客户端 API 边界；拒绝理由 textarea 未改动。`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
