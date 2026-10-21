@@ -30,6 +30,7 @@
 import { Plus } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormItemRule, UploadFile } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, nextTick, reactive, ref } from 'vue';
 
 import {
@@ -349,7 +350,7 @@ function handleDialogClosed(): void {
 
       <!-- 应用名称 -->
       <el-form-item label="应用名称" prop="name">
-        <el-input v-model="formData.name as string" placeholder="请输入应用名称" maxlength="32" />
+        <LxInput v-model="formData.name as string" placeholder="请输入应用名称" :maxlength="32" />
       </el-form-item>
 
       <!-- 应用类型 -->
@@ -361,32 +362,32 @@ function handleDialogClosed(): void {
 
       <!-- H5 链接（type=1 时显示） -->
       <el-form-item v-if="formData.type === 1" label="H5 链接" prop="url">
-        <el-input v-model="formData.url as string" placeholder="请输入 H5 链接" maxlength="256" />
+        <LxInput v-model="formData.url as string" placeholder="请输入 H5 链接" :maxlength="256" />
       </el-form-item>
 
       <!-- Android 安装包路径（type=0 时显示） -->
       <el-form-item v-if="formData.type === 0" label="Android 安装包" prop="packageAndroid">
-        <el-input v-model="formData.packageAndroid as string" placeholder="请输入安装包路径" maxlength="256" />
+        <LxInput v-model="formData.packageAndroid as string" placeholder="请输入安装包路径" :maxlength="256" />
       </el-form-item>
 
       <!-- Android 启动 Activity（type=0 时显示） -->
       <el-form-item v-if="formData.type === 0" label="启动 Activity" prop="activity">
-        <el-input v-model="formData.activity as string" placeholder="请输入启动 Activity" maxlength="256" />
+        <LxInput v-model="formData.activity as string" placeholder="请输入启动 Activity" :maxlength="256" />
       </el-form-item>
 
       <!-- 鸿蒙安装包路径（type=3 时显示） -->
       <el-form-item v-if="formData.type === 3" label="鸿蒙安装包" prop="packageHm">
-        <el-input v-model="formData.packageHm as string" placeholder="请输入安装包路径" maxlength="256" />
+        <LxInput v-model="formData.packageHm as string" placeholder="请输入安装包路径" :maxlength="256" />
       </el-form-item>
 
       <!-- 鸿蒙 appId（type=3 时显示） -->
       <el-form-item v-if="formData.type === 3" label="鸿蒙 appId" prop="appId">
-        <el-input v-model="formData.appId as string" placeholder="请输入鸿蒙 appId" maxlength="128" />
+        <LxInput v-model="formData.appId as string" placeholder="请输入鸿蒙 appId" :maxlength="128" />
       </el-form-item>
 
       <!-- 启动参数 -->
       <el-form-item label="启动参数" prop="params">
-        <el-input v-model="formData.params as string" placeholder="请输入启动参数" maxlength="256" />
+        <LxInput v-model="formData.params as string" placeholder="请输入启动参数" :maxlength="256" />
       </el-form-item>
 
       <!-- 可见范围 -->
