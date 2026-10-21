@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { FormInstance, FormItemRule } from 'element-plus';
 import { ElMessage } from 'element-plus';
-import { LxSwitch } from 'lx-ui';
+import { LxInput, LxSwitch } from 'lx-ui';
 import { ref, reactive, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -176,10 +176,10 @@ defineExpose({ init });
       label-position="left"
     >
       <el-form-item :label="t('index.list.thirdPartyApp')" prop="clientName">
-        <el-input v-model="thirdAppForm.clientName" placeholder="请输入应用名称" />
+        <LxInput v-model="thirdAppForm.clientName" placeholder="请输入应用名称" />
       </el-form-item>
       <el-form-item :label="t('index.list.thirdPartyAppID')" prop="clientId">
-        <el-input v-model="thirdAppForm.clientId" placeholder="请输入应用ID" />
+        <LxInput v-model="thirdAppForm.clientId" placeholder="请输入应用ID" />
       </el-form-item>
       <el-form-item :label="t('index.list.thirdPartyAppSecret')" prop="clientSecret">
         <el-input v-model="thirdAppForm.clientSecret" type="password" show-password placeholder="请输入应用密钥" />
