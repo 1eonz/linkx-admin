@@ -26,6 +26,7 @@
  * Methods: 无
  */
 import type { FormInstance, FormRules } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import { queryGroupInfo, queryUserInfo, type TargetType, type WarningRelationItem } from '@/api/notification/alertPush';
@@ -144,10 +145,10 @@ function handleSubmit(): void {
   <div class="unattended-edit-form">
     <el-form ref="formRef" :model="form" :rules="rules" label-width="120px" style="width: 500px" size="large">
       <el-form-item label="协同岗名称" prop="cooperName">
-        <el-input v-model="form.cooperName" disabled />
+        <LxInput v-model="form.cooperName" disabled />
       </el-form-item>
       <el-form-item label="所属组织" prop="belongOrgName">
-        <el-input v-model="form.belongOrgName" disabled placeholder="-" />
+        <LxInput v-model="form.belongOrgName" disabled placeholder="-" />
       </el-form-item>
       <el-form-item label="通知对象类型" prop="targetType">
         <el-radio-group v-model="form.targetType" @change="handleTargetTypeChange">

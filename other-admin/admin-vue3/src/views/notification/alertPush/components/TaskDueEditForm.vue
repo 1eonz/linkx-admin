@@ -26,6 +26,7 @@
  * Methods: 无
  */
 import type { FormInstance, FormRules } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import { queryGroupInfo, queryUserInfo, type TargetType, type WarningRelationItem } from '@/api/notification/alertPush';
@@ -141,10 +142,10 @@ function handleSubmit(): void {
   <div class="task-due-edit-form">
     <el-form ref="formRef" :model="form" :rules="rules" label-width="120px" style="width: 500px" size="large">
       <el-form-item label="组织名称" prop="orgName">
-        <el-input v-model="form.orgName" disabled />
+        <LxInput v-model="form.orgName" disabled />
       </el-form-item>
       <el-form-item label="父组织" prop="parentOrgName">
-        <el-input v-model="form.parentOrgName" disabled placeholder="-" />
+        <LxInput v-model="form.parentOrgName" disabled placeholder="-" />
       </el-form-item>
       <el-form-item label="通知对象类型" prop="targetType">
         <el-radio-group v-model="form.targetType" @change="handleTargetTypeChange">
