@@ -3,7 +3,7 @@ import { ElForm } from 'element-plus';
 import { LxButton, type LxButtonSize, type LxButtonType } from 'lx-ui';
 import { createIconTooltipController } from 'lx-ui/src/components/LxButton/icon-tooltip-coordinator';
 import { describe, expect, it, vi } from 'vitest';
-import { defineComponent, h, nextTick, ref } from 'vue';
+import { defineComponent, h, nextTick, onBeforeUnmount, ref } from 'vue';
 
 const TYPES: LxButtonType[] = ['primary', 'success', 'warning', 'danger', 'default', 'text'];
 
@@ -17,6 +17,50 @@ const EP_SIZE: Record<LxButtonSize, string> = {
 };
 
 describe('LxButton', () => {
+  it('普通按钮保持紧凑，提前绑定加载状态的文字按钮才预留空间', () => {
+    const compact = mount(LxButton, { slots: { default: '取消' } });
+    const pending = mount(LxButton, { props: { loading: false }, slots: { default: '提交' } });
+    try {
+      expect(compact.classes()).not.toContain('lx-btn--reserve-loading');
+      expect(compact.find('.lx-btn__spinner-space').exists()).toBe(false);
+      expect(pending.classes()).toContain('lx-btn--reserve-loading');
+      expect(pending.find('.lx-btn__spinner-space').exists()).toBe(true);
+    } finally {
+      compact.unmount();
+      pending.unmount();
+    }
+  });
+
+  it('切换加载文案时保留唯一插槽实例并隔离隐藏交互，恢复后重新展示', async () => {
+    const unmounted = vi.fn();
+    const Field = defineComponent({
+      setup() {
+        onBeforeUnmount(unmounted);
+        return () => h('span', { 'data-testid': 'persistent-label' }, '提交');
+      },
+    });
+    const wrapper = mount(LxButton, {
+      props: { loading: false, loadingText: '正在提交' },
+      slots: { default: () => h(Field) },
+    });
+    try {
+      const original = wrapper.get('[data-testid="persistent-label"]').element;
+      await wrapper.setProps({ loading: true });
+      expect(wrapper.findAllComponents(Field)).toHaveLength(1);
+      expect(wrapper.get('[data-testid="persistent-label"]').element).toBe(original);
+      expect(wrapper.get('.lx-btn__measure').attributes('aria-hidden')).toBe('true');
+      expect(wrapper.get('.lx-btn__measure').attributes('inert')).toBeDefined();
+      expect(unmounted).not.toHaveBeenCalled();
+      await wrapper.setProps({ loading: false });
+      expect(wrapper.get('.lx-btn__label').attributes('aria-hidden')).toBeUndefined();
+      expect(wrapper.get('.lx-btn__label').attributes('inert')).toBeUndefined();
+      expect(wrapper.get('.lx-btn__label').text()).toBe('提交');
+    } finally {
+      wrapper.unmount();
+    }
+    expect(unmounted).toHaveBeenCalledTimes(1);
+  });
+
   it('继承父表单禁用并同步关闭图标提示，恢复后才允许点击', async () => {
     const disabled = ref(false);
     const click = vi.fn();

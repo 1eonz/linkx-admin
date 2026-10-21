@@ -28,9 +28,9 @@ export interface LxButtonProps {
   textColor?: string
   /** 工程尺寸档：sm=28px / md=32px（基准）/ lg=40px */
   size?: LxButtonSize
-  /** 加载态：spinner + 点击拦截 + aria-busy；文字切换由 loadingText 提供 */
+  /** 加载态：spinner + 点击拦截 + aria-busy；提前绑定 false 可为文字按钮预留加载空间。 */
   loading?: boolean
-  /** 加载态文案（标本场景"下发指令中..."）；仅 loading 时生效，未提供时保留原文字 */
+  /** 加载态文案；文字按钮提前按两种文案预留空间，仅 loading 时展示，未提供时保留原文字。 */
   loadingText?: string
   /** 未传入时继承父表单禁用状态；显式 false 可按 EP 契约覆盖表单禁用。 */
   disabled?: boolean

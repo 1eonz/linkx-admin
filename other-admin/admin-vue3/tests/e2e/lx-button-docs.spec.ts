@@ -76,6 +76,101 @@ async function getContrastRatio(locator: Locator) {
 }
 
 test.describe('lx-ui 基础按钮设计回归', () => {
+  test('加载前中后保持文字按钮和邻项布局，支持长文案与初始加载', async ({ page }) => {
+    test.setTimeout(60_000);
+    await page.goto('/components/lxbutton');
+    const demo = page.getByRole('region', { name: '按钮加载布局示例' });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    const ids = ['plain', 'text', 'leading', 'trailing', 'neighbor', 'long', 'block', 'icon'];
+    const readBounds = async () => {
+      const bounds = [];
+      for (const id of ids) {
+        const box = await demo.getByTestId(`layout-${id}`).boundingBox();
+        if (!box) throw new Error(`加载布局示例 ${id} 不可见`);
+        bounds.push(box);
+      }
+      return bounds;
+    };
+    for (const width of [1280, 375]) {
+      await page.setViewportSize({ width, height: 1000 });
+      for (const hud of [false, true]) {
+        await demo.getByLabel('加载布局深色主题').setChecked(hud);
+        for (const size of ['sm', 'md', 'lg']) {
+          await demo.getByLabel('加载布局尺寸档').selectOption(size);
+          await demo.getByLabel('切换加载布局').scrollIntoViewIfNeeded();
+          const idleCenterOffset = await demo.getByTestId('layout-long').evaluate((node) => {
+            const label = node.querySelector('.lx-btn__label')?.getBoundingClientRect();
+            if (!label) throw new Error('长文案按钮缺少空闲文字');
+            const button = node.getBoundingClientRect();
+            return Math.abs(label.y + label.height / 2 - button.y - button.height / 2);
+          });
+          expect(idleCenterOffset).toBeLessThanOrEqual(0.5);
+          const before = await readBounds();
+          await demo.getByLabel('切换加载布局').check();
+          await expect(demo.getByTestId('layout-plain')).toBeDisabled();
+          await expect(demo.getByTestId('layout-long')).toHaveAccessibleName('正在保存跨部门协同配置，请稍候');
+          const visibleLabel = demo.getByTestId('layout-long').locator('.lx-btn__label');
+          expect(
+            await visibleLabel.evaluate((node) => {
+              const label = node.getBoundingClientRect();
+              const button = node.closest('button')?.getBoundingClientRect();
+              if (!button) return false;
+              return (
+                node.scrollWidth <= node.clientWidth + 1 &&
+                node.scrollHeight <= node.clientHeight + 1 &&
+                label.left >= button.left &&
+                label.right <= button.right + 1 &&
+                label.top >= button.top &&
+                label.bottom <= button.bottom + 1
+              );
+            }),
+          ).toBe(true);
+          const during = await readBounds();
+          await demo.getByLabel('切换加载布局').uncheck();
+          const after = await readBounds();
+          for (let index = 0; index < ids.length; index += 1) {
+            for (const key of ['x', 'y', 'width', 'height'] as const) {
+              expect(
+                Math.abs(during[index][key] - before[index][key]),
+                `${ids[index]} 加载中 ${key}`,
+              ).toBeLessThanOrEqual(0.5);
+              expect(
+                Math.abs(after[index][key] - before[index][key]),
+                `${ids[index]} 恢复后 ${key}`,
+              ).toBeLessThanOrEqual(0.5);
+            }
+          }
+          const long = demo.getByTestId('layout-long');
+          expect(await long.evaluate((node) => node.scrollWidth <= node.clientWidth + 1)).toBe(true);
+          const block = demo.getByTestId('layout-block');
+          expect(
+            await block.evaluate((node) => {
+              const bounds = node.getBoundingClientRect();
+              const parent = node.parentElement?.getBoundingClientRect();
+              if (!parent) return false;
+              return bounds.left >= parent.left - 0.5 && bounds.right <= parent.right + 0.5;
+            }),
+          ).toBe(true);
+          expect(
+            await block.evaluate((node) =>
+              Math.abs(node.getBoundingClientRect().width - (node.parentElement?.clientWidth ?? 0)),
+            ),
+          ).toBeLessThanOrEqual(1);
+          const initial = demo.getByTestId('layout-initial');
+          await expect(initial).toHaveAttribute('aria-busy', 'true');
+          const initialBounds = await initial.boundingBox();
+          await demo.getByLabel('初始加载状态').uncheck();
+          await expect(initial).toBeEnabled();
+          const restoredBounds = await initial.boundingBox();
+          if (!initialBounds || !restoredBounds) throw new Error('初始加载按钮缺少可见边界');
+          expect(restoredBounds.width).toBe(initialBounds.width);
+          expect(restoredBounds.height).toBe(initialBounds.height);
+          await demo.getByLabel('初始加载状态').check();
+        }
+      }
+    }
+  });
+
   test('前后置与纯图标在明暗主题和窄屏下兑现图标尺寸档位', async ({ page }) => {
     await page.goto('/components/lxbutton');
     await openAdvancedExamples(page);

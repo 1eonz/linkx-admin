@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<LxButtonProps>(), {
   text: false,
   textColor: '',
   size: 'md',
-  loading: false,
+  loading: undefined,
   loadingText: '',
   disabled: undefined,
   icon: undefined,
@@ -99,6 +99,17 @@ const showLoadingText = computed(
 /** 纯图标状态保持正方形；有默认内容或加载文案时按普通按钮布局。 */
 const iconOnly = computed(() =>
   Boolean(props.icon && !hasDefaultSlot.value && !showLoadingText.value),
+)
+
+// 仅已声明异步状态的文字按钮提前预留空间，普通按钮不承担空白图标槽。
+const reserveLoadingSpace = computed(
+  () =>
+    hasDefaultSlot.value &&
+    (props.loading !== undefined || props.loadingText !== ''),
+)
+const reserveSpinner = computed(
+  () =>
+    reserveLoadingSpace.value && !(props.icon && props.iconPosition === 'left'),
 )
 
 /** 自定义文字色（仅文字形态生效）：以 CSS 变量注入，样式层派生 hover 底色 */
@@ -314,6 +325,7 @@ function onClick(event: MouseEvent) {
         'lx-btn--block': block,
         'lx-btn--icon-only': iconOnly,
         'lx-btn--icon-right': iconPosition === 'right',
+        'lx-btn--reserve-loading': reserveLoadingSpace,
       },
     ]"
     :style="textColorStyle"
@@ -336,12 +348,30 @@ function onClick(event: MouseEvent) {
     @click="onClick"
   >
     <!-- 前置图标：EP 内核 loading 时自动隐藏 icon 槽并显示 spinner -->
-    <template v-if="icon && iconPosition === 'left'" #icon>
-      <LxIcon :name="icon" :size="iconSize" />
+    <template v-if="(icon && iconPosition === 'left') || reserveSpinner" #icon>
+      <LxIcon
+        v-if="icon && iconPosition === 'left'"
+        :name="icon"
+        :size="iconSize"
+      />
+      <span v-else class="lx-btn__spinner-space" aria-hidden="true" />
     </template>
-    <!-- 纯图标形态（无插槽内容）不渲染空 label，保持方形点击区 -->
-    <span v-if="showLoadingText" class="lx-btn__label">{{ loadingText }}</span>
-    <span v-else-if="$slots.default" class="lx-btn__label"><slot /></span>
+    <!-- 插槽只渲染一次；隐藏文案参与同一网格的固有尺寸计算，避免加载切换挤动邻项。 -->
+    <span v-if="$slots.default || showLoadingText" class="lx-btn__content">
+      <span
+        v-if="$slots.default"
+        :class="showLoadingText ? 'lx-btn__measure' : 'lx-btn__label'"
+        :aria-hidden="showLoadingText ? 'true' : undefined"
+        :inert="showLoadingText ? true : undefined"
+        ><slot
+      /></span>
+      <span
+        v-if="loadingText && (reserveLoadingSpace || showLoadingText)"
+        :class="showLoadingText ? 'lx-btn__label' : 'lx-btn__measure'"
+        :aria-hidden="showLoadingText ? undefined : 'true'"
+        >{{ loadingText }}</span
+      >
+    </span>
     <!-- 后置图标：EP 无对应 API，由本组件在文字尾部补充渲染；
          loading 时保留占位避免 spinner 前插导致文字横向跳动 -->
     <LxIcon

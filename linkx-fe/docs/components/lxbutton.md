@@ -11,6 +11,7 @@
 <script setup lang="ts">
 import Basic from '../../src/components/LxButton/demo/basic.vue';
 import FormDisabled from '../../src/components/LxButton/demo/form-disabled.vue';
+import LoadingLayout from '../../src/components/LxButton/demo/loading-layout.vue';
 import LxButton from '../../src/components/LxButton/index.vue';
 </script>
 
@@ -87,6 +88,16 @@ import LxButton from '../../src/components/LxButton/index.vue';
 ### 宿主请求与失败反馈
 
 `LxButton` 只负责触发点击和展示 loading；请求、业务成功判断、错误提示及重试由宿主负责。API 成功码、业务失败与网络异常由宿主按实际接口契约处理，提交锁在 `.finally()` 中释放。
+
+### 加载布局
+
+文字按钮提前绑定 `:loading="loading"`（初值为 `false`），或提前配置 `loadingText`，组件会预留 spinner 和两种文案的最大尺寸，加载前、中、后保持布局稳定。长文案在可用宽度内换行，块级按钮继续填满容器。未声明加载能力的普通按钮保持紧凑布局；首次加载时才动态添加 `loading` 或 `loadingText` 无法提前预留，应由宿主先声明状态。
+
+默认插槽只渲染一次，加载文案出现时原插槽保持挂载并隐藏，不向辅助技术暴露，也不能获得焦点；插槽内部的计时器或副作用不会因切换加载文案而自动停止，须由调用方管理。
+
+纯图标没有文案时仍保持方形；显式提供 `loadingText` 时保留原有“加载期间切换为文字按钮”的契约，此场景会改变宽度。需要完全稳定的布局时应从一开始使用带文字的按钮。
+
+<LoadingLayout />
 
 ### 高危操作确认与恢复
 

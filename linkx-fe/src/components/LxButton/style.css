@@ -8,6 +8,7 @@
 
 /* ===== 尺寸档（28 / 32 / 40px，内边距 12 / 16 / 20px）===== */
 .lx-btn.el-button {
+  --lx-btn-layout-height: var(--lx-btn-height-md);
   box-sizing: border-box;
   height: var(--lx-btn-height-md);
   padding: 0 var(--lx-btn-padding-x-md);
@@ -37,6 +38,7 @@
 }
 
 .lx-btn--sm.el-button {
+  --lx-btn-layout-height: var(--lx-btn-height-sm);
   height: var(--lx-btn-height-sm);
   padding: 0 var(--lx-btn-padding-x-sm);
   font-size: 12px;
@@ -48,6 +50,7 @@
 }
 
 .lx-btn--lg.el-button {
+  --lx-btn-layout-height: var(--lx-btn-height-lg);
   height: var(--lx-btn-height-lg);
   padding: 0 var(--lx-btn-padding-x-lg);
   font-size: 14px;
@@ -60,9 +63,43 @@
 }
 
 /* 块级撑满 */
-.lx-btn--block.el-button {
+.lx-btn__content {
+  display: inline-grid;
+  min-width: 0;
+}
+
+.lx-btn__content > span {
+  grid-area: 1 / 1;
+  align-self: center;
+}
+
+.lx-btn__measure {
+  visibility: hidden;
+}
+
+/* 已声明 loading 的文字按钮由两种文案共同决定尺寸，长文案在容器内换行。 */
+.lx-btn.el-button.lx-btn--reserve-loading {
+  height: auto;
+  min-height: var(--lx-btn-layout-height);
+  max-width: 100%;
+  padding-block: var(--lx-space-xs);
+  white-space: normal;
+}
+
+.lx-btn--reserve-loading.el-button > span {
+  min-width: 0;
+}
+
+.lx-btn--reserve-loading .lx-btn__content {
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.lx-btn.el-button.lx-btn--block {
   display: flex;
   width: 100%;
+  /* 块级按钮占满自身容器，不沿用内核相邻行内按钮的左外边距。 */
+  margin-left: 0;
 }
 
 /* ===== 主操作：实底白字，hover/active 逐档加深（标本 primary 行）===== */
@@ -308,6 +345,7 @@
  * 纯图标文字按钮收窄后宽度仅约 31px，只限高不限宽无法命中） */
 @media (hover: none), (max-width: 640px) {
   .lx-btn.el-button {
+    --lx-btn-layout-height: 44px;
     min-height: 44px;
     min-width: 44px;
   }
