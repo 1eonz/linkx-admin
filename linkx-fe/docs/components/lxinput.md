@@ -4,6 +4,8 @@
 
 视觉规范源：`design/表单控件八件套/code.html` 01。
 
+普通输入使用单层真实边框，聚焦时边框变为主色并增加外侧光环；复合输入仅在整体根节点绘制外框和光环，错误态也不会在前后缀接缝处重复描边。禁用复合输入悬停时保持禁用边框。`word-limit-position="outside"` 经 attrs 透传时保留框外统计，宿主仍需为下方统计预留布局空间。
+
 ## 最小示例
 
 ```vue
@@ -39,24 +41,24 @@ import Basic from '../../src/components/LxInput/demo/basic.vue';
 
 ## Props
 
-| 名称                  | 类型                   | 默认值           | 说明                                                                                                                 |
-| --------------------- | ---------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `modelValue`          | `string \| number`     | `''`             | 输入值（v-model）。                                                                                                  |
-| `type`                | `string`               | `'text'`         | 原生 input type（`text`/`password` 等）；文本域请使用 `LxTextarea`。                                                 |
-| `placeholder`         | `string`               | `''`             | 占位文案。                                                                                                           |
-| `disabled`            | `boolean`              | —（`undefined`） | 禁用态：灰底 + 禁用手势（标本 01 禁用行）。默认未设置：`ElForm` 禁用态可正常传导；显式传 `true`/`false` 才覆盖继承。 |
-| `readonly`            | `boolean`              | `false`          | 只读态：可聚焦不可改值。                                                                                             |
-| `required`            | `boolean`              | `false`          | 原生必填语义；业务表单规则仍由 `LxForm` 管理。                                                                       |
-| `clearable`           | `boolean`              | `false`          | 可清空：有值时桌面聚焦/悬停可见；触屏或窄屏也仅在有值时显示；禁用或只读时不可清空。                                  |
-| `clearButtonTabbable` | `boolean`              | `true`           | 控制可见清空按钮是否进入 Tab 顺序；带有同级显隐操作的复合输入可关闭。                                                |
-| `showPassword`        | `boolean`              | `false`          | 密码明暗切换（仅 `type="password"` 生效）。                                                                          |
-| `maxlength`           | `number`               | —                | 最大长度；与 `showWordLimit` 联动出现计数器（硬截断）。                                                              |
-| `minlength`           | `number`               | —                | 最小长度（表单校验契约，不产生视觉反馈）。                                                                           |
-| `showWordLimit`       | `boolean`              | `false`          | 显示字数统计（等宽 11px 右下角）。                                                                                   |
-| `mono`                | `boolean`              | `false`          | 值用等宽字体：警号、证件号、编码等机器读数字段开启（标本 01 font-mono）。                                            |
-| `size`                | `'sm' \| 'md' \| 'lg'` | `'md'`           | 工程尺寸：28 / 32 / 40px；档名区别于 EP 的 `small/default/large`。                                                   |
-| `name`                | `string`               | —                | 原生 name 属性，用于表单提交和序列化；不会提供控件可访问名称。                                                       |
-| `autocomplete`        | `string`               | `'off'`          | 原生自动完成提示；浏览器或密码管理器可能忽略该值，不能作为敏感信息保护措施。                                         |
+| 名称                  | 类型                   | 默认值           | 说明                                                                                                                                                  |
+| --------------------- | ---------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `modelValue`          | `string \| number`     | `''`             | 输入值（v-model）。                                                                                                                                   |
+| `type`                | `string`               | `'text'`         | 原生 input type（`text`/`password` 等）；文本域请使用 `LxTextarea`。                                                                                  |
+| `placeholder`         | `string`               | `''`             | 占位文案。                                                                                                                                            |
+| `disabled`            | `boolean`              | —（`undefined`） | 禁用态：灰底 + 禁用手势（标本 01 禁用行）。默认未设置：`ElForm` 禁用态可正常传导；显式传 `true`/`false` 才覆盖继承。                                  |
+| `readonly`            | `boolean`              | `false`          | 只读态：可聚焦不可改值。                                                                                                                              |
+| `required`            | `boolean`              | `false`          | 原生必填语义；业务表单规则仍由 `LxForm` 管理。                                                                                                        |
+| `clearable`           | `boolean`              | `false`          | 可清空：有值时桌面聚焦/悬停可见；触屏或窄屏也仅在有值时显示；禁用或只读时不可清空。                                                                   |
+| `clearButtonTabbable` | `boolean`              | `true`           | 控制可见清空按钮是否进入 Tab 顺序；带有同级显隐操作的复合输入可关闭。                                                                                 |
+| `showPassword`        | `boolean`              | `false`          | 密码显隐接管输入类型为 password/text；有值且未禁用时显示按钮，只读可切换。支持 Tab、Enter、空格，保留输入选区；关闭能力、改变 type 或禁用时恢复遮罩。 |
+| `maxlength`           | `number`               | —                | 最大长度；与 `showWordLimit` 联动出现计数器（硬截断）。                                                                                               |
+| `minlength`           | `number`               | —                | 最小长度（表单校验契约，不产生视觉反馈）。                                                                                                            |
+| `showWordLimit`       | `boolean`              | `false`          | 显示字数统计（等宽 11px 右下角）。                                                                                                                    |
+| `mono`                | `boolean`              | `false`          | 值用等宽字体：警号、证件号、编码等机器读数字段开启（标本 01 font-mono）。                                                                             |
+| `size`                | `'sm' \| 'md' \| 'lg'` | `'md'`           | 工程尺寸：28 / 32 / 40px；档名区别于 EP 的 `small/default/large`。                                                                                    |
+| `name`                | `string`               | —                | 原生 name 属性，用于表单提交和序列化；不会提供控件可访问名称。                                                                                        |
+| `autocomplete`        | `string`               | `'off'`          | 原生自动完成提示；浏览器或密码管理器可能忽略该值，不能作为敏感信息保护措施。                                                                          |
 
 ## Events
 
@@ -71,12 +73,13 @@ import Basic from '../../src/components/LxInput/demo/basic.vue';
 
 ## Slots
 
-| 名称      | 说明                     |
-| --------- | ------------------------ |
-| `prefix`  | 输入框内前置内容（图标） |
-| `suffix`  | 输入框内后置内容         |
-| `prepend` | 输入框外前置复合块       |
-| `append`  | 输入框外后置复合块       |
+| 名称            | 说明                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------- |
+| `prefix`        | 输入框内前置内容（图标）                                                                          |
+| `suffix`        | 输入框内后置内容                                                                                  |
+| `prepend`       | 输入框外前置复合块                                                                                |
+| `append`        | 输入框外后置复合块                                                                                |
+| `password-icon` | 密码显隐图标，参数 `{ visible: boolean }`；放置在库提供的语义按钮中，只传展示内容，避免嵌套按钮。 |
 
 ## Exposes
 

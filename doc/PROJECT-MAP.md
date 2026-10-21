@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-21 输入框边界与密码入口
+
+- 入口 `linkx-fe/src/components/LxInput/index.vue`（语义密码按钮/EP公开状态）、`style.css`（单层描边/状态/框外统计/局部主题），类型与 `demo/basic.vue`、`docs/components/lxinput.md` 同步。
+- 回归位于Vue3 `tests/unit/lx-input.test.ts`（19/19）、`tests/e2e/lx-base-controls-docs.spec.ts`（Input9/9及最终专项1/1）；Mock预览11/11。正式A/B36/40、快照和边界以交付计划/交接当前条目为准，无新增业务API。下一入口DatePicker旧问题当前态核对。
+
 ## 2026-10-21 按钮加载稳定布局入口
 
 - 实现：`linkx-fe/src/components/LxButton/index.vue` 的预留能力判定与唯一插槽网格，`style.css` 的固有尺寸/长文案/块级边界；演示：`demo/loading-layout.vue`，由 `linkx-fe/docs/components/lxbutton.md` 引用。未新增业务API或宿主请求。
