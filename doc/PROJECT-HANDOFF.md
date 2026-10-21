@@ -3212,6 +3212,11 @@
 - `colLevelManage.vue`、`ColSearch.vue`、`globals/index.vue`、`archivedTable/index.vue` 共 5 个字符串搜索输入改用 `LxInput`，保留清空、回车、前缀、组织选择、时间筛选和归档操作。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；协同权限和归档真实接口未改变。
 
+# 2026-10-21 H5 轮播输入交接
+
+- `CarouselForm.vue` 的标题、跳转链接改用 `LxInput`，保留条件渲染、长度、校验、上传、公众号/文章选择、排序和保存契约。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；上传和选择器未改变。
+
 # 2026-10-21 预警编辑只读输入交接
 
 - `TaskDueEditForm.vue`、`UnattendedEditForm.vue` 共 4 个只读组织/协同岗字段改用 `LxInput`，保留 disabled、通知对象选择、校验和提交契约。
