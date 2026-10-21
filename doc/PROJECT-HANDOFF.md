@@ -3191,3 +3191,8 @@
 
 - `TypeManage.vue` 类型标签搜索与 `TypeEdit.vue` 类型标签字段改用 `LxInput`，保留 SearchBar、清空、回车、长度限制、校验和保存契约。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；节点服务混合类型表单未改动。
+
+# 2026-10-21 节点服务文本交接
+
+- `ServerFormDialog.vue` 的 IP、名称、标签、备注改用 `LxInput`，保留编辑态禁用、长度限制、端口只读、表单校验、提交事件和 loading。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；端口和节点 API 未改变。

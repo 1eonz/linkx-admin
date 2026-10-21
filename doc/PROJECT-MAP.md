@@ -972,6 +972,7 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - `thirdInterface/app/components/AppForm.vue` 的 7 个普通文本字段已采用 `LxInput`；上传、选择器、排序和保存接口仍由页面宿主负责。
 - `thirdInterface/southInterface/components/TaskConfigModal.vue` 的任务名称和时间表达式字段已采用 `LxInput`；textarea、开关、选择器和任务接口仍由宿主负责。
 - `thirdInterface/policeReport/components/TypeManage.vue`、`TypeEdit.vue` 的类型标签输入已采用 `LxInput`；警务上报接口和复杂节点表单仍由宿主负责。
+- `nodeManage/serverManage/components/ServerFormDialog.vue` 的 IP、名称、标签、备注已采用 `LxInput`；端口、提交事件和节点接口仍由宿主负责。
 - DynamicForm 证据入口：`other-admin/admin-vue3/tests/unit/lx-dynamic-form.test.ts`（31/31）与 `tests/e2e/lx-dynamic-form-docs.spec.ts`（14/14）。Assessment B 三件套为合法 `[]`/空 stderr/0，8 个浏览器视图通过；综合 snapshot/trend 尚缺，正式视觉门禁仍开放。
 # 项目地图更新（2026-10-20）
 
