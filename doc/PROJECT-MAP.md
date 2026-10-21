@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-21 LxButton 表单与插槽契约
+
+- 组件入口 `linkx-fe/src/components/LxButton/index.vue`、类型 `types.ts`：统一父表单禁用继承与动态默认插槽存在性；不涉及业务 API。
+- 演示入口 `linkx-fe/src/components/LxButton/demo/form-disabled.vue`，由 `linkx-fe/docs/components/lxbutton.md` 引用。按钮单测 `tests/unit/lx-button.test.ts` **36/36**，文档回归 `tests/e2e/lx-button-docs.spec.ts` **20/20**；打开提示后禁用/切换文字的补强专项 **1/1**，测试目录均位于 Vue3 宿主。
+- 下一入口仍为该组件的 loading 宽度和 SVG 档位修复，正式 UI-10/UI-11 开放。
+
 ## 2026-10-21 Descriptions Demo 主题共享
 
 - 文档内部辅助入口：`linkx-fe/docs/.vitepress/composables/useDemoHudTheme.ts`，由 `src/components/LxDescriptions/demo/basic.vue` 使用；不从 lx-ui 公共入口导出，不参与业务 API 或权限处理。
