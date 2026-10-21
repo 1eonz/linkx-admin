@@ -23,6 +23,7 @@
  * ```
  */
 import type { FormInstance } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, reactive, ref, watch } from 'vue';
 
 import type { ClientItem, ClientUpdatePayload } from '@/api/nodeManage/client';
@@ -111,13 +112,13 @@ async function handleSubmit(): Promise<void> {
   >
     <el-form ref="formRef" :model="form" label-width="80px" size="large">
       <el-form-item label="名称" prop="name">
-        <el-input v-model="form.name" placeholder="请输入名称" maxlength="255" />
+        <LxInput v-model="form.name" placeholder="请输入名称" :maxlength="255" />
       </el-form-item>
       <el-form-item label="备注" prop="remark">
-        <el-input v-model="form.remark" placeholder="请输入备注" maxlength="255" />
+        <LxInput v-model="form.remark" placeholder="请输入备注" :maxlength="255" />
       </el-form-item>
       <el-form-item label="标签" prop="tag">
-        <el-input v-model="form.tag" placeholder="请输入标签" maxlength="255" />
+        <LxInput v-model="form.tag" placeholder="请输入标签" :maxlength="255" />
       </el-form-item>
     </el-form>
     <template #footer>
