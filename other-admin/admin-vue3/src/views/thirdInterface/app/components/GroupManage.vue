@@ -11,7 +11,7 @@
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import type { FormInstance, FormItemRule } from 'element-plus';
-import { LxTag } from 'lx-ui';
+import { LxInput, LxTag } from 'lx-ui';
 import { computed, nextTick, reactive, ref } from 'vue';
 
 import {
@@ -249,7 +249,7 @@ function getRow(scope: any): AppGroup {
   <div class="group-manage">
     <SearchBar :placeholder="searchPlaceholder" :actions="actions" @search="handleSearch" @reset="handleReset">
       <template #filters>
-        <el-input
+        <LxInput
           v-model="searchParams.name as string"
           :placeholder="searchPlaceholder"
           class="filter-item"
@@ -301,7 +301,7 @@ function getRow(scope: any): AppGroup {
         class="group-form"
       >
         <el-form-item label="分类名称" prop="name">
-          <el-input v-model="groupForm.name as string" placeholder="请输入分类名称" maxlength="32" />
+          <LxInput v-model="groupForm.name as string" placeholder="请输入分类名称" :maxlength="32" />
         </el-form-item>
         <el-form-item label="排序值" prop="sort">
           <el-input-number v-model="groupForm.sort as number" :min="0" controls-position="right" class="sort-input" />

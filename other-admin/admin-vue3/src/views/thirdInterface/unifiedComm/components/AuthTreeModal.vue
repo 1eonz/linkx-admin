@@ -28,7 +28,7 @@
  */
 import { ElMessage } from 'element-plus';
 import type ElTree from 'element-plus/es/components/tree/index';
-import { LxEmpty } from 'lx-ui';
+import { LxEmpty, LxInput } from 'lx-ui';
 import { computed, nextTick, ref, watch } from 'vue';
 
 import type { ApiResponse } from '#/axios';
@@ -324,7 +324,7 @@ function handleCancel(): void {
         <el-tag size="default" effect="plain">{{ deptName }}</el-tag>
       </div>
 
-      <el-input v-model="filterText" placeholder="输入关键字进行过滤" clearable style="margin-bottom: 12px" />
+      <LxInput v-model="filterText" placeholder="输入关键字进行过滤" clearable style="margin-bottom: 12px" />
 
       <div class="tree-wrapper">
         <el-tree
