@@ -222,6 +222,79 @@ test('北向接入管理使用本地 Mock 完成筛选和增改删', async ({ pa
   expect(unconfiguredApis).toEqual([]);
 });
 
+test('三方应用文本输入保留校验、失败重试、提交锁和编辑回显', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('localLanguage', 'cn'));
+  let createCount = 0;
+  let releaseCreate = () => {};
+  const createGate = new Promise<void>((resolve) => {
+    releaseCreate = resolve;
+  });
+  await page.route('**/linkx/admin/collaboration/v1/client/create**', async (route) => {
+    createCount += 1;
+    if (createCount === 1) {
+      await route.fulfill({ json: { code: 409, msg: '预览：应用暂不可创建', data: null } });
+      return;
+    }
+    await createGate;
+    await route.fallback();
+  });
+
+  try {
+    await page.goto('/baseData/thirdParty', { waitUntil: 'domcontentloaded' });
+    const appMain = page.locator('.app-main');
+    await expect(appMain).toContainText('省级情报共享平台');
+    await appMain.getByRole('button', { name: '新增', exact: true }).click();
+    const dialog = page.getByRole('dialog', { name: '新增应用', exact: true });
+    const name = dialog.getByPlaceholder('请输入应用名称');
+    const appId = dialog.getByPlaceholder('请输入应用ID', { exact: true });
+    const secret = dialog.getByPlaceholder('请输入应用密钥');
+    const confirm = dialog.getByRole('button', { name: '确定', exact: true });
+    await expect(dialog.locator('.lx-input')).toHaveCount(2);
+
+    await name.fill('预览表单专项');
+    await appId.fill('bad-id');
+    await secret.focus();
+    await expect(dialog).toContainText('应用ID不能包含特殊字符');
+    await confirm.click();
+    expect(createCount, '校验不通过时不得提交').toBe(0);
+
+    await appId.fill('previewFormContract21');
+    await secret.fill('preview-secret');
+    await confirm.click();
+    await expect(page.locator('.el-message')).toContainText('预览：应用暂不可创建');
+    await expect(dialog).toBeVisible();
+    await expect(name).toHaveValue('预览表单专项');
+    await expect(confirm).toBeEnabled();
+
+    await confirm.click();
+    await expect.poll(() => createCount).toBe(2);
+    await expect(confirm).toBeDisabled();
+    await expect(dialog.getByRole('button', { name: '取消', exact: true })).toBeDisabled();
+    await page.keyboard.press('Escape');
+    await expect(dialog).toBeVisible();
+    releaseCreate();
+    await expect(dialog).toBeHidden();
+
+    const row = appMain.locator('tbody tr').filter({ hasText: '预览表单专项' });
+    await expect(row).toHaveCount(1);
+    await row.getByRole('button', { name: '修改', exact: true }).click();
+    const editDialog = page.getByRole('dialog', { name: '编辑应用', exact: true });
+    await expect(editDialog.getByPlaceholder('请输入应用名称')).toHaveValue('预览表单专项');
+    await expect(editDialog.getByPlaceholder('请输入应用ID', { exact: true })).toHaveValue('previewFormContract21');
+    await editDialog.getByPlaceholder('请输入应用名称').fill('预览表单专项修改');
+    await editDialog.getByRole('button', { name: '确定', exact: true }).click();
+    await expect(editDialog).toBeHidden();
+    await expect(row).toContainText('预览表单专项修改');
+    expect(createCount, '修改必须使用更新接口，不重复新增').toBe(2);
+
+    await row.getByRole('button', { name: '删除', exact: true }).click();
+    await page.locator('.el-message-box').getByRole('button', { name: '确定', exact: true }).click();
+    await expect(row).toHaveCount(0);
+  } finally {
+    releaseCreate();
+  }
+});
+
 test('轮播文章下拉滚到底部后使用本地 Mock 加载下一页', async ({ page }) => {
   const articlePages: number[] = [];
   await page.route('**/linkx/admin/collaboration/v1/post/articles/page**', async (route) => {
