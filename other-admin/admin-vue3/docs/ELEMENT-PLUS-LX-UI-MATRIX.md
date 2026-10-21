@@ -1,5 +1,10 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-21 三方应用编辑专项 Mock 证据
+
+- 两个 `LxInput` 已有浏览器专项 **1/1**：校验、业务失败重试、提交锁及创建/编辑/删除；测试位于 `tests/e2e/preview.spec.ts`，只运行本地 Mock。
+- 本波不变更组件引用数量，不关闭网络失败、权限、真实联调或 UI-10/UI-11 门禁。
+
 ## 2026-10-21 三方应用编辑文本输入迁移
 
 - `baseData/thirdParty/components/thirdPartyEdit.vue` 两个普通字符串输入改用 `LxInput`；剩余密码、数字有效期、textarea 和隐藏选择器未迁移。

@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-21 三方应用表单专项证据
+
+- 测试入口：`other-admin/admin-vue3/tests/e2e/preview.spec.ts` 的“三方应用文本输入”测试；运行配置 `playwright.preview.config.ts`，目标页面 `/baseData/thirdParty`，复用 `mock/preview-server.ts` 的 client 新增/更新/删除协议。
+- 浏览器专项 **1/1** 覆盖输入校验、业务失败重试、提交锁、创建/编辑/删除；测试拦截失败响应，其余写请求仍只进入本地 Mock，不接触真实后端。
+
 ## 2026-10-21 三方应用编辑文本输入
 
 - 入口：`other-admin/admin-vue3/src/views/baseData/thirdParty/components/thirdPartyEdit.vue`；应用名称和应用 ID 使用 `LxInput`，类型来源为 `src/api/resource/thirdApp.ts` 的 `ThirdAppForm`。
