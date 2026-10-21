@@ -102,6 +102,8 @@ import LxButton from '../../src/components/LxButton/index.vue';
 
 ### 图标操作
 
+前置、后置及纯图标统一按 `size="sm/md/lg"` 使用 13/14/16px 图标；窄屏仍保留这组图标档位，仅扩大按钮触控区域。
+
 `type="text"` 支持三种组合：
 
 ```vue

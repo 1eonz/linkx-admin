@@ -76,6 +76,52 @@ async function getContrastRatio(locator: Locator) {
 }
 
 test.describe('lx-ui 基础按钮设计回归', () => {
+  test('前后置与纯图标在明暗主题和窄屏下兑现图标尺寸档位', async ({ page }) => {
+    await page.goto('/components/lxbutton');
+    await openAdvancedExamples(page);
+    const demo = page.locator('.lx-button-demo');
+    const theme = page.getByLabel('组件示例深色预览（HUD）', { exact: true });
+    const buttons = [
+      { button: demo.getByRole('button', { name: '新增警务服务', exact: true }), iconOnly: false },
+      { button: demo.getByRole('button', { name: '下一步', exact: true }), iconOnly: false },
+      { button: demo.getByRole('button', { name: '刷新数据', exact: true }), iconOnly: true },
+      { button: demo.getByRole('button', { name: '文字刷新', exact: true }), iconOnly: true },
+    ];
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    for (const width of [1280, 375]) {
+      await page.setViewportSize({ width, height: 900 });
+      for (const hud of [false, true]) {
+        await theme.setChecked(hud);
+        for (const [size, pixels] of [
+          ['sm', 13],
+          ['md', 14],
+          ['lg', 16],
+        ] as const) {
+          await page.getByLabel('按钮尺寸档').selectOption(size);
+          await page.mouse.move(0, 0);
+          for (const { button, iconOnly } of buttons) {
+            const icon = button.locator('.lx-icon');
+            await expect(icon).toHaveCount(1);
+            await expect(icon).toHaveCSS('width', `${pixels}px`);
+            await expect(icon).toHaveCSS('height', `${pixels}px`);
+            if (iconOnly) {
+              await expect(button).toHaveClass(/lx-btn--icon-only/);
+              const buttonBounds = await button.boundingBox();
+              const iconBounds = await icon.boundingBox();
+              if (!buttonBounds || !iconBounds) throw new Error('纯图标按钮缺少可见边界');
+              expect(
+                Math.abs(iconBounds.x + iconBounds.width / 2 - buttonBounds.x - buttonBounds.width / 2),
+              ).toBeLessThanOrEqual(0.5);
+              expect(
+                Math.abs(iconBounds.y + iconBounds.height / 2 - buttonBounds.y - buttonBounds.height / 2),
+              ).toBeLessThanOrEqual(0.5);
+            }
+          }
+        }
+      }
+    }
+  });
+
   test('父表单禁用继承与动态文字切换保持点击和提示契约', async ({ page }) => {
     await page.goto('/components/lxbutton');
     const demo = page.getByRole('region', { name: '按钮表单禁用与动态文字示例' });
