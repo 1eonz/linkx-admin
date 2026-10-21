@@ -2063,3 +2063,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `thirdInterface/app/components/GroupManage.vue` 的分类名称搜索和编辑字段、`thirdInterface/unifiedComm/components/AuthTreeModal.vue` 的授权树过滤字段已由 `el-input` 切换为 `LxInput`。
 - 保留清空、搜索、分类名称最大长度 32、树过滤和授权弹窗契约；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单回归 **10/10** 通过。
 - 排序数字、应用编辑条件字段、权限保存和真实后端联调继续单独处理，Element Plus 删除门槛不变。
+
+## 2026-10-21 AppForm 普通文本输入迁移
+
+- `thirdInterface/app/components/AppForm.vue` 的应用名称、H5 链接、Android/鸿蒙安装包路径、Activity、鸿蒙 appId、启动参数共 7 个普通文本字段已由 `el-input` 切换为 `LxInput`。
+- 保留条件显示、最大长度、表单校验、上传图标、可见范围、前置应用、排序和保存请求；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
+- 数字排序、上传、选择器及真实第三方接口仍按独立契约后续处理。

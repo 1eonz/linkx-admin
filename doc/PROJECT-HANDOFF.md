@@ -3176,3 +3176,8 @@
 
 - `GroupManage.vue` 的分类搜索/名称字段和 `AuthTreeModal.vue` 的树过滤字段改用 `LxInput`，保留清空、长度限制、树过滤、排序/应用选择和授权保存边界。
 - 验证：类型检查、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；数字排序、应用编辑条件字段和真实权限接口未改动。
+
+# 2026-10-21 AppForm 普通文本交接
+
+- `AppForm.vue` 应用名称、H5 链接、安装包路径、Activity、鸿蒙 appId、启动参数共 7 个字段改用 `LxInput`，保留条件渲染、长度限制、表单校验、上传、选择器、排序和保存契约。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；数字/上传/选择器未机械替换。
