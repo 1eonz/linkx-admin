@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-21 Descriptions Demo 主题共享
+
+- 文档内部辅助入口：`linkx-fe/docs/.vitepress/composables/useDemoHudTheme.ts`，由 `src/components/LxDescriptions/demo/basic.vue` 使用；不从 lx-ui 公共入口导出，不参与业务 API 或权限处理。
+- 行为证据：`other-admin/admin-vue3/tests/unit/demo-hud-theme.test.ts` **4/4**、`tests/e2e/lx-descriptions-docs.spec.ts` **3/3**；类型与文档构建通过。后续执行入口恢复到 lx-ui 严格组件矩阵。
+
 ## 2026-10-21 三方应用表单专项证据
 
 - 测试入口：`other-admin/admin-vue3/tests/e2e/preview.spec.ts` 的“三方应用文本输入”测试；运行配置 `playwright.preview.config.ts`，目标页面 `/baseData/thirdParty`，复用 `mock/preview-server.ts` 的 client 新增/更新/删除协议。
