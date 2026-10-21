@@ -345,6 +345,11 @@ Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过适�
 - `ServerFormDialog.vue` 的 IP、名称、标签、备注 4 个 `el-input` 已替换为 `LxInput`，保留禁用和校验契约。
 - 端口及真实节点接口仍按原控件处理；全库删除门槛未满足。
 
+## 2026-10-21 警务对接输入计数更新
+
+- `DockManage.vue`、`EditDock.vue` 共 8 个普通 `el-input` 已替换为 `LxInput`，保留搜索和表单契约。
+- 端口、JSON/脚本 textarea 与真实警务接口仍待处理，不能关闭全库依赖删除门槛。
+
 ## 2026-10-11 Wave 11 P2 影响更新
 
 - `LxTransferPanel` 与 `LxVirtualTree` 已完成当前版组件级严格 UI/交互审查：单测合计 67/67、文档 E2E 合计 48/48，类型、203 modules 构建、文档构建和 Vue3 生产构建通过；代码复审无 P0-P3。Assessment A 36/40；Assessment B 5 个 detector 均为有效 `[]`/空 stderr/0，9 个浏览器视图证据完整。

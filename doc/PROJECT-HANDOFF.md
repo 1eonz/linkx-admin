@@ -3196,3 +3196,8 @@
 
 - `ServerFormDialog.vue` 的 IP、名称、标签、备注改用 `LxInput`，保留编辑态禁用、长度限制、端口只读、表单校验、提交事件和 loading。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；端口和节点 API 未改变。
+
+# 2026-10-21 警务对接文本交接
+
+- `DockManage.vue` 系统名/IP/路径搜索与 `EditDock.vue` 名称、系统名、系统编码、IP、路径共 8 个普通字段改用 `LxInput`，保留 SearchBar、长度、启用开关、端口、JSON/脚本 textarea 和保存契约。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；警务真实接口和复杂文本内容未改动。
