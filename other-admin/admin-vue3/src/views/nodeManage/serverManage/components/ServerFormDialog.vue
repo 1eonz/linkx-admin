@@ -25,6 +25,7 @@
  * ```
  */
 import type { FormInstance, FormRules } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import type { ServerItem, ServerPayload } from '@/api/nodeManage/server';
@@ -152,19 +153,19 @@ defineExpose({ init, closeLoading });
   >
     <el-form ref="formRef" :model="form" :rules="rules" label-width="80px" size="large">
       <el-form-item label="IP" prop="ip">
-        <el-input v-model="form.ip" placeholder="请输入 IP 地址" maxlength="50" :disabled="isEdit" />
+        <LxInput v-model="form.ip" placeholder="请输入 IP 地址" :maxlength="50" :disabled="isEdit" />
       </el-form-item>
       <el-form-item label="端口" prop="port">
         <el-input v-model="form.port" maxlength="10" disabled />
       </el-form-item>
       <el-form-item label="名称" prop="name">
-        <el-input v-model="form.name" placeholder="请输入节点名称" maxlength="255" />
+        <LxInput v-model="form.name" placeholder="请输入节点名称" :maxlength="255" />
       </el-form-item>
       <el-form-item label="标签" prop="tag">
-        <el-input v-model="form.tag" placeholder="请输入标签" maxlength="255" />
+        <LxInput v-model="form.tag" placeholder="请输入标签" :maxlength="255" />
       </el-form-item>
       <el-form-item label="备注" prop="remark">
-        <el-input v-model="form.remark" placeholder="请输入备注" maxlength="255" />
+        <LxInput v-model="form.remark" placeholder="请输入备注" :maxlength="255" />
       </el-form-item>
     </el-form>
     <template #footer>
