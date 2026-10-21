@@ -34,6 +34,7 @@
 import { Plus } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormItemRule, UploadFile } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, nextTick, reactive, ref } from 'vue';
 
 import { getGlobalsList } from '@/api/dictionary/globals';
@@ -485,12 +486,12 @@ function handleDialogClosed(): void {
         >
           <el-option v-for="item in titleList" :key="item.id" :label="item.title" :value="item.id" />
         </el-select>
-        <el-input v-else v-model="formData.title as string" maxlength="128" placeholder="请输入标题" />
+        <LxInput v-else v-model="formData.title as string" :maxlength="128" placeholder="请输入标题" />
       </el-form-item>
 
       <!-- 跳转链接 -->
       <el-form-item label="跳转链接" prop="url">
-        <el-input v-model="formData.url as string" maxlength="128" placeholder="请输入链接地址" />
+        <LxInput v-model="formData.url as string" :maxlength="128" placeholder="请输入链接地址" />
       </el-form-item>
 
       <!-- 排序值 -->
