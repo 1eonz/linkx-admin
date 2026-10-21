@@ -2111,6 +2111,12 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - 保留条件标题选择、最大长度、表单校验、图片上传、公众号/文章选择、排序和保存请求；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
 - 上传、选择器和数字排序继续按独立契约处理。
 
+## 2026-10-21 H5 群组标签输入迁移
+
+- `h5/groupTags/GroupTagsForm.vue` 的标签名称、图标搜索、只读图标值、颜色值四个文本字段已由 `el-input` 切换为 `LxInput`。
+- 保留图标选择器前缀、颜色选择器同步、只读语义、字数统计、表单校验和保存请求；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
+- 图标资产、颜色主题和真实 H5 接口继续按独立契约后置。
+
 ## 2026-10-21 预警编辑只读文本迁移
 
 - `notification/alertPush/components/TaskDueEditForm.vue` 与 `UnattendedEditForm.vue` 的组织/协同岗及所属组织共 4 个只读字符串字段已由 `el-input` 切换为 `LxInput`。
