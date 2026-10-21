@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-21 按钮加载稳定布局入口
+
+- 实现：`linkx-fe/src/components/LxButton/index.vue` 的预留能力判定与唯一插槽网格，`style.css` 的固有尺寸/长文案/块级边界；演示：`demo/loading-layout.vue`，由 `linkx-fe/docs/components/lxbutton.md` 引用。未新增业务API或宿主请求。
+- 证据：Vue3目录 `tests/unit/lx-button.test.ts` 38/38、`tests/e2e/lx-button-docs.spec.ts` 22/22及最终补丁后专项1/1；正式A/B35/40与快照见计划/交接当前条目。LxButton严格行关闭，下一入口LxInput。
+
 ## 2026-10-21 按钮图标实际尺寸与全菜单预览
 
 - 样式入口 `linkx-fe/src/components/LxButton/style.css`，前置容器直接 SVG 继承13/14/16px；中文使用说明 `linkx-fe/docs/components/lxbutton.md`。浏览器测试 `other-admin/admin-vue3/tests/e2e/lx-button-docs.spec.ts` 追加四类目标实际尺寸和中心检查，相关 **3/3**。
