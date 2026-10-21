@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
-import { LxSwitch } from 'lx-ui';
+import { LxInput, LxSwitch } from 'lx-ui';
 import { reactive, ref, watch } from 'vue';
 
 import {
@@ -204,17 +204,17 @@ defineExpose({ open });
       <el-form v-if="!loadError && enableTask === 1" ref="formRef" :model="config" :rules="rules" label-width="112px">
         <el-divider content-position="left">派发默认值模板</el-divider>
         <el-form-item label="任务名称" prop="name"
-          ><el-input v-model="config.name.value.template as string" placeholder="示例：{{name}}-{{type}}"
+          ><LxInput v-model="config.name.value.template as string" placeholder="示例：{{name}}-{{type}}"
         /></el-form-item>
         <el-form-item label="任务内容" prop="content"
-          ><el-input
+          ><LxInput
             v-model="config.content.value.template as string"
             type="textarea"
             :rows="4"
             placeholder="示例：警情：{{policeCase}}"
         /></el-form-item>
         <el-form-item label="开始时间" prop="startTime"
-          ><el-input
+          ><LxInput
             v-model="config.startTime.value.expression as string"
             placeholder="留空默认为当前时间，或填写 {{startTime}}"
         /></el-form-item>
