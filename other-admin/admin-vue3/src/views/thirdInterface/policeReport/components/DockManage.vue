@@ -15,7 +15,7 @@
  */
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxSwitch } from 'lx-ui';
+import { LxInput, LxSwitch } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import EditDock from './EditDock.vue';
@@ -181,7 +181,7 @@ function getRow(scope: any): DockItem {
   <div class="dock-manage">
     <SearchBar :actions="actions" @search="handleSearch" @reset="handleReset">
       <template #filters>
-        <el-input
+        <LxInput
           v-model="searchParams.systemName as string"
           placeholder="系统名称"
           class="filter-item"
@@ -189,7 +189,7 @@ function getRow(scope: any): DockItem {
           clearable
           @keyup.enter="handleSearch"
         />
-        <el-input
+        <LxInput
           v-model="searchParams.ip as string"
           placeholder="IP"
           class="filter-item"
@@ -197,7 +197,7 @@ function getRow(scope: any): DockItem {
           clearable
           @keyup.enter="handleSearch"
         />
-        <el-input
+        <LxInput
           v-model="searchParams.path as string"
           placeholder="路径"
           class="filter-item"

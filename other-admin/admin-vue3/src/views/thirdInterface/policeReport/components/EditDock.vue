@@ -26,7 +26,7 @@
 import { Download } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormItemRule } from 'element-plus';
-import { LxSwitch } from 'lx-ui';
+import { LxInput, LxSwitch } from 'lx-ui';
 import { computed, nextTick, reactive, ref } from 'vue';
 
 import { saveDock, updateDock, type DockItem } from '@/api/thirdInterface/policeReport';
@@ -213,17 +213,17 @@ function transform(Params, Config) {
     >
       <!-- 名称 -->
       <el-form-item label="名称" prop="name">
-        <el-input v-model="formData.name as string" placeholder="请输入名称" maxlength="64" />
+        <LxInput v-model="formData.name as string" placeholder="请输入名称" :maxlength="64" />
       </el-form-item>
 
       <!-- 系统名称 -->
       <el-form-item label="系统名称" prop="systemName">
-        <el-input v-model="formData.systemName as string" placeholder="请输入系统名称" maxlength="64" />
+        <LxInput v-model="formData.systemName as string" placeholder="请输入系统名称" :maxlength="64" />
       </el-form-item>
 
       <!-- 系统编码 -->
       <el-form-item label="系统编码" prop="systemCode">
-        <el-input v-model="formData.systemCode as string" placeholder="请输入系统编码" maxlength="64" />
+        <LxInput v-model="formData.systemCode as string" placeholder="请输入系统编码" :maxlength="64" />
       </el-form-item>
 
       <!-- 协议 -->
@@ -235,7 +235,7 @@ function transform(Params, Config) {
 
       <!-- IP + 端口 -->
       <el-form-item label="IP" prop="ip">
-        <el-input v-model="formData.ip as string" placeholder="请输入 IP" maxlength="64" />
+        <LxInput v-model="formData.ip as string" placeholder="请输入 IP" :maxlength="64" />
       </el-form-item>
 
       <el-form-item label="端口" prop="port">
@@ -244,7 +244,7 @@ function transform(Params, Config) {
 
       <!-- 路径 -->
       <el-form-item label="路径" prop="path">
-        <el-input v-model="formData.path as string" placeholder="请输入路径" maxlength="256" />
+        <LxInput v-model="formData.path as string" placeholder="请输入路径" :maxlength="256" />
       </el-form-item>
 
       <!-- 请求方法 -->
