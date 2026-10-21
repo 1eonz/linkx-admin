@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-21 按钮图标实际尺寸与全菜单预览
+
+- 样式入口 `linkx-fe/src/components/LxButton/style.css`，前置容器直接 SVG 继承13/14/16px；中文使用说明 `linkx-fe/docs/components/lxbutton.md`。浏览器测试 `other-admin/admin-vue3/tests/e2e/lx-button-docs.spec.ts` 追加四类目标实际尺寸和中心检查，相关 **3/3**。
+- Mock 菜单与样例入口分别为 `other-admin/admin-vue3/mock/preview-menu.ts`、`mock/preview-server.ts`，运行 `pnpm dev:mock --port 30847`；`playwright.preview.config.ts` 完整回归 **11/11**，包含首页加32个业务入口及样例核对。仅代表 Mock 范围，真实后端仍未验收。
+
 ## 2026-10-21 LxButton 表单与插槽契约
 
 - 组件入口 `linkx-fe/src/components/LxButton/index.vue`、类型 `types.ts`：统一父表单禁用继承与动态默认插槽存在性；不涉及业务 API。

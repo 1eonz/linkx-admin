@@ -1,5 +1,10 @@
 # Vue3 Element Plus 与 lx-ui 替换清单
 
+## 2026-10-21 按钮 SVG 档位复验
+
+- LxButton前置SVG按既有13/14/16px容器渲染，前后置/纯图标在桌面及窄屏、Light/HUD均有实际尺寸断言；相关回归 **3/3**、Mock完整回归 **11/11**，未增加宿主替换数量。
+- loading布局稳定性与正式视觉综合门禁仍开放；Vue3 Element Plus删除前置条件未满足。
+
 ## 2026-10-21 LxButton 契约门禁进展
 
 - 组件库修复未传 `disabled` 的父表单继承，以及动态默认插槽的纯图标/Tooltip 状态。显式 `false` 保留 EP 覆盖语义；宿主接入时不得将未传与显式 false 视为等价。
