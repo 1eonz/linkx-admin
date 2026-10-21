@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils';
+import { ElForm } from 'element-plus';
 import { LxButton, type LxButtonSize, type LxButtonType } from 'lx-ui';
 import { createIconTooltipController } from 'lx-ui/src/components/LxButton/icon-tooltip-coordinator';
 import { describe, expect, it, vi } from 'vitest';
@@ -16,6 +17,81 @@ const EP_SIZE: Record<LxButtonSize, string> = {
 };
 
 describe('LxButton', () => {
+  it('继承父表单禁用并同步关闭图标提示，恢复后才允许点击', async () => {
+    const disabled = ref(false);
+    const click = vi.fn();
+    const wrapper = mount(
+      defineComponent({
+        setup: () => () =>
+          h(ElForm, { disabled: disabled.value }, () =>
+            h(LxButton, { icon: 'refresh', 'aria-label': '刷新表单', onClick: click }),
+          ),
+      }),
+    );
+    try {
+      expect(wrapper.findComponent({ name: 'ElTooltip' }).exists()).toBe(true);
+      disabled.value = true;
+      await nextTick();
+      expect(wrapper.get('button').attributes('disabled')).toBeDefined();
+      expect(wrapper.findComponent({ name: 'ElTooltip' }).exists()).toBe(false);
+      await wrapper.get('button').trigger('click');
+      expect(click).not.toHaveBeenCalled();
+      disabled.value = false;
+      await nextTick();
+      expect(wrapper.get('button').attributes('disabled')).toBeUndefined();
+      await wrapper.get('button').trigger('click');
+      expect(click).toHaveBeenCalledTimes(1);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it('显式 false 保留覆盖父表单禁用的内核契约', async () => {
+    const click = vi.fn();
+    const wrapper = mount(
+      defineComponent({
+        setup: () => () =>
+          h(ElForm, { disabled: true }, () => h(LxButton, { disabled: false, onClick: click }, () => '返回')),
+      }),
+    );
+    try {
+      expect(wrapper.get('button').attributes('disabled')).toBeUndefined();
+      await wrapper.get('button').trigger('click');
+      expect(click).toHaveBeenCalledTimes(1);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it('动态添加或移除文字插槽时同步纯图标布局和提示', async () => {
+    const withText = ref(false);
+    const wrapper = mount(
+      defineComponent({
+        setup: () => () =>
+          h(
+            LxButton,
+            { icon: 'refresh', 'aria-label': '刷新动态数据' },
+            withText.value ? { default: () => '刷新动态数据' } : {},
+          ),
+      }),
+    );
+    try {
+      const button = wrapper.findComponent(LxButton);
+      expect(button.classes()).toContain('lx-btn--icon-only');
+      withText.value = true;
+      await nextTick();
+      expect(button.text()).toBe('刷新动态数据');
+      expect(button.classes()).not.toContain('lx-btn--icon-only');
+      expect(wrapper.findComponent({ name: 'ElTooltip' }).exists()).toBe(false);
+      withText.value = false;
+      await nextTick();
+      expect(button.classes()).toContain('lx-btn--icon-only');
+      expect(wrapper.findComponent({ name: 'ElTooltip' }).exists()).toBe(true);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
   it('renders every type with the lx-btn class family', () => {
     for (const type of TYPES) {
       const wrapper = mount(LxButton, { props: { type } });

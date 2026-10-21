@@ -76,6 +76,38 @@ async function getContrastRatio(locator: Locator) {
 }
 
 test.describe('lx-ui 基础按钮设计回归', () => {
+  test('父表单禁用继承与动态文字切换保持点击和提示契约', async ({ page }) => {
+    await page.goto('/components/lxbutton');
+    const demo = page.getByRole('region', { name: '按钮表单禁用与动态文字示例' });
+    const button = demo.getByRole('button', { name: '刷新表单' });
+    const tooltip = page.getByRole('tooltip').filter({ hasText: '刷新表单' });
+    await expect(button).toHaveClass(/lx-btn--icon-only/);
+    await button.hover();
+    await expect(tooltip).toBeVisible();
+    await demo.getByLabel('显示按钮文字').check();
+    await expect(tooltip).toHaveCount(0);
+    await expect(button).toHaveText('刷新表单');
+    await expect(button).not.toHaveClass(/lx-btn--icon-only/);
+    await button.click();
+    await expect(demo.getByRole('status')).toHaveText('已刷新 1 次');
+    await demo.getByLabel('显示按钮文字').uncheck();
+    await expect(button).toHaveClass(/lx-btn--icon-only/);
+    await button.hover();
+    await expect(tooltip).toBeVisible();
+    await demo.getByLabel('禁用整个表单').check();
+    await expect(button).toBeDisabled();
+    await expect(tooltip).toHaveCount(0);
+    await button.dispatchEvent('click');
+    await expect(demo.getByRole('status')).toHaveText('已刷新 1 次');
+    await button.hover({ force: true });
+    await page.waitForTimeout(250);
+    await expect(tooltip).toHaveCount(0);
+    await demo.getByLabel('禁用整个表单').uncheck();
+    await expect(button).toBeEnabled();
+    await button.click();
+    await expect(demo.getByRole('status')).toHaveText('已刷新 2 次');
+  });
+
   test('文档页初始化不产生 hydration mismatch', async ({ page }) => {
     const hydrationErrors: string[] = [];
     page.on('console', (message) => {

@@ -32,6 +32,7 @@ export interface LxButtonProps {
   loading?: boolean
   /** 加载态文案（标本场景"下发指令中..."）；仅 loading 时生效，未提供时保留原文字 */
   loadingText?: string
+  /** 未传入时继承父表单禁用状态；显式 false 可按 EP 契约覆盖表单禁用。 */
   disabled?: boolean
   /** 前置/后置图标名，统一走 LxIcon（禁用 EP 图标链路） */
   icon?: LxIconName

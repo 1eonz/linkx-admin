@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 import Basic from '../../src/components/LxButton/demo/basic.vue';
+import FormDisabled from '../../src/components/LxButton/demo/form-disabled.vue';
 import LxButton from '../../src/components/LxButton/index.vue';
 </script>
 
@@ -174,6 +175,12 @@ tooltip 会按触发按钮最近的 `.lx-theme-hud` 容器同步主题令牌。�
 
 ## API
 
+### 表单禁用与动态插槽
+
+未传入 `disabled` 时继承父级 `LxForm`/`ElForm` 的禁用状态，同时阻止点击和纯图标提示；显式 `disabled=false` 按内核契约覆盖表单禁用，仅在确实需要例外的操作中使用。动态添加默认文字插槽时，按钮会退出纯图标布局并关闭图标提示，移除后恢复。
+
+<FormDisabled />
+
 ### Props
 
 | 名称           | 类型                                                                     | 默认值      | 说明                                                                                           |
@@ -184,7 +191,7 @@ tooltip 会按触发按钮最近的 `.lx-theme-hud` 容器同步主题令牌。�
 | `size`         | `'sm' \| 'md' \| 'lg'`                                                   | `'md'`      | 桌面工程尺寸：28 / 32 / 40px，字号为 12 / 14 / 14px；无 hover 或视口不宽于 640px 时至少 44px。 |
 | `loading`      | `boolean`                                                                | `false`     | 加载态：spinner + 点击拦截 + `aria-busy`，透明度降至 0.8。                                     |
 | `loadingText`  | `string`                                                                 | `''`        | 加载态文案（如“下发指令中…”）；仅 `loading` 时替换按钮文字。                                   |
-| `disabled`     | `boolean`                                                                | `false`     | 禁用态；使用中性表面与可读灰字，文字形态保持透明底；HUD 深色主题使用深色禁用表面与浅色文字。   |
+| `disabled`     | `boolean`                                                                | 继承表单，表单外为 `false` | 禁用态；使用中性表面与可读灰字，文字形态保持透明底；显式 `false` 可覆盖表单禁用。 |
 | `icon`         | `LxIconName`                                                             | `undefined` | 图标名，统一由 `LxIcon` 渲染（currentColor 跟随文字色）。                                      |
 | `iconPosition` | `'left' \| 'right'`                                                      | `'left'`    | 图标位置；loading 时前置图标自动让位给 spinner，后置图标保留。                                 |
 | `block`        | `boolean`                                                                | `false`     | 块级撑满容器宽。                                                                               |

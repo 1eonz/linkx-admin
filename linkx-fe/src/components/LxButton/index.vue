@@ -8,9 +8,11 @@
  * 表格行内一律用 type="text"；同一业务区域最多展示一个 primary。
  * 图标统一走 LxIcon（currentColor 跟随文字色），不使用 EP 图标链路。
  */
-import { ElButton, ElTooltip } from 'element-plus'
+import { ElButton, ElTooltip, formContextKey } from 'element-plus'
 import {
   computed,
+  inject,
+  onBeforeUpdate,
   onBeforeUnmount,
   onUpdated,
   ref,
@@ -35,7 +37,7 @@ const props = withDefaults(defineProps<LxButtonProps>(), {
   size: 'md',
   loading: false,
   loadingText: '',
-  disabled: false,
+  disabled: undefined,
   icon: undefined,
   iconPosition: 'left',
   block: false,
@@ -47,6 +49,16 @@ const emit = defineEmits<{ click: [event: MouseEvent] }>()
 /** attrs 显式接管后透传给 ElButton（aria-label / data-* 等调用方属性） */
 const attrs = useAttrs()
 const slots = useSlots()
+const formContext = inject(formContextKey, undefined)
+const isDisabled = computed(
+  () => props.disabled ?? formContext?.disabled ?? false,
+)
+const hasDefaultSlot = ref(Boolean(slots.default))
+
+// 插槽对象不具备响应性，更新前同步存在性，避免动态文字仍沿用纯图标布局。
+onBeforeUpdate(() => {
+  hasDefaultSlot.value = Boolean(slots.default)
+})
 
 /** ElButton 组件实例引用：纯图标 tooltip 虚拟触发需要根 DOM 元素 */
 const buttonRef = ref<InstanceType<typeof ElButton>>()
@@ -86,7 +98,7 @@ const showLoadingText = computed(
 
 /** 纯图标状态保持正方形；有默认内容或加载文案时按普通按钮布局。 */
 const iconOnly = computed(() =>
-  Boolean(props.icon && !slots.default && !showLoadingText.value),
+  Boolean(props.icon && !hasDefaultSlot.value && !showLoadingText.value),
 )
 
 /** 自定义文字色（仅文字形态生效）：以 CSS 变量注入，样式层派生 hover 底色 */
@@ -113,7 +125,7 @@ const canShowIconTooltip = computed(
   () =>
     iconOnly.value &&
     iconOnlyLabel.value !== '' &&
-    !props.disabled &&
+    !isDisabled.value &&
     !props.loading,
 )
 
@@ -286,7 +298,7 @@ onBeforeUnmount(() => {
 
 function onClick(event: MouseEvent) {
   // EP 内核在 disabled/loading 时已不派发 click，此处双保险防止 attrs 绕行
-  if (props.disabled || props.loading) return
+  if (isDisabled.value || props.loading) return
   emit('click', event)
 }
 </script>
@@ -310,7 +322,7 @@ function onClick(event: MouseEvent) {
     :text="isText"
     :native-type="nativeType"
     :loading="loading"
-    :disabled="disabled"
+    :disabled="isDisabled"
     v-bind="attrs"
     :aria-busy="loading ? 'true' : attrs['aria-busy']"
     @pointerenter="onIconTooltipPointerEnter"
