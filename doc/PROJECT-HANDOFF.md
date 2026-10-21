@@ -3186,3 +3186,8 @@
 
 - `TaskConfigModal.vue` 的任务名称、开始时间、结束时间表达式改用 `LxInput`，保留占位文案、校验、textarea、等级选择、紧急开关和保存契约。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；远程配置接口和 textarea 未改变。
+
+# 2026-10-21 警务上报类型输入交接
+
+- `TypeManage.vue` 类型标签搜索与 `TypeEdit.vue` 类型标签字段改用 `LxInput`，保留 SearchBar、清空、回车、长度限制、校验和保存契约。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；节点服务混合类型表单未改动。

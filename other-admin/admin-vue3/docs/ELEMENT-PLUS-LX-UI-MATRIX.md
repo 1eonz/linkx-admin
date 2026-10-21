@@ -335,6 +335,11 @@ Vue3 共享 `src/components/Pagination` 已使用 `LxPagination`，并通过适�
 - `TaskConfigModal.vue` 的任务名称、开始时间、结束时间三个 `el-input` 已替换为 `LxInput`。
 - 任务内容 textarea、等级、紧急开关和远程配置接口仍按页面契约保留；依赖删除门槛未满足。
 
+## 2026-10-21 警务上报输入计数更新
+
+- `TypeManage.vue`、`TypeEdit.vue` 的类型标签 2 个 `el-input` 已替换为 `LxInput`，保留搜索和表单契约。
+- 节点服务混合类型字段仍待迁移，不能关闭全库依赖删除门槛。
+
 ## 2026-10-11 Wave 11 P2 影响更新
 
 - `LxTransferPanel` 与 `LxVirtualTree` 已完成当前版组件级严格 UI/交互审查：单测合计 67/67、文档 E2E 合计 48/48，类型、203 modules 构建、文档构建和 Vue3 生产构建通过；代码复审无 P0-P3。Assessment A 36/40；Assessment B 5 个 detector 均为有效 `[]`/空 stderr/0，9 个浏览器视图证据完整。

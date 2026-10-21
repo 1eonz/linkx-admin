@@ -2075,3 +2075,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `thirdInterface/southInterface/components/TaskConfigModal.vue` 的任务名称、开始时间表达式、结束时间表达式三个普通字符串字段已由 `el-input` 切换为 `LxInput`。
 - 保留模板占位文案、表单校验、任务内容 textarea、等级选择、紧急开关和保存请求；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
 - textarea、远程任务配置和真实第三方接口继续单独验证。
+
+## 2026-10-21 警务上报类型输入迁移
+
+- `thirdInterface/policeReport/components/TypeManage.vue` 的类型标签搜索与 `TypeEdit.vue` 的类型标签字段已由 `el-input` 切换为 `LxInput`。
+- 保留 SearchBar、清空、回车搜索、最大长度 64、表单校验和保存请求；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
+- 节点服务表单等混合类型字段继续按独立契约处理。
