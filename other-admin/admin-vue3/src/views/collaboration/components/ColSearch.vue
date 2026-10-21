@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Delete, Download, Plus, RefreshRight } from '@element-plus/icons-vue';
+import { LxInput } from 'lx-ui';
 import { computed, reactive } from 'vue';
 import type { Component } from 'vue';
 
@@ -180,7 +181,7 @@ defineExpose({
 <template>
   <SearchBar :actions="actions" @search="handleQuery" @reset="handleReset">
     <template #filters>
-      <el-input
+      <LxInput
         v-model="queryParams.postName"
         placeholder="协同岗名称"
         class="filter-item"
@@ -198,7 +199,7 @@ defineExpose({
         @clear-val="cleanOrganizationInput"
         @current-change="organizationCurrentChange"
       />
-      <el-input
+      <LxInput
         v-model="queryParams.relatedUserNames"
         placeholder="关联人员"
         class="filter-item"

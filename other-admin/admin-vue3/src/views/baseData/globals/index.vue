@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Delete, Edit, MagicStick, Plus, Refresh, Search } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxTag } from 'lx-ui';
+import { LxInput, LxTag } from 'lx-ui';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -285,7 +285,7 @@ onBeforeUnmount(() => {
     <el-card shadow="always" class="card">
       <div class="globals-toolbar">
         <div class="globals-search">
-          <el-input
+          <LxInput
             v-model="keyword"
             class="globals-search__input"
             :prefix-icon="Search"

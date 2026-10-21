@@ -21,6 +21,7 @@
  */
 import { Delete, Download, Refresh } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import {
@@ -437,7 +438,7 @@ onMounted(() => {
     <el-card shadow="always" class="card">
       <SearchBar :actions="actions" @search="handleSearch" @reset="handleReset">
         <template #filters>
-          <el-input
+          <LxInput
             v-model="searchParams.keywords as string"
             placeholder="请输入群组名称、标签、所属部门"
             style="width: 260px"

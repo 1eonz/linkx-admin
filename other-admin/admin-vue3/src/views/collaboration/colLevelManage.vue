@@ -13,7 +13,7 @@
  */
 import { CircleClose, Plus, Search } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { LxEmpty } from 'lx-ui';
+import { LxEmpty, LxInput } from 'lx-ui';
 import { computed, nextTick, onMounted, reactive, ref } from 'vue';
 
 import CoopBindDialog, { type CoopBindDialogInstance } from './components/CoopBindDialog.vue';
@@ -324,7 +324,7 @@ onMounted(() => {
         <span class="panel-title">{{ panelTitle }}</span>
         <div class="panel-header__actions">
           <div class="search-wrap">
-            <el-input
+            <LxInput
               v-model="searchParams.name as string"
               placeholder="搜索协同岗名称"
               clearable
