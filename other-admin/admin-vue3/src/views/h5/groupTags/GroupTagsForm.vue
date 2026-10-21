@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
-import { LxIcon } from 'lx-ui';
+import { LxIcon, LxInput } from 'lx-ui';
 import { nextTick, reactive, ref } from 'vue';
 
 import { getGroupTagIcon } from './iconMap';
@@ -141,12 +141,12 @@ defineExpose({ open });
   <el-dialog v-model="visible" :title="title" width="750px" align-center append-to-body @open="handleOpen">
     <el-form ref="formRef" v-loading="loading" :model="formData" :rules="rules" label-width="100px">
       <el-form-item label="标签名称" prop="name">
-        <el-input v-model="formData.name" maxlength="6" show-word-limit placeholder="请输入标签名称" />
+        <LxInput v-model="formData.name" :maxlength="6" show-word-limit placeholder="请输入标签名称" />
       </el-form-item>
       <el-form-item label="图标" prop="icon">
         <el-popover placement="bottom-start" trigger="click" width="400px">
           <div class="icon-selector">
-            <el-input v-model="iconSearch" placeholder="搜索图标" size="small" />
+            <LxInput v-model="iconSearch" placeholder="搜索图标" size="sm" />
             <div class="icon-list">
               <button
                 v-for="icon in iconList.filter((item) => item.includes(iconSearch.toLowerCase()))"
@@ -162,16 +162,16 @@ defineExpose({ open });
             </div>
           </div>
           <template #reference>
-            <el-input v-model="formData.icon" readonly placeholder="请选择图标">
+            <LxInput v-model="formData.icon" readonly placeholder="请选择图标">
               <template #prefix><LxIcon :name="getGroupTagIcon(formData.icon || 'fas fa-user')" :size="16" /></template>
-            </el-input>
+            </LxInput>
           </template>
         </el-popover>
       </el-form-item>
       <el-form-item label="颜色" prop="color">
         <div class="color-row">
           <el-color-picker v-model="formData.color" show-alpha />
-          <el-input v-model="formData.color" placeholder="颜色值" />
+          <LxInput v-model="formData.color" placeholder="颜色值" />
         </div>
       </el-form-item>
     </el-form>
