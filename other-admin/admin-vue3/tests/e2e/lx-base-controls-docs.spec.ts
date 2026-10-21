@@ -299,32 +299,70 @@ test('Input 普通根节点与输入包装器保持同高', async ({ page }) => 
   }
 });
 
-test('Input 前后缀、密码和透传场景保留可见外边框', async ({ page }) => {
-  await page.goto('/components/lxinput');
-  const demo = page.locator('.lx-input-demo');
-  const fieldIds = ['demo-case-code', 'demo-secret', 'demo-phone'];
-  for (const id of fieldIds) {
-    await expect(demo.locator(`#${id}`)).toBeVisible();
-  }
+for (const route of ['/components/lxinput', '/components/lxinput.html']) {
+  test(`Input 前后缀、密码和透传场景保留可见外边框（${route}）`, async ({ page }) => {
+    await page.goto(route);
+    const demo = page.locator('.lx-input-demo');
+    const fieldIds = ['demo-case-code', 'demo-secret', 'demo-phone'];
+    for (const id of fieldIds) {
+      await expect(demo.locator(`#${id}`)).toBeVisible();
+    }
 
-  const inputRoots = fieldIds.map((id) =>
-    demo
-      .locator(`#${id}`)
-      .locator('xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")][1]'),
-  );
+    const inputRoots = fieldIds.map((id) =>
+      demo
+        .locator(`#${id}`)
+        .locator('xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")][1]'),
+    );
 
-  for (const root of inputRoots) {
-    const wrapper = root.locator('.el-input__wrapper');
-    await expect(wrapper).toHaveCSS('border-top-width', '1px');
-    await expect(wrapper).toHaveCSS('border-top-style', 'solid');
-    await expect(wrapper).not.toHaveCSS('border-top-color', 'rgba(0, 0, 0, 0)');
-  }
+    for (const root of inputRoots) {
+      const wrapper = root.locator('.el-input__wrapper');
+      await expect(wrapper).toHaveCSS('border-top-width', '1px');
+      await expect(wrapper).toHaveCSS('border-top-style', 'solid');
+      await expect(wrapper).not.toHaveCSS('border-top-color', 'rgba(0, 0, 0, 0)');
+    }
 
-  const compound = inputRoots[0];
-  await expect(compound).toHaveCSS('border-top-width', '1px');
-  await expect(compound).toHaveCSS('border-top-style', 'solid');
-  await expect(compound).not.toHaveCSS('border-top-color', 'rgba(0, 0, 0, 0)');
-});
+    const compound = inputRoots[0];
+    await expect(compound).toHaveCSS('border-top-width', '1px');
+    await expect(compound).toHaveCSS('border-top-style', 'solid');
+    await expect(compound).not.toHaveCSS('border-top-color', 'rgba(0, 0, 0, 0)');
+
+    const password = demo.locator('#demo-secret');
+    await password.fill('demo-password');
+    for (const width of [1440, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      for (const hud of [false, true]) {
+        await demo.getByLabel('HUD 深色主题', { exact: true }).setChecked(hud);
+        for (const size of ['sm', 'md', 'lg'] as const) {
+          await demo.getByLabel('输入框尺寸档').selectOption(size);
+          for (const root of inputRoots) {
+            const boundary = (await root.evaluate((node) => node.classList.contains('el-input-group')))
+              ? root
+              : root.locator('.el-input__wrapper');
+            await root.locator('input').focus();
+            await expect(boundary).toHaveCSS('border-top-width', '1px');
+            await expect(boundary).toHaveCSS('border-top-style', 'solid');
+            const colors = await boundary.evaluate((node) => {
+              const style = getComputedStyle(node);
+              return { border: style.borderTopColor, background: style.backgroundColor };
+            });
+            expect(colors.border).not.toBe('rgba(0, 0, 0, 0)');
+            expect(colors.border).not.toBe(colors.background);
+            await expect(boundary).toHaveCSS('height', `${width === 390 ? 44 : { sm: 28, md: 32, lg: 40 }[size]}px`);
+            await root.locator('input').blur();
+            await page.mouse.move(0, 0);
+            await expect(boundary).toHaveCSS('border-top-width', '1px');
+          }
+        }
+        const toggle = inputRoots[1].locator('.el-input__password');
+        await toggle.click();
+        await expect(password).toHaveAttribute('type', 'text');
+        await expect(inputRoots[1].locator('.el-input__wrapper')).toHaveCSS('border-top-width', '1px');
+        await toggle.click();
+        await expect(password).toHaveAttribute('type', 'password');
+      }
+    }
+  });
+}
 
 test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用', async ({ page }) => {
   await page.goto('/components/lxinput');
