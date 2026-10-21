@@ -3181,3 +3181,8 @@
 
 - `AppForm.vue` 应用名称、H5 链接、安装包路径、Activity、鸿蒙 appId、启动参数共 7 个字段改用 `LxInput`，保留条件渲染、长度限制、表单校验、上传、选择器、排序和保存契约。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；数字/上传/选择器未机械替换。
+
+# 2026-10-21 南向任务配置输入交接
+
+- `TaskConfigModal.vue` 的任务名称、开始时间、结束时间表达式改用 `LxInput`，保留占位文案、校验、textarea、等级选择、紧急开关和保存契约。
+- 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；远程配置接口和 textarea 未改变。

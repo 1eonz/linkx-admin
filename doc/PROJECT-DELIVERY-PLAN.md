@@ -2069,3 +2069,9 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `thirdInterface/app/components/AppForm.vue` 的应用名称、H5 链接、Android/鸿蒙安装包路径、Activity、鸿蒙 appId、启动参数共 7 个普通文本字段已由 `el-input` 切换为 `LxInput`。
 - 保留条件显示、最大长度、表单校验、上传图标、可见范围、前置应用、排序和保存请求；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
 - 数字排序、上传、选择器及真实第三方接口仍按独立契约后续处理。
+
+## 2026-10-21 南向任务配置普通输入迁移
+
+- `thirdInterface/southInterface/components/TaskConfigModal.vue` 的任务名称、开始时间表达式、结束时间表达式三个普通字符串字段已由 `el-input` 切换为 `LxInput`。
+- 保留模板占位文案、表单校验、任务内容 textarea、等级选择、紧急开关和保存请求；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
+- textarea、远程任务配置和真实第三方接口继续单独验证。
