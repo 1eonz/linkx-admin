@@ -10,7 +10,7 @@
  */
 import type { InputInstance } from 'element-plus'
 import { ElInput, formContextKey } from 'element-plus'
-import { computed, inject, ref } from 'vue'
+import { computed, inject, nextTick, ref, watch } from 'vue'
 
 import type { LxInputProps, LxInputSize } from './types'
 import LxIcon from '../LxIcon/index.vue'
@@ -97,6 +97,50 @@ function clearInput(event: MouseEvent) {
   inputRef.value?.focus()
 }
 
+// 关闭显隐能力、更换输入类型或禁用时恢复遮罩，避免再次启用时沿用明文状态。
+watch(
+  [() => props.showPassword, () => props.type, isDisabled],
+  () => {
+    if (inputRef.value) inputRef.value.passwordVisible = false
+  },
+  { flush: 'sync' },
+)
+
+function togglePasswordVisibility() {
+  const kernel = inputRef.value
+  if (!kernel || !props.showPassword || isDisabled.value) return
+
+  const input = kernel.input
+  const selection = input
+    ? ([
+        input.selectionStart,
+        input.selectionEnd,
+        input.selectionDirection,
+      ] as const)
+    : undefined
+
+  // 继续使用 EP 公开的显隐状态，保留 showPassword 接管 type 和 change 事件的内核契约。
+  kernel.passwordVisible = !kernel.passwordVisible
+  nextTick(() => {
+    if (
+      !input ||
+      input !== inputRef.value?.input ||
+      !props.showPassword ||
+      !selection ||
+      selection[0] === null ||
+      selection[1] === null
+    )
+      return
+
+    // 仅恢复选区，不主动聚焦：鼠标保留输入焦点，键盘保留按钮焦点。
+    input.setSelectionRange(
+      selection[0],
+      selection[1],
+      selection[2] ?? undefined,
+    )
+  })
+}
+
 defineExpose({
   /** 聚焦输入框 */
   focus: () => inputRef.value?.focus(),
@@ -155,6 +199,21 @@ defineExpose({
         @click="clearInput"
       >
         <LxIcon name="x" :size="14" />
+      </button>
+    </template>
+    <template #password-icon="{ visible }">
+      <button
+        class="lx-input__password-toggle"
+        type="button"
+        :disabled="isDisabled"
+        :aria-label="visible ? '隐藏密码' : '显示密码'"
+        :aria-pressed="visible"
+        @mousedown.prevent
+        @click.stop="togglePasswordVisibility"
+      >
+        <slot name="password-icon" :visible="visible">
+          <LxIcon :name="visible ? 'eye-off' : 'eye'" :size="14" />
+        </slot>
       </button>
     </template>
     <template v-if="$slots.prepend" #prepend><slot name="prepend" /></template>

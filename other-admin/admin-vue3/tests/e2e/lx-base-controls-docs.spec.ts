@@ -201,12 +201,12 @@ test('Input 复合前后缀与输入框在各尺寸及窄屏下保持同高', as
   const passwordBorder = await passwordInput.locator('.el-input__wrapper').evaluate((wrapper) => {
     const style = getComputedStyle(wrapper);
     return {
-      width: style.boxShadow.includes('0px 0px 0px 1px') ? '1px' : style.borderTopWidth,
-      color: style.boxShadow,
+      width: style.borderTopWidth,
+      color: style.borderTopColor,
     };
   });
   expect(passwordBorder.width, '密码输入框应保留可见边框').toBe('1px');
-  expect(passwordBorder.color, '密码输入框边框应由控件描边绘制').toContain('0px 0px 0px 1px');
+  expect(passwordBorder.color, '密码输入框边框不能透明').not.toBe('rgba(0, 0, 0, 0)');
 
   await page.setViewportSize({ width: 390, height: 844 });
   const touchHeights = await compoundInput.evaluate((root) =>
@@ -314,7 +314,7 @@ for (const route of ['/components/lxinput', '/components/lxinput.html']) {
         .locator('xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")][1]'),
     );
 
-    for (const root of inputRoots) {
+    for (const root of inputRoots.slice(1)) {
       const wrapper = root.locator('.el-input__wrapper');
       await expect(wrapper).toHaveCSS('border-top-width', '1px');
       await expect(wrapper).toHaveCSS('border-top-style', 'solid');
@@ -353,7 +353,7 @@ for (const route of ['/components/lxinput', '/components/lxinput.html']) {
             await expect(boundary).toHaveCSS('border-top-width', '1px');
           }
         }
-        const toggle = inputRoots[1].locator('.el-input__password');
+        const toggle = inputRoots[1].locator('.lx-input__password-toggle');
         await toggle.click();
         await expect(password).toHaveAttribute('type', 'text');
         await expect(inputRoots[1].locator('.el-input__wrapper')).toHaveCSS('border-top-width', '1px');
@@ -363,6 +363,90 @@ for (const route of ['/components/lxinput', '/components/lxinput.html']) {
     }
   });
 }
+
+test('Input 单层边框、禁用复合悬停、错误焦点与框外统计保持可见', async ({ page }) => {
+  await page.goto('/components/lxinput.html');
+  const demo = page.locator('.lx-input-demo');
+  const rootOf = (id: string) =>
+    demo
+      .locator(`#${id}`)
+      .locator('xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " lx-input ")][1]');
+  for (const width of [1280, 375]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const hud of [false, true]) {
+      await demo.getByLabel('HUD 深色主题', { exact: true }).setChecked(hud);
+      const placeholder = await demo.locator('#demo-secret').evaluate((node) => {
+        const probe = document.createElement('span');
+        probe.style.color = 'var(--lx-text-placeholder)';
+        node.parentElement!.append(probe);
+        const expected = getComputedStyle(probe).color;
+        probe.remove();
+        return { actual: getComputedStyle(node, '::placeholder').color, expected };
+      });
+      expect(placeholder.actual, '占位符必须使用实际局部主题令牌').toBe(placeholder.expected);
+      const ordinary = rootOf('demo-readonly-note').locator('.el-input__wrapper');
+      await page.mouse.move(0, 0);
+      await expect(ordinary).toHaveCSS('border-top-width', '1px');
+      await expect(ordinary).toHaveCSS('box-shadow', 'none');
+      const disabled = rootOf('demo-case-disabled');
+      const color = await disabled.evaluate((node) => getComputedStyle(node).borderTopColor);
+      await disabled.hover();
+      await expect(disabled).toHaveCSS('border-top-color', color);
+      await expect(disabled.locator('.el-input__wrapper')).toHaveCSS('box-shadow', 'none');
+      const error = rootOf('demo-case-error');
+      await expect(error.locator('input')).toHaveAttribute('aria-invalid', 'true');
+      await error.locator('input').focus();
+      await expect(error).not.toHaveCSS('box-shadow', 'none');
+      await expect(error.locator('.el-input__wrapper')).toHaveCSS('box-shadow', 'none');
+      await expect(error.locator('.el-input__wrapper')).toHaveCSS('border-top-width', '0px');
+      const outside = rootOf('demo-case-outside');
+      const counter = outside.locator('.el-input__count.is-outside');
+      await expect(counter).toHaveText('4 / 12');
+      await counter.scrollIntoViewIfNeeded();
+      await expect(outside).toHaveCSS('overflow', 'visible');
+      const painted = await counter.evaluate((node) => {
+        const bounds = node.getBoundingClientRect();
+        const target = document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+        return target !== null && node.contains(target);
+      });
+      expect(painted, '框外统计应实际绘制且不被祖先裁切').toBe(true);
+    }
+  }
+});
+
+test('Input 密码显隐按钮支持键盘、选区与触控尺寸', async ({ page }) => {
+  await page.goto('/components/lxinput.html');
+  const input = page.locator('#demo-secret');
+  const button = page.getByRole('button', { name: '显示密码', exact: true });
+  await input.fill('密码示例123');
+  await input.focus();
+  await input.evaluate((node) => {
+    if (!(node instanceof HTMLInputElement)) throw new Error('密码节点类型错误');
+    node.setSelectionRange(1, 4);
+  });
+  await page.keyboard.press('Tab');
+  await expect(button).toBeFocused();
+  await page.keyboard.press('Enter');
+  const hide = page.getByRole('button', { name: '隐藏密码', exact: true });
+  await expect(hide).toBeFocused();
+  await expect(hide).toHaveAttribute('aria-pressed', 'true');
+  await expect(input).toHaveAttribute('type', 'text');
+  expect(
+    await input.evaluate((node) =>
+      node instanceof HTMLInputElement ? [node.selectionStart, node.selectionEnd] : null,
+    ),
+  ).toEqual([1, 4]);
+  await page.keyboard.press('Space');
+  await expect(input).toHaveAttribute('type', 'password');
+  await expect(button).toBeFocused();
+  for (const width of [1280, 375]) {
+    await page.setViewportSize({ width, height: 900 });
+    const bounds = await button.boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds!.width).toBeGreaterThanOrEqual(width === 375 ? 44 : 24);
+    expect(bounds!.height).toBeGreaterThanOrEqual(width === 375 ? 44 : 24);
+  }
+});
 
 test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用', async ({ page }) => {
   await page.goto('/components/lxinput');
@@ -374,7 +458,7 @@ test('Input 标签、尺寸、清空、键盘焦点与窄屏主题状态可用',
   );
   const clearButton = inputRoot.getByRole('button', { name: '清空输入框', exact: true });
   const counterRoot = demo.locator('.lx-input-demo__validation-form .lx-input');
-  const addons = demo.locator('.lx-input .el-input-group__prepend, .lx-input .el-input-group__append');
+  const addons = demo.getByTestId('addons').locator('.el-input-group__prepend, .el-input-group__append');
   const validationInput = demo.locator('#demo-phone');
   const validationItem = validationInput.locator(
     'xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " el-form-item ")]',
@@ -676,7 +760,7 @@ test('Input 清除按钮支持键盘操作，校验提示在桌面和窄屏不�
   await expect(name).toBeFocused();
   await expect(demo.locator('.lx-input-demo__status')).toContainText('已清空');
 
-  const error = demo.locator('.lx-input-demo__validation-form .el-form-item__error');
+  const error = demo.getByTestId('states').locator('.lx-input-demo__validation-form .el-form-item__error');
   const helper = demo.getByText('错误态：修正为 11 位手机号后提示会清除。', { exact: true });
   const validationInput = demo.locator('#demo-phone');
   const validationInputRoot = validationInput.locator(

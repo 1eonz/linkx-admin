@@ -24,6 +24,11 @@ const caseCode = ref('2026-0001')
 const password = ref('')
 const phoneFormRef = ref<LxFormInstance>()
 const phoneForm = reactive({ phone: '1390000' })
+const compoundFormRef = ref<LxFormInstance>()
+const compoundForm = reactive({ code: '' })
+const compoundRules: FormRules = {
+  code: [{ required: true, message: '请输入案件编码', trigger: 'blur' }],
+}
 const inheritedDisabledForm = reactive({ value: '继承表单禁用状态' })
 const phoneRules: FormRules = {
   phone: [
@@ -40,6 +45,7 @@ const lastAction = ref('输入内容观察状态；演示数据仅存在于页�
 
 onMounted(() => {
   phoneFormRef.value?.validateField('phone').catch(() => undefined)
+  compoundFormRef.value?.validateField('code').catch(() => undefined)
 })
 
 function reportChange(field: string, value: string) {
@@ -78,8 +84,8 @@ function runInputMethod(method: keyof LxInputExposes) {
           >
           <LxInput
             id="demo-officer-name"
-            v-model="officerName"
             ref="officerNameInputRef"
+            v-model="officerName"
             name="officerName"
             :size="size"
             placeholder="请输入警员姓名/警号"
@@ -255,6 +261,59 @@ function runInputMethod(method: keyof LxInputExposes) {
       </div>
     </section>
 
+    <section class="lx-input-demo__panel" data-testid="compound-states">
+      <h3>复合输入状态</h3>
+      <div class="lx-input-demo__grid">
+        <div class="lx-input-demo__field">
+          <label class="lx-input-demo__label" for="demo-case-disabled"
+            >归档编码（禁用）</label
+          >
+          <LxInput
+            id="demo-case-disabled"
+            model-value="2026-0001"
+            :size="size"
+            disabled
+          >
+            <template #prepend>AJ</template>
+            <template #append>号</template>
+          </LxInput>
+        </div>
+        <div class="lx-input-demo__field">
+          <label class="lx-input-demo__label" for="demo-case-outside"
+            >编码字数（框外统计）</label
+          >
+          <LxInput
+            id="demo-case-outside"
+            model-value="2026"
+            :size="size"
+            :maxlength="12"
+            show-word-limit
+            word-limit-position="outside"
+          >
+            <template #prepend>AJ</template>
+            <template #append>号</template>
+          </LxInput>
+        </div>
+        <LxForm
+          ref="compoundFormRef"
+          :model="compoundForm"
+          :rules="compoundRules"
+          class="lx-input-demo__validation-form"
+        >
+          <LxFormItem label="案件编码（必填）" prop="code">
+            <LxInput
+              id="demo-case-error"
+              v-model="compoundForm.code"
+              :size="size"
+            >
+              <template #prepend>AJ</template>
+              <template #append>号</template>
+            </LxInput>
+          </LxFormItem>
+        </LxForm>
+      </div>
+    </section>
+
     <p class="lx-input-demo__status" aria-live="polite">{{ lastAction }}</p>
     <p class="lx-input-demo__note">
       32px 基准高 / 4px 圆角 / 主色 #0060a9 焦点光环由全局令牌桥供给；错误态承接
@@ -329,9 +388,8 @@ function runInputMethod(method: keyof LxInputExposes) {
 }
 
 :deep(.lx-input-demo__focus-example .el-input__wrapper) {
-  box-shadow:
-    0 0 0 1px var(--lx-color-primary) inset,
-    0 0 0 2px var(--lx-control-focus-halo-color);
+  border-color: var(--lx-color-primary);
+  box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
 :deep(.lx-input-demo__validation-form .el-form-item) {

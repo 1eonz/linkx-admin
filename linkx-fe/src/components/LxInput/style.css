@@ -43,7 +43,7 @@
   border-radius: var(--lx-radius-md);
   /* 使用真实边框确保普通、密码和透传场景在浅色背景上仍有清晰外缘。 */
   border: 1px solid var(--lx-control-border);
-  box-shadow: 0 0 0 1px var(--lx-control-border) inset;
+  box-shadow: none;
   /* 前景与表面令牌需同步切换，避免主题过渡期间文字对比度骤降。 */
   transition: box-shadow var(--lx-transition);
 }
@@ -77,6 +77,7 @@
   height: calc(100% + 2px);
   flex: 1 1 auto;
   min-height: 0;
+  border: 0;
   border-radius: 0;
   box-shadow: none;
 }
@@ -85,6 +86,42 @@
 .lx-input.el-input-group > .el-input-group__prepend,
 .lx-input.el-input-group > .el-input-group__append {
   border-radius: 0;
+  box-shadow: none;
+}
+
+.lx-input.el-input-group > .el-input-group__prepend {
+  border-right: 1px solid var(--lx-control-border);
+}
+
+.lx-input.el-input-group > .el-input-group__append {
+  border-left: 1px solid var(--lx-control-border);
+}
+
+/* 框外字数统计属于透传契约，不能由复合控件的圆角裁切掉。 */
+.lx-input.el-input-group:has(.el-input__count.is-outside) {
+  overflow: visible;
+}
+
+/* 全高子槽会覆盖根节点边缘；独立描边层保持统计溢出时外框连续可见。 */
+.lx-input.el-input-group:has(.el-input__count.is-outside)::after {
+  position: absolute;
+  inset: -1px;
+  z-index: 1;
+  pointer-events: none;
+  content: '';
+  border: 1px solid;
+  border-color: inherit;
+  border-radius: inherit;
+}
+
+.lx-input.el-input-group:has(.el-input__count.is-outside) > :first-child {
+  border-start-start-radius: var(--lx-radius-md);
+  border-end-start-radius: var(--lx-radius-md);
+}
+
+.lx-input.el-input-group:has(.el-input__count.is-outside) > :last-child {
+  border-start-end-radius: var(--lx-radius-md);
+  border-end-end-radius: var(--lx-radius-md);
 }
 
 /* 复合输入聚焦时由根节点承载完整焦点环，前后缀和输入框共享同一条边界。 */
@@ -97,7 +134,7 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
   box-shadow: none;
 }
 
-.lx-input.el-input-group:hover {
+.lx-input.el-input-group:not(.is-disabled):hover {
   border-color: var(--lx-color-primary);
 }
 
@@ -105,6 +142,7 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
 .lx-input.is-disabled .el-input__wrapper {
   background-color: var(--lx-bg-card-hover);
   opacity: 1;
+  box-shadow: none;
 }
 
 .lx-input.is-disabled .el-input__inner {
@@ -120,6 +158,11 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
   align-self: center;
   color: var(--lx-color-on-input);
   line-height: var(--lx-input-content-height);
+}
+
+/* 局部 HUD 切换时在实际节点解析令牌，避免继承外层已解析的 EP 浅色值。 */
+.lx-input .el-input__inner::placeholder {
+  color: var(--lx-text-placeholder);
 }
 
 /* 输入内容与 prefix/suffix 共用完整控件轨道，避免槽位与输入框出现上下差异。 */
@@ -158,24 +201,23 @@ html:root .lx-input.el-input-group > .el-input__wrapper.is-focus {
 }
 
 /* hover：描边转主色 */
-.lx-input .el-input__wrapper:hover {
-  box-shadow: 0 0 0 1px var(--lx-color-primary) inset;
+.lx-input:not(.is-disabled):not(.el-input-group) .el-input__wrapper:hover {
+  border-color: var(--lx-color-primary);
 }
 
-/* 键盘焦点：1px 主色内描边 + 2px 光环（不在控件外溢出第二圈） */
+/* 键盘焦点：真实边框变为主色，仅在外侧增加一层 2px 光环。 */
 html:root .lx-input .el-input__wrapper.is-focus {
   outline: none;
   outline-offset: 0;
-  box-shadow:
-    0 0 0 1px var(--lx-color-primary) inset,
-    0 0 0 2px var(--lx-control-focus-halo-color);
+  border-color: var(--lx-color-primary);
+  box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
 }
 
 /* 错误态：使用表单专属校验令牌，依赖 ElForm/LxForm 上下文。 */
 html:root .el-form-item.is-error .lx-input .el-input__wrapper {
   background-color: var(--lx-color-form-error-bg);
   border-color: var(--lx-color-form-error);
-  box-shadow: 0 0 0 1px var(--lx-color-form-error) inset;
+  box-shadow: none;
 }
 
 html:root .el-form-item.is-error .lx-input.el-input-group {
@@ -185,9 +227,17 @@ html:root .el-form-item.is-error .lx-input.el-input-group {
 html:root .el-form-item.is-error .lx-input .el-input__wrapper.is-focus {
   outline: none;
   outline-offset: 0;
-  box-shadow:
-    0 0 0 1px var(--lx-color-form-error) inset,
-    0 0 0 2px var(--lx-control-focus-halo-color);
+  box-shadow: 0 0 0 2px var(--lx-control-focus-halo-color);
+}
+
+/* 错误复合输入仍只在根节点画边框与焦点环，避免内框在接缝处重复描边。 */
+html:root .el-form-item.is-error .lx-input.el-input-group > .el-input__wrapper,
+html:root
+  .el-form-item.is-error
+  .lx-input.el-input-group
+  > .el-input__wrapper.is-focus {
+  border: 0;
+  box-shadow: none;
 }
 
 html:root .el-form-item.is-error .lx-input.el-input-group:focus-within {
@@ -272,6 +322,36 @@ html:root .el-form-item.is-error .lx-input.el-input-group:focus-within {
   outline-offset: 1px;
 }
 
+.lx-input .el-input__password {
+  width: auto;
+  margin-left: 0;
+}
+
+.lx-input .lx-input__password-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin-inline-start: 8px;
+  border: 0;
+  border-radius: var(--lx-radius-sm);
+  background: transparent;
+  color: var(--lx-text-secondary-strong);
+  cursor: pointer;
+}
+
+.lx-input .lx-input__password-toggle:focus-visible {
+  outline: 2px solid var(--lx-color-primary);
+  outline-offset: 1px;
+}
+
+.lx-input .lx-input__password-toggle:disabled {
+  cursor: not-allowed;
+}
+
 .lx-input.is-disabled .lx-input__clear {
   display: none;
 }
@@ -307,6 +387,11 @@ html:root .el-form-item.is-error .lx-input.el-input-group:focus-within {
   }
 
   .lx-input .lx-input__clear {
+    width: 44px;
+    height: 44px;
+  }
+
+  .lx-input .lx-input__password-toggle {
     width: 44px;
     height: 44px;
   }
