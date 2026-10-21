@@ -14,6 +14,7 @@
  */
 import { Plus, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, reactive, ref } from 'vue';
 
 import TypeEdit from './TypeEdit.vue';
@@ -117,7 +118,7 @@ function getRow(scope: any): PoliceticketTypeItem {
   <div class="type-manage">
     <SearchBar :actions="actions" @search="handleSearch" @reset="handleReset">
       <template #filters>
-        <el-input
+        <LxInput
           v-model="searchParams.tag as string"
           placeholder="类型标签"
           class="filter-item"

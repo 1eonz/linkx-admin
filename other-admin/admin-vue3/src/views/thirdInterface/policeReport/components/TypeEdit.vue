@@ -20,6 +20,7 @@
  */
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormItemRule } from 'element-plus';
+import { LxInput } from 'lx-ui';
 import { computed, nextTick, reactive, ref } from 'vue';
 
 import {
@@ -128,7 +129,7 @@ function handleDialogOpen(): void {
       class="dialog-form"
     >
       <el-form-item label="类型标签" prop="tag">
-        <el-input v-model="formData.tag as string" placeholder="请输入类型标签" maxlength="64" />
+        <LxInput v-model="formData.tag as string" placeholder="请输入类型标签" :maxlength="64" />
       </el-form-item>
     </el-form>
 
