@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, ref } from 'vue'
+
+import { useDemoHudTheme } from '../../../../docs/.vitepress/composables/useDemoHudTheme'
 
 import {
   LxDescriptions,
@@ -23,9 +25,9 @@ const layout = ref<'two-ends' | 'grid'>('two-ends')
 const bordered = ref(false)
 const hudTheme = ref(false)
 const previewState = ref<PreviewState>('ready')
-let originalDark = false
-let originalHud = false
 let retryTimeout: number | undefined
+
+useDemoHudTheme(hudTheme)
 
 const items: LxDescriptionItem[] = [
   { key: 'name', label: '姓名', value: '孙志国' },
@@ -96,28 +98,8 @@ function retryPreview() {
   }, 500)
 }
 
-function setTheme(enabled: boolean) {
-  if (typeof document === 'undefined') return
-  document.documentElement.classList.toggle('dark', enabled || originalDark)
-  document.documentElement.classList.toggle(
-    'lx-theme-hud',
-    enabled || originalHud,
-  )
-}
-
-watch(hudTheme, setTheme)
-
-onMounted(() => {
-  originalDark = document.documentElement.classList.contains('dark')
-  originalHud = document.documentElement.classList.contains('lx-theme-hud')
-  setTheme(hudTheme.value)
-})
-
 onBeforeUnmount(() => {
   if (retryTimeout !== undefined) window.clearTimeout(retryTimeout)
-  if (typeof document === 'undefined') return
-  document.documentElement.classList.toggle('dark', originalDark)
-  document.documentElement.classList.toggle('lx-theme-hud', originalHud)
 })
 </script>
 
