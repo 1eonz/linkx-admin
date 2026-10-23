@@ -18,17 +18,23 @@
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { ElDatePicker, provideGlobalConfig } from 'element-plus'
-import type { DateCell, DatePickerInstance } from 'element-plus'
+import type {
+  DateCell,
+  DatePickerInstance,
+  PopperCoreConfigProps,
+} from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
 import {
   computed,
   getCurrentInstance,
+  h,
   nextTick,
   onBeforeUnmount,
   onMounted,
   onUpdated,
   ref,
+  render,
   useAttrs,
 } from 'vue'
 
@@ -38,6 +44,7 @@ import type {
   LxDatePickerProps,
 } from './types'
 import { syncAriaDescribedBy } from '../../utils/syncAriaDescribedBy'
+import LxIcon from '../LxIcon/index.vue'
 import 'element-plus/es/components/date-picker/style/css'
 import './style.css'
 
@@ -116,10 +123,83 @@ const instanceClass = `lx-date-picker--instance-${getCurrentInstance()?.uid ?? '
 const instancePopperClass = `lx-date-picker__popper--instance-${getCurrentInstance()?.uid ?? 'unknown'}`
 const dualPanelClass = 'lx-date-picker__popper--dual-panel'
 const viewportFitClass = 'lx-date-picker__popper--viewport-fit'
+const scrollableClass = 'lx-date-picker__popper--scrollable'
+const scrollCueHeight = 20
 const isNarrowViewport = ref(false)
 const singlePanel = computed(() => props.singlePanel ?? isNarrowViewport.value)
 let viewportQuery: MediaQueryList | undefined
 let viewportFitFrame: number | undefined
+let scrollPanel: HTMLElement | undefined
+let scrollCue: HTMLElement | undefined
+let panelResizeObserver: ResizeObserver | undefined
+
+type PickerPopperOptions = NonNullable<PopperCoreConfigProps['popperOptions']>
+type PickerPopperModifier = NonNullable<
+  PickerPopperOptions['modifiers']
+>[number]
+
+function getScrollInset(value: string, scrollportHeight: number): number {
+  const size = Number.parseFloat(value)
+  if (!Number.isFinite(size)) return 0
+  return Math.max(
+    0,
+    value.endsWith('%') ? (size * scrollportHeight) / 100 : size,
+  )
+}
+
+function getTriggerScrollMargin(): number {
+  const trigger = getPickerContainer()
+  return trigger
+    ? getScrollInset(
+        window.getComputedStyle(trigger).scrollMarginBlockStart,
+        getViewportHeight(),
+      )
+    : 0
+}
+
+function isPickerPopperOptions(value: unknown): value is PickerPopperOptions {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    (!('modifiers' in value) || Array.isArray(value.modifiers))
+  )
+}
+
+/** 默认边界保留 8px；宿主同名 modifier 的选项、回调与启停设置优先。 */
+function getPopperOptions(): PickerPopperOptions {
+  const supplied = attrs['popper-options'] ?? attrs.popperOptions
+  const options = isPickerPopperOptions(supplied) ? supplied : {}
+  const defaultOffset = typeof attrs.offset === 'number' ? attrs.offset : 12
+  const defaults: PickerPopperModifier[] = [
+    { name: 'flip', options: { padding: 8 } },
+    { name: 'preventOverflow', options: { padding: 8, altAxis: true } },
+    {
+      name: 'offset',
+      options: {
+        // 上方弹层避让宿主声明的字段上下文，不推测标签或固定导航结构。
+        offset: ({ placement }: { placement: string }) => [
+          0,
+          placement.startsWith('top')
+            ? Math.max(defaultOffset, getTriggerScrollMargin() + 8)
+            : defaultOffset,
+        ],
+      },
+    },
+  ]
+  const modifiers = new Map(
+    defaults.map((modifier) => [modifier.name, modifier]),
+  )
+  for (const modifier of options.modifiers ?? []) {
+    const previous = modifiers.get(modifier.name)
+    modifiers.set(modifier.name, {
+      ...previous,
+      ...modifier,
+      options: { ...previous?.options, ...modifier.options },
+      data: { ...previous?.data, ...modifier.data },
+    })
+  }
+  return { ...options, modifiers: Array.from(modifiers.values()) }
+}
 
 function getViewportHeight(): number {
   return Math.min(
@@ -171,6 +251,8 @@ function syncInputDescriptions(): void {
 }
 
 let rangeFocusFrame: number | undefined
+let openPrepareFrame: number | undefined
+let openPrepareTimeout: number | undefined
 let focusedRangeInput: HTMLInputElement | undefined
 
 function getVisiblePopper(): HTMLElement | undefined {
@@ -189,12 +271,69 @@ function getPickerPopper(): HTMLElement | undefined {
 
 function clearViewportFit(popper: HTMLElement): void {
   popper.classList.remove(viewportFitClass)
+  popper.classList.remove(scrollableClass)
   popper.style.removeProperty('--lx-date-picker-fit-top')
   popper.style.removeProperty('--lx-date-picker-fit-left')
   popper.style.removeProperty('--lx-date-picker-fit-max-width')
   popper.style.removeProperty('--lx-date-picker-fit-max-height')
   const panel = popper.querySelector<HTMLElement>('.el-picker-panel')
   panel?.style.removeProperty('--lx-date-picker-fit-panel-height')
+}
+
+function syncScrollCue(): void {
+  const panel = scrollPanel
+  const cue = scrollCue
+  const popper = getVisiblePopper()
+  if (!panel || !cue || !popper) return
+
+  const reservedHeight = popper.classList.contains(scrollableClass)
+    ? scrollCueHeight
+    : 0
+  const overflows =
+    popper.classList.contains(viewportFitClass) &&
+    panel.scrollHeight > panel.clientHeight + reservedHeight + 1
+  // 底带保持稳定高度；滚到底部仅隐藏图标，不改变可滚动日期区域。
+  popper.classList.toggle(scrollableClass, overflows)
+  cue.hidden =
+    !overflows || panel.scrollHeight - panel.clientHeight - panel.scrollTop <= 1
+}
+
+function stopPanelScrollTracking(): void {
+  scrollPanel?.removeEventListener('scroll', syncScrollCue)
+  panelResizeObserver?.disconnect()
+  panelResizeObserver = undefined
+  scrollPanel = undefined
+  if (scrollCue) {
+    render(null, scrollCue)
+    scrollCue.remove()
+    scrollCue = undefined
+  }
+}
+
+function trackPanelScrolling(popper: HTMLElement): void {
+  const panel = popper.querySelector<HTMLElement>(':scope > .el-picker-panel')
+  if (!panel) return
+  if (scrollPanel !== panel) {
+    stopPanelScrollTracking()
+    scrollPanel = panel
+    const cue = document.createElement('span')
+    cue.className = 'lx-date-picker__scroll-cue'
+    cue.setAttribute('aria-hidden', 'true')
+    cue.hidden = true
+    popper.append(cue)
+    render(h(LxIcon, { name: 'chevron-down', size: 16 }), cue)
+    scrollCue = cue
+    panel.addEventListener('scroll', syncScrollCue, { passive: true })
+    if (typeof ResizeObserver !== 'undefined') {
+      panelResizeObserver = new ResizeObserver(syncScrollCue)
+      panelResizeObserver.observe(panel)
+      // 内容高度可能在面板固定高度不变时更新，例如快捷项或时间栏变化。
+      Array.from(panel.children).forEach((child) =>
+        panelResizeObserver?.observe(child),
+      )
+    }
+  }
+  syncScrollCue()
 }
 
 function getScrollableAncestor(element: HTMLElement): HTMLElement | undefined {
@@ -229,16 +368,39 @@ function preparePickerForOpen(allowOpen = false): void {
 
   const triggerBounds = trigger.getBoundingClientRect()
   const viewportTop = window.visualViewport?.offsetTop ?? 0
+  const scrollableAncestor = getScrollableAncestor(trigger)
+  const scrollport =
+    scrollableAncestor ?? document.scrollingElement ?? document.documentElement
+  const scrollportTop = scrollableAncestor
+    ? Math.max(
+        viewportTop,
+        scrollableAncestor.getBoundingClientRect().top +
+          scrollableAncestor.clientTop,
+      )
+    : viewportTop
+  const scrollPadding = getScrollInset(
+    window.getComputedStyle(scrollport).scrollPaddingBlockStart,
+    scrollableAncestor?.clientHeight ?? viewportHeight,
+  )
+  const contextTop = Math.max(
+    viewportTop + 8,
+    scrollportTop + scrollPadding + getTriggerScrollMargin(),
+  )
   const reservedPanelHeight = Math.min(480, Math.max(96, viewportHeight - 64))
-  const targetTop =
+  const targetTop = Math.max(
+    contextTop,
     viewportTop +
-    Math.max(8, viewportHeight - reservedPanelHeight - triggerBounds.height - 8)
-  if (triggerBounds.top <= targetTop + 1) return
+      viewportHeight -
+      reservedPanelHeight -
+      triggerBounds.height -
+      8,
+  )
+  if (triggerBounds.top >= contextTop - 1 && triggerBounds.top <= targetTop + 1)
+    return
 
   const scrollDistance = triggerBounds.top - targetTop
-  if (scrollDistance <= 1) return
+  if (Math.abs(scrollDistance) <= 1) return
 
-  const scrollableAncestor = getScrollableAncestor(trigger)
   if (scrollableAncestor) {
     scrollableAncestor.scrollBy({ top: scrollDistance, behavior: 'instant' })
   } else {
@@ -284,7 +446,22 @@ function handlePickerOpenKeydown(event: KeyboardEvent): void {
     target instanceof HTMLInputElement &&
     getPickerContainer()?.contains(target)
   ) {
-    preparePickerForOpen()
+    // 键盘事件在内核打开弹层前触发；当前帧先避让一次，下一帧再校正浏览器默认聚焦带来的滚动。
+    preparePickerForOpen(true)
+    if (openPrepareFrame !== undefined) {
+      cancelAnimationFrame(openPrepareFrame)
+    }
+    if (openPrepareTimeout !== undefined) {
+      window.clearTimeout(openPrepareTimeout)
+    }
+    openPrepareFrame = requestAnimationFrame(() => {
+      openPrepareFrame = undefined
+      preparePickerForOpen(true)
+    })
+    openPrepareTimeout = window.setTimeout(() => {
+      openPrepareTimeout = undefined
+      preparePickerForOpen(true)
+    }, 0)
   }
 }
 
@@ -295,6 +472,7 @@ function syncViewportFit(): void {
   const viewportHeight = getViewportHeight()
   if (viewportHeight > 640 && !isNarrowViewport.value) {
     clearViewportFit(popper)
+    trackPanelScrolling(popper)
     return
   }
 
@@ -317,13 +495,18 @@ function syncViewportFit(): void {
     const viewportBottom = viewportTop + currentViewportHeight
     const overflowsViewport =
       popperBounds.top < viewportTop + 8 ||
-      popperBounds.bottom > viewportBottom - 8
+      popperBounds.bottom > viewportBottom - 8 ||
+      popperBounds.left < viewportLeft ||
+      popperBounds.right > viewportLeft + viewportWidth
     const overlapsTrigger =
       popperBounds.top < triggerBounds.bottom &&
       popperBounds.bottom > triggerBounds.top
     const alreadyFitted = currentPopper.classList.contains(viewportFitClass)
 
-    if (!alreadyFitted && !overflowsViewport && !overlapsTrigger) return
+    if (!alreadyFitted && !overflowsViewport && !overlapsTrigger) {
+      trackPanelScrolling(currentPopper)
+      return
+    }
 
     const top = Math.min(
       Math.max(triggerBounds.bottom + 8, viewportTop + 8),
@@ -356,6 +539,7 @@ function syncViewportFit(): void {
       `${maxHeight}px`,
     )
     currentPopper.classList.add(viewportFitClass)
+    trackPanelScrolling(currentPopper)
   }
 
   if (popper.classList.contains(viewportFitClass)) {
@@ -384,6 +568,11 @@ function handlePickerVisibleChange(visible: boolean): void {
   if (visible) {
     nextTick(scheduleViewportFit)
   } else {
+    stopPanelScrollTracking()
+    if (viewportFitFrame !== undefined) {
+      window.cancelAnimationFrame(viewportFitFrame)
+      viewportFitFrame = undefined
+    }
     const popper = getPickerPopper()
     if (popper) clearViewportFit(popper)
   }
@@ -646,6 +835,15 @@ onMounted(() => {
 let stopViewportTracking: (() => void) | undefined
 
 onBeforeUnmount(() => {
+  if (openPrepareFrame !== undefined) {
+    cancelAnimationFrame(openPrepareFrame)
+    openPrepareFrame = undefined
+  }
+  if (openPrepareTimeout !== undefined) {
+    window.clearTimeout(openPrepareTimeout)
+    openPrepareTimeout = undefined
+  }
+  stopPanelScrollTracking()
   stopViewportTracking?.()
   document.removeEventListener('focus', handlePickerOpenFocus, true)
   document.removeEventListener('click', handlePickerOpenClick, true)
@@ -695,6 +893,7 @@ defineExpose({
     class="lx-date-picker"
     :class="[`lx-date-picker--${size}`, instanceClass]"
     v-bind="$attrs"
+    :popper-options="getPopperOptions()"
     :popper-class="[
       'lx-date-picker__popper',
       instancePopperClass,

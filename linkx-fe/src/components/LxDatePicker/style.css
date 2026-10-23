@@ -52,6 +52,11 @@
   font-family: var(--lx-font-mono);
 }
 
+/* 区间分隔符是必要正文信息，使用正文令牌保证亮色表面上的对比度。 */
+.lx-date-picker .el-range-separator {
+  color: var(--lx-text-secondary-strong);
+}
+
 /* 禁用态：半透明（单值 is-disabled 在根 / 区间与 wrapper 同元素） */
 .lx-date-picker.is-disabled .el-input__wrapper,
 .lx-date-picker.el-input__wrapper.is-disabled {
@@ -339,6 +344,44 @@ html:root
   max-height: var(--lx-date-picker-fit-panel-height, calc(100dvh - 16px));
   overflow: auto;
   overscroll-behavior: contain;
+}
+
+/* 极窄触屏保留日期格命中区，将必要的水平溢出限制在面板内。 */
+html:root
+  .lx-date-picker__popper--viewport-fit
+  > .el-picker-panel.single-panel {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 真实溢出时预留独立提示带，日期与快捷项不被指示图标覆盖。 */
+.lx-date-picker__popper--viewport-fit.lx-date-picker__popper--scrollable {
+  height: var(--lx-date-picker-fit-max-height);
+}
+
+.lx-date-picker__popper--viewport-fit.lx-date-picker__popper--scrollable
+  > .el-picker-panel {
+  height: calc(var(--lx-date-picker-fit-panel-height) - 20px);
+  max-height: calc(var(--lx-date-picker-fit-panel-height) - 20px);
+}
+
+.lx-date-picker__scroll-cue {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  border-top: 1px solid var(--lx-border);
+  background: var(--lx-bg-card);
+  color: var(--lx-text-regular);
+  pointer-events: none;
+}
+
+.lx-date-picker__scroll-cue[hidden] {
+  display: none;
 }
 
 .lx-date-picker__popper--viewport-fit .el-date-range-picker:not(.single-panel) {

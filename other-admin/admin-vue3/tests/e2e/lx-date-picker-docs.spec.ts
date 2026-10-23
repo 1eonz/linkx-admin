@@ -15,6 +15,147 @@ function readMonthHeadings(text: string): string[] {
     .filter((line) => /^\d{4}\s*年\s*\d{1,2}\s*月$/.test(line));
 }
 
+for (const kind of ['range', 'shortcuts']) {
+  test(`390x375 ${kind} 滚动线索随剩余内容、重开和视口高度同步`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 375 });
+    await page.goto('/components/lxdatepicker');
+    const input = page.locator(`.lx-date-picker-demo [data-testid="${kind}"] .el-range-input`).first();
+    await input.click();
+    const popper = page.locator('.lx-date-picker__popper[aria-hidden="false"]');
+    const panel = popper.locator('.el-picker-panel');
+    const cue = popper.locator(':scope > .lx-date-picker__scroll-cue');
+    await expect(cue).toBeVisible();
+    await expect(cue).toHaveAttribute('aria-hidden', 'true');
+    await expect
+      .poll(() => panel.evaluate((element) => element.scrollHeight - element.clientHeight - element.scrollTop))
+      .toBeGreaterThan(1);
+
+    const pageScrollY = await page.evaluate(() => window.scrollY);
+    const bounds = await panel.boundingBox();
+    if (!bounds) throw new Error('日期滚动面板未进入视口');
+    await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+    await page.mouse.wheel(0, 1000);
+    await expect
+      .poll(() => panel.evaluate((element) => element.scrollHeight - element.clientHeight - element.scrollTop))
+      .toBeLessThanOrEqual(1);
+    await expect(cue).toBeHidden();
+    expect(await page.evaluate(() => window.scrollY)).toBe(pageScrollY);
+    const lastDate = panel.locator('.el-date-table tbody tr:last-child td:not(.disabled):not(.week)').first();
+    const lastDateGeometry = await lastDate.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const panel = element.closest('.el-picker-panel')?.getBoundingClientRect();
+      const hit = document.elementFromPoint(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
+      return {
+        withinPanel: Boolean(panel && bounds.top >= panel.top && bounds.bottom <= panel.bottom + 1),
+        uncovered: Boolean(hit && element.contains(hit)),
+      };
+    });
+    expect(lastDateGeometry).toEqual({ withinPanel: true, uncovered: true });
+    await lastDate.click();
+
+    await panel.evaluate((element) => element.scrollTo({ top: 0 }));
+    await expect(cue).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(popper).toBeHidden();
+    await input.click();
+    await expect(cue).toBeVisible();
+
+    await page.setViewportSize({ width: 390, height: 1000 });
+    await expect.poll(() => panel.evaluate((element) => element.scrollHeight <= element.clientHeight + 1)).toBe(true);
+    await expect(cue).toBeHidden();
+    await page.setViewportSize({ width: 390, height: 375 });
+    await expect(cue).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(popper).toBeHidden();
+    await expect(page.locator('.lx-date-picker__scroll-cue:visible')).toHaveCount(0);
+  });
+
+  test(`1280x720 ${kind} 弹层避开可见标签并保留上下安全边距`, async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.goto('/components/lxdatepicker');
+    const section = page.locator(`.lx-date-picker-demo [data-testid="${kind}"]`);
+    await section.locator('.el-range-input').first().click();
+    const popper = page.locator('.lx-date-picker__popper[aria-hidden="false"]');
+    await expect(popper).toBeVisible();
+    await expect
+      .poll(() =>
+        section.evaluate((element) => {
+          const label = element.querySelector('.lx-date-picker-demo__label')?.getBoundingClientRect();
+          const popper = document
+            .querySelector('.lx-date-picker__popper[aria-hidden="false"]')
+            ?.getBoundingClientRect();
+          if (!label || !popper) throw new Error('日期标签或弹层未渲染');
+          return {
+            labelWithinViewport:
+              label.left >= 0 &&
+              label.right <= window.innerWidth &&
+              label.top >= 0 &&
+              label.bottom <= window.innerHeight,
+            overlapsLabel:
+              popper.left < label.right &&
+              popper.right > label.left &&
+              popper.top < label.bottom &&
+              popper.bottom > label.top,
+            topSafe: popper.top >= 8,
+            bottomSafe: popper.bottom <= window.innerHeight - 8,
+          };
+        }),
+      )
+      .toEqual({ labelWithinViewport: true, overlapsLabel: false, topSafe: true, bottomSafe: true });
+  });
+
+  for (const width of [320, 390]) {
+    for (const openMethod of ['click', 'ArrowDown']) {
+      test(`${width}x375 ${kind} ${openMethod} 打开后字段身份和触发器实际未被导航遮挡`, async ({ page }) => {
+        await page.setViewportSize({ width, height: 375 });
+        await page.goto('/components/lxdatepicker');
+        const section = page.locator(`.lx-date-picker-demo [data-testid="${kind}"]`);
+        const input = section.locator('.el-range-input').first();
+        if (openMethod === 'click') {
+          await input.click();
+        } else {
+          await input.focus();
+          await page.keyboard.press('ArrowDown');
+        }
+        await expect(page.locator('.lx-date-picker__popper[aria-hidden="false"]')).toBeVisible();
+        await expect
+          .poll(() =>
+            section.evaluate((element) => {
+              const targets = [
+                element.querySelector('.lx-date-picker-demo__label'),
+                element.querySelector('.lx-date-picker'),
+              ];
+              return targets.map((target) => {
+                if (!target) throw new Error('日期字段缺少可见标签或触发器');
+                const bounds = target.getBoundingClientRect();
+                const points = [0.25, 0.5, 0.75].map((fraction) => ({
+                  x: bounds.left + bounds.width * fraction,
+                  y: bounds.top + bounds.height / 2,
+                }));
+                return {
+                  withinViewport:
+                    bounds.top >= 0 &&
+                    bounds.bottom <= window.innerHeight &&
+                    bounds.left >= 0 &&
+                    bounds.right <= window.innerWidth,
+                  belowFixedNavigation: bounds.top >= 48,
+                  uncovered: points.every(({ x, y }) => {
+                    const hit = document.elementFromPoint(x, y);
+                    return hit !== null && (hit === target || target.contains(hit));
+                  }),
+                };
+              });
+            }),
+          )
+          .toEqual([
+            { withinViewport: true, belowFixedNavigation: true, uncovered: true },
+            { withinViewport: true, belowFixedNavigation: true, uncovered: true },
+          ]);
+      });
+    }
+  }
+}
+
 function getContrastRatio(foreground: string, background: string): number {
   const luminance = (color: string) => {
     const channels = color
@@ -668,11 +809,25 @@ test('窄屏显式双月日历可在弹层内横向滚动访问两个月份', as
 test('文档站 HUD 开关一致作用于整页和日期弹层', async ({ page }) => {
   await page.goto('/components/lxdatepicker');
   const demo = page.locator('.lx-date-picker-demo');
+  const rangeSeparator = demo.locator('[data-testid="range"] .el-range-separator');
+  const lightSeparatorColors = await rangeSeparator.evaluate((element) => {
+    const wrapper = element.closest<HTMLElement>('.el-input__wrapper');
+    if (!wrapper) throw new Error('日期区间分隔符缺少触发器表面');
+
+    return {
+      foreground: getComputedStyle(element).color,
+      background: getComputedStyle(wrapper).backgroundColor,
+    };
+  });
+  expect(
+    getContrastRatio(lightSeparatorColors.foreground, lightSeparatorColors.background),
+    `亮色区间分隔符对比度：${JSON.stringify(lightSeparatorColors)}`,
+  ).toBeGreaterThanOrEqual(4.5);
+
   const hudSwitch = demo.getByLabel('文档站整体深色（HUD）');
   await hudSwitch.check();
   await expect(page.locator('html')).toHaveClass(/dark/);
   await expect(page.locator('html')).toHaveClass(/lx-theme-hud/);
-  const rangeSeparator = demo.locator('[data-testid="range"] .el-range-separator');
   const rangeWrapper = rangeSeparator.locator('xpath=..');
   await expect
     .poll(() => rangeWrapper.evaluate((element) => getComputedStyle(element).backgroundColor))
@@ -794,7 +949,7 @@ test('文档站 HUD 开关一致作用于整页和日期弹层', async ({ page }
   await expect(page.locator('html')).not.toHaveClass(/dark/);
   await expect(page.locator('html')).not.toHaveClass(/lx-theme-hud/);
   await demo.getByLabel('布控生效日期', { exact: true }).click();
-  const lightPopper = page.locator('.lx-date-picker__popper[aria-hidden="false"]');
+  const lightPopper = page.locator('.lx-date-picker__popper[aria-hidden="false"]').last();
   await expect(lightPopper).toBeVisible();
   await expect(lightPopper).not.toHaveClass(/lx-theme-hud/);
   await expect

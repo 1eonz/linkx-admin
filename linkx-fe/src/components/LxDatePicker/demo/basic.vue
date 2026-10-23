@@ -502,6 +502,15 @@ const shortcuts: LxDatePickerShortcut[] = [
   /* 区间日期选择器有 EP 的 350px 默认宽度；Demo 字段必须在窄屏容器内收缩。 */
   width: 100% !important;
   max-width: 100%;
+  /* 向上展开时为可见标签预留空间，短屏自动滚动也使用这个标准间距。 */
+  scroll-margin-block-start: 28px;
+}
+
+@media (max-width: 640px), (max-height: 480px) {
+  :deep(.lx-date-picker-demo__field .lx-date-picker) {
+    /* 窄屏文档导航为 48px，字段标签需额外留出 24px 与 16px 间距。 */
+    scroll-margin-block-start: 88px;
+  }
 }
 
 .lx-date-picker-demo__hint,

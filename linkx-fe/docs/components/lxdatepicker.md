@@ -106,6 +106,26 @@ import Basic from '../../src/components/LxDatePicker/demo/basic.vue';
 
 窄屏（视口宽度不大于 640px）下快捷预设改为日历上方的横排按钮，日期格与翻月按钮提供至少 44px 的触控区域。通过点击或 ArrowDown 打开面板前，组件会将触发器调整到可用位置，使弹层优先显示在字段下方；极短视口或弹层仍越界时，弹层保持贴近字段并限制最大高度，箭头隐藏，日期面板内部可滚动且滚动不会带动页面。弹层打开后会响应窗口和可视视口变化；组件关闭或恢复宽屏布局后继续使用 Element Plus 原生定位。窄屏显式设置 `singlePanel=false` 时保留双月布局，弹层内容可在面板内横向滚动。
 
+### 固定头部与字段上下文
+
+宿主应在触发器上设置 `scroll-margin-block-start`，为字段标签和固定头部预留空间；滚动容器已有 `scroll-padding-block-start` 时也会参与短屏自动滚动的位置计算。库不识别业务导航或文档站内部选择器。Demo 默认为标签预留 28px，窄屏或极短屏为顶部导航及标签预留 88px；业务页面应按自己的布局设置，不能直接假定相同导航高度。
+
+```css
+.date-field {
+  scroll-margin-block-start: 28px;
+}
+
+@media (max-width: 640px), (max-height: 480px) {
+  .date-field {
+    scroll-margin-block-start: 88px;
+  }
+}
+```
+
+默认浮层避让视口边缘 8px；向上放置时按触发器的顶部滚动间距预留上下文。`popper-options` 仍可透传：同名 modifier 的 options 在默认值上合并，宿主显式提供的 offset、边界、启用状态和其他回调保留。主动覆写安全间距时，宿主需要自行验证遮挡及视口边界。
+
+高度受限且面板下方还有内容时，底部显示非交互的向下图标；滚到末尾后隐藏，反向滚动后恢复。提示带独立于日期点击区域，不额外加入 Tab 顺序；日期、快捷项和选择提交继续由 EP 内核管理。
+
 周首由已注册并注入日期对象的 Day.js `zh-cn` locale 决定；组件不会切换宿主的全局默认 locale。
 
 ## Vue3 宿主适配

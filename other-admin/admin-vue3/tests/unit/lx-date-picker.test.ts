@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import dayjs from 'dayjs';
-import type { DateCell } from 'element-plus';
+import { ElDatePicker, type DateCell, type PopperCoreConfigProps } from 'element-plus';
 import { LxDatePicker } from 'lx-ui';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { h, nextTick, ref } from 'vue';
@@ -9,9 +9,198 @@ import { h, nextTick, ref } from 'vue';
 // 每用例前清空避免 querySelector 命中旧实例的 popper
 beforeEach(() => {
   document.body.innerHTML = '';
+  vi.spyOn(window, 'scrollBy').mockImplementation(() => undefined);
 });
 
 describe('LxDatePicker', () => {
+  it('合并默认边界与宿主 Popper modifier，并保留回调、禁用设置和动态更新', async () => {
+    const offset = vi.fn(() => [0, 24]);
+    const modifierFn = vi.fn();
+    const onFirstUpdate = vi.fn();
+    const config = ref<PopperCoreConfigProps['popperOptions']>({
+      strategy: 'fixed',
+      onFirstUpdate,
+      modifiers: [
+        { name: 'offset', options: { offset } },
+        { name: 'flip', enabled: false, options: { fallbackPlacements: ['top'] } },
+        { name: 'preventOverflow', options: { altAxis: true } },
+        { name: 'host-modifier', enabled: true, phase: 'main', fn: modifierFn },
+      ],
+    });
+    const wrapper = mount({
+      render: () => h(LxDatePicker, { modelValue: '', 'popper-options': config.value }),
+    });
+
+    try {
+      const kernel = wrapper.findComponent(ElDatePicker);
+      const initial = kernel.props('popperOptions');
+      expect(initial.strategy).toBe('fixed');
+      expect(initial.onFirstUpdate).toBe(onFirstUpdate);
+      expect(initial.modifiers?.find((modifier) => modifier.name === 'offset')?.options?.offset).toBe(offset);
+      expect(initial.modifiers?.find((modifier) => modifier.name === 'flip')).toMatchObject({
+        enabled: false,
+        options: { padding: 8, fallbackPlacements: ['top'] },
+      });
+      expect(initial.modifiers?.find((modifier) => modifier.name === 'preventOverflow')?.options).toEqual({
+        padding: 8,
+        altAxis: true,
+      });
+      expect(initial.modifiers?.find((modifier) => modifier.name === 'host-modifier')?.fn).toBe(modifierFn);
+
+      config.value = { modifiers: [{ name: 'preventOverflow', options: { padding: 16 } }] };
+      await nextTick();
+      const updated = kernel.props('popperOptions');
+      expect(updated.modifiers?.find((modifier) => modifier.name === 'preventOverflow')?.options?.padding).toBe(16);
+      expect(updated.modifiers?.some((modifier) => modifier.name === 'host-modifier')).toBe(false);
+      expect(updated.modifiers?.find((modifier) => modifier.name === 'flip')?.options?.padding).toBe(8);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it('上方 Popper 偏移读取各实例 scroll-margin，下方保留宿主 offset', () => {
+    const wrapper = mount({
+      render: () =>
+        h('div', [
+          h(LxDatePicker, { modelValue: '', style: 'scroll-margin-block-start: 28px', offset: 14 }),
+          h(LxDatePicker, { modelValue: '', style: 'scroll-margin-block-start: 44px' }),
+        ]),
+    });
+    try {
+      const kernels = wrapper.findAllComponents(ElDatePicker);
+      const first = kernels[0].props('popperOptions').modifiers?.find((modifier) => modifier.name === 'offset')
+        ?.options?.offset;
+      const second = kernels[1].props('popperOptions').modifiers?.find((modifier) => modifier.name === 'offset')
+        ?.options?.offset;
+      expect(typeof first).toBe('function');
+      expect(typeof second).toBe('function');
+      expect(first({ placement: 'top-start' })).toEqual([0, 36]);
+      expect(first({ placement: 'bottom-start' })).toEqual([0, 14]);
+      expect(second({ placement: 'top-start' })).toEqual([0, 52]);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it('短屏打开前合并触发器 scroll-margin 与滚动容器 scroll-padding', async () => {
+    const originalHeight = window.innerHeight;
+    vi.stubGlobal('innerHeight', 375);
+    const scrollBy = vi.fn();
+    const wrapper = mount(
+      {
+        render: () =>
+          h('div', { style: 'overflow-y: auto; scroll-padding-block-start: 12px' }, [
+            h(LxDatePicker, { modelValue: '', style: 'scroll-margin-block-start: 84px' }),
+          ]),
+      },
+      { attachTo: document.body },
+    );
+    try {
+      const container = wrapper.element;
+      Object.defineProperties(container, {
+        scrollHeight: { configurable: true, value: 1000 },
+        clientHeight: { configurable: true, value: 300 },
+        scrollBy: { configurable: true, value: scrollBy },
+      });
+      vi.spyOn(container, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 20, 300, 300));
+      const trigger = wrapper.find('.lx-date-picker').element;
+      vi.spyOn(trigger, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 300, 280, 44));
+      await wrapper.find('input').trigger('click');
+      expect(scrollBy).toHaveBeenCalledWith({ top: 184, behavior: 'instant' });
+      expect(window.scrollBy).not.toHaveBeenCalled();
+    } finally {
+      wrapper.unmount();
+      vi.stubGlobal('innerHeight', originalHeight);
+    }
+  });
+
+  it('滚动提示按真实余量隐藏与恢复，内容缩短及关闭后清理', async () => {
+    const originalHeight = window.innerHeight;
+    const originalResizeObserver = globalThis.ResizeObserver;
+    const observers: PanelResizeObserver[] = [];
+    class PanelResizeObserver implements ResizeObserver {
+      readonly targets = new Set<Element>();
+      readonly observe = vi.fn((target: Element) => this.targets.add(target));
+      readonly unobserve = vi.fn((target: Element) => this.targets.delete(target));
+      readonly disconnect = vi.fn();
+      constructor(readonly callback: ResizeObserverCallback) {
+        observers.push(this);
+      }
+    }
+    vi.stubGlobal('innerHeight', 375);
+    vi.stubGlobal('ResizeObserver', PanelResizeObserver);
+    const wrapper = mount(LxDatePicker, {
+      props: { modelValue: '' },
+      attachTo: document.body,
+      // visible-change 由真实过渡钩子发出；默认 Transition stub 不会执行该钩子。
+      global: { stubs: { transition: false } },
+    });
+    let unmounted = false;
+    try {
+      // 使用内核真实点击入口打开面板；focus 只更新焦点状态，不保证弹出日期面板。
+      const input = wrapper.find('input');
+      input.element.focus();
+      await input.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+      await vi.waitFor(() => expect(document.querySelector('.lx-date-picker__scroll-cue')).not.toBeNull());
+      const popper = document.querySelector<HTMLElement>('.lx-date-picker__popper')!;
+      const panel = popper.querySelector<HTMLElement>('.el-picker-panel')!;
+      const cue = popper.querySelector<HTMLElement>('.lx-date-picker__scroll-cue')!;
+      const observer = observers.find(
+        (observer) =>
+          observer.targets.has(panel) && Array.from(panel.children).every((child) => observer.targets.has(child)),
+      );
+      expect(observer).toBeDefined();
+      let contentHeight = 400;
+      Object.defineProperties(panel, {
+        scrollHeight: { configurable: true, get: () => contentHeight },
+        clientHeight: { configurable: true, value: 240 },
+      });
+      panel.dispatchEvent(new Event('scroll'));
+      expect(cue.hidden).toBe(false);
+      expect(cue.getAttribute('aria-hidden')).toBe('true');
+      expect(cue.querySelector('[data-icon-name="chevron-down"]')).not.toBeNull();
+      expect(popper.classList.contains('lx-date-picker__popper--scrollable')).toBe(true);
+
+      panel.scrollTop = 160;
+      panel.dispatchEvent(new Event('scroll'));
+      expect(cue.hidden).toBe(true);
+      panel.scrollTop = 20;
+      panel.dispatchEvent(new Event('scroll'));
+      expect(cue.hidden).toBe(false);
+      contentHeight = 200;
+      observer!.callback([], observer!);
+      expect(cue.hidden).toBe(true);
+      expect(popper.classList.contains('lx-date-picker__popper--scrollable')).toBe(false);
+      contentHeight = 400;
+      observer!.callback([], observer!);
+      expect(cue.hidden).toBe(false);
+      expect(popper.classList.contains('lx-date-picker__popper--scrollable')).toBe(true);
+
+      await input.trigger('keydown', { key: 'Escape', code: 'Escape' });
+      await vi.waitFor(() => expect(popper.querySelector('.lx-date-picker__scroll-cue')).toBeNull());
+      expect(observer!.disconnect).toHaveBeenCalledOnce();
+      panel.dispatchEvent(new Event('scroll'));
+      observer!.callback([], observer!);
+      expect(popper.querySelector('.lx-date-picker__scroll-cue')).toBeNull();
+
+      input.element.blur();
+      input.element.focus();
+      await input.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+      await vi.waitFor(() => expect(popper.querySelector('.lx-date-picker__scroll-cue')).not.toBeNull());
+      const reopenedObserver = observers.findLast((observer) => observer.targets.has(panel));
+      expect(reopenedObserver).not.toBe(observer);
+      wrapper.unmount();
+      unmounted = true;
+      expect(reopenedObserver!.disconnect).toHaveBeenCalledOnce();
+      reopenedObserver!.callback([], reopenedObserver!);
+      expect(popper.querySelector('.lx-date-picker__scroll-cue')).toBeNull();
+    } finally {
+      if (!unmounted) wrapper.unmount();
+      vi.stubGlobal('innerHeight', originalHeight);
+      vi.stubGlobal('ResizeObserver', originalResizeObserver);
+    }
+  });
+
   /**
    * EP 2.14.6 契约：date-picker 内核根为 ElTooltip 包装（Fragment 根），
    * mount 包装层 classes() 恒为空；锚定类 lx-date-picker 落在触发器

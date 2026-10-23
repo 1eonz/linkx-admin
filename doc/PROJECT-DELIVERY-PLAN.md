@@ -1,5 +1,25 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-23 LxInput 前后缀/密码边框问题复核
+
+- **排查结论**：在文档页实机渲染中，密码输入及普通/透传字段由 `.el-input__wrapper` 绘制 `1px` 实体边框；prepend/append 复合输入在 `.lx-input.el-input-group` 根节点绘制连续 `1px` 边框，内层 wrapper 无边框是避免接缝双线的设计。截图曾因位于页面上方而没有包含目标区，滚动到示例后可见边框。现有工作区样式确保复合输入的根边框和密码输入 wrapper 边框均可见。
+- **回归**：新增 `tests/e2e/lx-input-docs.spec.ts`，检查复合根边框、密码 wrapper 边框、聚焦外环及 HUD 主题，浏览器 **1/1** 通过；验证只针对用户提出的状态，不改组件实现。
+- **状态**：未发现当前边框丢失故障；不增加 UI-10 关闭数，也不覆盖/重写工作区已有 CSS。后续若反馈针对特定浏览器或视口，按该环境复现后再调整。
+
+## 2026-10-22 LxDatePicker 当前实现验证
+
+- **实现**：短屏字段滚动避让与可见身份，弹层上下安全区和滚动提示生命周期；Popper modifier 合并保留宿主配置；区间分隔符采用正文强度令牌达到亮色 AA 对比度。
+- **验证**：DatePicker 单测 **26/26**、文档 E2E **34/34**；lx-ui 类型检查、206 modules 构建、VitePress 文档构建通过。新增窄屏导航实际遮挡、桌面标题避让及亮色对比度断言。文档构建保留已有大 chunk 警告。
+- **审查**：A 当前版评分 **35/40**，未发现 P0–P2；Escape 过渡等待后弹层关闭并将焦点返回起始输入。Assessment B 最终综合、代码审查记录及 snapshot/trend 仍待收口；静态 detector `[]` 只代表扫描目标静态规则零命中，不能代替浏览器 Critique。
+- **下一入口**：继续补齐 DatePicker 正式独立 A/B、建议归因与综合快照/trend，并完成当前版代码审查；严格行仍开放，不能因实现与行为测试通过而关闭。
+
+## 2026-10-22 LxInput 边框问题复核与聚焦样式修正
+
+- **排查结论**：普通、密码及透传输入默认均有真实 `1px` 边框；前后缀复合输入由根节点绘制连续边框。问题出在组件 wrapper 聚焦规则覆盖了 Element Plus 全局主题桥后，仅保留外侧 halo，未排除桥接层的 inset 描边，造成聚焦边框叠层/错色，并非 Demo 丢失边框。
+- **修正**：组件 wrapper 的边框色过渡明确覆盖 `border-color`，聚焦时继续以真实边框承载主色、仅保留外侧 `2px` halo；复合根节点规则未改。中文组件注释说明与全局桥的关系。
+- **验证**：Input 边框 E2E **3/3**（文档无后缀与 `.html` 后缀路由、普通/密码/透传及默认/聚焦，含禁用复合、错误焦点、框外计数）；lx-ui `typecheck` 与 206 modules 构建通过；目标 Prettier 通过；Impeccable detector JSON `[]`、stderr 空、exit 0（仅静态扫描零命中，不作为视觉通过证据）。
+- **状态**：这是针对用户问题的定点修复，不重计 LxInput 正式 A/B、Critique 快照或 UI-10 严格行关闭数；原有正式审查证据见 2026-10-21 LxInput 条目。当前工作区已有 DatePicker 等其他人修改未纳入此修复。
+
 ## 2026-10-21 LxInput 当前版严格复验完成（当前入口）
 
 - **实现**：统一实体单层边框，普通焦点仅附加外光环；禁用复合悬停不变色，错误复合内框不重复画环，HUD槽位与禁用框移除浅色内核阴影。框外统计保留溢出并由独立描边层维持连续外框。密码显隐使用可键盘操作的语义按钮，沿用EP公开状态、选区及事件契约；24/44px触控目标、中文名称/pressed、配置变化恢复遮罩、自定义图标插槽同步。占位字直接解析局部主题令牌，HUD对比度由3.6提升至6.79:1。
@@ -7,6 +27,13 @@
 - **审查**：独立代码复核无新增问题；原始隔离A/B及修后有界复验齐备，A **36/40**，两个Vue源码扫描合法JSON[]/空stderr/exit0，四视图真实overlay仅剩三项文档代码区命中。B发现占位字真实对比度不足，已采纳并双路定点复验，明确披露综合阶段来源。正式快照 `.impeccable/critique/2026-10-21T09-53-40Z__linkx-fe-src-components-lxinput-index-vue.md`，趋势34→34→34→32→36/40。
 - **门禁与剩余**：维持LxInput既有关闭行，UI-10仍 **13/52**，不重复计数。非阻塞P3为Demo桌面字段纵向对齐；文档代码区、真实读屏器/后端/全部宿主组合未验收，不扩大为整站通过。
 - **下一入口**：已启动 `LxDatePicker` 四项旧P2/P3的当前态核对，先区分后续提交已修项，再处理真实剩余缺口；整库UI-10/UI-11完成前不扩大Vue3替换、不删除宿主Element Plus。权限/可信后端契约仍保留阻塞，页面引导暂缓。
+
+### 2026-10-22 LxDatePicker 短屏布局与滚动提示交付
+
+- **实现**：短屏字段滚动避让 `scroll-margin-block-start` 与滚动容器 `scroll-padding-block-start`；向上浮层保留字段上下文和8px视口边界；滚动提示只在真实溢出时出现，滚到底隐藏、反向滚动恢复，关闭/重开/缩放/卸载清理；`popper-options` 按 modifier 名合并默认项并保留宿主配置。Demo 与中文 API 文档说明固定头部空间需按宿主布局配置。
+- **验证**：DatePicker 单测 **26/26**、文档 E2E **34/34**；lx-ui `typecheck`、206 modules 构建、VitePress 文档构建、指定 Prettier/ESLint 与 `git diff --check` 通过。单测使用真实 ArrowDown 路径开关面板，避免直接调用组件内部方法；文档构建保留既有大 chunk 警告。
+- **边界**：当前步骤完成实现及可执行回归，不等于 Impeccable 正式独立 A/B Critique、代码提交/推送或 UI-10 严格行关闭；A/B 最终结果、逐条建议处理、综合快照/trend 与当前版代码审核仍须补齐。真实后端与权限契约不在组件库验证范围。
+- **下一入口**：冻结 DatePicker 源码后继续独立代码审核和 Impeccable A/B 有界审查，确认最终指纹与建议结论后同步审计矩阵；不扩大 Vue3 Element Plus 删除或权限迁移范围。
 
 ### DatePicker 当前缺口已取证
 
@@ -1914,6 +1941,15 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **Assessment B**：六个 detector 目标均为合法 JSON `[]`、stderr 为空、退出码 `0`；Light/HUD、桌面/375px、reduced-motion 六个浏览器场景全部注入成功，页面错误、失败请求和 HTTP 失败均为 `0`。证据目录为 `linkx-fe/.impeccable/critique/metric-section-assessment-b-2026-10-18/`。
 - **正式快照**：分别写入 `.impeccable/critique/2026-10-17T20-43-58Z__linkx-fe-src-components-lxmetriccard-index-vue.md` 与 `...lxsectiontitle-index-vue.md`；趋势分别为 `37/40 → 30/40 → 32/40`、`37/40 → 33/40`。双路归档见 `linkx-fe/.impeccable/critique/metric-section-assessment-2026-10-18/`。
 - **边界**：375px 的 `scrollWidth=615` 归因到 VitePress 文档外壳/代码区，不能直接记为组件缺陷；两个 Demo 没有 loading/error/empty/disabled 入口，因此这些状态仍未完成组件级浏览器验收。当前不增加 UI-10 统一 52 项关闭数，宿主组合回归和整库 UI-11 仍开放。
+
+## 2026-10-23 LxDatePicker 窄屏复核与 LxInput 边框排查
+
+- **LxInput 边框结论**：复核文档 Demo 的前后缀复合输入、密码与透传示例，边框均由组件样式提供；复合输入由 `.lx-input.el-input-group` 根节点绘制连续边框，内部 wrapper 去边框以避免接缝双线，普通/密码/透传输入由 `.el-input__wrapper` 绘制边框。新增文档 E2E 覆盖复合框、密码框、聚焦外环和 HUD 主题，1/1 通过；当前未复现边框缺失，不改组件样式。
+- **DatePicker A/B**：修后独立 Assessment A 为 35/40，无 P0–P2；P3 为 320px 下区间值拥挤。独立 Assessment B 的两个目标 detector 均为 JSON `[]`、stderr 空、退出码 0；四个 Light/HUD/390px reduced-motion/320px 场景 overlay 成功。HUD 3.4:1 命中归因于 VitePress/Shiki 代码块标签，其他代码对比命中也来自文档代码高亮；禁用态分隔符为 4.4:1。移动视口根 `scrollWidth` 等于视口宽度，节点外溢来自文档表格/代码区。
+- **代码复核**：Popper 同名 modifier 合并保留宿主设置、短屏避让读取宿主 `scroll-margin`/`scroll-padding`、滚动提示监听和 ResizeObserver 在关闭/卸载时清理；文档曾将 Demo 窄屏间距写成 84px，已校正为实现值 88px。无 P0–P2 代码缺陷。
+- **边界与下一步**：本波不增加 UI-10 全库关闭计数。继续按 UI-10 台账选取下一个未关闭组件，保持组件/行为证据、独立 A/B、综合快照、代码复核和交接闭环；全库 UI-10/UI-11 通过前不启动 Vue3 Element Plus 批量替换。权限及页面引导继续后置。
+
+- **复验补充**：ArrowDown 打开快捷日期区间时，浏览器默认聚焦可能在组件定位后继续滚动；组件已增加当前帧、下一帧及零延迟任务的定位校正，并在卸载时清理待执行句柄。HUD E2E 选择最后一个可见弹层，避免收起过渡节点造成严格定位冲突。使用系统 Chrome 指向 4177 文档站重跑 LxDatePicker 与 LxInput 文档 E2E，**35/35 通过**。
 - **下一步**：按台账继续处理可独立验收的 lx-ui 候选和宿主适配；Vue3 Element Plus 批量替换仍等待 UI-10/UI-11 门禁，权限中心、文本/字段权限和页面操作引导继续后置。
 
 ## 2026-10-18 LxInput 前后缀高度复验完成
@@ -2042,6 +2078,7 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - **修复**：统一改为图标注册表已有的 `setting`，同步更新文档 E2E 选择器；不新增别名、不改变 `LxSectionTitle` API 或视觉行为。
 - **验证**：lx-ui `pnpm typecheck`、SectionTitle 单测 **14/14**、文档 E2E **1/1**、目标 Prettier 通过。
 -
+
 ## 2026-10-20 LxSectionTitle 当前版窄屏与主题复验
 
 - **实现**：Demo 的 HUD 主题开关同步 `html.dark` 与 `html.lx-theme-hud`，卸载时仅在状态仍由 Demo 持有时恢复初始主题，避免覆盖宿主并发主题变化；`extra` 操作区允许收缩并在窄容器中完整换行。

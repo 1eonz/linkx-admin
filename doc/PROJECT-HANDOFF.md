@@ -1,5 +1,19 @@
 # LinkX 项目交接记录
 
+## 2026-10-22 LxInput 边框定点排查交接
+
+- 排查 Demo「前后缀 / 密码 / 透传」边框：密码和 attrs 透传场景由内层 wrapper 画真实 `1px` 外框，前后缀复合场景由组件根节点画连续外框；当前默认态三类均有边框。实际问题是 wrapper 聚焦规则压过全局桥后没有移除 inset 描边，导致真实边框与内描边叠在一起、看起来边线异常。
+- 已调整 `linkx-fe/src/components/LxInput/style.css`：边框色加入过渡；聚焦保持真实主色边框和单独外侧 `2px` 光环。复合输入规则未改；不需要在 Demo 局部掩盖组件行为。
+- 验证：Input边框 Playwright **3/3** 通过（`/components/lxinput`、`.html`、普通/密码/透传聚焦，以及既有禁用复合、错误聚焦和框外计数场景）；lx-ui `pnpm typecheck`、`pnpm build`、目标 Prettier 通过；检测器为合法 JSON `[]` / 空 stderr / exit 0，只表示源码规则零命中。
+- 本次未运行完整 A/B Critique；引用既有 2026-10-21 当前版 A/B 证据而不宣称重新通过视觉审查。保留工作区所有 DatePicker、ProTable、Vue3 页面修改与临时证据，不提交无关文件。
+
+### 2026-10-22 LxDatePicker 实现与回归交接
+
+- 短屏字段避让、弹层安全边距、滚动延续提示及宿主 Popper modifier 配置合并已实现；Demo、组件中文说明同步，宿主可通过 `scroll-margin-block-start` 与滚动容器 `scroll-padding-block-start` 提供固定头部上下文。
+- Vue3 DatePicker 单测 **26/26**、文档浏览器 E2E **34/34**；lx-ui typecheck、206 modules 构建、VitePress 文档构建、目标 Prettier/ESLint 与 diff 检查通过。测试中面板经 ArrowDown 打开，Escape 关闭并重新打开后验证观察器重新建立。
+- 暂不标记严格 Critique 完成：独立 A/B 最终报告、建议处理核验、综合快照/trend 和当前版代码审核仍待补。组件实现此步骤不增加 UI-10 关闭数。保留工作区已有 `LxProTable/types.ts`、`EditVirtualUser.vue` 等不相关修改与临时证据文件。
+- 下一步冻结 DatePicker 当前源码并做代码复核、独立 Impeccable A/B 与有界复验；不得以静态 `[]` 单独判通过。
+
 ## 2026-10-21 LxInput 单层边框与密码可访问性交接
 
 - 实现和验证以交付计划同日当前条目为准：19/19单测、9/9文档E2E、最终占位字/边框专项1/1、Mock11/11、类型/最终两构建/格式/有效ESLint通过。测试新增后旧选择器扩张导致2项失败，限定原状态区后恢复，未放宽断言。保留其他工作区改动。
@@ -3110,18 +3124,21 @@
 - lx-ui 类型检查通过；SectionTitle 单测 **14/14**、文档 E2E **1/1**、目标格式检查通过。
 - 该修复只解除 Demo 类型门禁，不关闭 UI-10/UI-11，也不触发 Vue3 Element Plus 替换或权限任务。
 -
+
 ## 2026-10-20 LxSectionTitle 当前版交接
 
 - 组件 `extra` 使用可收缩布局并保留 400px 以下分行；Demo HUD 主题同步文档根节点，卸载恢复逻辑不会覆盖宿主在生命周期内接管的主题状态。
 - Assessment B 独立证据见 `tmp-sectiontitle-followup-b.md` 与 `tmp-sectiontitle-followup-b/`：1280/420/375/320px、Light/HUD、normal/reduced-motion 共 16 视图，页面错误、失败请求、页面横溢出和操作越界均为 0；detector 三件套均为 `[]`/空/0，未单独解释为通过。
 - Assessment A **32/40（Good）**，P0/P1 为 0；其主题并发竞争建议已在卸载恢复中加入状态所有权判断。默认 Vue3 E2E 因真实后端代理超时未形成页面证据，需使用 lx-ui 4177 文档服务或专用 Mock 配置复验。
 - 下一步：按 UI-10 继续处理剩余组件的正式双路 Critique；完成组件库门禁后再替换 Vue3 Element Plus。权限、真实后端和页面引导仍后置。
+
 # 2026-10-20 LxDynamicForm schema 诊断交接
 
 - **改动**：`LxDynamicForm` 开发环境诊断重复字段 key、未知字段 type、radio/checkbox 不支持的 option value 类型；不阻断生产渲染，不改变 `value/change`、校验、提交、上传或远程请求边界。文档同步值域和 520/760px 断点定义。
 - **验证**：`lx-dynamic-form.test.ts` **31/31**；`lx-dynamic-form-docs.spec.ts` **14/14**；lx-ui `vue-tsc --noEmit` 通过。API 请求链规则未改变。
 - **审查**：Assessment A **32/40**。Assessment B 三个 detector 均为合法 `[]`、stderr 为空、退出码 `0`；独立浏览器 8/8 视图覆盖 Light/HUD、桌面/窄屏和 reduced-motion，无页面错误、失败请求或业务横溢出。缺少综合 snapshot/trend，仍不关闭 UI-10/UI-11。
 - **下一步**：恢复可执行 detector 后重跑 Light/HUD、桌面/窄屏、reduced-motion 和 overlay；再决定 feedback 与 required 的错误播报优先级。真实上传、远程接口、权限和 Element Plus 删除继续阻塞。
+
 # 2026-10-20 LxTransferPanel 当前版复验
 
 - 文档 E2E **33/33** 通过；桌面复选框视觉盒保持 14px，窄屏触控目标保持 44px，用户反馈的“选择框太大”修复未回归。
@@ -3135,36 +3152,42 @@
 - **代码边界**：未修改接口、权限键、表单校验或请求链；API 调用继续使用 `.then().catch().finally()`。注释和交接记录使用中文。
 - **能力差异**：`thirdInterface/app/AppManage.vue` 仍使用 `el-switch`，因为现有页面要求开启/关闭均弹确认并在 API 成功后才切换，而 `LxStatusSwitch` 当前只拦截关闭；待组件契约明确后再扩展或迁移。
 - **下一步**：继续核对剩余 15 个 `el-switch` 场景，优先无前置保存钩子的表单；全库 UI-10/UI-11、权限中心、真实后端、页面引导和 Element Plus 删除门禁仍未完成。
+
 # 2026-10-20 LxSwitch 第二批宿主替换交接
 
 - **实现**：`AgentConfig.vue` 的分离部署/审批开关、`EditMap.vue` 激活状态、`thirdPartyEdit.vue` 应用状态共 4 处改用 `LxSwitch`；组件透传原有 `active-value/inactive-value`、文字和 `inline-prompt`，页面数据与提交契约保持不变。
 - **验证**：`vue-tsc --noEmit`、目标 ESLint/Prettier、`git diff --check` 和隔离 Mock Playwright **10/10** 通过；源码直接 `el-switch` 从 14 降到 **10**。
 - **边界**：未改变接口、权限、表单校验和链式请求；剩余 10 处包含异步保存、确认、权限或复杂配置，需按能力差异继续评估。正式 Impeccable 全库门禁、真实后端和 Element Plus 删除仍未完成。
 - **下一步**：继续处理统一通信、南向配置与布局配置中的简单开关，复杂前置保存场景暂保留并登记。
+
 # 2026-10-20 LxSwitch 第三批宿主替换交接
 
 - **实现**：`TaskConfigModal.vue`、`EditPcTabModal.vue`、`EditSectionModal.vue` 共 4 个表单开关改用 `LxSwitch`；保留 1/0 值域、表单条件、文案和保存时机。
 - **验证**：`vue-tsc --noEmit`、目标 ESLint/Prettier、`git diff --check`、隔离 Mock Playwright **10/10** 通过；源码直接 `el-switch` 从 10 降到 **6**。
 - **边界**：未改变接口、权限、校验和链式 API 请求；剩余 6 处涉及异步表格保存、权限筛选或失败回滚，暂不机械替换。正式 Impeccable 全库门禁、真实后端和 Element Plus 删除仍未完成。
 - **下一步**：继续核对统一通信与警务上报开关的 loading、失败恢复和权限语义，确认可由 `LxSwitch` 或 `LxStatusSwitch` 完整承接后再迁移。
+
 # 2026-10-20 LxSwitch 剩余宿主替换交接
 
 - **实现**：六个剩余页面开关已全部由 `el-switch` 改用 `LxSwitch`：设备类型、ICP 子部门筛选、警务上报编辑/列表、协同成员、第三方应用上架。`LxSwitch` 透传 `active-value/inactive-value`、`before-change` 和 `@change`，页面 loading、失败回滚和确认逻辑保持。
 - **验证**：`vue-tsc --noEmit`、六个目标文件 ESLint/Prettier、`git diff --check`、隔离 Mock Playwright **10/10** 通过；业务页面直接 `el-switch` 扫描为 **0**。
 - **边界**：没有删除 Vue3 `element-plus`，因为其他 Element Plus 控件及 lx-ui 内核仍依赖它；权限、真实后端、跨浏览器、正式 Impeccable 全库审查和页面引导仍按计划后置。
 - **下一步**：转入剩余 `el-input`、`el-select`、`el-dialog` 等矩阵项；组件迁移仍须保留中文文档、Promise 链 API 风格和页面原有业务契约。
+
 # 2026-10-20 SearchBar 默认输入迁移交接
 
 - **实现**：共享 `SearchBar` 默认关键字输入已由 `el-input` 改为 `LxInput`；保留 `searchKey` 受控更新、清空、回车搜索、前缀图标和自定义筛选插槽边界。
 - **验证**：目标 Prettier/ESLint、`vue-tsc --noEmit`、SearchBar 适配器单测 **2/2**、隔离 Mock 全菜单 Playwright **10/10** 通过。
 - **边界**：未改变页面搜索 API、权限或请求链；页面级密码/textarea/复合前后缀输入仍需按旧 props、校验和错误恢复逐项迁移。Element Plus 删除、正式 Impeccable 和真实后端门禁仍未完成。
 - **下一步**：继续选择低风险页面输入场景，迁移前补齐 Demo/Mock/表单上下文证据并保持中文文档和链式 API 风格。
+
 # 2026-10-20 Sidebar 菜单输入迁移交接
 
 - **实现**：`layout/components/Sidebar/index.vue` 的菜单搜索和全部菜单筛选由 `el-input` 改用 `LxInput`；旧 `size="small"` 映射为 lx-ui `size="sm"`，前缀图标、清空和过滤状态保持。
 - **验证**：目标 Prettier/ESLint、`vue-tsc --noEmit` 和隔离 Mock Playwright **10/10** 通过。
 - **阻塞**：尝试迁移 `policeExtend/virtualUser/EditVirtualUser.vue` 时，类型检查确认 `VirtualUserForm` 的 userName/contactNumber/appId/appSecret/remark 被声明为 number，而 `LxInput` 明确要求字符串值；已撤回该部分，未使用 `as any` 或强制断言掩盖问题。
 - **下一步**：继续迁移字符串类型明确的页面输入；虚拟用户待 API/类型契约核实后再处理，Element Plus 删除门禁、权限和真实后端仍未完成。
+
 # 2026-10-20 三方应用输入迁移交接
 
 - **实现**：`baseData/thirdParty/index.vue` 的应用名称搜索与只读应用密钥改用 `LxInput`；保留 clearable、回车搜索、`type=password`、show-password 和 disabled。
@@ -3287,3 +3310,23 @@
 
 - `TaskDueEditForm.vue`、`UnattendedEditForm.vue` 共 4 个只读组织/协同岗字段改用 `LxInput`，保留 disabled、通知对象选择、校验和提交契约。
 - 验证：`vue-tsc --noEmit`、目标 Prettier、ESLint、隔离 Mock 全菜单 **10/10**；预警 API 和复杂选择器未改变。
+
+# 2026-10-23 LxInput 前后缀/密码边框复核交接
+
+- **结论**：浏览器实测 1280px 文档页：密码 wrapper 有 `1px solid` 边框；prepend/append 示例的组件根节点有 `1px solid` 连续外框，内层 wrapper 为零边框用于避免重复接缝。滚动到目标示例后截图确认视觉边线清晰，当前没有复现边框缺失。
+- **改动**：新增 `other-admin/admin-vue3/tests/e2e/lx-input-docs.spec.ts`，覆盖默认复合边框、密码边框、密码聚焦外环和 HUD 主题，测试 **1/1** 通过。未改写 LxInput 样式，保留工作区中已有的 CSS 所有权。
+- **边界**：这是针对用户问题的局部排查，不关闭或重复计算 UI-10，不代表 Impeccable Critique。若用户所见仍不同，下一次需按其实际浏览器与视口复现。
+- **下一步**：回到 `LxDatePicker` 当前版正式双路审查及综合快照/trend；A 当前版复评为 **35/40**，无 P0–P2，B 综合、代码审查和正式快照尚未齐备，严格行继续开放。
+
+# 2026-10-23 LxDatePicker 评审与 LxInput 边框交接补充
+
+- **LxInput**：组件边框按结构分别位于复合输入根节点或普通输入 wrapper；浅色、密码聚焦和 HUD 文档 E2E 通过 1/1，仍未复现用户所见缺边框。若业务页面仍有问题，应按实际路由、视口和主题继续定位。
+- **LxDatePicker**：Assessment A 35/40，无 P0–P2；320px 区间值拥挤记为 P3。Assessment B 两个源码 detector 均为 JSON `[]`、stderr 空、退出码 0；四种浏览器视图 overlay 注入成功，浏览器错误/失败请求/HTTP 错误均为 0。HUD 3.4:1 和代码色命中来自 VitePress/Shiki 文档代码块；禁用态分隔符 4.4:1；根文档移动宽度未溢出。
+- **代码复核**：Popper modifier 合并、短屏宿主间距计算、滚动提示生命周期均与测试相符；文档 Demo 间距已从 84px 改为实现值 88px。没有 P0–P2；DatePicker 组件级证据不增加 UI-10 全库关闭数。
+- **下一步**：继续 UI-10 台账中下一个未闭环组件。整库 UI-10/UI-11 通过前，Vue3 Element Plus 仍不进行整体删除或批量替换；真实权限、后端联调和页面操作引导继续按计划后置。
+
+# 2026-10-24 DatePicker 键盘打开复验交接
+
+- **改动**：短屏 ArrowDown 打开日期区间时增加当前帧、下一帧和零延迟定位校正；卸载时取消 requestAnimationFrame 和 timeout。HUD E2E 取最后一个可见弹层，避免关闭过渡节点干扰。
+- **验证**：系统 Chrome + 4177 文档站重跑 `lx-date-picker-docs.spec.ts` 与 `lx-input-docs.spec.ts`，35/35 通过。先前 2 个快捷区间 ArrowDown 遮挡失败和 1 个 HUD 严格定位失败均已修复。
+- **边界**：320px 区间值拥挤仍是 P3；DatePicker 组件级综合快照需以本次最终源码指纹重新写入，UI-10 全库计数不因本波自动增加。
