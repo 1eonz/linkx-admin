@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-24 LxDescriptions 窄屏复制值修复与当前版复核
+
+- **缺陷与修复**：独立 A 在 375px 双列演示中发现警号值被压至 12px 并逐字竖排。根因是窄屏复制槽继承 LxCodeSlot 省略态 `width: 0`，且 Demo 固定标签宽度挤占值列。修复 LxDescriptions 窄屏复制槽宽度/内容宽度，Demo 警号跨列、标签宽度按容器限制；中文 API 补充复杂 `unknown` 值需通过插槽格式化的契约。
+- **验证**：描述组件单测 **10/10**、文档 E2E **3/3**；新增断言验证复制文本区宽度、横排书写模式与高度。Vue3 类型检查、目标 ESLint/Prettier、lx-ui 类型检查、206 模块构建、VitePress 文档构建通过。Impeccable detector 三目标均为 JSON `[]`/stderr 空/exit 0；独立 B 实际 overlay 注入，五项命中归因为 VitePress/Element Plus 文档外壳。文档构建保留已有大 chunk 警告。
+- **审查**：隔离 Assessment A **35/40**，发现的 P1 已被 E2E 复现并修复；B 覆盖 1280/375/320px、Light/HUD、reduced-motion、键盘展开、空/加载/错误重试，无页面错误和失败请求。代码复核无新增阻塞。综合快照 `.impeccable/critique/2026-10-23T16-58-15Z__linkx-fe-src-components-lxdescriptions-index-vue.md`；趋势最近为 **34→31→32→35/40**。旧 B 的 615px 误记及合成键盘证据已丢弃，以本轮真实浏览器证据为准。
+- **边界/下一步**：不改变 UI-10 全库 **13/52** 口径，也不代表整库 Impeccable、真实剪贴板授权、NVDA/VoiceOver、权限后端或 Vue3 宿主替换完成。继续按 `doc/lx-ui/COMPONENT-AUDIT.md` 当前开放项推进；UI-10/UI-11 门禁未完成前保留宿主 Element Plus。
+
 ## 2026-10-23 LxInput 前后缀/密码边框问题复核
 
 - **排查结论**：在文档页实机渲染中，密码输入及普通/透传字段由 `.el-input__wrapper` 绘制 `1px` 实体边框；prepend/append 复合输入在 `.lx-input.el-input-group` 根节点绘制连续 `1px` 边框，内层 wrapper 无边框是避免接缝双线的设计。截图曾因位于页面上方而没有包含目标区，滚动到示例后可见边框。现有工作区样式确保复合输入的根边框和密码输入 wrapper 边框均可见。

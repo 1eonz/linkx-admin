@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## 2026-10-24 LxDescriptions 当前版交接
+
+- **完成**：修复 375px 双列 Demo 的警号复制值逐字竖排。组件窄屏复制槽占满值列，恢复 LxCodeSlot 文本自然宽度；Demo 标签宽度响应式收缩、警号跨列。新增浏览器断言检查文本区可读宽度、横排书写模式与高度；API 中文说明复杂 `unknown` 对象/数组要经 `item-${key}` 插槽格式化。
+- **证据**：Vue3 组件单测 **10/10**、LxDescriptions 文档 Playwright **3/3**；Vue3 `vue-tsc --noEmit`、测试 ESLint、指定 Prettier、lx-ui `vue-tsc`、206模块 `vite build`、VitePress 文档构建通过。文档构建保留已有大 chunk 警告。Impeccable detector JSON `[]`/stderr 空/exit 0；独立 B 覆盖 1280/375/320px、Light/HUD/reduced-motion、键盘、空/加载/错误重试，无运行错误/失败请求，overlay 实际注入但五条命中归因为 VitePress/Element Plus 外壳。
+- **审查**：A **35/40**，其 P1 被测试复现并修复；修后浏览器 E2E 3/3。独立代码复核无新增问题。综合快照 `.impeccable/critique/2026-10-23T16-58-15Z__linkx-fe-src-components-lxdescriptions-index-vue.md`；趋势 **34→31→32→35/40**。不增加 UI-10 全库 **13/52**。
+- **限制/下一项**：真实剪贴板成功权限、NVDA/VoiceOver、宿主业务详情迁移未验收；旧 B 将 615px 记录错当 375px 且合成 Enter 无效，已明确弃用。下一步检查 `LxVirtualTree` 固定插槽行高和滚动契约；保留 Vue3 Element Plus 直到 UI-10/UI-11 门禁完成。
+
 ## 2026-10-22 LxInput 边框定点排查交接
 
 - 排查 Demo「前后缀 / 密码 / 透传」边框：密码和 attrs 透传场景由内层 wrapper 画真实 `1px` 外框，前后缀复合场景由组件根节点画连续外框；当前默认态三类均有边框。实际问题是 wrapper 聚焦规则压过全局桥后没有移除 inset 描边，导致真实边框与内描边叠在一起、看起来边线异常。

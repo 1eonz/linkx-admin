@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-24 LxDescriptions 窄屏复制值修复入口
+
+- `linkx-fe/src/components/LxDescriptions/index.vue` 的移动复制槽恢复可读内容宽度并保持 44px 图标操作区；Demo 对双列标签宽度采用响应式上限，警号字段跨列。避免 LxCodeSlot 省略态 `width: 0` 在移动 grid 下导致数字逐字竖排。
+- 回归入口 `other-admin/admin-vue3/tests/e2e/lx-descriptions-docs.spec.ts`：单测 10/10、文档 E2E 3/3，Vue3/lx-ui 类型、206模块库构建、VitePress、目标 ESLint/Prettier 均通过。正式 A/B 35/40 与快照见交付计划和 Impeccable 归档；不增加 UI-10 全库关闭数。
+- 当前版已补中文 API 复杂 `unknown` 值格式化契约；真实剪贴板授权、物理读屏器与宿主详情页替换仍未验收。下一入口回到 `LxVirtualTree` 当前开放插槽固定行高/滚动契约核对。
+
 ## 2026-10-23 LxInput 边框问题复核
 
 - `linkx-fe/src/components/LxInput/style.css` 的默认结构为普通/密码/透传输入在 wrapper 上绘制实体边框，prepend/append 输入在根节点绘制连续外边框；内层 wrapper 为零边框是防止复合接缝重线的有意规则。

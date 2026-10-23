@@ -463,6 +463,7 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
 
   .lx-descriptions__value :deep(.lx-code-slot--copyable) {
     display: grid;
+    width: 100%;
     grid-template-columns: minmax(0, 1fr) 44px;
     align-items: center;
     gap: 0;
@@ -473,6 +474,7 @@ function expansionDescription(item: LxDescriptionItem): string | undefined {
 
   .lx-descriptions__value
     :deep(.lx-code-slot--copyable .lx-code-slot__content) {
+    width: auto;
     min-width: 0;
     overflow: visible;
     overflow-wrap: anywhere;

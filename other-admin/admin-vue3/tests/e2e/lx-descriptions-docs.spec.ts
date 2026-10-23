@@ -256,6 +256,17 @@ test.describe('lx-ui LxDescriptions 文档示例', () => {
     const mobileCopyBox = await mobileCopyButton.boundingBox();
     if (!mobileCopyBox) throw new Error('移动端复制按钮未进入可视区域');
     expect(mobileCopyBox.height).toBeGreaterThanOrEqual(44);
+    const mobileCopyContent = mobileCopyButton.locator('.lx-code-slot__content');
+    const mobileCopyContentMetrics = await mobileCopyContent.evaluate((element) => ({
+      width: element.getBoundingClientRect().width,
+      height: element.getBoundingClientRect().height,
+      whiteSpace: getComputedStyle(element).whiteSpace,
+      writingMode: getComputedStyle(element).writingMode,
+    }));
+    expect(mobileCopyContentMetrics.width).toBeGreaterThanOrEqual(36);
+    expect(mobileCopyContentMetrics.height).toBeLessThanOrEqual(40);
+    expect(mobileCopyContentMetrics.whiteSpace).toBe('normal');
+    expect(mobileCopyContentMetrics.writingMode).toBe('horizontal-tb');
     const drawerBox = await page.getByRole('region', { name: '480 像素详情抽屉' }).boundingBox();
     expect(mobileColumns).toBe(1);
     expect(drawerBox?.width).toBeLessThanOrEqual(375);

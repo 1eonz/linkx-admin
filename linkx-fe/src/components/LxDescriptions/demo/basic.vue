@@ -31,7 +31,13 @@ useDemoHudTheme(hudTheme)
 
 const items: LxDescriptionItem[] = [
   { key: 'name', label: '姓名', value: '孙志国' },
-  { key: 'policeId', label: '警号', value: '005882', copyable: true },
+  {
+    key: 'policeId',
+    label: '警号',
+    value: '005882',
+    copyable: true,
+    span: 2,
+  },
   {
     key: 'organization',
     label: '所属组织',
@@ -176,7 +182,7 @@ onBeforeUnmount(() => {
         :columns="2"
         :layout="layout"
         :bordered="bordered"
-        :label-width="layout === 'grid' ? 96 : undefined"
+        :label-width="layout === 'grid' ? 'min(96px, 30%)' : undefined"
       >
         <template #item-role="{ value }">
           <span class="lx-descriptions-demo__role-value">{{ value }}</span>
