@@ -34,23 +34,27 @@ describe('LxVirtualTree', () => {
   it('触屏或窄屏行高与触控目标至少 44px，并同步虚拟滚动偏移', async () => {
     let mediaQueryMatches = false;
     let dispatchMediaChange: (() => void) | undefined;
+    let mediaChangeListener: EventListenerOrEventListenerObject | undefined;
     const mediaQuery: MediaQueryList = {
       matches: mediaQueryMatches,
       media: '(any-pointer: coarse), (max-width: 640px)',
       onchange: null,
-      addEventListener: (_type, listener) => {
+      addEventListener: vi.fn((_type, listener) => {
+        mediaChangeListener = listener;
         dispatchMediaChange = () => {
           const event = new Event('change');
           if (typeof listener === 'function') listener(event);
           else listener.handleEvent(event);
         };
-      },
+      }),
       removeEventListener: vi.fn(),
       addListener: vi.fn(),
       removeListener: vi.fn(),
       dispatchEvent: vi.fn(() => true),
     };
     const matchMedia = vi.spyOn(window, 'matchMedia').mockReturnValue(mediaQuery);
+    const addWindowListener = vi.spyOn(window, 'addEventListener');
+    const removeWindowListener = vi.spyOn(window, 'removeEventListener');
     const data = Array.from({ length: 100 }, (_, index) => ({
       id: `node-${index}`,
       label: `组织 ${index}`,
@@ -64,6 +68,8 @@ describe('LxVirtualTree', () => {
 
     try {
       expect(matchMedia).toHaveBeenCalledWith('(any-pointer: coarse), (max-width: 640px)');
+      expect(mediaQuery.addEventListener).toHaveBeenCalledWith('change', expect.any(Function));
+      expect(addWindowListener).toHaveBeenCalledWith('resize', expect.any(Function));
       expect(wrapper.get('.lx-virtual-tree').element.style.getPropertyValue('--lx-tree-control-size')).toBe('24px');
       expect(wrapper.get('[data-lx-tree-key="node-0"]').element.style.getPropertyValue('--lx-tree-row-height')).toBe(
         '32px',
@@ -98,6 +104,10 @@ describe('LxVirtualTree', () => {
       expect(viewport.element.scrollTop).toBe(1600);
     } finally {
       wrapper.unmount();
+      expect(mediaQuery.removeEventListener).toHaveBeenCalledWith('change', mediaChangeListener);
+      expect(removeWindowListener).toHaveBeenCalledWith('resize', expect.any(Function));
+      addWindowListener.mockRestore();
+      removeWindowListener.mockRestore();
       matchMedia.mockRestore();
     }
   });

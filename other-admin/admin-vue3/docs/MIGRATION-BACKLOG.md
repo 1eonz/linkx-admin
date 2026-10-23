@@ -1,5 +1,16 @@
 # Vue2 到 Vue3 迁移 Backlog
 
+## 2026-10-24 LxVirtualTree 监听卸载回归
+
+- [x] 单测断言组件卸载时同步移除 `MediaQueryList.change` 与 `window.resize` 监听器；VirtualTree 定向单测 **37/37**、Vue3 类型、目标 ESLint/Prettier 通过。
+- [ ] 此项只关闭可选测试 P3，不关闭 lx-ui UI-10 严格行或 Vue3 宿主替换。设计文档范围澄清、长中文真实数据、读屏器/跨浏览器以及 UI-11 全库 Critique 继续开放。
+
+## 2026-10-24 LxDatePicker 当前版降级复核
+
+- [x] 正确 lx-ui 文档配置下 DatePicker 单测 **26/26**、文档 E2E **34/34**；系统 Chrome 覆盖 1280×720、HUD 390×375、浅色 320×375，短屏定位、键盘打开、滚动提示和无横向溢出证据已保存。
+- [x] 组件、Demo、中文文档 detector 均为合法 JSON `[]`、stderr 空、exit `0`；overlay 命中已逐条归因为文档壳层、Element Plus 状态色或弹层正常覆盖，未确认组件缺陷。
+- [ ] 双代理服务 503，本轮只能记为降级 Assessment A/B 补证；A 30/40 的 320px 区间密度 P2、Demo 首屏密度 P3、正式 snapshot/trend、代码审查和 UI-10 严格行仍开放。继续组件库优先，暂不删除 Vue3 `element-plus`。
+
 ## 2026-10-24 LxDescriptions 组件库当前版复核
 
 - [x] 修复 375px 双列 Demo 的警号复制文本竖排；组件移动复制槽恢复内容宽度，Demo 响应式收缩标签并让警号跨列。单测 **10/10**、文档 E2E **3/3**，Vue3/lx-ui 类型、库与文档构建、目标格式/Lint 通过。

@@ -1,5 +1,32 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-24 LxVirtualTree 卸载监听清理回归补强
+
+- **补强**：在触屏/窄屏响应式单测中捕获 `MediaQueryList` 的 `change` handler 与 `window.resize` handler；断言组件挂载时注册，并在卸载后以相同事件和监听器完成解绑。只加强可观察行为回归，不改组件逻辑或公开 API。
+- **验证**：VirtualTree 单测 **37/37**、Vue3 `vue-tsc --noEmit`、目标 ESLint、Prettier 与 `git diff --check` 通过。该测试还保留触屏尺寸切换及虚拟滚动偏移断言。
+- **边界与下一步**：关闭此前代码审查提出的“卸载清理缺少单测断言”P3；不增加 UI-10 **13/52**，不代表严格矩阵或正式 Impeccable 关闭。当前组件仍需处理设计源范围说明、长中文真实业务数据、读屏器与跨浏览器验证；继续审计矩阵中下一个未闭环项。
+
+## 2026-10-24 LxDatePicker Assessment B 降级复核与当前版门禁
+
+- **浏览器证据**：在 4177 文档站以系统 Chrome 采集桌面浅色 1280×720、HUD 390×375、浅色 320×375 三个视图。三视图均无页面错误；日期弹层分别位于 `top=95..426`、`top=139.56..367`，短屏保留滚动提示，弹层左右至少 8px 视口安全边距。正确的 lx-ui Playwright 配置下 `lx-date-picker-docs.spec.ts` **34/34** 通过；此前误用 Vue3 业务配置导致的后端代理超时不计入组件失败，已中止且未发出写请求。
+- **Detector**：组件、Demo、中文文档三目标均为合法 JSON `[]`、stderr 空、退出码 `0`。这只表示静态规则零命中。浏览器 overlay 的低对比度命中主要来自 Element Plus 状态色和 VitePress/Shiki 文档代码区；文字遮挡命中经截图核对为误报或日期弹层覆盖底层文档内容的正常层叠，没有确认日期网格自身被遮挡。两个移动视图实测文档 `scrollWidth` 分别为 477/390、407/320；弹层自身安全边界正常，但页面横向溢出的来源尚未确认，不能直接归因于 DatePicker，需作为文档壳层待定位项保留。
+- **Assessment A/B 状态**：当前 A 独立评审评分 **30/40**，提出 320px 区间触发器拥挤 P2、桌面与触屏规格验收口径 P2、Demo 首屏密度 P3；B 为独立证据复核，指出移动文档根横溢出处待定位、真实低对比度颜色元素因 detector 丢失节点映射而无法逐条归因。由于双代理 Critique 服务返回 503，且流程未满足正式隔离评审门槛，按规则记为 `⚠️ DEGRADED: single-context (Assessment A/B service 503 后的有界补证)`，不能写入正式双路快照或趋势，也不能关闭 UI-10 严格行。
+- **验证**：DatePicker 单测 **26/26**、正确文档 E2E **34/34**、lx-ui `vue-tsc --noEmit`、206 modules 生产构建、VitePress 文档构建通过；构建保留 pnpm 配置弃用和大 chunk 警告。Vue3 类型检查及当前 `EditVirtualUser.vue` ESLint 通过。
+- **结论与下一入口**：短屏定位与键盘打开问题已具备当前版回归证据；320px 区间值拥挤和 Demo 密度列为后续 P2/P3，不在缺少正式 Critique 时擅自修改。移动文档根横溢出和低对比度颜色映射仍待真实节点归因。UI-10 仍 **13/52**，组件级正式代码审核、双路 Critique、snapshot/trend 和真实读屏器/后端验收继续开放。下一入口为审计矩阵中下一个未闭环组件，保持“基础组件/动态图标 → DynamicForm → UI-11 → Vue3 Element Plus 分批替换”的顺序。
+
+## 2026-10-24 LxInput 边框问题排查
+
+- **结论**：当前文档页截图中，`前后缀 / 密码 / 透传` 区域的 prepend/append 复合输入与密码输入均能看到边框；现有实现由 `LxInput` 组件样式绘制边界，Demo 未发现会隐藏边框的局部样式，因此本轮未复现“边框消失”，不能归因为 Demo 样式缺陷。
+- **实现核对**：普通/密码输入由 `.lx-input .el-input__wrapper` 绘制 1px 实体边框；prepend/append 复合输入由 `.lx-input.el-input-group` 绘制连续外框，内部输入框仅保留接缝规则。该差异说明边框属于组件样式职责。
+- **证据与限制**：当前浅色文档页截图可见两类边框；lx-ui `vue-tsc --noEmit`、206 模块构建和 `git diff --check` 通过。截图未能覆盖所有主题及聚焦/错误态，不能据此宣称全部状态正式验收通过。标题提及“透传”，但本段 Demo 实际只演示复合输入和密码输入；这是示例覆盖不足，后续需补真实 attrs/Element Plus 属性透传场景或调整标题。
+- **后续**：若用户仍能在当前版本复现缺边框，请按具体主题、控件状态和视口补采浏览器证据，再针对计算样式定位覆盖规则；本轮不将未复现问题标记为已修复。
+
+## 2026-10-24 LxVirtualTree 当前版矩阵复核
+
+- **验证**：组件单测 37/37、文档 Playwright 15/15；lx-ui `vue-tsc --noEmit` 与 206 模块构建通过。浏览器覆盖 Light/HUD × 1280/375px、HUD 320px、reduced-motion、方向键、筛选/空结果与展开全部；页面无横溢出、运行错误或失败请求。Demo 未提供可触发的异步 loading/error 控件，本轮未浏览器验证这两态。
+- **审查**：独立 Assessment A 31/40；B 三目标 detector 均为合法 JSON `[]`、stderr 空、退出码 0，浏览器视图与 Impeccable overlay 已实际采集。9 条 overlay 逐项归于文档壳层、状态探测误报和必要过渡，没有确认树本身视觉缺陷。独立代码审核未发现 P0–P2；可选 P3 为监听器卸载缺少单测断言，当前实现已清理监听。综合快照 `.impeccable/critique/2026-10-23T17-33-11Z__linkx-fe-src-components-lxvirtualtree-index-vue.md`，趋势 31/40→31/40。
+- **计划差异**：设计源 `design/虚拟滚动树 + 双栏穿梭/` 同页混排 VirtualTree 与 TransferPanel，且包含本轮未测量的性能/合规表述。记录为设计文档澄清待办，不将其当成组件已验证承诺；当前行暂不计入 UI-10 **13/52**。长中文节点由真实业务数据复验、读屏器和跨浏览器仍待做。
+
 ## 2026-10-24 LxDescriptions 窄屏复制值修复与当前版复核
 
 - **缺陷与修复**：独立 A 在 375px 双列演示中发现警号值被压至 12px 并逐字竖排。根因是窄屏复制槽继承 LxCodeSlot 省略态 `width: 0`，且 Demo 固定标签宽度挤占值列。修复 LxDescriptions 窄屏复制槽宽度/内容宽度，Demo 警号跨列、标签宽度按容器限制；中文 API 补充复杂 `unknown` 值需通过插槽格式化的契约。

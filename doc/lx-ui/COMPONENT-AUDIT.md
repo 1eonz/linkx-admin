@@ -1,5 +1,16 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-24 LxVirtualTree 卸载监听回归补强
+
+- VirtualTree 单测新增 `MediaQueryList.change` 与 `window.resize` 监听器注册/卸载配对断言，**37/37** 通过；Vue3 类型、目标 ESLint/Prettier 通过。组件实现已有正确清理，本次只关闭可选测试 P3。
+- 不改变 UI-10 **13/52**；设计源中 VirtualTree/TransferPanel 范围说明、长中文业务数据、真实读屏器与跨浏览器验收仍待处理，严格行保持开放。
+
+## 2026-10-24 LxDatePicker 当前版降级复核
+
+- 正确 lx-ui 文档配置下单测 **26/26**、文档 E2E **34/34**；系统 Chrome 三视图 overlay 无页面错误，短屏弹层保留 8px 视口边界和真实滚动提示。三目标 detector 均为合法 `[]`、空 stderr、exit `0`。
+- detector/overlay 命中归因为文档壳层、Element Plus 状态色、Shiki 代码区及弹层覆盖底层 Demo 文本；未确认组件自身缺陷。A 独立评分 **30/40**，保留 320px 区间密度 P2、Demo 首屏密度 P3。
+- 双代理服务返回 503，不能登记正式双路 Critique、snapshot/trend 或 UI-10 关闭；本条是降级补证，UI-10 仍 **13/52**。真实读屏器、后端契约和 Vue3 宿主迁移继续开放。
+
 ## 2026-10-24 LxDescriptions 当前版窄屏复核
 
 - Assessment A 在 375px 双列组合发现警号复制内容仅 12px、逐字竖排；修复移动复制槽 `width:100%` 与内容 `width:auto`，Demo 对双列标签宽度设响应式上限、警号跨列。E2E 新增文本宽度/高度/横排断言，单测 **10/10**、文档 E2E **3/3**。

@@ -1,5 +1,16 @@
 # LinkX 项目地图
 
+## 2026-10-24 LxVirtualTree 响应式监听清理回归
+
+- 组件监听注册/卸载逻辑位于 `linkx-fe/src/components/LxVirtualTree/index.vue`；回归位于 `other-admin/admin-vue3/tests/unit/lx-virtual-tree.test.ts`，精确断言 `MediaQueryList.change` 与 `window.resize` 监听器在卸载时移除。
+- 单测 37/37、Vue3 类型、目标 ESLint/Prettier 通过。只补行为证据，不改变 UI-10 **13/52** 计数；设计源范围澄清、真实长中文数据和辅助技术验收仍开放。
+
+## 2026-10-24 LxDatePicker 当前版复核入口
+
+- 组件入口 `linkx-fe/src/components/LxDatePicker/index.vue`、样式 `style.css`、Demo `demo/basic.vue`、中文文档 `docs/components/lxdatepicker.md`；短屏定位、滚动提示、键盘打开和 Popper 配置均已有实现与回归。
+- 当前证据：单测 **26/26**、正确 lx-ui 文档 E2E **34/34**、桌面/HUD/320px overlay 无页面错误，三目标 detector 为合法 `[]`/空 stderr/exit 0。Assessment A 30/40；双代理 503 后按降级复核记录，不能视为正式双路 Critique。
+- 仍开放：320px 区间触发器密度 P2、Demo 首屏密度 P3、正式 snapshot/trend、真实读屏器与 UI-10 严格行。下一入口按组件审计矩阵推进，不扩大 Vue3 Element Plus 替换。
+
 ## 2026-10-24 LxDescriptions 窄屏复制值修复入口
 
 - `linkx-fe/src/components/LxDescriptions/index.vue` 的移动复制槽恢复可读内容宽度并保持 44px 图标操作区；Demo 对双列标签宽度采用响应式上限，警号字段跨列。避免 LxCodeSlot 省略态 `width: 0` 在移动 grid 下导致数字逐字竖排。
