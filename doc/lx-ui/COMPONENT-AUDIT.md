@@ -1,5 +1,17 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-24 LxTransferPanel 当前版 A/B 补证
+
+- Assessment A 独立源码/设计评审 **28/40**；未取得 A 自身浏览器证据。筛选态头部、继承授权说明、240px 高度档和中间操作列可发现性列为 P1/P2。
+- Assessment B 三目标 detector 均为合法 JSON `[]`、stderr 空、退出码 0；不据此认定通过。独立 Chrome/overlay 复核桌面、375px、HUD、reduced-motion 无横溢或页面异常；组件搜索框 placeholder 实测对比度 **3.1:1**，为目标真实命中；文档站文本和全局 bounce easing 命中不计作 TransferPanel 缺陷。
+- 后续先确认两种搜索框 placeholder 的颜色 token/计算样式，并补对比度；再处理筛选头部密度和低高度档的树可见空间。完整报告与证据路径见 `doc/PROJECT-HANDOFF.md` 的本条记录。
+- 本次不关闭 UI-10 严格行，计数仍为 **13/52**；组件复核不等于宿主保存/loading/error 状态、真实读屏器或跨浏览器验收。
+
+## 2026-10-25 LxTransferPanel placeholder 对比度修复
+
+- 两个过滤输入显式使用 `--lx-text-placeholder`，修复 Assessment B 确认的 3.1:1 占位文字对比度问题；不改变主题令牌、组件 API 或筛选交互。
+- TransferPanel 单测 **30/30**、lx-ui 类型/构建/文档构建通过；UI-10 仍 **13/52**。A 的头部信息密度、继承说明、低高度档和中间操作列问题继续登记，不用 detector `[]` 代替视觉复验。
+
 ## 2026-10-24 LxVirtualTree 卸载监听回归补强
 
 - VirtualTree 单测新增 `MediaQueryList.change` 与 `window.resize` 监听器注册/卸载配对断言，**37/37** 通过；Vue3 类型、目标 ESLint/Prettier 通过。组件实现已有正确清理，本次只关闭可选测试 P3。

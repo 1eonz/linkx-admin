@@ -253,6 +253,18 @@
 - **边界**：本波无源码改动；Assessment A 未执行浏览器/detector，故不能替代已有 B 或宣称新增正式 Critique。宿主 `DataPermissionTree` 持久化、真实权限和后端联调仍属于 UI-04 阻塞。
 - **下一入口**：继续补 TransferPanel 当前版 Assessment B/主题与动效证据，随后按矩阵处理剩余组件；完成 lx-ui 门禁前不删除 Vue3 `element-plus`。
 
+## 2026-10-24 LxTransferPanel 当前版 Assessment A/B 补证
+
+- **Assessment A**：独立评审 **28/40（Good）**，指出筛选态头部信息密度、继承授权说明的位置、240px 紧凑档可视空间及中间穿梭操作可发现性仍有 P1/P2 改进空间。评审基于源码、类型、Demo、中文文档和设计图；A 未取得独立运行时浏览器视图。
+- **Assessment B**：组件、Demo、中文文档 detector 分别为合法 JSON `[]`、stderr 空、退出码 `0`；此结果只表示静态规则零命中。独立 Chrome 覆盖桌面、375px 窄屏、HUD 深色及 reduced-motion，横向溢出和页面异常为 0；实际注入 overlay 后确认组件两处搜索框占位文字对比度为 **3.1:1**，其余命中为文档代码/说明文本及全局 bounce easing，需按目标归属区分。
+- **结论与下一步**：本次形成双路评审及浏览器证据，但不关闭 UI-10 严格行，也不增加 **13/52** 计数。登记搜索占位文字对比度 P2；头部密度、继承说明、紧凑档和中间操作列按 Assessment A 的 P1/P2 保留，下一轮先核对设计令牌和组件实际计算色，再进行有界修复与复验。宿主保存/loading/error 状态仍属业务宿主契约，不在组件中臆造。
+
+## 2026-10-25 LxTransferPanel 搜索占位文字对比度修复
+
+- **修复**：为两个 TransferPanel 过滤输入的 `::placeholder` 显式绑定 `var(--lx-text-placeholder)` 并设置 `opacity: 1`。浅色主题使用已有 `#6b7280` 令牌，HUD 主题继续使用已有 `#94a3b8` 覆盖，避免浏览器默认占位色降至 3.1:1。
+- **验证**：TransferPanel 单测 **30/30**；lx-ui 类型检查、206 modules 构建和 VitePress 文档构建通过。组件文件使用 Vue3 工具链的 Prettier/ESLint 复核；组件库目录没有独立 `prettier`/`eslint` 可执行入口，直接调用会返回命令不存在，未把该环境限制伪报成代码失败；`git diff --check` 通过。
+- **边界**：本修复只处理已确认的占位色问题，不改变筛选值、批量范围、权限语义或 API。A 评审提出的筛选头部密度、继承说明、240px 可视空间和中间操作列仍需设计决策与有界复验，UI-10 仍为 **13/52**。
+
 ## 2026-10-20 LxDynamicForm schema 防错收口
 
 - **实现**：开发环境对重复 `key`、未知 `type` 以及 radio/checkbox 不支持的选项值输出中文诊断；保留现有线上渲染行为，不改变表单值、校验、提交和业务 API 契约。中文 API 同步说明各选择类型的值域，并将容器断点措辞统一为“不大于 760px/520px”。

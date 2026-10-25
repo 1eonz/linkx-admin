@@ -3366,3 +3366,18 @@
 - **审查判定**：overlay 的低对比度来自文档代码色/Element Plus 状态令牌，遮挡来自弹层覆盖底层 Demo 文本及诊断注入层；未确认组件缺陷。独立 A 评分 **30/40**，建议 320px 区间密度 P2、桌面/触屏规格分层 P2、Demo 首屏密度 P3。双代理服务 503，当前只能记为降级补证，不能冒充正式双路 Critique、snapshot/trend 或 UI-10 关闭。
 - **验证与边界**：lx-ui 类型检查、206 modules 构建、VitePress 文档构建、Vue3 类型检查及当前 `EditVirtualUser.vue` ESLint 通过；保留既有 pnpm/大 chunk 警告。一次错误启动 Vue3 业务配置产生后端代理超时，已中止且未写请求，不作为组件失败。真实读屏器、真实后端与权限契约未验收。
 - **下一步**：保留 320px 区间值拥挤 P2 与 Demo 密度 P3，继续 UI-10 下一个未闭环组件；不因本轮行为回归提前替换/删除 Vue3 Element Plus。临时脚本、截图和 detector 证据不纳入本波提交。
+
+## 2026-10-24 LxTransferPanel 当前版 Assessment A/B 补证交接
+
+- **评审方式**：Assessment A 与 B 由两个隔离子代理分别执行。A 为源代码/文档/设计图评审，没有独立浏览器视图；B 使用新 Chrome 上下文完成 detector、桌面/窄屏、HUD 和 reduced-motion 浏览器证据并成功注入 overlay。
+- **Assessment A**：28/40（Good）。P1：筛选状态下头部与范围操作占据树视口；继承授权说明同数量等信息放在页脚且缺省配置提示不够可操作。P2：240px 档可视树空间有限；中间箭头操作及小字号旁注可发现性偏弱。保存结果/错误恢复仍明确由宿主负责。
+- **Assessment B**：目标 slug `linkx-fe-src-components-lxtransferpanel-index-vue`，ignore 清单不存在。组件、`demo/basic.vue` 和 `docs/components/lxtransferpanel.md` detector 都是 JSON `[]`、stderr 空、exit `0`，不可单独解释成视觉通过。Chrome 1280px 与 375px 下无横溢，页面无异常；HUD 与 reduced-motion 视图正常。overlay 对两处组件搜索占位文字报告 **3.1:1**；其余 5 项是文档代码/状态文字及 body bounce easing。1 条 `ERR_ABORTED` 发生在页面重载期间，不是持续请求失败。
+- **证据位置**：`tmp-transferpanel-b-browser.json`、`tmp-transferpanel-b-desktop.png`、`tmp-transferpanel-b-mobile.png`、`tmp-transferpanel-b-hud.png`；detector 三件套保存在 `linkx-fe/.impeccable-transferpanel-*`。已启动的 4177 文档站与 8401 live-server 均停止；live-server 报告仓库缺少 `.impeccable/live/config.json`，因此无法清理注入标签，但端口已停止、临时浏览器配置已清理。
+- **门禁**：Assessment A/B 当前版证据已记录，静态与浏览器复核不等于正式 UI-10 关闭；计数仍为 **13/52**。下一步复核 placeholder 令牌/计算样式并处理 P2 对比度，之后有界验证筛选头部、继承说明及紧凑档；真实读屏器、宿主保存态、跨浏览器和全库矩阵继续开放。
+
+## 2026-10-25 LxTransferPanel 搜索占位文字对比度修复交接
+
+- **改动**：`linkx-fe/src/components/LxTransferPanel/index.vue` 为待选树和已选列表两个原生输入显式设置 `::placeholder { color: var(--lx-text-placeholder); opacity: 1; }`。复用现有主题令牌，不增加硬编码颜色；浅色对比度由约 3.1:1 提升到令牌规范要求，HUD 仍随主题覆盖。
+- **验证**：`tests/unit/lx-transfer-panel.test.ts` 单线程 **30/30**；lx-ui `vue-tsc --noEmit`、206 modules 构建、VitePress 文档构建、Vue3 工具链 Prettier/ESLint 指定文件和 `git diff --check` 通过。首次默认 Vitest 并发调用出现重复挂起进程，已终止后用 `--pool=threads --maxWorkers=1 --minWorkers=1` 重跑通过，不视为测试失败。
+- **限制**：`linkx-fe` 没有独立 `prettier`/`eslint` CLI，直接从该目录调用返回命令不存在；已改用 Vue3 项目已安装工具完成指定文件检查。未修改其他工作区改动或临时证据。
+- **后续**：继续处理 TransferPanel Assessment A 的 P1/P2 设计项；本波不关闭 UI-10 **13/52**，宿主保存/loading/error、读屏器、跨浏览器和真实权限联调仍开放。

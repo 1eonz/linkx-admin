@@ -1831,6 +1831,11 @@ function nodeSummaryOf({ node }: LxVirtualTreeNodeSlotProps): string {
   font-size: 12px;
 }
 
+.lx-transfer-panel__filter input::placeholder {
+  color: var(--lx-text-placeholder);
+  opacity: 1;
+}
+
 .lx-transfer-panel__filter button {
   display: inline-flex;
   width: 32px;

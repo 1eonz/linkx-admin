@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-24 组件审计进度补充
+
+- `LxTransferPanel` 已完成当前版 Assessment A/B 补证；评分 28/40，筛选框占位文字对比度 3.1:1 与筛选头部/窄高度信息密度问题待处理。严格矩阵仍开放，详见 `doc/PROJECT-DELIVERY-PLAN.md` 与 `doc/lx-ui/COMPONENT-AUDIT.md`。
+- 2026-10-25 已为两个过滤输入接入 `--lx-text-placeholder`，修复浏览器默认占位色造成的低对比度命中；单测 30/30、类型/构建通过，Assessment A 的布局与宿主契约事项继续开放。
+
 ## 2026-10-24 LxVirtualTree 响应式监听清理回归
 
 - 组件监听注册/卸载逻辑位于 `linkx-fe/src/components/LxVirtualTree/index.vue`；回归位于 `other-admin/admin-vue3/tests/unit/lx-virtual-tree.test.ts`，精确断言 `MediaQueryList.change` 与 `window.resize` 监听器在卸载时移除。
