@@ -1,8 +1,14 @@
 # LinkX 项目交接记录
 
+## 2026-10-25 LxDynamicForm Assessment A 浏览器补充交接
+
+- **补充证据**：Assessment A 浏览器观察见 `tmp-dynamicform-assessment-a-browser-observation/`。当前桌面实际渲染两列，未复现“默认三列挤压”；Light/HUD 错误辅助文案对比度分别为 **6.46:1 / 7.27:1**，关闭此前的对比度疑虑。Space 提交会聚焦首个无效字段。
+- **待核实**：Enter 提交后的焦点行为可能受 CDP 键盘模拟影响，需用真实键盘或等价可信浏览器输入复核。Demo 设置面板密度、schema 文档入口保留为 P3 观察，不据此改变组件默认布局。
+- **门禁**：本轮仍缺正式 Critique 综合 snapshot/trend，UI-10 维持 **13/52**；真实读屏器、宿主提交及后端联调未完成。后续按计划继续审计矩阵开放项，不以 detector `[]` 或独立评估替代正式关闭。
+
 ## 2026-10-25 LxDynamicForm Assessment A/B 当前版复核
 
-- **Assessment A**：独立设计评审 29/40。任务/状态/附件分组、字段错误、远程失败与上传恢复路径清晰；默认三列可能压缩长标签，辅助状态文案、Demo 设置面板和 schema 文档入口分别登记 P1/P2/P3。
+- **Assessment A**：独立设计评审 29/40。任务/状态/附件分组、字段错误、远程失败与上传恢复路径清晰。后续浏览器补充确认桌面两列、错误文案对比度达标，原“默认三列挤压”和对比度疑虑已关闭；Demo 设置面板密度及 schema 文档入口保留为 P3 观察，详见本节前的“Assessment A 浏览器补充交接”。
 - **Assessment B**：组件、Demo、中文文档 detector 均为合法 JSON `[]`，stderr 空、退出码 0；不以空数组单独判定视觉通过。8 个 Light/HUD、1280/375/320px、reduced-motion 视图均可达，无 page error、failed request 或注入前页面横溢出。overlay 注入后窄屏变宽属于检测覆盖层副作用，已与业务表单自身单列布局区分。
 - **浏览器交互**：验证字段类型预览、受控回写、密码错误和 ARIA 关联、远程取消/迟到响应、远程失败重试、单图失败重试、多图列表及自适应列；证据保存在 `tmp-dynamicform-assessment-b-current/`。组件单测 31/31 通过。
 - **验证与边界**：lx-ui 类型检查、206 模块构建、VitePress 文档构建、指定 Prettier 通过。ESLint 不能对库目录直接套用 Vue3 宿主配置（配置根目录和解析器不匹配），不将该工具路径问题记为代码失败；后续应使用库自身可用 lint 配置或补充配置后再跑。真实读屏器、业务后端提交及正式综合 Critique snapshot/trend 仍开放，UI-10 维持 13/52。
