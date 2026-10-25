@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-25 LxDynamicForm 当前版 Assessment A/B
+
+- Assessment A 独立评分 **29/40（Good）**；字段分组、字段错误与远程/上传恢复路径较清楚。默认三列密度、辅助文案对比度、Demo 设置面板密度、schema 文档入口登记为后续 P1/P2/P3。
+- Assessment B detector 的组件、Demo、中文文档目标均为合法 JSON `[]`、stderr 空、退出码 0；仅表示静态零命中。浏览器覆盖 Light/HUD、1280/375/320px 与 reduced-motion；注入前无页面横溢、page error 或 failed request，关键字段交互已验证。overlay 注入后的移动宽度扩展属于覆盖层副作用。
+- 单测 31/31；lx-ui 类型、206 模块构建、VitePress 文档构建和指定 Prettier 通过。ESLint 尚无可正确跨库根目录应用的配置，此工具限制单独记录，不作为代码缺陷证据。
+- **矩阵状态**：该评估没有关闭 UI-10 严格行，当前总数仍 13/52；正式综合 Critique snapshot/trend、真实读屏器和宿主后端提交仍待完成。详细过程见 `doc/PROJECT-DELIVERY-PLAN.md` 与 `doc/PROJECT-HANDOFF.md`。
+
 ## 2026-10-24 LxTransferPanel 当前版 A/B 补证
 
 - Assessment A 独立源码/设计评审 **28/40**；未取得 A 自身浏览器证据。筛选态头部、继承授权说明、240px 高度档和中间操作列可发现性列为 P1/P2。
