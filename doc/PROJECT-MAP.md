@@ -1092,3 +1092,4 @@ Element Plus 与 lx-ui 的依赖关系、46 种模板标签映射、缺少专用
 - ArrowDown 打开快捷日期区间时，浏览器默认聚焦可能在组件第一次定位后继续滚动；`LxDatePicker` 现于当前帧、下一帧及零延迟任务再次校正短屏位置，并在卸载时清理待执行句柄。
 - HUD 文档 E2E 使用最后一个可见弹层，排除收起过渡期间残留节点的严格定位歧义。
 - 以系统 Chrome 访问 4177 文档站重跑 LxDatePicker 与 LxInput 文档回归，**35/35 通过**；原先 3 个失败用例已复验通过。
+- `LxDynamicForm` 已完成当前版独立 Assessment A/B：A 29/40；B 覆盖 Light/HUD、桌面/窄屏、reduced-motion 与关键字段交互，detector 三目标合法 `[]`/空 stderr/退出码 0。默认三列密度、辅助文案对比度、Demo 设置密度和 schema 文档入口登记为后续项；UI-10 仍 13/52，未关闭严格矩阵。

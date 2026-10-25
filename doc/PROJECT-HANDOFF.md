@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## 2026-10-25 LxDynamicForm Assessment A/B 当前版复核
+
+- **Assessment A**：独立设计评审 29/40。任务/状态/附件分组、字段错误、远程失败与上传恢复路径清晰；默认三列可能压缩长标签，辅助状态文案、Demo 设置面板和 schema 文档入口分别登记 P1/P2/P3。
+- **Assessment B**：组件、Demo、中文文档 detector 均为合法 JSON `[]`，stderr 空、退出码 0；不以空数组单独判定视觉通过。8 个 Light/HUD、1280/375/320px、reduced-motion 视图均可达，无 page error、failed request 或注入前页面横溢出。overlay 注入后窄屏变宽属于检测覆盖层副作用，已与业务表单自身单列布局区分。
+- **浏览器交互**：验证字段类型预览、受控回写、密码错误和 ARIA 关联、远程取消/迟到响应、远程失败重试、单图失败重试、多图列表及自适应列；证据保存在 `tmp-dynamicform-assessment-b-current/`。组件单测 31/31 通过。
+- **验证与边界**：lx-ui 类型检查、206 模块构建、VitePress 文档构建、指定 Prettier 通过。ESLint 不能对库目录直接套用 Vue3 宿主配置（配置根目录和解析器不匹配），不将该工具路径问题记为代码失败；后续应使用库自身可用 lint 配置或补充配置后再跑。真实读屏器、业务后端提交及正式综合 Critique snapshot/trend 仍开放，UI-10 维持 13/52。
+- **下一棒**：继续审计矩阵的下一个开放项，并优先处理 DynamicForm 已登记的文档入口和表单密度问题；在 UI-10/UI-11 门禁完成前不删除宿主 Element Plus。
+
 ## 2026-10-24 LxVirtualTree 卸载监听清理回归补强
 
 - **变更**：扩充 `tests/unit/lx-virtual-tree.test.ts` 的触屏/窄屏测试，验证挂载后注册 `MediaQueryList.change` 与 `window.resize`，卸载后使用同一 handler 清理，避免组件销毁后仍保留全局监听。
