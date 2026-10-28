@@ -28,3 +28,18 @@ tests/**/coverage/
 *.codex/
 
 dist.*
+
+# 自动化验收的本地运行产物；正式测试源码和中文结论继续纳入仓库
+test-results/
+playwright-report/
+/chrome-tmp/
+/tmp-*
+/lxinput-after.png
+/lxinput-current.png
+/lxinput-page.html
+/lxprotable-a.png
+/lxprotable-a2.png
+
+# 命令重定向误生成的本地占位文件
+/0
+/1
