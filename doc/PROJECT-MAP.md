@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-28 页签栏本波入口
+
+- 组件：`linkx-fe/src/components/LxTabsBar/index.vue`、`types.ts`；示例和契约：该目录 `demo/basic.vue`、`linkx-fe/docs/components/lxtabsbar.md`。导航受控切换/关闭、键盘定位、局部露出及焦点恢复统一在组件，未保存确认和路由守卫留宿主。
+- 回归：`other-admin/admin-vue3/tests/unit/lx-tabs-bar.test.ts` **5/5**；`tests/e2e/lx-tabs-bar-docs.spec.ts` 配合 `playwright.lxui.config.ts` **7/7**。当前组件经独立代码复审及 Impeccable 隔离 A/B 有界复验；全库设计关闭数仍 **13/52**，不混同宿主迁移/真实联调。
+
 - `LxDynamicForm` 当前版 Assessment A 29/40；B 覆盖 Light/HUD、桌面/窄屏、reduced-motion 与关键字段交互，detector 三目标合法 `[]`/空 stderr/退出码 0。补充浏览器观察确认桌面为两列、Light/HUD 错误文案对比度 6.46:1 / 7.27:1，原默认三列与对比度疑虑均未复现；Enter 真实键盘焦点、Demo 设置密度/schema 入口及正式 Critique snapshot/trend 仍开放。UI-10 仍 13/52，未关闭严格矩阵。
 
 ## 2026-10-24 组件审计进度补充

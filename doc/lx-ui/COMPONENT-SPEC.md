@@ -237,6 +237,8 @@ interface Slots {
 
 浏览器风格页签（`h-9`，激活 = 白底 + 主色文字 + 顶部圆角）。
 
+路由导航使用 `nav` 与 `aria-current="page"`；左右方向键和 Home/End 只移动焦点，Enter/Space 请求激活。X 或中键仅发出受控 `close`，实际删除、未保存确认与路由守卫由宿主处理。宿主移除聚焦项后回收至邻项，保留宿主主动设置的有效焦点；活动项变化只滚动局部容器，不抢焦点。窄屏/粗略指针的按钮至少 44px，页签最小 160px；桌面关闭按钮 24px，基准高度令牌仍为 36px，较高的 `extra` 插槽可以撑高导航。
+
 ```ts
 interface LxTabItem {
   key: string

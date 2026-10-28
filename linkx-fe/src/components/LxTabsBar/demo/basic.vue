@@ -88,7 +88,7 @@ function addTab() {
 }
 
 .tabs-demo__add {
-  min-height: 32px;
+  min-height: 44px;
   padding: 0 10px;
   border: 1px solid var(--lx-border);
   border-radius: var(--lx-radius-sm);
