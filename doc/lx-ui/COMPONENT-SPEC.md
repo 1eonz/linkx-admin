@@ -275,9 +275,11 @@ interface Props {
   separator?: string // default: '/'
 }
 interface Events {
-  (e: 'select', item: LxBreadcrumbItem): void
+  (e: 'select', item: LxBreadcrumbItem, event: MouseEvent): void
 }
 ```
+
+2026-10-29契约补充：组件不依赖Router，只由宿主受控更新items；select保留原始事件且不自动阻止导航。宿主排除已阻止事件、非主键和修饰键后接管普通导航，href及redirect由Router解析。末项即使带to也不可点击；nav/ol/li及唯一aria-current表达层级，分隔符对辅助技术隐藏。空items不渲染空列表，插槽仍保留；长标题保留完整文本/title，路径分段换行。组件不拥有请求加载/错误状态，不替宿主安排目的页焦点；Demo回退后聚焦结果说明。
 
 ## 11. LxSplitLayout — 树 + 表分栏容器
 

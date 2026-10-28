@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-29 面包屑受控导航与验证入口
+
+- 组件：`linkx-fe/src/components/LxBreadcrumb/index.vue`→`demo/basic.vue`→`linkx-fe/docs/components/lxbreadcrumb.md`，可定位有序路径/当前页、长路径换行、主题、粗指针和原生链接。
+- 宿主：`other-admin/admin-vue3/src/components/Breadcrumb/index.vue`→`src/layout/components/Navbar.vue`，可信元数据生成条目，Router解析href/参数/redirect；无新增API或权限键。
+- 测试：`other-admin/admin-vue3/tests/unit/lx-breadcrumb.test.ts`8/8、`tests/e2e/lx-breadcrumb-docs.spec.ts`7/7；`navbar-preview.spec.ts`四宽Enter首页，与`preview.spec.ts`组合11/11覆盖首页及32现役菜单首屏Mock。严格矩阵15/52，外围HUD与真实联调仍开放。
+
 ## 2026-10-29 顶栏与自适应宿主入口
 
 - 组件与 Demo：`linkx-fe/src/components/LxNavbar/`、`linkx-fe/docs/components/lxnavbar.md`；宿主：`other-admin/admin-vue3/src/layout/index.vue`、`components/Navbar.vue`、`AppMain.vue`，负责可变顶栏后的主区内部滚动与原生账户入口。

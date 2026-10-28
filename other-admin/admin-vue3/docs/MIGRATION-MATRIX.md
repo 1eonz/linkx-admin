@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-29 既有面包屑宿主导航契约收口
+
+- `src/components/Breadcrumb/index.vue`继续消费本地`lx-ui`；轻量可信条目替代虚构完整路由断言，Router处理href/history base/参数/redirect字符串、对象和函数；普通点击/Enter走SPA，修饰键保留原生语义。无新增业务API、后端字段或权限键。
+- 单测8/8、文档E2E7/7、Mock全菜单与四宽宿主组合11/11通过；两端类型与生产构建、库文档构建、指定Prettier/无自动修复ESLint通过，独立代码复审无P0–P2。 `navbar-preview.spec.ts`四宽真实Enter首页并更新当前位置，组合覆盖首页和32现役菜单首屏样例；不把入口Smoke/Mock当全部业务完成。
+- 库Breadcrumb严格行关闭，当前15/52；Impeccable隔离A/B与唯一有界修后确认完成，A31/36为中间修订版浏览器基线、原Demo P2关闭；B四源码三件套合法，文档六视图18状态与宿主六视图实际overlay齐备。源码[]不作为单独通过依据；宿主外围命中保留归因，不称整站零问题。 下一波LxSplitLayout比例/拖动/键盘/折叠态；保持基础组件/动态图标→DynamicForm→Vue3全量替换顺序。真实读屏器、跨浏览器、权限及后端联调仍开放，操作引导暂缓。
+
 ## 2026-10-29 既有 LxNavbar 宿主兼容与 Mock 回归
 
 - 既有 Navbar 消费点取消固定高度裁切；Layout/AppMain 改用剩余空间布局，账户触发器由 div 改为 button，保留菜单、改密、绑定警员和退出契约。业务请求仍使用 `.then().catch().finally()`，本次不扩大 Element Plus 批量替换。

@@ -45,6 +45,16 @@ for (const width of [1280, 768, 375, 320]) {
     expect(geometry.mainBottom).toBeLessThanOrEqual(801);
     expect(geometry.mainHeight).toBeGreaterThan(400);
     expect(geometry.accountVisible).toBe(true);
+    const breadcrumb = header.getByRole('navigation', { name: '面包屑导航' });
+    await expect(breadcrumb.locator('[aria-current="page"]')).toHaveText('群组标签管理');
+    const home = breadcrumb.getByRole('link', { name: '首页', exact: true });
+    await expect(home).toHaveAttribute('href', '/dashboard');
+    await home.focus();
+    await page.keyboard.press('Enter');
+    await expect(page).toHaveURL(/\/dashboard$/);
+    await expect(header.getByRole('navigation', { name: '面包屑导航' }).locator('[aria-current="page"]')).toHaveText(
+      '首页',
+    );
     expect(unexpectedWrites).toEqual([]);
   });
 }

@@ -103,7 +103,7 @@
 
 ### 1.4 LxBreadcrumb 面包屑 📐 P3｜仅 2 处
 
-路由自动生成（V2 现状）；分隔符 `/`；最后一级 `--lx-text-primary`，其余可点击 `--lx-text-regular` hover 主色。
+路由由宿主通过 `items` 受控传入；组件不读取Router。默认分隔符`/`，当前项`--lx-text-primary`、祖先`--lx-text-regular`，链接hover/focus-visible主色。13px字号、8px间隔；分隔符与后一级成组换行，插槽独立换行，长标题省略且保留完整文本/title。有序列表和唯一aria-current表达位置，键盘焦点为贴合链接的2px轮廓。最低24px高度、粗指针44px为可访问性适配，不声称所有链接44×44。SPA宿主排除已阻止事件、非主键和修饰键后，再阻止普通导航交给Router；不附加动画。2026-10-29严格行关闭，深路径触屏全文及环境插槽身份为后续P3。
 
 ### 1.5 LxSplitLayout 左树右表分栏 📐 P1｜6 个业务模块通用骨架
 

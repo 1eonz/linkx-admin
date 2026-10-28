@@ -1,5 +1,14 @@
 # LinkX 项目交接记录
 
+## 2026-10-29 LxBreadcrumb 与真实宿主导航交接
+
+- 实现入口：`linkx-fe/src/components/LxBreadcrumb/index.vue`→`demo/basic.vue`→`linkx-fe/docs/components/lxbreadcrumb.md`；nav/ol/li、唯一当前项、层级换行、完整title、独立插槽及贴合链接焦点完成。13px/8px令牌保留，24px最低高度/粗指针44px为可访问性差异，不声称所有链接44×44。
+- 宿主`other-admin/admin-vue3/src/components/Breadcrumb/index.vue`从可信路由生成轻量条目，Router处理href/参数/history base及字符串/对象/函数redirect，仅接管未阻止的普通主键点击。移除虚构路由断言、过时过渡说明和失效EP选择器；业务API Promise链规则不变。
+- 证据入口：`tests/unit/lx-breadcrumb.test.ts`、`tests/e2e/lx-breadcrumb-docs.spec.ts`及既有`tests/e2e/navbar-preview.spec.ts`四宽Enter首页。单测8/8、文档E2E7/7、Mock全菜单与四宽宿主组合11/11通过；两端类型与生产构建、库文档构建、指定Prettier/无自动修复ESLint通过，独立代码复审无P0–P2。 Mock覆盖首页和32现役菜单首屏样例；构建既有Less导出、循环分包、依赖注解和大包警告仍保留。
+- Impeccable隔离A/B与唯一有界修后确认完成，A31/36为中间修订版浏览器基线、原Demo P2关闭；B四源码三件套合法，文档六视图18状态与宿主六视图实际overlay齐备。源码[]不作为单独通过依据；宿主外围命中保留归因，不称整站零问题。 B原脚本鼠标切长态后coarse=false的采样限制保留；主任务真实tap长路径三个链接>=44px、选择后结果获焦、恢复和Ctrl新标签为独立E2E补证，未改写B原始观察。
+- 快照`.impeccable/critique/2026-10-28T23-30-21Z__linkx-fe-src-components-lxbreadcrumb-index-vue.md`；趋势25/40→31/36非同比，31仍为基线。A/B与截图在`tmp-lxbreadcrumb-*`按规则留本机，8400 helper已停、4177文档/30847隔离Mock保留。深路径触屏全文和环境插槽P3保留。
+- 严格矩阵15/52。下一波LxSplitLayout比例/拖动/键盘/折叠态；保持基础组件/动态图标→DynamicForm→Vue3全量替换顺序。真实读屏器、跨浏览器、权限及后端联调仍开放，操作引导暂缓。 本波仅暂存自身hunk，其他未完成组件改动保留。
+
 ## 2026-10-29 补齐历史运行产物的 Git 忽略与取消跟踪
 
 - 开始时暂存区为空，现有 20 个源码、测试及正式文档改动保留，不混入本次提交。
