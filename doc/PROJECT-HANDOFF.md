@@ -1,5 +1,16 @@
 # LinkX 项目交接记录
 
+## 2026-10-29 LxNavbar 与宿主导航交接
+
+- 实现入口：`linkx-fe/src/components/LxNavbar/` 与对应文档。容器收窄保留品牌、面包屑及 trailing 操作，允许换行；全宽实测 998×56px，窄文档容器 270px 内所有操作可见。组件仍为展示/通用交互，不导入业务 API、Router 或凭据。
+- Fullscreen API 具备请求锁、busy/禁用、明确中文失败提示、重试及卸载迟到保护。保留既有 `fullscreen-toggle` 报告实际状态契约，新增 `fullscreen-error(error: Error)`；模拟拒绝不当作真实浏览器授权通过。
+- 用户菜单保持 Teleport，打开期间将来源 `--lx-*` 令牌传给浮层，只监听来源祖先 class/style，关闭、user 取消或卸载时释放，不修改全局主题。HUD 菜单、44px 触屏菜单项、浅色 placeholder 和徽标对比度已修复；通知数量的可访问名称为剩余 P3。
+- 宿主入口：`src/layout/index.vue`、`components/Navbar.vue`、`AppMain.vue`。主区按实际头部高度分配剩余空间，取消顶栏固定裁切，账户触发器改为原生 button。`playwright.preview.config.ts` 接入独立 `navbar-preview.spec.ts`，未改动既有业务请求链。
+- 当前证据：Navbar 单测 **7/7**；文档 E2E **7/7**，含六视图显式等待 Escape 关闭及按钮回焦；Mock 组合 **11/11** 覆盖首页+32 现役菜单首屏样例及四宽度宿主布局，修后宿主专项 **4/4**。库/宿主类型、两端生产构建、文档构建、指定 Prettier/无自动修复 ESLint 通过。独立代码复审无可复现 P0–P2。
+- Impeccable 隔离 A/B 与有界修后复验完成；A **34/40** 为修前基线。B 三源码 JSON/stderr/退出码均合法，实际扫描覆盖初态/菜单/失败状态；修后 placeholder 对比度 Light/HUD **4.83/6.79**，徽标 **5.56/6.46**，错误文案 **5.31/7.37**。剩余 SVG 边界和弹层覆盖文档命中经截图归因，不宣称全零；B 的一次 Escape 即时采样不确定与主任务等待式 E2E 通过分别保留。
+- 综合快照 `.impeccable/critique/2026-10-28T23-10-22Z__linkx-fe-src-components-lxnavbar-index-vue.md`；趋势 **24→34/40**，对应不同源码，34 仍是本波修前基线。8400 检测 helper 已停止，4177 文档服务保留；隔离 Mock 预览 30847 已后台启动，PID 记录于 `tmp-mock-preview.pid`（本次 12700），可供本地查看，终止时按该 PID 核对后停止。临时截图/报告及日志按既有忽略规则留本机。
+- 严格矩阵 Navbar 行已关闭，核对总计 **14/52**；不代表整库替换、全部业务或真实联调完成。下一波 LxBreadcrumb 当前版补证/修复，真实权限及后端契约继续明确阻塞。构建保留旧 Less 导出、chunk 循环/大包及依赖注解警告，未混入本波修复。
+
 ## 2026-10-28 LxTabsBar 本波交接
 
 - 已实现：路由导航保持 `nav`/`aria-current`；方向键、Home/End 只定位，Enter/Space 激活；中键阻止 Chrome 自动滚动后请求关闭，宿主持有列表和确认权。删除聚焦项后定位邻项/空导航，并尊重宿主渲染后主动设置的焦点。

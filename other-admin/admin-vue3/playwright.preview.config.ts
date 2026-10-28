@@ -12,7 +12,7 @@ export default defineConfig({
   ...baseConfig,
   timeout: 240_000,
   testIgnore: [],
-  testMatch: ['**/preview.spec.ts', '**/col-form-search-race.spec.ts'],
+  testMatch: ['**/preview.spec.ts', '**/col-form-search-race.spec.ts', '**/navbar-preview.spec.ts'],
   use: {
     ...baseConfig.use,
     baseURL: mockPreviewUrl,

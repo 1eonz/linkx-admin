@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-29 顶栏与自适应宿主入口
+
+- 组件与 Demo：`linkx-fe/src/components/LxNavbar/`、`linkx-fe/docs/components/lxnavbar.md`；宿主：`other-admin/admin-vue3/src/layout/index.vue`、`components/Navbar.vue`、`AppMain.vue`，负责可变顶栏后的主区内部滚动与原生账户入口。
+- 回归：`tests/unit/lx-navbar.test.ts` **7/7**、`tests/e2e/lx-navbar-docs.spec.ts` **7/7**、`tests/e2e/navbar-preview.spec.ts` 最终 **4/4**；结合 `preview.spec.ts` 组合 **11/11** 覆盖首页与 32 个现役菜单样例。新专项由 `playwright.preview.config.ts` 纳入隔离 Mock，预览地址仍为本地 30847。
+- 独立代码审核及正式隔离 A/B/快照完成，Navbar 严格组件行关闭，当前 **14/52**；权限/后端联调不由 Mock 结果替代。
+
 ## 2026-10-28 页签栏本波入口
 
 - 组件：`linkx-fe/src/components/LxTabsBar/index.vue`、`types.ts`；示例和契约：该目录 `demo/basic.vue`、`linkx-fe/docs/components/lxtabsbar.md`。导航受控切换/关闭、键盘定位、局部露出及焦点恢复统一在组件，未保存确认和路由守卫留宿主。

@@ -26,6 +26,7 @@ function recordSearch(keyword: string) {
       @search="recordSearch"
       @notification-click="lastAction = '已打开通知'"
       @fullscreen-toggle="lastAction = $event ? '已进入全屏' : '未处于全屏'"
+      @fullscreen-error="lastAction = '全屏切换失败，可以调整浏览器权限后重试'"
       @user-command="lastAction = `用户操作：${$event}`"
     >
       <template #leading>
@@ -83,7 +84,7 @@ function recordSearch(keyword: string) {
 }
 
 .navbar-demo__theme {
-  min-height: 36px;
+  min-height: 44px;
   padding: 0 10px;
   border: 1px solid var(--lx-border);
   border-radius: var(--lx-radius-md);
@@ -122,16 +123,5 @@ function recordSearch(keyword: string) {
   padding: 0 var(--lx-space-md) var(--lx-space-md);
   color: var(--lx-text-secondary);
   font-size: 13px;
-}
-
-@media (max-width: 640px) {
-  .navbar-demo__brand,
-  .navbar-demo__page-name {
-    display: none;
-  }
-
-  .navbar-demo__theme {
-    display: none;
-  }
 }
 </style>

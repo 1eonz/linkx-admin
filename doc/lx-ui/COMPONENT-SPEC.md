@@ -219,11 +219,14 @@ interface Props {
   networkStatus?: LxStatus // default: 'online'
   /** 用户显示信息 */
   user?: { name: string; role?: string; avatar?: string }
+  /** 是否显示全屏切换按钮 */
+  showFullscreen?: boolean // 默认 true
 }
 interface Events {
   (e: 'search', keyword: string): void
   (e: 'notification-click'): void
   (e: 'fullscreen-toggle', full: boolean): void
+  (e: 'fullscreen-error', error: Error): void // 拒绝或不支持时报告，toggle仍同步实际状态
   (e: 'user-command', cmd: 'profile' | 'password' | 'logout'): void
 }
 interface Slots {
@@ -232,6 +235,8 @@ interface Slots {
   trailing?(): unknown // 右侧操作区追加
 }
 ```
+
+顶栏最小高度为 56px；容器不超过 760px 时品牌/面包屑和工具区允许分行，trailing 保持可见。全屏请求处理中禁用并报告 busy，失败有中文提示且可重试，卸载后忽略迟到结果。用户菜单仍 Teleport，打开期间同步来源令牌，关闭/user取消/卸载时释放监听；触屏菜单项至少 44px。
 
 ## 9. LxTabsBar — 页签栏
 

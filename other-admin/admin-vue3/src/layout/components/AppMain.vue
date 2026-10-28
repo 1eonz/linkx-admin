@@ -26,9 +26,10 @@ const key = computed(() => route.path);
 
 <style lang="less" scoped>
 .app-main {
-  // 用 height 而非 min-height，让子组件可以 height: 100% 撑满
-  // padding 由各页面的 .app-container 自行管理（默认 @spacing-md）
-  height: calc(100vh - @navbar-height);
+  // 主区由布局分配顶栏后的剩余高度，兼容顶栏换行及错误提示。
+  // min-height: 0 保持滚动在主区内部，页面仍可按 height: 100% 撑满。
+  flex: 1 1 0;
+  min-height: 0;
   width: 100%;
   position: relative;
   overflow-x: hidden;

@@ -100,11 +100,11 @@ onMounted(() => {
     <template #trailing>
       <span class="right-tip">修改数据后，请重新登录客户端</span>
       <el-dropdown class="avatar-container" trigger="click">
-        <div class="avatar-wrapper">
+        <button class="avatar-wrapper" type="button" aria-label="账户菜单">
           <span class="user-avatar">{{ avatarText }}</span>
           <span v-show="role" class="user-role">{{ role }}</span>
           <LxIcon class="arrow-icon" name="chevron-down" :size="12" />
-        </div>
+        </button>
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">
             <router-link to="/">
@@ -133,8 +133,8 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .navbar {
-  height: @navbar-height;
-  overflow: hidden;
+  min-height: @navbar-height;
+  height: auto;
   position: relative;
   display: flex;
   align-items: center;
@@ -200,9 +200,19 @@ onMounted(() => {
       display: flex;
       align-items: center;
       gap: @spacing-sm;
+      min-height: 44px;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
       padding: @spacing-xs @spacing-sm;
       border-radius: @radius-2xl;
       transition: all @transition-duration @transition-timing;
+
+      &:focus-visible {
+        outline: 2px solid var(--lx-color-primary);
+        outline-offset: -2px;
+      }
 
       &:hover {
         background: @navbar-hover-bg;
