@@ -7,7 +7,7 @@
 - 本波补右侧抽屉 8px 左侧圆角，Demo 审计长值断行和浅色高对比成功色；未改变遮罩默认不关闭、ESC、footer 与插槽契约。
 - 证据：单测 **4/4**、文档 E2E **1/1**、`vue-tsc --noEmit`、指定 Prettier 通过。Assessment A **29/40**；Assessment B 三目标 detector 均为合法 `[]`、stderr 空、退出码 0，浏览器覆盖 Light/HUD、1280/375/320px、焦点、ESC、遮罩、44px 关闭按钮、reduced-motion 和无横溢。
 - 首次 overlay 交互被 Impeccable banner 拦截，fresh context 复跑成功；`tmp-lxdrawer-assessment-b-current/run-20261030/overlay-interaction-failure.json` 保留该工具环境记录，不能归因组件缺陷。
-- 严格矩阵暂不关闭：尚未生成修复后综合 snapshot/trend，空标题栏、长标题触屏提示和组件独立 reduced-motion 证据仍开放。下一棒先补综合证据，再按审计矩阵进入下一个基础组件。
+- 综合 snapshot 已写入 `.impeccable/critique/2026-10-29T23-53-11Z__linkx-fe-src-components-lxdrawer-index-vue.md`，trend 首条为 **29/40**。严格矩阵暂不关闭：空标题栏、长标题触屏提示和组件独立 reduced-motion 证据仍开放。下一棒按审计矩阵进入下一个基础组件。
 
 ## 2026-10-30 UI-11 / LxStatusDot 严格组件行收口
 
