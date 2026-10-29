@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## 2026-10-30 UI-11 / LxStatusDot 严格组件行收口
+
+- 实现入口：`linkx-fe/src/components/LxStatusDot/index.vue`、`types.ts`、`demo/basic.vue`、`demo/with-text.vue`、`demo/recovery.vue`；文档入口为 `linkx-fe/docs/components/lxstatusdot.md` 与 `doc/lx-ui/demo/LXSTATUSDOT.md`。状态点仍为纯展示组件，业务适配器的 `code=0 -> busy` 与库直传 `code=0 -> offline` 分开保留。
+- 恢复 Demo 通过 `loadStatus(signal, scenario)` 接收宿主 Mock，保留最后可信状态；加载期间锁定重复刷新，取消/卸载 abort 后忽略迟到结果。所有 API 风格保持 Promise 链，非 online 状态统一播报“状态已更新”。
+- 证据：`tests/unit/lx-status-dot.test.ts` **47/47**、`tests/unit/lx-status-dot-recovery.test.ts` **9/9**、`tests/e2e/lx-status-dot-docs.spec.ts` **10/10**；库类型、构建、文档构建、指定 Prettier/lint 通过。A **36/40** 为当前版评估，B 五目标 detector 均 `[]`/空 stderr/0，并有浅色/HUD、320/375/1280、reduced-motion 与 Mock 浏览器证据。B 仅有 Demo 外壳 checkbox bounce 误报，不归因于 StatusDot。
+- 正式差异：说明文字当前 13px、表格点当前 8px；HUD processing 使用共享 `--lx-color-primary-container` 的 `#0ea5e9`。两项均已登记为规范例外，不在 StatusDot 内硬编码主题色。A 的长文本垂直居中属于 P3，可后续结合真实页面密度再评估。
+- 严格矩阵 **17/52**。没有新增 Vue3 业务消费点，不能把本波当作业务迁移或真实权限联调完成；`.impeccable/`、`tmp-*`、测试截图和 Vue3 `artifacts/` 均为本机证据并由 Git 忽略规则排除。
+
 ## 2026-10-29 LxSplitLayout 响应式与稳定调宽交接
 
 - 实现入口：`linkx-fe/src/components/LxSplitLayout/index.vue`→`demo/basic.vue`→`linkx-fe/docs/components/lxsplitlayout.md`。默认三轨道/可调四轨道/折叠两轨道、内容600px与视口767px断点、44px堆叠按钮、普通主区容器与唯一aria-controls已落实；无业务API和路由耦合。

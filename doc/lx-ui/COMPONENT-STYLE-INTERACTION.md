@@ -165,7 +165,7 @@
 
 ### 2.3 LxStatusDot 状态点 ✅｜8+ 处 · P1 铁律组件
 
-**样式**：6-8px 实心圆（表格行内 6px）；五色：online `#67c23a` / processing `#409eff` / busy `#e6a23c` / error `#f56c6c` / offline `#909399`；online 带 hudPulse 呼吸（外扩淡出 ping 动画）；error 可叠加 tacticalBlink 闪烁（高危未处理专属）；`showText` 时右侧 12px 文字。
+**样式**：默认 8px 实心圆；密集表格仍可由宿主传入 6px。五色遵循主题令牌：online `#67c23a` / processing 使用主题 primary-container（HUD 当前 `#0ea5e9`，浅色保持设计主色）/ busy `#e6a23c` / error `#f56c6c` / offline `#909399`；online 带 `lx-hud-pulse` 呼吸（外扩淡出 ping 动画），reduced-motion 时关闭；`showText` 说明文字当前为 13px并支持长文本换行。
 
 **交互**：纯展示；hover 出 title 全称（建议补充）；`code` 0-7 数字兼容层（4→online，1/2/7→processing，0/5→busy，3/6→error，对齐后端连接状态枚举，迁移期保留）。
 

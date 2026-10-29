@@ -4,9 +4,8 @@
 
 ## 基础用法
 
-<script setup>
+<script setup lang="ts">
 import Basic from '../../src/components/LxStatusDot/demo/basic.vue';
-import WithText from '../../src/components/LxStatusDot/demo/with-text.vue';
 </script>
 <div class="demo-box"><Basic /></div>
 
@@ -14,24 +13,47 @@ import WithText from '../../src/components/LxStatusDot/demo/with-text.vue';
 <<< ../../src/components/LxStatusDot/demo/basic.vue
 :::
 
-## 表格状态列（show-text）
-
-<div class="demo-box"><WithText /></div>
-
-::: details 查看代码
-<<< ../../src/components/LxStatusDot/demo/with-text.vue
-:::
+示例覆盖五态中文名称、6/8/10px、开关呼吸、兼容码、密集静态列表、长说明、表格状态列和宿主恢复。HUD 复选框切换整个示例主题。
 
 ## 语义
 
-| 状态 | 颜色 | 适用 |
-|---|---|---|
-| online | 绿 `#67c23a` | 在线/正常/在岗/已连接 |
-| processing | 亮蓝 `#409eff` | 进行中/流转中 |
-| busy | 黄 `#e6a23c` | 忙碌/临时离岗/降级/待处理 |
-| error | 红 `#f56c6c` | 错误/断开/紧急/高危 |
-| offline | 灰 `#909399` | 离线/停用/归档/只读 |
+| 状态       | 颜色           | 适用                      |
+| ---------- | -------------- | ------------------------- |
+| online     | 绿 `#67c23a`   | 在线/正常/在岗/已连接     |
+| processing | 亮蓝 `#409eff` | 进行中/流转中             |
+| busy       | 黄 `#e6a23c`   | 忙碌/临时离岗/降级/待处理 |
+| error      | 红 `#f56c6c`   | 错误/断开/紧急/高危       |
+| offline    | 灰 `#909399`   | 离线/停用/归档/只读       |
 
 ## API
 
-`status`（LxStatus，默认 offline）/ `size`（px，默认 8；侧边栏徽章 6）/ `pulse`（online 呼吸动画，同屏 >20 个建议关闭，默认 true）/ `status-desc` + `show-text`（状态文本）/ `code`（@deprecated 0-7 数字兼容层，迁移期移除）
+| 属性         | 类型       | 默认值    | 说明                                                                           |
+| ------------ | ---------- | --------- | ------------------------------------------------------------------------------ |
+| `status`     | `LxStatus` | `offline` | 五态语义；不以操作成功/警告替代业务状态。                                      |
+| `size`       | `number`   | `8`       | 任意有限正数像素；非有限值或不大于 0 回退 8。6/8/10 为常用尺寸，不是取值限制。 |
+| `pulse`      | `boolean`  | `true`    | 仅在线状态使用既有 `lx-hud-pulse`，3.5s；同屏超过 20 个状态点应关闭。          |
+| `statusDesc` | `string`   | `''`      | 优先作为可访问名称及可见说明；未提供时使用五态中文名称。                       |
+| `showText`   | `boolean`  | `false`   | 是否显示说明；名称始终可供辅助技术读取。长文本允许完整换行。                   |
+| `code`       | `number`   | —         | 兼容码，优先于 `status`；已弃用，新接入优先显式语义。                          |
+
+没有事件、插槽或公开实例方法，组件保持纯展示，不内置业务请求或重试操作。
+
+## 兼容与边界
+
+库内直接调用映射：`0→offline`、`1/2/7→processing`、`3/6→error`、`4→online`、`5→busy`。未知数值采用离线视觉兜底，**不代表业务已确认离线**；宿主应通过 `statusDesc` 说明数据来源或未知原因。
+
+Vue3 既有 `StatusDot` 业务适配器保留 Vue2 的 `0/5→busy`，转换为 `status` 后再传给库；两套契约不能混用或通过修改共享映射强行统一。
+
+动画直接复用设计规范的 `lx-hud-pulse`，透明度 0.35–0.85、缩放 1–1.05；减少动效时禁用，不再外扩至 2.2 倍。高密度场景由宿主明确传 `pulse=false`。
+
+## 宿主状态与恢复
+
+加载、空结果、权限不足、失败、取消和禁用由宿主组合，圆点没有这些虚构属性。示例宿主向恢复区注入本地 Mock adapter，不发出业务请求：刷新时保留上次状态并锁定按钮，失败/取消不伪造在线结果；空结果明确展示暂无状态，再次成功可恢复。卸载或取消后不回写结果。
+
+表格在自身具名区域滚动，可通过键盘访问；状态点自身没有操作，因此不增加无意义的 Tab 停靠。
+
+::: details 查看宿主恢复示例
+<<< ../../src/components/LxStatusDot/demo/recovery.vue
+:::
+
+示例只是本地 Mock 验证，不代表真实节点接口、权限或后端联调已完成。

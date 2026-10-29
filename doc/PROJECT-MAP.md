@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-30 状态点组件与恢复示例
+
+- 公共组件：`linkx-fe/src/components/LxStatusDot/index.vue`、`types.ts`；Demo：`basic.vue`、`with-text.vue`、`recovery.vue`；文档：`linkx-fe/docs/components/lxstatusdot.md`。组件负责五态视觉、中文可访问名称、数字兼容映射与 reduced-motion，不访问 API 或权限。
+- 宿主恢复边界由 `recovery.vue` 的 `loadStatus(signal, scenario)` 注入，Mock 覆盖成功、非在线、失败、空、权限、取消和卸载迟到结果；请求链保持 `.then().catch().finally()`。
+- 回归入口：`tests/unit/lx-status-dot.test.ts`（47/47）、`tests/unit/lx-status-dot-recovery.test.ts`（9/9）、`tests/e2e/lx-status-dot-docs.spec.ts`（10/10）。库类型/构建/文档构建通过，严格矩阵 **17/52**；无 Vue3 业务页面消费点，真实后端、权限和跨浏览器验证仍开放。
+
 ## 2026-10-29 分栏布局与验证入口
 
 - 公共实现：`linkx-fe/src/components/LxSplitLayout/index.vue`，API为asideWidth/resizable/collapsed、resize/update:collapsed及aside/default插槽；未增加业务请求。默认/可调/折叠轨道、内容容器与视口响应式、唯一控制目标、指针结束与隐藏焦点恢复均在此定位。

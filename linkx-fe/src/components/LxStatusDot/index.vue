@@ -4,12 +4,13 @@
  * 语义色映射：DESIGN-SPEC §2.1（全库契约，禁止使用方自行换色）
  */
 import { computed } from 'vue'
+
+import type { LxStatusDotProps } from './types'
 import {
   LX_STATUS_COLOR,
   LX_LEGACY_CODE_STATUS,
   type LxStatus,
 } from '../../tokens'
-import type { LxStatusDotProps } from './types'
 
 const props = withDefaults(defineProps<LxStatusDotProps>(), {
   status: 'offline',
@@ -26,6 +27,23 @@ const currentStatus = computed<LxStatus>(() => {
 })
 
 const dotColor = computed(() => LX_STATUS_COLOR[currentStatus.value])
+// 保留任意合法正数尺寸；无效输入回退默认值，避免圆点消失或产生非法 CSS。
+const dotSize = computed(() =>
+  Number.isFinite(props.size) && props.size > 0 ? props.size : 8,
+)
+const statusLabel = computed(() => {
+  if (props.statusDesc) return props.statusDesc
+
+  const labels: Record<LxStatus, string> = {
+    online: '在线',
+    processing: '处理中',
+    busy: '忙碌',
+    error: '错误',
+    offline: '离线',
+  }
+
+  return labels[currentStatus.value]
+})
 const isBreathing = computed(
   () => props.pulse && currentStatus.value === 'online',
 )
@@ -35,31 +53,29 @@ const isBreathing = computed(
   <span
     class="lx-status-dot"
     :class="`lx-status-dot--${currentStatus}`"
-    :aria-label="statusDesc || currentStatus"
+    :aria-label="statusLabel"
     role="img"
   >
     <span
       class="lx-status-dot__wrap"
-      :style="{ width: size + 'px', height: size + 'px' }"
+      :style="{ width: dotSize + 'px', height: dotSize + 'px' }"
     >
-      <!-- 外扩呼吸层（在线态） -->
+      <!-- 直接让实心圆点呼吸，避免常亮底层抵消透明度变化。 -->
       <span
-        v-if="isBreathing"
-        class="lx-status-dot__ping"
+        class="lx-status-dot__dot"
+        :class="{ 'lx-status-dot__ping': isBreathing }"
         :style="{ background: dotColor }"
       />
-      <!-- 实心圆点 -->
-      <span class="lx-status-dot__dot" :style="{ background: dotColor }" />
     </span>
-    <span v-if="showText" class="lx-status-dot__text">{{
-      statusDesc || currentStatus
-    }}</span>
+    <span v-if="showText" class="lx-status-dot__text">{{ statusLabel }}</span>
   </span>
 </template>
 
 <style scoped>
 .lx-status-dot {
   display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
   align-items: center;
   gap: var(--lx-space-sm);
   font-size: 13px;
@@ -82,15 +98,14 @@ const isBreathing = computed(
 }
 
 .lx-status-dot__ping {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  animation: lx-dot-ping 3.5s ease-in-out infinite;
+  animation: lx-hud-pulse 3.5s ease-in-out infinite;
 }
 
 .lx-status-dot__text {
+  min-width: 0;
   color: var(--lx-text-regular);
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 /* 状态文字保持正文对比度；语义色由圆点单独承载。 */

@@ -393,6 +393,8 @@ interface Slots {
 
 铁律：状态一律用圆点，不用色块。
 
+当前实现说明：表格密集场景保留 8px 默认圆点；说明文字当前为 13px，以保证中文长状态在窄屏可换行。HUD 主题的 processing 使用共享 `--lx-color-primary-container` 令牌（当前值 `#0ea5e9`），不在组件内硬编码颜色；如设计令牌调整，组件随主题令牌更新。
+
 ```ts
 interface Props {
   status?: LxStatus // default: 'offline'
