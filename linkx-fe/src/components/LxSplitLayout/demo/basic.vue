@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+
 import { LxSplitLayout } from '../../../index'
 
 const asideWidth = ref(280)
 const collapsed = ref(false)
 const darkTheme = ref(false)
+const resizable = ref(true)
 const activeUnit = ref('command')
 
 const units = [
@@ -26,7 +28,7 @@ const activeUnitName = computed(
 )
 const layoutStatus = computed(
   () =>
-    `侧栏 ${Math.round(asideWidth.value)} 像素 · ${collapsed.value ? '已收起' : '已展开'}`,
+    `侧栏保存宽度 ${Math.round(asideWidth.value)} 像素 · ${collapsed.value ? '已收起' : '已展开'}`,
 )
 
 function onResize(value: number) {
@@ -41,6 +43,10 @@ function onResize(value: number) {
         <input v-model="darkTheme" type="checkbox" aria-label="HUD 深色主题" />
         <span>HUD 深色主题</span>
       </label>
+      <label>
+        <input v-model="resizable" type="checkbox" aria-label="允许调整侧栏" />
+        <span>允许调整侧栏</span>
+      </label>
       <output data-testid="split-layout-status" aria-live="polite">{{
         layoutStatus
       }}</output>
@@ -50,7 +56,7 @@ function onResize(value: number) {
       :aside-width="asideWidth"
       :collapsed="collapsed"
       class="lx-split-layout-demo__layout"
-      resizable
+      :resizable="resizable"
       @resize="onResize"
       @update:collapsed="collapsed = $event"
     >
@@ -78,7 +84,7 @@ function onResize(value: number) {
             <h3>人员名册</h3>
             <p>{{ activeUnitName }} · {{ people.length }} 人</p>
           </div>
-          <output data-testid="split-layout-width"
+          <output data-testid="split-layout-width" aria-label="保存的侧栏宽度"
             >{{ Math.round(asideWidth) }} px</output
           >
         </header>
@@ -128,6 +134,7 @@ function onResize(value: number) {
   align-items: center;
   justify-content: space-between;
   gap: var(--lx-space-md);
+  flex-wrap: wrap;
   padding: var(--lx-space-sm) var(--lx-space-lg);
   border-bottom: 1px solid var(--lx-border-light);
 }
@@ -211,7 +218,7 @@ function onResize(value: number) {
 }
 
 .lx-split-layout-demo__aside button span:last-child {
-  color: var(--lx-text-secondary);
+  color: var(--lx-text-regular);
   font-variant-numeric: tabular-nums;
 }
 
@@ -247,17 +254,25 @@ function onResize(value: number) {
 }
 
 .lx-split-layout-demo table {
+  display: table;
   width: 100%;
   min-width: 520px;
   border-collapse: collapse;
   font-size: 13px;
   text-align: start;
+  margin: 0;
+}
+
+.lx-split-layout-demo tr,
+.lx-split-layout-demo tr:nth-child(2n) {
+  background: var(--lx-bg-card);
 }
 
 .lx-split-layout-demo th,
 .lx-split-layout-demo td {
   height: 40px;
   padding: 0 var(--lx-space-md);
+  border: 0;
   border-bottom: 1px solid var(--lx-border-light);
   white-space: nowrap;
 }

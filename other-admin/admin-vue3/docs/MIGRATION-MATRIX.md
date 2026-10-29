@@ -1,5 +1,12 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-29 分栏组件门禁与宿主迁移边界
+
+- 库`LxSplitLayout`严格行关闭，当前16/52；默认/可调/折叠轨道、局部响应式、保存宽度恢复、指针清理与隐藏焦点已补齐。reduce下父级回传稳定回归已修复，不把pre-only或即时断言写成最终通过。
+- 单测17/17、文档E2E14/14（含1280/1920视口双主题宽容器、reduce及每步450ms稳定态）、库类型/构建/文档构建、宿主类型、指定Prettier及无自动修复ESLint通过；独立代码复审最终差量无可复现P0–P2，并补8项内存SFC/jsdom边界断言。 Impeccable隔离A/B及有界复验完成：A30/36为中间修订版基线，第9项不适用，不冒充修后重评分；A两项P2及文案P3关闭。B旧六视图真实overlay与最终受改两主题专项分开记录，最终三源码均合法[]/空stderr/0，Light数量对比度4.4→6.45:1，剩余icon-tile-stack为已核实功能折叠按钮误报。快照`.impeccable/critique/2026-10-29T00-02-01Z__linkx-fe-src-components-lxsplitlayout-index-vue.md`，趋势仅当前一条，无可比历史；源码[]不是单独通过依据。
+- 本波宿主只增加组件契约/文档测试，`src/`暂无直接LxSplitLayout消费点。组织树数据、跨页选择、取消、权限及真实接口仍需后续按Vue2契约接入，不能把静态Demo或Breadcrumb波次11/11全菜单首屏Mock冒充本波业务完成。
+- 本波没有新增Vue3业务消费点，不把组件完成冒充业务树表迁移或真实联调；真实读屏器、跨浏览器、权限及后端联调仍开放，操作引导暂缓。下一波LxStatusDot中文状态、动效规范、兼容映射和宿主恢复组合；保持基础组件/动态图标→DynamicForm→Vue3全量替换顺序。
+
 ## 2026-10-29 既有面包屑宿主导航契约收口
 
 - `src/components/Breadcrumb/index.vue`继续消费本地`lx-ui`；轻量可信条目替代虚构完整路由断言，Router处理href/history base/参数/redirect字符串、对象和函数；普通点击/Enter走SPA，修饰键保留原生语义。无新增业务API、后端字段或权限键。
@@ -201,7 +208,7 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 `LxDescriptions` 已对照 `design/详情描述行 Descriptions/` 完成 32px 行高、布局/标签宽度、复制字段和状态点；6 项单测、3 项文档 Playwright 与组件级 Impeccable 定向检查通过。该组件仍未接入 Vue3 业务详情页；当前只是库级交付证据，完整替换仍按“基础控件与动态图标 → DynamicForm → 其余组件及整库 Impeccable → Vue3 页面替换”推进。
 
-`LxSplitLayout` 已有独立中文 API/Demo、3 项宿主单测及 3 项文档 Playwright，覆盖 200–480px 可用宽度、折叠后主区同行、键盘/拖动、375px 表格局部滚动、HUD 深色和减少动效。它仍只是组件库交付，业务树/表场景未逐页替换；后续 UI-04 按 Vue2 页面契约验证数据、选择状态和窄屏组合。此证据不代表 Impeccable 正式 Critique 通过或真实后端联调。
+`LxSplitLayout` 当前组件级证据为17项单测、14项文档Playwright及隔离A/B正式快照，详见本文2026-10-29记录；组件严格行关闭，业务树/表场景仍未逐页替换，UI-04须按Vue2契约验证数据、选择、取消、权限与真实接口，不代表后端联调完成。
 
 ## 本地 Mock 全菜单预览
 

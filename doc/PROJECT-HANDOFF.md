@@ -1,5 +1,14 @@
 # LinkX 项目交接记录
 
+## 2026-10-29 LxSplitLayout 响应式与稳定调宽交接
+
+- 实现入口：`linkx-fe/src/components/LxSplitLayout/index.vue`→`demo/basic.vue`→`linkx-fe/docs/components/lxsplitlayout.md`。默认三轨道/可调四轨道/折叠两轨道、内容600px与视口767px断点、44px堆叠按钮、普通主区容器与唯一aria-controls已落实；无业务API和路由耦合。
+- 关键边界：只追踪活动主指针，取消/丢捕获/折叠/禁用/堆叠/卸载停止拖动；受控隐藏回收焦点但不抢宿主post主动焦点。保留桌面偏好，恢复再限宽。数字/已调整宽度以模型为准，仅未调整CSS字符串测量像素；aside禁用过渡防reduce微时长旧几何回写。
+- 证据入口：`other-admin/admin-vue3/tests/unit/lx-split-layout.test.ts`、`tests/e2e/lx-split-layout-docs.spec.ts`。单测17/17、文档E2E14/14（含1280/1920视口双主题宽容器、reduce及每步450ms稳定态）、库类型/构建/文档构建、宿主类型、指定Prettier及无自动修复ESLint通过；独立代码复审最终差量无可复现P0–P2，并补8项内存SFC/jsdom边界断言。 修前及pre-only/reduce稳定态失败均保留，最终受控回传、指针边界、百分比/calc与恢复证据分开记录。
+- Impeccable隔离A/B及有界复验完成：A30/36为中间修订版基线，第9项不适用，不冒充修后重评分；A两项P2及文案P3关闭。B旧六视图真实overlay与最终受改两主题专项分开记录，最终三源码均合法[]/空stderr/0，Light数量对比度4.4→6.45:1，剩余icon-tile-stack为已核实功能折叠按钮误报。快照`.impeccable/critique/2026-10-29T00-02-01Z__linkx-fe-src-components-lxsplitlayout-index-vue.md`，趋势仅当前一条，无可比历史；源码[]不是单独通过依据。
+- 最终组件SHA256为`78d1c2ac4c7b8fd0d60db30cf6cfb72f761443fee4bfc9276427792138c7be64`。A/B与截图在ignored的`tmp-lxsplitlayout-*`；系统Chrome无头新页为浏览器回退，不称实时可见overlay。8400 helper已停，4177文档/30847隔离Mock均HTTP200；构建既有pnpm配置与大包警告继续保留。
+- 严格矩阵16/52。本波没有新增Vue3业务消费点，不把组件完成冒充业务树表迁移或真实联调；真实读屏器、跨浏览器、权限及后端联调仍开放，操作引导暂缓。下一波LxStatusDot中文状态、动效规范、兼容映射和宿主恢复组合；保持基础组件/动态图标→DynamicForm→Vue3全量替换顺序。 Breadcrumb波次11/11宿主Mock证据不冒充本波新验证；仅暂存本波源文件及文档hunk，保留其他已有dirty。
+
 ## 2026-10-29 LxBreadcrumb 与真实宿主导航交接
 
 - 实现入口：`linkx-fe/src/components/LxBreadcrumb/index.vue`→`demo/basic.vue`→`linkx-fe/docs/components/lxbreadcrumb.md`；nav/ol/li、唯一当前项、层级换行、完整title、独立插槽及贴合链接焦点完成。13px/8px令牌保留，24px最低高度/粗指针44px为可访问性差异，不声称所有链接44×44。

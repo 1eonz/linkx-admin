@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-29 分栏布局与验证入口
+
+- 公共实现：`linkx-fe/src/components/LxSplitLayout/index.vue`，API为asideWidth/resizable/collapsed、resize/update:collapsed及aside/default插槽；未增加业务请求。默认/可调/折叠轨道、内容容器与视口响应式、唯一控制目标、指针结束与隐藏焦点恢复均在此定位。
+- 可运行示例：`linkx-fe/src/components/LxSplitLayout/demo/basic.vue`；文档：`linkx-fe/docs/components/lxsplitlayout.md`；规格：`doc/lx-ui/COMPONENT-SPEC.md`§11、`COMPONENT-STYLE-INTERACTION.md`§1.5。Demo支持主题/调整开关、保存宽度反馈与局部滚动，HUD表面和浅色数量对比度已修复。
+- 回归：`other-admin/admin-vue3/tests/unit/lx-split-layout.test.ts`17/17、`tests/e2e/lx-split-layout-docs.spec.ts`14/14；reduce下450ms稳定态捕获并修复父级回传被旧几何覆盖。构建/类型/格式/Lint和独立代码复审通过；A/B快照`.impeccable/critique/2026-10-29T00-02-01Z__linkx-fe-src-components-lxsplitlayout-index-vue.md`。严格矩阵16/52，业务页面暂无直接消费点，后续UI-04仍须按真实树表契约组合验证。
+
 ## 2026-10-29 面包屑受控导航与验证入口
 
 - 组件：`linkx-fe/src/components/LxBreadcrumb/index.vue`→`demo/basic.vue`→`linkx-fe/docs/components/lxbreadcrumb.md`，可定位有序路径/当前页、长路径换行、主题、粗指针和原生链接。
@@ -849,7 +855,7 @@ lx-ui 当前执行顺序固定为 `design/` 基础控件与动态图标 → `LxD
 
 `LxActionButtons` 已按 `design/按钮体系/` 完成 UI-10 严格复核：当前单测 18/18、文档 Playwright 9/9、Impeccable A 33/40、B 八视图与独立代码复审均通过，UI-10 更新为 8/52。Vue3 29 处宿主 ActionButtons 尚未替换，适配契约见 `ELEMENT-PLUS-LX-UI-MATRIX.md`；需保留 `buttons`/预设 `actions`、逐项回调、图标映射、gap、disabled 与权限语义，宿主替换仍属于后续 UI-04。
 
-`LxSplitLayout` 已补独立中文 API/Demo、3 项宿主单测和 3 项文档 Playwright；修复折叠时主区换行，并验证桌面拖动/键盘限宽、375px 纵向布局、表格局部滚动、HUD 深色与减少动效。宿主业务页面仍未采用该组件；UI-11 整库 Impeccable Critique 仍待 UI-10 完成，detector `[]` 不作为审查通过。
+`LxSplitLayout` 当前严格验收见本文2026-10-29入口：17项单测、14项文档Playwright、隔离Impeccable A/B与快照/趋势齐备，修复容器堆叠、受控宽度稳定回传、指针及焦点清理。宿主业务页面尚未采用，整库UI-11与真实业务组合仍待后续；静态[]不独立作为通过依据。
 
 Vue3 鉴权图片链路：`src/api/authImage.ts` 按 Vue2 网关映射请求站内相对图片、在 Authorization 请求头携带 Token 并支持 AbortSignal；`src/components/AuthImg/index.vue` 负责失败重试、请求归属保护及 Blob URL 生命周期。轮播图、头像、设备/协同/应用图标的 10 个宿主调用均提供 `alt`。验证见 `tests/unit/auth-img.test.ts`、`tests/unit/auth-image-api.test.ts` 和 `tests/e2e/preview.spec.ts`；UI-04 尚需替换为 lx-ui 组件并真实后端联调，正式 Impeccable Critique 因评审服务/页面注入限制未通过。
 
