@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-30 LxDrawer 组件接入边界
+
+- `LxDrawer` 当前版组件契约已与实现对齐：`modelValue/title/icon/size/closeOnClickModal/closeOnPressEsc` 和 `update:modelValue`；宿主继续负责业务 loading、empty、error、未保存确认、请求取消和权限反馈。
+- 组件单测 **4/4**、文档 E2E **1/1**、库类型检查通过；Assessment A **29/40**，Assessment B 三目标 detector 合法 `[]`/空 stderr/0，并有双主题、320/375/1280、焦点、ESC、遮罩和 reduced-motion 浏览器证据。组件证据不等于业务页面迁移完成。
+- Vue3 详情抽屉的 Element Plus 宿主引用暂不删除；逐页迁移时必须保留旧标题、footer/插槽、关闭确认、空/错/加载状态和 `.then().catch().finally()` 请求编排。综合视觉快照/trend 与真实后端/权限联调仍是门禁。
+
 ## 2026-10-30 LxStatusDot 组件门禁收口
 
 - `LxStatusDot` 严格行已关闭，当前 **17/52**。组件、Demo、恢复 Mock 和中文文档完成；状态点仍未接入 Vue3 业务页面，不把库级交付当作业务迁移完成。

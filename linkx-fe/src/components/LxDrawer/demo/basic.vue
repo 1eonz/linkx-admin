@@ -110,6 +110,8 @@ async function revoke() {
 }
 
 .audit-value {
+  min-width: 0;
+  overflow-wrap: anywhere;
   color: var(--lx-text-regular);
 }
 
@@ -120,7 +122,7 @@ async function revoke() {
 }
 
 .audit-pass {
-  color: var(--lx-color-success);
+  color: var(--lx-color-success-text);
   font-weight: 600;
 }
 

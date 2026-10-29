@@ -738,22 +738,21 @@ interface Events {
 }
 ```
 
-## 28. LxDetailDrawer — 详情抽屉
+## 28. LxDrawer — 详情抽屉
 
-`_1` Dispatch Action Drawer 规格（右滑 480/640px）。
+`_1` Dispatch Action Drawer 规格（右滑 480px；数字 `size` 可按宿主需要覆盖）。实现只负责通用展示与显隐交互，业务状态、加载和错误恢复由宿主提供。
 
 ```ts
 interface Props {
   modelValue?: boolean
   title?: string
+  icon?: LxIconName
   size?: number | string // default: 480
-  /** 头部状态 pill */
-  status?: LxStatus
-  statusText?: string
+  closeOnClickModal?: boolean // default: false
+  closeOnPressEsc?: boolean // default: true
 }
 interface Events {
   (e: 'update:modelValue', v: boolean): void
-  (e: 'close'): void
 }
 interface Slots {
   default?(): unknown

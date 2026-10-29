@@ -1,5 +1,13 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-30 LxDrawer 当前版契约与视觉边界修复
+
+- 依据当前实现修正 `doc/lx-ui/COMPONENT-SPEC.md` §28：组件名称为 `LxDrawer`，Props 为 `modelValue/title/icon/size/closeOnClickModal/closeOnPressEsc`，事件仅保留 `update:modelValue`；loading、empty、error 和业务状态由宿主负责，不把未实现的 `status/statusText/close` 写入公共契约。
+- 视觉与 Demo 修复：右侧抽屉补齐 8px 左侧圆角；审计值允许长字符串断行；浅色成功文案改用高对比度 `--lx-color-success-text`。未改变默认遮罩、ESC、footer 或插槽行为。
+- Assessment A 当前版 **29/40（Good）**。保留空标题栏、长标题触屏提示、组件独立 reduced-motion 证据等 P2/P3；不凭静态 detector 结果关闭严格行。
+- Assessment B 证据已归档于 `tmp-lxdrawer-assessment-b-current/run-20261030/`：组件、Demo、中文文档三目标 JSON 均为合法 `[]`，对应 stderr 为空、退出码为 `0`；浏览器覆盖 Light/HUD、1280/375/320px、打开/关闭、ESC、遮罩默认不关闭、44px 关闭按钮、焦点、reduced-motion 和无横溢。首次 overlay 点击被审查提示条拦截，fresh context 复跑成功，已在 `overlay-interaction-failure.json` 记录为工具环境问题。
+- 单测 **4/4**、文档 E2E **1/1**、`vue-tsc --noEmit` 与指定格式检查通过。综合 snapshot/trend 尚未生成，严格矩阵仍为 **17/52**；下一步补齐综合证据和空标题/长标题策略，再进入下一个未闭环基础组件。
+
 ## 2026-10-30 LxStatusDot 严格组件行收口（17/52）
 
 - 完成五态中文可访问名称、`statusDesc` 优先级、数字 `code` 兼容映射、非法尺寸回退、长文本换行、密集状态和 reduced-motion；在线呼吸复用全局 `lx-hud-pulse`，组件保持纯展示，不引入业务请求。

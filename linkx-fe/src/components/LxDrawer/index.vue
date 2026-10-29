@@ -94,6 +94,7 @@ function close() {
   --el-drawer-bg-color: var(--lx-bg-card);
   max-width: 100vw;
   min-width: 0;
+  border-radius: 8px 0 0 8px;
   box-shadow: var(--lx-shadow-modal);
 }
 
@@ -197,6 +198,10 @@ function close() {
 @media (max-width: 640px) {
   :global(.lx-drawer .el-drawer__body) {
     padding: var(--lx-space-md);
+  }
+
+  :global(.lx-drawer) {
+    border-radius: 8px 0 0 8px;
   }
 
   .lx-drawer__header,

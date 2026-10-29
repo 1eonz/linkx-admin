@@ -1,5 +1,12 @@
 # LinkX 项目地图
 
+## 2026-10-30 LxDrawer 当前版入口与验证
+
+- 公共组件：`linkx-fe/src/components/LxDrawer/index.vue`；Demo：`linkx-fe/src/components/LxDrawer/demo/basic.vue`；中文规范：`doc/lx-ui/COMPONENT-SPEC.md` §28。组件只负责抽屉展示、显隐、ESC、遮罩和插槽，业务状态与请求由宿主注入。
+- 当前契约已与实现对齐：`modelValue/title/icon/size/closeOnClickModal/closeOnPressEsc`，事件为 `update:modelValue`；右侧面板有 8px 左侧圆角，Demo 长值可断行并使用高对比成功色。
+- 回归入口：`other-admin/admin-vue3/tests/unit/lx-drawer.test.ts` **4/4**、`tests/e2e/lx-drawer-docs.spec.ts` **1/1**、库类型检查通过。B 证据位于 `tmp-lxdrawer-assessment-b-current/run-20261030/`，三目标 detector 为合法 `[]`/空 stderr/0，覆盖双主题、320/375/1280、ESC、焦点、reduced-motion 和无横溢。
+- 严格矩阵仍 **17/52**；综合 snapshot/trend、空标题/长标题策略和真实宿主业务迁移未完成，不能把组件证据计为页面迁移或真实联调完成。
+
 ## 2026-10-30 状态点组件与恢复示例
 
 - 公共组件：`linkx-fe/src/components/LxStatusDot/index.vue`、`types.ts`；Demo：`basic.vue`、`with-text.vue`、`recovery.vue`；文档：`linkx-fe/docs/components/lxstatusdot.md`。组件负责五态视觉、中文可访问名称、数字兼容映射与 reduced-motion，不访问 API 或权限。

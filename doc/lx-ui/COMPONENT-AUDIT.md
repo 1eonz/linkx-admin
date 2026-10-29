@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-30 LxDrawer 当前版 Assessment A/B
+
+- 当前版 Assessment A **29/40（Good）**。已修复契约漂移、右侧 8px 左侧圆角、Demo 长值断行和浅色成功色；保留空标题栏、长标题触屏提示、组件独立 reduced-motion 证据等 P2/P3。
+- Assessment B 三个目标（组件、Demo、中文文档）均读取到合法 JSON `[]`、空 stderr、退出码 `0`。浏览器证据覆盖 Light/HUD、1280/375/320px、打开/关闭、ESC、遮罩、44px 关闭按钮、焦点、reduced-motion 和页面无横溢；首次 overlay 点击被审查提示条拦截，fresh context 复跑成功，已单独记录工具环境失败。
+- 单测 **4/4**、文档 E2E **1/1**、`vue-tsc --noEmit` 和指定 Prettier 通过。`[]` 只代表静态规则无命中，不能单独作为 Critique 通过依据；综合 snapshot/trend 尚未生成，严格矩阵暂不关闭，当前总数 **17/52**。
+
 ## 2026-10-30 LxStatusDot 严格行关闭
 
 - 五态中文语义、非法尺寸边界、数字兼容、长文本、密集状态、在线呼吸与 reduced-motion 已完成；恢复 Demo 使用宿主注入 Mock，覆盖成功、非在线、失败、空、权限、取消和卸载迟到结果。单测 47/47 + 9/9，文档 E2E 10/10，库类型/构建/文档构建通过。
