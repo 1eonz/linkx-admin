@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-30 LxDialog 当前版评估与减少动效修复
+
+- Assessment A **29/40（Good）**：组件契约和警务协同语境明确；P1 为默认鼠标拖拽缺少键盘等价路径、减少动效原先未覆盖 Element Plus 面板/遮罩；P2 为空标题栏、对话框 `aria-busy`、Demo 重复错误反馈和原生控件密度。
+- Assessment B 已独立完成：组件、Demo、中文文档 detector 均为合法 JSON `[]`，stderr 为空、退出码 0；证据位于 `.impeccable/assessment-b/lxdialog-20261030/`，Edge/CDP 覆盖 Light/HUD、1280/375/320px、打开/危险态、焦点、页面错误、无横溢和 reduced-motion。ESC/拖拽几何未形成可靠成功证据，继续开放；Playwright/Puppeteer 缺失已记录，未伪造结论。
+- 修复：`loading` 映射到对话框区域的 `aria-busy=true`；通过 `modal-class` 为遮罩建立稳定作用域，在 `prefers-reduced-motion: reduce` 下关闭面板、遮罩和关闭按钮过渡；中文文档修正危险色范围并记录拖拽键盘边界。未改变默认 `draggable=true` 公共 API。
+- 验证：LxDialog 单测 **7/7**、文档 E2E **3/3**、库 `vue-tsc --noEmit` 通过。修复后综合 snapshot 已写入 `.impeccable/critique/2026-10-30T00-05-11Z__linkx-fe-src-components-lxdialog-index-vue.md`，trend 已读取（当前同一目标最新条目 29/40）；严格矩阵仍 **17/52**，拖拽键盘等价路径和真实宿主联调保持开放。
+
 ## 2026-10-30 LxDrawer 当前版契约与视觉边界修复
 
 - 依据当前实现修正 `doc/lx-ui/COMPONENT-SPEC.md` §28：组件名称为 `LxDrawer`，Props 为 `modelValue/title/icon/size/closeOnClickModal/closeOnPressEsc`，事件仅保留 `update:modelValue`；loading、empty、error 和业务状态由宿主负责，不把未实现的 `status/statusText/close` 写入公共契约。

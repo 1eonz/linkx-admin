@@ -1,6 +1,6 @@
 # LxDialog 表单弹窗
 
-三段式弹窗容器（图标标题栏 / 内容区 / 右对齐按钮栏），默认最大宽度 **672px**（设计稿 max-w-2xl 表单弹窗规格）；窄屏下宽度收至视口内、表单改为单列并扩大点按目标。危险模式全局变红。
+三段式弹窗容器（图标标题栏 / 内容区 / 右对齐按钮栏），默认最大宽度 **672px**（设计稿 max-w-2xl 表单弹窗规格）；窄屏下宽度收至视口内、表单改为单列并扩大点按目标。危险模式仅将标题、图标和主确认按钮设为危险色，正文仍使用普通文本令牌。
 
 <script setup lang="ts">
 import Basic from '../../src/components/LxDialog/demo/basic.vue';
@@ -34,7 +34,7 @@ import Basic from '../../src/components/LxDialog/demo/basic.vue';
 | draggable                  | 头部拖拽移动弹窗位置（header 即拖拽把手）          | `boolean`          | `true`                    |
 | hide-footer                | 隐藏默认按钮栏                                     | `boolean`          | `false`                   |
 
-固定行为：**屏幕垂直居中**（align-center）、append-to-body、8px 圆角；标题通过 `aria-labelledby` 关联，缺少标题时使用“对话框”作为可访问名称。关闭按钮保持 44px 触控目标，窄屏表单自动改为单列。portal 浮层跟随 `html.lx-theme-hud` 根主题。
+固定行为：**屏幕垂直居中**（align-center）、append-to-body、8px 圆角；标题通过 `aria-labelledby` 关联，缺少标题时使用“对话框”作为可访问名称。关闭按钮保持 44px 触控目标，窄屏表单自动改为单列。`loading` 时对话框区域暴露 `aria-busy=true` 并锁定关闭路径；`prefers-reduced-motion: reduce` 时禁用面板、遮罩和关闭按钮过渡。portal 浮层跟随 `html.lx-theme-hud` 根主题。
 
 ### Events
 
@@ -53,5 +53,6 @@ import Basic from '../../src/components/LxDialog/demo/basic.vue';
 - **弹窗选型**：表单用 LxDialog；详情用 LxDrawer（设计稿明确「详情不走弹窗」）；纯确认用 lxConfirm。
 - 提交时 `loading` 置 true 防重复；校验不通过弹窗不关，配 LxFormErrorBanner 提示。
 - 提交期间保持弹窗可见，直到宿主结束 `loading`；此时取消、标题关闭、遮罩和 ESC 均不会关闭弹窗。
+- 默认 `draggable=true` 时标题栏作为鼠标拖拽区域；当前没有键盘等价的弹窗位置调整路径，键盘用户应使用关闭/取消/ESC 完成退出。需要键盘拖动时由宿主选择 `draggable=false` 并提供替代布局。
 - `hide-footer` 仅在同时提供 `footer` 插槽时渲染自定义底栏；未提供插槽时不会留下空 footer。
 - 关闭回调里清空表单与校验残留（`nextTick(clearValidate)`）。

@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-30 LxDialog 当前版 Assessment A/B 与修复
+
+- Assessment A **29/40（Good）**。产品特异性来自警号/网格派单、危险资源、HUD 主题；P1 为默认拖拽缺键盘等价路径和 reduced-motion 未覆盖 Element Plus 面板/遮罩；P2 为空标题栏、dialog `aria-busy` 和 Demo 状态密度。
+- Assessment B 三目标 detector 合法 `[]`、stderr 空、退出码 0；证据目录 `.impeccable/assessment-b/lxdialog-20261030/`，独立 Edge/CDP 覆盖 Light/HUD、1280/375/320、打开/危险态、焦点、无横溢和页面错误。Playwright/Puppeteer 缺失及 ESC/拖拽几何未确认成功均已记录，不能把静态 `[]` 当作全部视觉通过。
+- 已修复 `loading -> aria-busy`；通过 `modal-class="lx-dialog__overlay"` 将 reduced-motion 规则作用到 Element Plus 面板、遮罩和关闭按钮；文档同步危险色范围与拖拽键盘限制。单测 **7/7**、文档 E2E **3/3**、`vue-tsc` 通过。
+- 修复后综合 snapshot 已写入 `.impeccable/critique/2026-10-30T00-05-11Z__linkx-fe-src-components-lxdialog-index-vue.md`，trend 已读取；严格矩阵仍 **17/52**。键盘拖拽、空标题布局、真实读屏器与宿主提交失败恢复继续开放。
+
 ## 2026-10-30 LxDrawer 当前版 Assessment A/B
 
 - 当前版 Assessment A **29/40（Good）**。已修复契约漂移、右侧 8px 左侧圆角、Demo 长值断行和浅色成功色；保留空标题栏、长标题触屏提示、组件独立 reduced-motion 证据等 P2/P3。

@@ -53,9 +53,17 @@ describe('LxDialog', () => {
     expect(wrapper.emitted('update:modelValue')).toBeUndefined();
 
     await wrapper.setProps({ loading: true });
+    expect(wrapper.get('[role="dialog"]').attributes('aria-busy')).toBe('true');
     expect(confirm.attributes('disabled')).toBeDefined();
     await confirm.trigger('click');
     expect(wrapper.emitted('confirm')).toHaveLength(1);
+    wrapper.unmount();
+  });
+
+  it('does not expose a busy state when it is idle', () => {
+    const wrapper = mountDialog();
+
+    expect(wrapper.get('[role="dialog"]').attributes('aria-busy')).toBeUndefined();
     wrapper.unmount();
   });
 

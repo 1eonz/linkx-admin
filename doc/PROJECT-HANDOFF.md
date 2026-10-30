@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## 2026-10-30 LxDialog 当前版评估与减少动效修复
+
+- 目标：`linkx-fe/src/components/LxDialog/index.vue`、`demo/basic.vue`、`docs/components/lxdialog.md`。
+- A **29/40（Good）**；A 识别的 P1 为默认鼠标拖拽无键盘等价路径、Element Plus 面板/遮罩减少动效未被组件覆盖；P2 为空标题栏、缺少 dialog `aria-busy` 和 Demo 错误反馈密度。
+- B 证据：`.impeccable/assessment-b/lxdialog-20261030/assessment-b-report.md` 及 `browser-evidence.json`。三目标 detector 为合法 `[]`/空 stderr/0；独立 Edge/CDP 覆盖 Light/HUD、1280/375/320、打开/危险态、焦点、无横溢和页面错误。ESC/拖拽几何未确认成功，Playwright/Puppeteer 缺失已如实记录。
+- 实现修复：`loading` 时对话框暴露 `aria-busy=true`；`modal-class="lx-dialog__overlay"` 让 reduced-motion 规则覆盖面板/遮罩/关闭按钮过渡；文档说明危险模式实际着色范围及拖拽键盘限制。
+- 验证：单测 **7/7**、文档 E2E **3/3**、`vue-tsc --noEmit` 通过。修复后综合 snapshot 已写入 `.impeccable/critique/2026-10-30T00-05-11Z__linkx-fe-src-components-lxdialog-index-vue.md`，trend 已读取；严格矩阵不关闭，后续补键盘拖拽决策和当前版复验。
+
 ## 2026-10-30 LxDrawer 当前版契约与视觉边界修复
 
 - 实现入口：`linkx-fe/src/components/LxDrawer/index.vue`、`demo/basic.vue`；规范入口：`doc/lx-ui/COMPONENT-SPEC.md` §28。

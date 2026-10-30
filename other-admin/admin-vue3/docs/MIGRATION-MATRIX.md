@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-30 LxDialog 组件接入边界
+
+- 当前 `LxDialog` 继续作为 Vue3 业务迁移的候选基础组件；`loading` 会在 dialog 区域暴露 `aria-busy=true`，宿主仍负责 API、校验、提交锁、失败恢复和权限反馈，调用保持 `.then().catch().finally()`。
+- 组件单测 **7/7**、文档 E2E **3/3**、库类型检查通过；Assessment A **29/40**，Assessment B 三目标 detector 合法 `[]`/空 stderr/0，Edge/CDP 双主题和窄屏证据已归档。组件证据不等于业务页面迁移完成。
+- Element Plus 对话框宿主暂不删除；迁移时保留 `draggable`、footer/插槽、danger、ESC、关闭确认及空/错/加载状态。修复后 snapshot 为 `.impeccable/critique/2026-10-30T00-05-11Z__linkx-fe-src-components-lxdialog-index-vue.md`；键盘拖拽等价路径和真实后端/权限联调仍是门禁。
+
 ## 2026-10-30 LxDrawer 组件接入边界
 
 - `LxDrawer` 当前版组件契约已与实现对齐：`modelValue/title/icon/size/closeOnClickModal/closeOnPressEsc` 和 `update:modelValue`；宿主继续负责业务 loading、empty、error、未保存确认、请求取消和权限反馈。

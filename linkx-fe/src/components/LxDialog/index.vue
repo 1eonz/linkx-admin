@@ -80,8 +80,10 @@ function onConfirm() {
     :close-on-click-modal="effectiveCloseOnClickModal"
     :close-on-press-escape="effectiveCloseOnPressEsc"
     :draggable="draggable"
+    modal-class="lx-dialog__overlay"
     :show-close="false"
     :aria-label="title ? undefined : '对话框'"
+    :aria-busy="loading ? 'true' : undefined"
     align-center
     append-to-body
     @update:model-value="close"
@@ -250,6 +252,17 @@ function onConfirm() {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  :global(.lx-dialog.el-dialog),
+  :global(.lx-dialog.el-dialog.dialog-fade-enter-active),
+  :global(.lx-dialog.el-dialog.dialog-fade-leave-active),
+  :global(.lx-dialog.el-dialog.dialog-fade-enter-active .el-dialog),
+  :global(.lx-dialog.el-dialog.dialog-fade-leave-active .el-dialog),
+  :global(.el-overlay.lx-dialog__overlay),
+  :global(.el-overlay.lx-dialog__overlay .el-overlay-dialog) {
+    animation: none !important;
+    transition: none !important;
+  }
+
   .lx-dialog__close {
     transition: none;
   }

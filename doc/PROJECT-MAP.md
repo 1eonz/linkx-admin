@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-30 LxDialog 当前版入口与门禁
+
+- 组件入口：`linkx-fe/src/components/LxDialog/index.vue`；Demo/文档：`linkx-fe/src/components/LxDialog/demo/basic.vue`、`linkx-fe/docs/components/lxdialog.md`。组件负责受控显隐、三段式布局、loading 锁和统一主题，业务提交/错误恢复由宿主注入。
+- 当前修复将 `loading` 暴露为 dialog `aria-busy`，并给 append-to-body 遮罩加 `lx-dialog__overlay` 作用域，在 reduced-motion 下关闭 Element Plus 面板/遮罩过渡；默认拖拽仍保持，键盘等价移动路径未完成。
+- 回归入口：`tests/unit/lx-dialog.test.ts` **7/7**、`tests/e2e/lx-dialog-docs.spec.ts` **3/3**、库类型检查通过；B 证据位于 `.impeccable/assessment-b/lxdialog-20261030/`，修复后 snapshot 为 `.impeccable/critique/2026-10-30T00-05-11Z__linkx-fe-src-components-lxdialog-index-vue.md`。严格矩阵仍 **17/52**，不能将组件门禁计作业务迁移或真实权限联调。
+
 ## 2026-10-30 LxDrawer 当前版入口与验证
 
 - 公共组件：`linkx-fe/src/components/LxDrawer/index.vue`；Demo：`linkx-fe/src/components/LxDrawer/demo/basic.vue`；中文规范：`doc/lx-ui/COMPONENT-SPEC.md` §28。组件只负责抽屉展示、显隐、ESC、遮罩和插槽，业务状态与请求由宿主注入。
