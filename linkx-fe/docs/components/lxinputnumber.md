@@ -82,6 +82,8 @@ import FormState from '../../src/components/LxInputNumber/demo/form-state.vue';
 
 ## 可访问性
 
+默认外框和步进分隔线使用强边界令牌 `--lx-control-border-strong`：浅色为 `#828892`，HUD 为 `#64748b`，用于提高未聚焦控件与相邻表面的辨识度。这是对设计标本低对比边框的可访问性修订，不改变 28/32/40px 尺寸或焦点、错误和禁用规则。组件局部别名 `--lx-input-number-border` 可用于宿主定制，定制后需重新核验对比度；仅修改旧 `--lx-control-border` 不会覆盖这个强边界。两侧兼容形态沿用相同边界色，桌面紧凑步进目标的尺寸评估仍单列，不代表全部 WCAG 验收完成。
+
 桌面端右侧步进按钮按触发器实际高度上下连续贴合，中间只保留 1px 分隔线；sm、md、lg 不会出现按钮之间的空白。触屏或窄屏下，默认右侧步进按钮改为并排布局，每个触控区域为 44×44px，控件宽度按可用空间收缩。包装组件会把 `id`、`name` 和自动填充属性同步到实际数字输入框，Demo 的可见标签可直接关联到输入。
 
 - 默认步进钮使用原生 `button`，提供中文可访问名称、键盘焦点、原生禁用语义及 `aria-disabled` 状态；`controlsPosition=""` 时沿用 Element Plus 内核控件。

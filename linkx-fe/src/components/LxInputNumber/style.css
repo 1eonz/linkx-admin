@@ -17,6 +17,9 @@
 
 .lx-input-number {
   --lx-input-number-height: var(--lx-control-height);
+  --lx-input-number-border: var(--lx-control-border-strong);
+  --el-border-color: var(--lx-input-number-border);
+  --el-border: 1px solid var(--lx-input-number-border);
 
   box-sizing: border-box;
   height: var(--lx-input-number-height);
@@ -39,7 +42,7 @@
   min-height: var(--lx-input-number-height);
   background-color: var(--lx-bg-card);
   border-radius: var(--lx-radius-md);
-  box-shadow: 0 0 0 1px var(--lx-control-border) inset;
+  box-shadow: 0 0 0 1px var(--lx-input-number-border) inset;
   transition:
     box-shadow var(--lx-transition),
     background-color var(--lx-transition);
@@ -85,7 +88,7 @@
   --el-bg-color-overlay: var(--lx-bg-card);
   --el-fill-color-blank: var(--lx-bg-card);
   --el-fill-color-light: var(--lx-bg-card-hover);
-  --el-border-color: var(--lx-border);
+  --el-border-color: var(--lx-input-number-border);
   --el-border-color-light: var(--lx-border-light);
   --el-text-color-primary: var(--lx-text-primary);
   --el-text-color-regular: var(--lx-text-regular);
@@ -94,8 +97,7 @@
   --el-disabled-bg-color: var(--lx-bg-card-hover);
   --el-disabled-text-color: var(--lx-text-placeholder);
   --el-disabled-border-color: var(--lx-border);
-  --el-border: 1px solid var(--lx-border);
-  --lx-control-border: var(--lx-border);
+  --el-border: 1px solid var(--lx-input-number-border);
   --lx-control-focus-halo-color: rgba(56, 189, 248, 0.28);
 }
 
@@ -118,7 +120,7 @@
   flex-direction: column;
   align-self: stretch;
   width: 32px;
-  border-left: 1px solid var(--lx-control-border);
+  border-left: 1px solid var(--lx-input-number-border);
 }
 
 .lx-input-number__stepper-button {
@@ -142,7 +144,7 @@
 }
 
 .lx-input-number__stepper-button + .lx-input-number__stepper-button {
-  border-top: 1px solid var(--lx-control-border);
+  border-top: 1px solid var(--lx-input-number-border);
 }
 
 .lx-input-number__stepper-button:not(:disabled):hover {
@@ -220,7 +222,7 @@
     width: 88px;
     height: 44px;
     border-top: 0;
-    border-left: 1px solid var(--lx-control-border);
+    border-left: 1px solid var(--lx-input-number-border);
   }
 
   .lx-input-number__stepper-button {
@@ -231,6 +233,6 @@
 
   .lx-input-number__stepper-button + .lx-input-number__stepper-button {
     border-top: 0;
-    border-left: 1px solid var(--lx-control-border);
+    border-left: 1px solid var(--lx-input-number-border);
   }
 }

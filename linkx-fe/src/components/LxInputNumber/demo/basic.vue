@@ -20,6 +20,7 @@ const maxConcurrency = ref<number>(100)
 const threshold = ref<number>(0.5)
 /** Panel 5 禁用 */
 const lockedQuota = ref<number>(12)
+const compatibleQuota = ref<number>(30)
 
 const lastAction = ref(
   '步进或直接输入数值观察边界与格式化行为；演示数据仅存在于页面内存。',
@@ -147,6 +148,22 @@ function reportChange(
       </div>
     </section>
 
+    <section class="lx-input-number-demo__panel" data-testid="compatibility">
+      <h3>两侧步进兼容形态</h3>
+      <div class="lx-input-number-demo__field">
+        <label class="lx-input-number-demo__label" for="demo-number-compatible"
+          >兼容配置配额</label
+        >
+        <LxInputNumber
+          id="demo-number-compatible"
+          v-model="compatibleQuota"
+          controls-position=""
+          :min="0"
+          :max="200"
+        />
+      </div>
+    </section>
+
     <section class="lx-input-number-demo__panel" data-testid="sizes">
       <h3>尺寸档（sm=28px / md=32px 基准 / lg=40px）</h3>
       <label class="lx-input-number-demo__sizes-toggle">
@@ -216,7 +233,7 @@ function reportChange(
       {{ lastAction }}
     </p>
     <p class="lx-input-number-demo__note">
-      默认宽 160px / 32px 高 / 4px 圆角 / 1px #dcdfe6 描边，hover
+      默认宽 160px / 32px 高 / 4px 圆角 / 1px 强边界令牌描边，hover
       与焦点转主色光环； value-on-clear / autocomplete 等低频 props 经 attrs
       透传给 EP 内核。
     </p>
