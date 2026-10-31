@@ -1,5 +1,11 @@
 # LinkX 项目交接记录
 
+## 2026-10-31 PageCard 空态示例交付
+
+- 文件：库 `LxPageCard/demo/basic.vue`、中文组件文档及宿主 `tests/e2e/lx-page-card-docs.spec.ts`。空态/错误互斥；刷新清除两态并沿已有内存计时器恢复，卸载仍清理计时器。
+- 外壳使用页面背景且不重复框住卡片；标签/按钮均为 44px。当前 E2E 1/1、库类型、指定格式/Lint 通过，独立审查无新增 P0–P3。截图为宿主 `test-results/lx-page-card-light-375.png` 和 `lx-page-card-hud-empty-375.png`。
+- detector 三件套位于忽略目录 `tmp-pagecard-polish/`（合法 `[]`/空 stderr/0）；仅为阶段性检查，不关闭正式视觉门禁或增加 17/52 严格计数。规范间距口径和其余组件仍待推进。
+
 ## 2026-10-31 SectionTitle 提示与语义交付
 
 - 本波修改库 SectionTitle、Demo、中文文档和 Vue3 SectionTitle 适配器；普通 title 有全文提示，自定义插槽不生成旧提示。适配器不能无条件创建默认插槽，否则会再次屏蔽普通标题提示。

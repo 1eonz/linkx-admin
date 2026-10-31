@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-31 PageCard 空态与恢复示例入口
+
+- `linkx-fe/src/components/LxPageCard/demo/basic.vue` → `linkx-fe/docs/components/lxpagecard.md` → 宿主 `tests/e2e/lx-page-card-docs.spec.ts`。空态与错误由宿主持有并互斥，刷新恢复本地示例；公共组件 props/events 不变。
+- 当前浏览器回归 1/1，覆盖空态恢复/互斥、44px 按钮、加载、错误、HUD、减少动效和窄屏；正式视觉门禁继续开放。
+
 ## 2026-10-31 SectionTitle 全文提示与语义入口
 
 - 库 `linkx-fe/src/components/LxSectionTitle/index.vue` → `demo/basic.vue` → `linkx-fe/docs/components/lxsectiontitle.md`；宿主适配为 `other-admin/admin-vue3/src/components/SectionTitle/index.vue`，默认插槽按调用方是否存在转发。
