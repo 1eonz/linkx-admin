@@ -53,11 +53,20 @@ test('本地预览全部菜单入口可打开且读取样例数据', async ({ pa
   expect(Object.keys(sampleTextByRoute).sort()).toEqual([...previewRoutes].sort());
 
   await page.goto('/h5/GroupTags', { waitUntil: 'domcontentloaded', timeout: 15_000 });
-  const submenuTitles = page.locator('[role="menubar"] .el-sub-menu > .el-sub-menu__title');
+  const submenuTitles = page
+    .getByRole('menubar')
+    .locator('[role="menuitem"]')
+    .filter({ has: page.locator('[role="menu"]') });
   await expect(submenuTitles).toHaveCount(previewMenu.length);
-  expect((await submenuTitles.allTextContents()).map((title) => title.trim()).sort()).toEqual(
-    previewMenu.map((parent) => parent.name).sort(),
+  const submenuNames = await submenuTitles.evaluateAll((items) =>
+    items
+      .map((item) => {
+        const title = item.querySelector<HTMLElement>(':scope > .el-sub-menu__title');
+        return title?.textContent?.trim() ?? '';
+      })
+      .filter(Boolean),
   );
+  expect(submenuNames.sort()).toEqual(previewMenu.map((parent) => parent.name).sort());
   await expect(page.getByRole('menuitem', { name: '首页', exact: true })).toBeVisible();
   const menuItems = page.locator('[role="menubar"] [role="menu"] > [role="menuitem"]');
   await expect(menuItems).toHaveCount(32);

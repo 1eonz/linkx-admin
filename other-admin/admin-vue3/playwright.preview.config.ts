@@ -20,7 +20,8 @@ export default defineConfig({
   webServer: {
     command: `pnpm dev:mock --port ${mockPreviewPort}`,
     url: mockPreviewUrl,
-    reuseExistingServer: !process.env.CI,
+    // 不复用未知服务，避免端口上的普通代理模式将测试写操作发往真实后端。
+    reuseExistingServer: false,
     timeout: 120_000,
   },
 });

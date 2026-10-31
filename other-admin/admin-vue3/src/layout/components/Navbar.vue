@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ElMessageBox } from 'element-plus';
 import { LxIcon, LxNavbar } from 'lx-ui';
+import type { DropdownInstance } from 'lx-ui';
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -25,6 +26,12 @@ const sidebar = computed(() => appStore.sidebar);
 const role = ref<string>('');
 // 头像首字（取用户名第一个字符）
 const avatarText = computed(() => role.value.charAt(0) || '管');
+const accountDropdown = ref<DropdownInstance>();
+
+/** 菜单触发按钮保持焦点时，Element Plus 浮层不会收到 Escape，需主动关闭。 */
+function closeAccountMenu(): void {
+  accountDropdown.value?.handleClose();
+}
 
 // ===== 绑定警员弹窗 =====
 const bindUserDialogVisible = ref(false);
@@ -99,8 +106,8 @@ onMounted(() => {
     </template>
     <template #trailing>
       <span class="right-tip">修改数据后，请重新登录客户端</span>
-      <el-dropdown class="avatar-container" trigger="click">
-        <button class="avatar-wrapper" type="button" aria-label="账户菜单">
+      <el-dropdown ref="accountDropdown" class="avatar-container" trigger="click">
+        <button class="avatar-wrapper" type="button" aria-label="账户菜单" @keydown.esc.stop.prevent="closeAccountMenu">
           <span class="user-avatar">{{ avatarText }}</span>
           <span v-show="role" class="user-role">{{ role }}</span>
           <LxIcon class="arrow-icon" name="chevron-down" :size="12" />

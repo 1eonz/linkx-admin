@@ -23,6 +23,7 @@ for (const width of [1280, 768, 375, 320]) {
     await page.keyboard.press('Enter');
     await expect(page.getByRole('menuitem', { name: '修改密码', exact: true })).toBeVisible();
     await page.keyboard.press('Escape');
+    await expect(page.getByRole('menuitem', { name: '修改密码', exact: true })).toBeHidden();
     const geometry = await page.locator('.main-container').evaluate((element) => {
       const header = element.querySelector('.lx-navbar');
       const main = element.querySelector('.app-main');
