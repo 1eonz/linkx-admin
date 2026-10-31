@@ -7,6 +7,7 @@ const loading = ref(false)
 const bordered = ref(true)
 const bodyPadding = ref(true)
 const showError = ref(false)
+const showEmpty = ref(false)
 const hudTheme = ref(false)
 const lastAction = ref('页面状态由宿主持有；示例不会请求后端。')
 let refreshTimer: number | undefined
@@ -16,6 +17,7 @@ function refreshCard() {
     window.clearTimeout(refreshTimer)
   }
   showError.value = false
+  showEmpty.value = false
   loading.value = true
   lastAction.value = '正在刷新概况（内存示例）'
   refreshTimer = window.setTimeout(() => {
@@ -39,7 +41,20 @@ onBeforeUnmount(() => {
       <label><input v-model="loading" type="checkbox" />加载遮罩</label>
       <label><input v-model="bordered" type="checkbox" />显示边框</label>
       <label><input v-model="bodyPadding" type="checkbox" />内容内边距</label>
-      <label><input v-model="showError" type="checkbox" />展示错误态</label>
+      <label
+        ><input
+          v-model="showError"
+          type="checkbox"
+          @change="showEmpty = false"
+        />展示错误态</label
+      >
+      <label
+        ><input
+          v-model="showEmpty"
+          type="checkbox"
+          @change="showError = false"
+        />展示空态</label
+      >
       <label><input v-model="hudTheme" type="checkbox" />HUD 深色主题</label>
     </div>
 
@@ -63,6 +78,10 @@ onBeforeUnmount(() => {
       <div v-if="showError" class="page-card-demo__error" role="alert">
         <strong>数据同步失败</strong>
         <span>请检查网络后重试，当前内容仍保留。</span>
+      </div>
+      <div v-else-if="showEmpty" class="page-card-demo__empty" role="status">
+        <strong>暂无节点数据</strong>
+        <span>可刷新概况，加载本地示例节点。</span>
       </div>
       <div v-else class="page-card-demo__body">
         <div><span>在线节点</span><strong>18 / 20</strong></div>
@@ -98,9 +117,7 @@ onBeforeUnmount(() => {
   min-width: 0;
   gap: var(--lx-space-md);
   padding: var(--lx-space-lg);
-  border: 1px solid var(--lx-border);
-  border-radius: var(--lx-radius-md);
-  background: var(--lx-bg-card);
+  background: var(--lx-bg-page);
   color: var(--lx-text-regular);
 }
 
@@ -112,7 +129,7 @@ onBeforeUnmount(() => {
 
 .page-card-demo__controls label {
   display: inline-flex;
-  min-height: 32px;
+  min-height: 44px;
   align-items: center;
   gap: var(--lx-space-sm);
   color: var(--lx-text-secondary);
@@ -124,7 +141,7 @@ onBeforeUnmount(() => {
 }
 
 .page-card-demo__refresh {
-  min-height: 36px;
+  min-height: 44px;
   padding: 0 var(--lx-space-sm);
   border: 1px solid var(--lx-border);
   border-radius: var(--lx-radius-sm);
@@ -175,6 +192,15 @@ onBeforeUnmount(() => {
 .page-card-demo__error strong {
   color: var(--lx-color-error-strong);
   font-size: 13px;
+}
+
+.page-card-demo__empty {
+  display: grid;
+  gap: var(--lx-space-sm);
+  padding-block: var(--lx-space-lg);
+  color: var(--lx-text-regular);
+  font-size: 13px;
+  text-align: center;
 }
 
 .page-card-demo__status {

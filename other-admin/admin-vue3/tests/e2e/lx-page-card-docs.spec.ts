@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('lx-ui LxPageCard 文档示例', () => {
-  test('验证标题插槽、loading/error、HUD 和窄屏无横向溢出', async ({ page }) => {
+  test('验证标题插槽、加载/空态/错误恢复、HUD 和窄屏无横向溢出', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/components/lxpagecard');
@@ -32,9 +32,29 @@ test.describe('lx-ui LxPageCard 文档示例', () => {
     await expect(region.getByRole('heading', { name: '接口运行概况' })).toBeVisible();
     await expect(region.getByRole('button', { name: '刷新概况' })).toBeVisible();
 
+    await page.getByRole('checkbox', { name: '展示空态', exact: true }).check();
+    await expect(region.getByRole('status')).toContainText('暂无节点数据');
+    await expect(region).not.toContainText('18 / 20');
+    await region.getByRole('button', { name: '刷新概况' }).click();
+    await expect(region).not.toHaveAttribute('aria-busy', { timeout: 2_000 });
+    await expect(region).toContainText('18 / 20');
+    await expect(page.getByRole('checkbox', { name: '展示空态', exact: true })).not.toBeChecked();
+    expect(
+      await region
+        .getByRole('button', { name: '刷新概况' })
+        .evaluate((element) => element.getBoundingClientRect().height),
+    ).toBeGreaterThanOrEqual(44);
+    await page.screenshot({ path: 'test-results/lx-page-card-light-375.png', fullPage: true });
+
     await page.getByRole('checkbox', { name: '展示错误态' }).check();
     await expect(region.getByRole('alert')).toContainText('数据同步失败');
     await expect(region).toContainText('当前内容仍保留');
+
+    await page.getByRole('checkbox', { name: '展示空态', exact: true }).check();
+    await expect(region.getByRole('alert')).toHaveCount(0);
+    await expect(page.getByRole('checkbox', { name: '展示错误态' })).not.toBeChecked();
+    await page.getByRole('checkbox', { name: '展示错误态' }).check();
+    await expect(page.getByRole('checkbox', { name: '展示空态', exact: true })).not.toBeChecked();
 
     await region.getByRole('button', { name: '刷新概况' }).click();
     await expect(region).toHaveAttribute('aria-busy', 'true');
@@ -61,5 +81,9 @@ test.describe('lx-ui LxPageCard 文档示例', () => {
         });
       });
     expect(Math.max(...animationDuration)).toBeLessThanOrEqual(0.02);
+    await page.getByRole('checkbox', { name: '加载遮罩' }).uncheck();
+    await page.getByRole('checkbox', { name: '展示空态', exact: true }).check();
+    await expect(region.getByRole('status')).toContainText('暂无节点数据');
+    await page.screenshot({ path: 'test-results/lx-page-card-hud-empty-375.png', fullPage: true });
   });
 });
