@@ -214,8 +214,11 @@
   }
 
   .lx-input-number__stepper {
+    /* 在内核后缀内容轨道中居中，抵消内侧1px偏移并保留完整44px目标。 */
+    align-self: center;
     flex-direction: row;
     width: 88px;
+    height: 44px;
     border-top: 0;
     border-left: 1px solid var(--lx-control-border);
   }

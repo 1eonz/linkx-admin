@@ -1023,6 +1023,7 @@ test('InputNumber 窄屏步进按钮保持触控尺寸与 HUD 输入底色', asy
 
         const increaseRect = increase.getBoundingClientRect();
         const decreaseRect = decrease.getBoundingClientRect();
+        const wrapperRect = wrapper.getBoundingClientRect();
         const colors = [getComputedStyle(input).color, getComputedStyle(wrapper).backgroundColor].map((color) =>
           color
             .match(/[\d.]+/g)
@@ -1043,6 +1044,12 @@ test('InputNumber 窄屏步进按钮保持触控尺寸与 HUD 输入底色', asy
           increase: { width: increaseRect.width, height: increaseRect.height },
           decrease: { width: decreaseRect.width, height: decreaseRect.height },
           horizontalGap: Math.abs(decreaseRect.left - increaseRect.right),
+          verticalOffsets: [
+            increaseRect.top - wrapperRect.top,
+            increaseRect.bottom - wrapperRect.bottom,
+            decreaseRect.top - wrapperRect.top,
+            decreaseRect.bottom - wrapperRect.bottom,
+          ],
           inputBackground: getComputedStyle(wrapper).backgroundColor,
           controlHeight: element.getBoundingClientRect().height,
           textContrast: (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05),
@@ -1053,7 +1060,27 @@ test('InputNumber 窄屏步进按钮保持触控尺寸与 HUD 输入底色', asy
       expect(measurements?.increase).toEqual({ width: 44, height: 44 });
       expect(measurements?.decrease).toEqual({ width: 44, height: 44 });
       expect(measurements?.horizontalGap).toBeLessThanOrEqual(0.5);
+      for (const offset of measurements?.verticalOffsets ?? []) {
+        expect(Math.abs(offset), '步进按钮的上下边缘应与控件外框对齐').toBeLessThanOrEqual(0.5);
+      }
       expect(measurements?.controlHeight).toBe(44);
+      for (const control of await demo.locator('.lx-input-number--custom-controls').all()) {
+        const bounds = await control.locator('.el-input__wrapper').boundingBox();
+        expect(bounds).not.toBeNull();
+        if (!bounds) throw new Error('无法读取数值输入框外框位置');
+        for (const button of await control.locator('.lx-input-number__stepper-button').all()) {
+          const target = await button.boundingBox();
+          expect(target).not.toBeNull();
+          if (!target) throw new Error('无法读取步进按钮位置');
+          expect(target.width).toBe(44);
+          expect(target.height).toBe(44);
+          expect(Math.abs(target.y - bounds.y), '各档位步进按钮顶边应对齐').toBeLessThanOrEqual(0.5);
+          expect(
+            Math.abs(target.y + target.height - bounds.y - bounds.height),
+            '各档位步进按钮底边应对齐',
+          ).toBeLessThanOrEqual(0.5);
+        }
+      }
       if (hud) {
         expect(measurements?.inputBackground).toBe('rgb(16, 26, 44)');
         expect(measurements?.textContrast).toBeGreaterThanOrEqual(4.5);
