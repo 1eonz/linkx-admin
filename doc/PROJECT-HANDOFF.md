@@ -1,5 +1,14 @@
 # LinkX 项目交接记录
 
+## 2026-11-01 InputNumber 强边界交付
+
+- 额外Mock验收：`MOCK_PREVIEW_PORT=30848`隔离启动，`preview.spec.ts`首轮6/7（北向CRUD、三方表单失败重试/锁、分页、图片失败/键盘恢复/减少动效均通过）；首个全菜单用例在初始goto等待DOMContentLoaded15秒超时，未进入菜单断言。同源码、原15秒导航/240秒用例超时及原断言仅重跑首项1/1通过（用例49.8s/命令54.8s），33入口样例数据已实际检查，不能写单轮7/7。主线备份命令误用相对根路径，旧trace被重跑清理，独立调查未读取网络记录，故不能判断冷启动或代码根因。限制见`tmp-mock-menu-first-navigation.md`；最终重跑成功不抹去首轮失败。
+- 文件：tokens `variables.css`/`theme-hud.css`、`LxInputNumber/style.css`和`demo/basic.vue`、中文组件文档及两份视觉规范。新令牌`--lx-control-border-strong`仅由InputNumber局部别名消费，默认及两侧兼容分隔线同步；不更改公共props/events或API风格。新增边框E2E并补兼容标签关联。
+- 11/11文档E2E、25/25单测、库类型/206模块构建/文档构建、指定Prettier/ESLint通过，独立代码复审无剩余P0–P3。首轮E2E5/6的挂载等待问题已修，后续全量通过。B初次导航失败属dev服务EBUSY环境问题；filter has定位错误属取证脚本问题，修正后一次有界六视图补查完成，失败原始文件保留。
+- 隔离A/B证据`tmp-inputnumber-border-a/`、`tmp-inputnumber-border-b/`，代码报告`tmp-inputnumber-border-review.md`。Light外框3.5679/HUD3.6586、兼容分隔线最低3.2402/3.3039；三markup合法`[]`/空stderr/0与九组实际overlay齐备，CSS/tokens等七目标指纹前后一致。快照`2026-10-31T16-50-38Z__linkx-fe-src-components-lxinputnumber-index-vue.md`及趋势已存，33/40是既有基线，不是重新评分。
+- 关闭边框P1；桌面13/15/19px目标P2与Demo留白P3继续开放，严格18/52。下一棒PasswordInput宿主校验失败集成示例，不跳过基础组件/动态图标→DynamicForm→Vue3替换顺序；旧共享边框的跨组件共性问题需另验，不能凭局部结果宣称全库满足3:1。
+- 4177现为VitePress静态preview，PID18008，服务本波新构建；dev因监听`.temp/auth-img-sample.png`在并行构建中EBUSY退出。后续源码改动要先构建再用该服务验收，避免误测旧产物。B8496/短暂4178已清理，30847 PID8352保留；其他开发者七份改动和忽略规则均保留。
+
 ## 2026-11-01 InputNumber 移动对齐交付
 
 - `LxInputNumber/style.css`仅在触屏/窄屏stepper增加居中与44px轨道；两侧EP兼容形态和controls=false无此节点，不受影响。E2E新增上下边对齐断言，修前失败证据`tmp-inputnumber-mobile-before/`；修后合跑5/5、加强三档全控件后专项1/1。库/文档构建、指定格式/Lint及独立代码复审通过，无公共API变化，本轮不重复无关类型/单测。

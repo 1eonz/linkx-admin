@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-11-01 InputNumber 默认边界 P1 关闭
+
+- 宿主隔离Mock额外验收首轮6/7、全菜单首项原样重跑1/1；菜单/样例覆盖不替代组件严格门禁或真实后端联调，首次导航超时证据限制见交接。
+- 强边界令牌Light`#828892`/HUD`#64748b`仅由InputNumber局部alias消费，默认外框/自定义与EP兼容分隔线同步。设计差异已写规范、Demo及API；旧共享令牌保留，其他控件的对比度不能引用本次局部结果代验。
+- 六视图独立A/B：外框Light3.5679/HUD3.6586，兼容分隔线最低3.2402/3.3039；尺寸、hover/focus/error/disabled、controls=false及compat交互未退化。B三markup合法`[]`/空stderr/0、九次实际overlay和源码指纹核对齐备。11/11文档E2E、25/25单测、库类型/构建/文档构建、格式/Lint和最终代码复审通过。
+- 快照`2026-10-31T16-50-38Z__linkx-fe-src-components-lxinputnumber-index-vue.md`及趋势已保存，33/40沿用整体旧基线。关闭默认边框P1，桌面小目标P2及表单Demo留白P3保留，严格18/52。
+
 ## 2026-11-01 InputNumber 移动对齐 P3 关闭
 
 - 窄屏stepper居中44px轨道，修前1px失败、修后合跑5/5及三档增强专项1/1，库/文档构建、格式/Lint与独立代码复审通过。隔离A/B四视图按钮上下偏移0、44×44、无横溢，实际overlay已执行；CSS-only扫描的合法`[]`不能当markup审查通过。
@@ -729,7 +736,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                                                                                                       |
 | `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | A/B 与代码复审通过；真实读屏及权限菜单数据未覆盖，暂不计入严格矩阵                                                                                                                           |
 | `LxInput`            | `design/表单控件八件套/`                          | **已关闭（2026-10-21当前版复验）**；19单测、Input文档E2E9/9及最终专项1/1；A36/40、B合法扫描三件套/四视图overlay、独立代码审核、正式快照与趋势齐备；单层边框/密码键盘/HUD占位字已修，非阻塞Demo对齐P3保留，不重复增加13/52 |
-| `LxInputNumber` | `design/表单控件八件套/` | 整体A修前33/40、B六视图/四状态overlay；长按25/25单测。表单Demo A37/40、B十状态overlay、合跑5/5E2E关闭Demo P2；移动对齐独立A/B四视图、全档位44px零偏移及代码复审通过，关闭底部1px P3。P1边框对比、P2桌面指针目标及Demo留白P3仍开放，不增加严格关闭数 |
+| `LxInputNumber` | `design/表单控件八件套/` | 整体A修前33/40；长按25/25单测。表单Demo P2、移动1px P3已关闭；强边界独立A/B六视图、三目标扫描/九次overlay，11/11E2E及代码复审通过，关闭默认边框P1。桌面指针目标P2及Demo留白P3仍开放，不增加严格关闭数 |
 | `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 2026-10-19 已补 320px 以下窄卡分层、宿主 loading/empty/error 与重试反馈；单测 15/15、文档 E2E 3/3。Assessment A 32/40 的状态维度建议已写入 API；正式 A/B 和 UI-10 严格行仍开放 |
 | `LxNavbar`           | `DESIGN-SPEC.md` + Navbar API/Demo                | **已关闭（2026-10-29）**；基准56px/头像28px/搜索200px及响应式差异已登记；7/7单测、7/7文档E2E、11/11 Mock组合、当前隔离A/B/快照/趋势和独立代码复审通过；通知数量名称P3与真实宿主权限联调后置 |
 | `LxNodeBadge`        | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；节点状态、字号和对齐                                                                                                                                                             |

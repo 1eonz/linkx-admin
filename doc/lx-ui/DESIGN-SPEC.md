@@ -167,6 +167,7 @@ export const NODE_STATUS: Record<number, LxStatus> = {
 | `--lx-bg-card-hover` | `#f2f4f8` | 卡片 hover（诊断微卡场景，stitch 底部微卡用法）                               |
 | `--lx-border`        | `#e4e7ed` | 卡片、表格容器外框                                                            |
 | `--lx-border-light`  | `#ebeef5` | 表格行分隔线、卡片 header 下分隔线（比外框浅，体现"外实内虚"）                |
+| `--lx-control-border-strong` | `#828892`（HUD `#64748b`） | 2026-11-01 可访问性修订：InputNumber 的默认外框与步进分隔线，对实际相邻表面核验至少3:1；局部别名为 `--lx-input-number-border`，与旧标本浅灰描边的差异明确保留，不自动推广到其他控件 |
 
 ### 3.4 文字
 

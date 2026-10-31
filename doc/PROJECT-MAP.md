@@ -1,5 +1,12 @@
 # LinkX 项目地图
 
+## 2026-11-01 InputNumber 强边界入口
+
+- 本轮Mock入口`tests/e2e/preview.spec.ts`及`playwright.preview.config.ts`，独立30848：首轮6/7、全菜单首项原样重跑1/1通过，10父32子+首页33入口和样例核对；非单轮全绿，首次导航超时原因未证实，证据限制见交接。
+- `linkx-fe/src/tokens/variables.css`/`theme-hud.css`定义强边界 → `LxInputNumber/style.css`局部alias及EP兼容桥 → `demo/basic.vue`新增两侧形态；中文API、`DESIGN-SPEC.md`表面令牌表和`COMPONENT-STYLE-INTERACTION.md`记录可访问性修订。
+- 新测试`other-admin/admin-vue3/tests/e2e/lx-input-number-border-docs.spec.ts`，两宽×Light/localHUD/root dark+HUD六项，连同原回归11/11；单测25/25。证据`tmp-inputnumber-border-{a,b}/`及`tmp-inputnumber-border-review.md`，默认边框P1关闭，桌面目标P2未关闭，严格18/52。
+- 4177已切为构建产物静态preview，源码变化需先重建再验收；30847人工Mock保留。
+
 ## 2026-11-01 InputNumber 移动步进轨道入口
 
 - `linkx-fe/src/components/LxInputNumber/style.css`触屏媒体规则 → 44px居中stepper；宿主`tests/e2e/lx-base-controls-docs.spec.ts`窄屏用例逐控件验证两按钮上下边及44×44尺寸。修前偏移1px，修后合跑5/5及三档增强专项1/1。
