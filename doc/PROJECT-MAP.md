@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-11-01 SectionTitle 容器布局与空标题回归
+
+- 库 `LxSectionTitle/index.vue` 的 header 是查询容器，`__layout` 是弹性布局层；空标题文字节点降为 DIV，types.ts 中文契约、Demo 开关、组件 API 和 `COMPONENT-STYLE-INTERACTION.md` 同步。
+- 单测 `lx-section-title.test.ts` + `section-title-adapter.test.ts` 合计 22/22；文档 `lx-section-title-docs.spec.ts` 2/2，新增桌面 394px 局部容器双主题、420px 多操作边界、按钮文本行和空标题恢复。隔离 A/B 证据与最终 CSS 视觉缺口见交接，不标记严格行完成。
+
 ## 2026-10-31 PageCard 空态与恢复示例入口
 
 - `linkx-fe/src/components/LxPageCard/demo/basic.vue` → `linkx-fe/docs/components/lxpagecard.md` → 宿主 `tests/e2e/lx-page-card-docs.spec.ts`。空态与错误由宿主持有并互斥，刷新恢复本地示例；公共组件 props/events 不变。

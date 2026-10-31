@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## 2026-11-01 SectionTitle 隔离审查与当前版本边界
+
+- 新增内部 `__layout`，外层 header 仅持有查询容器和尺寸；宽度不超过 400px 时完整分行。extra 不收缩，超预算整体下移，单个命令由宿主保持 nowrap。空 title 且无默认插槽使用 DIV，保留标签/操作；Demo 的“显示长标题”开关覆盖恢复。
+- 独立 A/B 修前 26/32、六浏览器视图及真实 overlay；A/B 各一次有界修后确认原三项 P2。代码复审新增的 420px 多操作 P2 已修、静态复审关闭，最终 E2E 2/2、单测 22/22、库类型/构建/文档构建、指定格式/Lint 通过。
+- 证据为忽略目录 `tmp-sectiontitle-a/`、`tmp-sectiontitle-b/`；最终 E2E 截图在宿主 test-results。快照 `.impeccable/critique/2026-10-31T15-59-51Z__linkx-fe-src-components-lxsectiontitle-index-vue.md`，趋势已读取；26/32 仍是修前评分。
+- 仅剩明确版本缺口：独立 B overlay 采集早于最终 420px CSS，不能冒充最终版本独立视觉证据；最终 detector 已扫该版本，主线几何 E2E 已通过。严格矩阵仍 17/52，下一棒只补此增量视觉证据，不重复全量设计讨论。PageCard 本波文档构建通过，既有大 chunk 警告保留。
+
 ## 2026-10-31 PageCard 空态示例交付
 
 - 文件：库 `LxPageCard/demo/basic.vue`、中文组件文档及宿主 `tests/e2e/lx-page-card-docs.spec.ts`。空态/错误互斥；刷新清除两态并沿已有内存计时器恢复，卸载仍清理计时器。
