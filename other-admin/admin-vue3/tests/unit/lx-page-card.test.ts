@@ -31,12 +31,15 @@ describe('LxPageCard', () => {
 
     const region = wrapper.get('[role="region"]');
     expect(region.attributes('aria-busy')).toBe('true');
+    expect(region.attributes('aria-disabled')).toBe('true');
+    expect(wrapper.get('.lx-page-card__body').attributes('inert')).toBeDefined();
     expect(wrapper.get('[data-testid="content"]').exists()).toBe(true);
     expect(wrapper.get('.lx-page-card__loading').attributes('aria-live')).toBe('polite');
 
     await wrapper.setProps({ loading: false });
     expect(wrapper.find('.lx-page-card__loading').exists()).toBe(false);
     expect(region.attributes('aria-busy')).toBeUndefined();
+    expect(region.attributes('aria-disabled')).toBeUndefined();
     wrapper.unmount();
   });
 

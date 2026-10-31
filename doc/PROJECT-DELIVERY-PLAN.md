@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-10-30 LxPageCard loading 交互隔离与严格评估
+
+- Assessment A **29/40（Good）**：P1 为 loading 遮罩只阻挡视觉层，插槽内 header/body/footer 操作仍可被键盘触发；P2 为空态 Demo 缺失、Demo 卡片套卡片/控制密度、触控按钮 36px 和 body padding 规范口径待统一。
+- Assessment B 已独立完成：三目标 detector 均为合法 JSON `[]`、stderr 为空、退出码 0；独立浏览器 24/24（Light/HUD × 1280/375/320 × default/loading/error/empty）通过，页面错误/失败请求 0，reduced-motion 生效。移动 Props 表横溢归因 VitePress 文档壳层。
+- 修复：loading 时根节点增加 `aria-disabled=true`，标题区、默认内容区和 footer 插槽增加 `inert`，保留内容布局和 `role=status` 加载播报；中文文档明确宿主取消/重试操作应放在遮罩外。
+- 验证：单测 **3/3**、文档 E2E **1/1**、库 `vue-tsc --noEmit` 通过；修复后 snapshot 已写入 `.impeccable/critique/2026-10-30T00-15-29Z__linkx-fe-src-components-lxpagecard-index-vue.md`，trend 已读取（当前条目 29/40）。严格矩阵仍 **17/52**；empty Demo、卡片套卡片、控件尺寸和 body padding 继续开放。
+
 ## 2026-10-30 LxDialog 当前版评估与减少动效修复
 
 - Assessment A **29/40（Good）**：组件契约和警务协同语境明确；P1 为默认鼠标拖拽缺少键盘等价路径、减少动效原先未覆盖 Element Plus 面板/遮罩；P2 为空标题栏、对话框 `aria-busy`、Demo 重复错误反馈和原生控件密度。

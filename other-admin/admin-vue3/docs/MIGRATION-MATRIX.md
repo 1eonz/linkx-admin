@@ -1,5 +1,11 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-30 LxPageCard 组件接入边界
+
+- `LxPageCard` loading 时暴露 `aria-busy/aria-disabled`，并隔离 header/body/footer 插槽交互；宿主仍负责 API、取消、重试、空/错内容和权限反馈，业务请求继续使用 `.then().catch().finally()`。
+- 单测 **3/3**、文档 E2E **1/1**、库类型检查通过；Assessment A **29/40**，Assessment B 三目标 detector 合法 `[]`/空 stderr/0，24/24 双主题/三视口/四状态证据已归档。组件证据不等于页面迁移完成。
+- Vue3 业务页暂不删除 Element Plus PageCard 替代物；迁移时保留标题、header-extra、footer、loading、空态和失败恢复。修复后 snapshot 为 `.impeccable/critique/2026-10-30T00-15-29Z__linkx-fe-src-components-lxpagecard-index-vue.md`，真实后端/权限联调继续作为门禁。
+
 ## 2026-10-30 LxDialog 组件接入边界
 
 - 当前 `LxDialog` 继续作为 Vue3 业务迁移的候选基础组件；`loading` 会在 dialog 区域暴露 `aria-busy=true`，宿主仍负责 API、校验、提交锁、失败恢复和权限反馈，调用保持 `.then().catch().finally()`。

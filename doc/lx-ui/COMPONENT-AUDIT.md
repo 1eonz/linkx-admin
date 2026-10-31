@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-30 LxPageCard 当前版 Assessment A/B 与 loading 修复
+
+- Assessment A **29/40（Good）**；P1 为 loading 遮罩未隔离 header/body/footer 键盘操作；P2 为空态 Demo、卡片套卡片、触控控件尺寸、body padding 规范漂移和 HUD 错误令牌边界。
+- Assessment B 三目标 detector 合法 `[]`/空 stderr/0；24/24 Light/HUD、1280/375/320、default/loading/error/empty 浏览器组合通过，页面错误/失败请求 0，reduced-motion 生效。移动 Props 表横溢属于 VitePress 壳层。
+- 修复 loading 根节点 `aria-disabled=true`，并给 header/body/footer 插槽加 `inert`；内容保留，loading status 继续使用 `role=status`。单测 **3/3**、文档 E2E **1/1**、`vue-tsc` 通过。
+- 修复后 snapshot 已写入 `.impeccable/critique/2026-10-30T00-15-29Z__linkx-fe-src-components-lxpagecard-index-vue.md`，trend 已读取；严格矩阵仍 **17/52**，empty Demo、Demo 密度/控件尺寸、body padding 和真实宿主恢复边界未关闭。
+
 ## 2026-10-30 LxDialog 当前版 Assessment A/B 与修复
 
 - Assessment A **29/40（Good）**。产品特异性来自警号/网格派单、危险资源、HUD 主题；P1 为默认拖拽缺键盘等价路径和 reduced-motion 未覆盖 Element Plus 面板/遮罩；P2 为空标题栏、dialog `aria-busy` 和 Demo 状态密度。

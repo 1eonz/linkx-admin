@@ -34,10 +34,11 @@ import Basic from '../../src/components/LxPageCard/demo/basic.vue';
 | `header-extra` | 标题区域右侧的操作。   |
 | `footer`       | 容器底部的说明或操作。 |
 
-组件没有自定义事件或实例方法。加载期间保留内容布局，根节点设置 `aria-busy="true"`，遮罩通过 `role="status"` 与 `aria-live="polite"` 报告加载状态。
+组件没有自定义事件或实例方法。加载期间保留内容布局，根节点设置 `aria-busy="true"` 和 `aria-disabled="true"`，标题操作、内容和页脚通过 `inert` 隔离键盘与指针交互；遮罩通过 `role="status"` 与 `aria-live="polite"` 报告加载状态。
 
 ## 使用边界
 
 - `loading` 只呈现视觉遮罩和忙碌语义，不会取消、重试或发起请求。
+- `loading` 期间插槽内操作会被组件隔离；需要取消或重试时，应在遮罩外由宿主提供独立操作。
 - 空态、失败提示和下一步操作应由默认插槽中的宿主内容提供。
 - 标题使用二级标题语义；页面应按信息层级决定是否传入标题。

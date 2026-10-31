@@ -23,10 +23,12 @@ const titleId = `lx-page-card-title-${useId()}`
     :role="title ? 'region' : undefined"
     :aria-labelledby="title ? titleId : undefined"
     :aria-busy="loading || undefined"
+    :aria-disabled="loading || undefined"
   >
     <header
       v-if="title || subtitle || $slots['header-extra']"
       class="lx-page-card__header"
+      :inert="loading || undefined"
     >
       <div class="lx-page-card__heading">
         <h2 v-if="title" :id="titleId" class="lx-page-card__title">
@@ -39,10 +41,18 @@ const titleId = `lx-page-card-title-${useId()}`
       </div>
     </header>
 
-    <div class="lx-page-card__body" :class="{ 'has-padding': bodyPadding }">
+    <div
+      class="lx-page-card__body"
+      :class="{ 'has-padding': bodyPadding }"
+      :inert="loading || undefined"
+    >
       <slot />
     </div>
-    <footer v-if="$slots.footer" class="lx-page-card__footer">
+    <footer
+      v-if="$slots.footer"
+      class="lx-page-card__footer"
+      :inert="loading || undefined"
+    >
       <slot name="footer" />
     </footer>
 

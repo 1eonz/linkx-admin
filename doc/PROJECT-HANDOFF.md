@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## 2026-10-30 LxPageCard loading 交互隔离与严格评估
+
+- 目标：`linkx-fe/src/components/LxPageCard/index.vue`、`demo/basic.vue`、`docs/components/lxpagecard.md`。
+- A **29/40（Good）**；P1 为 loading 时插槽控件仍可键盘触发；P2 为空态 Demo、卡片套卡片、36px Demo 控件、body padding 规范漂移和 HUD 错误令牌边界。
+- B 证据：`.impeccable/critique/assessment-b-20261030-080739/assessment-b-report.md`；三个 detector 合法 `[]`/空 stderr/0，24/24 双主题/三视口/四状态浏览器证据，页面错误与失败请求 0。Props 表横溢归因文档壳层。
+- 实现修复：loading 时根节点 `aria-disabled=true`，header/body/footer 插槽加 `inert`；内容和 loading status 仍保留。验证单测 **3/3**、文档 E2E **1/1**、`vue-tsc --noEmit` 通过。
+- 修复后 snapshot 已写入 `.impeccable/critique/2026-10-30T00-15-29Z__linkx-fe-src-components-lxpagecard-index-vue.md`，trend 已读取。严格矩阵仍 **17/52**；empty Demo、Demo 表面密度、控件尺寸、body padding 和真实宿主错误/权限联调继续开放。
+
 ## 2026-10-30 LxDialog 当前版评估与减少动效修复
 
 - 目标：`linkx-fe/src/components/LxDialog/index.vue`、`demo/basic.vue`、`docs/components/lxdialog.md`。

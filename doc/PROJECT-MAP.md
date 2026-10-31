@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-30 LxPageCard 当前版入口与 loading 门禁
+
+- 组件入口：`linkx-fe/src/components/LxPageCard/index.vue`；Demo/文档：`linkx-fe/src/components/LxPageCard/demo/basic.vue`、`linkx-fe/docs/components/lxpagecard.md`。组件提供页面卡片结构、插槽、loading 遮罩和 ARIA 语义，不拥有业务请求。
+- loading 时根节点暴露 `aria-busy`/`aria-disabled`，header/body/footer 插槽加 `inert` 隔离交互；宿主取消/重试需放在组件外。
+- 回归入口：`tests/unit/lx-page-card.test.ts` **3/3**、`tests/e2e/lx-page-card-docs.spec.ts` **1/1**、库类型检查通过；B 证据目录 `.impeccable/critique/assessment-b-20261030-080739/`，修复后 snapshot 为 `.impeccable/critique/2026-10-30T00-15-29Z__linkx-fe-src-components-lxpagecard-index-vue.md`，严格矩阵仍 **17/52**。
+
 ## 2026-10-30 LxDialog 当前版入口与门禁
 
 - 组件入口：`linkx-fe/src/components/LxDialog/index.vue`；Demo/文档：`linkx-fe/src/components/LxDialog/demo/basic.vue`、`linkx-fe/docs/components/lxdialog.md`。组件负责受控显隐、三段式布局、loading 锁和统一主题，业务提交/错误恢复由宿主注入。
