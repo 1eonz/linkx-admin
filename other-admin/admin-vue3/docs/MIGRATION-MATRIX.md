@@ -1,5 +1,10 @@
 # Vue2 到 Vue3 现役业务迁移台账
 
+## 2026-10-31 TransferPanel 布局修复接入边界
+
+- 当前库修复标题收缩、未加载项元数据布局、details 关闭态与 32/44px 移除命中区域；公开契约保持不变。30/30 单测、34/34 文档 E2E、增强专项 1/1 和库类型检查通过。
+- 本波不等于 Vue3 `DataPermissionTree` 已替换；真实授权保存、继承、失败恢复和权限后端仍需宿主验证。严格矩阵沿用 17/52；正式视觉门禁与宿主 Element Plus 删除门槛未关闭。
+
 ## 2026-10-30 LxPageCard 组件接入边界
 
 - `LxPageCard` loading 时暴露 `aria-busy/aria-disabled`，并隔离 header/body/footer 插槽交互；宿主仍负责 API、取消、重试、空/错内容和权限反馈，业务请求继续使用 `.then().catch().finally()`。

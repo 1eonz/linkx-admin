@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## 2026-10-31 TransferPanel 布局波次交付
+
+- 组件 `linkx-fe/src/components/LxTransferPanel/index.vue` 与文档 E2E 为本波文件。承接已有标题收缩、未加载键值限宽、details 隐藏和 32/44px 移除触控盒修复，未改变业务契约。
+- 独立复审无 P0–P2；已补审查建议的 32px 普通行高和按钮边缘实际移除断言。30/30 单测、34/34 完整 E2E、增强专项 1/1、类型和格式检查通过。
+- 增强测试修后独立复核无 P0–P3；库构建（206 modules）与文档构建通过，文档保留大 chunk 警告。宿主测试 ESLint 通过；库组件超出宿主 ESLint 基础目录被跳过，不记作库源码 Lint 通过。首次格式命令路径错误已纠正，最终指定文件 Prettier 通过。
+- 前波环境结论校正：主进程能使用项目 Playwright，SectionTitle 文档 E2E 1/1 已执行；子 Agent 未找到依赖只说明其取证失败，不能声称全项目浏览器不可用。正式独立视觉/overlay 仍未闭环，严格计数 17/52。
+- 下一步补齐剩余组件门禁和已有建议的可复现性；不重复把静态建议当产品阻塞，不用静态 `[]` 代替视觉证据。
+
 ## 2026-10-30 LxPageCard loading 交互隔离与严格评估
 
 - 目标：`linkx-fe/src/components/LxPageCard/index.vue`、`demo/basic.vue`、`docs/components/lxpagecard.md`。

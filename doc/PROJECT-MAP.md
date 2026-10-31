@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-31 TransferPanel 当前回归入口
+
+- 源码：`linkx-fe/src/components/LxTransferPanel/index.vue`；浏览器测试：`other-admin/admin-vue3/tests/e2e/lx-transfer-panel-docs.spec.ts`；单测：`other-admin/admin-vue3/tests/unit/lx-transfer-panel.test.ts`。
+- 当前布局修复经 30/30 单测与 34/34 文档 E2E 验证；新增专项 1/1 检查桌面 32px 行高、按钮边缘点击及窄屏 44px 触控盒。公开 props/events/exposes 未改变。
+- Playwright 使用宿主已安装 CLI 和 `playwright.lxui.config.ts`；不能将子 Agent 的依赖定位失败写成项目环境不可用。当前严格矩阵 17/52，本次不新增关闭项。
+
 ## 2026-10-30 LxPageCard 当前版入口与 loading 门禁
 
 - 组件入口：`linkx-fe/src/components/LxPageCard/index.vue`；Demo/文档：`linkx-fe/src/components/LxPageCard/demo/basic.vue`、`linkx-fe/docs/components/lxpagecard.md`。组件提供页面卡片结构、插槽、loading 遮罩和 ARIA 语义，不拥有业务请求。

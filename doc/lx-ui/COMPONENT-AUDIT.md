@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-31 TransferPanel 布局修复交付与证据校正
+
+- 标题独立文本收缩、details 关闭态隐藏、未加载键值 80px 限宽和桌面 32px/移动 44px 移除按钮通过当前版行为回归。独立代码复审无 P0–P2；P3 行高及边缘命中测试建议已落实。
+- 单测 30/30、完整文档 E2E 34/34、增强专项 1/1、库类型与目标格式检查通过。正式 Impeccable 当前版综合快照和 overlay 继续开放，本次不增加严格关闭数。
+- 当前计数为 17/52；10 月 31 日 MetricCard/SectionTitle 新增记录中的 13/52 为旧计数。主进程 Playwright 可运行，SectionTitle 文档 E2E 1/1 已通过；子 Agent 未发现浏览器工具仅为其取证限制，不是全项目环境结论。
+
 ## 2026-10-30 LxPageCard 当前版 Assessment A/B 与 loading 修复
 
 - Assessment A **29/40（Good）**；P1 为 loading 遮罩未隔离 header/body/footer 键盘操作；P2 为空态 Demo、卡片套卡片、触控控件尺寸、body padding 规范漂移和 HUD 错误令牌边界。
