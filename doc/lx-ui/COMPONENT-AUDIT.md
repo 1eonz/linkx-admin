@@ -1,5 +1,10 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-11-01 InputNumber 移动对齐 P3 关闭
+
+- 窄屏stepper居中44px轨道，修前1px失败、修后合跑5/5及三档增强专项1/1，库/文档构建、格式/Lint与独立代码复审通过。隔离A/B四视图按钮上下偏移0、44×44、无横溢，实际overlay已执行；CSS-only扫描的合法`[]`不能当markup审查通过。
+- 快照`2026-10-31T16-34-37Z__linkx-fe-src-components-lxinputnumber-index-vue.md`已保存、趋势已读，33/40为旧基线。本项关闭移动1px P3，默认边框P1和桌面目标P2仍开放。旧共享边框令牌的低对比为共性风险，本波不宣称全库解决；下一波独立强边界令牌限定InputNumber范围。严格18/52不变。
+
 ## 2026-11-01 InputNumber 表单 Demo 专项闭环
 
 - 新增表单必填/范围错误、恢复、错误态reset、实际focus/blur Demo与中文说明；新2项/原3项E2E合跑5/5，库类型、文档构建和指定格式/Lint通过，独立代码复审通过。
@@ -724,7 +729,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                                                                                                       |
 | `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | A/B 与代码复审通过；真实读屏及权限菜单数据未覆盖，暂不计入严格矩阵                                                                                                                           |
 | `LxInput`            | `design/表单控件八件套/`                          | **已关闭（2026-10-21当前版复验）**；19单测、Input文档E2E9/9及最终专项1/1；A36/40、B合法扫描三件套/四视图overlay、独立代码审核、正式快照与趋势齐备；单层边框/密码键盘/HUD占位字已修，非阻塞Demo对齐P3保留，不重复增加13/52 |
-| `LxInputNumber` | `design/表单控件八件套/` | 整体A修前33/40、B六视图/四状态overlay；长按修复25/25单测与3/3E2E。新增表单Demo独立A37/40、B十状态overlay、合跑5/5E2E及代码复审通过，关闭表单错误/exposes Demo P2。P1边框对比、P2桌面指针目标、P3移动底部1px及Demo留白仍开放，不增加严格关闭数 |
+| `LxInputNumber` | `design/表单控件八件套/` | 整体A修前33/40、B六视图/四状态overlay；长按25/25单测。表单Demo A37/40、B十状态overlay、合跑5/5E2E关闭Demo P2；移动对齐独立A/B四视图、全档位44px零偏移及代码复审通过，关闭底部1px P3。P1边框对比、P2桌面指针目标及Demo留白P3仍开放，不增加严格关闭数 |
 | `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 2026-10-19 已补 320px 以下窄卡分层、宿主 loading/empty/error 与重试反馈；单测 15/15、文档 E2E 3/3。Assessment A 32/40 的状态维度建议已写入 API；正式 A/B 和 UI-10 严格行仍开放 |
 | `LxNavbar`           | `DESIGN-SPEC.md` + Navbar API/Demo                | **已关闭（2026-10-29）**；基准56px/头像28px/搜索200px及响应式差异已登记；7/7单测、7/7文档E2E、11/11 Mock组合、当前隔离A/B/快照/趋势和独立代码复审通过；通知数量名称P3与真实宿主权限联调后置 |
 | `LxNodeBadge`        | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；节点状态、字号和对齐                                                                                                                                                             |

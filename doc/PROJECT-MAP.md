@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-11-01 InputNumber 移动步进轨道入口
+
+- `linkx-fe/src/components/LxInputNumber/style.css`触屏媒体规则 → 44px居中stepper；宿主`tests/e2e/lx-base-controls-docs.spec.ts`窄屏用例逐控件验证两按钮上下边及44×44尺寸。修前偏移1px，修后合跑5/5及三档增强专项1/1。
+- 视觉证据`tmp-inputnumber-mobile-a/report.md`、`tmp-inputnumber-mobile-b/report.md`；后续设计调查`tmp-inputnumber-next-review.md`。移动P3关闭，边框P1及桌面目标P2未关闭，严格18/52。
+
 ## 2026-11-01 InputNumber 表单与实例方法入口
 
 - 中文 `linkx-fe/docs/components/lxinputnumber.md` → `LxInputNumber/demo/form-state.vue` → LxForm/LxFormItem/LxButton/LxInputNumber；不调用API。测试入口 `other-admin/admin-vue3/tests/e2e/lx-input-number-form-docs.spec.ts`，新2项与原3项合跑5/5。

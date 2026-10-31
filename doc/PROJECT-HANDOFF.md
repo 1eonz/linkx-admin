@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## 2026-11-01 InputNumber 移动对齐交付
+
+- `LxInputNumber/style.css`仅在触屏/窄屏stepper增加居中与44px轨道；两侧EP兼容形态和controls=false无此节点，不受影响。E2E新增上下边对齐断言，修前失败证据`tmp-inputnumber-mobile-before/`；修后合跑5/5、加强三档全控件后专项1/1。库/文档构建、指定格式/Lint及独立代码复审通过，无公共API变化，本轮不重复无关类型/单测。
+- 隔离A/B证据`tmp-inputnumber-mobile-a/`、`tmp-inputnumber-mobile-b/`；CSS指纹`aa9d3e2a018f279ad8065b990675bcf878e757d1361e49536c5d8fc530cee2e1`一致。Light/HUD×375/320所有受测按钮44×44且上下偏移0px，实际overlay完成；CSS-only合法空数组不等于有效markup扫描。8495评估服务已清理。
+- 关闭移动底部1px P3；严格18/52不变。快照`2026-10-31T16-34-37Z__linkx-fe-src-components-lxinputnumber-index-vue.md`与趋势已保存，沿用33/40旧评分，不冒充新评分。下一波独立强边界令牌方案见`tmp-inputnumber-next-review.md`，默认边框P1及桌面目标P2继续开放。
+- 文档4177进程在取证后退出，主线已重启（PID3392）；Mock30847保留。其他开发者七份修改继续保留，测试/审查临时产物继续忽略；本轮无真实后端联调或全菜单新验收。
+
 ## 2026-11-01 InputNumber 表单演示交付
 
 - 综合快照：`.impeccable/critique/2026-10-31T16-26-05Z__ponents-lxinputnumber-demo-form-state-vue-55543c89.md`；趋势已读取，当前仅本目标37/40一份，不与整控件评分直接比较。

@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-11-01 InputNumber 移动端对齐修复
+
+- 窄屏步进轨道居中且保持44px，修前新增断言实测偏移1px失败；修后原有及表单E2E合跑5/5，补齐所有自定义控件（三档/只读/禁用）的几何断言后专项1/1通过。库206模块构建、文档构建及指定格式/Lint通过，独立增量代码复审无新增P0–P3。
+- 隔离A/B四视图独立复验，A32按钮、B64按钮均44×44且上下偏移0px；焦点/边界正常，无横溢。B四组实际overlay零命中；CSS-only扫描合法`[]`/空stderr/0只记执行结果，不冒充markup扫描通过。报告`tmp-inputnumber-mobile-a/report.md`、`tmp-inputnumber-mobile-b/report.md`。
+- 关闭移动底部1px P3，整体默认边框P1/桌面目标P2及新表单留白P3仍开放，严格矩阵18/52。快照`2026-10-31T16-34-37Z__linkx-fe-src-components-lxinputnumber-index-vue.md`已写、趋势已读，33/40沿用既有基线。
+- 下一波按只读调查`tmp-inputnumber-next-review.md`处理默认边框：新增独立强边界令牌并仅由InputNumber消费，核对根级/局部HUD及兼容形态，避免直接改旧共享令牌扩大范围。桌面上下拆分与最小指针目标的设计冲突继续单列，不能用键盘替代关闭。其他组件同源低对比属于共性风险，不能由本组件局部修复代表全库通过。
+
 ## 2026-11-01 InputNumber 表单演示缺口关闭
 
 - 已新增独立表单 Demo，复用 LxForm/LxFormItem/LxButton/LxInputNumber，覆盖必填、范围错误、恢复、错误态重置及实际 focus/blur；中文 API 文档同步。没有新增业务接口或改动公共组件契约。
