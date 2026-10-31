@@ -59,9 +59,7 @@ const lxIconName = computed(() => {
     :tag-type="tagType"
     class="custom-section-title"
   >
-    <template #default
-      ><slot>{{ title }}</slot></template
-    >
+    <template v-if="$slots.default" #default><slot /></template>
     <template v-if="$slots.subtitle" #subtitle><slot name="subtitle" /></template>
     <template v-if="$slots.leading" #leading><slot name="leading" /></template>
     <template v-else-if="icon && !lxIconName" #leading>

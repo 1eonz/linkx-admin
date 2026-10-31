@@ -20,6 +20,7 @@ describe('SectionTitle lx-ui adapter', () => {
 
     expect(wrapper.get('header').classes()).toContain('lx-section-title--dashed');
     expect(wrapper.get('h3').text()).toBe('地图配置');
+    expect(wrapper.get('.lx-section-title__label').attributes('title')).toBe('地图配置');
     expect(wrapper.get('[data-icon-name="map-pin"]').exists()).toBe(true);
     wrapper.unmount();
   });
@@ -40,6 +41,7 @@ describe('SectionTitle lx-ui adapter', () => {
 
     expect(wrapper.get('header').classes()).toContain('lx-section-title--large');
     expect(wrapper.get('h4').text()).toContain('自定义标题');
+    expect(wrapper.get('.lx-section-title__label').attributes('title')).toBeUndefined();
     expect(wrapper.get('h4 .lx-tag').classes()).toContain('lx-tag--primary');
     wrapper.unmount();
   });

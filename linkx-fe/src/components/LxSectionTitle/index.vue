@@ -46,7 +46,9 @@ const headingTag = computed(() => {
       </span>
       <div class="lx-section-title__copy">
         <component :is="headingTag" class="lx-section-title__text">
-          <span class="lx-section-title__label"
+          <span
+            class="lx-section-title__label"
+            :title="$slots.default ? undefined : title || undefined"
             ><slot>{{ title }}</slot></span
           >
           <LxTag

@@ -13,6 +13,19 @@ test.describe('LxSectionTitle 文档示例', () => {
     }
 
     const sizeSelector = page.getByLabel('标题尺寸');
+    await expect(page.getByTestId('long-title-case').locator('.lx-section-title__label')).toHaveAttribute(
+      'title',
+      '辖区协同指挥中心公共安全设备与网络凭证综合配置',
+    );
+    await expect(page.getByTestId('variant-dashed').getByRole('img', { name: '接口设置' })).toBeVisible();
+    await expect(page.getByTestId('variant-dashed').getByRole('img', { name: '接口设置' })).not.toHaveAttribute(
+      'aria-hidden',
+      'true',
+    );
+    await expect(page.getByTestId('variant-border').locator('[data-icon-name="folder"]')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    );
     await sizeSelector.selectOption('small');
     await expect(page.getByTestId('variant-border').locator('.lx-section-title')).toHaveClass(
       /lx-section-title--small/,

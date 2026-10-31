@@ -89,7 +89,7 @@ onBeforeUnmount(() => {
         tag-type="success"
       >
         <template #leading>
-          <LxIcon name="setting" :size="16" aria-label="接口设置" />
+          <LxIcon name="setting" :size="16" label="接口设置" />
         </template>
         <template #extra>
           <button

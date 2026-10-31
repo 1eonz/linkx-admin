@@ -3,6 +3,24 @@ import { LxSectionTitle } from 'lx-ui';
 import { describe, expect, it } from 'vitest';
 
 describe('LxSectionTitle design variants', () => {
+  it('普通标题全文提示随属性变化，空标题不生成提示', async () => {
+    const wrapper = mount(LxSectionTitle, { props: { title: '辖区设备综合配置' } });
+    expect(wrapper.get('.lx-section-title__label').attributes('title')).toBe('辖区设备综合配置');
+    await wrapper.setProps({ title: '更新后的完整标题' });
+    expect(wrapper.get('.lx-section-title__label').attributes('title')).toBe('更新后的完整标题');
+    await wrapper.setProps({ title: '' });
+    expect(wrapper.get('.lx-section-title__label').attributes('title')).toBeUndefined();
+  });
+
+  it('自定义标题不会沿用属性中的旧全文提示', () => {
+    const wrapper = mount(LxSectionTitle, {
+      props: { title: '属性旧标题' },
+      slots: { default: '<strong>插槽实际标题</strong>' },
+    });
+    expect(wrapper.get('.lx-section-title__label').text()).toBe('插槽实际标题');
+    expect(wrapper.get('.lx-section-title__label').attributes('title')).toBeUndefined();
+  });
+
   it.each(['border', 'dashed', 'plain'] as const)('renders the %s variant and public slots', (variant) => {
     const wrapper = mount(LxSectionTitle, {
       props: { title: '警员在岗档案', variant },

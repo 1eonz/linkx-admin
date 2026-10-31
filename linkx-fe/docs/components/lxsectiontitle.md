@@ -43,4 +43,10 @@ import Basic from '../../src/components/LxSectionTitle/demo/basic.vue';
 
 ## Vue3 宿主适配
 
+### 全文提示与前置图标语义
+
+普通 `title` 文本提供原生 `title` 全文提示，属性更新时同步更新。默认插槽存在时不自动沿用 `title` 属性，避免提示旧文案；自定义标题的全文发现方式由宿主提供。原生提示主要用于鼠标悬停，不能替代触屏或键盘交互；窄屏仍通过换行展示完整标题。
+
+默认 `icon` 是装饰图标，对读屏隐藏。`leading` 插槽由宿主管理语义：装饰图标保留 LxIcon 默认行为，有独立含义的图标使用 `label="接口设置"`，不要仅透传 `aria-label`，否则仍可能被 `aria-hidden` 隐藏。
+
 Vue3 的 `SectionTitle` 适配器保留原有 `title`、`icon`、`iconColor`、`variant`、默认/前置/副标题/extra 插槽及 `dashed` 默认变体，并透传 `headingLevel`、`size`、`subtitle`、`tag`、`tagType`。自定义 `leading` 插槽优先于适配器的图标映射和未映射图标回退。Vue2 运行时不直接加载本 Vue3 组件。
