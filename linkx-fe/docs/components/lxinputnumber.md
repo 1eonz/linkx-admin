@@ -8,12 +8,25 @@
 
 <script setup lang="ts">
 import Basic from '../../src/components/LxInputNumber/demo/basic.vue';
+import FormState from '../../src/components/LxInputNumber/demo/form-state.vue';
 </script>
 
 <Basic />
 
 ::: details 查看示例代码
 <<< ../../src/components/LxInputNumber/demo/basic.vue
+:::
+
+## 表单校验与实例方法
+
+<FormState />
+
+空值触发必填校验；控件允许录入 0 至 20，本地业务规则要求 1 至 10，以便展示规则失败与纠正恢复。错误文案由 `LxFormItem` 关联至实际输入，原有帮助说明仍保留。校验失败聚焦首个错误字段；重置恢复空值并清理错误。
+
+聚焦和失焦按钮分别调用实例的 `focus()`、`blur()`，下方反馈记录实际字段事件。失焦按钮阻止指针按下时的默认焦点转移，以便验证焦点确实由 `blur()` 移除；键盘仍可正常聚焦并激活按钮。示例仅在本地执行校验，不访问业务 API。
+
+::: details 查看表单示例代码
+<<< ../../src/components/LxInputNumber/demo/form-state.vue
 :::
 
 ## Props
