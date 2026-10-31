@@ -1,5 +1,12 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-11-01 SectionTitle 最终关闭、InputNumber 风险登记
+
+- SectionTitle 最后 CSS 版本已补四组独立截图/几何和真实 overlay，指纹固定、无源文件修改；多操作根 scrollWidth=clientWidth、局部容器完整分行。结合原隔离 A/B、22 单测/2 E2E和代码复审，严格行关闭，当前 18/52；评分26/32沿用修前记录，不虚构重评分。
+- InputNumber A33/40、B三源码合法 `[]`/空stderr/0，六视图与四状态 overlay 完成；人工发现的边框对比/桌面小指针目标不会被零命中抹去。实际按钮 sm/md/lg 31×13/15/19，移动44×44；上限/只读/方向键/Enter/Space/禁用/连缝行为明确。
+- 本波长按残留三红测证实后修复：25/25 单测、3/3 浏览器、库类型/构建和格式/Lint通过，独立代码复审无剩余P0–P3；无CSS变化。A/B旧JS取证与最终回归分开，严格InputNumber行仍开放。
+- 待执行：P1默认边框Light1.33/HUD1.29对比；P2桌面紧凑布局与24px指针目标的设计冲突（键盘替代不是指针例外的充分依据）；P2表单错误关联/恢复与focus/blur Demo；P3移动底部1px对齐。最新快照分别为 `2026-10-31T16-09-38Z__linkx-fe-src-components-lxsectiontitle-index-vue.md`、`2026-10-31T16-12-47Z__linkx-fe-src-components-lxinputnumber-index-vue.md`，趋势已读。
+
 ## 2026-11-01 SectionTitle 建议闭环与证据版本
 
 - 设计基线为 `design/区块标题 SectionTitle/` 的三 variant、14px/600、3×14px 竖条；small/large、自适应换行是公开能力，空标题语义和局部容器修复不改变默认设计。旧规范建议已按拍板决策 6 改为保留三种变体。
@@ -686,7 +693,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 
 ### 52 个公开组件逐项验收矩阵
 
-本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **17/52 已按统一严格口径关闭**（含原文以“严格矩阵已关闭”登记的 LxTextarea）；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
+本矩阵与 `src/index.ts` 的 `componentRegistry` 对齐。只有“当前矩阵状态”更新为已关闭，且记录设计差异、修改、Demo/API、行为测试、浏览器状态证据与剩余项，组件才算通过 UI-10。已有单测、局部截图或旧 Critique 只作支持证据。当前 **18/52 已按统一严格口径关闭**（含 LxTextarea，最新新增为 LxSectionTitle）；TreeSelect/Cascader/SelectPagination 的组件级 A/B 已完成，但各自 P2 与全库设计矩阵仍未关闭。
 
 | 公开组件             | 唯一对照源                                        | 当前矩阵状态                                                                                                                                                                                 |
 | -------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -711,7 +718,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxGauge`            | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；尺寸、比例、数值和深浅主题                                                                                                                                                       |
 | `LxIcon`             | `design/LxIcon*` + `doc/LxIcon*`                  | A/B 与代码复审通过；真实读屏及权限菜单数据未覆盖，暂不计入严格矩阵                                                                                                                           |
 | `LxInput`            | `design/表单控件八件套/`                          | **已关闭（2026-10-21当前版复验）**；19单测、Input文档E2E9/9及最终专项1/1；A36/40、B合法扫描三件套/四视图overlay、独立代码审核、正式快照与趋势齐备；单层边框/密码键盘/HUD占位字已修，非阻塞Demo对齐P3保留，不重复增加13/52 |
-| `LxInputNumber`      | `design/表单控件八件套/`                          | 当前版行为核验 18/18 单测、InputNumber E2E 2/2；sm/md/lg 步进轨道无可见间距，controls 隐藏/恢复有证据；正式 A/B/snapshot/trend 与桌面步进目标尺寸 P2 仍未决，严格矩阵行开放，不增加 UI-10 全库关闭数                         |
+| `LxInputNumber` | `design/表单控件八件套/` | A修前33/40、独立B六视图/四状态overlay和快照/趋势完成；长按中断修复25/25单测、3/3E2E及代码复审通过。P1边框对比、P2桌面指针目标和表单错误/exposes Demo、P3移动底部1px仍开放，不增加严格关闭数 |
 | `LxMetricCard`       | `design/指标卡 MetricCard/`                       | 2026-10-19 已补 320px 以下窄卡分层、宿主 loading/empty/error 与重试反馈；单测 15/15、文档 E2E 3/3。Assessment A 32/40 的状态维度建议已写入 API；正式 A/B 和 UI-10 严格行仍开放 |
 | `LxNavbar`           | `DESIGN-SPEC.md` + Navbar API/Demo                | **已关闭（2026-10-29）**；基准56px/头像28px/搜索200px及响应式差异已登记；7/7单测、7/7文档E2E、11/11 Mock组合、当前隔离A/B/快照/趋势和独立代码复审通过；通知数量名称P3与真实宿主权限联调后置 |
 | `LxNodeBadge`        | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；节点状态、字号和对齐                                                                                                                                                             |
@@ -722,7 +729,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxRadio`            | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；14px 靶环/6px 靶心、横纵选中色差、中文播报、禁用、减少动效与 44px 触屏均有当前版证据                                                                                  |
 | `LxRadioGroup`       | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/8px 垂直间距、方向键、禁用继承、历史只读值及 Light/HUD 行为均有当前版证据                                                                                   |
 | `LxSearchBar`        | `design/检索面板 SearchBar/`                      | **已关闭（G2，2026-10-17）**；单测 10/10、文档 E2E 5/5、综合 34/40；第四字段 4/4/4/12 栅格、桌面同行和窄屏独占操作行已复验；宿主业务参数映射仍待 UI-04 |
-| `LxSectionTitle` | `design/区块标题 SectionTitle/` | A修前26/32、独立B六视图/实际overlay和一次有界修后确认齐备；局部容器/长标题命令/空标题已修，最终22/22单测、2/2文档E2E及代码复审通过。最后420px多操作CSS的独立视觉/overlay待补，严格行仍开放；原生title键盘/触屏局限留宿主P3 |
+| `LxSectionTitle` | `design/区块标题 SectionTitle/` | **已关闭（2026-11-01）**；14px/600和3×14px竖条及三variant设计对照明确，局部容器/长标题命令/空标题/多操作边界已修；22/22单测、2/2文档E2E、隔离A/B及最终CSS四视图overlay、快照/趋势/代码复审齐备。26/32是修前基线；原生title键盘/触屏局限留宿主P3 |
 | `LxSelect`           | `design/表单控件八件套/`                          | **已关闭（Wave 20）**；桌面 32px、390px 触控目标/选项行 44px；定向单测 15/15、文档 E2E 8/8、A/B 36/40 与六场景浏览器证据、代码复审无未关闭 P0–P2；目录密度 P3 留后续整理                     |
 | `LxSelectPagination` | `design/远程分页下拉 SelectPagination/`           | 当前版行为 4 项单测、文档 E2E、A/B 和代码复审完成；严格矩阵仍待 P2 处理与全库复验                                                                                                            |
 | `LxSelectTree`       | `DESIGN-SPEC.md` + 组织树选择 API/Demo            | 待严格复核；与独立 TreeSelect 的视觉语义区分                                                                                                                                                 |

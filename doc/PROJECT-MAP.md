@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-11-01 SectionTitle 关闭与 InputNumber 长按入口
+
+- SectionTitle 独立最终 CSS 证据入口为 `tmp-sectiontitle-final-evidence/report.md`，当前严格矩阵 18/52。设计/源码/测试入口沿前条，原生提示局限不替代宿主全文发现方案。
+- InputNumber：`linkx-fe/src/components/LxInputNumber/index.vue` → 同目录 Demo → 中文 `lxinputnumber.md`；单测 `other-admin/admin-vue3/tests/unit/lx-input-number.test.ts` 25/25，浏览器 `tests/e2e/lx-base-controls-docs.spec.ts` 的 InputNumber 三项 3/3。长按中断监听形态/禁用和全局释放；API/事件无变化。
+- 后续表单上下文示例应复用 LxForm/LxFormItem，边框对比与步进目标密度通过库令牌/控件设计处理；不在业务页加局部补丁。Mock 服务 30847 已恢复并核验菜单接口数量，文档站 4177 保留。
+
 ## 2026-11-01 SectionTitle 容器布局与空标题回归
 
 - 库 `LxSectionTitle/index.vue` 的 header 是查询容器，`__layout` 是弹性布局层；空标题文字节点降为 DIV，types.ts 中文契约、Demo 开关、组件 API 和 `COMPONENT-STYLE-INTERACTION.md` 同步。

@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## 2026-11-01 SectionTitle 收口与 InputNumber 长按交付
+
+- SectionTitle 最后版本缺口已由独立 Agent 补齐，证据 `tmp-sectiontitle-final-evidence/report.md`、指纹与四组实际 overlay/截图；严格行关闭为 18/52。旧记录的“待补”是历史状态，不改写历史结论。最新综合快照 `2026-10-31T16-09-38Z__linkx-fe-src-components-lxsectiontitle-index-vue.md`。
+- InputNumber 源码的长按清理新增同步 watch、继承禁用 class 检查、触发 guard、window pointerup/pointercancel；监听器在卸载成对移除，readonly 契约不变。25/25 单测覆盖首次重复前快速禁用恢复和 ElForm 继承；浏览器 3/3 覆盖真实长按中隐藏/恢复及原有尺寸/边界/键盘/主题，库类型/构建和指定格式/Lint 通过，独立复审无剩余代码 P0–P3。
+- InputNumber A/B 报告位于 `tmp-inputnumber-a/report.md`、`tmp-inputnumber-b/assessment-b.md`，均取证于长按 JS 修复前；CSS 未变，最终行为由主线回归另证。最终 detector 三件套 `tmp-inputnumber-final/` 合法 `[]`/空/0，不能替代浏览器。综合快照 `2026-10-31T16-12-47Z__linkx-fe-src-components-lxinputnumber-index-vue.md`；P1 边框对比、P2 桌面目标/表单 Demo、P3 移动底部 1px 仍开放。
+- 下一棒先补 InputNumber 表单错误/恢复与公开方法 Demo，再按令牌和密度职责处理可访问性设计冲突，不强行更改紧凑默认尺寸。人工 Mock 30847 已恢复，PID 8352、HTTP200、10父32子；仅恢复与接口核验，不冒充新一轮全菜单 E2E。4177 文档服务按预览要求保留。
+
 ## 2026-11-01 SectionTitle 隔离审查与当前版本边界
 
 - 新增内部 `__layout`，外层 header 仅持有查询容器和尺寸；宽度不超过 400px 时完整分行。extra 不收缩，超预算整体下移，单个命令由宿主保持 nowrap。空 title 且无默认插槽使用 DIV，保留标签/操作；Demo 的“显示长标题”开关覆盖恢复。

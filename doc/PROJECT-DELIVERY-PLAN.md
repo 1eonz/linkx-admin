@@ -1,5 +1,14 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-11-01 SectionTitle 严格收口与 InputNumber 长按修复
+
+- SectionTitle 最终 CSS 独立证据补齐：组件/Demo 与实现 commit 的 blob 相同，源指纹前后不变；Light/HUD 的 394px 局部容器、420px 多操作及 320px 场景实际 overlay/截图/几何通过，无页面异常。原夹具移动溢出是固定 420px 注入导致，已保留失败记录并修正夹具，不归因组件。
+- 当前严格矩阵 **18/52**，本波仅新增关闭 SectionTitle。快照 `.impeccable/critique/2026-10-31T16-09-38Z__linkx-fe-src-components-lxsectiontitle-index-vue.md` 已写、趋势已读；26/32 沿用修前基线，不冒充修后重新评分。原生 title 的键盘/触屏发现局限留宿主 P3。
+- InputNumber 修复已复现的长按残留：controls 隐藏、切换形态和禁用恢复时清理计时器；继承表单禁用、窗口释放/取消/失焦及卸载均有清理。修前 18 通过/3 失败，修后单测 25/25、文档浏览器 3/3、库类型/206 模块构建、文档构建、指定格式/Lint 通过；独立复审无剩余代码 P0–P3，readonly 仍允许步进。
+- InputNumber 正式隔离 A/B 取证：A 33/40；B 三目标合法 `[]`/空 stderr/0、六视图及四状态实际 overlay。保留 P1 默认边框对比度、P2 桌面紧凑步进目标和表单错误/exposes Demo 缺口，P3 移动底部 1px 对齐。最终 JS 与修前截图分开记录，组件严格行不关闭。快照 `2026-10-31T16-12-47Z__linkx-fe-src-components-lxinputnumber-index-vue.md` 已写、趋势 29/40→33/40 已读，不代表旧问题全关闭。
+- 下一波：优先复用 LxForm/LxFormItem 补 InputNumber 校验错误关联/恢复及 focus/blur Demo；默认控件边界与桌面指针尺寸作为令牌/密度设计项处理，不能用键盘替代冒充指针目标合规，不能将旧设计低对比直接写成通过。随后继续剩余基础组件与图标，再进入 DynamicForm 和 Vue3 全量替换。
+- 人工 Mock 预览重新启动于 30847（PID 8352），HTTP 200、菜单接口 10 父/32 子；本次未重跑全菜单逐页验收，不把接口数量核验冒充新的全量浏览器通过。文档站 4177 保留；后端、权限扩展与操作引导保持既有边界。
+
 ## 2026-11-01 SectionTitle 隔离审查与布局修复
 
 - 正式两路独立取证：A 修前 26/32（3、9 不适用），B 六视图 Light/HUD × 1280/375/320，实际注入 overlay；合法 detector `[]`/空 stderr/0 并未发现人工复现的布局问题，不作为通过依据。
