@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-10-31 Navbar 宿主账户键盘组合回归
+
+- 缺陷位于宿主通过 trailing 插槽提供的独立账户下拉，不是 lx-ui 内置用户菜单；宿主按钮补显式 Escape 关闭，保留库组件和已有 API。DropdownInstance 从 lx-ui 导出，不新增直接类型依赖。
+- 四尺寸双轮键盘组合 8/8、Mock 全套 15/15、宿主类型和格式/Lint 通过；独立代码复审无 P0–P3。静态 detector 合法 `[]`/空 stderr/0，证据 `.impeccable/critique/navbar-escape-20261031/`。
+- 本波只收口此键盘缺陷和预览隔离，不是库级或整站正式视觉 Critique；UI-10 维持 17/52，UI-11 仍开放。
+
 ## 2026-10-31 TransferPanel 布局修复交付与证据校正
 
 - 标题独立文本收缩、details 关闭态隐藏、未加载键值 80px 限宽和桌面 32px/移动 44px 移除按钮通过当前版行为回归。独立代码复审无 P0–P2；P3 行高及边缘命中测试建议已落实。

@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## 2026-10-31 Mock 全菜单与账户菜单交付
+
+- 文件：宿主 `src/layout/components/Navbar.vue`、`tests/e2e/preview.spec.ts`、`tests/e2e/navbar-preview.spec.ts` 和 `playwright.preview.config.ts`。菜单定位适配当前 EP 角色结构；账户触发按钮显式处理 Escape，测试等待关闭后才导航首页。
+- `reuseExistingServer=false` 与 dev:mock 的 strictPort 共同阻止误连已占用端口的普通代理服务；负向验证在执行用例前退出 1。人工预览运行期间测试需另设 `MOCK_PREVIEW_PORT`，不能改回复用未知服务。
+- 修前 14/15、加强关闭断言后 12/15；修复后四尺寸双轮 8/8、最终整套 15/15、Mock 数据单测 1/1、类型与目标格式/Lint 通过。独立代码复审无 P0–P3。测试产物位于忽略的 `test-results/preview-escape-final/` 与 `test-results/navbar-escape-fix/`。
+- 静态 Impeccable 证据 `.impeccable/critique/navbar-escape-20261031/`，合法 `[]`/空 stderr/0；不代替正式视觉/overlay 审查。全部入口及首屏样例覆盖不等于全部业务交互完成，真实权限与后端仍开放。
+
 ## 2026-10-31 TransferPanel 布局波次交付
 
 - 组件 `linkx-fe/src/components/LxTransferPanel/index.vue` 与文档 E2E 为本波文件。承接已有标题收缩、未加载键值限宽、details 隐藏和 32/44px 移除触控盒修复，未改变业务契约。

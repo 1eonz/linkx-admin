@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-10-31 Mock 全菜单和账户键盘入口
+
+- 预览入口：`other-admin/admin-vue3/playwright.preview.config.ts` → `mock/preview-server.ts` / `mock/preview-menu.ts`；33 个入口及首屏样例由 `tests/e2e/preview.spec.ts` 核验。
+- 宿主账户：`src/layout/components/Navbar.vue` 的 Escape 通过 lx-ui 导出的 DropdownInstance 调用公开关闭方法；四尺寸键盘回归在 `tests/e2e/navbar-preview.spec.ts`，双轮 8/8；全套 15/15。
+- 测试必须独占指定端口，未知服务占用即失败，可用 `MOCK_PREVIEW_PORT` 指定空闲端口。Mock 成功不等于真实权限、业务全流程或后端联调完成。
+
 ## 2026-10-31 TransferPanel 当前回归入口
 
 - 源码：`linkx-fe/src/components/LxTransferPanel/index.vue`；浏览器测试：`other-admin/admin-vue3/tests/e2e/lx-transfer-panel-docs.spec.ts`；单测：`other-admin/admin-vue3/tests/unit/lx-transfer-panel.test.ts`。
