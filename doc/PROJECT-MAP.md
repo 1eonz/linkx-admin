@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-11-01 InputNumber 表单与实例方法入口
+
+- 中文 `linkx-fe/docs/components/lxinputnumber.md` → `LxInputNumber/demo/form-state.vue` → LxForm/LxFormItem/LxButton/LxInputNumber；不调用API。测试入口 `other-admin/admin-vue3/tests/e2e/lx-input-number-form-docs.spec.ts`，新2项与原3项合跑5/5。
+- 证据入口 `tmp-inputnumber-form-a/report.md`、`tmp-inputnumber-form-b/assessment-b.md`；新Demo A37/40、B静态三件套及十组实际overlay，独立代码复审完成。关闭表单错误/exposes Demo缺口，严格矩阵仍18/52，整体控件边框/桌面目标和移动1px继续开放。
+
 ## 2026-11-01 SectionTitle 关闭与 InputNumber 长按入口
 
 - SectionTitle 独立最终 CSS 证据入口为 `tmp-sectiontitle-final-evidence/report.md`，当前严格矩阵 18/52。设计/源码/测试入口沿前条，原生提示局限不替代宿主全文发现方案。

@@ -1,5 +1,12 @@
 # LinkX 项目交付计划与完成台账
 
+## 2026-11-01 InputNumber 表单演示缺口关闭
+
+- 已新增独立表单 Demo，复用 LxForm/LxFormItem/LxButton/LxInputNumber，覆盖必填、范围错误、恢复、错误态重置及实际 focus/blur；中文 API 文档同步。没有新增业务接口或改动公共组件契约。
+- 回归 5/5（新 Demo 2 项、原 InputNumber 3 项），库类型、文档构建、指定 Prettier/ESLint 通过；独立代码复审两项建议落实后无剩余代码 P0–P3。
+- 隔离 Impeccable A 37/40；B 两目标合法 `[]`/空 stderr/0、Light1280/HUD320 五状态实际 overlay 与截图完成，源码指纹一致。本评分仅覆盖新 Demo，原控件 33/40 保持原范围。报告见 `tmp-inputnumber-form-a/report.md`、`tmp-inputnumber-form-b/assessment-b.md`，综合快照以新 Demo 路径保存。
+- 关闭 P2 表单错误/exposes Demo 缺口；严格矩阵仍 18/52。P1 默认边框对比、P2 桌面步进目标、P3 移动底部 1px 及新 Demo 错误行留白保留。下一步核对默认边框的局部令牌与设计依据，再推进剩余基础组件；权限扩展和操作引导暂缓，真实后端门槛保留。
+
 ## 2026-11-01 SectionTitle 严格收口与 InputNumber 长按修复
 
 - SectionTitle 最终 CSS 独立证据补齐：组件/Demo 与实现 commit 的 blob 相同，源指纹前后不变；Light/HUD 的 394px 局部容器、420px 多操作及 320px 场景实际 overlay/截图/几何通过，无页面异常。原夹具移动溢出是固定 420px 注入导致，已保留失败记录并修正夹具，不归因组件。

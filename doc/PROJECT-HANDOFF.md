@@ -1,5 +1,13 @@
 # LinkX 项目交接记录
 
+## 2026-11-01 InputNumber 表单演示交付
+
+- 综合快照：`.impeccable/critique/2026-10-31T16-26-05Z__ponents-lxinputnumber-demo-form-state-vue-55543c89.md`；趋势已读取，当前仅本目标37/40一份，不与整控件评分直接比较。
+- 新文件 `linkx-fe/src/components/LxInputNumber/demo/form-state.vue`、宿主 `tests/e2e/lx-input-number-form-docs.spec.ts`，中文 `lxinputnumber.md` 接入；控件范围0至20与业务校验1至10明确分离，实例按钮实际调用focus/blur。错误说明与帮助共同关联，纠正与错误态重置移除错误关联并保留帮助。
+- 新2项与原3项 E2E 合跑5/5；库类型、文档构建、指定Prettier/ESLint通过。独立复审修复`.lx-button`误写选择器并加强错误态reset覆盖，最终无剩余代码P0–P3。Demo不进入库生产入口，本轮没有重复库生产构建或真实后端联调。
+- A/B 独立评估，A37/40；B两源码扫描合法`[]`/空stderr/0，十组实际overlay及截图，两个源码指纹与主线一致。报告位于`tmp-inputnumber-form-a/`、`tmp-inputnumber-form-b/`。新Demo综合快照与原InputNumber基线分开，不扩大评分范围。
+- 原P2表单错误/exposes Demo已关闭；严格总数18/52不变，边框对比、桌面目标及移动底部1px仍开放，新增Demo P3留白建议待统一表单间距处理。下一棒先查边框局部令牌与设计依据。8494评估服务已关闭，4177文档和30847 Mock保留；本轮未重跑全菜单E2E。临时证据继续忽略，其他开发者七份改动保留。
+
 ## 2026-11-01 SectionTitle 收口与 InputNumber 长按交付
 
 - SectionTitle 最后版本缺口已由独立 Agent 补齐，证据 `tmp-sectiontitle-final-evidence/report.md`、指纹与四组实际 overlay/截图；严格行关闭为 18/52。旧记录的“待补”是历史状态，不改写历史结论。最新综合快照 `2026-10-31T16-09-38Z__linkx-fe-src-components-lxsectiontitle-index-vue.md`。
