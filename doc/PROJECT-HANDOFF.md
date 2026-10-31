@@ -1,5 +1,12 @@
 # LinkX 项目交接记录
 
+## 2026-10-31 SectionTitle 提示与语义交付
+
+- 本波修改库 SectionTitle、Demo、中文文档和 Vue3 SectionTitle 适配器；普通 title 有全文提示，自定义插槽不生成旧提示。适配器不能无条件创建默认插槽，否则会再次屏蔽普通标题提示。
+- Demo 语义图标使用 `label`，装饰图标保持隐藏。原生 title 不作为触屏或键盘全文发现的完整方案，窄屏仍换行。
+- 单测 20/20、文档 E2E 1/1、两端类型、库/文档构建、指定格式/Lint 通过；独立审查提出的宿主插槽 P2 已修复。截图位于宿主 `test-results/lx-section-title-320.png`、`lx-section-title-375.png`；detector 三件套位于忽略目录 `.impeccable/critique/sectiontitle-title-20261031/`。
+- 正式隔离视觉/overlay 仍待补齐，不增加严格关闭数（17/52）。继续基础组件建议落地与正式门禁，之后按原顺序推进 DynamicForm 和 Vue3 替换；真实后端联调未完成。
+
 ## 2026-10-31 Mock 全菜单与账户菜单交付
 
 - 文件：宿主 `src/layout/components/Navbar.vue`、`tests/e2e/preview.spec.ts`、`tests/e2e/navbar-preview.spec.ts` 和 `playwright.preview.config.ts`。菜单定位适配当前 EP 角色结构；账户触发按钮显式处理 Escape，测试等待关闭后才导航首页。

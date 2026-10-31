@@ -1,5 +1,10 @@
 # LinkX 项目地图
 
+## 2026-10-31 SectionTitle 全文提示与语义入口
+
+- 库 `linkx-fe/src/components/LxSectionTitle/index.vue` → `demo/basic.vue` → `linkx-fe/docs/components/lxsectiontitle.md`；宿主适配为 `other-admin/admin-vue3/src/components/SectionTitle/index.vue`，默认插槽按调用方是否存在转发。
+- 回归为宿主 `tests/unit/lx-section-title.test.ts`、`tests/unit/section-title-adapter.test.ts`（合计 20/20）和 `tests/e2e/lx-section-title-docs.spec.ts`（1/1）。覆盖动态全文提示、自定义标题、图标可访问名称、主题、键盘及窄屏换行；正式隔离视觉门禁仍开放。
+
 ## 2026-10-31 Mock 全菜单和账户键盘入口
 
 - 预览入口：`other-admin/admin-vue3/playwright.preview.config.ts` → `mock/preview-server.ts` / `mock/preview-menu.ts`；33 个入口及首屏样例由 `tests/e2e/preview.spec.ts` 核验。
