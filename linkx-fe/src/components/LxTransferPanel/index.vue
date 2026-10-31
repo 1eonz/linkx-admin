@@ -888,7 +888,10 @@ function nodeSummaryOf({ node }: LxVirtualTreeNodeSlotProps): string {
             :id="sourceTitleId"
             class="lx-transfer-panel__title"
             :title="titles[0]"
-            ><LxIcon name="folder" :size="16" />{{ titles[0] }}</span
+            ><LxIcon name="folder" :size="16" /><span
+              class="lx-transfer-panel__title-text"
+              >{{ titles[0] }}</span
+            ></span
           >
           <span class="lx-transfer-panel__header-actions">
             <template v-if="sourceFilter.trim()">
@@ -1129,7 +1132,10 @@ function nodeSummaryOf({ node }: LxVirtualTreeNodeSlotProps): string {
           :id="selectedTitleId"
           class="lx-transfer-panel__title"
           :title="titles[1]"
-          ><LxIcon name="check" :size="16" />{{ titles[1] }}</span
+          ><LxIcon name="check" :size="16" /><span
+            class="lx-transfer-panel__title-text"
+            >{{ titles[1] }}</span
+          ></span
         >
       </header>
       <div class="lx-transfer-panel__filter">
@@ -1482,6 +1488,13 @@ function nodeSummaryOf({ node }: LxVirtualTreeNodeSlotProps): string {
   white-space: normal;
   font-size: 13px;
   font-weight: 600;
+}
+
+.lx-transfer-panel__title-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .lx-transfer-panel__header-actions {
@@ -2029,6 +2042,12 @@ function nodeSummaryOf({ node }: LxVirtualTreeNodeSlotProps): string {
   overflow-wrap: anywhere;
 }
 
+/* 显式维护 details 关闭态，避免内容样式覆盖浏览器默认隐藏规则。 */
+.lx-transfer-panel__selected-name-disclosure:not([open])
+  > .lx-transfer-panel__selected-name-full {
+  display: none;
+}
+
 .lx-transfer-panel__selected-main.is-unloaded {
   flex-wrap: wrap;
   align-content: center;
@@ -2168,13 +2187,20 @@ function nodeSummaryOf({ node }: LxVirtualTreeNodeSlotProps): string {
   white-space: nowrap;
 }
 
+/* 未加载项在窄侧面板中需要为编码、状态和标记保留同一行；完整键值由 title 提供。 */
+.lx-transfer-panel__selected-main.is-unloaded > .lx-transfer-panel__node-key {
+  max-width: 80px;
+}
+
 .lx-transfer-panel__selected-item button {
   display: inline-flex;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
+  /* 触控盒覆盖行内容轨道，避免外框边线把桌面 32px 行高撑高。 */
+  margin-block: -1px;
   padding: 0;
   border: 0;
   border-radius: var(--lx-radius-md);
@@ -2359,6 +2385,7 @@ function nodeSummaryOf({ node }: LxVirtualTreeNodeSlotProps): string {
   .lx-transfer-panel__selected-item button {
     width: 44px;
     height: 44px;
+    margin-block: 0;
   }
 
   .lx-transfer-panel__filter button {

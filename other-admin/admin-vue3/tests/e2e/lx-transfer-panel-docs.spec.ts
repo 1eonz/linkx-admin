@@ -580,6 +580,33 @@ test.describe('lx-ui LxTransferPanel 文档示例', () => {
     expect(documentWidths.scrollWidth).toBe(documentWidths.clientWidth);
   });
 
+  test('已选项移除按钮桌面匹配 32px 行高，窄屏保留 44px 触控盒', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 960 });
+    await page.goto('/components/lxtransferpanel');
+
+    const desktopRemoveButton = page.locator('.lx-transfer-panel__selected-item button').first();
+    const desktopBounds = await desktopRemoveButton.boundingBox();
+    if (!desktopBounds) throw new Error('桌面已选项移除按钮没有进入可视区域');
+    expect(Math.round(desktopBounds.width)).toBe(32);
+    expect(Math.round(desktopBounds.height)).toBe(32);
+
+    const desktopItem = page.locator('.lx-transfer-panel__selected-item').first();
+    const desktopItemBounds = await desktopItem.boundingBox();
+    if (!desktopItemBounds) throw new Error('桌面已选项没有进入可视区域');
+    expect(Math.round(desktopItemBounds.height)).toBe(32);
+    const initialSelectedCount = await page.locator('.lx-transfer-panel__selected-item').count();
+    await desktopRemoveButton.click({ position: { x: 2, y: 2 } });
+    await expect(page.locator('.lx-transfer-panel__selected-item')).toHaveCount(initialSelectedCount - 1);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.getByTestId('mobile-selected-panel').click();
+    const mobileRemoveButton = page.locator('.lx-transfer-panel__selected-item button').first();
+    const mobileBounds = await mobileRemoveButton.boundingBox();
+    if (!mobileBounds) throw new Error('窄屏已选项移除按钮没有进入可视区域');
+    expect(Math.round(mobileBounds.width)).toBe(44);
+    expect(Math.round(mobileBounds.height)).toBe(44);
+  });
+
   test('筛选批量操作只影响匹配名称，中间加入仍覆盖当前可选树', async ({ page }) => {
     await page.goto('/components/lxtransferpanel');
     await openDemoSettings(page);
