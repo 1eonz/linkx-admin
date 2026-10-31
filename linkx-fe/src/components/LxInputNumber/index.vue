@@ -18,6 +18,7 @@ import {
   onUpdated,
   ref,
   useAttrs,
+  watch,
 } from 'vue'
 import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import { ElIcon, ElInputNumber } from 'element-plus'
@@ -113,6 +114,8 @@ function isStepperDisabled(direction: StepDirection): boolean {
 function syncStepperAttributes(): void {
   const root = numberRef.value?.$el
   if (!root) return
+  // 表单禁用来自内核上下文，不能只监听组件显式 disabled 属性。
+  if (root.classList.contains('is-disabled')) stopStepperRepeat()
 
   if (hasCustomControls.value) {
     const buttons = root.querySelectorAll('.lx-input-number__stepper-button')
@@ -207,7 +210,10 @@ function stopStepperRepeat(): void {
 }
 
 function triggerStep(direction: StepDirection): void {
-  if (isStepperDisabled(direction)) return
+  if (!hasCustomControls.value || isStepperDisabled(direction)) {
+    stopStepperRepeat()
+    return
+  }
   const input = numberRef.value?.$el?.querySelector('input')
   if (!(input instanceof HTMLInputElement)) return
 
@@ -241,6 +247,11 @@ function handleStepperClick(event: MouseEvent, direction: StepDirection): void {
   triggerStep(direction)
 }
 
+// 按钮隐藏或切换为内核控件后，旧节点不再接收释放事件，必须主动结束长按。
+watch([hasCustomControls, () => props.disabled], stopStepperRepeat, {
+  flush: 'sync',
+})
+
 onMounted(() => {
   syncInputAttributes()
   syncStepperAttributes()
@@ -250,6 +261,8 @@ onMounted(() => {
   root.addEventListener('keydown', handleStepperKeydown)
   root.addEventListener('keyup', handleStepperKeyup)
   window.addEventListener('blur', stopStepperRepeat)
+  window.addEventListener('pointerup', stopStepperRepeat)
+  window.addEventListener('pointercancel', stopStepperRepeat)
   stepperObserver = new MutationObserver(syncStepperAttributes)
   stepperObserver.observe(root, {
     attributes: true,
@@ -266,6 +279,8 @@ onUpdated(() => {
 onBeforeUnmount(() => {
   stopStepperRepeat()
   window.removeEventListener('blur', stopStepperRepeat)
+  window.removeEventListener('pointerup', stopStepperRepeat)
+  window.removeEventListener('pointercancel', stopStepperRepeat)
   stepperObserver?.disconnect()
   const root = numberRef.value?.$el
   root?.removeEventListener('keydown', handleStepperKeydown)

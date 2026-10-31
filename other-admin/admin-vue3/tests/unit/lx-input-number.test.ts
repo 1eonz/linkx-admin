@@ -1,8 +1,92 @@
 import { mount } from '@vue/test-utils';
-import { LxInputNumber } from 'lx-ui';
-import { describe, expect, it } from 'vitest';
+import { ElForm, LxInputNumber } from 'lx-ui';
+import { describe, expect, it, vi } from 'vitest';
+import { h, nextTick, ref } from 'vue';
 
 describe('LxInputNumber', () => {
+  it('继承表单禁用后立即恢复不会续跑旧的长按', async () => {
+    vi.useFakeTimers();
+    const formDisabled = ref(false);
+    const wrapper = mount(
+      {
+        setup: () => () =>
+          h(ElForm, { disabled: formDisabled.value }, { default: () => h(LxInputNumber, { modelValue: 30 }) }),
+      },
+      { attachTo: document.body },
+    );
+    try {
+      const control = wrapper.findComponent(LxInputNumber);
+      await control.get('.lx-input-number__stepper-button--increase').trigger('pointerdown', { button: 0 });
+      formDisabled.value = true;
+      await nextTick();
+      await Promise.resolve();
+      expect(control.classes()).toContain('is-disabled');
+      formDisabled.value = false;
+      await nextTick();
+      const before = control.emitted('update:modelValue')?.length;
+      await vi.advanceTimersByTimeAsync(1_200);
+      expect(control.emitted('update:modelValue')).toHaveLength(before ?? 0);
+    } finally {
+      wrapper.unmount();
+      vi.useRealTimers();
+    }
+  });
+
+  it.each(['pointerup', 'pointercancel', 'blur'])('长按收到窗口 %s 后停止，重新按下才继续', async (eventName) => {
+    vi.useFakeTimers();
+    const wrapper = mount(LxInputNumber, { props: { modelValue: 30 }, attachTo: document.body });
+    try {
+      const increase = wrapper.get('.lx-input-number__stepper-button--increase');
+      await increase.trigger('pointerdown', { button: 0 });
+      await vi.advanceTimersByTimeAsync(800);
+      const before = wrapper.emitted('update:modelValue')?.length;
+      expect(before).toBeGreaterThan(1);
+      window.dispatchEvent(new Event(eventName));
+      await vi.advanceTimersByTimeAsync(800);
+      expect(wrapper.emitted('update:modelValue')).toHaveLength(before ?? 0);
+      await increase.trigger('click');
+      expect(wrapper.emitted('update:modelValue')).toHaveLength((before ?? 0) + 1);
+    } finally {
+      wrapper.unmount();
+      vi.useRealTimers();
+    }
+  });
+
+  it.each([{ controls: false }, { controlsPosition: '' as const }])(
+    '长按后切换控件形态 %j 不继续步进',
+    async (nextProps) => {
+      vi.useFakeTimers();
+      const wrapper = mount(LxInputNumber, { props: { modelValue: 30 }, attachTo: document.body });
+      try {
+        await wrapper.get('.lx-input-number__stepper-button--increase').trigger('pointerdown', { button: 0 });
+        expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
+        await wrapper.setProps(nextProps);
+        const before = wrapper.emitted('update:modelValue')?.length;
+        await vi.advanceTimersByTimeAsync(1_200);
+        expect(wrapper.emitted('update:modelValue')).toHaveLength(before ?? 0);
+      } finally {
+        wrapper.unmount();
+        vi.useRealTimers();
+      }
+    },
+  );
+
+  it('长按中禁用再恢复不会恢复旧的连续步进', async () => {
+    vi.useFakeTimers();
+    const wrapper = mount(LxInputNumber, { props: { modelValue: 30 }, attachTo: document.body });
+    try {
+      await wrapper.get('.lx-input-number__stepper-button--increase').trigger('pointerdown', { button: 0 });
+      await wrapper.setProps({ disabled: true });
+      await wrapper.setProps({ disabled: false });
+      const before = wrapper.emitted('update:modelValue')?.length;
+      await vi.advanceTimersByTimeAsync(700);
+      expect(wrapper.emitted('update:modelValue')).toHaveLength(before ?? 0);
+    } finally {
+      wrapper.unmount();
+      vi.useRealTimers();
+    }
+  });
+
   it('renders the lx-input-number class on the EP kernel root', () => {
     const wrapper = mount(LxInputNumber, { props: { modelValue: 30 } });
 

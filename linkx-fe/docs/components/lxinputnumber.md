@@ -74,3 +74,4 @@ import Basic from '../../src/components/LxInputNumber/demo/basic.vue';
 - 默认步进钮使用原生 `button`，提供中文可访问名称、键盘焦点、原生禁用语义及 `aria-disabled` 状态；`controlsPosition=""` 时沿用 Element Plus 内核控件。
 - 值文字 `tabular-nums` 等宽数字呈现，避免步进时宽度抖动。
 - 输入框与步进钮均提供可见键盘焦点；禁用或达到边界的步进钮不进入 Tab 顺序。
+- 长按在释放、指针取消、窗口失焦、控件隐藏或切换形态、禁用及组件卸载时结束；恢复显示或解除禁用不会自动恢复上一次长按。

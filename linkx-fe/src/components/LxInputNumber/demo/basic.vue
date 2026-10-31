@@ -14,7 +14,7 @@ const acknowledgementMinutes = ref<number>(30)
 const smallQuota = ref<number>(30)
 const mediumQuota = ref<number>(30)
 const largeQuota = ref<number>(30)
-/** Panel 2 极值：最高并发处警上限（max=100，达到后减少钮禁用） */
+/** 极值示例：最高并发处警上限（max=100，达到后增加钮禁用）。 */
 const maxConcurrency = ref<number>(100)
 /** Panel 3 小数步长与精度 */
 const threshold = ref<number>(0.5)

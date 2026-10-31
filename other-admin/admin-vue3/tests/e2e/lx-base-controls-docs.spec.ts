@@ -865,6 +865,33 @@ test('DatePicker 双输入各有标签，自定义日期与导航插槽保留内
   await expect(page.locator('.lx-date-picker__popper:visible')).toHaveCount(0);
 });
 
+test('InputNumber 长按中隐藏按钮立即停止，重新显示不恢复旧操作', async ({ page }) => {
+  await page.goto('/components/lxinputnumber');
+  const input = page.getByLabel('基准档 md（默认）', { exact: true });
+  const root = page.locator('[data-testid="sizes"] .lx-input-number').nth(1);
+  const increase = root.getByRole('button', { name: '增加数值' });
+  await increase.scrollIntoViewIfNeeded();
+  const bounds = await increase.boundingBox();
+  if (!bounds) throw new Error('步进按钮没有可测量区域');
+  await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+  await page.mouse.down();
+  await expect(input).toHaveValue('31');
+  const toggle = page.getByLabel('尺寸示例显示步进按钮', { exact: true });
+  await toggle.focus();
+  await page.keyboard.press('Space');
+  await expect(increase).toHaveCount(0);
+  // 超过首次重复延迟，证明隐藏期间没有残留长按写入。
+  await page.waitForTimeout(900);
+  await expect(input).toHaveValue('31');
+  await page.mouse.up();
+  await toggle.check();
+  await expect(increase).toBeVisible();
+  await page.waitForTimeout(700);
+  await expect(input).toHaveValue('31');
+  await increase.click();
+  await expect(input).toHaveValue('32');
+});
+
 test('InputNumber 全部可见标签关联原生数值输入，键盘步进保留边界', async ({ page }) => {
   await page.goto('/components/lxinputnumber');
   const demo = page.locator('.lx-input-number-demo');
