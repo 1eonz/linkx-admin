@@ -59,6 +59,97 @@
 - Impeccable 隔离 A/B 与唯一一次有界复验完成：A 33/40 为修前基线，三个 P2 已关闭；B 三目标 detector 均合法 `[]`/空 stderr/0，四组 Light/HUD、1280/320px 实际执行 overlay 扫描，修后无命中。静态零命中不是单独通过依据。
 - 仍开放：滚动边界提示、Demo 关闭反馈名称和桌面完整点击区 P3；宿主未保存确认、路由守卫、真实读屏器及后端联调不由组件测试替代。UI-10 维持 **13/52**，不将本波组件收口冒充全库严格设计完成。下一波优先落实已证实的 LxNavbar 窄屏裁切/全屏失败反馈，再处理表单及迁移门禁，保持基础组件/图标 → DynamicForm → Vue3 替换顺序。
 
+## 2026-10-27 LxDrawer 当前版 Assessment A/B
+
+- Assessment A **31/40（Good）**；P1 为状态契约偏薄（组件不承载 loading/empty/error），P2 为长标题单行省略、默认遮罩关闭时的触控回退成本，P3 为 Demo 信息稀疏。浏览器行为不能用旧截图替代当前版证据。
+- Assessment B：组件、Demo、中文文档 detector 均为合法 JSON `[]`、stderr 空、退出码 0；独立浏览器四视图完成 Light/HUD、桌面/375px、reduced-motion，注入脚本均返回 `ok=true`。打开可见、桌面宽 480px、375px 全宽、body 滚动锁定、ESC 关闭和焦点回收通过。
+- 关闭按钮在 overlay 强制点击后动画/遮罩尚未稳定，`closedByButton` 结果不确定；不把该场景写成通过，也没有证据证明组件关闭逻辑缺陷。HUD 低对比度和其它命中归因文档壳层/全局规则。
+- **下一棒**：补关闭按钮无 overlay 的独立几何/行为回归，并在文档说明 loading/empty/error 由宿主负责；随后进入下一个未关闭组件。UI-10 仍 **13/52**。
+
+## 2026-10-27 LxDialog 当前版 Assessment B 与设计复核
+
+- Assessment B：组件、Demo、中文文档 detector 均为合法 JSON `[]`、stderr 空、退出码 0；独立 Chromium 文档验证覆盖 Light/HUD、桌面/375px、打开/关闭、键盘焦点、ESC、校验失败首错聚焦、loading 禁用、自定义 footer 和 reduced-motion。aria-modal、标题关联、44px 关闭按钮、单列表单和组件自身横溢出均通过。
+- 本轮未执行可写 overlay 注入，因此只能记为当前版浏览器行为证据，不宣称正式 Impeccable Critique 通过；`[]` 不单独代表通过。
+- 静态设计复核候选：默认 `draggable=true` 时 header 整块使用 `cursor: move`，键盘没有等价拖动路径；标题为空时仍保留标题栏占位。两项暂列 P2，未擅自改变公共 API。
+- **下一棒**：在不改变默认行为的前提下补拖拽语义说明、空标题边界和 Demo 证据，再进入下一个未关闭组件；UI-10 仍 **13/52**。
+
+## 2026-10-27 LxPagination 当前版 B 证据复核校正
+
+- 独立复核确认正式历史 B 目录虽存在，但早于当前 `aria-label`、导航语义和窄屏命中区改动，不能作为当前版正式证据；本次环境没有可用 CDP，未伪造 Light/HUD、桌面/窄屏、键盘或 reduced-motion 结论。
+- 当前静态 detector 组件、Demo、中文文档仍为合法 `[]`、stderr 空、退出码 0；Assessment A 当前复评 **28/40**，默认契约分叉、请求状态缺口、`autoScroll` 上下文和窄屏横滑继续开放。
+- 前一轮保存的浏览器记录作为辅助材料保留，但在当前版指纹重新冻结并补齐独立 B 前，不标记正式 Critique 通过或关闭 UI-10。
+
+## 2026-10-27 LxPagination 当前版 Assessment A/B
+
+- Assessment A **27/40（Acceptable）**，P0 为 0，P1 为 3：设计规范默认值与实现（每页 20/含 jumper vs 每页 10/不含 jumper）冲突；默认 28px 触控命中偏紧；缺少统一分页导航名称与切页状态公告契约。另有 P2：loading/空/失败恢复不在组件可观察范围、`autoScroll` 默认行为可能打断阅读。
+- Assessment B 三目标 detector 均为合法 JSON `[]`、stderr 空、退出码 0；独立文档服务和新浏览器上下文完成 1280/375/320px × Light/HUD × reduced-motion 视图，页面错误、失败请求和页面级横溢为 0。窄屏横向滚动局限在分页 region 内，键盘可聚焦，下一页切换由 4→5 成功。
+- overlay 命中归因到 VitePress 文档壳层、API 表格、复制按钮、Element Plus popper 和全局过渡；没有证据直接归因 LxPagination 组件源码。`[]` 不单独代表正式 Critique 通过。
+- **阻塞决策**：需要产品确认正式默认 pageSize/layout、移动端触控命中策略、`autoScroll` 默认值及分页 aria/live-region 契约；在决策前不擅自改公共 API。
+- **下一棒**：保留 LxPagination P1/P2 阻塞，继续审计矩阵中不依赖该决策的下一个组件；UI-10 仍 **13/52**，Element Plus 删除和真实权限联调继续后置。
+
+## 2026-10-27 LxSectionTitle 当前版 Assessment A/B
+
+- Assessment A **32/40（Good）**；独立静态复评提出窄屏标题/操作区裁切的 P1 候选，但没有可变浏览器证据证明组件自身复现；现有 B 视图未观察到裁切。P2 为嵌套窄容器的 `@container` 接入契约、Demo 根主题同步的宿主所有权边界。该候选继续保留，未标记为已修复。
+- Assessment B 覆盖 1280/420/375/320px × Light/HUD × normal/reduced-motion，共 **16 个视图**；组件、Demo、中文文档 detector 均为合法 JSON `[]`、stderr 空、退出码 0。页面错误、失败请求、页面横溢出和 extra 操作越界均为 0。
+- 320/375px 下 extra 按钮保持 44px 并按预期换行；文档 API 表格窄屏横向阅读属于文档可读性观察，不归因组件溢出。`[]` 不单独代表正式 Critique 通过。
+- **下一棒**：登记并处理 SectionTitle 的容器接入说明和 Demo 主题所有权测试，再按审计矩阵进入下一个未关闭组件；UI-10 仍 **13/52**。
+
+## 2026-10-27 LxMetricCard 当前版 Assessment 复核
+
+- 当前实现已核对旧评审修复项：`headingLevel` 默认语义、未传 `trendDirection` 不猜测箭头、组件不使用 hover 抬升均符合实现和文档。
+- 组件、Demo、中文文档 detector 均为合法 JSON `[]`、stderr 为空、退出码 0；四个 Light/HUD、桌面/窄卡视图完成浏览器注入，卡片自身无横溢，`prefers-reduced-motion` 下过渡降级。静态 `[]` 不代表正式 Critique 通过。
+- 旧的窄屏 `scrollWidth=630` 经复核来自 overlay 绝对定位，未注入时页面宽度为 390px；不归因于组件。无组件级确定 P1，无需源码修改。
+- **P2**：Demo/文档长页面将基础用法、兼容属性、状态组合和 Props 表连续展开，首屏复制路径较稀释；后续做文档分层，不改组件 API。
+- **下一棒**：进入 `LxSectionTitle` 当前版复核；UI-10 仍 **13/52**，综合 snapshot/trend、全库 Critique 和 Vue3 Element Plus 替换门禁继续开放。
+
+## 2026-10-27 LxTransferPanel Assessment B 收口与标题宽度修复
+
+- **Assessment B**：当前源码、Demo、中文文档及 VirtualTree 目标 detector 均为合法 JSON `[]`、stderr 为空、退出码 0；9/9 浏览器视图完成导航、交互、overlay 和 HTTP 校验，页面错误/请求失败为 0。reduced-motion 下关键过渡降级为 `1e-05s/0s`。`[]` 仅代表静态零命中，不代表正式 Critique 通过。
+- **归因**：HUD 低对比度、代码展示、文档壳层横溢出和通用动画命中均未定位到 TransferPanel 组件节点。无 P1。Demo 状态选择控件覆盖命中保留为待 bounding-box 复核项。
+- **修复**：标题图标后的标题文本改为可收缩的独立文本节点，使用 `min-width: 0`、省略号和单行语义，避免标题与筛选操作并列时撑出约 26px 的可用宽度；保留完整标题 `title`。
+- **验证**：TransferPanel 单测 **30/30**；完整文档 E2E 已有 **34/34**，本次标题关键 820px 场景 **1/1**；目标 Prettier 检查通过。
+- **门禁**：无 P1，但标题修复后仍需按当前源码重新生成综合 snapshot/trend；Demo 空/加载状态控件需完成几何复核。UI-10 维持 **13/52**，不因静态 `[]` 或本轮行为回归关闭严格行。
+- **下一棒**：完成 TransferPanel 综合证据归档后，按 `COMPONENT-AUDIT.md` 进入下一个未闭环组件；继续保留 Vue3 `element-plus`、权限中心、真实后端联调和页面操作引导后置规则。
+
+## 2026-10-27 隔离 Mock 全菜单回归与 TransferPanel detector 归因
+
+- **Mock 回归**：修正 `preview.spec.ts` 对 Element Plus 菜单内部 CSS 结构的过时选择器，改用稳定 ARIA 菜单层级和标题；没有放宽菜单数量、入口名称或样例数据断言。隔离 Mock 全套 **7/7** 通过，覆盖首页+32 个现役子菜单、北向增改删、三方表单失败重试/提交锁/编辑回显、轮播分页和 AuthImg 失败/键盘/减少动效。
+- **TransferPanel detector 归因**：组件源码与中文文档 detector 均为合法 `[]`、stderr 空、退出码 0；URL CLI 因 Puppeteer 缺失退出码 1，不能视为扫描通过。独立浏览器 Light/HUD × 1280/390 证据显示组件节点无低对比度命中，HUD 命中来自 VitePress 侧栏导航与文档滚动提示，归档为文档壳层待办，不修改组件状态色。
+- **边界**：Mock 通过只证明隔离预览，不代表真实权限、后端联调或页面引导完成；TransferPanel 正式 A/B、overlay、snapshot/trend 和 UI-10 **13/52** 仍开放。detector `[]` 不单独作为 Critique 通过依据。
+- **下一棒**：继续补齐 TransferPanel 正式 Critique 综合证据，随后按矩阵进入下一个未关闭组件和 Vue3 Element Plus 分批替换门禁。
+
+## 2026-10-27 LxTransferPanel 未加载元数据行高修复
+
+- **问题与实现**：窄侧栏中的未加载项同时显示编码、状态、未加载标记和键值时，键值因 96px 上限换到第二行，使桌面长名称行达到约 64.8px。将未加载项键值的桌面最大宽度收紧为 80px；完整键值仍通过 `title` 保留，移动端既有 72px 规则不变。另补充 `<details>` 关闭态显式隐藏完整名称，避免内容样式覆盖原生隐藏语义。
+- **验证**：TransferPanel 文档 E2E **34/34** 全量通过，覆盖 Light/HUD、标准/240px、320/375/390px、键盘焦点、筛选/批量、加载/失败/空态、未加载回显和 32/44px 触控盒；单测 **30/30**、lx-ui `vue-tsc --noEmit`、目标 Prettier 通过。
+- **审查边界**：本波修复已确认的布局回归，不增加 UI-10 全库 **13/52**。URL detector 仍有未映射的低对比度命中，正式 Assessment B、overlay、snapshot/trend、真实读屏器和权限后端仍开放；不以 detector 结果单独宣称通过。
+- **下一棒**：继续补齐 TransferPanel 当前版正式 B 证据和命中节点归因，再按审计矩阵进入下一个未闭环组件；保持 Vue3 Element Plus、权限中心和页面引导的既定门禁顺序。
+
+## 2026-10-27 LxInputNumber 步进器当前版核验
+
+- **核验结论**：未复现 sm/md 步进器按钮之间存在可见间距的问题。组件的步进器使用纵向 flex，两个按钮共享连续轨道，相邻按钮仅保留 1px 分隔线；真实测量 gap 不超过 0.5px，sm/md/lg 外框高度分别为 28/32/40px。
+- **显示契约**：`controls` 默认开启；Demo 通过 `showControls` 与 `controls=false` 展示隐藏/恢复，关闭时不渲染自定义步进器并透传 Element Plus `controls=false`，中文 API 已同步说明。
+- **验证**：`tests/unit/lx-input-number.test.ts` **18/18**；InputNumber 文档 E2E 定向 **2/2**，覆盖 sm/md/lg、375/320px、HUD、步进按钮隐藏与恢复。该轮未修改组件代码或公开 API。
+- **工具边界**：仓库的包管理器安装守卫阻断了重新安装流程，验证使用已安装本地 CLI；组件相关文件的 Prettier 检查仍有既有格式告警，未改动他人文件。detector 结果不作为正式 Critique 通过依据。
+- **下一棒**：继续 TransferPanel 正式 Assessment B 与超长名称行高回归定位；随后按审计矩阵进入下一个未闭环组件，保持 UI-10/UI-11 门禁和 Vue3 Element Plus 保留规则。
+
+## 2026-10-27 LxTransferPanel 桌面移除触控盒修复
+
+- **问题与实现**：对照当前 Assessment A 的 P1，将桌面已选资源移除按钮从 24×24 调整为真实 32×32 触控盒；通过上下 1px 负外边距抵消父项边框占位，保持设计要求的 32px 桌面行高和长名称布局；移动端媒体规则继续使用 44×44，未改变移除事件、焦点回收或权限语义。
+- **验证**：`tests/unit/lx-transfer-panel.test.ts` **30/30**；新增文档 E2E“已选项移除按钮桌面匹配 32px 行高，窄屏保留 44px 触控盒”**1/1**；紧凑 240px/标准 380px 轨道专项 **1/1**。目标文件 Prettier、lx-ui `vue-tsc --noEmit` 已执行通过。
+- **回归边界**：完整 TransferPanel 文档套件本轮收集到 **32/34** 通过；一个标准/紧凑综合用例的失败在负外边距修复后已单独复跑通过，另一个“桌面超长名称行 <60px”断言在临时恢复 24px 旧按钮后仍为约 64.8px，确认是既有布局基线问题，未将其归因于本次 32px 修复，也未放宽断言。
+- **审查状态**：本波只关闭已确认的桌面触控盒缺陷，不增加 UI-10 全库 **13/52**；正式 Impeccable 双路 Critique、TransferPanel 继承说明/异步状态契约、真实权限后端和宿主保存状态仍开放。静态 detector `[]` 不作为视觉通过依据。
+- **工具状态**：按约执行 `npx impeccable update`，因外网下载 `impeccable@4.8.0` skill bundle 超时（Windows 网络错误 10060）退出码 **1**，没有安装或覆盖本地 skill；该环境失败不计为组件代码失败，也不能替代正式 A/B 证据。
+- **当前 URL detector**：`npx impeccable detect http://127.0.0.1:4177/components/lxtransferpanel` 实际退出码 **1**，报告 2 个低对比度命中（2.9:1、3.2:1）及 3 个 advisory；源码、Demo、Markdown regex 扫描仅为 undercount。由于 detector 未提供元素节点映射，本轮不把命中直接归因到 TransferPanel 或文档壳层，保留为 Assessment B 归因任务。
+- **下一棒**：保留超长名称桌面行高作为独立 P2 回归项，继续补齐 TransferPanel 当前版 Assessment B 与综合 snapshot/trend，再进入审计矩阵下一项；UI-10/UI-11 门禁完成前不删除 Vue3 宿主 Element Plus。
+
+## 2026-10-25 LxInput 边框反馈当前版复验
+
+- **结论**：本轮没有复现“前后缀 / 密码 / 透传”输入框边框消失。边框由组件绘制：普通与密码输入使用 `.lx-input .el-input__wrapper` 的实体边框，prepend/append 复合输入使用 `.lx-input.el-input-group` 根节点连续描边；内层 wrapper 无边框是避免接缝双线的规则。Demo 提供属性和插槽示例，不负责补画边框。
+- **当前版证据**：使用本地 4177 文档站与 lx-ui Playwright 配置复跑 `lx-base-controls-docs.spec.ts` 的三个相关用例，两个入口（`/components/lxinput`、`/components/lxinput.html`）及单层边框、禁用复合 hover、错误焦点、框外统计均 **3/3 通过**；`tests/unit/lx-input.test.ts` **19/19** 通过。页面截图可见复合控件边界；没有向后端发请求。
+- **版本边界**：当前组件 `index.vue/types.ts` 与部分 A/B 材料一致，但 `style.css` 和 `demo/basic.vue` 指纹已变化；因此旧 A/B、detector `[]` 和快照不作为本轮当前版正式视觉审查依据。本轮未改组件代码，也未声称完成新的 Impeccable Critique。
+- **状态与下一步**：仍未按特定用户浏览器/缩放/主题/视口复现缺边框；若其浏览器仍可见此问题，需基于其具体页面状态采集当前元素截图和 computed style，以判断是否为宿主样式覆盖。此局部复验不增加 UI-10 关闭数、不改变计划优先级，也不代替正式 A/B、完整矩阵或真实宿主验收。
+
 ## 2026-10-25 LxDynamicForm Assessment A/B 当前版复核
 
 - **Assessment A**：独立设计评审 **29/40（Good）**。补充浏览器观察确认当前桌面表单实际为两列，默认三列挤压没有复现，暂不作为已证实缺陷；Light/HUD 错误辅助文案对比度分别为 **6.46:1 / 7.27:1**，关闭原对比度疑虑。Demo 设置面板密度和 schema 文档入口仍作为低优先级体验改进项。
@@ -2336,3 +2427,16 @@ CODE-01 已覆盖 Vue3 宿主页面、公共组件、请求 composable、菜单/
 - `notification/alertPush/components/TaskDueEditForm.vue` 与 `UnattendedEditForm.vue` 的组织/协同岗及所属组织共 4 个只读字符串字段已由 `el-input` 切换为 `LxInput`。
 - 保留 disabled 展示、通知对象选择、表单校验、提交事件和请求契约；`vue-tsc`、Prettier、ESLint 与隔离 Mock 全菜单 **10/10** 通过。
 - 复杂通知对象选择和真实后端权限联调继续后置。
+- 2026-10-28 LxEmpty 正式双路评审已形成当前源码快照：Assessment A 31/40（Good），Assessment B 三目标 detector 均为合法 `[]`、stderr 空、退出码 0；当前环境无可用浏览器自动化，Light/HUD、窄屏、键盘、reduced-motion 未取证，不能宣称正式视觉通过。A 提出 default 插槽 `aria-hidden` 与 status/live 包含 footer 的两个 P1 无障碍契约待产品决策；默认文案原因和 imageSize 极端值列为 P2。UI-10 仍 13/52，继续进入下一个组件前保留这些边界。
+- 2026-10-28 LxPageCard 正式双路评审：Assessment A 31/40（Good）；Assessment B 组件、Demo、文档 detector 均为合法 `[]`、stderr 空、退出码 0，但环境无浏览器自动化，未形成主题/窄屏/键盘/reduced-motion 视觉证据。P1 为 loading 遮罩缺少可见进度/操作语义、错误/空态恢复契约完全外置；P2 为 Demo 状态开关密度和 loading 仅图标。快照已写入 `.impeccable/critique/2026-10-28T14-31-45Z__linkx-fe-src-components-lxpagecard-index-vue.md`，UI-10 仍 13/52。
+- 2026-10-28 LxFormErrorBanner 正式双路评审：Assessment A 28/40；Assessment B 三目标 detector 合法 `[]`、stderr 空、退出码 0。浏览器自动化不可用，未形成主题/窄屏/键盘/reduced-motion视觉证据。P1 为错误摘要缺少字段定位/恢复路径、assertive+atomic 动态 slot 播报粒度过粗；P2 为 11/12px 规格冲突、Demo 边界不足；P3 为阴影卡片化。快照 `.impeccable/critique/2026-10-28T14-34-05Z__rc-components-lxformerrorbanner-index-vue-94bff5bd.md`，UI-10 仍 13/52。
+- 2026-10-28 LxActionButtons 正式双路评审：Assessment A 32/40（Good）；Assessment B 三目标 detector 合法 `[]`/空 stderr/0，Chrome 文档页加载、DOM mutation 和截图成功，但无可用 detect.js overlay，完整视觉 Critique 未闭环。P1 为高风险动作确认/异步锁、更多菜单键盘语义；P2 为自定义颜色边界、loading/失败反馈和窄列行高。快照 `.impeccable/critique/2026-10-28T14-37-54Z__linkx-fe-src-components-lxactionbuttons-index-vue.md`，UI-10 仍 13/52。
+- 2026-10-28 LxStatusDot 正式双路评审：Assessment A 24/40（Acceptable）；Assessment B 目录及单文件 detector 均合法 `[]`/空 stderr/0，但浏览器自动化不可用。P1 为英文 aria-label、error 无恢复路径、文档引用不存在 Demo；P2 为默认 pulse 噪声、size/unknown code/颜色语义边界。快照 `.impeccable/critique/2026-10-28T14-40-30Z__linkx-fe-src-components-lxstatusdot-index-vue.md`，UI-10 仍 13/52。该组件需要进入修复波次，不直接推进关闭。
+- 2026-10-28 LxStatusDot 修复波次：默认无 `statusDesc` 时改用中文 aria-label 映射，更新 legacy code 单测并新增 processing 标签回归；设计 Demo 文档移除不存在的 size/code/anti-pattern 动态引用，改为可直接复制的内联示例。`vue-tsc`、定向单测 **4/4**、Prettier 通过。error 宿主恢复契约、pulse 密度策略、unknown code 和 size 边界仍待后续决策/复评。
+- 2026-10-28 LxTag 修复波次：Demo 语义改为已选人员/待同步条件/需复核记录，设备在线/降级/离线明确使用 LxStatusDot；可关闭 Tag 的 close hover/focus 增加危险色提示。`vue-tsc`、LxTag 单测 **5/5**、目标 Prettier 通过。宿主 close 失败/撤销反馈、320px 长文本和浏览器 overlay 仍开放。
+- 2026-10-28 LxTag 评审基线快照已写入 `.impeccable/critique/2026-10-28T14-52-08Z__linkx-fe-src-components-lxtag-index-vue.md`；该快照明确区分修前 A/B 与本轮 Demo/close 样式修复，未冒充修后重新评分。UI-10 仍 13/52。
+- 2026-10-28 LxStatusSwitch 当前版正式双路评审：Assessment A 33/40（Good）；Assessment B 三目标 detector 合法 `[]`/空 stderr/0，文档路由 HTTP 200，但无浏览器视觉工具。P1 为对象化 loading/失败反馈依赖宿主、disabled 与无权限原因趋同；P2 为行名 aria 关联、确认层信息密度和确认方向边界。快照 `.impeccable/critique/2026-10-28T15-02-16Z__linkx-fe-src-components-lxstatusswitch-index-vue.md`，不复用历史 39/40，UI-10 仍 13/52。
+- 2026-10-28 LxBreadcrumb 当前版评审与契约修复：A 25/40；B Chrome 桌面/375px、detector 三件套和 overlay 注入成功，组件无横溢，移动文档侧栏问题归因壳层。删除未使用 LxIcon，统一 `select(item, event)` 和受控 items/宿主 preventDefault 规范；vue-tsc/Prettier/diff check 通过。快照 `.impeccable/critique/2026-10-28T15-07-09Z__linkx-fe-src-components-lxbreadcrumb-index-vue.md`，UI-10 仍 13/52。
+- 2026-10-28 LxNavbar 当前版评审：A 24/40；B detector 合法 `[]`/空 stderr/0，浏览器不可用。P1 为窄屏右侧静默裁切、全屏失败无反馈、icon-only 缺可见提示；P2 为网络徽章语义和文档契约。已补 `COMPONENT-SPEC.md` 的 `showFullscreen?: boolean` 默认 true。快照 `.impeccable/critique/2026-10-28T15-09-50Z__linkx-fe-src-components-lxnavbar-index-vue.md`，UI-10 仍 13/52。
+- 2026-10-31 LxMetricCard 当前版双路评审：Assessment A **30/40（Good）**；B 三目标 detector 合法 `[]`/空 stderr/0，Light/HUD × 1280/375/320 浏览器证据 6/6，无页面错误、失败请求和横溢，ARIA 进度与 reduced-motion 生效。未注入 overlay，不能宣称完整视觉 Critique 通过。P1 为多维状态冲突、风险进度条正向语义和宿主状态契约分散；P2 为信息密度与长值可见性。快照 `.impeccable/critique/2026-10-31T14-41-52Z__linkx-fe-src-components-lxmetriccard-index-vue.md`，UI-10 仍 13/52，公共 API 变更等待产品语义确认。
+- 2026-10-31 LxSectionTitle 当前版双路评审：Assessment A **29/40（Good）**；B 三目标 detector 合法 `[]`/空 stderr/0，Light 1280/375/320 截图和三变体/窄屏换行已核对；当前环境无可用 Playwright、Puppeteer 或浏览器标签，HUD、键盘、reduced-motion、console/网络和 overlay 未验证，不能宣称完整视觉 Critique 通过。P2 为 401px 窄容器、长标题全文发现和 `leading` 辅助技术契约；P3 为 variant 规范冲突与 Demo 边界。快照 `.impeccable/critique/2026-10-31T14-57-02Z__linkx-fe-src-components-lxsectiontitle-index-vue.md`，UI-10 仍 13/52。

@@ -328,8 +328,10 @@ Vue3 宿主 Element Plus 用量、46 种模板标签的逐项映射、没有 Lx 
 
 - Vue3 宿主继续通过 lx-ui `LxSectionTitle`，组件 Demo 的图标名称已与注册表统一为 `setting`；不改变页面标题、插槽或权限契约。
 - 本波只修复库级类型门禁，页面迁移仍需按 Mock、权限和真实 API 逐页验证。
+- 2026-10-31：`LxMetricCard` 完成当前版 Assessment A/B 证据复核（A 30/40；B detector 三件套合法 `[]`/空 stderr/0，6 组 Light/HUD 桌面/窄屏浏览器无错误和横溢）。详情抽屉宿主仍未替换，旧 `title`/`valueType`/`footer`/插槽与宿主错误/空态责任必须保留；未完成 overlay 的完整视觉 Critique，`element-plus` 删除门槛不变。
 ## 2026-10-20 LxMetricCard 当前版接入边界
 
 - lx-ui `LxMetricCard` 已修复文档运行时标题节点缺失，并补齐只读 hover、长趋势和值提示；单测 **17/17**、文档 E2E **3/3**。
 - Vue3 详情抽屉的 6 处宿主引用仍未替换；迁移时必须保留 `headingLevel`、旧 `title`/`valueType`/`footer`/插槽契约及错误/空态责任。组件证据不代表宿主页面已迁移，`element-plus` 继续保留。
+- 2026-10-31：`LxSectionTitle` 完成当前版 Assessment A/B 复核（A 29/40；B detector 三件套合法 `[]`/空 stderr/0，Light 三尺寸截图通过）。由于浏览器自动化不可用，HUD、键盘、reduced-motion、网络和 overlay 未验证；Vue3 宿主仍需保留标题层级、extra、leading 与权限/Mock 组合契约，`element-plus` 删除门槛不变。
 
