@@ -6,6 +6,7 @@ import type { LxSectionTitleSize } from '../types'
 
 const size = ref<LxSectionTitleSize>('default')
 const hudTheme = ref(false)
+const showLongTitle = ref(true)
 const lastAction = ref('标题仅负责分组和说明，不加载业务数据。')
 let originalDark = false
 let originalHud = false
@@ -56,6 +57,7 @@ onBeforeUnmount(() => {
         <input v-model="hudTheme" type="checkbox" />
         HUD 深色主题
       </label>
+      <label><input v-model="showLongTitle" type="checkbox" />显示长标题</label>
     </div>
 
     <section class="lx-section-title-demo__panel" data-testid="variant-border">
@@ -136,7 +138,9 @@ onBeforeUnmount(() => {
       data-testid="long-title-case"
     >
       <LxSectionTitle
-        title="辖区协同指挥中心公共安全设备与网络凭证综合配置"
+        :title="
+          showLongTitle ? '辖区协同指挥中心公共安全设备与网络凭证综合配置' : ''
+        "
         :heading-level="4"
         variant="border"
         :size="size"
@@ -207,6 +211,7 @@ onBeforeUnmount(() => {
 }
 
 .lx-section-title-demo__action {
+  white-space: nowrap;
   min-height: 44px;
   padding: 0 12px;
   border: 0;

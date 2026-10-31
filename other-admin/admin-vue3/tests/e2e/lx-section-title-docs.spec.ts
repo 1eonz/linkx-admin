@@ -1,6 +1,83 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('LxSectionTitle 文档示例', () => {
+  test('桌面局部窄容器完整分行，长标题保留操作宽度且空标题不产生无名标题', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/components/lxsectiontitle');
+    const longCase = page.getByTestId('long-title-case');
+    const root = longCase.locator('.lx-section-title');
+    for (const hud of [false, true]) {
+      await page.getByRole('checkbox', { name: 'HUD 深色主题' }).setChecked(hud);
+      const layout = await root.evaluate((element) => {
+        const heading = element.querySelector('.lx-section-title__heading');
+        const extra = element.querySelector('.lx-section-title__extra');
+        if (!heading || !extra) throw new Error('标题布局结构缺失');
+        return {
+          width: element.getBoundingClientRect().width,
+          below: extra.getBoundingClientRect().top >= heading.getBoundingClientRect().bottom,
+          headingWidth: heading.getBoundingClientRect().width,
+        };
+      });
+      expect(layout.width).toBeLessThanOrEqual(400);
+      expect(layout.below).toBe(true);
+      expect(layout.headingWidth).toBeCloseTo(layout.width, 0);
+      await root.screenshot({ path: `test-results/lx-section-title-container-${hud ? 'hud' : 'light'}.png` });
+    }
+
+    const buttonLayout = await page.getByTestId('variant-border').evaluate((element) => {
+      const label = element.querySelector<HTMLElement>('.lx-section-title__label');
+      const button = element.querySelector('button');
+      if (!label || !button) throw new Error('长标题测试结构缺失');
+      label.textContent = '辖区协同指挥中心公共安全设备与网络凭证综合配置以及跨区资源协作联动处置记录'.repeat(3);
+      const lineHeight = Number.parseFloat(getComputedStyle(button).lineHeight);
+      const range = document.createRange();
+      range.selectNodeContents(button);
+      return {
+        textHeight: range.getBoundingClientRect().height,
+        lineHeight,
+        buttonWidth: button.getBoundingClientRect().width,
+        truncated: label.scrollWidth > label.clientWidth,
+      };
+    });
+    expect(buttonLayout.truncated).toBe(true);
+    expect(buttonLayout.textHeight).toBeLessThanOrEqual(buttonLayout.lineHeight);
+    expect(buttonLayout.buttonWidth).toBeGreaterThanOrEqual(44);
+
+    const manyActions = await page.getByTestId('variant-dashed').evaluate((element) => {
+      const source = element.querySelector<HTMLElement>('.lx-section-title');
+      if (!source) throw new Error('找不到多操作测试源');
+      const target = source.cloneNode(true) as HTMLElement;
+      target.style.width = '420px';
+      const extra = target.querySelector<HTMLElement>('.lx-section-title__extra');
+      if (!extra) throw new Error('操作区缺失');
+      for (let index = 0; index < 8; index += 1) {
+        const button = document.createElement('button');
+        button.textContent = '查看完整操作记录';
+        button.style.whiteSpace = 'nowrap';
+        extra.append(button);
+      }
+      document.body.append(target);
+      const heading = target.querySelector('.lx-section-title__heading');
+      if (!heading) throw new Error('标题区缺失');
+      const bounds = target.getBoundingClientRect();
+      const result = {
+        below: extra.getBoundingClientRect().top >= heading.getBoundingClientRect().bottom,
+        right: extra.getBoundingClientRect().right <= bounds.right + 0.5,
+        overflow: target.scrollWidth > target.clientWidth,
+      };
+      target.remove();
+      return result;
+    });
+    expect(manyActions).toEqual({ below: true, right: true, overflow: false });
+
+    await page.getByRole('checkbox', { name: '显示长标题' }).uncheck();
+    await expect(longCase.getByRole('heading')).toHaveCount(0);
+    await expect(longCase.getByRole('button', { name: '查看', exact: true })).toBeVisible();
+    await expect(longCase.locator('.lx-tag')).toHaveText('配置中');
+    await page.getByRole('checkbox', { name: '显示长标题' }).check();
+    await expect(longCase.getByRole('heading', { level: 4 })).toBeVisible();
+  });
+
   test('呈现设计变体、字号、标签语义和 extra 键盘操作', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/components/lxsectiontitle');

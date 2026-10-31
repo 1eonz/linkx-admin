@@ -49,4 +49,8 @@ import Basic from '../../src/components/LxSectionTitle/demo/basic.vue';
 
 默认 `icon` 是装饰图标，对读屏隐藏。`leading` 插槽由宿主管理语义：装饰图标保留 LxIcon 默认行为，有独立含义的图标使用 `label="接口设置"`，不要仅透传 `aria-label`，否则仍可能被 `aria-hidden` 隐藏。
 
+根节点作为宽度查询容器，内部布局在可用宽度不超过 400px 时将标题与操作分成两行，适用于宽桌面中的窄卡片或抽屉。操作区保留自身宽度，宿主应为单个命令设置不拆字样式；操作较多时允许操作区内部换行。
+
+`title` 为空或只有空白且没有默认插槽时，文字区域改用普通 `div`，不输出无名称 heading；标签、前置内容和操作仍保留。自定义默认插槽需由宿主提供有意义的标题。示例可关闭“显示长标题”检查此边界。
+
 Vue3 的 `SectionTitle` 适配器保留原有 `title`、`icon`、`iconColor`、`variant`、默认/前置/副标题/extra 插槽及 `dashed` 默认变体，并透传 `headingLevel`、`size`、`subtitle`、`tag`、`tagType`。自定义 `leading` 插槽优先于适配器的图标映射和未映射图标回退。Vue2 运行时不直接加载本 Vue3 组件。

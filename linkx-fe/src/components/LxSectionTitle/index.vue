@@ -29,65 +29,76 @@ const headingTag = computed(() => {
     class="lx-section-title"
     :class="[`lx-section-title--${variant}`, `lx-section-title--${size}`]"
   >
-    <div class="lx-section-title__heading">
-      <span
-        v-if="variant === 'border'"
-        class="lx-section-title__bar"
-        aria-hidden="true"
-      />
-      <span
-        v-if="icon || $slots.leading"
-        class="lx-section-title__leading"
-        :style="{ color: iconColor || undefined }"
-      >
-        <slot name="leading"
-          ><LxIcon v-if="icon" :name="icon" :size="16"
-        /></slot>
-      </span>
-      <div class="lx-section-title__copy">
-        <component :is="headingTag" class="lx-section-title__text">
-          <span
-            class="lx-section-title__label"
-            :title="$slots.default ? undefined : title || undefined"
-            ><slot>{{ title }}</slot></span
-          >
-          <LxTag
-            v-if="tag !== undefined && tag !== ''"
-            :type="tagType"
-            size="small"
-            :aria-label="`标题标记：${tag}`"
-          >
-            {{ tag }}
-          </LxTag>
-        </component>
-        <p
-          v-if="$slots.subtitle || subtitle"
-          class="lx-section-title__subtitle"
+    <div class="lx-section-title__layout">
+      <div class="lx-section-title__heading">
+        <span
+          v-if="variant === 'border'"
+          class="lx-section-title__bar"
+          aria-hidden="true"
+        />
+        <span
+          v-if="icon || $slots.leading"
+          class="lx-section-title__leading"
+          :style="{ color: iconColor || undefined }"
         >
-          <slot name="subtitle">{{ subtitle }}</slot>
-        </p>
+          <slot name="leading"
+            ><LxIcon v-if="icon" :name="icon" :size="16"
+          /></slot>
+        </span>
+        <div class="lx-section-title__copy">
+          <component
+            :is="title.trim() || $slots.default ? headingTag : 'div'"
+            class="lx-section-title__text"
+          >
+            <span
+              class="lx-section-title__label"
+              :title="$slots.default ? undefined : title || undefined"
+              ><slot>{{ title }}</slot></span
+            >
+            <LxTag
+              v-if="tag !== undefined && tag !== ''"
+              :type="tagType"
+              size="small"
+              :aria-label="`标题标记：${tag}`"
+            >
+              {{ tag }}
+            </LxTag>
+          </component>
+          <p
+            v-if="$slots.subtitle || subtitle"
+            class="lx-section-title__subtitle"
+          >
+            <slot name="subtitle">{{ subtitle }}</slot>
+          </p>
+        </div>
       </div>
-    </div>
-    <div v-if="$slots.extra" class="lx-section-title__extra">
-      <slot name="extra" />
+      <div v-if="$slots.extra" class="lx-section-title__extra">
+        <slot name="extra" />
+      </div>
     </div>
   </header>
 </template>
 
 <style scoped>
 .lx-section-title {
-  display: flex;
   container-type: inline-size;
+  min-height: var(--lx-control-height);
+  min-width: 0;
+}
+
+.lx-section-title__layout {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--lx-space-md);
-  min-height: var(--lx-control-height);
+  min-height: inherit;
   min-width: 0;
 }
 
 .lx-section-title__heading {
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 1 0%;
   min-width: 0;
   align-items: center;
   gap: var(--lx-space-sm);
@@ -146,7 +157,7 @@ const headingTag = computed(() => {
 
 .lx-section-title__extra {
   display: flex;
-  flex: 0 1 auto;
+  flex: 0 0 auto;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--lx-space-sm);
@@ -190,6 +201,9 @@ const headingTag = computed(() => {
 
 .lx-section-title--plain {
   min-height: 0;
+}
+
+.lx-section-title--plain .lx-section-title__layout {
   align-items: flex-start;
 }
 
@@ -199,7 +213,7 @@ const headingTag = computed(() => {
 
 @media (max-width: 400px) {
   /* 窄屏将标题和操作拆成两行，避免 extra 挤压标题或截断操作。 */
-  .lx-section-title {
+  .lx-section-title__layout {
     flex-wrap: wrap;
     align-items: flex-start;
     row-gap: var(--lx-space-xs);
@@ -229,9 +243,9 @@ const headingTag = computed(() => {
   }
 }
 
-/* 组件嵌入宽度受限的卡片或抽屉时，由宿主容器触发同一套窄屏布局。 */
+/* 根节点负责宽度查询，内部布局负责换行，避免查询容器无法查询自身。 */
 @container (max-width: 400px) {
-  .lx-section-title {
+  .lx-section-title__layout {
     flex-wrap: wrap;
     align-items: flex-start;
     row-gap: var(--lx-space-xs);

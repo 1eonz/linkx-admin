@@ -3,6 +3,17 @@ import { LxSectionTitle } from 'lx-ui';
 import { describe, expect, it } from 'vitest';
 
 describe('LxSectionTitle design variants', () => {
+  it.each(['', '   '])('空标题 %j 不生成无名称 heading，仍保留标签与操作', (title) => {
+    const wrapper = mount(LxSectionTitle, {
+      props: { title, tag: '配置中' },
+      slots: { extra: '<button type="button">查看</button>' },
+    });
+    expect(wrapper.find('h3').exists()).toBe(false);
+    expect(wrapper.get('.lx-section-title__text').element.tagName).toBe('DIV');
+    expect(wrapper.get('.lx-tag').text()).toBe('配置中');
+    expect(wrapper.get('button').text()).toBe('查看');
+  });
+
   it('普通标题全文提示随属性变化，空标题不生成提示', async () => {
     const wrapper = mount(LxSectionTitle, { props: { title: '辖区设备综合配置' } });
     expect(wrapper.get('.lx-section-title__label').attributes('title')).toBe('辖区设备综合配置');
