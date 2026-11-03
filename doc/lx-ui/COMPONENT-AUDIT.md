@@ -1,5 +1,11 @@
 # LinkX 项目组件审计报告 — lx-ui 覆盖度与设计决策底稿
 
+## 2026-11-03 PasswordInput 表单与窄屏操作专项
+
+- 新Demo补必填/长度、错误关联与聚焦、纠正、离开遮罩和错误态重置；窄屏显隐改为独立44px flex轨道，清空不再被覆盖。单测10/10、文档E2E11/11、库类型/构建/文档构建、格式/Lint及独立代码复审通过。
+- A修前34/40；修后A四视图/B六视图真实点击、44×44/间隔2px/无重叠、焦点与ARIA恢复齐备。B三源码合法`[]`/空stderr/0及36次实际overlay完成，静态零命中未发现首轮人工定位的重叠，不能单独代表通过。新Demo快照`2026-11-03T01-06-50Z__nents-lxpasswordinput-demo-form-state-vue-7c1522f2.md`与趋势已保存。
+- 关闭表单集成Demo及窄屏重叠P2；成功指引/帮助行节奏P3可选保留。共享默认边框低对比尚未采样核验，PasswordInput整体严格行仍开放，不增加18/52；下一步LxTextarea边界，不由其他组件结果代验。修前/环境失败与他人dirty环境边界见交接。
+
 ## 2026-11-01 InputNumber 默认边界 P1 关闭
 
 - 宿主隔离Mock额外验收首轮6/7、全菜单首项原样重跑1/1；菜单/样例覆盖不替代组件严格门禁或真实后端联调，首次导航超时证据限制见交接。
@@ -742,7 +748,7 @@ Wave 5 的独立 Assessment A/B、综合报告和 snapshot/trend 已落盘；B �
 | `LxNodeBadge`        | `doc/stitch_侧边栏/stitch_/`                      | 待严格复核；节点状态、字号和对齐                                                                                                                                                             |
 | `LxPageCard`         | `DESIGN-SPEC.md` + PageCard API/Demo              | Wave 5 实现/文档证据完成；正式 Critique 待收口（表面、内距、加载及插槽态）                                                                                                                   |
 | `LxPagination`       | `DESIGN-SPEC.md` + Pagination API/Demo            | 待严格复核；密度、分页按钮、背景与窄屏                                                                                                                                                       |
-| `LxPasswordInput`    | `design/表单控件八件套/` + PasswordInput API/Demo | A 32/40、B overlay/浏览器、代码复审通过；10/10 单测、9/9 E2E；宿主校验失败集成示例 P2 待 Form 波次，因此严格行保持打开                                                                       |
+| `LxPasswordInput` | `design/表单控件八件套/` + PasswordInput API/Demo | 表单Demo与窄屏重叠P2已关闭（2026-11-03）；10/10单测、11/11文档E2E、代码复审及隔离A/B修后证据/新Demo快照齐备。新Demo34/40为修前基线；共享默认边框低对比专项仍待核验，整体严格行保持打开，成功指引/帮助行节奏P3可选保留 |
 | `LxProTable`         | `DESIGN-SPEC.md` + ProTable API/Demo              | 待严格复核；表头/行密度、选择、空错态和滚动                                                                                                                                                  |
 | `LxRadio`            | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；14px 靶环/6px 靶心、横纵选中色差、中文播报、禁用、减少动效与 44px 触屏均有当前版证据                                                                                  |
 | `LxRadioGroup`       | `design/表单控件八件套/`                          | **已关闭（Wave 19）**；16px 水平/8px 垂直间距、方向键、禁用继承、历史只读值及 Light/HUD 行为均有当前版证据                                                                                   |

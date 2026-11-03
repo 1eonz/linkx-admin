@@ -1,5 +1,14 @@
 # LinkX 项目交接记录
 
+## 2026-11-03 PasswordInput 表单与窄屏命中交付
+
+- 本波五文件：`LxPasswordInput/index.vue`、新增`demo/form-state.vue`、`docs/components/lxpasswordinput.md`及宿主`tests/e2e/lx-password-input-{form-docs,docs}.spec.ts`。复用LxForm/LxFormItem/LxButton，未接API/存储、未扩展公共契约；窄屏清空/显隐在正常flex流各占44px。旧测试HUD定位限定Basic Demo，三档44px有HEAD基线依据，不是放宽契约。
+- 验证：两spec最终11/11（session35910 exit0）、单测10/10（80569 exit0），库类型/206模块构建/文档构建（75.41s）、指定Prettier/ESLint及差异检查通过。保留既有大chunk/pnpm配置警告。独立复审`tmp-password-form-final-review.md`无P0–P2。
+- 失败保留：首轮10/11为旧窄屏28px断言与既有44px规则不符（`tmp-password-form-first-e2e/`）；新增重叠断言修前实测44px失败（`tmp-password-form-overlap-before/`）。修后旧preview映射使新hash资源404、SSR未hydration，见`tmp-password-form-preview-stale/`和B的`reverify/diagnose.json`；重启preview核验新JS/CSS200后原断言11/11。A取证脚本首次闭包变量错误只改脚本后完成，不作产品失败。旧句柄25124已丢失，不引用其结果。
+- 隔离评估：A34/40仅为新Demo修前基线；修后A四视图、B六视图各20项行为断言和36次实际overlay通过。窄屏目标各44×44、间隔2px、相交0且普通点击生效，焦点/ARIA/纠正/重置正常。三个markup的JSON/stderr/exit已核验，合法`[]`/空/0不独立代表通过。报告`tmp-password-form-{a,b}/report.md`；B最终指纹、三件套与行为在`reverify/scan-summary.json`、`checks-summary.json`。快照`.impeccable/critique/2026-11-03T01-06-50Z__nents-lxpasswordinput-demo-form-state-vue-7c1522f2.md`已写、趋势已读。
+- 环境与所有权：B专用8536 overlay已停止，4177静态preview/PID18264与30847人工Mock/PID10328保留。重建后需重启preview并核验新资源，HTML200不足。LxInput/style.css等七份他人增量未混提交；本地验收环境LxInput指纹`b3e9a1257725696280be7f80c654627ccfbd182b2a6f9aacb04cf6649784c21e`。最终组件/Demo/文档指纹依次`b540bef56637d64b27063168a7002fefceb822123d1d3d02108771b089115074`、`32e974414e612d6be575b1b491b7bf81481031ba12376a22201f10cb4784f996`、`e389fc7c581597fb93ae840c6ca6b1535381b3fc2956089fca9840f87ea898b0`。
+- 关闭表单Demo和重叠P2，不关闭共享边界、真实认证/读屏器或全组件门禁；成功指引/帮助行节奏P3可选保留。严格18/52；下一入口LxTextarea边界调查`tmp-textarea-border-next.md`，继续基础组件/动态图标→DynamicForm→Vue3替换。另已核查`.gitignore`：缓存/快照/测试产物已忽略且未跟踪，无需新增规则，源码/Demo/测试继续纳入版本管理。
+
 ## 2026-11-01 InputNumber 强边界交付
 
 - 额外Mock验收：`MOCK_PREVIEW_PORT=30848`隔离启动，`preview.spec.ts`首轮6/7（北向CRUD、三方表单失败重试/锁、分页、图片失败/键盘恢复/减少动效均通过）；首个全菜单用例在初始goto等待DOMContentLoaded15秒超时，未进入菜单断言。同源码、原15秒导航/240秒用例超时及原断言仅重跑首项1/1通过（用例49.8s/命令54.8s），33入口样例数据已实际检查，不能写单轮7/7。主线备份命令误用相对根路径，旧trace被重跑清理，独立调查未读取网络记录，故不能判断冷启动或代码根因。限制见`tmp-mock-menu-first-navigation.md`；最终重跑成功不抹去首轮失败。

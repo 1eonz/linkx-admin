@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-11-03 PasswordInput 表单与独立操作入口
+
+- `linkx-fe/src/components/LxPasswordInput/index.vue`窄屏显隐flex轨道→`demo/form-state.vue`本地LxForm校验/恢复→`docs/components/lxpasswordinput.md`中文示例与独立44px目标说明。
+- 验证：宿主`tests/e2e/lx-password-input-form-docs.spec.ts`和`lx-password-input-docs.spec.ts`合计11/11，单测10/10，库类型/构建/文档构建与独立代码复审通过；修前失败、preview资源404及恢复见交接。
+- 报告`tmp-password-form-{a,b}/report.md`，新Demo快照`2026-11-03T01-06-50Z__nents-lxpasswordinput-demo-form-state-vue-7c1522f2.md`；A34/40为修前基线，修后独立目标及真实点击通过。仅关闭Demo和重叠P2，共享边界风险与18/52不变；下一步LxTextarea边界专项，LxInput他人增量不混提交。
+
 ## 2026-11-01 InputNumber 强边界入口
 
 - 本轮Mock入口`tests/e2e/preview.spec.ts`及`playwright.preview.config.ts`，独立30848：首轮6/7、全菜单首项原样重跑1/1通过，10父32子+首页33入口和样例核对；非单轮全绿，首次导航超时原因未证实，证据限制见交接。
