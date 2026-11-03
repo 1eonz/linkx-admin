@@ -15,12 +15,21 @@
   padding: 3px 11px;
   color: var(--lx-text-primary);
   background-color: var(--lx-bg-card);
-  border: 1px solid var(--lx-control-border);
+  border: 1px solid var(--lx-control-border-strong);
   box-shadow: none;
   transition:
     border-color var(--lx-transition),
     background-color var(--lx-transition),
     box-shadow var(--lx-transition);
+}
+
+/* 表面由 Lx 令牌控制，已选文字与占位文字也必须配对，避免普通暗色内核文字落在浅底。 */
+.lx-select.el-select .el-select__placeholder {
+  color: var(--lx-text-primary);
+}
+
+.lx-select.el-select .el-select__placeholder.is-transparent {
+  color: var(--lx-text-secondary-strong);
 }
 
 /* 局部 HUD 主题与根级主题使用相同的深色触发器令牌。 */

@@ -4,6 +4,8 @@
 
 ## 交互示例
 
+默认触发器保留 1px 内描边，采用 `--lx-control-border-strong` 替代标本低对比浅灰线；悬停、聚焦及错误仍使用原状态令牌，不改变内边距、尺寸或多选草稿确认规则。Demo 的 HUD 开关切换根级主题，不是局部主题示例。
+
 <script setup lang="ts">
 import Basic from '../../src/components/LxTreeSelect/demo/basic.vue';
 </script>

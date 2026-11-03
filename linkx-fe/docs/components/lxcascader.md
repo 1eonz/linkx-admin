@@ -29,6 +29,7 @@ import Basic from '../../src/components/LxCascader/demo/basic.vue'
 
 - 标准触发器高度沿用 lx-ui 28/32/40px 尺寸档，默认 32px。
 - 4px 圆角、1px 控件描边和主色焦点边线使用 lx-ui 令牌；不叠加偏移外圈，焦点时控件尺寸保持稳定。
+- 默认 1px 内描边采用 `--lx-control-border-strong`，修订标本低对比浅灰线；局部 HUD 重新绑定输入内核的表面、文字及禁用令牌，避免继承根节点已计算的浅色值。错误边线和错误背景仍由原校验规则接管。
 - 弹层使用组件库 popper 阴影和圆角，窄屏触控目标放大到至少 44px。
 - 375px 视口下弹层限制在视口内，级联列可在弹层内部横向滚动；长组织名完整换行显示，节点和过滤结果行保持至少 44px 触控高度。
 - `prefers-reduced-motion: reduce` 时关闭过渡与动画。
