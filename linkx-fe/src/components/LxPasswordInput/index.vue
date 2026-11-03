@@ -185,17 +185,11 @@ defineExpose({
     min-height: 44px;
   }
 
-  :deep(.lx-password-input .el-input__suffix) {
-    position: relative;
-  }
-
   :deep(.lx-password-input__toggle) {
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline-end: 0;
+    /* 与清空按钮各占独立轨道，避免绝对定位覆盖相邻的44px命中区。 */
+    flex: 0 0 44px;
     width: 44px;
     height: 44px;
-    transform: translateY(-50%);
   }
 
   :deep(.lx-password-input__toggle:focus-visible) {

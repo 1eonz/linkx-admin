@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import Basic from '../../src/components/LxPasswordInput/demo/basic.vue';
+import FormState from '../../src/components/LxPasswordInput/demo/form-state.vue';
 </script>
 
 <Basic />
@@ -15,6 +16,20 @@ import Basic from '../../src/components/LxPasswordInput/demo/basic.vue';
 :::
 
 示例覆盖明文切换、清空、只读、禁用和公开实例方法；密码仅保存在当前页面内存中，不会发送网络请求。
+
+## 表单校验与恢复
+
+<FormState />
+
+示例复用 `LxForm` 和 `LxFormItem`，本地规则为必填及 8 至 32 个字符，仅用于演示校验，不代表宿主真实口令策略。失败后聚焦实际输入，帮助文字与错误说明同时关联；纠正后移除错误关联并保留帮助。重置清空口令、错误和结果反馈。
+
+本例显式开启 `maskOnBlur`，在输入与显隐按钮之间移动仍保留显隐状态，焦点离开组件后重新遮罩。反馈不展示口令值，数据仅在组件内存中，不发请求或写入持久存储。
+
+窄屏或触屏下输入外框及显隐、清空目标使用 44px 触控高度；同时开启清空与显隐时，两者分别占用独立轨道，不互相覆盖。桌面尺寸档仍为 28/32/40px。
+
+::: details 查看表单示例代码
+<<< ../../src/components/LxPasswordInput/demo/form-state.vue
+:::
 
 ## Props
 

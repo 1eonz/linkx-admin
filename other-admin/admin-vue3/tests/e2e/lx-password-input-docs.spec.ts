@@ -204,7 +204,7 @@ test.describe('lx-ui LxPasswordInput 文档示例', () => {
     expect(darkTheme.text).toBe(darkTheme.expectedText);
 
     await page.getByText('剪贴板与主题设置', { exact: true }).click();
-    await page.getByLabel('HUD 深色主题').check();
+    await page.locator('.password-input-demo').getByLabel('HUD 深色主题', { exact: true }).check();
     await expect(demo).toHaveClass(/lx-theme-hud/);
     const hudBackground = await demo.evaluate((element) => getComputedStyle(element).backgroundColor);
     expect(hudBackground).not.toBe(darkTheme.background);
@@ -218,11 +218,8 @@ test.describe('lx-ui LxPasswordInput 文档示例', () => {
     await expect(page.getByLabel('禁用密码')).toBeDisabled();
     const input = page.getByLabel('访问密码');
     const sizeControl = page.getByLabel('密码框尺寸档', { exact: true });
-    for (const [size, expectedHeight] of [
-      ['sm', 28],
-      ['md', 32],
-      ['lg', 40],
-    ] as const) {
+    // 窄屏与触屏沿用密码输入族的44px高度，三档只保留宽度/密度语义。
+    for (const size of ['sm', 'md', 'lg'] as const) {
       await sizeControl.selectOption(size);
       const geometry = await input.evaluate((element) => {
         const root = element.closest('.el-input');
@@ -235,14 +232,12 @@ test.describe('lx-ui LxPasswordInput 文档示例', () => {
           toggleWidth: toggle.getBoundingClientRect().width,
         };
       });
-      expect(geometry.wrapperHeight, `${size} 档密码框外框高度不匹配：${JSON.stringify(geometry)}`).toBe(
-        expectedHeight,
-      );
+      expect(geometry.wrapperHeight, `${size} 档密码框外框高度不匹配：${JSON.stringify(geometry)}`).toBe(44);
       expect(geometry.toggleHeight, `${size} 档窄屏触控高度不足`).toBe(44);
       expect(geometry.toggleWidth, `${size} 档窄屏触控宽度不足`).toBe(44);
     }
     await page.getByText('剪贴板与主题设置', { exact: true }).click();
-    await page.getByLabel('HUD 深色主题').check();
+    await page.locator('.password-input-demo').getByLabel('HUD 深色主题', { exact: true }).check();
     await expect(page.locator('.password-input-demo')).toHaveClass(/lx-theme-hud/);
     await expect(page.locator('.password-input-demo__actions').getByRole('button')).toHaveCount(3);
 
