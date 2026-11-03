@@ -4,8 +4,19 @@ dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
 package-lock.json
 tests/**/coverage/
+
+# 本地校验缓存与 TypeScript 增量编译记录，不属于源码
+.eslintcache
+.stylelintcache
+.prettiercache
+*.tsbuildinfo
+
+# 本机环境覆盖配置；保留仓库已有的共享环境配置与示例
+.env.local
+.env.*.local
 
 # 本地包管理缓存，不纳入仓库
 .pnpm-store/
@@ -17,6 +28,7 @@ tests/**/coverage/
 
 # 根目录 VitePress 本地预构建缓存
 /docs/.vitepress/cache/
+/docs/.vitepress/.temp/
 
 # Editor directories and files
 .idea
@@ -40,6 +52,7 @@ playwright-report/
 /lxinput-page.html
 /lxprotable-a.png
 /lxprotable-a2.png
+/transfer-current.png
 
 # 命令重定向误生成的本地占位文件
 /0
