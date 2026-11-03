@@ -1,5 +1,17 @@
 # LinkX 项目交接记录
 
+## 2026-11-03 选择器边界与文档面板归属交接
+
+- 实现提交：`6faacc41 fix(lx-ui): 增强选择器边界并修复文档面板错绑`，精确包含本波9文件；五份台账另行提交，保留他人工作区所有权。
+
+- 实现范围：三组件style.css默认边界采用已有strong；Cascader局部HUD输入变量重绑；Select默认文字配对；三份中文组件文档及两份设计规范同步。lxselect.md仅将交互Demo放进ClientOnly，明确通用SSR并未验证，不改公共实例/props/事件/默认行为。
+- 新增宿主`tests/e2e/lx-selector-border-docs.spec.ts`：24个主题/两宽组合，按真实border/inset分别采样内外表面、RGBA/color(srgb)/opacity组，集合/ID/文字非空保护，覆盖默认有值/空值/过滤/折叠；另两宽硬导航逐个核五触发器面板归属。最终session71839退出0、44/44（4.6m），原始输出`tmp-selector-final-e2e-output.txt`及宿主`tmp-selector-final-e2e/`。单测session84903退出0、47/47；库类型session73879退出0，最终库构建session26623退出0/206模块，docs session67514退出0/55.20s。目标Prettier write/check、无修复ESLint及测试strict tsc通过；既有chunk/Node告警保留。
+- 失败与环境证据：旧默认边界Light约1.334、HUD约1.287。首轮旧交互session8845退出1、13/18；`tmp-selector-diagnose.json`保存警员expanded却显示禁用单位面板，诊断源码链见`tmp-selector-ssr-diagnosis.md`。旧构建有7Select/7Teleport起点、无目标容器/listbox，且有Hydration mismatch。旧站内客户端对照未完成，构建切换时新HTML配旧映射404只记环境失败；诊断临时进程树已定向清理。最终硬导航归属用例和原5失败均通过，不能倒写旧client路径也曾通过。
+- 独立代码报告`tmp-selector-code-review.md`无新增P0–P3。A报告`tmp-selector-a/report.md`：首轮30/40；唯一修后12组，普通dark已选文字1.500→16.131、占位6.111，八组补足三项后校验恢复成立，四组家族HUD边界/无溢出成立。首轮CascaderHUD标签一致性和320级联阅读成本P3保留；普通dark多选标签/弹层说明/Tree错误态待下一波，不能扩大单选文字结论。
+- B首轮九markup逐项合法`[]`/空stderr/0，18视图54次实际overlay；唯一修后报告`tmp-selector-b/recheck/report.md`：十视图38状态、32/32面板唯一关联、8/8错误恢复，14源与3实际资源指纹相同。受改lxselect.md复扫合法三件套。首轮165、复验103次原始命中含重复：文档代码壳低对比、Cascader标题跳级、普通dark真实低对比和正常弹层覆盖分别登记；不能当作165/103个缺陷，也不能全当误报。工具标签造成320→407扩页，注入前/去除后均320。首轮preflight输出路径曾被复用，已恢复原摘要并独立保存新完整记录，限制如实保留。
+- 综合快照`.impeccable/critique/2026-11-03T03-12-23Z__linkx-fe-src-components-lxselect-index-vue.md`写入、趋势读取成功，临时归档正文已删除。历史33/35/36与本次30范围不同（本次含三组件及额外dark路径），30仍为首轮基线，不当作修后退步或升分。只关闭本波专项，普通dark剩余P1等不能标正式全家族门禁通过，严格18/52不增加。
+- 最终人工预览4177/PID6804，style.Cgn7gaLF.css/app.DNs2GI3d.js/theme.BDwe-w1l.js及路由资源200；30847/PID10328保留。B专用8556/PID4244及首轮服务已清理、无监听，浏览器退出。七份原dirty按SHA256核验未改动，不混提交。下一波只读交接`tmp-selector-tag-next.md`已完成，方案尚未实施/验证；真实认证/权限/后端及通用SSR仍开放。
+
 ## 2026-11-03 Textarea 强边界与状态优先级交接
 
 - 实现：`LxTextarea/style.css`默认strong、只读90/10令牌混色、disabled根加权与hover降权；`docs/.vitepress/theme/custom.css`仅改Textarea普通dark桥的根HUD排除；中文API、`DESIGN-SPEC.md`、`COMPONENT-STYLE-INTERACTION.md`登记偏离原浅灰标本的可访问性理由，不改几何/props/事件。新增`tests/e2e/lx-textarea-border-docs.spec.ts`分别采样真实描边与内外合成表面，不以token探针代替实际边线。

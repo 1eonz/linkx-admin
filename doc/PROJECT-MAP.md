@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-11-03 选择器家族默认边界入口
+
+- `linkx-fe/src/components/{LxSelect,LxTreeSelect,LxCascader}/style.css`分别保留真实border/inset，消费既有strong令牌；Select默认文字配对，Cascader局部HUD输入内核令牌局部重绑。三份`docs/components/lx{select,treeselect,cascader}.md`和`doc/lx-ui/{DESIGN-SPEC,COMPONENT-STYLE-INTERACTION}.md`说明设计差异与主题边界。
+- `lxselect.md`中的交互Demo局部ClientOnly隔离静态指定目标Teleport缺失；通用组件SSR和其他Demo水合不由此覆盖。新增宿主`tests/e2e/lx-selector-border-docs.spec.ts`与三旧行为spec最终44/44，相关单测47/47、库类型/构建/docs及目标格式/Lint通过。诊断`tmp-selector-ssr-diagnosis.md`、代码审查`tmp-selector-code-review.md`、隔离A/B报告`tmp-selector-{a,b}/report.md`为本机忽略证据。
+- 隔离A首轮30/40及唯一复验、B首轮54/修后38次实际overlay、九markup及受改文档三件套、14源/3资源冻结完成；快照`2026-11-03T03-12-23Z__linkx-fe-src-components-lxselect-index-vue.md`与趋势已存，8556已清理。当前严格18/52；下一棒按`tmp-selector-tag-next.md`核普通dark标签/说明/错误态主题配对、Cascader禁用边线与文档壳，方案尚未实现，不把默认边线回归当全组件或全业务完成。没有新增业务API、宿主消费点或权限实现。
+
 ## 2026-11-03 Textarea 强边界与主题状态入口
 
 - `linkx-fe/src/components/LxTextarea/style.css`默认/只读描边及hoverfocus/disabled优先级→`docs/.vitepress/theme/custom.css`Textarea dark桥根HUD排除→中文API与两份设计规范。
