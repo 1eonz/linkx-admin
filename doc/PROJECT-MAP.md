@@ -1,5 +1,11 @@
 # LinkX 项目地图
 
+## 2026-11-03 Textarea 强边界与主题状态入口
+
+- `linkx-fe/src/components/LxTextarea/style.css`默认/只读描边及hoverfocus/disabled优先级→`docs/.vitepress/theme/custom.css`Textarea dark桥根HUD排除→中文API与两份设计规范。
+- 新回归`tests/e2e/lx-textarea-border-docs.spec.ts`八主题/尺寸项与既有Textarea三项合计11/11；单测14/14，类型/库/docs构建、格式/Lint和代码复审通过。独立A最低3.1454，B八视图各24项/48次overlay/三件套/指纹齐备；最终快照`2026-11-03T01-46-05Z__linkx-fe-src-components-lxtextarea-index-vue.md`及趋势已保存，8546已停止。失败与工具扩页归因见交接，18类外壳候选另行核验。
+- 下一入口是Select/TreeSelect/Cascader三组件合批默认边界，真实border/inset及多选/主题契约分开适配；不改全局旧令牌、LxInput他人增量或宿主业务接口。历史严格18/52不增加，Vue3全量EP替换继续等待库门槛。
+
 ## 2026-11-03 PasswordInput 表单与独立操作入口
 
 - `linkx-fe/src/components/LxPasswordInput/index.vue`窄屏显隐flex轨道→`demo/form-state.vue`本地LxForm校验/恢复→`docs/components/lxpasswordinput.md`中文示例与独立44px目标说明。

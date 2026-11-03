@@ -1,5 +1,15 @@
 # LinkX 项目交接记录
 
+## 2026-11-03 Textarea 强边界与状态优先级交接
+
+- 实现：`LxTextarea/style.css`默认strong、只读90/10令牌混色、disabled根加权与hover降权；`docs/.vitepress/theme/custom.css`仅改Textarea普通dark桥的根HUD排除；中文API、`DESIGN-SPEC.md`、`COMPONENT-STYLE-INTERACTION.md`登记偏离原浅灰标本的可访问性理由，不改几何/props/事件。新增`tests/e2e/lx-textarea-border-docs.spec.ts`分别采样真实描边与内外合成表面，不以token探针代替实际边线。
+- 验证：14/14单测（93473 exit0）、库类型/206模块构建、首次docs59.54s与最终docs58.53s均成功；最终E2E session78899 exit0、11/11（1.6m），输出`tmp-textarea-final-e2e-output.txt`与宿主`tmp-textarea-border-final/`。目标Prettier write/check及无修复ESLint通过。最终代码审查`tmp-textarea-border-review.md`无剩余P0–P2，保持color(srgb)解析兼容问题的发现/处理记录；只读/禁用叠加超限的错误接管也有永久断言。
+- 失败边界：基线Light1.334、只读1.212失败，根HUD表面被dark桥覆盖且约1.336，分别保留`tmp-textarea-border-{before,root-before}/`。首版测试全bbox坐标受自动滚动误报，已仅比较宽高；不当作组件几何缺陷。首轮实现后11项为5通过6失败：四HUD只读约2.94，两旧用例暴露局部disabled晚EP覆盖/站点dark令牌不匹配；原断言保留，成组修复后11/11。首次失败输出`tmp-textarea-first-e2e-output.txt`；失败trace部分仅88字节或未正常闭合，不宣称其网络证据可用，截图/错误上下文及命令输出仍保留。
+- 独立A首轮34/40，初取证alpha误入亮度公式导致NaN，基于同批原始颜色离线修正而未重浏览；首轮readonly HUD精确2.94178不可四舍五入。一次修后八视图通过，默认/只读内外最低3.145404919，hoverfocus2px与disabled本地token、只读超限error优先级正常；34/40仍是首轮基线。A报告`tmp-textarea-border-a/report.md`，修后32图/64状态。B报告`tmp-textarea-border-b/report.md`，八视图各24项通过，`analysis.exit=0`/stderr空、指纹匹配；三markup JSON合法`[]`/空stderr/0及48次实际overlay完成。两路首轮及唯一修后流程齐备，不代表真实读屏器或全WCAG通过。
+- 静态preview最终PID18744（4177），新style.DvEJ-kC6.css/app.BWk5yYZK.js/theme.WgWDEJ7q.js均HTTP200；30847人工Mock/PID10328保留。最终组件CSS SHA256`a9db66932aea1e8dbaccd7d734562bcd821fd2bafe0784904bec45d8f888a3b6`、文档桥`3332365dcc79c8c9e54b4382f96f9af468f13991e0d763d561680a60b92a8402`。七份他人dirty未触碰/提交，尤其LxInput。既有chunk/pnpm/Node警告不写成零警告。
+- B清理/归因：8546/PID22220已停止exit0，4177/30847保留。48次overlay组件targetCount均0，252次重复外壳命中归为18类候选（代码token、dark滚动提示、API/偏差表首列与标题节奏），不自动计组件缺陷或误报，后续专项核验。320页面扫描后407已定位工具`.impeccable-label`绝对定位右沿406.5；同批DOM诊断注入前document/body320，无未裁切越界节点，不记产品横溢。证据见B的`reverify/overlay-width-diagnostic.json`及`checks-summary.json`。
+- 正式快照`.impeccable/critique/2026-11-03T01-46-05Z__linkx-fe-src-components-lxtextarea-index-vue.md`已写、趋势已读；首次01-45-09快照后补全外壳候选归类，未新增产品浏览轮。旧31/40与新34/40范围不同，且34为首轮基线，不能当修后提升。精确实现与台账分别提交；下一波按`tmp-selector-border-next.md`合批选择器，再核对文档壳候选。严格18/52不增加，其他组件、真实认证/后端/权限或读屏器不由本次回归代验。
+
 ## 2026-11-03 PasswordInput 表单与窄屏命中交付
 
 - 本波五文件：`LxPasswordInput/index.vue`、新增`demo/form-state.vue`、`docs/components/lxpasswordinput.md`及宿主`tests/e2e/lx-password-input-{form-docs,docs}.spec.ts`。复用LxForm/LxFormItem/LxButton，未接API/存储、未扩展公共契约；窄屏清空/显隐在正常flex流各占44px。旧测试HUD定位限定Basic Demo，三档44px有HEAD基线依据，不是放宽契约。
