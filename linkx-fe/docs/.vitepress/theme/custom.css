@@ -167,8 +167,8 @@
   --lx-text-placeholder: var(--vp-c-text-2);
 }
 
-/* 文档站暗色主题下，文本域示例同步切换表面、焦点、错误和 Element Plus 控件令牌。 */
-.dark .vp-doc .lx-textarea-demo:not(.lx-theme-hud) {
+/* 普通文档暗色同步文本域令牌；根级和局部HUD均保留组件主题。 */
+html.dark:not(.lx-theme-hud) .vp-doc .lx-textarea-demo:not(.lx-theme-hud) {
   color-scheme: dark;
   --lx-bg-page: var(--vp-c-bg);
   --lx-bg-card: var(--vp-c-bg-alt);

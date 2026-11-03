@@ -31,7 +31,8 @@
   resize: vertical;
   background-color: var(--lx-bg-card);
   border-radius: var(--lx-radius-md);
-  box-shadow: 0 0 0 1px var(--lx-control-border) inset;
+  /* 默认可编辑与只读边界使用强描边，避免浅表面上轮廓无法辨认。 */
+  box-shadow: 0 0 0 1px var(--lx-control-border-strong) inset;
   transition:
     box-shadow var(--lx-transition),
     background-color var(--lx-transition);
@@ -46,7 +47,19 @@
   background-color: var(--lx-color-primary-light);
 }
 
-.lx-textarea__control .el-textarea__inner:disabled {
+/* 只读浅底会降低HUD描边对比；混入少量标签色，同时保持低特异性让交互/错误态接管。 */
+.lx-textarea__control .el-textarea__inner:where([readonly]:not(:disabled)) {
+  box-shadow: 0 0 0 1px
+    color-mix(
+      in srgb,
+      var(--lx-control-border-strong) 90%,
+      var(--lx-text-label)
+    )
+    inset;
+}
+
+/* 组件根加权，避免后加载的EP禁用规则以同特异性覆盖局部主题。 */
+.lx-textarea .lx-textarea__control .el-textarea__inner:disabled {
   color: var(--lx-text-regular);
   -webkit-text-fill-color: var(--lx-text-regular);
   cursor: not-allowed;
@@ -60,7 +73,7 @@
 }
 
 /* 可编辑态悬停时描边转主色，禁用态保持禁用边框。 */
-.lx-textarea__control .el-textarea__inner:not(:disabled):hover {
+.lx-textarea__control .el-textarea__inner:where(:not(:disabled)):hover {
   box-shadow: 0 0 0 1px var(--lx-color-primary) inset;
 }
 
